@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2023-12-29)
+------------------
+
+* Feature - AWS App Runner adds Python 3.11 and Node.js 18 runtimes.
+
+1.34.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2023-11-02)
+------------------
+
+* Feature - AWS App Runner now supports using dual-stack address type for the public endpoint of your incoming traffic.
+
 1.31.0 (2023-09-27)
 ------------------
 

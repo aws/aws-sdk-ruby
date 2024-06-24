@@ -67,15 +67,29 @@ module Aws::SQS
 
     # Two or more batch entries in the request have the same `Id`.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/BatchEntryIdsNotDistinct AWS API Documentation
     #
-    class BatchEntryIdsNotDistinct < Aws::EmptyStructure; end
+    class BatchEntryIdsNotDistinct < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The length of all the messages put together is more than the limit.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/BatchRequestTooLong AWS API Documentation
     #
-    class BatchRequestTooLong < Aws::EmptyStructure; end
+    class BatchRequestTooLong < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Gives a detailed description of the result of an action on each entry
     # in the request.
@@ -646,9 +660,16 @@ module Aws::SQS
 
     # The batch request doesn't contain any entries.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/EmptyBatchRequest AWS API Documentation
     #
-    class EmptyBatchRequest < Aws::EmptyStructure; end
+    class EmptyBatchRequest < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue whose attribute information is
@@ -918,18 +939,58 @@ module Aws::SQS
       include Aws::Structure
     end
 
+    # The `accountId` is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidAddress AWS API Documentation
+    #
+    class InvalidAddress < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified attribute doesn't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidAttributeName AWS API Documentation
     #
-    class InvalidAttributeName < Aws::EmptyStructure; end
+    class InvalidAttributeName < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A queue attribute value is invalid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidAttributeValue AWS API Documentation
+    #
+    class InvalidAttributeValue < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The `Id` of a batch entry in a batch request doesn't abide by the
     # specification.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidBatchEntryId AWS API Documentation
     #
-    class InvalidBatchEntryId < Aws::EmptyStructure; end
+    class InvalidBatchEntryId < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The specified receipt handle isn't valid for the current version.
     #
@@ -939,9 +1000,131 @@ module Aws::SQS
 
     # The message contains characters outside the allowed set.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidMessageContents AWS API Documentation
     #
-    class InvalidMessageContents < Aws::EmptyStructure; end
+    class InvalidMessageContents < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # When the request to a queue is not HTTPS and SigV4.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/InvalidSecurity AWS API Documentation
+    #
+    class InvalidSecurity < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The caller doesn't have the required KMS access.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/KmsAccessDenied AWS API Documentation
+    #
+    class KmsAccessDenied < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was denied due to request throttling.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/KmsDisabled AWS API Documentation
+    #
+    class KmsDisabled < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected for one of the following reasons:
+    #
+    # * The KeyUsage value of the KMS key is incompatible with the API
+    #   operation.
+    #
+    # * The encryption algorithm or signing algorithm specified for the
+    #   operation is incompatible with the type of key material in the KMS
+    #   key (KeySpec).
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/KmsInvalidKeyUsage AWS API Documentation
+    #
+    class KmsInvalidKeyUsage < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because the state of the specified resource
+    # is not valid for this request.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/KmsInvalidState AWS API Documentation
+    #
+    class KmsInvalidState < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified entity or resource
+    # could not be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/KmsNotFound AWS API Documentation
+    #
+    class KmsNotFound < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because the specified key policy isn't
+    # syntactically or semantically correct.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/KmsOptInRequired AWS API Documentation
+    #
+    class KmsOptInRequired < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon Web Services KMS throttles requests for the following
+    # conditions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/KmsThrottled AWS API Documentation
+    #
+    class KmsThrottled < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] queue_url
     #   The URL of a dead-letter queue.
@@ -1062,8 +1245,9 @@ module Aws::SQS
     #
     # @!attribute [rw] approximate_number_of_messages_to_move
     #   The number of messages to be moved from the source queue. This
-    #   number is obtained at the time of starting the message movement
-    #   task.
+    #   number is obtained at the time of starting the message movement task
+    #   and is only included after the message movement task is selected to
+    #   start.
     #   @return [Integer]
     #
     # @!attribute [rw] failure_reason
@@ -1371,17 +1555,31 @@ module Aws::SQS
     # reached and `AddPermission` returns this error if the maximum number
     # of permissions for the queue is reached.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/OverLimit AWS API Documentation
     #
-    class OverLimit < Aws::EmptyStructure; end
+    class OverLimit < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Indicates that the specified queue previously received a `PurgeQueue`
     # request within the last 60 seconds (the time it can take to delete the
     # messages in the queue).
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/PurgeQueueInProgress AWS API Documentation
     #
-    class PurgeQueueInProgress < Aws::EmptyStructure; end
+    class PurgeQueueInProgress < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] queue_url
     #   The URL of the queue from which the `PurgeQueue` action deletes
@@ -1401,29 +1599,57 @@ module Aws::SQS
     # You must wait 60 seconds after deleting a queue before you can create
     # another queue with the same name.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/QueueDeletedRecently AWS API Documentation
     #
-    class QueueDeletedRecently < Aws::EmptyStructure; end
+    class QueueDeletedRecently < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The specified queue doesn't exist.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/QueueDoesNotExist AWS API Documentation
     #
-    class QueueDoesNotExist < Aws::EmptyStructure; end
+    class QueueDoesNotExist < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A queue with this name already exists. Amazon SQS returns this error
     # only if the request includes attributes whose values differ from those
     # of the existing queue.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/QueueNameExists AWS API Documentation
     #
-    class QueueNameExists < Aws::EmptyStructure; end
+    class QueueNameExists < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The specified receipt handle isn't valid.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ReceiptHandleIsInvalid AWS API Documentation
     #
-    class ReceiptHandleIsInvalid < Aws::EmptyStructure; end
+    class ReceiptHandleIsInvalid < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue from which messages are received.
@@ -1432,6 +1658,57 @@ module Aws::SQS
     #   @return [String]
     #
     # @!attribute [rw] attribute_names
+    #   This parameter has been deprecated but will be supported for
+    #   backward compatibility. To provide attribute names, you are
+    #   encouraged to use `MessageSystemAttributeNames`.
+    #
+    #   A list of attributes that need to be returned along with each
+    #   message. These attributes include:
+    #
+    #   * `All` – Returns all values.
+    #
+    #   * `ApproximateFirstReceiveTimestamp` – Returns the time the message
+    #     was first received from the queue ([epoch time][1] in
+    #     milliseconds).
+    #
+    #   * `ApproximateReceiveCount` – Returns the number of times a message
+    #     has been received across all queues but not deleted.
+    #
+    #   * `AWSTraceHeader` – Returns the X-Ray trace header string.
+    #
+    #   * `SenderId`
+    #
+    #     * For a user, returns the user ID, for example
+    #       `ABCDEFGHI1JKLMNOPQ23R`.
+    #
+    #     * For an IAM role, returns the IAM role ID, for example
+    #       `ABCDE1F2GH3I4JK5LMNOP:i-a123b456`.
+    #
+    #   * `SentTimestamp` – Returns the time the message was sent to the
+    #     queue ([epoch time][1] in milliseconds).
+    #
+    #   * `SqsManagedSseEnabled` – Enables server-side queue encryption
+    #     using SQS owned encryption keys. Only one server-side encryption
+    #     option is supported per queue (for example, [SSE-KMS][2] or
+    #     [SSE-SQS][3]).
+    #
+    #   * `MessageDeduplicationId` – Returns the value provided by the
+    #     producer that calls the ` SendMessage ` action.
+    #
+    #   * `MessageGroupId` – Returns the value provided by the producer that
+    #     calls the ` SendMessage ` action. Messages with the same
+    #     `MessageGroupId` are returned in sequence.
+    #
+    #   * `SequenceNumber` – Returns the value provided by Amazon SQS.
+    #
+    #
+    #
+    #   [1]: http://en.wikipedia.org/wiki/Unix_time
+    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html
+    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] message_system_attribute_names
     #   A list of attributes that need to be returned along with each
     #   message. These attributes include:
     #
@@ -1517,8 +1794,8 @@ module Aws::SQS
     #   The duration (in seconds) for which the call waits for a message to
     #   arrive in the queue before returning. If a message is available, the
     #   call returns sooner than `WaitTimeSeconds`. If no messages are
-    #   available and the wait time expires, the call returns successfully
-    #   with an empty list of messages.
+    #   available and the wait time expires, the call does not return a
+    #   message list.
     #
     #   To avoid HTTP errors, ensure that the HTTP response timeout for
     #   `ReceiveMessage` requests is longer than the `WaitTimeSeconds`
@@ -1548,10 +1825,6 @@ module Aws::SQS
     #
     #   * When you set `FifoQueue`, a caller of the `ReceiveMessage` action
     #     can provide a `ReceiveRequestAttemptId` explicitly.
-    #
-    #   * If a caller of the `ReceiveMessage` action doesn't provide a
-    #     `ReceiveRequestAttemptId`, Amazon SQS generates a
-    #     `ReceiveRequestAttemptId`.
     #
     #   * It is possible to retry the `ReceiveMessage` action with the same
     #     `ReceiveRequestAttemptId` if none of the messages have been
@@ -1606,6 +1879,7 @@ module Aws::SQS
     class ReceiveMessageRequest < Struct.new(
       :queue_url,
       :attribute_names,
+      :message_system_attribute_names,
       :message_attribute_names,
       :max_number_of_messages,
       :visibility_timeout,
@@ -1649,11 +1923,44 @@ module Aws::SQS
       include Aws::Structure
     end
 
+    # The request was denied due to request throttling.
+    #
+    # * The rate of requests per second exceeds the Amazon Web Services KMS
+    #   request quota for an account and Region.
+    #
+    # * A burst or sustained high rate of requests to change the state of
+    #   the same KMS key. This condition is often known as a "hot key."
+    #
+    # * Requests for operations on KMS keys in a Amazon Web Services
+    #   CloudHSM key store might be throttled at a lower-than-expected rate
+    #   when the Amazon Web Services CloudHSM cluster associated with the
+    #   Amazon Web Services CloudHSM key store is processing numerous
+    #   commands, including those unrelated to the Amazon Web Services
+    #   CloudHSM key store.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/RequestThrottled AWS API Documentation
+    #
+    class RequestThrottled < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # One or more specified resources don't exist.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ResourceNotFoundException AWS API Documentation
     #
-    class ResourceNotFoundException < Aws::EmptyStructure; end
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] queue_url
     #   The URL of the Amazon SQS queue to which batched messages are sent.
@@ -1946,13 +2253,17 @@ module Aws::SQS
     #   size is 256 KiB.
     #
     #   A message can include only XML, JSON, and unformatted text. The
-    #   following Unicode characters are allowed:
+    #   following Unicode characters are allowed. For more information, see
+    #   the [W3C specification for characters][1].
     #
     #    `#x9` \| `#xA` \| `#xD` \| `#x20` to `#xD7FF` \| `#xE000` to
     #   `#xFFFD` \| `#x10000` to `#x10FFFF`
     #
-    #    Any characters not included in this list will be rejected. For more
-    #   information, see the [W3C specification for characters][1].
+    #    Amazon SQS does not throw an exception or completely reject the
+    #   message if it contains invalid characters. Instead, it replaces
+    #   those invalid characters with `U+FFFD` before storing the message in
+    #   the queue, as long as the message body contains at least one valid
+    #   character.
     #
     #
     #
@@ -2080,8 +2391,8 @@ module Aws::SQS
     #     are sorted by time sent. The caller can't specify a
     #     `MessageGroupId`.
     #
-    #   The length of `MessageGroupId` is 128 characters. Valid values:
-    #   alphanumeric characters and punctuation ``
+    #   The maximum length of `MessageGroupId` is 128 characters. Valid
+    #   values: alphanumeric characters and punctuation ``
     #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
     #
     #   For best practices of using `MessageGroupId`, see [Using the
@@ -2449,15 +2760,29 @@ module Aws::SQS
 
     # The batch request contains more entries than permissible.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/TooManyEntriesInBatchRequest AWS API Documentation
     #
-    class TooManyEntriesInBatchRequest < Aws::EmptyStructure; end
+    class TooManyEntriesInBatchRequest < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Error code 400. Unsupported operation.
     #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/UnsupportedOperation AWS API Documentation
     #
-    class UnsupportedOperation < Aws::EmptyStructure; end
+    class UnsupportedOperation < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] queue_url
     #   The URL of the queue.

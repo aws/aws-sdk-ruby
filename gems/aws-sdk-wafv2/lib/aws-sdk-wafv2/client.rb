@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::WAFV2
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::WAFV2
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::WAFV2
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::WAFV2
     #   @option options [Aws::WAFV2::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::WAFV2::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -410,23 +435,41 @@ module Aws::WAFV2
     # Resource Name (ARN) of the web ACL. For information, see
     # [UpdateDistribution][1] in the *Amazon CloudFront Developer Guide*.
     #
-    # When you make changes to web ACLs or web ACL components, like rules
-    # and rule groups, WAF propagates the changes everywhere that the web
-    # ACL and its components are stored and used. Your changes are applied
-    # within seconds, but there might be a brief period of inconsistency
-    # when the changes have arrived in some places and not in others. So,
-    # for example, if you change a rule action setting, the action might be
-    # the old action in one area and the new action in another area. Or if
-    # you add an IP address to an IP set used in a blocking rule, the new
-    # address might briefly be blocked in one area while still allowed in
-    # another. This temporary inconsistency can occur when you first
-    # associate a web ACL with an Amazon Web Services resource and when you
-    # change a web ACL that is already associated with a resource.
-    # Generally, any inconsistencies of this type last only a few seconds.
+    # **Required permissions for customer-managed IAM policies**
+    #
+    # This call requires permissions that are specific to the protected
+    # resource type. For details, see [Permissions for AssociateWebACL][2]
+    # in the *WAF Developer Guide*.
+    #
+    # **Temporary inconsistencies during updates**
+    #
+    # When you create or change a web ACL or other WAF resources, the
+    # changes take a small amount of time to propagate to all areas where
+    # the resources are stored. The propagation time can be from a few
+    # seconds to a number of minutes.
+    #
+    # The following are examples of the temporary inconsistencies that you
+    # might notice during change propagation:
+    #
+    # * After you create a web ACL, if you try to associate it with a
+    #   resource, you might get an exception indicating that the web ACL is
+    #   unavailable.
+    #
+    # * After you add a rule group to a web ACL, the new rule group rules
+    #   might be in effect in one area where the web ACL is used and not in
+    #   another.
+    #
+    # * After you change a rule action setting, you might see the old action
+    #   in some places and the new action in others.
+    #
+    # * After you add an IP address to an IP set that is in use in a
+    #   blocking rule, the new address might be blocked in one area while
+    #   still allowed in another.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-AssociateWebACL
     #
     # @option params [required, String] :web_acl_arn
     #   The Amazon Resource Name (ARN) of the web ACL that you want to
@@ -932,6 +975,7 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
+    #             evaluation_window_sec: 1,
     #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
     #             scope_down_statement: {
     #               # recursive Statement
@@ -1394,7 +1438,7 @@ module Aws::WAFV2
     #
     #   Example JSON: `"TokenDomains": ["abc.com", "store.abc.com"]`
     #
-    #   Public suffixes aren't allowed. For example, you can't use `usa.gov`
+    #   Public suffixes aren't allowed. For example, you can't use `gov.au`
     #   or `co.uk` as token domains.
     #
     # @return [Types::CreateAPIKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2110,6 +2154,7 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
+    #             evaluation_window_sec: 1,
     #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
     #             scope_down_statement: {
     #               # recursive Statement
@@ -2653,7 +2698,7 @@ module Aws::WAFV2
     #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
     #   "myotherwebsite.com" \}`
     #
-    #   Public suffixes aren't allowed. For example, you can't use `usa.gov`
+    #   Public suffixes aren't allowed. For example, you can't use `gov.au`
     #   or `co.uk` as token domains.
     #
     # @option params [Types::AssociationConfig] :association_config
@@ -2661,14 +2706,19 @@ module Aws::WAFV2
     #   ACL and protected resources.
     #
     #   Use this to customize the maximum size of the request body that your
-    #   protected CloudFront distributions forward to WAF for inspection. The
-    #   default is 16 KB (16,384 bytes).
+    #   protected resources forward to WAF for inspection. You can customize
+    #   this setting for CloudFront, API Gateway, Amazon Cognito, App Runner,
+    #   or Verified Access resources. The default setting is 16 KB (16,384
+    #   bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources forward
     #   body sizes that are larger than the default. For more information, see
     #   [WAF Pricing][1].
     #
     #    </note>
+    #
+    #   For Application Load Balancer and AppSync, the limit is fixed at 8 KB
+    #   (8,192 bytes).
     #
     #
     #
@@ -3118,6 +3168,7 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
+    #             evaluation_window_sec: 1,
     #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
     #             scope_down_statement: {
     #               # recursive Statement
@@ -3583,6 +3634,47 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
+    # Deletes the specified API key.
+    #
+    # After you delete a key, it can take up to 24 hours for WAF to disallow
+    # use of the key in all regions.
+    #
+    # @option params [required, String] :scope
+    #   Specifies whether this is for an Amazon CloudFront distribution or for
+    #   a regional application. A regional application can be an Application
+    #   Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync
+    #   GraphQL API, an Amazon Cognito user pool, an App Runner service, or an
+    #   Amazon Web Services Verified Access instance.
+    #
+    #   To work with CloudFront, you must also specify the Region US East (N.
+    #   Virginia) as follows:
+    #
+    #   * CLI - Specify the Region when you use the CloudFront scope:
+    #     `--scope=CLOUDFRONT --region=us-east-1`.
+    #
+    #   * API and SDKs - For all calls, use the Region endpoint us-east-1.
+    #
+    # @option params [required, String] :api_key
+    #   The encrypted API key that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_api_key({
+    #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
+    #     api_key: "APIKey", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteAPIKey AWS API Documentation
+    #
+    # @overload delete_api_key(params = {})
+    # @param [Hash] params ({})
+    def delete_api_key(params = {}, options = {})
+      req = build_request(:delete_api_key, params)
+      req.send_request(options)
+    end
+
     # Deletes all rule groups that are managed by Firewall Manager for the
     # specified web ACL.
     #
@@ -3688,12 +3780,37 @@ module Aws::WAFV2
     #   The Amazon Resource Name (ARN) of the web ACL from which you want to
     #   delete the LoggingConfiguration.
     #
+    # @option params [String] :log_type
+    #   Used to distinguish between various logging options. Currently, there
+    #   is one option.
+    #
+    #   Default: `WAF_LOGS`
+    #
+    # @option params [String] :log_scope
+    #   The owner of the logging configuration, which must be set to
+    #   `CUSTOMER` for the configurations that you manage.
+    #
+    #   The log scope `SECURITY_LAKE` indicates a configuration that is
+    #   managed through Amazon Security Lake. You can use Security Lake to
+    #   collect log and event data from various sources for normalization,
+    #   analysis, and management. For information, see [Collecting data from
+    #   Amazon Web Services services][1] in the *Amazon Security Lake user
+    #   guide*.
+    #
+    #   Default: `CUSTOMER`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_logging_configuration({
     #     resource_arn: "ResourceArn", # required
+    #     log_type: "WAF_LOGS", # accepts WAF_LOGS
+    #     log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/DeleteLoggingConfiguration AWS API Documentation
@@ -4138,9 +4255,16 @@ module Aws::WAFV2
     # `UpdateDistribution`. For information, see [UpdateDistribution][1] in
     # the *Amazon CloudFront API Reference*.
     #
+    # **Required permissions for customer-managed IAM policies**
+    #
+    # This call requires permissions that are specific to the protected
+    # resource type. For details, see [Permissions for
+    # DisassociateWebACL][2] in the *WAF Developer Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-DisassociateWebACL
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource to disassociate from
@@ -4355,6 +4479,29 @@ module Aws::WAFV2
     #   The Amazon Resource Name (ARN) of the web ACL for which you want to
     #   get the LoggingConfiguration.
     #
+    # @option params [String] :log_type
+    #   Used to distinguish between various logging options. Currently, there
+    #   is one option.
+    #
+    #   Default: `WAF_LOGS`
+    #
+    # @option params [String] :log_scope
+    #   The owner of the logging configuration, which must be set to
+    #   `CUSTOMER` for the configurations that you manage.
+    #
+    #   The log scope `SECURITY_LAKE` indicates a configuration that is
+    #   managed through Amazon Security Lake. You can use Security Lake to
+    #   collect log and event data from various sources for normalization,
+    #   analysis, and management. For information, see [Collecting data from
+    #   Amazon Web Services services][1] in the *Amazon Security Lake user
+    #   guide*.
+    #
+    #   Default: `CUSTOMER`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #
     # @return [Types::GetLoggingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetLoggingConfigurationResponse#logging_configuration #logging_configuration} => Types::LoggingConfiguration
@@ -4363,6 +4510,8 @@ module Aws::WAFV2
     #
     #   resp = client.get_logging_configuration({
     #     resource_arn: "ResourceArn", # required
+    #     log_type: "WAF_LOGS", # accepts WAF_LOGS
+    #     log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE
     #   })
     #
     # @example Response structure
@@ -4401,6 +4550,8 @@ module Aws::WAFV2
     #   resp.logging_configuration.logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "CHALLENGE", "EXCLUDED_AS_COUNT"
     #   resp.logging_configuration.logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
     #   resp.logging_configuration.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
+    #   resp.logging_configuration.log_type #=> String, one of "WAF_LOGS"
+    #   resp.logging_configuration.log_scope #=> String, one of "CUSTOMER", "SECURITY_LAKE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetLoggingConfiguration AWS API Documentation
     #
@@ -4932,6 +5083,7 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.rule_group.rules[0].statement.rate_based_statement.limit #=> Integer
+    #   resp.rule_group.rules[0].statement.rate_based_statement.evaluation_window_sec #=> Integer
     #   resp.rule_group.rules[0].statement.rate_based_statement.aggregate_key_type #=> String, one of "IP", "FORWARDED_IP", "CUSTOM_KEYS", "CONSTANT"
     #   resp.rule_group.rules[0].statement.rate_based_statement.scope_down_statement #=> Types::Statement
     #   resp.rule_group.rules[0].statement.rate_based_statement.forwarded_ip_config.header_name #=> String
@@ -5285,6 +5437,27 @@ module Aws::WAFV2
 
     # Retrieves the WebACL for the specified resource.
     #
+    # This call uses `GetWebACL`, to verify that your account has permission
+    # to access the retrieved web ACL. If you get an error that indicates
+    # that your account isn't authorized to perform `wafv2:GetWebACL` on
+    # the resource, that error won't be included in your CloudTrail event
+    # history.
+    #
+    # For Amazon CloudFront, don't use this call. Instead, call the
+    # CloudFront action `GetDistributionConfig`. For information, see
+    # [GetDistributionConfig][1] in the *Amazon CloudFront API Reference*.
+    #
+    # **Required permissions for customer-managed IAM policies**
+    #
+    # This call requires permissions that are specific to the protected
+    # resource type. For details, see [Permissions for
+    # GetWebACLForResource][2] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistributionConfig.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-GetWebACLForResource
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose web ACL you want
     #   to retrieve.
@@ -5637,6 +5810,23 @@ module Aws::WAFV2
     #   a `NextMarker` value that you can use in a subsequent call to get the
     #   next batch of objects.
     #
+    # @option params [String] :log_scope
+    #   The owner of the logging configuration, which must be set to
+    #   `CUSTOMER` for the configurations that you manage.
+    #
+    #   The log scope `SECURITY_LAKE` indicates a configuration that is
+    #   managed through Amazon Security Lake. You can use Security Lake to
+    #   collect log and event data from various sources for normalization,
+    #   analysis, and management. For information, see [Collecting data from
+    #   Amazon Web Services services][1] in the *Amazon Security Lake user
+    #   guide*.
+    #
+    #   Default: `CUSTOMER`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+    #
     # @return [Types::ListLoggingConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListLoggingConfigurationsResponse#logging_configurations #logging_configurations} => Array&lt;Types::LoggingConfiguration&gt;
@@ -5648,6 +5838,7 @@ module Aws::WAFV2
     #     scope: "CLOUDFRONT", # required, accepts CLOUDFRONT, REGIONAL
     #     next_marker: "NextMarker",
     #     limit: 1,
+    #     log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE
     #   })
     #
     # @example Response structure
@@ -5687,6 +5878,8 @@ module Aws::WAFV2
     #   resp.logging_configurations[0].logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "CHALLENGE", "EXCLUDED_AS_COUNT"
     #   resp.logging_configurations[0].logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
     #   resp.logging_configurations[0].logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
+    #   resp.logging_configurations[0].log_type #=> String, one of "WAF_LOGS"
+    #   resp.logging_configurations[0].log_scope #=> String, one of "CUSTOMER", "SECURITY_LAKE"
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListLoggingConfigurations AWS API Documentation
@@ -5894,9 +6087,23 @@ module Aws::WAFV2
     end
 
     # Retrieves an array of the Amazon Resource Names (ARNs) for the
-    # regional resources that are associated with the specified web ACL. If
-    # you want the list of Amazon CloudFront resources, use the CloudFront
-    # call `ListDistributionsByWebACLId`.
+    # regional resources that are associated with the specified web ACL.
+    #
+    # For Amazon CloudFront, don't use this call. Instead, use the
+    # CloudFront call `ListDistributionsByWebACLId`. For information, see
+    # [ListDistributionsByWebACLId][1] in the *Amazon CloudFront API
+    # Reference*.
+    #
+    # **Required permissions for customer-managed IAM policies**
+    #
+    # This call requires permissions that are specific to the protected
+    # resource type. For details, see [Permissions for
+    # ListResourcesForWebACL][2] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-ListResourcesForWebACL
     #
     # @option params [required, String] :web_acl_arn
     #   The Amazon Resource Name (ARN) of the web ACL.
@@ -6266,6 +6473,8 @@ module Aws::WAFV2
     #         ],
     #         default_behavior: "KEEP", # required, accepts KEEP, DROP
     #       },
+    #       log_type: "WAF_LOGS", # accepts WAF_LOGS
+    #       log_scope: "CUSTOMER", # accepts CUSTOMER, SECURITY_LAKE
     #     },
     #   })
     #
@@ -6305,6 +6514,8 @@ module Aws::WAFV2
     #   resp.logging_configuration.logging_filter.filters[0].conditions[0].action_condition.action #=> String, one of "ALLOW", "BLOCK", "COUNT", "CAPTCHA", "CHALLENGE", "EXCLUDED_AS_COUNT"
     #   resp.logging_configuration.logging_filter.filters[0].conditions[0].label_name_condition.label_name #=> String
     #   resp.logging_configuration.logging_filter.default_behavior #=> String, one of "KEEP", "DROP"
+    #   resp.logging_configuration.log_type #=> String, one of "WAF_LOGS"
+    #   resp.logging_configuration.log_scope #=> String, one of "CUSTOMER", "SECURITY_LAKE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PutLoggingConfiguration AWS API Documentation
     #
@@ -6570,19 +6781,30 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # When you make changes to web ACLs or web ACL components, like rules
-    # and rule groups, WAF propagates the changes everywhere that the web
-    # ACL and its components are stored and used. Your changes are applied
-    # within seconds, but there might be a brief period of inconsistency
-    # when the changes have arrived in some places and not in others. So,
-    # for example, if you change a rule action setting, the action might be
-    # the old action in one area and the new action in another area. Or if
-    # you add an IP address to an IP set used in a blocking rule, the new
-    # address might briefly be blocked in one area while still allowed in
-    # another. This temporary inconsistency can occur when you first
-    # associate a web ACL with an Amazon Web Services resource and when you
-    # change a web ACL that is already associated with a resource.
-    # Generally, any inconsistencies of this type last only a few seconds.
+    # **Temporary inconsistencies during updates**
+    #
+    # When you create or change a web ACL or other WAF resources, the
+    # changes take a small amount of time to propagate to all areas where
+    # the resources are stored. The propagation time can be from a few
+    # seconds to a number of minutes.
+    #
+    # The following are examples of the temporary inconsistencies that you
+    # might notice during change propagation:
+    #
+    # * After you create a web ACL, if you try to associate it with a
+    #   resource, you might get an exception indicating that the web ACL is
+    #   unavailable.
+    #
+    # * After you add a rule group to a web ACL, the new rule group rules
+    #   might be in effect in one area where the web ACL is used and not in
+    #   another.
+    #
+    # * After you change a rule action setting, you might see the old action
+    #   in some places and the new action in others.
+    #
+    # * After you add an IP address to an IP set that is in use in a
+    #   blocking rule, the new address might be blocked in one area while
+    #   still allowed in another.
     #
     # @option params [required, String] :name
     #   The name of the IP set. You cannot change the name of an `IPSet` after
@@ -6803,19 +7025,30 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # When you make changes to web ACLs or web ACL components, like rules
-    # and rule groups, WAF propagates the changes everywhere that the web
-    # ACL and its components are stored and used. Your changes are applied
-    # within seconds, but there might be a brief period of inconsistency
-    # when the changes have arrived in some places and not in others. So,
-    # for example, if you change a rule action setting, the action might be
-    # the old action in one area and the new action in another area. Or if
-    # you add an IP address to an IP set used in a blocking rule, the new
-    # address might briefly be blocked in one area while still allowed in
-    # another. This temporary inconsistency can occur when you first
-    # associate a web ACL with an Amazon Web Services resource and when you
-    # change a web ACL that is already associated with a resource.
-    # Generally, any inconsistencies of this type last only a few seconds.
+    # **Temporary inconsistencies during updates**
+    #
+    # When you create or change a web ACL or other WAF resources, the
+    # changes take a small amount of time to propagate to all areas where
+    # the resources are stored. The propagation time can be from a few
+    # seconds to a number of minutes.
+    #
+    # The following are examples of the temporary inconsistencies that you
+    # might notice during change propagation:
+    #
+    # * After you create a web ACL, if you try to associate it with a
+    #   resource, you might get an exception indicating that the web ACL is
+    #   unavailable.
+    #
+    # * After you add a rule group to a web ACL, the new rule group rules
+    #   might be in effect in one area where the web ACL is used and not in
+    #   another.
+    #
+    # * After you change a rule action setting, you might see the old action
+    #   in some places and the new action in others.
+    #
+    # * After you add an IP address to an IP set that is in use in a
+    #   blocking rule, the new address might be blocked in one area while
+    #   still allowed in another.
     #
     # @option params [required, String] :name
     #   The name of the set. You cannot change the name after you create the
@@ -6904,25 +7137,36 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # When you make changes to web ACLs or web ACL components, like rules
-    # and rule groups, WAF propagates the changes everywhere that the web
-    # ACL and its components are stored and used. Your changes are applied
-    # within seconds, but there might be a brief period of inconsistency
-    # when the changes have arrived in some places and not in others. So,
-    # for example, if you change a rule action setting, the action might be
-    # the old action in one area and the new action in another area. Or if
-    # you add an IP address to an IP set used in a blocking rule, the new
-    # address might briefly be blocked in one area while still allowed in
-    # another. This temporary inconsistency can occur when you first
-    # associate a web ACL with an Amazon Web Services resource and when you
-    # change a web ACL that is already associated with a resource.
-    # Generally, any inconsistencies of this type last only a few seconds.
-    #
     # A rule group defines a collection of rules to inspect and control web
     # requests that you can use in a WebACL. When you create a rule group,
     # you define an immutable capacity limit. If you update a rule group,
     # you must stay within the capacity. This allows others to reuse the
     # rule group with confidence in its capacity requirements.
+    #
+    # **Temporary inconsistencies during updates**
+    #
+    # When you create or change a web ACL or other WAF resources, the
+    # changes take a small amount of time to propagate to all areas where
+    # the resources are stored. The propagation time can be from a few
+    # seconds to a number of minutes.
+    #
+    # The following are examples of the temporary inconsistencies that you
+    # might notice during change propagation:
+    #
+    # * After you create a web ACL, if you try to associate it with a
+    #   resource, you might get an exception indicating that the web ACL is
+    #   unavailable.
+    #
+    # * After you add a rule group to a web ACL, the new rule group rules
+    #   might be in effect in one area where the web ACL is used and not in
+    #   another.
+    #
+    # * After you change a rule action setting, you might see the old action
+    #   in some places and the new action in others.
+    #
+    # * After you add an IP address to an IP set that is in use in a
+    #   blocking rule, the new address might be blocked in one area while
+    #   still allowed in another.
     #
     # @option params [required, String] :name
     #   The name of the rule group. You cannot change the name of a rule group
@@ -7411,6 +7655,7 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
+    #             evaluation_window_sec: 1,
     #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
     #             scope_down_statement: {
     #               # recursive Statement
@@ -7867,20 +8112,6 @@ module Aws::WAFV2
     #
     #  </note>
     #
-    # When you make changes to web ACLs or web ACL components, like rules
-    # and rule groups, WAF propagates the changes everywhere that the web
-    # ACL and its components are stored and used. Your changes are applied
-    # within seconds, but there might be a brief period of inconsistency
-    # when the changes have arrived in some places and not in others. So,
-    # for example, if you change a rule action setting, the action might be
-    # the old action in one area and the new action in another area. Or if
-    # you add an IP address to an IP set used in a blocking rule, the new
-    # address might briefly be blocked in one area while still allowed in
-    # another. This temporary inconsistency can occur when you first
-    # associate a web ACL with an Amazon Web Services resource and when you
-    # change a web ACL that is already associated with a resource.
-    # Generally, any inconsistencies of this type last only a few seconds.
-    #
     # A web ACL defines a collection of rules to use to inspect and control
     # web requests. Each rule has a statement that defines what to look for
     # in web requests and an action that WAF applies to requests that match
@@ -7893,6 +8124,31 @@ module Aws::WAFV2
     # API, an Application Load Balancer, an AppSync GraphQL API, an Amazon
     # Cognito user pool, an App Runner service, or an Amazon Web Services
     # Verified Access instance.
+    #
+    # **Temporary inconsistencies during updates**
+    #
+    # When you create or change a web ACL or other WAF resources, the
+    # changes take a small amount of time to propagate to all areas where
+    # the resources are stored. The propagation time can be from a few
+    # seconds to a number of minutes.
+    #
+    # The following are examples of the temporary inconsistencies that you
+    # might notice during change propagation:
+    #
+    # * After you create a web ACL, if you try to associate it with a
+    #   resource, you might get an exception indicating that the web ACL is
+    #   unavailable.
+    #
+    # * After you add a rule group to a web ACL, the new rule group rules
+    #   might be in effect in one area where the web ACL is used and not in
+    #   another.
+    #
+    # * After you change a rule action setting, you might see the old action
+    #   in some places and the new action in others.
+    #
+    # * After you add an IP address to an IP set that is in use in a
+    #   blocking rule, the new address might be blocked in one area while
+    #   still allowed in another.
     #
     # @option params [required, String] :name
     #   The name of the web ACL. You cannot change the name of a web ACL after
@@ -7987,7 +8243,7 @@ module Aws::WAFV2
     #   Example JSON: `"TokenDomains": \{ "mywebsite.com",
     #   "myotherwebsite.com" \}`
     #
-    #   Public suffixes aren't allowed. For example, you can't use `usa.gov`
+    #   Public suffixes aren't allowed. For example, you can't use `gov.au`
     #   or `co.uk` as token domains.
     #
     # @option params [Types::AssociationConfig] :association_config
@@ -7995,14 +8251,19 @@ module Aws::WAFV2
     #   ACL and protected resources.
     #
     #   Use this to customize the maximum size of the request body that your
-    #   protected CloudFront distributions forward to WAF for inspection. The
-    #   default is 16 KB (16,384 bytes).
+    #   protected resources forward to WAF for inspection. You can customize
+    #   this setting for CloudFront, API Gateway, Amazon Cognito, App Runner,
+    #   or Verified Access resources. The default setting is 16 KB (16,384
+    #   bytes).
     #
     #   <note markdown="1"> You are charged additional fees when your protected resources forward
     #   body sizes that are larger than the default. For more information, see
     #   [WAF Pricing][1].
     #
     #    </note>
+    #
+    #   For Application Load Balancer and AppSync, the limit is fixed at 8 KB
+    #   (8,192 bytes).
     #
     #
     #
@@ -8453,6 +8714,7 @@ module Aws::WAFV2
     #           },
     #           rate_based_statement: {
     #             limit: 1, # required
+    #             evaluation_window_sec: 1,
     #             aggregate_key_type: "IP", # required, accepts IP, FORWARDED_IP, CUSTOM_KEYS, CONSTANT
     #             scope_down_statement: {
     #               # recursive Statement
@@ -8922,7 +9184,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -5,6 +5,7 @@
     "endpointPrefix":"firehose",
     "jsonVersion":"1.1",
     "protocol":"json",
+    "protocols":["json"],
     "serviceAbbreviation":"Firehose",
     "serviceFullName":"Amazon Kinesis Firehose",
     "serviceId":"Firehose",
@@ -88,6 +89,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidArgumentException"},
         {"shape":"InvalidKMSResourceException"},
+        {"shape":"InvalidSourceException"},
         {"shape":"ServiceUnavailableException"}
       ]
     },
@@ -103,6 +105,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidArgumentException"},
         {"shape":"InvalidKMSResourceException"},
+        {"shape":"InvalidSourceException"},
         {"shape":"ServiceUnavailableException"}
       ]
     },
@@ -200,7 +203,7 @@
     "AmazonOpenSearchServerlessBufferingIntervalInSeconds":{
       "type":"integer",
       "max":900,
-      "min":60
+      "min":0
     },
     "AmazonOpenSearchServerlessBufferingSizeInMBs":{
       "type":"integer",
@@ -295,7 +298,7 @@
     "AmazonopensearchserviceBufferingIntervalInSeconds":{
       "type":"integer",
       "max":900,
-      "min":60
+      "min":0
     },
     "AmazonopensearchserviceBufferingSizeInMBs":{
       "type":"integer",
@@ -528,7 +531,8 @@
         "HttpEndpointDestinationConfiguration":{"shape":"HttpEndpointDestinationConfiguration"},
         "Tags":{"shape":"TagDeliveryStreamInputTagList"},
         "AmazonOpenSearchServerlessDestinationConfiguration":{"shape":"AmazonOpenSearchServerlessDestinationConfiguration"},
-        "MSKSourceConfiguration":{"shape":"MSKSourceConfiguration"}
+        "MSKSourceConfiguration":{"shape":"MSKSourceConfiguration"},
+        "SnowflakeDestinationConfiguration":{"shape":"SnowflakeDestinationConfiguration"}
       }
     },
     "CreateDeliveryStreamOutput":{
@@ -536,6 +540,11 @@
       "members":{
         "DeliveryStreamARN":{"shape":"DeliveryStreamARN"}
       }
+    },
+    "CustomTimeZone":{
+      "type":"string",
+      "max":50,
+      "min":0
     },
     "Data":{
       "type":"blob",
@@ -738,6 +747,7 @@
         "AmazonopensearchserviceDestinationDescription":{"shape":"AmazonopensearchserviceDestinationDescription"},
         "SplunkDestinationDescription":{"shape":"SplunkDestinationDescription"},
         "HttpEndpointDestinationDescription":{"shape":"HttpEndpointDestinationDescription"},
+        "SnowflakeDestinationDescription":{"shape":"SnowflakeDestinationDescription"},
         "AmazonOpenSearchServerlessDestinationDescription":{"shape":"AmazonOpenSearchServerlessDestinationDescription"}
       }
     },
@@ -775,7 +785,7 @@
     "ElasticsearchBufferingIntervalInSeconds":{
       "type":"integer",
       "max":900,
-      "min":60
+      "min":0
     },
     "ElasticsearchBufferingSizeInMBs":{
       "type":"integer",
@@ -928,7 +938,9 @@
         "S3BackupMode":{"shape":"S3BackupMode"},
         "S3BackupConfiguration":{"shape":"S3DestinationConfiguration"},
         "DataFormatConversionConfiguration":{"shape":"DataFormatConversionConfiguration"},
-        "DynamicPartitioningConfiguration":{"shape":"DynamicPartitioningConfiguration"}
+        "DynamicPartitioningConfiguration":{"shape":"DynamicPartitioningConfiguration"},
+        "FileExtension":{"shape":"FileExtension"},
+        "CustomTimeZone":{"shape":"CustomTimeZone"}
       }
     },
     "ExtendedS3DestinationDescription":{
@@ -953,7 +965,9 @@
         "S3BackupMode":{"shape":"S3BackupMode"},
         "S3BackupDescription":{"shape":"S3DestinationDescription"},
         "DataFormatConversionConfiguration":{"shape":"DataFormatConversionConfiguration"},
-        "DynamicPartitioningConfiguration":{"shape":"DynamicPartitioningConfiguration"}
+        "DynamicPartitioningConfiguration":{"shape":"DynamicPartitioningConfiguration"},
+        "FileExtension":{"shape":"FileExtension"},
+        "CustomTimeZone":{"shape":"CustomTimeZone"}
       }
     },
     "ExtendedS3DestinationUpdate":{
@@ -971,7 +985,9 @@
         "S3BackupMode":{"shape":"S3BackupMode"},
         "S3BackupUpdate":{"shape":"S3DestinationUpdate"},
         "DataFormatConversionConfiguration":{"shape":"DataFormatConversionConfiguration"},
-        "DynamicPartitioningConfiguration":{"shape":"DynamicPartitioningConfiguration"}
+        "DynamicPartitioningConfiguration":{"shape":"DynamicPartitioningConfiguration"},
+        "FileExtension":{"shape":"FileExtension"},
+        "CustomTimeZone":{"shape":"CustomTimeZone"}
       }
     },
     "FailureDescription":{
@@ -984,6 +1000,12 @@
         "Type":{"shape":"DeliveryStreamFailureType"},
         "Details":{"shape":"NonEmptyString"}
       }
+    },
+    "FileExtension":{
+      "type":"string",
+      "max":128,
+      "min":0,
+      "pattern":"^$|\\.[0-9a-z!\\-_.*'()]+"
     },
     "HECAcknowledgmentTimeoutInSeconds":{
       "type":"integer",
@@ -1046,7 +1068,7 @@
     "HttpEndpointBufferingIntervalInSeconds":{
       "type":"integer",
       "max":900,
-      "min":60
+      "min":0
     },
     "HttpEndpointBufferingSizeInMBs":{
       "type":"integer",
@@ -1101,7 +1123,8 @@
         "RoleARN":{"shape":"RoleARN"},
         "RetryOptions":{"shape":"HttpEndpointRetryOptions"},
         "S3BackupMode":{"shape":"HttpEndpointS3BackupMode"},
-        "S3Configuration":{"shape":"S3DestinationConfiguration"}
+        "S3Configuration":{"shape":"S3DestinationConfiguration"},
+        "SecretsManagerConfiguration":{"shape":"SecretsManagerConfiguration"}
       }
     },
     "HttpEndpointDestinationDescription":{
@@ -1115,7 +1138,8 @@
         "RoleARN":{"shape":"RoleARN"},
         "RetryOptions":{"shape":"HttpEndpointRetryOptions"},
         "S3BackupMode":{"shape":"HttpEndpointS3BackupMode"},
-        "S3DestinationDescription":{"shape":"S3DestinationDescription"}
+        "S3DestinationDescription":{"shape":"S3DestinationDescription"},
+        "SecretsManagerConfiguration":{"shape":"SecretsManagerConfiguration"}
       }
     },
     "HttpEndpointDestinationUpdate":{
@@ -1129,7 +1153,8 @@
         "RoleARN":{"shape":"RoleARN"},
         "RetryOptions":{"shape":"HttpEndpointRetryOptions"},
         "S3BackupMode":{"shape":"HttpEndpointS3BackupMode"},
-        "S3Update":{"shape":"S3DestinationUpdate"}
+        "S3Update":{"shape":"S3DestinationUpdate"},
+        "SecretsManagerConfiguration":{"shape":"SecretsManagerConfiguration"}
       }
     },
     "HttpEndpointName":{
@@ -1179,7 +1204,7 @@
     "IntervalInSeconds":{
       "type":"integer",
       "max":900,
-      "min":60
+      "min":0
     },
     "InvalidArgumentException":{
       "type":"structure",
@@ -1189,6 +1214,14 @@
       "exception":true
     },
     "InvalidKMSResourceException":{
+      "type":"structure",
+      "members":{
+        "code":{"shape":"ErrorCode"},
+        "message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
+    },
+    "InvalidSourceException":{
       "type":"structure",
       "members":{
         "code":{"shape":"ErrorCode"},
@@ -1506,7 +1539,8 @@
         "BufferIntervalInSeconds",
         "SubRecordType",
         "Delimiter",
-        "CompressionFormat"
+        "CompressionFormat",
+        "DataMessageExtraction"
       ]
     },
     "ProcessorParameterValue":{
@@ -1520,6 +1554,7 @@
       "enum":[
         "RecordDeAggregation",
         "Decompression",
+        "CloudWatchLogProcessing",
         "Lambda",
         "MetadataExtraction",
         "AppendDelimiterToRecord"
@@ -1609,8 +1644,6 @@
         "RoleARN",
         "ClusterJDBCURL",
         "CopyCommand",
-        "Username",
-        "Password",
         "S3Configuration"
       ],
       "members":{
@@ -1624,7 +1657,8 @@
         "ProcessingConfiguration":{"shape":"ProcessingConfiguration"},
         "S3BackupMode":{"shape":"RedshiftS3BackupMode"},
         "S3BackupConfiguration":{"shape":"S3DestinationConfiguration"},
-        "CloudWatchLoggingOptions":{"shape":"CloudWatchLoggingOptions"}
+        "CloudWatchLoggingOptions":{"shape":"CloudWatchLoggingOptions"},
+        "SecretsManagerConfiguration":{"shape":"SecretsManagerConfiguration"}
       }
     },
     "RedshiftDestinationDescription":{
@@ -1633,7 +1667,6 @@
         "RoleARN",
         "ClusterJDBCURL",
         "CopyCommand",
-        "Username",
         "S3DestinationDescription"
       ],
       "members":{
@@ -1646,7 +1679,8 @@
         "ProcessingConfiguration":{"shape":"ProcessingConfiguration"},
         "S3BackupMode":{"shape":"RedshiftS3BackupMode"},
         "S3BackupDescription":{"shape":"S3DestinationDescription"},
-        "CloudWatchLoggingOptions":{"shape":"CloudWatchLoggingOptions"}
+        "CloudWatchLoggingOptions":{"shape":"CloudWatchLoggingOptions"},
+        "SecretsManagerConfiguration":{"shape":"SecretsManagerConfiguration"}
       }
     },
     "RedshiftDestinationUpdate":{
@@ -1662,7 +1696,8 @@
         "ProcessingConfiguration":{"shape":"ProcessingConfiguration"},
         "S3BackupMode":{"shape":"RedshiftS3BackupMode"},
         "S3BackupUpdate":{"shape":"S3DestinationUpdate"},
-        "CloudWatchLoggingOptions":{"shape":"CloudWatchLoggingOptions"}
+        "CloudWatchLoggingOptions":{"shape":"CloudWatchLoggingOptions"},
+        "SecretsManagerConfiguration":{"shape":"SecretsManagerConfiguration"}
       }
     },
     "RedshiftRetryDurationInSeconds":{
@@ -1782,6 +1817,21 @@
         "VersionId":{"shape":"NonEmptyStringWithoutWhitespace"}
       }
     },
+    "SecretARN":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"arn:.*"
+    },
+    "SecretsManagerConfiguration":{
+      "type":"structure",
+      "required":["Enabled"],
+      "members":{
+        "SecretARN":{"shape":"SecretARN"},
+        "RoleARN":{"shape":"RoleARN"},
+        "Enabled":{"shape":"BooleanObject"}
+      }
+    },
     "SecurityGroupIdList":{
       "type":"list",
       "member":{"shape":"NonEmptyStringWithoutWhitespace"},
@@ -1808,6 +1858,192 @@
       "max":128,
       "min":1
     },
+    "SnowflakeAccountUrl":{
+      "type":"string",
+      "max":2048,
+      "min":24,
+      "pattern":".+?\\.snowflakecomputing\\.com",
+      "sensitive":true
+    },
+    "SnowflakeContentColumnName":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "sensitive":true
+    },
+    "SnowflakeDataLoadingOption":{
+      "type":"string",
+      "enum":[
+        "JSON_MAPPING",
+        "VARIANT_CONTENT_MAPPING",
+        "VARIANT_CONTENT_AND_METADATA_MAPPING"
+      ]
+    },
+    "SnowflakeDatabase":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "sensitive":true
+    },
+    "SnowflakeDestinationConfiguration":{
+      "type":"structure",
+      "required":[
+        "AccountUrl",
+        "Database",
+        "Schema",
+        "Table",
+        "RoleARN",
+        "S3Configuration"
+      ],
+      "members":{
+        "AccountUrl":{"shape":"SnowflakeAccountUrl"},
+        "PrivateKey":{"shape":"SnowflakePrivateKey"},
+        "KeyPassphrase":{"shape":"SnowflakeKeyPassphrase"},
+        "User":{"shape":"SnowflakeUser"},
+        "Database":{"shape":"SnowflakeDatabase"},
+        "Schema":{"shape":"SnowflakeSchema"},
+        "Table":{"shape":"SnowflakeTable"},
+        "SnowflakeRoleConfiguration":{"shape":"SnowflakeRoleConfiguration"},
+        "DataLoadingOption":{"shape":"SnowflakeDataLoadingOption"},
+        "MetaDataColumnName":{"shape":"SnowflakeMetaDataColumnName"},
+        "ContentColumnName":{"shape":"SnowflakeContentColumnName"},
+        "SnowflakeVpcConfiguration":{"shape":"SnowflakeVpcConfiguration"},
+        "CloudWatchLoggingOptions":{"shape":"CloudWatchLoggingOptions"},
+        "ProcessingConfiguration":{"shape":"ProcessingConfiguration"},
+        "RoleARN":{"shape":"RoleARN"},
+        "RetryOptions":{"shape":"SnowflakeRetryOptions"},
+        "S3BackupMode":{"shape":"SnowflakeS3BackupMode"},
+        "S3Configuration":{"shape":"S3DestinationConfiguration"},
+        "SecretsManagerConfiguration":{"shape":"SecretsManagerConfiguration"}
+      }
+    },
+    "SnowflakeDestinationDescription":{
+      "type":"structure",
+      "members":{
+        "AccountUrl":{"shape":"SnowflakeAccountUrl"},
+        "User":{"shape":"SnowflakeUser"},
+        "Database":{"shape":"SnowflakeDatabase"},
+        "Schema":{"shape":"SnowflakeSchema"},
+        "Table":{"shape":"SnowflakeTable"},
+        "SnowflakeRoleConfiguration":{"shape":"SnowflakeRoleConfiguration"},
+        "DataLoadingOption":{"shape":"SnowflakeDataLoadingOption"},
+        "MetaDataColumnName":{"shape":"SnowflakeMetaDataColumnName"},
+        "ContentColumnName":{"shape":"SnowflakeContentColumnName"},
+        "SnowflakeVpcConfiguration":{"shape":"SnowflakeVpcConfiguration"},
+        "CloudWatchLoggingOptions":{"shape":"CloudWatchLoggingOptions"},
+        "ProcessingConfiguration":{"shape":"ProcessingConfiguration"},
+        "RoleARN":{"shape":"RoleARN"},
+        "RetryOptions":{"shape":"SnowflakeRetryOptions"},
+        "S3BackupMode":{"shape":"SnowflakeS3BackupMode"},
+        "S3DestinationDescription":{"shape":"S3DestinationDescription"},
+        "SecretsManagerConfiguration":{"shape":"SecretsManagerConfiguration"}
+      }
+    },
+    "SnowflakeDestinationUpdate":{
+      "type":"structure",
+      "members":{
+        "AccountUrl":{"shape":"SnowflakeAccountUrl"},
+        "PrivateKey":{"shape":"SnowflakePrivateKey"},
+        "KeyPassphrase":{"shape":"SnowflakeKeyPassphrase"},
+        "User":{"shape":"SnowflakeUser"},
+        "Database":{"shape":"SnowflakeDatabase"},
+        "Schema":{"shape":"SnowflakeSchema"},
+        "Table":{"shape":"SnowflakeTable"},
+        "SnowflakeRoleConfiguration":{"shape":"SnowflakeRoleConfiguration"},
+        "DataLoadingOption":{"shape":"SnowflakeDataLoadingOption"},
+        "MetaDataColumnName":{"shape":"SnowflakeMetaDataColumnName"},
+        "ContentColumnName":{"shape":"SnowflakeContentColumnName"},
+        "CloudWatchLoggingOptions":{"shape":"CloudWatchLoggingOptions"},
+        "ProcessingConfiguration":{"shape":"ProcessingConfiguration"},
+        "RoleARN":{"shape":"RoleARN"},
+        "RetryOptions":{"shape":"SnowflakeRetryOptions"},
+        "S3BackupMode":{"shape":"SnowflakeS3BackupMode"},
+        "S3Update":{"shape":"S3DestinationUpdate"},
+        "SecretsManagerConfiguration":{"shape":"SecretsManagerConfiguration"}
+      }
+    },
+    "SnowflakeKeyPassphrase":{
+      "type":"string",
+      "max":255,
+      "min":7,
+      "sensitive":true
+    },
+    "SnowflakeMetaDataColumnName":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "sensitive":true
+    },
+    "SnowflakePrivateKey":{
+      "type":"string",
+      "max":4096,
+      "min":256,
+      "pattern":"^(?:[A-Za-z0-9+\\/]{4})*(?:[A-Za-z0-9+\\/]{2}==|[A-Za-z0-9+\\/]{3}=)?$",
+      "sensitive":true
+    },
+    "SnowflakePrivateLinkVpceId":{
+      "type":"string",
+      "max":255,
+      "min":47,
+      "pattern":"([a-zA-Z0-9\\-\\_]+\\.){2,3}vpce\\.[a-zA-Z0-9\\-]*\\.vpce-svc\\-[a-zA-Z0-9\\-]{17}$",
+      "sensitive":true
+    },
+    "SnowflakeRetryDurationInSeconds":{
+      "type":"integer",
+      "max":7200,
+      "min":0
+    },
+    "SnowflakeRetryOptions":{
+      "type":"structure",
+      "members":{
+        "DurationInSeconds":{"shape":"SnowflakeRetryDurationInSeconds"}
+      }
+    },
+    "SnowflakeRole":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "sensitive":true
+    },
+    "SnowflakeRoleConfiguration":{
+      "type":"structure",
+      "members":{
+        "Enabled":{"shape":"BooleanObject"},
+        "SnowflakeRole":{"shape":"SnowflakeRole"}
+      }
+    },
+    "SnowflakeS3BackupMode":{
+      "type":"string",
+      "enum":[
+        "FailedDataOnly",
+        "AllData"
+      ]
+    },
+    "SnowflakeSchema":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "sensitive":true
+    },
+    "SnowflakeTable":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "sensitive":true
+    },
+    "SnowflakeUser":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "sensitive":true
+    },
+    "SnowflakeVpcConfiguration":{
+      "type":"structure",
+      "required":["PrivateLinkVpceId"],
+      "members":{
+        "PrivateLinkVpceId":{"shape":"SnowflakePrivateLinkVpceId"}
+      }
+    },
     "SourceDescription":{
       "type":"structure",
       "members":{
@@ -1815,12 +2051,28 @@
         "MSKSourceDescription":{"shape":"MSKSourceDescription"}
       }
     },
+    "SplunkBufferingHints":{
+      "type":"structure",
+      "members":{
+        "IntervalInSeconds":{"shape":"SplunkBufferingIntervalInSeconds"},
+        "SizeInMBs":{"shape":"SplunkBufferingSizeInMBs"}
+      }
+    },
+    "SplunkBufferingIntervalInSeconds":{
+      "type":"integer",
+      "max":60,
+      "min":0
+    },
+    "SplunkBufferingSizeInMBs":{
+      "type":"integer",
+      "max":5,
+      "min":1
+    },
     "SplunkDestinationConfiguration":{
       "type":"structure",
       "required":[
         "HECEndpoint",
         "HECEndpointType",
-        "HECToken",
         "S3Configuration"
       ],
       "members":{
@@ -1832,7 +2084,9 @@
         "S3BackupMode":{"shape":"SplunkS3BackupMode"},
         "S3Configuration":{"shape":"S3DestinationConfiguration"},
         "ProcessingConfiguration":{"shape":"ProcessingConfiguration"},
-        "CloudWatchLoggingOptions":{"shape":"CloudWatchLoggingOptions"}
+        "CloudWatchLoggingOptions":{"shape":"CloudWatchLoggingOptions"},
+        "BufferingHints":{"shape":"SplunkBufferingHints"},
+        "SecretsManagerConfiguration":{"shape":"SecretsManagerConfiguration"}
       }
     },
     "SplunkDestinationDescription":{
@@ -1846,7 +2100,9 @@
         "S3BackupMode":{"shape":"SplunkS3BackupMode"},
         "S3DestinationDescription":{"shape":"S3DestinationDescription"},
         "ProcessingConfiguration":{"shape":"ProcessingConfiguration"},
-        "CloudWatchLoggingOptions":{"shape":"CloudWatchLoggingOptions"}
+        "CloudWatchLoggingOptions":{"shape":"CloudWatchLoggingOptions"},
+        "BufferingHints":{"shape":"SplunkBufferingHints"},
+        "SecretsManagerConfiguration":{"shape":"SecretsManagerConfiguration"}
       }
     },
     "SplunkDestinationUpdate":{
@@ -1860,7 +2116,9 @@
         "S3BackupMode":{"shape":"SplunkS3BackupMode"},
         "S3Update":{"shape":"S3DestinationUpdate"},
         "ProcessingConfiguration":{"shape":"ProcessingConfiguration"},
-        "CloudWatchLoggingOptions":{"shape":"CloudWatchLoggingOptions"}
+        "CloudWatchLoggingOptions":{"shape":"CloudWatchLoggingOptions"},
+        "BufferingHints":{"shape":"SplunkBufferingHints"},
+        "SecretsManagerConfiguration":{"shape":"SecretsManagerConfiguration"}
       }
     },
     "SplunkRetryDurationInSeconds":{
@@ -2004,7 +2262,8 @@
         "AmazonopensearchserviceDestinationUpdate":{"shape":"AmazonopensearchserviceDestinationUpdate"},
         "SplunkDestinationUpdate":{"shape":"SplunkDestinationUpdate"},
         "HttpEndpointDestinationUpdate":{"shape":"HttpEndpointDestinationUpdate"},
-        "AmazonOpenSearchServerlessDestinationUpdate":{"shape":"AmazonOpenSearchServerlessDestinationUpdate"}
+        "AmazonOpenSearchServerlessDestinationUpdate":{"shape":"AmazonOpenSearchServerlessDestinationUpdate"},
+        "SnowflakeDestinationUpdate":{"shape":"SnowflakeDestinationUpdate"}
       }
     },
     "UpdateDestinationOutput":{

@@ -1,0 +1,366 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ManagedBlockchainQuery
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AddressIdentifierFilter
+      attr_accessor transaction_event_to_address: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssetContract
+      attr_accessor contract_identifier: Types::ContractIdentifier
+      attr_accessor token_standard: ("ERC20" | "ERC721" | "ERC1155")
+      attr_accessor deployer_address: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetTokenBalanceErrorItem
+      attr_accessor token_identifier: Types::TokenIdentifier
+      attr_accessor owner_identifier: Types::OwnerIdentifier
+      attr_accessor at_blockchain_instant: Types::BlockchainInstant
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      attr_accessor error_type: ("VALIDATION_EXCEPTION" | "RESOURCE_NOT_FOUND_EXCEPTION")
+      SENSITIVE: []
+    end
+
+    class BatchGetTokenBalanceInput
+      attr_accessor get_token_balance_inputs: ::Array[Types::BatchGetTokenBalanceInputItem]
+      SENSITIVE: []
+    end
+
+    class BatchGetTokenBalanceInputItem
+      attr_accessor token_identifier: Types::TokenIdentifier
+      attr_accessor owner_identifier: Types::OwnerIdentifier
+      attr_accessor at_blockchain_instant: Types::BlockchainInstant
+      SENSITIVE: []
+    end
+
+    class BatchGetTokenBalanceOutput
+      attr_accessor token_balances: ::Array[Types::BatchGetTokenBalanceOutputItem]
+      attr_accessor errors: ::Array[Types::BatchGetTokenBalanceErrorItem]
+      SENSITIVE: []
+    end
+
+    class BatchGetTokenBalanceOutputItem
+      attr_accessor owner_identifier: Types::OwnerIdentifier
+      attr_accessor token_identifier: Types::TokenIdentifier
+      attr_accessor balance: ::String
+      attr_accessor at_blockchain_instant: Types::BlockchainInstant
+      attr_accessor last_updated_time: Types::BlockchainInstant
+      SENSITIVE: []
+    end
+
+    class BlockchainInstant
+      attr_accessor time: ::Time
+      SENSITIVE: []
+    end
+
+    class ConfirmationStatusFilter
+      attr_accessor include: ::Array[("FINAL" | "NONFINAL")]
+      SENSITIVE: []
+    end
+
+    class ContractFilter
+      attr_accessor network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
+      attr_accessor token_standard: ("ERC20" | "ERC721" | "ERC1155")
+      attr_accessor deployer_address: ::String
+      SENSITIVE: []
+    end
+
+    class ContractIdentifier
+      attr_accessor network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
+      attr_accessor contract_address: ::String
+      SENSITIVE: []
+    end
+
+    class ContractMetadata
+      attr_accessor name: ::String
+      attr_accessor symbol: ::String
+      attr_accessor decimals: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAssetContractInput
+      attr_accessor contract_identifier: Types::ContractIdentifier
+      SENSITIVE: []
+    end
+
+    class GetAssetContractOutput
+      attr_accessor contract_identifier: Types::ContractIdentifier
+      attr_accessor token_standard: ("ERC20" | "ERC721" | "ERC1155")
+      attr_accessor deployer_address: ::String
+      attr_accessor metadata: Types::ContractMetadata
+      SENSITIVE: []
+    end
+
+    class GetTokenBalanceInput
+      attr_accessor token_identifier: Types::TokenIdentifier
+      attr_accessor owner_identifier: Types::OwnerIdentifier
+      attr_accessor at_blockchain_instant: Types::BlockchainInstant
+      SENSITIVE: []
+    end
+
+    class GetTokenBalanceOutput
+      attr_accessor owner_identifier: Types::OwnerIdentifier
+      attr_accessor token_identifier: Types::TokenIdentifier
+      attr_accessor balance: ::String
+      attr_accessor at_blockchain_instant: Types::BlockchainInstant
+      attr_accessor last_updated_time: Types::BlockchainInstant
+      SENSITIVE: []
+    end
+
+    class GetTransactionInput
+      attr_accessor transaction_hash: ::String
+      attr_accessor transaction_id: ::String
+      attr_accessor network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
+      SENSITIVE: []
+    end
+
+    class GetTransactionOutput
+      attr_accessor transaction: Types::Transaction
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssetContractsInput
+      attr_accessor contract_filter: Types::ContractFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssetContractsOutput
+      attr_accessor contracts: ::Array[Types::AssetContract]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFilteredTransactionEventsInput
+      attr_accessor network: ::String
+      attr_accessor address_identifier_filter: Types::AddressIdentifierFilter
+      attr_accessor time_filter: Types::TimeFilter
+      attr_accessor vout_filter: Types::VoutFilter
+      attr_accessor confirmation_status_filter: Types::ConfirmationStatusFilter
+      attr_accessor sort: Types::ListFilteredTransactionEventsSort
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFilteredTransactionEventsOutput
+      attr_accessor events: ::Array[Types::TransactionEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFilteredTransactionEventsSort
+      attr_accessor sort_by: ("blockchainInstant")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ListTokenBalancesInput
+      attr_accessor owner_filter: Types::OwnerFilter
+      attr_accessor token_filter: Types::TokenFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTokenBalancesOutput
+      attr_accessor token_balances: ::Array[Types::TokenBalance]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTransactionEventsInput
+      attr_accessor transaction_hash: ::String
+      attr_accessor transaction_id: ::String
+      attr_accessor network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTransactionEventsOutput
+      attr_accessor events: ::Array[Types::TransactionEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTransactionsInput
+      attr_accessor address: ::String
+      attr_accessor network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
+      attr_accessor from_blockchain_instant: Types::BlockchainInstant
+      attr_accessor to_blockchain_instant: Types::BlockchainInstant
+      attr_accessor sort: Types::ListTransactionsSort
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor confirmation_status_filter: Types::ConfirmationStatusFilter
+      SENSITIVE: []
+    end
+
+    class ListTransactionsOutput
+      attr_accessor transactions: ::Array[Types::TransactionOutputItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTransactionsSort
+      attr_accessor sort_by: ("TRANSACTION_TIMESTAMP")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class OwnerFilter
+      attr_accessor address: ::String
+      SENSITIVE: []
+    end
+
+    class OwnerIdentifier
+      attr_accessor address: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("collection")
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("collection")
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor service_code: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimeFilter
+      attr_accessor from: Types::BlockchainInstant
+      attr_accessor to: Types::BlockchainInstant
+      SENSITIVE: []
+    end
+
+    class TokenBalance
+      attr_accessor owner_identifier: Types::OwnerIdentifier
+      attr_accessor token_identifier: Types::TokenIdentifier
+      attr_accessor balance: ::String
+      attr_accessor at_blockchain_instant: Types::BlockchainInstant
+      attr_accessor last_updated_time: Types::BlockchainInstant
+      SENSITIVE: []
+    end
+
+    class TokenFilter
+      attr_accessor network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
+      attr_accessor contract_address: ::String
+      attr_accessor token_id: ::String
+      SENSITIVE: []
+    end
+
+    class TokenIdentifier
+      attr_accessor network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
+      attr_accessor contract_address: ::String
+      attr_accessor token_id: ::String
+      SENSITIVE: []
+    end
+
+    class Transaction
+      attr_accessor network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
+      attr_accessor block_hash: ::String
+      attr_accessor transaction_hash: ::String
+      attr_accessor block_number: ::String
+      attr_accessor transaction_timestamp: ::Time
+      attr_accessor transaction_index: ::Integer
+      attr_accessor number_of_transactions: ::Integer
+      attr_accessor to: ::String
+      attr_accessor from: ::String
+      attr_accessor contract_address: ::String
+      attr_accessor gas_used: ::String
+      attr_accessor cumulative_gas_used: ::String
+      attr_accessor effective_gas_price: ::String
+      attr_accessor signature_v: ::Integer
+      attr_accessor signature_r: ::String
+      attr_accessor signature_s: ::String
+      attr_accessor transaction_fee: ::String
+      attr_accessor transaction_id: ::String
+      attr_accessor confirmation_status: ("FINAL" | "NONFINAL")
+      attr_accessor execution_status: ("FAILED" | "SUCCEEDED")
+      SENSITIVE: []
+    end
+
+    class TransactionEvent
+      attr_accessor network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
+      attr_accessor transaction_hash: ::String
+      attr_accessor event_type: ("ERC20_TRANSFER" | "ERC20_MINT" | "ERC20_BURN" | "ERC20_DEPOSIT" | "ERC20_WITHDRAWAL" | "ERC721_TRANSFER" | "ERC1155_TRANSFER" | "BITCOIN_VIN" | "BITCOIN_VOUT" | "INTERNAL_ETH_TRANSFER" | "ETH_TRANSFER")
+      attr_accessor from: ::String
+      attr_accessor to: ::String
+      attr_accessor value: ::String
+      attr_accessor contract_address: ::String
+      attr_accessor token_id: ::String
+      attr_accessor transaction_id: ::String
+      attr_accessor vout_index: ::Integer
+      attr_accessor vout_spent: bool
+      attr_accessor spent_vout_transaction_id: ::String
+      attr_accessor spent_vout_transaction_hash: ::String
+      attr_accessor spent_vout_index: ::Integer
+      attr_accessor blockchain_instant: Types::BlockchainInstant
+      attr_accessor confirmation_status: ("FINAL" | "NONFINAL")
+      SENSITIVE: []
+    end
+
+    class TransactionOutputItem
+      attr_accessor transaction_hash: ::String
+      attr_accessor transaction_id: ::String
+      attr_accessor network: ("ETHEREUM_MAINNET" | "ETHEREUM_SEPOLIA_TESTNET" | "BITCOIN_MAINNET" | "BITCOIN_TESTNET")
+      attr_accessor transaction_timestamp: ::Time
+      attr_accessor confirmation_status: ("FINAL" | "NONFINAL")
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VoutFilter
+      attr_accessor vout_spent: bool
+      SENSITIVE: []
+    end
+  end
+end

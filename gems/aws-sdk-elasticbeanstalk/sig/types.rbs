@@ -1,0 +1,1054 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ElasticBeanstalk
+  module Types
+
+    class AbortEnvironmentUpdateMessage
+      attr_accessor environment_id: ::String
+      attr_accessor environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationDescription
+      attr_accessor application_arn: ::String
+      attr_accessor application_name: ::String
+      attr_accessor description: ::String
+      attr_accessor date_created: ::Time
+      attr_accessor date_updated: ::Time
+      attr_accessor versions: ::Array[::String]
+      attr_accessor configuration_templates: ::Array[::String]
+      attr_accessor resource_lifecycle_config: Types::ApplicationResourceLifecycleConfig
+      SENSITIVE: []
+    end
+
+    class ApplicationDescriptionMessage
+      attr_accessor application: Types::ApplicationDescription
+      SENSITIVE: []
+    end
+
+    class ApplicationDescriptionsMessage
+      attr_accessor applications: ::Array[Types::ApplicationDescription]
+      SENSITIVE: []
+    end
+
+    class ApplicationMetrics
+      attr_accessor duration: ::Integer
+      attr_accessor request_count: ::Integer
+      attr_accessor status_codes: Types::StatusCodes
+      attr_accessor latency: Types::Latency
+      SENSITIVE: []
+    end
+
+    class ApplicationResourceLifecycleConfig
+      attr_accessor service_role: ::String
+      attr_accessor version_lifecycle_config: Types::ApplicationVersionLifecycleConfig
+      SENSITIVE: []
+    end
+
+    class ApplicationResourceLifecycleDescriptionMessage
+      attr_accessor application_name: ::String
+      attr_accessor resource_lifecycle_config: Types::ApplicationResourceLifecycleConfig
+      SENSITIVE: []
+    end
+
+    class ApplicationVersionDescription
+      attr_accessor application_version_arn: ::String
+      attr_accessor application_name: ::String
+      attr_accessor description: ::String
+      attr_accessor version_label: ::String
+      attr_accessor source_build_information: Types::SourceBuildInformation
+      attr_accessor build_arn: ::String
+      attr_accessor source_bundle: Types::S3Location
+      attr_accessor date_created: ::Time
+      attr_accessor date_updated: ::Time
+      attr_accessor status: ("Processed" | "Unprocessed" | "Failed" | "Processing" | "Building")
+      SENSITIVE: []
+    end
+
+    class ApplicationVersionDescriptionMessage
+      attr_accessor application_version: Types::ApplicationVersionDescription
+      SENSITIVE: []
+    end
+
+    class ApplicationVersionDescriptionsMessage
+      attr_accessor application_versions: ::Array[Types::ApplicationVersionDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationVersionLifecycleConfig
+      attr_accessor max_count_rule: Types::MaxCountRule
+      attr_accessor max_age_rule: Types::MaxAgeRule
+      SENSITIVE: []
+    end
+
+    class ApplyEnvironmentManagedActionRequest
+      attr_accessor environment_name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor action_id: ::String
+      SENSITIVE: []
+    end
+
+    class ApplyEnvironmentManagedActionResult
+      attr_accessor action_id: ::String
+      attr_accessor action_description: ::String
+      attr_accessor action_type: ("InstanceRefresh" | "PlatformUpdate" | "Unknown")
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateEnvironmentOperationsRoleMessage
+      attr_accessor environment_name: ::String
+      attr_accessor operations_role: ::String
+      SENSITIVE: []
+    end
+
+    class AutoScalingGroup
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class BuildConfiguration
+      attr_accessor artifact_name: ::String
+      attr_accessor code_build_service_role: ::String
+      attr_accessor compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE")
+      attr_accessor image: ::String
+      attr_accessor timeout_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class Builder
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class CPUUtilization
+      attr_accessor user: ::Float
+      attr_accessor nice: ::Float
+      attr_accessor system: ::Float
+      attr_accessor idle: ::Float
+      attr_accessor io_wait: ::Float
+      attr_accessor irq: ::Float
+      attr_accessor soft_irq: ::Float
+      attr_accessor privileged: ::Float
+      SENSITIVE: []
+    end
+
+    class CheckDNSAvailabilityMessage
+      attr_accessor cname_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class CheckDNSAvailabilityResultMessage
+      attr_accessor available: bool
+      attr_accessor fully_qualified_cname: ::String
+      SENSITIVE: []
+    end
+
+    class CodeBuildNotInServiceRegionException < Aws::EmptyStructure
+    end
+
+    class ComposeEnvironmentsMessage
+      attr_accessor application_name: ::String
+      attr_accessor group_name: ::String
+      attr_accessor version_labels: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConfigurationOptionDescription
+      attr_accessor namespace: ::String
+      attr_accessor name: ::String
+      attr_accessor default_value: ::String
+      attr_accessor change_severity: ::String
+      attr_accessor user_defined: bool
+      attr_accessor value_type: ("Scalar" | "List")
+      attr_accessor value_options: ::Array[::String]
+      attr_accessor min_value: ::Integer
+      attr_accessor max_value: ::Integer
+      attr_accessor max_length: ::Integer
+      attr_accessor regex: Types::OptionRestrictionRegex
+      SENSITIVE: []
+    end
+
+    class ConfigurationOptionSetting
+      attr_accessor resource_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor option_name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationOptionsDescription
+      attr_accessor solution_stack_name: ::String
+      attr_accessor platform_arn: ::String
+      attr_accessor options: ::Array[Types::ConfigurationOptionDescription]
+      SENSITIVE: []
+    end
+
+    class ConfigurationSettingsDescription
+      attr_accessor solution_stack_name: ::String
+      attr_accessor platform_arn: ::String
+      attr_accessor application_name: ::String
+      attr_accessor template_name: ::String
+      attr_accessor description: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor deployment_status: ("deployed" | "pending" | "failed")
+      attr_accessor date_created: ::Time
+      attr_accessor date_updated: ::Time
+      attr_accessor option_settings: ::Array[Types::ConfigurationOptionSetting]
+      SENSITIVE: []
+    end
+
+    class ConfigurationSettingsDescriptions
+      attr_accessor configuration_settings: ::Array[Types::ConfigurationSettingsDescription]
+      SENSITIVE: []
+    end
+
+    class ConfigurationSettingsValidationMessages
+      attr_accessor messages: ::Array[Types::ValidationMessage]
+      SENSITIVE: []
+    end
+
+    class CreateApplicationMessage
+      attr_accessor application_name: ::String
+      attr_accessor description: ::String
+      attr_accessor resource_lifecycle_config: Types::ApplicationResourceLifecycleConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateApplicationVersionMessage
+      attr_accessor application_name: ::String
+      attr_accessor version_label: ::String
+      attr_accessor description: ::String
+      attr_accessor source_build_information: Types::SourceBuildInformation
+      attr_accessor source_bundle: Types::S3Location
+      attr_accessor build_configuration: Types::BuildConfiguration
+      attr_accessor auto_create_application: bool
+      attr_accessor process: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationTemplateMessage
+      attr_accessor application_name: ::String
+      attr_accessor template_name: ::String
+      attr_accessor solution_stack_name: ::String
+      attr_accessor platform_arn: ::String
+      attr_accessor source_configuration: Types::SourceConfiguration
+      attr_accessor environment_id: ::String
+      attr_accessor description: ::String
+      attr_accessor option_settings: ::Array[Types::ConfigurationOptionSetting]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateEnvironmentMessage
+      attr_accessor application_name: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor cname_prefix: ::String
+      attr_accessor tier: Types::EnvironmentTier
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor version_label: ::String
+      attr_accessor template_name: ::String
+      attr_accessor solution_stack_name: ::String
+      attr_accessor platform_arn: ::String
+      attr_accessor option_settings: ::Array[Types::ConfigurationOptionSetting]
+      attr_accessor options_to_remove: ::Array[Types::OptionSpecification]
+      attr_accessor operations_role: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePlatformVersionRequest
+      attr_accessor platform_name: ::String
+      attr_accessor platform_version: ::String
+      attr_accessor platform_definition_bundle: Types::S3Location
+      attr_accessor environment_name: ::String
+      attr_accessor option_settings: ::Array[Types::ConfigurationOptionSetting]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePlatformVersionResult
+      attr_accessor platform_summary: Types::PlatformSummary
+      attr_accessor builder: Types::Builder
+      SENSITIVE: []
+    end
+
+    class CreateStorageLocationResultMessage
+      attr_accessor s3_bucket: ::String
+      SENSITIVE: []
+    end
+
+    class CustomAmi
+      attr_accessor virtualization_type: ::String
+      attr_accessor image_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationMessage
+      attr_accessor application_name: ::String
+      attr_accessor terminate_env_by_force: bool
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationVersionMessage
+      attr_accessor application_name: ::String
+      attr_accessor version_label: ::String
+      attr_accessor delete_source_bundle: bool
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationTemplateMessage
+      attr_accessor application_name: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEnvironmentConfigurationMessage
+      attr_accessor application_name: ::String
+      attr_accessor environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePlatformVersionRequest
+      attr_accessor platform_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePlatformVersionResult
+      attr_accessor platform_summary: Types::PlatformSummary
+      SENSITIVE: []
+    end
+
+    class Deployment
+      attr_accessor version_label: ::String
+      attr_accessor deployment_id: ::Integer
+      attr_accessor status: ::String
+      attr_accessor deployment_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeAccountAttributesResult
+      attr_accessor resource_quotas: Types::ResourceQuotas
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationVersionsMessage
+      attr_accessor application_name: ::String
+      attr_accessor version_labels: ::Array[::String]
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationsMessage
+      attr_accessor application_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationOptionsMessage
+      attr_accessor application_name: ::String
+      attr_accessor template_name: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor solution_stack_name: ::String
+      attr_accessor platform_arn: ::String
+      attr_accessor options: ::Array[Types::OptionSpecification]
+      SENSITIVE: []
+    end
+
+    class DescribeConfigurationSettingsMessage
+      attr_accessor application_name: ::String
+      attr_accessor template_name: ::String
+      attr_accessor environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEnvironmentHealthRequest
+      attr_accessor environment_name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor attribute_names: ::Array[("Status" | "Color" | "Causes" | "ApplicationMetrics" | "InstancesHealth" | "All" | "HealthStatus" | "RefreshedAt")]
+      SENSITIVE: []
+    end
+
+    class DescribeEnvironmentHealthResult
+      attr_accessor environment_name: ::String
+      attr_accessor health_status: ::String
+      attr_accessor status: ("Green" | "Yellow" | "Red" | "Grey")
+      attr_accessor color: ::String
+      attr_accessor causes: ::Array[::String]
+      attr_accessor application_metrics: Types::ApplicationMetrics
+      attr_accessor instances_health: Types::InstanceHealthSummary
+      attr_accessor refreshed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeEnvironmentManagedActionHistoryRequest
+      attr_accessor environment_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeEnvironmentManagedActionHistoryResult
+      attr_accessor managed_action_history_items: ::Array[Types::ManagedActionHistoryItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEnvironmentManagedActionsRequest
+      attr_accessor environment_name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor status: ("Scheduled" | "Pending" | "Running" | "Unknown")
+      SENSITIVE: []
+    end
+
+    class DescribeEnvironmentManagedActionsResult
+      attr_accessor managed_actions: ::Array[Types::ManagedAction]
+      SENSITIVE: []
+    end
+
+    class DescribeEnvironmentResourcesMessage
+      attr_accessor environment_id: ::String
+      attr_accessor environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEnvironmentsMessage
+      attr_accessor application_name: ::String
+      attr_accessor version_label: ::String
+      attr_accessor environment_ids: ::Array[::String]
+      attr_accessor environment_names: ::Array[::String]
+      attr_accessor include_deleted: bool
+      attr_accessor included_deleted_back_to: ::Time
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventsMessage
+      attr_accessor application_name: ::String
+      attr_accessor version_label: ::String
+      attr_accessor template_name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor platform_arn: ::String
+      attr_accessor request_id: ::String
+      attr_accessor severity: ("TRACE" | "DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstancesHealthRequest
+      attr_accessor environment_name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor attribute_names: ::Array[("HealthStatus" | "Color" | "Causes" | "ApplicationMetrics" | "RefreshedAt" | "LaunchedAt" | "System" | "Deployment" | "AvailabilityZone" | "InstanceType" | "All")]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstancesHealthResult
+      attr_accessor instance_health_list: ::Array[Types::SingleInstanceHealth]
+      attr_accessor refreshed_at: ::Time
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePlatformVersionRequest
+      attr_accessor platform_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePlatformVersionResult
+      attr_accessor platform_description: Types::PlatformDescription
+      SENSITIVE: []
+    end
+
+    class DisassociateEnvironmentOperationsRoleMessage
+      attr_accessor environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class ElasticBeanstalkServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EnvironmentDescription
+      attr_accessor environment_name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor application_name: ::String
+      attr_accessor version_label: ::String
+      attr_accessor solution_stack_name: ::String
+      attr_accessor platform_arn: ::String
+      attr_accessor template_name: ::String
+      attr_accessor description: ::String
+      attr_accessor endpoint_url: ::String
+      attr_accessor cname: ::String
+      attr_accessor date_created: ::Time
+      attr_accessor date_updated: ::Time
+      attr_accessor status: ("Aborting" | "Launching" | "Updating" | "LinkingFrom" | "LinkingTo" | "Ready" | "Terminating" | "Terminated")
+      attr_accessor abortable_operation_in_progress: bool
+      attr_accessor health: ("Green" | "Yellow" | "Red" | "Grey")
+      attr_accessor health_status: ("NoData" | "Unknown" | "Pending" | "Ok" | "Info" | "Warning" | "Degraded" | "Severe" | "Suspended")
+      attr_accessor resources: Types::EnvironmentResourcesDescription
+      attr_accessor tier: Types::EnvironmentTier
+      attr_accessor environment_links: ::Array[Types::EnvironmentLink]
+      attr_accessor environment_arn: ::String
+      attr_accessor operations_role: ::String
+      SENSITIVE: []
+    end
+
+    class EnvironmentDescriptionsMessage
+      attr_accessor environments: ::Array[Types::EnvironmentDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class EnvironmentInfoDescription
+      attr_accessor info_type: ("tail" | "bundle")
+      attr_accessor ec2_instance_id: ::String
+      attr_accessor sample_timestamp: ::Time
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EnvironmentLink
+      attr_accessor link_name: ::String
+      attr_accessor environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class EnvironmentResourceDescription
+      attr_accessor environment_name: ::String
+      attr_accessor auto_scaling_groups: ::Array[Types::AutoScalingGroup]
+      attr_accessor instances: ::Array[Types::Instance]
+      attr_accessor launch_configurations: ::Array[Types::LaunchConfiguration]
+      attr_accessor launch_templates: ::Array[Types::LaunchTemplate]
+      attr_accessor load_balancers: ::Array[Types::LoadBalancer]
+      attr_accessor triggers: ::Array[Types::Trigger]
+      attr_accessor queues: ::Array[Types::Queue]
+      SENSITIVE: []
+    end
+
+    class EnvironmentResourceDescriptionsMessage
+      attr_accessor environment_resources: Types::EnvironmentResourceDescription
+      SENSITIVE: []
+    end
+
+    class EnvironmentResourcesDescription
+      attr_accessor load_balancer: Types::LoadBalancerDescription
+      SENSITIVE: []
+    end
+
+    class EnvironmentTier
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class EventDescription
+      attr_accessor event_date: ::Time
+      attr_accessor message: ::String
+      attr_accessor application_name: ::String
+      attr_accessor version_label: ::String
+      attr_accessor template_name: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor platform_arn: ::String
+      attr_accessor request_id: ::String
+      attr_accessor severity: ("TRACE" | "DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL")
+      SENSITIVE: []
+    end
+
+    class EventDescriptionsMessage
+      attr_accessor events: ::Array[Types::EventDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Instance
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceHealthSummary
+      attr_accessor no_data: ::Integer
+      attr_accessor unknown: ::Integer
+      attr_accessor pending: ::Integer
+      attr_accessor ok: ::Integer
+      attr_accessor info: ::Integer
+      attr_accessor warning: ::Integer
+      attr_accessor degraded: ::Integer
+      attr_accessor severe: ::Integer
+      SENSITIVE: []
+    end
+
+    class InsufficientPrivilegesException < Aws::EmptyStructure
+    end
+
+    class InvalidRequestException < Aws::EmptyStructure
+    end
+
+    class Latency
+      attr_accessor p999: ::Float
+      attr_accessor p99: ::Float
+      attr_accessor p95: ::Float
+      attr_accessor p90: ::Float
+      attr_accessor p85: ::Float
+      attr_accessor p75: ::Float
+      attr_accessor p50: ::Float
+      attr_accessor p10: ::Float
+      SENSITIVE: []
+    end
+
+    class LaunchConfiguration
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class LaunchTemplate
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ListAvailableSolutionStacksResultMessage
+      attr_accessor solution_stacks: ::Array[::String]
+      attr_accessor solution_stack_details: ::Array[Types::SolutionStackDescription]
+      SENSITIVE: []
+    end
+
+    class ListPlatformBranchesRequest
+      attr_accessor filters: ::Array[Types::SearchFilter]
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlatformBranchesResult
+      attr_accessor platform_branch_summary_list: ::Array[Types::PlatformBranchSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlatformVersionsRequest
+      attr_accessor filters: ::Array[Types::PlatformFilter]
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlatformVersionsResult
+      attr_accessor platform_summary_list: ::Array[Types::PlatformSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceMessage
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Listener
+      attr_accessor protocol: ::String
+      attr_accessor port: ::Integer
+      SENSITIVE: []
+    end
+
+    class LoadBalancer
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class LoadBalancerDescription
+      attr_accessor load_balancer_name: ::String
+      attr_accessor domain: ::String
+      attr_accessor listeners: ::Array[Types::Listener]
+      SENSITIVE: []
+    end
+
+    class ManagedAction
+      attr_accessor action_id: ::String
+      attr_accessor action_description: ::String
+      attr_accessor action_type: ("InstanceRefresh" | "PlatformUpdate" | "Unknown")
+      attr_accessor status: ("Scheduled" | "Pending" | "Running" | "Unknown")
+      attr_accessor window_start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ManagedActionHistoryItem
+      attr_accessor action_id: ::String
+      attr_accessor action_type: ("InstanceRefresh" | "PlatformUpdate" | "Unknown")
+      attr_accessor action_description: ::String
+      attr_accessor failure_type: ("UpdateCancelled" | "CancellationFailed" | "RollbackFailed" | "RollbackSuccessful" | "InternalFailure" | "InvalidEnvironmentState" | "PermissionsError")
+      attr_accessor status: ("Completed" | "Failed" | "Unknown")
+      attr_accessor failure_description: ::String
+      attr_accessor executed_time: ::Time
+      attr_accessor finished_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ManagedActionInvalidStateException < Aws::EmptyStructure
+    end
+
+    class MaxAgeRule
+      attr_accessor enabled: bool
+      attr_accessor max_age_in_days: ::Integer
+      attr_accessor delete_source_from_s3: bool
+      SENSITIVE: []
+    end
+
+    class MaxCountRule
+      attr_accessor enabled: bool
+      attr_accessor max_count: ::Integer
+      attr_accessor delete_source_from_s3: bool
+      SENSITIVE: []
+    end
+
+    class OperationInProgressException < Aws::EmptyStructure
+    end
+
+    class OptionRestrictionRegex
+      attr_accessor pattern: ::String
+      attr_accessor label: ::String
+      SENSITIVE: []
+    end
+
+    class OptionSpecification
+      attr_accessor resource_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor option_name: ::String
+      SENSITIVE: []
+    end
+
+    class PlatformBranchSummary
+      attr_accessor platform_name: ::String
+      attr_accessor branch_name: ::String
+      attr_accessor lifecycle_state: ::String
+      attr_accessor branch_order: ::Integer
+      attr_accessor supported_tier_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PlatformDescription
+      attr_accessor platform_arn: ::String
+      attr_accessor platform_owner: ::String
+      attr_accessor platform_name: ::String
+      attr_accessor platform_version: ::String
+      attr_accessor solution_stack_name: ::String
+      attr_accessor platform_status: ("Creating" | "Failed" | "Ready" | "Deleting" | "Deleted")
+      attr_accessor date_created: ::Time
+      attr_accessor date_updated: ::Time
+      attr_accessor platform_category: ::String
+      attr_accessor description: ::String
+      attr_accessor maintainer: ::String
+      attr_accessor operating_system_name: ::String
+      attr_accessor operating_system_version: ::String
+      attr_accessor programming_languages: ::Array[Types::PlatformProgrammingLanguage]
+      attr_accessor frameworks: ::Array[Types::PlatformFramework]
+      attr_accessor custom_ami_list: ::Array[Types::CustomAmi]
+      attr_accessor supported_tier_list: ::Array[::String]
+      attr_accessor supported_addon_list: ::Array[::String]
+      attr_accessor platform_lifecycle_state: ::String
+      attr_accessor platform_branch_name: ::String
+      attr_accessor platform_branch_lifecycle_state: ::String
+      SENSITIVE: []
+    end
+
+    class PlatformFilter
+      attr_accessor type: ::String
+      attr_accessor operator: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PlatformFramework
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class PlatformProgrammingLanguage
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class PlatformSummary
+      attr_accessor platform_arn: ::String
+      attr_accessor platform_owner: ::String
+      attr_accessor platform_status: ("Creating" | "Failed" | "Ready" | "Deleting" | "Deleted")
+      attr_accessor platform_category: ::String
+      attr_accessor operating_system_name: ::String
+      attr_accessor operating_system_version: ::String
+      attr_accessor supported_tier_list: ::Array[::String]
+      attr_accessor supported_addon_list: ::Array[::String]
+      attr_accessor platform_lifecycle_state: ::String
+      attr_accessor platform_version: ::String
+      attr_accessor platform_branch_name: ::String
+      attr_accessor platform_branch_lifecycle_state: ::String
+      SENSITIVE: []
+    end
+
+    class PlatformVersionStillReferencedException < Aws::EmptyStructure
+    end
+
+    class Queue
+      attr_accessor name: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class RebuildEnvironmentMessage
+      attr_accessor environment_id: ::String
+      attr_accessor environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class RequestEnvironmentInfoMessage
+      attr_accessor environment_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor info_type: ("tail" | "bundle")
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException < Aws::EmptyStructure
+    end
+
+    class ResourceQuota
+      attr_accessor maximum: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceQuotas
+      attr_accessor application_quota: Types::ResourceQuota
+      attr_accessor application_version_quota: Types::ResourceQuota
+      attr_accessor environment_quota: Types::ResourceQuota
+      attr_accessor configuration_template_quota: Types::ResourceQuota
+      attr_accessor custom_platform_quota: Types::ResourceQuota
+      SENSITIVE: []
+    end
+
+    class ResourceTagsDescriptionMessage
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ResourceTypeNotSupportedException < Aws::EmptyStructure
+    end
+
+    class RestartAppServerMessage
+      attr_accessor environment_id: ::String
+      attr_accessor environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class RetrieveEnvironmentInfoMessage
+      attr_accessor environment_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor info_type: ("tail" | "bundle")
+      SENSITIVE: []
+    end
+
+    class RetrieveEnvironmentInfoResultMessage
+      attr_accessor environment_info: ::Array[Types::EnvironmentInfoDescription]
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key: ::String
+      SENSITIVE: []
+    end
+
+    class S3LocationNotInServiceRegionException < Aws::EmptyStructure
+    end
+
+    class S3SubscriptionRequiredException < Aws::EmptyStructure
+    end
+
+    class SearchFilter
+      attr_accessor attribute: ::String
+      attr_accessor operator: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SingleInstanceHealth
+      attr_accessor instance_id: ::String
+      attr_accessor health_status: ::String
+      attr_accessor color: ::String
+      attr_accessor causes: ::Array[::String]
+      attr_accessor launched_at: ::Time
+      attr_accessor application_metrics: Types::ApplicationMetrics
+      attr_accessor system: Types::SystemStatus
+      attr_accessor deployment: Types::Deployment
+      attr_accessor availability_zone: ::String
+      attr_accessor instance_type: ::String
+      SENSITIVE: []
+    end
+
+    class SolutionStackDescription
+      attr_accessor solution_stack_name: ::String
+      attr_accessor permitted_file_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SourceBuildInformation
+      attr_accessor source_type: ("Git" | "Zip")
+      attr_accessor source_repository: ("CodeCommit" | "S3")
+      attr_accessor source_location: ::String
+      SENSITIVE: []
+    end
+
+    class SourceBundleDeletionException < Aws::EmptyStructure
+    end
+
+    class SourceConfiguration
+      attr_accessor application_name: ::String
+      attr_accessor template_name: ::String
+      SENSITIVE: []
+    end
+
+    class StatusCodes
+      attr_accessor status_2xx: ::Integer
+      attr_accessor status_3xx: ::Integer
+      attr_accessor status_4xx: ::Integer
+      attr_accessor status_5xx: ::Integer
+      SENSITIVE: []
+    end
+
+    class SwapEnvironmentCNAMEsMessage
+      attr_accessor source_environment_id: ::String
+      attr_accessor source_environment_name: ::String
+      attr_accessor destination_environment_id: ::String
+      attr_accessor destination_environment_name: ::String
+      SENSITIVE: []
+    end
+
+    class SystemStatus
+      attr_accessor cpu_utilization: Types::CPUUtilization
+      attr_accessor load_average: ::Array[::Float]
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateEnvironmentMessage
+      attr_accessor environment_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor terminate_resources: bool
+      attr_accessor force_terminate: bool
+      SENSITIVE: []
+    end
+
+    class TooManyApplicationVersionsException < Aws::EmptyStructure
+    end
+
+    class TooManyApplicationsException < Aws::EmptyStructure
+    end
+
+    class TooManyBucketsException < Aws::EmptyStructure
+    end
+
+    class TooManyConfigurationTemplatesException < Aws::EmptyStructure
+    end
+
+    class TooManyEnvironmentsException < Aws::EmptyStructure
+    end
+
+    class TooManyPlatformsException < Aws::EmptyStructure
+    end
+
+    class TooManyTagsException < Aws::EmptyStructure
+    end
+
+    class Trigger
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationMessage
+      attr_accessor application_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationResourceLifecycleMessage
+      attr_accessor application_name: ::String
+      attr_accessor resource_lifecycle_config: Types::ApplicationResourceLifecycleConfig
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationVersionMessage
+      attr_accessor application_name: ::String
+      attr_accessor version_label: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationTemplateMessage
+      attr_accessor application_name: ::String
+      attr_accessor template_name: ::String
+      attr_accessor description: ::String
+      attr_accessor option_settings: ::Array[Types::ConfigurationOptionSetting]
+      attr_accessor options_to_remove: ::Array[Types::OptionSpecification]
+      SENSITIVE: []
+    end
+
+    class UpdateEnvironmentMessage
+      attr_accessor application_name: ::String
+      attr_accessor environment_id: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor tier: Types::EnvironmentTier
+      attr_accessor version_label: ::String
+      attr_accessor template_name: ::String
+      attr_accessor solution_stack_name: ::String
+      attr_accessor platform_arn: ::String
+      attr_accessor option_settings: ::Array[Types::ConfigurationOptionSetting]
+      attr_accessor options_to_remove: ::Array[Types::OptionSpecification]
+      SENSITIVE: []
+    end
+
+    class UpdateTagsForResourceMessage
+      attr_accessor resource_arn: ::String
+      attr_accessor tags_to_add: ::Array[Types::Tag]
+      attr_accessor tags_to_remove: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ValidateConfigurationSettingsMessage
+      attr_accessor application_name: ::String
+      attr_accessor template_name: ::String
+      attr_accessor environment_name: ::String
+      attr_accessor option_settings: ::Array[Types::ConfigurationOptionSetting]
+      SENSITIVE: []
+    end
+
+    class ValidationMessage
+      attr_accessor message: ::String
+      attr_accessor severity: ("error" | "warning")
+      attr_accessor namespace: ::String
+      attr_accessor option_name: ::String
+      SENSITIVE: []
+    end
+  end
+end

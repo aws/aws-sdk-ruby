@@ -1,0 +1,62 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IAM
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/MfaDevice.html
+    class MfaDevice
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/MfaDevice.html#initialize-instance_method
+      def initialize: (String user_name, String serial_number, Hash[Symbol, untyped] options) -> void
+                    | (user_name: String, serial_number: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/MfaDevice.html#user_name-instance_method
+      def user_name: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/MfaDevice.html#serial_number-instance_method
+      def serial_number: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/MfaDevice.html#enable_date-instance_method
+      def enable_date: () -> ::Time
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/MfaDevice.html#data-instance_method
+      def data: () -> Types::MFADevice
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/MfaDevice.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/MfaDevice.html#associate-instance_method
+      def associate: (
+                       authentication_code_1: ::String,
+                       authentication_code_2: ::String
+                     ) -> ::Aws::EmptyStructure
+                   | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/MfaDevice.html#disassociate-instance_method
+      def disassociate: (
+                        ) -> ::Aws::EmptyStructure
+                      | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/MfaDevice.html#resync-instance_method
+      def resync: (
+                    authentication_code_1: ::String,
+                    authentication_code_2: ::String
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/MfaDevice.html#user-instance_method
+      def user: () -> User
+
+      class Collection < ::Aws::Resources::Collection[MfaDevice]
+      end
+    end
+  end
+end

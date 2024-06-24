@@ -40,6 +40,9 @@ module Aws::Organizations
           if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-us-gov") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
             return Aws::Endpoints::Endpoint.new(url: "https://organizations.us-gov-west-1.amazonaws.com", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"organizations", "signingRegion"=>"us-gov-west-1"}]})
           end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
+            return Aws::Endpoints::Endpoint.new(url: "https://organizations.us-iso-east-1.c2s.ic.gov", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"organizations", "signingRegion"=>"us-iso-east-1"}]})
+          end
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
               return Aws::Endpoints::Endpoint.new(url: "https://organizations-fips.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
@@ -47,7 +50,7 @@ module Aws::Organizations
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
           end
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+            if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
               return Aws::Endpoints::Endpoint.new(url: "https://organizations-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"

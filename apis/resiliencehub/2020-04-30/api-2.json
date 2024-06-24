@@ -5,6 +5,7 @@
     "endpointPrefix":"resiliencehub",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
+    "protocols":["rest-json"],
     "serviceFullName":"AWS Resilience Hub",
     "serviceId":"resiliencehub",
     "signatureVersion":"v4",
@@ -465,6 +466,22 @@
       },
       "input":{"shape":"ListAppAssessmentComplianceDriftsRequest"},
       "output":{"shape":"ListAppAssessmentComplianceDriftsResponse"},
+      "errors":[
+        {"shape":"InternalServerException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"}
+      ]
+    },
+    "ListAppAssessmentResourceDrifts":{
+      "name":"ListAppAssessmentResourceDrifts",
+      "http":{
+        "method":"POST",
+        "requestUri":"/list-app-assessment-resource-drifts",
+        "responseCode":200
+      },
+      "input":{"shape":"ListAppAssessmentResourceDriftsRequest"},
+      "output":{"shape":"ListAppAssessmentResourceDriftsResponse"},
       "errors":[
         {"shape":"InternalServerException"},
         {"shape":"ThrottlingException"},
@@ -1030,6 +1047,7 @@
         "name":{"shape":"String500"},
         "prerequisite":{"shape":"String500"},
         "recommendationId":{"shape":"Uuid"},
+        "recommendationStatus":{"shape":"RecommendationStatus"},
         "referenceId":{"shape":"SpecReferenceId"},
         "type":{"shape":"AlarmType"}
       }
@@ -1076,6 +1094,8 @@
         "permissionModel":{"shape":"PermissionModel"},
         "policyArn":{"shape":"Arn"},
         "resiliencyScore":{"shape":"Double"},
+        "rpoInSecs":{"shape":"IntegerOptional"},
+        "rtoInSecs":{"shape":"IntegerOptional"},
         "status":{"shape":"AppStatusType"},
         "tags":{"shape":"TagMap"}
       }
@@ -1228,8 +1248,11 @@
         "creationTime":{"shape":"TimeStamp"},
         "description":{"shape":"EntityDescription"},
         "driftStatus":{"shape":"AppDriftStatusType"},
+        "lastAppComplianceEvaluationTime":{"shape":"TimeStamp"},
         "name":{"shape":"EntityName"},
         "resiliencyScore":{"shape":"Double"},
+        "rpoInSecs":{"shape":"IntegerOptional"},
+        "rtoInSecs":{"shape":"IntegerOptional"},
         "status":{"shape":"AppStatusType"}
       }
     },
@@ -1996,7 +2019,11 @@
     },
     "DifferenceType":{
       "type":"string",
-      "enum":["NotEqual"]
+      "enum":[
+        "NotEqual",
+        "Added",
+        "Removed"
+      ]
     },
     "DisruptionCompliance":{
       "type":"structure",
@@ -2049,7 +2076,10 @@
     },
     "DriftType":{
       "type":"string",
-      "enum":["ApplicationCompliance"]
+      "enum":[
+        "ApplicationCompliance",
+        "AppComponentResiliencyComplianceStatus"
+      ]
     },
     "EksNamespace":{
       "type":"string",
@@ -2218,6 +2248,10 @@
       }
     },
     "Integer":{"type":"integer"},
+    "IntegerOptional":{
+      "type":"integer",
+      "box":true
+    },
     "InternalServerException":{
       "type":"structure",
       "members":{
@@ -2259,6 +2293,23 @@
       "members":{
         "complianceDrifts":{"shape":"ComplianceDriftList"},
         "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListAppAssessmentResourceDriftsRequest":{
+      "type":"structure",
+      "required":["assessmentArn"],
+      "members":{
+        "assessmentArn":{"shape":"Arn"},
+        "maxResults":{"shape":"MaxResults"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListAppAssessmentResourceDriftsResponse":{
+      "type":"structure",
+      "required":["resourceDrifts"],
+      "members":{
+        "nextToken":{"shape":"NextToken"},
+        "resourceDrifts":{"shape":"ResourceDriftList"}
       }
     },
     "ListAppAssessmentsRequest":{
@@ -2469,6 +2520,11 @@
           "location":"querystring",
           "locationName":"appArn"
         },
+        "fromLastAssessmentTime":{
+          "shape":"TimeStamp",
+          "location":"querystring",
+          "locationName":"fromLastAssessmentTime"
+        },
         "maxResults":{
           "shape":"MaxResults",
           "location":"querystring",
@@ -2483,6 +2539,16 @@
           "shape":"NextToken",
           "location":"querystring",
           "locationName":"nextToken"
+        },
+        "reverseOrder":{
+          "shape":"BooleanOptional",
+          "location":"querystring",
+          "locationName":"reverseOrder"
+        },
+        "toLastAssessmentTime":{
+          "shape":"TimeStamp",
+          "location":"querystring",
+          "locationName":"toLastAssessmentTime"
         }
       }
     },
@@ -2496,7 +2562,6 @@
     },
     "ListRecommendationTemplatesRequest":{
       "type":"structure",
-      "required":["assessmentArn"],
       "members":{
         "assessmentArn":{
           "shape":"Arn",
@@ -2681,6 +2746,7 @@
         "terraformSourceName":{"shape":"String255"}
       }
     },
+    "Long":{"type":"long"},
     "LongOptional":{
       "type":"long",
       "box":true
@@ -2835,6 +2901,15 @@
       "type":"list",
       "member":{"shape":"RecommendationItem"}
     },
+    "RecommendationStatus":{
+      "type":"string",
+      "enum":[
+        "Implemented",
+        "Inactive",
+        "NotImplemented",
+        "Excluded"
+      ]
+    },
     "RecommendationTemplate":{
       "type":"structure",
       "required":[
@@ -2951,9 +3026,19 @@
         "score"
       ],
       "members":{
+        "componentScore":{"shape":"ScoringComponentResiliencyScores"},
         "disruptionScore":{"shape":"DisruptionResiliencyScore"},
         "score":{"shape":"Double"}
       }
+    },
+    "ResiliencyScoreType":{
+      "type":"string",
+      "enum":[
+        "Compliance",
+        "Test",
+        "Alarm",
+        "Sop"
+      ]
     },
     "ResolveAppVersionResourcesRequest":{
       "type":"structure",
@@ -2981,6 +3066,20 @@
         "status":{"shape":"ResourceResolutionStatusType"}
       }
     },
+    "ResourceDrift":{
+      "type":"structure",
+      "members":{
+        "appArn":{"shape":"Arn"},
+        "appVersion":{"shape":"EntityVersion"},
+        "diffType":{"shape":"DifferenceType"},
+        "referenceId":{"shape":"EntityId"},
+        "resourceIdentifier":{"shape":"ResourceIdentifier"}
+      }
+    },
+    "ResourceDriftList":{
+      "type":"list",
+      "member":{"shape":"ResourceDrift"}
+    },
     "ResourceError":{
       "type":"structure",
       "members":{
@@ -3003,6 +3102,13 @@
     "ResourceId":{
       "type":"string",
       "pattern":".*"
+    },
+    "ResourceIdentifier":{
+      "type":"structure",
+      "members":{
+        "logicalResourceId":{"shape":"LogicalResourceId"},
+        "resourceType":{"shape":"String255"}
+      }
     },
     "ResourceImportStatusType":{
       "type":"string",
@@ -3102,6 +3208,20 @@
       "min":0,
       "pattern":"^((https://([^/]+)\\.s3((-|\\.)[^/]+)?\\.amazonaws\\.com(.cn)?)|(s3://([^/]+)))/\\S{1,2000}$"
     },
+    "ScoringComponentResiliencyScore":{
+      "type":"structure",
+      "members":{
+        "excludedCount":{"shape":"Long"},
+        "outstandingCount":{"shape":"Long"},
+        "possibleScore":{"shape":"Double"},
+        "score":{"shape":"Double"}
+      }
+    },
+    "ScoringComponentResiliencyScores":{
+      "type":"map",
+      "key":{"shape":"ResiliencyScoreType"},
+      "value":{"shape":"ScoringComponentResiliencyScore"}
+    },
     "Seconds":{
       "type":"integer",
       "min":0
@@ -3131,6 +3251,7 @@
         "name":{"shape":"DocumentName"},
         "prerequisite":{"shape":"String500"},
         "recommendationId":{"shape":"Uuid"},
+        "recommendationStatus":{"shape":"RecommendationStatus"},
         "referenceId":{"shape":"SpecReferenceId"},
         "serviceType":{"shape":"SopServiceType"}
       }
@@ -3209,7 +3330,7 @@
       "type":"string",
       "max":128,
       "min":1,
-      "pattern":"^(?!aws:)[^\\x00-\\x1f\\x22]+$"
+      "pattern":"^[^\\x00-\\x1f\\x22]+$"
     },
     "TagKeyList":{
       "type":"list",
@@ -3282,6 +3403,7 @@
         "name":{"shape":"DocumentName"},
         "prerequisite":{"shape":"String500"},
         "recommendationId":{"shape":"Uuid"},
+        "recommendationStatus":{"shape":"RecommendationStatus"},
         "referenceId":{"shape":"SpecReferenceId"},
         "risk":{"shape":"TestRisk"},
         "type":{"shape":"TestType"}

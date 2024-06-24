@@ -1,0 +1,719 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudWatchEvidently
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchEvaluateFeatureResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchEvaluateFeatureResponse]
+        def results: () -> ::Array[Types::EvaluationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#batch_evaluate_feature-instance_method
+      def batch_evaluate_feature: (
+                                    project: ::String,
+                                    requests: Array[
+                                      {
+                                        entity_id: ::String,
+                                        evaluation_context: ::String?,
+                                        feature: ::String
+                                      },
+                                    ]
+                                  ) -> _BatchEvaluateFeatureResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchEvaluateFeatureResponseSuccess
+
+      interface _CreateExperimentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateExperimentResponse]
+        def experiment: () -> Types::Experiment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#create_experiment-instance_method
+      def create_experiment: (
+                               ?description: ::String,
+                               metric_goals: Array[
+                                 {
+                                   desired_change: ("INCREASE" | "DECREASE")?,
+                                   metric_definition: {
+                                     entity_id_key: ::String,
+                                     event_pattern: ::String?,
+                                     name: ::String,
+                                     unit_label: ::String?,
+                                     value_key: ::String
+                                   }
+                                 },
+                               ],
+                               name: ::String,
+                               ?online_ab_config: {
+                                 control_treatment_name: ::String?,
+                                 treatment_weights: Hash[::String, ::Integer]?
+                               },
+                               project: ::String,
+                               ?randomization_salt: ::String,
+                               ?sampling_rate: ::Integer,
+                               ?segment: ::String,
+                               ?tags: Hash[::String, ::String],
+                               treatments: Array[
+                                 {
+                                   description: ::String?,
+                                   feature: ::String,
+                                   name: ::String,
+                                   variation: ::String
+                                 },
+                               ]
+                             ) -> _CreateExperimentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExperimentResponseSuccess
+
+      interface _CreateFeatureResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFeatureResponse]
+        def feature: () -> Types::Feature
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#create_feature-instance_method
+      def create_feature: (
+                            ?default_variation: ::String,
+                            ?description: ::String,
+                            ?entity_overrides: Hash[::String, ::String],
+                            ?evaluation_strategy: ("ALL_RULES" | "DEFAULT_VARIATION"),
+                            name: ::String,
+                            project: ::String,
+                            ?tags: Hash[::String, ::String],
+                            variations: Array[
+                              {
+                                name: ::String,
+                                value: {
+                                  bool_value: bool?,
+                                  double_value: ::Float?,
+                                  long_value: ::Integer?,
+                                  string_value: ::String?
+                                }
+                              },
+                            ]
+                          ) -> _CreateFeatureResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFeatureResponseSuccess
+
+      interface _CreateLaunchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLaunchResponse]
+        def launch: () -> Types::Launch
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#create_launch-instance_method
+      def create_launch: (
+                           ?description: ::String,
+                           groups: Array[
+                             {
+                               description: ::String?,
+                               feature: ::String,
+                               name: ::String,
+                               variation: ::String
+                             },
+                           ],
+                           ?metric_monitors: Array[
+                             {
+                               metric_definition: {
+                                 entity_id_key: ::String,
+                                 event_pattern: ::String?,
+                                 name: ::String,
+                                 unit_label: ::String?,
+                                 value_key: ::String
+                               }
+                             },
+                           ],
+                           name: ::String,
+                           project: ::String,
+                           ?randomization_salt: ::String,
+                           ?scheduled_splits_config: {
+                             steps: Array[
+                               {
+                                 group_weights: Hash[::String, ::Integer],
+                                 segment_overrides: Array[
+                                   {
+                                     evaluation_order: ::Integer,
+                                     segment: ::String,
+                                     weights: Hash[::String, ::Integer]
+                                   },
+                                 ]?,
+                                 start_time: ::Time
+                               },
+                             ]
+                           },
+                           ?tags: Hash[::String, ::String]
+                         ) -> _CreateLaunchResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLaunchResponseSuccess
+
+      interface _CreateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectResponse]
+        def project: () -> Types::Project
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#create_project-instance_method
+      def create_project: (
+                            ?app_config_resource: {
+                              application_id: ::String?,
+                              environment_id: ::String?
+                            },
+                            ?data_delivery: {
+                              cloud_watch_logs: {
+                                log_group: ::String?
+                              }?,
+                              s3_destination: {
+                                bucket: ::String?,
+                                prefix: ::String?
+                              }?
+                            },
+                            ?description: ::String,
+                            name: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
+
+      interface _CreateSegmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSegmentResponse]
+        def segment: () -> Types::Segment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#create_segment-instance_method
+      def create_segment: (
+                            ?description: ::String,
+                            name: ::String,
+                            pattern: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateSegmentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSegmentResponseSuccess
+
+      interface _DeleteExperimentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteExperimentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#delete_experiment-instance_method
+      def delete_experiment: (
+                               experiment: ::String,
+                               project: ::String
+                             ) -> _DeleteExperimentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteExperimentResponseSuccess
+
+      interface _DeleteFeatureResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFeatureResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#delete_feature-instance_method
+      def delete_feature: (
+                            feature: ::String,
+                            project: ::String
+                          ) -> _DeleteFeatureResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFeatureResponseSuccess
+
+      interface _DeleteLaunchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLaunchResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#delete_launch-instance_method
+      def delete_launch: (
+                           launch: ::String,
+                           project: ::String
+                         ) -> _DeleteLaunchResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLaunchResponseSuccess
+
+      interface _DeleteProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#delete_project-instance_method
+      def delete_project: (
+                            project: ::String
+                          ) -> _DeleteProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectResponseSuccess
+
+      interface _DeleteSegmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSegmentResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#delete_segment-instance_method
+      def delete_segment: (
+                            segment: ::String
+                          ) -> _DeleteSegmentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSegmentResponseSuccess
+
+      interface _EvaluateFeatureResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EvaluateFeatureResponse]
+        def details: () -> ::String
+        def reason: () -> ::String
+        def value: () -> Types::VariableValue
+        def variation: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#evaluate_feature-instance_method
+      def evaluate_feature: (
+                              entity_id: ::String,
+                              ?evaluation_context: ::String,
+                              feature: ::String,
+                              project: ::String
+                            ) -> _EvaluateFeatureResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EvaluateFeatureResponseSuccess
+
+      interface _GetExperimentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExperimentResponse]
+        def experiment: () -> Types::Experiment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#get_experiment-instance_method
+      def get_experiment: (
+                            experiment: ::String,
+                            project: ::String
+                          ) -> _GetExperimentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExperimentResponseSuccess
+
+      interface _GetExperimentResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExperimentResultsResponse]
+        def details: () -> ::String
+        def reports: () -> ::Array[Types::ExperimentReport]
+        def results_data: () -> ::Array[Types::ExperimentResultsData]
+        def timestamps: () -> ::Array[::Time]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#get_experiment_results-instance_method
+      def get_experiment_results: (
+                                    ?base_stat: ("Mean"),
+                                    ?end_time: ::Time,
+                                    experiment: ::String,
+                                    metric_names: Array[::String],
+                                    ?period: ::Integer,
+                                    project: ::String,
+                                    ?report_names: Array[("BayesianInference")],
+                                    ?result_stats: Array[("BaseStat" | "TreatmentEffect" | "ConfidenceInterval" | "PValue")],
+                                    ?start_time: ::Time,
+                                    treatment_names: Array[::String]
+                                  ) -> _GetExperimentResultsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExperimentResultsResponseSuccess
+
+      interface _GetFeatureResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFeatureResponse]
+        def feature: () -> Types::Feature
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#get_feature-instance_method
+      def get_feature: (
+                         feature: ::String,
+                         project: ::String
+                       ) -> _GetFeatureResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFeatureResponseSuccess
+
+      interface _GetLaunchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLaunchResponse]
+        def launch: () -> Types::Launch
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#get_launch-instance_method
+      def get_launch: (
+                        launch: ::String,
+                        project: ::String
+                      ) -> _GetLaunchResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLaunchResponseSuccess
+
+      interface _GetProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProjectResponse]
+        def project: () -> Types::Project
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#get_project-instance_method
+      def get_project: (
+                         project: ::String
+                       ) -> _GetProjectResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProjectResponseSuccess
+
+      interface _GetSegmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSegmentResponse]
+        def segment: () -> Types::Segment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#get_segment-instance_method
+      def get_segment: (
+                         segment: ::String
+                       ) -> _GetSegmentResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSegmentResponseSuccess
+
+      interface _ListExperimentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListExperimentsResponse]
+        def experiments: () -> ::Array[Types::Experiment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#list_experiments-instance_method
+      def list_experiments: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String,
+                              project: ::String,
+                              ?status: ("CREATED" | "UPDATING" | "RUNNING" | "COMPLETED" | "CANCELLED")
+                            ) -> _ListExperimentsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExperimentsResponseSuccess
+
+      interface _ListFeaturesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFeaturesResponse]
+        def features: () -> ::Array[Types::FeatureSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#list_features-instance_method
+      def list_features: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           project: ::String
+                         ) -> _ListFeaturesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFeaturesResponseSuccess
+
+      interface _ListLaunchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLaunchesResponse]
+        def launches: () -> ::Array[Types::Launch]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#list_launches-instance_method
+      def list_launches: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String,
+                           project: ::String,
+                           ?status: ("CREATED" | "UPDATING" | "RUNNING" | "COMPLETED" | "CANCELLED")
+                         ) -> _ListLaunchesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLaunchesResponseSuccess
+
+      interface _ListProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProjectsResponse]
+        def next_token: () -> ::String
+        def projects: () -> ::Array[Types::ProjectSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#list_projects-instance_method
+      def list_projects: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListProjectsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectsResponseSuccess
+
+      interface _ListSegmentReferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSegmentReferencesResponse]
+        def next_token: () -> ::String
+        def referenced_by: () -> ::Array[Types::RefResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#list_segment_references-instance_method
+      def list_segment_references: (
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String,
+                                     segment: ::String,
+                                     type: ("EXPERIMENT" | "LAUNCH")
+                                   ) -> _ListSegmentReferencesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSegmentReferencesResponseSuccess
+
+      interface _ListSegmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSegmentsResponse]
+        def next_token: () -> ::String
+        def segments: () -> ::Array[Types::Segment]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#list_segments-instance_method
+      def list_segments: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListSegmentsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSegmentsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutProjectEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutProjectEventsResponse]
+        def event_results: () -> ::Array[Types::PutProjectEventsResultEntry]
+        def failed_event_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#put_project_events-instance_method
+      def put_project_events: (
+                                events: Array[
+                                  {
+                                    data: ::String,
+                                    timestamp: ::Time,
+                                    type: ("aws.evidently.evaluation" | "aws.evidently.custom")
+                                  },
+                                ],
+                                project: ::String
+                              ) -> _PutProjectEventsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutProjectEventsResponseSuccess
+
+      interface _StartExperimentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartExperimentResponse]
+        def started_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#start_experiment-instance_method
+      def start_experiment: (
+                              analysis_complete_time: ::Time,
+                              experiment: ::String,
+                              project: ::String
+                            ) -> _StartExperimentResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartExperimentResponseSuccess
+
+      interface _StartLaunchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartLaunchResponse]
+        def launch: () -> Types::Launch
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#start_launch-instance_method
+      def start_launch: (
+                          launch: ::String,
+                          project: ::String
+                        ) -> _StartLaunchResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartLaunchResponseSuccess
+
+      interface _StopExperimentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopExperimentResponse]
+        def ended_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#stop_experiment-instance_method
+      def stop_experiment: (
+                             ?desired_state: ("COMPLETED" | "CANCELLED"),
+                             experiment: ::String,
+                             project: ::String,
+                             ?reason: ::String
+                           ) -> _StopExperimentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopExperimentResponseSuccess
+
+      interface _StopLaunchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopLaunchResponse]
+        def ended_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#stop_launch-instance_method
+      def stop_launch: (
+                         ?desired_state: ("COMPLETED" | "CANCELLED"),
+                         launch: ::String,
+                         project: ::String,
+                         ?reason: ::String
+                       ) -> _StopLaunchResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopLaunchResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _TestSegmentPatternResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestSegmentPatternResponse]
+        def match: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#test_segment_pattern-instance_method
+      def test_segment_pattern: (
+                                  pattern: ::String,
+                                  payload: ::String
+                                ) -> _TestSegmentPatternResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestSegmentPatternResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateExperimentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateExperimentResponse]
+        def experiment: () -> Types::Experiment
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#update_experiment-instance_method
+      def update_experiment: (
+                               ?description: ::String,
+                               experiment: ::String,
+                               ?metric_goals: Array[
+                                 {
+                                   desired_change: ("INCREASE" | "DECREASE")?,
+                                   metric_definition: {
+                                     entity_id_key: ::String,
+                                     event_pattern: ::String?,
+                                     name: ::String,
+                                     unit_label: ::String?,
+                                     value_key: ::String
+                                   }
+                                 },
+                               ],
+                               ?online_ab_config: {
+                                 control_treatment_name: ::String?,
+                                 treatment_weights: Hash[::String, ::Integer]?
+                               },
+                               project: ::String,
+                               ?randomization_salt: ::String,
+                               ?remove_segment: bool,
+                               ?sampling_rate: ::Integer,
+                               ?segment: ::String,
+                               ?treatments: Array[
+                                 {
+                                   description: ::String?,
+                                   feature: ::String,
+                                   name: ::String,
+                                   variation: ::String
+                                 },
+                               ]
+                             ) -> _UpdateExperimentResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateExperimentResponseSuccess
+
+      interface _UpdateFeatureResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFeatureResponse]
+        def feature: () -> Types::Feature
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#update_feature-instance_method
+      def update_feature: (
+                            ?add_or_update_variations: Array[
+                              {
+                                name: ::String,
+                                value: {
+                                  bool_value: bool?,
+                                  double_value: ::Float?,
+                                  long_value: ::Integer?,
+                                  string_value: ::String?
+                                }
+                              },
+                            ],
+                            ?default_variation: ::String,
+                            ?description: ::String,
+                            ?entity_overrides: Hash[::String, ::String],
+                            ?evaluation_strategy: ("ALL_RULES" | "DEFAULT_VARIATION"),
+                            feature: ::String,
+                            project: ::String,
+                            ?remove_variations: Array[::String]
+                          ) -> _UpdateFeatureResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFeatureResponseSuccess
+
+      interface _UpdateLaunchResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLaunchResponse]
+        def launch: () -> Types::Launch
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#update_launch-instance_method
+      def update_launch: (
+                           ?description: ::String,
+                           ?groups: Array[
+                             {
+                               description: ::String?,
+                               feature: ::String,
+                               name: ::String,
+                               variation: ::String
+                             },
+                           ],
+                           launch: ::String,
+                           ?metric_monitors: Array[
+                             {
+                               metric_definition: {
+                                 entity_id_key: ::String,
+                                 event_pattern: ::String?,
+                                 name: ::String,
+                                 unit_label: ::String?,
+                                 value_key: ::String
+                               }
+                             },
+                           ],
+                           project: ::String,
+                           ?randomization_salt: ::String,
+                           ?scheduled_splits_config: {
+                             steps: Array[
+                               {
+                                 group_weights: Hash[::String, ::Integer],
+                                 segment_overrides: Array[
+                                   {
+                                     evaluation_order: ::Integer,
+                                     segment: ::String,
+                                     weights: Hash[::String, ::Integer]
+                                   },
+                                 ]?,
+                                 start_time: ::Time
+                               },
+                             ]
+                           }
+                         ) -> _UpdateLaunchResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLaunchResponseSuccess
+
+      interface _UpdateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectResponse]
+        def project: () -> Types::Project
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#update_project-instance_method
+      def update_project: (
+                            ?app_config_resource: {
+                              application_id: ::String?,
+                              environment_id: ::String?
+                            },
+                            ?description: ::String,
+                            project: ::String
+                          ) -> _UpdateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectResponseSuccess
+
+      interface _UpdateProjectDataDeliveryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectDataDeliveryResponse]
+        def project: () -> Types::Project
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchEvidently/Client.html#update_project_data_delivery-instance_method
+      def update_project_data_delivery: (
+                                          ?cloud_watch_logs: {
+                                            log_group: ::String?
+                                          },
+                                          project: ::String,
+                                          ?s3_destination: {
+                                            bucket: ::String?,
+                                            prefix: ::String?
+                                          }
+                                        ) -> _UpdateProjectDataDeliveryResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectDataDeliveryResponseSuccess
+    end
+  end
+end
+

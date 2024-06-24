@@ -1,0 +1,199 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ConnectParticipant
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectParticipant/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CompleteAttachmentUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CompleteAttachmentUploadResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectParticipant/Client.html#complete_attachment_upload-instance_method
+      def complete_attachment_upload: (
+                                        attachment_ids: Array[::String],
+                                        client_token: ::String,
+                                        connection_token: ::String
+                                      ) -> _CompleteAttachmentUploadResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CompleteAttachmentUploadResponseSuccess
+
+      interface _CreateParticipantConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateParticipantConnectionResponse]
+        def websocket: () -> Types::Websocket
+        def connection_credentials: () -> Types::ConnectionCredentials
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectParticipant/Client.html#create_participant_connection-instance_method
+      def create_participant_connection: (
+                                           ?type: Array[("WEBSOCKET" | "CONNECTION_CREDENTIALS")],
+                                           participant_token: ::String,
+                                           ?connect_participant: bool
+                                         ) -> _CreateParticipantConnectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateParticipantConnectionResponseSuccess
+
+      interface _DescribeViewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeViewResponse]
+        def view: () -> Types::View
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectParticipant/Client.html#describe_view-instance_method
+      def describe_view: (
+                           view_token: ::String,
+                           connection_token: ::String
+                         ) -> _DescribeViewResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeViewResponseSuccess
+
+      interface _DisconnectParticipantResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisconnectParticipantResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectParticipant/Client.html#disconnect_participant-instance_method
+      def disconnect_participant: (
+                                    ?client_token: ::String,
+                                    connection_token: ::String
+                                  ) -> _DisconnectParticipantResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisconnectParticipantResponseSuccess
+
+      interface _GetAttachmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAttachmentResponse]
+        def url: () -> ::String
+        def url_expiry: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectParticipant/Client.html#get_attachment-instance_method
+      def get_attachment: (
+                            attachment_id: ::String,
+                            connection_token: ::String
+                          ) -> _GetAttachmentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAttachmentResponseSuccess
+
+      interface _GetTranscriptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTranscriptResponse]
+        def initial_contact_id: () -> ::String
+        def transcript: () -> ::Array[Types::Item]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectParticipant/Client.html#get_transcript-instance_method
+      def get_transcript: (
+                            ?contact_id: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?scan_direction: ("FORWARD" | "BACKWARD"),
+                            ?sort_order: ("DESCENDING" | "ASCENDING"),
+                            ?start_position: {
+                              id: ::String?,
+                              absolute_time: ::String?,
+                              most_recent: ::Integer?
+                            },
+                            connection_token: ::String
+                          ) -> _GetTranscriptResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTranscriptResponseSuccess
+
+      interface _SendEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendEventResponse]
+        def id: () -> ::String
+        def absolute_time: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectParticipant/Client.html#send_event-instance_method
+      def send_event: (
+                        content_type: ::String,
+                        ?content: ::String,
+                        ?client_token: ::String,
+                        connection_token: ::String
+                      ) -> _SendEventResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendEventResponseSuccess
+
+      interface _SendMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendMessageResponse]
+        def id: () -> ::String
+        def absolute_time: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectParticipant/Client.html#send_message-instance_method
+      def send_message: (
+                          content_type: ::String,
+                          content: ::String,
+                          ?client_token: ::String,
+                          connection_token: ::String
+                        ) -> _SendMessageResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendMessageResponseSuccess
+
+      interface _StartAttachmentUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartAttachmentUploadResponse]
+        def attachment_id: () -> ::String
+        def upload_metadata: () -> Types::UploadMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectParticipant/Client.html#start_attachment_upload-instance_method
+      def start_attachment_upload: (
+                                     content_type: ::String,
+                                     attachment_size_in_bytes: ::Integer,
+                                     attachment_name: ::String,
+                                     client_token: ::String,
+                                     connection_token: ::String
+                                   ) -> _StartAttachmentUploadResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAttachmentUploadResponseSuccess
+    end
+  end
+end
+

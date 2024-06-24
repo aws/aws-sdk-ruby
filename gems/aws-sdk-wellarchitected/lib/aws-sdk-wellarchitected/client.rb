@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::WellArchitected
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::WellArchitected
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::WellArchitected
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::WellArchitected
     #   @option options [Aws::WellArchitected::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::WellArchitected::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -1129,6 +1154,9 @@ module Aws::WellArchitected
     # @option params [Array<String>] :review_template_arns
     #   The list of review template ARNs to associate with the workload.
     #
+    # @option params [Types::WorkloadJiraConfigurationInput] :jira_configuration
+    #   Jira configuration settings when creating a workload.
+    #
     # @return [Types::CreateWorkloadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkloadOutput#workload_id #workload_id} => String
@@ -1161,6 +1189,11 @@ module Aws::WellArchitected
     #     applications: ["ApplicationArn"],
     #     profile_arns: ["ProfileArn"],
     #     review_template_arns: ["TemplateArn"],
+    #     jira_configuration: {
+    #       issue_management_status: "ENABLED", # accepts ENABLED, DISABLED, INHERIT
+    #       issue_management_type: "AUTO", # accepts AUTO, MANUAL
+    #       jira_project_key: "JiraProjectKey",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1882,6 +1915,8 @@ module Aws::WellArchitected
     #   resp.answer.risk #=> String, one of "UNANSWERED", "HIGH", "MEDIUM", "NONE", "NOT_APPLICABLE"
     #   resp.answer.notes #=> String
     #   resp.answer.reason #=> String, one of "OUT_OF_SCOPE", "BUSINESS_PRIORITIES", "ARCHITECTURE_CONSTRAINTS", "OTHER", "NONE"
+    #   resp.answer.jira_configuration.jira_issue_url #=> String
+    #   resp.answer.jira_configuration.last_synced_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetAnswer AWS API Documentation
     #
@@ -1963,6 +1998,34 @@ module Aws::WellArchitected
     # @param [Hash] params ({})
     def get_consolidated_report(params = {}, options = {})
       req = build_request(:get_consolidated_report, params)
+      req.send_request(options)
+    end
+
+    # Global settings for all workloads.
+    #
+    # @return [Types::GetGlobalSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGlobalSettingsOutput#organization_sharing_status #organization_sharing_status} => String
+    #   * {Types::GetGlobalSettingsOutput#discovery_integration_status #discovery_integration_status} => String
+    #   * {Types::GetGlobalSettingsOutput#jira_configuration #jira_configuration} => Types::AccountJiraConfigurationOutput
+    #
+    # @example Response structure
+    #
+    #   resp.organization_sharing_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.discovery_integration_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jira_configuration.integration_status #=> String, one of "CONFIGURED", "NOT_CONFIGURED"
+    #   resp.jira_configuration.issue_management_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jira_configuration.issue_management_type #=> String, one of "AUTO", "MANUAL"
+    #   resp.jira_configuration.subdomain #=> String
+    #   resp.jira_configuration.jira_project_key #=> String
+    #   resp.jira_configuration.status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetGlobalSettings AWS API Documentation
+    #
+    # @overload get_global_settings(params = {})
+    # @param [Hash] params ({})
+    def get_global_settings(params = {}, options = {})
+      req = build_request(:get_global_settings, params)
       req.send_request(options)
     end
 
@@ -2072,6 +2135,10 @@ module Aws::WellArchitected
     #   resp.lens_review.pillar_review_summaries[0].risk_counts["Risk"] #=> Integer
     #   resp.lens_review.pillar_review_summaries[0].prioritized_risk_counts #=> Hash
     #   resp.lens_review.pillar_review_summaries[0].prioritized_risk_counts["Risk"] #=> Integer
+    #   resp.lens_review.jira_configuration.selected_pillars #=> Array
+    #   resp.lens_review.jira_configuration.selected_pillars[0].pillar_id #=> String
+    #   resp.lens_review.jira_configuration.selected_pillars[0].selected_question_ids #=> Array
+    #   resp.lens_review.jira_configuration.selected_pillars[0].selected_question_ids[0] #=> String
     #   resp.lens_review.updated_at #=> Time
     #   resp.lens_review.notes #=> String
     #   resp.lens_review.risk_counts #=> Hash
@@ -2281,6 +2348,10 @@ module Aws::WellArchitected
     #   resp.milestone.workload.profiles[0].profile_version #=> String
     #   resp.milestone.workload.prioritized_risk_counts #=> Hash
     #   resp.milestone.workload.prioritized_risk_counts["Risk"] #=> Integer
+    #   resp.milestone.workload.jira_configuration.issue_management_status #=> String, one of "ENABLED", "DISABLED", "INHERIT"
+    #   resp.milestone.workload.jira_configuration.issue_management_type #=> String, one of "AUTO", "MANUAL"
+    #   resp.milestone.workload.jira_configuration.jira_project_key #=> String
+    #   resp.milestone.workload.jira_configuration.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetMilestone AWS API Documentation
     #
@@ -2615,6 +2686,10 @@ module Aws::WellArchitected
     #   resp.workload.profiles[0].profile_version #=> String
     #   resp.workload.prioritized_risk_counts #=> Hash
     #   resp.workload.prioritized_risk_counts["Risk"] #=> Integer
+    #   resp.workload.jira_configuration.issue_management_status #=> String, one of "ENABLED", "DISABLED", "INHERIT"
+    #   resp.workload.jira_configuration.issue_management_type #=> String, one of "AUTO", "MANUAL"
+    #   resp.workload.jira_configuration.jira_project_key #=> String
+    #   resp.workload.jira_configuration.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/GetWorkload AWS API Documentation
     #
@@ -2817,6 +2892,8 @@ module Aws::WellArchitected
     #   resp.answer_summaries[0].risk #=> String, one of "UNANSWERED", "HIGH", "MEDIUM", "NONE", "NOT_APPLICABLE"
     #   resp.answer_summaries[0].reason #=> String, one of "OUT_OF_SCOPE", "BUSINESS_PRIORITIES", "ARCHITECTURE_CONSTRAINTS", "OTHER", "NONE"
     #   resp.answer_summaries[0].question_type #=> String, one of "PRIORITIZED", "NON_PRIORITIZED"
+    #   resp.answer_summaries[0].jira_configuration.jira_issue_url #=> String
+    #   resp.answer_summaries[0].jira_configuration.last_synced_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListAnswers AWS API Documentation
@@ -2973,7 +3050,7 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
-    # List lens review improvements.
+    # List the improvements of a particular lens review.
     #
     # @option params [required, String] :workload_id
     #   The ID assigned to the workload. This ID is unique within an Amazon
@@ -3051,6 +3128,8 @@ module Aws::WellArchitected
     #   resp.improvement_summaries[0].improvement_plans[0].choice_id #=> String
     #   resp.improvement_summaries[0].improvement_plans[0].display_text #=> String
     #   resp.improvement_summaries[0].improvement_plans[0].improvement_plan_url #=> String
+    #   resp.improvement_summaries[0].jira_configuration.jira_issue_url #=> String
+    #   resp.improvement_summaries[0].jira_configuration.last_synced_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/ListLensReviewImprovements AWS API Documentation
@@ -4110,6 +4189,8 @@ module Aws::WellArchitected
     #   resp.answer.risk #=> String, one of "UNANSWERED", "HIGH", "MEDIUM", "NONE", "NOT_APPLICABLE"
     #   resp.answer.notes #=> String
     #   resp.answer.reason #=> String, one of "OUT_OF_SCOPE", "BUSINESS_PRIORITIES", "ARCHITECTURE_CONSTRAINTS", "OTHER", "NONE"
+    #   resp.answer.jira_configuration.jira_issue_url #=> String
+    #   resp.answer.jira_configuration.last_synced_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateAnswer AWS API Documentation
     #
@@ -4120,7 +4201,7 @@ module Aws::WellArchitected
       req.send_request(options)
     end
 
-    # Updates whether the Amazon Web Services account is opted into
+    # Update whether the Amazon Web Services account is opted into
     # organization sharing and discovery integration features.
     #
     # @option params [String] :organization_sharing_status
@@ -4129,6 +4210,9 @@ module Aws::WellArchitected
     # @option params [String] :discovery_integration_status
     #   The status of discovery support settings.
     #
+    # @option params [Types::AccountJiraConfigurationInput] :jira_configuration
+    #   The status of Jira integration settings.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4136,6 +4220,12 @@ module Aws::WellArchitected
     #   resp = client.update_global_settings({
     #     organization_sharing_status: "ENABLED", # accepts ENABLED, DISABLED
     #     discovery_integration_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     jira_configuration: {
+    #       issue_management_status: "ENABLED", # accepts ENABLED, DISABLED
+    #       issue_management_type: "AUTO", # accepts AUTO, MANUAL
+    #       jira_project_key: "JiraProjectKey",
+    #       integration_status: "NOT_CONFIGURED", # accepts NOT_CONFIGURED
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateGlobalSettings AWS API Documentation
@@ -4144,6 +4234,51 @@ module Aws::WellArchitected
     # @param [Hash] params ({})
     def update_global_settings(params = {}, options = {})
       req = build_request(:update_global_settings, params)
+      req.send_request(options)
+    end
+
+    # Update integration features.
+    #
+    # @option params [required, String] :workload_id
+    #   The ID assigned to the workload. This ID is unique within an Amazon
+    #   Web Services Region.
+    #
+    # @option params [required, String] :client_request_token
+    #   A unique case-sensitive string used to ensure that this request is
+    #   idempotent (executes only once).
+    #
+    #   You should not reuse the same token for other requests. If you retry a
+    #   request with the same client request token and the same parameters
+    #   after the original request has completed successfully, the result of
+    #   the original request is returned.
+    #
+    #   This token is listed as required, however, if you do not specify it,
+    #   the Amazon Web Services SDKs automatically generate one for you. If
+    #   you are not using the Amazon Web Services SDK or the CLI, you must
+    #   provide this token or the request will fail.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :integrating_service
+    #   Which integrated service to update.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_integration({
+    #     workload_id: "WorkloadId", # required
+    #     client_request_token: "ClientRequestToken", # required
+    #     integrating_service: "JIRA", # required, accepts JIRA
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateIntegration AWS API Documentation
+    #
+    # @overload update_integration(params = {})
+    # @param [Hash] params ({})
+    def update_integration(params = {}, options = {})
+      req = build_request(:update_integration, params)
       req.send_request(options)
     end
 
@@ -4179,6 +4314,9 @@ module Aws::WellArchitected
     #   For a review template, these are the notes that will be associated
     #   with the workload when the template is applied.
     #
+    # @option params [Types::JiraSelectedQuestionConfiguration] :jira_configuration
+    #   Configuration of the Jira integration.
+    #
     # @return [Types::UpdateLensReviewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateLensReviewOutput#workload_id #workload_id} => String
@@ -4192,6 +4330,14 @@ module Aws::WellArchitected
     #     lens_notes: "Notes",
     #     pillar_notes: {
     #       "PillarId" => "Notes",
+    #     },
+    #     jira_configuration: {
+    #       selected_pillars: [
+    #         {
+    #           pillar_id: "PillarId",
+    #           selected_question_ids: ["SelectedQuestionId"],
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -4211,6 +4357,10 @@ module Aws::WellArchitected
     #   resp.lens_review.pillar_review_summaries[0].risk_counts["Risk"] #=> Integer
     #   resp.lens_review.pillar_review_summaries[0].prioritized_risk_counts #=> Hash
     #   resp.lens_review.pillar_review_summaries[0].prioritized_risk_counts["Risk"] #=> Integer
+    #   resp.lens_review.jira_configuration.selected_pillars #=> Array
+    #   resp.lens_review.jira_configuration.selected_pillars[0].pillar_id #=> String
+    #   resp.lens_review.jira_configuration.selected_pillars[0].selected_question_ids #=> Array
+    #   resp.lens_review.jira_configuration.selected_pillars[0].selected_question_ids[0] #=> String
     #   resp.lens_review.updated_at #=> Time
     #   resp.lens_review.notes #=> String
     #   resp.lens_review.risk_counts #=> Hash
@@ -4719,6 +4869,9 @@ module Aws::WellArchitected
     # @option params [Array<String>] :applications
     #   List of AppRegistry application ARNs to associate to the workload.
     #
+    # @option params [Types::WorkloadJiraConfigurationInput] :jira_configuration
+    #   Configuration of the Jira integration.
+    #
     # @return [Types::UpdateWorkloadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWorkloadOutput#workload #workload} => Types::Workload
@@ -4746,6 +4899,11 @@ module Aws::WellArchitected
     #       workload_resource_definition: ["WORKLOAD_METADATA"], # accepts WORKLOAD_METADATA, APP_REGISTRY
     #     },
     #     applications: ["ApplicationArn"],
+    #     jira_configuration: {
+    #       issue_management_status: "ENABLED", # accepts ENABLED, DISABLED, INHERIT
+    #       issue_management_type: "AUTO", # accepts AUTO, MANUAL
+    #       jira_project_key: "JiraProjectKey",
+    #     },
     #   })
     #
     # @example Response structure
@@ -4790,6 +4948,10 @@ module Aws::WellArchitected
     #   resp.workload.profiles[0].profile_version #=> String
     #   resp.workload.prioritized_risk_counts #=> Hash
     #   resp.workload.prioritized_risk_counts["Risk"] #=> Integer
+    #   resp.workload.jira_configuration.issue_management_status #=> String, one of "ENABLED", "DISABLED", "INHERIT"
+    #   resp.workload.jira_configuration.issue_management_type #=> String, one of "AUTO", "MANUAL"
+    #   resp.workload.jira_configuration.jira_project_key #=> String
+    #   resp.workload.jira_configuration.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wellarchitected-2020-03-31/UpdateWorkload AWS API Documentation
     #
@@ -5020,7 +5182,7 @@ module Aws::WellArchitected
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wellarchitected'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

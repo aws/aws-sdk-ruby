@@ -82,6 +82,32 @@ module Aws::LocationService
     #    </note>
     #   @return [Array<String>]
     #
+    # @!attribute [rw] allow_resources
+    #   A list of allowed resource ARNs that a API key bearer can perform
+    #   actions on.
+    #
+    #   * The ARN must be the correct ARN for a map, place, or route ARN.
+    #     You may include wildcards in the resource-id to match multiple
+    #     resources of the same type.
+    #
+    #   * The resources must be in the same `partition`, `region`, and
+    #     `account-id` as the key that is being created.
+    #
+    #   * Other than wildcards, you must include the full ARN, including the
+    #     `arn`, `partition`, `service`, `region`, `account-id` and
+    #     `resource-id` delimited by colons (:).
+    #
+    #   * No spaces allowed, even with wildcards. For example,
+    #     `arn:aws:geo:region:account-id:map/ExampleMap*`.
+    #
+    #   For more information about ARN format, see [Amazon Resource Names
+    #   (ARNs)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] allow_referers
     #   An optional list of allowed HTTP referers for which requests must
     #   originate from. Requests using this API key from other domains will
@@ -107,42 +133,21 @@ module Aws::LocationService
     #   * No spaces allowed. For example, `https://example.com`.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] allow_resources
-    #   A list of allowed resource ARNs that a API key bearer can perform
-    #   actions on.
-    #
-    #   * The ARN must be the correct ARN for a map, place, or route ARN.
-    #     You may include wildcards in the resource-id to match multiple
-    #     resources of the same type.
-    #
-    #   * The resources must be in the same `partition`, `region`, and
-    #     `account-id` as the key that is being created.
-    #
-    #   * Other than wildcards, you must include the full ARN, including the
-    #     `arn`, `partition`, `service`, `region`, `account-id` and
-    #     `resource-id`, delimited by colons (:).
-    #
-    #   * No spaces allowed, even with wildcards. For example,
-    #     `arn:aws:geo:region:account-id:map/ExampleMap*`.
-    #
-    #   For more information about ARN format, see [Amazon Resource Names
-    #   (ARNs)][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-    #   @return [Array<String>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ApiKeyRestrictions AWS API Documentation
     #
     class ApiKeyRestrictions < Struct.new(
       :allow_actions,
-      :allow_referers,
-      :allow_resources)
+      :allow_resources,
+      :allow_referers)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] tracker_name
+    #   The name of the tracker resource to be associated with a geofence
+    #   collection.
+    #   @return [String]
+    #
     # @!attribute [rw] consumer_arn
     #   The Amazon Resource Name (ARN) for the geofence collection to be
     #   associated to tracker resource. Used when you need to specify a
@@ -154,16 +159,11 @@ module Aws::LocationService
     #   ^
     #   @return [String]
     #
-    # @!attribute [rw] tracker_name
-    #   The name of the tracker resource to be associated with a geofence
-    #   collection.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/AssociateTrackerConsumerRequest AWS API Documentation
     #
     class AssociateTrackerConsumerRequest < Struct.new(
-      :consumer_arn,
-      :tracker_name)
+      :tracker_name,
+      :consumer_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -192,6 +192,11 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] tracker_name
+    #   The name of the tracker resource to delete the device position
+    #   history from.
+    #   @return [String]
+    #
     # @!attribute [rw] device_ids
     #   Devices whose position history you want to delete.
     #
@@ -201,16 +206,11 @@ module Aws::LocationService
     #   ^
     #   @return [Array<String>]
     #
-    # @!attribute [rw] tracker_name
-    #   The name of the tracker resource to delete the device position
-    #   history from.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/BatchDeleteDevicePositionHistoryRequest AWS API Documentation
     #
     class BatchDeleteDevicePositionHistoryRequest < Struct.new(
-      :device_ids,
-      :tracker_name)
+      :tracker_name,
+      :device_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -231,19 +231,19 @@ module Aws::LocationService
     # Contains error details for each geofence that failed to delete from
     # the geofence collection.
     #
-    # @!attribute [rw] error
-    #   Contains details associated to the batch error.
-    #   @return [Types::BatchItemError]
-    #
     # @!attribute [rw] geofence_id
     #   The geofence associated with the error message.
     #   @return [String]
     #
+    # @!attribute [rw] error
+    #   Contains details associated to the batch error.
+    #   @return [Types::BatchItemError]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/BatchDeleteGeofenceError AWS API Documentation
     #
     class BatchDeleteGeofenceError < Struct.new(
-      :error,
-      :geofence_id)
+      :geofence_id,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -284,10 +284,6 @@ module Aws::LocationService
     #   The device associated with the position evaluation error.
     #   @return [String]
     #
-    # @!attribute [rw] error
-    #   Contains details associated to the batch error.
-    #   @return [Types::BatchItemError]
-    #
     # @!attribute [rw] sample_time
     #   Specifies a timestamp for when the error occurred in [ISO 8601][1]
     #   format: `YYYY-MM-DDThh:mm:ss.sssZ`
@@ -297,12 +293,16 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
+    # @!attribute [rw] error
+    #   Contains details associated to the batch error.
+    #   @return [Types::BatchItemError]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/BatchEvaluateGeofencesError AWS API Documentation
     #
     class BatchEvaluateGeofencesError < Struct.new(
       :device_id,
-      :error,
-      :sample_time)
+      :sample_time,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -358,6 +358,10 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] tracker_name
+    #   The tracker resource retrieving the device position.
+    #   @return [String]
+    #
     # @!attribute [rw] device_ids
     #   Devices whose position you want to retrieve.
     #
@@ -367,34 +371,30 @@ module Aws::LocationService
     #   ^
     #   @return [Array<String>]
     #
-    # @!attribute [rw] tracker_name
-    #   The tracker resource retrieving the device position.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/BatchGetDevicePositionRequest AWS API Documentation
     #
     class BatchGetDevicePositionRequest < Struct.new(
-      :device_ids,
-      :tracker_name)
+      :tracker_name,
+      :device_ids)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] device_positions
-    #   Contains device position details such as the device ID, position,
-    #   and timestamps for when the position was received and sampled.
-    #   @return [Array<Types::DevicePosition>]
-    #
     # @!attribute [rw] errors
     #   Contains error details for each device that failed to send its
     #   position to the tracker resource.
     #   @return [Array<Types::BatchGetDevicePositionError>]
     #
+    # @!attribute [rw] device_positions
+    #   Contains device position details such as the device ID, position,
+    #   and timestamps for when the position was received and sampled.
+    #   @return [Array<Types::DevicePosition>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/BatchGetDevicePositionResponse AWS API Documentation
     #
     class BatchGetDevicePositionResponse < Struct.new(
-      :device_positions,
-      :errors)
+      :errors,
+      :device_positions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -421,19 +421,19 @@ module Aws::LocationService
     # Contains error details for each geofence that failed to be stored in a
     # given geofence collection.
     #
-    # @!attribute [rw] error
-    #   Contains details associated to the batch error.
-    #   @return [Types::BatchItemError]
-    #
     # @!attribute [rw] geofence_id
     #   The geofence associated with the error message.
     #   @return [String]
     #
+    # @!attribute [rw] error
+    #   Contains details associated to the batch error.
+    #   @return [Types::BatchItemError]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/BatchPutGeofenceError AWS API Documentation
     #
     class BatchPutGeofenceError < Struct.new(
-      :error,
-      :geofence_id)
+      :geofence_id,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -462,20 +462,14 @@ module Aws::LocationService
     #   collection.
     #   @return [String]
     #
-    # @!attribute [rw] geofence_properties
-    #   Associates one of more properties with the geofence. A property is a
-    #   key-value pair stored with the geofence and added to any geofence
-    #   event triggered with that geofence.
-    #
-    #   Format: `"key" : "value"`
-    #   @return [Hash<String,String>]
-    #
     # @!attribute [rw] geometry
-    #   Contains the details of the position of the geofence. Can be either
-    #   a polygon or a circle. Including both will return a validation
-    #   error.
+    #   Contains the details to specify the position of the geofence. Can be
+    #   a polygon, a circle or a polygon encoded in Geobuf format. Including
+    #   multiple selections will return a validation error.
     #
-    #   <note markdown="1"> Each [ geofence polygon][1] can have a maximum of 1,000 vertices.
+    #   <note markdown="1"> The [ geofence polygon][1] format supports a maximum of 1,000
+    #   vertices. The [Geofence geobuf][1] format supports a maximum of
+    #   100,000 vertices.
     #
     #    </note>
     #
@@ -484,37 +478,49 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
     #   @return [Types::GeofenceGeometry]
     #
+    # @!attribute [rw] geofence_properties
+    #   Associates one of more properties with the geofence. A property is a
+    #   key-value pair stored with the geofence and added to any geofence
+    #   event triggered with that geofence.
+    #
+    #   Format: `"key" : "value"`
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/BatchPutGeofenceRequestEntry AWS API Documentation
     #
     class BatchPutGeofenceRequestEntry < Struct.new(
       :geofence_id,
-      :geofence_properties,
-      :geometry)
+      :geometry,
+      :geofence_properties)
       SENSITIVE = [:geofence_properties]
       include Aws::Structure
     end
 
-    # @!attribute [rw] errors
-    #   Contains additional error details for each geofence that failed to
-    #   be stored in a geofence collection.
-    #   @return [Array<Types::BatchPutGeofenceError>]
-    #
     # @!attribute [rw] successes
     #   Contains each geofence that was successfully stored in a geofence
     #   collection.
     #   @return [Array<Types::BatchPutGeofenceSuccess>]
     #
+    # @!attribute [rw] errors
+    #   Contains additional error details for each geofence that failed to
+    #   be stored in a geofence collection.
+    #   @return [Array<Types::BatchPutGeofenceError>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/BatchPutGeofenceResponse AWS API Documentation
     #
     class BatchPutGeofenceResponse < Struct.new(
-      :errors,
-      :successes)
+      :successes,
+      :errors)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Contains a summary of each geofence that was successfully stored in a
     # given geofence collection.
+    #
+    # @!attribute [rw] geofence_id
+    #   The geofence successfully stored in a geofence collection.
+    #   @return [String]
     #
     # @!attribute [rw] create_time
     #   The timestamp for when the geofence was stored in a geofence
@@ -524,10 +530,6 @@ module Aws::LocationService
     #
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
-    #
-    # @!attribute [rw] geofence_id
-    #   The geofence successfully stored in a geofence collection.
-    #   @return [String]
     #
     # @!attribute [rw] update_time
     #   The timestamp for when the geofence was last updated in [ISO
@@ -541,8 +543,8 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/BatchPutGeofenceSuccess AWS API Documentation
     #
     class BatchPutGeofenceSuccess < Struct.new(
-      :create_time,
       :geofence_id,
+      :create_time,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -555,11 +557,6 @@ module Aws::LocationService
     #   The device associated with the failed location update.
     #   @return [String]
     #
-    # @!attribute [rw] error
-    #   Contains details related to the error code such as the error code
-    #   and error message.
-    #   @return [Types::BatchItemError]
-    #
     # @!attribute [rw] sample_time
     #   The timestamp at which the device position was determined. Uses [
     #   ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
@@ -569,12 +566,17 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
+    # @!attribute [rw] error
+    #   Contains details related to the error code such as the error code
+    #   and error message.
+    #   @return [Types::BatchItemError]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/BatchUpdateDevicePositionError AWS API Documentation
     #
     class BatchUpdateDevicePositionError < Struct.new(
       :device_id,
-      :error,
-      :sample_time)
+      :sample_time,
+      :error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -643,25 +645,6 @@ module Aws::LocationService
     #   calculate the route matrix.
     #   @return [String]
     #
-    # @!attribute [rw] car_mode_options
-    #   Specifies route preferences when traveling by `Car`, such as
-    #   avoiding routes that use ferries or tolls.
-    #
-    #   Requirements: `TravelMode` must be specified as `Car`.
-    #   @return [Types::CalculateRouteCarModeOptions]
-    #
-    # @!attribute [rw] depart_now
-    #   Sets the time of departure as the current time. Uses the current
-    #   time to calculate the route matrix. You can't set both
-    #   `DepartureTime` and `DepartNow`. If neither is set, the best time of
-    #   day to travel with the best traffic conditions is used to calculate
-    #   the route matrix.
-    #
-    #   Default Value: `false`
-    #
-    #   Valid Values: `false` \| `true`
-    #   @return [Boolean]
-    #
     # @!attribute [rw] departure_positions
     #   The list of departure (origin) positions for the route matrix. An
     #   array of points, each of which is itself a 2-value array defined in
@@ -689,27 +672,6 @@ module Aws::LocationService
     #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #   @return [Array<Array<Float>>]
     #
-    # @!attribute [rw] departure_time
-    #   Specifies the desired time of departure. Uses the given time to
-    #   calculate the route matrix. You can't set both `DepartureTime` and
-    #   `DepartNow`. If neither is set, the best time of day to travel with
-    #   the best traffic conditions is used to calculate the route matrix.
-    #
-    #   <note markdown="1"> Setting a departure time in the past returns a `400
-    #   ValidationException` error.
-    #
-    #    </note>
-    #
-    #   * In [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
-    #     `2020–07-2T12:15:20.000Z+01:00`
-    #
-    #   ^
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
     # @!attribute [rw] destination_positions
     #   The list of destination positions for the route matrix. An array of
     #   points, each of which is itself a 2-value array defined in [WGS
@@ -736,20 +698,6 @@ module Aws::LocationService
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html#matrix-routing-position-limits
     #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #   @return [Array<Array<Float>>]
-    #
-    # @!attribute [rw] distance_unit
-    #   Set the unit system to specify the distance.
-    #
-    #   Default Value: `Kilometers`
-    #   @return [String]
-    #
-    # @!attribute [rw] key
-    #   The optional [API key][1] to authorize the request.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
-    #   @return [String]
     #
     # @!attribute [rw] travel_mode
     #   Specifies the mode of transport when calculating a route. Used in
@@ -779,6 +727,52 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
     #   @return [String]
     #
+    # @!attribute [rw] departure_time
+    #   Specifies the desired time of departure. Uses the given time to
+    #   calculate the route matrix. You can't set both `DepartureTime` and
+    #   `DepartNow`. If neither is set, the best time of day to travel with
+    #   the best traffic conditions is used to calculate the route matrix.
+    #
+    #   <note markdown="1"> Setting a departure time in the past returns a `400
+    #   ValidationException` error.
+    #
+    #    </note>
+    #
+    #   * In [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
+    #     `2020–07-2T12:15:20.000Z+01:00`
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] depart_now
+    #   Sets the time of departure as the current time. Uses the current
+    #   time to calculate the route matrix. You can't set both
+    #   `DepartureTime` and `DepartNow`. If neither is set, the best time of
+    #   day to travel with the best traffic conditions is used to calculate
+    #   the route matrix.
+    #
+    #   Default Value: `false`
+    #
+    #   Valid Values: `false` \| `true`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] distance_unit
+    #   Set the unit system to specify the distance.
+    #
+    #   Default Value: `Kilometers`
+    #   @return [String]
+    #
+    # @!attribute [rw] car_mode_options
+    #   Specifies route preferences when traveling by `Car`, such as
+    #   avoiding routes that use ferries or tolls.
+    #
+    #   Requirements: `TravelMode` must be specified as `Car`.
+    #   @return [Types::CalculateRouteCarModeOptions]
+    #
     # @!attribute [rw] truck_mode_options
     #   Specifies route preferences when traveling by `Truck`, such as
     #   avoiding routes that use ferries or tolls, and truck specifications
@@ -787,19 +781,27 @@ module Aws::LocationService
     #   Requirements: `TravelMode` must be specified as `Truck`.
     #   @return [Types::CalculateRouteTruckModeOptions]
     #
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteMatrixRequest AWS API Documentation
     #
     class CalculateRouteMatrixRequest < Struct.new(
       :calculator_name,
-      :car_mode_options,
-      :depart_now,
       :departure_positions,
-      :departure_time,
       :destination_positions,
-      :distance_unit,
-      :key,
       :travel_mode,
-      :truck_mode_options)
+      :departure_time,
+      :depart_now,
+      :distance_unit,
+      :car_mode_options,
+      :truck_mode_options,
+      :key)
       SENSITIVE = [:key]
       include Aws::Structure
     end
@@ -862,28 +864,28 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
-    # @!attribute [rw] distance_unit
-    #   The unit of measurement for route distances.
-    #   @return [String]
-    #
-    # @!attribute [rw] error_count
-    #   The count of error results in the route matrix. If this number is 0,
-    #   all routes were calculated successfully.
-    #   @return [Integer]
-    #
     # @!attribute [rw] route_count
     #   The count of cells in the route matrix. Equal to the number of
     #   `DeparturePositions` multiplied by the number of
     #   `DestinationPositions`.
     #   @return [Integer]
     #
+    # @!attribute [rw] error_count
+    #   The count of error results in the route matrix. If this number is 0,
+    #   all routes were calculated successfully.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] distance_unit
+    #   The unit of measurement for route distances.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteMatrixSummary AWS API Documentation
     #
     class CalculateRouteMatrixSummary < Struct.new(
       :data_source,
-      :distance_unit,
+      :route_count,
       :error_count,
-      :route_count)
+      :distance_unit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -892,23 +894,6 @@ module Aws::LocationService
     #   The name of the route calculator resource that you want to use to
     #   calculate the route.
     #   @return [String]
-    #
-    # @!attribute [rw] car_mode_options
-    #   Specifies route preferences when traveling by `Car`, such as
-    #   avoiding routes that use ferries or tolls.
-    #
-    #   Requirements: `TravelMode` must be specified as `Car`.
-    #   @return [Types::CalculateRouteCarModeOptions]
-    #
-    # @!attribute [rw] depart_now
-    #   Sets the time of departure as the current time. Uses the current
-    #   time to calculate a route. Otherwise, the best time of day to travel
-    #   with the best traffic conditions is used to calculate the route.
-    #
-    #   Default Value: `false`
-    #
-    #   Valid Values: `false` \| `true`
-    #   @return [Boolean]
     #
     # @!attribute [rw] departure_position
     #   The start position for the route. Defined in [World Geodetic System
@@ -933,26 +918,6 @@ module Aws::LocationService
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #   @return [Array<Float>]
     #
-    # @!attribute [rw] departure_time
-    #   Specifies the desired time of departure. Uses the given time to
-    #   calculate the route. Otherwise, the best time of day to travel with
-    #   the best traffic conditions is used to calculate the route.
-    #
-    #   <note markdown="1"> Setting a departure time in the past returns a `400
-    #   ValidationException` error.
-    #
-    #    </note>
-    #
-    #   * In [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
-    #     `2020–07-2T12:15:20.000Z+01:00`
-    #
-    #   ^
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
     # @!attribute [rw] destination_position
     #   The finish position for the route. Defined in [World Geodetic System
     #   (WGS 84)][1] format: `[longitude, latitude]`.
@@ -974,28 +939,35 @@ module Aws::LocationService
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #   @return [Array<Float>]
     #
-    # @!attribute [rw] distance_unit
-    #   Set the unit system to specify the distance.
+    # @!attribute [rw] waypoint_positions
+    #   Specifies an ordered list of up to 23 intermediate positions to
+    #   include along a route between the departure position and destination
+    #   position.
     #
-    #   Default Value: `Kilometers`
-    #   @return [String]
+    #   * For example, from the `DeparturePosition` `[-123.115, 49.285]`,
+    #     the route follows the order that the waypoint positions are given
+    #     `[[-122.757, 49.0021],[-122.349, 47.620]]`
     #
-    # @!attribute [rw] include_leg_geometry
-    #   Set to include the geometry details in the result for each path
-    #   between a pair of positions.
+    #   ^
     #
-    #   Default Value: `false`
+    #   <note markdown="1"> If you specify a waypoint position that's not located on a road,
+    #   Amazon Location [moves the position to the nearest road][1].
     #
-    #   Valid Values: `false` \| `true`
-    #   @return [Boolean]
+    #    Specifying more than 23 waypoints returns a `400
+    #   ValidationException` error.
     #
-    # @!attribute [rw] key
-    #   The optional [API key][1] to authorize the request.
+    #    If Esri is the provider for your route calculator, specifying a
+    #   route that is longer than 400 km returns a `400
+    #   RoutesValidationException` error.
+    #
+    #    </note>
+    #
+    #   Valid Values: `[-180 to 180,-90 to 90]`
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
-    #   @return [String]
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   @return [Array<Array<Float>>]
     #
     # @!attribute [rw] travel_mode
     #   Specifies the mode of transport when calculating a route. Used in
@@ -1028,6 +1000,53 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
     #   @return [String]
     #
+    # @!attribute [rw] departure_time
+    #   Specifies the desired time of departure. Uses the given time to
+    #   calculate the route. Otherwise, the best time of day to travel with
+    #   the best traffic conditions is used to calculate the route.
+    #
+    #   * In [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
+    #     `2020–07-2T12:15:20.000Z+01:00`
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] depart_now
+    #   Sets the time of departure as the current time. Uses the current
+    #   time to calculate a route. Otherwise, the best time of day to travel
+    #   with the best traffic conditions is used to calculate the route.
+    #
+    #   Default Value: `false`
+    #
+    #   Valid Values: `false` \| `true`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] distance_unit
+    #   Set the unit system to specify the distance.
+    #
+    #   Default Value: `Kilometers`
+    #   @return [String]
+    #
+    # @!attribute [rw] include_leg_geometry
+    #   Set to include the geometry details in the result for each path
+    #   between a pair of positions.
+    #
+    #   Default Value: `false`
+    #
+    #   Valid Values: `false` \| `true`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] car_mode_options
+    #   Specifies route preferences when traveling by `Car`, such as
+    #   avoiding routes that use ferries or tolls.
+    #
+    #   Requirements: `TravelMode` must be specified as `Car`.
+    #   @return [Types::CalculateRouteCarModeOptions]
+    #
     # @!attribute [rw] truck_mode_options
     #   Specifies route preferences when traveling by `Truck`, such as
     #   avoiding routes that use ferries or tolls, and truck specifications
@@ -1036,51 +1055,45 @@ module Aws::LocationService
     #   Requirements: `TravelMode` must be specified as `Truck`.
     #   @return [Types::CalculateRouteTruckModeOptions]
     #
-    # @!attribute [rw] waypoint_positions
-    #   Specifies an ordered list of up to 23 intermediate positions to
-    #   include along a route between the departure position and destination
-    #   position.
+    # @!attribute [rw] arrival_time
+    #   Specifies the desired time of arrival. Uses the given time to
+    #   calculate the route. Otherwise, the best time of day to travel with
+    #   the best traffic conditions is used to calculate the route.
     #
-    #   * For example, from the `DeparturePosition` `[-123.115, 49.285]`,
-    #     the route follows the order that the waypoint positions are given
-    #     `[[-122.757, 49.0021],[-122.349, 47.620]]`
-    #
-    #   ^
-    #
-    #   <note markdown="1"> If you specify a waypoint position that's not located on a road,
-    #   Amazon Location [moves the position to the nearest road][1].
-    #
-    #    Specifying more than 23 waypoints returns a `400
-    #   ValidationException` error.
-    #
-    #    If Esri is the provider for your route calculator, specifying a
-    #   route that is longer than 400 km returns a `400
-    #   RoutesValidationException` error.
+    #   <note markdown="1"> ArrivalTime is not supported Esri.
     #
     #    </note>
+    #   @return [Time]
     #
-    #   Valid Values: `[-180 to 180,-90 to 90]`
+    # @!attribute [rw] optimize_for
+    #   Specifies the distance to optimize for when calculating a route.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
-    #   @return [Array<Array<Float>>]
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteRequest AWS API Documentation
     #
     class CalculateRouteRequest < Struct.new(
       :calculator_name,
-      :car_mode_options,
-      :depart_now,
       :departure_position,
-      :departure_time,
       :destination_position,
+      :waypoint_positions,
+      :travel_mode,
+      :departure_time,
+      :depart_now,
       :distance_unit,
       :include_leg_geometry,
-      :key,
-      :travel_mode,
+      :car_mode_options,
       :truck_mode_options,
-      :waypoint_positions)
+      :arrival_time,
+      :optimize_for,
+      :key)
       SENSITIVE = [:departure_position, :destination_position, :key]
       include Aws::Structure
     end
@@ -1134,6 +1147,28 @@ module Aws::LocationService
 
     # A summary of the calculated route.
     #
+    # @!attribute [rw] route_b_box
+    #   Specifies a geographical box surrounding a route. Used to zoom into
+    #   a route when displaying it in a map. For example, `[min x, min y,
+    #   max x, max y]`.
+    #
+    #   The first 2 `bbox` parameters describe the lower southwest corner:
+    #
+    #   * The first `bbox` position is the X coordinate or longitude of the
+    #     lower southwest corner.
+    #
+    #   * The second `bbox` position is the Y coordinate or latitude of the
+    #     lower southwest corner.
+    #
+    #   The next 2 `bbox` parameters describe the upper northeast corner:
+    #
+    #   * The third `bbox` position is the X coordinate, or longitude of the
+    #     upper northeast corner.
+    #
+    #   * The fourth `bbox` position is the Y coordinate, or latitude of the
+    #     upper northeast corner.
+    #   @return [Array<Float>]
+    #
     # @!attribute [rw] data_source
     #   The data provider of traffic and road network data used to calculate
     #   the route. Indicates one of the available providers:
@@ -1163,45 +1198,23 @@ module Aws::LocationService
     #    </note>
     #   @return [Float]
     #
-    # @!attribute [rw] distance_unit
-    #   The unit of measurement for route distances.
-    #   @return [String]
-    #
     # @!attribute [rw] duration_seconds
     #   The total travel time for the route measured in seconds. The sum of
     #   the travel time between every stop on the route.
     #   @return [Float]
     #
-    # @!attribute [rw] route_b_box
-    #   Specifies a geographical box surrounding a route. Used to zoom into
-    #   a route when displaying it in a map. For example, `[min x, min y,
-    #   max x, max y]`.
-    #
-    #   The first 2 `bbox` parameters describe the lower southwest corner:
-    #
-    #   * The first `bbox` position is the X coordinate or longitude of the
-    #     lower southwest corner.
-    #
-    #   * The second `bbox` position is the Y coordinate or latitude of the
-    #     lower southwest corner.
-    #
-    #   The next 2 `bbox` parameters describe the upper northeast corner:
-    #
-    #   * The third `bbox` position is the X coordinate, or longitude of the
-    #     upper northeast corner.
-    #
-    #   * The fourth `bbox` position is the Y coordinate, or latitude of the
-    #     upper northeast corner.
-    #   @return [Array<Float>]
+    # @!attribute [rw] distance_unit
+    #   The unit of measurement for route distances.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteSummary AWS API Documentation
     #
     class CalculateRouteSummary < Struct.new(
+      :route_b_box,
       :data_source,
       :distance,
-      :distance_unit,
       :duration_seconds,
-      :route_b_box)
+      :distance_unit)
       SENSITIVE = [:route_b_box]
       include Aws::Structure
     end
@@ -1244,6 +1257,22 @@ module Aws::LocationService
       :avoid_tolls,
       :dimensions,
       :weight)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The cellular network communication infrastructure that the device
+    # uses.
+    #
+    # @!attribute [rw] lte_cell_details
+    #   Information about the Long-Term Evolution (LTE) network the device
+    #   is connected to.
+    #   @return [Array<Types::LteCellDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CellSignals AWS API Documentation
+    #
+    class CellSignals < Struct.new(
+      :lte_cell_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1299,19 +1328,6 @@ module Aws::LocationService
     #   * No spaces allowed. For example, `ExampleGeofenceCollection`.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   An optional description for the geofence collection.
-    #   @return [String]
-    #
-    # @!attribute [rw] kms_key_id
-    #   A key identifier for an [Amazon Web Services KMS customer managed
-    #   key][1]. Enter a key ID, key ARN, alias name, or alias ARN.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
-    #   @return [String]
-    #
     # @!attribute [rw] pricing_plan
     #   No longer used. If included, the only allowed value is
     #   `RequestBasedUsage`.
@@ -1319,6 +1335,10 @@ module Aws::LocationService
     #
     # @!attribute [rw] pricing_plan_data_source
     #   This parameter is no longer used.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description for the geofence collection.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1344,19 +1364,32 @@ module Aws::LocationService
     #   * Cannot use "aws:" as a prefix for a key.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] kms_key_id
+    #   A key identifier for an [Amazon Web Services KMS customer managed
+    #   key][1]. Enter a key ID, key ARN, alias name, or alias ARN.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateGeofenceCollectionRequest AWS API Documentation
     #
     class CreateGeofenceCollectionRequest < Struct.new(
       :collection_name,
-      :description,
-      :kms_key_id,
       :pricing_plan,
       :pricing_plan_data_source,
-      :tags)
+      :description,
+      :tags,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] collection_name
+    #   The name for the geofence collection.
+    #   @return [String]
+    #
     # @!attribute [rw] collection_arn
     #   The Amazon Resource Name (ARN) for the geofence collection resource.
     #   Used when you need to specify a resource across all Amazon Web
@@ -1366,10 +1399,6 @@ module Aws::LocationService
     #     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection`
     #
     #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] collection_name
-    #   The name for the geofence collection.
     #   @return [String]
     #
     # @!attribute [rw] create_time
@@ -1384,13 +1413,30 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateGeofenceCollectionResponse AWS API Documentation
     #
     class CreateGeofenceCollectionResponse < Struct.new(
-      :collection_arn,
       :collection_name,
+      :collection_arn,
       :create_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] key_name
+    #   A custom name for the API key resource.
+    #
+    #   Requirements:
+    #
+    #   * Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
+    #     periods (.), and underscores (\_).
+    #
+    #   * Must be a unique API key name.
+    #
+    #   * No spaces allowed. For example, `ExampleAPIKey`.
+    #   @return [String]
+    #
+    # @!attribute [rw] restrictions
+    #   The API key restrictions for the API key resource.
+    #   @return [Types::ApiKeyRestrictions]
+    #
     # @!attribute [rw] description
     #   An optional description for the API key resource.
     #   @return [String]
@@ -1405,27 +1451,10 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
-    # @!attribute [rw] key_name
-    #   A custom name for the API key resource.
-    #
-    #   Requirements:
-    #
-    #   * Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
-    #     periods (.), and underscores (\_).
-    #
-    #   * Must be a unique API key name.
-    #
-    #   * No spaces allowed. For example, `ExampleAPIKey`.
-    #   @return [String]
-    #
     # @!attribute [rw] no_expiry
     #   Optionally set to `true` to set no expiration time for the API key.
     #   One of `NoExpiry` or `ExpireTime` must be set.
     #   @return [Boolean]
-    #
-    # @!attribute [rw] restrictions
-    #   The API key restrictions for the API key resource.
-    #   @return [Types::ApiKeyRestrictions]
     #
     # @!attribute [rw] tags
     #   Applies one or more tags to the map resource. A tag is a key-value
@@ -1453,25 +1482,16 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateKeyRequest AWS API Documentation
     #
     class CreateKeyRequest < Struct.new(
+      :key_name,
+      :restrictions,
       :description,
       :expire_time,
-      :key_name,
       :no_expiry,
-      :restrictions,
       :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] create_time
-    #   The timestamp for when the API key resource was created in [ ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
     # @!attribute [rw] key
     #   The key value/string of an API key. This value is used when making
     #   API calls to authorize the call. For example, see [GetMapGlyphs][1].
@@ -1494,27 +1514,26 @@ module Aws::LocationService
     #   The name of the API key resource.
     #   @return [String]
     #
+    # @!attribute [rw] create_time
+    #   The timestamp for when the API key resource was created in [ ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateKeyResponse AWS API Documentation
     #
     class CreateKeyResponse < Struct.new(
-      :create_time,
       :key,
       :key_arn,
-      :key_name)
+      :key_name,
+      :create_time)
       SENSITIVE = [:key]
       include Aws::Structure
     end
 
-    # @!attribute [rw] configuration
-    #   Specifies the `MapConfiguration`, including the map style, for the
-    #   map resource that you create. The map style defines the look of maps
-    #   and the data provider for your map resource.
-    #   @return [Types::MapConfiguration]
-    #
-    # @!attribute [rw] description
-    #   An optional description for the map resource.
-    #   @return [String]
-    #
     # @!attribute [rw] map_name
     #   The name for the map resource.
     #
@@ -1528,9 +1547,19 @@ module Aws::LocationService
     #   * No spaces allowed. For example, `ExampleMap`.
     #   @return [String]
     #
+    # @!attribute [rw] configuration
+    #   Specifies the `MapConfiguration`, including the map style, for the
+    #   map resource that you create. The map style defines the look of maps
+    #   and the data provider for your map resource.
+    #   @return [Types::MapConfiguration]
+    #
     # @!attribute [rw] pricing_plan
     #   No longer used. If included, the only allowed value is
     #   `RequestBasedUsage`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   An optional description for the map resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1559,23 +1588,18 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateMapRequest AWS API Documentation
     #
     class CreateMapRequest < Struct.new(
-      :configuration,
-      :description,
       :map_name,
+      :configuration,
       :pricing_plan,
+      :description,
       :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] create_time
-    #   The timestamp for when the map resource was created in [ISO 8601][1]
-    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
+    # @!attribute [rw] map_name
+    #   The name of the map resource.
+    #   @return [String]
     #
     # @!attribute [rw] map_arn
     #   The Amazon Resource Name (ARN) for the map resource. Used to specify
@@ -1586,20 +1610,38 @@ module Aws::LocationService
     #   ^
     #   @return [String]
     #
-    # @!attribute [rw] map_name
-    #   The name of the map resource.
-    #   @return [String]
+    # @!attribute [rw] create_time
+    #   The timestamp for when the map resource was created in [ISO 8601][1]
+    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateMapResponse AWS API Documentation
     #
     class CreateMapResponse < Struct.new(
-      :create_time,
+      :map_name,
       :map_arn,
-      :map_name)
+      :create_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] index_name
+    #   The name of the place index resource.
+    #
+    #   Requirements:
+    #
+    #   * Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
+    #     periods (.), and underscores (\_).
+    #
+    #   * Must be a unique place index resource name.
+    #
+    #   * No spaces allowed. For example, `ExamplePlaceIndex`.
+    #   @return [String]
+    #
     # @!attribute [rw] data_source
     #   Specifies the geospatial data provider for the new place index.
     #
@@ -1643,31 +1685,18 @@ module Aws::LocationService
     #   [9]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
-    # @!attribute [rw] data_source_configuration
-    #   Specifies the data storage option requesting Places.
-    #   @return [Types::DataSourceConfiguration]
+    # @!attribute [rw] pricing_plan
+    #   No longer used. If included, the only allowed value is
+    #   `RequestBasedUsage`.
+    #   @return [String]
     #
     # @!attribute [rw] description
     #   The optional description for the place index resource.
     #   @return [String]
     #
-    # @!attribute [rw] index_name
-    #   The name of the place index resource.
-    #
-    #   Requirements:
-    #
-    #   * Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
-    #     periods (.), and underscores (\_).
-    #
-    #   * Must be a unique place index resource name.
-    #
-    #   * No spaces allowed. For example, `ExamplePlaceIndex`.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan
-    #   No longer used. If included, the only allowed value is
-    #   `RequestBasedUsage`.
-    #   @return [String]
+    # @!attribute [rw] data_source_configuration
+    #   Specifies the data storage option requesting Places.
+    #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] tags
     #   Applies one or more tags to the place index resource. A tag is a
@@ -1696,24 +1725,19 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreatePlaceIndexRequest AWS API Documentation
     #
     class CreatePlaceIndexRequest < Struct.new(
-      :data_source,
-      :data_source_configuration,
-      :description,
       :index_name,
+      :data_source,
       :pricing_plan,
+      :description,
+      :data_source_configuration,
       :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] create_time
-    #   The timestamp for when the place index resource was created in [ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
+    # @!attribute [rw] index_name
+    #   The name for the place index resource.
+    #   @return [String]
     #
     # @!attribute [rw] index_arn
     #   The Amazon Resource Name (ARN) for the place index resource. Used to
@@ -1725,16 +1749,21 @@ module Aws::LocationService
     #   ^
     #   @return [String]
     #
-    # @!attribute [rw] index_name
-    #   The name for the place index resource.
-    #   @return [String]
+    # @!attribute [rw] create_time
+    #   The timestamp for when the place index resource was created in [ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreatePlaceIndexResponse AWS API Documentation
     #
     class CreatePlaceIndexResponse < Struct.new(
-      :create_time,
+      :index_name,
       :index_arn,
-      :index_name)
+      :create_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1792,13 +1821,13 @@ module Aws::LocationService
     #   [8]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   The optional description for the route calculator resource.
-    #   @return [String]
-    #
     # @!attribute [rw] pricing_plan
     #   No longer used. If included, the only allowed value is
     #   `RequestBasedUsage`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The optional description for the route calculator resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1833,13 +1862,21 @@ module Aws::LocationService
     class CreateRouteCalculatorRequest < Struct.new(
       :calculator_name,
       :data_source,
-      :description,
       :pricing_plan,
+      :description,
       :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] calculator_name
+    #   The name of the route calculator resource.
+    #
+    #   * For example, `ExampleRouteCalculator`.
+    #
+    #   ^
+    #   @return [String]
+    #
     # @!attribute [rw] calculator_arn
     #   The Amazon Resource Name (ARN) for the route calculator resource.
     #   Use the ARN when you specify a resource across all Amazon Web
@@ -1847,14 +1884,6 @@ module Aws::LocationService
     #
     #   * Format example:
     #     `arn:aws:geo:region:account-id:route-calculator/ExampleCalculator`
-    #
-    #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] calculator_name
-    #   The name of the route calculator resource.
-    #
-    #   * For example, `ExampleRouteCalculator`.
     #
     #   ^
     #   @return [String]
@@ -1875,15 +1904,101 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateRouteCalculatorResponse AWS API Documentation
     #
     class CreateRouteCalculatorResponse < Struct.new(
-      :calculator_arn,
       :calculator_name,
+      :calculator_arn,
       :create_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] tracker_name
+    #   The name for the tracker resource.
+    #
+    #   Requirements:
+    #
+    #   * Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens
+    #     (-), periods (.), and underscores (\_).
+    #
+    #   * Must be a unique tracker resource name.
+    #
+    #   * No spaces allowed. For example, `ExampleTracker`.
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan
+    #   No longer used. If included, the only allowed value is
+    #   `RequestBasedUsage`.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   A key identifier for an [Amazon Web Services KMS customer managed
+    #   key][1]. Enter a key ID, key ARN, alias name, or alias ARN.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan_data_source
+    #   This parameter is no longer used.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   An optional description for the tracker resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Applies one or more tags to the tracker resource. A tag is a
+    #   key-value pair helps manage, identify, search, and filter your
+    #   resources by labelling them.
+    #
+    #   Format: `"key" : "value"`
+    #
+    #   Restrictions:
+    #
+    #   * Maximum 50 tags per resource
+    #
+    #   * Each resource tag must be unique with a maximum of one value.
+    #
+    #   * Maximum key length: 128 Unicode characters in UTF-8
+    #
+    #   * Maximum value length: 256 Unicode characters in UTF-8
+    #
+    #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+    #     characters: + - = . \_ : / @.
+    #
+    #   * Cannot use "aws:" as a prefix for a key.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] position_filtering
+    #   Specifies the position filtering for the tracker resource.
+    #
+    #   Valid values:
+    #
+    #   * `TimeBased` - Location updates are evaluated against linked
+    #     geofence collections, but not every location update is stored. If
+    #     your update frequency is more often than 30 seconds, only one
+    #     update per 30 seconds is stored for each unique device ID.
+    #
+    #   * `DistanceBased` - If the device has moved less than 30 m (98.4
+    #     ft), location updates are ignored. Location updates within this
+    #     area are neither evaluated against linked geofence collections,
+    #     nor stored. This helps control costs by reducing the number of
+    #     geofence evaluations and historical device positions to paginate
+    #     through. Distance-based filtering can also reduce the effects of
+    #     GPS noise when displaying device trajectories on a map.
+    #
+    #   * `AccuracyBased` - If the device has moved less than the measured
+    #     accuracy, location updates are ignored. For example, if two
+    #     consecutive updates from a device have a horizontal accuracy of 5
+    #     m and 10 m, the second update is ignored if the device has moved
+    #     less than 15 m. Ignored location updates are neither evaluated
+    #     against linked geofence collections, nor stored. This can reduce
+    #     the effects of GPS noise when displaying device trajectories on a
+    #     map, and can help control your costs by reducing the number of
+    #     geofence evaluations.
+    #
+    #   This field is optional. If not specified, the default value is
+    #   `TimeBased`.
     #   @return [String]
     #
     # @!attribute [rw] event_bridge_enabled
@@ -1922,116 +2037,25 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
     #   @return [Boolean]
     #
-    # @!attribute [rw] kms_key_id
-    #   A key identifier for an [Amazon Web Services KMS customer managed
-    #   key][1]. Enter a key ID, key ARN, alias name, or alias ARN.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
-    #   @return [String]
-    #
-    # @!attribute [rw] position_filtering
-    #   Specifies the position filtering for the tracker resource.
-    #
-    #   Valid values:
-    #
-    #   * `TimeBased` - Location updates are evaluated against linked
-    #     geofence collections, but not every location update is stored. If
-    #     your update frequency is more often than 30 seconds, only one
-    #     update per 30 seconds is stored for each unique device ID.
-    #
-    #   * `DistanceBased` - If the device has moved less than 30 m (98.4
-    #     ft), location updates are ignored. Location updates within this
-    #     area are neither evaluated against linked geofence collections,
-    #     nor stored. This helps control costs by reducing the number of
-    #     geofence evaluations and historical device positions to paginate
-    #     through. Distance-based filtering can also reduce the effects of
-    #     GPS noise when displaying device trajectories on a map.
-    #
-    #   * `AccuracyBased` - If the device has moved less than the measured
-    #     accuracy, location updates are ignored. For example, if two
-    #     consecutive updates from a device have a horizontal accuracy of 5
-    #     m and 10 m, the second update is ignored if the device has moved
-    #     less than 15 m. Ignored location updates are neither evaluated
-    #     against linked geofence collections, nor stored. This can reduce
-    #     the effects of GPS noise when displaying device trajectories on a
-    #     map, and can help control your costs by reducing the number of
-    #     geofence evaluations.
-    #
-    #   This field is optional. If not specified, the default value is
-    #   `TimeBased`.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan
-    #   No longer used. If included, the only allowed value is
-    #   `RequestBasedUsage`.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan_data_source
-    #   This parameter is no longer used.
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   Applies one or more tags to the tracker resource. A tag is a
-    #   key-value pair helps manage, identify, search, and filter your
-    #   resources by labelling them.
-    #
-    #   Format: `"key" : "value"`
-    #
-    #   Restrictions:
-    #
-    #   * Maximum 50 tags per resource
-    #
-    #   * Each resource tag must be unique with a maximum of one value.
-    #
-    #   * Maximum key length: 128 Unicode characters in UTF-8
-    #
-    #   * Maximum value length: 256 Unicode characters in UTF-8
-    #
-    #   * Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-    #     characters: + - = . \_ : / @.
-    #
-    #   * Cannot use "aws:" as a prefix for a key.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] tracker_name
-    #   The name for the tracker resource.
-    #
-    #   Requirements:
-    #
-    #   * Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens
-    #     (-), periods (.), and underscores (\_).
-    #
-    #   * Must be a unique tracker resource name.
-    #
-    #   * No spaces allowed. For example, `ExampleTracker`.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateTrackerRequest AWS API Documentation
     #
     class CreateTrackerRequest < Struct.new(
-      :description,
-      :event_bridge_enabled,
-      :kms_key_enable_geospatial_queries,
-      :kms_key_id,
-      :position_filtering,
+      :tracker_name,
       :pricing_plan,
+      :kms_key_id,
       :pricing_plan_data_source,
+      :description,
       :tags,
-      :tracker_name)
+      :position_filtering,
+      :event_bridge_enabled,
+      :kms_key_enable_geospatial_queries)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] create_time
-    #   The timestamp for when the tracker resource was created in [ ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
+    # @!attribute [rw] tracker_name
+    #   The name of the tracker resource.
+    #   @return [String]
     #
     # @!attribute [rw] tracker_arn
     #   The Amazon Resource Name (ARN) for the tracker resource. Used when
@@ -2043,16 +2067,21 @@ module Aws::LocationService
     #   ^
     #   @return [String]
     #
-    # @!attribute [rw] tracker_name
-    #   The name of the tracker resource.
-    #   @return [String]
+    # @!attribute [rw] create_time
+    #   The timestamp for when the tracker resource was created in [ ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CreateTrackerResponse AWS API Documentation
     #
     class CreateTrackerResponse < Struct.new(
-      :create_time,
+      :tracker_name,
       :tracker_arn,
-      :tracker_name)
+      :create_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2119,10 +2148,26 @@ module Aws::LocationService
     #   The name of the API key to delete.
     #   @return [String]
     #
+    # @!attribute [rw] force_delete
+    #   ForceDelete bypasses an API key's expiry conditions and deletes the
+    #   key. Set the parameter `true` to delete the key or to `false` to not
+    #   preemptively delete the API key.
+    #
+    #   Valid values: `true`, or `false`.
+    #
+    #   Required: No
+    #
+    #   <note markdown="1"> This action is irreversible. Only use ForceDelete if you are certain
+    #   the key is no longer in use.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DeleteKeyRequest AWS API Documentation
     #
     class DeleteKeyRequest < Struct.new(
-      :key_name)
+      :key_name,
+      :force_delete)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2207,6 +2252,10 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] collection_name
+    #   The name of the geofence collection.
+    #   @return [String]
+    #
     # @!attribute [rw] collection_arn
     #   The Amazon Resource Name (ARN) for the geofence collection resource.
     #   Used when you need to specify a resource across all Amazon Web
@@ -2218,34 +2267,8 @@ module Aws::LocationService
     #   ^
     #   @return [String]
     #
-    # @!attribute [rw] collection_name
-    #   The name of the geofence collection.
-    #   @return [String]
-    #
-    # @!attribute [rw] create_time
-    #   The timestamp for when the geofence resource was created in [ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
     # @!attribute [rw] description
     #   The optional description for the geofence collection.
-    #   @return [String]
-    #
-    # @!attribute [rw] geofence_count
-    #   The number of geofences in the geofence collection.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] kms_key_id
-    #   A key identifier for an [Amazon Web Services KMS customer managed
-    #   key][1] assigned to the Amazon Location resource
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
@@ -2256,9 +2279,27 @@ module Aws::LocationService
     #   No longer used. Always returns an empty string.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   A key identifier for an [Amazon Web Services KMS customer managed
+    #   key][1] assigned to the Amazon Location resource
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Displays the key, value pairs of tags associated with this resource.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] create_time
+    #   The timestamp for when the geofence resource was created in [ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
     #
     # @!attribute [rw] update_time
     #   The timestamp for when the geofence collection was last updated in
@@ -2269,19 +2310,23 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
+    # @!attribute [rw] geofence_count
+    #   The number of geofences in the geofence collection.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DescribeGeofenceCollectionResponse AWS API Documentation
     #
     class DescribeGeofenceCollectionResponse < Struct.new(
-      :collection_arn,
       :collection_name,
-      :create_time,
+      :collection_arn,
       :description,
-      :geofence_count,
-      :kms_key_id,
       :pricing_plan,
       :pricing_plan_data_source,
+      :kms_key_id,
       :tags,
-      :update_time)
+      :create_time,
+      :update_time,
+      :geofence_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2298,28 +2343,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @!attribute [rw] create_time
-    #   The timestamp for when the API key resource was created in [ ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @!attribute [rw] description
-    #   The optional description for the API key resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] expire_time
-    #   The timestamp for when the API key resource will expire in [ ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
     # @!attribute [rw] key
     #   The key value/string of an API key.
     #   @return [String]
@@ -2342,9 +2365,23 @@ module Aws::LocationService
     #   an API key resource.
     #   @return [Types::ApiKeyRestrictions]
     #
-    # @!attribute [rw] tags
-    #   Tags associated with the API key resource.
-    #   @return [Hash<String,String>]
+    # @!attribute [rw] create_time
+    #   The timestamp for when the API key resource was created in [ ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] expire_time
+    #   The timestamp for when the API key resource will expire in [ ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
     #
     # @!attribute [rw] update_time
     #   The timestamp for when the API key resource was last updated in [
@@ -2355,18 +2392,26 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
+    # @!attribute [rw] description
+    #   The optional description for the API key resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with the API key resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DescribeKeyResponse AWS API Documentation
     #
     class DescribeKeyResponse < Struct.new(
-      :create_time,
-      :description,
-      :expire_time,
       :key,
       :key_arn,
       :key_name,
       :restrictions,
-      :tags,
-      :update_time)
+      :create_time,
+      :expire_time,
+      :update_time,
+      :description,
+      :tags)
       SENSITIVE = [:key]
       include Aws::Structure
     end
@@ -2383,25 +2428,8 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @!attribute [rw] configuration
-    #   Specifies the map tile style selected from a partner data provider.
-    #   @return [Types::MapConfiguration]
-    #
-    # @!attribute [rw] create_time
-    #   The timestamp for when the map resource was created in [ISO 8601][1]
-    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @!attribute [rw] data_source
-    #   Specifies the data provider for the associated map tiles.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The optional description for the map resource.
+    # @!attribute [rw] map_name
+    #   The map style selected from an available provider.
     #   @return [String]
     #
     # @!attribute [rw] map_arn
@@ -2413,17 +2441,34 @@ module Aws::LocationService
     #   ^
     #   @return [String]
     #
-    # @!attribute [rw] map_name
-    #   The map style selected from an available provider.
-    #   @return [String]
-    #
     # @!attribute [rw] pricing_plan
     #   No longer used. Always returns `RequestBasedUsage`.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   Specifies the data provider for the associated map tiles.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   Specifies the map tile style selected from a partner data provider.
+    #   @return [Types::MapConfiguration]
+    #
+    # @!attribute [rw] description
+    #   The optional description for the map resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   Tags associated with the map resource.
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] create_time
+    #   The timestamp for when the map resource was created in [ISO 8601][1]
+    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
     #
     # @!attribute [rw] update_time
     #   The timestamp for when the map resource was last update in [ISO
@@ -2437,14 +2482,14 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DescribeMapResponse AWS API Documentation
     #
     class DescribeMapResponse < Struct.new(
-      :configuration,
-      :create_time,
-      :data_source,
-      :description,
-      :map_arn,
       :map_name,
+      :map_arn,
       :pricing_plan,
+      :data_source,
+      :configuration,
+      :description,
       :tags,
+      :create_time,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -2462,9 +2507,40 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] index_name
+    #   The name of the place index resource being described.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_arn
+    #   The Amazon Resource Name (ARN) for the place index resource. Used to
+    #   specify a resource across Amazon Web Services.
+    #
+    #   * Format example:
+    #     `arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex`
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan
+    #   No longer used. Always returns `RequestBasedUsage`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The optional description for the place index resource.
+    #   @return [String]
+    #
     # @!attribute [rw] create_time
     #   The timestamp for when the place index resource was created in [ISO
     #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The timestamp for when the place index resource was last updated in
+    #   [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
     #
     #
     #
@@ -2493,53 +2569,22 @@ module Aws::LocationService
     #   The specified data storage option for requesting Places.
     #   @return [Types::DataSourceConfiguration]
     #
-    # @!attribute [rw] description
-    #   The optional description for the place index resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] index_arn
-    #   The Amazon Resource Name (ARN) for the place index resource. Used to
-    #   specify a resource across Amazon Web Services.
-    #
-    #   * Format example:
-    #     `arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex`
-    #
-    #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] index_name
-    #   The name of the place index resource being described.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan
-    #   No longer used. Always returns `RequestBasedUsage`.
-    #   @return [String]
-    #
     # @!attribute [rw] tags
     #   Tags associated with place index resource.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] update_time
-    #   The timestamp for when the place index resource was last updated in
-    #   [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DescribePlaceIndexResponse AWS API Documentation
     #
     class DescribePlaceIndexResponse < Struct.new(
+      :index_name,
+      :index_arn,
+      :pricing_plan,
+      :description,
       :create_time,
+      :update_time,
       :data_source,
       :data_source_configuration,
-      :description,
-      :index_arn,
-      :index_name,
-      :pricing_plan,
-      :tags,
-      :update_time)
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2556,6 +2601,10 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] calculator_name
+    #   The name of the route calculator resource being described.
+    #   @return [String]
+    #
     # @!attribute [rw] calculator_arn
     #   The Amazon Resource Name (ARN) for the Route calculator resource.
     #   Use the ARN when you specify a resource across Amazon Web Services.
@@ -2566,13 +2615,30 @@ module Aws::LocationService
     #   ^
     #   @return [String]
     #
-    # @!attribute [rw] calculator_name
-    #   The name of the route calculator resource being described.
+    # @!attribute [rw] pricing_plan
+    #   Always returns `RequestBasedUsage`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The optional description of the route calculator resource.
     #   @return [String]
     #
     # @!attribute [rw] create_time
     #   The timestamp when the route calculator resource was created in [ISO
     #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #   * For example, `2020–07-2T12:15:20.000Z+01:00`
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The timestamp when the route calculator resource was last updated in
+    #   [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
     #
     #   * For example, `2020–07-2T12:15:20.000Z+01:00`
     #
@@ -2601,42 +2667,21 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   The optional description of the route calculator resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan
-    #   Always returns `RequestBasedUsage`.
-    #   @return [String]
-    #
     # @!attribute [rw] tags
     #   Tags associated with route calculator resource.
     #   @return [Hash<String,String>]
     #
-    # @!attribute [rw] update_time
-    #   The timestamp when the route calculator resource was last updated in
-    #   [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #   * For example, `2020–07-2T12:15:20.000Z+01:00`
-    #
-    #   ^
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DescribeRouteCalculatorResponse AWS API Documentation
     #
     class DescribeRouteCalculatorResponse < Struct.new(
-      :calculator_arn,
       :calculator_name,
-      :create_time,
-      :data_source,
-      :description,
+      :calculator_arn,
       :pricing_plan,
-      :tags,
-      :update_time)
+      :description,
+      :create_time,
+      :update_time,
+      :data_source,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2653,6 +2698,36 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] tracker_name
+    #   The name of the tracker resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tracker_arn
+    #   The Amazon Resource Name (ARN) for the tracker resource. Used when
+    #   you need to specify a resource across all Amazon Web Services.
+    #
+    #   * Format example:
+    #     `arn:aws:geo:region:account-id:tracker/ExampleTracker`
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The optional description for the tracker resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan
+    #   Always returns `RequestBasedUsage`.
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan_data_source
+    #   No longer used. Always returns an empty string.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the tracker resource.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] create_time
     #   The timestamp for when the tracker resource was created in [ ISO
     #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
@@ -2662,8 +2737,26 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
-    # @!attribute [rw] description
-    #   The optional description for the tracker resource.
+    # @!attribute [rw] update_time
+    #   The timestamp for when the tracker resource was last updated in [
+    #   ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] kms_key_id
+    #   A key identifier for an [Amazon Web Services KMS customer managed
+    #   key][1] assigned to the Amazon Location resource.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] position_filtering
+    #   The position filtering method of the tracker resource.
     #   @return [String]
     #
     # @!attribute [rw] event_bridge_enabled
@@ -2696,99 +2789,30 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
     #   @return [Boolean]
     #
-    # @!attribute [rw] kms_key_id
-    #   A key identifier for an [Amazon Web Services KMS customer managed
-    #   key][1] assigned to the Amazon Location resource.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
-    #   @return [String]
-    #
-    # @!attribute [rw] position_filtering
-    #   The position filtering method of the tracker resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan
-    #   Always returns `RequestBasedUsage`.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan_data_source
-    #   No longer used. Always returns an empty string.
-    #   @return [String]
-    #
-    # @!attribute [rw] tags
-    #   The tags associated with the tracker resource.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] tracker_arn
-    #   The Amazon Resource Name (ARN) for the tracker resource. Used when
-    #   you need to specify a resource across all Amazon Web Services.
-    #
-    #   * Format example:
-    #     `arn:aws:geo:region:account-id:tracker/ExampleTracker`
-    #
-    #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] tracker_name
-    #   The name of the tracker resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] update_time
-    #   The timestamp for when the tracker resource was last updated in [
-    #   ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DescribeTrackerResponse AWS API Documentation
     #
     class DescribeTrackerResponse < Struct.new(
-      :create_time,
+      :tracker_name,
+      :tracker_arn,
       :description,
-      :event_bridge_enabled,
-      :kms_key_enable_geospatial_queries,
-      :kms_key_id,
-      :position_filtering,
       :pricing_plan,
       :pricing_plan_data_source,
       :tags,
-      :tracker_arn,
-      :tracker_name,
-      :update_time)
+      :create_time,
+      :update_time,
+      :kms_key_id,
+      :position_filtering,
+      :event_bridge_enabled,
+      :kms_key_enable_geospatial_queries)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Contains the device position details.
     #
-    # @!attribute [rw] accuracy
-    #   The accuracy of the device position.
-    #   @return [Types::PositionalAccuracy]
-    #
     # @!attribute [rw] device_id
     #   The device whose position you retrieved.
     #   @return [String]
-    #
-    # @!attribute [rw] position
-    #   The last known device position.
-    #   @return [Array<Float>]
-    #
-    # @!attribute [rw] position_properties
-    #   The properties associated with the position.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] received_time
-    #   The timestamp for when the tracker resource received the device
-    #   position in [ ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
     #
     # @!attribute [rw] sample_time
     #   The timestamp at which the device's position was determined. Uses [
@@ -2799,45 +2823,45 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
+    # @!attribute [rw] received_time
+    #   The timestamp for when the tracker resource received the device
+    #   position in [ ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] position
+    #   The last known device position.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] accuracy
+    #   The accuracy of the device position.
+    #   @return [Types::PositionalAccuracy]
+    #
+    # @!attribute [rw] position_properties
+    #   The properties associated with the position.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DevicePosition AWS API Documentation
     #
     class DevicePosition < Struct.new(
-      :accuracy,
       :device_id,
-      :position,
-      :position_properties,
+      :sample_time,
       :received_time,
-      :sample_time)
+      :position,
+      :accuracy,
+      :position_properties)
       SENSITIVE = [:position, :position_properties]
       include Aws::Structure
     end
 
     # Contains the position update details for a device.
     #
-    # @!attribute [rw] accuracy
-    #   The accuracy of the device position.
-    #   @return [Types::PositionalAccuracy]
-    #
     # @!attribute [rw] device_id
     #   The device associated to the position update.
     #   @return [String]
-    #
-    # @!attribute [rw] position
-    #   The latest device position defined in [WGS 84][1] format: `[X or
-    #   longitude, Y or latitude]`.
-    #
-    #
-    #
-    #   [1]: https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84
-    #   @return [Array<Float>]
-    #
-    # @!attribute [rw] position_properties
-    #   Associates one of more properties with the position update. A
-    #   property is a key-value pair stored with the position update and
-    #   added to any geofence event the update may trigger.
-    #
-    #   Format: `"key" : "value"`
-    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] sample_time
     #   The timestamp at which the device's position was determined. Uses
@@ -2848,18 +2872,93 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
+    # @!attribute [rw] position
+    #   The latest device position defined in [WGS 84][1] format: `[X or
+    #   longitude, Y or latitude]`.
+    #
+    #
+    #
+    #   [1]: https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] accuracy
+    #   The accuracy of the device position.
+    #   @return [Types::PositionalAccuracy]
+    #
+    # @!attribute [rw] position_properties
+    #   Associates one of more properties with the position update. A
+    #   property is a key-value pair stored with the position update and
+    #   added to any geofence event the update may trigger.
+    #
+    #   Format: `"key" : "value"`
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DevicePositionUpdate AWS API Documentation
     #
     class DevicePositionUpdate < Struct.new(
-      :accuracy,
       :device_id,
+      :sample_time,
       :position,
-      :position_properties,
-      :sample_time)
+      :accuracy,
+      :position_properties)
       SENSITIVE = [:position, :position_properties]
       include Aws::Structure
     end
 
+    # The device's position, IP address, and Wi-Fi access points.
+    #
+    # @!attribute [rw] device_id
+    #   The device identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_time
+    #   The timestamp at which the device's position was determined. Uses [
+    #   ISO 8601 ][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] position
+    #   The last known device position.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] accuracy
+    #   Defines the level of certainty of the position.
+    #   @return [Types::PositionalAccuracy]
+    #
+    # @!attribute [rw] ipv_4_address
+    #   The device's Ipv4 address.
+    #   @return [String]
+    #
+    # @!attribute [rw] wi_fi_access_points
+    #   The Wi-Fi access points the device is using.
+    #   @return [Array<Types::WiFiAccessPoint>]
+    #
+    # @!attribute [rw] cell_signals
+    #   The cellular network infrastructure that the device is connected to.
+    #   @return [Types::CellSignals]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DeviceState AWS API Documentation
+    #
+    class DeviceState < Struct.new(
+      :device_id,
+      :sample_time,
+      :position,
+      :accuracy,
+      :ipv_4_address,
+      :wi_fi_access_points,
+      :cell_signals)
+      SENSITIVE = [:position]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tracker_name
+    #   The name of the tracker resource to be dissociated from the
+    #   consumer.
+    #   @return [String]
+    #
     # @!attribute [rw] consumer_arn
     #   The Amazon Resource Name (ARN) for the geofence collection to be
     #   disassociated from the tracker resource. Used when you need to
@@ -2871,16 +2970,11 @@ module Aws::LocationService
     #   ^
     #   @return [String]
     #
-    # @!attribute [rw] tracker_name
-    #   The name of the tracker resource to be dissociated from the
-    #   consumer.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/DisassociateTrackerConsumerRequest AWS API Documentation
     #
     class DisassociateTrackerConsumerRequest < Struct.new(
-      :consumer_arn,
-      :tracker_name)
+      :tracker_name,
+      :consumer_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2889,21 +2983,187 @@ module Aws::LocationService
     #
     class DisassociateTrackerConsumerResponse < Aws::EmptyStructure; end
 
+    # The device's position, IP address, and WiFi access points.
+    #
+    # @!attribute [rw] position
+    #   The device's position.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] speed
+    #   The device's speed.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ForecastGeofenceEventsDeviceState AWS API Documentation
+    #
+    class ForecastGeofenceEventsDeviceState < Struct.new(
+      :position,
+      :speed)
+      SENSITIVE = [:position]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collection_name
+    #   The name of the geofence collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_state
+    #   The device's state, including current position and speed.
+    #   @return [Types::ForecastGeofenceEventsDeviceState]
+    #
+    # @!attribute [rw] time_horizon_minutes
+    #   Specifies the time horizon in minutes for the forecasted events.
+    #   @return [Float]
+    #
+    # @!attribute [rw] distance_unit
+    #   The distance unit used for the `NearestDistance` property returned
+    #   in a forecasted event. The measurement system must match for
+    #   `DistanceUnit` and `SpeedUnit`; if `Kilometers` is specified for
+    #   `DistanceUnit`, then `SpeedUnit` must be `KilometersPerHour`.
+    #
+    #   Default Value: `Kilometers`
+    #   @return [String]
+    #
+    # @!attribute [rw] speed_unit
+    #   The speed unit for the device captured by the device state. The
+    #   measurement system must match for `DistanceUnit` and `SpeedUnit`; if
+    #   `Kilometers` is specified for `DistanceUnit`, then `SpeedUnit` must
+    #   be `KilometersPerHour`.
+    #
+    #   Default Value: `KilometersPerHour`.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token specifying which page of results to return in
+    #   the response. If no token is provided, the default page is the first
+    #   page.
+    #
+    #   Default value: `null`
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   An optional limit for the number of resources returned in a single
+    #   call.
+    #
+    #   Default value: `20`
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ForecastGeofenceEventsRequest AWS API Documentation
+    #
+    class ForecastGeofenceEventsRequest < Struct.new(
+      :collection_name,
+      :device_state,
+      :time_horizon_minutes,
+      :distance_unit,
+      :speed_unit,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] forecasted_events
+    #   The list of forecasted events.
+    #   @return [Array<Types::ForecastedEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token specifying which page of results to return in
+    #   the response. If no token is provided, the default page is the first
+    #   page.
+    #   @return [String]
+    #
+    # @!attribute [rw] distance_unit
+    #   The distance unit for the forecasted events.
+    #   @return [String]
+    #
+    # @!attribute [rw] speed_unit
+    #   The speed unit for the forecasted events.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ForecastGeofenceEventsResponse AWS API Documentation
+    #
+    class ForecastGeofenceEventsResponse < Struct.new(
+      :forecasted_events,
+      :next_token,
+      :distance_unit,
+      :speed_unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A forecasted event represents a geofence event in relation to the
+    # requested device state, that may occur given the provided device state
+    # and time horizon.
+    #
+    # @!attribute [rw] event_id
+    #   The forecasted event identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] geofence_id
+    #   The geofence identifier pertaining to the forecasted event.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_device_in_geofence
+    #   Indicates if the device is located within the geofence.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] nearest_distance
+    #   The closest distance from the device's position to the geofence.
+    #   @return [Float]
+    #
+    # @!attribute [rw] event_type
+    #   The event type, forecasting three states for which a device can be
+    #   in relative to a geofence:
+    #
+    #   `ENTER`: If a device is outside of a geofence, but would breach the
+    #   fence if the device is moving at its current speed within time
+    #   horizon window.
+    #
+    #   `EXIT`: If a device is inside of a geofence, but would breach the
+    #   fence if the device is moving at its current speed within time
+    #   horizon window.
+    #
+    #   `IDLE`: If a device is inside of a geofence, and the device is not
+    #   moving.
+    #   @return [String]
+    #
+    # @!attribute [rw] forecasted_breach_time
+    #   The forecasted time the device will breach the geofence in [ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] geofence_properties
+    #   The geofence properties.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ForecastedEvent AWS API Documentation
+    #
+    class ForecastedEvent < Struct.new(
+      :event_id,
+      :geofence_id,
+      :is_device_in_geofence,
+      :nearest_distance,
+      :event_type,
+      :forecasted_breach_time,
+      :geofence_properties)
+      SENSITIVE = [:geofence_properties]
+      include Aws::Structure
+    end
+
     # Contains the geofence geometry details.
     #
     # A geofence geometry is made up of either a polygon or a circle. Can be
-    # either a polygon or a circle. Including both will return a validation
-    # error.
+    # a polygon, a circle or a polygon encoded in Geobuf format. Including
+    # multiple selections will return a validation error.
     #
     # <note markdown="1"> Amazon Location doesn't currently support polygons with holes,
     # multipolygons, polygons that are wound clockwise, or that cross the
     # antimeridian.
     #
     #  </note>
-    #
-    # @!attribute [rw] circle
-    #   A circle on the earth, as defined by a center point and a radius.
-    #   @return [Types::Circle]
     #
     # @!attribute [rw] polygon
     #   A polygon is a list of linear rings which are each made up of a list
@@ -2929,42 +3189,36 @@ module Aws::LocationService
     #   1,000 vertices.
     #   @return [Array<Array<Array<Float>>>]
     #
+    # @!attribute [rw] circle
+    #   A circle on the earth, as defined by a center point and a radius.
+    #   @return [Types::Circle]
+    #
+    # @!attribute [rw] geobuf
+    #   Geobuf is a compact binary encoding for geographic data that
+    #   provides lossless compression of GeoJSON polygons. The Geobuf must
+    #   be Base64-encoded.
+    #
+    #   A polygon in Geobuf format can have up to 100,000 vertices.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GeofenceGeometry AWS API Documentation
     #
     class GeofenceGeometry < Struct.new(
+      :polygon,
       :circle,
-      :polygon)
-      SENSITIVE = [:circle]
+      :geobuf)
+      SENSITIVE = [:circle, :geobuf]
       include Aws::Structure
     end
 
+    # @!attribute [rw] tracker_name
+    #   The tracker resource receiving the request for the device position
+    #   history.
+    #   @return [String]
+    #
     # @!attribute [rw] device_id
     #   The device whose position history you want to retrieve.
     #   @return [String]
-    #
-    # @!attribute [rw] end_time_exclusive
-    #   Specify the end time for the position history in [ ISO 8601][1]
-    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`. By default, the value will be
-    #   the time that the request is made.
-    #
-    #   Requirement:
-    #
-    #   * The time specified for `EndTimeExclusive` must be after the time
-    #     for `StartTimeInclusive`.
-    #
-    #   ^
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @!attribute [rw] max_results
-    #   An optional limit for the number of device positions returned in a
-    #   single call.
-    #
-    #   Default value: `100`
-    #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   The pagination token specifying which page of results to return in
@@ -2991,20 +3245,39 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
-    # @!attribute [rw] tracker_name
-    #   The tracker resource receiving the request for the device position
-    #   history.
-    #   @return [String]
+    # @!attribute [rw] end_time_exclusive
+    #   Specify the end time for the position history in [ ISO 8601][1]
+    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`. By default, the value will be
+    #   the time that the request is made.
+    #
+    #   Requirement:
+    #
+    #   * The time specified for `EndTimeExclusive` must be after the time
+    #     for `StartTimeInclusive`.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   An optional limit for the number of device positions returned in a
+    #   single call.
+    #
+    #   Default value: `100`
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetDevicePositionHistoryRequest AWS API Documentation
     #
     class GetDevicePositionHistoryRequest < Struct.new(
+      :tracker_name,
       :device_id,
-      :end_time_exclusive,
-      :max_results,
       :next_token,
       :start_time_inclusive,
-      :tracker_name)
+      :end_time_exclusive,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3028,47 +3301,26 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @!attribute [rw] device_id
-    #   The device whose position you want to retrieve.
-    #   @return [String]
-    #
     # @!attribute [rw] tracker_name
     #   The tracker resource receiving the position update.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The device whose position you want to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetDevicePositionRequest AWS API Documentation
     #
     class GetDevicePositionRequest < Struct.new(
-      :device_id,
-      :tracker_name)
+      :tracker_name,
+      :device_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] accuracy
-    #   The accuracy of the device position.
-    #   @return [Types::PositionalAccuracy]
-    #
     # @!attribute [rw] device_id
     #   The device whose position you retrieved.
     #   @return [String]
-    #
-    # @!attribute [rw] position
-    #   The last known device position.
-    #   @return [Array<Float>]
-    #
-    # @!attribute [rw] position_properties
-    #   The properties associated with the position.
-    #   @return [Hash<String,String>]
-    #
-    # @!attribute [rw] received_time
-    #   The timestamp for when the tracker resource received the device
-    #   position in [ ISO 8601 ][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
     #
     # @!attribute [rw] sample_time
     #   The timestamp at which the device's position was determined. Uses [
@@ -3079,15 +3331,36 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
+    # @!attribute [rw] received_time
+    #   The timestamp for when the tracker resource received the device
+    #   position. Uses [ ISO 8601 ][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] position
+    #   The last known device position.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] accuracy
+    #   The accuracy of the device position.
+    #   @return [Types::PositionalAccuracy]
+    #
+    # @!attribute [rw] position_properties
+    #   The properties associated with the position.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetDevicePositionResponse AWS API Documentation
     #
     class GetDevicePositionResponse < Struct.new(
-      :accuracy,
       :device_id,
-      :position,
-      :position_properties,
+      :sample_time,
       :received_time,
-      :sample_time)
+      :position,
+      :accuracy,
+      :position_properties)
       SENSITIVE = [:position, :position_properties]
       include Aws::Structure
     end
@@ -3109,26 +3382,9 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @!attribute [rw] create_time
-    #   The timestamp for when the geofence collection was created in [ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
     # @!attribute [rw] geofence_id
     #   The geofence identifier.
     #   @return [String]
-    #
-    # @!attribute [rw] geofence_properties
-    #   User defined properties of the geofence. A property is a key-value
-    #   pair stored with the geofence and added to any geofence event
-    #   triggered with that geofence.
-    #
-    #   Format: `"key" : "value"`
-    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] geometry
     #   Contains the geofence geometry details describing a polygon or a
@@ -3150,6 +3406,15 @@ module Aws::LocationService
     #   * `DELETING` — The geofence is being deleted from the system index.
     #   @return [String]
     #
+    # @!attribute [rw] create_time
+    #   The timestamp for when the geofence collection was created in [ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
     # @!attribute [rw] update_time
     #   The timestamp for when the geofence collection was last updated in
     #   [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
@@ -3159,19 +3424,31 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
+    # @!attribute [rw] geofence_properties
+    #   User defined properties of the geofence. A property is a key-value
+    #   pair stored with the geofence and added to any geofence event
+    #   triggered with that geofence.
+    #
+    #   Format: `"key" : "value"`
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetGeofenceResponse AWS API Documentation
     #
     class GetGeofenceResponse < Struct.new(
-      :create_time,
       :geofence_id,
-      :geofence_properties,
       :geometry,
       :status,
-      :update_time)
+      :create_time,
+      :update_time,
+      :geofence_properties)
       SENSITIVE = [:geofence_properties]
       include Aws::Structure
     end
 
+    # @!attribute [rw] map_name
+    #   The map resource associated with the glyph ﬁle.
+    #   @return [String]
+    #
     # @!attribute [rw] font_stack
     #   A comma-separated list of fonts to load glyphs from in order of
     #   preference. For example, `Noto Sans Regular, Arial Unicode`.
@@ -3258,17 +3535,13 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
     #   @return [String]
     #
-    # @!attribute [rw] map_name
-    #   The map resource associated with the glyph ﬁle.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapGlyphsRequest AWS API Documentation
     #
     class GetMapGlyphsRequest < Struct.new(
+      :map_name,
       :font_stack,
       :font_unicode_range,
-      :key,
-      :map_name)
+      :key)
       SENSITIVE = [:key]
       include Aws::Structure
     end
@@ -3277,24 +3550,28 @@ module Aws::LocationService
     #   The glyph, as binary blob.
     #   @return [String]
     #
-    # @!attribute [rw] cache_control
-    #   The HTTP Cache-Control directive for the value.
-    #   @return [String]
-    #
     # @!attribute [rw] content_type
     #   The map glyph content type. For example, `application/octet-stream`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_control
+    #   The HTTP Cache-Control directive for the value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapGlyphsResponse AWS API Documentation
     #
     class GetMapGlyphsResponse < Struct.new(
       :blob,
-      :cache_control,
-      :content_type)
+      :content_type,
+      :cache_control)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] map_name
+    #   The map resource associated with the sprite ﬁle.
+    #   @return [String]
+    #
     # @!attribute [rw] file_name
     #   The name of the sprite ﬁle. Use the following ﬁle names for the
     #   sprite sheet:
@@ -3319,16 +3596,12 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
     #   @return [String]
     #
-    # @!attribute [rw] map_name
-    #   The map resource associated with the sprite ﬁle.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapSpritesRequest AWS API Documentation
     #
     class GetMapSpritesRequest < Struct.new(
+      :map_name,
       :file_name,
-      :key,
-      :map_name)
+      :key)
       SENSITIVE = [:key]
       include Aws::Structure
     end
@@ -3337,26 +3610,30 @@ module Aws::LocationService
     #   Contains the body of the sprite sheet or JSON offset ﬁle.
     #   @return [String]
     #
-    # @!attribute [rw] cache_control
-    #   The HTTP Cache-Control directive for the value.
-    #   @return [String]
-    #
     # @!attribute [rw] content_type
     #   The content type of the sprite sheet and offsets. For example, the
     #   sprite sheet content type is `image/png`, and the sprite offset JSON
     #   document is `application/json`.
     #   @return [String]
     #
+    # @!attribute [rw] cache_control
+    #   The HTTP Cache-Control directive for the value.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapSpritesResponse AWS API Documentation
     #
     class GetMapSpritesResponse < Struct.new(
       :blob,
-      :cache_control,
-      :content_type)
+      :content_type,
+      :cache_control)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] map_name
+    #   The map resource to retrieve the style descriptor from.
+    #   @return [String]
+    #
     # @!attribute [rw] key
     #   The optional [API key][1] to authorize the request.
     #
@@ -3365,15 +3642,11 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
     #   @return [String]
     #
-    # @!attribute [rw] map_name
-    #   The map resource to retrieve the style descriptor from.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapStyleDescriptorRequest AWS API Documentation
     #
     class GetMapStyleDescriptorRequest < Struct.new(
-      :key,
-      :map_name)
+      :map_name,
+      :key)
       SENSITIVE = [:key]
       include Aws::Structure
     end
@@ -3382,35 +3655,31 @@ module Aws::LocationService
     #   Contains the body of the style descriptor.
     #   @return [String]
     #
-    # @!attribute [rw] cache_control
-    #   The HTTP Cache-Control directive for the value.
-    #   @return [String]
-    #
     # @!attribute [rw] content_type
     #   The style descriptor's content type. For example,
     #   `application/json`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_control
+    #   The HTTP Cache-Control directive for the value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapStyleDescriptorResponse AWS API Documentation
     #
     class GetMapStyleDescriptorResponse < Struct.new(
       :blob,
-      :cache_control,
-      :content_type)
+      :content_type,
+      :cache_control)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] key
-    #   The optional [API key][1] to authorize the request.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
-    #   @return [String]
-    #
     # @!attribute [rw] map_name
     #   The map resource to retrieve the map tiles from.
+    #   @return [String]
+    #
+    # @!attribute [rw] z
+    #   The zoom value for the map tile.
     #   @return [String]
     #
     # @!attribute [rw] x
@@ -3421,18 +3690,22 @@ module Aws::LocationService
     #   The Y axis value for the map tile.
     #   @return [String]
     #
-    # @!attribute [rw] z
-    #   The zoom value for the map tile.
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapTileRequest AWS API Documentation
     #
     class GetMapTileRequest < Struct.new(
-      :key,
       :map_name,
+      :z,
       :x,
       :y,
-      :z)
+      :key)
       SENSITIVE = [:key]
       include Aws::Structure
     end
@@ -3441,21 +3714,21 @@ module Aws::LocationService
     #   Contains Mapbox Vector Tile (MVT) data.
     #   @return [String]
     #
-    # @!attribute [rw] cache_control
-    #   The HTTP Cache-Control directive for the value.
-    #   @return [String]
-    #
     # @!attribute [rw] content_type
     #   The map tile's content type. For example,
     #   `application/vnd.mapbox-vector-tile`.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_control
+    #   The HTTP Cache-Control directive for the value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetMapTileResponse AWS API Documentation
     #
     class GetMapTileResponse < Struct.new(
       :blob,
-      :cache_control,
-      :content_type)
+      :content_type,
+      :cache_control)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3465,12 +3738,8 @@ module Aws::LocationService
     #   search.
     #   @return [String]
     #
-    # @!attribute [rw] key
-    #   The optional [API key][1] to authorize the request.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    # @!attribute [rw] place_id
+    #   The identifier of the place to find.
     #   @return [String]
     #
     # @!attribute [rw] language
@@ -3498,17 +3767,21 @@ module Aws::LocationService
     #   [1]: https://tools.ietf.org/search/bcp47
     #   @return [String]
     #
-    # @!attribute [rw] place_id
-    #   The identifier of the place to find.
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/GetPlaceRequest AWS API Documentation
     #
     class GetPlaceRequest < Struct.new(
       :index_name,
-      :key,
+      :place_id,
       :language,
-      :place_id)
+      :key)
       SENSITIVE = [:key]
       include Aws::Structure
     end
@@ -3522,6 +3795,38 @@ module Aws::LocationService
     class GetPlaceResponse < Struct.new(
       :place)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The inferred state of the device, given the provided position, IP
+    # address, cellular signals, and Wi-Fi- access points.
+    #
+    # @!attribute [rw] position
+    #   The device position inferred by the provided position, IP address,
+    #   cellular signals, and Wi-Fi- access points.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] accuracy
+    #   The level of certainty of the inferred position.
+    #   @return [Types::PositionalAccuracy]
+    #
+    # @!attribute [rw] deviation_distance
+    #   The distance between the inferred position and the device's
+    #   self-reported position.
+    #   @return [Float]
+    #
+    # @!attribute [rw] proxy_detected
+    #   Indicates if a proxy was used.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/InferredState AWS API Documentation
+    #
+    class InferredState < Struct.new(
+      :position,
+      :accuracy,
+      :deviation_distance,
+      :proxy_detected)
+      SENSITIVE = [:position]
       include Aws::Structure
     end
 
@@ -3564,6 +3869,34 @@ module Aws::LocationService
     #
     # [1]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #
+    # @!attribute [rw] start_position
+    #   The starting position of the leg. Follows the format
+    #   `[longitude,latitude]`.
+    #
+    #   <note markdown="1"> If the `StartPosition` isn't located on a road, it's [snapped to a
+    #   nearby road][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] end_position
+    #   The terminating position of the leg. Follows the format
+    #   `[longitude,latitude]`.
+    #
+    #   <note markdown="1"> If the `EndPosition` isn't located on a road, it's [snapped to a
+    #   nearby road][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/nap-to-nearby-road.html
+    #   @return [Array<Float>]
+    #
     # @!attribute [rw] distance
     #   The distance between the leg's `StartPosition` and `EndPosition`
     #   along a calculated route.
@@ -3580,37 +3913,9 @@ module Aws::LocationService
     #   in the request determines the calculated time.
     #   @return [Float]
     #
-    # @!attribute [rw] end_position
-    #   The terminating position of the leg. Follows the format
-    #   `[longitude,latitude]`.
-    #
-    #   <note markdown="1"> If the `EndPosition` isn't located on a road, it's [snapped to a
-    #   nearby road][1].
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/nap-to-nearby-road.html
-    #   @return [Array<Float>]
-    #
     # @!attribute [rw] geometry
     #   Contains the calculated route's path as a linestring geometry.
     #   @return [Types::LegGeometry]
-    #
-    # @!attribute [rw] start_position
-    #   The starting position of the leg. Follows the format
-    #   `[longitude,latitude]`.
-    #
-    #   <note markdown="1"> If the `StartPosition` isn't located on a road, it's [snapped to a
-    #   nearby road][1].
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
-    #   @return [Array<Float>]
     #
     # @!attribute [rw] steps
     #   Contains a list of steps, which represent subsections of a leg. Each
@@ -3622,13 +3927,13 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/Leg AWS API Documentation
     #
     class Leg < Struct.new(
+      :start_position,
+      :end_position,
       :distance,
       :duration_seconds,
-      :end_position,
       :geometry,
-      :start_position,
       :steps)
-      SENSITIVE = [:end_position, :start_position]
+      SENSITIVE = [:start_position, :end_position]
       include Aws::Structure
     end
 
@@ -3655,9 +3960,9 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @!attribute [rw] filter_geometry
-    #   The geomerty used to filter device positions.
-    #   @return [Types::TrackingFilterGeometry]
+    # @!attribute [rw] tracker_name
+    #   The tracker resource containing the requested devices.
+    #   @return [String]
     #
     # @!attribute [rw] max_results
     #   An optional limit for the number of entries returned in a single
@@ -3674,17 +3979,17 @@ module Aws::LocationService
     #   Default value: `null`
     #   @return [String]
     #
-    # @!attribute [rw] tracker_name
-    #   The tracker resource containing the requested devices.
-    #   @return [String]
+    # @!attribute [rw] filter_geometry
+    #   The geometry used to filter device positions.
+    #   @return [Types::TrackingFilterGeometry]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListDevicePositionsRequest AWS API Documentation
     #
     class ListDevicePositionsRequest < Struct.new(
-      :filter_geometry,
+      :tracker_name,
       :max_results,
       :next_token,
-      :tracker_name)
+      :filter_geometry)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3710,22 +4015,9 @@ module Aws::LocationService
 
     # Contains the tracker resource details.
     #
-    # @!attribute [rw] accuracy
-    #   The accuracy of the device position.
-    #   @return [Types::PositionalAccuracy]
-    #
     # @!attribute [rw] device_id
     #   The ID of the device for this position.
     #   @return [String]
-    #
-    # @!attribute [rw] position
-    #   The last known device position. Empty if no positions currently
-    #   stored.
-    #   @return [Array<Float>]
-    #
-    # @!attribute [rw] position_properties
-    #   The properties associated with the position.
-    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] sample_time
     #   The timestamp at which the device position was determined. Uses [
@@ -3736,14 +4028,27 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
+    # @!attribute [rw] position
+    #   The last known device position. Empty if no positions currently
+    #   stored.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] accuracy
+    #   The accuracy of the device position.
+    #   @return [Types::PositionalAccuracy]
+    #
+    # @!attribute [rw] position_properties
+    #   The properties associated with the position.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListDevicePositionsResponseEntry AWS API Documentation
     #
     class ListDevicePositionsResponseEntry < Struct.new(
-      :accuracy,
       :device_id,
+      :sample_time,
       :position,
-      :position_properties,
-      :sample_time)
+      :accuracy,
+      :position_properties)
       SENSITIVE = [:position, :position_properties]
       include Aws::Structure
     end
@@ -3794,18 +4099,14 @@ module Aws::LocationService
 
     # Contains the geofence collection details.
     #
+    # <note markdown="1"> The returned geometry will always match the geometry format used when
+    # the geofence was created.
+    #
+    #  </note>
+    #
     # @!attribute [rw] collection_name
     #   The name of the geofence collection.
     #   @return [String]
-    #
-    # @!attribute [rw] create_time
-    #   The timestamp for when the geofence collection was created in [ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
     #
     # @!attribute [rw] description
     #   The description for the geofence collection
@@ -3818,6 +4119,15 @@ module Aws::LocationService
     # @!attribute [rw] pricing_plan_data_source
     #   No longer used. Always returns an empty string.
     #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The timestamp for when the geofence collection was created in [ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
     #
     # @!attribute [rw] update_time
     #   Specifies a timestamp for when the resource was last updated in [ISO
@@ -3832,10 +4142,10 @@ module Aws::LocationService
     #
     class ListGeofenceCollectionsResponseEntry < Struct.new(
       :collection_name,
-      :create_time,
       :description,
       :pricing_plan,
       :pricing_plan_data_source,
+      :create_time,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -3843,26 +4153,14 @@ module Aws::LocationService
 
     # Contains a list of geofences stored in a given geofence collection.
     #
-    # @!attribute [rw] create_time
-    #   The timestamp for when the geofence was stored in a geofence
-    #   collection in [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
+    # <note markdown="1"> The returned geometry will always match the geometry format used when
+    # the geofence was created.
     #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
+    #  </note>
     #
     # @!attribute [rw] geofence_id
     #   The geofence identifier.
     #   @return [String]
-    #
-    # @!attribute [rw] geofence_properties
-    #   User defined properties of the geofence. A property is a key-value
-    #   pair stored with the geofence and added to any geofence event
-    #   triggered with that geofence.
-    #
-    #   Format: `"key" : "value"`
-    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] geometry
     #   Contains the geofence geometry details describing a polygon or a
@@ -3884,6 +4182,15 @@ module Aws::LocationService
     #   * `DELETING` — The geofence is being deleted from the system index.
     #   @return [String]
     #
+    # @!attribute [rw] create_time
+    #   The timestamp for when the geofence was stored in a geofence
+    #   collection in [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
     # @!attribute [rw] update_time
     #   The timestamp for when the geofence was last updated in [ISO
     #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`
@@ -3893,15 +4200,23 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
+    # @!attribute [rw] geofence_properties
+    #   User defined properties of the geofence. A property is a key-value
+    #   pair stored with the geofence and added to any geofence event
+    #   triggered with that geofence.
+    #
+    #   Format: `"key" : "value"`
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListGeofenceResponseEntry AWS API Documentation
     #
     class ListGeofenceResponseEntry < Struct.new(
-      :create_time,
       :geofence_id,
-      :geofence_properties,
       :geometry,
       :status,
-      :update_time)
+      :create_time,
+      :update_time,
+      :geofence_properties)
       SENSITIVE = [:geofence_properties]
       include Aws::Structure
     end
@@ -3909,13 +4224,6 @@ module Aws::LocationService
     # @!attribute [rw] collection_name
     #   The name of the geofence collection storing the list of geofences.
     #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   An optional limit for the number of geofences returned in a single
-    #   call.
-    #
-    #   Default value: `100`
-    #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   The pagination token specifying which page of results to return in
@@ -3925,12 +4233,19 @@ module Aws::LocationService
     #   Default value: `null`
     #   @return [String]
     #
+    # @!attribute [rw] max_results
+    #   An optional limit for the number of geofences returned in a single
+    #   call.
+    #
+    #   Default value: `100`
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListGeofencesRequest AWS API Documentation
     #
     class ListGeofencesRequest < Struct.new(
       :collection_name,
-      :max_results,
-      :next_token)
+      :next_token,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3954,10 +4269,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @!attribute [rw] filter
-    #   Optionally filter the list to only `Active` or `Expired` API keys.
-    #   @return [Types::ApiKeyFilter]
-    #
     # @!attribute [rw] max_results
     #   An optional limit for the number of resources returned in a single
     #   call.
@@ -3973,12 +4284,16 @@ module Aws::LocationService
     #   Default value: `null`
     #   @return [String]
     #
+    # @!attribute [rw] filter
+    #   Optionally filter the list to only `Active` or `Expired` API keys.
+    #   @return [Types::ApiKeyFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListKeysRequest AWS API Documentation
     #
     class ListKeysRequest < Struct.new(
-      :filter,
       :max_results,
-      :next_token)
+      :next_token,
+      :filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4006,17 +4321,8 @@ module Aws::LocationService
 
     # An API key resource listed in your Amazon Web Services account.
     #
-    # @!attribute [rw] create_time
-    #   The timestamp of when the API key was created, in [ ISO 8601][1]
-    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
-    #
-    # @!attribute [rw] description
-    #   The optional description for the API key resource.
+    # @!attribute [rw] key_name
+    #   The name of the API key resource.
     #   @return [String]
     #
     # @!attribute [rw] expire_time
@@ -4028,14 +4334,23 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
-    # @!attribute [rw] key_name
-    #   The name of the API key resource.
+    # @!attribute [rw] description
+    #   The optional description for the API key resource.
     #   @return [String]
     #
     # @!attribute [rw] restrictions
     #   API Restrictions on the allowed actions, resources, and referers for
     #   an API key resource.
     #   @return [Types::ApiKeyRestrictions]
+    #
+    # @!attribute [rw] create_time
+    #   The timestamp of when the API key was created, in [ ISO 8601][1]
+    #   format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
     #
     # @!attribute [rw] update_time
     #   The timestamp of when the API key was last updated, in [ ISO
@@ -4049,11 +4364,11 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListKeysResponseEntry AWS API Documentation
     #
     class ListKeysResponseEntry < Struct.new(
-      :create_time,
-      :description,
-      :expire_time,
       :key_name,
+      :expire_time,
+      :description,
       :restrictions,
+      :create_time,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -4105,6 +4420,22 @@ module Aws::LocationService
     # Contains details of an existing map resource in your Amazon Web
     # Services account.
     #
+    # @!attribute [rw] map_name
+    #   The name of the associated map resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the map resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   Specifies the data provider for the associated map tiles.
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan
+    #   No longer used. Always returns `RequestBasedUsage`.
+    #   @return [String]
+    #
     # @!attribute [rw] create_time
     #   The timestamp for when the map resource was created in [ISO 8601][1]
     #   format: `YYYY-MM-DDThh:mm:ss.sssZ`.
@@ -4113,22 +4444,6 @@ module Aws::LocationService
     #
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
-    #
-    # @!attribute [rw] data_source
-    #   Specifies the data provider for the associated map tiles.
-    #   @return [String]
-    #
-    # @!attribute [rw] description
-    #   The description for the map resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] map_name
-    #   The name of the associated map resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] pricing_plan
-    #   No longer used. Always returns `RequestBasedUsage`.
-    #   @return [String]
     #
     # @!attribute [rw] update_time
     #   The timestamp for when the map resource was last updated in [ISO
@@ -4142,11 +4457,11 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListMapsResponseEntry AWS API Documentation
     #
     class ListMapsResponseEntry < Struct.new(
-      :create_time,
-      :data_source,
-      :description,
       :map_name,
+      :description,
+      :data_source,
       :pricing_plan,
+      :create_time,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -4198,14 +4513,13 @@ module Aws::LocationService
 
     # A place index resource listed in your Amazon Web Services account.
     #
-    # @!attribute [rw] create_time
-    #   The timestamp for when the place index resource was created in [ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    # @!attribute [rw] index_name
+    #   The name of the place index resource.
+    #   @return [String]
     #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
+    # @!attribute [rw] description
+    #   The optional description for the place index resource.
+    #   @return [String]
     #
     # @!attribute [rw] data_source
     #   The data provider of geospatial data. Values can be one of the
@@ -4225,17 +4539,18 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   The optional description for the place index resource.
-    #   @return [String]
-    #
-    # @!attribute [rw] index_name
-    #   The name of the place index resource.
-    #   @return [String]
-    #
     # @!attribute [rw] pricing_plan
     #   No longer used. Always returns `RequestBasedUsage`.
     #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The timestamp for when the place index resource was created in [ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
     #
     # @!attribute [rw] update_time
     #   The timestamp for when the place index resource was last updated in
@@ -4249,11 +4564,11 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListPlaceIndexesResponseEntry AWS API Documentation
     #
     class ListPlaceIndexesResponseEntry < Struct.new(
-      :create_time,
-      :data_source,
-      :description,
       :index_name,
+      :description,
+      :data_source,
       :pricing_plan,
+      :create_time,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -4309,18 +4624,9 @@ module Aws::LocationService
     #   The name of the route calculator resource.
     #   @return [String]
     #
-    # @!attribute [rw] create_time
-    #   The timestamp when the route calculator resource was created in [ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #   * For example, `2020–07-2T12:15:20.000Z+01:00`
-    #
-    #   ^
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
+    # @!attribute [rw] description
+    #   The optional description of the route calculator resource.
+    #   @return [String]
     #
     # @!attribute [rw] data_source
     #   The data provider of traffic and road network data. Indicates one of
@@ -4340,13 +4646,22 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   The optional description of the route calculator resource.
-    #   @return [String]
-    #
     # @!attribute [rw] pricing_plan
     #   Always returns `RequestBasedUsage`.
     #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The timestamp when the route calculator resource was created in [ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #   * For example, `2020–07-2T12:15:20.000Z+01:00`
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
     #
     # @!attribute [rw] update_time
     #   The timestamp when the route calculator resource was last updated in
@@ -4365,10 +4680,10 @@ module Aws::LocationService
     #
     class ListRouteCalculatorsResponseEntry < Struct.new(
       :calculator_name,
-      :create_time,
-      :data_source,
       :description,
+      :data_source,
       :pricing_plan,
+      :create_time,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -4409,6 +4724,11 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @!attribute [rw] tracker_name
+    #   The tracker resource whose associated geofence collections you want
+    #   to list.
+    #   @return [String]
+    #
     # @!attribute [rw] max_results
     #   An optional limit for the number of resources returned in a single
     #   call.
@@ -4424,17 +4744,12 @@ module Aws::LocationService
     #   Default value: `null`
     #   @return [String]
     #
-    # @!attribute [rw] tracker_name
-    #   The tracker resource whose associated geofence collections you want
-    #   to list.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListTrackerConsumersRequest AWS API Documentation
     #
     class ListTrackerConsumersRequest < Struct.new(
+      :tracker_name,
       :max_results,
-      :next_token,
-      :tracker_name)
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4506,14 +4821,9 @@ module Aws::LocationService
 
     # Contains the tracker resource details.
     #
-    # @!attribute [rw] create_time
-    #   The timestamp for when the tracker resource was created in [ ISO
-    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
-    #   @return [Time]
+    # @!attribute [rw] tracker_name
+    #   The name of the tracker resource.
+    #   @return [String]
     #
     # @!attribute [rw] description
     #   The description for the tracker resource.
@@ -4527,9 +4837,14 @@ module Aws::LocationService
     #   No longer used. Always returns an empty string.
     #   @return [String]
     #
-    # @!attribute [rw] tracker_name
-    #   The name of the tracker resource.
-    #   @return [String]
+    # @!attribute [rw] create_time
+    #   The timestamp for when the tracker resource was created in [ ISO
+    #   8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
     #
     # @!attribute [rw] update_time
     #   The timestamp at which the device's position was determined. Uses [
@@ -4543,34 +4858,136 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ListTrackersResponseEntry AWS API Documentation
     #
     class ListTrackersResponseEntry < Struct.new(
-      :create_time,
+      :tracker_name,
       :description,
       :pricing_plan,
       :pricing_plan_data_source,
-      :tracker_name,
+      :create_time,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # Details about the Long-Term Evolution (LTE) network.
+    #
+    # @!attribute [rw] cell_id
+    #   The E-UTRAN Cell Identifier (ECI).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mcc
+    #   The Mobile Country Code (MCC).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mnc
+    #   The Mobile Network Code (MNC)
+    #   @return [Integer]
+    #
+    # @!attribute [rw] local_id
+    #   The LTE local identification information (local ID).
+    #   @return [Types::LteLocalId]
+    #
+    # @!attribute [rw] network_measurements
+    #   The network measurements.
+    #   @return [Array<Types::LteNetworkMeasurements>]
+    #
+    # @!attribute [rw] timing_advance
+    #   Timing Advance (TA).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] nr_capable
+    #   Indicates whether the LTE object is capable of supporting NR (new
+    #   radio).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] rsrp
+    #   Signal power of the reference signal received, measured in
+    #   decibel-milliwatts (dBm).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rsrq
+    #   Signal quality of the reference Signal received, measured in
+    #   decibels (dB).
+    #   @return [Float]
+    #
+    # @!attribute [rw] tac
+    #   LTE Tracking Area Code (TAC).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/LteCellDetails AWS API Documentation
+    #
+    class LteCellDetails < Struct.new(
+      :cell_id,
+      :mcc,
+      :mnc,
+      :local_id,
+      :network_measurements,
+      :timing_advance,
+      :nr_capable,
+      :rsrp,
+      :rsrq,
+      :tac)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # LTE local identification information (local ID).
+    #
+    # @!attribute [rw] earfcn
+    #   E-UTRA (Evolved Universal Terrestrial Radio Access) absolute radio
+    #   frequency channel number (EARFCN).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pci
+    #   Physical Cell ID (PCI).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/LteLocalId AWS API Documentation
+    #
+    class LteLocalId < Struct.new(
+      :earfcn,
+      :pci)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # LTE network measurements.
+    #
+    # @!attribute [rw] earfcn
+    #   E-UTRA (Evolved Universal Terrestrial Radio Access) absolute radio
+    #   frequency channel number (EARFCN).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cell_id
+    #   E-UTRAN Cell Identifier (ECI).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pci
+    #   Physical Cell ID (PCI).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rsrp
+    #   Signal power of the reference signal received, measured in dBm
+    #   (decibel-milliwatts).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rsrq
+    #   Signal quality of the reference Signal received, measured in
+    #   decibels (dB).
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/LteNetworkMeasurements AWS API Documentation
+    #
+    class LteNetworkMeasurements < Struct.new(
+      :earfcn,
+      :cell_id,
+      :pci,
+      :rsrp,
+      :rsrq)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the map tile style selected from an available provider.
-    #
-    # @!attribute [rw] political_view
-    #   Specifies the political view for the style. Leave unset to not use a
-    #   political view, or, for styles that support specific political
-    #   views, you can choose a view, such as `IND` for the Indian view.
-    #
-    #   Default is unset.
-    #
-    #   <note markdown="1"> Not all map resources or styles support political view styles. See
-    #   [Political views][1] for more information.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views
-    #   @return [String]
     #
     # @!attribute [rw] style
     #   Specifies the map style selected from an available data provider.
@@ -4690,11 +5107,41 @@ module Aws::LocationService
     #   [5]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
     #   @return [String]
     #
+    # @!attribute [rw] political_view
+    #   Specifies the political view for the style. Leave unset to not use a
+    #   political view, or, for styles that support specific political
+    #   views, you can choose a view, such as `IND` for the Indian view.
+    #
+    #   Default is unset.
+    #
+    #   <note markdown="1"> Not all map resources or styles support political view styles. See
+    #   [Political views][1] for more information.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_layers
+    #   Specifies the custom layers for the style. Leave unset to not enable
+    #   any custom layer, or, for styles that support custom layers, you can
+    #   enable layer(s), such as POI layer for the VectorEsriNavigation
+    #   style. Default is `unset`.
+    #
+    #   <note markdown="1"> Not all map resources or styles support custom layers. See Custom
+    #   Layers for more information.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfiguration AWS API Documentation
     #
     class MapConfiguration < Struct.new(
+      :style,
       :political_view,
-      :style)
+      :custom_layers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4717,10 +5164,23 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views
     #   @return [String]
     #
+    # @!attribute [rw] custom_layers
+    #   Specifies the custom layers for the style. Leave unset to not enable
+    #   any custom layer, or, for styles that support custom layers, you can
+    #   enable layer(s), such as POI layer for the VectorEsriNavigation
+    #   style. Default is `unset`.
+    #
+    #   <note markdown="1"> Not all map resources or styles support custom layers. See Custom
+    #   Layers for more information.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/MapConfigurationUpdate AWS API Documentation
     #
     class MapConfigurationUpdate < Struct.new(
-      :political_view)
+      :political_view,
+      :custom_layers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4731,21 +5191,42 @@ module Aws::LocationService
     # Not all details are included with all responses. Some details may only
     # be returned by specific data partners.
     #
+    # @!attribute [rw] label
+    #   The full name and address of the point of interest such as a city,
+    #   region, or country. For example, `123 Any Street, Any Town, USA`.
+    #   @return [String]
+    #
+    # @!attribute [rw] geometry
+    #   Places uses a point geometry to specify a location or a Place.
+    #   @return [Types::PlaceGeometry]
+    #
     # @!attribute [rw] address_number
     #   The numerical portion of an address, such as a building number.
     #   @return [String]
     #
-    # @!attribute [rw] categories
-    #   The Amazon Location categories that describe this Place.
+    # @!attribute [rw] street
+    #   The name for a street or a road to identify a location. For example,
+    #   `Main Street`.
+    #   @return [String]
     #
-    #   For more information about using categories, including a list of
-    #   Amazon Location categories, see [Categories and filtering][1], in
-    #   the *Amazon Location Service Developer Guide*.
+    # @!attribute [rw] neighborhood
+    #   The name of a community district. For example, `Downtown`.
+    #   @return [String]
     #
+    # @!attribute [rw] municipality
+    #   A name for a local area, such as a city or town name. For example,
+    #   `Toronto`.
+    #   @return [String]
     #
+    # @!attribute [rw] sub_region
+    #   A county, or an area that's part of a larger region. For example,
+    #   `Metro Vancouver`.
+    #   @return [String]
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
-    #   @return [Array<String>]
+    # @!attribute [rw] region
+    #   A name for an area or geographical division, such as a province or
+    #   state name. For example, `British Columbia`.
+    #   @return [String]
     #
     # @!attribute [rw] country
     #   A country/region specified using [ISO 3166][1] 3-digit
@@ -4756,9 +5237,10 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-3166-country-codes.html
     #   @return [String]
     #
-    # @!attribute [rw] geometry
-    #   Places uses a point geometry to specify a location or a Place.
-    #   @return [Types::PlaceGeometry]
+    # @!attribute [rw] postal_code
+    #   A group of numbers and letters in a country-specific format, which
+    #   accompanies the address for the purpose of identifying a location.
+    #   @return [String]
     #
     # @!attribute [rw] interpolated
     #   `True` if the result is interpolated from other known places.
@@ -4773,49 +5255,19 @@ module Aws::LocationService
     #   between other known addresses.
     #   @return [Boolean]
     #
-    # @!attribute [rw] label
-    #   The full name and address of the point of interest such as a city,
-    #   region, or country. For example, `123 Any Street, Any Town, USA`.
-    #   @return [String]
-    #
-    # @!attribute [rw] municipality
-    #   A name for a local area, such as a city or town name. For example,
-    #   `Toronto`.
-    #   @return [String]
-    #
-    # @!attribute [rw] neighborhood
-    #   The name of a community district. For example, `Downtown`.
-    #   @return [String]
-    #
-    # @!attribute [rw] postal_code
-    #   A group of numbers and letters in a country-specific format, which
-    #   accompanies the address for the purpose of identifying a location.
-    #   @return [String]
-    #
-    # @!attribute [rw] region
-    #   A name for an area or geographical division, such as a province or
-    #   state name. For example, `British Columbia`.
-    #   @return [String]
-    #
-    # @!attribute [rw] street
-    #   The name for a street or a road to identify a location. For example,
-    #   `Main Street`.
-    #   @return [String]
-    #
-    # @!attribute [rw] sub_region
-    #   A county, or an area that's part of a larger region. For example,
-    #   `Metro Vancouver`.
-    #   @return [String]
-    #
-    # @!attribute [rw] supplemental_categories
-    #   Categories from the data provider that describe the Place that are
-    #   not mapped to any Amazon Location categories.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] time_zone
     #   The time zone in which the `Place` is located. Returned only when
     #   using HERE or Grab as the selected partner.
     #   @return [Types::TimeZone]
+    #
+    # @!attribute [rw] unit_type
+    #   For addresses with a `UnitNumber`, the type of unit. For example,
+    #   `Apartment`.
+    #
+    #   <note markdown="1"> Returned only for a place index that uses Esri as a data provider.
+    #
+    #    </note>
+    #   @return [String]
     #
     # @!attribute [rw] unit_number
     #   For addresses with multiple units, the unit identifier. Can include
@@ -4827,11 +5279,29 @@ module Aws::LocationService
     #    </note>
     #   @return [String]
     #
-    # @!attribute [rw] unit_type
-    #   For addresses with a `UnitNumber`, the type of unit. For example,
-    #   `Apartment`.
+    # @!attribute [rw] categories
+    #   The Amazon Location categories that describe this Place.
     #
-    #   <note markdown="1"> Returned only for a place index that uses Esri as a data provider.
+    #   For more information about using categories, including a list of
+    #   Amazon Location categories, see [Categories and filtering][1], in
+    #   the *Amazon Location Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supplemental_categories
+    #   Categories from the data provider that describe the Place that are
+    #   not mapped to any Amazon Location categories.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] sub_municipality
+    #   An area that's part of a larger municipality. For example,
+    #   `Blissville ` is a submunicipality in the Queen County in New York.
+    #
+    #   <note markdown="1"> This property supported by Esri and OpenData. The Esri property is
+    #   `district`, and the OpenData property is `borough`.
     #
     #    </note>
     #   @return [String]
@@ -4839,22 +5309,23 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/Place AWS API Documentation
     #
     class Place < Struct.new(
-      :address_number,
-      :categories,
-      :country,
-      :geometry,
-      :interpolated,
       :label,
-      :municipality,
-      :neighborhood,
-      :postal_code,
-      :region,
+      :geometry,
+      :address_number,
       :street,
+      :neighborhood,
+      :municipality,
       :sub_region,
-      :supplemental_categories,
+      :region,
+      :country,
+      :postal_code,
+      :interpolated,
       :time_zone,
+      :unit_type,
       :unit_number,
-      :unit_type)
+      :categories,
+      :supplemental_categories,
+      :sub_municipality)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4905,20 +5376,14 @@ module Aws::LocationService
     #   An identifier for the geofence. For example, `ExampleGeofence-1`.
     #   @return [String]
     #
-    # @!attribute [rw] geofence_properties
-    #   Associates one of more properties with the geofence. A property is a
-    #   key-value pair stored with the geofence and added to any geofence
-    #   event triggered with that geofence.
-    #
-    #   Format: `"key" : "value"`
-    #   @return [Hash<String,String>]
-    #
     # @!attribute [rw] geometry
     #   Contains the details to specify the position of the geofence. Can be
-    #   either a polygon or a circle. Including both will return a
-    #   validation error.
+    #   a polygon, a circle or a polygon encoded in Geobuf format. Including
+    #   multiple selections will return a validation error.
     #
-    #   <note markdown="1"> Each [ geofence polygon][1] can have a maximum of 1,000 vertices.
+    #   <note markdown="1"> The [ geofence polygon][1] format supports a maximum of 1,000
+    #   vertices. The [Geofence Geobuf][1] format supports a maximum of
+    #   100,000 vertices.
     #
     #    </note>
     #
@@ -4927,17 +5392,29 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html
     #   @return [Types::GeofenceGeometry]
     #
+    # @!attribute [rw] geofence_properties
+    #   Associates one of more properties with the geofence. A property is a
+    #   key-value pair stored with the geofence and added to any geofence
+    #   event triggered with that geofence.
+    #
+    #   Format: `"key" : "value"`
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/PutGeofenceRequest AWS API Documentation
     #
     class PutGeofenceRequest < Struct.new(
       :collection_name,
       :geofence_id,
-      :geofence_properties,
-      :geometry)
+      :geometry,
+      :geofence_properties)
       SENSITIVE = [:geofence_properties]
       include Aws::Structure
     end
 
+    # @!attribute [rw] geofence_id
+    #   The geofence identifier entered in the request.
+    #   @return [String]
+    #
     # @!attribute [rw] create_time
     #   The timestamp for when the geofence was created in [ISO 8601][1]
     #   format: `YYYY-MM-DDThh:mm:ss.sssZ`
@@ -4946,10 +5423,6 @@ module Aws::LocationService
     #
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
-    #
-    # @!attribute [rw] geofence_id
-    #   The geofence identifier entered in the request.
-    #   @return [String]
     #
     # @!attribute [rw] update_time
     #   The timestamp for when the geofence was last updated in [ISO
@@ -4963,8 +5436,8 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/PutGeofenceResponse AWS API Documentation
     #
     class PutGeofenceResponse < Struct.new(
-      :create_time,
       :geofence_id,
+      :create_time,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -5069,6 +5542,10 @@ module Aws::LocationService
     # Contains a search result from a position search query that is run on a
     # place index resource.
     #
+    # @!attribute [rw] place
+    #   Details about the search result, such as its address and position.
+    #   @return [Types::Place]
+    #
     # @!attribute [rw] distance
     #   The distance in meters of a great-circle arc between the query
     #   position and the result.
@@ -5078,10 +5555,6 @@ module Aws::LocationService
     #
     #    </note>
     #   @return [Float]
-    #
-    # @!attribute [rw] place
-    #   Details about the search result, such as its address and position.
-    #   @return [Types::Place]
     #
     # @!attribute [rw] place_id
     #   The unique identifier of the place. You can use this with the
@@ -5097,8 +5570,8 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchForPositionResult AWS API Documentation
     #
     class SearchForPositionResult < Struct.new(
-      :distance,
       :place,
+      :distance,
       :place_id)
       SENSITIVE = []
       include Aws::Structure
@@ -5107,17 +5580,10 @@ module Aws::LocationService
     # Contains a place suggestion resulting from a place suggestion query
     # that is run on a place index resource.
     #
-    # @!attribute [rw] categories
-    #   The Amazon Location categories that describe the Place.
-    #
-    #   For more information about using categories, including a list of
-    #   Amazon Location categories, see [Categories and filtering][1], in
-    #   the *Amazon Location Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
-    #   @return [Array<String>]
+    # @!attribute [rw] text
+    #   The text of the place suggestion, typically formatted as an address
+    #   string.
+    #   @return [String]
     #
     # @!attribute [rw] place_id
     #   The unique identifier of the Place. You can use this with the
@@ -5134,29 +5600,40 @@ module Aws::LocationService
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] categories
+    #   The Amazon Location categories that describe the Place.
+    #
+    #   For more information about using categories, including a list of
+    #   Amazon Location categories, see [Categories and filtering][1], in
+    #   the *Amazon Location Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] supplemental_categories
     #   Categories from the data provider that describe the Place that are
     #   not mapped to any Amazon Location categories.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] text
-    #   The text of the place suggestion, typically formatted as an address
-    #   string.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchForSuggestionsResult AWS API Documentation
     #
     class SearchForSuggestionsResult < Struct.new(
-      :categories,
+      :text,
       :place_id,
-      :supplemental_categories,
-      :text)
+      :categories,
+      :supplemental_categories)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # Contains a search result from a text search query that is run on a
     # place index resource.
+    #
+    # @!attribute [rw] place
+    #   Details about the search result, such as its address and position.
+    #   @return [Types::Place]
     #
     # @!attribute [rw] distance
     #   The distance in meters of a great-circle arc between the bias
@@ -5169,9 +5646,14 @@ module Aws::LocationService
     #    </note>
     #   @return [Float]
     #
-    # @!attribute [rw] place
-    #   Details about the search result, such as its address and position.
-    #   @return [Types::Place]
+    # @!attribute [rw] relevance
+    #   The relative confidence in the match for a result among the results
+    #   returned. For example, if more fields for an address match
+    #   (including house number, street, city, country/region, and postal
+    #   code), the relevance score is closer to 1.
+    #
+    #   Returned only when the partner selected is Esri or Grab.
+    #   @return [Float]
     #
     # @!attribute [rw] place_id
     #   The unique identifier of the place. You can use this with the
@@ -5183,22 +5665,13 @@ module Aws::LocationService
     #    </note>
     #   @return [String]
     #
-    # @!attribute [rw] relevance
-    #   The relative confidence in the match for a result among the results
-    #   returned. For example, if more fields for an address match
-    #   (including house number, street, city, country/region, and postal
-    #   code), the relevance score is closer to 1.
-    #
-    #   Returned only when the partner selected is Esri or Grab.
-    #   @return [Float]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchForTextResult AWS API Documentation
     #
     class SearchForTextResult < Struct.new(
-      :distance,
       :place,
-      :place_id,
-      :relevance)
+      :distance,
+      :relevance,
+      :place_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5207,13 +5680,23 @@ module Aws::LocationService
     #   The name of the place index resource you want to use for the search.
     #   @return [String]
     #
-    # @!attribute [rw] key
-    #   The optional [API key][1] to authorize the request.
+    # @!attribute [rw] position
+    #   Specifies the longitude and latitude of the position to query.
     #
+    #   This parameter must contain a pair of numbers. The first number
+    #   represents the X coordinate, or longitude; the second number
+    #   represents the Y coordinate, or latitude.
     #
+    #   For example, `[-123.1174, 49.2847]` represents a position with
+    #   longitude `-123.1174` and latitude `49.2847`.
+    #   @return [Array<Float>]
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
-    #   @return [String]
+    # @!attribute [rw] max_results
+    #   An optional parameter. The maximum number of results returned per
+    #   request.
+    #
+    #   Default value: `50`
+    #   @return [Integer]
     #
     # @!attribute [rw] language
     #   The preferred language used to return results. The value must be a
@@ -5240,57 +5723,58 @@ module Aws::LocationService
     #   [1]: https://tools.ietf.org/search/bcp47
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   An optional parameter. The maximum number of results returned per
-    #   request.
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
     #
-    #   Default value: `50`
-    #   @return [Integer]
     #
-    # @!attribute [rw] position
-    #   Specifies the longitude and latitude of the position to query.
     #
-    #   This parameter must contain a pair of numbers. The first number
-    #   represents the X coordinate, or longitude; the second number
-    #   represents the Y coordinate, or latitude.
-    #
-    #   For example, `[-123.1174, 49.2847]` represents a position with
-    #   longitude `-123.1174` and latitude `49.2847`.
-    #   @return [Array<Float>]
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForPositionRequest AWS API Documentation
     #
     class SearchPlaceIndexForPositionRequest < Struct.new(
       :index_name,
-      :key,
-      :language,
+      :position,
       :max_results,
-      :position)
-      SENSITIVE = [:key, :position]
+      :language,
+      :key)
+      SENSITIVE = [:position, :key]
       include Aws::Structure
     end
 
-    # @!attribute [rw] results
-    #   Returns a list of Places closest to the specified position. Each
-    #   result contains additional information about the Places returned.
-    #   @return [Array<Types::SearchForPositionResult>]
-    #
     # @!attribute [rw] summary
     #   Contains a summary of the request. Echoes the input values for
     #   `Position`, `Language`, `MaxResults`, and the `DataSource` of the
     #   place index.
     #   @return [Types::SearchPlaceIndexForPositionSummary]
     #
+    # @!attribute [rw] results
+    #   Returns a list of Places closest to the specified position. Each
+    #   result contains additional information about the Places returned.
+    #   @return [Array<Types::SearchForPositionResult>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForPositionResponse AWS API Documentation
     #
     class SearchPlaceIndexForPositionResponse < Struct.new(
-      :results,
-      :summary)
+      :summary,
+      :results)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A summary of the request sent by using `SearchPlaceIndexForPosition`.
+    #
+    # @!attribute [rw] position
+    #   The position specified in the request.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] max_results
+    #   Contains the optional result count limit that is specified in the
+    #   request.
+    #
+    #   Default value: `50`
+    #   @return [Integer]
     #
     # @!attribute [rw] data_source
     #   The geospatial data provider attached to the place index resource
@@ -5320,28 +5804,26 @@ module Aws::LocationService
     #   [1]: https://tools.ietf.org/search/bcp47
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   Contains the optional result count limit that is specified in the
-    #   request.
-    #
-    #   Default value: `50`
-    #   @return [Integer]
-    #
-    # @!attribute [rw] position
-    #   The position specified in the request.
-    #   @return [Array<Float>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForPositionSummary AWS API Documentation
     #
     class SearchPlaceIndexForPositionSummary < Struct.new(
-      :data_source,
-      :language,
+      :position,
       :max_results,
-      :position)
+      :data_source,
+      :language)
       SENSITIVE = [:position]
       include Aws::Structure
     end
 
+    # @!attribute [rw] index_name
+    #   The name of the place index resource you want to use for the search.
+    #   @return [String]
+    #
+    # @!attribute [rw] text
+    #   The free-form partial text to use to generate place suggestions. For
+    #   example, `eiffel tow`.
+    #   @return [String]
+    #
     # @!attribute [rw] bias_position
     #   An optional parameter that indicates a preference for place
     #   suggestions that are closer to a specified position.
@@ -5381,20 +5863,6 @@ module Aws::LocationService
     #    </note>
     #   @return [Array<Float>]
     #
-    # @!attribute [rw] filter_categories
-    #   A list of one or more Amazon Location categories to filter the
-    #   returned places. If you include more than one category, the results
-    #   will include results that match *any* of the categories listed.
-    #
-    #   For more information about using categories, including a list of
-    #   Amazon Location categories, see [Categories and filtering][1], in
-    #   the *Amazon Location Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] filter_countries
     #   An optional parameter that limits the search results by returning
     #   only suggestions within the provided list of countries.
@@ -5409,17 +5877,12 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-3166-country-codes.html
     #   @return [Array<String>]
     #
-    # @!attribute [rw] index_name
-    #   The name of the place index resource you want to use for the search.
-    #   @return [String]
+    # @!attribute [rw] max_results
+    #   An optional parameter. The maximum number of results returned per
+    #   request.
     #
-    # @!attribute [rw] key
-    #   The optional [API key][1] to authorize the request.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
-    #   @return [String]
+    #   The default: `5`
+    #   @return [Integer]
     #
     # @!attribute [rw] language
     #   The preferred language used to return results. The value must be a
@@ -5445,38 +5908,44 @@ module Aws::LocationService
     #   [1]: https://tools.ietf.org/search/bcp47
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   An optional parameter. The maximum number of results returned per
-    #   request.
+    # @!attribute [rw] filter_categories
+    #   A list of one or more Amazon Location categories to filter the
+    #   returned places. If you include more than one category, the results
+    #   will include results that match *any* of the categories listed.
     #
-    #   The default: `5`
-    #   @return [Integer]
+    #   For more information about using categories, including a list of
+    #   Amazon Location categories, see [Categories and filtering][1], in
+    #   the *Amazon Location Service Developer Guide*.
     #
-    # @!attribute [rw] text
-    #   The free-form partial text to use to generate place suggestions. For
-    #   example, `eiffel tow`.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForSuggestionsRequest AWS API Documentation
     #
     class SearchPlaceIndexForSuggestionsRequest < Struct.new(
+      :index_name,
+      :text,
       :bias_position,
       :filter_b_box,
-      :filter_categories,
       :filter_countries,
-      :index_name,
-      :key,
-      :language,
       :max_results,
-      :text)
-      SENSITIVE = [:bias_position, :filter_b_box, :key, :text]
+      :language,
+      :filter_categories,
+      :key)
+      SENSITIVE = [:text, :bias_position, :filter_b_box, :key]
       include Aws::Structure
     end
 
-    # @!attribute [rw] results
-    #   A list of place suggestions that best match the search text.
-    #   @return [Array<Types::SearchForSuggestionsResult>]
-    #
     # @!attribute [rw] summary
     #   Contains a summary of the request. Echoes the input values for
     #   `BiasPosition`, `FilterBBox`, `FilterCountries`, `Language`,
@@ -5484,17 +5953,25 @@ module Aws::LocationService
     #   place index.
     #   @return [Types::SearchPlaceIndexForSuggestionsSummary]
     #
+    # @!attribute [rw] results
+    #   A list of place suggestions that best match the search text.
+    #   @return [Array<Types::SearchForSuggestionsResult>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForSuggestionsResponse AWS API Documentation
     #
     class SearchPlaceIndexForSuggestionsResponse < Struct.new(
-      :results,
-      :summary)
+      :summary,
+      :results)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A summary of the request sent by using
     # `SearchPlaceIndexForSuggestions`.
+    #
+    # @!attribute [rw] text
+    #   The free-form partial text input specified in the request.
+    #   @return [String]
     #
     # @!attribute [rw] bias_position
     #   Contains the coordinates for the optional bias position specified in
@@ -5507,6 +5984,19 @@ module Aws::LocationService
     #   For example, `[-123.1174, 49.2847]` represents the position with
     #   longitude `-123.1174` and latitude `49.2847`.
     #   @return [Array<Float>]
+    #
+    # @!attribute [rw] filter_b_box
+    #   Contains the coordinates for the optional bounding box specified in
+    #   the request.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] filter_countries
+    #   Contains the optional country filter specified in the request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   Contains the optional result count limit specified in the request.
+    #   @return [Integer]
     #
     # @!attribute [rw] data_source
     #   The geospatial data provider attached to the place index resource
@@ -5526,19 +6016,6 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
-    # @!attribute [rw] filter_b_box
-    #   Contains the coordinates for the optional bounding box specified in
-    #   the request.
-    #   @return [Array<Float>]
-    #
-    # @!attribute [rw] filter_categories
-    #   The optional category filter specified in the request.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] filter_countries
-    #   Contains the optional country filter specified in the request.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] language
     #   The preferred language used to return results. Matches the language
     #   in the request. The value is a valid [BCP 47][1] language tag, for
@@ -5549,29 +6026,34 @@ module Aws::LocationService
     #   [1]: https://tools.ietf.org/search/bcp47
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   Contains the optional result count limit specified in the request.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] text
-    #   The free-form partial text input specified in the request.
-    #   @return [String]
+    # @!attribute [rw] filter_categories
+    #   The optional category filter specified in the request.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForSuggestionsSummary AWS API Documentation
     #
     class SearchPlaceIndexForSuggestionsSummary < Struct.new(
+      :text,
       :bias_position,
-      :data_source,
       :filter_b_box,
-      :filter_categories,
       :filter_countries,
-      :language,
       :max_results,
-      :text)
-      SENSITIVE = [:bias_position, :filter_b_box, :text]
+      :data_source,
+      :language,
+      :filter_categories)
+      SENSITIVE = [:text, :bias_position, :filter_b_box]
       include Aws::Structure
     end
 
+    # @!attribute [rw] index_name
+    #   The name of the place index resource you want to use for the search.
+    #   @return [String]
+    #
+    # @!attribute [rw] text
+    #   The address, name, city, or region to be used in the search in
+    #   free-form text format. For example, `123 Any Street`.
+    #   @return [String]
+    #
     # @!attribute [rw] bias_position
     #   An optional parameter that indicates a preference for places that
     #   are closer to a specified position.
@@ -5611,20 +6093,6 @@ module Aws::LocationService
     #    </note>
     #   @return [Array<Float>]
     #
-    # @!attribute [rw] filter_categories
-    #   A list of one or more Amazon Location categories to filter the
-    #   returned places. If you include more than one category, the results
-    #   will include results that match *any* of the categories listed.
-    #
-    #   For more information about using categories, including a list of
-    #   Amazon Location categories, see [Categories and filtering][1], in
-    #   the *Amazon Location Service Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] filter_countries
     #   An optional parameter that limits the search results by returning
     #   only places that are in a specified list of countries.
@@ -5639,17 +6107,12 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-3166-country-codes.html
     #   @return [Array<String>]
     #
-    # @!attribute [rw] index_name
-    #   The name of the place index resource you want to use for the search.
-    #   @return [String]
+    # @!attribute [rw] max_results
+    #   An optional parameter. The maximum number of results returned per
+    #   request.
     #
-    # @!attribute [rw] key
-    #   The optional [API key][1] to authorize the request.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
-    #   @return [String]
+    #   The default: `50`
+    #   @return [Integer]
     #
     # @!attribute [rw] language
     #   The preferred language used to return results. The value must be a
@@ -5675,42 +6138,44 @@ module Aws::LocationService
     #   [1]: https://tools.ietf.org/search/bcp47
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   An optional parameter. The maximum number of results returned per
-    #   request.
+    # @!attribute [rw] filter_categories
+    #   A list of one or more Amazon Location categories to filter the
+    #   returned places. If you include more than one category, the results
+    #   will include results that match *any* of the categories listed.
     #
-    #   The default: `50`
-    #   @return [Integer]
+    #   For more information about using categories, including a list of
+    #   Amazon Location categories, see [Categories and filtering][1], in
+    #   the *Amazon Location Service Developer Guide*.
     #
-    # @!attribute [rw] text
-    #   The address, name, city, or region to be used in the search in
-    #   free-form text format. For example, `123 Any Street`.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] key
+    #   The optional [API key][1] to authorize the request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForTextRequest AWS API Documentation
     #
     class SearchPlaceIndexForTextRequest < Struct.new(
+      :index_name,
+      :text,
       :bias_position,
       :filter_b_box,
-      :filter_categories,
       :filter_countries,
-      :index_name,
-      :key,
-      :language,
       :max_results,
-      :text)
-      SENSITIVE = [:bias_position, :filter_b_box, :key, :text]
+      :language,
+      :filter_categories,
+      :key)
+      SENSITIVE = [:text, :bias_position, :filter_b_box, :key]
       include Aws::Structure
     end
 
-    # @!attribute [rw] results
-    #   A list of Places matching the input text. Each result contains
-    #   additional information about the specific point of interest.
-    #
-    #   Not all response properties are included with all responses. Some
-    #   properties may only be returned by specific data partners.
-    #   @return [Array<Types::SearchForTextResult>]
-    #
     # @!attribute [rw] summary
     #   Contains a summary of the request. Echoes the input values for
     #   `BiasPosition`, `FilterBBox`, `FilterCountries`, `Language`,
@@ -5719,16 +6184,28 @@ module Aws::LocationService
     #   search results.
     #   @return [Types::SearchPlaceIndexForTextSummary]
     #
+    # @!attribute [rw] results
+    #   A list of Places matching the input text. Each result contains
+    #   additional information about the specific point of interest.
+    #
+    #   Not all response properties are included with all responses. Some
+    #   properties may only be returned by specific data partners.
+    #   @return [Array<Types::SearchForTextResult>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForTextResponse AWS API Documentation
     #
     class SearchPlaceIndexForTextResponse < Struct.new(
-      :results,
-      :summary)
+      :summary,
+      :results)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A summary of the request sent by using `SearchPlaceIndexForText`.
+    #
+    # @!attribute [rw] text
+    #   The search text specified in the request.
+    #   @return [String]
     #
     # @!attribute [rw] bias_position
     #   Contains the coordinates for the optional bias position specified in
@@ -5740,6 +6217,28 @@ module Aws::LocationService
     #
     #   For example, `[-123.1174, 49.2847]` represents the position with
     #   longitude `-123.1174` and latitude `49.2847`.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] filter_b_box
+    #   Contains the coordinates for the optional bounding box specified in
+    #   the request.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] filter_countries
+    #   Contains the optional country filter specified in the request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   Contains the optional result count limit specified in the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] result_b_box
+    #   The bounding box that fully contains all search results.
+    #
+    #   <note markdown="1"> If you specified the optional `FilterBBox` parameter in the request,
+    #   `ResultBBox` is contained within `FilterBBox`.
+    #
+    #    </note>
     #   @return [Array<Float>]
     #
     # @!attribute [rw] data_source
@@ -5760,19 +6259,6 @@ module Aws::LocationService
     #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
     #   @return [String]
     #
-    # @!attribute [rw] filter_b_box
-    #   Contains the coordinates for the optional bounding box specified in
-    #   the request.
-    #   @return [Array<Float>]
-    #
-    # @!attribute [rw] filter_categories
-    #   The optional category filter specified in the request.
-    #   @return [Array<String>]
-    #
-    # @!attribute [rw] filter_countries
-    #   Contains the optional country filter specified in the request.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] language
     #   The preferred language used to return results. Matches the language
     #   in the request. The value is a valid [BCP 47][1] language tag, for
@@ -5783,36 +6269,23 @@ module Aws::LocationService
     #   [1]: https://tools.ietf.org/search/bcp47
     #   @return [String]
     #
-    # @!attribute [rw] max_results
-    #   Contains the optional result count limit specified in the request.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] result_b_box
-    #   The bounding box that fully contains all search results.
-    #
-    #   <note markdown="1"> If you specified the optional `FilterBBox` parameter in the request,
-    #   `ResultBBox` is contained within `FilterBBox`.
-    #
-    #    </note>
-    #   @return [Array<Float>]
-    #
-    # @!attribute [rw] text
-    #   The search text specified in the request.
-    #   @return [String]
+    # @!attribute [rw] filter_categories
+    #   The optional category filter specified in the request.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForTextSummary AWS API Documentation
     #
     class SearchPlaceIndexForTextSummary < Struct.new(
+      :text,
       :bias_position,
-      :data_source,
       :filter_b_box,
-      :filter_categories,
       :filter_countries,
-      :language,
       :max_results,
       :result_b_box,
-      :text)
-      SENSITIVE = [:bias_position, :filter_b_box, :result_b_box, :text]
+      :data_source,
+      :language,
+      :filter_categories)
+      SENSITIVE = [:text, :bias_position, :filter_b_box, :result_b_box]
       include Aws::Structure
     end
 
@@ -5839,6 +6312,17 @@ module Aws::LocationService
     # Represents an element of a leg within a route. A step contains
     # instructions for how to move to the next step in the leg.
     #
+    # @!attribute [rw] start_position
+    #   The starting position of a step. If the position is the first step
+    #   in the leg, this position is the same as the start position of the
+    #   leg.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] end_position
+    #   The end position of a step. If the position the last step in the
+    #   leg, this position is the same as the end position of the leg.
+    #   @return [Array<Float>]
+    #
     # @!attribute [rw] distance
     #   The travel distance between the step's `StartPosition` and
     #   `EndPosition`.
@@ -5851,11 +6335,6 @@ module Aws::LocationService
     #   calculated time.
     #   @return [Float]
     #
-    # @!attribute [rw] end_position
-    #   The end position of a step. If the position the last step in the
-    #   leg, this position is the same as the end position of the leg.
-    #   @return [Array<Float>]
-    #
     # @!attribute [rw] geometry_offset
     #   Represents the start position, or index, in a sequence of steps
     #   within the leg's line string geometry. For example, the index of
@@ -5865,21 +6344,15 @@ module Aws::LocationService
     #   to `True`.
     #   @return [Integer]
     #
-    # @!attribute [rw] start_position
-    #   The starting position of a step. If the position is the first step
-    #   in the leg, this position is the same as the start position of the
-    #   leg.
-    #   @return [Array<Float>]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/Step AWS API Documentation
     #
     class Step < Struct.new(
+      :start_position,
+      :end_position,
       :distance,
       :duration_seconds,
-      :end_position,
-      :geometry_offset,
-      :start_position)
-      SENSITIVE = [:end_position, :start_position]
+      :geometry_offset)
+      SENSITIVE = [:start_position, :end_position]
       include Aws::Structure
     end
 
@@ -5988,19 +6461,6 @@ module Aws::LocationService
     # allow the specified dimensions for requests that specify `TravelMode`
     # as `Truck`.
     #
-    # @!attribute [rw] height
-    #   The height of the truck.
-    #
-    #   * For example, `4.5`.
-    #
-    #   ^
-    #
-    #   <note markdown="1"> For routes calculated with a HERE resource, this value must be
-    #   between 0 and 50 meters.
-    #
-    #    </note>
-    #   @return [Float]
-    #
     # @!attribute [rw] length
     #   The length of the truck.
     #
@@ -6014,11 +6474,18 @@ module Aws::LocationService
     #    </note>
     #   @return [Float]
     #
-    # @!attribute [rw] unit
-    #   Specifies the unit of measurement for the truck dimensions.
+    # @!attribute [rw] height
+    #   The height of the truck.
     #
-    #   Default Value: `Meters`
-    #   @return [String]
+    #   * For example, `4.5`.
+    #
+    #   ^
+    #
+    #   <note markdown="1"> For routes calculated with a HERE resource, this value must be
+    #   between 0 and 50 meters.
+    #
+    #    </note>
+    #   @return [Float]
     #
     # @!attribute [rw] width
     #   The width of the truck.
@@ -6033,13 +6500,19 @@ module Aws::LocationService
     #    </note>
     #   @return [Float]
     #
+    # @!attribute [rw] unit
+    #   Specifies the unit of measurement for the truck dimensions.
+    #
+    #   Default Value: `Meters`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/TruckDimensions AWS API Documentation
     #
     class TruckDimensions < Struct.new(
-      :height,
       :length,
-      :unit,
-      :width)
+      :height,
+      :width,
+      :unit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6102,10 +6575,6 @@ module Aws::LocationService
     #   The name of the geofence collection to update.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   Updates the description for the geofence collection.
-    #   @return [String]
-    #
     # @!attribute [rw] pricing_plan
     #   No longer used. If included, the only allowed value is
     #   `RequestBasedUsage`.
@@ -6115,17 +6584,25 @@ module Aws::LocationService
     #   This parameter is no longer used.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   Updates the description for the geofence collection.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateGeofenceCollectionRequest AWS API Documentation
     #
     class UpdateGeofenceCollectionRequest < Struct.new(
       :collection_name,
-      :description,
       :pricing_plan,
-      :pricing_plan_data_source)
+      :pricing_plan_data_source,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] collection_name
+    #   The name of the updated geofence collection.
+    #   @return [String]
+    #
     # @!attribute [rw] collection_arn
     #   The Amazon Resource Name (ARN) of the updated geofence collection.
     #   Used to specify a resource across Amazon Web Services.
@@ -6134,10 +6611,6 @@ module Aws::LocationService
     #     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection`
     #
     #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] collection_name
-    #   The name of the updated geofence collection.
     #   @return [String]
     #
     # @!attribute [rw] update_time
@@ -6152,13 +6625,17 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateGeofenceCollectionResponse AWS API Documentation
     #
     class UpdateGeofenceCollectionResponse < Struct.new(
-      :collection_arn,
       :collection_name,
+      :collection_arn,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] key_name
+    #   The name of the API key resource to update.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   Updates the description for the API key resource.
     #   @return [String]
@@ -6172,6 +6649,11 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
     #
+    # @!attribute [rw] no_expiry
+    #   Whether the API key should expire. Set to `true` to set the API key
+    #   to have no expiration time.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] force_update
     #   The boolean flag to be included for updating `ExpireTime` or
     #   `Restrictions` details.
@@ -6184,15 +6666,6 @@ module Aws::LocationService
     #   Default value: `False`
     #   @return [Boolean]
     #
-    # @!attribute [rw] key_name
-    #   The name of the API key resource to update.
-    #   @return [String]
-    #
-    # @!attribute [rw] no_expiry
-    #   Whether the API key should expire. Set to `true` to set the API key
-    #   to have no expiration time.
-    #   @return [Boolean]
-    #
     # @!attribute [rw] restrictions
     #   Updates the API key restrictions for the API key resource.
     #   @return [Types::ApiKeyRestrictions]
@@ -6200,11 +6673,11 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateKeyRequest AWS API Documentation
     #
     class UpdateKeyRequest < Struct.new(
+      :key_name,
       :description,
       :expire_time,
-      :force_update,
-      :key_name,
       :no_expiry,
+      :force_update,
       :restrictions)
       SENSITIVE = []
       include Aws::Structure
@@ -6242,15 +6715,6 @@ module Aws::LocationService
       include Aws::Structure
     end
 
-    # @!attribute [rw] configuration_update
-    #   Updates the parts of the map configuration that can be updated,
-    #   including the political view.
-    #   @return [Types::MapConfigurationUpdate]
-    #
-    # @!attribute [rw] description
-    #   Updates the description for the map resource.
-    #   @return [String]
-    #
     # @!attribute [rw] map_name
     #   The name of the map resource to update.
     #   @return [String]
@@ -6260,17 +6724,30 @@ module Aws::LocationService
     #   `RequestBasedUsage`.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   Updates the description for the map resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_update
+    #   Updates the parts of the map configuration that can be updated,
+    #   including the political view.
+    #   @return [Types::MapConfigurationUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateMapRequest AWS API Documentation
     #
     class UpdateMapRequest < Struct.new(
-      :configuration_update,
-      :description,
       :map_name,
-      :pricing_plan)
+      :pricing_plan,
+      :description,
+      :configuration_update)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] map_name
+    #   The name of the updated map resource.
+    #   @return [String]
+    #
     # @!attribute [rw] map_arn
     #   The Amazon Resource Name (ARN) of the updated map resource. Used to
     #   specify a resource across AWS.
@@ -6278,10 +6755,6 @@ module Aws::LocationService
     #   * Format example: `arn:aws:geo:region:account-id:map/ExampleMap`
     #
     #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] map_name
-    #   The name of the updated map resource.
     #   @return [String]
     #
     # @!attribute [rw] update_time
@@ -6296,21 +6769,13 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateMapResponse AWS API Documentation
     #
     class UpdateMapResponse < Struct.new(
-      :map_arn,
       :map_name,
+      :map_arn,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # @!attribute [rw] data_source_configuration
-    #   Updates the data storage option for the place index resource.
-    #   @return [Types::DataSourceConfiguration]
-    #
-    # @!attribute [rw] description
-    #   Updates the description for the place index resource.
-    #   @return [String]
-    #
     # @!attribute [rw] index_name
     #   The name of the place index resource to update.
     #   @return [String]
@@ -6320,17 +6785,29 @@ module Aws::LocationService
     #   `RequestBasedUsage`.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   Updates the description for the place index resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_configuration
+    #   Updates the data storage option for the place index resource.
+    #   @return [Types::DataSourceConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdatePlaceIndexRequest AWS API Documentation
     #
     class UpdatePlaceIndexRequest < Struct.new(
-      :data_source_configuration,
-      :description,
       :index_name,
-      :pricing_plan)
+      :pricing_plan,
+      :description,
+      :data_source_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] index_name
+    #   The name of the updated place index resource.
+    #   @return [String]
+    #
     # @!attribute [rw] index_arn
     #   The Amazon Resource Name (ARN) of the upated place index resource.
     #   Used to specify a resource across Amazon Web Services.
@@ -6339,10 +6816,6 @@ module Aws::LocationService
     #     index/ExamplePlaceIndex`
     #
     #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] index_name
-    #   The name of the updated place index resource.
     #   @return [String]
     #
     # @!attribute [rw] update_time
@@ -6357,8 +6830,8 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdatePlaceIndexResponse AWS API Documentation
     #
     class UpdatePlaceIndexResponse < Struct.new(
-      :index_arn,
       :index_name,
+      :index_arn,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
@@ -6368,25 +6841,29 @@ module Aws::LocationService
     #   The name of the route calculator resource to update.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   Updates the description for the route calculator resource.
-    #   @return [String]
-    #
     # @!attribute [rw] pricing_plan
     #   No longer used. If included, the only allowed value is
     #   `RequestBasedUsage`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Updates the description for the route calculator resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateRouteCalculatorRequest AWS API Documentation
     #
     class UpdateRouteCalculatorRequest < Struct.new(
       :calculator_name,
-      :description,
-      :pricing_plan)
+      :pricing_plan,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] calculator_name
+    #   The name of the updated route calculator resource.
+    #   @return [String]
+    #
     # @!attribute [rw] calculator_arn
     #   The Amazon Resource Name (ARN) of the updated route calculator
     #   resource. Used to specify a resource across AWS.
@@ -6395,10 +6872,6 @@ module Aws::LocationService
     #     calculator/ExampleCalculator`
     #
     #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] calculator_name
-    #   The name of the updated route calculator resource.
     #   @return [String]
     #
     # @!attribute [rw] update_time
@@ -6413,39 +6886,29 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateRouteCalculatorResponse AWS API Documentation
     #
     class UpdateRouteCalculatorResponse < Struct.new(
-      :calculator_arn,
       :calculator_name,
+      :calculator_arn,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] tracker_name
+    #   The name of the tracker resource to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan
+    #   No longer used. If included, the only allowed value is
+    #   `RequestBasedUsage`.
+    #   @return [String]
+    #
+    # @!attribute [rw] pricing_plan_data_source
+    #   This parameter is no longer used.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   Updates the description for the tracker resource.
     #   @return [String]
-    #
-    # @!attribute [rw] event_bridge_enabled
-    #   Whether to enable position `UPDATE` events from this tracker to be
-    #   sent to EventBridge.
-    #
-    #   <note markdown="1"> You do not need enable this feature to get `ENTER` and `EXIT` events
-    #   for geofences with this tracker. Those events are always sent to
-    #   EventBridge.
-    #
-    #    </note>
-    #   @return [Boolean]
-    #
-    # @!attribute [rw] kms_key_enable_geospatial_queries
-    #   Enables `GeospatialQueries` for a tracker that uses a [Amazon Web
-    #   Services KMS customer managed key][1].
-    #
-    #   This parameter is only used if you are using a KMS customer managed
-    #   key.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
-    #   @return [Boolean]
     #
     # @!attribute [rw] position_filtering
     #   Updates the position filtering for the tracker resource.
@@ -6476,33 +6939,47 @@ module Aws::LocationService
     #     evaluations.
     #   @return [String]
     #
-    # @!attribute [rw] pricing_plan
-    #   No longer used. If included, the only allowed value is
-    #   `RequestBasedUsage`.
-    #   @return [String]
+    # @!attribute [rw] event_bridge_enabled
+    #   Whether to enable position `UPDATE` events from this tracker to be
+    #   sent to EventBridge.
     #
-    # @!attribute [rw] pricing_plan_data_source
-    #   This parameter is no longer used.
-    #   @return [String]
+    #   <note markdown="1"> You do not need enable this feature to get `ENTER` and `EXIT` events
+    #   for geofences with this tracker. Those events are always sent to
+    #   EventBridge.
     #
-    # @!attribute [rw] tracker_name
-    #   The name of the tracker resource to update.
-    #   @return [String]
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_enable_geospatial_queries
+    #   Enables `GeospatialQueries` for a tracker that uses a [Amazon Web
+    #   Services KMS customer managed key][1].
+    #
+    #   This parameter is only used if you are using a KMS customer managed
+    #   key.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateTrackerRequest AWS API Documentation
     #
     class UpdateTrackerRequest < Struct.new(
-      :description,
-      :event_bridge_enabled,
-      :kms_key_enable_geospatial_queries,
-      :position_filtering,
+      :tracker_name,
       :pricing_plan,
       :pricing_plan_data_source,
-      :tracker_name)
+      :description,
+      :position_filtering,
+      :event_bridge_enabled,
+      :kms_key_enable_geospatial_queries)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] tracker_name
+    #   The name of the updated tracker resource.
+    #   @return [String]
+    #
     # @!attribute [rw] tracker_arn
     #   The Amazon Resource Name (ARN) of the updated tracker resource. Used
     #   to specify a resource across AWS.
@@ -6511,10 +6988,6 @@ module Aws::LocationService
     #     `arn:aws:geo:region:account-id:tracker/ExampleTracker`
     #
     #   ^
-    #   @return [String]
-    #
-    # @!attribute [rw] tracker_name
-    #   The name of the updated tracker resource.
     #   @return [String]
     #
     # @!attribute [rw] update_time
@@ -6529,18 +7002,14 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateTrackerResponse AWS API Documentation
     #
     class UpdateTrackerResponse < Struct.new(
-      :tracker_arn,
       :tracker_name,
+      :tracker_arn,
       :update_time)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # The input failed to meet the constraints specified by the AWS service.
-    #
-    # @!attribute [rw] field_list
-    #   The field where the invalid entry was detected.
-    #   @return [Array<Types::ValidationExceptionField>]
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6549,12 +7018,16 @@ module Aws::LocationService
     #   A message with the reason for the validation exception error.
     #   @return [String]
     #
+    # @!attribute [rw] field_list
+    #   The field where the invalid entry was detected.
+    #   @return [Array<Types::ValidationExceptionField>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :field_list,
       :message,
-      :reason)
+      :reason,
+      :field_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6562,19 +7035,107 @@ module Aws::LocationService
     # The input failed to meet the constraints specified by the AWS service
     # in a specified field.
     #
-    # @!attribute [rw] message
-    #   A message with the reason for the validation exception error.
-    #   @return [String]
-    #
     # @!attribute [rw] name
     #   The field name where the invalid entry was detected.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message with the reason for the validation exception error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ValidationExceptionField AWS API Documentation
     #
     class ValidationExceptionField < Struct.new(
-      :message,
-      :name)
+      :name,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tracker_name
+    #   The name of the tracker resource to be associated with verification
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_state
+    #   The device's state, including position, IP address, cell signals
+    #   and Wi-Fi access points.
+    #   @return [Types::DeviceState]
+    #
+    # @!attribute [rw] distance_unit
+    #   The distance unit for the verification request.
+    #
+    #   Default Value: `Kilometers`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/VerifyDevicePositionRequest AWS API Documentation
+    #
+    class VerifyDevicePositionRequest < Struct.new(
+      :tracker_name,
+      :device_state,
+      :distance_unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inferred_state
+    #   The inferred state of the device, given the provided position, IP
+    #   address, cellular signals, and Wi-Fi- access points.
+    #   @return [Types::InferredState]
+    #
+    # @!attribute [rw] device_id
+    #   The device identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_time
+    #   The timestamp at which the device's position was determined. Uses [
+    #   ISO 8601 ][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] received_time
+    #   The timestamp for when the tracker resource received the device
+    #   position in [ ISO 8601 ][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] distance_unit
+    #   The distance unit for the verification response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/VerifyDevicePositionResponse AWS API Documentation
+    #
+    class VerifyDevicePositionResponse < Struct.new(
+      :inferred_state,
+      :device_id,
+      :sample_time,
+      :received_time,
+      :distance_unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Wi-Fi access point.
+    #
+    # @!attribute [rw] mac_address
+    #   Medium access control address (Mac).
+    #   @return [String]
+    #
+    # @!attribute [rw] rss
+    #   Received signal strength (dBm) of the WLAN measurement data.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/WiFiAccessPoint AWS API Documentation
+    #
+    class WiFiAccessPoint < Struct.new(
+      :mac_address,
+      :rss)
       SENSITIVE = []
       include Aws::Structure
     end

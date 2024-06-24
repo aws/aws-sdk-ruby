@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Macie2
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Macie2
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::Macie2
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::Macie2
     #   @option options [Aws::Macie2::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Macie2::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -449,6 +474,41 @@ module Aws::Macie2
     # @param [Hash] params ({})
     def batch_get_custom_data_identifiers(params = {}, options = {})
       req = build_request(:batch_get_custom_data_identifiers, params)
+      req.send_request(options)
+    end
+
+    # Changes the status of automated sensitive data discovery for one or
+    # more accounts.
+    #
+    # @option params [Array<Types::AutomatedDiscoveryAccountUpdate>] :accounts
+    #
+    # @return [Types::BatchUpdateAutomatedDiscoveryAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateAutomatedDiscoveryAccountsResponse#errors #errors} => Array&lt;Types::AutomatedDiscoveryAccountUpdateError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_automated_discovery_accounts({
+    #     accounts: [
+    #       {
+    #         account_id: "__string",
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].account_id #=> String
+    #   resp.errors[0].error_code #=> String, one of "ACCOUNT_PAUSED", "ACCOUNT_NOT_FOUND"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/BatchUpdateAutomatedDiscoveryAccounts AWS API Documentation
+    #
+    # @overload batch_update_automated_discovery_accounts(params = {})
+    # @param [Hash] params ({})
+    def batch_update_automated_discovery_accounts(params = {}, options = {})
+      req = build_request(:batch_update_automated_discovery_accounts, params)
       req.send_request(options)
     end
 
@@ -1138,6 +1198,7 @@ module Aws::Macie2
     #   resp.buckets #=> Array
     #   resp.buckets[0].account_id #=> String
     #   resp.buckets[0].allows_unencrypted_object_uploads #=> String, one of "TRUE", "FALSE", "UNKNOWN"
+    #   resp.buckets[0].automated_discovery_monitoring_status #=> String, one of "MONITORED", "NOT_MONITORED"
     #   resp.buckets[0].bucket_arn #=> String
     #   resp.buckets[0].bucket_created_at #=> Time
     #   resp.buckets[0].bucket_name #=> String
@@ -1177,7 +1238,7 @@ module Aws::Macie2
     #   resp.buckets[0].replication_details.replication_accounts[0] #=> String
     #   resp.buckets[0].sensitivity_score #=> Integer
     #   resp.buckets[0].server_side_encryption.kms_master_key_id #=> String
-    #   resp.buckets[0].server_side_encryption.type #=> String, one of "NONE", "AES256", "aws:kms"
+    #   resp.buckets[0].server_side_encryption.type #=> String, one of "NONE", "AES256", "aws:kms", "aws:kms:dsse"
     #   resp.buckets[0].shared_access #=> String, one of "EXTERNAL", "INTERNAL", "NOT_SHARED", "UNKNOWN"
     #   resp.buckets[0].size_in_bytes #=> Integer
     #   resp.buckets[0].size_in_bytes_compressed #=> Integer
@@ -1569,10 +1630,11 @@ module Aws::Macie2
     end
 
     # Retrieves the configuration settings and status of automated sensitive
-    # data discovery for an account.
+    # data discovery for an organization or standalone account.
     #
     # @return [Types::GetAutomatedDiscoveryConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetAutomatedDiscoveryConfigurationResponse#auto_enable_organization_members #auto_enable_organization_members} => String
     #   * {Types::GetAutomatedDiscoveryConfigurationResponse#classification_scope_id #classification_scope_id} => String
     #   * {Types::GetAutomatedDiscoveryConfigurationResponse#disabled_at #disabled_at} => Time
     #   * {Types::GetAutomatedDiscoveryConfigurationResponse#first_enabled_at #first_enabled_at} => Time
@@ -1582,6 +1644,7 @@ module Aws::Macie2
     #
     # @example Response structure
     #
+    #   resp.auto_enable_organization_members #=> String, one of "ALL", "NEW", "NONE"
     #   resp.classification_scope_id #=> String
     #   resp.disabled_at #=> Time
     #   resp.first_enabled_at #=> Time
@@ -2001,7 +2064,7 @@ module Aws::Macie2
     #   resp.findings[0].resources_affected.s3_bucket.allows_unencrypted_object_uploads #=> String, one of "TRUE", "FALSE", "UNKNOWN"
     #   resp.findings[0].resources_affected.s3_bucket.arn #=> String
     #   resp.findings[0].resources_affected.s3_bucket.created_at #=> Time
-    #   resp.findings[0].resources_affected.s3_bucket.default_server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms", "UNKNOWN"
+    #   resp.findings[0].resources_affected.s3_bucket.default_server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms", "UNKNOWN", "aws:kms:dsse"
     #   resp.findings[0].resources_affected.s3_bucket.default_server_side_encryption.kms_master_key_id #=> String
     #   resp.findings[0].resources_affected.s3_bucket.name #=> String
     #   resp.findings[0].resources_affected.s3_bucket.owner.display_name #=> String
@@ -2029,7 +2092,7 @@ module Aws::Macie2
     #   resp.findings[0].resources_affected.s3_object.last_modified #=> Time
     #   resp.findings[0].resources_affected.s3_object.path #=> String
     #   resp.findings[0].resources_affected.s3_object.public_access #=> Boolean
-    #   resp.findings[0].resources_affected.s3_object.server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms", "UNKNOWN"
+    #   resp.findings[0].resources_affected.s3_object.server_side_encryption.encryption_type #=> String, one of "NONE", "AES256", "aws:kms", "UNKNOWN", "aws:kms:dsse"
     #   resp.findings[0].resources_affected.s3_object.server_side_encryption.kms_master_key_id #=> String
     #   resp.findings[0].resources_affected.s3_object.size #=> Integer
     #   resp.findings[0].resources_affected.s3_object.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "ONEZONE_IA", "GLACIER", "GLACIER_IR", "OUTPOSTS"
@@ -2294,11 +2357,15 @@ module Aws::Macie2
     # @return [Types::GetRevealConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRevealConfigurationResponse#configuration #configuration} => Types::RevealConfiguration
+    #   * {Types::GetRevealConfigurationResponse#retrieval_configuration #retrieval_configuration} => Types::RetrievalConfiguration
     #
     # @example Response structure
     #
     #   resp.configuration.kms_key_id #=> String
     #   resp.configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.retrieval_configuration.external_id #=> String
+    #   resp.retrieval_configuration.retrieval_mode #=> String, one of "CALLER_CREDENTIALS", "ASSUME_ROLE"
+    #   resp.retrieval_configuration.role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetRevealConfiguration AWS API Documentation
     #
@@ -2367,7 +2434,7 @@ module Aws::Macie2
     #
     #   resp.code #=> String, one of "AVAILABLE", "UNAVAILABLE"
     #   resp.reasons #=> Array
-    #   resp.reasons[0] #=> String, one of "OBJECT_EXCEEDS_SIZE_QUOTA", "UNSUPPORTED_OBJECT_TYPE", "UNSUPPORTED_FINDING_TYPE", "INVALID_CLASSIFICATION_RESULT", "OBJECT_UNAVAILABLE"
+    #   resp.reasons[0] #=> String, one of "OBJECT_EXCEEDS_SIZE_QUOTA", "UNSUPPORTED_OBJECT_TYPE", "UNSUPPORTED_FINDING_TYPE", "INVALID_CLASSIFICATION_RESULT", "OBJECT_UNAVAILABLE", "ACCOUNT_NOT_IN_ORGANIZATION", "MISSING_GET_MEMBER_PERMISSION", "ROLE_TOO_PERMISSIVE", "MEMBER_ROLE_TOO_PERMISSIVE", "INVALID_RESULT_SIGNATURE", "RESULT_NOT_SIGNED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/GetSensitiveDataOccurrencesAvailability AWS API Documentation
     #
@@ -2559,6 +2626,46 @@ module Aws::Macie2
     # @param [Hash] params ({})
     def list_allow_lists(params = {}, options = {})
       req = build_request(:list_allow_lists, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the status of automated sensitive data discovery for one or
+    # more accounts.
+    #
+    # @option params [Array<String>] :account_ids
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListAutomatedDiscoveryAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAutomatedDiscoveryAccountsResponse#items #items} => Array&lt;Types::AutomatedDiscoveryAccount&gt;
+    #   * {Types::ListAutomatedDiscoveryAccountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_automated_discovery_accounts({
+    #     account_ids: ["__string"],
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].account_id #=> String
+    #   resp.items[0].status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/ListAutomatedDiscoveryAccounts AWS API Documentation
+    #
+    # @overload list_automated_discovery_accounts(params = {})
+    # @param [Hash] params ({})
+    def list_automated_discovery_accounts(params = {}, options = {})
+      req = build_request(:list_automated_discovery_accounts, params)
       req.send_request(options)
     end
 
@@ -2833,8 +2940,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about the Amazon Macie membership invitations
-    # that were received by an account.
+    # Retrieves information about Amazon Macie membership invitations that
+    # were received by an account.
     #
     # @option params [Integer] :max_results
     #
@@ -2991,8 +3098,8 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Retrieves information about objects that were selected from an S3
-    # bucket for automated sensitive data discovery.
+    # Retrieves information about objects that Amazon Macie selected from an
+    # S3 bucket for automated sensitive data discovery.
     #
     # @option params [String] :next_token
     #
@@ -3139,13 +3246,13 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Creates or updates the configuration settings for storing data
+    # Adds or updates the configuration settings for storing data
     # classification results.
     #
     # @option params [required, Types::ClassificationExportConfiguration] :configuration
     #   Specifies where to store data classification results, and the
     #   encryption settings to use when storing results in that location. The
-    #   location must be an S3 bucket.
+    #   location must be an S3 general purpose bucket.
     #
     # @return [Types::PutClassificationExportConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3249,7 +3356,7 @@ module Aws::Macie2
     #           {
     #             simple_criterion: {
     #               comparator: "EQ", # accepts EQ, NE
-    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS, AUTOMATED_DISCOVERY_MONITORING_STATUS
     #               values: ["__string"],
     #             },
     #             tag_criterion: {
@@ -3269,7 +3376,7 @@ module Aws::Macie2
     #           {
     #             simple_criterion: {
     #               comparator: "EQ", # accepts EQ, NE
-    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS
+    #               key: "ACCOUNT_ID", # accepts ACCOUNT_ID, S3_BUCKET_NAME, S3_BUCKET_EFFECTIVE_PERMISSION, S3_BUCKET_SHARED_ACCESS, AUTOMATED_DISCOVERY_MONITORING_STATUS
     #               values: ["__string"],
     #             },
     #             tag_criterion: {
@@ -3297,6 +3404,7 @@ module Aws::Macie2
     #
     #   resp.matching_resources #=> Array
     #   resp.matching_resources[0].matching_bucket.account_id #=> String
+    #   resp.matching_resources[0].matching_bucket.automated_discovery_monitoring_status #=> String, one of "MONITORED", "NOT_MONITORED"
     #   resp.matching_resources[0].matching_bucket.bucket_name #=> String
     #   resp.matching_resources[0].matching_bucket.classifiable_object_count #=> Integer
     #   resp.matching_resources[0].matching_bucket.classifiable_size_in_bytes #=> Integer
@@ -3362,7 +3470,7 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Tests a custom data identifier.
+    # Tests criteria for a custom data identifier.
     #
     # @option params [Array<String>] :ignore_words
     #
@@ -3473,17 +3581,25 @@ module Aws::Macie2
       req.send_request(options)
     end
 
-    # Enables or disables automated sensitive data discovery for an account.
+    # Changes the configuration settings and status of automated sensitive
+    # data discovery for an organization or standalone account.
+    #
+    # @option params [String] :auto_enable_organization_members
+    #   Specifies whether to automatically enable automated sensitive data
+    #   discovery for accounts that are part of an organization in Amazon
+    #   Macie. Valid values are:
     #
     # @option params [required, String] :status
     #   The status of the automated sensitive data discovery configuration for
-    #   an Amazon Macie account. Valid values are:
+    #   an organization in Amazon Macie or a standalone Macie account. Valid
+    #   values are:
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_automated_discovery_configuration({
+    #     auto_enable_organization_members: "ALL", # accepts ALL, NEW, NONE
     #     status: "ENABLED", # required, accepts ENABLED, DISABLED
     #   })
     #
@@ -3758,16 +3874,30 @@ module Aws::Macie2
     # occurrences of sensitive data reported by findings.
     #
     # @option params [required, Types::RevealConfiguration] :configuration
-    #   Specifies the configuration settings for retrieving occurrences of
-    #   sensitive data reported by findings, and the status of the
-    #   configuration for an Amazon Macie account. When you enable the
-    #   configuration for the first time, your request must specify an Key
-    #   Management Service (KMS) key. Otherwise, an error occurs. Macie uses
-    #   the specified key to encrypt the sensitive data that you retrieve.
+    #   Specifies the status of the Amazon Macie configuration for retrieving
+    #   occurrences of sensitive data reported by findings, and the Key
+    #   Management Service (KMS) key to use to encrypt sensitive data that's
+    #   retrieved. When you enable the configuration for the first time, your
+    #   request must specify an KMS key. Otherwise, an error occurs.
+    #
+    # @option params [Types::UpdateRetrievalConfiguration] :retrieval_configuration
+    #   Specifies the access method and settings to use when retrieving
+    #   occurrences of sensitive data reported by findings. If your request
+    #   specifies an Identity and Access Management (IAM) role to assume,
+    #   Amazon Macie verifies that the role exists and the attached policies
+    #   are configured correctly. If there's an issue, Macie returns an
+    #   error. For information about addressing the issue, see [Configuration
+    #   options and requirements for retrieving sensitive data samples][1] in
+    #   the *Amazon Macie User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/macie/latest/user/findings-retrieve-sd-options.html
     #
     # @return [Types::UpdateRevealConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRevealConfigurationResponse#configuration #configuration} => Types::RevealConfiguration
+    #   * {Types::UpdateRevealConfigurationResponse#retrieval_configuration #retrieval_configuration} => Types::RetrievalConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -3776,12 +3906,19 @@ module Aws::Macie2
     #       kms_key_id: "__stringMin1Max2048",
     #       status: "ENABLED", # required, accepts ENABLED, DISABLED
     #     },
+    #     retrieval_configuration: {
+    #       retrieval_mode: "CALLER_CREDENTIALS", # required, accepts CALLER_CREDENTIALS, ASSUME_ROLE
+    #       role_name: "__stringMin1Max64PatternW",
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.configuration.kms_key_id #=> String
     #   resp.configuration.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.retrieval_configuration.external_id #=> String
+    #   resp.retrieval_configuration.retrieval_mode #=> String, one of "CALLER_CREDENTIALS", "ASSUME_ROLE"
+    #   resp.retrieval_configuration.role_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/UpdateRevealConfiguration AWS API Documentation
     #
@@ -3799,10 +3936,9 @@ module Aws::Macie2
     #
     # @option params [Types::SensitivityInspectionTemplateExcludes] :excludes
     #   Specifies managed data identifiers to exclude (not use) when
-    #   performing automated sensitive data discovery for an Amazon Macie
-    #   account. For information about the managed data identifiers that
-    #   Amazon Macie currently provides, see [Using managed data
-    #   identifiers][1] in the *Amazon Macie User Guide*.
+    #   performing automated sensitive data discovery. For information about
+    #   the managed data identifiers that Amazon Macie currently provides, see
+    #   [Using managed data identifiers][1] in the *Amazon Macie User Guide*.
     #
     #
     #
@@ -3813,11 +3949,10 @@ module Aws::Macie2
     # @option params [Types::SensitivityInspectionTemplateIncludes] :includes
     #   Specifies the allow lists, custom data identifiers, and managed data
     #   identifiers to include (use) when performing automated sensitive data
-    #   discovery for an Amazon Macie account. The configuration must specify
-    #   at least one custom data identifier or managed data identifier. For
-    #   information about the managed data identifiers that Amazon Macie
-    #   currently provides, see [Using managed data identifiers][1] in the
-    #   *Amazon Macie User Guide*.
+    #   discovery. The configuration must specify at least one custom data
+    #   identifier or managed data identifier. For information about the
+    #   managed data identifiers that Amazon Macie currently provides, see
+    #   [Using managed data identifiers][1] in the *Amazon Macie User Guide*.
     #
     #
     #
@@ -3862,7 +3997,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

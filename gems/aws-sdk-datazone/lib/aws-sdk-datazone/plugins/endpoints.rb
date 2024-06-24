@@ -14,6 +14,7 @@ module Aws::DataZone
       option(
         :endpoint_provider,
         doc_type: 'Aws::DataZone::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::DataZone
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -60,6 +62,10 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::AcceptPredictions.build(context)
           when :accept_subscription_request
             Aws::DataZone::Endpoints::AcceptSubscriptionRequest.build(context)
+          when :associate_environment_role
+            Aws::DataZone::Endpoints::AssociateEnvironmentRole.build(context)
+          when :cancel_metadata_generation_run
+            Aws::DataZone::Endpoints::CancelMetadataGenerationRun.build(context)
           when :cancel_subscription
             Aws::DataZone::Endpoints::CancelSubscription.build(context)
           when :create_asset
@@ -74,6 +80,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::CreateDomain.build(context)
           when :create_environment
             Aws::DataZone::Endpoints::CreateEnvironment.build(context)
+          when :create_environment_action
+            Aws::DataZone::Endpoints::CreateEnvironmentAction.build(context)
           when :create_environment_profile
             Aws::DataZone::Endpoints::CreateEnvironmentProfile.build(context)
           when :create_form_type
@@ -108,6 +116,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::DeleteDomain.build(context)
           when :delete_environment
             Aws::DataZone::Endpoints::DeleteEnvironment.build(context)
+          when :delete_environment_action
+            Aws::DataZone::Endpoints::DeleteEnvironmentAction.build(context)
           when :delete_environment_blueprint_configuration
             Aws::DataZone::Endpoints::DeleteEnvironmentBlueprintConfiguration.build(context)
           when :delete_environment_profile
@@ -130,6 +140,10 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::DeleteSubscriptionRequest.build(context)
           when :delete_subscription_target
             Aws::DataZone::Endpoints::DeleteSubscriptionTarget.build(context)
+          when :delete_time_series_data_points
+            Aws::DataZone::Endpoints::DeleteTimeSeriesDataPoints.build(context)
+          when :disassociate_environment_role
+            Aws::DataZone::Endpoints::DisassociateEnvironmentRole.build(context)
           when :get_asset
             Aws::DataZone::Endpoints::GetAsset.build(context)
           when :get_asset_type
@@ -142,6 +156,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::GetDomain.build(context)
           when :get_environment
             Aws::DataZone::Endpoints::GetEnvironment.build(context)
+          when :get_environment_action
+            Aws::DataZone::Endpoints::GetEnvironmentAction.build(context)
           when :get_environment_blueprint
             Aws::DataZone::Endpoints::GetEnvironmentBlueprint.build(context)
           when :get_environment_blueprint_configuration
@@ -160,6 +176,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::GetIamPortalLoginUrl.build(context)
           when :get_listing
             Aws::DataZone::Endpoints::GetListing.build(context)
+          when :get_metadata_generation_run
+            Aws::DataZone::Endpoints::GetMetadataGenerationRun.build(context)
           when :get_project
             Aws::DataZone::Endpoints::GetProject.build(context)
           when :get_subscription
@@ -170,6 +188,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::GetSubscriptionRequestDetails.build(context)
           when :get_subscription_target
             Aws::DataZone::Endpoints::GetSubscriptionTarget.build(context)
+          when :get_time_series_data_point
+            Aws::DataZone::Endpoints::GetTimeSeriesDataPoint.build(context)
           when :get_user_profile
             Aws::DataZone::Endpoints::GetUserProfile.build(context)
           when :list_asset_revisions
@@ -182,6 +202,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::ListDataSources.build(context)
           when :list_domains
             Aws::DataZone::Endpoints::ListDomains.build(context)
+          when :list_environment_actions
+            Aws::DataZone::Endpoints::ListEnvironmentActions.build(context)
           when :list_environment_blueprint_configurations
             Aws::DataZone::Endpoints::ListEnvironmentBlueprintConfigurations.build(context)
           when :list_environment_blueprints
@@ -190,6 +212,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::ListEnvironmentProfiles.build(context)
           when :list_environments
             Aws::DataZone::Endpoints::ListEnvironments.build(context)
+          when :list_metadata_generation_runs
+            Aws::DataZone::Endpoints::ListMetadataGenerationRuns.build(context)
           when :list_notifications
             Aws::DataZone::Endpoints::ListNotifications.build(context)
           when :list_project_memberships
@@ -206,6 +230,10 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::ListSubscriptions.build(context)
           when :list_tags_for_resource
             Aws::DataZone::Endpoints::ListTagsForResource.build(context)
+          when :list_time_series_data_points
+            Aws::DataZone::Endpoints::ListTimeSeriesDataPoints.build(context)
+          when :post_time_series_data_points
+            Aws::DataZone::Endpoints::PostTimeSeriesDataPoints.build(context)
           when :put_environment_blueprint_configuration
             Aws::DataZone::Endpoints::PutEnvironmentBlueprintConfiguration.build(context)
           when :reject_predictions
@@ -226,6 +254,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::SearchUserProfiles.build(context)
           when :start_data_source_run
             Aws::DataZone::Endpoints::StartDataSourceRun.build(context)
+          when :start_metadata_generation_run
+            Aws::DataZone::Endpoints::StartMetadataGenerationRun.build(context)
           when :tag_resource
             Aws::DataZone::Endpoints::TagResource.build(context)
           when :untag_resource
@@ -236,6 +266,8 @@ module Aws::DataZone
             Aws::DataZone::Endpoints::UpdateDomain.build(context)
           when :update_environment
             Aws::DataZone::Endpoints::UpdateEnvironment.build(context)
+          when :update_environment_action
+            Aws::DataZone::Endpoints::UpdateEnvironmentAction.build(context)
           when :update_environment_profile
             Aws::DataZone::Endpoints::UpdateEnvironmentProfile.build(context)
           when :update_glossary

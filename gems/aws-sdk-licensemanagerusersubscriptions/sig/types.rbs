@@ -1,0 +1,266 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::LicenseManagerUserSubscriptions
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActiveDirectoryIdentityProvider
+      attr_accessor directory_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateUserRequest
+      attr_accessor domain: ::String
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor instance_id: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateUserResponse
+      attr_accessor instance_user_summary: Types::InstanceUserSummary
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterIdentityProviderRequest
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor product: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterIdentityProviderResponse
+      attr_accessor identity_provider_summary: Types::IdentityProviderSummary
+      SENSITIVE: []
+    end
+
+    class DisassociateUserRequest
+      attr_accessor domain: ::String
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor instance_id: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateUserResponse
+      attr_accessor instance_user_summary: Types::InstanceUserSummary
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor attribute: ::String
+      attr_accessor operation: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class IdentityProvider
+      attr_accessor active_directory_identity_provider: Types::ActiveDirectoryIdentityProvider
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ActiveDirectoryIdentityProvider < IdentityProvider
+      end
+      class Unknown < IdentityProvider
+      end
+    end
+
+    class IdentityProviderSummary
+      attr_accessor failure_message: ::String
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor product: ::String
+      attr_accessor settings: Types::Settings
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceSummary
+      attr_accessor instance_id: ::String
+      attr_accessor last_status_check_date: ::String
+      attr_accessor products: ::Array[::String]
+      attr_accessor status: ::String
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceUserSummary
+      attr_accessor association_date: ::String
+      attr_accessor disassociation_date: ::String
+      attr_accessor domain: ::String
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor instance_id: ::String
+      attr_accessor status: ::String
+      attr_accessor status_message: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentityProvidersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIdentityProvidersResponse
+      attr_accessor identity_provider_summaries: ::Array[Types::IdentityProviderSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstancesRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInstancesResponse
+      attr_accessor instance_summaries: ::Array[Types::InstanceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProductSubscriptionsRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor product: ::String
+      SENSITIVE: []
+    end
+
+    class ListProductSubscriptionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor product_user_summaries: ::Array[Types::ProductUserSummary]
+      SENSITIVE: []
+    end
+
+    class ListUserAssociationsRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor instance_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListUserAssociationsResponse
+      attr_accessor instance_user_summaries: ::Array[Types::InstanceUserSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ProductUserSummary
+      attr_accessor domain: ::String
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor product: ::String
+      attr_accessor status: ::String
+      attr_accessor status_message: ::String
+      attr_accessor subscription_end_date: ::String
+      attr_accessor subscription_start_date: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterIdentityProviderRequest
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor product: ::String
+      attr_accessor settings: Types::Settings
+      SENSITIVE: []
+    end
+
+    class RegisterIdentityProviderResponse
+      attr_accessor identity_provider_summary: Types::IdentityProviderSummary
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Settings
+      attr_accessor security_group_id: ::String
+      attr_accessor subnets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StartProductSubscriptionRequest
+      attr_accessor domain: ::String
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor product: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class StartProductSubscriptionResponse
+      attr_accessor product_user_summary: Types::ProductUserSummary
+      SENSITIVE: []
+    end
+
+    class StopProductSubscriptionRequest
+      attr_accessor domain: ::String
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor product: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class StopProductSubscriptionResponse
+      attr_accessor product_user_summary: Types::ProductUserSummary
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateIdentityProviderSettingsRequest
+      attr_accessor identity_provider: Types::IdentityProvider
+      attr_accessor product: ::String
+      attr_accessor update_settings: Types::UpdateSettings
+      SENSITIVE: []
+    end
+
+    class UpdateIdentityProviderSettingsResponse
+      attr_accessor identity_provider_summary: Types::IdentityProviderSummary
+      SENSITIVE: []
+    end
+
+    class UpdateSettings
+      attr_accessor add_subnets: ::Array[::String]
+      attr_accessor remove_subnets: ::Array[::String]
+      attr_accessor security_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

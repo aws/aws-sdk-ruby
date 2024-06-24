@@ -409,7 +409,7 @@ module Aws::SecurityLake
     #   @return [String]
     #
     # @!attribute [rw] subscriber_identity
-    #   The AWS identity used to access your data.
+    #   The Amazon Web Services identity used to access your data.
     #   @return [Types::AwsIdentity]
     #
     # @!attribute [rw] subscriber_name
@@ -725,19 +725,28 @@ module Aws::SecurityLake
       include Aws::Structure
     end
 
-    # Provides replication details of Amazon Security Lake object.
+    # Provides replication details for objects stored in the Amazon Security
+    # Lake data lake.
     #
     # @!attribute [rw] regions
-    #   Replication enables automatic, asynchronous copying of objects
-    #   across Amazon S3 buckets. Amazon S3 buckets that are configured for
-    #   object replication can be owned by the same Amazon Web Services
-    #   account or by different accounts. You can replicate objects to a
-    #   single destination bucket or to multiple destination buckets. The
-    #   destination buckets can be in different Amazon Web Services Regions
-    #   or within the same Region as the source bucket.
+    #   Specifies one or more centralized rollup Regions. The Amazon Web
+    #   Services Region specified in the `region` parameter of the [
+    #   `CreateDataLake` ][1] or [ `UpdateDataLake` ][2] operations
+    #   contributes data to the rollup Region or Regions specified in this
+    #   parameter.
     #
-    #   Set up one or more rollup Regions by providing the Region or Regions
-    #   that should contribute to the central rollup Region.
+    #   Replication enables automatic, asynchronous copying of objects
+    #   across Amazon S3 buckets. S3 buckets that are configured for object
+    #   replication can be owned by the same Amazon Web Services account or
+    #   by different accounts. You can replicate objects to a single
+    #   destination bucket or to multiple destination buckets. The
+    #   destination buckets can be in different Regions or within the same
+    #   Region as the source bucket.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/security-lake/latest/APIReference/API_CreateDataLake.html
+    #   [2]: https://docs.aws.amazon.com/security-lake/latest/APIReference/API_UpdateDataLake.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] role_arn
@@ -1327,8 +1336,7 @@ module Aws::SecurityLake
     #   @return [String]
     #
     # @!attribute [rw] regions
-    #   List the Amazon Web Services Regions from which exceptions are
-    #   retrieved.
+    #   The Amazon Web Services Regions from which exceptions are retrieved.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListDataLakeExceptionsRequest AWS API Documentation
@@ -1365,7 +1373,7 @@ module Aws::SecurityLake
     end
 
     # @!attribute [rw] regions
-    #   The list of regions where Security Lake is enabled.
+    #   The list of Regions where Security Lake is enabled.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListDataLakesRequest AWS API Documentation
@@ -1404,7 +1412,7 @@ module Aws::SecurityLake
     #   @return [String]
     #
     # @!attribute [rw] regions
-    #   The list of regions for which log sources are displayed.
+    #   The list of Regions for which log sources are displayed.
     #   @return [Array<String>]
     #
     # @!attribute [rw] sources
@@ -1482,7 +1490,7 @@ module Aws::SecurityLake
 
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon Security Lake resource
-    #   to retrieve the tags for.
+    #   for which you want to retrieve the tags.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/ListTagsForResourceRequest AWS API Documentation
@@ -1673,9 +1681,9 @@ module Aws::SecurityLake
     #   @return [Time]
     #
     # @!attribute [rw] resource_share_arn
-    #   The Amazon Resource Name (ARN) which uniquely defines the AWS RAM
-    #   resource share. Before accepting the RAM resource share invitation,
-    #   you can view details related to the RAM resource share.
+    #   The Amazon Resource Name (ARN) which uniquely defines the Amazon Web
+    #   Services RAM resource share. Before accepting the RAM resource share
+    #   invitation, you can view details related to the RAM resource share.
     #
     #   This field is available only for Lake Formation subscribers created
     #   after March 8, 2023.
@@ -1723,7 +1731,7 @@ module Aws::SecurityLake
     #   @return [String]
     #
     # @!attribute [rw] subscriber_identity
-    #   The AWS identity used to access your data.
+    #   The Amazon Web Services identity used to access your data.
     #   @return [Types::AwsIdentity]
     #
     # @!attribute [rw] subscriber_name
@@ -1913,10 +1921,17 @@ module Aws::SecurityLake
     #   rollup region.
     #   @return [Array<Types::DataLakeConfiguration>]
     #
+    # @!attribute [rw] meta_store_manager_role_arn
+    #   The Amazon Resource Name (ARN) used to create and update the Glue
+    #   table. This table contains partitions generated by the ingestion and
+    #   normalization of Amazon Web Services log sources and custom sources.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securitylake-2018-05-10/UpdateDataLakeRequest AWS API Documentation
     #
     class UpdateDataLakeRequest < Struct.new(
-      :configurations)
+      :configurations,
+      :meta_store_manager_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end

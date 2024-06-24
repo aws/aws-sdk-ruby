@@ -14,6 +14,7 @@ module Aws::CostExplorer
       option(
         :endpoint_provider,
         doc_type: 'Aws::CostExplorer::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::CostExplorer
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -76,6 +78,8 @@ module Aws::CostExplorer
             Aws::CostExplorer::Endpoints::GetAnomalyMonitors.build(context)
           when :get_anomaly_subscriptions
             Aws::CostExplorer::Endpoints::GetAnomalySubscriptions.build(context)
+          when :get_approximate_usage_records
+            Aws::CostExplorer::Endpoints::GetApproximateUsageRecords.build(context)
           when :get_cost_and_usage
             Aws::CostExplorer::Endpoints::GetCostAndUsage.build(context)
           when :get_cost_and_usage_with_resources
@@ -108,6 +112,8 @@ module Aws::CostExplorer
             Aws::CostExplorer::Endpoints::GetTags.build(context)
           when :get_usage_forecast
             Aws::CostExplorer::Endpoints::GetUsageForecast.build(context)
+          when :list_cost_allocation_tag_backfill_history
+            Aws::CostExplorer::Endpoints::ListCostAllocationTagBackfillHistory.build(context)
           when :list_cost_allocation_tags
             Aws::CostExplorer::Endpoints::ListCostAllocationTags.build(context)
           when :list_cost_category_definitions
@@ -118,6 +124,8 @@ module Aws::CostExplorer
             Aws::CostExplorer::Endpoints::ListTagsForResource.build(context)
           when :provide_anomaly_feedback
             Aws::CostExplorer::Endpoints::ProvideAnomalyFeedback.build(context)
+          when :start_cost_allocation_tag_backfill
+            Aws::CostExplorer::Endpoints::StartCostAllocationTagBackfill.build(context)
           when :start_savings_plans_purchase_recommendation_generation
             Aws::CostExplorer::Endpoints::StartSavingsPlansPurchaseRecommendationGeneration.build(context)
           when :tag_resource

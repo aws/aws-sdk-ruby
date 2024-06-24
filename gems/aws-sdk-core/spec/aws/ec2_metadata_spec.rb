@@ -21,25 +21,43 @@ module Aws
     end
 
     context 'endpoint configuration' do
-      it 'can be configured without a scheme' do
-        client = EC2Metadata.new(endpoint: '123.123.123.123')
-        expect(client.instance_variable_get(:@endpoint))
-          .to eq('123.123.123.123')
+      let(:endpoint) { 'http://123.123.123.123:9001' }
+
+      it 'uses endpoint with a scheme and custom port' do
+        token = stub_get_token
+        client = EC2Metadata.new(endpoint: endpoint)
+        stub_request(
+          :get, "#{endpoint}/latest/meta-data/foo"
+        ).with(
+          headers: { 'x-aws-ec2-metadata-token' => token }
+        )
+        client.get(metadata_path)
       end
 
-      it 'can be configured with a scheme' do
-        client = EC2Metadata.new(endpoint: 'http://123.123.123.123')
-        expect(client.instance_variable_get(:@endpoint))
-          .to eq('http://123.123.123.123')
+      it 'uses endpoint without a scheme and a configured port' do
+        uri = URI(endpoint)
+        token = stub_get_token
+        client = EC2Metadata.new(endpoint: uri.hostname, port: uri.port)
+        stub_request(
+          :get, "#{endpoint}/latest/meta-data/foo"
+        ).with(
+          headers: { 'x-aws-ec2-metadata-token' => token }
+        )
+        client.get(metadata_path)
       end
 
-      it 'takes precedence over endpoint mode' do
+      it 'endpoint takes precedence over endpoint mode' do
+        token = stub_get_token
         client = EC2Metadata.new(
           endpoint_mode: 'IPv6',
-          endpoint: '123.123.123.123'
+          endpoint: endpoint
         )
-        expect(client.instance_variable_get(:@endpoint))
-          .to eq('123.123.123.123')
+        stub_request(
+          :get, "#{endpoint}/latest/meta-data/foo"
+        ).with(
+          headers: { 'x-aws-ec2-metadata-token' => token }
+        )
+        client.get(metadata_path)
       end
     end
 

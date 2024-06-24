@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::SESV2
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::SESV2
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::SESV2
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::SESV2
     #   @option options [Aws::SESV2::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::SESV2::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -563,10 +588,8 @@ module Aws::SESV2
     # Create an event destination. *Events* include message sends,
     # deliveries, opens, clicks, bounces, and complaints. *Event
     # destinations* are places that you can send information about these
-    # events to. For example, you can send event data to Amazon SNS to
-    # receive notifications when you receive bounces or complaints, or you
-    # can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for
-    # long-term storage.
+    # events to. For example, you can send event data to Amazon EventBridge
+    # and associate a rule to send the event to the specified target.
     #
     # A single configuration set can include more than one event
     # destination.
@@ -606,6 +629,9 @@ module Aws::SESV2
     #       },
     #       sns_destination: {
     #         topic_arn: "AmazonResourceName", # required
+    #       },
+    #       event_bridge_destination: {
+    #         event_bus_arn: "AmazonResourceName", # required
     #       },
     #       pinpoint_destination: {
     #         application_arn: "AmazonResourceName",
@@ -868,6 +894,12 @@ module Aws::SESV2
     #             charset: "Charset",
     #           },
     #         },
+    #         headers: [
+    #           {
+    #             name: "MessageHeaderName", # required
+    #             value: "MessageHeaderValue", # required
+    #           },
+    #         ],
     #       },
     #       raw: {
     #         data: "data", # required
@@ -876,6 +908,12 @@ module Aws::SESV2
     #         template_name: "EmailTemplateName",
     #         template_arn: "AmazonResourceName",
     #         template_data: "EmailTemplateData",
+    #         headers: [
+    #           {
+    #             name: "MessageHeaderName", # required
+    #             value: "MessageHeaderValue", # required
+    #           },
+    #         ],
     #       },
     #     },
     #     tags: [
@@ -1329,9 +1367,8 @@ module Aws::SESV2
     # *Events* include message sends, deliveries, opens, clicks, bounces,
     # and complaints. *Event destinations* are places that you can send
     # information about these events to. For example, you can send event
-    # data to Amazon SNS to receive notifications when you receive bounces
-    # or complaints, or you can use Amazon Kinesis Data Firehose to stream
-    # data to Amazon S3 for long-term storage.
+    # data to Amazon EventBridge and associate a rule to send the event to
+    # the specified target.
     #
     # @option params [required, String] :configuration_set_name
     #   The name of the configuration set that contains the event destination
@@ -1720,9 +1757,8 @@ module Aws::SESV2
     # *Events* include message sends, deliveries, opens, clicks, bounces,
     # and complaints. *Event destinations* are places that you can send
     # information about these events to. For example, you can send event
-    # data to Amazon SNS to receive notifications when you receive bounces
-    # or complaints, or you can use Amazon Kinesis Data Firehose to stream
-    # data to Amazon S3 for long-term storage.
+    # data to Amazon EventBridge and associate a rule to send the event to
+    # the specified target.
     #
     # @option params [required, String] :configuration_set_name
     #   The name of the configuration set that contains the event destination.
@@ -1751,6 +1787,7 @@ module Aws::SESV2
     #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].dimension_value_source #=> String, one of "MESSAGE_TAG", "EMAIL_HEADER", "LINK_TAG"
     #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].default_dimension_value #=> String
     #   resp.event_destinations[0].sns_destination.topic_arn #=> String
+    #   resp.event_destinations[0].event_bridge_destination.event_bus_arn #=> String
     #   resp.event_destinations[0].pinpoint_destination.application_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetConfigurationSetEventDestinations AWS API Documentation
@@ -2252,6 +2289,7 @@ module Aws::SESV2
     #   * {Types::GetEmailIdentityResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::GetEmailIdentityResponse#configuration_set_name #configuration_set_name} => String
     #   * {Types::GetEmailIdentityResponse#verification_status #verification_status} => String
+    #   * {Types::GetEmailIdentityResponse#verification_info #verification_info} => Types::VerificationInfo
     #
     # @example Request syntax with placeholder values
     #
@@ -2282,6 +2320,12 @@ module Aws::SESV2
     #   resp.tags[0].value #=> String
     #   resp.configuration_set_name #=> String
     #   resp.verification_status #=> String, one of "PENDING", "SUCCESS", "FAILED", "TEMPORARY_FAILURE", "NOT_STARTED"
+    #   resp.verification_info.last_checked_timestamp #=> Time
+    #   resp.verification_info.last_success_timestamp #=> Time
+    #   resp.verification_info.error_type #=> String, one of "SERVICE_ERROR", "DNS_SERVER_ERROR", "HOST_NOT_FOUND", "TYPE_NOT_FOUND", "INVALID_VALUE"
+    #   resp.verification_info.soa_record.primary_name_server #=> String
+    #   resp.verification_info.soa_record.admin_email #=> String
+    #   resp.verification_info.soa_record.serial_number #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetEmailIdentity AWS API Documentation
     #
@@ -3157,7 +3201,7 @@ module Aws::SESV2
     #   `NextToken` element, which you can use to obtain additional results.
     #
     #   The value you specify has to be at least 1, and can be no more than
-    #   10.
+    #   100.
     #
     # @return [Types::ListEmailTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3531,9 +3575,7 @@ module Aws::SESV2
     #
     #   If the value is `false`, then your account is in the *sandbox*. When
     #   your account is in the sandbox, you can only send email to verified
-    #   identities. Additionally, the maximum number of emails you can send in
-    #   a 24-hour period (your sending quota) is 200, and the maximum number
-    #   of emails you can send per second (your maximum sending rate) is 1.
+    #   identities.
     #
     #   If the value is `true`, then your account has production access. When
     #   your account has production access, you can send email to any address.
@@ -4365,6 +4407,12 @@ module Aws::SESV2
     #         template_name: "EmailTemplateName",
     #         template_arn: "AmazonResourceName",
     #         template_data: "EmailTemplateData",
+    #         headers: [
+    #           {
+    #             name: "MessageHeaderName", # required
+    #             value: "MessageHeaderValue", # required
+    #           },
+    #         ],
     #       },
     #     },
     #     bulk_email_entries: [ # required
@@ -4385,6 +4433,12 @@ module Aws::SESV2
     #             replacement_template_data: "EmailTemplateData",
     #           },
     #         },
+    #         replacement_headers: [
+    #           {
+    #             name: "MessageHeaderName", # required
+    #             value: "MessageHeaderValue", # required
+    #           },
+    #         ],
     #       },
     #     ],
     #     configuration_set_name: "ConfigurationSetName",
@@ -4536,7 +4590,7 @@ module Aws::SESV2
     #
     # @option params [required, Types::EmailContent] :content
     #   An object that contains the body of the message. You can send either a
-    #   Simple message Raw message or a template Message.
+    #   Simple message, Raw message, or a Templated message.
     #
     # @option params [Array<Types::MessageTag>] :email_tags
     #   A list of tags, in the form of name/value pairs, to apply to an email
@@ -4584,6 +4638,12 @@ module Aws::SESV2
     #             charset: "Charset",
     #           },
     #         },
+    #         headers: [
+    #           {
+    #             name: "MessageHeaderName", # required
+    #             value: "MessageHeaderValue", # required
+    #           },
+    #         ],
     #       },
     #       raw: {
     #         data: "data", # required
@@ -4592,6 +4652,12 @@ module Aws::SESV2
     #         template_name: "EmailTemplateName",
     #         template_arn: "AmazonResourceName",
     #         template_data: "EmailTemplateData",
+    #         headers: [
+    #           {
+    #             name: "MessageHeaderName", # required
+    #             value: "MessageHeaderValue", # required
+    #           },
+    #         ],
     #       },
     #     },
     #     email_tags: [
@@ -4741,9 +4807,8 @@ module Aws::SESV2
     # *Events* include message sends, deliveries, opens, clicks, bounces,
     # and complaints. *Event destinations* are places that you can send
     # information about these events to. For example, you can send event
-    # data to Amazon SNS to receive notifications when you receive bounces
-    # or complaints, or you can use Amazon Kinesis Data Firehose to stream
-    # data to Amazon S3 for long-term storage.
+    # data to Amazon EventBridge and associate a rule to send the event to
+    # the specified target.
     #
     # @option params [required, String] :configuration_set_name
     #   The name of the configuration set that contains the event destination
@@ -4781,6 +4846,9 @@ module Aws::SESV2
     #       sns_destination: {
     #         topic_arn: "AmazonResourceName", # required
     #       },
+    #       event_bridge_destination: {
+    #         event_bus_arn: "AmazonResourceName", # required
+    #       },
     #       pinpoint_destination: {
     #         application_arn: "AmazonResourceName",
     #       },
@@ -4796,9 +4864,13 @@ module Aws::SESV2
       req.send_request(options)
     end
 
-    # Updates a contact's preferences for a list. It is not necessary to
-    # specify all existing topic preferences in the TopicPreferences object,
-    # just the ones that need updating.
+    # Updates a contact's preferences for a list.
+    #
+    # <note markdown="1"> You must specify all existing topic preferences in the
+    # `TopicPreferences` object, not just the ones that need updating;
+    # otherwise, all your existing preferences will be removed.
+    #
+    #  </note>
     #
     # @option params [required, String] :contact_list_name
     #   The name of the contact list.
@@ -5054,7 +5126,7 @@ module Aws::SESV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

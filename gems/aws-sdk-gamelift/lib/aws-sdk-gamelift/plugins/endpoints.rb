@@ -14,6 +14,7 @@ module Aws::GameLift
       option(
         :endpoint_provider,
         doc_type: 'Aws::GameLift::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::GameLift
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -64,6 +66,8 @@ module Aws::GameLift
             Aws::GameLift::Endpoints::CreateAlias.build(context)
           when :create_build
             Aws::GameLift::Endpoints::CreateBuild.build(context)
+          when :create_container_group_definition
+            Aws::GameLift::Endpoints::CreateContainerGroupDefinition.build(context)
           when :create_fleet
             Aws::GameLift::Endpoints::CreateFleet.build(context)
           when :create_fleet_locations
@@ -94,6 +98,8 @@ module Aws::GameLift
             Aws::GameLift::Endpoints::DeleteAlias.build(context)
           when :delete_build
             Aws::GameLift::Endpoints::DeleteBuild.build(context)
+          when :delete_container_group_definition
+            Aws::GameLift::Endpoints::DeleteContainerGroupDefinition.build(context)
           when :delete_fleet
             Aws::GameLift::Endpoints::DeleteFleet.build(context)
           when :delete_fleet_locations
@@ -126,6 +132,8 @@ module Aws::GameLift
             Aws::GameLift::Endpoints::DescribeBuild.build(context)
           when :describe_compute
             Aws::GameLift::Endpoints::DescribeCompute.build(context)
+          when :describe_container_group_definition
+            Aws::GameLift::Endpoints::DescribeContainerGroupDefinition.build(context)
           when :describe_ec2_instance_limits
             Aws::GameLift::Endpoints::DescribeEC2InstanceLimits.build(context)
           when :describe_fleet_attributes
@@ -192,6 +200,8 @@ module Aws::GameLift
             Aws::GameLift::Endpoints::ListBuilds.build(context)
           when :list_compute
             Aws::GameLift::Endpoints::ListCompute.build(context)
+          when :list_container_group_definitions
+            Aws::GameLift::Endpoints::ListContainerGroupDefinitions.build(context)
           when :list_fleets
             Aws::GameLift::Endpoints::ListFleets.build(context)
           when :list_game_server_groups

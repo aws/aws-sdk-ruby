@@ -26,6 +26,34 @@ module Aws::OpenSearchServerless
       end
     end
 
+    class BatchGetEffectiveLifecyclePolicy
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::OpenSearchServerless::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class BatchGetLifecyclePolicy
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::OpenSearchServerless::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class BatchGetVpcEndpoint
       def self.build(context)
         unless context.config.regional_endpoint
@@ -55,6 +83,20 @@ module Aws::OpenSearchServerless
     end
 
     class CreateCollection
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::OpenSearchServerless::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class CreateLifecyclePolicy
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -125,6 +167,20 @@ module Aws::OpenSearchServerless
     end
 
     class DeleteCollection
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::OpenSearchServerless::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DeleteLifecyclePolicy
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -278,6 +334,20 @@ module Aws::OpenSearchServerless
       end
     end
 
+    class ListLifecyclePolicies
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::OpenSearchServerless::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListSecurityConfigs
       def self.build(context)
         unless context.config.regional_endpoint
@@ -391,6 +461,20 @@ module Aws::OpenSearchServerless
     end
 
     class UpdateCollection
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::OpenSearchServerless::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateLifecyclePolicy
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

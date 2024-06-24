@@ -14,6 +14,7 @@ module Aws::AppIntegrationsService
       option(
         :endpoint_provider,
         doc_type: 'Aws::AppIntegrationsService::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::AppIntegrationsService
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -62,6 +64,8 @@ module Aws::AppIntegrationsService
             Aws::AppIntegrationsService::Endpoints::CreateDataIntegration.build(context)
           when :create_event_integration
             Aws::AppIntegrationsService::Endpoints::CreateEventIntegration.build(context)
+          when :delete_application
+            Aws::AppIntegrationsService::Endpoints::DeleteApplication.build(context)
           when :delete_data_integration
             Aws::AppIntegrationsService::Endpoints::DeleteDataIntegration.build(context)
           when :delete_event_integration
@@ -72,6 +76,8 @@ module Aws::AppIntegrationsService
             Aws::AppIntegrationsService::Endpoints::GetDataIntegration.build(context)
           when :get_event_integration
             Aws::AppIntegrationsService::Endpoints::GetEventIntegration.build(context)
+          when :list_application_associations
+            Aws::AppIntegrationsService::Endpoints::ListApplicationAssociations.build(context)
           when :list_applications
             Aws::AppIntegrationsService::Endpoints::ListApplications.build(context)
           when :list_data_integration_associations

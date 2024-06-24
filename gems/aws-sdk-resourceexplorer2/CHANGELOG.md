@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.18.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.17.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.16.0 (2024-02-13)
+------------------
+
+* Feature - Resource Explorer now uses newly supported IPv4 'amazonaws.com' endpoints by default.
+
+1.15.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2023-11-14)
+------------------
+
+* Feature - Resource Explorer supports multi-account search. You can now use Resource Explorer to search and discover resources across AWS accounts within your organization or organizational unit.
+
 1.11.0 (2023-09-27)
 ------------------
 

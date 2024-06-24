@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2024-05-17)
+------------------
+
+* Feature - Introduces a new API, GetDataLakePrincipal, that returns the identity of the invoking principal
+
+1.50.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2024-04-16)
+------------------
+
+* Feature - This release adds Lake Formation managed RAM support for the 4 APIs - "DescribeLakeFormationIdentityCenterConfiguration", "CreateLakeFormationIdentityCenterConfiguration", "DescribeLakeFormationIdentityCenterConfiguration", and "DeleteLakeFormationIdentityCenterConfiguration"
+
+1.47.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.46.0 (2023-12-22)
+------------------
+
+* Feature - This release adds additional configurations on GetTemporaryGlueTableCredentials for Query Session Context.
+
+1.45.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2023-11-27)
+------------------
+
+* Feature - This release adds four new APIs "DescribeLakeFormationIdentityCenterConfiguration", "CreateLakeFormationIdentityCenterConfiguration", "DescribeLakeFormationIdentityCenterConfiguration", and "DeleteLakeFormationIdentityCenterConfiguration", and also updates the corresponding documentation.
+
+1.43.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.42.0 (2023-09-27)
 ------------------
 

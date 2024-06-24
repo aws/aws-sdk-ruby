@@ -1,0 +1,409 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Support
+  module Types
+
+    class AddAttachmentsToSetRequest
+      attr_accessor attachment_set_id: ::String
+      attr_accessor attachments: ::Array[Types::Attachment]
+      SENSITIVE: []
+    end
+
+    class AddAttachmentsToSetResponse
+      attr_accessor attachment_set_id: ::String
+      attr_accessor expiry_time: ::String
+      SENSITIVE: []
+    end
+
+    class AddCommunicationToCaseRequest
+      attr_accessor case_id: ::String
+      attr_accessor communication_body: ::String
+      attr_accessor cc_email_addresses: ::Array[::String]
+      attr_accessor attachment_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class AddCommunicationToCaseResponse
+      attr_accessor result: bool
+      SENSITIVE: []
+    end
+
+    class Attachment
+      attr_accessor file_name: ::String
+      attr_accessor data: ::String
+      SENSITIVE: []
+    end
+
+    class AttachmentDetails
+      attr_accessor attachment_id: ::String
+      attr_accessor file_name: ::String
+      SENSITIVE: []
+    end
+
+    class AttachmentIdNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AttachmentLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AttachmentSetExpired
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AttachmentSetIdNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AttachmentSetSizeLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CaseCreationLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CaseDetails
+      attr_accessor case_id: ::String
+      attr_accessor display_id: ::String
+      attr_accessor subject: ::String
+      attr_accessor status: ::String
+      attr_accessor service_code: ::String
+      attr_accessor category_code: ::String
+      attr_accessor severity_code: ::String
+      attr_accessor submitted_by: ::String
+      attr_accessor time_created: ::String
+      attr_accessor recent_communications: Types::RecentCaseCommunications
+      attr_accessor cc_email_addresses: ::Array[::String]
+      attr_accessor language: ::String
+      SENSITIVE: []
+    end
+
+    class CaseIdNotFound
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Category
+      attr_accessor code: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class Communication
+      attr_accessor case_id: ::String
+      attr_accessor body: ::String
+      attr_accessor submitted_by: ::String
+      attr_accessor time_created: ::String
+      attr_accessor attachment_set: ::Array[Types::AttachmentDetails]
+      SENSITIVE: []
+    end
+
+    class CommunicationTypeOptions
+      attr_accessor type: ::String
+      attr_accessor supported_hours: ::Array[Types::SupportedHour]
+      attr_accessor dates_without_support: ::Array[Types::DateInterval]
+      SENSITIVE: []
+    end
+
+    class CreateCaseRequest
+      attr_accessor subject: ::String
+      attr_accessor service_code: ::String
+      attr_accessor severity_code: ::String
+      attr_accessor category_code: ::String
+      attr_accessor communication_body: ::String
+      attr_accessor cc_email_addresses: ::Array[::String]
+      attr_accessor language: ::String
+      attr_accessor issue_type: ::String
+      attr_accessor attachment_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCaseResponse
+      attr_accessor case_id: ::String
+      SENSITIVE: []
+    end
+
+    class DateInterval
+      attr_accessor start_date_time: ::String
+      attr_accessor end_date_time: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAttachmentLimitExceeded
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAttachmentRequest
+      attr_accessor attachment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAttachmentResponse
+      attr_accessor attachment: Types::Attachment
+      SENSITIVE: []
+    end
+
+    class DescribeCasesRequest
+      attr_accessor case_id_list: ::Array[::String]
+      attr_accessor display_id: ::String
+      attr_accessor after_time: ::String
+      attr_accessor before_time: ::String
+      attr_accessor include_resolved_cases: bool
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor language: ::String
+      attr_accessor include_communications: bool
+      SENSITIVE: []
+    end
+
+    class DescribeCasesResponse
+      attr_accessor cases: ::Array[Types::CaseDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCommunicationsRequest
+      attr_accessor case_id: ::String
+      attr_accessor before_time: ::String
+      attr_accessor after_time: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeCommunicationsResponse
+      attr_accessor communications: ::Array[Types::Communication]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCreateCaseOptionsRequest
+      attr_accessor issue_type: ::String
+      attr_accessor service_code: ::String
+      attr_accessor language: ::String
+      attr_accessor category_code: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCreateCaseOptionsResponse
+      attr_accessor language_availability: ::String
+      attr_accessor communication_types: ::Array[Types::CommunicationTypeOptions]
+      SENSITIVE: []
+    end
+
+    class DescribeServicesRequest
+      attr_accessor service_code_list: ::Array[::String]
+      attr_accessor language: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeServicesResponse
+      attr_accessor services: ::Array[Types::Service]
+      SENSITIVE: []
+    end
+
+    class DescribeSeverityLevelsRequest
+      attr_accessor language: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSeverityLevelsResponse
+      attr_accessor severity_levels: ::Array[Types::SeverityLevel]
+      SENSITIVE: []
+    end
+
+    class DescribeSupportedLanguagesRequest
+      attr_accessor issue_type: ::String
+      attr_accessor service_code: ::String
+      attr_accessor category_code: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSupportedLanguagesResponse
+      attr_accessor supported_languages: ::Array[Types::SupportedLanguage]
+      SENSITIVE: []
+    end
+
+    class DescribeTrustedAdvisorCheckRefreshStatusesRequest
+      attr_accessor check_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeTrustedAdvisorCheckRefreshStatusesResponse
+      attr_accessor statuses: ::Array[Types::TrustedAdvisorCheckRefreshStatus]
+      SENSITIVE: []
+    end
+
+    class DescribeTrustedAdvisorCheckResultRequest
+      attr_accessor check_id: ::String
+      attr_accessor language: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTrustedAdvisorCheckResultResponse
+      attr_accessor result: Types::TrustedAdvisorCheckResult
+      SENSITIVE: []
+    end
+
+    class DescribeTrustedAdvisorCheckSummariesRequest
+      attr_accessor check_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeTrustedAdvisorCheckSummariesResponse
+      attr_accessor summaries: ::Array[Types::TrustedAdvisorCheckSummary]
+      SENSITIVE: []
+    end
+
+    class DescribeTrustedAdvisorChecksRequest
+      attr_accessor language: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTrustedAdvisorChecksResponse
+      attr_accessor checks: ::Array[Types::TrustedAdvisorCheckDescription]
+      SENSITIVE: []
+    end
+
+    class InternalServerError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RecentCaseCommunications
+      attr_accessor communications: ::Array[Types::Communication]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class RefreshTrustedAdvisorCheckRequest
+      attr_accessor check_id: ::String
+      SENSITIVE: []
+    end
+
+    class RefreshTrustedAdvisorCheckResponse
+      attr_accessor status: Types::TrustedAdvisorCheckRefreshStatus
+      SENSITIVE: []
+    end
+
+    class ResolveCaseRequest
+      attr_accessor case_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResolveCaseResponse
+      attr_accessor initial_case_status: ::String
+      attr_accessor final_case_status: ::String
+      SENSITIVE: []
+    end
+
+    class Service
+      attr_accessor code: ::String
+      attr_accessor name: ::String
+      attr_accessor categories: ::Array[Types::Category]
+      SENSITIVE: []
+    end
+
+    class SeverityLevel
+      attr_accessor code: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class SupportedHour
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      SENSITIVE: []
+    end
+
+    class SupportedLanguage
+      attr_accessor code: ::String
+      attr_accessor language: ::String
+      attr_accessor display: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TrustedAdvisorCategorySpecificSummary
+      attr_accessor cost_optimizing: Types::TrustedAdvisorCostOptimizingSummary
+      SENSITIVE: []
+    end
+
+    class TrustedAdvisorCheckDescription
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor category: ::String
+      attr_accessor metadata: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TrustedAdvisorCheckRefreshStatus
+      attr_accessor check_id: ::String
+      attr_accessor status: ::String
+      attr_accessor millis_until_next_refreshable: ::Integer
+      SENSITIVE: []
+    end
+
+    class TrustedAdvisorCheckResult
+      attr_accessor check_id: ::String
+      attr_accessor timestamp: ::String
+      attr_accessor status: ::String
+      attr_accessor resources_summary: Types::TrustedAdvisorResourcesSummary
+      attr_accessor category_specific_summary: Types::TrustedAdvisorCategorySpecificSummary
+      attr_accessor flagged_resources: ::Array[Types::TrustedAdvisorResourceDetail]
+      SENSITIVE: []
+    end
+
+    class TrustedAdvisorCheckSummary
+      attr_accessor check_id: ::String
+      attr_accessor timestamp: ::String
+      attr_accessor status: ::String
+      attr_accessor has_flagged_resources: bool
+      attr_accessor resources_summary: Types::TrustedAdvisorResourcesSummary
+      attr_accessor category_specific_summary: Types::TrustedAdvisorCategorySpecificSummary
+      SENSITIVE: []
+    end
+
+    class TrustedAdvisorCostOptimizingSummary
+      attr_accessor estimated_monthly_savings: ::Float
+      attr_accessor estimated_percent_monthly_savings: ::Float
+      SENSITIVE: []
+    end
+
+    class TrustedAdvisorResourceDetail
+      attr_accessor status: ::String
+      attr_accessor region: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor is_suppressed: bool
+      attr_accessor metadata: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TrustedAdvisorResourcesSummary
+      attr_accessor resources_processed: ::Integer
+      attr_accessor resources_flagged: ::Integer
+      attr_accessor resources_ignored: ::Integer
+      attr_accessor resources_suppressed: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

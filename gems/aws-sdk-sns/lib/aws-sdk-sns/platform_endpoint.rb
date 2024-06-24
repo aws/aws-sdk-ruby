@@ -72,7 +72,7 @@ module Aws::SNS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_endpoint_attributes(endpoint_arn: @arn)
       end
       @data = resp.data
@@ -104,7 +104,7 @@ module Aws::SNS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(endpoint_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_endpoint(options)
       end
       resp.data
@@ -114,7 +114,7 @@ module Aws::SNS
     #
     #   platform_endpoint.publish({
     #     topic_arn: "topicARN",
-    #     phone_number: "String",
+    #     phone_number: "PhoneNumber",
     #     message: "message", # required
     #     subject: "subject",
     #     message_structure: "messageStructure",
@@ -200,9 +200,8 @@ module Aws::SNS
     #   is delivered to email endpoints. This field will also be included, if
     #   present, in the standard JSON messages delivered to other endpoints.
     #
-    #   Constraints: Subjects must be ASCII text that begins with a letter,
-    #   number, or punctuation mark; must not include line breaks or control
-    #   characters; and must be less than 100 characters long.
+    #   Constraints: Subjects must be UTF-8 text with no line breaks or
+    #   control characters, and less than 100 characters long.
     # @option options [String] :message_structure
     #   Set `MessageStructure` to `json` if you want to send a different
     #   message for each protocol. For example, using one publish action, you
@@ -249,7 +248,7 @@ module Aws::SNS
     # @return [Types::PublishResponse]
     def publish(options = {})
       options = options.merge(target_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.publish(options)
       end
       resp.data
@@ -283,7 +282,7 @@ module Aws::SNS
     # @return [EmptyStructure]
     def set_attributes(options = {})
       options = options.merge(endpoint_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.set_endpoint_attributes(options)
       end
       resp.data

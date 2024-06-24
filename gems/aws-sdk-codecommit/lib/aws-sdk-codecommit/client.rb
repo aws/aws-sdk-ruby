@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CodeCommit
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CodeCommit
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::CodeCommit
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::CodeCommit
     #   @option options [Aws::CodeCommit::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CodeCommit::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -722,6 +747,7 @@ module Aws::CodeCommit
     #
     #   * {Types::BatchGetRepositoriesOutput#repositories #repositories} => Array&lt;Types::RepositoryMetadata&gt;
     #   * {Types::BatchGetRepositoriesOutput#repositories_not_found #repositories_not_found} => Array&lt;String&gt;
+    #   * {Types::BatchGetRepositoriesOutput#errors #errors} => Array&lt;Types::BatchGetRepositoriesError&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -742,8 +768,14 @@ module Aws::CodeCommit
     #   resp.repositories[0].clone_url_http #=> String
     #   resp.repositories[0].clone_url_ssh #=> String
     #   resp.repositories[0].arn #=> String
+    #   resp.repositories[0].kms_key_id #=> String
     #   resp.repositories_not_found #=> Array
     #   resp.repositories_not_found[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].repository_id #=> String
+    #   resp.errors[0].repository_name #=> String
+    #   resp.errors[0].error_code #=> String, one of "EncryptionIntegrityChecksFailedException", "EncryptionKeyAccessDeniedException", "EncryptionKeyDisabledException", "EncryptionKeyNotFoundException", "EncryptionKeyUnavailableException", "RepositoryDoesNotExistException"
+    #   resp.errors[0].error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetRepositories AWS API Documentation
     #
@@ -1195,6 +1227,20 @@ module Aws::CodeCommit
     # @option params [Hash<String,String>] :tags
     #   One or more tag key-value pairs to use when tagging this repository.
     #
+    # @option params [String] :kms_key_id
+    #   The ID of the encryption key. You can view the ID of an encryption key
+    #   in the KMS console, or use the KMS APIs to programmatically retrieve a
+    #   key ID. For more information about acceptable values for kmsKeyID, see
+    #   [KeyId][1] in the Decrypt API description in the *Key Management
+    #   Service API Reference*.
+    #
+    #   If no key is specified, the default `aws/codecommit` Amazon Web
+    #   Services managed key is used.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
+    #
     # @return [Types::CreateRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRepositoryOutput#repository_metadata #repository_metadata} => Types::RepositoryMetadata
@@ -1207,6 +1253,7 @@ module Aws::CodeCommit
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -1221,6 +1268,7 @@ module Aws::CodeCommit
     #   resp.repository_metadata.clone_url_http #=> String
     #   resp.repository_metadata.clone_url_ssh #=> String
     #   resp.repository_metadata.arn #=> String
+    #   resp.repository_metadata.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepository AWS API Documentation
     #
@@ -2878,6 +2926,7 @@ module Aws::CodeCommit
     #   resp.repository_metadata.clone_url_http #=> String
     #   resp.repository_metadata.clone_url_ssh #=> String
     #   resp.repository_metadata.arn #=> String
+    #   resp.repository_metadata.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepository AWS API Documentation
     #
@@ -5004,6 +5053,52 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Updates the Key Management Service encryption key used to encrypt and
+    # decrypt a CodeCommit repository.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository for which you want to update the KMS
+    #   encryption key used to encrypt and decrypt the repository.
+    #
+    # @option params [required, String] :kms_key_id
+    #   The ID of the encryption key. You can view the ID of an encryption key
+    #   in the KMS console, or use the KMS APIs to programmatically retrieve a
+    #   key ID. For more information about acceptable values for keyID, see
+    #   [KeyId][1] in the Decrypt API description in the *Key Management
+    #   Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/APIReference/API_Decrypt.html#KMS-Decrypt-request-KeyId
+    #
+    # @return [Types::UpdateRepositoryEncryptionKeyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRepositoryEncryptionKeyOutput#repository_id #repository_id} => String
+    #   * {Types::UpdateRepositoryEncryptionKeyOutput#kms_key_id #kms_key_id} => String
+    #   * {Types::UpdateRepositoryEncryptionKeyOutput#original_kms_key_id #original_kms_key_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_repository_encryption_key({
+    #     repository_name: "RepositoryName", # required
+    #     kms_key_id: "KmsKeyId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.repository_id #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.original_kms_key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryEncryptionKey AWS API Documentation
+    #
+    # @overload update_repository_encryption_key(params = {})
+    # @param [Hash] params ({})
+    def update_repository_encryption_key(params = {}, options = {})
+      req = build_request(:update_repository_encryption_key, params)
+      req.send_request(options)
+    end
+
     # Renames a repository. The repository name must be unique across the
     # calling Amazon Web Services account. Repository names are limited to
     # 100 alphanumeric, dash, and underscore characters, and cannot include
@@ -5052,7 +5147,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,0 +1,61 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ECS
+    module Waiters
+
+      class ServicesInactive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?cluster: ::String,
+                    services: Array[::String],
+                    ?include: Array[("TAGS")]
+                  ) -> Client::_DescribeServicesResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeServicesResponseSuccess
+      end
+
+      class ServicesStable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?cluster: ::String,
+                    services: Array[::String],
+                    ?include: Array[("TAGS")]
+                  ) -> Client::_DescribeServicesResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeServicesResponseSuccess
+      end
+
+      class TasksRunning
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?cluster: ::String,
+                    tasks: Array[::String],
+                    ?include: Array[("TAGS")]
+                  ) -> Client::_DescribeTasksResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeTasksResponseSuccess
+      end
+
+      class TasksStopped
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?cluster: ::String,
+                    tasks: Array[::String],
+                    ?include: Array[("TAGS")]
+                  ) -> Client::_DescribeTasksResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeTasksResponseSuccess
+      end
+    end
+  end
+end

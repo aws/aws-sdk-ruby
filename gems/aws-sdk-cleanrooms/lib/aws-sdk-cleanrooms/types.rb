@@ -203,23 +203,30 @@ module Aws::CleanRooms
     end
 
     # A type of analysis rule that enables the table owner to approve custom
-    # SQL queries on their configured tables.
+    # SQL queries on their configured tables. It supports differential
+    # privacy.
     #
     # @!attribute [rw] allowed_analyses
-    #   The analysis templates that are allowed by the custom analysis rule.
+    #   The ARN of the analysis templates that are allowed by the custom
+    #   analysis rule.
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_analysis_providers
-    #   The Amazon Web Services accounts that are allowed to query by the
-    #   custom analysis rule. Required when `allowedAnalyses` is
-    #   `ANY_QUERY`.
+    #   The IDs of the Amazon Web Services accounts that are allowed to
+    #   query by the custom analysis rule. Required when `allowedAnalyses`
+    #   is `ANY_QUERY`.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] differential_privacy
+    #   The differential privacy configuration.
+    #   @return [Types::DifferentialPrivacyConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisRuleCustom AWS API Documentation
     #
     class AnalysisRuleCustom < Struct.new(
       :allowed_analyses,
-      :allowed_analysis_providers)
+      :allowed_analysis_providers,
+      :differential_privacy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -407,6 +414,11 @@ module Aws::CleanRooms
     #   The parameters of the analysis template.
     #   @return [Array<Types::AnalysisParameter>]
     #
+    # @!attribute [rw] validations
+    #   Information about the validations performed on the analysis
+    #   template.
+    #   @return [Array<Types::AnalysisTemplateValidationStatusDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplate AWS API Documentation
     #
     class AnalysisTemplate < Struct.new(
@@ -423,7 +435,8 @@ module Aws::CleanRooms
       :schema,
       :format,
       :source,
-      :analysis_parameters)
+      :analysis_parameters,
+      :validations)
       SENSITIVE = [:source]
       include Aws::Structure
     end
@@ -486,6 +499,58 @@ module Aws::CleanRooms
       :collaboration_arn,
       :collaboration_id,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status details of the analysis template validation. Clean Rooms
+    # Differential Privacy uses a general-purpose query structure to support
+    # complex SQL queries and validates whether an analysis template fits
+    # that general-purpose query structure. Validation is performed when
+    # analysis templates are created and fetched. Because analysis templates
+    # are immutable by design, we recommend that you create analysis
+    # templates after you associate the configured tables with their
+    # analysis rule to your collaboration.
+    #
+    # For more information, see
+    # [https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy
+    #
+    # @!attribute [rw] type
+    #   The type of validation that was performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] reasons
+    #   The reasons for the validation results.
+    #   @return [Array<Types::AnalysisTemplateValidationStatusReason>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplateValidationStatusDetail AWS API Documentation
+    #
+    class AnalysisTemplateValidationStatusDetail < Struct.new(
+      :type,
+      :status,
+      :reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The reasons for the validation results.
+    #
+    # @!attribute [rw] message
+    #   The validation message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/AnalysisTemplateValidationStatusReason AWS API Documentation
+    #
+    class AnalysisTemplateValidationStatusReason < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -553,6 +618,72 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # An error that describes why a schema could not be fetched.
+    #
+    # @!attribute [rw] name
+    #   An error name for the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The analysis rule type.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   An error code for the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of why the call failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BatchGetSchemaAnalysisRuleError AWS API Documentation
+    #
+    class BatchGetSchemaAnalysisRuleError < Struct.new(
+      :name,
+      :type,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_identifier
+    #   The unique identifier of the collaboration that contains the schema
+    #   analysis rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_analysis_rule_requests
+    #   The information that's necessary to retrieve a schema analysis
+    #   rule.
+    #   @return [Array<Types::SchemaAnalysisRuleRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BatchGetSchemaAnalysisRuleInput AWS API Documentation
+    #
+    class BatchGetSchemaAnalysisRuleInput < Struct.new(
+      :collaboration_identifier,
+      :schema_analysis_rule_requests)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_rules
+    #   The retrieved list of analysis rules.
+    #   @return [Array<Types::AnalysisRule>]
+    #
+    # @!attribute [rw] errors
+    #   Error reasons for schemas that could not be retrieved. One error is
+    #   returned for every schema that could not be retrieved.
+    #   @return [Array<Types::BatchGetSchemaAnalysisRuleError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BatchGetSchemaAnalysisRuleOutput AWS API Documentation
+    #
+    class BatchGetSchemaAnalysisRuleOutput < Struct.new(
+      :analysis_rules,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An error describing why a schema could not be fetched.
     #
     # @!attribute [rw] name
@@ -583,7 +714,7 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] names
-    #   The names for the schema objects to retrieve.&gt;
+    #   The names for the schema objects to retrieve.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/BatchGetSchemaInput AWS API Documentation
@@ -751,6 +882,10 @@ module Aws::CleanRooms
     #   template.
     #   @return [Array<Types::AnalysisParameter>]
     #
+    # @!attribute [rw] validations
+    #   The validations that were performed.
+    #   @return [Array<Types::AnalysisTemplateValidationStatusDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationAnalysisTemplate AWS API Documentation
     #
     class CollaborationAnalysisTemplate < Struct.new(
@@ -766,7 +901,8 @@ module Aws::CleanRooms
       :schema,
       :format,
       :source,
-      :analysis_parameters)
+      :analysis_parameters,
+      :validations)
       SENSITIVE = [:source]
       include Aws::Structure
     end
@@ -825,6 +961,325 @@ module Aws::CleanRooms
       :collaboration_id,
       :creator_account_id,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configured audience model association within a collaboration.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configured audience model
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   A unique identifier for the collaboration that the configured
+    #   audience model associations belong to. Accepts collaboration ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The unique ARN for the configured audience model's associated
+    #   collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_audience_model_arn
+    #   The Amazon Resource Name (ARN) of the configure audience model.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The identifier used to reference members of the collaboration. Only
+    #   supports AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the configured audience model association was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the configured audience model
+    #   association was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationConfiguredAudienceModelAssociation AWS API Documentation
+    #
+    class CollaborationConfiguredAudienceModelAssociation < Struct.new(
+      :id,
+      :arn,
+      :collaboration_id,
+      :collaboration_arn,
+      :configured_audience_model_arn,
+      :name,
+      :description,
+      :creator_account_id,
+      :create_time,
+      :update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the configured audience model association in the
+    # collaboration.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configured audience model
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the configured audience model association was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the configured audience model
+    #   association was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The unique ARN for the configured audience model's associated
+    #   collaboration.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   A unique identifier for the collaboration that the configured
+    #   audience model associations belong to. Accepts collaboration ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The identifier used to reference members of the collaboration. Only
+    #   supports AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configured audience model association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationConfiguredAudienceModelAssociationSummary AWS API Documentation
+    #
+    class CollaborationConfiguredAudienceModelAssociationSummary < Struct.new(
+      :arn,
+      :create_time,
+      :id,
+      :name,
+      :update_time,
+      :collaboration_arn,
+      :collaboration_id,
+      :creator_account_id,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the collaboration privacy budgets. This summary includes
+    # the collaboration information, creation information, epsilon provided,
+    # and utility in terms of aggregations.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the collaboration privacy budget.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_budget_template_id
+    #   The unique identifier of the collaboration privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_budget_template_arn
+    #   The ARN of the collaboration privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique identifier of the collaboration that includes this
+    #   privacy budget.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The ARN of the collaboration that includes this privacy budget.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The unique identifier of the account that created this privacy
+    #   budget.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the privacy budget was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the privacy budget was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] budget
+    #   The includes epsilon provided and utility in terms of aggregations.
+    #   @return [Types::PrivacyBudget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationPrivacyBudgetSummary AWS API Documentation
+    #
+    class CollaborationPrivacyBudgetSummary < Struct.new(
+      :id,
+      :privacy_budget_template_id,
+      :privacy_budget_template_arn,
+      :collaboration_id,
+      :collaboration_arn,
+      :creator_account_id,
+      :type,
+      :create_time,
+      :update_time,
+      :budget)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array that specifies the information for a collaboration's privacy
+    # budget template.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the collaboration privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the collaboration privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique identifier of the collaboration that includes this
+    #   collaboration privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The ARN of the collaboration that includes this collaboration
+    #   privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The unique identifier of the account that created this collaboration
+    #   privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the collaboration privacy budget template was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the collaboration privacy budget
+    #   template was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] privacy_budget_type
+    #   The type of privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_refresh
+    #   How often the privacy budget refreshes.
+    #
+    #   If you plan to regularly bring new data into the collaboration, use
+    #   `CALENDAR_MONTH` to automatically get a new privacy budget for the
+    #   collaboration every calendar month. Choosing this option allows
+    #   arbitrary amounts of information to be revealed about rows of the
+    #   data when repeatedly queried across refreshes. Avoid choosing this
+    #   if the same rows will be repeatedly queried between privacy budget
+    #   refreshes.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Specifies the epsilon and noise parameters for the privacy budget
+    #   template.
+    #   @return [Types::PrivacyBudgetTemplateParametersOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationPrivacyBudgetTemplate AWS API Documentation
+    #
+    class CollaborationPrivacyBudgetTemplate < Struct.new(
+      :id,
+      :arn,
+      :collaboration_id,
+      :collaboration_arn,
+      :creator_account_id,
+      :create_time,
+      :update_time,
+      :privacy_budget_type,
+      :auto_refresh,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the collaboration's privacy budget template. This
+    # summary includes information about who created the privacy budget
+    # template and what collaborations it belongs to.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the collaboration privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the collaboration privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique identifier of the collaboration that contains this
+    #   collaboration privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The ARN of the collaboration that contains this collaboration
+    #   privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_account_id
+    #   The unique identifier of the account that created this collaboration
+    #   privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_budget_type
+    #   The type of the privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the collaboration privacy budget template was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the collaboration privacy budget
+    #   template was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CollaborationPrivacyBudgetTemplateSummary AWS API Documentation
+    #
+    class CollaborationPrivacyBudgetTemplateSummary < Struct.new(
+      :id,
+      :arn,
+      :collaboration_id,
+      :collaboration_arn,
+      :creator_account_id,
+      :privacy_budget_type,
+      :create_time,
+      :update_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -906,6 +1361,159 @@ module Aws::CleanRooms
     class Column < Struct.new(
       :name,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the configured audience model association.
+    #
+    # @!attribute [rw] id
+    #   A unique identifier of the configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configured audience model
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_audience_model_arn
+    #   The Amazon Resource Name (ARN) of the configured audience model that
+    #   was used for this configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   A unique identifier for the membership that contains this configured
+    #   audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_arn
+    #   The Amazon Resource Name (ARN) of the membership that contains this
+    #   configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   A unique identifier of the collaboration that contains this
+    #   configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The Amazon Resource Name (ARN) of the collaboration that contains
+    #   this configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] manage_resource_policies
+    #   When `TRUE`, indicates that the resource policy for the configured
+    #   audience model resource being associated is configured for Clean
+    #   Rooms to manage permissions related to the given collaboration. When
+    #   `FALSE`, indicates that the configured audience model resource owner
+    #   will manage permissions related to the given collaboration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description of the configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the configured audience model association was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the configured audience model
+    #   association was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredAudienceModelAssociation AWS API Documentation
+    #
+    class ConfiguredAudienceModelAssociation < Struct.new(
+      :id,
+      :arn,
+      :configured_audience_model_arn,
+      :membership_id,
+      :membership_arn,
+      :collaboration_id,
+      :collaboration_arn,
+      :name,
+      :manage_resource_policies,
+      :description,
+      :create_time,
+      :update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the configured audience model association.
+    #
+    # @!attribute [rw] membership_id
+    #   A unique identifier of the membership that contains the configured
+    #   audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_arn
+    #   The Amazon Resource Name (ARN) of the membership that contains the
+    #   configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The Amazon Resource Name (ARN) of the collaboration that contains
+    #   the configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   A unique identifier of the collaboration that configured audience
+    #   model is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the configured audience model association was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the configured audience model
+    #   association was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier of the configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configured audience model
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_audience_model_arn
+    #   The Amazon Resource Name (ARN) of the configured audience model that
+    #   was used for this configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configured audience model association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredAudienceModelAssociationSummary AWS API Documentation
+    #
+    class ConfiguredAudienceModelAssociationSummary < Struct.new(
+      :membership_id,
+      :membership_arn,
+      :collaboration_arn,
+      :collaboration_id,
+      :create_time,
+      :update_time,
+      :id,
+      :arn,
+      :name,
+      :configured_audience_model_arn,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1057,7 +1665,8 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] custom
     #   A type of analysis rule that enables the table owner to approve
-    #   custom SQL queries on their configured tables.
+    #   custom SQL queries on their configured tables. It supports
+    #   differential privacy.
     #   @return [Types::AnalysisRuleCustom]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ConfiguredTableAnalysisRulePolicyV1 AWS API Documentation
@@ -1374,6 +1983,15 @@ module Aws::CleanRooms
     #   control in IAM policies to control access to this resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] creator_payment_configuration
+    #   The collaboration creator's payment responsibilities set by the
+    #   collaboration creator.
+    #
+    #   If the collaboration creator hasn't specified anyone as the member
+    #   paying for query compute costs, then the member who can query is the
+    #   default payer.
+    #   @return [Types::PaymentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateCollaborationInput AWS API Documentation
     #
     class CreateCollaborationInput < Struct.new(
@@ -1384,7 +2002,8 @@ module Aws::CleanRooms
       :creator_display_name,
       :data_encryption_metadata,
       :query_log_status,
-      :tags)
+      :tags,
+      :creator_payment_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1397,6 +2016,72 @@ module Aws::CleanRooms
     #
     class CreateCollaborationOutput < Struct.new(
       :collaboration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   The configured audience model is associated to the collaboration
+    #   that this membership belongs to. Accepts a membership ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_audience_model_arn
+    #   A unique identifier for the configured audience model that you want
+    #   to associate.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_audience_model_association_name
+    #   The name of the configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] manage_resource_policies
+    #   When `TRUE`, indicates that the resource policy for the configured
+    #   audience model resource being associated is configured for Clean
+    #   Rooms to manage permissions related to the given collaboration. When
+    #   `FALSE`, indicates that the configured audience model resource owner
+    #   will manage permissions related to the given collaboration.
+    #
+    #   Setting this to `TRUE` requires you to have permissions to create,
+    #   update, and delete the resource policy for the `cleanrooms-ml`
+    #   resource when you call the DeleteConfiguredAudienceModelAssociation
+    #   resource. In addition, if you are the collaboration creator and
+    #   specify `TRUE`, you must have the same permissions when you call the
+    #   DeleteMember and DeleteCollaboration APIs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] description
+    #   A description of the configured audience model association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateConfiguredAudienceModelAssociationInput AWS API Documentation
+    #
+    class CreateConfiguredAudienceModelAssociationInput < Struct.new(
+      :membership_identifier,
+      :configured_audience_model_arn,
+      :configured_audience_model_association_name,
+      :manage_resource_policies,
+      :tags,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configured_audience_model_association
+    #   Information about the configured audience model association.
+    #   @return [Types::ConfiguredAudienceModelAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateConfiguredAudienceModelAssociationOutput AWS API Documentation
+    #
+    class CreateConfiguredAudienceModelAssociationOutput < Struct.new(
+      :configured_audience_model_association)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1553,7 +2238,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] query_log_status
     #   An indicator as to whether query logging has been enabled or
-    #   disabled for the collaboration.
+    #   disabled for the membership.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1568,13 +2253,25 @@ module Aws::CleanRooms
     #   member who can receive results.
     #   @return [Types::MembershipProtectedQueryResultConfiguration]
     #
+    # @!attribute [rw] payment_configuration
+    #   The payment responsibilities accepted by the collaboration member.
+    #
+    #   Not required if the collaboration member has the member ability to
+    #   run queries.
+    #
+    #   Required if the collaboration member doesn't have the member
+    #   ability to run queries but is configured as a payer by the
+    #   collaboration creator.
+    #   @return [Types::MembershipPaymentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreateMembershipInput AWS API Documentation
     #
     class CreateMembershipInput < Struct.new(
       :collaboration_identifier,
       :query_log_status,
       :tags,
-      :default_result_configuration)
+      :default_result_configuration,
+      :payment_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1591,27 +2288,84 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # @!attribute [rw] membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   The privacy budget template is created in the collaboration that
+    #   this membership belongs to. Accepts a membership ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_refresh
+    #   How often the privacy budget refreshes.
+    #
+    #   If you plan to regularly bring new data into the collaboration, you
+    #   can use `CALENDAR_MONTH` to automatically get a new privacy budget
+    #   for the collaboration every calendar month. Choosing this option
+    #   allows arbitrary amounts of information to be revealed about rows of
+    #   the data when repeatedly queries across refreshes. Avoid choosing
+    #   this if the same rows will be repeatedly queried between privacy
+    #   budget refreshes.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_budget_type
+    #   Specifies the type of the privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Specifies your parameters for the privacy budget template.
+    #   @return [Types::PrivacyBudgetTemplateParametersInput]
+    #
+    # @!attribute [rw] tags
+    #   An optional label that you can assign to a resource when you create
+    #   it. Each tag consists of a key and an optional value, both of which
+    #   you define. When you use tagging, you can also use tag-based access
+    #   control in IAM policies to control access to this resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreatePrivacyBudgetTemplateInput AWS API Documentation
+    #
+    class CreatePrivacyBudgetTemplateInput < Struct.new(
+      :membership_identifier,
+      :auto_refresh,
+      :privacy_budget_type,
+      :parameters,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] privacy_budget_template
+    #   A summary of the elements in the privacy budget template.
+    #   @return [Types::PrivacyBudgetTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/CreatePrivacyBudgetTemplateOutput AWS API Documentation
+    #
+    class CreatePrivacyBudgetTemplateOutput < Struct.new(
+      :privacy_budget_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The settings for client-side encryption for cryptographic computing.
     #
     # @!attribute [rw] allow_cleartext
-    #   Indicates whether encrypted tables can contain cleartext data (true)
-    #   or are to cryptographically process every column (false).
+    #   Indicates whether encrypted tables can contain cleartext data
+    #   (`TRUE`) or are to cryptographically process every column (`FALSE`).
     #   @return [Boolean]
     #
     # @!attribute [rw] allow_duplicates
     #   Indicates whether Fingerprint columns can contain duplicate entries
-    #   (true) or are to contain only non-repeated values (false).
+    #   (`TRUE`) or are to contain only non-repeated values (`FALSE`).
     #   @return [Boolean]
     #
     # @!attribute [rw] allow_joins_on_columns_with_different_names
     #   Indicates whether Fingerprint columns can be joined on any other
-    #   Fingerprint column with a different name (true) or can only be
-    #   joined on Fingerprint columns of the same name (false).
+    #   Fingerprint column with a different name (`TRUE`) or can only be
+    #   joined on Fingerprint columns of the same name (`FALSE`).
     #   @return [Boolean]
     #
     # @!attribute [rw] preserve_nulls
     #   Indicates whether NULL values are to be copied as NULL to encrypted
-    #   tables (true) or cryptographically processed (false).
+    #   tables (`TRUE`) or cryptographically processed (`FALSE`).
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DataEncryptionMetadata AWS API Documentation
@@ -1661,6 +2415,29 @@ module Aws::CleanRooms
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteCollaborationOutput AWS API Documentation
     #
     class DeleteCollaborationOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] configured_audience_model_association_identifier
+    #   A unique identifier of the configured audience model association
+    #   that you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   A unique identifier of the membership that contains the audience
+    #   model association that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteConfiguredAudienceModelAssociationInput AWS API Documentation
+    #
+    class DeleteConfiguredAudienceModelAssociationInput < Struct.new(
+      :configured_audience_model_association_identifier,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeleteConfiguredAudienceModelAssociationOutput AWS API Documentation
+    #
+    class DeleteConfiguredAudienceModelAssociationOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] configured_table_identifier
     #   The unique identifier for the configured table that the analysis
@@ -1767,6 +2544,287 @@ module Aws::CleanRooms
     class DeleteMembershipOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   The privacy budget template is deleted from the collaboration that
+    #   this membership belongs to. Accepts a membership ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_budget_template_identifier
+    #   A unique identifier for your privacy budget template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeletePrivacyBudgetTemplateInput AWS API Documentation
+    #
+    class DeletePrivacyBudgetTemplateInput < Struct.new(
+      :membership_identifier,
+      :privacy_budget_template_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DeletePrivacyBudgetTemplateOutput AWS API Documentation
+    #
+    class DeletePrivacyBudgetTemplateOutput < Aws::EmptyStructure; end
+
+    # Specifies the name of the column that contains the unique identifier
+    # of your users, whose privacy you want to protect.
+    #
+    # @!attribute [rw] name
+    #   The name of the column, such as user\_id, that contains the unique
+    #   identifier of your users, whose privacy you want to protect. If you
+    #   want to turn on differential privacy for two or more tables in a
+    #   collaboration, you must configure the same column as the user
+    #   identifier column in both analysis rules.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DifferentialPrivacyColumn AWS API Documentation
+    #
+    class DifferentialPrivacyColumn < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the unique identifier for your users.
+    #
+    # @!attribute [rw] columns
+    #   The name of the column (such as user\_id) that contains the unique
+    #   identifier of your users whose privacy you want to protect. If you
+    #   want to turn on diﬀerential privacy for two or more tables in a
+    #   collaboration, you must conﬁgure the same column as the user
+    #   identiﬁer column in both analysis rules.
+    #   @return [Array<Types::DifferentialPrivacyColumn>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DifferentialPrivacyConfiguration AWS API Documentation
+    #
+    class DifferentialPrivacyConfiguration < Struct.new(
+      :columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array that contains the sensitivity parameters.
+    #
+    # @!attribute [rw] sensitivity_parameters
+    #   Provides the sensitivity parameters that you can use to better
+    #   understand the total amount of noise in query results.
+    #   @return [Array<Types::DifferentialPrivacySensitivityParameters>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DifferentialPrivacyParameters AWS API Documentation
+    #
+    class DifferentialPrivacyParameters < Struct.new(
+      :sensitivity_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides an estimate of the number of aggregation functions that the
+    # member who can query can run given the epsilon and noise parameters.
+    #
+    # @!attribute [rw] type
+    #   The type of aggregation function.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_count
+    #   The maximum number of aggregations that the member who can query can
+    #   run given the epsilon and noise parameters.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DifferentialPrivacyPreviewAggregation AWS API Documentation
+    #
+    class DifferentialPrivacyPreviewAggregation < Struct.new(
+      :type,
+      :max_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The epsilon and noise parameters that you want to preview.
+    #
+    # @!attribute [rw] epsilon
+    #   The epsilon value that you want to preview.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] users_noise_per_query
+    #   Noise added per query is measured in terms of the number of users
+    #   whose contributions you want to obscure. This value governs the rate
+    #   at which the privacy budget is depleted.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DifferentialPrivacyPreviewParametersInput AWS API Documentation
+    #
+    class DifferentialPrivacyPreviewParametersInput < Struct.new(
+      :epsilon,
+      :users_noise_per_query)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configured epsilon value and the utility in terms of
+    # total aggregations, as well as the remaining aggregations available.
+    #
+    # @!attribute [rw] aggregations
+    #   This information includes the configured epsilon value and the
+    #   utility in terms of total aggregations, as well as the remaining
+    #   aggregations.
+    #   @return [Array<Types::DifferentialPrivacyPrivacyBudgetAggregation>]
+    #
+    # @!attribute [rw] epsilon
+    #   The epsilon value that you configured.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DifferentialPrivacyPrivacyBudget AWS API Documentation
+    #
+    class DifferentialPrivacyPrivacyBudget < Struct.new(
+      :aggregations,
+      :epsilon)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the total number of aggregations, as well as the
+    # remaining aggregations.
+    #
+    # @!attribute [rw] type
+    #   The different types of aggregation functions that you can perform.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_count
+    #   The maximum number of aggregation functions that you can perform
+    #   with the given privacy budget.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] remaining_count
+    #   The remaining number of aggregation functions that can be run with
+    #   the available privacy budget.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DifferentialPrivacyPrivacyBudgetAggregation AWS API Documentation
+    #
+    class DifferentialPrivacyPrivacyBudgetAggregation < Struct.new(
+      :type,
+      :max_count,
+      :remaining_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the number of aggregation functions that the member
+    # who can query can run given the epsilon and noise parameters.
+    #
+    # @!attribute [rw] aggregations
+    #   The number of aggregation functions that you can perform.
+    #   @return [Array<Types::DifferentialPrivacyPreviewAggregation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DifferentialPrivacyPrivacyImpact AWS API Documentation
+    #
+    class DifferentialPrivacyPrivacyImpact < Struct.new(
+      :aggregations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the sensitivity parameters.
+    #
+    # @!attribute [rw] aggregation_type
+    #   The type of aggregation function that was run.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregation_expression
+    #   The aggregation expression that was run.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_contribution_limit
+    #   The maximum number of rows contributed by a user in a SQL query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_column_value
+    #   The lower bound of the aggregation expression.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_column_value
+    #   The upper bound of the aggregation expression.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DifferentialPrivacySensitivityParameters AWS API Documentation
+    #
+    class DifferentialPrivacySensitivityParameters < Struct.new(
+      :aggregation_type,
+      :aggregation_expression,
+      :user_contribution_limit,
+      :min_column_value,
+      :max_column_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The epsilon and noise parameter values that you want to use for the
+    # differential privacy template.
+    #
+    # @!attribute [rw] epsilon
+    #   The epsilon value that you want to use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] users_noise_per_query
+    #   Noise added per query is measured in terms of the number of users
+    #   whose contributions you want to obscure. This value governs the rate
+    #   at which the privacy budget is depleted.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DifferentialPrivacyTemplateParametersInput AWS API Documentation
+    #
+    class DifferentialPrivacyTemplateParametersInput < Struct.new(
+      :epsilon,
+      :users_noise_per_query)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The epsilon and noise parameter values that were used for the
+    # differential privacy template.
+    #
+    # @!attribute [rw] epsilon
+    #   The epsilon value that you specified.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] users_noise_per_query
+    #   Noise added per query is measured in terms of the number of users
+    #   whose contributions you want to obscure. This value governs the rate
+    #   at which the privacy budget is depleted.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DifferentialPrivacyTemplateParametersOutput AWS API Documentation
+    #
+    class DifferentialPrivacyTemplateParametersOutput < Struct.new(
+      :epsilon,
+      :users_noise_per_query)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The epsilon and noise parameter values that you want to update in the
+    # differential privacy template.
+    #
+    # @!attribute [rw] epsilon
+    #   The updated epsilon value that you want to use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] users_noise_per_query
+    #   The updated value of noise added per query. It is measured in terms
+    #   of the number of users whose contributions you want to obscure. This
+    #   value governs the rate at which the privacy budget is depleted.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DifferentialPrivacyTemplateUpdateParameters AWS API Documentation
+    #
+    class DifferentialPrivacyTemplateUpdateParameters < Struct.new(
+      :epsilon,
+      :users_noise_per_query)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
     #   The identifier for a membership resource.
     #   @return [String]
     #
@@ -1827,6 +2885,37 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] collaboration_identifier
+    #   A unique identifier for the collaboration that the configured
+    #   audience model association belongs to. Accepts a collaboration ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] configured_audience_model_association_identifier
+    #   A unique identifier for the configured audience model association
+    #   that you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationConfiguredAudienceModelAssociationInput AWS API Documentation
+    #
+    class GetCollaborationConfiguredAudienceModelAssociationInput < Struct.new(
+      :collaboration_identifier,
+      :configured_audience_model_association_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_configured_audience_model_association
+    #   The metadata of the configured audience model association.
+    #   @return [Types::CollaborationConfiguredAudienceModelAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationConfiguredAudienceModelAssociationOutput AWS API Documentation
+    #
+    class GetCollaborationConfiguredAudienceModelAssociationOutput < Struct.new(
+      :collaboration_configured_audience_model_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_identifier
     #   The identifier for the collaboration.
     #   @return [String]
     #
@@ -1846,6 +2935,68 @@ module Aws::CleanRooms
     #
     class GetCollaborationOutput < Struct.new(
       :collaboration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_identifier
+    #   A unique identifier for one of your collaborations.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_budget_template_identifier
+    #   A unique identifier for one of your privacy budget templates.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationPrivacyBudgetTemplateInput AWS API Documentation
+    #
+    class GetCollaborationPrivacyBudgetTemplateInput < Struct.new(
+      :collaboration_identifier,
+      :privacy_budget_template_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_privacy_budget_template
+    #   Returns the details of the privacy budget template that you
+    #   requested.
+    #   @return [Types::CollaborationPrivacyBudgetTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetCollaborationPrivacyBudgetTemplateOutput AWS API Documentation
+    #
+    class GetCollaborationPrivacyBudgetTemplateOutput < Struct.new(
+      :collaboration_privacy_budget_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configured_audience_model_association_identifier
+    #   A unique identifier for the configured audience model association
+    #   that you want to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   A unique identifier for the membership that contains the configured
+    #   audience model association that you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetConfiguredAudienceModelAssociationInput AWS API Documentation
+    #
+    class GetConfiguredAudienceModelAssociationInput < Struct.new(
+      :configured_audience_model_association_identifier,
+      :membership_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configured_audience_model_association
+    #   Information about the configured audience model association that you
+    #   requested.
+    #   @return [Types::ConfiguredAudienceModelAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetConfiguredAudienceModelAssociationOutput AWS API Documentation
+    #
+    class GetConfiguredAudienceModelAssociationOutput < Struct.new(
+      :configured_audience_model_association)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1957,6 +3108,38 @@ module Aws::CleanRooms
     #
     class GetMembershipOutput < Struct.new(
       :membership)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   The privacy budget template is retrieved from the collaboration that
+    #   this membership belongs to. Accepts a membership ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_budget_template_identifier
+    #   A unique identifier for your privacy budget template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetPrivacyBudgetTemplateInput AWS API Documentation
+    #
+    class GetPrivacyBudgetTemplateInput < Struct.new(
+      :membership_identifier,
+      :privacy_budget_template_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] privacy_budget_template
+    #   Returns the details of the privacy budget template that you
+    #   requested.
+    #   @return [Types::PrivacyBudgetTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/GetPrivacyBudgetTemplateOutput AWS API Documentation
+    #
+    class GetPrivacyBudgetTemplateOutput < Struct.new(
+      :privacy_budget_template)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2173,6 +3356,142 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # @!attribute [rw] collaboration_identifier
+    #   A unique identifier for the collaboration that the configured
+    #   audience model association belongs to. Accepts a collaboration ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationConfiguredAudienceModelAssociationsInput AWS API Documentation
+    #
+    class ListCollaborationConfiguredAudienceModelAssociationsInput < Struct.new(
+      :collaboration_identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_configured_audience_model_association_summaries
+    #   The metadata of the configured audience model association within a
+    #   collaboration.
+    #   @return [Array<Types::CollaborationConfiguredAudienceModelAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationConfiguredAudienceModelAssociationsOutput AWS API Documentation
+    #
+    class ListCollaborationConfiguredAudienceModelAssociationsOutput < Struct.new(
+      :collaboration_configured_audience_model_association_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_identifier
+    #   A unique identifier for one of your collaborations.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetTemplatesInput AWS API Documentation
+    #
+    class ListCollaborationPrivacyBudgetTemplatesInput < Struct.new(
+      :collaboration_identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_privacy_budget_template_summaries
+    #   An array that summarizes the collaboration privacy budget templates.
+    #   The summary includes collaboration information, creation
+    #   information, the privacy budget type.
+    #   @return [Array<Types::CollaborationPrivacyBudgetTemplateSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetTemplatesOutput AWS API Documentation
+    #
+    class ListCollaborationPrivacyBudgetTemplatesOutput < Struct.new(
+      :next_token,
+      :collaboration_privacy_budget_template_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_identifier
+    #   A unique identifier for one of your collaborations.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_budget_type
+    #   Specifies the type of the privacy budget.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetsInput AWS API Documentation
+    #
+    class ListCollaborationPrivacyBudgetsInput < Struct.new(
+      :collaboration_identifier,
+      :privacy_budget_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collaboration_privacy_budget_summaries
+    #   Summaries of the collaboration privacy budgets.
+    #   @return [Array<Types::CollaborationPrivacyBudgetSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListCollaborationPrivacyBudgetsOutput AWS API Documentation
+    #
+    class ListCollaborationPrivacyBudgetsOutput < Struct.new(
+      :collaboration_privacy_budget_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The token value retrieved from a previous call to access the next
     #   page of results.
@@ -2212,6 +3531,50 @@ module Aws::CleanRooms
     class ListCollaborationsOutput < Struct.new(
       :next_token,
       :collaboration_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   A unique identifier for a membership that contains the configured
+    #   audience model associations that you want to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredAudienceModelAssociationsInput AWS API Documentation
+    #
+    class ListConfiguredAudienceModelAssociationsInput < Struct.new(
+      :membership_identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configured_audience_model_association_summaries
+    #   Summaries of the configured audience model associations that you
+    #   requested.
+    #   @return [Array<Types::ConfiguredAudienceModelAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token value provided to access the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListConfiguredAudienceModelAssociationsOutput AWS API Documentation
+    #
+    class ListConfiguredAudienceModelAssociationsOutput < Struct.new(
+      :configured_audience_model_association_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2377,6 +3740,105 @@ module Aws::CleanRooms
     end
 
     # @!attribute [rw] membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   The privacy budget templates are retrieved from the collaboration
+    #   that this membership belongs to. Accepts a membership ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetTemplatesInput AWS API Documentation
+    #
+    class ListPrivacyBudgetTemplatesInput < Struct.new(
+      :membership_identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_budget_template_summaries
+    #   An array that summarizes the privacy budget templates. The summary
+    #   includes collaboration information, creation information, and
+    #   privacy budget type.
+    #   @return [Array<Types::PrivacyBudgetTemplateSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetTemplatesOutput AWS API Documentation
+    #
+    class ListPrivacyBudgetTemplatesOutput < Struct.new(
+      :next_token,
+      :privacy_budget_template_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   The privacy budget is retrieved from the collaboration that this
+    #   membership belongs to. Accepts a membership ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_budget_type
+    #   The privacy budget type.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of the results that is returned per call. Service
+    #   chooses a default if it has not been set. Service may return a
+    #   nextToken even if the maximum results has not been met.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetsInput AWS API Documentation
+    #
+    class ListPrivacyBudgetsInput < Struct.new(
+      :membership_identifier,
+      :privacy_budget_type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] privacy_budget_summaries
+    #   An array that summarizes the privacy budgets. The summary includes
+    #   collaboration information, membership information, privacy budget
+    #   template information, and privacy budget details.
+    #   @return [Array<Types::PrivacyBudgetSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token value retrieved from a previous call to access the next
+    #   page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ListPrivacyBudgetsOutput AWS API Documentation
+    #
+    class ListPrivacyBudgetsOutput < Struct.new(
+      :privacy_budget_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
     #   The identifier for the membership in the collaboration.
     #   @return [String]
     #
@@ -2512,12 +3974,22 @@ module Aws::CleanRooms
     #   The member's display name.
     #   @return [String]
     #
+    # @!attribute [rw] payment_configuration
+    #   The collaboration member's payment responsibilities set by the
+    #   collaboration creator.
+    #
+    #   If the collaboration creator hasn't speciﬁed anyone as the member
+    #   paying for query compute costs, then the member who can query is the
+    #   default payer.
+    #   @return [Types::PaymentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MemberSpecification AWS API Documentation
     #
     class MemberSpecification < Struct.new(
       :account_id,
       :member_abilities,
-      :display_name)
+      :display_name,
+      :payment_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2530,8 +4002,7 @@ module Aws::CleanRooms
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the member. Valid values are `INVITED`, `ACTIVE`,
-    #   `LEFT`, and `REMOVED`.
+    #   The status of the member.
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -2558,6 +4029,11 @@ module Aws::CleanRooms
     #   The unique ARN for the member's associated membership, if present.
     #   @return [String]
     #
+    # @!attribute [rw] payment_configuration
+    #   The collaboration member's payment responsibilities set by the
+    #   collaboration creator.
+    #   @return [Types::PaymentConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MemberSummary AWS API Documentation
     #
     class MemberSummary < Struct.new(
@@ -2568,7 +4044,8 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       :membership_id,
-      :membership_arn)
+      :membership_arn,
+      :payment_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2613,8 +4090,7 @@ module Aws::CleanRooms
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The status of the membership. Valid values are `ACTIVE`,
-    #   `REMOVED`, and `COLLABORATION\_DELETED`.
+    #   The status of the membership.
     #   @return [String]
     #
     # @!attribute [rw] member_abilities
@@ -2623,13 +4099,17 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] query_log_status
     #   An indicator as to whether query logging has been enabled or
-    #   disabled for the collaboration.
+    #   disabled for the membership.
     #   @return [String]
     #
     # @!attribute [rw] default_result_configuration
     #   The default protected query result configuration as specified by the
     #   member who can receive results.
     #   @return [Types::MembershipProtectedQueryResultConfiguration]
+    #
+    # @!attribute [rw] payment_configuration
+    #   The payment responsibilities accepted by the collaboration member.
+    #   @return [Types::MembershipPaymentConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/Membership AWS API Documentation
     #
@@ -2646,7 +4126,24 @@ module Aws::CleanRooms
       :status,
       :member_abilities,
       :query_log_status,
-      :default_result_configuration)
+      :default_result_configuration,
+      :payment_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the payment responsibilities accepted by the
+    # collaboration member.
+    #
+    # @!attribute [rw] query_compute
+    #   The payment responsibilities accepted by the collaboration member
+    #   for query compute costs.
+    #   @return [Types::MembershipQueryComputePaymentConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipPaymentConfiguration AWS API Documentation
+    #
+    class MembershipPaymentConfiguration < Struct.new(
+      :query_compute)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2695,6 +4192,35 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # An object representing the payment responsibilities accepted by the
+    # collaboration member for query compute costs.
+    #
+    # @!attribute [rw] is_responsible
+    #   Indicates whether the collaboration member has accepted to pay for
+    #   query compute costs (`TRUE`) or has not accepted to pay for query
+    #   compute costs (`FALSE`).
+    #
+    #   If the collaboration creator has not specified anyone to pay for
+    #   query compute costs, then the member who can query is the default
+    #   payer.
+    #
+    #   An error message is returned for the following reasons:
+    #
+    #   * If you set the value to `FALSE` but you are responsible to pay for
+    #     query compute costs.
+    #
+    #   * If you set the value to `TRUE` but you are not responsible to pay
+    #     for query compute costs.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipQueryComputePaymentConfig AWS API Documentation
+    #
+    class MembershipQueryComputePaymentConfig < Struct.new(
+      :is_responsible)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The membership object listed by the request.
     #
     # @!attribute [rw] id
@@ -2736,13 +4262,16 @@ module Aws::CleanRooms
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The status of the membership. Valid values are `ACTIVE`,
-    #   `REMOVED`, and `COLLABORATION\_DELETED`.
+    #   The status of the membership.
     #   @return [String]
     #
     # @!attribute [rw] member_abilities
     #   The abilities granted to the collaboration member.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] payment_configuration
+    #   The payment responsibilities accepted by the collaboration member.
+    #   @return [Types::MembershipPaymentConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/MembershipSummary AWS API Documentation
     #
@@ -2757,9 +4286,400 @@ module Aws::CleanRooms
       :create_time,
       :update_time,
       :status,
-      :member_abilities)
+      :member_abilities,
+      :payment_configuration)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # An object representing the collaboration member's payment
+    # responsibilities set by the collaboration creator.
+    #
+    # @!attribute [rw] query_compute
+    #   The collaboration member's payment responsibilities set by the
+    #   collaboration creator for query compute costs.
+    #   @return [Types::QueryComputePaymentConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PaymentConfiguration AWS API Documentation
+    #
+    class PaymentConfiguration < Struct.new(
+      :query_compute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   Accepts a membership ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Specifies the desired epsilon and noise parameters to preview.
+    #   @return [Types::PreviewPrivacyImpactParametersInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PreviewPrivacyImpactInput AWS API Documentation
+    #
+    class PreviewPrivacyImpactInput < Struct.new(
+      :membership_identifier,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] privacy_impact
+    #   An estimate of the number of aggregation functions that the member
+    #   who can query can run given the epsilon and noise parameters. This
+    #   does not change the privacy budget.
+    #   @return [Types::PrivacyImpact]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PreviewPrivacyImpactOutput AWS API Documentation
+    #
+    class PreviewPrivacyImpactOutput < Struct.new(
+      :privacy_impact)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the updated epsilon and noise parameters to preview. The
+    # preview allows you to see how the maximum number of each type of
+    # aggregation function would change with the new parameters.
+    #
+    # @note PreviewPrivacyImpactParametersInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] differential_privacy
+    #   An array that specifies the epsilon and noise parameters.
+    #   @return [Types::DifferentialPrivacyPreviewParametersInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PreviewPrivacyImpactParametersInput AWS API Documentation
+    #
+    class PreviewPrivacyImpactParametersInput < Struct.new(
+      :differential_privacy,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DifferentialPrivacy < PreviewPrivacyImpactParametersInput; end
+      class Unknown < PreviewPrivacyImpactParametersInput; end
+    end
+
+    # The epsilon parameter value and number of each aggregation function
+    # that you can perform.
+    #
+    # @note PrivacyBudget is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PrivacyBudget corresponding to the set member.
+    #
+    # @!attribute [rw] differential_privacy
+    #   An object that specifies the epsilon parameter and the utility in
+    #   terms of total aggregations, as well as the remaining aggregations
+    #   available.
+    #   @return [Types::DifferentialPrivacyPrivacyBudget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyBudget AWS API Documentation
+    #
+    class PrivacyBudget < Struct.new(
+      :differential_privacy,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DifferentialPrivacy < PrivacyBudget; end
+      class Unknown < PrivacyBudget; end
+    end
+
+    # An array that summaries the specified privacy budget. This summary
+    # includes collaboration information, creation information, membership
+    # information, and privacy budget information.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the privacy budget.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_budget_template_id
+    #   The unique identifier of the privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_budget_template_arn
+    #   The ARN of the privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   The identifier for a membership resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_arn
+    #   The Amazon Resource Name (ARN) of the member who created the privacy
+    #   budget summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique identifier of the collaboration that contains this
+    #   privacy budget.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The ARN of the collaboration that contains this privacy budget.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Specifies the type of the privacy budget.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the privacy budget was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the privacy budget was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] budget
+    #   The provided privacy budget.
+    #   @return [Types::PrivacyBudget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyBudgetSummary AWS API Documentation
+    #
+    class PrivacyBudgetSummary < Struct.new(
+      :id,
+      :privacy_budget_template_id,
+      :privacy_budget_template_arn,
+      :membership_id,
+      :membership_arn,
+      :collaboration_id,
+      :collaboration_arn,
+      :type,
+      :create_time,
+      :update_time,
+      :budget)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that defines the privacy budget template.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   The identifier for a membership resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_arn
+    #   The Amazon Resource Name (ARN) of the member who created the privacy
+    #   budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique ID of the collaboration that contains this privacy budget
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The ARN of the collaboration that contains this privacy budget
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the privacy budget template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the privacy budget template was
+    #   updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] privacy_budget_type
+    #   Specifies the type of the privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_refresh
+    #   How often the privacy budget refreshes.
+    #
+    #   If you plan to regularly bring new data into the collaboration, use
+    #   `CALENDAR_MONTH` to automatically get a new privacy budget for the
+    #   collaboration every calendar month. Choosing this option allows
+    #   arbitrary amounts of information to be revealed about rows of the
+    #   data when repeatedly queried across refreshes. Avoid choosing this
+    #   if the same rows will be repeatedly queried between privacy budget
+    #   refreshes.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Specifies the epislon and noise parameters for the privacy budget
+    #   template.
+    #   @return [Types::PrivacyBudgetTemplateParametersOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyBudgetTemplate AWS API Documentation
+    #
+    class PrivacyBudgetTemplate < Struct.new(
+      :id,
+      :arn,
+      :membership_id,
+      :membership_arn,
+      :collaboration_id,
+      :collaboration_arn,
+      :create_time,
+      :update_time,
+      :privacy_budget_type,
+      :auto_refresh,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The epsilon and noise parameters that you want to use for the privacy
+    # budget template.
+    #
+    # @note PrivacyBudgetTemplateParametersInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] differential_privacy
+    #   An object that specifies the epsilon and noise parameters.
+    #   @return [Types::DifferentialPrivacyTemplateParametersInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyBudgetTemplateParametersInput AWS API Documentation
+    #
+    class PrivacyBudgetTemplateParametersInput < Struct.new(
+      :differential_privacy,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DifferentialPrivacy < PrivacyBudgetTemplateParametersInput; end
+      class Unknown < PrivacyBudgetTemplateParametersInput; end
+    end
+
+    # The epsilon and noise parameters that were used in the privacy budget
+    # template.
+    #
+    # @note PrivacyBudgetTemplateParametersOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PrivacyBudgetTemplateParametersOutput corresponding to the set member.
+    #
+    # @!attribute [rw] differential_privacy
+    #   The epsilon and noise parameters.
+    #   @return [Types::DifferentialPrivacyTemplateParametersOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyBudgetTemplateParametersOutput AWS API Documentation
+    #
+    class PrivacyBudgetTemplateParametersOutput < Struct.new(
+      :differential_privacy,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DifferentialPrivacy < PrivacyBudgetTemplateParametersOutput; end
+      class Unknown < PrivacyBudgetTemplateParametersOutput; end
+    end
+
+    # A summary of the privacy budget template. The summary includes
+    # membership information, collaboration information, and creation
+    # information.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_id
+    #   The identifier for a membership resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_arn
+    #   The Amazon Resource Name (ARN) of the member who created the privacy
+    #   budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_id
+    #   The unique ID of the collaboration that contains this privacy budget
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] collaboration_arn
+    #   The ARN of the collaboration that contains this privacy budget
+    #   template.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_budget_type
+    #   The type of the privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time at which the privacy budget template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] update_time
+    #   The most recent time at which the privacy budget template was
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyBudgetTemplateSummary AWS API Documentation
+    #
+    class PrivacyBudgetTemplateSummary < Struct.new(
+      :id,
+      :arn,
+      :membership_id,
+      :membership_arn,
+      :collaboration_id,
+      :collaboration_arn,
+      :privacy_budget_type,
+      :create_time,
+      :update_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The epsilon and noise parameters that you want to update in the
+    # privacy budget template.
+    #
+    # @note PrivacyBudgetTemplateUpdateParameters is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] differential_privacy
+    #   An object that specifies the new values for the epsilon and noise
+    #   parameters.
+    #   @return [Types::DifferentialPrivacyTemplateUpdateParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyBudgetTemplateUpdateParameters AWS API Documentation
+    #
+    class PrivacyBudgetTemplateUpdateParameters < Struct.new(
+      :differential_privacy,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DifferentialPrivacy < PrivacyBudgetTemplateUpdateParameters; end
+      class Unknown < PrivacyBudgetTemplateUpdateParameters; end
+    end
+
+    # Provides an estimate of the number of aggregation functions that the
+    # member who can query can run given the epsilon and noise parameters.
+    #
+    # @note PrivacyImpact is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PrivacyImpact corresponding to the set member.
+    #
+    # @!attribute [rw] differential_privacy
+    #   An object that lists the number and type of aggregation functions
+    #   you can perform.
+    #   @return [Types::DifferentialPrivacyPrivacyImpact]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/PrivacyImpact AWS API Documentation
+    #
+    class PrivacyImpact < Struct.new(
+      :differential_privacy,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DifferentialPrivacy < PrivacyImpact; end
+      class Unknown < PrivacyImpact; end
     end
 
     # The parameters for an Clean Rooms protected query.
@@ -2804,6 +4724,11 @@ module Aws::CleanRooms
     #   An error thrown by the protected query.
     #   @return [Types::ProtectedQueryError]
     #
+    # @!attribute [rw] differential_privacy
+    #   The sensitivity parameters of the differential privacy results of
+    #   the protected query.
+    #   @return [Types::DifferentialPrivacyParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedQuery AWS API Documentation
     #
     class ProtectedQuery < Struct.new(
@@ -2816,7 +4741,8 @@ module Aws::CleanRooms
       :result_configuration,
       :statistics,
       :result,
-      :error)
+      :error,
+      :differential_privacy)
       SENSITIVE = [:sql_parameters]
       include Aws::Structure
     end
@@ -3052,6 +4978,34 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # An object representing the collaboration member's payment
+    # responsibilities set by the collaboration creator for query compute
+    # costs.
+    #
+    # @!attribute [rw] is_responsible
+    #   Indicates whether the collaboration creator has configured the
+    #   collaboration member to pay for query compute costs (`TRUE`) or has
+    #   not configured the collaboration member to pay for query compute
+    #   costs (`FALSE`).
+    #
+    #   Exactly one member can be configured to pay for query compute costs.
+    #   An error is returned if the collaboration creator sets a `TRUE`
+    #   value for more than one member in the collaboration.
+    #
+    #   If the collaboration creator hasn't specified anyone as the member
+    #   paying for query compute costs, then the member who can query is the
+    #   default payer. An error is returned if the collaboration creator
+    #   sets a `FALSE` value for the member who can query.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/QueryComputePaymentConfig AWS API Documentation
+    #
+    class QueryComputePaymentConfig < Struct.new(
+      :is_responsible)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Request references a resource which does not exist.
     #
     # @!attribute [rw] message
@@ -3129,6 +5083,11 @@ module Aws::CleanRooms
     #   The type of schema. The only valid value is currently `TABLE`.
     #   @return [String]
     #
+    # @!attribute [rw] schema_status_details
+    #   Details about the status of the schema. Currently, only one entry is
+    #   present.
+    #   @return [Array<Types::SchemaStatusDetail>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/Schema AWS API Documentation
     #
     class Schema < Struct.new(
@@ -3143,7 +5102,84 @@ module Aws::CleanRooms
       :description,
       :create_time,
       :update_time,
+      :type,
+      :schema_status_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the information that's necessary to retrieve an analysis rule
+    # schema. Schema analysis rules are uniquely identiﬁed by a combination
+    # of the schema name and the analysis rule type for a given
+    # collaboration.
+    #
+    # @!attribute [rw] name
+    #   The name of the analysis rule schema that you are requesting.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of analysis rule schema that you are requesting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SchemaAnalysisRuleRequest AWS API Documentation
+    #
+    class SchemaAnalysisRuleRequest < Struct.new(
+      :name,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the schema status.
+    #
+    # A status of `READY` means that based on the schema analysis rule,
+    # queries of the given analysis rule type are properly configured to run
+    # queries on this schema.
+    #
+    # @!attribute [rw] status
+    #   The status of the schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] reasons
+    #   The reasons why the schema status is set to its current state.
+    #   @return [Array<Types::SchemaStatusReason>]
+    #
+    # @!attribute [rw] analysis_rule_type
+    #   The analysis rule type for which the schema status has been
+    #   evaluated.
+    #   @return [String]
+    #
+    # @!attribute [rw] configurations
+    #   The configuration details of the schema analysis rule for the given
+    #   type.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SchemaStatusDetail AWS API Documentation
+    #
+    class SchemaStatusDetail < Struct.new(
+      :status,
+      :reasons,
+      :analysis_rule_type,
+      :configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A reason why the schema status is set to its current value.
+    #
+    # @!attribute [rw] code
+    #   The schema status reason code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An explanation of the schema status reason code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/SchemaStatusReason AWS API Documentation
+    #
+    class SchemaStatusReason < Struct.new(
+      :code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3420,6 +5456,48 @@ module Aws::CleanRooms
       include Aws::Structure
     end
 
+    # @!attribute [rw] configured_audience_model_association_identifier
+    #   A unique identifier for the configured audience model association
+    #   that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] membership_identifier
+    #   A unique identifier of the membership that contains the configured
+    #   audience model association that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A new description for the configured audience model association.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A new name for the configured audience model association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateConfiguredAudienceModelAssociationInput AWS API Documentation
+    #
+    class UpdateConfiguredAudienceModelAssociationInput < Struct.new(
+      :configured_audience_model_association_identifier,
+      :membership_identifier,
+      :description,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configured_audience_model_association
+    #   Details about the configured audience model association that you
+    #   updated.
+    #   @return [Types::ConfiguredAudienceModelAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdateConfiguredAudienceModelAssociationOutput AWS API Documentation
+    #
+    class UpdateConfiguredAudienceModelAssociationOutput < Struct.new(
+      :configured_audience_model_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] configured_table_identifier
     #   The unique identifier for the configured table that the analysis
     #   rule applies to. Currently accepts the configured table ID.
@@ -3540,7 +5618,7 @@ module Aws::CleanRooms
     #
     # @!attribute [rw] query_log_status
     #   An indicator as to whether query logging has been enabled or
-    #   disabled for the collaboration.
+    #   disabled for the membership.
     #   @return [String]
     #
     # @!attribute [rw] default_result_configuration
@@ -3566,6 +5644,49 @@ module Aws::CleanRooms
     #
     class UpdateMembershipOutput < Struct.new(
       :membership)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] membership_identifier
+    #   A unique identifier for one of your memberships for a collaboration.
+    #   The privacy budget template is updated in the collaboration that
+    #   this membership belongs to. Accepts a membership ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_budget_template_identifier
+    #   A unique identifier for your privacy budget template that you want
+    #   to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] privacy_budget_type
+    #   Specifies the type of the privacy budget template.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Specifies the epsilon and noise parameters for the privacy budget
+    #   template.
+    #   @return [Types::PrivacyBudgetTemplateUpdateParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdatePrivacyBudgetTemplateInput AWS API Documentation
+    #
+    class UpdatePrivacyBudgetTemplateInput < Struct.new(
+      :membership_identifier,
+      :privacy_budget_template_identifier,
+      :privacy_budget_type,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] privacy_budget_template
+    #   Summary of the privacy budget template.
+    #   @return [Types::PrivacyBudgetTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/UpdatePrivacyBudgetTemplateOutput AWS API Documentation
+    #
+    class UpdatePrivacyBudgetTemplateOutput < Struct.new(
+      :privacy_budget_template)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,0 +1,350 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudWatchRUM
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchCreateRumMetricDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateRumMetricDefinitionsResponse]
+        def errors: () -> ::Array[Types::BatchCreateRumMetricDefinitionsError]
+        def metric_definitions: () -> ::Array[Types::MetricDefinition]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#batch_create_rum_metric_definitions-instance_method
+      def batch_create_rum_metric_definitions: (
+                                                 app_monitor_name: ::String,
+                                                 destination: ("CloudWatch" | "Evidently"),
+                                                 ?destination_arn: ::String,
+                                                 metric_definitions: Array[
+                                                   {
+                                                     dimension_keys: Hash[::String, ::String]?,
+                                                     event_pattern: ::String?,
+                                                     name: ::String,
+                                                     namespace: ::String?,
+                                                     unit_label: ::String?,
+                                                     value_key: ::String?
+                                                   },
+                                                 ]
+                                               ) -> _BatchCreateRumMetricDefinitionsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateRumMetricDefinitionsResponseSuccess
+
+      interface _BatchDeleteRumMetricDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteRumMetricDefinitionsResponse]
+        def errors: () -> ::Array[Types::BatchDeleteRumMetricDefinitionsError]
+        def metric_definition_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#batch_delete_rum_metric_definitions-instance_method
+      def batch_delete_rum_metric_definitions: (
+                                                 app_monitor_name: ::String,
+                                                 destination: ("CloudWatch" | "Evidently"),
+                                                 ?destination_arn: ::String,
+                                                 metric_definition_ids: Array[::String]
+                                               ) -> _BatchDeleteRumMetricDefinitionsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteRumMetricDefinitionsResponseSuccess
+
+      interface _BatchGetRumMetricDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetRumMetricDefinitionsResponse]
+        def metric_definitions: () -> ::Array[Types::MetricDefinition]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#batch_get_rum_metric_definitions-instance_method
+      def batch_get_rum_metric_definitions: (
+                                              app_monitor_name: ::String,
+                                              destination: ("CloudWatch" | "Evidently"),
+                                              ?destination_arn: ::String,
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _BatchGetRumMetricDefinitionsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetRumMetricDefinitionsResponseSuccess
+
+      interface _CreateAppMonitorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAppMonitorResponse]
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#create_app_monitor-instance_method
+      def create_app_monitor: (
+                                ?app_monitor_configuration: {
+                                  allow_cookies: bool?,
+                                  enable_x_ray: bool?,
+                                  excluded_pages: Array[::String]?,
+                                  favorite_pages: Array[::String]?,
+                                  guest_role_arn: ::String?,
+                                  identity_pool_id: ::String?,
+                                  included_pages: Array[::String]?,
+                                  session_sample_rate: ::Float?,
+                                  telemetries: Array[("errors" | "performance" | "http")]?
+                                },
+                                ?custom_events: {
+                                  status: ("ENABLED" | "DISABLED")?
+                                },
+                                ?cw_log_enabled: bool,
+                                domain: ::String,
+                                name: ::String,
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateAppMonitorResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppMonitorResponseSuccess
+
+      interface _DeleteAppMonitorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAppMonitorResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#delete_app_monitor-instance_method
+      def delete_app_monitor: (
+                                name: ::String
+                              ) -> _DeleteAppMonitorResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAppMonitorResponseSuccess
+
+      interface _DeleteRumMetricsDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRumMetricsDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#delete_rum_metrics_destination-instance_method
+      def delete_rum_metrics_destination: (
+                                            app_monitor_name: ::String,
+                                            destination: ("CloudWatch" | "Evidently"),
+                                            ?destination_arn: ::String
+                                          ) -> _DeleteRumMetricsDestinationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRumMetricsDestinationResponseSuccess
+
+      interface _GetAppMonitorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAppMonitorResponse]
+        def app_monitor: () -> Types::AppMonitor
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#get_app_monitor-instance_method
+      def get_app_monitor: (
+                             name: ::String
+                           ) -> _GetAppMonitorResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAppMonitorResponseSuccess
+
+      interface _GetAppMonitorDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAppMonitorDataResponse]
+        def events: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#get_app_monitor_data-instance_method
+      def get_app_monitor_data: (
+                                  ?filters: Array[
+                                    {
+                                      name: ::String?,
+                                      values: Array[::String]?
+                                    },
+                                  ],
+                                  ?max_results: ::Integer,
+                                  name: ::String,
+                                  ?next_token: ::String,
+                                  time_range: {
+                                    after: ::Integer,
+                                    before: ::Integer?
+                                  }
+                                ) -> _GetAppMonitorDataResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAppMonitorDataResponseSuccess
+
+      interface _ListAppMonitorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAppMonitorsResponse]
+        def app_monitor_summaries: () -> ::Array[Types::AppMonitorSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#list_app_monitors-instance_method
+      def list_app_monitors: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListAppMonitorsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAppMonitorsResponseSuccess
+
+      interface _ListRumMetricsDestinationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRumMetricsDestinationsResponse]
+        def destinations: () -> ::Array[Types::MetricDestinationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#list_rum_metrics_destinations-instance_method
+      def list_rum_metrics_destinations: (
+                                           app_monitor_name: ::String,
+                                           ?max_results: ::Integer,
+                                           ?next_token: ::String
+                                         ) -> _ListRumMetricsDestinationsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRumMetricsDestinationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def resource_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutRumEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutRumEventsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#put_rum_events-instance_method
+      def put_rum_events: (
+                            app_monitor_details: {
+                              id: ::String?,
+                              name: ::String?,
+                              version: ::String?
+                            },
+                            batch_id: ::String,
+                            id: ::String,
+                            rum_events: Array[
+                              {
+                                details: ::String,
+                                id: ::String,
+                                metadata: ::String?,
+                                timestamp: ::Time,
+                                type: ::String
+                              },
+                            ],
+                            user_details: {
+                              session_id: ::String?,
+                              user_id: ::String?
+                            }
+                          ) -> _PutRumEventsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRumEventsResponseSuccess
+
+      interface _PutRumMetricsDestinationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutRumMetricsDestinationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#put_rum_metrics_destination-instance_method
+      def put_rum_metrics_destination: (
+                                         app_monitor_name: ::String,
+                                         destination: ("CloudWatch" | "Evidently"),
+                                         ?destination_arn: ::String,
+                                         ?iam_role_arn: ::String
+                                       ) -> _PutRumMetricsDestinationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRumMetricsDestinationResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAppMonitorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAppMonitorResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#update_app_monitor-instance_method
+      def update_app_monitor: (
+                                ?app_monitor_configuration: {
+                                  allow_cookies: bool?,
+                                  enable_x_ray: bool?,
+                                  excluded_pages: Array[::String]?,
+                                  favorite_pages: Array[::String]?,
+                                  guest_role_arn: ::String?,
+                                  identity_pool_id: ::String?,
+                                  included_pages: Array[::String]?,
+                                  session_sample_rate: ::Float?,
+                                  telemetries: Array[("errors" | "performance" | "http")]?
+                                },
+                                ?custom_events: {
+                                  status: ("ENABLED" | "DISABLED")?
+                                },
+                                ?cw_log_enabled: bool,
+                                ?domain: ::String,
+                                name: ::String
+                              ) -> _UpdateAppMonitorResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppMonitorResponseSuccess
+
+      interface _UpdateRumMetricDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRumMetricDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchRUM/Client.html#update_rum_metric_definition-instance_method
+      def update_rum_metric_definition: (
+                                          app_monitor_name: ::String,
+                                          destination: ("CloudWatch" | "Evidently"),
+                                          ?destination_arn: ::String,
+                                          metric_definition: {
+                                            dimension_keys: Hash[::String, ::String]?,
+                                            event_pattern: ::String?,
+                                            name: ::String,
+                                            namespace: ::String?,
+                                            unit_label: ::String?,
+                                            value_key: ::String?
+                                          },
+                                          metric_definition_id: ::String
+                                        ) -> _UpdateRumMetricDefinitionResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRumMetricDefinitionResponseSuccess
+    end
+  end
+end
+

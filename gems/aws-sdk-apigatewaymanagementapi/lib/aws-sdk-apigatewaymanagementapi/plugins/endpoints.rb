@@ -14,6 +14,7 @@ module Aws::ApiGatewayManagementApi
       option(
         :endpoint_provider,
         doc_type: 'Aws::ApiGatewayManagementApi::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::ApiGatewayManagementApi
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 

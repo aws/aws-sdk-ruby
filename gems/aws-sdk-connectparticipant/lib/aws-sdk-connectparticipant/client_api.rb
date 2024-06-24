@@ -387,6 +387,7 @@ module Aws::ConnectParticipant
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:send_message, Seahorse::Model::Operation.new.tap do |o|

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::EMRContainers
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::EMRContainers
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::EMRContainers
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::EMRContainers
     #   @option options [Aws::EMRContainers::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::EMRContainers::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -629,6 +654,80 @@ module Aws::EMRContainers
       req.send_request(options)
     end
 
+    # Creates a security configuration. Security configurations in Amazon
+    # EMR on EKS are templates for different security setups. You can use
+    # security configurations to configure the Lake Formation integration
+    # setup. You can also create a security configuration to re-use a
+    # security setup each time you create a virtual cluster.
+    #
+    # @option params [required, String] :client_token
+    #   The client idempotency token to use when creating the security
+    #   configuration.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   The name of the security configuration.
+    #
+    # @option params [required, Types::SecurityConfigurationData] :security_configuration_data
+    #   Security configuration input for the request.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to add to the security configuration.
+    #
+    # @return [Types::CreateSecurityConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSecurityConfigurationResponse#id #id} => String
+    #   * {Types::CreateSecurityConfigurationResponse#name #name} => String
+    #   * {Types::CreateSecurityConfigurationResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_security_configuration({
+    #     client_token: "ClientToken", # required
+    #     name: "ResourceNameString", # required
+    #     security_configuration_data: { # required
+    #       authorization_configuration: {
+    #         lake_formation_configuration: {
+    #           authorized_session_tag_value: "SessionTagValue",
+    #           secure_namespace_info: {
+    #             cluster_id: "ClusterId",
+    #             namespace: "KubernetesNamespace",
+    #           },
+    #           query_engine_role_arn: "IAMRoleArn",
+    #         },
+    #         encryption_configuration: {
+    #           in_transit_encryption_configuration: {
+    #             tls_certificate_configuration: {
+    #               certificate_provider_type: "PEM", # accepts PEM
+    #               public_certificate_secret_arn: "SecretsManagerArn",
+    #               private_certificate_secret_arn: "SecretsManagerArn",
+    #             },
+    #           },
+    #         },
+    #       },
+    #     },
+    #     tags: {
+    #       "String128" => "StringEmpty256",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/CreateSecurityConfiguration AWS API Documentation
+    #
+    # @overload create_security_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_security_configuration(params = {}, options = {})
+      req = build_request(:create_security_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates a virtual cluster. Virtual cluster is a managed entity on
     # Amazon EMR on EKS. You can create, describe, list and delete virtual
     # clusters. They do not consume any additional resource in your system.
@@ -650,6 +749,9 @@ module Aws::EMRContainers
     #
     # @option params [Hash<String,String>] :tags
     #   The tags assigned to the virtual cluster.
+    #
+    # @option params [String] :security_configuration_id
+    #   The ID of the security configuration.
     #
     # @return [Types::CreateVirtualClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -674,6 +776,7 @@ module Aws::EMRContainers
     #     tags: {
     #       "String128" => "StringEmpty256",
     #     },
+    #     security_configuration_id: "ResourceIdString",
     #   })
     #
     # @example Response structure
@@ -985,6 +1088,52 @@ module Aws::EMRContainers
       req.send_request(options)
     end
 
+    # Displays detailed information about a specified security
+    # configuration. Security configurations in Amazon EMR on EKS are
+    # templates for different security setups. You can use security
+    # configurations to configure the Lake Formation integration setup. You
+    # can also create a security configuration to re-use a security setup
+    # each time you create a virtual cluster.
+    #
+    # @option params [required, String] :id
+    #   The ID of the security configuration.
+    #
+    # @return [Types::DescribeSecurityConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSecurityConfigurationResponse#security_configuration #security_configuration} => Types::SecurityConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_security_configuration({
+    #     id: "ResourceIdString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_configuration.id #=> String
+    #   resp.security_configuration.name #=> String
+    #   resp.security_configuration.arn #=> String
+    #   resp.security_configuration.created_at #=> Time
+    #   resp.security_configuration.created_by #=> String
+    #   resp.security_configuration.security_configuration_data.authorization_configuration.lake_formation_configuration.authorized_session_tag_value #=> String
+    #   resp.security_configuration.security_configuration_data.authorization_configuration.lake_formation_configuration.secure_namespace_info.cluster_id #=> String
+    #   resp.security_configuration.security_configuration_data.authorization_configuration.lake_formation_configuration.secure_namespace_info.namespace #=> String
+    #   resp.security_configuration.security_configuration_data.authorization_configuration.lake_formation_configuration.query_engine_role_arn #=> String
+    #   resp.security_configuration.security_configuration_data.authorization_configuration.encryption_configuration.in_transit_encryption_configuration.tls_certificate_configuration.certificate_provider_type #=> String, one of "PEM"
+    #   resp.security_configuration.security_configuration_data.authorization_configuration.encryption_configuration.in_transit_encryption_configuration.tls_certificate_configuration.public_certificate_secret_arn #=> String
+    #   resp.security_configuration.security_configuration_data.authorization_configuration.encryption_configuration.in_transit_encryption_configuration.tls_certificate_configuration.private_certificate_secret_arn #=> String
+    #   resp.security_configuration.tags #=> Hash
+    #   resp.security_configuration.tags["String128"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DescribeSecurityConfiguration AWS API Documentation
+    #
+    # @overload describe_security_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_security_configuration(params = {}, options = {})
+      req = build_request(:describe_security_configuration, params)
+      req.send_request(options)
+    end
+
     # Displays detailed information about a specified virtual cluster.
     # Virtual cluster is a managed entity on Amazon EMR on EKS. You can
     # create, describe, list and delete virtual clusters. They do not
@@ -1018,6 +1167,7 @@ module Aws::EMRContainers
     #   resp.virtual_cluster.created_at #=> Time
     #   resp.virtual_cluster.tags #=> Hash
     #   resp.virtual_cluster.tags["String128"] #=> String
+    #   resp.virtual_cluster.security_configuration_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/DescribeVirtualCluster AWS API Documentation
     #
@@ -1351,6 +1501,69 @@ module Aws::EMRContainers
       req.send_request(options)
     end
 
+    # Lists security configurations based on a set of parameters. Security
+    # configurations in Amazon EMR on EKS are templates for different
+    # security setups. You can use security configurations to configure the
+    # Lake Formation integration setup. You can also create a security
+    # configuration to re-use a security setup each time you create a
+    # virtual cluster.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_after
+    #   The date and time after which the security configuration was created.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :created_before
+    #   The date and time before which the security configuration was created.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of security configurations the operation can list.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of security configurations to return.
+    #
+    # @return [Types::ListSecurityConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSecurityConfigurationsResponse#security_configurations #security_configurations} => Array&lt;Types::SecurityConfiguration&gt;
+    #   * {Types::ListSecurityConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_security_configurations({
+    #     created_after: Time.now,
+    #     created_before: Time.now,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_configurations #=> Array
+    #   resp.security_configurations[0].id #=> String
+    #   resp.security_configurations[0].name #=> String
+    #   resp.security_configurations[0].arn #=> String
+    #   resp.security_configurations[0].created_at #=> Time
+    #   resp.security_configurations[0].created_by #=> String
+    #   resp.security_configurations[0].security_configuration_data.authorization_configuration.lake_formation_configuration.authorized_session_tag_value #=> String
+    #   resp.security_configurations[0].security_configuration_data.authorization_configuration.lake_formation_configuration.secure_namespace_info.cluster_id #=> String
+    #   resp.security_configurations[0].security_configuration_data.authorization_configuration.lake_formation_configuration.secure_namespace_info.namespace #=> String
+    #   resp.security_configurations[0].security_configuration_data.authorization_configuration.lake_formation_configuration.query_engine_role_arn #=> String
+    #   resp.security_configurations[0].security_configuration_data.authorization_configuration.encryption_configuration.in_transit_encryption_configuration.tls_certificate_configuration.certificate_provider_type #=> String, one of "PEM"
+    #   resp.security_configurations[0].security_configuration_data.authorization_configuration.encryption_configuration.in_transit_encryption_configuration.tls_certificate_configuration.public_certificate_secret_arn #=> String
+    #   resp.security_configurations[0].security_configuration_data.authorization_configuration.encryption_configuration.in_transit_encryption_configuration.tls_certificate_configuration.private_certificate_secret_arn #=> String
+    #   resp.security_configurations[0].tags #=> Hash
+    #   resp.security_configurations[0].tags["String128"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListSecurityConfigurations AWS API Documentation
+    #
+    # @overload list_security_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_security_configurations(params = {}, options = {})
+      req = build_request(:list_security_configurations, params)
+      req.send_request(options)
+    end
+
     # Lists the tags assigned to the resources.
     #
     # @option params [required, String] :resource_arn
@@ -1410,6 +1623,12 @@ module Aws::EMRContainers
     # @option params [String] :next_token
     #   The token for the next set of virtual clusters to return.
     #
+    # @option params [Boolean] :eks_access_entry_integrated
+    #   Optional Boolean that specifies whether the operation should return
+    #   the virtual clusters that have the access entry integration enabled or
+    #   disabled. If not specified, the operation returns all applicable
+    #   virtual clusters.
+    #
     # @return [Types::ListVirtualClustersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListVirtualClustersResponse#virtual_clusters #virtual_clusters} => Array&lt;Types::VirtualCluster&gt;
@@ -1427,6 +1646,7 @@ module Aws::EMRContainers
     #     states: ["RUNNING"], # accepts RUNNING, TERMINATING, TERMINATED, ARRESTED
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     eks_access_entry_integrated: false,
     #   })
     #
     # @example Response structure
@@ -1442,6 +1662,7 @@ module Aws::EMRContainers
     #   resp.virtual_clusters[0].created_at #=> Time
     #   resp.virtual_clusters[0].tags #=> Hash
     #   resp.virtual_clusters[0].tags["String128"] #=> String
+    #   resp.virtual_clusters[0].security_configuration_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-containers-2020-10-01/ListVirtualClusters AWS API Documentation
@@ -1651,7 +1872,7 @@ module Aws::EMRContainers
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrcontainers'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

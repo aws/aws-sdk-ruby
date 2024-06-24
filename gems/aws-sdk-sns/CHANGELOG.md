@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2024-06-06)
+------------------
+
+* Feature - Doc-only update for SNS. These changes include customer-reported issues and TXC3 updates.
+
+1.76.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.75.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.74.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2024-04-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.72.0 (2024-02-16)
+------------------
+
+* Feature - This release marks phone numbers as sensitive inputs.
+
+1.71.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.68.0 (2023-10-26)
+------------------
+
+* Feature - Message Archiving and Replay is now supported in Amazon SNS for FIFO topics.
+
 1.67.0 (2023-09-27)
 ------------------
 

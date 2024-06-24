@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.90.0 (2024-04-18)
+------------------
+
+* Feature - Added IPv6Address fields for local and remote IP addresses
+
+1.89.0 (2024-03-28)
+------------------
+
+* Feature - Add EC2 support for GuardDuty Runtime Monitoring auto management.
+
+1.88.0 (2024-03-08)
+------------------
+
+* Feature - Add RDS Provisioned and Serverless Usage types
+
+1.87.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.86.0 (2023-12-20)
+------------------
+
+* Feature - This release 1) introduces a new API: GetOrganizationStatistics , and 2) adds a new UsageStatisticType TOP_ACCOUNTS_BY_FEATURE for GetUsageStatistics API
+
+1.85.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.84.0 (2023-11-27)
+------------------
+
+* Feature - Add support for Runtime Monitoring for ECS and ECS-EC2.
+
+1.83.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.82.0 (2023-11-08)
+------------------
+
+* Feature - Added API support for new GuardDuty EKS Audit Log finding types.
+
+1.81.0 (2023-10-17)
+------------------
+
+* Feature - Add domainWithSuffix finding field to dnsRequestAction
+
 1.80.0 (2023-09-27)
 ------------------
 

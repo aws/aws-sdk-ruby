@@ -201,8 +201,8 @@ module Aws::Pricing
 
     # @!attribute [rw] price_list_arn
     #   The unique identifier that maps to where your Price List files are
-    #   located. `PriceListArn` can be obtained from the [ `ListPriceLists`
-    #   ][1] response.
+    #   located. `PriceListArn` can be obtained from the [ListPriceLists][1]
+    #   response.
     #
     #
     #
@@ -211,8 +211,7 @@ module Aws::Pricing
     #
     # @!attribute [rw] file_format
     #   The format that you want to retrieve your Price List files in. The
-    #   `FileFormat` can be obtained from the [ `ListPriceLists` ][1]
-    #   response.
+    #   `FileFormat` can be obtained from the [ListPriceLists][1] response.
     #
     #
     #
@@ -345,11 +344,13 @@ module Aws::Pricing
     #   that you want to retrieve. For example, to get the list of
     #   applicable Amazon EC2 price lists, use `AmazonEC2`. For a full list
     #   of service codes containing On-Demand and Reserved Instance (RI)
-    #   pricing, use the [ `DescribeServices` ][1] API.
+    #   pricing, use the [DescribeServices][1] API.
     #
-    #   To retrieve the Compute Savings Plan price lists, use
-    #   `ComputeSavingsPlans`. To retrieve Machine Learning Savings Plans
-    #   price lists, use `MachineLearningSavingsPlans`.
+    #   To retrieve the Reserved Instance and Compute Savings Plan price
+    #   lists, use `ComputeSavingsPlans`.
+    #
+    #   To retrieve Machine Learning Savings Plans price lists, use
+    #   `MachineLearningSavingsPlans`.
     #
     #
     #
@@ -365,8 +366,7 @@ module Aws::Pricing
     #   For example, to get the price list only for the `US East (N.
     #   Virginia)` Region, use `us-east-1`. If nothing is specified, you
     #   retrieve price lists for all applicable Regions. The available
-    #   `RegionCode` list can be retrieved from [ `GetAttributeValues` ][1]
-    #   API.
+    #   `RegionCode` list can be retrieved from [GetAttributeValues][1] API.
     #
     #
     #
@@ -488,6 +488,19 @@ module Aws::Pricing
       include Aws::Structure
     end
 
+    # The requested resource can't be found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The metadata for a service, such as the service code and available
     # attribute names.
     #
@@ -504,6 +517,19 @@ module Aws::Pricing
     class Service < Struct.new(
       :service_code,
       :attribute_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You've made too many requests exceeding service quotas.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pricing-2017-10-15/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

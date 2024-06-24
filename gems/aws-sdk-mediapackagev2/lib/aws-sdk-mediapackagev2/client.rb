@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::MediaPackageV2
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::MediaPackageV2
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::MediaPackageV2
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::MediaPackageV2
     #   @option options [Aws::MediaPackageV2::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::MediaPackageV2::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -416,6 +441,19 @@ module Aws::MediaPackageV2
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :input_type
+    #   The input type will be an immutable field which will be used to define
+    #   whether the channel will allow CMAF ingest or HLS ingest. If
+    #   unprovided, it will default to HLS to preserve current behavior.
+    #
+    #   The allowed values are:
+    #
+    #   * `HLS` - The HLS streaming specification (which defines M3U8
+    #     manifests and TS segments).
+    #
+    #   * `CMAF` - The DASH-IF CMAF Ingest specification (which defines CMAF
+    #     segments with optional DASH manifests).
+    #
     # @option params [String] :description
     #   Enter any descriptive text that helps you to identify the channel.
     #
@@ -436,7 +474,49 @@ module Aws::MediaPackageV2
     #   * {Types::CreateChannelResponse#modified_at #modified_at} => Time
     #   * {Types::CreateChannelResponse#description #description} => String
     #   * {Types::CreateChannelResponse#ingest_endpoints #ingest_endpoints} => Array&lt;Types::IngestEndpoint&gt;
+    #   * {Types::CreateChannelResponse#input_type #input_type} => String
+    #   * {Types::CreateChannelResponse#etag #etag} => String
     #   * {Types::CreateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Creating a Channel
+    #
+    #   resp = client.create_channel({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     description: "Description for exampleChannel", 
+    #     input_type: "HLS", 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     description: "Description for exampleChannel", 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     ingest_endpoints: [
+    #       {
+    #         id: "1", 
+    #         url: "https://abcde-1.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleChannel/index", 
+    #       }, 
+    #       {
+    #         id: "2", 
+    #         url: "https://abcde-2.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleChannel/index", 
+    #       }, 
+    #     ], 
+    #     input_type: "HLS", 
+    #     modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -444,6 +524,7 @@ module Aws::MediaPackageV2
     #     channel_group_name: "ResourceName", # required
     #     channel_name: "ResourceName", # required
     #     client_token: "IdempotencyToken",
+    #     input_type: "HLS", # accepts HLS, CMAF
     #     description: "ResourceDescription",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -461,6 +542,8 @@ module Aws::MediaPackageV2
     #   resp.ingest_endpoints #=> Array
     #   resp.ingest_endpoints[0].id #=> String
     #   resp.ingest_endpoints[0].url #=> String
+    #   resp.input_type #=> String, one of "HLS", "CMAF"
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -512,8 +595,36 @@ module Aws::MediaPackageV2
     #   * {Types::CreateChannelGroupResponse#egress_domain #egress_domain} => String
     #   * {Types::CreateChannelGroupResponse#created_at #created_at} => Time
     #   * {Types::CreateChannelGroupResponse#modified_at #modified_at} => Time
+    #   * {Types::CreateChannelGroupResponse#etag #etag} => String
     #   * {Types::CreateChannelGroupResponse#description #description} => String
     #   * {Types::CreateChannelGroupResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Creating a Channel Group
+    #
+    #   resp = client.create_channel_group({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     description: "Description for exampleChannelGroup", 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     description: "Description for exampleChannelGroup", 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     egress_domain: "abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com", 
+    #     modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -533,6 +644,7 @@ module Aws::MediaPackageV2
     #   resp.egress_domain #=> String
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
+    #   resp.etag #=> String
     #   resp.description #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -602,6 +714,12 @@ module Aws::MediaPackageV2
     # @option params [Array<Types::CreateLowLatencyHlsManifestConfiguration>] :low_latency_hls_manifests
     #   A low-latency HLS manifest configuration.
     #
+    # @option params [Array<Types::CreateDashManifestConfiguration>] :dash_manifests
+    #   A DASH manifest configuration.
+    #
+    # @option params [Types::ForceEndpointErrorConfiguration] :force_endpoint_error_configuration
+    #   The failover settings for the endpoint.
+    #
     # @option params [Hash<String,String>] :tags
     #   A comma-separated list of tag key:value pairs that you define. For
     #   example:
@@ -624,7 +742,473 @@ module Aws::MediaPackageV2
     #   * {Types::CreateOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
     #   * {Types::CreateOriginEndpointResponse#hls_manifests #hls_manifests} => Array&lt;Types::GetHlsManifestConfiguration&gt;
     #   * {Types::CreateOriginEndpointResponse#low_latency_hls_manifests #low_latency_hls_manifests} => Array&lt;Types::GetLowLatencyHlsManifestConfiguration&gt;
+    #   * {Types::CreateOriginEndpointResponse#dash_manifests #dash_manifests} => Array&lt;Types::GetDashManifestConfiguration&gt;
+    #   * {Types::CreateOriginEndpointResponse#force_endpoint_error_configuration #force_endpoint_error_configuration} => Types::ForceEndpointErrorConfiguration
+    #   * {Types::CreateOriginEndpointResponse#etag #etag} => String
     #   * {Types::CreateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Creating an OriginEndpoint with container type TS, and encryption enabled
+    #
+    #   resp = client.create_origin_endpoint({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     container_type: "TS", 
+    #     description: "Description for exampleOriginEndpointTS", 
+    #     force_endpoint_error_configuration: {
+    #       endpoint_error_conditions: [
+    #         "STALE_MANIFEST", 
+    #         "INCOMPLETE_MANIFEST", 
+    #         "MISSING_DRM_KEY", 
+    #         "SLATE_INPUT", 
+    #       ], 
+    #     }, 
+    #     hls_manifests: [
+    #       {
+    #         child_manifest_name: "exampleChildManifest1", 
+    #         manifest_name: "exampleManifest1", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #       }, 
+    #       {
+    #         child_manifest_name: "exampleManifest2", 
+    #         manifest_name: "exampleManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     low_latency_hls_manifests: [
+    #       {
+    #         child_manifest_name: "exampleLLChildManifest1", 
+    #         manifest_name: "exampleLLManifest1", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #       }, 
+    #       {
+    #         child_manifest_name: "exampleLLManifest2", 
+    #         manifest_name: "exampleLLManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     origin_endpoint_name: "exampleOriginEndpointTS", 
+    #     segment: {
+    #       encryption: {
+    #         constant_initialization_vector: "A382A901F3C1F7718512266CFFBB0B7E", 
+    #         encryption_method: {
+    #           ts_encryption_method: "AES_128", 
+    #         }, 
+    #         key_rotation_interval_seconds: 300, 
+    #         speke_key_provider: {
+    #           drm_systems: [
+    #             "CLEAR_KEY_AES_128", 
+    #           ], 
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "SHARED", 
+    #             preset_speke_20_video: "SHARED", 
+    #           }, 
+    #           resource_id: "ResourceId", 
+    #           role_arn: "arn:aws:iam::123456789012:role/empRole", 
+    #           url: "https://foo.com", 
+    #         }, 
+    #       }, 
+    #       include_iframe_only_streams: true, 
+    #       scte: {
+    #         scte_filter: [
+    #           "SPLICE_INSERT", 
+    #           "BREAK", 
+    #         ], 
+    #       }, 
+    #       segment_duration_seconds: 6, 
+    #       segment_name: "segmentName", 
+    #       ts_include_dvb_subtitles: true, 
+    #       ts_use_audio_rendition_group: true, 
+    #     }, 
+    #     startover_window_seconds: 300, 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointTS", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     container_type: "TS", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     description: "Description for exampleOriginEndpointTS", 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     force_endpoint_error_configuration: {
+    #       endpoint_error_conditions: [
+    #         "STALE_MANIFEST", 
+    #         "INCOMPLETE_MANIFEST", 
+    #         "MISSING_DRM_KEY", 
+    #         "SLATE_INPUT", 
+    #       ], 
+    #     }, 
+    #     hls_manifests: [
+    #       {
+    #         child_manifest_name: "exampleChildManifest1", 
+    #         manifest_name: "exampleManifest1", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest1.m3u8", 
+    #       }, 
+    #       {
+    #         child_manifest_name: "exampleManifest2", 
+    #         manifest_name: "exampleManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest2.m3u8", 
+    #       }, 
+    #     ], 
+    #     low_latency_hls_manifests: [
+    #       {
+    #         child_manifest_name: "exampleLLChildManifest1", 
+    #         manifest_name: "exampleLLManifest1", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest1.m3u8", 
+    #       }, 
+    #       {
+    #         child_manifest_name: "exampleLLManifest2", 
+    #         manifest_name: "exampleLLManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest2.m3u8", 
+    #       }, 
+    #     ], 
+    #     modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     origin_endpoint_name: "exampleOriginEndpointTS", 
+    #     segment: {
+    #       encryption: {
+    #         constant_initialization_vector: "A382A901F3C1F7718512266CFFBB0B7E", 
+    #         encryption_method: {
+    #           ts_encryption_method: "AES_128", 
+    #         }, 
+    #         key_rotation_interval_seconds: 300, 
+    #         speke_key_provider: {
+    #           drm_systems: [
+    #             "CLEAR_KEY_AES_128", 
+    #           ], 
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "SHARED", 
+    #             preset_speke_20_video: "SHARED", 
+    #           }, 
+    #           resource_id: "ResourceId", 
+    #           role_arn: "arn:aws:iam::123456789012:role/empRole", 
+    #           url: "https://foo.com", 
+    #         }, 
+    #       }, 
+    #       include_iframe_only_streams: true, 
+    #       scte: {
+    #         scte_filter: [
+    #           "SPLICE_INSERT", 
+    #           "BREAK", 
+    #         ], 
+    #       }, 
+    #       segment_duration_seconds: 6, 
+    #       segment_name: "segmentName", 
+    #       ts_include_dvb_subtitles: true, 
+    #       ts_use_audio_rendition_group: true, 
+    #     }, 
+    #     startover_window_seconds: 300, 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
+    #
+    # @example Example: Creating an OriginEndpoint with container type CMAF, and encryption enabled
+    #
+    #   resp = client.create_origin_endpoint({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     container_type: "CMAF", 
+    #     dash_manifests: [
+    #       {
+    #         drm_signaling: "INDIVIDUAL", 
+    #         manifest_name: "exampleDashManifest1", 
+    #         manifest_window_seconds: 300, 
+    #         min_buffer_time_seconds: 30, 
+    #         min_update_period_seconds: 5, 
+    #         period_triggers: [
+    #           "AVAILS", 
+    #         ], 
+    #         scte_dash: {
+    #           ad_marker_dash: "XML", 
+    #         }, 
+    #         segment_template_format: "NUMBER_WITH_TIMELINE", 
+    #         suggested_presentation_delay_seconds: 2, 
+    #       }, 
+    #       {
+    #         drm_signaling: "INDIVIDUAL", 
+    #         manifest_name: "exampleDashManifest2", 
+    #         manifest_window_seconds: 60, 
+    #         min_buffer_time_seconds: 9, 
+    #         min_update_period_seconds: 3, 
+    #         period_triggers: [
+    #           "AVAILS", 
+    #           "DRM_KEY_ROTATION", 
+    #           "SOURCE_CHANGES", 
+    #           "SOURCE_DISRUPTIONS", 
+    #         ], 
+    #         scte_dash: {
+    #           ad_marker_dash: "XML", 
+    #         }, 
+    #         segment_template_format: "NUMBER_WITH_TIMELINE", 
+    #         suggested_presentation_delay_seconds: 12, 
+    #       }, 
+    #     ], 
+    #     force_endpoint_error_configuration: {
+    #       endpoint_error_conditions: [
+    #         "STALE_MANIFEST", 
+    #         "INCOMPLETE_MANIFEST", 
+    #         "MISSING_DRM_KEY", 
+    #         "SLATE_INPUT", 
+    #       ], 
+    #     }, 
+    #     hls_manifests: [
+    #       {
+    #         child_manifest_name: "exampleChildManifest1", 
+    #         manifest_name: "exampleManifest1", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #       }, 
+    #       {
+    #         child_manifest_name: "exampleManifest2", 
+    #         manifest_name: "exampleManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     low_latency_hls_manifests: [
+    #       {
+    #         child_manifest_name: "exampleLLChildManifest1", 
+    #         manifest_name: "exampleLLManifest1", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #       }, 
+    #       {
+    #         child_manifest_name: "exampleLLManifest2", 
+    #         manifest_name: "exampleLLManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     origin_endpoint_name: "exampleOriginEndpointCMAF", 
+    #     segment: {
+    #       encryption: {
+    #         constant_initialization_vector: "A382A901F3C1F7718512266CFFBB0B9F", 
+    #         encryption_method: {
+    #           cmaf_encryption_method: "CBCS", 
+    #         }, 
+    #         key_rotation_interval_seconds: 300, 
+    #         speke_key_provider: {
+    #           drm_systems: [
+    #             "PLAYREADY", 
+    #             "WIDEVINE", 
+    #           ], 
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET_AUDIO_1", 
+    #             preset_speke_20_video: "PRESET_VIDEO_1", 
+    #           }, 
+    #           resource_id: "ResourceId", 
+    #           role_arn: "arn:aws:iam::123456789012:role/empRole", 
+    #           url: "https://foo.com", 
+    #         }, 
+    #       }, 
+    #       include_iframe_only_streams: true, 
+    #       scte: {
+    #         scte_filter: [
+    #           "SPLICE_INSERT", 
+    #           "BREAK", 
+    #         ], 
+    #       }, 
+    #       segment_duration_seconds: 6, 
+    #       segment_name: "segmentName", 
+    #     }, 
+    #     startover_window_seconds: 300, 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointCMAF", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     container_type: "CMAF", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     dash_manifests: [
+    #       {
+    #         drm_signaling: "INDIVIDUAL", 
+    #         manifest_name: "exampleDashManifest1", 
+    #         manifest_window_seconds: 300, 
+    #         min_buffer_time_seconds: 30, 
+    #         min_update_period_seconds: 5, 
+    #         period_triggers: [
+    #           "AVAILS", 
+    #         ], 
+    #         scte_dash: {
+    #           ad_marker_dash: "XML", 
+    #         }, 
+    #         segment_template_format: "NUMBER_WITH_TIMELINE", 
+    #         suggested_presentation_delay_seconds: 2, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleDashManifest1.mpd", 
+    #       }, 
+    #       {
+    #         drm_signaling: "INDIVIDUAL", 
+    #         manifest_name: "exampleDashManifest2", 
+    #         manifest_window_seconds: 60, 
+    #         min_buffer_time_seconds: 9, 
+    #         min_update_period_seconds: 3, 
+    #         period_triggers: [
+    #           "AVAILS", 
+    #           "DRM_KEY_ROTATION", 
+    #           "SOURCE_CHANGES", 
+    #           "SOURCE_DISRUPTIONS", 
+    #         ], 
+    #         scte_dash: {
+    #           ad_marker_dash: "XML", 
+    #         }, 
+    #         segment_template_format: "NUMBER_WITH_TIMELINE", 
+    #         suggested_presentation_delay_seconds: 12, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleDashManifest2.mpd", 
+    #       }, 
+    #     ], 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     force_endpoint_error_configuration: {
+    #       endpoint_error_conditions: [
+    #         "STALE_MANIFEST", 
+    #         "INCOMPLETE_MANIFEST", 
+    #         "MISSING_DRM_KEY", 
+    #         "SLATE_INPUT", 
+    #       ], 
+    #     }, 
+    #     hls_manifests: [
+    #       {
+    #         child_manifest_name: "exampleChildManifest1", 
+    #         manifest_name: "exampleManifest1", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleManifest1.m3u8", 
+    #       }, 
+    #       {
+    #         child_manifest_name: "exampleManifest2", 
+    #         manifest_name: "exampleManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleManifest2.m3u8", 
+    #       }, 
+    #     ], 
+    #     low_latency_hls_manifests: [
+    #       {
+    #         child_manifest_name: "exampleLLChildManifest1", 
+    #         manifest_name: "exampleLLManifest1", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleLLManifest1.m3u8", 
+    #       }, 
+    #       {
+    #         child_manifest_name: "exampleLLManifest2", 
+    #         manifest_name: "exampleLLManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleLLManifest2.m3u8", 
+    #       }, 
+    #     ], 
+    #     modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     origin_endpoint_name: "exampleOriginEndpointCMAF", 
+    #     segment: {
+    #       encryption: {
+    #         constant_initialization_vector: "A382A901F3C1F7718512266CFFBB0B9F", 
+    #         encryption_method: {
+    #           cmaf_encryption_method: "CBCS", 
+    #         }, 
+    #         key_rotation_interval_seconds: 300, 
+    #         speke_key_provider: {
+    #           drm_systems: [
+    #             "PLAYREADY", 
+    #             "WIDEVINE", 
+    #           ], 
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "PRESET_AUDIO_1", 
+    #             preset_speke_20_video: "PRESET_VIDEO_1", 
+    #           }, 
+    #           resource_id: "ResourceId", 
+    #           role_arn: "arn:aws:iam::123456789012:role/empRole", 
+    #           url: "https://foo.com", 
+    #         }, 
+    #       }, 
+    #       include_iframe_only_streams: true, 
+    #       scte: {
+    #         scte_filter: [
+    #           "SPLICE_INSERT", 
+    #           "BREAK", 
+    #         ], 
+    #       }, 
+    #       segment_duration_seconds: 6, 
+    #       segment_name: "segmentName", 
+    #     }, 
+    #     startover_window_seconds: 300, 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -673,6 +1257,12 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #         },
     #       },
     #     ],
     #     low_latency_hls_manifests: [
@@ -684,8 +1274,42 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #         },
     #       },
     #     ],
+    #     dash_manifests: [
+    #       {
+    #         manifest_name: "ManifestName", # required
+    #         manifest_window_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #         },
+    #         min_update_period_seconds: 1,
+    #         min_buffer_time_seconds: 1,
+    #         suggested_presentation_delay_seconds: 1,
+    #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE
+    #         period_triggers: ["AVAILS"], # accepts AVAILS, DRM_KEY_ROTATION, SOURCE_CHANGES, SOURCE_DISRUPTIONS, NONE
+    #         scte_dash: {
+    #           ad_marker_dash: "BINARY", # accepts BINARY, XML
+    #         },
+    #         drm_signaling: "INDIVIDUAL", # accepts INDIVIDUAL, REFERENCED
+    #         utc_timing: {
+    #           timing_mode: "HTTP_HEAD", # accepts HTTP_HEAD, HTTP_ISO, HTTP_XSDATE, UTC_DIRECT
+    #           timing_source: "DashUtcTimingTimingSourceString",
+    #         },
+    #       },
+    #     ],
+    #     force_endpoint_error_configuration: {
+    #       endpoint_error_conditions: ["STALE_MANIFEST"], # accepts STALE_MANIFEST, INCOMPLETE_MANIFEST, MISSING_DRM_KEY, SLATE_INPUT
+    #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -727,6 +1351,10 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.hls_manifests[0].filter_configuration.start #=> Time
+    #   resp.hls_manifests[0].filter_configuration.end #=> Time
+    #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.low_latency_hls_manifests #=> Array
     #   resp.low_latency_hls_manifests[0].manifest_name #=> String
     #   resp.low_latency_hls_manifests[0].url #=> String
@@ -734,6 +1362,31 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.low_latency_hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests #=> Array
+    #   resp.dash_manifests[0].manifest_name #=> String
+    #   resp.dash_manifests[0].url #=> String
+    #   resp.dash_manifests[0].manifest_window_seconds #=> Integer
+    #   resp.dash_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.dash_manifests[0].filter_configuration.start #=> Time
+    #   resp.dash_manifests[0].filter_configuration.end #=> Time
+    #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
+    #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
+    #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE"
+    #   resp.dash_manifests[0].period_triggers #=> Array
+    #   resp.dash_manifests[0].period_triggers[0] #=> String, one of "AVAILS", "DRM_KEY_ROTATION", "SOURCE_CHANGES", "SOURCE_DISRUPTIONS", "NONE"
+    #   resp.dash_manifests[0].scte_dash.ad_marker_dash #=> String, one of "BINARY", "XML"
+    #   resp.dash_manifests[0].drm_signaling #=> String, one of "INDIVIDUAL", "REFERENCED"
+    #   resp.dash_manifests[0].utc_timing.timing_mode #=> String, one of "HTTP_HEAD", "HTTP_ISO", "HTTP_XSDATE", "UTC_DIRECT"
+    #   resp.dash_manifests[0].utc_timing.timing_source #=> String
+    #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
+    #   resp.force_endpoint_error_configuration.endpoint_error_conditions[0] #=> String, one of "STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -761,6 +1414,18 @@ module Aws::MediaPackageV2
     #   AWS Region and channel group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Deleting a Channel
+    #
+    #   resp = client.delete_channel({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -790,6 +1455,17 @@ module Aws::MediaPackageV2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Deleting a Channel Group
+    #
+    #   resp = client.delete_channel_group({
+    #     channel_group_name: "exampleChannelGroup", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_channel_group({
@@ -818,6 +1494,18 @@ module Aws::MediaPackageV2
     #   AWS Region and channel group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Deleting a Channel Policy
+    #
+    #   resp = client.delete_channel_policy({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -856,6 +1544,19 @@ module Aws::MediaPackageV2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Deleting an OriginEndpoint
+    #
+    #   resp = client.delete_origin_endpoint({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     origin_endpoint_name: "exampleOriginEndpointTS", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_origin_endpoint({
@@ -891,6 +1592,19 @@ module Aws::MediaPackageV2
     #   account in the AWS Region and channel.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Deleting an Origin Endpoint Policy
+    #
+    #   resp = client.delete_origin_endpoint_policy({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     origin_endpoint_name: "exampleOriginEndpoint", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -932,7 +1646,43 @@ module Aws::MediaPackageV2
     #   * {Types::GetChannelResponse#modified_at #modified_at} => Time
     #   * {Types::GetChannelResponse#description #description} => String
     #   * {Types::GetChannelResponse#ingest_endpoints #ingest_endpoints} => Array&lt;Types::IngestEndpoint&gt;
+    #   * {Types::GetChannelResponse#input_type #input_type} => String
+    #   * {Types::GetChannelResponse#etag #etag} => String
     #   * {Types::GetChannelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Getting a Channel
+    #
+    #   resp = client.get_channel({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     description: "Description for exampleChannel", 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     ingest_endpoints: [
+    #       {
+    #         id: "1", 
+    #         url: "https://abcde-1.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleChannel/index", 
+    #       }, 
+    #       {
+    #         id: "2", 
+    #         url: "https://abcde-2.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleChannel/index", 
+    #       }, 
+    #     ], 
+    #     input_type: "HLS", 
+    #     modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -952,6 +1702,8 @@ module Aws::MediaPackageV2
     #   resp.ingest_endpoints #=> Array
     #   resp.ingest_endpoints[0].id #=> String
     #   resp.ingest_endpoints[0].url #=> String
+    #   resp.input_type #=> String, one of "HLS", "CMAF"
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -981,7 +1733,30 @@ module Aws::MediaPackageV2
     #   * {Types::GetChannelGroupResponse#created_at #created_at} => Time
     #   * {Types::GetChannelGroupResponse#modified_at #modified_at} => Time
     #   * {Types::GetChannelGroupResponse#description #description} => String
+    #   * {Types::GetChannelGroupResponse#etag #etag} => String
     #   * {Types::GetChannelGroupResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Getting a Channel Group
+    #
+    #   resp = client.get_channel_group({
+    #     channel_group_name: "exampleChannelGroup", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     description: "Description for exampleChannelGroup", 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     egress_domain: "abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com", 
+    #     modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -997,6 +1772,7 @@ module Aws::MediaPackageV2
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
     #   resp.description #=> String
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1028,6 +1804,21 @@ module Aws::MediaPackageV2
     #   * {Types::GetChannelPolicyResponse#channel_group_name #channel_group_name} => String
     #   * {Types::GetChannelPolicyResponse#channel_name #channel_name} => String
     #   * {Types::GetChannelPolicyResponse#policy #policy} => String
+    #
+    #
+    # @example Example: Getting a Channel Policy
+    #
+    #   resp = client.get_channel_policy({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     policy: "{...}", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1084,7 +1875,121 @@ module Aws::MediaPackageV2
     #   * {Types::GetOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
     #   * {Types::GetOriginEndpointResponse#hls_manifests #hls_manifests} => Array&lt;Types::GetHlsManifestConfiguration&gt;
     #   * {Types::GetOriginEndpointResponse#low_latency_hls_manifests #low_latency_hls_manifests} => Array&lt;Types::GetLowLatencyHlsManifestConfiguration&gt;
+    #   * {Types::GetOriginEndpointResponse#dash_manifests #dash_manifests} => Array&lt;Types::GetDashManifestConfiguration&gt;
+    #   * {Types::GetOriginEndpointResponse#force_endpoint_error_configuration #force_endpoint_error_configuration} => Types::ForceEndpointErrorConfiguration
+    #   * {Types::GetOriginEndpointResponse#etag #etag} => String
     #   * {Types::GetOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Getting an OriginEndpoint
+    #
+    #   resp = client.get_origin_endpoint({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     origin_endpoint_name: "exampleOriginEndpointTS", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointTS", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     container_type: "TS", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     description: "Description for exampleOriginEndpointTS", 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     force_endpoint_error_configuration: {
+    #       endpoint_error_conditions: [
+    #         "STALE_MANIFEST", 
+    #         "INCOMPLETE_MANIFEST", 
+    #         "MISSING_DRM_KEY", 
+    #         "SLATE_INPUT", 
+    #       ], 
+    #     }, 
+    #     hls_manifests: [
+    #       {
+    #         child_manifest_name: "exampleChildManifest1", 
+    #         manifest_name: "exampleManifest1", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest1.m3u8", 
+    #       }, 
+    #       {
+    #         child_manifest_name: "exampleManifest2", 
+    #         manifest_name: "exampleManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest2.m3u8", 
+    #       }, 
+    #     ], 
+    #     low_latency_hls_manifests: [
+    #       {
+    #         child_manifest_name: "exampleLLChildManifest1", 
+    #         manifest_name: "exampleLLManifest1", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest1.m3u8", 
+    #       }, 
+    #       {
+    #         child_manifest_name: "exampleLLManifest2", 
+    #         manifest_name: "exampleLLManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest2.m3u8", 
+    #       }, 
+    #     ], 
+    #     modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     origin_endpoint_name: "exampleOriginEndpointTS", 
+    #     segment: {
+    #       encryption: {
+    #         constant_initialization_vector: "A382A901F3C1F7718512266CFFBB0B7E", 
+    #         encryption_method: {
+    #           ts_encryption_method: "AES_128", 
+    #         }, 
+    #         key_rotation_interval_seconds: 300, 
+    #         speke_key_provider: {
+    #           drm_systems: [
+    #             "CLEAR_KEY_AES_128", 
+    #           ], 
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "SHARED", 
+    #             preset_speke_20_video: "SHARED", 
+    #           }, 
+    #           resource_id: "ResourceId", 
+    #           role_arn: "arn:aws:iam::123456789012:role/empRole", 
+    #           url: "https://foo.com", 
+    #         }, 
+    #       }, 
+    #       include_iframe_only_streams: true, 
+    #       scte: {
+    #         scte_filter: [
+    #           "SPLICE_INSERT", 
+    #           "BREAK", 
+    #         ], 
+    #       }, 
+    #       segment_duration_seconds: 6, 
+    #       segment_name: "segmentName", 
+    #       ts_include_dvb_subtitles: true, 
+    #       ts_use_audio_rendition_group: true, 
+    #     }, 
+    #     startover_window_seconds: 300, 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1130,6 +2035,10 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.hls_manifests[0].filter_configuration.start #=> Time
+    #   resp.hls_manifests[0].filter_configuration.end #=> Time
+    #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.low_latency_hls_manifests #=> Array
     #   resp.low_latency_hls_manifests[0].manifest_name #=> String
     #   resp.low_latency_hls_manifests[0].url #=> String
@@ -1137,6 +2046,31 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.low_latency_hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests #=> Array
+    #   resp.dash_manifests[0].manifest_name #=> String
+    #   resp.dash_manifests[0].url #=> String
+    #   resp.dash_manifests[0].manifest_window_seconds #=> Integer
+    #   resp.dash_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.dash_manifests[0].filter_configuration.start #=> Time
+    #   resp.dash_manifests[0].filter_configuration.end #=> Time
+    #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
+    #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
+    #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE"
+    #   resp.dash_manifests[0].period_triggers #=> Array
+    #   resp.dash_manifests[0].period_triggers[0] #=> String, one of "AVAILS", "DRM_KEY_ROTATION", "SOURCE_CHANGES", "SOURCE_DISRUPTIONS", "NONE"
+    #   resp.dash_manifests[0].scte_dash.ad_marker_dash #=> String, one of "BINARY", "XML"
+    #   resp.dash_manifests[0].drm_signaling #=> String, one of "INDIVIDUAL", "REFERENCED"
+    #   resp.dash_manifests[0].utc_timing.timing_mode #=> String, one of "HTTP_HEAD", "HTTP_ISO", "HTTP_XSDATE", "UTC_DIRECT"
+    #   resp.dash_manifests[0].utc_timing.timing_source #=> String
+    #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
+    #   resp.force_endpoint_error_configuration.endpoint_error_conditions[0] #=> String, one of "STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1173,6 +2107,23 @@ module Aws::MediaPackageV2
     #   * {Types::GetOriginEndpointPolicyResponse#channel_name #channel_name} => String
     #   * {Types::GetOriginEndpointPolicyResponse#origin_endpoint_name #origin_endpoint_name} => String
     #   * {Types::GetOriginEndpointPolicyResponse#policy #policy} => String
+    #
+    #
+    # @example Example: Getting an Origin Endpoint Policy
+    #
+    #   resp = client.get_origin_endpoint_policy({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     origin_endpoint_name: "exampleOriginEndpoint", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     origin_endpoint_name: "exampleOriginEndpoint", 
+    #     policy: "{...}", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1215,6 +2166,31 @@ module Aws::MediaPackageV2
     #   * {Types::ListChannelGroupsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: Listing all Channel Groups
+    #
+    #   resp = client.list_channel_groups({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup", 
+    #         channel_group_name: "exampleChannelGroup", 
+    #         created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #         description: "Description for exampleChannelGroup", 
+    #         modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/anotherExampleChannelGroup", 
+    #         channel_group_name: "anotherExampleChannelGroup", 
+    #         created_at: Time.parse("2022-10-18T10:36:00.00Z"), 
+    #         modified_at: Time.parse("2022-10-18T10:36:00.00Z"), 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1265,6 +2241,34 @@ module Aws::MediaPackageV2
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: Listing all Channels
+    #
+    #   resp = client.list_channels({
+    #     channel_group_name: "exampleChannelGroup", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel", 
+    #         channel_group_name: "exampleChannelGroup", 
+    #         channel_name: "exampleChannel", 
+    #         created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #         description: "Description for exampleChannel", 
+    #         modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/anotherExampleChannel", 
+    #         channel_group_name: "exampleChannelGroup", 
+    #         channel_name: "anotherExampleChannel", 
+    #         created_at: Time.parse("2022-10-18T10:36:00.00Z"), 
+    #         modified_at: Time.parse("2022-10-18T10:36:00.00Z"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_channels({
@@ -1282,6 +2286,7 @@ module Aws::MediaPackageV2
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].modified_at #=> Time
     #   resp.items[0].description #=> String
+    #   resp.items[0].input_type #=> String, one of "HLS", "CMAF"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ListChannels AWS API Documentation
@@ -1320,6 +2325,113 @@ module Aws::MediaPackageV2
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
+    #
+    # @example Example: Listing all OriginEndpoints
+    #
+    #   resp = client.list_origin_endpoints({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     items: [
+    #       {
+    #         arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointTS", 
+    #         channel_group_name: "exampleChannelGroup", 
+    #         channel_name: "exampleChannel", 
+    #         container_type: "TS", 
+    #         created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #         description: "Description for exampleOriginEndpointTS", 
+    #         force_endpoint_error_configuration: {
+    #           endpoint_error_conditions: [
+    #             "STALE_MANIFEST", 
+    #             "INCOMPLETE_MANIFEST", 
+    #             "MISSING_DRM_KEY", 
+    #             "SLATE_INPUT", 
+    #           ], 
+    #         }, 
+    #         hls_manifests: [
+    #           {
+    #             child_manifest_name: "exampleChildManifest1", 
+    #             manifest_name: "exampleManifest1", 
+    #             url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest1.m3u8", 
+    #           }, 
+    #           {
+    #             child_manifest_name: "exampleManifest2", 
+    #             manifest_name: "exampleManifest2", 
+    #             url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest2.m3u8", 
+    #           }, 
+    #         ], 
+    #         low_latency_hls_manifests: [
+    #           {
+    #             child_manifest_name: "exampleLLChildManifest1", 
+    #             manifest_name: "exampleLLManifest1", 
+    #             url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest1.m3u8", 
+    #           }, 
+    #           {
+    #             child_manifest_name: "exampleLLManifest2", 
+    #             manifest_name: "exampleLLManifest2", 
+    #             url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest2.m3u8", 
+    #           }, 
+    #         ], 
+    #         modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #         origin_endpoint_name: "exampleOriginEndpointTS", 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointCMAF", 
+    #         channel_group_name: "exampleChannelGroup", 
+    #         channel_name: "exampleChannel", 
+    #         container_type: "CMAF", 
+    #         created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #         dash_manifests: [
+    #           {
+    #             manifest_name: "exampleDashManifest1", 
+    #             url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleDashManifest1.mpd", 
+    #           }, 
+    #           {
+    #             manifest_name: "exampleDashManifest2", 
+    #             url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleDashManifest2.mpd", 
+    #           }, 
+    #         ], 
+    #         force_endpoint_error_configuration: {
+    #           endpoint_error_conditions: [
+    #             "STALE_MANIFEST", 
+    #             "INCOMPLETE_MANIFEST", 
+    #             "MISSING_DRM_KEY", 
+    #             "SLATE_INPUT", 
+    #           ], 
+    #         }, 
+    #         hls_manifests: [
+    #           {
+    #             child_manifest_name: "exampleChildManifest1", 
+    #             manifest_name: "exampleManifest1", 
+    #             url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleManifest1.m3u8", 
+    #           }, 
+    #           {
+    #             child_manifest_name: "exampleManifest2", 
+    #             manifest_name: "exampleManifest2", 
+    #             url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleManifest2.m3u8", 
+    #           }, 
+    #         ], 
+    #         low_latency_hls_manifests: [
+    #           {
+    #             child_manifest_name: "exampleLLChildManifest1", 
+    #             manifest_name: "exampleLLManifest1", 
+    #             url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleLLManifest1.m3u8", 
+    #           }, 
+    #           {
+    #             child_manifest_name: "exampleLLManifest2", 
+    #             manifest_name: "exampleLLManifest2", 
+    #             url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointCMAF/exampleLLManifest2.m3u8", 
+    #           }, 
+    #         ], 
+    #         modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #         origin_endpoint_name: "exampleOriginEndpointCMAF", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_origin_endpoints({
@@ -1348,6 +2460,11 @@ module Aws::MediaPackageV2
     #   resp.items[0].low_latency_hls_manifests[0].manifest_name #=> String
     #   resp.items[0].low_latency_hls_manifests[0].child_manifest_name #=> String
     #   resp.items[0].low_latency_hls_manifests[0].url #=> String
+    #   resp.items[0].dash_manifests #=> Array
+    #   resp.items[0].dash_manifests[0].manifest_name #=> String
+    #   resp.items[0].dash_manifests[0].url #=> String
+    #   resp.items[0].force_endpoint_error_configuration.endpoint_error_conditions #=> Array
+    #   resp.items[0].force_endpoint_error_configuration.endpoint_error_conditions[0] #=> String, one of "STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ListOriginEndpoints AWS API Documentation
@@ -1367,6 +2484,21 @@ module Aws::MediaPackageV2
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: List all tags for a resource
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1408,6 +2540,19 @@ module Aws::MediaPackageV2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Creating a Channel Policy
+    #
+    #   resp = client.put_channel_policy({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     policy: "{...}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_channel_policy({
@@ -1448,6 +2593,20 @@ module Aws::MediaPackageV2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Creating an Origin Endpoint Policy
+    #
+    #   resp = client.put_origin_endpoint_policy({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     origin_endpoint_name: "exampleOriginEndpoint", 
+    #     policy: "{...}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_origin_endpoint_policy({
@@ -1487,6 +2646,21 @@ module Aws::MediaPackageV2
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: Add tags to a resource
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel", 
+    #     tags: {
+    #       "key3" => "value3", 
+    #       "key4" => "value4", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
@@ -1514,6 +2688,21 @@ module Aws::MediaPackageV2
     #   The list of tag keys to remove from the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: Remove tags from a resource
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel", 
+    #     tag_keys: [
+    #       "key3", 
+    #       "key4", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1550,6 +2739,11 @@ module Aws::MediaPackageV2
     #   identifier for the channel, and must be unique for your account in the
     #   AWS Region and channel group.
     #
+    # @option params [String] :etag
+    #   The expected current Entity Tag (ETag) for the resource. If the
+    #   specified ETag does not match the resource's current entity tag, the
+    #   update request will be rejected.
+    #
     # @option params [String] :description
     #   Any descriptive information that you want to add to the channel for
     #   future identification purposes.
@@ -1563,13 +2757,51 @@ module Aws::MediaPackageV2
     #   * {Types::UpdateChannelResponse#modified_at #modified_at} => Time
     #   * {Types::UpdateChannelResponse#description #description} => String
     #   * {Types::UpdateChannelResponse#ingest_endpoints #ingest_endpoints} => Array&lt;Types::IngestEndpoint&gt;
+    #   * {Types::UpdateChannelResponse#input_type #input_type} => String
+    #   * {Types::UpdateChannelResponse#etag #etag} => String
     #   * {Types::UpdateChannelResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Updating a Channel
+    #
+    #   resp = client.update_channel({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     description: "Updated description for exampleChannel", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     description: "Updated description for exampleChannel", 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     ingest_endpoints: [
+    #       {
+    #         id: "1", 
+    #         url: "https://abcde-1.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleChannel/index", 
+    #       }, 
+    #       {
+    #         id: "2", 
+    #         url: "https://abcde-2.ingest.vwxyz.mediapackagev2.us-west-2.amazonaws.com/v1/exampleChannelGroup/exampleChannel/index", 
+    #       }, 
+    #     ], 
+    #     input_type: "HLS", 
+    #     modified_at: Time.parse("2022-10-18T10:36:00.00Z"), 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_channel({
     #     channel_group_name: "ResourceName", # required
     #     channel_name: "ResourceName", # required
+    #     etag: "EntityTag",
     #     description: "ResourceDescription",
     #   })
     #
@@ -1584,6 +2816,8 @@ module Aws::MediaPackageV2
     #   resp.ingest_endpoints #=> Array
     #   resp.ingest_endpoints[0].id #=> String
     #   resp.ingest_endpoints[0].url #=> String
+    #   resp.input_type #=> String, one of "HLS", "CMAF"
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1608,6 +2842,11 @@ module Aws::MediaPackageV2
     #   identifier for the channel group, and must be unique for your account
     #   in the AWS Region.
     #
+    # @option params [String] :etag
+    #   The expected current Entity Tag (ETag) for the resource. If the
+    #   specified ETag does not match the resource's current entity tag, the
+    #   update request will be rejected.
+    #
     # @option params [String] :description
     #   Any descriptive information that you want to add to the channel group
     #   for future identification purposes.
@@ -1620,12 +2859,37 @@ module Aws::MediaPackageV2
     #   * {Types::UpdateChannelGroupResponse#created_at #created_at} => Time
     #   * {Types::UpdateChannelGroupResponse#modified_at #modified_at} => Time
     #   * {Types::UpdateChannelGroupResponse#description #description} => String
+    #   * {Types::UpdateChannelGroupResponse#etag #etag} => String
     #   * {Types::UpdateChannelGroupResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Updating a Channel Group
+    #
+    #   resp = client.update_channel_group({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     description: "Updated description for exampleChannelGroup", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     description: "Updated description for exampleChannelGroup", 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     egress_domain: "abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com", 
+    #     modified_at: Time.parse("2022-10-18T10:36:00.00Z"), 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_channel_group({
     #     channel_group_name: "ResourceName", # required
+    #     etag: "EntityTag",
     #     description: "ResourceDescription",
     #   })
     #
@@ -1637,6 +2901,7 @@ module Aws::MediaPackageV2
     #   resp.created_at #=> Time
     #   resp.modified_at #=> Time
     #   resp.description #=> String
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1696,6 +2961,17 @@ module Aws::MediaPackageV2
     # @option params [Array<Types::CreateLowLatencyHlsManifestConfiguration>] :low_latency_hls_manifests
     #   A low-latency HLS manifest configuration.
     #
+    # @option params [Array<Types::CreateDashManifestConfiguration>] :dash_manifests
+    #   A DASH manifest configuration.
+    #
+    # @option params [Types::ForceEndpointErrorConfiguration] :force_endpoint_error_configuration
+    #   The failover settings for the endpoint.
+    #
+    # @option params [String] :etag
+    #   The expected current Entity Tag (ETag) for the resource. If the
+    #   specified ETag does not match the resource's current entity tag, the
+    #   update request will be rejected.
+    #
     # @return [Types::UpdateOriginEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateOriginEndpointResponse#arn #arn} => String
@@ -1710,7 +2986,202 @@ module Aws::MediaPackageV2
     #   * {Types::UpdateOriginEndpointResponse#startover_window_seconds #startover_window_seconds} => Integer
     #   * {Types::UpdateOriginEndpointResponse#hls_manifests #hls_manifests} => Array&lt;Types::GetHlsManifestConfiguration&gt;
     #   * {Types::UpdateOriginEndpointResponse#low_latency_hls_manifests #low_latency_hls_manifests} => Array&lt;Types::GetLowLatencyHlsManifestConfiguration&gt;
+    #   * {Types::UpdateOriginEndpointResponse#force_endpoint_error_configuration #force_endpoint_error_configuration} => Types::ForceEndpointErrorConfiguration
+    #   * {Types::UpdateOriginEndpointResponse#etag #etag} => String
     #   * {Types::UpdateOriginEndpointResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateOriginEndpointResponse#dash_manifests #dash_manifests} => Array&lt;Types::GetDashManifestConfiguration&gt;
+    #
+    #
+    # @example Example: Updating an OriginEndpoint
+    #
+    #   resp = client.update_origin_endpoint({
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     container_type: "TS", 
+    #     description: "Updated description for exampleOriginEndpointTS", 
+    #     force_endpoint_error_configuration: {
+    #       endpoint_error_conditions: [
+    #         "STALE_MANIFEST", 
+    #         "INCOMPLETE_MANIFEST", 
+    #         "MISSING_DRM_KEY", 
+    #         "SLATE_INPUT", 
+    #       ], 
+    #     }, 
+    #     hls_manifests: [
+    #       {
+    #         child_manifest_name: "exampleChildManifest1", 
+    #         manifest_name: "exampleManifest1", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #       }, 
+    #       {
+    #         child_manifest_name: "exampleManifest2", 
+    #         manifest_name: "exampleManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     low_latency_hls_manifests: [
+    #       {
+    #         child_manifest_name: "exampleLLChildManifest1", 
+    #         manifest_name: "exampleLLManifest1", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #       }, 
+    #       {
+    #         child_manifest_name: "exampleLLManifest2", 
+    #         manifest_name: "exampleLLManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #     origin_endpoint_name: "exampleOriginEndpointTS", 
+    #     segment: {
+    #       encryption: {
+    #         constant_initialization_vector: "A382A901F3C1F7718512266CFFBB0B7E", 
+    #         encryption_method: {
+    #           ts_encryption_method: "AES_128", 
+    #         }, 
+    #         key_rotation_interval_seconds: 300, 
+    #         speke_key_provider: {
+    #           drm_systems: [
+    #             "CLEAR_KEY_AES_128", 
+    #           ], 
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "SHARED", 
+    #             preset_speke_20_video: "SHARED", 
+    #           }, 
+    #           resource_id: "ResourceId", 
+    #           role_arn: "arn:aws:iam::123456789012:role/empRole", 
+    #           url: "https://foo.com", 
+    #         }, 
+    #       }, 
+    #       include_iframe_only_streams: false, 
+    #       scte: {
+    #         scte_filter: [
+    #           "SPLICE_INSERT", 
+    #         ], 
+    #       }, 
+    #       segment_duration_seconds: 7, 
+    #       segment_name: "segmentName2", 
+    #       ts_include_dvb_subtitles: false, 
+    #       ts_use_audio_rendition_group: true, 
+    #     }, 
+    #     startover_window_seconds: 600, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:mediapackagev2:us-west-2:123456789012:channelGroup/exampleChannelGroup/channel/exampleChannel/originEndpoint/exampleOriginEndpointTS", 
+    #     channel_group_name: "exampleChannelGroup", 
+    #     channel_name: "exampleChannel", 
+    #     container_type: "TS", 
+    #     created_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     description: "Updated description for exampleOriginEndpointTS", 
+    #     etag: "GlfT+dwAyGIR4wuy8nKWl1RDPwSrjQej9qUutLZxoxk=", 
+    #     force_endpoint_error_configuration: {
+    #       endpoint_error_conditions: [
+    #         "STALE_MANIFEST", 
+    #         "INCOMPLETE_MANIFEST", 
+    #         "MISSING_DRM_KEY", 
+    #         "SLATE_INPUT", 
+    #       ], 
+    #     }, 
+    #     hls_manifests: [
+    #       {
+    #         child_manifest_name: "exampleChildManifest1", 
+    #         manifest_name: "exampleManifest1", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest1.m3u8", 
+    #       }, 
+    #       {
+    #         child_manifest_name: "exampleManifest2", 
+    #         manifest_name: "exampleManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleManifest2.m3u8", 
+    #       }, 
+    #     ], 
+    #     low_latency_hls_manifests: [
+    #       {
+    #         child_manifest_name: "exampleLLChildManifest1", 
+    #         manifest_name: "exampleLLManifest1", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest1.m3u8", 
+    #       }, 
+    #       {
+    #         child_manifest_name: "exampleLLManifest2", 
+    #         manifest_name: "exampleLLManifest2", 
+    #         manifest_window_seconds: 30, 
+    #         program_date_time_interval_seconds: 60, 
+    #         scte_hls: {
+    #           ad_marker_hls: "DATERANGE", 
+    #         }, 
+    #         url: "https://abcde.egress.vwxyz.mediapackagev2.us-west-2.amazonaws.com/out/v1/exampleChannelGroup/exampleChannel/exampleOriginEndpointTS/exampleLLManifest2.m3u8", 
+    #       }, 
+    #     ], 
+    #     modified_at: Time.parse("2022-10-18T09:36:00.00Z"), 
+    #     origin_endpoint_name: "exampleOriginEndpointTS", 
+    #     segment: {
+    #       encryption: {
+    #         constant_initialization_vector: "A382A901F3C1F7718512266CFFBB0B7E", 
+    #         encryption_method: {
+    #           ts_encryption_method: "AES_128", 
+    #         }, 
+    #         key_rotation_interval_seconds: 300, 
+    #         speke_key_provider: {
+    #           drm_systems: [
+    #             "CLEAR_KEY_AES_128", 
+    #           ], 
+    #           encryption_contract_configuration: {
+    #             preset_speke_20_audio: "SHARED", 
+    #             preset_speke_20_video: "SHARED", 
+    #           }, 
+    #           resource_id: "ResourceId", 
+    #           role_arn: "arn:aws:iam::123456789012:role/empRole", 
+    #           url: "https://foo.com", 
+    #         }, 
+    #       }, 
+    #       include_iframe_only_streams: false, 
+    #       scte: {
+    #         scte_filter: [
+    #           "SPLICE_INSERT", 
+    #         ], 
+    #       }, 
+    #       segment_duration_seconds: 7, 
+    #       segment_name: "segmentName2", 
+    #       ts_include_dvb_subtitles: false, 
+    #       ts_use_audio_rendition_group: true, 
+    #     }, 
+    #     startover_window_seconds: 600, 
+    #     tags: {
+    #       "key1" => "value1", 
+    #       "key2" => "value2", 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1758,6 +3229,12 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #         },
     #       },
     #     ],
     #     low_latency_hls_manifests: [
@@ -1769,8 +3246,43 @@ module Aws::MediaPackageV2
     #         },
     #         manifest_window_seconds: 1,
     #         program_date_time_interval_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #         },
     #       },
     #     ],
+    #     dash_manifests: [
+    #       {
+    #         manifest_name: "ManifestName", # required
+    #         manifest_window_seconds: 1,
+    #         filter_configuration: {
+    #           manifest_filter: "FilterConfigurationManifestFilterString",
+    #           start: Time.now,
+    #           end: Time.now,
+    #           time_delay_seconds: 1,
+    #         },
+    #         min_update_period_seconds: 1,
+    #         min_buffer_time_seconds: 1,
+    #         suggested_presentation_delay_seconds: 1,
+    #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE
+    #         period_triggers: ["AVAILS"], # accepts AVAILS, DRM_KEY_ROTATION, SOURCE_CHANGES, SOURCE_DISRUPTIONS, NONE
+    #         scte_dash: {
+    #           ad_marker_dash: "BINARY", # accepts BINARY, XML
+    #         },
+    #         drm_signaling: "INDIVIDUAL", # accepts INDIVIDUAL, REFERENCED
+    #         utc_timing: {
+    #           timing_mode: "HTTP_HEAD", # accepts HTTP_HEAD, HTTP_ISO, HTTP_XSDATE, UTC_DIRECT
+    #           timing_source: "DashUtcTimingTimingSourceString",
+    #         },
+    #       },
+    #     ],
+    #     force_endpoint_error_configuration: {
+    #       endpoint_error_conditions: ["STALE_MANIFEST"], # accepts STALE_MANIFEST, INCOMPLETE_MANIFEST, MISSING_DRM_KEY, SLATE_INPUT
+    #     },
+    #     etag: "EntityTag",
     #   })
     #
     # @example Response structure
@@ -1809,6 +3321,10 @@ module Aws::MediaPackageV2
     #   resp.hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.hls_manifests[0].filter_configuration.start #=> Time
+    #   resp.hls_manifests[0].filter_configuration.end #=> Time
+    #   resp.hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
     #   resp.low_latency_hls_manifests #=> Array
     #   resp.low_latency_hls_manifests[0].manifest_name #=> String
     #   resp.low_latency_hls_manifests[0].url #=> String
@@ -1816,8 +3332,33 @@ module Aws::MediaPackageV2
     #   resp.low_latency_hls_manifests[0].manifest_window_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].program_date_time_interval_seconds #=> Integer
     #   resp.low_latency_hls_manifests[0].scte_hls.ad_marker_hls #=> String, one of "DATERANGE"
+    #   resp.low_latency_hls_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.low_latency_hls_manifests[0].filter_configuration.start #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.end #=> Time
+    #   resp.low_latency_hls_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.force_endpoint_error_configuration.endpoint_error_conditions #=> Array
+    #   resp.force_endpoint_error_configuration.endpoint_error_conditions[0] #=> String, one of "STALE_MANIFEST", "INCOMPLETE_MANIFEST", "MISSING_DRM_KEY", "SLATE_INPUT"
+    #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.dash_manifests #=> Array
+    #   resp.dash_manifests[0].manifest_name #=> String
+    #   resp.dash_manifests[0].url #=> String
+    #   resp.dash_manifests[0].manifest_window_seconds #=> Integer
+    #   resp.dash_manifests[0].filter_configuration.manifest_filter #=> String
+    #   resp.dash_manifests[0].filter_configuration.start #=> Time
+    #   resp.dash_manifests[0].filter_configuration.end #=> Time
+    #   resp.dash_manifests[0].filter_configuration.time_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].min_update_period_seconds #=> Integer
+    #   resp.dash_manifests[0].min_buffer_time_seconds #=> Integer
+    #   resp.dash_manifests[0].suggested_presentation_delay_seconds #=> Integer
+    #   resp.dash_manifests[0].segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE"
+    #   resp.dash_manifests[0].period_triggers #=> Array
+    #   resp.dash_manifests[0].period_triggers[0] #=> String, one of "AVAILS", "DRM_KEY_ROTATION", "SOURCE_CHANGES", "SOURCE_DISRUPTIONS", "NONE"
+    #   resp.dash_manifests[0].scte_dash.ad_marker_dash #=> String, one of "BINARY", "XML"
+    #   resp.dash_manifests[0].drm_signaling #=> String, one of "INDIVIDUAL", "REFERENCED"
+    #   resp.dash_manifests[0].utc_timing.timing_mode #=> String, one of "HTTP_HEAD", "HTTP_ISO", "HTTP_XSDATE", "UTC_DIRECT"
+    #   resp.dash_manifests[0].utc_timing.timing_source #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/UpdateOriginEndpoint AWS API Documentation
     #
@@ -1841,7 +3382,7 @@ module Aws::MediaPackageV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

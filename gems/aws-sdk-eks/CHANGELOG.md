@@ -1,6 +1,81 @@
 Unreleased Changes
 ------------------
 
+1.105.0 (2024-06-18)
+------------------
+
+* Feature - This release adds support to surface async fargate customer errors from async path to customer through describe-fargate-profile API response.
+
+1.104.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.103.0 (2024-06-03)
+------------------
+
+* Feature - Adds support for EKS add-ons pod identity associations integration
+
+1.102.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.101.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2024-03-28)
+------------------
+
+* Feature - Add multiple customer error code to handle customer caused failure when managing EKS node groups
+
+1.99.0 (2024-02-29)
+------------------
+
+* Feature - Added support for new AL2023 AMIs to the supported AMITypes.
+
+1.98.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.97.0 (2023-12-20)
+------------------
+
+* Feature - Add support for cluster insights, new EKS capability that surfaces potentially upgrade impacting issues.
+
+1.96.0 (2023-12-18)
+------------------
+
+* Feature - Add support for EKS Cluster Access Management.
+
+1.95.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.94.0 (2023-11-27)
+------------------
+
+* Feature - This release adds support for EKS Pod Identity feature. EKS Pod Identity makes it easy for customers to obtain IAM permissions for the applications running in their EKS clusters.
+
+1.93.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2023-11-09)
+------------------
+
+* Feature - Adding EKS Anywhere subscription related operations.
+
+1.91.0 (2023-10-24)
+------------------
+
+* Feature - Added support for Cluster Subnet and Security Group mutability.
+
 1.90.0 (2023-09-27)
 ------------------
 

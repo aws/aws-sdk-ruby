@@ -21,16 +21,21 @@ module Aws::IoTTwinMaker
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BundleInformation = Shapes::StructureShape.new(name: 'BundleInformation')
     BundleName = Shapes::StringShape.new(name: 'BundleName')
+    CancelMetadataTransferJobRequest = Shapes::StructureShape.new(name: 'CancelMetadataTransferJobRequest')
+    CancelMetadataTransferJobResponse = Shapes::StructureShape.new(name: 'CancelMetadataTransferJobResponse')
     ColumnDescription = Shapes::StructureShape.new(name: 'ColumnDescription')
     ColumnDescriptions = Shapes::ListShape.new(name: 'ColumnDescriptions')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
     ColumnType = Shapes::StringShape.new(name: 'ColumnType')
+    ComponentPath = Shapes::StringShape.new(name: 'ComponentPath')
     ComponentPropertyGroupRequest = Shapes::StructureShape.new(name: 'ComponentPropertyGroupRequest')
     ComponentPropertyGroupRequests = Shapes::MapShape.new(name: 'ComponentPropertyGroupRequests')
     ComponentPropertyGroupResponse = Shapes::StructureShape.new(name: 'ComponentPropertyGroupResponse')
     ComponentPropertyGroupResponses = Shapes::MapShape.new(name: 'ComponentPropertyGroupResponses')
     ComponentRequest = Shapes::StructureShape.new(name: 'ComponentRequest')
     ComponentResponse = Shapes::StructureShape.new(name: 'ComponentResponse')
+    ComponentSummaries = Shapes::ListShape.new(name: 'ComponentSummaries')
+    ComponentSummary = Shapes::StructureShape.new(name: 'ComponentSummary')
     ComponentTypeId = Shapes::StringShape.new(name: 'ComponentTypeId')
     ComponentTypeName = Shapes::StringShape.new(name: 'ComponentTypeName')
     ComponentTypeSummaries = Shapes::ListShape.new(name: 'ComponentTypeSummaries')
@@ -40,6 +45,15 @@ module Aws::IoTTwinMaker
     ComponentUpdatesMapRequest = Shapes::MapShape.new(name: 'ComponentUpdatesMapRequest')
     ComponentsMap = Shapes::MapShape.new(name: 'ComponentsMap')
     ComponentsMapRequest = Shapes::MapShape.new(name: 'ComponentsMapRequest')
+    CompositeComponentRequest = Shapes::StructureShape.new(name: 'CompositeComponentRequest')
+    CompositeComponentResponse = Shapes::MapShape.new(name: 'CompositeComponentResponse')
+    CompositeComponentTypeRequest = Shapes::StructureShape.new(name: 'CompositeComponentTypeRequest')
+    CompositeComponentTypeResponse = Shapes::StructureShape.new(name: 'CompositeComponentTypeResponse')
+    CompositeComponentTypesRequest = Shapes::MapShape.new(name: 'CompositeComponentTypesRequest')
+    CompositeComponentTypesResponse = Shapes::MapShape.new(name: 'CompositeComponentTypesResponse')
+    CompositeComponentUpdateRequest = Shapes::StructureShape.new(name: 'CompositeComponentUpdateRequest')
+    CompositeComponentUpdatesMapRequest = Shapes::MapShape.new(name: 'CompositeComponentUpdatesMapRequest')
+    CompositeComponentsMapRequest = Shapes::MapShape.new(name: 'CompositeComponentsMapRequest')
     Configuration = Shapes::MapShape.new(name: 'Configuration')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectorFailureException = Shapes::StructureShape.new(name: 'ConnectorFailureException')
@@ -48,6 +62,8 @@ module Aws::IoTTwinMaker
     CreateComponentTypeResponse = Shapes::StructureShape.new(name: 'CreateComponentTypeResponse')
     CreateEntityRequest = Shapes::StructureShape.new(name: 'CreateEntityRequest')
     CreateEntityResponse = Shapes::StructureShape.new(name: 'CreateEntityResponse')
+    CreateMetadataTransferJobRequest = Shapes::StructureShape.new(name: 'CreateMetadataTransferJobRequest')
+    CreateMetadataTransferJobResponse = Shapes::StructureShape.new(name: 'CreateMetadataTransferJobResponse')
     CreateSceneRequest = Shapes::StructureShape.new(name: 'CreateSceneRequest')
     CreateSceneResponse = Shapes::StructureShape.new(name: 'CreateSceneResponse')
     CreateSyncJobRequest = Shapes::StructureShape.new(name: 'CreateSyncJobRequest')
@@ -70,6 +86,8 @@ module Aws::IoTTwinMaker
     DeleteWorkspaceRequest = Shapes::StructureShape.new(name: 'DeleteWorkspaceRequest')
     DeleteWorkspaceResponse = Shapes::StructureShape.new(name: 'DeleteWorkspaceResponse')
     Description = Shapes::StringShape.new(name: 'Description')
+    DestinationConfiguration = Shapes::StructureShape.new(name: 'DestinationConfiguration')
+    DestinationType = Shapes::StringShape.new(name: 'DestinationType')
     Double = Shapes::FloatShape.new(name: 'Double')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
     EntityName = Shapes::StringShape.new(name: 'EntityName')
@@ -88,6 +106,10 @@ module Aws::IoTTwinMaker
     Expression = Shapes::StringShape.new(name: 'Expression')
     ExtendsFrom = Shapes::ListShape.new(name: 'ExtendsFrom')
     ExternalIdProperty = Shapes::MapShape.new(name: 'ExternalIdProperty')
+    FilterByAsset = Shapes::StructureShape.new(name: 'FilterByAsset')
+    FilterByAssetModel = Shapes::StructureShape.new(name: 'FilterByAssetModel')
+    FilterByComponentType = Shapes::StructureShape.new(name: 'FilterByComponentType')
+    FilterByEntity = Shapes::StructureShape.new(name: 'FilterByEntity')
     FunctionRequest = Shapes::StructureShape.new(name: 'FunctionRequest')
     FunctionResponse = Shapes::StructureShape.new(name: 'FunctionResponse')
     FunctionsRequest = Shapes::MapShape.new(name: 'FunctionsRequest')
@@ -97,6 +119,8 @@ module Aws::IoTTwinMaker
     GetComponentTypeResponse = Shapes::StructureShape.new(name: 'GetComponentTypeResponse')
     GetEntityRequest = Shapes::StructureShape.new(name: 'GetEntityRequest')
     GetEntityResponse = Shapes::StructureShape.new(name: 'GetEntityResponse')
+    GetMetadataTransferJobRequest = Shapes::StructureShape.new(name: 'GetMetadataTransferJobRequest')
+    GetMetadataTransferJobResponse = Shapes::StructureShape.new(name: 'GetMetadataTransferJobResponse')
     GetPricingPlanRequest = Shapes::StructureShape.new(name: 'GetPricingPlanRequest')
     GetPricingPlanResponse = Shapes::StructureShape.new(name: 'GetPricingPlanResponse')
     GetPropertyValueHistoryRequest = Shapes::StructureShape.new(name: 'GetPropertyValueHistoryRequest')
@@ -117,16 +141,33 @@ module Aws::IoTTwinMaker
     InterpolationParameters = Shapes::StructureShape.new(name: 'InterpolationParameters')
     InterpolationType = Shapes::StringShape.new(name: 'InterpolationType')
     IntervalInSeconds = Shapes::IntegerShape.new(name: 'IntervalInSeconds')
+    IotSiteWiseSourceConfiguration = Shapes::StructureShape.new(name: 'IotSiteWiseSourceConfiguration')
+    IotSiteWiseSourceConfigurationFilter = Shapes::UnionShape.new(name: 'IotSiteWiseSourceConfigurationFilter')
+    IotSiteWiseSourceConfigurationFilters = Shapes::ListShape.new(name: 'IotSiteWiseSourceConfigurationFilters')
+    IotTwinMakerDestinationConfiguration = Shapes::StructureShape.new(name: 'IotTwinMakerDestinationConfiguration')
+    IotTwinMakerSourceConfiguration = Shapes::StructureShape.new(name: 'IotTwinMakerSourceConfiguration')
+    IotTwinMakerSourceConfigurationFilter = Shapes::UnionShape.new(name: 'IotTwinMakerSourceConfigurationFilter')
+    IotTwinMakerSourceConfigurationFilters = Shapes::ListShape.new(name: 'IotTwinMakerSourceConfigurationFilters')
     LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
     LambdaFunction = Shapes::StructureShape.new(name: 'LambdaFunction')
+    LinkedService = Shapes::StringShape.new(name: 'LinkedService')
+    LinkedServices = Shapes::ListShape.new(name: 'LinkedServices')
     ListComponentTypesFilter = Shapes::UnionShape.new(name: 'ListComponentTypesFilter')
     ListComponentTypesFilters = Shapes::ListShape.new(name: 'ListComponentTypesFilters')
     ListComponentTypesRequest = Shapes::StructureShape.new(name: 'ListComponentTypesRequest')
     ListComponentTypesResponse = Shapes::StructureShape.new(name: 'ListComponentTypesResponse')
+    ListComponentsRequest = Shapes::StructureShape.new(name: 'ListComponentsRequest')
+    ListComponentsResponse = Shapes::StructureShape.new(name: 'ListComponentsResponse')
     ListEntitiesFilter = Shapes::UnionShape.new(name: 'ListEntitiesFilter')
     ListEntitiesFilters = Shapes::ListShape.new(name: 'ListEntitiesFilters')
     ListEntitiesRequest = Shapes::StructureShape.new(name: 'ListEntitiesRequest')
     ListEntitiesResponse = Shapes::StructureShape.new(name: 'ListEntitiesResponse')
+    ListMetadataTransferJobsFilter = Shapes::UnionShape.new(name: 'ListMetadataTransferJobsFilter')
+    ListMetadataTransferJobsFilters = Shapes::ListShape.new(name: 'ListMetadataTransferJobsFilters')
+    ListMetadataTransferJobsRequest = Shapes::StructureShape.new(name: 'ListMetadataTransferJobsRequest')
+    ListMetadataTransferJobsResponse = Shapes::StructureShape.new(name: 'ListMetadataTransferJobsResponse')
+    ListPropertiesRequest = Shapes::StructureShape.new(name: 'ListPropertiesRequest')
+    ListPropertiesResponse = Shapes::StructureShape.new(name: 'ListPropertiesResponse')
     ListScenesRequest = Shapes::StructureShape.new(name: 'ListScenesRequest')
     ListScenesResponse = Shapes::StructureShape.new(name: 'ListScenesResponse')
     ListSyncJobsRequest = Shapes::StructureShape.new(name: 'ListSyncJobsRequest')
@@ -139,6 +180,11 @@ module Aws::IoTTwinMaker
     ListWorkspacesResponse = Shapes::StructureShape.new(name: 'ListWorkspacesResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MetadataTransferJobProgress = Shapes::StructureShape.new(name: 'MetadataTransferJobProgress')
+    MetadataTransferJobState = Shapes::StringShape.new(name: 'MetadataTransferJobState')
+    MetadataTransferJobStatus = Shapes::StructureShape.new(name: 'MetadataTransferJobStatus')
+    MetadataTransferJobSummaries = Shapes::ListShape.new(name: 'MetadataTransferJobSummaries')
+    MetadataTransferJobSummary = Shapes::StructureShape.new(name: 'MetadataTransferJobSummary')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     Order = Shapes::StringShape.new(name: 'Order')
@@ -171,6 +217,8 @@ module Aws::IoTTwinMaker
     PropertyRequests = Shapes::MapShape.new(name: 'PropertyRequests')
     PropertyResponse = Shapes::StructureShape.new(name: 'PropertyResponse')
     PropertyResponses = Shapes::MapShape.new(name: 'PropertyResponses')
+    PropertySummaries = Shapes::ListShape.new(name: 'PropertySummaries')
+    PropertySummary = Shapes::StructureShape.new(name: 'PropertySummary')
     PropertyTableValue = Shapes::MapShape.new(name: 'PropertyTableValue')
     PropertyUpdateType = Shapes::StringShape.new(name: 'PropertyUpdateType')
     PropertyValue = Shapes::StructureShape.new(name: 'PropertyValue')
@@ -190,7 +238,11 @@ module Aws::IoTTwinMaker
     Row = Shapes::StructureShape.new(name: 'Row')
     RowData = Shapes::ListShape.new(name: 'RowData')
     Rows = Shapes::ListShape.new(name: 'Rows')
+    S3DestinationConfiguration = Shapes::StructureShape.new(name: 'S3DestinationConfiguration')
+    S3DestinationLocation = Shapes::StringShape.new(name: 'S3DestinationLocation')
     S3Location = Shapes::StringShape.new(name: 'S3Location')
+    S3SourceConfiguration = Shapes::StructureShape.new(name: 'S3SourceConfiguration')
+    S3SourceLocation = Shapes::StringShape.new(name: 'S3SourceLocation')
     S3Url = Shapes::StringShape.new(name: 'S3Url')
     SceneCapabilities = Shapes::ListShape.new(name: 'SceneCapabilities')
     SceneCapability = Shapes::StringShape.new(name: 'SceneCapability')
@@ -203,6 +255,10 @@ module Aws::IoTTwinMaker
     Scope = Shapes::StringShape.new(name: 'Scope')
     SelectedPropertyList = Shapes::ListShape.new(name: 'SelectedPropertyList')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SiteWiseExternalId = Shapes::StringShape.new(name: 'SiteWiseExternalId')
+    SourceConfiguration = Shapes::StructureShape.new(name: 'SourceConfiguration')
+    SourceConfigurations = Shapes::ListShape.new(name: 'SourceConfigurations')
+    SourceType = Shapes::StringShape.new(name: 'SourceType')
     State = Shapes::StringShape.new(name: 'State')
     Status = Shapes::StructureShape.new(name: 'Status')
     String = Shapes::StringShape.new(name: 'String')
@@ -246,9 +302,11 @@ module Aws::IoTTwinMaker
     UpdateSceneResponse = Shapes::StructureShape.new(name: 'UpdateSceneResponse')
     UpdateWorkspaceRequest = Shapes::StructureShape.new(name: 'UpdateWorkspaceRequest')
     UpdateWorkspaceResponse = Shapes::StructureShape.new(name: 'UpdateWorkspaceResponse')
+    Uuid = Shapes::StringShape.new(name: 'Uuid')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::StringShape.new(name: 'Value')
     Values = Shapes::ListShape.new(name: 'Values')
+    WorkspaceDeleteMessage = Shapes::StringShape.new(name: 'WorkspaceDeleteMessage')
     WorkspaceSummaries = Shapes::ListShape.new(name: 'WorkspaceSummaries')
     WorkspaceSummary = Shapes::StructureShape.new(name: 'WorkspaceSummary')
 
@@ -273,6 +331,16 @@ module Aws::IoTTwinMaker
     BundleInformation.add_member(:bundle_names, Shapes::ShapeRef.new(shape: PricingBundles, required: true, location_name: "bundleNames"))
     BundleInformation.add_member(:pricing_tier, Shapes::ShapeRef.new(shape: PricingTier, location_name: "pricingTier"))
     BundleInformation.struct_class = Types::BundleInformation
+
+    CancelMetadataTransferJobRequest.add_member(:metadata_transfer_job_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "metadataTransferJobId"))
+    CancelMetadataTransferJobRequest.struct_class = Types::CancelMetadataTransferJobRequest
+
+    CancelMetadataTransferJobResponse.add_member(:metadata_transfer_job_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "metadataTransferJobId"))
+    CancelMetadataTransferJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
+    CancelMetadataTransferJobResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
+    CancelMetadataTransferJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: MetadataTransferJobStatus, required: true, location_name: "status"))
+    CancelMetadataTransferJobResponse.add_member(:progress, Shapes::ShapeRef.new(shape: MetadataTransferJobProgress, location_name: "progress"))
+    CancelMetadataTransferJobResponse.struct_class = Types::CancelMetadataTransferJobResponse
 
     ColumnDescription.add_member(:name, Shapes::ShapeRef.new(shape: ColumnName, location_name: "name"))
     ColumnDescription.add_member(:type, Shapes::ShapeRef.new(shape: ColumnType, location_name: "type"))
@@ -310,7 +378,22 @@ module Aws::IoTTwinMaker
     ComponentResponse.add_member(:properties, Shapes::ShapeRef.new(shape: PropertyResponses, location_name: "properties"))
     ComponentResponse.add_member(:property_groups, Shapes::ShapeRef.new(shape: ComponentPropertyGroupResponses, location_name: "propertyGroups"))
     ComponentResponse.add_member(:sync_source, Shapes::ShapeRef.new(shape: SyncSource, location_name: "syncSource"))
+    ComponentResponse.add_member(:are_all_properties_returned, Shapes::ShapeRef.new(shape: Boolean, location_name: "areAllPropertiesReturned"))
+    ComponentResponse.add_member(:composite_components, Shapes::ShapeRef.new(shape: CompositeComponentResponse, location_name: "compositeComponents"))
+    ComponentResponse.add_member(:are_all_composite_components_returned, Shapes::ShapeRef.new(shape: Boolean, location_name: "areAllCompositeComponentsReturned"))
     ComponentResponse.struct_class = Types::ComponentResponse
+
+    ComponentSummaries.member = Shapes::ShapeRef.new(shape: ComponentSummary)
+
+    ComponentSummary.add_member(:component_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "componentName"))
+    ComponentSummary.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, required: true, location_name: "componentTypeId"))
+    ComponentSummary.add_member(:defined_in, Shapes::ShapeRef.new(shape: String, location_name: "definedIn"))
+    ComponentSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    ComponentSummary.add_member(:property_groups, Shapes::ShapeRef.new(shape: ComponentPropertyGroupResponses, location_name: "propertyGroups"))
+    ComponentSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
+    ComponentSummary.add_member(:sync_source, Shapes::ShapeRef.new(shape: SyncSource, location_name: "syncSource"))
+    ComponentSummary.add_member(:component_path, Shapes::ShapeRef.new(shape: ComponentPath, location_name: "componentPath"))
+    ComponentSummary.struct_class = Types::ComponentSummary
 
     ComponentTypeSummaries.member = Shapes::ShapeRef.new(shape: ComponentTypeSummary)
 
@@ -339,6 +422,39 @@ module Aws::IoTTwinMaker
     ComponentsMapRequest.key = Shapes::ShapeRef.new(shape: Name)
     ComponentsMapRequest.value = Shapes::ShapeRef.new(shape: ComponentRequest)
 
+    CompositeComponentRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CompositeComponentRequest.add_member(:properties, Shapes::ShapeRef.new(shape: PropertyRequests, location_name: "properties"))
+    CompositeComponentRequest.add_member(:property_groups, Shapes::ShapeRef.new(shape: ComponentPropertyGroupRequests, location_name: "propertyGroups"))
+    CompositeComponentRequest.struct_class = Types::CompositeComponentRequest
+
+    CompositeComponentResponse.key = Shapes::ShapeRef.new(shape: Name)
+    CompositeComponentResponse.value = Shapes::ShapeRef.new(shape: ComponentSummary)
+
+    CompositeComponentTypeRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
+    CompositeComponentTypeRequest.struct_class = Types::CompositeComponentTypeRequest
+
+    CompositeComponentTypeResponse.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
+    CompositeComponentTypeResponse.add_member(:is_inherited, Shapes::ShapeRef.new(shape: Boolean, location_name: "isInherited"))
+    CompositeComponentTypeResponse.struct_class = Types::CompositeComponentTypeResponse
+
+    CompositeComponentTypesRequest.key = Shapes::ShapeRef.new(shape: Name)
+    CompositeComponentTypesRequest.value = Shapes::ShapeRef.new(shape: CompositeComponentTypeRequest)
+
+    CompositeComponentTypesResponse.key = Shapes::ShapeRef.new(shape: Name)
+    CompositeComponentTypesResponse.value = Shapes::ShapeRef.new(shape: CompositeComponentTypeResponse)
+
+    CompositeComponentUpdateRequest.add_member(:update_type, Shapes::ShapeRef.new(shape: ComponentUpdateType, location_name: "updateType"))
+    CompositeComponentUpdateRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CompositeComponentUpdateRequest.add_member(:property_updates, Shapes::ShapeRef.new(shape: PropertyRequests, location_name: "propertyUpdates"))
+    CompositeComponentUpdateRequest.add_member(:property_group_updates, Shapes::ShapeRef.new(shape: ComponentPropertyGroupRequests, location_name: "propertyGroupUpdates"))
+    CompositeComponentUpdateRequest.struct_class = Types::CompositeComponentUpdateRequest
+
+    CompositeComponentUpdatesMapRequest.key = Shapes::ShapeRef.new(shape: ComponentPath)
+    CompositeComponentUpdatesMapRequest.value = Shapes::ShapeRef.new(shape: CompositeComponentUpdateRequest)
+
+    CompositeComponentsMapRequest.key = Shapes::ShapeRef.new(shape: ComponentPath)
+    CompositeComponentsMapRequest.value = Shapes::ShapeRef.new(shape: CompositeComponentRequest)
+
     Configuration.key = Shapes::ShapeRef.new(shape: Name)
     Configuration.value = Shapes::ShapeRef.new(shape: Value)
 
@@ -361,6 +477,7 @@ module Aws::IoTTwinMaker
     CreateComponentTypeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateComponentTypeRequest.add_member(:property_groups, Shapes::ShapeRef.new(shape: PropertyGroupsRequest, location_name: "propertyGroups"))
     CreateComponentTypeRequest.add_member(:component_type_name, Shapes::ShapeRef.new(shape: ComponentTypeName, location_name: "componentTypeName"))
+    CreateComponentTypeRequest.add_member(:composite_component_types, Shapes::ShapeRef.new(shape: CompositeComponentTypesRequest, location_name: "compositeComponentTypes"))
     CreateComponentTypeRequest.struct_class = Types::CreateComponentTypeRequest
 
     CreateComponentTypeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
@@ -373,6 +490,7 @@ module Aws::IoTTwinMaker
     CreateEntityRequest.add_member(:entity_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "entityName"))
     CreateEntityRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateEntityRequest.add_member(:components, Shapes::ShapeRef.new(shape: ComponentsMapRequest, location_name: "components"))
+    CreateEntityRequest.add_member(:composite_components, Shapes::ShapeRef.new(shape: CompositeComponentsMapRequest, location_name: "compositeComponents"))
     CreateEntityRequest.add_member(:parent_entity_id, Shapes::ShapeRef.new(shape: ParentEntityId, location_name: "parentEntityId"))
     CreateEntityRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateEntityRequest.struct_class = Types::CreateEntityRequest
@@ -382,6 +500,18 @@ module Aws::IoTTwinMaker
     CreateEntityResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
     CreateEntityResponse.add_member(:state, Shapes::ShapeRef.new(shape: State, required: true, location_name: "state"))
     CreateEntityResponse.struct_class = Types::CreateEntityResponse
+
+    CreateMetadataTransferJobRequest.add_member(:metadata_transfer_job_id, Shapes::ShapeRef.new(shape: Id, location_name: "metadataTransferJobId"))
+    CreateMetadataTransferJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateMetadataTransferJobRequest.add_member(:sources, Shapes::ShapeRef.new(shape: SourceConfigurations, required: true, location_name: "sources"))
+    CreateMetadataTransferJobRequest.add_member(:destination, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destination"))
+    CreateMetadataTransferJobRequest.struct_class = Types::CreateMetadataTransferJobRequest
+
+    CreateMetadataTransferJobResponse.add_member(:metadata_transfer_job_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "metadataTransferJobId"))
+    CreateMetadataTransferJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
+    CreateMetadataTransferJobResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
+    CreateMetadataTransferJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: MetadataTransferJobStatus, required: true, location_name: "status"))
+    CreateMetadataTransferJobResponse.struct_class = Types::CreateMetadataTransferJobResponse
 
     CreateSceneRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     CreateSceneRequest.add_member(:scene_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "sceneId"))
@@ -409,8 +539,8 @@ module Aws::IoTTwinMaker
 
     CreateWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     CreateWorkspaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateWorkspaceRequest.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "s3Location"))
-    CreateWorkspaceRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "role"))
+    CreateWorkspaceRequest.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
+    CreateWorkspaceRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "role"))
     CreateWorkspaceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateWorkspaceRequest.struct_class = Types::CreateWorkspaceRequest
 
@@ -476,9 +606,16 @@ module Aws::IoTTwinMaker
     DeleteWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     DeleteWorkspaceRequest.struct_class = Types::DeleteWorkspaceRequest
 
+    DeleteWorkspaceResponse.add_member(:message, Shapes::ShapeRef.new(shape: WorkspaceDeleteMessage, location_name: "message"))
     DeleteWorkspaceResponse.struct_class = Types::DeleteWorkspaceResponse
 
+    DestinationConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: DestinationType, required: true, location_name: "type"))
+    DestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "s3Configuration"))
+    DestinationConfiguration.add_member(:iot_twin_maker_configuration, Shapes::ShapeRef.new(shape: IotTwinMakerDestinationConfiguration, location_name: "iotTwinMakerConfiguration"))
+    DestinationConfiguration.struct_class = Types::DestinationConfiguration
+
     EntityPropertyReference.add_member(:component_name, Shapes::ShapeRef.new(shape: Name, location_name: "componentName"))
+    EntityPropertyReference.add_member(:component_path, Shapes::ShapeRef.new(shape: ComponentPath, location_name: "componentPath"))
     EntityPropertyReference.add_member(:external_id_property, Shapes::ShapeRef.new(shape: ExternalIdProperty, location_name: "externalIdProperty"))
     EntityPropertyReference.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "entityId"))
     EntityPropertyReference.add_member(:property_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "propertyName"))
@@ -523,6 +660,24 @@ module Aws::IoTTwinMaker
     ExternalIdProperty.key = Shapes::ShapeRef.new(shape: String)
     ExternalIdProperty.value = Shapes::ShapeRef.new(shape: String)
 
+    FilterByAsset.add_member(:asset_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "assetId"))
+    FilterByAsset.add_member(:asset_external_id, Shapes::ShapeRef.new(shape: SiteWiseExternalId, location_name: "assetExternalId"))
+    FilterByAsset.add_member(:include_offspring, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeOffspring"))
+    FilterByAsset.add_member(:include_asset_model, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeAssetModel"))
+    FilterByAsset.struct_class = Types::FilterByAsset
+
+    FilterByAssetModel.add_member(:asset_model_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "assetModelId"))
+    FilterByAssetModel.add_member(:asset_model_external_id, Shapes::ShapeRef.new(shape: SiteWiseExternalId, location_name: "assetModelExternalId"))
+    FilterByAssetModel.add_member(:include_offspring, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeOffspring"))
+    FilterByAssetModel.add_member(:include_assets, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeAssets"))
+    FilterByAssetModel.struct_class = Types::FilterByAssetModel
+
+    FilterByComponentType.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, required: true, location_name: "componentTypeId"))
+    FilterByComponentType.struct_class = Types::FilterByComponentType
+
+    FilterByEntity.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "entityId"))
+    FilterByEntity.struct_class = Types::FilterByEntity
+
     FunctionRequest.add_member(:required_properties, Shapes::ShapeRef.new(shape: RequiredProperties, location_name: "requiredProperties"))
     FunctionRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
     FunctionRequest.add_member(:implemented_by, Shapes::ShapeRef.new(shape: DataConnector, location_name: "implementedBy"))
@@ -563,6 +718,7 @@ module Aws::IoTTwinMaker
     GetComponentTypeResponse.add_member(:property_groups, Shapes::ShapeRef.new(shape: PropertyGroupsResponse, location_name: "propertyGroups"))
     GetComponentTypeResponse.add_member(:sync_source, Shapes::ShapeRef.new(shape: SyncSource, location_name: "syncSource"))
     GetComponentTypeResponse.add_member(:component_type_name, Shapes::ShapeRef.new(shape: ComponentTypeName, location_name: "componentTypeName"))
+    GetComponentTypeResponse.add_member(:composite_component_types, Shapes::ShapeRef.new(shape: CompositeComponentTypesResponse, location_name: "compositeComponentTypes"))
     GetComponentTypeResponse.struct_class = Types::GetComponentTypeResponse
 
     GetEntityRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
@@ -581,7 +737,24 @@ module Aws::IoTTwinMaker
     GetEntityResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
     GetEntityResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     GetEntityResponse.add_member(:sync_source, Shapes::ShapeRef.new(shape: SyncSource, location_name: "syncSource"))
+    GetEntityResponse.add_member(:are_all_components_returned, Shapes::ShapeRef.new(shape: Boolean, location_name: "areAllComponentsReturned"))
     GetEntityResponse.struct_class = Types::GetEntityResponse
+
+    GetMetadataTransferJobRequest.add_member(:metadata_transfer_job_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "metadataTransferJobId"))
+    GetMetadataTransferJobRequest.struct_class = Types::GetMetadataTransferJobRequest
+
+    GetMetadataTransferJobResponse.add_member(:metadata_transfer_job_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "metadataTransferJobId"))
+    GetMetadataTransferJobResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
+    GetMetadataTransferJobResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    GetMetadataTransferJobResponse.add_member(:sources, Shapes::ShapeRef.new(shape: SourceConfigurations, required: true, location_name: "sources"))
+    GetMetadataTransferJobResponse.add_member(:destination, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destination"))
+    GetMetadataTransferJobResponse.add_member(:metadata_transfer_job_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "metadataTransferJobRole"))
+    GetMetadataTransferJobResponse.add_member(:report_url, Shapes::ShapeRef.new(shape: String, location_name: "reportUrl"))
+    GetMetadataTransferJobResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
+    GetMetadataTransferJobResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
+    GetMetadataTransferJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: MetadataTransferJobStatus, required: true, location_name: "status"))
+    GetMetadataTransferJobResponse.add_member(:progress, Shapes::ShapeRef.new(shape: MetadataTransferJobProgress, location_name: "progress"))
+    GetMetadataTransferJobResponse.struct_class = Types::GetMetadataTransferJobResponse
 
     GetPricingPlanRequest.struct_class = Types::GetPricingPlanRequest
 
@@ -592,6 +765,7 @@ module Aws::IoTTwinMaker
     GetPropertyValueHistoryRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     GetPropertyValueHistoryRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "entityId"))
     GetPropertyValueHistoryRequest.add_member(:component_name, Shapes::ShapeRef.new(shape: Name, location_name: "componentName"))
+    GetPropertyValueHistoryRequest.add_member(:component_path, Shapes::ShapeRef.new(shape: ComponentPath, location_name: "componentPath"))
     GetPropertyValueHistoryRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
     GetPropertyValueHistoryRequest.add_member(:selected_properties, Shapes::ShapeRef.new(shape: SelectedPropertyList, required: true, location_name: "selectedProperties"))
     GetPropertyValueHistoryRequest.add_member(:property_filters, Shapes::ShapeRef.new(shape: PropertyFilters, location_name: "propertyFilters"))
@@ -610,6 +784,7 @@ module Aws::IoTTwinMaker
     GetPropertyValueHistoryResponse.struct_class = Types::GetPropertyValueHistoryResponse
 
     GetPropertyValueRequest.add_member(:component_name, Shapes::ShapeRef.new(shape: Name, location_name: "componentName"))
+    GetPropertyValueRequest.add_member(:component_path, Shapes::ShapeRef.new(shape: ComponentPath, location_name: "componentPath"))
     GetPropertyValueRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
     GetPropertyValueRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "entityId"))
     GetPropertyValueRequest.add_member(:selected_properties, Shapes::ShapeRef.new(shape: SelectedPropertyList, required: true, location_name: "selectedProperties"))
@@ -661,8 +836,9 @@ module Aws::IoTTwinMaker
     GetWorkspaceResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "workspaceId"))
     GetWorkspaceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
     GetWorkspaceResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    GetWorkspaceResponse.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "s3Location"))
-    GetWorkspaceResponse.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "role"))
+    GetWorkspaceResponse.add_member(:linked_services, Shapes::ShapeRef.new(shape: LinkedServices, location_name: "linkedServices"))
+    GetWorkspaceResponse.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
+    GetWorkspaceResponse.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "role"))
     GetWorkspaceResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
     GetWorkspaceResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     GetWorkspaceResponse.struct_class = Types::GetWorkspaceResponse
@@ -674,8 +850,40 @@ module Aws::IoTTwinMaker
     InterpolationParameters.add_member(:interval_in_seconds, Shapes::ShapeRef.new(shape: IntervalInSeconds, location_name: "intervalInSeconds"))
     InterpolationParameters.struct_class = Types::InterpolationParameters
 
+    IotSiteWiseSourceConfiguration.add_member(:filters, Shapes::ShapeRef.new(shape: IotSiteWiseSourceConfigurationFilters, location_name: "filters"))
+    IotSiteWiseSourceConfiguration.struct_class = Types::IotSiteWiseSourceConfiguration
+
+    IotSiteWiseSourceConfigurationFilter.add_member(:filter_by_asset_model, Shapes::ShapeRef.new(shape: FilterByAssetModel, location_name: "filterByAssetModel"))
+    IotSiteWiseSourceConfigurationFilter.add_member(:filter_by_asset, Shapes::ShapeRef.new(shape: FilterByAsset, location_name: "filterByAsset"))
+    IotSiteWiseSourceConfigurationFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    IotSiteWiseSourceConfigurationFilter.add_member_subclass(:filter_by_asset_model, Types::IotSiteWiseSourceConfigurationFilter::FilterByAssetModel)
+    IotSiteWiseSourceConfigurationFilter.add_member_subclass(:filter_by_asset, Types::IotSiteWiseSourceConfigurationFilter::FilterByAsset)
+    IotSiteWiseSourceConfigurationFilter.add_member_subclass(:unknown, Types::IotSiteWiseSourceConfigurationFilter::Unknown)
+    IotSiteWiseSourceConfigurationFilter.struct_class = Types::IotSiteWiseSourceConfigurationFilter
+
+    IotSiteWiseSourceConfigurationFilters.member = Shapes::ShapeRef.new(shape: IotSiteWiseSourceConfigurationFilter)
+
+    IotTwinMakerDestinationConfiguration.add_member(:workspace, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "workspace"))
+    IotTwinMakerDestinationConfiguration.struct_class = Types::IotTwinMakerDestinationConfiguration
+
+    IotTwinMakerSourceConfiguration.add_member(:workspace, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "workspace"))
+    IotTwinMakerSourceConfiguration.add_member(:filters, Shapes::ShapeRef.new(shape: IotTwinMakerSourceConfigurationFilters, location_name: "filters"))
+    IotTwinMakerSourceConfiguration.struct_class = Types::IotTwinMakerSourceConfiguration
+
+    IotTwinMakerSourceConfigurationFilter.add_member(:filter_by_component_type, Shapes::ShapeRef.new(shape: FilterByComponentType, location_name: "filterByComponentType"))
+    IotTwinMakerSourceConfigurationFilter.add_member(:filter_by_entity, Shapes::ShapeRef.new(shape: FilterByEntity, location_name: "filterByEntity"))
+    IotTwinMakerSourceConfigurationFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    IotTwinMakerSourceConfigurationFilter.add_member_subclass(:filter_by_component_type, Types::IotTwinMakerSourceConfigurationFilter::FilterByComponentType)
+    IotTwinMakerSourceConfigurationFilter.add_member_subclass(:filter_by_entity, Types::IotTwinMakerSourceConfigurationFilter::FilterByEntity)
+    IotTwinMakerSourceConfigurationFilter.add_member_subclass(:unknown, Types::IotTwinMakerSourceConfigurationFilter::Unknown)
+    IotTwinMakerSourceConfigurationFilter.struct_class = Types::IotTwinMakerSourceConfigurationFilter
+
+    IotTwinMakerSourceConfigurationFilters.member = Shapes::ShapeRef.new(shape: IotTwinMakerSourceConfigurationFilter)
+
     LambdaFunction.add_member(:arn, Shapes::ShapeRef.new(shape: LambdaArn, required: true, location_name: "arn"))
     LambdaFunction.struct_class = Types::LambdaFunction
+
+    LinkedServices.member = Shapes::ShapeRef.new(shape: LinkedService)
 
     ListComponentTypesFilter.add_member(:extends_from, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "extendsFrom"))
     ListComponentTypesFilter.add_member(:namespace, Shapes::ShapeRef.new(shape: String, location_name: "namespace"))
@@ -701,6 +909,17 @@ module Aws::IoTTwinMaker
     ListComponentTypesResponse.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListComponentTypesResponse.struct_class = Types::ListComponentTypesResponse
 
+    ListComponentsRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    ListComponentsRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location: "uri", location_name: "entityId"))
+    ListComponentsRequest.add_member(:component_path, Shapes::ShapeRef.new(shape: ComponentPath, location_name: "componentPath"))
+    ListComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListComponentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListComponentsRequest.struct_class = Types::ListComponentsRequest
+
+    ListComponentsResponse.add_member(:component_summaries, Shapes::ShapeRef.new(shape: ComponentSummaries, required: true, location_name: "componentSummaries"))
+    ListComponentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListComponentsResponse.struct_class = Types::ListComponentsResponse
+
     ListEntitiesFilter.add_member(:parent_entity_id, Shapes::ShapeRef.new(shape: ParentEntityId, location_name: "parentEntityId"))
     ListEntitiesFilter.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
     ListEntitiesFilter.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
@@ -722,6 +941,39 @@ module Aws::IoTTwinMaker
     ListEntitiesResponse.add_member(:entity_summaries, Shapes::ShapeRef.new(shape: EntitySummaries, location_name: "entitySummaries"))
     ListEntitiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListEntitiesResponse.struct_class = Types::ListEntitiesResponse
+
+    ListMetadataTransferJobsFilter.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, location_name: "workspaceId"))
+    ListMetadataTransferJobsFilter.add_member(:state, Shapes::ShapeRef.new(shape: MetadataTransferJobState, location_name: "state"))
+    ListMetadataTransferJobsFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ListMetadataTransferJobsFilter.add_member_subclass(:workspace_id, Types::ListMetadataTransferJobsFilter::WorkspaceId)
+    ListMetadataTransferJobsFilter.add_member_subclass(:state, Types::ListMetadataTransferJobsFilter::State)
+    ListMetadataTransferJobsFilter.add_member_subclass(:unknown, Types::ListMetadataTransferJobsFilter::Unknown)
+    ListMetadataTransferJobsFilter.struct_class = Types::ListMetadataTransferJobsFilter
+
+    ListMetadataTransferJobsFilters.member = Shapes::ShapeRef.new(shape: ListMetadataTransferJobsFilter)
+
+    ListMetadataTransferJobsRequest.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, required: true, location_name: "sourceType"))
+    ListMetadataTransferJobsRequest.add_member(:destination_type, Shapes::ShapeRef.new(shape: DestinationType, required: true, location_name: "destinationType"))
+    ListMetadataTransferJobsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ListMetadataTransferJobsFilters, location_name: "filters"))
+    ListMetadataTransferJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListMetadataTransferJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListMetadataTransferJobsRequest.struct_class = Types::ListMetadataTransferJobsRequest
+
+    ListMetadataTransferJobsResponse.add_member(:metadata_transfer_job_summaries, Shapes::ShapeRef.new(shape: MetadataTransferJobSummaries, required: true, location_name: "metadataTransferJobSummaries"))
+    ListMetadataTransferJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListMetadataTransferJobsResponse.struct_class = Types::ListMetadataTransferJobsResponse
+
+    ListPropertiesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
+    ListPropertiesRequest.add_member(:component_name, Shapes::ShapeRef.new(shape: Name, location_name: "componentName"))
+    ListPropertiesRequest.add_member(:component_path, Shapes::ShapeRef.new(shape: ComponentPath, location_name: "componentPath"))
+    ListPropertiesRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "entityId"))
+    ListPropertiesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListPropertiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPropertiesRequest.struct_class = Types::ListPropertiesRequest
+
+    ListPropertiesResponse.add_member(:property_summaries, Shapes::ShapeRef.new(shape: PropertySummaries, required: true, location_name: "propertySummaries"))
+    ListPropertiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPropertiesResponse.struct_class = Types::ListPropertiesResponse
 
     ListScenesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     ListScenesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -768,6 +1020,27 @@ module Aws::IoTTwinMaker
     ListWorkspacesResponse.add_member(:workspace_summaries, Shapes::ShapeRef.new(shape: WorkspaceSummaries, location_name: "workspaceSummaries"))
     ListWorkspacesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListWorkspacesResponse.struct_class = Types::ListWorkspacesResponse
+
+    MetadataTransferJobProgress.add_member(:total_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalCount"))
+    MetadataTransferJobProgress.add_member(:succeeded_count, Shapes::ShapeRef.new(shape: Integer, location_name: "succeededCount"))
+    MetadataTransferJobProgress.add_member(:skipped_count, Shapes::ShapeRef.new(shape: Integer, location_name: "skippedCount"))
+    MetadataTransferJobProgress.add_member(:failed_count, Shapes::ShapeRef.new(shape: Integer, location_name: "failedCount"))
+    MetadataTransferJobProgress.struct_class = Types::MetadataTransferJobProgress
+
+    MetadataTransferJobStatus.add_member(:state, Shapes::ShapeRef.new(shape: MetadataTransferJobState, location_name: "state"))
+    MetadataTransferJobStatus.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "error"))
+    MetadataTransferJobStatus.add_member(:queued_position, Shapes::ShapeRef.new(shape: Integer, location_name: "queuedPosition"))
+    MetadataTransferJobStatus.struct_class = Types::MetadataTransferJobStatus
+
+    MetadataTransferJobSummaries.member = Shapes::ShapeRef.new(shape: MetadataTransferJobSummary)
+
+    MetadataTransferJobSummary.add_member(:metadata_transfer_job_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "metadataTransferJobId"))
+    MetadataTransferJobSummary.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
+    MetadataTransferJobSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
+    MetadataTransferJobSummary.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
+    MetadataTransferJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: MetadataTransferJobStatus, required: true, location_name: "status"))
+    MetadataTransferJobSummary.add_member(:progress, Shapes::ShapeRef.new(shape: MetadataTransferJobProgress, location_name: "progress"))
+    MetadataTransferJobSummary.struct_class = Types::MetadataTransferJobSummary
 
     OrderBy.add_member(:order, Shapes::ShapeRef.new(shape: Order, location_name: "order"))
     OrderBy.add_member(:property_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "propertyName"))
@@ -859,10 +1132,19 @@ module Aws::IoTTwinMaker
 
     PropertyResponse.add_member(:definition, Shapes::ShapeRef.new(shape: PropertyDefinitionResponse, location_name: "definition"))
     PropertyResponse.add_member(:value, Shapes::ShapeRef.new(shape: DataValue, location_name: "value"))
+    PropertyResponse.add_member(:are_all_property_values_returned, Shapes::ShapeRef.new(shape: Boolean, location_name: "areAllPropertyValuesReturned"))
     PropertyResponse.struct_class = Types::PropertyResponse
 
     PropertyResponses.key = Shapes::ShapeRef.new(shape: Name)
     PropertyResponses.value = Shapes::ShapeRef.new(shape: PropertyResponse)
+
+    PropertySummaries.member = Shapes::ShapeRef.new(shape: PropertySummary)
+
+    PropertySummary.add_member(:definition, Shapes::ShapeRef.new(shape: PropertyDefinitionResponse, location_name: "definition"))
+    PropertySummary.add_member(:property_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "propertyName"))
+    PropertySummary.add_member(:value, Shapes::ShapeRef.new(shape: DataValue, location_name: "value"))
+    PropertySummary.add_member(:are_all_property_values_returned, Shapes::ShapeRef.new(shape: Boolean, location_name: "areAllPropertyValuesReturned"))
+    PropertySummary.struct_class = Types::PropertySummary
 
     PropertyTableValue.key = Shapes::ShapeRef.new(shape: Name)
     PropertyTableValue.value = Shapes::ShapeRef.new(shape: DataValue)
@@ -907,6 +1189,12 @@ module Aws::IoTTwinMaker
 
     Rows.member = Shapes::ShapeRef.new(shape: Row)
 
+    S3DestinationConfiguration.add_member(:location, Shapes::ShapeRef.new(shape: S3DestinationLocation, required: true, location_name: "location"))
+    S3DestinationConfiguration.struct_class = Types::S3DestinationConfiguration
+
+    S3SourceConfiguration.add_member(:location, Shapes::ShapeRef.new(shape: S3SourceLocation, required: true, location_name: "location"))
+    S3SourceConfiguration.struct_class = Types::S3SourceConfiguration
+
     SceneCapabilities.member = Shapes::ShapeRef.new(shape: SceneCapability)
 
     SceneError.add_member(:code, Shapes::ShapeRef.new(shape: SceneErrorCode, location_name: "code"))
@@ -930,6 +1218,14 @@ module Aws::IoTTwinMaker
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    SourceConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: SourceType, required: true, location_name: "type"))
+    SourceConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3SourceConfiguration, location_name: "s3Configuration"))
+    SourceConfiguration.add_member(:iot_site_wise_configuration, Shapes::ShapeRef.new(shape: IotSiteWiseSourceConfiguration, location_name: "iotSiteWiseConfiguration"))
+    SourceConfiguration.add_member(:iot_twin_maker_configuration, Shapes::ShapeRef.new(shape: IotTwinMakerSourceConfiguration, location_name: "iotTwinMakerConfiguration"))
+    SourceConfiguration.struct_class = Types::SourceConfiguration
+
+    SourceConfigurations.member = Shapes::ShapeRef.new(shape: SourceConfiguration)
 
     Status.add_member(:state, Shapes::ShapeRef.new(shape: State, location_name: "state"))
     Status.add_member(:error, Shapes::ShapeRef.new(shape: ErrorDetails, location_name: "error"))
@@ -1016,6 +1312,7 @@ module Aws::IoTTwinMaker
     UpdateComponentTypeRequest.add_member(:functions, Shapes::ShapeRef.new(shape: FunctionsRequest, location_name: "functions"))
     UpdateComponentTypeRequest.add_member(:property_groups, Shapes::ShapeRef.new(shape: PropertyGroupsRequest, location_name: "propertyGroups"))
     UpdateComponentTypeRequest.add_member(:component_type_name, Shapes::ShapeRef.new(shape: ComponentTypeName, location_name: "componentTypeName"))
+    UpdateComponentTypeRequest.add_member(:composite_component_types, Shapes::ShapeRef.new(shape: CompositeComponentTypesRequest, location_name: "compositeComponentTypes"))
     UpdateComponentTypeRequest.struct_class = Types::UpdateComponentTypeRequest
 
     UpdateComponentTypeResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "workspaceId"))
@@ -1029,6 +1326,7 @@ module Aws::IoTTwinMaker
     UpdateEntityRequest.add_member(:entity_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "entityName"))
     UpdateEntityRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateEntityRequest.add_member(:component_updates, Shapes::ShapeRef.new(shape: ComponentUpdatesMapRequest, location_name: "componentUpdates"))
+    UpdateEntityRequest.add_member(:composite_component_updates, Shapes::ShapeRef.new(shape: CompositeComponentUpdatesMapRequest, location_name: "compositeComponentUpdates"))
     UpdateEntityRequest.add_member(:parent_entity_update, Shapes::ShapeRef.new(shape: ParentEntityUpdateRequest, location_name: "parentEntityUpdate"))
     UpdateEntityRequest.struct_class = Types::UpdateEntityRequest
 
@@ -1058,6 +1356,7 @@ module Aws::IoTTwinMaker
     UpdateWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     UpdateWorkspaceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateWorkspaceRequest.add_member(:role, Shapes::ShapeRef.new(shape: RoleArn, location_name: "role"))
+    UpdateWorkspaceRequest.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
     UpdateWorkspaceRequest.struct_class = Types::UpdateWorkspaceRequest
 
     UpdateWorkspaceResponse.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
@@ -1073,6 +1372,7 @@ module Aws::IoTTwinMaker
     WorkspaceSummary.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "workspaceId"))
     WorkspaceSummary.add_member(:arn, Shapes::ShapeRef.new(shape: TwinMakerArn, required: true, location_name: "arn"))
     WorkspaceSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    WorkspaceSummary.add_member(:linked_services, Shapes::ShapeRef.new(shape: LinkedServices, location_name: "linkedServices"))
     WorkspaceSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationDateTime"))
     WorkspaceSummary.add_member(:update_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateDateTime"))
     WorkspaceSummary.struct_class = Types::WorkspaceSummary
@@ -1086,8 +1386,8 @@ module Aws::IoTTwinMaker
       api.metadata = {
         "apiVersion" => "2021-11-29",
         "endpointPrefix" => "iottwinmaker",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AWS IoT TwinMaker",
         "serviceId" => "IoTTwinMaker",
         "signatureVersion" => "v4",
@@ -1108,6 +1408,23 @@ module Aws::IoTTwinMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:cancel_metadata_transfer_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelMetadataTransferJob"
+        o.http_method = "PUT"
+        o.http_request_uri = "/metadata-transfer-jobs/{metadataTransferJobId}/cancel"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CancelMetadataTransferJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelMetadataTransferJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:create_component_type, Seahorse::Model::Operation.new.tap do |o|
@@ -1138,6 +1455,24 @@ module Aws::IoTTwinMaker
         o.output = Shapes::ShapeRef.new(shape: CreateEntityResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_metadata_transfer_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateMetadataTransferJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/metadata-transfer-jobs"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: CreateMetadataTransferJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateMetadataTransferJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1331,6 +1666,22 @@ module Aws::IoTTwinMaker
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:get_metadata_transfer_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMetadataTransferJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/metadata-transfer-jobs/{metadataTransferJobId}"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: GetMetadataTransferJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetMetadataTransferJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_pricing_plan, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPricingPlan"
         o.http_method = "GET"
@@ -1464,6 +1815,28 @@ module Aws::IoTTwinMaker
         )
       end)
 
+      api.add_operation(:list_components, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListComponents"
+        o.http_method = "POST"
+        o.http_request_uri = "/workspaces/{workspaceId}/entities/{entityId}/components-list"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListComponentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListComponentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_entities, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListEntities"
         o.http_method = "POST"
@@ -1477,6 +1850,49 @@ module Aws::IoTTwinMaker
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_metadata_transfer_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMetadataTransferJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/metadata-transfer-jobs-list"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListMetadataTransferJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMetadataTransferJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_properties, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListProperties"
+        o.http_method = "POST"
+        o.http_request_uri = "/workspaces/{workspaceId}/properties-list"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListPropertiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPropertiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

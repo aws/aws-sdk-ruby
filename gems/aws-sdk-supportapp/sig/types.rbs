@@ -1,0 +1,172 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SupportApp
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSlackChannelConfigurationRequest
+      attr_accessor channel_id: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_role_arn: ::String
+      attr_accessor notify_on_add_correspondence_to_case: bool
+      attr_accessor notify_on_case_severity: ("none" | "all" | "high")
+      attr_accessor notify_on_create_or_reopen_case: bool
+      attr_accessor notify_on_resolve_case: bool
+      attr_accessor team_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSlackChannelConfigurationResult < Aws::EmptyStructure
+    end
+
+    class DeleteAccountAliasRequest < Aws::EmptyStructure
+    end
+
+    class DeleteAccountAliasResult < Aws::EmptyStructure
+    end
+
+    class DeleteSlackChannelConfigurationRequest
+      attr_accessor channel_id: ::String
+      attr_accessor team_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSlackChannelConfigurationResult < Aws::EmptyStructure
+    end
+
+    class DeleteSlackWorkspaceConfigurationRequest
+      attr_accessor team_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSlackWorkspaceConfigurationResult < Aws::EmptyStructure
+    end
+
+    class GetAccountAliasRequest < Aws::EmptyStructure
+    end
+
+    class GetAccountAliasResult
+      attr_accessor account_alias: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListSlackChannelConfigurationsRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSlackChannelConfigurationsResult
+      attr_accessor next_token: ::String
+      attr_accessor slack_channel_configurations: ::Array[Types::SlackChannelConfiguration]
+      SENSITIVE: []
+    end
+
+    class ListSlackWorkspaceConfigurationsRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSlackWorkspaceConfigurationsResult
+      attr_accessor next_token: ::String
+      attr_accessor slack_workspace_configurations: ::Array[Types::SlackWorkspaceConfiguration]
+      SENSITIVE: []
+    end
+
+    class PutAccountAliasRequest
+      attr_accessor account_alias: ::String
+      SENSITIVE: []
+    end
+
+    class PutAccountAliasResult < Aws::EmptyStructure
+    end
+
+    class RegisterSlackWorkspaceForOrganizationRequest
+      attr_accessor team_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterSlackWorkspaceForOrganizationResult
+      attr_accessor account_type: ("management" | "member")
+      attr_accessor team_id: ::String
+      attr_accessor team_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SlackChannelConfiguration
+      attr_accessor channel_id: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_role_arn: ::String
+      attr_accessor notify_on_add_correspondence_to_case: bool
+      attr_accessor notify_on_case_severity: ("none" | "all" | "high")
+      attr_accessor notify_on_create_or_reopen_case: bool
+      attr_accessor notify_on_resolve_case: bool
+      attr_accessor team_id: ::String
+      SENSITIVE: []
+    end
+
+    class SlackWorkspaceConfiguration
+      attr_accessor allow_organization_member_account: bool
+      attr_accessor team_id: ::String
+      attr_accessor team_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSlackChannelConfigurationRequest
+      attr_accessor channel_id: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_role_arn: ::String
+      attr_accessor notify_on_add_correspondence_to_case: bool
+      attr_accessor notify_on_case_severity: ("none" | "all" | "high")
+      attr_accessor notify_on_create_or_reopen_case: bool
+      attr_accessor notify_on_resolve_case: bool
+      attr_accessor team_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSlackChannelConfigurationResult
+      attr_accessor channel_id: ::String
+      attr_accessor channel_name: ::String
+      attr_accessor channel_role_arn: ::String
+      attr_accessor notify_on_add_correspondence_to_case: bool
+      attr_accessor notify_on_case_severity: ("none" | "all" | "high")
+      attr_accessor notify_on_create_or_reopen_case: bool
+      attr_accessor notify_on_resolve_case: bool
+      attr_accessor team_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

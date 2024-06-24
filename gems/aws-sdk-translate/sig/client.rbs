@@ -1,0 +1,387 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Translate
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateParallelDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateParallelDataResponse]
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#create_parallel_data-instance_method
+      def create_parallel_data: (
+                                  name: ::String,
+                                  ?description: ::String,
+                                  parallel_data_config: {
+                                    s3_uri: ::String?,
+                                    format: ("TSV" | "CSV" | "TMX")?
+                                  },
+                                  ?encryption_key: {
+                                    type: ("KMS"),
+                                    id: ::String
+                                  },
+                                  client_token: ::String,
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> _CreateParallelDataResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateParallelDataResponseSuccess
+
+      interface _DeleteParallelDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteParallelDataResponse]
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#delete_parallel_data-instance_method
+      def delete_parallel_data: (
+                                  name: ::String
+                                ) -> _DeleteParallelDataResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteParallelDataResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#delete_terminology-instance_method
+      def delete_terminology: (
+                                name: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeTextTranslationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTextTranslationJobResponse]
+        def text_translation_job_properties: () -> Types::TextTranslationJobProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#describe_text_translation_job-instance_method
+      def describe_text_translation_job: (
+                                           job_id: ::String
+                                         ) -> _DescribeTextTranslationJobResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTextTranslationJobResponseSuccess
+
+      interface _GetParallelDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetParallelDataResponse]
+        def parallel_data_properties: () -> Types::ParallelDataProperties
+        def data_location: () -> Types::ParallelDataDataLocation
+        def auxiliary_data_location: () -> Types::ParallelDataDataLocation
+        def latest_update_attempt_auxiliary_data_location: () -> Types::ParallelDataDataLocation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#get_parallel_data-instance_method
+      def get_parallel_data: (
+                               name: ::String
+                             ) -> _GetParallelDataResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetParallelDataResponseSuccess
+
+      interface _GetTerminologyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTerminologyResponse]
+        def terminology_properties: () -> Types::TerminologyProperties
+        def terminology_data_location: () -> Types::TerminologyDataLocation
+        def auxiliary_data_location: () -> Types::TerminologyDataLocation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#get_terminology-instance_method
+      def get_terminology: (
+                             name: ::String,
+                             ?terminology_data_format: ("CSV" | "TMX" | "TSV")
+                           ) -> _GetTerminologyResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTerminologyResponseSuccess
+
+      interface _ImportTerminologyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportTerminologyResponse]
+        def terminology_properties: () -> Types::TerminologyProperties
+        def auxiliary_data_location: () -> Types::TerminologyDataLocation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#import_terminology-instance_method
+      def import_terminology: (
+                                name: ::String,
+                                merge_strategy: ("OVERWRITE"),
+                                ?description: ::String,
+                                terminology_data: {
+                                  file: ::String,
+                                  format: ("CSV" | "TMX" | "TSV"),
+                                  directionality: ("UNI" | "MULTI")?
+                                },
+                                ?encryption_key: {
+                                  type: ("KMS"),
+                                  id: ::String
+                                },
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ]
+                              ) -> _ImportTerminologyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportTerminologyResponseSuccess
+
+      interface _ListLanguagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLanguagesResponse]
+        def languages: () -> ::Array[Types::Language]
+        def display_language_code: () -> ("de" | "en" | "es" | "fr" | "it" | "ja" | "ko" | "pt" | "zh" | "zh-TW")
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#list_languages-instance_method
+      def list_languages: (
+                            ?display_language_code: ("de" | "en" | "es" | "fr" | "it" | "ja" | "ko" | "pt" | "zh" | "zh-TW"),
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListLanguagesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLanguagesResponseSuccess
+
+      interface _ListParallelDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListParallelDataResponse]
+        def parallel_data_properties_list: () -> ::Array[Types::ParallelDataProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#list_parallel_data-instance_method
+      def list_parallel_data: (
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListParallelDataResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListParallelDataResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTerminologiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTerminologiesResponse]
+        def terminology_properties_list: () -> ::Array[Types::TerminologyProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#list_terminologies-instance_method
+      def list_terminologies: (
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListTerminologiesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTerminologiesResponseSuccess
+
+      interface _ListTextTranslationJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTextTranslationJobsResponse]
+        def text_translation_job_properties_list: () -> ::Array[Types::TextTranslationJobProperties]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#list_text_translation_jobs-instance_method
+      def list_text_translation_jobs: (
+                                        ?filter: {
+                                          job_name: ::String?,
+                                          job_status: ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERROR" | "FAILED" | "STOP_REQUESTED" | "STOPPED")?,
+                                          submitted_before_time: ::Time?,
+                                          submitted_after_time: ::Time?
+                                        },
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListTextTranslationJobsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTextTranslationJobsResponseSuccess
+
+      interface _StartTextTranslationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTextTranslationJobResponse]
+        def job_id: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERROR" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#start_text_translation_job-instance_method
+      def start_text_translation_job: (
+                                        ?job_name: ::String,
+                                        input_data_config: {
+                                          s3_uri: ::String,
+                                          content_type: ::String
+                                        },
+                                        output_data_config: {
+                                          s3_uri: ::String,
+                                          encryption_key: {
+                                            type: ("KMS"),
+                                            id: ::String
+                                          }?
+                                        },
+                                        data_access_role_arn: ::String,
+                                        source_language_code: ::String,
+                                        target_language_codes: Array[::String],
+                                        ?terminology_names: Array[::String],
+                                        ?parallel_data_names: Array[::String],
+                                        client_token: ::String,
+                                        ?settings: {
+                                          formality: ("FORMAL" | "INFORMAL")?,
+                                          profanity: ("MASK")?,
+                                          brevity: ("ON")?
+                                        }
+                                      ) -> _StartTextTranslationJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTextTranslationJobResponseSuccess
+
+      interface _StopTextTranslationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopTextTranslationJobResponse]
+        def job_id: () -> ::String
+        def job_status: () -> ("SUBMITTED" | "IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERROR" | "FAILED" | "STOP_REQUESTED" | "STOPPED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#stop_text_translation_job-instance_method
+      def stop_text_translation_job: (
+                                       job_id: ::String
+                                     ) -> _StopTextTranslationJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopTextTranslationJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _TranslateDocumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TranslateDocumentResponse]
+        def translated_document: () -> Types::TranslatedDocument
+        def source_language_code: () -> ::String
+        def target_language_code: () -> ::String
+        def applied_terminologies: () -> ::Array[Types::AppliedTerminology]
+        def applied_settings: () -> Types::TranslationSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#translate_document-instance_method
+      def translate_document: (
+                                document: {
+                                  content: ::String,
+                                  content_type: ::String
+                                },
+                                ?terminology_names: Array[::String],
+                                source_language_code: ::String,
+                                target_language_code: ::String,
+                                ?settings: {
+                                  formality: ("FORMAL" | "INFORMAL")?,
+                                  profanity: ("MASK")?,
+                                  brevity: ("ON")?
+                                }
+                              ) -> _TranslateDocumentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TranslateDocumentResponseSuccess
+
+      interface _TranslateTextResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TranslateTextResponse]
+        def translated_text: () -> ::String
+        def source_language_code: () -> ::String
+        def target_language_code: () -> ::String
+        def applied_terminologies: () -> ::Array[Types::AppliedTerminology]
+        def applied_settings: () -> Types::TranslationSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#translate_text-instance_method
+      def translate_text: (
+                            text: ::String,
+                            ?terminology_names: Array[::String],
+                            source_language_code: ::String,
+                            target_language_code: ::String,
+                            ?settings: {
+                              formality: ("FORMAL" | "INFORMAL")?,
+                              profanity: ("MASK")?,
+                              brevity: ("ON")?
+                            }
+                          ) -> _TranslateTextResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TranslateTextResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateParallelDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateParallelDataResponse]
+        def name: () -> ::String
+        def status: () -> ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING" | "FAILED")
+        def latest_update_attempt_status: () -> ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING" | "FAILED")
+        def latest_update_attempt_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Translate/Client.html#update_parallel_data-instance_method
+      def update_parallel_data: (
+                                  name: ::String,
+                                  ?description: ::String,
+                                  parallel_data_config: {
+                                    s3_uri: ::String?,
+                                    format: ("TSV" | "CSV" | "TMX")?
+                                  },
+                                  client_token: ::String
+                                ) -> _UpdateParallelDataResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateParallelDataResponseSuccess
+    end
+  end
+end
+

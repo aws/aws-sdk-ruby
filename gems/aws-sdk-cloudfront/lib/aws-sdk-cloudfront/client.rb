@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CloudFront
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CloudFront
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::CloudFront
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::CloudFront
     #   @option options [Aws::CloudFront::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CloudFront::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -2057,6 +2082,56 @@ module Aws::CloudFront
     #   * {Types::CreateFunctionResult#location #location} => String
     #   * {Types::CreateFunctionResult#etag #etag} => String
     #
+    #
+    # @example Example: To create a function
+    #
+    #   # Use the following command to create a function.
+    #
+    #   resp = client.create_function({
+    #     function_code: "function-code.js", 
+    #     function_config: {
+    #       comment: "my-function-comment", 
+    #       key_value_store_associations: {
+    #         items: [
+    #           {
+    #             key_value_store_arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #           }, 
+    #         ], 
+    #         quantity: 1, 
+    #       }, 
+    #       runtime: "cloudfront-js-2.0", 
+    #     }, 
+    #     name: "my-function-name", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "ETVPDKIKX0DER", 
+    #     function_summary: {
+    #       function_config: {
+    #         comment: "my-function-comment", 
+    #         key_value_store_associations: {
+    #           items: [
+    #             {
+    #               key_value_store_arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #             }, 
+    #           ], 
+    #           quantity: 1, 
+    #         }, 
+    #         runtime: "cloudfront-js-2.0", 
+    #       }, 
+    #       function_metadata: {
+    #         created_time: Time.parse("2023-11-07T19:53:50.334Z"), 
+    #         function_arn: "arn:aws:cloudfront::123456789012:function/my-function-name", 
+    #         last_modified_time: Time.parse("2023-11-07T19:53:50.334Z"), 
+    #         stage: "DEVELOPMENT", 
+    #       }, 
+    #       name: "my-function-name", 
+    #       status: "UNPUBLISHED", 
+    #     }, 
+    #     location: "https://cloudfront.amazonaws.com/2020-05-31/function/arn:aws:cloudfront::123456789012:function/my-function-name", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_function({
@@ -2064,6 +2139,14 @@ module Aws::CloudFront
     #     function_config: { # required
     #       comment: "string", # required
     #       runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0, cloudfront-js-2.0
+    #       key_value_store_associations: {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             key_value_store_arn: "KeyValueStoreARN", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     function_code: "data", # required
     #   })
@@ -2074,6 +2157,9 @@ module Aws::CloudFront
     #   resp.function_summary.status #=> String
     #   resp.function_summary.function_config.comment #=> String
     #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
+    #   resp.function_summary.function_config.key_value_store_associations.quantity #=> Integer
+    #   resp.function_summary.function_config.key_value_store_associations.items #=> Array
+    #   resp.function_summary.function_config.key_value_store_associations.items[0].key_value_store_arn #=> String
     #   resp.function_summary.function_metadata.function_arn #=> String
     #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.function_summary.function_metadata.created_time #=> Time
@@ -2090,7 +2176,12 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Create a new invalidation.
+    # Create a new invalidation. For more information, see [Invalidating
+    # files][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html
     #
     # @option params [required, String] :distribution_id
     #   The distribution's id.
@@ -2193,6 +2284,87 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Specifies the key value store resource to add to your account. In your
+    # account, the key value store names must be unique. You can also import
+    # key value store data in JSON format from an S3 bucket by providing a
+    # valid `ImportSource` that you own.
+    #
+    # @option params [required, String] :name
+    #   The name of the key value store. The minimum length is 1 character and
+    #   the maximum length is 64 characters.
+    #
+    # @option params [String] :comment
+    #   The comment of the key value store.
+    #
+    # @option params [Types::ImportSource] :import_source
+    #   The S3 bucket that provides the source for the import. The source must
+    #   be in a valid JSON format.
+    #
+    # @return [Types::CreateKeyValueStoreResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateKeyValueStoreResult#key_value_store #key_value_store} => Types::KeyValueStore
+    #   * {Types::CreateKeyValueStoreResult#etag #etag} => String
+    #   * {Types::CreateKeyValueStoreResult#location #location} => String
+    #
+    #
+    # @example Example: To create a KeyValueStore
+    #
+    #   # Use the following command to create a KeyValueStore.
+    #
+    #   resp = client.create_key_value_store({
+    #     comment: "my-key-valuestore-comment", 
+    #     import_source: {
+    #       source_arn: "arn:aws:s3:::my-bucket/validJSON.json", 
+    #       source_type: "S3", 
+    #     }, 
+    #     name: "my-keyvaluestore-name", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "ETVPDKIKX0DER", 
+    #     key_value_store: {
+    #       arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #       comment: "my-key-valuestore-comment", 
+    #       id: "54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #       last_modified_time: Time.parse("2023-11-07T18:15:52.042Z"), 
+    #       name: "my-keyvaluestore-name", 
+    #       status: "PROVISIONING", 
+    #     }, 
+    #     location: "https://cloudfront.amazonaws.com/2020-05-31/key-value-store/arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_key_value_store({
+    #     name: "KeyValueStoreName", # required
+    #     comment: "KeyValueStoreComment",
+    #     import_source: {
+    #       source_type: "S3", # required, accepts S3
+    #       source_arn: "string", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_value_store.name #=> String
+    #   resp.key_value_store.id #=> String
+    #   resp.key_value_store.comment #=> String
+    #   resp.key_value_store.arn #=> String
+    #   resp.key_value_store.status #=> String
+    #   resp.key_value_store.last_modified_time #=> Time
+    #   resp.etag #=> String
+    #   resp.location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateKeyValueStore AWS API Documentation
+    #
+    # @overload create_key_value_store(params = {})
+    # @param [Hash] params ({})
+    def create_key_value_store(params = {}, options = {})
+      req = build_request(:create_key_value_store, params)
+      req.send_request(options)
+    end
+
     # Enables additional CloudWatch metrics for the specified CloudFront
     # distribution. The additional metrics incur an additional cost.
     #
@@ -2273,7 +2445,7 @@ module Aws::CloudFront
     #       description: "string",
     #       signing_protocol: "sigv4", # required, accepts sigv4
     #       signing_behavior: "never", # required, accepts never, always, no-override
-    #       origin_access_control_origin_type: "s3", # required, accepts s3, mediastore
+    #       origin_access_control_origin_type: "s3", # required, accepts s3, mediastore, mediapackagev2, lambda
     #     },
     #   })
     #
@@ -2284,7 +2456,7 @@ module Aws::CloudFront
     #   resp.origin_access_control.origin_access_control_config.description #=> String
     #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
     #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
-    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore"
+    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.location #=> String
     #   resp.etag #=> String
     #
@@ -2475,10 +2647,10 @@ module Aws::CloudFront
     #   A unique name to identify this real-time log configuration.
     #
     # @option params [required, Integer] :sampling_rate
-    #   The sampling rate for this real-time log configuration. The sampling
-    #   rate determines the percentage of viewer requests that are represented
-    #   in the real-time log data. You must provide an integer between 1 and
-    #   100, inclusive.
+    #   The sampling rate for this real-time log configuration. You can
+    #   specify a whole number between 1 and 100 (inclusive) to determine the
+    #   percentage of viewer requests that are represented in the real-time
+    #   log data.
     #
     # @return [Types::CreateRealtimeLogConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3130,6 +3302,42 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Specifies the key value store to delete.
+    #
+    # @option params [required, String] :name
+    #   The name of the key value store.
+    #
+    # @option params [required, String] :if_match
+    #   The key value store to delete, if a match occurs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete a KeyValueStore
+    #
+    #   # Use the following command to delete a KeyValueStore.
+    #
+    #   resp = client.delete_key_value_store({
+    #     if_match: "ETVPDKIKX0DER", 
+    #     name: "my-keyvaluestore-name", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_key_value_store({
+    #     name: "KeyValueStoreName", # required
+    #     if_match: "string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteKeyValueStore AWS API Documentation
+    #
+    # @overload delete_key_value_store(params = {})
+    # @param [Hash] params ({})
+    def delete_key_value_store(params = {}, options = {})
+      req = build_request(:delete_key_value_store, params)
+      req.send_request(options)
+    end
+
     # Disables additional CloudWatch metrics for the specified CloudFront
     # distribution.
     #
@@ -3432,6 +3640,9 @@ module Aws::CloudFront
     #   resp.function_summary.status #=> String
     #   resp.function_summary.function_config.comment #=> String
     #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
+    #   resp.function_summary.function_config.key_value_store_associations.quantity #=> Integer
+    #   resp.function_summary.function_config.key_value_store_associations.items #=> Array
+    #   resp.function_summary.function_config.key_value_store_associations.items[0].key_value_store_arn #=> String
     #   resp.function_summary.function_metadata.function_arn #=> String
     #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.function_summary.function_metadata.created_time #=> Time
@@ -3444,6 +3655,63 @@ module Aws::CloudFront
     # @param [Hash] params ({})
     def describe_function(params = {}, options = {})
       req = build_request(:describe_function, params)
+      req.send_request(options)
+    end
+
+    # Specifies the key value store and its configuration.
+    #
+    # @option params [required, String] :name
+    #   The name of the key value store.
+    #
+    # @return [Types::DescribeKeyValueStoreResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeKeyValueStoreResult#key_value_store #key_value_store} => Types::KeyValueStore
+    #   * {Types::DescribeKeyValueStoreResult#etag #etag} => String
+    #
+    #
+    # @example Example: To describe a KeyValueStore
+    #
+    #   # Use the following command to describe a KeyValueStore.
+    #
+    #   resp = client.describe_key_value_store({
+    #     name: "my-keyvaluestore-name", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "ETVPDKIKX0DER", 
+    #     key_value_store: {
+    #       arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #       comment: "my-key-valuestore-comment", 
+    #       id: "54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #       last_modified_time: Time.parse("2023-11-07T18:20:33.056Z"), 
+    #       name: "my-keyvaluestore-name", 
+    #       status: "READY", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_key_value_store({
+    #     name: "KeyValueStoreName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_value_store.name #=> String
+    #   resp.key_value_store.id #=> String
+    #   resp.key_value_store.comment #=> String
+    #   resp.key_value_store.arn #=> String
+    #   resp.key_value_store.status #=> String
+    #   resp.key_value_store.last_modified_time #=> Time
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DescribeKeyValueStore AWS API Documentation
+    #
+    # @overload describe_key_value_store(params = {})
+    # @param [Hash] params ({})
+    def describe_key_value_store(params = {}, options = {})
+      req = build_request(:describe_key_value_store, params)
       req.send_request(options)
     end
 
@@ -4518,7 +4786,7 @@ module Aws::CloudFront
     #   resp.origin_access_control.origin_access_control_config.description #=> String
     #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
     #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
-    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore"
+    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginAccessControl AWS API Documentation
@@ -4552,7 +4820,7 @@ module Aws::CloudFront
     #   resp.origin_access_control_config.description #=> String
     #   resp.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
     #   resp.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
-    #   resp.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore"
+    #   resp.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetOriginAccessControlConfig AWS API Documentation
@@ -6022,6 +6290,12 @@ module Aws::CloudFront
     #   distributions. If you specify "null" for the ID, the request returns
     #   a list of the distributions that aren't associated with a web ACL.
     #
+    #   For WAFV2, this is the ARN of the web ACL, such as
+    #   `arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
+    #
+    #   For WAF Classic, this is the ID of the web ACL, such as
+    #   `a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
+    #
     # @return [Types::ListDistributionsByWebACLIdResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDistributionsByWebACLIdResult#distribution_list #distribution_list} => Types::DistributionList
@@ -6371,6 +6645,9 @@ module Aws::CloudFront
     #   resp.function_list.items[0].status #=> String
     #   resp.function_list.items[0].function_config.comment #=> String
     #   resp.function_list.items[0].function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
+    #   resp.function_list.items[0].function_config.key_value_store_associations.quantity #=> Integer
+    #   resp.function_list.items[0].function_config.key_value_store_associations.items #=> Array
+    #   resp.function_list.items[0].function_config.key_value_store_associations.items[0].key_value_store_arn #=> String
     #   resp.function_list.items[0].function_metadata.function_arn #=> String
     #   resp.function_list.items[0].function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.function_list.items[0].function_metadata.created_time #=> Time
@@ -6491,6 +6768,83 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Specifies the key value stores to list.
+    #
+    # @option params [String] :marker
+    #   The marker associated with the key value stores list.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of items in the key value stores list.
+    #
+    # @option params [String] :status
+    #   The status of the request for the key value stores list.
+    #
+    # @return [Types::ListKeyValueStoresResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKeyValueStoresResult#key_value_store_list #key_value_store_list} => Types::KeyValueStoreList
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To get a list of KeyValueStores
+    #
+    #   # The following command retrieves a list of KeyValueStores with READY status.
+    #
+    #   resp = client.list_key_value_stores({
+    #     marker: "", 
+    #     max_items: 100, 
+    #     status: "READY", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     key_value_store_list: {
+    #       items: [
+    #         {
+    #           arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #           comment: "", 
+    #           id: "54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #           last_modified_time: Time.parse("2023-11-07T18:45:21.069Z"), 
+    #           name: "my-keyvaluestore-name", 
+    #           status: "READY", 
+    #         }, 
+    #       ], 
+    #       max_items: 100, 
+    #       next_marker: "", 
+    #       quantity: 1, 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_key_value_stores({
+    #     marker: "string",
+    #     max_items: 1,
+    #     status: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_value_store_list.next_marker #=> String
+    #   resp.key_value_store_list.max_items #=> Integer
+    #   resp.key_value_store_list.quantity #=> Integer
+    #   resp.key_value_store_list.items #=> Array
+    #   resp.key_value_store_list.items[0].name #=> String
+    #   resp.key_value_store_list.items[0].id #=> String
+    #   resp.key_value_store_list.items[0].comment #=> String
+    #   resp.key_value_store_list.items[0].arn #=> String
+    #   resp.key_value_store_list.items[0].status #=> String
+    #   resp.key_value_store_list.items[0].last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListKeyValueStores AWS API Documentation
+    #
+    # @overload list_key_value_stores(params = {})
+    # @param [Hash] params ({})
+    def list_key_value_stores(params = {}, options = {})
+      req = build_request(:list_key_value_stores, params)
+      req.send_request(options)
+    end
+
     # Gets the list of CloudFront origin access controls in this Amazon Web
     # Services account.
     #
@@ -6536,7 +6890,7 @@ module Aws::CloudFront
     #   resp.origin_access_control_list.items[0].name #=> String
     #   resp.origin_access_control_list.items[0].signing_protocol #=> String, one of "sigv4"
     #   resp.origin_access_control_list.items[0].signing_behavior #=> String, one of "never", "always", "no-override"
-    #   resp.origin_access_control_list.items[0].origin_access_control_origin_type #=> String, one of "s3", "mediastore"
+    #   resp.origin_access_control_list.items[0].origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListOriginAccessControls AWS API Documentation
     #
@@ -6958,6 +7312,9 @@ module Aws::CloudFront
     #   resp.function_summary.status #=> String
     #   resp.function_summary.function_config.comment #=> String
     #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
+    #   resp.function_summary.function_config.key_value_store_associations.quantity #=> Integer
+    #   resp.function_summary.function_config.key_value_store_associations.items #=> Array
+    #   resp.function_summary.function_config.key_value_store_associations.items[0].key_value_store_arn #=> String
     #   resp.function_summary.function_metadata.function_arn #=> String
     #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.function_summary.function_metadata.created_time #=> Time
@@ -7063,6 +7420,9 @@ module Aws::CloudFront
     #   resp.test_result.function_summary.status #=> String
     #   resp.test_result.function_summary.function_config.comment #=> String
     #   resp.test_result.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
+    #   resp.test_result.function_summary.function_config.key_value_store_associations.quantity #=> Integer
+    #   resp.test_result.function_summary.function_config.key_value_store_associations.items #=> Array
+    #   resp.test_result.function_summary.function_config.key_value_store_associations.items[0].key_value_store_arn #=> String
     #   resp.test_result.function_summary.function_metadata.function_arn #=> String
     #   resp.test_result.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.test_result.function_summary.function_metadata.created_time #=> Time
@@ -8284,6 +8644,56 @@ module Aws::CloudFront
     #   * {Types::UpdateFunctionResult#function_summary #function_summary} => Types::FunctionSummary
     #   * {Types::UpdateFunctionResult#etag #etag} => String
     #
+    #
+    # @example Example: To update a function
+    #
+    #   # Use the following command to update a function.
+    #
+    #   resp = client.update_function({
+    #     function_code: "function-code-changed.js", 
+    #     function_config: {
+    #       comment: "my-changed-comment", 
+    #       key_value_store_associations: {
+    #         items: [
+    #           {
+    #             key_value_store_arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #           }, 
+    #         ], 
+    #         quantity: 1, 
+    #       }, 
+    #       runtime: "cloudfront-js-2.0", 
+    #     }, 
+    #     if_match: "ETVPDKIKX0DER", 
+    #     name: "my-function-name", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "E3UN6WX5RRO2AG", 
+    #     function_summary: {
+    #       function_config: {
+    #         comment: "my-changed-comment", 
+    #         key_value_store_associations: {
+    #           items: [
+    #             {
+    #               key_value_store_arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #             }, 
+    #           ], 
+    #           quantity: 1, 
+    #         }, 
+    #         runtime: "cloudfront-js-2.0", 
+    #       }, 
+    #       function_metadata: {
+    #         created_time: Time.parse("2023-11-07T19:53:50.334Z"), 
+    #         function_arn: "arn:aws:cloudfront::123456789012:function/my-function-name", 
+    #         last_modified_time: Time.parse("2023-11-07T20:01:37.174Z"), 
+    #         stage: "DEVELOPMENT", 
+    #       }, 
+    #       name: "my-function-name", 
+    #       status: "UNPUBLISHED", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_function({
@@ -8292,6 +8702,14 @@ module Aws::CloudFront
     #     function_config: { # required
     #       comment: "string", # required
     #       runtime: "cloudfront-js-1.0", # required, accepts cloudfront-js-1.0, cloudfront-js-2.0
+    #       key_value_store_associations: {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             key_value_store_arn: "KeyValueStoreARN", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     function_code: "data", # required
     #   })
@@ -8302,6 +8720,9 @@ module Aws::CloudFront
     #   resp.function_summary.status #=> String
     #   resp.function_summary.function_config.comment #=> String
     #   resp.function_summary.function_config.runtime #=> String, one of "cloudfront-js-1.0", "cloudfront-js-2.0"
+    #   resp.function_summary.function_config.key_value_store_associations.quantity #=> Integer
+    #   resp.function_summary.function_config.key_value_store_associations.items #=> Array
+    #   resp.function_summary.function_config.key_value_store_associations.items[0].key_value_store_arn #=> String
     #   resp.function_summary.function_metadata.function_arn #=> String
     #   resp.function_summary.function_metadata.stage #=> String, one of "DEVELOPMENT", "LIVE"
     #   resp.function_summary.function_metadata.created_time #=> Time
@@ -8378,6 +8799,73 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
+    # Specifies the key value store to update.
+    #
+    # @option params [required, String] :name
+    #   The name of the key value store to update.
+    #
+    # @option params [required, String] :comment
+    #   The comment of the key value store to update.
+    #
+    # @option params [required, String] :if_match
+    #   The key value store to update, if a match occurs.
+    #
+    # @return [Types::UpdateKeyValueStoreResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateKeyValueStoreResult#key_value_store #key_value_store} => Types::KeyValueStore
+    #   * {Types::UpdateKeyValueStoreResult#etag #etag} => String
+    #
+    #
+    # @example Example: To update a KeyValueStore
+    #
+    #   # Use the following command to update a KeyValueStore.
+    #
+    #   resp = client.update_key_value_store({
+    #     comment: "my-changed-comment", 
+    #     if_match: "ETVPDKIKX0DER", 
+    #     name: "my-keyvaluestore-name", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     etag: "E3UN6WX5RRO2AG", 
+    #     key_value_store: {
+    #       arn: "arn:aws:cloudfront::123456789012:key-value-store/54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #       comment: "my-changed-comment", 
+    #       id: "54947df8-0e9e-4471-a2f9-9af509fb5889", 
+    #       last_modified_time: Time.parse("2023-11-07T18:45:21.069Z"), 
+    #       name: "my-keyvaluestore-name", 
+    #       status: "READY", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_key_value_store({
+    #     name: "KeyValueStoreName", # required
+    #     comment: "KeyValueStoreComment", # required
+    #     if_match: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_value_store.name #=> String
+    #   resp.key_value_store.id #=> String
+    #   resp.key_value_store.comment #=> String
+    #   resp.key_value_store.arn #=> String
+    #   resp.key_value_store.status #=> String
+    #   resp.key_value_store.last_modified_time #=> Time
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateKeyValueStore AWS API Documentation
+    #
+    # @overload update_key_value_store(params = {})
+    # @param [Hash] params ({})
+    def update_key_value_store(params = {}, options = {})
+      req = build_request(:update_key_value_store, params)
+      req.send_request(options)
+    end
+
     # Updates a CloudFront origin access control.
     #
     # @option params [required, Types::OriginAccessControlConfig] :origin_access_control_config
@@ -8404,7 +8892,7 @@ module Aws::CloudFront
     #       description: "string",
     #       signing_protocol: "sigv4", # required, accepts sigv4
     #       signing_behavior: "never", # required, accepts never, always, no-override
-    #       origin_access_control_origin_type: "s3", # required, accepts s3, mediastore
+    #       origin_access_control_origin_type: "s3", # required, accepts s3, mediastore, mediapackagev2, lambda
     #     },
     #     id: "string", # required
     #     if_match: "string",
@@ -8417,7 +8905,7 @@ module Aws::CloudFront
     #   resp.origin_access_control.origin_access_control_config.description #=> String
     #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4"
     #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
-    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore"
+    #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateOriginAccessControl AWS API Documentation
@@ -8940,7 +9428,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.92.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

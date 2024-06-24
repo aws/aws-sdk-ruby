@@ -34,6 +34,9 @@ module Aws::RDSDataService
     ColumnMetadata = Shapes::StructureShape.new(name: 'ColumnMetadata')
     CommitTransactionRequest = Shapes::StructureShape.new(name: 'CommitTransactionRequest')
     CommitTransactionResponse = Shapes::StructureShape.new(name: 'CommitTransactionResponse')
+    DatabaseErrorException = Shapes::StructureShape.new(name: 'DatabaseErrorException')
+    DatabaseNotFoundException = Shapes::StructureShape.new(name: 'DatabaseNotFoundException')
+    DatabaseUnavailableException = Shapes::StructureShape.new(name: 'DatabaseUnavailableException')
     DbName = Shapes::StringShape.new(name: 'DbName')
     DecimalReturnType = Shapes::StringShape.new(name: 'DecimalReturnType')
     DoubleArray = Shapes::ListShape.new(name: 'DoubleArray')
@@ -46,9 +49,11 @@ module Aws::RDSDataService
     FieldList = Shapes::ListShape.new(name: 'FieldList')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     FormattedSqlRecords = Shapes::StringShape.new(name: 'FormattedSqlRecords')
+    HttpEndpointNotEnabledException = Shapes::StructureShape.new(name: 'HttpEndpointNotEnabledException')
     Id = Shapes::StringShape.new(name: 'Id')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
+    InvalidSecretException = Shapes::StructureShape.new(name: 'InvalidSecretException')
     Long = Shapes::IntegerShape.new(name: 'Long')
     LongArray = Shapes::ListShape.new(name: 'LongArray')
     LongReturnType = Shapes::StringShape.new(name: 'LongReturnType')
@@ -65,6 +70,7 @@ module Aws::RDSDataService
     RollbackTransactionRequest = Shapes::StructureShape.new(name: 'RollbackTransactionRequest')
     RollbackTransactionResponse = Shapes::StructureShape.new(name: 'RollbackTransactionResponse')
     Row = Shapes::ListShape.new(name: 'Row')
+    SecretsErrorException = Shapes::StructureShape.new(name: 'SecretsErrorException')
     ServiceUnavailableError = Shapes::StructureShape.new(name: 'ServiceUnavailableError')
     SqlParameter = Shapes::StructureShape.new(name: 'SqlParameter')
     SqlParameterSets = Shapes::ListShape.new(name: 'SqlParameterSets')
@@ -77,8 +83,10 @@ module Aws::RDSDataService
     String = Shapes::StringShape.new(name: 'String')
     StringArray = Shapes::ListShape.new(name: 'StringArray')
     StructValue = Shapes::StructureShape.new(name: 'StructValue')
+    TransactionNotFoundException = Shapes::StructureShape.new(name: 'TransactionNotFoundException')
     TransactionStatus = Shapes::StringShape.new(name: 'TransactionStatus')
     TypeHint = Shapes::StringShape.new(name: 'TypeHint')
+    UnsupportedResultException = Shapes::StructureShape.new(name: 'UnsupportedResultException')
     UpdateResult = Shapes::StructureShape.new(name: 'UpdateResult')
     UpdateResults = Shapes::ListShape.new(name: 'UpdateResults')
     Value = Shapes::UnionShape.new(name: 'Value')
@@ -154,6 +162,14 @@ module Aws::RDSDataService
     CommitTransactionResponse.add_member(:transaction_status, Shapes::ShapeRef.new(shape: TransactionStatus, location_name: "transactionStatus"))
     CommitTransactionResponse.struct_class = Types::CommitTransactionResponse
 
+    DatabaseErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DatabaseErrorException.struct_class = Types::DatabaseErrorException
+
+    DatabaseNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DatabaseNotFoundException.struct_class = Types::DatabaseNotFoundException
+
+    DatabaseUnavailableException.struct_class = Types::DatabaseUnavailableException
+
     DoubleArray.member = Shapes::ShapeRef.new(shape: BoxedDouble)
 
     ExecuteSqlRequest.add_member(:db_cluster_or_instance_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "dbClusterOrInstanceArn"))
@@ -186,10 +202,10 @@ module Aws::RDSDataService
     ExecuteStatementResponse.add_member(:formatted_records, Shapes::ShapeRef.new(shape: FormattedSqlRecords, location_name: "formattedRecords"))
     ExecuteStatementResponse.struct_class = Types::ExecuteStatementResponse
 
-    Field.add_member(:is_null, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "isNull", metadata: {"box"=>true}))
-    Field.add_member(:boolean_value, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "booleanValue", metadata: {"box"=>true}))
-    Field.add_member(:long_value, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "longValue", metadata: {"box"=>true}))
-    Field.add_member(:double_value, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "doubleValue", metadata: {"box"=>true}))
+    Field.add_member(:is_null, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "isNull"))
+    Field.add_member(:boolean_value, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "booleanValue"))
+    Field.add_member(:long_value, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "longValue"))
+    Field.add_member(:double_value, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "doubleValue"))
     Field.add_member(:string_value, Shapes::ShapeRef.new(shape: String, location_name: "stringValue"))
     Field.add_member(:blob_value, Shapes::ShapeRef.new(shape: Blob, location_name: "blobValue"))
     Field.add_member(:array_value, Shapes::ShapeRef.new(shape: ArrayValue, location_name: "arrayValue"))
@@ -209,7 +225,13 @@ module Aws::RDSDataService
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
 
+    HttpEndpointNotEnabledException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    HttpEndpointNotEnabledException.struct_class = Types::HttpEndpointNotEnabledException
+
     InternalServerErrorException.struct_class = Types::InternalServerErrorException
+
+    InvalidSecretException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidSecretException.struct_class = Types::InvalidSecretException
 
     LongArray.member = Shapes::ShapeRef.new(shape: BoxedLong)
 
@@ -245,6 +267,9 @@ module Aws::RDSDataService
 
     Row.member = Shapes::ShapeRef.new(shape: Value)
 
+    SecretsErrorException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    SecretsErrorException.struct_class = Types::SecretsErrorException
+
     ServiceUnavailableError.struct_class = Types::ServiceUnavailableError
 
     SqlParameter.add_member(:name, Shapes::ShapeRef.new(shape: ParameterName, location_name: "name"))
@@ -273,17 +298,23 @@ module Aws::RDSDataService
     StructValue.add_member(:attributes, Shapes::ShapeRef.new(shape: ArrayValueList, location_name: "attributes"))
     StructValue.struct_class = Types::StructValue
 
+    TransactionNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TransactionNotFoundException.struct_class = Types::TransactionNotFoundException
+
+    UnsupportedResultException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    UnsupportedResultException.struct_class = Types::UnsupportedResultException
+
     UpdateResult.add_member(:generated_fields, Shapes::ShapeRef.new(shape: FieldList, location_name: "generatedFields"))
     UpdateResult.struct_class = Types::UpdateResult
 
     UpdateResults.member = Shapes::ShapeRef.new(shape: UpdateResult)
 
-    Value.add_member(:is_null, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "isNull", metadata: {"box"=>true}))
-    Value.add_member(:bit_value, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "bitValue", metadata: {"box"=>true}))
-    Value.add_member(:big_int_value, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "bigIntValue", metadata: {"box"=>true}))
-    Value.add_member(:int_value, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "intValue", metadata: {"box"=>true}))
-    Value.add_member(:double_value, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "doubleValue", metadata: {"box"=>true}))
-    Value.add_member(:real_value, Shapes::ShapeRef.new(shape: BoxedFloat, location_name: "realValue", metadata: {"box"=>true}))
+    Value.add_member(:is_null, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "isNull"))
+    Value.add_member(:bit_value, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "bitValue"))
+    Value.add_member(:big_int_value, Shapes::ShapeRef.new(shape: BoxedLong, location_name: "bigIntValue"))
+    Value.add_member(:int_value, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "intValue"))
+    Value.add_member(:double_value, Shapes::ShapeRef.new(shape: BoxedDouble, location_name: "doubleValue"))
+    Value.add_member(:real_value, Shapes::ShapeRef.new(shape: BoxedFloat, location_name: "realValue"))
     Value.add_member(:string_value, Shapes::ShapeRef.new(shape: String, location_name: "stringValue"))
     Value.add_member(:blob_value, Shapes::ShapeRef.new(shape: Blob, location_name: "blobValue"))
     Value.add_member(:array_values, Shapes::ShapeRef.new(shape: ArrayValueList, location_name: "arrayValues"))
@@ -326,12 +357,19 @@ module Aws::RDSDataService
         o.http_request_uri = "/BatchExecute"
         o.input = Shapes::ShapeRef.new(shape: BatchExecuteStatementRequest)
         o.output = Shapes::ShapeRef.new(shape: BatchExecuteStatementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: SecretsErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HttpEndpointNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecretException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: StatementTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
       end)
 
       api.add_operation(:begin_transaction, Seahorse::Model::Operation.new.tap do |o|
@@ -340,12 +378,19 @@ module Aws::RDSDataService
         o.http_request_uri = "/BeginTransaction"
         o.input = Shapes::ShapeRef.new(shape: BeginTransactionRequest)
         o.output = Shapes::ShapeRef.new(shape: BeginTransactionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: SecretsErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HttpEndpointNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecretException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: StatementTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
       end)
 
       api.add_operation(:commit_transaction, Seahorse::Model::Operation.new.tap do |o|
@@ -354,12 +399,19 @@ module Aws::RDSDataService
         o.http_request_uri = "/CommitTransaction"
         o.input = Shapes::ShapeRef.new(shape: CommitTransactionRequest)
         o.output = Shapes::ShapeRef.new(shape: CommitTransactionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: SecretsErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HttpEndpointNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecretException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: StatementTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
@@ -383,12 +435,20 @@ module Aws::RDSDataService
         o.http_request_uri = "/Execute"
         o.input = Shapes::ShapeRef.new(shape: ExecuteStatementRequest)
         o.output = Shapes::ShapeRef.new(shape: ExecuteStatementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: SecretsErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HttpEndpointNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecretException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: StatementTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedResultException)
       end)
 
       api.add_operation(:rollback_transaction, Seahorse::Model::Operation.new.tap do |o|
@@ -397,12 +457,19 @@ module Aws::RDSDataService
         o.http_request_uri = "/RollbackTransaction"
         o.input = Shapes::ShapeRef.new(shape: RollbackTransactionRequest)
         o.output = Shapes::ShapeRef.new(shape: RollbackTransactionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: SecretsErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: HttpEndpointNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TransactionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSecretException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: DatabaseNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: StatementTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
-        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
     end

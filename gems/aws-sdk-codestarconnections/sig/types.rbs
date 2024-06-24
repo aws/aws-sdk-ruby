@@ -1,0 +1,553 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CodeStarconnections
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConditionalCheckFailedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Connection
+      attr_accessor connection_name: ::String
+      attr_accessor connection_arn: ::String
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor owner_account_id: ::String
+      attr_accessor connection_status: ("PENDING" | "AVAILABLE" | "ERROR")
+      attr_accessor host_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectionInput
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor connection_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor host_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectionOutput
+      attr_accessor connection_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateHostInput
+      attr_accessor name: ::String
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor provider_endpoint: ::String
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateHostOutput
+      attr_accessor host_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRepositoryLinkInput
+      attr_accessor connection_arn: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRepositoryLinkOutput
+      attr_accessor repository_link_info: Types::RepositoryLinkInfo
+      SENSITIVE: []
+    end
+
+    class CreateSyncConfigurationInput
+      attr_accessor branch: ::String
+      attr_accessor config_file: ::String
+      attr_accessor repository_link_id: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor sync_type: ("CFN_STACK_SYNC")
+      attr_accessor publish_deployment_status: ("ENABLED" | "DISABLED")
+      attr_accessor trigger_resource_update_on: ("ANY_CHANGE" | "FILE_CHANGE")
+      SENSITIVE: []
+    end
+
+    class CreateSyncConfigurationOutput
+      attr_accessor sync_configuration: Types::SyncConfiguration
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionInput
+      attr_accessor connection_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionOutput < Aws::EmptyStructure
+    end
+
+    class DeleteHostInput
+      attr_accessor host_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHostOutput < Aws::EmptyStructure
+    end
+
+    class DeleteRepositoryLinkInput
+      attr_accessor repository_link_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRepositoryLinkOutput < Aws::EmptyStructure
+    end
+
+    class DeleteSyncConfigurationInput
+      attr_accessor sync_type: ("CFN_STACK_SYNC")
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSyncConfigurationOutput < Aws::EmptyStructure
+    end
+
+    class GetConnectionInput
+      attr_accessor connection_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectionOutput
+      attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class GetHostInput
+      attr_accessor host_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetHostOutput
+      attr_accessor name: ::String
+      attr_accessor status: ::String
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor provider_endpoint: ::String
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      SENSITIVE: []
+    end
+
+    class GetRepositoryLinkInput
+      attr_accessor repository_link_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRepositoryLinkOutput
+      attr_accessor repository_link_info: Types::RepositoryLinkInfo
+      SENSITIVE: []
+    end
+
+    class GetRepositorySyncStatusInput
+      attr_accessor branch: ::String
+      attr_accessor repository_link_id: ::String
+      attr_accessor sync_type: ("CFN_STACK_SYNC")
+      SENSITIVE: []
+    end
+
+    class GetRepositorySyncStatusOutput
+      attr_accessor latest_sync: Types::RepositorySyncAttempt
+      SENSITIVE: []
+    end
+
+    class GetResourceSyncStatusInput
+      attr_accessor resource_name: ::String
+      attr_accessor sync_type: ("CFN_STACK_SYNC")
+      SENSITIVE: []
+    end
+
+    class GetResourceSyncStatusOutput
+      attr_accessor desired_state: Types::Revision
+      attr_accessor latest_successful_sync: Types::ResourceSyncAttempt
+      attr_accessor latest_sync: Types::ResourceSyncAttempt
+      SENSITIVE: []
+    end
+
+    class GetSyncBlockerSummaryInput
+      attr_accessor sync_type: ("CFN_STACK_SYNC")
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetSyncBlockerSummaryOutput
+      attr_accessor sync_blocker_summary: Types::SyncBlockerSummary
+      SENSITIVE: []
+    end
+
+    class GetSyncConfigurationInput
+      attr_accessor sync_type: ("CFN_STACK_SYNC")
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetSyncConfigurationOutput
+      attr_accessor sync_configuration: Types::SyncConfiguration
+      SENSITIVE: []
+    end
+
+    class Host
+      attr_accessor name: ::String
+      attr_accessor host_arn: ::String
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor provider_endpoint: ::String
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      attr_accessor status: ::String
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectionsInput
+      attr_accessor provider_type_filter: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor host_arn_filter: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectionsOutput
+      attr_accessor connections: ::Array[Types::Connection]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHostsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHostsOutput
+      attr_accessor hosts: ::Array[Types::Host]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRepositoryLinksInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRepositoryLinksOutput
+      attr_accessor repository_links: ::Array[Types::RepositoryLinkInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRepositorySyncDefinitionsInput
+      attr_accessor repository_link_id: ::String
+      attr_accessor sync_type: ("CFN_STACK_SYNC")
+      SENSITIVE: []
+    end
+
+    class ListRepositorySyncDefinitionsOutput
+      attr_accessor repository_sync_definitions: ::Array[Types::RepositorySyncDefinition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSyncConfigurationsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor repository_link_id: ::String
+      attr_accessor sync_type: ("CFN_STACK_SYNC")
+      SENSITIVE: []
+    end
+
+    class ListSyncConfigurationsOutput
+      attr_accessor sync_configurations: ::Array[Types::SyncConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class RepositoryLinkInfo
+      attr_accessor connection_arn: ::String
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor repository_link_arn: ::String
+      attr_accessor repository_link_id: ::String
+      attr_accessor repository_name: ::String
+      SENSITIVE: []
+    end
+
+    class RepositorySyncAttempt
+      attr_accessor started_at: ::Time
+      attr_accessor status: ("FAILED" | "INITIATED" | "IN_PROGRESS" | "SUCCEEDED" | "QUEUED")
+      attr_accessor events: ::Array[Types::RepositorySyncEvent]
+      SENSITIVE: []
+    end
+
+    class RepositorySyncDefinition
+      attr_accessor branch: ::String
+      attr_accessor directory: ::String
+      attr_accessor parent: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class RepositorySyncEvent
+      attr_accessor event: ::String
+      attr_accessor external_id: ::String
+      attr_accessor time: ::Time
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceSyncAttempt
+      attr_accessor events: ::Array[Types::ResourceSyncEvent]
+      attr_accessor initial_revision: Types::Revision
+      attr_accessor started_at: ::Time
+      attr_accessor status: ("FAILED" | "INITIATED" | "IN_PROGRESS" | "SUCCEEDED")
+      attr_accessor target_revision: Types::Revision
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceSyncEvent
+      attr_accessor event: ::String
+      attr_accessor external_id: ::String
+      attr_accessor time: ::Time
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RetryLatestCommitFailedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Revision
+      attr_accessor branch: ::String
+      attr_accessor directory: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor sha: ::String
+      SENSITIVE: []
+    end
+
+    class SyncBlocker
+      attr_accessor id: ::String
+      attr_accessor type: ("AUTOMATED")
+      attr_accessor status: ("ACTIVE" | "RESOLVED")
+      attr_accessor created_reason: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor contexts: ::Array[Types::SyncBlockerContext]
+      attr_accessor resolved_reason: ::String
+      attr_accessor resolved_at: ::Time
+      SENSITIVE: []
+    end
+
+    class SyncBlockerContext
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SyncBlockerDoesNotExistException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SyncBlockerSummary
+      attr_accessor resource_name: ::String
+      attr_accessor parent_resource_name: ::String
+      attr_accessor latest_blockers: ::Array[Types::SyncBlocker]
+      SENSITIVE: []
+    end
+
+    class SyncConfiguration
+      attr_accessor branch: ::String
+      attr_accessor config_file: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor provider_type: ("Bitbucket" | "GitHub" | "GitHubEnterpriseServer" | "GitLab" | "GitLabSelfManaged")
+      attr_accessor repository_link_id: ::String
+      attr_accessor repository_name: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor sync_type: ("CFN_STACK_SYNC")
+      attr_accessor publish_deployment_status: ("ENABLED" | "DISABLED")
+      attr_accessor trigger_resource_update_on: ("ANY_CHANGE" | "FILE_CHANGE")
+      SENSITIVE: []
+    end
+
+    class SyncConfigurationStillExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedProviderTypeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateHostInput
+      attr_accessor host_arn: ::String
+      attr_accessor provider_endpoint: ::String
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateHostOutput < Aws::EmptyStructure
+    end
+
+    class UpdateOutOfSyncException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRepositoryLinkInput
+      attr_accessor connection_arn: ::String
+      attr_accessor encryption_key_arn: ::String
+      attr_accessor repository_link_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRepositoryLinkOutput
+      attr_accessor repository_link_info: Types::RepositoryLinkInfo
+      SENSITIVE: []
+    end
+
+    class UpdateSyncBlockerInput
+      attr_accessor id: ::String
+      attr_accessor sync_type: ("CFN_STACK_SYNC")
+      attr_accessor resource_name: ::String
+      attr_accessor resolved_reason: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSyncBlockerOutput
+      attr_accessor resource_name: ::String
+      attr_accessor parent_resource_name: ::String
+      attr_accessor sync_blocker: Types::SyncBlocker
+      SENSITIVE: []
+    end
+
+    class UpdateSyncConfigurationInput
+      attr_accessor branch: ::String
+      attr_accessor config_file: ::String
+      attr_accessor repository_link_id: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor sync_type: ("CFN_STACK_SYNC")
+      attr_accessor publish_deployment_status: ("ENABLED" | "DISABLED")
+      attr_accessor trigger_resource_update_on: ("ANY_CHANGE" | "FILE_CHANGE")
+      SENSITIVE: []
+    end
+
+    class UpdateSyncConfigurationOutput
+      attr_accessor sync_configuration: Types::SyncConfiguration
+      SENSITIVE: []
+    end
+
+    class VpcConfiguration
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor tls_certificate: ::String
+      SENSITIVE: []
+    end
+  end
+end

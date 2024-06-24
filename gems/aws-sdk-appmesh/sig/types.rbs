@@ -1,0 +1,1708 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AppMesh
+  module Types
+
+    class AccessLog
+      attr_accessor file: Types::FileAccessLog
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class File < AccessLog
+      end
+      class Unknown < AccessLog
+      end
+    end
+
+    class AwsCloudMapInstanceAttribute
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AwsCloudMapServiceDiscovery
+      attr_accessor attributes: ::Array[Types::AwsCloudMapInstanceAttribute]
+      attr_accessor ip_preference: ("IPv6_PREFERRED" | "IPv4_PREFERRED" | "IPv4_ONLY" | "IPv6_ONLY")
+      attr_accessor namespace_name: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class Backend
+      attr_accessor virtual_service: Types::VirtualServiceBackend
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class VirtualService < Backend
+      end
+      class Unknown < Backend
+      end
+    end
+
+    class BackendDefaults
+      attr_accessor client_policy: Types::ClientPolicy
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ClientPolicy
+      attr_accessor tls: Types::ClientPolicyTls
+      SENSITIVE: []
+    end
+
+    class ClientPolicyTls
+      attr_accessor certificate: Types::ClientTlsCertificate
+      attr_accessor enforce: bool
+      attr_accessor ports: ::Array[::Integer]
+      attr_accessor validation: Types::TlsValidationContext
+      SENSITIVE: []
+    end
+
+    class ClientTlsCertificate
+      attr_accessor file: Types::ListenerTlsFileCertificate
+      attr_accessor sds: Types::ListenerTlsSdsCertificate
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class File < ClientTlsCertificate
+      end
+      class Sds < ClientTlsCertificate
+      end
+      class Unknown < ClientTlsCertificate
+      end
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGatewayRouteInput
+      attr_accessor client_token: ::String
+      attr_accessor gateway_route_name: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor spec: Types::GatewayRouteSpec
+      attr_accessor tags: ::Array[Types::TagRef]
+      attr_accessor virtual_gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGatewayRouteOutput
+      attr_accessor gateway_route: Types::GatewayRouteData
+      SENSITIVE: []
+    end
+
+    class CreateMeshInput
+      attr_accessor client_token: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor spec: Types::MeshSpec
+      attr_accessor tags: ::Array[Types::TagRef]
+      SENSITIVE: []
+    end
+
+    class CreateMeshOutput
+      attr_accessor mesh: Types::MeshData
+      SENSITIVE: []
+    end
+
+    class CreateRouteInput
+      attr_accessor client_token: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor route_name: ::String
+      attr_accessor spec: Types::RouteSpec
+      attr_accessor tags: ::Array[Types::TagRef]
+      attr_accessor virtual_router_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRouteOutput
+      attr_accessor route: Types::RouteData
+      SENSITIVE: []
+    end
+
+    class CreateVirtualGatewayInput
+      attr_accessor client_token: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor spec: Types::VirtualGatewaySpec
+      attr_accessor tags: ::Array[Types::TagRef]
+      attr_accessor virtual_gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVirtualGatewayOutput
+      attr_accessor virtual_gateway: Types::VirtualGatewayData
+      SENSITIVE: []
+    end
+
+    class CreateVirtualNodeInput
+      attr_accessor client_token: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor spec: Types::VirtualNodeSpec
+      attr_accessor tags: ::Array[Types::TagRef]
+      attr_accessor virtual_node_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVirtualNodeOutput
+      attr_accessor virtual_node: Types::VirtualNodeData
+      SENSITIVE: []
+    end
+
+    class CreateVirtualRouterInput
+      attr_accessor client_token: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor spec: Types::VirtualRouterSpec
+      attr_accessor tags: ::Array[Types::TagRef]
+      attr_accessor virtual_router_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVirtualRouterOutput
+      attr_accessor virtual_router: Types::VirtualRouterData
+      SENSITIVE: []
+    end
+
+    class CreateVirtualServiceInput
+      attr_accessor client_token: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor spec: Types::VirtualServiceSpec
+      attr_accessor tags: ::Array[Types::TagRef]
+      attr_accessor virtual_service_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateVirtualServiceOutput
+      attr_accessor virtual_service: Types::VirtualServiceData
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayRouteInput
+      attr_accessor gateway_route_name: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor virtual_gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayRouteOutput
+      attr_accessor gateway_route: Types::GatewayRouteData
+      SENSITIVE: []
+    end
+
+    class DeleteMeshInput
+      attr_accessor mesh_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMeshOutput
+      attr_accessor mesh: Types::MeshData
+      SENSITIVE: []
+    end
+
+    class DeleteRouteInput
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor route_name: ::String
+      attr_accessor virtual_router_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRouteOutput
+      attr_accessor route: Types::RouteData
+      SENSITIVE: []
+    end
+
+    class DeleteVirtualGatewayInput
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor virtual_gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVirtualGatewayOutput
+      attr_accessor virtual_gateway: Types::VirtualGatewayData
+      SENSITIVE: []
+    end
+
+    class DeleteVirtualNodeInput
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor virtual_node_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVirtualNodeOutput
+      attr_accessor virtual_node: Types::VirtualNodeData
+      SENSITIVE: []
+    end
+
+    class DeleteVirtualRouterInput
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor virtual_router_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVirtualRouterOutput
+      attr_accessor virtual_router: Types::VirtualRouterData
+      SENSITIVE: []
+    end
+
+    class DeleteVirtualServiceInput
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor virtual_service_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVirtualServiceOutput
+      attr_accessor virtual_service: Types::VirtualServiceData
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayRouteInput
+      attr_accessor gateway_route_name: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor virtual_gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayRouteOutput
+      attr_accessor gateway_route: Types::GatewayRouteData
+      SENSITIVE: []
+    end
+
+    class DescribeMeshInput
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMeshOutput
+      attr_accessor mesh: Types::MeshData
+      SENSITIVE: []
+    end
+
+    class DescribeRouteInput
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor route_name: ::String
+      attr_accessor virtual_router_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRouteOutput
+      attr_accessor route: Types::RouteData
+      SENSITIVE: []
+    end
+
+    class DescribeVirtualGatewayInput
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor virtual_gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVirtualGatewayOutput
+      attr_accessor virtual_gateway: Types::VirtualGatewayData
+      SENSITIVE: []
+    end
+
+    class DescribeVirtualNodeInput
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor virtual_node_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVirtualNodeOutput
+      attr_accessor virtual_node: Types::VirtualNodeData
+      SENSITIVE: []
+    end
+
+    class DescribeVirtualRouterInput
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor virtual_router_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVirtualRouterOutput
+      attr_accessor virtual_router: Types::VirtualRouterData
+      SENSITIVE: []
+    end
+
+    class DescribeVirtualServiceInput
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor virtual_service_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeVirtualServiceOutput
+      attr_accessor virtual_service: Types::VirtualServiceData
+      SENSITIVE: []
+    end
+
+    class DnsServiceDiscovery
+      attr_accessor hostname: ::String
+      attr_accessor ip_preference: ("IPv6_PREFERRED" | "IPv4_PREFERRED" | "IPv4_ONLY" | "IPv6_ONLY")
+      attr_accessor response_type: ("LOADBALANCER" | "ENDPOINTS")
+      SENSITIVE: []
+    end
+
+    class Duration
+      attr_accessor unit: ("s" | "ms")
+      attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class EgressFilter
+      attr_accessor type: ("ALLOW_ALL" | "DROP_ALL")
+      SENSITIVE: []
+    end
+
+    class FileAccessLog
+      attr_accessor format: Types::LoggingFormat
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayRouteData
+      attr_accessor gateway_route_name: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor metadata: Types::ResourceMetadata
+      attr_accessor spec: Types::GatewayRouteSpec
+      attr_accessor status: Types::GatewayRouteStatus
+      attr_accessor virtual_gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayRouteHostnameMatch
+      attr_accessor exact: ::String
+      attr_accessor suffix: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayRouteHostnameRewrite
+      attr_accessor default_target_hostname: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class GatewayRouteRef
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor gateway_route_name: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor resource_owner: ::String
+      attr_accessor version: ::Integer
+      attr_accessor virtual_gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayRouteSpec
+      attr_accessor grpc_route: Types::GrpcGatewayRoute
+      attr_accessor http2_route: Types::HttpGatewayRoute
+      attr_accessor http_route: Types::HttpGatewayRoute
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class GatewayRouteStatus
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class GatewayRouteTarget
+      attr_accessor port: ::Integer
+      attr_accessor virtual_service: Types::GatewayRouteVirtualService
+      SENSITIVE: []
+    end
+
+    class GatewayRouteVirtualService
+      attr_accessor virtual_service_name: ::String
+      SENSITIVE: []
+    end
+
+    class GrpcGatewayRoute
+      attr_accessor action: Types::GrpcGatewayRouteAction
+      attr_accessor match: Types::GrpcGatewayRouteMatch
+      SENSITIVE: []
+    end
+
+    class GrpcGatewayRouteAction
+      attr_accessor rewrite: Types::GrpcGatewayRouteRewrite
+      attr_accessor target: Types::GatewayRouteTarget
+      SENSITIVE: []
+    end
+
+    class GrpcGatewayRouteMatch
+      attr_accessor hostname: Types::GatewayRouteHostnameMatch
+      attr_accessor metadata: ::Array[Types::GrpcGatewayRouteMetadata]
+      attr_accessor port: ::Integer
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class GrpcGatewayRouteMetadata
+      attr_accessor invert: bool
+      attr_accessor match: Types::GrpcMetadataMatchMethod
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GrpcGatewayRouteRewrite
+      attr_accessor hostname: Types::GatewayRouteHostnameRewrite
+      SENSITIVE: []
+    end
+
+    class GrpcMetadataMatchMethod
+      attr_accessor exact: ::String
+      attr_accessor prefix: ::String
+      attr_accessor range: Types::MatchRange
+      attr_accessor regex: ::String
+      attr_accessor suffix: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Exact < GrpcMetadataMatchMethod
+      end
+      class Prefix < GrpcMetadataMatchMethod
+      end
+      class Range < GrpcMetadataMatchMethod
+      end
+      class Regex < GrpcMetadataMatchMethod
+      end
+      class Suffix < GrpcMetadataMatchMethod
+      end
+      class Unknown < GrpcMetadataMatchMethod
+      end
+    end
+
+    class GrpcRetryPolicy
+      attr_accessor grpc_retry_events: ::Array[("cancelled" | "deadline-exceeded" | "internal" | "resource-exhausted" | "unavailable")]
+      attr_accessor http_retry_events: ::Array[::String]
+      attr_accessor max_retries: ::Integer
+      attr_accessor per_retry_timeout: Types::Duration
+      attr_accessor tcp_retry_events: ::Array[("connection-error")]
+      SENSITIVE: []
+    end
+
+    class GrpcRoute
+      attr_accessor action: Types::GrpcRouteAction
+      attr_accessor match: Types::GrpcRouteMatch
+      attr_accessor retry_policy: Types::GrpcRetryPolicy
+      attr_accessor timeout: Types::GrpcTimeout
+      SENSITIVE: []
+    end
+
+    class GrpcRouteAction
+      attr_accessor weighted_targets: ::Array[Types::WeightedTarget]
+      SENSITIVE: []
+    end
+
+    class GrpcRouteMatch
+      attr_accessor metadata: ::Array[Types::GrpcRouteMetadata]
+      attr_accessor method_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class GrpcRouteMetadata
+      attr_accessor invert: bool
+      attr_accessor match: Types::GrpcRouteMetadataMatchMethod
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GrpcRouteMetadataMatchMethod
+      attr_accessor exact: ::String
+      attr_accessor prefix: ::String
+      attr_accessor range: Types::MatchRange
+      attr_accessor regex: ::String
+      attr_accessor suffix: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Exact < GrpcRouteMetadataMatchMethod
+      end
+      class Prefix < GrpcRouteMetadataMatchMethod
+      end
+      class Range < GrpcRouteMetadataMatchMethod
+      end
+      class Regex < GrpcRouteMetadataMatchMethod
+      end
+      class Suffix < GrpcRouteMetadataMatchMethod
+      end
+      class Unknown < GrpcRouteMetadataMatchMethod
+      end
+    end
+
+    class GrpcTimeout
+      attr_accessor idle: Types::Duration
+      attr_accessor per_request: Types::Duration
+      SENSITIVE: []
+    end
+
+    class HeaderMatchMethod
+      attr_accessor exact: ::String
+      attr_accessor prefix: ::String
+      attr_accessor range: Types::MatchRange
+      attr_accessor regex: ::String
+      attr_accessor suffix: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Exact < HeaderMatchMethod
+      end
+      class Prefix < HeaderMatchMethod
+      end
+      class Range < HeaderMatchMethod
+      end
+      class Regex < HeaderMatchMethod
+      end
+      class Suffix < HeaderMatchMethod
+      end
+      class Unknown < HeaderMatchMethod
+      end
+    end
+
+    class HealthCheckPolicy
+      attr_accessor healthy_threshold: ::Integer
+      attr_accessor interval_millis: ::Integer
+      attr_accessor path: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("http" | "tcp" | "http2" | "grpc")
+      attr_accessor timeout_millis: ::Integer
+      attr_accessor unhealthy_threshold: ::Integer
+      SENSITIVE: []
+    end
+
+    class HttpGatewayRoute
+      attr_accessor action: Types::HttpGatewayRouteAction
+      attr_accessor match: Types::HttpGatewayRouteMatch
+      SENSITIVE: []
+    end
+
+    class HttpGatewayRouteAction
+      attr_accessor rewrite: Types::HttpGatewayRouteRewrite
+      attr_accessor target: Types::GatewayRouteTarget
+      SENSITIVE: []
+    end
+
+    class HttpGatewayRouteHeader
+      attr_accessor invert: bool
+      attr_accessor match: Types::HeaderMatchMethod
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class HttpGatewayRouteMatch
+      attr_accessor headers: ::Array[Types::HttpGatewayRouteHeader]
+      attr_accessor hostname: Types::GatewayRouteHostnameMatch
+      attr_accessor method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")
+      attr_accessor path: Types::HttpPathMatch
+      attr_accessor port: ::Integer
+      attr_accessor prefix: ::String
+      attr_accessor query_parameters: ::Array[Types::HttpQueryParameter]
+      SENSITIVE: []
+    end
+
+    class HttpGatewayRoutePathRewrite
+      attr_accessor exact: ::String
+      SENSITIVE: []
+    end
+
+    class HttpGatewayRoutePrefixRewrite
+      attr_accessor default_prefix: ("ENABLED" | "DISABLED")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class HttpGatewayRouteRewrite
+      attr_accessor hostname: Types::GatewayRouteHostnameRewrite
+      attr_accessor path: Types::HttpGatewayRoutePathRewrite
+      attr_accessor prefix: Types::HttpGatewayRoutePrefixRewrite
+      SENSITIVE: []
+    end
+
+    class HttpPathMatch
+      attr_accessor exact: ::String
+      attr_accessor regex: ::String
+      SENSITIVE: []
+    end
+
+    class HttpQueryParameter
+      attr_accessor match: Types::QueryParameterMatch
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class HttpRetryPolicy
+      attr_accessor http_retry_events: ::Array[::String]
+      attr_accessor max_retries: ::Integer
+      attr_accessor per_retry_timeout: Types::Duration
+      attr_accessor tcp_retry_events: ::Array[("connection-error")]
+      SENSITIVE: []
+    end
+
+    class HttpRoute
+      attr_accessor action: Types::HttpRouteAction
+      attr_accessor match: Types::HttpRouteMatch
+      attr_accessor retry_policy: Types::HttpRetryPolicy
+      attr_accessor timeout: Types::HttpTimeout
+      SENSITIVE: []
+    end
+
+    class HttpRouteAction
+      attr_accessor weighted_targets: ::Array[Types::WeightedTarget]
+      SENSITIVE: []
+    end
+
+    class HttpRouteHeader
+      attr_accessor invert: bool
+      attr_accessor match: Types::HeaderMatchMethod
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class HttpRouteMatch
+      attr_accessor headers: ::Array[Types::HttpRouteHeader]
+      attr_accessor method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")
+      attr_accessor path: Types::HttpPathMatch
+      attr_accessor port: ::Integer
+      attr_accessor prefix: ::String
+      attr_accessor query_parameters: ::Array[Types::HttpQueryParameter]
+      attr_accessor scheme: ("http" | "https")
+      SENSITIVE: []
+    end
+
+    class HttpTimeout
+      attr_accessor idle: Types::Duration
+      attr_accessor per_request: Types::Duration
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JsonFormatRef
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewayRoutesInput
+      attr_accessor limit: ::Integer
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor next_token: ::String
+      attr_accessor virtual_gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewayRoutesOutput
+      attr_accessor gateway_routes: ::Array[Types::GatewayRouteRef]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMeshesInput
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMeshesOutput
+      attr_accessor meshes: ::Array[Types::MeshRef]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoutesInput
+      attr_accessor limit: ::Integer
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor next_token: ::String
+      attr_accessor virtual_router_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoutesOutput
+      attr_accessor next_token: ::String
+      attr_accessor routes: ::Array[Types::RouteRef]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor next_token: ::String
+      attr_accessor tags: ::Array[Types::TagRef]
+      SENSITIVE: []
+    end
+
+    class ListVirtualGatewaysInput
+      attr_accessor limit: ::Integer
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVirtualGatewaysOutput
+      attr_accessor next_token: ::String
+      attr_accessor virtual_gateways: ::Array[Types::VirtualGatewayRef]
+      SENSITIVE: []
+    end
+
+    class ListVirtualNodesInput
+      attr_accessor limit: ::Integer
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVirtualNodesOutput
+      attr_accessor next_token: ::String
+      attr_accessor virtual_nodes: ::Array[Types::VirtualNodeRef]
+      SENSITIVE: []
+    end
+
+    class ListVirtualRoutersInput
+      attr_accessor limit: ::Integer
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVirtualRoutersOutput
+      attr_accessor next_token: ::String
+      attr_accessor virtual_routers: ::Array[Types::VirtualRouterRef]
+      SENSITIVE: []
+    end
+
+    class ListVirtualServicesInput
+      attr_accessor limit: ::Integer
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVirtualServicesOutput
+      attr_accessor next_token: ::String
+      attr_accessor virtual_services: ::Array[Types::VirtualServiceRef]
+      SENSITIVE: []
+    end
+
+    class Listener
+      attr_accessor connection_pool: Types::VirtualNodeConnectionPool
+      attr_accessor health_check: Types::HealthCheckPolicy
+      attr_accessor outlier_detection: Types::OutlierDetection
+      attr_accessor port_mapping: Types::PortMapping
+      attr_accessor timeout: Types::ListenerTimeout
+      attr_accessor tls: Types::ListenerTls
+      SENSITIVE: []
+    end
+
+    class ListenerTimeout
+      attr_accessor grpc: Types::GrpcTimeout
+      attr_accessor http: Types::HttpTimeout
+      attr_accessor http2: Types::HttpTimeout
+      attr_accessor tcp: Types::TcpTimeout
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Grpc < ListenerTimeout
+      end
+      class Http < ListenerTimeout
+      end
+      class Http2 < ListenerTimeout
+      end
+      class Tcp < ListenerTimeout
+      end
+      class Unknown < ListenerTimeout
+      end
+    end
+
+    class ListenerTls
+      attr_accessor certificate: Types::ListenerTlsCertificate
+      attr_accessor mode: ("STRICT" | "PERMISSIVE" | "DISABLED")
+      attr_accessor validation: Types::ListenerTlsValidationContext
+      SENSITIVE: []
+    end
+
+    class ListenerTlsAcmCertificate
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListenerTlsCertificate
+      attr_accessor acm: Types::ListenerTlsAcmCertificate
+      attr_accessor file: Types::ListenerTlsFileCertificate
+      attr_accessor sds: Types::ListenerTlsSdsCertificate
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Acm < ListenerTlsCertificate
+      end
+      class File < ListenerTlsCertificate
+      end
+      class Sds < ListenerTlsCertificate
+      end
+      class Unknown < ListenerTlsCertificate
+      end
+    end
+
+    class ListenerTlsFileCertificate
+      attr_accessor certificate_chain: ::String
+      attr_accessor private_key: ::String
+      SENSITIVE: []
+    end
+
+    class ListenerTlsSdsCertificate
+      attr_accessor secret_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListenerTlsValidationContext
+      attr_accessor subject_alternative_names: Types::SubjectAlternativeNames
+      attr_accessor trust: Types::ListenerTlsValidationContextTrust
+      SENSITIVE: []
+    end
+
+    class ListenerTlsValidationContextTrust
+      attr_accessor file: Types::TlsValidationContextFileTrust
+      attr_accessor sds: Types::TlsValidationContextSdsTrust
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class File < ListenerTlsValidationContextTrust
+      end
+      class Sds < ListenerTlsValidationContextTrust
+      end
+      class Unknown < ListenerTlsValidationContextTrust
+      end
+    end
+
+    class Logging
+      attr_accessor access_log: Types::AccessLog
+      SENSITIVE: []
+    end
+
+    class LoggingFormat
+      attr_accessor json: ::Array[Types::JsonFormatRef]
+      attr_accessor text: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Json < LoggingFormat
+      end
+      class Text < LoggingFormat
+      end
+      class Unknown < LoggingFormat
+      end
+    end
+
+    class MatchRange
+      attr_accessor end: ::Integer
+      attr_accessor start: ::Integer
+      SENSITIVE: []
+    end
+
+    class MeshData
+      attr_accessor mesh_name: ::String
+      attr_accessor metadata: Types::ResourceMetadata
+      attr_accessor spec: Types::MeshSpec
+      attr_accessor status: Types::MeshStatus
+      SENSITIVE: []
+    end
+
+    class MeshRef
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor resource_owner: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class MeshServiceDiscovery
+      attr_accessor ip_preference: ("IPv6_PREFERRED" | "IPv4_PREFERRED" | "IPv4_ONLY" | "IPv6_ONLY")
+      SENSITIVE: []
+    end
+
+    class MeshSpec
+      attr_accessor egress_filter: Types::EgressFilter
+      attr_accessor service_discovery: Types::MeshServiceDiscovery
+      SENSITIVE: []
+    end
+
+    class MeshStatus
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OutlierDetection
+      attr_accessor base_ejection_duration: Types::Duration
+      attr_accessor interval: Types::Duration
+      attr_accessor max_ejection_percent: ::Integer
+      attr_accessor max_server_errors: ::Integer
+      SENSITIVE: []
+    end
+
+    class PortMapping
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("http" | "tcp" | "http2" | "grpc")
+      SENSITIVE: []
+    end
+
+    class QueryParameterMatch
+      attr_accessor exact: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceMetadata
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor mesh_owner: ::String
+      attr_accessor resource_owner: ::String
+      attr_accessor uid: ::String
+      attr_accessor version: ::Integer
+      SENSITIVE: []
+    end
+
+    class RouteData
+      attr_accessor mesh_name: ::String
+      attr_accessor metadata: Types::ResourceMetadata
+      attr_accessor route_name: ::String
+      attr_accessor spec: Types::RouteSpec
+      attr_accessor status: Types::RouteStatus
+      attr_accessor virtual_router_name: ::String
+      SENSITIVE: []
+    end
+
+    class RouteRef
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor resource_owner: ::String
+      attr_accessor route_name: ::String
+      attr_accessor version: ::Integer
+      attr_accessor virtual_router_name: ::String
+      SENSITIVE: []
+    end
+
+    class RouteSpec
+      attr_accessor grpc_route: Types::GrpcRoute
+      attr_accessor http2_route: Types::HttpRoute
+      attr_accessor http_route: Types::HttpRoute
+      attr_accessor priority: ::Integer
+      attr_accessor tcp_route: Types::TcpRoute
+      SENSITIVE: []
+    end
+
+    class RouteStatus
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class ServiceDiscovery
+      attr_accessor aws_cloud_map: Types::AwsCloudMapServiceDiscovery
+      attr_accessor dns: Types::DnsServiceDiscovery
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AwsCloudMap < ServiceDiscovery
+      end
+      class Dns < ServiceDiscovery
+      end
+      class Unknown < ServiceDiscovery
+      end
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SubjectAlternativeNameMatchers
+      attr_accessor exact: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SubjectAlternativeNames
+      attr_accessor match: Types::SubjectAlternativeNameMatchers
+      SENSITIVE: []
+    end
+
+    class TagRef
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::TagRef]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class TcpRoute
+      attr_accessor action: Types::TcpRouteAction
+      attr_accessor match: Types::TcpRouteMatch
+      attr_accessor timeout: Types::TcpTimeout
+      SENSITIVE: []
+    end
+
+    class TcpRouteAction
+      attr_accessor weighted_targets: ::Array[Types::WeightedTarget]
+      SENSITIVE: []
+    end
+
+    class TcpRouteMatch
+      attr_accessor port: ::Integer
+      SENSITIVE: []
+    end
+
+    class TcpTimeout
+      attr_accessor idle: Types::Duration
+      SENSITIVE: []
+    end
+
+    class TlsValidationContext
+      attr_accessor subject_alternative_names: Types::SubjectAlternativeNames
+      attr_accessor trust: Types::TlsValidationContextTrust
+      SENSITIVE: []
+    end
+
+    class TlsValidationContextAcmTrust
+      attr_accessor certificate_authority_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TlsValidationContextFileTrust
+      attr_accessor certificate_chain: ::String
+      SENSITIVE: []
+    end
+
+    class TlsValidationContextSdsTrust
+      attr_accessor secret_name: ::String
+      SENSITIVE: []
+    end
+
+    class TlsValidationContextTrust
+      attr_accessor acm: Types::TlsValidationContextAcmTrust
+      attr_accessor file: Types::TlsValidationContextFileTrust
+      attr_accessor sds: Types::TlsValidationContextSdsTrust
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Acm < TlsValidationContextTrust
+      end
+      class File < TlsValidationContextTrust
+      end
+      class Sds < TlsValidationContextTrust
+      end
+      class Unknown < TlsValidationContextTrust
+      end
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateGatewayRouteInput
+      attr_accessor client_token: ::String
+      attr_accessor gateway_route_name: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor spec: Types::GatewayRouteSpec
+      attr_accessor virtual_gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayRouteOutput
+      attr_accessor gateway_route: Types::GatewayRouteData
+      SENSITIVE: []
+    end
+
+    class UpdateMeshInput
+      attr_accessor client_token: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor spec: Types::MeshSpec
+      SENSITIVE: []
+    end
+
+    class UpdateMeshOutput
+      attr_accessor mesh: Types::MeshData
+      SENSITIVE: []
+    end
+
+    class UpdateRouteInput
+      attr_accessor client_token: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor route_name: ::String
+      attr_accessor spec: Types::RouteSpec
+      attr_accessor virtual_router_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRouteOutput
+      attr_accessor route: Types::RouteData
+      SENSITIVE: []
+    end
+
+    class UpdateVirtualGatewayInput
+      attr_accessor client_token: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor spec: Types::VirtualGatewaySpec
+      attr_accessor virtual_gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVirtualGatewayOutput
+      attr_accessor virtual_gateway: Types::VirtualGatewayData
+      SENSITIVE: []
+    end
+
+    class UpdateVirtualNodeInput
+      attr_accessor client_token: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor spec: Types::VirtualNodeSpec
+      attr_accessor virtual_node_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVirtualNodeOutput
+      attr_accessor virtual_node: Types::VirtualNodeData
+      SENSITIVE: []
+    end
+
+    class UpdateVirtualRouterInput
+      attr_accessor client_token: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor spec: Types::VirtualRouterSpec
+      attr_accessor virtual_router_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVirtualRouterOutput
+      attr_accessor virtual_router: Types::VirtualRouterData
+      SENSITIVE: []
+    end
+
+    class UpdateVirtualServiceInput
+      attr_accessor client_token: ::String
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor spec: Types::VirtualServiceSpec
+      attr_accessor virtual_service_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVirtualServiceOutput
+      attr_accessor virtual_service: Types::VirtualServiceData
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayAccessLog
+      attr_accessor file: Types::VirtualGatewayFileAccessLog
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class File < VirtualGatewayAccessLog
+      end
+      class Unknown < VirtualGatewayAccessLog
+      end
+    end
+
+    class VirtualGatewayBackendDefaults
+      attr_accessor client_policy: Types::VirtualGatewayClientPolicy
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayClientPolicy
+      attr_accessor tls: Types::VirtualGatewayClientPolicyTls
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayClientPolicyTls
+      attr_accessor certificate: Types::VirtualGatewayClientTlsCertificate
+      attr_accessor enforce: bool
+      attr_accessor ports: ::Array[::Integer]
+      attr_accessor validation: Types::VirtualGatewayTlsValidationContext
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayClientTlsCertificate
+      attr_accessor file: Types::VirtualGatewayListenerTlsFileCertificate
+      attr_accessor sds: Types::VirtualGatewayListenerTlsSdsCertificate
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class File < VirtualGatewayClientTlsCertificate
+      end
+      class Sds < VirtualGatewayClientTlsCertificate
+      end
+      class Unknown < VirtualGatewayClientTlsCertificate
+      end
+    end
+
+    class VirtualGatewayConnectionPool
+      attr_accessor grpc: Types::VirtualGatewayGrpcConnectionPool
+      attr_accessor http: Types::VirtualGatewayHttpConnectionPool
+      attr_accessor http2: Types::VirtualGatewayHttp2ConnectionPool
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Grpc < VirtualGatewayConnectionPool
+      end
+      class Http < VirtualGatewayConnectionPool
+      end
+      class Http2 < VirtualGatewayConnectionPool
+      end
+      class Unknown < VirtualGatewayConnectionPool
+      end
+    end
+
+    class VirtualGatewayData
+      attr_accessor mesh_name: ::String
+      attr_accessor metadata: Types::ResourceMetadata
+      attr_accessor spec: Types::VirtualGatewaySpec
+      attr_accessor status: Types::VirtualGatewayStatus
+      attr_accessor virtual_gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayFileAccessLog
+      attr_accessor format: Types::LoggingFormat
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayGrpcConnectionPool
+      attr_accessor max_requests: ::Integer
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayHealthCheckPolicy
+      attr_accessor healthy_threshold: ::Integer
+      attr_accessor interval_millis: ::Integer
+      attr_accessor path: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("http" | "http2" | "grpc")
+      attr_accessor timeout_millis: ::Integer
+      attr_accessor unhealthy_threshold: ::Integer
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayHttp2ConnectionPool
+      attr_accessor max_requests: ::Integer
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayHttpConnectionPool
+      attr_accessor max_connections: ::Integer
+      attr_accessor max_pending_requests: ::Integer
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayListener
+      attr_accessor connection_pool: Types::VirtualGatewayConnectionPool
+      attr_accessor health_check: Types::VirtualGatewayHealthCheckPolicy
+      attr_accessor port_mapping: Types::VirtualGatewayPortMapping
+      attr_accessor tls: Types::VirtualGatewayListenerTls
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayListenerTls
+      attr_accessor certificate: Types::VirtualGatewayListenerTlsCertificate
+      attr_accessor mode: ("STRICT" | "PERMISSIVE" | "DISABLED")
+      attr_accessor validation: Types::VirtualGatewayListenerTlsValidationContext
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayListenerTlsAcmCertificate
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayListenerTlsCertificate
+      attr_accessor acm: Types::VirtualGatewayListenerTlsAcmCertificate
+      attr_accessor file: Types::VirtualGatewayListenerTlsFileCertificate
+      attr_accessor sds: Types::VirtualGatewayListenerTlsSdsCertificate
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Acm < VirtualGatewayListenerTlsCertificate
+      end
+      class File < VirtualGatewayListenerTlsCertificate
+      end
+      class Sds < VirtualGatewayListenerTlsCertificate
+      end
+      class Unknown < VirtualGatewayListenerTlsCertificate
+      end
+    end
+
+    class VirtualGatewayListenerTlsFileCertificate
+      attr_accessor certificate_chain: ::String
+      attr_accessor private_key: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayListenerTlsSdsCertificate
+      attr_accessor secret_name: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayListenerTlsValidationContext
+      attr_accessor subject_alternative_names: Types::SubjectAlternativeNames
+      attr_accessor trust: Types::VirtualGatewayListenerTlsValidationContextTrust
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayListenerTlsValidationContextTrust
+      attr_accessor file: Types::VirtualGatewayTlsValidationContextFileTrust
+      attr_accessor sds: Types::VirtualGatewayTlsValidationContextSdsTrust
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class File < VirtualGatewayListenerTlsValidationContextTrust
+      end
+      class Sds < VirtualGatewayListenerTlsValidationContextTrust
+      end
+      class Unknown < VirtualGatewayListenerTlsValidationContextTrust
+      end
+    end
+
+    class VirtualGatewayLogging
+      attr_accessor access_log: Types::VirtualGatewayAccessLog
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayPortMapping
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("http" | "http2" | "grpc")
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayRef
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor resource_owner: ::String
+      attr_accessor version: ::Integer
+      attr_accessor virtual_gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualGatewaySpec
+      attr_accessor backend_defaults: Types::VirtualGatewayBackendDefaults
+      attr_accessor listeners: ::Array[Types::VirtualGatewayListener]
+      attr_accessor logging: Types::VirtualGatewayLogging
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayStatus
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayTlsValidationContext
+      attr_accessor subject_alternative_names: Types::SubjectAlternativeNames
+      attr_accessor trust: Types::VirtualGatewayTlsValidationContextTrust
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayTlsValidationContextAcmTrust
+      attr_accessor certificate_authority_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayTlsValidationContextFileTrust
+      attr_accessor certificate_chain: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayTlsValidationContextSdsTrust
+      attr_accessor secret_name: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualGatewayTlsValidationContextTrust
+      attr_accessor acm: Types::VirtualGatewayTlsValidationContextAcmTrust
+      attr_accessor file: Types::VirtualGatewayTlsValidationContextFileTrust
+      attr_accessor sds: Types::VirtualGatewayTlsValidationContextSdsTrust
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Acm < VirtualGatewayTlsValidationContextTrust
+      end
+      class File < VirtualGatewayTlsValidationContextTrust
+      end
+      class Sds < VirtualGatewayTlsValidationContextTrust
+      end
+      class Unknown < VirtualGatewayTlsValidationContextTrust
+      end
+    end
+
+    class VirtualNodeConnectionPool
+      attr_accessor grpc: Types::VirtualNodeGrpcConnectionPool
+      attr_accessor http: Types::VirtualNodeHttpConnectionPool
+      attr_accessor http2: Types::VirtualNodeHttp2ConnectionPool
+      attr_accessor tcp: Types::VirtualNodeTcpConnectionPool
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Grpc < VirtualNodeConnectionPool
+      end
+      class Http < VirtualNodeConnectionPool
+      end
+      class Http2 < VirtualNodeConnectionPool
+      end
+      class Tcp < VirtualNodeConnectionPool
+      end
+      class Unknown < VirtualNodeConnectionPool
+      end
+    end
+
+    class VirtualNodeData
+      attr_accessor mesh_name: ::String
+      attr_accessor metadata: Types::ResourceMetadata
+      attr_accessor spec: Types::VirtualNodeSpec
+      attr_accessor status: Types::VirtualNodeStatus
+      attr_accessor virtual_node_name: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualNodeGrpcConnectionPool
+      attr_accessor max_requests: ::Integer
+      SENSITIVE: []
+    end
+
+    class VirtualNodeHttp2ConnectionPool
+      attr_accessor max_requests: ::Integer
+      SENSITIVE: []
+    end
+
+    class VirtualNodeHttpConnectionPool
+      attr_accessor max_connections: ::Integer
+      attr_accessor max_pending_requests: ::Integer
+      SENSITIVE: []
+    end
+
+    class VirtualNodeRef
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor resource_owner: ::String
+      attr_accessor version: ::Integer
+      attr_accessor virtual_node_name: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualNodeServiceProvider
+      attr_accessor virtual_node_name: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualNodeSpec
+      attr_accessor backend_defaults: Types::BackendDefaults
+      attr_accessor backends: ::Array[Types::Backend]
+      attr_accessor listeners: ::Array[Types::Listener]
+      attr_accessor logging: Types::Logging
+      attr_accessor service_discovery: Types::ServiceDiscovery
+      SENSITIVE: []
+    end
+
+    class VirtualNodeStatus
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class VirtualNodeTcpConnectionPool
+      attr_accessor max_connections: ::Integer
+      SENSITIVE: []
+    end
+
+    class VirtualRouterData
+      attr_accessor mesh_name: ::String
+      attr_accessor metadata: Types::ResourceMetadata
+      attr_accessor spec: Types::VirtualRouterSpec
+      attr_accessor status: Types::VirtualRouterStatus
+      attr_accessor virtual_router_name: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualRouterListener
+      attr_accessor port_mapping: Types::PortMapping
+      SENSITIVE: []
+    end
+
+    class VirtualRouterRef
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor resource_owner: ::String
+      attr_accessor version: ::Integer
+      attr_accessor virtual_router_name: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualRouterServiceProvider
+      attr_accessor virtual_router_name: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualRouterSpec
+      attr_accessor listeners: ::Array[Types::VirtualRouterListener]
+      SENSITIVE: []
+    end
+
+    class VirtualRouterStatus
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class VirtualServiceBackend
+      attr_accessor client_policy: Types::ClientPolicy
+      attr_accessor virtual_service_name: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualServiceData
+      attr_accessor mesh_name: ::String
+      attr_accessor metadata: Types::ResourceMetadata
+      attr_accessor spec: Types::VirtualServiceSpec
+      attr_accessor status: Types::VirtualServiceStatus
+      attr_accessor virtual_service_name: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualServiceProvider
+      attr_accessor virtual_node: Types::VirtualNodeServiceProvider
+      attr_accessor virtual_router: Types::VirtualRouterServiceProvider
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class VirtualNode < VirtualServiceProvider
+      end
+      class VirtualRouter < VirtualServiceProvider
+      end
+      class Unknown < VirtualServiceProvider
+      end
+    end
+
+    class VirtualServiceRef
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor mesh_name: ::String
+      attr_accessor mesh_owner: ::String
+      attr_accessor resource_owner: ::String
+      attr_accessor version: ::Integer
+      attr_accessor virtual_service_name: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualServiceSpec
+      attr_accessor provider: Types::VirtualServiceProvider
+      SENSITIVE: []
+    end
+
+    class VirtualServiceStatus
+      attr_accessor status: ("ACTIVE" | "INACTIVE" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class WeightedTarget
+      attr_accessor port: ::Integer
+      attr_accessor virtual_node: ::String
+      attr_accessor weight: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

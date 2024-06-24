@@ -1,0 +1,88 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ElasticLoadBalancingV2
+    module Waiters
+
+      class LoadBalancerAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?load_balancer_arns: Array[::String],
+                    ?names: Array[::String],
+                    ?marker: ::String,
+                    ?page_size: ::Integer
+                  ) -> Client::_DescribeLoadBalancersResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeLoadBalancersResponseSuccess
+      end
+
+      class LoadBalancerExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?load_balancer_arns: Array[::String],
+                    ?names: Array[::String],
+                    ?marker: ::String,
+                    ?page_size: ::Integer
+                  ) -> Client::_DescribeLoadBalancersResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeLoadBalancersResponseSuccess
+      end
+
+      class LoadBalancersDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?load_balancer_arns: Array[::String],
+                    ?names: Array[::String],
+                    ?marker: ::String,
+                    ?page_size: ::Integer
+                  ) -> Client::_DescribeLoadBalancersResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeLoadBalancersResponseSuccess
+      end
+
+      class TargetDeregistered
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    target_group_arn: ::String,
+                    ?targets: Array[
+                      {
+                        id: ::String,
+                        port: ::Integer?,
+                        availability_zone: ::String?
+                      },
+                    ],
+                    ?include: Array[("AnomalyDetection" | "All")]
+                  ) -> Client::_DescribeTargetHealthResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeTargetHealthResponseSuccess
+      end
+
+      class TargetInService
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    target_group_arn: ::String,
+                    ?targets: Array[
+                      {
+                        id: ::String,
+                        port: ::Integer?,
+                        availability_zone: ::String?
+                      },
+                    ],
+                    ?include: Array[("AnomalyDetection" | "All")]
+                  ) -> Client::_DescribeTargetHealthResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeTargetHealthResponseSuccess
+      end
+    end
+  end
+end

@@ -1485,7 +1485,10 @@ module Aws::AppMesh
     #   specify a path in the Envoy container's file system to write the
     #   files to disk.
     #
-    #        <note> <p>The Envoy process must have write permissions to the path that you specify here. Otherwise, Envoy fails to bootstrap properly.</p> </note>
+    #   <note markdown="1"> The Envoy process must have write permissions to the path that you
+    #   specify here. Otherwise, Envoy fails to bootstrap properly.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appmesh-2019-01-25/FileAccessLog AWS API Documentation
@@ -1788,7 +1791,7 @@ module Aws::AppMesh
     #   @return [Array<Types::GrpcGatewayRouteMetadata>]
     #
     # @!attribute [rw] port
-    #   The port number to match from the request.
+    #   The gateway route port to be matched on.
     #   @return [Integer]
     #
     # @!attribute [rw] service_name

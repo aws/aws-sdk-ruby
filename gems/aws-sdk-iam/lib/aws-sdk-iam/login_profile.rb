@@ -61,7 +61,7 @@ module Aws::IAM
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_login_profile(user_name: @user_name)
       end
       @data = resp.login_profile
@@ -178,7 +178,7 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -214,7 +214,7 @@ module Aws::IAM
     # @return [LoginProfile]
     def create(options = {})
       options = options.merge(user_name: @user_name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_login_profile(options)
       end
       LoginProfile.new(
@@ -231,7 +231,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(user_name: @user_name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_login_profile(options)
       end
       resp.data
@@ -272,7 +272,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def update(options = {})
       options = options.merge(user_name: @user_name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.update_login_profile(options)
       end
       resp.data

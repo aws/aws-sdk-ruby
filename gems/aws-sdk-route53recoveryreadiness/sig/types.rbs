@@ -1,0 +1,532 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Route53RecoveryReadiness
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CellOutput
+      attr_accessor cell_arn: ::String
+      attr_accessor cell_name: ::String
+      attr_accessor cells: ::Array[::String]
+      attr_accessor parent_readiness_scopes: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCellRequest
+      attr_accessor cell_name: ::String
+      attr_accessor cells: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCellResponse
+      attr_accessor cell_arn: ::String
+      attr_accessor cell_name: ::String
+      attr_accessor cells: ::Array[::String]
+      attr_accessor parent_readiness_scopes: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCrossAccountAuthorizationRequest
+      attr_accessor cross_account_authorization: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCrossAccountAuthorizationResponse
+      attr_accessor cross_account_authorization: ::String
+      SENSITIVE: []
+    end
+
+    class CreateReadinessCheckRequest
+      attr_accessor readiness_check_name: ::String
+      attr_accessor resource_set_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateReadinessCheckResponse
+      attr_accessor readiness_check_arn: ::String
+      attr_accessor readiness_check_name: ::String
+      attr_accessor resource_set: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRecoveryGroupRequest
+      attr_accessor cells: ::Array[::String]
+      attr_accessor recovery_group_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRecoveryGroupResponse
+      attr_accessor cells: ::Array[::String]
+      attr_accessor recovery_group_arn: ::String
+      attr_accessor recovery_group_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateResourceSetRequest
+      attr_accessor resource_set_name: ::String
+      attr_accessor resource_set_type: ::String
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateResourceSetResponse
+      attr_accessor resource_set_arn: ::String
+      attr_accessor resource_set_name: ::String
+      attr_accessor resource_set_type: ::String
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DNSTargetResource
+      attr_accessor domain_name: ::String
+      attr_accessor hosted_zone_arn: ::String
+      attr_accessor record_set_id: ::String
+      attr_accessor record_type: ::String
+      attr_accessor target_resource: Types::TargetResource
+      SENSITIVE: []
+    end
+
+    class DeleteCellRequest
+      attr_accessor cell_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCrossAccountAuthorizationRequest
+      attr_accessor cross_account_authorization: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCrossAccountAuthorizationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteReadinessCheckRequest
+      attr_accessor readiness_check_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRecoveryGroupRequest
+      attr_accessor recovery_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourceSetRequest
+      attr_accessor resource_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetArchitectureRecommendationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor recovery_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetArchitectureRecommendationsResponse
+      attr_accessor last_audit_timestamp: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor recommendations: ::Array[Types::Recommendation]
+      SENSITIVE: []
+    end
+
+    class GetCellReadinessSummaryRequest
+      attr_accessor cell_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCellReadinessSummaryResponse
+      attr_accessor next_token: ::String
+      attr_accessor readiness: ("READY" | "NOT_READY" | "UNKNOWN" | "NOT_AUTHORIZED")
+      attr_accessor readiness_checks: ::Array[Types::ReadinessCheckSummary]
+      SENSITIVE: []
+    end
+
+    class GetCellRequest
+      attr_accessor cell_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCellResponse
+      attr_accessor cell_arn: ::String
+      attr_accessor cell_name: ::String
+      attr_accessor cells: ::Array[::String]
+      attr_accessor parent_readiness_scopes: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetReadinessCheckRequest
+      attr_accessor readiness_check_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetReadinessCheckResourceStatusRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor readiness_check_name: ::String
+      attr_accessor resource_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetReadinessCheckResourceStatusResponse
+      attr_accessor next_token: ::String
+      attr_accessor readiness: ("READY" | "NOT_READY" | "UNKNOWN" | "NOT_AUTHORIZED")
+      attr_accessor rules: ::Array[Types::RuleResult]
+      SENSITIVE: []
+    end
+
+    class GetReadinessCheckResponse
+      attr_accessor readiness_check_arn: ::String
+      attr_accessor readiness_check_name: ::String
+      attr_accessor resource_set: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetReadinessCheckStatusRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor readiness_check_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetReadinessCheckStatusResponse
+      attr_accessor messages: ::Array[Types::Message]
+      attr_accessor next_token: ::String
+      attr_accessor readiness: ("READY" | "NOT_READY" | "UNKNOWN" | "NOT_AUTHORIZED")
+      attr_accessor resources: ::Array[Types::ResourceResult]
+      SENSITIVE: []
+    end
+
+    class GetRecoveryGroupReadinessSummaryRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor recovery_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecoveryGroupReadinessSummaryResponse
+      attr_accessor next_token: ::String
+      attr_accessor readiness: ("READY" | "NOT_READY" | "UNKNOWN" | "NOT_AUTHORIZED")
+      attr_accessor readiness_checks: ::Array[Types::ReadinessCheckSummary]
+      SENSITIVE: []
+    end
+
+    class GetRecoveryGroupRequest
+      attr_accessor recovery_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecoveryGroupResponse
+      attr_accessor cells: ::Array[::String]
+      attr_accessor recovery_group_arn: ::String
+      attr_accessor recovery_group_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetResourceSetRequest
+      attr_accessor resource_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceSetResponse
+      attr_accessor resource_set_arn: ::String
+      attr_accessor resource_set_name: ::String
+      attr_accessor resource_set_type: ::String
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListCellsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCellsResponse
+      attr_accessor cells: ::Array[Types::CellOutput]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCrossAccountAuthorizationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCrossAccountAuthorizationsResponse
+      attr_accessor cross_account_authorizations: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReadinessChecksRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReadinessChecksResponse
+      attr_accessor next_token: ::String
+      attr_accessor readiness_checks: ::Array[Types::ReadinessCheckOutput]
+      SENSITIVE: []
+    end
+
+    class ListRecoveryGroupsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecoveryGroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor recovery_groups: ::Array[Types::RecoveryGroupOutput]
+      SENSITIVE: []
+    end
+
+    class ListResourceSetsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceSetsResponse
+      attr_accessor next_token: ::String
+      attr_accessor resource_sets: ::Array[Types::ResourceSetOutput]
+      SENSITIVE: []
+    end
+
+    class ListRulesOutput
+      attr_accessor resource_type: ::String
+      attr_accessor rule_description: ::String
+      attr_accessor rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListRulesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ListRulesResponse
+      attr_accessor next_token: ::String
+      attr_accessor rules: ::Array[Types::ListRulesOutput]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourcesRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourcesResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Message
+      attr_accessor message_text: ::String
+      SENSITIVE: []
+    end
+
+    class NLBResource
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class R53ResourceRecord
+      attr_accessor domain_name: ::String
+      attr_accessor record_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReadinessCheckOutput
+      attr_accessor readiness_check_arn: ::String
+      attr_accessor readiness_check_name: ::String
+      attr_accessor resource_set: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ReadinessCheckSummary
+      attr_accessor readiness: ("READY" | "NOT_READY" | "UNKNOWN" | "NOT_AUTHORIZED")
+      attr_accessor readiness_check_name: ::String
+      SENSITIVE: []
+    end
+
+    class Recommendation
+      attr_accessor recommendation_text: ::String
+      SENSITIVE: []
+    end
+
+    class RecoveryGroupOutput
+      attr_accessor cells: ::Array[::String]
+      attr_accessor recovery_group_arn: ::String
+      attr_accessor recovery_group_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor component_id: ::String
+      attr_accessor dns_target_resource: Types::DNSTargetResource
+      attr_accessor readiness_scopes: ::Array[::String]
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceResult
+      attr_accessor component_id: ::String
+      attr_accessor last_checked_timestamp: ::Time
+      attr_accessor readiness: ("READY" | "NOT_READY" | "UNKNOWN" | "NOT_AUTHORIZED")
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceSetOutput
+      attr_accessor resource_set_arn: ::String
+      attr_accessor resource_set_name: ::String
+      attr_accessor resource_set_type: ::String
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RuleResult
+      attr_accessor last_checked_timestamp: ::Time
+      attr_accessor messages: ::Array[Types::Message]
+      attr_accessor readiness: ("READY" | "NOT_READY" | "UNKNOWN" | "NOT_AUTHORIZED")
+      attr_accessor rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TargetResource
+      attr_accessor nlb_resource: Types::NLBResource
+      attr_accessor r53_resource: Types::R53ResourceRecord
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateCellRequest
+      attr_accessor cell_name: ::String
+      attr_accessor cells: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateCellResponse
+      attr_accessor cell_arn: ::String
+      attr_accessor cell_name: ::String
+      attr_accessor cells: ::Array[::String]
+      attr_accessor parent_readiness_scopes: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateReadinessCheckRequest
+      attr_accessor readiness_check_name: ::String
+      attr_accessor resource_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateReadinessCheckResponse
+      attr_accessor readiness_check_arn: ::String
+      attr_accessor readiness_check_name: ::String
+      attr_accessor resource_set: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateRecoveryGroupRequest
+      attr_accessor cells: ::Array[::String]
+      attr_accessor recovery_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRecoveryGroupResponse
+      attr_accessor cells: ::Array[::String]
+      attr_accessor recovery_group_arn: ::String
+      attr_accessor recovery_group_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateResourceSetRequest
+      attr_accessor resource_set_name: ::String
+      attr_accessor resource_set_type: ::String
+      attr_accessor resources: ::Array[Types::Resource]
+      SENSITIVE: []
+    end
+
+    class UpdateResourceSetResponse
+      attr_accessor resource_set_arn: ::String
+      attr_accessor resource_set_name: ::String
+      attr_accessor resource_set_type: ::String
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

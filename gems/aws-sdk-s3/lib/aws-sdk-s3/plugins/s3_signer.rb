@@ -4,6 +4,11 @@ require 'aws-sigv4'
 
 module Aws
   module S3
+    # @api private
+    def self.bucket_region_cache
+      @bucket_region_cache ||= BucketRegionCache.new
+    end
+
     module Plugins
       # This plugin used to have a V4 signer but it was removed in favor of
       # generic Sign plugin that uses endpoint auth scheme.
@@ -51,7 +56,7 @@ module Aws
           private
 
           def check_for_cached_region(context, bucket)
-            cached_region = S3::BUCKET_REGIONS[bucket]
+            cached_region = Aws::S3.bucket_region_cache[bucket]
             if cached_region &&
                cached_region != context.config.region &&
                !S3Signer.custom_endpoint?(context)
@@ -97,7 +102,7 @@ module Aws
           end
 
           def update_bucket_cache(context, actual_region)
-            S3::BUCKET_REGIONS[context.params[:bucket]] = actual_region
+            Aws::S3.bucket_region_cache[context.params[:bucket]] = actual_region
           end
 
           def fips_region?(resp)

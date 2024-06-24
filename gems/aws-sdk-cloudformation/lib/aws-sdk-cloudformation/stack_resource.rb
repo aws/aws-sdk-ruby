@@ -57,7 +57,7 @@ module Aws::CloudFormation
     end
 
     # Type of resource. For more information, go to [Amazon Web Services
-    # Resource Types Reference][1] in the CloudFormation User Guide.
+    # Resource Types Reference][1] in the *CloudFormation User Guide*.
     #
     #
     #
@@ -92,8 +92,8 @@ module Aws::CloudFormation
     end
 
     # The content of the `Metadata` attribute declared for the resource. For
-    # more information, see [Metadata Attribute][1] in the CloudFormation
-    # User Guide.
+    # more information, see [Metadata Attribute][1] in the *CloudFormation
+    # User Guide*.
     #
     #
     #
@@ -139,7 +139,7 @@ module Aws::CloudFormation
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_stack_resource(
         logical_resource_id: @logical_id,
         stack_name: @stack_name
@@ -259,7 +259,7 @@ module Aws::CloudFormation
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end

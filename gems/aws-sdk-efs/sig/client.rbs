@@ -1,0 +1,507 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EFS
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAccessPointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AccessPointDescription]
+        def client_token: () -> ::String
+        def name: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+        def access_point_id: () -> ::String
+        def access_point_arn: () -> ::String
+        def file_system_id: () -> ::String
+        def posix_user: () -> Types::PosixUser
+        def root_directory: () -> Types::RootDirectory
+        def owner_id: () -> ::String
+        def life_cycle_state: () -> ("creating" | "available" | "updating" | "deleting" | "deleted" | "error")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#create_access_point-instance_method
+      def create_access_point: (
+                                 client_token: ::String,
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ],
+                                 file_system_id: ::String,
+                                 ?posix_user: {
+                                   uid: ::Integer,
+                                   gid: ::Integer,
+                                   secondary_gids: Array[::Integer]?
+                                 },
+                                 ?root_directory: {
+                                   path: ::String?,
+                                   creation_info: {
+                                     owner_uid: ::Integer,
+                                     owner_gid: ::Integer,
+                                     permissions: ::String
+                                   }?
+                                 }
+                               ) -> _CreateAccessPointResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessPointResponseSuccess
+
+      interface _CreateFileSystemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FileSystemDescription]
+        def owner_id: () -> ::String
+        def creation_token: () -> ::String
+        def file_system_id: () -> ::String
+        def file_system_arn: () -> ::String
+        def creation_time: () -> ::Time
+        def life_cycle_state: () -> ("creating" | "available" | "updating" | "deleting" | "deleted" | "error")
+        def name: () -> ::String
+        def number_of_mount_targets: () -> ::Integer
+        def size_in_bytes: () -> Types::FileSystemSize
+        def performance_mode: () -> ("generalPurpose" | "maxIO")
+        def encrypted: () -> bool
+        def kms_key_id: () -> ::String
+        def throughput_mode: () -> ("bursting" | "provisioned" | "elastic")
+        def provisioned_throughput_in_mibps: () -> ::Float
+        def availability_zone_name: () -> ::String
+        def availability_zone_id: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+        def file_system_protection: () -> Types::FileSystemProtectionDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#create_file_system-instance_method
+      def create_file_system: (
+                                creation_token: ::String,
+                                ?performance_mode: ("generalPurpose" | "maxIO"),
+                                ?encrypted: bool,
+                                ?kms_key_id: ::String,
+                                ?throughput_mode: ("bursting" | "provisioned" | "elastic"),
+                                ?provisioned_throughput_in_mibps: ::Float,
+                                ?availability_zone_name: ::String,
+                                ?backup: bool,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ]
+                              ) -> _CreateFileSystemResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFileSystemResponseSuccess
+
+      interface _CreateMountTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MountTargetDescription]
+        def owner_id: () -> ::String
+        def mount_target_id: () -> ::String
+        def file_system_id: () -> ::String
+        def subnet_id: () -> ::String
+        def life_cycle_state: () -> ("creating" | "available" | "updating" | "deleting" | "deleted" | "error")
+        def ip_address: () -> ::String
+        def network_interface_id: () -> ::String
+        def availability_zone_id: () -> ::String
+        def availability_zone_name: () -> ::String
+        def vpc_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#create_mount_target-instance_method
+      def create_mount_target: (
+                                 file_system_id: ::String,
+                                 subnet_id: ::String,
+                                 ?ip_address: ::String,
+                                 ?security_groups: Array[::String]
+                               ) -> _CreateMountTargetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMountTargetResponseSuccess
+
+      interface _CreateReplicationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReplicationConfigurationDescription]
+        def source_file_system_id: () -> ::String
+        def source_file_system_region: () -> ::String
+        def source_file_system_arn: () -> ::String
+        def original_source_file_system_arn: () -> ::String
+        def creation_time: () -> ::Time
+        def destinations: () -> ::Array[Types::Destination]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#create_replication_configuration-instance_method
+      def create_replication_configuration: (
+                                              source_file_system_id: ::String,
+                                              destinations: Array[
+                                                {
+                                                  region: ::String?,
+                                                  availability_zone_name: ::String?,
+                                                  kms_key_id: ::String?,
+                                                  file_system_id: ::String?
+                                                },
+                                              ]
+                                            ) -> _CreateReplicationConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReplicationConfigurationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#create_tags-instance_method
+      def create_tags: (
+                         file_system_id: ::String,
+                         tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#delete_access_point-instance_method
+      def delete_access_point: (
+                                 access_point_id: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#delete_file_system-instance_method
+      def delete_file_system: (
+                                file_system_id: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#delete_file_system_policy-instance_method
+      def delete_file_system_policy: (
+                                       file_system_id: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#delete_mount_target-instance_method
+      def delete_mount_target: (
+                                 mount_target_id: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#delete_replication_configuration-instance_method
+      def delete_replication_configuration: (
+                                              source_file_system_id: ::String
+                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#delete_tags-instance_method
+      def delete_tags: (
+                         file_system_id: ::String,
+                         tag_keys: Array[::String]
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeAccessPointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccessPointsResponse]
+        def access_points: () -> ::Array[Types::AccessPointDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#describe_access_points-instance_method
+      def describe_access_points: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    ?access_point_id: ::String,
+                                    ?file_system_id: ::String
+                                  ) -> _DescribeAccessPointsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccessPointsResponseSuccess
+
+      interface _DescribeAccountPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountPreferencesResponse]
+        def resource_id_preference: () -> Types::ResourceIdPreference
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#describe_account_preferences-instance_method
+      def describe_account_preferences: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _DescribeAccountPreferencesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountPreferencesResponseSuccess
+
+      interface _DescribeBackupPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BackupPolicyDescription]
+        def backup_policy: () -> Types::BackupPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#describe_backup_policy-instance_method
+      def describe_backup_policy: (
+                                    file_system_id: ::String
+                                  ) -> _DescribeBackupPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBackupPolicyResponseSuccess
+
+      interface _DescribeFileSystemPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FileSystemPolicyDescription]
+        def file_system_id: () -> ::String
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#describe_file_system_policy-instance_method
+      def describe_file_system_policy: (
+                                         file_system_id: ::String
+                                       ) -> _DescribeFileSystemPolicyResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFileSystemPolicyResponseSuccess
+
+      interface _DescribeFileSystemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFileSystemsResponse]
+        def marker: () -> ::String
+        def file_systems: () -> ::Array[Types::FileSystemDescription]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#describe_file_systems-instance_method
+      def describe_file_systems: (
+                                   ?max_items: ::Integer,
+                                   ?marker: ::String,
+                                   ?creation_token: ::String,
+                                   ?file_system_id: ::String
+                                 ) -> _DescribeFileSystemsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFileSystemsResponseSuccess
+
+      interface _DescribeLifecycleConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::LifecycleConfigurationDescription]
+        def lifecycle_policies: () -> ::Array[Types::LifecyclePolicy]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#describe_lifecycle_configuration-instance_method
+      def describe_lifecycle_configuration: (
+                                              file_system_id: ::String
+                                            ) -> _DescribeLifecycleConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLifecycleConfigurationResponseSuccess
+
+      interface _DescribeMountTargetSecurityGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMountTargetSecurityGroupsResponse]
+        def security_groups: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#describe_mount_target_security_groups-instance_method
+      def describe_mount_target_security_groups: (
+                                                   mount_target_id: ::String
+                                                 ) -> _DescribeMountTargetSecurityGroupsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMountTargetSecurityGroupsResponseSuccess
+
+      interface _DescribeMountTargetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMountTargetsResponse]
+        def marker: () -> ::String
+        def mount_targets: () -> ::Array[Types::MountTargetDescription]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#describe_mount_targets-instance_method
+      def describe_mount_targets: (
+                                    ?max_items: ::Integer,
+                                    ?marker: ::String,
+                                    ?file_system_id: ::String,
+                                    ?mount_target_id: ::String,
+                                    ?access_point_id: ::String
+                                  ) -> _DescribeMountTargetsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMountTargetsResponseSuccess
+
+      interface _DescribeReplicationConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReplicationConfigurationsResponse]
+        def replications: () -> ::Array[Types::ReplicationConfigurationDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#describe_replication_configurations-instance_method
+      def describe_replication_configurations: (
+                                                 ?file_system_id: ::String,
+                                                 ?next_token: ::String,
+                                                 ?max_results: ::Integer
+                                               ) -> _DescribeReplicationConfigurationsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicationConfigurationsResponseSuccess
+
+      interface _DescribeTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTagsResponse]
+        def marker: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+        def next_marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#describe_tags-instance_method
+      def describe_tags: (
+                           ?max_items: ::Integer,
+                           ?marker: ::String,
+                           file_system_id: ::String
+                         ) -> _DescribeTagsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_id: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#modify_mount_target_security_groups-instance_method
+      def modify_mount_target_security_groups: (
+                                                 mount_target_id: ::String,
+                                                 ?security_groups: Array[::String]
+                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _PutAccountPreferencesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountPreferencesResponse]
+        def resource_id_preference: () -> Types::ResourceIdPreference
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#put_account_preferences-instance_method
+      def put_account_preferences: (
+                                     resource_id_type: ("LONG_ID" | "SHORT_ID")
+                                   ) -> _PutAccountPreferencesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountPreferencesResponseSuccess
+
+      interface _PutBackupPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BackupPolicyDescription]
+        def backup_policy: () -> Types::BackupPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#put_backup_policy-instance_method
+      def put_backup_policy: (
+                               file_system_id: ::String,
+                               backup_policy: {
+                                 status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING")
+                               }
+                             ) -> _PutBackupPolicyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutBackupPolicyResponseSuccess
+
+      interface _PutFileSystemPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FileSystemPolicyDescription]
+        def file_system_id: () -> ::String
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#put_file_system_policy-instance_method
+      def put_file_system_policy: (
+                                    file_system_id: ::String,
+                                    policy: ::String,
+                                    ?bypass_policy_lockout_safety_check: bool
+                                  ) -> _PutFileSystemPolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFileSystemPolicyResponseSuccess
+
+      interface _PutLifecycleConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::LifecycleConfigurationDescription]
+        def lifecycle_policies: () -> ::Array[Types::LifecyclePolicy]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#put_lifecycle_configuration-instance_method
+      def put_lifecycle_configuration: (
+                                         file_system_id: ::String,
+                                         lifecycle_policies: Array[
+                                           {
+                                             transition_to_ia: ("AFTER_7_DAYS" | "AFTER_14_DAYS" | "AFTER_30_DAYS" | "AFTER_60_DAYS" | "AFTER_90_DAYS" | "AFTER_1_DAY" | "AFTER_180_DAYS" | "AFTER_270_DAYS" | "AFTER_365_DAYS")?,
+                                             transition_to_primary_storage_class: ("AFTER_1_ACCESS")?,
+                                             transition_to_archive: ("AFTER_1_DAY" | "AFTER_7_DAYS" | "AFTER_14_DAYS" | "AFTER_30_DAYS" | "AFTER_60_DAYS" | "AFTER_90_DAYS" | "AFTER_180_DAYS" | "AFTER_270_DAYS" | "AFTER_365_DAYS")?
+                                           },
+                                         ]
+                                       ) -> _PutLifecycleConfigurationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLifecycleConfigurationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_id: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_id: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateFileSystemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FileSystemDescription]
+        def owner_id: () -> ::String
+        def creation_token: () -> ::String
+        def file_system_id: () -> ::String
+        def file_system_arn: () -> ::String
+        def creation_time: () -> ::Time
+        def life_cycle_state: () -> ("creating" | "available" | "updating" | "deleting" | "deleted" | "error")
+        def name: () -> ::String
+        def number_of_mount_targets: () -> ::Integer
+        def size_in_bytes: () -> Types::FileSystemSize
+        def performance_mode: () -> ("generalPurpose" | "maxIO")
+        def encrypted: () -> bool
+        def kms_key_id: () -> ::String
+        def throughput_mode: () -> ("bursting" | "provisioned" | "elastic")
+        def provisioned_throughput_in_mibps: () -> ::Float
+        def availability_zone_name: () -> ::String
+        def availability_zone_id: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+        def file_system_protection: () -> Types::FileSystemProtectionDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#update_file_system-instance_method
+      def update_file_system: (
+                                file_system_id: ::String,
+                                ?throughput_mode: ("bursting" | "provisioned" | "elastic"),
+                                ?provisioned_throughput_in_mibps: ::Float
+                              ) -> _UpdateFileSystemResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFileSystemResponseSuccess
+
+      interface _UpdateFileSystemProtectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FileSystemProtectionDescription]
+        def replication_overwrite_protection: () -> ("ENABLED" | "DISABLED" | "REPLICATING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EFS/Client.html#update_file_system_protection-instance_method
+      def update_file_system_protection: (
+                                           file_system_id: ::String,
+                                           ?replication_overwrite_protection: ("ENABLED" | "DISABLED" | "REPLICATING")
+                                         ) -> _UpdateFileSystemProtectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFileSystemProtectionResponseSuccess
+    end
+  end
+end
+

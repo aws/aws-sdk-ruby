@@ -5,12 +5,14 @@
     "endpointPrefix":"email",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
+    "protocols":["rest-json"],
     "serviceAbbreviation":"Amazon SES V2",
     "serviceFullName":"Amazon Simple Email Service",
     "serviceId":"SESv2",
     "signatureVersion":"v4",
     "signingName":"ses",
-    "uid":"sesv2-2019-09-27"
+    "uid":"sesv2-2019-09-27",
+    "auth":["aws.auth#sigv4"]
   },
   "operations":{
     "BatchGetMetricData":{
@@ -700,8 +702,8 @@
     "ListContacts":{
       "name":"ListContacts",
       "http":{
-        "method":"GET",
-        "requestUri":"/v2/email/contact-lists/{ContactListName}/contacts"
+        "method":"POST",
+        "requestUri":"/v2/email/contact-lists/{ContactListName}/contacts/list"
       },
       "input":{"shape":"ListContactsRequest"},
       "output":{"shape":"ListContactsResponse"},
@@ -807,8 +809,8 @@
     "ListImportJobs":{
       "name":"ListImportJobs",
       "http":{
-        "method":"GET",
-        "requestUri":"/v2/email/import-jobs"
+        "method":"POST",
+        "requestUri":"/v2/email/import-jobs/list"
       },
       "input":{"shape":"ListImportJobsRequest"},
       "output":{"shape":"ListImportJobsResponse"},
@@ -1372,6 +1374,7 @@
       "min":1,
       "sensitive":true
     },
+    "AdminEmail":{"type":"string"},
     "AlreadyExistsException":{
       "type":"structure",
       "members":{
@@ -1492,7 +1495,8 @@
       "members":{
         "Destination":{"shape":"Destination"},
         "ReplacementTags":{"shape":"MessageTagList"},
-        "ReplacementEmailContent":{"shape":"ReplacementEmailContent"}
+        "ReplacementEmailContent":{"shape":"ReplacementEmailContent"},
+        "ReplacementHeaders":{"shape":"MessageHeaderList"}
       }
     },
     "BulkEmailEntryList":{
@@ -2410,6 +2414,13 @@
       "type":"list",
       "member":{"shape":"Esp"}
     },
+    "EventBridgeDestination":{
+      "type":"structure",
+      "required":["EventBusArn"],
+      "members":{
+        "EventBusArn":{"shape":"AmazonResourceName"}
+      }
+    },
     "EventDestination":{
       "type":"structure",
       "required":[
@@ -2423,6 +2434,7 @@
         "KinesisFirehoseDestination":{"shape":"KinesisFirehoseDestination"},
         "CloudWatchDestination":{"shape":"CloudWatchDestination"},
         "SnsDestination":{"shape":"SnsDestination"},
+        "EventBridgeDestination":{"shape":"EventBridgeDestination"},
         "PinpointDestination":{"shape":"PinpointDestination"}
       }
     },
@@ -2434,6 +2446,7 @@
         "KinesisFirehoseDestination":{"shape":"KinesisFirehoseDestination"},
         "CloudWatchDestination":{"shape":"CloudWatchDestination"},
         "SnsDestination":{"shape":"SnsDestination"},
+        "EventBridgeDestination":{"shape":"EventBridgeDestination"},
         "PinpointDestination":{"shape":"PinpointDestination"}
       }
     },
@@ -2906,7 +2919,8 @@
         "Policies":{"shape":"PolicyMap"},
         "Tags":{"shape":"TagList"},
         "ConfigurationSetName":{"shape":"ConfigurationSetName"},
-        "VerificationStatus":{"shape":"VerificationStatus"}
+        "VerificationStatus":{"shape":"VerificationStatus"},
+        "VerificationInfo":{"shape":"VerificationInfo"}
       }
     },
     "GetEmailTemplateRequest":{
@@ -3269,16 +3283,8 @@
           "locationName":"ContactListName"
         },
         "Filter":{"shape":"ListContactsFilter"},
-        "PageSize":{
-          "shape":"MaxItems",
-          "location":"querystring",
-          "locationName":"PageSize"
-        },
-        "NextToken":{
-          "shape":"NextToken",
-          "location":"querystring",
-          "locationName":"NextToken"
-        }
+        "PageSize":{"shape":"MaxItems"},
+        "NextToken":{"shape":"NextToken"}
       }
     },
     "ListContactsResponse":{
@@ -3462,16 +3468,8 @@
       "type":"structure",
       "members":{
         "ImportDestinationType":{"shape":"ImportDestinationType"},
-        "NextToken":{
-          "shape":"NextToken",
-          "location":"querystring",
-          "locationName":"NextToken"
-        },
-        "PageSize":{
-          "shape":"MaxItems",
-          "location":"querystring",
-          "locationName":"PageSize"
-        }
+        "NextToken":{"shape":"NextToken"},
+        "PageSize":{"shape":"MaxItems"}
       }
     },
     "ListImportJobsResponse":{
@@ -3640,11 +3638,41 @@
       ],
       "members":{
         "Subject":{"shape":"Content"},
-        "Body":{"shape":"Body"}
+        "Body":{"shape":"Body"},
+        "Headers":{"shape":"MessageHeaderList"}
       }
     },
     "MessageContent":{"type":"string"},
     "MessageData":{"type":"string"},
+    "MessageHeader":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Value"
+      ],
+      "members":{
+        "Name":{"shape":"MessageHeaderName"},
+        "Value":{"shape":"MessageHeaderValue"}
+      }
+    },
+    "MessageHeaderList":{
+      "type":"list",
+      "member":{"shape":"MessageHeader"},
+      "max":15,
+      "min":0
+    },
+    "MessageHeaderName":{
+      "type":"string",
+      "max":126,
+      "min":1,
+      "pattern":"^[!-9;-@A-~]+$"
+    },
+    "MessageHeaderValue":{
+      "type":"string",
+      "max":870,
+      "min":1,
+      "pattern":"[ -~]*"
+    },
     "MessageInsightsDataSource":{
       "type":"structure",
       "required":[
@@ -3829,6 +3857,7 @@
       "min":1
     },
     "PoolName":{"type":"string"},
+    "PrimaryNameServer":{"type":"string"},
     "PrivateKey":{
       "type":"string",
       "max":20480,
@@ -4291,6 +4320,14 @@
       "type":"string",
       "pattern":"^s3:\\/\\/([^\\/]+)\\/(.*?([^\\/]+)\\/?)$"
     },
+    "SOARecord":{
+      "type":"structure",
+      "members":{
+        "PrimaryNameServer":{"shape":"PrimaryNameServer"},
+        "AdminEmail":{"shape":"AdminEmail"},
+        "SerialNumber":{"shape":"SerialNumber"}
+      }
+    },
     "ScalingMode":{
       "type":"string",
       "enum":[
@@ -4392,6 +4429,7 @@
     },
     "SendingPoolName":{"type":"string"},
     "SentLast24Hours":{"type":"double"},
+    "SerialNumber":{"type":"long"},
     "SnsDestination":{
       "type":"structure",
       "required":["TopicArn"],
@@ -4525,7 +4563,8 @@
       "members":{
         "TemplateName":{"shape":"EmailTemplateName"},
         "TemplateArn":{"shape":"AmazonResourceName"},
-        "TemplateData":{"shape":"EmailTemplateData"}
+        "TemplateData":{"shape":"EmailTemplateData"},
+        "Headers":{"shape":"MessageHeaderList"}
       }
     },
     "TemplateContent":{"type":"string"},
@@ -4809,6 +4848,25 @@
       "members":{
         "DashboardOptions":{"shape":"DashboardOptions"},
         "GuardianOptions":{"shape":"GuardianOptions"}
+      }
+    },
+    "VerificationError":{
+      "type":"string",
+      "enum":[
+        "SERVICE_ERROR",
+        "DNS_SERVER_ERROR",
+        "HOST_NOT_FOUND",
+        "TYPE_NOT_FOUND",
+        "INVALID_VALUE"
+      ]
+    },
+    "VerificationInfo":{
+      "type":"structure",
+      "members":{
+        "LastCheckedTimestamp":{"shape":"Timestamp"},
+        "LastSuccessTimestamp":{"shape":"Timestamp"},
+        "ErrorType":{"shape":"VerificationError"},
+        "SOARecord":{"shape":"SOARecord"}
       }
     },
     "VerificationStatus":{

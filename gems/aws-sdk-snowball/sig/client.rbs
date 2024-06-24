@@ -1,0 +1,702 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Snowball
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CancelClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelClusterResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#cancel_cluster-instance_method
+      def cancel_cluster: (
+                            cluster_id: ::String
+                          ) -> _CancelClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelClusterResponseSuccess
+
+      interface _CancelJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelJobResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#cancel_job-instance_method
+      def cancel_job: (
+                        job_id: ::String
+                      ) -> _CancelJobResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelJobResponseSuccess
+
+      interface _CreateAddressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAddressResult]
+        def address_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#create_address-instance_method
+      def create_address: (
+                            address: {
+                              address_id: ::String?,
+                              name: ::String?,
+                              company: ::String?,
+                              street_1: ::String?,
+                              street_2: ::String?,
+                              street_3: ::String?,
+                              city: ::String?,
+                              state_or_province: ::String?,
+                              prefecture_or_district: ::String?,
+                              landmark: ::String?,
+                              country: ::String?,
+                              postal_code: ::String?,
+                              phone_number: ::String?,
+                              is_restricted: bool?,
+                              type: ("CUST_PICKUP" | "AWS_SHIP")?
+                            }
+                          ) -> _CreateAddressResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAddressResponseSuccess
+
+      interface _CreateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterResult]
+        def cluster_id: () -> ::String
+        def job_list_entries: () -> ::Array[Types::JobListEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#create_cluster-instance_method
+      def create_cluster: (
+                            job_type: ("IMPORT" | "EXPORT" | "LOCAL_USE"),
+                            ?resources: {
+                              s3_resources: Array[
+                                {
+                                  bucket_arn: ::String?,
+                                  key_range: {
+                                    begin_marker: ::String?,
+                                    end_marker: ::String?
+                                  }?,
+                                  target_on_device_services: Array[
+                                    {
+                                      service_name: ("NFS_ON_DEVICE_SERVICE" | "S3_ON_DEVICE_SERVICE")?,
+                                      transfer_option: ("IMPORT" | "EXPORT" | "LOCAL_USE")?
+                                    },
+                                  ]?
+                                },
+                              ]?,
+                              lambda_resources: Array[
+                                {
+                                  lambda_arn: ::String?,
+                                  event_triggers: Array[
+                                    {
+                                      event_resource_arn: ::String?
+                                    },
+                                  ]?
+                                },
+                              ]?,
+                              ec2_ami_resources: Array[
+                                {
+                                  ami_id: ::String,
+                                  snowball_ami_id: ::String?
+                                },
+                              ]?
+                            },
+                            ?on_device_service_configuration: {
+                              nfs_on_device_service: {
+                                storage_limit: ::Integer?,
+                                storage_unit: ("TB")?
+                              }?,
+                              tgw_on_device_service: {
+                                storage_limit: ::Integer?,
+                                storage_unit: ("TB")?
+                              }?,
+                              eks_on_device_service: {
+                                kubernetes_version: ::String?,
+                                eks_anywhere_version: ::String?
+                              }?,
+                              s3_on_device_service: {
+                                storage_limit: ::Float?,
+                                storage_unit: ("TB")?,
+                                service_size: ::Integer?,
+                                fault_tolerance: ::Integer?
+                              }?
+                            },
+                            ?description: ::String,
+                            address_id: ::String,
+                            ?kms_key_arn: ::String,
+                            ?role_arn: ::String,
+                            snowball_type: ("STANDARD" | "EDGE" | "EDGE_C" | "EDGE_CG" | "EDGE_S" | "SNC1_HDD" | "SNC1_SSD" | "V3_5C" | "V3_5S" | "RACK_5U_C"),
+                            shipping_option: ("SECOND_DAY" | "NEXT_DAY" | "EXPRESS" | "STANDARD"),
+                            ?notification: {
+                              sns_topic_arn: ::String?,
+                              job_states_to_notify: Array[("New" | "PreparingAppliance" | "PreparingShipment" | "InTransitToCustomer" | "WithCustomer" | "InTransitToAWS" | "WithAWSSortingFacility" | "WithAWS" | "InProgress" | "Complete" | "Cancelled" | "Listing" | "Pending")]?,
+                              notify_all: bool?,
+                              device_pickup_sns_topic_arn: ::String?
+                            },
+                            ?forwarding_address_id: ::String,
+                            ?tax_documents: {
+                              ind: {
+                                gstin: ::String?
+                              }?
+                            },
+                            ?remote_management: ("INSTALLED_ONLY" | "INSTALLED_AUTOSTART" | "NOT_INSTALLED"),
+                            ?initial_cluster_size: ::Integer,
+                            ?force_create_jobs: bool,
+                            ?long_term_pricing_ids: Array[::String],
+                            ?snowball_capacity_preference: ("T50" | "T80" | "T100" | "T42" | "T98" | "T8" | "T14" | "T32" | "NoPreference" | "T240" | "T13")
+                          ) -> _CreateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
+
+      interface _CreateJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateJobResult]
+        def job_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#create_job-instance_method
+      def create_job: (
+                        ?job_type: ("IMPORT" | "EXPORT" | "LOCAL_USE"),
+                        ?resources: {
+                          s3_resources: Array[
+                            {
+                              bucket_arn: ::String?,
+                              key_range: {
+                                begin_marker: ::String?,
+                                end_marker: ::String?
+                              }?,
+                              target_on_device_services: Array[
+                                {
+                                  service_name: ("NFS_ON_DEVICE_SERVICE" | "S3_ON_DEVICE_SERVICE")?,
+                                  transfer_option: ("IMPORT" | "EXPORT" | "LOCAL_USE")?
+                                },
+                              ]?
+                            },
+                          ]?,
+                          lambda_resources: Array[
+                            {
+                              lambda_arn: ::String?,
+                              event_triggers: Array[
+                                {
+                                  event_resource_arn: ::String?
+                                },
+                              ]?
+                            },
+                          ]?,
+                          ec2_ami_resources: Array[
+                            {
+                              ami_id: ::String,
+                              snowball_ami_id: ::String?
+                            },
+                          ]?
+                        },
+                        ?on_device_service_configuration: {
+                          nfs_on_device_service: {
+                            storage_limit: ::Integer?,
+                            storage_unit: ("TB")?
+                          }?,
+                          tgw_on_device_service: {
+                            storage_limit: ::Integer?,
+                            storage_unit: ("TB")?
+                          }?,
+                          eks_on_device_service: {
+                            kubernetes_version: ::String?,
+                            eks_anywhere_version: ::String?
+                          }?,
+                          s3_on_device_service: {
+                            storage_limit: ::Float?,
+                            storage_unit: ("TB")?,
+                            service_size: ::Integer?,
+                            fault_tolerance: ::Integer?
+                          }?
+                        },
+                        ?description: ::String,
+                        ?address_id: ::String,
+                        ?kms_key_arn: ::String,
+                        ?role_arn: ::String,
+                        ?snowball_capacity_preference: ("T50" | "T80" | "T100" | "T42" | "T98" | "T8" | "T14" | "T32" | "NoPreference" | "T240" | "T13"),
+                        ?shipping_option: ("SECOND_DAY" | "NEXT_DAY" | "EXPRESS" | "STANDARD"),
+                        ?notification: {
+                          sns_topic_arn: ::String?,
+                          job_states_to_notify: Array[("New" | "PreparingAppliance" | "PreparingShipment" | "InTransitToCustomer" | "WithCustomer" | "InTransitToAWS" | "WithAWSSortingFacility" | "WithAWS" | "InProgress" | "Complete" | "Cancelled" | "Listing" | "Pending")]?,
+                          notify_all: bool?,
+                          device_pickup_sns_topic_arn: ::String?
+                        },
+                        ?cluster_id: ::String,
+                        ?snowball_type: ("STANDARD" | "EDGE" | "EDGE_C" | "EDGE_CG" | "EDGE_S" | "SNC1_HDD" | "SNC1_SSD" | "V3_5C" | "V3_5S" | "RACK_5U_C"),
+                        ?forwarding_address_id: ::String,
+                        ?tax_documents: {
+                          ind: {
+                            gstin: ::String?
+                          }?
+                        },
+                        ?device_configuration: {
+                          snowcone_device_configuration: {
+                            wireless_connection: {
+                              is_wifi_enabled: bool?
+                            }?
+                          }?
+                        },
+                        ?remote_management: ("INSTALLED_ONLY" | "INSTALLED_AUTOSTART" | "NOT_INSTALLED"),
+                        ?long_term_pricing_id: ::String,
+                        ?impact_level: ("IL2" | "IL4" | "IL5" | "IL6" | "IL99"),
+                        ?pickup_details: {
+                          name: ::String?,
+                          phone_number: ::String?,
+                          email: ::String?,
+                          identification_number: ::String?,
+                          identification_expiration_date: ::Time?,
+                          identification_issuing_org: ::String?,
+                          device_pickup_id: ::String?
+                        }
+                      ) -> _CreateJobResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobResponseSuccess
+
+      interface _CreateLongTermPricingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLongTermPricingResult]
+        def long_term_pricing_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#create_long_term_pricing-instance_method
+      def create_long_term_pricing: (
+                                      long_term_pricing_type: ("OneYear" | "ThreeYear" | "OneMonth"),
+                                      ?is_long_term_pricing_auto_renew: bool,
+                                      snowball_type: ("STANDARD" | "EDGE" | "EDGE_C" | "EDGE_CG" | "EDGE_S" | "SNC1_HDD" | "SNC1_SSD" | "V3_5C" | "V3_5S" | "RACK_5U_C")
+                                    ) -> _CreateLongTermPricingResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLongTermPricingResponseSuccess
+
+      interface _CreateReturnShippingLabelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReturnShippingLabelResult]
+        def status: () -> ("InProgress" | "TimedOut" | "Succeeded" | "Failed")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#create_return_shipping_label-instance_method
+      def create_return_shipping_label: (
+                                          job_id: ::String,
+                                          ?shipping_option: ("SECOND_DAY" | "NEXT_DAY" | "EXPRESS" | "STANDARD")
+                                        ) -> _CreateReturnShippingLabelResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReturnShippingLabelResponseSuccess
+
+      interface _DescribeAddressResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAddressResult]
+        def address: () -> Types::Address
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#describe_address-instance_method
+      def describe_address: (
+                              address_id: ::String
+                            ) -> _DescribeAddressResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAddressResponseSuccess
+
+      interface _DescribeAddressesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAddressesResult]
+        def addresses: () -> ::Array[Types::Address]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#describe_addresses-instance_method
+      def describe_addresses: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _DescribeAddressesResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAddressesResponseSuccess
+
+      interface _DescribeClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterResult]
+        def cluster_metadata: () -> Types::ClusterMetadata
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#describe_cluster-instance_method
+      def describe_cluster: (
+                              cluster_id: ::String
+                            ) -> _DescribeClusterResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterResponseSuccess
+
+      interface _DescribeJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeJobResult]
+        def job_metadata: () -> Types::JobMetadata
+        def sub_job_metadata: () -> ::Array[Types::JobMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#describe_job-instance_method
+      def describe_job: (
+                          job_id: ::String
+                        ) -> _DescribeJobResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobResponseSuccess
+
+      interface _DescribeReturnShippingLabelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReturnShippingLabelResult]
+        def status: () -> ("InProgress" | "TimedOut" | "Succeeded" | "Failed")
+        def expiration_date: () -> ::Time
+        def return_shipping_label_uri: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#describe_return_shipping_label-instance_method
+      def describe_return_shipping_label: (
+                                            job_id: ::String
+                                          ) -> _DescribeReturnShippingLabelResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReturnShippingLabelResponseSuccess
+
+      interface _GetJobManifestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetJobManifestResult]
+        def manifest_uri: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#get_job_manifest-instance_method
+      def get_job_manifest: (
+                              job_id: ::String
+                            ) -> _GetJobManifestResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobManifestResponseSuccess
+
+      interface _GetJobUnlockCodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetJobUnlockCodeResult]
+        def unlock_code: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#get_job_unlock_code-instance_method
+      def get_job_unlock_code: (
+                                 job_id: ::String
+                               ) -> _GetJobUnlockCodeResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobUnlockCodeResponseSuccess
+
+      interface _GetSnowballUsageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSnowballUsageResult]
+        def snowball_limit: () -> ::Integer
+        def snowballs_in_use: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#get_snowball_usage-instance_method
+      def get_snowball_usage: (
+                              ) -> _GetSnowballUsageResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSnowballUsageResponseSuccess
+
+      interface _GetSoftwareUpdatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSoftwareUpdatesResult]
+        def updates_uri: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#get_software_updates-instance_method
+      def get_software_updates: (
+                                  job_id: ::String
+                                ) -> _GetSoftwareUpdatesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSoftwareUpdatesResponseSuccess
+
+      interface _ListClusterJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClusterJobsResult]
+        def job_list_entries: () -> ::Array[Types::JobListEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#list_cluster_jobs-instance_method
+      def list_cluster_jobs: (
+                               cluster_id: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListClusterJobsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClusterJobsResponseSuccess
+
+      interface _ListClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClustersResult]
+        def cluster_list_entries: () -> ::Array[Types::ClusterListEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#list_clusters-instance_method
+      def list_clusters: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListClustersResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClustersResponseSuccess
+
+      interface _ListCompatibleImagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCompatibleImagesResult]
+        def compatible_images: () -> ::Array[Types::CompatibleImage]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#list_compatible_images-instance_method
+      def list_compatible_images: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListCompatibleImagesResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCompatibleImagesResponseSuccess
+
+      interface _ListJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsResult]
+        def job_list_entries: () -> ::Array[Types::JobListEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#list_jobs-instance_method
+      def list_jobs: (
+                       ?max_results: ::Integer,
+                       ?next_token: ::String
+                     ) -> _ListJobsResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobsResponseSuccess
+
+      interface _ListLongTermPricingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLongTermPricingResult]
+        def long_term_pricing_entries: () -> ::Array[Types::LongTermPricingListEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#list_long_term_pricing-instance_method
+      def list_long_term_pricing: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListLongTermPricingResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLongTermPricingResponseSuccess
+
+      interface _ListPickupLocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPickupLocationsResult]
+        def addresses: () -> ::Array[Types::Address]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#list_pickup_locations-instance_method
+      def list_pickup_locations: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListPickupLocationsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPickupLocationsResponseSuccess
+
+      interface _ListServiceVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServiceVersionsResult]
+        def service_versions: () -> ::Array[Types::ServiceVersion]
+        def service_name: () -> ("KUBERNETES" | "EKS_ANYWHERE")
+        def dependent_services: () -> ::Array[Types::DependentService]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#list_service_versions-instance_method
+      def list_service_versions: (
+                                   service_name: ("KUBERNETES" | "EKS_ANYWHERE"),
+                                   ?dependent_services: Array[
+                                     {
+                                       service_name: ("KUBERNETES" | "EKS_ANYWHERE")?,
+                                       service_version: {
+                                         version: ::String?
+                                       }?
+                                     },
+                                   ],
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListServiceVersionsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceVersionsResponseSuccess
+
+      interface _UpdateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateClusterResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#update_cluster-instance_method
+      def update_cluster: (
+                            cluster_id: ::String,
+                            ?role_arn: ::String,
+                            ?description: ::String,
+                            ?resources: {
+                              s3_resources: Array[
+                                {
+                                  bucket_arn: ::String?,
+                                  key_range: {
+                                    begin_marker: ::String?,
+                                    end_marker: ::String?
+                                  }?,
+                                  target_on_device_services: Array[
+                                    {
+                                      service_name: ("NFS_ON_DEVICE_SERVICE" | "S3_ON_DEVICE_SERVICE")?,
+                                      transfer_option: ("IMPORT" | "EXPORT" | "LOCAL_USE")?
+                                    },
+                                  ]?
+                                },
+                              ]?,
+                              lambda_resources: Array[
+                                {
+                                  lambda_arn: ::String?,
+                                  event_triggers: Array[
+                                    {
+                                      event_resource_arn: ::String?
+                                    },
+                                  ]?
+                                },
+                              ]?,
+                              ec2_ami_resources: Array[
+                                {
+                                  ami_id: ::String,
+                                  snowball_ami_id: ::String?
+                                },
+                              ]?
+                            },
+                            ?on_device_service_configuration: {
+                              nfs_on_device_service: {
+                                storage_limit: ::Integer?,
+                                storage_unit: ("TB")?
+                              }?,
+                              tgw_on_device_service: {
+                                storage_limit: ::Integer?,
+                                storage_unit: ("TB")?
+                              }?,
+                              eks_on_device_service: {
+                                kubernetes_version: ::String?,
+                                eks_anywhere_version: ::String?
+                              }?,
+                              s3_on_device_service: {
+                                storage_limit: ::Float?,
+                                storage_unit: ("TB")?,
+                                service_size: ::Integer?,
+                                fault_tolerance: ::Integer?
+                              }?
+                            },
+                            ?address_id: ::String,
+                            ?shipping_option: ("SECOND_DAY" | "NEXT_DAY" | "EXPRESS" | "STANDARD"),
+                            ?notification: {
+                              sns_topic_arn: ::String?,
+                              job_states_to_notify: Array[("New" | "PreparingAppliance" | "PreparingShipment" | "InTransitToCustomer" | "WithCustomer" | "InTransitToAWS" | "WithAWSSortingFacility" | "WithAWS" | "InProgress" | "Complete" | "Cancelled" | "Listing" | "Pending")]?,
+                              notify_all: bool?,
+                              device_pickup_sns_topic_arn: ::String?
+                            },
+                            ?forwarding_address_id: ::String
+                          ) -> _UpdateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClusterResponseSuccess
+
+      interface _UpdateJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateJobResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#update_job-instance_method
+      def update_job: (
+                        job_id: ::String,
+                        ?role_arn: ::String,
+                        ?notification: {
+                          sns_topic_arn: ::String?,
+                          job_states_to_notify: Array[("New" | "PreparingAppliance" | "PreparingShipment" | "InTransitToCustomer" | "WithCustomer" | "InTransitToAWS" | "WithAWSSortingFacility" | "WithAWS" | "InProgress" | "Complete" | "Cancelled" | "Listing" | "Pending")]?,
+                          notify_all: bool?,
+                          device_pickup_sns_topic_arn: ::String?
+                        },
+                        ?resources: {
+                          s3_resources: Array[
+                            {
+                              bucket_arn: ::String?,
+                              key_range: {
+                                begin_marker: ::String?,
+                                end_marker: ::String?
+                              }?,
+                              target_on_device_services: Array[
+                                {
+                                  service_name: ("NFS_ON_DEVICE_SERVICE" | "S3_ON_DEVICE_SERVICE")?,
+                                  transfer_option: ("IMPORT" | "EXPORT" | "LOCAL_USE")?
+                                },
+                              ]?
+                            },
+                          ]?,
+                          lambda_resources: Array[
+                            {
+                              lambda_arn: ::String?,
+                              event_triggers: Array[
+                                {
+                                  event_resource_arn: ::String?
+                                },
+                              ]?
+                            },
+                          ]?,
+                          ec2_ami_resources: Array[
+                            {
+                              ami_id: ::String,
+                              snowball_ami_id: ::String?
+                            },
+                          ]?
+                        },
+                        ?on_device_service_configuration: {
+                          nfs_on_device_service: {
+                            storage_limit: ::Integer?,
+                            storage_unit: ("TB")?
+                          }?,
+                          tgw_on_device_service: {
+                            storage_limit: ::Integer?,
+                            storage_unit: ("TB")?
+                          }?,
+                          eks_on_device_service: {
+                            kubernetes_version: ::String?,
+                            eks_anywhere_version: ::String?
+                          }?,
+                          s3_on_device_service: {
+                            storage_limit: ::Float?,
+                            storage_unit: ("TB")?,
+                            service_size: ::Integer?,
+                            fault_tolerance: ::Integer?
+                          }?
+                        },
+                        ?address_id: ::String,
+                        ?shipping_option: ("SECOND_DAY" | "NEXT_DAY" | "EXPRESS" | "STANDARD"),
+                        ?description: ::String,
+                        ?snowball_capacity_preference: ("T50" | "T80" | "T100" | "T42" | "T98" | "T8" | "T14" | "T32" | "NoPreference" | "T240" | "T13"),
+                        ?forwarding_address_id: ::String,
+                        ?pickup_details: {
+                          name: ::String?,
+                          phone_number: ::String?,
+                          email: ::String?,
+                          identification_number: ::String?,
+                          identification_expiration_date: ::Time?,
+                          identification_issuing_org: ::String?,
+                          device_pickup_id: ::String?
+                        }
+                      ) -> _UpdateJobResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateJobResponseSuccess
+
+      interface _UpdateJobShipmentStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateJobShipmentStateResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#update_job_shipment_state-instance_method
+      def update_job_shipment_state: (
+                                       job_id: ::String,
+                                       shipment_state: ("RECEIVED" | "RETURNED")
+                                     ) -> _UpdateJobShipmentStateResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateJobShipmentStateResponseSuccess
+
+      interface _UpdateLongTermPricingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLongTermPricingResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#update_long_term_pricing-instance_method
+      def update_long_term_pricing: (
+                                      long_term_pricing_id: ::String,
+                                      ?replacement_job: ::String,
+                                      ?is_long_term_pricing_auto_renew: bool
+                                    ) -> _UpdateLongTermPricingResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLongTermPricingResponseSuccess
+    end
+  end
+end
+

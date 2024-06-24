@@ -1,0 +1,103 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module States
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ActivityDoesNotExist < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ActivityLimitExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ActivityWorkerLimitExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ExecutionAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ExecutionDoesNotExist < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ExecutionLimitExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ExecutionNotRedrivable < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidArn < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidDefinition < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidExecutionInput < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidLoggingConfiguration < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidName < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidOutput < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidToken < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidTracingConfiguration < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MissingRequiredParameter < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_name: () -> ::String
+      end
+      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class StateMachineAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class StateMachineDeleting < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class StateMachineDoesNotExist < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class StateMachineLimitExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class StateMachineTypeNotSupported < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TaskDoesNotExist < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TaskTimedOut < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTags < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_name: () -> ::String
+      end
+      class ValidationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def reason: () -> ::String
+      end
+    end
+  end
+end

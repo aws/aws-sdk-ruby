@@ -1,0 +1,229 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudFormation
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html
+    class Stack
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#name-instance_method
+      def name: () -> String
+      alias stack_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#stack_id-instance_method
+      def stack_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#change_set_id-instance_method
+      def change_set_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#description-instance_method
+      def description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#parameters-instance_method
+      def parameters: () -> ::Array[Types::Parameter]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#creation_time-instance_method
+      def creation_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#deletion_time-instance_method
+      def deletion_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#last_updated_time-instance_method
+      def last_updated_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#rollback_configuration-instance_method
+      def rollback_configuration: () -> Types::RollbackConfiguration
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#stack_status-instance_method
+      def stack_status: () -> ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_FAILED" | "ROLLBACK_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_FAILED" | "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "REVIEW_IN_PROGRESS" | "IMPORT_IN_PROGRESS" | "IMPORT_COMPLETE" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#stack_status_reason-instance_method
+      def stack_status_reason: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#disable_rollback-instance_method
+      def disable_rollback: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#notification_arns-instance_method
+      def notification_arns: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#timeout_in_minutes-instance_method
+      def timeout_in_minutes: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#capabilities-instance_method
+      def capabilities: () -> ::Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#outputs-instance_method
+      def outputs: () -> ::Array[Types::Output]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#role_arn-instance_method
+      def role_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#tags-instance_method
+      def tags: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#enable_termination_protection-instance_method
+      def enable_termination_protection: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#parent_id-instance_method
+      def parent_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#root_id-instance_method
+      def root_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#drift_information-instance_method
+      def drift_information: () -> Types::StackDriftInformation
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#retain_except_on_create-instance_method
+      def retain_except_on_create: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#deletion_mode-instance_method
+      def deletion_mode: () -> ("STANDARD" | "FORCE_DELETE_STACK")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#detailed_status-instance_method
+      def detailed_status: () -> ("CONFIGURATION_COMPLETE" | "VALIDATION_FAILED")
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#data-instance_method
+      def data: () -> Types::Stack
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#exists?-instance_method
+      def exists?: (?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) -> bool
+                 | (?Hash[Symbol, untyped]) -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#wait_until_exists-instance_method
+      def wait_until_exists: (?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) ?{ (untyped waiter) -> void } -> Stack
+                           | (?Hash[Symbol, untyped]) ?{ (untyped waiter) -> void } -> Stack
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#cancel_update-instance_method
+      def cancel_update: (
+                           ?client_request_token: ::String
+                         ) -> ::Aws::EmptyStructure
+                       | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#create-instance_method
+      def create: (
+                    ?template_body: ::String,
+                    ?template_url: ::String,
+                    ?parameters: Array[
+                      {
+                        parameter_key: ::String?,
+                        parameter_value: ::String?,
+                        use_previous_value: bool?,
+                        resolved_value: ::String?
+                      },
+                    ],
+                    ?disable_rollback: bool,
+                    ?rollback_configuration: {
+                      rollback_triggers: Array[
+                        {
+                          arn: ::String,
+                          type: ::String
+                        },
+                      ]?,
+                      monitoring_time_in_minutes: ::Integer?
+                    },
+                    ?timeout_in_minutes: ::Integer,
+                    ?notification_arns: Array[::String],
+                    ?capabilities: Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")],
+                    ?resource_types: Array[::String],
+                    ?role_arn: ::String,
+                    ?on_failure: ("DO_NOTHING" | "ROLLBACK" | "DELETE"),
+                    ?stack_policy_body: ::String,
+                    ?stack_policy_url: ::String,
+                    ?tags: Array[
+                      {
+                        key: ::String,
+                        value: ::String
+                      },
+                    ],
+                    ?client_request_token: ::String,
+                    ?enable_termination_protection: bool,
+                    ?retain_except_on_create: bool
+                  ) -> Types::CreateStackOutput
+                | (?Hash[Symbol, untyped]) -> Types::CreateStackOutput
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#delete-instance_method
+      def delete: (
+                    ?retain_resources: Array[::String],
+                    ?role_arn: ::String,
+                    ?client_request_token: ::String,
+                    ?deletion_mode: ("STANDARD" | "FORCE_DELETE_STACK")
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#update-instance_method
+      def update: (
+                    ?template_body: ::String,
+                    ?template_url: ::String,
+                    ?use_previous_template: bool,
+                    ?stack_policy_during_update_body: ::String,
+                    ?stack_policy_during_update_url: ::String,
+                    ?parameters: Array[
+                      {
+                        parameter_key: ::String?,
+                        parameter_value: ::String?,
+                        use_previous_value: bool?,
+                        resolved_value: ::String?
+                      },
+                    ],
+                    ?capabilities: Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")],
+                    ?resource_types: Array[::String],
+                    ?role_arn: ::String,
+                    ?rollback_configuration: {
+                      rollback_triggers: Array[
+                        {
+                          arn: ::String,
+                          type: ::String
+                        },
+                      ]?,
+                      monitoring_time_in_minutes: ::Integer?
+                    },
+                    ?stack_policy_body: ::String,
+                    ?stack_policy_url: ::String,
+                    ?notification_arns: Array[::String],
+                    ?tags: Array[
+                      {
+                        key: ::String,
+                        value: ::String
+                      },
+                    ],
+                    ?disable_rollback: bool,
+                    ?client_request_token: ::String,
+                    ?retain_except_on_create: bool
+                  ) -> Types::UpdateStackOutput
+                | (?Hash[Symbol, untyped]) -> Types::UpdateStackOutput
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#events-instance_method
+      def events: (
+                  ) -> Event::Collection
+                | (?Hash[Symbol, untyped]) -> Event::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#resource-instance_method
+      def resource: (String logical_id) -> StackResource
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Stack.html#resource_summaries-instance_method
+      def resource_summaries: (
+                              ) -> StackResourceSummary::Collection
+                            | (?Hash[Symbol, untyped]) -> StackResourceSummary::Collection
+
+      class Collection < ::Aws::Resources::Collection[Stack]
+      end
+    end
+  end
+end

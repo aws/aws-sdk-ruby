@@ -926,6 +926,10 @@ module Aws::RDS
     #   instead automatically adjusts as needed.
     #   @return [Integer]
     #
+    # @!attribute [rw] rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #   @return [Types::RdsCustomClusterConfiguration]
+    #
     # @!attribute [rw] iops
     #   The Provisioned IOPS (I/O operations per second) value. This setting
     #   is only for non-Aurora Multi-AZ DB clusters.
@@ -934,6 +938,20 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   The storage type for the DB cluster.
     #   @return [String]
+    #
+    # @!attribute [rw] certificate_details
+    #   Returns the details of the DB instance’s server certificate.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
+    #   to encrypt a connection to a DB cluster][2] in the *Amazon Aurora
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #   @return [Types::CertificateDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ClusterPendingModifiedValues AWS API Documentation
     #
@@ -945,8 +963,10 @@ module Aws::RDS
       :engine_version,
       :backup_retention_period,
       :allocated_storage,
+      :rds_custom_cluster_configuration,
       :iops,
-      :storage_type)
+      :storage_type,
+      :certificate_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1103,6 +1123,25 @@ module Aws::RDS
       :connection_borrow_timeout,
       :session_pinning_filters,
       :init_query)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The additional attributes of `RecommendedAction` data type.
+    #
+    # @!attribute [rw] key
+    #   The key of `ContextAttribute`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of `ContextAttribute`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ContextAttribute AWS API Documentation
+    #
+    class ContextAttribute < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1757,6 +1796,30 @@ module Aws::RDS
     #   Tags to assign to the blue/green deployment.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] target_db_instance_class
+    #   Specify the DB instance class for the databases in the green
+    #   environment.
+    #
+    #   This parameter only applies to RDS DB instances, because DB
+    #   instances within an Aurora DB cluster can have multiple different
+    #   instance classes. If you're creating a blue/green deployment from
+    #   an Aurora DB cluster, don't specify this parameter. After the green
+    #   environment is created, you can individually modify the instance
+    #   classes of the DB instances within the green DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] upgrade_target_storage_config
+    #   Whether to upgrade the storage file system configuration on the
+    #   green database. This option migrates the green DB instance from the
+    #   older 32-bit file system to the preferred configuration. For more
+    #   information, see [Upgrading the storage file system for a DB
+    #   instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateBlueGreenDeploymentRequest AWS API Documentation
     #
     class CreateBlueGreenDeploymentRequest < Struct.new(
@@ -1765,7 +1828,9 @@ module Aws::RDS
       :target_engine_version,
       :target_db_parameter_group_name,
       :target_db_cluster_parameter_group_name,
-      :tags)
+      :tags,
+      :target_db_instance_class,
+      :upgrade_target_storage_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1799,8 +1864,16 @@ module Aws::RDS
     class CreateCustomDBEngineVersionFault < Aws::EmptyStructure; end
 
     # @!attribute [rw] engine
-    #   The database engine to use for your custom engine version (CEV). The
-    #   only supported value is `custom-oracle-ee`.
+    #   The database engine. RDS Custom for Oracle supports the following
+    #   values:
+    #
+    #   * `custom-oracle-ee`
+    #
+    #   * `custom-oracle-ee-cdb`
+    #
+    #   * `custom-oracle-se2`
+    #
+    #   * `custom-oracle-se2-cdb`
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -1909,11 +1982,17 @@ module Aws::RDS
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] source_custom_db_engine_version_identifier
-    #   Reserved for future use.
+    #   The ARN of a CEV to use as a source for creating a new CEV. You can
+    #   specify a different Amazon Machine Imagine (AMI) by using either
+    #   `Source` or `UseAwsProvidedLatestImage`. You can't specify a
+    #   different JSON manifest when you specify
+    #   `SourceCustomDbEngineVersionIdentifier`.
     #   @return [String]
     #
     # @!attribute [rw] use_aws_provided_latest_image
-    #   Reserved for future use.
+    #   Specifies whether to use the latest service-provided Amazon Machine
+    #   Image (AMI) for the CEV. If you specify `UseAwsProvidedLatestImage`,
+    #   you can't also specify `ImageId`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersionMessage AWS API Documentation
@@ -1978,18 +2057,23 @@ module Aws::RDS
     end
 
     # @!attribute [rw] availability_zones
-    #   A list of Availability Zones (AZs) where DB instances in the DB
-    #   cluster can be created.
+    #   A list of Availability Zones (AZs) where you specifically want to
+    #   create DB instances in the DB cluster.
     #
-    #   For information on Amazon Web Services Regions and Availability
-    #   Zones, see [Choosing the Regions and Availability Zones][1] in the
-    #   *Amazon Aurora User Guide*.
+    #   For information on AZs, see [Availability Zones][1] in the *Amazon
+    #   Aurora User Guide*.
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
+    #   Constraints:
+    #
+    #   * Can't specify more than three AZs.
+    #
+    #   ^
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.AvailabilityZones
     #   @return [Array<String>]
     #
     # @!attribute [rw] backup_retention_period
@@ -2014,9 +2098,9 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   The name for your database of up to 64 alphanumeric characters. If
-    #   you don't provide a name, Amazon RDS doesn't create a database in
-    #   the DB cluster you are creating.
+    #   The name for your database of up to 64 alphanumeric characters. A
+    #   database named `postgres` is always created. If this parameter is
+    #   specified, an additional database with this name is created.
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
@@ -2029,7 +2113,8 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
+    #   * Must contain from 1 to 63 (for Aurora DB clusters) or 1 to 52 (for
+    #     Multi-AZ DB clusters) letters, numbers, or hyphens.
     #
     #   * First character must be a letter.
     #
@@ -2080,7 +2165,22 @@ module Aws::RDS
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
-    #   Valid Values: `aurora-mysql | aurora-postgresql | mysql | postgres`
+    #   Valid Values:
+    #
+    #   * `aurora-mysql`
+    #
+    #   * `aurora-postgresql`
+    #
+    #   * `mysql`
+    #
+    #   * `postgres`
+    #
+    #   * `neptune` - For information about using Amazon Neptune, see the [
+    #     *Amazon Neptune User Guide* ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/intro.html
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -2413,7 +2513,8 @@ module Aws::RDS
     #   `serverless`.
     #
     #   The `serverless` engine mode only applies for Aurora Serverless v1
-    #   DB clusters.
+    #   DB clusters. Aurora Serverless v2 DB clusters use the `provisioned`
+    #   engine mode.
     #
     #   For information about limitations and requirements for Serverless DB
     #   clusters, see the following sections in the *Amazon Aurora User
@@ -2438,6 +2539,10 @@ module Aws::RDS
     #   Valid for Cluster Type: Aurora DB clusters only
     #   @return [Types::ScalingConfiguration]
     #
+    # @!attribute [rw] rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #   @return [Types::RdsCustomClusterConfiguration]
+    #
     # @!attribute [rw] deletion_protection
     #   Specifies whether the DB cluster has deletion protection enabled.
     #   The database can't be deleted when deletion protection is enabled.
@@ -2454,16 +2559,22 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] enable_http_endpoint
-    #   Specifies whether to enable the HTTP endpoint for an Aurora
-    #   Serverless v1 DB cluster. By default, the HTTP endpoint is disabled.
+    #   Specifies whether to enable the HTTP endpoint for the DB cluster. By
+    #   default, the HTTP endpoint isn't enabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web
-    #   service API for running SQL queries on the Aurora Serverless v1 DB
+    #   service API (RDS Data API) for running SQL queries on the DB
     #   cluster. You can also query your database from inside the RDS
-    #   console with the query editor.
+    #   console with the RDS query editor.
     #
-    #   For more information, see [Using the Data API for Aurora Serverless
-    #   v1][1] in the *Amazon Aurora User Guide*.
+    #   RDS Data API is supported with the following DB clusters:
+    #
+    #   * Aurora PostgreSQL Serverless v2 and provisioned
+    #
+    #   * Aurora PostgreSQL and Aurora MySQL Serverless v1
+    #
+    #   For more information, see [Using RDS Data API][1] in the *Amazon
+    #   Aurora User Guide*.
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
@@ -2565,7 +2676,7 @@ module Aws::RDS
     #
     #   * Aurora DB clusters - `aurora | aurora-iopt1`
     #
-    #   * Multi-AZ DB clusters - `io1`
+    #   * Multi-AZ DB clusters - `io1 | io2 | gp3`
     #
     #   Default:
     #
@@ -2738,6 +2849,13 @@ module Aws::RDS
     #   Amazon RDS issues an error.
     #   @return [Integer]
     #
+    # @!attribute [rw] enable_limitless_database
+    #   Specifies whether to enable Aurora Limitless Database. You must
+    #   enable Aurora Limitless Database to create a DB shard group.
+    #
+    #   Valid for: Aurora DB clusters only
+    #   @return [Boolean]
+    #
     # @!attribute [rw] serverless_v2_scaling_configuration
     #   Contains the scaling configuration of an Aurora Serverless v2 DB
     #   cluster.
@@ -2831,6 +2949,58 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters only
     #   @return [Boolean]
     #
+    # @!attribute [rw] ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB cluster's server
+    #   certificate.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide*.
+    #
+    #   Valid for Cluster Type: Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_lifecycle_support
+    #   The life cycle type for this DB cluster.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB cluster into Amazon RDS Extended Support. At
+    #   the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, creating
+    #   the DB cluster will fail if the DB major version is past its end of
+    #   standard support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB cluster into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the
+    #   selected major engine version on your DB cluster past the end of
+    #   standard support for that engine version. For more information, see
+    #   the following sections:
+    #
+    #   * Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
+    #     Support][1] in the *Amazon Aurora User Guide*
+    #
+    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
+    #     RDS User Guide*
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #   @return [String]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2865,6 +3035,7 @@ module Aws::RDS
       :enable_cloudwatch_logs_exports,
       :engine_mode,
       :scaling_configuration,
+      :rds_custom_cluster_configuration,
       :deletion_protection,
       :global_cluster_identifier,
       :enable_http_endpoint,
@@ -2883,12 +3054,15 @@ module Aws::RDS
       :enable_performance_insights,
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
+      :enable_limitless_database,
       :serverless_v2_scaling_configuration,
       :network_type,
       :db_system_id,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       :enable_local_write_forwarding,
+      :ca_certificate_identifier,
+      :engine_lifecycle_support,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -2929,7 +3103,7 @@ module Aws::RDS
     #
     #   **RDS for PostgreSQL**
     #
-    #   Example: `postgres12`
+    #   Example: `postgres13`
     #
     #   To list all of the available parameter group families for a DB
     #   engine, use the following command:
@@ -3093,117 +3267,140 @@ module Aws::RDS
     #   The meaning of this parameter differs according to the database
     #   engine you use.
     #
-    #   **MySQL**
+    #   Amazon Aurora MySQL
     #
-    #   The name of the database to create when the DB instance is created.
-    #   If this parameter isn't specified, no database is created in the DB
-    #   instance.
+    #   : The name of the database to create when the primary DB instance of
+    #     the Aurora MySQL DB cluster is created. If this parameter isn't
+    #     specified for an Aurora MySQL DB cluster, no database is created
+    #     in the DB cluster.
     #
-    #   Constraints:
+    #     Constraints:
     #
-    #   * Must contain 1 to 64 letters or numbers.
+    #     * Must contain 1 to 64 alphanumeric characters.
     #
-    #   * Must begin with a letter. Subsequent characters can be letters,
-    #     underscores, or digits (0-9).
+    #     * Can't be a word reserved by the database engine.
     #
-    #   * Can't be a word reserved by the specified database engine
+    #   Amazon Aurora PostgreSQL
     #
-    #   **MariaDB**
+    #   : The name of the database to create when the primary DB instance of
+    #     the Aurora PostgreSQL DB cluster is created. A database named
+    #     `postgres` is always created. If this parameter is specified, an
+    #     additional database with this name is created.
     #
-    #   The name of the database to create when the DB instance is created.
-    #   If this parameter isn't specified, no database is created in the DB
-    #   instance.
+    #     Constraints:
     #
-    #   Constraints:
+    #     * It must contain 1 to 63 alphanumeric characters.
     #
-    #   * Must contain 1 to 64 letters or numbers.
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0 to 9).
     #
-    #   * Must begin with a letter. Subsequent characters can be letters,
-    #     underscores, or digits (0-9).
+    #     * Can't be a word reserved by the database engine.
     #
-    #   * Can't be a word reserved by the specified database engine
+    #   Amazon RDS Custom for Oracle
     #
-    #   **PostgreSQL**
+    #   : The Oracle System ID (SID) of the created RDS Custom DB instance.
+    #     If you don't specify a value, the default value is `ORCL` for
+    #     non-CDBs and `RDSCDB` for CDBs.
     #
-    #   The name of the database to create when the DB instance is created.
-    #   If this parameter isn't specified, a database named `postgres` is
-    #   created in the DB instance.
+    #     Default: `ORCL`
     #
-    #   Constraints:
+    #     Constraints:
     #
-    #   * Must contain 1 to 63 letters, numbers, or underscores.
+    #     * Must contain 1 to 8 alphanumeric characters.
     #
-    #   * Must begin with a letter. Subsequent characters can be letters,
-    #     underscores, or digits (0-9).
+    #     * Must contain a letter.
     #
-    #   * Can't be a word reserved by the specified database engine
+    #     * Can't be a word reserved by the database engine.
     #
-    #   **Oracle**
+    #   Amazon RDS Custom for SQL Server
     #
-    #   The Oracle System ID (SID) of the created DB instance. If you don't
-    #   specify a value, the default value is `ORCL`. You can't specify the
-    #   string `null`, or any other reserved word, for `DBName`.
+    #   : Not applicable. Must be null.
     #
-    #   Default: `ORCL`
+    #   RDS for Db2
     #
-    #   Constraints:
+    #   : The name of the database to create when the DB instance is
+    #     created. If this parameter isn't specified, no database is
+    #     created in the DB instance. In some cases, we recommend that you
+    #     don't add a database name. For more information, see [Additional
+    #     considerations][1] in the *Amazon RDS User Guide*.
     #
-    #   * Can't be longer than 8 characters
+    #     Constraints:
     #
-    #   ^
+    #     * Must contain 1 to 64 letters or numbers.
     #
-    #   **Amazon RDS Custom for Oracle**
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
     #
-    #   The Oracle System ID (SID) of the created RDS Custom DB instance. If
-    #   you don't specify a value, the default value is `ORCL` for non-CDBs
-    #   and `RDSCDB` for CDBs.
+    #     * Can't be a word reserved by the specified database engine.
     #
-    #   Default: `ORCL`
+    #   RDS for MariaDB
     #
-    #   Constraints:
+    #   : The name of the database to create when the DB instance is
+    #     created. If this parameter isn't specified, no database is
+    #     created in the DB instance.
     #
-    #   * It must contain 1 to 8 alphanumeric characters.
+    #     Constraints:
     #
-    #   * It must contain a letter.
+    #     * Must contain 1 to 64 letters or numbers.
     #
-    #   * It can't be a word reserved by the database engine.
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
     #
-    #   **Amazon RDS Custom for SQL Server**
+    #     * Can't be a word reserved by the specified database engine.
     #
-    #   Not applicable. Must be null.
+    #   RDS for MySQL
     #
-    #   **SQL Server**
+    #   : The name of the database to create when the DB instance is
+    #     created. If this parameter isn't specified, no database is
+    #     created in the DB instance.
     #
-    #   Not applicable. Must be null.
+    #     Constraints:
     #
-    #   **Amazon Aurora MySQL**
+    #     * Must contain 1 to 64 letters or numbers.
     #
-    #   The name of the database to create when the primary DB instance of
-    #   the Aurora MySQL DB cluster is created. If this parameter isn't
-    #   specified for an Aurora MySQL DB cluster, no database is created in
-    #   the DB cluster.
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
     #
-    #   Constraints:
+    #     * Can't be a word reserved by the specified database engine.
     #
-    #   * It must contain 1 to 64 alphanumeric characters.
+    #   RDS for Oracle
     #
-    #   * It can't be a word reserved by the database engine.
+    #   : The Oracle System ID (SID) of the created DB instance. If you
+    #     don't specify a value, the default value is `ORCL`. You can't
+    #     specify the string `null`, or any other reserved word, for
+    #     `DBName`.
     #
-    #   **Amazon Aurora PostgreSQL**
+    #     Default: `ORCL`
     #
-    #   The name of the database to create when the primary DB instance of
-    #   the Aurora PostgreSQL DB cluster is created. If this parameter
-    #   isn't specified for an Aurora PostgreSQL DB cluster, a database
-    #   named `postgres` is created in the DB cluster.
+    #     Constraints:
     #
-    #   Constraints:
+    #     * Can't be longer than 8 characters.
     #
-    #   * It must contain 1 to 63 alphanumeric characters.
+    #     ^
     #
-    #   * It must begin with a letter. Subsequent characters can be letters,
-    #     underscores, or digits (0 to 9).
+    #   RDS for PostgreSQL
     #
-    #   * It can't be a word reserved by the database engine.
+    #   : The name of the database to create when the DB instance is
+    #     created. A database named `postgres` is always created. If this
+    #     parameter is specified, an additional database with this name is
+    #     created.
+    #
+    #     Constraints:
+    #
+    #     * Must contain 1 to 63 letters, numbers, or underscores.
+    #
+    #     * Must begin with a letter. Subsequent characters can be letters,
+    #       underscores, or digits (0-9).
+    #
+    #     * Can't be a word reserved by the specified database engine.
+    #
+    #   RDS for SQL Server
+    #
+    #   : Not applicable. Must be null.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-db-instance-prereqs.html#db2-prereqs-additional-considerations
     #   @return [String]
     #
     # @!attribute [rw] db_instance_identifier
@@ -3239,9 +3436,20 @@ module Aws::RDS
     #       from 40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom
     #       for SQL Server.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 40 to
-    #       65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 40
+    #       to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
     #       Server.
+    #
+    #   RDS for Db2
+    #
+    #   : Constraints to the amount of storage for each storage type are the
+    #     following:
+    #
+    #     * General Purpose (SSD) storage (gp3): Must be an integer from 20
+    #       to 65536.
+    #
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #   RDS for MariaDB
     #
@@ -3251,8 +3459,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer
     #       from 20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -3264,8 +3472,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer
     #       from 20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -3277,8 +3485,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer
     #       from 20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
@@ -3290,8 +3498,8 @@ module Aws::RDS
     #     * General Purpose (SSD) storage (gp2, gp3): Must be an integer
     #       from 20 to 65536.
     #
-    #     * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #       65536.
+    #     * Provisioned IOPS storage (io1, io2): Must be an integer from 100
+    #       to 65536.
     #
     #     * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -3307,7 +3515,7 @@ module Aws::RDS
     #
     #       * Web and Express editions: Must be an integer from 20 to 16384.
     #
-    #     * Provisioned IOPS storage (io1):
+    #     * Provisioned IOPS storage (io1, io2):
     #
     #       * Enterprise and Standard editions: Must be an integer from 100
     #         to 16384.
@@ -3353,12 +3561,20 @@ module Aws::RDS
     #
     #   * `custom-oracle-ee-cdb` (for RDS Custom for Oracle DB instances)
     #
+    #   * `custom-oracle-se2` (for RDS Custom for Oracle DB instances)
+    #
+    #   * `custom-oracle-se2-cdb` (for RDS Custom for Oracle DB instances)
+    #
     #   * `custom-sqlserver-ee` (for RDS Custom for SQL Server DB instances)
     #
     #   * `custom-sqlserver-se` (for RDS Custom for SQL Server DB instances)
     #
     #   * `custom-sqlserver-web` (for RDS Custom for SQL Server DB
     #     instances)
+    #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
     #
     #   * `mariadb`
     #
@@ -3415,6 +3631,8 @@ module Aws::RDS
     #     (ampersand) or the "'" (single quotes) character.
     #
     #   Length Constraints:
+    #
+    #   * RDS for Db2 - Must contain from 8 to 255 characters.
     #
     #   * RDS for MariaDB - Must contain from 8 to 41 characters.
     #
@@ -3587,6 +3805,8 @@ module Aws::RDS
     #
     #   Default:
     #
+    #   * RDS for Db2 - `50000`
+    #
     #   * RDS for MariaDB - `3306`
     #
     #   * RDS for Microsoft SQL Server - `1433`
@@ -3646,40 +3866,46 @@ module Aws::RDS
     #   : See [RDS Custom for SQL Server general requirements][2] in the
     #     *Amazon RDS User Guide*.
     #
+    #   RDS for Db2
+    #
+    #   : For information, see [Db2 on Amazon RDS versions][3] in the
+    #     *Amazon RDS User Guide*.
+    #
     #   RDS for MariaDB
     #
-    #   : For information, see [MariaDB on Amazon RDS versions][3] in the
+    #   : For information, see [MariaDB on Amazon RDS versions][4] in the
     #     *Amazon RDS User Guide*.
     #
     #   RDS for Microsoft SQL Server
     #
     #   : For information, see [Microsoft SQL Server versions on Amazon
-    #     RDS][4] in the *Amazon RDS User Guide*.
+    #     RDS][5] in the *Amazon RDS User Guide*.
     #
     #   RDS for MySQL
     #
-    #   : For information, see [MySQL on Amazon RDS versions][5] in the
+    #   : For information, see [MySQL on Amazon RDS versions][6] in the
     #     *Amazon RDS User Guide*.
     #
     #   RDS for Oracle
     #
-    #   : For information, see [Oracle Database Engine release notes][6] in
+    #   : For information, see [Oracle Database Engine release notes][7] in
     #     the *Amazon RDS User Guide*.
     #
     #   RDS for PostgreSQL
     #
     #   : For information, see [Amazon RDS for PostgreSQL versions and
-    #     extensions][7] in the *Amazon RDS User Guide*.
+    #     extensions][8] in the *Amazon RDS User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create
     #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html
-    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
-    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
-    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
-    #   [6]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
-    #   [7]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Db2.html#Db2.Concepts.VersionMgmt
+    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
+    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
+    #   [6]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
+    #   [7]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
+    #   [8]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -3694,10 +3920,23 @@ module Aws::RDS
     # @!attribute [rw] license_model
     #   The license model information for this DB instance.
     #
+    #   <note markdown="1"> License models for RDS for Db2 require additional configuration. The
+    #   Bring Your Own License (BYOL) model requires a custom parameter
+    #   group. The Db2 license through Amazon Web Services Marketplace model
+    #   requires an Amazon Web Services Marketplace subscription. For more
+    #   information, see [RDS for Db2 licensing options][1] in the *Amazon
+    #   RDS User Guide*.
+    #
+    #    The default for RDS for Db2 is `bring-your-own-license`.
+    #
+    #    </note>
+    #
     #   This setting doesn't apply to Amazon Aurora or RDS Custom DB
     #   instances.
     #
     #   Valid Values:
+    #
+    #   * RDS for Db2 - `bring-your-own-license | marketplace-license`
     #
     #   * RDS for MariaDB - `general-public-license`
     #
@@ -3708,6 +3947,10 @@ module Aws::RDS
     #   * RDS for Oracle - `bring-your-own-license | license-included`
     #
     #   * RDS for PostgreSQL - `postgresql-license`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -3721,8 +3964,8 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * For RDS for MariaDB, MySQL, Oracle, and PostgreSQL - Must be a
-    #     multiple between .5 and 50 of the storage amount for the DB
+    #   * For RDS for Db2, MariaDB, MySQL, Oracle, and PostgreSQL - Must be
+    #     a multiple between .5 and 50 of the storage amount for the DB
     #     instance.
     #
     #   * For RDS for SQL Server - Must be a multiple between 1 and 50 of
@@ -3814,13 +4057,13 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   The storage type to associate with the DB instance.
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
     #   This setting doesn't apply to Amazon Aurora DB instances. Storage
     #   is managed by the DB cluster.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
@@ -3880,8 +4123,8 @@ module Aws::RDS
     #
     # @!attribute [rw] domain
     #   The Active Directory directory ID to create the DB instance in.
-    #   Currently, only Microsoft SQL Server, MySQL, Oracle, and PostgreSQL
-    #   DB instances can be created in an Active Directory Domain.
+    #   Currently, you can create only Db2, MySQL, Microsoft SQL Server,
+    #   Oracle, and PostgreSQL DB instances in an Active Directory Domain.
     #
     #   For more information, see [ Kerberos Authentication][1] in the
     #   *Amazon RDS User Guide*.
@@ -4018,11 +4261,13 @@ module Aws::RDS
     #
     # @!attribute [rw] timezone
     #   The time zone of the DB instance. The time zone parameter is
-    #   currently supported only by [Microsoft SQL Server][1].
+    #   currently supported only by [RDS for Db2][1] and [RDS for SQL
+    #   Server][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-time-zone
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone
     #   @return [String]
     #
     # @!attribute [rw] enable_iam_database_authentication
@@ -4095,9 +4340,9 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
-    #   The list of log types that need to be enabled for exporting to
-    #   CloudWatch Logs. For more information, see [ Publishing Database
-    #   Logs to Amazon CloudWatch Logs][1] in the *Amazon RDS User Guide*.
+    #   The list of log types to enable for exporting to CloudWatch Logs.
+    #   For more information, see [ Publishing Database Logs to Amazon
+    #   CloudWatch Logs][1] in the *Amazon RDS User Guide*.
     #
     #   This setting doesn't apply to the following DB instances:
     #
@@ -4107,6 +4352,8 @@ module Aws::RDS
     #   * RDS Custom
     #
     #   The following values are valid for each DB engine:
+    #
+    #   * RDS for Db2 - `diag.log | notify.log`
     #
     #   * RDS for MariaDB - `audit | error | general | slowquery`
     #
@@ -4217,7 +4464,7 @@ module Aws::RDS
     # @!attribute [rw] backup_target
     #   The location for storing automated backups and manual snapshots.
     #
-    #   Valie Values:
+    #   Valid Values:
     #
     #   * `outposts` (Amazon Web Services Outposts)
     #
@@ -4328,6 +4575,62 @@ module Aws::RDS
     #   is also the name of your CDB.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] multi_tenant
+    #   Specifies whether to use the multi-tenant configuration or the
+    #   single-tenant configuration (default). This parameter only applies
+    #   to RDS for Oracle container database (CDB) engines.
+    #
+    #   Note the following restrictions:
+    #
+    #   * The DB engine that you specify in the request must support the
+    #     multi-tenant configuration. If you attempt to enable the
+    #     multi-tenant configuration on a DB engine that doesn't support
+    #     it, the request fails.
+    #
+    #   * If you specify the multi-tenant configuration when you create your
+    #     DB instance, you can't later modify this DB instance to use the
+    #     single-tenant configuration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] engine_lifecycle_support
+    #   The life cycle type for this DB instance.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB instance into Amazon RDS Extended Support. At
+    #   the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, creating
+    #   the DB instance will fail if the DB major version is past its end of
+    #   standard support date.
+    #
+    #    </note>
+    #
+    #   This setting applies only to RDS for MySQL and RDS for PostgreSQL.
+    #   For Amazon Aurora DB instances, the life cycle type is managed by
+    #   the DB cluster.
+    #
+    #   You can use this setting to enroll your DB instance into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the
+    #   selected major engine version on your DB instance past the end of
+    #   standard support for that engine version. For more information, see
+    #   [Using Amazon RDS Extended Support][1] in the *Amazon RDS User
+    #   Guide*.
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -4390,7 +4693,10 @@ module Aws::RDS
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       :ca_certificate_identifier,
-      :db_system_id)
+      :db_system_id,
+      :dedicated_log_volume,
+      :multi_tenant,
+      :engine_lifecycle_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4409,7 +4715,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must be the identifier of an existing MySQL, MariaDB, Oracle,
+    #   * Must be the identifier of an existing Db2, MariaDB, MySQL, Oracle,
     #     PostgreSQL, or SQL Server DB instance.
     #
     #   * Can't be specified if the `SourceDBClusterIdentifier` parameter
@@ -4599,10 +4905,10 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   The storage type to associate with the read replica.
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1` if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
@@ -5079,6 +5385,34 @@ module Aws::RDS
     #     supported.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] upgrade_storage_config
+    #   Whether to upgrade the storage file system configuration on the read
+    #   replica. This option migrates the read replica from the old storage
+    #   file system layout to the preferred layout.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ca_certificate_identifier
+    #   The CA certificate identifier to use for the read replica's server
+    #   certificate.
+    #
+    #   This setting doesn't apply to RDS Custom DB instances.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
+    #   to encrypt a connection to a DB cluster][2] in the *Amazon Aurora
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #   @return [String]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -5129,6 +5463,9 @@ module Aws::RDS
       :enable_customer_owned_ip,
       :allocated_storage,
       :source_db_cluster_identifier,
+      :dedicated_log_volume,
+      :upgrade_storage_config,
+      :ca_certificate_identifier,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -5218,7 +5555,9 @@ module Aws::RDS
     #
     #   * `aurora-postgresql`
     #
-    #   * `mariadb`
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
     #
     #   * `mysql`
     #
@@ -5483,6 +5822,83 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] db_shard_group_identifier
+    #   The name of the DB shard group.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The name of the primary DB cluster for the DB shard group.
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_redundancy
+    #   Specifies whether to create standby instances for the DB shard
+    #   group. Valid values are the following:
+    #
+    #   * 0 - Creates a single, primary DB instance for each physical shard.
+    #     This is the default value, and the only one supported for the
+    #     preview.
+    #
+    #   * 1 - Creates a primary DB instance and a standby instance in a
+    #     different Availability Zone (AZ) for each physical shard.
+    #
+    #   * 2 - Creates a primary DB instance and two standby instances in
+    #     different AZs for each physical shard.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_acu
+    #   The maximum capacity of the DB shard group in Aurora capacity units
+    #   (ACUs).
+    #   @return [Float]
+    #
+    # @!attribute [rw] publicly_accessible
+    #   Specifies whether the DB shard group is publicly accessible.
+    #
+    #   When the DB shard group is publicly accessible, its Domain Name
+    #   System (DNS) endpoint resolves to the private IP address from within
+    #   the DB shard group's virtual private cloud (VPC). It resolves to
+    #   the public IP address from outside of the DB shard group's VPC.
+    #   Access to the DB shard group is ultimately controlled by the
+    #   security group it uses. That public access is not permitted if the
+    #   security group assigned to the DB shard group doesn't permit it.
+    #
+    #   When the DB shard group isn't publicly accessible, it is an
+    #   internal DB shard group with a DNS name that resolves to a private
+    #   IP address.
+    #
+    #   Default: The default behavior varies depending on whether
+    #   `DBSubnetGroupName` is specified.
+    #
+    #   If `DBSubnetGroupName` isn't specified, and `PubliclyAccessible`
+    #   isn't specified, the following applies:
+    #
+    #   * If the default VPC in the target Region doesn’t have an internet
+    #     gateway attached to it, the DB shard group is private.
+    #
+    #   * If the default VPC in the target Region has an internet gateway
+    #     attached to it, the DB shard group is public.
+    #
+    #   If `DBSubnetGroupName` is specified, and `PubliclyAccessible` isn't
+    #   specified, the following applies:
+    #
+    #   * If the subnets are part of a VPC that doesn’t have an internet
+    #     gateway attached to it, the DB shard group is private.
+    #
+    #   * If the subnets are part of a VPC that has an internet gateway
+    #     attached to it, the DB shard group is public.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBShardGroupMessage AWS API Documentation
+    #
+    class CreateDBShardGroupMessage < Struct.new(
+      :db_shard_group_identifier,
+      :db_cluster_identifier,
+      :compute_redundancy,
+      :max_acu,
+      :publicly_accessible)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] db_snapshot_identifier
     #   The identifier for the DB snapshot.
     #
@@ -5606,8 +6022,19 @@ module Aws::RDS
     #
     # @!attribute [rw] sns_topic_arn
     #   The Amazon Resource Name (ARN) of the SNS topic created for event
-    #   notification. The ARN is created by Amazon SNS when you create a
+    #   notification. SNS automatically creates the ARN when you create a
     #   topic and subscribe to it.
+    #
+    #   <note markdown="1"> RDS doesn't support FIFO (first in, first out) topics. For more
+    #   information, see [Message ordering and deduplication (FIFO
+    #   topics)][1] in the *Amazon Simple Notification Service Developer
+    #   Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
     #   @return [String]
     #
     # @!attribute [rw] source_type
@@ -5616,9 +6043,9 @@ module Aws::RDS
     #   set this parameter to `db-instance`. For RDS Proxy events, specify
     #   `db-proxy`. If this value isn't specified, all events are returned.
     #
-    #   Valid Values: `db-instance` \| `db-cluster` \| `db-parameter-group`
-    #   \| `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot` \|
-    #   `db-proxy`
+    #   Valid Values:` db-instance | db-cluster | db-parameter-group |
+    #   db-security-group | db-snapshot | db-cluster-snapshot | db-proxy |
+    #   zero-etl | custom-engine-version | blue-green-deployment `
     #   @return [String]
     #
     # @!attribute [rw] event_categories
@@ -5758,6 +6185,39 @@ module Aws::RDS
     #   ^
     #   @return [String]
     #
+    # @!attribute [rw] engine_lifecycle_support
+    #   The life cycle type for this global database cluster.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your global cluster into Amazon RDS Extended Support.
+    #   At the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, creating
+    #   the global cluster will fail if the DB major version is past its end
+    #   of standard support date.
+    #
+    #    </note>
+    #
+    #   This setting only applies to Aurora PostgreSQL-based global
+    #   databases.
+    #
+    #   You can use this setting to enroll your global cluster into Amazon
+    #   RDS Extended Support. With RDS Extended Support, you can run the
+    #   selected major engine version on your global cluster past the end of
+    #   standard support for that engine version. For more information, see
+    #   [Using Amazon RDS Extended Support][1] in the *Amazon Aurora User
+    #   Guide*.
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #   @return [String]
+    #
     # @!attribute [rw] deletion_protection
     #   Specifies whether to enable deletion protection for the new global
     #   database cluster. The global database can't be deleted when
@@ -5798,6 +6258,7 @@ module Aws::RDS
       :source_db_cluster_identifier,
       :engine,
       :engine_version,
+      :engine_lifecycle_support,
       :deletion_protection,
       :database_name,
       :storage_encrypted)
@@ -5817,6 +6278,81 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the database to use as the source
+    #   for replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The ARN of the Redshift data warehouse to use as the target for
+    #   replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_name
+    #   The name of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services Key Management System (Amazon Web Services
+    #   KMS) key identifier for the key to use to encrypt the integration.
+    #   If you don't specify an encryption key, RDS uses a default Amazon
+    #   Web Services owned key.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_encryption_context
+    #   An optional set of non-secret key–value pairs that contains
+    #   additional contextual information about the data. For more
+    #   information, see [Encryption context][1] in the *Amazon Web Services
+    #   Key Management Service Developer Guide*.
+    #
+    #   You can only include this parameter if you specify the `KMSKeyId`
+    #   parameter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] data_filter
+    #   Data filtering options for the integration. For more information,
+    #   see [Data filtering for Aurora zero-ETL integrations with Amazon
+    #   Redshift][1].
+    #
+    #   Valid for: Integrations with Aurora MySQL source DB clusters only
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.filtering.html
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateIntegrationMessage AWS API Documentation
+    #
+    class CreateIntegrationMessage < Struct.new(
+      :source_arn,
+      :target_arn,
+      :integration_name,
+      :kms_key_id,
+      :additional_encryption_context,
+      :tags,
+      :data_filter,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] option_group_name
     #   Specifies the name of the option group to be created.
     #
@@ -5832,10 +6368,13 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] engine_name
-    #   Specifies the name of the engine that this option group should be
-    #   associated with.
+    #   The name of the engine to associate this option group with.
     #
     #   Valid Values:
+    #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
     #
     #   * `mariadb`
     #
@@ -5892,6 +6431,88 @@ module Aws::RDS
     #
     class CreateOptionGroupResult < Struct.new(
       :option_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_instance_identifier
+    #   The user-supplied DB instance identifier. RDS creates your tenant
+    #   database in this DB instance. This parameter isn't case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_db_name
+    #   The user-supplied name of the tenant database that you want to
+    #   create in your DB instance. This parameter has the same constraints
+    #   as `DBName` in `CreateDBInstance`.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_username
+    #   The name for the master user account in your tenant database. RDS
+    #   creates this user account in the tenant database and grants
+    #   privileges to the master user. This parameter is case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must be 1 to 16 letters, numbers, or underscores.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Can't be a reserved word for the chosen database engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_user_password
+    #   The password for the master user in your tenant database.
+    #
+    #   Constraints:
+    #
+    #   * Must be 8 to 30 characters.
+    #
+    #   * Can include any printable ASCII character except forward slash
+    #     (`/`), double quote (`"`), at symbol (`@`), ampersand (`&`), or
+    #     single quote (`'`).
+    #   @return [String]
+    #
+    # @!attribute [rw] character_set_name
+    #   The character set for your tenant database. If you don't specify a
+    #   value, the character set name defaults to `AL32UTF8`.
+    #   @return [String]
+    #
+    # @!attribute [rw] nchar_character_set_name
+    #   The `NCHAR` value for the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateTenantDatabaseMessage AWS API Documentation
+    #
+    class CreateTenantDatabaseMessage < Struct.new(
+      :db_instance_identifier,
+      :tenant_db_name,
+      :master_username,
+      :master_user_password,
+      :character_set_name,
+      :nchar_character_set_name,
+      :tags)
+      SENSITIVE = [:master_user_password]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tenant_database
+    #   A tenant database in the DB instance. This data type is an element
+    #   in the response to the `DescribeTenantDatabases` action.
+    #   @return [Types::TenantDatabase]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateTenantDatabaseResult AWS API Documentation
+    #
+    class CreateTenantDatabaseResult < Struct.new(
+      :tenant_database)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6102,6 +6723,10 @@ module Aws::RDS
     #   with this DB cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] status_infos
+    #   Reserved for future use.
+    #   @return [Array<Types::DBClusterStatusInfo>]
+    #
     # @!attribute [rw] db_cluster_members
     #   The list of DB instances that make up the DB cluster.
     #   @return [Array<Types::DBClusterMember>]
@@ -6220,22 +6845,26 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html
     #   @return [Types::ScalingConfigurationInfo]
     #
+    # @!attribute [rw] rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #   @return [Types::RdsCustomClusterConfiguration]
+    #
     # @!attribute [rw] deletion_protection
     #   Indicates whether the DB cluster has deletion protection enabled.
     #   The database can't be deleted when deletion protection is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] http_endpoint_enabled
-    #   Indicates whether the HTTP endpoint for an Aurora Serverless v1 DB
-    #   cluster is enabled.
+    #   Indicates whether the HTTP endpoint is enabled for an Aurora DB
+    #   cluster.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web
-    #   service API for running SQL queries on the Aurora Serverless v1 DB
+    #   service API (RDS Data API) for running SQL queries on the DB
     #   cluster. You can also query your database from inside the RDS
-    #   console with the query editor.
+    #   console with the RDS query editor.
     #
-    #   For more information, see [Using the Data API for Aurora Serverless
-    #   v1][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using RDS Data API][1] in the *Amazon
+    #   Aurora User Guide*.
     #
     #
     #
@@ -6467,6 +7096,38 @@ module Aws::RDS
     #   Services Backup.
     #   @return [String]
     #
+    # @!attribute [rw] limitless_database
+    #   The details for Aurora Limitless Database.
+    #   @return [Types::LimitlessDatabase]
+    #
+    # @!attribute [rw] storage_throughput
+    #   The storage throughput for the DB cluster. The throughput is
+    #   automatically set based on the IOPS that you provision, and is not
+    #   configurable.
+    #
+    #   This setting is only for non-Aurora Multi-AZ DB clusters.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] certificate_details
+    #   Returns the details of the DB instance’s server certificate.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
+    #   to encrypt a connection to a DB cluster][2] in the *Amazon Aurora
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #   @return [Types::CertificateDetails]
+    #
+    # @!attribute [rw] engine_lifecycle_support
+    #   The life cycle type for the DB cluster.
+    #
+    #   For more information, see CreateDBCluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -6496,6 +7157,7 @@ module Aws::RDS
       :preferred_maintenance_window,
       :replication_source_identifier,
       :read_replica_identifiers,
+      :status_infos,
       :db_cluster_members,
       :vpc_security_groups,
       :hosted_zone_id,
@@ -6514,6 +7176,7 @@ module Aws::RDS
       :capacity,
       :engine_mode,
       :scaling_configuration_info,
+      :rds_custom_cluster_configuration,
       :deletion_protection,
       :http_endpoint_enabled,
       :activity_stream_mode,
@@ -6543,7 +7206,11 @@ module Aws::RDS
       :master_user_secret,
       :io_optimized_next_allowed_modification_time,
       :local_write_forwarding_status,
-      :aws_backup_recovery_point_arn)
+      :aws_backup_recovery_point_arn,
+      :limitless_database,
+      :storage_throughput,
+      :certificate_details,
+      :engine_lifecycle_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6684,6 +7351,14 @@ module Aws::RDS
     #   Services Backup.
     #   @return [String]
     #
+    # @!attribute [rw] storage_throughput
+    #   The storage throughput for the automated backup. The throughput is
+    #   automatically set based on the IOPS that you provision, and is not
+    #   configurable.
+    #
+    #   This setting is only for non-Aurora Multi-AZ DB clusters.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterAutomatedBackup AWS API Documentation
     #
     class DBClusterAutomatedBackup < Struct.new(
@@ -6710,7 +7385,8 @@ module Aws::RDS
       :kms_key_id,
       :storage_type,
       :iops,
-      :aws_backup_recovery_point_arn)
+      :aws_backup_recovery_point_arn,
+      :storage_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7381,6 +8057,14 @@ module Aws::RDS
     #   created from.
     #   @return [String]
     #
+    # @!attribute [rw] storage_throughput
+    #   The storage throughput for the DB cluster snapshot. The throughput
+    #   is automatically set based on the IOPS that you provision, and is
+    #   not configurable.
+    #
+    #   This setting is only for non-Aurora Multi-AZ DB clusters.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshot AWS API Documentation
     #
     class DBClusterSnapshot < Struct.new(
@@ -7408,7 +8092,8 @@ module Aws::RDS
       :tag_list,
       :db_system_id,
       :storage_type,
-      :db_cluster_resource_id)
+      :db_cluster_resource_id,
+      :storage_throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7512,6 +8197,35 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshotNotFoundFault AWS API Documentation
     #
     class DBClusterSnapshotNotFoundFault < Aws::EmptyStructure; end
+
+    # Reserved for future use.
+    #
+    # @!attribute [rw] status_type
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] normal
+    #   Reserved for future use.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterStatusInfo AWS API Documentation
+    #
+    class DBClusterStatusInfo < Struct.new(
+      :status_type,
+      :normal,
+      :status,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # This data type is used as a response element in the action
     # `DescribeDBEngineVersions`.
@@ -7683,6 +8397,11 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields
     #   @return [String]
     #
+    # @!attribute [rw] supports_limitless_database
+    #   Indicates whether the DB engine version supports Aurora Limitless
+    #   Database.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] supports_certificate_rotation_without_restart
     #   Indicates whether the engine version supports rotating the server
     #   certificate without rebooting the DB instance.
@@ -7709,6 +8428,11 @@ module Aws::RDS
     #   DB instances.
     #
     #   Valid for: Aurora DB clusters only
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] supports_integrations
+    #   Indicates whether the DB engine version supports zero-ETL
+    #   integrations with Amazon Redshift.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
@@ -7743,9 +8467,11 @@ module Aws::RDS
       :tag_list,
       :supports_babelfish,
       :custom_db_engine_version_manifest,
+      :supports_limitless_database,
       :supports_certificate_rotation_without_restart,
       :supported_ca_certificate_identifiers,
-      :supports_local_write_forwarding)
+      :supports_local_write_forwarding,
+      :supports_integrations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7815,10 +8541,10 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] db_name
-    #   Contains the initial database name that you provided (if required)
-    #   when you created the DB instance. This name is returned for the life
-    #   of your DB instance. For an RDS for Oracle CDB instance, the name
-    #   identifies the PDB rather than the CDB.
+    #   The initial database name that you provided (if required) when you
+    #   created the DB instance. This name is returned for the life of your
+    #   DB instance. For an RDS for Oracle CDB instance, the name identifies
+    #   the PDB rather than the CDB.
     #   @return [String]
     #
     # @!attribute [rw] endpoint
@@ -7941,7 +8667,7 @@ module Aws::RDS
     #
     # @!attribute [rw] license_model
     #   The license model information for this DB instance. This setting
-    #   doesn't apply to RDS Custom DB instances.
+    #   doesn't apply to Amazon Aurora or RDS Custom DB instances.
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -8092,8 +8818,9 @@ module Aws::RDS
     #
     # @!attribute [rw] timezone
     #   The time zone of the DB instance. In most cases, the `Timezone`
-    #   element is empty. `Timezone` content appears only for Microsoft SQL
-    #   Server DB instances that were created with a time zone specified.
+    #   element is empty. `Timezone` content appears only for RDS for Db2
+    #   and RDS for SQL Server DB instances that were created with a time
+    #   zone specified.
     #   @return [String]
     #
     # @!attribute [rw] iam_database_authentication_enabled
@@ -8352,6 +9079,34 @@ module Aws::RDS
     #   The progress of the storage optimization operation as a percentage.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_storage_config_upgrade_available
+    #   Indicates whether an upgrade is recommended for the storage file
+    #   system configuration on the DB instance. To migrate to the preferred
+    #   configuration, you can either create a blue/green deployment, or
+    #   create a read replica from the DB instance. For more information,
+    #   see [Upgrading the storage file system for a DB instance][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.UpgradeFileSystem
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] multi_tenant
+    #   Specifies whether the DB instance is in the multi-tenant
+    #   configuration (TRUE) or the single-tenant configuration (FALSE).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] engine_lifecycle_support
+    #   The life cycle type for the DB instance.
+    #
+    #   For more information, see CreateDBInstance.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -8436,7 +9191,11 @@ module Aws::RDS
       :master_user_secret,
       :certificate_details,
       :read_replica_source_db_cluster_identifier,
-      :percent_progress)
+      :percent_progress,
+      :dedicated_log_volume,
+      :is_storage_config_upgrade_available,
+      :multi_tenant,
+      :engine_lifecycle_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8599,6 +9358,17 @@ module Aws::RDS
     #   Services Backup.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] multi_tenant
+    #   Specifies whether the automatic backup is for a DB instance in the
+    #   multi-tenant configuration (TRUE) or the single-tenant configuration
+    #   (FALSE).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceAutomatedBackup AWS API Documentation
     #
     class DBInstanceAutomatedBackup < Struct.new(
@@ -8630,7 +9400,9 @@ module Aws::RDS
       :db_instance_automated_backups_replications,
       :backup_target,
       :storage_throughput,
-      :aws_backup_recovery_point_arn)
+      :aws_backup_recovery_point_arn,
+      :dedicated_log_volume,
+      :multi_tenant)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8785,8 +9557,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] normal
-    #   A Boolean value that is true if the instance is operating normally,
-    #   or false if the instance is in an error state.
+    #   Indicates whether the instance is operating normally (TRUE) or is in
+    #   an error state (FALSE).
     #   @return [Boolean]
     #
     # @!attribute [rw] status
@@ -8880,7 +9652,7 @@ module Aws::RDS
     end
 
     # Contains the result of a successful invocation of the
-    # `ModifyDBParameterGroup` or `ResetDBParameterGroup` action.
+    # `ModifyDBParameterGroup` or `ResetDBParameterGroup` operation.
     #
     # @!attribute [rw] db_parameter_group_name
     #   The name of the DB parameter group.
@@ -9355,6 +10127,198 @@ module Aws::RDS
     #
     class DBProxyTargetNotFoundFault < Aws::EmptyStructure; end
 
+    # The recommendation for your DB instances, DB clusters, and DB
+    # parameter groups.
+    #
+    # @!attribute [rw] recommendation_id
+    #   The unique identifier of the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_id
+    #   A value that indicates the type of recommendation. This value
+    #   determines how the description is rendered.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity level of the recommendation. The severity level can
+    #   help you decide the urgency with which to address the
+    #   recommendation.
+    #
+    #   Valid values:
+    #
+    #   * `high`
+    #
+    #   * `medium`
+    #
+    #   * `low`
+    #
+    #   * `informational`
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the RDS resource associated with
+    #   the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the recommendation.
+    #
+    #   Valid values:
+    #
+    #   * `active` - The recommendations which are ready for you to apply.
+    #
+    #   * `pending` - The applied or scheduled recommendations which are in
+    #     progress.
+    #
+    #   * `resolved` - The recommendations which are completed.
+    #
+    #   * `dismissed` - The recommendations that you dismissed.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time when the recommendation was created. For example,
+    #   `2023-09-28T01:13:53.931000+00:00`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_time
+    #   The time when the recommendation was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] detection
+    #   A short description of the issue identified for this recommendation.
+    #   The description might contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation
+    #   A short description of the recommendation to resolve an issue. The
+    #   description might contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A detailed description of the recommendation. The description might
+    #   contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason why this recommendation was created. The information
+    #   might contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommended_actions
+    #   A list of recommended actions.
+    #   @return [Array<Types::RecommendedAction>]
+    #
+    # @!attribute [rw] category
+    #   The category of the recommendation.
+    #
+    #   Valid values:
+    #
+    #   * `performance efficiency`
+    #
+    #   * `security`
+    #
+    #   * `reliability`
+    #
+    #   * `cost optimization`
+    #
+    #   * `operational excellence`
+    #
+    #   * `sustainability`
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The Amazon Web Services service that generated the recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_detection
+    #   A short description of the recommendation type. The description
+    #   might contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_recommendation
+    #   A short description that summarizes the recommendation to fix all
+    #   the issues of the recommendation type. The description might contain
+    #   markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] impact
+    #   A short description that explains the possible impact of an issue.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_info
+    #   Additional information about the recommendation. The information
+    #   might contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] links
+    #   A link to documentation that provides additional information about
+    #   the recommendation.
+    #   @return [Array<Types::DocLink>]
+    #
+    # @!attribute [rw] issue_details
+    #   Details of the issue that caused the recommendation.
+    #   @return [Types::IssueDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBRecommendation AWS API Documentation
+    #
+    class DBRecommendation < Struct.new(
+      :recommendation_id,
+      :type_id,
+      :severity,
+      :resource_arn,
+      :status,
+      :created_time,
+      :updated_time,
+      :detection,
+      :recommendation,
+      :description,
+      :reason,
+      :recommended_actions,
+      :category,
+      :source,
+      :type_detection,
+      :type_recommendation,
+      :impact,
+      :additional_info,
+      :links,
+      :issue_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_recommendation
+    #   The recommendation for your DB instances, DB clusters, and DB
+    #   parameter groups.
+    #   @return [Types::DBRecommendation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBRecommendationMessage AWS API Documentation
+    #
+    class DBRecommendationMessage < Struct.new(
+      :db_recommendation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_recommendations
+    #   A list of recommendations which is returned from
+    #   `DescribeDBRecommendations` API request.
+    #   @return [Array<Types::DBRecommendation>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DBRecommendationsMessage` request. This token can be used later in
+    #   a `DescribeDBRecomendations` request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBRecommendationsMessage AWS API Documentation
+    #
+    class DBRecommendationsMessage < Struct.new(
+      :db_recommendations,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the details for an Amazon RDS DB security group.
     #
     # This data type is used as a response element in the
@@ -9477,6 +10441,95 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSecurityGroupQuotaExceededFault AWS API Documentation
     #
     class DBSecurityGroupQuotaExceededFault < Aws::EmptyStructure; end
+
+    # @!attribute [rw] db_shard_group_resource_id
+    #   The Amazon Web Services Region-unique, immutable identifier for the
+    #   DB shard group.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_shard_group_identifier
+    #   The name of the DB shard group.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The name of the primary DB cluster for the DB shard group.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_acu
+    #   The maximum capacity of the DB shard group in Aurora capacity units
+    #   (ACUs).
+    #   @return [Float]
+    #
+    # @!attribute [rw] compute_redundancy
+    #   Specifies whether to create standby instances for the DB shard
+    #   group. Valid values are the following:
+    #
+    #   * 0 - Creates a single, primary DB instance for each physical shard.
+    #     This is the default value, and the only one supported for the
+    #     preview.
+    #
+    #   * 1 - Creates a primary DB instance and a standby instance in a
+    #     different Availability Zone (AZ) for each physical shard.
+    #
+    #   * 2 - Creates a primary DB instance and two standby instances in
+    #     different AZs for each physical shard.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the DB shard group.
+    #   @return [String]
+    #
+    # @!attribute [rw] publicly_accessible
+    #   Indicates whether the DB shard group is publicly accessible.
+    #
+    #   When the DB shard group is publicly accessible, its Domain Name
+    #   System (DNS) endpoint resolves to the private IP address from within
+    #   the DB shard group's virtual private cloud (VPC). It resolves to
+    #   the public IP address from outside of the DB shard group's VPC.
+    #   Access to the DB shard group is ultimately controlled by the
+    #   security group it uses. That public access isn't permitted if the
+    #   security group assigned to the DB shard group doesn't permit it.
+    #
+    #   When the DB shard group isn't publicly accessible, it is an
+    #   internal DB shard group with a DNS name that resolves to a private
+    #   IP address.
+    #
+    #   For more information, see CreateDBShardGroup.
+    #
+    #   This setting is only for Aurora Limitless Database.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] endpoint
+    #   The connection endpoint for the DB shard group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBShardGroup AWS API Documentation
+    #
+    class DBShardGroup < Struct.new(
+      :db_shard_group_resource_id,
+      :db_shard_group_identifier,
+      :db_cluster_identifier,
+      :max_acu,
+      :compute_redundancy,
+      :status,
+      :publicly_accessible,
+      :endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified DB shard group name must be unique in your Amazon Web
+    # Services account in the specified Amazon Web Services Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBShardGroupAlreadyExistsFault AWS API Documentation
+    #
+    class DBShardGroupAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified DB shard group name wasn't found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBShardGroupNotFoundFault AWS API Documentation
+    #
+    class DBShardGroupNotFoundFault < Aws::EmptyStructure; end
 
     # Contains the details of an Amazon RDS DB snapshot.
     #
@@ -9658,6 +10711,17 @@ module Aws::RDS
     #   is also the name of your CDB.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] multi_tenant
+    #   Indicates whether the snapshot is of a DB instance using the
+    #   multi-tenant configuration (TRUE) or the single-tenant configuration
+    #   (FALSE).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshot AWS API Documentation
     #
     class DBSnapshot < Struct.new(
@@ -9694,7 +10758,9 @@ module Aws::RDS
       :snapshot_database_time,
       :snapshot_target,
       :storage_throughput,
-      :db_system_id)
+      :db_system_id,
+      :dedicated_log_volume,
+      :multi_tenant)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9791,6 +10857,114 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotNotFoundFault AWS API Documentation
     #
     class DBSnapshotNotFoundFault < Aws::EmptyStructure; end
+
+    # Contains the details of a tenant database in a snapshot of a DB
+    # instance.
+    #
+    # @!attribute [rw] db_snapshot_identifier
+    #   The identifier for the snapshot of the DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   The ID for the DB instance that contains the tenant databases.
+    #   @return [String]
+    #
+    # @!attribute [rw] dbi_resource_id
+    #   The resource identifier of the source CDB instance. This identifier
+    #   can't be changed and is unique to an Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_name
+    #   The name of the database engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_type
+    #   The type of DB snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_database_create_time
+    #   The time the DB snapshot was taken, specified in Coordinated
+    #   Universal Time (UTC). If you copy the snapshot, the creation time
+    #   changes.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tenant_db_name
+    #   The name of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_username
+    #   The master username of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_database_resource_id
+    #   The resource ID of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] character_set_name
+    #   The name of the character set of a tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_snapshot_tenant_database_arn
+    #   The Amazon Resource Name (ARN) for the snapshot tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] nchar_character_set_name
+    #   The `NCHAR` character set name of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_list
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotTenantDatabase AWS API Documentation
+    #
+    class DBSnapshotTenantDatabase < Struct.new(
+      :db_snapshot_identifier,
+      :db_instance_identifier,
+      :dbi_resource_id,
+      :engine_name,
+      :snapshot_type,
+      :tenant_database_create_time,
+      :tenant_db_name,
+      :master_username,
+      :tenant_database_resource_id,
+      :character_set_name,
+      :db_snapshot_tenant_database_arn,
+      :nchar_character_set_name,
+      :tag_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified snapshot tenant database wasn't found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotTenantDatabaseNotFoundFault AWS API Documentation
+    #
+    class DBSnapshotTenantDatabaseNotFoundFault < Aws::EmptyStructure; end
+
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_snapshot_tenant_databases
+    #   A list of DB snapshot tenant databases.
+    #   @return [Array<Types::DBSnapshotTenantDatabase>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotTenantDatabasesMessage AWS API Documentation
+    #
+    class DBSnapshotTenantDatabasesMessage < Struct.new(
+      :marker,
+      :db_snapshot_tenant_databases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains the details of an Amazon RDS DB subnet group.
     #
@@ -9977,8 +11151,16 @@ module Aws::RDS
     end
 
     # @!attribute [rw] engine
-    #   The database engine. The only supported engines are
-    #   `custom-oracle-ee` and `custom-oracle-ee-cdb`.
+    #   The database engine. RDS Custom for Oracle supports the following
+    #   values:
+    #
+    #   * `custom-oracle-ee`
+    #
+    #   * `custom-oracle-ee-cdb`
+    #
+    #   * `custom-oracle-se2`
+    #
+    #   * `custom-oracle-se2-cdb`
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -10415,6 +11597,18 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] db_shard_group_identifier
+    #   Teh name of the DB shard group to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBShardGroupMessage AWS API Documentation
+    #
+    class DeleteDBShardGroupMessage < Struct.new(
+      :db_shard_group_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] db_snapshot_identifier
     #   The DB snapshot identifier.
     #
@@ -10516,6 +11710,18 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] integration_identifier
+    #   The unique identifier of the integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteIntegrationMessage AWS API Documentation
+    #
+    class DeleteIntegrationMessage < Struct.new(
+      :integration_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] option_group_name
     #   The name of the option group to be deleted.
     #
@@ -10528,6 +11734,61 @@ module Aws::RDS
     #
     class DeleteOptionGroupMessage < Struct.new(
       :option_group_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_instance_identifier
+    #   The user-supplied identifier for the DB instance that contains the
+    #   tenant database that you want to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_db_name
+    #   The user-supplied name of the tenant database that you want to
+    #   remove from your DB instance. Amazon RDS deletes the tenant database
+    #   with this name. This parameter isn’t case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] skip_final_snapshot
+    #   Specifies whether to skip the creation of a final DB snapshot before
+    #   removing the tenant database from your DB instance. If you enable
+    #   this parameter, RDS doesn't create a DB snapshot. If you don't
+    #   enable this parameter, RDS creates a DB snapshot before it deletes
+    #   the tenant database. By default, RDS doesn't skip the final
+    #   snapshot. If you don't enable this parameter, you must specify the
+    #   `FinalDBSnapshotIdentifier` parameter.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] final_db_snapshot_identifier
+    #   The `DBSnapshotIdentifier` of the new `DBSnapshot` created when the
+    #   `SkipFinalSnapshot` parameter is disabled.
+    #
+    #   <note markdown="1"> If you enable this parameter and also enable `SkipFinalShapshot`,
+    #   the command results in an error.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteTenantDatabaseMessage AWS API Documentation
+    #
+    class DeleteTenantDatabaseMessage < Struct.new(
+      :db_instance_identifier,
+      :tenant_db_name,
+      :skip_final_snapshot,
+      :final_db_snapshot_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tenant_database
+    #   A tenant database in the DB instance. This data type is an element
+    #   in the response to the `DescribeTenantDatabases` action.
+    #   @return [Types::TenantDatabase]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteTenantDatabaseResult AWS API Documentation
+    #
+    class DeleteTenantDatabaseResult < Struct.new(
+      :tenant_database)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11223,7 +12484,7 @@ module Aws::RDS
     #
     #   Default: 100
     #
-    #   Constraints: Minimum 20, maximum 100.
+    #   Constraints: Minimum 20, maximum 100
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -11260,6 +12521,16 @@ module Aws::RDS
     #   * `aurora-postgresql`
     #
     #   * `custom-oracle-ee`
+    #
+    #   * `custom-oracle-ee-cdb`
+    #
+    #   * `custom-oracle-se2`
+    #
+    #   * `custom-oracle-se2-cdb`
+    #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
     #
     #   * `mariadb`
     #
@@ -11992,6 +13263,133 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] last_updated_after
+    #   A filter to include only the recommendations that were updated after
+    #   this specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_before
+    #   A filter to include only the recommendations that were updated
+    #   before this specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] locale
+    #   The language that you choose to return the list of recommendations.
+    #
+    #   Valid values:
+    #
+    #   * `en`
+    #
+    #   * `en_UK`
+    #
+    #   * `de`
+    #
+    #   * `es`
+    #
+    #   * `fr`
+    #
+    #   * `id`
+    #
+    #   * `it`
+    #
+    #   * `ja`
+    #
+    #   * `ko`
+    #
+    #   * `pt_BR`
+    #
+    #   * `zh_TW`
+    #
+    #   * `zh_CN`
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more recommendations to describe.
+    #
+    #   Supported Filters:
+    #
+    #   * `recommendation-id` - Accepts a list of recommendation
+    #     identifiers. The results list only includes the recommendations
+    #     whose identifier is one of the specified filter values.
+    #
+    #   * `status` - Accepts a list of recommendation statuses.
+    #
+    #     Valid values:
+    #
+    #     * `active` - The recommendations which are ready for you to apply.
+    #
+    #     * `pending` - The applied or scheduled recommendations which are
+    #       in progress.
+    #
+    #     * `resolved` - The recommendations which are completed.
+    #
+    #     * `dismissed` - The recommendations that you dismissed.
+    #
+    #     The results list only includes the recommendations whose status is
+    #     one of the specified filter values.
+    #
+    #   * `severity` - Accepts a list of recommendation severities. The
+    #     results list only includes the recommendations whose severity is
+    #     one of the specified filter values.
+    #
+    #     Valid values:
+    #
+    #     * `high`
+    #
+    #     * `medium`
+    #
+    #     * `low`
+    #
+    #     * `informational`
+    #
+    #   * `type-id` - Accepts a list of recommendation type identifiers. The
+    #     results list only includes the recommendations whose type is one
+    #     of the specified filter values.
+    #
+    #   * `dbi-resource-id` - Accepts a list of database resource
+    #     identifiers. The results list only includes the recommendations
+    #     that generated for the specified databases.
+    #
+    #   * `cluster-resource-id` - Accepts a list of cluster resource
+    #     identifiers. The results list only includes the recommendations
+    #     that generated for the specified clusters.
+    #
+    #   * `pg-arn` - Accepts a list of parameter group ARNs. The results
+    #     list only includes the recommendations that generated for the
+    #     specified parameter groups.
+    #
+    #   * `cluster-pg-arn` - Accepts a list of cluster parameter group ARNs.
+    #     The results list only includes the recommendations that generated
+    #     for the specified cluster parameter groups.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of recommendations to include in the response. If
+    #   more records exist than the specified `MaxRecords` value, a
+    #   pagination token called a marker is included in the response so that
+    #   you can retrieve the remaining results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeDBRecommendations` request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBRecommendationsMessage AWS API Documentation
+    #
+    class DescribeDBRecommendationsMessage < Struct.new(
+      :last_updated_after,
+      :last_updated_before,
+      :locale,
+      :filters,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] db_security_group_name
     #   The name of the DB security group to return details for.
     #   @return [String]
@@ -12029,6 +13427,70 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] db_shard_group_identifier
+    #   The user-supplied DB shard group identifier or the Amazon Resource
+    #   Name (ARN) of the DB shard group. If this parameter is specified,
+    #   information for only the specific DB shard group is returned. This
+    #   parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match an existing DB shard group identifier.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more DB shard groups to describe.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeDBShardGroups` request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so you can
+    #   retrieve the remaining results.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBShardGroupsMessage AWS API Documentation
+    #
+    class DescribeDBShardGroupsMessage < Struct.new(
+      :db_shard_group_identifier,
+      :filters,
+      :marker,
+      :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_shard_groups
+    #   Contains a list of DB shard groups for the user.
+    #   @return [Array<Types::DBShardGroup>]
+    #
+    # @!attribute [rw] marker
+    #   A pagination token that can be used in a later `DescribeDBClusters`
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBShardGroupsResponse AWS API Documentation
+    #
+    class DescribeDBShardGroupsResponse < Struct.new(
+      :db_shard_groups,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] db_snapshot_identifier
     #   The identifier for the DB snapshot to describe the attributes for.
     #   @return [String]
@@ -12054,6 +13516,108 @@ module Aws::RDS
     #
     class DescribeDBSnapshotAttributesResult < Struct.new(
       :db_snapshot_attributes_result)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_instance_identifier
+    #   The ID of the DB instance used to create the DB snapshots. This
+    #   parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * If supplied, must match the identifier of an existing
+    #     `DBInstance`.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] db_snapshot_identifier
+    #   The ID of a DB snapshot that contains the tenant databases to
+    #   describe. This value is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * If you specify this parameter, the value must match the ID of an
+    #     existing DB snapshot.
+    #
+    #   * If you specify an automatic snapshot, you must also specify
+    #     `SnapshotType`.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_type
+    #   The type of DB snapshots to be returned. You can specify one of the
+    #   following values:
+    #
+    #   * `automated` – All DB snapshots that have been automatically taken
+    #     by Amazon RDS for my Amazon Web Services account.
+    #
+    #   * `manual` – All DB snapshots that have been taken by my Amazon Web
+    #     Services account.
+    #
+    #   * `shared` – All manual DB snapshots that have been shared to my
+    #     Amazon Web Services account.
+    #
+    #   * `public` – All DB snapshots that have been marked as public.
+    #
+    #   * `awsbackup` – All DB snapshots managed by the Amazon Web Services
+    #     Backup service.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more tenant databases to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `tenant-db-name` - Tenant database names. The results list only
+    #     includes information about the tenant databases that match these
+    #     tenant DB names.
+    #
+    #   * `tenant-database-resource-id` - Tenant database resource
+    #     identifiers. The results list only includes information about the
+    #     tenant databases contained within the DB snapshots.
+    #
+    #   * `dbi-resource-id` - DB instance resource identifiers. The results
+    #     list only includes information about snapshots containing tenant
+    #     databases contained within the DB instances identified by these
+    #     resource identifiers.
+    #
+    #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
+    #     Amazon Resource Names (ARNs).
+    #
+    #   * `db-snapshot-id` - Accepts DB snapshot identifiers.
+    #
+    #   * `snapshot-type` - Accepts types of DB snapshots.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeDBSnapshotTenantDatabases` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dbi_resource_id
+    #   A specific DB resource identifier to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotTenantDatabasesMessage AWS API Documentation
+    #
+    class DescribeDBSnapshotTenantDatabasesMessage < Struct.new(
+      :db_instance_identifier,
+      :db_snapshot_identifier,
+      :snapshot_type,
+      :filters,
+      :max_records,
+      :marker,
+      :dbi_resource_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12310,6 +13874,12 @@ module Aws::RDS
     #   * `aurora-postgresql14`
     #
     #   * `custom-oracle-ee-19`
+    #
+    #   * `custom-oracle-ee-cdb-19`
+    #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
     #
     #   * `mariadb10.2`
     #
@@ -12695,7 +14265,14 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   This parameter isn't currently supported.
+    #   A filter that specifies one or more global database clusters to
+    #   describe. This parameter is case-sensitive.
+    #
+    #   Currently, the only supported filter is `region`.
+    #
+    #   If used, the request returns information about any global cluster
+    #   with at least one member (primary or secondary) in the specified
+    #   Amazon Web Services Regions.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -12727,11 +14304,69 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] integration_identifier
+    #   The unique identifier of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more resources to return.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeIntegrations` request. If this parameter is specified, the
+    #   response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeIntegrationsMessage AWS API Documentation
+    #
+    class DescribeIntegrationsMessage < Struct.new(
+      :integration_identifier,
+      :filters,
+      :max_records,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   A pagination token that can be used in a later
+    #   `DescribeIntegrations` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] integrations
+    #   A list of integrations.
+    #   @return [Array<Types::Integration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeIntegrationsResponse AWS API Documentation
+    #
+    class DescribeIntegrationsResponse < Struct.new(
+      :marker,
+      :integrations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] engine_name
-    #   A required parameter. Options available for the given engine name
-    #   are described.
+    #   The name of the engine to describe options for.
     #
     #   Valid Values:
+    #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
     #
     #   * `mariadb`
     #
@@ -12822,10 +14457,14 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] engine_name
-    #   Filters the list of option groups to only include groups associated
-    #   with a specific database engine.
+    #   A filter to only include option groups associated with this database
+    #   engine.
     #
     #   Valid Values:
+    #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
     #
     #   * `mariadb`
     #
@@ -12870,7 +14509,7 @@ module Aws::RDS
     end
 
     # @!attribute [rw] engine
-    #   The name of the engine to retrieve DB instance options for.
+    #   The name of the database engine to describe DB instance options for.
     #
     #   Valid Values:
     #
@@ -12879,6 +14518,16 @@ module Aws::RDS
     #   * `aurora-postgresql`
     #
     #   * `custom-oracle-ee`
+    #
+    #   * `custom-oracle-ee-cdb`
+    #
+    #   * `custom-oracle-se2`
+    #
+    #   * `custom-oracle-se2-cdb`
+    #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
     #
     #   * `mariadb`
     #
@@ -12904,32 +14553,31 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] engine_version
-    #   The engine version filter value. Specify this parameter to show only
-    #   the available offerings matching the specified engine version.
+    #   A filter to include only the available options for the specified
+    #   engine version.
     #   @return [String]
     #
     # @!attribute [rw] db_instance_class
-    #   The DB instance class filter value. Specify this parameter to show
-    #   only the available offerings matching the specified DB instance
-    #   class.
+    #   A filter to include only the available options for the specified DB
+    #   instance class.
     #   @return [String]
     #
     # @!attribute [rw] license_model
-    #   The license model filter value. Specify this parameter to show only
-    #   the available offerings matching the specified license model.
+    #   A filter to include only the available options for the specified
+    #   license model.
     #
     #   RDS Custom supports only the BYOL licensing model.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_group
     #   The Availability Zone group associated with a Local Zone. Specify
-    #   this parameter to retrieve available offerings for the Local Zones
-    #   in the group.
+    #   this parameter to retrieve available options for the Local Zones in
+    #   the group.
     #
-    #   Omit this parameter to show the available offerings in the specified
+    #   Omit this parameter to show the available options in the specified
     #   Amazon Web Services Region.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #   @return [String]
     #
     # @!attribute [rw] vpc
@@ -12952,7 +14600,7 @@ module Aws::RDS
     #
     #   Default: 100
     #
-    #   Constraints: Minimum 20, maximum 10000.
+    #   Constraints: Minimum 20, maximum 1000.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -13242,6 +14890,62 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_instance_identifier
+    #   The user-supplied DB instance identifier, which must match the
+    #   identifier of an existing instance owned by the Amazon Web Services
+    #   account. This parameter isn't case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_db_name
+    #   The user-supplied tenant database name, which must match the name of
+    #   an existing tenant database on the specified DB instance owned by
+    #   your Amazon Web Services account. This parameter isn’t
+    #   case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more database tenants to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `tenant-db-name` - Tenant database names. The results list only
+    #     includes information about the tenant databases that match these
+    #     tenant DB names.
+    #
+    #   * `tenant-database-resource-id` - Tenant database resource
+    #     identifiers.
+    #
+    #   * `dbi-resource-id` - DB instance resource identifiers. The results
+    #     list only includes information about the tenants contained within
+    #     the DB instances identified by these resource identifiers.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeTenantDatabases` request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeTenantDatabasesMessage AWS API Documentation
+    #
+    class DescribeTenantDatabasesMessage < Struct.new(
+      :db_instance_identifier,
+      :tenant_db_name,
+      :filters,
+      :marker,
+      :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_instance_identifier
     #   The customer identifier or the ARN of your DB instance.
     #   @return [String]
     #
@@ -13264,6 +14968,56 @@ module Aws::RDS
     #
     class DescribeValidDBInstanceModificationsResult < Struct.new(
       :valid_db_instance_modifications_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the DB cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DisableHttpEndpointRequest AWS API Documentation
+    #
+    class DisableHttpEndpointRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The ARN of the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_endpoint_enabled
+    #   Indicates whether the HTTP endpoint is enabled or disabled for the
+    #   DB cluster.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DisableHttpEndpointResponse AWS API Documentation
+    #
+    class DisableHttpEndpointResponse < Struct.new(
+      :resource_arn,
+      :http_endpoint_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A link to documentation that provides additional information for a
+    # recommendation.
+    #
+    # @!attribute [rw] text
+    #   The text with the link to documentation for the recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL for the documentation for the recommendation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DocLink AWS API Documentation
+    #
+    class DocLink < Struct.new(
+      :text,
+      :url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13474,6 +15228,36 @@ module Aws::RDS
     #
     class Ec2ImagePropertiesNotSupportedFault < Aws::EmptyStructure; end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the DB cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EnableHttpEndpointRequest AWS API Documentation
+    #
+    class EnableHttpEndpointRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arn
+    #   The ARN of the DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_endpoint_enabled
+    #   Indicates whether the HTTP endpoint is enabled or disabled for the
+    #   DB cluster.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EnableHttpEndpointResponse AWS API Documentation
+    #
+    class EnableHttpEndpointResponse < Struct.new(
+      :resource_arn,
+      :http_endpoint_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This data type represents the information you need to connect to an
     # Amazon RDS DB instance. This data type is used as a response element
     # in the following actions:
@@ -13669,8 +15453,8 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] enabled
-    #   A Boolean value indicating if the subscription is enabled. True
-    #   indicates the subscription is enabled.
+    #   Specifies whether the subscription is enabled. True indicates the
+    #   subscription is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] event_subscription_arn
@@ -14058,15 +15842,19 @@ module Aws::RDS
     #     and the specified secondary DB cluster are being verified before
     #     the operation starts.
     #
-    #   * failing-over – This status covers the range of Aurora internal
-    #     operations that take place during the switchover or failover
-    #     process, such as demoting the primary Aurora DB cluster, promoting
-    #     the secondary Aurora DB cluster, and synchronizing replicas.
+    #   * failing-over – Aurora is promoting the chosen secondary Aurora DB
+    #     cluster to become the new primary DB cluster to fail over the
+    #     global cluster.
     #
     #   * cancelling – The request to switch over or fail over the global
     #     cluster was cancelled and the primary Aurora DB cluster and the
     #     selected secondary Aurora DB cluster are returning to their
     #     previous states.
+    #
+    #   * switching-over – This status covers the range of Aurora internal
+    #     operations that take place during the switchover process, such as
+    #     demoting the primary Aurora DB cluster, promoting the secondary
+    #     Aurora DB cluster, and synchronizing replicas.
     #   @return [String]
     #
     # @!attribute [rw] from_db_cluster_arn
@@ -14115,6 +15903,10 @@ module Aws::RDS
     # * `DescribeDBClusters`
     #
     # * `DescribeDBInstances`
+    #
+    # * `DescribeDBRecommendations`
+    #
+    # * `DescribeDBShardGroups`
     #
     # * `DescribePendingMaintenanceActions`
     #
@@ -14166,6 +15958,12 @@ module Aws::RDS
     #   Indicates the database engine version.
     #   @return [String]
     #
+    # @!attribute [rw] engine_lifecycle_support
+    #   The life cycle type for the global cluster.
+    #
+    #   For more information, see CreateGlobalCluster.
+    #   @return [String]
+    #
     # @!attribute [rw] database_name
     #   The default database name within the new global database cluster.
     #   @return [String]
@@ -14200,6 +15998,7 @@ module Aws::RDS
       :status,
       :engine,
       :engine_version,
+      :engine_lifecycle_support,
       :database_name,
       :storage_encrypted,
       :deletion_protection,
@@ -14364,6 +16163,139 @@ module Aws::RDS
     #
     class InsufficientStorageClusterCapacityFault < Aws::EmptyStructure; end
 
+    # A zero-ETL integration with Amazon Redshift.
+    #
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the database used as the source
+    #   for replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The ARN of the Redshift data warehouse used as the target for
+    #   replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_name
+    #   The name of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_arn
+    #   The ARN of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Web Services Key Management System (Amazon Web Services
+    #   KMS) key identifier for the key used to to encrypt the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_encryption_context
+    #   The encryption context for the integration. For more information,
+    #   see [Encryption context][1] in the *Amazon Web Services Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] status
+    #   The current status of the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] create_time
+    #   The time when the integration was created, in Universal Coordinated
+    #   Time (UTC).
+    #   @return [Time]
+    #
+    # @!attribute [rw] errors
+    #   Any errors associated with the integration.
+    #   @return [Array<Types::IntegrationError>]
+    #
+    # @!attribute [rw] data_filter
+    #   Data filters for the integration. These filters determine which
+    #   tables from the source database are sent to the target Amazon
+    #   Redshift data warehouse.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Integration AWS API Documentation
+    #
+    class Integration < Struct.new(
+      :source_arn,
+      :target_arn,
+      :integration_name,
+      :integration_arn,
+      :kms_key_id,
+      :additional_encryption_context,
+      :status,
+      :tags,
+      :create_time,
+      :errors,
+      :data_filter,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The integration you are trying to create already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IntegrationAlreadyExistsFault AWS API Documentation
+    #
+    class IntegrationAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # A conflicting conditional operation is currently in progress against
+    # this resource. Typically occurs when there are multiple requests being
+    # made to the same resource at the same time, and these requests
+    # conflict with each other.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IntegrationConflictOperationFault AWS API Documentation
+    #
+    class IntegrationConflictOperationFault < Aws::EmptyStructure; end
+
+    # An error associated with a zero-ETL integration with Amazon Redshift.
+    #
+    # @!attribute [rw] error_code
+    #   The error code associated with the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A message explaining the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IntegrationError AWS API Documentation
+    #
+    class IntegrationError < Struct.new(
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified integration could not be found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IntegrationNotFoundFault AWS API Documentation
+    #
+    class IntegrationNotFoundFault < Aws::EmptyStructure; end
+
+    # You can't crate any more zero-ETL integrations because the quota has
+    # been reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IntegrationQuotaExceededFault AWS API Documentation
+    #
+    class IntegrationQuotaExceededFault < Aws::EmptyStructure; end
+
     # The blue/green deployment can't be switched over or deleted because
     # there is an invalid configuration in the green environment.
     #
@@ -14452,6 +16384,12 @@ module Aws::RDS
     #
     class InvalidDBSecurityGroupStateFault < Aws::EmptyStructure; end
 
+    # The DB shard group must be in the available state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBShardGroupStateFault AWS API Documentation
+    #
+    class InvalidDBShardGroupStateFault < Aws::EmptyStructure; end
+
     # The state of the DB snapshot doesn't allow deletion.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidDBSnapshotStateFault AWS API Documentation
@@ -14510,11 +16448,32 @@ module Aws::RDS
     #
     class InvalidGlobalClusterStateFault < Aws::EmptyStructure; end
 
+    # The integration is in an invalid state and can't perform the
+    # requested operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidIntegrationStateFault AWS API Documentation
+    #
+    class InvalidIntegrationStateFault < Aws::EmptyStructure; end
+
+    # The maximum capacity of the DB shard group must be 48-7168 Aurora
+    # capacity units (ACUs).
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidMaxAcuFault AWS API Documentation
+    #
+    class InvalidMaxAcuFault < Aws::EmptyStructure; end
+
     # The option group isn't in the *available* state.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidOptionGroupStateFault AWS API Documentation
     #
     class InvalidOptionGroupStateFault < Aws::EmptyStructure; end
+
+    # The operation can't be performed because another operation is in
+    # progress.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InvalidResourceStateFault AWS API Documentation
+    #
+    class InvalidResourceStateFault < Aws::EmptyStructure; end
 
     # Cannot restore from VPC backup to non-VPC DB instance.
     #
@@ -14545,11 +16504,47 @@ module Aws::RDS
     #
     class InvalidVPCNetworkStateFault < Aws::EmptyStructure; end
 
+    # The details of an issue with your DB instances, DB clusters, and DB
+    # parameter groups.
+    #
+    # @!attribute [rw] performance_issue_details
+    #   A detailed description of the issue when the recommendation category
+    #   is `performance`.
+    #   @return [Types::PerformanceIssueDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IssueDetails AWS API Documentation
+    #
+    class IssueDetails < Struct.new(
+      :performance_issue_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An error occurred accessing an Amazon Web Services KMS key.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/KMSKeyNotAccessibleFault AWS API Documentation
     #
     class KMSKeyNotAccessibleFault < Aws::EmptyStructure; end
+
+    # Contains details for Aurora Limitless Database.
+    #
+    # @!attribute [rw] status
+    #   The status of Aurora Limitless Database.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_required_acu
+    #   The minimum required capacity for Aurora Limitless Database in
+    #   Aurora capacity units (ACUs).
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/LimitlessDatabase AWS API Documentation
+    #
+    class LimitlessDatabase < Struct.new(
+      :status,
+      :min_required_acu)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] resource_name
     #   The Amazon RDS resource with tags to be listed. This value is an
@@ -14630,6 +16625,77 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The maximum number of DB shard groups for your Amazon Web Services
+    # account in the specified Amazon Web Services Region has been reached.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/MaxDBShardGroupLimitReached AWS API Documentation
+    #
+    class MaxDBShardGroupLimitReached < Aws::EmptyStructure; end
+
+    # The representation of a metric.
+    #
+    # @!attribute [rw] name
+    #   The name of a metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] references
+    #   A list of metric references (thresholds).
+    #   @return [Array<Types::MetricReference>]
+    #
+    # @!attribute [rw] statistics_details
+    #   The details of different statistics for a metric. The description
+    #   might contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_query
+    #   The query to retrieve metric data points.
+    #   @return [Types::MetricQuery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Metric AWS API Documentation
+    #
+    class Metric < Struct.new(
+      :name,
+      :references,
+      :statistics_details,
+      :metric_query)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The query to retrieve metric data points.
+    #
+    # @!attribute [rw] performance_insights_metric_query
+    #   The Performance Insights query that you can use to retrieve
+    #   Performance Insights metric data points.
+    #   @return [Types::PerformanceInsightsMetricQuery]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/MetricQuery AWS API Documentation
+    #
+    class MetricQuery < Struct.new(
+      :performance_insights_metric_query)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The reference (threshold) for a metric.
+    #
+    # @!attribute [rw] name
+    #   The name of the metric reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_details
+    #   The details of a performance issue.
+    #   @return [Types::ReferenceDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/MetricReference AWS API Documentation
+    #
+    class MetricReference < Struct.new(
+      :name,
+      :reference_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The minimum DB engine version required for each corresponding allowed
     # value for an option setting.
     #
@@ -14653,7 +16719,7 @@ module Aws::RDS
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the RDS for Oracle or Microsoft
     #   SQL Server DB instance. For example,
-    #   `arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db`.
+    #   `arn:aws:rds:us-east-1:12345667890:db:my-orcl-db`.
     #   @return [String]
     #
     # @!attribute [rw] audit_policy_state
@@ -14814,8 +16880,16 @@ module Aws::RDS
     end
 
     # @!attribute [rw] engine
-    #   The DB engine. The only supported values are `custom-oracle-ee` and
-    #   `custom-oracle-ee-cdb`.
+    #   The database engine. RDS Custom for Oracle supports the following
+    #   values:
+    #
+    #   * `custom-oracle-ee`
+    #
+    #   * `custom-oracle-ee-cdb`
+    #
+    #   * `custom-oracle-se2`
+    #
+    #   * `custom-oracle-se2-cdb`
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -15232,15 +17306,23 @@ module Aws::RDS
     #
     # @!attribute [rw] enable_http_endpoint
     #   Specifies whether to enable the HTTP endpoint for an Aurora
-    #   Serverless v1 DB cluster. By default, the HTTP endpoint is disabled.
+    #   Serverless v1 DB cluster. By default, the HTTP endpoint isn't
+    #   enabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web
-    #   service API for running SQL queries on the Aurora Serverless v1 DB
-    #   cluster. You can also query your database from inside the RDS
-    #   console with the query editor.
+    #   service API (RDS Data API) for running SQL queries on the Aurora
+    #   Serverless v1 DB cluster. You can also query your database from
+    #   inside the RDS console with the RDS query editor.
     #
-    #   For more information, see [Using the Data API for Aurora Serverless
-    #   v1][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using RDS Data API][1] in the *Amazon
+    #   Aurora User Guide*.
+    #
+    #   <note markdown="1"> This parameter applies only to Aurora Serverless v1 DB clusters. To
+    #   enable or disable the HTTP endpoint for an Aurora PostgreSQL
+    #   Serverless v2 or provisioned DB cluster, use the
+    #   `EnableHttpEndpoint` and `DisableHttpEndpoint` operations.
+    #
+    #    </note>
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
@@ -15313,7 +17395,7 @@ module Aws::RDS
     #
     #   * Aurora DB clusters - `aurora | aurora-iopt1`
     #
-    #   * Multi-AZ DB clusters - `io1`
+    #   * Multi-AZ DB clusters - `io1 | io2 | gp3`
     #
     #   Default:
     #
@@ -15610,6 +17692,27 @@ module Aws::RDS
     #   Services Backup.
     #   @return [String]
     #
+    # @!attribute [rw] enable_limitless_database
+    #   Specifies whether to enable Aurora Limitless Database. You must
+    #   enable Aurora Limitless Database to create a DB shard group.
+    #
+    #   Valid for: Aurora DB clusters only
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB cluster's server
+    #   certificate.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide*.
+    #
+    #   Valid for Cluster Type: Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -15655,7 +17758,9 @@ module Aws::RDS
       :engine_mode,
       :allow_engine_mode_change,
       :enable_local_write_forwarding,
-      :aws_backup_recovery_point_arn)
+      :aws_backup_recovery_point_arn,
+      :enable_limitless_database,
+      :ca_certificate_identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15821,7 +17926,7 @@ module Aws::RDS
     #   The new amount of storage in gibibytes (GiB) to allocate for the DB
     #   instance.
     #
-    #   For RDS for MariaDB, RDS for MySQL, RDS for Oracle, and RDS for
+    #   For RDS for Db2, MariaDB, RDS for MySQL, RDS for Oracle, and RDS for
     #   PostgreSQL, the value supplied must be at least 10% greater than the
     #   current value. Values that are not at least 10% greater than the
     #   existing value are rounded up so that they are 10% greater than the
@@ -15829,6 +17934,15 @@ module Aws::RDS
     #
     #   For the valid values for allocated storage for each engine, see
     #   `CreateDBInstance`.
+    #
+    #   Constraints:
+    #
+    #   * When you increase the allocated storage for a DB instance that
+    #     uses Provisioned IOPS (`gp3`, `io1`, or `io2` storage type), you
+    #     must also specify the `Iops` parameter. You can use the current
+    #     value for `Iops`.
+    #
+    #   ^
     #   @return [Integer]
     #
     # @!attribute [rw] db_instance_class
@@ -15853,8 +17967,8 @@ module Aws::RDS
     #     engine version at the same time, the currently running engine
     #     version must be supported on the specified DB instance class.
     #     Otherwise, the operation returns an error. In this case, first run
-    #     the operation to modify the DB instance class, and then run it
-    #     again to upgrade the engine version.
+    #     the operation to upgrade the engine version, and then run it again
+    #     to modify the DB instance class.
     #
     #   ^
     #
@@ -15877,7 +17991,7 @@ module Aws::RDS
     #   change is applied during the next maintenance window, unless you
     #   enable `ApplyImmediately`.
     #
-    #   This parameter doesn't apply to RDS Custom DB instances.
+    #   This setting doesn't apply to RDS Custom DB instances.
     #
     #   Constraints:
     #
@@ -15954,10 +18068,10 @@ module Aws::RDS
     #   `MasterUserPassword` element exists in the `PendingModifiedValues`
     #   element of the operation response.
     #
-    #   <note markdown="1"> Amazon RDS API operations never return the password, so this action
-    #   provides a way to regain access to a primary instance user if the
-    #   password is lost. This includes restoring privileges that might have
-    #   been accidentally revoked.
+    #   <note markdown="1"> Amazon RDS API operations never return the password, so this
+    #   operation provides a way to regain access to a primary instance user
+    #   if the password is lost. This includes restoring privileges that
+    #   might have been accidentally revoked.
     #
     #    </note>
     #
@@ -15975,9 +18089,12 @@ module Aws::RDS
     #   * Can't be specified if `ManageMasterUserPassword` is turned on.
     #
     #   * Can include any printable ASCII character except "/", """, or
-    #     "@".
+    #     "@". For RDS for Oracle, can't include the "&amp;"
+    #     (ampersand) or the "'" (single quotes) character.
     #
     #   Length Constraints:
+    #
+    #   * RDS for Db2 - Must contain from 8 to 255 characters.
     #
     #   * RDS for MariaDB - Must contain from 8 to 41 characters.
     #
@@ -16147,8 +18264,8 @@ module Aws::RDS
     #     instance class at the same time, the currently running engine
     #     version must be supported on the specified DB instance class.
     #     Otherwise, the operation returns an error. In this case, first run
-    #     the operation to modify the DB instance class, and then run it
-    #     again to upgrade the engine version.
+    #     the operation to upgrade the engine version, and then run it again
+    #     to modify the DB instance class.
     #
     #   ^
     #   @return [String]
@@ -16194,6 +18311,8 @@ module Aws::RDS
     #   instances.
     #
     #   Valid Values:
+    #
+    #   * RDS for Db2 - `bring-your-own-license`
     #
     #   * RDS for MariaDB - `general-public-license`
     #
@@ -16241,7 +18360,9 @@ module Aws::RDS
     #     the existing value are rounded up so that they are 10% greater
     #     than the current value.
     #
-    #   ^
+    #   * When you increase the Provisioned IOPS, you must also specify the
+    #     `AllocatedStorage` parameter. You can use the current value for
+    #     `AllocatedStorage`.
     #
     #   Default: Uses existing setting
     #   @return [Integer]
@@ -16289,8 +18410,8 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   The storage type to associate with the DB instance.
     #
-    #   If you specify Provisioned IOPS (`io1`), you must also include a
-    #   value for the `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3` you must also include a value
+    #   for the `Iops` parameter.
     #
     #   If you choose to migrate your DB instance from using standard
     #   storage to using Provisioned IOPS, or from using Provisioned IOPS to
@@ -16308,7 +18429,7 @@ module Aws::RDS
     #   read replica for the instance, and creating a DB snapshot of the
     #   instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
@@ -16349,8 +18470,8 @@ module Aws::RDS
     #   The Active Directory directory ID to move the DB instance to.
     #   Specify `none` to remove the instance from its current domain. You
     #   must create the domain before this operation. Currently, you can
-    #   create only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB
-    #   instances in an Active Directory Domain.
+    #   create only Db2, MySQL, Microsoft SQL Server, Oracle, and PostgreSQL
+    #   DB instances in an Active Directory Domain.
     #
     #   For more information, see [ Kerberos Authentication][1] in the
     #   *Amazon RDS User Guide*.
@@ -16454,6 +18575,8 @@ module Aws::RDS
     #   Default:
     #
     #   * Amazon Aurora - `3306`
+    #
+    #   * RDS for Db2 - `50000`
     #
     #   * RDS for MariaDB - `3306`
     #
@@ -16643,6 +18766,12 @@ module Aws::RDS
     #   The database can't be deleted when deletion protection is enabled.
     #   By default, deletion protection isn't enabled. For more
     #   information, see [ Deleting a DB Instance][1].
+    #
+    #   This setting doesn't apply to Amazon Aurora DB instances. You can
+    #   enable or disable deletion protection for the DB cluster. For more
+    #   information, see `ModifyDBCluster`. DB instances in a DB cluster can
+    #   be deleted even when deletion protection is enabled for the DB
+    #   cluster.
     #
     #
     #
@@ -16912,6 +19041,29 @@ module Aws::RDS
     #     `--option-group-name`.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] multi_tenant
+    #   Specifies whether the to convert your DB instance from the
+    #   single-tenant conﬁguration to the multi-tenant conﬁguration. This
+    #   parameter is supported only for RDS for Oracle CDB instances.
+    #
+    #   During the conversion, RDS creates an initial tenant database and
+    #   associates the DB name, master user name, character set, and
+    #   national character set metadata with this database. The tags
+    #   associated with the instance also propagate to the initial tenant
+    #   database. You can add more tenant databases to your DB instance by
+    #   using the `CreateTenantDatabase` operation.
+    #
+    #   The conversion to the multi-tenant configuration is permanent and
+    #   irreversible, so you can't later convert back to the single-tenant
+    #   configuration. When you specify this parameter, you must also
+    #   specify `ApplyImmediately`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -16972,7 +19124,9 @@ module Aws::RDS
       :manage_master_user_password,
       :rotate_master_user_password,
       :master_user_secret_kms_key_id,
-      :engine)
+      :engine,
+      :dedicated_log_volume,
+      :multi_tenant)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17210,6 +19364,58 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] recommendation_id
+    #   The identifier of the recommendation to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale
+    #   The language of the modified recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The recommendation status to update.
+    #
+    #   Valid values:
+    #
+    #   * active
+    #
+    #   * dismissed
+    #   @return [String]
+    #
+    # @!attribute [rw] recommended_action_updates
+    #   The list of recommended action status to update. You can update
+    #   multiple recommended actions at one time.
+    #   @return [Array<Types::RecommendedActionUpdate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBRecommendationMessage AWS API Documentation
+    #
+    class ModifyDBRecommendationMessage < Struct.new(
+      :recommendation_id,
+      :locale,
+      :status,
+      :recommended_action_updates)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_shard_group_identifier
+    #   The name of the DB shard group to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_acu
+    #   The maximum capacity of the DB shard group in Aurora capacity units
+    #   (ACUs).
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBShardGroupMessage AWS API Documentation
+    #
+    class ModifyDBShardGroupMessage < Struct.new(
+      :db_shard_group_identifier,
+      :max_acu)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] db_snapshot_identifier
     #   The identifier for the DB snapshot to modify the attributes for.
     #   @return [String]
@@ -17291,9 +19497,9 @@ module Aws::RDS
     #
     #   **MySQL**
     #
-    #   * `5.5.46` (supported for 5.1 DB snapshots)
-    #
-    #   ^
+    #   For the list of engine versions that are available for upgrading a
+    #   DB snapshot, see [ Upgrading a MySQL DB snapshot engine version][1]
+    #   in the *Amazon RDS User Guide.*
     #
     #   **Oracle**
     #
@@ -17312,12 +19518,13 @@ module Aws::RDS
     #   **PostgreSQL**
     #
     #   For the list of engine versions that are available for upgrading a
-    #   DB snapshot, see [ Upgrading the PostgreSQL DB Engine for Amazon
-    #   RDS][1].
+    #   DB snapshot, see [ Upgrading a PostgreSQL DB snapshot engine
+    #   version][2] in the *Amazon RDS User Guide.*
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-upgrade-snapshot.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBSnapshot.PostgreSQL.html
     #   @return [String]
     #
     # @!attribute [rw] option_group_name
@@ -17418,9 +19625,9 @@ module Aws::RDS
     #   specify `db-proxy`. If this value isn't specified, all events are
     #   returned.
     #
-    #   Valid Values: `db-instance` \| `db-cluster` \| `db-parameter-group`
-    #   \| `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot` \|
-    #   `db-proxy`
+    #   Valid Values:` db-instance | db-cluster | db-parameter-group |
+    #   db-security-group | db-snapshot | db-cluster-snapshot | db-proxy |
+    #   zero-etl | custom-engine-version | blue-green-deployment `
     #   @return [String]
     #
     # @!attribute [rw] event_categories
@@ -17551,6 +19758,39 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] integration_identifier
+    #   The unique identifier of the integration to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] integration_name
+    #   A new name for the integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_filter
+    #   A new data filter for the integration. For more information, see
+    #   [Data filtering for Aurora zero-ETL integrations with Amazon
+    #   Redshift][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Zero_ETL_Filtering.html
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A new description for the integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyIntegrationMessage AWS API Documentation
+    #
+    class ModifyIntegrationMessage < Struct.new(
+      :integration_identifier,
+      :integration_name,
+      :data_filter,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] option_group_name
     #   The name of the option group to be modified.
     #
@@ -17594,6 +19834,88 @@ module Aws::RDS
     #
     class ModifyOptionGroupResult < Struct.new(
       :option_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] db_instance_identifier
+    #   The identifier of the DB instance that contains the tenant database
+    #   that you are modifying. This parameter isn't case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing DB instance.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_db_name
+    #   The user-supplied name of the tenant database that you want to
+    #   modify. This parameter isn’t case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must match the identifier of an existing tenant database.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] master_user_password
+    #   The new password for the master user of the specified tenant
+    #   database in your DB instance.
+    #
+    #   <note markdown="1"> Amazon RDS operations never return the password, so this action
+    #   provides a way to regain access to a tenant database user if the
+    #   password is lost. This includes restoring privileges that might have
+    #   been accidentally revoked.
+    #
+    #    </note>
+    #
+    #   Constraints:
+    #
+    #   * Can include any printable ASCII character except `/`, `"` (double
+    #     quote), `@`, `&` (ampersand), and `'` (single quote).
+    #
+    #   ^
+    #
+    #   Length constraints:
+    #
+    #   * Must contain between 8 and 30 characters.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] new_tenant_db_name
+    #   The new name of the tenant database when renaming a tenant database.
+    #   This parameter isn’t case-sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Can't be the string null or any other reserved word.
+    #
+    #   * Can't be longer than 8 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyTenantDatabaseMessage AWS API Documentation
+    #
+    class ModifyTenantDatabaseMessage < Struct.new(
+      :db_instance_identifier,
+      :tenant_db_name,
+      :master_user_password,
+      :new_tenant_db_name)
+      SENSITIVE = [:master_user_password]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tenant_database
+    #   A tenant database in the DB instance. This data type is an element
+    #   in the response to the `DescribeTenantDatabases` action.
+    #   @return [Types::TenantDatabase]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyTenantDatabaseResult AWS API Documentation
+    #
+    class ModifyTenantDatabaseResult < Struct.new(
+      :tenant_database)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18279,6 +20601,11 @@ module Aws::RDS
     #   instance.
     #   @return [Float]
     #
+    # @!attribute [rw] supports_dedicated_log_volume
+    #   Indicates whether a DB instance supports using a dedicated log
+    #   volume (DLV).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -18316,7 +20643,8 @@ module Aws::RDS
       :min_storage_throughput_per_db_instance,
       :max_storage_throughput_per_db_instance,
       :min_storage_throughput_per_iops,
-      :max_storage_throughput_per_iops)
+      :max_storage_throughput_per_iops,
+      :supports_dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18465,8 +20793,17 @@ module Aws::RDS
     #
     # @!attribute [rw] action
     #   The type of pending maintenance action that is available for the
-    #   resource. Valid actions are `system-update`, `db-upgrade`,
-    #   `hardware-maintenance`, and `ca-certificate-rotation`.
+    #   resource.
+    #
+    #   For more information about maintenance actions, see [Maintaining a
+    #   DB instance][1].
+    #
+    #   Valid Values:` system-update | db-upgrade | hardware-maintenance |
+    #   ca-certificate-rotation`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html
     #   @return [String]
     #
     # @!attribute [rw] auto_applied_after_date
@@ -18646,6 +20983,16 @@ module Aws::RDS
     #   The database engine of the DB instance.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Indicates whether the DB instance has a dedicated log volume (DLV)
+    #   enabled.&gt;
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] multi_tenant
+    #   Indicates whether the DB instance will change to the multi-tenant
+    #   configuration (TRUE) or the single-tenant configuration (FALSE).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
@@ -18668,7 +21015,144 @@ module Aws::RDS
       :automation_mode,
       :resume_full_automation_mode_time,
       :storage_throughput,
-      :engine)
+      :engine,
+      :dedicated_log_volume,
+      :multi_tenant)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A logical grouping of Performance Insights metrics for a related
+    # subject area. For example, the `db.sql` dimension group consists of
+    # the following dimensions:
+    #
+    # * `db.sql.id` - The hash of a running SQL statement, generated by
+    #   Performance Insights.
+    #
+    # * `db.sql.db_id` - Either the SQL ID generated by the database engine,
+    #   or a value generated by Performance Insights that begins with `pi-`.
+    #
+    # * `db.sql.statement` - The full text of the SQL statement that is
+    #   running, for example, `SELECT * FROM employees`.
+    #
+    # * `db.sql_tokenized.id` - The hash of the SQL digest generated by
+    #   Performance Insights.
+    #
+    # <note markdown="1"> Each response element returns a maximum of 500 bytes. For larger
+    # elements, such as SQL statements, only the first 500 bytes are
+    # returned.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] dimensions
+    #   A list of specific dimensions from a dimension group. If this list
+    #   isn't included, then all of the dimensions in the group were
+    #   requested, or are present in the response.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] group
+    #   The available dimension groups for Performance Insights metric type.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items to fetch for this dimension group.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PerformanceInsightsMetricDimensionGroup AWS API Documentation
+    #
+    class PerformanceInsightsMetricDimensionGroup < Struct.new(
+      :dimensions,
+      :group,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single Performance Insights metric query to process. You must
+    # provide the metric to the query. If other parameters aren't
+    # specified, Performance Insights returns all data points for the
+    # specified metric. Optionally, you can request the data points to be
+    # aggregated by dimension group (`GroupBy`) and return only those data
+    # points that match your criteria (`Filter`).
+    #
+    # Constraints:
+    #
+    # * Must be a valid Performance Insights query.
+    #
+    # ^
+    #
+    # @!attribute [rw] group_by
+    #   A specification for how to aggregate the data points from a query
+    #   result. You must specify a valid dimension group. Performance
+    #   Insights will return all of the dimensions within that group, unless
+    #   you provide the names of specific dimensions within that group. You
+    #   can also request that Performance Insights return a limited number
+    #   of values for a dimension.
+    #   @return [Types::PerformanceInsightsMetricDimensionGroup]
+    #
+    # @!attribute [rw] metric
+    #   The name of a Performance Insights metric to be measured.
+    #
+    #   Valid Values:
+    #
+    #   * `db.load.avg` - A scaled representation of the number of active
+    #     sessions for the database engine.
+    #
+    #   * `db.sampledload.avg` - The raw number of active sessions for the
+    #     database engine.
+    #
+    #   * The counter metrics listed in [Performance Insights operating
+    #     system counters][1] in the *Amazon Aurora User Guide*.
+    #
+    #   If the number of active sessions is less than an internal
+    #   Performance Insights threshold, `db.load.avg` and
+    #   `db.sampledload.avg` are the same value. If the number of active
+    #   sessions is greater than the internal threshold, Performance
+    #   Insights samples the active sessions, with `db.load.avg` showing the
+    #   scaled values, `db.sampledload.avg` showing the raw values, and
+    #   `db.sampledload.avg` less than `db.load.avg`. For most use cases,
+    #   you can query `db.load.avg` only.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PerformanceInsightsMetricQuery AWS API Documentation
+    #
+    class PerformanceInsightsMetricQuery < Struct.new(
+      :group_by,
+      :metric)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of the performance issue.
+    #
+    # @!attribute [rw] start_time
+    #   The time when the performance issue started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time when the performance issue stopped.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metrics
+    #   The metrics that are relevant to the performance issue.
+    #   @return [Array<Types::Metric>]
+    #
+    # @!attribute [rw] analysis
+    #   The analysis of the performance issue. The information might contain
+    #   markdown.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PerformanceIssueDetails AWS API Documentation
+    #
+    class PerformanceIssueDetails < Struct.new(
+      :start_time,
+      :end_time,
+      :metrics,
+      :analysis)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18977,6 +21461,30 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # Reserved for future use.
+    #
+    # @!attribute [rw] interconnect_subnet_id
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_multicast_domain_id
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_mode
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RdsCustomClusterConfiguration AWS API Documentation
+    #
+    class RdsCustomClusterConfiguration < Struct.new(
+      :interconnect_subnet_id,
+      :transit_gateway_multicast_domain_id,
+      :replica_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] db_cluster_identifier
     #   The DB cluster identifier. This parameter is stored as a lowercase
     #   string.
@@ -19083,6 +21591,139 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @!attribute [rw] db_shard_group_identifier
+    #   The name of the DB shard group to reboot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBShardGroupMessage AWS API Documentation
+    #
+    class RebootDBShardGroupMessage < Struct.new(
+      :db_shard_group_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The recommended actions to apply to resolve the issues associated with
+    # your DB instances, DB clusters, and DB parameter groups.
+    #
+    # @!attribute [rw] action_id
+    #   The unique identifier of the recommended action.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A short description to summarize the action. The description might
+    #   contain markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A detailed description of the action. The description might contain
+    #   markdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] operation
+    #   An API operation for the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters for the API operation.
+    #   @return [Array<Types::RecommendedActionParameter>]
+    #
+    # @!attribute [rw] apply_modes
+    #   The methods to apply the recommended action.
+    #
+    #   Valid values:
+    #
+    #   * `manual` - The action requires you to resolve the recommendation
+    #     manually.
+    #
+    #   * `immediately` - The action is applied immediately.
+    #
+    #   * `next-maintainance-window` - The action is applied during the next
+    #     scheduled maintainance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the action.
+    #
+    #   * `ready`
+    #
+    #   * `applied`
+    #
+    #   * `scheduled`
+    #
+    #   * `resolved`
+    #   @return [String]
+    #
+    # @!attribute [rw] issue_details
+    #   The details of the issue.
+    #   @return [Types::IssueDetails]
+    #
+    # @!attribute [rw] context_attributes
+    #   The supporting attributes to explain the recommended action.
+    #   @return [Array<Types::ContextAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RecommendedAction AWS API Documentation
+    #
+    class RecommendedAction < Struct.new(
+      :action_id,
+      :title,
+      :description,
+      :operation,
+      :parameters,
+      :apply_modes,
+      :status,
+      :issue_details,
+      :context_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single parameter to use with the `RecommendedAction` API operation
+    # to apply the action.
+    #
+    # @!attribute [rw] key
+    #   The key of the parameter to use with the `RecommendedAction` API
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the parameter to use with the `RecommendedAction` API
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RecommendedActionParameter AWS API Documentation
+    #
+    class RecommendedActionParameter < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The recommended status to update for the specified recommendation
+    # action ID.
+    #
+    # @!attribute [rw] action_id
+    #   A unique identifier of the updated recommendation action.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the updated recommendation action.
+    #
+    #   * `applied`
+    #
+    #   * `scheduled`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RecommendedActionUpdate AWS API Documentation
+    #
+    class RecommendedActionUpdate < Struct.new(
+      :action_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This data type is used as a response element in the
     # `DescribeReservedDBInstances` and
     # `DescribeReservedDBInstancesOfferings` actions.
@@ -19100,6 +21741,20 @@ module Aws::RDS
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
       :recurring_charge_frequency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The reference details of a metric.
+    #
+    # @!attribute [rw] scalar_reference_details
+    #   The metric reference details when the reference is a scalar.
+    #   @return [Types::ScalarReferenceDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReferenceDetails AWS API Documentation
+    #
+    class ReferenceDetails < Struct.new(
+      :scalar_reference_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20022,6 +22677,45 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters only
     #   @return [String]
     #
+    # @!attribute [rw] engine_lifecycle_support
+    #   The life cycle type for this DB cluster.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB cluster into Amazon RDS Extended Support. At
+    #   the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, RDS
+    #   automatically upgrades your restored DB cluster to a higher engine
+    #   version, if the major engine version is past its end of standard
+    #   support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB cluster into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the
+    #   selected major engine version on your DB cluster past the end of
+    #   standard support for that engine version. For more information, see
+    #   the following sections:
+    #
+    #   * Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
+    #     Support][1] in the *Amazon Aurora User Guide*
+    #
+    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
+    #     RDS User Guide*
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message AWS API Documentation
     #
     class RestoreDBClusterFromS3Message < Struct.new(
@@ -20060,7 +22754,8 @@ module Aws::RDS
       :network_type,
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
-      :storage_type)
+      :storage_type,
+      :engine_lifecycle_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20554,6 +23249,49 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     #   @return [String]
     #
+    # @!attribute [rw] rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #   @return [Types::RdsCustomClusterConfiguration]
+    #
+    # @!attribute [rw] engine_lifecycle_support
+    #   The life cycle type for this DB cluster.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB cluster into Amazon RDS Extended Support. At
+    #   the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, RDS
+    #   automatically upgrades your restored DB cluster to a higher engine
+    #   version, if the major engine version is past its end of standard
+    #   support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB cluster into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the
+    #   selected major engine version on your DB cluster past the end of
+    #   standard support for that engine version. For more information, see
+    #   the following sections:
+    #
+    #   * Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
+    #     Support][1] in the *Amazon Aurora User Guide*
+    #
+    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
+    #     RDS User Guide*
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -20584,7 +23322,9 @@ module Aws::RDS
       :iops,
       :publicly_accessible,
       :serverless_v2_scaling_configuration,
-      :network_type)
+      :network_type,
+      :rds_custom_cluster_configuration,
+      :engine_lifecycle_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21050,6 +23790,49 @@ module Aws::RDS
     #   The resource ID of the source DB cluster from which to restore.
     #   @return [String]
     #
+    # @!attribute [rw] rds_custom_cluster_configuration
+    #   Reserved for future use.
+    #   @return [Types::RdsCustomClusterConfiguration]
+    #
+    # @!attribute [rw] engine_lifecycle_support
+    #   The life cycle type for this DB cluster.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB cluster into Amazon RDS Extended Support. At
+    #   the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, RDS
+    #   automatically upgrades your restored DB cluster to a higher engine
+    #   version, if the major engine version is past its end of standard
+    #   support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB cluster into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the
+    #   selected major engine version on your DB cluster past the end of
+    #   standard support for that engine version. For more information, see
+    #   the following sections:
+    #
+    #   * Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
+    #     Support][1] in the *Amazon Aurora User Guide*
+    #
+    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
+    #     RDS User Guide*
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -21080,7 +23863,9 @@ module Aws::RDS
       :iops,
       :serverless_v2_scaling_configuration,
       :network_type,
-      :source_db_cluster_resource_id)
+      :source_db_cluster_resource_id,
+      :rds_custom_cluster_configuration,
+      :engine_lifecycle_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21125,16 +23910,16 @@ module Aws::RDS
     end
 
     # @!attribute [rw] db_instance_identifier
-    #   Name of the DB instance to create from the DB snapshot. This
+    #   The name of the DB instance to create from the DB snapshot. This
     #   parameter isn't case-sensitive.
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 63 numbers, letters, or hyphens
+    #   * Must contain from 1 to 63 numbers, letters, or hyphens.
     #
-    #   * First character must be a letter
+    #   * First character must be a letter.
     #
-    #   * Can't end with a hyphen or contain two consecutive hyphens
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
     #
     #   Example: `my-snapshot-id`
     #   @return [String]
@@ -21144,7 +23929,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must match the identifier of an existing DBSnapshot.
+    #   * Must match the identifier of an existing DB snapshot.
     #
     #   * Can't be specified when `DBClusterSnapshotIdentifier` is
     #     specified.
@@ -21190,10 +23975,13 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_name
-    #   The DB subnet group name to use for the new instance.
+    #   The name of the DB subnet group to use for the new instance.
     #
-    #   Constraints: If supplied, must match the name of an existing
-    #   DBSubnetGroup.
+    #   Constraints:
+    #
+    #   * If supplied, must match the name of an existing DB subnet group.
+    #
+    #   ^
     #
     #   Example: `mydbsubnetgroup`
     #   @return [String]
@@ -21235,19 +24023,45 @@ module Aws::RDS
     # @!attribute [rw] license_model
     #   License model information for the restored DB instance.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   <note markdown="1"> License models for RDS for Db2 require additional configuration. The
+    #   Bring Your Own License (BYOL) model requires a custom parameter
+    #   group. The Db2 license through Amazon Web Services Marketplace model
+    #   requires an Amazon Web Services Marketplace subscription. For more
+    #   information, see [RDS for Db2 licensing options][1] in the *Amazon
+    #   RDS User Guide*.
     #
-    #   Default: Same as source.
+    #    </note>
     #
-    #   Valid Values: `license-included` \| `bring-your-own-license` \|
-    #   `general-public-license`
+    #   This setting doesn't apply to Amazon Aurora or RDS Custom DB
+    #   instances.
+    #
+    #   Valid Values:
+    #
+    #   * RDS for Db2 - `bring-your-own-license | marketplace-license`
+    #
+    #   * RDS for MariaDB - `general-public-license`
+    #
+    #   * RDS for Microsoft SQL Server - `license-included`
+    #
+    #   * RDS for MySQL - `general-public-license`
+    #
+    #   * RDS for Oracle - `bring-your-own-license | license-included`
+    #
+    #   * RDS for PostgreSQL - `postgresql-license`
+    #
+    #   Default: Same as the source.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html
     #   @return [String]
     #
     # @!attribute [rw] db_name
-    #   The database name for the restored DB instance.
+    #   The name of the database for the restored DB instance.
     #
-    #   This parameter doesn't apply to the MySQL, PostgreSQL, or MariaDB
-    #   engines. It also doesn't apply to RDS Custom DB instances.
+    #   This parameter only applies to RDS for Oracle and RDS for SQL Server
+    #   DB instances. It doesn't apply to the other engines or to RDS
+    #   Custom DB instances.
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -21262,6 +24076,10 @@ module Aws::RDS
     #   snapshot.
     #
     #   Valid Values:
+    #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
     #
     #   * `mariadb`
     #
@@ -21329,10 +24147,10 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
     #   @return [String]
@@ -21360,10 +24178,10 @@ module Aws::RDS
     #   @return [Array<String>]
     #
     # @!attribute [rw] domain
-    #   Specify the Active Directory directory ID to restore the DB instance
-    #   in. The domain/ must be created prior to this operation. Currently,
-    #   you can create only MySQL, Microsoft SQL Server, Oracle, and
-    #   PostgreSQL DB instances in an Active Directory Domain.
+    #   The Active Directory directory ID to restore the DB instance in. The
+    #   domain/ must be created prior to this operation. Currently, you can
+    #   create only Db2, MySQL, Microsoft SQL Server, Oracle, and PostgreSQL
+    #   DB instances in an Active Directory Domain.
     #
     #   For more information, see [ Kerberos Authentication][1] in the
     #   *Amazon RDS User Guide*.
@@ -21474,10 +24292,10 @@ module Aws::RDS
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_cloudwatch_logs_exports
-    #   The list of logs that the restored DB instance is to export to
-    #   CloudWatch Logs. The values in the list depend on the DB engine
-    #   being used. For more information, see [Publishing Database Logs to
-    #   Amazon CloudWatch Logs][1] in the *Amazon RDS User Guide*.
+    #   The list of logs for the restored DB instance to export to
+    #   CloudWatch Logs. The values in the list depend on the DB engine. For
+    #   more information, see [Publishing Database Logs to Amazon CloudWatch
+    #   Logs][1] in the *Amazon RDS User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -21511,7 +24329,8 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * If supplied, must match the name of an existing DBParameterGroup.
+    #   * If supplied, must match the name of an existing DB parameter
+    #     group.
     #
     #   * Must be 1 to 255 letters, numbers, or hyphens.
     #
@@ -21622,8 +24441,7 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] db_cluster_snapshot_identifier
-    #   The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to
-    #   restore from.
+    #   The identifier for the Multi-AZ DB cluster snapshot to restore from.
     #
     #   For more information on Multi-AZ DB clusters, see [ Multi-AZ DB
     #   cluster deployments][1] in the *Amazon RDS User Guide*.
@@ -21643,9 +24461,6 @@ module Aws::RDS
     #
     #   * Can't be the identifier of an Aurora DB cluster snapshot.
     #
-    #   * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB
-    #     cluster snapshot.
-    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
@@ -21662,6 +24477,63 @@ module Aws::RDS
     #
     #    </note>
     #   @return [Integer]
+    #
+    # @!attribute [rw] dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB instance's server
+    #   certificate.
+    #
+    #   This setting doesn't apply to RDS Custom DB instances.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
+    #   to encrypt a connection to a DB cluster][2] in the *Amazon Aurora
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_lifecycle_support
+    #   The life cycle type for this DB instance.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB instance into Amazon RDS Extended Support. At
+    #   the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, RDS
+    #   automatically upgrades your restored DB instance to a higher engine
+    #   version, if the major engine version is past its end of standard
+    #   support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB instance into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the
+    #   selected major engine version on your DB instance past the end of
+    #   standard support for that engine version. For more information, see
+    #   [Using Amazon RDS Extended Support][1] in the *Amazon RDS User
+    #   Guide*.
+    #
+    #   This setting applies only to RDS for MySQL and RDS for PostgreSQL.
+    #   For Amazon Aurora DB instances, the life cycle type is managed by
+    #   the DB cluster.
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotMessage AWS API Documentation
     #
@@ -21704,7 +24576,10 @@ module Aws::RDS
       :network_type,
       :storage_throughput,
       :db_cluster_snapshot_identifier,
-      :allocated_storage)
+      :allocated_storage,
+      :dedicated_log_volume,
+      :ca_certificate_identifier,
+      :engine_lifecycle_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21795,31 +24670,30 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] master_user_password
-    #   The password for the master user. The password can include any
-    #   printable ASCII character except "/", """, or "@".
+    #   The password for the master user.
     #
-    #   Constraints: Can't be specified if `ManageMasterUserPassword` is
-    #   turned on.
+    #   Constraints:
     #
-    #   **MariaDB**
+    #   * Can't be specified if `ManageMasterUserPassword` is turned on.
     #
-    #   Constraints: Must contain from 8 to 41 characters.
+    #   * Can include any printable ASCII character except "/", """, or
+    #     "@". For RDS for Oracle, can't include the "&amp;"
+    #     (ampersand) or the "'" (single quotes) character.
     #
-    #   **Microsoft SQL Server**
+    #   Length Constraints:
     #
-    #   Constraints: Must contain from 8 to 128 characters.
+    #   * RDS for Db2 - Must contain from 8 to 128 characters.
     #
-    #   **MySQL**
+    #   * RDS for MariaDB - Must contain from 8 to 41 characters.
     #
-    #   Constraints: Must contain from 8 to 41 characters.
+    #   * RDS for Microsoft SQL Server - Must contain from 8 to 128
+    #     characters.
     #
-    #   **Oracle**
+    #   * RDS for MySQL - Must contain from 8 to 41 characters.
     #
-    #   Constraints: Must contain from 8 to 30 characters.
+    #   * RDS for Oracle - Must contain from 8 to 30 characters.
     #
-    #   **PostgreSQL**
-    #
-    #   Constraints: Must contain from 8 to 128 characters.
+    #   * RDS for PostgreSQL - Must contain from 8 to 128 characters.
     #   @return [String]
     #
     # @!attribute [rw] db_security_groups
@@ -21999,10 +24873,10 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
-    #   If you specify `io1` or `gp3`, you must also include a value for the
-    #   `Iops` parameter.
+    #   If you specify `io1`, `io2`, or `gp3`, you must also include a value
+    #   for the `Iops` parameter.
     #
     #   Default: `io1` if the `Iops` parameter is specified; otherwise `gp2`
     #   @return [String]
@@ -22098,8 +24972,15 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] s3_ingestion_role_arn
-    #   An Amazon Web Services Identity and Access Management (IAM) role to
-    #   allow Amazon RDS to access your Amazon S3 bucket.
+    #   An Amazon Web Services Identity and Access Management (IAM) role
+    #   with a trust policy and a permissions policy that allows Amazon RDS
+    #   to access your Amazon S3 bucket. For information about this role,
+    #   see [ Creating an IAM role manually][1] in the *Amazon RDS User
+    #   Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html#MySQL.Procedural.Importing.Enabling.IAM
     #   @return [String]
     #
     # @!attribute [rw] enable_performance_insights
@@ -22267,6 +25148,63 @@ module Aws::RDS
     #   each Amazon Web Services Region.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB instance's server
+    #   certificate.
+    #
+    #   This setting doesn't apply to RDS Custom DB instances.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
+    #   to encrypt a connection to a DB cluster][2] in the *Amazon Aurora
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_lifecycle_support
+    #   The life cycle type for this DB instance.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB instance into Amazon RDS Extended Support. At
+    #   the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, RDS
+    #   automatically upgrades your restored DB instance to a higher engine
+    #   version, if the major engine version is past its end of standard
+    #   support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB instance into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the
+    #   selected major engine version on your DB instance past the end of
+    #   standard support for that engine version. For more information, see
+    #   [Using Amazon RDS Extended Support][1] in the *Amazon RDS User
+    #   Guide*.
+    #
+    #   This setting applies only to RDS for MySQL and RDS for PostgreSQL.
+    #   For Amazon Aurora DB instances, the life cycle type is managed by
+    #   the DB cluster.
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3Message AWS API Documentation
     #
     class RestoreDBInstanceFromS3Message < Struct.new(
@@ -22317,7 +25255,10 @@ module Aws::RDS
       :network_type,
       :storage_throughput,
       :manage_master_user_password,
-      :master_user_secret_kms_key_id)
+      :master_user_secret_kms_key_id,
+      :dedicated_log_volume,
+      :ca_certificate_identifier,
+      :engine_lifecycle_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22484,21 +25425,51 @@ module Aws::RDS
     # @!attribute [rw] license_model
     #   The license model information for the restored DB instance.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   <note markdown="1"> License models for RDS for Db2 require additional configuration. The
+    #   Bring Your Own License (BYOL) model requires a custom parameter
+    #   group. The Db2 license through Amazon Web Services Marketplace model
+    #   requires an Amazon Web Services Marketplace subscription. For more
+    #   information, see [RDS for Db2 licensing options][1] in the *Amazon
+    #   RDS User Guide*.
     #
-    #   Valid Values: `license-included` \| `bring-your-own-license` \|
-    #   `general-public-license`
+    #    </note>
+    #
+    #   This setting doesn't apply to Amazon Aurora or RDS Custom DB
+    #   instances.
+    #
+    #   Valid Values:
+    #
+    #   * RDS for Db2 - `bring-your-own-license | marketplace-license`
+    #
+    #   * RDS for MariaDB - `general-public-license`
+    #
+    #   * RDS for Microsoft SQL Server - `license-included`
+    #
+    #   * RDS for MySQL - `general-public-license`
+    #
+    #   * RDS for Oracle - `bring-your-own-license | license-included`
+    #
+    #   * RDS for PostgreSQL - `postgresql-license`
     #
     #   Default: Same as the source.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html
     #   @return [String]
     #
     # @!attribute [rw] db_name
     #   The database name for the restored DB instance.
     #
-    #   <note markdown="1"> This parameter isn't supported for the MySQL or MariaDB engines. It
-    #   also doesn't apply to RDS Custom.
+    #   This parameter doesn't apply to the following DB instances:
     #
-    #    </note>
+    #   * RDS Custom
+    #
+    #   * RDS for Db2
+    #
+    #   * RDS for MariaDB
+    #
+    #   * RDS for MySQL
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -22507,6 +25478,10 @@ module Aws::RDS
     #   This setting doesn't apply to RDS Custom.
     #
     #   Valid Values:
+    #
+    #   * `db2-ae`
+    #
+    #   * `db2-se`
     #
     #   * `mariadb`
     #
@@ -22580,15 +25555,15 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   The storage type to associate with the DB instance.
     #
-    #   Valid Values: `gp2 | gp3 | io1 | standard`
+    #   Valid Values: `gp2 | gp3 | io1 | io2 | standard`
     #
     #   Default: `io1`, if the `Iops` parameter is specified. Otherwise,
     #   `gp2`.
     #
     #   Constraints:
     #
-    #   * If you specify `io1` or `gp3`, you must also include a value for
-    #     the `Iops` parameter.
+    #   * If you specify `io1`, `io2`, or `gp3`, you must also include a
+    #     value for the `Iops` parameter.
     #
     #   ^
     #   @return [String]
@@ -22845,11 +25820,16 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] backup_target
-    #   Specifies where automated backups and manual snapshots are stored
-    #   for the restored DB instance.
+    #   The location for storing automated backups and manual snapshots for
+    #   the restored DB instance.
     #
-    #   Possible values are `outposts` (Amazon Web Services Outposts) and
-    #   `region` (Amazon Web Services Region). The default is `region`.
+    #   Valid Values:
+    #
+    #   * `outposts` (Amazon Web Services Outposts)
+    #
+    #   * `region` (Amazon Web Services Region)
+    #
+    #   Default: `region`
     #
     #   For more information, see [Working with Amazon RDS on Amazon Web
     #   Services Outposts][1] in the *Amazon RDS User Guide*.
@@ -22898,6 +25878,63 @@ module Aws::RDS
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] dedicated_log_volume
+    #   Specifies whether to enable a dedicated log volume (DLV) for the DB
+    #   instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB instance's server
+    #   certificate.
+    #
+    #   This setting doesn't apply to RDS Custom DB instances.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to
+    #   a DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS
+    #   to encrypt a connection to a DB cluster][2] in the *Amazon Aurora
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_lifecycle_support
+    #   The life cycle type for this DB instance.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB instance into Amazon RDS Extended Support. At
+    #   the end of standard support, you can avoid charges for Extended
+    #   Support by setting the value to
+    #   `open-source-rds-extended-support-disabled`. In this case, RDS
+    #   automatically upgrades your restored DB instance to a higher engine
+    #   version, if the major engine version is past its end of standard
+    #   support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB instance into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the
+    #   selected major engine version on your DB instance past the end of
+    #   standard support for that engine version. For more information, see
+    #   [Using Amazon RDS Extended Support][1] in the *Amazon RDS User
+    #   Guide*.
+    #
+    #   This setting applies only to RDS for MySQL and RDS for PostgreSQL.
+    #   For Amazon Aurora DB instances, the life cycle type is managed by
+    #   the DB cluster.
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBInstanceToPointInTimeMessage < Struct.new(
@@ -22943,7 +25980,10 @@ module Aws::RDS
       :backup_target,
       :network_type,
       :storage_throughput,
-      :allocated_storage)
+      :allocated_storage,
+      :dedicated_log_volume,
+      :ca_certificate_identifier,
+      :engine_lifecycle_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23065,6 +26105,20 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SNSTopicArnNotFoundFault AWS API Documentation
     #
     class SNSTopicArnNotFoundFault < Aws::EmptyStructure; end
+
+    # The metric reference details when the reference is a scalar.
+    #
+    # @!attribute [rw] value
+    #   The value of a scalar reference.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ScalarReferenceDetails AWS API Documentation
+    #
+    class ScalarReferenceDetails < Struct.new(
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains the scaling configuration of an Aurora Serverless v1 DB
     # cluster.
@@ -24183,11 +27237,13 @@ module Aws::RDS
     # pair.
     #
     # For more information, see [Tagging Amazon RDS Resources][1] in the
-    # *Amazon RDS User Guide.*
+    # *Amazon RDS User Guide* or [Tagging Amazon Aurora and Amazon RDS
+    # Resources][2] in the *Amazon Aurora User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html
     #
     # @!attribute [rw] key
     #   A key is the required name of the tag. The string value can be from
@@ -24258,6 +27314,152 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # A tenant database in the DB instance. This data type is an element in
+    # the response to the `DescribeTenantDatabases` action.
+    #
+    # @!attribute [rw] tenant_database_create_time
+    #   The creation time of the tenant database.
+    #   @return [Time]
+    #
+    # @!attribute [rw] db_instance_identifier
+    #   The ID of the DB instance that contains the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_db_name
+    #   The database name of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] master_username
+    #   The master username of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] dbi_resource_id
+    #   The Amazon Web Services Region-unique, immutable identifier for the
+    #   DB instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_database_resource_id
+    #   The Amazon Web Services Region-unique, immutable identifier for the
+    #   tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_database_arn
+    #   The Amazon Resource Name (ARN) for the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] character_set_name
+    #   The character set of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] nchar_character_set_name
+    #   The `NCHAR` character set name of the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Specifies whether deletion protection is enabled for the DB
+    #   instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] pending_modified_values
+    #   Information about pending changes for a tenant database.
+    #   @return [Types::TenantDatabasePendingModifiedValues]
+    #
+    # @!attribute [rw] tag_list
+    #   A list of tags. For more information, see [Tagging Amazon RDS
+    #   Resources][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TenantDatabase AWS API Documentation
+    #
+    class TenantDatabase < Struct.new(
+      :tenant_database_create_time,
+      :db_instance_identifier,
+      :tenant_db_name,
+      :status,
+      :master_username,
+      :dbi_resource_id,
+      :tenant_database_resource_id,
+      :tenant_database_arn,
+      :character_set_name,
+      :nchar_character_set_name,
+      :deletion_protection,
+      :pending_modified_values,
+      :tag_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You attempted to either create a tenant database that already exists
+    # or modify a tenant database to use the name of an existing tenant
+    # database.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TenantDatabaseAlreadyExistsFault AWS API Documentation
+    #
+    class TenantDatabaseAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The specified tenant database wasn't found in the DB instance.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TenantDatabaseNotFoundFault AWS API Documentation
+    #
+    class TenantDatabaseNotFoundFault < Aws::EmptyStructure; end
+
+    # A response element in the `ModifyTenantDatabase` operation that
+    # describes changes that will be applied. Specific changes are
+    # identified by subelements.
+    #
+    # @!attribute [rw] master_user_password
+    #   The master password for the tenant database.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_db_name
+    #   The name of the tenant database.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TenantDatabasePendingModifiedValues AWS API Documentation
+    #
+    class TenantDatabasePendingModifiedValues < Struct.new(
+      :master_user_password,
+      :tenant_db_name)
+      SENSITIVE = [:master_user_password]
+      include Aws::Structure
+    end
+
+    # You attempted to create more tenant databases than are permitted in
+    # your Amazon Web Services account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TenantDatabaseQuotaExceededFault AWS API Documentation
+    #
+    class TenantDatabaseQuotaExceededFault < Aws::EmptyStructure; end
+
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeTenantDatabases` request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenant_databases
+    #   An array of the tenant databases requested by the
+    #   `DescribeTenantDatabases` operation.
+    #   @return [Array<Types::TenantDatabase>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TenantDatabasesMessage AWS API Documentation
+    #
+    class TenantDatabasesMessage < Struct.new(
+      :marker,
+      :tenant_databases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A time zone associated with a `DBInstance` or a `DBSnapshot`. This
     # data type is an element in the response to the `DescribeDBInstances`,
     # the `DescribeDBSnapshots`, and the `DescribeDBEngineVersions` actions.
@@ -24273,6 +27475,13 @@ module Aws::RDS
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The specified DB engine version isn't supported for Aurora Limitless
+    # Database.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UnsupportedDBEngineVersionFault AWS API Documentation
+    #
+    class UnsupportedDBEngineVersionFault < Aws::EmptyStructure; end
 
     # The version of the database engine that a DB instance can be upgraded
     # to.
@@ -24293,6 +27502,8 @@ module Aws::RDS
     # @!attribute [rw] auto_upgrade
     #   Indicates whether the target version is applied to any source DB
     #   instances that have `AutoMinorVersionUpgrade` set to true.
+    #
+    #   This parameter is dynamic, and is set by RDS.
     #   @return [Boolean]
     #
     # @!attribute [rw] is_major_version_upgrade
@@ -24320,6 +27531,11 @@ module Aws::RDS
     #   the target engine version.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supports_limitless_database
+    #   Indicates whether the DB engine version supports Aurora Limitless
+    #   Database.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] supports_local_write_forwarding
     #   Indicates whether the target engine version supports forwarding
     #   write operations from reader DB instances to the writer DB instance
@@ -24327,6 +27543,11 @@ module Aws::RDS
     #   reader DB instances.
     #
     #   Valid for: Aurora DB clusters only
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] supports_integrations
+    #   Indicates whether the DB engine version supports zero-ETL
+    #   integrations with Amazon Redshift.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UpgradeTarget AWS API Documentation
@@ -24341,7 +27562,9 @@ module Aws::RDS
       :supports_parallel_query,
       :supports_global_databases,
       :supports_babelfish,
-      :supports_local_write_forwarding)
+      :supports_limitless_database,
+      :supports_local_write_forwarding,
+      :supports_integrations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24455,11 +27678,17 @@ module Aws::RDS
     #   Valid processor features for your DB instance.
     #   @return [Array<Types::AvailableProcessorFeature>]
     #
+    # @!attribute [rw] supports_dedicated_log_volume
+    #   Indicates whether a DB instance supports using a dedicated log
+    #   volume (DLV).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ValidDBInstanceModificationsMessage AWS API Documentation
     #
     class ValidDBInstanceModificationsMessage < Struct.new(
       :storage,
-      :valid_processor_features)
+      :valid_processor_features,
+      :supports_dedicated_log_volume)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24470,7 +27699,7 @@ module Aws::RDS
     #
     # @!attribute [rw] storage_type
     #   The valid storage types for your DB instance. For example: gp2, gp3,
-    #   io1.
+    #   io1, io2.
     #   @return [String]
     #
     # @!attribute [rw] storage_size

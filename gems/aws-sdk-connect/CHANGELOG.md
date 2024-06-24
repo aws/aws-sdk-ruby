@@ -1,6 +1,171 @@
 Unreleased Changes
 ------------------
 
+1.162.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.161.0 (2024-05-30)
+------------------
+
+* Feature - Adding associatedQueueIds as a SearchCriteria and response field to the SearchRoutingProfiles API
+
+1.160.0 (2024-05-29)
+------------------
+
+* Feature - This release includes changes to DescribeContact API's response by including ConnectedToSystemTimestamp, RoutingCriteria, Customer, Campaign, AnsweringMachineDetectionStatus, CustomerVoiceActivity, QualityMetrics, DisconnectDetails, and SegmentAttributes information from a contact in Amazon Connect.
+
+1.159.0 (2024-05-16)
+------------------
+
+* Feature - Adding Contact Flow metrics to the GetMetricDataV2 API
+
+1.158.0 (2024-05-14)
+------------------
+
+* Feature - Amazon Connect provides enhanced search capabilities for flows & flow modules on the Connect admin website and programmatically using APIs. You can search for flows and flow modules by name, description, type, status, and tags, to filter and identify a specific flow in your Connect instances.
+
+1.157.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.156.0 (2024-05-03)
+------------------
+
+* Feature - This release adds 5 new APIs for managing attachments: StartAttachedFileUpload, CompleteAttachedFileUpload, GetAttachedFile, BatchGetAttachedFileMetadata, DeleteAttachedFile. These APIs can be used to programmatically upload and download attachments to Connect resources, like cases.
+
+1.155.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.154.0 (2024-04-10)
+------------------
+
+* Feature - This release adds new Submit Auto Evaluation Action for Amazon Connect Rules.
+
+1.153.0 (2024-03-20)
+------------------
+
+* Feature - This release updates the *InstanceStorageConfig APIs to support a new ResourceType: REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS. Use this resource type to enable streaming for real-time analysis of chat contacts and to associate a Kinesis stream where real-time analysis chat segments will be published.
+
+1.152.0 (2024-03-15)
+------------------
+
+* Feature - This release adds Hierarchy based Access Control fields to Security Profile public APIs and adds support for UserAttributeFilter to SearchUsers API.
+
+1.151.0 (2024-03-12)
+------------------
+
+* Feature - This release increases MaxResults limit to 500 in request for SearchUsers, SearchQueues and SearchRoutingProfiles APIs of Amazon Connect.
+
+1.150.0 (2024-01-26)
+------------------
+
+* Feature - Update list and string length limits for predefined attributes.
+
+1.149.0 (2024-01-18)
+------------------
+
+* Feature - GetMetricDataV2 now supports 3 groupings
+
+1.148.0 (2024-01-12)
+------------------
+
+* Feature - Supervisor Barge for Chat is now supported through the MonitorContact API.
+
+1.147.0 (2024-01-05)
+------------------
+
+* Feature - Minor trait updates for User APIs
+
+1.146.0 (2024-01-03)
+------------------
+
+* Feature - Amazon Connect, Contact Lens Evaluation API increase evaluation notes max length to 3072.
+
+1.145.0 (2023-12-21)
+------------------
+
+* Feature - Adds APIs to manage User Proficiencies and Predefined Attributes. Enhances StartOutboundVoiceContact API input. Introduces SearchContacts API. Enhances DescribeContact API. Adds an API to update Routing Attributes in QueuePriority and QueueTimeAdjustmentSeconds.
+
+1.144.0 (2023-12-15)
+------------------
+
+* Feature - Adds relatedContactId field to StartOutboundVoiceContact API input. Introduces PauseContact API and ResumeContact API for Task contacts. Adds pause duration, number of pauses, timestamps for last paused and resumed events to DescribeContact API response. Adds new Rule type and new Rule action.
+
+1.143.0 (2023-12-14)
+------------------
+
+* Feature - This release adds support for more granular billing using tags (key:value pairs)
+
+1.142.0 (2023-12-06)
+------------------
+
+* Feature - Releasing Tagging Support for Instance Management APIS
+
+1.141.0 (2023-11-28)
+------------------
+
+* Feature - Added support for following capabilities: Amazon Connect's in-app, web, and video calling. Two-way SMS integrations. Contact Lens real-time chat analytics feature. Amazon Connect Analytics Datalake capability. Capability to configure real time chat rules.
+
+1.140.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.139.0 (2023-11-17)
+------------------
+
+* Feature - This release adds WISDOM_QUICK_RESPONSES as new IntegrationType of Connect IntegrationAssociation resource and bug fixes.
+
+1.138.0 (2023-11-14)
+------------------
+
+* Feature - Introducing SegmentAttributes parameter for StartChatContact API
+
+1.137.0 (2023-11-09)
+------------------
+
+* Feature - This release adds the ability to integrate customer lambda functions with Connect attachments for scanning and updates the ListIntegrationAssociations API to support filtering on IntegrationArn.
+
+1.136.0 (2023-11-08)
+------------------
+
+* Feature - This release clarifies in our public documentation that InstanceId is a requirement for SearchUsers API requests.
+
+1.135.0 (2023-11-06)
+------------------
+
+* Feature - Added new API that allows Amazon Connect Outbound Campaigns to create contacts in Amazon Connect when ingesting your dial requests.
+
+1.134.0 (2023-11-03)
+------------------
+
+* Feature - Amazon Connect Chat introduces Create Persistent Contact Association API, allowing customers to choose when to resume previous conversations from previous chats, eliminating the need to repeat themselves and allowing agents to provide personalized service with access to entire conversation history.
+
+1.133.0 (2023-11-02)
+------------------
+
+* Feature - GetMetricDataV2 API: Update to include new metrics PERCENT_NON_TALK_TIME, PERCENT_TALK_TIME, PERCENT_TALK_TIME_AGENT, PERCENT_TALK_TIME_CUSTOMER
+
+1.132.0 (2023-11-01)
+------------------
+
+* Feature - Adds the BatchGetFlowAssociation API which returns flow associations (flow-resource) corresponding to the list of resourceArns supplied in the request. This release also adds IsDefault, LastModifiedRegion and LastModifiedTime fields to the responses of several Describe and List APIs.
+
+1.131.0 (2023-10-30)
+------------------
+
+* Feature - This release adds InstanceId field for phone number APIs.
+
+1.130.0 (2023-10-20)
+------------------
+
+* Feature - This release adds support for updating phone number metadata, such as phone number description.
+
 1.129.0 (2023-10-03)
 ------------------
 

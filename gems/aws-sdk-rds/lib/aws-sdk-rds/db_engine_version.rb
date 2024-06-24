@@ -254,6 +254,13 @@ module Aws::RDS
       data[:custom_db_engine_version_manifest]
     end
 
+    # Indicates whether the DB engine version supports Aurora Limitless
+    # Database.
+    # @return [Boolean]
+    def supports_limitless_database
+      data[:supports_limitless_database]
+    end
+
     # Indicates whether the engine version supports rotating the server
     # certificate without rebooting the DB instance.
     # @return [Boolean]
@@ -288,6 +295,13 @@ module Aws::RDS
       data[:supports_local_write_forwarding]
     end
 
+    # Indicates whether the DB engine version supports zero-ETL integrations
+    # with Amazon Redshift.
+    # @return [Boolean]
+    def supports_integrations
+      data[:supports_integrations]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -302,7 +316,7 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_db_engine_versions(
         engine: @engine_name,
         engine_version: @version
@@ -422,7 +436,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -457,7 +471,7 @@ module Aws::RDS
           engine_name: @engine,
           major_engine_version: @version
         )
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_option_group_options(options)
         end
         resp.each_page do |page|
@@ -499,7 +513,7 @@ module Aws::RDS
           engine_name: @engine,
           major_engine_version: @version
         )
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_option_groups(options)
         end
         resp.each_page do |page|

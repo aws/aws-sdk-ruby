@@ -43,16 +43,20 @@ module Aws::FMS
     BatchDisassociateResourceRequest = Shapes::StructureShape.new(name: 'BatchDisassociateResourceRequest')
     BatchDisassociateResourceResponse = Shapes::StructureShape.new(name: 'BatchDisassociateResourceResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     CIDR = Shapes::StringShape.new(name: 'CIDR')
     ComplianceViolator = Shapes::StructureShape.new(name: 'ComplianceViolator')
     ComplianceViolatorMetadata = Shapes::MapShape.new(name: 'ComplianceViolatorMetadata')
     ComplianceViolators = Shapes::ListShape.new(name: 'ComplianceViolators')
+    CreateNetworkAclAction = Shapes::StructureShape.new(name: 'CreateNetworkAclAction')
+    CreateNetworkAclEntriesAction = Shapes::StructureShape.new(name: 'CreateNetworkAclEntriesAction')
     CustomerPolicyScopeId = Shapes::StringShape.new(name: 'CustomerPolicyScopeId')
     CustomerPolicyScopeIdList = Shapes::ListShape.new(name: 'CustomerPolicyScopeIdList')
     CustomerPolicyScopeIdType = Shapes::StringShape.new(name: 'CustomerPolicyScopeIdType')
     CustomerPolicyScopeMap = Shapes::MapShape.new(name: 'CustomerPolicyScopeMap')
     CustomerPolicyStatus = Shapes::StringShape.new(name: 'CustomerPolicyStatus')
     DeleteAppsListRequest = Shapes::StructureShape.new(name: 'DeleteAppsListRequest')
+    DeleteNetworkAclEntriesAction = Shapes::StructureShape.new(name: 'DeleteNetworkAclEntriesAction')
     DeleteNotificationChannelRequest = Shapes::StructureShape.new(name: 'DeleteNotificationChannelRequest')
     DeletePolicyRequest = Shapes::StructureShape.new(name: 'DeletePolicyRequest')
     DeleteProtocolsListRequest = Shapes::StructureShape.new(name: 'DeleteProtocolsListRequest')
@@ -78,6 +82,14 @@ module Aws::FMS
     EC2DeleteRouteAction = Shapes::StructureShape.new(name: 'EC2DeleteRouteAction')
     EC2ReplaceRouteAction = Shapes::StructureShape.new(name: 'EC2ReplaceRouteAction')
     EC2ReplaceRouteTableAssociationAction = Shapes::StructureShape.new(name: 'EC2ReplaceRouteTableAssociationAction')
+    EntriesDescription = Shapes::ListShape.new(name: 'EntriesDescription')
+    EntriesWithConflicts = Shapes::ListShape.new(name: 'EntriesWithConflicts')
+    EntryDescription = Shapes::StructureShape.new(name: 'EntryDescription')
+    EntryType = Shapes::StringShape.new(name: 'EntryType')
+    EntryViolation = Shapes::StructureShape.new(name: 'EntryViolation')
+    EntryViolationReason = Shapes::StringShape.new(name: 'EntryViolationReason')
+    EntryViolationReasons = Shapes::ListShape.new(name: 'EntryViolationReasons')
+    EntryViolations = Shapes::ListShape.new(name: 'EntryViolations')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EvaluationResult = Shapes::StructureShape.new(name: 'EvaluationResult')
     EvaluationResults = Shapes::ListShape.new(name: 'EvaluationResults')
@@ -115,13 +127,18 @@ module Aws::FMS
     GetViolationDetailsRequest = Shapes::StructureShape.new(name: 'GetViolationDetailsRequest')
     GetViolationDetailsResponse = Shapes::StructureShape.new(name: 'GetViolationDetailsResponse')
     IPPortNumber = Shapes::IntegerShape.new(name: 'IPPortNumber')
+    IPPortNumberInteger = Shapes::IntegerShape.new(name: 'IPPortNumberInteger')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     IdentifierList = Shapes::ListShape.new(name: 'IdentifierList')
+    IntegerObject = Shapes::IntegerShape.new(name: 'IntegerObject')
+    IntegerObjectMinimum0 = Shapes::IntegerShape.new(name: 'IntegerObjectMinimum0')
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
+    InvalidNetworkAclEntriesViolation = Shapes::StructureShape.new(name: 'InvalidNetworkAclEntriesViolation')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
     InvalidTypeException = Shapes::StructureShape.new(name: 'InvalidTypeException')
     IssueInfoMap = Shapes::MapShape.new(name: 'IssueInfoMap')
+    LengthBoundedNonEmptyString = Shapes::StringShape.new(name: 'LengthBoundedNonEmptyString')
     LengthBoundedString = Shapes::StringShape.new(name: 'LengthBoundedString')
     LengthBoundedStringList = Shapes::ListShape.new(name: 'LengthBoundedStringList')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -154,6 +171,13 @@ module Aws::FMS
     MarketplaceSubscriptionOnboardingStatus = Shapes::StringShape.new(name: 'MarketplaceSubscriptionOnboardingStatus')
     MemberAccounts = Shapes::ListShape.new(name: 'MemberAccounts')
     Name = Shapes::StringShape.new(name: 'Name')
+    NetworkAclCommonPolicy = Shapes::StructureShape.new(name: 'NetworkAclCommonPolicy')
+    NetworkAclEntries = Shapes::ListShape.new(name: 'NetworkAclEntries')
+    NetworkAclEntry = Shapes::StructureShape.new(name: 'NetworkAclEntry')
+    NetworkAclEntrySet = Shapes::StructureShape.new(name: 'NetworkAclEntrySet')
+    NetworkAclIcmpTypeCode = Shapes::StructureShape.new(name: 'NetworkAclIcmpTypeCode')
+    NetworkAclPortRange = Shapes::StructureShape.new(name: 'NetworkAclPortRange')
+    NetworkAclRuleAction = Shapes::StringShape.new(name: 'NetworkAclRuleAction')
     NetworkFirewallAction = Shapes::StringShape.new(name: 'NetworkFirewallAction')
     NetworkFirewallActionList = Shapes::ListShape.new(name: 'NetworkFirewallActionList')
     NetworkFirewallBlackHoleRouteDetectedViolation = Shapes::StructureShape.new(name: 'NetworkFirewallBlackHoleRouteDetectedViolation')
@@ -220,6 +244,7 @@ module Aws::FMS
     RemediationActionDescription = Shapes::StringShape.new(name: 'RemediationActionDescription')
     RemediationActionType = Shapes::StringShape.new(name: 'RemediationActionType')
     RemediationActionWithOrder = Shapes::StructureShape.new(name: 'RemediationActionWithOrder')
+    ReplaceNetworkAclAssociationAction = Shapes::StructureShape.new(name: 'ReplaceNetworkAclAssociationAction')
     Resource = Shapes::StructureShape.new(name: 'Resource')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceCount = Shapes::IntegerShape.new(name: 'ResourceCount')
@@ -258,6 +283,7 @@ module Aws::FMS
     StatelessRuleGroup = Shapes::StructureShape.new(name: 'StatelessRuleGroup')
     StatelessRuleGroupList = Shapes::ListShape.new(name: 'StatelessRuleGroupList')
     StatelessRuleGroupPriority = Shapes::IntegerShape.new(name: 'StatelessRuleGroupPriority')
+    StreamExceptionPolicy = Shapes::StringShape.new(name: 'StreamExceptionPolicy')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -388,6 +414,17 @@ module Aws::FMS
 
     ComplianceViolators.member = Shapes::ShapeRef.new(shape: ComplianceViolator)
 
+    CreateNetworkAclAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
+    CreateNetworkAclAction.add_member(:vpc, Shapes::ShapeRef.new(shape: ActionTarget, location_name: "Vpc"))
+    CreateNetworkAclAction.add_member(:fms_can_remediate, Shapes::ShapeRef.new(shape: Boolean, location_name: "FMSCanRemediate"))
+    CreateNetworkAclAction.struct_class = Types::CreateNetworkAclAction
+
+    CreateNetworkAclEntriesAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
+    CreateNetworkAclEntriesAction.add_member(:network_acl_id, Shapes::ShapeRef.new(shape: ActionTarget, location_name: "NetworkAclId"))
+    CreateNetworkAclEntriesAction.add_member(:network_acl_entries_to_be_created, Shapes::ShapeRef.new(shape: EntriesDescription, location_name: "NetworkAclEntriesToBeCreated"))
+    CreateNetworkAclEntriesAction.add_member(:fms_can_remediate, Shapes::ShapeRef.new(shape: Boolean, location_name: "FMSCanRemediate"))
+    CreateNetworkAclEntriesAction.struct_class = Types::CreateNetworkAclEntriesAction
+
     CustomerPolicyScopeIdList.member = Shapes::ShapeRef.new(shape: CustomerPolicyScopeId)
 
     CustomerPolicyScopeMap.key = Shapes::ShapeRef.new(shape: CustomerPolicyScopeIdType)
@@ -395,6 +432,12 @@ module Aws::FMS
 
     DeleteAppsListRequest.add_member(:list_id, Shapes::ShapeRef.new(shape: ListId, required: true, location_name: "ListId"))
     DeleteAppsListRequest.struct_class = Types::DeleteAppsListRequest
+
+    DeleteNetworkAclEntriesAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
+    DeleteNetworkAclEntriesAction.add_member(:network_acl_id, Shapes::ShapeRef.new(shape: ActionTarget, location_name: "NetworkAclId"))
+    DeleteNetworkAclEntriesAction.add_member(:network_acl_entries_to_be_deleted, Shapes::ShapeRef.new(shape: EntriesDescription, location_name: "NetworkAclEntriesToBeDeleted"))
+    DeleteNetworkAclEntriesAction.add_member(:fms_can_remediate, Shapes::ShapeRef.new(shape: Boolean, location_name: "FMSCanRemediate"))
+    DeleteNetworkAclEntriesAction.struct_class = Types::DeleteNetworkAclEntriesAction
 
     DeleteNotificationChannelRequest.struct_class = Types::DeleteNotificationChannelRequest
 
@@ -485,6 +528,27 @@ module Aws::FMS
     EC2ReplaceRouteTableAssociationAction.add_member(:association_id, Shapes::ShapeRef.new(shape: ActionTarget, required: true, location_name: "AssociationId"))
     EC2ReplaceRouteTableAssociationAction.add_member(:route_table_id, Shapes::ShapeRef.new(shape: ActionTarget, required: true, location_name: "RouteTableId"))
     EC2ReplaceRouteTableAssociationAction.struct_class = Types::EC2ReplaceRouteTableAssociationAction
+
+    EntriesDescription.member = Shapes::ShapeRef.new(shape: EntryDescription)
+
+    EntriesWithConflicts.member = Shapes::ShapeRef.new(shape: EntryDescription)
+
+    EntryDescription.add_member(:entry_detail, Shapes::ShapeRef.new(shape: NetworkAclEntry, location_name: "EntryDetail"))
+    EntryDescription.add_member(:entry_rule_number, Shapes::ShapeRef.new(shape: IntegerObjectMinimum0, location_name: "EntryRuleNumber"))
+    EntryDescription.add_member(:entry_type, Shapes::ShapeRef.new(shape: EntryType, location_name: "EntryType"))
+    EntryDescription.struct_class = Types::EntryDescription
+
+    EntryViolation.add_member(:expected_entry, Shapes::ShapeRef.new(shape: EntryDescription, location_name: "ExpectedEntry"))
+    EntryViolation.add_member(:expected_evaluation_order, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "ExpectedEvaluationOrder"))
+    EntryViolation.add_member(:actual_evaluation_order, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "ActualEvaluationOrder"))
+    EntryViolation.add_member(:entry_at_expected_evaluation_order, Shapes::ShapeRef.new(shape: EntryDescription, location_name: "EntryAtExpectedEvaluationOrder"))
+    EntryViolation.add_member(:entries_with_conflicts, Shapes::ShapeRef.new(shape: EntriesWithConflicts, location_name: "EntriesWithConflicts"))
+    EntryViolation.add_member(:entry_violation_reasons, Shapes::ShapeRef.new(shape: EntryViolationReasons, location_name: "EntryViolationReasons"))
+    EntryViolation.struct_class = Types::EntryViolation
+
+    EntryViolationReasons.member = Shapes::ShapeRef.new(shape: EntryViolationReason)
+
+    EntryViolations.member = Shapes::ShapeRef.new(shape: EntryViolation)
 
     EvaluationResult.add_member(:compliance_status, Shapes::ShapeRef.new(shape: PolicyComplianceStatusType, location_name: "ComplianceStatus"))
     EvaluationResult.add_member(:violator_count, Shapes::ShapeRef.new(shape: ResourceCount, location_name: "ViolatorCount"))
@@ -620,6 +684,13 @@ module Aws::FMS
     InvalidInputException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidInputException.struct_class = Types::InvalidInputException
 
+    InvalidNetworkAclEntriesViolation.add_member(:vpc, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Vpc"))
+    InvalidNetworkAclEntriesViolation.add_member(:subnet, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Subnet"))
+    InvalidNetworkAclEntriesViolation.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "SubnetAvailabilityZone"))
+    InvalidNetworkAclEntriesViolation.add_member(:current_associated_network_acl, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CurrentAssociatedNetworkAcl"))
+    InvalidNetworkAclEntriesViolation.add_member(:entry_violations, Shapes::ShapeRef.new(shape: EntryViolations, location_name: "EntryViolations"))
+    InvalidNetworkAclEntriesViolation.struct_class = Types::InvalidNetworkAclEntriesViolation
+
     InvalidOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidOperationException.struct_class = Types::InvalidOperationException
 
@@ -736,6 +807,34 @@ module Aws::FMS
     ListThirdPartyFirewallFirewallPoliciesResponse.struct_class = Types::ListThirdPartyFirewallFirewallPoliciesResponse
 
     MemberAccounts.member = Shapes::ShapeRef.new(shape: AWSAccountId)
+
+    NetworkAclCommonPolicy.add_member(:network_acl_entry_set, Shapes::ShapeRef.new(shape: NetworkAclEntrySet, required: true, location_name: "NetworkAclEntrySet"))
+    NetworkAclCommonPolicy.struct_class = Types::NetworkAclCommonPolicy
+
+    NetworkAclEntries.member = Shapes::ShapeRef.new(shape: NetworkAclEntry)
+
+    NetworkAclEntry.add_member(:icmp_type_code, Shapes::ShapeRef.new(shape: NetworkAclIcmpTypeCode, location_name: "IcmpTypeCode"))
+    NetworkAclEntry.add_member(:protocol, Shapes::ShapeRef.new(shape: LengthBoundedString, required: true, location_name: "Protocol"))
+    NetworkAclEntry.add_member(:port_range, Shapes::ShapeRef.new(shape: NetworkAclPortRange, location_name: "PortRange"))
+    NetworkAclEntry.add_member(:cidr_block, Shapes::ShapeRef.new(shape: LengthBoundedNonEmptyString, location_name: "CidrBlock"))
+    NetworkAclEntry.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: LengthBoundedNonEmptyString, location_name: "Ipv6CidrBlock"))
+    NetworkAclEntry.add_member(:rule_action, Shapes::ShapeRef.new(shape: NetworkAclRuleAction, required: true, location_name: "RuleAction"))
+    NetworkAclEntry.add_member(:egress, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "Egress"))
+    NetworkAclEntry.struct_class = Types::NetworkAclEntry
+
+    NetworkAclEntrySet.add_member(:first_entries, Shapes::ShapeRef.new(shape: NetworkAclEntries, location_name: "FirstEntries"))
+    NetworkAclEntrySet.add_member(:force_remediate_for_first_entries, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "ForceRemediateForFirstEntries"))
+    NetworkAclEntrySet.add_member(:last_entries, Shapes::ShapeRef.new(shape: NetworkAclEntries, location_name: "LastEntries"))
+    NetworkAclEntrySet.add_member(:force_remediate_for_last_entries, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "ForceRemediateForLastEntries"))
+    NetworkAclEntrySet.struct_class = Types::NetworkAclEntrySet
+
+    NetworkAclIcmpTypeCode.add_member(:code, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "Code"))
+    NetworkAclIcmpTypeCode.add_member(:type, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "Type"))
+    NetworkAclIcmpTypeCode.struct_class = Types::NetworkAclIcmpTypeCode
+
+    NetworkAclPortRange.add_member(:from, Shapes::ShapeRef.new(shape: IPPortNumberInteger, location_name: "From"))
+    NetworkAclPortRange.add_member(:to, Shapes::ShapeRef.new(shape: IPPortNumberInteger, location_name: "To"))
+    NetworkAclPortRange.struct_class = Types::NetworkAclPortRange
 
     NetworkFirewallActionList.member = Shapes::ShapeRef.new(shape: NetworkFirewallAction)
 
@@ -891,6 +990,7 @@ module Aws::FMS
 
     PolicyOption.add_member(:network_firewall_policy, Shapes::ShapeRef.new(shape: NetworkFirewallPolicy, location_name: "NetworkFirewallPolicy"))
     PolicyOption.add_member(:third_party_firewall_policy, Shapes::ShapeRef.new(shape: ThirdPartyFirewallPolicy, location_name: "ThirdPartyFirewallPolicy"))
+    PolicyOption.add_member(:network_acl_common_policy, Shapes::ShapeRef.new(shape: NetworkAclCommonPolicy, location_name: "NetworkAclCommonPolicy"))
     PolicyOption.struct_class = Types::PolicyOption
 
     PolicySummary.add_member(:policy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "PolicyArn"))
@@ -998,11 +1098,21 @@ module Aws::FMS
     RemediationAction.add_member(:ec2_associate_route_table_action, Shapes::ShapeRef.new(shape: EC2AssociateRouteTableAction, location_name: "EC2AssociateRouteTableAction"))
     RemediationAction.add_member(:ec2_create_route_table_action, Shapes::ShapeRef.new(shape: EC2CreateRouteTableAction, location_name: "EC2CreateRouteTableAction"))
     RemediationAction.add_member(:fms_policy_update_firewall_creation_config_action, Shapes::ShapeRef.new(shape: FMSPolicyUpdateFirewallCreationConfigAction, location_name: "FMSPolicyUpdateFirewallCreationConfigAction"))
+    RemediationAction.add_member(:create_network_acl_action, Shapes::ShapeRef.new(shape: CreateNetworkAclAction, location_name: "CreateNetworkAclAction"))
+    RemediationAction.add_member(:replace_network_acl_association_action, Shapes::ShapeRef.new(shape: ReplaceNetworkAclAssociationAction, location_name: "ReplaceNetworkAclAssociationAction"))
+    RemediationAction.add_member(:create_network_acl_entries_action, Shapes::ShapeRef.new(shape: CreateNetworkAclEntriesAction, location_name: "CreateNetworkAclEntriesAction"))
+    RemediationAction.add_member(:delete_network_acl_entries_action, Shapes::ShapeRef.new(shape: DeleteNetworkAclEntriesAction, location_name: "DeleteNetworkAclEntriesAction"))
     RemediationAction.struct_class = Types::RemediationAction
 
     RemediationActionWithOrder.add_member(:remediation_action, Shapes::ShapeRef.new(shape: RemediationAction, location_name: "RemediationAction"))
     RemediationActionWithOrder.add_member(:order, Shapes::ShapeRef.new(shape: BasicInteger, location_name: "Order"))
     RemediationActionWithOrder.struct_class = Types::RemediationActionWithOrder
+
+    ReplaceNetworkAclAssociationAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
+    ReplaceNetworkAclAssociationAction.add_member(:association_id, Shapes::ShapeRef.new(shape: ActionTarget, location_name: "AssociationId"))
+    ReplaceNetworkAclAssociationAction.add_member(:network_acl_id, Shapes::ShapeRef.new(shape: ActionTarget, location_name: "NetworkAclId"))
+    ReplaceNetworkAclAssociationAction.add_member(:fms_can_remediate, Shapes::ShapeRef.new(shape: Boolean, location_name: "FMSCanRemediate"))
+    ReplaceNetworkAclAssociationAction.struct_class = Types::ReplaceNetworkAclAssociationAction
 
     Resource.add_member(:uri, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "URI"))
     Resource.add_member(:account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "AccountId"))
@@ -1059,13 +1169,14 @@ module Aws::FMS
     ResourceViolation.add_member(:dns_rule_group_priority_conflict_violation, Shapes::ShapeRef.new(shape: DnsRuleGroupPriorityConflictViolation, location_name: "DnsRuleGroupPriorityConflictViolation"))
     ResourceViolation.add_member(:dns_duplicate_rule_group_violation, Shapes::ShapeRef.new(shape: DnsDuplicateRuleGroupViolation, location_name: "DnsDuplicateRuleGroupViolation"))
     ResourceViolation.add_member(:dns_rule_group_limit_exceeded_violation, Shapes::ShapeRef.new(shape: DnsRuleGroupLimitExceededViolation, location_name: "DnsRuleGroupLimitExceededViolation"))
-    ResourceViolation.add_member(:possible_remediation_actions, Shapes::ShapeRef.new(shape: PossibleRemediationActions, location_name: "PossibleRemediationActions"))
     ResourceViolation.add_member(:firewall_subnet_is_out_of_scope_violation, Shapes::ShapeRef.new(shape: FirewallSubnetIsOutOfScopeViolation, location_name: "FirewallSubnetIsOutOfScopeViolation"))
     ResourceViolation.add_member(:route_has_out_of_scope_endpoint_violation, Shapes::ShapeRef.new(shape: RouteHasOutOfScopeEndpointViolation, location_name: "RouteHasOutOfScopeEndpointViolation"))
     ResourceViolation.add_member(:third_party_firewall_missing_firewall_violation, Shapes::ShapeRef.new(shape: ThirdPartyFirewallMissingFirewallViolation, location_name: "ThirdPartyFirewallMissingFirewallViolation"))
     ResourceViolation.add_member(:third_party_firewall_missing_subnet_violation, Shapes::ShapeRef.new(shape: ThirdPartyFirewallMissingSubnetViolation, location_name: "ThirdPartyFirewallMissingSubnetViolation"))
     ResourceViolation.add_member(:third_party_firewall_missing_expected_route_table_violation, Shapes::ShapeRef.new(shape: ThirdPartyFirewallMissingExpectedRouteTableViolation, location_name: "ThirdPartyFirewallMissingExpectedRouteTableViolation"))
     ResourceViolation.add_member(:firewall_subnet_missing_vpc_endpoint_violation, Shapes::ShapeRef.new(shape: FirewallSubnetMissingVPCEndpointViolation, location_name: "FirewallSubnetMissingVPCEndpointViolation"))
+    ResourceViolation.add_member(:invalid_network_acl_entries_violation, Shapes::ShapeRef.new(shape: InvalidNetworkAclEntriesViolation, location_name: "InvalidNetworkAclEntriesViolation"))
+    ResourceViolation.add_member(:possible_remediation_actions, Shapes::ShapeRef.new(shape: PossibleRemediationActions, location_name: "PossibleRemediationActions"))
     ResourceViolation.struct_class = Types::ResourceViolation
 
     ResourceViolations.member = Shapes::ShapeRef.new(shape: ResourceViolation)
@@ -1116,6 +1227,7 @@ module Aws::FMS
     SecurityServiceTypeList.member = Shapes::ShapeRef.new(shape: SecurityServiceType)
 
     StatefulEngineOptions.add_member(:rule_order, Shapes::ShapeRef.new(shape: RuleOrder, location_name: "RuleOrder"))
+    StatefulEngineOptions.add_member(:stream_exception_policy, Shapes::ShapeRef.new(shape: StreamExceptionPolicy, location_name: "StreamExceptionPolicy"))
     StatefulEngineOptions.struct_class = Types::StatefulEngineOptions
 
     StatefulRuleGroup.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: NetworkFirewallResourceName, location_name: "RuleGroupName"))
@@ -1203,6 +1315,7 @@ module Aws::FMS
         "endpointPrefix" => "fms",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "FMS",
         "serviceFullName" => "Firewall Management Service",
         "serviceId" => "FMS",

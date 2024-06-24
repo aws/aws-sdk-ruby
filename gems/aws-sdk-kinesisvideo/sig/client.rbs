@@ -1,0 +1,507 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module KinesisVideo
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateSignalingChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSignalingChannelOutput]
+        def channel_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#create_signaling_channel-instance_method
+      def create_signaling_channel: (
+                                      channel_name: ::String,
+                                      ?channel_type: ("SINGLE_MASTER" | "FULL_MESH"),
+                                      ?single_master_configuration: {
+                                        message_ttl_seconds: ::Integer?
+                                      },
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ]
+                                    ) -> _CreateSignalingChannelResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSignalingChannelResponseSuccess
+
+      interface _CreateStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStreamOutput]
+        def stream_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#create_stream-instance_method
+      def create_stream: (
+                           ?device_name: ::String,
+                           stream_name: ::String,
+                           ?media_type: ::String,
+                           ?kms_key_id: ::String,
+                           ?data_retention_in_hours: ::Integer,
+                           ?tags: Hash[::String, ::String]
+                         ) -> _CreateStreamResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamResponseSuccess
+
+      interface _DeleteEdgeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEdgeConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#delete_edge_configuration-instance_method
+      def delete_edge_configuration: (
+                                       ?stream_name: ::String,
+                                       ?stream_arn: ::String
+                                     ) -> _DeleteEdgeConfigurationResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEdgeConfigurationResponseSuccess
+
+      interface _DeleteSignalingChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSignalingChannelOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#delete_signaling_channel-instance_method
+      def delete_signaling_channel: (
+                                      channel_arn: ::String,
+                                      ?current_version: ::String
+                                    ) -> _DeleteSignalingChannelResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSignalingChannelResponseSuccess
+
+      interface _DeleteStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStreamOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#delete_stream-instance_method
+      def delete_stream: (
+                           stream_arn: ::String,
+                           ?current_version: ::String
+                         ) -> _DeleteStreamResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStreamResponseSuccess
+
+      interface _DescribeEdgeConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEdgeConfigurationOutput]
+        def stream_name: () -> ::String
+        def stream_arn: () -> ::String
+        def creation_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+        def sync_status: () -> ("SYNCING" | "ACKNOWLEDGED" | "IN_SYNC" | "SYNC_FAILED" | "DELETING" | "DELETE_FAILED" | "DELETING_ACKNOWLEDGED")
+        def failed_status_details: () -> ::String
+        def edge_config: () -> Types::EdgeConfig
+        def edge_agent_status: () -> Types::EdgeAgentStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#describe_edge_configuration-instance_method
+      def describe_edge_configuration: (
+                                         ?stream_name: ::String,
+                                         ?stream_arn: ::String
+                                       ) -> _DescribeEdgeConfigurationResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEdgeConfigurationResponseSuccess
+
+      interface _DescribeImageGenerationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeImageGenerationConfigurationOutput]
+        def image_generation_configuration: () -> Types::ImageGenerationConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#describe_image_generation_configuration-instance_method
+      def describe_image_generation_configuration: (
+                                                     ?stream_name: ::String,
+                                                     ?stream_arn: ::String
+                                                   ) -> _DescribeImageGenerationConfigurationResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeImageGenerationConfigurationResponseSuccess
+
+      interface _DescribeMappedResourceConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMappedResourceConfigurationOutput]
+        def mapped_resource_configuration_list: () -> ::Array[Types::MappedResourceConfigurationListItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#describe_mapped_resource_configuration-instance_method
+      def describe_mapped_resource_configuration: (
+                                                    ?stream_name: ::String,
+                                                    ?stream_arn: ::String,
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String
+                                                  ) -> _DescribeMappedResourceConfigurationResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMappedResourceConfigurationResponseSuccess
+
+      interface _DescribeMediaStorageConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMediaStorageConfigurationOutput]
+        def media_storage_configuration: () -> Types::MediaStorageConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#describe_media_storage_configuration-instance_method
+      def describe_media_storage_configuration: (
+                                                  ?channel_name: ::String,
+                                                  ?channel_arn: ::String
+                                                ) -> _DescribeMediaStorageConfigurationResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMediaStorageConfigurationResponseSuccess
+
+      interface _DescribeNotificationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNotificationConfigurationOutput]
+        def notification_configuration: () -> Types::NotificationConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#describe_notification_configuration-instance_method
+      def describe_notification_configuration: (
+                                                 ?stream_name: ::String,
+                                                 ?stream_arn: ::String
+                                               ) -> _DescribeNotificationConfigurationResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNotificationConfigurationResponseSuccess
+
+      interface _DescribeSignalingChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSignalingChannelOutput]
+        def channel_info: () -> Types::ChannelInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#describe_signaling_channel-instance_method
+      def describe_signaling_channel: (
+                                        ?channel_name: ::String,
+                                        ?channel_arn: ::String
+                                      ) -> _DescribeSignalingChannelResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSignalingChannelResponseSuccess
+
+      interface _DescribeStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStreamOutput]
+        def stream_info: () -> Types::StreamInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#describe_stream-instance_method
+      def describe_stream: (
+                             ?stream_name: ::String,
+                             ?stream_arn: ::String
+                           ) -> _DescribeStreamResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStreamResponseSuccess
+
+      interface _GetDataEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataEndpointOutput]
+        def data_endpoint: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#get_data_endpoint-instance_method
+      def get_data_endpoint: (
+                               ?stream_name: ::String,
+                               ?stream_arn: ::String,
+                               api_name: ("PUT_MEDIA" | "GET_MEDIA" | "LIST_FRAGMENTS" | "GET_MEDIA_FOR_FRAGMENT_LIST" | "GET_HLS_STREAMING_SESSION_URL" | "GET_DASH_STREAMING_SESSION_URL" | "GET_CLIP" | "GET_IMAGES")
+                             ) -> _GetDataEndpointResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataEndpointResponseSuccess
+
+      interface _GetSignalingChannelEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSignalingChannelEndpointOutput]
+        def resource_endpoint_list: () -> ::Array[Types::ResourceEndpointListItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#get_signaling_channel_endpoint-instance_method
+      def get_signaling_channel_endpoint: (
+                                            channel_arn: ::String,
+                                            ?single_master_channel_endpoint_configuration: {
+                                              protocols: Array[("WSS" | "HTTPS" | "WEBRTC")]?,
+                                              role: ("MASTER" | "VIEWER")?
+                                            }
+                                          ) -> _GetSignalingChannelEndpointResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSignalingChannelEndpointResponseSuccess
+
+      interface _ListEdgeAgentConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEdgeAgentConfigurationsOutput]
+        def edge_configs: () -> ::Array[Types::ListEdgeAgentConfigurationsEdgeConfig]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#list_edge_agent_configurations-instance_method
+      def list_edge_agent_configurations: (
+                                            hub_device_arn: ::String,
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _ListEdgeAgentConfigurationsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEdgeAgentConfigurationsResponseSuccess
+
+      interface _ListSignalingChannelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSignalingChannelsOutput]
+        def channel_info_list: () -> ::Array[Types::ChannelInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#list_signaling_channels-instance_method
+      def list_signaling_channels: (
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String,
+                                     ?channel_name_condition: {
+                                       comparison_operator: ("BEGINS_WITH")?,
+                                       comparison_value: ::String?
+                                     }
+                                   ) -> _ListSignalingChannelsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSignalingChannelsResponseSuccess
+
+      interface _ListStreamsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamsOutput]
+        def stream_info_list: () -> ::Array[Types::StreamInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#list_streams-instance_method
+      def list_streams: (
+                          ?max_results: ::Integer,
+                          ?next_token: ::String,
+                          ?stream_name_condition: {
+                            comparison_operator: ("BEGINS_WITH")?,
+                            comparison_value: ::String?
+                          }
+                        ) -> _ListStreamsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
+        def next_token: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    ?next_token: ::String,
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTagsForStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForStreamOutput]
+        def next_token: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#list_tags_for_stream-instance_method
+      def list_tags_for_stream: (
+                                  ?next_token: ::String,
+                                  ?stream_arn: ::String,
+                                  ?stream_name: ::String
+                                ) -> _ListTagsForStreamResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForStreamResponseSuccess
+
+      interface _StartEdgeConfigurationUpdateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartEdgeConfigurationUpdateOutput]
+        def stream_name: () -> ::String
+        def stream_arn: () -> ::String
+        def creation_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+        def sync_status: () -> ("SYNCING" | "ACKNOWLEDGED" | "IN_SYNC" | "SYNC_FAILED" | "DELETING" | "DELETE_FAILED" | "DELETING_ACKNOWLEDGED")
+        def failed_status_details: () -> ::String
+        def edge_config: () -> Types::EdgeConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#start_edge_configuration_update-instance_method
+      def start_edge_configuration_update: (
+                                             ?stream_name: ::String,
+                                             ?stream_arn: ::String,
+                                             edge_config: {
+                                               hub_device_arn: ::String,
+                                               recorder_config: {
+                                                 media_source_config: {
+                                                   media_uri_secret_arn: ::String,
+                                                   media_uri_type: ("RTSP_URI" | "FILE_URI")
+                                                 },
+                                                 schedule_config: {
+                                                   schedule_expression: ::String,
+                                                   duration_in_seconds: ::Integer
+                                                 }?
+                                               },
+                                               uploader_config: {
+                                                 schedule_config: {
+                                                   schedule_expression: ::String,
+                                                   duration_in_seconds: ::Integer
+                                                 }
+                                               }?,
+                                               deletion_config: {
+                                                 edge_retention_in_hours: ::Integer?,
+                                                 local_size_config: {
+                                                   max_local_media_size_in_mb: ::Integer?,
+                                                   strategy_on_full_size: ("DELETE_OLDEST_MEDIA" | "DENY_NEW_MEDIA")?
+                                                 }?,
+                                                 delete_after_upload: bool?
+                                               }?
+                                             }
+                                           ) -> _StartEdgeConfigurationUpdateResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartEdgeConfigurationUpdateResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _TagStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagStreamOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#tag_stream-instance_method
+      def tag_stream: (
+                        ?stream_arn: ::String,
+                        ?stream_name: ::String,
+                        tags: Hash[::String, ::String]
+                      ) -> _TagStreamResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagStreamResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_key_list: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UntagStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagStreamOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#untag_stream-instance_method
+      def untag_stream: (
+                          ?stream_arn: ::String,
+                          ?stream_name: ::String,
+                          tag_key_list: Array[::String]
+                        ) -> _UntagStreamResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagStreamResponseSuccess
+
+      interface _UpdateDataRetentionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataRetentionOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#update_data_retention-instance_method
+      def update_data_retention: (
+                                   ?stream_name: ::String,
+                                   ?stream_arn: ::String,
+                                   current_version: ::String,
+                                   operation: ("INCREASE_DATA_RETENTION" | "DECREASE_DATA_RETENTION"),
+                                   data_retention_change_in_hours: ::Integer
+                                 ) -> _UpdateDataRetentionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataRetentionResponseSuccess
+
+      interface _UpdateImageGenerationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateImageGenerationConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#update_image_generation_configuration-instance_method
+      def update_image_generation_configuration: (
+                                                   ?stream_name: ::String,
+                                                   ?stream_arn: ::String,
+                                                   ?image_generation_configuration: {
+                                                     status: ("ENABLED" | "DISABLED"),
+                                                     image_selector_type: ("SERVER_TIMESTAMP" | "PRODUCER_TIMESTAMP"),
+                                                     destination_config: {
+                                                       uri: ::String,
+                                                       destination_region: ::String
+                                                     },
+                                                     sampling_interval: ::Integer,
+                                                     format: ("JPEG" | "PNG"),
+                                                     format_config: Hash[("JPEGQuality"), ::String]?,
+                                                     width_pixels: ::Integer?,
+                                                     height_pixels: ::Integer?
+                                                   }
+                                                 ) -> _UpdateImageGenerationConfigurationResponseSuccess
+                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateImageGenerationConfigurationResponseSuccess
+
+      interface _UpdateMediaStorageConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMediaStorageConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#update_media_storage_configuration-instance_method
+      def update_media_storage_configuration: (
+                                                channel_arn: ::String,
+                                                media_storage_configuration: {
+                                                  stream_arn: ::String?,
+                                                  status: ("ENABLED" | "DISABLED")
+                                                }
+                                              ) -> _UpdateMediaStorageConfigurationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMediaStorageConfigurationResponseSuccess
+
+      interface _UpdateNotificationConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNotificationConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#update_notification_configuration-instance_method
+      def update_notification_configuration: (
+                                               ?stream_name: ::String,
+                                               ?stream_arn: ::String,
+                                               ?notification_configuration: {
+                                                 status: ("ENABLED" | "DISABLED"),
+                                                 destination_config: {
+                                                   uri: ::String
+                                                 }
+                                               }
+                                             ) -> _UpdateNotificationConfigurationResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNotificationConfigurationResponseSuccess
+
+      interface _UpdateSignalingChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSignalingChannelOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#update_signaling_channel-instance_method
+      def update_signaling_channel: (
+                                      channel_arn: ::String,
+                                      current_version: ::String,
+                                      ?single_master_configuration: {
+                                        message_ttl_seconds: ::Integer?
+                                      }
+                                    ) -> _UpdateSignalingChannelResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSignalingChannelResponseSuccess
+
+      interface _UpdateStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStreamOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KinesisVideo/Client.html#update_stream-instance_method
+      def update_stream: (
+                           ?stream_name: ::String,
+                           ?stream_arn: ::String,
+                           current_version: ::String,
+                           ?device_name: ::String,
+                           ?media_type: ::String
+                         ) -> _UpdateStreamResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStreamResponseSuccess
+    end
+  end
+end
+

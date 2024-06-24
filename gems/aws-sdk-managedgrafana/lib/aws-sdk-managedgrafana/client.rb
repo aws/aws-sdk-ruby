@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::ManagedGrafana
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::ManagedGrafana
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::ManagedGrafana
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::ManagedGrafana
     #   @option options [Aws::ManagedGrafana::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ManagedGrafana::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -388,16 +413,32 @@ module Aws::ManagedGrafana
 
     # @!group API Operations
 
-    # Assigns a Grafana Enterprise license to a workspace. Upgrading to
-    # Grafana Enterprise incurs additional fees. For more information, see
-    # [Upgrade a workspace to Grafana Enterprise][1].
+    # Assigns a Grafana Enterprise license to a workspace. To upgrade, you
+    # must use `ENTERPRISE` for the `licenseType`, and pass in a valid
+    # Grafana Labs token for the `grafanaToken`. Upgrading to Grafana
+    # Enterprise incurs additional fees. For more information, see [Upgrade
+    # a workspace to Grafana Enterprise][1].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html
     #
+    # @option params [String] :grafana_token
+    #   A token from Grafana Labs that ties your Amazon Web Services account
+    #   with a Grafana Labs account. For more information, see [Link your
+    #   account with Grafana Labs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
+    #
     # @option params [required, String] :license_type
     #   The type of license to associate with the workspace.
+    #
+    #   <note markdown="1"> Amazon Managed Grafana workspaces no longer support Grafana Enterprise
+    #   free trials.
+    #
+    #    </note>
     #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace to associate the license with.
@@ -409,6 +450,7 @@ module Aws::ManagedGrafana
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_license({
+    #     grafana_token: "GrafanaToken",
     #     license_type: "ENTERPRISE", # required, accepts ENTERPRISE, ENTERPRISE_FREE_TRIAL
     #     workspace_id: "WorkspaceId", # required
     #   })
@@ -426,6 +468,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -482,10 +525,10 @@ module Aws::ManagedGrafana
     #   `workspaceOrganizationalUnits` parameter.
     #
     # @option params [required, Array<String>] :authentication_providers
-    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center
-    #   (successor to Single Sign-On), or both to authenticate users for using
-    #   the Grafana console within a workspace. For more information, see
-    #   [User authentication in Amazon Managed Grafana][1].
+    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
+    #   or both to authenticate users for using the Grafana console within a
+    #   workspace. For more information, see [User authentication in Amazon
+    #   Managed Grafana][1].
     #
     #
     #
@@ -512,9 +555,10 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
     #
     # @option params [String] :grafana_version
-    #   Specifies the version of Grafana to support in the new workspace.
+    #   Specifies the version of Grafana to support in the new workspace. If
+    #   not specified, defaults to the latest version (for example, 10.4).
     #
-    #   To get a list of supported version, use the `ListVersions` operation.
+    #   To get a list of supported versions, use the `ListVersions` operation.
     #
     # @option params [Types::NetworkAccessConfiguration] :network_access_control
     #   Configuration for network access to your workspace.
@@ -652,6 +696,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -692,6 +737,12 @@ module Aws::ManagedGrafana
     # [https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html][1]
     # for available APIs and example requests.
     #
+    # <note markdown="1"> In workspaces compatible with Grafana version 9 or above, use
+    # workspace service accounts instead of API keys. API keys will be
+    # removed in a future release.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html
@@ -703,7 +754,7 @@ module Aws::ManagedGrafana
     # @option params [required, String] :key_role
     #   Specifies the permission level of the key.
     #
-    #   Valid values: `VIEWER`\|`EDITOR`\|`ADMIN`
+    #   Valid values: `ADMIN`\|`EDITOR`\|`VIEWER`
     #
     # @option params [required, Integer] :seconds_to_live
     #   Specifies the time in seconds until the key expires. Keys can be valid
@@ -742,6 +793,143 @@ module Aws::ManagedGrafana
       req.send_request(options)
     end
 
+    # Creates a service account for the workspace. A service account can be
+    # used to call Grafana HTTP APIs, and run automated workloads. After
+    # creating the service account with the correct `GrafanaRole` for your
+    # use case, use `CreateWorkspaceServiceAccountToken` to create a token
+    # that can be used to authenticate and authorize Grafana HTTP API calls.
+    #
+    # You can only create service accounts for workspaces that are
+    # compatible with Grafana version 9 and above.
+    #
+    # <note markdown="1"> For more information about service accounts, see [Service accounts][1]
+    # in the *Amazon Managed Grafana User Guide*.
+    #
+    #  For more information about the Grafana HTTP APIs, see [Using Grafana
+    # HTTP APIs][2] in the *Amazon Managed Grafana User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/grafana/latest/userguide/service-accounts.html
+    # [2]: https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html
+    #
+    # @option params [required, String] :grafana_role
+    #   The permission level to use for this service account.
+    #
+    #   <note markdown="1"> For more information about the roles and the permissions each has, see
+    #   [User roles][1] in the *Amazon Managed Grafana User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/Grafana-user-roles.html
+    #
+    # @option params [required, String] :name
+    #   A name for the service account. The name must be unique within the
+    #   workspace, as it determines the ID associated with the service
+    #   account.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace within which to create the service account.
+    #
+    # @return [Types::CreateWorkspaceServiceAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorkspaceServiceAccountResponse#grafana_role #grafana_role} => String
+    #   * {Types::CreateWorkspaceServiceAccountResponse#id #id} => String
+    #   * {Types::CreateWorkspaceServiceAccountResponse#name #name} => String
+    #   * {Types::CreateWorkspaceServiceAccountResponse#workspace_id #workspace_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_workspace_service_account({
+    #     grafana_role: "ADMIN", # required, accepts ADMIN, EDITOR, VIEWER
+    #     name: "ServiceAccountName", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.grafana_role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceServiceAccount AWS API Documentation
+    #
+    # @overload create_workspace_service_account(params = {})
+    # @param [Hash] params ({})
+    def create_workspace_service_account(params = {}, options = {})
+      req = build_request(:create_workspace_service_account, params)
+      req.send_request(options)
+    end
+
+    # Creates a token that can be used to authenticate and authorize Grafana
+    # HTTP API operations for the given [workspace service account][1]. The
+    # service account acts as a user for the API operations, and defines the
+    # permissions that are used by the API.
+    #
+    # When you create the service account token, you will receive a key that
+    # is used when calling Grafana APIs. Do not lose this key, as it will
+    # not be retrievable again.
+    #
+    #  If you do lose the key, you can delete the token and recreate it to
+    # receive a new key. This will disable the initial key.
+    #
+    # Service accounts are only available for workspaces that are compatible
+    # with Grafana version 9 and above.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/grafana/latest/userguide/service-accounts.html
+    #
+    # @option params [required, String] :name
+    #   A name for the token to create.
+    #
+    # @option params [required, Integer] :seconds_to_live
+    #   Sets how long the token will be valid, in seconds. You can set the
+    #   time up to 30 days in the future.
+    #
+    # @option params [required, String] :service_account_id
+    #   The ID of the service account for which to create a token.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace the service account resides within.
+    #
+    # @return [Types::CreateWorkspaceServiceAccountTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorkspaceServiceAccountTokenResponse#service_account_id #service_account_id} => String
+    #   * {Types::CreateWorkspaceServiceAccountTokenResponse#service_account_token #service_account_token} => Types::ServiceAccountTokenSummaryWithKey
+    #   * {Types::CreateWorkspaceServiceAccountTokenResponse#workspace_id #workspace_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_workspace_service_account_token({
+    #     name: "ServiceAccountTokenName", # required
+    #     seconds_to_live: 1, # required
+    #     service_account_id: "String", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_account_id #=> String
+    #   resp.service_account_token.id #=> String
+    #   resp.service_account_token.key #=> String
+    #   resp.service_account_token.name #=> String
+    #   resp.workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceServiceAccountToken AWS API Documentation
+    #
+    # @overload create_workspace_service_account_token(params = {})
+    # @param [Hash] params ({})
+    def create_workspace_service_account_token(params = {}, options = {})
+      req = build_request(:create_workspace_service_account_token, params)
+      req.send_request(options)
+    end
+
     # Deletes an Amazon Managed Grafana workspace.
     #
     # @option params [required, String] :workspace_id
@@ -770,6 +958,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -807,6 +996,12 @@ module Aws::ManagedGrafana
 
     # Deletes a Grafana API key for the workspace.
     #
+    # <note markdown="1"> In workspaces compatible with Grafana version 9 or above, use
+    # workspace service accounts instead of API keys. API keys will be
+    # removed in a future release.
+    #
+    #  </note>
+    #
     # @option params [required, String] :key_name
     #   The name of the API key to delete.
     #
@@ -839,6 +1034,94 @@ module Aws::ManagedGrafana
       req.send_request(options)
     end
 
+    # Deletes a workspace service account from the workspace.
+    #
+    # This will delete any tokens created for the service account, as well.
+    # If the tokens are currently in use, the will fail to authenticate /
+    # authorize after they are deleted.
+    #
+    # Service accounts are only available for workspaces that are compatible
+    # with Grafana version 9 and above.
+    #
+    # @option params [required, String] :service_account_id
+    #   The ID of the service account to delete.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace where the service account resides.
+    #
+    # @return [Types::DeleteWorkspaceServiceAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteWorkspaceServiceAccountResponse#service_account_id #service_account_id} => String
+    #   * {Types::DeleteWorkspaceServiceAccountResponse#workspace_id #workspace_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workspace_service_account({
+    #     service_account_id: "String", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_account_id #=> String
+    #   resp.workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspaceServiceAccount AWS API Documentation
+    #
+    # @overload delete_workspace_service_account(params = {})
+    # @param [Hash] params ({})
+    def delete_workspace_service_account(params = {}, options = {})
+      req = build_request(:delete_workspace_service_account, params)
+      req.send_request(options)
+    end
+
+    # Deletes a token for the workspace service account.
+    #
+    # This will disable the key associated with the token. If any automation
+    # is currently using the key, it will no longer be authenticated or
+    # authorized to perform actions with the Grafana HTTP APIs.
+    #
+    # Service accounts are only available for workspaces that are compatible
+    # with Grafana version 9 and above.
+    #
+    # @option params [required, String] :service_account_id
+    #   The ID of the service account from which to delete the token.
+    #
+    # @option params [required, String] :token_id
+    #   The ID of the token to delete.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace from which to delete the token.
+    #
+    # @return [Types::DeleteWorkspaceServiceAccountTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteWorkspaceServiceAccountTokenResponse#service_account_id #service_account_id} => String
+    #   * {Types::DeleteWorkspaceServiceAccountTokenResponse#token_id #token_id} => String
+    #   * {Types::DeleteWorkspaceServiceAccountTokenResponse#workspace_id #workspace_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workspace_service_account_token({
+    #     service_account_id: "String", # required
+    #     token_id: "String", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_account_id #=> String
+    #   resp.token_id #=> String
+    #   resp.workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspaceServiceAccountToken AWS API Documentation
+    #
+    # @overload delete_workspace_service_account_token(params = {})
+    # @param [Hash] params ({})
+    def delete_workspace_service_account_token(params = {}, options = {})
+      req = build_request(:delete_workspace_service_account_token, params)
+      req.send_request(options)
+    end
+
     # Displays information about one Amazon Managed Grafana workspace.
     #
     # @option params [required, String] :workspace_id
@@ -867,6 +1150,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -1011,6 +1295,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -1188,6 +1473,120 @@ module Aws::ManagedGrafana
       req.send_request(options)
     end
 
+    # Returns a list of tokens for a workspace service account.
+    #
+    # <note markdown="1"> This does not return the key for each token. You cannot access keys
+    # after they are created. To create a new key, delete the token and
+    # recreate it.
+    #
+    #  </note>
+    #
+    # Service accounts are only available for workspaces that are compatible
+    # with Grafana version 9 and above.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of tokens to include in the results.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of service accounts to return. (You receive
+    #   this token from a previous `ListWorkspaceServiceAccountTokens`
+    #   operation.)
+    #
+    # @option params [required, String] :service_account_id
+    #   The ID of the service account for which to return tokens.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace for which to return tokens.
+    #
+    # @return [Types::ListWorkspaceServiceAccountTokensResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkspaceServiceAccountTokensResponse#next_token #next_token} => String
+    #   * {Types::ListWorkspaceServiceAccountTokensResponse#service_account_id #service_account_id} => String
+    #   * {Types::ListWorkspaceServiceAccountTokensResponse#service_account_tokens #service_account_tokens} => Array&lt;Types::ServiceAccountTokenSummary&gt;
+    #   * {Types::ListWorkspaceServiceAccountTokensResponse#workspace_id #workspace_id} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workspace_service_account_tokens({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     service_account_id: "String", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.service_account_id #=> String
+    #   resp.service_account_tokens #=> Array
+    #   resp.service_account_tokens[0].created_at #=> Time
+    #   resp.service_account_tokens[0].expires_at #=> Time
+    #   resp.service_account_tokens[0].id #=> String
+    #   resp.service_account_tokens[0].last_used_at #=> Time
+    #   resp.service_account_tokens[0].name #=> String
+    #   resp.workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListWorkspaceServiceAccountTokens AWS API Documentation
+    #
+    # @overload list_workspace_service_account_tokens(params = {})
+    # @param [Hash] params ({})
+    def list_workspace_service_account_tokens(params = {}, options = {})
+      req = build_request(:list_workspace_service_account_tokens, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of service accounts for a workspace.
+    #
+    # Service accounts are only available for workspaces that are compatible
+    # with Grafana version 9 and above.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of service accounts to include in the results.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of service accounts to return. (You receive
+    #   this token from a previous `ListWorkspaceServiceAccounts` operation.)
+    #
+    # @option params [required, String] :workspace_id
+    #   The workspace for which to list service accounts.
+    #
+    # @return [Types::ListWorkspaceServiceAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkspaceServiceAccountsResponse#next_token #next_token} => String
+    #   * {Types::ListWorkspaceServiceAccountsResponse#service_accounts #service_accounts} => Array&lt;Types::ServiceAccountSummary&gt;
+    #   * {Types::ListWorkspaceServiceAccountsResponse#workspace_id #workspace_id} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workspace_service_accounts({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.service_accounts #=> Array
+    #   resp.service_accounts[0].grafana_role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
+    #   resp.service_accounts[0].id #=> String
+    #   resp.service_accounts[0].is_disabled #=> String
+    #   resp.service_accounts[0].name #=> String
+    #   resp.workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListWorkspaceServiceAccounts AWS API Documentation
+    #
+    # @overload list_workspace_service_accounts(params = {})
+    # @param [Hash] params ({})
+    def list_workspace_service_accounts(params = {}, options = {})
+      req = build_request(:list_workspace_service_accounts, params)
+      req.send_request(options)
+    end
+
     # Returns a list of Amazon Managed Grafana workspaces in the account,
     # with some information about each workspace. For more complete
     # information about one workspace, use [DescribeWorkspace][1].
@@ -1227,8 +1626,10 @@ module Aws::ManagedGrafana
     #   resp.workspaces[0].created #=> Time
     #   resp.workspaces[0].description #=> String
     #   resp.workspaces[0].endpoint #=> String
+    #   resp.workspaces[0].grafana_token #=> String
     #   resp.workspaces[0].grafana_version #=> String
     #   resp.workspaces[0].id #=> String
+    #   resp.workspaces[0].license_type #=> String, one of "ENTERPRISE", "ENTERPRISE_FREE_TRIAL"
     #   resp.workspaces[0].modified #=> Time
     #   resp.workspaces[0].name #=> String
     #   resp.workspaces[0].notification_destinations #=> Array
@@ -1531,6 +1932,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.endpoint #=> String
     #   resp.workspace.free_trial_consumed #=> Boolean
     #   resp.workspace.free_trial_expiration #=> Time
+    #   resp.workspace.grafana_token #=> String
     #   resp.workspace.grafana_version #=> String
     #   resp.workspace.id #=> String
     #   resp.workspace.license_expiration #=> Time
@@ -1578,10 +1980,10 @@ module Aws::ManagedGrafana
     #  </note>
     #
     # @option params [required, Array<String>] :authentication_providers
-    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center
-    #   (successor to Single Sign-On), or both to authenticate users for using
-    #   the Grafana console within a workspace. For more information, see
-    #   [User authentication in Amazon Managed Grafana][1].
+    #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
+    #   or both to authenticate users for using the Grafana console within a
+    #   workspace. For more information, see [User authentication in Amazon
+    #   Managed Grafana][1].
     #
     #
     #
@@ -1674,13 +2076,18 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
     #
     # @option params [String] :grafana_version
-    #   Specifies the version of Grafana to support in the new workspace.
+    #   Specifies the version of Grafana to support in the workspace. If not
+    #   specified, keeps the current version of the workspace.
     #
     #   Can only be used to upgrade (for example, from 8.4 to 9.4), not
     #   downgrade (for example, from 9.4 to 8.4).
     #
     #   To know what versions are available to upgrade to for a specific
-    #   workspace, see the `ListVersions` operation.
+    #   workspace, see the [ListVersions][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListVersions.html
     #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace to update.
@@ -1717,7 +2124,7 @@ module Aws::ManagedGrafana
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedgrafana'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

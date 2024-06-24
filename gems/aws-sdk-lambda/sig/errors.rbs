@@ -1,0 +1,171 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Lambda
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class CodeSigningConfigNotFoundException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class CodeStorageExceededException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class CodeVerificationFailedException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class EC2AccessDeniedException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class EC2ThrottledException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class EC2UnexpectedException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+        def ec2_error_code: () -> ::String
+      end
+      class EFSIOException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class EFSMountConnectivityException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class EFSMountFailureException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class EFSMountTimeoutException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class ENILimitReachedException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class InvalidCodeSignatureException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class InvalidRequestContentException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class InvalidRuntimeException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class InvalidSecurityGroupIDException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class InvalidSubnetIDException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class InvalidZipFileException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class KMSAccessDeniedException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class KMSDisabledException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class KMSInvalidStateException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class KMSNotFoundException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class PolicyLengthExceededException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class PreconditionFailedException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class ProvisionedConcurrencyConfigNotFoundException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class RecursiveInvocationException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class RequestTooLargeException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class ResourceConflictException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class ResourceInUseException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class ResourceNotReadyException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class ServiceException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class SnapStartException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class SnapStartNotReadyException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class SnapStartTimeoutException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class SubnetIPAddressLimitReachedException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+      class TooManyRequestsException < ::Aws::Errors::ServiceError
+        def retry_after_seconds: () -> ::String
+        def type: () -> ::String
+        def message: () -> ::String
+        def reason: () -> ::String
+      end
+      class UnsupportedMediaTypeException < ::Aws::Errors::ServiceError
+        def type: () -> ::String
+        def message: () -> ::String
+      end
+    end
+  end
+end

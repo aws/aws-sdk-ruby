@@ -14,6 +14,7 @@ module Aws::EC2
       option(
         :endpoint_provider,
         doc_type: 'Aws::EC2::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::EC2
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -98,6 +100,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::AssociateIamInstanceProfile.build(context)
           when :associate_instance_event_window
             Aws::EC2::Endpoints::AssociateInstanceEventWindow.build(context)
+          when :associate_ipam_byoasn
+            Aws::EC2::Endpoints::AssociateIpamByoasn.build(context)
           when :associate_ipam_resource_discovery
             Aws::EC2::Endpoints::AssociateIpamResourceDiscovery.build(context)
           when :associate_nat_gateway_address
@@ -478,6 +482,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DeleteVpnGateway.build(context)
           when :deprovision_byoip_cidr
             Aws::EC2::Endpoints::DeprovisionByoipCidr.build(context)
+          when :deprovision_ipam_byoasn
+            Aws::EC2::Endpoints::DeprovisionIpamByoasn.build(context)
           when :deprovision_ipam_pool_cidr
             Aws::EC2::Endpoints::DeprovisionIpamPoolCidr.build(context)
           when :deprovision_public_ipv_4_pool_cidr
@@ -508,6 +514,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeBundleTasks.build(context)
           when :describe_byoip_cidrs
             Aws::EC2::Endpoints::DescribeByoipCidrs.build(context)
+          when :describe_capacity_block_offerings
+            Aws::EC2::Endpoints::DescribeCapacityBlockOfferings.build(context)
           when :describe_capacity_reservation_fleets
             Aws::EC2::Endpoints::DescribeCapacityReservationFleets.build(context)
           when :describe_capacity_reservations
@@ -590,6 +598,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeInstanceEventWindows.build(context)
           when :describe_instance_status
             Aws::EC2::Endpoints::DescribeInstanceStatus.build(context)
+          when :describe_instance_topology
+            Aws::EC2::Endpoints::DescribeInstanceTopology.build(context)
           when :describe_instance_type_offerings
             Aws::EC2::Endpoints::DescribeInstanceTypeOfferings.build(context)
           when :describe_instance_types
@@ -598,6 +608,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeInstances.build(context)
           when :describe_internet_gateways
             Aws::EC2::Endpoints::DescribeInternetGateways.build(context)
+          when :describe_ipam_byoasn
+            Aws::EC2::Endpoints::DescribeIpamByoasn.build(context)
           when :describe_ipam_pools
             Aws::EC2::Endpoints::DescribeIpamPools.build(context)
           when :describe_ipam_resource_discoveries
@@ -628,6 +640,10 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeLocalGatewayVirtualInterfaces.build(context)
           when :describe_local_gateways
             Aws::EC2::Endpoints::DescribeLocalGateways.build(context)
+          when :describe_locked_snapshots
+            Aws::EC2::Endpoints::DescribeLockedSnapshots.build(context)
+          when :describe_mac_hosts
+            Aws::EC2::Endpoints::DescribeMacHosts.build(context)
           when :describe_managed_prefix_lists
             Aws::EC2::Endpoints::DescribeManagedPrefixLists.build(context)
           when :describe_moving_addresses
@@ -708,6 +724,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DescribeSubnets.build(context)
           when :describe_tags
             Aws::EC2::Endpoints::DescribeTags.build(context)
+          when :describe_traffic_mirror_filter_rules
+            Aws::EC2::Endpoints::DescribeTrafficMirrorFilterRules.build(context)
           when :describe_traffic_mirror_filters
             Aws::EC2::Endpoints::DescribeTrafficMirrorFilters.build(context)
           when :describe_traffic_mirror_sessions
@@ -802,14 +820,20 @@ module Aws::EC2
             Aws::EC2::Endpoints::DisableFastLaunch.build(context)
           when :disable_fast_snapshot_restores
             Aws::EC2::Endpoints::DisableFastSnapshotRestores.build(context)
+          when :disable_image
+            Aws::EC2::Endpoints::DisableImage.build(context)
           when :disable_image_block_public_access
             Aws::EC2::Endpoints::DisableImageBlockPublicAccess.build(context)
           when :disable_image_deprecation
             Aws::EC2::Endpoints::DisableImageDeprecation.build(context)
+          when :disable_image_deregistration_protection
+            Aws::EC2::Endpoints::DisableImageDeregistrationProtection.build(context)
           when :disable_ipam_organization_admin_account
             Aws::EC2::Endpoints::DisableIpamOrganizationAdminAccount.build(context)
           when :disable_serial_console_access
             Aws::EC2::Endpoints::DisableSerialConsoleAccess.build(context)
+          when :disable_snapshot_block_public_access
+            Aws::EC2::Endpoints::DisableSnapshotBlockPublicAccess.build(context)
           when :disable_transit_gateway_route_table_propagation
             Aws::EC2::Endpoints::DisableTransitGatewayRouteTablePropagation.build(context)
           when :disable_vgw_route_propagation
@@ -828,6 +852,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::DisassociateIamInstanceProfile.build(context)
           when :disassociate_instance_event_window
             Aws::EC2::Endpoints::DisassociateInstanceEventWindow.build(context)
+          when :disassociate_ipam_byoasn
+            Aws::EC2::Endpoints::DisassociateIpamByoasn.build(context)
           when :disassociate_ipam_resource_discovery
             Aws::EC2::Endpoints::DisassociateIpamResourceDiscovery.build(context)
           when :disassociate_nat_gateway_address
@@ -856,16 +882,22 @@ module Aws::EC2
             Aws::EC2::Endpoints::EnableFastLaunch.build(context)
           when :enable_fast_snapshot_restores
             Aws::EC2::Endpoints::EnableFastSnapshotRestores.build(context)
+          when :enable_image
+            Aws::EC2::Endpoints::EnableImage.build(context)
           when :enable_image_block_public_access
             Aws::EC2::Endpoints::EnableImageBlockPublicAccess.build(context)
           when :enable_image_deprecation
             Aws::EC2::Endpoints::EnableImageDeprecation.build(context)
+          when :enable_image_deregistration_protection
+            Aws::EC2::Endpoints::EnableImageDeregistrationProtection.build(context)
           when :enable_ipam_organization_admin_account
             Aws::EC2::Endpoints::EnableIpamOrganizationAdminAccount.build(context)
           when :enable_reachability_analyzer_organization_sharing
             Aws::EC2::Endpoints::EnableReachabilityAnalyzerOrganizationSharing.build(context)
           when :enable_serial_console_access
             Aws::EC2::Endpoints::EnableSerialConsoleAccess.build(context)
+          when :enable_snapshot_block_public_access
+            Aws::EC2::Endpoints::EnableSnapshotBlockPublicAccess.build(context)
           when :enable_transit_gateway_route_table_propagation
             Aws::EC2::Endpoints::EnableTransitGatewayRouteTablePropagation.build(context)
           when :enable_vgw_route_propagation
@@ -912,6 +944,10 @@ module Aws::EC2
             Aws::EC2::Endpoints::GetHostReservationPurchasePreview.build(context)
           when :get_image_block_public_access_state
             Aws::EC2::Endpoints::GetImageBlockPublicAccessState.build(context)
+          when :get_instance_metadata_defaults
+            Aws::EC2::Endpoints::GetInstanceMetadataDefaults.build(context)
+          when :get_instance_tpm_ek_pub
+            Aws::EC2::Endpoints::GetInstanceTpmEkPub.build(context)
           when :get_instance_types_from_instance_requirements
             Aws::EC2::Endpoints::GetInstanceTypesFromInstanceRequirements.build(context)
           when :get_instance_uefi_data
@@ -920,6 +956,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::GetIpamAddressHistory.build(context)
           when :get_ipam_discovered_accounts
             Aws::EC2::Endpoints::GetIpamDiscoveredAccounts.build(context)
+          when :get_ipam_discovered_public_addresses
+            Aws::EC2::Endpoints::GetIpamDiscoveredPublicAddresses.build(context)
           when :get_ipam_discovered_resource_cidrs
             Aws::EC2::Endpoints::GetIpamDiscoveredResourceCidrs.build(context)
           when :get_ipam_pool_allocations
@@ -942,8 +980,12 @@ module Aws::EC2
             Aws::EC2::Endpoints::GetPasswordData.build(context)
           when :get_reserved_instances_exchange_quote
             Aws::EC2::Endpoints::GetReservedInstancesExchangeQuote.build(context)
+          when :get_security_groups_for_vpc
+            Aws::EC2::Endpoints::GetSecurityGroupsForVpc.build(context)
           when :get_serial_console_access_status
             Aws::EC2::Endpoints::GetSerialConsoleAccessStatus.build(context)
+          when :get_snapshot_block_public_access_state
+            Aws::EC2::Endpoints::GetSnapshotBlockPublicAccessState.build(context)
           when :get_spot_placement_scores
             Aws::EC2::Endpoints::GetSpotPlacementScores.build(context)
           when :get_subnet_cidr_reservations
@@ -988,6 +1030,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::ListImagesInRecycleBin.build(context)
           when :list_snapshots_in_recycle_bin
             Aws::EC2::Endpoints::ListSnapshotsInRecycleBin.build(context)
+          when :lock_snapshot
+            Aws::EC2::Endpoints::LockSnapshot.build(context)
           when :modify_address_attribute
             Aws::EC2::Endpoints::ModifyAddressAttribute.build(context)
           when :modify_availability_zone_group
@@ -1026,6 +1070,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::ModifyInstanceEventWindow.build(context)
           when :modify_instance_maintenance_options
             Aws::EC2::Endpoints::ModifyInstanceMaintenanceOptions.build(context)
+          when :modify_instance_metadata_defaults
+            Aws::EC2::Endpoints::ModifyInstanceMetadataDefaults.build(context)
           when :modify_instance_metadata_options
             Aws::EC2::Endpoints::ModifyInstanceMetadataOptions.build(context)
           when :modify_instance_placement
@@ -1124,10 +1170,14 @@ module Aws::EC2
             Aws::EC2::Endpoints::MoveByoipCidrToIpam.build(context)
           when :provision_byoip_cidr
             Aws::EC2::Endpoints::ProvisionByoipCidr.build(context)
+          when :provision_ipam_byoasn
+            Aws::EC2::Endpoints::ProvisionIpamByoasn.build(context)
           when :provision_ipam_pool_cidr
             Aws::EC2::Endpoints::ProvisionIpamPoolCidr.build(context)
           when :provision_public_ipv_4_pool_cidr
             Aws::EC2::Endpoints::ProvisionPublicIpv4PoolCidr.build(context)
+          when :purchase_capacity_block
+            Aws::EC2::Endpoints::PurchaseCapacityBlock.build(context)
           when :purchase_host_reservation
             Aws::EC2::Endpoints::PurchaseHostReservation.build(context)
           when :purchase_reserved_instances_offering
@@ -1242,6 +1292,8 @@ module Aws::EC2
             Aws::EC2::Endpoints::UnassignPrivateIpAddresses.build(context)
           when :unassign_private_nat_gateway_address
             Aws::EC2::Endpoints::UnassignPrivateNatGatewayAddress.build(context)
+          when :unlock_snapshot
+            Aws::EC2::Endpoints::UnlockSnapshot.build(context)
           when :unmonitor_instances
             Aws::EC2::Endpoints::UnmonitorInstances.build(context)
           when :update_security_group_rule_descriptions_egress

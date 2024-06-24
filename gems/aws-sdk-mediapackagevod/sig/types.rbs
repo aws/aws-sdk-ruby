@@ -1,0 +1,514 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MediaPackageVod
+  module Types
+
+    class Asset
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::String
+      attr_accessor egress_endpoints: ::Array[Types::EgressEndpoint]
+      attr_accessor id: ::String
+      attr_accessor packaging_group_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor source_role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AssetCreateParameters
+      attr_accessor id: ::String
+      attr_accessor packaging_group_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor source_role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AssetList
+      attr_accessor assets: ::Array[Types::AssetShallow]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssetShallow
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::String
+      attr_accessor id: ::String
+      attr_accessor packaging_group_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor source_role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Authorization
+      attr_accessor cdn_identifier_secret: ::String
+      attr_accessor secrets_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CmafEncryption
+      attr_accessor constant_initialization_vector: ::String
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider
+      SENSITIVE: []
+    end
+
+    class CmafPackage
+      attr_accessor encryption: Types::CmafEncryption
+      attr_accessor hls_manifests: ::Array[Types::HlsManifest]
+      attr_accessor include_encoder_configuration_in_segments: bool
+      attr_accessor segment_duration_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConfigureLogsParameters
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      SENSITIVE: []
+    end
+
+    class ConfigureLogsRequest
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigureLogsResponse
+      attr_accessor arn: ::String
+      attr_accessor authorization: Types::Authorization
+      attr_accessor created_at: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAssetRequest
+      attr_accessor id: ::String
+      attr_accessor packaging_group_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor source_role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAssetResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::String
+      attr_accessor egress_endpoints: ::Array[Types::EgressEndpoint]
+      attr_accessor id: ::String
+      attr_accessor packaging_group_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor source_role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePackagingConfigurationRequest
+      attr_accessor cmaf_package: Types::CmafPackage
+      attr_accessor dash_package: Types::DashPackage
+      attr_accessor hls_package: Types::HlsPackage
+      attr_accessor id: ::String
+      attr_accessor mss_package: Types::MssPackage
+      attr_accessor packaging_group_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePackagingConfigurationResponse
+      attr_accessor arn: ::String
+      attr_accessor cmaf_package: Types::CmafPackage
+      attr_accessor created_at: ::String
+      attr_accessor dash_package: Types::DashPackage
+      attr_accessor hls_package: Types::HlsPackage
+      attr_accessor id: ::String
+      attr_accessor mss_package: Types::MssPackage
+      attr_accessor packaging_group_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePackagingGroupRequest
+      attr_accessor authorization: Types::Authorization
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePackagingGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor authorization: Types::Authorization
+      attr_accessor created_at: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DashEncryption
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider
+      SENSITIVE: []
+    end
+
+    class DashManifest
+      attr_accessor manifest_layout: ("FULL" | "COMPACT")
+      attr_accessor manifest_name: ::String
+      attr_accessor min_buffer_time_seconds: ::Integer
+      attr_accessor profile: ("NONE" | "HBBTV_1_5")
+      attr_accessor scte_markers_source: ("SEGMENTS" | "MANIFEST")
+      attr_accessor stream_selection: Types::StreamSelection
+      SENSITIVE: []
+    end
+
+    class DashPackage
+      attr_accessor dash_manifests: ::Array[Types::DashManifest]
+      attr_accessor encryption: Types::DashEncryption
+      attr_accessor include_encoder_configuration_in_segments: bool
+      attr_accessor include_iframe_only_stream: bool
+      attr_accessor period_triggers: ::Array[("ADS")]
+      attr_accessor segment_duration_seconds: ::Integer
+      attr_accessor segment_template_format: ("NUMBER_WITH_TIMELINE" | "TIME_WITH_TIMELINE" | "NUMBER_WITH_DURATION")
+      SENSITIVE: []
+    end
+
+    class DeleteAssetRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssetResponse < Aws::EmptyStructure
+    end
+
+    class DeletePackagingConfigurationRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePackagingConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeletePackagingGroupRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePackagingGroupResponse < Aws::EmptyStructure
+    end
+
+    class DescribeAssetRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssetResponse
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::String
+      attr_accessor egress_endpoints: ::Array[Types::EgressEndpoint]
+      attr_accessor id: ::String
+      attr_accessor packaging_group_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor source_role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribePackagingConfigurationRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePackagingConfigurationResponse
+      attr_accessor arn: ::String
+      attr_accessor cmaf_package: Types::CmafPackage
+      attr_accessor created_at: ::String
+      attr_accessor dash_package: Types::DashPackage
+      attr_accessor hls_package: Types::HlsPackage
+      attr_accessor id: ::String
+      attr_accessor mss_package: Types::MssPackage
+      attr_accessor packaging_group_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribePackagingGroupRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePackagingGroupResponse
+      attr_accessor approximate_asset_count: ::Integer
+      attr_accessor arn: ::String
+      attr_accessor authorization: Types::Authorization
+      attr_accessor created_at: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EgressAccessLogs
+      attr_accessor log_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class EgressEndpoint
+      attr_accessor packaging_configuration_id: ::String
+      attr_accessor status: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionContractConfiguration
+      attr_accessor preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED")
+      attr_accessor preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HlsEncryption
+      attr_accessor constant_initialization_vector: ::String
+      attr_accessor encryption_method: ("AES_128" | "SAMPLE_AES")
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider
+      SENSITIVE: []
+    end
+
+    class HlsManifest
+      attr_accessor ad_markers: ("NONE" | "SCTE35_ENHANCED" | "PASSTHROUGH")
+      attr_accessor include_iframe_only_stream: bool
+      attr_accessor manifest_name: ::String
+      attr_accessor program_date_time_interval_seconds: ::Integer
+      attr_accessor repeat_ext_x_key: bool
+      attr_accessor stream_selection: Types::StreamSelection
+      SENSITIVE: []
+    end
+
+    class HlsPackage
+      attr_accessor encryption: Types::HlsEncryption
+      attr_accessor hls_manifests: ::Array[Types::HlsManifest]
+      attr_accessor include_dvb_subtitles: bool
+      attr_accessor segment_duration_seconds: ::Integer
+      attr_accessor use_audio_rendition_group: bool
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssetsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor packaging_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssetsResponse
+      attr_accessor assets: ::Array[Types::AssetShallow]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackagingConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor packaging_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackagingConfigurationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor packaging_configurations: ::Array[Types::PackagingConfiguration]
+      SENSITIVE: []
+    end
+
+    class ListPackagingGroupsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackagingGroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor packaging_groups: ::Array[Types::PackagingGroup]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MssEncryption
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider
+      SENSITIVE: []
+    end
+
+    class MssManifest
+      attr_accessor manifest_name: ::String
+      attr_accessor stream_selection: Types::StreamSelection
+      SENSITIVE: []
+    end
+
+    class MssPackage
+      attr_accessor encryption: Types::MssEncryption
+      attr_accessor mss_manifests: ::Array[Types::MssManifest]
+      attr_accessor segment_duration_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PackagingConfiguration
+      attr_accessor arn: ::String
+      attr_accessor cmaf_package: Types::CmafPackage
+      attr_accessor created_at: ::String
+      attr_accessor dash_package: Types::DashPackage
+      attr_accessor hls_package: Types::HlsPackage
+      attr_accessor id: ::String
+      attr_accessor mss_package: Types::MssPackage
+      attr_accessor packaging_group_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PackagingConfigurationCreateParameters
+      attr_accessor cmaf_package: Types::CmafPackage
+      attr_accessor dash_package: Types::DashPackage
+      attr_accessor hls_package: Types::HlsPackage
+      attr_accessor id: ::String
+      attr_accessor mss_package: Types::MssPackage
+      attr_accessor packaging_group_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PackagingConfigurationList
+      attr_accessor next_token: ::String
+      attr_accessor packaging_configurations: ::Array[Types::PackagingConfiguration]
+      SENSITIVE: []
+    end
+
+    class PackagingGroup
+      attr_accessor approximate_asset_count: ::Integer
+      attr_accessor arn: ::String
+      attr_accessor authorization: Types::Authorization
+      attr_accessor created_at: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PackagingGroupCreateParameters
+      attr_accessor authorization: Types::Authorization
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PackagingGroupList
+      attr_accessor next_token: ::String
+      attr_accessor packaging_groups: ::Array[Types::PackagingGroup]
+      SENSITIVE: []
+    end
+
+    class PackagingGroupUpdateParameters
+      attr_accessor authorization: Types::Authorization
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SpekeKeyProvider
+      attr_accessor encryption_contract_configuration: Types::EncryptionContractConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor system_ids: ::Array[::String]
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class StreamSelection
+      attr_accessor max_video_bits_per_second: ::Integer
+      attr_accessor min_video_bits_per_second: ::Integer
+      attr_accessor stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagsModel
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnprocessableEntityException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdatePackagingGroupRequest
+      attr_accessor authorization: Types::Authorization
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePackagingGroupResponse
+      attr_accessor approximate_asset_count: ::Integer
+      attr_accessor arn: ::String
+      attr_accessor authorization: Types::Authorization
+      attr_accessor created_at: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor egress_access_logs: Types::EgressAccessLogs
+      attr_accessor id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+  end
+end

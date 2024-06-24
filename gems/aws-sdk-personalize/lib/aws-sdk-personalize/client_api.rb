@@ -20,10 +20,12 @@ module Aws::Personalize
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     AutoMLConfig = Shapes::StructureShape.new(name: 'AutoMLConfig')
     AutoMLResult = Shapes::StructureShape.new(name: 'AutoMLResult')
+    AutoTrainingConfig = Shapes::StructureShape.new(name: 'AutoTrainingConfig')
     AvroSchema = Shapes::StringShape.new(name: 'AvroSchema')
     BatchInferenceJob = Shapes::StructureShape.new(name: 'BatchInferenceJob')
     BatchInferenceJobConfig = Shapes::StructureShape.new(name: 'BatchInferenceJobConfig')
     BatchInferenceJobInput = Shapes::StructureShape.new(name: 'BatchInferenceJobInput')
+    BatchInferenceJobMode = Shapes::StringShape.new(name: 'BatchInferenceJobMode')
     BatchInferenceJobOutput = Shapes::StructureShape.new(name: 'BatchInferenceJobOutput')
     BatchInferenceJobSummary = Shapes::StructureShape.new(name: 'BatchInferenceJobSummary')
     BatchInferenceJobs = Shapes::ListShape.new(name: 'BatchInferenceJobs')
@@ -54,6 +56,8 @@ module Aws::Personalize
     CreateBatchSegmentJobResponse = Shapes::StructureShape.new(name: 'CreateBatchSegmentJobResponse')
     CreateCampaignRequest = Shapes::StructureShape.new(name: 'CreateCampaignRequest')
     CreateCampaignResponse = Shapes::StructureShape.new(name: 'CreateCampaignResponse')
+    CreateDataDeletionJobRequest = Shapes::StructureShape.new(name: 'CreateDataDeletionJobRequest')
+    CreateDataDeletionJobResponse = Shapes::StructureShape.new(name: 'CreateDataDeletionJobResponse')
     CreateDatasetExportJobRequest = Shapes::StructureShape.new(name: 'CreateDatasetExportJobRequest')
     CreateDatasetExportJobResponse = Shapes::StructureShape.new(name: 'CreateDatasetExportJobResponse')
     CreateDatasetGroupRequest = Shapes::StructureShape.new(name: 'CreateDatasetGroupRequest')
@@ -76,6 +80,9 @@ module Aws::Personalize
     CreateSolutionResponse = Shapes::StructureShape.new(name: 'CreateSolutionResponse')
     CreateSolutionVersionRequest = Shapes::StructureShape.new(name: 'CreateSolutionVersionRequest')
     CreateSolutionVersionResponse = Shapes::StructureShape.new(name: 'CreateSolutionVersionResponse')
+    DataDeletionJob = Shapes::StructureShape.new(name: 'DataDeletionJob')
+    DataDeletionJobSummary = Shapes::StructureShape.new(name: 'DataDeletionJobSummary')
+    DataDeletionJobs = Shapes::ListShape.new(name: 'DataDeletionJobs')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     Dataset = Shapes::StructureShape.new(name: 'Dataset')
     DatasetExportJob = Shapes::StructureShape.new(name: 'DatasetExportJob')
@@ -119,6 +126,8 @@ module Aws::Personalize
     DescribeBatchSegmentJobResponse = Shapes::StructureShape.new(name: 'DescribeBatchSegmentJobResponse')
     DescribeCampaignRequest = Shapes::StructureShape.new(name: 'DescribeCampaignRequest')
     DescribeCampaignResponse = Shapes::StructureShape.new(name: 'DescribeCampaignResponse')
+    DescribeDataDeletionJobRequest = Shapes::StructureShape.new(name: 'DescribeDataDeletionJobRequest')
+    DescribeDataDeletionJobResponse = Shapes::StructureShape.new(name: 'DescribeDataDeletionJobResponse')
     DescribeDatasetExportJobRequest = Shapes::StructureShape.new(name: 'DescribeDatasetExportJobRequest')
     DescribeDatasetExportJobResponse = Shapes::StructureShape.new(name: 'DescribeDatasetExportJobResponse')
     DescribeDatasetGroupRequest = Shapes::StructureShape.new(name: 'DescribeDatasetGroupRequest')
@@ -159,6 +168,7 @@ module Aws::Personalize
     FeatureTransformation = Shapes::StructureShape.new(name: 'FeatureTransformation')
     FeatureTransformationParameters = Shapes::MapShape.new(name: 'FeatureTransformationParameters')
     FeaturizationParameters = Shapes::MapShape.new(name: 'FeaturizationParameters')
+    FieldsForThemeGeneration = Shapes::StructureShape.new(name: 'FieldsForThemeGeneration')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterExpression = Shapes::StringShape.new(name: 'FilterExpression')
     FilterSummary = Shapes::StructureShape.new(name: 'FilterSummary')
@@ -174,6 +184,7 @@ module Aws::Personalize
     HyperParameters = Shapes::MapShape.new(name: 'HyperParameters')
     ImportMode = Shapes::StringShape.new(name: 'ImportMode')
     IngestionMode = Shapes::StringShape.new(name: 'IngestionMode')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerHyperParameterRange = Shapes::StructureShape.new(name: 'IntegerHyperParameterRange')
     IntegerHyperParameterRanges = Shapes::ListShape.new(name: 'IntegerHyperParameterRanges')
     IntegerMaxValue = Shapes::IntegerShape.new(name: 'IntegerMaxValue')
@@ -189,6 +200,8 @@ module Aws::Personalize
     ListBatchSegmentJobsResponse = Shapes::StructureShape.new(name: 'ListBatchSegmentJobsResponse')
     ListCampaignsRequest = Shapes::StructureShape.new(name: 'ListCampaignsRequest')
     ListCampaignsResponse = Shapes::StructureShape.new(name: 'ListCampaignsResponse')
+    ListDataDeletionJobsRequest = Shapes::StructureShape.new(name: 'ListDataDeletionJobsRequest')
+    ListDataDeletionJobsResponse = Shapes::StructureShape.new(name: 'ListDataDeletionJobsResponse')
     ListDatasetExportJobsRequest = Shapes::StructureShape.new(name: 'ListDatasetExportJobsRequest')
     ListDatasetExportJobsResponse = Shapes::StructureShape.new(name: 'ListDatasetExportJobsResponse')
     ListDatasetGroupsRequest = Shapes::StructureShape.new(name: 'ListDatasetGroupsRequest')
@@ -238,6 +251,7 @@ module Aws::Personalize
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     PerformAutoML = Shapes::BooleanShape.new(name: 'PerformAutoML')
+    PerformAutoTraining = Shapes::BooleanShape.new(name: 'PerformAutoTraining')
     PerformHPO = Shapes::BooleanShape.new(name: 'PerformHPO')
     Recipe = Shapes::StructureShape.new(name: 'Recipe')
     RecipeProvider = Shapes::StringShape.new(name: 'RecipeProvider')
@@ -256,6 +270,7 @@ module Aws::Personalize
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3DataConfig = Shapes::StructureShape.new(name: 'S3DataConfig')
     S3Location = Shapes::StringShape.new(name: 'S3Location')
+    SchedulingExpression = Shapes::StringShape.new(name: 'SchedulingExpression')
     Schemas = Shapes::ListShape.new(name: 'Schemas')
     Solution = Shapes::StructureShape.new(name: 'Solution')
     SolutionConfig = Shapes::StructureShape.new(name: 'SolutionConfig')
@@ -277,6 +292,7 @@ module Aws::Personalize
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::ListShape.new(name: 'Tags')
+    ThemeGenerationConfig = Shapes::StructureShape.new(name: 'ThemeGenerationConfig')
     TooManyTagKeysException = Shapes::StructureShape.new(name: 'TooManyTagKeysException')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TrackingId = Shapes::StringShape.new(name: 'TrackingId')
@@ -284,6 +300,7 @@ module Aws::Personalize
     TrainingHours = Shapes::FloatShape.new(name: 'TrainingHours')
     TrainingInputMode = Shapes::StringShape.new(name: 'TrainingInputMode')
     TrainingMode = Shapes::StringShape.new(name: 'TrainingMode')
+    TrainingType = Shapes::StringShape.new(name: 'TrainingType')
     TransactionsPerSecond = Shapes::IntegerShape.new(name: 'TransactionsPerSecond')
     Tunable = Shapes::BooleanShape.new(name: 'Tunable')
     TunedHPOParams = Shapes::StructureShape.new(name: 'TunedHPOParams')
@@ -323,6 +340,9 @@ module Aws::Personalize
     AutoMLResult.add_member(:best_recipe_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "bestRecipeArn"))
     AutoMLResult.struct_class = Types::AutoMLResult
 
+    AutoTrainingConfig.add_member(:scheduling_expression, Shapes::ShapeRef.new(shape: SchedulingExpression, location_name: "schedulingExpression"))
+    AutoTrainingConfig.struct_class = Types::AutoTrainingConfig
+
     BatchInferenceJob.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
     BatchInferenceJob.add_member(:batch_inference_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "batchInferenceJobArn"))
     BatchInferenceJob.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
@@ -333,6 +353,8 @@ module Aws::Personalize
     BatchInferenceJob.add_member(:job_output, Shapes::ShapeRef.new(shape: BatchInferenceJobOutput, location_name: "jobOutput"))
     BatchInferenceJob.add_member(:batch_inference_job_config, Shapes::ShapeRef.new(shape: BatchInferenceJobConfig, location_name: "batchInferenceJobConfig"))
     BatchInferenceJob.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    BatchInferenceJob.add_member(:batch_inference_job_mode, Shapes::ShapeRef.new(shape: BatchInferenceJobMode, location_name: "batchInferenceJobMode"))
+    BatchInferenceJob.add_member(:theme_generation_config, Shapes::ShapeRef.new(shape: ThemeGenerationConfig, location_name: "themeGenerationConfig"))
     BatchInferenceJob.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     BatchInferenceJob.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     BatchInferenceJob.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
@@ -354,6 +376,7 @@ module Aws::Personalize
     BatchInferenceJobSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     BatchInferenceJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
     BatchInferenceJobSummary.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
+    BatchInferenceJobSummary.add_member(:batch_inference_job_mode, Shapes::ShapeRef.new(shape: BatchInferenceJobMode, location_name: "batchInferenceJobMode"))
     BatchInferenceJobSummary.struct_class = Types::BatchInferenceJobSummary
 
     BatchInferenceJobs.member = Shapes::ShapeRef.new(shape: BatchInferenceJobSummary)
@@ -402,6 +425,8 @@ module Aws::Personalize
     Campaign.struct_class = Types::Campaign
 
     CampaignConfig.add_member(:item_exploration_config, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "itemExplorationConfig"))
+    CampaignConfig.add_member(:enable_metadata_with_recommendations, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableMetadataWithRecommendations"))
+    CampaignConfig.add_member(:sync_with_latest_solution_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "syncWithLatestSolutionVersion"))
     CampaignConfig.struct_class = Types::CampaignConfig
 
     CampaignSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -449,6 +474,8 @@ module Aws::Personalize
     CreateBatchInferenceJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateBatchInferenceJobRequest.add_member(:batch_inference_job_config, Shapes::ShapeRef.new(shape: BatchInferenceJobConfig, location_name: "batchInferenceJobConfig"))
     CreateBatchInferenceJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateBatchInferenceJobRequest.add_member(:batch_inference_job_mode, Shapes::ShapeRef.new(shape: BatchInferenceJobMode, location_name: "batchInferenceJobMode"))
+    CreateBatchInferenceJobRequest.add_member(:theme_generation_config, Shapes::ShapeRef.new(shape: ThemeGenerationConfig, location_name: "themeGenerationConfig"))
     CreateBatchInferenceJobRequest.struct_class = Types::CreateBatchInferenceJobRequest
 
     CreateBatchInferenceJobResponse.add_member(:batch_inference_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "batchInferenceJobArn"))
@@ -476,6 +503,16 @@ module Aws::Personalize
 
     CreateCampaignResponse.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
     CreateCampaignResponse.struct_class = Types::CreateCampaignResponse
+
+    CreateDataDeletionJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
+    CreateDataDeletionJobRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetGroupArn"))
+    CreateDataDeletionJobRequest.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "dataSource"))
+    CreateDataDeletionJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreateDataDeletionJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateDataDeletionJobRequest.struct_class = Types::CreateDataDeletionJobRequest
+
+    CreateDataDeletionJobResponse.add_member(:data_deletion_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "dataDeletionJobArn"))
+    CreateDataDeletionJobResponse.struct_class = Types::CreateDataDeletionJobResponse
 
     CreateDatasetExportJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
     CreateDatasetExportJobRequest.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetArn"))
@@ -569,6 +606,7 @@ module Aws::Personalize
     CreateSolutionRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateSolutionRequest.add_member(:perform_hpo, Shapes::ShapeRef.new(shape: Boolean, location_name: "performHPO"))
     CreateSolutionRequest.add_member(:perform_auto_ml, Shapes::ShapeRef.new(shape: PerformAutoML, location_name: "performAutoML"))
+    CreateSolutionRequest.add_member(:perform_auto_training, Shapes::ShapeRef.new(shape: PerformAutoTraining, location_name: "performAutoTraining"))
     CreateSolutionRequest.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recipeArn"))
     CreateSolutionRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetGroupArn"))
     CreateSolutionRequest.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, location_name: "eventType"))
@@ -588,6 +626,29 @@ module Aws::Personalize
     CreateSolutionVersionResponse.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
     CreateSolutionVersionResponse.struct_class = Types::CreateSolutionVersionResponse
 
+    DataDeletionJob.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
+    DataDeletionJob.add_member(:data_deletion_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "dataDeletionJobArn"))
+    DataDeletionJob.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
+    DataDeletionJob.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
+    DataDeletionJob.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    DataDeletionJob.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    DataDeletionJob.add_member(:num_deleted, Shapes::ShapeRef.new(shape: Integer, location_name: "numDeleted"))
+    DataDeletionJob.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    DataDeletionJob.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    DataDeletionJob.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    DataDeletionJob.struct_class = Types::DataDeletionJob
+
+    DataDeletionJobSummary.add_member(:data_deletion_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "dataDeletionJobArn"))
+    DataDeletionJobSummary.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
+    DataDeletionJobSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
+    DataDeletionJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    DataDeletionJobSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
+    DataDeletionJobSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    DataDeletionJobSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
+    DataDeletionJobSummary.struct_class = Types::DataDeletionJobSummary
+
+    DataDeletionJobs.member = Shapes::ShapeRef.new(shape: DataDeletionJobSummary)
+
     DataSource.add_member(:data_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "dataLocation"))
     DataSource.struct_class = Types::DataSource
 
@@ -600,6 +661,7 @@ module Aws::Personalize
     Dataset.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     Dataset.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     Dataset.add_member(:latest_dataset_update, Shapes::ShapeRef.new(shape: DatasetUpdateSummary, location_name: "latestDatasetUpdate"))
+    Dataset.add_member(:tracking_id, Shapes::ShapeRef.new(shape: TrackingId, location_name: "trackingId"))
     Dataset.struct_class = Types::Dataset
 
     DatasetExportJob.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
@@ -784,6 +846,12 @@ module Aws::Personalize
     DescribeCampaignResponse.add_member(:campaign, Shapes::ShapeRef.new(shape: Campaign, location_name: "campaign"))
     DescribeCampaignResponse.struct_class = Types::DescribeCampaignResponse
 
+    DescribeDataDeletionJobRequest.add_member(:data_deletion_job_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "dataDeletionJobArn"))
+    DescribeDataDeletionJobRequest.struct_class = Types::DescribeDataDeletionJobRequest
+
+    DescribeDataDeletionJobResponse.add_member(:data_deletion_job, Shapes::ShapeRef.new(shape: DataDeletionJob, location_name: "dataDeletionJob"))
+    DescribeDataDeletionJobResponse.struct_class = Types::DescribeDataDeletionJobResponse
+
     DescribeDatasetExportJobRequest.add_member(:dataset_export_job_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetExportJobArn"))
     DescribeDatasetExportJobRequest.struct_class = Types::DescribeDatasetExportJobRequest
 
@@ -898,6 +966,9 @@ module Aws::Personalize
     FeaturizationParameters.key = Shapes::ShapeRef.new(shape: ParameterName)
     FeaturizationParameters.value = Shapes::ShapeRef.new(shape: ParameterValue)
 
+    FieldsForThemeGeneration.add_member(:item_name, Shapes::ShapeRef.new(shape: ColumnName, required: true, location_name: "itemName"))
+    FieldsForThemeGeneration.struct_class = Types::FieldsForThemeGeneration
+
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Filter.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
     Filter.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
@@ -990,6 +1061,15 @@ module Aws::Personalize
     ListCampaignsResponse.add_member(:campaigns, Shapes::ShapeRef.new(shape: Campaigns, location_name: "campaigns"))
     ListCampaignsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListCampaignsResponse.struct_class = Types::ListCampaignsResponse
+
+    ListDataDeletionJobsRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
+    ListDataDeletionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDataDeletionJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListDataDeletionJobsRequest.struct_class = Types::ListDataDeletionJobsRequest
+
+    ListDataDeletionJobsResponse.add_member(:data_deletion_jobs, Shapes::ShapeRef.new(shape: DataDeletionJobs, location_name: "dataDeletionJobs"))
+    ListDataDeletionJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListDataDeletionJobsResponse.struct_class = Types::ListDataDeletionJobsResponse
 
     ListDatasetExportJobsRequest.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetArn"))
     ListDatasetExportJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -1190,6 +1270,7 @@ module Aws::Personalize
     RecommenderConfig.add_member(:item_exploration_config, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "itemExplorationConfig"))
     RecommenderConfig.add_member(:min_recommendation_requests_per_second, Shapes::ShapeRef.new(shape: TransactionsPerSecond, location_name: "minRecommendationRequestsPerSecond"))
     RecommenderConfig.add_member(:training_data_config, Shapes::ShapeRef.new(shape: TrainingDataConfig, location_name: "trainingDataConfig"))
+    RecommenderConfig.add_member(:enable_metadata_with_recommendations, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableMetadataWithRecommendations"))
     RecommenderConfig.struct_class = Types::RecommenderConfig
 
     RecommenderSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -1233,6 +1314,7 @@ module Aws::Personalize
     Solution.add_member(:solution_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionArn"))
     Solution.add_member(:perform_hpo, Shapes::ShapeRef.new(shape: PerformHPO, location_name: "performHPO"))
     Solution.add_member(:perform_auto_ml, Shapes::ShapeRef.new(shape: PerformAutoML, location_name: "performAutoML"))
+    Solution.add_member(:perform_auto_training, Shapes::ShapeRef.new(shape: PerformAutoTraining, location_name: "performAutoTraining"))
     Solution.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recipeArn"))
     Solution.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
     Solution.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, location_name: "eventType"))
@@ -1251,6 +1333,7 @@ module Aws::Personalize
     SolutionConfig.add_member(:auto_ml_config, Shapes::ShapeRef.new(shape: AutoMLConfig, location_name: "autoMLConfig"))
     SolutionConfig.add_member(:optimization_objective, Shapes::ShapeRef.new(shape: OptimizationObjective, location_name: "optimizationObjective"))
     SolutionConfig.add_member(:training_data_config, Shapes::ShapeRef.new(shape: TrainingDataConfig, location_name: "trainingDataConfig"))
+    SolutionConfig.add_member(:auto_training_config, Shapes::ShapeRef.new(shape: AutoTrainingConfig, location_name: "autoTrainingConfig"))
     SolutionConfig.struct_class = Types::SolutionConfig
 
     SolutionSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -1277,10 +1360,13 @@ module Aws::Personalize
     SolutionVersion.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
     SolutionVersion.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     SolutionVersion.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
+    SolutionVersion.add_member(:training_type, Shapes::ShapeRef.new(shape: TrainingType, location_name: "trainingType"))
     SolutionVersion.struct_class = Types::SolutionVersion
 
     SolutionVersionSummary.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
     SolutionVersionSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
+    SolutionVersionSummary.add_member(:training_mode, Shapes::ShapeRef.new(shape: TrainingMode, location_name: "trainingMode"))
+    SolutionVersionSummary.add_member(:training_type, Shapes::ShapeRef.new(shape: TrainingType, location_name: "trainingType"))
     SolutionVersionSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "creationDateTime"))
     SolutionVersionSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastUpdatedDateTime"))
     SolutionVersionSummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
@@ -1318,6 +1404,9 @@ module Aws::Personalize
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
+
+    ThemeGenerationConfig.add_member(:fields_for_theme_generation, Shapes::ShapeRef.new(shape: FieldsForThemeGeneration, required: true, location_name: "fieldsForThemeGeneration"))
+    ThemeGenerationConfig.struct_class = Types::ThemeGenerationConfig
 
     TooManyTagKeysException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TooManyTagKeysException.struct_class = Types::TooManyTagKeysException
@@ -1380,6 +1469,7 @@ module Aws::Personalize
         "endpointPrefix" => "personalize",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Personalize",
         "serviceId" => "Personalize",
         "signatureVersion" => "v4",
@@ -1422,6 +1512,20 @@ module Aws::Personalize
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateCampaignRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCampaignResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+      end)
+
+      api.add_operation(:create_data_deletion_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateDataDeletionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateDataDeletionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateDataDeletionJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
@@ -1716,6 +1820,16 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:describe_data_deletion_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDataDeletionJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDataDeletionJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDataDeletionJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:describe_dataset, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDataset"
         o.http_method = "POST"
@@ -1903,6 +2017,16 @@ module Aws::Personalize
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_data_deletion_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDataDeletionJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDataDeletionJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDataDeletionJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:list_dataset_export_jobs, Seahorse::Model::Operation.new.tap do |o|

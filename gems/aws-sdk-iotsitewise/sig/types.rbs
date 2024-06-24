@@ -1,0 +1,2098 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoTSiteWise
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessPolicySummary
+      attr_accessor id: ::String
+      attr_accessor identity: Types::Identity
+      attr_accessor resource: Types::Resource
+      attr_accessor permission: ("ADMINISTRATOR" | "VIEWER")
+      attr_accessor creation_date: ::Time
+      attr_accessor last_update_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ActionDefinition
+      attr_accessor action_definition_id: ::String
+      attr_accessor action_name: ::String
+      attr_accessor action_type: ::String
+      SENSITIVE: []
+    end
+
+    class ActionPayload
+      attr_accessor string_value: ::String
+      SENSITIVE: []
+    end
+
+    class ActionSummary
+      attr_accessor action_id: ::String
+      attr_accessor action_definition_id: ::String
+      attr_accessor target_resource: Types::TargetResource
+      SENSITIVE: []
+    end
+
+    class AggregatedValue
+      attr_accessor timestamp: ::Time
+      attr_accessor quality: ("GOOD" | "BAD" | "UNCERTAIN")
+      attr_accessor value: Types::Aggregates
+      SENSITIVE: []
+    end
+
+    class Aggregates
+      attr_accessor average: ::Float
+      attr_accessor count: ::Float
+      attr_accessor maximum: ::Float
+      attr_accessor minimum: ::Float
+      attr_accessor sum: ::Float
+      attr_accessor standard_deviation: ::Float
+      SENSITIVE: []
+    end
+
+    class Alarms
+      attr_accessor alarm_role_arn: ::String
+      attr_accessor notification_lambda_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssetCompositeModel
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ::String
+      attr_accessor properties: ::Array[Types::AssetProperty]
+      attr_accessor id: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssetCompositeModelPathSegment
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AssetCompositeModelSummary
+      attr_accessor id: ::String
+      attr_accessor external_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor description: ::String
+      attr_accessor path: ::Array[Types::AssetCompositeModelPathSegment]
+      SENSITIVE: []
+    end
+
+    class AssetErrorDetails
+      attr_accessor asset_id: ::String
+      attr_accessor code: ("INTERNAL_FAILURE")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssetHierarchy
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssetHierarchyInfo
+      attr_accessor parent_asset_id: ::String
+      attr_accessor child_asset_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssetModelCompositeModel
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ::String
+      attr_accessor properties: ::Array[Types::AssetModelProperty]
+      attr_accessor id: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssetModelCompositeModelDefinition
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ::String
+      attr_accessor properties: ::Array[Types::AssetModelPropertyDefinition]
+      attr_accessor id: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssetModelCompositeModelPathSegment
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AssetModelCompositeModelSummary
+      attr_accessor id: ::String
+      attr_accessor external_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor description: ::String
+      attr_accessor path: ::Array[Types::AssetModelCompositeModelPathSegment]
+      SENSITIVE: []
+    end
+
+    class AssetModelHierarchy
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor child_asset_model_id: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssetModelHierarchyDefinition
+      attr_accessor name: ::String
+      attr_accessor child_asset_model_id: ::String
+      attr_accessor id: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssetModelProperty
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT")
+      attr_accessor data_type_spec: ::String
+      attr_accessor unit: ::String
+      attr_accessor type: Types::PropertyType
+      attr_accessor path: ::Array[Types::AssetModelPropertyPathSegment]
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssetModelPropertyDefinition
+      attr_accessor name: ::String
+      attr_accessor data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT")
+      attr_accessor data_type_spec: ::String
+      attr_accessor unit: ::String
+      attr_accessor type: Types::PropertyType
+      attr_accessor id: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssetModelPropertyPathSegment
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AssetModelPropertySummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT")
+      attr_accessor data_type_spec: ::String
+      attr_accessor unit: ::String
+      attr_accessor type: Types::PropertyType
+      attr_accessor asset_model_composite_model_id: ::String
+      attr_accessor path: ::Array[Types::AssetModelPropertyPathSegment]
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssetModelStatus
+      attr_accessor state: ("CREATING" | "ACTIVE" | "UPDATING" | "PROPAGATING" | "DELETING" | "FAILED")
+      attr_accessor error: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class AssetModelSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_update_date: ::Time
+      attr_accessor status: Types::AssetModelStatus
+      attr_accessor asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL")
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssetProperty
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor alias: ::String
+      attr_accessor notification: Types::PropertyNotification
+      attr_accessor data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT")
+      attr_accessor data_type_spec: ::String
+      attr_accessor unit: ::String
+      attr_accessor path: ::Array[Types::AssetPropertyPathSegment]
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssetPropertyPathSegment
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class AssetPropertySummary
+      attr_accessor id: ::String
+      attr_accessor alias: ::String
+      attr_accessor unit: ::String
+      attr_accessor notification: Types::PropertyNotification
+      attr_accessor asset_composite_model_id: ::String
+      attr_accessor path: ::Array[Types::AssetPropertyPathSegment]
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssetPropertyValue
+      attr_accessor value: Types::Variant
+      attr_accessor timestamp: Types::TimeInNanos
+      attr_accessor quality: ("GOOD" | "BAD" | "UNCERTAIN")
+      SENSITIVE: []
+    end
+
+    class AssetRelationshipSummary
+      attr_accessor hierarchy_info: Types::AssetHierarchyInfo
+      attr_accessor relationship_type: ("HIERARCHY")
+      SENSITIVE: []
+    end
+
+    class AssetStatus
+      attr_accessor state: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "FAILED")
+      attr_accessor error: Types::ErrorDetails
+      SENSITIVE: []
+    end
+
+    class AssetSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor asset_model_id: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_update_date: ::Time
+      attr_accessor status: Types::AssetStatus
+      attr_accessor hierarchies: ::Array[Types::AssetHierarchy]
+      attr_accessor description: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateAssetsRequest
+      attr_accessor asset_id: ::String
+      attr_accessor hierarchy_id: ::String
+      attr_accessor child_asset_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateTimeSeriesToAssetPropertyRequest
+      attr_accessor alias: ::String
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociatedAssetsSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor asset_model_id: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_update_date: ::Time
+      attr_accessor status: Types::AssetStatus
+      attr_accessor hierarchies: ::Array[Types::AssetHierarchy]
+      attr_accessor description: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class Attribute
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class BatchAssociateProjectAssetsRequest
+      attr_accessor project_id: ::String
+      attr_accessor asset_ids: ::Array[::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchAssociateProjectAssetsResponse
+      attr_accessor errors: ::Array[Types::AssetErrorDetails]
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateProjectAssetsRequest
+      attr_accessor project_id: ::String
+      attr_accessor asset_ids: ::Array[::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDisassociateProjectAssetsResponse
+      attr_accessor errors: ::Array[Types::AssetErrorDetails]
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyAggregatesEntry
+      attr_accessor entry_id: ::String
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor property_alias: ::String
+      attr_accessor aggregate_types: ::Array[("AVERAGE" | "COUNT" | "MAXIMUM" | "MINIMUM" | "SUM" | "STANDARD_DEVIATION")]
+      attr_accessor resolution: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor qualities: ::Array[("GOOD" | "BAD" | "UNCERTAIN")]
+      attr_accessor time_ordering: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyAggregatesErrorEntry
+      attr_accessor error_code: ("ResourceNotFoundException" | "InvalidRequestException" | "AccessDeniedException")
+      attr_accessor error_message: ::String
+      attr_accessor entry_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyAggregatesErrorInfo
+      attr_accessor error_code: ("ResourceNotFoundException" | "InvalidRequestException" | "AccessDeniedException")
+      attr_accessor error_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyAggregatesRequest
+      attr_accessor entries: ::Array[Types::BatchGetAssetPropertyAggregatesEntry]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyAggregatesResponse
+      attr_accessor error_entries: ::Array[Types::BatchGetAssetPropertyAggregatesErrorEntry]
+      attr_accessor success_entries: ::Array[Types::BatchGetAssetPropertyAggregatesSuccessEntry]
+      attr_accessor skipped_entries: ::Array[Types::BatchGetAssetPropertyAggregatesSkippedEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyAggregatesSkippedEntry
+      attr_accessor entry_id: ::String
+      attr_accessor completion_status: ("SUCCESS" | "ERROR")
+      attr_accessor error_info: Types::BatchGetAssetPropertyAggregatesErrorInfo
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyAggregatesSuccessEntry
+      attr_accessor entry_id: ::String
+      attr_accessor aggregated_values: ::Array[Types::AggregatedValue]
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyValueEntry
+      attr_accessor entry_id: ::String
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor property_alias: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyValueErrorEntry
+      attr_accessor error_code: ("ResourceNotFoundException" | "InvalidRequestException" | "AccessDeniedException")
+      attr_accessor error_message: ::String
+      attr_accessor entry_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyValueErrorInfo
+      attr_accessor error_code: ("ResourceNotFoundException" | "InvalidRequestException" | "AccessDeniedException")
+      attr_accessor error_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyValueHistoryEntry
+      attr_accessor entry_id: ::String
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor property_alias: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor qualities: ::Array[("GOOD" | "BAD" | "UNCERTAIN")]
+      attr_accessor time_ordering: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyValueHistoryErrorEntry
+      attr_accessor error_code: ("ResourceNotFoundException" | "InvalidRequestException" | "AccessDeniedException")
+      attr_accessor error_message: ::String
+      attr_accessor entry_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyValueHistoryErrorInfo
+      attr_accessor error_code: ("ResourceNotFoundException" | "InvalidRequestException" | "AccessDeniedException")
+      attr_accessor error_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyValueHistoryRequest
+      attr_accessor entries: ::Array[Types::BatchGetAssetPropertyValueHistoryEntry]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyValueHistoryResponse
+      attr_accessor error_entries: ::Array[Types::BatchGetAssetPropertyValueHistoryErrorEntry]
+      attr_accessor success_entries: ::Array[Types::BatchGetAssetPropertyValueHistorySuccessEntry]
+      attr_accessor skipped_entries: ::Array[Types::BatchGetAssetPropertyValueHistorySkippedEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyValueHistorySkippedEntry
+      attr_accessor entry_id: ::String
+      attr_accessor completion_status: ("SUCCESS" | "ERROR")
+      attr_accessor error_info: Types::BatchGetAssetPropertyValueHistoryErrorInfo
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyValueHistorySuccessEntry
+      attr_accessor entry_id: ::String
+      attr_accessor asset_property_value_history: ::Array[Types::AssetPropertyValue]
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyValueRequest
+      attr_accessor entries: ::Array[Types::BatchGetAssetPropertyValueEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyValueResponse
+      attr_accessor error_entries: ::Array[Types::BatchGetAssetPropertyValueErrorEntry]
+      attr_accessor success_entries: ::Array[Types::BatchGetAssetPropertyValueSuccessEntry]
+      attr_accessor skipped_entries: ::Array[Types::BatchGetAssetPropertyValueSkippedEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyValueSkippedEntry
+      attr_accessor entry_id: ::String
+      attr_accessor completion_status: ("SUCCESS" | "ERROR")
+      attr_accessor error_info: Types::BatchGetAssetPropertyValueErrorInfo
+      SENSITIVE: []
+    end
+
+    class BatchGetAssetPropertyValueSuccessEntry
+      attr_accessor entry_id: ::String
+      attr_accessor asset_property_value: Types::AssetPropertyValue
+      SENSITIVE: []
+    end
+
+    class BatchPutAssetPropertyError
+      attr_accessor error_code: ("ResourceNotFoundException" | "InvalidRequestException" | "InternalFailureException" | "ServiceUnavailableException" | "ThrottlingException" | "LimitExceededException" | "ConflictingOperationException" | "TimestampOutOfRangeException" | "AccessDeniedException")
+      attr_accessor error_message: ::String
+      attr_accessor timestamps: ::Array[Types::TimeInNanos]
+      SENSITIVE: []
+    end
+
+    class BatchPutAssetPropertyErrorEntry
+      attr_accessor entry_id: ::String
+      attr_accessor errors: ::Array[Types::BatchPutAssetPropertyError]
+      SENSITIVE: []
+    end
+
+    class BatchPutAssetPropertyValueRequest
+      attr_accessor entries: ::Array[Types::PutAssetPropertyValueEntry]
+      SENSITIVE: []
+    end
+
+    class BatchPutAssetPropertyValueResponse
+      attr_accessor error_entries: ::Array[Types::BatchPutAssetPropertyErrorEntry]
+      SENSITIVE: []
+    end
+
+    class ColumnInfo
+      attr_accessor name: ::String
+      attr_accessor type: Types::ColumnType
+      SENSITIVE: []
+    end
+
+    class ColumnType
+      attr_accessor scalar_type: ("BOOLEAN" | "INT" | "DOUBLE" | "TIMESTAMP" | "STRING")
+      SENSITIVE: []
+    end
+
+    class CompositeModelProperty
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor asset_property: Types::Property
+      attr_accessor id: ::String
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class CompositionDetails
+      attr_accessor composition_relationship: ::Array[Types::CompositionRelationshipItem]
+      SENSITIVE: []
+    end
+
+    class CompositionRelationshipItem
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class CompositionRelationshipSummary
+      attr_accessor asset_model_id: ::String
+      attr_accessor asset_model_composite_model_id: ::String
+      attr_accessor asset_model_composite_model_type: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationErrorDetails
+      attr_accessor code: ("VALIDATION_ERROR" | "INTERNAL_FAILURE")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConfigurationStatus
+      attr_accessor state: ("ACTIVE" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED")
+      attr_accessor error: Types::ConfigurationErrorDetails
+      SENSITIVE: []
+    end
+
+    class ConflictingOperationException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessPolicyRequest
+      attr_accessor access_policy_identity: Types::Identity
+      attr_accessor access_policy_resource: Types::Resource
+      attr_accessor access_policy_permission: ("ADMINISTRATOR" | "VIEWER")
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAccessPolicyResponse
+      attr_accessor access_policy_id: ::String
+      attr_accessor access_policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAssetModelCompositeModelRequest
+      attr_accessor asset_model_id: ::String
+      attr_accessor parent_asset_model_composite_model_id: ::String
+      attr_accessor asset_model_composite_model_external_id: ::String
+      attr_accessor asset_model_composite_model_id: ::String
+      attr_accessor asset_model_composite_model_description: ::String
+      attr_accessor asset_model_composite_model_name: ::String
+      attr_accessor asset_model_composite_model_type: ::String
+      attr_accessor client_token: ::String
+      attr_accessor composed_asset_model_id: ::String
+      attr_accessor asset_model_composite_model_properties: ::Array[Types::AssetModelPropertyDefinition]
+      SENSITIVE: []
+    end
+
+    class CreateAssetModelCompositeModelResponse
+      attr_accessor asset_model_composite_model_id: ::String
+      attr_accessor asset_model_composite_model_path: ::Array[Types::AssetModelCompositeModelPathSegment]
+      attr_accessor asset_model_status: Types::AssetModelStatus
+      SENSITIVE: []
+    end
+
+    class CreateAssetModelRequest
+      attr_accessor asset_model_name: ::String
+      attr_accessor asset_model_description: ::String
+      attr_accessor asset_model_properties: ::Array[Types::AssetModelPropertyDefinition]
+      attr_accessor asset_model_hierarchies: ::Array[Types::AssetModelHierarchyDefinition]
+      attr_accessor asset_model_composite_models: ::Array[Types::AssetModelCompositeModelDefinition]
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor asset_model_id: ::String
+      attr_accessor asset_model_external_id: ::String
+      attr_accessor asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL")
+      SENSITIVE: []
+    end
+
+    class CreateAssetModelResponse
+      attr_accessor asset_model_id: ::String
+      attr_accessor asset_model_arn: ::String
+      attr_accessor asset_model_status: Types::AssetModelStatus
+      SENSITIVE: []
+    end
+
+    class CreateAssetRequest
+      attr_accessor asset_name: ::String
+      attr_accessor asset_model_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor asset_description: ::String
+      attr_accessor asset_id: ::String
+      attr_accessor asset_external_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAssetResponse
+      attr_accessor asset_id: ::String
+      attr_accessor asset_arn: ::String
+      attr_accessor asset_status: Types::AssetStatus
+      SENSITIVE: []
+    end
+
+    class CreateBulkImportJobRequest
+      attr_accessor job_name: ::String
+      attr_accessor job_role_arn: ::String
+      attr_accessor files: ::Array[Types::File]
+      attr_accessor error_report_location: Types::ErrorReportLocation
+      attr_accessor job_configuration: Types::JobConfiguration
+      attr_accessor adaptive_ingestion: bool
+      attr_accessor delete_files_after_import: bool
+      SENSITIVE: []
+    end
+
+    class CreateBulkImportJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("PENDING" | "CANCELLED" | "RUNNING" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")
+      SENSITIVE: []
+    end
+
+    class CreateDashboardRequest
+      attr_accessor project_id: ::String
+      attr_accessor dashboard_name: ::String
+      attr_accessor dashboard_description: ::String
+      attr_accessor dashboard_definition: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDashboardResponse
+      attr_accessor dashboard_id: ::String
+      attr_accessor dashboard_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGatewayRequest
+      attr_accessor gateway_name: ::String
+      attr_accessor gateway_platform: Types::GatewayPlatform
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateGatewayResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePortalRequest
+      attr_accessor portal_name: ::String
+      attr_accessor portal_description: ::String
+      attr_accessor portal_contact_email: ::String
+      attr_accessor client_token: ::String
+      attr_accessor portal_logo_image_file: Types::ImageFile
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor portal_auth_mode: ("IAM" | "SSO")
+      attr_accessor notification_sender_email: ::String
+      attr_accessor alarms: Types::Alarms
+      SENSITIVE: []
+    end
+
+    class CreatePortalResponse
+      attr_accessor portal_id: ::String
+      attr_accessor portal_arn: ::String
+      attr_accessor portal_start_url: ::String
+      attr_accessor portal_status: Types::PortalStatus
+      attr_accessor sso_application_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateProjectRequest
+      attr_accessor portal_id: ::String
+      attr_accessor project_name: ::String
+      attr_accessor project_description: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProjectResponse
+      attr_accessor project_id: ::String
+      attr_accessor project_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Csv
+      attr_accessor column_names: ::Array[("ALIAS" | "ASSET_ID" | "PROPERTY_ID" | "DATA_TYPE" | "TIMESTAMP_SECONDS" | "TIMESTAMP_NANO_OFFSET" | "QUALITY" | "VALUE")]
+      SENSITIVE: []
+    end
+
+    class CustomerManagedS3Storage
+      attr_accessor s3_resource_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DashboardSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_update_date: ::Time
+      SENSITIVE: []
+    end
+
+    class Datum
+      attr_accessor scalar_value: ::String
+      attr_accessor array_value: ::Array[Types::Datum]
+      attr_accessor row_value: Types::Row
+      attr_accessor null_value: bool
+      SENSITIVE: []
+    end
+
+    class DeleteAccessPolicyRequest
+      attr_accessor access_policy_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAssetModelCompositeModelRequest
+      attr_accessor asset_model_id: ::String
+      attr_accessor asset_model_composite_model_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssetModelCompositeModelResponse
+      attr_accessor asset_model_status: Types::AssetModelStatus
+      SENSITIVE: []
+    end
+
+    class DeleteAssetModelRequest
+      attr_accessor asset_model_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssetModelResponse
+      attr_accessor asset_model_status: Types::AssetModelStatus
+      SENSITIVE: []
+    end
+
+    class DeleteAssetRequest
+      attr_accessor asset_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAssetResponse
+      attr_accessor asset_status: Types::AssetStatus
+      SENSITIVE: []
+    end
+
+    class DeleteDashboardRequest
+      attr_accessor dashboard_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDashboardResponse < Aws::EmptyStructure
+    end
+
+    class DeleteGatewayRequest
+      attr_accessor gateway_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePortalRequest
+      attr_accessor portal_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePortalResponse
+      attr_accessor portal_status: Types::PortalStatus
+      SENSITIVE: []
+    end
+
+    class DeleteProjectRequest
+      attr_accessor project_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProjectResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTimeSeriesRequest
+      attr_accessor alias: ::String
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccessPolicyRequest
+      attr_accessor access_policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccessPolicyResponse
+      attr_accessor access_policy_id: ::String
+      attr_accessor access_policy_arn: ::String
+      attr_accessor access_policy_identity: Types::Identity
+      attr_accessor access_policy_resource: Types::Resource
+      attr_accessor access_policy_permission: ("ADMINISTRATOR" | "VIEWER")
+      attr_accessor access_policy_creation_date: ::Time
+      attr_accessor access_policy_last_update_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeActionRequest
+      attr_accessor action_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeActionResponse
+      attr_accessor action_id: ::String
+      attr_accessor target_resource: Types::TargetResource
+      attr_accessor action_definition_id: ::String
+      attr_accessor action_payload: Types::ActionPayload
+      attr_accessor execution_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeAssetCompositeModelRequest
+      attr_accessor asset_id: ::String
+      attr_accessor asset_composite_model_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssetCompositeModelResponse
+      attr_accessor asset_id: ::String
+      attr_accessor asset_composite_model_id: ::String
+      attr_accessor asset_composite_model_external_id: ::String
+      attr_accessor asset_composite_model_path: ::Array[Types::AssetCompositeModelPathSegment]
+      attr_accessor asset_composite_model_name: ::String
+      attr_accessor asset_composite_model_description: ::String
+      attr_accessor asset_composite_model_type: ::String
+      attr_accessor asset_composite_model_properties: ::Array[Types::AssetProperty]
+      attr_accessor asset_composite_model_summaries: ::Array[Types::AssetCompositeModelSummary]
+      attr_accessor action_definitions: ::Array[Types::ActionDefinition]
+      SENSITIVE: []
+    end
+
+    class DescribeAssetModelCompositeModelRequest
+      attr_accessor asset_model_id: ::String
+      attr_accessor asset_model_composite_model_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssetModelCompositeModelResponse
+      attr_accessor asset_model_id: ::String
+      attr_accessor asset_model_composite_model_id: ::String
+      attr_accessor asset_model_composite_model_external_id: ::String
+      attr_accessor asset_model_composite_model_path: ::Array[Types::AssetModelCompositeModelPathSegment]
+      attr_accessor asset_model_composite_model_name: ::String
+      attr_accessor asset_model_composite_model_description: ::String
+      attr_accessor asset_model_composite_model_type: ::String
+      attr_accessor asset_model_composite_model_properties: ::Array[Types::AssetModelProperty]
+      attr_accessor composition_details: Types::CompositionDetails
+      attr_accessor asset_model_composite_model_summaries: ::Array[Types::AssetModelCompositeModelSummary]
+      attr_accessor action_definitions: ::Array[Types::ActionDefinition]
+      SENSITIVE: []
+    end
+
+    class DescribeAssetModelRequest
+      attr_accessor asset_model_id: ::String
+      attr_accessor exclude_properties: bool
+      SENSITIVE: []
+    end
+
+    class DescribeAssetModelResponse
+      attr_accessor asset_model_id: ::String
+      attr_accessor asset_model_arn: ::String
+      attr_accessor asset_model_name: ::String
+      attr_accessor asset_model_description: ::String
+      attr_accessor asset_model_properties: ::Array[Types::AssetModelProperty]
+      attr_accessor asset_model_hierarchies: ::Array[Types::AssetModelHierarchy]
+      attr_accessor asset_model_composite_models: ::Array[Types::AssetModelCompositeModel]
+      attr_accessor asset_model_creation_date: ::Time
+      attr_accessor asset_model_last_update_date: ::Time
+      attr_accessor asset_model_status: Types::AssetModelStatus
+      attr_accessor asset_model_type: ("ASSET_MODEL" | "COMPONENT_MODEL")
+      attr_accessor asset_model_composite_model_summaries: ::Array[Types::AssetModelCompositeModelSummary]
+      attr_accessor asset_model_external_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssetPropertyRequest
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssetPropertyResponse
+      attr_accessor asset_id: ::String
+      attr_accessor asset_name: ::String
+      attr_accessor asset_model_id: ::String
+      attr_accessor asset_property: Types::Property
+      attr_accessor composite_model: Types::CompositeModelProperty
+      attr_accessor asset_external_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAssetRequest
+      attr_accessor asset_id: ::String
+      attr_accessor exclude_properties: bool
+      SENSITIVE: []
+    end
+
+    class DescribeAssetResponse
+      attr_accessor asset_id: ::String
+      attr_accessor asset_arn: ::String
+      attr_accessor asset_name: ::String
+      attr_accessor asset_model_id: ::String
+      attr_accessor asset_properties: ::Array[Types::AssetProperty]
+      attr_accessor asset_hierarchies: ::Array[Types::AssetHierarchy]
+      attr_accessor asset_composite_models: ::Array[Types::AssetCompositeModel]
+      attr_accessor asset_creation_date: ::Time
+      attr_accessor asset_last_update_date: ::Time
+      attr_accessor asset_status: Types::AssetStatus
+      attr_accessor asset_description: ::String
+      attr_accessor asset_composite_model_summaries: ::Array[Types::AssetCompositeModelSummary]
+      attr_accessor asset_external_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBulkImportJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBulkImportJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
+      attr_accessor job_status: ("PENDING" | "CANCELLED" | "RUNNING" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")
+      attr_accessor job_role_arn: ::String
+      attr_accessor files: ::Array[Types::File]
+      attr_accessor error_report_location: Types::ErrorReportLocation
+      attr_accessor job_configuration: Types::JobConfiguration
+      attr_accessor job_creation_date: ::Time
+      attr_accessor job_last_update_date: ::Time
+      attr_accessor adaptive_ingestion: bool
+      attr_accessor delete_files_after_import: bool
+      SENSITIVE: []
+    end
+
+    class DescribeDashboardRequest
+      attr_accessor dashboard_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDashboardResponse
+      attr_accessor dashboard_id: ::String
+      attr_accessor dashboard_arn: ::String
+      attr_accessor dashboard_name: ::String
+      attr_accessor project_id: ::String
+      attr_accessor dashboard_description: ::String
+      attr_accessor dashboard_definition: ::String
+      attr_accessor dashboard_creation_date: ::Time
+      attr_accessor dashboard_last_update_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeDefaultEncryptionConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class DescribeDefaultEncryptionConfigurationResponse
+      attr_accessor encryption_type: ("SITEWISE_DEFAULT_ENCRYPTION" | "KMS_BASED_ENCRYPTION")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor configuration_status: Types::ConfigurationStatus
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayCapabilityConfigurationRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor capability_namespace: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayCapabilityConfigurationResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor capability_namespace: ::String
+      attr_accessor capability_configuration: ::String
+      attr_accessor capability_sync_status: ("IN_SYNC" | "OUT_OF_SYNC" | "SYNC_FAILED" | "UNKNOWN")
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayRequest
+      attr_accessor gateway_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor gateway_name: ::String
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_platform: Types::GatewayPlatform
+      attr_accessor gateway_capability_summaries: ::Array[Types::GatewayCapabilitySummary]
+      attr_accessor creation_date: ::Time
+      attr_accessor last_update_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeLoggingOptionsRequest < Aws::EmptyStructure
+    end
+
+    class DescribeLoggingOptionsResponse
+      attr_accessor logging_options: Types::LoggingOptions
+      SENSITIVE: []
+    end
+
+    class DescribePortalRequest
+      attr_accessor portal_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePortalResponse
+      attr_accessor portal_id: ::String
+      attr_accessor portal_arn: ::String
+      attr_accessor portal_name: ::String
+      attr_accessor portal_description: ::String
+      attr_accessor portal_client_id: ::String
+      attr_accessor portal_start_url: ::String
+      attr_accessor portal_contact_email: ::String
+      attr_accessor portal_status: Types::PortalStatus
+      attr_accessor portal_creation_date: ::Time
+      attr_accessor portal_last_update_date: ::Time
+      attr_accessor portal_logo_image_location: Types::ImageLocation
+      attr_accessor role_arn: ::String
+      attr_accessor portal_auth_mode: ("IAM" | "SSO")
+      attr_accessor notification_sender_email: ::String
+      attr_accessor alarms: Types::Alarms
+      SENSITIVE: []
+    end
+
+    class DescribeProjectRequest
+      attr_accessor project_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeProjectResponse
+      attr_accessor project_id: ::String
+      attr_accessor project_arn: ::String
+      attr_accessor project_name: ::String
+      attr_accessor portal_id: ::String
+      attr_accessor project_description: ::String
+      attr_accessor project_creation_date: ::Time
+      attr_accessor project_last_update_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeStorageConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class DescribeStorageConfigurationResponse
+      attr_accessor storage_type: ("SITEWISE_DEFAULT_STORAGE" | "MULTI_LAYER_STORAGE")
+      attr_accessor multi_layer_storage: Types::MultiLayerStorage
+      attr_accessor disassociated_data_storage: ("ENABLED" | "DISABLED")
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor configuration_status: Types::ConfigurationStatus
+      attr_accessor last_update_date: ::Time
+      attr_accessor warm_tier: ("ENABLED" | "DISABLED")
+      attr_accessor warm_tier_retention_period: Types::WarmTierRetentionPeriod
+      SENSITIVE: []
+    end
+
+    class DescribeTimeSeriesRequest
+      attr_accessor alias: ::String
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTimeSeriesResponse
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor alias: ::String
+      attr_accessor time_series_id: ::String
+      attr_accessor data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT")
+      attr_accessor data_type_spec: ::String
+      attr_accessor time_series_creation_date: ::Time
+      attr_accessor time_series_last_update_date: ::Time
+      attr_accessor time_series_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DetailedError
+      attr_accessor code: ("INCOMPATIBLE_COMPUTE_LOCATION" | "INCOMPATIBLE_FORWARDING_CONFIGURATION")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateAssetsRequest
+      attr_accessor asset_id: ::String
+      attr_accessor hierarchy_id: ::String
+      attr_accessor child_asset_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateTimeSeriesFromAssetPropertyRequest
+      attr_accessor alias: ::String
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorDetails
+      attr_accessor code: ("VALIDATION_ERROR" | "INTERNAL_FAILURE")
+      attr_accessor message: ::String
+      attr_accessor details: ::Array[Types::DetailedError]
+      SENSITIVE: []
+    end
+
+    class ErrorReportLocation
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteActionRequest
+      attr_accessor target_resource: Types::TargetResource
+      attr_accessor action_definition_id: ::String
+      attr_accessor action_payload: Types::ActionPayload
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteActionResponse
+      attr_accessor action_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExecuteQueryRequest
+      attr_accessor query_statement: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ExecuteQueryResponse
+      attr_accessor columns: ::Array[Types::ColumnInfo]
+      attr_accessor rows: ::Array[Types::Row]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ExpressionVariable
+      attr_accessor name: ::String
+      attr_accessor value: Types::VariableValue
+      SENSITIVE: []
+    end
+
+    class File
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor version_id: ::String
+      SENSITIVE: []
+    end
+
+    class FileFormat
+      attr_accessor csv: Types::Csv
+      attr_accessor parquet: Types::Parquet
+      SENSITIVE: []
+    end
+
+    class ForwardingConfig
+      attr_accessor state: ("DISABLED" | "ENABLED")
+      SENSITIVE: []
+    end
+
+    class GatewayCapabilitySummary
+      attr_accessor capability_namespace: ::String
+      attr_accessor capability_sync_status: ("IN_SYNC" | "OUT_OF_SYNC" | "SYNC_FAILED" | "UNKNOWN")
+      SENSITIVE: []
+    end
+
+    class GatewayPlatform
+      attr_accessor greengrass: Types::Greengrass
+      attr_accessor greengrass_v2: Types::GreengrassV2
+      SENSITIVE: []
+    end
+
+    class GatewaySummary
+      attr_accessor gateway_id: ::String
+      attr_accessor gateway_name: ::String
+      attr_accessor gateway_platform: Types::GatewayPlatform
+      attr_accessor gateway_capability_summaries: ::Array[Types::GatewayCapabilitySummary]
+      attr_accessor creation_date: ::Time
+      attr_accessor last_update_date: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAssetPropertyAggregatesRequest
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor property_alias: ::String
+      attr_accessor aggregate_types: ::Array[("AVERAGE" | "COUNT" | "MAXIMUM" | "MINIMUM" | "SUM" | "STANDARD_DEVIATION")]
+      attr_accessor resolution: ::String
+      attr_accessor qualities: ::Array[("GOOD" | "BAD" | "UNCERTAIN")]
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor time_ordering: ("ASCENDING" | "DESCENDING")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAssetPropertyAggregatesResponse
+      attr_accessor aggregated_values: ::Array[Types::AggregatedValue]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssetPropertyValueHistoryRequest
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor property_alias: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor qualities: ::Array[("GOOD" | "BAD" | "UNCERTAIN")]
+      attr_accessor time_ordering: ("ASCENDING" | "DESCENDING")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAssetPropertyValueHistoryResponse
+      attr_accessor asset_property_value_history: ::Array[Types::AssetPropertyValue]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssetPropertyValueRequest
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor property_alias: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssetPropertyValueResponse
+      attr_accessor property_value: Types::AssetPropertyValue
+      SENSITIVE: []
+    end
+
+    class GetInterpolatedAssetPropertyValuesRequest
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor property_alias: ::String
+      attr_accessor start_time_in_seconds: ::Integer
+      attr_accessor start_time_offset_in_nanos: ::Integer
+      attr_accessor end_time_in_seconds: ::Integer
+      attr_accessor end_time_offset_in_nanos: ::Integer
+      attr_accessor quality: ("GOOD" | "BAD" | "UNCERTAIN")
+      attr_accessor interval_in_seconds: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor type: ::String
+      attr_accessor interval_window_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetInterpolatedAssetPropertyValuesResponse
+      attr_accessor interpolated_asset_property_values: ::Array[Types::InterpolatedAssetPropertyValue]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Greengrass
+      attr_accessor group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GreengrassV2
+      attr_accessor core_device_thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class GroupIdentity
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class IAMRoleIdentity
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class IAMUserIdentity
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class Identity
+      attr_accessor user: Types::UserIdentity
+      attr_accessor group: Types::GroupIdentity
+      attr_accessor iam_user: Types::IAMUserIdentity
+      attr_accessor iam_role: Types::IAMRoleIdentity
+      SENSITIVE: []
+    end
+
+    class Image
+      attr_accessor id: ::String
+      attr_accessor file: Types::ImageFile
+      SENSITIVE: []
+    end
+
+    class ImageFile
+      attr_accessor data: ::String
+      attr_accessor type: ("PNG")
+      SENSITIVE: []
+    end
+
+    class ImageLocation
+      attr_accessor id: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InterpolatedAssetPropertyValue
+      attr_accessor timestamp: Types::TimeInNanos
+      attr_accessor value: Types::Variant
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JobConfiguration
+      attr_accessor file_format: Types::FileFormat
+      SENSITIVE: []
+    end
+
+    class JobSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("PENDING" | "CANCELLED" | "RUNNING" | "COMPLETED" | "FAILED" | "COMPLETED_WITH_FAILURES")
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessPoliciesRequest
+      attr_accessor identity_type: ("USER" | "GROUP" | "IAM")
+      attr_accessor identity_id: ::String
+      attr_accessor resource_type: ("PORTAL" | "PROJECT")
+      attr_accessor resource_id: ::String
+      attr_accessor iam_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccessPoliciesResponse
+      attr_accessor access_policy_summaries: ::Array[Types::AccessPolicySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListActionsRequest
+      attr_accessor target_resource_type: ("ASSET")
+      attr_accessor target_resource_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListActionsResponse
+      attr_accessor action_summaries: ::Array[Types::ActionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssetModelCompositeModelsRequest
+      attr_accessor asset_model_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssetModelCompositeModelsResponse
+      attr_accessor asset_model_composite_model_summaries: ::Array[Types::AssetModelCompositeModelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssetModelPropertiesRequest
+      attr_accessor asset_model_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: ("ALL" | "BASE")
+      SENSITIVE: []
+    end
+
+    class ListAssetModelPropertiesResponse
+      attr_accessor asset_model_property_summaries: ::Array[Types::AssetModelPropertySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssetModelsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor asset_model_types: ::Array[("ASSET_MODEL" | "COMPONENT_MODEL")]
+      SENSITIVE: []
+    end
+
+    class ListAssetModelsResponse
+      attr_accessor asset_model_summaries: ::Array[Types::AssetModelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssetPropertiesRequest
+      attr_accessor asset_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: ("ALL" | "BASE")
+      SENSITIVE: []
+    end
+
+    class ListAssetPropertiesResponse
+      attr_accessor asset_property_summaries: ::Array[Types::AssetPropertySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssetRelationshipsRequest
+      attr_accessor asset_id: ::String
+      attr_accessor traversal_type: ("PATH_TO_ROOT")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssetRelationshipsResponse
+      attr_accessor asset_relationship_summaries: ::Array[Types::AssetRelationshipSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssetsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor asset_model_id: ::String
+      attr_accessor filter: ("ALL" | "TOP_LEVEL")
+      SENSITIVE: []
+    end
+
+    class ListAssetsResponse
+      attr_accessor asset_summaries: ::Array[Types::AssetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociatedAssetsRequest
+      attr_accessor asset_id: ::String
+      attr_accessor hierarchy_id: ::String
+      attr_accessor traversal_direction: ("PARENT" | "CHILD")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssociatedAssetsResponse
+      attr_accessor asset_summaries: ::Array[Types::AssociatedAssetsSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBulkImportJobsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filter: ("ALL" | "PENDING" | "RUNNING" | "CANCELLED" | "FAILED" | "COMPLETED_WITH_FAILURES" | "COMPLETED")
+      SENSITIVE: []
+    end
+
+    class ListBulkImportJobsResponse
+      attr_accessor job_summaries: ::Array[Types::JobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCompositionRelationshipsRequest
+      attr_accessor asset_model_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCompositionRelationshipsResponse
+      attr_accessor composition_relationship_summaries: ::Array[Types::CompositionRelationshipSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDashboardsRequest
+      attr_accessor project_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDashboardsResponse
+      attr_accessor dashboard_summaries: ::Array[Types::DashboardSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewaysRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGatewaysResponse
+      attr_accessor gateway_summaries: ::Array[Types::GatewaySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPortalsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPortalsResponse
+      attr_accessor portal_summaries: ::Array[Types::PortalSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProjectAssetsRequest
+      attr_accessor project_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProjectAssetsResponse
+      attr_accessor asset_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProjectsRequest
+      attr_accessor portal_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProjectsResponse
+      attr_accessor project_summaries: ::Array[Types::ProjectSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTimeSeriesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor asset_id: ::String
+      attr_accessor alias_prefix: ::String
+      attr_accessor time_series_type: ("ASSOCIATED" | "DISASSOCIATED")
+      SENSITIVE: []
+    end
+
+    class ListTimeSeriesResponse
+      attr_accessor time_series_summaries: ::Array[Types::TimeSeriesSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LoggingOptions
+      attr_accessor level: ("ERROR" | "INFO" | "OFF")
+      SENSITIVE: []
+    end
+
+    class Measurement
+      attr_accessor processing_config: Types::MeasurementProcessingConfig
+      SENSITIVE: []
+    end
+
+    class MeasurementProcessingConfig
+      attr_accessor forwarding_config: Types::ForwardingConfig
+      SENSITIVE: []
+    end
+
+    class Metric
+      attr_accessor expression: ::String
+      attr_accessor variables: ::Array[Types::ExpressionVariable]
+      attr_accessor window: Types::MetricWindow
+      attr_accessor processing_config: Types::MetricProcessingConfig
+      SENSITIVE: []
+    end
+
+    class MetricProcessingConfig
+      attr_accessor compute_location: ("EDGE" | "CLOUD")
+      SENSITIVE: []
+    end
+
+    class MetricWindow
+      attr_accessor tumbling: Types::TumblingWindow
+      SENSITIVE: []
+    end
+
+    class MonitorErrorDetails
+      attr_accessor code: ("INTERNAL_FAILURE" | "VALIDATION_ERROR" | "LIMIT_EXCEEDED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MultiLayerStorage
+      attr_accessor customer_managed_s3_storage: Types::CustomerManagedS3Storage
+      SENSITIVE: []
+    end
+
+    class Parquet < Aws::EmptyStructure
+    end
+
+    class PortalResource
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class PortalStatus
+      attr_accessor state: ("CREATING" | "UPDATING" | "DELETING" | "ACTIVE" | "FAILED")
+      attr_accessor error: Types::MonitorErrorDetails
+      SENSITIVE: []
+    end
+
+    class PortalSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor start_url: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_update_date: ::Time
+      attr_accessor role_arn: ::String
+      attr_accessor status: Types::PortalStatus
+      SENSITIVE: []
+    end
+
+    class ProjectResource
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ProjectSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor last_update_date: ::Time
+      SENSITIVE: []
+    end
+
+    class Property
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor alias: ::String
+      attr_accessor notification: Types::PropertyNotification
+      attr_accessor data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT")
+      attr_accessor unit: ::String
+      attr_accessor type: Types::PropertyType
+      attr_accessor path: ::Array[Types::AssetPropertyPathSegment]
+      attr_accessor external_id: ::String
+      SENSITIVE: []
+    end
+
+    class PropertyNotification
+      attr_accessor topic: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class PropertyType
+      attr_accessor attribute: Types::Attribute
+      attr_accessor measurement: Types::Measurement
+      attr_accessor transform: Types::Transform
+      attr_accessor metric: Types::Metric
+      SENSITIVE: []
+    end
+
+    class PutAssetPropertyValueEntry
+      attr_accessor entry_id: ::String
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor property_alias: ::String
+      attr_accessor property_values: ::Array[Types::AssetPropertyValue]
+      SENSITIVE: []
+    end
+
+    class PutDefaultEncryptionConfigurationRequest
+      attr_accessor encryption_type: ("SITEWISE_DEFAULT_ENCRYPTION" | "KMS_BASED_ENCRYPTION")
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutDefaultEncryptionConfigurationResponse
+      attr_accessor encryption_type: ("SITEWISE_DEFAULT_ENCRYPTION" | "KMS_BASED_ENCRYPTION")
+      attr_accessor kms_key_arn: ::String
+      attr_accessor configuration_status: Types::ConfigurationStatus
+      SENSITIVE: []
+    end
+
+    class PutLoggingOptionsRequest
+      attr_accessor logging_options: Types::LoggingOptions
+      SENSITIVE: []
+    end
+
+    class PutLoggingOptionsResponse < Aws::EmptyStructure
+    end
+
+    class PutStorageConfigurationRequest
+      attr_accessor storage_type: ("SITEWISE_DEFAULT_STORAGE" | "MULTI_LAYER_STORAGE")
+      attr_accessor multi_layer_storage: Types::MultiLayerStorage
+      attr_accessor disassociated_data_storage: ("ENABLED" | "DISABLED")
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor warm_tier: ("ENABLED" | "DISABLED")
+      attr_accessor warm_tier_retention_period: Types::WarmTierRetentionPeriod
+      SENSITIVE: []
+    end
+
+    class PutStorageConfigurationResponse
+      attr_accessor storage_type: ("SITEWISE_DEFAULT_STORAGE" | "MULTI_LAYER_STORAGE")
+      attr_accessor multi_layer_storage: Types::MultiLayerStorage
+      attr_accessor disassociated_data_storage: ("ENABLED" | "DISABLED")
+      attr_accessor retention_period: Types::RetentionPeriod
+      attr_accessor configuration_status: Types::ConfigurationStatus
+      attr_accessor warm_tier: ("ENABLED" | "DISABLED")
+      attr_accessor warm_tier_retention_period: Types::WarmTierRetentionPeriod
+      SENSITIVE: []
+    end
+
+    class QueryTimeoutException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor portal: Types::PortalResource
+      attr_accessor project: Types::ProjectResource
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RetentionPeriod
+      attr_accessor number_of_days: ::Integer
+      attr_accessor unlimited: bool
+      SENSITIVE: []
+    end
+
+    class Row
+      attr_accessor data: ::Array[Types::Datum]
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TargetResource
+      attr_accessor asset_id: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimeInNanos
+      attr_accessor time_in_seconds: ::Integer
+      attr_accessor offset_in_nanos: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimeSeriesSummary
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor alias: ::String
+      attr_accessor time_series_id: ::String
+      attr_accessor data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT")
+      attr_accessor data_type_spec: ::String
+      attr_accessor time_series_creation_date: ::Time
+      attr_accessor time_series_last_update_date: ::Time
+      attr_accessor time_series_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class Transform
+      attr_accessor expression: ::String
+      attr_accessor variables: ::Array[Types::ExpressionVariable]
+      attr_accessor processing_config: Types::TransformProcessingConfig
+      SENSITIVE: []
+    end
+
+    class TransformProcessingConfig
+      attr_accessor compute_location: ("EDGE" | "CLOUD")
+      attr_accessor forwarding_config: Types::ForwardingConfig
+      SENSITIVE: []
+    end
+
+    class TumblingWindow
+      attr_accessor interval: ::String
+      attr_accessor offset: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAccessPolicyRequest
+      attr_accessor access_policy_id: ::String
+      attr_accessor access_policy_identity: Types::Identity
+      attr_accessor access_policy_resource: Types::Resource
+      attr_accessor access_policy_permission: ("ADMINISTRATOR" | "VIEWER")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAccessPolicyResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAssetModelCompositeModelRequest
+      attr_accessor asset_model_id: ::String
+      attr_accessor asset_model_composite_model_id: ::String
+      attr_accessor asset_model_composite_model_external_id: ::String
+      attr_accessor asset_model_composite_model_description: ::String
+      attr_accessor asset_model_composite_model_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor asset_model_composite_model_properties: ::Array[Types::AssetModelProperty]
+      SENSITIVE: []
+    end
+
+    class UpdateAssetModelCompositeModelResponse
+      attr_accessor asset_model_composite_model_path: ::Array[Types::AssetModelCompositeModelPathSegment]
+      attr_accessor asset_model_status: Types::AssetModelStatus
+      SENSITIVE: []
+    end
+
+    class UpdateAssetModelRequest
+      attr_accessor asset_model_id: ::String
+      attr_accessor asset_model_name: ::String
+      attr_accessor asset_model_description: ::String
+      attr_accessor asset_model_properties: ::Array[Types::AssetModelProperty]
+      attr_accessor asset_model_hierarchies: ::Array[Types::AssetModelHierarchy]
+      attr_accessor asset_model_composite_models: ::Array[Types::AssetModelCompositeModel]
+      attr_accessor client_token: ::String
+      attr_accessor asset_model_external_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAssetModelResponse
+      attr_accessor asset_model_status: Types::AssetModelStatus
+      SENSITIVE: []
+    end
+
+    class UpdateAssetPropertyRequest
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor property_alias: ::String
+      attr_accessor property_notification_state: ("ENABLED" | "DISABLED")
+      attr_accessor client_token: ::String
+      attr_accessor property_unit: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAssetRequest
+      attr_accessor asset_id: ::String
+      attr_accessor asset_name: ::String
+      attr_accessor client_token: ::String
+      attr_accessor asset_description: ::String
+      attr_accessor asset_external_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAssetResponse
+      attr_accessor asset_status: Types::AssetStatus
+      SENSITIVE: []
+    end
+
+    class UpdateDashboardRequest
+      attr_accessor dashboard_id: ::String
+      attr_accessor dashboard_name: ::String
+      attr_accessor dashboard_description: ::String
+      attr_accessor dashboard_definition: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDashboardResponse < Aws::EmptyStructure
+    end
+
+    class UpdateGatewayCapabilityConfigurationRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor capability_namespace: ::String
+      attr_accessor capability_configuration: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayCapabilityConfigurationResponse
+      attr_accessor capability_namespace: ::String
+      attr_accessor capability_sync_status: ("IN_SYNC" | "OUT_OF_SYNC" | "SYNC_FAILED" | "UNKNOWN")
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor gateway_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePortalRequest
+      attr_accessor portal_id: ::String
+      attr_accessor portal_name: ::String
+      attr_accessor portal_description: ::String
+      attr_accessor portal_contact_email: ::String
+      attr_accessor portal_logo_image: Types::Image
+      attr_accessor role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor notification_sender_email: ::String
+      attr_accessor alarms: Types::Alarms
+      SENSITIVE: []
+    end
+
+    class UpdatePortalResponse
+      attr_accessor portal_status: Types::PortalStatus
+      SENSITIVE: []
+    end
+
+    class UpdateProjectRequest
+      attr_accessor project_id: ::String
+      attr_accessor project_name: ::String
+      attr_accessor project_description: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateProjectResponse < Aws::EmptyStructure
+    end
+
+    class UserIdentity
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VariableValue
+      attr_accessor property_id: ::String
+      attr_accessor hierarchy_id: ::String
+      attr_accessor property_path: ::Array[Types::AssetModelPropertyPathSegment]
+      SENSITIVE: []
+    end
+
+    class Variant
+      attr_accessor string_value: ::String
+      attr_accessor integer_value: ::Integer
+      attr_accessor double_value: ::Float
+      attr_accessor boolean_value: bool
+      SENSITIVE: []
+    end
+
+    class WarmTierRetentionPeriod
+      attr_accessor number_of_days: ::Integer
+      attr_accessor unlimited: bool
+      SENSITIVE: []
+    end
+  end
+end

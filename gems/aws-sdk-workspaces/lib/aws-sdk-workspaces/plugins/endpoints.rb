@@ -14,6 +14,7 @@ module Aws::WorkSpaces
       option(
         :endpoint_provider,
         doc_type: 'Aws::WorkSpaces::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::WorkSpaces
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -56,6 +58,8 @@ module Aws::WorkSpaces
 
         def parameters_for_operation(context)
           case context.operation_name
+          when :accept_account_link_invitation
+            Aws::WorkSpaces::Endpoints::AcceptAccountLinkInvitation.build(context)
           when :associate_connection_alias
             Aws::WorkSpaces::Endpoints::AssociateConnectionAlias.build(context)
           when :associate_ip_groups
@@ -66,6 +70,8 @@ module Aws::WorkSpaces
             Aws::WorkSpaces::Endpoints::AuthorizeIpRules.build(context)
           when :copy_workspace_image
             Aws::WorkSpaces::Endpoints::CopyWorkspaceImage.build(context)
+          when :create_account_link_invitation
+            Aws::WorkSpaces::Endpoints::CreateAccountLinkInvitation.build(context)
           when :create_connect_client_add_in
             Aws::WorkSpaces::Endpoints::CreateConnectClientAddIn.build(context)
           when :create_connection_alias
@@ -84,6 +90,8 @@ module Aws::WorkSpaces
             Aws::WorkSpaces::Endpoints::CreateWorkspaceImage.build(context)
           when :create_workspaces
             Aws::WorkSpaces::Endpoints::CreateWorkspaces.build(context)
+          when :delete_account_link_invitation
+            Aws::WorkSpaces::Endpoints::DeleteAccountLinkInvitation.build(context)
           when :delete_client_branding
             Aws::WorkSpaces::Endpoints::DeleteClientBranding.build(context)
           when :delete_connect_client_add_in
@@ -150,10 +158,14 @@ module Aws::WorkSpaces
             Aws::WorkSpaces::Endpoints::DisassociateIpGroups.build(context)
           when :disassociate_workspace_application
             Aws::WorkSpaces::Endpoints::DisassociateWorkspaceApplication.build(context)
+          when :get_account_link
+            Aws::WorkSpaces::Endpoints::GetAccountLink.build(context)
           when :import_client_branding
             Aws::WorkSpaces::Endpoints::ImportClientBranding.build(context)
           when :import_workspace_image
             Aws::WorkSpaces::Endpoints::ImportWorkspaceImage.build(context)
+          when :list_account_links
+            Aws::WorkSpaces::Endpoints::ListAccountLinks.build(context)
           when :list_available_management_cidr_ranges
             Aws::WorkSpaces::Endpoints::ListAvailableManagementCidrRanges.build(context)
           when :migrate_workspace
@@ -182,6 +194,8 @@ module Aws::WorkSpaces
             Aws::WorkSpaces::Endpoints::RebuildWorkspaces.build(context)
           when :register_workspace_directory
             Aws::WorkSpaces::Endpoints::RegisterWorkspaceDirectory.build(context)
+          when :reject_account_link_invitation
+            Aws::WorkSpaces::Endpoints::RejectAccountLinkInvitation.build(context)
           when :restore_workspace
             Aws::WorkSpaces::Endpoints::RestoreWorkspace.build(context)
           when :revoke_ip_rules

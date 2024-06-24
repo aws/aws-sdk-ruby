@@ -134,7 +134,7 @@ module Aws
 
       # @api private
       def load
-        @data = Aws::Plugins::UserAgent.feature('resource') do
+        @data = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           client.list_buckets.buckets.find { |b| b.name == name }
         end
         raise "unable to load bucket #{name}" if @data.nil?

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::StorageGateway
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::StorageGateway
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::StorageGateway
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::StorageGateway
     #   @option options [Aws::StorageGateway::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::StorageGateway::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -432,11 +457,12 @@ module Aws::StorageGateway
     #
     # @option params [required, String] :gateway_timezone
     #   A value that indicates the time zone you want to set for the gateway.
-    #   The time zone is of the format "GMT-hr:mm" or "GMT+hr:mm". For
-    #   example, GMT-4:00 indicates the time is 4 hours behind GMT. GMT+2:00
-    #   indicates the time is 2 hours ahead of GMT. The time zone is used, for
-    #   example, for scheduling snapshots and your gateway's maintenance
-    #   schedule.
+    #   The time zone is of the format "GMT", "GMT-hr:mm", or
+    #   "GMT+hr:mm". For example, GMT indicates Greenwich Mean Time without
+    #   any offset. GMT-4:00 indicates the time is 4 hours behind GMT.
+    #   GMT+2:00 indicates the time is 2 hours ahead of GMT. The time zone is
+    #   used, for example, for scheduling snapshots and your gateway's
+    #   maintenance schedule.
     #
     # @option params [required, String] :gateway_region
     #   A value that indicates the Amazon Web Services Region where you want
@@ -459,8 +485,8 @@ module Aws::StorageGateway
     #   specified is critical to all later functions of the gateway and cannot
     #   be changed after activation. The default value is `CACHED`.
     #
-    #   Valid Values: `STORED` \| `CACHED` \| `VTL` \| `VTL_SNOW` \| `FILE_S3`
-    #   \| `FILE_FSX_SMB`
+    #   Valid Values: `STORED` \| `CACHED` \| `VTL` \| `FILE_S3` \|
+    #   `FILE_FSX_SMB`
     #
     # @option params [String] :tape_drive_type
     #   The value that indicates the type of tape drive to use for tape
@@ -3556,9 +3582,10 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Returns your gateway's weekly maintenance start time including the
-    # day and time of the week. Note that values are in terms of the
-    # gateway's time zone.
+    # Returns your gateway's maintenance window schedule information, with
+    # values for monthly or weekly cadence, specific day and time to begin
+    # maintenance, and which types of updates to apply. Time values returned
+    # are for the gateway's time zone.
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -3573,6 +3600,7 @@ module Aws::StorageGateway
     #   * {Types::DescribeMaintenanceStartTimeOutput#day_of_week #day_of_week} => Integer
     #   * {Types::DescribeMaintenanceStartTimeOutput#day_of_month #day_of_month} => Integer
     #   * {Types::DescribeMaintenanceStartTimeOutput#timezone #timezone} => String
+    #   * {Types::DescribeMaintenanceStartTimeOutput#software_update_preferences #software_update_preferences} => Types::SoftwareUpdatePreferences
     #
     #
     # @example Example: To describe gateway's maintenance start time
@@ -3606,6 +3634,7 @@ module Aws::StorageGateway
     #   resp.day_of_week #=> Integer
     #   resp.day_of_month #=> Integer
     #   resp.timezone #=> String
+    #   resp.software_update_preferences.automatic_update_policy #=> String, one of "ALL_VERSIONS", "EMERGENCY_VERSIONS_ONLY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTime AWS API Documentation
     #
@@ -3773,7 +3802,7 @@ module Aws::StorageGateway
     #   resp.domain_name #=> String
     #   resp.active_directory_status #=> String, one of "ACCESS_DENIED", "DETACHED", "JOINED", "JOINING", "NETWORK_ERROR", "TIMEOUT", "UNKNOWN_ERROR"
     #   resp.smb_guest_password_set #=> Boolean
-    #   resp.smb_security_strategy #=> String, one of "ClientSpecified", "MandatorySigning", "MandatoryEncryption"
+    #   resp.smb_security_strategy #=> String, one of "ClientSpecified", "MandatorySigning", "MandatoryEncryption", "MandatoryEncryptionNoAes128"
     #   resp.file_shares_visible #=> Boolean
     #   resp.smb_local_groups.gateway_admins #=> Array
     #   resp.smb_local_groups.gateway_admins[0] #=> String
@@ -4115,10 +4144,18 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Returns a description of the specified Amazon Resource Name (ARN) of
-    # virtual tapes. If a `TapeARN` is not specified, returns a description
-    # of all virtual tapes associated with the specified gateway. This
-    # operation is only supported in the tape gateway type.
+    # Returns a description of virtual tapes that correspond to the
+    # specified Amazon Resource Names (ARNs). If `TapeARN` is not specified,
+    # returns a description of the virtual tapes associated with the
+    # specified gateway. This operation is only supported for the tape
+    # gateway type.
+    #
+    # The operation supports pagination. By default, the operation returns a
+    # maximum of up to 100 tapes. You can optionally specify the `Limit`
+    # field in the body to limit the number of tapes in the response. If the
+    # number of tapes returned in the response is truncated, the response
+    # includes a `Marker` field. You can use this `Marker` value in your
+    # subsequent request to retrieve the next set of tapes.
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -4943,6 +4980,8 @@ module Aws::StorageGateway
     #   resp.gateways[0].ec2_instance_region #=> String
     #   resp.gateways[0].host_environment #=> String, one of "VMWARE", "HYPER-V", "EC2", "KVM", "OTHER", "SNOWBALL"
     #   resp.gateways[0].host_environment_id #=> String
+    #   resp.gateways[0].deprecation_date #=> String
+    #   resp.gateways[0].software_version #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListGateways AWS API Documentation
@@ -5433,7 +5472,7 @@ module Aws::StorageGateway
     end
 
     # Sends you notification through CloudWatch Events when all files
-    # written to your file share have been uploaded to S3. Amazon S3.
+    # written to your file share have been uploaded to Amazon S3.
     #
     # Storage Gateway can send a notification through Amazon CloudWatch
     # Events when all files written to your file share up to that point in
@@ -5491,7 +5530,7 @@ module Aws::StorageGateway
     #
     # You can subscribe to be notified through an Amazon CloudWatch event
     # when your `RefreshCache` operation completes. For more information,
-    # see [Getting notified about file operations][1] in the *Storage
+    # see [Getting notified about file operations][1] in the *Amazon S3 File
     # Gateway User Guide*. This operation is Only supported for S3 File
     # Gateways.
     #
@@ -5507,7 +5546,7 @@ module Aws::StorageGateway
     # no more than two refreshes at any time. We recommend using the
     # refresh-complete CloudWatch event notification before issuing
     # additional requests. For more information, see [Getting notified about
-    # file operations][1] in the *Storage Gateway User Guide*.
+    # file operations][1] in the *Amazon S3 File Gateway User Guide*.
     #
     # * Wait at least 60 seconds between consecutive RefreshCache API
     #   requests.
@@ -5523,11 +5562,11 @@ module Aws::StorageGateway
     #  </note>
     #
     # For more information, see [Getting notified about file operations][1]
-    # in the *Storage Gateway User Guide*.
+    # in the *Amazon S3 File Gateway User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification
+    # [1]: https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification
     #
     # @option params [required, String] :file_share_arn
     #   The Amazon Resource Name (ARN) of the file share you want to refresh.
@@ -5538,6 +5577,9 @@ module Aws::StorageGateway
     #   folders at the root of the Amazon S3 bucket. If `Recursive` is set to
     #   `true`, the entire S3 bucket that the file share has access to is
     #   refreshed.
+    #
+    #   Do not include `/` when specifying folder names. For example, you
+    #   would specify `samplefolder` rather than `samplefolder/`.
     #
     # @option params [Boolean] :recursive
     #   A value that specifies whether to recursively refresh folders in the
@@ -5900,8 +5942,14 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Shuts down a gateway. To specify which gateway to shut down, use the
-    # Amazon Resource Name (ARN) of the gateway in the body of your request.
+    # Shuts down a Tape Gateway or Volume Gateway. To specify which gateway
+    # to shut down, use the Amazon Resource Name (ARN) of the gateway in the
+    # body of your request.
+    #
+    # <note markdown="1"> This API action cannot be used to shut down S3 File Gateway or FSx
+    # File Gateway.
+    #
+    #  </note>
     #
     # The operation shuts down the gateway service component running in the
     # gateway's virtual machine (VM) and not the host VM.
@@ -6373,9 +6421,10 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Updates a gateway's metadata, which includes the gateway's name and
-    # time zone. To specify which gateway to update, use the Amazon Resource
-    # Name (ARN) of the gateway in your request.
+    # Updates a gateway's metadata, which includes the gateway's name,
+    # time zone, and metadata cache size. To specify which gateway to
+    # update, use the Amazon Resource Name (ARN) of the gateway in your
+    # request.
     #
     # <note markdown="1"> For gateways activated after September 2, 2015, the gateway's ARN
     # contains the gateway ID rather than the gateway name. However,
@@ -6405,7 +6454,14 @@ module Aws::StorageGateway
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html
     #
     # @option params [String] :gateway_capacity
-    #   Specifies the size of the gateway's metadata cache.
+    #   Specifies the size of the gateway's metadata cache. This setting
+    #   impacts gateway performance and hardware recommendations. For more
+    #   information, see [Performance guidance for gateways with multiple file
+    #   shares][1] in the *Amazon S3 File Gateway User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/filegateway/latest/files3/performance-multiple-file-shares.html
     #
     # @return [Types::UpdateGatewayInformationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6517,21 +6573,36 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Updates a gateway's weekly maintenance start time information,
-    # including day and time of the week. The maintenance time is the time
-    # in your gateway's time zone.
+    # Updates a gateway's maintenance window schedule, with settings for
+    # monthly or weekly cadence, specific day and time to begin maintenance,
+    # and which types of updates to apply. Time configuration uses the
+    # gateway's time zone. You can pass values for a complete maintenance
+    # schedule, or update policy, or both. Previous values will persist for
+    # whichever setting you choose not to modify. If an incomplete or
+    # invalid maintenance schedule is passed, the entire request will be
+    # rejected with an error and no changes will occur.
+    #
+    # A complete maintenance schedule must include values for *both*
+    # `MinuteOfHour` and `HourOfDay`, and *either* `DayOfMonth` *or*
+    # `DayOfWeek`.
+    #
+    # <note markdown="1"> We recommend keeping maintenance updates turned on, except in specific
+    # use cases where the brief disruptions caused by updating the gateway
+    # could critically impact your deployment.
+    #
+    #  </note>
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and Amazon Web
     #   Services Region.
     #
-    # @option params [required, Integer] :hour_of_day
+    # @option params [Integer] :hour_of_day
     #   The hour component of the maintenance start time represented as *hh*,
     #   where *hh* is the hour (00 to 23). The hour of the day is in the time
     #   zone of the gateway.
     #
-    # @option params [required, Integer] :minute_of_hour
+    # @option params [Integer] :minute_of_hour
     #   The minute component of the maintenance start time represented as
     #   *mm*, where *mm* is the minute (00 to 59). The minute of the hour is
     #   in the time zone of the gateway.
@@ -6539,12 +6610,24 @@ module Aws::StorageGateway
     # @option params [Integer] :day_of_week
     #   The day of the week component of the maintenance start time week
     #   represented as an ordinal number from 0 to 6, where 0 represents
-    #   Sunday and 6 Saturday.
+    #   Sunday and 6 represents Saturday.
     #
     # @option params [Integer] :day_of_month
     #   The day of the month component of the maintenance start time
     #   represented as an ordinal number from 1 to 28, where 1 represents the
-    #   first day of the month and 28 represents the last day of the month.
+    #   first day of the month. It is not possible to set the maintenance
+    #   schedule to start on days 29 through 31.
+    #
+    # @option params [Types::SoftwareUpdatePreferences] :software_update_preferences
+    #   A set of variables indicating the software update preferences for the
+    #   gateway.
+    #
+    #   Includes `AutomaticUpdatePolicy` field with the following inputs:
+    #
+    #   `ALL_VERSIONS` - Enables regular gateway maintenance updates.
+    #
+    #   `EMERGENCY_VERSIONS_ONLY` - Disables regular gateway maintenance
+    #   updates.
     #
     # @return [Types::UpdateMaintenanceStartTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6572,10 +6655,13 @@ module Aws::StorageGateway
     #
     #   resp = client.update_maintenance_start_time({
     #     gateway_arn: "GatewayARN", # required
-    #     hour_of_day: 1, # required
-    #     minute_of_hour: 1, # required
+    #     hour_of_day: 1,
+    #     minute_of_hour: 1,
     #     day_of_week: 1,
     #     day_of_month: 1,
+    #     software_update_preferences: {
+    #       automatic_update_policy: "ALL_VERSIONS", # accepts ALL_VERSIONS, EMERGENCY_VERSIONS_ONLY
+    #     },
     #   })
     #
     # @example Response structure
@@ -7058,14 +7144,21 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Updates the SMB security strategy on a file gateway. This action is
-    # only supported in file gateways.
+    # Updates the SMB security strategy level for an Amazon S3 file gateway.
+    # This action is only supported for Amazon S3 file gateways.
     #
-    # <note markdown="1"> This API is called Security level in the User Guide.
+    # <note markdown="1"> For information about configuring this setting using the Amazon Web
+    # Services console, see [Setting a security level for your gateway][1]
+    # in the *Amazon S3 File Gateway User Guide*.
     #
-    #  A higher security level can affect performance of the gateway.
+    #  A higher security strategy level can affect performance of the
+    # gateway.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/filegateway/latest/files3/security-strategy.html
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -7075,21 +7168,28 @@ module Aws::StorageGateway
     # @option params [required, String] :smb_security_strategy
     #   Specifies the type of security strategy.
     #
-    #   ClientSpecified: if you use this option, requests are established
+    #   `ClientSpecified`: If you choose this option, requests are established
     #   based on what is negotiated by the client. This option is recommended
     #   when you want to maximize compatibility across different clients in
-    #   your environment. Supported only in S3 File Gateway.
+    #   your environment. Supported only for S3 File Gateway.
     #
-    #   MandatorySigning: if you use this option, file gateway only allows
-    #   connections from SMBv2 or SMBv3 clients that have signing enabled.
-    #   This option works with SMB clients on Microsoft Windows Vista, Windows
-    #   Server 2008 or newer.
+    #   `MandatorySigning`: If you choose this option, File Gateway only
+    #   allows connections from SMBv2 or SMBv3 clients that have signing
+    #   enabled. This option works with SMB clients on Microsoft Windows
+    #   Vista, Windows Server 2008 or newer.
     #
-    #   MandatoryEncryption: if you use this option, file gateway only allows
-    #   connections from SMBv3 clients that have encryption enabled. This
-    #   option is highly recommended for environments that handle sensitive
+    #   `MandatoryEncryption`: If you choose this option, File Gateway only
+    #   allows connections from SMBv3 clients that have encryption enabled.
+    #   This option is recommended for environments that handle sensitive
     #   data. This option works with SMB clients on Microsoft Windows 8,
     #   Windows Server 2012 or newer.
+    #
+    #   `MandatoryEncryptionNoAes128`: If you choose this option, File Gateway
+    #   only allows connections from SMBv3 clients that use 256-bit AES
+    #   encryption algorithms. 128-bit algorithms are not allowed. This option
+    #   is recommended for environments that handle sensitive data. It works
+    #   with SMB clients on Microsoft Windows 8, Windows Server 2012, or
+    #   later.
     #
     # @return [Types::UpdateSMBSecurityStrategyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7099,7 +7199,7 @@ module Aws::StorageGateway
     #
     #   resp = client.update_smb_security_strategy({
     #     gateway_arn: "GatewayARN", # required
-    #     smb_security_strategy: "ClientSpecified", # required, accepts ClientSpecified, MandatorySigning, MandatoryEncryption
+    #     smb_security_strategy: "ClientSpecified", # required, accepts ClientSpecified, MandatorySigning, MandatoryEncryption, MandatoryEncryptionNoAes128
     #   })
     #
     # @example Response structure
@@ -7271,7 +7371,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.78.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

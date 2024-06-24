@@ -1,0 +1,930 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DirectoryService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptSharedDirectoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptSharedDirectoryResult]
+        def shared_directory: () -> Types::SharedDirectory
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#accept_shared_directory-instance_method
+      def accept_shared_directory: (
+                                     shared_directory_id: ::String
+                                   ) -> _AcceptSharedDirectoryResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptSharedDirectoryResponseSuccess
+
+      interface _AddIpRoutesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddIpRoutesResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#add_ip_routes-instance_method
+      def add_ip_routes: (
+                           directory_id: ::String,
+                           ip_routes: Array[
+                             {
+                               cidr_ip: ::String?,
+                               description: ::String?
+                             },
+                           ],
+                           ?update_security_group_for_directory_controllers: bool
+                         ) -> _AddIpRoutesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddIpRoutesResponseSuccess
+
+      interface _AddRegionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddRegionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#add_region-instance_method
+      def add_region: (
+                        directory_id: ::String,
+                        region_name: ::String,
+                        vpc_settings: {
+                          vpc_id: ::String,
+                          subnet_ids: Array[::String]
+                        }
+                      ) -> _AddRegionResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddRegionResponseSuccess
+
+      interface _AddTagsToResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddTagsToResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#add_tags_to_resource-instance_method
+      def add_tags_to_resource: (
+                                  resource_id: ::String,
+                                  tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> _AddTagsToResourceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsToResourceResponseSuccess
+
+      interface _CancelSchemaExtensionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelSchemaExtensionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#cancel_schema_extension-instance_method
+      def cancel_schema_extension: (
+                                     directory_id: ::String,
+                                     schema_extension_id: ::String
+                                   ) -> _CancelSchemaExtensionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelSchemaExtensionResponseSuccess
+
+      interface _ConnectDirectoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConnectDirectoryResult]
+        def directory_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#connect_directory-instance_method
+      def connect_directory: (
+                               name: ::String,
+                               ?short_name: ::String,
+                               password: ::String,
+                               ?description: ::String,
+                               size: ("Small" | "Large"),
+                               connect_settings: {
+                                 vpc_id: ::String,
+                                 subnet_ids: Array[::String],
+                                 customer_dns_ips: Array[::String],
+                                 customer_user_name: ::String
+                               },
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ]
+                             ) -> _ConnectDirectoryResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConnectDirectoryResponseSuccess
+
+      interface _CreateAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAliasResult]
+        def directory_id: () -> ::String
+        def alias: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#create_alias-instance_method
+      def create_alias: (
+                          directory_id: ::String,
+                          alias: ::String
+                        ) -> _CreateAliasResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAliasResponseSuccess
+
+      interface _CreateComputerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateComputerResult]
+        def computer: () -> Types::Computer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#create_computer-instance_method
+      def create_computer: (
+                             directory_id: ::String,
+                             computer_name: ::String,
+                             password: ::String,
+                             ?organizational_unit_distinguished_name: ::String,
+                             ?computer_attributes: Array[
+                               {
+                                 name: ::String?,
+                                 value: ::String?
+                               },
+                             ]
+                           ) -> _CreateComputerResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateComputerResponseSuccess
+
+      interface _CreateConditionalForwarderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConditionalForwarderResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#create_conditional_forwarder-instance_method
+      def create_conditional_forwarder: (
+                                          directory_id: ::String,
+                                          remote_domain_name: ::String,
+                                          dns_ip_addrs: Array[::String]
+                                        ) -> _CreateConditionalForwarderResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConditionalForwarderResponseSuccess
+
+      interface _CreateDirectoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDirectoryResult]
+        def directory_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#create_directory-instance_method
+      def create_directory: (
+                              name: ::String,
+                              ?short_name: ::String,
+                              password: ::String,
+                              ?description: ::String,
+                              size: ("Small" | "Large"),
+                              ?vpc_settings: {
+                                vpc_id: ::String,
+                                subnet_ids: Array[::String]
+                              },
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ]
+                            ) -> _CreateDirectoryResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDirectoryResponseSuccess
+
+      interface _CreateLogSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLogSubscriptionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#create_log_subscription-instance_method
+      def create_log_subscription: (
+                                     directory_id: ::String,
+                                     log_group_name: ::String
+                                   ) -> _CreateLogSubscriptionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLogSubscriptionResponseSuccess
+
+      interface _CreateMicrosoftADResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMicrosoftADResult]
+        def directory_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#create_microsoft_ad-instance_method
+      def create_microsoft_ad: (
+                                 name: ::String,
+                                 ?short_name: ::String,
+                                 password: ::String,
+                                 ?description: ::String,
+                                 vpc_settings: {
+                                   vpc_id: ::String,
+                                   subnet_ids: Array[::String]
+                                 },
+                                 ?edition: ("Enterprise" | "Standard"),
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ]
+                               ) -> _CreateMicrosoftADResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMicrosoftADResponseSuccess
+
+      interface _CreateSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSnapshotResult]
+        def snapshot_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#create_snapshot-instance_method
+      def create_snapshot: (
+                             directory_id: ::String,
+                             ?name: ::String
+                           ) -> _CreateSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotResponseSuccess
+
+      interface _CreateTrustResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTrustResult]
+        def trust_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#create_trust-instance_method
+      def create_trust: (
+                          directory_id: ::String,
+                          remote_domain_name: ::String,
+                          trust_password: ::String,
+                          trust_direction: ("One-Way: Outgoing" | "One-Way: Incoming" | "Two-Way"),
+                          ?trust_type: ("Forest" | "External"),
+                          ?conditional_forwarder_ip_addrs: Array[::String],
+                          ?selective_auth: ("Enabled" | "Disabled")
+                        ) -> _CreateTrustResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrustResponseSuccess
+
+      interface _DeleteConditionalForwarderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConditionalForwarderResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#delete_conditional_forwarder-instance_method
+      def delete_conditional_forwarder: (
+                                          directory_id: ::String,
+                                          remote_domain_name: ::String
+                                        ) -> _DeleteConditionalForwarderResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConditionalForwarderResponseSuccess
+
+      interface _DeleteDirectoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDirectoryResult]
+        def directory_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#delete_directory-instance_method
+      def delete_directory: (
+                              directory_id: ::String
+                            ) -> _DeleteDirectoryResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDirectoryResponseSuccess
+
+      interface _DeleteLogSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLogSubscriptionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#delete_log_subscription-instance_method
+      def delete_log_subscription: (
+                                     directory_id: ::String
+                                   ) -> _DeleteLogSubscriptionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLogSubscriptionResponseSuccess
+
+      interface _DeleteSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSnapshotResult]
+        def snapshot_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#delete_snapshot-instance_method
+      def delete_snapshot: (
+                             snapshot_id: ::String
+                           ) -> _DeleteSnapshotResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSnapshotResponseSuccess
+
+      interface _DeleteTrustResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTrustResult]
+        def trust_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#delete_trust-instance_method
+      def delete_trust: (
+                          trust_id: ::String,
+                          ?delete_associated_conditional_forwarder: bool
+                        ) -> _DeleteTrustResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTrustResponseSuccess
+
+      interface _DeregisterCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterCertificateResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#deregister_certificate-instance_method
+      def deregister_certificate: (
+                                    directory_id: ::String,
+                                    certificate_id: ::String
+                                  ) -> _DeregisterCertificateResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterCertificateResponseSuccess
+
+      interface _DeregisterEventTopicResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterEventTopicResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#deregister_event_topic-instance_method
+      def deregister_event_topic: (
+                                    directory_id: ::String,
+                                    topic_name: ::String
+                                  ) -> _DeregisterEventTopicResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterEventTopicResponseSuccess
+
+      interface _DescribeCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCertificateResult]
+        def certificate: () -> Types::Certificate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_certificate-instance_method
+      def describe_certificate: (
+                                  directory_id: ::String,
+                                  certificate_id: ::String
+                                ) -> _DescribeCertificateResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCertificateResponseSuccess
+
+      interface _DescribeClientAuthenticationSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClientAuthenticationSettingsResult]
+        def client_authentication_settings_info: () -> ::Array[Types::ClientAuthenticationSettingInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_client_authentication_settings-instance_method
+      def describe_client_authentication_settings: (
+                                                     directory_id: ::String,
+                                                     ?type: ("SmartCard" | "SmartCardOrPassword"),
+                                                     ?next_token: ::String,
+                                                     ?limit: ::Integer
+                                                   ) -> _DescribeClientAuthenticationSettingsResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClientAuthenticationSettingsResponseSuccess
+
+      interface _DescribeConditionalForwardersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConditionalForwardersResult]
+        def conditional_forwarders: () -> ::Array[Types::ConditionalForwarder]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_conditional_forwarders-instance_method
+      def describe_conditional_forwarders: (
+                                             directory_id: ::String,
+                                             ?remote_domain_names: Array[::String]
+                                           ) -> _DescribeConditionalForwardersResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConditionalForwardersResponseSuccess
+
+      interface _DescribeDirectoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDirectoriesResult]
+        def directory_descriptions: () -> ::Array[Types::DirectoryDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_directories-instance_method
+      def describe_directories: (
+                                  ?directory_ids: Array[::String],
+                                  ?next_token: ::String,
+                                  ?limit: ::Integer
+                                ) -> _DescribeDirectoriesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDirectoriesResponseSuccess
+
+      interface _DescribeDomainControllersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainControllersResult]
+        def domain_controllers: () -> ::Array[Types::DomainController]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_domain_controllers-instance_method
+      def describe_domain_controllers: (
+                                         directory_id: ::String,
+                                         ?domain_controller_ids: Array[::String],
+                                         ?next_token: ::String,
+                                         ?limit: ::Integer
+                                       ) -> _DescribeDomainControllersResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainControllersResponseSuccess
+
+      interface _DescribeEventTopicsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventTopicsResult]
+        def event_topics: () -> ::Array[Types::EventTopic]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_event_topics-instance_method
+      def describe_event_topics: (
+                                   ?directory_id: ::String,
+                                   ?topic_names: Array[::String]
+                                 ) -> _DescribeEventTopicsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventTopicsResponseSuccess
+
+      interface _DescribeLDAPSSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLDAPSSettingsResult]
+        def ldaps_settings_info: () -> ::Array[Types::LDAPSSettingInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_ldaps_settings-instance_method
+      def describe_ldaps_settings: (
+                                     directory_id: ::String,
+                                     ?type: ("Client"),
+                                     ?next_token: ::String,
+                                     ?limit: ::Integer
+                                   ) -> _DescribeLDAPSSettingsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLDAPSSettingsResponseSuccess
+
+      interface _DescribeRegionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRegionsResult]
+        def regions_description: () -> ::Array[Types::RegionDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_regions-instance_method
+      def describe_regions: (
+                              directory_id: ::String,
+                              ?region_name: ::String,
+                              ?next_token: ::String
+                            ) -> _DescribeRegionsResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRegionsResponseSuccess
+
+      interface _DescribeSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSettingsResult]
+        def directory_id: () -> ::String
+        def setting_entries: () -> ::Array[Types::SettingEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_settings-instance_method
+      def describe_settings: (
+                               directory_id: ::String,
+                               ?status: ("Requested" | "Updating" | "Updated" | "Failed" | "Default"),
+                               ?next_token: ::String
+                             ) -> _DescribeSettingsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSettingsResponseSuccess
+
+      interface _DescribeSharedDirectoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSharedDirectoriesResult]
+        def shared_directories: () -> ::Array[Types::SharedDirectory]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_shared_directories-instance_method
+      def describe_shared_directories: (
+                                         owner_directory_id: ::String,
+                                         ?shared_directory_ids: Array[::String],
+                                         ?next_token: ::String,
+                                         ?limit: ::Integer
+                                       ) -> _DescribeSharedDirectoriesResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSharedDirectoriesResponseSuccess
+
+      interface _DescribeSnapshotsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSnapshotsResult]
+        def snapshots: () -> ::Array[Types::Snapshot]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_snapshots-instance_method
+      def describe_snapshots: (
+                                ?directory_id: ::String,
+                                ?snapshot_ids: Array[::String],
+                                ?next_token: ::String,
+                                ?limit: ::Integer
+                              ) -> _DescribeSnapshotsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSnapshotsResponseSuccess
+
+      interface _DescribeTrustsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTrustsResult]
+        def trusts: () -> ::Array[Types::Trust]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_trusts-instance_method
+      def describe_trusts: (
+                             ?directory_id: ::String,
+                             ?trust_ids: Array[::String],
+                             ?next_token: ::String,
+                             ?limit: ::Integer
+                           ) -> _DescribeTrustsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTrustsResponseSuccess
+
+      interface _DescribeUpdateDirectoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeUpdateDirectoryResult]
+        def update_activities: () -> ::Array[Types::UpdateInfoEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#describe_update_directory-instance_method
+      def describe_update_directory: (
+                                       directory_id: ::String,
+                                       update_type: ("OS"),
+                                       ?region_name: ::String,
+                                       ?next_token: ::String
+                                     ) -> _DescribeUpdateDirectoryResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeUpdateDirectoryResponseSuccess
+
+      interface _DisableClientAuthenticationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableClientAuthenticationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#disable_client_authentication-instance_method
+      def disable_client_authentication: (
+                                           directory_id: ::String,
+                                           type: ("SmartCard" | "SmartCardOrPassword")
+                                         ) -> _DisableClientAuthenticationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableClientAuthenticationResponseSuccess
+
+      interface _DisableLDAPSResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableLDAPSResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#disable_ldaps-instance_method
+      def disable_ldaps: (
+                           directory_id: ::String,
+                           type: ("Client")
+                         ) -> _DisableLDAPSResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableLDAPSResponseSuccess
+
+      interface _DisableRadiusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableRadiusResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#disable_radius-instance_method
+      def disable_radius: (
+                            directory_id: ::String
+                          ) -> _DisableRadiusResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableRadiusResponseSuccess
+
+      interface _DisableSsoResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableSsoResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#disable_sso-instance_method
+      def disable_sso: (
+                         directory_id: ::String,
+                         ?user_name: ::String,
+                         ?password: ::String
+                       ) -> _DisableSsoResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableSsoResponseSuccess
+
+      interface _EnableClientAuthenticationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableClientAuthenticationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#enable_client_authentication-instance_method
+      def enable_client_authentication: (
+                                          directory_id: ::String,
+                                          type: ("SmartCard" | "SmartCardOrPassword")
+                                        ) -> _EnableClientAuthenticationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableClientAuthenticationResponseSuccess
+
+      interface _EnableLDAPSResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableLDAPSResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#enable_ldaps-instance_method
+      def enable_ldaps: (
+                          directory_id: ::String,
+                          type: ("Client")
+                        ) -> _EnableLDAPSResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableLDAPSResponseSuccess
+
+      interface _EnableRadiusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableRadiusResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#enable_radius-instance_method
+      def enable_radius: (
+                           directory_id: ::String,
+                           radius_settings: {
+                             radius_servers: Array[::String]?,
+                             radius_port: ::Integer?,
+                             radius_timeout: ::Integer?,
+                             radius_retries: ::Integer?,
+                             shared_secret: ::String?,
+                             authentication_protocol: ("PAP" | "CHAP" | "MS-CHAPv1" | "MS-CHAPv2")?,
+                             display_label: ::String?,
+                             use_same_username: bool?
+                           }
+                         ) -> _EnableRadiusResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableRadiusResponseSuccess
+
+      interface _EnableSsoResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableSsoResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#enable_sso-instance_method
+      def enable_sso: (
+                        directory_id: ::String,
+                        ?user_name: ::String,
+                        ?password: ::String
+                      ) -> _EnableSsoResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableSsoResponseSuccess
+
+      interface _GetDirectoryLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDirectoryLimitsResult]
+        def directory_limits: () -> Types::DirectoryLimits
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#get_directory_limits-instance_method
+      def get_directory_limits: (
+                                ) -> _GetDirectoryLimitsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDirectoryLimitsResponseSuccess
+
+      interface _GetSnapshotLimitsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSnapshotLimitsResult]
+        def snapshot_limits: () -> Types::SnapshotLimits
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#get_snapshot_limits-instance_method
+      def get_snapshot_limits: (
+                                 directory_id: ::String
+                               ) -> _GetSnapshotLimitsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSnapshotLimitsResponseSuccess
+
+      interface _ListCertificatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCertificatesResult]
+        def next_token: () -> ::String
+        def certificates_info: () -> ::Array[Types::CertificateInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#list_certificates-instance_method
+      def list_certificates: (
+                               directory_id: ::String,
+                               ?next_token: ::String,
+                               ?limit: ::Integer
+                             ) -> _ListCertificatesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCertificatesResponseSuccess
+
+      interface _ListIpRoutesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIpRoutesResult]
+        def ip_routes_info: () -> ::Array[Types::IpRouteInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#list_ip_routes-instance_method
+      def list_ip_routes: (
+                            directory_id: ::String,
+                            ?next_token: ::String,
+                            ?limit: ::Integer
+                          ) -> _ListIpRoutesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIpRoutesResponseSuccess
+
+      interface _ListLogSubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLogSubscriptionsResult]
+        def log_subscriptions: () -> ::Array[Types::LogSubscription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#list_log_subscriptions-instance_method
+      def list_log_subscriptions: (
+                                    ?directory_id: ::String,
+                                    ?next_token: ::String,
+                                    ?limit: ::Integer
+                                  ) -> _ListLogSubscriptionsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLogSubscriptionsResponseSuccess
+
+      interface _ListSchemaExtensionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSchemaExtensionsResult]
+        def schema_extensions_info: () -> ::Array[Types::SchemaExtensionInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#list_schema_extensions-instance_method
+      def list_schema_extensions: (
+                                    directory_id: ::String,
+                                    ?next_token: ::String,
+                                    ?limit: ::Integer
+                                  ) -> _ListSchemaExtensionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSchemaExtensionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResult]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_id: ::String,
+                                    ?next_token: ::String,
+                                    ?limit: ::Integer
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RegisterCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterCertificateResult]
+        def certificate_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#register_certificate-instance_method
+      def register_certificate: (
+                                  directory_id: ::String,
+                                  certificate_data: ::String,
+                                  ?type: ("ClientCertAuth" | "ClientLDAPS"),
+                                  ?client_cert_auth_settings: {
+                                    ocsp_url: ::String?
+                                  }
+                                ) -> _RegisterCertificateResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterCertificateResponseSuccess
+
+      interface _RegisterEventTopicResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterEventTopicResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#register_event_topic-instance_method
+      def register_event_topic: (
+                                  directory_id: ::String,
+                                  topic_name: ::String
+                                ) -> _RegisterEventTopicResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterEventTopicResponseSuccess
+
+      interface _RejectSharedDirectoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectSharedDirectoryResult]
+        def shared_directory_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#reject_shared_directory-instance_method
+      def reject_shared_directory: (
+                                     shared_directory_id: ::String
+                                   ) -> _RejectSharedDirectoryResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectSharedDirectoryResponseSuccess
+
+      interface _RemoveIpRoutesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveIpRoutesResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#remove_ip_routes-instance_method
+      def remove_ip_routes: (
+                              directory_id: ::String,
+                              cidr_ips: Array[::String]
+                            ) -> _RemoveIpRoutesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveIpRoutesResponseSuccess
+
+      interface _RemoveRegionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveRegionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#remove_region-instance_method
+      def remove_region: (
+                           directory_id: ::String
+                         ) -> _RemoveRegionResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveRegionResponseSuccess
+
+      interface _RemoveTagsFromResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveTagsFromResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#remove_tags_from_resource-instance_method
+      def remove_tags_from_resource: (
+                                       resource_id: ::String,
+                                       tag_keys: Array[::String]
+                                     ) -> _RemoveTagsFromResourceResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveTagsFromResourceResponseSuccess
+
+      interface _ResetUserPasswordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetUserPasswordResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#reset_user_password-instance_method
+      def reset_user_password: (
+                                 directory_id: ::String,
+                                 user_name: ::String,
+                                 new_password: ::String
+                               ) -> _ResetUserPasswordResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetUserPasswordResponseSuccess
+
+      interface _RestoreFromSnapshotResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreFromSnapshotResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#restore_from_snapshot-instance_method
+      def restore_from_snapshot: (
+                                   snapshot_id: ::String
+                                 ) -> _RestoreFromSnapshotResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreFromSnapshotResponseSuccess
+
+      interface _ShareDirectoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ShareDirectoryResult]
+        def shared_directory_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#share_directory-instance_method
+      def share_directory: (
+                             directory_id: ::String,
+                             ?share_notes: ::String,
+                             share_target: {
+                               id: ::String,
+                               type: ("ACCOUNT")
+                             },
+                             share_method: ("ORGANIZATIONS" | "HANDSHAKE")
+                           ) -> _ShareDirectoryResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ShareDirectoryResponseSuccess
+
+      interface _StartSchemaExtensionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSchemaExtensionResult]
+        def schema_extension_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#start_schema_extension-instance_method
+      def start_schema_extension: (
+                                    directory_id: ::String,
+                                    create_snapshot_before_schema_extension: bool,
+                                    ldif_content: ::String,
+                                    description: ::String
+                                  ) -> _StartSchemaExtensionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSchemaExtensionResponseSuccess
+
+      interface _UnshareDirectoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UnshareDirectoryResult]
+        def shared_directory_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#unshare_directory-instance_method
+      def unshare_directory: (
+                               directory_id: ::String,
+                               unshare_target: {
+                                 id: ::String,
+                                 type: ("ACCOUNT")
+                               }
+                             ) -> _UnshareDirectoryResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UnshareDirectoryResponseSuccess
+
+      interface _UpdateConditionalForwarderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConditionalForwarderResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#update_conditional_forwarder-instance_method
+      def update_conditional_forwarder: (
+                                          directory_id: ::String,
+                                          remote_domain_name: ::String,
+                                          dns_ip_addrs: Array[::String]
+                                        ) -> _UpdateConditionalForwarderResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConditionalForwarderResponseSuccess
+
+      interface _UpdateDirectorySetupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDirectorySetupResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#update_directory_setup-instance_method
+      def update_directory_setup: (
+                                    directory_id: ::String,
+                                    update_type: ("OS"),
+                                    ?os_update_settings: {
+                                      os_version: ("SERVER_2012" | "SERVER_2019")?
+                                    },
+                                    ?create_snapshot_before_update: bool
+                                  ) -> _UpdateDirectorySetupResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDirectorySetupResponseSuccess
+
+      interface _UpdateNumberOfDomainControllersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNumberOfDomainControllersResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#update_number_of_domain_controllers-instance_method
+      def update_number_of_domain_controllers: (
+                                                 directory_id: ::String,
+                                                 desired_number: ::Integer
+                                               ) -> _UpdateNumberOfDomainControllersResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNumberOfDomainControllersResponseSuccess
+
+      interface _UpdateRadiusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRadiusResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#update_radius-instance_method
+      def update_radius: (
+                           directory_id: ::String,
+                           radius_settings: {
+                             radius_servers: Array[::String]?,
+                             radius_port: ::Integer?,
+                             radius_timeout: ::Integer?,
+                             radius_retries: ::Integer?,
+                             shared_secret: ::String?,
+                             authentication_protocol: ("PAP" | "CHAP" | "MS-CHAPv1" | "MS-CHAPv2")?,
+                             display_label: ::String?,
+                             use_same_username: bool?
+                           }
+                         ) -> _UpdateRadiusResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRadiusResponseSuccess
+
+      interface _UpdateSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSettingsResult]
+        def directory_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#update_settings-instance_method
+      def update_settings: (
+                             directory_id: ::String,
+                             settings: Array[
+                               {
+                                 name: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _UpdateSettingsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSettingsResponseSuccess
+
+      interface _UpdateTrustResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTrustResult]
+        def request_id: () -> ::String
+        def trust_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#update_trust-instance_method
+      def update_trust: (
+                          trust_id: ::String,
+                          ?selective_auth: ("Enabled" | "Disabled")
+                        ) -> _UpdateTrustResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrustResponseSuccess
+
+      interface _VerifyTrustResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VerifyTrustResult]
+        def trust_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectoryService/Client.html#verify_trust-instance_method
+      def verify_trust: (
+                          trust_id: ::String
+                        ) -> _VerifyTrustResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyTrustResponseSuccess
+    end
+  end
+end
+

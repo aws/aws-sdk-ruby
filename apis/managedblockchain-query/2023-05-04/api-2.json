@@ -31,6 +31,24 @@
         {"shape":"ServiceQuotaExceededException"}
       ]
     },
+    "GetAssetContract":{
+      "name":"GetAssetContract",
+      "http":{
+        "method":"POST",
+        "requestUri":"/get-asset-contract",
+        "responseCode":200
+      },
+      "input":{"shape":"GetAssetContractInput"},
+      "output":{"shape":"GetAssetContractOutput"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ServiceQuotaExceededException"}
+      ]
+    },
     "GetTokenBalance":{
       "name":"GetTokenBalance",
       "http":{
@@ -62,6 +80,40 @@
         {"shape":"ThrottlingException"},
         {"shape":"ValidationException"},
         {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ServiceQuotaExceededException"}
+      ]
+    },
+    "ListAssetContracts":{
+      "name":"ListAssetContracts",
+      "http":{
+        "method":"POST",
+        "requestUri":"/list-asset-contracts",
+        "responseCode":200
+      },
+      "input":{"shape":"ListAssetContractsInput"},
+      "output":{"shape":"ListAssetContractsOutput"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ServiceQuotaExceededException"}
+      ]
+    },
+    "ListFilteredTransactionEvents":{
+      "name":"ListFilteredTransactionEvents",
+      "http":{
+        "method":"POST",
+        "requestUri":"/list-filtered-transaction-events",
+        "responseCode":200
+      },
+      "input":{"shape":"ListFilteredTransactionEventsInput"},
+      "output":{"shape":"ListFilteredTransactionEventsOutput"},
+      "errors":[
+        {"shape":"ThrottlingException"},
+        {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
         {"shape":"InternalServerException"},
         {"shape":"ServiceQuotaExceededException"}
@@ -131,6 +183,38 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "AddressIdentifierFilter":{
+      "type":"structure",
+      "required":["transactionEventToAddress"],
+      "members":{
+        "transactionEventToAddress":{"shape":"AddressIdentifierFilterTransactionEventToAddressList"}
+      }
+    },
+    "AddressIdentifierFilterTransactionEventToAddressList":{
+      "type":"list",
+      "member":{"shape":"ChainAddress"},
+      "max":1,
+      "min":1
+    },
+    "AssetContract":{
+      "type":"structure",
+      "required":[
+        "contractIdentifier",
+        "tokenStandard",
+        "deployerAddress"
+      ],
+      "members":{
+        "contractIdentifier":{"shape":"ContractIdentifier"},
+        "tokenStandard":{"shape":"QueryTokenStandard"},
+        "deployerAddress":{"shape":"ChainAddress"}
+      }
+    },
+    "AssetContractList":{
+      "type":"list",
+      "member":{"shape":"AssetContract"},
+      "max":250,
+      "min":0
     },
     "BatchGetTokenBalanceErrorItem":{
       "type":"structure",
@@ -213,9 +297,64 @@
         "time":{"shape":"Timestamp"}
       }
     },
+    "Boolean":{
+      "type":"boolean",
+      "box":true
+    },
     "ChainAddress":{
       "type":"string",
       "pattern":"[-A-Za-z0-9]{13,74}"
+    },
+    "ConfirmationStatus":{
+      "type":"string",
+      "enum":[
+        "FINAL",
+        "NONFINAL"
+      ]
+    },
+    "ConfirmationStatusFilter":{
+      "type":"structure",
+      "required":["include"],
+      "members":{
+        "include":{"shape":"ConfirmationStatusIncludeList"}
+      }
+    },
+    "ConfirmationStatusIncludeList":{
+      "type":"list",
+      "member":{"shape":"ConfirmationStatus"},
+      "min":1
+    },
+    "ContractFilter":{
+      "type":"structure",
+      "required":[
+        "network",
+        "tokenStandard",
+        "deployerAddress"
+      ],
+      "members":{
+        "network":{"shape":"QueryNetwork"},
+        "tokenStandard":{"shape":"QueryTokenStandard"},
+        "deployerAddress":{"shape":"ChainAddress"}
+      }
+    },
+    "ContractIdentifier":{
+      "type":"structure",
+      "required":[
+        "network",
+        "contractAddress"
+      ],
+      "members":{
+        "network":{"shape":"QueryNetwork"},
+        "contractAddress":{"shape":"ChainAddress"}
+      }
+    },
+    "ContractMetadata":{
+      "type":"structure",
+      "members":{
+        "name":{"shape":"String"},
+        "symbol":{"shape":"String"},
+        "decimals":{"shape":"Integer"}
+      }
     },
     "ErrorType":{
       "type":"string",
@@ -227,6 +366,34 @@
     "ExceptionMessage":{
       "type":"string",
       "min":1
+    },
+    "ExecutionStatus":{
+      "type":"string",
+      "enum":[
+        "FAILED",
+        "SUCCEEDED"
+      ]
+    },
+    "GetAssetContractInput":{
+      "type":"structure",
+      "required":["contractIdentifier"],
+      "members":{
+        "contractIdentifier":{"shape":"ContractIdentifier"}
+      }
+    },
+    "GetAssetContractOutput":{
+      "type":"structure",
+      "required":[
+        "contractIdentifier",
+        "tokenStandard",
+        "deployerAddress"
+      ],
+      "members":{
+        "contractIdentifier":{"shape":"ContractIdentifier"},
+        "tokenStandard":{"shape":"QueryTokenStandard"},
+        "deployerAddress":{"shape":"ChainAddress"},
+        "metadata":{"shape":"ContractMetadata"}
+      }
     },
     "GetTokenBalanceInput":{
       "type":"structure",
@@ -262,12 +429,10 @@
     },
     "GetTransactionInput":{
       "type":"structure",
-      "required":[
-        "transactionHash",
-        "network"
-      ],
+      "required":["network"],
       "members":{
         "transactionHash":{"shape":"QueryTransactionHash"},
+        "transactionId":{"shape":"QueryTransactionId"},
         "network":{"shape":"QueryNetwork"}
       }
     },
@@ -298,6 +463,71 @@
       "fault":true,
       "retryable":{"throttling":false}
     },
+    "ListAssetContractsInput":{
+      "type":"structure",
+      "required":["contractFilter"],
+      "members":{
+        "contractFilter":{"shape":"ContractFilter"},
+        "nextToken":{"shape":"NextToken"},
+        "maxResults":{"shape":"ListAssetContractsInputMaxResultsInteger"}
+      }
+    },
+    "ListAssetContractsInputMaxResultsInteger":{
+      "type":"integer",
+      "box":true,
+      "max":250,
+      "min":1
+    },
+    "ListAssetContractsOutput":{
+      "type":"structure",
+      "required":["contracts"],
+      "members":{
+        "contracts":{"shape":"AssetContractList"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListFilteredTransactionEventsInput":{
+      "type":"structure",
+      "required":[
+        "network",
+        "addressIdentifierFilter"
+      ],
+      "members":{
+        "network":{"shape":"String"},
+        "addressIdentifierFilter":{"shape":"AddressIdentifierFilter"},
+        "timeFilter":{"shape":"TimeFilter"},
+        "voutFilter":{"shape":"VoutFilter"},
+        "confirmationStatusFilter":{"shape":"ConfirmationStatusFilter"},
+        "sort":{"shape":"ListFilteredTransactionEventsSort"},
+        "nextToken":{"shape":"NextToken"},
+        "maxResults":{"shape":"ListFilteredTransactionEventsInputMaxResultsInteger"}
+      }
+    },
+    "ListFilteredTransactionEventsInputMaxResultsInteger":{
+      "type":"integer",
+      "box":true,
+      "max":250,
+      "min":1
+    },
+    "ListFilteredTransactionEventsOutput":{
+      "type":"structure",
+      "required":["events"],
+      "members":{
+        "events":{"shape":"TransactionEventList"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListFilteredTransactionEventsSort":{
+      "type":"structure",
+      "members":{
+        "sortBy":{"shape":"ListFilteredTransactionEventsSortBy"},
+        "sortOrder":{"shape":"SortOrder"}
+      }
+    },
+    "ListFilteredTransactionEventsSortBy":{
+      "type":"string",
+      "enum":["blockchainInstant"]
+    },
     "ListTokenBalancesInput":{
       "type":"structure",
       "required":["tokenFilter"],
@@ -324,12 +554,10 @@
     },
     "ListTransactionEventsInput":{
       "type":"structure",
-      "required":[
-        "transactionHash",
-        "network"
-      ],
+      "required":["network"],
       "members":{
         "transactionHash":{"shape":"QueryTransactionHash"},
+        "transactionId":{"shape":"QueryTransactionId"},
         "network":{"shape":"QueryNetwork"},
         "nextToken":{"shape":"NextToken"},
         "maxResults":{"shape":"ListTransactionEventsInputMaxResultsInteger"}
@@ -362,7 +590,8 @@
         "toBlockchainInstant":{"shape":"BlockchainInstant"},
         "sort":{"shape":"ListTransactionsSort"},
         "nextToken":{"shape":"NextToken"},
-        "maxResults":{"shape":"ListTransactionsInputMaxResultsInteger"}
+        "maxResults":{"shape":"ListTransactionsInputMaxResultsInteger"},
+        "confirmationStatusFilter":{"shape":"ConfirmationStatusFilter"}
       }
     },
     "ListTransactionsInputMaxResultsInteger":{
@@ -417,12 +646,22 @@
       "type":"string",
       "enum":[
         "ETHEREUM_MAINNET",
-        "BITCOIN_MAINNET"
+        "ETHEREUM_SEPOLIA_TESTNET",
+        "BITCOIN_MAINNET",
+        "BITCOIN_TESTNET"
       ]
     },
     "QueryTokenId":{
       "type":"string",
       "pattern":"[a-zA-Z0-9]{1,66}"
+    },
+    "QueryTokenStandard":{
+      "type":"string",
+      "enum":[
+        "ERC20",
+        "ERC721",
+        "ERC1155"
+      ]
     },
     "QueryTransactionEventType":{
       "type":"string",
@@ -444,12 +683,9 @@
       "type":"string",
       "pattern":"(0x[A-Fa-f0-9]{64}|[A-Fa-f0-9]{64})"
     },
-    "QueryTransactionStatus":{
+    "QueryTransactionId":{
       "type":"string",
-      "enum":[
-        "FINAL",
-        "FAILED"
-      ]
+      "pattern":"(0x[A-Fa-f0-9]{64}|[A-Fa-f0-9]{64})"
     },
     "QuotaCode":{"type":"string"},
     "ResourceId":{"type":"string"},
@@ -530,6 +766,13 @@
       "exception":true,
       "retryable":{"throttling":true}
     },
+    "TimeFilter":{
+      "type":"structure",
+      "members":{
+        "from":{"shape":"BlockchainInstant"},
+        "to":{"shape":"BlockchainInstant"}
+      }
+    },
     "Timestamp":{"type":"timestamp"},
     "TokenBalance":{
       "type":"structure",
@@ -577,7 +820,6 @@
         "transactionTimestamp",
         "transactionIndex",
         "numberOfTransactions",
-        "status",
         "to"
       ],
       "members":{
@@ -588,7 +830,6 @@
         "transactionTimestamp":{"shape":"Timestamp"},
         "transactionIndex":{"shape":"Long"},
         "numberOfTransactions":{"shape":"Long"},
-        "status":{"shape":"QueryTransactionStatus"},
         "to":{"shape":"ChainAddress"},
         "from":{"shape":"ChainAddress"},
         "contractAddress":{"shape":"ChainAddress"},
@@ -599,7 +840,9 @@
         "signatureR":{"shape":"String"},
         "signatureS":{"shape":"String"},
         "transactionFee":{"shape":"String"},
-        "transactionId":{"shape":"String"}
+        "transactionId":{"shape":"String"},
+        "confirmationStatus":{"shape":"ConfirmationStatus"},
+        "executionStatus":{"shape":"ExecutionStatus"}
       }
     },
     "TransactionEvent":{
@@ -619,7 +862,13 @@
         "contractAddress":{"shape":"ChainAddress"},
         "tokenId":{"shape":"QueryTokenId"},
         "transactionId":{"shape":"String"},
-        "voutIndex":{"shape":"Integer"}
+        "voutIndex":{"shape":"Integer"},
+        "voutSpent":{"shape":"Boolean"},
+        "spentVoutTransactionId":{"shape":"String"},
+        "spentVoutTransactionHash":{"shape":"String"},
+        "spentVoutIndex":{"shape":"Integer"},
+        "blockchainInstant":{"shape":"BlockchainInstant"},
+        "confirmationStatus":{"shape":"ConfirmationStatus"}
       }
     },
     "TransactionEventList":{
@@ -637,8 +886,10 @@
       ],
       "members":{
         "transactionHash":{"shape":"QueryTransactionHash"},
+        "transactionId":{"shape":"QueryTransactionId"},
         "network":{"shape":"QueryNetwork"},
-        "transactionTimestamp":{"shape":"Timestamp"}
+        "transactionTimestamp":{"shape":"Timestamp"},
+        "confirmationStatus":{"shape":"ConfirmationStatus"}
       }
     },
     "TransactionOutputList":{
@@ -687,6 +938,13 @@
         "fieldValidationFailed",
         "other"
       ]
+    },
+    "VoutFilter":{
+      "type":"structure",
+      "required":["voutSpent"],
+      "members":{
+        "voutSpent":{"shape":"Boolean"}
+      }
     }
   }
 }

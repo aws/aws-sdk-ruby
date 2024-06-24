@@ -1,0 +1,41 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/AccountQuota.html
+    class AccountQuota
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/AccountQuota.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/AccountQuota.html#name-instance_method
+      def name: () -> String
+      alias account_quota_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/AccountQuota.html#used-instance_method
+      def used: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/AccountQuota.html#max-instance_method
+      def max: () -> ::Integer
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/AccountQuota.html#data-instance_method
+      def data: () -> Types::AccountQuota
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/AccountQuota.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      class Collection < ::Aws::Resources::Collection[AccountQuota]
+      end
+    end
+  end
+end

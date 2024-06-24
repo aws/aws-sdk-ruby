@@ -14,6 +14,10 @@ module Aws::DataZone
     # metadata) and the target (for example, a column name) that can be
     # accepted.
     #
+    # @!attribute [rw] edited_value
+    #   The edit of the prediction.
+    #   @return [String]
+    #
     # @!attribute [rw] prediction_choice
     #   Specifies the prediction (aka, the automatically generated piece of
     #   metadata) that can be accepted.
@@ -27,13 +31,17 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AcceptChoice AWS API Documentation
     #
     class AcceptChoice < Struct.new(
+      :edited_value,
       :prediction_choice,
       :prediction_target)
-      SENSITIVE = []
+      SENSITIVE = [:edited_value]
       include Aws::Structure
     end
 
     # @!attribute [rw] accept_choices
+    #   Specifies the prediction (aka, the automatically generated piece of
+    #   metadata) and the target (for example, a column name) that can be
+    #   accepted.
     #   @return [Array<Types::AcceptChoice>]
     #
     # @!attribute [rw] accept_rule
@@ -54,9 +62,11 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] identifier
+    #   The identifier of the asset.
     #   @return [String]
     #
     # @!attribute [rw] revision
+    #   The revision that is to be made to the asset.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AcceptPredictionsInput AWS API Documentation
@@ -73,12 +83,15 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] asset_id
+    #   The ID of the asset.
     #   @return [String]
     #
     # @!attribute [rw] domain_id
+    #   The identifier of the Amazon DataZone domain.
     #   @return [String]
     #
     # @!attribute [rw] revision
+    #   The revision that is to be made to the asset.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AcceptPredictionsOutput AWS API Documentation
@@ -224,6 +237,29 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The parameters of the environment action.
+    #
+    # @note ActionParameters is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ActionParameters is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ActionParameters corresponding to the set member.
+    #
+    # @!attribute [rw] aws_console_link
+    #   The console link specified as part of the environment action.
+    #   @return [Types::AwsConsoleLinkParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ActionParameters AWS API Documentation
+    #
+    class ActionParameters < Struct.new(
+      :aws_console_link,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AwsConsoleLink < ActionParameters; end
+      class Unknown < ActionParameters; end
+    end
+
     # A Amazon DataZone inventory asset.
     #
     # @!attribute [rw] additional_attributes
@@ -316,6 +352,11 @@ module Aws::DataZone
     #   asset.
     #   @return [Array<Types::FormOutput>]
     #
+    # @!attribute [rw] latest_time_series_data_point_forms_output
+    #   The latest time series data points forms included in the additional
+    #   attributes of an asset.
+    #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
+    #
     # @!attribute [rw] read_only_forms_output
     #   The read-only forms included in the additional attributes of an
     #   inventory asset.
@@ -325,6 +366,7 @@ module Aws::DataZone
     #
     class AssetItemAdditionalAttributes < Struct.new(
       :forms_output,
+      :latest_time_series_data_point_forms_output,
       :read_only_forms_output)
       SENSITIVE = []
       include Aws::Structure
@@ -359,6 +401,11 @@ module Aws::DataZone
     #   DataZone catalog.
     #   @return [Array<Types::DetailedGlossaryTerm>]
     #
+    # @!attribute [rw] latest_time_series_data_point_forms
+    #   The latest time series data points forms included in the additional
+    #   attributes of an asset.
+    #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
+    #
     # @!attribute [rw] owning_project_id
     #   The identifier of the project where an asset published in an Amazon
     #   DataZone catalog exists.
@@ -373,6 +420,7 @@ module Aws::DataZone
       :created_at,
       :forms,
       :glossary_terms,
+      :latest_time_series_data_point_forms,
       :owning_project_id)
       SENSITIVE = []
       include Aws::Structure
@@ -482,10 +530,16 @@ module Aws::DataZone
     #   asset.
     #   @return [String]
     #
+    # @!attribute [rw] latest_time_series_data_point_forms
+    #   The latest time series data points forms included in the additional
+    #   attributes of an asset.
+    #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssetListingItemAdditionalAttributes AWS API Documentation
     #
     class AssetListingItemAdditionalAttributes < Struct.new(
-      :forms)
+      :forms,
+      :latest_time_series_data_point_forms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -524,6 +578,8 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The name map for assets.
+    #
     # @!attribute [rw] asset_id
     #   The identifier of the inventory asset.
     #   @return [String]
@@ -614,6 +670,49 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which the environment role
+    #   is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The ID of the Amazon DataZone environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_role_arn
+    #   The ARN of the environment role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssociateEnvironmentRoleInput AWS API Documentation
+    #
+    class AssociateEnvironmentRoleInput < Struct.new(
+      :domain_identifier,
+      :environment_identifier,
+      :environment_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssociateEnvironmentRoleOutput AWS API Documentation
+    #
+    class AssociateEnvironmentRoleOutput < Aws::EmptyStructure; end
+
+    # The parameters of the console link specified as part of the
+    # environment action.
+    #
+    # @!attribute [rw] uri
+    #   The URI of the console link specified as part of the environment
+    #   action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AwsConsoleLinkParameters AWS API Documentation
+    #
+    class AwsConsoleLinkParameters < Struct.new(
+      :uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration of the business name generation.
     #
     # @!attribute [rw] enabled
@@ -627,6 +726,28 @@ module Aws::DataZone
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which the metadata
+    #   generation run is to be cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the metadata generation run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CancelMetadataGenerationRunInput AWS API Documentation
+    #
+    class CancelMetadataGenerationRunInput < Struct.new(
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CancelMetadataGenerationRunOutput AWS API Documentation
+    #
+    class CancelMetadataGenerationRunOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] domain_identifier
     #   The unique identifier of the Amazon DataZone domain where the
@@ -804,6 +925,7 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] external_identifier
+    #   The external identifier of the asset.
     #   @return [String]
     #
     # @!attribute [rw] forms_input
@@ -870,6 +992,7 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] external_identifier
+    #   The external identifier of the asset.
     #   @return [String]
     #
     # @!attribute [rw] first_revision_created_at
@@ -892,7 +1015,13 @@ module Aws::DataZone
     #   The unique identifier of the created asset.
     #   @return [String]
     #
+    # @!attribute [rw] latest_time_series_data_point_forms_output
+    #   The latest data point that was imported into the time series form
+    #   for the asset.
+    #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
+    #
     # @!attribute [rw] listing
+    #   The details of an asset published in an Amazon DataZone catalog.
     #   @return [Types::AssetListingDetails]
     #
     # @!attribute [rw] name
@@ -937,6 +1066,7 @@ module Aws::DataZone
       :forms_output,
       :glossary_terms,
       :id,
+      :latest_time_series_data_point_forms_output,
       :listing,
       :name,
       :owning_project_id,
@@ -1027,6 +1157,7 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] external_identifier
+    #   The external identifier of the asset.
     #   @return [String]
     #
     # @!attribute [rw] first_revision_created_at
@@ -1051,7 +1182,13 @@ module Aws::DataZone
     #   The unique identifier of the asset revision.
     #   @return [String]
     #
+    # @!attribute [rw] latest_time_series_data_point_forms_output
+    #   The latest data point that was imported into the time series form
+    #   for the asset.
+    #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
+    #
     # @!attribute [rw] listing
+    #   The details of an asset published in an Amazon DataZone catalog.
     #   @return [Types::AssetListingDetails]
     #
     # @!attribute [rw] name
@@ -1097,6 +1234,7 @@ module Aws::DataZone
       :forms_output,
       :glossary_terms,
       :id,
+      :latest_time_series_data_point_forms_output,
       :listing,
       :name,
       :owning_project_id,
@@ -1525,12 +1663,96 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] description
+    #   The description of the environment action that is being created in
+    #   the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which the environment action
+    #   is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The ID of the environment in which the environment action is
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters of the environment action.
+    #   @return [Types::ActionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateEnvironmentActionInput AWS API Documentation
+    #
+    class CreateEnvironmentActionInput < Struct.new(
+      :description,
+      :domain_identifier,
+      :environment_identifier,
+      :name,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   The description of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the domain in which the environment action is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The ID of the environment in which the environment is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters of the environment action.
+    #   @return [Types::ActionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateEnvironmentActionOutput AWS API Documentation
+    #
+    class CreateEnvironmentActionOutput < Struct.new(
+      :description,
+      :domain_id,
+      :environment_id,
+      :id,
+      :name,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
     #   The description of the Amazon DataZone environment.
     #   @return [String]
     #
     # @!attribute [rw] domain_identifier
     #   The identifier of the Amazon DataZone domain in which the
     #   environment is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_account_identifier
+    #   The ID of the account in which the environment is being created.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_account_region
+    #   The region of the account in which the environment is being created.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_blueprint_identifier
+    #   The ID of the blueprint with which the environment is being created.
     #   @return [String]
     #
     # @!attribute [rw] environment_profile_identifier
@@ -1561,6 +1783,9 @@ module Aws::DataZone
     class CreateEnvironmentInput < Struct.new(
       :description,
       :domain_identifier,
+      :environment_account_identifier,
+      :environment_account_region,
+      :environment_blueprint_identifier,
       :environment_profile_identifier,
       :glossary_terms,
       :name,
@@ -2135,23 +2360,31 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] action
+    #   Specifies whether to publish or unpublish a listing.
     #   @return [String]
     #
     # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain.
     #   @return [String]
     #
     # @!attribute [rw] entity_identifier
+    #   The ID of the asset.
     #   @return [String]
     #
     # @!attribute [rw] entity_revision
+    #   The revision of an asset.
     #   @return [String]
     #
     # @!attribute [rw] entity_type
+    #   The type of an entity.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateListingChangeSetInput AWS API Documentation
@@ -2168,12 +2401,15 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] listing_id
+    #   The ID of the listing (a record of an asset at a given time).
     #   @return [String]
     #
     # @!attribute [rw] listing_revision
+    #   The revision of a listing.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   Specifies the status of the listing.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateListingChangeSetOutput AWS API Documentation
@@ -2263,6 +2499,11 @@ module Aws::DataZone
     #   was created.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reasons
+    #   Specifies the error message that is returned if the operation cannot
+    #   be successfully completed.
+    #   @return [Array<Types::ProjectDeletionError>]
+    #
     # @!attribute [rw] glossary_terms
     #   The glossary terms that can be used in the project.
     #   @return [Array<String>]
@@ -2279,6 +2520,10 @@ module Aws::DataZone
     #   The name of the project.
     #   @return [String]
     #
+    # @!attribute [rw] project_status
+    #   The status of the Amazon DataZone project that was created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateProjectOutput AWS API Documentation
     #
     class CreateProjectOutput < Struct.new(
@@ -2286,10 +2531,12 @@ module Aws::DataZone
       :created_by,
       :description,
       :domain_id,
+      :failure_reasons,
       :glossary_terms,
       :id,
       :last_updated_at,
-      :name)
+      :name,
+      :project_status)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end
@@ -2420,6 +2667,8 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] subscribed_listings
+    #   The published asset for which the subscription grant is to be
+    #   created.
     #   @return [Array<Types::SubscribedListingInput>]
     #
     # @!attribute [rw] subscribed_principals
@@ -2473,6 +2722,8 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] subscribed_listings
+    #   The published asset for which the subscription grant is to be
+    #   created.
     #   @return [Array<Types::SubscribedListing>]
     #
     # @!attribute [rw] subscribed_principals
@@ -3167,12 +3418,18 @@ module Aws::DataZone
     #   The identifier of the data source that is deleted.
     #   @return [String]
     #
+    # @!attribute [rw] retain_permissions_on_revoke_failure
+    #   Specifies that the granted permissions are retained in case of a
+    #   self-subscribe functionality failure for a data source.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDataSourceInput AWS API Documentation
     #
     class DeleteDataSourceInput < Struct.new(
       :client_token,
       :domain_identifier,
-      :identifier)
+      :identifier,
+      :retain_permissions_on_revoke_failure)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3243,9 +3500,18 @@ module Aws::DataZone
     #   inventory are to be also automatically published to the catalog.
     #   @return [Boolean]
     #
+    # @!attribute [rw] retain_permissions_on_revoke_failure
+    #   Specifies that the granted permissions are retained in case of a
+    #   self-subscribe functionality failure for a data source.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] schedule
     #   The schedule of runs for this data source.
     #   @return [Types::ScheduleConfiguration]
+    #
+    # @!attribute [rw] self_grant_status
+    #   Specifies the status of the self-granting functionality.
+    #   @return [Types::SelfGrantStatusOutput]
     #
     # @!attribute [rw] status
     #   The status of this data source.
@@ -3277,7 +3543,9 @@ module Aws::DataZone
       :name,
       :project_id,
       :publish_on_import,
+      :retain_permissions_on_revoke_failure,
       :schedule,
+      :self_grant_status,
       :status,
       :type,
       :updated_at)
@@ -3298,11 +3566,17 @@ module Aws::DataZone
     #   deleted.
     #   @return [String]
     #
+    # @!attribute [rw] skip_deletion_check
+    #   Specifies the optional flag to delete all child entities within the
+    #   domain.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDomainInput AWS API Documentation
     #
     class DeleteDomainInput < Struct.new(
       :client_token,
-      :identifier)
+      :identifier,
+      :skip_deletion_check)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3315,6 +3589,29 @@ module Aws::DataZone
     #
     class DeleteDomainOutput < Struct.new(
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which an environment action
+    #   is deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The ID of the environment where an environment action is deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the environment action that is deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteEnvironmentActionInput AWS API Documentation
+    #
+    class DeleteEnvironmentActionInput < Struct.new(
+      :domain_identifier,
+      :environment_identifier,
+      :identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3444,9 +3741,11 @@ module Aws::DataZone
     class DeleteGlossaryTermOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain.
     #   @return [String]
     #
     # @!attribute [rw] identifier
+    #   The ID of the listing to be deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteListingInput AWS API Documentation
@@ -3471,11 +3770,17 @@ module Aws::DataZone
     #   The identifier of the project that is to be deleted.
     #   @return [String]
     #
+    # @!attribute [rw] skip_deletion_check
+    #   Specifies the optional flag to delete all child entities within the
+    #   project.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteProjectInput AWS API Documentation
     #
     class DeleteProjectInput < Struct.new(
       :domain_identifier,
-      :identifier)
+      :identifier,
+      :skip_deletion_check)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3642,6 +3947,48 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain that houses the asset for which
+    #   you want to delete a time series form.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the asset for which you want to delete a time series form.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the asset for which you want to delete a time series
+    #   form.
+    #   @return [String]
+    #
+    # @!attribute [rw] form_name
+    #   The name of the time series form that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteTimeSeriesDataPointsInput AWS API Documentation
+    #
+    class DeleteTimeSeriesDataPointsInput < Struct.new(
+      :client_token,
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :form_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteTimeSeriesDataPointsOutput AWS API Documentation
+    #
+    class DeleteTimeSeriesDataPointsOutput < Aws::EmptyStructure; end
+
     # The details of the last deployment of the environment.
     #
     # @!attribute [rw] deployment_id
@@ -3721,6 +4068,33 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which an environment role is
+    #   disassociated.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The ID of the environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_role_arn
+    #   The ARN of the environment role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DisassociateEnvironmentRoleInput AWS API Documentation
+    #
+    class DisassociateEnvironmentRoleInput < Struct.new(
+      :domain_identifier,
+      :environment_identifier,
+      :environment_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DisassociateEnvironmentRoleOutput AWS API Documentation
+    #
+    class DisassociateEnvironmentRoleOutput < Aws::EmptyStructure; end
+
     # A summary of a Amazon DataZone domain.
     #
     # @!attribute [rw] arn
@@ -3773,6 +4147,47 @@ module Aws::DataZone
       :portal_url,
       :status)
       SENSITIVE = [:description, :name]
+      include Aws::Structure
+    end
+
+    # The details about the specified action configured for an environment.
+    # For example, the details of the specified console links for an
+    # analytics tool that is available in this environment.
+    #
+    # @!attribute [rw] description
+    #   The environment action description.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The Amazon DataZone domain ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The environment ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters of the environment action.
+    #   @return [Types::ActionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/EnvironmentActionSummary AWS API Documentation
+    #
+    class EnvironmentActionSummary < Struct.new(
+      :description,
+      :domain_id,
+      :environment_id,
+      :id,
+      :name,
+      :parameters)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -4361,6 +4776,7 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] external_identifier
+    #   The external ID of the asset.
     #   @return [String]
     #
     # @!attribute [rw] first_revision_created_at
@@ -4384,7 +4800,13 @@ module Aws::DataZone
     #   The ID of the asset.
     #   @return [String]
     #
+    # @!attribute [rw] latest_time_series_data_point_forms_output
+    #   The latest data point that was imported into the time series form
+    #   for the asset.
+    #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
+    #
     # @!attribute [rw] listing
+    #   The listing of the asset.
     #   @return [Types::AssetListingDetails]
     #
     # @!attribute [rw] name
@@ -4424,6 +4846,7 @@ module Aws::DataZone
       :forms_output,
       :glossary_terms,
       :id,
+      :latest_time_series_data_point_forms_output,
       :listing,
       :name,
       :owning_project_id,
@@ -4616,11 +5039,16 @@ module Aws::DataZone
     #   @return [Boolean]
     #
     # @!attribute [rw] recommendation
+    #   The recommendation configuration of the data source.
     #   @return [Types::RecommendationConfiguration]
     #
     # @!attribute [rw] schedule
     #   The schedule of the data source runs.
     #   @return [Types::ScheduleConfiguration]
+    #
+    # @!attribute [rw] self_grant_status
+    #   Specifies the status of the self-granting functionality.
+    #   @return [Types::SelfGrantStatusOutput]
     #
     # @!attribute [rw] status
     #   The status of the data source.
@@ -4655,6 +5083,7 @@ module Aws::DataZone
       :publish_on_import,
       :recommendation,
       :schedule,
+      :self_grant_status,
       :status,
       :type,
       :updated_at)
@@ -4830,6 +5259,67 @@ module Aws::DataZone
       :single_sign_on,
       :status,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which the
+    #   `GetEnvironmentAction` API is invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The environment ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the environment action
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetEnvironmentActionInput AWS API Documentation
+    #
+    class GetEnvironmentActionInput < Struct.new(
+      :domain_identifier,
+      :environment_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   The description of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the Amazon DataZone domain in which the environment action
+    #   lives.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The environment ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters of the environment action.
+    #   @return [Types::ActionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetEnvironmentActionOutput AWS API Documentation
+    #
+    class GetEnvironmentActionOutput < Struct.new(
+      :description,
+      :domain_id,
+      :environment_id,
+      :id,
+      :name,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5528,12 +6018,15 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain.
     #   @return [String]
     #
     # @!attribute [rw] identifier
+    #   The ID of the listing.
     #   @return [String]
     #
     # @!attribute [rw] listing_revision
+    #   The revision of the listing.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetListingInput AWS API Documentation
@@ -5547,6 +6040,7 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] created_at
+    #   The timestamp of when the listing was created.
     #   @return [Time]
     #
     # @!attribute [rw] created_by
@@ -5554,24 +6048,31 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] description
+    #   The description of the listing.
     #   @return [String]
     #
     # @!attribute [rw] domain_id
+    #   The ID of the Amazon DataZone domain.
     #   @return [String]
     #
     # @!attribute [rw] id
+    #   The ID of the listing.
     #   @return [String]
     #
     # @!attribute [rw] item
+    #   The details of a listing.
     #   @return [Types::ListingItem]
     #
     # @!attribute [rw] listing_revision
+    #   The revision of a listing.
     #   @return [String]
     #
     # @!attribute [rw] name
+    #   The name of the listing.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   The status of the listing.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
@@ -5597,6 +6098,73 @@ module Aws::DataZone
       :updated_at,
       :updated_by)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain the metadata generation run of
+    #   which you want to get.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of the metadata generation run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetMetadataGenerationRunInput AWS API Documentation
+    #
+    class GetMetadataGenerationRunInput < Struct.new(
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The timestamp of when the metadata generation run was start.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The Amazon DataZone user who started the metadata generation run.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the Amazon DataZone domain the metadata generation run of
+    #   which you want to get.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the metadata generation run.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The ID of the project that owns the assets for which you're running
+    #   metadata generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the metadata generation run.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The asset for which you're generating metadata.
+    #   @return [Types::MetadataGenerationRunTarget]
+    #
+    # @!attribute [rw] type
+    #   The type of metadata generation run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetMetadataGenerationRunOutput AWS API Documentation
+    #
+    class GetMetadataGenerationRunOutput < Struct.new(
+      :created_at,
+      :created_by,
+      :domain_id,
+      :id,
+      :owning_project_id,
+      :status,
+      :target,
+      :type)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5633,6 +6201,11 @@ module Aws::DataZone
     #   The ID of the Amazon DataZone domain in which the project exists.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reasons
+    #   Specifies the error message that is returned if the operation cannot
+    #   be successfully completed.
+    #   @return [Array<Types::ProjectDeletionError>]
+    #
     # @!attribute [rw] glossary_terms
     #   The business glossary terms that can be used in the project.
     #   @return [Array<String>]
@@ -5649,6 +6222,10 @@ module Aws::DataZone
     #   The name of the project.
     #   @return [String]
     #
+    # @!attribute [rw] project_status
+    #   The status of the project.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetProjectOutput AWS API Documentation
     #
     class GetProjectOutput < Struct.new(
@@ -5656,10 +6233,12 @@ module Aws::DataZone
       :created_by,
       :description,
       :domain_id,
+      :failure_reasons,
       :glossary_terms,
       :id,
       :last_updated_at,
-      :name)
+      :name,
+      :project_status)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end
@@ -5789,6 +6368,8 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] subscribed_listing
+    #   The details of the published asset for which the subscription grant
+    #   is created.
     #   @return [Types::SubscribedListing]
     #
     # @!attribute [rw] subscribed_principal
@@ -6021,6 +6602,75 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain that houses the asset for which
+    #   you want to get the data point.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the asset for which you want to get the data point.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the asset for which you want to get the data point.
+    #   @return [String]
+    #
+    # @!attribute [rw] form_name
+    #   The name of the time series form that houses the data point that you
+    #   want to get.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the data point that you want to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetTimeSeriesDataPointInput AWS API Documentation
+    #
+    class GetTimeSeriesDataPointInput < Struct.new(
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :form_name,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_id
+    #   The ID of the Amazon DataZone domain that houses the asset data
+    #   point that you want to get.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The ID of the asset for which you want to get the data point.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the asset for which you want to get the data point.
+    #   @return [String]
+    #
+    # @!attribute [rw] form
+    #   The time series form that houses the data point that you want to
+    #   get.
+    #   @return [Types::TimeSeriesDataPointFormOutput]
+    #
+    # @!attribute [rw] form_name
+    #   The name of the time series form that houses the data point that you
+    #   want to get.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetTimeSeriesDataPointOutput AWS API Documentation
+    #
+    class GetTimeSeriesDataPointOutput < Struct.new(
+      :domain_id,
+      :entity_id,
+      :entity_type,
+      :form,
+      :form_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
     #   the ID of the Amazon DataZone domain the data portal of which you
     #   want to get.
     #   @return [String]
@@ -6209,6 +6859,11 @@ module Aws::DataZone
 
     # The configuration details of the Amazon Web Services Glue data source.
     #
+    # @!attribute [rw] auto_import_data_quality_result
+    #   Specifies whether to automatically import data quality metrics as
+    #   part of the data source run.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] data_access_role
     #   The data access role included in the configuration details of the
     #   Amazon Web Services Glue data source.
@@ -6222,6 +6877,7 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GlueRunConfigurationInput AWS API Documentation
     #
     class GlueRunConfigurationInput < Struct.new(
+      :auto_import_data_quality_result,
       :data_access_role,
       :relational_filter_configurations)
       SENSITIVE = []
@@ -6234,6 +6890,11 @@ module Aws::DataZone
     #   The Amazon Web Services account ID included in the configuration
     #   details of the Amazon Web Services Glue data source.
     #   @return [String]
+    #
+    # @!attribute [rw] auto_import_data_quality_result
+    #   Specifies whether to automatically import data quality metrics as
+    #   part of the data source run.
+    #   @return [Boolean]
     #
     # @!attribute [rw] data_access_role
     #   The data access role included in the configuration details of the
@@ -6254,9 +6915,24 @@ module Aws::DataZone
     #
     class GlueRunConfigurationOutput < Struct.new(
       :account_id,
+      :auto_import_data_quality_result,
       :data_access_role,
       :region,
       :relational_filter_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the self granting status.
+    #
+    # @!attribute [rw] self_grant_status_details
+    #   The details for the self granting status for a Glue data source.
+    #   @return [Array<Types::SelfGrantStatusDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GlueSelfGrantStatusOutput AWS API Documentation
+    #
+    class GlueSelfGrantStatusOutput < Struct.new(
+      :self_grant_status_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6712,6 +7388,68 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which the environment
+    #   actions are listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The ID of the envrironment whose environment actions are listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of environment actions to return in a single call
+    #   to `ListEnvironmentActions`. When the number of environment actions
+    #   to be listed is greater than the value of `MaxResults`, the response
+    #   contains a `NextToken` value that you can use in a subsequent call
+    #   to `ListEnvironmentActions` to list the next set of environment
+    #   actions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of environment actions is greater than the default
+    #   value for the `MaxResults` parameter, or if you explicitly specify a
+    #   value for `MaxResults` that is less than the number of environment
+    #   actions, the response includes a pagination token named `NextToken`.
+    #   You can specify this `NextToken` value in a subsequent call to
+    #   `ListEnvironmentActions` to list the next set of environment
+    #   actions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListEnvironmentActionsInput AWS API Documentation
+    #
+    class ListEnvironmentActionsInput < Struct.new(
+      :domain_identifier,
+      :environment_identifier,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The results of `ListEnvironmentActions`.
+    #   @return [Array<Types::EnvironmentActionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of environment actions is greater than the default
+    #   value for the `MaxResults` parameter, or if you explicitly specify a
+    #   value for `MaxResults` that is less than the number of environment
+    #   actions, the response includes a pagination token named `NextToken`.
+    #   You can specify this `NextToken` value in a subsequent call to
+    #   `ListEnvironmentActions` to list the next set of environment
+    #   actions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListEnvironmentActionsOutput AWS API Documentation
+    #
+    class ListEnvironmentActionsOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
     #   The identifier of the Amazon DataZone domain.
     #   @return [String]
     #
@@ -6946,6 +7684,7 @@ module Aws::DataZone
     #   @return [Integer]
     #
     # @!attribute [rw] name
+    #   The name of the environment.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -7003,6 +7742,73 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListEnvironmentsOutput AWS API Documentation
     #
     class ListEnvironmentsOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain where you want to list metadata
+    #   generation runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of metadata generation runs to return in a single
+    #   call to ListMetadataGenerationRuns. When the number of metadata
+    #   generation runs to be listed is greater than the value of
+    #   MaxResults, the response contains a NextToken value that you can use
+    #   in a subsequent call to ListMetadataGenerationRuns to list the next
+    #   set of revisions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of metadata generation runs is greater than the
+    #   default value for the MaxResults parameter, or if you explicitly
+    #   specify a value for MaxResults that is less than the number of
+    #   metadata generation runs, the response includes a pagination token
+    #   named NextToken. You can specify this NextToken value in a
+    #   subsequent call to ListMetadataGenerationRuns to list the next set
+    #   of revisions.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the metadata generation runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the metadata generation runs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListMetadataGenerationRunsInput AWS API Documentation
+    #
+    class ListMetadataGenerationRunsInput < Struct.new(
+      :domain_identifier,
+      :max_results,
+      :next_token,
+      :status,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The results of the ListMetadataGenerationRuns action.
+    #   @return [Array<Types::MetadataGenerationRunItem>]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of metadata generation runs is greater than the
+    #   default value for the MaxResults parameter, or if you explicitly
+    #   specify a value for MaxResults that is less than the number of
+    #   metadata generation runs, the response includes a pagination token
+    #   named NextToken. You can specify this NextToken value in a
+    #   subsequent call to ListMetadataGenerationRuns to list the next set
+    #   of revisions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListMetadataGenerationRunsOutput AWS API Documentation
+    #
+    class ListMetadataGenerationRunsOutput < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -7173,6 +7979,7 @@ module Aws::DataZone
     #   @return [Integer]
     #
     # @!attribute [rw] name
+    #   The name of the project.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -7584,6 +8391,87 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain that houses the assets for
+    #   which you want to list time series data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] ended_at
+    #   The timestamp at which the data points that you wanted to list
+    #   ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the asset for which you want to list data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the asset for which you want to list data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] form_name
+    #   The name of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of data points to return in a single call to
+    #   ListTimeSeriesDataPoints. When the number of data points to be
+    #   listed is greater than the value of MaxResults, the response
+    #   contains a NextToken value that you can use in a subsequent call to
+    #   ListTimeSeriesDataPoints to list the next set of data points.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of data points is greater than the default value for
+    #   the MaxResults parameter, or if you explicitly specify a value for
+    #   MaxResults that is less than the number of data points, the response
+    #   includes a pagination token named NextToken. You can specify this
+    #   NextToken value in a subsequent call to ListTimeSeriesDataPoints to
+    #   list the next set of data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The timestamp at which the data points that you want to list
+    #   started.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListTimeSeriesDataPointsInput AWS API Documentation
+    #
+    class ListTimeSeriesDataPointsInput < Struct.new(
+      :domain_identifier,
+      :ended_at,
+      :entity_identifier,
+      :entity_type,
+      :form_name,
+      :max_results,
+      :next_token,
+      :started_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The results of the ListTimeSeriesDataPoints action.
+    #   @return [Array<Types::TimeSeriesDataPointSummaryFormOutput>]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of data points is greater than the default value for
+    #   the MaxResults parameter, or if you explicitly specify a value for
+    #   MaxResults that is less than the number of data points, the response
+    #   includes a pagination token named NextToken. You can specify this
+    #   NextToken value in a subsequent call to ListTimeSeriesDataPoints to
+    #   list the next set of data points.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListTimeSeriesDataPointsOutput AWS API Documentation
+    #
+    class ListTimeSeriesDataPointsOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of a listing (aka asset published in a Amazon DataZone
     # catalog).
     #
@@ -7703,11 +8591,89 @@ module Aws::DataZone
       class Unknown < MemberDetails; end
     end
 
+    # The metadata generation run.
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp at which the metadata generation run was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The user who created the metadata generation run.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the Amazon DataZone domain in which the metadata
+    #   generation run was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the metadata generation run.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The ID of the project that owns the asset for which the metadata
+    #   generation was ran.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the metadata generation run.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The asset for which metadata was generated.
+    #   @return [Types::MetadataGenerationRunTarget]
+    #
+    # @!attribute [rw] type
+    #   The type of the metadata generation run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/MetadataGenerationRunItem AWS API Documentation
+    #
+    class MetadataGenerationRunItem < Struct.new(
+      :created_at,
+      :created_by,
+      :domain_id,
+      :id,
+      :owning_project_id,
+      :status,
+      :target,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The asset for which metadata was generated.
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the metadata generation run's target.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision of the asset for which metadata was generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the asset for which metadata was generated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/MetadataGenerationRunTarget AWS API Documentation
+    #
+    class MetadataGenerationRunTarget < Struct.new(
+      :identifier,
+      :revision,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The model of the API.
+    #
     # @note Model is a union - when making an API calls you must set exactly one of the members.
     #
     # @note Model is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Model corresponding to the set member.
     #
     # @!attribute [rw] smithy
+    #   Indicates the smithy model of the API.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/Model AWS API Documentation
@@ -7812,6 +8778,73 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain in which you want to post time
+    #   series data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_identifier
+    #   The ID of the asset for which you want to post time series data
+    #   points.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the asset for which you want to post data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] forms
+    #   The forms that contain the data points that you want to post.
+    #   @return [Array<Types::TimeSeriesDataPointFormInput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PostTimeSeriesDataPointsInput AWS API Documentation
+    #
+    class PostTimeSeriesDataPointsInput < Struct.new(
+      :client_token,
+      :domain_identifier,
+      :entity_identifier,
+      :entity_type,
+      :forms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_id
+    #   The ID of the Amazon DataZone domain in which you want to post time
+    #   series data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The ID of the asset for which you want to post time series data
+    #   points.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The type of the asset for which you want to post data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] forms
+    #   The forms that contain the data points that you have posted.
+    #   @return [Array<Types::TimeSeriesDataPointFormOutput>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PostTimeSeriesDataPointsOutput AWS API Documentation
+    #
+    class PostTimeSeriesDataPointsOutput < Struct.new(
+      :domain_id,
+      :entity_id,
+      :entity_type,
+      :forms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration of the prediction.
     #
     # @!attribute [rw] business_name_generation
@@ -7822,6 +8855,26 @@ module Aws::DataZone
     #
     class PredictionConfiguration < Struct.new(
       :business_name_generation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the error message that is returned if the operation cannot
+    # be successfully completed.
+    #
+    # @!attribute [rw] code
+    #   The code of the project deletion error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message of the project deletion error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ProjectDeletionError AWS API Documentation
+    #
+    class ProjectDeletionError < Struct.new(
+      :code,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7863,12 +8916,21 @@ module Aws::DataZone
     #   The identifier of a Amazon DataZone domain where the project exists.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reasons
+    #   Specifies the error message that is returned if the operation cannot
+    #   be successfully completed.
+    #   @return [Array<Types::ProjectDeletionError>]
+    #
     # @!attribute [rw] id
     #   The identifier of a project.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   The name of a project.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_status
+    #   The status of the project.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
@@ -7882,8 +8944,10 @@ module Aws::DataZone
       :created_by,
       :description,
       :domain_id,
+      :failure_reasons,
       :id,
       :name,
+      :project_status,
       :updated_at)
       SENSITIVE = [:description, :name]
       include Aws::Structure
@@ -8118,6 +9182,22 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The details for the self granting status for an Amazon Redshift data
+    # source.
+    #
+    # @!attribute [rw] self_grant_status_details
+    #   The details for the self granting status for an Amazon Redshift data
+    #   source.
+    #   @return [Array<Types::SelfGrantStatusDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/RedshiftSelfGrantStatusOutput AWS API Documentation
+    #
+    class RedshiftSelfGrantStatusOutput < Struct.new(
+      :self_grant_status_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of the Amazon Redshift Serverless workgroup storage.
     #
     # @!attribute [rw] workgroup_name
@@ -8201,12 +9281,18 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] reject_choices
+    #   Specifies the prediction (aka, the automatically generated piece of
+    #   metadata) and the target (for example, a column name) that can be
+    #   rejected.
     #   @return [Array<Types::RejectChoice>]
     #
     # @!attribute [rw] reject_rule
+    #   Specifies the rule (or the conditions) under which a prediction can
+    #   be rejected.
     #   @return [Types::RejectRule]
     #
     # @!attribute [rw] revision
+    #   The revision that is to be made to the asset.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/RejectPredictionsInput AWS API Documentation
@@ -8223,12 +9309,15 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] asset_id
+    #   The ID of the asset.
     #   @return [String]
     #
     # @!attribute [rw] asset_revision
+    #   The revision that is to be made to the asset.
     #   @return [String]
     #
     # @!attribute [rw] domain_id
+    #   The ID of the Amazon DataZone domain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/RejectPredictionsOutput AWS API Documentation
@@ -8682,6 +9771,7 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] search_in
+    #   The details of the search.
     #   @return [Array<Types::SearchInItem>]
     #
     # @!attribute [rw] search_scope
@@ -8782,6 +9872,7 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] search_in
+    #   The details of the search.
     #   @return [Array<Types::SearchInItem>]
     #
     # @!attribute [rw] search_text
@@ -8912,6 +10003,7 @@ module Aws::DataZone
     #   @return [Types::FilterClause]
     #
     # @!attribute [rw] managed
+    #   Specifies whether the search is managed.
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
@@ -8932,6 +10024,7 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] search_in
+    #   The details of the search.
     #   @return [Array<Types::SearchInItem>]
     #
     # @!attribute [rw] search_scope
@@ -9078,6 +10171,63 @@ module Aws::DataZone
       :next_token)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The details for the self granting status.
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database used for the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_cause
+    #   The reason for why the operation failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   The name of the schema used in the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The self granting status of the data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SelfGrantStatusDetail AWS API Documentation
+    #
+    class SelfGrantStatusDetail < Struct.new(
+      :database_name,
+      :failure_cause,
+      :schema_name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details for the self granting status for a data source.
+    #
+    # @note SelfGrantStatusOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SelfGrantStatusOutput corresponding to the set member.
+    #
+    # @!attribute [rw] glue_self_grant_status
+    #   The details for the self granting status for a Glue data source.
+    #   @return [Types::GlueSelfGrantStatusOutput]
+    #
+    # @!attribute [rw] redshift_self_grant_status
+    #   The details for the self granting status for an Amazon Redshift data
+    #   source.
+    #   @return [Types::RedshiftSelfGrantStatusOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SelfGrantStatusOutput AWS API Documentation
+    #
+    class SelfGrantStatusOutput < Struct.new(
+      :glue_self_grant_status,
+      :redshift_self_grant_status,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class GlueSelfGrantStatus < SelfGrantStatusOutput; end
+      class RedshiftSelfGrantStatus < SelfGrantStatusOutput; end
+      class Unknown < SelfGrantStatusOutput; end
     end
 
     # The request has exceeded the specified service quota.
@@ -9236,6 +10386,88 @@ module Aws::DataZone
       :stopped_at,
       :type,
       :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The ID of the Amazon DataZone domain where you want to start a
+    #   metadata generation run.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_identifier
+    #   The ID of the project that owns the asset for which you want to
+    #   start a metadata generation run.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The asset for which you want to start a metadata generation run.
+    #   @return [Types::MetadataGenerationRunTarget]
+    #
+    # @!attribute [rw] type
+    #   The type of the metadata generation run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartMetadataGenerationRunInput AWS API Documentation
+    #
+    class StartMetadataGenerationRunInput < Struct.new(
+      :client_token,
+      :domain_identifier,
+      :owning_project_identifier,
+      :target,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] created_at
+    #   The timestamp at which the metadata generation run was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The ID of the user who started the metadata generation run.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The ID of the Amazon DataZone domain in which the metadata
+    #   generation run was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the metadata generation run.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The ID of the project that owns the asset for which the metadata
+    #   generation run was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the metadata generation run.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the metadata generation run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartMetadataGenerationRunOutput AWS API Documentation
+    #
+    class StartMetadataGenerationRunOutput < Struct.new(
+      :created_at,
+      :created_by,
+      :domain_id,
+      :id,
+      :owning_project_id,
+      :status,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9851,6 +11083,118 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The time series data points form.
+    #
+    # @!attribute [rw] content
+    #   The content of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] form_name
+    #   The name of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp of the time series data points form.
+    #   @return [Time]
+    #
+    # @!attribute [rw] type_identifier
+    #   The ID of the type of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_revision
+    #   The revision type of the time series data points form.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/TimeSeriesDataPointFormInput AWS API Documentation
+    #
+    class TimeSeriesDataPointFormInput < Struct.new(
+      :content,
+      :form_name,
+      :timestamp,
+      :type_identifier,
+      :type_revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The time series data points form.
+    #
+    # @!attribute [rw] content
+    #   The content of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] form_name
+    #   The name of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp of the time series data points form.
+    #   @return [Time]
+    #
+    # @!attribute [rw] type_identifier
+    #   The ID of the type of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_revision
+    #   The revision type of the time series data points form.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/TimeSeriesDataPointFormOutput AWS API Documentation
+    #
+    class TimeSeriesDataPointFormOutput < Struct.new(
+      :content,
+      :form_name,
+      :id,
+      :timestamp,
+      :type_identifier,
+      :type_revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of the time series data points form.
+    #
+    # @!attribute [rw] content_summary
+    #   The content of the summary of the time series data points form.
+    #   @return [String]
+    #
+    # @!attribute [rw] form_name
+    #   The name of the time series data points summary form.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the time series data points summary form.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp of the time series data points summary form.
+    #   @return [Time]
+    #
+    # @!attribute [rw] type_identifier
+    #   The type ID of the time series data points summary form.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_revision
+    #   The type revision of the time series data points summary form.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/TimeSeriesDataPointSummaryFormOutput AWS API Documentation
+    #
+    class TimeSeriesDataPointSummaryFormOutput < Struct.new(
+      :content_summary,
+      :form_name,
+      :id,
+      :timestamp,
+      :type_identifier,
+      :type_revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The topic of the notification.
     #
     # @!attribute [rw] resource
@@ -9951,6 +11295,11 @@ module Aws::DataZone
     #   action.
     #   @return [Types::RecommendationConfiguration]
     #
+    # @!attribute [rw] retain_permissions_on_revoke_failure
+    #   Specifies that the granted permissions are retained in case of a
+    #   self-subscribe functionality failure for a data source.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] schedule
     #   The schedule to be updated as part of the `UpdateDataSource` action.
     #   @return [Types::ScheduleConfiguration]
@@ -9967,6 +11316,7 @@ module Aws::DataZone
       :name,
       :publish_on_import,
       :recommendation,
+      :retain_permissions_on_revoke_failure,
       :schedule)
       SENSITIVE = [:asset_forms_input, :description, :name, :schedule]
       include Aws::Structure
@@ -10045,9 +11395,18 @@ module Aws::DataZone
     #   action.
     #   @return [Types::RecommendationConfiguration]
     #
+    # @!attribute [rw] retain_permissions_on_revoke_failure
+    #   Specifies that the granted permissions are retained in case of a
+    #   self-subscribe functionality failure for a data source.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] schedule
     #   The schedule to be updated as part of the `UpdateDataSource` action.
     #   @return [Types::ScheduleConfiguration]
+    #
+    # @!attribute [rw] self_grant_status
+    #   Specifies the status of the self-granting functionality.
+    #   @return [Types::SelfGrantStatusOutput]
     #
     # @!attribute [rw] status
     #   The status to be updated as part of the `UpdateDataSource` action.
@@ -10080,7 +11439,9 @@ module Aws::DataZone
       :project_id,
       :publish_on_import,
       :recommendation,
+      :retain_permissions_on_revoke_failure,
       :schedule,
+      :self_grant_status,
       :status,
       :type,
       :updated_at)
@@ -10165,6 +11526,80 @@ module Aws::DataZone
       :last_updated_at,
       :name,
       :single_sign_on)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   The description of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_identifier
+    #   The domain ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_identifier
+    #   The environment ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters of the environment action.
+    #   @return [Types::ActionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateEnvironmentActionInput AWS API Documentation
+    #
+    class UpdateEnvironmentActionInput < Struct.new(
+      :description,
+      :domain_identifier,
+      :environment_identifier,
+      :identifier,
+      :name,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   The description of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The domain ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] environment_id
+    #   The environment ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the environment action.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters of the environment action.
+    #   @return [Types::ActionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateEnvironmentActionOutput AWS API Documentation
+    #
+    class UpdateEnvironmentActionOutput < Struct.new(
+      :description,
+      :domain_id,
+      :environment_id,
+      :id,
+      :name,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10737,6 +12172,11 @@ module Aws::DataZone
     #   updated.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reasons
+    #   Specifies the error message that is returned if the operation cannot
+    #   be successfully completed.
+    #   @return [Array<Types::ProjectDeletionError>]
+    #
     # @!attribute [rw] glossary_terms
     #   The glossary terms of the project that are to be updated.
     #   @return [Array<String>]
@@ -10753,6 +12193,10 @@ module Aws::DataZone
     #   The name of the project that is to be updated.
     #   @return [String]
     #
+    # @!attribute [rw] project_status
+    #   The status of the project.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateProjectOutput AWS API Documentation
     #
     class UpdateProjectOutput < Struct.new(
@@ -10760,10 +12204,12 @@ module Aws::DataZone
       :created_by,
       :description,
       :domain_id,
+      :failure_reasons,
       :glossary_terms,
       :id,
       :last_updated_at,
-      :name)
+      :name,
+      :project_status)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end
@@ -10812,6 +12258,8 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] assets
+    #   The details of the asset for which the subscription grant is
+    #   created.
     #   @return [Array<Types::SubscribedAsset>]
     #
     # @!attribute [rw] created_at

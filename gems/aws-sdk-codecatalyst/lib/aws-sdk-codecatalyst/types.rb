@@ -185,6 +185,11 @@ module Aws::CodeCatalyst
     #    </note>
     #   @return [Types::PersistentStorageConfiguration]
     #
+    # @!attribute [rw] vpc_connection_name
+    #   The name of the connection that will be used to connect to Amazon
+    #   VPC, if any.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/CreateDevEnvironmentRequest AWS API Documentation
     #
     class CreateDevEnvironmentRequest < Struct.new(
@@ -196,7 +201,8 @@ module Aws::CodeCatalyst
       :ides,
       :instance_type,
       :inactivity_timeout_minutes,
-      :persistent_storage)
+      :persistent_storage,
+      :vpc_connection_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -213,12 +219,18 @@ module Aws::CodeCatalyst
     #   The system-generated unique ID of the Dev Environment.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_connection_name
+    #   The name of the connection used to connect to Amazon VPC used when
+    #   the Dev Environment was created, if any.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/CreateDevEnvironmentResponse AWS API Documentation
     #
     class CreateDevEnvironmentResponse < Struct.new(
       :space_name,
       :project_name,
-      :id)
+      :id,
+      :vpc_connection_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -742,6 +754,11 @@ module Aws::CodeCatalyst
     #   Dev Environment.
     #   @return [Types::PersistentStorage]
     #
+    # @!attribute [rw] vpc_connection_name
+    #   The name of the connection used to connect to Amazon VPC used when
+    #   the Dev Environment was created, if any.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/DevEnvironmentSummary AWS API Documentation
     #
     class DevEnvironmentSummary < Struct.new(
@@ -757,7 +774,8 @@ module Aws::CodeCatalyst
       :ides,
       :instance_type,
       :inactivity_timeout_minutes,
-      :persistent_storage)
+      :persistent_storage,
+      :vpc_connection_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1024,6 +1042,11 @@ module Aws::CodeCatalyst
     #   16GB of persistent storage.
     #   @return [Types::PersistentStorage]
     #
+    # @!attribute [rw] vpc_connection_name
+    #   The name of the connection used to connect to Amazon VPC used when
+    #   the Dev Environment was created, if any.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetDevEnvironmentResponse AWS API Documentation
     #
     class GetDevEnvironmentResponse < Struct.new(
@@ -1039,7 +1062,8 @@ module Aws::CodeCatalyst
       :ides,
       :instance_type,
       :inactivity_timeout_minutes,
-      :persistent_storage)
+      :persistent_storage,
+      :vpc_connection_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1252,11 +1276,35 @@ module Aws::CodeCatalyst
     #   for the space.
     #   @return [String]
     #
+    # @!attribute [rw] pending_subscription_type
+    #   The type of the billing plan that the space will be changed to at
+    #   the start of the next billing cycle. This applies only to changes
+    #   that reduce the functionality available for the space. Billing plan
+    #   changes that increase functionality are applied immediately. For
+    #   more information, see [Pricing][1].
+    #
+    #
+    #
+    #   [1]: https://codecatalyst.aws/explore/pricing
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_subscription_start_time
+    #   The day and time the pending change will be applied to the space, in
+    #   coordinated universal time (UTC) timestamp format as specified in
+    #   [RFC 3339][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetSubscriptionResponse AWS API Documentation
     #
     class GetSubscriptionResponse < Struct.new(
       :subscription_type,
-      :aws_account_name)
+      :aws_account_name,
+      :pending_subscription_type,
+      :pending_subscription_start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1305,6 +1353,199 @@ module Aws::CodeCatalyst
       :display_name,
       :primary_email,
       :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the workflow. To rerieve a list of workflow IDs, use
+    #   ListWorkflows.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetWorkflowRequest AWS API Documentation
+    #
+    class GetWorkflowRequest < Struct.new(
+      :space_name,
+      :id,
+      :project_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_repository_name
+    #   The name of the source repository where the workflow YAML is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_branch_name
+    #   The name of the branch that contains the workflow YAML.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   Information about the workflow definition file for the workflow.
+    #   @return [Types::WorkflowDefinition]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time the workflow was created, in coordinated universal
+    #   time (UTC) timestamp format as specified in [RFC 3339][1]
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time the workflow was last updated, in coordinated
+    #   universal time (UTC) timestamp format as specified in [RFC 3339][1]
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] run_mode
+    #   The behavior to use when multiple workflows occur at the same time.
+    #   For more information, see
+    #   [https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflows-configure-runs.html][1]
+    #   in the Amazon CodeCatalyst User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflows-configure-runs.html
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the workflow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetWorkflowResponse AWS API Documentation
+    #
+    class GetWorkflowResponse < Struct.new(
+      :space_name,
+      :project_name,
+      :id,
+      :name,
+      :source_repository_name,
+      :source_branch_name,
+      :definition,
+      :created_time,
+      :last_updated_time,
+      :run_mode,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the workflow run. To retrieve a list of workflow run IDs,
+    #   use ListWorkflowRuns.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetWorkflowRunRequest AWS API Documentation
+    #
+    class GetWorkflowRunRequest < Struct.new(
+      :space_name,
+      :id,
+      :project_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the workflow run.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_id
+    #   The ID of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the workflow run.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Information about the reasons for the status of the workflow run.
+    #   @return [Array<Types::WorkflowRunStatusReason>]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time the workflow run began, in coordinated universal
+    #   time (UTC) timestamp format as specified in [RFC 3339][1]
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The date and time the workflow run ended, in coordinated universal
+    #   time (UTC) timestamp format as specified in [RFC 3339][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time the workflow run status was last updated, in
+    #   coordinated universal time (UTC) timestamp format as specified in
+    #   [RFC 3339][1]
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetWorkflowRunResponse AWS API Documentation
+    #
+    class GetWorkflowRunResponse < Struct.new(
+      :space_name,
+      :project_name,
+      :id,
+      :workflow_id,
+      :status,
+      :status_reasons,
+      :start_time,
+      :end_time,
+      :last_updated_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1839,6 +2080,120 @@ module Aws::CodeCatalyst
       include Aws::Structure
     end
 
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_id
+    #   The ID of the workflow. To retrieve a list of workflow IDs, use
+    #   ListWorkflows.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a call to this API to indicate the next batch
+    #   of results to return, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to show in a single call to this API.
+    #   If the number of results is larger than the number you specified,
+    #   the response will include a `NextToken` element, which you can use
+    #   to obtain additional results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sort_by
+    #   Information used to sort the items in the returned list.
+    #   @return [Array<Types::WorkflowRunSortCriteria>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/ListWorkflowRunsRequest AWS API Documentation
+    #
+    class ListWorkflowRunsRequest < Struct.new(
+      :space_name,
+      :workflow_id,
+      :project_name,
+      :next_token,
+      :max_results,
+      :sort_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token returned from a call to this API to indicate the next batch
+    #   of results to return, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   Information about the runs of a workflow.
+    #   @return [Array<Types::WorkflowRunSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/ListWorkflowRunsResponse AWS API Documentation
+    #
+    class ListWorkflowRunsResponse < Struct.new(
+      :next_token,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a call to this API to indicate the next batch
+    #   of results to return, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to show in a single call to this API.
+    #   If the number of results is larger than the number you specified,
+    #   the response will include a `NextToken` element, which you can use
+    #   to obtain additional results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sort_by
+    #   Information used to sort the items in the returned list.
+    #   @return [Array<Types::WorkflowSortCriteria>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/ListWorkflowsRequest AWS API Documentation
+    #
+    class ListWorkflowsRequest < Struct.new(
+      :space_name,
+      :project_name,
+      :next_token,
+      :max_results,
+      :sort_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token returned from a call to this API to indicate the next batch
+    #   of results to return, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   Information about the workflows in a project.
+    #   @return [Array<Types::WorkflowSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/ListWorkflowsResponse AWS API Documentation
+    #
+    class ListWorkflowsResponse < Struct.new(
+      :next_token,
+      :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the persistent storage for a Dev Environment.
     #
     # @!attribute [rw] size_in_gi_b
@@ -2149,6 +2504,68 @@ module Aws::CodeCatalyst
       :project_name,
       :id)
       SENSITIVE = [:access_details]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_id
+    #   The system-generated unique ID of the workflow. To retrieve a list
+    #   of workflow IDs, use ListWorkflows.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A user-specified idempotency token. Idempotency ensures that an API
+    #   request completes only once. With an idempotent request, if the
+    #   original request completes successfully, the subsequent retries
+    #   return the result from the original successful request and have no
+    #   additional effect.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/StartWorkflowRunRequest AWS API Documentation
+    #
+    class StartWorkflowRunRequest < Struct.new(
+      :space_name,
+      :project_name,
+      :workflow_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] space_name
+    #   The name of the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] project_name
+    #   The name of the project in the space.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The system-generated unique ID of the workflow run.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_id
+    #   The system-generated unique ID of the workflow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/StartWorkflowRunResponse AWS API Documentation
+    #
+    class StartWorkflowRunResponse < Struct.new(
+      :space_name,
+      :project_name,
+      :id,
+      :workflow_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2533,6 +2950,188 @@ module Aws::CodeCatalyst
     #
     class VerifySessionResponse < Struct.new(
       :identity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a workflow definition file.
+    #
+    # @!attribute [rw] path
+    #   The path to the workflow definition file stored in the source
+    #   repository for the project, including the file name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/WorkflowDefinition AWS API Documentation
+    #
+    class WorkflowDefinition < Struct.new(
+      :path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a workflow definition.
+    #
+    # @!attribute [rw] path
+    #   The path to the workflow definition file stored in the source
+    #   repository for the project, including the file name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/WorkflowDefinitionSummary AWS API Documentation
+    #
+    class WorkflowDefinitionSummary < Struct.new(
+      :path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information used to sort workflow runs in the returned list.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/WorkflowRunSortCriteria AWS API Documentation
+    #
+    class WorkflowRunSortCriteria < Aws::EmptyStructure; end
+
+    # Information about the status of a workflow run.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/WorkflowRunStatusReason AWS API Documentation
+    #
+    class WorkflowRunStatusReason < Aws::EmptyStructure; end
+
+    # Information about a workflow run.
+    #
+    # @!attribute [rw] id
+    #   The system-generated unique ID of the workflow run.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_id
+    #   The system-generated unique ID of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_name
+    #   The name of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the workflow run.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   The reasons for the workflow run status.
+    #   @return [Array<Types::WorkflowRunStatusReason>]
+    #
+    # @!attribute [rw] start_time
+    #   The date and time the workflow run began, in coordinated universal
+    #   time (UTC) timestamp format as specified in [RFC 3339][1].
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The date and time the workflow run ended, in coordinated universal
+    #   time (UTC) timestamp format as specified in [RFC 3339][1]
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time the workflow was last updated, in coordinated
+    #   universal time (UTC) timestamp format as specified in [RFC 3339][1]
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/WorkflowRunSummary AWS API Documentation
+    #
+    class WorkflowRunSummary < Struct.new(
+      :id,
+      :workflow_id,
+      :workflow_name,
+      :status,
+      :status_reasons,
+      :start_time,
+      :end_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information used to sort workflows in the returned list.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/WorkflowSortCriteria AWS API Documentation
+    #
+    class WorkflowSortCriteria < Aws::EmptyStructure; end
+
+    # Information about a workflow.
+    #
+    # @!attribute [rw] id
+    #   The system-generated unique ID of a workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_repository_name
+    #   The name of the source repository where the workflow definition file
+    #   is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_branch_name
+    #   The name of the branch of the source repository where the workflow
+    #   definition file is stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   Information about the workflow definition file.
+    #   @return [Types::WorkflowDefinitionSummary]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time the workflow was created, in coordinated universal
+    #   time (UTC) timestamp format as specified in [RFC 3339][1]
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The date and time the workflow was last updated, in coordinated
+    #   universal time (UTC) timestamp format as specified in [RFC 3339][1]
+    #
+    #
+    #
+    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   @return [Time]
+    #
+    # @!attribute [rw] run_mode
+    #   The run mode of the workflow.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the workflow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/WorkflowSummary AWS API Documentation
+    #
+    class WorkflowSummary < Struct.new(
+      :id,
+      :name,
+      :source_repository_name,
+      :source_branch_name,
+      :definition,
+      :created_time,
+      :last_updated_time,
+      :run_mode,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2024-06-17)
+------------------
+
+* Feature - Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
+1.89.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.88.0 (2024-06-03)
+------------------
+
+* Feature - This release adds support for the AWS Batch GetJobQueueSnapshot API operation.
+
+1.87.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.86.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.85.0 (2024-04-11)
+------------------
+
+* Feature - This release adds the task properties field to attempt details and the name field on EKS container detail.
+
+1.84.0 (2024-03-27)
+------------------
+
+* Feature - This feature allows AWS Batch to support configuration of imagePullSecrets and allowPrivilegeEscalation for jobs running on EKS
+
+1.83.0 (2024-03-08)
+------------------
+
+* Feature - This release adds JobStateTimeLimitActions setting to the Job Queue API. It allows you to configure an action Batch can take for a blocking job in front of the queue after the defined period of time. The new parameter applies for ECS, EKS, and FARGATE Job Queues.
+
+1.82.0 (2024-02-28)
+------------------
+
+* Feature - This release adds Batch support for configuration of multicontainer jobs in ECS, Fargate, and EKS. This support is available for all types of jobs, including both array jobs and multi-node parallel jobs.
+
+1.81.0 (2024-02-09)
+------------------
+
+* Feature - This feature allows Batch to support configuration of repository credentials for jobs running on ECS
+
+1.80.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.79.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.78.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.77.0 (2023-09-27)
 ------------------
 

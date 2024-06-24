@@ -38,6 +38,7 @@ module Aws::Transfer
     CompressionEnum = Shapes::StringShape.new(name: 'CompressionEnum')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectorId = Shapes::StringShape.new(name: 'ConnectorId')
+    ConnectorSecurityPolicyName = Shapes::StringShape.new(name: 'ConnectorSecurityPolicyName')
     CopyStepDetails = Shapes::StructureShape.new(name: 'CopyStepDetails')
     CreateAccessRequest = Shapes::StructureShape.new(name: 'CreateAccessRequest')
     CreateAccessResponse = Shapes::StructureShape.new(name: 'CreateAccessResponse')
@@ -105,6 +106,7 @@ module Aws::Transfer
     DescribedWorkflow = Shapes::StructureShape.new(name: 'DescribedWorkflow')
     Description = Shapes::StringShape.new(name: 'Description')
     DirectoryId = Shapes::StringShape.new(name: 'DirectoryId')
+    DirectoryListingOptimization = Shapes::StringShape.new(name: 'DirectoryListingOptimization')
     Domain = Shapes::StringShape.new(name: 'Domain')
     EfsFileLocation = Shapes::StructureShape.new(name: 'EfsFileLocation')
     EfsFileSystemId = Shapes::StringShape.new(name: 'EfsFileSystemId')
@@ -192,10 +194,13 @@ module Aws::Transfer
     ListedUsers = Shapes::ListShape.new(name: 'ListedUsers')
     ListedWorkflow = Shapes::StructureShape.new(name: 'ListedWorkflow')
     ListedWorkflows = Shapes::ListShape.new(name: 'ListedWorkflows')
+    ListingId = Shapes::StringShape.new(name: 'ListingId')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
     MapEntry = Shapes::StringShape.new(name: 'MapEntry')
     MapTarget = Shapes::StringShape.new(name: 'MapTarget')
+    MapType = Shapes::StringShape.new(name: 'MapType')
+    MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MdnResponse = Shapes::StringShape.new(name: 'MdnResponse')
     MdnSigningAlg = Shapes::StringShape.new(name: 'MdnSigningAlg')
@@ -205,6 +210,7 @@ module Aws::Transfer
     NullableRole = Shapes::StringShape.new(name: 'NullableRole')
     OnPartialUploadWorkflowDetails = Shapes::ListShape.new(name: 'OnPartialUploadWorkflowDetails')
     OnUploadWorkflowDetails = Shapes::ListShape.new(name: 'OnUploadWorkflowDetails')
+    OutputFileName = Shapes::StringShape.new(name: 'OutputFileName')
     OverwriteExisting = Shapes::StringShape.new(name: 'OverwriteExisting')
     PassiveIp = Shapes::StringShape.new(name: 'PassiveIp')
     Policy = Shapes::StringShape.new(name: 'Policy')
@@ -230,6 +236,7 @@ module Aws::Transfer
     S3FileLocation = Shapes::StructureShape.new(name: 'S3FileLocation')
     S3InputFileLocation = Shapes::StructureShape.new(name: 'S3InputFileLocation')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
+    S3StorageOptions = Shapes::StructureShape.new(name: 'S3StorageOptions')
     S3Tag = Shapes::StructureShape.new(name: 'S3Tag')
     S3TagKey = Shapes::StringShape.new(name: 'S3TagKey')
     S3TagValue = Shapes::StringShape.new(name: 'S3TagValue')
@@ -243,10 +250,15 @@ module Aws::Transfer
     SecurityPolicyNames = Shapes::ListShape.new(name: 'SecurityPolicyNames')
     SecurityPolicyOption = Shapes::StringShape.new(name: 'SecurityPolicyOption')
     SecurityPolicyOptions = Shapes::ListShape.new(name: 'SecurityPolicyOptions')
+    SecurityPolicyProtocol = Shapes::StringShape.new(name: 'SecurityPolicyProtocol')
+    SecurityPolicyProtocols = Shapes::ListShape.new(name: 'SecurityPolicyProtocols')
+    SecurityPolicyResourceType = Shapes::StringShape.new(name: 'SecurityPolicyResourceType')
     SendWorkflowStepStateRequest = Shapes::StructureShape.new(name: 'SendWorkflowStepStateRequest')
     SendWorkflowStepStateResponse = Shapes::StructureShape.new(name: 'SendWorkflowStepStateResponse')
     ServerId = Shapes::StringShape.new(name: 'ServerId')
     ServiceErrorMessage = Shapes::StringShape.new(name: 'ServiceErrorMessage')
+    ServiceManagedEgressIpAddress = Shapes::StringShape.new(name: 'ServiceManagedEgressIpAddress')
+    ServiceManagedEgressIpAddresses = Shapes::ListShape.new(name: 'ServiceManagedEgressIpAddresses')
     ServiceMetadata = Shapes::StructureShape.new(name: 'ServiceMetadata')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
@@ -263,6 +275,8 @@ module Aws::Transfer
     SshPublicKeyCount = Shapes::IntegerShape.new(name: 'SshPublicKeyCount')
     SshPublicKeyId = Shapes::StringShape.new(name: 'SshPublicKeyId')
     SshPublicKeys = Shapes::ListShape.new(name: 'SshPublicKeys')
+    StartDirectoryListingRequest = Shapes::StructureShape.new(name: 'StartDirectoryListingRequest')
+    StartDirectoryListingResponse = Shapes::StructureShape.new(name: 'StartDirectoryListingResponse')
     StartFileTransferRequest = Shapes::StructureShape.new(name: 'StartFileTransferRequest')
     StartFileTransferResponse = Shapes::StructureShape.new(name: 'StartFileTransferResponse')
     StartServerRequest = Shapes::StructureShape.new(name: 'StartServerRequest')
@@ -383,6 +397,7 @@ module Aws::Transfer
     CreateConnectorRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
     CreateConnectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateConnectorRequest.add_member(:sftp_config, Shapes::ShapeRef.new(shape: SftpConnectorConfig, location_name: "SftpConfig"))
+    CreateConnectorRequest.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: ConnectorSecurityPolicyName, location_name: "SecurityPolicyName"))
     CreateConnectorRequest.struct_class = Types::CreateConnectorRequest
 
     CreateConnectorResponse.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
@@ -404,7 +419,7 @@ module Aws::Transfer
     CreateServerRequest.add_member(:host_key, Shapes::ShapeRef.new(shape: HostKey, location_name: "HostKey"))
     CreateServerRequest.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: IdentityProviderDetails, location_name: "IdentityProviderDetails"))
     CreateServerRequest.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProviderType"))
-    CreateServerRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
+    CreateServerRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: NullableRole, location_name: "LoggingRole"))
     CreateServerRequest.add_member(:post_authentication_login_banner, Shapes::ShapeRef.new(shape: PostAuthenticationLoginBanner, location_name: "PostAuthenticationLoginBanner"))
     CreateServerRequest.add_member(:pre_authentication_login_banner, Shapes::ShapeRef.new(shape: PreAuthenticationLoginBanner, location_name: "PreAuthenticationLoginBanner"))
     CreateServerRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: Protocols, location_name: "Protocols"))
@@ -413,6 +428,7 @@ module Aws::Transfer
     CreateServerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateServerRequest.add_member(:workflow_details, Shapes::ShapeRef.new(shape: WorkflowDetails, location_name: "WorkflowDetails"))
     CreateServerRequest.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
+    CreateServerRequest.add_member(:s3_storage_options, Shapes::ShapeRef.new(shape: S3StorageOptions, location_name: "S3StorageOptions"))
     CreateServerRequest.struct_class = Types::CreateServerRequest
 
     CreateServerResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -615,6 +631,8 @@ module Aws::Transfer
     DescribedConnector.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
     DescribedConnector.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     DescribedConnector.add_member(:sftp_config, Shapes::ShapeRef.new(shape: SftpConnectorConfig, location_name: "SftpConfig"))
+    DescribedConnector.add_member(:service_managed_egress_ip_addresses, Shapes::ShapeRef.new(shape: ServiceManagedEgressIpAddresses, location_name: "ServiceManagedEgressIpAddresses"))
+    DescribedConnector.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: ConnectorSecurityPolicyName, location_name: "SecurityPolicyName"))
     DescribedConnector.struct_class = Types::DescribedConnector
 
     DescribedExecution.add_member(:execution_id, Shapes::ShapeRef.new(shape: ExecutionId, location_name: "ExecutionId"))
@@ -650,6 +668,9 @@ module Aws::Transfer
     DescribedSecurityPolicy.add_member(:ssh_kexs, Shapes::ShapeRef.new(shape: SecurityPolicyOptions, location_name: "SshKexs"))
     DescribedSecurityPolicy.add_member(:ssh_macs, Shapes::ShapeRef.new(shape: SecurityPolicyOptions, location_name: "SshMacs"))
     DescribedSecurityPolicy.add_member(:tls_ciphers, Shapes::ShapeRef.new(shape: SecurityPolicyOptions, location_name: "TlsCiphers"))
+    DescribedSecurityPolicy.add_member(:ssh_host_key_algorithms, Shapes::ShapeRef.new(shape: SecurityPolicyOptions, location_name: "SshHostKeyAlgorithms"))
+    DescribedSecurityPolicy.add_member(:type, Shapes::ShapeRef.new(shape: SecurityPolicyResourceType, location_name: "Type"))
+    DescribedSecurityPolicy.add_member(:protocols, Shapes::ShapeRef.new(shape: SecurityPolicyProtocols, location_name: "Protocols"))
     DescribedSecurityPolicy.struct_class = Types::DescribedSecurityPolicy
 
     DescribedServer.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -661,7 +682,7 @@ module Aws::Transfer
     DescribedServer.add_member(:host_key_fingerprint, Shapes::ShapeRef.new(shape: HostKeyFingerprint, location_name: "HostKeyFingerprint"))
     DescribedServer.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: IdentityProviderDetails, location_name: "IdentityProviderDetails"))
     DescribedServer.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProviderType"))
-    DescribedServer.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
+    DescribedServer.add_member(:logging_role, Shapes::ShapeRef.new(shape: NullableRole, location_name: "LoggingRole"))
     DescribedServer.add_member(:post_authentication_login_banner, Shapes::ShapeRef.new(shape: PostAuthenticationLoginBanner, location_name: "PostAuthenticationLoginBanner"))
     DescribedServer.add_member(:pre_authentication_login_banner, Shapes::ShapeRef.new(shape: PreAuthenticationLoginBanner, location_name: "PreAuthenticationLoginBanner"))
     DescribedServer.add_member(:protocols, Shapes::ShapeRef.new(shape: Protocols, location_name: "Protocols"))
@@ -672,6 +693,8 @@ module Aws::Transfer
     DescribedServer.add_member(:user_count, Shapes::ShapeRef.new(shape: UserCount, location_name: "UserCount"))
     DescribedServer.add_member(:workflow_details, Shapes::ShapeRef.new(shape: WorkflowDetails, location_name: "WorkflowDetails"))
     DescribedServer.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
+    DescribedServer.add_member(:s3_storage_options, Shapes::ShapeRef.new(shape: S3StorageOptions, location_name: "S3StorageOptions"))
+    DescribedServer.add_member(:as_2_service_managed_egress_ip_addresses, Shapes::ShapeRef.new(shape: ServiceManagedEgressIpAddresses, location_name: "As2ServiceManagedEgressIpAddresses"))
     DescribedServer.struct_class = Types::DescribedServer
 
     DescribedUser.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -728,6 +751,7 @@ module Aws::Transfer
 
     HomeDirectoryMapEntry.add_member(:entry, Shapes::ShapeRef.new(shape: MapEntry, required: true, location_name: "Entry"))
     HomeDirectoryMapEntry.add_member(:target, Shapes::ShapeRef.new(shape: MapTarget, required: true, location_name: "Target"))
+    HomeDirectoryMapEntry.add_member(:type, Shapes::ShapeRef.new(shape: MapType, location_name: "Type"))
     HomeDirectoryMapEntry.struct_class = Types::HomeDirectoryMapEntry
 
     HomeDirectoryMappings.member = Shapes::ShapeRef.new(shape: HomeDirectoryMapEntry)
@@ -1027,6 +1051,9 @@ module Aws::Transfer
     S3InputFileLocation.add_member(:key, Shapes::ShapeRef.new(shape: S3Key, location_name: "Key"))
     S3InputFileLocation.struct_class = Types::S3InputFileLocation
 
+    S3StorageOptions.add_member(:directory_listing_optimization, Shapes::ShapeRef.new(shape: DirectoryListingOptimization, location_name: "DirectoryListingOptimization"))
+    S3StorageOptions.struct_class = Types::S3StorageOptions
+
     S3Tag.add_member(:key, Shapes::ShapeRef.new(shape: S3TagKey, required: true, location_name: "Key"))
     S3Tag.add_member(:value, Shapes::ShapeRef.new(shape: S3TagValue, required: true, location_name: "Value"))
     S3Tag.struct_class = Types::S3Tag
@@ -1041,6 +1068,8 @@ module Aws::Transfer
 
     SecurityPolicyOptions.member = Shapes::ShapeRef.new(shape: SecurityPolicyOption)
 
+    SecurityPolicyProtocols.member = Shapes::ShapeRef.new(shape: SecurityPolicyProtocol)
+
     SendWorkflowStepStateRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "WorkflowId"))
     SendWorkflowStepStateRequest.add_member(:execution_id, Shapes::ShapeRef.new(shape: ExecutionId, required: true, location_name: "ExecutionId"))
     SendWorkflowStepStateRequest.add_member(:token, Shapes::ShapeRef.new(shape: CallbackToken, required: true, location_name: "Token"))
@@ -1048,6 +1077,8 @@ module Aws::Transfer
     SendWorkflowStepStateRequest.struct_class = Types::SendWorkflowStepStateRequest
 
     SendWorkflowStepStateResponse.struct_class = Types::SendWorkflowStepStateResponse
+
+    ServiceManagedEgressIpAddresses.member = Shapes::ShapeRef.new(shape: ServiceManagedEgressIpAddress)
 
     ServiceMetadata.add_member(:user_details, Shapes::ShapeRef.new(shape: UserDetails, required: true, location_name: "UserDetails"))
     ServiceMetadata.struct_class = Types::ServiceMetadata
@@ -1067,6 +1098,16 @@ module Aws::Transfer
     SshPublicKey.struct_class = Types::SshPublicKey
 
     SshPublicKeys.member = Shapes::ShapeRef.new(shape: SshPublicKey)
+
+    StartDirectoryListingRequest.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
+    StartDirectoryListingRequest.add_member(:remote_directory_path, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "RemoteDirectoryPath"))
+    StartDirectoryListingRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location_name: "MaxItems"))
+    StartDirectoryListingRequest.add_member(:output_directory_path, Shapes::ShapeRef.new(shape: FilePath, required: true, location_name: "OutputDirectoryPath"))
+    StartDirectoryListingRequest.struct_class = Types::StartDirectoryListingRequest
+
+    StartDirectoryListingResponse.add_member(:listing_id, Shapes::ShapeRef.new(shape: ListingId, required: true, location_name: "ListingId"))
+    StartDirectoryListingResponse.add_member(:output_file_name, Shapes::ShapeRef.new(shape: OutputFileName, required: true, location_name: "OutputFileName"))
+    StartDirectoryListingResponse.struct_class = Types::StartDirectoryListingResponse
 
     StartFileTransferRequest.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
     StartFileTransferRequest.add_member(:send_file_paths, Shapes::ShapeRef.new(shape: FilePaths, location_name: "SendFilePaths"))
@@ -1175,6 +1216,7 @@ module Aws::Transfer
     UpdateConnectorRequest.add_member(:access_role, Shapes::ShapeRef.new(shape: Role, location_name: "AccessRole"))
     UpdateConnectorRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
     UpdateConnectorRequest.add_member(:sftp_config, Shapes::ShapeRef.new(shape: SftpConnectorConfig, location_name: "SftpConfig"))
+    UpdateConnectorRequest.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: ConnectorSecurityPolicyName, location_name: "SecurityPolicyName"))
     UpdateConnectorRequest.struct_class = Types::UpdateConnectorRequest
 
     UpdateConnectorResponse.add_member(:connector_id, Shapes::ShapeRef.new(shape: ConnectorId, required: true, location_name: "ConnectorId"))
@@ -1210,6 +1252,7 @@ module Aws::Transfer
     UpdateServerRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     UpdateServerRequest.add_member(:workflow_details, Shapes::ShapeRef.new(shape: WorkflowDetails, location_name: "WorkflowDetails"))
     UpdateServerRequest.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
+    UpdateServerRequest.add_member(:s3_storage_options, Shapes::ShapeRef.new(shape: S3StorageOptions, location_name: "S3StorageOptions"))
     UpdateServerRequest.struct_class = Types::UpdateServerRequest
 
     UpdateServerResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -1263,6 +1306,7 @@ module Aws::Transfer
         "endpointPrefix" => "transfer",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "AWS Transfer",
         "serviceFullName" => "AWS Transfer Family",
         "serviceId" => "Transfer",
@@ -1278,11 +1322,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateAccessRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateAccessResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
       end)
 
       api.add_operation(:create_agreement, Seahorse::Model::Operation.new.tap do |o|
@@ -1291,12 +1335,12 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateAgreementRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateAgreementResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
       end)
 
       api.add_operation(:create_connector, Seahorse::Model::Operation.new.tap do |o|
@@ -1305,12 +1349,12 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateConnectorRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateConnectorResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
       end)
 
       api.add_operation(:create_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -1319,11 +1363,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateProfileResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:create_server, Seahorse::Model::Operation.new.tap do |o|
@@ -1332,13 +1376,13 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateServerRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateServerResponse)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:create_user, Seahorse::Model::Operation.new.tap do |o|
@@ -1347,11 +1391,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateUserRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateUserResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
       end)
 
       api.add_operation(:create_workflow, Seahorse::Model::Operation.new.tap do |o|
@@ -1360,12 +1404,12 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateWorkflowRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateWorkflowResponse)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_access, Seahorse::Model::Operation.new.tap do |o|
@@ -1374,10 +1418,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteAccessRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:delete_agreement, Seahorse::Model::Operation.new.tap do |o|
@@ -1386,10 +1430,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteAgreementRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:delete_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -1398,10 +1442,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:delete_connector, Seahorse::Model::Operation.new.tap do |o|
@@ -1410,10 +1454,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteConnectorRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:delete_host_key, Seahorse::Model::Operation.new.tap do |o|
@@ -1422,11 +1466,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteHostKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:delete_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -1435,10 +1479,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:delete_server, Seahorse::Model::Operation.new.tap do |o|
@@ -1447,11 +1491,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteServerRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_ssh_public_key, Seahorse::Model::Operation.new.tap do |o|
@@ -1460,11 +1504,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteSshPublicKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:delete_user, Seahorse::Model::Operation.new.tap do |o|
@@ -1473,10 +1517,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteUserRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:delete_workflow, Seahorse::Model::Operation.new.tap do |o|
@@ -1485,11 +1529,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteWorkflowRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:describe_access, Seahorse::Model::Operation.new.tap do |o|
@@ -1498,10 +1542,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeAccessRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAccessResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:describe_agreement, Seahorse::Model::Operation.new.tap do |o|
@@ -1510,10 +1554,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeAgreementRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAgreementResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:describe_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -1522,10 +1566,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeCertificateResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:describe_connector, Seahorse::Model::Operation.new.tap do |o|
@@ -1534,10 +1578,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeConnectorRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeConnectorResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:describe_execution, Seahorse::Model::Operation.new.tap do |o|
@@ -1546,10 +1590,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeExecutionRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeExecutionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:describe_host_key, Seahorse::Model::Operation.new.tap do |o|
@@ -1558,10 +1602,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeHostKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeHostKeyResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:describe_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -1570,10 +1614,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeProfileResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:describe_security_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1582,10 +1626,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeSecurityPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeSecurityPolicyResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:describe_server, Seahorse::Model::Operation.new.tap do |o|
@@ -1594,10 +1638,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeServerRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeServerResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:describe_user, Seahorse::Model::Operation.new.tap do |o|
@@ -1606,10 +1650,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeUserRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeUserResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:describe_workflow, Seahorse::Model::Operation.new.tap do |o|
@@ -1618,10 +1662,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeWorkflowRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeWorkflowResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:import_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -1630,10 +1674,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ImportCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: ImportCertificateResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:import_host_key, Seahorse::Model::Operation.new.tap do |o|
@@ -1642,12 +1686,12 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ImportHostKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: ImportHostKeyResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
       end)
 
       api.add_operation(:import_ssh_public_key, Seahorse::Model::Operation.new.tap do |o|
@@ -1656,12 +1700,12 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ImportSshPublicKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: ImportSshPublicKeyResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
       end)
 
       api.add_operation(:list_accesses, Seahorse::Model::Operation.new.tap do |o|
@@ -1670,11 +1714,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListAccessesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAccessesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1689,11 +1733,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListAgreementsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAgreementsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1708,11 +1752,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListCertificatesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCertificatesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1727,11 +1771,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListConnectorsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListConnectorsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1746,11 +1790,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListExecutionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListExecutionsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1765,11 +1809,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListHostKeysRequest)
         o.output = Shapes::ShapeRef.new(shape: ListHostKeysResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:list_profiles, Seahorse::Model::Operation.new.tap do |o|
@@ -1778,11 +1822,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListProfilesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListProfilesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1797,10 +1841,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListSecurityPoliciesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSecurityPoliciesResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1815,10 +1859,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListServersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListServersResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1833,10 +1877,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1851,11 +1895,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListUsersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListUsersResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1870,10 +1914,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListWorkflowsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListWorkflowsResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1888,12 +1932,25 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SendWorkflowStepStateRequest)
         o.output = Shapes::ShapeRef.new(shape: SendWorkflowStepStateResponse)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:start_directory_listing, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDirectoryListing"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartDirectoryListingRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDirectoryListingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:start_file_transfer, Seahorse::Model::Operation.new.tap do |o|
@@ -1902,11 +1959,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartFileTransferRequest)
         o.output = Shapes::ShapeRef.new(shape: StartFileTransferResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:start_server, Seahorse::Model::Operation.new.tap do |o|
@@ -1915,11 +1972,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StartServerRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:stop_server, Seahorse::Model::Operation.new.tap do |o|
@@ -1928,11 +1985,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StopServerRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1941,10 +1998,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:test_connection, Seahorse::Model::Operation.new.tap do |o|
@@ -1953,10 +2010,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TestConnectionRequest)
         o.output = Shapes::ShapeRef.new(shape: TestConnectionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:test_identity_provider, Seahorse::Model::Operation.new.tap do |o|
@@ -1965,10 +2022,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TestIdentityProviderRequest)
         o.output = Shapes::ShapeRef.new(shape: TestIdentityProviderResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1977,10 +2034,10 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:update_access, Seahorse::Model::Operation.new.tap do |o|
@@ -1989,12 +2046,12 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateAccessRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAccessResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
       end)
 
       api.add_operation(:update_agreement, Seahorse::Model::Operation.new.tap do |o|
@@ -2003,12 +2060,12 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateAgreementRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAgreementResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
       end)
 
       api.add_operation(:update_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -2017,11 +2074,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateCertificateRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateCertificateResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:update_connector, Seahorse::Model::Operation.new.tap do |o|
@@ -2030,12 +2087,12 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateConnectorRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateConnectorResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
       end)
 
       api.add_operation(:update_host_key, Seahorse::Model::Operation.new.tap do |o|
@@ -2044,11 +2101,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateHostKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateHostKeyResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:update_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -2057,11 +2114,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateProfileRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateProfileResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:update_server, Seahorse::Model::Operation.new.tap do |o|
@@ -2070,14 +2127,14 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateServerRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateServerResponse)
-        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_user, Seahorse::Model::Operation.new.tap do |o|
@@ -2086,11 +2143,11 @@ module Aws::Transfer
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateUserRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateUserResponse)
-        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
-        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
     end
 

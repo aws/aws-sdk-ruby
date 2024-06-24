@@ -1,0 +1,786 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MarketplaceCatalog
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AmiProductEntityIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AmiProductFilters
+      attr_accessor entity_id: Types::AmiProductEntityIdFilter
+      attr_accessor last_modified_date: Types::AmiProductLastModifiedDateFilter
+      attr_accessor product_title: Types::AmiProductTitleFilter
+      attr_accessor visibility: Types::AmiProductVisibilityFilter
+      SENSITIVE: []
+    end
+
+    class AmiProductLastModifiedDateFilter
+      attr_accessor date_range: Types::AmiProductLastModifiedDateFilterDateRange
+      SENSITIVE: []
+    end
+
+    class AmiProductLastModifiedDateFilterDateRange
+      attr_accessor after_value: ::String
+      attr_accessor before_value: ::String
+      SENSITIVE: []
+    end
+
+    class AmiProductSort
+      attr_accessor sort_by: ("EntityId" | "LastModifiedDate" | "ProductTitle" | "Visibility")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class AmiProductSummary
+      attr_accessor product_title: ::String
+      attr_accessor visibility: ("Limited" | "Public" | "Restricted" | "Draft")
+      SENSITIVE: []
+    end
+
+    class AmiProductTitleFilter
+      attr_accessor value_list: ::Array[::String]
+      attr_accessor wild_card_value: ::String
+      SENSITIVE: []
+    end
+
+    class AmiProductVisibilityFilter
+      attr_accessor value_list: ::Array[("Limited" | "Public" | "Restricted" | "Draft")]
+      SENSITIVE: []
+    end
+
+    class BatchDescribeEntitiesRequest
+      attr_accessor entity_request_list: ::Array[Types::EntityRequest]
+      SENSITIVE: []
+    end
+
+    class BatchDescribeEntitiesResponse
+      attr_accessor entity_details: ::Hash[::String, Types::EntityDetail]
+      attr_accessor errors: ::Hash[::String, Types::BatchDescribeErrorDetail]
+      SENSITIVE: []
+    end
+
+    class BatchDescribeErrorDetail
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class CancelChangeSetRequest
+      attr_accessor catalog: ::String
+      attr_accessor change_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelChangeSetResponse
+      attr_accessor change_set_id: ::String
+      attr_accessor change_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Change
+      attr_accessor change_type: ::String
+      attr_accessor entity: Types::Entity
+      attr_accessor entity_tags: ::Array[Types::Tag]
+      attr_accessor details: ::String
+      attr_accessor details_document: untyped
+      attr_accessor change_name: ::String
+      SENSITIVE: []
+    end
+
+    class ChangeSetSummaryListItem
+      attr_accessor change_set_id: ::String
+      attr_accessor change_set_arn: ::String
+      attr_accessor change_set_name: ::String
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      attr_accessor status: ("PREPARING" | "APPLYING" | "SUCCEEDED" | "CANCELLED" | "FAILED")
+      attr_accessor entity_id_list: ::Array[::String]
+      attr_accessor failure_code: ("CLIENT_ERROR" | "SERVER_FAULT")
+      SENSITIVE: []
+    end
+
+    class ChangeSummary
+      attr_accessor change_type: ::String
+      attr_accessor entity: Types::Entity
+      attr_accessor details: ::String
+      attr_accessor details_document: untyped
+      attr_accessor error_detail_list: ::Array[Types::ErrorDetail]
+      attr_accessor change_name: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerProductEntityIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ContainerProductFilters
+      attr_accessor entity_id: Types::ContainerProductEntityIdFilter
+      attr_accessor last_modified_date: Types::ContainerProductLastModifiedDateFilter
+      attr_accessor product_title: Types::ContainerProductTitleFilter
+      attr_accessor visibility: Types::ContainerProductVisibilityFilter
+      SENSITIVE: []
+    end
+
+    class ContainerProductLastModifiedDateFilter
+      attr_accessor date_range: Types::ContainerProductLastModifiedDateFilterDateRange
+      SENSITIVE: []
+    end
+
+    class ContainerProductLastModifiedDateFilterDateRange
+      attr_accessor after_value: ::String
+      attr_accessor before_value: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerProductSort
+      attr_accessor sort_by: ("EntityId" | "LastModifiedDate" | "ProductTitle" | "Visibility")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ContainerProductSummary
+      attr_accessor product_title: ::String
+      attr_accessor visibility: ("Limited" | "Public" | "Restricted" | "Draft")
+      SENSITIVE: []
+    end
+
+    class ContainerProductTitleFilter
+      attr_accessor value_list: ::Array[::String]
+      attr_accessor wild_card_value: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerProductVisibilityFilter
+      attr_accessor value_list: ::Array[("Limited" | "Public" | "Restricted" | "Draft")]
+      SENSITIVE: []
+    end
+
+    class DataProductEntityIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DataProductFilters
+      attr_accessor entity_id: Types::DataProductEntityIdFilter
+      attr_accessor product_title: Types::DataProductTitleFilter
+      attr_accessor visibility: Types::DataProductVisibilityFilter
+      attr_accessor last_modified_date: Types::DataProductLastModifiedDateFilter
+      SENSITIVE: []
+    end
+
+    class DataProductLastModifiedDateFilter
+      attr_accessor date_range: Types::DataProductLastModifiedDateFilterDateRange
+      SENSITIVE: []
+    end
+
+    class DataProductLastModifiedDateFilterDateRange
+      attr_accessor after_value: ::String
+      attr_accessor before_value: ::String
+      SENSITIVE: []
+    end
+
+    class DataProductSort
+      attr_accessor sort_by: ("EntityId" | "ProductTitle" | "Visibility" | "LastModifiedDate")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class DataProductSummary
+      attr_accessor product_title: ::String
+      attr_accessor visibility: ("Limited" | "Public" | "Restricted" | "Unavailable" | "Draft")
+      SENSITIVE: []
+    end
+
+    class DataProductTitleFilter
+      attr_accessor value_list: ::Array[::String]
+      attr_accessor wild_card_value: ::String
+      SENSITIVE: []
+    end
+
+    class DataProductVisibilityFilter
+      attr_accessor value_list: ::Array[("Limited" | "Public" | "Restricted" | "Unavailable" | "Draft")]
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class DescribeChangeSetRequest
+      attr_accessor catalog: ::String
+      attr_accessor change_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeChangeSetResponse
+      attr_accessor change_set_id: ::String
+      attr_accessor change_set_arn: ::String
+      attr_accessor change_set_name: ::String
+      attr_accessor intent: ("VALIDATE" | "APPLY")
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      attr_accessor status: ("PREPARING" | "APPLYING" | "SUCCEEDED" | "CANCELLED" | "FAILED")
+      attr_accessor failure_code: ("CLIENT_ERROR" | "SERVER_FAULT")
+      attr_accessor failure_description: ::String
+      attr_accessor change_set: ::Array[Types::ChangeSummary]
+      SENSITIVE: []
+    end
+
+    class DescribeEntityRequest
+      attr_accessor catalog: ::String
+      attr_accessor entity_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEntityResponse
+      attr_accessor entity_type: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor entity_arn: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor details: ::String
+      attr_accessor details_document: untyped
+      SENSITIVE: []
+    end
+
+    class Entity
+      attr_accessor type: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class EntityDetail
+      attr_accessor entity_type: ::String
+      attr_accessor entity_arn: ::String
+      attr_accessor entity_identifier: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor details_document: untyped
+      SENSITIVE: []
+    end
+
+    class EntityRequest
+      attr_accessor catalog: ::String
+      attr_accessor entity_id: ::String
+      SENSITIVE: []
+    end
+
+    class EntitySummary
+      attr_accessor name: ::String
+      attr_accessor entity_type: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor entity_arn: ::String
+      attr_accessor last_modified_date: ::String
+      attr_accessor visibility: ::String
+      attr_accessor ami_product_summary: Types::AmiProductSummary
+      attr_accessor container_product_summary: Types::ContainerProductSummary
+      attr_accessor data_product_summary: Types::DataProductSummary
+      attr_accessor saa_s_product_summary: Types::SaaSProductSummary
+      attr_accessor offer_summary: Types::OfferSummary
+      attr_accessor resale_authorization_summary: Types::ResaleAuthorizationSummary
+      SENSITIVE: []
+    end
+
+    class EntityTypeFilters
+      attr_accessor data_product_filters: Types::DataProductFilters
+      attr_accessor saa_s_product_filters: Types::SaaSProductFilters
+      attr_accessor ami_product_filters: Types::AmiProductFilters
+      attr_accessor offer_filters: Types::OfferFilters
+      attr_accessor container_product_filters: Types::ContainerProductFilters
+      attr_accessor resale_authorization_filters: Types::ResaleAuthorizationFilters
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DataProductFilters < EntityTypeFilters
+      end
+      class SaaSProductFilters < EntityTypeFilters
+      end
+      class AmiProductFilters < EntityTypeFilters
+      end
+      class OfferFilters < EntityTypeFilters
+      end
+      class ContainerProductFilters < EntityTypeFilters
+      end
+      class ResaleAuthorizationFilters < EntityTypeFilters
+      end
+      class Unknown < EntityTypeFilters
+      end
+    end
+
+    class EntityTypeSort
+      attr_accessor data_product_sort: Types::DataProductSort
+      attr_accessor saa_s_product_sort: Types::SaaSProductSort
+      attr_accessor ami_product_sort: Types::AmiProductSort
+      attr_accessor offer_sort: Types::OfferSort
+      attr_accessor container_product_sort: Types::ContainerProductSort
+      attr_accessor resale_authorization_sort: Types::ResaleAuthorizationSort
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DataProductSort < EntityTypeSort
+      end
+      class SaaSProductSort < EntityTypeSort
+      end
+      class AmiProductSort < EntityTypeSort
+      end
+      class OfferSort < EntityTypeSort
+      end
+      class ContainerProductSort < EntityTypeSort
+      end
+      class ResaleAuthorizationSort < EntityTypeSort
+      end
+      class Unknown < EntityTypeSort
+      end
+    end
+
+    class ErrorDetail
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResponse
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListChangeSetsRequest
+      attr_accessor catalog: ::String
+      attr_accessor filter_list: ::Array[Types::Filter]
+      attr_accessor sort: Types::Sort
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChangeSetsResponse
+      attr_accessor change_set_summary_list: ::Array[Types::ChangeSetSummaryListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEntitiesRequest
+      attr_accessor catalog: ::String
+      attr_accessor entity_type: ::String
+      attr_accessor filter_list: ::Array[Types::Filter]
+      attr_accessor sort: Types::Sort
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor ownership_type: ("SELF" | "SHARED")
+      attr_accessor entity_type_filters: Types::EntityTypeFilters
+      attr_accessor entity_type_sort: Types::EntityTypeSort
+      SENSITIVE: []
+    end
+
+    class ListEntitiesResponse
+      attr_accessor entity_summary_list: ::Array[Types::EntitySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class OfferAvailabilityEndDateFilter
+      attr_accessor date_range: Types::OfferAvailabilityEndDateFilterDateRange
+      SENSITIVE: []
+    end
+
+    class OfferAvailabilityEndDateFilterDateRange
+      attr_accessor after_value: ::String
+      attr_accessor before_value: ::String
+      SENSITIVE: []
+    end
+
+    class OfferBuyerAccountsFilter
+      attr_accessor wild_card_value: ::String
+      SENSITIVE: []
+    end
+
+    class OfferEntityIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OfferFilters
+      attr_accessor entity_id: Types::OfferEntityIdFilter
+      attr_accessor name: Types::OfferNameFilter
+      attr_accessor product_id: Types::OfferProductIdFilter
+      attr_accessor resale_authorization_id: Types::OfferResaleAuthorizationIdFilter
+      attr_accessor release_date: Types::OfferReleaseDateFilter
+      attr_accessor availability_end_date: Types::OfferAvailabilityEndDateFilter
+      attr_accessor buyer_accounts: Types::OfferBuyerAccountsFilter
+      attr_accessor state: Types::OfferStateFilter
+      attr_accessor targeting: Types::OfferTargetingFilter
+      attr_accessor last_modified_date: Types::OfferLastModifiedDateFilter
+      SENSITIVE: []
+    end
+
+    class OfferLastModifiedDateFilter
+      attr_accessor date_range: Types::OfferLastModifiedDateFilterDateRange
+      SENSITIVE: []
+    end
+
+    class OfferLastModifiedDateFilterDateRange
+      attr_accessor after_value: ::String
+      attr_accessor before_value: ::String
+      SENSITIVE: []
+    end
+
+    class OfferNameFilter
+      attr_accessor value_list: ::Array[::String]
+      attr_accessor wild_card_value: ::String
+      SENSITIVE: []
+    end
+
+    class OfferProductIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OfferReleaseDateFilter
+      attr_accessor date_range: Types::OfferReleaseDateFilterDateRange
+      SENSITIVE: []
+    end
+
+    class OfferReleaseDateFilterDateRange
+      attr_accessor after_value: ::String
+      attr_accessor before_value: ::String
+      SENSITIVE: []
+    end
+
+    class OfferResaleAuthorizationIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class OfferSort
+      attr_accessor sort_by: ("EntityId" | "Name" | "ProductId" | "ResaleAuthorizationId" | "ReleaseDate" | "AvailabilityEndDate" | "BuyerAccounts" | "State" | "Targeting" | "LastModifiedDate")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class OfferStateFilter
+      attr_accessor value_list: ::Array[("Draft" | "Released")]
+      SENSITIVE: []
+    end
+
+    class OfferSummary
+      attr_accessor name: ::String
+      attr_accessor product_id: ::String
+      attr_accessor resale_authorization_id: ::String
+      attr_accessor release_date: ::String
+      attr_accessor availability_end_date: ::String
+      attr_accessor buyer_accounts: ::Array[::String]
+      attr_accessor state: ("Draft" | "Released")
+      attr_accessor targeting: ::Array[("BuyerAccounts" | "ParticipatingPrograms" | "CountryCodes" | "None")]
+      SENSITIVE: []
+    end
+
+    class OfferTargetingFilter
+      attr_accessor value_list: ::Array[("BuyerAccounts" | "ParticipatingPrograms" | "CountryCodes" | "None")]
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class ResaleAuthorizationAvailabilityEndDateFilter
+      attr_accessor date_range: Types::ResaleAuthorizationAvailabilityEndDateFilterDateRange
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationAvailabilityEndDateFilterDateRange
+      attr_accessor after_value: ::String
+      attr_accessor before_value: ::String
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationCreatedDateFilter
+      attr_accessor date_range: Types::ResaleAuthorizationCreatedDateFilterDateRange
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationCreatedDateFilterDateRange
+      attr_accessor after_value: ::String
+      attr_accessor before_value: ::String
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationEntityIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationFilters
+      attr_accessor entity_id: Types::ResaleAuthorizationEntityIdFilter
+      attr_accessor name: Types::ResaleAuthorizationNameFilter
+      attr_accessor product_id: Types::ResaleAuthorizationProductIdFilter
+      attr_accessor created_date: Types::ResaleAuthorizationCreatedDateFilter
+      attr_accessor availability_end_date: Types::ResaleAuthorizationAvailabilityEndDateFilter
+      attr_accessor manufacturer_account_id: Types::ResaleAuthorizationManufacturerAccountIdFilter
+      attr_accessor product_name: Types::ResaleAuthorizationProductNameFilter
+      attr_accessor manufacturer_legal_name: Types::ResaleAuthorizationManufacturerLegalNameFilter
+      attr_accessor reseller_account_id: Types::ResaleAuthorizationResellerAccountIDFilter
+      attr_accessor reseller_legal_name: Types::ResaleAuthorizationResellerLegalNameFilter
+      attr_accessor status: Types::ResaleAuthorizationStatusFilter
+      attr_accessor offer_extended_status: Types::ResaleAuthorizationOfferExtendedStatusFilter
+      attr_accessor last_modified_date: Types::ResaleAuthorizationLastModifiedDateFilter
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationLastModifiedDateFilter
+      attr_accessor date_range: Types::ResaleAuthorizationLastModifiedDateFilterDateRange
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationLastModifiedDateFilterDateRange
+      attr_accessor after_value: ::String
+      attr_accessor before_value: ::String
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationManufacturerAccountIdFilter
+      attr_accessor value_list: ::Array[::String]
+      attr_accessor wild_card_value: ::String
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationManufacturerLegalNameFilter
+      attr_accessor value_list: ::Array[::String]
+      attr_accessor wild_card_value: ::String
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationNameFilter
+      attr_accessor value_list: ::Array[::String]
+      attr_accessor wild_card_value: ::String
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationOfferExtendedStatusFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationProductIdFilter
+      attr_accessor value_list: ::Array[::String]
+      attr_accessor wild_card_value: ::String
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationProductNameFilter
+      attr_accessor value_list: ::Array[::String]
+      attr_accessor wild_card_value: ::String
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationResellerAccountIDFilter
+      attr_accessor value_list: ::Array[::String]
+      attr_accessor wild_card_value: ::String
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationResellerLegalNameFilter
+      attr_accessor value_list: ::Array[::String]
+      attr_accessor wild_card_value: ::String
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationSort
+      attr_accessor sort_by: ("EntityId" | "Name" | "ProductId" | "ProductName" | "ManufacturerAccountId" | "ManufacturerLegalName" | "ResellerAccountID" | "ResellerLegalName" | "Status" | "OfferExtendedStatus" | "CreatedDate" | "AvailabilityEndDate" | "LastModifiedDate")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationStatusFilter
+      attr_accessor value_list: ::Array[("Draft" | "Active" | "Restricted")]
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationSummary
+      attr_accessor name: ::String
+      attr_accessor product_id: ::String
+      attr_accessor product_name: ::String
+      attr_accessor manufacturer_account_id: ::String
+      attr_accessor manufacturer_legal_name: ::String
+      attr_accessor reseller_account_id: ::String
+      attr_accessor reseller_legal_name: ::String
+      attr_accessor status: ("Draft" | "Active" | "Restricted")
+      attr_accessor offer_extended_status: ::String
+      attr_accessor created_date: ::String
+      attr_accessor availability_end_date: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotSupportedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SaaSProductEntityIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SaaSProductFilters
+      attr_accessor entity_id: Types::SaaSProductEntityIdFilter
+      attr_accessor product_title: Types::SaaSProductTitleFilter
+      attr_accessor visibility: Types::SaaSProductVisibilityFilter
+      attr_accessor last_modified_date: Types::SaaSProductLastModifiedDateFilter
+      SENSITIVE: []
+    end
+
+    class SaaSProductLastModifiedDateFilter
+      attr_accessor date_range: Types::SaaSProductLastModifiedDateFilterDateRange
+      SENSITIVE: []
+    end
+
+    class SaaSProductLastModifiedDateFilterDateRange
+      attr_accessor after_value: ::String
+      attr_accessor before_value: ::String
+      SENSITIVE: []
+    end
+
+    class SaaSProductSort
+      attr_accessor sort_by: ("EntityId" | "ProductTitle" | "Visibility" | "LastModifiedDate")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class SaaSProductSummary
+      attr_accessor product_title: ::String
+      attr_accessor visibility: ("Limited" | "Public" | "Restricted" | "Draft")
+      SENSITIVE: []
+    end
+
+    class SaaSProductTitleFilter
+      attr_accessor value_list: ::Array[::String]
+      attr_accessor wild_card_value: ::String
+      SENSITIVE: []
+    end
+
+    class SaaSProductVisibilityFilter
+      attr_accessor value_list: ::Array[("Limited" | "Public" | "Restricted" | "Draft")]
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Sort
+      attr_accessor sort_by: ::String
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class StartChangeSetRequest
+      attr_accessor catalog: ::String
+      attr_accessor change_set: ::Array[Types::Change]
+      attr_accessor change_set_name: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor change_set_tags: ::Array[Types::Tag]
+      attr_accessor intent: ("VALIDATE" | "APPLY")
+      SENSITIVE: []
+    end
+
+    class StartChangeSetResponse
+      attr_accessor change_set_id: ::String
+      attr_accessor change_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -10,6 +10,36 @@
 module Aws::WorkSpaces
   module Types
 
+    # @!attribute [rw] link_id
+    #   The identifier of the account link.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A string of up to 64 ASCII characters that Amazon EFS uses to ensure
+    #   idempotent creation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AcceptAccountLinkInvitationRequest AWS API Documentation
+    #
+    class AcceptAccountLinkInvitationRequest < Struct.new(
+      :link_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_link
+    #   Information about the account link.
+    #   @return [Types::AccountLink]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AcceptAccountLinkInvitationResult AWS API Documentation
+    #
+    class AcceptAccountLinkInvitationResult < Struct.new(
+      :account_link)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The user is not authorized to access a resource.
     #
     # @!attribute [rw] message
@@ -19,6 +49,35 @@ module Aws::WorkSpaces
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about about the account link.
+    #
+    # @!attribute [rw] account_link_id
+    #   The identifier of the account link.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_link_status
+    #   The status of the account link.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_account_id
+    #   The identifier of the source account.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_account_id
+    #   The identifier of the target account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AccountLink AWS API Documentation
+    #
+    class AccountLink < Struct.new(
+      :account_link_id,
+      :account_link_status,
+      :source_account_id,
+      :target_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -373,6 +432,19 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # The `TargetAccountId` is already linked or invited.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an Amazon Connect client add-in.
     #
     # @!attribute [rw] add_in_id
@@ -550,6 +622,36 @@ module Aws::WorkSpaces
     #
     class CopyWorkspaceImageResult < Struct.new(
       :image_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_account_id
+    #   The identifier of the target account.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A string of up to 64 ASCII characters that Amazon EFS uses to ensure
+    #   idempotent creation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateAccountLinkInvitationRequest AWS API Documentation
+    #
+    class CreateAccountLinkInvitationRequest < Struct.new(
+      :target_account_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_link
+    #   Information about the account link.
+    #   @return [Types::AccountLink]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateAccountLinkInvitationResult AWS API Documentation
+    #
+    class CreateAccountLinkInvitationResult < Struct.new(
+      :account_link)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -944,6 +1046,27 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # Describes the data replication settings.
+    #
+    # @!attribute [rw] data_replication
+    #   Indicates whether data replication is enabled, and if enabled, the
+    #   type of data replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_snapshot_time
+    #   The date and time at which the last successful snapshot was taken of
+    #   the primary WorkSpace used for replicating data.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DataReplicationSettings AWS API Documentation
+    #
+    class DataReplicationSettings < Struct.new(
+      :data_replication,
+      :recovery_snapshot_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Returns default client branding attributes that were imported. These
     # attributes display on the client login screen.
     #
@@ -1136,6 +1259,36 @@ module Aws::WorkSpaces
       :custom_security_group_id,
       :user_enabled_as_local_administrator,
       :enable_maintenance_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] link_id
+    #   The identifier of the account link.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A string of up to 64 ASCII characters that Amazon EFS uses to ensure
+    #   idempotent creation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteAccountLinkInvitationRequest AWS API Documentation
+    #
+    class DeleteAccountLinkInvitationRequest < Struct.new(
+      :link_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_link
+    #   Information about the account link.
+    #   @return [Types::AccountLink]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteAccountLinkInvitationResult AWS API Documentation
+    #
+    class DeleteAccountLinkInvitationResult < Struct.new(
+      :account_link)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1371,11 +1524,16 @@ module Aws::WorkSpaces
     #   Amazon WorkSpaces to manage the WorkSpace.
     #   @return [String]
     #
+    # @!attribute [rw] dedicated_tenancy_account_type
+    #   The type of linked account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccountResult AWS API Documentation
     #
     class DescribeAccountResult < Struct.new(
       :dedicated_tenancy_support,
-      :dedicated_tenancy_management_cidr_range)
+      :dedicated_tenancy_management_cidr_range,
+      :dedicated_tenancy_account_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2137,6 +2295,10 @@ module Aws::WorkSpaces
     #   paginated, provide this token to receive the next set of results.
     #   @return [String]
     #
+    # @!attribute [rw] workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesRequest AWS API Documentation
     #
     class DescribeWorkspacesRequest < Struct.new(
@@ -2145,7 +2307,8 @@ module Aws::WorkSpaces
       :user_name,
       :bundle_id,
       :limit,
-      :next_token)
+      :next_token,
+      :workspace_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2332,6 +2495,35 @@ module Aws::WorkSpaces
       :workspace_id,
       :error_code,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] link_id
+    #   The identifier of the account to link.
+    #   @return [String]
+    #
+    # @!attribute [rw] linked_account_id
+    #   The identifier of the account link
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/GetAccountLinkRequest AWS API Documentation
+    #
+    class GetAccountLinkRequest < Struct.new(
+      :link_id,
+      :linked_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_link
+    #   The account link of the account link to retrieve.
+    #   @return [Types::AccountLink]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/GetAccountLinkResult AWS API Documentation
+    #
+    class GetAccountLinkResult < Struct.new(
+      :account_link)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2571,6 +2763,19 @@ module Aws::WorkSpaces
     #
     class IncompatibleApplicationsException < Aws::EmptyStructure; end
 
+    # Unexpected server error occured.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/InternalServerException AWS API Documentation
+    #
+    class InternalServerException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # One or more parameter values are not valid.
     #
     # @!attribute [rw] message
@@ -2809,6 +3014,47 @@ module Aws::WorkSpaces
     class IpRuleItem < Struct.new(
       :ip_rule,
       :rule_desc)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] link_status_filter
+    #   Filters the account based on their link status.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of accounts to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ListAccountLinksRequest AWS API Documentation
+    #
+    class ListAccountLinksRequest < Struct.new(
+      :link_status_filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_links
+    #   Information about the account links.
+    #   @return [Array<Types::AccountLink>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ListAccountLinksResult AWS API Documentation
+    #
+    class ListAccountLinksResult < Struct.new(
+      :account_links,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3093,11 +3339,16 @@ module Aws::WorkSpaces
     #   The properties of the WorkSpace.
     #   @return [Types::WorkspaceProperties]
     #
+    # @!attribute [rw] data_replication
+    #   Indicates the data replication status.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspacePropertiesRequest AWS API Documentation
     #
     class ModifyWorkspacePropertiesRequest < Struct.new(
       :workspace_id,
-      :workspace_properties)
+      :workspace_properties,
+      :data_replication)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3359,6 +3610,35 @@ module Aws::WorkSpaces
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RegisterWorkspaceDirectoryResult AWS API Documentation
     #
     class RegisterWorkspaceDirectoryResult < Aws::EmptyStructure; end
+
+    # @!attribute [rw] link_id
+    #   The identifier of the account link
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The client token of the account link invitation to reject.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RejectAccountLinkInvitationRequest AWS API Documentation
+    #
+    class RejectAccountLinkInvitationRequest < Struct.new(
+      :link_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_link
+    #   Information about the account link.
+    #   @return [Types::AccountLink]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RejectAccountLinkInvitationResult AWS API Documentation
+    #
+    class RejectAccountLinkInvitationResult < Struct.new(
+      :account_link)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Describes the related WorkSpace. The related WorkSpace could be a
     # standby WorkSpace or primary WorkSpace related to the specified
@@ -3680,13 +3960,45 @@ module Aws::WorkSpaces
     #   The tags associated with the standby WorkSpace.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] data_replication
+    #   Indicates whether data replication is enabled, and if enabled, the
+    #   type of data replication.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StandbyWorkspace AWS API Documentation
     #
     class StandbyWorkspace < Struct.new(
       :primary_workspace_id,
       :volume_encryption_key,
       :directory_id,
-      :tags)
+      :tags,
+      :data_replication)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the properties of the related standby WorkSpaces.
+    #
+    # @!attribute [rw] standby_workspace_id
+    #   The identifier of the standby WorkSpace
+    #   @return [String]
+    #
+    # @!attribute [rw] data_replication
+    #   Indicates whether data replication is enabled, and if enabled, the
+    #   type of data replication.
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_snapshot_time
+    #   The date and time at which the last successful snapshot was taken of
+    #   the primary WorkSpace used for replicating data.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StandbyWorkspacesProperties AWS API Documentation
+    #
+    class StandbyWorkspacesProperties < Struct.new(
+      :standby_workspace_id,
+      :data_replication,
+      :recovery_snapshot_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4031,6 +4343,20 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # You either haven't provided a `TargetAccountId` or are using the same
+    # value for `TargetAccountId` and `SourceAccountId`.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the WorkSpace application.
     #
     # @!attribute [rw] application_id
@@ -4121,6 +4447,46 @@ module Aws::WorkSpaces
     # @!attribute [rw] state
     #   The operational state of the WorkSpace.
     #
+    #   * `PENDING` – The WorkSpace is in a waiting state (for example, the
+    #     WorkSpace is being created).
+    #
+    #   * `AVAILABLE` – The WorkSpace is running and has passed the health
+    #     checks.
+    #
+    #   * `IMPAIRED` – Refer to `UNHEALTHY` state.
+    #
+    #   * `UNHEALTHY` – The WorkSpace is not responding to health checks.
+    #
+    #   * `REBOOTING` – The WorkSpace is being rebooted (restarted).
+    #
+    #   * `STARTING` – The WorkSpace is starting up and health checks are
+    #     being run.
+    #
+    #   * `REBUILDING` – The WorkSpace is being rebuilt.
+    #
+    #   * `RESTORING` – The WorkSpace is being restored.
+    #
+    #   * `MAINTENANCE` – The WorkSpace is undergoing scheduled maintenance
+    #     by Amazon Web Services.
+    #
+    #   * `ADMIN_MAINTENANCE` – The WorkSpace is undergoing maintenance by
+    #     the WorkSpaces administrator.
+    #
+    #   * `TERMINATING` – The WorkSpace is being deleted.
+    #
+    #   * `TERMINATED` – The WorkSpace has been deleted.
+    #
+    #   * `SUSPENDED` – The WorkSpace has been suspended for image creation.
+    #
+    #   * `UPDATING` – The WorkSpace is undergoing an update.
+    #
+    #   * `STOPPING` – The WorkSpace is being stopped.
+    #
+    #   * `STOPPED` – The WorkSpace has been stopped.
+    #
+    #   * `ERROR ` – The WorkSpace is an error state (for example, an error
+    #     occurred during startup).
+    #
     #   <note markdown="1"> After a WorkSpace is terminated, the `TERMINATED` state is returned
     #   only briefly before the WorkSpace directory metadata is cleaned up,
     #   so this state is rarely returned. To confirm that a WorkSpace is
@@ -4175,6 +4541,10 @@ module Aws::WorkSpaces
     #   Indicates whether the data stored on the root volume is encrypted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #   @return [String]
+    #
     # @!attribute [rw] workspace_properties
     #   The properties of the WorkSpace.
     #   @return [Types::WorkspaceProperties]
@@ -4187,6 +4557,14 @@ module Aws::WorkSpaces
     #   The standby WorkSpace or primary WorkSpace related to the specified
     #   WorkSpace.
     #   @return [Array<Types::RelatedWorkspaceProperties>]
+    #
+    # @!attribute [rw] data_replication_settings
+    #   Indicates the settings of the data replication.
+    #   @return [Types::DataReplicationSettings]
+    #
+    # @!attribute [rw] standby_workspaces_properties
+    #   The properties of the standby WorkSpace
+    #   @return [Array<Types::StandbyWorkspacesProperties>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/Workspace AWS API Documentation
     #
@@ -4204,9 +4582,12 @@ module Aws::WorkSpaces
       :volume_encryption_key,
       :user_volume_encryption_enabled,
       :root_volume_encryption_enabled,
+      :workspace_name,
       :workspace_properties,
       :modification_states,
-      :related_workspaces)
+      :related_workspaces,
+      :data_replication_settings,
+      :standby_workspaces_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4774,6 +5155,9 @@ module Aws::WorkSpaces
     # @!attribute [rw] user_name
     #   The user name of the user for the WorkSpace. This user name must
     #   exist in the Directory Service directory for the WorkSpace.
+    #
+    #   The reserved keyword, `[UNDEFINED]`, is used when creating
+    #   user-decoupled WorkSpaces.
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
@@ -4802,6 +5186,10 @@ module Aws::WorkSpaces
     #   The tags for the WorkSpace.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceRequest AWS API Documentation
     #
     class WorkspaceRequest < Struct.new(
@@ -4812,7 +5200,8 @@ module Aws::WorkSpaces
       :user_volume_encryption_enabled,
       :root_volume_encryption_enabled,
       :workspace_properties,
-      :tags)
+      :tags,
+      :workspace_name)
       SENSITIVE = []
       include Aws::Structure
     end

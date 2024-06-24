@@ -640,9 +640,12 @@ module Aws::ACMPCA
     # Your private CA writes CRLs to an S3 bucket that you specify in the
     # **S3BucketName** parameter. You can hide the name of your bucket by
     # specifying a value for the **CustomCname** parameter. Your private CA
-    # copies the CNAME or the S3 bucket name to the **CRL Distribution
-    # Points** extension of each certificate it issues. Your S3 bucket
-    # policy must give write permission to Amazon Web Services Private CA.
+    # by default copies the CNAME or the S3 bucket name to the **CRL
+    # Distribution Points** extension of each certificate it issues. If you
+    # want to configure this default behavior to be something different, you
+    # can set the **CrlDistributionPointExtensionConfiguration** parameter.
+    # Your S3 bucket policy must give write permission to Amazon Web
+    # Services Private CA.
     #
     # Amazon Web Services Private CA assets that are stored in Amazon S3 can
     # be protected with encryption. For more information, see [Encrypting
@@ -713,7 +716,7 @@ module Aws::ACMPCA
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption
+    # [1]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#crl-encryption
     # [2]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html
     #
     # @!attribute [rw] enabled
@@ -798,6 +801,13 @@ module Aws::ACMPCA
     #   [1]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#s3-bpa
     #   @return [String]
     #
+    # @!attribute [rw] crl_distribution_point_extension_configuration
+    #   Configures the behavior of the CRL Distribution Point extension for
+    #   certificates issued by your certificate authority. If this field is
+    #   not provided, then the CRl Distribution Point Extension will be
+    #   present and contain the default CRL URL.
+    #   @return [Types::CrlDistributionPointExtensionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CrlConfiguration AWS API Documentation
     #
     class CrlConfiguration < Struct.new(
@@ -805,7 +815,38 @@ module Aws::ACMPCA
       :expiration_in_days,
       :custom_cname,
       :s3_bucket_name,
-      :s3_object_acl)
+      :s3_object_acl,
+      :crl_distribution_point_extension_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration information for the default behavior of the CRL
+    # Distribution Point (CDP) extension in certificates issued by your CA.
+    # This extension contains a link to download the CRL, so you can check
+    # whether a certificate has been revoked. To choose whether you want
+    # this extension omitted or not in certificates issued by your CA, you
+    # can set the **OmitExtension** parameter.
+    #
+    # @!attribute [rw] omit_extension
+    #   Configures whether the CRL Distribution Point extension should be
+    #   populated with the default URL to the CRL. If set to `true`, then
+    #   the CDP extension will not be present in any certificates issued by
+    #   that CA unless otherwise specified through CSR or API passthrough.
+    #
+    #   <note markdown="1"> Only set this if you have another way to distribute the CRL
+    #   Distribution Points ffor certificates issued by your CA, such as the
+    #   Matter Distributed Compliance Ledger
+    #
+    #    This configuration cannot be enabled with a custom CNAME set.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-pca-2017-08-22/CrlDistributionPointExtensionConfiguration AWS API Documentation
+    #
+    class CrlDistributionPointExtensionConfiguration < Struct.new(
+      :omit_extension)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1785,6 +1826,9 @@ module Aws::ACMPCA
     #   additional items exist beyond the number you specify, the
     #   `NextToken` element is sent in the response. Use this `NextToken`
     #   value in a subsequent request to retrieve additional items.
+    #
+    #   Although the maximum value is 1000, the action only returns a
+    #   maximum of 100 items.
     #   @return [Integer]
     #
     # @!attribute [rw] resource_owner

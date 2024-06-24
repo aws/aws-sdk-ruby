@@ -1,0 +1,58 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IAM
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/UserPolicy.html
+    class UserPolicy
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/UserPolicy.html#initialize-instance_method
+      def initialize: (String user_name, String name, Hash[Symbol, untyped] options) -> void
+                    | (user_name: String, name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/UserPolicy.html#user_name-instance_method
+      def user_name: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/UserPolicy.html#name-instance_method
+      def name: () -> String
+      alias policy_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/UserPolicy.html#policy_document-instance_method
+      def policy_document: () -> ::String
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/UserPolicy.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/UserPolicy.html#data-instance_method
+      def data: () -> Types::GetUserPolicyResponse
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/UserPolicy.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/UserPolicy.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/UserPolicy.html#put-instance_method
+      def put: (
+                 policy_document: ::String
+               ) -> ::Aws::EmptyStructure
+             | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/UserPolicy.html#user-instance_method
+      def user: () -> User
+
+      class Collection < ::Aws::Resources::Collection[UserPolicy]
+      end
+    end
+  end
+end

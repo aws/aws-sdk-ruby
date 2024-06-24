@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Omics
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Omics
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::Omics
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::Omics
     #   @option options [Aws::Omics::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Omics::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -414,10 +439,10 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Accepts a share for an analytics store.
+    # Accept a resource share request.
     #
     # @option params [required, String] :share_id
-    #   The ID for a share offer for analytics store data.
+    #   The ID of the resource share.
     #
     # @return [Types::AcceptShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -568,7 +593,7 @@ module Aws::Omics
     #       {
     #         part_number: 1, # required
     #         part_source: "SOURCE1", # required, accepts SOURCE1, SOURCE2
-    #         checksum: "String", # required
+    #         checksum: "CompleteReadSetUploadPartListItemChecksumString", # required
     #       },
     #     ],
     #   })
@@ -780,7 +805,7 @@ module Aws::Omics
     # @option params [String] :generated_from
     #   Where the source originated.
     #
-    # @option params [required, String] :reference_arn
+    # @option params [String] :reference_arn
     #   The ARN of the reference.
     #
     # @option params [required, String] :name
@@ -811,11 +836,11 @@ module Aws::Omics
     #   resp = client.create_multipart_read_set_upload({
     #     sequence_store_id: "SequenceStoreId", # required
     #     client_token: "ClientToken",
-    #     source_file_type: "FASTQ", # required, accepts FASTQ, BAM, CRAM
+    #     source_file_type: "FASTQ", # required, accepts FASTQ, BAM, CRAM, UBAM
     #     subject_id: "SubjectId", # required
     #     sample_id: "SampleId", # required
     #     generated_from: "GeneratedFrom",
-    #     reference_arn: "ReferenceArn", # required
+    #     reference_arn: "ReferenceArn",
     #     name: "ReadSetName", # required
     #     description: "ReadSetDescription",
     #     tags: {
@@ -827,7 +852,7 @@ module Aws::Omics
     #
     #   resp.sequence_store_id #=> String
     #   resp.upload_id #=> String
-    #   resp.source_file_type #=> String, one of "FASTQ", "BAM", "CRAM"
+    #   resp.source_file_type #=> String, one of "FASTQ", "BAM", "CRAM", "UBAM"
     #   resp.subject_id #=> String
     #   resp.sample_id #=> String
     #   resp.generated_from #=> String
@@ -993,6 +1018,9 @@ module Aws::Omics
     #   An S3 location that is used to store files that have failed a direct
     #   upload.
     #
+    # @option params [String] :e_tag_algorithm_family
+    #   The ETag algorithm family to use for ingested read sets.
+    #
     # @return [Types::CreateSequenceStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSequenceStoreResponse#id #id} => String
@@ -1002,6 +1030,7 @@ module Aws::Omics
     #   * {Types::CreateSequenceStoreResponse#sse_config #sse_config} => Types::SseConfig
     #   * {Types::CreateSequenceStoreResponse#creation_time #creation_time} => Time
     #   * {Types::CreateSequenceStoreResponse#fallback_location #fallback_location} => String
+    #   * {Types::CreateSequenceStoreResponse#e_tag_algorithm_family #e_tag_algorithm_family} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1017,6 +1046,7 @@ module Aws::Omics
     #     },
     #     client_token: "ClientToken",
     #     fallback_location: "S3Destination",
+    #     e_tag_algorithm_family: "MD5up", # accepts MD5up, SHA256up, SHA512up
     #   })
     #
     # @example Response structure
@@ -1029,6 +1059,7 @@ module Aws::Omics
     #   resp.sse_config.key_arn #=> String
     #   resp.creation_time #=> Time
     #   resp.fallback_location #=> String
+    #   resp.e_tag_algorithm_family #=> String, one of "MD5up", "SHA256up", "SHA512up"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateSequenceStore AWS API Documentation
     #
@@ -1039,19 +1070,27 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Creates a share offer that can be accepted outside the account by a
-    # subscriber. The share is created by the owner and accepted by the
-    # principal subscriber.
+    # Creates a cross-account shared resource. The resource owner makes an
+    # offer to share the resource with the principal subscriber (an AWS user
+    # with a different account than the resource owner).
+    #
+    # The following resources support cross-account sharing:
+    #
+    # * Healthomics variant stores
+    #
+    # * Healthomics annotation stores
+    #
+    # * Private workflows
     #
     # @option params [required, String] :resource_arn
-    #   The resource ARN for the analytics store to be shared.
+    #   The ARN of the resource to be shared.
     #
     # @option params [required, String] :principal_subscriber
-    #   The principal subscriber is the account being given access to the
-    #   analytics store data through the share offer.
+    #   The principal subscriber is the account being offered shared access to
+    #   the resource.
     #
     # @option params [String] :share_name
-    #   A name given to the share.
+    #   A name that the owner defines for the share.
     #
     # @return [Types::CreateShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1165,7 +1204,7 @@ module Aws::Omics
     #   A parameter template for the workflow.
     #
     # @option params [Integer] :storage_capacity
-    #   A storage capacity for the workflow in gigabytes.
+    #   The storage capacity for the workflow in gibibytes.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags for the workflow.
@@ -1413,10 +1452,12 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Deletes a share of an analytics store.
+    # Deletes a resource share. If you are the resource owner, the
+    # subscriber will no longer have access to the shared resource. If you
+    # are the subscriber, this operation deletes your access to the share.
     #
     # @option params [required, String] :share_id
-    #   The ID for the share request to be deleted.
+    #   The ID for the resource share to be deleted.
     #
     # @return [Types::DeleteShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1888,7 +1929,7 @@ module Aws::Omics
     #   resp.sources #=> Array
     #   resp.sources[0].source_files.source1 #=> String
     #   resp.sources[0].source_files.source2 #=> String
-    #   resp.sources[0].source_file_type #=> String, one of "FASTQ", "BAM", "CRAM"
+    #   resp.sources[0].source_file_type #=> String, one of "FASTQ", "BAM", "CRAM", "UBAM"
     #   resp.sources[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "FINISHED", "FAILED"
     #   resp.sources[0].status_message #=> String
     #   resp.sources[0].subject_id #=> String
@@ -1958,7 +1999,7 @@ module Aws::Omics
     #   resp.status #=> String, one of "ARCHIVED", "ACTIVATING", "ACTIVE", "DELETING", "DELETED", "PROCESSING_UPLOAD", "UPLOAD_FAILED"
     #   resp.name #=> String
     #   resp.description #=> String
-    #   resp.file_type #=> String, one of "FASTQ", "BAM", "CRAM"
+    #   resp.file_type #=> String, one of "FASTQ", "BAM", "CRAM", "UBAM"
     #   resp.creation_time #=> Time
     #   resp.sequence_information.total_read_count #=> Integer
     #   resp.sequence_information.total_base_count #=> Integer
@@ -1968,15 +2009,18 @@ module Aws::Omics
     #   resp.files.source1.total_parts #=> Integer
     #   resp.files.source1.part_size #=> Integer
     #   resp.files.source1.content_length #=> Integer
+    #   resp.files.source1.s3_access.s3_uri #=> String
     #   resp.files.source2.total_parts #=> Integer
     #   resp.files.source2.part_size #=> Integer
     #   resp.files.source2.content_length #=> Integer
+    #   resp.files.source2.s3_access.s3_uri #=> String
     #   resp.files.index.total_parts #=> Integer
     #   resp.files.index.part_size #=> Integer
     #   resp.files.index.content_length #=> Integer
+    #   resp.files.index.s3_access.s3_uri #=> String
     #   resp.status_message #=> String
     #   resp.creation_type #=> String, one of "IMPORT", "UPLOAD"
-    #   resp.etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up"
+    #   resp.etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up", "FASTQ_SHA256up", "BAM_SHA256up", "CRAM_SHA256up", "FASTQ_SHA512up", "BAM_SHA512up", "CRAM_SHA512up"
     #   resp.etag.source1 #=> String
     #   resp.etag.source2 #=> String
     #
@@ -2133,9 +2177,11 @@ module Aws::Omics
     #   resp.files.source.total_parts #=> Integer
     #   resp.files.source.part_size #=> Integer
     #   resp.files.source.content_length #=> Integer
+    #   resp.files.source.s3_access.s3_uri #=> String
     #   resp.files.index.total_parts #=> Integer
     #   resp.files.index.part_size #=> Integer
     #   resp.files.index.content_length #=> Integer
+    #   resp.files.index.s3_access.s3_uri #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetReferenceMetadata AWS API Documentation
     #
@@ -2187,6 +2233,9 @@ module Aws::Omics
 
     # Gets information about a workflow run.
     #
+    # If a workflow is shared with you, you cannot export information about
+    # the run.
+    #
     # @option params [required, String] :id
     #   The run's ID.
     #
@@ -2220,6 +2269,12 @@ module Aws::Omics
     #   * {Types::GetRunResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetRunResponse#accelerators #accelerators} => String
     #   * {Types::GetRunResponse#retention_mode #retention_mode} => String
+    #   * {Types::GetRunResponse#failure_reason #failure_reason} => String
+    #   * {Types::GetRunResponse#log_location #log_location} => Types::RunLogLocation
+    #   * {Types::GetRunResponse#uuid #uuid} => String
+    #   * {Types::GetRunResponse#run_output_uri #run_output_uri} => String
+    #   * {Types::GetRunResponse#storage_type #storage_type} => String
+    #   * {Types::GetRunResponse#workflow_owner_id #workflow_owner_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2256,6 +2311,13 @@ module Aws::Omics
     #   resp.tags["TagKey"] #=> String
     #   resp.accelerators #=> String, one of "GPU"
     #   resp.retention_mode #=> String, one of "RETAIN", "REMOVE"
+    #   resp.failure_reason #=> String
+    #   resp.log_location.engine_log_stream #=> String
+    #   resp.log_location.run_log_stream #=> String
+    #   resp.uuid #=> String
+    #   resp.run_output_uri #=> String
+    #   resp.storage_type #=> String, one of "STATIC", "DYNAMIC"
+    #   resp.workflow_owner_id #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2320,7 +2382,7 @@ module Aws::Omics
     # Gets information about a workflow run task.
     #
     # @option params [required, String] :id
-    #   The task's ID.
+    #   The workflow run ID.
     #
     # @option params [required, String] :task_id
     #   The task's ID.
@@ -2339,6 +2401,7 @@ module Aws::Omics
     #   * {Types::GetRunTaskResponse#log_stream #log_stream} => String
     #   * {Types::GetRunTaskResponse#gpus #gpus} => Integer
     #   * {Types::GetRunTaskResponse#instance_type #instance_type} => String
+    #   * {Types::GetRunTaskResponse#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2361,6 +2424,7 @@ module Aws::Omics
     #   resp.log_stream #=> String
     #   resp.gpus #=> Integer
     #   resp.instance_type #=> String
+    #   resp.failure_reason #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2391,6 +2455,8 @@ module Aws::Omics
     #   * {Types::GetSequenceStoreResponse#sse_config #sse_config} => Types::SseConfig
     #   * {Types::GetSequenceStoreResponse#creation_time #creation_time} => Time
     #   * {Types::GetSequenceStoreResponse#fallback_location #fallback_location} => String
+    #   * {Types::GetSequenceStoreResponse#s3_access #s3_access} => Types::SequenceStoreS3Access
+    #   * {Types::GetSequenceStoreResponse#e_tag_algorithm_family #e_tag_algorithm_family} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2408,6 +2474,9 @@ module Aws::Omics
     #   resp.sse_config.key_arn #=> String
     #   resp.creation_time #=> Time
     #   resp.fallback_location #=> String
+    #   resp.s3_access.s3_uri #=> String
+    #   resp.s3_access.s3_access_point_arn #=> String
+    #   resp.e_tag_algorithm_family #=> String, one of "MD5up", "SHA256up", "SHA512up"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetSequenceStore AWS API Documentation
     #
@@ -2418,10 +2487,10 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Retrieves the metadata for a share.
+    # Retrieves the metadata for the specified resource share.
     #
     # @option params [required, String] :share_id
-    #   The generated ID for a share.
+    #   The ID of the share.
     #
     # @return [Types::GetShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2437,6 +2506,7 @@ module Aws::Omics
     #
     #   resp.share.share_id #=> String
     #   resp.share.resource_arn #=> String
+    #   resp.share.resource_id #=> String
     #   resp.share.principal_subscriber #=> String
     #   resp.share.owner_id #=> String
     #   resp.share.status #=> String, one of "PENDING", "ACTIVATING", "ACTIVE", "DELETING", "DELETED", "FAILED"
@@ -2571,6 +2641,8 @@ module Aws::Omics
 
     # Gets information about a workflow.
     #
+    # If a workflow is shared with you, you cannot export the workflow.
+    #
     # @option params [required, String] :id
     #   The workflow's ID.
     #
@@ -2579,6 +2651,9 @@ module Aws::Omics
     #
     # @option params [Array<String>] :export
     #   The export format for the workflow.
+    #
+    # @option params [String] :workflow_owner_id
+    #   The ID of the workflow owner.
     #
     # @return [Types::GetWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2606,6 +2681,7 @@ module Aws::Omics
     #     id: "WorkflowId", # required
     #     type: "PRIVATE", # accepts PRIVATE, READY2RUN
     #     export: ["DEFINITION"], # accepts DEFINITION
+    #     workflow_owner_id: "WorkflowOwnerId",
     #   })
     #
     # @example Response structure
@@ -2824,7 +2900,9 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Lists all multipart read set uploads and their statuses.
+    # Lists multipart read set uploads and for in progress uploads. Once the
+    # upload is completed, a read set is created and the upload will no
+    # longer be returned in the response.
     #
     # @option params [required, String] :sequence_store_id
     #   The Sequence Store ID used for the multipart uploads.
@@ -2858,7 +2936,7 @@ module Aws::Omics
     #   resp.uploads #=> Array
     #   resp.uploads[0].sequence_store_id #=> String
     #   resp.uploads[0].upload_id #=> String
-    #   resp.uploads[0].source_file_type #=> String, one of "FASTQ", "BAM", "CRAM"
+    #   resp.uploads[0].source_file_type #=> String, one of "FASTQ", "BAM", "CRAM", "UBAM"
     #   resp.uploads[0].subject_id #=> String
     #   resp.uploads[0].sample_id #=> String
     #   resp.uploads[0].generated_from #=> String
@@ -3139,7 +3217,7 @@ module Aws::Omics
     #     filter: {
     #       name: "ReadSetName",
     #       status: "ARCHIVED", # accepts ARCHIVED, ACTIVATING, ACTIVE, DELETING, DELETED, PROCESSING_UPLOAD, UPLOAD_FAILED
-    #       reference_arn: "ReferenceArn",
+    #       reference_arn: "ReferenceArnFilter",
     #       created_after: Time.now,
     #       created_before: Time.now,
     #       sample_id: "SampleId",
@@ -3162,7 +3240,7 @@ module Aws::Omics
     #   resp.read_sets[0].name #=> String
     #   resp.read_sets[0].description #=> String
     #   resp.read_sets[0].reference_arn #=> String
-    #   resp.read_sets[0].file_type #=> String, one of "FASTQ", "BAM", "CRAM"
+    #   resp.read_sets[0].file_type #=> String, one of "FASTQ", "BAM", "CRAM", "UBAM"
     #   resp.read_sets[0].sequence_information.total_read_count #=> Integer
     #   resp.read_sets[0].sequence_information.total_base_count #=> Integer
     #   resp.read_sets[0].sequence_information.generated_from #=> String
@@ -3170,7 +3248,7 @@ module Aws::Omics
     #   resp.read_sets[0].creation_time #=> Time
     #   resp.read_sets[0].status_message #=> String
     #   resp.read_sets[0].creation_type #=> String, one of "IMPORT", "UPLOAD"
-    #   resp.read_sets[0].etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up"
+    #   resp.read_sets[0].etag.algorithm #=> String, one of "FASTQ_MD5up", "BAM_MD5up", "CRAM_MD5up", "FASTQ_SHA256up", "BAM_SHA256up", "CRAM_SHA256up", "FASTQ_SHA512up", "BAM_SHA512up", "CRAM_SHA512up"
     #   resp.read_sets[0].etag.source1 #=> String
     #   resp.read_sets[0].etag.source2 #=> String
     #
@@ -3501,6 +3579,7 @@ module Aws::Omics
     #   resp.items[0].creation_time #=> Time
     #   resp.items[0].start_time #=> Time
     #   resp.items[0].stop_time #=> Time
+    #   resp.items[0].storage_type #=> String, one of "STATIC", "DYNAMIC"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListRuns AWS API Documentation
@@ -3555,6 +3634,7 @@ module Aws::Omics
     #   resp.sequence_stores[0].sse_config.key_arn #=> String
     #   resp.sequence_stores[0].creation_time #=> Time
     #   resp.sequence_stores[0].fallback_location #=> String
+    #   resp.sequence_stores[0].e_tag_algorithm_family #=> String, one of "MD5up", "SHA256up", "SHA512up"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ListSequenceStores AWS API Documentation
     #
@@ -3565,13 +3645,15 @@ module Aws::Omics
       req.send_request(options)
     end
 
-    # Lists all shares associated with an account.
+    # Retrieves the resource shares associated with an account. Use the
+    # filter parameter to retrieve a specific subset of the shares.
     #
     # @option params [required, String] :resource_owner
-    #   The account that owns the analytics store shared.
+    #   The account that owns the resource shares.
     #
     # @option params [Types::Filter] :filter
-    #   Attributes used to filter for a specific subset of shares.
+    #   Attributes that you use to filter for a specific subset of resource
+    #   shares.
     #
     # @option params [String] :next_token
     #   Next token returned in the response of a previous
@@ -3595,6 +3677,7 @@ module Aws::Omics
     #     filter: {
     #       resource_arns: ["String"],
     #       status: ["PENDING"], # accepts PENDING, ACTIVATING, ACTIVE, DELETING, DELETED, FAILED
+    #       type: ["VARIANT_STORE"], # accepts VARIANT_STORE, ANNOTATION_STORE, WORKFLOW
     #     },
     #     next_token: "String",
     #     max_results: 1,
@@ -3605,6 +3688,7 @@ module Aws::Omics
     #   resp.shares #=> Array
     #   resp.shares[0].share_id #=> String
     #   resp.shares[0].resource_arn #=> String
+    #   resp.shares[0].resource_id #=> String
     #   resp.shares[0].principal_subscriber #=> String
     #   resp.shares[0].owner_id #=> String
     #   resp.shares[0].status #=> String, one of "PENDING", "ACTIVATING", "ACTIVE", "DELETING", "DELETED", "FAILED"
@@ -3772,10 +3856,10 @@ module Aws::Omics
     # Retrieves a list of workflows.
     #
     # @option params [String] :type
-    #   The workflows' type.
+    #   Filter the list by workflow type.
     #
     # @option params [String] :name
-    #   The workflows' name.
+    #   Filter the list by workflow name.
     #
     # @option params [String] :starting_token
     #   Specify the pagination token from a previous request to retrieve the
@@ -4039,11 +4123,11 @@ module Aws::Omics
     #           source1: "S3Uri", # required
     #           source2: "S3Uri",
     #         },
-    #         source_file_type: "FASTQ", # required, accepts FASTQ, BAM, CRAM
+    #         source_file_type: "FASTQ", # required, accepts FASTQ, BAM, CRAM, UBAM
     #         subject_id: "SubjectId", # required
     #         sample_id: "SampleId", # required
     #         generated_from: "GeneratedFrom",
-    #         reference_arn: "ReferenceArn", # required
+    #         reference_arn: "ReferenceArn",
     #         name: "ReadSetName",
     #         description: "ReadSetDescription",
     #         tags: {
@@ -4131,10 +4215,24 @@ module Aws::Omics
     # Starts a workflow run. To duplicate a run, specify the run's ID and a
     # role ARN. The remaining parameters are copied from the previous run.
     #
+    # StartRun will not support re-run for a workflow that is shared with
+    # you.
+    #
     # The total number of runs in your account is subject to a quota per
     # Region. To avoid needing to delete runs manually, you can set the
     # retention mode to `REMOVE`. Runs with this setting are deleted
     # automatically when the run quoata is exceeded.
+    #
+    # By default, the run uses STATIC storage. For STATIC storage, set the
+    # `storageCapacity` field. You can set the storage type to DYNAMIC. You
+    # do not set `storageCapacity`, because HealthOmics dynamically scales
+    # the storage up or down as required. For more information about static
+    # and dynamic storage, see [Running workflows][1] in the *AWS
+    # HealthOmics User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html
     #
     # @option params [String] :workflow_id
     #   The run's workflow ID.
@@ -4166,7 +4264,9 @@ module Aws::Omics
     #   additional encoding or escaping.
     #
     # @option params [Integer] :storage_capacity
-    #   A storage capacity for the run in gigabytes.
+    #   A storage capacity for the run in gibibytes. This field is not
+    #   required if the storage type is dynamic (the system ignores any value
+    #   that you enter).
     #
     # @option params [String] :output_uri
     #   An output URI for the run.
@@ -4187,12 +4287,23 @@ module Aws::Omics
     # @option params [String] :retention_mode
     #   The retention mode for the run.
     #
+    # @option params [String] :storage_type
+    #   The run's storage type. By default, the run uses STATIC storage type,
+    #   which allocates a fixed amount of storage. If you set the storage type
+    #   to DYNAMIC, HealthOmics dynamically scales the storage up or down,
+    #   based on file system utilization.
+    #
+    # @option params [String] :workflow_owner_id
+    #   The ID of the workflow owner.
+    #
     # @return [Types::StartRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartRunResponse#arn #arn} => String
     #   * {Types::StartRunResponse#id #id} => String
     #   * {Types::StartRunResponse#status #status} => String
     #   * {Types::StartRunResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::StartRunResponse#uuid #uuid} => String
+    #   * {Types::StartRunResponse#run_output_uri #run_output_uri} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4214,6 +4325,8 @@ module Aws::Omics
     #     },
     #     request_id: "RunRequestId", # required
     #     retention_mode: "RETAIN", # accepts RETAIN, REMOVE
+    #     storage_type: "STATIC", # accepts STATIC, DYNAMIC
+    #     workflow_owner_id: "WorkflowOwnerId",
     #   })
     #
     # @example Response structure
@@ -4223,6 +4336,8 @@ module Aws::Omics
     #   resp.status #=> String, one of "PENDING", "STARTING", "RUNNING", "STOPPING", "COMPLETED", "DELETED", "CANCELLED", "FAILED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.uuid #=> String
+    #   resp.run_output_uri #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartRun AWS API Documentation
     #
@@ -4615,7 +4730,7 @@ module Aws::Omics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

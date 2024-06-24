@@ -1,0 +1,25 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DataSync
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class InternalException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def error_code: () -> ::String
+      end
+      class InvalidRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def error_code: () -> ::String
+        def datasync_error_code: () -> ::String
+      end
+    end
+  end
+end

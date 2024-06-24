@@ -1,0 +1,451 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::WorkLink
+  module Types
+
+    class AssociateDomainRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor acm_certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateDomainResponse < Aws::EmptyStructure
+    end
+
+    class AssociateWebsiteAuthorizationProviderRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor authorization_provider_type: ("SAML")
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateWebsiteAuthorizationProviderResponse
+      attr_accessor authorization_provider_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateWebsiteCertificateAuthorityRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor certificate: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateWebsiteCertificateAuthorityResponse
+      attr_accessor website_ca_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFleetRequest
+      attr_accessor fleet_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor optimize_for_end_user_location: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateFleetResponse
+      attr_accessor fleet_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFleetRequest
+      attr_accessor fleet_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFleetResponse < Aws::EmptyStructure
+    end
+
+    class DescribeAuditStreamConfigurationRequest
+      attr_accessor fleet_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAuditStreamConfigurationResponse
+      attr_accessor audit_stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCompanyNetworkConfigurationRequest
+      attr_accessor fleet_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCompanyNetworkConfigurationResponse
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeDevicePolicyConfigurationRequest
+      attr_accessor fleet_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDevicePolicyConfigurationResponse
+      attr_accessor device_ca_certificate: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDeviceRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor device_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDeviceResponse
+      attr_accessor status: ("ACTIVE" | "SIGNED_OUT")
+      attr_accessor model: ::String
+      attr_accessor manufacturer: ::String
+      attr_accessor operating_system: ::String
+      attr_accessor operating_system_version: ::String
+      attr_accessor patch_level: ::String
+      attr_accessor first_accessed_time: ::Time
+      attr_accessor last_accessed_time: ::Time
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDomainRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDomainResponse
+      attr_accessor domain_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor domain_status: ("PENDING_VALIDATION" | "ASSOCIATING" | "ACTIVE" | "INACTIVE" | "DISASSOCIATING" | "DISASSOCIATED" | "FAILED_TO_ASSOCIATE" | "FAILED_TO_DISASSOCIATE")
+      attr_accessor acm_certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFleetMetadataRequest
+      attr_accessor fleet_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFleetMetadataResponse
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor fleet_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor optimize_for_end_user_location: bool
+      attr_accessor company_code: ::String
+      attr_accessor fleet_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED_TO_CREATE" | "FAILED_TO_DELETE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeIdentityProviderConfigurationRequest
+      attr_accessor fleet_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeIdentityProviderConfigurationResponse
+      attr_accessor identity_provider_type: ("SAML")
+      attr_accessor service_provider_saml_metadata: ::String
+      attr_accessor identity_provider_saml_metadata: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWebsiteCertificateAuthorityRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor website_ca_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWebsiteCertificateAuthorityResponse
+      attr_accessor certificate: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeviceSummary
+      attr_accessor device_id: ::String
+      attr_accessor device_status: ("ACTIVE" | "SIGNED_OUT")
+      SENSITIVE: []
+    end
+
+    class DisassociateDomainRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateDomainResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateWebsiteAuthorizationProviderRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor authorization_provider_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateWebsiteAuthorizationProviderResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateWebsiteCertificateAuthorityRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor website_ca_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateWebsiteCertificateAuthorityResponse < Aws::EmptyStructure
+    end
+
+    class DomainSummary
+      attr_accessor domain_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor domain_status: ("PENDING_VALIDATION" | "ASSOCIATING" | "ACTIVE" | "INACTIVE" | "DISASSOCIATING" | "DISASSOCIATED" | "FAILED_TO_ASSOCIATE" | "FAILED_TO_DISASSOCIATE")
+      SENSITIVE: []
+    end
+
+    class FleetSummary
+      attr_accessor fleet_arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor fleet_name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor company_code: ::String
+      attr_accessor fleet_status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED_TO_CREATE" | "FAILED_TO_DELETE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDevicesRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDevicesResponse
+      attr_accessor devices: ::Array[Types::DeviceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainsRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDomainsResponse
+      attr_accessor domains: ::Array[Types::DomainSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFleetsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFleetsResponse
+      attr_accessor fleet_summary_list: ::Array[Types::FleetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListWebsiteAuthorizationProvidersRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWebsiteAuthorizationProvidersResponse
+      attr_accessor website_authorization_providers: ::Array[Types::WebsiteAuthorizationProviderSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWebsiteCertificateAuthoritiesRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWebsiteCertificateAuthoritiesResponse
+      attr_accessor website_certificate_authorities: ::Array[Types::WebsiteCaSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreDomainAccessRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreDomainAccessResponse < Aws::EmptyStructure
+    end
+
+    class RevokeDomainAccessRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeDomainAccessResponse < Aws::EmptyStructure
+    end
+
+    class SignOutUserRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor username: ::String
+      SENSITIVE: []
+    end
+
+    class SignOutUserResponse < Aws::EmptyStructure
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAuditStreamConfigurationRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor audit_stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAuditStreamConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCompanyNetworkConfigurationRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateCompanyNetworkConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDevicePolicyConfigurationRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor device_ca_certificate: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDevicePolicyConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDomainMetadataRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDomainMetadataResponse < Aws::EmptyStructure
+    end
+
+    class UpdateFleetMetadataRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor display_name: ::String
+      attr_accessor optimize_for_end_user_location: bool
+      SENSITIVE: []
+    end
+
+    class UpdateFleetMetadataResponse < Aws::EmptyStructure
+    end
+
+    class UpdateIdentityProviderConfigurationRequest
+      attr_accessor fleet_arn: ::String
+      attr_accessor identity_provider_type: ("SAML")
+      attr_accessor identity_provider_saml_metadata: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateIdentityProviderConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class WebsiteAuthorizationProviderSummary
+      attr_accessor authorization_provider_id: ::String
+      attr_accessor authorization_provider_type: ("SAML")
+      attr_accessor domain_name: ::String
+      attr_accessor created_time: ::Time
+      SENSITIVE: []
+    end
+
+    class WebsiteCaSummary
+      attr_accessor website_ca_id: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor display_name: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,701 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Schemas
+  module Types
+
+    class BadRequestException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CodeBindingOutput
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified: ::Time
+      attr_accessor schema_version: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED")
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDiscovererInput
+      attr_accessor description: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor cross_account: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDiscovererRequest
+      attr_accessor description: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor cross_account: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDiscovererResponse
+      attr_accessor description: ::String
+      attr_accessor discoverer_arn: ::String
+      attr_accessor discoverer_id: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor state: ("STARTED" | "STOPPED")
+      attr_accessor cross_account: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRegistryInput
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRegistryRequest
+      attr_accessor description: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRegistryResponse
+      attr_accessor description: ::String
+      attr_accessor registry_arn: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSchemaInput
+      attr_accessor content: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("OpenApi3")
+      SENSITIVE: []
+    end
+
+    class CreateSchemaRequest
+      attr_accessor content: ::String
+      attr_accessor description: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("OpenApi3")
+      SENSITIVE: []
+    end
+
+    class CreateSchemaResponse
+      attr_accessor description: ::String
+      attr_accessor last_modified: ::Time
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_version: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ::String
+      attr_accessor version_created_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteDiscovererRequest
+      attr_accessor discoverer_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRegistryRequest
+      attr_accessor registry_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor registry_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSchemaRequest
+      attr_accessor registry_name: ::String
+      attr_accessor schema_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSchemaVersionRequest
+      attr_accessor registry_name: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCodeBindingRequest
+      attr_accessor language: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCodeBindingResponse
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified: ::Time
+      attr_accessor schema_version: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED")
+      SENSITIVE: []
+    end
+
+    class DescribeDiscovererRequest
+      attr_accessor discoverer_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDiscovererResponse
+      attr_accessor description: ::String
+      attr_accessor discoverer_arn: ::String
+      attr_accessor discoverer_id: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor state: ("STARTED" | "STOPPED")
+      attr_accessor cross_account: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeRegistryRequest
+      attr_accessor registry_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRegistryResponse
+      attr_accessor description: ::String
+      attr_accessor registry_arn: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeSchemaOutput
+      attr_accessor content: ::String
+      attr_accessor description: ::String
+      attr_accessor last_modified: ::Time
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_version: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ::String
+      attr_accessor version_created_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeSchemaRequest
+      attr_accessor registry_name: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSchemaResponse
+      attr_accessor content: ::String
+      attr_accessor description: ::String
+      attr_accessor last_modified: ::Time
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_version: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ::String
+      attr_accessor version_created_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DiscovererOutput
+      attr_accessor description: ::String
+      attr_accessor discoverer_arn: ::String
+      attr_accessor discoverer_id: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor state: ("STARTED" | "STOPPED")
+      attr_accessor cross_account: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DiscovererStateOutput
+      attr_accessor discoverer_id: ::String
+      attr_accessor state: ("STARTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class DiscovererSummary
+      attr_accessor discoverer_arn: ::String
+      attr_accessor discoverer_id: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor state: ("STARTED" | "STOPPED")
+      attr_accessor cross_account: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ErrorOutput
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetCodeBindingSourceRequest
+      attr_accessor language: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetCodeBindingSourceResponse
+      attr_accessor body: ::IO
+      SENSITIVE: []
+    end
+
+    class GetDiscoveredSchemaInput
+      attr_accessor events: ::Array[::String]
+      attr_accessor type: ("OpenApi3")
+      SENSITIVE: []
+    end
+
+    class GetDiscoveredSchemaOutput
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class GetDiscoveredSchemaRequest
+      attr_accessor events: ::Array[::String]
+      attr_accessor type: ("OpenApi3")
+      SENSITIVE: []
+    end
+
+    class GetDiscoveredSchemaResponse
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyOutput
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyRequest
+      attr_accessor registry_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResponse
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class GoneException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDiscoverersOutput
+      attr_accessor discoverers: ::Array[Types::DiscovererSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDiscoverersRequest
+      attr_accessor discoverer_id_prefix: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor source_arn_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ListDiscoverersResponse
+      attr_accessor discoverers: ::Array[Types::DiscovererSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRegistriesOutput
+      attr_accessor next_token: ::String
+      attr_accessor registries: ::Array[Types::RegistrySummary]
+      SENSITIVE: []
+    end
+
+    class ListRegistriesRequest
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor registry_name_prefix: ::String
+      attr_accessor scope: ::String
+      SENSITIVE: []
+    end
+
+    class ListRegistriesResponse
+      attr_accessor next_token: ::String
+      attr_accessor registries: ::Array[Types::RegistrySummary]
+      SENSITIVE: []
+    end
+
+    class ListSchemaVersionsOutput
+      attr_accessor next_token: ::String
+      attr_accessor schema_versions: ::Array[Types::SchemaVersionSummary]
+      SENSITIVE: []
+    end
+
+    class ListSchemaVersionsRequest
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor schema_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchemaVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor schema_versions: ::Array[Types::SchemaVersionSummary]
+      SENSITIVE: []
+    end
+
+    class ListSchemasOutput
+      attr_accessor next_token: ::String
+      attr_accessor schemas: ::Array[Types::SchemaSummary]
+      SENSITIVE: []
+    end
+
+    class ListSchemasRequest
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor schema_name_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ListSchemasResponse
+      attr_accessor next_token: ::String
+      attr_accessor schemas: ::Array[Types::SchemaSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PreconditionFailedException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutCodeBindingRequest
+      attr_accessor language: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_version: ::String
+      SENSITIVE: []
+    end
+
+    class PutCodeBindingResponse
+      attr_accessor creation_date: ::Time
+      attr_accessor last_modified: ::Time
+      attr_accessor schema_version: ::String
+      attr_accessor status: ("CREATE_IN_PROGRESS" | "CREATE_COMPLETE" | "CREATE_FAILED")
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyInput
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyOutput
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor policy: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse
+      attr_accessor policy: ::String
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegistryOutput
+      attr_accessor description: ::String
+      attr_accessor registry_arn: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class RegistrySummary
+      attr_accessor registry_arn: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SchemaOutput
+      attr_accessor description: ::String
+      attr_accessor last_modified: ::Time
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_version: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ::String
+      attr_accessor version_created_date: ::Time
+      SENSITIVE: []
+    end
+
+    class SchemaSummary
+      attr_accessor last_modified: ::Time
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor version_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SchemaVersionSummary
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_version: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class SearchSchemaSummary
+      attr_accessor registry_name: ::String
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_versions: ::Array[Types::SearchSchemaVersionSummary]
+      SENSITIVE: []
+    end
+
+    class SearchSchemaVersionSummary
+      attr_accessor created_date: ::Time
+      attr_accessor schema_version: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class SearchSchemasOutput
+      attr_accessor next_token: ::String
+      attr_accessor schemas: ::Array[Types::SearchSchemaSummary]
+      SENSITIVE: []
+    end
+
+    class SearchSchemasRequest
+      attr_accessor keywords: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor registry_name: ::String
+      SENSITIVE: []
+    end
+
+    class SearchSchemasResponse
+      attr_accessor next_token: ::String
+      attr_accessor schemas: ::Array[Types::SearchSchemaSummary]
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartDiscovererRequest
+      attr_accessor discoverer_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartDiscovererResponse
+      attr_accessor discoverer_id: ::String
+      attr_accessor state: ("STARTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class StopDiscovererRequest
+      attr_accessor discoverer_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopDiscovererResponse
+      attr_accessor discoverer_id: ::String
+      attr_accessor state: ("STARTED" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateDiscovererInput
+      attr_accessor description: ::String
+      attr_accessor cross_account: bool
+      SENSITIVE: []
+    end
+
+    class UpdateDiscovererRequest
+      attr_accessor description: ::String
+      attr_accessor discoverer_id: ::String
+      attr_accessor cross_account: bool
+      SENSITIVE: []
+    end
+
+    class UpdateDiscovererResponse
+      attr_accessor description: ::String
+      attr_accessor discoverer_arn: ::String
+      attr_accessor discoverer_id: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor state: ("STARTED" | "STOPPED")
+      attr_accessor cross_account: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateRegistryInput
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRegistryRequest
+      attr_accessor description: ::String
+      attr_accessor registry_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRegistryResponse
+      attr_accessor description: ::String
+      attr_accessor registry_arn: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateSchemaInput
+      attr_accessor client_token_id: ::String
+      attr_accessor content: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("OpenApi3")
+      SENSITIVE: []
+    end
+
+    class UpdateSchemaRequest
+      attr_accessor client_token_id: ::String
+      attr_accessor content: ::String
+      attr_accessor description: ::String
+      attr_accessor registry_name: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor type: ("OpenApi3")
+      SENSITIVE: []
+    end
+
+    class UpdateSchemaResponse
+      attr_accessor description: ::String
+      attr_accessor last_modified: ::Time
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_version: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ::String
+      attr_accessor version_created_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ExportSchemaOutput
+      attr_accessor content: ::String
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_version: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ExportSchemaRequest
+      attr_accessor registry_name: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_version: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ExportSchemaResponse
+      attr_accessor content: ::String
+      attr_accessor schema_arn: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor schema_version: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+  end
+end

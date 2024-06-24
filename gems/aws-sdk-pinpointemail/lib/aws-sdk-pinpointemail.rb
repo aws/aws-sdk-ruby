@@ -52,6 +52,6 @@ require_relative 'aws-sdk-pinpointemail/customizations'
 # @!group service
 module Aws::PinpointEmail
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.50.0'
 
 end

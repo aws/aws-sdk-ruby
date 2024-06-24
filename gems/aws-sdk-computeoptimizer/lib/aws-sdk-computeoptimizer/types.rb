@@ -90,6 +90,27 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # An object that describes the estimated monthly savings possible by
+    # adopting Compute Optimizer’s Auto Scaling group recommendations. This
+    # is based on the Savings Plans and Reserved Instances discounts.
+    #
+    # @!attribute [rw] currency
+    #   The currency of the estimated monthly savings.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the estimated monthly savings.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/AutoScalingGroupEstimatedMonthlySavings AWS API Documentation
+    #
+    class AutoScalingGroupEstimatedMonthlySavings < Struct.new(
+      :currency,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an Auto Scaling group recommendation.
     #
     # @!attribute [rw] account_id
@@ -135,6 +156,11 @@ module Aws::ComputeOptimizer
     #   An array of objects that describe the current configuration of the
     #   Auto Scaling group.
     #   @return [Types::AutoScalingGroupConfiguration]
+    #
+    # @!attribute [rw] current_instance_gpu_info
+    #   Describes the GPU accelerator settings for the current instance type
+    #   of the Auto Scaling group.
+    #   @return [Types::GpuInfo]
     #
     # @!attribute [rw] recommendation_options
     #   An array of objects that describe the recommendation options for the
@@ -190,11 +216,6 @@ module Aws::ComputeOptimizer
     #     instance.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] current_instance_gpu_info
-    #   Describes the GPU accelerator settings for the current instance type
-    #   of the Auto Scaling group.
-    #   @return [Types::GpuInfo]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/AutoScalingGroupRecommendation AWS API Documentation
     #
     class AutoScalingGroupRecommendation < Struct.new(
@@ -205,12 +226,12 @@ module Aws::ComputeOptimizer
       :utilization_metrics,
       :look_back_period_in_days,
       :current_configuration,
+      :current_instance_gpu_info,
       :recommendation_options,
       :last_refresh_timestamp,
       :current_performance_risk,
       :effective_recommendation_preferences,
-      :inferred_workload_types,
-      :current_instance_gpu_info)
+      :inferred_workload_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -221,6 +242,11 @@ module Aws::ComputeOptimizer
     #   An array of objects that describe an Auto Scaling group
     #   configuration.
     #   @return [Types::AutoScalingGroupConfiguration]
+    #
+    # @!attribute [rw] instance_gpu_info
+    #   Describes the GPU accelerator settings for the recommended instance
+    #   type of the Auto Scaling group.
+    #   @return [Types::GpuInfo]
     #
     # @!attribute [rw] projected_utilization_metrics
     #   An array of objects that describe the projected utilization metrics
@@ -271,6 +297,13 @@ module Aws::ComputeOptimizer
     #   the estimated monthly savings amount and percentage.
     #   @return [Types::SavingsOpportunity]
     #
+    # @!attribute [rw] savings_opportunity_after_discounts
+    #   An object that describes the savings opportunity for the Auto
+    #   Scaling group recommendation option that includes Savings Plans and
+    #   Reserved Instances discounts. Savings opportunity includes the
+    #   estimated monthly savings and percentage.
+    #   @return [Types::AutoScalingGroupSavingsOpportunityAfterDiscounts]
+    #
     # @!attribute [rw] migration_effort
     #   The level of effort required to migrate from the current instance
     #   type to the recommended instance type.
@@ -284,21 +317,47 @@ module Aws::ComputeOptimizer
     #   architecture.
     #   @return [String]
     #
-    # @!attribute [rw] instance_gpu_info
-    #   Describes the GPU accelerator settings for the recommended instance
-    #   type of the Auto Scaling group.
-    #   @return [Types::GpuInfo]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/AutoScalingGroupRecommendationOption AWS API Documentation
     #
     class AutoScalingGroupRecommendationOption < Struct.new(
       :configuration,
+      :instance_gpu_info,
       :projected_utilization_metrics,
       :performance_risk,
       :rank,
       :savings_opportunity,
-      :migration_effort,
-      :instance_gpu_info)
+      :savings_opportunity_after_discounts,
+      :migration_effort)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the savings opportunity for Auto Scaling group
+    # recommendations after applying the Savings Plans and Reserved
+    # Instances discounts.
+    #
+    # Savings opportunity represents the estimated monthly savings you can
+    # achieve by implementing Compute Optimizer recommendations.
+    #
+    # @!attribute [rw] savings_opportunity_percentage
+    #   The estimated monthly savings possible as a percentage of monthly
+    #   cost after applying the Savings Plans and Reserved Instances
+    #   discounts. This saving can be achieved by adopting Compute
+    #   Optimizer’s Auto Scaling group recommendations.
+    #   @return [Float]
+    #
+    # @!attribute [rw] estimated_monthly_savings
+    #   An object that describes the estimated monthly savings possible by
+    #   adopting Compute Optimizer’s Auto Scaling group recommendations.
+    #   This is based on the Savings Plans and Reserved Instances pricing
+    #   discounts.
+    #   @return [Types::AutoScalingGroupEstimatedMonthlySavings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/AutoScalingGroupSavingsOpportunityAfterDiscounts AWS API Documentation
+    #
+    class AutoScalingGroupSavingsOpportunityAfterDiscounts < Struct.new(
+      :savings_opportunity_percentage,
+      :estimated_monthly_savings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -390,6 +449,72 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # Defines the various metric parameters that can be customized, such as
+    # threshold and headroom.
+    #
+    # @!attribute [rw] threshold
+    #   The threshold value used for the specified metric parameter.
+    #
+    #   <note markdown="1"> You can only specify the threshold value for CPU utilization.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] headroom
+    #   The headroom value in percentage used for the specified metric
+    #   parameter.
+    #
+    #   The following lists the valid values for CPU and memory utilization.
+    #
+    #   * CPU utilization: `PERCENT_30 | PERCENT_20 | PERCENT_0`
+    #
+    #   * Memory utilization: `PERCENT_30 | PERCENT_20 | PERCENT_10`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/CustomizableMetricParameters AWS API Documentation
+    #
+    class CustomizableMetricParameters < Struct.new(
+      :threshold,
+      :headroom)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of the recommended RDS storage.
+    #
+    # @!attribute [rw] storage_type
+    #   The type of RDS storage.
+    #   @return [String]
+    #
+    # @!attribute [rw] allocated_storage
+    #   The size of the RDS storage in gigabytes (GB).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] iops
+    #   The provisioned IOPs of the RDS storage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_allocated_storage
+    #   The maximum limit in gibibytes (GiB) to which Amazon RDS can
+    #   automatically scale the storage of the RDS instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_throughput
+    #   The storage throughput of the RDS storage.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/DBStorageConfiguration AWS API Documentation
+    #
+    class DBStorageConfiguration < Struct.new(
+      :storage_type,
+      :allocated_storage,
+      :iops,
+      :max_allocated_storage,
+      :storage_throughput)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_type
     #   The target resource type of the recommendation preference to delete.
     #
@@ -397,11 +522,6 @@ module Aws::ComputeOptimizer
     #   instances that are part of Auto Scaling groups. The
     #   `AutoScalingGroup` option encompasses only instances that are part
     #   of an Auto Scaling group.
-    #
-    #   <note markdown="1"> The valid values for this parameter are `Ec2Instance` and
-    #   `AutoScalingGroup`.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -495,6 +615,43 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # Describes the effective recommendation preferences for Amazon EBS
+    # volumes.
+    #
+    # @!attribute [rw] savings_estimation_mode
+    #   Describes the savings estimation mode preference applied for
+    #   calculating savings opportunity for Amazon EBS volumes.
+    #   @return [Types::EBSSavingsEstimationMode]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/EBSEffectiveRecommendationPreferences AWS API Documentation
+    #
+    class EBSEffectiveRecommendationPreferences < Struct.new(
+      :savings_estimation_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that describes the estimated monthly savings possible by
+    # adopting Compute Optimizer’s Amazon EBS volume recommendations. This
+    # includes any applicable discounts.
+    #
+    # @!attribute [rw] currency
+    #   The currency of the estimated monthly savings.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the estimated monthly savings.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/EBSEstimatedMonthlySavings AWS API Documentation
+    #
+    class EBSEstimatedMonthlySavings < Struct.new(
+      :currency,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a filter that returns a more specific list of Amazon Elastic
     # Block Store (Amazon EBS) volume recommendations. Use this filter with
     # the GetEBSVolumeRecommendations action.
@@ -540,6 +697,47 @@ module Aws::ComputeOptimizer
     class EBSFilter < Struct.new(
       :name,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the savings estimation mode used for calculating savings
+    # opportunity for Amazon EBS volumes.
+    #
+    # @!attribute [rw] source
+    #   Describes the source for calculating the savings opportunity for
+    #   Amazon EBS volumes.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/EBSSavingsEstimationMode AWS API Documentation
+    #
+    class EBSSavingsEstimationMode < Struct.new(
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the savings opportunity for Amazon EBS volume
+    # recommendations after applying specific discounts.
+    #
+    # @!attribute [rw] savings_opportunity_percentage
+    #   The estimated monthly savings possible as a percentage of monthly
+    #   cost after applying the specific discounts. This saving can be
+    #   achieved by adopting Compute Optimizer’s Amazon EBS volume
+    #   recommendations.
+    #   @return [Float]
+    #
+    # @!attribute [rw] estimated_monthly_savings
+    #   The estimated monthly savings possible as a percentage of monthly
+    #   cost by adopting Compute Optimizer’s Amazon EBS volume
+    #   recommendations. This saving includes any applicable discounts.
+    #   @return [Types::EBSEstimatedMonthlySavings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/EBSSavingsOpportunityAfterDiscounts AWS API Documentation
+    #
+    class EBSSavingsOpportunityAfterDiscounts < Struct.new(
+      :savings_opportunity_percentage,
+      :estimated_monthly_savings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -608,6 +806,88 @@ module Aws::ComputeOptimizer
       :name,
       :statistic,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the effective recommendation preferences for Amazon ECS
+    # services.
+    #
+    # @!attribute [rw] savings_estimation_mode
+    #   Describes the savings estimation mode preference applied for
+    #   calculating savings opportunity for Amazon ECS services.
+    #   @return [Types::ECSSavingsEstimationMode]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ECSEffectiveRecommendationPreferences AWS API Documentation
+    #
+    class ECSEffectiveRecommendationPreferences < Struct.new(
+      :savings_estimation_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the estimated monthly savings possible for Amazon ECS
+    # services by adopting Compute Optimizer recommendations. This is based
+    # on Amazon ECS service pricing after applying Savings Plans discounts.
+    #
+    # @!attribute [rw] currency
+    #   The currency of the estimated monthly savings.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the estimated monthly savings for Amazon ECS services.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ECSEstimatedMonthlySavings AWS API Documentation
+    #
+    class ECSEstimatedMonthlySavings < Struct.new(
+      :currency,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the savings estimation mode used for calculating savings
+    # opportunity for Amazon ECS services.
+    #
+    # @!attribute [rw] source
+    #   Describes the source for calculating the savings opportunity for
+    #   Amazon ECS services.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ECSSavingsEstimationMode AWS API Documentation
+    #
+    class ECSSavingsEstimationMode < Struct.new(
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the savings opportunity for Amazon ECS service
+    # recommendations after applying Savings Plans discounts.
+    #
+    # Savings opportunity represents the estimated monthly savings after
+    # applying Savings Plans discounts. You can achieve this by implementing
+    # a given Compute Optimizer recommendation.
+    #
+    # @!attribute [rw] savings_opportunity_percentage
+    #   The estimated monthly savings possible as a percentage of monthly
+    #   cost by adopting Compute Optimizer’s Amazon ECS service
+    #   recommendations. This includes any applicable Savings Plans
+    #   discounts.
+    #   @return [Float]
+    #
+    # @!attribute [rw] estimated_monthly_savings
+    #   The estimated monthly savings possible by adopting Compute
+    #   Optimizer’s Amazon ECS service recommendations. This includes any
+    #   applicable Savings Plans discounts.
+    #   @return [Types::ECSEstimatedMonthlySavings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ECSSavingsOpportunityAfterDiscounts AWS API Documentation
+    #
+    class ECSSavingsOpportunityAfterDiscounts < Struct.new(
+      :savings_opportunity_percentage,
+      :estimated_monthly_savings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -814,6 +1094,11 @@ module Aws::ComputeOptimizer
     #   of its workload.
     #   @return [String]
     #
+    # @!attribute [rw] effective_recommendation_preferences
+    #   Describes the effective recommendation preferences for Amazon ECS
+    #   services.
+    #   @return [Types::ECSEffectiveRecommendationPreferences]
+    #
     # @!attribute [rw] tags
     #   A list of tags assigned to your Amazon ECS service recommendations.
     #   @return [Array<Types::Tag>]
@@ -832,6 +1117,7 @@ module Aws::ComputeOptimizer
       :finding_reason_codes,
       :service_recommendation_options,
       :current_performance_risk,
+      :effective_recommendation_preferences,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -926,6 +1212,15 @@ module Aws::ComputeOptimizer
     #   [2]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html
     #   @return [Types::SavingsOpportunity]
     #
+    # @!attribute [rw] savings_opportunity_after_discounts
+    #   Describes the savings opportunity for Amazon ECS service
+    #   recommendations or for the recommendation option.
+    #
+    #   Savings opportunity represents the estimated monthly savings after
+    #   applying Savings Plans discounts. You can achieve this by
+    #   implementing a given Compute Optimizer recommendation.
+    #   @return [Types::ECSSavingsOpportunityAfterDiscounts]
+    #
     # @!attribute [rw] projected_utilization_metrics
     #   An array of objects that describe the projected utilization metrics
     #   of the Amazon ECS service recommendation option.
@@ -942,6 +1237,7 @@ module Aws::ComputeOptimizer
       :memory,
       :cpu,
       :savings_opportunity,
+      :savings_opportunity_after_discounts,
       :projected_utilization_metrics,
       :container_recommendations)
       SENSITIVE = []
@@ -1028,6 +1324,42 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # Describes the effective preferred resources that Compute Optimizer
+    # considers as rightsizing recommendation candidates.
+    #
+    # <note markdown="1"> Compute Optimizer only supports Amazon EC2 instance types.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] name
+    #   The name of the preferred resource list.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_list
+    #   The list of preferred resource values that you want considered as
+    #   rightsizing recommendation candidates.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] effective_include_list
+    #   The expanded version of your preferred resource's include list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude_list
+    #   The list of preferred resources values that you want excluded from
+    #   rightsizing recommendation candidates.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/EffectivePreferredResource AWS API Documentation
+    #
+    class EffectivePreferredResource < Struct.new(
+      :name,
+      :include_list,
+      :effective_include_list,
+      :exclude_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the effective recommendation preferences for a resource.
     #
     # @!attribute [rw] cpu_vendor_architectures
@@ -1038,16 +1370,16 @@ module Aws::ComputeOptimizer
     #
     #   * A GetEC2InstanceRecommendations or
     #     GetAutoScalingGroupRecommendations request, Compute Optimizer
-    #     returns recommendations that consist of Graviton2 instance types
+    #     returns recommendations that consist of Graviton instance types
     #     only.
     #
     #   * A GetEC2RecommendationProjectedMetrics request, Compute Optimizer
-    #     returns projected utilization metrics for Graviton2 instance type
+    #     returns projected utilization metrics for Graviton instance type
     #     recommendations only.
     #
     #   * A ExportEC2InstanceRecommendations or
     #     ExportAutoScalingGroupRecommendations request, Compute Optimizer
-    #     exports recommendations that consist of Graviton2 instance types
+    #     exports recommendations that consist of Graviton instance types
     #     only.
     #   @return [Array<String>]
     #
@@ -1086,13 +1418,43 @@ module Aws::ComputeOptimizer
     #   this object doesn't appear in the response.
     #   @return [Types::ExternalMetricsPreference]
     #
+    # @!attribute [rw] look_back_period
+    #   The number of days the utilization metrics of the Amazon Web
+    #   Services resource are analyzed.
+    #   @return [String]
+    #
+    # @!attribute [rw] utilization_preferences
+    #   The resource’s CPU and memory utilization preferences, such as
+    #   threshold and headroom, that are used to generate rightsizing
+    #   recommendations.
+    #
+    #   <note markdown="1"> This preference is only available for the Amazon EC2 instance
+    #   resource type.
+    #
+    #    </note>
+    #   @return [Array<Types::UtilizationPreference>]
+    #
+    # @!attribute [rw] preferred_resources
+    #   The resource type values that are considered as candidates when
+    #   generating rightsizing recommendations.
+    #   @return [Array<Types::EffectivePreferredResource>]
+    #
+    # @!attribute [rw] savings_estimation_mode
+    #   Describes the savings estimation mode applied for calculating
+    #   savings opportunity for a resource.
+    #   @return [Types::InstanceSavingsEstimationMode]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/EffectiveRecommendationPreferences AWS API Documentation
     #
     class EffectiveRecommendationPreferences < Struct.new(
       :cpu_vendor_architectures,
       :enhanced_infrastructure_metrics,
       :inferred_workload_types,
-      :external_metrics_preference)
+      :external_metrics_preference,
+      :look_back_period,
+      :utilization_preferences,
+      :preferred_resources,
+      :savings_estimation_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1877,6 +2239,131 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_ids
+    #   The Amazon Web Services account IDs for the export Amazon RDS
+    #   recommendations.
+    #
+    #   If your account is the management account or the delegated
+    #   administrator of an organization, use this parameter to specify the
+    #   member account you want to export recommendations to.
+    #
+    #   This parameter can't be specified together with the include member
+    #   accounts parameter. The parameters are mutually exclusive.
+    #
+    #   If this parameter or the include member accounts parameter is
+    #   omitted, the recommendations for member accounts aren't included in
+    #   the export.
+    #
+    #   You can specify multiple account IDs per request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   An array of objects to specify a filter that exports a more specific
+    #   set of Amazon RDS recommendations.
+    #   @return [Array<Types::RDSDBRecommendationFilter>]
+    #
+    # @!attribute [rw] fields_to_export
+    #   The recommendations data to include in the export file. For more
+    #   information about the fields that can be exported, see [Exported
+    #   files][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html#exported-files
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] s3_destination_config
+    #   Describes the destination Amazon Simple Storage Service (Amazon S3)
+    #   bucket name and key prefix for a recommendations export job.
+    #
+    #   You must create the destination Amazon S3 bucket for your
+    #   recommendations export before you create the export job. Compute
+    #   Optimizer does not create the S3 bucket for you. After you create
+    #   the S3 bucket, ensure that it has the required permission policy to
+    #   allow Compute Optimizer to write the export file to it. If you plan
+    #   to specify an object prefix when you create the export job, you must
+    #   include the object prefix in the policy that you add to the S3
+    #   bucket. For more information, see [Amazon S3 Bucket Policy for
+    #   Compute Optimizer][1] in the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html
+    #   @return [Types::S3DestinationConfig]
+    #
+    # @!attribute [rw] file_format
+    #   The format of the export file.
+    #
+    #   The CSV file is the only export file format currently supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_member_accounts
+    #   If your account is the management account or the delegated
+    #   administrator of an organization, this parameter indicates whether
+    #   to include recommendations for resources in all member accounts of
+    #   the organization.
+    #
+    #   The member accounts must also be opted in to Compute Optimizer, and
+    #   trusted access for Compute Optimizer must be enabled in the
+    #   organization account. For more information, see [Compute Optimizer
+    #   and Amazon Web Services Organizations trusted access][1] in the
+    #   *Compute Optimizer User Guide*.
+    #
+    #   If this parameter is omitted, recommendations for member accounts of
+    #   the organization aren't included in the export file.
+    #
+    #   If this parameter or the account ID parameter is omitted,
+    #   recommendations for member accounts aren't included in the export.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] recommendation_preferences
+    #   Describes the recommendation preferences to return in the response
+    #   of a GetAutoScalingGroupRecommendations,
+    #   GetEC2InstanceRecommendations, GetEC2RecommendationProjectedMetrics,
+    #   GetRDSDatabaseRecommendations, and
+    #   GetRDSDatabaseRecommendationProjectedMetrics request.
+    #   @return [Types::RecommendationPreferences]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportRDSDatabaseRecommendationsRequest AWS API Documentation
+    #
+    class ExportRDSDatabaseRecommendationsRequest < Struct.new(
+      :account_ids,
+      :filters,
+      :fields_to_export,
+      :s3_destination_config,
+      :file_format,
+      :include_member_accounts,
+      :recommendation_preferences)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identification number of the export job.
+    #
+    #   To view the status of an export job, use the
+    #   DescribeRecommendationExportJobs action and specify the job ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination
+    #   Describes the destination Amazon Simple Storage Service (Amazon S3)
+    #   bucket name and object keys of a recommendations export file, and
+    #   its associated metadata file.
+    #   @return [Types::S3Destination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/ExportRDSDatabaseRecommendationsResponse AWS API Documentation
+    #
+    class ExportRDSDatabaseRecommendationsResponse < Struct.new(
+      :job_id,
+      :s3_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes Compute Optimizer's integration status with your chosen
     # external metric provider. For example, Datadog.
     #
@@ -2534,11 +3021,52 @@ module Aws::ComputeOptimizer
     #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html
     #   @return [Types::ExternalMetricsPreference]
     #
+    # @!attribute [rw] look_back_period
+    #   The number of days the utilization metrics of the Amazon Web
+    #   Services resource are analyzed.
+    #
+    #   To validate that the preference is applied to your last generated
+    #   set of recommendations, review the
+    #   `effectiveRecommendationPreferences` value in the response of the
+    #   GetAutoScalingGroupRecommendations or GetEC2InstanceRecommendations
+    #   actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] utilization_preferences
+    #   The resource’s CPU and memory utilization preferences, such as
+    #   threshold and headroom, that were used to generate rightsizing
+    #   recommendations. It considers all applicable preferences that you
+    #   set at the resource, account, and organization level.
+    #
+    #   To validate that the preference is applied to your last generated
+    #   set of recommendations, review the
+    #   `effectiveRecommendationPreferences` value in the response of the
+    #   GetAutoScalingGroupRecommendations or GetEC2InstanceRecommendations
+    #   actions.
+    #   @return [Array<Types::UtilizationPreference>]
+    #
+    # @!attribute [rw] preferred_resources
+    #   The resource type values that are considered as candidates when
+    #   generating rightsizing recommendations. This object resolves any
+    #   wildcard expressions and returns the effective list of candidate
+    #   resource type values. It also considers all applicable preferences
+    #   that you set at the resource, account, and organization level.
+    #
+    #   To validate that the preference is applied to your last generated
+    #   set of recommendations, review the
+    #   `effectiveRecommendationPreferences` value in the response of the
+    #   GetAutoScalingGroupRecommendations or GetEC2InstanceRecommendations
+    #   actions.
+    #   @return [Array<Types::EffectivePreferredResource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEffectiveRecommendationPreferencesResponse AWS API Documentation
     #
     class GetEffectiveRecommendationPreferencesResponse < Struct.new(
       :enhanced_infrastructure_metrics,
-      :external_metrics_preference)
+      :external_metrics_preference,
+      :look_back_period,
+      :utilization_preferences,
+      :preferred_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2789,6 +3317,146 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The ARN that identifies the Amazon RDS.
+    #
+    #   The following is the format of the ARN:
+    #
+    #   `arn:aws:rds:\{region\}:\{accountId\}:db:\{resourceName\}`
+    #   @return [String]
+    #
+    # @!attribute [rw] stat
+    #   The statistic of the projected metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The granularity, in seconds, of the projected metrics data points.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp of the first projected metrics data point to return.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp of the last projected metrics data point to return.
+    #   @return [Time]
+    #
+    # @!attribute [rw] recommendation_preferences
+    #   Describes the recommendation preferences to return in the response
+    #   of a GetAutoScalingGroupRecommendations,
+    #   GetEC2InstanceRecommendations, GetEC2RecommendationProjectedMetrics,
+    #   GetRDSDatabaseRecommendations, and
+    #   GetRDSDatabaseRecommendationProjectedMetrics request.
+    #   @return [Types::RecommendationPreferences]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetRDSDatabaseRecommendationProjectedMetricsRequest AWS API Documentation
+    #
+    class GetRDSDatabaseRecommendationProjectedMetricsRequest < Struct.new(
+      :resource_arn,
+      :stat,
+      :period,
+      :start_time,
+      :end_time,
+      :recommendation_preferences)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommended_option_projected_metrics
+    #   An array of objects that describes the projected metrics.
+    #   @return [Array<Types::RDSDatabaseRecommendedOptionProjectedMetric>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetRDSDatabaseRecommendationProjectedMetricsResponse AWS API Documentation
+    #
+    class GetRDSDatabaseRecommendationProjectedMetricsResponse < Struct.new(
+      :recommended_option_projected_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_arns
+    #   The ARN that identifies the Amazon RDS.
+    #
+    #   The following is the format of the ARN:
+    #
+    #   `arn:aws:rds:\{region\}:\{accountId\}:db:\{resourceName\}`
+    #
+    #   The following is the format of a DB Cluster ARN:
+    #
+    #   `arn:aws:rds:\{region\}:\{accountId\}:cluster:\{resourceName\}`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to advance to the next page of Amazon RDS recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of Amazon RDS recommendations to return with a
+    #   single request.
+    #
+    #   To retrieve the remaining results, make another request with the
+    #   returned `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   An array of objects to specify a filter that returns a more specific
+    #   list of Amazon RDS recommendations.
+    #   @return [Array<Types::RDSDBRecommendationFilter>]
+    #
+    # @!attribute [rw] account_ids
+    #   Return the Amazon RDS recommendations to the specified Amazon Web
+    #   Services account IDs.
+    #
+    #   If your account is the management account or the delegated
+    #   administrator of an organization, use this parameter to return the
+    #   Amazon RDS recommendations to specific member accounts.
+    #
+    #   You can only specify one account ID per request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] recommendation_preferences
+    #   Describes the recommendation preferences to return in the response
+    #   of a GetAutoScalingGroupRecommendations,
+    #   GetEC2InstanceRecommendations, GetEC2RecommendationProjectedMetrics,
+    #   GetRDSDatabaseRecommendations, and
+    #   GetRDSDatabaseRecommendationProjectedMetrics request.
+    #   @return [Types::RecommendationPreferences]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetRDSDatabaseRecommendationsRequest AWS API Documentation
+    #
+    class GetRDSDatabaseRecommendationsRequest < Struct.new(
+      :resource_arns,
+      :next_token,
+      :max_results,
+      :filters,
+      :account_ids,
+      :recommendation_preferences)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to advance to the next page of Amazon RDS recommendations.
+    #   @return [String]
+    #
+    # @!attribute [rw] rds_db_recommendations
+    #   An array of objects that describe the Amazon RDS recommendations.
+    #   @return [Array<Types::RDSDBRecommendation>]
+    #
+    # @!attribute [rw] errors
+    #   An array of objects that describe errors of the request.
+    #   @return [Array<Types::GetRecommendationError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetRDSDatabaseRecommendationsResponse AWS API Documentation
+    #
+    class GetRDSDatabaseRecommendationsResponse < Struct.new(
+      :next_token,
+      :rds_db_recommendations,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an error experienced when getting recommendations.
     #
     # For example, an error is returned if you request recommendations for
@@ -2825,11 +3493,6 @@ module Aws::ComputeOptimizer
     #   instances that are part of Auto Scaling groups. The
     #   `AutoScalingGroup` option encompasses only instances that are part
     #   of an Auto Scaling group.
-    #
-    #   <note markdown="1"> The valid values for this parameter are `Ec2Instance` and
-    #   `AutoScalingGroup`.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -3033,6 +3696,28 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # An object that describes the estimated monthly savings possible by
+    # adopting Compute Optimizer’s Amazon EC2 instance recommendations. This
+    # is based on the Savings Plans and Reserved Instances pricing
+    # discounts.
+    #
+    # @!attribute [rw] currency
+    #   The currency of the estimated monthly savings.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the estimated monthly savings.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceEstimatedMonthlySavings AWS API Documentation
+    #
+    class InstanceEstimatedMonthlySavings < Struct.new(
+      :currency,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an Amazon EC2 instance recommendation.
     #
     # @!attribute [rw] instance_arn
@@ -3074,6 +3759,11 @@ module Aws::ComputeOptimizer
     #     memory, and network, meet the performance requirements of your
     #     workload and is not over provisioned. For optimized resources,
     #     Compute Optimizer might recommend a new generation instance type.
+    #
+    #   <note markdown="1"> The valid values in your API responses appear as OVER\_PROVISIONED,
+    #   UNDER\_PROVISIONED, or OPTIMIZED.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] finding_reason_codes
@@ -3344,6 +4034,11 @@ module Aws::ComputeOptimizer
     #   The instance type of the instance recommendation.
     #   @return [String]
     #
+    # @!attribute [rw] instance_gpu_info
+    #   Describes the GPU accelerator settings for the recommended instance
+    #   type.
+    #   @return [Types::GpuInfo]
+    #
     # @!attribute [rw] projected_utilization_metrics
     #   An array of objects that describe the projected utilization metrics
     #   of the instance recommendation option.
@@ -3491,6 +4186,13 @@ module Aws::ComputeOptimizer
     #   monthly savings amount and percentage.
     #   @return [Types::SavingsOpportunity]
     #
+    # @!attribute [rw] savings_opportunity_after_discounts
+    #   An object that describes the savings opportunity for the instance
+    #   recommendation option that includes Savings Plans and Reserved
+    #   Instances discounts. Savings opportunity includes the estimated
+    #   monthly savings and percentage.
+    #   @return [Types::InstanceSavingsOpportunityAfterDiscounts]
+    #
     # @!attribute [rw] migration_effort
     #   The level of effort required to migrate from the current instance
     #   type to the recommended instance type.
@@ -3504,22 +4206,64 @@ module Aws::ComputeOptimizer
     #   architecture.
     #   @return [String]
     #
-    # @!attribute [rw] instance_gpu_info
-    #   Describes the GPU accelerator settings for the recommended instance
-    #   type.
-    #   @return [Types::GpuInfo]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceRecommendationOption AWS API Documentation
     #
     class InstanceRecommendationOption < Struct.new(
       :instance_type,
+      :instance_gpu_info,
       :projected_utilization_metrics,
       :platform_differences,
       :performance_risk,
       :rank,
       :savings_opportunity,
-      :migration_effort,
-      :instance_gpu_info)
+      :savings_opportunity_after_discounts,
+      :migration_effort)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the savings estimation mode used for calculating savings
+    # opportunity for Amazon EC2 instances.
+    #
+    # @!attribute [rw] source
+    #   Describes the source for calculating the savings opportunity for
+    #   Amazon EC2 instances.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceSavingsEstimationMode AWS API Documentation
+    #
+    class InstanceSavingsEstimationMode < Struct.new(
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the savings opportunity for instance recommendations after
+    # applying the Savings Plans and Reserved Instances discounts.
+    #
+    # Savings opportunity after discounts represents the estimated monthly
+    # savings you can achieve by implementing Compute Optimizer
+    # recommendations.
+    #
+    # @!attribute [rw] savings_opportunity_percentage
+    #   The estimated monthly savings possible as a percentage of monthly
+    #   cost after applying the Savings Plans and Reserved Instances
+    #   discounts. This saving can be achieved by adopting Compute
+    #   Optimizer’s EC2 instance recommendations.
+    #   @return [Float]
+    #
+    # @!attribute [rw] estimated_monthly_savings
+    #   An object that describes the estimated monthly savings possible by
+    #   adopting Compute Optimizer’s Amazon EC2 instance recommendations.
+    #   This is based on pricing after applying the Savings Plans and
+    #   Reserved Instances discounts.
+    #   @return [Types::InstanceEstimatedMonthlySavings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceSavingsOpportunityAfterDiscounts AWS API Documentation
+    #
+    class InstanceSavingsOpportunityAfterDiscounts < Struct.new(
+      :savings_opportunity_percentage,
+      :estimated_monthly_savings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3595,6 +4339,43 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # Describes the effective recommendation preferences for Lambda
+    # functions.
+    #
+    # @!attribute [rw] savings_estimation_mode
+    #   Describes the savings estimation mode applied for calculating
+    #   savings opportunity for Lambda functions.
+    #   @return [Types::LambdaSavingsEstimationMode]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LambdaEffectiveRecommendationPreferences AWS API Documentation
+    #
+    class LambdaEffectiveRecommendationPreferences < Struct.new(
+      :savings_estimation_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the estimated monthly savings possible for Lambda functions
+    # by adopting Compute Optimizer recommendations. This is based on Lambda
+    # functions pricing after applying Savings Plans discounts.
+    #
+    # @!attribute [rw] currency
+    #   The currency of the estimated monthly savings.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the estimated monthly savings.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LambdaEstimatedMonthlySavings AWS API Documentation
+    #
+    class LambdaEstimatedMonthlySavings < Struct.new(
+      :currency,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a projected utilization metric of an Lambda function
     # recommendation option.
     #
@@ -3643,13 +4424,20 @@ module Aws::ComputeOptimizer
     #   estimated monthly savings amount and percentage.
     #   @return [Types::SavingsOpportunity]
     #
+    # @!attribute [rw] savings_opportunity_after_discounts
+    #   An object that describes the savings opportunity for the Lambda
+    #   recommendation option which includes Saving Plans discounts. Savings
+    #   opportunity includes the estimated monthly savings and percentage.
+    #   @return [Types::LambdaSavingsOpportunityAfterDiscounts]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LambdaFunctionMemoryRecommendationOption AWS API Documentation
     #
     class LambdaFunctionMemoryRecommendationOption < Struct.new(
       :rank,
       :memory_size,
       :projected_utilization_metrics,
-      :savings_opportunity)
+      :savings_opportunity,
+      :savings_opportunity_after_discounts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3778,6 +4566,11 @@ module Aws::ComputeOptimizer
     #   current Lambda function requires more memory.
     #   @return [String]
     #
+    # @!attribute [rw] effective_recommendation_preferences
+    #   Describes the effective recommendation preferences for Lambda
+    #   functions.
+    #   @return [Types::LambdaEffectiveRecommendationPreferences]
+    #
     # @!attribute [rw] tags
     #   A list of tags assigned to your Lambda function recommendations.
     #   @return [Array<Types::Tag>]
@@ -3797,6 +4590,7 @@ module Aws::ComputeOptimizer
       :finding_reason_codes,
       :memory_size_recommendation_options,
       :current_performance_risk,
+      :effective_recommendation_preferences,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -3906,6 +4700,51 @@ module Aws::ComputeOptimizer
       :name,
       :statistic,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the savings estimation used for calculating savings
+    # opportunity for Lambda functions.
+    #
+    # @!attribute [rw] source
+    #   Describes the source for calculation of savings opportunity for
+    #   Lambda functions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LambdaSavingsEstimationMode AWS API Documentation
+    #
+    class LambdaSavingsEstimationMode < Struct.new(
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the savings opportunity for Lambda functions recommendations
+    # after applying Savings Plans discounts.
+    #
+    # Savings opportunity represents the estimated monthly savings after
+    # applying Savings Plans discounts. You can achieve this by implementing
+    # a given Compute Optimizer recommendation.
+    #
+    # @!attribute [rw] savings_opportunity_percentage
+    #   The estimated monthly savings possible as a percentage of monthly
+    #   cost by adopting Compute Optimizer’s Lambda function
+    #   recommendations. This includes any applicable Savings Plans
+    #   discounts.
+    #   @return [Float]
+    #
+    # @!attribute [rw] estimated_monthly_savings
+    #   The estimated monthly savings possible by adopting Compute
+    #   Optimizer’s Lambda function recommendations. This includes any
+    #   applicable Savings Plans discounts.
+    #   @return [Types::LambdaEstimatedMonthlySavings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LambdaSavingsOpportunityAfterDiscounts AWS API Documentation
+    #
+    class LambdaSavingsOpportunityAfterDiscounts < Struct.new(
+      :savings_opportunity_percentage,
+      :estimated_monthly_savings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4243,6 +5082,60 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # The preference to control which resource type values are considered
+    # when generating rightsizing recommendations. You can specify this
+    # preference as a combination of include and exclude lists. You must
+    # specify either an `includeList` or `excludeList`. If the preference is
+    # an empty set of resource type values, an error occurs. For more
+    # information, see [ Rightsizing recommendation preferences][1] in the
+    # *Compute Optimizer User Guide*.
+    #
+    # <note markdown="1"> * This preference is only available for the Amazon EC2 instance and
+    #   Auto Scaling group resource types.
+    #
+    # * Compute Optimizer only supports the customization of
+    #   `Ec2InstanceTypes`.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/rightsizing-preferences.html
+    #
+    # @!attribute [rw] name
+    #   The type of preferred resource to customize.
+    #
+    #   <note markdown="1"> Compute Optimizer only supports the customization of
+    #   `Ec2InstanceTypes`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] include_list
+    #   The preferred resource type values to include in the recommendation
+    #   candidates. You can specify the exact resource type value, such as
+    #   m5.large, or use wild card expressions, such as m5. If this isn’t
+    #   specified, all supported resources are included by default. You can
+    #   specify up to 1000 values in this list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude_list
+    #   The preferred resource type values to exclude from the
+    #   recommendation candidates. If this isn’t specified, all supported
+    #   resources are included by default. You can specify up to 1000 values
+    #   in this list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/PreferredResource AWS API Documentation
+    #
+    class PreferredResource < Struct.new(
+      :name,
+      :include_list,
+      :exclude_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a projected utilization metric of a recommendation option,
     # such as an Amazon EC2 instance. This represents the projected
     # utilization of a recommendation option had you used that resource
@@ -4340,11 +5233,6 @@ module Aws::ComputeOptimizer
     #   instances that are part of Auto Scaling groups. The
     #   `AutoScalingGroup` option encompasses only instances that are part
     #   of an Auto Scaling group.
-    #
-    #   <note markdown="1"> The valid values for this parameter are `Ec2Instance` and
-    #   `AutoScalingGroup`.
-    #
-    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] scope
@@ -4427,6 +5315,73 @@ module Aws::ComputeOptimizer
     #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html
     #   @return [Types::ExternalMetricsPreference]
     #
+    # @!attribute [rw] look_back_period
+    #   The preference to control the number of days the utilization metrics
+    #   of the Amazon Web Services resource are analyzed. When this
+    #   preference isn't specified, we use the default value `DAYS_14`.
+    #
+    #   <note markdown="1"> You can only set this preference for the Amazon EC2 instance and
+    #   Auto Scaling group resource types.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] utilization_preferences
+    #   The preference to control the resource’s CPU utilization threshold,
+    #   CPU utilization headroom, and memory utilization headroom. When this
+    #   preference isn't specified, we use the following default values.
+    #
+    #   CPU utilization:
+    #
+    #   * `P99_5` for threshold
+    #
+    #   * `PERCENT_20` for headroom
+    #
+    #   Memory utilization:
+    #
+    #   * `PERCENT_20` for headroom
+    #
+    #   ^
+    #
+    #   <note markdown="1"> * You can only set CPU and memory utilization preferences for the
+    #     Amazon EC2 instance resource type.
+    #
+    #   * The threshold setting isn’t available for memory utilization.
+    #
+    #    </note>
+    #   @return [Array<Types::UtilizationPreference>]
+    #
+    # @!attribute [rw] preferred_resources
+    #   The preference to control which resource type values are considered
+    #   when generating rightsizing recommendations. You can specify this
+    #   preference as a combination of include and exclude lists. You must
+    #   specify either an `includeList` or `excludeList`. If the preference
+    #   is an empty set of resource type values, an error occurs.
+    #
+    #   <note markdown="1"> You can only set this preference for the Amazon EC2 instance and
+    #   Auto Scaling group resource types.
+    #
+    #    </note>
+    #   @return [Array<Types::PreferredResource>]
+    #
+    # @!attribute [rw] savings_estimation_mode
+    #   The status of the savings estimation mode preference to create or
+    #   update.
+    #
+    #   Specify the `AfterDiscounts` status to activate the preference, or
+    #   specify `BeforeDiscounts` to deactivate the preference.
+    #
+    #   Only the account manager or delegated administrator of your
+    #   organization can activate this preference.
+    #
+    #   For more information, see [ Savings estimation mode][1] in the
+    #   *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/savings-estimation-mode.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/PutRecommendationPreferencesRequest AWS API Documentation
     #
     class PutRecommendationPreferencesRequest < Struct.new(
@@ -4434,7 +5389,11 @@ module Aws::ComputeOptimizer
       :scope,
       :enhanced_infrastructure_metrics,
       :inferred_workload_types,
-      :external_metrics_preference)
+      :external_metrics_preference,
+      :look_back_period,
+      :utilization_preferences,
+      :preferred_resources,
+      :savings_estimation_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4442,6 +5401,569 @@ module Aws::ComputeOptimizer
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/PutRecommendationPreferencesResponse AWS API Documentation
     #
     class PutRecommendationPreferencesResponse < Aws::EmptyStructure; end
+
+    # Describes the recommendation options for an Amazon RDS instance.
+    #
+    # @!attribute [rw] db_instance_class
+    #   Describes the DB instance class recommendation option for your
+    #   Amazon RDS instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] projected_utilization_metrics
+    #   An array of objects that describe the projected utilization metrics
+    #   of the RDS instance recommendation option.
+    #   @return [Array<Types::RDSDBUtilizationMetric>]
+    #
+    # @!attribute [rw] performance_risk
+    #   The performance risk of the RDS instance recommendation option.
+    #   @return [Float]
+    #
+    # @!attribute [rw] rank
+    #   The rank identifier of the RDS instance recommendation option.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] savings_opportunity
+    #   Describes the savings opportunity for recommendations of a given
+    #   resource type or for the recommendation option of an individual
+    #   resource.
+    #
+    #   Savings opportunity represents the estimated monthly savings you can
+    #   achieve by implementing a given Compute Optimizer recommendation.
+    #
+    #   Savings opportunity data requires that you opt in to Cost Explorer,
+    #   as well as activate **Receive Amazon EC2 resource recommendations**
+    #   in the Cost Explorer preferences page. That creates a connection
+    #   between Cost Explorer and Compute Optimizer. With this connection,
+    #   Cost Explorer generates savings estimates considering the price of
+    #   existing resources, the price of recommended resources, and
+    #   historical usage data. Estimated monthly savings reflects the
+    #   projected dollar savings associated with each of the recommendations
+    #   generated. For more information, see [Enabling Cost Explorer][1] and
+    #   [Optimizing your cost with Rightsizing Recommendations][2] in the
+    #   *Cost Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html
+    #   [2]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html
+    #   @return [Types::SavingsOpportunity]
+    #
+    # @!attribute [rw] savings_opportunity_after_discounts
+    #   Describes the savings opportunity for Amazon RDS recommendations or
+    #   for the recommendation option.
+    #
+    #   Savings opportunity represents the estimated monthly savings after
+    #   applying Savings Plans discounts. You can achieve this by
+    #   implementing a given Compute Optimizer recommendation.
+    #   @return [Types::RDSInstanceSavingsOpportunityAfterDiscounts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSDBInstanceRecommendationOption AWS API Documentation
+    #
+    class RDSDBInstanceRecommendationOption < Struct.new(
+      :db_instance_class,
+      :projected_utilization_metrics,
+      :performance_risk,
+      :rank,
+      :savings_opportunity,
+      :savings_opportunity_after_discounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Amazon RDS recommendation.
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the current Amazon RDS.
+    #
+    #   The following is the format of the ARN:
+    #
+    #   `arn:aws:rds:\{region\}:\{accountId\}:db:\{resourceName\}`
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the Amazon RDS.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The engine of the RDS instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The database engine version.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_db_instance_class
+    #   The DB instance class of the current RDS instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_storage_configuration
+    #   The configuration of the current RDS storage.
+    #   @return [Types::DBStorageConfiguration]
+    #
+    # @!attribute [rw] idle
+    #   This indicates if the RDS instance is idle or not.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_finding
+    #   The finding classification of an Amazon RDS instance.
+    #
+    #   Findings for Amazon RDS instance include:
+    #
+    #   * <b> <code>Underprovisioned</code> </b> — When Compute Optimizer
+    #     detects that there’s not enough resource specifications, an Amazon
+    #     RDS is considered under-provisioned.
+    #
+    #   * <b> <code>Overprovisioned</code> </b> — When Compute Optimizer
+    #     detects that there’s excessive resource specifications, an Amazon
+    #     RDS is considered over-provisioned.
+    #
+    #   * <b> <code>Optimized</code> </b> — When the specifications of your
+    #     Amazon RDS instance meet the performance requirements of your
+    #     workload, the service is considered optimized.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_finding
+    #   The finding classification of Amazon RDS storage.
+    #
+    #   Findings for Amazon RDS instance include:
+    #
+    #   * <b> <code>Underprovisioned</code> </b> — When Compute Optimizer
+    #     detects that there’s not enough storage, an Amazon RDS is
+    #     considered under-provisioned.
+    #
+    #   * <b> <code>Overprovisioned</code> </b> — When Compute Optimizer
+    #     detects that there’s excessive storage, an Amazon RDS is
+    #     considered over-provisioned.
+    #
+    #   * <b> <code>Optimized</code> </b> — When the storage of your Amazon
+    #     RDS meet the performance requirements of your workload, the
+    #     service is considered optimized.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_finding_reason_codes
+    #   The reason for the finding classification of an Amazon RDS instance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] storage_finding_reason_codes
+    #   The reason for the finding classification of Amazon RDS storage.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_recommendation_options
+    #   An array of objects that describe the recommendation options for the
+    #   Amazon RDS instance.
+    #   @return [Array<Types::RDSDBInstanceRecommendationOption>]
+    #
+    # @!attribute [rw] storage_recommendation_options
+    #   An array of objects that describe the recommendation options for
+    #   Amazon RDS storage.
+    #   @return [Array<Types::RDSDBStorageRecommendationOption>]
+    #
+    # @!attribute [rw] utilization_metrics
+    #   An array of objects that describe the utilization metrics of the
+    #   Amazon RDS.
+    #   @return [Array<Types::RDSDBUtilizationMetric>]
+    #
+    # @!attribute [rw] effective_recommendation_preferences
+    #   Describes the effective recommendation preferences for Amazon RDS.
+    #   @return [Types::RDSEffectiveRecommendationPreferences]
+    #
+    # @!attribute [rw] lookback_period_in_days
+    #   The number of days the Amazon RDS utilization metrics were analyzed.
+    #   @return [Float]
+    #
+    # @!attribute [rw] last_refresh_timestamp
+    #   The timestamp of when the Amazon RDS recommendation was last
+    #   generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags assigned to your Amazon RDS recommendations.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSDBRecommendation AWS API Documentation
+    #
+    class RDSDBRecommendation < Struct.new(
+      :resource_arn,
+      :account_id,
+      :engine,
+      :engine_version,
+      :current_db_instance_class,
+      :current_storage_configuration,
+      :idle,
+      :instance_finding,
+      :storage_finding,
+      :instance_finding_reason_codes,
+      :storage_finding_reason_codes,
+      :instance_recommendation_options,
+      :storage_recommendation_options,
+      :utilization_metrics,
+      :effective_recommendation_preferences,
+      :lookback_period_in_days,
+      :last_refresh_timestamp,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a filter that returns a more specific list of Amazon RDS
+    # recommendations. Use this filter with the GetECSServiceRecommendations
+    # action.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter.
+    #
+    #   Specify `Finding` to return recommendations with a specific finding
+    #   classification.
+    #
+    #   You can filter your Amazon RDS recommendations by `tag:key` and
+    #   `tag-key` tags.
+    #
+    #   A `tag:key` is a key and value combination of a tag assigned to your
+    #   Amazon RDS recommendations. Use the tag key in the filter name and
+    #   the tag value as the filter value. For example, to find all Amazon
+    #   RDS service recommendations that have a tag with the key of `Owner`
+    #   and the value of `TeamA`, specify `tag:Owner` for the filter name
+    #   and `TeamA` for the filter value.
+    #
+    #   A `tag-key` is the key of a tag assigned to your Amazon RDS
+    #   recommendations. Use this filter to find all of your Amazon RDS
+    #   recommendations that have a tag with a specific key. This doesn’t
+    #   consider the tag value. For example, you can find your Amazon RDS
+    #   service recommendations with a tag key value of `Owner` or without
+    #   any tag keys assigned.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The value of the filter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSDBRecommendationFilter AWS API Documentation
+    #
+    class RDSDBRecommendationFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the recommendation options for Amazon RDS storage.
+    #
+    # @!attribute [rw] storage_configuration
+    #   The recommended storage configuration.
+    #   @return [Types::DBStorageConfiguration]
+    #
+    # @!attribute [rw] rank
+    #   The rank identifier of the RDS storage recommendation option.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] savings_opportunity
+    #   Describes the savings opportunity for recommendations of a given
+    #   resource type or for the recommendation option of an individual
+    #   resource.
+    #
+    #   Savings opportunity represents the estimated monthly savings you can
+    #   achieve by implementing a given Compute Optimizer recommendation.
+    #
+    #   Savings opportunity data requires that you opt in to Cost Explorer,
+    #   as well as activate **Receive Amazon EC2 resource recommendations**
+    #   in the Cost Explorer preferences page. That creates a connection
+    #   between Cost Explorer and Compute Optimizer. With this connection,
+    #   Cost Explorer generates savings estimates considering the price of
+    #   existing resources, the price of recommended resources, and
+    #   historical usage data. Estimated monthly savings reflects the
+    #   projected dollar savings associated with each of the recommendations
+    #   generated. For more information, see [Enabling Cost Explorer][1] and
+    #   [Optimizing your cost with Rightsizing Recommendations][2] in the
+    #   *Cost Management User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html
+    #   [2]: https://docs.aws.amazon.com/cost-management/latest/userguide/ce-rightsizing.html
+    #   @return [Types::SavingsOpportunity]
+    #
+    # @!attribute [rw] savings_opportunity_after_discounts
+    #   Describes the savings opportunity for Amazon RDS storage
+    #   recommendations or for the recommendation option.
+    #
+    #   Savings opportunity represents the estimated monthly savings after
+    #   applying Savings Plans discounts. You can achieve this by
+    #   implementing a given Compute Optimizer recommendation.
+    #   @return [Types::RDSStorageSavingsOpportunityAfterDiscounts]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSDBStorageRecommendationOption AWS API Documentation
+    #
+    class RDSDBStorageRecommendationOption < Struct.new(
+      :storage_configuration,
+      :rank,
+      :savings_opportunity,
+      :savings_opportunity_after_discounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the utilization metric of an Amazon RDS.
+    #
+    # To determine the performance difference between your current Amazon
+    # RDS and the recommended option, compare the utilization metric data of
+    # your service against its projected utilization metric data.
+    #
+    # @!attribute [rw] name
+    #   The name of the utilization metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic of the utilization metric.
+    #
+    #   The Compute Optimizer API, Command Line Interface (CLI), and SDKs
+    #   return utilization metrics using only the `Maximum` statistic, which
+    #   is the highest value observed during the specified period.
+    #
+    #   The Compute Optimizer console displays graphs for some utilization
+    #   metrics using the `Average` statistic, which is the value of `Sum` /
+    #   `SampleCount` during the specified period. For more information, see
+    #   [Viewing resource recommendations][1] in the *Compute Optimizer User
+    #   Guide*. You can also get averaged utilization metric data for your
+    #   resources using Amazon CloudWatch. For more information, see the
+    #   [Amazon CloudWatch User Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the utilization metric.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSDBUtilizationMetric AWS API Documentation
+    #
+    class RDSDBUtilizationMetric < Struct.new(
+      :name,
+      :statistic,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the projected metrics of an Amazon RDS recommendation
+    # option.
+    #
+    # To determine the performance difference between your current Amazon
+    # RDS and the recommended option, compare the metric data of your
+    # service against its projected metric data.
+    #
+    # @!attribute [rw] name
+    #   The name of the projected metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamps
+    #   The timestamps of the projected metric.
+    #   @return [Array<Time>]
+    #
+    # @!attribute [rw] values
+    #   The values for the projected metric.
+    #   @return [Array<Float>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSDatabaseProjectedMetric AWS API Documentation
+    #
+    class RDSDatabaseProjectedMetric < Struct.new(
+      :name,
+      :timestamps,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the projected metrics of an Amazon RDS recommendation
+    # option.
+    #
+    # To determine the performance difference between your current Amazon
+    # RDS and the recommended option, compare the metric data of your
+    # service against its projected metric data.
+    #
+    # @!attribute [rw] recommended_db_instance_class
+    #   The recommended DB instance class for the Amazon RDS.
+    #   @return [String]
+    #
+    # @!attribute [rw] rank
+    #   The rank identifier of the RDS instance recommendation option.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] projected_metrics
+    #   An array of objects that describe the projected metric.
+    #   @return [Array<Types::RDSDatabaseProjectedMetric>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSDatabaseRecommendedOptionProjectedMetric AWS API Documentation
+    #
+    class RDSDatabaseRecommendedOptionProjectedMetric < Struct.new(
+      :recommended_db_instance_class,
+      :rank,
+      :projected_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the effective recommendation preferences for Amazon RDS.
+    #
+    # @!attribute [rw] cpu_vendor_architectures
+    #   Describes the CPU vendor and architecture for Amazon RDS
+    #   recommendations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] enhanced_infrastructure_metrics
+    #   Describes the activation status of the enhanced infrastructure
+    #   metrics preference.
+    #
+    #   A status of `Active` confirms that the preference is applied in the
+    #   latest recommendation refresh, and a status of `Inactive` confirms
+    #   that it's not yet applied to recommendations.
+    #
+    #   For more information, see [Enhanced infrastructure metrics][1] in
+    #   the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
+    #   @return [String]
+    #
+    # @!attribute [rw] look_back_period
+    #   The number of days the utilization metrics of the Amazon RDS are
+    #   analyzed.
+    #   @return [String]
+    #
+    # @!attribute [rw] savings_estimation_mode
+    #   Describes the savings estimation mode preference applied for
+    #   calculating savings opportunity for Amazon RDS.
+    #   @return [Types::RDSSavingsEstimationMode]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSEffectiveRecommendationPreferences AWS API Documentation
+    #
+    class RDSEffectiveRecommendationPreferences < Struct.new(
+      :cpu_vendor_architectures,
+      :enhanced_infrastructure_metrics,
+      :look_back_period,
+      :savings_estimation_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the estimated monthly savings possible for Amazon RDS
+    # instances by adopting Compute Optimizer recommendations. This is based
+    # on Amazon RDS pricing after applying Savings Plans discounts.
+    #
+    # @!attribute [rw] currency
+    #   The currency of the estimated monthly savings.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the estimated monthly savings for Amazon RDS instances.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSInstanceEstimatedMonthlySavings AWS API Documentation
+    #
+    class RDSInstanceEstimatedMonthlySavings < Struct.new(
+      :currency,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the savings opportunity for Amazon RDS instance
+    # recommendations after applying Savings Plans discounts.
+    #
+    # Savings opportunity represents the estimated monthly savings after
+    # applying Savings Plans discounts. You can achieve this by implementing
+    # a given Compute Optimizer recommendation.
+    #
+    # @!attribute [rw] savings_opportunity_percentage
+    #   The estimated monthly savings possible as a percentage of monthly
+    #   cost by adopting Compute Optimizer’s Amazon RDS instance
+    #   recommendations. This includes any applicable Savings Plans
+    #   discounts.
+    #   @return [Float]
+    #
+    # @!attribute [rw] estimated_monthly_savings
+    #   The estimated monthly savings possible by adopting Compute
+    #   Optimizer’s Amazon RDS instance recommendations. This includes any
+    #   applicable Savings Plans discounts.
+    #   @return [Types::RDSInstanceEstimatedMonthlySavings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSInstanceSavingsOpportunityAfterDiscounts AWS API Documentation
+    #
+    class RDSInstanceSavingsOpportunityAfterDiscounts < Struct.new(
+      :savings_opportunity_percentage,
+      :estimated_monthly_savings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the savings estimation mode used for calculating savings
+    # opportunity for Amazon RDS.
+    #
+    # @!attribute [rw] source
+    #   Describes the source for calculating the savings opportunity for
+    #   Amazon RDS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSSavingsEstimationMode AWS API Documentation
+    #
+    class RDSSavingsEstimationMode < Struct.new(
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the estimated monthly savings possible for Amazon RDS
+    # storage by adopting Compute Optimizer recommendations. This is based
+    # on Amazon RDS pricing after applying Savings Plans discounts.
+    #
+    # @!attribute [rw] currency
+    #   The currency of the estimated monthly savings.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the estimated monthly savings for Amazon RDS storage.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSStorageEstimatedMonthlySavings AWS API Documentation
+    #
+    class RDSStorageEstimatedMonthlySavings < Struct.new(
+      :currency,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the savings opportunity for Amazon RDS storage
+    # recommendations after applying Savings Plans discounts.
+    #
+    # Savings opportunity represents the estimated monthly savings after
+    # applying Savings Plans discounts. You can achieve this by implementing
+    # a given Compute Optimizer recommendation.
+    #
+    # @!attribute [rw] savings_opportunity_percentage
+    #   The estimated monthly savings possible as a percentage of monthly
+    #   cost by adopting Compute Optimizer’s Amazon RDS storage
+    #   recommendations. This includes any applicable Savings Plans
+    #   discounts.
+    #   @return [Float]
+    #
+    # @!attribute [rw] estimated_monthly_savings
+    #   The estimated monthly savings possible by adopting Compute
+    #   Optimizer’s Amazon RDS storage recommendations. This includes any
+    #   applicable Savings Plans discounts.
+    #   @return [Types::RDSStorageEstimatedMonthlySavings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RDSStorageSavingsOpportunityAfterDiscounts AWS API Documentation
+    #
+    class RDSStorageSavingsOpportunityAfterDiscounts < Struct.new(
+      :savings_opportunity_percentage,
+      :estimated_monthly_savings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A summary of a finding reason code.
     #
@@ -4515,7 +6037,8 @@ module Aws::ComputeOptimizer
 
     # Describes the recommendation preferences to return in the response of
     # a GetAutoScalingGroupRecommendations, GetEC2InstanceRecommendations,
-    # and GetEC2RecommendationProjectedMetrics request.
+    # GetEC2RecommendationProjectedMetrics, GetRDSDatabaseRecommendations,
+    # and GetRDSDatabaseRecommendationProjectedMetrics request.
     #
     # @!attribute [rw] cpu_vendor_architectures
     #   Specifies the CPU vendor and architecture for Amazon EC2 instance
@@ -4525,16 +6048,16 @@ module Aws::ComputeOptimizer
     #
     #   * A GetEC2InstanceRecommendations or
     #     GetAutoScalingGroupRecommendations request, Compute Optimizer
-    #     returns recommendations that consist of Graviton2 instance types
+    #     returns recommendations that consist of Graviton instance types
     #     only.
     #
     #   * A GetEC2RecommendationProjectedMetrics request, Compute Optimizer
-    #     returns projected utilization metrics for Graviton2 instance type
+    #     returns projected utilization metrics for Graviton instance type
     #     recommendations only.
     #
     #   * A ExportEC2InstanceRecommendations or
     #     ExportAutoScalingGroupRecommendations request, Compute Optimizer
-    #     exports recommendations that consist of Graviton2 instance types
+    #     exports recommendations that consist of Graviton instance types
     #     only.
     #   @return [Array<String>]
     #
@@ -4606,6 +6129,39 @@ module Aws::ComputeOptimizer
     #   this object doesn't appear in the response.
     #   @return [Types::ExternalMetricsPreference]
     #
+    # @!attribute [rw] look_back_period
+    #   The preference to control the number of days the utilization metrics
+    #   of the Amazon Web Services resource are analyzed. If the preference
+    #   isn’t set, this object is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] utilization_preferences
+    #   The preference to control the resource’s CPU utilization threshold,
+    #   CPU utilization headroom, and memory utilization headroom. If the
+    #   preference isn’t set, this object is null.
+    #
+    #   <note markdown="1"> This preference is only available for the Amazon EC2 instance
+    #   resource type.
+    #
+    #    </note>
+    #   @return [Array<Types::UtilizationPreference>]
+    #
+    # @!attribute [rw] preferred_resources
+    #   The preference to control which resource type values are considered
+    #   when generating rightsizing recommendations. This object resolves
+    #   any wildcard expressions and returns the effective list of candidate
+    #   resource type values. If the preference isn’t set, this object is
+    #   null.
+    #   @return [Array<Types::EffectivePreferredResource>]
+    #
+    # @!attribute [rw] savings_estimation_mode
+    #   Describes the savings estimation mode used for calculating savings
+    #   opportunity.
+    #
+    #   Only the account manager or delegated administrator of your
+    #   organization can activate this preference.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RecommendationPreferencesDetail AWS API Documentation
     #
     class RecommendationPreferencesDetail < Struct.new(
@@ -4613,7 +6169,11 @@ module Aws::ComputeOptimizer
       :resource_type,
       :enhanced_infrastructure_metrics,
       :inferred_workload_types,
-      :external_metrics_preference)
+      :external_metrics_preference,
+      :look_back_period,
+      :utilization_preferences,
+      :preferred_resources,
+      :savings_estimation_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5268,6 +6828,32 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
+    # The preference to control the resource’s CPU utilization threshold,
+    # CPU utilization headroom, and memory utilization headroom.
+    #
+    # <note markdown="1"> This preference is only available for the Amazon EC2 instance resource
+    # type.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the resource utilization metric name to customize.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_parameters
+    #   The parameters to set when customizing the resource utilization
+    #   thresholds.
+    #   @return [Types::CustomizableMetricParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/UtilizationPreference AWS API Documentation
+    #
+    class UtilizationPreference < Struct.new(
+      :metric_name,
+      :metric_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the configuration of an Amazon Elastic Block Store (Amazon
     # EBS) volume.
     #
@@ -5374,6 +6960,11 @@ module Aws::ComputeOptimizer
     #   EBS volume doesn't have sufficient capacity.
     #   @return [String]
     #
+    # @!attribute [rw] effective_recommendation_preferences
+    #   Describes the effective recommendation preferences for Amazon EBS
+    #   volume.
+    #   @return [Types::EBSEffectiveRecommendationPreferences]
+    #
     # @!attribute [rw] tags
     #   A list of tags assigned to your Amazon EBS volume recommendations.
     #   @return [Array<Types::Tag>]
@@ -5390,6 +6981,7 @@ module Aws::ComputeOptimizer
       :volume_recommendation_options,
       :last_refresh_timestamp,
       :current_performance_risk,
+      :effective_recommendation_preferences,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -5427,13 +7019,20 @@ module Aws::ComputeOptimizer
     #   monthly savings amount and percentage.
     #   @return [Types::SavingsOpportunity]
     #
+    # @!attribute [rw] savings_opportunity_after_discounts
+    #   An object that describes the savings opportunity for the Amazon EBS
+    #   volume recommendation option with specific discounts. Savings
+    #   opportunity includes the estimated monthly savings and percentage.
+    #   @return [Types::EBSSavingsOpportunityAfterDiscounts]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/VolumeRecommendationOption AWS API Documentation
     #
     class VolumeRecommendationOption < Struct.new(
       :configuration,
       :performance_risk,
       :rank,
-      :savings_opportunity)
+      :savings_opportunity,
+      :savings_opportunity_after_discounts)
       SENSITIVE = []
       include Aws::Structure
     end

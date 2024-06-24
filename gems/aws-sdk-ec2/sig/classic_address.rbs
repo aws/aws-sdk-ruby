@@ -1,0 +1,102 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html
+    class ClassicAddress
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#initialize-instance_method
+      def initialize: (String public_ip, Hash[Symbol, untyped] options) -> void
+                    | (public_ip: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#public_ip-instance_method
+      def public_ip: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#instance_id-instance_method
+      def instance_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#allocation_id-instance_method
+      def allocation_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#association_id-instance_method
+      def association_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#domain-instance_method
+      def domain: () -> ("vpc" | "standard")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#network_interface_id-instance_method
+      def network_interface_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#network_interface_owner_id-instance_method
+      def network_interface_owner_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#private_ip_address-instance_method
+      def private_ip_address: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#tags-instance_method
+      def tags: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#public_ipv_4_pool-instance_method
+      def public_ipv_4_pool: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#network_border_group-instance_method
+      def network_border_group: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#customer_owned_ip-instance_method
+      def customer_owned_ip: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#customer_owned_ipv_4_pool-instance_method
+      def customer_owned_ipv_4_pool: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#carrier_ip-instance_method
+      def carrier_ip: () -> ::String
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#data-instance_method
+      def data: () -> Types::Address
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#associate-instance_method
+      def associate: (
+                       ?allocation_id: ::String,
+                       ?instance_id: ::String,
+                       ?allow_reassociation: bool,
+                       ?dry_run: bool,
+                       ?network_interface_id: ::String,
+                       ?private_ip_address: ::String
+                     ) -> Types::AssociateAddressResult
+                   | (?Hash[Symbol, untyped]) -> Types::AssociateAddressResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#disassociate-instance_method
+      def disassociate: (
+                          ?association_id: ::String,
+                          ?dry_run: bool
+                        ) -> ::Aws::EmptyStructure
+                      | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/ClassicAddress.html#release-instance_method
+      def release: (
+                     ?allocation_id: ::String,
+                     ?network_border_group: ::String,
+                     ?dry_run: bool
+                   ) -> ::Aws::EmptyStructure
+                 | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      class Collection < ::Aws::Resources::Collection[ClassicAddress]
+      end
+    end
+  end
+end

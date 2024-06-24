@@ -1,0 +1,179 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudWatch
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html
+    class Alarm
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#name-instance_method
+      def name: () -> String
+      alias alarm_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#alarm_arn-instance_method
+      def alarm_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#alarm_description-instance_method
+      def alarm_description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#alarm_configuration_updated_timestamp-instance_method
+      def alarm_configuration_updated_timestamp: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#actions_enabled-instance_method
+      def actions_enabled: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#ok_actions-instance_method
+      def ok_actions: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#alarm_actions-instance_method
+      def alarm_actions: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#insufficient_data_actions-instance_method
+      def insufficient_data_actions: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#state_value-instance_method
+      def state_value: () -> ("OK" | "ALARM" | "INSUFFICIENT_DATA")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#state_reason-instance_method
+      def state_reason: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#state_reason_data-instance_method
+      def state_reason_data: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#state_updated_timestamp-instance_method
+      def state_updated_timestamp: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#metric_name-instance_method
+      def metric_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#namespace-instance_method
+      def namespace: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#statistic-instance_method
+      def statistic: () -> ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#extended_statistic-instance_method
+      def extended_statistic: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#dimensions-instance_method
+      def dimensions: () -> ::Array[Types::Dimension]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#period-instance_method
+      def period: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#unit-instance_method
+      def unit: () -> ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#evaluation_periods-instance_method
+      def evaluation_periods: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#datapoints_to_alarm-instance_method
+      def datapoints_to_alarm: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#threshold-instance_method
+      def threshold: () -> ::Float
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#comparison_operator-instance_method
+      def comparison_operator: () -> ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold" | "LessThanLowerOrGreaterThanUpperThreshold" | "LessThanLowerThreshold" | "GreaterThanUpperThreshold")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#treat_missing_data-instance_method
+      def treat_missing_data: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#evaluate_low_sample_count_percentile-instance_method
+      def evaluate_low_sample_count_percentile: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#metrics-instance_method
+      def metrics: () -> ::Array[Types::MetricDataQuery]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#threshold_metric_id-instance_method
+      def threshold_metric_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#evaluation_state-instance_method
+      def evaluation_state: () -> ("PARTIAL_DATA")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#state_transitioned_timestamp-instance_method
+      def state_transitioned_timestamp: () -> ::Time
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#data-instance_method
+      def data: () -> Types::MetricAlarm
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#exists?-instance_method
+      def exists?: (?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) -> bool
+                 | (?Hash[Symbol, untyped]) -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#wait_until_exists-instance_method
+      def wait_until_exists: (?max_attempts: Integer, ?delay: Numeric, ?before_attempt: (^(Integer attempts) -> void), ?before_wait: (^(Integer attempts, untyped response) -> void)) ?{ (untyped waiter) -> void } -> Alarm
+                           | (?Hash[Symbol, untyped]) ?{ (untyped waiter) -> void } -> Alarm
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#describe_history-instance_method
+      def describe_history: (
+                              ?alarm_types: Array[("CompositeAlarm" | "MetricAlarm")],
+                              ?history_item_type: ("ConfigurationUpdate" | "StateUpdate" | "Action"),
+                              ?start_date: ::Time,
+                              ?end_date: ::Time,
+                              ?max_records: ::Integer,
+                              ?next_token: ::String,
+                              ?scan_by: ("TimestampDescending" | "TimestampAscending")
+                            ) -> Types::DescribeAlarmHistoryOutput
+                          | (?Hash[Symbol, untyped]) -> Types::DescribeAlarmHistoryOutput
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#disable_actions-instance_method
+      def disable_actions: (
+                           ) -> ::Aws::EmptyStructure
+                         | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#enable_actions-instance_method
+      def enable_actions: (
+                          ) -> ::Aws::EmptyStructure
+                        | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#set_state-instance_method
+      def set_state: (
+                       state_value: ("OK" | "ALARM" | "INSUFFICIENT_DATA"),
+                       state_reason: ::String,
+                       ?state_reason_data: ::String
+                     ) -> ::Aws::EmptyStructure
+                   | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Alarm.html#metric-instance_method
+      def metric: () -> Metric?
+
+      class Collection < ::Aws::Resources::Collection[Alarm]
+
+        def batch_delete!: (
+                           ) -> void
+                       | (?Hash[Symbol, untyped]) -> void
+
+        def batch_disable_actions: (
+                                   ) -> void
+                               | (?Hash[Symbol, untyped]) -> void
+
+        def batch_enable_actions: (
+                                  ) -> void
+                              | (?Hash[Symbol, untyped]) -> void
+      end
+    end
+  end
+end

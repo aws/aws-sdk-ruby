@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CustomerProfiles
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CustomerProfiles
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::CustomerProfiles
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::CustomerProfiles
     #   @option options [Aws::CustomerProfiles::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CustomerProfiles::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -498,7 +523,7 @@ module Aws::CustomerProfiles
     #     domain_name: "name", # required
     #     calculated_attribute_name: "typeName", # required
     #     display_name: "displayName",
-    #     description: "text",
+    #     description: "sensitiveText",
     #     attribute_details: { # required
     #       attributes: [ # required
     #         {
@@ -1390,6 +1415,50 @@ module Aws::CustomerProfiles
     # @param [Hash] params ({})
     def delete_workflow(params = {}, options = {})
       req = build_request(:delete_workflow, params)
+      req.send_request(options)
+    end
+
+    # The process of detecting profile object type mapping by using given
+    # objects.
+    #
+    # @option params [required, Array<String>] :objects
+    #   A string that is serialized from a JSON object.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @return [Types::DetectProfileObjectTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetectProfileObjectTypeResponse#detected_profile_object_types #detected_profile_object_types} => Array&lt;Types::DetectedProfileObjectType&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detect_profile_object_type({
+    #     objects: ["stringifiedJson"], # required
+    #     domain_name: "name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.detected_profile_object_types #=> Array
+    #   resp.detected_profile_object_types[0].source_last_updated_timestamp_format #=> String
+    #   resp.detected_profile_object_types[0].fields #=> Hash
+    #   resp.detected_profile_object_types[0].fields["name"].source #=> String
+    #   resp.detected_profile_object_types[0].fields["name"].target #=> String
+    #   resp.detected_profile_object_types[0].fields["name"].content_type #=> String, one of "STRING", "NUMBER", "PHONE_NUMBER", "EMAIL_ADDRESS", "NAME"
+    #   resp.detected_profile_object_types[0].keys #=> Hash
+    #   resp.detected_profile_object_types[0].keys["name"] #=> Array
+    #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers #=> Array
+    #   resp.detected_profile_object_types[0].keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY", "ORDER"
+    #   resp.detected_profile_object_types[0].keys["name"][0].field_names #=> Array
+    #   resp.detected_profile_object_types[0].keys["name"][0].field_names[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DetectProfileObjectType AWS API Documentation
+    #
+    # @overload detect_profile_object_type(params = {})
+    # @param [Hash] params ({})
+    def detect_profile_object_type(params = {}, options = {})
+      req = build_request(:detect_profile_object_type, params)
       req.send_request(options)
     end
 
@@ -3514,7 +3583,7 @@ module Aws::CustomerProfiles
     #     domain_name: "name", # required
     #     calculated_attribute_name: "typeName", # required
     #     display_name: "displayName",
-    #     description: "text",
+    #     description: "sensitiveText",
     #     conditions: {
     #       range: {
     #         value: 1, # required
@@ -3944,7 +4013,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

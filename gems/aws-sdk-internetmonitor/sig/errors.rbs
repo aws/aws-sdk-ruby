@@ -1,0 +1,49 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module InternetMonitor
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessDeniedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class BadRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalServerErrorException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalServerException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyRequestsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ValidationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

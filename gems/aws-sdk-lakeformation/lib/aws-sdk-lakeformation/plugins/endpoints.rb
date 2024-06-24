@@ -14,6 +14,7 @@ module Aws::LakeFormation
       option(
         :endpoint_provider,
         doc_type: 'Aws::LakeFormation::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::LakeFormation
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -72,18 +74,24 @@ module Aws::LakeFormation
             Aws::LakeFormation::Endpoints::CreateDataCellsFilter.build(context)
           when :create_lf_tag
             Aws::LakeFormation::Endpoints::CreateLFTag.build(context)
+          when :create_lake_formation_identity_center_configuration
+            Aws::LakeFormation::Endpoints::CreateLakeFormationIdentityCenterConfiguration.build(context)
           when :create_lake_formation_opt_in
             Aws::LakeFormation::Endpoints::CreateLakeFormationOptIn.build(context)
           when :delete_data_cells_filter
             Aws::LakeFormation::Endpoints::DeleteDataCellsFilter.build(context)
           when :delete_lf_tag
             Aws::LakeFormation::Endpoints::DeleteLFTag.build(context)
+          when :delete_lake_formation_identity_center_configuration
+            Aws::LakeFormation::Endpoints::DeleteLakeFormationIdentityCenterConfiguration.build(context)
           when :delete_lake_formation_opt_in
             Aws::LakeFormation::Endpoints::DeleteLakeFormationOptIn.build(context)
           when :delete_objects_on_cancel
             Aws::LakeFormation::Endpoints::DeleteObjectsOnCancel.build(context)
           when :deregister_resource
             Aws::LakeFormation::Endpoints::DeregisterResource.build(context)
+          when :describe_lake_formation_identity_center_configuration
+            Aws::LakeFormation::Endpoints::DescribeLakeFormationIdentityCenterConfiguration.build(context)
           when :describe_resource
             Aws::LakeFormation::Endpoints::DescribeResource.build(context)
           when :describe_transaction
@@ -92,6 +100,8 @@ module Aws::LakeFormation
             Aws::LakeFormation::Endpoints::ExtendTransaction.build(context)
           when :get_data_cells_filter
             Aws::LakeFormation::Endpoints::GetDataCellsFilter.build(context)
+          when :get_data_lake_principal
+            Aws::LakeFormation::Endpoints::GetDataLakePrincipal.build(context)
           when :get_data_lake_settings
             Aws::LakeFormation::Endpoints::GetDataLakeSettings.build(context)
           when :get_effective_permissions_for_path
@@ -150,6 +160,8 @@ module Aws::LakeFormation
             Aws::LakeFormation::Endpoints::UpdateDataCellsFilter.build(context)
           when :update_lf_tag
             Aws::LakeFormation::Endpoints::UpdateLFTag.build(context)
+          when :update_lake_formation_identity_center_configuration
+            Aws::LakeFormation::Endpoints::UpdateLakeFormationIdentityCenterConfiguration.build(context)
           when :update_resource
             Aws::LakeFormation::Endpoints::UpdateResource.build(context)
           when :update_table_objects

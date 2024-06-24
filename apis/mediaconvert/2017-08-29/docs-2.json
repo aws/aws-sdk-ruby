@@ -12,7 +12,7 @@
     "DeletePolicy": "Permanently delete a policy that you created.",
     "DeletePreset": "Permanently delete a preset you have created.",
     "DeleteQueue": "Permanently delete a queue you have created.",
-    "DescribeEndpoints": "Send an request with an empty body to the regional API endpoint to get your account API endpoint.",
+    "DescribeEndpoints": "Send a request with an empty body to the regional API endpoint to get your account API endpoint. Note that DescribeEndpoints is no longer required. We recommend that you send your requests directly to the regional endpoint instead.",
     "DisassociateCertificate": "Removes an association between the Amazon Resource Name (ARN) of an AWS Certificate Manager (ACM) certificate and an AWS Elemental MediaConvert resource.",
     "GetJob": "Retrieve the JSON for a specific transcoding job.",
     "GetJobTemplate": "Retrieve the JSON for a specific job template.",
@@ -25,6 +25,7 @@
     "ListQueues": "Retrieve a JSON array of up to twenty of your queues. This will return the queues themselves, not just a list of them. To retrieve the next twenty queues, use the nextToken string returned with the array.",
     "ListTagsForResource": "Retrieve the tags for a MediaConvert resource.",
     "PutPolicy": "Create or change your policy. For more information about policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html",
+    "SearchJobs": "Retrieve a JSON array that includes job details for up to twenty of your most recent jobs. Optionally filter results further according to input file, queue, or status. To retrieve the twenty next most recent jobs, use the nextToken string returned with the array.",
     "TagResource": "Add tags to a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html",
     "UntagResource": "Remove tags from a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html",
     "UpdateJobTemplate": "Modify one of your existing job templates.",
@@ -235,15 +236,16 @@
       }
     },
     "AudioChannelTag": {
-      "base": "You can add a tag for this mono-channel audio track to mimic its placement in a multi-channel layout. For example, if this track is the left surround channel, choose Left surround (LS).",
+      "base": "Specify the QuickTime audio channel layout tags for the audio channels in this audio track. Enter channel layout tags in the same order as your output's audio channel order. For example, if your output audio track has a left and a right channel, enter Left (L) for the first channel and Right (R) for the second. If your output has multiple single-channel audio tracks, enter a single channel layout tag for each track.",
       "refs": {
-        "AudioChannelTaggingSettings$ChannelTag": "You can add a tag for this mono-channel audio track to mimic its placement in a multi-channel layout. For example, if this track is the left surround channel, choose Left surround (LS)."
+        "AudioChannelTaggingSettings$ChannelTag": "Specify the QuickTime audio channel layout tags for the audio channels in this audio track. Enter channel layout tags in the same order as your output's audio channel order. For example, if your output audio track has a left and a right channel, enter Left (L) for the first channel and Right (R) for the second. If your output has multiple single-channel audio tracks, enter a single channel layout tag for each track.",
+        "__listOfAudioChannelTag$member": null
       }
     },
     "AudioChannelTaggingSettings": {
-      "base": "When you mimic a multi-channel audio layout with multiple mono-channel tracks, you can tag each channel layout manually. For example, you would tag the tracks that contain your left, right, and center audio with Left (L), Right (R), and Center (C), respectively. When you don't specify a value, MediaConvert labels your track as Center (C) by default. To use audio layout tagging, your output must be in a QuickTime (.mov) container; your audio codec must be AAC, WAV, or AIFF; and you must set up your audio track to have only one channel.",
+      "base": "Specify the QuickTime audio channel layout tags for the audio channels in this audio track. When you don't specify a value, MediaConvert labels your track as Center (C) by default. To use Audio layout tagging, your output must be in a QuickTime (MOV) container and your audio codec must be AAC, WAV, or AIFF.",
       "refs": {
-        "AudioDescription$AudioChannelTaggingSettings": "When you mimic a multi-channel audio layout with multiple mono-channel tracks, you can tag each channel layout manually. For example, you would tag the tracks that contain your left, right, and center audio with Left (L), Right (R), and Center (C), respectively. When you don't specify a value, MediaConvert labels your track as Center (C) by default. To use audio layout tagging, your output must be in a QuickTime (.mov) container; your audio codec must be AAC, WAV, or AIFF; and you must set up your audio track to have only one channel."
+        "AudioDescription$AudioChannelTaggingSettings": "Specify the QuickTime audio channel layout tags for the audio channels in this audio track. When you don't specify a value, MediaConvert labels your track as Center (C) by default. To use Audio layout tagging, your output must be in a QuickTime (MOV) container and your audio codec must be AAC, WAV, or AIFF."
       }
     },
     "AudioCodec": {
@@ -507,9 +509,9 @@
       }
     },
     "BurnInSubtitleStylePassthrough": {
-      "base": "Set Style passthrough to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use default settings: white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings.",
+      "base": "To use the available style, color, and position information from your input captions: Set Style passthrough to Enabled. Note that MediaConvert uses default settings for any missing style or position information in your input captions To ignore the style and position information from your input captions and use default settings: Leave blank or keep the default value, Disabled. Default settings include white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings. You can also override any fonts by manually specifying custom font files.",
       "refs": {
-        "BurninDestinationSettings$StylePassthrough": "Set Style passthrough to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use default settings: white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings."
+        "BurninDestinationSettings$StylePassthrough": "To use the available style, color, and position information from your input captions: Set Style passthrough to Enabled. Note that MediaConvert uses default settings for any missing style or position information in your input captions To ignore the style and position information from your input captions and use default settings: Leave blank or keep the default value, Disabled. Default settings include white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings. You can also override any fonts by manually specifying custom font files."
       }
     },
     "BurninDestinationSettings": {
@@ -854,6 +856,12 @@
         "CmfcSettings$TimedMetadataBoxVersion": "Specify the event message box (eMSG) version for ID3 timed metadata in your output.\nFor more information, see ISO/IEC 23009-1:2022 section 5.10.3.3.3 Syntax.\nLeave blank to use the default value Version 0.\nWhen you specify Version 1, you must also set ID3 metadata to Passthrough."
       }
     },
+    "ColorConversion3DLUTSetting": {
+      "base": "Custom 3D lut settings",
+      "refs": {
+        "__listOfColorConversion3DLUTSetting$member": null
+      }
+    },
     "ColorCorrector": {
       "base": "Settings for color correction.",
       "refs": {
@@ -869,6 +877,8 @@
     "ColorSpace": {
       "base": "If your input video has accurate color space metadata, or if you don't know about color space: Keep the default value, Follow. MediaConvert will automatically detect your input color space. If your input video has metadata indicating the wrong color space, or has missing metadata: Specify the accurate color space here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering Display Color Volume static metadata isn't present in your video stream, or if that metadata is present but not accurate: Choose Force HDR 10. Specify correct values in the input HDR 10 metadata settings. For more information about HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr. When you specify an input color space, MediaConvert uses the following color space metadata, which includes color primaries, transfer characteristics, and matrix coefficients:\n * HDR 10: BT.2020, PQ, BT.2020 non-constant\n * HLG 2020: BT.2020, HLG, BT.2020 non-constant\n * P3DCI (Theater): DCIP3, SMPTE 428M, BT.709\n * P3D65 (SDR): Display P3, sRGB, BT.709\n * P3D65 (HDR): Display P3, PQ, BT.709",
       "refs": {
+        "ColorConversion3DLUTSetting$InputColorSpace": "Specify which inputs use this 3D LUT, according to their color space.",
+        "ColorConversion3DLUTSetting$OutputColorSpace": "Specify which outputs use this 3D LUT, according to their color space.",
         "VideoSelector$ColorSpace": "If your input video has accurate color space metadata, or if you don't know about color space: Keep the default value, Follow. MediaConvert will automatically detect your input color space. If your input video has metadata indicating the wrong color space, or has missing metadata: Specify the accurate color space here. If your input video is HDR 10 and the SMPTE ST 2086 Mastering Display Color Volume static metadata isn't present in your video stream, or if that metadata is present but not accurate: Choose Force HDR 10. Specify correct values in the input HDR 10 metadata settings. For more information about HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr. When you specify an input color space, MediaConvert uses the following color space metadata, which includes color primaries, transfer characteristics, and matrix coefficients:\n * HDR 10: BT.2020, PQ, BT.2020 non-constant\n * HLG 2020: BT.2020, HLG, BT.2020 non-constant\n * P3DCI (Theater): DCIP3, SMPTE 428M, BT.709\n * P3D65 (SDR): Display P3, sRGB, BT.709\n * P3D65 (HDR): Display P3, PQ, BT.709"
       }
     },
@@ -1135,7 +1145,7 @@
       }
     },
     "DescribeEndpointsRequest": {
-      "base": "Send an request with an empty body to the regional API endpoint to get your account API endpoint.",
+      "base": "Send a request with an empty body to the regional API endpoint to get your account API endpoint. Note that DescribeEndpoints is no longer required. We recommend that you send your requests directly to the regional endpoint instead.",
       "refs": {
       }
     },
@@ -1267,9 +1277,9 @@
       }
     },
     "DvbSubtitleStylePassthrough": {
-      "base": "Set Style passthrough to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use default settings: white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings.",
+      "base": "To use the available style, color, and position information from your input captions: Set Style passthrough to Enabled. Note that MediaConvert uses default settings for any missing style or position information in your input captions To ignore the style and position information from your input captions and use default settings: Leave blank or keep the default value, Disabled. Default settings include white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings. You can also override any fonts by manually specifying custom font files.",
       "refs": {
-        "DvbSubDestinationSettings$StylePassthrough": "Set Style passthrough to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use default settings: white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings."
+        "DvbSubDestinationSettings$StylePassthrough": "To use the available style, color, and position information from your input captions: Set Style passthrough to Enabled. Note that MediaConvert uses default settings for any missing style or position information in your input captions To ignore the style and position information from your input captions and use default settings: Leave blank or keep the default value, Disabled. Default settings include white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings. You can also override any fonts by manually specifying custom font files."
       }
     },
     "DvbSubtitleTeletextSpacing": {
@@ -1520,9 +1530,9 @@
       }
     },
     "F4vMoovPlacement": {
-      "base": "If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end.",
+      "base": "To place the MOOV atom at the beginning of your output, which is useful for progressive downloading: Leave blank or choose Progressive download. To place the MOOV at the end of your output: Choose Normal.",
       "refs": {
-        "F4vSettings$MoovPlacement": "If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end."
+        "F4vSettings$MoovPlacement": "To place the MOOV atom at the beginning of your output, which is useful for progressive downloading: Leave blank or choose Progressive download. To place the MOOV at the end of your output: Choose Normal."
       }
     },
     "F4vSettings": {
@@ -2310,7 +2320,7 @@
       "refs": {
         "Input$TimecodeSource": "Use this Timecode source setting, located under the input settings, to specify how the service counts input video frames. This input frame count affects only the behavior of features that apply to a single input at a time, such as input clipping and synchronizing some captions formats. Choose Embedded to use the timecodes in your input video. Choose Start at zero to start the first frame at zero. Choose Specified start to start the first frame at the timecode that you specify in the setting Start timecode. If you don't specify a value for Timecode source, the service will use Embedded by default. For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.",
         "InputTemplate$TimecodeSource": "Use this Timecode source setting, located under the input settings, to specify how the service counts input video frames. This input frame count affects only the behavior of features that apply to a single input at a time, such as input clipping and synchronizing some captions formats. Choose Embedded to use the timecodes in your input video. Choose Start at zero to start the first frame at zero. Choose Specified start to start the first frame at the timecode that you specify in the setting Start timecode. If you don't specify a value for Timecode source, the service will use Embedded by default. For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.",
-        "VideoOverlayInput$TimecodeSource": "Specify the starting timecode for your video overlay. To use the timecode present in your video overlay: Choose Embedded. To use a zerobased timecode: Choose Start at 0. To choose a timecode: Choose Specified start. When you do, enter the starting timecode in Start timecode. If you don't specify a value for Timecode source, MediaConvert uses Embedded by default."
+        "VideoOverlayInput$TimecodeSource": "Specify the timecode source for your video overlay input clips. To use the timecode present in your video overlay: Choose Embedded. To use a zerobased timecode: Choose Start at 0. To choose a timecode: Choose Specified start. When you do, enter the starting timecode in Start timecode. If you don't specify a value for Timecode source, MediaConvert uses Embedded by default."
       }
     },
     "InputVideoGenerator": {
@@ -2361,7 +2371,8 @@
       "base": "A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.",
       "refs": {
         "Job$Status": "A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.",
-        "ListJobsRequest$Status": "Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR."
+        "ListJobsRequest$Status": "Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.",
+        "SearchJobsRequest$Status": "Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR."
       }
     },
     "JobTemplate": {
@@ -2521,6 +2532,12 @@
       "base": "When set to PCR_EVERY_PES_PACKET, a Program Clock Reference value is inserted for every Packetized Elementary Stream (PES) header. This is effective only when the PCR PID is the same as the video or audio elementary stream.",
       "refs": {
         "M2tsSettings$PcrControl": "When set to PCR_EVERY_PES_PACKET, a Program Clock Reference value is inserted for every Packetized Elementary Stream (PES) header. This is effective only when the PCR PID is the same as the video or audio elementary stream."
+      }
+    },
+    "M2tsPreventBufferUnderflow": {
+      "base": "Specify whether MediaConvert automatically attempts to prevent decoder buffer underflows in your transport stream output. Use if you are seeing decoder buffer underflows in your output and are unable to increase your transport stream's bitrate. For most workflows: We recommend that you keep the default value, Disabled. To prevent decoder buffer underflows in your output, when possible: Choose Enabled. Note that if MediaConvert prevents a decoder buffer underflow in your output, output video quality is reduced and your job will take longer to complete.",
+      "refs": {
+        "M2tsSettings$PreventBufferUnderflow": "Specify whether MediaConvert automatically attempts to prevent decoder buffer underflows in your transport stream output. Use if you are seeing decoder buffer underflows in your output and are unable to increase your transport stream's bitrate. For most workflows: We recommend that you keep the default value, Disabled. To prevent decoder buffer underflows in your output, when possible: Choose Enabled. Note that if MediaConvert prevents a decoder buffer underflow in your output, output video quality is reduced and your job will take longer to complete."
       }
     },
     "M2tsRateMode": {
@@ -2705,9 +2722,9 @@
       }
     },
     "Mp4MoovPlacement": {
-      "base": "If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end.",
+      "base": "To place the MOOV atom at the beginning of your output, which is useful for progressive downloading: Leave blank or choose Progressive download. To place the MOOV at the end of your output: Choose Normal.",
       "refs": {
-        "Mp4Settings$MoovPlacement": "If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end."
+        "Mp4Settings$MoovPlacement": "To place the MOOV atom at the beginning of your output, which is useful for progressive downloading: Leave blank or choose Progressive download. To place the MOOV at the end of your output: Choose Normal."
       }
     },
     "Mp4Settings": {
@@ -3059,7 +3076,8 @@
         "ListJobTemplatesRequest$Order": "Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.",
         "ListJobsRequest$Order": "Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.",
         "ListPresetsRequest$Order": "Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.",
-        "ListQueuesRequest$Order": "Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource."
+        "ListQueuesRequest$Order": "Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.",
+        "SearchJobsRequest$Order": "Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource."
       }
     },
     "Output": {
@@ -3376,9 +3394,9 @@
       }
     },
     "ScalingBehavior": {
-      "base": "Specify how the service handles outputs that have a different aspect ratio from the input aspect ratio. Choose Stretch to output to have the service stretch your video image to fit. Keep the setting Default to have the service letterbox your video instead. This setting overrides any value that you specify for the setting Selection placement in this output.",
+      "base": "Specify the video Scaling behavior when your output has a different resolution than your input. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html",
       "refs": {
-        "VideoDescription$ScalingBehavior": "Specify how the service handles outputs that have a different aspect ratio from the input aspect ratio. Choose Stretch to output to have the service stretch your video image to fit. Keep the setting Default to have the service letterbox your video instead. This setting overrides any value that you specify for the setting Selection placement in this output."
+        "VideoDescription$ScalingBehavior": "Specify the video Scaling behavior when your output has a different resolution than your input. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html"
       }
     },
     "SccDestinationFramerate": {
@@ -3391,6 +3409,16 @@
       "base": "Settings related to SCC captions. SCC is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/scc-srt-output-captions.html.",
       "refs": {
         "CaptionDestinationSettings$SccDestinationSettings": "Settings related to SCC captions. SCC is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/scc-srt-output-captions.html."
+      }
+    },
+    "SearchJobsRequest": {
+      "base": "Retrieve a JSON array that includes job details for up to twenty of your most recent jobs. Optionally filter results further according to input file, queue, or status. To retrieve the twenty next most recent jobs, use the nextToken string returned with the array.",
+      "refs": {
+      }
+    },
+    "SearchJobsResponse": {
+      "base": "Successful search jobs requests return a JSON array of jobs. If you don't specify how they are ordered, you will receive the most recently created first.",
+      "refs": {
       }
     },
     "SimulateReservedQueue": {
@@ -3553,6 +3581,54 @@
         "Queue$Type": "Specifies whether this on-demand queue is system or custom. System queues are built in. You can't modify or delete system queues. You can create and modify custom queues."
       }
     },
+    "UncompressedFourcc": {
+      "base": "The four character code for the uncompressed video.",
+      "refs": {
+        "UncompressedSettings$Fourcc": "The four character code for the uncompressed video."
+      }
+    },
+    "UncompressedFramerateControl": {
+      "base": "Use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction.",
+      "refs": {
+        "UncompressedSettings$FramerateControl": "Use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction."
+      }
+    },
+    "UncompressedFramerateConversionAlgorithm": {
+      "base": "Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. For numerically simple conversions, such as 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate. For numerically complex conversions, to avoid stutter: Choose Interpolate. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence: Choose FrameFormer to do motion-compensated interpolation. FrameFormer uses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost. When you choose FrameFormer, your input video resolution must be at least 128x96.",
+      "refs": {
+        "UncompressedSettings$FramerateConversionAlgorithm": "Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. For numerically simple conversions, such as 60 fps to 30 fps: We recommend that you keep the default value, Drop duplicate. For numerically complex conversions, to avoid stutter: Choose Interpolate. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence: Choose FrameFormer to do motion-compensated interpolation. FrameFormer uses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost. When you choose FrameFormer, your input video resolution must be at least 128x96."
+      }
+    },
+    "UncompressedInterlaceMode": {
+      "base": "Optional. Choose the scan line type for this output. If you don't specify a value, MediaConvert will create a progressive output.",
+      "refs": {
+        "UncompressedSettings$InterlaceMode": "Optional. Choose the scan line type for this output. If you don't specify a value, MediaConvert will create a progressive output."
+      }
+    },
+    "UncompressedScanTypeConversionMode": {
+      "base": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing, for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine to None or Soft. You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode to a value other than Progressive.",
+      "refs": {
+        "UncompressedSettings$ScanTypeConversionMode": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing, for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine to None or Soft. You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode to a value other than Progressive."
+      }
+    },
+    "UncompressedSettings": {
+      "base": "Required when you set Codec, under VideoDescription>CodecSettings to the value UNCOMPRESSED.",
+      "refs": {
+        "VideoCodecSettings$UncompressedSettings": "Required when you set Codec, under VideoDescription>CodecSettings to the value UNCOMPRESSED."
+      }
+    },
+    "UncompressedSlowPal": {
+      "base": "Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output by relabeling the video frames and resampling your audio. Note that enabling this setting will slightly reduce the duration of your video. Related settings: You must also set Framerate to 25.",
+      "refs": {
+        "UncompressedSettings$SlowPal": "Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output by relabeling the video frames and resampling your audio. Note that enabling this setting will slightly reduce the duration of your video. Related settings: You must also set Framerate to 25."
+      }
+    },
+    "UncompressedTelecine": {
+      "base": "When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine to create a smoother picture. When you keep the default value, None, MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture.",
+      "refs": {
+        "UncompressedSettings$Telecine": "When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine to create a smoother picture. When you keep the default value, None, MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture."
+      }
+    },
     "UntagResourceRequest": {
       "base": "To remove tags from a resource, send a request with the Amazon Resource Name (ARN) of the resource and the keys of the tags that you want to remove.",
       "refs": {
@@ -3654,9 +3730,9 @@
       }
     },
     "VideoCodecSettings": {
-      "base": "Video codec settings contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec. For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings",
+      "base": "Video codec settings contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec. For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * UNCOMPRESSED, UncompressedSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings",
       "refs": {
-        "VideoDescription$CodecSettings": "Video codec settings contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec. For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings"
+        "VideoDescription$CodecSettings": "Video codec settings contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec. For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * UNCOMPRESSED, UncompressedSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings"
       }
     },
     "VideoDescription": {
@@ -3673,7 +3749,7 @@
       }
     },
     "VideoOverlay": {
-      "base": "Overlay one or more videos on top of your input video.",
+      "base": "Overlay one or more videos on top of your input video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/video-overlays.html",
       "refs": {
         "__listOfVideoOverlay$member": null
       }
@@ -4178,6 +4254,9 @@
         "BurninDestinationSettings$XPosition": "Specify the horizontal position of the captions, relative to the left side of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the left of the output. If no explicit x_position is provided, the horizontal caption position will be determined by the alignment parameter.",
         "BurninDestinationSettings$YPosition": "Specify the vertical position of the captions, relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit y_position is provided, the caption will be positioned towards the bottom of the output.",
         "CmafGroupSettings$MinBufferTime": "Minimum time of initially buffered media that is needed to ensure smooth playout.",
+        "ColorConversion3DLUTSetting$InputMasteringLuminance": "Specify which inputs use this 3D LUT, according to their luminance. To apply this 3D LUT to HDR10 or P3D65 (HDR) inputs with a specific mastering luminance: Enter an integer from 0 to 2147483647, corresponding to the input's Maximum luminance value. To apply this 3D LUT to any input regardless of its luminance: Leave blank, or enter 0.",
+        "ColorConversion3DLUTSetting$OutputMasteringLuminance": "Specify which outputs use this 3D LUT, according to their luminance. To apply this 3D LUT to HDR10 or P3D65 (HDR) outputs with a specific luminance: Enter an integer from 0 to 2147483647, corresponding to the output's luminance. To apply this 3D LUT to any output regardless of its luminance: Leave blank, or enter 0.",
+        "ColorCorrector$MaxLuminance": "Specify the maximum mastering display luminance. Enter an integer from 0 to 2147483647, in units of 0.0001 nits. For example, enter 10000000 for 1000 nits.",
         "DashIsoGroupSettings$MinBufferTime": "Minimum time of initially buffered media that is needed to ensure smooth playout.",
         "DvbSubDestinationSettings$DdsXCoordinate": "Use this setting, along with DDS y-coordinate, to specify the upper left corner of the display definition segment (DDS) display window. With this setting, specify the distance, in pixels, between the left side of the frame and the left side of the DDS display window. Keep the default value, 0, to have MediaConvert automatically choose this offset. Related setting: When you use this setting, you must set DDS handling to a value other than None. MediaConvert uses these values to determine whether to write page position data to the DDS or to the page composition segment. All burn-in and DVB-Sub font settings must match.",
         "DvbSubDestinationSettings$DdsYCoordinate": "Use this setting, along with DDS x-coordinate, to specify the upper left corner of the display definition segment (DDS) display window. With this setting, specify the distance, in pixels, between the top of the frame and the top of the DDS display window. Keep the default value, 0, to have MediaConvert automatically choose this offset. Related setting: When you use this setting, you must set DDS handling to a value other than None. MediaConvert uses these values to determine whether to write page position data to the DDS or to the page composition segment (PCS). All burn-in and DVB-Sub font settings must match.",
@@ -4205,6 +4284,7 @@
         "MxfXavcProfileSettings$MaxAncDataSize": "Specify a value for this setting only for outputs that you set up with one of these two XAVC profiles: XAVC HD Intra CBG or XAVC 4K Intra CBG. Specify the amount of space in each frame that the service reserves for ancillary data, such as teletext captions. The default value for this setting is 1492 bytes per frame. This should be sufficient to prevent overflow unless you have multiple pages of teletext captions data. If you have a large amount of teletext data, specify a larger number.",
         "Rectangle$X": "The distance, in pixels, between the rectangle and the left edge of the video frame. Specify only even numbers.",
         "Rectangle$Y": "The distance, in pixels, between the rectangle and the top edge of the video frame. Specify only even numbers.",
+        "VideoSelector$MaxLuminance": "Specify the maximum mastering display luminance. Enter an integer from 0 to 2147483647, in units of 0.0001 nits. For example, enter 10000000 for 1000 nits.",
         "Xavc4kProfileSettings$GopClosedCadence": "Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting.",
         "XavcHdProfileSettings$GopClosedCadence": "Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting."
       }
@@ -4430,7 +4510,7 @@
     "__integerMin16000Max48000": {
       "base": null,
       "refs": {
-        "OpusSettings$SampleRate": "Optional. Sample rate in hz. Valid values are 16000, 24000, and 48000. The default value is 48000."
+        "OpusSettings$SampleRate": "Optional. Sample rate in Hz. Valid values are 16000, 24000, and 48000. The default value is 48000."
       }
     },
     "__integerMin16Max24": {
@@ -4475,9 +4555,17 @@
       "refs": {
         "AvcIntraSettings$FramerateDenominator": "When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.",
         "CaptionSourceFramerate$FramerateDenominator": "Specify the denominator of the fraction that represents the frame rate for the setting Caption source frame rate. Use this setting along with the setting Framerate numerator.",
+        "InputVideoGenerator$FramerateDenominator": "Specify the denominator of the fraction that represents the frame rate for your video generator input. When you do, you must also specify a value for Frame rate numerator. MediaConvert uses a default frame rate of 29.97 when you leave Frame rate numerator and Frame rate denominator blank.",
         "Mpeg2Settings$FramerateDenominator": "When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.",
         "Vc3Settings$FramerateDenominator": "When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.",
         "XavcSettings$FramerateDenominator": "When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Frame rate. In this example, specify 23.976."
+      }
+    },
+    "__integerMin1Max150": {
+      "base": null,
+      "refs": {
+        "JobSettings$FollowSource": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+        "JobTemplateSettings$FollowSource": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs."
       }
     },
     "__integerMin1Max17895697": {
@@ -4501,7 +4589,8 @@
         "ListJobTemplatesRequest$MaxResults": "Optional. Number of job templates, up to twenty, that will be returned at one time.",
         "ListJobsRequest$MaxResults": "Optional. Number of jobs, up to twenty, that will be returned at one time.",
         "ListPresetsRequest$MaxResults": "Optional. Number of presets, up to twenty, that will be returned at one time",
-        "ListQueuesRequest$MaxResults": "Optional. Number of queues, up to twenty, that will be returned at one time."
+        "ListQueuesRequest$MaxResults": "Optional. Number of queues, up to twenty, that will be returned at one time.",
+        "SearchJobsRequest$MaxResults": "Optional. Number of jobs, up to twenty, that will be returned at one time."
       }
     },
     "__integerMin1Max2048": {
@@ -4552,6 +4641,8 @@
         "ProresSettings$ParDenominator": "Required when you set Pixel aspect ratio to SPECIFIED. On the console, this corresponds to any value other than Follow source. When you specify an output pixel aspect ratio (PAR) that is different from your input video PAR, provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would specify the ratio 40:33. In this example, the value for parDenominator is 33.",
         "ProresSettings$ParNumerator": "Required when you set Pixel aspect ratio to SPECIFIED. On the console, this corresponds to any value other than Follow source. When you specify an output pixel aspect ratio (PAR) that is different from your input video PAR, provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would specify the ratio 40:33. In this example, the value for parNumerator is 40.",
         "TrackSourceSettings$TrackNumber": "Use this setting to select a single captions track from a source. Track numbers correspond to the order in the captions source file. For IMF sources, track numbering is based on the order that the captions appear in the CPL. For example, use 1 to select the captions asset that is listed first in the CPL. To include more than one captions track in your job outputs, create multiple input captions selectors. Specify one track per selector.",
+        "UncompressedSettings$FramerateDenominator": "When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.",
+        "UncompressedSettings$FramerateNumerator": "When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.",
         "VideoSelector$Pid": "Use PID to select specific video data from an input file. Specify this value as an integer; the system automatically converts it to the hexidecimal value. For example, 257 selects PID 0x101. A PID, or packet identifier, is an identifier for a set of data in an MPEG-2 transport stream container.",
         "Vp8Settings$FramerateDenominator": "When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.",
         "Vp8Settings$FramerateNumerator": "When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.",
@@ -4576,7 +4667,8 @@
       "refs": {
         "Av1Settings$Slices": "Specify the number of slices per picture. This value must be 1, 2, 4, 8, 16, or 32. For progressive pictures, this value must be less than or equal to the number of macroblock rows. For interlaced pictures, this value must be less than or equal to half the number of macroblock rows.",
         "H264Settings$Slices": "Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.",
-        "H265Settings$Slices": "Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures."
+        "H265Settings$Slices": "Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures.",
+        "InputVideoGenerator$Channels": "Specify the number of audio channels to include in your video generator input. MediaConvert creates these audio channels as silent audio within a single audio track. Enter an integer from 1 to 32."
       }
     },
     "__integerMin1Max4": {
@@ -4612,13 +4704,16 @@
     "__integerMin1Max60000": {
       "base": null,
       "refs": {
-        "CaptionSourceFramerate$FramerateNumerator": "Specify the numerator of the fraction that represents the frame rate for the setting Caption source frame rate. Use this setting along with the setting Framerate denominator."
+        "CaptionSourceFramerate$FramerateNumerator": "Specify the numerator of the fraction that represents the frame rate for the setting Caption source frame rate. Use this setting along with the setting Framerate denominator.",
+        "InputVideoGenerator$FramerateNumerator": "Specify the numerator of the fraction that represents the frame rate for your video generator input. When you do, you must also specify a value for Frame rate denominator. MediaConvert uses a default frame rate of 29.97 when you leave Frame rate numerator and Frame rate denominator blank."
       }
     },
     "__integerMin1Max64": {
       "base": null,
       "refs": {
         "AiffSettings$Channels": "Specify the number of channels in this output audio track. Valid values are 1 and even numbers up to 64. For example, 1, 2, 4, 6, and so on, up to 64.",
+        "RemixSettings$AudioDescriptionAudioChannel": "Optionally specify the channel in your input that contains your audio description audio signal. MediaConvert mixes your audio signal across all output channels, while reducing their volume according to your data stream. When you specify an audio description audio channel, you must also specify an audio description data channel. For more information about audio description signals, see the BBC WHP 198 and 051 white papers.",
+        "RemixSettings$AudioDescriptionDataChannel": "Optionally specify the channel in your input that contains your audio description data stream. MediaConvert mixes your audio signal across all output channels, while reducing their volume according to your data stream. When you specify an audio description data channel, you must also specify an audio description audio channel. For more information about audio description signals, see the BBC WHP 198 and 051 white papers.",
         "RemixSettings$ChannelsIn": "Specify the number of audio channels from your input that you want to use in your output. With remixing, you might combine or split the data in these channels, so the number of channels in your final output might be different. If you are doing both input channel mapping and output channel mapping, the number of output channels in your input mapping must be the same as the number of input channels in your output mapping.",
         "RemixSettings$ChannelsOut": "Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8... 64. (1 and even numbers to 64.) If you are doing both input channel mapping and output channel mapping, the number of output channels in your input mapping must be the same as the number of input channels in your output mapping.",
         "WavSettings$Channels": "Specify the number of channels in this output audio track. Valid values are 1 and even numbers up to 64. For example, 1, 2, 4, 6, and so on, up to 64."
@@ -4633,8 +4728,8 @@
     "__integerMin22050Max48000": {
       "base": null,
       "refs": {
-        "FlacSettings$SampleRate": "Sample rate in hz.",
-        "Mp3Settings$SampleRate": "Sample rate in hz.",
+        "FlacSettings$SampleRate": "Sample rate in Hz.",
+        "Mp3Settings$SampleRate": "Sample rate in Hz.",
         "VorbisSettings$SampleRate": "Optional. Specify the audio sample rate in Hz. Valid values are 22050, 32000, 44100, and 48000. The default value is 48000."
       }
     },
@@ -4694,7 +4789,8 @@
     "__integerMin32000Max48000": {
       "base": null,
       "refs": {
-        "Mp2Settings$SampleRate": "Sample rate in hz."
+        "InputVideoGenerator$SampleRate": "Specify the audio sample rate, in Hz, for the silent audio in your video generator input.\nEnter an integer from 32000 to 48000.",
+        "Mp2Settings$SampleRate": "Sample rate in Hz."
       }
     },
     "__integerMin32Max8182": {
@@ -4761,7 +4857,7 @@
     "__integerMin50Max86400000": {
       "base": null,
       "refs": {
-        "InputVideoGenerator$Duration": "Specify an integer value for Black video duration from 50 to 86400000 to generate a black video input for that many milliseconds. Required when you include Video generator."
+        "InputVideoGenerator$Duration": "Specify the duration, in milliseconds, for your video generator input.\nEnter an integer from 50 to 86400000."
       }
     },
     "__integerMin6000Max1024000": {
@@ -4779,7 +4875,7 @@
     "__integerMin8000Max192000": {
       "base": null,
       "refs": {
-        "AiffSettings$SampleRate": "Sample rate in hz.",
+        "AiffSettings$SampleRate": "Sample rate in Hz.",
         "WavSettings$SampleRate": "Sample rate in Hz."
       }
     },
@@ -4903,6 +4999,12 @@
         "AutomatedAbrRule$AllowedRenditions": "When customer adds the allowed renditions rule for auto ABR ladder, they are required to add at leat one rendition to allowedRenditions list"
       }
     },
+    "__listOfAudioChannelTag": {
+      "base": null,
+      "refs": {
+        "AudioChannelTaggingSettings$ChannelTags": "Specify the QuickTime audio channel layout tags for the audio channels in this audio track. Enter channel layout tags in the same order as your output's audio channel order. For example, if your output audio track has a left and a right channel, enter Left (L) for the first channel and Right (R) for the second. If your output has multiple single-channel audio tracks, enter a single channel layout tag for each track."
+      }
+    },
     "__listOfAudioDescription": {
       "base": null,
       "refs": {
@@ -4932,6 +5034,13 @@
       "base": null,
       "refs": {
         "CmafGroupSettings$AdditionalManifests": "By default, the service creates one top-level .m3u8 HLS manifest and one top -level .mpd DASH manifest for each CMAF output group in your job. These default manifests reference every output in the output group. To create additional top-level manifests that reference a subset of the outputs in the output group, specify a list of them here. For each additional manifest that you specify, the service creates one HLS manifest and one DASH manifest."
+      }
+    },
+    "__listOfColorConversion3DLUTSetting": {
+      "base": null,
+      "refs": {
+        "JobSettings$ColorConversion3DLUTSettings": "Use 3D LUTs to specify custom color mapping behavior when you convert from one color space into another. You can include up to 8 different 3D LUTs. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/3d-luts.html",
+        "JobTemplateSettings$ColorConversion3DLUTSettings": "Use 3D LUTs to specify custom color mapping behavior when you convert from one color space into another. You can include up to 8 different 3D LUTs. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/3d-luts.html"
       }
     },
     "__listOfDashAdditionalManifest": {
@@ -5014,7 +5123,8 @@
     "__listOfJob": {
       "base": null,
       "refs": {
-        "ListJobsResponse$Jobs": "List of jobs"
+        "ListJobsResponse$Jobs": "List of jobs",
+        "SearchJobsResponse$Jobs": "List of jobs."
       }
     },
     "__listOfJobTemplate": {
@@ -5206,6 +5316,7 @@
       "refs": {
         "AssociateCertificateRequest$Arn": "The ARN of the ACM certificate that you want to associate with your MediaConvert resource.",
         "AudioDescription$AudioSourceName": "Specifies which audio data to use from each input. In the simplest case, specify an \"Audio Selector\":#inputs-audio_selector by name based on its order within each input. For example if you specify \"Audio Selector 3\", then the third audio selector will be used from each input. If an input does not have an \"Audio Selector 3\", then the audio selector marked as \"default\" in that input will be used. If there is no audio selector marked as \"default\", silence will be inserted for the duration of that input. Alternatively, an \"Audio Selector Group\":#inputs-audio_selector_group name may be specified, with similar default/silence behavior. If no audio_source_name is specified, then \"Audio Selector 1\" will be chosen automatically.",
+        "BurninDestinationSettings$FontFileBoldItalic": "Specify a bold italic TrueType font file to use when rendering your output captions.\nEnter an S3, HTTP, or HTTPS URL.\nWhen you do, you must also separately specify a regular, a bold, and an italic font file.",
         "CancelJobRequest$Id": "The Job ID of the job to be cancelled.",
         "CaptionDescription$LanguageDescription": "Specify a label for this set of output captions. For example, \"English\", \"Director commentary\", or \"track_2\". For streaming outputs, MediaConvert passes this information into destination manifests for display on the end-viewer's player device. For outputs in other output groups, the service ignores this setting.",
         "CaptionDescriptionPreset$LanguageDescription": "Specify a label for this set of output captions. For example, \"English\", \"Director commentary\", or \"track_2\". For streaming outputs, MediaConvert passes this information into destination manifests for display on the end-viewer's player device. For outputs in other output groups, the service ignores this setting.",
@@ -5285,6 +5396,10 @@
         "QueueTransition$DestinationQueue": "The queue that the job was on after the transition.",
         "QueueTransition$SourceQueue": "The queue that the job was on before the transition.",
         "ResourceTags$Arn": "The Amazon Resource Name (ARN) of the resource.",
+        "SearchJobsRequest$InputFile": "Optional. Provide your input file URL or your partial input file name. The maximum length for an input file is 300 characters.",
+        "SearchJobsRequest$NextToken": "Optional. Use this string, provided with the response to a previous request, to request the next batch of jobs.",
+        "SearchJobsRequest$Queue": "Optional. Provide a queue name, or a queue ARN, to return only jobs from that queue.",
+        "SearchJobsResponse$NextToken": "Use this string to request the next batch of jobs.",
         "SpekeKeyProvider$ResourceId": "Specify the resource ID that your SPEKE-compliant key provider uses to identify this content.",
         "StaticKeyProvider$Url": "Relates to DRM implementation. The location of the license server used for protecting content.",
         "TagResourceRequest$Arn": "The Amazon Resource Name (ARN) of the resource that you want to tag. To get the ARN, send a GET request with the resource name.",
@@ -5327,7 +5442,6 @@
         "DashAdditionalManifest$ManifestNameModifier": "Specify a name modifier that the service adds to the name of this manifest to make it different from the file names of the other main manifests in the output group. For example, say that the default main manifest for your DASH group is film-name.mpd. If you enter \"-no-premium\" for this setting, then the file name the service generates for this top-level manifest is film-name-no-premium.mpd.",
         "HlsAdditionalManifest$ManifestNameModifier": "Specify a name modifier that the service adds to the name of this manifest to make it different from the file names of the other main manifests in the output group. For example, say that the default main manifest for your HLS group is film-name.m3u8. If you enter \"-no-premium\" for this setting, then the file name the service generates for this top-level manifest is film-name-no-premium.m3u8. For HLS output groups, specify a manifestNameModifier that is different from the nameModifier of the output. The service uses the output name modifier to create unique names for the individual variant manifests.",
         "MsSmoothAdditionalManifest$ManifestNameModifier": "Specify a name modifier that the service adds to the name of this manifest to make it different from the file names of the other main manifests in the output group. For example, say that the default main manifest for your Microsoft Smooth group is film-name.ismv. If you enter \"-no-premium\" for this setting, then the file name the service generates for this top-level manifest is film-name-no-premium.ismv.",
-        "Output$NameModifier": "Use Name modifier to have the service add a string to the end of each output filename. You specify the base filename as part of your destination URI. When you create multiple outputs in the same output group, Name modifier is required. Name modifier also accepts format identifiers. For DASH ISO outputs, if you use the format identifiers $Number$ or $Time$ in one output, you must use them in the same way in all outputs of the output group.",
         "__listOf__stringMin1$member": null
       }
     },
@@ -5350,6 +5464,12 @@
       "base": null,
       "refs": {
         "InsertableImage$ImageInserterInput": "Specify the HTTP, HTTPS, or Amazon S3 location of the image that you want to overlay on the video. Use a PNG or TGA file."
+      }
+    },
+    "__stringMin14PatternS3CubeCUBEHttpsCubeCUBE": {
+      "base": null,
+      "refs": {
+        "ColorConversion3DLUTSetting$FileInput": "Specify the input file S3, HTTP, or HTTPS URL for your 3D LUT .cube file. Note that MediaConvert accepts 3D LUT files up to 8MB in size."
       }
     },
     "__stringMin14PatternS3Mov09PngHttpsMov09Png": {
@@ -5394,10 +5514,13 @@
     "__stringMin1Max256": {
       "base": null,
       "refs": {
+        "CmafGroupSettings$DashIFrameTrickPlayNameModifier": "Specify whether MediaConvert generates I-frame only video segments for DASH trick play, also known as trick mode. When specified, the I-frame only video segments are included within an additional AdaptationSet in your DASH output manifest. To generate I-frame only video segments: Enter a name as a text string, up to 256 character long. This name is appended to the end of this output group's base filename, that you specify as part of your destination URI, and used for the I-frame only video segment files. You may also include format identifiers. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html#using-settings-variables-with-streaming-outputs To not generate I-frame only video segments: Leave blank.",
+        "DashIsoGroupSettings$DashIFrameTrickPlayNameModifier": "Specify whether MediaConvert generates I-frame only video segments for DASH trick play, also known as trick mode. When specified, the I-frame only video segments are included within an additional AdaptationSet in your DASH output manifest. To generate I-frame only video segments: Enter a name as a text string, up to 256 character long. This name is appended to the end of this output group's base filename, that you specify as part of your destination URI, and used for the I-frame only video segment files. You may also include format identifiers. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/using-variables-in-your-job-settings.html#using-settings-variables-with-streaming-outputs To not generate I-frame only video segments: Leave blank.",
         "DvbNitSettings$NetworkName": "The network name text placed in the network_name_descriptor inside the Network Information Table. Maximum length is 256 characters.",
         "DvbSdtSettings$ServiceName": "The service name placed in the service_descriptor in the Service Description Table. Maximum length is 256 characters.",
         "DvbSdtSettings$ServiceProviderName": "The service provider name placed in the service_descriptor in the Service Description Table. Maximum length is 256 characters.",
-        "NexGuardFileMarkerSettings$Preset": "Enter one of the watermarking preset strings that Nagra provides you. Required when you include Nagra NexGuard File Marker watermarking in your job."
+        "NexGuardFileMarkerSettings$Preset": "Enter one of the watermarking preset strings that Nagra provides you. Required when you include Nagra NexGuard File Marker watermarking in your job.",
+        "Output$NameModifier": "Use Name modifier to have the service add a string to the end of each output filename. You specify the base filename as part of your destination URI. When you create multiple outputs in the same output group, Name modifier is required. Name modifier also accepts format identifiers. For DASH ISO outputs, if you use the format identifiers $Number$ or $Time$ in one output, you must use them in the same way in all outputs of the output group."
       }
     },
     "__stringMin1Max50": {
@@ -5481,14 +5604,19 @@
       "base": null,
       "refs": {
         "Id3Insertion$Timecode": "Provide a Timecode in HH:MM:SS:FF or HH:MM:SS;FF format.",
-        "InputClipping$EndTimecode": "Set End timecode to the end of the portion of the input you are clipping. The frame corresponding to the End timecode value is included in the clip. Start timecode or End timecode may be left blank, but not both. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When choosing this value, take into account your setting for timecode source under input settings. For example, if you have embedded timecodes that start at 01:00:00:00 and you want your clip to end six minutes into the video, use 01:06:00:00.",
-        "InputClipping$StartTimecode": "Set Start timecode to the beginning of the portion of the input you are clipping. The frame corresponding to the Start timecode value is included in the clip. Start timecode or End timecode may be left blank, but not both. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When choosing this value, take into account your setting for Input timecode source. For example, if you have embedded timecodes that start at 01:00:00:00 and you want your clip to begin five minutes into the video, use 01:05:00:00.",
         "TimecodeConfig$Anchor": "If you use an editing platform that relies on an anchor timecode, use Anchor Timecode to specify a timecode that will match the input video frame to the output video frame. Use 24-hour format with frame number, (HH:MM:SS:FF) or (HH:MM:SS;FF). This setting ignores frame rate conversion. System behavior for Anchor Timecode varies depending on your setting for Source. * If Source is set to Specified Start, the first input frame is the specified value in Start Timecode. Anchor Timecode and Start Timecode are used calculate output timecode. * If Source is set to Start at 0 the first frame is 00:00:00:00. * If Source is set to Embedded, the first frame is the timecode value on the first input frame of the input.",
         "TimecodeConfig$Start": "Only use when you set Source to Specified start. Use Start timecode to specify the timecode for the initial frame. Use 24-hour format with frame number, (HH:MM:SS:FF) or (HH:MM:SS;FF).",
         "VideoOverlay$EndTimecode": "Enter the end timecode in the underlying input video for this overlay. Your overlay will be active through this frame. To display your video overlay for the duration of the underlying video: Leave blank. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When entering this value, take into account your choice for the underlying Input timecode source. For example, if you have embedded timecodes that start at 01:00:00:00 and you want your overlay to end ten minutes into the video, enter 01:10:00:00.",
         "VideoOverlay$StartTimecode": "Enter the start timecode in the underlying input video for this overlay. Your overlay will be active starting with this frame. To display your video overlay starting at the beginning of the underlying video: Leave blank. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When entering this value, take into account your choice for the underlying Input timecode source. For example, if you have embedded timecodes that start at 01:00:00:00 and you want your overlay to begin five minutes into the video, enter 01:05:00:00.",
         "VideoOverlayInputClipping$EndTimecode": "Specify the timecode of the last frame to include in your video overlay's clip. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When entering this value, take into account your choice for Timecode source.",
         "VideoOverlayInputClipping$StartTimecode": "Specify the timecode of the first frame to include in your video overlay's clip. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When entering this value, take into account your choice for Timecode source."
+      }
+    },
+    "__stringPattern010920405090509092090909": {
+      "base": null,
+      "refs": {
+        "InputClipping$EndTimecode": "Set End timecode to the end of the portion of the input you are clipping. The frame corresponding to the End timecode value is included in the clip. Start timecode or End timecode may be left blank, but not both. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When choosing this value, take into account your setting for timecode source under input settings. For example, if you have embedded timecodes that start at 01:00:00:00 and you want your clip to end six minutes into the video, use 01:06:00:00.",
+        "InputClipping$StartTimecode": "Set Start timecode to the beginning of the portion of the input you are clipping. The frame corresponding to the Start timecode value is included in the clip. Start timecode or End timecode may be left blank, but not both. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When choosing this value, take into account your setting for Input timecode source. For example, if you have embedded timecodes that start at 01:00:00:00 and you want your clip to begin five minutes into the video, use 01:05:00:00."
       }
     },
     "__stringPattern01D20305D205D": {
@@ -5531,9 +5659,14 @@
     "__stringPatternAZaZ23AZaZ": {
       "base": null,
       "refs": {
-        "AudioDescription$CustomLanguageCode": "Specify the language for this audio output track. The service puts this language code into your output audio track when you set Language code control to Use configured. The service also uses your specified custom language code when you set Language code control to Follow input, but your input file doesn't specify a language code. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming.",
         "CaptionDescription$CustomLanguageCode": "Specify the language for this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information when automatically selecting the font script for rendering the captions text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming.",
         "CaptionDescriptionPreset$CustomLanguageCode": "Specify the language for this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information when automatically selecting the font script for rendering the captions text. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming."
+      }
+    },
+    "__stringPatternAZaZ23AZaZ09": {
+      "base": null,
+      "refs": {
+        "AudioDescription$CustomLanguageCode": "Specify the language for this audio output track. The service puts this language code into your output audio track when you set Language code control to Use configured. The service also uses your specified custom language code when you set Language code control to Follow input, but your input file doesn't specify a language code. For all outputs, you can use an ISO 639-2 or ISO 639-3 code. For streaming outputs, you can also use any other code in the full RFC-5646 specification. Streaming outputs are those that are in one of the following output groups: CMAF, DASH ISO, Apple HLS, or Microsoft Smooth Streaming."
       }
     },
     "__stringPatternArnAwsUsGovAcm": {
@@ -5605,6 +5738,18 @@
         "AudioSelector$ExternalAudioFileInput": "Specifies audio data from an external file source.",
         "Input$FileInput": "Specify the source file for your transcoding job. You can use multiple inputs in a single job. The service concatenates these inputs, in the order that you specify them in the job, to create the outputs. If your input format is IMF, specify your input by providing the path to your CPL. For example, \"s3://bucket/vf/cpl.xml\". If the CPL is in an incomplete IMP, make sure to use *Supplemental IMPs* to specify any supplemental IMPs that contain assets referenced by the CPL.",
         "VideoOverlayInput$FileInput": "Specify the input file S3, HTTP, or HTTPS URI for your video overlay. For consistency in color and formatting in your output video image, we recommend that you specify a video with similar characteristics as the underlying input video."
+      }
+    },
+    "__stringPatternS3TtfHttpsTtf": {
+      "base": null,
+      "refs": {
+        "BurninDestinationSettings$FontFileBold": "Specify a bold TrueType font file to use when rendering your output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately specify a regular, an italic, and a bold italic font file.",
+        "BurninDestinationSettings$FontFileItalic": "Specify an italic TrueType font file to use when rendering your output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately specify a regular, a bold, and a bold italic font file.",
+        "BurninDestinationSettings$FontFileRegular": "Specify a regular TrueType font file to use when rendering your output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately specify a bold, an italic, and a bold italic font file.",
+        "DvbSubDestinationSettings$FontFileBold": "Specify a bold TrueType font file to use when rendering your output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately specify a regular, an italic, and a bold italic font file.",
+        "DvbSubDestinationSettings$FontFileBoldItalic": "Specify a bold italic TrueType font file to use when rendering your output captions.\nEnter an S3, HTTP, or HTTPS URL.\nWhen you do, you must also separately specify a regular, a bold, and an italic font file.",
+        "DvbSubDestinationSettings$FontFileItalic": "Specify an italic TrueType font file to use when rendering your output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately specify a regular, a bold, and a bold italic font file.",
+        "DvbSubDestinationSettings$FontFileRegular": "Specify a regular TrueType font file to use when rendering your output captions. Enter an S3, HTTP, or HTTPS URL. When you do, you must also separately specify a bold, an italic, and a bold italic font file."
       }
     },
     "__stringPatternSNManifestConfirmConditionNotificationNS": {

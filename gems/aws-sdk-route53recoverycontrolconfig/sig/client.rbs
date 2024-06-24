@@ -1,0 +1,399 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Route53RecoveryControlConfig
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#create_cluster-instance_method
+      def create_cluster: (
+                            ?client_token: ::String,
+                            cluster_name: ::String,
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
+
+      interface _CreateControlPanelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateControlPanelResponse]
+        def control_panel: () -> Types::ControlPanel
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#create_control_panel-instance_method
+      def create_control_panel: (
+                                  ?client_token: ::String,
+                                  cluster_arn: ::String,
+                                  control_panel_name: ::String,
+                                  ?tags: Hash[::String, ::String]
+                                ) -> _CreateControlPanelResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateControlPanelResponseSuccess
+
+      interface _CreateRoutingControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRoutingControlResponse]
+        def routing_control: () -> Types::RoutingControl
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#create_routing_control-instance_method
+      def create_routing_control: (
+                                    ?client_token: ::String,
+                                    cluster_arn: ::String,
+                                    ?control_panel_arn: ::String,
+                                    routing_control_name: ::String
+                                  ) -> _CreateRoutingControlResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRoutingControlResponseSuccess
+
+      interface _CreateSafetyRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSafetyRuleResponse]
+        def assertion_rule: () -> Types::AssertionRule
+        def gating_rule: () -> Types::GatingRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#create_safety_rule-instance_method
+      def create_safety_rule: (
+                                ?assertion_rule: {
+                                  asserted_controls: Array[::String],
+                                  control_panel_arn: ::String,
+                                  name: ::String,
+                                  rule_config: {
+                                    inverted: bool,
+                                    threshold: ::Integer,
+                                    type: ("ATLEAST" | "AND" | "OR")
+                                  },
+                                  wait_period_ms: ::Integer
+                                },
+                                ?client_token: ::String,
+                                ?gating_rule: {
+                                  control_panel_arn: ::String,
+                                  gating_controls: Array[::String],
+                                  name: ::String,
+                                  rule_config: {
+                                    inverted: bool,
+                                    threshold: ::Integer,
+                                    type: ("ATLEAST" | "AND" | "OR")
+                                  },
+                                  target_controls: Array[::String],
+                                  wait_period_ms: ::Integer
+                                },
+                                ?tags: Hash[::String, ::String]
+                              ) -> _CreateSafetyRuleResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSafetyRuleResponseSuccess
+
+      interface _DeleteClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#delete_cluster-instance_method
+      def delete_cluster: (
+                            cluster_arn: ::String
+                          ) -> _DeleteClusterResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterResponseSuccess
+
+      interface _DeleteControlPanelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteControlPanelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#delete_control_panel-instance_method
+      def delete_control_panel: (
+                                  control_panel_arn: ::String
+                                ) -> _DeleteControlPanelResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteControlPanelResponseSuccess
+
+      interface _DeleteRoutingControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRoutingControlResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#delete_routing_control-instance_method
+      def delete_routing_control: (
+                                    routing_control_arn: ::String
+                                  ) -> _DeleteRoutingControlResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRoutingControlResponseSuccess
+
+      interface _DeleteSafetyRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSafetyRuleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#delete_safety_rule-instance_method
+      def delete_safety_rule: (
+                                safety_rule_arn: ::String
+                              ) -> _DeleteSafetyRuleResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSafetyRuleResponseSuccess
+
+      interface _DescribeClusterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeClusterResponse]
+        def cluster: () -> Types::Cluster
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#describe_cluster-instance_method
+      def describe_cluster: (
+                              cluster_arn: ::String
+                            ) -> _DescribeClusterResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterResponseSuccess
+
+      interface _DescribeControlPanelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeControlPanelResponse]
+        def control_panel: () -> Types::ControlPanel
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#describe_control_panel-instance_method
+      def describe_control_panel: (
+                                    control_panel_arn: ::String
+                                  ) -> _DescribeControlPanelResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeControlPanelResponseSuccess
+
+      interface _DescribeRoutingControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRoutingControlResponse]
+        def routing_control: () -> Types::RoutingControl
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#describe_routing_control-instance_method
+      def describe_routing_control: (
+                                      routing_control_arn: ::String
+                                    ) -> _DescribeRoutingControlResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRoutingControlResponseSuccess
+
+      interface _DescribeSafetyRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSafetyRuleResponse]
+        def assertion_rule: () -> Types::AssertionRule
+        def gating_rule: () -> Types::GatingRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#describe_safety_rule-instance_method
+      def describe_safety_rule: (
+                                  safety_rule_arn: ::String
+                                ) -> _DescribeSafetyRuleResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSafetyRuleResponseSuccess
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyResponse]
+        def policy: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 resource_arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _ListAssociatedRoute53HealthChecksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociatedRoute53HealthChecksResponse]
+        def health_check_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#list_associated_route_53_health_checks-instance_method
+      def list_associated_route_53_health_checks: (
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String,
+                                                    routing_control_arn: ::String
+                                                  ) -> _ListAssociatedRoute53HealthChecksResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociatedRoute53HealthChecksResponseSuccess
+
+      interface _ListClustersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListClustersResponse]
+        def clusters: () -> ::Array[Types::Cluster]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#list_clusters-instance_method
+      def list_clusters: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListClustersResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClustersResponseSuccess
+
+      interface _ListControlPanelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListControlPanelsResponse]
+        def control_panels: () -> ::Array[Types::ControlPanel]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#list_control_panels-instance_method
+      def list_control_panels: (
+                                 ?cluster_arn: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListControlPanelsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListControlPanelsResponseSuccess
+
+      interface _ListRoutingControlsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRoutingControlsResponse]
+        def next_token: () -> ::String
+        def routing_controls: () -> ::Array[Types::RoutingControl]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#list_routing_controls-instance_method
+      def list_routing_controls: (
+                                   control_panel_arn: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListRoutingControlsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRoutingControlsResponseSuccess
+
+      interface _ListSafetyRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSafetyRulesResponse]
+        def next_token: () -> ::String
+        def safety_rules: () -> ::Array[Types::Rule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#list_safety_rules-instance_method
+      def list_safety_rules: (
+                               control_panel_arn: ::String,
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListSafetyRulesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSafetyRulesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateControlPanelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateControlPanelResponse]
+        def control_panel: () -> Types::ControlPanel
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#update_control_panel-instance_method
+      def update_control_panel: (
+                                  control_panel_arn: ::String,
+                                  control_panel_name: ::String
+                                ) -> _UpdateControlPanelResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateControlPanelResponseSuccess
+
+      interface _UpdateRoutingControlResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRoutingControlResponse]
+        def routing_control: () -> Types::RoutingControl
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#update_routing_control-instance_method
+      def update_routing_control: (
+                                    routing_control_arn: ::String,
+                                    routing_control_name: ::String
+                                  ) -> _UpdateRoutingControlResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRoutingControlResponseSuccess
+
+      interface _UpdateSafetyRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSafetyRuleResponse]
+        def assertion_rule: () -> Types::AssertionRule
+        def gating_rule: () -> Types::GatingRule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#update_safety_rule-instance_method
+      def update_safety_rule: (
+                                ?assertion_rule_update: {
+                                  name: ::String,
+                                  safety_rule_arn: ::String,
+                                  wait_period_ms: ::Integer
+                                },
+                                ?gating_rule_update: {
+                                  name: ::String,
+                                  safety_rule_arn: ::String,
+                                  wait_period_ms: ::Integer
+                                }
+                              ) -> _UpdateSafetyRuleResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSafetyRuleResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryControlConfig/Client.html#wait_until-instance_method
+      def wait_until: (:cluster_created waiter_name, 
+                    cluster_arn: ::String
+                  ) -> Client::_DescribeClusterResponseSuccess
+                    | (:cluster_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeClusterResponseSuccess
+                    | (:cluster_deleted waiter_name, 
+                    cluster_arn: ::String
+                  ) -> Client::_DescribeClusterResponseSuccess
+                    | (:cluster_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeClusterResponseSuccess
+                    | (:control_panel_created waiter_name, 
+                    control_panel_arn: ::String
+                  ) -> Client::_DescribeControlPanelResponseSuccess
+                    | (:control_panel_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeControlPanelResponseSuccess
+                    | (:control_panel_deleted waiter_name, 
+                    control_panel_arn: ::String
+                  ) -> Client::_DescribeControlPanelResponseSuccess
+                    | (:control_panel_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeControlPanelResponseSuccess
+                    | (:routing_control_created waiter_name, 
+                    routing_control_arn: ::String
+                  ) -> Client::_DescribeRoutingControlResponseSuccess
+                    | (:routing_control_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeRoutingControlResponseSuccess
+                    | (:routing_control_deleted waiter_name, 
+                    routing_control_arn: ::String
+                  ) -> Client::_DescribeRoutingControlResponseSuccess
+                    | (:routing_control_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeRoutingControlResponseSuccess
+    end
+  end
+end
+

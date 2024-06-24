@@ -13,6 +13,9 @@ module Aws::Route53Resolver
     # The current account doesn't have the IAM permissions required to
     # perform the specified Resolver operation.
     #
+    # This error can also be thrown when a customer has reached the 5120
+    # character limit for a resource policy for CloudWatch Logs.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -401,6 +404,61 @@ module Aws::Route53Resolver
     #   A name that lets you identify the rule in the rule group.
     #   @return [String]
     #
+    # @!attribute [rw] firewall_domain_redirection_action
+    #   How you want the the rule to evaluate DNS redirection in the DNS
+    #   redirection chain, such as CNAME or DNAME.
+    #
+    #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
+    #   redirection chain. The individual domains in the redirection chain
+    #   must be added to the domain list.
+    #
+    #   `Trust_Redirection_Domain ` inspects only the first domain in the
+    #   redirection chain. You don't need to add the subsequent domains in
+    #   the domain in the redirection list to the domain list.
+    #   @return [String]
+    #
+    # @!attribute [rw] qtype
+    #   The DNS query type you want the rule to evaluate. Allowed values
+    #   are;
+    #
+    #   * A: Returns an IPv4 address.
+    #
+    #   * AAAA: Returns an Ipv6 address.
+    #
+    #   * CAA: Restricts CAs that can create SSL/TLS certifications for the
+    #     domain.
+    #
+    #   * CNAME: Returns another domain name.
+    #
+    #   * DS: Record that identifies the DNSSEC signing key of a delegated
+    #     zone.
+    #
+    #   * MX: Specifies mail servers.
+    #
+    #   * NAPTR: Regular-expression-based rewriting of domain names.
+    #
+    #   * NS: Authoritative name servers.
+    #
+    #   * PTR: Maps an IP address to a domain name.
+    #
+    #   * SOA: Start of authority record for the zone.
+    #
+    #   * SPF: Lists the servers authorized to send emails from a domain.
+    #
+    #   * SRV: Application specific values that identify servers.
+    #
+    #   * TXT: Verifies email senders and application-specific values.
+    #
+    #   * A query type you define by using the DNS type ID, for example 28
+    #     for AAAA. The values must be defined as TYPENUMBER, where the
+    #     NUMBER can be 1-65334, for example, TYPE28. For more information,
+    #     see [List of DNS record types][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRuleRequest AWS API Documentation
     #
     class CreateFirewallRuleRequest < Struct.new(
@@ -413,7 +471,9 @@ module Aws::Route53Resolver
       :block_override_domain,
       :block_override_dns_type,
       :block_override_ttl,
-      :name)
+      :name,
+      :firewall_domain_redirection_action,
+      :qtype)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -509,6 +569,18 @@ module Aws::Route53Resolver
     #   outbound rules must allow TCP and UDP access. For inbound access,
     #   open port 53. For outbound access, open the port that you're using
     #   for DNS queries on your network.
+    #
+    #   Some security group rules will cause your connection to be tracked.
+    #   For outbound resolver endpoint, it can potentially impact the
+    #   maximum queries per second from outbound endpoint to your target
+    #   name server. For inbound resolver endpoint, it can bring down the
+    #   overall maximum queries per second per IP address to as low as 1500.
+    #   To avoid connection tracking caused by security group, see
+    #   [Untracked connections][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#untracked-connectionsl
     #   @return [Array<String>]
     #
     # @!attribute [rw] direction
@@ -525,7 +597,22 @@ module Aws::Route53Resolver
     #   The subnets and IP addresses in your VPC that DNS queries originate
     #   from (for outbound endpoints) or that you forward DNS queries to
     #   (for inbound endpoints). The subnet ID uniquely identifies a VPC.
+    #
+    #   <note markdown="1"> Even though the minimum is 1, Route 53 requires that you create at
+    #   least two.
+    #
+    #    </note>
     #   @return [Array<Types::IpAddressRequest>]
+    #
+    # @!attribute [rw] outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost. If you specify this,
+    #   you must also specify a value for the `PreferredInstanceType`.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_instance_type
+    #   The instance type. If you specify this, you must also specify a
+    #   value for the `OutpostArn`.
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   A list of the tag keys and values that you want to associate with
@@ -539,15 +626,34 @@ module Aws::Route53Resolver
     #   addresses.
     #   @return [String]
     #
-    # @!attribute [rw] outpost_arn
-    #   The Amazon Resource Name (ARN) of the Outpost. If you specify this,
-    #   you must also specify a value for the `PreferredInstanceType`.
-    #   @return [String]
+    # @!attribute [rw] protocols
+    #   The protocols you want to use for the endpoint. DoH-FIPS is
+    #   applicable for inbound endpoints only.
     #
-    # @!attribute [rw] preferred_instance_type
-    #   The instance type. If you specify this, you must also specify a
-    #   value for the `OutpostArn`.
-    #   @return [String]
+    #   For an inbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 and DoH-FIPS in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * DoH-FIPS alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   For an outbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * None, which is treated as Do53.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateResolverEndpointRequest AWS API Documentation
     #
@@ -557,10 +663,11 @@ module Aws::Route53Resolver
       :security_group_ids,
       :direction,
       :ip_addresses,
+      :outpost_arn,
+      :preferred_instance_type,
       :tags,
       :resolver_endpoint_type,
-      :outpost_arn,
-      :preferred_instance_type)
+      :protocols)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -787,11 +894,54 @@ module Aws::Route53Resolver
     #   The ID of the domain list that's used in the rule.
     #   @return [String]
     #
+    # @!attribute [rw] qtype
+    #   The DNS query type that the rule you are deleting evaluates. Allowed
+    #   values are;
+    #
+    #   * A: Returns an IPv4 address.
+    #
+    #   * AAAA: Returns an Ipv6 address.
+    #
+    #   * CAA: Restricts CAs that can create SSL/TLS certifications for the
+    #     domain.
+    #
+    #   * CNAME: Returns another domain name.
+    #
+    #   * DS: Record that identifies the DNSSEC signing key of a delegated
+    #     zone.
+    #
+    #   * MX: Specifies mail servers.
+    #
+    #   * NAPTR: Regular-expression-based rewriting of domain names.
+    #
+    #   * NS: Authoritative name servers.
+    #
+    #   * PTR: Maps an IP address to a domain name.
+    #
+    #   * SOA: Start of authority record for the zone.
+    #
+    #   * SPF: Lists the servers authorized to send emails from a domain.
+    #
+    #   * SRV: Application specific values that identify servers.
+    #
+    #   * TXT: Verifies email senders and application-specific values.
+    #
+    #   * A query type you define by using the DNS type ID, for example 28
+    #     for AAAA. The values must be defined as TYPENUMBER, where the
+    #     NUMBER can be 1-65334, for example, TYPE28. For more information,
+    #     see [List of DNS record types][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallRuleRequest AWS API Documentation
     #
     class DeleteFirewallRuleRequest < Struct.new(
       :firewall_rule_group_id,
-      :firewall_domain_list_id)
+      :firewall_domain_list_id,
+      :qtype)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1492,6 +1642,61 @@ module Aws::Route53Resolver
     #   format and Coordinated Universal Time (UTC).
     #   @return [String]
     #
+    # @!attribute [rw] firewall_domain_redirection_action
+    #   How you want the the rule to evaluate DNS redirection in the DNS
+    #   redirection chain, such as CNAME or DNAME.
+    #
+    #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
+    #   redirection chain. The individual domains in the redirection chain
+    #   must be added to the domain list.
+    #
+    #   `Trust_Redirection_Domain ` inspects only the first domain in the
+    #   redirection chain. You don't need to add the subsequent domains in
+    #   the domain in the redirection list to the domain list.
+    #   @return [String]
+    #
+    # @!attribute [rw] qtype
+    #   The DNS query type you want the rule to evaluate. Allowed values
+    #   are;
+    #
+    #   * A: Returns an IPv4 address.
+    #
+    #   * AAAA: Returns an Ipv6 address.
+    #
+    #   * CAA: Restricts CAs that can create SSL/TLS certifications for the
+    #     domain.
+    #
+    #   * CNAME: Returns another domain name.
+    #
+    #   * DS: Record that identifies the DNSSEC signing key of a delegated
+    #     zone.
+    #
+    #   * MX: Specifies mail servers.
+    #
+    #   * NAPTR: Regular-expression-based rewriting of domain names.
+    #
+    #   * NS: Authoritative name servers.
+    #
+    #   * PTR: Maps an IP address to a domain name.
+    #
+    #   * SOA: Start of authority record for the zone.
+    #
+    #   * SPF: Lists the servers authorized to send emails from a domain.
+    #
+    #   * SRV: Application specific values that identify servers.
+    #
+    #   * TXT: Verifies email senders and application-specific values.
+    #
+    #   * A query type you define by using the DNS type ID, for example 28
+    #     for AAAA. The values must be defined as TYPENUMBER, where the
+    #     NUMBER can be 1-65334, for example, TYPE28. For more information,
+    #     see [List of DNS record types][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/FirewallRule AWS API Documentation
     #
     class FirewallRule < Struct.new(
@@ -1506,7 +1711,9 @@ module Aws::Route53Resolver
       :block_override_ttl,
       :creator_request_id,
       :creation_time,
-      :modification_time)
+      :modification_time,
+      :firewall_domain_redirection_action,
+      :qtype)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2933,7 +3140,8 @@ module Aws::Route53Resolver
     # @!attribute [rw] resolver_dnssec_configs
     #   An array that contains one [ResolverDnssecConfig][1] element for
     #   each configuration for DNSSEC validation that is associated with the
-    #   current Amazon Web Services account.
+    #   current Amazon Web Services account. It doesn't contain disabled
+    #   DNSSEC configurations for the resource.
     #
     #
     #
@@ -3957,10 +4165,6 @@ module Aws::Route53Resolver
     #   format and Coordinated Universal Time (UTC).
     #   @return [String]
     #
-    # @!attribute [rw] resolver_endpoint_type
-    #   The Resolver endpoint IP address type.
-    #   @return [String]
-    #
     # @!attribute [rw] outpost_arn
     #   The ARN (Amazon Resource Name) for the Outpost.
     #   @return [String]
@@ -3968,6 +4172,39 @@ module Aws::Route53Resolver
     # @!attribute [rw] preferred_instance_type
     #   The Amazon EC2 instance type.
     #   @return [String]
+    #
+    # @!attribute [rw] resolver_endpoint_type
+    #   The Resolver endpoint IP address type.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocols
+    #   Protocols used for the endpoint. DoH-FIPS is applicable for inbound
+    #   endpoints only.
+    #
+    #   For an inbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 and DoH-FIPS in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * DoH-FIPS alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   For an outbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * None, which is treated as Do53.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResolverEndpoint AWS API Documentation
     #
@@ -3984,9 +4221,10 @@ module Aws::Route53Resolver
       :status_message,
       :creation_time,
       :modification_time,
-      :resolver_endpoint_type,
       :outpost_arn,
-      :preferred_instance_type)
+      :preferred_instance_type,
+      :resolver_endpoint_type,
+      :protocols)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4562,12 +4800,42 @@ module Aws::Route53Resolver
     #   One IPv6 address that you want to forward DNS queries to.
     #   @return [String]
     #
+    # @!attribute [rw] protocol
+    #   The protocols for the Resolver endpoints. DoH-FIPS is applicable for
+    #   inbound endpoints only.
+    #
+    #   For an inbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 and DoH-FIPS in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * DoH-FIPS alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   For an outbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * None, which is treated as Do53.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/TargetAddress AWS API Documentation
     #
     class TargetAddress < Struct.new(
       :ip,
       :port,
-      :ipv_6)
+      :ipv_6,
+      :protocol)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4876,6 +5144,61 @@ module Aws::Route53Resolver
     #   The name of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] firewall_domain_redirection_action
+    #   How you want the the rule to evaluate DNS redirection in the DNS
+    #   redirection chain, such as CNAME or DNAME.
+    #
+    #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
+    #   redirection chain. The individual domains in the redirection chain
+    #   must be added to the domain list.
+    #
+    #   `Trust_Redirection_Domain ` inspects only the first domain in the
+    #   redirection chain. You don't need to add the subsequent domains in
+    #   the domain in the redirection list to the domain list.
+    #   @return [String]
+    #
+    # @!attribute [rw] qtype
+    #   The DNS query type you want the rule to evaluate. Allowed values
+    #   are;
+    #
+    #   * A: Returns an IPv4 address.
+    #
+    #   * AAAA: Returns an Ipv6 address.
+    #
+    #   * CAA: Restricts CAs that can create SSL/TLS certifications for the
+    #     domain.
+    #
+    #   * CNAME: Returns another domain name.
+    #
+    #   * DS: Record that identifies the DNSSEC signing key of a delegated
+    #     zone.
+    #
+    #   * MX: Specifies mail servers.
+    #
+    #   * NAPTR: Regular-expression-based rewriting of domain names.
+    #
+    #   * NS: Authoritative name servers.
+    #
+    #   * PTR: Maps an IP address to a domain name.
+    #
+    #   * SOA: Start of authority record for the zone.
+    #
+    #   * SPF: Lists the servers authorized to send emails from a domain.
+    #
+    #   * SRV: Application specific values that identify servers.
+    #
+    #   * TXT: Verifies email senders and application-specific values.
+    #
+    #   * A query type you define by using the DNS type ID, for example 28
+    #     for AAAA. The values must be defined as TYPENUMBER, where the
+    #     NUMBER can be 1-65334, for example, TYPE28. For more information,
+    #     see [List of DNS record types][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRuleRequest AWS API Documentation
     #
     class UpdateFirewallRuleRequest < Struct.new(
@@ -4887,7 +5210,9 @@ module Aws::Route53Resolver
       :block_override_domain,
       :block_override_dns_type,
       :block_override_ttl,
-      :name)
+      :name,
+      :firewall_domain_redirection_action,
+      :qtype)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5073,13 +5398,51 @@ module Aws::Route53Resolver
     #   will be automatically chosen from your subnet.
     #   @return [Array<Types::UpdateIpAddress>]
     #
+    # @!attribute [rw] protocols
+    #   The protocols you want to use for the endpoint. DoH-FIPS is
+    #   applicable for inbound endpoints only.
+    #
+    #   For an inbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 and DoH-FIPS in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * DoH-FIPS alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   For an outbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   You can't change the protocol of an inbound endpoint directly from
+    #   only Do53 to only DoH, or DoH-FIPS. This is to prevent a sudden
+    #   disruption to incoming traffic that relies on Do53. To change the
+    #   protocol from Do53 to DoH, or DoH-FIPS, you must first enable both
+    #   Do53 and DoH, or Do53 and DoH-FIPS, to make sure that all incoming
+    #   traffic has transferred to using the DoH protocol, or DoH-FIPS, and
+    #   then remove the Do53.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverEndpointRequest AWS API Documentation
     #
     class UpdateResolverEndpointRequest < Struct.new(
       :resolver_endpoint_id,
       :name,
       :resolver_endpoint_type,
-      :update_ip_addresses)
+      :update_ip_addresses,
+      :protocols)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5125,8 +5488,9 @@ module Aws::Route53Resolver
       include Aws::Structure
     end
 
-    # You have provided an invalid command. Supported values are `ADD`,
-    # `REMOVE`, or `REPLACE` a domain.
+    # You have provided an invalid command. If you ran the
+    # `UpdateFirewallDomains` request. supported values are `ADD`, `REMOVE`,
+    # or `REPLACE` a domain.
     #
     # @!attribute [rw] message
     #   @return [String]

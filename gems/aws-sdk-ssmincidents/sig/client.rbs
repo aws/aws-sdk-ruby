@@ -1,0 +1,650 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SSMIncidents
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchGetIncidentFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetIncidentFindingsOutput]
+        def errors: () -> ::Array[Types::BatchGetIncidentFindingsError]
+        def findings: () -> ::Array[Types::Finding]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#batch_get_incident_findings-instance_method
+      def batch_get_incident_findings: (
+                                         finding_ids: Array[::String],
+                                         incident_record_arn: ::String
+                                       ) -> _BatchGetIncidentFindingsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetIncidentFindingsResponseSuccess
+
+      interface _CreateReplicationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReplicationSetOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#create_replication_set-instance_method
+      def create_replication_set: (
+                                    ?client_token: ::String,
+                                    regions: Hash[::String, {
+                                        sse_kms_key_id: ::String?
+                                      }],
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateReplicationSetResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReplicationSetResponseSuccess
+
+      interface _CreateResponsePlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResponsePlanOutput]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#create_response_plan-instance_method
+      def create_response_plan: (
+                                  ?actions: Array[
+                                    {
+                                      ssm_automation: {
+                                        document_name: ::String,
+                                        document_version: ::String?,
+                                        dynamic_parameters: Hash[::String, {
+                                            variable: ("INCIDENT_RECORD_ARN" | "INVOLVED_RESOURCES")?
+                                          }]?,
+                                        parameters: Hash[::String, Array[::String]]?,
+                                        role_arn: ::String,
+                                        target_account: ("RESPONSE_PLAN_OWNER_ACCOUNT" | "IMPACTED_ACCOUNT")?
+                                      }?
+                                    },
+                                  ],
+                                  ?chat_channel: {
+                                    chatbot_sns: Array[::String]?,
+                                    empty: {
+                                    }?
+                                  },
+                                  ?client_token: ::String,
+                                  ?display_name: ::String,
+                                  ?engagements: Array[::String],
+                                  incident_template: {
+                                    dedupe_string: ::String?,
+                                    impact: ::Integer,
+                                    incident_tags: Hash[::String, ::String]?,
+                                    notification_targets: Array[
+                                      {
+                                        sns_topic_arn: ::String?
+                                      },
+                                    ]?,
+                                    summary: ::String?,
+                                    title: ::String
+                                  },
+                                  ?integrations: Array[
+                                    {
+                                      pager_duty_configuration: {
+                                        name: ::String,
+                                        pager_duty_incident_configuration: {
+                                          service_id: ::String
+                                        },
+                                        secret_id: ::String
+                                      }?
+                                    },
+                                  ],
+                                  name: ::String,
+                                  ?tags: Hash[::String, ::String]
+                                ) -> _CreateResponsePlanResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResponsePlanResponseSuccess
+
+      interface _CreateTimelineEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTimelineEventOutput]
+        def event_id: () -> ::String
+        def incident_record_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#create_timeline_event-instance_method
+      def create_timeline_event: (
+                                   ?client_token: ::String,
+                                   event_data: ::String,
+                                   ?event_references: Array[
+                                     {
+                                       related_item_id: ::String?,
+                                       resource: ::String?
+                                     },
+                                   ],
+                                   event_time: ::Time,
+                                   event_type: ::String,
+                                   incident_record_arn: ::String
+                                 ) -> _CreateTimelineEventResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTimelineEventResponseSuccess
+
+      interface _DeleteIncidentRecordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIncidentRecordOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#delete_incident_record-instance_method
+      def delete_incident_record: (
+                                    arn: ::String
+                                  ) -> _DeleteIncidentRecordResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIncidentRecordResponseSuccess
+
+      interface _DeleteReplicationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReplicationSetOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#delete_replication_set-instance_method
+      def delete_replication_set: (
+                                    arn: ::String
+                                  ) -> _DeleteReplicationSetResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReplicationSetResponseSuccess
+
+      interface _DeleteResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResourcePolicyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#delete_resource_policy-instance_method
+      def delete_resource_policy: (
+                                    policy_id: ::String,
+                                    resource_arn: ::String
+                                  ) -> _DeleteResourcePolicyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
+
+      interface _DeleteResponsePlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteResponsePlanOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#delete_response_plan-instance_method
+      def delete_response_plan: (
+                                  arn: ::String
+                                ) -> _DeleteResponsePlanResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResponsePlanResponseSuccess
+
+      interface _DeleteTimelineEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTimelineEventOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#delete_timeline_event-instance_method
+      def delete_timeline_event: (
+                                   event_id: ::String,
+                                   incident_record_arn: ::String
+                                 ) -> _DeleteTimelineEventResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTimelineEventResponseSuccess
+
+      interface _GetIncidentRecordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIncidentRecordOutput]
+        def incident_record: () -> Types::IncidentRecord
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#get_incident_record-instance_method
+      def get_incident_record: (
+                                 arn: ::String
+                               ) -> _GetIncidentRecordResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIncidentRecordResponseSuccess
+
+      interface _GetReplicationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReplicationSetOutput]
+        def replication_set: () -> Types::ReplicationSet
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#get_replication_set-instance_method
+      def get_replication_set: (
+                                 arn: ::String
+                               ) -> _GetReplicationSetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReplicationSetResponseSuccess
+
+      interface _GetResourcePoliciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePoliciesOutput]
+        def next_token: () -> ::String
+        def resource_policies: () -> ::Array[Types::ResourcePolicy]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#get_resource_policies-instance_method
+      def get_resource_policies: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   resource_arn: ::String
+                                 ) -> _GetResourcePoliciesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePoliciesResponseSuccess
+
+      interface _GetResponsePlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResponsePlanOutput]
+        def actions: () -> ::Array[Types::Action]
+        def arn: () -> ::String
+        def chat_channel: () -> Types::ChatChannel
+        def display_name: () -> ::String
+        def engagements: () -> ::Array[::String]
+        def incident_template: () -> Types::IncidentTemplate
+        def integrations: () -> ::Array[Types::Integration]
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#get_response_plan-instance_method
+      def get_response_plan: (
+                               arn: ::String
+                             ) -> _GetResponsePlanResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResponsePlanResponseSuccess
+
+      interface _GetTimelineEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTimelineEventOutput]
+        def event: () -> Types::TimelineEvent
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#get_timeline_event-instance_method
+      def get_timeline_event: (
+                                event_id: ::String,
+                                incident_record_arn: ::String
+                              ) -> _GetTimelineEventResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTimelineEventResponseSuccess
+
+      interface _ListIncidentFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIncidentFindingsOutput]
+        def findings: () -> ::Array[Types::FindingSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#list_incident_findings-instance_method
+      def list_incident_findings: (
+                                    incident_record_arn: ::String,
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String
+                                  ) -> _ListIncidentFindingsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIncidentFindingsResponseSuccess
+
+      interface _ListIncidentRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIncidentRecordsOutput]
+        def incident_record_summaries: () -> ::Array[Types::IncidentRecordSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#list_incident_records-instance_method
+      def list_incident_records: (
+                                   ?filters: Array[
+                                     {
+                                       condition: {
+                                         after: ::Time?,
+                                         before: ::Time?,
+                                         equals: {
+                                           integer_values: Array[::Integer]?,
+                                           string_values: Array[::String]?
+                                         }?
+                                       },
+                                       key: ::String
+                                     },
+                                   ],
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListIncidentRecordsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIncidentRecordsResponseSuccess
+
+      interface _ListRelatedItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRelatedItemsOutput]
+        def next_token: () -> ::String
+        def related_items: () -> ::Array[Types::RelatedItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#list_related_items-instance_method
+      def list_related_items: (
+                                incident_record_arn: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListRelatedItemsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRelatedItemsResponseSuccess
+
+      interface _ListReplicationSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReplicationSetsOutput]
+        def next_token: () -> ::String
+        def replication_set_arns: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#list_replication_sets-instance_method
+      def list_replication_sets: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListReplicationSetsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReplicationSetsResponseSuccess
+
+      interface _ListResponsePlansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResponsePlansOutput]
+        def next_token: () -> ::String
+        def response_plan_summaries: () -> ::Array[Types::ResponsePlanSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#list_response_plans-instance_method
+      def list_response_plans: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListResponsePlansResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResponsePlansResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTimelineEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTimelineEventsOutput]
+        def event_summaries: () -> ::Array[Types::EventSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#list_timeline_events-instance_method
+      def list_timeline_events: (
+                                  ?filters: Array[
+                                    {
+                                      condition: {
+                                        after: ::Time?,
+                                        before: ::Time?,
+                                        equals: {
+                                          integer_values: Array[::Integer]?,
+                                          string_values: Array[::String]?
+                                        }?
+                                      },
+                                      key: ::String
+                                    },
+                                  ],
+                                  incident_record_arn: ::String,
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?sort_by: ("EVENT_TIME"),
+                                  ?sort_order: ("ASCENDING" | "DESCENDING")
+                                ) -> _ListTimelineEventsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTimelineEventsResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyOutput]
+        def policy_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 policy: ::String,
+                                 resource_arn: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _StartIncidentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartIncidentOutput]
+        def incident_record_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#start_incident-instance_method
+      def start_incident: (
+                            ?client_token: ::String,
+                            ?impact: ::Integer,
+                            ?related_items: Array[
+                              {
+                                generated_id: ::String?,
+                                identifier: {
+                                  type: ("ANALYSIS" | "INCIDENT" | "METRIC" | "PARENT" | "ATTACHMENT" | "OTHER" | "AUTOMATION" | "INVOLVED_RESOURCE" | "TASK"),
+                                  value: {
+                                    arn: ::String?,
+                                    metric_definition: ::String?,
+                                    pager_duty_incident_detail: {
+                                      auto_resolve: bool?,
+                                      id: ::String,
+                                      secret_id: ::String?
+                                    }?,
+                                    url: ::String?
+                                  }
+                                },
+                                title: ::String?
+                              },
+                            ],
+                            response_plan_arn: ::String,
+                            ?title: ::String,
+                            ?trigger_details: {
+                              raw_data: ::String?,
+                              source: ::String,
+                              timestamp: ::Time,
+                              trigger_arn: ::String?
+                            }
+                          ) -> _StartIncidentResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartIncidentResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDeletionProtectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDeletionProtectionOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#update_deletion_protection-instance_method
+      def update_deletion_protection: (
+                                        arn: ::String,
+                                        ?client_token: ::String,
+                                        deletion_protected: bool
+                                      ) -> _UpdateDeletionProtectionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeletionProtectionResponseSuccess
+
+      interface _UpdateIncidentRecordResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIncidentRecordOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#update_incident_record-instance_method
+      def update_incident_record: (
+                                    arn: ::String,
+                                    ?chat_channel: {
+                                      chatbot_sns: Array[::String]?,
+                                      empty: {
+                                      }?
+                                    },
+                                    ?client_token: ::String,
+                                    ?impact: ::Integer,
+                                    ?notification_targets: Array[
+                                      {
+                                        sns_topic_arn: ::String?
+                                      },
+                                    ],
+                                    ?status: ("OPEN" | "RESOLVED"),
+                                    ?summary: ::String,
+                                    ?title: ::String
+                                  ) -> _UpdateIncidentRecordResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIncidentRecordResponseSuccess
+
+      interface _UpdateRelatedItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRelatedItemsOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#update_related_items-instance_method
+      def update_related_items: (
+                                  ?client_token: ::String,
+                                  incident_record_arn: ::String,
+                                  related_items_update: {
+                                    item_to_add: {
+                                      generated_id: ::String?,
+                                      identifier: {
+                                        type: ("ANALYSIS" | "INCIDENT" | "METRIC" | "PARENT" | "ATTACHMENT" | "OTHER" | "AUTOMATION" | "INVOLVED_RESOURCE" | "TASK"),
+                                        value: {
+                                          arn: ::String?,
+                                          metric_definition: ::String?,
+                                          pager_duty_incident_detail: {
+                                            auto_resolve: bool?,
+                                            id: ::String,
+                                            secret_id: ::String?
+                                          }?,
+                                          url: ::String?
+                                        }
+                                      },
+                                      title: ::String?
+                                    }?,
+                                    item_to_remove: {
+                                      type: ("ANALYSIS" | "INCIDENT" | "METRIC" | "PARENT" | "ATTACHMENT" | "OTHER" | "AUTOMATION" | "INVOLVED_RESOURCE" | "TASK"),
+                                      value: {
+                                        arn: ::String?,
+                                        metric_definition: ::String?,
+                                        pager_duty_incident_detail: {
+                                          auto_resolve: bool?,
+                                          id: ::String,
+                                          secret_id: ::String?
+                                        }?,
+                                        url: ::String?
+                                      }
+                                    }?
+                                  }
+                                ) -> _UpdateRelatedItemsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRelatedItemsResponseSuccess
+
+      interface _UpdateReplicationSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateReplicationSetOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#update_replication_set-instance_method
+      def update_replication_set: (
+                                    actions: Array[
+                                      {
+                                        add_region_action: {
+                                          region_name: ::String,
+                                          sse_kms_key_id: ::String?
+                                        }?,
+                                        delete_region_action: {
+                                          region_name: ::String
+                                        }?
+                                      },
+                                    ],
+                                    arn: ::String,
+                                    ?client_token: ::String
+                                  ) -> _UpdateReplicationSetResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReplicationSetResponseSuccess
+
+      interface _UpdateResponsePlanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResponsePlanOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#update_response_plan-instance_method
+      def update_response_plan: (
+                                  ?actions: Array[
+                                    {
+                                      ssm_automation: {
+                                        document_name: ::String,
+                                        document_version: ::String?,
+                                        dynamic_parameters: Hash[::String, {
+                                            variable: ("INCIDENT_RECORD_ARN" | "INVOLVED_RESOURCES")?
+                                          }]?,
+                                        parameters: Hash[::String, Array[::String]]?,
+                                        role_arn: ::String,
+                                        target_account: ("RESPONSE_PLAN_OWNER_ACCOUNT" | "IMPACTED_ACCOUNT")?
+                                      }?
+                                    },
+                                  ],
+                                  arn: ::String,
+                                  ?chat_channel: {
+                                    chatbot_sns: Array[::String]?,
+                                    empty: {
+                                    }?
+                                  },
+                                  ?client_token: ::String,
+                                  ?display_name: ::String,
+                                  ?engagements: Array[::String],
+                                  ?incident_template_dedupe_string: ::String,
+                                  ?incident_template_impact: ::Integer,
+                                  ?incident_template_notification_targets: Array[
+                                    {
+                                      sns_topic_arn: ::String?
+                                    },
+                                  ],
+                                  ?incident_template_summary: ::String,
+                                  ?incident_template_tags: Hash[::String, ::String],
+                                  ?incident_template_title: ::String,
+                                  ?integrations: Array[
+                                    {
+                                      pager_duty_configuration: {
+                                        name: ::String,
+                                        pager_duty_incident_configuration: {
+                                          service_id: ::String
+                                        },
+                                        secret_id: ::String
+                                      }?
+                                    },
+                                  ]
+                                ) -> _UpdateResponsePlanResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResponsePlanResponseSuccess
+
+      interface _UpdateTimelineEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTimelineEventOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#update_timeline_event-instance_method
+      def update_timeline_event: (
+                                   ?client_token: ::String,
+                                   ?event_data: ::String,
+                                   event_id: ::String,
+                                   ?event_references: Array[
+                                     {
+                                       related_item_id: ::String?,
+                                       resource: ::String?
+                                     },
+                                   ],
+                                   ?event_time: ::Time,
+                                   ?event_type: ::String,
+                                   incident_record_arn: ::String
+                                 ) -> _UpdateTimelineEventResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTimelineEventResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#wait_until-instance_method
+      def wait_until: (:wait_for_replication_set_active waiter_name, 
+                    arn: ::String
+                  ) -> Client::_GetReplicationSetResponseSuccess
+                    | (:wait_for_replication_set_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetReplicationSetResponseSuccess
+                    | (:wait_for_replication_set_deleted waiter_name, 
+                    arn: ::String
+                  ) -> Client::_GetReplicationSetResponseSuccess
+                    | (:wait_for_replication_set_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetReplicationSetResponseSuccess
+    end
+  end
+end
+

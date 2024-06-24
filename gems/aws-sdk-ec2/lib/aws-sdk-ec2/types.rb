@@ -744,8 +744,7 @@ module Aws::EC2
     end
 
     # Details on the Elastic IP address transfer. For more information, see
-    # [Transfer Elastic IP addresses][1] in the *Amazon Virtual Private
-    # Cloud User Guide*.
+    # [Transfer Elastic IP addresses][1] in the *Amazon VPC User Guide*.
     #
     #
     #
@@ -798,6 +797,10 @@ module Aws::EC2
     #   provisioned range.
     #   @return [String]
     #
+    # @!attribute [rw] asn
+    #   The public 2-byte or 4-byte ASN that you want to advertise.
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -805,11 +808,39 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] network_border_group
+    #   If you have [Local Zones][1] enabled, you can choose a network
+    #   border group for Local Zones when you provision and advertise a
+    #   BYOIPv4 CIDR. Choose the network border group carefully as the EIP
+    #   and the Amazon Web Services resource it is associated with must
+    #   reside in the same network border group.
+    #
+    #   You can provision BYOIP address ranges to and advertise them in the
+    #   following Local Zone network border groups:
+    #
+    #   * us-east-1-dfw-2
+    #
+    #   * us-west-2-lax-1
+    #
+    #   * us-west-2-phx-2
+    #
+    #   <note markdown="1"> You cannot provision or advertise BYOIPv6 address ranges in Local
+    #   Zones at this time.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AdvertiseByoipCidrRequest AWS API Documentation
     #
     class AdvertiseByoipCidrRequest < Struct.new(
       :cidr,
-      :dry_run)
+      :asn,
+      :dry_run,
+      :network_border_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -847,13 +878,6 @@ module Aws::EC2
     #   from which Amazon Web Services advertises IP addresses. Use this
     #   parameter to limit the IP address to this location. IP addresses
     #   cannot move between network border groups.
-    #
-    #   Use [DescribeAvailabilityZones][1] to view the network border
-    #   groups.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html
     #   @return [String]
     #
     # @!attribute [rw] customer_owned_ipv_4_pool
@@ -943,7 +967,7 @@ module Aws::EC2
     #   more information, see [ Understanding auto-placement and
     #   affinity][1] in the *Amazon EC2 User Guide*.
     #
-    #   Default: `on`
+    #   Default: `off`
     #
     #
     #
@@ -1124,14 +1148,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1141,6 +1165,12 @@ module Aws::EC2
     # @!attribute [rw] preview_next_cidr
     #   A preview of the next available CIDR in a pool.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] allowed_cidrs
+    #   Include a particular CIDR range that can be returned by the pool.
+    #   Allowed CIDRs are only allowed if using netmask length for
+    #   allocation.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] disallowed_cidrs
     #   Exclude a particular CIDR range from being returned by the pool.
@@ -1158,6 +1188,7 @@ module Aws::EC2
       :client_token,
       :description,
       :preview_next_cidr,
+      :allowed_cidrs,
       :disallowed_cidrs)
       SENSITIVE = []
       include Aws::Structure
@@ -1555,6 +1586,62 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # An Autonomous System Number (ASN) and BYOIP CIDR association.
+    #
+    # @!attribute [rw] asn
+    #   The association's ASN.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr
+    #   The association's CIDR.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The association's status message.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The association's state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AsnAssociation AWS API Documentation
+    #
+    class AsnAssociation < Struct.new(
+      :asn,
+      :cidr,
+      :status_message,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides authorization for Amazon to bring an Autonomous System Number
+    # (ASN) to a specific Amazon Web Services account using bring your own
+    # ASN (BYOASN). For details on the format of the message and signature,
+    # see [Tutorial: Bring your ASN to IPAM][1] in the *Amazon VPC IPAM
+    # guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html
+    #
+    # @!attribute [rw] message
+    #   The authorization context's message.
+    #   @return [String]
+    #
+    # @!attribute [rw] signature
+    #   The authorization context's signature.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AsnAuthorizationContext AWS API Documentation
+    #
+    class AsnAuthorizationContext < Struct.new(
+      :message,
+      :signature)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] ipv_6_address_count
     #   The number of additional IPv6 addresses to assign to the network
     #   interface. The specified number of IPv6 addresses are assigned in
@@ -1837,7 +1924,7 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1845,7 +1932,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -2028,6 +2115,43 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] asn
+    #   A public 2-byte or 4-byte ASN.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr
+    #   The BYOIP CIDR you want to associate with an ASN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateIpamByoasnRequest AWS API Documentation
+    #
+    class AssociateIpamByoasnRequest < Struct.new(
+      :dry_run,
+      :asn,
+      :cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asn_association
+    #   The ASN and BYOIP CIDR association.
+    #   @return [Types::AsnAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateIpamByoasnResult AWS API Documentation
+    #
+    class AssociateIpamByoasnResult < Struct.new(
+      :asn_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
     #   A check for whether you have the required permissions for the action
     #   without actually making the request and provides an error response.
     #   If you have the required permissions, the error response is
@@ -2176,19 +2300,28 @@ module Aws::EC2
     end
 
     # @!attribute [rw] ipv_6_cidr_block
-    #   The IPv6 CIDR block for your subnet. The subnet must have a /64
-    #   prefix length.
+    #   The IPv6 CIDR block for your subnet.
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
     #   The ID of your subnet.
     #   @return [String]
     #
+    # @!attribute [rw] ipv_6_ipam_pool_id
+    #   An IPv6 IPAM pool ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_netmask_length
+    #   An IPv6 netmask length.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlockRequest AWS API Documentation
     #
     class AssociateSubnetCidrBlockRequest < Struct.new(
       :ipv_6_cidr_block,
-      :subnet_id)
+      :subnet_id,
+      :ipv_6_ipam_pool_id,
+      :ipv_6_netmask_length)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2349,15 +2482,15 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -2387,12 +2520,12 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateTrunkInterfaceResult AWS API Documentation
@@ -2406,7 +2539,7 @@ module Aws::EC2
 
     # @!attribute [rw] amazon_provided_ipv_6_cidr_block
     #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
-    #   for the VPC. You cannot specify the range of IPv6 addresses, or the
+    #   for the VPC. You cannot specify the range of IPv6 addresses or the
     #   size of the CIDR block.
     #   @return [Boolean]
     #
@@ -2535,14 +2668,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] certificate_s3_object_key
-    #   The key of the Amazon S3 object ey where the certificate,
-    #   certificate chain, and encrypted private key bundle is stored. The
-    #   object key is formated as follows: `role_arn`/`certificate_arn`.
+    #   The key of the Amazon S3 object where the certificate, certificate
+    #   chain, and encrypted private key bundle are stored. The object key
+    #   is formatted as follows: `role_arn`/`certificate_arn`.
     #   @return [String]
     #
     # @!attribute [rw] encryption_kms_key_id
-    #   The ID of the KMS customer master key (CMK) used to encrypt the
-    #   private key.
+    #   The ID of the KMS key used to encrypt the private key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociatedRole AWS API Documentation
@@ -2770,14 +2902,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -2799,11 +2931,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider
-    #   The ID of the Verified Access trust provider.
+    #   Details about the Verified Access trust provider.
     #   @return [Types::VerifiedAccessTrustProvider]
     #
     # @!attribute [rw] verified_access_instance
-    #   The ID of the Verified Access instance.
+    #   Details about the Verified Access instance.
     #   @return [Types::VerifiedAccessInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVerifiedAccessTrustProviderResult AWS API Documentation
@@ -2887,16 +3019,26 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the ENA Express configuration for the network interface
-    # that's attached to the instance.
+    # ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD)
+    # technology to increase the maximum bandwidth used per stream and
+    # minimize tail latency of network traffic between EC2 instances. With
+    # ENA Express, you can communicate between two EC2 instances in the same
+    # subnet within the same account, or in different accounts. Both sending
+    # and receiving instances must have ENA Express enabled.
+    #
+    # To improve the reliability of network packet delivery, ENA Express
+    # reorders network packets on the receiving end by default. However,
+    # some UDP-based applications are designed to handle network packets
+    # that are out of order to reduce the overhead for packet delivery at
+    # the network layer. When ENA Express is enabled, you can specify
+    # whether UDP network traffic uses it.
     #
     # @!attribute [rw] ena_srd_enabled
-    #   Indicates whether ENA Express is enabled for the network interface
-    #   that's attached to the instance.
+    #   Indicates whether ENA Express is enabled for the network interface.
     #   @return [Boolean]
     #
     # @!attribute [rw] ena_srd_udp_specification
-    #   ENA Express configuration for UDP network traffic.
+    #   Configures ENA Express for UDP network traffic.
     #   @return [Types::AttachmentEnaSrdUdpSpecification]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachmentEnaSrdSpecification AWS API Documentation
@@ -2908,8 +3050,13 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the ENA Express configuration for UDP traffic on the network
-    # interface that's attached to the instance.
+    # ENA Express is compatible with both TCP and UDP transport protocols.
+    # When it's enabled, TCP traffic automatically uses it. However, some
+    # UDP-based applications are designed to handle network packets that are
+    # out of order, without a need for retransmission, such as live video
+    # broadcasting or other near-real-time applications. For UDP traffic,
+    # you can specify whether to use ENA Express, based on your application
+    # environment needs.
     #
     # @!attribute [rw] ena_srd_udp_enabled
     #   Indicates whether UDP traffic to and from the instance uses ENA
@@ -3023,7 +3170,7 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -3031,7 +3178,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -3079,9 +3226,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
-    #   The sets of IP permissions. You can't specify a destination
-    #   security group and a CIDR IP address range in the same set of
-    #   permissions.
+    #   The permissions for the security group rules.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] tag_specifications
@@ -3089,30 +3234,27 @@ module Aws::EC2
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] cidr_ip
-    #   Not supported. Use a set of IP permissions to specify the CIDR.
+    #   Not supported. Use IP permissions instead.
     #   @return [String]
     #
     # @!attribute [rw] from_port
-    #   Not supported. Use a set of IP permissions to specify the port.
+    #   Not supported. Use IP permissions instead.
     #   @return [Integer]
     #
     # @!attribute [rw] ip_protocol
-    #   Not supported. Use a set of IP permissions to specify the protocol
-    #   name or number.
+    #   Not supported. Use IP permissions instead.
     #   @return [String]
     #
     # @!attribute [rw] to_port
-    #   Not supported. Use a set of IP permissions to specify the port.
+    #   Not supported. Use IP permissions instead.
     #   @return [Integer]
     #
     # @!attribute [rw] source_security_group_name
-    #   Not supported. Use a set of IP permissions to specify a destination
-    #   security group.
+    #   Not supported. Use IP permissions instead.
     #   @return [String]
     #
     # @!attribute [rw] source_security_group_owner_id
-    #   Not supported. Use a set of IP permissions to specify a destination
-    #   security group.
+    #   Not supported. Use IP permissions instead.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupEgressRequest AWS API Documentation
@@ -3151,51 +3293,50 @@ module Aws::EC2
     end
 
     # @!attribute [rw] cidr_ip
-    #   The IPv4 address range, in CIDR format. You can't specify this
-    #   parameter when specifying a source security group. To specify an
-    #   IPv6 address range, use a set of IP permissions.
+    #   The IPv4 address range, in CIDR format.
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   To specify an IPv6 address range, use IP permissions instead.
+    #
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     #   @return [String]
     #
     # @!attribute [rw] from_port
     #   If the protocol is TCP or UDP, this is the start of the port range.
-    #   If the protocol is ICMP, this is the type number. A value of -1
-    #   indicates all ICMP types. If you specify all ICMP types, you must
-    #   specify all ICMP codes.
+    #   If the protocol is ICMP, this is the ICMP type or -1 (all ICMP
+    #   types).
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     #   @return [Integer]
     #
     # @!attribute [rw] group_id
-    #   The ID of the security group. You must specify either the security
-    #   group ID or the security group name in the request. For security
-    #   groups in a nondefault VPC, you must specify the security group ID.
+    #   The ID of the security group.
     #   @return [String]
     #
     # @!attribute [rw] group_name
-    #   \[Default VPC\] The name of the security group. You must specify
-    #   either the security group ID or the security group name in the
-    #   request. For security groups in a nondefault VPC, you must specify
-    #   the security group ID.
+    #   \[Default VPC\] The name of the security group. For security groups
+    #   for a default VPC you can specify either the ID or the name of the
+    #   security group. For security groups for a nondefault VPC, you must
+    #   specify the ID of the security group.
     #   @return [String]
     #
     # @!attribute [rw] ip_permissions
-    #   The sets of IP permissions.
+    #   The permissions for the security group rules.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] ip_protocol
     #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-    #   Numbers][1]). To specify `icmpv6`, use a set of IP permissions.
+    #   Numbers][1]). To specify all protocols, use `-1`.
     #
-    #   Use `-1` to specify all protocols. If you specify `-1` or a protocol
-    #   other than `tcp`, `udp`, or `icmp`, traffic on all ports is allowed,
-    #   regardless of any ports you specify.
+    #   To specify `icmpv6`, use IP permissions instead.
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   If you specify a protocol other than one of the supported values,
+    #   traffic is allowed on all ports, regardless of any ports that you
+    #   specify.
+    #
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     #
     #
     #
@@ -3203,34 +3344,29 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] source_security_group_name
-    #   \[Default VPC\] The name of the source security group. You can't
-    #   specify this parameter in combination with the following parameters:
-    #   the CIDR IP address range, the start of the port range, the IP
-    #   protocol, and the end of the port range. Creates rules that grant
-    #   full ICMP, UDP, and TCP access. To create a rule with a specific IP
-    #   protocol and port range, use a set of IP permissions instead. The
-    #   source security group must be in the same VPC.
+    #   \[Default VPC\] The name of the source security group.
+    #
+    #   The rule grants full ICMP, UDP, and TCP access. To create a rule
+    #   with a specific protocol and port range, specify a set of IP
+    #   permissions instead.
     #   @return [String]
     #
     # @!attribute [rw] source_security_group_owner_id
-    #   \[Nondefault VPC\] The Amazon Web Services account ID for the source
-    #   security group, if the source security group is in a different
-    #   account. You can't specify this parameter in combination with the
-    #   following parameters: the CIDR IP address range, the IP protocol,
-    #   the start of the port range, and the end of the port range. Creates
-    #   rules that grant full ICMP, UDP, and TCP access. To create a rule
-    #   with a specific IP protocol and port range, use a set of IP
-    #   permissions instead.
+    #   The Amazon Web Services account ID for the source security group, if
+    #   the source security group is in a different account.
+    #
+    #   The rule grants full ICMP, UDP, and TCP access. To create a rule
+    #   with a specific protocol and port range, use IP permissions instead.
     #   @return [String]
     #
     # @!attribute [rw] to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
-    #   the protocol is ICMP, this is the code. A value of -1 indicates all
-    #   ICMP codes. If you specify all ICMP types, you must specify all ICMP
-    #   codes.
+    #   the protocol is ICMP, this is the ICMP code or -1 (all ICMP codes).
+    #   If the start port is -1 (all ICMP types), then the end port must be
+    #   -1 (all ICMP codes).
     #
-    #   Alternatively, use a set of IP permissions to specify multiple rules
-    #   and a description for the rule.
+    #   To specify multiple rules and descriptions for the rules, use IP
+    #   permissions instead.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -3241,7 +3377,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] tag_specifications
-    #   \[VPC Only\] The tags applied to the security group rule.
+    #   The tags applied to the security group rule.
     #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupIngressRequest AWS API Documentation
@@ -3518,11 +3654,7 @@ module Aws::EC2
     # @!attribute [rw] instance_id
     #   The ID of the instance to bundle.
     #
-    #   Type: String
-    #
     #   Default: None
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] storage
@@ -3631,6 +3763,35 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The Autonomous System Number (ASN) and BYOIP CIDR association.
+    #
+    # @!attribute [rw] asn
+    #   A public 2-byte or 4-byte ASN.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipam_id
+    #   An IPAM ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The provisioning state of the BYOASN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Byoasn AWS API Documentation
+    #
+    class Byoasn < Struct.new(
+      :asn,
+      :ipam_id,
+      :status_message,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an address range that is provisioned for use with
     # your Amazon Web Services resources through bring your own IP addresses
     # (BYOIP).
@@ -3643,6 +3804,10 @@ module Aws::EC2
     #   The description of the address range.
     #   @return [String]
     #
+    # @!attribute [rw] asn_associations
+    #   The BYOIP CIDR associations with ASNs.
+    #   @return [Array<Types::AsnAssociation>]
+    #
     # @!attribute [rw] status_message
     #   Upon success, contains the ID of the address pool. Otherwise,
     #   contains an error message.
@@ -3652,13 +3817,41 @@ module Aws::EC2
     #   The state of the address pool.
     #   @return [String]
     #
+    # @!attribute [rw] network_border_group
+    #   If you have [Local Zones][1] enabled, you can choose a network
+    #   border group for Local Zones when you provision and advertise a
+    #   BYOIPv4 CIDR. Choose the network border group carefully as the EIP
+    #   and the Amazon Web Services resource it is associated with must
+    #   reside in the same network border group.
+    #
+    #   You can provision BYOIP address ranges to and advertise them in the
+    #   following Local Zone network border groups:
+    #
+    #   * us-east-1-dfw-2
+    #
+    #   * us-west-2-lax-1
+    #
+    #   * us-west-2-phx-2
+    #
+    #   <note markdown="1"> You cannot provision or advertise BYOIPv6 address ranges in Local
+    #   Zones at this time.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ByoipCidr AWS API Documentation
     #
     class ByoipCidr < Struct.new(
       :cidr,
       :description,
+      :asn_associations,
       :status_message,
-      :state)
+      :state,
+      :network_border_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3986,6 +4179,8 @@ module Aws::EC2
     #
     # @!attribute [rw] spot_fleet_request_ids
     #   The IDs of the Spot Fleet requests.
+    #
+    #   Constraint: You can specify up to 100 IDs in a single request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] terminate_instances
@@ -4125,6 +4320,65 @@ module Aws::EC2
     class CapacityAllocation < Struct.new(
       :allocation_type,
       :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The recommended Capacity Block that fits your search requirements.
+    #
+    # @!attribute [rw] capacity_block_offering_id
+    #   The ID of the Capacity Block offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type of the Capacity Block offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of the Capacity Block offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances in the Capacity Block offering.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_date
+    #   The start date of the Capacity Block offering.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end date of the Capacity Block offering.
+    #   @return [Time]
+    #
+    # @!attribute [rw] capacity_block_duration_hours
+    #   The amount of time of the Capacity Block reservation in hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] upfront_fee
+    #   The total price to be paid up front.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency of the payment for the Capacity Block.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenancy
+    #   The tenancy of the Capacity Block.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityBlockOffering AWS API Documentation
+    #
+    class CapacityBlockOffering < Struct.new(
+      :capacity_block_offering_id,
+      :instance_type,
+      :availability_zone,
+      :instance_count,
+      :start_date,
+      :end_date,
+      :capacity_block_duration_hours,
+      :upfront_fee,
+      :currency_code,
+      :tenancy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4294,6 +4548,10 @@ module Aws::EC2
     #   Information about instance capacity usage.
     #   @return [Array<Types::CapacityAllocation>]
     #
+    # @!attribute [rw] reservation_type
+    #   The type of Capacity Reservation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservation AWS API Documentation
     #
     class CapacityReservation < Struct.new(
@@ -4319,7 +4577,8 @@ module Aws::EC2
       :outpost_arn,
       :capacity_reservation_fleet_id,
       :placement_group_arn,
-      :capacity_allocations)
+      :capacity_allocations,
+      :reservation_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4379,7 +4638,7 @@ module Aws::EC2
     # @!attribute [rw] total_target_capacity
     #   The total number of capacity units for which the Capacity
     #   Reservation Fleet reserves capacity. For more information, see
-    #   [Total target capacity][1] in the Amazon EC2 User Guide.
+    #   [Total target capacity][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -4426,8 +4685,8 @@ module Aws::EC2
     # @!attribute [rw] allocation_strategy
     #   The strategy used by the Capacity Reservation Fleet to determine
     #   which of the specified instance types to use. For more information,
-    #   see For more information, see [ Allocation strategy][1] in the
-    #   Amazon EC2 User Guide.
+    #   see For more information, see [Allocation strategy][1] in the
+    #   *Amazon EC2 User Guide*.
     #
     #
     #
@@ -4777,7 +5036,7 @@ module Aws::EC2
     # Provides authorization for Amazon to bring a specific IP address range
     # to a specific Amazon Web Services account using bring your own IP
     # addresses (BYOIP). For more information, see [Configuring your BYOIP
-    # address range][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # address range][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -5806,6 +6065,154 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # A security group connection tracking configuration that enables you to
+    # set the idle timeout for connection tracking on an Elastic network
+    # interface. For more information, see [Connection tracking timeouts][1]
+    # in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #
+    # @!attribute [rw] tcp_established_timeout
+    #   Timeout (in seconds) for idle TCP connections in an established
+    #   state. Min: 60 seconds. Max: 432000 seconds (5 days). Default:
+    #   432000 seconds. Recommended: Less than 432000 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_stream_timeout
+    #   Timeout (in seconds) for idle UDP flows classified as streams which
+    #   have seen more than one request-response transaction. Min: 60
+    #   seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_timeout
+    #   Timeout (in seconds) for idle UDP flows that have seen traffic only
+    #   in a single direction or a single request-response transaction. Min:
+    #   30 seconds. Max: 60 seconds. Default: 30 seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionTrackingConfiguration AWS API Documentation
+    #
+    class ConnectionTrackingConfiguration < Struct.new(
+      :tcp_established_timeout,
+      :udp_stream_timeout,
+      :udp_timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A security group connection tracking specification that enables you to
+    # set the idle timeout for connection tracking on an Elastic network
+    # interface. For more information, see [Connection tracking timeouts][1]
+    # in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #
+    # @!attribute [rw] tcp_established_timeout
+    #   Timeout (in seconds) for idle TCP connections in an established
+    #   state. Min: 60 seconds. Max: 432000 seconds (5 days). Default:
+    #   432000 seconds. Recommended: Less than 432000 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_timeout
+    #   Timeout (in seconds) for idle UDP flows that have seen traffic only
+    #   in a single direction or a single request-response transaction. Min:
+    #   30 seconds. Max: 60 seconds. Default: 30 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_stream_timeout
+    #   Timeout (in seconds) for idle UDP flows classified as streams which
+    #   have seen more than one request-response transaction. Min: 60
+    #   seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionTrackingSpecification AWS API Documentation
+    #
+    class ConnectionTrackingSpecification < Struct.new(
+      :tcp_established_timeout,
+      :udp_timeout,
+      :udp_stream_timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A security group connection tracking specification request that
+    # enables you to set the idle timeout for connection tracking on an
+    # Elastic network interface. For more information, see [Connection
+    # tracking timeouts][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #
+    # @!attribute [rw] tcp_established_timeout
+    #   Timeout (in seconds) for idle TCP connections in an established
+    #   state. Min: 60 seconds. Max: 432000 seconds (5 days). Default:
+    #   432000 seconds. Recommended: Less than 432000 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_stream_timeout
+    #   Timeout (in seconds) for idle UDP flows classified as streams which
+    #   have seen more than one request-response transaction. Min: 60
+    #   seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_timeout
+    #   Timeout (in seconds) for idle UDP flows that have seen traffic only
+    #   in a single direction or a single request-response transaction. Min:
+    #   30 seconds. Max: 60 seconds. Default: 30 seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionTrackingSpecificationRequest AWS API Documentation
+    #
+    class ConnectionTrackingSpecificationRequest < Struct.new(
+      :tcp_established_timeout,
+      :udp_stream_timeout,
+      :udp_timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A security group connection tracking specification response that
+    # enables you to set the idle timeout for connection tracking on an
+    # Elastic network interface. For more information, see [Connection
+    # tracking timeouts][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #
+    # @!attribute [rw] tcp_established_timeout
+    #   Timeout (in seconds) for idle TCP connections in an established
+    #   state. Min: 60 seconds. Max: 432000 seconds (5 days). Default:
+    #   432000 seconds. Recommended: Less than 432000 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_stream_timeout
+    #   Timeout (in seconds) for idle UDP flows classified as streams which
+    #   have seen more than one request-response transaction. Min: 60
+    #   seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] udp_timeout
+    #   Timeout (in seconds) for idle UDP flows that have seen traffic only
+    #   in a single direction or a single request-response transaction. Min:
+    #   30 seconds. Max: 60 seconds. Default: 30 seconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionTrackingSpecificationResponse AWS API Documentation
+    #
+    class ConnectionTrackingSpecificationResponse < Struct.new(
+      :tcp_established_timeout,
+      :udp_stream_timeout,
+      :udp_timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a conversion task.
     #
     # @!attribute [rw] conversion_task_id
@@ -5883,7 +6290,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyFpgaImageRequest AWS API Documentation
@@ -5934,11 +6341,11 @@ module Aws::EC2
     #   snapshot. The default KMS key for Amazon EBS is used unless you
     #   specify a non-default Key Management Service (KMS) KMS key using
     #   `KmsKeyId`. For more information, see [Amazon EBS encryption][1] in
-    #   the *Amazon EC2 User Guide*.
+    #   the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
@@ -5988,12 +6395,12 @@ module Aws::EC2
     #   the destination Outpost. You cannot copy an AMI from an Outpost to a
     #   Region, from one Outpost to another, or within the same Outpost.
     #
-    #   For more information, see [ Copy AMIs from an Amazon Web Services
-    #   Region to an Outpost][1] in the *Amazon EC2 User Guide*.
+    #   For more information, see [Copy AMIs from an Amazon Web Services
+    #   Region to an Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-amis
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-amis
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -6017,6 +6424,25 @@ module Aws::EC2
     #   Default: Your user-defined AMI tags are not copied.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the new AMI and new snapshots. You can tag the
+    #   AMI, the snapshots, or both.
+    #
+    #   * To tag the new AMI, the value for `ResourceType` must be `image`.
+    #
+    #   * To tag the new snapshots, the value for `ResourceType` must be
+    #     `snapshot`. The same tag is applied to all the new snapshots.
+    #
+    #   If you specify other values for `ResourceType`, the request fails.
+    #
+    #   To tag an AMI or snapshot after it has been created, see
+    #   [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyImageRequest AWS API Documentation
     #
     class CopyImageRequest < Struct.new(
@@ -6029,7 +6455,8 @@ module Aws::EC2
       :source_region,
       :destination_outpost_arn,
       :dry_run,
-      :copy_image_tags)
+      :copy_image_tags,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6061,12 +6488,11 @@ module Aws::EC2
     #   the same Outpost.
     #
     #   For more information, see [ Copy snapshots from an Amazon Web
-    #   Services Region to an Outpost][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   Services Region to an Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-snapshots
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-snapshots
     #   @return [String]
     #
     # @!attribute [rw] destination_region
@@ -6087,19 +6513,19 @@ module Aws::EC2
     #   Otherwise, omit this parameter. Encrypted snapshots are encrypted,
     #   even if you omit this parameter and encryption by default is not
     #   enabled. You cannot set this parameter to false. For more
-    #   information, see [Amazon EBS encryption][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   information, see [Amazon EBS encryption][1] in the *Amazon EBS User
+    #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier of the Key Management Service (KMS) KMS key to use
-    #   for Amazon EBS encryption. If this parameter is not specified, your
-    #   KMS key for Amazon EBS is used. If `KmsKeyId` is specified, the
-    #   encrypted state must be `true`.
+    #   The identifier of the KMS key to use for Amazon EBS encryption. If
+    #   this parameter is not specified, your KMS key for Amazon EBS is
+    #   used. If `KmsKeyId` is specified, the encrypted state must be
+    #   `true`.
     #
     #   You can specify the KMS key using any of the following:
     #
@@ -6130,11 +6556,11 @@ module Aws::EC2
     #   `PresignedUrl` must be signed using Amazon Web Services Signature
     #   Version 4. Because EBS snapshots are stored in Amazon S3, the
     #   signing algorithm for this parameter uses the same logic that is
-    #   described in [Authenticating Requests: Using Query Parameters
-    #   (Amazon Web Services Signature Version 4)][2] in the *Amazon Simple
-    #   Storage Service API Reference*. An invalid or improperly signed
-    #   `PresignedUrl` will cause the copy operation to fail asynchronously,
-    #   and the snapshot will move to an `error` state.
+    #   described in [ Authenticating Requests: Using Query Parameters
+    #   (Amazon Web Services Signature Version 4)][2] in the *Amazon S3 API
+    #   Reference*. An invalid or improperly signed `PresignedUrl` will
+    #   cause the copy operation to fail asynchronously, and the snapshot
+    #   will move to an `error` state.
     #
     #
     #
@@ -6261,8 +6687,8 @@ module Aws::EC2
     #   The strategy used by the Capacity Reservation Fleet to determine
     #   which of the specified instance types to use. Currently, only the
     #   `prioritized` allocation strategy is supported. For more
-    #   information, see [ Allocation strategy][1] in the Amazon EC2 User
-    #   Guide.
+    #   information, see [ Allocation strategy][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #   Valid values: `prioritized`
     #
@@ -6309,8 +6735,8 @@ module Aws::EC2
     #   weights that you assign to each instance type used by the Fleet
     #   determine the number of instances for which the Fleet reserves
     #   capacity. Both values are based on units that make sense for your
-    #   workload. For more information, see [ Total target capacity][1] in
-    #   the Amazon EC2 User Guide.
+    #   workload. For more information, see [Total target capacity][1] in
+    #   the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -6632,7 +7058,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCarrierGatewayRequest AWS API Documentation
@@ -6746,7 +7172,7 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -6754,7 +7180,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -6881,7 +7307,7 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -6889,7 +7315,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -7001,9 +7427,14 @@ module Aws::EC2
     # Contains the parameters for CreateCustomerGateway.
     #
     # @!attribute [rw] bgp_asn
-    #   For devices that support BGP, the customer gateway's BGP ASN.
+    #   For customer gateway devices that support BGP, specify the device's
+    #   ASN. You must specify either `BgpAsn` or `BgpAsnExtended` when
+    #   creating the customer gateway. If the ASN is larger than
+    #   `2,147,483,647`, you must use `BgpAsnExtended`.
     #
     #   Default: 65000
+    #
+    #   Valid values: `1` to `2,147,483,647`
     #   @return [Integer]
     #
     # @!attribute [rw] public_ip
@@ -7033,7 +7464,10 @@ module Aws::EC2
     #
     # @!attribute [rw] ip_address
     #   IPv4 address for the customer gateway device's outside interface.
-    #   The address must be static.
+    #   The address must be static. If `OutsideIpAddressType` in your VPN
+    #   connection options is set to `PrivateIpv4`, you can use an RFC6598
+    #   or RFC1918 private IPv4 address. If `OutsideIpAddressType` is set to
+    #   `PublicIpv4`, you can use a public IPv4 address.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -7042,6 +7476,15 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] bgp_asn_extended
+    #   For customer gateway devices that support BGP, specify the device's
+    #   ASN. You must specify either `BgpAsn` or `BgpAsnExtended` when
+    #   creating the customer gateway. If the ASN is larger than
+    #   `2,147,483,647`, you must use `BgpAsnExtended`.
+    #
+    #   Valid values: `2,147,483,648` to `4,294,967,295`
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCustomerGatewayRequest AWS API Documentation
     #
@@ -7053,7 +7496,8 @@ module Aws::EC2
       :tag_specifications,
       :device_name,
       :ip_address,
-      :dry_run)
+      :dry_run,
+      :bgp_asn_extended)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7177,12 +7621,12 @@ module Aws::EC2
 
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -7250,7 +7694,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -7260,7 +7704,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetError AWS API Documentation
@@ -7486,15 +7930,17 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] deliver_logs_permission_arn
     #   The ARN of the IAM role that allows Amazon EC2 to publish flow logs
-    #   to a CloudWatch Logs log group in your account.
+    #   to the log destination.
     #
     #   This parameter is required if the destination type is
-    #   `cloud-watch-logs` and unsupported otherwise.
+    #   `cloud-watch-logs`, or if the destination type is
+    #   `kinesis-data-firehose` and the delivery stream and the resources to
+    #   monitor are in different accounts.
     #   @return [String]
     #
     # @!attribute [rw] deliver_cross_account_role
@@ -7595,7 +8041,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html
     #   @return [Integer]
     #
     # @!attribute [rw] destination_options
@@ -7678,7 +8124,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -7717,9 +8163,22 @@ module Aws::EC2
     end
 
     # @!attribute [rw] block_device_mappings
-    #   The block device mappings. This parameter cannot be used to modify
-    #   the encryption status of existing volumes or snapshots. To create an
-    #   AMI with encrypted snapshots, use the CopyImage action.
+    #   The block device mappings.
+    #
+    #   When using the CreateImage action:
+    #
+    #   * You can't change the volume size using the VolumeSize parameter.
+    #     If you want a different volume size, you must first change the
+    #     volume size of the source instance.
+    #
+    #   * You can't modify the encryption status of existing volumes or
+    #     snapshots. To create an AMI with volumes or snapshots that have a
+    #     different encryption status (for example, where the source volume
+    #     and snapshots are unencrypted, and you want to create an AMI with
+    #     encrypted volumes or snapshots), use the CopyImage action.
+    #
+    #   * The only option that can be changed for existing mappings or
+    #     snapshots is `DeleteOnTermination`.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] description
@@ -8139,14 +8598,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] aws_service
@@ -8171,6 +8630,10 @@ module Aws::EC2
     #   [2]: https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html
     #   @return [String]
     #
+    # @!attribute [rw] source_resource
+    #   The resource used to provision CIDRs to a resource planning pool.
+    #   @return [Types::IpamPoolSourceResourceRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateIpamPoolRequest AWS API Documentation
     #
     class CreateIpamPoolRequest < Struct.new(
@@ -8189,7 +8652,8 @@ module Aws::EC2
       :tag_specifications,
       :client_token,
       :aws_service,
-      :public_ip_source)
+      :public_ip_source,
+      :source_resource)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8242,14 +8706,25 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tier
+    #   IPAM is offered in a Free Tier and an Advanced Tier. For more
+    #   information about the features available in each tier and the costs
+    #   associated with the tiers, see [Amazon VPC pricing &gt; IPAM
+    #   tab][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateIpamRequest AWS API Documentation
@@ -8259,7 +8734,8 @@ module Aws::EC2
       :description,
       :operating_regions,
       :tag_specifications,
-      :client_token)
+      :client_token,
+      :tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8355,14 +8831,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateIpamScopeRequest AWS API Documentation
@@ -8466,11 +8942,9 @@ module Aws::EC2
     #   The tags to apply to the launch template on creation. To tag the
     #   launch template, the resource type must be `launch-template`.
     #
-    #   <note markdown="1"> To specify the tags for the resources that are created when an
+    #   To specify the tags for the resources that are created when an
     #   instance is launched, you must use the `TagSpecifications` parameter
     #   in the [launch template data][1] structure.
-    #
-    #    </note>
     #
     #
     #
@@ -8531,24 +9005,29 @@ module Aws::EC2
     # @!attribute [rw] launch_template_id
     #   The ID of the launch template.
     #
-    #   You must specify either the `LaunchTemplateId` or the
-    #   `LaunchTemplateName`, but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
     #   The name of the launch template.
     #
-    #   You must specify the `LaunchTemplateName` or the `LaunchTemplateId`,
-    #   but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] source_version
-    #   The version number of the launch template version on which to base
-    #   the new version. The new version inherits the same launch parameters
-    #   as the source version, except for parameters that you specify in
-    #   `LaunchTemplateData`. Snapshots applied to the block device mapping
-    #   are ignored when creating a new version unless they are explicitly
-    #   included.
+    #   The version of the launch template on which to base the new version.
+    #   Snapshots applied to the block device mapping are ignored when
+    #   creating a new version unless they are explicitly included.
+    #
+    #   If you specify this parameter, the new version inherits the launch
+    #   parameters from the source version. If you specify additional launch
+    #   parameters for the new version, they overwrite any corresponding
+    #   launch parameters inherited from the source version.
+    #
+    #   If you omit this parameter, the new version contains only the launch
+    #   parameters that you specify for the new version.
     #   @return [String]
     #
     # @!attribute [rw] version_description
@@ -8563,7 +9042,7 @@ module Aws::EC2
     #   If `true`, and if a Systems Manager parameter is specified for
     #   `ImageId`, the AMI ID is displayed in the response for `imageID`.
     #   For more information, see [Use a Systems Manager parameter instead
-    #   of an AMI ID][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   of an AMI ID][1] in the *Amazon EC2 User Guide*.
     #
     #   Default: `false`
     #
@@ -8825,7 +9304,7 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   Constraints: Up to 255 UTF-8 characters in length.
     #
@@ -8834,7 +9313,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateManagedPrefixListRequest AWS API Documentation
@@ -8873,7 +9352,7 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to ensure
+    #   idempotency of the request. For more information, see [Ensuring
     #   idempotency][1].
     #
     #   Constraint: Maximum 64 ASCII characters.
@@ -8883,7 +9362,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -9073,12 +9552,26 @@ module Aws::EC2
     #   The tags to assign to the network ACL.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclRequest AWS API Documentation
     #
     class CreateNetworkAclRequest < Struct.new(
       :dry_run,
       :vpc_id,
-      :tag_specifications)
+      :tag_specifications,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9087,10 +9580,17 @@ module Aws::EC2
     #   Information about the network ACL.
     #   @return [Types::NetworkAcl]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure the idempotency of the
+    #   request. Only returned if a client token was provided in the
+    #   request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclResult AWS API Documentation
     #
     class CreateNetworkAclResult < Struct.new(
-      :network_acl)
+      :network_acl,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9113,7 +9613,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -9203,7 +9703,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] filter_at_source
@@ -9415,14 +9915,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] enable_primary_ipv_6
@@ -9443,6 +9943,10 @@ module Aws::EC2
     #   ENI becomes the primary IPv6 address.
     #   @return [Boolean]
     #
+    # @!attribute [rw] connection_tracking_specification
+    #   A connection tracking specification for the network interface.
+    #   @return [Types::ConnectionTrackingSpecificationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfaceRequest AWS API Documentation
     #
     class CreateNetworkInterfaceRequest < Struct.new(
@@ -9462,7 +9966,8 @@ module Aws::EC2
       :subnet_id,
       :tag_specifications,
       :client_token,
-      :enable_primary_ipv_6)
+      :enable_primary_ipv_6,
+      :connection_tracking_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9606,7 +10111,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -9903,12 +10408,26 @@ module Aws::EC2
     #   The tags to assign to the route table.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTableRequest AWS API Documentation
     #
     class CreateRouteTableRequest < Struct.new(
       :dry_run,
       :vpc_id,
-      :tag_specifications)
+      :tag_specifications,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9917,10 +10436,17 @@ module Aws::EC2
     #   Information about the route table.
     #   @return [Types::RouteTable]
     #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure the idempotency of the
+    #   request. Only returned if a client token was provided in the
+    #   request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTableResult AWS API Documentation
     #
     class CreateRouteTableResult < Struct.new(
-      :route_table)
+      :route_table,
+      :client_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10009,11 +10535,11 @@ module Aws::EC2
     #     volume.
     #
     #   For more information, see [Create local snapshots from volumes on an
-    #   Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-snapshot
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#create-snapshot
     #   @return [String]
     #
     # @!attribute [rw] volume_id
@@ -10071,12 +10597,11 @@ module Aws::EC2
     #     instance.
     #
     #   For more information, see [ Create multi-volume local snapshots from
-    #   instances on an Outpost][1] in the *Amazon Elastic Compute Cloud
-    #   User Guide*.
+    #   instances on an Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-multivol-snapshot
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#create-multivol-snapshot
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -10284,14 +10809,14 @@ module Aws::EC2
     #
     #   To create a subnet in a Local Zone, set this value to the Local Zone
     #   ID, for example `us-west-2-lax-1a`. For information about the
-    #   Regions that support Local Zones, see [Local Zones locations][1].
+    #   Regions that support Local Zones, see [Available Local Zones][1].
     #
     #   To create a subnet in an Outpost, set this value to the Availability
     #   Zone for the Outpost and specify the Outpost ARN.
     #
     #
     #
-    #   [1]: http://aws.amazon.com/about-aws/global-infrastructure/localzones/locations/
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/available-local-zones.html
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_id
@@ -10308,10 +10833,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ipv_6_cidr_block
-    #   The IPv6 network range for the subnet, in CIDR notation. The subnet
-    #   size must use a /64 prefix length.
-    #
-    #   This parameter is required for an IPv6 only subnet.
+    #   The IPv6 network range for the subnet, in CIDR notation. This
+    #   parameter is required for an IPv6 only subnet.
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
@@ -10335,6 +10858,22 @@ module Aws::EC2
     #   Indicates whether to create an IPv6 only subnet.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ipv_4_ipam_pool_id
+    #   An IPv4 IPAM pool ID for the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_4_netmask_length
+    #   An IPv4 netmask length for the subnet.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ipv_6_ipam_pool_id
+    #   An IPv6 IPAM pool ID for the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv_6_netmask_length
+    #   An IPv6 netmask length for the subnet.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnetRequest AWS API Documentation
     #
     class CreateSubnetRequest < Struct.new(
@@ -10346,7 +10885,11 @@ module Aws::EC2
       :outpost_arn,
       :vpc_id,
       :dry_run,
-      :ipv_6_native)
+      :ipv_6_native,
+      :ipv_4_ipam_pool_id,
+      :ipv_4_netmask_length,
+      :ipv_6_ipam_pool_id,
+      :ipv_6_netmask_length)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10418,7 +10961,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterRequest AWS API Documentation
@@ -10443,7 +10986,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterResult AWS API Documentation
@@ -10521,8 +11064,12 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   Traffic Mirroring tags specifications.
+    #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterRuleRequest AWS API Documentation
     #
@@ -10538,7 +11085,8 @@ module Aws::EC2
       :source_cidr_block,
       :description,
       :dry_run,
-      :client_token)
+      :client_token,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10554,7 +11102,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorFilterRuleResult AWS API Documentation
@@ -10607,11 +11155,11 @@ module Aws::EC2
     # @!attribute [rw] virtual_network_id
     #   The VXLAN ID for the Traffic Mirror session. For more information
     #   about the VXLAN protocol, see [RFC 7348][1]. If you do not specify a
-    #   `VirtualNetworkId`, an account-wide unique id is chosen at random.
+    #   `VirtualNetworkId`, an account-wide unique ID is chosen at random.
     #
     #
     #
-    #   [1]: https://tools.ietf.org/html/rfc7348
+    #   [1]: https://datatracker.ietf.org/doc/html/rfc7348
     #   @return [Integer]
     #
     # @!attribute [rw] description
@@ -10639,7 +11187,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorSessionRequest AWS API Documentation
@@ -10670,7 +11218,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorSessionResult AWS API Documentation
@@ -10716,7 +11264,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] gateway_load_balancer_endpoint_id
@@ -10748,7 +11296,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorTargetResult AWS API Documentation
@@ -11330,6 +11878,26 @@ module Aws::EC2
     #   Enable or disable DNS support. The default is `enable`.
     #   @return [String]
     #
+    # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
+    #   Enables you to reference a security group across VPCs attached to a
+    #   transit gateway. Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
+    #
+    #   If you don't enable or disable SecurityGroupReferencingSupport in
+    #   the request, the attachment will inherit the security group
+    #   referencing support setting on the transit gateway.
+    #   @return [String]
+    #
     # @!attribute [rw] ipv_6_support
     #   Enable or disable IPv6 support. The default is `disable`.
     #   @return [String]
@@ -11345,6 +11913,7 @@ module Aws::EC2
     #
     class CreateTransitGatewayVpcAttachmentRequestOptions < Struct.new(
       :dns_support,
+      :security_group_referencing_support,
       :ipv_6_support,
       :appliance_mode_support)
       SENSITIVE = []
@@ -11448,7 +12017,7 @@ module Aws::EC2
     #
     # @!attribute [rw] security_group_ids
     #   The IDs of the security groups to associate with the Verified Access
-    #   endpoint.
+    #   endpoint. Required if `AttachmentType` is set to `vpc`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] load_balancer_options
@@ -11476,14 +12045,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -11494,7 +12063,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessEndpointRequest AWS API Documentation
@@ -11520,7 +12089,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoint
-    #   The ID of the Verified Access endpoint.
+    #   Details about the Verified Access endpoint.
     #   @return [Types::VerifiedAccessEndpoint]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessEndpointResult AWS API Documentation
@@ -11550,14 +12119,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -11568,7 +12137,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessGroupRequest AWS API Documentation
@@ -11586,7 +12155,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_group
-    #   The ID of the Verified Access group.
+    #   Details about the Verified Access group.
     #   @return [Types::VerifiedAccessGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessGroupResult AWS API Documentation
@@ -11608,14 +12177,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -11643,7 +12212,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance
-    #   The ID of the Verified Access instance.
+    #   Details about the Verified Access instance.
     #   @return [Types::VerifiedAccessInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessInstanceResult AWS API Documentation
@@ -11661,10 +12230,16 @@ module Aws::EC2
     #   The ID of the tenant application with the device-identity provider.
     #   @return [String]
     #
+    # @!attribute [rw] public_signing_key_url
+    #   The URL Amazon Web Services Verified Access will use to verify the
+    #   authenticity of the device tokens.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessTrustProviderDeviceOptions AWS API Documentation
     #
     class CreateVerifiedAccessTrustProviderDeviceOptions < Struct.new(
-      :tenant_id)
+      :tenant_id,
+      :public_signing_key_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11756,14 +12331,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -11774,7 +12349,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessTrustProviderRequest AWS API Documentation
@@ -11796,7 +12371,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider
-    #   The ID of the Verified Access trust provider.
+    #   Details about the Verified Access trust provider.
     #   @return [Types::VerifiedAccessTrustProvider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVerifiedAccessTrustProviderResult AWS API Documentation
@@ -11859,8 +12434,7 @@ module Aws::EC2
     #   setting the encryption state to `true` depends on the volume origin
     #   (new or from a snapshot), starting encryption state, ownership, and
     #   whether encryption by default is enabled. For more information, see
-    #   [Encryption by default][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   [Encryption by default][1] in the *Amazon EBS User Guide*.
     #
     #   Encrypted Amazon EBS volumes must be attached to instances that
     #   support Amazon EBS encryption. For more information, see [Supported
@@ -11868,8 +12442,8 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default
+    #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
@@ -11881,14 +12455,14 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`: 3,000-16,000 IOPS
+    #   * `gp3`: 3,000 - 16,000 IOPS
     #
-    #   * `io1`: 100-64,000 IOPS
+    #   * `io1`: 100 - 64,000 IOPS
     #
-    #   * `io2`: 100-64,000 IOPS
+    #   * `io2`: 100 - 256,000 IOPS
     #
-    #   `io1` and `io2` volumes support up to 64,000 IOPS only on [Instances
-    #   built on the Nitro System][1]. Other instance families support
+    #   For `io2` volumes, you can achieve up to 256,000 IOPS on [instances
+    #   built on the Nitro System][1]. On other instances, you can achieve
     #   performance up to 32,000 IOPS.
     #
     #   This parameter is required for `io1` and `io2` volumes. The default
@@ -11897,14 +12471,14 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier of the Key Management Service (KMS) KMS key to use
-    #   for Amazon EBS encryption. If this parameter is not specified, your
-    #   KMS key for Amazon EBS is used. If `KmsKeyId` is specified, the
-    #   encrypted state must be `true`.
+    #   The identifier of the KMS key to use for Amazon EBS encryption. If
+    #   this parameter is not specified, your KMS key for Amazon EBS is
+    #   used. If `KmsKeyId` is specified, the encrypted state must be
+    #   `true`.
     #
     #   You can specify the KMS key using any of the following:
     #
@@ -11935,13 +12509,15 @@ module Aws::EC2
     #
     #   The following are the supported volumes sizes for each volume type:
     #
-    #   * `gp2` and `gp3`: 1-16,384
+    #   * `gp2` and `gp3`: 1 - 16,384 GiB
     #
-    #   * `io1` and `io2`: 4-16,384
+    #   * `io1`: 4 - 16,384 GiB
     #
-    #   * `st1` and `sc1`: 125-16,384
+    #   * `io2`: 4 - 65,536 GiB
     #
-    #   * `standard`: 1-1,024
+    #   * `st1` and `sc1`: 125 - 16,384 GiB
+    #
+    #   * `standard`: 1 - 1024 GiB
     #   @return [Integer]
     #
     # @!attribute [rw] snapshot_id
@@ -11966,13 +12542,13 @@ module Aws::EC2
     #   be used as boot volumes.
     #
     #   For more information, see [Amazon EBS volume types][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   *Amazon EBS User Guide*.
     #
     #   Default: `gp2`
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -11991,13 +12567,13 @@ module Aws::EC2
     #   Multi-Attach, you can attach the volume to up to 16 [Instances built
     #   on the Nitro System][1] in the same Availability Zone. This
     #   parameter is supported with `io1` and `io2` volumes only. For more
-    #   information, see [ Amazon EBS Multi-Attach][2] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   information, see [ Amazon EBS Multi-Attach][2] in the *Amazon EBS
+    #   User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html
+    #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html
     #   @return [Boolean]
     #
     # @!attribute [rw] throughput
@@ -12019,7 +12595,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumeRequest AWS API Documentation
@@ -12073,7 +12649,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointConnectionNotificationRequest AWS API Documentation
@@ -12166,7 +12742,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] private_dns_enabled
@@ -12270,7 +12846,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -12679,8 +13255,10 @@ module Aws::EC2
     # Describes a customer gateway.
     #
     # @!attribute [rw] bgp_asn
-    #   The customer gateway's Border Gateway Protocol (BGP) Autonomous
-    #   System Number (ASN).
+    #   The customer gateway device's Border Gateway Protocol (BGP)
+    #   Autonomous System Number (ASN).
+    #
+    #   Valid values: `1` to `2,147,483,647`
     #   @return [String]
     #
     # @!attribute [rw] customer_gateway_id
@@ -12688,7 +13266,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_address
-    #   The IP address of the customer gateway device's outside interface.
+    #   IPv4 address for the customer gateway device's outside interface.
+    #   The address must be static. If `OutsideIpAddressType` in your VPN
+    #   connection options is set to `PrivateIpv4`, you can use an RFC6598
+    #   or RFC1918 private IPv4 address. If `OutsideIpAddressType` is set to
+    #   `PublicIpv4`, you can use a public IPv4 address.
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
@@ -12713,6 +13295,13 @@ module Aws::EC2
     #   Any tags assigned to the customer gateway.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] bgp_asn_extended
+    #   The customer gateway device's Border Gateway Protocol (BGP)
+    #   Autonomous System Number (ASN).
+    #
+    #   Valid values: `2,147,483,648` to `4,294,967,295`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CustomerGateway AWS API Documentation
     #
     class CustomerGateway < Struct.new(
@@ -12723,7 +13312,8 @@ module Aws::EC2
       :state,
       :type,
       :device_name,
-      :tags)
+      :tags,
+      :bgp_asn_extended)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13147,6 +13737,9 @@ module Aws::EC2
     #
     # @!attribute [rw] fleet_ids
     #   The IDs of the EC2 Fleets.
+    #
+    #   Constraints: In a single request, you can specify up to 25 `instant`
+    #   fleet IDs and up to 100 `maintain` or `request` fleet IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] terminate_instances
@@ -13357,11 +13950,22 @@ module Aws::EC2
     #   The ID of the pool to delete.
     #   @return [String]
     #
+    # @!attribute [rw] cascade
+    #   Enables you to quickly delete an IPAM pool and all resources within
+    #   that pool, including provisioned CIDRs, allocations, and other
+    #   pools.
+    #
+    #   You can only use this option to delete pools in the private scope or
+    #   pools in the public scope with a source resource. A source resource
+    #   is a resource used to provision CIDRs to a resource planning pool.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteIpamPoolRequest AWS API Documentation
     #
     class DeleteIpamPoolRequest < Struct.new(
       :dry_run,
-      :ipam_pool_id)
+      :ipam_pool_id,
+      :cascade)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13552,15 +14156,15 @@ module Aws::EC2
     # @!attribute [rw] launch_template_id
     #   The ID of the launch template.
     #
-    #   You must specify either the `LaunchTemplateId` or the
-    #   `LaunchTemplateName`, but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
     #   The name of the launch template.
     #
-    #   You must specify either the `LaunchTemplateName` or the
-    #   `LaunchTemplateId`, but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateRequest AWS API Documentation
@@ -13595,15 +14199,15 @@ module Aws::EC2
     # @!attribute [rw] launch_template_id
     #   The ID of the launch template.
     #
-    #   You must specify either the `LaunchTemplateId` or the
-    #   `LaunchTemplateName`, but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
     #   The name of the launch template.
     #
-    #   You must specify either the `LaunchTemplateName` or the
-    #   `LaunchTemplateId`, but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] versions
@@ -14962,14 +15566,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -14990,7 +15594,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoint
-    #   The ID of the Verified Access endpoint.
+    #   Details about the Verified Access endpoint.
     #   @return [Types::VerifiedAccessEndpoint]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessEndpointResult AWS API Documentation
@@ -15008,14 +15612,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -15036,7 +15640,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_group
-    #   The ID of the Verified Access group.
+    #   Details about the Verified Access group.
     #   @return [Types::VerifiedAccessGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessGroupResult AWS API Documentation
@@ -15061,14 +15665,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessInstanceRequest AWS API Documentation
@@ -15082,7 +15686,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance
-    #   The ID of the Verified Access instance.
+    #   Details about the Verified Access instance.
     #   @return [Types::VerifiedAccessInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessInstanceResult AWS API Documentation
@@ -15107,14 +15711,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessTrustProviderRequest AWS API Documentation
@@ -15128,7 +15732,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider
-    #   The ID of the Verified Access trust provider.
+    #   Details about the Verified Access trust provider.
     #   @return [Types::VerifiedAccessTrustProvider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVerifiedAccessTrustProviderResult AWS API Documentation
@@ -15404,6 +16008,43 @@ module Aws::EC2
     #
     class DeprovisionByoipCidrResult < Struct.new(
       :byoip_cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_id
+    #   The IPAM ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] asn
+    #   An ASN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeprovisionIpamByoasnRequest AWS API Documentation
+    #
+    class DeprovisionIpamByoasnRequest < Struct.new(
+      :dry_run,
+      :ipam_id,
+      :asn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoasn
+    #   An ASN and BYOIP CIDR association.
+    #   @return [Types::Byoasn]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeprovisionIpamByoasnResult AWS API Documentation
+    #
+    class DeprovisionIpamByoasnResult < Struct.new(
+      :byoasn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15906,18 +16547,18 @@ module Aws::EC2
     #     Local Zones, use the name of the group associated with the Local
     #     Zone (for example, `us-west-2-lax-1`) For Wavelength Zones, use
     #     the name of the group associated with the Wavelength Zone (for
-    #     example, `us-east-1-wl1-bos-wlz-1`).
+    #     example, `us-east-1-wl1`).
     #
     #   * `message` - The Zone message.
     #
     #   * `opt-in-status` - The opt-in status (`opted-in` \| `not-opted-in`
     #     \| `opt-in-not-required`).
     #
-    #   * `parent-zoneID` - The ID of the zone that handles some of the
+    #   * `parent-zone-id` - The ID of the zone that handles some of the
     #     Local Zone and Wavelength Zone control plane operations, such as
     #     API calls.
     #
-    #   * `parent-zoneName` - The ID of the zone that handles some of the
+    #   * `parent-zone-name` - The ID of the zone that handles some of the
     #     Local Zone and Wavelength Zone control plane operations, such as
     #     API calls.
     #
@@ -16147,6 +16788,81 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_type
+    #   The type of instance for which the Capacity Block offering reserves
+    #   capacity.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances for which to reserve capacity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_date_range
+    #   The earliest start date for the Capacity Block offering.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_range
+    #   The latest end date for the Capacity Block offering.
+    #   @return [Time]
+    #
+    # @!attribute [rw] capacity_duration_hours
+    #   The number of hours for which to reserve Capacity Block.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockOfferingsRequest AWS API Documentation
+    #
+    class DescribeCapacityBlockOfferingsRequest < Struct.new(
+      :dry_run,
+      :instance_type,
+      :instance_count,
+      :start_date_range,
+      :end_date_range,
+      :capacity_duration_hours,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_block_offerings
+    #   The recommended Capacity Block offering for the dates specified.
+    #   @return [Array<Types::CapacityBlockOffering>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockOfferingsResult AWS API Documentation
+    #
+    class DescribeCapacityBlockOfferingsResult < Struct.new(
+      :capacity_block_offerings,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] capacity_reservation_fleet_ids
     #   The IDs of the Capacity Reservation Fleets to describe.
     #   @return [Array<String>]
@@ -16156,11 +16872,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -16225,11 +16943,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -16988,9 +17708,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dhcp_options_ids
-    #   The IDs of one or more DHCP options sets.
-    #
-    #   Default: Describes all your DHCP options sets.
+    #   The IDs of DHCP option sets.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
@@ -17053,7 +17771,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dhcp_options
-    #   Information about one or more DHCP options sets.
+    #   Information about the DHCP options sets.
     #   @return [Array<Types::DhcpOptions>]
     #
     # @!attribute [rw] next_token
@@ -17303,16 +18021,13 @@ module Aws::EC2
     end
 
     # @!attribute [rw] image_ids
-    #   Details for one or more Windows AMI image IDs.
+    #   Specify one or more Windows AMI image IDs for the request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   Use the following filters to streamline results.
     #
     #   * `resource-type` - The resource type for pre-provisioning.
-    #
-    #   * `launch-template` - The launch template that is associated with
-    #     the pre-provisioned Windows AMI.
     #
     #   * `owner-id` - The owner ID for the pre-provisioning resource.
     #
@@ -17373,17 +18088,17 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describe details about a fast-launch enabled Windows image that meets
-    # the requested criteria. Criteria are defined by the
+    # Describe details about a Windows image with Windows fast launch
+    # enabled that meets the requested criteria. Criteria are defined by the
     # `DescribeFastLaunchImages` action filters.
     #
     # @!attribute [rw] image_id
-    #   The image ID that identifies the fast-launch enabled Windows image.
+    #   The image ID that identifies the Windows fast launch enabled image.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type that is used for pre-provisioning the Windows AMI.
-    #   Supported values include: `snapshot`.
+    #   The resource type that Amazon EC2 uses for pre-provisioning the
+    #   Windows AMI. Supported values include: `snapshot`.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_configuration
@@ -17392,32 +18107,33 @@ module Aws::EC2
     #   @return [Types::FastLaunchSnapshotConfigurationResponse]
     #
     # @!attribute [rw] launch_template
-    #   The launch template that the fast-launch enabled Windows AMI uses
+    #   The launch template that the Windows fast launch enabled AMI uses
     #   when it launches Windows instances from pre-provisioned snapshots.
     #   @return [Types::FastLaunchLaunchTemplateSpecificationResponse]
     #
     # @!attribute [rw] max_parallel_launches
     #   The maximum number of instances that Amazon EC2 can launch at the
-    #   same time to create pre-provisioned snapshots for Windows faster
-    #   launching.
+    #   same time to create pre-provisioned snapshots for Windows fast
+    #   launch.
     #   @return [Integer]
     #
     # @!attribute [rw] owner_id
-    #   The owner ID for the fast-launch enabled Windows AMI.
+    #   The owner ID for the Windows fast launch enabled AMI.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The current state of faster launching for the specified Windows AMI.
+    #   The current state of Windows fast launch for the specified Windows
+    #   AMI.
     #   @return [String]
     #
     # @!attribute [rw] state_transition_reason
-    #   The reason that faster launching for the Windows AMI changed to the
+    #   The reason that Windows fast launch for the AMI changed to the
     #   current state.
     #   @return [String]
     #
     # @!attribute [rw] state_transition_time
-    #   The time that faster launching for the Windows AMI changed to the
-    #   current state.
+    #   The time that Windows fast launch for the AMI changed to the current
+    #   state.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFastLaunchImagesSuccessItem AWS API Documentation
@@ -18598,6 +19314,10 @@ module Aws::EC2
     #   * `root-device-type` - The type of the root device volume (`ebs` \|
     #     `instance-store`).
     #
+    #   * `source-instance-id` - The ID of the instance that the AMI was
+    #     created from if the AMI was created using CreateImage. This filter
+    #     is applicable only if the AMI was created using [CreateImage][1].
+    #
     #   * `state` - The state of the image (`available` \| `pending` \|
     #     `failed`).
     #
@@ -18620,6 +19340,10 @@ module Aws::EC2
     #
     #   * `virtualization-type` - The virtualization type (`paravirtual` \|
     #     `hvm`).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] image_ids
@@ -18645,6 +19369,12 @@ module Aws::EC2
     #   regardless of what you specify for this parameter.
     #
     #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_disabled
+    #   Specifies whether to include disabled AMIs.
+    #
+    #   Default: No disabled AMIs are included in the response.
     #   @return [Boolean]
     #
     # @!attribute [rw] dry_run
@@ -18678,6 +19408,7 @@ module Aws::EC2
       :image_ids,
       :owners,
       :include_deprecated,
+      :include_disabled,
       :dry_run,
       :max_results,
       :next_token)
@@ -19249,18 +19980,126 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #   You can't specify this parameter and the instance IDs parameter in
+    #   the same request.
+    #
+    #   Default: `20`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_ids
+    #   The instance IDs.
+    #
+    #   Default: Describes all your instances.
+    #
+    #   Constraints: Maximum 100 explicitly specified instance IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] group_names
+    #   The name of the placement group that each instance is in.
+    #
+    #   Constraints: Maximum 100 explicitly specified placement group names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `availability-zone` - The name of the Availability Zone (for
+    #     example, `us-west-2a`) or Local Zone (for example,
+    #     `us-west-2-lax-1b`) that the instance is in.
+    #
+    #   * `instance-type` - The instance type (for example, `p4d.24xlarge`)
+    #     or instance family (for example, `p4d*`). You can use the `*`
+    #     wildcard to match zero or more characters, or the `?` wildcard to
+    #     match zero or one character.
+    #
+    #   * `zone-id` - The ID of the Availability Zone (for example,
+    #     `usw2-az2`) or Local Zone (for example, `usw2-lax1-az1`) that the
+    #     instance is in.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTopologyRequest AWS API Documentation
+    #
+    class DescribeInstanceTopologyRequest < Struct.new(
+      :dry_run,
+      :next_token,
+      :max_results,
+      :instance_ids,
+      :group_names,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instances
+    #   Information about the topology of each instance.
+    #   @return [Array<Types::InstanceTopology>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTopologyResult AWS API Documentation
+    #
+    class DescribeInstanceTopologyResult < Struct.new(
+      :instances,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] location_type
     #   The location type.
+    #
+    #   * `availability-zone` - The Availability Zone. When you specify a
+    #     location filter, it must be an Availability Zone for the current
+    #     Region.
+    #
+    #   * `availability-zone-id` - The AZ ID. When you specify a location
+    #     filter, it must be an AZ ID for the current Region.
+    #
+    #   * `outpost` - The Outpost ARN. When you specify a location filter,
+    #     it must be an Outpost ARN for the current Region.
+    #
+    #   * `region` - The current Region. If you specify a location filter,
+    #     it must match the current Region.
     #   @return [String]
     #
     # @!attribute [rw] filters
     #   One or more filters. Filter names and values are case-sensitive.
     #
-    #   * `location` - This depends on the location type. For example, if
-    #     the location type is `region` (default), the location is the
-    #     Region code (for example, `us-east-2`.)
+    #   * `instance-type` - The instance type. For a list of possible
+    #     values, see [Instance][1].
     #
-    #   * `instance-type` - The instance type. For example, `c5.2xlarge`.
+    #   * `location` - The location. For a list of possible identifiers, see
+    #     [Regions and Zones][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Instance.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -19292,7 +20131,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] instance_type_offerings
-    #   The instance types offered.
+    #   The instance types offered in the location.
     #   @return [Array<Types::InstanceTypeOffering>]
     #
     # @!attribute [rw] next_token
@@ -19317,12 +20156,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_types
-    #   The instance types. For more information, see [Instance types][1] in
-    #   the *Amazon EC2 User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   The instance types.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
@@ -19517,12 +20351,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] instance_types
-    #   The instance type. For more information, see [Instance types][1] in
-    #   the *Amazon EC2 User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   The instance type.
     #   @return [Array<Types::InstanceTypeInfo>]
     #
     # @!attribute [rw] next_token
@@ -19624,8 +20453,9 @@ module Aws::EC2
     #
     #   * `instance-id` - The ID of the instance.
     #
-    #   * `instance-lifecycle` - Indicates whether this is a Spot Instance
-    #     or a Scheduled Instance (`spot` \| `scheduled`).
+    #   * `instance-lifecycle` - Indicates whether this is a Spot Instance,
+    #     a Scheduled Instance, or a Capacity Block (`spot` \| `scheduled`
+    #     \| `capacity-block`).
     #
     #   * `instance-state-code` - The state of the instance, as a 16-bit
     #     unsigned integer. The high byte is used for internal purposes and
@@ -19892,6 +20722,10 @@ module Aws::EC2
     #     (`ip-name` \| `resource-name`).
     #
     #   * `private-ip-address` - The private IPv4 address of the instance.
+    #     This can only be used to filter by the primary IP address of the
+    #     network interface attached to the instance. To filter by
+    #     additional IP addresses assigned to the network interface, use the
+    #     filter `network-interface.addresses.private-ip-address`.
     #
     #   * `product-code` - The product code associated with the AMI used to
     #     launch the instance.
@@ -20103,7 +20937,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] internet_gateways
-    #   Information about one or more internet gateways.
+    #   Information about the internet gateways.
     #   @return [Array<Types::InternetGateway>]
     #
     # @!attribute [rw] next_token
@@ -20115,6 +20949,51 @@ module Aws::EC2
     #
     class DescribeInternetGatewaysResult < Struct.new(
       :internet_gateways,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpamByoasnRequest AWS API Documentation
+    #
+    class DescribeIpamByoasnRequest < Struct.new(
+      :dry_run,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoasns
+    #   ASN and BYOIP CIDR associations.
+    #   @return [Array<Types::Byoasn>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpamByoasnResult AWS API Documentation
+    #
+    class DescribeIpamByoasnResult < Struct.new(
+      :byoasns,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -20547,8 +21426,8 @@ module Aws::EC2
     #   The ID of the launch template.
     #
     #   To describe one or more versions of a specified launch template, you
-    #   must specify either the `LaunchTemplateId` or the
-    #   `LaunchTemplateName`, but not both.
+    #   must specify either the launch template ID or the launch template
+    #   name, but not both.
     #
     #   To describe all the latest or default launch template versions in
     #   your account, you must omit this parameter.
@@ -20558,8 +21437,8 @@ module Aws::EC2
     #   The name of the launch template.
     #
     #   To describe one or more versions of a specified launch template, you
-    #   must specify either the `LaunchTemplateName` or the
-    #   `LaunchTemplateId`, but not both.
+    #   must specify either the launch template name or the launch template
+    #   ID, but not both.
     #
     #   To describe all the latest or default launch template versions in
     #   your account, you must omit this parameter.
@@ -20645,7 +21524,7 @@ module Aws::EC2
     #   `ImageId`, the parameter is displayed in the response for `imageId`.
     #
     #   For more information, see [Use a Systems Manager parameter instead
-    #   of an AMI ID][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   of an AMI ID][1] in the *Amazon EC2 User Guide*.
     #
     #   Default: `false`
     #
@@ -21184,6 +22063,127 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `lock-state` - The state of the snapshot lock
+    #     (`compliance-cooloff` \| `governance` \| `compliance` \|
+    #     `expired`).
+    #
+    #   ^
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_ids
+    #   The IDs of the snapshots for which to view the lock status.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLockedSnapshotsRequest AWS API Documentation
+    #
+    class DescribeLockedSnapshotsRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token,
+      :snapshot_ids,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshots
+    #   Information about the snapshots.
+    #   @return [Array<Types::LockedSnapshotsInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLockedSnapshotsResult AWS API Documentation
+    #
+    class DescribeLockedSnapshotsResult < Struct.new(
+      :snapshots,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   The filters.
+    #
+    #   * `availability-zone` - The Availability Zone of the EC2 Mac
+    #     Dedicated Host.
+    #
+    #   * `instance-type` - The instance type size that the EC2 Mac
+    #     Dedicated Host is configured to support.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] host_ids
+    #   The IDs of the EC2 Mac Dedicated Hosts.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results can be seen by sending another request
+    #   with the returned `nextToken` value. This value can be between 5 and
+    #   500. If `maxResults` is given a larger value than 500, you receive
+    #   an error.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMacHostsRequest AWS API Documentation
+    #
+    class DescribeMacHostsRequest < Struct.new(
+      :filters,
+      :host_ids,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mac_hosts
+    #   Information about the EC2 Mac Dedicated Hosts.
+    #   @return [Array<Types::MacHost>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMacHostsResult AWS API Documentation
+    #
+    class DescribeMacHostsResult < Struct.new(
+      :mac_hosts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -21458,8 +22458,6 @@ module Aws::EC2
     #
     # @!attribute [rw] network_acl_ids
     #   The IDs of the network ACLs.
-    #
-    #   Default: Describes all your network ACLs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -21491,7 +22489,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] network_acls
-    #   Information about one or more network ACLs.
+    #   Information about the network ACLs.
     #   @return [Array<Types::NetworkAcl>]
     #
     # @!attribute [rw] next_token
@@ -21847,6 +22845,12 @@ module Aws::EC2
     #   Indicates whether source/destination checking is enabled.
     #   @return [Types::AttributeBooleanValue]
     #
+    # @!attribute [rw] associate_public_ip_address
+    #   Indicates whether to assign a public IPv4 address to a network
+    #   interface. This option can be enabled for any network interface but
+    #   will only apply to the primary network interface (eth0).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaceAttributeResult AWS API Documentation
     #
     class DescribeNetworkInterfaceAttributeResult < Struct.new(
@@ -21854,7 +22858,8 @@ module Aws::EC2
       :description,
       :groups,
       :network_interface_id,
-      :source_dest_check)
+      :source_dest_check,
+      :associate_public_ip_address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22096,7 +23101,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] network_interfaces
-    #   Information about one or more network interfaces.
+    #   Information about the network interfaces.
     #   @return [Array<Types::NetworkInterface>]
     #
     # @!attribute [rw] next_token
@@ -22654,8 +23659,8 @@ module Aws::EC2
     #
     # @!attribute [rw] instance_type
     #   The instance type that the reservation will cover (for example,
-    #   `m1.small`). For more information, see [Instance types][1] in the
-    #   *Amazon EC2 User Guide*.
+    #   `m1.small`). For more information, see [Amazon EC2 instance
+    #   types][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -22883,6 +23888,9 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   The filters.
     #
+    #   * `association.gateway-id` - The ID of the gateway involved in the
+    #     association.
+    #
     #   * `association.route-table-association-id` - The ID of an
     #     association ID for the route table.
     #
@@ -22961,8 +23969,6 @@ module Aws::EC2
     #
     # @!attribute [rw] route_table_ids
     #   The IDs of the route tables.
-    #
-    #   Default: Describes all your route tables.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -22996,7 +24002,7 @@ module Aws::EC2
     # Contains the output of DescribeRouteTables.
     #
     # @!attribute [rw] route_tables
-    #   Information about one or more route tables.
+    #   Information about the route tables.
     #   @return [Array<Types::RouteTable>]
     #
     # @!attribute [rw] next_token
@@ -23593,12 +24599,9 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of snapshots to return for this request. This
-    #   value can be between 5 and 1,000; if this value is larger than
-    #   1,000, only 1,000 results are returned. If this parameter is not
-    #   used, then the request returns all snapshots. You cannot specify
-    #   this parameter and the snapshot IDs parameter in the same request.
-    #   For more information, see [Pagination][1].
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
     #
     #
     #
@@ -23655,9 +24658,8 @@ module Aws::EC2
     #   @return [Array<Types::Snapshot>]
     #
     # @!attribute [rw] next_token
-    #   The token to include in another request to return the next page of
-    #   snapshots. This value is `null` when there are no more snapshots to
-    #   return.
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotsResult AWS API Documentation
@@ -23949,9 +24951,9 @@ module Aws::EC2
     #     volume, in GiB.
     #
     #   * `launch.block-device-mapping.volume-type` - The type of EBS
-    #     volume: `gp2` for General Purpose SSD, `io1` or `io2` for
-    #     Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`for
-    #     Cold HDD, or `standard` for Magnetic.
+    #     volume: `gp2` or `gp3` for General Purpose SSD, `io1` or `io2` for
+    #     Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`
+    #     for Cold HDD, or `standard` for Magnetic.
     #
     #   * `launch.group-id` - The ID of the security group for the instance.
     #
@@ -24012,7 +25014,7 @@ module Aws::EC2
     #     `active` \| `closed` \| `cancelled` \| `failed`). Spot request
     #     status information can help you track your Amazon EC2 Spot
     #     Instance requests. For more information, see [Spot request
-    #     status][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #     status][1] in the *Amazon EC2 User Guide*.
     #
     #   * `status-code` - The short code describing the most recent
     #     evaluation of your Spot Instance request.
@@ -24122,9 +25124,9 @@ module Aws::EC2
     #     supported).
     #
     #   * `timestamp` - The time stamp of the Spot price history, in UTC
-    #     format (for example, *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z). You can
-    #     use wildcards (* and ?). Greater than or less than comparison is
-    #     not supported.
+    #     format (for example, *ddd MMM dd HH*:*mm*:*ss* UTC *YYYY*). You
+    #     can use wildcards (`*` and `?`). Greater than or less than
+    #     comparison is not supported.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] availability_zone
@@ -24194,7 +25196,8 @@ module Aws::EC2
     #
     # @!attribute [rw] next_token
     #   The token to include in another request to get the next page of
-    #   items. This value is `null` when there are no more items to return.
+    #   items. This value is an empty string (`""`) or `null` when there are
+    #   no more items to return.
     #   @return [String]
     #
     # @!attribute [rw] spot_price_history
@@ -24287,6 +25290,12 @@ module Aws::EC2
     #
     #   * `bucket` - Returns task information for tasks that targeted a
     #     specific bucket. For the filter value, specify the bucket name.
+    #
+    #   <note markdown="1"> When you specify the `ImageIds` parameter, any filters that you
+    #   specify are ignored. To use the filters, you must remove the
+    #   `ImageIds` parameter.
+    #
+    #    </note>
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
@@ -24300,7 +25309,7 @@ module Aws::EC2
     #   next page of items, make another request with the token returned in
     #   the output. For more information, see [Pagination][1].
     #
-    #   You cannot specify this parameter and the `ImageIDs` parameter in
+    #   You cannot specify this parameter and the `ImageIds` parameter in
     #   the same call.
     #
     #
@@ -24471,7 +25480,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] subnets
-    #   Information about one or more subnets.
+    #   Information about the subnets.
     #   @return [Array<Types::Subnet>]
     #
     # @!attribute [rw] next_token
@@ -24502,16 +25511,8 @@ module Aws::EC2
     #
     #   * `resource-id` - The ID of the resource.
     #
-    #   * `resource-type` - The resource type (`customer-gateway` \|
-    #     `dedicated-host` \| `dhcp-options` \| `elastic-ip` \| `fleet` \|
-    #     `fpga-image` \| `host-reservation` \| `image` \| `instance` \|
-    #     `internet-gateway` \| `key-pair` \| `launch-template` \|
-    #     `natgateway` \| `network-acl` \| `network-interface` \|
-    #     `placement-group` \| `reserved-instances` \| `route-table` \|
-    #     `security-group` \| `snapshot` \| `spot-instances-request` \|
-    #     `subnet` \| `volume` \| `vpc` \| `vpc-endpoint` \|
-    #     `vpc-endpoint-service` \| `vpc-peering-connection` \|
-    #     `vpn-connection` \| `vpn-gateway`).
+    #   * `resource-type` - The resource type. For a list of possible
+    #     values, see [TagSpecification][1].
     #
     #   * `tag`:&lt;key&gt; - The key/value combination of the tag. For
     #     example, specify "tag:Owner" for the filter name and "TeamA"
@@ -24519,6 +25520,10 @@ module Aws::EC2
     #     "Owner=TeamA".
     #
     #   * `value` - The tag value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TagSpecification.html
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -24563,6 +25568,91 @@ module Aws::EC2
     class DescribeTagsResult < Struct.new(
       :next_token,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter_rule_ids
+    #   Traffic filter rule IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] traffic_mirror_filter_id
+    #   Traffic filter ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   Traffic mirror filters.
+    #
+    #   * `traffic-mirror-filter-rule-id`: The ID of the Traffic Mirror
+    #     rule.
+    #
+    #   * `traffic-mirror-filter-id`: The ID of the filter that this rule is
+    #     associated with.
+    #
+    #   * `rule-number`: The number of the Traffic Mirror rule.
+    #
+    #   * `rule-action`: The action taken on the filtered traffic. Possible
+    #     actions are `accept` and `reject`.
+    #
+    #   * `traffic-direction`: The traffic direction. Possible directions
+    #     are `ingress` and `egress`.
+    #
+    #   * `protocol`: The protocol, for example UDP, assigned to the Traffic
+    #     Mirror rule.
+    #
+    #   * `source-cidr-block`: The source CIDR block assigned to the Traffic
+    #     Mirror rule.
+    #
+    #   * `destination-cidr-block`: The destination CIDR block assigned to
+    #     the Traffic Mirror rule.
+    #
+    #   * `description`: The description of the Traffic Mirror rule.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorFilterRulesRequest AWS API Documentation
+    #
+    class DescribeTrafficMirrorFilterRulesRequest < Struct.new(
+      :traffic_mirror_filter_rule_ids,
+      :traffic_mirror_filter_id,
+      :dry_run,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] traffic_mirror_filter_rules
+    #   Traffic mirror rules.
+    #   @return [Array<Types::TrafficMirrorFilterRule>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorFilterRulesResult AWS API Documentation
+    #
+    class DescribeTrafficMirrorFilterRulesResult < Struct.new(
+      :traffic_mirror_filter_rules,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25415,6 +26505,12 @@ module Aws::EC2
     #     `deleted` \| `deleting` \| `modifying` \| `pending`).
     #
     #   * `transit-gateway-id` - The ID of the transit gateway.
+    #
+    #   * `tag-key `- The key/value combination of a tag assigned to the
+    #     resource. Use the tag key in the filter name and the tag value as
+    #     the filter value. For example, to find all resources that have a
+    #     tag with the key `Owner` and the value `TeamA`, specify
+    #     `tag:Owner` for the filter name and `TeamA` for the filter value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -25572,7 +26668,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoints
-    #   The ID of the Verified Access endpoint.
+    #   Details about the Verified Access endpoints.
     #   @return [Array<Types::VerifiedAccessEndpoint>]
     #
     # @!attribute [rw] next_token
@@ -25632,7 +26728,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_groups
-    #   The ID of the Verified Access group.
+    #   Details about the Verified Access groups.
     #   @return [Array<Types::VerifiedAccessGroup>]
     #
     # @!attribute [rw] next_token
@@ -25687,7 +26783,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] logging_configurations
-    #   The current logging configuration for the Verified Access instances.
+    #   The logging configuration for the Verified Access instances.
     #   @return [Array<Types::VerifiedAccessInstanceLoggingConfiguration>]
     #
     # @!attribute [rw] next_token
@@ -25742,7 +26838,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instances
-    #   The IDs of the Verified Access instances.
+    #   Details about the Verified Access instances.
     #   @return [Array<Types::VerifiedAccessInstance>]
     #
     # @!attribute [rw] next_token
@@ -25797,7 +26893,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_providers
-    #   The IDs of the Verified Access trust providers.
+    #   Details about the Verified Access trust providers.
     #   @return [Array<Types::VerifiedAccessTrustProvider>]
     #
     # @!attribute [rw] next_token
@@ -25900,11 +26996,7 @@ module Aws::EC2
     # @!attribute [rw] max_results
     #   The maximum number of items to return for this request. To get the
     #   next page of items, make another request with the token returned in
-    #   the output. This value can be between 5 and 1,000; if the value is
-    #   larger than 1,000, only 1,000 results are returned. If this
-    #   parameter is not used, then all items are returned. You cannot
-    #   specify this parameter and the volume IDs parameter in the same
-    #   request. For more information, see [Pagination][1].
+    #   the output. For more information, see [Pagination][1].
     #
     #
     #
@@ -26003,7 +27095,7 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
-    #   The token returned by a previous paginated request. Pagination
+    #   The token returned from a previous paginated request. Pagination
     #   continues from the end of the items returned by the previous
     #   request.
     #   @return [String]
@@ -26035,7 +27127,7 @@ module Aws::EC2
     #
     # @!attribute [rw] next_token
     #   The token to include in another request to get the next page of
-    #   items. This value is `null` if there are no more items to return.
+    #   items. This value is `null` when there are no more items to return.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumesModificationsResult AWS API Documentation
@@ -26115,12 +27207,9 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of volumes to return for this request. This value
-    #   can be between 5 and 500; if you specify a value larger than 500,
-    #   only 500 items are returned. If this parameter is not used, then all
-    #   items are returned. You cannot specify this parameter and the volume
-    #   IDs parameter in the same request. For more information, see
-    #   [Pagination][1].
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
     #
     #
     #
@@ -26129,7 +27218,7 @@ module Aws::EC2
     #
     # @!attribute [rw] next_token
     #   The token returned from a previous paginated request. Pagination
-    #   continues from the end of the items returned from the previous
+    #   continues from the end of the items returned by the previous
     #   request.
     #   @return [String]
     #
@@ -26745,7 +27834,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] vpc_endpoints
-    #   Information about the endpoints.
+    #   Information about the VPC endpoints.
     #   @return [Array<Types::VpcEndpoint>]
     #
     # @!attribute [rw] next_token
@@ -26917,8 +28006,6 @@ module Aws::EC2
     #
     # @!attribute [rw] vpc_ids
     #   The IDs of the VPCs.
-    #
-    #   Default: Describes all your VPCs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dry_run
@@ -26957,7 +28044,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] vpcs
-    #   Information about one or more VPCs.
+    #   Information about the VPCs.
     #   @return [Array<Types::Vpc>]
     #
     # @!attribute [rw] next_token
@@ -27302,14 +28389,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -27331,11 +28418,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider
-    #   The ID of the Verified Access trust provider.
+    #   Details about the Verified Access trust provider.
     #   @return [Types::VerifiedAccessTrustProvider]
     #
     # @!attribute [rw] verified_access_instance
-    #   The ID of the Verified Access instance.
+    #   Details about the Verified Access instance.
     #   @return [Types::VerifiedAccessInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVerifiedAccessTrustProviderResult AWS API Documentation
@@ -27424,10 +28511,16 @@ module Aws::EC2
     #   The ID of the tenant application with the device-identity provider.
     #   @return [String]
     #
+    # @!attribute [rw] public_signing_key_url
+    #   The URL Amazon Web Services Verified Access will use to verify the
+    #   authenticity of the device tokens.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeviceOptions AWS API Documentation
     #
     class DeviceOptions < Struct.new(
-      :tenant_id)
+      :tenant_id,
+      :public_signing_key_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27618,12 +28711,12 @@ module Aws::EC2
     end
 
     # @!attribute [rw] image_id
-    #   The ID of the image for which you’re turning off faster launching,
-    #   and removing pre-provisioned snapshots.
+    #   Specify the ID of the image for which to disable Windows fast
+    #   launch.
     #   @return [String]
     #
     # @!attribute [rw] force
-    #   Forces the image settings to turn off faster launching for your
+    #   Forces the image settings to turn off Windows fast launch for your
     #   Windows AMI. This parameter overrides any errors that are
     #   encountered while cleaning up resources in your account.
     #   @return [Boolean]
@@ -27646,19 +28739,19 @@ module Aws::EC2
     end
 
     # @!attribute [rw] image_id
-    #   The ID of the image for which faster-launching has been turned off.
+    #   The ID of the image for which Windows fast launch was disabled.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
     #   The pre-provisioning resource type that must be cleaned after
-    #   turning off faster launching for the Windows AMI. Supported values
-    #   include: `snapshot`.
+    #   turning off Windows fast launch for the Windows AMI. Supported
+    #   values include: `snapshot`.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_configuration
-    #   Parameters that were used for faster launching for the Windows AMI
-    #   before faster launching was turned off. This informs the clean-up
-    #   process.
+    #   Parameters that were used for Windows fast launch for the Windows
+    #   AMI before Windows fast launch was disabled. This informs the
+    #   clean-up process.
     #   @return [Types::FastLaunchSnapshotConfigurationResponse]
     #
     # @!attribute [rw] launch_template
@@ -27668,27 +28761,28 @@ module Aws::EC2
     #
     # @!attribute [rw] max_parallel_launches
     #   The maximum number of instances that Amazon EC2 can launch at the
-    #   same time to create pre-provisioned snapshots for Windows faster
-    #   launching.
+    #   same time to create pre-provisioned snapshots for Windows fast
+    #   launch.
     #   @return [Integer]
     #
     # @!attribute [rw] owner_id
-    #   The owner of the Windows AMI for which faster launching was turned
-    #   off.
+    #   The owner of the Windows AMI for which Windows fast launch was
+    #   disabled.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The current state of faster launching for the specified Windows AMI.
+    #   The current state of Windows fast launch for the specified Windows
+    #   AMI.
     #   @return [String]
     #
     # @!attribute [rw] state_transition_reason
-    #   The reason that the state changed for faster launching for the
+    #   The reason that the state changed for Windows fast launch for the
     #   Windows AMI.
     #   @return [String]
     #
     # @!attribute [rw] state_transition_time
-    #   The time that the state changed for faster launching for the Windows
-    #   AMI.
+    #   The time that the state changed for Windows fast launch for the
+    #   Windows AMI.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableFastLaunchResult AWS API Documentation
@@ -27952,6 +29046,72 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageDeregistrationProtectionRequest AWS API Documentation
+    #
+    class DisableImageDeregistrationProtectionRequest < Struct.new(
+      :image_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageDeregistrationProtectionResult AWS API Documentation
+    #
+    class DisableImageDeregistrationProtectionResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageRequest AWS API Documentation
+    #
+    class DisableImageRequest < Struct.new(
+      :image_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableImageResult AWS API Documentation
+    #
+    class DisableImageResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   A check for whether you have the required permissions for the action
     #   without actually making the request and provides an error response.
@@ -28010,6 +29170,33 @@ module Aws::EC2
     #
     class DisableSerialConsoleAccessResult < Struct.new(
       :serial_console_access_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableSnapshotBlockPublicAccessRequest AWS API Documentation
+    #
+    class DisableSnapshotBlockPublicAccessRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   Returns `unblocked` if the request succeeds.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableSnapshotBlockPublicAccessResult AWS API Documentation
+    #
+    class DisableSnapshotBlockPublicAccessResult < Struct.new(
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28310,6 +29497,43 @@ module Aws::EC2
     end
 
     # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] asn
+    #   A public 2-byte or 4-byte ASN.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr
+    #   A BYOIP CIDR.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateIpamByoasnRequest AWS API Documentation
+    #
+    class DisassociateIpamByoasnRequest < Struct.new(
+      :dry_run,
+      :asn,
+      :cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] asn_association
+    #   An ASN and BYOIP CIDR association.
+    #   @return [Types::AsnAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateIpamByoasnResult AWS API Documentation
+    #
+    class DisassociateIpamByoasnResult < Struct.new(
+      :asn_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
     #   A check for whether you have the required permissions for the action
     #   without actually making the request and provides an error response.
     #   If you have the required permissions, the error response is
@@ -28565,15 +29789,15 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -28600,12 +29824,12 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1].
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateTrunkInterfaceResult AWS API Documentation
@@ -28901,19 +30125,18 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`: 3,000-16,000 IOPS
+    #   * `gp3`: 3,000 - 16,000 IOPS
     #
-    #   * `io1`: 100-64,000 IOPS
+    #   * `io1`: 100 - 64,000 IOPS
     #
-    #   * `io2`: 100-64,000 IOPS
+    #   * `io2`: 100 - 256,000 IOPS
     #
-    #   For `io1` and `io2` volumes, we guarantee 64,000 IOPS only for
-    #   [Instances built on the Nitro System][1]. Other instance families
-    #   guarantee performance up to 32,000 IOPS.
+    #   For `io2` volumes, you can achieve up to 256,000 IOPS on [instances
+    #   built on the Nitro System][1]. On other instances, you can achieve
+    #   performance up to 32,000 IOPS.
     #
     #   This parameter is required for `io1` and `io2` volumes. The default
-    #   for `gp3` volumes is 3,000 IOPS. This parameter is not supported for
-    #   `gp2`, `st1`, `sc1`, or `standard` volumes.
+    #   for `gp3` volumes is 3,000 IOPS.
     #
     #
     #
@@ -28930,25 +30153,26 @@ module Aws::EC2
     #   snapshot size. You can specify a volume size that is equal to or
     #   larger than the snapshot size.
     #
-    #   The following are the supported volumes sizes for each volume type:
+    #   The following are the supported sizes for each volume type:
     #
-    #   * `gp2` and `gp3`:1-16,384
+    #   * `gp2` and `gp3`: 1 - 16,384 GiB
     #
-    #   * `io1` and `io2`: 4-16,384
+    #   * `io1`: 4 - 16,384 GiB
     #
-    #   * `st1` and `sc1`: 125-16,384
+    #   * `io2`: 4 - 65,536 GiB
     #
-    #   * `standard`: 1-1,024
+    #   * `st1` and `sc1`: 125 - 16,384 GiB
+    #
+    #   * `standard`: 1 - 1024 GiB
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
     #   The volume type. For more information, see [Amazon EBS volume
-    #   types][1] in the *Amazon EC2 User Guide*. If the volume type is
-    #   `io1` or `io2`, you must specify the IOPS that the volume supports.
+    #   types][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -28990,7 +30214,7 @@ module Aws::EC2
     #   the encryption state to `true` depends on the volume origin (new or
     #   from a snapshot), starting encryption state, ownership, and whether
     #   encryption by default is enabled. For more information, see [Amazon
-    #   EBS encryption][1] in the *Amazon EC2 User Guide*.
+    #   EBS encryption][1] in the *Amazon EBS User Guide*.
     #
     #   In no case can you remove encryption from an encrypted volume.
     #
@@ -29028,8 +30252,8 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html#encryption-parameters
+    #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsBlockDevice AWS API Documentation
@@ -29102,13 +30326,27 @@ module Aws::EC2
     #   The ID of the EBS volume.
     #   @return [String]
     #
+    # @!attribute [rw] associated_resource
+    #   The ARN of the Amazon ECS or Fargate task to which the volume is
+    #   attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_owner_id
+    #   The ID of the Amazon Web Services account that owns the volume.
+    #
+    #   This parameter is returned only for volumes that are attached to
+    #   Fargate tasks.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInstanceBlockDevice AWS API Documentation
     #
     class EbsInstanceBlockDevice < Struct.new(
       :attach_time,
       :delete_on_termination,
       :status,
-      :volume_id)
+      :volume_id,
+      :associated_resource,
+      :volume_owner_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29318,6 +30556,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4, G5, or G6 instances.
+    #
+    #  </note>
+    #
     # Describes the association between an instance and an Elastic Graphics
     # accelerator.
     #
@@ -29350,6 +30594,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4, G5, or G6 instances.
+    #
+    #  </note>
+    #
     # Describes the status of an Elastic Graphics accelerator.
     #
     # @!attribute [rw] status
@@ -29364,17 +30614,16 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4, G5, or G6 instances.
+    #
+    #  </note>
+    #
     # A specification for an Elastic Graphics accelerator.
     #
     # @!attribute [rw] type
-    #   The type of Elastic Graphics accelerator. For more information about
-    #   the values to specify for `Type`, see [Elastic Graphics Basics][1],
-    #   specifically the Elastic Graphics accelerator column, in the *Amazon
-    #   Elastic Compute Cloud User Guide for Windows Instances*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html#elastic-graphics-basics
+    #   The type of Elastic Graphics accelerator.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuSpecification AWS API Documentation
@@ -29385,10 +30634,22 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an elastic GPU.
+    # Deprecated.
+    #
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #  </note>
     #
     # @!attribute [rw] type
-    #   The elastic GPU type.
+    #   Deprecated.
+    #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuSpecificationResponse AWS API Documentation
@@ -29399,6 +30660,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    # workloads that require graphics acceleration, we recommend that you
+    # use Amazon EC2 G4, G5, or G6 instances.
+    #
+    #  </note>
+    #
     # Describes an Elastic Graphics accelerator.
     #
     # @!attribute [rw] elastic_gpu_id
@@ -29531,8 +30798,30 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Launch instances with ENA Express settings configured from your launch
+    # template.
+    #
+    # @!attribute [rw] ena_srd_enabled
+    #   Specifies whether ENA Express is enabled for the network interface
+    #   when you launch an instance from your launch template.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ena_srd_udp_specification
+    #   Contains ENA Express settings for UDP network traffic in your launch
+    #   template.
+    #   @return [Types::EnaSrdUdpSpecificationRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnaSrdSpecificationRequest AWS API Documentation
+    #
+    class EnaSrdSpecificationRequest < Struct.new(
+      :ena_srd_enabled,
+      :ena_srd_udp_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # ENA Express is compatible with both TCP and UDP transport protocols.
-    # When it’s enabled, TCP traffic automatically uses it. However, some
+    # When it's enabled, TCP traffic automatically uses it. However, some
     # UDP-based applications are designed to handle network packets that are
     # out of order, without a need for retransmission, such as live video
     # broadcasting or other near-real-time applications. For UDP traffic,
@@ -29540,13 +30829,31 @@ module Aws::EC2
     # environment needs.
     #
     # @!attribute [rw] ena_srd_udp_enabled
-    #   Indicates whether UDP traffic uses ENA Express. To specify this
-    #   setting, you must first enable ENA Express.
+    #   Indicates whether UDP traffic to and from the instance uses ENA
+    #   Express. To specify this setting, you must first enable ENA Express.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnaSrdUdpSpecification AWS API Documentation
     #
     class EnaSrdUdpSpecification < Struct.new(
+      :ena_srd_udp_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures ENA Express for UDP network traffic from your launch
+    # template.
+    #
+    # @!attribute [rw] ena_srd_udp_enabled
+    #   Indicates whether UDP traffic uses ENA Express for your instance. To
+    #   ensure that UDP traffic can use ENA Express when you launch an
+    #   instance, you must also set **EnaSrdEnabled** in the
+    #   **EnaSrdSpecificationRequest** to `true` in your launch template.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnaSrdUdpSpecificationRequest AWS API Documentation
+    #
+    class EnaSrdUdpSpecificationRequest < Struct.new(
       :ena_srd_udp_enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -29591,13 +30898,17 @@ module Aws::EC2
     end
 
     # @!attribute [rw] source
-    #   The source Region or Availability Zone that the metric subscription
-    #   is enabled for. For example, `us-east-1`.
+    #   The source Region (like `us-east-1`) or Availability Zone ID (like
+    #   `use1-az1`) that the metric subscription is enabled for. If you use
+    #   Availability Zone IDs, the Source and Destination Availability Zones
+    #   must be in the same Region.
     #   @return [String]
     #
     # @!attribute [rw] destination
-    #   The target Region or Availability Zone that the metric subscription
-    #   is enabled for. For example, `eu-west-1`.
+    #   The target Region (like `us-east-2`) or Availability Zone ID (like
+    #   `use2-az2`) that the metric subscription is enabled for. If you use
+    #   Availability Zone IDs, the Source and Destination Availability Zones
+    #   must be in the same Region.
     #   @return [String]
     #
     # @!attribute [rw] metric
@@ -29667,19 +30978,19 @@ module Aws::EC2
     end
 
     # @!attribute [rw] image_id
-    #   The ID of the image for which you’re enabling faster launching.
+    #   Specify the ID of the image for which to enable Windows fast launch.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource to use for pre-provisioning the Windows AMI for
-    #   faster launching. Supported values include: `snapshot`, which is the
+    #   The type of resource to use for pre-provisioning the AMI for Windows
+    #   fast launch. Supported values include: `snapshot`, which is the
     #   default value.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_configuration
     #   Configuration settings for creating and managing the snapshots that
-    #   are used for pre-provisioning the Windows AMI for faster launching.
-    #   The associated `ResourceType` must be `snapshot`.
+    #   are used for pre-provisioning the AMI for Windows fast launch. The
+    #   associated `ResourceType` must be `snapshot`.
     #   @return [Types::FastLaunchSnapshotConfigurationRequest]
     #
     # @!attribute [rw] launch_template
@@ -29690,8 +31001,8 @@ module Aws::EC2
     #
     # @!attribute [rw] max_parallel_launches
     #   The maximum number of instances that Amazon EC2 can launch at the
-    #   same time to create pre-provisioned snapshots for Windows faster
-    #   launching. Value must be `6` or greater.
+    #   same time to create pre-provisioned snapshots for Windows fast
+    #   launch. Value must be `6` or greater.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -29715,13 +31026,13 @@ module Aws::EC2
     end
 
     # @!attribute [rw] image_id
-    #   The image ID that identifies the Windows AMI for which faster
-    #   launching was enabled.
+    #   The image ID that identifies the AMI for which Windows fast launch
+    #   was enabled.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource that was defined for pre-provisioning the
-    #   Windows AMI for faster launching.
+    #   The type of resource that was defined for pre-provisioning the AMI
+    #   for Windows fast launch.
     #   @return [String]
     #
     # @!attribute [rw] snapshot_configuration
@@ -29738,27 +31049,25 @@ module Aws::EC2
     #
     # @!attribute [rw] max_parallel_launches
     #   The maximum number of instances that Amazon EC2 can launch at the
-    #   same time to create pre-provisioned snapshots for Windows faster
-    #   launching.
+    #   same time to create pre-provisioned snapshots for Windows fast
+    #   launch.
     #   @return [Integer]
     #
     # @!attribute [rw] owner_id
-    #   The owner ID for the Windows AMI for which faster launching was
-    #   enabled.
+    #   The owner ID for the AMI for which Windows fast launch was enabled.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The current state of faster launching for the specified Windows AMI.
+    #   The current state of Windows fast launch for the specified AMI.
     #   @return [String]
     #
     # @!attribute [rw] state_transition_reason
-    #   The reason that the state changed for faster launching for the
-    #   Windows AMI.
+    #   The reason that the state changed for Windows fast launch for the
+    #   AMI.
     #   @return [String]
     #
     # @!attribute [rw] state_transition_time
-    #   The time that the state changed for faster launching for the Windows
-    #   AMI.
+    #   The time that the state changed for Windows fast launch for the AMI.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableFastLaunchResult AWS API Documentation
@@ -30040,6 +31349,78 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] with_cooldown
+    #   If `true`, enforces deregistration protection for 24 hours after
+    #   deregistration protection is disabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageDeregistrationProtectionRequest AWS API Documentation
+    #
+    class EnableImageDeregistrationProtectionRequest < Struct.new(
+      :image_id,
+      :with_cooldown,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageDeregistrationProtectionResult AWS API Documentation
+    #
+    class EnableImageDeregistrationProtectionResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageRequest AWS API Documentation
+    #
+    class EnableImageRequest < Struct.new(
+      :image_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableImageResult AWS API Documentation
+    #
+    class EnableImageResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   A check for whether you have the required permissions for the action
     #   without actually making the request and provides an error response.
@@ -30125,6 +31506,65 @@ module Aws::EC2
     #
     class EnableSerialConsoleAccessResult < Struct.new(
       :serial_console_access_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   The mode in which to enable block public access for snapshots for
+    #   the Region. Specify one of the following values:
+    #
+    #   * `block-all-sharing` - Prevents all public sharing of snapshots in
+    #     the Region. Users in the account will no longer be able to request
+    #     new public sharing. Additionally, snapshots that are already
+    #     publicly shared are treated as private and they are no longer
+    #     publicly available.
+    #
+    #     <note markdown="1"> If you enable block public access for snapshots in
+    #     `block-all-sharing` mode, it does not change the permissions for
+    #     snapshots that are already publicly shared. Instead, it prevents
+    #     these snapshots from be publicly visible and publicly accessible.
+    #     Therefore, the attributes for these snapshots still indicate that
+    #     they are publicly shared, even though they are not publicly
+    #     available.
+    #
+    #      </note>
+    #
+    #   * `block-new-sharing` - Prevents only new public sharing of
+    #     snapshots in the Region. Users in the account will no longer be
+    #     able to request new public sharing. However, snapshots that are
+    #     already publicly shared, remain publicly available.
+    #
+    #   `unblocked` is not a valid value for
+    #   **EnableSnapshotBlockPublicAccess**.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableSnapshotBlockPublicAccessRequest AWS API Documentation
+    #
+    class EnableSnapshotBlockPublicAccessRequest < Struct.new(
+      :state,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   The state of block public access for snapshots for the account and
+    #   Region. Returns either `block-all-sharing` or `block-new-sharing` if
+    #   the request succeeds.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableSnapshotBlockPublicAccessResult AWS API Documentation
+    #
+    class EnableSnapshotBlockPublicAccessResult < Struct.new(
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31218,7 +32658,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Request to create a launch template for a fast-launch enabled Windows
+    # Request to create a launch template for a Windows fast launch enabled
     # AMI.
     #
     # <note markdown="1"> Note - You can specify either the `LaunchTemplateName` or the
@@ -31227,18 +32667,18 @@ module Aws::EC2
     #  </note>
     #
     # @!attribute [rw] launch_template_id
-    #   The ID of the launch template to use for faster launching for a
-    #   Windows AMI.
+    #   Specify the ID of the launch template that the AMI should use for
+    #   Windows fast launch.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
-    #   The name of the launch template to use for faster launching for a
-    #   Windows AMI.
+    #   Specify the name of the launch template that the AMI should use for
+    #   Windows fast launch.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of the launch template to use for faster launching for a
-    #   Windows AMI.
+    #   Specify the version of the launch template that the AMI should use
+    #   for Windows fast launch.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FastLaunchLaunchTemplateSpecificationRequest AWS API Documentation
@@ -31251,22 +32691,22 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Identifies the launch template to use for faster launching of the
-    # Windows AMI.
+    # Identifies the launch template that the AMI uses for Windows fast
+    # launch.
     #
     # @!attribute [rw] launch_template_id
-    #   The ID of the launch template for faster launching of the associated
-    #   Windows AMI.
+    #   The ID of the launch template that the AMI uses for Windows fast
+    #   launch.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
-    #   The name of the launch template for faster launching of the
-    #   associated Windows AMI.
+    #   The name of the launch template that the AMI uses for Windows fast
+    #   launch.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version of the launch template for faster launching of the
-    #   associated Windows AMI.
+    #   The version of the launch template that the AMI uses for Windows
+    #   fast launch.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FastLaunchLaunchTemplateSpecificationResponse AWS API Documentation
@@ -31280,11 +32720,11 @@ module Aws::EC2
     end
 
     # Configuration settings for creating and managing pre-provisioned
-    # snapshots for a fast-launch enabled Windows AMI.
+    # snapshots for a Windows fast launch enabled AMI.
     #
     # @!attribute [rw] target_resource_count
     #   The number of pre-provisioned snapshots to keep on hand for a
-    #   fast-launch enabled Windows AMI.
+    #   Windows fast launch enabled AMI.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FastLaunchSnapshotConfigurationRequest AWS API Documentation
@@ -31296,11 +32736,11 @@ module Aws::EC2
     end
 
     # Configuration settings for creating and managing pre-provisioned
-    # snapshots for a fast-launch enabled Windows AMI.
+    # snapshots for a Windows fast launch enabled Windows AMI.
     #
     # @!attribute [rw] target_resource_count
     #   The number of pre-provisioned snapshots requested to keep on hand
-    #   for a fast-launch enabled Windows AMI.
+    #   for a Windows fast launch enabled AMI.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FastLaunchSnapshotConfigurationResponse AWS API Documentation
@@ -31534,8 +32974,8 @@ module Aws::EC2
     #
     # @!attribute [rw] fulfilled_capacity
     #   The number of capacity units fulfilled by the Capacity Reservation.
-    #   For more information, see [ Total target capacity][1] in the Amazon
-    #   EC2 User Guide.
+    #   For more information, see [Total target capacity][1] in the *Amazon
+    #   EC2 User Guide*.
     #
     #
     #
@@ -31553,8 +32993,8 @@ module Aws::EC2
     #
     # @!attribute [rw] weight
     #   The weight of the instance type in the Capacity Reservation Fleet.
-    #   For more information, see [ Instance type weight][1] in the Amazon
-    #   EC2 User Guide.
+    #   For more information, see [Instance type weight][1] in the *Amazon
+    #   EC2 User Guide*.
     #
     #
     #
@@ -31563,8 +33003,8 @@ module Aws::EC2
     #
     # @!attribute [rw] priority
     #   The priority of the instance type in the Capacity Reservation Fleet.
-    #   For more information, see [ Instance type priority][1] in the Amazon
-    #   EC2 User Guide.
+    #   For more information, see [Instance type priority][1] in the *Amazon
+    #   EC2 User Guide*.
     #
     #
     #
@@ -31825,6 +33265,15 @@ module Aws::EC2
     #
     # @!attribute [rw] weighted_capacity
     #   The number of units provided by the specified instance type.
+    #
+    #   <note markdown="1"> When specifying weights, the price used in the `lowest-price` and
+    #   `price-capacity-optimized` allocation strategies is per *unit* hour
+    #   (where the instance price is divided by the specified weight).
+    #   However, if all the specified weights are above the requested
+    #   `TargetCapacity`, resulting in only 1 instance being launched, the
+    #   price used is per *instance* hour.
+    #
+    #    </note>
     #   @return [Float]
     #
     # @!attribute [rw] priority
@@ -31920,6 +33369,15 @@ module Aws::EC2
     #
     # @!attribute [rw] weighted_capacity
     #   The number of units provided by the specified instance type.
+    #
+    #   <note markdown="1"> When specifying weights, the price used in the `lowest-price` and
+    #   `price-capacity-optimized` allocation strategies is per *unit* hour
+    #   (where the instance price is divided by the specified weight).
+    #   However, if all the specified weights are above the requested
+    #   `TargetCapacity`, resulting in only 1 instance being launched, the
+    #   price used is per *instance* hour.
+    #
+    #    </note>
     #   @return [Float]
     #
     # @!attribute [rw] priority
@@ -32276,7 +33734,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html
     #   @return [Integer]
     #
     # @!attribute [rw] destination_options
@@ -32677,13 +34135,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
     #
-    #   Valid range: Minimum value of 1. Maximum value of 1000.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -32829,12 +34287,18 @@ module Aws::EC2
     #   The ID of the local gateway route table.
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCoipPoolUsageResult AWS API Documentation
     #
     class GetCoipPoolUsageResult < Struct.new(
       :coip_pool_id,
       :coip_address_usages,
-      :local_gateway_route_table_id)
+      :local_gateway_route_table_id,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33078,11 +34542,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -33203,6 +34669,93 @@ module Aws::EC2
     class GetImageBlockPublicAccessStateResult < Struct.new(
       :image_block_public_access_state)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceMetadataDefaultsRequest AWS API Documentation
+    #
+    class GetInstanceMetadataDefaultsRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_level
+    #   The account-level default IMDS settings.
+    #   @return [Types::InstanceMetadataDefaultsResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceMetadataDefaultsResult AWS API Documentation
+    #
+    class GetInstanceMetadataDefaultsResult < Struct.new(
+      :account_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The ID of the instance for which to get the public endorsement key.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_type
+    #   The required public endorsement key type.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_format
+    #   The required public endorsement key format. Specify `der` for a
+    #   DER-encoded public key that is compatible with OpenSSL. Specify
+    #   `tpmt` for a TPM 2.0 format that is compatible with tpm2-tools. The
+    #   returned key is base64 encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Specify this parameter to verify whether the request will succeed,
+    #   without actually making the request. If the request will succeed,
+    #   the response is `DryRunOperation`. Otherwise, the response is
+    #   `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceTpmEkPubRequest AWS API Documentation
+    #
+    class GetInstanceTpmEkPubRequest < Struct.new(
+      :instance_id,
+      :key_type,
+      :key_format,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_type
+    #   The public endorsement key type.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_format
+    #   The public endorsement key format.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_value
+    #   The public endorsement key material.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceTpmEkPubResult AWS API Documentation
+    #
+    class GetInstanceTpmEkPubResult < Struct.new(
+      :instance_id,
+      :key_type,
+      :key_format,
+      :key_value)
+      SENSITIVE = [:key_value]
       include Aws::Structure
     end
 
@@ -33441,6 +34994,70 @@ module Aws::EC2
     #
     class GetIpamDiscoveredAccountsResult < Struct.new(
       :ipam_discovered_accounts,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_resource_discovery_id
+    #   An IPAM resource discovery ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_region
+    #   The Amazon Web Services Region for the IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of IPAM discovered public addresses to return in
+    #   one page of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetIpamDiscoveredPublicAddressesRequest AWS API Documentation
+    #
+    class GetIpamDiscoveredPublicAddressesRequest < Struct.new(
+      :dry_run,
+      :ipam_resource_discovery_id,
+      :address_region,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipam_discovered_public_addresses
+    #   IPAM discovered public addresses.
+    #   @return [Array<Types::IpamDiscoveredPublicAddress>]
+    #
+    # @!attribute [rw] oldest_sample_time
+    #   The oldest successful resource discovery time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetIpamDiscoveredPublicAddressesResult AWS API Documentation
+    #
+    class GetIpamDiscoveredPublicAddressesResult < Struct.new(
+      :ipam_discovered_public_addresses,
+      :oldest_sample_time,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -34066,6 +35683,79 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] vpc_id
+    #   The VPC ID where the security group can be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   The filters. If using multiple filters, the results include security
+    #   groups which match all filters.
+    #
+    #   * `group-id`: The security group ID.
+    #
+    #   * `description`: The security group's description.
+    #
+    #   * `group-name`: The security group name.
+    #
+    #   * `owner-id`: The security group owner ID.
+    #
+    #   * `primary-vpc-id`: The VPC ID in which the security group was
+    #     created.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSecurityGroupsForVpcRequest AWS API Documentation
+    #
+    class GetSecurityGroupsForVpcRequest < Struct.new(
+      :vpc_id,
+      :next_token,
+      :max_results,
+      :filters,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_for_vpcs
+    #   The security group that can be used by interfaces in the VPC.
+    #   @return [Array<Types::SecurityGroupForVpc>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSecurityGroupsForVpcResult AWS API Documentation
+    #
+    class GetSecurityGroupsForVpcResult < Struct.new(
+      :next_token,
+      :security_group_for_vpcs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -34095,6 +35785,47 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSnapshotBlockPublicAccessStateRequest AWS API Documentation
+    #
+    class GetSnapshotBlockPublicAccessStateRequest < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] state
+    #   The current state of block public access for snapshots. Possible
+    #   values include:
+    #
+    #   * `block-all-sharing` - All public sharing of snapshots is blocked.
+    #     Users in the account can't request new public sharing.
+    #     Additionally, snapshots that were already publicly shared are
+    #     treated as private and are not publicly available.
+    #
+    #   * `block-new-sharing` - Only new public sharing of snapshots is
+    #     blocked. Users in the account can't request new public sharing.
+    #     However, snapshots that were already publicly shared, remain
+    #     publicly available.
+    #
+    #   * `unblocked` - Public sharing is not blocked. Users can publicly
+    #     share snapshots.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetSnapshotBlockPublicAccessStateResult AWS API Documentation
+    #
+    class GetSnapshotBlockPublicAccessStateResult < Struct.new(
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_types
     #   The instance types. We recommend that you specify at least three
     #   instance types. If you specify one or two instance types, or specify
@@ -34112,8 +35843,6 @@ module Aws::EC2
     #
     # @!attribute [rw] target_capacity_unit_type
     #   The unit for the target capacity.
-    #
-    #   Default: `units` (translates to number of instances)
     #   @return [String]
     #
     # @!attribute [rw] single_availability_zone
@@ -35049,8 +36778,8 @@ module Aws::EC2
 
     # Indicates whether your instance is configured for hibernation. This
     # parameter is valid only if the instance meets the [hibernation
-    # prerequisites][1]. For more information, see [Hibernate your
-    # instance][2] in the *Amazon EC2 User Guide*.
+    # prerequisites][1]. For more information, see [Hibernate your Amazon
+    # EC2 instance][2] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -35072,8 +36801,8 @@ module Aws::EC2
 
     # Indicates whether your instance is configured for hibernation. This
     # parameter is valid only if the instance meets the [hibernation
-    # prerequisites][1]. For more information, see [Hibernate your
-    # instance][2] in the *Amazon EC2 User Guide*.
+    # prerequisites][1]. For more information, see [Hibernate your Amazon
+    # EC2 instance][2] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -35083,7 +36812,22 @@ module Aws::EC2
     # @!attribute [rw] configured
     #   Set to `true` to enable your instance for hibernation.
     #
+    #   For Spot Instances, if you set `Configured` to `true`, either omit
+    #   the `InstanceInterruptionBehavior` parameter (for [
+    #   `SpotMarketOptions` ][1]), or set it to `hibernate`. When
+    #   `Configured` is true:
+    #
+    #   * If you omit `InstanceInterruptionBehavior`, it defaults to
+    #     `hibernate`.
+    #
+    #   * If you set `InstanceInterruptionBehavior` to a value other than
+    #     `hibernate`, you'll get an error.
+    #
     #   Default: `false`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotMarketOptions.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HibernationOptionsRequest AWS API Documentation
@@ -35721,12 +37465,12 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] hypervisor
-    #   The hypervisor type of the image.
+    #   The hypervisor type of the image. Only `xen` is supported. `ovm` is
+    #   not supported.
     #   @return [String]
     #
     # @!attribute [rw] image_owner_alias
-    #   The Amazon Web Services account alias (for example, `amazon`,
-    #   `self`) or the Amazon Web Services account ID of the AMI owner.
+    #   The owner alias (`amazon` \| `aws-marketplace`).
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -35799,6 +37543,35 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
     #   @return [String]
     #
+    # @!attribute [rw] source_instance_id
+    #   The ID of the instance that the AMI was created from if the AMI was
+    #   created using [CreateImage][1]. This field only appears if the AMI
+    #   was created using CreateImage.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
+    #   @return [String]
+    #
+    # @!attribute [rw] deregistration_protection
+    #   Indicates whether deregistration protection is enabled for the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_launched_time
+    #   The date and time, in [ISO 8601 date-time format][1], when the AMI
+    #   was last used to launch an EC2 instance. When the AMI is used to
+    #   launch an instance, there is a 24-hour delay before that usage is
+    #   reported.
+    #
+    #   <note markdown="1"> `lastLaunchedTime` data is available starting April 2017.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -35831,7 +37604,10 @@ module Aws::EC2
       :boot_mode,
       :tpm_support,
       :deprecation_time,
-      :imds_support)
+      :imds_support,
+      :source_instance_id,
+      :deregistration_protection,
+      :last_launched_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35923,6 +37699,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
     #   @return [Types::AttributeValue]
     #
+    # @!attribute [rw] deregistration_protection
+    #   Indicates whether deregistration protection is enabled for the AMI.
+    #   @return [Types::AttributeValue]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageAttribute AWS API Documentation
     #
     class ImageAttribute < Struct.new(
@@ -35938,7 +37718,8 @@ module Aws::EC2
       :tpm_support,
       :uefi_data,
       :last_launched_time,
-      :imds_support)
+      :imds_support,
+      :deregistration_protection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37051,7 +38832,8 @@ module Aws::EC2
     #   @return [Types::Placement]
     #
     # @!attribute [rw] platform
-    #   The value is `Windows` for Windows instances; otherwise blank.
+    #   The platform. This value is `windows` for Windows instances;
+    #   otherwise, it is empty.
     #   @return [String]
     #
     # @!attribute [rw] private_dns_name
@@ -37151,7 +38933,13 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_associations
-    #   The Elastic GPU associated with the instance.
+    #   Deprecated.
+    #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #    </note>
     #   @return [Array<Types::ElasticGpuAssociation>]
     #
     # @!attribute [rw] elastic_inference_accelerator_associations
@@ -37370,6 +39158,58 @@ module Aws::EC2
       :tpm_support,
       :maintenance_options,
       :current_instance_boot_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD)
+    # technology to increase the maximum bandwidth used per stream and
+    # minimize tail latency of network traffic between EC2 instances. With
+    # ENA Express, you can communicate between two EC2 instances in the same
+    # subnet within the same account, or in different accounts. Both sending
+    # and receiving instances must have ENA Express enabled.
+    #
+    # To improve the reliability of network packet delivery, ENA Express
+    # reorders network packets on the receiving end by default. However,
+    # some UDP-based applications are designed to handle network packets
+    # that are out of order to reduce the overhead for packet delivery at
+    # the network layer. When ENA Express is enabled, you can specify
+    # whether UDP network traffic uses it.
+    #
+    # @!attribute [rw] ena_srd_enabled
+    #   Indicates whether ENA Express is enabled for the network interface.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ena_srd_udp_specification
+    #   Configures ENA Express for UDP network traffic.
+    #   @return [Types::InstanceAttachmentEnaSrdUdpSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceAttachmentEnaSrdSpecification AWS API Documentation
+    #
+    class InstanceAttachmentEnaSrdSpecification < Struct.new(
+      :ena_srd_enabled,
+      :ena_srd_udp_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # ENA Express is compatible with both TCP and UDP transport protocols.
+    # When it's enabled, TCP traffic automatically uses it. However, some
+    # UDP-based applications are designed to handle network packets that are
+    # out of order, without a need for retransmission, such as live video
+    # broadcasting or other near-real-time applications. For UDP traffic,
+    # you can specify whether to use ENA Express, based on your application
+    # environment needs.
+    #
+    # @!attribute [rw] ena_srd_udp_enabled
+    #   Indicates whether UDP traffic to and from the instance uses ENA
+    #   Express. To specify this setting, you must first enable ENA Express.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceAttachmentEnaSrdUdpSpecification AWS API Documentation
+    #
+    class InstanceAttachmentEnaSrdUdpSpecification < Struct.new(
+      :ena_srd_udp_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37991,34 +39831,82 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The metadata options for the instance.
+    # The default instance metadata service (IMDS) settings that were set at
+    # the account level in the specified Amazon Web Services  Region.
     #
     # @!attribute [rw] http_tokens
-    #   IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to
-    #   `optional` (in other words, set the use of IMDSv2 to `optional`) or
-    #   `required` (in other words, set the use of IMDSv2 to `required`).
+    #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #     instance metadata with or without a session token in your request.
-    #     If you retrieve the IAM role credentials without a token, the
-    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
-    #     credentials using a valid session token, the IMDSv2 role
-    #     credentials are returned.
+    #   * `optional` – IMDSv2 is optional, which means that you can use
+    #     either IMDSv2 or IMDSv1.
     #
-    #   * `required` - When IMDSv2 is required, you must send a session
-    #     token with any instance metadata retrieval requests. In this
-    #     state, retrieving the IAM role credentials always returns IMDSv2
-    #     credentials; IMDSv1 credentials are not available.
-    #
-    #   Default: `optional`
+    #   * `required` – IMDSv2 is required, which means that IMDSv1 is
+    #     disabled, and you must use IMDSv2.
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
-    #   The desired HTTP PUT response hop limit for instance metadata
-    #   requests. The larger the number, the further instance metadata
-    #   requests can travel.
+    #   The maximum number of hops that the metadata token can travel.
+    #   @return [Integer]
     #
-    #   Default: 1
+    # @!attribute [rw] http_endpoint
+    #   Indicates whether the IMDS endpoint for an instance is enabled or
+    #   disabled. When disabled, the instance metadata can't be accessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_metadata_tags
+    #   Indicates whether access to instance tags from the instance metadata
+    #   is enabled or disabled. For more information, see [Work with
+    #   instance tags using the instance metadata][1] in the *Amazon EC2
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMetadataDefaultsResponse AWS API Documentation
+    #
+    class InstanceMetadataDefaultsResponse < Struct.new(
+      :http_tokens,
+      :http_put_response_hop_limit,
+      :http_endpoint,
+      :instance_metadata_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata options for the instance.
+    #
+    # @!attribute [rw] http_tokens
+    #   Indicates whether IMDSv2 is required.
+    #
+    #   * `optional` - IMDSv2 is optional, which means that you can use
+    #     either IMDSv2 or IMDSv1.
+    #
+    #   * `required` - IMDSv2 is required, which means that IMDSv1 is
+    #     disabled, and you must use IMDSv2.
+    #
+    #   Default:
+    #
+    #   * If the value of `ImdsSupport` for the Amazon Machine Image (AMI)
+    #     for your instance is `v2.0` and the account level default is set
+    #     to `no-preference`, the default is `required`.
+    #
+    #   * If the value of `ImdsSupport` for the Amazon Machine Image (AMI)
+    #     for your instance is `v2.0`, but the account level default is set
+    #     to `V1 or V2`, the default is `optional`.
+    #
+    #   The default value can also be affected by other combinations of
+    #   parameters. For more information, see [Order of precedence for
+    #   instance metadata options][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#instance-metadata-options-order-of-precedence
+    #   @return [String]
+    #
+    # @!attribute [rw] http_put_response_hop_limit
+    #   The maximum number of hops that the metadata token can travel.
     #
     #   Possible values: Integers from 1 to 64
     #   @return [Integer]
@@ -38035,6 +39923,8 @@ module Aws::EC2
     # @!attribute [rw] http_protocol_ipv_6
     #   Enables or disables the IPv6 endpoint for the instance metadata
     #   service.
+    #
+    #   Default: `disabled`
     #   @return [String]
     #
     # @!attribute [rw] instance_metadata_tags
@@ -38075,34 +39965,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] http_tokens
-    #   IMDSv2 uses token-backed sessions. Indicates whether the use of HTTP
-    #   tokens is `optional` (in other words, indicates whether the use of
-    #   IMDSv2 is `optional`) or `required` (in other words, indicates
-    #   whether the use of IMDSv2 is `required`).
+    #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #     instance metadata with or without a session token in your request.
-    #     If you retrieve the IAM role credentials without a token, the
-    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
-    #     credentials using a valid session token, the IMDSv2 role
-    #     credentials are returned.
+    #   * `optional` - IMDSv2 is optional, which means that you can use
+    #     either IMDSv2 or IMDSv1.
     #
-    #   * `required` - When IMDSv2 is required, you must send a session
-    #     token with any instance metadata retrieval requests. In this
-    #     state, retrieving the IAM role credentials always returns IMDSv2
-    #     credentials; IMDSv1 credentials are not available.
-    #
-    #   Default: `optional`
+    #   * `required` - IMDSv2 is required, which means that IMDSv1 is
+    #     disabled, and you must use IMDSv2.
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
-    #   The desired HTTP PUT response hop limit for instance metadata
-    #   requests. The larger the number, the further instance metadata
-    #   requests can travel.
+    #   The maximum number of hops that the metadata token can travel.
     #
-    #   Default: 1
-    #
-    #   Possible values: Integers from 1 to 64
+    #   Possible values: Integers from `1` to `64`
     #   @return [Integer]
     #
     # @!attribute [rw] http_endpoint
@@ -38116,6 +39991,8 @@ module Aws::EC2
     # @!attribute [rw] http_protocol_ipv_6
     #   Indicates whether the IPv6 endpoint for the instance metadata
     #   service is enabled or disabled.
+    #
+    #   Default: `disabled`
     #   @return [String]
     #
     # @!attribute [rw] instance_metadata_tags
@@ -38240,6 +40117,17 @@ module Aws::EC2
     #   interface.
     #   @return [Array<Types::InstanceIpv6Prefix>]
     #
+    # @!attribute [rw] connection_tracking_configuration
+    #   A security group connection tracking configuration that enables you
+    #   to set the timeout for connection tracking on an Elastic network
+    #   interface. For more information, see [Connection tracking
+    #   timeouts][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #   @return [Types::ConnectionTrackingSpecificationResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterface AWS API Documentation
     #
     class InstanceNetworkInterface < Struct.new(
@@ -38260,7 +40148,8 @@ module Aws::EC2
       :vpc_id,
       :interface_type,
       :ipv_4_prefixes,
-      :ipv_6_prefixes)
+      :ipv_6_prefixes,
+      :connection_tracking_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38328,6 +40217,11 @@ module Aws::EC2
     #   The index of the network card.
     #   @return [Integer]
     #
+    # @!attribute [rw] ena_srd_specification
+    #   Contains the ENA Express settings for the network interface that's
+    #   attached to the instance.
+    #   @return [Types::InstanceAttachmentEnaSrdSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceAttachment AWS API Documentation
     #
     class InstanceNetworkInterfaceAttachment < Struct.new(
@@ -38336,7 +40230,8 @@ module Aws::EC2
       :delete_on_termination,
       :device_index,
       :status,
-      :network_card_index)
+      :network_card_index,
+      :ena_srd_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38350,6 +40245,15 @@ module Aws::EC2
     #   network interface, not an existing one. You cannot specify more than
     #   one network interface in the request. If launching into a default
     #   subnet, the default value is `true`.
+    #
+    #   Amazon Web Services charges for all public IPv4 addresses, including
+    #   public IPv4 addresses associated with running instances and Elastic
+    #   IP addresses. For more information, see the *Public IPv4 Address*
+    #   tab on the [Amazon VPC pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
@@ -38507,6 +40411,22 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] ena_srd_specification
+    #   Specifies the ENA Express settings for the network interface that's
+    #   attached to the instance.
+    #   @return [Types::EnaSrdSpecificationRequest]
+    #
+    # @!attribute [rw] connection_tracking_specification
+    #   A security group connection tracking specification that enables you
+    #   to set the timeout for connection tracking on an Elastic network
+    #   interface. For more information, see [Connection tracking
+    #   timeouts][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #   @return [Types::ConnectionTrackingSpecificationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceSpecification AWS API Documentation
     #
     class InstanceNetworkInterfaceSpecification < Struct.new(
@@ -38529,7 +40449,9 @@ module Aws::EC2
       :ipv_4_prefix_count,
       :ipv_6_prefixes,
       :ipv_6_prefix_count,
-      :primary_ipv_6)
+      :primary_ipv_6,
+      :ena_srd_specification,
+      :connection_tracking_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38599,18 +40521,21 @@ module Aws::EC2
     #
     #  </note>
     #
-    # For more information, see [Attribute-based instance type selection for
-    # EC2 Fleet][3], [Attribute-based instance type selection for Spot
-    # Fleet][4], and [Spot placement score][5] in the *Amazon EC2 User
+    # For more information, see [Create a mixed instances group using
+    # attribute-based instance type selection][3] in the *Amazon EC2 Auto
+    # Scaling User Guide*, and also [Attribute-based instance type selection
+    # for EC2 Fleet][4], [Attribute-based instance type selection for Spot
+    # Fleet][5], and [Spot placement score][6] in the *Amazon EC2 User
     # Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
-    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
-    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
+    # [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-mixed-instances-group-attribute-based-instance-type-selection.html
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html
+    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html
+    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html
     #
     # @!attribute [rw] v_cpu_count
     #   The minimum and maximum number of vCPUs.
@@ -38686,25 +40611,36 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] spot_max_price_percentage_over_lowest_price
-    #   The price protection threshold for Spot Instances. This is the
-    #   maximum you’ll pay for a Spot Instance, expressed as a percentage
-    #   above the least expensive current generation M, C, or R instance
-    #   type with your specified attributes. When Amazon EC2 selects
-    #   instance types with your attributes, it excludes instance types
-    #   priced above your threshold.
+    #   \[Price protection\] The price protection threshold for Spot
+    #   Instances, as a percentage higher than an identified Spot price. The
+    #   identified Spot price is the Spot price of the lowest priced current
+    #   generation C, M, or R instance type with your specified attributes.
+    #   If no current generation C, M, or R instance type matches your
+    #   attributes, then the identified Spot price is from the lowest priced
+    #   current generation instance types, and failing that, from the lowest
+    #   priced previous generation instance types that match your
+    #   attributes. When Amazon EC2 selects instance types with your
+    #   attributes, it will exclude instance types whose Spot price exceeds
+    #   your specified threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
     #
-    #   To turn off price protection, specify a high value, such as
-    #   `999999`.
+    #   If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is applied based on the per-vCPU or
+    #   per-memory price instead of the per-instance price.
     #
     #   This parameter is not supported for [GetSpotPlacementScores][1] and
     #   [GetInstanceTypesFromInstanceRequirements][2].
     #
-    #   <note markdown="1"> If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
-    #   price protection threshold is applied based on the per-vCPU or
-    #   per-memory price instead of the per-instance price.
+    #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
+    #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
+    #   If you don't specify either, Amazon EC2 will automatically apply
+    #   optimal price protection to consistently select from a wide range of
+    #   instance types. To indicate no price protection threshold for Spot
+    #   Instances, meaning you want to consider all instance types that
+    #   match your attributes, include one of these parameters and specify a
+    #   high value, such as `999999`.
     #
     #    </note>
     #
@@ -38717,12 +40653,13 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
-    #   The price protection threshold for On-Demand Instances. This is the
-    #   maximum you’ll pay for an On-Demand Instance, expressed as a
-    #   percentage above the least expensive current generation M, C, or R
-    #   instance type with your specified attributes. When Amazon EC2
-    #   selects instance types with your attributes, it excludes instance
-    #   types priced above your threshold.
+    #   \[Price protection\] The price protection threshold for On-Demand
+    #   Instances, as a percentage higher than an identified On-Demand
+    #   price. The identified On-Demand price is the price of the lowest
+    #   priced current generation C, M, or R instance type with your
+    #   specified attributes. When Amazon EC2 selects instance types with
+    #   your attributes, it will exclude instance types whose price exceeds
+    #   your specified threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
@@ -38877,12 +40814,14 @@ module Aws::EC2
     #   Indicates whether instance types must have accelerators by specific
     #   manufacturers.
     #
-    #   * For instance types with NVIDIA devices, specify `nvidia`.
+    #   * For instance types with Amazon Web Services devices, specify
+    #     `amazon-web-services`.
     #
     #   * For instance types with AMD devices, specify `amd`.
     #
-    #   * For instance types with Amazon Web Services devices, specify
-    #     `amazon-web-services`.
+    #   * For instance types with Habana devices, specify `habana`.
+    #
+    #   * For instance types with NVIDIA devices, specify `nvidia`.
     #
     #   * For instance types with Xilinx devices, specify `xilinx`.
     #
@@ -38892,25 +40831,31 @@ module Aws::EC2
     # @!attribute [rw] accelerator_names
     #   The accelerators that must be on the instance type.
     #
+    #   * For instance types with NVIDIA A10G GPUs, specify `a10g`.
+    #
     #   * For instance types with NVIDIA A100 GPUs, specify `a100`.
     #
-    #   * For instance types with NVIDIA V100 GPUs, specify `v100`.
+    #   * For instance types with NVIDIA H100 GPUs, specify `h100`.
+    #
+    #   * For instance types with Amazon Web Services Inferentia chips,
+    #     specify `inferentia`.
+    #
+    #   * For instance types with NVIDIA GRID K520 GPUs, specify `k520`.
     #
     #   * For instance types with NVIDIA K80 GPUs, specify `k80`.
-    #
-    #   * For instance types with NVIDIA T4 GPUs, specify `t4`.
     #
     #   * For instance types with NVIDIA M60 GPUs, specify `m60`.
     #
     #   * For instance types with AMD Radeon Pro V520 GPUs, specify
     #     `radeon-pro-v520`.
     #
+    #   * For instance types with NVIDIA T4 GPUs, specify `t4`.
+    #
+    #   * For instance types with NVIDIA T4G GPUs, specify `t4g`.
+    #
     #   * For instance types with Xilinx VU9P FPGAs, specify `vu9p`.
     #
-    #   * For instance types with Amazon Web Services Inferentia chips,
-    #     specify `inferentia`.
-    #
-    #   * For instance types with NVIDIA GRID K520 GPUs, specify `k520`.
+    #   * For instance types with NVIDIA V100 GPUs, specify `v100`.
     #
     #   Default: Any accelerator
     #   @return [Array<String>]
@@ -38950,6 +40895,38 @@ module Aws::EC2
     #   Default: All instance types
     #   @return [Array<String>]
     #
+    # @!attribute [rw] max_spot_price_as_percentage_of_optimal_on_demand_price
+    #   \[Price protection\] The price protection threshold for Spot
+    #   Instances, as a percentage of an identified On-Demand price. The
+    #   identified On-Demand price is the price of the lowest priced current
+    #   generation C, M, or R instance type with your specified attributes.
+    #   If no current generation C, M, or R instance type matches your
+    #   attributes, then the identified price is from the lowest priced
+    #   current generation instance types, and failing that, from the lowest
+    #   priced previous generation instance types that match your
+    #   attributes. When Amazon EC2 selects instance types with your
+    #   attributes, it will exclude instance types whose price exceeds your
+    #   specified threshold.
+    #
+    #   The parameter accepts an integer, which Amazon EC2 interprets as a
+    #   percentage.
+    #
+    #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is based on the per vCPU or per memory
+    #   price instead of the per instance price.
+    #
+    #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
+    #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
+    #   If you don't specify either, Amazon EC2 will automatically apply
+    #   optimal price protection to consistently select from a wide range of
+    #   instance types. To indicate no price protection threshold for Spot
+    #   Instances, meaning you want to consider all instance types that
+    #   match your attributes, include one of these parameters and specify a
+    #   high value, such as `999999`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceRequirements AWS API Documentation
     #
     class InstanceRequirements < Struct.new(
@@ -38975,7 +40952,8 @@ module Aws::EC2
       :accelerator_names,
       :accelerator_total_memory_mi_b,
       :network_bandwidth_gbps,
-      :allowed_instance_types)
+      :allowed_instance_types,
+      :max_spot_price_as_percentage_of_optimal_on_demand_price)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39103,25 +41081,36 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] spot_max_price_percentage_over_lowest_price
-    #   The price protection threshold for Spot Instance. This is the
-    #   maximum you’ll pay for an Spot Instance, expressed as a percentage
-    #   above the least expensive current generation M, C, or R instance
-    #   type with your specified attributes. When Amazon EC2 selects
-    #   instance types with your attributes, it excludes instance types
-    #   priced above your threshold.
+    #   \[Price protection\] The price protection threshold for Spot
+    #   Instances, as a percentage higher than an identified Spot price. The
+    #   identified Spot price is the Spot price of the lowest priced current
+    #   generation C, M, or R instance type with your specified attributes.
+    #   If no current generation C, M, or R instance type matches your
+    #   attributes, then the identified Spot price is from the lowest priced
+    #   current generation instance types, and failing that, from the lowest
+    #   priced previous generation instance types that match your
+    #   attributes. When Amazon EC2 selects instance types with your
+    #   attributes, it will exclude instance types whose Spot price exceeds
+    #   your specified threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
     #
-    #   To turn off price protection, specify a high value, such as
-    #   `999999`.
+    #   If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is applied based on the per-vCPU or
+    #   per-memory price instead of the per-instance price.
     #
     #   This parameter is not supported for [GetSpotPlacementScores][1] and
     #   [GetInstanceTypesFromInstanceRequirements][2].
     #
-    #   <note markdown="1"> If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
-    #   price protection threshold is applied based on the per-vCPU or
-    #   per-memory price instead of the per-instance price.
+    #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
+    #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
+    #   If you don't specify either, Amazon EC2 will automatically apply
+    #   optimal price protection to consistently select from a wide range of
+    #   instance types. To indicate no price protection threshold for Spot
+    #   Instances, meaning you want to consider all instance types that
+    #   match your attributes, include one of these parameters and specify a
+    #   high value, such as `999999`.
     #
     #    </note>
     #
@@ -39134,18 +41123,19 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_max_price_percentage_over_lowest_price
-    #   The price protection threshold for On-Demand Instances. This is the
-    #   maximum you’ll pay for an On-Demand Instance, expressed as a
-    #   percentage above the least expensive current generation M, C, or R
-    #   instance type with your specified attributes. When Amazon EC2
-    #   selects instance types with your attributes, it excludes instance
-    #   types priced above your threshold.
+    #   \[Price protection\] The price protection threshold for On-Demand
+    #   Instances, as a percentage higher than an identified On-Demand
+    #   price. The identified On-Demand price is the price of the lowest
+    #   priced current generation C, M, or R instance type with your
+    #   specified attributes. When Amazon EC2 selects instance types with
+    #   your attributes, it will exclude instance types whose price exceeds
+    #   your specified threshold.
     #
     #   The parameter accepts an integer, which Amazon EC2 interprets as a
     #   percentage.
     #
-    #   To turn off price protection, specify a high value, such as
-    #   `999999`.
+    #   To indicate no price protection threshold, specify a high value,
+    #   such as `999999`.
     #
     #   This parameter is not supported for [GetSpotPlacementScores][1] and
     #   [GetInstanceTypesFromInstanceRequirements][2].
@@ -39294,12 +41284,14 @@ module Aws::EC2
     #   Indicates whether instance types must have accelerators by specific
     #   manufacturers.
     #
-    #   * For instance types with NVIDIA devices, specify `nvidia`.
+    #   * For instance types with Amazon Web Services devices, specify
+    #     `amazon-web-services`.
     #
     #   * For instance types with AMD devices, specify `amd`.
     #
-    #   * For instance types with Amazon Web Services devices, specify
-    #     `amazon-web-services`.
+    #   * For instance types with Habana devices, specify `habana`.
+    #
+    #   * For instance types with NVIDIA devices, specify `nvidia`.
     #
     #   * For instance types with Xilinx devices, specify `xilinx`.
     #
@@ -39309,25 +41301,31 @@ module Aws::EC2
     # @!attribute [rw] accelerator_names
     #   The accelerators that must be on the instance type.
     #
+    #   * For instance types with NVIDIA A10G GPUs, specify `a10g`.
+    #
     #   * For instance types with NVIDIA A100 GPUs, specify `a100`.
     #
-    #   * For instance types with NVIDIA V100 GPUs, specify `v100`.
+    #   * For instance types with NVIDIA H100 GPUs, specify `h100`.
+    #
+    #   * For instance types with Amazon Web Services Inferentia chips,
+    #     specify `inferentia`.
+    #
+    #   * For instance types with NVIDIA GRID K520 GPUs, specify `k520`.
     #
     #   * For instance types with NVIDIA K80 GPUs, specify `k80`.
-    #
-    #   * For instance types with NVIDIA T4 GPUs, specify `t4`.
     #
     #   * For instance types with NVIDIA M60 GPUs, specify `m60`.
     #
     #   * For instance types with AMD Radeon Pro V520 GPUs, specify
     #     `radeon-pro-v520`.
     #
-    #   * For instance types with Xilinx VU9P FPGAs, specify ` vu9p`.
+    #   * For instance types with NVIDIA T4 GPUs, specify `t4`.
     #
-    #   * For instance types with Amazon Web Services Inferentia chips,
-    #     specify `inferentia`.
+    #   * For instance types with NVIDIA T4G GPUs, specify `t4g`.
     #
-    #   * For instance types with NVIDIA GRID K520 GPUs, specify `k520`.
+    #   * For instance types with Xilinx VU9P FPGAs, specify `vu9p`.
+    #
+    #   * For instance types with NVIDIA V100 GPUs, specify `v100`.
     #
     #   Default: Any accelerator
     #   @return [Array<String>]
@@ -39372,6 +41370,38 @@ module Aws::EC2
     #   Default: All instance types
     #   @return [Array<String>]
     #
+    # @!attribute [rw] max_spot_price_as_percentage_of_optimal_on_demand_price
+    #   \[Price protection\] The price protection threshold for Spot
+    #   Instances, as a percentage of an identified On-Demand price. The
+    #   identified On-Demand price is the price of the lowest priced current
+    #   generation C, M, or R instance type with your specified attributes.
+    #   If no current generation C, M, or R instance type matches your
+    #   attributes, then the identified price is from the lowest priced
+    #   current generation instance types, and failing that, from the lowest
+    #   priced previous generation instance types that match your
+    #   attributes. When Amazon EC2 selects instance types with your
+    #   attributes, it will exclude instance types whose price exceeds your
+    #   specified threshold.
+    #
+    #   The parameter accepts an integer, which Amazon EC2 interprets as a
+    #   percentage.
+    #
+    #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is based on the per vCPU or per memory
+    #   price instead of the per instance price.
+    #
+    #   <note markdown="1"> Only one of `SpotMaxPricePercentageOverLowestPrice` or
+    #   `MaxSpotPriceAsPercentageOfOptimalOnDemandPrice` can be specified.
+    #   If you don't specify either, Amazon EC2 will automatically apply
+    #   optimal price protection to consistently select from a wide range of
+    #   instance types. To indicate no price protection threshold for Spot
+    #   Instances, meaning you want to consider all instance types that
+    #   match your attributes, include one of these parameters and specify a
+    #   high value, such as `999999`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceRequirementsRequest AWS API Documentation
     #
     class InstanceRequirementsRequest < Struct.new(
@@ -39397,7 +41427,8 @@ module Aws::EC2
       :accelerator_names,
       :accelerator_total_memory_mi_b,
       :network_bandwidth_gbps,
-      :allowed_instance_types)
+      :allowed_instance_types,
+      :max_spot_price_as_percentage_of_optimal_on_demand_price)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39717,6 +41748,49 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Information about the instance topology.
+    #
+    # @!attribute [rw] instance_id
+    #   The instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the placement group that the instance is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_nodes
+    #   The network nodes. The nodes are hashed based on your account.
+    #   Instances from different accounts running under the same server will
+    #   return a different hashed list of strings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] availability_zone
+    #   The name of the Availability Zone or Local Zone that the instance is
+    #   in.
+    #   @return [String]
+    #
+    # @!attribute [rw] zone_id
+    #   The ID of the Availability Zone or Local Zone that the instance is
+    #   in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTopology AWS API Documentation
+    #
+    class InstanceTopology < Struct.new(
+      :instance_id,
+      :instance_type,
+      :group_name,
+      :network_nodes,
+      :availability_zone,
+      :zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the instance type.
     #
     # @!attribute [rw] instance_type
@@ -39846,6 +41920,19 @@ module Aws::EC2
     #   Describes the supported NitroTPM versions for the instance type.
     #   @return [Types::NitroTpmInfo]
     #
+    # @!attribute [rw] media_accelerator_info
+    #   Describes the media accelerator settings for the instance type.
+    #   @return [Types::MediaAcceleratorInfo]
+    #
+    # @!attribute [rw] neuron_info
+    #   Describes the Neuron accelerator settings for the instance type.
+    #   @return [Types::NeuronInfo]
+    #
+    # @!attribute [rw] phc_support
+    #   Indicates whether a local Precision Time Protocol (PTP) hardware
+    #   clock (PHC) is supported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTypeInfo AWS API Documentation
     #
     class InstanceTypeInfo < Struct.new(
@@ -39875,7 +41962,10 @@ module Aws::EC2
       :supported_boot_modes,
       :nitro_enclaves_support,
       :nitro_tpm_support,
-      :nitro_tpm_info)
+      :nitro_tpm_info,
+      :media_accelerator_info,
+      :neuron_info,
+      :phc_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40012,13 +42102,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a set of permissions for a security group rule.
+    # Describes the permissions for a security group rule.
     #
     # @!attribute [rw] from_port
     #   If the protocol is TCP or UDP, this is the start of the port range.
-    #   If the protocol is ICMP or ICMPv6, this is the type number. A value
-    #   of -1 indicates all ICMP/ICMPv6 types. If you specify all
-    #   ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
+    #   If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all
+    #   ICMP types).
     #   @return [Integer]
     #
     # @!attribute [rw] ip_protocol
@@ -40038,11 +42127,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] ip_ranges
-    #   The IPv4 ranges.
+    #   The IPv4 address ranges.
     #   @return [Array<Types::IpRange>]
     #
     # @!attribute [rw] ipv_6_ranges
-    #   The IPv6 ranges.
+    #   The IPv6 address ranges.
     #   @return [Array<Types::Ipv6Range>]
     #
     # @!attribute [rw] prefix_list_ids
@@ -40051,9 +42140,9 @@ module Aws::EC2
     #
     # @!attribute [rw] to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
-    #   the protocol is ICMP or ICMPv6, this is the code. A value of -1
-    #   indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
-    #   types, you must specify all ICMP/ICMPv6 codes.
+    #   the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all
+    #   ICMP codes). If the start port is -1 (all ICMP types), then the end
+    #   port must be -1 (all ICMP codes).
     #   @return [Integer]
     #
     # @!attribute [rw] user_id_group_pairs
@@ -40074,12 +42163,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an IPv4 range.
+    # Describes an IPv4 address range.
     #
     # @!attribute [rw] cidr_ip
-    #   The IPv4 CIDR range. You can either specify a CIDR range or a source
-    #   security group, not both. To specify a single IPv4 address, use the
-    #   /32 prefix length.
+    #   The IPv4 address range. You can either specify a CIDR block or a
+    #   source security group, not both. To specify a single IPv4 address,
+    #   use the /32 prefix length.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -40186,6 +42275,21 @@ module Aws::EC2
     #   The IPAM's resource discovery association count.
     #   @return [Integer]
     #
+    # @!attribute [rw] state_message
+    #   The state message.
+    #   @return [String]
+    #
+    # @!attribute [rw] tier
+    #   IPAM is offered in a Free Tier and an Advanced Tier. For more
+    #   information about the features available in each tier and the costs
+    #   associated with the tiers, see [Amazon VPC pricing &gt; IPAM
+    #   tab][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipam AWS API Documentation
     #
     class Ipam < Struct.new(
@@ -40202,7 +42306,9 @@ module Aws::EC2
       :tags,
       :default_resource_discovery_id,
       :default_resource_discovery_association_id,
-      :resource_discovery_association_count)
+      :resource_discovery_association_count,
+      :state_message,
+      :tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40349,6 +42455,118 @@ module Aws::EC2
       :failure_reason,
       :last_attempted_discovery_time,
       :last_successful_discovery_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A public IP Address discovered by IPAM.
+    #
+    # @!attribute [rw] ipam_resource_discovery_id
+    #   The resource discovery ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_region
+    #   The Region of the resource the IP address is assigned to.
+    #   @return [String]
+    #
+    # @!attribute [rw] address
+    #   The IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_owner_id
+    #   The ID of the owner of the resource the IP address is assigned to.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_allocation_id
+    #   The allocation ID of the resource the IP address is assigned to.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status
+    #   The association status.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_type
+    #   The IP address type.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The Amazon Web Services service associated with the IP address.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_resource
+    #   The resource ARN or ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC that the resource with the assigned IP address is
+    #   in.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet that the resource with the assigned IP address
+    #   is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ipv_4_pool_id
+    #   The ID of the public IPv4 pool that the resource with the assigned
+    #   IP address is from.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The network interface ID of the resource with the assigned IP
+    #   address.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_description
+    #   The description of the network interface that IP address is assigned
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The instance ID of the instance the assigned IP address is assigned
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags associated with the IP address.
+    #   @return [Types::IpamPublicAddressTags]
+    #
+    # @!attribute [rw] network_border_group
+    #   The network border group that the resource that the IP address is
+    #   assigned to is in.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_groups
+    #   Security groups associated with the resource that the IP address is
+    #   assigned to.
+    #   @return [Array<Types::IpamPublicAddressSecurityGroup>]
+    #
+    # @!attribute [rw] sample_time
+    #   The last successful resource discovery time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamDiscoveredPublicAddress AWS API Documentation
+    #
+    class IpamDiscoveredPublicAddress < Struct.new(
+      :ipam_resource_discovery_id,
+      :address_region,
+      :address,
+      :address_owner_id,
+      :address_allocation_id,
+      :association_status,
+      :address_type,
+      :service,
+      :service_resource,
+      :vpc_id,
+      :subnet_id,
+      :public_ipv_4_pool_id,
+      :network_interface_id,
+      :network_interface_description,
+      :instance_id,
+      :tags,
+      :network_border_group,
+      :security_groups,
+      :sample_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40569,7 +42787,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] state_message
-    #   A message related to the failed creation of an IPAM pool.
+    #   The state message.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -40651,7 +42869,7 @@ module Aws::EC2
     #   is `BYOIP`. For more information, see [Create IPv6 pools][1] in the
     #   *Amazon VPC IPAM User Guide*. By default, you can add only one
     #   Amazon-provided IPv6 CIDR block to a top-level IPv6 pool. For
-    #   information on increasing the default limit, see [ Quotas for your
+    #   information on increasing the default limit, see [Quotas for your
     #   IPAM][2] in the *Amazon VPC IPAM User Guide*.
     #
     #
@@ -40659,6 +42877,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html
     #   [2]: https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html
     #   @return [String]
+    #
+    # @!attribute [rw] source_resource
+    #   The resource used to provision CIDRs to a resource planning pool.
+    #   @return [Types::IpamPoolSourceResource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPool AWS API Documentation
     #
@@ -40685,7 +42907,8 @@ module Aws::EC2
       :allocation_resource_tags,
       :tags,
       :aws_service,
-      :public_ip_source)
+      :public_ip_source,
+      :source_resource)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40795,6 +43018,116 @@ module Aws::EC2
     class IpamPoolCidrFailureReason < Struct.new(
       :code,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resource used to provision CIDRs to a resource planning pool.
+    #
+    # @!attribute [rw] resource_id
+    #   The source resource ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The source resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_region
+    #   The source resource Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The source resource owner.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPoolSourceResource AWS API Documentation
+    #
+    class IpamPoolSourceResource < Struct.new(
+      :resource_id,
+      :resource_type,
+      :resource_region,
+      :resource_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The resource used to provision CIDRs to a resource planning pool.
+    #
+    # @!attribute [rw] resource_id
+    #   The source resource ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The source resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_region
+    #   The source resource Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner
+    #   The source resource owner.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPoolSourceResourceRequest AWS API Documentation
+    #
+    class IpamPoolSourceResourceRequest < Struct.new(
+      :resource_id,
+      :resource_type,
+      :resource_region,
+      :resource_owner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The security group that the resource with the public IP address is in.
+    #
+    # @!attribute [rw] group_name
+    #   The security group's name.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The security group's ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPublicAddressSecurityGroup AWS API Documentation
+    #
+    class IpamPublicAddressSecurityGroup < Struct.new(
+      :group_name,
+      :group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tag for a public IP address discovered by IPAM.
+    #
+    # @!attribute [rw] key
+    #   The tag's key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag's value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPublicAddressTag AWS API Documentation
+    #
+    class IpamPublicAddressTag < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Tags for a public IP address discovered by IPAM.
+    #
+    # @!attribute [rw] eip_tags
+    #   Tags for an Elastic IP address.
+    #   @return [Array<Types::IpamPublicAddressTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPublicAddressTags AWS API Documentation
+    #
+    class IpamPublicAddressTags < Struct.new(
+      :eip_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41221,9 +43554,8 @@ module Aws::EC2
     # Describes an IPv4 prefix.
     #
     # @!attribute [rw] ipv_4_prefix
-    #   The IPv4 prefix. For information, see [ Assigning prefixes to Amazon
-    #   EC2 network interfaces][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   The IPv4 prefix. For information, see [ Assigning prefixes to
+    #   network interfaces][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -41241,9 +43573,8 @@ module Aws::EC2
     # Describes the IPv4 prefix option for a network interface.
     #
     # @!attribute [rw] ipv_4_prefix
-    #   The IPv4 prefix. For information, see [ Assigning prefixes to Amazon
-    #   EC2 network interfaces][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   The IPv4 prefix. For information, see [ Assigning prefixes to
+    #   network interfaces][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -41378,12 +43709,12 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an IPv6 range.
+    # Describes an IPv6 address range.
     #
     # @!attribute [rw] cidr_ipv_6
-    #   The IPv6 CIDR range. You can either specify a CIDR range or a source
-    #   security group, not both. To specify a single IPv6 address, use the
-    #   /128 prefix length.
+    #   The IPv6 address range. You can either specify a CIDR block or a
+    #   source security group, not both. To specify a single IPv6 address,
+    #   use the /128 prefix length.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -42032,19 +44363,18 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`: 3,000-16,000 IOPS
+    #   * `gp3`: 3,000 - 16,000 IOPS
     #
-    #   * `io1`: 100-64,000 IOPS
+    #   * `io1`: 100 - 64,000 IOPS
     #
-    #   * `io2`: 100-64,000 IOPS
+    #   * `io2`: 100 - 256,000 IOPS
     #
-    #   For `io1` and `io2` volumes, we guarantee 64,000 IOPS only for
-    #   [Instances built on the Nitro System][1]. Other instance families
-    #   guarantee performance up to 32,000 IOPS.
+    #   For `io2` volumes, you can achieve up to 256,000 IOPS on [instances
+    #   built on the Nitro System][1]. On other instances, you can achieve
+    #   performance up to 32,000 IOPS.
     #
     #   This parameter is supported for `io1`, `io2`, and `gp3` volumes
-    #   only. This parameter is not supported for `gp2`, `st1`, `sc1`, or
-    #   `standard` volumes.
+    #   only.
     #
     #
     #
@@ -42065,22 +44395,24 @@ module Aws::EC2
     #   ID or a volume size. The following are the supported volumes sizes
     #   for each volume type:
     #
-    #   * `gp2` and `gp3`: 1-16,384
+    #   * `gp2` and `gp3`: 1 - 16,384 GiB
     #
-    #   * `io1` and `io2`: 4-16,384
+    #   * `io1`: 4 - 16,384 GiB
     #
-    #   * `st1` and `sc1`: 125-16,384
+    #   * `io2`: 4 - 65,536 GiB
     #
-    #   * `standard`: 1-1,024
+    #   * `st1` and `sc1`: 125 - 16,384 GiB
+    #
+    #   * `standard`: 1 - 1024 GiB
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
     #   The volume type. For more information, see [Amazon EBS volume
-    #   types][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   types][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html
     #   @return [String]
     #
     # @!attribute [rw] throughput
@@ -42147,6 +44479,58 @@ module Aws::EC2
     class LaunchTemplateElasticInferenceAcceleratorResponse < Struct.new(
       :type,
       :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD)
+    # technology to increase the maximum bandwidth used per stream and
+    # minimize tail latency of network traffic between EC2 instances. With
+    # ENA Express, you can communicate between two EC2 instances in the same
+    # subnet within the same account, or in different accounts. Both sending
+    # and receiving instances must have ENA Express enabled.
+    #
+    # To improve the reliability of network packet delivery, ENA Express
+    # reorders network packets on the receiving end by default. However,
+    # some UDP-based applications are designed to handle network packets
+    # that are out of order to reduce the overhead for packet delivery at
+    # the network layer. When ENA Express is enabled, you can specify
+    # whether UDP network traffic uses it.
+    #
+    # @!attribute [rw] ena_srd_enabled
+    #   Indicates whether ENA Express is enabled for the network interface.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ena_srd_udp_specification
+    #   Configures ENA Express for UDP network traffic.
+    #   @return [Types::LaunchTemplateEnaSrdUdpSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateEnaSrdSpecification AWS API Documentation
+    #
+    class LaunchTemplateEnaSrdSpecification < Struct.new(
+      :ena_srd_enabled,
+      :ena_srd_udp_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # ENA Express is compatible with both TCP and UDP transport protocols.
+    # When it's enabled, TCP traffic automatically uses it. However, some
+    # UDP-based applications are designed to handle network packets that are
+    # out of order, without a need for retransmission, such as live video
+    # broadcasting or other near-real-time applications. For UDP traffic,
+    # you can specify whether to use ENA Express, based on your application
+    # environment needs.
+    #
+    # @!attribute [rw] ena_srd_udp_enabled
+    #   Indicates whether UDP traffic to and from the instance uses ENA
+    #   Express. To specify this setting, you must first enable ENA Express.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateEnaSrdUdpSpecification AWS API Documentation
+    #
+    class LaunchTemplateEnaSrdUdpSpecification < Struct.new(
+      :ena_srd_udp_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42340,8 +44724,7 @@ module Aws::EC2
     end
 
     # The metadata options for the instance. For more information, see
-    # [Instance metadata and user data][1] in the *Amazon Elastic Compute
-    # Cloud User Guide*.
+    # [Instance metadata and user data][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -42358,21 +44741,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] http_tokens
-    #   Indicates whether IMDSv2 is `optional` or `required`.
+    #   Indicates whether IMDSv2 is required.
     #
-    #   `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #   instance metadata with or without a session token in your request.
-    #   If you retrieve the IAM role credentials without a token, the IMDSv1
-    #   role credentials are returned. If you retrieve the IAM role
-    #   credentials using a valid session token, the IMDSv2 role credentials
-    #   are returned.
+    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
+    #     session token in your instance metadata retrieval requests. If you
+    #     retrieve IAM role credentials without a session token, you receive
+    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
+    #     using a valid session token, you receive the IMDSv2 role
+    #     credentials.
     #
-    #   `required` - When IMDSv2 is required, you must send a session token
-    #   with any instance metadata retrieval requests. In this state,
-    #   retrieving the IAM role credentials always returns IMDSv2
-    #   credentials; IMDSv1 credentials are not available.
-    #
-    #   Default: `optional`
+    #   * `required` - IMDSv2 is required. You must send a session token in
+    #     your instance metadata retrieval requests. With this option,
+    #     retrieving the IAM role credentials always returns IMDSv2
+    #     credentials; IMDSv1 credentials are not available.
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -42429,31 +44810,29 @@ module Aws::EC2
     end
 
     # The metadata options for the instance. For more information, see
-    # [Instance metadata and user data][1] in the *Amazon Elastic Compute
-    # Cloud User Guide*.
+    # [Instance metadata and user data][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     #
     # @!attribute [rw] http_tokens
-    #   IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to
-    #   `optional` (in other words, set the use of IMDSv2 to `optional`) or
-    #   `required` (in other words, set the use of IMDSv2 to `required`).
+    #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #     instance metadata with or without a session token in your request.
-    #     If you retrieve the IAM role credentials without a token, the
-    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
-    #     credentials using a valid session token, the IMDSv2 role
-    #     credentials are returned.
+    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
+    #     session token in your instance metadata retrieval requests. If you
+    #     retrieve IAM role credentials without a session token, you receive
+    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
+    #     using a valid session token, you receive the IMDSv2 role
+    #     credentials.
     #
-    #   * `required` - When IMDSv2 is required, you must send a session
-    #     token with any instance metadata retrieval requests. In this
-    #     state, retrieving the IAM role credentials always returns IMDSv2
+    #   * `required` - IMDSv2 is required. You must send a session token in
+    #     your instance metadata retrieval requests. With this option,
+    #     retrieving the IAM role credentials always returns IMDSv2
     #     credentials; IMDSv1 credentials are not available.
     #
-    #   Default: `optional`
+    #   Default: If the value of `ImdsSupport` for the Amazon Machine Image
+    #   (AMI) for your instance is `v2.0`, the default is `required`.
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -42527,6 +44906,15 @@ module Aws::EC2
     # @!attribute [rw] associate_public_ip_address
     #   Indicates whether to associate a public IPv4 address with eth0 for a
     #   new network interface.
+    #
+    #   Amazon Web Services charges for all public IPv4 addresses, including
+    #   public IPv4 addresses associated with running instances and Elastic
+    #   IP addresses. For more information, see the *Public IPv4 Address*
+    #   tab on the [Amazon VPC pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
@@ -42613,6 +45001,22 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] ena_srd_specification
+    #   Contains the ENA Express settings for instances launched from your
+    #   launch template.
+    #   @return [Types::LaunchTemplateEnaSrdSpecification]
+    #
+    # @!attribute [rw] connection_tracking_specification
+    #   A security group connection tracking specification that enables you
+    #   to set the timeout for connection tracking on an Elastic network
+    #   interface. For more information, see [Idle connection tracking
+    #   timeout][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #   @return [Types::ConnectionTrackingSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceNetworkInterfaceSpecification AWS API Documentation
     #
     class LaunchTemplateInstanceNetworkInterfaceSpecification < Struct.new(
@@ -42635,7 +45039,9 @@ module Aws::EC2
       :ipv_4_prefix_count,
       :ipv_6_prefixes,
       :ipv_6_prefix_count,
-      :primary_ipv_6)
+      :primary_ipv_6,
+      :ena_srd_specification,
+      :connection_tracking_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42659,6 +45065,15 @@ module Aws::EC2
     # @!attribute [rw] associate_public_ip_address
     #   Associates a public IPv4 address with eth0 for a new network
     #   interface.
+    #
+    #   Amazon Web Services charges for all public IPv4 addresses, including
+    #   public IPv4 addresses associated with running instances and Elastic
+    #   IP addresses. For more information, see the *Public IPv4 Address*
+    #   tab on the [Amazon VPC pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
@@ -42671,7 +45086,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] device_index
-    #   The device index for the network interface attachment.
+    #   The device index for the network interface attachment. Each network
+    #   interface requires a device index. If you create a launch template
+    #   that includes secondary network interfaces but not a primary network
+    #   interface, then you must add a primary network interface as a launch
+    #   parameter when you launch an instance from the template.
     #   @return [Integer]
     #
     # @!attribute [rw] groups
@@ -42681,7 +45100,7 @@ module Aws::EC2
     # @!attribute [rw] interface_type
     #   The type of network interface. To create an Elastic Fabric Adapter
     #   (EFA), specify `efa`. For more information, see [Elastic Fabric
-    #   Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Adapter][1] in the *Amazon EC2 User Guide*.
     #
     #   If you are not creating an EFA, specify `interface` or omit this
     #   parameter.
@@ -42767,6 +45186,21 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] ena_srd_specification
+    #   Configure ENA Express settings for your launch template.
+    #   @return [Types::EnaSrdSpecificationRequest]
+    #
+    # @!attribute [rw] connection_tracking_specification
+    #   A security group connection tracking specification that enables you
+    #   to set the timeout for connection tracking on an Elastic network
+    #   interface. For more information, see [Idle connection tracking
+    #   timeout][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #   @return [Types::ConnectionTrackingSpecificationRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceNetworkInterfaceSpecificationRequest AWS API Documentation
     #
     class LaunchTemplateInstanceNetworkInterfaceSpecificationRequest < Struct.new(
@@ -42789,7 +45223,9 @@ module Aws::EC2
       :ipv_4_prefix_count,
       :ipv_6_prefixes,
       :ipv_6_prefix_count,
-      :primary_ipv_6)
+      :primary_ipv_6,
+      :ena_srd_specification,
+      :connection_tracking_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42848,6 +45284,15 @@ module Aws::EC2
     #
     # @!attribute [rw] weighted_capacity
     #   The number of units provided by the specified instance type.
+    #
+    #   <note markdown="1"> When specifying weights, the price used in the `lowest-price` and
+    #   `price-capacity-optimized` allocation strategies is per *unit* hour
+    #   (where the instance price is divided by the specified weight).
+    #   However, if all the specified weights are above the requested
+    #   `TargetCapacity`, resulting in only 1 instance being launched, the
+    #   price used is per *instance* hour.
+    #
+    #    </note>
     #   @return [Float]
     #
     # @!attribute [rw] priority
@@ -43070,31 +45515,29 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The launch template to use. You must specify either the launch
-    # template ID or launch template name in the request, but not both.
+    # Describes the launch template to use.
     #
     # @!attribute [rw] launch_template_id
     #   The ID of the launch template.
     #
-    #   You must specify the `LaunchTemplateId` or the `LaunchTemplateName`,
-    #   but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
     #   The name of the launch template.
     #
-    #   You must specify the `LaunchTemplateName` or the `LaunchTemplateId`,
-    #   but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] version
     #   The launch template version number, `$Latest`, or `$Default`.
     #
-    #   If the value is `$Latest`, Amazon EC2 uses the latest version of the
-    #   launch template.
+    #   A value of `$Latest` uses the latest version of the launch template.
     #
-    #   If the value is `$Default`, Amazon EC2 uses the default version of
-    #   the launch template.
+    #   A value of `$Default` uses the default version of the launch
+    #   template.
     #
     #   Default: The default version of the launch template.
     #   @return [String]
@@ -43236,10 +45679,9 @@ module Aws::EC2
     #   Valid Values lists all resource types for Amazon EC2 that can be
     #   tagged. When you create a launch template, you can specify tags for
     #   the following resource types only: `instance` \| `volume` \|
-    #   `elastic-gpu` \| `network-interface` \| `spot-instances-request`. If
-    #   the instance does include the resource type that you specify, the
-    #   instance launch fails. For example, not all instance types include
-    #   an Elastic GPU.
+    #   `network-interface` \| `spot-instances-request`. If the instance
+    #   does not include the resource type that you specify, the instance
+    #   launch fails. For example, not all instance types include a volume.
     #
     #   To tag a resource after it has been created, see [CreateTags][1].
     #
@@ -43911,6 +46353,271 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot to lock.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] lock_mode
+    #   The mode in which to lock the snapshot. Specify one of the
+    #   following:
+    #
+    #   * `governance` - Locks the snapshot in governance mode. Snapshots
+    #     locked in governance mode can't be deleted until one of the
+    #     following conditions are met:
+    #
+    #     * The lock duration expires.
+    #
+    #     * The snapshot is unlocked by a user with the appropriate
+    #       permissions.
+    #
+    #     Users with the appropriate IAM permissions can unlock the
+    #     snapshot, increase or decrease the lock duration, and change the
+    #     lock mode to `compliance` at any time.
+    #
+    #     If you lock a snapshot in `governance` mode, omit <b>
+    #     CoolOffPeriod</b>.
+    #
+    #   * `compliance` - Locks the snapshot in compliance mode. Snapshots
+    #     locked in compliance mode can't be unlocked by any user. They can
+    #     be deleted only after the lock duration expires. Users can't
+    #     decrease the lock duration or change the lock mode to
+    #     `governance`. However, users with appropriate IAM permissions can
+    #     increase the lock duration at any time.
+    #
+    #     If you lock a snapshot in `compliance` mode, you can optionally
+    #     specify **CoolOffPeriod**.
+    #   @return [String]
+    #
+    # @!attribute [rw] cool_off_period
+    #   The cooling-off period during which you can unlock the snapshot or
+    #   modify the lock settings after locking the snapshot in compliance
+    #   mode, in hours. After the cooling-off period expires, you can't
+    #   unlock or delete the snapshot, decrease the lock duration, or change
+    #   the lock mode. You can increase the lock duration after the
+    #   cooling-off period expires.
+    #
+    #   The cooling-off period is optional when locking a snapshot in
+    #   compliance mode. If you are locking the snapshot in governance mode,
+    #   omit this parameter.
+    #
+    #   To lock the snapshot in compliance mode immediately without a
+    #   cooling-off period, omit this parameter.
+    #
+    #   If you are extending the lock duration for a snapshot that is locked
+    #   in compliance mode after the cooling-off period has expired, omit
+    #   this parameter. If you specify a cooling-period in a such a request,
+    #   the request fails.
+    #
+    #   Allowed values: Min 1, max 72.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lock_duration
+    #   The period of time for which to lock the snapshot, in days. The
+    #   snapshot lock will automatically expire after this period lapses.
+    #
+    #   You must specify either this parameter or **ExpirationDate**, but
+    #   not both.
+    #
+    #   Allowed values: Min: 1, max 36500
+    #   @return [Integer]
+    #
+    # @!attribute [rw] expiration_date
+    #   The date and time at which the snapshot lock is to automatically
+    #   expire, in the UTC time zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #
+    #   You must specify either this parameter or **LockDuration**, but not
+    #   both.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LockSnapshotRequest AWS API Documentation
+    #
+    class LockSnapshotRequest < Struct.new(
+      :snapshot_id,
+      :dry_run,
+      :lock_mode,
+      :cool_off_period,
+      :lock_duration,
+      :expiration_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot
+    #   @return [String]
+    #
+    # @!attribute [rw] lock_state
+    #   The state of the snapshot lock. Valid states include:
+    #
+    #   * `compliance-cooloff` - The snapshot has been locked in compliance
+    #     mode but it is still within the cooling-off period. The snapshot
+    #     can't be deleted, but it can be unlocked and the lock settings
+    #     can be modified by users with appropriate permissions.
+    #
+    #   * `governance` - The snapshot is locked in governance mode. The
+    #     snapshot can't be deleted, but it can be unlocked and the lock
+    #     settings can be modified by users with appropriate permissions.
+    #
+    #   * `compliance` - The snapshot is locked in compliance mode and the
+    #     cooling-off period has expired. The snapshot can't be unlocked or
+    #     deleted. The lock duration can only be increased by users with
+    #     appropriate permissions.
+    #
+    #   * `expired` - The snapshot was locked in compliance or governance
+    #     mode but the lock duration has expired. The snapshot is not locked
+    #     and can be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] lock_duration
+    #   The period of time for which the snapshot is locked, in days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cool_off_period
+    #   The compliance mode cooling-off period, in hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cool_off_period_expires_on
+    #   The date and time at which the compliance mode cooling-off period
+    #   expires, in the UTC time zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] lock_created_on
+    #   The date and time at which the snapshot was locked, in the UTC time
+    #   zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] lock_expires_on
+    #   The date and time at which the lock will expire, in the UTC time
+    #   zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] lock_duration_start_time
+    #   The date and time at which the lock duration started, in the UTC
+    #   time zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LockSnapshotResult AWS API Documentation
+    #
+    class LockSnapshotResult < Struct.new(
+      :snapshot_id,
+      :lock_state,
+      :lock_duration,
+      :cool_off_period,
+      :cool_off_period_expires_on,
+      :lock_created_on,
+      :lock_expires_on,
+      :lock_duration_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a locked snapshot.
+    #
+    # @!attribute [rw] owner_id
+    #   The account ID of the Amazon Web Services account that owns the
+    #   snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] lock_state
+    #   The state of the snapshot lock. Valid states include:
+    #
+    #   * `compliance-cooloff` - The snapshot has been locked in compliance
+    #     mode but it is still within the cooling-off period. The snapshot
+    #     can't be deleted, but it can be unlocked and the lock settings
+    #     can be modified by users with appropriate permissions.
+    #
+    #   * `governance` - The snapshot is locked in governance mode. The
+    #     snapshot can't be deleted, but it can be unlocked and the lock
+    #     settings can be modified by users with appropriate permissions.
+    #
+    #   * `compliance` - The snapshot is locked in compliance mode and the
+    #     cooling-off period has expired. The snapshot can't be unlocked or
+    #     deleted. The lock duration can only be increased by users with
+    #     appropriate permissions.
+    #
+    #   * `expired` - The snapshot was locked in compliance or governance
+    #     mode but the lock duration has expired. The snapshot is not locked
+    #     and can be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] lock_duration
+    #   The period of time for which the snapshot is locked, in days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cool_off_period
+    #   The compliance mode cooling-off period, in hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cool_off_period_expires_on
+    #   The date and time at which the compliance mode cooling-off period
+    #   expires, in the UTC time zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] lock_created_on
+    #   The date and time at which the snapshot was locked, in the UTC time
+    #   zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] lock_duration_start_time
+    #   The date and time at which the lock duration started, in the UTC
+    #   time zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #
+    #   If you lock a snapshot that is in the `pending` state, the lock
+    #   duration starts only once the snapshot enters the `completed` state.
+    #   @return [Time]
+    #
+    # @!attribute [rw] lock_expires_on
+    #   The date and time at which the lock will expire, in the UTC time
+    #   zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LockedSnapshotsInfo AWS API Documentation
+    #
+    class LockedSnapshotsInfo < Struct.new(
+      :owner_id,
+      :snapshot_id,
+      :lock_state,
+      :lock_duration,
+      :cool_off_period,
+      :cool_off_period_expires_on,
+      :lock_created_on,
+      :lock_duration_start_time,
+      :lock_expires_on)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the EC2 Mac Dedicated Host.
+    #
+    # @!attribute [rw] host_id
+    #   The EC2 Mac Dedicated Host ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] mac_os_latest_supported_versions
+    #   The latest macOS versions that the EC2 Mac Dedicated Host can launch
+    #   without being upgraded.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MacHost AWS API Documentation
+    #
+    class MacHost < Struct.new(
+      :host_id,
+      :mac_os_latest_supported_versions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details for Site-to-Site VPN tunnel endpoint maintenance events.
     #
     # @!attribute [rw] pending_maintenance
@@ -43991,6 +46698,69 @@ module Aws::EC2
       :version,
       :tags,
       :owner_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the media accelerators for the instance type.
+    #
+    # @!attribute [rw] accelerators
+    #   Describes the media accelerators for the instance type.
+    #   @return [Array<Types::MediaDeviceInfo>]
+    #
+    # @!attribute [rw] total_media_memory_in_mi_b
+    #   The total size of the memory for the media accelerators for the
+    #   instance type, in MiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MediaAcceleratorInfo AWS API Documentation
+    #
+    class MediaAcceleratorInfo < Struct.new(
+      :accelerators,
+      :total_media_memory_in_mi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the media accelerators for the instance type.
+    #
+    # @!attribute [rw] count
+    #   The number of media accelerators for the instance type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the media accelerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] manufacturer
+    #   The manufacturer of the media accelerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory_info
+    #   Describes the memory available to the media accelerator.
+    #   @return [Types::MediaDeviceMemoryInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MediaDeviceInfo AWS API Documentation
+    #
+    class MediaDeviceInfo < Struct.new(
+      :count,
+      :name,
+      :manufacturer,
+      :memory_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the memory available to the media accelerator.
+    #
+    # @!attribute [rw] size_in_mi_b
+    #   The size of the memory available to each media accelerator, in MiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MediaDeviceMemoryInfo AWS API Documentation
+    #
+    class MediaDeviceMemoryInfo < Struct.new(
+      :size_in_mi_b)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44169,14 +46939,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] opt_in_status
-    #   Indicates whether you are opted in to the Local Zone group or
-    #   Wavelength Zone group. The only valid value is `opted-in`. You must
-    #   contact [Amazon Web Services Support][1] to opt out of a Local Zone
-    #   or Wavelength Zone group.
-    #
-    #
-    #
-    #   [1]: https://console.aws.amazon.com/support/home#/case/create%3FissueType=customer-service%26serviceCode=general-info%26getting-started%26categoryCode=using-aws%26services
+    #   Indicates whether to opt in to the zone group. The only valid value
+    #   is `opted-in`. You must contact Amazon Web Services Support to opt
+    #   out of a Local Zone or Wavelength Zone group.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -44219,7 +46984,7 @@ module Aws::EC2
     #   determine the number of instances for which the Fleet reserves
     #   capacity. Both values are based on units that make sense for your
     #   workload. For more information, see [Total target capacity][1] in
-    #   the Amazon EC2 User Guide.
+    #   the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -44533,10 +47298,10 @@ module Aws::EC2
     end
 
     # @!attribute [rw] kms_key_id
-    #   The identifier of the Key Management Service (KMS) KMS key to use
-    #   for Amazon EBS encryption. If this parameter is not specified, your
-    #   KMS key for Amazon EBS is used. If `KmsKeyId` is specified, the
-    #   encrypted state must be `true`.
+    #   The identifier of the KMS key to use for Amazon EBS encryption. If
+    #   this parameter is not specified, your KMS key for Amazon EBS is
+    #   used. If `KmsKeyId` is specified, the encrypted state must be
+    #   `true`.
     #
     #   You can specify the KMS key using any of the following:
     #
@@ -44730,7 +47495,7 @@ module Aws::EC2
     #
     # @!attribute [rw] host_recovery
     #   Indicates whether to enable or disable host recovery for the
-    #   Dedicated Host. For more information, see [ Host recovery][1] in the
+    #   Dedicated Host. For more information, see [Host recovery][1] in the
     #   *Amazon EC2 User Guide*.
     #
     #
@@ -44762,7 +47527,7 @@ module Aws::EC2
     #
     # @!attribute [rw] host_maintenance
     #   Indicates whether to enable or disable host maintenance for the
-    #   Dedicated Host. For more information, see [ Host maintenance][1] in
+    #   Dedicated Host. For more information, see [Host maintenance][1] in
     #   the *Amazon EC2 User Guide*.
     #
     #
@@ -44995,7 +47760,9 @@ module Aws::EC2
     #   Modifies the `DeleteOnTermination` attribute for volumes that are
     #   currently attached. The volume must be owned by the caller. If no
     #   value is specified for `DeleteOnTermination`, the default is `true`
-    #   and the volume is deleted when the instance is terminated.
+    #   and the volume is deleted when the instance is terminated. You
+    #   can't modify the `DeleteOnTermination` attribute for volumes that
+    #   are attached to Fargate tasks.
     #
     #   To add instance store volumes to an Amazon EBS-backed instance, you
     #   must add them when you launch the instance. For more information,
@@ -45110,13 +47877,13 @@ module Aws::EC2
     #
     # @!attribute [rw] disable_api_stop
     #   Indicates whether an instance is enabled for stop protection. For
-    #   more information, see [Stop Protection][1].
+    #   more information, see [Enable stop protection for your instance][1].
     #
     #
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html
     #   @return [Types::AttributeBooleanValue]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceAttributeRequest AWS API Documentation
@@ -45390,28 +48157,108 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] http_tokens
+    #   Indicates whether IMDSv2 is required.
+    #
+    #   * `optional` – IMDSv2 is optional, which means that you can use
+    #     either IMDSv2 or IMDSv1.
+    #
+    #   * `required` – IMDSv2 is required, which means that IMDSv1 is
+    #     disabled, and you must use IMDSv2.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_put_response_hop_limit
+    #   The maximum number of hops that the metadata token can travel. To
+    #   indicate no preference, specify `-1`.
+    #
+    #   Possible values: Integers from `1` to `64`, and `-1` to indicate no
+    #   preference
+    #   @return [Integer]
+    #
+    # @!attribute [rw] http_endpoint
+    #   Enables or disables the IMDS endpoint on an instance. When disabled,
+    #   the instance metadata can't be accessed.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_metadata_tags
+    #   Enables or disables access to an instance's tags from the instance
+    #   metadata. For more information, see [Work with instance tags using
+    #   the instance metadata][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataDefaultsRequest AWS API Documentation
+    #
+    class ModifyInstanceMetadataDefaultsRequest < Struct.new(
+      :http_tokens,
+      :http_put_response_hop_limit,
+      :http_endpoint,
+      :instance_metadata_tags,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   If the request succeeds, the response returns `true`. If the request
+    #   fails, no response is returned, and instead an error message is
+    #   returned.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMetadataDefaultsResult AWS API Documentation
+    #
+    class ModifyInstanceMetadataDefaultsResult < Struct.new(
+      :return)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
     #
     # @!attribute [rw] http_tokens
-    #   IMDSv2 uses token-backed sessions. Set the use of HTTP tokens to
-    #   `optional` (in other words, set the use of IMDSv2 to `optional`) or
-    #   `required` (in other words, set the use of IMDSv2 to `required`).
+    #   Indicates whether IMDSv2 is required.
     #
-    #   * `optional` - When IMDSv2 is optional, you can choose to retrieve
-    #     instance metadata with or without a session token in your request.
-    #     If you retrieve the IAM role credentials without a token, the
-    #     IMDSv1 role credentials are returned. If you retrieve the IAM role
-    #     credentials using a valid session token, the IMDSv2 role
-    #     credentials are returned.
+    #   * `optional` - IMDSv2 is optional. You can choose whether to send a
+    #     session token in your instance metadata retrieval requests. If you
+    #     retrieve IAM role credentials without a session token, you receive
+    #     the IMDSv1 role credentials. If you retrieve IAM role credentials
+    #     using a valid session token, you receive the IMDSv2 role
+    #     credentials.
     #
-    #   * `required` - When IMDSv2 is required, you must send a session
-    #     token with any instance metadata retrieval requests. In this
-    #     state, retrieving the IAM role credentials always returns IMDSv2
+    #   * `required` - IMDSv2 is required. You must send a session token in
+    #     your instance metadata retrieval requests. With this option,
+    #     retrieving the IAM role credentials always returns IMDSv2
     #     credentials; IMDSv1 credentials are not available.
     #
-    #   Default: `optional`
+    #   Default:
+    #
+    #   * If the value of `ImdsSupport` for the Amazon Machine Image (AMI)
+    #     for your instance is `v2.0` and the account level default is set
+    #     to `no-preference`, the default is `required`.
+    #
+    #   * If the value of `ImdsSupport` for the Amazon Machine Image (AMI)
+    #     for your instance is `v2.0`, but the account level default is set
+    #     to `V1 or V2`, the default is `optional`.
+    #
+    #   The default value can also be affected by other combinations of
+    #   parameters. For more information, see [Order of precedence for
+    #   instance metadata options][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-options.html#instance-metadata-options-order-of-precedence
     #   @return [String]
     #
     # @!attribute [rw] http_put_response_hop_limit
@@ -45448,8 +48295,6 @@ module Aws::EC2
     #   metadata. Set to `disabled` to turn off access to instance tags from
     #   the instance metadata. For more information, see [Work with instance
     #   tags using the instance metadata][1].
-    #
-    #   Default: `disabled`
     #
     #
     #
@@ -45488,7 +48333,12 @@ module Aws::EC2
     end
 
     # @!attribute [rw] affinity
-    #   The affinity setting for the instance.
+    #   The affinity setting for the instance. For more information, see
+    #   [Host affinity][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/how-dedicated-hosts-work.html#dedicated-hosts-affinity
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -45697,6 +48547,17 @@ module Aws::EC2
     #   The operating Regions to remove.
     #   @return [Array<Types::RemoveIpamOperatingRegion>]
     #
+    # @!attribute [rw] tier
+    #   IPAM is offered in a Free Tier and an Advanced Tier. For more
+    #   information about the features available in each tier and the costs
+    #   associated with the tiers, see [Amazon VPC pricing &gt; IPAM
+    #   tab][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIpamRequest AWS API Documentation
     #
     class ModifyIpamRequest < Struct.new(
@@ -45704,7 +48565,8 @@ module Aws::EC2
       :ipam_id,
       :description,
       :add_operating_regions,
-      :remove_operating_regions)
+      :remove_operating_regions,
+      :tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45889,15 +48751,15 @@ module Aws::EC2
     # @!attribute [rw] launch_template_id
     #   The ID of the launch template.
     #
-    #   You must specify either the `LaunchTemplateId` or the
-    #   `LaunchTemplateName`, but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] launch_template_name
     #   The name of the launch template.
     #
-    #   You must specify either the `LaunchTemplateName` or the
-    #   `LaunchTemplateId`, but not both.
+    #   You must specify either the launch template ID or the launch
+    #   template name, but not both.
     #   @return [String]
     #
     # @!attribute [rw] default_version
@@ -46111,6 +48973,16 @@ module Aws::EC2
     #   ENI becomes the primary IPv6 address.
     #   @return [Boolean]
     #
+    # @!attribute [rw] connection_tracking_specification
+    #   A connection tracking specification.
+    #   @return [Types::ConnectionTrackingSpecificationRequest]
+    #
+    # @!attribute [rw] associate_public_ip_address
+    #   Indicates whether to assign a public IPv4 address to a network
+    #   interface. This option can be enabled for any network interface but
+    #   will only apply to the primary network interface (eth0).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkInterfaceAttributeRequest AWS API Documentation
     #
     class ModifyNetworkInterfaceAttributeRequest < Struct.new(
@@ -46121,7 +48993,9 @@ module Aws::EC2
       :network_interface_id,
       :source_dest_check,
       :ena_srd_specification,
-      :enable_primary_ipv_6)
+      :enable_primary_ipv_6,
+      :connection_tracking_specification,
+      :associate_public_ip_address)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46426,6 +49300,15 @@ module Aws::EC2
     #   Specify `true` to indicate that network interfaces attached to
     #   instances created in the specified subnet should be assigned a
     #   public IPv4 address.
+    #
+    #   Amazon Web Services charges for all public IPv4 addresses, including
+    #   public IPv4 addresses associated with running instances and Elastic
+    #   IP addresses. For more information, see the *Public IPv4 Address*
+    #   tab on the [Amazon VPC pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] subnet_id
@@ -46625,7 +49508,11 @@ module Aws::EC2
     end
 
     # @!attribute [rw] traffic_mirror_filter_rule
-    #   Modifies a Traffic Mirror rule.
+    #   <note markdown="1"> Tags are not returned for ModifyTrafficMirrorFilterRule.
+    #
+    #    </note>
+    #
+    #   A Traffic Mirror rule.
     #   @return [Types::TrafficMirrorFilterRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTrafficMirrorFilterRuleResult AWS API Documentation
@@ -46742,6 +49629,22 @@ module Aws::EC2
     #   Enable or disable DNS support.
     #   @return [String]
     #
+    # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
+    #   Enables you to reference a security group across VPCs attached to a
+    #   transit gateway. Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
+    #   @return [String]
+    #
     # @!attribute [rw] auto_accept_shared_attachments
     #   Enable or disable automatic acceptance of attachment requests.
     #   @return [String]
@@ -46782,6 +49685,7 @@ module Aws::EC2
       :remove_transit_gateway_cidr_blocks,
       :vpn_ecmp_support,
       :dns_support,
+      :security_group_referencing_support,
       :auto_accept_shared_attachments,
       :default_route_table_association,
       :association_default_route_table_id,
@@ -46923,6 +49827,22 @@ module Aws::EC2
     #   Enable or disable DNS support. The default is `enable`.
     #   @return [String]
     #
+    # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
+    #   Enables you to reference a security group across VPCs attached to a
+    #   transit gateway. Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
+    #   @return [String]
+    #
     # @!attribute [rw] ipv_6_support
     #   Enable or disable IPv6 support. The default is `enable`.
     #   @return [String]
@@ -46938,6 +49858,7 @@ module Aws::EC2
     #
     class ModifyTransitGatewayVpcAttachmentRequestOptions < Struct.new(
       :dns_support,
+      :security_group_referencing_support,
       :ipv_6_support,
       :appliance_mode_support)
       SENSITIVE = []
@@ -47016,14 +49937,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -47034,7 +49955,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessEndpointPolicyRequest AWS API Documentation
@@ -47059,7 +49980,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] sse_specification
-    #   Describes the options in use for server side encryption.
+    #   The options in use for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessEndpointPolicyResult AWS API Documentation
@@ -47096,14 +50017,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -47128,7 +50049,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_endpoint
-    #   The Verified Access endpoint details.
+    #   Details about the Verified Access endpoint.
     #   @return [Types::VerifiedAccessEndpoint]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessEndpointResult AWS API Documentation
@@ -47154,14 +50075,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -47172,7 +50093,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessGroupPolicyRequest AWS API Documentation
@@ -47197,7 +50118,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] sse_specification
-    #   Describes the options in use for server side encryption.
+    #   The options in use for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessGroupPolicyResult AWS API Documentation
@@ -47225,14 +50146,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -47255,7 +50176,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_group
-    #   Details of Verified Access group.
+    #   Details about the Verified Access group.
     #   @return [Types::VerifiedAccessGroup]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessGroupResult AWS API Documentation
@@ -47284,14 +50205,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessInstanceLoggingConfigurationRequest AWS API Documentation
@@ -47335,14 +50256,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessInstanceRequest AWS API Documentation
@@ -47357,13 +50278,29 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_instance
-    #   The ID of the Verified Access instance.
+    #   Details about the Verified Access instance.
     #   @return [Types::VerifiedAccessInstance]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessInstanceResult AWS API Documentation
     #
     class ModifyVerifiedAccessInstanceResult < Struct.new(
       :verified_access_instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Modifies the configuration of the specified device-based Amazon Web
+    # Services Verified Access trust provider.
+    #
+    # @!attribute [rw] public_signing_key_url
+    #   The URL Amazon Web Services Verified Access will use to verify the
+    #   authenticity of the device tokens.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessTrustProviderDeviceOptions AWS API Documentation
+    #
+    class ModifyVerifiedAccessTrustProviderDeviceOptions < Struct.new(
+      :public_signing_key_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -47423,6 +50360,11 @@ module Aws::EC2
     #   provider.
     #   @return [Types::ModifyVerifiedAccessTrustProviderOidcOptions]
     #
+    # @!attribute [rw] device_options
+    #   The options for a device-based trust provider. This parameter is
+    #   required when the provider type is `device`.
+    #   @return [Types::ModifyVerifiedAccessTrustProviderDeviceOptions]
+    #
     # @!attribute [rw] description
     #   A description for the Verified Access trust provider.
     #   @return [String]
@@ -47437,18 +50379,18 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive token that you provide to ensure
     #   idempotency of your modification request. For more information, see
-    #   [Ensuring Idempotency][1].
+    #   [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @!attribute [rw] sse_specification
-    #   Options for server side encryption.
+    #   The options for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessTrustProviderRequest AWS API Documentation
@@ -47456,6 +50398,7 @@ module Aws::EC2
     class ModifyVerifiedAccessTrustProviderRequest < Struct.new(
       :verified_access_trust_provider_id,
       :oidc_options,
+      :device_options,
       :description,
       :dry_run,
       :client_token,
@@ -47465,7 +50408,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] verified_access_trust_provider
-    #   The ID of the Verified Access trust provider.
+    #   Details about the Verified Access trust provider.
     #   @return [Types::VerifiedAccessTrustProvider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVerifiedAccessTrustProviderResult AWS API Documentation
@@ -47519,27 +50462,28 @@ module Aws::EC2
     #
     #   The following are the supported volumes sizes for each volume type:
     #
-    #   * `gp2` and `gp3`: 1-16,384
+    #   * `gp2` and `gp3`: 1 - 16,384 GiB
     #
-    #   * `io1` and `io2`: 4-16,384
+    #   * `io1`: 4 - 16,384 GiB
     #
-    #   * `st1` and `sc1`: 125-16,384
+    #   * `io2`: 4 - 65,536 GiB
     #
-    #   * `standard`: 1-1,024
+    #   * `st1` and `sc1`: 125 - 16,384 GiB
+    #
+    #   * `standard`: 1 - 1024 GiB
     #
     #   Default: The existing size is retained.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
     #   The target EBS volume type of the volume. For more information, see
-    #   [Amazon EBS volume types][1] in the *Amazon Elastic Compute Cloud
-    #   User Guide*.
+    #   [Amazon EBS volume types][1] in the *Amazon EBS User Guide*.
     #
     #   Default: The existing type is retained.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html
     #   @return [String]
     #
     # @!attribute [rw] iops
@@ -47548,15 +50492,23 @@ module Aws::EC2
     #
     #   The following are the supported values for each volume type:
     #
-    #   * `gp3`: 3,000-16,000 IOPS
+    #   * `gp3`: 3,000 - 16,000 IOPS
     #
-    #   * `io1`: 100-64,000 IOPS
+    #   * `io1`: 100 - 64,000 IOPS
     #
-    #   * `io2`: 100-64,000 IOPS
+    #   * `io2`: 100 - 256,000 IOPS
+    #
+    #   For `io2` volumes, you can achieve up to 256,000 IOPS on [instances
+    #   built on the Nitro System][1]. On other instances, you can achieve
+    #   performance up to 32,000 IOPS.
     #
     #   Default: The existing value is retained if you keep the same volume
     #   type. If you change the volume type to `io1`, `io2`, or `gp3`, the
     #   default is 3,000.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html
     #   @return [Integer]
     #
     # @!attribute [rw] throughput
@@ -47574,13 +50526,12 @@ module Aws::EC2
     #   Multi-Attach, you can attach the volume to up to 16 [ Nitro-based
     #   instances][1] in the same Availability Zone. This parameter is
     #   supported with `io1` and `io2` volumes only. For more information,
-    #   see [ Amazon EBS Multi-Attach][2] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   see [ Amazon EBS Multi-Attach][2] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html
+    #   [2]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVolumeRequest AWS API Documentation
@@ -48229,7 +51180,9 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] skip_tunnel_replacement
-    #   Choose whether or not to trigger immediate tunnel replacement.
+    #   Choose whether or not to trigger immediate tunnel replacement. This
+    #   is only applicable when turning on or off
+    #   `EnableTunnelLifecycleControl`.
     #
     #   Valid values: `True` \| `False`
     #   @return [Boolean]
@@ -48325,7 +51278,7 @@ module Aws::EC2
     #
     #   Constraints: A value between 60 and half of `Phase2LifetimeSeconds`.
     #
-    #   Default: `540`
+    #   Default: `270`
     #   @return [Integer]
     #
     # @!attribute [rw] rekey_fuzz_percentage
@@ -48347,11 +51300,13 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] dpd_timeout_seconds
-    #   The number of seconds after which a DPD timeout occurs.
+    #   The number of seconds after which a DPD timeout occurs. A DPD
+    #   timeout of 40 seconds means that the VPN endpoint will consider the
+    #   peer dead 30 seconds after the first failed keep-alive.
     #
     #   Constraints: A value greater than or equal to 30.
     #
-    #   Default: `30`
+    #   Default: `40`
     #   @return [Integer]
     #
     # @!attribute [rw] dpd_timeout_action
@@ -48664,12 +51619,11 @@ module Aws::EC2
     #
     # @!attribute [rw] provisioned_bandwidth
     #   Reserved. If you need to sustain traffic greater than the
-    #   [documented limits][1], contact us through the [Support Center][2].
+    #   [documented limits][1], contact Amazon Web Services Support.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
-    #   [2]: https://console.aws.amazon.com/support/home?
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-gateways
     #   @return [Types::ProvisionedBandwidth]
     #
     # @!attribute [rw] state
@@ -48784,7 +51738,7 @@ module Aws::EC2
     # Describes a network ACL.
     #
     # @!attribute [rw] associations
-    #   Any associations between the network ACL and one or more subnets
+    #   Any associations between the network ACL and your subnets
     #   @return [Array<Types::NetworkAclAssociation>]
     #
     # @!attribute [rw] entries
@@ -49398,6 +52352,17 @@ module Aws::EC2
     #   The Availability Zone.
     #   @return [String]
     #
+    # @!attribute [rw] connection_tracking_configuration
+    #   A security group connection tracking configuration that enables you
+    #   to set the timeout for connection tracking on an Elastic network
+    #   interface. For more information, see [Connection tracking
+    #   timeouts][1] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    #   @return [Types::ConnectionTrackingConfiguration]
+    #
     # @!attribute [rw] description
     #   A description.
     #   @return [String]
@@ -49505,6 +52470,7 @@ module Aws::EC2
       :association,
       :attachment,
       :availability_zone,
+      :connection_tracking_configuration,
       :description,
       :groups,
       :interface_type,
@@ -49818,10 +52784,96 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the cores available to the neuron accelerator.
+    #
+    # @!attribute [rw] count
+    #   The number of cores available to the neuron accelerator.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] version
+    #   The version of the neuron accelerator.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NeuronDeviceCoreInfo AWS API Documentation
+    #
+    class NeuronDeviceCoreInfo < Struct.new(
+      :count,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the neuron accelerators for the instance type.
+    #
+    # @!attribute [rw] count
+    #   The number of neuron accelerators for the instance type.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the neuron accelerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_info
+    #   Describes the cores available to each neuron accelerator.
+    #   @return [Types::NeuronDeviceCoreInfo]
+    #
+    # @!attribute [rw] memory_info
+    #   Describes the memory available to each neuron accelerator.
+    #   @return [Types::NeuronDeviceMemoryInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NeuronDeviceInfo AWS API Documentation
+    #
+    class NeuronDeviceInfo < Struct.new(
+      :count,
+      :name,
+      :core_info,
+      :memory_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the memory available to the neuron accelerator.
+    #
+    # @!attribute [rw] size_in_mi_b
+    #   The size of the memory available to the neuron accelerator, in MiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NeuronDeviceMemoryInfo AWS API Documentation
+    #
+    class NeuronDeviceMemoryInfo < Struct.new(
+      :size_in_mi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the neuron accelerators for the instance type.
+    #
+    # @!attribute [rw] neuron_devices
+    #   Describes the neuron accelerators for the instance type.
+    #   @return [Array<Types::NeuronDeviceInfo>]
+    #
+    # @!attribute [rw] total_neuron_device_memory_in_mi_b
+    #   The total size of the memory for the neuron accelerators for the
+    #   instance type, in MiB.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NeuronInfo AWS API Documentation
+    #
+    class NeuronInfo < Struct.new(
+      :neuron_devices,
+      :total_neuron_device_memory_in_mi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a DHCP configuration option.
+    #
     # @!attribute [rw] key
+    #   The name of a DHCP option.
     #   @return [String]
     #
     # @!attribute [rw] values
+    #   The values for the DHCP option.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NewDhcpConfiguration AWS API Documentation
@@ -49930,10 +52982,10 @@ module Aws::EC2
     #
     # @!attribute [rw] min_target_capacity
     #   The minimum target capacity for On-Demand Instances in the fleet. If
-    #   the minimum target capacity is not reached, the fleet launches no
-    #   instances.
+    #   this minimum capacity isn't reached, no instances are launched.
     #
-    #   Supported only for fleets of type `instant`.
+    #   Constraints: Maximum value of `1000`. Supported only for fleets of
+    #   type `instant`.
     #
     #   At least one of the following must be specified:
     #   `SingleAvailabilityZone` \| `SingleInstanceType`
@@ -49949,7 +53001,7 @@ module Aws::EC2
     #   `maxTotalPrice` does not account for surplus credits, and, if you
     #   use surplus credits, your final cost might be higher than what you
     #   specified for `maxTotalPrice`. For more information, see [Surplus
-    #   credits can incur charges][1] in the *EC2 User Guide*.
+    #   credits can incur charges][1] in the *Amazon EC2 User Guide*.
     #
     #    </note>
     #
@@ -50009,10 +53061,10 @@ module Aws::EC2
     #
     # @!attribute [rw] min_target_capacity
     #   The minimum target capacity for On-Demand Instances in the fleet. If
-    #   the minimum target capacity is not reached, the fleet launches no
-    #   instances.
+    #   this minimum capacity isn't reached, no instances are launched.
     #
-    #   Supported only for fleets of type `instant`.
+    #   Constraints: Maximum value of `1000`. Supported only for fleets of
+    #   type `instant`.
     #
     #   At least one of the following must be specified:
     #   `SingleAvailabilityZone` \| `SingleInstanceType`
@@ -50028,7 +53080,7 @@ module Aws::EC2
     #   `MaxTotalPrice` does not account for surplus credits, and, if you
     #   use surplus credits, your final cost might be higher than what you
     #   specified for `MaxTotalPrice`. For more information, see [Surplus
-    #   credits can incur charges][1] in the *EC2 User Guide*.
+    #   credits can incur charges][1] in the *Amazon EC2 User Guide*.
     #
     #    </note>
     #
@@ -51235,12 +54287,17 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html
     #   @return [Array<String>]
     #
+    # @!attribute [rw] manufacturer
+    #   The manufacturer of the processor.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProcessorInfo AWS API Documentation
     #
     class ProcessorInfo < Struct.new(
       :supported_architectures,
       :sustained_clock_speed_in_ghz,
-      :supported_features)
+      :supported_features,
+      :manufacturer)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51281,9 +54338,10 @@ module Aws::EC2
     # @!attribute [rw] cidr
     #   The public IPv4 or IPv6 address range, in CIDR notation. The most
     #   specific IPv4 prefix that you can specify is /24. The most specific
-    #   IPv6 prefix you can specify is /56. The address range cannot overlap
-    #   with another address range that you've brought to this or another
-    #   Region.
+    #   IPv6 address range that you can bring is /48 for CIDRs that are
+    #   publicly advertisable and /56 for CIDRs that are not publicly
+    #   advertisable. The address range cannot overlap with another address
+    #   range that you've brought to this or another Region.
     #   @return [String]
     #
     # @!attribute [rw] cidr_authorization_context
@@ -51317,6 +54375,32 @@ module Aws::EC2
     #   Reserved.
     #   @return [Boolean]
     #
+    # @!attribute [rw] network_border_group
+    #   If you have [Local Zones][1] enabled, you can choose a network
+    #   border group for Local Zones when you provision and advertise a
+    #   BYOIPv4 CIDR. Choose the network border group carefully as the EIP
+    #   and the Amazon Web Services resource it is associated with must
+    #   reside in the same network border group.
+    #
+    #   You can provision BYOIP address ranges to and advertise them in the
+    #   following Local Zone network border groups:
+    #
+    #   * us-east-1-dfw-2
+    #
+    #   * us-west-2-lax-1
+    #
+    #   * us-west-2-phx-2
+    #
+    #   <note markdown="1"> You cannot provision or advertise BYOIPv6 address ranges in Local
+    #   Zones at this time.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionByoipCidrRequest AWS API Documentation
     #
     class ProvisionByoipCidrRequest < Struct.new(
@@ -51326,7 +54410,8 @@ module Aws::EC2
       :description,
       :dry_run,
       :pool_tag_specifications,
-      :multi_region)
+      :multi_region,
+      :network_border_group)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51339,6 +54424,48 @@ module Aws::EC2
     #
     class ProvisionByoipCidrResult < Struct.new(
       :byoip_cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_id
+    #   An IPAM ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] asn
+    #   A public 2-byte or 4-byte ASN.
+    #   @return [String]
+    #
+    # @!attribute [rw] asn_authorization_context
+    #   An ASN authorization context.
+    #   @return [Types::AsnAuthorizationContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionIpamByoasnRequest AWS API Documentation
+    #
+    class ProvisionIpamByoasnRequest < Struct.new(
+      :dry_run,
+      :ipam_id,
+      :asn,
+      :asn_authorization_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] byoasn
+    #   An ASN and BYOIP CIDR association.
+    #   @return [Types::Byoasn]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionIpamByoasnResult AWS API Documentation
+    #
+    class ProvisionIpamByoasnResult < Struct.new(
+      :byoasn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51378,14 +54505,14 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionIpamPoolCidrRequest AWS API Documentation
@@ -51462,61 +54589,30 @@ module Aws::EC2
     end
 
     # Reserved. If you need to sustain traffic greater than the [documented
-    # limits][1], contact us through the [Support Center][2].
+    # limits][1], contact Amazon Web Services Support.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
-    # [2]: https://console.aws.amazon.com/support/home?
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-gateways
     #
     # @!attribute [rw] provision_time
-    #   Reserved. If you need to sustain traffic greater than the
-    #   [documented limits][1], contact us through the [Support Center][2].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
-    #   [2]: https://console.aws.amazon.com/support/home?
+    #   Reserved.
     #   @return [Time]
     #
     # @!attribute [rw] provisioned
-    #   Reserved. If you need to sustain traffic greater than the
-    #   [documented limits][1], contact us through the [Support Center][2].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
-    #   [2]: https://console.aws.amazon.com/support/home?
+    #   Reserved.
     #   @return [String]
     #
     # @!attribute [rw] request_time
-    #   Reserved. If you need to sustain traffic greater than the
-    #   [documented limits][1], contact us through the [Support Center][2].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
-    #   [2]: https://console.aws.amazon.com/support/home?
+    #   Reserved.
     #   @return [Time]
     #
     # @!attribute [rw] requested
-    #   Reserved. If you need to sustain traffic greater than the
-    #   [documented limits][1], contact us through the [Support Center][2].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
-    #   [2]: https://console.aws.amazon.com/support/home?
+    #   Reserved.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Reserved. If you need to sustain traffic greater than the
-    #   [documented limits][1], contact us through the [Support Center][2].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
-    #   [2]: https://console.aws.amazon.com/support/home?
+    #   Reserved.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionedBandwidth AWS API Documentation
@@ -51683,6 +54779,48 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the Capacity Block during launch.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] capacity_block_offering_id
+    #   The ID of the Capacity Block offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_platform
+    #   The type of operating system for which to reserve capacity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseCapacityBlockRequest AWS API Documentation
+    #
+    class PurchaseCapacityBlockRequest < Struct.new(
+      :dry_run,
+      :tag_specifications,
+      :capacity_block_offering_id,
+      :instance_platform)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_reservation
+    #   The Capacity Reservation.
+    #   @return [Types::CapacityReservation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseCapacityBlockResult AWS API Documentation
+    #
+    class PurchaseCapacityBlockResult < Struct.new(
+      :capacity_reservation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
@@ -51841,7 +54979,7 @@ module Aws::EC2
     #   The IDs of the purchased Reserved Instances. If your purchase
     #   crosses into a discounted pricing tier, the final Reserved Instances
     #   IDs might change. For more information, see [Crossing pricing
-    #   tiers][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   tiers][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -51964,7 +55102,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] vpc_peering_connection_id
-    #   The ID of the VPC peering connection.
+    #   The ID of the VPC peering connection (if applicable).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReferencedSecurityGroup AWS API Documentation
@@ -52035,11 +55173,11 @@ module Aws::EC2
     #   be on the same Outpost or in the Region of that Outpost. AMIs on an
     #   Outpost that include local snapshots can be used to launch instances
     #   on the same Outpost only. For more information, [Amazon EBS local
-    #   snapshots on Outposts][1] in the *Amazon EC2 User Guide*.
+    #   snapshots on Outposts][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#ami
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] description
@@ -52175,6 +55313,19 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the AMI.
+    #
+    #   To tag the AMI, the value for `ResourceType` must be `image`. If you
+    #   specify another value for `ResourceType`, the request fails.
+    #
+    #   To tag an AMI after it has been registered, see [CreateTags][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterImageRequest AWS API Documentation
     #
     class RegisterImageRequest < Struct.new(
@@ -52194,7 +55345,8 @@ module Aws::EC2
       :boot_mode,
       :tpm_support,
       :uefi_data,
-      :imds_support)
+      :imds_support,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -53250,7 +56402,7 @@ module Aws::EC2
     #
     #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
     #   For more information, see [User provided kernels][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   EC2 User Guide*.
     #
     #
     #
@@ -53275,9 +56427,7 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateBlockDeviceMappingRequest>]
     #
     # @!attribute [rw] network_interfaces
-    #   One or more network interfaces. If you specify a network interface,
-    #   you must specify any security groups and subnets as part of the
-    #   network interface.
+    #   The network interfaces for the instance.
     #   @return [Array<Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest>]
     #
     # @!attribute [rw] image_id
@@ -53303,7 +56453,7 @@ module Aws::EC2
     #    </note>
     #
     #   For more information, see [Use a Systems Manager parameter instead
-    #   of an AMI ID][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   of an AMI ID][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -53311,8 +56461,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type. For more information, see [Instance types][1] in
-    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #   The instance type. For more information, see [Amazon EC2 instance
+    #   types][1] in the *Amazon EC2 User Guide*.
     #
     #   If you specify `InstanceType`, you can't specify
     #   `InstanceRequirements`.
@@ -53349,7 +56499,7 @@ module Aws::EC2
     #
     #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
     #   For more information, see [User provided kernels][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   EC2 User Guide*.
     #
     #
     #
@@ -53381,54 +56531,34 @@ module Aws::EC2
     # @!attribute [rw] user_data
     #   The user data to make available to the instance. You must provide
     #   base64-encoded text. User data is limited to 16 KB. For more
-    #   information, see [Run commands on your Linux instance at launch][1]
-    #   (Linux) or [Work with instance user data][2] (Windows) in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   information, see [Run commands on your Amazon EC2 instance at
+    #   launch][1] in the *Amazon EC2 User Guide*.
     #
     #   If you are creating the launch template for use with Batch, the user
-    #   data must be provided in the [ MIME multi-part archive format][3].
+    #   data must be provided in the [MIME multi-part archive format][2].
     #   For more information, see [Amazon EC2 user data in launch
-    #   templates][4] in the *Batch User Guide*.
+    #   templates][3] in the *Batch User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instancedata-add-user-data.html
-    #   [3]: https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive
-    #   [4]: https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html
+    #   [2]: https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive
+    #   [3]: https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
     #   The tags to apply to the resources that are created during instance
-    #   launch.
-    #
-    #   You can specify tags for the following resources only:
-    #
-    #   * Instances
-    #
-    #   * Volumes
-    #
-    #   * Elastic graphics
-    #
-    #   * Spot Instance requests
-    #
-    #   * Network interfaces
-    #
-    #   To tag a resource after it has been created, see [CreateTags][1].
-    #
-    #   <note markdown="1"> To tag the launch template itself, you must use the
-    #   [TagSpecification][2] parameter.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html
+    #   launch. These tags are not applied to the launch template.
     #   @return [Array<Types::LaunchTemplateTagSpecificationRequest>]
     #
     # @!attribute [rw] elastic_gpu_specifications
-    #   An elastic GPU to associate with the instance.
+    #   Deprecated.
+    #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #    </note>
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
     # @!attribute [rw] elastic_inference_accelerators
@@ -53454,19 +56584,20 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateElasticInferenceAccelerator>]
     #
     # @!attribute [rw] security_group_ids
-    #   One or more security group IDs. You can create a security group
-    #   using [CreateSecurityGroup][1]. You cannot specify both a security
-    #   group ID and security name in the same request.
+    #   The IDs of the security groups.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateSecurityGroup.html
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface instead of using this
+    #   parameter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
-    #   One or more security group names. For a nondefault VPC, you must use
-    #   security group IDs instead. You cannot specify both a security group
-    #   ID and security name in the same request.
+    #   The names of the security groups. For a nondefault VPC, you must use
+    #   security group IDs instead.
+    #
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface instead of using this
+    #   parameter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_market_options
@@ -53480,8 +56611,7 @@ module Aws::EC2
     #
     # @!attribute [rw] cpu_options
     #   The CPU options for the instance. For more information, see
-    #   [Optimizing CPU Options][1] in the *Amazon Elastic Compute Cloud
-    #   User Guide*.
+    #   [Optimize CPU options][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -53503,8 +56633,8 @@ module Aws::EC2
     # @!attribute [rw] hibernation_options
     #   Indicates whether an instance is enabled for hibernation. This
     #   parameter is valid only if the instance meets the [hibernation
-    #   prerequisites][1]. For more information, see [Hibernate your
-    #   instance][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   prerequisites][1]. For more information, see [Hibernate your Amazon
+    #   EC2 instance][2] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -53514,8 +56644,7 @@ module Aws::EC2
     #
     # @!attribute [rw] metadata_options
     #   The metadata options for the instance. For more information, see
-    #   [Instance metadata and user data][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   [Instance metadata and user data][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -53524,7 +56653,7 @@ module Aws::EC2
     #
     # @!attribute [rw] enclave_options
     #   Indicates whether the instance is enabled for Amazon Web Services
-    #   Nitro Enclaves. For more information, see [ What is Amazon Web
+    #   Nitro Enclaves. For more information, see [What is Amazon Web
     #   Services Nitro Enclaves?][1] in the *Amazon Web Services Nitro
     #   Enclaves User Guide*.
     #
@@ -53599,12 +56728,12 @@ module Aws::EC2
     #
     # @!attribute [rw] disable_api_stop
     #   Indicates whether to enable the instance for stop protection. For
-    #   more information, see [Stop protection][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   more information, see [Enable stop protection for your instance][1]
+    #   in the *Amazon EC2 User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData AWS API Documentation
@@ -53714,8 +56843,9 @@ module Aws::EC2
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency in Amazon EC2 API requests][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #
     #
@@ -54003,7 +57133,7 @@ module Aws::EC2
     #   specify for the Fleet determine the number of instances for which
     #   the Fleet reserves capacity. Both values are based on units that
     #   make sense for your workload. For more information, see [Total
-    #   target capacity][1] in the Amazon EC2 User Guide.
+    #   target capacity][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -54037,8 +57167,8 @@ module Aws::EC2
     #   The priority to assign to the instance type. This value is used to
     #   determine which of the instance types specified for the Fleet should
     #   be prioritized for use. A lower value indicates a high priority. For
-    #   more information, see [Instance type priority][1] in the Amazon EC2
-    #   User Guide.
+    #   more information, see [Instance type priority][1] in the *Amazon EC2
+    #   User Guide*.
     #
     #
     #
@@ -54834,7 +57964,7 @@ module Aws::EC2
     #     parameter value.
     #
     #   For more information, see [Use a Systems Manager parameter instead
-    #   of an AMI ID][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   of an AMI ID][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -54882,7 +58012,13 @@ module Aws::EC2
     #   @return [Array<Types::LaunchTemplateTagSpecification>]
     #
     # @!attribute [rw] elastic_gpu_specifications
-    #   The elastic GPU specification.
+    #   Deprecated.
+    #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024. For
+    #   workloads that require graphics acceleration, we recommend that you
+    #   use Amazon EC2 G4ad, G4dn, or G5 instances.
+    #
+    #    </note>
     #   @return [Array<Types::ElasticGpuSpecificationResponse>]
     #
     # @!attribute [rw] elastic_inference_accelerators
@@ -54925,8 +58061,7 @@ module Aws::EC2
     #
     # @!attribute [rw] cpu_options
     #   The CPU options for the instance. For more information, see
-    #   [Optimizing CPU options][1] in the *Amazon Elastic Compute Cloud
-    #   User Guide*.
+    #   [Optimize CPU options][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -54943,8 +58078,8 @@ module Aws::EC2
     #
     # @!attribute [rw] hibernation_options
     #   Indicates whether an instance is configured for hibernation. For
-    #   more information, see [Hibernate your instance][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide*.
+    #   more information, see [Hibernate your Amazon EC2 instance][1] in the
+    #   *Amazon EC2 User Guide*.
     #
     #
     #
@@ -54953,8 +58088,7 @@ module Aws::EC2
     #
     # @!attribute [rw] metadata_options
     #   The metadata options for the instance. For more information, see
-    #   [Instance metadata and user data][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   [Instance metadata and user data][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -54985,12 +58119,12 @@ module Aws::EC2
     #
     # @!attribute [rw] disable_api_stop
     #   Indicates whether the instance is enabled for stop protection. For
-    #   more information, see [Stop protection][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
+    #   more information, see [Enable stop protection for your instance][1]
+    #   in the *Amazon EC2 User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-stop-protection.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData AWS API Documentation
@@ -55170,11 +58304,11 @@ module Aws::EC2
     # @!attribute [rw] outpost_arn
     #   The ARN of the Outpost on which the snapshot is stored. For more
     #   information, see [Amazon EBS local snapshots on Outposts][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -55440,8 +58574,8 @@ module Aws::EC2
     #
     # @!attribute [rw] from_port
     #   If the protocol is TCP or UDP, this is the start of the port range.
-    #   If the protocol is ICMP, this is the type number. A value of -1
-    #   indicates all ICMP types.
+    #   If the protocol is ICMP, this is the ICMP type or -1 (all ICMP
+    #   types).
     #   @return [Integer]
     #
     # @!attribute [rw] group_id
@@ -55484,8 +58618,7 @@ module Aws::EC2
     #
     # @!attribute [rw] to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
-    #   the protocol is ICMP, this is the code. A value of -1 indicates all
-    #   ICMP codes.
+    #   the protocol is ICMP, this is the ICMP code or -1 (all ICMP codes).
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -55639,8 +58772,8 @@ module Aws::EC2
     # Describes a route table.
     #
     # @!attribute [rw] associations
-    #   The associations between the route table and one or more subnets or
-    #   a gateway.
+    #   The associations between the route table and your subnets or
+    #   gateways.
     #   @return [Array<Types::RouteTableAssociation>]
     #
     # @!attribute [rw] propagating_vgws
@@ -55832,8 +58965,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type. For more information, see [Instance types][1] in
-    #   the *Amazon EC2 User Guide*.
+    #   The instance type. For more information, see [Amazon EC2 instance
+    #   types][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -55889,34 +59022,32 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] max_count
-    #   The maximum number of instances to launch. If you specify more
-    #   instances than Amazon EC2 can launch in the target Availability
-    #   Zone, Amazon EC2 launches the largest possible number of instances
-    #   above `MinCount`.
+    #   The maximum number of instances to launch. If you specify a value
+    #   that is more capacity than Amazon EC2 can launch in the target
+    #   Availability Zone, Amazon EC2 launches the largest possible number
+    #   of instances above the specified minimum count.
     #
-    #   Constraints: Between 1 and the maximum number you're allowed for
-    #   the specified instance type. For more information about the default
-    #   limits, and how to request an increase, see [How many instances can
-    #   I run in Amazon EC2][1] in the Amazon EC2 FAQ.
-    #
+    #   Constraints: Between 1 and the quota for the specified instance type
+    #   for your account for this Region. For more information, see [Amazon
+    #   EC2 instance type quotas][1].
     #
     #
-    #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-quotas.html
     #   @return [Integer]
     #
     # @!attribute [rw] min_count
-    #   The minimum number of instances to launch. If you specify a minimum
-    #   that is more instances than Amazon EC2 can launch in the target
-    #   Availability Zone, Amazon EC2 launches no instances.
+    #   The minimum number of instances to launch. If you specify a value
+    #   that is more capacity than Amazon EC2 can provide in the target
+    #   Availability Zone, Amazon EC2 does not launch any instances.
     #
-    #   Constraints: Between 1 and the maximum number you're allowed for
-    #   the specified instance type. For more information about the default
-    #   limits, and how to request an increase, see [How many instances can
-    #   I run in Amazon EC2][1] in the Amazon EC2 General FAQ.
-    #
+    #   Constraints: Between 1 and the quota for the specified instance type
+    #   for your account for this Region. For more information, see [Amazon
+    #   EC2 instance type quotas][1].
     #
     #
-    #   [1]: http://aws.amazon.com/ec2/faqs/#How_many_instances_can_I_run_in_Amazon_EC2
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-quotas.html
     #   @return [Integer]
     #
     # @!attribute [rw] monitoring
@@ -55948,7 +59079,8 @@ module Aws::EC2
     #   using [CreateSecurityGroup][1].
     #
     #   If you specify a network interface, you must specify any security
-    #   groups as part of the network interface.
+    #   groups as part of the network interface instead of using this
+    #   parameter.
     #
     #
     #
@@ -55959,7 +59091,8 @@ module Aws::EC2
     #   \[Default VPC\] The names of the security groups.
     #
     #   If you specify a network interface, you must specify any security
-    #   groups as part of the network interface.
+    #   groups as part of the network interface instead of using this
+    #   parameter.
     #
     #   Default: Amazon EC2 uses the default security group.
     #   @return [Array<String>]
@@ -55968,21 +59101,20 @@ module Aws::EC2
     #   The ID of the subnet to launch the instance into.
     #
     #   If you specify a network interface, you must specify any subnets as
-    #   part of the network interface.
+    #   part of the network interface instead of using this parameter.
     #   @return [String]
     #
     # @!attribute [rw] user_data
     #   The user data script to make available to the instance. For more
-    #   information, see [Run commands on your Linux instance at launch][1]
-    #   and [Run commands on your Windows instance at launch][2]. If you are
-    #   using a command line tool, base64-encoding is performed for you, and
-    #   you can load the text from a file. Otherwise, you must provide
+    #   information, see [Run commands on your Amazon EC2 instance at
+    #   launch][1] in the *Amazon EC2 User Guide*. If you are using a
+    #   command line tool, base64-encoding is performed for you, and you can
+    #   load the text from a file. Otherwise, you must provide
     #   base64-encoded text. User data is limited to 16 KB.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-windows-user-data.html
     #   @return [String]
     #
     # @!attribute [rw] additional_info
@@ -56054,9 +59186,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] network_interfaces
-    #   The network interfaces to associate with the instance. If you
-    #   specify a network interface, you must specify any security groups
-    #   and subnets as part of the network interface.
+    #   The network interfaces to associate with the instance.
     #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
     #
     # @!attribute [rw] private_ip_address
@@ -56074,37 +59204,25 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_specification
-    #   An elastic GPU to associate with the instance. An Elastic GPU is a
-    #   GPU resource that you can attach to your Windows instance to
-    #   accelerate the graphics performance of your applications. For more
-    #   information, see [Amazon EC2 Elastic GPUs][1] in the *Amazon EC2
-    #   User Guide*.
+    #   An elastic GPU to associate with the instance.
     #
+    #   <note markdown="1"> Amazon Elastic Graphics reached end of life on January 8, 2024.
     #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-graphics.html
+    #    </note>
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
     # @!attribute [rw] elastic_inference_accelerators
     #   An elastic inference accelerator to associate with the instance.
-    #   Elastic inference accelerators are a resource you can attach to your
-    #   Amazon EC2 instances to accelerate your Deep Learning (DL) inference
-    #   workloads.
     #
-    #   You cannot specify accelerators from different generations in the
-    #   same request.
-    #
-    #   <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
-    #   customers to Amazon Elastic Inference (EI), and will help current
-    #   customers migrate their workloads to options that offer better price
-    #   and performance. After April 15, 2023, new customers will not be
-    #   able to launch instances with Amazon EI accelerators in Amazon
-    #   SageMaker, Amazon ECS, or Amazon EC2. However, customers who have
-    #   used Amazon EI at least once during the past 30-day period are
-    #   considered current customers and will be able to continue using the
-    #   service.
+    #   <note markdown="1"> Amazon Elastic Inference (EI) is no longer available to new
+    #   customers. For more information, see [Amazon Elastic Inference
+    #   FAQs][1].
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/machine-learning/elastic-inference/faqs/
     #   @return [Array<Types::ElasticInferenceAccelerator>]
     #
     # @!attribute [rw] tag_specifications
@@ -56116,8 +59234,6 @@ module Aws::EC2
     #   * Instances
     #
     #   * Volumes
-    #
-    #   * Elastic graphics
     #
     #   * Spot Instance requests
     #
@@ -56131,10 +59247,9 @@ module Aws::EC2
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] launch_template
-    #   The launch template to use to launch the instances. Any parameters
-    #   that you specify in RunInstances override the same parameters in the
-    #   launch template. You can specify either the name or ID of a launch
-    #   template, but not both.
+    #   The launch template. Any additional parameters that you specify for
+    #   the new instance overwrite the corresponding parameters included in
+    #   the launch template.
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] instance_market_options
@@ -56183,8 +59298,8 @@ module Aws::EC2
     # @!attribute [rw] hibernation_options
     #   Indicates whether an instance is enabled for hibernation. This
     #   parameter is valid only if the instance meets the [hibernation
-    #   prerequisites][1]. For more information, see [Hibernate your
-    #   instance][2] in the *Amazon EC2 User Guide*.
+    #   prerequisites][1]. For more information, see [Hibernate your Amazon
+    #   EC2 instance][2] in the *Amazon EC2 User Guide*.
     #
     #   You can't enable hibernation and Amazon Web Services Nitro Enclaves
     #   on the same instance.
@@ -56741,21 +59856,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
-    #   The number of I/O operations per second (IOPS) to provision for an
-    #   `io1` or `io2` volume, with a maximum ratio of 50 IOPS/GiB for
-    #   `io1`, and 500 IOPS/GiB for `io2`. Range is 100 to 64,000 IOPS for
-    #   volumes in most Regions. Maximum IOPS of 64,000 is guaranteed only
-    #   on [instances built on the Nitro System][1]. Other instance families
-    #   guarantee performance up to 32,000 IOPS. For more information, see
-    #   [Amazon EBS volume types][2] in the *Amazon EC2 User Guide*.
-    #
-    #   This parameter is valid only for Provisioned IOPS SSD (`io1` and
-    #   `io2`) volumes.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+    #   The number of I/O operations per second (IOPS) to provision for a
+    #   `gp3`, `io1`, or `io2` volume.
     #   @return [Integer]
     #
     # @!attribute [rw] snapshot_id
@@ -56770,9 +59872,7 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
-    #   The volume type. `gp2` for General Purpose SSD, `io1` or ` io2` for
-    #   Provisioned IOPS SSD, Throughput Optimized HDD for `st1`, Cold HDD
-    #   for `sc1`, or `standard` for Magnetic.
+    #   The volume type.
     #
     #   Default: `gp2`
     #   @return [String]
@@ -56936,6 +60036,15 @@ module Aws::EC2
     #   network interface, not an existing one. You cannot specify more than
     #   one network interface in the request. If launching into a default
     #   subnet, the default value is `true`.
+    #
+    #   Amazon Web Services charges for all public IPv4 addresses, including
+    #   public IPv4 addresses associated with running instances and Elastic
+    #   IP addresses. For more information, see the *Public IPv4 Address*
+    #   tab on the [Amazon VPC pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
@@ -57238,7 +60347,8 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of routes to return.
+    #   The maximum number of routes to return. If a value is not provided,
+    #   the default is 1000.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -57326,6 +60436,45 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # A security group that can be used by interfaces in the VPC.
+    #
+    # @!attribute [rw] description
+    #   The security group's description.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The security group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The security group owner ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The security group ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The security group tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] primary_vpc_id
+    #   The VPC ID in which the security group was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupForVpc AWS API Documentation
+    #
+    class SecurityGroupForVpc < Struct.new(
+      :description,
+      :group_name,
+      :owner_id,
+      :group_id,
+      :tags,
+      :primary_vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a security group.
     #
     # @!attribute [rw] group_id
@@ -57357,7 +60506,23 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] vpc_peering_connection_id
-    #   The ID of the VPC peering connection.
+    #   The ID of the VPC peering connection (if applicable). For more
+    #   information about security group referencing for peering
+    #   connections, see [Update your security groups to reference peer
+    #   security groups][1] in the *VPC Peering Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-security-groups.html
+    #   @return [String]
+    #
+    # @!attribute [rw] transit_gateway_id
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
+    #   The ID of the transit gateway (if applicable).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupReference AWS API Documentation
@@ -57365,7 +60530,8 @@ module Aws::EC2
     class SecurityGroupReference < Struct.new(
       :group_id,
       :referencing_vpc_id,
-      :vpc_peering_connection_id)
+      :vpc_peering_connection_id,
+      :transit_gateway_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -57402,16 +60568,15 @@ module Aws::EC2
     #
     # @!attribute [rw] from_port
     #   If the protocol is TCP or UDP, this is the start of the port range.
-    #   If the protocol is ICMP or ICMPv6, this is the type number. A value
-    #   of -1 indicates all ICMP/ICMPv6 types. If you specify all
-    #   ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
+    #   If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all
+    #   ICMP types).
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
-    #   the protocol is ICMP or ICMPv6, this is the type number. A value of
-    #   -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
-    #   types, you must specify all ICMP/ICMPv6 codes.
+    #   the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all
+    #   ICMP codes). If the start port is -1 (all ICMP types), then the end
+    #   port must be -1 (all ICMP codes).
     #   @return [Integer]
     #
     # @!attribute [rw] cidr_ipv_4
@@ -57510,16 +60675,15 @@ module Aws::EC2
     #
     # @!attribute [rw] from_port
     #   If the protocol is TCP or UDP, this is the start of the port range.
-    #   If the protocol is ICMP or ICMPv6, this is the type number. A value
-    #   of -1 indicates all ICMP/ICMPv6 types. If you specify all
-    #   ICMP/ICMPv6 types, you must specify all ICMP/ICMPv6 codes.
+    #   If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all
+    #   ICMP types).
     #   @return [Integer]
     #
     # @!attribute [rw] to_port
     #   If the protocol is TCP or UDP, this is the end of the port range. If
-    #   the protocol is ICMP or ICMPv6, this is the code. A value of -1
-    #   indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
-    #   types, you must specify all ICMP/ICMPv6 codes.
+    #   the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all
+    #   ICMP codes). If the start port is -1 (all ICMP types), then the end
+    #   port must be -1 (all ICMP codes).
     #   @return [Integer]
     #
     # @!attribute [rw] cidr_ipv_4
@@ -57860,9 +61024,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Resource Name (ARN) of the Key Management Service (KMS)
-    #   KMS key that was used to protect the volume encryption key for the
-    #   parent volume.
+    #   The Amazon Resource Name (ARN) of the KMS key that was used to
+    #   protect the volume encryption key for the parent volume.
     #   @return [String]
     #
     # @!attribute [rw] owner_id
@@ -57889,10 +61052,10 @@ module Aws::EC2
     #
     # @!attribute [rw] state_message
     #   Encrypted Amazon EBS snapshots are copied asynchronously. If a
-    #   snapshot copy operation fails (for example, if the proper Key
-    #   Management Service (KMS) permissions are not obtained) this field
-    #   displays error state details to help you diagnose why the error
-    #   occurred. This parameter is only returned by DescribeSnapshots.
+    #   snapshot copy operation fails (for example, if the proper KMS
+    #   permissions are not obtained) this field displays error state
+    #   details to help you diagnose why the error occurred. This parameter
+    #   is only returned by DescribeSnapshots.
     #   @return [String]
     #
     # @!attribute [rw] volume_id
@@ -57914,11 +61077,11 @@ module Aws::EC2
     # @!attribute [rw] outpost_arn
     #   The ARN of the Outpost on which the snapshot is stored. For more
     #   information, see [Amazon EBS local snapshots on Outposts][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -58106,11 +61269,11 @@ module Aws::EC2
     # @!attribute [rw] outpost_arn
     #   The ARN of the Outpost on which the snapshot is stored. For more
     #   information, see [Amazon EBS local snapshots on Outposts][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html
     #   @return [String]
     #
     # @!attribute [rw] sse_type
@@ -58317,7 +61480,7 @@ module Aws::EC2
     # The Spot Instance replacement strategy to use when Amazon EC2 emits a
     # signal that your Spot Instance is at an elevated risk of being
     # interrupted. For more information, see [Capacity rebalancing][1] in
-    # the *Amazon EC2 User Guide for Linux Instances*.
+    # the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -58411,6 +61574,10 @@ module Aws::EC2
     #
     # @!attribute [rw] security_groups
     #   The security groups.
+    #
+    #   If you specify a network interface, you must specify any security
+    #   groups as part of the network interface instead of using this
+    #   parameter.
     #   @return [Array<Types::GroupIdentifier>]
     #
     # @!attribute [rw] addressing_type
@@ -58461,13 +61628,10 @@ module Aws::EC2
     #   @return [Types::SpotFleetMonitoring]
     #
     # @!attribute [rw] network_interfaces
-    #   One or more network interfaces. If you specify a network interface,
-    #   you must specify subnet IDs and security group IDs using the network
-    #   interface.
+    #   The network interfaces.
     #
-    #   <note markdown="1"> `SpotFleetLaunchSpecification` currently does not support Elastic
-    #   Fabric Adapter (EFA). To specify an EFA, you must use
-    #   [LaunchTemplateConfig][1].
+    #   <note markdown="1"> `SpotFleetLaunchSpecification` does not support Elastic Fabric
+    #   Adapter (EFA). You must use [LaunchTemplateConfig][1] instead.
     #
     #    </note>
     #
@@ -58502,6 +61666,9 @@ module Aws::EC2
     #   The IDs of the subnets in which to launch the instances. To specify
     #   multiple subnets, separate them using commas; for example,
     #   "subnet-1234abcdeexample1, subnet-0987cdef6example2".
+    #
+    #   If you specify a network interface, you must specify any subnets as
+    #   part of the network interface instead of using this parameter.
     #   @return [String]
     #
     # @!attribute [rw] user_data
@@ -58661,9 +61828,12 @@ module Aws::EC2
     #   : Spot Fleet requests instances from all of the Spot Instance pools
     #     that you specify.
     #
-    #   lowestPrice
+    #   lowestPrice (not recommended)
     #
-    #   : Spot Fleet requests instances from the lowest priced Spot Instance
+    #   : We don't recommend the `lowestPrice` allocation strategy because
+    #     it has the highest risk of interruption for your Spot Instances.
+    #
+    #     Spot Fleet requests instances from the lowest priced Spot Instance
     #     pool that has available capacity. If the lowest priced pool
     #     doesn't have available capacity, the Spot Instances come from the
     #     next lowest priced pool that has available capacity. If a pool
@@ -58745,6 +61915,12 @@ module Aws::EC2
     #   `LaunchSpecifications`, you can't specify `LaunchTemplateConfigs`.
     #   If you include On-Demand capacity in your request, you must use
     #   `LaunchTemplateConfigs`.
+    #
+    #   <note markdown="1"> If an AMI specified in a launch specification is deregistered or
+    #   disabled, no new instances can be launched from the AMI. For fleets
+    #   of type `maintain`, the target capacity will not be maintained.
+    #
+    #    </note>
     #   @return [Array<Types::SpotFleetLaunchSpecification>]
     #
     # @!attribute [rw] launch_template_configs
@@ -58797,8 +61973,8 @@ module Aws::EC2
     #   `onDemandMaxTotalPrice` does not account for surplus credits, and,
     #   if you use surplus credits, your final cost might be higher than
     #   what you specified for `onDemandMaxTotalPrice`. For more
-    #   information, see [Surplus credits can incur charges][1] in the *EC2
-    #   User Guide*.
+    #   information, see [Surplus credits can incur charges][1] in the
+    #   *Amazon EC2 User Guide*.
     #
     #    </note>
     #
@@ -58824,7 +62000,8 @@ module Aws::EC2
     #   `spotMaxTotalPrice` does not account for surplus credits, and, if
     #   you use surplus credits, your final cost might be higher than what
     #   you specified for `spotMaxTotalPrice`. For more information, see
-    #   [Surplus credits can incur charges][1] in the *EC2 User Guide*.
+    #   [Surplus credits can incur charges][1] in the *Amazon EC2 User
+    #   Guide*.
     #
     #    </note>
     #
@@ -58908,10 +62085,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] target_capacity_unit_type
-    #   The unit for the target capacity. `TargetCapacityUnitType` can only
-    #   be specified when `InstanceRequirements` is specified.
+    #   The unit for the target capacity. You can specify this parameter
+    #   only when using attribute-based instance type selection.
     #
-    #   Default: `units` (translates to number of instances)
+    #   Default: `units` (the number of instances)
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
@@ -59049,7 +62226,7 @@ module Aws::EC2
     #   The state of the Spot Instance request. Spot request status
     #   information helps track your Spot Instance requests. For more
     #   information, see [Spot request status][1] in the *Amazon EC2 User
-    #   Guide for Linux Instances*.
+    #   Guide*.
     #
     #
     #
@@ -59142,7 +62319,7 @@ module Aws::EC2
     #
     # @!attribute [rw] code
     #   The status code. For a list of status codes, see [Spot request
-    #   status codes][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #   status codes][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -59175,7 +62352,7 @@ module Aws::EC2
     #   The Spot Instance replacement strategy to use when Amazon EC2 emits
     #   a signal that your Spot Instance is at an elevated risk of being
     #   interrupted. For more information, see [Capacity rebalancing][1] in
-    #   the *Amazon EC2 User Guide for Linux Instances*.
+    #   the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -59232,8 +62409,25 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] instance_interruption_behavior
-    #   The behavior when a Spot Instance is interrupted. The default is
-    #   `terminate`.
+    #   The behavior when a Spot Instance is interrupted.
+    #
+    #   If `Configured` (for [ `HibernationOptions` ][1]) is set to `true`,
+    #   the `InstanceInterruptionBehavior` parameter is automatically set to
+    #   `hibernate`. If you set it to `stop` or `terminate`, you'll get an
+    #   error.
+    #
+    #   If `Configured` (for [ `HibernationOptions` ][1]) is set to `false`
+    #   or `null`, the `InstanceInterruptionBehavior` parameter is
+    #   automatically set to `terminate`. You can also set it to `stop` or
+    #   `hibernate`.
+    #
+    #   For more information, see [Interruption behavior][2] in the *Amazon
+    #   EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/interruption-behavior.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotMarketOptions AWS API Documentation
@@ -59288,9 +62482,12 @@ module Aws::EC2
     #   : EC2 Fleet requests instances from all of the Spot Instance pools
     #     that you specify.
     #
-    #   lowest-price
+    #   lowest-price (not recommended)
     #
-    #   : EC2 Fleet requests instances from the lowest priced Spot Instance
+    #   : We don't recommend the `lowest-price` allocation strategy because
+    #     it has the highest risk of interruption for your Spot Instances.
+    #
+    #     EC2 Fleet requests instances from the lowest priced Spot Instance
     #     pool that has available capacity. If the lowest priced pool
     #     doesn't have available capacity, the Spot Instances come from the
     #     next lowest priced pool that has available capacity. If a pool
@@ -59353,11 +62550,11 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] min_target_capacity
-    #   The minimum target capacity for Spot Instances in the fleet. If the
-    #   minimum target capacity is not reached, the fleet launches no
-    #   instances.
+    #   The minimum target capacity for Spot Instances in the fleet. If this
+    #   minimum capacity isn't reached, no instances are launched.
     #
-    #   Supported only for fleets of type `instant`.
+    #   Constraints: Maximum value of `1000`. Supported only for fleets of
+    #   type `instant`.
     #
     #   At least one of the following must be specified:
     #   `SingleAvailabilityZone` \| `SingleInstanceType`
@@ -59379,7 +62576,7 @@ module Aws::EC2
     #   `maxTotalPrice` does not account for surplus credits, and, if you
     #   use surplus credits, your final cost might be higher than what you
     #   specified for `maxTotalPrice`. For more information, see [Surplus
-    #   credits can incur charges][1] in the *EC2 User Guide*.
+    #   credits can incur charges][1] in the *Amazon EC2 User Guide*.
     #
     #    </note>
     #
@@ -59443,9 +62640,12 @@ module Aws::EC2
     #   : EC2 Fleet requests instances from all of the Spot Instance pools
     #     that you specify.
     #
-    #   lowest-price
+    #   lowest-price (not recommended)
     #
-    #   : EC2 Fleet requests instances from the lowest priced Spot Instance
+    #   : We don't recommend the `lowest-price` allocation strategy because
+    #     it has the highest risk of interruption for your Spot Instances.
+    #
+    #     EC2 Fleet requests instances from the lowest priced Spot Instance
     #     pool that has available capacity. If the lowest priced pool
     #     doesn't have available capacity, the Spot Instances come from the
     #     next lowest priced pool that has available capacity. If a pool
@@ -59507,11 +62707,11 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] min_target_capacity
-    #   The minimum target capacity for Spot Instances in the fleet. If the
-    #   minimum target capacity is not reached, the fleet launches no
-    #   instances.
+    #   The minimum target capacity for Spot Instances in the fleet. If this
+    #   minimum capacity isn't reached, no instances are launched.
     #
-    #   Supported only for fleets of type `instant`.
+    #   Constraints: Maximum value of `1000`. Supported only for fleets of
+    #   type `instant`.
     #
     #   At least one of the following must be specified:
     #   `SingleAvailabilityZone` \| `SingleInstanceType`
@@ -59533,7 +62733,7 @@ module Aws::EC2
     #   `MaxTotalPrice` does not account for surplus credits, and, if you
     #   use surplus credits, your final cost might be higher than what you
     #   specified for `MaxTotalPrice`. For more information, see [Surplus
-    #   credits can incur charges][1] in the *EC2 User Guide*.
+    #   credits can incur charges][1] in the *Amazon EC2 User Guide*.
     #
     #    </note>
     #
@@ -59666,12 +62866,13 @@ module Aws::EC2
     # Describes a stale rule in a security group.
     #
     # @!attribute [rw] from_port
-    #   The start of the port range for the TCP and UDP protocols, or an
-    #   ICMP type number. A value of -1 indicates all ICMP types.
+    #   If the protocol is TCP or UDP, this is the start of the port range.
+    #   If the protocol is ICMP or ICMPv6, this is the ICMP type or -1 (all
+    #   ICMP types).
     #   @return [Integer]
     #
     # @!attribute [rw] ip_protocol
-    #   The IP protocol name (for `tcp`, `udp`, and `icmp`) or number (see
+    #   The IP protocol name (`tcp`, `udp`, `icmp`, `icmpv6`) or number (see
     #   [Protocol Numbers)][1].
     #
     #
@@ -59688,8 +62889,9 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] to_port
-    #   The end of the port range for the TCP and UDP protocols, or an ICMP
-    #   type number. A value of `-1` indicates all ICMP types.
+    #   If the protocol is TCP or UDP, this is the end of the port range. If
+    #   the protocol is ICMP or ICMPv6, this is the ICMP code or -1 (all
+    #   ICMP codes).
     #   @return [Integer]
     #
     # @!attribute [rw] user_id_group_pairs
@@ -59812,7 +63014,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StartNetworkInsightsAccessScopeAnalysisRequest AWS API Documentation
@@ -59873,7 +63075,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StartNetworkInsightsAnalysisRequest AWS API Documentation
@@ -59963,7 +63165,7 @@ module Aws::EC2
     #     because of an increase in the Spot price.
     #
     #   * `Client.InstanceInitiatedShutdown`: The instance was shut down
-    #     using the `shutdown -h` command from the instance.
+    #     from the operating system of the instance.
     #
     #   * `Client.InstanceTerminated`: The instance was terminated or
     #     rebooted during AMI creation.
@@ -60164,6 +63366,15 @@ module Aws::EC2
     # @!attribute [rw] map_public_ip_on_launch
     #   Indicates whether instances launched in this subnet receive a public
     #   IPv4 address.
+    #
+    #   Amazon Web Services charges for all public IPv4 addresses, including
+    #   public IPv4 addresses associated with running instances and Elastic
+    #   IP addresses. For more information, see the *Public IPv4 Address*
+    #   tab on the [Amazon VPC pricing page][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/vpc/pricing/
     #   @return [Boolean]
     #
     # @!attribute [rw] map_customer_owned_ip_on_launch
@@ -60573,8 +63784,8 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptions
     #
     # @!attribute [rw] total_target_capacity
-    #   The number of units to request, filled using
-    #   `DefaultTargetCapacityType`.
+    #   The number of units to request, filled the default target capacity
+    #   type.
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_target_capacity
@@ -60590,15 +63801,11 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] default_target_capacity_type
-    #   The default `TotalTargetCapacity`, which is either `Spot` or
-    #   `On-Demand`.
+    #   The default target capacity type.
     #   @return [String]
     #
     # @!attribute [rw] target_capacity_unit_type
-    #   The unit for the target capacity. `TargetCapacityUnitType` can only
-    #   be specified when `InstanceRequirements` is specified.
-    #
-    #   Default: `units` (translates to number of instances)
+    #   The unit for the target capacity.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecification AWS API Documentation
@@ -60627,7 +63834,7 @@ module Aws::EC2
     # request, EC2 Fleet will launch instances until it reaches the maximum
     # amount that you're willing to pay. When the maximum amount you're
     # willing to pay is reached, the fleet stops launching instances even if
-    # it hasn’t met the target capacity. The `MaxTotalPrice` parameters are
+    # it hasn't met the target capacity. The `MaxTotalPrice` parameters are
     # located in [OnDemandOptionsRequest][1] and [SpotOptionsRequest][2].
     #
     #
@@ -60636,8 +63843,8 @@ module Aws::EC2
     # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_SpotOptionsRequest
     #
     # @!attribute [rw] total_target_capacity
-    #   The number of units to request, filled using
-    #   `DefaultTargetCapacityType`.
+    #   The number of units to request, filled using the default target
+    #   capacity type.
     #   @return [Integer]
     #
     # @!attribute [rw] on_demand_target_capacity
@@ -60649,15 +63856,14 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] default_target_capacity_type
-    #   The default `TotalTargetCapacity`, which is either `Spot` or
-    #   `On-Demand`.
+    #   The default target capacity type.
     #   @return [String]
     #
     # @!attribute [rw] target_capacity_unit_type
-    #   The unit for the target capacity. `TargetCapacityUnitType` can only
-    #   be specified when `InstanceRequirements` is specified.
+    #   The unit for the target capacity. You can specify this parameter
+    #   only when using attributed-based instance type selection.
     #
-    #   Default: `units` (translates to number of instances)
+    #   Default: `units` (the number of instances)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecificationRequest AWS API Documentation
@@ -61079,6 +64285,10 @@ module Aws::EC2
     #   The description of the Traffic Mirror rule.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Tags on Traffic Mirroring filter rules.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorFilterRule AWS API Documentation
     #
     class TrafficMirrorFilterRule < Struct.new(
@@ -61092,7 +64302,8 @@ module Aws::EC2
       :source_port_range,
       :destination_cidr_block,
       :source_cidr_block,
-      :description)
+      :description,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -61983,6 +65194,22 @@ module Aws::EC2
     #   Indicates whether DNS support is enabled.
     #   @return [String]
     #
+    # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
+    #   Enables you to reference a security group across VPCs attached to a
+    #   transit gateway. Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
+    #   @return [String]
+    #
     # @!attribute [rw] multicast_support
     #   Indicates whether multicast is enabled on the transit gateway
     #   @return [String]
@@ -61999,6 +65226,7 @@ module Aws::EC2
       :propagation_default_route_table_id,
       :vpn_ecmp_support,
       :dns_support,
+      :security_group_referencing_support,
       :multicast_support)
       SENSITIVE = []
       include Aws::Structure
@@ -62364,6 +65592,22 @@ module Aws::EC2
     #   Enable or disable DNS support. Enabled by default.
     #   @return [String]
     #
+    # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
+    #   Enables you to reference a security group across VPCs attached to a
+    #   transit gateway. Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
+    #   @return [String]
+    #
     # @!attribute [rw] multicast_support
     #   Indicates whether multicast is enabled on the transit gateway
     #   @return [String]
@@ -62383,6 +65627,7 @@ module Aws::EC2
       :default_route_table_propagation,
       :vpn_ecmp_support,
       :dns_support,
+      :security_group_referencing_support,
       :multicast_support,
       :transit_gateway_cidr_blocks)
       SENSITIVE = []
@@ -62740,6 +65985,22 @@ module Aws::EC2
     #   Indicates whether DNS support is enabled.
     #   @return [String]
     #
+    # @!attribute [rw] security_group_referencing_support
+    #   <note markdown="1"> This parameter is in preview and may not be available for your
+    #   account.
+    #
+    #    </note>
+    #
+    #   Enables you to reference a security group across VPCs attached to a
+    #   transit gateway. Use this option to simplify security group
+    #   management and control of instance-to-instance traffic across VPCs
+    #   that are connected by transit gateway. You can also use this option
+    #   to migrate from VPC peering (which was the only option that
+    #   supported security group referencing) to transit gateways (which now
+    #   also support security group referencing). This option is disabled by
+    #   default and there are no additional costs to use this feature.
+    #   @return [String]
+    #
     # @!attribute [rw] ipv_6_support
     #   Indicates whether IPv6 support is disabled.
     #   @return [String]
@@ -62752,17 +66013,13 @@ module Aws::EC2
     #
     class TransitGatewayVpcAttachmentOptions < Struct.new(
       :dns_support,
+      :security_group_referencing_support,
       :ipv_6_support,
       :appliance_mode_support)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # <note markdown="1"> Currently available in **limited preview only**. If you are interested
-    # in using this feature, contact your account manager.
-    #
-    #  </note>
-    #
     # Information about an association between a branch network interface
     # with a trunk network interface.
     #
@@ -63051,6 +66308,38 @@ module Aws::EC2
     class UnassignPrivateNatGatewayAddressResult < Struct.new(
       :nat_gateway_id,
       :nat_gateway_addresses)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot to unlock.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnlockSnapshotRequest AWS API Documentation
+    #
+    class UnlockSnapshotRequest < Struct.new(
+      :snapshot_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnlockSnapshotResult AWS API Documentation
+    #
+    class UnlockSnapshotResult < Struct.new(
+      :snapshot_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -63600,7 +66889,7 @@ module Aws::EC2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] sse_specification
-    #   Describes the options in use for server side encryption.
+    #   The options in use for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessEndpoint AWS API Documentation
@@ -63741,7 +67030,7 @@ module Aws::EC2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] sse_specification
-    #   Describes the options in use for server side encryption.
+    #   The options in use for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessGroup AWS API Documentation
@@ -63788,7 +67077,7 @@ module Aws::EC2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] fips_enabled
-    #   Describes whether support for Federal Information Processing
+    #   Indicates whether support for Federal Information Processing
     #   Standards (FIPS) is enabled on the instance.
     #   @return [Boolean]
     #
@@ -63946,13 +67235,14 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessLogKinesisDataFirehoseDestinationOptions]
     #
     # @!attribute [rw] log_version
-    #   The logging version to use.
+    #   The logging version.
     #
     #   Valid values: `ocsf-0.1` \| `ocsf-1.0.0-rc.2`
     #   @return [String]
     #
     # @!attribute [rw] include_trust_context
-    #   Include trust data sent by trust providers into the logs.
+    #   Indicates whether to include trust data sent by trust providers in
+    #   the logs.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessLogOptions AWS API Documentation
@@ -64046,11 +67336,11 @@ module Aws::EC2
     #   @return [Types::VerifiedAccessLogKinesisDataFirehoseDestination]
     #
     # @!attribute [rw] log_version
-    #   Describes current setting for the logging version.
+    #   The log version.
     #   @return [String]
     #
     # @!attribute [rw] include_trust_context
-    #   Describes current setting for including trust data into the logs.
+    #   Indicates whether trust data is included in the logs.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessLogs AWS API Documentation
@@ -64090,17 +67380,17 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the options in use for server side encryption.
+    # The options in use for server side encryption.
     #
     # @!attribute [rw] customer_managed_key_enabled
-    #   Describes the use of customer managed KMS keys for server side
-    #   encryption.
+    #   Indicates whether customer managed KMS keys are in use for server
+    #   side encryption.
     #
     #   Valid values: `True` \| `False`
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_arn
-    #   Describes the ARN of the KMS key.
+    #   The ARN of the KMS key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessSseSpecificationResponse AWS API Documentation
@@ -64161,7 +67451,7 @@ module Aws::EC2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] sse_specification
-    #   Describes the options in use for server side encryption.
+    #   The options in use for server side encryption.
     #   @return [Types::VerifiedAccessSseSpecificationResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VerifiedAccessTrustProvider AWS API Documentation
@@ -64224,7 +67514,9 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] last_status_change
-    #   The date and time of the last change in status.
+    #   The date and time of the last change in status. This field is
+    #   updated when changes in IKE (Phase 1), IPSec (Phase 2), or BGP
+    #   status are detected.
     #   @return [Time]
     #
     # @!attribute [rw] outside_ip_address
@@ -64261,6 +67553,10 @@ module Aws::EC2
     # Describes a volume.
     #
     # @!attribute [rw] attachments
+    #   <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #    </note>
+    #
     #   Information about the volume attachments.
     #   @return [Array<Types::VolumeAttachment>]
     #
@@ -64277,9 +67573,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Resource Name (ARN) of the Key Management Service (KMS)
-    #   KMS key that was used to protect the volume encryption key for the
-    #   volume.
+    #   The Amazon Resource Name (ARN) of the KMS key that was used to
+    #   protect the volume encryption key for the volume.
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
@@ -64319,6 +67614,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] fast_restored
+    #   <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #    </note>
+    #
     #   Indicates whether the volume was created using fast snapshot
     #   restore.
     #   @return [Boolean]
@@ -64332,6 +67631,10 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] sse_type
+    #   <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #    </note>
+    #
     #   Reserved for future use.
     #   @return [String]
     #
@@ -64367,10 +67670,16 @@ module Aws::EC2
     #
     # @!attribute [rw] device
     #   The device name.
+    #
+    #   If the volume is attached to a Fargate task, this parameter returns
+    #   `null`.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
+    #
+    #   If the volume is attached to a Fargate task, this parameter returns
+    #   `null`.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -64385,6 +67694,19 @@ module Aws::EC2
     #   Indicates whether the EBS volume is deleted on instance termination.
     #   @return [Boolean]
     #
+    # @!attribute [rw] associated_resource
+    #   The ARN of the Amazon ECS or Fargate task to which the volume is
+    #   attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_owning_service
+    #   The service principal of Amazon Web Services service that owns the
+    #   underlying instance to which the volume is attached.
+    #
+    #   This parameter is returned only for volumes that are attached to
+    #   Fargate tasks.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeAttachment AWS API Documentation
     #
     class VolumeAttachment < Struct.new(
@@ -64393,7 +67715,9 @@ module Aws::EC2
       :instance_id,
       :state,
       :volume_id,
-      :delete_on_termination)
+      :delete_on_termination,
+      :associated_resource,
+      :instance_owning_service)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -65610,7 +68934,7 @@ module Aws::EC2
     #
     #   Constraints: A value between 60 and half of `Phase2LifetimeSeconds`.
     #
-    #   Default: `540`
+    #   Default: `270`
     #   @return [Integer]
     #
     # @!attribute [rw] rekey_fuzz_percentage

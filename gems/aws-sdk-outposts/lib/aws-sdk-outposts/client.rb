@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Outposts
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Outposts
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::Outposts
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,56 +347,98 @@ module Aws::Outposts
     #   @option options [Aws::Outposts::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Outposts::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
+
+    # Cancels the capacity task.
+    #
+    # @option params [required, String] :capacity_task_id
+    #   ID of the capacity task that you want to cancel.
+    #
+    # @option params [required, String] :outpost_identifier
+    #   ID or ARN of the Outpost associated with the capacity task that you
+    #   want to cancel.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_capacity_task({
+    #     capacity_task_id: "CapacityTaskId", # required
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CancelCapacityTask AWS API Documentation
+    #
+    # @overload cancel_capacity_task(params = {})
+    # @param [Hash] params ({})
+    def cancel_capacity_task(params = {}, options = {})
+      req = build_request(:cancel_capacity_task, params)
+      req.send_request(options)
+    end
 
     # Cancels the specified order for an Outpost.
     #
@@ -453,7 +505,7 @@ module Aws::Outposts
     #   resp.order.line_items[0].quantity #=> Integer
     #   resp.order.line_items[0].status #=> String, one of "PREPARING", "BUILDING", "SHIPPED", "DELIVERED", "INSTALLING", "INSTALLED", "ERROR", "CANCELLED", "REPLACED"
     #   resp.order.line_items[0].shipment_information.shipment_tracking_number #=> String
-    #   resp.order.line_items[0].shipment_information.shipment_carrier #=> String, one of "DHL", "DBS", "FEDEX", "UPS"
+    #   resp.order.line_items[0].shipment_information.shipment_carrier #=> String, one of "DHL", "DBS", "FEDEX", "UPS", "EXPEDITORS"
     #   resp.order.line_items[0].asset_information_list #=> Array
     #   resp.order.line_items[0].asset_information_list[0].asset_id #=> String
     #   resp.order.line_items[0].asset_information_list[0].mac_address_list #=> Array
@@ -665,7 +717,7 @@ module Aws::Outposts
     # Deletes the specified Outpost.
     #
     # @option params [required, String] :outpost_id
-    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #   The ID or ARN of the Outpost.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -703,6 +755,59 @@ module Aws::Outposts
     # @param [Hash] params ({})
     def delete_site(params = {}, options = {})
       req = build_request(:delete_site, params)
+      req.send_request(options)
+    end
+
+    # Gets details of the specified capacity task.
+    #
+    # @option params [required, String] :capacity_task_id
+    #   ID of the capacity task.
+    #
+    # @option params [required, String] :outpost_identifier
+    #   ID or ARN of the Outpost associated with the specified capacity task.
+    #
+    # @return [Types::GetCapacityTaskOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCapacityTaskOutput#capacity_task_id #capacity_task_id} => String
+    #   * {Types::GetCapacityTaskOutput#outpost_id #outpost_id} => String
+    #   * {Types::GetCapacityTaskOutput#order_id #order_id} => String
+    #   * {Types::GetCapacityTaskOutput#requested_instance_pools #requested_instance_pools} => Array&lt;Types::InstanceTypeCapacity&gt;
+    #   * {Types::GetCapacityTaskOutput#dry_run #dry_run} => Boolean
+    #   * {Types::GetCapacityTaskOutput#capacity_task_status #capacity_task_status} => String
+    #   * {Types::GetCapacityTaskOutput#failed #failed} => Types::CapacityTaskFailure
+    #   * {Types::GetCapacityTaskOutput#creation_date #creation_date} => Time
+    #   * {Types::GetCapacityTaskOutput#completion_date #completion_date} => Time
+    #   * {Types::GetCapacityTaskOutput#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_capacity_task({
+    #     capacity_task_id: "CapacityTaskId", # required
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_task_id #=> String
+    #   resp.outpost_id #=> String
+    #   resp.order_id #=> String
+    #   resp.requested_instance_pools #=> Array
+    #   resp.requested_instance_pools[0].instance_type #=> String
+    #   resp.requested_instance_pools[0].count #=> Integer
+    #   resp.dry_run #=> Boolean
+    #   resp.capacity_task_status #=> String, one of "REQUESTED", "IN_PROGRESS", "FAILED", "COMPLETED", "CANCELLED"
+    #   resp.failed.reason #=> String
+    #   resp.failed.type #=> String, one of "UNSUPPORTED_CAPACITY_CONFIGURATION"
+    #   resp.creation_date #=> Time
+    #   resp.completion_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetCapacityTask AWS API Documentation
+    #
+    # @overload get_capacity_task(params = {})
+    # @param [Hash] params ({})
+    def get_capacity_task(params = {}, options = {})
+      req = build_request(:get_capacity_task, params)
       req.send_request(options)
     end
 
@@ -823,7 +928,7 @@ module Aws::Outposts
     #   resp.order.line_items[0].quantity #=> Integer
     #   resp.order.line_items[0].status #=> String, one of "PREPARING", "BUILDING", "SHIPPED", "DELIVERED", "INSTALLING", "INSTALLED", "ERROR", "CANCELLED", "REPLACED"
     #   resp.order.line_items[0].shipment_information.shipment_tracking_number #=> String
-    #   resp.order.line_items[0].shipment_information.shipment_carrier #=> String, one of "DHL", "DBS", "FEDEX", "UPS"
+    #   resp.order.line_items[0].shipment_information.shipment_carrier #=> String, one of "DHL", "DBS", "FEDEX", "UPS", "EXPEDITORS"
     #   resp.order.line_items[0].asset_information_list #=> Array
     #   resp.order.line_items[0].asset_information_list[0].asset_id #=> String
     #   resp.order.line_items[0].asset_information_list[0].mac_address_list #=> Array
@@ -848,7 +953,7 @@ module Aws::Outposts
     # Gets information about the specified Outpost.
     #
     # @option params [required, String] :outpost_id
-    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #   The ID or ARN of the Outpost.
     #
     # @return [Types::GetOutpostOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -888,7 +993,7 @@ module Aws::Outposts
     # Gets the instance types for the specified Outpost.
     #
     # @option params [required, String] :outpost_id
-    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #   The ID or ARN of the Outpost.
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -927,6 +1032,54 @@ module Aws::Outposts
     # @param [Hash] params ({})
     def get_outpost_instance_types(params = {}, options = {})
       req = build_request(:get_outpost_instance_types, params)
+      req.send_request(options)
+    end
+
+    # Gets the instance types that an Outpost can support in
+    # `InstanceTypeCapacity`. This will generally include instance types
+    # that are not currently configured and therefore cannot be launched
+    # with the current Outpost capacity configuration.
+    #
+    # @option params [required, String] :outpost_identifier
+    #   The ID or ARN of the Outpost.
+    #
+    # @option params [required, String] :order_id
+    #   The ID for the Amazon Web Services Outposts order.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum page size.
+    #
+    # @option params [String] :next_token
+    #   The pagination token.
+    #
+    # @return [Types::GetOutpostSupportedInstanceTypesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOutpostSupportedInstanceTypesOutput#instance_types #instance_types} => Array&lt;Types::InstanceTypeItem&gt;
+    #   * {Types::GetOutpostSupportedInstanceTypesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_outpost_supported_instance_types({
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #     order_id: "OrderId", # required
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_types #=> Array
+    #   resp.instance_types[0].instance_type #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpostSupportedInstanceTypes AWS API Documentation
+    #
+    # @overload get_outpost_supported_instance_types(params = {})
+    # @param [Hash] params ({})
+    def get_outpost_supported_instance_types(params = {}, options = {})
+      req = build_request(:get_outpost_supported_instance_types, params)
       req.send_request(options)
     end
 
@@ -1082,6 +1235,64 @@ module Aws::Outposts
     # @param [Hash] params ({})
     def list_assets(params = {}, options = {})
       req = build_request(:list_assets, params)
+      req.send_request(options)
+    end
+
+    # Lists the capacity tasks for your Amazon Web Services account.
+    #
+    # Use filters to return specific results. If you specify multiple
+    # filters, the results include only the resources that match all of the
+    # specified filters. For a filter where you can specify multiple values,
+    # the results include items that match any of the values that you
+    # specify for the filter.
+    #
+    # @option params [String] :outpost_identifier_filter
+    #   Filters the results by an Outpost ID or an Outpost ARN.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum page size.
+    #
+    # @option params [String] :next_token
+    #   The pagination token.
+    #
+    # @option params [Array<String>] :capacity_task_status_filter
+    #   A list of statuses. For example, `REQUESTED` or
+    #   `WAITING_FOR_EVACUATION`.
+    #
+    # @return [Types::ListCapacityTasksOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCapacityTasksOutput#capacity_tasks #capacity_tasks} => Array&lt;Types::CapacityTaskSummary&gt;
+    #   * {Types::ListCapacityTasksOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_capacity_tasks({
+    #     outpost_identifier_filter: "OutpostIdentifier",
+    #     max_results: 1,
+    #     next_token: "Token",
+    #     capacity_task_status_filter: ["REQUESTED"], # accepts REQUESTED, IN_PROGRESS, FAILED, COMPLETED, CANCELLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_tasks #=> Array
+    #   resp.capacity_tasks[0].capacity_task_id #=> String
+    #   resp.capacity_tasks[0].outpost_id #=> String
+    #   resp.capacity_tasks[0].order_id #=> String
+    #   resp.capacity_tasks[0].capacity_task_status #=> String, one of "REQUESTED", "IN_PROGRESS", "FAILED", "COMPLETED", "CANCELLED"
+    #   resp.capacity_tasks[0].creation_date #=> Time
+    #   resp.capacity_tasks[0].completion_date #=> Time
+    #   resp.capacity_tasks[0].last_modified_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListCapacityTasks AWS API Documentation
+    #
+    # @overload list_capacity_tasks(params = {})
+    # @param [Hash] params ({})
+    def list_capacity_tasks(params = {}, options = {})
+      req = build_request(:list_capacity_tasks, params)
       req.send_request(options)
     end
 
@@ -1370,6 +1581,77 @@ module Aws::Outposts
       req.send_request(options)
     end
 
+    # Starts the specified capacity task. You can have one active capacity
+    # task for an order.
+    #
+    # @option params [required, String] :outpost_identifier
+    #   The ID or ARN of the Outposts associated with the specified capacity
+    #   task.
+    #
+    # @option params [required, String] :order_id
+    #   The ID of the Amazon Web Services Outposts order associated with the
+    #   specified capacity task.
+    #
+    # @option params [required, Array<Types::InstanceTypeCapacity>] :instance_pools
+    #   The instance pools specified in the capacity task.
+    #
+    # @option params [Boolean] :dry_run
+    #   You can request a dry run to determine if the instance type and
+    #   instance size changes is above or below available instance capacity.
+    #   Requesting a dry run does not make any changes to your plan.
+    #
+    # @return [Types::StartCapacityTaskOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartCapacityTaskOutput#capacity_task_id #capacity_task_id} => String
+    #   * {Types::StartCapacityTaskOutput#outpost_id #outpost_id} => String
+    #   * {Types::StartCapacityTaskOutput#order_id #order_id} => String
+    #   * {Types::StartCapacityTaskOutput#requested_instance_pools #requested_instance_pools} => Array&lt;Types::InstanceTypeCapacity&gt;
+    #   * {Types::StartCapacityTaskOutput#dry_run #dry_run} => Boolean
+    #   * {Types::StartCapacityTaskOutput#capacity_task_status #capacity_task_status} => String
+    #   * {Types::StartCapacityTaskOutput#failed #failed} => Types::CapacityTaskFailure
+    #   * {Types::StartCapacityTaskOutput#creation_date #creation_date} => Time
+    #   * {Types::StartCapacityTaskOutput#completion_date #completion_date} => Time
+    #   * {Types::StartCapacityTaskOutput#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_capacity_task({
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #     order_id: "OrderId", # required
+    #     instance_pools: [ # required
+    #       {
+    #         instance_type: "InstanceTypeName", # required
+    #         count: 1, # required
+    #       },
+    #     ],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.capacity_task_id #=> String
+    #   resp.outpost_id #=> String
+    #   resp.order_id #=> String
+    #   resp.requested_instance_pools #=> Array
+    #   resp.requested_instance_pools[0].instance_type #=> String
+    #   resp.requested_instance_pools[0].count #=> Integer
+    #   resp.dry_run #=> Boolean
+    #   resp.capacity_task_status #=> String, one of "REQUESTED", "IN_PROGRESS", "FAILED", "COMPLETED", "CANCELLED"
+    #   resp.failed.reason #=> String
+    #   resp.failed.type #=> String, one of "UNSUPPORTED_CAPACITY_CONFIGURATION"
+    #   resp.creation_date #=> Time
+    #   resp.completion_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/StartCapacityTask AWS API Documentation
+    #
+    # @overload start_capacity_task(params = {})
+    # @param [Hash] params ({})
+    def start_capacity_task(params = {}, options = {})
+      req = build_request(:start_capacity_task, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> Amazon Web Services uses this action to install Outpost servers.
     #
     #  </note>
@@ -1388,7 +1670,7 @@ module Aws::Outposts
     # [1]: https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html
     # [2]: https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html
     #
-    # @option params [required, String] :device_serial_number
+    # @option params [String] :device_serial_number
     #   The serial number of the dongle.
     #
     # @option params [required, String] :asset_id
@@ -1408,7 +1690,7 @@ module Aws::Outposts
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_connection({
-    #     device_serial_number: "DeviceSerialNumber", # required
+    #     device_serial_number: "DeviceSerialNumber",
     #     asset_id: "AssetId", # required
     #     client_public_key: "WireGuardPublicKey", # required
     #     network_interface_device_index: 1, # required
@@ -1485,7 +1767,7 @@ module Aws::Outposts
     # Updates an Outpost.
     #
     # @option params [required, String] :outpost_id
-    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #   The ID or ARN of the Outpost.
     #
     # @option params [String] :name
     #   The name of the Outpost.
@@ -1833,7 +2115,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

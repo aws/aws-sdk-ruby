@@ -1,0 +1,176 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MarketplaceMetering
+  module Types
+
+    class BatchMeterUsageRequest
+      attr_accessor usage_records: ::Array[Types::UsageRecord]
+      attr_accessor product_code: ::String
+      SENSITIVE: []
+    end
+
+    class BatchMeterUsageResult
+      attr_accessor results: ::Array[Types::UsageRecordResult]
+      attr_accessor unprocessed_records: ::Array[Types::UsageRecord]
+      SENSITIVE: []
+    end
+
+    class CustomerNotEntitledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DisabledApiException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DuplicateRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExpiredTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServiceErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidCustomerIdentifierException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidEndpointRegionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidProductCodeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPublicKeyVersionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRegionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTagException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidUsageAllocationsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidUsageDimensionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MeterUsageRequest
+      attr_accessor product_code: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor usage_dimension: ::String
+      attr_accessor usage_quantity: ::Integer
+      attr_accessor dry_run: bool
+      attr_accessor usage_allocations: ::Array[Types::UsageAllocation]
+      SENSITIVE: []
+    end
+
+    class MeterUsageResult
+      attr_accessor metering_record_id: ::String
+      SENSITIVE: []
+    end
+
+    class PlatformNotSupportedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterUsageRequest
+      attr_accessor product_code: ::String
+      attr_accessor public_key_version: ::Integer
+      attr_accessor nonce: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterUsageResult
+      attr_accessor public_key_rotation_timestamp: ::Time
+      attr_accessor signature: ::String
+      SENSITIVE: []
+    end
+
+    class ResolveCustomerRequest
+      attr_accessor registration_token: ::String
+      SENSITIVE: []
+    end
+
+    class ResolveCustomerResult
+      attr_accessor customer_identifier: ::String
+      attr_accessor product_code: ::String
+      attr_accessor customer_aws_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimestampOutOfBoundsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UsageAllocation
+      attr_accessor allocated_usage_quantity: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UsageRecord
+      attr_accessor timestamp: ::Time
+      attr_accessor customer_identifier: ::String
+      attr_accessor dimension: ::String
+      attr_accessor quantity: ::Integer
+      attr_accessor usage_allocations: ::Array[Types::UsageAllocation]
+      SENSITIVE: []
+    end
+
+    class UsageRecordResult
+      attr_accessor usage_record: Types::UsageRecord
+      attr_accessor metering_record_id: ::String
+      attr_accessor status: ("Success" | "CustomerNotSubscribed" | "DuplicateRecord")
+      SENSITIVE: []
+    end
+  end
+end

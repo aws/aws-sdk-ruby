@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::OSIS
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::OSIS
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::OSIS
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::OSIS
     #   @option options [Aws::OSIS::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::OSIS::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -420,6 +445,13 @@ module Aws::OSIS
     #   pipeline. If you don't specify these values, OpenSearch Ingestion
     #   creates the pipeline with a public endpoint.
     #
+    # @option params [Types::BufferOptions] :buffer_options
+    #   Key-value pairs to configure persistent buffering for the pipeline.
+    #
+    # @option params [Types::EncryptionAtRestOptions] :encryption_at_rest_options
+    #   Key-value pairs to configure encryption for data that is written to a
+    #   persistent buffer.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   List of tags to add to the pipeline upon creation.
     #
@@ -443,6 +475,17 @@ module Aws::OSIS
     #     vpc_options: {
     #       subnet_ids: ["SubnetId"], # required
     #       security_group_ids: ["SecurityGroupId"],
+    #       vpc_attachment_options: {
+    #         attach_to_vpc: false, # required
+    #         cidr_block: "CidrBlock",
+    #       },
+    #       vpc_endpoint_management: "CUSTOMER", # accepts CUSTOMER, SERVICE
+    #     },
+    #     buffer_options: {
+    #       persistent_buffer_enabled: false, # required
+    #     },
+    #     encryption_at_rest_options: {
+    #       kms_key_arn: "KmsKeyArn", # required
     #     },
     #     tags: [
     #       {
@@ -474,6 +517,21 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.attach_to_vpc #=> Boolean
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.cidr_block #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_endpoint_management #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
+    #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
+    #   resp.pipeline.vpc_endpoint_service #=> String
+    #   resp.pipeline.service_vpc_endpoints #=> Array
+    #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
+    #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.pipeline.destinations #=> Array
+    #   resp.pipeline.destinations[0].service_name #=> String
+    #   resp.pipeline.destinations[0].endpoint #=> String
+    #   resp.pipeline.tags #=> Array
+    #   resp.pipeline.tags[0].key #=> String
+    #   resp.pipeline.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/CreatePipeline AWS API Documentation
     #
@@ -514,7 +572,7 @@ module Aws::OSIS
     # Retrieves information about an OpenSearch Ingestion pipeline.
     #
     # @option params [required, String] :pipeline_name
-    #   The name of the pipeline to get information about.
+    #   The name of the pipeline.
     #
     # @return [Types::GetPipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -548,6 +606,21 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.attach_to_vpc #=> Boolean
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.cidr_block #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_endpoint_management #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
+    #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
+    #   resp.pipeline.vpc_endpoint_service #=> String
+    #   resp.pipeline.service_vpc_endpoints #=> Array
+    #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
+    #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.pipeline.destinations #=> Array
+    #   resp.pipeline.destinations[0].service_name #=> String
+    #   resp.pipeline.destinations[0].endpoint #=> String
+    #   resp.pipeline.tags #=> Array
+    #   resp.pipeline.tags[0].key #=> String
+    #   resp.pipeline.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/GetPipeline AWS API Documentation
     #
@@ -570,20 +643,30 @@ module Aws::OSIS
     # @option params [required, String] :blueprint_name
     #   The name of the blueprint to retrieve.
     #
+    # @option params [String] :format
+    #   The format format of the blueprint to retrieve.
+    #
     # @return [Types::GetPipelineBlueprintResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPipelineBlueprintResponse#blueprint #blueprint} => Types::PipelineBlueprint
+    #   * {Types::GetPipelineBlueprintResponse#format #format} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_pipeline_blueprint({
     #     blueprint_name: "String", # required
+    #     format: "BlueprintFormat",
     #   })
     #
     # @example Response structure
     #
     #   resp.blueprint.blueprint_name #=> String
     #   resp.blueprint.pipeline_configuration_body #=> String
+    #   resp.blueprint.display_name #=> String
+    #   resp.blueprint.display_description #=> String
+    #   resp.blueprint.service #=> String
+    #   resp.blueprint.use_case #=> String
+    #   resp.format #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/GetPipelineBlueprint AWS API Documentation
     #
@@ -654,6 +737,10 @@ module Aws::OSIS
     #
     #   resp.blueprints #=> Array
     #   resp.blueprints[0].blueprint_name #=> String
+    #   resp.blueprints[0].display_name #=> String
+    #   resp.blueprints[0].display_description #=> String
+    #   resp.blueprints[0].service #=> String
+    #   resp.blueprints[0].use_case #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/ListPipelineBlueprints AWS API Documentation
     #
@@ -707,6 +794,12 @@ module Aws::OSIS
     #   resp.pipelines[0].max_units #=> Integer
     #   resp.pipelines[0].created_at #=> Time
     #   resp.pipelines[0].last_updated_at #=> Time
+    #   resp.pipelines[0].destinations #=> Array
+    #   resp.pipelines[0].destinations[0].service_name #=> String
+    #   resp.pipelines[0].destinations[0].endpoint #=> String
+    #   resp.pipelines[0].tags #=> Array
+    #   resp.pipelines[0].tags[0].key #=> String
+    #   resp.pipelines[0].tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/ListPipelines AWS API Documentation
     #
@@ -795,6 +888,21 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.attach_to_vpc #=> Boolean
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.cidr_block #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_endpoint_management #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
+    #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
+    #   resp.pipeline.vpc_endpoint_service #=> String
+    #   resp.pipeline.service_vpc_endpoints #=> Array
+    #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
+    #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.pipeline.destinations #=> Array
+    #   resp.pipeline.destinations[0].service_name #=> String
+    #   resp.pipeline.destinations[0].endpoint #=> String
+    #   resp.pipeline.tags #=> Array
+    #   resp.pipeline.tags[0].key #=> String
+    #   resp.pipeline.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/StartPipeline AWS API Documentation
     #
@@ -847,6 +955,21 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.attach_to_vpc #=> Boolean
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.cidr_block #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_endpoint_management #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
+    #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
+    #   resp.pipeline.vpc_endpoint_service #=> String
+    #   resp.pipeline.service_vpc_endpoints #=> Array
+    #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
+    #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.pipeline.destinations #=> Array
+    #   resp.pipeline.destinations[0].service_name #=> String
+    #   resp.pipeline.destinations[0].endpoint #=> String
+    #   resp.pipeline.tags #=> Array
+    #   resp.pipeline.tags[0].key #=> String
+    #   resp.pipeline.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/StopPipeline AWS API Documentation
     #
@@ -950,6 +1073,13 @@ module Aws::OSIS
     # @option params [Types::LogPublishingOptions] :log_publishing_options
     #   Key-value pairs to configure log publishing.
     #
+    # @option params [Types::BufferOptions] :buffer_options
+    #   Key-value pairs to configure persistent buffering for the pipeline.
+    #
+    # @option params [Types::EncryptionAtRestOptions] :encryption_at_rest_options
+    #   Key-value pairs to configure encryption for data that is written to a
+    #   persistent buffer.
+    #
     # @return [Types::UpdatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePipelineResponse#pipeline #pipeline} => Types::Pipeline
@@ -966,6 +1096,12 @@ module Aws::OSIS
     #       cloud_watch_log_destination: {
     #         log_group: "LogGroup", # required
     #       },
+    #     },
+    #     buffer_options: {
+    #       persistent_buffer_enabled: false, # required
+    #     },
+    #     encryption_at_rest_options: {
+    #       kms_key_arn: "KmsKeyArn", # required
     #     },
     #   })
     #
@@ -991,6 +1127,21 @@ module Aws::OSIS
     #   resp.pipeline.vpc_endpoints[0].vpc_options.subnet_ids[0] #=> String
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.pipeline.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.attach_to_vpc #=> Boolean
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_attachment_options.cidr_block #=> String
+    #   resp.pipeline.vpc_endpoints[0].vpc_options.vpc_endpoint_management #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.pipeline.buffer_options.persistent_buffer_enabled #=> Boolean
+    #   resp.pipeline.encryption_at_rest_options.kms_key_arn #=> String
+    #   resp.pipeline.vpc_endpoint_service #=> String
+    #   resp.pipeline.service_vpc_endpoints #=> Array
+    #   resp.pipeline.service_vpc_endpoints[0].service_name #=> String, one of "OPENSEARCH_SERVERLESS"
+    #   resp.pipeline.service_vpc_endpoints[0].vpc_endpoint_id #=> String
+    #   resp.pipeline.destinations #=> Array
+    #   resp.pipeline.destinations[0].service_name #=> String
+    #   resp.pipeline.destinations[0].endpoint #=> String
+    #   resp.pipeline.tags #=> Array
+    #   resp.pipeline.tags[0].key #=> String
+    #   resp.pipeline.tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/osis-2022-01-01/UpdatePipeline AWS API Documentation
     #
@@ -1054,7 +1205,7 @@ module Aws::OSIS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-osis'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

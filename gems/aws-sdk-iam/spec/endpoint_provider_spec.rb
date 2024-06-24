@@ -388,6 +388,34 @@ module Aws::IAM
       end
     end
 
+    context 'For region eu-isoe-west-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"eu-isoe-west-1"}]}, "url"=>"https://iam.eu-isoe-west-1.cloud.adc-e.uk"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"eu-isoe-west-1", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context 'For region us-isof-south-1 with FIPS disabled and DualStack disabled' do
+      let(:expected) do
+        {"endpoint"=>{"properties"=>{"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"iam", "signingRegion"=>"us-isof-south-1"}]}, "url"=>"https://iam.us-isof-south-1.csp.hci.ic.gov"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{:region=>"us-isof-south-1", :use_fips=>false, :use_dual_stack=>false})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
     context 'For custom endpoint with region set and fips disabled and dualstack disabled' do
       let(:expected) do
         {"endpoint"=>{"url"=>"https://example.com"}}

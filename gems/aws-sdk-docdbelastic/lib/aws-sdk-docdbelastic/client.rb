@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::DocDBElastic
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::DocDBElastic
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::DocDBElastic
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::DocDBElastic
     #   @option options [Aws::DocDBElastic::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::DocDBElastic::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -388,11 +413,103 @@ module Aws::DocDBElastic
 
     # @!group API Operations
 
-    # Creates a new Elastic DocumentDB cluster and returns its Cluster
-    # structure.
+    # Copies a snapshot of an elastic cluster.
+    #
+    # @option params [Boolean] :copy_tags
+    #   Set to `true` to copy all tags from the source cluster snapshot to the
+    #   target elastic cluster snapshot. The default is `false`.
+    #
+    # @option params [String] :kms_key_id
+    #   The Amazon Web Services KMS key ID for an encrypted elastic cluster
+    #   snapshot. The Amazon Web Services KMS key ID is the Amazon Resource
+    #   Name (ARN), Amazon Web Services KMS key identifier, or the Amazon Web
+    #   Services KMS key alias for the Amazon Web Services KMS encryption key.
+    #
+    #   If you copy an encrypted elastic cluster snapshot from your Amazon Web
+    #   Services account, you can specify a value for `KmsKeyId` to encrypt
+    #   the copy with a new Amazon Web ServicesS KMS encryption key. If you
+    #   don't specify a value for `KmsKeyId`, then the copy of the elastic
+    #   cluster snapshot is encrypted with the same `AWS` KMS key as the
+    #   source elastic cluster snapshot.
+    #
+    #   To copy an encrypted elastic cluster snapshot to another Amazon Web
+    #   Services region, set `KmsKeyId` to the Amazon Web Services KMS key ID
+    #   that you want to use to encrypt the copy of the elastic cluster
+    #   snapshot in the destination region. Amazon Web Services KMS encryption
+    #   keys are specific to the Amazon Web Services region that they are
+    #   created in, and you can't use encryption keys from one Amazon Web
+    #   Services region in another Amazon Web Services region.
+    #
+    #   If you copy an unencrypted elastic cluster snapshot and specify a
+    #   value for the `KmsKeyId` parameter, an error is returned.
+    #
+    # @option params [required, String] :snapshot_arn
+    #   The Amazon Resource Name (ARN) identifier of the elastic cluster
+    #   snapshot.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to be assigned to the elastic cluster snapshot.
+    #
+    # @option params [required, String] :target_snapshot_name
+    #   The identifier of the new elastic cluster snapshot to create from the
+    #   source cluster snapshot. This parameter is not case sensitive.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens.
+    #
+    #   * The first character must be a letter.
+    #
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #
+    #   Example: `elastic-cluster-snapshot-5`
+    #
+    # @return [Types::CopyClusterSnapshotOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CopyClusterSnapshotOutput#snapshot #snapshot} => Types::ClusterSnapshot
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_cluster_snapshot({
+    #     copy_tags: false,
+    #     kms_key_id: "String",
+    #     snapshot_arn: "String", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     target_snapshot_name: "CopyClusterSnapshotInputTargetSnapshotNameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot.admin_user_name #=> String
+    #   resp.snapshot.cluster_arn #=> String
+    #   resp.snapshot.cluster_creation_time #=> String
+    #   resp.snapshot.kms_key_id #=> String
+    #   resp.snapshot.snapshot_arn #=> String
+    #   resp.snapshot.snapshot_creation_time #=> String
+    #   resp.snapshot.snapshot_name #=> String
+    #   resp.snapshot.snapshot_type #=> String, one of "MANUAL", "AUTOMATED"
+    #   resp.snapshot.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.snapshot.subnet_ids #=> Array
+    #   resp.snapshot.subnet_ids[0] #=> String
+    #   resp.snapshot.vpc_security_group_ids #=> Array
+    #   resp.snapshot.vpc_security_group_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/CopyClusterSnapshot AWS API Documentation
+    #
+    # @overload copy_cluster_snapshot(params = {})
+    # @param [Hash] params ({})
+    def copy_cluster_snapshot(params = {}, options = {})
+      req = build_request(:copy_cluster_snapshot, params)
+      req.send_request(options)
+    end
+
+    # Creates a new Amazon DocumentDB elastic cluster and returns its
+    # cluster structure.
     #
     # @option params [required, String] :admin_user_name
-    #   The name of the Elastic DocumentDB cluster administrator.
+    #   The name of the Amazon DocumentDB elastic clusters administrator.
     #
     #   *Constraints*:
     #
@@ -403,8 +520,8 @@ module Aws::DocDBElastic
     #   * Cannot be a reserved word.
     #
     # @option params [required, String] :admin_user_password
-    #   The password for the Elastic DocumentDB cluster administrator and can
-    #   contain any printable ASCII characters.
+    #   The password for the Amazon DocumentDB elastic clusters administrator.
+    #   The password can contain any printable ASCII characters.
     #
     #   *Constraints*:
     #
@@ -414,17 +531,22 @@ module Aws::DocDBElastic
     #     symbol (@).
     #
     # @option params [required, String] :auth_type
-    #   The authentication type for the Elastic DocumentDB cluster.
+    #   The authentication type used to determine where to fetch the password
+    #   used for accessing the elastic cluster. Valid types are `PLAIN_TEXT`
+    #   or `SECRET_ARN`.
+    #
+    # @option params [Integer] :backup_retention_period
+    #   The number of days for which automatic snapshots are retained.
     #
     # @option params [String] :client_token
-    #   The client token for the Elastic DocumentDB cluster.
+    #   The client token for the elastic cluster.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :cluster_name
-    #   The name of the new Elastic DocumentDB cluster. This parameter is
-    #   stored as a lowercase string.
+    #   The name of the new elastic cluster. This parameter is stored as a
+    #   lowercase string.
     #
     #   *Constraints*:
     #
@@ -437,17 +559,21 @@ module Aws::DocDBElastic
     #   *Example*: `my-cluster`
     #
     # @option params [String] :kms_key_id
-    #   The KMS key identifier to use to encrypt the new Elastic DocumentDB
-    #   cluster.
+    #   The KMS key identifier to use to encrypt the new elastic cluster.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
     #   encryption key. If you are creating a cluster using the same Amazon
     #   account that owns this KMS encryption key, you can use the KMS key
     #   alias instead of the ARN as the KMS encryption key.
     #
-    #   If an encryption key is not specified, Elastic DocumentDB uses the
+    #   If an encryption key is not specified, Amazon DocumentDB uses the
     #   default encryption key that KMS creates for your account. Your account
     #   has a different default encryption key for each Amazon Region.
+    #
+    # @option params [String] :preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, as determined by the
+    #   `backupRetentionPeriod`.
     #
     # @option params [String] :preferred_maintenance_window
     #   The weekly time range during which system maintenance can occur, in
@@ -464,20 +590,27 @@ module Aws::DocDBElastic
     #   *Constraints*: Minimum 30-minute window.
     #
     # @option params [required, Integer] :shard_capacity
-    #   The capacity of each shard in the new Elastic DocumentDB cluster.
+    #   The number of vCPUs assigned to each elastic cluster shard. Maximum is
+    #   64. Allowed values are 2, 4, 8, 16, 32, 64.
     #
     # @option params [required, Integer] :shard_count
-    #   The number of shards to create in the new Elastic DocumentDB cluster.
+    #   The number of shards assigned to the elastic cluster. Maximum is 32.
+    #
+    # @option params [Integer] :shard_instance_count
+    #   The number of replica instances applying to all shards in the elastic
+    #   cluster. A `shardInstanceCount` value of 1 means there is one writer
+    #   instance, and any additional instances are replicas that can be used
+    #   for reads and to improve availability.
     #
     # @option params [Array<String>] :subnet_ids
-    #   The Amazon EC2 subnet IDs for the new Elastic DocumentDB cluster.
+    #   The Amazon EC2 subnet IDs for the new elastic cluster.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags to be assigned to the new Elastic DocumentDB cluster.
+    #   The tags to be assigned to the new elastic cluster.
     #
     # @option params [Array<String>] :vpc_security_group_ids
-    #   A list of EC2 VPC security groups to associate with the new Elastic
-    #   DocumentDB cluster.
+    #   A list of EC2 VPC security groups to associate with the new elastic
+    #   cluster.
     #
     # @return [Types::CreateClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -489,12 +622,15 @@ module Aws::DocDBElastic
     #     admin_user_name: "String", # required
     #     admin_user_password: "Password", # required
     #     auth_type: "PLAIN_TEXT", # required, accepts PLAIN_TEXT, SECRET_ARN
+    #     backup_retention_period: 1,
     #     client_token: "String",
     #     cluster_name: "String", # required
     #     kms_key_id: "String",
+    #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
     #     shard_capacity: 1, # required
     #     shard_count: 1, # required
+    #     shard_instance_count: 1,
     #     subnet_ids: ["String"],
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -506,15 +642,22 @@ module Aws::DocDBElastic
     #
     #   resp.cluster.admin_user_name #=> String
     #   resp.cluster.auth_type #=> String, one of "PLAIN_TEXT", "SECRET_ARN"
+    #   resp.cluster.backup_retention_period #=> Integer
     #   resp.cluster.cluster_arn #=> String
     #   resp.cluster.cluster_endpoint #=> String
     #   resp.cluster.cluster_name #=> String
     #   resp.cluster.create_time #=> String
     #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.preferred_backup_window #=> String
     #   resp.cluster.preferred_maintenance_window #=> String
     #   resp.cluster.shard_capacity #=> Integer
     #   resp.cluster.shard_count #=> Integer
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS"
+    #   resp.cluster.shard_instance_count #=> Integer
+    #   resp.cluster.shards #=> Array
+    #   resp.cluster.shards[0].create_time #=> String
+    #   resp.cluster.shards[0].shard_id #=> String
+    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
     #   resp.cluster.subnet_ids #=> Array
     #   resp.cluster.subnet_ids[0] #=> String
     #   resp.cluster.vpc_security_group_ids #=> Array
@@ -529,17 +672,17 @@ module Aws::DocDBElastic
       req.send_request(options)
     end
 
-    # Creates a snapshot of a cluster.
+    # Creates a snapshot of an elastic cluster.
     #
     # @option params [required, String] :cluster_arn
-    #   The arn of the Elastic DocumentDB cluster that the snapshot will be
-    #   taken from.
+    #   The ARN identifier of the elastic cluster of which you want to create
+    #   a snapshot.
     #
     # @option params [required, String] :snapshot_name
-    #   The name of the Elastic DocumentDB snapshot.
+    #   The name of the new elastic cluster snapshot.
     #
     # @option params [Hash<String,String>] :tags
-    #   The tags to be assigned to the new Elastic DocumentDB snapshot.
+    #   The tags to be assigned to the new elastic cluster snapshot.
     #
     # @return [Types::CreateClusterSnapshotOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -564,7 +707,8 @@ module Aws::DocDBElastic
     #   resp.snapshot.snapshot_arn #=> String
     #   resp.snapshot.snapshot_creation_time #=> String
     #   resp.snapshot.snapshot_name #=> String
-    #   resp.snapshot.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS"
+    #   resp.snapshot.snapshot_type #=> String, one of "MANUAL", "AUTOMATED"
+    #   resp.snapshot.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
     #   resp.snapshot.subnet_ids #=> Array
     #   resp.snapshot.subnet_ids[0] #=> String
     #   resp.snapshot.vpc_security_group_ids #=> Array
@@ -579,10 +723,10 @@ module Aws::DocDBElastic
       req.send_request(options)
     end
 
-    # Delete a Elastic DocumentDB cluster.
+    # Delete an elastic cluster.
     #
     # @option params [required, String] :cluster_arn
-    #   The arn of the Elastic DocumentDB cluster that is to be deleted.
+    #   The ARN identifier of the elastic cluster that is to be deleted.
     #
     # @return [Types::DeleteClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -598,15 +742,22 @@ module Aws::DocDBElastic
     #
     #   resp.cluster.admin_user_name #=> String
     #   resp.cluster.auth_type #=> String, one of "PLAIN_TEXT", "SECRET_ARN"
+    #   resp.cluster.backup_retention_period #=> Integer
     #   resp.cluster.cluster_arn #=> String
     #   resp.cluster.cluster_endpoint #=> String
     #   resp.cluster.cluster_name #=> String
     #   resp.cluster.create_time #=> String
     #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.preferred_backup_window #=> String
     #   resp.cluster.preferred_maintenance_window #=> String
     #   resp.cluster.shard_capacity #=> Integer
     #   resp.cluster.shard_count #=> Integer
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS"
+    #   resp.cluster.shard_instance_count #=> Integer
+    #   resp.cluster.shards #=> Array
+    #   resp.cluster.shards[0].create_time #=> String
+    #   resp.cluster.shards[0].shard_id #=> String
+    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
     #   resp.cluster.subnet_ids #=> Array
     #   resp.cluster.subnet_ids[0] #=> String
     #   resp.cluster.vpc_security_group_ids #=> Array
@@ -621,10 +772,11 @@ module Aws::DocDBElastic
       req.send_request(options)
     end
 
-    # Delete a Elastic DocumentDB snapshot.
+    # Delete an elastic cluster snapshot.
     #
     # @option params [required, String] :snapshot_arn
-    #   The arn of the Elastic DocumentDB snapshot that is to be deleted.
+    #   The ARN identifier of the elastic cluster snapshot that is to be
+    #   deleted.
     #
     # @return [Types::DeleteClusterSnapshotOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -645,7 +797,8 @@ module Aws::DocDBElastic
     #   resp.snapshot.snapshot_arn #=> String
     #   resp.snapshot.snapshot_creation_time #=> String
     #   resp.snapshot.snapshot_name #=> String
-    #   resp.snapshot.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS"
+    #   resp.snapshot.snapshot_type #=> String, one of "MANUAL", "AUTOMATED"
+    #   resp.snapshot.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
     #   resp.snapshot.subnet_ids #=> Array
     #   resp.snapshot.subnet_ids[0] #=> String
     #   resp.snapshot.vpc_security_group_ids #=> Array
@@ -660,10 +813,10 @@ module Aws::DocDBElastic
       req.send_request(options)
     end
 
-    # Returns information about a specific Elastic DocumentDB cluster.
+    # Returns information about a specific elastic cluster.
     #
     # @option params [required, String] :cluster_arn
-    #   The arn of the Elastic DocumentDB cluster.
+    #   The ARN identifier of the elastic cluster.
     #
     # @return [Types::GetClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -679,15 +832,22 @@ module Aws::DocDBElastic
     #
     #   resp.cluster.admin_user_name #=> String
     #   resp.cluster.auth_type #=> String, one of "PLAIN_TEXT", "SECRET_ARN"
+    #   resp.cluster.backup_retention_period #=> Integer
     #   resp.cluster.cluster_arn #=> String
     #   resp.cluster.cluster_endpoint #=> String
     #   resp.cluster.cluster_name #=> String
     #   resp.cluster.create_time #=> String
     #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.preferred_backup_window #=> String
     #   resp.cluster.preferred_maintenance_window #=> String
     #   resp.cluster.shard_capacity #=> Integer
     #   resp.cluster.shard_count #=> Integer
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS"
+    #   resp.cluster.shard_instance_count #=> Integer
+    #   resp.cluster.shards #=> Array
+    #   resp.cluster.shards[0].create_time #=> String
+    #   resp.cluster.shards[0].shard_id #=> String
+    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
     #   resp.cluster.subnet_ids #=> Array
     #   resp.cluster.subnet_ids[0] #=> String
     #   resp.cluster.vpc_security_group_ids #=> Array
@@ -702,10 +862,10 @@ module Aws::DocDBElastic
       req.send_request(options)
     end
 
-    # Returns information about a specific Elastic DocumentDB snapshot
+    # Returns information about a specific elastic cluster snapshot
     #
     # @option params [required, String] :snapshot_arn
-    #   The arn of the Elastic DocumentDB snapshot.
+    #   The ARN identifier of the elastic cluster snapshot.
     #
     # @return [Types::GetClusterSnapshotOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -726,7 +886,8 @@ module Aws::DocDBElastic
     #   resp.snapshot.snapshot_arn #=> String
     #   resp.snapshot.snapshot_creation_time #=> String
     #   resp.snapshot.snapshot_name #=> String
-    #   resp.snapshot.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS"
+    #   resp.snapshot.snapshot_type #=> String, one of "MANUAL", "AUTOMATED"
+    #   resp.snapshot.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
     #   resp.snapshot.subnet_ids #=> Array
     #   resp.snapshot.subnet_ids[0] #=> String
     #   resp.snapshot.vpc_security_group_ids #=> Array
@@ -741,17 +902,32 @@ module Aws::DocDBElastic
       req.send_request(options)
     end
 
-    # Returns information about Elastic DocumentDB snapshots for a specified
-    # cluster.
+    # Returns information about snapshots for a specified elastic cluster.
     #
     # @option params [String] :cluster_arn
-    #   The arn of the Elastic DocumentDB cluster.
+    #   The ARN identifier of the elastic cluster.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of entries to recieve in the response.
+    #   The maximum number of elastic cluster snapshot results to receive in
+    #   the response.
     #
     # @option params [String] :next_token
-    #   The nextToken which is used the get the next page of data.
+    #   A pagination token provided by a previous request. If this parameter
+    #   is specified, the response includes only records beyond this token, up
+    #   to the value specified by `max-results`.
+    #
+    #   If there is no more data in the responce, the `nextToken` will not be
+    #   returned.
+    #
+    # @option params [String] :snapshot_type
+    #   The type of cluster snapshots to be returned. You can specify one of
+    #   the following values:
+    #
+    #   * `automated` - Return all cluster snapshots that Amazon DocumentDB
+    #     has automatically created for your Amazon Web Services account.
+    #
+    #   * `manual` - Return all cluster snapshots that you have manually
+    #     created for your Amazon Web Services account.
     #
     # @return [Types::ListClusterSnapshotsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -766,6 +942,7 @@ module Aws::DocDBElastic
     #     cluster_arn: "String",
     #     max_results: 1,
     #     next_token: "PaginationToken",
+    #     snapshot_type: "String",
     #   })
     #
     # @example Response structure
@@ -776,7 +953,7 @@ module Aws::DocDBElastic
     #   resp.snapshots[0].snapshot_arn #=> String
     #   resp.snapshots[0].snapshot_creation_time #=> String
     #   resp.snapshots[0].snapshot_name #=> String
-    #   resp.snapshots[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS"
+    #   resp.snapshots[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/ListClusterSnapshots AWS API Documentation
     #
@@ -787,13 +964,20 @@ module Aws::DocDBElastic
       req.send_request(options)
     end
 
-    # Returns information about provisioned Elastic DocumentDB clusters.
+    # Returns information about provisioned Amazon DocumentDB elastic
+    # clusters.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of entries to recieve in the response.
+    #   The maximum number of elastic cluster snapshot results to receive in
+    #   the response.
     #
     # @option params [String] :next_token
-    #   The nextToken which is used the get the next page of data.
+    #   A pagination token provided by a previous request. If this parameter
+    #   is specified, the response includes only records beyond this token, up
+    #   to the value specified by `max-results`.
+    #
+    #   If there is no more data in the responce, the `nextToken` will not be
+    #   returned.
     #
     # @return [Types::ListClustersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -814,7 +998,7 @@ module Aws::DocDBElastic
     #   resp.clusters #=> Array
     #   resp.clusters[0].cluster_arn #=> String
     #   resp.clusters[0].cluster_name #=> String
-    #   resp.clusters[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS"
+    #   resp.clusters[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/ListClusters AWS API Documentation
@@ -826,10 +1010,10 @@ module Aws::DocDBElastic
       req.send_request(options)
     end
 
-    # Lists all tags on a Elastic DocumentDB resource
+    # Lists all tags on a elastic cluster resource
     #
     # @option params [required, String] :resource_arn
-    #   The arn of the Elastic DocumentDB resource.
+    #   The ARN identifier of the elastic cluster resource.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -855,38 +1039,47 @@ module Aws::DocDBElastic
       req.send_request(options)
     end
 
-    # Restores a Elastic DocumentDB cluster from a snapshot.
+    # Restores an elastic cluster from a snapshot.
     #
     # @option params [required, String] :cluster_name
-    #   The name of the Elastic DocumentDB cluster.
+    #   The name of the elastic cluster.
     #
     # @option params [String] :kms_key_id
-    #   The KMS key identifier to use to encrypt the new Elastic DocumentDB
-    #   cluster.
+    #   The KMS key identifier to use to encrypt the new Amazon DocumentDB
+    #   elastic clusters cluster.
     #
     #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
     #   encryption key. If you are creating a cluster using the same Amazon
     #   account that owns this KMS encryption key, you can use the KMS key
     #   alias instead of the ARN as the KMS encryption key.
     #
-    #   If an encryption key is not specified here, Elastic DocumentDB uses
-    #   the default encryption key that KMS creates for your account. Your
-    #   account has a different default encryption key for each Amazon Region.
+    #   If an encryption key is not specified here, Amazon DocumentDB uses the
+    #   default encryption key that KMS creates for your account. Your account
+    #   has a different default encryption key for each Amazon Region.
+    #
+    # @option params [Integer] :shard_capacity
+    #   The capacity of each shard in the new restored elastic cluster.
+    #
+    # @option params [Integer] :shard_instance_count
+    #   The number of replica instances applying to all shards in the elastic
+    #   cluster. A `shardInstanceCount` value of 1 means there is one writer
+    #   instance, and any additional instances are replicas that can be used
+    #   for reads and to improve availability.
     #
     # @option params [required, String] :snapshot_arn
-    #   The arn of the Elastic DocumentDB snapshot.
+    #   The ARN identifier of the elastic cluster snapshot.
     #
     # @option params [Array<String>] :subnet_ids
-    #   The Amazon EC2 subnet IDs for the Elastic DocumentDB cluster.
+    #   The Amazon EC2 subnet IDs for the elastic cluster.
     #
     # @option params [Hash<String,String>] :tags
-    #   A list of the tag names to be assigned to the restored DB cluster, in
-    #   the form of an array of key-value pairs in which the key is the tag
-    #   name and the value is the key value.
+    #   A list of the tag names to be assigned to the restored elastic
+    #   cluster, in the form of an array of key-value pairs in which the key
+    #   is the tag name and the value is the key value.
     #
     # @option params [Array<String>] :vpc_security_group_ids
-    #   A list of EC2 VPC security groups to associate with the Elastic
-    #   DocumentDB cluster.
+    #   A list of EC2 VPC security groups to associate with the elastic
+    #   cluster.
     #
     # @return [Types::RestoreClusterFromSnapshotOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -897,6 +1090,8 @@ module Aws::DocDBElastic
     #   resp = client.restore_cluster_from_snapshot({
     #     cluster_name: "String", # required
     #     kms_key_id: "String",
+    #     shard_capacity: 1,
+    #     shard_instance_count: 1,
     #     snapshot_arn: "String", # required
     #     subnet_ids: ["String"],
     #     tags: {
@@ -909,15 +1104,22 @@ module Aws::DocDBElastic
     #
     #   resp.cluster.admin_user_name #=> String
     #   resp.cluster.auth_type #=> String, one of "PLAIN_TEXT", "SECRET_ARN"
+    #   resp.cluster.backup_retention_period #=> Integer
     #   resp.cluster.cluster_arn #=> String
     #   resp.cluster.cluster_endpoint #=> String
     #   resp.cluster.cluster_name #=> String
     #   resp.cluster.create_time #=> String
     #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.preferred_backup_window #=> String
     #   resp.cluster.preferred_maintenance_window #=> String
     #   resp.cluster.shard_capacity #=> Integer
     #   resp.cluster.shard_count #=> Integer
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS"
+    #   resp.cluster.shard_instance_count #=> Integer
+    #   resp.cluster.shards #=> Array
+    #   resp.cluster.shards[0].create_time #=> String
+    #   resp.cluster.shards[0].shard_id #=> String
+    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
     #   resp.cluster.subnet_ids #=> Array
     #   resp.cluster.subnet_ids[0] #=> String
     #   resp.cluster.vpc_security_group_ids #=> Array
@@ -932,13 +1134,113 @@ module Aws::DocDBElastic
       req.send_request(options)
     end
 
-    # Adds metadata tags to a Elastic DocumentDB resource
+    # Restarts the stopped elastic cluster that is specified by
+    # `clusterARN`.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The ARN identifier of the elastic cluster.
+    #
+    # @return [Types::StartClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartClusterOutput#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_cluster({
+    #     cluster_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.admin_user_name #=> String
+    #   resp.cluster.auth_type #=> String, one of "PLAIN_TEXT", "SECRET_ARN"
+    #   resp.cluster.backup_retention_period #=> Integer
+    #   resp.cluster.cluster_arn #=> String
+    #   resp.cluster.cluster_endpoint #=> String
+    #   resp.cluster.cluster_name #=> String
+    #   resp.cluster.create_time #=> String
+    #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.preferred_backup_window #=> String
+    #   resp.cluster.preferred_maintenance_window #=> String
+    #   resp.cluster.shard_capacity #=> Integer
+    #   resp.cluster.shard_count #=> Integer
+    #   resp.cluster.shard_instance_count #=> Integer
+    #   resp.cluster.shards #=> Array
+    #   resp.cluster.shards[0].create_time #=> String
+    #   resp.cluster.shards[0].shard_id #=> String
+    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.subnet_ids #=> Array
+    #   resp.cluster.subnet_ids[0] #=> String
+    #   resp.cluster.vpc_security_group_ids #=> Array
+    #   resp.cluster.vpc_security_group_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/StartCluster AWS API Documentation
+    #
+    # @overload start_cluster(params = {})
+    # @param [Hash] params ({})
+    def start_cluster(params = {}, options = {})
+      req = build_request(:start_cluster, params)
+      req.send_request(options)
+    end
+
+    # Stops the running elastic cluster that is specified by `clusterArn`.
+    # The elastic cluster must be in the *available* state.
+    #
+    # @option params [required, String] :cluster_arn
+    #   The ARN identifier of the elastic cluster.
+    #
+    # @return [Types::StopClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopClusterOutput#cluster #cluster} => Types::Cluster
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_cluster({
+    #     cluster_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster.admin_user_name #=> String
+    #   resp.cluster.auth_type #=> String, one of "PLAIN_TEXT", "SECRET_ARN"
+    #   resp.cluster.backup_retention_period #=> Integer
+    #   resp.cluster.cluster_arn #=> String
+    #   resp.cluster.cluster_endpoint #=> String
+    #   resp.cluster.cluster_name #=> String
+    #   resp.cluster.create_time #=> String
+    #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.preferred_backup_window #=> String
+    #   resp.cluster.preferred_maintenance_window #=> String
+    #   resp.cluster.shard_capacity #=> Integer
+    #   resp.cluster.shard_count #=> Integer
+    #   resp.cluster.shard_instance_count #=> Integer
+    #   resp.cluster.shards #=> Array
+    #   resp.cluster.shards[0].create_time #=> String
+    #   resp.cluster.shards[0].shard_id #=> String
+    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.subnet_ids #=> Array
+    #   resp.cluster.subnet_ids[0] #=> String
+    #   resp.cluster.vpc_security_group_ids #=> Array
+    #   resp.cluster.vpc_security_group_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-elastic-2022-11-28/StopCluster AWS API Documentation
+    #
+    # @overload stop_cluster(params = {})
+    # @param [Hash] params ({})
+    def stop_cluster(params = {}, options = {})
+      req = build_request(:stop_cluster, params)
+      req.send_request(options)
+    end
+
+    # Adds metadata tags to an elastic cluster resource
     #
     # @option params [required, String] :resource_arn
-    #   The arn of the Elastic DocumentDB resource.
+    #   The ARN identifier of the elastic cluster resource.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   The tags to be assigned to the Elastic DocumentDB resource.
+    #   The tags that are assigned to the elastic cluster resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -960,13 +1262,13 @@ module Aws::DocDBElastic
       req.send_request(options)
     end
 
-    # Removes metadata tags to a Elastic DocumentDB resource
+    # Removes metadata tags from an elastic cluster resource
     #
     # @option params [required, String] :resource_arn
-    #   The arn of the Elastic DocumentDB resource.
+    #   The ARN identifier of the elastic cluster resource.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The tag keys to be removed from the Elastic DocumentDB resource.
+    #   The tag keys to be removed from the elastic cluster resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -986,28 +1288,38 @@ module Aws::DocDBElastic
       req.send_request(options)
     end
 
-    # Modifies a Elastic DocumentDB cluster. This includes updating
-    # admin-username/password, upgrading API version setting up a backup
-    # window and maintenance window
+    # Modifies an elastic cluster. This includes updating
+    # admin-username/password, upgrading the API version, and setting up a
+    # backup window and maintenance window
     #
     # @option params [String] :admin_user_password
-    #   The password for the Elastic DocumentDB cluster administrator. This
+    #   The password associated with the elastic cluster administrator. This
     #   password can contain any printable ASCII character except forward
     #   slash (/), double quote ("), or the "at" symbol (@).
     #
     #   *Constraints*: Must contain from 8 to 100 characters.
     #
     # @option params [String] :auth_type
-    #   The authentication type for the Elastic DocumentDB cluster.
+    #   The authentication type used to determine where to fetch the password
+    #   used for accessing the elastic cluster. Valid types are `PLAIN_TEXT`
+    #   or `SECRET_ARN`.
+    #
+    # @option params [Integer] :backup_retention_period
+    #   The number of days for which automatic snapshots are retained.
     #
     # @option params [String] :client_token
-    #   The client token for the Elastic DocumentDB cluster.
+    #   The client token for the elastic cluster.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :cluster_arn
-    #   The arn of the Elastic DocumentDB cluster.
+    #   The ARN identifier of the elastic cluster.
+    #
+    # @option params [String] :preferred_backup_window
+    #   The daily time range during which automated backups are created if
+    #   automated backups are enabled, as determined by the
+    #   `backupRetentionPeriod`.
     #
     # @option params [String] :preferred_maintenance_window
     #   The weekly time range during which system maintenance can occur, in
@@ -1024,17 +1336,24 @@ module Aws::DocDBElastic
     #   *Constraints*: Minimum 30-minute window.
     #
     # @option params [Integer] :shard_capacity
-    #   The capacity of each shard in the Elastic DocumentDB cluster.
+    #   The number of vCPUs assigned to each elastic cluster shard. Maximum is
+    #   64. Allowed values are 2, 4, 8, 16, 32, 64.
     #
     # @option params [Integer] :shard_count
-    #   The number of shards to create in the Elastic DocumentDB cluster.
+    #   The number of shards assigned to the elastic cluster. Maximum is 32.
+    #
+    # @option params [Integer] :shard_instance_count
+    #   The number of replica instances applying to all shards in the elastic
+    #   cluster. A `shardInstanceCount` value of 1 means there is one writer
+    #   instance, and any additional instances are replicas that can be used
+    #   for reads and to improve availability.
     #
     # @option params [Array<String>] :subnet_ids
-    #   The number of shards to create in the Elastic DocumentDB cluster.
+    #   The Amazon EC2 subnet IDs for the elastic cluster.
     #
     # @option params [Array<String>] :vpc_security_group_ids
-    #   A list of EC2 VPC security groups to associate with the new Elastic
-    #   DocumentDB cluster.
+    #   A list of EC2 VPC security groups to associate with the elastic
+    #   cluster.
     #
     # @return [Types::UpdateClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1045,11 +1364,14 @@ module Aws::DocDBElastic
     #   resp = client.update_cluster({
     #     admin_user_password: "Password",
     #     auth_type: "PLAIN_TEXT", # accepts PLAIN_TEXT, SECRET_ARN
+    #     backup_retention_period: 1,
     #     client_token: "String",
     #     cluster_arn: "String", # required
+    #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
     #     shard_capacity: 1,
     #     shard_count: 1,
+    #     shard_instance_count: 1,
     #     subnet_ids: ["String"],
     #     vpc_security_group_ids: ["String"],
     #   })
@@ -1058,15 +1380,22 @@ module Aws::DocDBElastic
     #
     #   resp.cluster.admin_user_name #=> String
     #   resp.cluster.auth_type #=> String, one of "PLAIN_TEXT", "SECRET_ARN"
+    #   resp.cluster.backup_retention_period #=> Integer
     #   resp.cluster.cluster_arn #=> String
     #   resp.cluster.cluster_endpoint #=> String
     #   resp.cluster.cluster_name #=> String
     #   resp.cluster.create_time #=> String
     #   resp.cluster.kms_key_id #=> String
+    #   resp.cluster.preferred_backup_window #=> String
     #   resp.cluster.preferred_maintenance_window #=> String
     #   resp.cluster.shard_capacity #=> Integer
     #   resp.cluster.shard_count #=> Integer
-    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS"
+    #   resp.cluster.shard_instance_count #=> Integer
+    #   resp.cluster.shards #=> Array
+    #   resp.cluster.shards[0].create_time #=> String
+    #   resp.cluster.shards[0].shard_id #=> String
+    #   resp.cluster.shards[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
+    #   resp.cluster.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING", "VPC_ENDPOINT_LIMIT_EXCEEDED", "IP_ADDRESS_LIMIT_EXCEEDED", "INVALID_SECURITY_GROUP_ID", "INVALID_SUBNET_ID", "INACCESSIBLE_ENCRYPTION_CREDS", "INACCESSIBLE_SECRET_ARN", "INACCESSIBLE_VPC_ENDPOINT", "INCOMPATIBLE_NETWORK", "MERGING", "MODIFYING", "SPLITTING", "COPYING", "STARTING", "STOPPING", "STOPPED"
     #   resp.cluster.subnet_ids #=> Array
     #   resp.cluster.subnet_ids[0] #=> String
     #   resp.cluster.vpc_security_group_ids #=> Array
@@ -1094,7 +1423,7 @@ module Aws::DocDBElastic
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-docdbelastic'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

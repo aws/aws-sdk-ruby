@@ -1,6 +1,96 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2024-06-12)
+------------------
+
+* Feature - Updates to remove DC1 and DS2 node types.
+
+1.115.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.114.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.113.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.112.0 (2024-04-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.111.0 (2024-04-12)
+------------------
+
+* Feature - Adds support for Amazon Redshift DescribeClusterSnapshots API to include Snapshot ARN response field.
+
+1.110.0 (2024-03-06)
+------------------
+
+* Feature - Update for documentation only. Covers port ranges, definition updates for data sharing, and definition updates to cluster-snapshot documentation.
+
+1.109.0 (2024-02-07)
+------------------
+
+* Feature - LisRecommendations API to fetch Amazon Redshift Advisor recommendations.
+
+1.108.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.107.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.106.0 (2023-11-27)
+------------------
+
+* Feature - This release adds support for multi-data warehouse writes through data sharing.
+
+1.105.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.104.0 (2023-11-17)
+------------------
+
+* Feature - Updated SDK for Amazon Redshift, which you can use to configure a connection with IAM Identity Center to manage access to databases. With these, you can create a connection through a managed application. You can also change a managed application, delete it, or get information about an existing one.
+
+1.103.0 (2023-11-15)
+------------------
+
+* Feature - The custom domain name SDK for Amazon Redshift provisioned clusters is updated with additional required parameters for modify and delete operations. Additionally, users can provide domain names with longer top-level domains.
+
+1.102.0 (2023-11-01)
+------------------
+
+* Feature - Added support for Multi-AZ deployments for Provisioned RA3 clusters that provide 99.99% SLA availability.
+
+1.101.0 (2023-10-27)
+------------------
+
+* Feature - added support to create a dual stack cluster
+
+1.100.0 (2023-10-26)
+------------------
+
+* Feature - Add Redshift APIs GetResourcePolicy, DeleteResourcePolicy, PutResourcePolicy and DescribeInboundIntegrations for the new Amazon Redshift Zero-ETL integration feature, which can be used to control data ingress into Redshift namespace, and view inbound integrations.
+
+1.99.0 (2023-10-16)
+------------------
+
+* Feature - Added support for managing credentials of provisioned cluster admin using AWS Secrets Manager.
+
 1.98.0 (2023-09-27)
 ------------------
 

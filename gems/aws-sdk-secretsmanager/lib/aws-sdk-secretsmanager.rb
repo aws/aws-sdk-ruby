@@ -32,7 +32,7 @@ require_relative 'aws-sdk-secretsmanager/customizations'
 # structure.
 #
 #     secrets_manager = Aws::SecretsManager::Client.new
-#     resp = secrets_manager.cancel_rotate_secret(params)
+#     resp = secrets_manager.batch_get_secret_value(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-secretsmanager/customizations'
 # @!group service
 module Aws::SecretsManager
 
-  GEM_VERSION = '1.83.0'
+  GEM_VERSION = '1.98.0'
 
 end

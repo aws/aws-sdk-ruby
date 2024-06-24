@@ -1,0 +1,452 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AppRegistry
+  module Types
+
+    class AppRegistryConfiguration
+      attr_accessor tag_query_configuration: Types::TagQueryConfiguration
+      SENSITIVE: []
+    end
+
+    class Application
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor application_tag: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ApplicationSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ApplicationTagResult
+      attr_accessor application_tag_status: ("IN_PROGRESS" | "SUCCESS" | "FAILURE")
+      attr_accessor error_message: ::String
+      attr_accessor resources: ::Array[Types::ResourcesListItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateAttributeGroupRequest
+      attr_accessor application: ::String
+      attr_accessor attribute_group: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateAttributeGroupResponse
+      attr_accessor application_arn: ::String
+      attr_accessor attribute_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateResourceRequest
+      attr_accessor application: ::String
+      attr_accessor resource_type: ("CFN_STACK" | "RESOURCE_TAG_VALUE")
+      attr_accessor resource: ::String
+      attr_accessor options: ::Array[("APPLY_APPLICATION_TAG" | "SKIP_APPLICATION_TAG")]
+      SENSITIVE: []
+    end
+
+    class AssociateResourceResponse
+      attr_accessor application_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor options: ::Array[("APPLY_APPLICATION_TAG" | "SKIP_APPLICATION_TAG")]
+      SENSITIVE: []
+    end
+
+    class AttributeGroup
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AttributeGroupDetails
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor created_by: ::String
+      SENSITIVE: []
+    end
+
+    class AttributeGroupSummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor created_by: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationResponse
+      attr_accessor application: Types::Application
+      SENSITIVE: []
+    end
+
+    class CreateAttributeGroupRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor attributes: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAttributeGroupResponse
+      attr_accessor attribute_group: Types::AttributeGroup
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationRequest
+      attr_accessor application: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApplicationResponse
+      attr_accessor application: Types::ApplicationSummary
+      SENSITIVE: []
+    end
+
+    class DeleteAttributeGroupRequest
+      attr_accessor attribute_group: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAttributeGroupResponse
+      attr_accessor attribute_group: Types::AttributeGroupSummary
+      SENSITIVE: []
+    end
+
+    class DisassociateAttributeGroupRequest
+      attr_accessor application: ::String
+      attr_accessor attribute_group: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateAttributeGroupResponse
+      attr_accessor application_arn: ::String
+      attr_accessor attribute_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateResourceRequest
+      attr_accessor application: ::String
+      attr_accessor resource_type: ("CFN_STACK" | "RESOURCE_TAG_VALUE")
+      attr_accessor resource: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateResourceResponse
+      attr_accessor application_arn: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationRequest
+      attr_accessor application: ::String
+      SENSITIVE: []
+    end
+
+    class GetApplicationResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor associated_resource_count: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor integrations: Types::Integrations
+      attr_accessor application_tag: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetAssociatedResourceRequest
+      attr_accessor application: ::String
+      attr_accessor resource_type: ("CFN_STACK" | "RESOURCE_TAG_VALUE")
+      attr_accessor resource: ::String
+      attr_accessor next_token: ::String
+      attr_accessor resource_tag_status: ::Array[("SUCCESS" | "FAILED" | "IN_PROGRESS" | "SKIPPED")]
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAssociatedResourceResponse
+      attr_accessor resource: Types::Resource
+      attr_accessor options: ::Array[("APPLY_APPLICATION_TAG" | "SKIP_APPLICATION_TAG")]
+      attr_accessor application_tag_result: Types::ApplicationTagResult
+      SENSITIVE: []
+    end
+
+    class GetAttributeGroupRequest
+      attr_accessor attribute_group: ::String
+      SENSITIVE: []
+    end
+
+    class GetAttributeGroupResponse
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor attributes: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor created_by: ::String
+      SENSITIVE: []
+    end
+
+    class GetConfigurationResponse
+      attr_accessor configuration: Types::AppRegistryConfiguration
+      SENSITIVE: []
+    end
+
+    class Integrations
+      attr_accessor resource_group: Types::ResourceGroup
+      attr_accessor application_tag_resource_group: Types::ResourceGroup
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListApplicationsResponse
+      attr_accessor applications: ::Array[Types::ApplicationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociatedAttributeGroupsRequest
+      attr_accessor application: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssociatedAttributeGroupsResponse
+      attr_accessor attribute_groups: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociatedResourcesRequest
+      attr_accessor application: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAssociatedResourcesResponse
+      attr_accessor resources: ::Array[Types::ResourceInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttributeGroupsForApplicationRequest
+      attr_accessor application: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAttributeGroupsForApplicationResponse
+      attr_accessor attribute_groups_details: ::Array[Types::AttributeGroupDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttributeGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAttributeGroupsResponse
+      attr_accessor attribute_groups: ::Array[Types::AttributeGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutConfigurationRequest
+      attr_accessor configuration: Types::AppRegistryConfiguration
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor association_time: ::Time
+      attr_accessor integrations: Types::ResourceIntegrations
+      SENSITIVE: []
+    end
+
+    class ResourceDetails
+      attr_accessor tag_value: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceGroup
+      attr_accessor state: ("CREATING" | "CREATE_COMPLETE" | "CREATE_FAILED" | "UPDATING" | "UPDATE_COMPLETE" | "UPDATE_FAILED")
+      attr_accessor arn: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInfo
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor resource_type: ("CFN_STACK" | "RESOURCE_TAG_VALUE")
+      attr_accessor resource_details: Types::ResourceDetails
+      attr_accessor options: ::Array[("APPLY_APPLICATION_TAG" | "SKIP_APPLICATION_TAG")]
+      SENSITIVE: []
+    end
+
+    class ResourceIntegrations
+      attr_accessor resource_group: Types::ResourceGroup
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcesListItem
+      attr_accessor resource_arn: ::String
+      attr_accessor error_message: ::String
+      attr_accessor status: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SyncResourceRequest
+      attr_accessor resource_type: ("CFN_STACK" | "RESOURCE_TAG_VALUE")
+      attr_accessor resource: ::String
+      SENSITIVE: []
+    end
+
+    class SyncResourceResponse
+      attr_accessor application_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor action_taken: ("START_SYNC" | "NO_ACTION")
+      SENSITIVE: []
+    end
+
+    class TagQueryConfiguration
+      attr_accessor tag_key: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateApplicationRequest
+      attr_accessor application: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApplicationResponse
+      attr_accessor application: Types::Application
+      SENSITIVE: []
+    end
+
+    class UpdateAttributeGroupRequest
+      attr_accessor attribute_group: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor attributes: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAttributeGroupResponse
+      attr_accessor attribute_group: Types::AttributeGroup
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

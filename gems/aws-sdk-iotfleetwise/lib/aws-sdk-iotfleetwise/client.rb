@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::IoTFleetWise
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::IoTFleetWise
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::IoTFleetWise
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::IoTFleetWise
     #   @option options [Aws::IoTFleetWise::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::IoTFleetWise::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -563,8 +588,8 @@ module Aws::IoTFleetWise
     #   An optional description of the campaign to help identify its purpose.
     #
     # @option params [required, String] :signal_catalog_arn
-    #   (Optional) The Amazon Resource Name (ARN) of the signal catalog to
-    #   associate with the campaign.
+    #   The Amazon Resource Name (ARN) of the signal catalog to associate with
+    #   the campaign.
     #
     # @option params [required, String] :target_arn
     #   The ARN of the vehicle or fleet to deploy a campaign to.
@@ -772,7 +797,7 @@ module Aws::IoTFleetWise
     #     signal_decoders: [
     #       {
     #         fully_qualified_name: "FullyQualifiedName", # required
-    #         type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL
+    #         type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL, MESSAGE_SIGNAL
     #         interface_id: "InterfaceId", # required
     #         can_signal: {
     #           message_id: 1, # required
@@ -795,12 +820,41 @@ module Aws::IoTFleetWise
     #           bit_right_shift: 1,
     #           bit_mask_length: 1,
     #         },
+    #         message_signal: {
+    #           topic_name: "TopicName", # required
+    #           structured_message: { # required
+    #             primitive_message_definition: {
+    #               ros2_primitive_message_definition: {
+    #                 primitive_type: "BOOL", # required, accepts BOOL, BYTE, CHAR, FLOAT32, FLOAT64, INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, STRING, WSTRING
+    #                 offset: 1.0,
+    #                 scaling: 1.0,
+    #                 upper_bound: 1,
+    #               },
+    #             },
+    #             structured_message_list_definition: {
+    #               name: "StructureMessageName", # required
+    #               member_type: { # required
+    #                 # recursive StructuredMessage
+    #               },
+    #               list_type: "FIXED_CAPACITY", # required, accepts FIXED_CAPACITY, DYNAMIC_UNBOUNDED_CAPACITY, DYNAMIC_BOUNDED_CAPACITY
+    #               capacity: 1,
+    #             },
+    #             structured_message_definition: [
+    #               {
+    #                 field_name: "StructureMessageName", # required
+    #                 data_type: { # required
+    #                   # recursive StructuredMessage
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
     #       },
     #     ],
     #     network_interfaces: [
     #       {
     #         interface_id: "InterfaceId", # required
-    #         type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE
+    #         type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE, VEHICLE_MIDDLEWARE
     #         can_interface: {
     #           name: "CanInterfaceName", # required
     #           protocol_name: "ProtocolName",
@@ -814,6 +868,10 @@ module Aws::IoTFleetWise
     #           dtc_request_interval_seconds: 1,
     #           use_extended_ids: false,
     #           has_transmission_ecu: false,
+    #         },
+    #         vehicle_middleware: {
+    #           name: "VehicleMiddlewareName", # required
+    #           protocol_name: "ROS_2", # required, accepts ROS_2
     #         },
     #       },
     #     ],
@@ -987,7 +1045,7 @@ module Aws::IoTFleetWise
     #         },
     #         sensor: {
     #           fully_qualified_name: "string", # required
-    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
+    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN, STRUCT, STRUCT_ARRAY
     #           description: "description",
     #           unit: "string",
     #           allowed_values: ["string"],
@@ -995,10 +1053,11 @@ module Aws::IoTFleetWise
     #           max: 1.0,
     #           deprecation_message: "message",
     #           comment: "message",
+    #           struct_fully_qualified_name: "NodePath",
     #         },
     #         actuator: {
     #           fully_qualified_name: "string", # required
-    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
+    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN, STRUCT, STRUCT_ARRAY
     #           description: "description",
     #           unit: "string",
     #           allowed_values: ["string"],
@@ -1007,10 +1066,11 @@ module Aws::IoTFleetWise
     #           assigned_value: "string",
     #           deprecation_message: "message",
     #           comment: "message",
+    #           struct_fully_qualified_name: "NodePath",
     #         },
     #         attribute: {
     #           fully_qualified_name: "string", # required
-    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
+    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN, STRUCT, STRUCT_ARRAY
     #           description: "description",
     #           unit: "string",
     #           allowed_values: ["string"],
@@ -1020,6 +1080,21 @@ module Aws::IoTFleetWise
     #           default_value: "string",
     #           deprecation_message: "message",
     #           comment: "message",
+    #         },
+    #         struct: {
+    #           fully_qualified_name: "string", # required
+    #           description: "description",
+    #           deprecation_message: "message",
+    #           comment: "message",
+    #         },
+    #         property: {
+    #           fully_qualified_name: "string", # required
+    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN, STRUCT, STRUCT_ARRAY
+    #           data_encoding: "BINARY", # accepts BINARY, TYPED
+    #           description: "description",
+    #           deprecation_message: "message",
+    #           comment: "message",
+    #           struct_fully_qualified_name: "NodePath",
     #         },
     #       },
     #     ],
@@ -1446,6 +1521,7 @@ module Aws::IoTFleetWise
     #   * {Types::GetDecoderManifestResponse#status #status} => String
     #   * {Types::GetDecoderManifestResponse#creation_time #creation_time} => Time
     #   * {Types::GetDecoderManifestResponse#last_modification_time #last_modification_time} => Time
+    #   * {Types::GetDecoderManifestResponse#message #message} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1459,9 +1535,10 @@ module Aws::IoTFleetWise
     #   resp.arn #=> String
     #   resp.description #=> String
     #   resp.model_manifest_arn #=> String
-    #   resp.status #=> String, one of "ACTIVE", "DRAFT"
+    #   resp.status #=> String, one of "ACTIVE", "DRAFT", "INVALID", "VALIDATING"
     #   resp.creation_time #=> Time
     #   resp.last_modification_time #=> Time
+    #   resp.message #=> String
     #
     # @overload get_decoder_manifest(params = {})
     # @param [Hash] params ({})
@@ -1579,7 +1656,7 @@ module Aws::IoTFleetWise
     #   resp.arn #=> String
     #   resp.description #=> String
     #   resp.signal_catalog_arn #=> String
-    #   resp.status #=> String, one of "ACTIVE", "DRAFT"
+    #   resp.status #=> String, one of "ACTIVE", "DRAFT", "INVALID", "VALIDATING"
     #   resp.creation_time #=> Time
     #   resp.last_modification_time #=> Time
     #
@@ -1668,6 +1745,8 @@ module Aws::IoTFleetWise
     #   resp.node_counts.total_sensors #=> Integer
     #   resp.node_counts.total_attributes #=> Integer
     #   resp.node_counts.total_actuators #=> Integer
+    #   resp.node_counts.total_structs #=> Integer
+    #   resp.node_counts.total_properties #=> Integer
     #   resp.creation_time #=> Time
     #   resp.last_modification_time #=> Time
     #
@@ -1958,7 +2037,7 @@ module Aws::IoTFleetWise
     #
     #   resp.network_interfaces #=> Array
     #   resp.network_interfaces[0].interface_id #=> String
-    #   resp.network_interfaces[0].type #=> String, one of "CAN_INTERFACE", "OBD_INTERFACE"
+    #   resp.network_interfaces[0].type #=> String, one of "CAN_INTERFACE", "OBD_INTERFACE", "VEHICLE_MIDDLEWARE"
     #   resp.network_interfaces[0].can_interface.name #=> String
     #   resp.network_interfaces[0].can_interface.protocol_name #=> String
     #   resp.network_interfaces[0].can_interface.protocol_version #=> String
@@ -1969,6 +2048,8 @@ module Aws::IoTFleetWise
     #   resp.network_interfaces[0].obd_interface.dtc_request_interval_seconds #=> Integer
     #   resp.network_interfaces[0].obd_interface.use_extended_ids #=> Boolean
     #   resp.network_interfaces[0].obd_interface.has_transmission_ecu #=> Boolean
+    #   resp.network_interfaces[0].vehicle_middleware.name #=> String
+    #   resp.network_interfaces[0].vehicle_middleware.protocol_name #=> String, one of "ROS_2"
     #   resp.next_token #=> String
     #
     # @overload list_decoder_manifest_network_interfaces(params = {})
@@ -2020,7 +2101,7 @@ module Aws::IoTFleetWise
     #
     #   resp.signal_decoders #=> Array
     #   resp.signal_decoders[0].fully_qualified_name #=> String
-    #   resp.signal_decoders[0].type #=> String, one of "CAN_SIGNAL", "OBD_SIGNAL"
+    #   resp.signal_decoders[0].type #=> String, one of "CAN_SIGNAL", "OBD_SIGNAL", "MESSAGE_SIGNAL"
     #   resp.signal_decoders[0].interface_id #=> String
     #   resp.signal_decoders[0].can_signal.message_id #=> Integer
     #   resp.signal_decoders[0].can_signal.is_big_endian #=> Boolean
@@ -2039,6 +2120,18 @@ module Aws::IoTFleetWise
     #   resp.signal_decoders[0].obd_signal.byte_length #=> Integer
     #   resp.signal_decoders[0].obd_signal.bit_right_shift #=> Integer
     #   resp.signal_decoders[0].obd_signal.bit_mask_length #=> Integer
+    #   resp.signal_decoders[0].message_signal.topic_name #=> String
+    #   resp.signal_decoders[0].message_signal.structured_message.primitive_message_definition.ros2_primitive_message_definition.primitive_type #=> String, one of "BOOL", "BYTE", "CHAR", "FLOAT32", "FLOAT64", "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "STRING", "WSTRING"
+    #   resp.signal_decoders[0].message_signal.structured_message.primitive_message_definition.ros2_primitive_message_definition.offset #=> Float
+    #   resp.signal_decoders[0].message_signal.structured_message.primitive_message_definition.ros2_primitive_message_definition.scaling #=> Float
+    #   resp.signal_decoders[0].message_signal.structured_message.primitive_message_definition.ros2_primitive_message_definition.upper_bound #=> Integer
+    #   resp.signal_decoders[0].message_signal.structured_message.structured_message_list_definition.name #=> String
+    #   resp.signal_decoders[0].message_signal.structured_message.structured_message_list_definition.member_type #=> Types::StructuredMessage
+    #   resp.signal_decoders[0].message_signal.structured_message.structured_message_list_definition.list_type #=> String, one of "FIXED_CAPACITY", "DYNAMIC_UNBOUNDED_CAPACITY", "DYNAMIC_BOUNDED_CAPACITY"
+    #   resp.signal_decoders[0].message_signal.structured_message.structured_message_list_definition.capacity #=> Integer
+    #   resp.signal_decoders[0].message_signal.structured_message.structured_message_definition #=> Array
+    #   resp.signal_decoders[0].message_signal.structured_message.structured_message_definition[0].field_name #=> String
+    #   resp.signal_decoders[0].message_signal.structured_message.structured_message_definition[0].data_type #=> Types::StructuredMessage
     #   resp.next_token #=> String
     #
     # @overload list_decoder_manifest_signals(params = {})
@@ -2093,9 +2186,10 @@ module Aws::IoTFleetWise
     #   resp.summaries[0].arn #=> String
     #   resp.summaries[0].model_manifest_arn #=> String
     #   resp.summaries[0].description #=> String
-    #   resp.summaries[0].status #=> String, one of "ACTIVE", "DRAFT"
+    #   resp.summaries[0].status #=> String, one of "ACTIVE", "DRAFT", "INVALID", "VALIDATING"
     #   resp.summaries[0].creation_time #=> Time
     #   resp.summaries[0].last_modification_time #=> Time
+    #   resp.summaries[0].message #=> String
     #   resp.next_token #=> String
     #
     # @overload list_decoder_manifests(params = {})
@@ -2254,7 +2348,7 @@ module Aws::IoTFleetWise
     #   resp.nodes[0].branch.deprecation_message #=> String
     #   resp.nodes[0].branch.comment #=> String
     #   resp.nodes[0].sensor.fully_qualified_name #=> String
-    #   resp.nodes[0].sensor.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN"
+    #   resp.nodes[0].sensor.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN", "STRUCT", "STRUCT_ARRAY"
     #   resp.nodes[0].sensor.description #=> String
     #   resp.nodes[0].sensor.unit #=> String
     #   resp.nodes[0].sensor.allowed_values #=> Array
@@ -2263,8 +2357,9 @@ module Aws::IoTFleetWise
     #   resp.nodes[0].sensor.max #=> Float
     #   resp.nodes[0].sensor.deprecation_message #=> String
     #   resp.nodes[0].sensor.comment #=> String
+    #   resp.nodes[0].sensor.struct_fully_qualified_name #=> String
     #   resp.nodes[0].actuator.fully_qualified_name #=> String
-    #   resp.nodes[0].actuator.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN"
+    #   resp.nodes[0].actuator.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN", "STRUCT", "STRUCT_ARRAY"
     #   resp.nodes[0].actuator.description #=> String
     #   resp.nodes[0].actuator.unit #=> String
     #   resp.nodes[0].actuator.allowed_values #=> Array
@@ -2274,8 +2369,9 @@ module Aws::IoTFleetWise
     #   resp.nodes[0].actuator.assigned_value #=> String
     #   resp.nodes[0].actuator.deprecation_message #=> String
     #   resp.nodes[0].actuator.comment #=> String
+    #   resp.nodes[0].actuator.struct_fully_qualified_name #=> String
     #   resp.nodes[0].attribute.fully_qualified_name #=> String
-    #   resp.nodes[0].attribute.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN"
+    #   resp.nodes[0].attribute.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN", "STRUCT", "STRUCT_ARRAY"
     #   resp.nodes[0].attribute.description #=> String
     #   resp.nodes[0].attribute.unit #=> String
     #   resp.nodes[0].attribute.allowed_values #=> Array
@@ -2286,6 +2382,17 @@ module Aws::IoTFleetWise
     #   resp.nodes[0].attribute.default_value #=> String
     #   resp.nodes[0].attribute.deprecation_message #=> String
     #   resp.nodes[0].attribute.comment #=> String
+    #   resp.nodes[0].struct.fully_qualified_name #=> String
+    #   resp.nodes[0].struct.description #=> String
+    #   resp.nodes[0].struct.deprecation_message #=> String
+    #   resp.nodes[0].struct.comment #=> String
+    #   resp.nodes[0].property.fully_qualified_name #=> String
+    #   resp.nodes[0].property.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN", "STRUCT", "STRUCT_ARRAY"
+    #   resp.nodes[0].property.data_encoding #=> String, one of "BINARY", "TYPED"
+    #   resp.nodes[0].property.description #=> String
+    #   resp.nodes[0].property.deprecation_message #=> String
+    #   resp.nodes[0].property.comment #=> String
+    #   resp.nodes[0].property.struct_fully_qualified_name #=> String
     #   resp.next_token #=> String
     #
     # @overload list_model_manifest_nodes(params = {})
@@ -2340,7 +2447,7 @@ module Aws::IoTFleetWise
     #   resp.summaries[0].arn #=> String
     #   resp.summaries[0].signal_catalog_arn #=> String
     #   resp.summaries[0].description #=> String
-    #   resp.summaries[0].status #=> String, one of "ACTIVE", "DRAFT"
+    #   resp.summaries[0].status #=> String, one of "ACTIVE", "DRAFT", "INVALID", "VALIDATING"
     #   resp.summaries[0].creation_time #=> Time
     #   resp.summaries[0].last_modification_time #=> Time
     #   resp.next_token #=> String
@@ -2375,6 +2482,9 @@ module Aws::IoTFleetWise
     # @option params [Integer] :max_results
     #   The maximum number of items to return, between 1 and 100, inclusive.
     #
+    # @option params [String] :signal_node_type
+    #   The type of node in the signal catalog.
+    #
     # @return [Types::ListSignalCatalogNodesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListSignalCatalogNodesResponse#nodes #nodes} => Array&lt;Types::Node&gt;
@@ -2388,6 +2498,7 @@ module Aws::IoTFleetWise
     #     name: "resourceName", # required
     #     next_token: "nextToken",
     #     max_results: 1,
+    #     signal_node_type: "SENSOR", # accepts SENSOR, ACTUATOR, ATTRIBUTE, BRANCH, CUSTOM_STRUCT, CUSTOM_PROPERTY
     #   })
     #
     # @example Response structure
@@ -2398,7 +2509,7 @@ module Aws::IoTFleetWise
     #   resp.nodes[0].branch.deprecation_message #=> String
     #   resp.nodes[0].branch.comment #=> String
     #   resp.nodes[0].sensor.fully_qualified_name #=> String
-    #   resp.nodes[0].sensor.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN"
+    #   resp.nodes[0].sensor.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN", "STRUCT", "STRUCT_ARRAY"
     #   resp.nodes[0].sensor.description #=> String
     #   resp.nodes[0].sensor.unit #=> String
     #   resp.nodes[0].sensor.allowed_values #=> Array
@@ -2407,8 +2518,9 @@ module Aws::IoTFleetWise
     #   resp.nodes[0].sensor.max #=> Float
     #   resp.nodes[0].sensor.deprecation_message #=> String
     #   resp.nodes[0].sensor.comment #=> String
+    #   resp.nodes[0].sensor.struct_fully_qualified_name #=> String
     #   resp.nodes[0].actuator.fully_qualified_name #=> String
-    #   resp.nodes[0].actuator.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN"
+    #   resp.nodes[0].actuator.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN", "STRUCT", "STRUCT_ARRAY"
     #   resp.nodes[0].actuator.description #=> String
     #   resp.nodes[0].actuator.unit #=> String
     #   resp.nodes[0].actuator.allowed_values #=> Array
@@ -2418,8 +2530,9 @@ module Aws::IoTFleetWise
     #   resp.nodes[0].actuator.assigned_value #=> String
     #   resp.nodes[0].actuator.deprecation_message #=> String
     #   resp.nodes[0].actuator.comment #=> String
+    #   resp.nodes[0].actuator.struct_fully_qualified_name #=> String
     #   resp.nodes[0].attribute.fully_qualified_name #=> String
-    #   resp.nodes[0].attribute.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN"
+    #   resp.nodes[0].attribute.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN", "STRUCT", "STRUCT_ARRAY"
     #   resp.nodes[0].attribute.description #=> String
     #   resp.nodes[0].attribute.unit #=> String
     #   resp.nodes[0].attribute.allowed_values #=> Array
@@ -2430,6 +2543,17 @@ module Aws::IoTFleetWise
     #   resp.nodes[0].attribute.default_value #=> String
     #   resp.nodes[0].attribute.deprecation_message #=> String
     #   resp.nodes[0].attribute.comment #=> String
+    #   resp.nodes[0].struct.fully_qualified_name #=> String
+    #   resp.nodes[0].struct.description #=> String
+    #   resp.nodes[0].struct.deprecation_message #=> String
+    #   resp.nodes[0].struct.comment #=> String
+    #   resp.nodes[0].property.fully_qualified_name #=> String
+    #   resp.nodes[0].property.data_type #=> String, one of "INT8", "UINT8", "INT16", "UINT16", "INT32", "UINT32", "INT64", "UINT64", "BOOLEAN", "FLOAT", "DOUBLE", "STRING", "UNIX_TIMESTAMP", "INT8_ARRAY", "UINT8_ARRAY", "INT16_ARRAY", "UINT16_ARRAY", "INT32_ARRAY", "UINT32_ARRAY", "INT64_ARRAY", "UINT64_ARRAY", "BOOLEAN_ARRAY", "FLOAT_ARRAY", "DOUBLE_ARRAY", "STRING_ARRAY", "UNIX_TIMESTAMP_ARRAY", "UNKNOWN", "STRUCT", "STRUCT_ARRAY"
+    #   resp.nodes[0].property.data_encoding #=> String, one of "BINARY", "TYPED"
+    #   resp.nodes[0].property.description #=> String
+    #   resp.nodes[0].property.deprecation_message #=> String
+    #   resp.nodes[0].property.comment #=> String
+    #   resp.nodes[0].property.struct_fully_qualified_name #=> String
     #   resp.next_token #=> String
     #
     # @overload list_signal_catalog_nodes(params = {})
@@ -2532,6 +2656,16 @@ module Aws::IoTFleetWise
     #   You can use this optional parameter to list only the vehicles created
     #   from a certain vehicle model.
     #
+    # @option params [Array<String>] :attribute_names
+    #   The fully qualified names of the attributes. For example, the fully
+    #   qualified name of an attribute might be `Vehicle.Body.Engine.Type`.
+    #
+    # @option params [Array<String>] :attribute_values
+    #   Static information about a vehicle attribute value in string format.
+    #   For example:
+    #
+    #   `"1.3 L R2"`
+    #
     # @option params [String] :next_token
     #   A pagination token for the next set of results.
     #
@@ -2555,6 +2689,8 @@ module Aws::IoTFleetWise
     #
     #   resp = client.list_vehicles({
     #     model_manifest_arn: "arn",
+    #     attribute_names: ["attributeName"],
+    #     attribute_values: ["attributeValue"],
     #     next_token: "nextToken",
     #     max_results: 1,
     #   })
@@ -2568,6 +2704,8 @@ module Aws::IoTFleetWise
     #   resp.vehicle_summaries[0].decoder_manifest_arn #=> String
     #   resp.vehicle_summaries[0].creation_time #=> Time
     #   resp.vehicle_summaries[0].last_modification_time #=> Time
+    #   resp.vehicle_summaries[0].attributes #=> Hash
+    #   resp.vehicle_summaries[0].attributes["attributeName"] #=> String
     #   resp.next_token #=> String
     #
     # @overload list_vehicles(params = {})
@@ -2654,7 +2792,7 @@ module Aws::IoTFleetWise
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_encryption_configuration({
-    #     kms_key_id: "String",
+    #     kms_key_id: "PutEncryptionConfigurationRequestKmsKeyIdString",
     #     encryption_type: "KMS_BASED_ENCRYPTION", # required, accepts KMS_BASED_ENCRYPTION, FLEETWISE_DEFAULT_ENCRYPTION
     #   })
     #
@@ -2712,13 +2850,30 @@ module Aws::IoTFleetWise
     # [DeleteServiceLinkedRole][3] in the *Identity and Access Management
     # API Reference*.
     #
-    #      <p>Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services Cloud. For more information, including step-by-step procedures, see <a href="https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html">Setting up Amazon Web Services IoT FleetWise</a>. </p> <note> <p>An Amazon Web Services account is <b>not</b> the same thing as a "user." An <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users">Amazon Web Services user</a> is an identity that you create using Identity and Access Management (IAM) and takes the form of either an <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html">IAM user</a> or an <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM role, both with credentials</a>. A single Amazon Web Services account can, and typically does, contain many users and roles.</p> </note>
+    # Registers your Amazon Web Services account, IAM, and Amazon Timestream
+    # resources so Amazon Web Services IoT FleetWise can transfer your
+    # vehicle data to the Amazon Web Services Cloud. For more information,
+    # including step-by-step procedures, see [Setting up Amazon Web Services
+    # IoT FleetWise][4].
+    #
+    # <note markdown="1"> An Amazon Web Services account is **not** the same thing as a
+    # "user." An [Amazon Web Services user][5] is an identity that you
+    # create using Identity and Access Management (IAM) and takes the form
+    # of either an [IAM user][6] or an [IAM role, both with credentials][7].
+    # A single Amazon Web Services account can, and typically does, contain
+    # many users and roles.
+    #
+    #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CreateCampaign.html
     # [2]: https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_DeleteCampaign.html
     # [3]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceLinkedRole.html
+    # [4]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html
+    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html
+    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
     #
     # @option params [Types::TimestreamResources] :timestream_resources
     #   The registered Amazon Timestream resources that Amazon Web Services
@@ -2927,7 +3082,7 @@ module Aws::IoTFleetWise
     #     signal_decoders_to_add: [
     #       {
     #         fully_qualified_name: "FullyQualifiedName", # required
-    #         type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL
+    #         type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL, MESSAGE_SIGNAL
     #         interface_id: "InterfaceId", # required
     #         can_signal: {
     #           message_id: 1, # required
@@ -2949,13 +3104,42 @@ module Aws::IoTFleetWise
     #           byte_length: 1, # required
     #           bit_right_shift: 1,
     #           bit_mask_length: 1,
+    #         },
+    #         message_signal: {
+    #           topic_name: "TopicName", # required
+    #           structured_message: { # required
+    #             primitive_message_definition: {
+    #               ros2_primitive_message_definition: {
+    #                 primitive_type: "BOOL", # required, accepts BOOL, BYTE, CHAR, FLOAT32, FLOAT64, INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, STRING, WSTRING
+    #                 offset: 1.0,
+    #                 scaling: 1.0,
+    #                 upper_bound: 1,
+    #               },
+    #             },
+    #             structured_message_list_definition: {
+    #               name: "StructureMessageName", # required
+    #               member_type: { # required
+    #                 # recursive StructuredMessage
+    #               },
+    #               list_type: "FIXED_CAPACITY", # required, accepts FIXED_CAPACITY, DYNAMIC_UNBOUNDED_CAPACITY, DYNAMIC_BOUNDED_CAPACITY
+    #               capacity: 1,
+    #             },
+    #             structured_message_definition: [
+    #               {
+    #                 field_name: "StructureMessageName", # required
+    #                 data_type: { # required
+    #                   # recursive StructuredMessage
+    #                 },
+    #               },
+    #             ],
+    #           },
     #         },
     #       },
     #     ],
     #     signal_decoders_to_update: [
     #       {
     #         fully_qualified_name: "FullyQualifiedName", # required
-    #         type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL
+    #         type: "CAN_SIGNAL", # required, accepts CAN_SIGNAL, OBD_SIGNAL, MESSAGE_SIGNAL
     #         interface_id: "InterfaceId", # required
     #         can_signal: {
     #           message_id: 1, # required
@@ -2977,6 +3161,35 @@ module Aws::IoTFleetWise
     #           byte_length: 1, # required
     #           bit_right_shift: 1,
     #           bit_mask_length: 1,
+    #         },
+    #         message_signal: {
+    #           topic_name: "TopicName", # required
+    #           structured_message: { # required
+    #             primitive_message_definition: {
+    #               ros2_primitive_message_definition: {
+    #                 primitive_type: "BOOL", # required, accepts BOOL, BYTE, CHAR, FLOAT32, FLOAT64, INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, STRING, WSTRING
+    #                 offset: 1.0,
+    #                 scaling: 1.0,
+    #                 upper_bound: 1,
+    #               },
+    #             },
+    #             structured_message_list_definition: {
+    #               name: "StructureMessageName", # required
+    #               member_type: { # required
+    #                 # recursive StructuredMessage
+    #               },
+    #               list_type: "FIXED_CAPACITY", # required, accepts FIXED_CAPACITY, DYNAMIC_UNBOUNDED_CAPACITY, DYNAMIC_BOUNDED_CAPACITY
+    #               capacity: 1,
+    #             },
+    #             structured_message_definition: [
+    #               {
+    #                 field_name: "StructureMessageName", # required
+    #                 data_type: { # required
+    #                   # recursive StructuredMessage
+    #                 },
+    #               },
+    #             ],
+    #           },
     #         },
     #       },
     #     ],
@@ -2984,7 +3197,7 @@ module Aws::IoTFleetWise
     #     network_interfaces_to_add: [
     #       {
     #         interface_id: "InterfaceId", # required
-    #         type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE
+    #         type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE, VEHICLE_MIDDLEWARE
     #         can_interface: {
     #           name: "CanInterfaceName", # required
     #           protocol_name: "ProtocolName",
@@ -2998,13 +3211,17 @@ module Aws::IoTFleetWise
     #           dtc_request_interval_seconds: 1,
     #           use_extended_ids: false,
     #           has_transmission_ecu: false,
+    #         },
+    #         vehicle_middleware: {
+    #           name: "VehicleMiddlewareName", # required
+    #           protocol_name: "ROS_2", # required, accepts ROS_2
     #         },
     #       },
     #     ],
     #     network_interfaces_to_update: [
     #       {
     #         interface_id: "InterfaceId", # required
-    #         type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE
+    #         type: "CAN_INTERFACE", # required, accepts CAN_INTERFACE, OBD_INTERFACE, VEHICLE_MIDDLEWARE
     #         can_interface: {
     #           name: "CanInterfaceName", # required
     #           protocol_name: "ProtocolName",
@@ -3019,10 +3236,14 @@ module Aws::IoTFleetWise
     #           use_extended_ids: false,
     #           has_transmission_ecu: false,
     #         },
+    #         vehicle_middleware: {
+    #           name: "VehicleMiddlewareName", # required
+    #           protocol_name: "ROS_2", # required, accepts ROS_2
+    #         },
     #       },
     #     ],
     #     network_interfaces_to_remove: ["InterfaceId"],
-    #     status: "ACTIVE", # accepts ACTIVE, DRAFT
+    #     status: "ACTIVE", # accepts ACTIVE, DRAFT, INVALID, VALIDATING
     #   })
     #
     # @example Response structure
@@ -3108,7 +3329,7 @@ module Aws::IoTFleetWise
     #     description: "description",
     #     nodes_to_add: ["NodePath"],
     #     nodes_to_remove: ["NodePath"],
-    #     status: "ACTIVE", # accepts ACTIVE, DRAFT
+    #     status: "ACTIVE", # accepts ACTIVE, DRAFT, INVALID, VALIDATING
     #   })
     #
     # @example Response structure
@@ -3161,7 +3382,7 @@ module Aws::IoTFleetWise
     #         },
     #         sensor: {
     #           fully_qualified_name: "string", # required
-    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
+    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN, STRUCT, STRUCT_ARRAY
     #           description: "description",
     #           unit: "string",
     #           allowed_values: ["string"],
@@ -3169,10 +3390,11 @@ module Aws::IoTFleetWise
     #           max: 1.0,
     #           deprecation_message: "message",
     #           comment: "message",
+    #           struct_fully_qualified_name: "NodePath",
     #         },
     #         actuator: {
     #           fully_qualified_name: "string", # required
-    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
+    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN, STRUCT, STRUCT_ARRAY
     #           description: "description",
     #           unit: "string",
     #           allowed_values: ["string"],
@@ -3181,10 +3403,11 @@ module Aws::IoTFleetWise
     #           assigned_value: "string",
     #           deprecation_message: "message",
     #           comment: "message",
+    #           struct_fully_qualified_name: "NodePath",
     #         },
     #         attribute: {
     #           fully_qualified_name: "string", # required
-    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
+    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN, STRUCT, STRUCT_ARRAY
     #           description: "description",
     #           unit: "string",
     #           allowed_values: ["string"],
@@ -3194,6 +3417,21 @@ module Aws::IoTFleetWise
     #           default_value: "string",
     #           deprecation_message: "message",
     #           comment: "message",
+    #         },
+    #         struct: {
+    #           fully_qualified_name: "string", # required
+    #           description: "description",
+    #           deprecation_message: "message",
+    #           comment: "message",
+    #         },
+    #         property: {
+    #           fully_qualified_name: "string", # required
+    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN, STRUCT, STRUCT_ARRAY
+    #           data_encoding: "BINARY", # accepts BINARY, TYPED
+    #           description: "description",
+    #           deprecation_message: "message",
+    #           comment: "message",
+    #           struct_fully_qualified_name: "NodePath",
     #         },
     #       },
     #     ],
@@ -3207,7 +3445,7 @@ module Aws::IoTFleetWise
     #         },
     #         sensor: {
     #           fully_qualified_name: "string", # required
-    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
+    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN, STRUCT, STRUCT_ARRAY
     #           description: "description",
     #           unit: "string",
     #           allowed_values: ["string"],
@@ -3215,10 +3453,11 @@ module Aws::IoTFleetWise
     #           max: 1.0,
     #           deprecation_message: "message",
     #           comment: "message",
+    #           struct_fully_qualified_name: "NodePath",
     #         },
     #         actuator: {
     #           fully_qualified_name: "string", # required
-    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
+    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN, STRUCT, STRUCT_ARRAY
     #           description: "description",
     #           unit: "string",
     #           allowed_values: ["string"],
@@ -3227,10 +3466,11 @@ module Aws::IoTFleetWise
     #           assigned_value: "string",
     #           deprecation_message: "message",
     #           comment: "message",
+    #           struct_fully_qualified_name: "NodePath",
     #         },
     #         attribute: {
     #           fully_qualified_name: "string", # required
-    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN
+    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN, STRUCT, STRUCT_ARRAY
     #           description: "description",
     #           unit: "string",
     #           allowed_values: ["string"],
@@ -3240,6 +3480,21 @@ module Aws::IoTFleetWise
     #           default_value: "string",
     #           deprecation_message: "message",
     #           comment: "message",
+    #         },
+    #         struct: {
+    #           fully_qualified_name: "string", # required
+    #           description: "description",
+    #           deprecation_message: "message",
+    #           comment: "message",
+    #         },
+    #         property: {
+    #           fully_qualified_name: "string", # required
+    #           data_type: "INT8", # required, accepts INT8, UINT8, INT16, UINT16, INT32, UINT32, INT64, UINT64, BOOLEAN, FLOAT, DOUBLE, STRING, UNIX_TIMESTAMP, INT8_ARRAY, UINT8_ARRAY, INT16_ARRAY, UINT16_ARRAY, INT32_ARRAY, UINT32_ARRAY, INT64_ARRAY, UINT64_ARRAY, BOOLEAN_ARRAY, FLOAT_ARRAY, DOUBLE_ARRAY, STRING_ARRAY, UNIX_TIMESTAMP_ARRAY, UNKNOWN, STRUCT, STRUCT_ARRAY
+    #           data_encoding: "BINARY", # accepts BINARY, TYPED
+    #           description: "description",
+    #           deprecation_message: "message",
+    #           comment: "message",
+    #           struct_fully_qualified_name: "NodePath",
     #         },
     #       },
     #     ],
@@ -3325,7 +3580,7 @@ module Aws::IoTFleetWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotfleetwise'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

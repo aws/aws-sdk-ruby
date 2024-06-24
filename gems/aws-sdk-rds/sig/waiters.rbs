@@ -1,0 +1,217 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    module Waiters
+
+      class DBClusterAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?db_cluster_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?include_shared: bool
+                  ) -> Client::_DescribeDBClustersResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeDBClustersResponseSuccess
+      end
+
+      class DBClusterDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?db_cluster_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?include_shared: bool
+                  ) -> Client::_DescribeDBClustersResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeDBClustersResponseSuccess
+      end
+
+      class DBClusterSnapshotAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?db_cluster_identifier: ::String,
+                    ?db_cluster_snapshot_identifier: ::String,
+                    ?snapshot_type: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?include_shared: bool,
+                    ?include_public: bool,
+                    ?db_cluster_resource_id: ::String
+                  ) -> Client::_DescribeDBClusterSnapshotsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeDBClusterSnapshotsResponseSuccess
+      end
+
+      class DBClusterSnapshotDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?db_cluster_identifier: ::String,
+                    ?db_cluster_snapshot_identifier: ::String,
+                    ?snapshot_type: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?include_shared: bool,
+                    ?include_public: bool,
+                    ?db_cluster_resource_id: ::String
+                  ) -> Client::_DescribeDBClusterSnapshotsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeDBClusterSnapshotsResponseSuccess
+      end
+
+      class DBInstanceAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?db_instance_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeDBInstancesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeDBInstancesResponseSuccess
+      end
+
+      class DBInstanceDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?db_instance_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeDBInstancesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeDBInstancesResponseSuccess
+      end
+
+      class DBSnapshotAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?db_instance_identifier: ::String,
+                    ?db_snapshot_identifier: ::String,
+                    ?snapshot_type: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?include_shared: bool,
+                    ?include_public: bool,
+                    ?dbi_resource_id: ::String
+                  ) -> Client::_DescribeDBSnapshotsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeDBSnapshotsResponseSuccess
+      end
+
+      class DBSnapshotDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?db_instance_identifier: ::String,
+                    ?db_snapshot_identifier: ::String,
+                    ?snapshot_type: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?include_shared: bool,
+                    ?include_public: bool,
+                    ?dbi_resource_id: ::String
+                  ) -> Client::_DescribeDBSnapshotsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeDBSnapshotsResponseSuccess
+      end
+
+      class TenantDatabaseAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?db_instance_identifier: ::String,
+                    ?tenant_db_name: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeTenantDatabasesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeTenantDatabasesResponseSuccess
+      end
+
+      class TenantDatabaseDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?db_instance_identifier: ::String,
+                    ?tenant_db_name: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeTenantDatabasesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeTenantDatabasesResponseSuccess
+      end
+    end
+  end
+end

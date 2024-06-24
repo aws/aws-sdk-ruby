@@ -1,6 +1,171 @@
 Unreleased Changes
 ------------------
 
+1.248.0 (2024-06-20)
+------------------
+
+* Feature - Adds support for model references in Hub service, and adds support for cross-account access of Hubs
+
+1.247.0 (2024-06-18)
+------------------
+
+* Feature - Launched a new feature in SageMaker to provide managed MLflow Tracking Servers for customers to track ML experiments. This release also adds a new capability of attaching additional storage to SageMaker HyperPod cluster instances.
+
+1.246.0 (2024-06-07)
+------------------
+
+* Feature - This release introduces a new optional parameter: InferenceAmiVersion, in ProductionVariant.
+
+1.245.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.244.0 (2024-06-04)
+------------------
+
+* Feature - Extend DescribeClusterNode response with private DNS hostname and IP address, and placement information about availability zone and availability zone ID.
+
+1.243.0 (2024-05-30)
+------------------
+
+* Feature - Adds Model Card information as a new component to Model Package. Autopilot launches algorithm selection for TimeSeries modality to generate AutoML candidates per algorithm.
+
+1.242.0 (2024-05-16)
+------------------
+
+* Feature - Introduced WorkerAccessConfiguration to SageMaker Workteam. This allows customers to configure resource access for workers in a workteam.
+
+1.241.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.240.0 (2024-05-10)
+------------------
+
+* Feature - Introduced support for G6 instance types on Sagemaker Notebook Instances and on SageMaker Studio for JupyterLab and CodeEditor applications.
+
+1.239.0 (2024-05-03)
+------------------
+
+* Feature - Amazon SageMaker Inference now supports m6i, c6i, r6i, m7i, c7i, r7i and g5 instance types for Batch Transform Jobs
+
+1.238.0 (2024-04-30)
+------------------
+
+* Feature - Amazon SageMaker Training now supports the use of attribute-based access control (ABAC) roles for training job execution roles. Amazon SageMaker Inference now supports G6 instance types.
+
+1.237.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.236.0 (2024-04-22)
+------------------
+
+* Feature - This release adds support for Real-Time Collaboration and Shared Space for JupyterLab App on SageMaker Studio.
+
+1.235.0 (2024-04-18)
+------------------
+
+* Feature - Removed deprecated enum values and updated API documentation.
+
+1.234.0 (2024-03-25)
+------------------
+
+* Feature - Introduced support for the following new instance types on SageMaker Studio for JupyterLab and CodeEditor applications: m6i, m6id, m7i, c6i, c6id, c7i, r6i, r6id, r7i, and p5
+
+1.233.0 (2024-03-15)
+------------------
+
+* Feature - Adds m6i, m6id, m7i, c6i, c6id, c7i, r6i r6id, r7i, p5 instance type support to Sagemaker Notebook Instances and miscellaneous wording fixes for previous Sagemaker documentation.
+
+1.232.0 (2024-02-29)
+------------------
+
+* Feature - Adds support for ModelDataSource in Model Packages to support unzipped models. Adds support to specify SourceUri for models which allows registration of models without mandating a container for hosting. Using SourceUri, customers can decouple the model from hosting information during registration.
+
+1.231.0 (2024-02-02)
+------------------
+
+* Feature - Amazon SageMaker Canvas adds GenerativeAiSettings support for CanvasAppSettings.
+
+1.230.0 (2024-01-26)
+------------------
+
+* Feature - Amazon SageMaker Automatic Model Tuning now provides an API to programmatically delete tuning jobs.
+
+1.229.0 (2024-01-14)
+------------------
+
+* Feature - This release will have ValidationException thrown if certain invalid app types are provided. The release will also throw ValidationException if more than 10 account ids are provided in VpcOnlyTrustedAccounts.
+
+1.228.0 (2024-01-04)
+------------------
+
+* Feature - Adding support for provisioned throughput mode for SageMaker Feature Groups
+
+1.227.0 (2023-12-28)
+------------------
+
+* Feature - Amazon SageMaker Studio now supports Docker access from within app container
+
+1.226.0 (2023-12-21)
+------------------
+
+* Feature - Amazon SageMaker Training now provides model training container access for debugging purposes. Amazon SageMaker Search now provides the ability to use visibility conditions to limit resource access to a single domain or multiple domains.
+
+1.225.0 (2023-12-15)
+------------------
+
+* Feature - This release 1) introduces a new API: DeleteCompilationJob , and 2) adds InfraCheckConfig for Create/Describe training job API
+
+1.224.0 (2023-11-30)
+------------------
+
+* Feature - This release adds support for 1/ Code Editor, based on Code-OSS, Visual Studio Code Open Source, a new fully managed IDE option in SageMaker Studio  2/ JupyterLab, a new fully managed JupyterLab IDE experience in SageMaker Studio
+
+1.223.0 (2023-11-29)
+------------------
+
+* Feature - This release adds following support 1/ Improved SDK tooling for model deployment. 2/ New Inference Component based features to lower inference costs and latency 3/ SageMaker HyperPod management. 4/ Additional parameters for FM Fine Tuning in Autopilot
+
+1.222.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.221.0 (2023-11-22)
+------------------
+
+* Feature - This feature adds the end user license agreement status as a model access configuration parameter.
+
+1.220.0 (2023-11-16)
+------------------
+
+* Feature - Amazon SageMaker Studio now supports Trainium instance types - trn1.2xlarge, trn1.32xlarge, trn1n.32xlarge.
+
+1.219.0 (2023-11-14)
+------------------
+
+* Feature - This release makes Model Registry Inference Specification fields as not required.
+
+1.218.0 (2023-11-01)
+------------------
+
+* Feature - Support for batch transform input in Model dashboard
+
+1.217.0 (2023-10-26)
+------------------
+
+* Feature - Amazon Sagemaker Autopilot now supports Text Generation jobs.
+
+1.216.0 (2023-10-12)
+------------------
+
+* Feature - Amazon SageMaker Canvas adds KendraSettings and DirectDeploySettings support for CanvasAppSettings
+
 1.215.0 (2023-10-04)
 ------------------
 

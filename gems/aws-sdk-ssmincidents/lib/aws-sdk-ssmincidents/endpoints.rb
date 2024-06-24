@@ -12,6 +12,20 @@ module Aws::SSMIncidents
   # @api private
   module Endpoints
 
+    class BatchGetIncidentFindings
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SSMIncidents::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateReplicationSet
       def self.build(context)
         unless context.config.regional_endpoint
@@ -181,6 +195,20 @@ module Aws::SSMIncidents
     end
 
     class GetTimelineEvent
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SSMIncidents::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListIncidentFindings
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

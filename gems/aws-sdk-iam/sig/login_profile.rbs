@@ -1,0 +1,65 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IAM
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html
+    class LoginProfile
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#initialize-instance_method
+      def initialize: (String user_name, Hash[Symbol, untyped] options) -> void
+                    | (user_name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#user_name-instance_method
+      def user_name: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#create_date-instance_method
+      def create_date: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#password_reset_required-instance_method
+      def password_reset_required: () -> bool
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#data-instance_method
+      def data: () -> Types::LoginProfile
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#create-instance_method
+      def create: (
+                    password: ::String,
+                    ?password_reset_required: bool
+                  ) -> LoginProfile
+                | (?Hash[Symbol, untyped]) -> LoginProfile
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#update-instance_method
+      def update: (
+                    ?password: ::String,
+                    ?password_reset_required: bool
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IAM/LoginProfile.html#user-instance_method
+      def user: () -> User
+
+      class Collection < ::Aws::Resources::Collection[LoginProfile]
+      end
+    end
+  end
+end

@@ -1,0 +1,64 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ElasticBeanstalk
+    module Waiters
+
+      class EnvironmentExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?application_name: ::String,
+                    ?version_label: ::String,
+                    ?environment_ids: Array[::String],
+                    ?environment_names: Array[::String],
+                    ?include_deleted: bool,
+                    ?included_deleted_back_to: ::Time,
+                    ?max_records: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeEnvironmentsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeEnvironmentsResponseSuccess
+      end
+
+      class EnvironmentTerminated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?application_name: ::String,
+                    ?version_label: ::String,
+                    ?environment_ids: Array[::String],
+                    ?environment_names: Array[::String],
+                    ?include_deleted: bool,
+                    ?included_deleted_back_to: ::Time,
+                    ?max_records: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeEnvironmentsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeEnvironmentsResponseSuccess
+      end
+
+      class EnvironmentUpdated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?application_name: ::String,
+                    ?version_label: ::String,
+                    ?environment_ids: Array[::String],
+                    ?environment_names: Array[::String],
+                    ?include_deleted: bool,
+                    ?included_deleted_back_to: ::Time,
+                    ?max_records: ::Integer,
+                    ?next_token: ::String
+                  ) -> Client::_DescribeEnvironmentsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeEnvironmentsResponseSuccess
+      end
+    end
+  end
+end

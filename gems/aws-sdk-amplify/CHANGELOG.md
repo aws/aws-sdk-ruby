@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2024-06-03)
+------------------
+
+* Feature - This doc-only update identifies fields that are specific to Gen 1 and Gen 2 applications.
+
+1.59.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2024-04-29)
+------------------
+
+* Feature - Updating max results limit for listing any resources (Job, Artifacts, Branch, BackendResources, DomainAssociation) to 50 with the exception of list apps that where max results can be up to 100.
+
+1.57.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.56.0 (2024-03-14)
+------------------
+
+* Feature - Documentation updates for Amplify. Identifies the APIs available only to apps created using Amplify Gen 1.
+
+1.55.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.53.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.52.0 (2023-10-31)
+------------------
+
+* Feature - Add backend field to CreateBranch and UpdateBranch requests. Add pagination support for ListApps, ListDomainAssociations, ListBranches, and ListJobs
+
 1.51.0 (2023-09-27)
 ------------------
 

@@ -93,7 +93,7 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_placement_groups(group_names: [@name])
       end
       @data = resp.placement_groups[0]
@@ -210,7 +210,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -231,7 +231,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_placement_group(options)
       end
       resp.data
@@ -334,8 +334,9 @@ module Aws::EC2
     #
     #   * `instance-id` - The ID of the instance.
     #
-    #   * `instance-lifecycle` - Indicates whether this is a Spot Instance or
-    #     a Scheduled Instance (`spot` \| `scheduled`).
+    #   * `instance-lifecycle` - Indicates whether this is a Spot Instance, a
+    #     Scheduled Instance, or a Capacity Block (`spot` \| `scheduled` \|
+    #     `capacity-block`).
     #
     #   * `instance-state-code` - The state of the instance, as a 16-bit
     #     unsigned integer. The high byte is used for internal purposes and
@@ -598,6 +599,10 @@ module Aws::EC2
     #     (`ip-name` \| `resource-name`).
     #
     #   * `private-ip-address` - The private IPv4 address of the instance.
+    #     This can only be used to filter by the primary IP address of the
+    #     network interface attached to the instance. To filter by additional
+    #     IP addresses assigned to the network interface, use the filter
+    #     `network-interface.addresses.private-ip-address`.
     #
     #   * `product-code` - The product code associated with the AMI used to
     #     launch the instance.
@@ -692,7 +697,7 @@ module Aws::EC2
           name: "placement-group-name",
           values: [@name]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_instances(options)
         end
         resp.each_page do |page|

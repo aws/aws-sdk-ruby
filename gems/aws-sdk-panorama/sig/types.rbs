@@ -1,0 +1,875 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Panorama
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AlternateSoftwareMetadata
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationInstance
+      attr_accessor application_instance_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor default_runtime_context_device: ::String
+      attr_accessor default_runtime_context_device_name: ::String
+      attr_accessor description: ::String
+      attr_accessor health_status: ("RUNNING" | "ERROR" | "NOT_AVAILABLE")
+      attr_accessor name: ::String
+      attr_accessor runtime_context_states: ::Array[Types::ReportedRuntimeContextState]
+      attr_accessor status: ("DEPLOYMENT_PENDING" | "DEPLOYMENT_REQUESTED" | "DEPLOYMENT_IN_PROGRESS" | "DEPLOYMENT_ERROR" | "DEPLOYMENT_SUCCEEDED" | "REMOVAL_PENDING" | "REMOVAL_REQUESTED" | "REMOVAL_IN_PROGRESS" | "REMOVAL_FAILED" | "REMOVAL_SUCCEEDED" | "DEPLOYMENT_FAILED")
+      attr_accessor status_description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor error_arguments: ::Array[Types::ConflictExceptionErrorArgument]
+      attr_accessor error_id: ::String
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictExceptionErrorArgument
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApplicationInstanceRequest
+      attr_accessor application_instance_id_to_replace: ::String
+      attr_accessor default_runtime_context_device: ::String
+      attr_accessor description: ::String
+      attr_accessor manifest_overrides_payload: Types::ManifestOverridesPayload
+      attr_accessor manifest_payload: Types::ManifestPayload
+      attr_accessor name: ::String
+      attr_accessor runtime_role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateApplicationInstanceResponse
+      attr_accessor application_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateJobForDevicesRequest
+      attr_accessor device_ids: ::Array[::String]
+      attr_accessor device_job_config: Types::DeviceJobConfig
+      attr_accessor job_type: ("OTA" | "REBOOT")
+      SENSITIVE: []
+    end
+
+    class CreateJobForDevicesResponse
+      attr_accessor jobs: ::Array[Types::Job]
+      SENSITIVE: []
+    end
+
+    class CreateNodeFromTemplateJobRequest
+      attr_accessor job_tags: ::Array[Types::JobResourceTags]
+      attr_accessor node_description: ::String
+      attr_accessor node_name: ::String
+      attr_accessor output_package_name: ::String
+      attr_accessor output_package_version: ::String
+      attr_accessor template_parameters: ::Hash[::String, ::String]
+      attr_accessor template_type: ("RTSP_CAMERA_STREAM")
+      SENSITIVE: []
+    end
+
+    class CreateNodeFromTemplateJobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePackageImportJobRequest
+      attr_accessor client_token: ::String
+      attr_accessor input_config: Types::PackageImportJobInputConfig
+      attr_accessor job_tags: ::Array[Types::JobResourceTags]
+      attr_accessor job_type: ("NODE_PACKAGE_VERSION" | "MARKETPLACE_NODE_PACKAGE_VERSION")
+      attr_accessor output_config: Types::PackageImportJobOutputConfig
+      SENSITIVE: []
+    end
+
+    class CreatePackageImportJobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePackageRequest
+      attr_accessor package_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePackageResponse
+      attr_accessor arn: ::String
+      attr_accessor package_id: ::String
+      attr_accessor storage_location: Types::StorageLocation
+      SENSITIVE: []
+    end
+
+    class DeleteDeviceRequest
+      attr_accessor device_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeviceResponse
+      attr_accessor device_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePackageRequest
+      attr_accessor force_delete: bool
+      attr_accessor package_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePackageResponse < Aws::EmptyStructure
+    end
+
+    class DeregisterPackageVersionRequest
+      attr_accessor owner_account: ::String
+      attr_accessor package_id: ::String
+      attr_accessor package_version: ::String
+      attr_accessor patch_version: ::String
+      attr_accessor updated_latest_patch_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterPackageVersionResponse < Aws::EmptyStructure
+    end
+
+    class DescribeApplicationInstanceDetailsRequest
+      attr_accessor application_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationInstanceDetailsResponse
+      attr_accessor application_instance_id: ::String
+      attr_accessor application_instance_id_to_replace: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor default_runtime_context_device: ::String
+      attr_accessor description: ::String
+      attr_accessor manifest_overrides_payload: Types::ManifestOverridesPayload
+      attr_accessor manifest_payload: Types::ManifestPayload
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationInstanceRequest
+      attr_accessor application_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationInstanceResponse
+      attr_accessor application_instance_id: ::String
+      attr_accessor application_instance_id_to_replace: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor default_runtime_context_device: ::String
+      attr_accessor default_runtime_context_device_name: ::String
+      attr_accessor description: ::String
+      attr_accessor health_status: ("RUNNING" | "ERROR" | "NOT_AVAILABLE")
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor runtime_context_states: ::Array[Types::ReportedRuntimeContextState]
+      attr_accessor runtime_role_arn: ::String
+      attr_accessor status: ("DEPLOYMENT_PENDING" | "DEPLOYMENT_REQUESTED" | "DEPLOYMENT_IN_PROGRESS" | "DEPLOYMENT_ERROR" | "DEPLOYMENT_SUCCEEDED" | "REMOVAL_PENDING" | "REMOVAL_REQUESTED" | "REMOVAL_IN_PROGRESS" | "REMOVAL_FAILED" | "REMOVAL_SUCCEEDED" | "DEPLOYMENT_FAILED")
+      attr_accessor status_description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeDeviceJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDeviceJobResponse
+      attr_accessor created_time: ::Time
+      attr_accessor device_arn: ::String
+      attr_accessor device_id: ::String
+      attr_accessor device_name: ::String
+      attr_accessor device_type: ("PANORAMA_APPLIANCE_DEVELOPER_KIT" | "PANORAMA_APPLIANCE")
+      attr_accessor image_version: ::String
+      attr_accessor job_id: ::String
+      attr_accessor job_type: ("OTA" | "REBOOT")
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "VERIFYING" | "REBOOTING" | "DOWNLOADING" | "COMPLETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DescribeDeviceRequest
+      attr_accessor device_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDeviceResponse
+      attr_accessor alternate_softwares: ::Array[Types::AlternateSoftwareMetadata]
+      attr_accessor arn: ::String
+      attr_accessor brand: ("AWS_PANORAMA" | "LENOVO")
+      attr_accessor created_time: ::Time
+      attr_accessor current_networking_status: Types::NetworkStatus
+      attr_accessor current_software: ::String
+      attr_accessor description: ::String
+      attr_accessor device_aggregated_status: ("ERROR" | "AWAITING_PROVISIONING" | "PENDING" | "FAILED" | "DELETING" | "ONLINE" | "OFFLINE" | "LEASE_EXPIRED" | "UPDATE_NEEDED" | "REBOOTING")
+      attr_accessor device_connection_status: ("ONLINE" | "OFFLINE" | "AWAITING_CREDENTIALS" | "NOT_AVAILABLE" | "ERROR")
+      attr_accessor device_id: ::String
+      attr_accessor latest_alternate_software: ::String
+      attr_accessor latest_device_job: Types::LatestDeviceJob
+      attr_accessor latest_software: ::String
+      attr_accessor lease_expiration_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor networking_configuration: Types::NetworkPayload
+      attr_accessor provisioning_status: ("AWAITING_PROVISIONING" | "PENDING" | "SUCCEEDED" | "FAILED" | "ERROR" | "DELETING")
+      attr_accessor serial_number: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("PANORAMA_APPLIANCE_DEVELOPER_KIT" | "PANORAMA_APPLIANCE")
+      SENSITIVE: []
+    end
+
+    class DescribeNodeFromTemplateJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNodeFromTemplateJobResponse
+      attr_accessor created_time: ::Time
+      attr_accessor job_id: ::String
+      attr_accessor job_tags: ::Array[Types::JobResourceTags]
+      attr_accessor last_updated_time: ::Time
+      attr_accessor node_description: ::String
+      attr_accessor node_name: ::String
+      attr_accessor output_package_name: ::String
+      attr_accessor output_package_version: ::String
+      attr_accessor status: ("PENDING" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor template_parameters: ::Hash[::String, ::String]
+      attr_accessor template_type: ("RTSP_CAMERA_STREAM")
+      SENSITIVE: []
+    end
+
+    class DescribeNodeRequest
+      attr_accessor node_id: ::String
+      attr_accessor owner_account: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeNodeResponse
+      attr_accessor asset_name: ::String
+      attr_accessor category: ("BUSINESS_LOGIC" | "ML_MODEL" | "MEDIA_SOURCE" | "MEDIA_SINK")
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor node_id: ::String
+      attr_accessor node_interface: Types::NodeInterface
+      attr_accessor owner_account: ::String
+      attr_accessor package_arn: ::String
+      attr_accessor package_id: ::String
+      attr_accessor package_name: ::String
+      attr_accessor package_version: ::String
+      attr_accessor patch_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePackageImportJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePackageImportJobResponse
+      attr_accessor client_token: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor input_config: Types::PackageImportJobInputConfig
+      attr_accessor job_id: ::String
+      attr_accessor job_tags: ::Array[Types::JobResourceTags]
+      attr_accessor job_type: ("NODE_PACKAGE_VERSION" | "MARKETPLACE_NODE_PACKAGE_VERSION")
+      attr_accessor last_updated_time: ::Time
+      attr_accessor output: Types::PackageImportJobOutput
+      attr_accessor output_config: Types::PackageImportJobOutputConfig
+      attr_accessor status: ("PENDING" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePackageRequest
+      attr_accessor package_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePackageResponse
+      attr_accessor arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor package_id: ::String
+      attr_accessor package_name: ::String
+      attr_accessor read_access_principal_arns: ::Array[::String]
+      attr_accessor storage_location: Types::StorageLocation
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor write_access_principal_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribePackageVersionRequest
+      attr_accessor owner_account: ::String
+      attr_accessor package_id: ::String
+      attr_accessor package_version: ::String
+      attr_accessor patch_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePackageVersionResponse
+      attr_accessor is_latest_patch: bool
+      attr_accessor owner_account: ::String
+      attr_accessor package_arn: ::String
+      attr_accessor package_id: ::String
+      attr_accessor package_name: ::String
+      attr_accessor package_version: ::String
+      attr_accessor patch_version: ::String
+      attr_accessor registered_time: ::Time
+      attr_accessor status: ("REGISTER_PENDING" | "REGISTER_COMPLETED" | "FAILED" | "DELETING")
+      attr_accessor status_description: ::String
+      SENSITIVE: []
+    end
+
+    class Device
+      attr_accessor brand: ("AWS_PANORAMA" | "LENOVO")
+      attr_accessor created_time: ::Time
+      attr_accessor current_software: ::String
+      attr_accessor description: ::String
+      attr_accessor device_aggregated_status: ("ERROR" | "AWAITING_PROVISIONING" | "PENDING" | "FAILED" | "DELETING" | "ONLINE" | "OFFLINE" | "LEASE_EXPIRED" | "UPDATE_NEEDED" | "REBOOTING")
+      attr_accessor device_id: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor latest_device_job: Types::LatestDeviceJob
+      attr_accessor lease_expiration_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor provisioning_status: ("AWAITING_PROVISIONING" | "PENDING" | "SUCCEEDED" | "FAILED" | "ERROR" | "DELETING")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("PANORAMA_APPLIANCE_DEVELOPER_KIT" | "PANORAMA_APPLIANCE")
+      SENSITIVE: []
+    end
+
+    class DeviceJob
+      attr_accessor created_time: ::Time
+      attr_accessor device_id: ::String
+      attr_accessor device_name: ::String
+      attr_accessor job_id: ::String
+      attr_accessor job_type: ("OTA" | "REBOOT")
+      SENSITIVE: []
+    end
+
+    class DeviceJobConfig
+      attr_accessor ota_job_config: Types::OTAJobConfig
+      SENSITIVE: []
+    end
+
+    class EthernetPayload
+      attr_accessor connection_type: ("STATIC_IP" | "DHCP")
+      attr_accessor static_ip_connection_info: Types::StaticIpConnectionInfo
+      SENSITIVE: []
+    end
+
+    class EthernetStatus
+      attr_accessor connection_status: ("CONNECTED" | "NOT_CONNECTED" | "CONNECTING")
+      attr_accessor hw_address: ::String
+      attr_accessor ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class Job
+      attr_accessor device_id: ::String
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class JobResourceTags
+      attr_accessor resource_type: ("PACKAGE")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LatestDeviceJob
+      attr_accessor image_version: ::String
+      attr_accessor job_type: ("OTA" | "REBOOT")
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "VERIFYING" | "REBOOTING" | "DOWNLOADING" | "COMPLETED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListApplicationInstanceDependenciesRequest
+      attr_accessor application_instance_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationInstanceDependenciesResponse
+      attr_accessor next_token: ::String
+      attr_accessor package_objects: ::Array[Types::PackageObject]
+      SENSITIVE: []
+    end
+
+    class ListApplicationInstanceNodeInstancesRequest
+      attr_accessor application_instance_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationInstanceNodeInstancesResponse
+      attr_accessor next_token: ::String
+      attr_accessor node_instances: ::Array[Types::NodeInstance]
+      SENSITIVE: []
+    end
+
+    class ListApplicationInstancesRequest
+      attr_accessor device_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status_filter: ("DEPLOYMENT_SUCCEEDED" | "DEPLOYMENT_ERROR" | "REMOVAL_SUCCEEDED" | "REMOVAL_FAILED" | "PROCESSING_DEPLOYMENT" | "PROCESSING_REMOVAL" | "DEPLOYMENT_FAILED")
+      SENSITIVE: []
+    end
+
+    class ListApplicationInstancesResponse
+      attr_accessor application_instances: ::Array[Types::ApplicationInstance]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDevicesJobsRequest
+      attr_accessor device_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDevicesJobsResponse
+      attr_accessor device_jobs: ::Array[Types::DeviceJob]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDevicesRequest
+      attr_accessor device_aggregated_status_filter: ("ERROR" | "AWAITING_PROVISIONING" | "PENDING" | "FAILED" | "DELETING" | "ONLINE" | "OFFLINE" | "LEASE_EXPIRED" | "UPDATE_NEEDED" | "REBOOTING")
+      attr_accessor max_results: ::Integer
+      attr_accessor name_filter: ::String
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ("DEVICE_ID" | "CREATED_TIME" | "NAME" | "DEVICE_AGGREGATED_STATUS")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ListDevicesResponse
+      attr_accessor devices: ::Array[Types::Device]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNodeFromTemplateJobsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNodeFromTemplateJobsResponse
+      attr_accessor next_token: ::String
+      attr_accessor node_from_template_jobs: ::Array[Types::NodeFromTemplateJob]
+      SENSITIVE: []
+    end
+
+    class ListNodesRequest
+      attr_accessor category: ("BUSINESS_LOGIC" | "ML_MODEL" | "MEDIA_SOURCE" | "MEDIA_SINK")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor package_name: ::String
+      attr_accessor package_version: ::String
+      attr_accessor patch_version: ::String
+      SENSITIVE: []
+    end
+
+    class ListNodesResponse
+      attr_accessor next_token: ::String
+      attr_accessor nodes: ::Array[Types::Node]
+      SENSITIVE: []
+    end
+
+    class ListPackageImportJobsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackageImportJobsResponse
+      attr_accessor next_token: ::String
+      attr_accessor package_import_jobs: ::Array[Types::PackageImportJob]
+      SENSITIVE: []
+    end
+
+    class ListPackagesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPackagesResponse
+      attr_accessor next_token: ::String
+      attr_accessor packages: ::Array[Types::PackageListItem]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ManifestOverridesPayload
+      attr_accessor payload_data: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PayloadData < ManifestOverridesPayload
+      end
+      class Unknown < ManifestOverridesPayload
+      end
+    end
+
+    class ManifestPayload
+      attr_accessor payload_data: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PayloadData < ManifestPayload
+      end
+      class Unknown < ManifestPayload
+      end
+    end
+
+    class NetworkPayload
+      attr_accessor ethernet_0: Types::EthernetPayload
+      attr_accessor ethernet_1: Types::EthernetPayload
+      attr_accessor ntp: Types::NtpPayload
+      SENSITIVE: []
+    end
+
+    class NetworkStatus
+      attr_accessor ethernet_0_status: Types::EthernetStatus
+      attr_accessor ethernet_1_status: Types::EthernetStatus
+      attr_accessor last_updated_time: ::Time
+      attr_accessor ntp_status: Types::NtpStatus
+      SENSITIVE: []
+    end
+
+    class Node
+      attr_accessor category: ("BUSINESS_LOGIC" | "ML_MODEL" | "MEDIA_SOURCE" | "MEDIA_SINK")
+      attr_accessor created_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor node_id: ::String
+      attr_accessor owner_account: ::String
+      attr_accessor package_arn: ::String
+      attr_accessor package_id: ::String
+      attr_accessor package_name: ::String
+      attr_accessor package_version: ::String
+      attr_accessor patch_version: ::String
+      SENSITIVE: []
+    end
+
+    class NodeFromTemplateJob
+      attr_accessor created_time: ::Time
+      attr_accessor job_id: ::String
+      attr_accessor node_name: ::String
+      attr_accessor status: ("PENDING" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor template_type: ("RTSP_CAMERA_STREAM")
+      SENSITIVE: []
+    end
+
+    class NodeInputPort
+      attr_accessor default_value: ::String
+      attr_accessor description: ::String
+      attr_accessor max_connections: ::Integer
+      attr_accessor name: ::String
+      attr_accessor type: ("BOOLEAN" | "STRING" | "INT32" | "FLOAT32" | "MEDIA")
+      SENSITIVE: []
+    end
+
+    class NodeInstance
+      attr_accessor current_status: ("RUNNING" | "ERROR" | "NOT_AVAILABLE" | "PAUSED")
+      attr_accessor node_id: ::String
+      attr_accessor node_instance_id: ::String
+      attr_accessor node_name: ::String
+      attr_accessor package_name: ::String
+      attr_accessor package_patch_version: ::String
+      attr_accessor package_version: ::String
+      SENSITIVE: []
+    end
+
+    class NodeInterface
+      attr_accessor inputs: ::Array[Types::NodeInputPort]
+      attr_accessor outputs: ::Array[Types::NodeOutputPort]
+      SENSITIVE: []
+    end
+
+    class NodeOutputPort
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("BOOLEAN" | "STRING" | "INT32" | "FLOAT32" | "MEDIA")
+      SENSITIVE: []
+    end
+
+    class NodeSignal
+      attr_accessor node_instance_id: ::String
+      attr_accessor signal: ("PAUSE" | "RESUME")
+      SENSITIVE: []
+    end
+
+    class NtpPayload
+      attr_accessor ntp_servers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class NtpStatus
+      attr_accessor connection_status: ("CONNECTED" | "NOT_CONNECTED" | "CONNECTING")
+      attr_accessor ip_address: ::String
+      attr_accessor ntp_server_name: ::String
+      SENSITIVE: []
+    end
+
+    class OTAJobConfig
+      attr_accessor allow_major_version_update: bool
+      attr_accessor image_version: ::String
+      SENSITIVE: []
+    end
+
+    class OutPutS3Location
+      attr_accessor bucket_name: ::String
+      attr_accessor object_key: ::String
+      SENSITIVE: []
+    end
+
+    class PackageImportJob
+      attr_accessor created_time: ::Time
+      attr_accessor job_id: ::String
+      attr_accessor job_type: ("NODE_PACKAGE_VERSION" | "MARKETPLACE_NODE_PACKAGE_VERSION")
+      attr_accessor last_updated_time: ::Time
+      attr_accessor status: ("PENDING" | "SUCCEEDED" | "FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class PackageImportJobInputConfig
+      attr_accessor package_version_input_config: Types::PackageVersionInputConfig
+      SENSITIVE: []
+    end
+
+    class PackageImportJobOutput
+      attr_accessor output_s3_location: Types::OutPutS3Location
+      attr_accessor package_id: ::String
+      attr_accessor package_version: ::String
+      attr_accessor patch_version: ::String
+      SENSITIVE: []
+    end
+
+    class PackageImportJobOutputConfig
+      attr_accessor package_version_output_config: Types::PackageVersionOutputConfig
+      SENSITIVE: []
+    end
+
+    class PackageListItem
+      attr_accessor arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor package_id: ::String
+      attr_accessor package_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PackageObject
+      attr_accessor name: ::String
+      attr_accessor package_version: ::String
+      attr_accessor patch_version: ::String
+      SENSITIVE: []
+    end
+
+    class PackageVersionInputConfig
+      attr_accessor s3_location: Types::S3Location
+      SENSITIVE: []
+    end
+
+    class PackageVersionOutputConfig
+      attr_accessor mark_latest: bool
+      attr_accessor package_name: ::String
+      attr_accessor package_version: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisionDeviceRequest
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor networking_configuration: Types::NetworkPayload
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ProvisionDeviceResponse
+      attr_accessor arn: ::String
+      attr_accessor certificates: ::String
+      attr_accessor device_id: ::String
+      attr_accessor iot_thing_name: ::String
+      attr_accessor status: ("AWAITING_PROVISIONING" | "PENDING" | "SUCCEEDED" | "FAILED" | "ERROR" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class RegisterPackageVersionRequest
+      attr_accessor mark_latest: bool
+      attr_accessor owner_account: ::String
+      attr_accessor package_id: ::String
+      attr_accessor package_version: ::String
+      attr_accessor patch_version: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterPackageVersionResponse < Aws::EmptyStructure
+    end
+
+    class RemoveApplicationInstanceRequest
+      attr_accessor application_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveApplicationInstanceResponse < Aws::EmptyStructure
+    end
+
+    class ReportedRuntimeContextState
+      attr_accessor desired_state: ("RUNNING" | "STOPPED" | "REMOVED")
+      attr_accessor device_reported_status: ("STOPPING" | "STOPPED" | "STOP_ERROR" | "REMOVAL_FAILED" | "REMOVAL_IN_PROGRESS" | "STARTING" | "RUNNING" | "INSTALL_ERROR" | "LAUNCHED" | "LAUNCH_ERROR" | "INSTALL_IN_PROGRESS")
+      attr_accessor device_reported_time: ::Time
+      attr_accessor runtime_context_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class S3Location
+      attr_accessor bucket_name: ::String
+      attr_accessor object_key: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class SignalApplicationInstanceNodeInstancesRequest
+      attr_accessor application_instance_id: ::String
+      attr_accessor node_signals: ::Array[Types::NodeSignal]
+      SENSITIVE: []
+    end
+
+    class SignalApplicationInstanceNodeInstancesResponse
+      attr_accessor application_instance_id: ::String
+      SENSITIVE: []
+    end
+
+    class StaticIpConnectionInfo
+      attr_accessor default_gateway: ::String
+      attr_accessor dns: ::Array[::String]
+      attr_accessor ip_address: ::String
+      attr_accessor mask: ::String
+      SENSITIVE: []
+    end
+
+    class StorageLocation
+      attr_accessor binary_prefix_location: ::String
+      attr_accessor bucket: ::String
+      attr_accessor generated_prefix_location: ::String
+      attr_accessor manifest_prefix_location: ::String
+      attr_accessor repo_prefix_location: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDeviceMetadataRequest
+      attr_accessor description: ::String
+      attr_accessor device_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDeviceMetadataResponse
+      attr_accessor device_id: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor error_arguments: ::Array[Types::ValidationExceptionErrorArgument]
+      attr_accessor error_id: ::String
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
+      attr_accessor message: ::String
+      attr_accessor reason: ("UNKNOWN_OPERATION" | "CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "OTHER")
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionErrorArgument
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor message: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.131.0 (2024-06-17)
+------------------
+
+* Feature - This release includes support for creating I-frame only video segments for DASH trick play.
+
+1.130.0 (2024-06-14)
+------------------
+
+* Feature - This release adds the ability to search for historical job records within the management console using a search box and/or via the SDK/CLI with partial string matching search on input file name.
+
+1.129.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.128.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.127.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.126.0 (2024-04-09)
+------------------
+
+* Feature - This release includes support for bringing your own fonts to use for burn-in or DVB-Sub captioning workflows.
+
+1.125.0 (2024-02-01)
+------------------
+
+* Feature - This release includes support for broadcast-mixed audio description tracks.
+
+1.124.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.123.0 (2024-01-03)
+------------------
+
+* Feature - This release includes video engine updates including HEVC improvements, support for ingesting VP9 encoded video in MP4 containers, and support for user-specified 3D LUTs.
+
+1.122.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.121.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.120.0 (2023-11-10)
+------------------
+
+* Feature - This release includes the ability to specify any input source as the primary input for corresponding follow modes, and allows users to specify fit and fill behaviors without resizing content.
+
 1.119.0 (2023-10-03)
 ------------------
 

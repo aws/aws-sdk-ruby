@@ -1,0 +1,748 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PinpointEmail
+  module Types
+
+    class AccountSuspendedException < Aws::EmptyStructure
+    end
+
+    class AlreadyExistsException < Aws::EmptyStructure
+    end
+
+    class BadRequestException < Aws::EmptyStructure
+    end
+
+    class BlacklistEntry
+      attr_accessor rbl_name: ::String
+      attr_accessor listing_time: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class Body
+      attr_accessor text: Types::Content
+      attr_accessor html: Types::Content
+      SENSITIVE: []
+    end
+
+    class CloudWatchDestination
+      attr_accessor dimension_configurations: ::Array[Types::CloudWatchDimensionConfiguration]
+      SENSITIVE: []
+    end
+
+    class CloudWatchDimensionConfiguration
+      attr_accessor dimension_name: ::String
+      attr_accessor dimension_value_source: ("MESSAGE_TAG" | "EMAIL_HEADER" | "LINK_TAG")
+      attr_accessor default_dimension_value: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException < Aws::EmptyStructure
+    end
+
+    class Content
+      attr_accessor data: ::String
+      attr_accessor charset: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationSetEventDestinationRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination_name: ::String
+      attr_accessor event_destination: Types::EventDestinationDefinition
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationSetEventDestinationResponse < Aws::EmptyStructure
+    end
+
+    class CreateConfigurationSetRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor tracking_options: Types::TrackingOptions
+      attr_accessor delivery_options: Types::DeliveryOptions
+      attr_accessor reputation_options: Types::ReputationOptions
+      attr_accessor sending_options: Types::SendingOptions
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateConfigurationSetResponse < Aws::EmptyStructure
+    end
+
+    class CreateDedicatedIpPoolRequest
+      attr_accessor pool_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDedicatedIpPoolResponse < Aws::EmptyStructure
+    end
+
+    class CreateDeliverabilityTestReportRequest
+      attr_accessor report_name: ::String
+      attr_accessor from_email_address: ::String
+      attr_accessor content: Types::EmailContent
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDeliverabilityTestReportResponse
+      attr_accessor report_id: ::String
+      attr_accessor deliverability_test_status: ("IN_PROGRESS" | "COMPLETED")
+      SENSITIVE: []
+    end
+
+    class CreateEmailIdentityRequest
+      attr_accessor email_identity: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateEmailIdentityResponse
+      attr_accessor identity_type: ("EMAIL_ADDRESS" | "DOMAIN" | "MANAGED_DOMAIN")
+      attr_accessor verified_for_sending_status: bool
+      attr_accessor dkim_attributes: Types::DkimAttributes
+      SENSITIVE: []
+    end
+
+    class DailyVolume
+      attr_accessor start_date: ::Time
+      attr_accessor volume_statistics: Types::VolumeStatistics
+      attr_accessor domain_isp_placements: ::Array[Types::DomainIspPlacement]
+      SENSITIVE: []
+    end
+
+    class DedicatedIp
+      attr_accessor ip: ::String
+      attr_accessor warmup_status: ("IN_PROGRESS" | "DONE")
+      attr_accessor warmup_percentage: ::Integer
+      attr_accessor pool_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationSetEventDestinationRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationSetEventDestinationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteConfigurationSetRequest
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConfigurationSetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDedicatedIpPoolRequest
+      attr_accessor pool_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDedicatedIpPoolResponse < Aws::EmptyStructure
+    end
+
+    class DeleteEmailIdentityRequest
+      attr_accessor email_identity: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEmailIdentityResponse < Aws::EmptyStructure
+    end
+
+    class DeliverabilityTestReport
+      attr_accessor report_id: ::String
+      attr_accessor report_name: ::String
+      attr_accessor subject: ::String
+      attr_accessor from_email_address: ::String
+      attr_accessor create_date: ::Time
+      attr_accessor deliverability_test_status: ("IN_PROGRESS" | "COMPLETED")
+      SENSITIVE: []
+    end
+
+    class DeliveryOptions
+      attr_accessor tls_policy: ("REQUIRE" | "OPTIONAL")
+      attr_accessor sending_pool_name: ::String
+      SENSITIVE: []
+    end
+
+    class Destination
+      attr_accessor to_addresses: ::Array[::String]
+      attr_accessor cc_addresses: ::Array[::String]
+      attr_accessor bcc_addresses: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DkimAttributes
+      attr_accessor signing_enabled: bool
+      attr_accessor status: ("PENDING" | "SUCCESS" | "FAILED" | "TEMPORARY_FAILURE" | "NOT_STARTED")
+      attr_accessor tokens: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DomainDeliverabilityCampaign
+      attr_accessor campaign_id: ::String
+      attr_accessor image_url: ::String
+      attr_accessor subject: ::String
+      attr_accessor from_address: ::String
+      attr_accessor sending_ips: ::Array[::String]
+      attr_accessor first_seen_date_time: ::Time
+      attr_accessor last_seen_date_time: ::Time
+      attr_accessor inbox_count: ::Integer
+      attr_accessor spam_count: ::Integer
+      attr_accessor read_rate: ::Float
+      attr_accessor delete_rate: ::Float
+      attr_accessor read_delete_rate: ::Float
+      attr_accessor projected_volume: ::Integer
+      attr_accessor esps: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DomainDeliverabilityTrackingOption
+      attr_accessor domain: ::String
+      attr_accessor subscription_start_date: ::Time
+      attr_accessor inbox_placement_tracking_option: Types::InboxPlacementTrackingOption
+      SENSITIVE: []
+    end
+
+    class DomainIspPlacement
+      attr_accessor isp_name: ::String
+      attr_accessor inbox_raw_count: ::Integer
+      attr_accessor spam_raw_count: ::Integer
+      attr_accessor inbox_percentage: ::Float
+      attr_accessor spam_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class EmailContent
+      attr_accessor simple: Types::Message
+      attr_accessor raw: Types::RawMessage
+      attr_accessor template: Types::Template
+      SENSITIVE: []
+    end
+
+    class EventDestination
+      attr_accessor name: ::String
+      attr_accessor enabled: bool
+      attr_accessor matching_event_types: ::Array[("SEND" | "REJECT" | "BOUNCE" | "COMPLAINT" | "DELIVERY" | "OPEN" | "CLICK" | "RENDERING_FAILURE")]
+      attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination
+      attr_accessor cloud_watch_destination: Types::CloudWatchDestination
+      attr_accessor sns_destination: Types::SnsDestination
+      attr_accessor pinpoint_destination: Types::PinpointDestination
+      SENSITIVE: []
+    end
+
+    class EventDestinationDefinition
+      attr_accessor enabled: bool
+      attr_accessor matching_event_types: ::Array[("SEND" | "REJECT" | "BOUNCE" | "COMPLAINT" | "DELIVERY" | "OPEN" | "CLICK" | "RENDERING_FAILURE")]
+      attr_accessor kinesis_firehose_destination: Types::KinesisFirehoseDestination
+      attr_accessor cloud_watch_destination: Types::CloudWatchDestination
+      attr_accessor sns_destination: Types::SnsDestination
+      attr_accessor pinpoint_destination: Types::PinpointDestination
+      SENSITIVE: []
+    end
+
+    class GetAccountRequest < Aws::EmptyStructure
+    end
+
+    class GetAccountResponse
+      attr_accessor send_quota: Types::SendQuota
+      attr_accessor sending_enabled: bool
+      attr_accessor dedicated_ip_auto_warmup_enabled: bool
+      attr_accessor enforcement_status: ::String
+      attr_accessor production_access_enabled: bool
+      SENSITIVE: []
+    end
+
+    class GetBlacklistReportsRequest
+      attr_accessor blacklist_item_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetBlacklistReportsResponse
+      attr_accessor blacklist_report: ::Hash[::String, ::Array[Types::BlacklistEntry]]
+      SENSITIVE: []
+    end
+
+    class GetConfigurationSetEventDestinationsRequest
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetConfigurationSetEventDestinationsResponse
+      attr_accessor event_destinations: ::Array[Types::EventDestination]
+      SENSITIVE: []
+    end
+
+    class GetConfigurationSetRequest
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetConfigurationSetResponse
+      attr_accessor configuration_set_name: ::String
+      attr_accessor tracking_options: Types::TrackingOptions
+      attr_accessor delivery_options: Types::DeliveryOptions
+      attr_accessor reputation_options: Types::ReputationOptions
+      attr_accessor sending_options: Types::SendingOptions
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class GetDedicatedIpRequest
+      attr_accessor ip: ::String
+      SENSITIVE: []
+    end
+
+    class GetDedicatedIpResponse
+      attr_accessor dedicated_ip: Types::DedicatedIp
+      SENSITIVE: []
+    end
+
+    class GetDedicatedIpsRequest
+      attr_accessor pool_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDedicatedIpsResponse
+      attr_accessor dedicated_ips: ::Array[Types::DedicatedIp]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeliverabilityDashboardOptionsRequest < Aws::EmptyStructure
+    end
+
+    class GetDeliverabilityDashboardOptionsResponse
+      attr_accessor dashboard_enabled: bool
+      attr_accessor subscription_expiry_date: ::Time
+      attr_accessor account_status: ("ACTIVE" | "PENDING_EXPIRATION" | "DISABLED")
+      attr_accessor active_subscribed_domains: ::Array[Types::DomainDeliverabilityTrackingOption]
+      attr_accessor pending_expiration_subscribed_domains: ::Array[Types::DomainDeliverabilityTrackingOption]
+      SENSITIVE: []
+    end
+
+    class GetDeliverabilityTestReportRequest
+      attr_accessor report_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeliverabilityTestReportResponse
+      attr_accessor deliverability_test_report: Types::DeliverabilityTestReport
+      attr_accessor overall_placement: Types::PlacementStatistics
+      attr_accessor isp_placements: ::Array[Types::IspPlacement]
+      attr_accessor message: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class GetDomainDeliverabilityCampaignRequest
+      attr_accessor campaign_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainDeliverabilityCampaignResponse
+      attr_accessor domain_deliverability_campaign: Types::DomainDeliverabilityCampaign
+      SENSITIVE: []
+    end
+
+    class GetDomainStatisticsReportRequest
+      attr_accessor domain: ::String
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      SENSITIVE: []
+    end
+
+    class GetDomainStatisticsReportResponse
+      attr_accessor overall_volume: Types::OverallVolume
+      attr_accessor daily_volumes: ::Array[Types::DailyVolume]
+      SENSITIVE: []
+    end
+
+    class GetEmailIdentityRequest
+      attr_accessor email_identity: ::String
+      SENSITIVE: []
+    end
+
+    class GetEmailIdentityResponse
+      attr_accessor identity_type: ("EMAIL_ADDRESS" | "DOMAIN" | "MANAGED_DOMAIN")
+      attr_accessor feedback_forwarding_status: bool
+      attr_accessor verified_for_sending_status: bool
+      attr_accessor dkim_attributes: Types::DkimAttributes
+      attr_accessor mail_from_attributes: Types::MailFromAttributes
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class IdentityInfo
+      attr_accessor identity_type: ("EMAIL_ADDRESS" | "DOMAIN" | "MANAGED_DOMAIN")
+      attr_accessor identity_name: ::String
+      attr_accessor sending_enabled: bool
+      SENSITIVE: []
+    end
+
+    class InboxPlacementTrackingOption
+      attr_accessor global: bool
+      attr_accessor tracked_isps: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IspPlacement
+      attr_accessor isp_name: ::String
+      attr_accessor placement_statistics: Types::PlacementStatistics
+      SENSITIVE: []
+    end
+
+    class KinesisFirehoseDestination
+      attr_accessor iam_role_arn: ::String
+      attr_accessor delivery_stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException < Aws::EmptyStructure
+    end
+
+    class ListConfigurationSetsRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListConfigurationSetsResponse
+      attr_accessor configuration_sets: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDedicatedIpPoolsRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDedicatedIpPoolsResponse
+      attr_accessor dedicated_ip_pools: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeliverabilityTestReportsRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDeliverabilityTestReportsResponse
+      attr_accessor deliverability_test_reports: ::Array[Types::DeliverabilityTestReport]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainDeliverabilityCampaignsRequest
+      attr_accessor start_date: ::Time
+      attr_accessor end_date: ::Time
+      attr_accessor subscribed_domain: ::String
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDomainDeliverabilityCampaignsResponse
+      attr_accessor domain_deliverability_campaigns: ::Array[Types::DomainDeliverabilityCampaign]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEmailIdentitiesRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEmailIdentitiesResponse
+      attr_accessor email_identities: ::Array[Types::IdentityInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MailFromAttributes
+      attr_accessor mail_from_domain: ::String
+      attr_accessor mail_from_domain_status: ("PENDING" | "SUCCESS" | "FAILED" | "TEMPORARY_FAILURE")
+      attr_accessor behavior_on_mx_failure: ("USE_DEFAULT_VALUE" | "REJECT_MESSAGE")
+      SENSITIVE: []
+    end
+
+    class MailFromDomainNotVerifiedException < Aws::EmptyStructure
+    end
+
+    class Message
+      attr_accessor subject: Types::Content
+      attr_accessor body: Types::Body
+      SENSITIVE: []
+    end
+
+    class MessageRejected < Aws::EmptyStructure
+    end
+
+    class MessageTag
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException < Aws::EmptyStructure
+    end
+
+    class OverallVolume
+      attr_accessor volume_statistics: Types::VolumeStatistics
+      attr_accessor read_rate_percent: ::Float
+      attr_accessor domain_isp_placements: ::Array[Types::DomainIspPlacement]
+      SENSITIVE: []
+    end
+
+    class PinpointDestination
+      attr_accessor application_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PlacementStatistics
+      attr_accessor inbox_percentage: ::Float
+      attr_accessor spam_percentage: ::Float
+      attr_accessor missing_percentage: ::Float
+      attr_accessor spf_percentage: ::Float
+      attr_accessor dkim_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class PutAccountDedicatedIpWarmupAttributesRequest
+      attr_accessor auto_warmup_enabled: bool
+      SENSITIVE: []
+    end
+
+    class PutAccountDedicatedIpWarmupAttributesResponse < Aws::EmptyStructure
+    end
+
+    class PutAccountSendingAttributesRequest
+      attr_accessor sending_enabled: bool
+      SENSITIVE: []
+    end
+
+    class PutAccountSendingAttributesResponse < Aws::EmptyStructure
+    end
+
+    class PutConfigurationSetDeliveryOptionsRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor tls_policy: ("REQUIRE" | "OPTIONAL")
+      attr_accessor sending_pool_name: ::String
+      SENSITIVE: []
+    end
+
+    class PutConfigurationSetDeliveryOptionsResponse < Aws::EmptyStructure
+    end
+
+    class PutConfigurationSetReputationOptionsRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor reputation_metrics_enabled: bool
+      SENSITIVE: []
+    end
+
+    class PutConfigurationSetReputationOptionsResponse < Aws::EmptyStructure
+    end
+
+    class PutConfigurationSetSendingOptionsRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor sending_enabled: bool
+      SENSITIVE: []
+    end
+
+    class PutConfigurationSetSendingOptionsResponse < Aws::EmptyStructure
+    end
+
+    class PutConfigurationSetTrackingOptionsRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor custom_redirect_domain: ::String
+      SENSITIVE: []
+    end
+
+    class PutConfigurationSetTrackingOptionsResponse < Aws::EmptyStructure
+    end
+
+    class PutDedicatedIpInPoolRequest
+      attr_accessor ip: ::String
+      attr_accessor destination_pool_name: ::String
+      SENSITIVE: []
+    end
+
+    class PutDedicatedIpInPoolResponse < Aws::EmptyStructure
+    end
+
+    class PutDedicatedIpWarmupAttributesRequest
+      attr_accessor ip: ::String
+      attr_accessor warmup_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutDedicatedIpWarmupAttributesResponse < Aws::EmptyStructure
+    end
+
+    class PutDeliverabilityDashboardOptionRequest
+      attr_accessor dashboard_enabled: bool
+      attr_accessor subscribed_domains: ::Array[Types::DomainDeliverabilityTrackingOption]
+      SENSITIVE: []
+    end
+
+    class PutDeliverabilityDashboardOptionResponse < Aws::EmptyStructure
+    end
+
+    class PutEmailIdentityDkimAttributesRequest
+      attr_accessor email_identity: ::String
+      attr_accessor signing_enabled: bool
+      SENSITIVE: []
+    end
+
+    class PutEmailIdentityDkimAttributesResponse < Aws::EmptyStructure
+    end
+
+    class PutEmailIdentityFeedbackAttributesRequest
+      attr_accessor email_identity: ::String
+      attr_accessor email_forwarding_enabled: bool
+      SENSITIVE: []
+    end
+
+    class PutEmailIdentityFeedbackAttributesResponse < Aws::EmptyStructure
+    end
+
+    class PutEmailIdentityMailFromAttributesRequest
+      attr_accessor email_identity: ::String
+      attr_accessor mail_from_domain: ::String
+      attr_accessor behavior_on_mx_failure: ("USE_DEFAULT_VALUE" | "REJECT_MESSAGE")
+      SENSITIVE: []
+    end
+
+    class PutEmailIdentityMailFromAttributesResponse < Aws::EmptyStructure
+    end
+
+    class RawMessage
+      attr_accessor data: ::String
+      SENSITIVE: []
+    end
+
+    class ReputationOptions
+      attr_accessor reputation_metrics_enabled: bool
+      attr_accessor last_fresh_start: ::Time
+      SENSITIVE: []
+    end
+
+    class SendEmailRequest
+      attr_accessor from_email_address: ::String
+      attr_accessor destination: Types::Destination
+      attr_accessor reply_to_addresses: ::Array[::String]
+      attr_accessor feedback_forwarding_email_address: ::String
+      attr_accessor content: Types::EmailContent
+      attr_accessor email_tags: ::Array[Types::MessageTag]
+      attr_accessor configuration_set_name: ::String
+      SENSITIVE: []
+    end
+
+    class SendEmailResponse
+      attr_accessor message_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendQuota
+      attr_accessor max_24_hour_send: ::Float
+      attr_accessor max_send_rate: ::Float
+      attr_accessor sent_last_24_hours: ::Float
+      SENSITIVE: []
+    end
+
+    class SendingOptions
+      attr_accessor sending_enabled: bool
+      SENSITIVE: []
+    end
+
+    class SendingPausedException < Aws::EmptyStructure
+    end
+
+    class SnsDestination
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Template
+      attr_accessor template_arn: ::String
+      attr_accessor template_data: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException < Aws::EmptyStructure
+    end
+
+    class TrackingOptions
+      attr_accessor custom_redirect_domain: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateConfigurationSetEventDestinationRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor event_destination_name: ::String
+      attr_accessor event_destination: Types::EventDestinationDefinition
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationSetEventDestinationResponse < Aws::EmptyStructure
+    end
+
+    class VolumeStatistics
+      attr_accessor inbox_raw_count: ::Integer
+      attr_accessor spam_raw_count: ::Integer
+      attr_accessor projected_inbox: ::Integer
+      attr_accessor projected_spam: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

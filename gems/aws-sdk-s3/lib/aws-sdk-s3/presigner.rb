@@ -199,6 +199,8 @@ module Aws
         req.handlers.remove(Aws::S3::Plugins::S3Signer::LegacyHandler)
         req.handlers.remove(Aws::Plugins::Sign::Handler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
+        req.handlers.remove(Aws::Rest::ContentTypeHandler)
+        req.handlers.remove(Aws::Plugins::InvocationId::Handler)
 
         req.handle(step: :send) do |context|
           # if an endpoint was not provided, force secure or insecure
@@ -232,8 +234,8 @@ module Aws
                    end
           signer = Aws::Sigv4::Signer.new(
             service: auth_scheme['signingName'] || 's3',
-            region: region || context.config.region,
-            credentials_provider: context.config.credentials,
+            region: context[:sigv4_region] || region || context.config.region,
+            credentials_provider: context[:sigv4_credentials] || context.config.credentials,
             signing_algorithm: scheme_name.to_sym,
             uri_escape_path: !!!auth_scheme['disableDoubleEncoding'],
             unsigned_headers: unsigned_headers,

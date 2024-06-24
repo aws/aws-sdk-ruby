@@ -7,13 +7,14 @@
 
 Feature: Smoke tests for CostandUsageReportService
 
-Background:
-  Given I create a client in region 'us-east-1'
-
   @costandusagereportservice @smoke
-  Scenario: Call Aws::CostandUsageReportService::Client#describe_report_definitions and expect it to succeed
-  When I call the operation 'describe_report_definitions' with params:
-    """
+  Scenario: DescribeReportDefinitionsSuccess
+    Given I create a 'Aws::CostandUsageReportService' client with config:
+      """
+{"region":"us-east-1"}
+      """
+    When I call the operation 'describe_report_definitions' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised

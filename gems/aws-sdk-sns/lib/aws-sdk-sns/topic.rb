@@ -141,7 +141,7 @@ module Aws::SNS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_topic_attributes(topic_arn: @arn)
       end
       @data = resp.data
@@ -188,7 +188,7 @@ module Aws::SNS
     # @return [EmptyStructure]
     def add_permission(options = {})
       options = options.merge(topic_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.add_permission(options)
       end
       resp.data
@@ -212,7 +212,7 @@ module Aws::SNS
     # @return [Subscription]
     def confirm_subscription(options = {})
       options = options.merge(topic_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.confirm_subscription(options)
       end
       Subscription.new(
@@ -228,7 +228,7 @@ module Aws::SNS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(topic_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_topic(options)
       end
       resp.data
@@ -238,7 +238,7 @@ module Aws::SNS
     #
     #   topic.publish({
     #     target_arn: "String",
-    #     phone_number: "String",
+    #     phone_number: "PhoneNumber",
     #     message: "message", # required
     #     subject: "subject",
     #     message_structure: "messageStructure",
@@ -322,9 +322,8 @@ module Aws::SNS
     #   is delivered to email endpoints. This field will also be included, if
     #   present, in the standard JSON messages delivered to other endpoints.
     #
-    #   Constraints: Subjects must be ASCII text that begins with a letter,
-    #   number, or punctuation mark; must not include line breaks or control
-    #   characters; and must be less than 100 characters long.
+    #   Constraints: Subjects must be UTF-8 text with no line breaks or
+    #   control characters, and less than 100 characters long.
     # @option options [String] :message_structure
     #   Set `MessageStructure` to `json` if you want to send a different
     #   message for each protocol. For example, using one publish action, you
@@ -371,7 +370,7 @@ module Aws::SNS
     # @return [Types::PublishResponse]
     def publish(options = {})
       options = options.merge(topic_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.publish(options)
       end
       resp.data
@@ -388,7 +387,7 @@ module Aws::SNS
     # @return [EmptyStructure]
     def remove_permission(options = {})
       options = options.merge(topic_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.remove_permission(options)
       end
       resp.data
@@ -563,7 +562,7 @@ module Aws::SNS
     # @return [EmptyStructure]
     def set_attributes(options = {})
       options = options.merge(topic_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.set_topic_attributes(options)
       end
       resp.data
@@ -663,24 +662,45 @@ module Aws::SNS
     #     service that powers the subscribed endpoint becomes unavailable) are
     #     held in the dead-letter queue for further analysis or reprocessing.
     #
-    #   The following attribute applies only to Amazon Kinesis Data Firehose
-    #   delivery stream subscriptions:
+    #   The following attribute applies only to Amazon Data Firehose delivery
+    #   stream subscriptions:
     #
     #   * `SubscriptionRoleArn` – The ARN of the IAM role that has the
     #     following:
     #
-    #     * Permission to write to the Kinesis Data Firehose delivery stream
+    #     * Permission to write to the Firehose delivery stream
     #
     #     * Amazon SNS listed as a trusted entity
     #
-    #     Specifying a valid ARN for this attribute is required for Kinesis
-    #     Data Firehose delivery stream subscriptions. For more information,
-    #     see [Fanout to Kinesis Data Firehose delivery streams][1] in the
-    #     *Amazon SNS Developer Guide*.
+    #     Specifying a valid ARN for this attribute is required for Firehose
+    #     delivery stream subscriptions. For more information, see [Fanout to
+    #     Firehose delivery streams][1] in the *Amazon SNS Developer Guide*.
+    #
+    #   The following attributes apply only to [FIFO topics][2]:
+    #
+    #   * `ReplayPolicy` – Adds or updates an inline policy document for a
+    #     subscription to replay messages stored in the specified Amazon SNS
+    #     topic.
+    #
+    #   * `ReplayStatus` – Retrieves the status of the subscription message
+    #     replay, which can be one of the following:
+    #
+    #     * `Completed` – The replay has successfully redelivered all
+    #       messages, and is now delivering newly published messages. If an
+    #       ending point was specified in the `ReplayPolicy` then the
+    #       subscription will no longer receive newly published messages.
+    #
+    #     * `In progress` – The replay is currently replaying the selected
+    #       messages.
+    #
+    #     * `Failed` – The replay was unable to complete.
+    #
+    #     * `Pending` – The default state while the replay initiates.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
     # @option options [Boolean] :return_subscription_arn
     #   Sets whether the response from the `Subscribe` request includes the
     #   subscription ARN, even if the subscription is not yet confirmed.
@@ -698,7 +718,7 @@ module Aws::SNS
     # @return [Subscription]
     def subscribe(options = {})
       options = options.merge(topic_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.subscribe(options)
       end
       Subscription.new(
@@ -717,7 +737,7 @@ module Aws::SNS
     def subscriptions(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(topic_arn: @arn)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_subscriptions_by_topic(options)
         end
         resp.each_page do |page|

@@ -14,6 +14,7 @@ module Aws::IoTSiteWise
       option(
         :endpoint_provider,
         doc_type: 'Aws::IoTSiteWise::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::IoTSiteWise
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -78,6 +80,8 @@ module Aws::IoTSiteWise
             Aws::IoTSiteWise::Endpoints::CreateAsset.build(context)
           when :create_asset_model
             Aws::IoTSiteWise::Endpoints::CreateAssetModel.build(context)
+          when :create_asset_model_composite_model
+            Aws::IoTSiteWise::Endpoints::CreateAssetModelCompositeModel.build(context)
           when :create_bulk_import_job
             Aws::IoTSiteWise::Endpoints::CreateBulkImportJob.build(context)
           when :create_dashboard
@@ -94,6 +98,8 @@ module Aws::IoTSiteWise
             Aws::IoTSiteWise::Endpoints::DeleteAsset.build(context)
           when :delete_asset_model
             Aws::IoTSiteWise::Endpoints::DeleteAssetModel.build(context)
+          when :delete_asset_model_composite_model
+            Aws::IoTSiteWise::Endpoints::DeleteAssetModelCompositeModel.build(context)
           when :delete_dashboard
             Aws::IoTSiteWise::Endpoints::DeleteDashboard.build(context)
           when :delete_gateway
@@ -106,10 +112,16 @@ module Aws::IoTSiteWise
             Aws::IoTSiteWise::Endpoints::DeleteTimeSeries.build(context)
           when :describe_access_policy
             Aws::IoTSiteWise::Endpoints::DescribeAccessPolicy.build(context)
+          when :describe_action
+            Aws::IoTSiteWise::Endpoints::DescribeAction.build(context)
           when :describe_asset
             Aws::IoTSiteWise::Endpoints::DescribeAsset.build(context)
+          when :describe_asset_composite_model
+            Aws::IoTSiteWise::Endpoints::DescribeAssetCompositeModel.build(context)
           when :describe_asset_model
             Aws::IoTSiteWise::Endpoints::DescribeAssetModel.build(context)
+          when :describe_asset_model_composite_model
+            Aws::IoTSiteWise::Endpoints::DescribeAssetModelCompositeModel.build(context)
           when :describe_asset_property
             Aws::IoTSiteWise::Endpoints::DescribeAssetProperty.build(context)
           when :describe_bulk_import_job
@@ -136,6 +148,10 @@ module Aws::IoTSiteWise
             Aws::IoTSiteWise::Endpoints::DisassociateAssets.build(context)
           when :disassociate_time_series_from_asset_property
             Aws::IoTSiteWise::Endpoints::DisassociateTimeSeriesFromAssetProperty.build(context)
+          when :execute_action
+            Aws::IoTSiteWise::Endpoints::ExecuteAction.build(context)
+          when :execute_query
+            Aws::IoTSiteWise::Endpoints::ExecuteQuery.build(context)
           when :get_asset_property_aggregates
             Aws::IoTSiteWise::Endpoints::GetAssetPropertyAggregates.build(context)
           when :get_asset_property_value
@@ -146,6 +162,10 @@ module Aws::IoTSiteWise
             Aws::IoTSiteWise::Endpoints::GetInterpolatedAssetPropertyValues.build(context)
           when :list_access_policies
             Aws::IoTSiteWise::Endpoints::ListAccessPolicies.build(context)
+          when :list_actions
+            Aws::IoTSiteWise::Endpoints::ListActions.build(context)
+          when :list_asset_model_composite_models
+            Aws::IoTSiteWise::Endpoints::ListAssetModelCompositeModels.build(context)
           when :list_asset_model_properties
             Aws::IoTSiteWise::Endpoints::ListAssetModelProperties.build(context)
           when :list_asset_models
@@ -160,6 +180,8 @@ module Aws::IoTSiteWise
             Aws::IoTSiteWise::Endpoints::ListAssociatedAssets.build(context)
           when :list_bulk_import_jobs
             Aws::IoTSiteWise::Endpoints::ListBulkImportJobs.build(context)
+          when :list_composition_relationships
+            Aws::IoTSiteWise::Endpoints::ListCompositionRelationships.build(context)
           when :list_dashboards
             Aws::IoTSiteWise::Endpoints::ListDashboards.build(context)
           when :list_gateways
@@ -190,6 +212,8 @@ module Aws::IoTSiteWise
             Aws::IoTSiteWise::Endpoints::UpdateAsset.build(context)
           when :update_asset_model
             Aws::IoTSiteWise::Endpoints::UpdateAssetModel.build(context)
+          when :update_asset_model_composite_model
+            Aws::IoTSiteWise::Endpoints::UpdateAssetModelCompositeModel.build(context)
           when :update_asset_property
             Aws::IoTSiteWise::Endpoints::UpdateAssetProperty.build(context)
           when :update_dashboard

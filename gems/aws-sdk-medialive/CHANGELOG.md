@@ -1,6 +1,76 @@
 Unreleased Changes
 ------------------
 
+1.123.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.122.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.121.0 (2024-05-06)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports configuring how SCTE 35 passthrough triggers segment breaks in HLS and MediaPackage output groups. Previously, messages triggered breaks in all these output groups. The new option is to trigger segment breaks only in groups that have SCTE 35 passthrough enabled.
+
+1.120.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.119.0 (2024-04-11)
+------------------
+
+* Feature - AWS Elemental MediaLive introduces workflow monitor, a new feature that enables the visualization and monitoring of your media workflows. Create signal maps of your existing workflows and monitor them by creating notification and monitoring template groups.
+
+1.118.0 (2024-04-03)
+------------------
+
+* Feature - Cmaf Ingest outputs are now supported in Media Live
+
+1.117.0 (2024-03-25)
+------------------
+
+* Feature - Exposing TileMedia H265 options
+
+1.116.0 (2024-02-21)
+------------------
+
+* Feature - MediaLive now supports the ability to restart pipelines in a running channel.
+
+1.115.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.114.0 (2023-12-21)
+------------------
+
+* Feature - MediaLive now supports the ability to configure the audio that an AWS Elemental Link UHD device produces, when the device is configured as the source for a flow in AWS Elemental MediaConnect.
+
+1.113.0 (2023-12-04)
+------------------
+
+* Feature - Adds support for custom color correction on channels using 3D LUT files.
+
+1.112.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.111.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.110.0 (2023-11-17)
+------------------
+
+* Feature - MediaLive has now added support for per-output static image overlay.
+
 1.109.0 (2023-09-27)
 ------------------
 

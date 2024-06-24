@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2024-06-17)
+------------------
+
+* Feature - Updating SDK example for KMS DeriveSharedSecret API.
+
+1.84.0 (2024-06-13)
+------------------
+
+* Feature - This feature allows customers to use their keys stored in KMS to derive a shared secret which can then be used to establish a secured channel for communication, provide proof of possession, or establish trust with other parties.
+
+1.83.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.82.0 (2024-05-22)
+------------------
+
+* Feature - This release includes feature to import customer's asymmetric (RSA, ECC and SM2) and HMAC keys into KMS in China.
+
+1.81.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.79.0 (2024-04-12)
+------------------
+
+* Feature - This feature supports the ability to specify a custom rotation period for automatic key rotations, the ability to perform on-demand key rotations, and visibility into your key material rotations.
+
+1.78.0 (2024-03-18)
+------------------
+
+* Feature - Adds the ability to use the default policy name by omitting the policyName parameter in calls to PutKeyPolicy and GetKeyPolicy
+
+1.77.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.76.0 (2024-01-05)
+------------------
+
+* Feature - Documentation updates for AWS Key Management Service (KMS).
+
+1.75.0 (2023-12-15)
+------------------
+
+* Feature - Documentation updates for AWS Key Management Service
+
+1.74.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.72.0 (2023-09-27)
 ------------------
 

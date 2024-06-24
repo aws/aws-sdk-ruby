@@ -71,9 +71,10 @@ module Aws
         end
 
         if @validate_required && shape.union
-          if values.length > 1
+          set_values = @input ? values.length : values.to_h.length
+          if set_values > 1
             errors << "multiple values provided to union at #{context} - must contain exactly one of the supported types: #{shape.member_names.join(', ')}"
-          elsif values.length == 0
+          elsif set_values == 0
             errors << "No values provided to union at #{context} - must contain exactly one of the supported types: #{shape.member_names.join(', ')}"
           end
         end
@@ -106,6 +107,8 @@ module Aws
       # validate members
       member_ref = ref.shape.member
       values.each.with_index do |value, index|
+        next unless value
+
         shape(member_ref, value, errors, context + "[#{index}]")
       end
     end
@@ -121,6 +124,8 @@ module Aws
 
       values.each do |key, value|
         shape(key_ref, key, errors, "#{context} #{key.inspect} key")
+        next unless value
+
         shape(value_ref, value, errors, context + "[#{key.inspect}]")
       end
     end

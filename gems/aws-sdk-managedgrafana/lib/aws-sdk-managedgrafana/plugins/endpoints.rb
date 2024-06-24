@@ -14,6 +14,7 @@ module Aws::ManagedGrafana
       option(
         :endpoint_provider,
         doc_type: 'Aws::ManagedGrafana::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::ManagedGrafana
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -62,10 +64,18 @@ module Aws::ManagedGrafana
             Aws::ManagedGrafana::Endpoints::CreateWorkspace.build(context)
           when :create_workspace_api_key
             Aws::ManagedGrafana::Endpoints::CreateWorkspaceApiKey.build(context)
+          when :create_workspace_service_account
+            Aws::ManagedGrafana::Endpoints::CreateWorkspaceServiceAccount.build(context)
+          when :create_workspace_service_account_token
+            Aws::ManagedGrafana::Endpoints::CreateWorkspaceServiceAccountToken.build(context)
           when :delete_workspace
             Aws::ManagedGrafana::Endpoints::DeleteWorkspace.build(context)
           when :delete_workspace_api_key
             Aws::ManagedGrafana::Endpoints::DeleteWorkspaceApiKey.build(context)
+          when :delete_workspace_service_account
+            Aws::ManagedGrafana::Endpoints::DeleteWorkspaceServiceAccount.build(context)
+          when :delete_workspace_service_account_token
+            Aws::ManagedGrafana::Endpoints::DeleteWorkspaceServiceAccountToken.build(context)
           when :describe_workspace
             Aws::ManagedGrafana::Endpoints::DescribeWorkspace.build(context)
           when :describe_workspace_authentication
@@ -80,6 +90,10 @@ module Aws::ManagedGrafana
             Aws::ManagedGrafana::Endpoints::ListTagsForResource.build(context)
           when :list_versions
             Aws::ManagedGrafana::Endpoints::ListVersions.build(context)
+          when :list_workspace_service_account_tokens
+            Aws::ManagedGrafana::Endpoints::ListWorkspaceServiceAccountTokens.build(context)
+          when :list_workspace_service_accounts
+            Aws::ManagedGrafana::Endpoints::ListWorkspaceServiceAccounts.build(context)
           when :list_workspaces
             Aws::ManagedGrafana::Endpoints::ListWorkspaces.build(context)
           when :tag_resource

@@ -224,8 +224,11 @@
       "output":{"shape":"GetDataSetDetailsResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
+        {"shape":"ExecutionTimeoutException"},
+        {"shape":"ServiceUnavailableException"},
         {"shape":"ThrottlingException"},
         {"shape":"AccessDeniedException"},
+        {"shape":"ConflictException"},
         {"shape":"ValidationException"},
         {"shape":"InternalServerException"}
       ]
@@ -362,6 +365,24 @@
         {"shape":"InternalServerException"}
       ]
     },
+    "ListBatchJobRestartPoints":{
+      "name":"ListBatchJobRestartPoints",
+      "http":{
+        "method":"GET",
+        "requestUri":"/applications/{applicationId}/batch-job-executions/{executionId}/steps",
+        "responseCode":200
+      },
+      "input":{"shape":"ListBatchJobRestartPointsRequest"},
+      "output":{"shape":"ListBatchJobRestartPointsResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "ListDataSetImportHistory":{
       "name":"ListDataSetImportHistory",
       "http":{
@@ -390,8 +411,11 @@
       "output":{"shape":"ListDataSetsResponse"},
       "errors":[
         {"shape":"ResourceNotFoundException"},
+        {"shape":"ExecutionTimeoutException"},
+        {"shape":"ServiceUnavailableException"},
         {"shape":"ThrottlingException"},
         {"shape":"AccessDeniedException"},
+        {"shape":"ConflictException"},
         {"shape":"ValidationException"},
         {"shape":"InternalServerException"}
       ]
@@ -731,6 +755,7 @@
         "Cancelled",
         "Succeeded",
         "Failed",
+        "Purged",
         "Succeeded With Warning"
       ]
     },
@@ -763,6 +788,8 @@
       "type":"structure",
       "members":{
         "fileBatchJobIdentifier":{"shape":"FileBatchJobIdentifier"},
+        "restartBatchJobIdentifier":{"shape":"RestartBatchJobIdentifier"},
+        "s3BatchJobIdentifier":{"shape":"S3BatchJobIdentifier"},
         "scriptBatchJobIdentifier":{"shape":"ScriptBatchJobIdentifier"}
       },
       "union":true
@@ -774,6 +801,10 @@
       "max":500,
       "min":0
     },
+    "BatchJobStepList":{
+      "type":"list",
+      "member":{"shape":"JobStep"}
+    },
     "BatchJobType":{
       "type":"string",
       "enum":[
@@ -784,13 +815,13 @@
     },
     "BatchParamKey":{
       "type":"string",
-      "max":8,
+      "max":32,
       "min":1,
       "pattern":"^[A-Za-z][A-Za-z0-9]{1,7}$"
     },
     "BatchParamValue":{
       "type":"string",
-      "max":44,
+      "max":80,
       "min":0
     },
     "Boolean":{"type":"boolean"},
@@ -1024,6 +1055,7 @@
       ],
       "members":{
         "status":{"shape":"DataSetTaskLifecycle"},
+        "statusReason":{"shape":"String"},
         "summary":{"shape":"DataSetImportSummary"},
         "taskId":{"shape":"Identifier"}
       }
@@ -1049,7 +1081,8 @@
       "enum":[
         "Creating",
         "Running",
-        "Completed"
+        "Completed",
+        "Failed"
       ]
     },
     "DataSetsSummaryList":{
@@ -1157,7 +1190,8 @@
       "enum":[
         "Deploying",
         "Succeeded",
-        "Failed"
+        "Failed",
+        "Updating Deployment"
       ]
     },
     "DeploymentList":{
@@ -1278,6 +1312,17 @@
     "EnvironmentSummaryList":{
       "type":"list",
       "member":{"shape":"EnvironmentSummary"}
+    },
+    "ExecutionTimeoutException":{
+      "type":"structure",
+      "required":["message"],
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":504},
+      "exception":true,
+      "fault":true,
+      "retryable":{"throttling":false}
     },
     "ExternalLocation":{
       "type":"structure",
@@ -1450,6 +1495,7 @@
         "executionId":{"shape":"Identifier"},
         "jobId":{"shape":"String100"},
         "jobName":{"shape":"String100"},
+        "jobStepRestartMarker":{"shape":"JobStepRestartMarker"},
         "jobType":{"shape":"BatchJobType"},
         "jobUser":{"shape":"String100"},
         "returnCode":{"shape":"String"},
@@ -1488,6 +1534,7 @@
         "creationTime":{"shape":"Timestamp"},
         "dataSetName":{"shape":"String200"},
         "dataSetOrg":{"shape":"DatasetDetailOrgAttributes"},
+        "fileSize":{"shape":"Long"},
         "lastReferencedTime":{"shape":"Timestamp"},
         "lastUpdatedTime":{"shape":"Timestamp"},
         "location":{"shape":"String2000"},
@@ -1659,6 +1706,35 @@
       "fault":true,
       "retryable":{"throttling":false}
     },
+    "JobIdentifier":{
+      "type":"structure",
+      "members":{
+        "fileName":{"shape":"String"},
+        "scriptName":{"shape":"String"}
+      },
+      "union":true
+    },
+    "JobStep":{
+      "type":"structure",
+      "members":{
+        "procStepName":{"shape":"String"},
+        "procStepNumber":{"shape":"Integer"},
+        "stepCondCode":{"shape":"String"},
+        "stepName":{"shape":"String"},
+        "stepNumber":{"shape":"Integer"},
+        "stepRestartable":{"shape":"Boolean"}
+      }
+    },
+    "JobStepRestartMarker":{
+      "type":"structure",
+      "required":["fromStep"],
+      "members":{
+        "fromProcStep":{"shape":"String"},
+        "fromStep":{"shape":"String"},
+        "toProcStep":{"shape":"String"},
+        "toStep":{"shape":"String"}
+      }
+    },
     "ListApplicationVersionsRequest":{
       "type":"structure",
       "required":["applicationId"],
@@ -1809,6 +1885,31 @@
         "nextToken":{"shape":"NextToken"}
       }
     },
+    "ListBatchJobRestartPointsRequest":{
+      "type":"structure",
+      "required":[
+        "applicationId",
+        "executionId"
+      ],
+      "members":{
+        "applicationId":{
+          "shape":"Identifier",
+          "location":"uri",
+          "locationName":"applicationId"
+        },
+        "executionId":{
+          "shape":"Identifier",
+          "location":"uri",
+          "locationName":"executionId"
+        }
+      }
+    },
+    "ListBatchJobRestartPointsResponse":{
+      "type":"structure",
+      "members":{
+        "batchJobSteps":{"shape":"BatchJobStepList"}
+      }
+    },
     "ListDataSetImportHistoryRequest":{
       "type":"structure",
       "required":["applicationId"],
@@ -1851,6 +1952,11 @@
           "shape":"MaxResults",
           "location":"querystring",
           "locationName":"maxResults"
+        },
+        "nameFilter":{
+          "shape":"String200",
+          "location":"querystring",
+          "locationName":"nameFilter"
         },
         "nextToken":{
           "shape":"NextToken",
@@ -2000,6 +2106,10 @@
         "logType":{"shape":"String20"}
       }
     },
+    "Long":{
+      "type":"long",
+      "box":true
+    },
     "MaintenanceSchedule":{
       "type":"structure",
       "members":{
@@ -2108,6 +2218,29 @@
       },
       "exception":true
     },
+    "RestartBatchJobIdentifier":{
+      "type":"structure",
+      "required":[
+        "executionId",
+        "jobStepRestartMarker"
+      ],
+      "members":{
+        "executionId":{"shape":"Identifier"},
+        "jobStepRestartMarker":{"shape":"JobStepRestartMarker"}
+      }
+    },
+    "S3BatchJobIdentifier":{
+      "type":"structure",
+      "required":[
+        "bucket",
+        "identifier"
+      ],
+      "members":{
+        "bucket":{"shape":"String"},
+        "identifier":{"shape":"JobIdentifier"},
+        "keyPrefix":{"shape":"String"}
+      }
+    },
     "ScriptBatchJobDefinition":{
       "type":"structure",
       "required":["scriptName"],
@@ -2137,6 +2270,17 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "ServiceUnavailableException":{
+      "type":"structure",
+      "required":["message"],
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":503},
+      "exception":true,
+      "fault":true,
+      "retryable":{"throttling":false}
     },
     "StartApplicationRequest":{
       "type":"structure",
@@ -2365,6 +2509,7 @@
           "location":"uri",
           "locationName":"environmentId"
         },
+        "forceUpdate":{"shape":"Boolean"},
         "instanceType":{"shape":"String20"},
         "preferredMaintenanceWindow":{"shape":"String"}
       }
@@ -2410,6 +2555,8 @@
       "enum":[
         "unknownOperation",
         "cannotParse",
+        "featureNotAvailable",
+        "unsupportedEngineVersion",
         "fieldValidationFailed",
         "other"
       ]

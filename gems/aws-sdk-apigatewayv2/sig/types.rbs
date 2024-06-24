@@ -1,0 +1,1848 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ApiGatewayV2
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessLogSettings
+      attr_accessor destination_arn: ::String
+      attr_accessor format: ::String
+      SENSITIVE: []
+    end
+
+    class Api
+      attr_accessor api_endpoint: ::String
+      attr_accessor api_gateway_managed: bool
+      attr_accessor api_id: ::String
+      attr_accessor api_key_selection_expression: ::String
+      attr_accessor cors_configuration: Types::Cors
+      attr_accessor created_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor disable_schema_validation: bool
+      attr_accessor disable_execute_api_endpoint: bool
+      attr_accessor import_info: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor protocol_type: ("WEBSOCKET" | "HTTP")
+      attr_accessor route_selection_expression: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor version: ::String
+      attr_accessor warnings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ApiMapping
+      attr_accessor api_id: ::String
+      attr_accessor api_mapping_id: ::String
+      attr_accessor api_mapping_key: ::String
+      attr_accessor stage: ::String
+      SENSITIVE: []
+    end
+
+    class ApiMappings
+      attr_accessor items: ::Array[Types::ApiMapping]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Apis
+      attr_accessor items: ::Array[Types::Api]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Authorizer
+      attr_accessor authorizer_credentials_arn: ::String
+      attr_accessor authorizer_id: ::String
+      attr_accessor authorizer_result_ttl_in_seconds: ::Integer
+      attr_accessor authorizer_type: ("REQUEST" | "JWT")
+      attr_accessor authorizer_uri: ::String
+      attr_accessor identity_source: ::Array[::String]
+      attr_accessor identity_validation_expression: ::String
+      attr_accessor jwt_configuration: Types::JWTConfiguration
+      attr_accessor name: ::String
+      attr_accessor authorizer_payload_format_version: ::String
+      attr_accessor enable_simple_responses: bool
+      SENSITIVE: []
+    end
+
+    class Authorizers
+      attr_accessor items: ::Array[Types::Authorizer]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Cors
+      attr_accessor allow_credentials: bool
+      attr_accessor allow_headers: ::Array[::String]
+      attr_accessor allow_methods: ::Array[::String]
+      attr_accessor allow_origins: ::Array[::String]
+      attr_accessor expose_headers: ::Array[::String]
+      attr_accessor max_age: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateApiInput
+      attr_accessor api_key_selection_expression: ::String
+      attr_accessor cors_configuration: Types::Cors
+      attr_accessor credentials_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor disable_schema_validation: bool
+      attr_accessor disable_execute_api_endpoint: bool
+      attr_accessor name: ::String
+      attr_accessor protocol_type: ("WEBSOCKET" | "HTTP")
+      attr_accessor route_key: ::String
+      attr_accessor route_selection_expression: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApiMappingInput
+      attr_accessor api_id: ::String
+      attr_accessor api_mapping_key: ::String
+      attr_accessor stage: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApiMappingRequest
+      attr_accessor api_id: ::String
+      attr_accessor api_mapping_key: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor stage: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApiMappingResponse
+      attr_accessor api_id: ::String
+      attr_accessor api_mapping_id: ::String
+      attr_accessor api_mapping_key: ::String
+      attr_accessor stage: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApiRequest
+      attr_accessor api_key_selection_expression: ::String
+      attr_accessor cors_configuration: Types::Cors
+      attr_accessor credentials_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor disable_schema_validation: bool
+      attr_accessor disable_execute_api_endpoint: bool
+      attr_accessor name: ::String
+      attr_accessor protocol_type: ("WEBSOCKET" | "HTTP")
+      attr_accessor route_key: ::String
+      attr_accessor route_selection_expression: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor target: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateApiResponse
+      attr_accessor api_endpoint: ::String
+      attr_accessor api_gateway_managed: bool
+      attr_accessor api_id: ::String
+      attr_accessor api_key_selection_expression: ::String
+      attr_accessor cors_configuration: Types::Cors
+      attr_accessor created_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor disable_schema_validation: bool
+      attr_accessor disable_execute_api_endpoint: bool
+      attr_accessor import_info: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor protocol_type: ("WEBSOCKET" | "HTTP")
+      attr_accessor route_selection_expression: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor version: ::String
+      attr_accessor warnings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateAuthorizerInput
+      attr_accessor authorizer_credentials_arn: ::String
+      attr_accessor authorizer_result_ttl_in_seconds: ::Integer
+      attr_accessor authorizer_type: ("REQUEST" | "JWT")
+      attr_accessor authorizer_uri: ::String
+      attr_accessor identity_source: ::Array[::String]
+      attr_accessor identity_validation_expression: ::String
+      attr_accessor jwt_configuration: Types::JWTConfiguration
+      attr_accessor name: ::String
+      attr_accessor authorizer_payload_format_version: ::String
+      attr_accessor enable_simple_responses: bool
+      SENSITIVE: []
+    end
+
+    class CreateAuthorizerRequest
+      attr_accessor api_id: ::String
+      attr_accessor authorizer_credentials_arn: ::String
+      attr_accessor authorizer_result_ttl_in_seconds: ::Integer
+      attr_accessor authorizer_type: ("REQUEST" | "JWT")
+      attr_accessor authorizer_uri: ::String
+      attr_accessor identity_source: ::Array[::String]
+      attr_accessor identity_validation_expression: ::String
+      attr_accessor jwt_configuration: Types::JWTConfiguration
+      attr_accessor name: ::String
+      attr_accessor authorizer_payload_format_version: ::String
+      attr_accessor enable_simple_responses: bool
+      SENSITIVE: []
+    end
+
+    class CreateAuthorizerResponse
+      attr_accessor authorizer_credentials_arn: ::String
+      attr_accessor authorizer_id: ::String
+      attr_accessor authorizer_result_ttl_in_seconds: ::Integer
+      attr_accessor authorizer_type: ("REQUEST" | "JWT")
+      attr_accessor authorizer_uri: ::String
+      attr_accessor identity_source: ::Array[::String]
+      attr_accessor identity_validation_expression: ::String
+      attr_accessor jwt_configuration: Types::JWTConfiguration
+      attr_accessor name: ::String
+      attr_accessor authorizer_payload_format_version: ::String
+      attr_accessor enable_simple_responses: bool
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentInput
+      attr_accessor description: ::String
+      attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentRequest
+      attr_accessor api_id: ::String
+      attr_accessor description: ::String
+      attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentResponse
+      attr_accessor auto_deployed: bool
+      attr_accessor created_date: ::Time
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_status: ("PENDING" | "FAILED" | "DEPLOYED")
+      attr_accessor deployment_status_message: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDomainNameInput
+      attr_accessor domain_name: ::String
+      attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
+      attr_accessor mutual_tls_authentication: Types::MutualTlsAuthenticationInput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDomainNameRequest
+      attr_accessor domain_name: ::String
+      attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
+      attr_accessor mutual_tls_authentication: Types::MutualTlsAuthenticationInput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDomainNameResponse
+      attr_accessor api_mapping_selection_expression: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
+      attr_accessor mutual_tls_authentication: Types::MutualTlsAuthentication
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateIntegrationInput
+      attr_accessor connection_id: ::String
+      attr_accessor connection_type: ("INTERNET" | "VPC_LINK")
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor credentials_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor integration_method: ::String
+      attr_accessor integration_subtype: ::String
+      attr_accessor integration_type: ("AWS" | "HTTP" | "MOCK" | "HTTP_PROXY" | "AWS_PROXY")
+      attr_accessor integration_uri: ::String
+      attr_accessor passthrough_behavior: ("WHEN_NO_MATCH" | "NEVER" | "WHEN_NO_TEMPLATES")
+      attr_accessor payload_format_version: ::String
+      attr_accessor request_parameters: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor request_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      attr_accessor timeout_in_millis: ::Integer
+      attr_accessor tls_config: Types::TlsConfigInput
+      SENSITIVE: []
+    end
+
+    class CreateIntegrationRequest
+      attr_accessor api_id: ::String
+      attr_accessor connection_id: ::String
+      attr_accessor connection_type: ("INTERNET" | "VPC_LINK")
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor credentials_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor integration_method: ::String
+      attr_accessor integration_subtype: ::String
+      attr_accessor integration_type: ("AWS" | "HTTP" | "MOCK" | "HTTP_PROXY" | "AWS_PROXY")
+      attr_accessor integration_uri: ::String
+      attr_accessor passthrough_behavior: ("WHEN_NO_MATCH" | "NEVER" | "WHEN_NO_TEMPLATES")
+      attr_accessor payload_format_version: ::String
+      attr_accessor request_parameters: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor request_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      attr_accessor timeout_in_millis: ::Integer
+      attr_accessor tls_config: Types::TlsConfigInput
+      SENSITIVE: []
+    end
+
+    class CreateIntegrationResult
+      attr_accessor api_gateway_managed: bool
+      attr_accessor connection_id: ::String
+      attr_accessor connection_type: ("INTERNET" | "VPC_LINK")
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor credentials_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor integration_id: ::String
+      attr_accessor integration_method: ::String
+      attr_accessor integration_response_selection_expression: ::String
+      attr_accessor integration_subtype: ::String
+      attr_accessor integration_type: ("AWS" | "HTTP" | "MOCK" | "HTTP_PROXY" | "AWS_PROXY")
+      attr_accessor integration_uri: ::String
+      attr_accessor passthrough_behavior: ("WHEN_NO_MATCH" | "NEVER" | "WHEN_NO_TEMPLATES")
+      attr_accessor payload_format_version: ::String
+      attr_accessor request_parameters: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor request_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      attr_accessor timeout_in_millis: ::Integer
+      attr_accessor tls_config: Types::TlsConfig
+      SENSITIVE: []
+    end
+
+    class CreateIntegrationResponseInput
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor integration_response_key: ::String
+      attr_accessor response_parameters: ::Hash[::String, ::String]
+      attr_accessor response_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIntegrationResponseRequest
+      attr_accessor api_id: ::String
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor integration_id: ::String
+      attr_accessor integration_response_key: ::String
+      attr_accessor response_parameters: ::Hash[::String, ::String]
+      attr_accessor response_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIntegrationResponseResponse
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor integration_response_id: ::String
+      attr_accessor integration_response_key: ::String
+      attr_accessor response_parameters: ::Hash[::String, ::String]
+      attr_accessor response_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      SENSITIVE: []
+    end
+
+    class CreateModelInput
+      attr_accessor content_type: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor schema: ::String
+      SENSITIVE: []
+    end
+
+    class CreateModelRequest
+      attr_accessor api_id: ::String
+      attr_accessor content_type: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor schema: ::String
+      SENSITIVE: []
+    end
+
+    class CreateModelResponse
+      attr_accessor content_type: ::String
+      attr_accessor description: ::String
+      attr_accessor model_id: ::String
+      attr_accessor name: ::String
+      attr_accessor schema: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRouteInput
+      attr_accessor api_key_required: bool
+      attr_accessor authorization_scopes: ::Array[::String]
+      attr_accessor authorization_type: ("NONE" | "AWS_IAM" | "CUSTOM" | "JWT")
+      attr_accessor authorizer_id: ::String
+      attr_accessor model_selection_expression: ::String
+      attr_accessor operation_name: ::String
+      attr_accessor request_models: ::Hash[::String, ::String]
+      attr_accessor request_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_key: ::String
+      attr_accessor route_response_selection_expression: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRouteRequest
+      attr_accessor api_id: ::String
+      attr_accessor api_key_required: bool
+      attr_accessor authorization_scopes: ::Array[::String]
+      attr_accessor authorization_type: ("NONE" | "AWS_IAM" | "CUSTOM" | "JWT")
+      attr_accessor authorizer_id: ::String
+      attr_accessor model_selection_expression: ::String
+      attr_accessor operation_name: ::String
+      attr_accessor request_models: ::Hash[::String, ::String]
+      attr_accessor request_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_key: ::String
+      attr_accessor route_response_selection_expression: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRouteResult
+      attr_accessor api_gateway_managed: bool
+      attr_accessor api_key_required: bool
+      attr_accessor authorization_scopes: ::Array[::String]
+      attr_accessor authorization_type: ("NONE" | "AWS_IAM" | "CUSTOM" | "JWT")
+      attr_accessor authorizer_id: ::String
+      attr_accessor model_selection_expression: ::String
+      attr_accessor operation_name: ::String
+      attr_accessor request_models: ::Hash[::String, ::String]
+      attr_accessor request_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_id: ::String
+      attr_accessor route_key: ::String
+      attr_accessor route_response_selection_expression: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRouteResponseInput
+      attr_accessor model_selection_expression: ::String
+      attr_accessor response_models: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_response_key: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRouteResponseRequest
+      attr_accessor api_id: ::String
+      attr_accessor model_selection_expression: ::String
+      attr_accessor response_models: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_id: ::String
+      attr_accessor route_response_key: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRouteResponseResponse
+      attr_accessor model_selection_expression: ::String
+      attr_accessor response_models: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_response_id: ::String
+      attr_accessor route_response_key: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStageInput
+      attr_accessor access_log_settings: Types::AccessLogSettings
+      attr_accessor auto_deploy: bool
+      attr_accessor client_certificate_id: ::String
+      attr_accessor default_route_settings: Types::RouteSettings
+      attr_accessor deployment_id: ::String
+      attr_accessor description: ::String
+      attr_accessor route_settings: ::Hash[::String, Types::RouteSettings]
+      attr_accessor stage_name: ::String
+      attr_accessor stage_variables: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateStageRequest
+      attr_accessor access_log_settings: Types::AccessLogSettings
+      attr_accessor api_id: ::String
+      attr_accessor auto_deploy: bool
+      attr_accessor client_certificate_id: ::String
+      attr_accessor default_route_settings: Types::RouteSettings
+      attr_accessor deployment_id: ::String
+      attr_accessor description: ::String
+      attr_accessor route_settings: ::Hash[::String, Types::RouteSettings]
+      attr_accessor stage_name: ::String
+      attr_accessor stage_variables: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateStageResponse
+      attr_accessor access_log_settings: Types::AccessLogSettings
+      attr_accessor api_gateway_managed: bool
+      attr_accessor auto_deploy: bool
+      attr_accessor client_certificate_id: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor default_route_settings: Types::RouteSettings
+      attr_accessor deployment_id: ::String
+      attr_accessor description: ::String
+      attr_accessor last_deployment_status_message: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor route_settings: ::Hash[::String, Types::RouteSettings]
+      attr_accessor stage_name: ::String
+      attr_accessor stage_variables: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateVpcLinkInput
+      attr_accessor name: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateVpcLinkRequest
+      attr_accessor name: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateVpcLinkResponse
+      attr_accessor created_date: ::Time
+      attr_accessor name: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_link_id: ::String
+      attr_accessor vpc_link_status: ("PENDING" | "AVAILABLE" | "DELETING" | "FAILED" | "INACTIVE")
+      attr_accessor vpc_link_status_message: ::String
+      attr_accessor vpc_link_version: ("V2")
+      SENSITIVE: []
+    end
+
+    class DeleteAccessLogSettingsRequest
+      attr_accessor api_id: ::String
+      attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApiMappingRequest
+      attr_accessor api_mapping_id: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteApiRequest
+      attr_accessor api_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAuthorizerRequest
+      attr_accessor api_id: ::String
+      attr_accessor authorizer_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCorsConfigurationRequest
+      attr_accessor api_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeploymentRequest
+      attr_accessor api_id: ::String
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainNameRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIntegrationRequest
+      attr_accessor api_id: ::String
+      attr_accessor integration_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIntegrationResponseRequest
+      attr_accessor api_id: ::String
+      attr_accessor integration_id: ::String
+      attr_accessor integration_response_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteModelRequest
+      attr_accessor api_id: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRouteRequest
+      attr_accessor api_id: ::String
+      attr_accessor route_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRouteRequestParameterRequest
+      attr_accessor api_id: ::String
+      attr_accessor request_parameter_key: ::String
+      attr_accessor route_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRouteResponseRequest
+      attr_accessor api_id: ::String
+      attr_accessor route_id: ::String
+      attr_accessor route_response_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRouteSettingsRequest
+      attr_accessor api_id: ::String
+      attr_accessor route_key: ::String
+      attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStageRequest
+      attr_accessor api_id: ::String
+      attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVpcLinkRequest
+      attr_accessor vpc_link_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVpcLinkResponse < Aws::EmptyStructure
+    end
+
+    class Deployment
+      attr_accessor auto_deployed: bool
+      attr_accessor created_date: ::Time
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_status: ("PENDING" | "FAILED" | "DEPLOYED")
+      attr_accessor deployment_status_message: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class Deployments
+      attr_accessor items: ::Array[Types::Deployment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DomainName
+      attr_accessor api_mapping_selection_expression: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
+      attr_accessor mutual_tls_authentication: Types::MutualTlsAuthentication
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DomainNameConfiguration
+      attr_accessor api_gateway_domain_name: ::String
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_name: ::String
+      attr_accessor certificate_upload_date: ::Time
+      attr_accessor domain_name_status: ("AVAILABLE" | "UPDATING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION")
+      attr_accessor domain_name_status_message: ::String
+      attr_accessor endpoint_type: ("REGIONAL" | "EDGE")
+      attr_accessor hosted_zone_id: ::String
+      attr_accessor security_policy: ("TLS_1_0" | "TLS_1_2")
+      attr_accessor ownership_verification_certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DomainNames
+      attr_accessor items: ::Array[Types::DomainName]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ExportApiRequest
+      attr_accessor api_id: ::String
+      attr_accessor export_version: ::String
+      attr_accessor include_extensions: bool
+      attr_accessor output_type: ::String
+      attr_accessor specification: ::String
+      attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class ExportApiResponse
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
+    class ResetAuthorizersCacheRequest
+      attr_accessor api_id: ::String
+      attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetApiMappingRequest
+      attr_accessor api_mapping_id: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetApiMappingResponse
+      attr_accessor api_id: ::String
+      attr_accessor api_mapping_id: ::String
+      attr_accessor api_mapping_key: ::String
+      attr_accessor stage: ::String
+      SENSITIVE: []
+    end
+
+    class GetApiMappingsRequest
+      attr_accessor domain_name: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetApiMappingsResponse
+      attr_accessor items: ::Array[Types::ApiMapping]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetApiRequest
+      attr_accessor api_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetApiResponse
+      attr_accessor api_endpoint: ::String
+      attr_accessor api_gateway_managed: bool
+      attr_accessor api_id: ::String
+      attr_accessor api_key_selection_expression: ::String
+      attr_accessor cors_configuration: Types::Cors
+      attr_accessor created_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor disable_schema_validation: bool
+      attr_accessor disable_execute_api_endpoint: bool
+      attr_accessor import_info: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor protocol_type: ("WEBSOCKET" | "HTTP")
+      attr_accessor route_selection_expression: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor version: ::String
+      attr_accessor warnings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetApisRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetApisResponse
+      attr_accessor items: ::Array[Types::Api]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetAuthorizerRequest
+      attr_accessor api_id: ::String
+      attr_accessor authorizer_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAuthorizerResponse
+      attr_accessor authorizer_credentials_arn: ::String
+      attr_accessor authorizer_id: ::String
+      attr_accessor authorizer_result_ttl_in_seconds: ::Integer
+      attr_accessor authorizer_type: ("REQUEST" | "JWT")
+      attr_accessor authorizer_uri: ::String
+      attr_accessor identity_source: ::Array[::String]
+      attr_accessor identity_validation_expression: ::String
+      attr_accessor jwt_configuration: Types::JWTConfiguration
+      attr_accessor name: ::String
+      attr_accessor authorizer_payload_format_version: ::String
+      attr_accessor enable_simple_responses: bool
+      SENSITIVE: []
+    end
+
+    class GetAuthorizersRequest
+      attr_accessor api_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetAuthorizersResponse
+      attr_accessor items: ::Array[Types::Authorizer]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentRequest
+      attr_accessor api_id: ::String
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentResponse
+      attr_accessor auto_deployed: bool
+      attr_accessor created_date: ::Time
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_status: ("PENDING" | "FAILED" | "DEPLOYED")
+      attr_accessor deployment_status_message: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentsRequest
+      attr_accessor api_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentsResponse
+      attr_accessor items: ::Array[Types::Deployment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainNameRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainNameResponse
+      attr_accessor api_mapping_selection_expression: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
+      attr_accessor mutual_tls_authentication: Types::MutualTlsAuthentication
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetDomainNamesRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainNamesResponse
+      attr_accessor items: ::Array[Types::DomainName]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetIntegrationRequest
+      attr_accessor api_id: ::String
+      attr_accessor integration_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetIntegrationResult
+      attr_accessor api_gateway_managed: bool
+      attr_accessor connection_id: ::String
+      attr_accessor connection_type: ("INTERNET" | "VPC_LINK")
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor credentials_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor integration_id: ::String
+      attr_accessor integration_method: ::String
+      attr_accessor integration_response_selection_expression: ::String
+      attr_accessor integration_subtype: ::String
+      attr_accessor integration_type: ("AWS" | "HTTP" | "MOCK" | "HTTP_PROXY" | "AWS_PROXY")
+      attr_accessor integration_uri: ::String
+      attr_accessor passthrough_behavior: ("WHEN_NO_MATCH" | "NEVER" | "WHEN_NO_TEMPLATES")
+      attr_accessor payload_format_version: ::String
+      attr_accessor request_parameters: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor request_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      attr_accessor timeout_in_millis: ::Integer
+      attr_accessor tls_config: Types::TlsConfig
+      SENSITIVE: []
+    end
+
+    class GetIntegrationResponseRequest
+      attr_accessor api_id: ::String
+      attr_accessor integration_id: ::String
+      attr_accessor integration_response_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetIntegrationResponseResponse
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor integration_response_id: ::String
+      attr_accessor integration_response_key: ::String
+      attr_accessor response_parameters: ::Hash[::String, ::String]
+      attr_accessor response_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      SENSITIVE: []
+    end
+
+    class GetIntegrationResponsesRequest
+      attr_accessor api_id: ::String
+      attr_accessor integration_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetIntegrationResponsesResponse
+      attr_accessor items: ::Array[Types::IntegrationResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetIntegrationsRequest
+      attr_accessor api_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetIntegrationsResponse
+      attr_accessor items: ::Array[Types::Integration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetModelRequest
+      attr_accessor api_id: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetModelResponse
+      attr_accessor content_type: ::String
+      attr_accessor description: ::String
+      attr_accessor model_id: ::String
+      attr_accessor name: ::String
+      attr_accessor schema: ::String
+      SENSITIVE: []
+    end
+
+    class GetModelTemplateRequest
+      attr_accessor api_id: ::String
+      attr_accessor model_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetModelTemplateResponse
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class GetModelsRequest
+      attr_accessor api_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetModelsResponse
+      attr_accessor items: ::Array[Types::Model]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouteRequest
+      attr_accessor api_id: ::String
+      attr_accessor route_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouteResult
+      attr_accessor api_gateway_managed: bool
+      attr_accessor api_key_required: bool
+      attr_accessor authorization_scopes: ::Array[::String]
+      attr_accessor authorization_type: ("NONE" | "AWS_IAM" | "CUSTOM" | "JWT")
+      attr_accessor authorizer_id: ::String
+      attr_accessor model_selection_expression: ::String
+      attr_accessor operation_name: ::String
+      attr_accessor request_models: ::Hash[::String, ::String]
+      attr_accessor request_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_id: ::String
+      attr_accessor route_key: ::String
+      attr_accessor route_response_selection_expression: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouteResponseRequest
+      attr_accessor api_id: ::String
+      attr_accessor route_id: ::String
+      attr_accessor route_response_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouteResponseResponse
+      attr_accessor model_selection_expression: ::String
+      attr_accessor response_models: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_response_id: ::String
+      attr_accessor route_response_key: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouteResponsesRequest
+      attr_accessor api_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      attr_accessor route_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRouteResponsesResponse
+      attr_accessor items: ::Array[Types::RouteResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRoutesRequest
+      attr_accessor api_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRoutesResponse
+      attr_accessor items: ::Array[Types::Route]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetStageRequest
+      attr_accessor api_id: ::String
+      attr_accessor stage_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetStageResponse
+      attr_accessor access_log_settings: Types::AccessLogSettings
+      attr_accessor api_gateway_managed: bool
+      attr_accessor auto_deploy: bool
+      attr_accessor client_certificate_id: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor default_route_settings: Types::RouteSettings
+      attr_accessor deployment_id: ::String
+      attr_accessor description: ::String
+      attr_accessor last_deployment_status_message: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor route_settings: ::Hash[::String, Types::RouteSettings]
+      attr_accessor stage_name: ::String
+      attr_accessor stage_variables: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetStagesRequest
+      attr_accessor api_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetStagesResponse
+      attr_accessor items: ::Array[Types::Stage]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTagsRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTagsResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetVpcLinkRequest
+      attr_accessor vpc_link_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetVpcLinkResponse
+      attr_accessor created_date: ::Time
+      attr_accessor name: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_link_id: ::String
+      attr_accessor vpc_link_status: ("PENDING" | "AVAILABLE" | "DELETING" | "FAILED" | "INACTIVE")
+      attr_accessor vpc_link_status_message: ::String
+      attr_accessor vpc_link_version: ("V2")
+      SENSITIVE: []
+    end
+
+    class GetVpcLinksRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetVpcLinksResponse
+      attr_accessor items: ::Array[Types::VpcLink]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ImportApiInput
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
+    class ImportApiRequest
+      attr_accessor basepath: ::String
+      attr_accessor body: ::String
+      attr_accessor fail_on_warnings: bool
+      SENSITIVE: []
+    end
+
+    class ImportApiResponse
+      attr_accessor api_endpoint: ::String
+      attr_accessor api_gateway_managed: bool
+      attr_accessor api_id: ::String
+      attr_accessor api_key_selection_expression: ::String
+      attr_accessor cors_configuration: Types::Cors
+      attr_accessor created_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor disable_schema_validation: bool
+      attr_accessor disable_execute_api_endpoint: bool
+      attr_accessor import_info: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor protocol_type: ("WEBSOCKET" | "HTTP")
+      attr_accessor route_selection_expression: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor version: ::String
+      attr_accessor warnings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Integration
+      attr_accessor api_gateway_managed: bool
+      attr_accessor connection_id: ::String
+      attr_accessor connection_type: ("INTERNET" | "VPC_LINK")
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor credentials_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor integration_id: ::String
+      attr_accessor integration_method: ::String
+      attr_accessor integration_response_selection_expression: ::String
+      attr_accessor integration_subtype: ::String
+      attr_accessor integration_type: ("AWS" | "HTTP" | "MOCK" | "HTTP_PROXY" | "AWS_PROXY")
+      attr_accessor integration_uri: ::String
+      attr_accessor passthrough_behavior: ("WHEN_NO_MATCH" | "NEVER" | "WHEN_NO_TEMPLATES")
+      attr_accessor payload_format_version: ::String
+      attr_accessor request_parameters: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor request_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      attr_accessor timeout_in_millis: ::Integer
+      attr_accessor tls_config: Types::TlsConfig
+      SENSITIVE: []
+    end
+
+    class IntegrationResponse
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor integration_response_id: ::String
+      attr_accessor integration_response_key: ::String
+      attr_accessor response_parameters: ::Hash[::String, ::String]
+      attr_accessor response_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      SENSITIVE: []
+    end
+
+    class IntegrationResponses
+      attr_accessor items: ::Array[Types::IntegrationResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Integrations
+      attr_accessor items: ::Array[Types::Integration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class JWTConfiguration
+      attr_accessor audience: ::Array[::String]
+      attr_accessor issuer: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor limit_type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Model
+      attr_accessor content_type: ::String
+      attr_accessor description: ::String
+      attr_accessor model_id: ::String
+      attr_accessor name: ::String
+      attr_accessor schema: ::String
+      SENSITIVE: []
+    end
+
+    class Models
+      attr_accessor items: ::Array[Types::Model]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MutualTlsAuthentication
+      attr_accessor truststore_uri: ::String
+      attr_accessor truststore_version: ::String
+      attr_accessor truststore_warnings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MutualTlsAuthenticationInput
+      attr_accessor truststore_uri: ::String
+      attr_accessor truststore_version: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterConstraints
+      attr_accessor required: bool
+      SENSITIVE: []
+    end
+
+    class ReimportApiInput
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
+    class ReimportApiRequest
+      attr_accessor api_id: ::String
+      attr_accessor basepath: ::String
+      attr_accessor body: ::String
+      attr_accessor fail_on_warnings: bool
+      SENSITIVE: []
+    end
+
+    class ReimportApiResponse
+      attr_accessor api_endpoint: ::String
+      attr_accessor api_gateway_managed: bool
+      attr_accessor api_id: ::String
+      attr_accessor api_key_selection_expression: ::String
+      attr_accessor cors_configuration: Types::Cors
+      attr_accessor created_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor disable_schema_validation: bool
+      attr_accessor disable_execute_api_endpoint: bool
+      attr_accessor import_info: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor protocol_type: ("WEBSOCKET" | "HTTP")
+      attr_accessor route_selection_expression: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor version: ::String
+      attr_accessor warnings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Route
+      attr_accessor api_gateway_managed: bool
+      attr_accessor api_key_required: bool
+      attr_accessor authorization_scopes: ::Array[::String]
+      attr_accessor authorization_type: ("NONE" | "AWS_IAM" | "CUSTOM" | "JWT")
+      attr_accessor authorizer_id: ::String
+      attr_accessor model_selection_expression: ::String
+      attr_accessor operation_name: ::String
+      attr_accessor request_models: ::Hash[::String, ::String]
+      attr_accessor request_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_id: ::String
+      attr_accessor route_key: ::String
+      attr_accessor route_response_selection_expression: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class RouteResponse
+      attr_accessor model_selection_expression: ::String
+      attr_accessor response_models: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_response_id: ::String
+      attr_accessor route_response_key: ::String
+      SENSITIVE: []
+    end
+
+    class RouteResponses
+      attr_accessor items: ::Array[Types::RouteResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class RouteSettings
+      attr_accessor data_trace_enabled: bool
+      attr_accessor detailed_metrics_enabled: bool
+      attr_accessor logging_level: ("ERROR" | "INFO" | "OFF")
+      attr_accessor throttling_burst_limit: ::Integer
+      attr_accessor throttling_rate_limit: ::Float
+      SENSITIVE: []
+    end
+
+    class Routes
+      attr_accessor items: ::Array[Types::Route]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Stage
+      attr_accessor access_log_settings: Types::AccessLogSettings
+      attr_accessor api_gateway_managed: bool
+      attr_accessor auto_deploy: bool
+      attr_accessor client_certificate_id: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor default_route_settings: Types::RouteSettings
+      attr_accessor deployment_id: ::String
+      attr_accessor description: ::String
+      attr_accessor last_deployment_status_message: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor route_settings: ::Hash[::String, Types::RouteSettings]
+      attr_accessor stage_name: ::String
+      attr_accessor stage_variables: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Stages
+      attr_accessor items: ::Array[Types::Stage]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class Template
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TlsConfig
+      attr_accessor server_name_to_verify: ::String
+      SENSITIVE: []
+    end
+
+    class TlsConfigInput
+      attr_accessor server_name_to_verify: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor limit_type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateApiInput
+      attr_accessor api_key_selection_expression: ::String
+      attr_accessor cors_configuration: Types::Cors
+      attr_accessor credentials_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor disable_schema_validation: bool
+      attr_accessor disable_execute_api_endpoint: bool
+      attr_accessor name: ::String
+      attr_accessor route_key: ::String
+      attr_accessor route_selection_expression: ::String
+      attr_accessor target: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApiMappingInput
+      attr_accessor api_id: ::String
+      attr_accessor api_mapping_key: ::String
+      attr_accessor stage: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApiMappingRequest
+      attr_accessor api_id: ::String
+      attr_accessor api_mapping_id: ::String
+      attr_accessor api_mapping_key: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor stage: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApiMappingResponse
+      attr_accessor api_id: ::String
+      attr_accessor api_mapping_id: ::String
+      attr_accessor api_mapping_key: ::String
+      attr_accessor stage: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApiRequest
+      attr_accessor api_id: ::String
+      attr_accessor api_key_selection_expression: ::String
+      attr_accessor cors_configuration: Types::Cors
+      attr_accessor credentials_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor disable_schema_validation: bool
+      attr_accessor disable_execute_api_endpoint: bool
+      attr_accessor name: ::String
+      attr_accessor route_key: ::String
+      attr_accessor route_selection_expression: ::String
+      attr_accessor target: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateApiResponse
+      attr_accessor api_endpoint: ::String
+      attr_accessor api_gateway_managed: bool
+      attr_accessor api_id: ::String
+      attr_accessor api_key_selection_expression: ::String
+      attr_accessor cors_configuration: Types::Cors
+      attr_accessor created_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor disable_schema_validation: bool
+      attr_accessor disable_execute_api_endpoint: bool
+      attr_accessor import_info: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor protocol_type: ("WEBSOCKET" | "HTTP")
+      attr_accessor route_selection_expression: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor version: ::String
+      attr_accessor warnings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAuthorizerInput
+      attr_accessor authorizer_credentials_arn: ::String
+      attr_accessor authorizer_result_ttl_in_seconds: ::Integer
+      attr_accessor authorizer_type: ("REQUEST" | "JWT")
+      attr_accessor authorizer_uri: ::String
+      attr_accessor identity_source: ::Array[::String]
+      attr_accessor identity_validation_expression: ::String
+      attr_accessor jwt_configuration: Types::JWTConfiguration
+      attr_accessor name: ::String
+      attr_accessor authorizer_payload_format_version: ::String
+      attr_accessor enable_simple_responses: bool
+      SENSITIVE: []
+    end
+
+    class UpdateAuthorizerRequest
+      attr_accessor api_id: ::String
+      attr_accessor authorizer_credentials_arn: ::String
+      attr_accessor authorizer_id: ::String
+      attr_accessor authorizer_result_ttl_in_seconds: ::Integer
+      attr_accessor authorizer_type: ("REQUEST" | "JWT")
+      attr_accessor authorizer_uri: ::String
+      attr_accessor identity_source: ::Array[::String]
+      attr_accessor identity_validation_expression: ::String
+      attr_accessor jwt_configuration: Types::JWTConfiguration
+      attr_accessor name: ::String
+      attr_accessor authorizer_payload_format_version: ::String
+      attr_accessor enable_simple_responses: bool
+      SENSITIVE: []
+    end
+
+    class UpdateAuthorizerResponse
+      attr_accessor authorizer_credentials_arn: ::String
+      attr_accessor authorizer_id: ::String
+      attr_accessor authorizer_result_ttl_in_seconds: ::Integer
+      attr_accessor authorizer_type: ("REQUEST" | "JWT")
+      attr_accessor authorizer_uri: ::String
+      attr_accessor identity_source: ::Array[::String]
+      attr_accessor identity_validation_expression: ::String
+      attr_accessor jwt_configuration: Types::JWTConfiguration
+      attr_accessor name: ::String
+      attr_accessor authorizer_payload_format_version: ::String
+      attr_accessor enable_simple_responses: bool
+      SENSITIVE: []
+    end
+
+    class UpdateDeploymentInput
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDeploymentRequest
+      attr_accessor api_id: ::String
+      attr_accessor deployment_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDeploymentResponse
+      attr_accessor auto_deployed: bool
+      attr_accessor created_date: ::Time
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_status: ("PENDING" | "FAILED" | "DEPLOYED")
+      attr_accessor deployment_status_message: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDomainNameInput
+      attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
+      attr_accessor mutual_tls_authentication: Types::MutualTlsAuthenticationInput
+      SENSITIVE: []
+    end
+
+    class UpdateDomainNameRequest
+      attr_accessor domain_name: ::String
+      attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
+      attr_accessor mutual_tls_authentication: Types::MutualTlsAuthenticationInput
+      SENSITIVE: []
+    end
+
+    class UpdateDomainNameResponse
+      attr_accessor api_mapping_selection_expression: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor domain_name_configurations: ::Array[Types::DomainNameConfiguration]
+      attr_accessor mutual_tls_authentication: Types::MutualTlsAuthentication
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateIntegrationInput
+      attr_accessor connection_id: ::String
+      attr_accessor connection_type: ("INTERNET" | "VPC_LINK")
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor credentials_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor integration_method: ::String
+      attr_accessor integration_subtype: ::String
+      attr_accessor integration_type: ("AWS" | "HTTP" | "MOCK" | "HTTP_PROXY" | "AWS_PROXY")
+      attr_accessor integration_uri: ::String
+      attr_accessor passthrough_behavior: ("WHEN_NO_MATCH" | "NEVER" | "WHEN_NO_TEMPLATES")
+      attr_accessor payload_format_version: ::String
+      attr_accessor request_parameters: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor request_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      attr_accessor timeout_in_millis: ::Integer
+      attr_accessor tls_config: Types::TlsConfigInput
+      SENSITIVE: []
+    end
+
+    class UpdateIntegrationRequest
+      attr_accessor api_id: ::String
+      attr_accessor connection_id: ::String
+      attr_accessor connection_type: ("INTERNET" | "VPC_LINK")
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor credentials_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor integration_id: ::String
+      attr_accessor integration_method: ::String
+      attr_accessor integration_subtype: ::String
+      attr_accessor integration_type: ("AWS" | "HTTP" | "MOCK" | "HTTP_PROXY" | "AWS_PROXY")
+      attr_accessor integration_uri: ::String
+      attr_accessor passthrough_behavior: ("WHEN_NO_MATCH" | "NEVER" | "WHEN_NO_TEMPLATES")
+      attr_accessor payload_format_version: ::String
+      attr_accessor request_parameters: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor request_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      attr_accessor timeout_in_millis: ::Integer
+      attr_accessor tls_config: Types::TlsConfigInput
+      SENSITIVE: []
+    end
+
+    class UpdateIntegrationResult
+      attr_accessor api_gateway_managed: bool
+      attr_accessor connection_id: ::String
+      attr_accessor connection_type: ("INTERNET" | "VPC_LINK")
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor credentials_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor integration_id: ::String
+      attr_accessor integration_method: ::String
+      attr_accessor integration_response_selection_expression: ::String
+      attr_accessor integration_subtype: ::String
+      attr_accessor integration_type: ("AWS" | "HTTP" | "MOCK" | "HTTP_PROXY" | "AWS_PROXY")
+      attr_accessor integration_uri: ::String
+      attr_accessor passthrough_behavior: ("WHEN_NO_MATCH" | "NEVER" | "WHEN_NO_TEMPLATES")
+      attr_accessor payload_format_version: ::String
+      attr_accessor request_parameters: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, ::Hash[::String, ::String]]
+      attr_accessor request_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      attr_accessor timeout_in_millis: ::Integer
+      attr_accessor tls_config: Types::TlsConfig
+      SENSITIVE: []
+    end
+
+    class UpdateIntegrationResponseInput
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor integration_response_key: ::String
+      attr_accessor response_parameters: ::Hash[::String, ::String]
+      attr_accessor response_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateIntegrationResponseRequest
+      attr_accessor api_id: ::String
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor integration_id: ::String
+      attr_accessor integration_response_id: ::String
+      attr_accessor integration_response_key: ::String
+      attr_accessor response_parameters: ::Hash[::String, ::String]
+      attr_accessor response_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateIntegrationResponseResponse
+      attr_accessor content_handling_strategy: ("CONVERT_TO_BINARY" | "CONVERT_TO_TEXT")
+      attr_accessor integration_response_id: ::String
+      attr_accessor integration_response_key: ::String
+      attr_accessor response_parameters: ::Hash[::String, ::String]
+      attr_accessor response_templates: ::Hash[::String, ::String]
+      attr_accessor template_selection_expression: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateModelInput
+      attr_accessor content_type: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor schema: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateModelRequest
+      attr_accessor api_id: ::String
+      attr_accessor content_type: ::String
+      attr_accessor description: ::String
+      attr_accessor model_id: ::String
+      attr_accessor name: ::String
+      attr_accessor schema: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateModelResponse
+      attr_accessor content_type: ::String
+      attr_accessor description: ::String
+      attr_accessor model_id: ::String
+      attr_accessor name: ::String
+      attr_accessor schema: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRouteInput
+      attr_accessor api_key_required: bool
+      attr_accessor authorization_scopes: ::Array[::String]
+      attr_accessor authorization_type: ("NONE" | "AWS_IAM" | "CUSTOM" | "JWT")
+      attr_accessor authorizer_id: ::String
+      attr_accessor model_selection_expression: ::String
+      attr_accessor operation_name: ::String
+      attr_accessor request_models: ::Hash[::String, ::String]
+      attr_accessor request_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_key: ::String
+      attr_accessor route_response_selection_expression: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRouteRequest
+      attr_accessor api_id: ::String
+      attr_accessor api_key_required: bool
+      attr_accessor authorization_scopes: ::Array[::String]
+      attr_accessor authorization_type: ("NONE" | "AWS_IAM" | "CUSTOM" | "JWT")
+      attr_accessor authorizer_id: ::String
+      attr_accessor model_selection_expression: ::String
+      attr_accessor operation_name: ::String
+      attr_accessor request_models: ::Hash[::String, ::String]
+      attr_accessor request_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_id: ::String
+      attr_accessor route_key: ::String
+      attr_accessor route_response_selection_expression: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRouteResult
+      attr_accessor api_gateway_managed: bool
+      attr_accessor api_key_required: bool
+      attr_accessor authorization_scopes: ::Array[::String]
+      attr_accessor authorization_type: ("NONE" | "AWS_IAM" | "CUSTOM" | "JWT")
+      attr_accessor authorizer_id: ::String
+      attr_accessor model_selection_expression: ::String
+      attr_accessor operation_name: ::String
+      attr_accessor request_models: ::Hash[::String, ::String]
+      attr_accessor request_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_id: ::String
+      attr_accessor route_key: ::String
+      attr_accessor route_response_selection_expression: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRouteResponseInput
+      attr_accessor model_selection_expression: ::String
+      attr_accessor response_models: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_response_key: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRouteResponseRequest
+      attr_accessor api_id: ::String
+      attr_accessor model_selection_expression: ::String
+      attr_accessor response_models: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_id: ::String
+      attr_accessor route_response_id: ::String
+      attr_accessor route_response_key: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRouteResponseResponse
+      attr_accessor model_selection_expression: ::String
+      attr_accessor response_models: ::Hash[::String, ::String]
+      attr_accessor response_parameters: ::Hash[::String, Types::ParameterConstraints]
+      attr_accessor route_response_id: ::String
+      attr_accessor route_response_key: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateStageInput
+      attr_accessor access_log_settings: Types::AccessLogSettings
+      attr_accessor auto_deploy: bool
+      attr_accessor client_certificate_id: ::String
+      attr_accessor default_route_settings: Types::RouteSettings
+      attr_accessor deployment_id: ::String
+      attr_accessor description: ::String
+      attr_accessor route_settings: ::Hash[::String, Types::RouteSettings]
+      attr_accessor stage_variables: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateStageRequest
+      attr_accessor access_log_settings: Types::AccessLogSettings
+      attr_accessor api_id: ::String
+      attr_accessor auto_deploy: bool
+      attr_accessor client_certificate_id: ::String
+      attr_accessor default_route_settings: Types::RouteSettings
+      attr_accessor deployment_id: ::String
+      attr_accessor description: ::String
+      attr_accessor route_settings: ::Hash[::String, Types::RouteSettings]
+      attr_accessor stage_name: ::String
+      attr_accessor stage_variables: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateStageResponse
+      attr_accessor access_log_settings: Types::AccessLogSettings
+      attr_accessor api_gateway_managed: bool
+      attr_accessor auto_deploy: bool
+      attr_accessor client_certificate_id: ::String
+      attr_accessor created_date: ::Time
+      attr_accessor default_route_settings: Types::RouteSettings
+      attr_accessor deployment_id: ::String
+      attr_accessor description: ::String
+      attr_accessor last_deployment_status_message: ::String
+      attr_accessor last_updated_date: ::Time
+      attr_accessor route_settings: ::Hash[::String, Types::RouteSettings]
+      attr_accessor stage_name: ::String
+      attr_accessor stage_variables: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateVpcLinkInput
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVpcLinkRequest
+      attr_accessor name: ::String
+      attr_accessor vpc_link_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateVpcLinkResponse
+      attr_accessor created_date: ::Time
+      attr_accessor name: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_link_id: ::String
+      attr_accessor vpc_link_status: ("PENDING" | "AVAILABLE" | "DELETING" | "FAILED" | "INACTIVE")
+      attr_accessor vpc_link_status_message: ::String
+      attr_accessor vpc_link_version: ("V2")
+      SENSITIVE: []
+    end
+
+    class VpcLink
+      attr_accessor created_date: ::Time
+      attr_accessor name: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_link_id: ::String
+      attr_accessor vpc_link_status: ("PENDING" | "AVAILABLE" | "DELETING" | "FAILED" | "INACTIVE")
+      attr_accessor vpc_link_status_message: ::String
+      attr_accessor vpc_link_version: ("V2")
+      SENSITIVE: []
+    end
+
+    class VpcLinks
+      attr_accessor items: ::Array[Types::VpcLink]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+  end
+end

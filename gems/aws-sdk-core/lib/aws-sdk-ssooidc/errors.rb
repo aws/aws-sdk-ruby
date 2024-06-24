@@ -34,7 +34,9 @@ module Aws::SSOOIDC
   # * {InvalidClientException}
   # * {InvalidClientMetadataException}
   # * {InvalidGrantException}
+  # * {InvalidRedirectUriException}
   # * {InvalidRequestException}
+  # * {InvalidRequestRegionException}
   # * {InvalidScopeException}
   # * {SlowDownException}
   # * {UnauthorizedClientException}
@@ -186,6 +188,26 @@ module Aws::SSOOIDC
       end
     end
 
+    class InvalidRedirectUriException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSOOIDC::Types::InvalidRedirectUriException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error
+        @data[:error]
+      end
+
+      # @return [String]
+      def error_description
+        @data[:error_description]
+      end
+    end
+
     class InvalidRequestException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -203,6 +225,36 @@ module Aws::SSOOIDC
       # @return [String]
       def error_description
         @data[:error_description]
+      end
+    end
+
+    class InvalidRequestRegionException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSOOIDC::Types::InvalidRequestRegionException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error
+        @data[:error]
+      end
+
+      # @return [String]
+      def error_description
+        @data[:error_description]
+      end
+
+      # @return [String]
+      def endpoint
+        @data[:endpoint]
+      end
+
+      # @return [String]
+      def region
+        @data[:region]
       end
     end
 

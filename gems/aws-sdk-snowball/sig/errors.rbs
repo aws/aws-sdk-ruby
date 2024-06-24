@@ -1,0 +1,51 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Snowball
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ClusterLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def conflict_resource: () -> ::String
+        def message: () -> ::String
+      end
+      class Ec2RequestFailedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidAddressException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidInputCombinationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidJobStateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidResourceException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_type: () -> ::String
+      end
+      class KMSRequestFailedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ReturnShippingLabelAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedAddressException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

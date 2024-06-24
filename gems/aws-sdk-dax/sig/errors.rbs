@@ -1,0 +1,72 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DAX
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ClusterAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class ClusterNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class ClusterQuotaForCustomerExceededFault < ::Aws::Errors::ServiceError
+      end
+      class InsufficientClusterCapacityFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidARNFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidClusterStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidParameterCombinationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidParameterGroupStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidSubnet < ::Aws::Errors::ServiceError
+      end
+      class InvalidVPCNetworkStateFault < ::Aws::Errors::ServiceError
+      end
+      class NodeNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class NodeQuotaForClusterExceededFault < ::Aws::Errors::ServiceError
+      end
+      class NodeQuotaForCustomerExceededFault < ::Aws::Errors::ServiceError
+      end
+      class ParameterGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class ParameterGroupNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class ParameterGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class ServiceLinkedRoleNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      end
+      class SubnetGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class SubnetGroupInUseFault < ::Aws::Errors::ServiceError
+      end
+      class SubnetGroupNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class SubnetGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class SubnetInUse < ::Aws::Errors::ServiceError
+      end
+      class SubnetQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class TagNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class TagQuotaPerResourceExceeded < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

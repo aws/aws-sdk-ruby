@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Bedrock
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Bedrock
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::Bedrock
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::Bedrock
     #   @option options [Aws::Bedrock::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Bedrock::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -388,59 +413,448 @@ module Aws::Bedrock
 
     # @!group API Operations
 
+    # API operation for creating and managing Amazon Bedrock automatic model
+    # evaluation jobs and model evaluation jobs that use human workers. To
+    # learn more about the requirements for creating a model evaluation job
+    # see, [Model evaluations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html
+    #
+    # @option params [required, String] :job_name
+    #   The name of the model evaluation job. Model evaluation job names must
+    #   unique with your AWS account, and your account's AWS region.
+    #
+    # @option params [String] :job_description
+    #   A description of the model evaluation job.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of an IAM service role that Amazon
+    #   Bedrock can assume to perform tasks on your behalf. The service role
+    #   must have Amazon Bedrock as the service principal, and provide access
+    #   to any Amazon S3 buckets specified in the `EvaluationConfig` object.
+    #   To pass this role to Amazon Bedrock, the caller of this API must have
+    #   the `iam:PassRole` permission. To learn more about the required
+    #   permissions, see [Required permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-security.html
+    #
+    # @option params [String] :customer_encryption_key_id
+    #   Specify your customer managed key ARN that will be used to encrypt
+    #   your model evaluation job.
+    #
+    # @option params [Array<Types::Tag>] :job_tags
+    #   Tags to attach to the model evaluation job.
+    #
+    # @option params [required, Types::EvaluationConfig] :evaluation_config
+    #   Specifies whether the model evaluation job is automatic or uses human
+    #   worker.
+    #
+    # @option params [required, Types::EvaluationInferenceConfig] :inference_config
+    #   Specify the models you want to use in your model evaluation job.
+    #   Automatic model evaluation jobs support a single model, and model
+    #   evaluation job that use human workers support two models.
+    #
+    # @option params [required, Types::EvaluationOutputDataConfig] :output_data_config
+    #   An object that defines where the results of model evaluation job will
+    #   be saved in Amazon S3.
+    #
+    # @return [Types::CreateEvaluationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEvaluationJobResponse#job_arn #job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_evaluation_job({
+    #     job_name: "EvaluationJobName", # required
+    #     job_description: "EvaluationJobDescription",
+    #     client_request_token: "IdempotencyToken",
+    #     role_arn: "RoleArn", # required
+    #     customer_encryption_key_id: "KmsKeyId",
+    #     job_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     evaluation_config: { # required
+    #       automated: {
+    #         dataset_metric_configs: [ # required
+    #           {
+    #             task_type: "Summarization", # required, accepts Summarization, Classification, QuestionAndAnswer, Generation, Custom
+    #             dataset: { # required
+    #               name: "EvaluationDatasetName", # required
+    #               dataset_location: {
+    #                 s3_uri: "S3Uri",
+    #               },
+    #             },
+    #             metric_names: ["EvaluationMetricName"], # required
+    #           },
+    #         ],
+    #       },
+    #       human: {
+    #         human_workflow_config: {
+    #           flow_definition_arn: "SageMakerFlowDefinitionArn", # required
+    #           instructions: "HumanTaskInstructions",
+    #         },
+    #         custom_metrics: [
+    #           {
+    #             name: "EvaluationMetricName", # required
+    #             description: "EvaluationMetricDescription",
+    #             rating_method: "EvaluationRatingMethod", # required
+    #           },
+    #         ],
+    #         dataset_metric_configs: [ # required
+    #           {
+    #             task_type: "Summarization", # required, accepts Summarization, Classification, QuestionAndAnswer, Generation, Custom
+    #             dataset: { # required
+    #               name: "EvaluationDatasetName", # required
+    #               dataset_location: {
+    #                 s3_uri: "S3Uri",
+    #               },
+    #             },
+    #             metric_names: ["EvaluationMetricName"], # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     inference_config: { # required
+    #       models: [
+    #         {
+    #           bedrock_model: {
+    #             model_identifier: "EvaluationModelIdentifier", # required
+    #             inference_params: "EvaluationModelInferenceParams", # required
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     output_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateEvaluationJob AWS API Documentation
+    #
+    # @overload create_evaluation_job(params = {})
+    # @param [Hash] params ({})
+    def create_evaluation_job(params = {}, options = {})
+      req = build_request(:create_evaluation_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a guardrail to block topics and to filter out harmful content.
+    #
+    # * Specify a `name` and optional `description`.
+    #
+    # * Specify messages for when the guardrail successfully blocks a prompt
+    #   or a model response in the `blockedInputMessaging` and
+    #   `blockedOutputsMessaging` fields.
+    #
+    # * Specify topics for the guardrail to deny in the `topicPolicyConfig`
+    #   object. Each [GuardrailTopicConfig][1] object in the `topicsConfig`
+    #   list pertains to one topic.
+    #
+    #   * Give a `name` and `description` so that the guardrail can properly
+    #     identify the topic.
+    #
+    #   * Specify `DENY` in the `type` field.
+    #
+    #   * (Optional) Provide up to five prompts that you would categorize as
+    #     belonging to the topic in the `examples` list.
+    #
+    # * Specify filter strengths for the harmful categories defined in
+    #   Amazon Bedrock in the `contentPolicyConfig` object. Each
+    #   [GuardrailContentFilterConfig][2] object in the `filtersConfig` list
+    #   pertains to a harmful category. For more information, see [Content
+    #   filters][3]. For more information about the fields in a content
+    #   filter, see [GuardrailContentFilterConfig][2].
+    #
+    #   * Specify the category in the `type` field.
+    #
+    #   * Specify the strength of the filter for prompts in the
+    #     `inputStrength` field and for model responses in the `strength`
+    #     field of the [GuardrailContentFilterConfig][2].
+    #
+    # * (Optional) For security, include the ARN of a KMS key in the
+    #   `kmsKeyId` field.
+    #
+    # * (Optional) Attach any tags to the guardrail in the `tags` object.
+    #   For more information, see [Tag resources][4].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailTopicConfig.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailContentFilterConfig.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging
+    #
+    # @option params [required, String] :name
+    #   The name to give the guardrail.
+    #
+    # @option params [String] :description
+    #   A description of the guardrail.
+    #
+    # @option params [Types::GuardrailTopicPolicyConfig] :topic_policy_config
+    #   The topic policies to configure for the guardrail.
+    #
+    # @option params [Types::GuardrailContentPolicyConfig] :content_policy_config
+    #   The content filter policies to configure for the guardrail.
+    #
+    # @option params [Types::GuardrailWordPolicyConfig] :word_policy_config
+    #   The word policy you configure for the guardrail.
+    #
+    # @option params [Types::GuardrailSensitiveInformationPolicyConfig] :sensitive_information_policy_config
+    #   The sensitive information policy to configure for the guardrail.
+    #
+    # @option params [required, String] :blocked_input_messaging
+    #   The message to return when the guardrail blocks a prompt.
+    #
+    # @option params [required, String] :blocked_outputs_messaging
+    #   The message to return when the guardrail blocks a model response.
+    #
+    # @option params [String] :kms_key_id
+    #   The ARN of the KMS key that you use to encrypt the guardrail.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags that you want to attach to the guardrail.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than once. If this token matches a previous request,
+    #   Amazon Bedrock ignores the request, but does not return an error. For
+    #   more information, see [Ensuring idempotency][1] in the *Amazon S3 User
+    #   Guide*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateGuardrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGuardrailResponse#guardrail_id #guardrail_id} => String
+    #   * {Types::CreateGuardrailResponse#guardrail_arn #guardrail_arn} => String
+    #   * {Types::CreateGuardrailResponse#version #version} => String
+    #   * {Types::CreateGuardrailResponse#created_at #created_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_guardrail({
+    #     name: "GuardrailName", # required
+    #     description: "GuardrailDescription",
+    #     topic_policy_config: {
+    #       topics_config: [ # required
+    #         {
+    #           name: "GuardrailTopicName", # required
+    #           definition: "GuardrailTopicDefinition", # required
+    #           examples: ["GuardrailTopicExample"],
+    #           type: "DENY", # required, accepts DENY
+    #         },
+    #       ],
+    #     },
+    #     content_policy_config: {
+    #       filters_config: [ # required
+    #         {
+    #           type: "SEXUAL", # required, accepts SEXUAL, VIOLENCE, HATE, INSULTS, MISCONDUCT, PROMPT_ATTACK
+    #           input_strength: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH
+    #           output_strength: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH
+    #         },
+    #       ],
+    #     },
+    #     word_policy_config: {
+    #       words_config: [
+    #         {
+    #           text: "GuardrailWordConfigTextString", # required
+    #         },
+    #       ],
+    #       managed_word_lists_config: [
+    #         {
+    #           type: "PROFANITY", # required, accepts PROFANITY
+    #         },
+    #       ],
+    #     },
+    #     sensitive_information_policy_config: {
+    #       pii_entities_config: [
+    #         {
+    #           type: "ADDRESS", # required, accepts ADDRESS, AGE, AWS_ACCESS_KEY, AWS_SECRET_KEY, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, DRIVER_ID, EMAIL, INTERNATIONAL_BANK_ACCOUNT_NUMBER, IP_ADDRESS, LICENSE_PLATE, MAC_ADDRESS, NAME, PASSWORD, PHONE, PIN, SWIFT_CODE, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER, URL, USERNAME, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, VEHICLE_IDENTIFICATION_NUMBER
+    #           action: "BLOCK", # required, accepts BLOCK, ANONYMIZE
+    #         },
+    #       ],
+    #       regexes_config: [
+    #         {
+    #           name: "GuardrailRegexConfigNameString", # required
+    #           description: "GuardrailRegexConfigDescriptionString",
+    #           pattern: "GuardrailRegexConfigPatternString", # required
+    #           action: "BLOCK", # required, accepts BLOCK, ANONYMIZE
+    #         },
+    #       ],
+    #     },
+    #     blocked_input_messaging: "GuardrailBlockedMessaging", # required
+    #     blocked_outputs_messaging: "GuardrailBlockedMessaging", # required
+    #     kms_key_id: "KmsKeyId",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     client_request_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.guardrail_id #=> String
+    #   resp.guardrail_arn #=> String
+    #   resp.version #=> String
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateGuardrail AWS API Documentation
+    #
+    # @overload create_guardrail(params = {})
+    # @param [Hash] params ({})
+    def create_guardrail(params = {}, options = {})
+      req = build_request(:create_guardrail, params)
+      req.send_request(options)
+    end
+
+    # Creates a version of the guardrail. Use this API to create a snapshot
+    # of the guardrail when you are satisfied with a configuration, or to
+    # compare the configuration with another version.
+    #
+    # @option params [required, String] :guardrail_identifier
+    #   The unique identifier of the guardrail.
+    #
+    # @option params [String] :description
+    #   A description of the guardrail version.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than once. If this token matches a previous request,
+    #   Amazon Bedrock ignores the request, but does not return an error. For
+    #   more information, see [Ensuring idempotency][1] in the *Amazon S3 User
+    #   Guide*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateGuardrailVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGuardrailVersionResponse#guardrail_id #guardrail_id} => String
+    #   * {Types::CreateGuardrailVersionResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_guardrail_version({
+    #     guardrail_identifier: "GuardrailIdentifier", # required
+    #     description: "GuardrailDescription",
+    #     client_request_token: "IdempotencyToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.guardrail_id #=> String
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateGuardrailVersion AWS API Documentation
+    #
+    # @overload create_guardrail_version(params = {})
+    # @param [Hash] params ({})
+    def create_guardrail_version(params = {}, options = {})
+      req = build_request(:create_guardrail_version, params)
+      req.send_request(options)
+    end
+
     # Creates a fine-tuning job to customize a base model.
     #
     # You specify the base foundation model and the location of the training
     # data. After the model-customization job completes successfully, your
-    # custom model resource will be ready to use. Training data contains
-    # input and output text for each record in a JSONL format. Optionally,
-    # you can specify validation data in the same format as the training
-    # data. Bedrock returns validation loss metrics and output generations
-    # after the job completes.
+    # custom model resource will be ready to use. Amazon Bedrock returns
+    # validation loss metrics and output generations after the job
+    # completes.
+    #
+    # For information on the format of training and validation data, see
+    # [Prepare the datasets][1].
     #
     # Model-customization jobs are asynchronous and the completion time
     # depends on the base model and the training/validation data size. To
     # monitor a job, use the `GetModelCustomizationJob` operation to
     # retrieve the job status.
     #
-    # For more information, see [Custom models][1] in the Bedrock User
-    # Guide.
+    # For more information, see [Custom models][2] in the Amazon Bedrock
+    # User Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-prepare.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
     #
     # @option params [required, String] :job_name
-    #   Enter a unique name for the fine-tuning job.
+    #   A name for the fine-tuning job.
     #
     # @option params [required, String] :custom_model_name
-    #   Enter a name for the custom model.
+    #   A name for the resulting custom model.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that Bedrock can assume
-    #   to perform tasks on your behalf. For example, during model training,
-    #   Bedrock needs your permission to read input data from an S3 bucket,
-    #   write model artifacts to an S3 bucket. To pass this role to Bedrock,
-    #   the caller of this API must have the `iam:PassRole` permission.
+    #   The Amazon Resource Name (ARN) of an IAM service role that Amazon
+    #   Bedrock can assume to perform tasks on your behalf. For example,
+    #   during model training, Amazon Bedrock needs your permission to read
+    #   input data from an S3 bucket, write model artifacts to an S3 bucket.
+    #   To pass this role to Amazon Bedrock, the caller of this API must have
+    #   the `iam:PassRole` permission.
     #
     # @option params [String] :client_request_token
-    #   Unique token value that you can provide. The GetModelCustomizationJob
-    #   response includes the same token value.
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1].
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
     # @option params [required, String] :base_model_identifier
     #   Name of the base model.
+    #
+    # @option params [String] :customization_type
+    #   The customization type.
     #
     # @option params [String] :custom_model_kms_key_id
     #   The custom model is encrypted at rest using this key.
     #
     # @option params [Array<Types::Tag>] :job_tags
-    #   Assign tags to the job.
+    #   Tags to attach to the job.
     #
     # @option params [Array<Types::Tag>] :custom_model_tags
-    #   Assign tags to the custom model.
+    #   Tags to attach to the resulting custom model.
     #
     # @option params [required, Types::TrainingDataConfig] :training_data_config
     #   Information about the training dataset.
@@ -452,7 +866,12 @@ module Aws::Bedrock
     #   S3 location for the output data.
     #
     # @option params [required, Hash<String,String>] :hyper_parameters
-    #   Parameters related to tuning the model.
+    #   Parameters related to tuning the model. For details on the format for
+    #   different models, see [Custom model hyperparameters][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html
     #
     # @option params [Types::VpcConfig] :vpc_config
     #   VPC configuration (optional). Configuration parameters for the private
@@ -471,6 +890,7 @@ module Aws::Bedrock
     #     role_arn: "RoleArn", # required
     #     client_request_token: "IdempotencyToken",
     #     base_model_identifier: "BaseModelIdentifier", # required
+    #     customization_type: "FINE_TUNING", # accepts FINE_TUNING, CONTINUED_PRE_TRAINING
     #     custom_model_kms_key_id: "KmsKeyId",
     #     job_tags: [
     #       {
@@ -519,39 +939,79 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
-    # Creates a provisioned throughput with dedicated capacity for a
-    # foundation model or a fine-tuned model.
-    #
-    # For more information, see [Provisioned throughput][1] in the Bedrock
-    # User Guide.
-    #
+    # Creates dedicated throughput for a base or custom model with the model
+    # units and for the duration that you specify. For pricing details, see
+    # [Amazon Bedrock Pricing][1]. For more information, see [Provisioned
+    # Throughput][2] in the Amazon Bedrock User Guide.
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    #
+    # [1]: http://aws.amazon.com/bedrock/pricing/
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
     #
     # @option params [String] :client_request_token
-    #   Unique token value that you can provide. If this token matches a
-    #   previous request, Bedrock ignores the request, but does not return an
-    #   error.
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If this token matches a previous
+    #   request, Amazon Bedrock ignores the request, but does not return an
+    #   error. For more information, see [Ensuring idempotency][1] in the
+    #   Amazon S3 User Guide.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
     # @option params [required, Integer] :model_units
-    #   Number of model units to allocate.
+    #   Number of model units to allocate. A model unit delivers a specific
+    #   throughput level for the specified model. The throughput level of a
+    #   model unit specifies the total number of input and output tokens that
+    #   it can process and generate within a span of one minute. By default,
+    #   your account has no model units for purchasing Provisioned Throughputs
+    #   with commitment. You must first visit the [Amazon Web Services support
+    #   center][1] to request MUs.
+    #
+    #   For model unit quotas, see [Provisioned Throughput quotas][2] in the
+    #   Amazon Bedrock User Guide.
+    #
+    #   For more information about what an MU specifies, contact your Amazon
+    #   Web Services account manager.
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase
+    #   [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html#prov-thru-quotas
     #
     # @option params [required, String] :provisioned_model_name
-    #   Unique name for this provisioned throughput.
+    #   The name for this Provisioned Throughput.
     #
     # @option params [required, String] :model_id
-    #   Name or ARN of the model to associate with this provisioned
-    #   throughput.
+    #   The Amazon Resource Name (ARN) or name of the model to associate with
+    #   this Provisioned Throughput. For a list of models for which you can
+    #   purchase Provisioned Throughput, see [Amazon Bedrock model IDs for
+    #   purchasing Provisioned Throughput][1] in the Amazon Bedrock User
+    #   Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#prov-throughput-models
     #
     # @option params [String] :commitment_duration
-    #   Commitment duration requested for the provisioned throughput.
+    #   The commitment duration requested for the Provisioned Throughput.
+    #   Billing occurs hourly and is discounted for longer commitment terms.
+    #   To request a no-commit Provisioned Throughput, omit this field.
+    #
+    #   Custom models support all levels of commitment. To see which base
+    #   models support no commitment, see [Supported regions and models for
+    #   Provisioned Throughput][1] in the Amazon Bedrock User Guide
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/pt-supported.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to associate with this provisioned throughput.
+    #   Tags to associate with this Provisioned Throughput.
     #
     # @return [Types::CreateProvisionedModelThroughputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -587,7 +1047,7 @@ module Aws::Bedrock
     end
 
     # Deletes a custom model that you created earlier. For more information,
-    # see [Custom models][1] in the Bedrock User Guide.
+    # see [Custom models][1] in the Amazon Bedrock User Guide.
     #
     #
     #
@@ -613,6 +1073,40 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Deletes a guardrail.
+    #
+    # * To delete a guardrail, only specify the ARN of the guardrail in the
+    #   `guardrailIdentifier` field. If you delete a guardrail, all of its
+    #   versions will be deleted.
+    #
+    # * To delete a version of a guardrail, specify the ARN of the guardrail
+    #   in the `guardrailIdentifier` field and the version in the
+    #   `guardrailVersion` field.
+    #
+    # @option params [required, String] :guardrail_identifier
+    #   The unique identifier of the guardrail.
+    #
+    # @option params [String] :guardrail_version
+    #   The version of the guardrail.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_guardrail({
+    #     guardrail_identifier: "GuardrailIdentifier", # required
+    #     guardrail_version: "GuardrailNumericalVersion",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/DeleteGuardrail AWS API Documentation
+    #
+    # @overload delete_guardrail(params = {})
+    # @param [Hash] params ({})
+    def delete_guardrail(params = {}, options = {})
+      req = build_request(:delete_guardrail, params)
+      req.send_request(options)
+    end
+
     # Delete the invocation logging.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -626,15 +1120,16 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
-    # Deletes a provisioned throughput. For more information, see
-    # [Provisioned throughput][1] in the Bedrock User Guide.
+    # Deletes a Provisioned Throughput. You can't delete a Provisioned
+    # Throughput before the commitment term is over. For more information,
+    # see [Provisioned Throughput][1] in the Amazon Bedrock User Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
     #
     # @option params [required, String] :provisioned_model_id
-    #   The ARN or name of the provisioned throughput.
+    #   The Amazon Resource Name (ARN) or name of the Provisioned Throughput.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -653,16 +1148,16 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
-    # Get the properties associated with a Bedrock custom model that you
-    # have created.For more information, see [Custom models][1] in the
-    # Bedrock User Guide.
+    # Get the properties associated with a Amazon Bedrock custom model that
+    # you have created.For more information, see [Custom models][1] in the
+    # Amazon Bedrock User Guide.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
     #
     # @option params [required, String] :model_identifier
-    #   Name or ARN of the custom model.
+    #   Name or Amazon Resource Name (ARN) of the custom model.
     #
     # @return [Types::GetCustomModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -671,6 +1166,7 @@ module Aws::Bedrock
     #   * {Types::GetCustomModelResponse#job_name #job_name} => String
     #   * {Types::GetCustomModelResponse#job_arn #job_arn} => String
     #   * {Types::GetCustomModelResponse#base_model_arn #base_model_arn} => String
+    #   * {Types::GetCustomModelResponse#customization_type #customization_type} => String
     #   * {Types::GetCustomModelResponse#model_kms_key_arn #model_kms_key_arn} => String
     #   * {Types::GetCustomModelResponse#hyper_parameters #hyper_parameters} => Hash&lt;String,String&gt;
     #   * {Types::GetCustomModelResponse#training_data_config #training_data_config} => Types::TrainingDataConfig
@@ -693,6 +1189,7 @@ module Aws::Bedrock
     #   resp.job_name #=> String
     #   resp.job_arn #=> String
     #   resp.base_model_arn #=> String
+    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING"
     #   resp.model_kms_key_arn #=> String
     #   resp.hyper_parameters #=> Hash
     #   resp.hyper_parameters["String"] #=> String
@@ -714,7 +1211,85 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
-    # Get details about a Bedrock foundation model.
+    # Retrieves the properties associated with a model evaluation job,
+    # including the status of the job. For more information, see [Model
+    # evaluations][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/latest/userguide/model-evaluation.html
+    #
+    # @option params [required, String] :job_identifier
+    #   The Amazon Resource Name (ARN) of the model evaluation job.
+    #
+    # @return [Types::GetEvaluationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEvaluationJobResponse#job_name #job_name} => String
+    #   * {Types::GetEvaluationJobResponse#status #status} => String
+    #   * {Types::GetEvaluationJobResponse#job_arn #job_arn} => String
+    #   * {Types::GetEvaluationJobResponse#job_description #job_description} => String
+    #   * {Types::GetEvaluationJobResponse#role_arn #role_arn} => String
+    #   * {Types::GetEvaluationJobResponse#customer_encryption_key_id #customer_encryption_key_id} => String
+    #   * {Types::GetEvaluationJobResponse#job_type #job_type} => String
+    #   * {Types::GetEvaluationJobResponse#evaluation_config #evaluation_config} => Types::EvaluationConfig
+    #   * {Types::GetEvaluationJobResponse#inference_config #inference_config} => Types::EvaluationInferenceConfig
+    #   * {Types::GetEvaluationJobResponse#output_data_config #output_data_config} => Types::EvaluationOutputDataConfig
+    #   * {Types::GetEvaluationJobResponse#creation_time #creation_time} => Time
+    #   * {Types::GetEvaluationJobResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetEvaluationJobResponse#failure_messages #failure_messages} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_evaluation_job({
+    #     job_identifier: "EvaluationJobIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_name #=> String
+    #   resp.status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.job_arn #=> String
+    #   resp.job_description #=> String
+    #   resp.role_arn #=> String
+    #   resp.customer_encryption_key_id #=> String
+    #   resp.job_type #=> String, one of "Human", "Automated"
+    #   resp.evaluation_config.automated.dataset_metric_configs #=> Array
+    #   resp.evaluation_config.automated.dataset_metric_configs[0].task_type #=> String, one of "Summarization", "Classification", "QuestionAndAnswer", "Generation", "Custom"
+    #   resp.evaluation_config.automated.dataset_metric_configs[0].dataset.name #=> String
+    #   resp.evaluation_config.automated.dataset_metric_configs[0].dataset.dataset_location.s3_uri #=> String
+    #   resp.evaluation_config.automated.dataset_metric_configs[0].metric_names #=> Array
+    #   resp.evaluation_config.automated.dataset_metric_configs[0].metric_names[0] #=> String
+    #   resp.evaluation_config.human.human_workflow_config.flow_definition_arn #=> String
+    #   resp.evaluation_config.human.human_workflow_config.instructions #=> String
+    #   resp.evaluation_config.human.custom_metrics #=> Array
+    #   resp.evaluation_config.human.custom_metrics[0].name #=> String
+    #   resp.evaluation_config.human.custom_metrics[0].description #=> String
+    #   resp.evaluation_config.human.custom_metrics[0].rating_method #=> String
+    #   resp.evaluation_config.human.dataset_metric_configs #=> Array
+    #   resp.evaluation_config.human.dataset_metric_configs[0].task_type #=> String, one of "Summarization", "Classification", "QuestionAndAnswer", "Generation", "Custom"
+    #   resp.evaluation_config.human.dataset_metric_configs[0].dataset.name #=> String
+    #   resp.evaluation_config.human.dataset_metric_configs[0].dataset.dataset_location.s3_uri #=> String
+    #   resp.evaluation_config.human.dataset_metric_configs[0].metric_names #=> Array
+    #   resp.evaluation_config.human.dataset_metric_configs[0].metric_names[0] #=> String
+    #   resp.inference_config.models #=> Array
+    #   resp.inference_config.models[0].bedrock_model.model_identifier #=> String
+    #   resp.inference_config.models[0].bedrock_model.inference_params #=> String
+    #   resp.output_data_config.s3_uri #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.failure_messages #=> Array
+    #   resp.failure_messages[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetEvaluationJob AWS API Documentation
+    #
+    # @overload get_evaluation_job(params = {})
+    # @param [Hash] params ({})
+    def get_evaluation_job(params = {}, options = {})
+      req = build_request(:get_evaluation_job, params)
+      req.send_request(options)
+    end
+
+    # Get details about a Amazon Bedrock foundation model.
     #
     # @option params [required, String] :model_identifier
     #   The model identifier.
@@ -741,9 +1316,10 @@ module Aws::Bedrock
     #   resp.model_details.output_modalities[0] #=> String, one of "TEXT", "IMAGE", "EMBEDDING"
     #   resp.model_details.response_streaming_supported #=> Boolean
     #   resp.model_details.customizations_supported #=> Array
-    #   resp.model_details.customizations_supported[0] #=> String, one of "FINE_TUNING"
+    #   resp.model_details.customizations_supported[0] #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING"
     #   resp.model_details.inference_types_supported #=> Array
     #   resp.model_details.inference_types_supported[0] #=> String, one of "ON_DEMAND", "PROVISIONED"
+    #   resp.model_details.model_lifecycle.status #=> String, one of "ACTIVE", "LEGACY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetFoundationModel AWS API Documentation
     #
@@ -754,9 +1330,96 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Gets details about a guardrail. If you don't specify a version, the
+    # response returns details for the `DRAFT` version.
+    #
+    # @option params [required, String] :guardrail_identifier
+    #   The unique identifier of the guardrail for which to get details.
+    #
+    # @option params [String] :guardrail_version
+    #   The version of the guardrail for which to get details. If you don't
+    #   specify a version, the response returns details for the `DRAFT`
+    #   version.
+    #
+    # @return [Types::GetGuardrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGuardrailResponse#name #name} => String
+    #   * {Types::GetGuardrailResponse#description #description} => String
+    #   * {Types::GetGuardrailResponse#guardrail_id #guardrail_id} => String
+    #   * {Types::GetGuardrailResponse#guardrail_arn #guardrail_arn} => String
+    #   * {Types::GetGuardrailResponse#version #version} => String
+    #   * {Types::GetGuardrailResponse#status #status} => String
+    #   * {Types::GetGuardrailResponse#topic_policy #topic_policy} => Types::GuardrailTopicPolicy
+    #   * {Types::GetGuardrailResponse#content_policy #content_policy} => Types::GuardrailContentPolicy
+    #   * {Types::GetGuardrailResponse#word_policy #word_policy} => Types::GuardrailWordPolicy
+    #   * {Types::GetGuardrailResponse#sensitive_information_policy #sensitive_information_policy} => Types::GuardrailSensitiveInformationPolicy
+    #   * {Types::GetGuardrailResponse#created_at #created_at} => Time
+    #   * {Types::GetGuardrailResponse#updated_at #updated_at} => Time
+    #   * {Types::GetGuardrailResponse#status_reasons #status_reasons} => Array&lt;String&gt;
+    #   * {Types::GetGuardrailResponse#failure_recommendations #failure_recommendations} => Array&lt;String&gt;
+    #   * {Types::GetGuardrailResponse#blocked_input_messaging #blocked_input_messaging} => String
+    #   * {Types::GetGuardrailResponse#blocked_outputs_messaging #blocked_outputs_messaging} => String
+    #   * {Types::GetGuardrailResponse#kms_key_arn #kms_key_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_guardrail({
+    #     guardrail_identifier: "GuardrailIdentifier", # required
+    #     guardrail_version: "GuardrailVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.guardrail_id #=> String
+    #   resp.guardrail_arn #=> String
+    #   resp.version #=> String
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "VERSIONING", "READY", "FAILED", "DELETING"
+    #   resp.topic_policy.topics #=> Array
+    #   resp.topic_policy.topics[0].name #=> String
+    #   resp.topic_policy.topics[0].definition #=> String
+    #   resp.topic_policy.topics[0].examples #=> Array
+    #   resp.topic_policy.topics[0].examples[0] #=> String
+    #   resp.topic_policy.topics[0].type #=> String, one of "DENY"
+    #   resp.content_policy.filters #=> Array
+    #   resp.content_policy.filters[0].type #=> String, one of "SEXUAL", "VIOLENCE", "HATE", "INSULTS", "MISCONDUCT", "PROMPT_ATTACK"
+    #   resp.content_policy.filters[0].input_strength #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   resp.content_policy.filters[0].output_strength #=> String, one of "NONE", "LOW", "MEDIUM", "HIGH"
+    #   resp.word_policy.words #=> Array
+    #   resp.word_policy.words[0].text #=> String
+    #   resp.word_policy.managed_word_lists #=> Array
+    #   resp.word_policy.managed_word_lists[0].type #=> String, one of "PROFANITY"
+    #   resp.sensitive_information_policy.pii_entities #=> Array
+    #   resp.sensitive_information_policy.pii_entities[0].type #=> String, one of "ADDRESS", "AGE", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "CREDIT_DEBIT_CARD_CVV", "CREDIT_DEBIT_CARD_EXPIRY", "CREDIT_DEBIT_CARD_NUMBER", "DRIVER_ID", "EMAIL", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "IP_ADDRESS", "LICENSE_PLATE", "MAC_ADDRESS", "NAME", "PASSWORD", "PHONE", "PIN", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "URL", "USERNAME", "US_BANK_ACCOUNT_NUMBER", "US_BANK_ROUTING_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "US_PASSPORT_NUMBER", "US_SOCIAL_SECURITY_NUMBER", "VEHICLE_IDENTIFICATION_NUMBER"
+    #   resp.sensitive_information_policy.pii_entities[0].action #=> String, one of "BLOCK", "ANONYMIZE"
+    #   resp.sensitive_information_policy.regexes #=> Array
+    #   resp.sensitive_information_policy.regexes[0].name #=> String
+    #   resp.sensitive_information_policy.regexes[0].description #=> String
+    #   resp.sensitive_information_policy.regexes[0].pattern #=> String
+    #   resp.sensitive_information_policy.regexes[0].action #=> String, one of "BLOCK", "ANONYMIZE"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.status_reasons #=> Array
+    #   resp.status_reasons[0] #=> String
+    #   resp.failure_recommendations #=> Array
+    #   resp.failure_recommendations[0] #=> String
+    #   resp.blocked_input_messaging #=> String
+    #   resp.blocked_outputs_messaging #=> String
+    #   resp.kms_key_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetGuardrail AWS API Documentation
+    #
+    # @overload get_guardrail(params = {})
+    # @param [Hash] params ({})
+    def get_guardrail(params = {}, options = {})
+      req = build_request(:get_guardrail, params)
+      req.send_request(options)
+    end
+
     # Retrieves the properties associated with a model-customization job,
     # including the status of the job. For more information, see [Custom
-    # models][1] in the Bedrock User Guide.
+    # models][1] in the Amazon Bedrock User Guide.
     #
     #
     #
@@ -783,6 +1446,7 @@ module Aws::Bedrock
     #   * {Types::GetModelCustomizationJobResponse#training_data_config #training_data_config} => Types::TrainingDataConfig
     #   * {Types::GetModelCustomizationJobResponse#validation_data_config #validation_data_config} => Types::ValidationDataConfig
     #   * {Types::GetModelCustomizationJobResponse#output_data_config #output_data_config} => Types::OutputDataConfig
+    #   * {Types::GetModelCustomizationJobResponse#customization_type #customization_type} => String
     #   * {Types::GetModelCustomizationJobResponse#output_model_kms_key_arn #output_model_kms_key_arn} => String
     #   * {Types::GetModelCustomizationJobResponse#training_metrics #training_metrics} => Types::TrainingMetrics
     #   * {Types::GetModelCustomizationJobResponse#validation_metrics #validation_metrics} => Array&lt;Types::ValidatorMetric&gt;
@@ -814,6 +1478,7 @@ module Aws::Bedrock
     #   resp.validation_data_config.validators #=> Array
     #   resp.validation_data_config.validators[0].s3_uri #=> String
     #   resp.output_data_config.s3_uri #=> String
+    #   resp.customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING"
     #   resp.output_model_kms_key_arn #=> String
     #   resp.training_metrics.training_loss #=> Float
     #   resp.validation_metrics #=> Array
@@ -859,15 +1524,15 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
-    # Get details for a provisioned throughput. For more information, see
-    # [Provisioned throughput][1] in the Bedrock User Guide.
+    # Returns details for a Provisioned Throughput. For more information,
+    # see [Provisioned Throughput][1] in the Amazon Bedrock User Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
     #
     # @option params [required, String] :provisioned_model_id
-    #   The ARN or name of the provisioned throughput.
+    #   The Amazon Resource Name (ARN) or name of the Provisioned Throughput.
     #
     # @return [Types::GetProvisionedModelThroughputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -919,8 +1584,8 @@ module Aws::Bedrock
     # Returns a list of the custom models that you have created with the
     # `CreateModelCustomizationJob` operation.
     #
-    # For more information, see [Custom models][1] in the Bedrock User
-    # Guide.
+    # For more information, see [Custom models][1] in the Amazon Bedrock
+    # User Guide.
     #
     #
     #
@@ -936,19 +1601,19 @@ module Aws::Bedrock
     #   Return custom models only if the job name contains these characters.
     #
     # @option params [String] :base_model_arn_equals
-    #   Return custom models only if the base model ARN matches this
-    #   parameter.
+    #   Return custom models only if the base model Amazon Resource Name (ARN)
+    #   matches this parameter.
     #
     # @option params [String] :foundation_model_arn_equals
-    #   Return custom models only if the foundation model ARN matches this
-    #   parameter.
+    #   Return custom models only if the foundation model Amazon Resource Name
+    #   (ARN) matches this parameter.
     #
     # @option params [Integer] :max_results
     #   Maximum number of results to return in the response.
     #
     # @option params [String] :next_token
-    #   Continuation token from the previous response, for Bedrock to list the
-    #   next set of results.
+    #   Continuation token from the previous response, for Amazon Bedrock to
+    #   list the next set of results.
     #
     # @option params [String] :sort_by
     #   The field to sort by in the returned list of models.
@@ -986,6 +1651,7 @@ module Aws::Bedrock
     #   resp.model_summaries[0].creation_time #=> Time
     #   resp.model_summaries[0].base_model_arn #=> String
     #   resp.model_summaries[0].base_model_name #=> String
+    #   resp.model_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListCustomModels AWS API Documentation
     #
@@ -996,24 +1662,109 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
-    # List of Bedrock foundation models that you can use. For more
-    # information, see [Foundation models][1] in the Bedrock User Guide.
+    # Lists model evaluation jobs.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that includes model evaluation jobs created after the time
+    #   specified.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that includes model evaluation jobs created prior to the time
+    #   specified.
+    #
+    # @option params [String] :status_equals
+    #   Only return jobs where the status condition is met.
+    #
+    # @option params [String] :name_contains
+    #   Query parameter string for model evaluation job names.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   Continuation token from the previous response, for Amazon Bedrock to
+    #   list the next set of results.
+    #
+    # @option params [String] :sort_by
+    #   Allows you to sort model evaluation jobs by when they were created.
+    #
+    # @option params [String] :sort_order
+    #   How you want the order of jobs sorted.
+    #
+    # @return [Types::ListEvaluationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEvaluationJobsResponse#next_token #next_token} => String
+    #   * {Types::ListEvaluationJobsResponse#job_summaries #job_summaries} => Array&lt;Types::EvaluationSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_evaluation_jobs({
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
+    #     name_contains: "EvaluationJobName",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "CreationTime", # accepts CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.job_summaries #=> Array
+    #   resp.job_summaries[0].job_arn #=> String
+    #   resp.job_summaries[0].job_name #=> String
+    #   resp.job_summaries[0].status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.job_summaries[0].creation_time #=> Time
+    #   resp.job_summaries[0].job_type #=> String, one of "Human", "Automated"
+    #   resp.job_summaries[0].evaluation_task_types #=> Array
+    #   resp.job_summaries[0].evaluation_task_types[0] #=> String, one of "Summarization", "Classification", "QuestionAndAnswer", "Generation", "Custom"
+    #   resp.job_summaries[0].model_identifiers #=> Array
+    #   resp.job_summaries[0].model_identifiers[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListEvaluationJobs AWS API Documentation
+    #
+    # @overload list_evaluation_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_evaluation_jobs(params = {}, options = {})
+      req = build_request(:list_evaluation_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists Amazon Bedrock foundation models that you can use. You can
+    # filter the results with the request parameters. For more information,
+    # see [Foundation models][1] in the Amazon Bedrock User Guide.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/foundation-models.html
     #
     # @option params [String] :by_provider
-    #   A Bedrock model provider.
+    #   Return models belonging to the model provider that you specify.
     #
     # @option params [String] :by_customization_type
-    #   List by customization type.
+    #   Return models that support the customization type that you specify.
+    #   For more information, see [Custom models][1] in the Amazon Bedrock
+    #   User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
     #
     # @option params [String] :by_output_modality
-    #   List by output modality type.
+    #   Return models that support the output modality that you specify.
     #
     # @option params [String] :by_inference_type
-    #   List by inference type.
+    #   Return models that support the inference type that you specify. For
+    #   more information, see [Provisioned Throughput][1] in the Amazon
+    #   Bedrock User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
     #
     # @return [Types::ListFoundationModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1023,7 +1774,7 @@ module Aws::Bedrock
     #
     #   resp = client.list_foundation_models({
     #     by_provider: "Provider",
-    #     by_customization_type: "FINE_TUNING", # accepts FINE_TUNING
+    #     by_customization_type: "FINE_TUNING", # accepts FINE_TUNING, CONTINUED_PRE_TRAINING
     #     by_output_modality: "TEXT", # accepts TEXT, IMAGE, EMBEDDING
     #     by_inference_type: "ON_DEMAND", # accepts ON_DEMAND, PROVISIONED
     #   })
@@ -1041,9 +1792,10 @@ module Aws::Bedrock
     #   resp.model_summaries[0].output_modalities[0] #=> String, one of "TEXT", "IMAGE", "EMBEDDING"
     #   resp.model_summaries[0].response_streaming_supported #=> Boolean
     #   resp.model_summaries[0].customizations_supported #=> Array
-    #   resp.model_summaries[0].customizations_supported[0] #=> String, one of "FINE_TUNING"
+    #   resp.model_summaries[0].customizations_supported[0] #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING"
     #   resp.model_summaries[0].inference_types_supported #=> Array
     #   resp.model_summaries[0].inference_types_supported[0] #=> String, one of "ON_DEMAND", "PROVISIONED"
+    #   resp.model_summaries[0].model_lifecycle.status #=> String, one of "ACTIVE", "LEGACY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListFoundationModels AWS API Documentation
     #
@@ -1054,11 +1806,69 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Lists details about all the guardrails in an account. To list the
+    # `DRAFT` version of all your guardrails, don't specify the
+    # `guardrailIdentifier` field. To list all versions of a guardrail,
+    # specify the ARN of the guardrail in the `guardrailIdentifier` field.
+    #
+    # You can set the maximum number of results to return in a response in
+    # the `maxResults` field. If there are more results than the number you
+    # set, the response returns a `nextToken` that you can send in another
+    # `ListGuardrails` request to see the next batch of results.
+    #
+    # @option params [String] :guardrail_identifier
+    #   The unique identifier of the guardrail.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   If there are more results than were returned in the response, the
+    #   response returns a `nextToken` that you can send in another
+    #   `ListGuardrails` request to see the next batch of results.
+    #
+    # @return [Types::ListGuardrailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGuardrailsResponse#guardrails #guardrails} => Array&lt;Types::GuardrailSummary&gt;
+    #   * {Types::ListGuardrailsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_guardrails({
+    #     guardrail_identifier: "GuardrailIdentifier",
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.guardrails #=> Array
+    #   resp.guardrails[0].id #=> String
+    #   resp.guardrails[0].arn #=> String
+    #   resp.guardrails[0].status #=> String, one of "CREATING", "UPDATING", "VERSIONING", "READY", "FAILED", "DELETING"
+    #   resp.guardrails[0].name #=> String
+    #   resp.guardrails[0].description #=> String
+    #   resp.guardrails[0].version #=> String
+    #   resp.guardrails[0].created_at #=> Time
+    #   resp.guardrails[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListGuardrails AWS API Documentation
+    #
+    # @overload list_guardrails(params = {})
+    # @param [Hash] params ({})
+    def list_guardrails(params = {}, options = {})
+      req = build_request(:list_guardrails, params)
+      req.send_request(options)
+    end
+
     # Returns a list of model customization jobs that you have submitted.
     # You can filter the jobs to return based on one or more criteria.
     #
-    # For more information, see [Custom models][1] in the Bedrock User
-    # Guide.
+    # For more information, see [Custom models][1] in the Amazon Bedrock
+    # User Guide.
     #
     #
     #
@@ -1081,8 +1891,8 @@ module Aws::Bedrock
     #   Maximum number of results to return in the response.
     #
     # @option params [String] :next_token
-    #   Continuation token from the previous response, for Bedrock to list the
-    #   next set of results.
+    #   Continuation token from the previous response, for Amazon Bedrock to
+    #   list the next set of results.
     #
     # @option params [String] :sort_by
     #   The field to sort by in the returned list of jobs.
@@ -1123,6 +1933,7 @@ module Aws::Bedrock
     #   resp.model_customization_job_summaries[0].end_time #=> Time
     #   resp.model_customization_job_summaries[0].custom_model_arn #=> String
     #   resp.model_customization_job_summaries[0].custom_model_name #=> String
+    #   resp.model_customization_job_summaries[0].customization_type #=> String, one of "FINE_TUNING", "CONTINUED_PRE_TRAINING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListModelCustomizationJobs AWS API Documentation
     #
@@ -1133,40 +1944,49 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
-    # List the provisioned capacities. For more information, see
-    # [Provisioned throughput][1] in the Bedrock User Guide.
+    # Lists the Provisioned Throughputs in the account. For more
+    # information, see [Provisioned Throughput][1] in the Amazon Bedrock
+    # User Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
-    #   Return provisioned capacities created after the specified time.
+    #   A filter that returns Provisioned Throughputs created after the
+    #   specified time.
     #
     # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
-    #   Return provisioned capacities created before the specified time.
+    #   A filter that returns Provisioned Throughputs created before the
+    #   specified time.
     #
     # @option params [String] :status_equals
-    #   Return the list of provisioned capacities that match the specified
-    #   status.
+    #   A filter that returns Provisioned Throughputs if their statuses
+    #   matches the value that you specify.
     #
     # @option params [String] :model_arn_equals
-    #   Return the list of provisioned capacities where their model ARN is
-    #   equal to this parameter.
+    #   A filter that returns Provisioned Throughputs whose model Amazon
+    #   Resource Name (ARN) is equal to the value that you specify.
     #
     # @option params [String] :name_contains
-    #   Return the list of provisioned capacities if their name contains these
-    #   characters.
+    #   A filter that returns Provisioned Throughputs if their name contains
+    #   the expression that you specify.
     #
     # @option params [Integer] :max_results
-    #   THe maximum number of results to return in the response.
+    #   THe maximum number of results to return in the response. If there are
+    #   more results than the number you specified, the response returns a
+    #   `nextToken` value. To see the next batch of results, send the
+    #   `nextToken` value in another list request.
     #
     # @option params [String] :next_token
-    #   Continuation token from the previous response, for Bedrock to list the
-    #   next set of results.
+    #   If there are more results than the number you specified in the
+    #   `maxResults` field, the response returns a `nextToken` value. To see
+    #   the next batch of results, specify the `nextToken` value in this
+    #   field.
     #
     # @option params [String] :sort_by
-    #   The field to sort by in the returned list of provisioned capacities.
+    #   The field by which to sort the returned list of Provisioned
+    #   Throughputs.
     #
     # @option params [String] :sort_order
     #   The sort order of the results.
@@ -1220,15 +2040,15 @@ module Aws::Bedrock
 
     # List the tags associated with the specified resource.
     #
-    # For more information, see [Tagging resources][1] in the Bedrock User
-    # Guide.
+    # For more information, see [Tagging resources][1] in the Amazon Bedrock
+    # User Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource.
+    #   The Amazon Resource Name (ARN) of the resource.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1293,8 +2113,30 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Stops an in progress model evaluation job.
+    #
+    # @option params [required, String] :job_identifier
+    #   The ARN of the model evaluation job you want to stop.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_evaluation_job({
+    #     job_identifier: "EvaluationJobIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StopEvaluationJob AWS API Documentation
+    #
+    # @overload stop_evaluation_job(params = {})
+    # @param [Hash] params ({})
+    def stop_evaluation_job(params = {}, options = {})
+      req = build_request(:stop_evaluation_job, params)
+      req.send_request(options)
+    end
+
     # Stops an active model customization job. For more information, see
-    # [Custom models][1] in the Bedrock User Guide.
+    # [Custom models][1] in the Amazon Bedrock User Guide.
     #
     #
     #
@@ -1321,14 +2163,14 @@ module Aws::Bedrock
     end
 
     # Associate tags with a resource. For more information, see [Tagging
-    # resources][1] in the Bedrock User Guide.
+    # resources][1] in the Amazon Bedrock User Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource to tag.
+    #   The Amazon Resource Name (ARN) of the resource to tag.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   Tags to associate with the resource.
@@ -1357,14 +2199,14 @@ module Aws::Bedrock
     end
 
     # Remove one or more tags from a resource. For more information, see
-    # [Tagging resources][1] in the Bedrock User Guide.
+    # [Tagging resources][1] in the Amazon Bedrock User Guide.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html
     #
     # @option params [required, String] :resource_arn
-    #   The ARN of the resource to untag.
+    #   The Amazon Resource Name (ARN) of the resource to untag.
     #
     # @option params [required, Array<String>] :tag_keys
     #   Tag keys of the tags to remove from the resource.
@@ -1387,22 +2229,190 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
-    # Update a provisioned throughput. For more information, see
-    # [Provisioned throughput][1] in the Bedrock User Guide.
+    # Updates a guardrail with the values you specify.
+    #
+    # * Specify a `name` and optional `description`.
+    #
+    # * Specify messages for when the guardrail successfully blocks a prompt
+    #   or a model response in the `blockedInputMessaging` and
+    #   `blockedOutputsMessaging` fields.
+    #
+    # * Specify topics for the guardrail to deny in the `topicPolicyConfig`
+    #   object. Each [GuardrailTopicConfig][1] object in the `topicsConfig`
+    #   list pertains to one topic.
+    #
+    #   * Give a `name` and `description` so that the guardrail can properly
+    #     identify the topic.
+    #
+    #   * Specify `DENY` in the `type` field.
+    #
+    #   * (Optional) Provide up to five prompts that you would categorize as
+    #     belonging to the topic in the `examples` list.
+    #
+    # * Specify filter strengths for the harmful categories defined in
+    #   Amazon Bedrock in the `contentPolicyConfig` object. Each
+    #   [GuardrailContentFilterConfig][2] object in the `filtersConfig` list
+    #   pertains to a harmful category. For more information, see [Content
+    #   filters][3]. For more information about the fields in a content
+    #   filter, see [GuardrailContentFilterConfig][2].
+    #
+    #   * Specify the category in the `type` field.
+    #
+    #   * Specify the strength of the filter for prompts in the
+    #     `inputStrength` field and for model responses in the `strength`
+    #     field of the [GuardrailContentFilterConfig][2].
+    #
+    # * (Optional) For security, include the ARN of a KMS key in the
+    #   `kmsKeyId` field.
+    #
+    # * (Optional) Attach any tags to the guardrail in the `tags` object.
+    #   For more information, see [Tag resources][4].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailTopicConfig.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GuardrailContentFilterConfig.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-filters
+    # [4]: https://docs.aws.amazon.com/bedrock/latest/userguide/tagging
+    #
+    # @option params [required, String] :guardrail_identifier
+    #   The unique identifier of the guardrail
+    #
+    # @option params [required, String] :name
+    #   A name for the guardrail.
+    #
+    # @option params [String] :description
+    #   A description of the guardrail.
+    #
+    # @option params [Types::GuardrailTopicPolicyConfig] :topic_policy_config
+    #   The topic policy to configure for the guardrail.
+    #
+    # @option params [Types::GuardrailContentPolicyConfig] :content_policy_config
+    #   The content policy to configure for the guardrail.
+    #
+    # @option params [Types::GuardrailWordPolicyConfig] :word_policy_config
+    #   The word policy to configure for the guardrail.
+    #
+    # @option params [Types::GuardrailSensitiveInformationPolicyConfig] :sensitive_information_policy_config
+    #   The sensitive information policy to configure for the guardrail.
+    #
+    # @option params [required, String] :blocked_input_messaging
+    #   The message to return when the guardrail blocks a prompt.
+    #
+    # @option params [required, String] :blocked_outputs_messaging
+    #   The message to return when the guardrail blocks a model response.
+    #
+    # @option params [String] :kms_key_id
+    #   The ARN of the KMS key with which to encrypt the guardrail.
+    #
+    # @return [Types::UpdateGuardrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateGuardrailResponse#guardrail_id #guardrail_id} => String
+    #   * {Types::UpdateGuardrailResponse#guardrail_arn #guardrail_arn} => String
+    #   * {Types::UpdateGuardrailResponse#version #version} => String
+    #   * {Types::UpdateGuardrailResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_guardrail({
+    #     guardrail_identifier: "GuardrailIdentifier", # required
+    #     name: "GuardrailName", # required
+    #     description: "GuardrailDescription",
+    #     topic_policy_config: {
+    #       topics_config: [ # required
+    #         {
+    #           name: "GuardrailTopicName", # required
+    #           definition: "GuardrailTopicDefinition", # required
+    #           examples: ["GuardrailTopicExample"],
+    #           type: "DENY", # required, accepts DENY
+    #         },
+    #       ],
+    #     },
+    #     content_policy_config: {
+    #       filters_config: [ # required
+    #         {
+    #           type: "SEXUAL", # required, accepts SEXUAL, VIOLENCE, HATE, INSULTS, MISCONDUCT, PROMPT_ATTACK
+    #           input_strength: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH
+    #           output_strength: "NONE", # required, accepts NONE, LOW, MEDIUM, HIGH
+    #         },
+    #       ],
+    #     },
+    #     word_policy_config: {
+    #       words_config: [
+    #         {
+    #           text: "GuardrailWordConfigTextString", # required
+    #         },
+    #       ],
+    #       managed_word_lists_config: [
+    #         {
+    #           type: "PROFANITY", # required, accepts PROFANITY
+    #         },
+    #       ],
+    #     },
+    #     sensitive_information_policy_config: {
+    #       pii_entities_config: [
+    #         {
+    #           type: "ADDRESS", # required, accepts ADDRESS, AGE, AWS_ACCESS_KEY, AWS_SECRET_KEY, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, CREDIT_DEBIT_CARD_CVV, CREDIT_DEBIT_CARD_EXPIRY, CREDIT_DEBIT_CARD_NUMBER, DRIVER_ID, EMAIL, INTERNATIONAL_BANK_ACCOUNT_NUMBER, IP_ADDRESS, LICENSE_PLATE, MAC_ADDRESS, NAME, PASSWORD, PHONE, PIN, SWIFT_CODE, UK_NATIONAL_HEALTH_SERVICE_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER, URL, USERNAME, US_BANK_ACCOUNT_NUMBER, US_BANK_ROUTING_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, US_PASSPORT_NUMBER, US_SOCIAL_SECURITY_NUMBER, VEHICLE_IDENTIFICATION_NUMBER
+    #           action: "BLOCK", # required, accepts BLOCK, ANONYMIZE
+    #         },
+    #       ],
+    #       regexes_config: [
+    #         {
+    #           name: "GuardrailRegexConfigNameString", # required
+    #           description: "GuardrailRegexConfigDescriptionString",
+    #           pattern: "GuardrailRegexConfigPatternString", # required
+    #           action: "BLOCK", # required, accepts BLOCK, ANONYMIZE
+    #         },
+    #       ],
+    #     },
+    #     blocked_input_messaging: "GuardrailBlockedMessaging", # required
+    #     blocked_outputs_messaging: "GuardrailBlockedMessaging", # required
+    #     kms_key_id: "KmsKeyId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.guardrail_id #=> String
+    #   resp.guardrail_arn #=> String
+    #   resp.version #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/UpdateGuardrail AWS API Documentation
+    #
+    # @overload update_guardrail(params = {})
+    # @param [Hash] params ({})
+    def update_guardrail(params = {}, options = {})
+      req = build_request(:update_guardrail, params)
+      req.send_request(options)
+    end
+
+    # Updates the name or associated model for a Provisioned Throughput. For
+    # more information, see [Provisioned Throughput][1] in the Amazon
+    # Bedrock User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
     #
     # @option params [required, String] :provisioned_model_id
-    #   The ARN or name of the provisioned throughput to update.
+    #   The Amazon Resource Name (ARN) or name of the Provisioned Throughput
+    #   to update.
     #
     # @option params [String] :desired_provisioned_model_name
-    #   The new name for this provisioned throughput.
+    #   The new name for this Provisioned Throughput.
     #
     # @option params [String] :desired_model_id
-    #   The ARN of the new model to associate with this provisioned
-    #   throughput.
+    #   The Amazon Resource Name (ARN) of the new model to associate with this
+    #   Provisioned Throughput. You can't specify this field if this
+    #   Provisioned Throughput is associated with a base model.
+    #
+    #   If this Provisioned Throughput is associated with a custom model, you
+    #   can specify one of the following options:
+    #
+    #   * The base model from which the custom model was customized.
+    #
+    #   * Another custom model that was customized from the same base model as
+    #     the custom model.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1436,7 +2446,7 @@ module Aws::Bedrock
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

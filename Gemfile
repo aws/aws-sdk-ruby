@@ -13,7 +13,7 @@ gem 'jmespath'
 gem 'json'
 gem 'nokogiri', '>= 1.6.8.1'
 gem 'oga'
-gem 'rexml'
+gem 'rexml', '= 3.2.6' # Temporary Workaround (https://github.com/ruby/rexml/issues/131)
 
 # These json and xml parsers do not have java gems
 unless defined?(JRUBY_VERSION)
@@ -51,10 +51,14 @@ group :repl do
 end
 
 group :development do
-  gem 'rubocop', '0.81.0'
+  gem 'rubocop', '1.28.0'
 end
 
 group :benchmark do
   gem 'benchmark'
   gem 'memory_profiler'
+end
+
+group :signature do
+  gem 'rbs', platforms: :ruby
 end

@@ -50,6 +50,16 @@ module {{module_name}}
         {{/expect_error?}}
         {{^expect_error?}}
         {{#expect_auth?}}
+        {{#s3_express_auth?}}
+        client.stub_responses(:create_session, credentials: {
+          access_key_id: 's3-akid',
+          secret_access_key: 's3-secret',
+          session_token: 's3-session',
+          expiration: Time.now + 60 * 5
+        })
+        expect_auth({"name"=>"sigv4", "signingName"=>"s3express"})
+        Aws::S3.express_credentials_cache.clear
+        {{/s3_express_auth?}}
         expect_auth({{{expected_auth}}})
         {{/expect_auth?}}
         resp = client.{{operation_name}}(

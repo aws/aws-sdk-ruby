@@ -81,6 +81,7 @@ module Aws::Lightsail
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
     CertificateDomainValidationStatus = Shapes::StringShape.new(name: 'CertificateDomainValidationStatus')
     CertificateName = Shapes::StringShape.new(name: 'CertificateName')
+    CertificateProvider = Shapes::StringShape.new(name: 'CertificateProvider')
     CertificateStatus = Shapes::StringShape.new(name: 'CertificateStatus')
     CertificateStatusList = Shapes::ListShape.new(name: 'CertificateStatusList')
     CertificateSummary = Shapes::StructureShape.new(name: 'CertificateSummary')
@@ -271,6 +272,7 @@ module Aws::Lightsail
     DownloadDefaultKeyPairRequest = Shapes::StructureShape.new(name: 'DownloadDefaultKeyPairRequest')
     DownloadDefaultKeyPairResult = Shapes::StructureShape.new(name: 'DownloadDefaultKeyPairResult')
     EligibleToRenew = Shapes::StringShape.new(name: 'EligibleToRenew')
+    EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
     EnableAddOnRequest = Shapes::StructureShape.new(name: 'EnableAddOnRequest')
     EnableAddOnResult = Shapes::StructureShape.new(name: 'EnableAddOnResult')
     EndpointRequest = Shapes::StructureShape.new(name: 'EndpointRequest')
@@ -407,6 +409,8 @@ module Aws::Lightsail
     GetRelationalDatabaseSnapshotsResult = Shapes::StructureShape.new(name: 'GetRelationalDatabaseSnapshotsResult')
     GetRelationalDatabasesRequest = Shapes::StructureShape.new(name: 'GetRelationalDatabasesRequest')
     GetRelationalDatabasesResult = Shapes::StructureShape.new(name: 'GetRelationalDatabasesResult')
+    GetSetupHistoryRequest = Shapes::StructureShape.new(name: 'GetSetupHistoryRequest')
+    GetSetupHistoryResult = Shapes::StructureShape.new(name: 'GetSetupHistoryResult')
     GetStaticIpRequest = Shapes::StructureShape.new(name: 'GetStaticIpRequest')
     GetStaticIpResult = Shapes::StructureShape.new(name: 'GetStaticIpResult')
     GetStaticIpsRequest = Shapes::StructureShape.new(name: 'GetStaticIpsRequest')
@@ -599,6 +603,17 @@ module Aws::Lightsail
     SetIpAddressTypeResult = Shapes::StructureShape.new(name: 'SetIpAddressTypeResult')
     SetResourceAccessForBucketRequest = Shapes::StructureShape.new(name: 'SetResourceAccessForBucketRequest')
     SetResourceAccessForBucketResult = Shapes::StructureShape.new(name: 'SetResourceAccessForBucketResult')
+    SetupDomainName = Shapes::StringShape.new(name: 'SetupDomainName')
+    SetupDomainNameList = Shapes::ListShape.new(name: 'SetupDomainNameList')
+    SetupExecutionDetails = Shapes::StructureShape.new(name: 'SetupExecutionDetails')
+    SetupExecutionDetailsList = Shapes::ListShape.new(name: 'SetupExecutionDetailsList')
+    SetupHistory = Shapes::StructureShape.new(name: 'SetupHistory')
+    SetupHistoryPageToken = Shapes::StringShape.new(name: 'SetupHistoryPageToken')
+    SetupHistoryResource = Shapes::StructureShape.new(name: 'SetupHistoryResource')
+    SetupInstanceHttpsRequest = Shapes::StructureShape.new(name: 'SetupInstanceHttpsRequest')
+    SetupInstanceHttpsResult = Shapes::StructureShape.new(name: 'SetupInstanceHttpsResult')
+    SetupRequest = Shapes::StructureShape.new(name: 'SetupRequest')
+    SetupStatus = Shapes::StringShape.new(name: 'SetupStatus')
     StartGUISessionRequest = Shapes::StructureShape.new(name: 'StartGUISessionRequest')
     StartGUISessionResult = Shapes::StructureShape.new(name: 'StartGUISessionResult')
     StartInstanceRequest = Shapes::StructureShape.new(name: 'StartInstanceRequest')
@@ -656,11 +671,13 @@ module Aws::Lightsail
     UpdateRelationalDatabaseParametersResult = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseParametersResult')
     UpdateRelationalDatabaseRequest = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseRequest')
     UpdateRelationalDatabaseResult = Shapes::StructureShape.new(name: 'UpdateRelationalDatabaseResult')
+    ViewerMinimumTlsProtocolVersionEnum = Shapes::StringShape.new(name: 'ViewerMinimumTlsProtocolVersionEnum')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
     double = Shapes::FloatShape.new(name: 'double')
     float = Shapes::FloatShape.new(name: 'float')
     integer = Shapes::IntegerShape.new(name: 'integer')
     long = Shapes::IntegerShape.new(name: 'long')
+    setupHistoryList = Shapes::ListShape.new(name: 'setupHistoryList')
     string = Shapes::StringShape.new(name: 'string')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
 
@@ -882,6 +899,7 @@ module Aws::Lightsail
     Bundle.add_member(:transfer_per_month_in_gb, Shapes::ShapeRef.new(shape: integer, location_name: "transferPerMonthInGb"))
     Bundle.add_member(:supported_platforms, Shapes::ShapeRef.new(shape: InstancePlatformList, location_name: "supportedPlatforms"))
     Bundle.add_member(:supported_app_categories, Shapes::ShapeRef.new(shape: AppCategoryList, location_name: "supportedAppCategories"))
+    Bundle.add_member(:public_ipv_4_address_count, Shapes::ShapeRef.new(shape: integer, location_name: "publicIpv4AddressCount"))
     Bundle.struct_class = Types::Bundle
 
     BundleList.member = Shapes::ShapeRef.new(shape: Bundle)
@@ -1218,6 +1236,8 @@ module Aws::Lightsail
     CreateDistributionRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "bundleId"))
     CreateDistributionRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     CreateDistributionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateDistributionRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "certificateName"))
+    CreateDistributionRequest.add_member(:viewer_minimum_tls_protocol_version, Shapes::ShapeRef.new(shape: ViewerMinimumTlsProtocolVersionEnum, location_name: "viewerMinimumTlsProtocolVersion"))
     CreateDistributionRequest.struct_class = Types::CreateDistributionRequest
 
     CreateDistributionResult.add_member(:distribution, Shapes::ShapeRef.new(shape: LightsailDistribution, location_name: "distribution"))
@@ -2175,6 +2195,14 @@ module Aws::Lightsail
     GetRelationalDatabasesResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
     GetRelationalDatabasesResult.struct_class = Types::GetRelationalDatabasesResult
 
+    GetSetupHistoryRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "resourceName"))
+    GetSetupHistoryRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: SetupHistoryPageToken, location_name: "pageToken"))
+    GetSetupHistoryRequest.struct_class = Types::GetSetupHistoryRequest
+
+    GetSetupHistoryResult.add_member(:setup_history, Shapes::ShapeRef.new(shape: setupHistoryList, location_name: "setupHistory"))
+    GetSetupHistoryResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: SetupHistoryPageToken, location_name: "nextPageToken"))
+    GetSetupHistoryResult.struct_class = Types::GetSetupHistoryResult
+
     GetStaticIpRequest.add_member(:static_ip_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "staticIpName"))
     GetStaticIpRequest.struct_class = Types::GetStaticIpRequest
 
@@ -2215,6 +2243,7 @@ module Aws::Lightsail
     InputOrigin.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     InputOrigin.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, location_name: "regionName"))
     InputOrigin.add_member(:protocol_policy, Shapes::ShapeRef.new(shape: OriginProtocolPolicyEnum, location_name: "protocolPolicy"))
+    InputOrigin.add_member(:response_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "responseTimeout"))
     InputOrigin.struct_class = Types::InputOrigin
 
     Instance.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
@@ -2244,6 +2273,7 @@ module Aws::Lightsail
     InstanceAccessDetails.add_member(:cert_key, Shapes::ShapeRef.new(shape: string, location_name: "certKey"))
     InstanceAccessDetails.add_member(:expires_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "expiresAt"))
     InstanceAccessDetails.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "ipAddress"))
+    InstanceAccessDetails.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, location_name: "ipv6Addresses"))
     InstanceAccessDetails.add_member(:password, Shapes::ShapeRef.new(shape: string, location_name: "password"))
     InstanceAccessDetails.add_member(:password_data, Shapes::ShapeRef.new(shape: PasswordData, location_name: "passwordData"))
     InstanceAccessDetails.add_member(:private_key, Shapes::ShapeRef.new(shape: string, location_name: "privateKey"))
@@ -2388,6 +2418,7 @@ module Aws::Lightsail
     LightsailDistribution.add_member(:able_to_update_bundle, Shapes::ShapeRef.new(shape: boolean, location_name: "ableToUpdateBundle"))
     LightsailDistribution.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     LightsailDistribution.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    LightsailDistribution.add_member(:viewer_minimum_tls_protocol_version, Shapes::ShapeRef.new(shape: string, location_name: "viewerMinimumTlsProtocolVersion"))
     LightsailDistribution.struct_class = Types::LightsailDistribution
 
     LoadBalancer.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
@@ -2556,6 +2587,7 @@ module Aws::Lightsail
     Origin.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     Origin.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, location_name: "regionName"))
     Origin.add_member(:protocol_policy, Shapes::ShapeRef.new(shape: OriginProtocolPolicyEnum, location_name: "protocolPolicy"))
+    Origin.add_member(:response_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "responseTimeout"))
     Origin.struct_class = Types::Origin
 
     PartnerIdList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -2834,6 +2866,7 @@ module Aws::Lightsail
     SetIpAddressTypeRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     SetIpAddressTypeRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "resourceName"))
     SetIpAddressTypeRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, required: true, location_name: "ipAddressType"))
+    SetIpAddressTypeRequest.add_member(:accept_bundle_update, Shapes::ShapeRef.new(shape: boolean, location_name: "acceptBundleUpdate"))
     SetIpAddressTypeRequest.struct_class = Types::SetIpAddressTypeRequest
 
     SetIpAddressTypeResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
@@ -2846,6 +2879,47 @@ module Aws::Lightsail
 
     SetResourceAccessForBucketResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     SetResourceAccessForBucketResult.struct_class = Types::SetResourceAccessForBucketResult
+
+    SetupDomainNameList.member = Shapes::ShapeRef.new(shape: SetupDomainName)
+
+    SetupExecutionDetails.add_member(:command, Shapes::ShapeRef.new(shape: string, location_name: "command"))
+    SetupExecutionDetails.add_member(:date_time, Shapes::ShapeRef.new(shape: IsoDate, location_name: "dateTime"))
+    SetupExecutionDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "name"))
+    SetupExecutionDetails.add_member(:status, Shapes::ShapeRef.new(shape: SetupStatus, location_name: "status"))
+    SetupExecutionDetails.add_member(:standard_error, Shapes::ShapeRef.new(shape: string, location_name: "standardError"))
+    SetupExecutionDetails.add_member(:standard_output, Shapes::ShapeRef.new(shape: string, location_name: "standardOutput"))
+    SetupExecutionDetails.add_member(:version, Shapes::ShapeRef.new(shape: string, location_name: "version"))
+    SetupExecutionDetails.struct_class = Types::SetupExecutionDetails
+
+    SetupExecutionDetailsList.member = Shapes::ShapeRef.new(shape: SetupExecutionDetails)
+
+    SetupHistory.add_member(:operation_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "operationId"))
+    SetupHistory.add_member(:request, Shapes::ShapeRef.new(shape: SetupRequest, location_name: "request"))
+    SetupHistory.add_member(:resource, Shapes::ShapeRef.new(shape: SetupHistoryResource, location_name: "resource"))
+    SetupHistory.add_member(:execution_details, Shapes::ShapeRef.new(shape: SetupExecutionDetailsList, location_name: "executionDetails"))
+    SetupHistory.add_member(:status, Shapes::ShapeRef.new(shape: SetupStatus, location_name: "status"))
+    SetupHistory.struct_class = Types::SetupHistory
+
+    SetupHistoryResource.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    SetupHistoryResource.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    SetupHistoryResource.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    SetupHistoryResource.add_member(:location, Shapes::ShapeRef.new(shape: ResourceLocation, location_name: "location"))
+    SetupHistoryResource.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    SetupHistoryResource.struct_class = Types::SetupHistoryResource
+
+    SetupInstanceHttpsRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
+    SetupInstanceHttpsRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: EmailAddress, required: true, location_name: "emailAddress"))
+    SetupInstanceHttpsRequest.add_member(:domain_names, Shapes::ShapeRef.new(shape: SetupDomainNameList, required: true, location_name: "domainNames"))
+    SetupInstanceHttpsRequest.add_member(:certificate_provider, Shapes::ShapeRef.new(shape: CertificateProvider, required: true, location_name: "certificateProvider"))
+    SetupInstanceHttpsRequest.struct_class = Types::SetupInstanceHttpsRequest
+
+    SetupInstanceHttpsResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    SetupInstanceHttpsResult.struct_class = Types::SetupInstanceHttpsResult
+
+    SetupRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "instanceName"))
+    SetupRequest.add_member(:domain_names, Shapes::ShapeRef.new(shape: SetupDomainNameList, location_name: "domainNames"))
+    SetupRequest.add_member(:certificate_provider, Shapes::ShapeRef.new(shape: CertificateProvider, location_name: "certificateProvider"))
+    SetupRequest.struct_class = Types::SetupRequest
 
     StartGUISessionRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "resourceName"))
     StartGUISessionRequest.struct_class = Types::StartGUISessionRequest
@@ -2994,6 +3068,9 @@ module Aws::Lightsail
     UpdateDistributionRequest.add_member(:cache_behavior_settings, Shapes::ShapeRef.new(shape: CacheSettings, location_name: "cacheBehaviorSettings"))
     UpdateDistributionRequest.add_member(:cache_behaviors, Shapes::ShapeRef.new(shape: CacheBehaviorList, location_name: "cacheBehaviors"))
     UpdateDistributionRequest.add_member(:is_enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "isEnabled"))
+    UpdateDistributionRequest.add_member(:viewer_minimum_tls_protocol_version, Shapes::ShapeRef.new(shape: ViewerMinimumTlsProtocolVersionEnum, location_name: "viewerMinimumTlsProtocolVersion"))
+    UpdateDistributionRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "certificateName"))
+    UpdateDistributionRequest.add_member(:use_default_certificate, Shapes::ShapeRef.new(shape: boolean, location_name: "useDefaultCertificate"))
     UpdateDistributionRequest.struct_class = Types::UpdateDistributionRequest
 
     UpdateDistributionResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
@@ -3041,10 +3118,13 @@ module Aws::Lightsail
     UpdateRelationalDatabaseRequest.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: boolean, location_name: "publiclyAccessible"))
     UpdateRelationalDatabaseRequest.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: boolean, location_name: "applyImmediately"))
     UpdateRelationalDatabaseRequest.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: string, location_name: "caCertificateIdentifier"))
+    UpdateRelationalDatabaseRequest.add_member(:relational_database_blueprint_id, Shapes::ShapeRef.new(shape: string, location_name: "relationalDatabaseBlueprintId"))
     UpdateRelationalDatabaseRequest.struct_class = Types::UpdateRelationalDatabaseRequest
 
     UpdateRelationalDatabaseResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     UpdateRelationalDatabaseResult.struct_class = Types::UpdateRelationalDatabaseResult
+
+    setupHistoryList.member = Shapes::ShapeRef.new(shape: SetupHistory)
 
 
     # @api private
@@ -3054,9 +3134,11 @@ module Aws::Lightsail
 
       api.metadata = {
         "apiVersion" => "2016-11-28",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "lightsail",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Lightsail",
         "serviceId" => "Lightsail",
         "signatureVersion" => "v4",
@@ -4836,6 +4918,19 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:get_setup_history, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSetupHistory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSetupHistoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSetupHistoryResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
       api.add_operation(:get_static_ip, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetStaticIp"
         o.http_method = "POST"
@@ -5062,6 +5157,19 @@ module Aws::Lightsail
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: SetResourceAccessForBucketRequest)
         o.output = Shapes::ShapeRef.new(shape: SetResourceAccessForBucketResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:setup_instance_https, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SetupInstanceHttps"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SetupInstanceHttpsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SetupInstanceHttpsResult)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)

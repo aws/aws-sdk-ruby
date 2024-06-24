@@ -52,6 +52,6 @@ require_relative 'aws-sdk-iotfleethub/customizations'
 # @!group service
 module Aws::IoTFleetHub
 
-  GEM_VERSION = '1.20.0'
+  GEM_VERSION = '1.27.0'
 
 end

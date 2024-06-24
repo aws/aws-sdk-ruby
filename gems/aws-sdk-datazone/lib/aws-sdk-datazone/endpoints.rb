@@ -38,6 +38,32 @@ module Aws::DataZone
       end
     end
 
+    class AssociateEnvironmentRole
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class CancelMetadataGenerationRun
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CancelSubscription
       def self.build(context)
         unless context.config.regional_endpoint
@@ -117,6 +143,19 @@ module Aws::DataZone
     end
 
     class CreateEnvironment
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class CreateEnvironmentAction
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -350,6 +389,19 @@ module Aws::DataZone
       end
     end
 
+    class DeleteEnvironmentAction
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteEnvironmentBlueprintConfiguration
       def self.build(context)
         unless context.config.regional_endpoint
@@ -493,6 +545,32 @@ module Aws::DataZone
       end
     end
 
+    class DeleteTimeSeriesDataPoints
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DisassociateEnvironmentRole
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetAsset
       def self.build(context)
         unless context.config.regional_endpoint
@@ -559,6 +637,19 @@ module Aws::DataZone
     end
 
     class GetEnvironment
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetEnvironmentAction
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -688,6 +779,19 @@ module Aws::DataZone
       end
     end
 
+    class GetMetadataGenerationRun
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class GetProject
       def self.build(context)
         unless context.config.regional_endpoint
@@ -741,6 +845,19 @@ module Aws::DataZone
     end
 
     class GetSubscriptionTarget
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetTimeSeriesDataPoint
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -831,6 +948,19 @@ module Aws::DataZone
       end
     end
 
+    class ListEnvironmentActions
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListEnvironmentBlueprintConfigurations
       def self.build(context)
         unless context.config.regional_endpoint
@@ -871,6 +1001,19 @@ module Aws::DataZone
     end
 
     class ListEnvironments
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListMetadataGenerationRuns
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -975,6 +1118,32 @@ module Aws::DataZone
     end
 
     class ListTagsForResource
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListTimeSeriesDataPoints
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class PostTimeSeriesDataPoints
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -1117,6 +1286,19 @@ module Aws::DataZone
       end
     end
 
+    class StartMetadataGenerationRun
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class TagResource
       def self.build(context)
         unless context.config.regional_endpoint
@@ -1170,6 +1352,19 @@ module Aws::DataZone
     end
 
     class UpdateEnvironment
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DataZone::EndpointParameters.new(
+          region: context.config.region,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateEnvironmentAction
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

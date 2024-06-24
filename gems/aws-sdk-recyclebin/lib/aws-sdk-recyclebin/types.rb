@@ -139,6 +139,10 @@ module Aws::RecycleBin
     #     to `null`.
     #   @return [String]
     #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) of the retention rule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/CreateRuleResponse AWS API Documentation
     #
     class CreateRuleResponse < Struct.new(
@@ -150,7 +154,8 @@ module Aws::RecycleBin
       :resource_tags,
       :status,
       :lock_configuration,
-      :lock_state)
+      :lock_state,
+      :rule_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -240,6 +245,10 @@ module Aws::RecycleBin
     #   still within the unlock delay period.
     #   @return [Time]
     #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) of the retention rule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/GetRuleResponse AWS API Documentation
     #
     class GetRuleResponse < Struct.new(
@@ -251,7 +260,8 @@ module Aws::RecycleBin
       :status,
       :lock_configuration,
       :lock_state,
-      :lock_end_time)
+      :lock_end_time,
+      :rule_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -435,6 +445,10 @@ module Aws::RecycleBin
     #     to `null`.
     #   @return [String]
     #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) of the retention rule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/LockRuleResponse AWS API Documentation
     #
     class LockRuleResponse < Struct.new(
@@ -445,7 +459,8 @@ module Aws::RecycleBin
       :resource_tags,
       :status,
       :lock_configuration,
-      :lock_state)
+      :lock_state,
+      :rule_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -546,13 +561,18 @@ module Aws::RecycleBin
     #     to `null`.
     #   @return [String]
     #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) of the retention rule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/RuleSummary AWS API Documentation
     #
     class RuleSummary < Struct.new(
       :identifier,
       :description,
       :retention_period,
-      :lock_state)
+      :lock_state,
+      :rule_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -710,6 +730,10 @@ module Aws::RecycleBin
     #   still within the unlock delay period.
     #   @return [Time]
     #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) of the retention rule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/UnlockRuleResponse AWS API Documentation
     #
     class UnlockRuleResponse < Struct.new(
@@ -721,7 +745,8 @@ module Aws::RecycleBin
       :status,
       :lock_configuration,
       :lock_state,
-      :lock_end_time)
+      :lock_end_time,
+      :rule_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -852,6 +877,10 @@ module Aws::RecycleBin
     #   still within the unlock delay period.
     #   @return [Time]
     #
+    # @!attribute [rw] rule_arn
+    #   The Amazon Resource Name (ARN) of the retention rule.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/UpdateRuleResponse AWS API Documentation
     #
     class UpdateRuleResponse < Struct.new(
@@ -862,7 +891,8 @@ module Aws::RecycleBin
       :resource_tags,
       :status,
       :lock_state,
-      :lock_end_time)
+      :lock_end_time,
+      :rule_arn)
       SENSITIVE = []
       include Aws::Structure
     end

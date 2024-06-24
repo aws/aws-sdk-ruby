@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2024-06-13)
+------------------
+
+* Feature - Add RoamingDeviceSNR and RoamingDeviceRSSI to Customer Metrics.
+
+1.49.0 (2024-06-06)
+------------------
+
+* Feature - Adds support for wireless device to be in Conflict FUOTA Device Status due to a FUOTA Task, so it couldn't be attached to a new one.
+
+1.48.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.47.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.46.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2024-04-16)
+------------------
+
+* Feature - Add PublicGateways in the GetWirelessStatistics call response, indicating the LoRaWAN public network accessed by the device.
+
+1.44.0 (2024-03-29)
+------------------
+
+* Feature - Add support for retrieving key historical and live metrics for LoRaWAN devices and gateways
+
+1.43.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2023-11-03)
+------------------
+
+* Feature - Added LoRaWAN version 1.0.4 support
+
 1.39.0 (2023-09-27)
 ------------------
 

@@ -46,6 +46,7 @@ module Aws::IAM
   # * {MalformedCertificateException}
   # * {MalformedPolicyDocumentException}
   # * {NoSuchEntityException}
+  # * {OpenIdIdpCommunicationErrorException}
   # * {PasswordPolicyViolationException}
   # * {PolicyEvaluationException}
   # * {PolicyNotAttachableException}
@@ -336,6 +337,21 @@ module Aws::IAM
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::IAM::Types::NoSuchEntityException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class OpenIdIdpCommunicationErrorException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::IAM::Types::OpenIdIdpCommunicationErrorException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

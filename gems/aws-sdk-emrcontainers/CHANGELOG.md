@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2024-04-24)
+------------------
+
+* Feature - EMRonEKS Service support for SecurityConfiguration enforcement for Spark Jobs.
+
+1.32.0 (2024-04-04)
+------------------
+
+* Feature - This release adds support for integration with EKS AccessEntry APIs to enable automatic Cluster Access for EMR on EKS.
+
+1.31.0 (2024-03-25)
+------------------
+
+* Feature - This release increases the number of supported job template parameters from 20 to 100.
+
+1.30.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.27.0 (2023-09-27)
 ------------------
 

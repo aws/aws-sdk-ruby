@@ -7,21 +7,26 @@
 
 Feature: Smoke tests for CodePipeline
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @codepipeline @smoke
-  Scenario: Call Aws::CodePipeline::Client#list_pipelines and expect it to succeed
-  When I call the operation 'list_pipelines' with params:
-    """
+  Scenario: ListPipelinesSuccess
+    Given I create a 'Aws::CodePipeline' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'list_pipelines' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
+      """
+    Then I expect an error was not raised
 
   @codepipeline @smoke
-  Scenario: Call Aws::Aws::CodePipeline::Client#get_pipeline and expect it to fail
-  When I call the operation 'get_pipeline' with params:
-    """
+  Scenario: GetPipelineFailure
+    Given I create a 'Aws::CodePipeline' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'get_pipeline' with params:
+      """
 {"name":"fake-pipeline"}
-    """
-  Then I expect an error was raised
+      """
+    Then I expect an error was raised

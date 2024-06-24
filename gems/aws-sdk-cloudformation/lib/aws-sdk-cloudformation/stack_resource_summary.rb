@@ -51,7 +51,7 @@ module Aws::CloudFormation
     end
 
     # Type of resource. (For more information, go to [Amazon Web Services
-    # Resource Types Reference][1] in the CloudFormation User Guide.)
+    # Resource Types Reference][1] in the *CloudFormation User Guide*.)
     #
     #
     #
@@ -225,7 +225,7 @@ module Aws::CloudFormation
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end

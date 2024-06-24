@@ -52,10 +52,20 @@ module Aws::CleanRooms
     AnalysisTemplateSummary = Shapes::StructureShape.new(name: 'AnalysisTemplateSummary')
     AnalysisTemplateSummaryList = Shapes::ListShape.new(name: 'AnalysisTemplateSummaryList')
     AnalysisTemplateText = Shapes::StringShape.new(name: 'AnalysisTemplateText')
+    AnalysisTemplateValidationStatus = Shapes::StringShape.new(name: 'AnalysisTemplateValidationStatus')
+    AnalysisTemplateValidationStatusDetail = Shapes::StructureShape.new(name: 'AnalysisTemplateValidationStatusDetail')
+    AnalysisTemplateValidationStatusDetailList = Shapes::ListShape.new(name: 'AnalysisTemplateValidationStatusDetailList')
+    AnalysisTemplateValidationStatusReason = Shapes::StructureShape.new(name: 'AnalysisTemplateValidationStatusReason')
+    AnalysisTemplateValidationStatusReasonList = Shapes::ListShape.new(name: 'AnalysisTemplateValidationStatusReasonList')
+    AnalysisTemplateValidationType = Shapes::StringShape.new(name: 'AnalysisTemplateValidationType')
     BatchGetCollaborationAnalysisTemplateError = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateError')
     BatchGetCollaborationAnalysisTemplateErrorList = Shapes::ListShape.new(name: 'BatchGetCollaborationAnalysisTemplateErrorList')
     BatchGetCollaborationAnalysisTemplateInput = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateInput')
     BatchGetCollaborationAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'BatchGetCollaborationAnalysisTemplateOutput')
+    BatchGetSchemaAnalysisRuleError = Shapes::StructureShape.new(name: 'BatchGetSchemaAnalysisRuleError')
+    BatchGetSchemaAnalysisRuleErrorList = Shapes::ListShape.new(name: 'BatchGetSchemaAnalysisRuleErrorList')
+    BatchGetSchemaAnalysisRuleInput = Shapes::StructureShape.new(name: 'BatchGetSchemaAnalysisRuleInput')
+    BatchGetSchemaAnalysisRuleOutput = Shapes::StructureShape.new(name: 'BatchGetSchemaAnalysisRuleOutput')
     BatchGetSchemaError = Shapes::StructureShape.new(name: 'BatchGetSchemaError')
     BatchGetSchemaErrorList = Shapes::ListShape.new(name: 'BatchGetSchemaErrorList')
     BatchGetSchemaInput = Shapes::StructureShape.new(name: 'BatchGetSchemaInput')
@@ -68,9 +78,17 @@ module Aws::CleanRooms
     CollaborationAnalysisTemplateSummary = Shapes::StructureShape.new(name: 'CollaborationAnalysisTemplateSummary')
     CollaborationAnalysisTemplateSummaryList = Shapes::ListShape.new(name: 'CollaborationAnalysisTemplateSummaryList')
     CollaborationArn = Shapes::StringShape.new(name: 'CollaborationArn')
+    CollaborationConfiguredAudienceModelAssociation = Shapes::StructureShape.new(name: 'CollaborationConfiguredAudienceModelAssociation')
+    CollaborationConfiguredAudienceModelAssociationSummary = Shapes::StructureShape.new(name: 'CollaborationConfiguredAudienceModelAssociationSummary')
+    CollaborationConfiguredAudienceModelAssociationSummaryList = Shapes::ListShape.new(name: 'CollaborationConfiguredAudienceModelAssociationSummaryList')
     CollaborationDescription = Shapes::StringShape.new(name: 'CollaborationDescription')
     CollaborationIdentifier = Shapes::StringShape.new(name: 'CollaborationIdentifier')
     CollaborationName = Shapes::StringShape.new(name: 'CollaborationName')
+    CollaborationPrivacyBudgetSummary = Shapes::StructureShape.new(name: 'CollaborationPrivacyBudgetSummary')
+    CollaborationPrivacyBudgetSummaryList = Shapes::ListShape.new(name: 'CollaborationPrivacyBudgetSummaryList')
+    CollaborationPrivacyBudgetTemplate = Shapes::StructureShape.new(name: 'CollaborationPrivacyBudgetTemplate')
+    CollaborationPrivacyBudgetTemplateSummary = Shapes::StructureShape.new(name: 'CollaborationPrivacyBudgetTemplateSummary')
+    CollaborationPrivacyBudgetTemplateSummaryList = Shapes::ListShape.new(name: 'CollaborationPrivacyBudgetTemplateSummaryList')
     CollaborationQueryLogStatus = Shapes::StringShape.new(name: 'CollaborationQueryLogStatus')
     CollaborationSummary = Shapes::StructureShape.new(name: 'CollaborationSummary')
     CollaborationSummaryList = Shapes::ListShape.new(name: 'CollaborationSummaryList')
@@ -78,6 +96,13 @@ module Aws::CleanRooms
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
     ColumnTypeString = Shapes::StringShape.new(name: 'ColumnTypeString')
+    ConfiguredAudienceModelArn = Shapes::StringShape.new(name: 'ConfiguredAudienceModelArn')
+    ConfiguredAudienceModelAssociation = Shapes::StructureShape.new(name: 'ConfiguredAudienceModelAssociation')
+    ConfiguredAudienceModelAssociationArn = Shapes::StringShape.new(name: 'ConfiguredAudienceModelAssociationArn')
+    ConfiguredAudienceModelAssociationIdentifier = Shapes::StringShape.new(name: 'ConfiguredAudienceModelAssociationIdentifier')
+    ConfiguredAudienceModelAssociationName = Shapes::StringShape.new(name: 'ConfiguredAudienceModelAssociationName')
+    ConfiguredAudienceModelAssociationSummary = Shapes::StructureShape.new(name: 'ConfiguredAudienceModelAssociationSummary')
+    ConfiguredAudienceModelAssociationSummaryList = Shapes::ListShape.new(name: 'ConfiguredAudienceModelAssociationSummaryList')
     ConfiguredTable = Shapes::StructureShape.new(name: 'ConfiguredTable')
     ConfiguredTableAnalysisRule = Shapes::StructureShape.new(name: 'ConfiguredTableAnalysisRule')
     ConfiguredTableAnalysisRulePolicy = Shapes::UnionShape.new(name: 'ConfiguredTableAnalysisRulePolicy')
@@ -99,6 +124,8 @@ module Aws::CleanRooms
     CreateAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'CreateAnalysisTemplateOutput')
     CreateCollaborationInput = Shapes::StructureShape.new(name: 'CreateCollaborationInput')
     CreateCollaborationOutput = Shapes::StructureShape.new(name: 'CreateCollaborationOutput')
+    CreateConfiguredAudienceModelAssociationInput = Shapes::StructureShape.new(name: 'CreateConfiguredAudienceModelAssociationInput')
+    CreateConfiguredAudienceModelAssociationOutput = Shapes::StructureShape.new(name: 'CreateConfiguredAudienceModelAssociationOutput')
     CreateConfiguredTableAnalysisRuleInput = Shapes::StructureShape.new(name: 'CreateConfiguredTableAnalysisRuleInput')
     CreateConfiguredTableAnalysisRuleOutput = Shapes::StructureShape.new(name: 'CreateConfiguredTableAnalysisRuleOutput')
     CreateConfiguredTableAssociationInput = Shapes::StructureShape.new(name: 'CreateConfiguredTableAssociationInput')
@@ -107,11 +134,15 @@ module Aws::CleanRooms
     CreateConfiguredTableOutput = Shapes::StructureShape.new(name: 'CreateConfiguredTableOutput')
     CreateMembershipInput = Shapes::StructureShape.new(name: 'CreateMembershipInput')
     CreateMembershipOutput = Shapes::StructureShape.new(name: 'CreateMembershipOutput')
+    CreatePrivacyBudgetTemplateInput = Shapes::StructureShape.new(name: 'CreatePrivacyBudgetTemplateInput')
+    CreatePrivacyBudgetTemplateOutput = Shapes::StructureShape.new(name: 'CreatePrivacyBudgetTemplateOutput')
     DataEncryptionMetadata = Shapes::StructureShape.new(name: 'DataEncryptionMetadata')
     DeleteAnalysisTemplateInput = Shapes::StructureShape.new(name: 'DeleteAnalysisTemplateInput')
     DeleteAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'DeleteAnalysisTemplateOutput')
     DeleteCollaborationInput = Shapes::StructureShape.new(name: 'DeleteCollaborationInput')
     DeleteCollaborationOutput = Shapes::StructureShape.new(name: 'DeleteCollaborationOutput')
+    DeleteConfiguredAudienceModelAssociationInput = Shapes::StructureShape.new(name: 'DeleteConfiguredAudienceModelAssociationInput')
+    DeleteConfiguredAudienceModelAssociationOutput = Shapes::StructureShape.new(name: 'DeleteConfiguredAudienceModelAssociationOutput')
     DeleteConfiguredTableAnalysisRuleInput = Shapes::StructureShape.new(name: 'DeleteConfiguredTableAnalysisRuleInput')
     DeleteConfiguredTableAnalysisRuleOutput = Shapes::StructureShape.new(name: 'DeleteConfiguredTableAnalysisRuleOutput')
     DeleteConfiguredTableAssociationInput = Shapes::StructureShape.new(name: 'DeleteConfiguredTableAssociationInput')
@@ -122,15 +153,47 @@ module Aws::CleanRooms
     DeleteMemberOutput = Shapes::StructureShape.new(name: 'DeleteMemberOutput')
     DeleteMembershipInput = Shapes::StructureShape.new(name: 'DeleteMembershipInput')
     DeleteMembershipOutput = Shapes::StructureShape.new(name: 'DeleteMembershipOutput')
+    DeletePrivacyBudgetTemplateInput = Shapes::StructureShape.new(name: 'DeletePrivacyBudgetTemplateInput')
+    DeletePrivacyBudgetTemplateOutput = Shapes::StructureShape.new(name: 'DeletePrivacyBudgetTemplateOutput')
+    DifferentialPrivacyAggregationExpression = Shapes::StringShape.new(name: 'DifferentialPrivacyAggregationExpression')
+    DifferentialPrivacyAggregationType = Shapes::StringShape.new(name: 'DifferentialPrivacyAggregationType')
+    DifferentialPrivacyColumn = Shapes::StructureShape.new(name: 'DifferentialPrivacyColumn')
+    DifferentialPrivacyColumnList = Shapes::ListShape.new(name: 'DifferentialPrivacyColumnList')
+    DifferentialPrivacyConfiguration = Shapes::StructureShape.new(name: 'DifferentialPrivacyConfiguration')
+    DifferentialPrivacyParameters = Shapes::StructureShape.new(name: 'DifferentialPrivacyParameters')
+    DifferentialPrivacyPreviewAggregation = Shapes::StructureShape.new(name: 'DifferentialPrivacyPreviewAggregation')
+    DifferentialPrivacyPreviewAggregationList = Shapes::ListShape.new(name: 'DifferentialPrivacyPreviewAggregationList')
+    DifferentialPrivacyPreviewAggregationMaxCountInteger = Shapes::IntegerShape.new(name: 'DifferentialPrivacyPreviewAggregationMaxCountInteger')
+    DifferentialPrivacyPreviewParametersInput = Shapes::StructureShape.new(name: 'DifferentialPrivacyPreviewParametersInput')
+    DifferentialPrivacyPrivacyBudget = Shapes::StructureShape.new(name: 'DifferentialPrivacyPrivacyBudget')
+    DifferentialPrivacyPrivacyBudgetAggregation = Shapes::StructureShape.new(name: 'DifferentialPrivacyPrivacyBudgetAggregation')
+    DifferentialPrivacyPrivacyBudgetAggregationList = Shapes::ListShape.new(name: 'DifferentialPrivacyPrivacyBudgetAggregationList')
+    DifferentialPrivacyPrivacyBudgetAggregationMaxCountInteger = Shapes::IntegerShape.new(name: 'DifferentialPrivacyPrivacyBudgetAggregationMaxCountInteger')
+    DifferentialPrivacyPrivacyBudgetAggregationRemainingCountInteger = Shapes::IntegerShape.new(name: 'DifferentialPrivacyPrivacyBudgetAggregationRemainingCountInteger')
+    DifferentialPrivacyPrivacyImpact = Shapes::StructureShape.new(name: 'DifferentialPrivacyPrivacyImpact')
+    DifferentialPrivacySensitivityParameters = Shapes::StructureShape.new(name: 'DifferentialPrivacySensitivityParameters')
+    DifferentialPrivacySensitivityParametersList = Shapes::ListShape.new(name: 'DifferentialPrivacySensitivityParametersList')
+    DifferentialPrivacySensitivityParametersUserContributionLimitInteger = Shapes::IntegerShape.new(name: 'DifferentialPrivacySensitivityParametersUserContributionLimitInteger')
+    DifferentialPrivacyTemplateParametersInput = Shapes::StructureShape.new(name: 'DifferentialPrivacyTemplateParametersInput')
+    DifferentialPrivacyTemplateParametersOutput = Shapes::StructureShape.new(name: 'DifferentialPrivacyTemplateParametersOutput')
+    DifferentialPrivacyTemplateUpdateParameters = Shapes::StructureShape.new(name: 'DifferentialPrivacyTemplateUpdateParameters')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     Double = Shapes::FloatShape.new(name: 'Double')
+    Epsilon = Shapes::IntegerShape.new(name: 'Epsilon')
     FilterableMemberStatus = Shapes::StringShape.new(name: 'FilterableMemberStatus')
+    Float = Shapes::FloatShape.new(name: 'Float')
     GetAnalysisTemplateInput = Shapes::StructureShape.new(name: 'GetAnalysisTemplateInput')
     GetAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'GetAnalysisTemplateOutput')
     GetCollaborationAnalysisTemplateInput = Shapes::StructureShape.new(name: 'GetCollaborationAnalysisTemplateInput')
     GetCollaborationAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'GetCollaborationAnalysisTemplateOutput')
+    GetCollaborationConfiguredAudienceModelAssociationInput = Shapes::StructureShape.new(name: 'GetCollaborationConfiguredAudienceModelAssociationInput')
+    GetCollaborationConfiguredAudienceModelAssociationOutput = Shapes::StructureShape.new(name: 'GetCollaborationConfiguredAudienceModelAssociationOutput')
     GetCollaborationInput = Shapes::StructureShape.new(name: 'GetCollaborationInput')
     GetCollaborationOutput = Shapes::StructureShape.new(name: 'GetCollaborationOutput')
+    GetCollaborationPrivacyBudgetTemplateInput = Shapes::StructureShape.new(name: 'GetCollaborationPrivacyBudgetTemplateInput')
+    GetCollaborationPrivacyBudgetTemplateOutput = Shapes::StructureShape.new(name: 'GetCollaborationPrivacyBudgetTemplateOutput')
+    GetConfiguredAudienceModelAssociationInput = Shapes::StructureShape.new(name: 'GetConfiguredAudienceModelAssociationInput')
+    GetConfiguredAudienceModelAssociationOutput = Shapes::StructureShape.new(name: 'GetConfiguredAudienceModelAssociationOutput')
     GetConfiguredTableAnalysisRuleInput = Shapes::StructureShape.new(name: 'GetConfiguredTableAnalysisRuleInput')
     GetConfiguredTableAnalysisRuleOutput = Shapes::StructureShape.new(name: 'GetConfiguredTableAnalysisRuleOutput')
     GetConfiguredTableAssociationInput = Shapes::StructureShape.new(name: 'GetConfiguredTableAssociationInput')
@@ -139,6 +202,8 @@ module Aws::CleanRooms
     GetConfiguredTableOutput = Shapes::StructureShape.new(name: 'GetConfiguredTableOutput')
     GetMembershipInput = Shapes::StructureShape.new(name: 'GetMembershipInput')
     GetMembershipOutput = Shapes::StructureShape.new(name: 'GetMembershipOutput')
+    GetPrivacyBudgetTemplateInput = Shapes::StructureShape.new(name: 'GetPrivacyBudgetTemplateInput')
+    GetPrivacyBudgetTemplateOutput = Shapes::StructureShape.new(name: 'GetPrivacyBudgetTemplateOutput')
     GetProtectedQueryInput = Shapes::StructureShape.new(name: 'GetProtectedQueryInput')
     GetProtectedQueryOutput = Shapes::StructureShape.new(name: 'GetProtectedQueryOutput')
     GetSchemaAnalysisRuleInput = Shapes::StructureShape.new(name: 'GetSchemaAnalysisRuleInput')
@@ -157,8 +222,16 @@ module Aws::CleanRooms
     ListAnalysisTemplatesOutput = Shapes::StructureShape.new(name: 'ListAnalysisTemplatesOutput')
     ListCollaborationAnalysisTemplatesInput = Shapes::StructureShape.new(name: 'ListCollaborationAnalysisTemplatesInput')
     ListCollaborationAnalysisTemplatesOutput = Shapes::StructureShape.new(name: 'ListCollaborationAnalysisTemplatesOutput')
+    ListCollaborationConfiguredAudienceModelAssociationsInput = Shapes::StructureShape.new(name: 'ListCollaborationConfiguredAudienceModelAssociationsInput')
+    ListCollaborationConfiguredAudienceModelAssociationsOutput = Shapes::StructureShape.new(name: 'ListCollaborationConfiguredAudienceModelAssociationsOutput')
+    ListCollaborationPrivacyBudgetTemplatesInput = Shapes::StructureShape.new(name: 'ListCollaborationPrivacyBudgetTemplatesInput')
+    ListCollaborationPrivacyBudgetTemplatesOutput = Shapes::StructureShape.new(name: 'ListCollaborationPrivacyBudgetTemplatesOutput')
+    ListCollaborationPrivacyBudgetsInput = Shapes::StructureShape.new(name: 'ListCollaborationPrivacyBudgetsInput')
+    ListCollaborationPrivacyBudgetsOutput = Shapes::StructureShape.new(name: 'ListCollaborationPrivacyBudgetsOutput')
     ListCollaborationsInput = Shapes::StructureShape.new(name: 'ListCollaborationsInput')
     ListCollaborationsOutput = Shapes::StructureShape.new(name: 'ListCollaborationsOutput')
+    ListConfiguredAudienceModelAssociationsInput = Shapes::StructureShape.new(name: 'ListConfiguredAudienceModelAssociationsInput')
+    ListConfiguredAudienceModelAssociationsOutput = Shapes::StructureShape.new(name: 'ListConfiguredAudienceModelAssociationsOutput')
     ListConfiguredTableAssociationsInput = Shapes::StructureShape.new(name: 'ListConfiguredTableAssociationsInput')
     ListConfiguredTableAssociationsOutput = Shapes::StructureShape.new(name: 'ListConfiguredTableAssociationsOutput')
     ListConfiguredTablesInput = Shapes::StructureShape.new(name: 'ListConfiguredTablesInput')
@@ -167,6 +240,10 @@ module Aws::CleanRooms
     ListMembersOutput = Shapes::StructureShape.new(name: 'ListMembersOutput')
     ListMembershipsInput = Shapes::StructureShape.new(name: 'ListMembershipsInput')
     ListMembershipsOutput = Shapes::StructureShape.new(name: 'ListMembershipsOutput')
+    ListPrivacyBudgetTemplatesInput = Shapes::StructureShape.new(name: 'ListPrivacyBudgetTemplatesInput')
+    ListPrivacyBudgetTemplatesOutput = Shapes::StructureShape.new(name: 'ListPrivacyBudgetTemplatesOutput')
+    ListPrivacyBudgetsInput = Shapes::StructureShape.new(name: 'ListPrivacyBudgetsInput')
+    ListPrivacyBudgetsOutput = Shapes::StructureShape.new(name: 'ListPrivacyBudgetsOutput')
     ListProtectedQueriesInput = Shapes::StructureShape.new(name: 'ListProtectedQueriesInput')
     ListProtectedQueriesOutput = Shapes::StructureShape.new(name: 'ListProtectedQueriesOutput')
     ListSchemasInput = Shapes::StructureShape.new(name: 'ListSchemasInput')
@@ -185,8 +262,10 @@ module Aws::CleanRooms
     Membership = Shapes::StructureShape.new(name: 'Membership')
     MembershipArn = Shapes::StringShape.new(name: 'MembershipArn')
     MembershipIdentifier = Shapes::StringShape.new(name: 'MembershipIdentifier')
+    MembershipPaymentConfiguration = Shapes::StructureShape.new(name: 'MembershipPaymentConfiguration')
     MembershipProtectedQueryOutputConfiguration = Shapes::UnionShape.new(name: 'MembershipProtectedQueryOutputConfiguration')
     MembershipProtectedQueryResultConfiguration = Shapes::StructureShape.new(name: 'MembershipProtectedQueryResultConfiguration')
+    MembershipQueryComputePaymentConfig = Shapes::StructureShape.new(name: 'MembershipQueryComputePaymentConfig')
     MembershipQueryLogStatus = Shapes::StringShape.new(name: 'MembershipQueryLogStatus')
     MembershipStatus = Shapes::StringShape.new(name: 'MembershipStatus')
     MembershipSummary = Shapes::StructureShape.new(name: 'MembershipSummary')
@@ -196,6 +275,24 @@ module Aws::CleanRooms
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     ParameterType = Shapes::StringShape.new(name: 'ParameterType')
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
+    PaymentConfiguration = Shapes::StructureShape.new(name: 'PaymentConfiguration')
+    PreviewPrivacyImpactInput = Shapes::StructureShape.new(name: 'PreviewPrivacyImpactInput')
+    PreviewPrivacyImpactOutput = Shapes::StructureShape.new(name: 'PreviewPrivacyImpactOutput')
+    PreviewPrivacyImpactParametersInput = Shapes::UnionShape.new(name: 'PreviewPrivacyImpactParametersInput')
+    PrivacyBudget = Shapes::UnionShape.new(name: 'PrivacyBudget')
+    PrivacyBudgetSummary = Shapes::StructureShape.new(name: 'PrivacyBudgetSummary')
+    PrivacyBudgetSummaryList = Shapes::ListShape.new(name: 'PrivacyBudgetSummaryList')
+    PrivacyBudgetTemplate = Shapes::StructureShape.new(name: 'PrivacyBudgetTemplate')
+    PrivacyBudgetTemplateArn = Shapes::StringShape.new(name: 'PrivacyBudgetTemplateArn')
+    PrivacyBudgetTemplateAutoRefresh = Shapes::StringShape.new(name: 'PrivacyBudgetTemplateAutoRefresh')
+    PrivacyBudgetTemplateIdentifier = Shapes::StringShape.new(name: 'PrivacyBudgetTemplateIdentifier')
+    PrivacyBudgetTemplateParametersInput = Shapes::UnionShape.new(name: 'PrivacyBudgetTemplateParametersInput')
+    PrivacyBudgetTemplateParametersOutput = Shapes::UnionShape.new(name: 'PrivacyBudgetTemplateParametersOutput')
+    PrivacyBudgetTemplateSummary = Shapes::StructureShape.new(name: 'PrivacyBudgetTemplateSummary')
+    PrivacyBudgetTemplateSummaryList = Shapes::ListShape.new(name: 'PrivacyBudgetTemplateSummaryList')
+    PrivacyBudgetTemplateUpdateParameters = Shapes::UnionShape.new(name: 'PrivacyBudgetTemplateUpdateParameters')
+    PrivacyBudgetType = Shapes::StringShape.new(name: 'PrivacyBudgetType')
+    PrivacyImpact = Shapes::UnionShape.new(name: 'PrivacyImpact')
     ProtectedQuery = Shapes::StructureShape.new(name: 'ProtectedQuery')
     ProtectedQueryError = Shapes::StructureShape.new(name: 'ProtectedQueryError')
     ProtectedQueryIdentifier = Shapes::StringShape.new(name: 'ProtectedQueryIdentifier')
@@ -215,6 +312,7 @@ module Aws::CleanRooms
     ProtectedQuerySummary = Shapes::StructureShape.new(name: 'ProtectedQuerySummary')
     ProtectedQuerySummaryList = Shapes::ListShape.new(name: 'ProtectedQuerySummaryList')
     ProtectedQueryType = Shapes::StringShape.new(name: 'ProtectedQueryType')
+    QueryComputePaymentConfig = Shapes::StructureShape.new(name: 'QueryComputePaymentConfig')
     QueryTables = Shapes::ListShape.new(name: 'QueryTables')
     ResourceAlias = Shapes::StringShape.new(name: 'ResourceAlias')
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
@@ -225,7 +323,18 @@ module Aws::CleanRooms
     ScalarFunctions = Shapes::StringShape.new(name: 'ScalarFunctions')
     ScalarFunctionsList = Shapes::ListShape.new(name: 'ScalarFunctionsList')
     Schema = Shapes::StructureShape.new(name: 'Schema')
+    SchemaAnalysisRuleList = Shapes::ListShape.new(name: 'SchemaAnalysisRuleList')
+    SchemaAnalysisRuleRequest = Shapes::StructureShape.new(name: 'SchemaAnalysisRuleRequest')
+    SchemaAnalysisRuleRequestList = Shapes::ListShape.new(name: 'SchemaAnalysisRuleRequestList')
+    SchemaConfiguration = Shapes::StringShape.new(name: 'SchemaConfiguration')
+    SchemaConfigurationList = Shapes::ListShape.new(name: 'SchemaConfigurationList')
     SchemaList = Shapes::ListShape.new(name: 'SchemaList')
+    SchemaStatus = Shapes::StringShape.new(name: 'SchemaStatus')
+    SchemaStatusDetail = Shapes::StructureShape.new(name: 'SchemaStatusDetail')
+    SchemaStatusDetailList = Shapes::ListShape.new(name: 'SchemaStatusDetailList')
+    SchemaStatusReason = Shapes::StructureShape.new(name: 'SchemaStatusReason')
+    SchemaStatusReasonCode = Shapes::StringShape.new(name: 'SchemaStatusReasonCode')
+    SchemaStatusReasonList = Shapes::ListShape.new(name: 'SchemaStatusReasonList')
     SchemaSummary = Shapes::StructureShape.new(name: 'SchemaSummary')
     SchemaSummaryList = Shapes::ListShape.new(name: 'SchemaSummaryList')
     SchemaType = Shapes::StringShape.new(name: 'SchemaType')
@@ -253,6 +362,8 @@ module Aws::CleanRooms
     UpdateAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'UpdateAnalysisTemplateOutput')
     UpdateCollaborationInput = Shapes::StructureShape.new(name: 'UpdateCollaborationInput')
     UpdateCollaborationOutput = Shapes::StructureShape.new(name: 'UpdateCollaborationOutput')
+    UpdateConfiguredAudienceModelAssociationInput = Shapes::StructureShape.new(name: 'UpdateConfiguredAudienceModelAssociationInput')
+    UpdateConfiguredAudienceModelAssociationOutput = Shapes::StructureShape.new(name: 'UpdateConfiguredAudienceModelAssociationOutput')
     UpdateConfiguredTableAnalysisRuleInput = Shapes::StructureShape.new(name: 'UpdateConfiguredTableAnalysisRuleInput')
     UpdateConfiguredTableAnalysisRuleOutput = Shapes::StructureShape.new(name: 'UpdateConfiguredTableAnalysisRuleOutput')
     UpdateConfiguredTableAssociationInput = Shapes::StructureShape.new(name: 'UpdateConfiguredTableAssociationInput')
@@ -261,8 +372,11 @@ module Aws::CleanRooms
     UpdateConfiguredTableOutput = Shapes::StructureShape.new(name: 'UpdateConfiguredTableOutput')
     UpdateMembershipInput = Shapes::StructureShape.new(name: 'UpdateMembershipInput')
     UpdateMembershipOutput = Shapes::StructureShape.new(name: 'UpdateMembershipOutput')
+    UpdatePrivacyBudgetTemplateInput = Shapes::StructureShape.new(name: 'UpdatePrivacyBudgetTemplateInput')
+    UpdatePrivacyBudgetTemplateOutput = Shapes::StructureShape.new(name: 'UpdatePrivacyBudgetTemplateOutput')
     UpdateProtectedQueryInput = Shapes::StructureShape.new(name: 'UpdateProtectedQueryInput')
     UpdateProtectedQueryOutput = Shapes::StructureShape.new(name: 'UpdateProtectedQueryOutput')
+    UsersNoisePerQuery = Shapes::IntegerShape.new(name: 'UsersNoisePerQuery')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
@@ -317,6 +431,7 @@ module Aws::CleanRooms
 
     AnalysisRuleCustom.add_member(:allowed_analyses, Shapes::ShapeRef.new(shape: AnalysisRuleCustomAllowedAnalysesList, required: true, location_name: "allowedAnalyses"))
     AnalysisRuleCustom.add_member(:allowed_analysis_providers, Shapes::ShapeRef.new(shape: AnalysisRuleCustomAllowedAnalysisProvidersList, location_name: "allowedAnalysisProviders"))
+    AnalysisRuleCustom.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyConfiguration, location_name: "differentialPrivacy"))
     AnalysisRuleCustom.struct_class = Types::AnalysisRuleCustom
 
     AnalysisRuleCustomAllowedAnalysesList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateArnOrQueryWildcard)
@@ -371,6 +486,7 @@ module Aws::CleanRooms
     AnalysisTemplate.add_member(:format, Shapes::ShapeRef.new(shape: AnalysisFormat, required: true, location_name: "format"))
     AnalysisTemplate.add_member(:source, Shapes::ShapeRef.new(shape: AnalysisSource, required: true, location_name: "source"))
     AnalysisTemplate.add_member(:analysis_parameters, Shapes::ShapeRef.new(shape: AnalysisParameterList, location_name: "analysisParameters"))
+    AnalysisTemplate.add_member(:validations, Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusDetailList, location_name: "validations"))
     AnalysisTemplate.struct_class = Types::AnalysisTemplate
 
     AnalysisTemplateArnList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateArn)
@@ -389,6 +505,18 @@ module Aws::CleanRooms
 
     AnalysisTemplateSummaryList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateSummary)
 
+    AnalysisTemplateValidationStatusDetail.add_member(:type, Shapes::ShapeRef.new(shape: AnalysisTemplateValidationType, required: true, location_name: "type"))
+    AnalysisTemplateValidationStatusDetail.add_member(:status, Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatus, required: true, location_name: "status"))
+    AnalysisTemplateValidationStatusDetail.add_member(:reasons, Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusReasonList, location_name: "reasons"))
+    AnalysisTemplateValidationStatusDetail.struct_class = Types::AnalysisTemplateValidationStatusDetail
+
+    AnalysisTemplateValidationStatusDetailList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusDetail)
+
+    AnalysisTemplateValidationStatusReason.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    AnalysisTemplateValidationStatusReason.struct_class = Types::AnalysisTemplateValidationStatusReason
+
+    AnalysisTemplateValidationStatusReasonList.member = Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusReason)
+
     BatchGetCollaborationAnalysisTemplateError.add_member(:arn, Shapes::ShapeRef.new(shape: AnalysisTemplateArn, required: true, location_name: "arn"))
     BatchGetCollaborationAnalysisTemplateError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
     BatchGetCollaborationAnalysisTemplateError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -403,6 +531,22 @@ module Aws::CleanRooms
     BatchGetCollaborationAnalysisTemplateOutput.add_member(:collaboration_analysis_templates, Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplateList, required: true, location_name: "collaborationAnalysisTemplates"))
     BatchGetCollaborationAnalysisTemplateOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetCollaborationAnalysisTemplateErrorList, required: true, location_name: "errors"))
     BatchGetCollaborationAnalysisTemplateOutput.struct_class = Types::BatchGetCollaborationAnalysisTemplateOutput
+
+    BatchGetSchemaAnalysisRuleError.add_member(:name, Shapes::ShapeRef.new(shape: TableAlias, required: true, location_name: "name"))
+    BatchGetSchemaAnalysisRuleError.add_member(:type, Shapes::ShapeRef.new(shape: AnalysisRuleType, required: true, location_name: "type"))
+    BatchGetSchemaAnalysisRuleError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    BatchGetSchemaAnalysisRuleError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    BatchGetSchemaAnalysisRuleError.struct_class = Types::BatchGetSchemaAnalysisRuleError
+
+    BatchGetSchemaAnalysisRuleErrorList.member = Shapes::ShapeRef.new(shape: BatchGetSchemaAnalysisRuleError)
+
+    BatchGetSchemaAnalysisRuleInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
+    BatchGetSchemaAnalysisRuleInput.add_member(:schema_analysis_rule_requests, Shapes::ShapeRef.new(shape: SchemaAnalysisRuleRequestList, required: true, location_name: "schemaAnalysisRuleRequests"))
+    BatchGetSchemaAnalysisRuleInput.struct_class = Types::BatchGetSchemaAnalysisRuleInput
+
+    BatchGetSchemaAnalysisRuleOutput.add_member(:analysis_rules, Shapes::ShapeRef.new(shape: SchemaAnalysisRuleList, required: true, location_name: "analysisRules"))
+    BatchGetSchemaAnalysisRuleOutput.add_member(:errors, Shapes::ShapeRef.new(shape: BatchGetSchemaAnalysisRuleErrorList, required: true, location_name: "errors"))
+    BatchGetSchemaAnalysisRuleOutput.struct_class = Types::BatchGetSchemaAnalysisRuleOutput
 
     BatchGetSchemaError.add_member(:name, Shapes::ShapeRef.new(shape: TableAlias, required: true, location_name: "name"))
     BatchGetSchemaError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
@@ -447,6 +591,7 @@ module Aws::CleanRooms
     CollaborationAnalysisTemplate.add_member(:format, Shapes::ShapeRef.new(shape: AnalysisFormat, required: true, location_name: "format"))
     CollaborationAnalysisTemplate.add_member(:source, Shapes::ShapeRef.new(shape: AnalysisSource, required: true, location_name: "source"))
     CollaborationAnalysisTemplate.add_member(:analysis_parameters, Shapes::ShapeRef.new(shape: AnalysisParameterList, location_name: "analysisParameters"))
+    CollaborationAnalysisTemplate.add_member(:validations, Shapes::ShapeRef.new(shape: AnalysisTemplateValidationStatusDetailList, location_name: "validations"))
     CollaborationAnalysisTemplate.struct_class = Types::CollaborationAnalysisTemplate
 
     CollaborationAnalysisTemplateList.member = Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplate)
@@ -463,6 +608,69 @@ module Aws::CleanRooms
     CollaborationAnalysisTemplateSummary.struct_class = Types::CollaborationAnalysisTemplateSummary
 
     CollaborationAnalysisTemplateSummaryList.member = Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplateSummary)
+
+    CollaborationConfiguredAudienceModelAssociation.add_member(:id, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationIdentifier, required: true, location_name: "id"))
+    CollaborationConfiguredAudienceModelAssociation.add_member(:arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationArn, required: true, location_name: "arn"))
+    CollaborationConfiguredAudienceModelAssociation.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    CollaborationConfiguredAudienceModelAssociation.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    CollaborationConfiguredAudienceModelAssociation.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
+    CollaborationConfiguredAudienceModelAssociation.add_member(:name, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationName, required: true, location_name: "name"))
+    CollaborationConfiguredAudienceModelAssociation.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    CollaborationConfiguredAudienceModelAssociation.add_member(:creator_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "creatorAccountId"))
+    CollaborationConfiguredAudienceModelAssociation.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    CollaborationConfiguredAudienceModelAssociation.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    CollaborationConfiguredAudienceModelAssociation.struct_class = Types::CollaborationConfiguredAudienceModelAssociation
+
+    CollaborationConfiguredAudienceModelAssociationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationArn, required: true, location_name: "arn"))
+    CollaborationConfiguredAudienceModelAssociationSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    CollaborationConfiguredAudienceModelAssociationSummary.add_member(:id, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationIdentifier, required: true, location_name: "id"))
+    CollaborationConfiguredAudienceModelAssociationSummary.add_member(:name, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationName, required: true, location_name: "name"))
+    CollaborationConfiguredAudienceModelAssociationSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    CollaborationConfiguredAudienceModelAssociationSummary.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    CollaborationConfiguredAudienceModelAssociationSummary.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    CollaborationConfiguredAudienceModelAssociationSummary.add_member(:creator_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "creatorAccountId"))
+    CollaborationConfiguredAudienceModelAssociationSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    CollaborationConfiguredAudienceModelAssociationSummary.struct_class = Types::CollaborationConfiguredAudienceModelAssociationSummary
+
+    CollaborationConfiguredAudienceModelAssociationSummaryList.member = Shapes::ShapeRef.new(shape: CollaborationConfiguredAudienceModelAssociationSummary)
+
+    CollaborationPrivacyBudgetSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    CollaborationPrivacyBudgetSummary.add_member(:privacy_budget_template_id, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateIdentifier, required: true, location_name: "privacyBudgetTemplateId"))
+    CollaborationPrivacyBudgetSummary.add_member(:privacy_budget_template_arn, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateArn, required: true, location_name: "privacyBudgetTemplateArn"))
+    CollaborationPrivacyBudgetSummary.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    CollaborationPrivacyBudgetSummary.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    CollaborationPrivacyBudgetSummary.add_member(:creator_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "creatorAccountId"))
+    CollaborationPrivacyBudgetSummary.add_member(:type, Shapes::ShapeRef.new(shape: PrivacyBudgetType, required: true, location_name: "type"))
+    CollaborationPrivacyBudgetSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    CollaborationPrivacyBudgetSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    CollaborationPrivacyBudgetSummary.add_member(:budget, Shapes::ShapeRef.new(shape: PrivacyBudget, required: true, location_name: "budget"))
+    CollaborationPrivacyBudgetSummary.struct_class = Types::CollaborationPrivacyBudgetSummary
+
+    CollaborationPrivacyBudgetSummaryList.member = Shapes::ShapeRef.new(shape: CollaborationPrivacyBudgetSummary)
+
+    CollaborationPrivacyBudgetTemplate.add_member(:id, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateIdentifier, required: true, location_name: "id"))
+    CollaborationPrivacyBudgetTemplate.add_member(:arn, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateArn, required: true, location_name: "arn"))
+    CollaborationPrivacyBudgetTemplate.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    CollaborationPrivacyBudgetTemplate.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    CollaborationPrivacyBudgetTemplate.add_member(:creator_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "creatorAccountId"))
+    CollaborationPrivacyBudgetTemplate.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    CollaborationPrivacyBudgetTemplate.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    CollaborationPrivacyBudgetTemplate.add_member(:privacy_budget_type, Shapes::ShapeRef.new(shape: PrivacyBudgetType, required: true, location_name: "privacyBudgetType"))
+    CollaborationPrivacyBudgetTemplate.add_member(:auto_refresh, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateAutoRefresh, required: true, location_name: "autoRefresh"))
+    CollaborationPrivacyBudgetTemplate.add_member(:parameters, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateParametersOutput, required: true, location_name: "parameters"))
+    CollaborationPrivacyBudgetTemplate.struct_class = Types::CollaborationPrivacyBudgetTemplate
+
+    CollaborationPrivacyBudgetTemplateSummary.add_member(:id, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateIdentifier, required: true, location_name: "id"))
+    CollaborationPrivacyBudgetTemplateSummary.add_member(:arn, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateArn, required: true, location_name: "arn"))
+    CollaborationPrivacyBudgetTemplateSummary.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    CollaborationPrivacyBudgetTemplateSummary.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    CollaborationPrivacyBudgetTemplateSummary.add_member(:creator_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "creatorAccountId"))
+    CollaborationPrivacyBudgetTemplateSummary.add_member(:privacy_budget_type, Shapes::ShapeRef.new(shape: PrivacyBudgetType, required: true, location_name: "privacyBudgetType"))
+    CollaborationPrivacyBudgetTemplateSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    CollaborationPrivacyBudgetTemplateSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    CollaborationPrivacyBudgetTemplateSummary.struct_class = Types::CollaborationPrivacyBudgetTemplateSummary
+
+    CollaborationPrivacyBudgetTemplateSummaryList.member = Shapes::ShapeRef.new(shape: CollaborationPrivacyBudgetTemplateSummary)
 
     CollaborationSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     CollaborationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "arn"))
@@ -483,6 +691,35 @@ module Aws::CleanRooms
     Column.struct_class = Types::Column
 
     ColumnList.member = Shapes::ShapeRef.new(shape: Column)
+
+    ConfiguredAudienceModelAssociation.add_member(:id, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationIdentifier, required: true, location_name: "id"))
+    ConfiguredAudienceModelAssociation.add_member(:arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationArn, required: true, location_name: "arn"))
+    ConfiguredAudienceModelAssociation.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
+    ConfiguredAudienceModelAssociation.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "membershipId"))
+    ConfiguredAudienceModelAssociation.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "membershipArn"))
+    ConfiguredAudienceModelAssociation.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    ConfiguredAudienceModelAssociation.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    ConfiguredAudienceModelAssociation.add_member(:name, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationName, required: true, location_name: "name"))
+    ConfiguredAudienceModelAssociation.add_member(:manage_resource_policies, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "manageResourcePolicies"))
+    ConfiguredAudienceModelAssociation.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    ConfiguredAudienceModelAssociation.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    ConfiguredAudienceModelAssociation.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    ConfiguredAudienceModelAssociation.struct_class = Types::ConfiguredAudienceModelAssociation
+
+    ConfiguredAudienceModelAssociationSummary.add_member(:membership_id, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location_name: "membershipId"))
+    ConfiguredAudienceModelAssociationSummary.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "membershipArn"))
+    ConfiguredAudienceModelAssociationSummary.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    ConfiguredAudienceModelAssociationSummary.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    ConfiguredAudienceModelAssociationSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    ConfiguredAudienceModelAssociationSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    ConfiguredAudienceModelAssociationSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    ConfiguredAudienceModelAssociationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationArn, required: true, location_name: "arn"))
+    ConfiguredAudienceModelAssociationSummary.add_member(:name, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationName, required: true, location_name: "name"))
+    ConfiguredAudienceModelAssociationSummary.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
+    ConfiguredAudienceModelAssociationSummary.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    ConfiguredAudienceModelAssociationSummary.struct_class = Types::ConfiguredAudienceModelAssociationSummary
+
+    ConfiguredAudienceModelAssociationSummaryList.member = Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationSummary)
 
     ConfiguredTable.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     ConfiguredTable.add_member(:arn, Shapes::ShapeRef.new(shape: ConfiguredTableArn, required: true, location_name: "arn"))
@@ -584,10 +821,22 @@ module Aws::CleanRooms
     CreateCollaborationInput.add_member(:data_encryption_metadata, Shapes::ShapeRef.new(shape: DataEncryptionMetadata, location_name: "dataEncryptionMetadata"))
     CreateCollaborationInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: CollaborationQueryLogStatus, required: true, location_name: "queryLogStatus"))
     CreateCollaborationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCollaborationInput.add_member(:creator_payment_configuration, Shapes::ShapeRef.new(shape: PaymentConfiguration, location_name: "creatorPaymentConfiguration"))
     CreateCollaborationInput.struct_class = Types::CreateCollaborationInput
 
     CreateCollaborationOutput.add_member(:collaboration, Shapes::ShapeRef.new(shape: Collaboration, required: true, location_name: "collaboration"))
     CreateCollaborationOutput.struct_class = Types::CreateCollaborationOutput
+
+    CreateConfiguredAudienceModelAssociationInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    CreateConfiguredAudienceModelAssociationInput.add_member(:configured_audience_model_arn, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelArn, required: true, location_name: "configuredAudienceModelArn"))
+    CreateConfiguredAudienceModelAssociationInput.add_member(:configured_audience_model_association_name, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationName, required: true, location_name: "configuredAudienceModelAssociationName"))
+    CreateConfiguredAudienceModelAssociationInput.add_member(:manage_resource_policies, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "manageResourcePolicies"))
+    CreateConfiguredAudienceModelAssociationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateConfiguredAudienceModelAssociationInput.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    CreateConfiguredAudienceModelAssociationInput.struct_class = Types::CreateConfiguredAudienceModelAssociationInput
+
+    CreateConfiguredAudienceModelAssociationOutput.add_member(:configured_audience_model_association, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociation, required: true, location_name: "configuredAudienceModelAssociation"))
+    CreateConfiguredAudienceModelAssociationOutput.struct_class = Types::CreateConfiguredAudienceModelAssociationOutput
 
     CreateConfiguredTableAnalysisRuleInput.add_member(:configured_table_identifier, Shapes::ShapeRef.new(shape: ConfiguredTableIdentifier, required: true, location: "uri", location_name: "configuredTableIdentifier"))
     CreateConfiguredTableAnalysisRuleInput.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: ConfiguredTableAnalysisRuleType, required: true, location_name: "analysisRuleType"))
@@ -623,10 +872,21 @@ module Aws::CleanRooms
     CreateMembershipInput.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, required: true, location_name: "queryLogStatus"))
     CreateMembershipInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateMembershipInput.add_member(:default_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryResultConfiguration, location_name: "defaultResultConfiguration"))
+    CreateMembershipInput.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: MembershipPaymentConfiguration, location_name: "paymentConfiguration"))
     CreateMembershipInput.struct_class = Types::CreateMembershipInput
 
     CreateMembershipOutput.add_member(:membership, Shapes::ShapeRef.new(shape: Membership, required: true, location_name: "membership"))
     CreateMembershipOutput.struct_class = Types::CreateMembershipOutput
+
+    CreatePrivacyBudgetTemplateInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    CreatePrivacyBudgetTemplateInput.add_member(:auto_refresh, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateAutoRefresh, required: true, location_name: "autoRefresh"))
+    CreatePrivacyBudgetTemplateInput.add_member(:privacy_budget_type, Shapes::ShapeRef.new(shape: PrivacyBudgetType, required: true, location_name: "privacyBudgetType"))
+    CreatePrivacyBudgetTemplateInput.add_member(:parameters, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateParametersInput, required: true, location_name: "parameters"))
+    CreatePrivacyBudgetTemplateInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreatePrivacyBudgetTemplateInput.struct_class = Types::CreatePrivacyBudgetTemplateInput
+
+    CreatePrivacyBudgetTemplateOutput.add_member(:privacy_budget_template, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplate, required: true, location_name: "privacyBudgetTemplate"))
+    CreatePrivacyBudgetTemplateOutput.struct_class = Types::CreatePrivacyBudgetTemplateOutput
 
     DataEncryptionMetadata.add_member(:allow_cleartext, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "allowCleartext"))
     DataEncryptionMetadata.add_member(:allow_duplicates, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "allowDuplicates"))
@@ -644,6 +904,12 @@ module Aws::CleanRooms
     DeleteCollaborationInput.struct_class = Types::DeleteCollaborationInput
 
     DeleteCollaborationOutput.struct_class = Types::DeleteCollaborationOutput
+
+    DeleteConfiguredAudienceModelAssociationInput.add_member(:configured_audience_model_association_identifier, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationIdentifier, required: true, location: "uri", location_name: "configuredAudienceModelAssociationIdentifier"))
+    DeleteConfiguredAudienceModelAssociationInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    DeleteConfiguredAudienceModelAssociationInput.struct_class = Types::DeleteConfiguredAudienceModelAssociationInput
+
+    DeleteConfiguredAudienceModelAssociationOutput.struct_class = Types::DeleteConfiguredAudienceModelAssociationOutput
 
     DeleteConfiguredTableAnalysisRuleInput.add_member(:configured_table_identifier, Shapes::ShapeRef.new(shape: ConfiguredTableIdentifier, required: true, location: "uri", location_name: "configuredTableIdentifier"))
     DeleteConfiguredTableAnalysisRuleInput.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: ConfiguredTableAnalysisRuleType, required: true, location: "uri", location_name: "analysisRuleType"))
@@ -673,6 +939,68 @@ module Aws::CleanRooms
 
     DeleteMembershipOutput.struct_class = Types::DeleteMembershipOutput
 
+    DeletePrivacyBudgetTemplateInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    DeletePrivacyBudgetTemplateInput.add_member(:privacy_budget_template_identifier, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateIdentifier, required: true, location: "uri", location_name: "privacyBudgetTemplateIdentifier"))
+    DeletePrivacyBudgetTemplateInput.struct_class = Types::DeletePrivacyBudgetTemplateInput
+
+    DeletePrivacyBudgetTemplateOutput.struct_class = Types::DeletePrivacyBudgetTemplateOutput
+
+    DifferentialPrivacyColumn.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    DifferentialPrivacyColumn.struct_class = Types::DifferentialPrivacyColumn
+
+    DifferentialPrivacyColumnList.member = Shapes::ShapeRef.new(shape: DifferentialPrivacyColumn)
+
+    DifferentialPrivacyConfiguration.add_member(:columns, Shapes::ShapeRef.new(shape: DifferentialPrivacyColumnList, required: true, location_name: "columns"))
+    DifferentialPrivacyConfiguration.struct_class = Types::DifferentialPrivacyConfiguration
+
+    DifferentialPrivacyParameters.add_member(:sensitivity_parameters, Shapes::ShapeRef.new(shape: DifferentialPrivacySensitivityParametersList, required: true, location_name: "sensitivityParameters"))
+    DifferentialPrivacyParameters.struct_class = Types::DifferentialPrivacyParameters
+
+    DifferentialPrivacyPreviewAggregation.add_member(:type, Shapes::ShapeRef.new(shape: DifferentialPrivacyAggregationType, required: true, location_name: "type"))
+    DifferentialPrivacyPreviewAggregation.add_member(:max_count, Shapes::ShapeRef.new(shape: DifferentialPrivacyPreviewAggregationMaxCountInteger, required: true, location_name: "maxCount"))
+    DifferentialPrivacyPreviewAggregation.struct_class = Types::DifferentialPrivacyPreviewAggregation
+
+    DifferentialPrivacyPreviewAggregationList.member = Shapes::ShapeRef.new(shape: DifferentialPrivacyPreviewAggregation)
+
+    DifferentialPrivacyPreviewParametersInput.add_member(:epsilon, Shapes::ShapeRef.new(shape: Epsilon, required: true, location_name: "epsilon"))
+    DifferentialPrivacyPreviewParametersInput.add_member(:users_noise_per_query, Shapes::ShapeRef.new(shape: UsersNoisePerQuery, required: true, location_name: "usersNoisePerQuery"))
+    DifferentialPrivacyPreviewParametersInput.struct_class = Types::DifferentialPrivacyPreviewParametersInput
+
+    DifferentialPrivacyPrivacyBudget.add_member(:aggregations, Shapes::ShapeRef.new(shape: DifferentialPrivacyPrivacyBudgetAggregationList, required: true, location_name: "aggregations"))
+    DifferentialPrivacyPrivacyBudget.add_member(:epsilon, Shapes::ShapeRef.new(shape: Epsilon, required: true, location_name: "epsilon"))
+    DifferentialPrivacyPrivacyBudget.struct_class = Types::DifferentialPrivacyPrivacyBudget
+
+    DifferentialPrivacyPrivacyBudgetAggregation.add_member(:type, Shapes::ShapeRef.new(shape: DifferentialPrivacyAggregationType, required: true, location_name: "type"))
+    DifferentialPrivacyPrivacyBudgetAggregation.add_member(:max_count, Shapes::ShapeRef.new(shape: DifferentialPrivacyPrivacyBudgetAggregationMaxCountInteger, required: true, location_name: "maxCount"))
+    DifferentialPrivacyPrivacyBudgetAggregation.add_member(:remaining_count, Shapes::ShapeRef.new(shape: DifferentialPrivacyPrivacyBudgetAggregationRemainingCountInteger, required: true, location_name: "remainingCount"))
+    DifferentialPrivacyPrivacyBudgetAggregation.struct_class = Types::DifferentialPrivacyPrivacyBudgetAggregation
+
+    DifferentialPrivacyPrivacyBudgetAggregationList.member = Shapes::ShapeRef.new(shape: DifferentialPrivacyPrivacyBudgetAggregation)
+
+    DifferentialPrivacyPrivacyImpact.add_member(:aggregations, Shapes::ShapeRef.new(shape: DifferentialPrivacyPreviewAggregationList, required: true, location_name: "aggregations"))
+    DifferentialPrivacyPrivacyImpact.struct_class = Types::DifferentialPrivacyPrivacyImpact
+
+    DifferentialPrivacySensitivityParameters.add_member(:aggregation_type, Shapes::ShapeRef.new(shape: DifferentialPrivacyAggregationType, required: true, location_name: "aggregationType"))
+    DifferentialPrivacySensitivityParameters.add_member(:aggregation_expression, Shapes::ShapeRef.new(shape: DifferentialPrivacyAggregationExpression, required: true, location_name: "aggregationExpression"))
+    DifferentialPrivacySensitivityParameters.add_member(:user_contribution_limit, Shapes::ShapeRef.new(shape: DifferentialPrivacySensitivityParametersUserContributionLimitInteger, required: true, location_name: "userContributionLimit"))
+    DifferentialPrivacySensitivityParameters.add_member(:min_column_value, Shapes::ShapeRef.new(shape: Float, location_name: "minColumnValue"))
+    DifferentialPrivacySensitivityParameters.add_member(:max_column_value, Shapes::ShapeRef.new(shape: Float, location_name: "maxColumnValue"))
+    DifferentialPrivacySensitivityParameters.struct_class = Types::DifferentialPrivacySensitivityParameters
+
+    DifferentialPrivacySensitivityParametersList.member = Shapes::ShapeRef.new(shape: DifferentialPrivacySensitivityParameters)
+
+    DifferentialPrivacyTemplateParametersInput.add_member(:epsilon, Shapes::ShapeRef.new(shape: Epsilon, required: true, location_name: "epsilon"))
+    DifferentialPrivacyTemplateParametersInput.add_member(:users_noise_per_query, Shapes::ShapeRef.new(shape: UsersNoisePerQuery, required: true, location_name: "usersNoisePerQuery"))
+    DifferentialPrivacyTemplateParametersInput.struct_class = Types::DifferentialPrivacyTemplateParametersInput
+
+    DifferentialPrivacyTemplateParametersOutput.add_member(:epsilon, Shapes::ShapeRef.new(shape: Epsilon, required: true, location_name: "epsilon"))
+    DifferentialPrivacyTemplateParametersOutput.add_member(:users_noise_per_query, Shapes::ShapeRef.new(shape: UsersNoisePerQuery, required: true, location_name: "usersNoisePerQuery"))
+    DifferentialPrivacyTemplateParametersOutput.struct_class = Types::DifferentialPrivacyTemplateParametersOutput
+
+    DifferentialPrivacyTemplateUpdateParameters.add_member(:epsilon, Shapes::ShapeRef.new(shape: Epsilon, location_name: "epsilon"))
+    DifferentialPrivacyTemplateUpdateParameters.add_member(:users_noise_per_query, Shapes::ShapeRef.new(shape: UsersNoisePerQuery, location_name: "usersNoisePerQuery"))
+    DifferentialPrivacyTemplateUpdateParameters.struct_class = Types::DifferentialPrivacyTemplateUpdateParameters
+
     GetAnalysisTemplateInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     GetAnalysisTemplateInput.add_member(:analysis_template_identifier, Shapes::ShapeRef.new(shape: AnalysisTemplateIdentifier, required: true, location: "uri", location_name: "analysisTemplateIdentifier"))
     GetAnalysisTemplateInput.struct_class = Types::GetAnalysisTemplateInput
@@ -687,11 +1015,32 @@ module Aws::CleanRooms
     GetCollaborationAnalysisTemplateOutput.add_member(:collaboration_analysis_template, Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplate, required: true, location_name: "collaborationAnalysisTemplate"))
     GetCollaborationAnalysisTemplateOutput.struct_class = Types::GetCollaborationAnalysisTemplateOutput
 
+    GetCollaborationConfiguredAudienceModelAssociationInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
+    GetCollaborationConfiguredAudienceModelAssociationInput.add_member(:configured_audience_model_association_identifier, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationIdentifier, required: true, location: "uri", location_name: "configuredAudienceModelAssociationIdentifier"))
+    GetCollaborationConfiguredAudienceModelAssociationInput.struct_class = Types::GetCollaborationConfiguredAudienceModelAssociationInput
+
+    GetCollaborationConfiguredAudienceModelAssociationOutput.add_member(:collaboration_configured_audience_model_association, Shapes::ShapeRef.new(shape: CollaborationConfiguredAudienceModelAssociation, required: true, location_name: "collaborationConfiguredAudienceModelAssociation"))
+    GetCollaborationConfiguredAudienceModelAssociationOutput.struct_class = Types::GetCollaborationConfiguredAudienceModelAssociationOutput
+
     GetCollaborationInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
     GetCollaborationInput.struct_class = Types::GetCollaborationInput
 
     GetCollaborationOutput.add_member(:collaboration, Shapes::ShapeRef.new(shape: Collaboration, required: true, location_name: "collaboration"))
     GetCollaborationOutput.struct_class = Types::GetCollaborationOutput
+
+    GetCollaborationPrivacyBudgetTemplateInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
+    GetCollaborationPrivacyBudgetTemplateInput.add_member(:privacy_budget_template_identifier, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateIdentifier, required: true, location: "uri", location_name: "privacyBudgetTemplateIdentifier"))
+    GetCollaborationPrivacyBudgetTemplateInput.struct_class = Types::GetCollaborationPrivacyBudgetTemplateInput
+
+    GetCollaborationPrivacyBudgetTemplateOutput.add_member(:collaboration_privacy_budget_template, Shapes::ShapeRef.new(shape: CollaborationPrivacyBudgetTemplate, required: true, location_name: "collaborationPrivacyBudgetTemplate"))
+    GetCollaborationPrivacyBudgetTemplateOutput.struct_class = Types::GetCollaborationPrivacyBudgetTemplateOutput
+
+    GetConfiguredAudienceModelAssociationInput.add_member(:configured_audience_model_association_identifier, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationIdentifier, required: true, location: "uri", location_name: "configuredAudienceModelAssociationIdentifier"))
+    GetConfiguredAudienceModelAssociationInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    GetConfiguredAudienceModelAssociationInput.struct_class = Types::GetConfiguredAudienceModelAssociationInput
+
+    GetConfiguredAudienceModelAssociationOutput.add_member(:configured_audience_model_association, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociation, required: true, location_name: "configuredAudienceModelAssociation"))
+    GetConfiguredAudienceModelAssociationOutput.struct_class = Types::GetConfiguredAudienceModelAssociationOutput
 
     GetConfiguredTableAnalysisRuleInput.add_member(:configured_table_identifier, Shapes::ShapeRef.new(shape: ConfiguredTableIdentifier, required: true, location: "uri", location_name: "configuredTableIdentifier"))
     GetConfiguredTableAnalysisRuleInput.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: ConfiguredTableAnalysisRuleType, required: true, location: "uri", location_name: "analysisRuleType"))
@@ -718,6 +1067,13 @@ module Aws::CleanRooms
 
     GetMembershipOutput.add_member(:membership, Shapes::ShapeRef.new(shape: Membership, required: true, location_name: "membership"))
     GetMembershipOutput.struct_class = Types::GetMembershipOutput
+
+    GetPrivacyBudgetTemplateInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    GetPrivacyBudgetTemplateInput.add_member(:privacy_budget_template_identifier, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateIdentifier, required: true, location: "uri", location_name: "privacyBudgetTemplateIdentifier"))
+    GetPrivacyBudgetTemplateInput.struct_class = Types::GetPrivacyBudgetTemplateInput
+
+    GetPrivacyBudgetTemplateOutput.add_member(:privacy_budget_template, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplate, required: true, location_name: "privacyBudgetTemplate"))
+    GetPrivacyBudgetTemplateOutput.struct_class = Types::GetPrivacyBudgetTemplateOutput
 
     GetProtectedQueryInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     GetProtectedQueryInput.add_member(:protected_query_identifier, Shapes::ShapeRef.new(shape: ProtectedQueryIdentifier, required: true, location: "uri", location_name: "protectedQueryIdentifier"))
@@ -768,6 +1124,34 @@ module Aws::CleanRooms
     ListCollaborationAnalysisTemplatesOutput.add_member(:collaboration_analysis_template_summaries, Shapes::ShapeRef.new(shape: CollaborationAnalysisTemplateSummaryList, required: true, location_name: "collaborationAnalysisTemplateSummaries"))
     ListCollaborationAnalysisTemplatesOutput.struct_class = Types::ListCollaborationAnalysisTemplatesOutput
 
+    ListCollaborationConfiguredAudienceModelAssociationsInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
+    ListCollaborationConfiguredAudienceModelAssociationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListCollaborationConfiguredAudienceModelAssociationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListCollaborationConfiguredAudienceModelAssociationsInput.struct_class = Types::ListCollaborationConfiguredAudienceModelAssociationsInput
+
+    ListCollaborationConfiguredAudienceModelAssociationsOutput.add_member(:collaboration_configured_audience_model_association_summaries, Shapes::ShapeRef.new(shape: CollaborationConfiguredAudienceModelAssociationSummaryList, required: true, location_name: "collaborationConfiguredAudienceModelAssociationSummaries"))
+    ListCollaborationConfiguredAudienceModelAssociationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListCollaborationConfiguredAudienceModelAssociationsOutput.struct_class = Types::ListCollaborationConfiguredAudienceModelAssociationsOutput
+
+    ListCollaborationPrivacyBudgetTemplatesInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
+    ListCollaborationPrivacyBudgetTemplatesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListCollaborationPrivacyBudgetTemplatesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListCollaborationPrivacyBudgetTemplatesInput.struct_class = Types::ListCollaborationPrivacyBudgetTemplatesInput
+
+    ListCollaborationPrivacyBudgetTemplatesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListCollaborationPrivacyBudgetTemplatesOutput.add_member(:collaboration_privacy_budget_template_summaries, Shapes::ShapeRef.new(shape: CollaborationPrivacyBudgetTemplateSummaryList, required: true, location_name: "collaborationPrivacyBudgetTemplateSummaries"))
+    ListCollaborationPrivacyBudgetTemplatesOutput.struct_class = Types::ListCollaborationPrivacyBudgetTemplatesOutput
+
+    ListCollaborationPrivacyBudgetsInput.add_member(:collaboration_identifier, Shapes::ShapeRef.new(shape: CollaborationIdentifier, required: true, location: "uri", location_name: "collaborationIdentifier"))
+    ListCollaborationPrivacyBudgetsInput.add_member(:privacy_budget_type, Shapes::ShapeRef.new(shape: PrivacyBudgetType, required: true, location: "querystring", location_name: "privacyBudgetType"))
+    ListCollaborationPrivacyBudgetsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListCollaborationPrivacyBudgetsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListCollaborationPrivacyBudgetsInput.struct_class = Types::ListCollaborationPrivacyBudgetsInput
+
+    ListCollaborationPrivacyBudgetsOutput.add_member(:collaboration_privacy_budget_summaries, Shapes::ShapeRef.new(shape: CollaborationPrivacyBudgetSummaryList, required: true, location_name: "collaborationPrivacyBudgetSummaries"))
+    ListCollaborationPrivacyBudgetsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListCollaborationPrivacyBudgetsOutput.struct_class = Types::ListCollaborationPrivacyBudgetsOutput
+
     ListCollaborationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListCollaborationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListCollaborationsInput.add_member(:member_status, Shapes::ShapeRef.new(shape: FilterableMemberStatus, location: "querystring", location_name: "memberStatus"))
@@ -776,6 +1160,15 @@ module Aws::CleanRooms
     ListCollaborationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListCollaborationsOutput.add_member(:collaboration_list, Shapes::ShapeRef.new(shape: CollaborationSummaryList, required: true, location_name: "collaborationList"))
     ListCollaborationsOutput.struct_class = Types::ListCollaborationsOutput
+
+    ListConfiguredAudienceModelAssociationsInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    ListConfiguredAudienceModelAssociationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListConfiguredAudienceModelAssociationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListConfiguredAudienceModelAssociationsInput.struct_class = Types::ListConfiguredAudienceModelAssociationsInput
+
+    ListConfiguredAudienceModelAssociationsOutput.add_member(:configured_audience_model_association_summaries, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationSummaryList, required: true, location_name: "configuredAudienceModelAssociationSummaries"))
+    ListConfiguredAudienceModelAssociationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListConfiguredAudienceModelAssociationsOutput.struct_class = Types::ListConfiguredAudienceModelAssociationsOutput
 
     ListConfiguredTableAssociationsInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     ListConfiguredTableAssociationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -812,6 +1205,25 @@ module Aws::CleanRooms
     ListMembershipsOutput.add_member(:membership_summaries, Shapes::ShapeRef.new(shape: MembershipSummaryList, required: true, location_name: "membershipSummaries"))
     ListMembershipsOutput.struct_class = Types::ListMembershipsOutput
 
+    ListPrivacyBudgetTemplatesInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    ListPrivacyBudgetTemplatesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListPrivacyBudgetTemplatesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPrivacyBudgetTemplatesInput.struct_class = Types::ListPrivacyBudgetTemplatesInput
+
+    ListPrivacyBudgetTemplatesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListPrivacyBudgetTemplatesOutput.add_member(:privacy_budget_template_summaries, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateSummaryList, required: true, location_name: "privacyBudgetTemplateSummaries"))
+    ListPrivacyBudgetTemplatesOutput.struct_class = Types::ListPrivacyBudgetTemplatesOutput
+
+    ListPrivacyBudgetsInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    ListPrivacyBudgetsInput.add_member(:privacy_budget_type, Shapes::ShapeRef.new(shape: PrivacyBudgetType, required: true, location: "querystring", location_name: "privacyBudgetType"))
+    ListPrivacyBudgetsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListPrivacyBudgetsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPrivacyBudgetsInput.struct_class = Types::ListPrivacyBudgetsInput
+
+    ListPrivacyBudgetsOutput.add_member(:privacy_budget_summaries, Shapes::ShapeRef.new(shape: PrivacyBudgetSummaryList, required: true, location_name: "privacyBudgetSummaries"))
+    ListPrivacyBudgetsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListPrivacyBudgetsOutput.struct_class = Types::ListPrivacyBudgetsOutput
+
     ListProtectedQueriesInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     ListProtectedQueriesInput.add_member(:status, Shapes::ShapeRef.new(shape: ProtectedQueryStatus, location: "querystring", location_name: "status"))
     ListProtectedQueriesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -845,6 +1257,7 @@ module Aws::CleanRooms
     MemberSpecification.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     MemberSpecification.add_member(:member_abilities, Shapes::ShapeRef.new(shape: MemberAbilities, required: true, location_name: "memberAbilities"))
     MemberSpecification.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "displayName"))
+    MemberSpecification.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: PaymentConfiguration, location_name: "paymentConfiguration"))
     MemberSpecification.struct_class = Types::MemberSpecification
 
     MemberSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
@@ -855,6 +1268,7 @@ module Aws::CleanRooms
     MemberSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     MemberSummary.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, location_name: "membershipId"))
     MemberSummary.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, location_name: "membershipArn"))
+    MemberSummary.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: PaymentConfiguration, required: true, location_name: "paymentConfiguration"))
     MemberSummary.struct_class = Types::MemberSummary
 
     MemberSummaryList.member = Shapes::ShapeRef.new(shape: MemberSummary)
@@ -872,7 +1286,11 @@ module Aws::CleanRooms
     Membership.add_member(:member_abilities, Shapes::ShapeRef.new(shape: MemberAbilities, required: true, location_name: "memberAbilities"))
     Membership.add_member(:query_log_status, Shapes::ShapeRef.new(shape: MembershipQueryLogStatus, required: true, location_name: "queryLogStatus"))
     Membership.add_member(:default_result_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryResultConfiguration, location_name: "defaultResultConfiguration"))
+    Membership.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: MembershipPaymentConfiguration, required: true, location_name: "paymentConfiguration"))
     Membership.struct_class = Types::Membership
+
+    MembershipPaymentConfiguration.add_member(:query_compute, Shapes::ShapeRef.new(shape: MembershipQueryComputePaymentConfig, required: true, location_name: "queryCompute"))
+    MembershipPaymentConfiguration.struct_class = Types::MembershipPaymentConfiguration
 
     MembershipProtectedQueryOutputConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: ProtectedQueryS3OutputConfiguration, location_name: "s3"))
     MembershipProtectedQueryOutputConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -883,6 +1301,9 @@ module Aws::CleanRooms
     MembershipProtectedQueryResultConfiguration.add_member(:output_configuration, Shapes::ShapeRef.new(shape: MembershipProtectedQueryOutputConfiguration, required: true, location_name: "outputConfiguration"))
     MembershipProtectedQueryResultConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     MembershipProtectedQueryResultConfiguration.struct_class = Types::MembershipProtectedQueryResultConfiguration
+
+    MembershipQueryComputePaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
+    MembershipQueryComputePaymentConfig.struct_class = Types::MembershipQueryComputePaymentConfig
 
     MembershipSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     MembershipSummary.add_member(:arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "arn"))
@@ -895,12 +1316,100 @@ module Aws::CleanRooms
     MembershipSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     MembershipSummary.add_member(:status, Shapes::ShapeRef.new(shape: MembershipStatus, required: true, location_name: "status"))
     MembershipSummary.add_member(:member_abilities, Shapes::ShapeRef.new(shape: MemberAbilities, required: true, location_name: "memberAbilities"))
+    MembershipSummary.add_member(:payment_configuration, Shapes::ShapeRef.new(shape: MembershipPaymentConfiguration, required: true, location_name: "paymentConfiguration"))
     MembershipSummary.struct_class = Types::MembershipSummary
 
     MembershipSummaryList.member = Shapes::ShapeRef.new(shape: MembershipSummary)
 
     ParameterMap.key = Shapes::ShapeRef.new(shape: ParameterName)
     ParameterMap.value = Shapes::ShapeRef.new(shape: ParameterValue)
+
+    PaymentConfiguration.add_member(:query_compute, Shapes::ShapeRef.new(shape: QueryComputePaymentConfig, required: true, location_name: "queryCompute"))
+    PaymentConfiguration.struct_class = Types::PaymentConfiguration
+
+    PreviewPrivacyImpactInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    PreviewPrivacyImpactInput.add_member(:parameters, Shapes::ShapeRef.new(shape: PreviewPrivacyImpactParametersInput, required: true, location_name: "parameters"))
+    PreviewPrivacyImpactInput.struct_class = Types::PreviewPrivacyImpactInput
+
+    PreviewPrivacyImpactOutput.add_member(:privacy_impact, Shapes::ShapeRef.new(shape: PrivacyImpact, required: true, location_name: "privacyImpact"))
+    PreviewPrivacyImpactOutput.struct_class = Types::PreviewPrivacyImpactOutput
+
+    PreviewPrivacyImpactParametersInput.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyPreviewParametersInput, location_name: "differentialPrivacy"))
+    PreviewPrivacyImpactParametersInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PreviewPrivacyImpactParametersInput.add_member_subclass(:differential_privacy, Types::PreviewPrivacyImpactParametersInput::DifferentialPrivacy)
+    PreviewPrivacyImpactParametersInput.add_member_subclass(:unknown, Types::PreviewPrivacyImpactParametersInput::Unknown)
+    PreviewPrivacyImpactParametersInput.struct_class = Types::PreviewPrivacyImpactParametersInput
+
+    PrivacyBudget.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyPrivacyBudget, location_name: "differentialPrivacy"))
+    PrivacyBudget.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PrivacyBudget.add_member_subclass(:differential_privacy, Types::PrivacyBudget::DifferentialPrivacy)
+    PrivacyBudget.add_member_subclass(:unknown, Types::PrivacyBudget::Unknown)
+    PrivacyBudget.struct_class = Types::PrivacyBudget
+
+    PrivacyBudgetSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
+    PrivacyBudgetSummary.add_member(:privacy_budget_template_id, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateIdentifier, required: true, location_name: "privacyBudgetTemplateId"))
+    PrivacyBudgetSummary.add_member(:privacy_budget_template_arn, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateArn, required: true, location_name: "privacyBudgetTemplateArn"))
+    PrivacyBudgetSummary.add_member(:membership_id, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location_name: "membershipId"))
+    PrivacyBudgetSummary.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "membershipArn"))
+    PrivacyBudgetSummary.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    PrivacyBudgetSummary.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    PrivacyBudgetSummary.add_member(:type, Shapes::ShapeRef.new(shape: PrivacyBudgetType, required: true, location_name: "type"))
+    PrivacyBudgetSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    PrivacyBudgetSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    PrivacyBudgetSummary.add_member(:budget, Shapes::ShapeRef.new(shape: PrivacyBudget, required: true, location_name: "budget"))
+    PrivacyBudgetSummary.struct_class = Types::PrivacyBudgetSummary
+
+    PrivacyBudgetSummaryList.member = Shapes::ShapeRef.new(shape: PrivacyBudgetSummary)
+
+    PrivacyBudgetTemplate.add_member(:id, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateIdentifier, required: true, location_name: "id"))
+    PrivacyBudgetTemplate.add_member(:arn, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateArn, required: true, location_name: "arn"))
+    PrivacyBudgetTemplate.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "membershipId"))
+    PrivacyBudgetTemplate.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "membershipArn"))
+    PrivacyBudgetTemplate.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    PrivacyBudgetTemplate.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    PrivacyBudgetTemplate.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    PrivacyBudgetTemplate.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    PrivacyBudgetTemplate.add_member(:privacy_budget_type, Shapes::ShapeRef.new(shape: PrivacyBudgetType, required: true, location_name: "privacyBudgetType"))
+    PrivacyBudgetTemplate.add_member(:auto_refresh, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateAutoRefresh, required: true, location_name: "autoRefresh"))
+    PrivacyBudgetTemplate.add_member(:parameters, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateParametersOutput, required: true, location_name: "parameters"))
+    PrivacyBudgetTemplate.struct_class = Types::PrivacyBudgetTemplate
+
+    PrivacyBudgetTemplateParametersInput.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyTemplateParametersInput, location_name: "differentialPrivacy"))
+    PrivacyBudgetTemplateParametersInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PrivacyBudgetTemplateParametersInput.add_member_subclass(:differential_privacy, Types::PrivacyBudgetTemplateParametersInput::DifferentialPrivacy)
+    PrivacyBudgetTemplateParametersInput.add_member_subclass(:unknown, Types::PrivacyBudgetTemplateParametersInput::Unknown)
+    PrivacyBudgetTemplateParametersInput.struct_class = Types::PrivacyBudgetTemplateParametersInput
+
+    PrivacyBudgetTemplateParametersOutput.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyTemplateParametersOutput, location_name: "differentialPrivacy"))
+    PrivacyBudgetTemplateParametersOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PrivacyBudgetTemplateParametersOutput.add_member_subclass(:differential_privacy, Types::PrivacyBudgetTemplateParametersOutput::DifferentialPrivacy)
+    PrivacyBudgetTemplateParametersOutput.add_member_subclass(:unknown, Types::PrivacyBudgetTemplateParametersOutput::Unknown)
+    PrivacyBudgetTemplateParametersOutput.struct_class = Types::PrivacyBudgetTemplateParametersOutput
+
+    PrivacyBudgetTemplateSummary.add_member(:id, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateIdentifier, required: true, location_name: "id"))
+    PrivacyBudgetTemplateSummary.add_member(:arn, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateArn, required: true, location_name: "arn"))
+    PrivacyBudgetTemplateSummary.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "membershipId"))
+    PrivacyBudgetTemplateSummary.add_member(:membership_arn, Shapes::ShapeRef.new(shape: MembershipArn, required: true, location_name: "membershipArn"))
+    PrivacyBudgetTemplateSummary.add_member(:collaboration_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "collaborationId"))
+    PrivacyBudgetTemplateSummary.add_member(:collaboration_arn, Shapes::ShapeRef.new(shape: CollaborationArn, required: true, location_name: "collaborationArn"))
+    PrivacyBudgetTemplateSummary.add_member(:privacy_budget_type, Shapes::ShapeRef.new(shape: PrivacyBudgetType, required: true, location_name: "privacyBudgetType"))
+    PrivacyBudgetTemplateSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
+    PrivacyBudgetTemplateSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
+    PrivacyBudgetTemplateSummary.struct_class = Types::PrivacyBudgetTemplateSummary
+
+    PrivacyBudgetTemplateSummaryList.member = Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateSummary)
+
+    PrivacyBudgetTemplateUpdateParameters.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyTemplateUpdateParameters, location_name: "differentialPrivacy"))
+    PrivacyBudgetTemplateUpdateParameters.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PrivacyBudgetTemplateUpdateParameters.add_member_subclass(:differential_privacy, Types::PrivacyBudgetTemplateUpdateParameters::DifferentialPrivacy)
+    PrivacyBudgetTemplateUpdateParameters.add_member_subclass(:unknown, Types::PrivacyBudgetTemplateUpdateParameters::Unknown)
+    PrivacyBudgetTemplateUpdateParameters.struct_class = Types::PrivacyBudgetTemplateUpdateParameters
+
+    PrivacyImpact.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyPrivacyImpact, location_name: "differentialPrivacy"))
+    PrivacyImpact.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PrivacyImpact.add_member_subclass(:differential_privacy, Types::PrivacyImpact::DifferentialPrivacy)
+    PrivacyImpact.add_member_subclass(:unknown, Types::PrivacyImpact::Unknown)
+    PrivacyImpact.struct_class = Types::PrivacyImpact
 
     ProtectedQuery.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     ProtectedQuery.add_member(:membership_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "membershipId"))
@@ -912,6 +1421,7 @@ module Aws::CleanRooms
     ProtectedQuery.add_member(:statistics, Shapes::ShapeRef.new(shape: ProtectedQueryStatistics, location_name: "statistics"))
     ProtectedQuery.add_member(:result, Shapes::ShapeRef.new(shape: ProtectedQueryResult, location_name: "result"))
     ProtectedQuery.add_member(:error, Shapes::ShapeRef.new(shape: ProtectedQueryError, location_name: "error"))
+    ProtectedQuery.add_member(:differential_privacy, Shapes::ShapeRef.new(shape: DifferentialPrivacyParameters, location_name: "differentialPrivacy"))
     ProtectedQuery.struct_class = Types::ProtectedQuery
 
     ProtectedQueryError.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -968,6 +1478,9 @@ module Aws::CleanRooms
 
     ProtectedQuerySummaryList.member = Shapes::ShapeRef.new(shape: ProtectedQuerySummary)
 
+    QueryComputePaymentConfig.add_member(:is_responsible, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isResponsible"))
+    QueryComputePaymentConfig.struct_class = Types::QueryComputePaymentConfig
+
     QueryTables.member = Shapes::ShapeRef.new(shape: TableAlias)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -989,9 +1502,34 @@ module Aws::CleanRooms
     Schema.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
     Schema.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     Schema.add_member(:type, Shapes::ShapeRef.new(shape: SchemaType, required: true, location_name: "type"))
+    Schema.add_member(:schema_status_details, Shapes::ShapeRef.new(shape: SchemaStatusDetailList, required: true, location_name: "schemaStatusDetails"))
     Schema.struct_class = Types::Schema
 
+    SchemaAnalysisRuleList.member = Shapes::ShapeRef.new(shape: AnalysisRule)
+
+    SchemaAnalysisRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: TableAlias, required: true, location_name: "name"))
+    SchemaAnalysisRuleRequest.add_member(:type, Shapes::ShapeRef.new(shape: AnalysisRuleType, required: true, location_name: "type"))
+    SchemaAnalysisRuleRequest.struct_class = Types::SchemaAnalysisRuleRequest
+
+    SchemaAnalysisRuleRequestList.member = Shapes::ShapeRef.new(shape: SchemaAnalysisRuleRequest)
+
+    SchemaConfigurationList.member = Shapes::ShapeRef.new(shape: SchemaConfiguration)
+
     SchemaList.member = Shapes::ShapeRef.new(shape: Schema)
+
+    SchemaStatusDetail.add_member(:status, Shapes::ShapeRef.new(shape: SchemaStatus, required: true, location_name: "status"))
+    SchemaStatusDetail.add_member(:reasons, Shapes::ShapeRef.new(shape: SchemaStatusReasonList, location_name: "reasons"))
+    SchemaStatusDetail.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: AnalysisRuleType, location_name: "analysisRuleType"))
+    SchemaStatusDetail.add_member(:configurations, Shapes::ShapeRef.new(shape: SchemaConfigurationList, location_name: "configurations"))
+    SchemaStatusDetail.struct_class = Types::SchemaStatusDetail
+
+    SchemaStatusDetailList.member = Shapes::ShapeRef.new(shape: SchemaStatusDetail)
+
+    SchemaStatusReason.add_member(:code, Shapes::ShapeRef.new(shape: SchemaStatusReasonCode, required: true, location_name: "code"))
+    SchemaStatusReason.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    SchemaStatusReason.struct_class = Types::SchemaStatusReason
+
+    SchemaStatusReasonList.member = Shapes::ShapeRef.new(shape: SchemaStatusReason)
 
     SchemaSummary.add_member(:name, Shapes::ShapeRef.new(shape: TableAlias, required: true, location_name: "name"))
     SchemaSummary.add_member(:type, Shapes::ShapeRef.new(shape: SchemaType, required: true, location_name: "type"))
@@ -1064,6 +1602,15 @@ module Aws::CleanRooms
     UpdateCollaborationOutput.add_member(:collaboration, Shapes::ShapeRef.new(shape: Collaboration, required: true, location_name: "collaboration"))
     UpdateCollaborationOutput.struct_class = Types::UpdateCollaborationOutput
 
+    UpdateConfiguredAudienceModelAssociationInput.add_member(:configured_audience_model_association_identifier, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationIdentifier, required: true, location: "uri", location_name: "configuredAudienceModelAssociationIdentifier"))
+    UpdateConfiguredAudienceModelAssociationInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    UpdateConfiguredAudienceModelAssociationInput.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "description"))
+    UpdateConfiguredAudienceModelAssociationInput.add_member(:name, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociationName, location_name: "name"))
+    UpdateConfiguredAudienceModelAssociationInput.struct_class = Types::UpdateConfiguredAudienceModelAssociationInput
+
+    UpdateConfiguredAudienceModelAssociationOutput.add_member(:configured_audience_model_association, Shapes::ShapeRef.new(shape: ConfiguredAudienceModelAssociation, required: true, location_name: "configuredAudienceModelAssociation"))
+    UpdateConfiguredAudienceModelAssociationOutput.struct_class = Types::UpdateConfiguredAudienceModelAssociationOutput
+
     UpdateConfiguredTableAnalysisRuleInput.add_member(:configured_table_identifier, Shapes::ShapeRef.new(shape: ConfiguredTableIdentifier, required: true, location: "uri", location_name: "configuredTableIdentifier"))
     UpdateConfiguredTableAnalysisRuleInput.add_member(:analysis_rule_type, Shapes::ShapeRef.new(shape: ConfiguredTableAnalysisRuleType, required: true, location: "uri", location_name: "analysisRuleType"))
     UpdateConfiguredTableAnalysisRuleInput.add_member(:analysis_rule_policy, Shapes::ShapeRef.new(shape: ConfiguredTableAnalysisRulePolicy, required: true, location_name: "analysisRulePolicy"))
@@ -1096,6 +1643,15 @@ module Aws::CleanRooms
 
     UpdateMembershipOutput.add_member(:membership, Shapes::ShapeRef.new(shape: Membership, required: true, location_name: "membership"))
     UpdateMembershipOutput.struct_class = Types::UpdateMembershipOutput
+
+    UpdatePrivacyBudgetTemplateInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
+    UpdatePrivacyBudgetTemplateInput.add_member(:privacy_budget_template_identifier, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateIdentifier, required: true, location: "uri", location_name: "privacyBudgetTemplateIdentifier"))
+    UpdatePrivacyBudgetTemplateInput.add_member(:privacy_budget_type, Shapes::ShapeRef.new(shape: PrivacyBudgetType, required: true, location_name: "privacyBudgetType"))
+    UpdatePrivacyBudgetTemplateInput.add_member(:parameters, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplateUpdateParameters, location_name: "parameters"))
+    UpdatePrivacyBudgetTemplateInput.struct_class = Types::UpdatePrivacyBudgetTemplateInput
+
+    UpdatePrivacyBudgetTemplateOutput.add_member(:privacy_budget_template, Shapes::ShapeRef.new(shape: PrivacyBudgetTemplate, required: true, location_name: "privacyBudgetTemplate"))
+    UpdatePrivacyBudgetTemplateOutput.struct_class = Types::UpdatePrivacyBudgetTemplateOutput
 
     UpdateProtectedQueryInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     UpdateProtectedQueryInput.add_member(:protected_query_identifier, Shapes::ShapeRef.new(shape: ProtectedQueryIdentifier, required: true, location: "uri", location_name: "protectedQueryIdentifier"))
@@ -1160,6 +1716,19 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:batch_get_schema_analysis_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetSchemaAnalysisRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/collaborations/{collaborationIdentifier}/batch-schema-analysis-rule"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetSchemaAnalysisRuleInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetSchemaAnalysisRuleOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_analysis_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateAnalysisTemplate"
         o.http_method = "POST"
@@ -1182,6 +1751,21 @@ module Aws::CleanRooms
         o.input = Shapes::ShapeRef.new(shape: CreateCollaborationInput)
         o.output = Shapes::ShapeRef.new(shape: CreateCollaborationOutput)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_configured_audience_model_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateConfiguredAudienceModelAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations"
+        o.input = Shapes::ShapeRef.new(shape: CreateConfiguredAudienceModelAssociationInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateConfiguredAudienceModelAssociationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1247,6 +1831,20 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_privacy_budget_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePrivacyBudgetTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/privacybudgettemplates"
+        o.input = Shapes::ShapeRef.new(shape: CreatePrivacyBudgetTemplateInput)
+        o.output = Shapes::ShapeRef.new(shape: CreatePrivacyBudgetTemplateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_analysis_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAnalysisTemplate"
         o.http_method = "DELETE"
@@ -1266,6 +1864,19 @@ module Aws::CleanRooms
         o.http_request_uri = "/collaborations/{collaborationIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: DeleteCollaborationInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteCollaborationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_configured_audience_model_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteConfiguredAudienceModelAssociation"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteConfiguredAudienceModelAssociationInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteConfiguredAudienceModelAssociationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1342,6 +1953,19 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:delete_privacy_budget_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePrivacyBudgetTemplate"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeletePrivacyBudgetTemplateInput)
+        o.output = Shapes::ShapeRef.new(shape: DeletePrivacyBudgetTemplateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_analysis_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAnalysisTemplate"
         o.http_method = "GET"
@@ -1373,6 +1997,45 @@ module Aws::CleanRooms
         o.http_request_uri = "/collaborations/{collaborationIdentifier}/analysistemplates/{analysisTemplateArn}"
         o.input = Shapes::ShapeRef.new(shape: GetCollaborationAnalysisTemplateInput)
         o.output = Shapes::ShapeRef.new(shape: GetCollaborationAnalysisTemplateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_collaboration_configured_audience_model_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCollaborationConfiguredAudienceModelAssociation"
+        o.http_method = "GET"
+        o.http_request_uri = "/collaborations/{collaborationIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetCollaborationConfiguredAudienceModelAssociationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetCollaborationConfiguredAudienceModelAssociationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_collaboration_privacy_budget_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCollaborationPrivacyBudgetTemplate"
+        o.http_method = "GET"
+        o.http_request_uri = "/collaborations/{collaborationIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetCollaborationPrivacyBudgetTemplateInput)
+        o.output = Shapes::ShapeRef.new(shape: GetCollaborationPrivacyBudgetTemplateOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_configured_audience_model_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetConfiguredAudienceModelAssociation"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetConfiguredAudienceModelAssociationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetConfiguredAudienceModelAssociationOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1425,6 +2088,19 @@ module Aws::CleanRooms
         o.http_request_uri = "/memberships/{membershipIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: GetMembershipInput)
         o.output = Shapes::ShapeRef.new(shape: GetMembershipOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_privacy_budget_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPrivacyBudgetTemplate"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetPrivacyBudgetTemplateInput)
+        o.output = Shapes::ShapeRef.new(shape: GetPrivacyBudgetTemplateOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1509,12 +2185,88 @@ module Aws::CleanRooms
         )
       end)
 
+      api.add_operation(:list_collaboration_configured_audience_model_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCollaborationConfiguredAudienceModelAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/collaborations/{collaborationIdentifier}/configuredaudiencemodelassociations"
+        o.input = Shapes::ShapeRef.new(shape: ListCollaborationConfiguredAudienceModelAssociationsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCollaborationConfiguredAudienceModelAssociationsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_collaboration_privacy_budget_templates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCollaborationPrivacyBudgetTemplates"
+        o.http_method = "GET"
+        o.http_request_uri = "/collaborations/{collaborationIdentifier}/privacybudgettemplates"
+        o.input = Shapes::ShapeRef.new(shape: ListCollaborationPrivacyBudgetTemplatesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCollaborationPrivacyBudgetTemplatesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_collaboration_privacy_budgets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCollaborationPrivacyBudgets"
+        o.http_method = "GET"
+        o.http_request_uri = "/collaborations/{collaborationIdentifier}/privacybudgets"
+        o.input = Shapes::ShapeRef.new(shape: ListCollaborationPrivacyBudgetsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCollaborationPrivacyBudgetsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_collaborations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListCollaborations"
         o.http_method = "GET"
         o.http_request_uri = "/collaborations"
         o.input = Shapes::ShapeRef.new(shape: ListCollaborationsInput)
         o.output = Shapes::ShapeRef.new(shape: ListCollaborationsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_configured_audience_model_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListConfiguredAudienceModelAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations"
+        o.input = Shapes::ShapeRef.new(shape: ListConfiguredAudienceModelAssociationsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListConfiguredAudienceModelAssociationsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -1601,6 +2353,44 @@ module Aws::CleanRooms
         )
       end)
 
+      api.add_operation(:list_privacy_budget_templates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPrivacyBudgetTemplates"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/privacybudgettemplates"
+        o.input = Shapes::ShapeRef.new(shape: ListPrivacyBudgetTemplatesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListPrivacyBudgetTemplatesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_privacy_budgets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPrivacyBudgets"
+        o.http_method = "GET"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/privacybudgets"
+        o.input = Shapes::ShapeRef.new(shape: ListPrivacyBudgetsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListPrivacyBudgetsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_protected_queries, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListProtectedQueries"
         o.http_method = "GET"
@@ -1647,6 +2437,19 @@ module Aws::CleanRooms
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:preview_privacy_impact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PreviewPrivacyImpact"
+        o.http_method = "POST"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/previewprivacyimpact"
+        o.input = Shapes::ShapeRef.new(shape: PreviewPrivacyImpactInput)
+        o.output = Shapes::ShapeRef.new(shape: PreviewPrivacyImpactOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:start_protected_query, Seahorse::Model::Operation.new.tap do |o|
@@ -1708,6 +2511,19 @@ module Aws::CleanRooms
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:update_configured_audience_model_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConfiguredAudienceModelAssociation"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConfiguredAudienceModelAssociationInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConfiguredAudienceModelAssociationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:update_configured_table, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateConfiguredTable"
         o.http_method = "PATCH"
@@ -1756,6 +2572,20 @@ module Aws::CleanRooms
         o.http_request_uri = "/memberships/{membershipIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: UpdateMembershipInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateMembershipOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_privacy_budget_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePrivacyBudgetTemplate"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/memberships/{membershipIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePrivacyBudgetTemplateInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePrivacyBudgetTemplateOutput)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

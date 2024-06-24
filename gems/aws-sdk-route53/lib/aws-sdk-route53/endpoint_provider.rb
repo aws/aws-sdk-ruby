@@ -46,6 +46,12 @@ module Aws::Route53
           if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso-b") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
             return Aws::Endpoints::Endpoint.new(url: "https://route53.sc2s.sgov.gov", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"route53", "signingRegion"=>"us-isob-east-1"}]})
           end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso-e") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
+            return Aws::Endpoints::Endpoint.new(url: "https://route53.cloud.adc-e.uk", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"route53", "signingRegion"=>"eu-isoe-west-1"}]})
+          end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-iso-f") && Aws::Endpoints::Matchers.boolean_equals?(use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, false)
+            return Aws::Endpoints::Endpoint.new(url: "https://route53.csp.hci.ic.gov", headers: {}, properties: {"authSchemes"=>[{"name"=>"sigv4", "signingName"=>"route53", "signingRegion"=>"us-isof-south-1"}]})
+          end
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
               return Aws::Endpoints::Endpoint.new(url: "https://route53-fips.#{region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
@@ -53,7 +59,7 @@ module Aws::Route53
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
           end
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+            if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
               return Aws::Endpoints::Endpoint.new(url: "https://route53-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"

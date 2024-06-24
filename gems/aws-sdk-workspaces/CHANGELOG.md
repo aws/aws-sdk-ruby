@@ -1,6 +1,81 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.103.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.102.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.101.0 (2024-04-18)
+------------------
+
+* Feature - Adds new APIs for managing and sharing WorkSpaces BYOL configuration across accounts.
+
+1.100.0 (2024-03-07)
+------------------
+
+* Feature - Added note for user decoupling
+
+1.99.0 (2024-02-08)
+------------------
+
+* Feature - This release introduces User-Decoupling feature. This feature allows Workspaces Core customers to provision workspaces without providing users. CreateWorkspaces and DescribeWorkspaces APIs will now take a new optional parameter "WorkspaceName".
+
+1.98.0 (2024-02-05)
+------------------
+
+* Feature - Added definitions of various WorkSpace states
+
+1.97.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.96.0 (2024-01-11)
+------------------
+
+* Feature - Added AWS Workspaces RebootWorkspaces API - Extended Reboot documentation update
+
+1.95.0 (2023-12-14)
+------------------
+
+* Feature - Updated note to ensure customers understand running modes.
+
+1.94.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.93.0 (2023-11-27)
+------------------
+
+* Feature - The release introduces Multi-Region Resilience one-way data replication that allows you to replicate data from your primary WorkSpace to a standby WorkSpace in another AWS Region. DescribeWorkspaces now returns the status of data replication.
+
+1.92.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2023-10-19)
+------------------
+
+* Feature - Documentation updates for WorkSpaces
+
+1.90.0 (2023-10-12)
+------------------
+
+* Feature - Updated the CreateWorkspaces action documentation to clarify that the PCoIP protocol is only available for Windows bundles.
+
 1.89.0 (2023-10-05)
 ------------------
 

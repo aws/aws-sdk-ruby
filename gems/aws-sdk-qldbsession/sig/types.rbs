@@ -1,0 +1,166 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::QLDBSession
+  module Types
+
+    class AbortTransactionRequest < Aws::EmptyStructure
+    end
+
+    class AbortTransactionResult
+      attr_accessor timing_information: Types::TimingInformation
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class CapacityExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CommitTransactionRequest
+      attr_accessor transaction_id: ::String
+      attr_accessor commit_digest: ::String
+      SENSITIVE: []
+    end
+
+    class CommitTransactionResult
+      attr_accessor transaction_id: ::String
+      attr_accessor commit_digest: ::String
+      attr_accessor timing_information: Types::TimingInformation
+      attr_accessor consumed_i_os: Types::IOUsage
+      SENSITIVE: []
+    end
+
+    class EndSessionRequest < Aws::EmptyStructure
+    end
+
+    class EndSessionResult
+      attr_accessor timing_information: Types::TimingInformation
+      SENSITIVE: []
+    end
+
+    class ExecuteStatementRequest
+      attr_accessor transaction_id: ::String
+      attr_accessor statement: ::String
+      attr_accessor parameters: ::Array[Types::ValueHolder]
+      SENSITIVE: []
+    end
+
+    class ExecuteStatementResult
+      attr_accessor first_page: Types::Page
+      attr_accessor timing_information: Types::TimingInformation
+      attr_accessor consumed_i_os: Types::IOUsage
+      SENSITIVE: []
+    end
+
+    class FetchPageRequest
+      attr_accessor transaction_id: ::String
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class FetchPageResult
+      attr_accessor page: Types::Page
+      attr_accessor timing_information: Types::TimingInformation
+      attr_accessor consumed_i_os: Types::IOUsage
+      SENSITIVE: []
+    end
+
+    class IOUsage
+      attr_accessor read_i_os: ::Integer
+      attr_accessor write_i_os: ::Integer
+      SENSITIVE: []
+    end
+
+    class InvalidSessionException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OccConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Page
+      attr_accessor values: ::Array[Types::ValueHolder]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class RateExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SendCommandRequest
+      attr_accessor session_token: ::String
+      attr_accessor start_session: Types::StartSessionRequest
+      attr_accessor start_transaction: Types::StartTransactionRequest
+      attr_accessor end_session: Types::EndSessionRequest
+      attr_accessor commit_transaction: Types::CommitTransactionRequest
+      attr_accessor abort_transaction: Types::AbortTransactionRequest
+      attr_accessor execute_statement: Types::ExecuteStatementRequest
+      attr_accessor fetch_page: Types::FetchPageRequest
+      SENSITIVE: []
+    end
+
+    class SendCommandResult
+      attr_accessor start_session: Types::StartSessionResult
+      attr_accessor start_transaction: Types::StartTransactionResult
+      attr_accessor end_session: Types::EndSessionResult
+      attr_accessor commit_transaction: Types::CommitTransactionResult
+      attr_accessor abort_transaction: Types::AbortTransactionResult
+      attr_accessor execute_statement: Types::ExecuteStatementResult
+      attr_accessor fetch_page: Types::FetchPageResult
+      SENSITIVE: []
+    end
+
+    class StartSessionRequest
+      attr_accessor ledger_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartSessionResult
+      attr_accessor session_token: ::String
+      attr_accessor timing_information: Types::TimingInformation
+      SENSITIVE: []
+    end
+
+    class StartTransactionRequest < Aws::EmptyStructure
+    end
+
+    class StartTransactionResult
+      attr_accessor transaction_id: ::String
+      attr_accessor timing_information: Types::TimingInformation
+      SENSITIVE: []
+    end
+
+    class TimingInformation
+      attr_accessor processing_time_milliseconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ValueHolder
+      attr_accessor ion_binary: ::String
+      attr_accessor ion_text: ::String
+      SENSITIVE: []
+    end
+  end
+end

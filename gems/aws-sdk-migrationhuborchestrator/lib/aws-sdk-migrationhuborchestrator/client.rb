@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::MigrationHubOrchestrator
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::MigrationHubOrchestrator
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::MigrationHubOrchestrator
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,56 +347,133 @@ module Aws::MigrationHubOrchestrator
     #   @option options [Aws::MigrationHubOrchestrator::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::MigrationHubOrchestrator::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
+
+    # Creates a migration workflow template.
+    #
+    # @option params [required, String] :template_name
+    #   The name of the migration workflow template.
+    #
+    # @option params [String] :template_description
+    #   A description of the migration workflow template.
+    #
+    # @option params [required, Types::TemplateSource] :template_source
+    #   The source of the migration workflow template.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Idempotency][1]
+    #   in the Smithy documentation.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://smithy.io/2.0/spec/behavior-traits.html#idempotencytoken-trait
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to add to the migration workflow template.
+    #
+    # @return [Types::CreateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTemplateResponse#template_id #template_id} => String
+    #   * {Types::CreateTemplateResponse#template_arn #template_arn} => String
+    #   * {Types::CreateTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_template({
+    #     template_name: "CreateTemplateRequestTemplateNameString", # required
+    #     template_description: "CreateTemplateRequestTemplateDescriptionString",
+    #     template_source: { # required
+    #       workflow_id: "MigrationWorkflowId",
+    #     },
+    #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_id #=> String
+    #   resp.template_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["StringMapKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/CreateTemplate AWS API Documentation
+    #
+    # @overload create_template(params = {})
+    # @param [Hash] params ({})
+    def create_template(params = {}, options = {})
+      req = build_request(:create_template, params)
+      req.send_request(options)
+    end
 
     # Create a workflow to orchestrate your migrations.
     #
@@ -399,7 +486,7 @@ module Aws::MigrationHubOrchestrator
     # @option params [required, String] :template_id
     #   The ID of the template.
     #
-    # @option params [required, String] :application_configuration_id
+    # @option params [String] :application_configuration_id
     #   The configuration ID of the application configured in Application
     #   Discovery Service.
     #
@@ -432,7 +519,7 @@ module Aws::MigrationHubOrchestrator
     #     name: "CreateMigrationWorkflowRequestNameString", # required
     #     description: "CreateMigrationWorkflowRequestDescriptionString",
     #     template_id: "CreateMigrationWorkflowRequestTemplateIdString", # required
-    #     application_configuration_id: "CreateMigrationWorkflowRequestApplicationConfigurationIdString", # required
+    #     application_configuration_id: "CreateMigrationWorkflowRequestApplicationConfigurationIdString",
     #     input_parameters: { # required
     #       "StepInputParametersKey" => {
     #         integer_value: 1,
@@ -550,8 +637,8 @@ module Aws::MigrationHubOrchestrator
     #         required: false,
     #         value: {
     #           integer_value: 1,
-    #           string_value: "StringValue",
-    #           list_of_string_value: ["StringListMember"],
+    #           string_value: "MaxStringValue",
+    #           list_of_string_value: ["MaxStringValue"],
     #         },
     #       },
     #     ],
@@ -634,6 +721,28 @@ module Aws::MigrationHubOrchestrator
     # @param [Hash] params ({})
     def create_workflow_step_group(params = {}, options = {})
       req = build_request(:create_workflow_step_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes a migration workflow template.
+    #
+    # @option params [required, String] :id
+    #   The ID of the request to delete a migration workflow template.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_template({
+    #     id: "TemplateId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/DeleteTemplate AWS API Documentation
+    #
+    # @overload delete_template(params = {})
+    # @param [Hash] params ({})
+    def delete_template(params = {}, options = {})
+      req = build_request(:delete_template, params)
       req.send_request(options)
     end
 
@@ -735,12 +844,17 @@ module Aws::MigrationHubOrchestrator
     # @return [Types::GetMigrationWorkflowTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetMigrationWorkflowTemplateResponse#id #id} => String
+    #   * {Types::GetMigrationWorkflowTemplateResponse#template_arn #template_arn} => String
     #   * {Types::GetMigrationWorkflowTemplateResponse#name #name} => String
     #   * {Types::GetMigrationWorkflowTemplateResponse#description #description} => String
     #   * {Types::GetMigrationWorkflowTemplateResponse#inputs #inputs} => Array&lt;Types::TemplateInput&gt;
     #   * {Types::GetMigrationWorkflowTemplateResponse#tools #tools} => Array&lt;Types::Tool&gt;
-    #   * {Types::GetMigrationWorkflowTemplateResponse#status #status} => String
     #   * {Types::GetMigrationWorkflowTemplateResponse#creation_time #creation_time} => Time
+    #   * {Types::GetMigrationWorkflowTemplateResponse#owner #owner} => String
+    #   * {Types::GetMigrationWorkflowTemplateResponse#status #status} => String
+    #   * {Types::GetMigrationWorkflowTemplateResponse#status_message #status_message} => String
+    #   * {Types::GetMigrationWorkflowTemplateResponse#template_class #template_class} => String
+    #   * {Types::GetMigrationWorkflowTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -751,6 +865,7 @@ module Aws::MigrationHubOrchestrator
     # @example Response structure
     #
     #   resp.id #=> String
+    #   resp.template_arn #=> String
     #   resp.name #=> String
     #   resp.description #=> String
     #   resp.inputs #=> Array
@@ -760,8 +875,13 @@ module Aws::MigrationHubOrchestrator
     #   resp.tools #=> Array
     #   resp.tools[0].name #=> String
     #   resp.tools[0].url #=> String
-    #   resp.status #=> String, one of "CREATED"
     #   resp.creation_time #=> Time
+    #   resp.owner #=> String
+    #   resp.status #=> String, one of "CREATED", "READY", "PENDING_CREATION", "CREATING", "CREATION_FAILED"
+    #   resp.status_message #=> String
+    #   resp.template_class #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["StringMapKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/GetTemplate AWS API Documentation
     #
@@ -974,7 +1094,7 @@ module Aws::MigrationHubOrchestrator
     #   The ID of the migration workflow.
     #
     # @option params [required, String] :step_group_id
-    #   desThe ID of the step group.
+    #   The ID of the step group.
     #
     # @option params [required, String] :id
     #   The ID of the step.
@@ -1041,7 +1161,7 @@ module Aws::MigrationHubOrchestrator
     #   resp.previous[0] #=> String
     #   resp.next #=> Array
     #   resp.next[0] #=> String
-    #   resp.status #=> String, one of "AWAITING_DEPENDENCIES", "READY", "IN_PROGRESS", "COMPLETED", "FAILED", "PAUSED", "USER_ATTENTION_REQUIRED"
+    #   resp.status #=> String, one of "AWAITING_DEPENDENCIES", "SKIPPED", "READY", "IN_PROGRESS", "COMPLETED", "FAILED", "PAUSED", "USER_ATTENTION_REQUIRED"
     #   resp.status_message #=> String
     #   resp.script_output_location #=> String
     #   resp.creation_time #=> Time
@@ -1425,7 +1545,7 @@ module Aws::MigrationHubOrchestrator
     #   resp.workflow_steps_summary[0].previous[0] #=> String
     #   resp.workflow_steps_summary[0].next #=> Array
     #   resp.workflow_steps_summary[0].next[0] #=> String
-    #   resp.workflow_steps_summary[0].status #=> String, one of "AWAITING_DEPENDENCIES", "READY", "IN_PROGRESS", "COMPLETED", "FAILED", "PAUSED", "USER_ATTENTION_REQUIRED"
+    #   resp.workflow_steps_summary[0].status #=> String, one of "AWAITING_DEPENDENCIES", "SKIPPED", "READY", "IN_PROGRESS", "COMPLETED", "FAILED", "PAUSED", "USER_ATTENTION_REQUIRED"
     #   resp.workflow_steps_summary[0].status_message #=> String
     #   resp.workflow_steps_summary[0].no_of_srv_completed #=> Integer
     #   resp.workflow_steps_summary[0].no_of_srv_failed #=> Integer
@@ -1536,7 +1656,7 @@ module Aws::MigrationHubOrchestrator
     #   resp.step_group_id #=> String
     #   resp.workflow_id #=> String
     #   resp.id #=> String
-    #   resp.status #=> String, one of "AWAITING_DEPENDENCIES", "READY", "IN_PROGRESS", "COMPLETED", "FAILED", "PAUSED", "USER_ATTENTION_REQUIRED"
+    #   resp.status #=> String, one of "AWAITING_DEPENDENCIES", "SKIPPED", "READY", "IN_PROGRESS", "COMPLETED", "FAILED", "PAUSED", "USER_ATTENTION_REQUIRED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/RetryWorkflowStep AWS API Documentation
     #
@@ -1673,6 +1793,55 @@ module Aws::MigrationHubOrchestrator
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates a migration workflow template.
+    #
+    # @option params [required, String] :id
+    #   The ID of the request to update a migration workflow template.
+    #
+    # @option params [String] :template_name
+    #   The name of the migration workflow template to update.
+    #
+    # @option params [String] :template_description
+    #   The description of the migration workflow template to update.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTemplateResponse#template_id #template_id} => String
+    #   * {Types::UpdateTemplateResponse#template_arn #template_arn} => String
+    #   * {Types::UpdateTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_template({
+    #     id: "TemplateId", # required
+    #     template_name: "UpdateTemplateRequestTemplateNameString",
+    #     template_description: "UpdateTemplateRequestTemplateDescriptionString",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.template_id #=> String
+    #   resp.template_arn #=> String
+    #   resp.tags #=> Hash
+    #   resp.tags["StringMapKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhuborchestrator-2021-08-28/UpdateTemplate AWS API Documentation
+    #
+    # @overload update_template(params = {})
+    # @param [Hash] params ({})
+    def update_template(params = {}, options = {})
+      req = build_request(:update_template, params)
       req.send_request(options)
     end
 
@@ -1836,14 +2005,14 @@ module Aws::MigrationHubOrchestrator
     #         required: false,
     #         value: {
     #           integer_value: 1,
-    #           string_value: "StringValue",
-    #           list_of_string_value: ["StringListMember"],
+    #           string_value: "MaxStringValue",
+    #           list_of_string_value: ["MaxStringValue"],
     #         },
     #       },
     #     ],
     #     previous: ["StringListMember"],
     #     next: ["StringListMember"],
-    #     status: "AWAITING_DEPENDENCIES", # accepts AWAITING_DEPENDENCIES, READY, IN_PROGRESS, COMPLETED, FAILED, PAUSED, USER_ATTENTION_REQUIRED
+    #     status: "AWAITING_DEPENDENCIES", # accepts AWAITING_DEPENDENCIES, SKIPPED, READY, IN_PROGRESS, COMPLETED, FAILED, PAUSED, USER_ATTENTION_REQUIRED
     #   })
     #
     # @example Response structure
@@ -1941,7 +2110,7 @@ module Aws::MigrationHubOrchestrator
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhuborchestrator'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

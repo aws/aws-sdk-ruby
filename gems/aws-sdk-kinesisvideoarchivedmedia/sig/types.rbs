@@ -1,0 +1,218 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::KinesisVideoArchivedMedia
+  module Types
+
+    class ClientLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ClipFragmentSelector
+      attr_accessor fragment_selector_type: ("PRODUCER_TIMESTAMP" | "SERVER_TIMESTAMP")
+      attr_accessor timestamp_range: Types::ClipTimestampRange
+      SENSITIVE: []
+    end
+
+    class ClipTimestampRange
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class DASHFragmentSelector
+      attr_accessor fragment_selector_type: ("PRODUCER_TIMESTAMP" | "SERVER_TIMESTAMP")
+      attr_accessor timestamp_range: Types::DASHTimestampRange
+      SENSITIVE: []
+    end
+
+    class DASHTimestampRange
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class Fragment
+      attr_accessor fragment_number: ::String
+      attr_accessor fragment_size_in_bytes: ::Integer
+      attr_accessor producer_timestamp: ::Time
+      attr_accessor server_timestamp: ::Time
+      attr_accessor fragment_length_in_milliseconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class FragmentSelector
+      attr_accessor fragment_selector_type: ("PRODUCER_TIMESTAMP" | "SERVER_TIMESTAMP")
+      attr_accessor timestamp_range: Types::TimestampRange
+      SENSITIVE: []
+    end
+
+    class GetClipInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor clip_fragment_selector: Types::ClipFragmentSelector
+      SENSITIVE: []
+    end
+
+    class GetClipOutput
+      attr_accessor content_type: ::String
+      attr_accessor payload: ::IO
+      SENSITIVE: []
+    end
+
+    class GetDASHStreamingSessionURLInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor playback_mode: ("LIVE" | "LIVE_REPLAY" | "ON_DEMAND")
+      attr_accessor display_fragment_timestamp: ("ALWAYS" | "NEVER")
+      attr_accessor display_fragment_number: ("ALWAYS" | "NEVER")
+      attr_accessor dash_fragment_selector: Types::DASHFragmentSelector
+      attr_accessor expires: ::Integer
+      attr_accessor max_manifest_fragment_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDASHStreamingSessionURLOutput
+      attr_accessor dash_streaming_session_url: ::String
+      SENSITIVE: []
+    end
+
+    class GetHLSStreamingSessionURLInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor playback_mode: ("LIVE" | "LIVE_REPLAY" | "ON_DEMAND")
+      attr_accessor hls_fragment_selector: Types::HLSFragmentSelector
+      attr_accessor container_format: ("FRAGMENTED_MP4" | "MPEG_TS")
+      attr_accessor discontinuity_mode: ("ALWAYS" | "NEVER" | "ON_DISCONTINUITY")
+      attr_accessor display_fragment_timestamp: ("ALWAYS" | "NEVER")
+      attr_accessor expires: ::Integer
+      attr_accessor max_media_playlist_fragment_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetHLSStreamingSessionURLOutput
+      attr_accessor hls_streaming_session_url: ::String
+      SENSITIVE: []
+    end
+
+    class GetImagesInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor image_selector_type: ("PRODUCER_TIMESTAMP" | "SERVER_TIMESTAMP")
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      attr_accessor sampling_interval: ::Integer
+      attr_accessor format: ("JPEG" | "PNG")
+      attr_accessor format_config: ::Hash[("JPEGQuality"), ::String]
+      attr_accessor width_pixels: ::Integer
+      attr_accessor height_pixels: ::Integer
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetImagesOutput
+      attr_accessor images: ::Array[Types::Image]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetMediaForFragmentListInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor fragments: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetMediaForFragmentListOutput
+      attr_accessor content_type: ::String
+      attr_accessor payload: ::IO
+      SENSITIVE: []
+    end
+
+    class HLSFragmentSelector
+      attr_accessor fragment_selector_type: ("PRODUCER_TIMESTAMP" | "SERVER_TIMESTAMP")
+      attr_accessor timestamp_range: Types::HLSTimestampRange
+      SENSITIVE: []
+    end
+
+    class HLSTimestampRange
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class Image
+      attr_accessor time_stamp: ::Time
+      attr_accessor error: ("NO_MEDIA" | "MEDIA_ERROR")
+      attr_accessor image_content: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidCodecPrivateDataException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidMediaFrameException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListFragmentsInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor fragment_selector: Types::FragmentSelector
+      SENSITIVE: []
+    end
+
+    class ListFragmentsOutput
+      attr_accessor fragments: ::Array[Types::Fragment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MissingCodecPrivateDataException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoDataRetentionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotAuthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimestampRange
+      attr_accessor start_timestamp: ::Time
+      attr_accessor end_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class UnsupportedStreamMediaTypeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -48,7 +48,7 @@ describe 'Client Interface:' do
 
         sent_event = same_client.send_events[0]
         expect(sent_event.headers[":event-type"].value).to eq('BazResult')
-        expect(sent_event.payload.read).to eq("{\"Details\":[\"baz\"]}")
+        expect(sent_event.payload.read).to eq("{\"Result\":{\"Details\":[\"baz\"]}}")
       end
 
       it 'allows disable event validation' do

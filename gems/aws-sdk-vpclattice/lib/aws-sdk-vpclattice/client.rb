@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::VPCLattice
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::VPCLattice
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::VPCLattice
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::VPCLattice
     #   @option options [Aws::VPCLattice::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::VPCLattice::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -391,6 +416,15 @@ module Aws::VPCLattice
     # Updates the listener rules in a batch. You can use this operation to
     # change the priority of listener rules. This can be useful when bulk
     # updating or swapping rule priority.
+    #
+    # **Required permissions:** `vpc-lattice:UpdateRule`
+    #
+    # For more information, see [How Amazon VPC Lattice works with IAM][1]
+    # in the *Amazon VPC Lattice User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/security_iam_service-with-iam.html
     #
     # @option params [required, String] :listener_identifier
     #   The ID or Amazon Resource Name (ARN) of the listener.
@@ -494,7 +528,7 @@ module Aws::VPCLattice
     # Enables access logs to be sent to Amazon CloudWatch, Amazon S3, and
     # Amazon Kinesis Data Firehose. The service network owner can use the
     # access logs to audit the services in the network. The service network
-    # owner will only see access logs from clients and services that are
+    # owner can only see access logs from clients and services that are
     # associated with their service network. Access log entries represent
     # traffic originated from VPCs associated with that network. For more
     # information, see [Access logs][1] in the *Amazon VPC Lattice User
@@ -583,12 +617,8 @@ module Aws::VPCLattice
     #   not need to pass this option.**
     #
     # @option params [required, Types::RuleAction] :default_action
-    #   The action for the default rule. Each listener has a default rule.
-    #   Each rule consists of a priority, one or more actions, and one or more
-    #   conditions. The default rule is the rule that's used if no other
-    #   rules match. Each rule must include exactly one of the following types
-    #   of actions: `forward `or `fixed-response`, and it must be the last
-    #   action to be performed.
+    #   The action for the default rule. Each listener has a default rule. The
+    #   default rule is used if no other rules match.
     #
     # @option params [required, String] :name
     #   The name of the listener. A listener name must be unique within a
@@ -597,11 +627,11 @@ module Aws::VPCLattice
     #   after another hyphen.
     #
     # @option params [Integer] :port
-    #   The listener port. You can specify a value from `1` to `65535`. For
-    #   HTTP, the default is `80`. For HTTPS, the default is `443`.
+    #   The listener port. You can specify a value from 1 to 65535. For HTTP,
+    #   the default is 80. For HTTPS, the default is 443.
     #
     # @option params [required, String] :protocol
-    #   The listener protocol HTTP or HTTPS.
+    #   The listener protocol.
     #
     # @option params [required, String] :service_identifier
     #   The ID or Amazon Resource Name (ARN) of the service.
@@ -639,7 +669,7 @@ module Aws::VPCLattice
     #     },
     #     name: "ListenerName", # required
     #     port: 1,
-    #     protocol: "HTTP", # required, accepts HTTP, HTTPS
+    #     protocol: "HTTP", # required, accepts HTTP, HTTPS, TLS_PASSTHROUGH
     #     service_identifier: "ServiceIdentifier", # required
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -656,7 +686,7 @@ module Aws::VPCLattice
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.port #=> Integer
-    #   resp.protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.protocol #=> String, one of "HTTP", "HTTPS", "TLS_PASSTHROUGH"
     #   resp.service_arn #=> String
     #   resp.service_id #=> String
     #
@@ -966,7 +996,9 @@ module Aws::VPCLattice
       req.send_request(options)
     end
 
-    # Associates a service with a service network.
+    # Associates a service with a service network. For more information, see
+    # [Manage service associations][1] in the *Amazon VPC Lattice User
+    # Guide*.
     #
     # You can't use this operation if the service and service network are
     # already associated or if there is a disassociation or deletion in
@@ -979,6 +1011,10 @@ module Aws::VPCLattice
     #
     # As a result of this operation, the association is created in the
     # service network account and the association owner account.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-service-associations
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -1053,10 +1089,11 @@ module Aws::VPCLattice
     # As a result of this operation, the association gets created in the
     # service network account and the VPC owner account.
     #
-    # Once a security group is added to the VPC association it cannot be
-    # removed. You can add or update the security groups being used for the
-    # VPC association once a security group is attached. To remove all
-    # security groups you must reassociate the VPC.
+    # If you add a security group to the service network and VPC
+    # association, the association must continue to always have at least one
+    # security group. You can add or edit security groups at any time.
+    # However, to remove all security groups, you must first delete the
+    # association and recreate it without security groups.
     #
     #
     #
@@ -1154,8 +1191,7 @@ module Aws::VPCLattice
     #   not need to pass this option.**
     #
     # @option params [Types::TargetGroupConfig] :config
-    #   The target group configuration. If `type` is set to `LAMBDA`, this
-    #   parameter doesn't apply.
+    #   The target group configuration.
     #
     # @option params [required, String] :name
     #   The name of the target group. The name must be unique within the
@@ -1193,14 +1229,14 @@ module Aws::VPCLattice
     #         },
     #         path: "HealthCheckPath",
     #         port: 1,
-    #         protocol: "HTTP", # accepts HTTP, HTTPS
+    #         protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #         protocol_version: "HTTP1", # accepts HTTP1, HTTP2
     #         unhealthy_threshold_count: 1,
     #       },
     #       ip_address_type: "IPV4", # accepts IPV4, IPV6
     #       lambda_event_structure_version: "V1", # accepts V1, V2
     #       port: 1,
-    #       protocol: "HTTP", # accepts HTTP, HTTPS
+    #       protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #       protocol_version: "HTTP1", # accepts HTTP1, HTTP2, GRPC
     #       vpc_identifier: "VpcId",
     #     },
@@ -1221,13 +1257,13 @@ module Aws::VPCLattice
     #   resp.config.health_check.matcher.http_code #=> String
     #   resp.config.health_check.path #=> String
     #   resp.config.health_check.port #=> Integer
-    #   resp.config.health_check.protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.config.health_check.protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.config.health_check.protocol_version #=> String, one of "HTTP1", "HTTP2"
     #   resp.config.health_check.unhealthy_threshold_count #=> Integer
     #   resp.config.ip_address_type #=> String, one of "IPV4", "IPV6"
     #   resp.config.lambda_event_structure_version #=> String, one of "V1", "V2"
     #   resp.config.port #=> Integer
-    #   resp.config.protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.config.protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.config.protocol_version #=> String, one of "HTTP1", "HTTP2", "GRPC"
     #   resp.config.vpc_identifier #=> String
     #   resp.id #=> String
@@ -1266,12 +1302,11 @@ module Aws::VPCLattice
       req.send_request(options)
     end
 
-    # Deletes the specified auth policy. If an auth is set to `Amazon Web
-    # Services_IAM` and the auth policy is deleted, all requests will be
-    # denied by default. If you are trying to remove the auth policy
-    # completely, you must set the auth\_type to `NONE`. If auth is enabled
-    # on the resource, but no auth policy is set, all requests will be
-    # denied.
+    # Deletes the specified auth policy. If an auth is set to `AWS_IAM` and
+    # the auth policy is deleted, all requests are denied. If you are trying
+    # to remove the auth policy completely, you must set the auth type to
+    # `NONE`. If auth is enabled on the resource, but no auth policy is set,
+    # all requests are denied.
     #
     # @option params [required, String] :resource_identifier
     #   The ID or Amazon Resource Name (ARN) of the resource.
@@ -1457,7 +1492,7 @@ module Aws::VPCLattice
     end
 
     # Deletes the association between a specified service and the specific
-    # service network. This request will fail if an association is still in
+    # service network. This operation fails if an association is still in
     # progress.
     #
     # @option params [required, String] :service_network_service_association_identifier
@@ -1719,7 +1754,7 @@ module Aws::VPCLattice
     #   resp.last_updated_at #=> Time
     #   resp.name #=> String
     #   resp.port #=> Integer
-    #   resp.protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.protocol #=> String, one of "HTTP", "HTTPS", "TLS_PASSTHROUGH"
     #   resp.service_arn #=> String
     #   resp.service_id #=> String
     #
@@ -1733,11 +1768,11 @@ module Aws::VPCLattice
     end
 
     # Retrieves information about the resource policy. The resource policy
-    # is an IAM policy created by AWS RAM on behalf of the resource owner
-    # when they share a resource.
+    # is an IAM policy created on behalf of the resource owner when they
+    # share a resource.
     #
     # @option params [required, String] :resource_arn
-    #   An IAM policy.
+    #   The Amazon Resource Name (ARN) of the service network or service.
     #
     # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2072,13 +2107,13 @@ module Aws::VPCLattice
     #   resp.config.health_check.matcher.http_code #=> String
     #   resp.config.health_check.path #=> String
     #   resp.config.health_check.port #=> Integer
-    #   resp.config.health_check.protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.config.health_check.protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.config.health_check.protocol_version #=> String, one of "HTTP1", "HTTP2"
     #   resp.config.health_check.unhealthy_threshold_count #=> Integer
     #   resp.config.ip_address_type #=> String, one of "IPV4", "IPV6"
     #   resp.config.lambda_event_structure_version #=> String, one of "V1", "V2"
     #   resp.config.port #=> Integer
-    #   resp.config.protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.config.protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.config.protocol_version #=> String, one of "HTTP1", "HTTP2", "GRPC"
     #   resp.config.vpc_identifier #=> String
     #   resp.created_at #=> Time
@@ -2185,7 +2220,7 @@ module Aws::VPCLattice
     #   resp.items[0].last_updated_at #=> Time
     #   resp.items[0].name #=> String
     #   resp.items[0].port #=> Integer
-    #   resp.items[0].protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.items[0].protocol #=> String, one of "HTTP", "HTTPS", "TLS_PASSTHROUGH"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListListeners AWS API Documentation
@@ -2257,8 +2292,8 @@ module Aws::VPCLattice
     # Resource Name (ARN), such as when a service network is associated with
     # a VPC or when a service is associated with a service network. If the
     # association is for a resource that is shared with another account, the
-    # association will include the local account ID as the prefix in the ARN
-    # for each account the resource is shared with.
+    # association includes the local account ID as the prefix in the ARN for
+    # each account the resource is shared with.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return.
@@ -2505,7 +2540,7 @@ module Aws::VPCLattice
     #   The target group type.
     #
     # @option params [String] :vpc_identifier
-    #   The ID or Amazon Resource Name (ARN) of the service.
+    #   The ID or Amazon Resource Name (ARN) of the VPC.
     #
     # @return [Types::ListTargetGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2534,7 +2569,7 @@ module Aws::VPCLattice
     #   resp.items[0].last_updated_at #=> Time
     #   resp.items[0].name #=> String
     #   resp.items[0].port #=> Integer
-    #   resp.items[0].protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.items[0].protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.items[0].service_arns #=> Array
     #   resp.items[0].service_arns[0] #=> String
     #   resp.items[0].status #=> String, one of "CREATE_IN_PROGRESS", "ACTIVE", "DELETE_IN_PROGRESS", "CREATE_FAILED", "DELETE_FAILED"
@@ -2565,7 +2600,7 @@ module Aws::VPCLattice
     #   The ID or Amazon Resource Name (ARN) of the target group.
     #
     # @option params [Array<Types::Target>] :targets
-    #   The targets to list.
+    #   The targets.
     #
     # @return [Types::ListTargetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2606,10 +2641,19 @@ module Aws::VPCLattice
       req.send_request(options)
     end
 
-    # Creates or updates the auth policy.
+    # Creates or updates the auth policy. The policy string in JSON must not
+    # contain newlines or blank lines.
+    #
+    # For more information, see [Auth policies][1] in the *Amazon VPC
+    # Lattice User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/auth-policies.html
     #
     # @option params [required, String] :policy
-    #   The auth policy.
+    #   The auth policy. The policy string in JSON must not contain newlines
+    #   or blank lines.
     #
     # @option params [required, String] :resource_identifier
     #   The ID or Amazon Resource Name (ARN) of the service network or service
@@ -2647,7 +2691,8 @@ module Aws::VPCLattice
     # permission for sharing services and service networks.
     #
     # @option params [required, String] :policy
-    #   An IAM policy.
+    #   An IAM policy. The policy string in JSON must not contain newlines or
+    #   blank lines.
     #
     # @option params [required, String] :resource_arn
     #   The ID or Amazon Resource Name (ARN) of the service network or service
@@ -2863,7 +2908,7 @@ module Aws::VPCLattice
     #   resp.id #=> String
     #   resp.name #=> String
     #   resp.port #=> Integer
-    #   resp.protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.protocol #=> String, one of "HTTP", "HTTPS", "TLS_PASSTHROUGH"
     #   resp.service_arn #=> String
     #   resp.service_id #=> String
     #
@@ -3080,12 +3125,15 @@ module Aws::VPCLattice
       req.send_request(options)
     end
 
-    # Updates the service network and VPC association. Once you add a
-    # security group, it cannot be removed.
+    # Updates the service network and VPC association. If you add a security
+    # group to the service network and VPC association, the association must
+    # continue to always have at least one security group. You can add or
+    # edit security groups at any time. However, to remove all security
+    # groups, you must first delete the association and recreate it without
+    # security groups.
     #
     # @option params [required, Array<String>] :security_group_ids
-    #   The IDs of the security groups. Once you add a security group, it
-    #   cannot be removed.
+    #   The IDs of the security groups.
     #
     # @option params [required, String] :service_network_vpc_association_identifier
     #   The ID or Amazon Resource Name (ARN) of the association.
@@ -3153,7 +3201,7 @@ module Aws::VPCLattice
     #       },
     #       path: "HealthCheckPath",
     #       port: 1,
-    #       protocol: "HTTP", # accepts HTTP, HTTPS
+    #       protocol: "HTTP", # accepts HTTP, HTTPS, TCP
     #       protocol_version: "HTTP1", # accepts HTTP1, HTTP2
     #       unhealthy_threshold_count: 1,
     #     },
@@ -3170,13 +3218,13 @@ module Aws::VPCLattice
     #   resp.config.health_check.matcher.http_code #=> String
     #   resp.config.health_check.path #=> String
     #   resp.config.health_check.port #=> Integer
-    #   resp.config.health_check.protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.config.health_check.protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.config.health_check.protocol_version #=> String, one of "HTTP1", "HTTP2"
     #   resp.config.health_check.unhealthy_threshold_count #=> Integer
     #   resp.config.ip_address_type #=> String, one of "IPV4", "IPV6"
     #   resp.config.lambda_event_structure_version #=> String, one of "V1", "V2"
     #   resp.config.port #=> Integer
-    #   resp.config.protocol #=> String, one of "HTTP", "HTTPS"
+    #   resp.config.protocol #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.config.protocol_version #=> String, one of "HTTP1", "HTTP2", "GRPC"
     #   resp.config.vpc_identifier #=> String
     #   resp.id #=> String
@@ -3206,7 +3254,7 @@ module Aws::VPCLattice
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-vpclattice'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

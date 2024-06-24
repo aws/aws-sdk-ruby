@@ -1,6 +1,86 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.120.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.119.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.118.0 (2024-04-03)
+------------------
+
+* Feature - Add Ruby 3.3 (ruby3.3) support to AWS Lambda
+
+1.117.0 (2024-03-07)
+------------------
+
+* Feature - Documentation updates for AWS Lambda
+
+1.116.0 (2024-02-20)
+------------------
+
+* Feature - Add .NET 8 (dotnet8) Runtime support to AWS Lambda.
+
+1.115.0 (2024-02-16)
+------------------
+
+* Feature - Documentation-only updates for Lambda to clarify a number of existing actions and properties.
+
+1.114.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.113.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.112.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.111.0 (2023-11-16)
+------------------
+
+* Feature - Adds support for logging configuration in Lambda Functions. Customers will have more control how their function logs are captured and to which cloud watch log group they are delivered also.
+
+1.110.0 (2023-11-15)
+------------------
+
+* Feature - Add Java 21 (java21) support to AWS Lambda
+
+1.109.0 (2023-11-14)
+------------------
+
+* Feature - Add Python 3.12 (python3.12) support to AWS Lambda
+
+1.108.0 (2023-11-09)
+------------------
+
+* Feature - Add Custom runtime on Amazon Linux 2023 (provided.al2023) support to AWS Lambda.
+
+1.107.0 (2023-11-08)
+------------------
+
+* Feature - Add Node 20 (nodejs20.x) support to AWS Lambda.
+
+1.106.0 (2023-10-12)
+------------------
+
+* Feature - Adds support for Lambda functions to access Dual-Stack subnets over IPv6, via an opt-in flag in CreateFunction and UpdateFunctionConfiguration APIs
+
 1.105.0 (2023-09-27)
 ------------------
 

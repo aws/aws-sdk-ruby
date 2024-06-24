@@ -1,0 +1,745 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SSMContacts
+  module Types
+
+    class AcceptPageRequest
+      attr_accessor page_id: ::String
+      attr_accessor contact_channel_id: ::String
+      attr_accessor accept_type: ("DELIVERED" | "READ")
+      attr_accessor note: ::String
+      attr_accessor accept_code: ::String
+      attr_accessor accept_code_validation: ("IGNORE" | "ENFORCE")
+      SENSITIVE: []
+    end
+
+    class AcceptPageResult < Aws::EmptyStructure
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ActivateContactChannelRequest
+      attr_accessor contact_channel_id: ::String
+      attr_accessor activation_code: ::String
+      SENSITIVE: []
+    end
+
+    class ActivateContactChannelResult < Aws::EmptyStructure
+    end
+
+    class ChannelTargetInfo
+      attr_accessor contact_channel_id: ::String
+      attr_accessor retry_interval_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor dependent_entities: ::Array[Types::DependentEntity]
+      SENSITIVE: []
+    end
+
+    class Contact
+      attr_accessor contact_arn: ::String
+      attr_accessor alias: ::String
+      attr_accessor display_name: ::String
+      attr_accessor type: ("PERSONAL" | "ESCALATION" | "ONCALL_SCHEDULE")
+      SENSITIVE: []
+    end
+
+    class ContactChannel
+      attr_accessor contact_channel_arn: ::String
+      attr_accessor contact_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("SMS" | "VOICE" | "EMAIL")
+      attr_accessor delivery_address: Types::ContactChannelAddress
+      attr_accessor activation_status: ("ACTIVATED" | "NOT_ACTIVATED")
+      SENSITIVE: []
+    end
+
+    class ContactChannelAddress
+      attr_accessor simple_address: ::String
+      SENSITIVE: []
+    end
+
+    class ContactTargetInfo
+      attr_accessor contact_id: ::String
+      attr_accessor is_essential: bool
+      SENSITIVE: []
+    end
+
+    class CoverageTime
+      attr_accessor start: Types::HandOffTime
+      attr_accessor end: Types::HandOffTime
+      SENSITIVE: []
+    end
+
+    class CreateContactChannelRequest
+      attr_accessor contact_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("SMS" | "VOICE" | "EMAIL")
+      attr_accessor delivery_address: Types::ContactChannelAddress
+      attr_accessor defer_activation: bool
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactChannelResult
+      attr_accessor contact_channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactRequest
+      attr_accessor alias: ::String
+      attr_accessor display_name: ::String
+      attr_accessor type: ("PERSONAL" | "ESCALATION" | "ONCALL_SCHEDULE")
+      attr_accessor plan: Types::Plan
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactResult
+      attr_accessor contact_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRotationOverrideRequest
+      attr_accessor rotation_id: ::String
+      attr_accessor new_contact_ids: ::Array[::String]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRotationOverrideResult
+      attr_accessor rotation_override_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRotationRequest
+      attr_accessor name: ::String
+      attr_accessor contact_ids: ::Array[::String]
+      attr_accessor start_time: ::Time
+      attr_accessor time_zone_id: ::String
+      attr_accessor recurrence: Types::RecurrenceSettings
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRotationResult
+      attr_accessor rotation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataEncryptionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeactivateContactChannelRequest
+      attr_accessor contact_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeactivateContactChannelResult < Aws::EmptyStructure
+    end
+
+    class DeleteContactChannelRequest
+      attr_accessor contact_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContactChannelResult < Aws::EmptyStructure
+    end
+
+    class DeleteContactRequest
+      attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContactResult < Aws::EmptyStructure
+    end
+
+    class DeleteRotationOverrideRequest
+      attr_accessor rotation_id: ::String
+      attr_accessor rotation_override_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRotationOverrideResult < Aws::EmptyStructure
+    end
+
+    class DeleteRotationRequest
+      attr_accessor rotation_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRotationResult < Aws::EmptyStructure
+    end
+
+    class DependentEntity
+      attr_accessor relation_type: ::String
+      attr_accessor dependent_resource_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeEngagementRequest
+      attr_accessor engagement_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEngagementResult
+      attr_accessor contact_arn: ::String
+      attr_accessor engagement_arn: ::String
+      attr_accessor sender: ::String
+      attr_accessor subject: ::String
+      attr_accessor content: ::String
+      attr_accessor public_subject: ::String
+      attr_accessor public_content: ::String
+      attr_accessor incident_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor stop_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribePageRequest
+      attr_accessor page_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePageResult
+      attr_accessor page_arn: ::String
+      attr_accessor engagement_arn: ::String
+      attr_accessor contact_arn: ::String
+      attr_accessor sender: ::String
+      attr_accessor subject: ::String
+      attr_accessor content: ::String
+      attr_accessor public_subject: ::String
+      attr_accessor public_content: ::String
+      attr_accessor incident_id: ::String
+      attr_accessor sent_time: ::Time
+      attr_accessor read_time: ::Time
+      attr_accessor delivery_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Engagement
+      attr_accessor engagement_arn: ::String
+      attr_accessor contact_arn: ::String
+      attr_accessor sender: ::String
+      attr_accessor incident_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor stop_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetContactChannelRequest
+      attr_accessor contact_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetContactChannelResult
+      attr_accessor contact_arn: ::String
+      attr_accessor contact_channel_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("SMS" | "VOICE" | "EMAIL")
+      attr_accessor delivery_address: Types::ContactChannelAddress
+      attr_accessor activation_status: ("ACTIVATED" | "NOT_ACTIVATED")
+      SENSITIVE: []
+    end
+
+    class GetContactPolicyRequest
+      attr_accessor contact_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetContactPolicyResult
+      attr_accessor contact_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetContactRequest
+      attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetContactResult
+      attr_accessor contact_arn: ::String
+      attr_accessor alias: ::String
+      attr_accessor display_name: ::String
+      attr_accessor type: ("PERSONAL" | "ESCALATION" | "ONCALL_SCHEDULE")
+      attr_accessor plan: Types::Plan
+      SENSITIVE: []
+    end
+
+    class GetRotationOverrideRequest
+      attr_accessor rotation_id: ::String
+      attr_accessor rotation_override_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRotationOverrideResult
+      attr_accessor rotation_override_id: ::String
+      attr_accessor rotation_arn: ::String
+      attr_accessor new_contact_ids: ::Array[::String]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor create_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetRotationRequest
+      attr_accessor rotation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRotationResult
+      attr_accessor rotation_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor contact_ids: ::Array[::String]
+      attr_accessor start_time: ::Time
+      attr_accessor time_zone_id: ::String
+      attr_accessor recurrence: Types::RecurrenceSettings
+      SENSITIVE: []
+    end
+
+    class HandOffTime
+      attr_accessor hour_of_day: ::Integer
+      attr_accessor minute_of_hour: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContactChannelsRequest
+      attr_accessor contact_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListContactChannelsResult
+      attr_accessor next_token: ::String
+      attr_accessor contact_channels: ::Array[Types::ContactChannel]
+      SENSITIVE: []
+    end
+
+    class ListContactsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor alias_prefix: ::String
+      attr_accessor type: ("PERSONAL" | "ESCALATION" | "ONCALL_SCHEDULE")
+      SENSITIVE: []
+    end
+
+    class ListContactsResult
+      attr_accessor next_token: ::String
+      attr_accessor contacts: ::Array[Types::Contact]
+      SENSITIVE: []
+    end
+
+    class ListEngagementsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor incident_id: ::String
+      attr_accessor time_range_value: Types::TimeRange
+      SENSITIVE: []
+    end
+
+    class ListEngagementsResult
+      attr_accessor next_token: ::String
+      attr_accessor engagements: ::Array[Types::Engagement]
+      SENSITIVE: []
+    end
+
+    class ListPageReceiptsRequest
+      attr_accessor page_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPageReceiptsResult
+      attr_accessor next_token: ::String
+      attr_accessor receipts: ::Array[Types::Receipt]
+      SENSITIVE: []
+    end
+
+    class ListPageResolutionsRequest
+      attr_accessor next_token: ::String
+      attr_accessor page_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListPageResolutionsResult
+      attr_accessor next_token: ::String
+      attr_accessor page_resolutions: ::Array[Types::ResolutionContact]
+      SENSITIVE: []
+    end
+
+    class ListPagesByContactRequest
+      attr_accessor contact_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPagesByContactResult
+      attr_accessor next_token: ::String
+      attr_accessor pages: ::Array[Types::Page]
+      SENSITIVE: []
+    end
+
+    class ListPagesByEngagementRequest
+      attr_accessor engagement_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPagesByEngagementResult
+      attr_accessor next_token: ::String
+      attr_accessor pages: ::Array[Types::Page]
+      SENSITIVE: []
+    end
+
+    class ListPreviewRotationShiftsRequest
+      attr_accessor rotation_start_time: ::Time
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor members: ::Array[::String]
+      attr_accessor time_zone_id: ::String
+      attr_accessor recurrence: Types::RecurrenceSettings
+      attr_accessor overrides: ::Array[Types::PreviewOverride]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPreviewRotationShiftsResult
+      attr_accessor rotation_shifts: ::Array[Types::RotationShift]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRotationOverridesRequest
+      attr_accessor rotation_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRotationOverridesResult
+      attr_accessor rotation_overrides: ::Array[Types::RotationOverride]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRotationShiftsRequest
+      attr_accessor rotation_id: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRotationShiftsResult
+      attr_accessor rotation_shifts: ::Array[Types::RotationShift]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRotationsRequest
+      attr_accessor rotation_name_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRotationsResult
+      attr_accessor next_token: ::String
+      attr_accessor rotations: ::Array[Types::Rotation]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResult
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MonthlySetting
+      attr_accessor day_of_month: ::Integer
+      attr_accessor hand_off_time: Types::HandOffTime
+      SENSITIVE: []
+    end
+
+    class Page
+      attr_accessor page_arn: ::String
+      attr_accessor engagement_arn: ::String
+      attr_accessor contact_arn: ::String
+      attr_accessor sender: ::String
+      attr_accessor incident_id: ::String
+      attr_accessor sent_time: ::Time
+      attr_accessor delivery_time: ::Time
+      attr_accessor read_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Plan
+      attr_accessor stages: ::Array[Types::Stage]
+      attr_accessor rotation_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PreviewOverride
+      attr_accessor new_members: ::Array[::String]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PutContactPolicyRequest
+      attr_accessor contact_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutContactPolicyResult < Aws::EmptyStructure
+    end
+
+    class Receipt
+      attr_accessor contact_channel_arn: ::String
+      attr_accessor receipt_type: ("DELIVERED" | "ERROR" | "READ" | "SENT" | "STOP")
+      attr_accessor receipt_info: ::String
+      attr_accessor receipt_time: ::Time
+      SENSITIVE: []
+    end
+
+    class RecurrenceSettings
+      attr_accessor monthly_settings: ::Array[Types::MonthlySetting]
+      attr_accessor weekly_settings: ::Array[Types::WeeklySetting]
+      attr_accessor daily_settings: ::Array[Types::HandOffTime]
+      attr_accessor number_of_on_calls: ::Integer
+      attr_accessor shift_coverages: ::Hash[("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"), ::Array[Types::CoverageTime]]
+      attr_accessor recurrence_multiplier: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResolutionContact
+      attr_accessor contact_arn: ::String
+      attr_accessor type: ("PERSONAL" | "ESCALATION" | "ONCALL_SCHEDULE")
+      attr_accessor stage_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class Rotation
+      attr_accessor rotation_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor contact_ids: ::Array[::String]
+      attr_accessor start_time: ::Time
+      attr_accessor time_zone_id: ::String
+      attr_accessor recurrence: Types::RecurrenceSettings
+      SENSITIVE: []
+    end
+
+    class RotationOverride
+      attr_accessor rotation_override_id: ::String
+      attr_accessor new_contact_ids: ::Array[::String]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor create_time: ::Time
+      SENSITIVE: []
+    end
+
+    class RotationShift
+      attr_accessor contact_ids: ::Array[::String]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor type: ("REGULAR" | "OVERRIDDEN")
+      attr_accessor shift_details: Types::ShiftDetails
+      SENSITIVE: []
+    end
+
+    class SendActivationCodeRequest
+      attr_accessor contact_channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class SendActivationCodeResult < Aws::EmptyStructure
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class ShiftDetails
+      attr_accessor overridden_contact_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Stage
+      attr_accessor duration_in_minutes: ::Integer
+      attr_accessor targets: ::Array[Types::Target]
+      SENSITIVE: []
+    end
+
+    class StartEngagementRequest
+      attr_accessor contact_id: ::String
+      attr_accessor sender: ::String
+      attr_accessor subject: ::String
+      attr_accessor content: ::String
+      attr_accessor public_subject: ::String
+      attr_accessor public_content: ::String
+      attr_accessor incident_id: ::String
+      attr_accessor idempotency_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartEngagementResult
+      attr_accessor engagement_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopEngagementRequest
+      attr_accessor engagement_id: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class StopEngagementResult < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResult < Aws::EmptyStructure
+    end
+
+    class Target
+      attr_accessor channel_target_info: Types::ChannelTargetInfo
+      attr_accessor contact_target_info: Types::ContactTargetInfo
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimeRange
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResult < Aws::EmptyStructure
+    end
+
+    class UpdateContactChannelRequest
+      attr_accessor contact_channel_id: ::String
+      attr_accessor name: ::String
+      attr_accessor delivery_address: Types::ContactChannelAddress
+      SENSITIVE: []
+    end
+
+    class UpdateContactChannelResult < Aws::EmptyStructure
+    end
+
+    class UpdateContactRequest
+      attr_accessor contact_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor plan: Types::Plan
+      SENSITIVE: []
+    end
+
+    class UpdateContactResult < Aws::EmptyStructure
+    end
+
+    class UpdateRotationRequest
+      attr_accessor rotation_id: ::String
+      attr_accessor contact_ids: ::Array[::String]
+      attr_accessor start_time: ::Time
+      attr_accessor time_zone_id: ::String
+      attr_accessor recurrence: Types::RecurrenceSettings
+      SENSITIVE: []
+    end
+
+    class UpdateRotationResult < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("UNKNOWN_OPERATION" | "CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "OTHER")
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WeeklySetting
+      attr_accessor day_of_week: ("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN")
+      attr_accessor hand_off_time: Types::HandOffTime
+      SENSITIVE: []
+    end
+  end
+end

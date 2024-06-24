@@ -29,6 +29,9 @@ module Aws::Glue
   # ## Error Classes
   # * {AccessDeniedException}
   # * {AlreadyExistsException}
+  # * {ColumnStatisticsTaskNotRunningException}
+  # * {ColumnStatisticsTaskRunningException}
+  # * {ColumnStatisticsTaskStoppingException}
   # * {ConcurrentModificationException}
   # * {ConcurrentRunsExceededException}
   # * {ConditionCheckFailureException}
@@ -50,6 +53,7 @@ module Aws::Glue
   # * {InvalidStateException}
   # * {MLTransformNotReadyException}
   # * {NoScheduleException}
+  # * {OperationNotSupportedException}
   # * {OperationTimeoutException}
   # * {PermissionTypeMismatchException}
   # * {ResourceNotReadyException}
@@ -86,6 +90,51 @@ module Aws::Glue
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Glue::Types::AlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ColumnStatisticsTaskNotRunningException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::ColumnStatisticsTaskNotRunningException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ColumnStatisticsTaskRunningException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::ColumnStatisticsTaskRunningException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ColumnStatisticsTaskStoppingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::ColumnStatisticsTaskStoppingException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -421,6 +470,21 @@ module Aws::Glue
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Glue::Types::NoScheduleException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class OperationNotSupportedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::OperationNotSupportedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

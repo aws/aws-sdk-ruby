@@ -17,6 +17,7 @@ module Aws::ManagedBlockchain
     Accessor = Shapes::StructureShape.new(name: 'Accessor')
     AccessorBillingTokenString = Shapes::StringShape.new(name: 'AccessorBillingTokenString')
     AccessorListMaxResults = Shapes::IntegerShape.new(name: 'AccessorListMaxResults')
+    AccessorNetworkType = Shapes::StringShape.new(name: 'AccessorNetworkType')
     AccessorStatus = Shapes::StringShape.new(name: 'AccessorStatus')
     AccessorSummary = Shapes::StructureShape.new(name: 'AccessorSummary')
     AccessorSummaryList = Shapes::ListShape.new(name: 'AccessorSummaryList')
@@ -178,6 +179,7 @@ module Aws::ManagedBlockchain
     Accessor.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
     Accessor.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
     Accessor.add_member(:tags, Shapes::ShapeRef.new(shape: OutputTagMap, location_name: "Tags"))
+    Accessor.add_member(:network_type, Shapes::ShapeRef.new(shape: AccessorNetworkType, location_name: "NetworkType"))
     Accessor.struct_class = Types::Accessor
 
     AccessorSummary.add_member(:id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "Id"))
@@ -185,6 +187,7 @@ module Aws::ManagedBlockchain
     AccessorSummary.add_member(:status, Shapes::ShapeRef.new(shape: AccessorStatus, location_name: "Status"))
     AccessorSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
     AccessorSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ArnString, location_name: "Arn"))
+    AccessorSummary.add_member(:network_type, Shapes::ShapeRef.new(shape: AccessorNetworkType, location_name: "NetworkType"))
     AccessorSummary.struct_class = Types::AccessorSummary
 
     AccessorSummaryList.member = Shapes::ShapeRef.new(shape: AccessorSummary)
@@ -197,10 +200,12 @@ module Aws::ManagedBlockchain
     CreateAccessorInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateAccessorInput.add_member(:accessor_type, Shapes::ShapeRef.new(shape: AccessorType, required: true, location_name: "AccessorType"))
     CreateAccessorInput.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagMap, location_name: "Tags"))
+    CreateAccessorInput.add_member(:network_type, Shapes::ShapeRef.new(shape: AccessorNetworkType, location_name: "NetworkType"))
     CreateAccessorInput.struct_class = Types::CreateAccessorInput
 
     CreateAccessorOutput.add_member(:accessor_id, Shapes::ShapeRef.new(shape: ResourceIdString, location_name: "AccessorId"))
     CreateAccessorOutput.add_member(:billing_token, Shapes::ShapeRef.new(shape: AccessorBillingTokenString, location_name: "BillingToken"))
+    CreateAccessorOutput.add_member(:network_type, Shapes::ShapeRef.new(shape: AccessorNetworkType, location_name: "NetworkType"))
     CreateAccessorOutput.struct_class = Types::CreateAccessorOutput
 
     CreateMemberInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
@@ -328,6 +333,7 @@ module Aws::ManagedBlockchain
 
     ListAccessorsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: AccessorListMaxResults, location: "querystring", location_name: "maxResults"))
     ListAccessorsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListAccessorsInput.add_member(:network_type, Shapes::ShapeRef.new(shape: AccessorNetworkType, location: "querystring", location_name: "networkType"))
     ListAccessorsInput.struct_class = Types::ListAccessorsInput
 
     ListAccessorsOutput.add_member(:accessors, Shapes::ShapeRef.new(shape: AccessorSummaryList, location_name: "Accessors"))
@@ -674,6 +680,7 @@ module Aws::ManagedBlockchain
         "endpointPrefix" => "managedblockchain",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "ManagedBlockchain",
         "serviceFullName" => "Amazon Managed Blockchain",
         "serviceId" => "ManagedBlockchain",

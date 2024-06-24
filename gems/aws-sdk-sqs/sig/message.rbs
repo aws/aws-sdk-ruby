@@ -1,0 +1,73 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SQS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html
+    class Message
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#initialize-instance_method
+      def initialize: (String queue_url, String receipt_handle, Hash[Symbol, untyped] options) -> void
+                    | (queue_url: String, receipt_handle: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#queue_url-instance_method
+      def queue_url: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#receipt_handle-instance_method
+      def receipt_handle: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#message_id-instance_method
+      def message_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#md5_of_body-instance_method
+      def md5_of_body: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#body-instance_method
+      def body: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#attributes-instance_method
+      def attributes: () -> ::Hash[("All" | "SenderId" | "SentTimestamp" | "ApproximateReceiveCount" | "ApproximateFirstReceiveTimestamp" | "SequenceNumber" | "MessageDeduplicationId" | "MessageGroupId" | "AWSTraceHeader" | "DeadLetterQueueSourceArn"), ::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#md5_of_message_attributes-instance_method
+      def md5_of_message_attributes: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#message_attributes-instance_method
+      def message_attributes: () -> ::Hash[::String, Types::MessageAttributeValue]
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#data-instance_method
+      def data: () -> Types::Message
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#change_visibility-instance_method
+      def change_visibility: (
+                               visibility_timeout: ::Integer
+                             ) -> ::Aws::EmptyStructure
+                           | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Message.html#queue-instance_method
+      def queue: () -> Queue
+
+      class Collection < ::Aws::Resources::Collection[Message]
+
+        def batch_delete!: (
+                           ) -> void
+                       | (?Hash[Symbol, untyped]) -> void
+      end
+    end
+  end
+end

@@ -56,6 +56,7 @@ module Aws::Omics
     CompleteMultipartReadSetUploadResponse = Shapes::StructureShape.new(name: 'CompleteMultipartReadSetUploadResponse')
     CompleteReadSetUploadPartList = Shapes::ListShape.new(name: 'CompleteReadSetUploadPartList')
     CompleteReadSetUploadPartListItem = Shapes::StructureShape.new(name: 'CompleteReadSetUploadPartListItem')
+    CompleteReadSetUploadPartListItemChecksumString = Shapes::StringShape.new(name: 'CompleteReadSetUploadPartListItemChecksumString')
     CompleteReadSetUploadPartListItemPartNumberInteger = Shapes::IntegerShape.new(name: 'CompleteReadSetUploadPartListItemPartNumberInteger')
     CompletionTime = Shapes::TimestampShape.new(name: 'CompletionTime', timestampFormat: "iso8601")
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -104,8 +105,10 @@ module Aws::Omics
     Description = Shapes::StringShape.new(name: 'Description')
     ETag = Shapes::StructureShape.new(name: 'ETag')
     ETagAlgorithm = Shapes::StringShape.new(name: 'ETagAlgorithm')
+    ETagAlgorithmFamily = Shapes::StringShape.new(name: 'ETagAlgorithmFamily')
     Encoding = Shapes::StringShape.new(name: 'Encoding')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
+    EngineLogStream = Shapes::StringShape.new(name: 'EngineLogStream')
     EscapeChar = Shapes::StringShape.new(name: 'EscapeChar')
     EscapeQuotes = Shapes::BooleanShape.new(name: 'EscapeQuotes')
     ExportJobId = Shapes::StringShape.new(name: 'ExportJobId')
@@ -303,6 +306,7 @@ module Aws::Omics
     ReadSetName = Shapes::StringShape.new(name: 'ReadSetName')
     ReadSetPartSource = Shapes::StringShape.new(name: 'ReadSetPartSource')
     ReadSetPartStreamingBlob = Shapes::BlobShape.new(name: 'ReadSetPartStreamingBlob', requiresLength: true, streaming: true)
+    ReadSetS3Access = Shapes::StructureShape.new(name: 'ReadSetS3Access')
     ReadSetStatus = Shapes::StringShape.new(name: 'ReadSetStatus')
     ReadSetStatusMessage = Shapes::StringShape.new(name: 'ReadSetStatusMessage')
     ReadSetStreamingBlob = Shapes::BlobShape.new(name: 'ReadSetStreamingBlob', streaming: true)
@@ -312,6 +316,7 @@ module Aws::Omics
     ReadSetUploadPartListItemPartNumberInteger = Shapes::IntegerShape.new(name: 'ReadSetUploadPartListItemPartNumberInteger')
     ReadSetUploadPartListItemPartSizeLong = Shapes::IntegerShape.new(name: 'ReadSetUploadPartListItemPartSizeLong')
     ReferenceArn = Shapes::StringShape.new(name: 'ReferenceArn')
+    ReferenceArnFilter = Shapes::StringShape.new(name: 'ReferenceArnFilter')
     ReferenceDescription = Shapes::StringShape.new(name: 'ReferenceDescription')
     ReferenceFile = Shapes::StringShape.new(name: 'ReferenceFile')
     ReferenceFiles = Shapes::StructureShape.new(name: 'ReferenceFiles')
@@ -341,6 +346,7 @@ module Aws::Omics
     RunArn = Shapes::StringShape.new(name: 'RunArn')
     RunExport = Shapes::StringShape.new(name: 'RunExport')
     RunExportList = Shapes::ListShape.new(name: 'RunExportList')
+    RunFailureReason = Shapes::StringShape.new(name: 'RunFailureReason')
     RunGroupArn = Shapes::StringShape.new(name: 'RunGroupArn')
     RunGroupId = Shapes::StringShape.new(name: 'RunGroupId')
     RunGroupList = Shapes::ListShape.new(name: 'RunGroupList')
@@ -361,6 +367,8 @@ module Aws::Omics
     RunListItemStorageCapacityInteger = Shapes::IntegerShape.new(name: 'RunListItemStorageCapacityInteger')
     RunListToken = Shapes::StringShape.new(name: 'RunListToken')
     RunLogLevel = Shapes::StringShape.new(name: 'RunLogLevel')
+    RunLogLocation = Shapes::StructureShape.new(name: 'RunLogLocation')
+    RunLogStream = Shapes::StringShape.new(name: 'RunLogStream')
     RunName = Shapes::StringShape.new(name: 'RunName')
     RunOutputUri = Shapes::StringShape.new(name: 'RunOutputUri')
     RunParameters = Shapes::DocumentShape.new(name: 'RunParameters', document: true)
@@ -374,6 +382,8 @@ module Aws::Omics
     RunStatus = Shapes::StringShape.new(name: 'RunStatus')
     RunStatusMessage = Shapes::StringShape.new(name: 'RunStatusMessage')
     RunTimestamp = Shapes::TimestampShape.new(name: 'RunTimestamp', timestampFormat: "iso8601")
+    RunUuid = Shapes::StringShape.new(name: 'RunUuid')
+    S3AccessPointArn = Shapes::StringShape.new(name: 'S3AccessPointArn')
     S3Destination = Shapes::StringShape.new(name: 'S3Destination')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SampleId = Shapes::StringShape.new(name: 'SampleId')
@@ -389,10 +399,12 @@ module Aws::Omics
     SequenceStoreFilter = Shapes::StructureShape.new(name: 'SequenceStoreFilter')
     SequenceStoreId = Shapes::StringShape.new(name: 'SequenceStoreId')
     SequenceStoreName = Shapes::StringShape.new(name: 'SequenceStoreName')
+    SequenceStoreS3Access = Shapes::StructureShape.new(name: 'SequenceStoreS3Access')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ShareDetails = Shapes::StructureShape.new(name: 'ShareDetails')
     ShareDetailsList = Shapes::ListShape.new(name: 'ShareDetailsList')
     ShareName = Shapes::StringShape.new(name: 'ShareName')
+    ShareResourceType = Shapes::StringShape.new(name: 'ShareResourceType')
     ShareStatus = Shapes::StringShape.new(name: 'ShareStatus')
     SourceFiles = Shapes::StructureShape.new(name: 'SourceFiles')
     SseConfig = Shapes::StructureShape.new(name: 'SseConfig')
@@ -422,6 +434,7 @@ module Aws::Omics
     StartVariantImportResponse = Shapes::StructureShape.new(name: 'StartVariantImportResponse')
     StatusList = Shapes::ListShape.new(name: 'StatusList')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
+    StorageType = Shapes::StringShape.new(name: 'StorageType')
     StoreFormat = Shapes::StringShape.new(name: 'StoreFormat')
     StoreName = Shapes::StringShape.new(name: 'StoreName')
     StoreOptions = Shapes::UnionShape.new(name: 'StoreOptions')
@@ -437,6 +450,7 @@ module Aws::Omics
     TagResourceRequestTagsMap = Shapes::MapShape.new(name: 'TagResourceRequestTagsMap')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TaskFailureReason = Shapes::StringShape.new(name: 'TaskFailureReason')
     TaskId = Shapes::StringShape.new(name: 'TaskId')
     TaskInstanceType = Shapes::StringShape.new(name: 'TaskInstanceType')
     TaskList = Shapes::ListShape.new(name: 'TaskList')
@@ -456,6 +470,7 @@ module Aws::Omics
     TsvStoreOptionsSchemaList = Shapes::ListShape.new(name: 'TsvStoreOptionsSchemaList')
     TsvVersionOptions = Shapes::StructureShape.new(name: 'TsvVersionOptions')
     TsvVersionOptionsSchemaList = Shapes::ListShape.new(name: 'TsvVersionOptionsSchemaList')
+    TypeList = Shapes::ListShape.new(name: 'TypeList')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAnnotationStoreRequest = Shapes::StructureShape.new(name: 'UpdateAnnotationStoreRequest')
@@ -507,6 +522,7 @@ module Aws::Omics
     WorkflowMetadataKey = Shapes::StringShape.new(name: 'WorkflowMetadataKey')
     WorkflowMetadataValue = Shapes::StringShape.new(name: 'WorkflowMetadataValue')
     WorkflowName = Shapes::StringShape.new(name: 'WorkflowName')
+    WorkflowOwnerId = Shapes::StringShape.new(name: 'WorkflowOwnerId')
     WorkflowParameter = Shapes::StructureShape.new(name: 'WorkflowParameter')
     WorkflowParameterDescription = Shapes::StringShape.new(name: 'WorkflowParameterDescription')
     WorkflowParameterName = Shapes::StringShape.new(name: 'WorkflowParameterName')
@@ -646,7 +662,7 @@ module Aws::Omics
 
     CompleteReadSetUploadPartListItem.add_member(:part_number, Shapes::ShapeRef.new(shape: CompleteReadSetUploadPartListItemPartNumberInteger, required: true, location_name: "partNumber"))
     CompleteReadSetUploadPartListItem.add_member(:part_source, Shapes::ShapeRef.new(shape: ReadSetPartSource, required: true, location_name: "partSource"))
-    CompleteReadSetUploadPartListItem.add_member(:checksum, Shapes::ShapeRef.new(shape: String, required: true, location_name: "checksum"))
+    CompleteReadSetUploadPartListItem.add_member(:checksum, Shapes::ShapeRef.new(shape: CompleteReadSetUploadPartListItemChecksumString, required: true, location_name: "checksum"))
     CompleteReadSetUploadPartListItem.struct_class = Types::CompleteReadSetUploadPartListItem
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -694,7 +710,7 @@ module Aws::Omics
     CreateMultipartReadSetUploadRequest.add_member(:subject_id, Shapes::ShapeRef.new(shape: SubjectId, required: true, location_name: "subjectId"))
     CreateMultipartReadSetUploadRequest.add_member(:sample_id, Shapes::ShapeRef.new(shape: SampleId, required: true, location_name: "sampleId"))
     CreateMultipartReadSetUploadRequest.add_member(:generated_from, Shapes::ShapeRef.new(shape: GeneratedFrom, location_name: "generatedFrom"))
-    CreateMultipartReadSetUploadRequest.add_member(:reference_arn, Shapes::ShapeRef.new(shape: ReferenceArn, required: true, location_name: "referenceArn"))
+    CreateMultipartReadSetUploadRequest.add_member(:reference_arn, Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "referenceArn"))
     CreateMultipartReadSetUploadRequest.add_member(:name, Shapes::ShapeRef.new(shape: ReadSetName, required: true, location_name: "name"))
     CreateMultipartReadSetUploadRequest.add_member(:description, Shapes::ShapeRef.new(shape: ReadSetDescription, location_name: "description"))
     CreateMultipartReadSetUploadRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -748,6 +764,7 @@ module Aws::Omics
     CreateSequenceStoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateSequenceStoreRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken"))
     CreateSequenceStoreRequest.add_member(:fallback_location, Shapes::ShapeRef.new(shape: S3Destination, location_name: "fallbackLocation"))
+    CreateSequenceStoreRequest.add_member(:e_tag_algorithm_family, Shapes::ShapeRef.new(shape: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
     CreateSequenceStoreRequest.struct_class = Types::CreateSequenceStoreRequest
 
     CreateSequenceStoreResponse.add_member(:id, Shapes::ShapeRef.new(shape: SequenceStoreId, required: true, location_name: "id"))
@@ -757,6 +774,7 @@ module Aws::Omics
     CreateSequenceStoreResponse.add_member(:sse_config, Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
     CreateSequenceStoreResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "creationTime"))
     CreateSequenceStoreResponse.add_member(:fallback_location, Shapes::ShapeRef.new(shape: S3Destination, location_name: "fallbackLocation"))
+    CreateSequenceStoreResponse.add_member(:e_tag_algorithm_family, Shapes::ShapeRef.new(shape: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
     CreateSequenceStoreResponse.struct_class = Types::CreateSequenceStoreResponse
 
     CreateShareRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceArn"))
@@ -888,10 +906,12 @@ module Aws::Omics
     FileInformation.add_member(:total_parts, Shapes::ShapeRef.new(shape: FileInformationTotalPartsInteger, location_name: "totalParts"))
     FileInformation.add_member(:part_size, Shapes::ShapeRef.new(shape: FileInformationPartSizeLong, location_name: "partSize"))
     FileInformation.add_member(:content_length, Shapes::ShapeRef.new(shape: FileInformationContentLengthLong, location_name: "contentLength"))
+    FileInformation.add_member(:s3_access, Shapes::ShapeRef.new(shape: ReadSetS3Access, location_name: "s3Access"))
     FileInformation.struct_class = Types::FileInformation
 
     Filter.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ArnList, location_name: "resourceArns"))
     Filter.add_member(:status, Shapes::ShapeRef.new(shape: StatusList, location_name: "status"))
+    Filter.add_member(:type, Shapes::ShapeRef.new(shape: TypeList, location_name: "type"))
     Filter.struct_class = Types::Filter
 
     FormatOptions.add_member(:tsv_options, Shapes::ShapeRef.new(shape: TsvOptions, location_name: "tsvOptions"))
@@ -1132,6 +1152,12 @@ module Aws::Omics
     GetRunResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetRunResponse.add_member(:accelerators, Shapes::ShapeRef.new(shape: Accelerators, location_name: "accelerators"))
     GetRunResponse.add_member(:retention_mode, Shapes::ShapeRef.new(shape: RunRetentionMode, location_name: "retentionMode"))
+    GetRunResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: RunFailureReason, location_name: "failureReason"))
+    GetRunResponse.add_member(:log_location, Shapes::ShapeRef.new(shape: RunLogLocation, location_name: "logLocation"))
+    GetRunResponse.add_member(:uuid, Shapes::ShapeRef.new(shape: RunUuid, location_name: "uuid"))
+    GetRunResponse.add_member(:run_output_uri, Shapes::ShapeRef.new(shape: RunOutputUri, location_name: "runOutputUri"))
+    GetRunResponse.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
+    GetRunResponse.add_member(:workflow_owner_id, Shapes::ShapeRef.new(shape: WorkflowOwnerId, location_name: "workflowOwnerId"))
     GetRunResponse.struct_class = Types::GetRunResponse
 
     GetRunTaskRequest.add_member(:id, Shapes::ShapeRef.new(shape: RunId, required: true, location: "uri", location_name: "id"))
@@ -1150,6 +1176,7 @@ module Aws::Omics
     GetRunTaskResponse.add_member(:log_stream, Shapes::ShapeRef.new(shape: TaskLogStream, location_name: "logStream"))
     GetRunTaskResponse.add_member(:gpus, Shapes::ShapeRef.new(shape: GetRunTaskResponseGpusInteger, location_name: "gpus"))
     GetRunTaskResponse.add_member(:instance_type, Shapes::ShapeRef.new(shape: TaskInstanceType, location_name: "instanceType"))
+    GetRunTaskResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: TaskFailureReason, location_name: "failureReason"))
     GetRunTaskResponse.struct_class = Types::GetRunTaskResponse
 
     GetSequenceStoreRequest.add_member(:id, Shapes::ShapeRef.new(shape: SequenceStoreId, required: true, location: "uri", location_name: "id"))
@@ -1162,6 +1189,8 @@ module Aws::Omics
     GetSequenceStoreResponse.add_member(:sse_config, Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
     GetSequenceStoreResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "creationTime"))
     GetSequenceStoreResponse.add_member(:fallback_location, Shapes::ShapeRef.new(shape: S3Destination, location_name: "fallbackLocation"))
+    GetSequenceStoreResponse.add_member(:s3_access, Shapes::ShapeRef.new(shape: SequenceStoreS3Access, location_name: "s3Access"))
+    GetSequenceStoreResponse.add_member(:e_tag_algorithm_family, Shapes::ShapeRef.new(shape: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
     GetSequenceStoreResponse.struct_class = Types::GetSequenceStoreResponse
 
     GetShareRequest.add_member(:share_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "shareId"))
@@ -1206,6 +1235,7 @@ module Aws::Omics
     GetWorkflowRequest.add_member(:id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location: "uri", location_name: "id"))
     GetWorkflowRequest.add_member(:type, Shapes::ShapeRef.new(shape: WorkflowType, location: "querystring", location_name: "type"))
     GetWorkflowRequest.add_member(:export, Shapes::ShapeRef.new(shape: WorkflowExportList, location: "querystring", location_name: "export"))
+    GetWorkflowRequest.add_member(:workflow_owner_id, Shapes::ShapeRef.new(shape: WorkflowOwnerId, location: "querystring", location_name: "workflowOwnerId"))
     GetWorkflowRequest.struct_class = Types::GetWorkflowRequest
 
     GetWorkflowResponse.add_member(:arn, Shapes::ShapeRef.new(shape: WorkflowArn, location_name: "arn"))
@@ -1561,7 +1591,7 @@ module Aws::Omics
 
     ReadSetFilter.add_member(:name, Shapes::ShapeRef.new(shape: ReadSetName, location_name: "name"))
     ReadSetFilter.add_member(:status, Shapes::ShapeRef.new(shape: ReadSetStatus, location_name: "status"))
-    ReadSetFilter.add_member(:reference_arn, Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "referenceArn"))
+    ReadSetFilter.add_member(:reference_arn, Shapes::ShapeRef.new(shape: ReferenceArnFilter, location_name: "referenceArn"))
     ReadSetFilter.add_member(:created_after, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAfter"))
     ReadSetFilter.add_member(:created_before, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdBefore"))
     ReadSetFilter.add_member(:sample_id, Shapes::ShapeRef.new(shape: SampleId, location_name: "sampleId"))
@@ -1590,6 +1620,9 @@ module Aws::Omics
     ReadSetListItem.add_member(:creation_type, Shapes::ShapeRef.new(shape: CreationType, location_name: "creationType"))
     ReadSetListItem.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "etag"))
     ReadSetListItem.struct_class = Types::ReadSetListItem
+
+    ReadSetS3Access.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "s3Uri"))
+    ReadSetS3Access.struct_class = Types::ReadSetS3Access
 
     ReadSetUploadPartList.member = Shapes::ShapeRef.new(shape: ReadSetUploadPartListItem)
 
@@ -1681,7 +1714,12 @@ module Aws::Omics
     RunListItem.add_member(:creation_time, Shapes::ShapeRef.new(shape: RunTimestamp, location_name: "creationTime"))
     RunListItem.add_member(:start_time, Shapes::ShapeRef.new(shape: RunTimestamp, location_name: "startTime"))
     RunListItem.add_member(:stop_time, Shapes::ShapeRef.new(shape: RunTimestamp, location_name: "stopTime"))
+    RunListItem.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
     RunListItem.struct_class = Types::RunListItem
+
+    RunLogLocation.add_member(:engine_log_stream, Shapes::ShapeRef.new(shape: EngineLogStream, location_name: "engineLogStream"))
+    RunLogLocation.add_member(:run_log_stream, Shapes::ShapeRef.new(shape: RunLogStream, location_name: "runLogStream"))
+    RunLogLocation.struct_class = Types::RunLogLocation
 
     RunResourceDigests.key = Shapes::ShapeRef.new(shape: RunResourceDigestKey)
     RunResourceDigests.value = Shapes::ShapeRef.new(shape: RunResourceDigest)
@@ -1702,6 +1740,7 @@ module Aws::Omics
     SequenceStoreDetail.add_member(:sse_config, Shapes::ShapeRef.new(shape: SseConfig, location_name: "sseConfig"))
     SequenceStoreDetail.add_member(:creation_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "creationTime"))
     SequenceStoreDetail.add_member(:fallback_location, Shapes::ShapeRef.new(shape: S3Destination, location_name: "fallbackLocation"))
+    SequenceStoreDetail.add_member(:e_tag_algorithm_family, Shapes::ShapeRef.new(shape: ETagAlgorithmFamily, location_name: "eTagAlgorithmFamily"))
     SequenceStoreDetail.struct_class = Types::SequenceStoreDetail
 
     SequenceStoreDetailList.member = Shapes::ShapeRef.new(shape: SequenceStoreDetail)
@@ -1711,11 +1750,16 @@ module Aws::Omics
     SequenceStoreFilter.add_member(:created_before, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdBefore"))
     SequenceStoreFilter.struct_class = Types::SequenceStoreFilter
 
+    SequenceStoreS3Access.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "s3Uri"))
+    SequenceStoreS3Access.add_member(:s3_access_point_arn, Shapes::ShapeRef.new(shape: S3AccessPointArn, location_name: "s3AccessPointArn"))
+    SequenceStoreS3Access.struct_class = Types::SequenceStoreS3Access
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
     ShareDetails.add_member(:share_id, Shapes::ShapeRef.new(shape: String, location_name: "shareId"))
     ShareDetails.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceArn"))
+    ShareDetails.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
     ShareDetails.add_member(:principal_subscriber, Shapes::ShapeRef.new(shape: String, location_name: "principalSubscriber"))
     ShareDetails.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     ShareDetails.add_member(:status, Shapes::ShapeRef.new(shape: ShareStatus, location_name: "status"))
@@ -1799,7 +1843,7 @@ module Aws::Omics
     StartReadSetImportJobSourceItem.add_member(:subject_id, Shapes::ShapeRef.new(shape: SubjectId, required: true, location_name: "subjectId"))
     StartReadSetImportJobSourceItem.add_member(:sample_id, Shapes::ShapeRef.new(shape: SampleId, required: true, location_name: "sampleId"))
     StartReadSetImportJobSourceItem.add_member(:generated_from, Shapes::ShapeRef.new(shape: GeneratedFrom, location_name: "generatedFrom"))
-    StartReadSetImportJobSourceItem.add_member(:reference_arn, Shapes::ShapeRef.new(shape: ReferenceArn, required: true, location_name: "referenceArn"))
+    StartReadSetImportJobSourceItem.add_member(:reference_arn, Shapes::ShapeRef.new(shape: ReferenceArn, location_name: "referenceArn"))
     StartReadSetImportJobSourceItem.add_member(:name, Shapes::ShapeRef.new(shape: ReadSetName, location_name: "name"))
     StartReadSetImportJobSourceItem.add_member(:description, Shapes::ShapeRef.new(shape: ReadSetDescription, location_name: "description"))
     StartReadSetImportJobSourceItem.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
@@ -1840,12 +1884,16 @@ module Aws::Omics
     StartRunRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     StartRunRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: RunRequestId, required: true, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     StartRunRequest.add_member(:retention_mode, Shapes::ShapeRef.new(shape: RunRetentionMode, location_name: "retentionMode"))
+    StartRunRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: StorageType, location_name: "storageType"))
+    StartRunRequest.add_member(:workflow_owner_id, Shapes::ShapeRef.new(shape: WorkflowOwnerId, location_name: "workflowOwnerId"))
     StartRunRequest.struct_class = Types::StartRunRequest
 
     StartRunResponse.add_member(:arn, Shapes::ShapeRef.new(shape: RunArn, location_name: "arn"))
     StartRunResponse.add_member(:id, Shapes::ShapeRef.new(shape: RunId, location_name: "id"))
     StartRunResponse.add_member(:status, Shapes::ShapeRef.new(shape: RunStatus, location_name: "status"))
     StartRunResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    StartRunResponse.add_member(:uuid, Shapes::ShapeRef.new(shape: RunUuid, location_name: "uuid"))
+    StartRunResponse.add_member(:run_output_uri, Shapes::ShapeRef.new(shape: RunOutputUri, location_name: "runOutputUri"))
     StartRunResponse.struct_class = Types::StartRunResponse
 
     StartVariantImportRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: StoreName, required: true, location_name: "destinationName"))
@@ -1913,6 +1961,8 @@ module Aws::Omics
     TsvVersionOptions.struct_class = Types::TsvVersionOptions
 
     TsvVersionOptionsSchemaList.member = Shapes::ShapeRef.new(shape: SchemaItem)
+
+    TypeList.member = Shapes::ShapeRef.new(shape: ShareResourceType)
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: TagArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))

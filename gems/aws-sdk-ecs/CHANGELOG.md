@@ -1,6 +1,96 @@
 Unreleased Changes
 ------------------
 
+1.148.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.147.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.146.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.145.0 (2024-04-02)
+------------------
+
+* Feature - Documentation only update for Amazon ECS.
+
+1.144.0 (2024-03-26)
+------------------
+
+* Feature - This is a documentation update for Amazon ECS.
+
+1.143.0 (2024-03-25)
+------------------
+
+* Feature - Documentation only update for Amazon ECS.
+
+1.142.0 (2024-02-09)
+------------------
+
+* Feature - Documentation only update for Amazon ECS.
+
+1.141.0 (2024-02-06)
+------------------
+
+* Feature - This release is a documentation only update to address customer issues.
+
+1.140.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.139.0 (2024-01-24)
+------------------
+
+* Feature - Documentation updates for Amazon ECS.
+
+1.138.0 (2024-01-22)
+------------------
+
+* Feature - This release adds support for Transport Layer Security (TLS) and Configurable Timeout to ECS Service Connect. TLS facilitates privacy and data security for inter-service communications, while Configurable Timeout allows customized per-request timeout and idle timeout for Service Connect services.
+
+1.137.0 (2024-01-11)
+------------------
+
+* Feature - This release adds support for adding an ElasticBlockStorage volume configurations in ECS RunTask/StartTask/CreateService/UpdateService APIs. The configuration allows for attaching EBS volumes to ECS Tasks.
+
+1.136.0 (2024-01-04)
+------------------
+
+* Feature - This release adds support for managed instance draining which facilitates graceful termination of Amazon ECS instances.
+
+1.135.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.134.0 (2023-11-27)
+------------------
+
+* Feature - Adds a new 'type' property to the Setting structure. Adds a new AccountSetting - guardDutyActivate for ECS.
+
+1.133.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.132.0 (2023-11-13)
+------------------
+
+* Feature - Adds a Client Token parameter to the ECS RunTask API. The Client Token parameter allows for idempotent RunTask requests.
+
+1.131.0 (2023-10-17)
+------------------
+
+* Feature - Documentation only updates to address Amazon ECS tickets.
+
 1.130.0 (2023-09-27)
 ------------------
 

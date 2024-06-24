@@ -216,6 +216,11 @@ module Aws::WAFV2
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def source_type
+        @data[:source_type]
+      end
     end
 
     class WAFLogDestinationPermissionIssueException < ServiceError

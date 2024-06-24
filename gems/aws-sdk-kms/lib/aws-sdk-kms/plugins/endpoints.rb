@@ -14,6 +14,7 @@ module Aws::KMS
       option(
         :endpoint_provider,
         doc_type: 'Aws::KMS::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::KMS
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -76,6 +78,8 @@ module Aws::KMS
             Aws::KMS::Endpoints::DeleteCustomKeyStore.build(context)
           when :delete_imported_key_material
             Aws::KMS::Endpoints::DeleteImportedKeyMaterial.build(context)
+          when :derive_shared_secret
+            Aws::KMS::Endpoints::DeriveSharedSecret.build(context)
           when :describe_custom_key_stores
             Aws::KMS::Endpoints::DescribeCustomKeyStores.build(context)
           when :describe_key
@@ -120,6 +124,8 @@ module Aws::KMS
             Aws::KMS::Endpoints::ListGrants.build(context)
           when :list_key_policies
             Aws::KMS::Endpoints::ListKeyPolicies.build(context)
+          when :list_key_rotations
+            Aws::KMS::Endpoints::ListKeyRotations.build(context)
           when :list_keys
             Aws::KMS::Endpoints::ListKeys.build(context)
           when :list_resource_tags
@@ -136,6 +142,8 @@ module Aws::KMS
             Aws::KMS::Endpoints::RetireGrant.build(context)
           when :revoke_grant
             Aws::KMS::Endpoints::RevokeGrant.build(context)
+          when :rotate_key_on_demand
+            Aws::KMS::Endpoints::RotateKeyOnDemand.build(context)
           when :schedule_key_deletion
             Aws::KMS::Endpoints::ScheduleKeyDeletion.build(context)
           when :sign

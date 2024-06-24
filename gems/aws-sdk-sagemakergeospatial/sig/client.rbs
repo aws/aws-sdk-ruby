@@ -1,0 +1,577 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SageMakerGeospatial
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _DeleteEarthObservationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEarthObservationJobOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#delete_earth_observation_job-instance_method
+      def delete_earth_observation_job: (
+                                          arn: ::String
+                                        ) -> _DeleteEarthObservationJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEarthObservationJobResponseSuccess
+
+      interface _DeleteVectorEnrichmentJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVectorEnrichmentJobOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#delete_vector_enrichment_job-instance_method
+      def delete_vector_enrichment_job: (
+                                          arn: ::String
+                                        ) -> _DeleteVectorEnrichmentJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVectorEnrichmentJobResponseSuccess
+
+      interface _ExportEarthObservationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportEarthObservationJobOutput]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def execution_role_arn: () -> ::String
+        def export_source_images: () -> bool
+        def export_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def output_config: () -> Types::OutputConfigInput
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#export_earth_observation_job-instance_method
+      def export_earth_observation_job: (
+                                          arn: ::String,
+                                          ?client_token: ::String,
+                                          execution_role_arn: ::String,
+                                          ?export_source_images: bool,
+                                          output_config: {
+                                            s3_data: {
+                                              kms_key_id: ::String?,
+                                              s3_uri: ::String
+                                            }
+                                          }
+                                        ) -> _ExportEarthObservationJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportEarthObservationJobResponseSuccess
+
+      interface _ExportVectorEnrichmentJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportVectorEnrichmentJobOutput]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def execution_role_arn: () -> ::String
+        def export_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def output_config: () -> Types::ExportVectorEnrichmentJobOutputConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#export_vector_enrichment_job-instance_method
+      def export_vector_enrichment_job: (
+                                          arn: ::String,
+                                          ?client_token: ::String,
+                                          execution_role_arn: ::String,
+                                          output_config: {
+                                            s3_data: {
+                                              kms_key_id: ::String?,
+                                              s3_uri: ::String
+                                            }
+                                          }
+                                        ) -> _ExportVectorEnrichmentJobResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportVectorEnrichmentJobResponseSuccess
+
+      interface _GetEarthObservationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEarthObservationJobOutput]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def duration_in_seconds: () -> ::Integer
+        def error_details: () -> Types::EarthObservationJobErrorDetails
+        def execution_role_arn: () -> ::String
+        def export_error_details: () -> Types::ExportErrorDetails
+        def export_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def input_config: () -> Types::InputConfigOutput
+        def job_config: () -> Types::JobConfigInput
+        def kms_key_id: () -> ::String
+        def name: () -> ::String
+        def output_bands: () -> ::Array[Types::OutputBand]
+        def status: () -> ("INITIALIZING" | "IN_PROGRESS" | "STOPPING" | "COMPLETED" | "STOPPED" | "FAILED" | "DELETING" | "DELETED")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#get_earth_observation_job-instance_method
+      def get_earth_observation_job: (
+                                       arn: ::String
+                                     ) -> _GetEarthObservationJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEarthObservationJobResponseSuccess
+
+      interface _GetRasterDataCollectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRasterDataCollectionOutput]
+        def arn: () -> ::String
+        def description: () -> ::String
+        def description_page_url: () -> ::String
+        def image_source_bands: () -> ::Array[::String]
+        def name: () -> ::String
+        def supported_filters: () -> ::Array[Types::Filter]
+        def tags: () -> ::Hash[::String, ::String]
+        def type: () -> ("PUBLIC" | "PREMIUM" | "USER")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#get_raster_data_collection-instance_method
+      def get_raster_data_collection: (
+                                        arn: ::String
+                                      ) -> _GetRasterDataCollectionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRasterDataCollectionResponseSuccess
+
+      interface _GetTileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTileOutput]
+        def binary_file: () -> ::IO
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#get_tile-instance_method
+      def get_tile: (
+                      arn: ::String,
+                      ?execution_role_arn: ::String,
+                      image_assets: Array[::String],
+                      ?image_mask: bool,
+                      ?output_data_type: ("INT32" | "FLOAT32" | "INT16" | "FLOAT64" | "UINT16"),
+                      ?output_format: ::String,
+                      ?property_filters: ::String,
+                      target: ("INPUT" | "OUTPUT"),
+                      ?time_range_filter: ::String,
+                      x: ::Integer,
+                      y: ::Integer,
+                      z: ::Integer
+                    ) ?{ (*untyped) -> void } -> _GetTileResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetTileResponseSuccess
+
+      interface _GetVectorEnrichmentJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVectorEnrichmentJobOutput]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def duration_in_seconds: () -> ::Integer
+        def error_details: () -> Types::VectorEnrichmentJobErrorDetails
+        def execution_role_arn: () -> ::String
+        def export_error_details: () -> Types::VectorEnrichmentJobExportErrorDetails
+        def export_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def input_config: () -> Types::VectorEnrichmentJobInputConfig
+        def job_config: () -> Types::VectorEnrichmentJobConfig
+        def kms_key_id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("INITIALIZING" | "IN_PROGRESS" | "STOPPING" | "STOPPED" | "COMPLETED" | "FAILED" | "DELETING" | "DELETED")
+        def tags: () -> ::Hash[::String, ::String]
+        def type: () -> ("REVERSE_GEOCODING" | "MAP_MATCHING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#get_vector_enrichment_job-instance_method
+      def get_vector_enrichment_job: (
+                                       arn: ::String
+                                     ) -> _GetVectorEnrichmentJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVectorEnrichmentJobResponseSuccess
+
+      interface _ListEarthObservationJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEarthObservationJobOutput]
+        def earth_observation_job_summaries: () -> ::Array[Types::ListEarthObservationJobOutputConfig]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#list_earth_observation_jobs-instance_method
+      def list_earth_observation_jobs: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String,
+                                         ?sort_by: ::String,
+                                         ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                         ?status_equals: ("INITIALIZING" | "IN_PROGRESS" | "STOPPING" | "COMPLETED" | "STOPPED" | "FAILED" | "DELETING" | "DELETED")
+                                       ) -> _ListEarthObservationJobsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEarthObservationJobsResponseSuccess
+
+      interface _ListRasterDataCollectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRasterDataCollectionsOutput]
+        def next_token: () -> ::String
+        def raster_data_collection_summaries: () -> ::Array[Types::RasterDataCollectionMetadata]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#list_raster_data_collections-instance_method
+      def list_raster_data_collections: (
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListRasterDataCollectionsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRasterDataCollectionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListVectorEnrichmentJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVectorEnrichmentJobOutput]
+        def next_token: () -> ::String
+        def vector_enrichment_job_summaries: () -> ::Array[Types::ListVectorEnrichmentJobOutputConfig]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#list_vector_enrichment_jobs-instance_method
+      def list_vector_enrichment_jobs: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String,
+                                         ?sort_by: ::String,
+                                         ?sort_order: ("ASCENDING" | "DESCENDING"),
+                                         ?status_equals: ::String
+                                       ) -> _ListVectorEnrichmentJobsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVectorEnrichmentJobsResponseSuccess
+
+      interface _SearchRasterDataCollectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchRasterDataCollectionOutput]
+        def approximate_result_count: () -> ::Integer
+        def items: () -> ::Array[Types::ItemSource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#search_raster_data_collection-instance_method
+      def search_raster_data_collection: (
+                                           arn: ::String,
+                                           ?next_token: ::String,
+                                           raster_data_collection_query: {
+                                             area_of_interest: {
+                                               area_of_interest_geometry: {
+                                                 multi_polygon_geometry: {
+                                                   coordinates: Array[
+                                                     Array[
+                                                       Array[
+                                                         Array[::Float],
+                                                       ],
+                                                     ],
+                                                   ]
+                                                 }?,
+                                                 polygon_geometry: {
+                                                   coordinates: Array[
+                                                     Array[
+                                                       Array[::Float],
+                                                     ],
+                                                   ]
+                                                 }?
+                                               }?
+                                             }?,
+                                             band_filter: Array[::String]?,
+                                             property_filters: {
+                                               logical_operator: ("AND")?,
+                                               properties: Array[
+                                                 {
+                                                   property: {
+                                                     eo_cloud_cover: {
+                                                       lower_bound: ::Float,
+                                                       upper_bound: ::Float
+                                                     }?,
+                                                     landsat_cloud_cover_land: {
+                                                       lower_bound: ::Float,
+                                                       upper_bound: ::Float
+                                                     }?,
+                                                     platform: {
+                                                       comparison_operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH")?,
+                                                       value: ::String
+                                                     }?,
+                                                     view_off_nadir: {
+                                                       lower_bound: ::Float,
+                                                       upper_bound: ::Float
+                                                     }?,
+                                                     view_sun_azimuth: {
+                                                       lower_bound: ::Float,
+                                                       upper_bound: ::Float
+                                                     }?,
+                                                     view_sun_elevation: {
+                                                       lower_bound: ::Float,
+                                                       upper_bound: ::Float
+                                                     }?
+                                                   }
+                                                 },
+                                               ]?
+                                             }?,
+                                             time_range_filter: {
+                                               end_time: ::Time,
+                                               start_time: ::Time
+                                             }
+                                           }
+                                         ) -> _SearchRasterDataCollectionResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchRasterDataCollectionResponseSuccess
+
+      interface _StartEarthObservationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartEarthObservationJobOutput]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def duration_in_seconds: () -> ::Integer
+        def execution_role_arn: () -> ::String
+        def input_config: () -> Types::InputConfigOutput
+        def job_config: () -> Types::JobConfigInput
+        def kms_key_id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("INITIALIZING" | "IN_PROGRESS" | "STOPPING" | "COMPLETED" | "STOPPED" | "FAILED" | "DELETING" | "DELETED")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#start_earth_observation_job-instance_method
+      def start_earth_observation_job: (
+                                         ?client_token: ::String,
+                                         execution_role_arn: ::String,
+                                         input_config: {
+                                           previous_earth_observation_job_arn: ::String?,
+                                           raster_data_collection_query: {
+                                             area_of_interest: {
+                                               area_of_interest_geometry: {
+                                                 multi_polygon_geometry: {
+                                                   coordinates: Array[
+                                                     Array[
+                                                       Array[
+                                                         Array[::Float],
+                                                       ],
+                                                     ],
+                                                   ]
+                                                 }?,
+                                                 polygon_geometry: {
+                                                   coordinates: Array[
+                                                     Array[
+                                                       Array[::Float],
+                                                     ],
+                                                   ]
+                                                 }?
+                                               }?
+                                             }?,
+                                             property_filters: {
+                                               logical_operator: ("AND")?,
+                                               properties: Array[
+                                                 {
+                                                   property: {
+                                                     eo_cloud_cover: {
+                                                       lower_bound: ::Float,
+                                                       upper_bound: ::Float
+                                                     }?,
+                                                     landsat_cloud_cover_land: {
+                                                       lower_bound: ::Float,
+                                                       upper_bound: ::Float
+                                                     }?,
+                                                     platform: {
+                                                       comparison_operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH")?,
+                                                       value: ::String
+                                                     }?,
+                                                     view_off_nadir: {
+                                                       lower_bound: ::Float,
+                                                       upper_bound: ::Float
+                                                     }?,
+                                                     view_sun_azimuth: {
+                                                       lower_bound: ::Float,
+                                                       upper_bound: ::Float
+                                                     }?,
+                                                     view_sun_elevation: {
+                                                       lower_bound: ::Float,
+                                                       upper_bound: ::Float
+                                                     }?
+                                                   }
+                                                 },
+                                               ]?
+                                             }?,
+                                             raster_data_collection_arn: ::String,
+                                             time_range_filter: {
+                                               end_time: ::Time,
+                                               start_time: ::Time
+                                             }
+                                           }?
+                                         },
+                                         job_config: {
+                                           band_math_config: {
+                                             custom_indices: {
+                                               operations: Array[
+                                                 {
+                                                   equation: ::String,
+                                                   name: ::String,
+                                                   output_type: ("INT32" | "FLOAT32" | "INT16" | "FLOAT64" | "UINT16")?
+                                                 },
+                                               ]?
+                                             }?,
+                                             predefined_indices: Array[::String]?
+                                           }?,
+                                           cloud_masking_config: {
+                                           }?,
+                                           cloud_removal_config: {
+                                             algorithm_name: ("INTERPOLATION")?,
+                                             interpolation_value: ::String?,
+                                             target_bands: Array[::String]?
+                                           }?,
+                                           geo_mosaic_config: {
+                                             algorithm_name: ("NEAR" | "BILINEAR" | "CUBIC" | "CUBICSPLINE" | "LANCZOS" | "AVERAGE" | "RMS" | "MODE" | "MAX" | "MIN" | "MED" | "Q1" | "Q3" | "SUM")?,
+                                             target_bands: Array[::String]?
+                                           }?,
+                                           land_cover_segmentation_config: {
+                                           }?,
+                                           resampling_config: {
+                                             algorithm_name: ("NEAR" | "BILINEAR" | "CUBIC" | "CUBICSPLINE" | "LANCZOS" | "AVERAGE" | "RMS" | "MODE" | "MAX" | "MIN" | "MED" | "Q1" | "Q3" | "SUM")?,
+                                             output_resolution: {
+                                               user_defined: {
+                                                 unit: ("METERS"),
+                                                 value: ::Float
+                                               }
+                                             },
+                                             target_bands: Array[::String]?
+                                           }?,
+                                           stack_config: {
+                                             output_resolution: {
+                                               predefined: ("HIGHEST" | "LOWEST" | "AVERAGE")?,
+                                               user_defined: {
+                                                 unit: ("METERS"),
+                                                 value: ::Float
+                                               }?
+                                             }?,
+                                             target_bands: Array[::String]?
+                                           }?,
+                                           temporal_statistics_config: {
+                                             group_by: ("ALL" | "YEARLY")?,
+                                             statistics: Array[("MEAN" | "MEDIAN" | "STANDARD_DEVIATION")],
+                                             target_bands: Array[::String]?
+                                           }?,
+                                           zonal_statistics_config: {
+                                             statistics: Array[("MEAN" | "MEDIAN" | "STANDARD_DEVIATION" | "MAX" | "MIN" | "SUM")],
+                                             target_bands: Array[::String]?,
+                                             zone_s3_path: ::String,
+                                             zone_s3_path_kms_key_id: ::String?
+                                           }?
+                                         },
+                                         ?kms_key_id: ::String,
+                                         name: ::String,
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _StartEarthObservationJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartEarthObservationJobResponseSuccess
+
+      interface _StartVectorEnrichmentJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartVectorEnrichmentJobOutput]
+        def arn: () -> ::String
+        def creation_time: () -> ::Time
+        def duration_in_seconds: () -> ::Integer
+        def execution_role_arn: () -> ::String
+        def input_config: () -> Types::VectorEnrichmentJobInputConfig
+        def job_config: () -> Types::VectorEnrichmentJobConfig
+        def kms_key_id: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("INITIALIZING" | "IN_PROGRESS" | "STOPPING" | "STOPPED" | "COMPLETED" | "FAILED" | "DELETING" | "DELETED")
+        def tags: () -> ::Hash[::String, ::String]
+        def type: () -> ("REVERSE_GEOCODING" | "MAP_MATCHING")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#start_vector_enrichment_job-instance_method
+      def start_vector_enrichment_job: (
+                                         ?client_token: ::String,
+                                         execution_role_arn: ::String,
+                                         input_config: {
+                                           data_source_config: {
+                                             s3_data: {
+                                               kms_key_id: ::String?,
+                                               s3_uri: ::String
+                                             }?
+                                           },
+                                           document_type: ("CSV")
+                                         },
+                                         job_config: {
+                                           map_matching_config: {
+                                             id_attribute_name: ::String,
+                                             timestamp_attribute_name: ::String,
+                                             x_attribute_name: ::String,
+                                             y_attribute_name: ::String
+                                           }?,
+                                           reverse_geocoding_config: {
+                                             x_attribute_name: ::String,
+                                             y_attribute_name: ::String
+                                           }?
+                                         },
+                                         ?kms_key_id: ::String,
+                                         name: ::String,
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _StartVectorEnrichmentJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartVectorEnrichmentJobResponseSuccess
+
+      interface _StopEarthObservationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopEarthObservationJobOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#stop_earth_observation_job-instance_method
+      def stop_earth_observation_job: (
+                                        arn: ::String
+                                      ) -> _StopEarthObservationJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopEarthObservationJobResponseSuccess
+
+      interface _StopVectorEnrichmentJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopVectorEnrichmentJobOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#stop_vector_enrichment_job-instance_method
+      def stop_vector_enrichment_job: (
+                                        arn: ::String
+                                      ) -> _StopVectorEnrichmentJobResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopVectorEnrichmentJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerGeospatial/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+    end
+  end
+end
+

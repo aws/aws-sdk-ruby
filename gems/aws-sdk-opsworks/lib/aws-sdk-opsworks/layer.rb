@@ -58,7 +58,7 @@ module Aws::OpsWorks
       data[:type]
     end
 
-    # The layer name.
+    # The layer name. Layer names can be a maximum of 32 characters.
     # @return [String]
     def name
       data[:name]
@@ -73,10 +73,10 @@ module Aws::OpsWorks
     # The layer attributes.
     #
     # For the `HaproxyStatsPassword`, `MysqlRootPassword`, and
-    # `GangliaPassword` attributes, AWS OpsWorks Stacks returns
+    # `GangliaPassword` attributes, OpsWorks Stacks returns
     # `*****FILTERED*****` instead of the actual value
     #
-    # For an ECS Cluster layer, AWS OpsWorks Stacks the `EcsClusterArn`
+    # For an ECS Cluster layer, OpsWorks Stacks the `EcsClusterArn`
     # attribute is set to the cluster's ARN.
     # @return [Hash<String,String>]
     def attributes
@@ -164,14 +164,13 @@ module Aws::OpsWorks
       data[:auto_assign_public_ips]
     end
 
-    # AWS OpsWorks Stacks supports five lifecycle events: **setup**,
+    # OpsWorks Stacks supports five lifecycle events: **setup**,
     # **configuration**, **deploy**, **undeploy**, and **shutdown**. For
-    # each layer, AWS OpsWorks Stacks runs a set of standard recipes for
-    # each event. You can also provide custom recipes for any or all layers
-    # and events. AWS OpsWorks Stacks runs custom event recipes after the
-    # standard recipes. `LayerCustomRecipes` specifies the custom recipes
-    # for a particular layer to be run in response to each of the five
-    # events.
+    # each layer, OpsWorks Stacks runs a set of standard recipes for each
+    # event. You can also provide custom recipes for any or all layers and
+    # events. OpsWorks Stacks runs custom event recipes after the standard
+    # recipes. `LayerCustomRecipes` specifies the custom recipes for a
+    # particular layer to be run in response to each of the five events.
     #
     # To specify a recipe, use the cookbook's directory name in the
     # repository followed by two colons and the recipe name, which is the
@@ -239,7 +238,7 @@ module Aws::OpsWorks
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_layers(layer_ids: [@id])
       end
       @data = resp.layers[0]
@@ -356,7 +355,7 @@ module Aws::OpsWorks
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -370,7 +369,7 @@ module Aws::OpsWorks
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(layer_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_layer(options)
       end
       resp.data

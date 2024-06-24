@@ -14,6 +14,7 @@ module Aws::SSM
       option(
         :endpoint_provider,
         doc_type: 'Aws::SSM::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::SSM
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -92,6 +94,8 @@ module Aws::SSM
             Aws::SSM::Endpoints::DeleteInventory.build(context)
           when :delete_maintenance_window
             Aws::SSM::Endpoints::DeleteMaintenanceWindow.build(context)
+          when :delete_ops_item
+            Aws::SSM::Endpoints::DeleteOpsItem.build(context)
           when :delete_ops_metadata
             Aws::SSM::Endpoints::DeleteOpsMetadata.build(context)
           when :delete_parameter
@@ -144,6 +148,8 @@ module Aws::SSM
             Aws::SSM::Endpoints::DescribeInstancePatchStatesForPatchGroup.build(context)
           when :describe_instance_patches
             Aws::SSM::Endpoints::DescribeInstancePatches.build(context)
+          when :describe_instance_properties
+            Aws::SSM::Endpoints::DescribeInstanceProperties.build(context)
           when :describe_inventory_deletions
             Aws::SSM::Endpoints::DescribeInventoryDeletions.build(context)
           when :describe_maintenance_window_execution_task_invocations

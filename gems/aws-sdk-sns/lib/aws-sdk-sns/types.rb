@@ -123,7 +123,7 @@ module Aws::SNS
     #
     class CheckIfPhoneNumberIsOptedOutInput < Struct.new(
       :phone_number)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -232,7 +232,8 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   For a list of attributes, see [SetPlatformApplicationAttributes][1].
+    #   For a list of attributes, see [ `SetPlatformApplicationAttributes`
+    #   ][1].
     #
     #
     #
@@ -252,7 +253,7 @@ module Aws::SNS
     # Response from CreatePlatformApplication action.
     #
     # @!attribute [rw] platform_application_arn
-    #   PlatformApplicationArn is returned.
+    #   `PlatformApplicationArn` is returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplicationResponse AWS API Documentation
@@ -266,7 +267,7 @@ module Aws::SNS
     # Input for CreatePlatformEndpoint action.
     #
     # @!attribute [rw] platform_application_arn
-    #   PlatformApplicationArn returned from CreatePlatformApplication is
+    #   `PlatformApplicationArn` returned from CreatePlatformApplication is
     #   used to create a an endpoint.
     #   @return [String]
     #
@@ -286,7 +287,7 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   For a list of attributes, see [SetEndpointAttributes][1].
+    #   For a list of attributes, see [ `SetEndpointAttributes` ][1].
     #
     #
     #
@@ -320,7 +321,7 @@ module Aws::SNS
     class CreateSMSSandboxPhoneNumberInput < Struct.new(
       :phone_number,
       :language_code)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -344,8 +345,8 @@ module Aws::SNS
     # @!attribute [rw] attributes
     #   A map of attributes with their corresponding values.
     #
-    #   The following lists the names, descriptions, and values of the
-    #   special request parameters that the `CreateTopic` action uses:
+    #   The following lists names, descriptions, and values of the special
+    #   request parameters that the `CreateTopic` action uses:
     #
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
     #     failed deliveries to HTTP/S endpoints.
@@ -384,7 +385,13 @@ module Aws::SNS
     #
     #   The following attributes apply only to [FIFO topics][4]:
     #
-    #   * `FifoTopic` – When this is set to `true`, a FIFO topic is created.
+    #   * `ArchivePolicy` – Adds or updates an inline policy document to
+    #     archive messages stored in the specified Amazon SNS topic.
+    #
+    #   * `BeginningArchiveTime` – The earliest starting point at which a
+    #     message in the topic’s archive can be replayed from. This point in
+    #     time is based on the configured message retention period set by
+    #     the topic’s message archiving policy.
     #
     #   * `ContentBasedDeduplication` – Enables content-based deduplication
     #     for FIFO topics.
@@ -456,10 +463,10 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Input for DeleteEndpoint action.
+    # Input for `DeleteEndpoint` action.
     #
     # @!attribute [rw] endpoint_arn
-    #   EndpointArn of endpoint to delete.
+    #   `EndpointArn` of endpoint to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteEndpointInput AWS API Documentation
@@ -470,10 +477,10 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Input for DeletePlatformApplication action.
+    # Input for `DeletePlatformApplication` action.
     #
     # @!attribute [rw] platform_application_arn
-    #   PlatformApplicationArn of platform application object to delete.
+    #   `PlatformApplicationArn` of platform application object to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeletePlatformApplicationInput AWS API Documentation
@@ -492,7 +499,7 @@ module Aws::SNS
     #
     class DeleteSMSSandboxPhoneNumberInput < Struct.new(
       :phone_number)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -605,10 +612,10 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Input for GetEndpointAttributes action.
+    # Input for `GetEndpointAttributes` action.
     #
     # @!attribute [rw] endpoint_arn
-    #   EndpointArn for GetEndpointAttributes input.
+    #   `EndpointArn` for `GetEndpointAttributes` input.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetEndpointAttributesInput AWS API Documentation
@@ -619,7 +626,7 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Response from GetEndpointAttributes of the EndpointArn.
+    # Response from `GetEndpointAttributes` of the `EndpointArn`.
     #
     # @!attribute [rw] attributes
     #   Attributes include the following:
@@ -651,10 +658,10 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Input for GetPlatformApplicationAttributes action.
+    # Input for `GetPlatformApplicationAttributes` action.
     #
     # @!attribute [rw] platform_application_arn
-    #   PlatformApplicationArn for GetPlatformApplicationAttributesInput.
+    #   `PlatformApplicationArn` for GetPlatformApplicationAttributesInput.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetPlatformApplicationAttributesInput AWS API Documentation
@@ -665,7 +672,7 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Response for GetPlatformApplicationAttributes action.
+    # Response for `GetPlatformApplicationAttributes` action.
     #
     # @!attribute [rw] attributes
     #   Attributes include the following:
@@ -678,6 +685,14 @@ module Aws::SNS
     #
     #   * `ApplePlatformBundleID` – The app identifier used to configure
     #     token-based authentication.
+    #
+    #   * `AuthenticationMethod` – Returns the credential type used when
+    #     sending push notifications from application to APNS/APNS\_Sandbox,
+    #     or application to GCM.
+    #
+    #     * APNS – Returns the token or certificate.
+    #
+    #     * GCM – Returns the token or key.
     #
     #   * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
     #     notifications should be sent.
@@ -824,20 +839,20 @@ module Aws::SNS
     #   * `TopicArn` – The topic ARN that the subscription is associated
     #     with.
     #
-    #   The following attribute applies only to Amazon Kinesis Data Firehose
+    #   The following attribute applies only to Amazon Data Firehose
     #   delivery stream subscriptions:
     #
     #   * `SubscriptionRoleArn` – The ARN of the IAM role that has the
     #     following:
     #
-    #     * Permission to write to the Kinesis Data Firehose delivery stream
+    #     * Permission to write to the Firehose delivery stream
     #
     #     * Amazon SNS listed as a trusted entity
     #
-    #     Specifying a valid ARN for this attribute is required for Kinesis
-    #     Data Firehose delivery stream subscriptions. For more information,
-    #     see [Fanout to Kinesis Data Firehose delivery streams][2] in the
-    #     *Amazon SNS Developer Guide*.
+    #     Specifying a valid ARN for this attribute is required for Firehose
+    #     delivery stream subscriptions. For more information, see [Fanout
+    #     to Firehose delivery streams][2] in the *Amazon SNS Developer
+    #     Guide*.
     #
     #
     #
@@ -1042,6 +1057,20 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # Indicates that the specified state is not a valid state for an event
+    # source.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/InvalidStateException AWS API Documentation
+    #
+    class InvalidStateException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The ciphertext references a key that doesn't exist or that you don't
     # have access to.
     #
@@ -1056,8 +1085,8 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # The request was rejected because the specified customer master key
-    # (CMK) isn't enabled.
+    # The request was rejected because the specified Amazon Web Services KMS
+    # key isn't enabled.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1071,9 +1100,9 @@ module Aws::SNS
     end
 
     # The request was rejected because the state of the specified resource
-    # isn't valid for this request. For more information, see [How Key
-    # State Affects Use of a Customer Master Key][1] in the *Key Management
-    # Service Developer Guide*.
+    # isn't valid for this request. For more information, see [Key states
+    # of Amazon Web Services KMS keys][1] in the *Key Management Service
+    # Developer Guide*.
     #
     #
     #
@@ -1137,16 +1166,16 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Input for ListEndpointsByPlatformApplication action.
+    # Input for `ListEndpointsByPlatformApplication` action.
     #
     # @!attribute [rw] platform_application_arn
-    #   PlatformApplicationArn for ListEndpointsByPlatformApplicationInput
-    #   action.
+    #   `PlatformApplicationArn` for
+    #   `ListEndpointsByPlatformApplicationInput` action.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   NextToken string is used when calling
-    #   ListEndpointsByPlatformApplication action to retrieve additional
+    #   `NextToken` string is used when calling
+    #   `ListEndpointsByPlatformApplication` action to retrieve additional
     #   records that are available after the first page results.
     #   @return [String]
     #
@@ -1159,16 +1188,16 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Response for ListEndpointsByPlatformApplication action.
+    # Response for `ListEndpointsByPlatformApplication` action.
     #
     # @!attribute [rw] endpoints
-    #   Endpoints returned for ListEndpointsByPlatformApplication action.
+    #   Endpoints returned for `ListEndpointsByPlatformApplication` action.
     #   @return [Array<Types::Endpoint>]
     #
     # @!attribute [rw] next_token
-    #   NextToken string is returned when calling
-    #   ListEndpointsByPlatformApplication action if additional records are
-    #   available after the first page results.
+    #   `NextToken` string is returned when calling
+    #   `ListEndpointsByPlatformApplication` action if additional records
+    #   are available after the first page results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListEndpointsByPlatformApplicationResponse AWS API Documentation
@@ -1256,10 +1285,10 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Input for ListPlatformApplications action.
+    # Input for `ListPlatformApplications` action.
     #
     # @!attribute [rw] next_token
-    #   NextToken string is used when calling ListPlatformApplications
+    #   `NextToken` string is used when calling `ListPlatformApplications`
     #   action to retrieve additional records that are available after the
     #   first page results.
     #   @return [String]
@@ -1272,17 +1301,17 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Response for ListPlatformApplications action.
+    # Response for `ListPlatformApplications` action.
     #
     # @!attribute [rw] platform_applications
-    #   Platform applications returned when calling ListPlatformApplications
-    #   action.
+    #   Platform applications returned when calling
+    #   `ListPlatformApplications` action.
     #   @return [Array<Types::PlatformApplication>]
     #
     # @!attribute [rw] next_token
-    #   NextToken string is returned when calling ListPlatformApplications
-    #   action if additional records are available after the first page
-    #   results.
+    #   `NextToken` string is returned when calling
+    #   `ListPlatformApplications` action if additional records are
+    #   available after the first page results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPlatformApplicationsResponse AWS API Documentation
@@ -1535,7 +1564,7 @@ module Aws::SNS
     #
     class OptInPhoneNumberInput < Struct.new(
       :phone_number)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -1596,7 +1625,7 @@ module Aws::SNS
       :iso_2_country_code,
       :route_type,
       :number_capabilities)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -1931,9 +1960,8 @@ module Aws::SNS
     #   included, if present, in the standard JSON messages delivered to
     #   other endpoints.
     #
-    #   Constraints: Subjects must be ASCII text that begins with a letter,
-    #   number, or punctuation mark; must not include line breaks or control
-    #   characters; and must be less than 100 characters long.
+    #   Constraints: Subjects must be UTF-8 text with no line breaks or
+    #   control characters, and less than 100 characters long.
     #   @return [String]
     #
     # @!attribute [rw] message_structure
@@ -2000,7 +2028,7 @@ module Aws::SNS
       :message_attributes,
       :message_deduplication_id,
       :message_group_id)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
@@ -2079,6 +2107,20 @@ module Aws::SNS
       include Aws::Structure
     end
 
+    # Indicates that the request parameter has exceeded the maximum number
+    # of concurrent message replays.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ReplayLimitExceededException AWS API Documentation
+    #
+    class ReplayLimitExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Can’t perform the action on the specified resource. Make sure that the
     # resource exists.
     #
@@ -2122,14 +2164,14 @@ module Aws::SNS
     class SMSSandboxPhoneNumber < Struct.new(
       :phone_number,
       :status)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 
-    # Input for SetEndpointAttributes action.
+    # Input for `SetEndpointAttributes` action.
     #
     # @!attribute [rw] endpoint_arn
-    #   EndpointArn used for SetEndpointAttributes action.
+    #   EndpointArn used for `SetEndpointAttributes` action.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -2160,10 +2202,11 @@ module Aws::SNS
       include Aws::Structure
     end
 
-    # Input for SetPlatformApplicationAttributes action.
+    # Input for `SetPlatformApplicationAttributes` action.
     #
     # @!attribute [rw] platform_application_arn
-    #   PlatformApplicationArn for SetPlatformApplicationAttributes action.
+    #   `PlatformApplicationArn` for `SetPlatformApplicationAttributes`
+    #   action.
     #   @return [String]
     #
     # @!attribute [rw] attributes
@@ -2181,8 +2224,17 @@ module Aws::SNS
     #     * For Apple Services using token credentials, `PlatformCredential`
     #       is signing key.
     #
-    #     * For GCM (Firebase Cloud Messaging), `PlatformCredential` is API
-    #       key.
+    #     * For GCM (Firebase Cloud Messaging) using key credentials, there
+    #       is no `PlatformPrincipal`. The `PlatformCredential` is `API
+    #       key`.
+    #
+    #     * For GCM (Firebase Cloud Messaging) using token credentials,
+    #       there is no `PlatformPrincipal`. The `PlatformCredential` is a
+    #       JSON formatted private key file. When using the Amazon Web
+    #       Services CLI, the file must be in string format and special
+    #       characters must be ignored. To format the file correctly, Amazon
+    #       SNS recommends using the following command: `` SERVICE_JSON=`jq
+    #       @json <<< cat service.json` ``.
     #   ^
     #
     #   * `PlatformPrincipal` – The principal received from the notification
@@ -2383,20 +2435,20 @@ module Aws::SNS
     #     unavailable) are held in the dead-letter queue for further
     #     analysis or reprocessing.
     #
-    #   The following attribute applies only to Amazon Kinesis Data Firehose
+    #   The following attribute applies only to Amazon Data Firehose
     #   delivery stream subscriptions:
     #
     #   * `SubscriptionRoleArn` – The ARN of the IAM role that has the
     #     following:
     #
-    #     * Permission to write to the Kinesis Data Firehose delivery stream
+    #     * Permission to write to the Firehose delivery stream
     #
     #     * Amazon SNS listed as a trusted entity
     #
-    #     Specifying a valid ARN for this attribute is required for Kinesis
-    #     Data Firehose delivery stream subscriptions. For more information,
-    #     see [Fanout to Kinesis Data Firehose delivery streams][1] in the
-    #     *Amazon SNS Developer Guide*.
+    #     Specifying a valid ARN for this attribute is required for Firehose
+    #     delivery stream subscriptions. For more information, see [Fanout
+    #     to Firehose delivery streams][1] in the *Amazon SNS Developer
+    #     Guide*.
     #
     #
     #
@@ -2708,24 +2760,46 @@ module Aws::SNS
     #     unavailable) are held in the dead-letter queue for further
     #     analysis or reprocessing.
     #
-    #   The following attribute applies only to Amazon Kinesis Data Firehose
+    #   The following attribute applies only to Amazon Data Firehose
     #   delivery stream subscriptions:
     #
     #   * `SubscriptionRoleArn` – The ARN of the IAM role that has the
     #     following:
     #
-    #     * Permission to write to the Kinesis Data Firehose delivery stream
+    #     * Permission to write to the Firehose delivery stream
     #
     #     * Amazon SNS listed as a trusted entity
     #
-    #     Specifying a valid ARN for this attribute is required for Kinesis
-    #     Data Firehose delivery stream subscriptions. For more information,
-    #     see [Fanout to Kinesis Data Firehose delivery streams][1] in the
-    #     *Amazon SNS Developer Guide*.
+    #     Specifying a valid ARN for this attribute is required for Firehose
+    #     delivery stream subscriptions. For more information, see [Fanout
+    #     to Firehose delivery streams][1] in the *Amazon SNS Developer
+    #     Guide*.
+    #
+    #   The following attributes apply only to [FIFO topics][2]:
+    #
+    #   * `ReplayPolicy` – Adds or updates an inline policy document for a
+    #     subscription to replay messages stored in the specified Amazon SNS
+    #     topic.
+    #
+    #   * `ReplayStatus` – Retrieves the status of the subscription message
+    #     replay, which can be one of the following:
+    #
+    #     * `Completed` – The replay has successfully redelivered all
+    #       messages, and is now delivering newly published messages. If an
+    #       ending point was specified in the `ReplayPolicy` then the
+    #       subscription will no longer receive newly published messages.
+    #
+    #     * `In progress` – The replay is currently replaying the selected
+    #       messages.
+    #
+    #     * `Failed` – The replay was unable to complete.
+    #
+    #     * `Pending` – The default state while the replay initiates.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html
+    #   [2]: https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] return_subscription_arn
@@ -3043,7 +3117,7 @@ module Aws::SNS
     class VerifySMSSandboxPhoneNumberInput < Struct.new(
       :phone_number,
       :one_time_password)
-      SENSITIVE = []
+      SENSITIVE = [:phone_number]
       include Aws::Structure
     end
 

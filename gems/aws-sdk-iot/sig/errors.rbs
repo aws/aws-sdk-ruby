@@ -1,0 +1,118 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoT
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class CertificateConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CertificateStateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CertificateValidationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_id: () -> ::String
+      end
+      class ConflictingResourceUpdateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DeleteConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IndexNotReadyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalFailureException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalServerException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidAggregationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidQueryException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidResponseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidStateTransitionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MalformedPolicyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotConfiguredException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RegistrationCodeValidationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def resource_id: () -> ::String
+        def resource_arn: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceRegistrationFailureException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SqlParseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TaskAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TransferAlreadyCompletedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TransferConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnauthorizedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ValidationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class VersionConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class VersionsLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

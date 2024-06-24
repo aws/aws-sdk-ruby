@@ -10,15 +10,147 @@
 module Aws::Keyspaces
   module Types
 
-    # You do not have sufficient access to perform this action.
+    # You don't have sufficient access permissions to perform this action.
     #
     # @!attribute [rw] message
+    #   Description of the error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/AccessDeniedException AWS API Documentation
     #
     class AccessDeniedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Amazon Keyspaces supports the `target tracking` auto scaling policy.
+    # With this policy, Amazon Keyspaces auto scaling ensures that the
+    # table's ratio of consumed to provisioned capacity stays at or near
+    # the target value that you specify. You define the target value as a
+    # percentage between 20 and 90.
+    #
+    # @!attribute [rw] target_tracking_scaling_policy_configuration
+    #   Auto scaling scales up capacity automatically when traffic exceeds
+    #   this target utilization rate, and then back down when it falls below
+    #   the target. A `double` between 20 and 90.
+    #   @return [Types::TargetTrackingScalingPolicyConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/AutoScalingPolicy AWS API Documentation
+    #
+    class AutoScalingPolicy < Struct.new(
+      :target_tracking_scaling_policy_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The optional auto scaling settings for a table with provisioned
+    # throughput capacity.
+    #
+    # To turn on auto scaling for a table in `throughputMode:PROVISIONED`,
+    # you must specify the following parameters.
+    #
+    # Configure the minimum and maximum capacity units. The auto scaling
+    # policy ensures that capacity never goes below the minimum or above the
+    # maximum range.
+    #
+    # * `minimumUnits`: The minimum level of throughput the table should
+    #   always be ready to support. The value must be between 1 and the max
+    #   throughput per second quota for your account (40,000 by default).
+    #
+    # * `maximumUnits`: The maximum level of throughput the table should
+    #   always be ready to support. The value must be between 1 and the max
+    #   throughput per second quota for your account (40,000 by default).
+    #
+    # * `scalingPolicy`: Amazon Keyspaces supports the `target tracking`
+    #   scaling policy. The auto scaling target is the provisioned capacity
+    #   of the table.
+    #
+    #   * `targetTrackingScalingPolicyConfiguration`: To define the target
+    #     tracking policy, you must define the target value.
+    #
+    #     * `targetValue`: The target utilization rate of the table. Amazon
+    #       Keyspaces auto scaling ensures that the ratio of consumed
+    #       capacity to provisioned capacity stays at or near this value.
+    #       You define `targetValue` as a percentage. A `double` between 20
+    #       and 90. (Required)
+    #
+    #     * `disableScaleIn`: A `boolean` that specifies if `scale-in` is
+    #       disabled or enabled for the table. This parameter is disabled by
+    #       default. To turn on `scale-in`, set the `boolean` value to
+    #       `FALSE`. This means that capacity for a table can be
+    #       automatically scaled down on your behalf. (Optional)
+    #
+    #     * `scaleInCooldown`: A cooldown period in seconds between scaling
+    #       activities that lets the table stabilize before another scale in
+    #       activity starts. If no value is provided, the default is 0.
+    #       (Optional)
+    #
+    #     * `scaleOutCooldown`: A cooldown period in seconds between scaling
+    #       activities that lets the table stabilize before another scale
+    #       out activity starts. If no value is provided, the default is 0.
+    #       (Optional)
+    #
+    # For more information, see [Managing throughput capacity automatically
+    # with Amazon Keyspaces auto scaling][1] in the *Amazon Keyspaces
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html
+    #
+    # @!attribute [rw] auto_scaling_disabled
+    #   This optional parameter enables auto scaling for the table if set to
+    #   `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] minimum_units
+    #   The minimum level of throughput the table should always be ready to
+    #   support. The value must be between 1 and the max throughput per
+    #   second quota for your account (40,000 by default).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_units
+    #   Manage costs by specifying the maximum amount of throughput to
+    #   provision. The value must be between 1 and the max throughput per
+    #   second quota for your account (40,000 by default).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scaling_policy
+    #   Amazon Keyspaces supports the `target tracking` auto scaling policy.
+    #   With this policy, Amazon Keyspaces auto scaling ensures that the
+    #   table's ratio of consumed to provisioned capacity stays at or near
+    #   the target value that you specify. You define the target value as a
+    #   percentage between 20 and 90.
+    #   @return [Types::AutoScalingPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/AutoScalingSettings AWS API Documentation
+    #
+    class AutoScalingSettings < Struct.new(
+      :auto_scaling_disabled,
+      :minimum_units,
+      :maximum_units,
+      :scaling_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The optional auto scaling capacity settings for a table in provisioned
+    # capacity mode.
+    #
+    # @!attribute [rw] write_capacity_auto_scaling
+    #   The auto scaling settings for the table's write capacity.
+    #   @return [Types::AutoScalingSettings]
+    #
+    # @!attribute [rw] read_capacity_auto_scaling
+    #   The auto scaling settings for the table's read capacity.
+    #   @return [Types::AutoScalingSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/AutoScalingSpecification AWS API Documentation
+    #
+    class AutoScalingSpecification < Struct.new(
+      :write_capacity_auto_scaling,
+      :read_capacity_auto_scaling)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -218,12 +350,13 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
-    # Amazon Keyspaces could not complete the requested action. This error
+    # Amazon Keyspaces couldn't complete the requested action. This error
     # may occur if you try to perform an action and the same or a different
     # action is already in progress, or if you try to create a resource that
     # already exists.
     #
     # @!attribute [rw] message
+    #   Description of the error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/ConflictException AWS API Documentation
@@ -449,6 +582,47 @@ module Aws::Keyspaces
     #   cannot be disabled.
     #   @return [Types::ClientSideTimestamps]
     #
+    # @!attribute [rw] auto_scaling_specification
+    #   The optional auto scaling settings for a table in provisioned
+    #   capacity mode. Specifies if the service can manage throughput
+    #   capacity automatically on your behalf.
+    #
+    #   Auto scaling helps you provision throughput capacity for variable
+    #   workloads efficiently by increasing and decreasing your table's
+    #   read and write capacity automatically in response to application
+    #   traffic. For more information, see [Managing throughput capacity
+    #   automatically with Amazon Keyspaces auto scaling][1] in the *Amazon
+    #   Keyspaces Developer Guide*.
+    #
+    #   By default, auto scaling is disabled for a table.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html
+    #   @return [Types::AutoScalingSpecification]
+    #
+    # @!attribute [rw] replica_specifications
+    #   The optional Amazon Web Services Region specific settings of a
+    #   multi-Region table. These settings overwrite the general settings of
+    #   the table for the specified Region.
+    #
+    #   For a multi-Region table in provisioned capacity mode, you can
+    #   configure the table's read capacity differently for each Region's
+    #   replica. The write capacity, however, remains synchronized between
+    #   all replicas to ensure that there's enough capacity to replicate
+    #   writes across all Regions. To define the read capacity for a table
+    #   replica in a specific Region, you can do so by configuring the
+    #   following parameters.
+    #
+    #   * `region`: The Region where these settings are applied. (Required)
+    #
+    #   * `readCapacityUnits`: The provisioned read capacity units.
+    #     (Optional)
+    #
+    #   * `readCapacityAutoScaling`: The read capacity auto scaling settings
+    #     for the table. (Optional)
+    #   @return [Array<Types::ReplicaSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/CreateTableRequest AWS API Documentation
     #
     class CreateTableRequest < Struct.new(
@@ -462,7 +636,9 @@ module Aws::Keyspaces
       :ttl,
       :default_time_to_live,
       :tags,
-      :client_side_timestamps)
+      :client_side_timestamps,
+      :auto_scaling_specification,
+      :replica_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -616,6 +792,57 @@ module Aws::Keyspaces
     end
 
     # @!attribute [rw] keyspace_name
+    #   The name of the keyspace.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/GetTableAutoScalingSettingsRequest AWS API Documentation
+    #
+    class GetTableAutoScalingSettingsRequest < Struct.new(
+      :keyspace_name,
+      :table_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] keyspace_name
+    #   The name of the keyspace.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_scaling_specification
+    #   The auto scaling settings of the table.
+    #   @return [Types::AutoScalingSpecification]
+    #
+    # @!attribute [rw] replica_specifications
+    #   The Amazon Web Services Region specific settings of a multi-Region
+    #   table. Returns the settings for all Regions the table is replicated
+    #   in.
+    #   @return [Array<Types::ReplicaAutoScalingSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/GetTableAutoScalingSettingsResponse AWS API Documentation
+    #
+    class GetTableAutoScalingSettingsResponse < Struct.new(
+      :keyspace_name,
+      :table_name,
+      :resource_arn,
+      :auto_scaling_specification,
+      :replica_specifications)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] keyspace_name
     #   The name of the keyspace that the table is stored in.
     #   @return [String]
     #
@@ -689,6 +916,11 @@ module Aws::Keyspaces
     #   The client-side timestamps setting of the table.
     #   @return [Types::ClientSideTimestamps]
     #
+    # @!attribute [rw] replica_specifications
+    #   Returns the Amazon Web Services Region specific settings of all
+    #   Regions a multi-Region table is replicated in.
+    #   @return [Array<Types::ReplicaSpecificationSummary>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/GetTableResponse AWS API Documentation
     #
     class GetTableResponse < Struct.new(
@@ -704,7 +936,8 @@ module Aws::Keyspaces
       :ttl,
       :default_time_to_live,
       :comment,
-      :client_side_timestamps)
+      :client_side_timestamps,
+      :replica_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -713,6 +946,7 @@ module Aws::Keyspaces
     # an internal server error.
     #
     # @!attribute [rw] message
+    #   Description of the error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/InternalServerException AWS API Documentation
@@ -948,6 +1182,111 @@ module Aws::Keyspaces
       include Aws::Structure
     end
 
+    # The auto scaling settings of a multi-Region table in the specified
+    # Amazon Web Services Region.
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_scaling_specification
+    #   The auto scaling settings for a multi-Region table in the specified
+    #   Amazon Web Services Region.
+    #   @return [Types::AutoScalingSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/ReplicaAutoScalingSpecification AWS API Documentation
+    #
+    class ReplicaAutoScalingSpecification < Struct.new(
+      :region,
+      :auto_scaling_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Web Services Region specific settings of a multi-Region
+    # table.
+    #
+    # For a multi-Region table, you can configure the table's read capacity
+    # differently per Amazon Web Services Region. You can do this by
+    # configuring the following parameters.
+    #
+    # * `region`: The Region where these settings are applied. (Required)
+    #
+    # * `readCapacityUnits`: The provisioned read capacity units. (Optional)
+    #
+    # * `readCapacityAutoScaling`: The read capacity auto scaling settings
+    #   for the table. (Optional)
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] read_capacity_units
+    #   The provisioned read capacity units for the multi-Region table in
+    #   the specified Amazon Web Services Region.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] read_capacity_auto_scaling
+    #   The read capacity auto scaling settings for the multi-Region table
+    #   in the specified Amazon Web Services Region.
+    #   @return [Types::AutoScalingSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/ReplicaSpecification AWS API Documentation
+    #
+    class ReplicaSpecification < Struct.new(
+      :region,
+      :read_capacity_units,
+      :read_capacity_auto_scaling)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Region-specific settings of a multi-Region table in the specified
+    # Amazon Web Services Region.
+    #
+    # If the multi-Region table is using provisioned capacity and has
+    # optional auto scaling policies configured, note that the Region
+    # specific summary returns both read and write capacity settings. But
+    # only Region specific read capacity settings can be configured for a
+    # multi-Region table. In a multi-Region table, your write capacity units
+    # will be synced across all Amazon Web Services Regions to ensure that
+    # there is enough capacity to replicate write events across Regions.
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the multi-Region table in the specified Amazon Web
+    #   Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_specification
+    #   The read/write throughput capacity mode for a table. The options
+    #   are:
+    #
+    #   * `throughputMode:PAY_PER_REQUEST` and
+    #
+    #   * `throughputMode:PROVISIONED`.
+    #
+    #   For more information, see [Read/write capacity modes][1] in the
+    #   *Amazon Keyspaces Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html
+    #   @return [Types::CapacitySpecificationSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/ReplicaSpecificationSummary AWS API Documentation
+    #
+    class ReplicaSpecificationSummary < Struct.new(
+      :region,
+      :status,
+      :capacity_specification)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The replication specification of the keyspace includes:
     #
     # * `regionList` - up to six Amazon Web Services Regions where the
@@ -980,6 +1319,7 @@ module Aws::Keyspaces
     # be `ACTIVE`.
     #
     # @!attribute [rw] message
+    #   Description of the error.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -1085,6 +1425,28 @@ module Aws::Keyspaces
     #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] auto_scaling_specification
+    #   The optional auto scaling settings for the restored table in
+    #   provisioned capacity mode. Specifies if the service can manage
+    #   throughput capacity of a provisioned table automatically on your
+    #   behalf. Amazon Keyspaces auto scaling helps you provision throughput
+    #   capacity for variable workloads efficiently by increasing and
+    #   decreasing your table's read and write capacity automatically in
+    #   response to application traffic.
+    #
+    #   For more information, see [Managing throughput capacity
+    #   automatically with Amazon Keyspaces auto scaling][1] in the *Amazon
+    #   Keyspaces Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html
+    #   @return [Types::AutoScalingSpecification]
+    #
+    # @!attribute [rw] replica_specifications
+    #   The optional Region specific settings of a multi-Regional table.
+    #   @return [Array<Types::ReplicaSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/RestoreTableRequest AWS API Documentation
     #
     class RestoreTableRequest < Struct.new(
@@ -1096,7 +1458,9 @@ module Aws::Keyspaces
       :capacity_specification_override,
       :encryption_specification_override,
       :point_in_time_recovery_override,
-      :tags_override)
+      :tags_override,
+      :auto_scaling_specification,
+      :replica_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1152,6 +1516,7 @@ module Aws::Keyspaces
     # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/quotas.html
     #
     # @!attribute [rw] message
+    #   Description of the error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/ServiceQuotaExceededException AWS API Documentation
@@ -1261,6 +1626,54 @@ module Aws::Keyspaces
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # The auto scaling policy that scales a table based on the ratio of
+    # consumed to provisioned capacity.
+    #
+    # @!attribute [rw] disable_scale_in
+    #   Specifies if `scale-in` is enabled.
+    #
+    #   When auto scaling automatically decreases capacity for a table, the
+    #   table *scales in*. When scaling policies are set, they can't scale
+    #   in the table lower than its minimum capacity.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] scale_in_cooldown
+    #   Specifies a `scale-in` cool down period.
+    #
+    #   A cooldown period in seconds between scaling activities that lets
+    #   the table stabilize before another scaling activity starts.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] scale_out_cooldown
+    #   Specifies a scale out cool down period.
+    #
+    #   A cooldown period in seconds between scaling activities that lets
+    #   the table stabilize before another scaling activity starts.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_value
+    #   Specifies the target value for the target tracking auto scaling
+    #   policy.
+    #
+    #   Amazon Keyspaces auto scaling scales up capacity automatically when
+    #   traffic exceeds this target utilization rate, and then back down
+    #   when it falls below the target. This ensures that the ratio of
+    #   consumed capacity to provisioned capacity stays at or near this
+    #   value. You define `targetValue` as a percentage. A `double` between
+    #   20 and 90.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/TargetTrackingScalingPolicyConfiguration AWS API Documentation
+    #
+    class TargetTrackingScalingPolicyConfiguration < Struct.new(
+      :disable_scale_in,
+      :scale_in_cooldown,
+      :scale_out_cooldown,
+      :target_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Enable custom Time to Live (TTL) settings for rows and columns without
     # setting a TTL default for the specified table.
@@ -1430,6 +1843,32 @@ module Aws::Keyspaces
     #   cannot be disabled.
     #   @return [Types::ClientSideTimestamps]
     #
+    # @!attribute [rw] auto_scaling_specification
+    #   The optional auto scaling settings to update for a table in
+    #   provisioned capacity mode. Specifies if the service can manage
+    #   throughput capacity of a provisioned table automatically on your
+    #   behalf. Amazon Keyspaces auto scaling helps you provision throughput
+    #   capacity for variable workloads efficiently by increasing and
+    #   decreasing your table's read and write capacity automatically in
+    #   response to application traffic.
+    #
+    #   If auto scaling is already enabled for the table, you can use
+    #   `UpdateTable` to update the minimum and maximum values or the auto
+    #   scaling policy settings independently.
+    #
+    #   For more information, see [Managing throughput capacity
+    #   automatically with Amazon Keyspaces auto scaling][1] in the *Amazon
+    #   Keyspaces Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html
+    #   @return [Types::AutoScalingSpecification]
+    #
+    # @!attribute [rw] replica_specifications
+    #   The Region specific settings of a multi-Regional table.
+    #   @return [Array<Types::ReplicaSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/UpdateTableRequest AWS API Documentation
     #
     class UpdateTableRequest < Struct.new(
@@ -1441,7 +1880,9 @@ module Aws::Keyspaces
       :point_in_time_recovery,
       :ttl,
       :default_time_to_live,
-      :client_side_timestamps)
+      :client_side_timestamps,
+      :auto_scaling_specification,
+      :replica_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1461,6 +1902,7 @@ module Aws::Keyspaces
     # The operation failed due to an invalid or malformed request.
     #
     # @!attribute [rw] message
+    #   Description of the error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/ValidationException AWS API Documentation

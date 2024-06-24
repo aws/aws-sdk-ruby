@@ -5,6 +5,7 @@
     "endpointPrefix":"connect-campaigns",
     "jsonVersion":"1.1",
     "protocol":"rest-json",
+    "protocols":["rest-json"],
     "serviceFullName":"AmazonConnectCampaignService",
     "serviceId":"ConnectCampaigns",
     "signatureVersion":"v4",
@@ -423,7 +424,8 @@
       "type":"structure",
       "required":["enableAnswerMachineDetection"],
       "members":{
-        "enableAnswerMachineDetection":{"shape":"Boolean"}
+        "enableAnswerMachineDetection":{"shape":"Boolean"},
+        "awaitAnswerMachinePrompt":{"shape":"Boolean"}
       }
     },
     "Arn":{
@@ -441,7 +443,8 @@
     "AttributeValue":{
       "type":"string",
       "max":32767,
-      "min":0
+      "min":0,
+      "pattern":".*"
     },
     "Attributes":{
       "type":"map",
@@ -493,7 +496,8 @@
     "CampaignId":{
       "type":"string",
       "max":256,
-      "min":0
+      "min":0,
+      "pattern":"[\\S]*"
     },
     "CampaignName":{
       "type":"string",
@@ -531,8 +535,9 @@
     },
     "ClientToken":{
       "type":"string",
-      "max":64,
-      "min":0
+      "max":200,
+      "min":0,
+      "pattern":"[a-zA-Z0-9_\\-.]*"
     },
     "ConflictException":{
       "type":"structure",
@@ -634,6 +639,7 @@
       "type":"string",
       "max":20,
       "min":0,
+      "pattern":"[\\d\\-+]*",
       "sensitive":true
     },
     "DialRequest":{
@@ -651,7 +657,12 @@
         "attributes":{"shape":"Attributes"}
       }
     },
-    "DialRequestId":{"type":"string"},
+    "DialRequestId":{
+      "type":"string",
+      "max":256,
+      "min":0,
+      "pattern":"[a-zA-Z0-9_\\-.]*"
+    },
     "DialRequestList":{
       "type":"list",
       "member":{"shape":"DialRequest"},
@@ -821,7 +832,8 @@
     "InstanceId":{
       "type":"string",
       "max":256,
-      "min":0
+      "min":0,
+      "pattern":"[a-zA-Z0-9_\\-.]*"
     },
     "InstanceIdFilter":{
       "type":"structure",

@@ -281,6 +281,10 @@ module Aws::NetworkManager
     #   The name of the segment attachment.
     #   @return [String]
     #
+    # @!attribute [rw] network_function_group_name
+    #   The name of the network function group.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags associated with the attachment.
     #   @return [Array<Types::Tag>]
@@ -288,6 +292,11 @@ module Aws::NetworkManager
     # @!attribute [rw] proposed_segment_change
     #   The attachment to move from one segment to another.
     #   @return [Types::ProposedSegmentChange]
+    #
+    # @!attribute [rw] proposed_network_function_group_change
+    #   Describes a proposed change to a network function group associated
+    #   with the attachment.
+    #   @return [Types::ProposedNetworkFunctionGroupChange]
     #
     # @!attribute [rw] created_at
     #   The timestamp when the attachment was created.
@@ -310,8 +319,10 @@ module Aws::NetworkManager
       :resource_arn,
       :attachment_policy_rule_number,
       :segment_name,
+      :network_function_group_name,
       :tags,
       :proposed_segment_change,
+      :proposed_network_function_group_change,
       :created_at,
       :updated_at)
       SENSITIVE = []
@@ -447,6 +458,11 @@ module Aws::NetworkManager
     #   The list of key-value tags associated with the Connect peer.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] subnet_arn
+    #   The subnet ARN for the Connect peer. This only applies only when the
+    #   protocol is NO\_ENCAP.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectPeer AWS API Documentation
     #
     class ConnectPeer < Struct.new(
@@ -457,7 +473,8 @@ module Aws::NetworkManager
       :state,
       :created_at,
       :configuration,
-      :tags)
+      :tags,
+      :subnet_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -589,6 +606,10 @@ module Aws::NetworkManager
     #   The list of key-value tags associated with the Connect peer summary.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] subnet_arn
+    #   The subnet ARN for the Connect peer summary.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectPeerSummary AWS API Documentation
     #
     class ConnectPeerSummary < Struct.new(
@@ -598,7 +619,8 @@ module Aws::NetworkManager
       :edge_location,
       :connect_peer_state,
       :created_at,
-      :tags)
+      :tags,
+      :subnet_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -721,6 +743,10 @@ module Aws::NetworkManager
     #   The segments within a core network.
     #   @return [Array<Types::CoreNetworkSegment>]
     #
+    # @!attribute [rw] network_function_groups
+    #   The network function groups associated with a core network.
+    #   @return [Array<Types::CoreNetworkNetworkFunctionGroup>]
+    #
     # @!attribute [rw] edges
     #   The edges within a core network.
     #   @return [Array<Types::CoreNetworkEdge>]
@@ -739,6 +765,7 @@ module Aws::NetworkManager
       :created_at,
       :state,
       :segments,
+      :network_function_groups,
       :edges,
       :tags)
       SENSITIVE = []
@@ -838,6 +865,10 @@ module Aws::NetworkManager
     #   The segment name if the change event is associated with a segment.
     #   @return [String]
     #
+    # @!attribute [rw] network_function_group_name
+    #   The changed network function group name.
+    #   @return [String]
+    #
     # @!attribute [rw] attachment_id
     #   The ID of the attachment if the change event is associated with an
     #   attachment.
@@ -852,6 +883,7 @@ module Aws::NetworkManager
     class CoreNetworkChangeEventValues < Struct.new(
       :edge_location,
       :segment_name,
+      :network_function_group_name,
       :attachment_id,
       :cidr)
       SENSITIVE = []
@@ -862,6 +894,11 @@ module Aws::NetworkManager
     #
     # @!attribute [rw] segment_name
     #   The names of the segments in a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_function_group_name
+    #   The network function group name if the change event is associated
+    #   with a network function group.
     #   @return [String]
     #
     # @!attribute [rw] edge_locations
@@ -888,16 +925,22 @@ module Aws::NetworkManager
     #   The shared segments for a core network change value.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] service_insertion_actions
+    #   Describes the service insertion action.
+    #   @return [Array<Types::ServiceInsertionAction>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkChangeValues AWS API Documentation
     #
     class CoreNetworkChangeValues < Struct.new(
       :segment_name,
+      :network_function_group_name,
       :edge_locations,
       :asn,
       :cidr,
       :destination_identifier,
       :inside_cidr_blocks,
-      :shared_segments)
+      :shared_segments,
+      :service_insertion_actions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -922,6 +965,54 @@ module Aws::NetworkManager
       :edge_location,
       :asn,
       :inside_cidr_blocks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a network function group.
+    #
+    # @!attribute [rw] name
+    #   The name of the network function group.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_locations
+    #   The core network edge locations.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] segments
+    #   The segments associated with the network function group.
+    #   @return [Types::ServiceInsertionSegments]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkNetworkFunctionGroup AWS API Documentation
+    #
+    class CoreNetworkNetworkFunctionGroup < Struct.new(
+      :name,
+      :edge_locations,
+      :segments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a core network
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of the core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_function_group_name
+    #   The network function group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_location
+    #   The location for the core network edge.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkNetworkFunctionGroupIdentifier AWS API Documentation
+    #
+    class CoreNetworkNetworkFunctionGroupIdentifier < Struct.new(
+      :core_network_id,
+      :network_function_group_name,
+      :edge_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1209,7 +1300,8 @@ module Aws::NetworkManager
     #   @return [String]
     #
     # @!attribute [rw] core_network_address
-    #   A Connect peer core network address.
+    #   A Connect peer core network address. This only applies only when the
+    #   protocol is `GRE`.
     #   @return [String]
     #
     # @!attribute [rw] peer_address
@@ -1217,7 +1309,8 @@ module Aws::NetworkManager
     #   @return [String]
     #
     # @!attribute [rw] bgp_options
-    #   The Connect peer BGP options.
+    #   The Connect peer BGP options. This only applies only when the
+    #   protocol is `GRE`.
     #   @return [Types::BgpOptions]
     #
     # @!attribute [rw] inside_cidr_blocks
@@ -1235,6 +1328,11 @@ module Aws::NetworkManager
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] subnet_arn
+    #   The subnet ARN for the Connect peer. This only applies only when the
+    #   protocol is NO\_ENCAP.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateConnectPeerRequest AWS API Documentation
     #
     class CreateConnectPeerRequest < Struct.new(
@@ -1244,7 +1342,8 @@ module Aws::NetworkManager
       :bgp_options,
       :inside_cidr_blocks,
       :tags,
-      :client_token)
+      :client_token,
+      :subnet_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2351,6 +2450,25 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Describes the edge that's used for the override.
+    #
+    # @!attribute [rw] edge_sets
+    #   The list of edge locations.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] use_edge
+    #   The edge that should be used when overriding the current edge order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/EdgeOverride AWS API Documentation
+    #
+    class EdgeOverride < Struct.new(
+      :edge_sets,
+      :use_edge)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] core_network_id
     #   The ID of a core network.
     #   @return [String]
@@ -2878,11 +2996,19 @@ module Aws::NetworkManager
     #
     #   The following are the supported resource types for Network Manager:
     #
+    #   * `attachment`
+    #
+    #   * `connect-peer`
+    #
     #   * `connection`
+    #
+    #   * `core-network`
     #
     #   * `device`
     #
     #   * `link`
+    #
+    #   * `peering`
     #
     #   * `site`
     #
@@ -2970,11 +3096,19 @@ module Aws::NetworkManager
     #
     #   The following are the supported resource types for Network Manager:
     #
+    #   * `attachment`
+    #
+    #   * `connect-peer`
+    #
     #   * `connection`
+    #
+    #   * `core-network`
     #
     #   * `device`
     #
     #   * `link`
+    #
+    #   * `peering`
     #
     #   * `site`
     #
@@ -3063,54 +3197,43 @@ module Aws::NetworkManager
     #
     #   The following are the supported resource types for Direct Connect:
     #
-    #   * `dxcon` - The definition model is [Connection][1].
+    #   * `dxcon`
     #
-    #   * `dx-gateway` - The definition model is [DirectConnectGateway][2].
+    #   * `dx-gateway`
     #
-    #   * `dx-vif` - The definition model is [VirtualInterface][3].
+    #   * `dx-vif`
     #
     #   The following are the supported resource types for Network Manager:
     #
-    #   * `connection` - The definition model is [Connection][4].
+    #   * `attachment`
     #
-    #   * `device` - The definition model is [Device][5].
+    #   * `connect-peer`
     #
-    #   * `link` - The definition model is [Link][6].
+    #   * `connection`
     #
-    #   * `site` - The definition model is [Site][7].
+    #   * `core-network`
+    #
+    #   * `device`
+    #
+    #   * `link`
+    #
+    #   * `peering`
+    #
+    #   * `site`
     #
     #   The following are the supported resource types for Amazon VPC:
     #
-    #   * `customer-gateway` - The definition model is [CustomerGateway][8].
+    #   * `customer-gateway`
     #
-    #   * `transit-gateway` - The definition model is [TransitGateway][9].
+    #   * `transit-gateway`
     #
-    #   * `transit-gateway-attachment` - The definition model is
-    #     [TransitGatewayAttachment][10].
+    #   * `transit-gateway-attachment`
     #
-    #   * `transit-gateway-connect-peer` - The definition model is
-    #     [TransitGatewayConnectPeer][11].
+    #   * `transit-gateway-connect-peer`
     #
-    #   * `transit-gateway-route-table` - The definition model is
-    #     [TransitGatewayRouteTable][12].
+    #   * `transit-gateway-route-table`
     #
-    #   * `vpn-connection` - The definition model is [VpnConnection][13].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_Connection.html
-    #   [2]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DirectConnectGateway.html
-    #   [3]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_VirtualInterface.html
-    #   [4]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Connection.html
-    #   [5]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Device.html
-    #   [6]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Link.html
-    #   [7]: https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Site.html
-    #   [8]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CustomerGateway.html
-    #   [9]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGateway.html
-    #   [10]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayAttachment.html
-    #   [11]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayConnectPeer.html
-    #   [12]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayRouteTable.html
-    #   [13]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VpnConnection.html
+    #   * `vpn-connection`
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -3271,37 +3394,11 @@ module Aws::NetworkManager
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type.
+    #   The resource type. The following are the supported resource types:
     #
-    #   The following are the supported resource types for Direct Connect:
-    #
-    #   * `dxcon`
-    #
-    #   * `dx-gateway`
-    #
-    #   * `dx-vif`
-    #
-    #   The following are the supported resource types for Network Manager:
-    #
-    #   * `connection`
-    #
-    #   * `device`
-    #
-    #   * `link`
-    #
-    #   * `site`
-    #
-    #   The following are the supported resource types for Amazon VPC:
-    #
-    #   * `customer-gateway`
-    #
-    #   * `transit-gateway`
-    #
-    #   * `transit-gateway-attachment`
+    #   * `connect-peer`
     #
     #   * `transit-gateway-connect-peer`
-    #
-    #   * `transit-gateway-route-table`
     #
     #   * `vpn-connection`
     #   @return [String]
@@ -4094,6 +4191,20 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Describes a network function group for service insertion.
+    #
+    # @!attribute [rw] name
+    #   The name of the network function group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/NetworkFunctionGroup AWS API Documentation
+    #
+    class NetworkFunctionGroup < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a network resource.
     #
     # @!attribute [rw] registered_gateway_arn
@@ -4125,11 +4236,19 @@ module Aws::NetworkManager
     #
     #   The following are the supported resource types for Network Manager:
     #
+    #   * `attachment`
+    #
+    #   * `connect-peer`
+    #
     #   * `connection`
+    #
+    #   * `core-network`
     #
     #   * `device`
     #
     #   * `link`
+    #
+    #   * `peering`
     #
     #   * `site`
     #
@@ -4300,6 +4419,10 @@ module Aws::NetworkManager
     #   The name of the segment.
     #   @return [String]
     #
+    # @!attribute [rw] network_function_group_name
+    #   The network function group name associated with the destination.
+    #   @return [String]
+    #
     # @!attribute [rw] edge_location
     #   The edge location for the network destination.
     #   @return [String]
@@ -4318,6 +4441,7 @@ module Aws::NetworkManager
       :core_network_attachment_id,
       :transit_gateway_attachment_id,
       :segment_name,
+      :network_function_group_name,
       :edge_location,
       :resource_type,
       :resource_id)
@@ -4492,6 +4616,32 @@ module Aws::NetworkManager
       :resource_arn,
       :tags,
       :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes proposed changes to a network function group.
+    #
+    # @!attribute [rw] tags
+    #   The list of proposed changes to the key-value tags associated with
+    #   the network function group.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] attachment_policy_rule_number
+    #   The proposed new attachment policy rule number for the network
+    #   function group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] network_function_group_name
+    #   The proposed name change for the network function group name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ProposedNetworkFunctionGroupChange AWS API Documentation
+    #
+    class ProposedNetworkFunctionGroupChange < Struct.new(
+      :tags,
+      :attachment_policy_rule_number,
+      :network_function_group_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4901,18 +5051,88 @@ module Aws::NetworkManager
     # Describes a route table.
     #
     # @!attribute [rw] transit_gateway_route_table_arn
-    #   The ARN of the transit gateway route table.
+    #   The ARN of the transit gateway route table for the attachment
+    #   request. For example, `"TransitGatewayRouteTableArn":
+    #   "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456"`.
     #   @return [String]
     #
     # @!attribute [rw] core_network_segment_edge
     #   The segment edge in a core network.
     #   @return [Types::CoreNetworkSegmentEdgeIdentifier]
     #
+    # @!attribute [rw] core_network_network_function_group
+    #   The route table identifier associated with the network function
+    #   group.
+    #   @return [Types::CoreNetworkNetworkFunctionGroupIdentifier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RouteTableIdentifier AWS API Documentation
     #
     class RouteTableIdentifier < Struct.new(
       :transit_gateway_route_table_arn,
-      :core_network_segment_edge)
+      :core_network_segment_edge,
+      :core_network_network_function_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the action that the service insertion will take for any
+    # segments associated with it.
+    #
+    # @!attribute [rw] action
+    #   The action the service insertion takes for traffic. `send-via` sends
+    #   east-west traffic between attachments. `send-to` sends north-south
+    #   traffic to the security appliance, and then from that to either the
+    #   Internet or to an on-premesis location.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   Describes the mode packets take for the `send-via` action. This is
+    #   not used when the action is `send-to`. `dual-hop` packets traverse
+    #   attachments in both the source to the destination core network
+    #   edges. This mode requires that an inspection attachment must be
+    #   present in all Regions of the service insertion-enabled segments.
+    #   For `single-hop`, packets traverse a single intermediate inserted
+    #   attachment. You can use `EdgeOverride` to specify a specific edge to
+    #   use.
+    #   @return [String]
+    #
+    # @!attribute [rw] when_sent_to
+    #   The list of destination segments if the service insertion action is
+    #   `send-via`.
+    #   @return [Types::WhenSentTo]
+    #
+    # @!attribute [rw] via
+    #   The list of network function groups and any edge overrides for the
+    #   chosen service insertion action. Used for both `send-to` or
+    #   `send-via`.
+    #   @return [Types::Via]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ServiceInsertionAction AWS API Documentation
+    #
+    class ServiceInsertionAction < Struct.new(
+      :action,
+      :mode,
+      :when_sent_to,
+      :via)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the segments associated with the service insertion action.
+    #
+    # @!attribute [rw] send_via
+    #   The list of segments associated with the `send-via` action.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] send_to
+    #   The list of segments associated with the `send-to` action.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ServiceInsertionSegments AWS API Documentation
+    #
+    class ServiceInsertionSegments < Struct.new(
+      :send_via,
+      :send_to)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5707,6 +5927,28 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # The list of network function groups and edge overrides for the service
+    # insertion action. Used for both the `send-to` and `send-via` actions.
+    #
+    # @!attribute [rw] network_function_groups
+    #   The list of network function groups associated with the service
+    #   insertion action.
+    #   @return [Array<Types::NetworkFunctionGroup>]
+    #
+    # @!attribute [rw] with_edge_overrides
+    #   Describes any edge overrides. An edge override is a specific edge to
+    #   be used for traffic.
+    #   @return [Array<Types::EdgeOverride>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/Via AWS API Documentation
+    #
+    class Via < Struct.new(
+      :network_function_groups,
+      :with_edge_overrides)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a VPC attachment.
     #
     # @!attribute [rw] attachment
@@ -5749,6 +5991,22 @@ module Aws::NetworkManager
     class VpcOptions < Struct.new(
       :ipv_6_support,
       :appliance_mode_support)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Displays a list of the destination segments. Used only when the
+    # service insertion action is `send-to`.
+    #
+    # @!attribute [rw] when_sent_to_segments_list
+    #   The list of destination segments when the service insertion action
+    #   is `send-to`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/WhenSentTo AWS API Documentation
+    #
+    class WhenSentTo < Struct.new(
+      :when_sent_to_segments_list)
       SENSITIVE = []
       include Aws::Structure
     end

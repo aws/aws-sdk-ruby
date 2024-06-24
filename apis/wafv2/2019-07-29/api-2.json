@@ -5,6 +5,7 @@
     "endpointPrefix":"wafv2",
     "jsonVersion":"1.1",
     "protocol":"json",
+    "protocols":["json"],
     "serviceAbbreviation":"WAFV2",
     "serviceFullName":"AWS WAFV2",
     "serviceId":"WAFV2",
@@ -149,6 +150,22 @@
         {"shape":"WAFExpiredManagedRuleGroupVersionException"}
       ]
     },
+    "DeleteAPIKey":{
+      "name":"DeleteAPIKey",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteAPIKeyRequest"},
+      "output":{"shape":"DeleteAPIKeyResponse"},
+      "errors":[
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFNonexistentItemException"},
+        {"shape":"WAFOptimisticLockException"},
+        {"shape":"WAFInvalidParameterException"},
+        {"shape":"WAFInvalidOperationException"}
+      ]
+    },
     "DeleteFirewallManagerRuleGroups":{
       "name":"DeleteFirewallManagerRuleGroups",
       "http":{
@@ -281,7 +298,8 @@
       "output":{"shape":"DescribeAllManagedProductsResponse"},
       "errors":[
         {"shape":"WAFInvalidOperationException"},
-        {"shape":"WAFInternalErrorException"}
+        {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFInvalidParameterException"}
       ]
     },
     "DescribeManagedProductsByVendor":{
@@ -355,6 +373,7 @@
       "output":{"shape":"GetDecryptedAPIKeyResponse"},
       "errors":[
         {"shape":"WAFInternalErrorException"},
+        {"shape":"WAFNonexistentItemException"},
         {"shape":"WAFInvalidParameterException"},
         {"shape":"WAFInvalidOperationException"},
         {"shape":"WAFInvalidResourceException"}
@@ -940,7 +959,7 @@
       "required":["InspectionLevel"],
       "members":{
         "InspectionLevel":{"shape":"InspectionLevel"},
-        "EnableMachineLearning":{"shape":"Boolean"}
+        "EnableMachineLearning":{"shape":"EnableMachineLearning"}
       }
     },
     "Action":{"type":"string"},
@@ -1014,7 +1033,13 @@
     },
     "AssociatedResourceType":{
       "type":"string",
-      "enum":["CLOUDFRONT"]
+      "enum":[
+        "CLOUDFRONT",
+        "API_GATEWAY",
+        "COGNITO_USER_POOL",
+        "APP_RUNNER_SERVICE",
+        "VERIFIED_ACCESS_INSTANCE"
+      ]
     },
     "AssociationConfig":{
       "type":"structure",
@@ -1629,6 +1654,22 @@
         "Allow":{"shape":"AllowAction"}
       }
     },
+    "DeleteAPIKeyRequest":{
+      "type":"structure",
+      "required":[
+        "Scope",
+        "APIKey"
+      ],
+      "members":{
+        "Scope":{"shape":"Scope"},
+        "APIKey":{"shape":"APIKey"}
+      }
+    },
+    "DeleteAPIKeyResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteFirewallManagerRuleGroupsRequest":{
       "type":"structure",
       "required":[
@@ -1670,7 +1711,9 @@
       "type":"structure",
       "required":["ResourceArn"],
       "members":{
-        "ResourceArn":{"shape":"ResourceArn"}
+        "ResourceArn":{"shape":"ResourceArn"},
+        "LogType":{"shape":"LogType"},
+        "LogScope":{"shape":"LogScope"}
       }
     },
     "DeleteLoggingConfigurationResponse":{
@@ -1826,6 +1869,7 @@
         "Identifier":{"shape":"FieldIdentifier"}
       }
     },
+    "EnableMachineLearning":{"type":"boolean"},
     "EntityDescription":{
       "type":"string",
       "max":256,
@@ -1846,6 +1890,7 @@
     },
     "ErrorMessage":{"type":"string"},
     "ErrorReason":{"type":"string"},
+    "EvaluationWindowSec":{"type":"long"},
     "ExcludedRule":{
       "type":"structure",
       "required":["Name"],
@@ -2065,7 +2110,9 @@
       "type":"structure",
       "required":["ResourceArn"],
       "members":{
-        "ResourceArn":{"shape":"ResourceArn"}
+        "ResourceArn":{"shape":"ResourceArn"},
+        "LogType":{"shape":"LogType"},
+        "LogScope":{"shape":"LogScope"}
       }
     },
     "GetLoggingConfigurationResponse":{
@@ -2575,7 +2622,8 @@
       "members":{
         "Scope":{"shape":"Scope"},
         "NextMarker":{"shape":"NextMarker"},
-        "Limit":{"shape":"PaginationLimit"}
+        "Limit":{"shape":"PaginationLimit"},
+        "LogScope":{"shape":"LogScope"}
       }
     },
     "ListLoggingConfigurationsResponse":{
@@ -2712,6 +2760,17 @@
       "max":100,
       "min":1
     },
+    "LogScope":{
+      "type":"string",
+      "enum":[
+        "CUSTOMER",
+        "SECURITY_LAKE"
+      ]
+    },
+    "LogType":{
+      "type":"string",
+      "enum":["WAF_LOGS"]
+    },
     "LoggingConfiguration":{
       "type":"structure",
       "required":[
@@ -2723,7 +2782,9 @@
         "LogDestinationConfigs":{"shape":"LogDestinationConfigs"},
         "RedactedFields":{"shape":"RedactedFields"},
         "ManagedByFirewallManager":{"shape":"Boolean"},
-        "LoggingFilter":{"shape":"LoggingFilter"}
+        "LoggingFilter":{"shape":"LoggingFilter"},
+        "LogType":{"shape":"LogType"},
+        "LogScope":{"shape":"LogScope"}
       }
     },
     "LoggingConfigurations":{
@@ -3174,6 +3235,7 @@
       ],
       "members":{
         "Limit":{"shape":"RateLimit"},
+        "EvaluationWindowSec":{"shape":"EvaluationWindowSec"},
         "AggregateKeyType":{"shape":"RateBasedStatementAggregateKeyType"},
         "ScopeDownStatement":{"shape":"Statement"},
         "ForwardedIPConfig":{"shape":"ForwardedIPConfig"},
@@ -3206,8 +3268,7 @@
     "RateBasedStatementCustomKeys":{
       "type":"list",
       "member":{"shape":"RateBasedStatementCustomKey"},
-      "max":5,
-      "min":1
+      "max":5
     },
     "RateBasedStatementManagedKeysIPSet":{
       "type":"structure",
@@ -3612,8 +3673,7 @@
     "RuleActionOverrides":{
       "type":"list",
       "member":{"shape":"RuleActionOverride"},
-      "max":100,
-      "min":1
+      "max":100
     },
     "RuleGroup":{
       "type":"structure",
@@ -3773,6 +3833,7 @@
       ]
     },
     "SolveTimestamp":{"type":"long"},
+    "SourceType":{"type":"string"},
     "SqliMatchStatement":{
       "type":"structure",
       "required":[
@@ -4223,7 +4284,8 @@
     "WAFLimitsExceededException":{
       "type":"structure",
       "members":{
-        "Message":{"shape":"ErrorMessage"}
+        "Message":{"shape":"ErrorMessage"},
+        "SourceType":{"shape":"SourceType"}
       },
       "exception":true
     },

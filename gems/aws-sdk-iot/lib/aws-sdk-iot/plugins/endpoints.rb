@@ -14,6 +14,7 @@ module Aws::IoT
       option(
         :endpoint_provider,
         doc_type: 'Aws::IoT::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::IoT
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -96,6 +98,8 @@ module Aws::IoT
             Aws::IoT::Endpoints::CreateBillingGroup.build(context)
           when :create_certificate_from_csr
             Aws::IoT::Endpoints::CreateCertificateFromCsr.build(context)
+          when :create_certificate_provider
+            Aws::IoT::Endpoints::CreateCertificateProvider.build(context)
           when :create_custom_metric
             Aws::IoT::Endpoints::CreateCustomMetric.build(context)
           when :create_dimension
@@ -160,6 +164,8 @@ module Aws::IoT
             Aws::IoT::Endpoints::DeleteCACertificate.build(context)
           when :delete_certificate
             Aws::IoT::Endpoints::DeleteCertificate.build(context)
+          when :delete_certificate_provider
+            Aws::IoT::Endpoints::DeleteCertificateProvider.build(context)
           when :delete_custom_metric
             Aws::IoT::Endpoints::DeleteCustomMetric.build(context)
           when :delete_dimension
@@ -234,6 +240,8 @@ module Aws::IoT
             Aws::IoT::Endpoints::DescribeCACertificate.build(context)
           when :describe_certificate
             Aws::IoT::Endpoints::DescribeCertificate.build(context)
+          when :describe_certificate_provider
+            Aws::IoT::Endpoints::DescribeCertificateProvider.build(context)
           when :describe_custom_metric
             Aws::IoT::Endpoints::DescribeCustomMetric.build(context)
           when :describe_default_authorizer
@@ -352,6 +360,8 @@ module Aws::IoT
             Aws::IoT::Endpoints::ListBillingGroups.build(context)
           when :list_ca_certificates
             Aws::IoT::Endpoints::ListCACertificates.build(context)
+          when :list_certificate_providers
+            Aws::IoT::Endpoints::ListCertificateProviders.build(context)
           when :list_certificates
             Aws::IoT::Endpoints::ListCertificates.build(context)
           when :list_certificates_by_ca
@@ -512,6 +522,8 @@ module Aws::IoT
             Aws::IoT::Endpoints::UpdateCACertificate.build(context)
           when :update_certificate
             Aws::IoT::Endpoints::UpdateCertificate.build(context)
+          when :update_certificate_provider
+            Aws::IoT::Endpoints::UpdateCertificateProvider.build(context)
           when :update_custom_metric
             Aws::IoT::Endpoints::UpdateCustomMetric.build(context)
           when :update_dimension

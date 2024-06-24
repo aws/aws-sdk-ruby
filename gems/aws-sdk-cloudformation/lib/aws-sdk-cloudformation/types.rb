@@ -381,8 +381,11 @@ module Aws::CloudFormation
     # perform if you execute the change set.
     #
     # @!attribute [rw] type
-    #   The type of entity that CloudFormation changes. Currently, the only
-    #   entity type is `Resource`.
+    #   The type of entity that CloudFormation changes.
+    #
+    #   * `Resource` This change is for a resource.
+    #
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] hook_invocation_count
@@ -580,6 +583,10 @@ module Aws::CloudFormation
     #   The root change set ID.
     #   @return [String]
     #
+    # @!attribute [rw] import_existing_resources
+    #   Indicates if the change set imports resources that already exist.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ChangeSetSummary AWS API Documentation
     #
     class ChangeSetSummary < Struct.new(
@@ -594,10 +601,20 @@ module Aws::CloudFormation
       :description,
       :include_nested_stacks,
       :parent_change_set_id,
-      :root_change_set_id)
+      :root_change_set_id,
+      :import_existing_resources)
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # No more than 5 generated templates can be in an `InProgress` or
+    # `Pending` status at one time. This error is also returned if a
+    # generated template that is in an `InProgress` or `Pending` status is
+    # attempted to be updated or deleted.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ConcurrentResourcesLimitExceededException AWS API Documentation
+    #
+    class ConcurrentResourcesLimitExceededException < Aws::EmptyStructure; end
 
     # The input for the ContinueUpdateRollback action.
     #
@@ -723,7 +740,8 @@ module Aws::CloudFormation
     #   must point to a template (max size: 460,800 bytes) that's located
     #   in an Amazon S3 bucket or a Systems Manager document. CloudFormation
     #   generates the change set by comparing this template with the stack
-    #   that you specified.
+    #   that you specified. The location for an Amazon S3 bucket must start
+    #   with `https://`.
     #
     #   Conditional: You must specify only `TemplateBody` or `TemplateURL`.
     #   @return [String]
@@ -811,6 +829,11 @@ module Aws::CloudFormation
     #     For more information about macros, see [Using CloudFormation
     #     macros to perform custom processing on templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -836,8 +859,13 @@ module Aws::CloudFormation
     #   grants permissions to all resource types. Identity and Access
     #   Management (IAM) uses this parameter for condition keys in IAM
     #   policies for CloudFormation. For more information, see [Controlling
-    #   access with Identity and Access Management][1] in the CloudFormation
-    #   User Guide.
+    #   access with Identity and Access Management][1] in the
+    #   *CloudFormation User Guide*.
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #
@@ -958,6 +986,24 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html
     #   @return [String]
     #
+    # @!attribute [rw] import_existing_resources
+    #   Indicates if the change set imports resources that already exist.
+    #
+    #   <note markdown="1"> This parameter can only import resources that have custom names in
+    #   templates. For more information, see [name type][1] in the
+    #   *CloudFormation User Guide*. To import resources that do not accept
+    #   custom names, such as EC2 instances, use the resource import feature
+    #   instead. For more information, see [Bringing existing resources into
+    #   CloudFormation management][2] in the *CloudFormation User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSetInput AWS API Documentation
     #
     class CreateChangeSetInput < Struct.new(
@@ -978,7 +1024,8 @@ module Aws::CloudFormation
       :change_set_type,
       :resources_to_import,
       :include_nested_stacks,
-      :on_stack_failure)
+      :on_stack_failure,
+      :import_existing_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1002,6 +1049,52 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @!attribute [rw] resources
+    #   An optional list of resources to be included in the generated
+    #   template.
+    #
+    #   If no resources are specified,the template will be created without
+    #   any resources. Resources can be added to the template using the
+    #   `UpdateGeneratedTemplate` API action.
+    #   @return [Array<Types::ResourceDefinition>]
+    #
+    # @!attribute [rw] generated_template_name
+    #   The name assigned to the generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_name
+    #   An optional name or ARN of a stack to use as the base stack for the
+    #   generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_configuration
+    #   The configuration details of the generated template, including the
+    #   `DeletionPolicy` and `UpdateReplacePolicy`.
+    #   @return [Types::TemplateConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateGeneratedTemplateInput AWS API Documentation
+    #
+    class CreateGeneratedTemplateInput < Struct.new(
+      :resources,
+      :generated_template_name,
+      :stack_name,
+      :template_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] generated_template_id
+    #   The ID of the generated template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateGeneratedTemplateOutput AWS API Documentation
+    #
+    class CreateGeneratedTemplateOutput < Struct.new(
+      :generated_template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for CreateStack action.
     #
     # @!attribute [rw] stack_name
@@ -1018,7 +1111,7 @@ module Aws::CloudFormation
     # @!attribute [rw] template_body
     #   Structure containing the template body with a minimum length of 1
     #   byte and a maximum length of 51,200 bytes. For more information, go
-    #   to [Template anatomy][1] in the CloudFormation User Guide.
+    #   to [Template anatomy][1] in the *CloudFormation User Guide*.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
@@ -1032,7 +1125,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to
     #   a template (max size: 460,800 bytes) that's located in an Amazon S3
     #   bucket or a Systems Manager document. For more information, go to
-    #   the [Template anatomy][1] in the CloudFormation User Guide.
+    #   the [Template anatomy][1] in the *CloudFormation User Guide*. The
+    #   location for an Amazon S3 bucket must start with `https://`.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
@@ -1067,7 +1161,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] timeout_in_minutes
     #   The amount of time that can pass before the stack status becomes
-    #   CREATE\_FAILED; if `DisableRollback` is not set or is set to
+    #   `CREATE_FAILED`; if `DisableRollback` is not set or is set to
     #   `false`, the stack will be rolled back.
     #   @return [Integer]
     #
@@ -1106,17 +1200,17 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ AWS::IAM::AccessKey][1]
+    #     * [AWS::IAM::AccessKey][1]
     #
-    #     * [ AWS::IAM::Group][2]
+    #     * [AWS::IAM::Group][2]
     #
     #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ AWS::IAM::Policy][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ AWS::IAM::Role][5]
+    #     * [AWS::IAM::Role][5]
     #
-    #     * [ AWS::IAM::User][6]
+    #     * [AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
     #
@@ -1153,6 +1247,11 @@ module Aws::CloudFormation
     #     For more information, see [Using CloudFormation macros to perform
     #     custom processing on templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -1186,6 +1285,11 @@ module Aws::CloudFormation
     #   CloudFormation-specific condition keys in IAM policies. For more
     #   information, see [Controlling Access with Identity and Access
     #   Management][1].
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #
@@ -1230,8 +1334,9 @@ module Aws::CloudFormation
     # @!attribute [rw] stack_policy_url
     #   Location of a file containing the stack policy. The URL must point
     #   to a policy (maximum size: 16 KB) located in an S3 bucket in the
-    #   same Region as the stack. You can specify either the
-    #   `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.
+    #   same Region as the stack. The location for an Amazon S3 bucket must
+    #   start with `https://`. You can specify either the `StackPolicyBody`
+    #   or the `StackPolicyURL` parameter, but not both.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1482,8 +1587,8 @@ module Aws::CloudFormation
     # @!attribute [rw] template_body
     #   The structure that contains the template body, with a minimum length
     #   of 1 byte and a maximum length of 51,200 bytes. For more
-    #   information, see [Template Anatomy][1] in the CloudFormation User
-    #   Guide.
+    #   information, see [Template Anatomy][1] in the *CloudFormation User
+    #   Guide*.
     #
     #   Conditional: You must specify either the TemplateBody or the
     #   TemplateURL parameter, but not both.
@@ -1497,8 +1602,8 @@ module Aws::CloudFormation
     #   The location of the file that contains the template body. The URL
     #   must point to a template (maximum size: 460,800 bytes) that's
     #   located in an Amazon S3 bucket or a Systems Manager document. For
-    #   more information, see [Template Anatomy][1] in the CloudFormation
-    #   User Guide.
+    #   more information, see [Template Anatomy][1] in the *CloudFormation
+    #   User Guide*.
     #
     #   Conditional: You must specify either the TemplateBody or the
     #   TemplateURL parameter, but not both.
@@ -1545,17 +1650,17 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ AWS::IAM::AccessKey][1]
+    #     * [AWS::IAM::AccessKey][1]
     #
-    #     * [ AWS::IAM::Group][2]
+    #     * [AWS::IAM::Group][2]
     #
     #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ AWS::IAM::Policy][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ AWS::IAM::Role][5]
+    #     * [AWS::IAM::Role][5]
     #
-    #     * [ AWS::IAM::User][6]
+    #     * [AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
     #
@@ -1823,6 +1928,18 @@ module Aws::CloudFormation
     #
     class DeleteChangeSetOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] generated_template_name
+    #   The name or Amazon Resource Name (ARN) of a generated template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteGeneratedTemplateInput AWS API Documentation
+    #
+    class DeleteGeneratedTemplateInput < Struct.new(
+      :generated_template_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for DeleteStack action.
     #
     # @!attribute [rw] stack_name
@@ -1873,13 +1990,24 @@ module Aws::CloudFormation
     #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
     #   @return [String]
     #
+    # @!attribute [rw] deletion_mode
+    #   Specifies the deletion mode for the stack. Possible values are:
+    #
+    #   * `STANDARD` - Use the standard behavior. Specifying this value is
+    #     the same as not specifying this parameter.
+    #
+    #   * `FORCE_DELETE_STACK` - Delete the stack if it's stuck in a
+    #     `DELETE_FAILED` state due to resource deletion failure.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInput AWS API Documentation
     #
     class DeleteStackInput < Struct.new(
       :stack_name,
       :retain_resources,
       :role_arn,
-      :client_request_token)
+      :client_request_token,
+      :deletion_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2265,12 +2393,18 @@ module Aws::CloudFormation
     #   identifies the next page of information that you want to retrieve.
     #   @return [String]
     #
+    # @!attribute [rw] include_property_values
+    #   If `true`, the returned changes include detailed changes in the
+    #   property values.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSetInput AWS API Documentation
     #
     class DescribeChangeSetInput < Struct.new(
       :change_set_name,
       :stack_name,
-      :next_token)
+      :next_token,
+      :include_property_values)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2401,6 +2535,21 @@ module Aws::CloudFormation
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html
     #   @return [String]
     #
+    # @!attribute [rw] import_existing_resources
+    #   Indicates if the change set imports resources that already exist.
+    #
+    #   <note markdown="1"> This parameter can only import resources that have [custom names][1]
+    #   in templates. To import resources that do not accept custom names,
+    #   such as EC2 instances, use the [resource import][2] feature instead.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSetOutput AWS API Documentation
     #
     class DescribeChangeSetOutput < Struct.new(
@@ -2423,7 +2572,108 @@ module Aws::CloudFormation
       :include_nested_stacks,
       :parent_change_set_id,
       :root_change_set_id,
-      :on_stack_failure)
+      :on_stack_failure,
+      :import_existing_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] generated_template_name
+    #   The name or Amazon Resource Name (ARN) of a generated template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeGeneratedTemplateInput AWS API Documentation
+    #
+    class DescribeGeneratedTemplateInput < Struct.new(
+      :generated_template_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] generated_template_id
+    #   The Amazon Resource Name (ARN) of the generated template. The format
+    #   is
+    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:generatedtemplate/$\{Id\}`.
+    #   For example,
+    #   `arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc
+    #   `.
+    #   @return [String]
+    #
+    # @!attribute [rw] generated_template_name
+    #   The name of the generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   A list of objects describing the details of the resources in the
+    #   template generation.
+    #   @return [Array<Types::ResourceDetail>]
+    #
+    # @!attribute [rw] status
+    #   The status of the template generation. Supported values are:
+    #
+    #   * `CreatePending` - the creation of the template is pending.
+    #
+    #   * `CreateInProgress` - the creation of the template is in progress.
+    #
+    #   * `DeletePending` - the deletion of the template is pending.
+    #
+    #   * `DeleteInProgress` - the deletion of the template is in progress.
+    #
+    #   * `UpdatePending` - the update of the template is pending.
+    #
+    #   * `UpdateInProgress` - the update of the template is in progress.
+    #
+    #   * `Failed` - the template operation failed.
+    #
+    #   * `Complete` - the template operation is complete.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current template generation status. This will
+    #   provide more details if a failure happened.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the generated template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time the generated template was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] progress
+    #   An object describing the progress of the template generation.
+    #   @return [Types::TemplateProgress]
+    #
+    # @!attribute [rw] stack_id
+    #   The stack ARN of the base stack if a base stack was provided when
+    #   generating the template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_configuration
+    #   The configuration details of the generated template, including the
+    #   `DeletionPolicy` and `UpdateReplacePolicy`.
+    #   @return [Types::TemplateConfiguration]
+    #
+    # @!attribute [rw] total_warnings
+    #   The number of warnings generated for this template. The warnings are
+    #   found in the details of each of the resources in the template.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeGeneratedTemplateOutput AWS API Documentation
+    #
+    class DescribeGeneratedTemplateOutput < Struct.new(
+      :generated_template_id,
+      :generated_template_name,
+      :resources,
+      :status,
+      :status_reason,
+      :creation_time,
+      :last_updated_time,
+      :progress,
+      :stack_id,
+      :template_configuration,
+      :total_warnings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2511,6 +2761,100 @@ module Aws::CloudFormation
       :publisher_status,
       :identity_provider,
       :publisher_profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_scan_id
+    #   The Amazon Resource Name (ARN) of the resource scan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeResourceScanInput AWS API Documentation
+    #
+    class DescribeResourceScanInput < Struct.new(
+      :resource_scan_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_scan_id
+    #   The Amazon Resource Name (ARN) of the resource scan. The format is
+    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:resourceScan/$\{Id\}`.
+    #   An example is
+    #   `arn:aws:cloudformation:us-east-1:123456789012:resourceScan/f5b490f7-7ed4-428a-aa06-31ff25db0772
+    #   `.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the resource scan.
+    #
+    #   INPROGRESS
+    #
+    #   : The resource scan is still in progress.
+    #
+    #   COMPLETE
+    #
+    #   : The resource scan is complete.
+    #
+    #   EXPIRED
+    #
+    #   : The resource scan has expired.
+    #
+    #   FAILED
+    #
+    #   : The resource scan has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the resource scan status, providing more information
+    #   if a failure happened.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time that the resource scan was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that the resource scan was finished.
+    #   @return [Time]
+    #
+    # @!attribute [rw] percentage_completed
+    #   The percentage of the resource scan that has been completed.
+    #   @return [Float]
+    #
+    # @!attribute [rw] resource_types
+    #   The list of resource types for the specified scan. Resource types
+    #   are only available for scans with a `Status` set to `COMPLETE` or
+    #   `FAILED `.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resources_scanned
+    #   The number of resources that were listed. This is only available for
+    #   scans with a `Status` set to `COMPLETE`, `EXPIRED`, or `FAILED `.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resources_read
+    #   The number of resources that were read. This is only available for
+    #   scans with a `Status` set to `COMPLETE`, `EXPIRED`, or `FAILED `.
+    #
+    #   <note markdown="1"> This field may be 0 if the resource scan failed with a
+    #   `ResourceScanLimitExceededException`.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeResourceScanOutput AWS API Documentation
+    #
+    class DescribeResourceScanOutput < Struct.new(
+      :resource_scan_id,
+      :status,
+      :status_reason,
+      :start_time,
+      :end_time,
+      :percentage_completed,
+      :resource_types,
+      :resources_scanned,
+      :resources_read)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3368,7 +3712,7 @@ module Aws::CloudFormation
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html
-    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    #   [2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
     #   @return [String]
     #
     # @!attribute [rw] publisher_id
@@ -3665,7 +4009,7 @@ module Aws::CloudFormation
     # @!attribute [rw] template_body
     #   Structure containing the template body with a minimum length of 1
     #   byte and a maximum length of 51,200 bytes. (For more information, go
-    #   to [Template Anatomy][1] in the CloudFormation User Guide.)
+    #   to [Template Anatomy][1] in the *CloudFormation User Guide*.)
     #
     #   Conditional: You must pass `TemplateBody` or `TemplateURL`. If both
     #   are passed, only `TemplateBody` is used.
@@ -3679,7 +4023,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to
     #   a template that's located in an Amazon S3 bucket or a Systems
     #   Manager document. For more information, go to [Template Anatomy][1]
-    #   in the CloudFormation User Guide.
+    #   in the *CloudFormation User Guide*. The location for an Amazon S3
+    #   bucket must start with `https://`.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
@@ -3816,6 +4161,73 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # The generated template was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GeneratedTemplateNotFoundException AWS API Documentation
+    #
+    class GeneratedTemplateNotFoundException < Aws::EmptyStructure; end
+
+    # @!attribute [rw] format
+    #   The language to use to retrieve for the generated template.
+    #   Supported values are:
+    #
+    #   * `JSON`
+    #
+    #   * `YAML`
+    #   @return [String]
+    #
+    # @!attribute [rw] generated_template_name
+    #   The name or Amazon Resource Name (ARN) of the generated template.
+    #   The format is
+    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:generatedtemplate/$\{Id\}`.
+    #   For example,
+    #   `arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc
+    #   `.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetGeneratedTemplateInput AWS API Documentation
+    #
+    class GetGeneratedTemplateInput < Struct.new(
+      :format,
+      :generated_template_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the template generation. Supported values are:
+    #
+    #   * `CreatePending` - the creation of the template is pending.
+    #
+    #   * `CreateInProgress` - the creation of the template is in progress.
+    #
+    #   * `DeletePending` - the deletion of the template is pending.
+    #
+    #   * `DeleteInProgress` - the deletion of the template is in progress.
+    #
+    #   * `UpdatePending` - the update of the template is pending.
+    #
+    #   * `UpdateInProgress` - the update of the template is in progress.
+    #
+    #   * `Failed` - the template operation failed.
+    #
+    #   * `Complete` - the template operation is complete.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_body
+    #   The template body of the generated template, in the language
+    #   specified by the `Language` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetGeneratedTemplateOutput AWS API Documentation
+    #
+    class GetGeneratedTemplateOutput < Struct.new(
+      :status,
+      :template_body)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for the GetStackPolicy action.
     #
     # @!attribute [rw] stack_name
@@ -3835,8 +4247,8 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] stack_policy_body
     #   Structure containing the stack policy body. (For more information,
-    #   go to [ Prevent Updates to Stack Resources][1] in the CloudFormation
-    #   User Guide.)
+    #   go to [ Prevent Updates to Stack Resources][1] in the
+    #   *CloudFormation User Guide*.)
     #
     #
     #
@@ -3896,7 +4308,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] template_body
     #   Structure containing the template body. (For more information, go to
-    #   [Template Anatomy][1] in the CloudFormation User Guide.)
+    #   [Template Anatomy][1] in the *CloudFormation User Guide*.)
     #
     #   CloudFormation returns the same template that was used when the
     #   stack was created.
@@ -3928,8 +4340,8 @@ module Aws::CloudFormation
     # @!attribute [rw] template_body
     #   Structure containing the template body with a minimum length of 1
     #   byte and a maximum length of 51,200 bytes. For more information
-    #   about templates, see [Template anatomy][1] in the CloudFormation
-    #   User Guide.
+    #   about templates, see [Template anatomy][1] in the *CloudFormation
+    #   User Guide*.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
@@ -3943,8 +4355,9 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to
     #   a template (max size: 460,800 bytes) that's located in an Amazon S3
     #   bucket or a Systems Manager document. For more information about
-    #   templates, see [Template anatomy][1] in the CloudFormation User
-    #   Guide.
+    #   templates, see [Template anatomy][1] in the *CloudFormation User
+    #   Guide*. The location for an Amazon S3 bucket must start with
+    #   `https://`.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `StackName`, `StackSetName`, `TemplateBody`, or `TemplateURL`.
@@ -4291,6 +4704,48 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   A string that identifies the next page of resource scan results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   If the number of available results exceeds this maximum, the
+    #   response includes a `NextToken` value that you can use for the
+    #   `NextToken` parameter to get the next set of results. By default the
+    #   `ListGeneratedTemplates` API action will return at most 50 results
+    #   in each response. The maximum value is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListGeneratedTemplatesInput AWS API Documentation
+    #
+    class ListGeneratedTemplatesInput < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] summaries
+    #   A list of summaries of the generated templates.
+    #   @return [Array<Types::TemplateSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call `ListGeneratedTemplates` again and use that value for the
+    #   `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to an empty string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListGeneratedTemplatesOutput AWS API Documentation
+    #
+    class ListGeneratedTemplatesOutput < Struct.new(
+      :summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] export_name
     #   The name of the exported output value. CloudFormation returns the
     #   stack names that are importing this value.
@@ -4325,6 +4780,172 @@ module Aws::CloudFormation
     #
     class ListImportsOutput < Struct.new(
       :imports,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_scan_id
+    #   The Amazon Resource Name (ARN) of the resource scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   The list of resources for which you want to get the related
+    #   resources. Up to 100 resources can be provided.
+    #   @return [Array<Types::ScannedResourceIdentifier>]
+    #
+    # @!attribute [rw] next_token
+    #   A string that identifies the next page of resource scan results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   If the number of available results exceeds this maximum, the
+    #   response includes a `NextToken` value that you can use for the
+    #   `NextToken` parameter to get the next set of results. By default the
+    #   `ListResourceScanRelatedResources` API action will return up to 100
+    #   results in each response. The maximum value is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListResourceScanRelatedResourcesInput AWS API Documentation
+    #
+    class ListResourceScanRelatedResourcesInput < Struct.new(
+      :resource_scan_id,
+      :resources,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] related_resources
+    #   List of up to `MaxResults` resources in the specified resource scan
+    #   related to the specified resources.
+    #   @return [Array<Types::ScannedResource>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call `ListResourceScanRelatedResources` again and use that value for
+    #   the `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to an empty string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListResourceScanRelatedResourcesOutput AWS API Documentation
+    #
+    class ListResourceScanRelatedResourcesOutput < Struct.new(
+      :related_resources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_scan_id
+    #   The Amazon Resource Name (ARN) of the resource scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   If specified, the returned resources will have the specified
+    #   resource identifier (or one of them in the case where the resource
+    #   has multiple identifiers).
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type_prefix
+    #   If specified, the returned resources will be of any of the resource
+    #   types with the specified prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_key
+    #   If specified, the returned resources will have a matching tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value
+    #   If specified, the returned resources will have a matching tag value.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A string that identifies the next page of resource scan results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   If the number of available results exceeds this maximum, the
+    #   response includes a `NextToken` value that you can use for the
+    #   `NextToken` parameter to get the next set of results. By default the
+    #   `ListResourceScanResources` API action will return at most 100
+    #   results in each response. The maximum value is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListResourceScanResourcesInput AWS API Documentation
+    #
+    class ListResourceScanResourcesInput < Struct.new(
+      :resource_scan_id,
+      :resource_identifier,
+      :resource_type_prefix,
+      :tag_key,
+      :tag_value,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resources
+    #   List of up to `MaxResults` resources in the specified resource scan
+    #   that match all of the specified filters.
+    #   @return [Array<Types::ScannedResource>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call `ListResourceScanResources` again and use that value for the
+    #   `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to an empty string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListResourceScanResourcesOutput AWS API Documentation
+    #
+    class ListResourceScanResourcesOutput < Struct.new(
+      :resources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A string that identifies the next page of resource scan results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   If the number of available results exceeds this maximum, the
+    #   response includes a `NextToken` value that you can use for the
+    #   `NextToken` parameter to get the next set of results. The default
+    #   value is 10. The maximum value is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListResourceScansInput AWS API Documentation
+    #
+    class ListResourceScansInput < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_scan_summaries
+    #   The list of scans returned.
+    #   @return [Array<Types::ResourceScanSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call `ListResourceScans` again and use that value for the
+    #   `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to an empty string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListResourceScansOutput AWS API Documentation
+    #
+    class ListResourceScansOutput < Struct.new(
+      :resource_scan_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -4419,7 +5040,7 @@ module Aws::CloudFormation
     end
 
     # @!attribute [rw] summaries
-    #   A list of `StackInstanceResourceDriftSummary` structures that
+    #   A list of `StackInstanceResourceDriftsSummary` structures that
     #   contain information about the specified stack instances.
     #   @return [Array<Types::StackInstanceResourceDriftsSummary>]
     #
@@ -4578,6 +5199,82 @@ module Aws::CloudFormation
     #
     class ListStackResourcesOutput < Struct.new(
       :stack_resource_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stack_set_name
+    #   The name or unique ID of the stack set that you want to get
+    #   automatic deployment targets for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A string that identifies the next page of stack set deployment
+    #   targets that you want to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to be returned with a single call. If
+    #   the number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] call_as
+    #   Specifies whether you are acting as an account administrator in the
+    #   organization's management account or as a delegated administrator
+    #   in a member account.
+    #
+    #   By default, `SELF` is specified. Use `SELF` for StackSets with
+    #   self-managed permissions.
+    #
+    #   * If you are signed in to the management account, specify `SELF`.
+    #
+    #   * If you are signed in to a delegated administrator account, specify
+    #     `DELEGATED_ADMIN`.
+    #
+    #     Your Amazon Web Services account must be registered as a delegated
+    #     administrator in the management account. For more information, see
+    #     [Register a delegated administrator][1] in the *CloudFormation
+    #     User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetAutoDeploymentTargetsInput AWS API Documentation
+    #
+    class ListStackSetAutoDeploymentTargetsInput < Struct.new(
+      :stack_set_name,
+      :next_token,
+      :max_results,
+      :call_as)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] summaries
+    #   An array of summaries of the deployment targets for the stack set.
+    #   @return [Array<Types::StackSetAutoDeploymentTargetSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the request doesn't return all the remaining results,
+    #   `NextToken` is set to a token. To retrieve the next set of results,
+    #   call [ListStackSetAutoDeploymentTargets][1] again and use that value
+    #   for the `NextToken` parameter. If the request returns all results,
+    #   `NextToken` is set to an empty string.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackSetAutoDeploymentTargets.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetAutoDeploymentTargetsOutput AWS API Documentation
+    #
+    class ListStackSetAutoDeploymentTargetsOutput < Struct.new(
+      :summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -5779,7 +6476,7 @@ module Aws::CloudFormation
     #
     #   For CloudFormation to assume the specified execution role, the role
     #   must contain a trust relationship with the CloudFormation service
-    #   principle (`resources.cloudformation.amazonaws.com`). For more
+    #   principal (`resources.cloudformation.amazonaws.com`). For more
     #   information about adding trust relationships, see [Modifying a role
     #   trust policy][1] in the *Identity and Access Management User Guide*.
     #
@@ -5893,6 +6590,25 @@ module Aws::CloudFormation
     # The `ResourceChange` structure describes the resource and the action
     # that CloudFormation will perform on it if you execute this change set.
     #
+    # @!attribute [rw] policy_action
+    #   The action that will be taken on the physical resource when the
+    #   change set is executed.
+    #
+    #   * `Delete` The resource will be deleted.
+    #
+    #   * `Retain` The resource will be retained.
+    #
+    #   * `Snapshot` The resource will have a snapshot taken.
+    #
+    #   * `ReplaceAndDelete` The resource will be replaced and then deleted.
+    #
+    #   * `ReplaceAndRetain` The resource will be replaced and then
+    #     retained.
+    #
+    #   * `ReplaceAndSnapshot` The resource will be replaced and then have a
+    #     snapshot taken.
+    #   @return [String]
+    #
     # @!attribute [rw] action
     #   The action that CloudFormation takes on the resource, such as `Add`
     #   (adds a new resource), `Modify` (changes a resource), `Remove`
@@ -5952,9 +6668,20 @@ module Aws::CloudFormation
     #   stack template.
     #   @return [Types::ModuleInfo]
     #
+    # @!attribute [rw] before_context
+    #   An encoded JSON string containing the context of the resource before
+    #   the change is executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_context
+    #   An encoded JSON string containing the context of the resource after
+    #   the change is executed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceChange AWS API Documentation
     #
     class ResourceChange < Struct.new(
+      :policy_action,
       :action,
       :logical_resource_id,
       :physical_resource_id,
@@ -5963,7 +6690,9 @@ module Aws::CloudFormation
       :scope,
       :details,
       :change_set_id,
-      :module_info)
+      :module_info,
+      :before_context,
+      :after_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6049,6 +6778,126 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # A resource included in a generated template. This data type is used
+    # with the `CreateGeneratedTemplate` and `UpdateGeneratedTemplate` API
+    # actions.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource, such as `AWS::DynamoDB::Table`. For the
+    #   list of supported resources, see [IaC generator supported resource
+    #   types][1] in the *CloudFormation User Guide*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_id
+    #   The logical resource id for this resource in the generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   A list of up to 256 key-value pairs that identifies the scanned
+    #   resource. The key is the name of one of the primary identifiers for
+    #   the resource. (Primary identifiers are specified in the
+    #   `primaryIdentifier` list in the resource schema.) The value is the
+    #   value of that primary identifier. For example, for a
+    #   `AWS::DynamoDB::Table` resource, the primary identifiers is
+    #   `TableName` so the key-value pair could be `"TableName":
+    #   "MyDDBTable"`. For more information, see [primaryIdentifier][1] in
+    #   the *CloudFormation Command Line Interface User guide for extension
+    #   development*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceDefinition AWS API Documentation
+    #
+    class ResourceDefinition < Struct.new(
+      :resource_type,
+      :logical_resource_id,
+      :resource_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a resource in a generated template
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource, such as `AWS::DynamoDB::Table`. For the
+    #   list of supported resources, see [IaC generator supported resource
+    #   types][1] In the *CloudFormation User Guide*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_id
+    #   The logical id for this resource in the final generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   A list of up to 256 key-value pairs that identifies the resource in
+    #   the generated template. The key is the name of one of the primary
+    #   identifiers for the resource. (Primary identifiers are specified in
+    #   the `primaryIdentifier` list in the resource schema.) The value is
+    #   the value of that primary identifier. For example, for a
+    #   `AWS::DynamoDB::Table` resource, the primary identifiers is
+    #   `TableName` so the key-value pair could be `"TableName":
+    #   "MyDDBTable"`. For more information, see [primaryIdentifier][1] in
+    #   the *CloudFormation Command Line Interface User guide for extension
+    #   development*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] resource_status
+    #   Status of the processing of a resource in a generated template.
+    #
+    #   InProgress
+    #
+    #   : The resource processing is still in progress.
+    #
+    #   Complete
+    #
+    #   : The resource processing is complete.
+    #
+    #   Pending
+    #
+    #   : The resource processing is pending.
+    #
+    #   Failed
+    #
+    #   : The resource processing has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_status_reason
+    #   The reason for the resource detail, providing more information if a
+    #   failure happened.
+    #   @return [String]
+    #
+    # @!attribute [rw] warnings
+    #   The warnings generated for this resource.
+    #   @return [Array<Types::WarningDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceDetail AWS API Documentation
+    #
+    class ResourceDetail < Struct.new(
+      :resource_type,
+      :logical_resource_id,
+      :resource_identifier,
+      :resource_status,
+      :resource_status_reason,
+      :warnings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the target resources of a specific type in your import
     # template (for example, all `AWS::S3::Bucket` resources) and the
     # properties you can provide during the import to identify resources of
@@ -6080,6 +6929,91 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # A resource scan is currently in progress. Only one can be run at a
+    # time for an account in a Region.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceScanInProgressException AWS API Documentation
+    #
+    class ResourceScanInProgressException < Aws::EmptyStructure; end
+
+    # The limit on resource scans has been exceeded. Reasons include:
+    #
+    # * Exceeded the daily quota for resource scans.
+    #
+    # * A resource scan recently failed. You must wait 10 minutes before
+    #   starting a new resource scan.
+    #
+    # * The last resource scan failed after exceeding 100,000 resources.
+    #   When this happens, you must wait 24 hours before starting a new
+    #   resource scan.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceScanLimitExceededException AWS API Documentation
+    #
+    class ResourceScanLimitExceededException < Aws::EmptyStructure; end
+
+    # The resource scan was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceScanNotFoundException AWS API Documentation
+    #
+    class ResourceScanNotFoundException < Aws::EmptyStructure; end
+
+    # A summary of the resource scan. This is returned by the
+    # `ListResourceScan` API action.
+    #
+    # @!attribute [rw] resource_scan_id
+    #   The Amazon Resource Name (ARN) of the resource scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the resource scan.
+    #
+    #   INPROGRESS
+    #
+    #   : The resource scan is still in progress.
+    #
+    #   COMPLETE
+    #
+    #   : The resource scan is complete.
+    #
+    #   EXPIRED
+    #
+    #   : The resource scan has expired.
+    #
+    #   FAILED
+    #
+    #   : The resource scan has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the resource scan status, providing more information
+    #   if a failure happened.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time that the resource scan was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that the resource scan was finished.
+    #   @return [Time]
+    #
+    # @!attribute [rw] percentage_completed
+    #   The percentage of the resource scan that has been completed.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceScanSummary AWS API Documentation
+    #
+    class ResourceScanSummary < Struct.new(
+      :resource_scan_id,
+      :status,
+      :status_reason,
+      :start_time,
+      :end_time,
+      :percentage_completed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The field that CloudFormation will change, such as the name of a
     # resource's property, and whether the resource will be recreated.
     #
@@ -6099,11 +7033,36 @@ module Aws::CloudFormation
     #   to this property causes the resource to be recreated. The value can
     #   be `Never`, `Always`, or `Conditionally`. To determine the
     #   conditions for a `Conditionally` recreation, see the update behavior
-    #   for that [property][1] in the CloudFormation User Guide.
+    #   for that [property][1] in the *CloudFormation User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The property path of the property.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_value
+    #   The value of the property before the change is executed. Large
+    #   values can be truncated.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_value
+    #   The value of the property after the change is executed. Large values
+    #   can be truncated.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_change_type
+    #   The type of change to be made to the property if the change is
+    #   executed.
+    #
+    #   * `Add` The item will be added.
+    #
+    #   * `Remove` The item will be removed.
+    #
+    #   * `Modify` The item will be modified.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceTargetDefinition AWS API Documentation
@@ -6111,7 +7070,11 @@ module Aws::CloudFormation
     class ResourceTargetDefinition < Struct.new(
       :attribute,
       :name,
-      :requires_recreation)
+      :requires_recreation,
+      :path,
+      :before_value,
+      :after_value,
+      :attribute_change_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6121,8 +7084,8 @@ module Aws::CloudFormation
     # @!attribute [rw] resource_type
     #   The type of resource to import into your stack, such as
     #   `AWS::S3::Bucket`. For a list of supported resource types, see
-    #   [Resources that support import operations][1] in the CloudFormation
-    #   User Guide.
+    #   [Resources that support import operations][1] in the *CloudFormation
+    #   User Guide*.
     #
     #
     #
@@ -6300,6 +7263,89 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # A scanned resource returned by `ListResourceScanResources` or
+    # `ListResourceScanRelatedResources`.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource, such as `AWS::DynamoDB::Table`. For the
+    #   list of supported resources, see [Resource type support][1] In the
+    #   *CloudFormation User Guide*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   A list of up to 256 key-value pairs that identifies for the scanned
+    #   resource. The key is the name of one of the primary identifiers for
+    #   the resource. (Primary identifiers are specified in the
+    #   `primaryIdentifier` list in the resource schema.) The value is the
+    #   value of that primary identifier. For example, for a
+    #   `AWS::DynamoDB::Table` resource, the primary identifiers is
+    #   `TableName` so the key-value pair could be `"TableName":
+    #   "MyDDBTable"`. For more information, see [primaryIdentifier][1] in
+    #   the *CloudFormation Command Line Interface User guide for extension
+    #   development*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] managed_by_stack
+    #   If `true`, the resource is managed by a CloudFormation stack.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ScannedResource AWS API Documentation
+    #
+    class ScannedResource < Struct.new(
+      :resource_type,
+      :resource_identifier,
+      :managed_by_stack)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies a scanned resource. This is used with the
+    # `ListResourceScanRelatedResources` API action.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource, such as `AWS::DynamoDB::Table`. For the
+    #   list of supported resources, see [IaC generator supported resource
+    #   types][1] In the *CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_identifier
+    #   A list of up to 256 key-value pairs that identifies the scanned
+    #   resource. The key is the name of one of the primary identifiers for
+    #   the resource. (Primary identifiers are specified in the
+    #   `primaryIdentifier` list in the resource schema.) The value is the
+    #   value of that primary identifier. For example, for a
+    #   `AWS::DynamoDB::Table` resource, the primary identifiers is
+    #   `TableName` so the key-value pair could be `"TableName":
+    #   "MyDDBTable"`. For more information, see [primaryIdentifier][1] in
+    #   the *CloudFormation Command Line Interface User guide for extension
+    #   development*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-primaryidentifier
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ScannedResourceIdentifier AWS API Documentation
+    #
+    class ScannedResourceIdentifier < Struct.new(
+      :resource_type,
+      :resource_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for the SetStackPolicy action.
     #
     # @!attribute [rw] stack_name
@@ -6309,8 +7355,8 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] stack_policy_body
     #   Structure containing the stack policy body. For more information, go
-    #   to [ Prevent updates to stack resources][1] in the CloudFormation
-    #   User Guide. You can specify either the `StackPolicyBody` or the
+    #   to [ Prevent updates to stack resources][1] in the *CloudFormation
+    #   User Guide*. You can specify either the `StackPolicyBody` or the
     #   `StackPolicyURL` parameter, but not both.
     #
     #
@@ -6321,7 +7367,8 @@ module Aws::CloudFormation
     # @!attribute [rw] stack_policy_url
     #   Location of a file containing the stack policy. The URL must point
     #   to a policy (maximum size: 16 KB) located in an Amazon S3 bucket in
-    #   the same Amazon Web Services Region as the stack. You can specify
+    #   the same Amazon Web Services Region as the stack. The location for
+    #   an Amazon S3 bucket must start with `https://`. You can specify
     #   either the `StackPolicyBody` or the `StackPolicyURL` parameter, but
     #   not both.
     #   @return [String]
@@ -6340,10 +7387,10 @@ module Aws::CloudFormation
     #   The Amazon Resource Name (ARN) for the extension, in this account
     #   and Region.
     #
-    #   For public extensions, this will be the ARN assigned when you
-    #   [activate the type][1] in this account and Region. For private
-    #   extensions, this will be the ARN assigned when you [register the
-    #   type][2] in this account and Region.
+    #   For public extensions, this will be the ARN assigned when you call
+    #   the [ActivateType][1] API operation in this account and Region. For
+    #   private extensions, this will be the ARN assigned when you call the
+    #   [RegisterType][2] API operation in this account and Region.
     #
     #   Do not include the extension versions suffix at the end of the ARN.
     #   You can set the configuration for an extension, but not for a
@@ -6646,6 +7693,30 @@ module Aws::CloudFormation
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] deletion_mode
+    #   Specifies the deletion mode for the stack. Possible values are:
+    #
+    #   * `STANDARD` - Use the standard behavior. Specifying this value is
+    #     the same as not specifying this parameter.
+    #
+    #   * `FORCE_DELETE_STACK` - Delete the stack if it's stuck in a
+    #     `DELETE_FAILED` state due to resource deletion failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] detailed_status
+    #   The detailed status of the resource or stack. If
+    #   `CONFIGURATION_COMPLETE` is present, the resource or resource
+    #   configuration phase has completed and the stabilization of the
+    #   resources is in progress. The stack sets `CONFIGURATION_COMPLETE`
+    #   when all of the resources in the stack have reached that event. For
+    #   more information, see [CloudFormation stack deployment][1] in the
+    #   *CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -6671,7 +7742,9 @@ module Aws::CloudFormation
       :parent_id,
       :root_id,
       :drift_information,
-      :retain_except_on_create)
+      :retain_except_on_create,
+      :deletion_mode,
+      :detailed_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6777,7 +7850,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] resource_type
     #   Type of resource. (For more information, go to [Amazon Web Services
-    #   Resource Types Reference][1] in the CloudFormation User Guide.)
+    #   Resource Types Reference][1] in the *CloudFormation User Guide*.)
     #
     #
     #
@@ -6844,6 +7917,28 @@ module Aws::CloudFormation
     #   * `WARN` Allows provisioning to continue with a warning message.
     #   @return [String]
     #
+    # @!attribute [rw] detailed_status
+    #   An optional field containing information about the detailed status
+    #   of the stack event.
+    #
+    #   * `CONFIGURATION_COMPLETE` - all of the resources in the stack have
+    #     reached that event. For more information, see [CloudFormation
+    #     stack deployment][1] in the *CloudFormation User Guide*.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `VALIDATION_FAILED` - template validation failed because of
+    #     invalid properties in the template. The `ResourceStatusReason`
+    #     field shows what properties are defined incorrectly.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackEvent AWS API Documentation
     #
     class StackEvent < Struct.new(
@@ -6862,7 +7957,8 @@ module Aws::CloudFormation
       :hook_status,
       :hook_status_reason,
       :hook_invocation_point,
-      :hook_failure_mode)
+      :hook_failure_mode,
+      :detailed_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6909,7 +8005,12 @@ module Aws::CloudFormation
     #     excluded from further `UpdateStackSet` operations. You might need
     #     to perform a `DeleteStackInstances` operation, with `RetainStacks`
     #     set to `true`, to delete the stack instance, and then delete the
-    #     stack manually.
+    #     stack manually. `INOPERABLE` can be returned here when the cause
+    #     is a failed import. If it's due to a failed import, the operation
+    #     can be retried once the failures are fixed. To see if this is due
+    #     to a failed import, look at the `DetailedStatus` member in the
+    #     `StackInstanceSummary` member that is a peer to this `Status`
+    #     member.
     #
     #   * `OUTDATED`: The stack isn't currently up to date with the stack
     #     set because:
@@ -7005,6 +8106,13 @@ module Aws::CloudFormation
     #     a Region, the failure tolerance for the stack set operation as a
     #     whole might be exceeded.
     #
+    #   * `FAILED_IMPORT`: The import of the stack instance in the specified
+    #     account and Region failed and left the stack in an unstable state.
+    #     Once the issues causing the failure are fixed, the import
+    #     operation can be retried. If enough stack set operations fail in
+    #     enough accounts within a Region, the failure tolerance for the
+    #     stack set operation as a whole might be exceeded.
+    #
     #   * `INOPERABLE`: A `DeleteStackInstances` operation has failed and
     #     left the stack in an unstable state. Stacks in this state are
     #     excluded from further `UpdateStackSet` operations. You might need
@@ -7085,7 +8193,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] resource_type
     #   Type of resource. For more information, go to [Amazon Web Services
-    #   Resource Types Reference][1] in the CloudFormation User Guide.
+    #   Resource Types Reference][1] in the *CloudFormation User Guide*.
     #
     #
     #
@@ -7165,7 +8273,12 @@ module Aws::CloudFormation
     #     excluded from further `UpdateStackSet` operations. You might need
     #     to perform a `DeleteStackInstances` operation, with `RetainStacks`
     #     set to `true`, to delete the stack instance, and then delete the
-    #     stack manually.
+    #     stack manually. `INOPERABLE` can be returned here when the cause
+    #     is a failed import. If it's due to a failed import, the operation
+    #     can be retried once the failures are fixed. To see if this is due
+    #     to a failed import, call the DescribeStackInstance API operation,
+    #     look at the `DetailedStatus` member returned in the
+    #     `StackInstanceSummary` member.
     #
     #   * `OUTDATED`: The stack isn't currently up to date with the stack
     #     set because:
@@ -7275,7 +8388,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] resource_type
     #   Type of resource. For more information, go to [Amazon Web Services
-    #   Resource Types Reference][1] in the CloudFormation User Guide.
+    #   Resource Types Reference][1] in the *CloudFormation User Guide*.
     #
     #
     #
@@ -7355,7 +8468,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] resource_type
     #   Type of resource. For more information, go to [Amazon Web Services
-    #   Resource Types Reference][1] in the CloudFormation User Guide.
+    #   Resource Types Reference][1] in the *CloudFormation User Guide*.
     #
     #
     #
@@ -7381,7 +8494,7 @@ module Aws::CloudFormation
     # @!attribute [rw] metadata
     #   The content of the `Metadata` attribute declared for the resource.
     #   For more information, see [Metadata Attribute][1] in the
-    #   CloudFormation User Guide.
+    #   *CloudFormation User Guide*.
     #
     #
     #
@@ -7643,7 +8756,7 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] resource_type
     #   Type of resource. (For more information, go to [Amazon Web Services
-    #   Resource Types Reference][1] in the CloudFormation User Guide.)
+    #   Resource Types Reference][1] in the *CloudFormation User Guide*.)
     #
     #
     #
@@ -7850,6 +8963,31 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # One of the targets for the stack set. Returned by the
+    # [ListStackSetAutoDeploymentTargets][1] API operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ListStackSetAutoDeploymentTargets.html
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   The organization root ID or organizational unit (OU) IDs where the
+    #   stack set is targeted.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions
+    #   The list of Regions targeted for this organization or OU.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetAutoDeploymentTargetSummary AWS API Documentation
+    #
+    class StackSetAutoDeploymentTargetSummary < Struct.new(
+      :organizational_unit_id,
+      :regions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Detailed information about the drift status of the stack set.
     #
     # For stack sets, contains information about the last *completed* drift
@@ -8010,7 +9148,7 @@ module Aws::CloudFormation
     #   * `QUEUED`: \[Service-managed permissions\] For automatic
     #     deployments that require a sequence of operations, the operation
     #     is queued to be performed. For more information, see the [stack
-    #     set operation status codes][1] in the CloudFormation User Guide.
+    #     set operation status codes][1] in the *CloudFormation User Guide*.
     #
     #   * `RUNNING`: The operation is currently being performed.
     #
@@ -8092,7 +9230,7 @@ module Aws::CloudFormation
     #   `Action` type is `DETECT_DRIFT`.
     #
     #   For more information, see [Detecting Unmanaged Changes in Stack
-    #   Sets][1] in the CloudFormation User Guide.
+    #   Sets][1] in the *CloudFormation User Guide*.
     #
     #
     #
@@ -8146,6 +9284,10 @@ module Aws::CloudFormation
     # @!attribute [rw] region_order
     #   The order of the Regions where you want to perform the stack
     #   operation.
+    #
+    #   <note markdown="1"> `RegionOrder` isn't followed if `AutoDeployment` is enabled.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] failure_tolerance_count
@@ -8177,9 +9319,10 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] max_concurrent_count
     #   The maximum number of accounts in which to perform this operation at
-    #   one time. This is dependent on the value of
-    #   `FailureToleranceCount`.`MaxConcurrentCount` is at most one more
-    #   than the `FailureToleranceCount`.
+    #   one time. This can depend on the value of `FailureToleranceCount`
+    #   depending on your `ConcurrencyMode`. `MaxConcurrentCount` is at most
+    #   one more than the `FailureToleranceCount` if you're using
+    #   `STRICT_FAILURE_TOLERANCE`.
     #
     #   Note that this setting lets you specify the *maximum* for
     #   operations. For large deployments, under certain circumstances the
@@ -8212,6 +9355,28 @@ module Aws::CloudFormation
     #   By default, `1` is specified.
     #   @return [Integer]
     #
+    # @!attribute [rw] concurrency_mode
+    #   Specifies how the concurrency level behaves during the operation
+    #   execution.
+    #
+    #   * `STRICT_FAILURE_TOLERANCE`: This option dynamically lowers the
+    #     concurrency level to ensure the number of failed accounts never
+    #     exceeds the value of `FailureToleranceCount` +1. The initial
+    #     actual concurrency is set to the lower of either the value of the
+    #     `MaxConcurrentCount`, or the value of `FailureToleranceCount` +1.
+    #     The actual concurrency is then reduced proportionally by the
+    #     number of failures. This is the default behavior.
+    #
+    #     If failure tolerance or Maximum concurrent accounts are set to
+    #     percentages, the behavior is similar.
+    #
+    #   * `SOFT_FAILURE_TOLERANCE`: This option decouples
+    #     `FailureToleranceCount` from the actual concurrency. This allows
+    #     stack set operations to run at the concurrency level set by the
+    #     `MaxConcurrentCount` value, or `MaxConcurrentPercentage`,
+    #     regardless of the number of failures.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSetOperationPreferences AWS API Documentation
     #
     class StackSetOperationPreferences < Struct.new(
@@ -8220,7 +9385,8 @@ module Aws::CloudFormation
       :failure_tolerance_count,
       :failure_tolerance_percentage,
       :max_concurrent_count,
-      :max_concurrent_percentage)
+      :max_concurrent_percentage,
+      :concurrency_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8340,7 +9506,7 @@ module Aws::CloudFormation
     #   * `QUEUED`: \[Service-managed permissions\] For automatic
     #     deployments that require a sequence of operations, the operation
     #     is queued to be performed. For more information, see the [stack
-    #     set operation status codes][1] in the CloudFormation User Guide.
+    #     set operation status codes][1] in the *CloudFormation User Guide*.
     #
     #   * `RUNNING`: The operation is currently being performed.
     #
@@ -8603,6 +9769,36 @@ module Aws::CloudFormation
     #
     class StaleRequestException < Aws::EmptyStructure; end
 
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for this `StartResourceScan` request. Specify
+    #   this token if you plan to retry requests so that CloudFormation
+    #   knows that you're not attempting to start a new resource scan.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StartResourceScanInput AWS API Documentation
+    #
+    class StartResourceScanInput < Struct.new(
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_scan_id
+    #   The Amazon Resource Name (ARN) of the resource scan. The format is
+    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:resourceScan/$\{Id\}`.
+    #   An example is
+    #   `arn:aws:cloudformation:us-east-1:123456789012:resourceScan/f5b490f7-7ed4-428a-aa06-31ff25db0772
+    #   `.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StartResourceScanOutput AWS API Documentation
+    #
+    class StartResourceScanOutput < Struct.new(
+      :resource_scan_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] stack_set_name
     #   The name or unique ID of the stack set that you want to stop the
     #   operation for.
@@ -8672,6 +9868,51 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # The configuration details of a generated template.
+    #
+    # @!attribute [rw] deletion_policy
+    #   The `DeletionPolicy` assigned to resources in the generated
+    #   template. Supported values are:
+    #
+    #   * `DELETE` - delete all resources when the stack is deleted.
+    #
+    #   * `RETAIN` - retain all resources when the stack is deleted.
+    #
+    #   For more information, see [DeletionPolicy attribute][1] in the
+    #   *CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html
+    #   @return [String]
+    #
+    # @!attribute [rw] update_replace_policy
+    #   The `UpdateReplacePolicy` assigned to resources in the generated
+    #   template. Supported values are:
+    #
+    #   * `DELETE` - delete all resources when the resource is replaced
+    #     during an update operation.
+    #
+    #   * `RETAIN` - retain all resources when the resource is replaced
+    #     during an update operation.
+    #
+    #   For more information, see [UpdateReplacePolicy attribute][1] in the
+    #   *CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatereplacepolicy.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TemplateConfiguration AWS API Documentation
+    #
+    class TemplateConfiguration < Struct.new(
+      :deletion_policy,
+      :update_replace_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The TemplateParameter data type.
     #
     # @!attribute [rw] parameter_key
@@ -8698,6 +9939,104 @@ module Aws::CloudFormation
       :default_value,
       :no_echo,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the progress of the template generation.
+    #
+    # @!attribute [rw] resources_succeeded
+    #   The number of resources that succeeded the template generation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resources_failed
+    #   The number of resources that failed the template generation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resources_processing
+    #   The number of resources that are in-process for the template
+    #   generation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resources_pending
+    #   The number of resources that are still pending the template
+    #   generation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TemplateProgress AWS API Documentation
+    #
+    class TemplateProgress < Struct.new(
+      :resources_succeeded,
+      :resources_failed,
+      :resources_processing,
+      :resources_pending)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of a generated template.
+    #
+    # @!attribute [rw] generated_template_id
+    #   The Amazon Resource Name (ARN) of the generated template. The format
+    #   is
+    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:generatedtemplate/$\{Id\}`.
+    #   For example,
+    #   `arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc
+    #   `.
+    #   @return [String]
+    #
+    # @!attribute [rw] generated_template_name
+    #   The name of the generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the template generation. Supported values are:
+    #
+    #   * `CreatePending` - the creation of the template is pending.
+    #
+    #   * `CreateInProgress` - the creation of the template is in progress.
+    #
+    #   * `DeletePending` - the deletion of the template is pending.
+    #
+    #   * `DeleteInProgress` - the deletion of the template is in progress.
+    #
+    #   * `UpdatePending` - the update of the template is pending.
+    #
+    #   * `UpdateInProgress` - the update of the template is in progress.
+    #
+    #   * `Failed` - the template operation failed.
+    #
+    #   * `Complete` - the template operation is complete.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current template generation status. This will
+    #   provide more details if a failure happened.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time the generated template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time the generated template was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] number_of_resources
+    #   The number of resources in the generated template. This is a total
+    #   of resources in pending, in-progress, completed, and failed states.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TemplateSummary AWS API Documentation
+    #
+    class TemplateSummary < Struct.new(
+      :generated_template_id,
+      :generated_template_name,
+      :status,
+      :status_reason,
+      :creation_time,
+      :last_updated_time,
+      :number_of_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8809,7 +10148,7 @@ module Aws::CloudFormation
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) for the configuration data, in this
@@ -8840,10 +10179,10 @@ module Aws::CloudFormation
     #   The Amazon Resource Name (ARN) for the extension, in this account
     #   and Region.
     #
-    #   For public extensions, this will be the ARN assigned when you
-    #   [activate the type][1] in this account and Region. For private
-    #   extensions, this will be the ARN assigned when you [register the
-    #   type][2] in this account and Region.
+    #   For public extensions, this will be the ARN assigned when you call
+    #   the [ActivateType][1] API operation in this account and Region. For
+    #   private extensions, this will be the ARN assigned when you call the
+    #   [RegisterType][2] API operation in this account and Region.
     #
     #
     #
@@ -8881,10 +10220,10 @@ module Aws::CloudFormation
     #   The Amazon Resource Name (ARN) for the extension, in this account
     #   and Region.
     #
-    #   For public extensions, this will be the ARN assigned when you
-    #   [activate the type][1] in this account and Region. For private
-    #   extensions, this will be the ARN assigned when you [register the
-    #   type][2] in this account and Region.
+    #   For public extensions, this will be the ARN assigned when you call
+    #   the [ActivateType][1] API operation in this account and Region. For
+    #   private extensions, this will be the ARN assigned when you call the
+    #   [RegisterType][2] API operation in this account and Region.
     #
     #
     #
@@ -8988,9 +10327,9 @@ module Aws::CloudFormation
     # @!attribute [rw] type_name
     #   The name of the extension.
     #
-    #   If you specified a `TypeNameAlias` when you [activate this
-    #   extension][1] in your account and Region, CloudFormation considers
-    #   that alias as the type name.
+    #   If you specified a `TypeNameAlias` when you call the
+    #   [ActivateType][1] API operation in your account and Region,
+    #   CloudFormation considers that alias as the type name.
     #
     #
     #
@@ -9211,6 +10550,66 @@ module Aws::CloudFormation
       include Aws::Structure
     end
 
+    # @!attribute [rw] generated_template_name
+    #   The name or Amazon Resource Name (ARN) of a generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_generated_template_name
+    #   An optional new name to assign to the generated template.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_resources
+    #   An optional list of resources to be added to the generated template.
+    #   @return [Array<Types::ResourceDefinition>]
+    #
+    # @!attribute [rw] remove_resources
+    #   A list of logical ids for resources to remove from the generated
+    #   template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] refresh_all_resources
+    #   If `true`, update the resource properties in the generated template
+    #   with their current live state. This feature is useful when the
+    #   resource properties in your generated a template does not reflect
+    #   the live state of the resource properties. This happens when a user
+    #   update the resource properties after generating a template.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] template_configuration
+    #   The configuration details of the generated template, including the
+    #   `DeletionPolicy` and `UpdateReplacePolicy`.
+    #   @return [Types::TemplateConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateGeneratedTemplateInput AWS API Documentation
+    #
+    class UpdateGeneratedTemplateInput < Struct.new(
+      :generated_template_name,
+      :new_generated_template_name,
+      :add_resources,
+      :remove_resources,
+      :refresh_all_resources,
+      :template_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] generated_template_id
+    #   The Amazon Resource Name (ARN) of the generated template. The format
+    #   is
+    #   `arn:$\{Partition\}:cloudformation:$\{Region\}:$\{Account\}:generatedtemplate/$\{Id\}`.
+    #   For example,
+    #   `arn:aws:cloudformation:us-east-1:123456789012:generatedtemplate/2e8465c1-9a80-43ea-a3a3-4f2d692fe6dc
+    #   `.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateGeneratedTemplateOutput AWS API Documentation
+    #
+    class UpdateGeneratedTemplateOutput < Struct.new(
+      :generated_template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for an UpdateStack action.
     #
     # @!attribute [rw] stack_name
@@ -9220,7 +10619,7 @@ module Aws::CloudFormation
     # @!attribute [rw] template_body
     #   Structure containing the template body with a minimum length of 1
     #   byte and a maximum length of 51,200 bytes. (For more information, go
-    #   to [Template Anatomy][1] in the CloudFormation User Guide.)
+    #   to [Template Anatomy][1] in the *CloudFormation User Guide*.)
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
@@ -9235,7 +10634,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to
     #   a template that's located in an Amazon S3 bucket or a Systems
     #   Manager document. For more information, go to [Template Anatomy][1]
-    #   in the CloudFormation User Guide.
+    #   in the *CloudFormation User Guide*. The location for an Amazon S3
+    #   bucket must start with `https://`.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
@@ -9269,7 +10669,8 @@ module Aws::CloudFormation
     # @!attribute [rw] stack_policy_during_update_url
     #   Location of a file containing the temporary overriding stack policy.
     #   The URL must point to a policy (max size: 16KB) located in an S3
-    #   bucket in the same Region as the stack. You can specify either the
+    #   bucket in the same Region as the stack. The location for an Amazon
+    #   S3 bucket must start with `https://`. You can specify either the
     #   `StackPolicyDuringUpdateBody` or the `StackPolicyDuringUpdateURL`
     #   parameter, but not both.
     #
@@ -9322,7 +10723,7 @@ module Aws::CloudFormation
     #
     #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ AWS::IAM::Policy][4]
+    #     * [AWS::IAM::Policy][4]
     #
     #     * [ AWS::IAM::Role][5]
     #
@@ -9363,6 +10764,11 @@ module Aws::CloudFormation
     #     For more information, see [Using CloudFormation Macros to Perform
     #     Custom Processing on Templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -9389,6 +10795,11 @@ module Aws::CloudFormation
     #   Management (IAM) uses this parameter for CloudFormation-specific
     #   condition keys in IAM policies. For more information, see
     #   [Controlling Access with Identity and Access Management][1].
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #
@@ -9431,8 +10842,9 @@ module Aws::CloudFormation
     # @!attribute [rw] stack_policy_url
     #   Location of a file containing the updated stack policy. The URL must
     #   point to a policy (max size: 16KB) located in an S3 bucket in the
-    #   same Region as the stack. You can specify either the
-    #   `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.
+    #   same Region as the stack. The location for an Amazon S3 bucket must
+    #   start with `https://`. You can specify either the `StackPolicyBody`
+    #   or the `StackPolicyURL` parameter, but not both.
     #
     #   You might update the stack policy, for example, in order to protect
     #   a new resource that you created during a stack update. If you don't
@@ -9689,8 +11101,8 @@ module Aws::CloudFormation
     # @!attribute [rw] template_body
     #   The structure that contains the template body, with a minimum length
     #   of 1 byte and a maximum length of 51,200 bytes. For more
-    #   information, see [Template Anatomy][1] in the CloudFormation User
-    #   Guide.
+    #   information, see [Template Anatomy][1] in the *CloudFormation User
+    #   Guide*.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody` or `TemplateURL`—or set `UsePreviousTemplate` to
@@ -9705,8 +11117,8 @@ module Aws::CloudFormation
     #   The location of the file that contains the template body. The URL
     #   must point to a template (maximum size: 460,800 bytes) that is
     #   located in an Amazon S3 bucket or a Systems Manager document. For
-    #   more information, see [Template Anatomy][1] in the CloudFormation
-    #   User Guide.
+    #   more information, see [Template Anatomy][1] in the *CloudFormation
+    #   User Guide*.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody` or `TemplateURL`—or set `UsePreviousTemplate` to
@@ -9758,19 +11170,19 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ AWS::IAM::AccessKey][1]
+    #     * [AWS::IAM::AccessKey][1]
     #
-    #     * [ AWS::IAM::Group][2]
+    #     * [AWS::IAM::Group][2]
     #
-    #     * [ AWS::IAM::InstanceProfile][3]
+    #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ AWS::IAM::Policy][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ AWS::IAM::Role][5]
+    #     * [AWS::IAM::Role][5]
     #
-    #     * [ AWS::IAM::User][6]
+    #     * [AWS::IAM::User][6]
     #
-    #     * [ AWS::IAM::UserToGroupAddition][7]
+    #     * [AWS::IAM::UserToGroupAddition][7]
     #
     #     For more information, see [Acknowledging IAM Resources in
     #     CloudFormation Templates][8].
@@ -10092,7 +11504,7 @@ module Aws::CloudFormation
     # @!attribute [rw] template_body
     #   Structure containing the template body with a minimum length of 1
     #   byte and a maximum length of 51,200 bytes. For more information, go
-    #   to [Template Anatomy][1] in the CloudFormation User Guide.
+    #   to [Template Anatomy][1] in the *CloudFormation User Guide*.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
@@ -10106,7 +11518,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to
     #   a template (max size: 460,800 bytes) that is located in an Amazon S3
     #   bucket or a Systems Manager document. For more information, go to
-    #   [Template Anatomy][1] in the CloudFormation User Guide.
+    #   [Template Anatomy][1] in the *CloudFormation User Guide*. The
+    #   location for an Amazon S3 bucket must start with `https://`.
     #
     #   Conditional: You must pass `TemplateURL` or `TemplateBody`. If both
     #   are passed, only `TemplateBody` is used.
@@ -10167,6 +11580,81 @@ module Aws::CloudFormation
       :capabilities,
       :capabilities_reason,
       :declared_transforms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The warnings generated for a specific resource for this generated
+    # template.
+    #
+    # @!attribute [rw] type
+    #   The type of this warning. For more information, see [IaC generator
+    #   and write-only properties][1] in the *CloudFormation User Guide*.
+    #
+    #   * `MUTUALLY_EXCLUSIVE_PROPERTIES` - The resource requires
+    #     mutually-exclusive write-only properties. The IaC generator
+    #     selects one set of mutually exclusive properties and converts the
+    #     included properties into parameters. The parameter names have a
+    #     suffix `OneOf` and the parameter descriptions indicate that the
+    #     corresponding property can be replaced with other exclusive
+    #     properties.
+    #
+    #   * `UNSUPPORTED_PROPERTIES` - Unsupported properties are present in
+    #     the resource. One example of unsupported properties would be a
+    #     required write-only property that is an array, because a parameter
+    #     cannot be an array. Another example is an optional write-only
+    #     property.
+    #
+    #   * `MUTUALLY_EXCLUSIVE_TYPES` - One or more required write-only
+    #     properties are found in the resource, and the type of that
+    #     property can be any of several types.
+    #
+    #   <note markdown="1"> Currently the resource and property reference documentation does not
+    #   indicate if a property uses a type of `oneOf` or `anyOf`. You need
+    #   to look at the resource provider schema.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/generate-IaC-write-only-properties.html
+    #   @return [String]
+    #
+    # @!attribute [rw] properties
+    #   The properties of the resource that are impacted by this warning.
+    #   @return [Array<Types::WarningProperty>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/WarningDetail AWS API Documentation
+    #
+    class WarningDetail < Struct.new(
+      :type,
+      :properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A specific property that is impacted by a warning.
+    #
+    # @!attribute [rw] property_path
+    #   The path of the property. For example, if this is for the `S3Bucket`
+    #   member of the `Code` property, the property path would be
+    #   `Code/S3Bucket`.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   If `true`, the specified property is required.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description of the property from the resource provider schema.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/WarningProperty AWS API Documentation
+    #
+    class WarningProperty < Struct.new(
+      :property_path,
+      :required,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end

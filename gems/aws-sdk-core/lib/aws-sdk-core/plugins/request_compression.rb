@@ -91,10 +91,19 @@ and 10485780 bytes inclusive.
               end
             end
           end
-          @handler.call(context)
+          with_metric(selected_encoding) { @handler.call(context) }
         end
 
         private
+
+        def with_metric(encoding, &block)
+          case encoding
+          when 'gzip'
+            Aws::Plugins::UserAgent.metric('GZIP_REQUEST_COMPRESSION', &block)
+          else
+            block.call
+          end
+        end
 
         def request_encoding_selection(context)
           encoding_list = context.operation.request_compression['encodings']
@@ -104,7 +113,7 @@ and 10485780 bytes inclusive.
         def update_content_encoding(encoding, context)
           headers = context.http_request.headers
           if headers['Content-Encoding']
-            headers['Content-Encoding'] += ',' + encoding
+            headers['Content-Encoding'] += ", #{encoding}"
           else
             headers['Content-Encoding'] = encoding
           end

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Glue
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Glue
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::Glue
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::Glue
     #   @option options [Aws::Glue::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Glue::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -948,6 +973,21 @@ module Aws::Glue
     #   resp.results[0].rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
     #   resp.results[0].rule_results[0].evaluated_metrics #=> Hash
     #   resp.results[0].rule_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.results[0].analyzer_results #=> Array
+    #   resp.results[0].analyzer_results[0].name #=> String
+    #   resp.results[0].analyzer_results[0].description #=> String
+    #   resp.results[0].analyzer_results[0].evaluation_message #=> String
+    #   resp.results[0].analyzer_results[0].evaluated_metrics #=> Hash
+    #   resp.results[0].analyzer_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.results[0].observations #=> Array
+    #   resp.results[0].observations[0].description #=> String
+    #   resp.results[0].observations[0].metric_based_observation.metric_name #=> String
+    #   resp.results[0].observations[0].metric_based_observation.metric_values.actual_value #=> Float
+    #   resp.results[0].observations[0].metric_based_observation.metric_values.expected_value #=> Float
+    #   resp.results[0].observations[0].metric_based_observation.metric_values.lower_limit #=> Float
+    #   resp.results[0].observations[0].metric_based_observation.metric_values.upper_limit #=> Float
+    #   resp.results[0].observations[0].metric_based_observation.new_rules #=> Array
+    #   resp.results[0].observations[0].metric_based_observation.new_rules[0] #=> String
     #   resp.results_not_found #=> Array
     #   resp.results_not_found[0] #=> String
     #
@@ -1049,6 +1089,7 @@ module Aws::Glue
     #
     #   resp.jobs #=> Array
     #   resp.jobs[0].name #=> String
+    #   resp.jobs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.jobs[0].description #=> String
     #   resp.jobs[0].log_uri #=> String
     #   resp.jobs[0].role #=> String
@@ -1906,8 +1947,22 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.data.table_schema[0].description #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.data #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.data["GenericString"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.data #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.data["GenericString"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.inputs[0] #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
-    #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
+    #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
     #   resp.jobs[0].source_control_details.owner #=> String
     #   resp.jobs[0].source_control_details.branch #=> String
@@ -1915,6 +1970,8 @@ module Aws::Glue
     #   resp.jobs[0].source_control_details.last_commit_id #=> String
     #   resp.jobs[0].source_control_details.auth_strategy #=> String, one of "PERSONAL_ACCESS_TOKEN", "AWS_SECRETS_MANAGER"
     #   resp.jobs[0].source_control_details.auth_token #=> String
+    #   resp.jobs[0].maintenance_window #=> String
+    #   resp.jobs[0].profile_name #=> String
     #   resp.jobs_not_found #=> Array
     #   resp.jobs_not_found[0] #=> String
     #
@@ -2023,6 +2080,64 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Returns the configuration for the specified table optimizers.
+    #
+    # @option params [required, Array<Types::BatchGetTableOptimizerEntry>] :entries
+    #   A list of `BatchGetTableOptimizerEntry` objects specifying the table
+    #   optimizers to retrieve.
+    #
+    # @return [Types::BatchGetTableOptimizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetTableOptimizerResponse#table_optimizers #table_optimizers} => Array&lt;Types::BatchTableOptimizer&gt;
+    #   * {Types::BatchGetTableOptimizerResponse#failures #failures} => Array&lt;Types::BatchGetTableOptimizerError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_table_optimizer({
+    #     entries: [ # required
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "databaseNameString",
+    #         table_name: "tableNameString",
+    #         type: "compaction", # accepts compaction
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_optimizers #=> Array
+    #   resp.table_optimizers[0].catalog_id #=> String
+    #   resp.table_optimizers[0].database_name #=> String
+    #   resp.table_optimizers[0].table_name #=> String
+    #   resp.table_optimizers[0].table_optimizer.type #=> String, one of "compaction"
+    #   resp.table_optimizers[0].table_optimizer.configuration.role_arn #=> String
+    #   resp.table_optimizers[0].table_optimizer.configuration.enabled #=> Boolean
+    #   resp.table_optimizers[0].table_optimizer.last_run.event_type #=> String, one of "starting", "completed", "failed", "in_progress"
+    #   resp.table_optimizers[0].table_optimizer.last_run.start_timestamp #=> Time
+    #   resp.table_optimizers[0].table_optimizer.last_run.end_timestamp #=> Time
+    #   resp.table_optimizers[0].table_optimizer.last_run.metrics.number_of_bytes_compacted #=> String
+    #   resp.table_optimizers[0].table_optimizer.last_run.metrics.number_of_files_compacted #=> String
+    #   resp.table_optimizers[0].table_optimizer.last_run.metrics.number_of_dpus #=> String
+    #   resp.table_optimizers[0].table_optimizer.last_run.metrics.job_duration_in_hour #=> String
+    #   resp.table_optimizers[0].table_optimizer.last_run.error #=> String
+    #   resp.failures #=> Array
+    #   resp.failures[0].error.error_code #=> String
+    #   resp.failures[0].error.error_message #=> String
+    #   resp.failures[0].catalog_id #=> String
+    #   resp.failures[0].database_name #=> String
+    #   resp.failures[0].table_name #=> String
+    #   resp.failures[0].type #=> String, one of "compaction"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetTableOptimizer AWS API Documentation
+    #
+    # @overload batch_get_table_optimizer(params = {})
+    # @param [Hash] params ({})
+    def batch_get_table_optimizer(params = {}, options = {})
+      req = build_request(:batch_get_table_optimizer, params)
+      req.send_request(options)
+    end
+
     # Returns a list of resource metadata for a given list of trigger names.
     # After calling the `ListTriggers` operation, you can call this
     # operation to access the data to which you have been granted
@@ -2066,7 +2181,7 @@ module Aws::Glue
     #   resp.triggers[0].predicate.conditions #=> Array
     #   resp.triggers[0].predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.triggers[0].predicate.conditions[0].job_name #=> String
-    #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.triggers[0].predicate.conditions[0].crawler_name #=> String
     #   resp.triggers[0].predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.triggers[0].event_batching_condition.batch_size #=> Integer
@@ -2158,7 +2273,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflows[0].last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
@@ -2169,10 +2284,11 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
-    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].error_message #=> String
@@ -2191,6 +2307,8 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -2226,7 +2344,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflows[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
@@ -2237,10 +2355,11 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
-    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].error_message #=> String
@@ -2259,6 +2378,8 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -2694,6 +2815,9 @@ module Aws::Glue
 
     # Creates a connection definition in the Data Catalog.
     #
+    # Connections used for creating federated resources require the IAM
+    # `glue:PassConnection` permission.
+    #
     # @option params [String] :catalog_id
     #   The ID of the Data Catalog in which to create the connection. If none
     #   is provided, the Amazon Web Services account ID is used by default.
@@ -2704,7 +2828,9 @@ module Aws::Glue
     # @option params [Hash<String,String>] :tags
     #   The tags you assign to the connection.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::CreateConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConnectionResponse#create_connection_status #create_connection_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2713,7 +2839,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -2723,11 +2849,35 @@ module Aws::Glue
     #         security_group_id_list: ["NameString"],
     #         availability_zone: "NameString",
     #       },
+    #       authentication_configuration: {
+    #         authentication_type: "BASIC", # accepts BASIC, OAUTH2, CUSTOM
+    #         secret_arn: "SecretArn",
+    #         o_auth_2_properties: {
+    #           o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER
+    #           o_auth_2_client_application: {
+    #             user_managed_client_application_client_id: "UserManagedClientApplicationClientId",
+    #             aws_managed_client_application_reference: "AWSManagedClientApplicationReference",
+    #           },
+    #           token_url: "TokenUrl",
+    #           token_url_parameters_map: {
+    #             "TokenUrlParameterKey" => "TokenUrlParameterValue",
+    #           },
+    #           authorization_code_properties: {
+    #             authorization_code: "AuthorizationCode",
+    #             redirect_uri: "RedirectUri",
+    #           },
+    #         },
+    #       },
+    #       validate_credentials: false,
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.create_connection_status #=> String, one of "READY", "IN_PROGRESS", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateConnection AWS API Documentation
     #
@@ -3299,6 +3449,19 @@ module Aws::Glue
     #   The name you assign to this job definition. It must be unique in your
     #   account.
     #
+    # @option params [String] :job_mode
+    #   A mode that describes how a job was created. Valid values are:
+    #
+    #   * `SCRIPT` - The job was created using the Glue Studio script editor.
+    #
+    #   * `VISUAL` - The job was created using the Glue Studio visual editor.
+    #
+    #   * `NOTEBOOK` - The job was created using an interactive sessions
+    #     notebook.
+    #
+    #   When the `JobMode` field is missing or null, `SCRIPT` is assigned as
+    #   the default value.
+    #
     # @option params [String] :description
     #   Description of the job being defined.
     #
@@ -3372,7 +3535,13 @@ module Aws::Glue
     # @option params [Integer] :timeout
     #   The job timeout in minutes. This is the maximum time that a job run
     #   can consume resources before it is terminated and enters `TIMEOUT`
-    #   status. The default is 2,880 minutes (48 hours).
+    #   status. The default is 2,880 minutes (48 hours) for batch jobs.
+    #
+    #   Streaming jobs must have timeout values less than 7 days or 10080
+    #   minutes. When the value is left blank, the job will be restarted after
+    #   7 days based if you have not setup a maintenance window. If you have
+    #   setup maintenance window, it will be restarted during the maintenance
+    #   window after 7 days.
     #
     # @option params [Float] :max_capacity
     #   For Glue version 1.0 or earlier jobs, using the standard worker type,
@@ -3510,6 +3679,17 @@ module Aws::Glue
     # @option params [Types::SourceControlDetails] :source_control_details
     #   The details for a source control configuration for a job, allowing
     #   synchronization of job artifacts to or from a remote repository.
+    #
+    # @option params [String] :maintenance_window
+    #   This field specifies a day of the week and hour for a maintenance
+    #   window for streaming jobs. Glue periodically performs maintenance
+    #   activities. During these maintenance windows, Glue will need to
+    #   restart your streaming jobs.
+    #
+    #   Glue will restart the job within 3 hours of the specified maintenance
+    #   window. For instance, if you set up the maintenance window for Monday
+    #   at 10:00AM GMT, your jobs will be restarted between 10:00AM GMT to
+    #   1:00PM GMT.
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4338,6 +4518,7 @@ module Aws::Glue
     #   resp.session.execution_time #=> Float
     #   resp.session.dpu_seconds #=> Float
     #   resp.session.idle_timeout #=> Integer
+    #   resp.session.profile_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSession AWS API Documentation
     #
@@ -4461,6 +4642,20 @@ module Aws::Glue
     #         name: "NameString",
     #         region: "NameString",
     #       },
+    #       view_definition: {
+    #         is_protected: false,
+    #         definer: "ArnString",
+    #         representations: [
+    #           {
+    #             dialect: "REDSHIFT", # accepts REDSHIFT, ATHENA, SPARK
+    #             dialect_version: "ViewDialectVersionString",
+    #             view_original_text: "ViewTextString",
+    #             validation_connection: "NameString",
+    #             view_expanded_text: "ViewTextString",
+    #           },
+    #         ],
+    #         sub_objects: ["ArnString"],
+    #       },
     #     },
     #     partition_indexes: [
     #       {
@@ -4483,6 +4678,50 @@ module Aws::Glue
     # @param [Hash] params ({})
     def create_table(params = {}, options = {})
       req = build_request(:create_table, params)
+      req.send_request(options)
+    end
+
+    # Creates a new table optimizer for a specific function. `compaction` is
+    # the only currently supported optimizer type.
+    #
+    # @option params [required, String] :catalog_id
+    #   The Catalog ID of the table.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database in the catalog in which the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @option params [required, String] :type
+    #   The type of table optimizer. Currently, the only valid value is
+    #   `compaction`.
+    #
+    # @option params [required, Types::TableOptimizerConfiguration] :table_optimizer_configuration
+    #   A `TableOptimizerConfiguration` object representing the configuration
+    #   of a table optimizer.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_table_optimizer({
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     type: "compaction", # required, accepts compaction
+    #     table_optimizer_configuration: { # required
+    #       role_arn: "ArnString",
+    #       enabled: false,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTableOptimizer AWS API Documentation
+    #
+    # @overload create_table_optimizer(params = {})
+    # @param [Hash] params ({})
+    def create_table_optimizer(params = {}, options = {})
+      req = build_request(:create_table_optimizer, params)
       req.send_request(options)
     end
 
@@ -4553,7 +4792,7 @@ module Aws::Glue
     #         {
     #           logical_operator: "EQUALS", # accepts EQUALS
     #           job_name: "NameString",
-    #           state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT, ERROR, WAITING
+    #           state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT, ERROR, WAITING, EXPIRED
     #           crawler_name: "NameString",
     #           crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED, ERROR
     #         },
@@ -4594,6 +4833,66 @@ module Aws::Glue
     # @param [Hash] params ({})
     def create_trigger(params = {}, options = {})
       req = build_request(:create_trigger, params)
+      req.send_request(options)
+    end
+
+    # Creates an Glue usage profile.
+    #
+    # @option params [required, String] :name
+    #   The name of the usage profile.
+    #
+    # @option params [String] :description
+    #   A description of the usage profile.
+    #
+    # @option params [required, Types::ProfileConfiguration] :configuration
+    #   A `ProfileConfiguration` object specifying the job and session values
+    #   for the profile.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of tags applied to the usage profile.
+    #
+    # @return [Types::CreateUsageProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateUsageProfileResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_usage_profile({
+    #     name: "NameString", # required
+    #     description: "DescriptionString",
+    #     configuration: { # required
+    #       session_configuration: {
+    #         "NameString" => {
+    #           default_value: "ConfigValueString",
+    #           allowed_values: ["ConfigValueString"],
+    #           min_value: "ConfigValueString",
+    #           max_value: "ConfigValueString",
+    #         },
+    #       },
+    #       job_configuration: {
+    #         "NameString" => {
+    #           default_value: "ConfigValueString",
+    #           allowed_values: ["ConfigValueString"],
+    #           min_value: "ConfigValueString",
+    #           max_value: "ConfigValueString",
+    #         },
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateUsageProfile AWS API Documentation
+    #
+    # @overload create_usage_profile(params = {})
+    # @param [Hash] params ({})
+    def create_usage_profile(params = {}, options = {})
+      req = build_request(:create_usage_profile, params)
       req.send_request(options)
     end
 
@@ -5401,6 +5700,41 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Deletes an optimizer and all associated metadata for a table. The
+    # optimization will no longer be performed on the table.
+    #
+    # @option params [required, String] :catalog_id
+    #   The Catalog ID of the table.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database in the catalog in which the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @option params [required, String] :type
+    #   The type of table optimizer.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_table_optimizer({
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     type: "compaction", # required, accepts compaction
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTableOptimizer AWS API Documentation
+    #
+    # @overload delete_table_optimizer(params = {})
+    # @param [Hash] params ({})
+    def delete_table_optimizer(params = {}, options = {})
+      req = build_request(:delete_table_optimizer, params)
+      req.send_request(options)
+    end
+
     # Deletes a specified version of a table.
     #
     # @option params [String] :catalog_id
@@ -5465,6 +5799,28 @@ module Aws::Glue
     # @param [Hash] params ({})
     def delete_trigger(params = {}, options = {})
       req = build_request(:delete_trigger, params)
+      req.send_request(options)
+    end
+
+    # Deletes the Glue specified usage profile.
+    #
+    # @option params [required, String] :name
+    #   The name of the usage profile to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_usage_profile({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteUsageProfile AWS API Documentation
+    #
+    # @overload delete_usage_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_usage_profile(params = {}, options = {})
+      req = build_request(:delete_usage_profile, params)
       req.send_request(options)
     end
 
@@ -5996,6 +6352,117 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Get the associated metadata/information for a task run, given a task
+    # run ID.
+    #
+    # @option params [required, String] :column_statistics_task_run_id
+    #   The identifier for the particular column statistics task run.
+    #
+    # @return [Types::GetColumnStatisticsTaskRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetColumnStatisticsTaskRunResponse#column_statistics_task_run #column_statistics_task_run} => Types::ColumnStatisticsTaskRun
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_column_statistics_task_run({
+    #     column_statistics_task_run_id: "HashString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.column_statistics_task_run.customer_id #=> String
+    #   resp.column_statistics_task_run.column_statistics_task_run_id #=> String
+    #   resp.column_statistics_task_run.database_name #=> String
+    #   resp.column_statistics_task_run.table_name #=> String
+    #   resp.column_statistics_task_run.column_name_list #=> Array
+    #   resp.column_statistics_task_run.column_name_list[0] #=> String
+    #   resp.column_statistics_task_run.catalog_id #=> String
+    #   resp.column_statistics_task_run.role #=> String
+    #   resp.column_statistics_task_run.sample_size #=> Float
+    #   resp.column_statistics_task_run.security_configuration #=> String
+    #   resp.column_statistics_task_run.number_of_workers #=> Integer
+    #   resp.column_statistics_task_run.worker_type #=> String
+    #   resp.column_statistics_task_run.status #=> String, one of "STARTING", "RUNNING", "SUCCEEDED", "FAILED", "STOPPED"
+    #   resp.column_statistics_task_run.creation_time #=> Time
+    #   resp.column_statistics_task_run.last_updated #=> Time
+    #   resp.column_statistics_task_run.start_time #=> Time
+    #   resp.column_statistics_task_run.end_time #=> Time
+    #   resp.column_statistics_task_run.error_message #=> String
+    #   resp.column_statistics_task_run.dpu_seconds #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskRun AWS API Documentation
+    #
+    # @overload get_column_statistics_task_run(params = {})
+    # @param [Hash] params ({})
+    def get_column_statistics_task_run(params = {}, options = {})
+      req = build_request(:get_column_statistics_task_run, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about all runs associated with the specified
+    # table.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the response.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::GetColumnStatisticsTaskRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetColumnStatisticsTaskRunsResponse#column_statistics_task_runs #column_statistics_task_runs} => Array&lt;Types::ColumnStatisticsTaskRun&gt;
+    #   * {Types::GetColumnStatisticsTaskRunsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_column_statistics_task_runs({
+    #     database_name: "DatabaseName", # required
+    #     table_name: "NameString", # required
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.column_statistics_task_runs #=> Array
+    #   resp.column_statistics_task_runs[0].customer_id #=> String
+    #   resp.column_statistics_task_runs[0].column_statistics_task_run_id #=> String
+    #   resp.column_statistics_task_runs[0].database_name #=> String
+    #   resp.column_statistics_task_runs[0].table_name #=> String
+    #   resp.column_statistics_task_runs[0].column_name_list #=> Array
+    #   resp.column_statistics_task_runs[0].column_name_list[0] #=> String
+    #   resp.column_statistics_task_runs[0].catalog_id #=> String
+    #   resp.column_statistics_task_runs[0].role #=> String
+    #   resp.column_statistics_task_runs[0].sample_size #=> Float
+    #   resp.column_statistics_task_runs[0].security_configuration #=> String
+    #   resp.column_statistics_task_runs[0].number_of_workers #=> Integer
+    #   resp.column_statistics_task_runs[0].worker_type #=> String
+    #   resp.column_statistics_task_runs[0].status #=> String, one of "STARTING", "RUNNING", "SUCCEEDED", "FAILED", "STOPPED"
+    #   resp.column_statistics_task_runs[0].creation_time #=> Time
+    #   resp.column_statistics_task_runs[0].last_updated #=> Time
+    #   resp.column_statistics_task_runs[0].start_time #=> Time
+    #   resp.column_statistics_task_runs[0].end_time #=> Time
+    #   resp.column_statistics_task_runs[0].error_message #=> String
+    #   resp.column_statistics_task_runs[0].dpu_seconds #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskRuns AWS API Documentation
+    #
+    # @overload get_column_statistics_task_runs(params = {})
+    # @param [Hash] params ({})
+    def get_column_statistics_task_runs(params = {}, options = {})
+      req = build_request(:get_column_statistics_task_runs, params)
+      req.send_request(options)
+    end
+
     # Retrieves a connection definition from the Data Catalog.
     #
     # @option params [String] :catalog_id
@@ -6029,7 +6496,7 @@ module Aws::Glue
     #
     #   resp.connection.name #=> String
     #   resp.connection.description #=> String
-    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM"
+    #   resp.connection.connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM", "SALESFORCE"
     #   resp.connection.match_criteria #=> Array
     #   resp.connection.match_criteria[0] #=> String
     #   resp.connection.connection_properties #=> Hash
@@ -6041,6 +6508,17 @@ module Aws::Glue
     #   resp.connection.creation_time #=> Time
     #   resp.connection.last_updated_time #=> Time
     #   resp.connection.last_updated_by #=> String
+    #   resp.connection.status #=> String, one of "READY", "IN_PROGRESS", "FAILED"
+    #   resp.connection.status_reason #=> String
+    #   resp.connection.last_connection_validation_time #=> Time
+    #   resp.connection.authentication_configuration.authentication_type #=> String, one of "BASIC", "OAUTH2", "CUSTOM"
+    #   resp.connection.authentication_configuration.secret_arn #=> String
+    #   resp.connection.authentication_configuration.o_auth_2_properties.o_auth_2_grant_type #=> String, one of "AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER"
+    #   resp.connection.authentication_configuration.o_auth_2_properties.o_auth_2_client_application.user_managed_client_application_client_id #=> String
+    #   resp.connection.authentication_configuration.o_auth_2_properties.o_auth_2_client_application.aws_managed_client_application_reference #=> String
+    #   resp.connection.authentication_configuration.o_auth_2_properties.token_url #=> String
+    #   resp.connection.authentication_configuration.o_auth_2_properties.token_url_parameters_map #=> Hash
+    #   resp.connection.authentication_configuration.o_auth_2_properties.token_url_parameters_map["TokenUrlParameterKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnection AWS API Documentation
     #
@@ -6087,7 +6565,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     filter: {
     #       match_criteria: ["NameString"],
-    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
+    #       connection_type: "JDBC", # accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE
     #     },
     #     hide_password: false,
     #     next_token: "Token",
@@ -6099,7 +6577,7 @@ module Aws::Glue
     #   resp.connection_list #=> Array
     #   resp.connection_list[0].name #=> String
     #   resp.connection_list[0].description #=> String
-    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM"
+    #   resp.connection_list[0].connection_type #=> String, one of "JDBC", "SFTP", "MONGODB", "KAFKA", "NETWORK", "MARKETPLACE", "CUSTOM", "SALESFORCE"
     #   resp.connection_list[0].match_criteria #=> Array
     #   resp.connection_list[0].match_criteria[0] #=> String
     #   resp.connection_list[0].connection_properties #=> Hash
@@ -6111,6 +6589,17 @@ module Aws::Glue
     #   resp.connection_list[0].creation_time #=> Time
     #   resp.connection_list[0].last_updated_time #=> Time
     #   resp.connection_list[0].last_updated_by #=> String
+    #   resp.connection_list[0].status #=> String, one of "READY", "IN_PROGRESS", "FAILED"
+    #   resp.connection_list[0].status_reason #=> String
+    #   resp.connection_list[0].last_connection_validation_time #=> Time
+    #   resp.connection_list[0].authentication_configuration.authentication_type #=> String, one of "BASIC", "OAUTH2", "CUSTOM"
+    #   resp.connection_list[0].authentication_configuration.secret_arn #=> String
+    #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.o_auth_2_grant_type #=> String, one of "AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER"
+    #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.o_auth_2_client_application.user_managed_client_application_client_id #=> String
+    #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.o_auth_2_client_application.aws_managed_client_application_reference #=> String
+    #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.token_url #=> String
+    #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.token_url_parameters_map #=> Hash
+    #   resp.connection_list[0].authentication_configuration.o_auth_2_properties.token_url_parameters_map["TokenUrlParameterKey"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetConnections AWS API Documentation
@@ -6441,8 +6930,9 @@ module Aws::Glue
     #
     # @example Response structure
     #
-    #   resp.data_catalog_encryption_settings.encryption_at_rest.catalog_encryption_mode #=> String, one of "DISABLED", "SSE-KMS"
+    #   resp.data_catalog_encryption_settings.encryption_at_rest.catalog_encryption_mode #=> String, one of "DISABLED", "SSE-KMS", "SSE-KMS-WITH-SERVICE-ROLE"
     #   resp.data_catalog_encryption_settings.encryption_at_rest.sse_aws_kms_key_id #=> String
+    #   resp.data_catalog_encryption_settings.encryption_at_rest.catalog_encryption_service_role #=> String
     #   resp.data_catalog_encryption_settings.connection_password_encryption.return_connection_password_encrypted #=> Boolean
     #   resp.data_catalog_encryption_settings.connection_password_encryption.aws_kms_key_id #=> String
     #
@@ -6473,6 +6963,8 @@ module Aws::Glue
     #   * {Types::GetDataQualityResultResponse#job_run_id #job_run_id} => String
     #   * {Types::GetDataQualityResultResponse#ruleset_evaluation_run_id #ruleset_evaluation_run_id} => String
     #   * {Types::GetDataQualityResultResponse#rule_results #rule_results} => Array&lt;Types::DataQualityRuleResult&gt;
+    #   * {Types::GetDataQualityResultResponse#analyzer_results #analyzer_results} => Array&lt;Types::DataQualityAnalyzerResult&gt;
+    #   * {Types::GetDataQualityResultResponse#observations #observations} => Array&lt;Types::DataQualityObservation&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6504,6 +6996,21 @@ module Aws::Glue
     #   resp.rule_results[0].result #=> String, one of "PASS", "FAIL", "ERROR"
     #   resp.rule_results[0].evaluated_metrics #=> Hash
     #   resp.rule_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.analyzer_results #=> Array
+    #   resp.analyzer_results[0].name #=> String
+    #   resp.analyzer_results[0].description #=> String
+    #   resp.analyzer_results[0].evaluation_message #=> String
+    #   resp.analyzer_results[0].evaluated_metrics #=> Hash
+    #   resp.analyzer_results[0].evaluated_metrics["NameString"] #=> Float
+    #   resp.observations #=> Array
+    #   resp.observations[0].description #=> String
+    #   resp.observations[0].metric_based_observation.metric_name #=> String
+    #   resp.observations[0].metric_based_observation.metric_values.actual_value #=> Float
+    #   resp.observations[0].metric_based_observation.metric_values.expected_value #=> Float
+    #   resp.observations[0].metric_based_observation.metric_values.lower_limit #=> Float
+    #   resp.observations[0].metric_based_observation.metric_values.upper_limit #=> Float
+    #   resp.observations[0].metric_based_observation.new_rules #=> Array
+    #   resp.observations[0].metric_based_observation.new_rules[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResult AWS API Documentation
     #
@@ -6657,6 +7164,7 @@ module Aws::Glue
     #   resp.timeout #=> Integer
     #   resp.additional_run_options.cloud_watch_metrics_enabled #=> Boolean
     #   resp.additional_run_options.results_s3_prefix #=> String
+    #   resp.additional_run_options.composite_rule_evaluation_method #=> String, one of "COLUMN", "ROW"
     #   resp.status #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.error_string #=> String
     #   resp.started_on #=> Time
@@ -6997,6 +7505,7 @@ module Aws::Glue
     # @example Response structure
     #
     #   resp.job.name #=> String
+    #   resp.job.job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.job.description #=> String
     #   resp.job.log_uri #=> String
     #   resp.job.role #=> String
@@ -7854,8 +8363,22 @@ module Aws::Glue
     #   resp.job.code_gen_configuration_nodes["NodeId"].snowflake_target.data.table_schema[0].description #=> String
     #   resp.job.code_gen_configuration_nodes["NodeId"].snowflake_target.inputs #=> Array
     #   resp.job.code_gen_configuration_nodes["NodeId"].snowflake_target.inputs[0] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.connection_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.data #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.data["GenericString"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.name #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.connection_type #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.data #=> Hash
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.data["GenericString"] #=> String
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.inputs #=> Array
+    #   resp.job.code_gen_configuration_nodes["NodeId"].connector_data_target.inputs[0] #=> String
     #   resp.job.execution_class #=> String, one of "FLEX", "STANDARD"
-    #   resp.job.source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
+    #   resp.job.source_control_details.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "AWS_CODE_COMMIT"
     #   resp.job.source_control_details.repository #=> String
     #   resp.job.source_control_details.owner #=> String
     #   resp.job.source_control_details.branch #=> String
@@ -7863,6 +8386,8 @@ module Aws::Glue
     #   resp.job.source_control_details.last_commit_id #=> String
     #   resp.job.source_control_details.auth_strategy #=> String, one of "PERSONAL_ACCESS_TOKEN", "AWS_SECRETS_MANAGER"
     #   resp.job.source_control_details.auth_token #=> String
+    #   resp.job.maintenance_window #=> String
+    #   resp.job.profile_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJob AWS API Documentation
     #
@@ -7925,7 +8450,8 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the metadata for a given job run.
+    # Retrieves the metadata for a given job run. Job run history is
+    # accessible for 90 days for your workflow and job run.
     #
     # @option params [required, String] :job_name
     #   Name of the job definition being run.
@@ -7955,10 +8481,11 @@ module Aws::Glue
     #   resp.job_run.previous_run_id #=> String
     #   resp.job_run.trigger_name #=> String
     #   resp.job_run.job_name #=> String
+    #   resp.job_run.job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.job_run.started_on #=> Time
     #   resp.job_run.last_modified_on #=> Time
     #   resp.job_run.completed_on #=> Time
-    #   resp.job_run.job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.job_run.job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.job_run.arguments #=> Hash
     #   resp.job_run.arguments["GenericString"] #=> String
     #   resp.job_run.error_message #=> String
@@ -7977,6 +8504,8 @@ module Aws::Glue
     #   resp.job_run.glue_version #=> String
     #   resp.job_run.dpu_seconds #=> Float
     #   resp.job_run.execution_class #=> String, one of "FLEX", "STANDARD"
+    #   resp.job_run.maintenance_window #=> String
+    #   resp.job_run.profile_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun AWS API Documentation
     #
@@ -8021,10 +8550,11 @@ module Aws::Glue
     #   resp.job_runs[0].previous_run_id #=> String
     #   resp.job_runs[0].trigger_name #=> String
     #   resp.job_runs[0].job_name #=> String
+    #   resp.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.job_runs[0].started_on #=> Time
     #   resp.job_runs[0].last_modified_on #=> Time
     #   resp.job_runs[0].completed_on #=> Time
-    #   resp.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.job_runs[0].arguments #=> Hash
     #   resp.job_runs[0].arguments["GenericString"] #=> String
     #   resp.job_runs[0].error_message #=> String
@@ -8043,6 +8573,8 @@ module Aws::Glue
     #   resp.job_runs[0].glue_version #=> String
     #   resp.job_runs[0].dpu_seconds #=> Float
     #   resp.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
+    #   resp.job_runs[0].maintenance_window #=> String
+    #   resp.job_runs[0].profile_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns AWS API Documentation
@@ -8080,6 +8612,7 @@ module Aws::Glue
     #
     #   resp.jobs #=> Array
     #   resp.jobs[0].name #=> String
+    #   resp.jobs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.jobs[0].description #=> String
     #   resp.jobs[0].log_uri #=> String
     #   resp.jobs[0].role #=> String
@@ -8937,8 +9470,22 @@ module Aws::Glue
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.data.table_schema[0].description #=> String
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.inputs #=> Array
     #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].snowflake_target.inputs[0] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.data #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.data["GenericString"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_source.output_schemas[0].columns[0].type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.name #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.connection_type #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.data #=> Hash
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.data["GenericString"] #=> String
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.inputs #=> Array
+    #   resp.jobs[0].code_gen_configuration_nodes["NodeId"].connector_data_target.inputs[0] #=> String
     #   resp.jobs[0].execution_class #=> String, one of "FLEX", "STANDARD"
-    #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "AWS_CODE_COMMIT"
+    #   resp.jobs[0].source_control_details.provider #=> String, one of "GITHUB", "GITLAB", "BITBUCKET", "AWS_CODE_COMMIT"
     #   resp.jobs[0].source_control_details.repository #=> String
     #   resp.jobs[0].source_control_details.owner #=> String
     #   resp.jobs[0].source_control_details.branch #=> String
@@ -8946,6 +9493,8 @@ module Aws::Glue
     #   resp.jobs[0].source_control_details.last_commit_id #=> String
     #   resp.jobs[0].source_control_details.auth_strategy #=> String, one of "PERSONAL_ACCESS_TOKEN", "AWS_SECRETS_MANAGER"
     #   resp.jobs[0].source_control_details.auth_token #=> String
+    #   resp.jobs[0].maintenance_window #=> String
+    #   resp.jobs[0].profile_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobs AWS API Documentation
@@ -10336,6 +10885,7 @@ module Aws::Glue
     #   resp.session.execution_time #=> Float
     #   resp.session.dpu_seconds #=> Float
     #   resp.session.idle_timeout #=> Integer
+    #   resp.session.profile_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSession AWS API Documentation
     #
@@ -10500,6 +11050,18 @@ module Aws::Glue
     #   resp.table.federated_table.identifier #=> String
     #   resp.table.federated_table.database_identifier #=> String
     #   resp.table.federated_table.connection_name #=> String
+    #   resp.table.view_definition.is_protected #=> Boolean
+    #   resp.table.view_definition.definer #=> String
+    #   resp.table.view_definition.sub_objects #=> Array
+    #   resp.table.view_definition.sub_objects[0] #=> String
+    #   resp.table.view_definition.representations #=> Array
+    #   resp.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table.view_definition.representations[0].dialect_version #=> String
+    #   resp.table.view_definition.representations[0].view_original_text #=> String
+    #   resp.table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table.view_definition.representations[0].validation_connection #=> String
+    #   resp.table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table.is_multi_dialect_view #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTable AWS API Documentation
     #
@@ -10507,6 +11069,63 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_table(params = {}, options = {})
       req = build_request(:get_table, params)
+      req.send_request(options)
+    end
+
+    # Returns the configuration of all optimizers associated with a
+    # specified table.
+    #
+    # @option params [required, String] :catalog_id
+    #   The Catalog ID of the table.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database in the catalog in which the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @option params [required, String] :type
+    #   The type of table optimizer.
+    #
+    # @return [Types::GetTableOptimizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTableOptimizerResponse#catalog_id #catalog_id} => String
+    #   * {Types::GetTableOptimizerResponse#database_name #database_name} => String
+    #   * {Types::GetTableOptimizerResponse#table_name #table_name} => String
+    #   * {Types::GetTableOptimizerResponse#table_optimizer #table_optimizer} => Types::TableOptimizer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_table_optimizer({
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     type: "compaction", # required, accepts compaction
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.catalog_id #=> String
+    #   resp.database_name #=> String
+    #   resp.table_name #=> String
+    #   resp.table_optimizer.type #=> String, one of "compaction"
+    #   resp.table_optimizer.configuration.role_arn #=> String
+    #   resp.table_optimizer.configuration.enabled #=> Boolean
+    #   resp.table_optimizer.last_run.event_type #=> String, one of "starting", "completed", "failed", "in_progress"
+    #   resp.table_optimizer.last_run.start_timestamp #=> Time
+    #   resp.table_optimizer.last_run.end_timestamp #=> Time
+    #   resp.table_optimizer.last_run.metrics.number_of_bytes_compacted #=> String
+    #   resp.table_optimizer.last_run.metrics.number_of_files_compacted #=> String
+    #   resp.table_optimizer.last_run.metrics.number_of_dpus #=> String
+    #   resp.table_optimizer.last_run.metrics.job_duration_in_hour #=> String
+    #   resp.table_optimizer.last_run.error #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableOptimizer AWS API Documentation
+    #
+    # @overload get_table_optimizer(params = {})
+    # @param [Hash] params ({})
+    def get_table_optimizer(params = {}, options = {})
+      req = build_request(:get_table_optimizer, params)
       req.send_request(options)
     end
 
@@ -10610,6 +11229,18 @@ module Aws::Glue
     #   resp.table_version.table.federated_table.identifier #=> String
     #   resp.table_version.table.federated_table.database_identifier #=> String
     #   resp.table_version.table.federated_table.connection_name #=> String
+    #   resp.table_version.table.view_definition.is_protected #=> Boolean
+    #   resp.table_version.table.view_definition.definer #=> String
+    #   resp.table_version.table.view_definition.sub_objects #=> Array
+    #   resp.table_version.table.view_definition.sub_objects[0] #=> String
+    #   resp.table_version.table.view_definition.representations #=> Array
+    #   resp.table_version.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_version.table.view_definition.representations[0].dialect_version #=> String
+    #   resp.table_version.table.view_definition.representations[0].view_original_text #=> String
+    #   resp.table_version.table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_version.table.view_definition.representations[0].validation_connection #=> String
+    #   resp.table_version.table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_version.table.is_multi_dialect_view #=> Boolean
     #   resp.table_version.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersion AWS API Documentation
@@ -10729,6 +11360,18 @@ module Aws::Glue
     #   resp.table_versions[0].table.federated_table.identifier #=> String
     #   resp.table_versions[0].table.federated_table.database_identifier #=> String
     #   resp.table_versions[0].table.federated_table.connection_name #=> String
+    #   resp.table_versions[0].table.view_definition.is_protected #=> Boolean
+    #   resp.table_versions[0].table.view_definition.definer #=> String
+    #   resp.table_versions[0].table.view_definition.sub_objects #=> Array
+    #   resp.table_versions[0].table.view_definition.sub_objects[0] #=> String
+    #   resp.table_versions[0].table.view_definition.representations #=> Array
+    #   resp.table_versions[0].table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_versions[0].table.view_definition.representations[0].dialect_version #=> String
+    #   resp.table_versions[0].table.view_definition.representations[0].view_original_text #=> String
+    #   resp.table_versions[0].table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_versions[0].table.view_definition.representations[0].validation_connection #=> String
+    #   resp.table_versions[0].table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_versions[0].table.is_multi_dialect_view #=> Boolean
     #   resp.table_versions[0].version_id #=> String
     #   resp.next_token #=> String
     #
@@ -10859,6 +11502,18 @@ module Aws::Glue
     #   resp.table_list[0].federated_table.identifier #=> String
     #   resp.table_list[0].federated_table.database_identifier #=> String
     #   resp.table_list[0].federated_table.connection_name #=> String
+    #   resp.table_list[0].view_definition.is_protected #=> Boolean
+    #   resp.table_list[0].view_definition.definer #=> String
+    #   resp.table_list[0].view_definition.sub_objects #=> Array
+    #   resp.table_list[0].view_definition.sub_objects[0] #=> String
+    #   resp.table_list[0].view_definition.representations #=> Array
+    #   resp.table_list[0].view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
+    #   resp.table_list[0].view_definition.representations[0].view_original_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
+    #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_list[0].is_multi_dialect_view #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTables AWS API Documentation
@@ -10936,7 +11591,7 @@ module Aws::Glue
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.trigger.event_batching_condition.batch_size #=> Integer
@@ -11001,7 +11656,7 @@ module Aws::Glue
     #   resp.triggers[0].predicate.conditions #=> Array
     #   resp.triggers[0].predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.triggers[0].predicate.conditions[0].job_name #=> String
-    #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.triggers[0].predicate.conditions[0].crawler_name #=> String
     #   resp.triggers[0].predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.triggers[0].event_batching_condition.batch_size #=> Integer
@@ -11023,6 +11678,10 @@ module Aws::Glue
     # For IAM authorization, the public IAM action associated with this API
     # is `glue:GetPartition`.
     #
+    # @option params [String] :region
+    #   Specified only if the base tables belong to a different Amazon Web
+    #   Services Region.
+    #
     # @option params [required, String] :catalog_id
     #   The catalog ID where the partition resides.
     #
@@ -11042,6 +11701,12 @@ module Aws::Glue
     # @option params [required, Array<String>] :supported_permission_types
     #   (Required) A list of supported permission types.
     #
+    # @option params [Types::QuerySessionContext] :query_session_context
+    #   A structure used as a protocol between query engines and Lake
+    #   Formation or Glue. Contains both a Lake Formation generated
+    #   authorization identifier and information from the request's
+    #   authorization context.
+    #
     # @return [Types::GetUnfilteredPartitionMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetUnfilteredPartitionMetadataResponse#partition #data.partition} => Types::Partition (This method conflicts with a method on Response, call it through the data member)
@@ -11051,6 +11716,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_unfiltered_partition_metadata({
+    #     region: "ValueString",
     #     catalog_id: "CatalogIdString", # required
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
@@ -11061,6 +11727,15 @@ module Aws::Glue
     #       all_columns_requested: false,
     #     },
     #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION, NESTED_PERMISSION, NESTED_CELL_PERMISSION
+    #     query_session_context: {
+    #       query_id: "HashString",
+    #       query_start_time: Time.now,
+    #       cluster_id: "NullableString",
+    #       query_authorization_id: "HashString",
+    #       additional_context: {
+    #         "ContextKey" => "ContextValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -11129,6 +11804,10 @@ module Aws::Glue
     #
     # For IAM authorization, the public IAM action associated with this API
     # is `glue:GetPartitions`.
+    #
+    # @option params [String] :region
+    #   Specified only if the base tables belong to a different Amazon Web
+    #   Services Region.
     #
     # @option params [required, String] :catalog_id
     #   The ID of the Data Catalog where the partitions in question reside. If
@@ -11243,6 +11922,12 @@ module Aws::Glue
     # @option params [Integer] :max_results
     #   The maximum number of partitions to return in a single response.
     #
+    # @option params [Types::QuerySessionContext] :query_session_context
+    #   A structure used as a protocol between query engines and Lake
+    #   Formation or Glue. Contains both a Lake Formation generated
+    #   authorization identifier and information from the request's
+    #   authorization context.
+    #
     # @return [Types::GetUnfilteredPartitionsMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetUnfilteredPartitionsMetadataResponse#unfiltered_partitions #unfiltered_partitions} => Array&lt;Types::UnfilteredPartition&gt;
@@ -11253,6 +11938,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_unfiltered_partitions_metadata({
+    #     region: "ValueString",
     #     catalog_id: "CatalogIdString", # required
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
@@ -11269,6 +11955,15 @@ module Aws::Glue
     #       total_segments: 1, # required
     #     },
     #     max_results: 1,
+    #     query_session_context: {
+    #       query_id: "HashString",
+    #       query_start_time: Time.now,
+    #       cluster_id: "NullableString",
+    #       query_authorization_id: "HashString",
+    #       additional_context: {
+    #         "ContextKey" => "ContextValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -11334,11 +12029,15 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves table metadata from the Data Catalog that contains
-    # unfiltered metadata.
+    # Allows a third-party analytical engine to retrieve unfiltered table
+    # metadata from the Data Catalog.
     #
     # For IAM authorization, the public IAM action associated with this API
     # is `glue:GetTable`.
+    #
+    # @option params [String] :region
+    #   Specified only if the base tables belong to a different Amazon Web
+    #   Services Region.
     #
     # @option params [required, String] :catalog_id
     #   The catalog ID where the table resides.
@@ -11354,7 +12053,60 @@ module Aws::Glue
     #   A structure containing Lake Formation audit context information.
     #
     # @option params [required, Array<String>] :supported_permission_types
-    #   (Required) A list of supported permission types.
+    #   Indicates the level of filtering a third-party analytical engine is
+    #   capable of enforcing when calling the `GetUnfilteredTableMetadata` API
+    #   operation. Accepted values are:
+    #
+    #   * `COLUMN_PERMISSION` - Column permissions ensure that users can
+    #     access only specific columns in the table. If there are particular
+    #     columns contain sensitive data, data lake administrators can define
+    #     column filters that exclude access to specific columns.
+    #
+    #   * `CELL_FILTER_PERMISSION` - Cell-level filtering combines column
+    #     filtering (include or exclude columns) and row filter expressions to
+    #     restrict access to individual elements in the table.
+    #
+    #   * `NESTED_PERMISSION` - Nested permissions combines cell-level
+    #     filtering and nested column filtering to restrict access to columns
+    #     and/or nested columns in specific rows based on row filter
+    #     expressions.
+    #
+    #   * `NESTED_CELL_PERMISSION` - Nested cell permissions combines nested
+    #     permission with nested cell-level filtering. This allows different
+    #     subsets of nested columns to be restricted based on an array of row
+    #     filter expressions.
+    #
+    #   Note: Each of these permission types follows a hierarchical order
+    #   where each subsequent permission type includes all permission of the
+    #   previous type.
+    #
+    #   Important: If you provide a supported permission type that doesn't
+    #   match the user's level of permissions on the table, then Lake
+    #   Formation raises an exception. For example, if the third-party engine
+    #   calling the `GetUnfilteredTableMetadata` operation can enforce only
+    #   column-level filtering, and the user has nested cell filtering applied
+    #   on the table, Lake Formation throws an exception, and will not return
+    #   unfiltered table metadata and data access credentials.
+    #
+    # @option params [String] :parent_resource_arn
+    #   The resource ARN of the view.
+    #
+    # @option params [String] :root_resource_arn
+    #   The resource ARN of the root view in a chain of nested views.
+    #
+    # @option params [Types::SupportedDialect] :supported_dialect
+    #   A structure specifying the dialect and dialect version used by the
+    #   query engine.
+    #
+    # @option params [Array<String>] :permissions
+    #   The Lake Formation data permissions of the caller on the table. Used
+    #   to authorize the call when no view context is found.
+    #
+    # @option params [Types::QuerySessionContext] :query_session_context
+    #   A structure used as a protocol between query engines and Lake
+    #   Formation or Glue. Contains both a Lake Formation generated
+    #   authorization identifier and information from the request's
+    #   authorization context.
     #
     # @return [Types::GetUnfilteredTableMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11362,10 +12114,17 @@ module Aws::Glue
     #   * {Types::GetUnfilteredTableMetadataResponse#authorized_columns #authorized_columns} => Array&lt;String&gt;
     #   * {Types::GetUnfilteredTableMetadataResponse#is_registered_with_lake_formation #is_registered_with_lake_formation} => Boolean
     #   * {Types::GetUnfilteredTableMetadataResponse#cell_filters #cell_filters} => Array&lt;Types::ColumnRowFilter&gt;
+    #   * {Types::GetUnfilteredTableMetadataResponse#query_authorization_id #query_authorization_id} => String
+    #   * {Types::GetUnfilteredTableMetadataResponse#is_multi_dialect_view #is_multi_dialect_view} => Boolean
+    #   * {Types::GetUnfilteredTableMetadataResponse#resource_arn #resource_arn} => String
+    #   * {Types::GetUnfilteredTableMetadataResponse#is_protected #is_protected} => Boolean
+    #   * {Types::GetUnfilteredTableMetadataResponse#permissions #permissions} => Array&lt;String&gt;
+    #   * {Types::GetUnfilteredTableMetadataResponse#row_filter #row_filter} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_unfiltered_table_metadata({
+    #     region: "ValueString",
     #     catalog_id: "CatalogIdString", # required
     #     database_name: "NameString", # required
     #     name: "NameString", # required
@@ -11375,6 +12134,22 @@ module Aws::Glue
     #       all_columns_requested: false,
     #     },
     #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION, NESTED_PERMISSION, NESTED_CELL_PERMISSION
+    #     parent_resource_arn: "ArnString",
+    #     root_resource_arn: "ArnString",
+    #     supported_dialect: {
+    #       dialect: "REDSHIFT", # accepts REDSHIFT, ATHENA, SPARK
+    #       dialect_version: "ViewDialectVersionString",
+    #     },
+    #     permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS
+    #     query_session_context: {
+    #       query_id: "HashString",
+    #       query_start_time: Time.now,
+    #       cluster_id: "NullableString",
+    #       query_authorization_id: "HashString",
+    #       additional_context: {
+    #         "ContextKey" => "ContextValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -11446,12 +12221,31 @@ module Aws::Glue
     #   resp.table.federated_table.identifier #=> String
     #   resp.table.federated_table.database_identifier #=> String
     #   resp.table.federated_table.connection_name #=> String
+    #   resp.table.view_definition.is_protected #=> Boolean
+    #   resp.table.view_definition.definer #=> String
+    #   resp.table.view_definition.sub_objects #=> Array
+    #   resp.table.view_definition.sub_objects[0] #=> String
+    #   resp.table.view_definition.representations #=> Array
+    #   resp.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table.view_definition.representations[0].dialect_version #=> String
+    #   resp.table.view_definition.representations[0].view_original_text #=> String
+    #   resp.table.view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table.view_definition.representations[0].validation_connection #=> String
+    #   resp.table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table.is_multi_dialect_view #=> Boolean
     #   resp.authorized_columns #=> Array
     #   resp.authorized_columns[0] #=> String
     #   resp.is_registered_with_lake_formation #=> Boolean
     #   resp.cell_filters #=> Array
     #   resp.cell_filters[0].column_name #=> String
     #   resp.cell_filters[0].row_filter_expression #=> String
+    #   resp.query_authorization_id #=> String
+    #   resp.is_multi_dialect_view #=> Boolean
+    #   resp.resource_arn #=> String
+    #   resp.is_protected #=> Boolean
+    #   resp.permissions #=> Array
+    #   resp.permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS"
+    #   resp.row_filter #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredTableMetadata AWS API Documentation
     #
@@ -11459,6 +12253,53 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_unfiltered_table_metadata(params = {}, options = {})
       req = build_request(:get_unfiltered_table_metadata, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the specified Glue usage profile.
+    #
+    # @option params [required, String] :name
+    #   The name of the usage profile to retrieve.
+    #
+    # @return [Types::GetUsageProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUsageProfileResponse#name #name} => String
+    #   * {Types::GetUsageProfileResponse#description #description} => String
+    #   * {Types::GetUsageProfileResponse#configuration #configuration} => Types::ProfileConfiguration
+    #   * {Types::GetUsageProfileResponse#created_on #created_on} => Time
+    #   * {Types::GetUsageProfileResponse#last_modified_on #last_modified_on} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_usage_profile({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.configuration.session_configuration #=> Hash
+    #   resp.configuration.session_configuration["NameString"].default_value #=> String
+    #   resp.configuration.session_configuration["NameString"].allowed_values #=> Array
+    #   resp.configuration.session_configuration["NameString"].allowed_values[0] #=> String
+    #   resp.configuration.session_configuration["NameString"].min_value #=> String
+    #   resp.configuration.session_configuration["NameString"].max_value #=> String
+    #   resp.configuration.job_configuration #=> Hash
+    #   resp.configuration.job_configuration["NameString"].default_value #=> String
+    #   resp.configuration.job_configuration["NameString"].allowed_values #=> Array
+    #   resp.configuration.job_configuration["NameString"].allowed_values[0] #=> String
+    #   resp.configuration.job_configuration["NameString"].min_value #=> String
+    #   resp.configuration.job_configuration["NameString"].max_value #=> String
+    #   resp.created_on #=> Time
+    #   resp.last_modified_on #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUsageProfile AWS API Documentation
+    #
+    # @overload get_usage_profile(params = {})
+    # @param [Hash] params ({})
+    def get_usage_profile(params = {}, options = {})
+      req = build_request(:get_usage_profile, params)
       req.send_request(options)
     end
 
@@ -11640,7 +12481,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflow.last_run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
@@ -11651,10 +12492,11 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
-    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].error_message #=> String
@@ -11673,6 +12515,8 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -11708,7 +12552,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflow.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
@@ -11719,10 +12563,11 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
-    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].error_message #=> String
@@ -11741,6 +12586,8 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.workflow.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -11764,7 +12611,8 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves the metadata for a given workflow run.
+    # Retrieves the metadata for a given workflow run. Job run history is
+    # accessible for 90 days for your workflow and job run.
     #
     # @option params [required, String] :name
     #   Name of the workflow being run.
@@ -11829,7 +12677,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.run.graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.run.graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
@@ -11840,10 +12688,11 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.run.graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.run.graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.run.graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
-    #   resp.run.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.run.graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
     #   resp.run.graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].error_message #=> String
@@ -11862,6 +12711,8 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.run.graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -11990,7 +12841,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions #=> Array
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.runs[0].graph.nodes[0].trigger_details.trigger.event_batching_condition.batch_size #=> Integer
@@ -12001,10 +12852,11 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].previous_run_id #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].trigger_name #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].job_name #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].job_mode #=> String, one of "SCRIPT", "VISUAL", "NOTEBOOK"
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].started_on #=> Time
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].last_modified_on #=> Time
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].completed_on #=> Time
-    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].arguments #=> Hash
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].arguments["GenericString"] #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].error_message #=> String
@@ -12023,6 +12875,8 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].glue_version #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].execution_class #=> String, one of "FLEX", "STANDARD"
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].maintenance_window #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].profile_name #=> String
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -12109,6 +12963,43 @@ module Aws::Glue
     # @param [Hash] params ({})
     def list_blueprints(params = {}, options = {})
       req = build_request(:list_blueprints, params)
+      req.send_request(options)
+    end
+
+    # List all task runs for a particular account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of the response.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::ListColumnStatisticsTaskRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListColumnStatisticsTaskRunsResponse#column_statistics_task_run_ids #column_statistics_task_run_ids} => Array&lt;String&gt;
+    #   * {Types::ListColumnStatisticsTaskRunsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_column_statistics_task_runs({
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.column_statistics_task_run_ids #=> Array
+    #   resp.column_statistics_task_run_ids[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListColumnStatisticsTaskRuns AWS API Documentation
+    #
+    # @overload list_column_statistics_task_runs(params = {})
+    # @param [Hash] params ({})
+    def list_column_statistics_task_runs(params = {}, options = {})
+      req = build_request(:list_column_statistics_task_runs, params)
       req.send_request(options)
     end
 
@@ -12949,6 +13840,7 @@ module Aws::Glue
     #   resp.sessions[0].execution_time #=> Float
     #   resp.sessions[0].dpu_seconds #=> Float
     #   resp.sessions[0].idle_timeout #=> Integer
+    #   resp.sessions[0].profile_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListSessions AWS API Documentation
@@ -13011,6 +13903,73 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Lists the history of previous optimizer runs for a specific table.
+    #
+    # @option params [required, String] :catalog_id
+    #   The Catalog ID of the table.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database in the catalog in which the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @option params [required, String] :type
+    #   The type of table optimizer. Currently, the only valid value is
+    #   `compaction`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of optimizer runs to return on each call.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, if this is a continuation call.
+    #
+    # @return [Types::ListTableOptimizerRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTableOptimizerRunsResponse#catalog_id #catalog_id} => String
+    #   * {Types::ListTableOptimizerRunsResponse#database_name #database_name} => String
+    #   * {Types::ListTableOptimizerRunsResponse#table_name #table_name} => String
+    #   * {Types::ListTableOptimizerRunsResponse#next_token #next_token} => String
+    #   * {Types::ListTableOptimizerRunsResponse#table_optimizer_runs #table_optimizer_runs} => Array&lt;Types::TableOptimizerRun&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_table_optimizer_runs({
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     type: "compaction", # required, accepts compaction
+    #     max_results: 1,
+    #     next_token: "ListTableOptimizerRunsToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.catalog_id #=> String
+    #   resp.database_name #=> String
+    #   resp.table_name #=> String
+    #   resp.next_token #=> String
+    #   resp.table_optimizer_runs #=> Array
+    #   resp.table_optimizer_runs[0].event_type #=> String, one of "starting", "completed", "failed", "in_progress"
+    #   resp.table_optimizer_runs[0].start_timestamp #=> Time
+    #   resp.table_optimizer_runs[0].end_timestamp #=> Time
+    #   resp.table_optimizer_runs[0].metrics.number_of_bytes_compacted #=> String
+    #   resp.table_optimizer_runs[0].metrics.number_of_files_compacted #=> String
+    #   resp.table_optimizer_runs[0].metrics.number_of_dpus #=> String
+    #   resp.table_optimizer_runs[0].metrics.job_duration_in_hour #=> String
+    #   resp.table_optimizer_runs[0].error #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListTableOptimizerRuns AWS API Documentation
+    #
+    # @overload list_table_optimizer_runs(params = {})
+    # @param [Hash] params ({})
+    def list_table_optimizer_runs(params = {}, options = {})
+      req = build_request(:list_table_optimizer_runs, params)
+      req.send_request(options)
+    end
+
     # Retrieves the names of all trigger resources in this Amazon Web
     # Services account, or the resources with the specified tag. This
     # operation allows you to see which resources are available in your
@@ -13065,6 +14024,46 @@ module Aws::Glue
     # @param [Hash] params ({})
     def list_triggers(params = {}, options = {})
       req = build_request(:list_triggers, params)
+      req.send_request(options)
+    end
+
+    # List all the Glue usage profiles.
+    #
+    # @option params [String] :next_token
+    #   A continuation token, included if this is a continuation call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of usage profiles to return in a single response.
+    #
+    # @return [Types::ListUsageProfilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUsageProfilesResponse#profiles #profiles} => Array&lt;Types::UsageProfileDefinition&gt;
+    #   * {Types::ListUsageProfilesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_usage_profiles({
+    #     next_token: "OrchestrationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profiles #=> Array
+    #   resp.profiles[0].name #=> String
+    #   resp.profiles[0].description #=> String
+    #   resp.profiles[0].created_on #=> Time
+    #   resp.profiles[0].last_modified_on #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListUsageProfiles AWS API Documentation
+    #
+    # @overload list_usage_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_usage_profiles(params = {}, options = {})
+      req = build_request(:list_usage_profiles, params)
       req.send_request(options)
     end
 
@@ -13125,8 +14124,9 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     data_catalog_encryption_settings: { # required
     #       encryption_at_rest: {
-    #         catalog_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS
+    #         catalog_encryption_mode: "DISABLED", # required, accepts DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE
     #         sse_aws_kms_key_id: "NameString",
+    #         catalog_encryption_service_role: "IAMRoleArn",
     #       },
     #       connection_password_encryption: {
     #         return_connection_password_encrypted: false, # required
@@ -13794,6 +14794,18 @@ module Aws::Glue
     #   resp.table_list[0].federated_table.identifier #=> String
     #   resp.table_list[0].federated_table.database_identifier #=> String
     #   resp.table_list[0].federated_table.connection_name #=> String
+    #   resp.table_list[0].view_definition.is_protected #=> Boolean
+    #   resp.table_list[0].view_definition.definer #=> String
+    #   resp.table_list[0].view_definition.sub_objects #=> Array
+    #   resp.table_list[0].view_definition.sub_objects[0] #=> String
+    #   resp.table_list[0].view_definition.representations #=> Array
+    #   resp.table_list[0].view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
+    #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
+    #   resp.table_list[0].view_definition.representations[0].view_original_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].view_expanded_text #=> String
+    #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
+    #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_list[0].is_multi_dialect_view #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SearchTables AWS API Documentation
     #
@@ -13837,6 +14849,63 @@ module Aws::Glue
     # @param [Hash] params ({})
     def start_blueprint_run(params = {}, options = {})
       req = build_request(:start_blueprint_run, params)
+      req.send_request(options)
+    end
+
+    # Starts a column statistics task run, for a specified table and
+    # columns.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table to generate statistics.
+    #
+    # @option params [Array<String>] :column_name_list
+    #   A list of the column names to generate statistics. If none is
+    #   supplied, all column names for the table will be used by default.
+    #
+    # @option params [required, String] :role
+    #   The IAM role that the service assumes to generate statistics.
+    #
+    # @option params [Float] :sample_size
+    #   The percentage of rows used to generate statistics. If none is
+    #   supplied, the entire table will be used to generate stats.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the table reside. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #
+    # @option params [String] :security_configuration
+    #   Name of the security configuration that is used to encrypt CloudWatch
+    #   logs for the column stats task run.
+    #
+    # @return [Types::StartColumnStatisticsTaskRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartColumnStatisticsTaskRunResponse#column_statistics_task_run_id #column_statistics_task_run_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_column_statistics_task_run({
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     column_name_list: ["NameString"],
+    #     role: "NameString", # required
+    #     sample_size: 1.0,
+    #     catalog_id: "NameString",
+    #     security_configuration: "NameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.column_statistics_task_run_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartColumnStatisticsTaskRun AWS API Documentation
+    #
+    # @overload start_column_statistics_task_run(params = {})
+    # @param [Hash] params ({})
+    def start_column_statistics_task_run(params = {}, options = {})
+      req = build_request(:start_column_statistics_task_run, params)
       req.send_request(options)
     end
 
@@ -13897,6 +14966,8 @@ module Aws::Glue
     # and comes up with recommendations for a potential ruleset. You can
     # then triage the ruleset and modify the generated ruleset to your
     # liking.
+    #
+    # Recommendation runs are automatically deleted after 90 days.
     #
     # @option params [required, Types::DataSource] :data_source
     #   The data source (Glue table) associated with this run.
@@ -14017,6 +15088,7 @@ module Aws::Glue
     #     additional_run_options: {
     #       cloud_watch_metrics_enabled: false,
     #       results_s3_prefix: "UriString",
+    #       composite_rule_evaluation_method: "COLUMN", # accepts COLUMN, ROW
     #     },
     #     ruleset_names: ["NameString"], # required
     #     additional_data_sources: {
@@ -14210,8 +15282,11 @@ module Aws::Glue
     #   run can consume resources before it is terminated and enters `TIMEOUT`
     #   status. This value overrides the timeout value set in the parent job.
     #
-    #   Streaming jobs do not have a timeout. The default for non-streaming
-    #   jobs is 2,880 minutes (48 hours).
+    #   Streaming jobs must have timeout values less than 7 days or 10080
+    #   minutes. When the value is left blank, the job will be restarted after
+    #   7 days based if you have not setup a maintenance window. If you have
+    #   setup maintenance window, it will be restarted during the maintenance
+    #   window after 7 days.
     #
     # @option params [Float] :max_capacity
     #   For Glue version 1.0 or earlier jobs, using the standard worker type,
@@ -14498,6 +15573,32 @@ module Aws::Glue
     # @param [Hash] params ({})
     def start_workflow_run(params = {}, options = {})
       req = build_request(:start_workflow_run, params)
+      req.send_request(options)
+    end
+
+    # Stops a task run for the specified table.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database where the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_column_statistics_task_run({
+    #     database_name: "DatabaseName", # required
+    #     table_name: "NameString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRun AWS API Documentation
+    #
+    # @overload stop_column_statistics_task_run(params = {})
+    # @param [Hash] params ({})
+    def stop_column_statistics_task_run(params = {}, options = {})
+      req = build_request(:stop_column_statistics_task_run, params)
       req.send_request(options)
     end
 
@@ -15089,7 +16190,7 @@ module Aws::Glue
     #     connection_input: { # required
     #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP, MONGODB, KAFKA, NETWORK, MARKETPLACE, CUSTOM, SALESFORCE
     #       match_criteria: ["NameString"],
     #       connection_properties: { # required
     #         "HOST" => "ValueString",
@@ -15099,6 +16200,26 @@ module Aws::Glue
     #         security_group_id_list: ["NameString"],
     #         availability_zone: "NameString",
     #       },
+    #       authentication_configuration: {
+    #         authentication_type: "BASIC", # accepts BASIC, OAUTH2, CUSTOM
+    #         secret_arn: "SecretArn",
+    #         o_auth_2_properties: {
+    #           o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER
+    #           o_auth_2_client_application: {
+    #             user_managed_client_application_client_id: "UserManagedClientApplicationClientId",
+    #             aws_managed_client_application_reference: "AWSManagedClientApplicationReference",
+    #           },
+    #           token_url: "TokenUrl",
+    #           token_url_parameters_map: {
+    #             "TokenUrlParameterKey" => "TokenUrlParameterValue",
+    #           },
+    #           authorization_code_properties: {
+    #             authorization_code: "AuthorizationCode",
+    #             redirect_uri: "RedirectUri",
+    #           },
+    #         },
+    #       },
+    #       validate_credentials: false,
     #     },
     #   })
     #
@@ -15521,10 +16642,13 @@ module Aws::Glue
     #   repository.
     #
     # @option params [String] :provider
-    #   The provider for the remote repository.
+    #   The provider for the remote repository. Possible values: GITHUB,
+    #   AWS\_CODE\_COMMIT, GITLAB, BITBUCKET.
     #
     # @option params [String] :repository_name
-    #   The name of the remote repository that contains the job artifacts.
+    #   The name of the remote repository that contains the job artifacts. For
+    #   BitBucket providers, `RepositoryName` should include `WorkspaceName`.
+    #   Use the format `<WorkspaceName>/<RepositoryName>`.
     #
     # @option params [String] :repository_owner
     #   The owner of the remote repository that contains the job artifacts.
@@ -15554,7 +16678,7 @@ module Aws::Glue
     #
     #   resp = client.update_job_from_source_control({
     #     job_name: "NameString",
-    #     provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
+    #     provider: "GITHUB", # accepts GITHUB, GITLAB, BITBUCKET, AWS_CODE_COMMIT
     #     repository_name: "NameString",
     #     repository_owner: "NameString",
     #     branch_name: "NameString",
@@ -15924,10 +17048,13 @@ module Aws::Glue
     #   repository.
     #
     # @option params [String] :provider
-    #   The provider for the remote repository.
+    #   The provider for the remote repository. Possible values: GITHUB,
+    #   AWS\_CODE\_COMMIT, GITLAB, BITBUCKET.
     #
     # @option params [String] :repository_name
-    #   The name of the remote repository that contains the job artifacts.
+    #   The name of the remote repository that contains the job artifacts. For
+    #   BitBucket providers, `RepositoryName` should include `WorkspaceName`.
+    #   Use the format `<WorkspaceName>/<RepositoryName>`.
     #
     # @option params [String] :repository_owner
     #   The owner of the remote repository that contains the job artifacts.
@@ -15957,7 +17084,7 @@ module Aws::Glue
     #
     #   resp = client.update_source_control_from_job({
     #     job_name: "NameString",
-    #     provider: "GITHUB", # accepts GITHUB, AWS_CODE_COMMIT
+    #     provider: "GITHUB", # accepts GITHUB, GITLAB, BITBUCKET, AWS_CODE_COMMIT
     #     repository_name: "NameString",
     #     repository_owner: "NameString",
     #     branch_name: "NameString",
@@ -16004,6 +17131,13 @@ module Aws::Glue
     #
     # @option params [String] :version_id
     #   The version ID at which to update the table contents.
+    #
+    # @option params [String] :view_update_action
+    #   The operation to be performed when updating the view.
+    #
+    # @option params [Boolean] :force
+    #   A flag that can be set to true to ignore matching storage descriptor
+    #   and subobject matching requirements.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -16093,10 +17227,26 @@ module Aws::Glue
     #         name: "NameString",
     #         region: "NameString",
     #       },
+    #       view_definition: {
+    #         is_protected: false,
+    #         definer: "ArnString",
+    #         representations: [
+    #           {
+    #             dialect: "REDSHIFT", # accepts REDSHIFT, ATHENA, SPARK
+    #             dialect_version: "ViewDialectVersionString",
+    #             view_original_text: "ViewTextString",
+    #             validation_connection: "NameString",
+    #             view_expanded_text: "ViewTextString",
+    #           },
+    #         ],
+    #         sub_objects: ["ArnString"],
+    #       },
     #     },
     #     skip_archive: false,
     #     transaction_id: "TransactionIdString",
     #     version_id: "VersionString",
+    #     view_update_action: "ADD", # accepts ADD, REPLACE, ADD_OR_REPLACE, DROP
+    #     force: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTable AWS API Documentation
@@ -16105,6 +17255,49 @@ module Aws::Glue
     # @param [Hash] params ({})
     def update_table(params = {}, options = {})
       req = build_request(:update_table, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration for an existing table optimizer.
+    #
+    # @option params [required, String] :catalog_id
+    #   The Catalog ID of the table.
+    #
+    # @option params [required, String] :database_name
+    #   The name of the database in the catalog in which the table resides.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @option params [required, String] :type
+    #   The type of table optimizer. Currently, the only valid value is
+    #   `compaction`.
+    #
+    # @option params [required, Types::TableOptimizerConfiguration] :table_optimizer_configuration
+    #   A `TableOptimizerConfiguration` object representing the configuration
+    #   of a table optimizer.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_table_optimizer({
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     type: "compaction", # required, accepts compaction
+    #     table_optimizer_configuration: { # required
+    #       role_arn: "ArnString",
+    #       enabled: false,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTableOptimizer AWS API Documentation
+    #
+    # @overload update_table_optimizer(params = {})
+    # @param [Hash] params ({})
+    def update_table_optimizer(params = {}, options = {})
+      req = build_request(:update_table_optimizer, params)
       req.send_request(options)
     end
 
@@ -16148,7 +17341,7 @@ module Aws::Glue
     #           {
     #             logical_operator: "EQUALS", # accepts EQUALS
     #             job_name: "NameString",
-    #             state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT, ERROR, WAITING
+    #             state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT, ERROR, WAITING, EXPIRED
     #             crawler_name: "NameString",
     #             crawl_state: "RUNNING", # accepts RUNNING, CANCELLING, CANCELLED, SUCCEEDED, FAILED, ERROR
     #           },
@@ -16182,7 +17375,7 @@ module Aws::Glue
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING"
+    #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT", "ERROR", "WAITING", "EXPIRED"
     #   resp.trigger.predicate.conditions[0].crawler_name #=> String
     #   resp.trigger.predicate.conditions[0].crawl_state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED", "ERROR"
     #   resp.trigger.event_batching_condition.batch_size #=> Integer
@@ -16194,6 +17387,60 @@ module Aws::Glue
     # @param [Hash] params ({})
     def update_trigger(params = {}, options = {})
       req = build_request(:update_trigger, params)
+      req.send_request(options)
+    end
+
+    # Update an Glue usage profile.
+    #
+    # @option params [required, String] :name
+    #   The name of the usage profile.
+    #
+    # @option params [String] :description
+    #   A description of the usage profile.
+    #
+    # @option params [required, Types::ProfileConfiguration] :configuration
+    #   A `ProfileConfiguration` object specifying the job and session values
+    #   for the profile.
+    #
+    # @return [Types::UpdateUsageProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateUsageProfileResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_usage_profile({
+    #     name: "NameString", # required
+    #     description: "DescriptionString",
+    #     configuration: { # required
+    #       session_configuration: {
+    #         "NameString" => {
+    #           default_value: "ConfigValueString",
+    #           allowed_values: ["ConfigValueString"],
+    #           min_value: "ConfigValueString",
+    #           max_value: "ConfigValueString",
+    #         },
+    #       },
+    #       job_configuration: {
+    #         "NameString" => {
+    #           default_value: "ConfigValueString",
+    #           allowed_values: ["ConfigValueString"],
+    #           min_value: "ConfigValueString",
+    #           max_value: "ConfigValueString",
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateUsageProfile AWS API Documentation
+    #
+    # @overload update_usage_profile(params = {})
+    # @param [Hash] params ({})
+    def update_usage_profile(params = {}, options = {})
+      req = build_request(:update_usage_profile, params)
       req.send_request(options)
     end
 
@@ -16306,7 +17553,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.156.0'
+      context[:gem_version] = '1.180.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

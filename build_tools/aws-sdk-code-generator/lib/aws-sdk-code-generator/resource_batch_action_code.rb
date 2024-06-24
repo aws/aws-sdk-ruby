@@ -15,7 +15,7 @@ module AwsSdkCodeGenerator
       parts << 'batch_enum.each do |batch|'
       parts << initialize_params
       parts << apply_params_per_batch
-      parts << "  Aws::Plugins::UserAgent.feature('resource') do"
+      parts << "  Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do"
       parts << "    batch[0].client.#{client_method}(params)"
       parts << '  end'
       parts << 'end'

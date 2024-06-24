@@ -1,6 +1,124 @@
 Unreleased Changes
 ------------------
 
+1.152.3 (2024-06-13)
+------------------
+
+* Issue - Handle 200 errors for all S3 operations that do not have streaming responses.
+
+1.152.2 (2024-06-12)
+------------------
+
+* Issue - Revert Handling of 200 errors for all S3 operations.
+
+1.152.1 (2024-06-10)
+------------------
+
+* Issue - Handle 200 errors for all S3 operations that do not have streaming responses.
+
+1.152.0 (2024-06-05)
+------------------
+
+* Feature - Added new params copySource and key to copyObject API for supporting S3 Access Grants plugin. These changes will not change any of the existing S3 API functionality.
+
+1.151.0 (2024-05-14)
+------------------
+
+* Feature - Updated a few x-id in the http uri traits
+
+1.150.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.149.1 (2024-05-06)
+------------------
+
+* Issue - Fix bug where destination bucket default encryption was inadvertently overridden by source object encryption.
+
+1.149.0 (2024-04-30)
+------------------
+
+* Feature - Support S3 Access Grants authentication. Access Grants can be enabled with the `access_grants` option, and custom options can be passed into the `access_grants_credentials_provider` option. This feature requires `aws-sdk-s3control` to be installed.
+
+* Feature - Add RBS signatures for customizations of S3.
+
+1.148.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.147.0 (2024-04-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Omit `ContentType` plugin when generating presigned url.
+
+1.146.1 (2024-03-28)
+------------------
+
+* Issue - Fix bug where thread_count option was not being respected for multipart uploads.
+
+1.146.0 (2024-03-18)
+------------------
+
+* Feature - Fix two issues with response root node names.
+
+1.145.0 (2024-03-15)
+------------------
+
+* Feature - Documentation updates for Amazon S3.
+
+1.144.0 (2024-03-13)
+------------------
+
+* Feature - This release makes the default option for S3 on Outposts request signing to use the SigV4A algorithm when using AWS Common Runtime (CRT).
+
+1.143.1 (2024-03-12)
+------------------
+
+* Issue - Include original part errors in message when aborting multipart upload fails (#2990).
+
+1.143.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.142.0 (2023-12-22)
+------------------
+
+* Feature - Added additional examples for some operations.
+
+1.141.0 (2023-11-28)
+------------------
+
+* Feature - Adds support for S3 Express One Zone.
+
+* Feature - Support S3 Express authentication and endpoints. Express session auth can be disabled with the `disable_s3_express_session_auth` Client option, the `AWS_S3_DISABLE_EXPRESS_SESSION_AUTH` environment variable, and the `s3_disable_express_session_auth` shared config option. A custom `express_credentials_provider` can be configured onto the Client.
+
+1.140.0 (2023-11-27)
+------------------
+
+* Feature - Adding new params - Key and Prefix, to S3 API operations for supporting S3 Access Grants. Note - These updates will not change any of the existing S3 API functionality.
+
+* Issue - Fix thread interruptions in multipart `download_file`, `file_uploader` and `stream_uploader` (#2944).
+
+1.139.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.138.0 (2023-11-21)
+------------------
+
+* Feature - Add support for automatic date based partitioning in S3 Server Access Logs.
+
+1.137.0 (2023-11-17)
+------------------
+
+* Feature - Removes all default 0 values for numbers and false values for booleans
+
 1.136.0 (2023-09-26)
 ------------------
 
@@ -46,6 +164,7 @@ Unreleased Changes
 * Feature - S3 Inventory now supports Object Access Control List and Object Owner as available object metadata fields in inventory reports.
 
 * Feature - Allow Object multipart copy API to work when requiring a checksum algorithm.
+
 * Feature - Allow Object multipart copy API to optionally copy parts as they exist on the source object if it has parts, instead of generating new part ranges, when specifying `use_source_parts: true`.
 
 1.129.0 (2023-07-11)
@@ -83,7 +202,7 @@ Unreleased Changes
 1.123.2 (2023-06-12)
 ------------------
 
-* Issue - Fix issue when decrypting noncurrent versions of objects when using client side encryption (#2866). 
+* Issue - Fix issue when decrypting noncurrent versions of objects when using client side encryption (#2866).
 
 1.123.1 (2023-06-02)
 ------------------

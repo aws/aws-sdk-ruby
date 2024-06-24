@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Personalize
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Personalize
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::Personalize
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::Personalize
     #   @option options [Aws::Personalize::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Personalize::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -398,13 +423,35 @@ module Aws::Personalize
 
     # @!group API Operations
 
-    # Creates a batch inference job. The operation can handle up to 50
-    # million records and the input file must be in JSON format. For more
-    # information, see [Creating a batch inference job][1].
+    # Generates batch recommendations based on a list of items or users
+    # stored in Amazon S3 and exports the recommendations to an Amazon S3
+    # bucket.
+    #
+    # To generate batch recommendations, specify the ARN of a solution
+    # version and an Amazon S3 URI for the input and output data. For user
+    # personalization, popular items, and personalized ranking solutions,
+    # the batch inference job generates a list of recommended items for each
+    # user ID in the input file. For related items solutions, the job
+    # generates a list of recommended items for each item ID in the input
+    # file.
+    #
+    # For more information, see [Creating a batch inference job ][1].
+    #
+    # If you use the Similar-Items recipe, Amazon Personalize can add
+    # descriptive themes to batch recommendations. To generate themes, set
+    # the job's mode to `THEME_GENERATION` and specify the name of the
+    # field that contains item names in the input data.
+    #
+    # For more information about generating themes, see [Batch
+    # recommendations with themes from Content Generator ][2].
+    #
+    # You can't get batch recommendations with the Trending-Now or
+    # Next-Best-Action recipes.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/creating-batch-inference-job.html
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/getting-batch-recommendations.html
+    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/themed-batch-recommendations.html
     #
     # @option params [required, String] :job_name
     #   The name of the batch inference job to create.
@@ -448,6 +495,24 @@ module Aws::Personalize
     #
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html
     #
+    # @option params [String] :batch_inference_job_mode
+    #   The mode of the batch inference job. To generate descriptive themes
+    #   for groups of similar items, set the job mode to `THEME_GENERATION`.
+    #   If you don't want to generate themes, use the default
+    #   `BATCH_INFERENCE`.
+    #
+    #   When you get batch recommendations with themes, you will incur
+    #   additional costs. For more information, see [Amazon Personalize
+    #   pricing][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/personalize/pricing/
+    #
+    # @option params [Types::ThemeGenerationConfig] :theme_generation_config
+    #   For theme generation jobs, specify the name of the column in your
+    #   Items dataset that contains each item's name.
+    #
     # @return [Types::CreateBatchInferenceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBatchInferenceJobResponse#batch_inference_job_arn #batch_inference_job_arn} => String
@@ -483,6 +548,12 @@ module Aws::Personalize
     #         tag_value: "TagValue", # required
     #       },
     #     ],
+    #     batch_inference_job_mode: "BATCH_INFERENCE", # accepts BATCH_INFERENCE, THEME_GENERATION
+    #     theme_generation_config: {
+    #       fields_for_theme_generation: { # required
+    #         item_name: "ColumnName", # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -592,34 +663,44 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # You incur campaign costs while it is active. To avoid unnecessary
+    # costs, make sure to delete the campaign when you are finished. For
+    # information about campaign costs, see [Amazon Personalize pricing][1].
+    #
     # Creates a campaign that deploys a solution version. When a client
-    # calls the [GetRecommendations][1] and [GetPersonalizedRanking][2]
+    # calls the [GetRecommendations][2] and [GetPersonalizedRanking][3]
     # APIs, a campaign is specified in the request.
     #
     # **Minimum Provisioned TPS and Auto-Scaling**
     #
-    # A high `minProvisionedTPS` will increase your bill. We recommend
+    # A high `minProvisionedTPS` will increase your cost. We recommend
     # starting with 1 for `minProvisionedTPS` (the default). Track your
     # usage using Amazon CloudWatch metrics, and increase the
     # `minProvisionedTPS` as necessary.
     #
-    # A transaction is a single `GetRecommendations` or
-    # `GetPersonalizedRanking` call. Transactions per second (TPS) is the
-    # throughput and unit of billing for Amazon Personalize. The minimum
-    # provisioned TPS (`minProvisionedTPS`) specifies the baseline
-    # throughput provisioned by Amazon Personalize, and thus, the minimum
-    # billing charge.
+    # When you create an Amazon Personalize campaign, you can specify the
+    # minimum provisioned transactions per second (`minProvisionedTPS`) for
+    # the campaign. This is the baseline transaction throughput for the
+    # campaign provisioned by Amazon Personalize. It sets the minimum
+    # billing charge for the campaign while it is active. A transaction is a
+    # single `GetRecommendations` or `GetPersonalizedRanking` request. The
+    # default `minProvisionedTPS` is 1.
     #
-    # If your TPS increases beyond `minProvisionedTPS`, Amazon Personalize
-    # auto-scales the provisioned capacity up and down, but never below
-    # `minProvisionedTPS`. There's a short time delay while the capacity is
-    # increased that might cause loss of transactions.
+    # If your TPS increases beyond the `minProvisionedTPS`, Amazon
+    # Personalize auto-scales the provisioned capacity up and down, but
+    # never below `minProvisionedTPS`. There's a short time delay while the
+    # capacity is increased that might cause loss of transactions. When your
+    # traffic reduces, capacity returns to the `minProvisionedTPS`.
     #
-    # The actual TPS used is calculated as the average requests/second
-    # within a 5-minute window. You pay for maximum of either the minimum
-    # provisioned TPS or the actual TPS. We recommend starting with a low
-    # `minProvisionedTPS`, track your usage using Amazon CloudWatch metrics,
-    # and then increase the `minProvisionedTPS` as necessary.
+    # You are charged for the the minimum provisioned TPS or, if your
+    # requests exceed the `minProvisionedTPS`, the actual TPS. The actual
+    # TPS is the total number of recommendation requests you make. We
+    # recommend starting with a low `minProvisionedTPS`, track your usage
+    # using Amazon CloudWatch metrics, and then increase the
+    # `minProvisionedTPS` as necessary.
+    #
+    # For more information about campaign costs, see [Amazon Personalize
+    # pricing][1].
     #
     # **Status**
     #
@@ -630,7 +711,7 @@ module Aws::Personalize
     #
     # * DELETE PENDING &gt; DELETE IN\_PROGRESS
     #
-    # To get the campaign status, call [DescribeCampaign][3].
+    # To get the campaign status, call [DescribeCampaign][4].
     #
     # <note markdown="1"> Wait until the `status` of the campaign is `ACTIVE` before asking the
     # campaign for recommendations.
@@ -639,29 +720,45 @@ module Aws::Personalize
     #
     # **Related APIs**
     #
-    # * [ListCampaigns][4]
+    # * [ListCampaigns][5]
     #
-    # * [DescribeCampaign][3]
+    # * [DescribeCampaign][4]
     #
-    # * [UpdateCampaign][5]
+    # * [UpdateCampaign][6]
     #
-    # * [DeleteCampaign][6]
+    # * [DeleteCampaign][7]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html
-    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html
-    # [3]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html
-    # [4]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html
-    # [5]: https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html
-    # [6]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html
+    # [1]: https://aws.amazon.com/personalize/pricing/
+    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html
+    # [3]: https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html
+    # [4]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html
+    # [5]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html
+    # [6]: https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html
+    # [7]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html
     #
     # @option params [required, String] :name
     #   A name for the new campaign. The campaign name must be unique within
     #   your account.
     #
     # @option params [required, String] :solution_version_arn
-    #   The Amazon Resource Name (ARN) of the solution version to deploy.
+    #   The Amazon Resource Name (ARN) of the trained model to deploy with the
+    #   campaign. To specify the latest solution version of your solution,
+    #   specify the ARN of your *solution* in `SolutionArn/$LATEST` format.
+    #   You must use this format if you set `syncWithLatestSolutionVersion` to
+    #   `True` in the [CampaignConfig][1].
+    #
+    #   To deploy a model that isn't the latest solution version of your
+    #   solution, specify the ARN of the solution version.
+    #
+    #   For more information about automatic campaign updates, see [Enabling
+    #   automatic campaign updates][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CampaignConfig.html
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update
     #
     # @option params [Integer] :min_provisioned_tps
     #   Specifies the requested minimum provisioned transactions
@@ -695,6 +792,8 @@ module Aws::Personalize
     #       item_exploration_config: {
     #         "ParameterName" => "ParameterValue",
     #       },
+    #       enable_metadata_with_recommendations: false,
+    #       sync_with_latest_solution_version: false,
     #     },
     #     tags: [
     #       {
@@ -717,21 +816,135 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Creates a batch job that deletes all references to specific users from
+    # an Amazon Personalize dataset group in batches. You specify the users
+    # to delete in a CSV file of userIds in an Amazon S3 bucket. After a job
+    # completes, Amazon Personalize no longer trains on the users’ data and
+    # no longer considers the users when generating user segments. For more
+    # information about creating a data deletion job, see [Deleting
+    # users][1].
+    #
+    # * Your input file must be a CSV file with a single USER\_ID column
+    #   that lists the users IDs. For more information about preparing the
+    #   CSV file, see [Preparing your data deletion file and uploading it to
+    #   Amazon S3][2].
+    #
+    # * To give Amazon Personalize permission to access your input CSV file
+    #   of userIds, you must specify an IAM service role that has permission
+    #   to read from the data source. This role needs `GetObject` and
+    #   `ListBucket` permissions for the bucket and its content. These
+    #   permissions are the same as importing data. For information on
+    #   granting access to your Amazon S3 bucket, see [Giving Amazon
+    #   Personalize Access to Amazon S3 Resources][3].
+    #
+    # After you create a job, it can take up to a day to delete all
+    # references to the users from datasets and models. Until the job
+    # completes, Amazon Personalize continues to use the data when training.
+    # And if you use a User Segmentation recipe, the users might appear in
+    # user segments.
+    #
+    # **Status**
+    #
+    # A data deletion job can have one of the following statuses:
+    #
+    # * PENDING &gt; IN\_PROGRESS &gt; COMPLETED -or- FAILED
+    #
+    # ^
+    #
+    # To get the status of the data deletion job, call
+    # [DescribeDataDeletionJob][4] API operation and specify the Amazon
+    # Resource Name (ARN) of the job. If the status is FAILED, the response
+    # includes a `failureReason` key, which describes why the job failed.
+    #
+    # **Related APIs**
+    #
+    # * [ListDataDeletionJobs][5]
+    #
+    # * [DescribeDataDeletionJob][4]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html
+    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/prepare-deletion-input-file.html
+    # [3]: https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html
+    # [4]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataDeletionJob.html
+    # [5]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListDataDeletionJobs.html
+    #
+    # @option params [required, String] :job_name
+    #   The name for the data deletion job.
+    #
+    # @option params [required, String] :dataset_group_arn
+    #   The Amazon Resource Name (ARN) of the dataset group that has the
+    #   datasets you want to delete records from.
+    #
+    # @option params [required, Types::DataSource] :data_source
+    #   The Amazon S3 bucket that contains the list of userIds of the users to
+    #   delete.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that has permissions to
+    #   read from the Amazon S3 data source.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of [tags][1] to apply to the data deletion job.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html
+    #
+    # @return [Types::CreateDataDeletionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataDeletionJobResponse#data_deletion_job_arn #data_deletion_job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_deletion_job({
+    #     job_name: "Name", # required
+    #     dataset_group_arn: "Arn", # required
+    #     data_source: { # required
+    #       data_location: "S3Location",
+    #     },
+    #     role_arn: "RoleArn", # required
+    #     tags: [
+    #       {
+    #         tag_key: "TagKey", # required
+    #         tag_value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_deletion_job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/CreateDataDeletionJob AWS API Documentation
+    #
+    # @overload create_data_deletion_job(params = {})
+    # @param [Hash] params ({})
+    def create_data_deletion_job(params = {}, options = {})
+      req = build_request(:create_data_deletion_job, params)
+      req.send_request(options)
+    end
+
     # Creates an empty dataset and adds it to the specified dataset group.
     # Use [CreateDatasetImportJob][1] to import your training data to a
     # dataset.
     #
-    # There are three types of datasets:
+    # There are 5 types of datasets:
     #
-    # * Interactions
+    # * Item interactions
     #
     # * Items
     #
     # * Users
     #
+    # * Action interactions
+    #
+    # * Actions
+    #
     # Each dataset type has an associated schema with required field types.
-    # Only the `Interactions` dataset is required in order to train a model
-    # (also referred to as creating a solution).
+    # Only the `Item interactions` dataset is required in order to train a
+    # model (also referred to as creating a solution).
     #
     # A dataset can be in one of the following states:
     #
@@ -781,6 +994,10 @@ module Aws::Personalize
     #   * Items
     #
     #   * Users
+    #
+    #   * Actions
+    #
+    #   * Action\_Interactions
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of [tags][1] to apply to the dataset.
@@ -919,11 +1136,15 @@ module Aws::Personalize
     # Amazon Personalize resources. A dataset group can contain at most
     # three datasets, one for each type of dataset:
     #
-    # * Interactions
+    # * Item interactions
     #
     # * Items
     #
     # * Users
+    #
+    # * Actions
+    #
+    # * Action interactions
     #
     # A dataset group can be a Domain dataset group, where you specify a
     # domain and use pre-configured resources like recommenders, or a Custom
@@ -1049,6 +1270,12 @@ module Aws::Personalize
     # bucket, see [Giving Amazon Personalize Access to Amazon S3
     # Resources][1].
     #
+    # If you already created a recommender or deployed a custom solution
+    # version with a campaign, how new bulk records influence
+    # recommendations depends on the domain use case or recipe that you use.
+    # For more information, see [How new data influences real-time
+    # recommendations][2].
+    #
     # By default, a dataset import job replaces any existing data in the
     # dataset that you imported in bulk. To add new records without
     # replacing existing data, specify INCREMENTAL for the import mode in
@@ -1064,7 +1291,7 @@ module Aws::Personalize
     # ^
     #
     # To get the status of the import job, call
-    # [DescribeDatasetImportJob][2], providing the Amazon Resource Name
+    # [DescribeDatasetImportJob][3], providing the Amazon Resource Name
     # (ARN) of the dataset import job. The dataset import is complete when
     # the status shows as ACTIVE. If the status shows as CREATE FAILED, the
     # response includes a `failureReason` key, which describes why the job
@@ -1077,15 +1304,16 @@ module Aws::Personalize
     #
     # **Related APIs**
     #
-    # * [ListDatasetImportJobs][3]
+    # * [ListDatasetImportJobs][4]
     #
-    # * [DescribeDatasetImportJob][2]
+    # * [DescribeDatasetImportJob][3]
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html
-    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html
-    # [3]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetImportJobs.html
+    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/how-new-data-influences-recommendations.html
+    # [3]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html
+    # [4]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetImportJobs.html
     #
     # @option params [required, String] :job_name
     #   The name for the dataset import job.
@@ -1170,8 +1398,8 @@ module Aws::Personalize
     #
     # When you create an event tracker, the response includes a tracking ID,
     # which you pass as a parameter when you use the [PutEvents][1]
-    # operation. Amazon Personalize then appends the event data to the
-    # Interactions dataset of the dataset group you specify in your event
+    # operation. Amazon Personalize then appends the event data to the Item
+    # interactions dataset of the dataset group you specify in your event
     # tracker.
     #
     # The event tracker can be in one of the following states:
@@ -1497,6 +1725,7 @@ module Aws::Personalize
     #           "DatasetType" => ["ColumnName"],
     #         },
     #       },
+    #       enable_metadata_with_recommendations: false,
     #     },
     #     tags: [
     #       {
@@ -1579,22 +1808,40 @@ module Aws::Personalize
       req.send_request(options)
     end
 
-    # Creates the configuration for training a model. A trained model is
-    # known as a solution version. After the configuration is created, you
-    # train the model (create a solution version) by calling the
-    # [CreateSolutionVersion][1] operation. Every time you call
-    # `CreateSolutionVersion`, a new version of the solution is created.
+    # After you create a solution, you can’t change its configuration. By
+    # default, all new solutions use automatic training. With automatic
+    # training, you incur training costs while your solution is active. You
+    # can't stop automatic training for a solution. To avoid unnecessary
+    # costs, make sure to delete the solution when you are finished. For
+    # information about training costs, see [Amazon Personalize pricing][1].
     #
-    # After creating a solution version, you check its accuracy by calling
-    # [GetSolutionMetrics][2]. When you are satisfied with the version, you
-    # deploy it using [CreateCampaign][3]. The campaign provides
-    # recommendations to a client through the [GetRecommendations][4] API.
+    # Creates the configuration for training a model (creating a solution
+    # version). This configuration includes the recipe to use for model
+    # training and optional training configuration, such as columns to use
+    # in training and feature transformation parameters. For more
+    # information about configuring a solution, see [Creating and
+    # configuring a solution][2].
     #
-    # To train a model, Amazon Personalize requires training data and a
-    # recipe. The training data comes from the dataset group that you
-    # provide in the request. A recipe specifies the training algorithm and
-    # a feature transformation. You can specify one of the predefined
-    # recipes provided by Amazon Personalize.
+    # By default, new solutions use automatic training to create solution
+    # versions every 7 days. You can change the training frequency.
+    # Automatic solution version creation starts one hour after the solution
+    # is ACTIVE. If you manually create a solution version within the hour,
+    # the solution skips the first automatic training. For more information,
+    # see [Configuring automatic training][3].
+    #
+    # To turn off automatic training, set `performAutoTraining` to false. If
+    # you turn off automatic training, you must manually create a solution
+    # version by calling the [CreateSolutionVersion][4] operation.
+    #
+    # After training starts, you can get the solution version's Amazon
+    # Resource Name (ARN) with the [ListSolutionVersions][5] API operation.
+    # To get its status, use the [DescribeSolutionVersion][6].
+    #
+    # After training completes you can evaluate model accuracy by calling
+    # [GetSolutionMetrics][7]. When you are satisfied with the solution
+    # version, you deploy it using [CreateCampaign][8]. The campaign
+    # provides recommendations to a client through the
+    # [GetRecommendations][9] API.
     #
     # <note markdown="1"> Amazon Personalize doesn't support configuring the `hpoObjective` for
     # solution hyperparameter optimization at this time.
@@ -1610,36 +1857,39 @@ module Aws::Personalize
     #
     # * DELETE PENDING &gt; DELETE IN\_PROGRESS
     #
-    # To get the status of the solution, call [DescribeSolution][5]. Wait
-    # until the status shows as ACTIVE before calling
+    # To get the status of the solution, call [DescribeSolution][10]. If you
+    # use manual training, the status must be ACTIVE before you call
     # `CreateSolutionVersion`.
     #
     # **Related APIs**
     #
-    # * [ListSolutions][6]
+    # * [ListSolutions][11]
     #
-    # * [CreateSolutionVersion][1]
+    # * [CreateSolutionVersion][4]
     #
-    # * [DescribeSolution][5]
+    # * [DescribeSolution][10]
     #
-    # * [DeleteSolution][7]
+    # * [DeleteSolution][12]
     # ^
     #
-    # * [ListSolutionVersions][8]
+    # * [ListSolutionVersions][5]
     #
-    # * [DescribeSolutionVersion][9]
+    # * [DescribeSolutionVersion][6]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html
-    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html
-    # [3]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html
-    # [4]: https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html
-    # [5]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html
-    # [6]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html
-    # [7]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html
-    # [8]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html
-    # [9]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html
+    # [1]: https://aws.amazon.com/personalize/pricing/
+    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html
+    # [3]: https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html
+    # [4]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html
+    # [5]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html
+    # [6]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html
+    # [7]: https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html
+    # [8]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html
+    # [9]: https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html
+    # [10]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html
+    # [11]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html
+    # [12]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html
     #
     # @option params [required, String] :name
     #   The name for the solution.
@@ -1654,7 +1904,7 @@ module Aws::Personalize
     # @option params [Boolean] :perform_auto_ml
     #   We don't recommend enabling automated machine learning. Instead,
     #   match your use case to the available Amazon Personalize recipes. For
-    #   more information, see [Determining your use case.][1]
+    #   more information, see [Choosing a recipe][1].
     #
     #   Whether to perform automated machine learning (AutoML). The default is
     #   `false`. For this case, you must specify `recipeArn`.
@@ -1668,11 +1918,40 @@ module Aws::Personalize
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/determining-use-case.html
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html
+    #
+    # @option params [Boolean] :perform_auto_training
+    #   Whether the solution uses automatic training to create new solution
+    #   versions (trained models). The default is `True` and the solution
+    #   automatically creates new solution versions every 7 days. You can
+    #   change the training frequency by specifying a `schedulingExpression`
+    #   in the `AutoTrainingConfig` as part of solution configuration. For
+    #   more information about automatic training, see [Configuring automatic
+    #   training][1].
+    #
+    #   Automatic solution version creation starts one hour after the solution
+    #   is ACTIVE. If you manually create a solution version within the hour,
+    #   the solution skips the first automatic training.
+    #
+    #   After training starts, you can get the solution version's Amazon
+    #   Resource Name (ARN) with the [ListSolutionVersions][2] API operation.
+    #   To get its status, use the [DescribeSolutionVersion][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html
+    #   [3]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html
     #
     # @option params [String] :recipe_arn
-    #   The ARN of the recipe to use for model training. This is required when
-    #   `performAutoML` is false.
+    #   The Amazon Resource Name (ARN) of the recipe to use for model
+    #   training. This is required when `performAutoML` is false. For
+    #   information about different Amazon Personalize recipes and their ARNs,
+    #   see [Choosing a recipe][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html
     #
     # @option params [required, String] :dataset_group_arn
     #   The Amazon Resource Name (ARN) of the dataset group that provides the
@@ -1713,6 +1992,7 @@ module Aws::Personalize
     #     name: "Name", # required
     #     perform_hpo: false,
     #     perform_auto_ml: false,
+    #     perform_auto_training: false,
     #     recipe_arn: "Arn",
     #     dataset_group_arn: "Arn", # required
     #     event_type: "EventType",
@@ -1769,6 +2049,9 @@ module Aws::Personalize
     #         excluded_dataset_columns: {
     #           "DatasetType" => ["ColumnName"],
     #         },
+    #       },
+    #       auto_training_config: {
+    #         scheduling_expression: "SchedulingExpression",
     #       },
     #     },
     #     tags: [
@@ -1851,21 +2134,30 @@ module Aws::Personalize
     #
     # @option params [String] :training_mode
     #   The scope of training to be performed when creating the solution
-    #   version. The `FULL` option trains the solution version based on the
-    #   entirety of the input solution's training data, while the `UPDATE`
-    #   option processes only the data that has changed in comparison to the
-    #   input solution. Choose `UPDATE` when you want to incrementally update
-    #   your solution version instead of creating an entirely new one.
+    #   version. The default is `FULL`. This creates a completely new model
+    #   based on the entirety of the training data from the datasets in your
+    #   dataset group.
+    #
+    #   If you use [User-Personalization][1], you can specify a training mode
+    #   of `UPDATE`. This updates the model to consider new items for
+    #   recommendations. It is not a full retraining. You should still
+    #   complete a full retraining weekly. If you specify `UPDATE`, Amazon
+    #   Personalize will stop automatic updates for the solution version. To
+    #   resume updates, create a new solution with training mode set to `FULL`
+    #   and deploy it in a campaign. For more information about automatic
+    #   updates, see [Automatic updates][2].
     #
     #   The `UPDATE` option can only be used when you already have an active
     #   solution version created from the input solution using the `FULL`
     #   option and the input solution was trained with the
-    #   [User-Personalization][1] recipe or the [HRNN-Coldstart][2] recipe.
+    #   [User-Personalization][1] recipe or the legacy [HRNN-Coldstart][3]
+    #   recipe.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html
-    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/use-case-recipe-features.html#maintaining-with-automatic-updates
+    #   [3]: https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of [tags][1] to apply to the solution version.
@@ -1883,7 +2175,7 @@ module Aws::Personalize
     #   resp = client.create_solution_version({
     #     name: "Name",
     #     solution_arn: "Arn", # required
-    #     training_mode: "FULL", # accepts FULL, UPDATE
+    #     training_mode: "FULL", # accepts FULL, UPDATE, AUTOTRAIN
     #     tags: [
     #       {
     #         tag_key: "TagKey", # required
@@ -1994,9 +2286,9 @@ module Aws::Personalize
       req.send_request(options)
     end
 
-    # Deletes the event tracker. Does not delete the event-interactions
-    # dataset from the associated dataset group. For more information on
-    # event trackers, see [CreateEventTracker][1].
+    # Deletes the event tracker. Does not delete the dataset from the
+    # dataset group. For more information on event trackers, see
+    # [CreateEventTracker][1].
     #
     #
     #
@@ -2240,6 +2532,8 @@ module Aws::Personalize
     #   resp.batch_inference_job.batch_inference_job_config.item_exploration_config #=> Hash
     #   resp.batch_inference_job.batch_inference_job_config.item_exploration_config["ParameterName"] #=> String
     #   resp.batch_inference_job.role_arn #=> String
+    #   resp.batch_inference_job.batch_inference_job_mode #=> String, one of "BATCH_INFERENCE", "THEME_GENERATION"
+    #   resp.batch_inference_job.theme_generation_config.fields_for_theme_generation.item_name #=> String
     #   resp.batch_inference_job.status #=> String
     #   resp.batch_inference_job.creation_date_time #=> Time
     #   resp.batch_inference_job.last_updated_date_time #=> Time
@@ -2335,6 +2629,8 @@ module Aws::Personalize
     #   resp.campaign.min_provisioned_tps #=> Integer
     #   resp.campaign.campaign_config.item_exploration_config #=> Hash
     #   resp.campaign.campaign_config.item_exploration_config["ParameterName"] #=> String
+    #   resp.campaign.campaign_config.enable_metadata_with_recommendations #=> Boolean
+    #   resp.campaign.campaign_config.sync_with_latest_solution_version #=> Boolean
     #   resp.campaign.status #=> String
     #   resp.campaign.failure_reason #=> String
     #   resp.campaign.creation_date_time #=> Time
@@ -2343,6 +2639,8 @@ module Aws::Personalize
     #   resp.campaign.latest_campaign_update.min_provisioned_tps #=> Integer
     #   resp.campaign.latest_campaign_update.campaign_config.item_exploration_config #=> Hash
     #   resp.campaign.latest_campaign_update.campaign_config.item_exploration_config["ParameterName"] #=> String
+    #   resp.campaign.latest_campaign_update.campaign_config.enable_metadata_with_recommendations #=> Boolean
+    #   resp.campaign.latest_campaign_update.campaign_config.sync_with_latest_solution_version #=> Boolean
     #   resp.campaign.latest_campaign_update.status #=> String
     #   resp.campaign.latest_campaign_update.failure_reason #=> String
     #   resp.campaign.latest_campaign_update.creation_date_time #=> Time
@@ -2354,6 +2652,48 @@ module Aws::Personalize
     # @param [Hash] params ({})
     def describe_campaign(params = {}, options = {})
       req = build_request(:describe_campaign, params)
+      req.send_request(options)
+    end
+
+    # Describes the data deletion job created by [CreateDataDeletionJob][1],
+    # including the job status.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataDeletionJob.html
+    #
+    # @option params [required, String] :data_deletion_job_arn
+    #   The Amazon Resource Name (ARN) of the data deletion job.
+    #
+    # @return [Types::DescribeDataDeletionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDataDeletionJobResponse#data_deletion_job #data_deletion_job} => Types::DataDeletionJob
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_data_deletion_job({
+    #     data_deletion_job_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_deletion_job.job_name #=> String
+    #   resp.data_deletion_job.data_deletion_job_arn #=> String
+    #   resp.data_deletion_job.dataset_group_arn #=> String
+    #   resp.data_deletion_job.data_source.data_location #=> String
+    #   resp.data_deletion_job.role_arn #=> String
+    #   resp.data_deletion_job.status #=> String
+    #   resp.data_deletion_job.num_deleted #=> Integer
+    #   resp.data_deletion_job.creation_date_time #=> Time
+    #   resp.data_deletion_job.last_updated_date_time #=> Time
+    #   resp.data_deletion_job.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDataDeletionJob AWS API Documentation
+    #
+    # @overload describe_data_deletion_job(params = {})
+    # @param [Hash] params ({})
+    def describe_data_deletion_job(params = {}, options = {})
+      req = build_request(:describe_data_deletion_job, params)
       req.send_request(options)
     end
 
@@ -2392,6 +2732,7 @@ module Aws::Personalize
     #   resp.dataset.latest_dataset_update.failure_reason #=> String
     #   resp.dataset.latest_dataset_update.creation_date_time #=> Time
     #   resp.dataset.latest_dataset_update.last_updated_date_time #=> Time
+    #   resp.dataset.tracking_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeDataset AWS API Documentation
     #
@@ -2783,6 +3124,7 @@ module Aws::Personalize
     #   resp.recommender.recommender_config.training_data_config.excluded_dataset_columns #=> Hash
     #   resp.recommender.recommender_config.training_data_config.excluded_dataset_columns["DatasetType"] #=> Array
     #   resp.recommender.recommender_config.training_data_config.excluded_dataset_columns["DatasetType"][0] #=> String
+    #   resp.recommender.recommender_config.enable_metadata_with_recommendations #=> Boolean
     #   resp.recommender.creation_date_time #=> Time
     #   resp.recommender.last_updated_date_time #=> Time
     #   resp.recommender.status #=> String
@@ -2793,6 +3135,7 @@ module Aws::Personalize
     #   resp.recommender.latest_recommender_update.recommender_config.training_data_config.excluded_dataset_columns #=> Hash
     #   resp.recommender.latest_recommender_update.recommender_config.training_data_config.excluded_dataset_columns["DatasetType"] #=> Array
     #   resp.recommender.latest_recommender_update.recommender_config.training_data_config.excluded_dataset_columns["DatasetType"][0] #=> String
+    #   resp.recommender.latest_recommender_update.recommender_config.enable_metadata_with_recommendations #=> Boolean
     #   resp.recommender.latest_recommender_update.creation_date_time #=> Time
     #   resp.recommender.latest_recommender_update.last_updated_date_time #=> Time
     #   resp.recommender.latest_recommender_update.status #=> String
@@ -2873,6 +3216,7 @@ module Aws::Personalize
     #   resp.solution.solution_arn #=> String
     #   resp.solution.perform_hpo #=> Boolean
     #   resp.solution.perform_auto_ml #=> Boolean
+    #   resp.solution.perform_auto_training #=> Boolean
     #   resp.solution.recipe_arn #=> String
     #   resp.solution.dataset_group_arn #=> String
     #   resp.solution.event_type #=> String
@@ -2906,12 +3250,15 @@ module Aws::Personalize
     #   resp.solution.solution_config.training_data_config.excluded_dataset_columns #=> Hash
     #   resp.solution.solution_config.training_data_config.excluded_dataset_columns["DatasetType"] #=> Array
     #   resp.solution.solution_config.training_data_config.excluded_dataset_columns["DatasetType"][0] #=> String
+    #   resp.solution.solution_config.auto_training_config.scheduling_expression #=> String
     #   resp.solution.auto_ml_result.best_recipe_arn #=> String
     #   resp.solution.status #=> String
     #   resp.solution.creation_date_time #=> Time
     #   resp.solution.last_updated_date_time #=> Time
     #   resp.solution.latest_solution_version.solution_version_arn #=> String
     #   resp.solution.latest_solution_version.status #=> String
+    #   resp.solution.latest_solution_version.training_mode #=> String, one of "FULL", "UPDATE", "AUTOTRAIN"
+    #   resp.solution.latest_solution_version.training_type #=> String, one of "AUTOMATIC", "MANUAL"
     #   resp.solution.latest_solution_version.creation_date_time #=> Time
     #   resp.solution.latest_solution_version.last_updated_date_time #=> Time
     #   resp.solution.latest_solution_version.failure_reason #=> String
@@ -2985,14 +3332,16 @@ module Aws::Personalize
     #   resp.solution_version.solution_config.training_data_config.excluded_dataset_columns #=> Hash
     #   resp.solution_version.solution_config.training_data_config.excluded_dataset_columns["DatasetType"] #=> Array
     #   resp.solution_version.solution_config.training_data_config.excluded_dataset_columns["DatasetType"][0] #=> String
+    #   resp.solution_version.solution_config.auto_training_config.scheduling_expression #=> String
     #   resp.solution_version.training_hours #=> Float
-    #   resp.solution_version.training_mode #=> String, one of "FULL", "UPDATE"
+    #   resp.solution_version.training_mode #=> String, one of "FULL", "UPDATE", "AUTOTRAIN"
     #   resp.solution_version.tuned_hpo_params.algorithm_hyper_parameters #=> Hash
     #   resp.solution_version.tuned_hpo_params.algorithm_hyper_parameters["ParameterName"] #=> String
     #   resp.solution_version.status #=> String
     #   resp.solution_version.failure_reason #=> String
     #   resp.solution_version.creation_date_time #=> Time
     #   resp.solution_version.last_updated_date_time #=> Time
+    #   resp.solution_version.training_type #=> String, one of "AUTOMATIC", "MANUAL"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeSolutionVersion AWS API Documentation
     #
@@ -3074,6 +3423,7 @@ module Aws::Personalize
     #   resp.batch_inference_jobs[0].last_updated_date_time #=> Time
     #   resp.batch_inference_jobs[0].failure_reason #=> String
     #   resp.batch_inference_jobs[0].solution_version_arn #=> String
+    #   resp.batch_inference_jobs[0].batch_inference_job_mode #=> String, one of "BATCH_INFERENCE", "THEME_GENERATION"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListBatchInferenceJobs AWS API Documentation
@@ -3193,6 +3543,62 @@ module Aws::Personalize
     # @param [Hash] params ({})
     def list_campaigns(params = {}, options = {})
       req = build_request(:list_campaigns, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of data deletion jobs for a dataset group ordered by
+    # creation time, with the most recent first. When a dataset group is not
+    # specified, all the data deletion jobs associated with the account are
+    # listed. The response provides the properties for each job, including
+    # the Amazon Resource Name (ARN). For more information on data deletion
+    # jobs, see [Deleting users][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html
+    #
+    # @option params [String] :dataset_group_arn
+    #   The Amazon Resource Name (ARN) of the dataset group to list data
+    #   deletion jobs for.
+    #
+    # @option params [String] :next_token
+    #   A token returned from the previous call to `ListDataDeletionJobs` for
+    #   getting the next set of jobs (if they exist).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of data deletion jobs to return.
+    #
+    # @return [Types::ListDataDeletionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDataDeletionJobsResponse#data_deletion_jobs #data_deletion_jobs} => Array&lt;Types::DataDeletionJobSummary&gt;
+    #   * {Types::ListDataDeletionJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_data_deletion_jobs({
+    #     dataset_group_arn: "Arn",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data_deletion_jobs #=> Array
+    #   resp.data_deletion_jobs[0].data_deletion_job_arn #=> String
+    #   resp.data_deletion_jobs[0].dataset_group_arn #=> String
+    #   resp.data_deletion_jobs[0].job_name #=> String
+    #   resp.data_deletion_jobs[0].status #=> String
+    #   resp.data_deletion_jobs[0].creation_date_time #=> Time
+    #   resp.data_deletion_jobs[0].last_updated_date_time #=> Time
+    #   resp.data_deletion_jobs[0].failure_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/ListDataDeletionJobs AWS API Documentation
+    #
+    # @overload list_data_deletion_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_data_deletion_jobs(params = {}, options = {})
+      req = build_request(:list_data_deletion_jobs, params)
       req.send_request(options)
     end
 
@@ -3379,8 +3785,8 @@ module Aws::Personalize
     #   datasets to list.
     #
     # @option params [String] :next_token
-    #   A token returned from the previous call to `ListDatasetImportJobs` for
-    #   getting the next set of dataset import jobs (if they exist).
+    #   A token returned from the previous call to `ListDatasets` for getting
+    #   the next set of dataset import jobs (if they exist).
     #
     # @option params [Integer] :max_results
     #   The maximum number of datasets to return.
@@ -3720,6 +4126,7 @@ module Aws::Personalize
     #   resp.recommenders[0].recommender_config.training_data_config.excluded_dataset_columns #=> Hash
     #   resp.recommenders[0].recommender_config.training_data_config.excluded_dataset_columns["DatasetType"] #=> Array
     #   resp.recommenders[0].recommender_config.training_data_config.excluded_dataset_columns["DatasetType"][0] #=> String
+    #   resp.recommenders[0].recommender_config.enable_metadata_with_recommendations #=> Boolean
     #   resp.recommenders[0].status #=> String
     #   resp.recommenders[0].creation_date_time #=> Time
     #   resp.recommenders[0].last_updated_date_time #=> Time
@@ -3817,6 +4224,8 @@ module Aws::Personalize
     #   resp.solution_versions #=> Array
     #   resp.solution_versions[0].solution_version_arn #=> String
     #   resp.solution_versions[0].status #=> String
+    #   resp.solution_versions[0].training_mode #=> String, one of "FULL", "UPDATE", "AUTOTRAIN"
+    #   resp.solution_versions[0].training_type #=> String, one of "AUTOMATIC", "MANUAL"
     #   resp.solution_versions[0].creation_date_time #=> Time
     #   resp.solution_versions[0].last_updated_date_time #=> Time
     #   resp.solution_versions[0].failure_reason #=> String
@@ -3831,11 +4240,11 @@ module Aws::Personalize
       req.send_request(options)
     end
 
-    # Returns a list of solutions that use the given dataset group. When a
-    # dataset group is not specified, all the solutions associated with the
-    # account are listed. The response provides the properties for each
-    # solution, including the Amazon Resource Name (ARN). For more
-    # information on solutions, see [CreateSolution][1].
+    # Returns a list of solutions in a given dataset group. When a dataset
+    # group is not specified, all the solutions associated with the account
+    # are listed. The response provides the properties for each solution,
+    # including the Amazon Resource Name (ARN). For more information on
+    # solutions, see [CreateSolution][1].
     #
     #
     #
@@ -3893,7 +4302,7 @@ module Aws::Personalize
     # [1]: https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html
     #
     # @option params [required, String] :resource_arn
-    #   The resource's Amazon Resource Name.
+    #   The resource's Amazon Resource Name (ARN).
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4023,7 +4432,7 @@ module Aws::Personalize
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   Tags to apply to the resource. For more information see [Tagging
-    #   Amazon Personalize recources][1].
+    #   Amazon Personalize resources][1].
     #
     #
     #
@@ -4052,17 +4461,18 @@ module Aws::Personalize
       req.send_request(options)
     end
 
-    # Remove [tags][1] that are attached to a resource.
+    # Removes the specified tags that are attached to a resource. For more
+    # information, see [Removing tags from Amazon Personalize resources][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/tags-remove.html
     #
     # @option params [required, String] :resource_arn
     #   The resource's Amazon Resource Name (ARN).
     #
     # @option params [required, Array<String>] :tag_keys
-    #   Keys to remove from the resource's tags.
+    #   The keys of the tags to be removed.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4082,8 +4492,19 @@ module Aws::Personalize
       req.send_request(options)
     end
 
-    # Updates a campaign by either deploying a new solution or changing the
-    # value of the campaign's `minProvisionedTPS` parameter.
+    # Updates a campaign to deploy a retrained solution version with an
+    # existing campaign, change your campaign's `minProvisionedTPS`, or
+    # modify your campaign's configuration. For example, you can set
+    # `enableMetadataWithRecommendations` to true for an existing campaign.
+    #
+    # To update a campaign to start automatically using the latest solution
+    # version, specify the following:
+    #
+    # * For the `SolutionVersionArn` parameter, specify the Amazon Resource
+    #   Name (ARN) of your solution in `SolutionArn/$LATEST` format.
+    #
+    # * In the `campaignConfig`, set `syncWithLatestSolutionVersion` to
+    #   `true`.
     #
     # To update a campaign, the campaign status must be ACTIVE or CREATE
     # FAILED. Check the campaign status using the [DescribeCampaign][1]
@@ -4096,18 +4517,36 @@ module Aws::Personalize
     #
     #  </note>
     #
-    # For more information on campaigns, see [CreateCampaign][2].
+    # For more information about updating a campaign, including code
+    # samples, see [Updating a campaign][2]. For more information about
+    # campaigns, see [Creating a campaign][3].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html
-    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html
+    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/update-campaigns.html
+    # [3]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html
     #
     # @option params [required, String] :campaign_arn
     #   The Amazon Resource Name (ARN) of the campaign.
     #
     # @option params [String] :solution_version_arn
-    #   The ARN of a new solution version to deploy.
+    #   The Amazon Resource Name (ARN) of a new model to deploy. To specify
+    #   the latest solution version of your solution, specify the ARN of your
+    #   *solution* in `SolutionArn/$LATEST` format. You must use this format
+    #   if you set `syncWithLatestSolutionVersion` to `True` in the
+    #   [CampaignConfig][1].
+    #
+    #   To deploy a model that isn't the latest solution version of your
+    #   solution, specify the ARN of the solution version.
+    #
+    #   For more information about automatic campaign updates, see [Enabling
+    #   automatic campaign updates][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/API_CampaignConfig.html
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update
     #
     # @option params [Integer] :min_provisioned_tps
     #   Specifies the requested minimum provisioned transactions
@@ -4134,6 +4573,8 @@ module Aws::Personalize
     #       item_exploration_config: {
     #         "ParameterName" => "ParameterValue",
     #       },
+    #       enable_metadata_with_recommendations: false,
+    #       sync_with_latest_solution_version: false,
     #     },
     #   })
     #
@@ -4276,6 +4717,7 @@ module Aws::Personalize
     #           "DatasetType" => ["ColumnName"],
     #         },
     #       },
+    #       enable_metadata_with_recommendations: false,
     #     },
     #   })
     #
@@ -4305,7 +4747,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

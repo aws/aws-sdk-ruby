@@ -35,6 +35,7 @@ module Aws::ECS
   # * {ClusterContainsServicesException}
   # * {ClusterContainsTasksException}
   # * {ClusterNotFoundException}
+  # * {ConflictException}
   # * {InvalidParameterException}
   # * {LimitExceededException}
   # * {MissingVersionException}
@@ -141,6 +142,21 @@ module Aws::ECS
       # @param [Aws::ECS::Types::ClusterNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECS::Types::ConflictException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def resource_ids
+        @data[:resource_ids]
       end
     end
 

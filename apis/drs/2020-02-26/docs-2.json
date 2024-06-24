@@ -114,6 +114,13 @@
         "ListStagingAccountsResponse$accounts": "<p>An array of staging AWS Accounts.</p>"
       }
     },
+    "AgentVersion": {
+      "base": null,
+      "refs": {
+        "RecoveryInstance$agentVersion": "<p>The version of the DRS agent installed on the recovery instance</p>",
+        "SourceServer$agentVersion": "<p>The version of the DRS agent installed on the source server</p>"
+      }
+    },
     "AssociateSourceNetworkStackRequest": {
       "base": null,
       "refs": {
@@ -148,6 +155,7 @@
         "ConversionProperties$forceUefi": "<p>Whether the volume being converted uses UEFI or not</p>",
         "CreateLaunchConfigurationTemplateRequest$copyPrivateIp": "<p>Copy private IP.</p>",
         "CreateLaunchConfigurationTemplateRequest$copyTags": "<p>Copy tags.</p>",
+        "CreateLaunchConfigurationTemplateRequest$launchIntoSourceInstance": "<p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>",
         "CreateLaunchConfigurationTemplateRequest$postLaunchEnabled": "<p>Whether we want to activate post-launch actions.</p>",
         "CreateReplicationConfigurationTemplateRequest$associateDefaultSecurityGroup": "<p>Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.</p>",
         "CreateReplicationConfigurationTemplateRequest$autoReplicateNewDisks": "<p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>",
@@ -161,6 +169,7 @@
         "LaunchConfiguration$postLaunchEnabled": "<p>Whether we want to activate post-launch actions for the Source Server.</p>",
         "LaunchConfigurationTemplate$copyPrivateIp": "<p>Copy private IP.</p>",
         "LaunchConfigurationTemplate$copyTags": "<p>Copy tags.</p>",
+        "LaunchConfigurationTemplate$launchIntoSourceInstance": "<p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>",
         "LaunchConfigurationTemplate$postLaunchEnabled": "<p>Post-launch actions activated.</p>",
         "Licensing$osByol": "<p>Whether to enable \"Bring your own license\" or not.</p>",
         "NetworkInterface$isPrimary": "<p>Whether this is the primary network interface.</p>",
@@ -189,6 +198,7 @@
         "UpdateLaunchConfigurationRequest$postLaunchEnabled": "<p>Whether we want to enable post-launch actions for the Source Server.</p>",
         "UpdateLaunchConfigurationTemplateRequest$copyPrivateIp": "<p>Copy private IP.</p>",
         "UpdateLaunchConfigurationTemplateRequest$copyTags": "<p>Copy tags.</p>",
+        "UpdateLaunchConfigurationTemplateRequest$launchIntoSourceInstance": "<p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>",
         "UpdateLaunchConfigurationTemplateRequest$postLaunchEnabled": "<p>Whether we want to activate post-launch actions.</p>",
         "UpdateReplicationConfigurationRequest$associateDefaultSecurityGroup": "<p>Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration.</p>",
         "UpdateReplicationConfigurationRequest$autoReplicateNewDisks": "<p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>",
@@ -589,6 +599,7 @@
         "IdentificationHints$awsInstanceID": "<p>AWS Instance ID identification hint.</p>",
         "JobLogEventData$conversionServerID": "<p>The ID of a conversion server.</p>",
         "JobLogEventData$targetInstanceID": "<p>The ID of a Recovery Instance.</p>",
+        "LaunchIntoInstanceProperties$launchIntoEC2InstanceID": "<p>Optionally holds EC2 instance ID of an instance to launch into, instead of launching a new instance during drill, recovery or failback.</p>",
         "RecoveryInstance$ec2InstanceID": "<p>The EC2 instance ID of the Recovery Instance.</p>"
       }
     },
@@ -874,6 +885,7 @@
         "ValidationExceptionField$message": "<p>Validate exception field message.</p>",
         "ValidationExceptionField$name": "<p>Validate exception field name.</p>",
         "VolumeToConversionMap$key": null,
+        "VolumeToProductCodes$key": null,
         "VolumeToSizeMap$key": null
       }
     },
@@ -1086,6 +1098,13 @@
         "UpdateLaunchConfigurationTemplateRequest$launchDisposition": "<p>Launch disposition.</p>"
       }
     },
+    "LaunchIntoInstanceProperties": {
+      "base": "<p>Launch into existing instance.</p>",
+      "refs": {
+        "LaunchConfiguration$launchIntoInstanceProperties": "<p>Launch into existing instance properties.</p>",
+        "UpdateLaunchConfigurationRequest$launchIntoInstanceProperties": "<p>Launch into existing instance properties.</p>"
+      }
+    },
     "LaunchStatus": {
       "base": null,
       "refs": {
@@ -1207,6 +1226,15 @@
         "RecoveryInstance$originEnvironment": "<p>Environment (On Premises / AWS) of the instance that the recovery instance originated from.</p>"
       }
     },
+    "OutpostARN": {
+      "base": null,
+      "refs": {
+        "DataReplicationInfo$stagingOutpostArn": "<p>The ARN of the staging Outpost</p>",
+        "RecoveryInstance$sourceOutpostArn": "<p>The ARN of the source Outpost</p>",
+        "RecoveryInstanceDataReplicationInfo$stagingOutpostArn": "<p>The ARN of the staging Outpost</p>",
+        "SourceCloudProperties$sourceOutpostArn": "<p>The ARN of the source Outpost</p>"
+      }
+    },
     "PITPolicy": {
       "base": null,
       "refs": {
@@ -1314,6 +1342,30 @@
         "UpdateReplicationConfigurationRequest$bandwidthThrottling": "<p>Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.</p>",
         "UpdateReplicationConfigurationTemplateRequest$bandwidthThrottling": "<p>Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.</p>",
         "VolumeToSizeMap$value": null
+      }
+    },
+    "ProductCode": {
+      "base": "<p>Properties of a product code associated with a volume.</p>",
+      "refs": {
+        "ProductCodes$member": null
+      }
+    },
+    "ProductCodeId": {
+      "base": null,
+      "refs": {
+        "ProductCode$productCodeId": "<p>Id of a product code associated with a volume.</p>"
+      }
+    },
+    "ProductCodeMode": {
+      "base": null,
+      "refs": {
+        "ProductCode$productCodeMode": "<p>Mode of a product code associated with a volume.</p>"
+      }
+    },
+    "ProductCodes": {
+      "base": null,
+      "refs": {
+        "VolumeToProductCodes$value": null
       }
     },
     "PutLaunchActionRequest": {
@@ -2036,10 +2088,22 @@
         "ValidationException$reason": "<p>Validation exception reason.</p>"
       }
     },
+    "VolumeStatus": {
+      "base": null,
+      "refs": {
+        "DataReplicationInfoReplicatedDisk$volumeStatus": "<p>The status of the volume.</p>"
+      }
+    },
     "VolumeToConversionMap": {
       "base": null,
       "refs": {
         "ConversionProperties$volumeToConversionMap": "<p>A mapping between the volumes being converted and the converted snapshot ids</p>"
+      }
+    },
+    "VolumeToProductCodes": {
+      "base": null,
+      "refs": {
+        "ConversionProperties$volumeToProductCodes": "<p>A mapping between the volumes being converted and the product codes associated with them</p>"
       }
     },
     "VolumeToSizeMap": {

@@ -169,6 +169,9 @@ module Aws
           end
 
           it 'reports progress for multipart uploads' do
+            thread = double(value: nil)
+            allow(Thread).to receive(:new).and_yield.and_return(thread)
+
             client.stub_responses(:create_multipart_upload, upload_id: 'id')
             client.stub_responses(:complete_multipart_upload)
             expect(client).to receive(:upload_part).exactly(24).times do |args|
@@ -180,6 +183,21 @@ module Aws
               expect(totals.size).to eq(24)
             end
             object.upload_file(one_hundred_seventeen_meg_file, content_type: 'text/plain', progress_callback: callback)
+          end
+
+          it 'defaults to THREAD_COUNT without the thread_count option' do
+            expect(Thread).to receive(:new).exactly(S3::MultipartFileUploader::THREAD_COUNT).times.and_return(double(value: nil))
+            client.stub_responses(:create_multipart_upload, upload_id: 'id')
+            client.stub_responses(:complete_multipart_upload)
+            object.upload_file(one_hundred_seventeen_meg_file)
+          end
+
+          it 'respects the thread_count option' do
+            custom_thread_count = 20
+            expect(Thread).to receive(:new).exactly(custom_thread_count).times.and_return(double(value: nil))
+            client.stub_responses(:create_multipart_upload, upload_id: 'id')
+            client.stub_responses(:complete_multipart_upload)
+            object.upload_file(one_hundred_seventeen_meg_file, thread_count: custom_thread_count)
           end
 
           it 'raises an error if the multipart threshold is too small' do
@@ -214,6 +232,10 @@ module Aws
           end
 
           it 'reports when it is unable to abort a failed multipart upload' do
+            allow(Thread).to receive(:new) do |_, &block|
+              double(value: block.call)
+            end
+
             client.stub_responses(
               :upload_part,
               [
@@ -229,7 +251,7 @@ module Aws
             )
             expect { object.upload_file(one_hundred_seventeen_meg_file) }.to raise_error(
               S3::MultipartUploadError,
-              'failed to abort multipart upload: network-error'
+              /failed to abort multipart upload: network-error. Multipart upload failed: part failed/
             )
           end
         end

@@ -103,7 +103,7 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_vpcs(vpc_ids: [@id])
       end
       @data = resp.vpcs[0]
@@ -150,7 +150,7 @@ module Aws::EC2
       options, params = separate_params_and_options(options)
       waiter = Waiters::VpcAvailable.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(vpc_ids: [@id]))
       end
       Vpc.new({
@@ -169,7 +169,7 @@ module Aws::EC2
       options, params = separate_params_and_options(options)
       waiter = Waiters::VpcExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(vpc_ids: [@id]))
       end
       Vpc.new({
@@ -272,7 +272,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -297,7 +297,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def associate_dhcp_options(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.associate_dhcp_options(options)
       end
       resp.data
@@ -324,7 +324,7 @@ module Aws::EC2
     # @return [Types::AttachClassicLinkVpcResult]
     def attach_classic_link_instance(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.attach_classic_link_vpc(options)
       end
       resp.data
@@ -347,7 +347,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def attach_internet_gateway(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.attach_internet_gateway(options)
       end
       resp.data
@@ -359,7 +359,7 @@ module Aws::EC2
     #     dry_run: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
     #         tags: [
     #           {
     #             key: "String",
@@ -368,6 +368,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -377,10 +378,18 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the network ACL.
+    # @option options [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     # @return [NetworkAcl]
     def create_network_acl(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_network_acl(options)
       end
       NetworkAcl.new(
@@ -396,7 +405,7 @@ module Aws::EC2
     #     dry_run: false,
     #     tag_specifications: [
     #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
     #         tags: [
     #           {
     #             key: "String",
@@ -405,6 +414,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     client_token: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -414,10 +424,18 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to assign to the route table.
+    # @option options [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     # @return [RouteTable]
     def create_route_table(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_route_table(options)
       end
       RouteTable.new(
@@ -434,7 +452,7 @@ module Aws::EC2
     #     group_name: "String", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
     #         tags: [
     #           {
     #             key: "String",
@@ -470,7 +488,7 @@ module Aws::EC2
     # @return [SecurityGroup]
     def create_security_group(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_security_group(options)
       end
       SecurityGroup.new(
@@ -484,7 +502,7 @@ module Aws::EC2
     #   subnet = vpc.create_subnet({
     #     tag_specifications: [
     #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
     #         tags: [
     #           {
     #             key: "String",
@@ -500,6 +518,10 @@ module Aws::EC2
     #     outpost_arn: "String",
     #     dry_run: false,
     #     ipv_6_native: false,
+    #     ipv_4_ipam_pool_id: "IpamPoolId",
+    #     ipv_4_netmask_length: 1,
+    #     ipv_6_ipam_pool_id: "IpamPoolId",
+    #     ipv_6_netmask_length: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::TagSpecification>] :tag_specifications
@@ -513,14 +535,14 @@ module Aws::EC2
     #
     #   To create a subnet in a Local Zone, set this value to the Local Zone
     #   ID, for example `us-west-2-lax-1a`. For information about the Regions
-    #   that support Local Zones, see [Local Zones locations][1].
+    #   that support Local Zones, see [Available Local Zones][1].
     #
     #   To create a subnet in an Outpost, set this value to the Availability
     #   Zone for the Outpost and specify the Outpost ARN.
     #
     #
     #
-    #   [1]: http://aws.amazon.com/about-aws/global-infrastructure/localzones/locations/
+    #   [1]: https://docs.aws.amazon.com/local-zones/latest/ug/available-local-zones.html
     # @option options [String] :availability_zone_id
     #   The AZ ID or the Local Zone ID of the subnet.
     # @option options [String] :cidr_block
@@ -531,10 +553,8 @@ module Aws::EC2
     #
     #   This parameter is not supported for an IPv6 only subnet.
     # @option options [String] :ipv_6_cidr_block
-    #   The IPv6 network range for the subnet, in CIDR notation. The subnet
-    #   size must use a /64 prefix length.
-    #
-    #   This parameter is required for an IPv6 only subnet.
+    #   The IPv6 network range for the subnet, in CIDR notation. This
+    #   parameter is required for an IPv6 only subnet.
     # @option options [String] :outpost_arn
     #   The Amazon Resource Name (ARN) of the Outpost. If you specify an
     #   Outpost ARN, you must also specify the Availability Zone of the
@@ -546,10 +566,18 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Boolean] :ipv_6_native
     #   Indicates whether to create an IPv6 only subnet.
+    # @option options [String] :ipv_4_ipam_pool_id
+    #   An IPv4 IPAM pool ID for the subnet.
+    # @option options [Integer] :ipv_4_netmask_length
+    #   An IPv4 netmask length for the subnet.
+    # @option options [String] :ipv_6_ipam_pool_id
+    #   An IPv6 IPAM pool ID for the subnet.
+    # @option options [Integer] :ipv_6_netmask_length
+    #   An IPv6 netmask length for the subnet.
     # @return [Subnet]
     def create_subnet(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_subnet(options)
       end
       Subnet.new(
@@ -584,7 +612,7 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_tags(options)
       end
       options[:tags].each do |t|
@@ -631,7 +659,7 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_tags(options)
       end
       options[:tags].each do |t|
@@ -659,7 +687,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_vpc(options)
       end
       resp.data
@@ -682,7 +710,7 @@ module Aws::EC2
     # @return [Types::DescribeVpcAttributeResult]
     def describe_attribute(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_vpc_attribute(options)
       end
       resp.data
@@ -705,7 +733,7 @@ module Aws::EC2
     # @return [Types::DetachClassicLinkVpcResult]
     def detach_classic_link_instance(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.detach_classic_link_vpc(options)
       end
       resp.data
@@ -728,7 +756,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def detach_internet_gateway(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.detach_internet_gateway(options)
       end
       resp.data
@@ -748,7 +776,7 @@ module Aws::EC2
     # @return [Types::DisableVpcClassicLinkResult]
     def disable_classic_link(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.disable_vpc_classic_link(options)
       end
       resp.data
@@ -768,7 +796,7 @@ module Aws::EC2
     # @return [Types::EnableVpcClassicLinkResult]
     def enable_classic_link(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.enable_vpc_classic_link(options)
       end
       resp.data
@@ -812,7 +840,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.modify_vpc_attribute(options)
       end
       resp.data
@@ -827,7 +855,7 @@ module Aws::EC2
     #     peer_region: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
     #         tags: [
     #           {
     #             key: "String",
@@ -860,7 +888,7 @@ module Aws::EC2
     # @return [VpcPeeringConnection]
     def request_vpc_peering_connection(options = {})
       options = options.merge(vpc_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_vpc_peering_connection(options)
       end
       VpcPeeringConnection.new(
@@ -941,7 +969,7 @@ module Aws::EC2
           name: "accepter-vpc-info.vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_vpc_peering_connections(options)
         end
         resp.each_page do |page|
@@ -1066,8 +1094,9 @@ module Aws::EC2
     #
     #   * `instance-id` - The ID of the instance.
     #
-    #   * `instance-lifecycle` - Indicates whether this is a Spot Instance or
-    #     a Scheduled Instance (`spot` \| `scheduled`).
+    #   * `instance-lifecycle` - Indicates whether this is a Spot Instance, a
+    #     Scheduled Instance, or a Capacity Block (`spot` \| `scheduled` \|
+    #     `capacity-block`).
     #
     #   * `instance-state-code` - The state of the instance, as a 16-bit
     #     unsigned integer. The high byte is used for internal purposes and
@@ -1330,6 +1359,10 @@ module Aws::EC2
     #     (`ip-name` \| `resource-name`).
     #
     #   * `private-ip-address` - The private IPv4 address of the instance.
+    #     This can only be used to filter by the primary IP address of the
+    #     network interface attached to the instance. To filter by additional
+    #     IP addresses assigned to the network interface, use the filter
+    #     `network-interface.addresses.private-ip-address`.
     #
     #   * `product-code` - The product code associated with the AMI used to
     #     launch the instance.
@@ -1424,7 +1457,7 @@ module Aws::EC2
           name: "vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_instances(options)
         end
         resp.each_page do |page|
@@ -1496,7 +1529,7 @@ module Aws::EC2
           name: "attachment.vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_internet_gateways(options)
         end
         resp.each_page do |page|
@@ -1591,8 +1624,6 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :network_acl_ids
     #   The IDs of the network ACLs.
-    #
-    #   Default: Describes all your network ACLs.
     # @return [NetworkAcl::Collection]
     def network_acls(options = {})
       batches = Enumerator.new do |y|
@@ -1600,7 +1631,7 @@ module Aws::EC2
           name: "vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_network_acls(options)
         end
         resp.each_page do |page|
@@ -1762,7 +1793,7 @@ module Aws::EC2
           name: "vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_network_interfaces(options)
         end
         resp.each_page do |page|
@@ -1849,7 +1880,7 @@ module Aws::EC2
           name: "requester-vpc-info.vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_vpc_peering_connections(options)
         end
         resp.each_page do |page|
@@ -1882,6 +1913,9 @@ module Aws::EC2
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
     #   The filters.
+    #
+    #   * `association.gateway-id` - The ID of the gateway involved in the
+    #     association.
     #
     #   * `association.route-table-association-id` - The ID of an association
     #     ID for the route table.
@@ -1957,8 +1991,6 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [Array<String>] :route_table_ids
     #   The IDs of the route tables.
-    #
-    #   Default: Describes all your route tables.
     # @return [RouteTable::Collection]
     def route_tables(options = {})
       batches = Enumerator.new do |y|
@@ -1966,7 +1998,7 @@ module Aws::EC2
           name: "vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_route_tables(options)
         end
         resp.each_page do |page|
@@ -2102,7 +2134,7 @@ module Aws::EC2
           name: "vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_security_groups(options)
         end
         resp.each_page do |page|
@@ -2238,7 +2270,7 @@ module Aws::EC2
           name: "vpc-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_subnets(options)
         end
         resp.each_page do |page|

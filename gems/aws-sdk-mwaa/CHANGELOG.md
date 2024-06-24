@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2024-05-16)
+------------------
+
+* Feature - Amazon MWAA now supports Airflow web server auto scaling to automatically handle increased demand from REST APIs, Command Line Interface (CLI), or more Airflow User Interface (UI) users. Customers can specify maximum and minimum web server instances during environment creation and update workflow.
+
+1.37.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2024-03-06)
+------------------
+
+* Feature - Amazon MWAA adds support for Apache Airflow v2.8.1.
+
+1.34.0 (2024-01-29)
+------------------
+
+* Feature - This release adds MAINTENANCE environment status for Amazon MWAA environments.
+
+1.33.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2024-01-12)
+------------------
+
+* Feature - This Amazon MWAA feature release includes new fields in CreateWebLoginToken response model. The new fields IamIdentity and AirflowIdentity will let you match identifications, as the Airflow identity length is currently hashed to 64 characters.
+
+1.31.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2023-11-15)
+------------------
+
+* Feature - This Amazon MWAA release adds support for customer-managed VPC endpoints. This lets you choose whether to create, and manage your environment's VPC endpoints, or to have Amazon MWAA create, and manage them for you.
+
+1.28.0 (2023-11-06)
+------------------
+
+* Feature - This release adds support for Apache Airflow version 2.7.2. This version release includes support for deferrable operators and triggers.
+
 1.27.0 (2023-09-27)
 ------------------
 

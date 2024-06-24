@@ -1,0 +1,828 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ChimeSDKMediaPipelines
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateMediaCapturePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMediaCapturePipelineResponse]
+        def media_capture_pipeline: () -> Types::MediaCapturePipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#create_media_capture_pipeline-instance_method
+      def create_media_capture_pipeline: (
+                                           source_type: ("ChimeSdkMeeting"),
+                                           source_arn: ::String,
+                                           sink_type: ("S3Bucket"),
+                                           sink_arn: ::String,
+                                           ?client_request_token: ::String,
+                                           ?chime_sdk_meeting_configuration: {
+                                             source_configuration: {
+                                               selected_video_streams: {
+                                                 attendee_ids: Array[::String]?,
+                                                 external_user_ids: Array[::String]?
+                                               }?
+                                             }?,
+                                             artifacts_configuration: {
+                                               audio: {
+                                                 mux_type: ("AudioOnly" | "AudioWithActiveSpeakerVideo" | "AudioWithCompositedVideo")
+                                               },
+                                               video: {
+                                                 state: ("Enabled" | "Disabled"),
+                                                 mux_type: ("VideoOnly")?
+                                               },
+                                               content: {
+                                                 state: ("Enabled" | "Disabled"),
+                                                 mux_type: ("ContentOnly")?
+                                               },
+                                               composited_video: {
+                                                 layout: ("GridView")?,
+                                                 resolution: ("HD" | "FHD")?,
+                                                 grid_view_configuration: {
+                                                   content_share_layout: ("PresenterOnly" | "Horizontal" | "Vertical" | "ActiveSpeakerOnly"),
+                                                   presenter_only_configuration: {
+                                                     presenter_position: ("TopLeft" | "TopRight" | "BottomLeft" | "BottomRight")?
+                                                   }?,
+                                                   active_speaker_only_configuration: {
+                                                     active_speaker_position: ("TopLeft" | "TopRight" | "BottomLeft" | "BottomRight")?
+                                                   }?,
+                                                   horizontal_layout_configuration: {
+                                                     tile_order: ("JoinSequence" | "SpeakerSequence")?,
+                                                     tile_position: ("Top" | "Bottom")?,
+                                                     tile_count: ::Integer?,
+                                                     tile_aspect_ratio: ::String?
+                                                   }?,
+                                                   vertical_layout_configuration: {
+                                                     tile_order: ("JoinSequence" | "SpeakerSequence")?,
+                                                     tile_position: ("Left" | "Right")?,
+                                                     tile_count: ::Integer?,
+                                                     tile_aspect_ratio: ::String?
+                                                   }?,
+                                                   video_attribute: {
+                                                     corner_radius: ::Integer?,
+                                                     border_color: ("Black" | "Blue" | "Red" | "Green" | "White" | "Yellow")?,
+                                                     highlight_color: ("Black" | "Blue" | "Red" | "Green" | "White" | "Yellow")?,
+                                                     border_thickness: ::Integer?
+                                                   }?,
+                                                   canvas_orientation: ("Landscape" | "Portrait")?
+                                                 }
+                                               }?
+                                             }?
+                                           },
+                                           ?tags: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String
+                                             },
+                                           ]
+                                         ) -> _CreateMediaCapturePipelineResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMediaCapturePipelineResponseSuccess
+
+      interface _CreateMediaConcatenationPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMediaConcatenationPipelineResponse]
+        def media_concatenation_pipeline: () -> Types::MediaConcatenationPipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#create_media_concatenation_pipeline-instance_method
+      def create_media_concatenation_pipeline: (
+                                                 sources: Array[
+                                                   {
+                                                     type: ("MediaCapturePipeline"),
+                                                     media_capture_pipeline_source_configuration: {
+                                                       media_pipeline_arn: ::String,
+                                                       chime_sdk_meeting_configuration: {
+                                                         artifacts_configuration: {
+                                                           audio: {
+                                                             state: ("Enabled")
+                                                           },
+                                                           video: {
+                                                             state: ("Enabled" | "Disabled")
+                                                           },
+                                                           content: {
+                                                             state: ("Enabled" | "Disabled")
+                                                           },
+                                                           data_channel: {
+                                                             state: ("Enabled" | "Disabled")
+                                                           },
+                                                           transcription_messages: {
+                                                             state: ("Enabled" | "Disabled")
+                                                           },
+                                                           meeting_events: {
+                                                             state: ("Enabled" | "Disabled")
+                                                           },
+                                                           composited_video: {
+                                                             state: ("Enabled" | "Disabled")
+                                                           }
+                                                         }
+                                                       }
+                                                     }
+                                                   },
+                                                 ],
+                                                 sinks: Array[
+                                                   {
+                                                     type: ("S3Bucket"),
+                                                     s3_bucket_sink_configuration: {
+                                                       destination: ::String
+                                                     }
+                                                   },
+                                                 ],
+                                                 ?client_request_token: ::String,
+                                                 ?tags: Array[
+                                                   {
+                                                     key: ::String,
+                                                     value: ::String
+                                                   },
+                                                 ]
+                                               ) -> _CreateMediaConcatenationPipelineResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMediaConcatenationPipelineResponseSuccess
+
+      interface _CreateMediaInsightsPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMediaInsightsPipelineResponse]
+        def media_insights_pipeline: () -> Types::MediaInsightsPipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#create_media_insights_pipeline-instance_method
+      def create_media_insights_pipeline: (
+                                            media_insights_pipeline_configuration_arn: ::String,
+                                            ?kinesis_video_stream_source_runtime_configuration: {
+                                              streams: Array[
+                                                {
+                                                  stream_arn: ::String,
+                                                  fragment_number: ::String?,
+                                                  stream_channel_definition: {
+                                                    number_of_channels: ::Integer,
+                                                    channel_definitions: Array[
+                                                      {
+                                                        channel_id: ::Integer,
+                                                        participant_role: ("AGENT" | "CUSTOMER")?
+                                                      },
+                                                    ]?
+                                                  }
+                                                },
+                                              ],
+                                              media_encoding: ("pcm"),
+                                              media_sample_rate: ::Integer
+                                            },
+                                            ?media_insights_runtime_metadata: Hash[::String, ::String],
+                                            ?kinesis_video_stream_recording_source_runtime_configuration: {
+                                              streams: Array[
+                                                {
+                                                  stream_arn: ::String?
+                                                },
+                                              ],
+                                              fragment_selector: {
+                                                fragment_selector_type: ("ProducerTimestamp" | "ServerTimestamp"),
+                                                timestamp_range: {
+                                                  start_timestamp: ::Time,
+                                                  end_timestamp: ::Time
+                                                }
+                                              }
+                                            },
+                                            ?s3_recording_sink_runtime_configuration: {
+                                              destination: ::String,
+                                              recording_file_format: ("Wav" | "Opus")
+                                            },
+                                            ?tags: Array[
+                                              {
+                                                key: ::String,
+                                                value: ::String
+                                              },
+                                            ],
+                                            ?client_request_token: ::String
+                                          ) -> _CreateMediaInsightsPipelineResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMediaInsightsPipelineResponseSuccess
+
+      interface _CreateMediaInsightsPipelineConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMediaInsightsPipelineConfigurationResponse]
+        def media_insights_pipeline_configuration: () -> Types::MediaInsightsPipelineConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#create_media_insights_pipeline_configuration-instance_method
+      def create_media_insights_pipeline_configuration: (
+                                                          media_insights_pipeline_configuration_name: ::String,
+                                                          resource_access_role_arn: ::String,
+                                                          ?real_time_alert_configuration: {
+                                                            disabled: bool?,
+                                                            rules: Array[
+                                                              {
+                                                                type: ("KeywordMatch" | "Sentiment" | "IssueDetection"),
+                                                                keyword_match_configuration: {
+                                                                  rule_name: ::String,
+                                                                  keywords: Array[::String],
+                                                                  negate: bool?
+                                                                }?,
+                                                                sentiment_configuration: {
+                                                                  rule_name: ::String,
+                                                                  sentiment_type: ("NEGATIVE"),
+                                                                  time_period: ::Integer
+                                                                }?,
+                                                                issue_detection_configuration: {
+                                                                  rule_name: ::String
+                                                                }?
+                                                              },
+                                                            ]?
+                                                          },
+                                                          elements: Array[
+                                                            {
+                                                              type: ("AmazonTranscribeCallAnalyticsProcessor" | "VoiceAnalyticsProcessor" | "AmazonTranscribeProcessor" | "KinesisDataStreamSink" | "LambdaFunctionSink" | "SqsQueueSink" | "SnsTopicSink" | "S3RecordingSink" | "VoiceEnhancementSink"),
+                                                              amazon_transcribe_call_analytics_processor_configuration: {
+                                                                language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR"),
+                                                                vocabulary_name: ::String?,
+                                                                vocabulary_filter_name: ::String?,
+                                                                vocabulary_filter_method: ("remove" | "mask" | "tag")?,
+                                                                language_model_name: ::String?,
+                                                                enable_partial_results_stabilization: bool?,
+                                                                partial_results_stability: ("high" | "medium" | "low")?,
+                                                                content_identification_type: ("PII")?,
+                                                                content_redaction_type: ("PII")?,
+                                                                pii_entity_types: ::String?,
+                                                                filter_partial_results: bool?,
+                                                                post_call_analytics_settings: {
+                                                                  output_location: ::String,
+                                                                  data_access_role_arn: ::String,
+                                                                  content_redaction_output: ("redacted" | "redacted_and_unredacted")?,
+                                                                  output_encryption_kms_key_id: ::String?
+                                                                }?,
+                                                                call_analytics_stream_categories: Array[::String]?
+                                                              }?,
+                                                              amazon_transcribe_processor_configuration: {
+                                                                language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")?,
+                                                                vocabulary_name: ::String?,
+                                                                vocabulary_filter_name: ::String?,
+                                                                vocabulary_filter_method: ("remove" | "mask" | "tag")?,
+                                                                show_speaker_label: bool?,
+                                                                enable_partial_results_stabilization: bool?,
+                                                                partial_results_stability: ("high" | "medium" | "low")?,
+                                                                content_identification_type: ("PII")?,
+                                                                content_redaction_type: ("PII")?,
+                                                                pii_entity_types: ::String?,
+                                                                language_model_name: ::String?,
+                                                                filter_partial_results: bool?,
+                                                                identify_language: bool?,
+                                                                language_options: ::String?,
+                                                                preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")?,
+                                                                vocabulary_names: ::String?,
+                                                                vocabulary_filter_names: ::String?
+                                                              }?,
+                                                              kinesis_data_stream_sink_configuration: {
+                                                                insights_target: ::String?
+                                                              }?,
+                                                              s3_recording_sink_configuration: {
+                                                                destination: ::String?,
+                                                                recording_file_format: ("Wav" | "Opus")?
+                                                              }?,
+                                                              voice_analytics_processor_configuration: {
+                                                                speaker_search_status: ("Enabled" | "Disabled")?,
+                                                                voice_tone_analysis_status: ("Enabled" | "Disabled")?
+                                                              }?,
+                                                              lambda_function_sink_configuration: {
+                                                                insights_target: ::String?
+                                                              }?,
+                                                              sqs_queue_sink_configuration: {
+                                                                insights_target: ::String?
+                                                              }?,
+                                                              sns_topic_sink_configuration: {
+                                                                insights_target: ::String?
+                                                              }?,
+                                                              voice_enhancement_sink_configuration: {
+                                                                disabled: bool?
+                                                              }?
+                                                            },
+                                                          ],
+                                                          ?tags: Array[
+                                                            {
+                                                              key: ::String,
+                                                              value: ::String
+                                                            },
+                                                          ],
+                                                          ?client_request_token: ::String
+                                                        ) -> _CreateMediaInsightsPipelineConfigurationResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMediaInsightsPipelineConfigurationResponseSuccess
+
+      interface _CreateMediaLiveConnectorPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMediaLiveConnectorPipelineResponse]
+        def media_live_connector_pipeline: () -> Types::MediaLiveConnectorPipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#create_media_live_connector_pipeline-instance_method
+      def create_media_live_connector_pipeline: (
+                                                  sources: Array[
+                                                    {
+                                                      source_type: ("ChimeSdkMeeting"),
+                                                      chime_sdk_meeting_live_connector_configuration: {
+                                                        arn: ::String,
+                                                        mux_type: ("AudioWithCompositedVideo" | "AudioWithActiveSpeakerVideo"),
+                                                        composited_video: {
+                                                          layout: ("GridView")?,
+                                                          resolution: ("HD" | "FHD")?,
+                                                          grid_view_configuration: {
+                                                            content_share_layout: ("PresenterOnly" | "Horizontal" | "Vertical" | "ActiveSpeakerOnly"),
+                                                            presenter_only_configuration: {
+                                                              presenter_position: ("TopLeft" | "TopRight" | "BottomLeft" | "BottomRight")?
+                                                            }?,
+                                                            active_speaker_only_configuration: {
+                                                              active_speaker_position: ("TopLeft" | "TopRight" | "BottomLeft" | "BottomRight")?
+                                                            }?,
+                                                            horizontal_layout_configuration: {
+                                                              tile_order: ("JoinSequence" | "SpeakerSequence")?,
+                                                              tile_position: ("Top" | "Bottom")?,
+                                                              tile_count: ::Integer?,
+                                                              tile_aspect_ratio: ::String?
+                                                            }?,
+                                                            vertical_layout_configuration: {
+                                                              tile_order: ("JoinSequence" | "SpeakerSequence")?,
+                                                              tile_position: ("Left" | "Right")?,
+                                                              tile_count: ::Integer?,
+                                                              tile_aspect_ratio: ::String?
+                                                            }?,
+                                                            video_attribute: {
+                                                              corner_radius: ::Integer?,
+                                                              border_color: ("Black" | "Blue" | "Red" | "Green" | "White" | "Yellow")?,
+                                                              highlight_color: ("Black" | "Blue" | "Red" | "Green" | "White" | "Yellow")?,
+                                                              border_thickness: ::Integer?
+                                                            }?,
+                                                            canvas_orientation: ("Landscape" | "Portrait")?
+                                                          }
+                                                        }?,
+                                                        source_configuration: {
+                                                          selected_video_streams: {
+                                                            attendee_ids: Array[::String]?,
+                                                            external_user_ids: Array[::String]?
+                                                          }?
+                                                        }?
+                                                      }
+                                                    },
+                                                  ],
+                                                  sinks: Array[
+                                                    {
+                                                      sink_type: ("RTMP"),
+                                                      rtmp_configuration: {
+                                                        url: ::String,
+                                                        audio_channels: ("Stereo" | "Mono")?,
+                                                        audio_sample_rate: ::String?
+                                                      }
+                                                    },
+                                                  ],
+                                                  ?client_request_token: ::String,
+                                                  ?tags: Array[
+                                                    {
+                                                      key: ::String,
+                                                      value: ::String
+                                                    },
+                                                  ]
+                                                ) -> _CreateMediaLiveConnectorPipelineResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMediaLiveConnectorPipelineResponseSuccess
+
+      interface _CreateMediaPipelineKinesisVideoStreamPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMediaPipelineKinesisVideoStreamPoolResponse]
+        def kinesis_video_stream_pool_configuration: () -> Types::KinesisVideoStreamPoolConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#create_media_pipeline_kinesis_video_stream_pool-instance_method
+      def create_media_pipeline_kinesis_video_stream_pool: (
+                                                             stream_configuration: {
+                                                               region: ::String,
+                                                               data_retention_in_hours: ::Integer?
+                                                             },
+                                                             pool_name: ::String,
+                                                             ?client_request_token: ::String,
+                                                             ?tags: Array[
+                                                               {
+                                                                 key: ::String,
+                                                                 value: ::String
+                                                               },
+                                                             ]
+                                                           ) -> _CreateMediaPipelineKinesisVideoStreamPoolResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMediaPipelineKinesisVideoStreamPoolResponseSuccess
+
+      interface _CreateMediaStreamPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMediaStreamPipelineResponse]
+        def media_stream_pipeline: () -> Types::MediaStreamPipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#create_media_stream_pipeline-instance_method
+      def create_media_stream_pipeline: (
+                                          sources: Array[
+                                            {
+                                              source_type: ("ChimeSdkMeeting"),
+                                              source_arn: ::String
+                                            },
+                                          ],
+                                          sinks: Array[
+                                            {
+                                              sink_arn: ::String,
+                                              sink_type: ("KinesisVideoStreamPool"),
+                                              reserved_stream_capacity: ::Integer,
+                                              media_stream_type: ("MixedAudio" | "IndividualAudio")
+                                            },
+                                          ],
+                                          ?client_request_token: ::String,
+                                          ?tags: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String
+                                            },
+                                          ]
+                                        ) -> _CreateMediaStreamPipelineResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMediaStreamPipelineResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#delete_media_capture_pipeline-instance_method
+      def delete_media_capture_pipeline: (
+                                           media_pipeline_id: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#delete_media_insights_pipeline_configuration-instance_method
+      def delete_media_insights_pipeline_configuration: (
+                                                          identifier: ::String
+                                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#delete_media_pipeline-instance_method
+      def delete_media_pipeline: (
+                                   media_pipeline_id: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#delete_media_pipeline_kinesis_video_stream_pool-instance_method
+      def delete_media_pipeline_kinesis_video_stream_pool: (
+                                                             identifier: ::String
+                                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetMediaCapturePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMediaCapturePipelineResponse]
+        def media_capture_pipeline: () -> Types::MediaCapturePipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#get_media_capture_pipeline-instance_method
+      def get_media_capture_pipeline: (
+                                        media_pipeline_id: ::String
+                                      ) -> _GetMediaCapturePipelineResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMediaCapturePipelineResponseSuccess
+
+      interface _GetMediaInsightsPipelineConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMediaInsightsPipelineConfigurationResponse]
+        def media_insights_pipeline_configuration: () -> Types::MediaInsightsPipelineConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#get_media_insights_pipeline_configuration-instance_method
+      def get_media_insights_pipeline_configuration: (
+                                                       identifier: ::String
+                                                     ) -> _GetMediaInsightsPipelineConfigurationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMediaInsightsPipelineConfigurationResponseSuccess
+
+      interface _GetMediaPipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMediaPipelineResponse]
+        def media_pipeline: () -> Types::MediaPipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#get_media_pipeline-instance_method
+      def get_media_pipeline: (
+                                media_pipeline_id: ::String
+                              ) -> _GetMediaPipelineResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMediaPipelineResponseSuccess
+
+      interface _GetMediaPipelineKinesisVideoStreamPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMediaPipelineKinesisVideoStreamPoolResponse]
+        def kinesis_video_stream_pool_configuration: () -> Types::KinesisVideoStreamPoolConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#get_media_pipeline_kinesis_video_stream_pool-instance_method
+      def get_media_pipeline_kinesis_video_stream_pool: (
+                                                          identifier: ::String
+                                                        ) -> _GetMediaPipelineKinesisVideoStreamPoolResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMediaPipelineKinesisVideoStreamPoolResponseSuccess
+
+      interface _GetSpeakerSearchTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSpeakerSearchTaskResponse]
+        def speaker_search_task: () -> Types::SpeakerSearchTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#get_speaker_search_task-instance_method
+      def get_speaker_search_task: (
+                                     identifier: ::String,
+                                     speaker_search_task_id: ::String
+                                   ) -> _GetSpeakerSearchTaskResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSpeakerSearchTaskResponseSuccess
+
+      interface _GetVoiceToneAnalysisTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVoiceToneAnalysisTaskResponse]
+        def voice_tone_analysis_task: () -> Types::VoiceToneAnalysisTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#get_voice_tone_analysis_task-instance_method
+      def get_voice_tone_analysis_task: (
+                                          identifier: ::String,
+                                          voice_tone_analysis_task_id: ::String
+                                        ) -> _GetVoiceToneAnalysisTaskResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVoiceToneAnalysisTaskResponseSuccess
+
+      interface _ListMediaCapturePipelinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMediaCapturePipelinesResponse]
+        def media_capture_pipelines: () -> ::Array[Types::MediaCapturePipelineSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#list_media_capture_pipelines-instance_method
+      def list_media_capture_pipelines: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListMediaCapturePipelinesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMediaCapturePipelinesResponseSuccess
+
+      interface _ListMediaInsightsPipelineConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMediaInsightsPipelineConfigurationsResponse]
+        def media_insights_pipeline_configurations: () -> ::Array[Types::MediaInsightsPipelineConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#list_media_insights_pipeline_configurations-instance_method
+      def list_media_insights_pipeline_configurations: (
+                                                         ?next_token: ::String,
+                                                         ?max_results: ::Integer
+                                                       ) -> _ListMediaInsightsPipelineConfigurationsResponseSuccess
+                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMediaInsightsPipelineConfigurationsResponseSuccess
+
+      interface _ListMediaPipelineKinesisVideoStreamPoolsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMediaPipelineKinesisVideoStreamPoolsResponse]
+        def kinesis_video_stream_pools: () -> ::Array[Types::KinesisVideoStreamPoolSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#list_media_pipeline_kinesis_video_stream_pools-instance_method
+      def list_media_pipeline_kinesis_video_stream_pools: (
+                                                            ?next_token: ::String,
+                                                            ?max_results: ::Integer
+                                                          ) -> _ListMediaPipelineKinesisVideoStreamPoolsResponseSuccess
+                                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMediaPipelineKinesisVideoStreamPoolsResponseSuccess
+
+      interface _ListMediaPipelinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMediaPipelinesResponse]
+        def media_pipelines: () -> ::Array[Types::MediaPipelineSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#list_media_pipelines-instance_method
+      def list_media_pipelines: (
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListMediaPipelinesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMediaPipelinesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _StartSpeakerSearchTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartSpeakerSearchTaskResponse]
+        def speaker_search_task: () -> Types::SpeakerSearchTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#start_speaker_search_task-instance_method
+      def start_speaker_search_task: (
+                                       identifier: ::String,
+                                       voice_profile_domain_arn: ::String,
+                                       ?kinesis_video_stream_source_task_configuration: {
+                                         stream_arn: ::String,
+                                         channel_id: ::Integer,
+                                         fragment_number: ::String?
+                                       },
+                                       ?client_request_token: ::String
+                                     ) -> _StartSpeakerSearchTaskResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartSpeakerSearchTaskResponseSuccess
+
+      interface _StartVoiceToneAnalysisTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartVoiceToneAnalysisTaskResponse]
+        def voice_tone_analysis_task: () -> Types::VoiceToneAnalysisTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#start_voice_tone_analysis_task-instance_method
+      def start_voice_tone_analysis_task: (
+                                            identifier: ::String,
+                                            language_code: ("en-US"),
+                                            ?kinesis_video_stream_source_task_configuration: {
+                                              stream_arn: ::String,
+                                              channel_id: ::Integer,
+                                              fragment_number: ::String?
+                                            },
+                                            ?client_request_token: ::String
+                                          ) -> _StartVoiceToneAnalysisTaskResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartVoiceToneAnalysisTaskResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#stop_speaker_search_task-instance_method
+      def stop_speaker_search_task: (
+                                      identifier: ::String,
+                                      speaker_search_task_id: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#stop_voice_tone_analysis_task-instance_method
+      def stop_voice_tone_analysis_task: (
+                                           identifier: ::String,
+                                           voice_tone_analysis_task_id: ::String
+                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateMediaInsightsPipelineConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMediaInsightsPipelineConfigurationResponse]
+        def media_insights_pipeline_configuration: () -> Types::MediaInsightsPipelineConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#update_media_insights_pipeline_configuration-instance_method
+      def update_media_insights_pipeline_configuration: (
+                                                          identifier: ::String,
+                                                          resource_access_role_arn: ::String,
+                                                          ?real_time_alert_configuration: {
+                                                            disabled: bool?,
+                                                            rules: Array[
+                                                              {
+                                                                type: ("KeywordMatch" | "Sentiment" | "IssueDetection"),
+                                                                keyword_match_configuration: {
+                                                                  rule_name: ::String,
+                                                                  keywords: Array[::String],
+                                                                  negate: bool?
+                                                                }?,
+                                                                sentiment_configuration: {
+                                                                  rule_name: ::String,
+                                                                  sentiment_type: ("NEGATIVE"),
+                                                                  time_period: ::Integer
+                                                                }?,
+                                                                issue_detection_configuration: {
+                                                                  rule_name: ::String
+                                                                }?
+                                                              },
+                                                            ]?
+                                                          },
+                                                          elements: Array[
+                                                            {
+                                                              type: ("AmazonTranscribeCallAnalyticsProcessor" | "VoiceAnalyticsProcessor" | "AmazonTranscribeProcessor" | "KinesisDataStreamSink" | "LambdaFunctionSink" | "SqsQueueSink" | "SnsTopicSink" | "S3RecordingSink" | "VoiceEnhancementSink"),
+                                                              amazon_transcribe_call_analytics_processor_configuration: {
+                                                                language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR"),
+                                                                vocabulary_name: ::String?,
+                                                                vocabulary_filter_name: ::String?,
+                                                                vocabulary_filter_method: ("remove" | "mask" | "tag")?,
+                                                                language_model_name: ::String?,
+                                                                enable_partial_results_stabilization: bool?,
+                                                                partial_results_stability: ("high" | "medium" | "low")?,
+                                                                content_identification_type: ("PII")?,
+                                                                content_redaction_type: ("PII")?,
+                                                                pii_entity_types: ::String?,
+                                                                filter_partial_results: bool?,
+                                                                post_call_analytics_settings: {
+                                                                  output_location: ::String,
+                                                                  data_access_role_arn: ::String,
+                                                                  content_redaction_output: ("redacted" | "redacted_and_unredacted")?,
+                                                                  output_encryption_kms_key_id: ::String?
+                                                                }?,
+                                                                call_analytics_stream_categories: Array[::String]?
+                                                              }?,
+                                                              amazon_transcribe_processor_configuration: {
+                                                                language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")?,
+                                                                vocabulary_name: ::String?,
+                                                                vocabulary_filter_name: ::String?,
+                                                                vocabulary_filter_method: ("remove" | "mask" | "tag")?,
+                                                                show_speaker_label: bool?,
+                                                                enable_partial_results_stabilization: bool?,
+                                                                partial_results_stability: ("high" | "medium" | "low")?,
+                                                                content_identification_type: ("PII")?,
+                                                                content_redaction_type: ("PII")?,
+                                                                pii_entity_types: ::String?,
+                                                                language_model_name: ::String?,
+                                                                filter_partial_results: bool?,
+                                                                identify_language: bool?,
+                                                                language_options: ::String?,
+                                                                preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")?,
+                                                                vocabulary_names: ::String?,
+                                                                vocabulary_filter_names: ::String?
+                                                              }?,
+                                                              kinesis_data_stream_sink_configuration: {
+                                                                insights_target: ::String?
+                                                              }?,
+                                                              s3_recording_sink_configuration: {
+                                                                destination: ::String?,
+                                                                recording_file_format: ("Wav" | "Opus")?
+                                                              }?,
+                                                              voice_analytics_processor_configuration: {
+                                                                speaker_search_status: ("Enabled" | "Disabled")?,
+                                                                voice_tone_analysis_status: ("Enabled" | "Disabled")?
+                                                              }?,
+                                                              lambda_function_sink_configuration: {
+                                                                insights_target: ::String?
+                                                              }?,
+                                                              sqs_queue_sink_configuration: {
+                                                                insights_target: ::String?
+                                                              }?,
+                                                              sns_topic_sink_configuration: {
+                                                                insights_target: ::String?
+                                                              }?,
+                                                              voice_enhancement_sink_configuration: {
+                                                                disabled: bool?
+                                                              }?
+                                                            },
+                                                          ]
+                                                        ) -> _UpdateMediaInsightsPipelineConfigurationResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMediaInsightsPipelineConfigurationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#update_media_insights_pipeline_status-instance_method
+      def update_media_insights_pipeline_status: (
+                                                   identifier: ::String,
+                                                   update_status: ("Pause" | "Resume")
+                                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateMediaPipelineKinesisVideoStreamPoolResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMediaPipelineKinesisVideoStreamPoolResponse]
+        def kinesis_video_stream_pool_configuration: () -> Types::KinesisVideoStreamPoolConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMediaPipelines/Client.html#update_media_pipeline_kinesis_video_stream_pool-instance_method
+      def update_media_pipeline_kinesis_video_stream_pool: (
+                                                             identifier: ::String,
+                                                             ?stream_configuration: {
+                                                               data_retention_in_hours: ::Integer?
+                                                             }
+                                                           ) -> _UpdateMediaPipelineKinesisVideoStreamPoolResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMediaPipelineKinesisVideoStreamPoolResponseSuccess
+    end
+  end
+end
+

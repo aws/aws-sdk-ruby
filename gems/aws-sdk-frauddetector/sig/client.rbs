@@ -1,0 +1,1199 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module FraudDetector
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchCreateVariableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateVariableResult]
+        def errors: () -> ::Array[Types::BatchCreateVariableError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#batch_create_variable-instance_method
+      def batch_create_variable: (
+                                   variable_entries: Array[
+                                     {
+                                       name: ::String?,
+                                       data_type: ::String?,
+                                       data_source: ::String?,
+                                       default_value: ::String?,
+                                       description: ::String?,
+                                       variable_type: ::String?
+                                     },
+                                   ],
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ]
+                                 ) -> _BatchCreateVariableResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateVariableResponseSuccess
+
+      interface _BatchGetVariableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetVariableResult]
+        def variables: () -> ::Array[Types::Variable]
+        def errors: () -> ::Array[Types::BatchGetVariableError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#batch_get_variable-instance_method
+      def batch_get_variable: (
+                                names: Array[::String]
+                              ) -> _BatchGetVariableResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetVariableResponseSuccess
+
+      interface _CancelBatchImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelBatchImportJobResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#cancel_batch_import_job-instance_method
+      def cancel_batch_import_job: (
+                                     job_id: ::String
+                                   ) -> _CancelBatchImportJobResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelBatchImportJobResponseSuccess
+
+      interface _CancelBatchPredictionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelBatchPredictionJobResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#cancel_batch_prediction_job-instance_method
+      def cancel_batch_prediction_job: (
+                                         job_id: ::String
+                                       ) -> _CancelBatchPredictionJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelBatchPredictionJobResponseSuccess
+
+      interface _CreateBatchImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBatchImportJobResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#create_batch_import_job-instance_method
+      def create_batch_import_job: (
+                                     job_id: ::String,
+                                     input_path: ::String,
+                                     output_path: ::String,
+                                     event_type_name: ::String,
+                                     iam_role_arn: ::String,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ]
+                                   ) -> _CreateBatchImportJobResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBatchImportJobResponseSuccess
+
+      interface _CreateBatchPredictionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBatchPredictionJobResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#create_batch_prediction_job-instance_method
+      def create_batch_prediction_job: (
+                                         job_id: ::String,
+                                         input_path: ::String,
+                                         output_path: ::String,
+                                         event_type_name: ::String,
+                                         detector_name: ::String,
+                                         ?detector_version: ::String,
+                                         iam_role_arn: ::String,
+                                         ?tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ]
+                                       ) -> _CreateBatchPredictionJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBatchPredictionJobResponseSuccess
+
+      interface _CreateDetectorVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDetectorVersionResult]
+        def detector_id: () -> ::String
+        def detector_version_id: () -> ::String
+        def status: () -> ("DRAFT" | "ACTIVE" | "INACTIVE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#create_detector_version-instance_method
+      def create_detector_version: (
+                                     detector_id: ::String,
+                                     ?description: ::String,
+                                     ?external_model_endpoints: Array[::String],
+                                     rules: Array[
+                                       {
+                                         detector_id: ::String,
+                                         rule_id: ::String,
+                                         rule_version: ::String
+                                       },
+                                     ],
+                                     ?model_versions: Array[
+                                       {
+                                         model_id: ::String,
+                                         model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS"),
+                                         model_version_number: ::String,
+                                         arn: ::String?
+                                       },
+                                     ],
+                                     ?rule_execution_mode: ("ALL_MATCHED" | "FIRST_MATCHED"),
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ]
+                                   ) -> _CreateDetectorVersionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDetectorVersionResponseSuccess
+
+      interface _CreateListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateListResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#create_list-instance_method
+      def create_list: (
+                         name: ::String,
+                         ?elements: Array[::String],
+                         ?variable_type: ::String,
+                         ?description: ::String,
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> _CreateListResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateListResponseSuccess
+
+      interface _CreateModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateModelResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#create_model-instance_method
+      def create_model: (
+                          model_id: ::String,
+                          model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS"),
+                          ?description: ::String,
+                          event_type_name: ::String,
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _CreateModelResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelResponseSuccess
+
+      interface _CreateModelVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateModelVersionResult]
+        def model_id: () -> ::String
+        def model_type: () -> ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+        def model_version_number: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#create_model_version-instance_method
+      def create_model_version: (
+                                  model_id: ::String,
+                                  model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS"),
+                                  training_data_source: ("EXTERNAL_EVENTS" | "INGESTED_EVENTS"),
+                                  training_data_schema: {
+                                    model_variables: Array[::String],
+                                    label_schema: {
+                                      label_mapper: Hash[::String, Array[::String]]?,
+                                      unlabeled_events_treatment: ("IGNORE" | "FRAUD" | "LEGIT" | "AUTO")?
+                                    }?
+                                  },
+                                  ?external_events_detail: {
+                                    data_location: ::String,
+                                    data_access_role_arn: ::String
+                                  },
+                                  ?ingested_events_detail: {
+                                    ingested_events_time_window: {
+                                      start_time: ::String,
+                                      end_time: ::String
+                                    }
+                                  },
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> _CreateModelVersionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelVersionResponseSuccess
+
+      interface _CreateRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRuleResult]
+        def rule: () -> Types::Rule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#create_rule-instance_method
+      def create_rule: (
+                         rule_id: ::String,
+                         detector_id: ::String,
+                         ?description: ::String,
+                         expression: ::String,
+                         language: ("DETECTORPL"),
+                         outcomes: Array[::String],
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> _CreateRuleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleResponseSuccess
+
+      interface _CreateVariableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVariableResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#create_variable-instance_method
+      def create_variable: (
+                             name: ::String,
+                             data_type: ("STRING" | "INTEGER" | "FLOAT" | "BOOLEAN" | "DATETIME"),
+                             data_source: ("EVENT" | "MODEL_SCORE" | "EXTERNAL_MODEL_SCORE"),
+                             default_value: ::String,
+                             ?description: ::String,
+                             ?variable_type: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _CreateVariableResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVariableResponseSuccess
+
+      interface _DeleteBatchImportJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBatchImportJobResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_batch_import_job-instance_method
+      def delete_batch_import_job: (
+                                     job_id: ::String
+                                   ) -> _DeleteBatchImportJobResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBatchImportJobResponseSuccess
+
+      interface _DeleteBatchPredictionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBatchPredictionJobResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_batch_prediction_job-instance_method
+      def delete_batch_prediction_job: (
+                                         job_id: ::String
+                                       ) -> _DeleteBatchPredictionJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBatchPredictionJobResponseSuccess
+
+      interface _DeleteDetectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDetectorResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_detector-instance_method
+      def delete_detector: (
+                             detector_id: ::String
+                           ) -> _DeleteDetectorResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDetectorResponseSuccess
+
+      interface _DeleteDetectorVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDetectorVersionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_detector_version-instance_method
+      def delete_detector_version: (
+                                     detector_id: ::String,
+                                     detector_version_id: ::String
+                                   ) -> _DeleteDetectorVersionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDetectorVersionResponseSuccess
+
+      interface _DeleteEntityTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEntityTypeResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_entity_type-instance_method
+      def delete_entity_type: (
+                                name: ::String
+                              ) -> _DeleteEntityTypeResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEntityTypeResponseSuccess
+
+      interface _DeleteEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEventResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_event-instance_method
+      def delete_event: (
+                          event_id: ::String,
+                          event_type_name: ::String,
+                          ?delete_audit_history: bool
+                        ) -> _DeleteEventResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEventResponseSuccess
+
+      interface _DeleteEventTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEventTypeResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_event_type-instance_method
+      def delete_event_type: (
+                               name: ::String
+                             ) -> _DeleteEventTypeResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEventTypeResponseSuccess
+
+      interface _DeleteEventsByEventTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEventsByEventTypeResult]
+        def event_type_name: () -> ::String
+        def events_deletion_status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_events_by_event_type-instance_method
+      def delete_events_by_event_type: (
+                                         event_type_name: ::String
+                                       ) -> _DeleteEventsByEventTypeResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEventsByEventTypeResponseSuccess
+
+      interface _DeleteExternalModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteExternalModelResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_external_model-instance_method
+      def delete_external_model: (
+                                   model_endpoint: ::String
+                                 ) -> _DeleteExternalModelResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteExternalModelResponseSuccess
+
+      interface _DeleteLabelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLabelResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_label-instance_method
+      def delete_label: (
+                          name: ::String
+                        ) -> _DeleteLabelResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLabelResponseSuccess
+
+      interface _DeleteListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteListResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_list-instance_method
+      def delete_list: (
+                         name: ::String
+                       ) -> _DeleteListResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteListResponseSuccess
+
+      interface _DeleteModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteModelResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_model-instance_method
+      def delete_model: (
+                          model_id: ::String,
+                          model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+                        ) -> _DeleteModelResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteModelResponseSuccess
+
+      interface _DeleteModelVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteModelVersionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_model_version-instance_method
+      def delete_model_version: (
+                                  model_id: ::String,
+                                  model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS"),
+                                  model_version_number: ::String
+                                ) -> _DeleteModelVersionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteModelVersionResponseSuccess
+
+      interface _DeleteOutcomeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOutcomeResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_outcome-instance_method
+      def delete_outcome: (
+                            name: ::String
+                          ) -> _DeleteOutcomeResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOutcomeResponseSuccess
+
+      interface _DeleteRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRuleResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_rule-instance_method
+      def delete_rule: (
+                         rule: {
+                           detector_id: ::String,
+                           rule_id: ::String,
+                           rule_version: ::String
+                         }
+                       ) -> _DeleteRuleResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRuleResponseSuccess
+
+      interface _DeleteVariableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVariableResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#delete_variable-instance_method
+      def delete_variable: (
+                             name: ::String
+                           ) -> _DeleteVariableResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVariableResponseSuccess
+
+      interface _DescribeDetectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDetectorResult]
+        def detector_id: () -> ::String
+        def detector_version_summaries: () -> ::Array[Types::DetectorVersionSummary]
+        def next_token: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#describe_detector-instance_method
+      def describe_detector: (
+                               detector_id: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _DescribeDetectorResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDetectorResponseSuccess
+
+      interface _DescribeModelVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeModelVersionsResult]
+        def model_version_details: () -> ::Array[Types::ModelVersionDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#describe_model_versions-instance_method
+      def describe_model_versions: (
+                                     ?model_id: ::String,
+                                     ?model_version_number: ::String,
+                                     ?model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS"),
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _DescribeModelVersionsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeModelVersionsResponseSuccess
+
+      interface _GetBatchImportJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBatchImportJobsResult]
+        def batch_imports: () -> ::Array[Types::BatchImport]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_batch_import_jobs-instance_method
+      def get_batch_import_jobs: (
+                                   ?job_id: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _GetBatchImportJobsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBatchImportJobsResponseSuccess
+
+      interface _GetBatchPredictionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBatchPredictionJobsResult]
+        def batch_predictions: () -> ::Array[Types::BatchPrediction]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_batch_prediction_jobs-instance_method
+      def get_batch_prediction_jobs: (
+                                       ?job_id: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _GetBatchPredictionJobsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBatchPredictionJobsResponseSuccess
+
+      interface _GetDeleteEventsByEventTypeStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDeleteEventsByEventTypeStatusResult]
+        def event_type_name: () -> ::String
+        def events_deletion_status: () -> ("IN_PROGRESS_INITIALIZING" | "IN_PROGRESS" | "CANCEL_IN_PROGRESS" | "CANCELED" | "COMPLETE" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_delete_events_by_event_type_status-instance_method
+      def get_delete_events_by_event_type_status: (
+                                                    event_type_name: ::String
+                                                  ) -> _GetDeleteEventsByEventTypeStatusResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDeleteEventsByEventTypeStatusResponseSuccess
+
+      interface _GetDetectorVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDetectorVersionResult]
+        def detector_id: () -> ::String
+        def detector_version_id: () -> ::String
+        def description: () -> ::String
+        def external_model_endpoints: () -> ::Array[::String]
+        def model_versions: () -> ::Array[Types::ModelVersion]
+        def rules: () -> ::Array[Types::Rule]
+        def status: () -> ("DRAFT" | "ACTIVE" | "INACTIVE")
+        def last_updated_time: () -> ::String
+        def created_time: () -> ::String
+        def rule_execution_mode: () -> ("ALL_MATCHED" | "FIRST_MATCHED")
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_detector_version-instance_method
+      def get_detector_version: (
+                                  detector_id: ::String,
+                                  detector_version_id: ::String
+                                ) -> _GetDetectorVersionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDetectorVersionResponseSuccess
+
+      interface _GetDetectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDetectorsResult]
+        def detectors: () -> ::Array[Types::Detector]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_detectors-instance_method
+      def get_detectors: (
+                           ?detector_id: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _GetDetectorsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDetectorsResponseSuccess
+
+      interface _GetEntityTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEntityTypesResult]
+        def entity_types: () -> ::Array[Types::EntityType]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_entity_types-instance_method
+      def get_entity_types: (
+                              ?name: ::String,
+                              ?next_token: ::String,
+                              ?max_results: ::Integer
+                            ) -> _GetEntityTypesResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEntityTypesResponseSuccess
+
+      interface _GetEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventResult]
+        def event: () -> Types::Event
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_event-instance_method
+      def get_event: (
+                       event_id: ::String,
+                       event_type_name: ::String
+                     ) -> _GetEventResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventResponseSuccess
+
+      interface _GetEventPredictionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventPredictionResult]
+        def model_scores: () -> ::Array[Types::ModelScores]
+        def rule_results: () -> ::Array[Types::RuleResult]
+        def external_model_outputs: () -> ::Array[Types::ExternalModelOutputs]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_event_prediction-instance_method
+      def get_event_prediction: (
+                                  detector_id: ::String,
+                                  ?detector_version_id: ::String,
+                                  event_id: ::String,
+                                  event_type_name: ::String,
+                                  entities: Array[
+                                    {
+                                      entity_type: ::String,
+                                      entity_id: ::String
+                                    },
+                                  ],
+                                  event_timestamp: ::String,
+                                  event_variables: Hash[::String, ::String],
+                                  ?external_model_endpoint_data_blobs: Hash[::String, {
+                                      byte_buffer: ::String?,
+                                      content_type: ::String?
+                                    }]
+                                ) -> _GetEventPredictionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventPredictionResponseSuccess
+
+      interface _GetEventPredictionMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventPredictionMetadataResult]
+        def event_id: () -> ::String
+        def event_type_name: () -> ::String
+        def entity_id: () -> ::String
+        def entity_type: () -> ::String
+        def event_timestamp: () -> ::String
+        def detector_id: () -> ::String
+        def detector_version_id: () -> ::String
+        def detector_version_status: () -> ::String
+        def event_variables: () -> ::Array[Types::EventVariableSummary]
+        def rules: () -> ::Array[Types::EvaluatedRule]
+        def rule_execution_mode: () -> ("ALL_MATCHED" | "FIRST_MATCHED")
+        def outcomes: () -> ::Array[::String]
+        def evaluated_model_versions: () -> ::Array[Types::EvaluatedModelVersion]
+        def evaluated_external_models: () -> ::Array[Types::EvaluatedExternalModel]
+        def prediction_timestamp: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_event_prediction_metadata-instance_method
+      def get_event_prediction_metadata: (
+                                           event_id: ::String,
+                                           event_type_name: ::String,
+                                           detector_id: ::String,
+                                           detector_version_id: ::String,
+                                           prediction_timestamp: ::String
+                                         ) -> _GetEventPredictionMetadataResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventPredictionMetadataResponseSuccess
+
+      interface _GetEventTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventTypesResult]
+        def event_types: () -> ::Array[Types::EventType]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_event_types-instance_method
+      def get_event_types: (
+                             ?name: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _GetEventTypesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventTypesResponseSuccess
+
+      interface _GetExternalModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetExternalModelsResult]
+        def external_models: () -> ::Array[Types::ExternalModel]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_external_models-instance_method
+      def get_external_models: (
+                                 ?model_endpoint: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _GetExternalModelsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetExternalModelsResponseSuccess
+
+      interface _GetKMSEncryptionKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetKMSEncryptionKeyResult]
+        def kms_key: () -> Types::KMSKey
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_kms_encryption_key-instance_method
+      def get_kms_encryption_key: () -> _GetKMSEncryptionKeyResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetKMSEncryptionKeyResponseSuccess
+
+      interface _GetLabelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLabelsResult]
+        def labels: () -> ::Array[Types::Label]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_labels-instance_method
+      def get_labels: (
+                        ?name: ::String,
+                        ?next_token: ::String,
+                        ?max_results: ::Integer
+                      ) -> _GetLabelsResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLabelsResponseSuccess
+
+      interface _GetListElementsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetListElementsResult]
+        def elements: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_list_elements-instance_method
+      def get_list_elements: (
+                               name: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _GetListElementsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetListElementsResponseSuccess
+
+      interface _GetListsMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetListsMetadataResult]
+        def lists: () -> ::Array[Types::AllowDenyList]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_lists_metadata-instance_method
+      def get_lists_metadata: (
+                                ?name: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _GetListsMetadataResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetListsMetadataResponseSuccess
+
+      interface _GetModelVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetModelVersionResult]
+        def model_id: () -> ::String
+        def model_type: () -> ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+        def model_version_number: () -> ::String
+        def training_data_source: () -> ("EXTERNAL_EVENTS" | "INGESTED_EVENTS")
+        def training_data_schema: () -> Types::TrainingDataSchema
+        def external_events_detail: () -> Types::ExternalEventsDetail
+        def ingested_events_detail: () -> Types::IngestedEventsDetail
+        def status: () -> ::String
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_model_version-instance_method
+      def get_model_version: (
+                               model_id: ::String,
+                               model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS"),
+                               model_version_number: ::String
+                             ) -> _GetModelVersionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetModelVersionResponseSuccess
+
+      interface _GetModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetModelsResult]
+        def next_token: () -> ::String
+        def models: () -> ::Array[Types::Model]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_models-instance_method
+      def get_models: (
+                        ?model_id: ::String,
+                        ?model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS"),
+                        ?next_token: ::String,
+                        ?max_results: ::Integer
+                      ) -> _GetModelsResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetModelsResponseSuccess
+
+      interface _GetOutcomesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOutcomesResult]
+        def outcomes: () -> ::Array[Types::Outcome]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_outcomes-instance_method
+      def get_outcomes: (
+                          ?name: ::String,
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _GetOutcomesResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOutcomesResponseSuccess
+
+      interface _GetRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRulesResult]
+        def rule_details: () -> ::Array[Types::RuleDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_rules-instance_method
+      def get_rules: (
+                       ?rule_id: ::String,
+                       detector_id: ::String,
+                       ?rule_version: ::String,
+                       ?next_token: ::String,
+                       ?max_results: ::Integer
+                     ) -> _GetRulesResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRulesResponseSuccess
+
+      interface _GetVariablesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVariablesResult]
+        def variables: () -> ::Array[Types::Variable]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#get_variables-instance_method
+      def get_variables: (
+                           ?name: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _GetVariablesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVariablesResponseSuccess
+
+      interface _ListEventPredictionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventPredictionsResult]
+        def event_prediction_summaries: () -> ::Array[Types::EventPredictionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#list_event_predictions-instance_method
+      def list_event_predictions: (
+                                    ?event_id: {
+                                      value: ::String?
+                                    },
+                                    ?event_type: {
+                                      value: ::String?
+                                    },
+                                    ?detector_id: {
+                                      value: ::String?
+                                    },
+                                    ?detector_version_id: {
+                                      value: ::String?
+                                    },
+                                    ?prediction_time_range: {
+                                      start_time: ::String,
+                                      end_time: ::String
+                                    },
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListEventPredictionsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventPredictionsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResult]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutDetectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutDetectorResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#put_detector-instance_method
+      def put_detector: (
+                          detector_id: ::String,
+                          ?description: ::String,
+                          event_type_name: ::String,
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _PutDetectorResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDetectorResponseSuccess
+
+      interface _PutEntityTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEntityTypeResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#put_entity_type-instance_method
+      def put_entity_type: (
+                             name: ::String,
+                             ?description: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _PutEntityTypeResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEntityTypeResponseSuccess
+
+      interface _PutEventTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutEventTypeResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#put_event_type-instance_method
+      def put_event_type: (
+                            name: ::String,
+                            ?description: ::String,
+                            event_variables: Array[::String],
+                            ?labels: Array[::String],
+                            entity_types: Array[::String],
+                            ?event_ingestion: ("ENABLED" | "DISABLED"),
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ],
+                            ?event_orchestration: {
+                              event_bridge_enabled: bool
+                            }
+                          ) -> _PutEventTypeResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEventTypeResponseSuccess
+
+      interface _PutExternalModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutExternalModelResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#put_external_model-instance_method
+      def put_external_model: (
+                                model_endpoint: ::String,
+                                model_source: ("SAGEMAKER"),
+                                invoke_model_endpoint_role_arn: ::String,
+                                input_configuration: {
+                                  event_type_name: ::String?,
+                                  format: ("TEXT_CSV" | "APPLICATION_JSON")?,
+                                  use_event_variables: bool,
+                                  json_input_template: ::String?,
+                                  csv_input_template: ::String?
+                                },
+                                output_configuration: {
+                                  format: ("TEXT_CSV" | "APPLICATION_JSONLINES"),
+                                  json_key_to_variable_map: Hash[::String, ::String]?,
+                                  csv_index_to_variable_map: Hash[::String, ::String]?
+                                },
+                                model_endpoint_status: ("ASSOCIATED" | "DISSOCIATED"),
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ]
+                              ) -> _PutExternalModelResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutExternalModelResponseSuccess
+
+      interface _PutKMSEncryptionKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutKMSEncryptionKeyResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#put_kms_encryption_key-instance_method
+      def put_kms_encryption_key: (
+                                    kms_encryption_key_arn: ::String
+                                  ) -> _PutKMSEncryptionKeyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutKMSEncryptionKeyResponseSuccess
+
+      interface _PutLabelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutLabelResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#put_label-instance_method
+      def put_label: (
+                       name: ::String,
+                       ?description: ::String,
+                       ?tags: Array[
+                         {
+                           key: ::String,
+                           value: ::String
+                         },
+                       ]
+                     ) -> _PutLabelResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLabelResponseSuccess
+
+      interface _PutOutcomeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutOutcomeResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#put_outcome-instance_method
+      def put_outcome: (
+                         name: ::String,
+                         ?description: ::String,
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> _PutOutcomeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutOutcomeResponseSuccess
+
+      interface _SendEventResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SendEventResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#send_event-instance_method
+      def send_event: (
+                        event_id: ::String,
+                        event_type_name: ::String,
+                        event_timestamp: ::String,
+                        event_variables: Hash[::String, ::String],
+                        ?assigned_label: ::String,
+                        ?label_timestamp: ::String,
+                        entities: Array[
+                          {
+                            entity_type: ::String,
+                            entity_id: ::String
+                          },
+                        ]
+                      ) -> _SendEventResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendEventResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateDetectorVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDetectorVersionResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#update_detector_version-instance_method
+      def update_detector_version: (
+                                     detector_id: ::String,
+                                     detector_version_id: ::String,
+                                     external_model_endpoints: Array[::String],
+                                     rules: Array[
+                                       {
+                                         detector_id: ::String,
+                                         rule_id: ::String,
+                                         rule_version: ::String
+                                       },
+                                     ],
+                                     ?description: ::String,
+                                     ?model_versions: Array[
+                                       {
+                                         model_id: ::String,
+                                         model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS"),
+                                         model_version_number: ::String,
+                                         arn: ::String?
+                                       },
+                                     ],
+                                     ?rule_execution_mode: ("ALL_MATCHED" | "FIRST_MATCHED")
+                                   ) -> _UpdateDetectorVersionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDetectorVersionResponseSuccess
+
+      interface _UpdateDetectorVersionMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDetectorVersionMetadataResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#update_detector_version_metadata-instance_method
+      def update_detector_version_metadata: (
+                                              detector_id: ::String,
+                                              detector_version_id: ::String,
+                                              description: ::String
+                                            ) -> _UpdateDetectorVersionMetadataResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDetectorVersionMetadataResponseSuccess
+
+      interface _UpdateDetectorVersionStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDetectorVersionStatusResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#update_detector_version_status-instance_method
+      def update_detector_version_status: (
+                                            detector_id: ::String,
+                                            detector_version_id: ::String,
+                                            status: ("DRAFT" | "ACTIVE" | "INACTIVE")
+                                          ) -> _UpdateDetectorVersionStatusResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDetectorVersionStatusResponseSuccess
+
+      interface _UpdateEventLabelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEventLabelResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#update_event_label-instance_method
+      def update_event_label: (
+                                event_id: ::String,
+                                event_type_name: ::String,
+                                assigned_label: ::String,
+                                label_timestamp: ::String
+                              ) -> _UpdateEventLabelResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventLabelResponseSuccess
+
+      interface _UpdateListResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateListResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#update_list-instance_method
+      def update_list: (
+                         name: ::String,
+                         ?elements: Array[::String],
+                         ?description: ::String,
+                         ?update_mode: ("REPLACE" | "APPEND" | "REMOVE"),
+                         ?variable_type: ::String
+                       ) -> _UpdateListResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateListResponseSuccess
+
+      interface _UpdateModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateModelResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#update_model-instance_method
+      def update_model: (
+                          model_id: ::String,
+                          model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS"),
+                          ?description: ::String
+                        ) -> _UpdateModelResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateModelResponseSuccess
+
+      interface _UpdateModelVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateModelVersionResult]
+        def model_id: () -> ::String
+        def model_type: () -> ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS")
+        def model_version_number: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#update_model_version-instance_method
+      def update_model_version: (
+                                  model_id: ::String,
+                                  model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS"),
+                                  major_version_number: ::String,
+                                  ?external_events_detail: {
+                                    data_location: ::String,
+                                    data_access_role_arn: ::String
+                                  },
+                                  ?ingested_events_detail: {
+                                    ingested_events_time_window: {
+                                      start_time: ::String,
+                                      end_time: ::String
+                                    }
+                                  },
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    },
+                                  ]
+                                ) -> _UpdateModelVersionResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateModelVersionResponseSuccess
+
+      interface _UpdateModelVersionStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateModelVersionStatusResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#update_model_version_status-instance_method
+      def update_model_version_status: (
+                                         model_id: ::String,
+                                         model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS"),
+                                         model_version_number: ::String,
+                                         status: ("ACTIVE" | "INACTIVE" | "TRAINING_CANCELLED")
+                                       ) -> _UpdateModelVersionStatusResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateModelVersionStatusResponseSuccess
+
+      interface _UpdateRuleMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRuleMetadataResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#update_rule_metadata-instance_method
+      def update_rule_metadata: (
+                                  rule: {
+                                    detector_id: ::String,
+                                    rule_id: ::String,
+                                    rule_version: ::String
+                                  },
+                                  description: ::String
+                                ) -> _UpdateRuleMetadataResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuleMetadataResponseSuccess
+
+      interface _UpdateRuleVersionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRuleVersionResult]
+        def rule: () -> Types::Rule
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#update_rule_version-instance_method
+      def update_rule_version: (
+                                 rule: {
+                                   detector_id: ::String,
+                                   rule_id: ::String,
+                                   rule_version: ::String
+                                 },
+                                 ?description: ::String,
+                                 expression: ::String,
+                                 language: ("DETECTORPL"),
+                                 outcomes: Array[::String],
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String
+                                   },
+                                 ]
+                               ) -> _UpdateRuleVersionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuleVersionResponseSuccess
+
+      interface _UpdateVariableResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVariableResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FraudDetector/Client.html#update_variable-instance_method
+      def update_variable: (
+                             name: ::String,
+                             ?default_value: ::String,
+                             ?description: ::String,
+                             ?variable_type: ::String
+                           ) -> _UpdateVariableResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVariableResponseSuccess
+    end
+  end
+end
+

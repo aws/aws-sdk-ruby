@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::MigrationHubStrategyRecommendations
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::MigrationHubStrategyRecommendations
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::MigrationHubStrategyRecommendations
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::MigrationHubStrategyRecommendations
     #   @option options [Aws::MigrationHubStrategyRecommendations::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::MigrationHubStrategyRecommendations::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -856,6 +881,57 @@ module Aws::MigrationHubStrategyRecommendations
       req.send_request(options)
     end
 
+    # Retrieves a list of all the servers fetched from customer vCenter
+    # using Strategy Recommendation Collector.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to include in the response. The maximum
+    #   value is 100.
+    #
+    # @option params [String] :next_token
+    #   The token from a previous call that you use to retrieve the next set
+    #   of results. For example, if a previous call to this action returned
+    #   100 items, but you set maxResults to 10. You'll receive a set of 10
+    #   results along with a token. You then use the returned token to
+    #   retrieve the next set of 10.
+    #
+    # @option params [String] :sort
+    #   Specifies whether to sort by ascending (ASC) or descending (DESC)
+    #   order.
+    #
+    # @return [Types::ListAnalyzableServersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAnalyzableServersResponse#analyzable_servers #analyzable_servers} => Array&lt;Types::AnalyzableServerSummary&gt;
+    #   * {Types::ListAnalyzableServersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_analyzable_servers({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     sort: "ASC", # accepts ASC, DESC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analyzable_servers #=> Array
+    #   resp.analyzable_servers[0].hostname #=> String
+    #   resp.analyzable_servers[0].ip_address #=> String
+    #   resp.analyzable_servers[0].source #=> String
+    #   resp.analyzable_servers[0].vm_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/ListAnalyzableServers AWS API Documentation
+    #
+    # @overload list_analyzable_servers(params = {})
+    # @param [Hash] params ({})
+    def list_analyzable_servers(params = {}, options = {})
+      req = build_request(:list_analyzable_servers, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of all the application components (processes).
     #
     # @option params [String] :application_component_criteria
@@ -1246,6 +1322,9 @@ module Aws::MigrationHubStrategyRecommendations
 
     # Starts the assessment of an on-premises environment.
     #
+    # @option params [String] :assessment_data_source_type
+    #   The data source type of an assessment to be started.
+    #
     # @option params [Array<Types::AssessmentTarget>] :assessment_targets
     #   List of criteria for assessment.
     #
@@ -1264,6 +1343,7 @@ module Aws::MigrationHubStrategyRecommendations
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_assessment({
+    #     assessment_data_source_type: "StrategyRecommendationsApplicationDataCollector", # accepts StrategyRecommendationsApplicationDataCollector, ManualImport, ApplicationDiscoveryService
     #     assessment_targets: [
     #       {
     #         condition: "EQUALS", # required, accepts EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS
@@ -1322,7 +1402,7 @@ module Aws::MigrationHubStrategyRecommendations
     #
     #   resp = client.start_import_file_task({
     #     s3_bucket: "importS3Bucket", # required
-    #     data_source_type: "ApplicationDiscoveryService", # accepts ApplicationDiscoveryService, MPA, Import
+    #     data_source_type: "ApplicationDiscoveryService", # accepts ApplicationDiscoveryService, MPA, Import, StrategyRecommendationsApplicationDataCollector
     #     group_id: [
     #       {
     #         name: "ExternalId", # accepts ExternalId, ExternalSourceType
@@ -1517,7 +1597,7 @@ module Aws::MigrationHubStrategyRecommendations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhubstrategyrecommendations'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

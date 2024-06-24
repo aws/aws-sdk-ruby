@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2024-06-18)
+------------------
+
+* Feature - Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
+1.69.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.68.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.66.0 (2024-03-07)
+------------------
+
+* Feature - Doc-only update for change to EKS-Anywhere ordering.
+
+1.65.0 (2024-01-29)
+------------------
+
+* Feature - Modified description of createaddress to include direction to add path when providing a JSON file.
+
+1.64.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.63.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.61.0 (2023-09-27)
 ------------------
 

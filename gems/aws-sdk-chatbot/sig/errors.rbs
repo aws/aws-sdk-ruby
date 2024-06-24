@@ -1,0 +1,78 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Chatbot
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ConflictException < ::Aws::Errors::ServiceError
+      end
+      class CreateChimeWebhookConfigurationException < ::Aws::Errors::ServiceError
+      end
+      class CreateSlackChannelConfigurationException < ::Aws::Errors::ServiceError
+      end
+      class CreateTeamsChannelConfigurationException < ::Aws::Errors::ServiceError
+      end
+      class DeleteChimeWebhookConfigurationException < ::Aws::Errors::ServiceError
+      end
+      class DeleteMicrosoftTeamsUserIdentityException < ::Aws::Errors::ServiceError
+      end
+      class DeleteSlackChannelConfigurationException < ::Aws::Errors::ServiceError
+      end
+      class DeleteSlackUserIdentityException < ::Aws::Errors::ServiceError
+      end
+      class DeleteSlackWorkspaceAuthorizationFault < ::Aws::Errors::ServiceError
+      end
+      class DeleteTeamsChannelConfigurationException < ::Aws::Errors::ServiceError
+      end
+      class DeleteTeamsConfiguredTeamException < ::Aws::Errors::ServiceError
+      end
+      class DescribeChimeWebhookConfigurationsException < ::Aws::Errors::ServiceError
+      end
+      class DescribeSlackChannelConfigurationsException < ::Aws::Errors::ServiceError
+      end
+      class DescribeSlackUserIdentitiesException < ::Aws::Errors::ServiceError
+      end
+      class DescribeSlackWorkspacesException < ::Aws::Errors::ServiceError
+      end
+      class GetAccountPreferencesException < ::Aws::Errors::ServiceError
+      end
+      class GetTeamsChannelConfigurationException < ::Aws::Errors::ServiceError
+      end
+      class InternalServiceError < ::Aws::Errors::ServiceError
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+      end
+      class InvalidRequestException < ::Aws::Errors::ServiceError
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+      end
+      class ListMicrosoftTeamsConfiguredTeamsException < ::Aws::Errors::ServiceError
+      end
+      class ListMicrosoftTeamsUserIdentitiesException < ::Aws::Errors::ServiceError
+      end
+      class ListTeamsChannelConfigurationsException < ::Aws::Errors::ServiceError
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+      end
+      class UpdateAccountPreferencesException < ::Aws::Errors::ServiceError
+      end
+      class UpdateChimeWebhookConfigurationException < ::Aws::Errors::ServiceError
+      end
+      class UpdateSlackChannelConfigurationException < ::Aws::Errors::ServiceError
+      end
+      class UpdateTeamsChannelConfigurationException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

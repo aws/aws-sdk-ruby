@@ -238,6 +238,34 @@ module Aws::TimestreamQuery
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/DescribeAccountSettingsRequest AWS API Documentation
+    #
+    class DescribeAccountSettingsRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] max_query_tcu
+    #   The maximum number of [Timestream compute units][1] (TCUs) the
+    #   service will use at any point in time to serve your queries.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/tcu.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_pricing_model
+    #   The pricing model for queries in your account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/DescribeAccountSettingsResponse AWS API Documentation
+    #
+    class DescribeAccountSettingsResponse < Struct.new(
+      :max_query_tcu,
+      :query_pricing_model)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/DescribeEndpointsRequest AWS API Documentation
     #
     class DescribeEndpointsRequest < Aws::EmptyStructure; end
@@ -390,6 +418,10 @@ module Aws::TimestreamQuery
     #   Bytes metered for a single scheduled query run.
     #   @return [Integer]
     #
+    # @!attribute [rw] cumulative_bytes_scanned
+    #   Bytes scanned for a single scheduled query run.
+    #   @return [Integer]
+    #
     # @!attribute [rw] records_ingested
     #   The number of records ingested for a single scheduled query run.
     #   @return [Integer]
@@ -405,13 +437,14 @@ module Aws::TimestreamQuery
       :execution_time_in_millis,
       :data_writes,
       :bytes_metered,
+      :cumulative_bytes_scanned,
       :records_ingested,
       :query_result_rows)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Timestream was unable to fully process this request because of an
+    # The service was unable to fully process this request because of an
     # internal server error.
     #
     # @!attribute [rw] message
@@ -1394,7 +1427,12 @@ module Aws::TimestreamQuery
     #
     # @!attribute [rw] scalar_type
     #   Indicates if the column is of type string, integer, Boolean, double,
-    #   timestamp, date, time.
+    #   timestamp, date, time. For more information, see [Supported data
+    #   types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/supported-data-types.html
     #   @return [String]
     #
     # @!attribute [rw] array_column_info
@@ -1442,6 +1480,53 @@ module Aws::TimestreamQuery
     # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] max_query_tcu
+    #   The maximum number of compute units the service will use at any
+    #   point in time to serve your queries. To run queries, you must set a
+    #   minimum capacity of 4 TCU. You can set the maximum number of TCU in
+    #   multiples of 4, for example, 4, 8, 16, 32, and so on.
+    #
+    #   The maximum value supported for `MaxQueryTCU` is 1000. To request an
+    #   increase to this soft limit, contact Amazon Web Services Support.
+    #   For information about the default quota for maxQueryTCU, see
+    #   [Default quotas][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.default
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_pricing_model
+    #   The pricing model for queries in an account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/UpdateAccountSettingsRequest AWS API Documentation
+    #
+    class UpdateAccountSettingsRequest < Struct.new(
+      :max_query_tcu,
+      :query_pricing_model)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_query_tcu
+    #   The configured maximum number of compute units the service will use
+    #   at any point in time to serve your queries.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] query_pricing_model
+    #   The pricing model for an account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-query-2018-11-01/UpdateAccountSettingsResponse AWS API Documentation
+    #
+    class UpdateAccountSettingsResponse < Struct.new(
+      :max_query_tcu,
+      :query_pricing_model)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] scheduled_query_arn
     #   ARN of the scheuled query.

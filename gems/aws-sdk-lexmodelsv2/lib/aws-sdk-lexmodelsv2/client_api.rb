@@ -124,6 +124,7 @@ module Aws::LexModelsV2
     AnalyticsUtteranceResult = Shapes::StructureShape.new(name: 'AnalyticsUtteranceResult')
     AnalyticsUtteranceResults = Shapes::ListShape.new(name: 'AnalyticsUtteranceResults')
     AnalyticsUtteranceSortByName = Shapes::StringShape.new(name: 'AnalyticsUtteranceSortByName')
+    AnswerField = Shapes::StringShape.new(name: 'AnswerField')
     AssociatedTranscript = Shapes::StructureShape.new(name: 'AssociatedTranscript')
     AssociatedTranscriptFilter = Shapes::StructureShape.new(name: 'AssociatedTranscriptFilter')
     AssociatedTranscriptFilterName = Shapes::StringShape.new(name: 'AssociatedTranscriptFilterName')
@@ -144,6 +145,10 @@ module Aws::LexModelsV2
     BatchDeleteCustomVocabularyItemResponse = Shapes::StructureShape.new(name: 'BatchDeleteCustomVocabularyItemResponse')
     BatchUpdateCustomVocabularyItemRequest = Shapes::StructureShape.new(name: 'BatchUpdateCustomVocabularyItemRequest')
     BatchUpdateCustomVocabularyItemResponse = Shapes::StructureShape.new(name: 'BatchUpdateCustomVocabularyItemResponse')
+    BedrockKnowledgeBaseArn = Shapes::StringShape.new(name: 'BedrockKnowledgeBaseArn')
+    BedrockKnowledgeStoreConfiguration = Shapes::StructureShape.new(name: 'BedrockKnowledgeStoreConfiguration')
+    BedrockModelArn = Shapes::StringShape.new(name: 'BedrockModelArn')
+    BedrockModelSpecification = Shapes::StructureShape.new(name: 'BedrockModelSpecification')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BotAliasHistoryEvent = Shapes::StructureShape.new(name: 'BotAliasHistoryEvent')
     BotAliasHistoryEventsList = Shapes::ListShape.new(name: 'BotAliasHistoryEventsList')
@@ -151,6 +156,9 @@ module Aws::LexModelsV2
     BotAliasLocaleSettings = Shapes::StructureShape.new(name: 'BotAliasLocaleSettings')
     BotAliasLocaleSettingsMap = Shapes::MapShape.new(name: 'BotAliasLocaleSettingsMap')
     BotAliasName = Shapes::StringShape.new(name: 'BotAliasName')
+    BotAliasReplicaSummary = Shapes::StructureShape.new(name: 'BotAliasReplicaSummary')
+    BotAliasReplicaSummaryList = Shapes::ListShape.new(name: 'BotAliasReplicaSummaryList')
+    BotAliasReplicationStatus = Shapes::StringShape.new(name: 'BotAliasReplicationStatus')
     BotAliasStatus = Shapes::StringShape.new(name: 'BotAliasStatus')
     BotAliasSummary = Shapes::StructureShape.new(name: 'BotAliasSummary')
     BotAliasSummaryList = Shapes::ListShape.new(name: 'BotAliasSummaryList')
@@ -182,6 +190,9 @@ module Aws::LexModelsV2
     BotRecommendationStatus = Shapes::StringShape.new(name: 'BotRecommendationStatus')
     BotRecommendationSummary = Shapes::StructureShape.new(name: 'BotRecommendationSummary')
     BotRecommendationSummaryList = Shapes::ListShape.new(name: 'BotRecommendationSummaryList')
+    BotReplicaStatus = Shapes::StringShape.new(name: 'BotReplicaStatus')
+    BotReplicaSummary = Shapes::StructureShape.new(name: 'BotReplicaSummary')
+    BotReplicaSummaryList = Shapes::ListShape.new(name: 'BotReplicaSummaryList')
     BotSortAttribute = Shapes::StringShape.new(name: 'BotSortAttribute')
     BotSortBy = Shapes::StructureShape.new(name: 'BotSortBy')
     BotStatus = Shapes::StringShape.new(name: 'BotStatus')
@@ -191,6 +202,11 @@ module Aws::LexModelsV2
     BotVersion = Shapes::StringShape.new(name: 'BotVersion')
     BotVersionLocaleDetails = Shapes::StructureShape.new(name: 'BotVersionLocaleDetails')
     BotVersionLocaleSpecification = Shapes::MapShape.new(name: 'BotVersionLocaleSpecification')
+    BotVersionReplicaSortAttribute = Shapes::StringShape.new(name: 'BotVersionReplicaSortAttribute')
+    BotVersionReplicaSortBy = Shapes::StructureShape.new(name: 'BotVersionReplicaSortBy')
+    BotVersionReplicaSummary = Shapes::StructureShape.new(name: 'BotVersionReplicaSummary')
+    BotVersionReplicaSummaryList = Shapes::ListShape.new(name: 'BotVersionReplicaSummaryList')
+    BotVersionReplicationStatus = Shapes::StringShape.new(name: 'BotVersionReplicationStatus')
     BotVersionSortAttribute = Shapes::StringShape.new(name: 'BotVersionSortAttribute')
     BotVersionSortBy = Shapes::StructureShape.new(name: 'BotVersionSortBy')
     BotVersionSummary = Shapes::StructureShape.new(name: 'BotVersionSummary')
@@ -198,6 +214,7 @@ module Aws::LexModelsV2
     BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     BuildBotLocaleRequest = Shapes::StructureShape.new(name: 'BuildBotLocaleRequest')
     BuildBotLocaleResponse = Shapes::StructureShape.new(name: 'BuildBotLocaleResponse')
+    BuildtimeSettings = Shapes::StructureShape.new(name: 'BuildtimeSettings')
     BuiltInIntentSortAttribute = Shapes::StringShape.new(name: 'BuiltInIntentSortAttribute')
     BuiltInIntentSortBy = Shapes::StructureShape.new(name: 'BuiltInIntentSortBy')
     BuiltInIntentSummary = Shapes::StructureShape.new(name: 'BuiltInIntentSummary')
@@ -251,6 +268,8 @@ module Aws::LexModelsV2
     CreateBotAliasResponse = Shapes::StructureShape.new(name: 'CreateBotAliasResponse')
     CreateBotLocaleRequest = Shapes::StructureShape.new(name: 'CreateBotLocaleRequest')
     CreateBotLocaleResponse = Shapes::StructureShape.new(name: 'CreateBotLocaleResponse')
+    CreateBotReplicaRequest = Shapes::StructureShape.new(name: 'CreateBotReplicaRequest')
+    CreateBotReplicaResponse = Shapes::StructureShape.new(name: 'CreateBotReplicaResponse')
     CreateBotRequest = Shapes::StructureShape.new(name: 'CreateBotRequest')
     CreateBotResponse = Shapes::StructureShape.new(name: 'CreateBotResponse')
     CreateBotVersionRequest = Shapes::StructureShape.new(name: 'CreateBotVersionRequest')
@@ -283,12 +302,15 @@ module Aws::LexModelsV2
     DTMFCharacter = Shapes::StringShape.new(name: 'DTMFCharacter')
     DTMFSpecification = Shapes::StructureShape.new(name: 'DTMFSpecification')
     DataPrivacy = Shapes::StructureShape.new(name: 'DataPrivacy')
+    DataSourceConfiguration = Shapes::StructureShape.new(name: 'DataSourceConfiguration')
     DateRangeFilter = Shapes::StructureShape.new(name: 'DateRangeFilter')
     DefaultConditionalBranch = Shapes::StructureShape.new(name: 'DefaultConditionalBranch')
     DeleteBotAliasRequest = Shapes::StructureShape.new(name: 'DeleteBotAliasRequest')
     DeleteBotAliasResponse = Shapes::StructureShape.new(name: 'DeleteBotAliasResponse')
     DeleteBotLocaleRequest = Shapes::StructureShape.new(name: 'DeleteBotLocaleRequest')
     DeleteBotLocaleResponse = Shapes::StructureShape.new(name: 'DeleteBotLocaleResponse')
+    DeleteBotReplicaRequest = Shapes::StructureShape.new(name: 'DeleteBotReplicaRequest')
+    DeleteBotReplicaResponse = Shapes::StructureShape.new(name: 'DeleteBotReplicaResponse')
     DeleteBotRequest = Shapes::StructureShape.new(name: 'DeleteBotRequest')
     DeleteBotResponse = Shapes::StructureShape.new(name: 'DeleteBotResponse')
     DeleteBotVersionRequest = Shapes::StructureShape.new(name: 'DeleteBotVersionRequest')
@@ -316,7 +338,11 @@ module Aws::LexModelsV2
     DescribeBotLocaleResponse = Shapes::StructureShape.new(name: 'DescribeBotLocaleResponse')
     DescribeBotRecommendationRequest = Shapes::StructureShape.new(name: 'DescribeBotRecommendationRequest')
     DescribeBotRecommendationResponse = Shapes::StructureShape.new(name: 'DescribeBotRecommendationResponse')
+    DescribeBotReplicaRequest = Shapes::StructureShape.new(name: 'DescribeBotReplicaRequest')
+    DescribeBotReplicaResponse = Shapes::StructureShape.new(name: 'DescribeBotReplicaResponse')
     DescribeBotRequest = Shapes::StructureShape.new(name: 'DescribeBotRequest')
+    DescribeBotResourceGenerationRequest = Shapes::StructureShape.new(name: 'DescribeBotResourceGenerationRequest')
+    DescribeBotResourceGenerationResponse = Shapes::StructureShape.new(name: 'DescribeBotResourceGenerationResponse')
     DescribeBotResponse = Shapes::StructureShape.new(name: 'DescribeBotResponse')
     DescribeBotVersionRequest = Shapes::StructureShape.new(name: 'DescribeBotVersionRequest')
     DescribeBotVersionResponse = Shapes::StructureShape.new(name: 'DescribeBotVersionResponse')
@@ -343,17 +369,21 @@ module Aws::LexModelsV2
     DescribeTestSetRequest = Shapes::StructureShape.new(name: 'DescribeTestSetRequest')
     DescribeTestSetResponse = Shapes::StructureShape.new(name: 'DescribeTestSetResponse')
     Description = Shapes::StringShape.new(name: 'Description')
+    DescriptiveBotBuilderSpecification = Shapes::StructureShape.new(name: 'DescriptiveBotBuilderSpecification')
     DialogAction = Shapes::StructureShape.new(name: 'DialogAction')
     DialogActionType = Shapes::StringShape.new(name: 'DialogActionType')
     DialogCodeHookInvocationSetting = Shapes::StructureShape.new(name: 'DialogCodeHookInvocationSetting')
     DialogCodeHookSettings = Shapes::StructureShape.new(name: 'DialogCodeHookSettings')
     DialogState = Shapes::StructureShape.new(name: 'DialogState')
+    DomainEndpoint = Shapes::StringShape.new(name: 'DomainEndpoint')
     DraftBotVersion = Shapes::StringShape.new(name: 'DraftBotVersion')
     Effect = Shapes::StringShape.new(name: 'Effect')
     ElicitationCodeHookInvocationSetting = Shapes::StructureShape.new(name: 'ElicitationCodeHookInvocationSetting')
+    Enabled = Shapes::BooleanShape.new(name: 'Enabled')
     EncryptionSetting = Shapes::StructureShape.new(name: 'EncryptionSetting')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExactResponseFields = Shapes::StructureShape.new(name: 'ExactResponseFields')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     ExecutionErrorDetails = Shapes::StructureShape.new(name: 'ExecutionErrorDetails')
     ExportFilter = Shapes::StructureShape.new(name: 'ExportFilter')
@@ -381,6 +411,15 @@ module Aws::LexModelsV2
     FulfillmentUpdateResponseFrequency = Shapes::IntegerShape.new(name: 'FulfillmentUpdateResponseFrequency')
     FulfillmentUpdateResponseSpecification = Shapes::StructureShape.new(name: 'FulfillmentUpdateResponseSpecification')
     FulfillmentUpdatesSpecification = Shapes::StructureShape.new(name: 'FulfillmentUpdatesSpecification')
+    GenerateBotElementRequest = Shapes::StructureShape.new(name: 'GenerateBotElementRequest')
+    GenerateBotElementResponse = Shapes::StructureShape.new(name: 'GenerateBotElementResponse')
+    GenerationInput = Shapes::StringShape.new(name: 'GenerationInput')
+    GenerationSortBy = Shapes::StructureShape.new(name: 'GenerationSortBy')
+    GenerationSortByAttribute = Shapes::StringShape.new(name: 'GenerationSortByAttribute')
+    GenerationStatus = Shapes::StringShape.new(name: 'GenerationStatus')
+    GenerationSummary = Shapes::StructureShape.new(name: 'GenerationSummary')
+    GenerationSummaryList = Shapes::ListShape.new(name: 'GenerationSummaryList')
+    GenerativeAISettings = Shapes::StructureShape.new(name: 'GenerativeAISettings')
     GetTestExecutionArtifactsUrlRequest = Shapes::StructureShape.new(name: 'GetTestExecutionArtifactsUrlRequest')
     GetTestExecutionArtifactsUrlResponse = Shapes::StructureShape.new(name: 'GetTestExecutionArtifactsUrlResponse')
     GrammarSlotTypeSetting = Shapes::StructureShape.new(name: 'GrammarSlotTypeSetting')
@@ -402,6 +441,7 @@ module Aws::LexModelsV2
     ImportSummary = Shapes::StructureShape.new(name: 'ImportSummary')
     ImportSummaryList = Shapes::ListShape.new(name: 'ImportSummaryList')
     ImportedResourceId = Shapes::StringShape.new(name: 'ImportedResourceId')
+    IncludeField = Shapes::StringShape.new(name: 'IncludeField')
     InitialResponseSetting = Shapes::StructureShape.new(name: 'InitialResponseSetting')
     InputContext = Shapes::StructureShape.new(name: 'InputContext')
     InputContextsList = Shapes::ListShape.new(name: 'InputContextsList')
@@ -439,12 +479,20 @@ module Aws::LexModelsV2
     LexTranscriptFilter = Shapes::StructureShape.new(name: 'LexTranscriptFilter')
     ListAggregatedUtterancesRequest = Shapes::StructureShape.new(name: 'ListAggregatedUtterancesRequest')
     ListAggregatedUtterancesResponse = Shapes::StructureShape.new(name: 'ListAggregatedUtterancesResponse')
+    ListBotAliasReplicasRequest = Shapes::StructureShape.new(name: 'ListBotAliasReplicasRequest')
+    ListBotAliasReplicasResponse = Shapes::StructureShape.new(name: 'ListBotAliasReplicasResponse')
     ListBotAliasesRequest = Shapes::StructureShape.new(name: 'ListBotAliasesRequest')
     ListBotAliasesResponse = Shapes::StructureShape.new(name: 'ListBotAliasesResponse')
     ListBotLocalesRequest = Shapes::StructureShape.new(name: 'ListBotLocalesRequest')
     ListBotLocalesResponse = Shapes::StructureShape.new(name: 'ListBotLocalesResponse')
     ListBotRecommendationsRequest = Shapes::StructureShape.new(name: 'ListBotRecommendationsRequest')
     ListBotRecommendationsResponse = Shapes::StructureShape.new(name: 'ListBotRecommendationsResponse')
+    ListBotReplicasRequest = Shapes::StructureShape.new(name: 'ListBotReplicasRequest')
+    ListBotReplicasResponse = Shapes::StructureShape.new(name: 'ListBotReplicasResponse')
+    ListBotResourceGenerationsRequest = Shapes::StructureShape.new(name: 'ListBotResourceGenerationsRequest')
+    ListBotResourceGenerationsResponse = Shapes::StructureShape.new(name: 'ListBotResourceGenerationsResponse')
+    ListBotVersionReplicasRequest = Shapes::StructureShape.new(name: 'ListBotVersionReplicasRequest')
+    ListBotVersionReplicasResponse = Shapes::StructureShape.new(name: 'ListBotVersionReplicasResponse')
     ListBotVersionsRequest = Shapes::StructureShape.new(name: 'ListBotVersionsRequest')
     ListBotVersionsResponse = Shapes::StructureShape.new(name: 'ListBotVersionsResponse')
     ListBotsRequest = Shapes::StructureShape.new(name: 'ListBotsRequest')
@@ -510,10 +558,13 @@ module Aws::LexModelsV2
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     NumericalBotVersion = Shapes::StringShape.new(name: 'NumericalBotVersion')
+    OSIncludeFields = Shapes::ListShape.new(name: 'OSIncludeFields')
+    OSIndexName = Shapes::StringShape.new(name: 'OSIndexName')
     ObfuscationSetting = Shapes::StructureShape.new(name: 'ObfuscationSetting')
     ObfuscationSettingType = Shapes::StringShape.new(name: 'ObfuscationSettingType')
     ObjectPrefix = Shapes::StringShape.new(name: 'ObjectPrefix')
     ObjectPrefixes = Shapes::ListShape.new(name: 'ObjectPrefixes')
+    OpensearchConfiguration = Shapes::StructureShape.new(name: 'OpensearchConfiguration')
     Operation = Shapes::StringShape.new(name: 'Operation')
     OperationList = Shapes::ListShape.new(name: 'OperationList')
     OutputContext = Shapes::StructureShape.new(name: 'OutputContext')
@@ -541,7 +592,10 @@ module Aws::LexModelsV2
     PromptAttemptsSpecificationMap = Shapes::MapShape.new(name: 'PromptAttemptsSpecificationMap')
     PromptMaxRetries = Shapes::IntegerShape.new(name: 'PromptMaxRetries')
     PromptSpecification = Shapes::StructureShape.new(name: 'PromptSpecification')
+    QnAIntentConfiguration = Shapes::StructureShape.new(name: 'QnAIntentConfiguration')
+    QnAKendraConfiguration = Shapes::StructureShape.new(name: 'QnAKendraConfiguration')
     QueryFilterString = Shapes::StringShape.new(name: 'QueryFilterString')
+    QuestionField = Shapes::StringShape.new(name: 'QuestionField')
     RecommendedAction = Shapes::StringShape.new(name: 'RecommendedAction')
     RecommendedActions = Shapes::ListShape.new(name: 'RecommendedActions')
     RecommendedIntentSummary = Shapes::StructureShape.new(name: 'RecommendedIntentSummary')
@@ -549,6 +603,7 @@ module Aws::LexModelsV2
     RecordNumber = Shapes::IntegerShape.new(name: 'RecordNumber')
     RegexPattern = Shapes::StringShape.new(name: 'RegexPattern')
     RelativeAggregationDuration = Shapes::StructureShape.new(name: 'RelativeAggregationDuration')
+    ReplicaRegion = Shapes::StringShape.new(name: 'ReplicaRegion')
     ResourceCount = Shapes::IntegerShape.new(name: 'ResourceCount')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResponseSpecification = Shapes::StructureShape.new(name: 'ResponseSpecification')
@@ -560,6 +615,7 @@ module Aws::LexModelsV2
     RuntimeHintValue = Shapes::StructureShape.new(name: 'RuntimeHintValue')
     RuntimeHintValuesList = Shapes::ListShape.new(name: 'RuntimeHintValuesList')
     RuntimeHints = Shapes::StructureShape.new(name: 'RuntimeHints')
+    RuntimeSettings = Shapes::StructureShape.new(name: 'RuntimeSettings')
     S3BucketArn = Shapes::StringShape.new(name: 'S3BucketArn')
     S3BucketLogDestination = Shapes::StructureShape.new(name: 'S3BucketLogDestination')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
@@ -568,6 +624,7 @@ module Aws::LexModelsV2
     SSMLMessage = Shapes::StructureShape.new(name: 'SSMLMessage')
     SSMLMessageValue = Shapes::StringShape.new(name: 'SSMLMessageValue')
     SampleUtterance = Shapes::StructureShape.new(name: 'SampleUtterance')
+    SampleUtteranceGenerationSpecification = Shapes::StructureShape.new(name: 'SampleUtteranceGenerationSpecification')
     SampleUtterancesCount = Shapes::IntegerShape.new(name: 'SampleUtterancesCount')
     SampleUtterancesList = Shapes::ListShape.new(name: 'SampleUtterancesList')
     SampleValue = Shapes::StructureShape.new(name: 'SampleValue')
@@ -597,6 +654,9 @@ module Aws::LexModelsV2
     SlotHintsSlotMap = Shapes::MapShape.new(name: 'SlotHintsSlotMap')
     SlotPrioritiesList = Shapes::ListShape.new(name: 'SlotPrioritiesList')
     SlotPriority = Shapes::StructureShape.new(name: 'SlotPriority')
+    SlotResolutionImprovementSpecification = Shapes::StructureShape.new(name: 'SlotResolutionImprovementSpecification')
+    SlotResolutionSetting = Shapes::StructureShape.new(name: 'SlotResolutionSetting')
+    SlotResolutionStrategy = Shapes::StringShape.new(name: 'SlotResolutionStrategy')
     SlotResolutionTestResultItem = Shapes::StructureShape.new(name: 'SlotResolutionTestResultItem')
     SlotResolutionTestResultItemCounts = Shapes::StructureShape.new(name: 'SlotResolutionTestResultItemCounts')
     SlotResolutionTestResultItems = Shapes::ListShape.new(name: 'SlotResolutionTestResultItems')
@@ -630,6 +690,8 @@ module Aws::LexModelsV2
     Specifications = Shapes::StructureShape.new(name: 'Specifications')
     StartBotRecommendationRequest = Shapes::StructureShape.new(name: 'StartBotRecommendationRequest')
     StartBotRecommendationResponse = Shapes::StructureShape.new(name: 'StartBotRecommendationResponse')
+    StartBotResourceGenerationRequest = Shapes::StructureShape.new(name: 'StartBotResourceGenerationRequest')
+    StartBotResourceGenerationResponse = Shapes::StructureShape.new(name: 'StartBotResourceGenerationResponse')
     StartImportRequest = Shapes::StructureShape.new(name: 'StartImportRequest')
     StartImportResponse = Shapes::StructureShape.new(name: 'StartImportResponse')
     StartTestExecutionRequest = Shapes::StructureShape.new(name: 'StartTestExecutionRequest')
@@ -1026,6 +1088,7 @@ module Aws::LexModelsV2
 
     AudioLogSetting.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     AudioLogSetting.add_member(:destination, Shapes::ShapeRef.new(shape: AudioLogDestination, required: true, location_name: "destination"))
+    AudioLogSetting.add_member(:selective_logging_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "selectiveLoggingEnabled"))
     AudioLogSetting.struct_class = Types::AudioLogSetting
 
     AudioLogSettingsList.member = Shapes::ShapeRef.new(shape: AudioLogSetting)
@@ -1073,6 +1136,12 @@ module Aws::LexModelsV2
     BatchUpdateCustomVocabularyItemResponse.add_member(:resources, Shapes::ShapeRef.new(shape: CustomVocabularyItems, location_name: "resources"))
     BatchUpdateCustomVocabularyItemResponse.struct_class = Types::BatchUpdateCustomVocabularyItemResponse
 
+    BedrockKnowledgeStoreConfiguration.add_member(:bedrock_knowledge_base_arn, Shapes::ShapeRef.new(shape: BedrockKnowledgeBaseArn, required: true, location_name: "bedrockKnowledgeBaseArn"))
+    BedrockKnowledgeStoreConfiguration.struct_class = Types::BedrockKnowledgeStoreConfiguration
+
+    BedrockModelSpecification.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockModelArn, required: true, location_name: "modelArn"))
+    BedrockModelSpecification.struct_class = Types::BedrockModelSpecification
+
     BotAliasHistoryEvent.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
     BotAliasHistoryEvent.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startDate"))
     BotAliasHistoryEvent.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endDate"))
@@ -1086,6 +1155,16 @@ module Aws::LexModelsV2
 
     BotAliasLocaleSettingsMap.key = Shapes::ShapeRef.new(shape: LocaleId)
     BotAliasLocaleSettingsMap.value = Shapes::ShapeRef.new(shape: BotAliasLocaleSettings)
+
+    BotAliasReplicaSummary.add_member(:bot_alias_id, Shapes::ShapeRef.new(shape: BotAliasId, location_name: "botAliasId"))
+    BotAliasReplicaSummary.add_member(:bot_alias_replication_status, Shapes::ShapeRef.new(shape: BotAliasReplicationStatus, location_name: "botAliasReplicationStatus"))
+    BotAliasReplicaSummary.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
+    BotAliasReplicaSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    BotAliasReplicaSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    BotAliasReplicaSummary.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
+    BotAliasReplicaSummary.struct_class = Types::BotAliasReplicaSummary
+
+    BotAliasReplicaSummaryList.member = Shapes::ShapeRef.new(shape: BotAliasReplicaSummary)
 
     BotAliasSummary.add_member(:bot_alias_id, Shapes::ShapeRef.new(shape: BotAliasId, location_name: "botAliasId"))
     BotAliasSummary.add_member(:bot_alias_name, Shapes::ShapeRef.new(shape: Name, location_name: "botAliasName"))
@@ -1187,6 +1266,14 @@ module Aws::LexModelsV2
 
     BotRecommendationSummaryList.member = Shapes::ShapeRef.new(shape: BotRecommendationSummary)
 
+    BotReplicaSummary.add_member(:replica_region, Shapes::ShapeRef.new(shape: ReplicaRegion, location_name: "replicaRegion"))
+    BotReplicaSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    BotReplicaSummary.add_member(:bot_replica_status, Shapes::ShapeRef.new(shape: BotReplicaStatus, location_name: "botReplicaStatus"))
+    BotReplicaSummary.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
+    BotReplicaSummary.struct_class = Types::BotReplicaSummary
+
+    BotReplicaSummaryList.member = Shapes::ShapeRef.new(shape: BotReplicaSummary)
+
     BotSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: BotSortAttribute, required: true, location_name: "attribute"))
     BotSortBy.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "order"))
     BotSortBy.struct_class = Types::BotSortBy
@@ -1207,6 +1294,18 @@ module Aws::LexModelsV2
 
     BotVersionLocaleSpecification.key = Shapes::ShapeRef.new(shape: LocaleId)
     BotVersionLocaleSpecification.value = Shapes::ShapeRef.new(shape: BotVersionLocaleDetails)
+
+    BotVersionReplicaSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: BotVersionReplicaSortAttribute, required: true, location_name: "attribute"))
+    BotVersionReplicaSortBy.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "order"))
+    BotVersionReplicaSortBy.struct_class = Types::BotVersionReplicaSortBy
+
+    BotVersionReplicaSummary.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
+    BotVersionReplicaSummary.add_member(:bot_version_replication_status, Shapes::ShapeRef.new(shape: BotVersionReplicationStatus, location_name: "botVersionReplicationStatus"))
+    BotVersionReplicaSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    BotVersionReplicaSummary.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
+    BotVersionReplicaSummary.struct_class = Types::BotVersionReplicaSummary
+
+    BotVersionReplicaSummaryList.member = Shapes::ShapeRef.new(shape: BotVersionReplicaSummary)
 
     BotVersionSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: BotVersionSortAttribute, required: true, location_name: "attribute"))
     BotVersionSortBy.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "order"))
@@ -1232,6 +1331,10 @@ module Aws::LexModelsV2
     BuildBotLocaleResponse.add_member(:bot_locale_status, Shapes::ShapeRef.new(shape: BotLocaleStatus, location_name: "botLocaleStatus"))
     BuildBotLocaleResponse.add_member(:last_build_submitted_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastBuildSubmittedDateTime"))
     BuildBotLocaleResponse.struct_class = Types::BuildBotLocaleResponse
+
+    BuildtimeSettings.add_member(:descriptive_bot_builder, Shapes::ShapeRef.new(shape: DescriptiveBotBuilderSpecification, location_name: "descriptiveBotBuilder"))
+    BuildtimeSettings.add_member(:sample_utterance_generation, Shapes::ShapeRef.new(shape: SampleUtteranceGenerationSpecification, location_name: "sampleUtteranceGeneration"))
+    BuildtimeSettings.struct_class = Types::BuildtimeSettings
 
     BuiltInIntentSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: BuiltInIntentSortAttribute, required: true, location_name: "attribute"))
     BuiltInIntentSortBy.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "order"))
@@ -1370,6 +1473,7 @@ module Aws::LexModelsV2
     CreateBotLocaleRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreateBotLocaleRequest.add_member(:nlu_intent_confidence_threshold, Shapes::ShapeRef.new(shape: ConfidenceThreshold, required: true, location_name: "nluIntentConfidenceThreshold"))
     CreateBotLocaleRequest.add_member(:voice_settings, Shapes::ShapeRef.new(shape: VoiceSettings, location_name: "voiceSettings"))
+    CreateBotLocaleRequest.add_member(:generative_ai_settings, Shapes::ShapeRef.new(shape: GenerativeAISettings, location_name: "generativeAISettings"))
     CreateBotLocaleRequest.struct_class = Types::CreateBotLocaleRequest
 
     CreateBotLocaleResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
@@ -1381,7 +1485,19 @@ module Aws::LexModelsV2
     CreateBotLocaleResponse.add_member(:voice_settings, Shapes::ShapeRef.new(shape: VoiceSettings, location_name: "voiceSettings"))
     CreateBotLocaleResponse.add_member(:bot_locale_status, Shapes::ShapeRef.new(shape: BotLocaleStatus, location_name: "botLocaleStatus"))
     CreateBotLocaleResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    CreateBotLocaleResponse.add_member(:generative_ai_settings, Shapes::ShapeRef.new(shape: GenerativeAISettings, location_name: "generativeAISettings"))
     CreateBotLocaleResponse.struct_class = Types::CreateBotLocaleResponse
+
+    CreateBotReplicaRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    CreateBotReplicaRequest.add_member(:replica_region, Shapes::ShapeRef.new(shape: ReplicaRegion, required: true, location_name: "replicaRegion"))
+    CreateBotReplicaRequest.struct_class = Types::CreateBotReplicaRequest
+
+    CreateBotReplicaResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    CreateBotReplicaResponse.add_member(:replica_region, Shapes::ShapeRef.new(shape: ReplicaRegion, location_name: "replicaRegion"))
+    CreateBotReplicaResponse.add_member(:source_region, Shapes::ShapeRef.new(shape: ReplicaRegion, location_name: "sourceRegion"))
+    CreateBotReplicaResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    CreateBotReplicaResponse.add_member(:bot_replica_status, Shapes::ShapeRef.new(shape: BotReplicaStatus, location_name: "botReplicaStatus"))
+    CreateBotReplicaResponse.struct_class = Types::CreateBotReplicaResponse
 
     CreateBotRequest.add_member(:bot_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "botName"))
     CreateBotRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
@@ -1450,6 +1566,7 @@ module Aws::LexModelsV2
     CreateIntentRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
     CreateIntentRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
     CreateIntentRequest.add_member(:initial_response_setting, Shapes::ShapeRef.new(shape: InitialResponseSetting, location_name: "initialResponseSetting"))
+    CreateIntentRequest.add_member(:qn_a_intent_configuration, Shapes::ShapeRef.new(shape: QnAIntentConfiguration, location_name: "qnAIntentConfiguration"))
     CreateIntentRequest.struct_class = Types::CreateIntentRequest
 
     CreateIntentResponse.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, location_name: "intentId"))
@@ -1469,6 +1586,7 @@ module Aws::LexModelsV2
     CreateIntentResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
     CreateIntentResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     CreateIntentResponse.add_member(:initial_response_setting, Shapes::ShapeRef.new(shape: InitialResponseSetting, location_name: "initialResponseSetting"))
+    CreateIntentResponse.add_member(:qn_a_intent_configuration, Shapes::ShapeRef.new(shape: QnAIntentConfiguration, location_name: "qnAIntentConfiguration"))
     CreateIntentResponse.struct_class = Types::CreateIntentResponse
 
     CreateResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
@@ -1595,6 +1713,11 @@ module Aws::LexModelsV2
     DataPrivacy.add_member(:child_directed, Shapes::ShapeRef.new(shape: ChildDirected, required: true, location_name: "childDirected"))
     DataPrivacy.struct_class = Types::DataPrivacy
 
+    DataSourceConfiguration.add_member(:opensearch_configuration, Shapes::ShapeRef.new(shape: OpensearchConfiguration, location_name: "opensearchConfiguration"))
+    DataSourceConfiguration.add_member(:kendra_configuration, Shapes::ShapeRef.new(shape: QnAKendraConfiguration, location_name: "kendraConfiguration"))
+    DataSourceConfiguration.add_member(:bedrock_knowledge_store_configuration, Shapes::ShapeRef.new(shape: BedrockKnowledgeStoreConfiguration, location_name: "bedrockKnowledgeStoreConfiguration"))
+    DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
+
     DateRangeFilter.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDateTime"))
     DateRangeFilter.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endDateTime"))
     DateRangeFilter.struct_class = Types::DateRangeFilter
@@ -1623,6 +1746,15 @@ module Aws::LexModelsV2
     DeleteBotLocaleResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
     DeleteBotLocaleResponse.add_member(:bot_locale_status, Shapes::ShapeRef.new(shape: BotLocaleStatus, location_name: "botLocaleStatus"))
     DeleteBotLocaleResponse.struct_class = Types::DeleteBotLocaleResponse
+
+    DeleteBotReplicaRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    DeleteBotReplicaRequest.add_member(:replica_region, Shapes::ShapeRef.new(shape: ReplicaRegion, required: true, location: "uri", location_name: "replicaRegion"))
+    DeleteBotReplicaRequest.struct_class = Types::DeleteBotReplicaRequest
+
+    DeleteBotReplicaResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    DeleteBotReplicaResponse.add_member(:replica_region, Shapes::ShapeRef.new(shape: ReplicaRegion, location_name: "replicaRegion"))
+    DeleteBotReplicaResponse.add_member(:bot_replica_status, Shapes::ShapeRef.new(shape: BotReplicaStatus, location_name: "botReplicaStatus"))
+    DeleteBotReplicaResponse.struct_class = Types::DeleteBotReplicaResponse
 
     DeleteBotRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     DeleteBotRequest.add_member(:skip_resource_in_use_check, Shapes::ShapeRef.new(shape: SkipResourceInUseCheck, location: "querystring", location_name: "skipResourceInUseCheck"))
@@ -1756,6 +1888,7 @@ module Aws::LexModelsV2
     DescribeBotLocaleResponse.add_member(:last_build_submitted_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastBuildSubmittedDateTime"))
     DescribeBotLocaleResponse.add_member(:bot_locale_history_events, Shapes::ShapeRef.new(shape: BotLocaleHistoryEventsList, location_name: "botLocaleHistoryEvents"))
     DescribeBotLocaleResponse.add_member(:recommended_actions, Shapes::ShapeRef.new(shape: RecommendedActions, location_name: "recommendedActions"))
+    DescribeBotLocaleResponse.add_member(:generative_ai_settings, Shapes::ShapeRef.new(shape: GenerativeAISettings, location_name: "generativeAISettings"))
     DescribeBotLocaleResponse.struct_class = Types::DescribeBotLocaleResponse
 
     DescribeBotRecommendationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
@@ -1777,8 +1910,39 @@ module Aws::LexModelsV2
     DescribeBotRecommendationResponse.add_member(:bot_recommendation_results, Shapes::ShapeRef.new(shape: BotRecommendationResults, location_name: "botRecommendationResults"))
     DescribeBotRecommendationResponse.struct_class = Types::DescribeBotRecommendationResponse
 
+    DescribeBotReplicaRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    DescribeBotReplicaRequest.add_member(:replica_region, Shapes::ShapeRef.new(shape: ReplicaRegion, required: true, location: "uri", location_name: "replicaRegion"))
+    DescribeBotReplicaRequest.struct_class = Types::DescribeBotReplicaRequest
+
+    DescribeBotReplicaResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    DescribeBotReplicaResponse.add_member(:replica_region, Shapes::ShapeRef.new(shape: ReplicaRegion, location_name: "replicaRegion"))
+    DescribeBotReplicaResponse.add_member(:source_region, Shapes::ShapeRef.new(shape: ReplicaRegion, location_name: "sourceRegion"))
+    DescribeBotReplicaResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    DescribeBotReplicaResponse.add_member(:bot_replica_status, Shapes::ShapeRef.new(shape: BotReplicaStatus, location_name: "botReplicaStatus"))
+    DescribeBotReplicaResponse.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
+    DescribeBotReplicaResponse.struct_class = Types::DescribeBotReplicaResponse
+
     DescribeBotRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     DescribeBotRequest.struct_class = Types::DescribeBotRequest
+
+    DescribeBotResourceGenerationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    DescribeBotResourceGenerationRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location: "uri", location_name: "botVersion"))
+    DescribeBotResourceGenerationRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
+    DescribeBotResourceGenerationRequest.add_member(:generation_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "generationId"))
+    DescribeBotResourceGenerationRequest.struct_class = Types::DescribeBotResourceGenerationRequest
+
+    DescribeBotResourceGenerationResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    DescribeBotResourceGenerationResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
+    DescribeBotResourceGenerationResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
+    DescribeBotResourceGenerationResponse.add_member(:generation_id, Shapes::ShapeRef.new(shape: Id, location_name: "generationId"))
+    DescribeBotResourceGenerationResponse.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))
+    DescribeBotResourceGenerationResponse.add_member(:generation_status, Shapes::ShapeRef.new(shape: GenerationStatus, location_name: "generationStatus"))
+    DescribeBotResourceGenerationResponse.add_member(:generation_input_prompt, Shapes::ShapeRef.new(shape: GenerationInput, location_name: "generationInputPrompt"))
+    DescribeBotResourceGenerationResponse.add_member(:generated_bot_locale_url, Shapes::ShapeRef.new(shape: PresignedS3Url, location_name: "generatedBotLocaleUrl"))
+    DescribeBotResourceGenerationResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    DescribeBotResourceGenerationResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockModelArn, location_name: "modelArn"))
+    DescribeBotResourceGenerationResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    DescribeBotResourceGenerationResponse.struct_class = Types::DescribeBotResourceGenerationResponse
 
     DescribeBotResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
     DescribeBotResponse.add_member(:bot_name, Shapes::ShapeRef.new(shape: Name, location_name: "botName"))
@@ -1878,6 +2042,7 @@ module Aws::LexModelsV2
     DescribeIntentResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     DescribeIntentResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
     DescribeIntentResponse.add_member(:initial_response_setting, Shapes::ShapeRef.new(shape: InitialResponseSetting, location_name: "initialResponseSetting"))
+    DescribeIntentResponse.add_member(:qn_a_intent_configuration, Shapes::ShapeRef.new(shape: QnAIntentConfiguration, location_name: "qnAIntentConfiguration"))
     DescribeIntentResponse.struct_class = Types::DescribeIntentResponse
 
     DescribeResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
@@ -1992,6 +2157,10 @@ module Aws::LexModelsV2
     DescribeTestSetResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
     DescribeTestSetResponse.struct_class = Types::DescribeTestSetResponse
 
+    DescriptiveBotBuilderSpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    DescriptiveBotBuilderSpecification.add_member(:bedrock_model_specification, Shapes::ShapeRef.new(shape: BedrockModelSpecification, location_name: "bedrockModelSpecification"))
+    DescriptiveBotBuilderSpecification.struct_class = Types::DescriptiveBotBuilderSpecification
+
     DialogAction.add_member(:type, Shapes::ShapeRef.new(shape: DialogActionType, required: true, location_name: "type"))
     DialogAction.add_member(:slot_to_elicit, Shapes::ShapeRef.new(shape: Name, location_name: "slotToElicit"))
     DialogAction.add_member(:suppress_next_message, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "suppressNextMessage"))
@@ -2019,6 +2188,10 @@ module Aws::LexModelsV2
     EncryptionSetting.add_member(:bot_locale_export_password, Shapes::ShapeRef.new(shape: FilePassword, location_name: "botLocaleExportPassword"))
     EncryptionSetting.add_member(:associated_transcripts_password, Shapes::ShapeRef.new(shape: FilePassword, location_name: "associatedTranscriptsPassword"))
     EncryptionSetting.struct_class = Types::EncryptionSetting
+
+    ExactResponseFields.add_member(:question_field, Shapes::ShapeRef.new(shape: QuestionField, required: true, location_name: "questionField"))
+    ExactResponseFields.add_member(:answer_field, Shapes::ShapeRef.new(shape: AnswerField, required: true, location_name: "answerField"))
+    ExactResponseFields.struct_class = Types::ExactResponseFields
 
     ExecutionErrorDetails.add_member(:error_code, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "errorCode"))
     ExecutionErrorDetails.add_member(:error_message, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "errorMessage"))
@@ -2086,6 +2259,35 @@ module Aws::LexModelsV2
     FulfillmentUpdatesSpecification.add_member(:update_response, Shapes::ShapeRef.new(shape: FulfillmentUpdateResponseSpecification, location_name: "updateResponse"))
     FulfillmentUpdatesSpecification.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: FulfillmentTimeout, location_name: "timeoutInSeconds"))
     FulfillmentUpdatesSpecification.struct_class = Types::FulfillmentUpdatesSpecification
+
+    GenerateBotElementRequest.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "intentId"))
+    GenerateBotElementRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    GenerateBotElementRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location: "uri", location_name: "botVersion"))
+    GenerateBotElementRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
+    GenerateBotElementRequest.struct_class = Types::GenerateBotElementRequest
+
+    GenerateBotElementResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    GenerateBotElementResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, location_name: "botVersion"))
+    GenerateBotElementResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
+    GenerateBotElementResponse.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, location_name: "intentId"))
+    GenerateBotElementResponse.add_member(:sample_utterances, Shapes::ShapeRef.new(shape: SampleUtterancesList, location_name: "sampleUtterances"))
+    GenerateBotElementResponse.struct_class = Types::GenerateBotElementResponse
+
+    GenerationSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: GenerationSortByAttribute, required: true, location_name: "attribute"))
+    GenerationSortBy.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "order"))
+    GenerationSortBy.struct_class = Types::GenerationSortBy
+
+    GenerationSummary.add_member(:generation_id, Shapes::ShapeRef.new(shape: Id, location_name: "generationId"))
+    GenerationSummary.add_member(:generation_status, Shapes::ShapeRef.new(shape: GenerationStatus, location_name: "generationStatus"))
+    GenerationSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    GenerationSummary.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
+    GenerationSummary.struct_class = Types::GenerationSummary
+
+    GenerationSummaryList.member = Shapes::ShapeRef.new(shape: GenerationSummary)
+
+    GenerativeAISettings.add_member(:runtime_settings, Shapes::ShapeRef.new(shape: RuntimeSettings, location_name: "runtimeSettings"))
+    GenerativeAISettings.add_member(:buildtime_settings, Shapes::ShapeRef.new(shape: BuildtimeSettings, location_name: "buildtimeSettings"))
+    GenerativeAISettings.struct_class = Types::GenerativeAISettings
 
     GetTestExecutionArtifactsUrlRequest.add_member(:test_execution_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "testExecutionId"))
     GetTestExecutionArtifactsUrlRequest.struct_class = Types::GetTestExecutionArtifactsUrlRequest
@@ -2271,6 +2473,19 @@ module Aws::LexModelsV2
     ListAggregatedUtterancesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListAggregatedUtterancesResponse.struct_class = Types::ListAggregatedUtterancesResponse
 
+    ListBotAliasReplicasRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    ListBotAliasReplicasRequest.add_member(:replica_region, Shapes::ShapeRef.new(shape: ReplicaRegion, required: true, location: "uri", location_name: "replicaRegion"))
+    ListBotAliasReplicasRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListBotAliasReplicasRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBotAliasReplicasRequest.struct_class = Types::ListBotAliasReplicasRequest
+
+    ListBotAliasReplicasResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListBotAliasReplicasResponse.add_member(:source_region, Shapes::ShapeRef.new(shape: ReplicaRegion, location_name: "sourceRegion"))
+    ListBotAliasReplicasResponse.add_member(:replica_region, Shapes::ShapeRef.new(shape: ReplicaRegion, location_name: "replicaRegion"))
+    ListBotAliasReplicasResponse.add_member(:bot_alias_replica_summaries, Shapes::ShapeRef.new(shape: BotAliasReplicaSummaryList, location_name: "botAliasReplicaSummaries"))
+    ListBotAliasReplicasResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBotAliasReplicasResponse.struct_class = Types::ListBotAliasReplicasResponse
+
     ListBotAliasesRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     ListBotAliasesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListBotAliasesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -2308,6 +2523,43 @@ module Aws::LexModelsV2
     ListBotRecommendationsResponse.add_member(:bot_recommendation_summaries, Shapes::ShapeRef.new(shape: BotRecommendationSummaryList, location_name: "botRecommendationSummaries"))
     ListBotRecommendationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListBotRecommendationsResponse.struct_class = Types::ListBotRecommendationsResponse
+
+    ListBotReplicasRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    ListBotReplicasRequest.struct_class = Types::ListBotReplicasRequest
+
+    ListBotReplicasResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListBotReplicasResponse.add_member(:source_region, Shapes::ShapeRef.new(shape: ReplicaRegion, location_name: "sourceRegion"))
+    ListBotReplicasResponse.add_member(:bot_replica_summaries, Shapes::ShapeRef.new(shape: BotReplicaSummaryList, location_name: "botReplicaSummaries"))
+    ListBotReplicasResponse.struct_class = Types::ListBotReplicasResponse
+
+    ListBotResourceGenerationsRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    ListBotResourceGenerationsRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location: "uri", location_name: "botVersion"))
+    ListBotResourceGenerationsRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
+    ListBotResourceGenerationsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: GenerationSortBy, location_name: "sortBy"))
+    ListBotResourceGenerationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListBotResourceGenerationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBotResourceGenerationsRequest.struct_class = Types::ListBotResourceGenerationsRequest
+
+    ListBotResourceGenerationsResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListBotResourceGenerationsResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
+    ListBotResourceGenerationsResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
+    ListBotResourceGenerationsResponse.add_member(:generation_summaries, Shapes::ShapeRef.new(shape: GenerationSummaryList, location_name: "generationSummaries"))
+    ListBotResourceGenerationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBotResourceGenerationsResponse.struct_class = Types::ListBotResourceGenerationsResponse
+
+    ListBotVersionReplicasRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    ListBotVersionReplicasRequest.add_member(:replica_region, Shapes::ShapeRef.new(shape: ReplicaRegion, required: true, location: "uri", location_name: "replicaRegion"))
+    ListBotVersionReplicasRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListBotVersionReplicasRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBotVersionReplicasRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: BotVersionReplicaSortBy, location_name: "sortBy"))
+    ListBotVersionReplicasRequest.struct_class = Types::ListBotVersionReplicasRequest
+
+    ListBotVersionReplicasResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    ListBotVersionReplicasResponse.add_member(:source_region, Shapes::ShapeRef.new(shape: ReplicaRegion, location_name: "sourceRegion"))
+    ListBotVersionReplicasResponse.add_member(:replica_region, Shapes::ShapeRef.new(shape: ReplicaRegion, location_name: "replicaRegion"))
+    ListBotVersionReplicasResponse.add_member(:bot_version_replica_summaries, Shapes::ShapeRef.new(shape: BotVersionReplicaSummaryList, location_name: "botVersionReplicaSummaries"))
+    ListBotVersionReplicasResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListBotVersionReplicasResponse.struct_class = Types::ListBotVersionReplicasResponse
 
     ListBotVersionsRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
     ListBotVersionsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: BotVersionSortBy, location_name: "sortBy"))
@@ -2632,10 +2884,19 @@ module Aws::LexModelsV2
     NewCustomVocabularyItem.add_member(:display_as, Shapes::ShapeRef.new(shape: Phrase, location_name: "displayAs"))
     NewCustomVocabularyItem.struct_class = Types::NewCustomVocabularyItem
 
+    OSIncludeFields.member = Shapes::ShapeRef.new(shape: IncludeField)
+
     ObfuscationSetting.add_member(:obfuscation_setting_type, Shapes::ShapeRef.new(shape: ObfuscationSettingType, required: true, location_name: "obfuscationSettingType"))
     ObfuscationSetting.struct_class = Types::ObfuscationSetting
 
     ObjectPrefixes.member = Shapes::ShapeRef.new(shape: ObjectPrefix)
+
+    OpensearchConfiguration.add_member(:domain_endpoint, Shapes::ShapeRef.new(shape: DomainEndpoint, required: true, location_name: "domainEndpoint"))
+    OpensearchConfiguration.add_member(:index_name, Shapes::ShapeRef.new(shape: OSIndexName, required: true, location_name: "indexName"))
+    OpensearchConfiguration.add_member(:exact_response, Shapes::ShapeRef.new(shape: Boolean, location_name: "exactResponse"))
+    OpensearchConfiguration.add_member(:exact_response_fields, Shapes::ShapeRef.new(shape: ExactResponseFields, location_name: "exactResponseFields"))
+    OpensearchConfiguration.add_member(:include_fields, Shapes::ShapeRef.new(shape: OSIncludeFields, location_name: "includeFields"))
+    OpensearchConfiguration.struct_class = Types::OpensearchConfiguration
 
     OperationList.member = Shapes::ShapeRef.new(shape: Operation)
 
@@ -2716,6 +2977,16 @@ module Aws::LexModelsV2
     PromptSpecification.add_member(:prompt_attempts_specification, Shapes::ShapeRef.new(shape: PromptAttemptsSpecificationMap, location_name: "promptAttemptsSpecification"))
     PromptSpecification.struct_class = Types::PromptSpecification
 
+    QnAIntentConfiguration.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, location_name: "dataSourceConfiguration"))
+    QnAIntentConfiguration.add_member(:bedrock_model_configuration, Shapes::ShapeRef.new(shape: BedrockModelSpecification, location_name: "bedrockModelConfiguration"))
+    QnAIntentConfiguration.struct_class = Types::QnAIntentConfiguration
+
+    QnAKendraConfiguration.add_member(:kendra_index, Shapes::ShapeRef.new(shape: KendraIndexArn, required: true, location_name: "kendraIndex"))
+    QnAKendraConfiguration.add_member(:query_filter_string_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "queryFilterStringEnabled"))
+    QnAKendraConfiguration.add_member(:query_filter_string, Shapes::ShapeRef.new(shape: QueryFilterString, location_name: "queryFilterString"))
+    QnAKendraConfiguration.add_member(:exact_response, Shapes::ShapeRef.new(shape: Boolean, location_name: "exactResponse"))
+    QnAKendraConfiguration.struct_class = Types::QnAKendraConfiguration
+
     RecommendedActions.member = Shapes::ShapeRef.new(shape: RecommendedAction)
 
     RecommendedIntentSummary.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, location_name: "intentId"))
@@ -2748,6 +3019,9 @@ module Aws::LexModelsV2
     RuntimeHints.add_member(:slot_hints, Shapes::ShapeRef.new(shape: SlotHintsIntentMap, location_name: "slotHints"))
     RuntimeHints.struct_class = Types::RuntimeHints
 
+    RuntimeSettings.add_member(:slot_resolution_improvement, Shapes::ShapeRef.new(shape: SlotResolutionImprovementSpecification, location_name: "slotResolutionImprovement"))
+    RuntimeSettings.struct_class = Types::RuntimeSettings
+
     S3BucketLogDestination.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     S3BucketLogDestination.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, required: true, location_name: "s3BucketArn"))
     S3BucketLogDestination.add_member(:log_prefix, Shapes::ShapeRef.new(shape: LogPrefix, required: true, location_name: "logPrefix"))
@@ -2765,6 +3039,10 @@ module Aws::LexModelsV2
 
     SampleUtterance.add_member(:utterance, Shapes::ShapeRef.new(shape: Utterance, required: true, location_name: "utterance"))
     SampleUtterance.struct_class = Types::SampleUtterance
+
+    SampleUtteranceGenerationSpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
+    SampleUtteranceGenerationSpecification.add_member(:bedrock_model_specification, Shapes::ShapeRef.new(shape: BedrockModelSpecification, location_name: "bedrockModelSpecification"))
+    SampleUtteranceGenerationSpecification.struct_class = Types::SampleUtteranceGenerationSpecification
 
     SampleUtterancesList.member = Shapes::ShapeRef.new(shape: SampleUtterance)
 
@@ -2854,6 +3132,13 @@ module Aws::LexModelsV2
     SlotPriority.add_member(:slot_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "slotId"))
     SlotPriority.struct_class = Types::SlotPriority
 
+    SlotResolutionImprovementSpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, required: true, location_name: "enabled"))
+    SlotResolutionImprovementSpecification.add_member(:bedrock_model_specification, Shapes::ShapeRef.new(shape: BedrockModelSpecification, location_name: "bedrockModelSpecification"))
+    SlotResolutionImprovementSpecification.struct_class = Types::SlotResolutionImprovementSpecification
+
+    SlotResolutionSetting.add_member(:slot_resolution_strategy, Shapes::ShapeRef.new(shape: SlotResolutionStrategy, required: true, location_name: "slotResolutionStrategy"))
+    SlotResolutionSetting.struct_class = Types::SlotResolutionSetting
+
     SlotResolutionTestResultItem.add_member(:slot_name, Shapes::ShapeRef.new(shape: TestResultSlotName, required: true, location_name: "slotName"))
     SlotResolutionTestResultItem.add_member(:result_counts, Shapes::ShapeRef.new(shape: SlotResolutionTestResultItemCounts, required: true, location_name: "resultCounts"))
     SlotResolutionTestResultItem.struct_class = Types::SlotResolutionTestResultItem
@@ -2919,6 +3204,7 @@ module Aws::LexModelsV2
     SlotValueElicitationSetting.add_member(:sample_utterances, Shapes::ShapeRef.new(shape: SampleUtterancesList, location_name: "sampleUtterances"))
     SlotValueElicitationSetting.add_member(:wait_and_continue_specification, Shapes::ShapeRef.new(shape: WaitAndContinueSpecification, location_name: "waitAndContinueSpecification"))
     SlotValueElicitationSetting.add_member(:slot_capture_setting, Shapes::ShapeRef.new(shape: SlotCaptureSetting, location_name: "slotCaptureSetting"))
+    SlotValueElicitationSetting.add_member(:slot_resolution_setting, Shapes::ShapeRef.new(shape: SlotResolutionSetting, location_name: "slotResolutionSetting"))
     SlotValueElicitationSetting.struct_class = Types::SlotValueElicitationSetting
 
     SlotValueOverride.add_member(:shape, Shapes::ShapeRef.new(shape: SlotShape, location_name: "shape"))
@@ -2959,6 +3245,21 @@ module Aws::LexModelsV2
     StartBotRecommendationResponse.add_member(:transcript_source_setting, Shapes::ShapeRef.new(shape: TranscriptSourceSetting, location_name: "transcriptSourceSetting"))
     StartBotRecommendationResponse.add_member(:encryption_setting, Shapes::ShapeRef.new(shape: EncryptionSetting, location_name: "encryptionSetting"))
     StartBotRecommendationResponse.struct_class = Types::StartBotRecommendationResponse
+
+    StartBotResourceGenerationRequest.add_member(:generation_input_prompt, Shapes::ShapeRef.new(shape: GenerationInput, required: true, location_name: "generationInputPrompt"))
+    StartBotResourceGenerationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
+    StartBotResourceGenerationRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, required: true, location: "uri", location_name: "botVersion"))
+    StartBotResourceGenerationRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
+    StartBotResourceGenerationRequest.struct_class = Types::StartBotResourceGenerationRequest
+
+    StartBotResourceGenerationResponse.add_member(:generation_input_prompt, Shapes::ShapeRef.new(shape: GenerationInput, location_name: "generationInputPrompt"))
+    StartBotResourceGenerationResponse.add_member(:generation_id, Shapes::ShapeRef.new(shape: Id, location_name: "generationId"))
+    StartBotResourceGenerationResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
+    StartBotResourceGenerationResponse.add_member(:bot_version, Shapes::ShapeRef.new(shape: BotVersion, location_name: "botVersion"))
+    StartBotResourceGenerationResponse.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, location_name: "localeId"))
+    StartBotResourceGenerationResponse.add_member(:generation_status, Shapes::ShapeRef.new(shape: GenerationStatus, location_name: "generationStatus"))
+    StartBotResourceGenerationResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
+    StartBotResourceGenerationResponse.struct_class = Types::StartBotResourceGenerationResponse
 
     StartImportRequest.add_member(:import_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "importId"))
     StartImportRequest.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ImportResourceSpecification, required: true, location_name: "resourceSpecification"))
@@ -3181,6 +3482,7 @@ module Aws::LexModelsV2
 
     TextLogSetting.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enabled"))
     TextLogSetting.add_member(:destination, Shapes::ShapeRef.new(shape: TextLogDestination, required: true, location_name: "destination"))
+    TextLogSetting.add_member(:selective_logging_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "selectiveLoggingEnabled"))
     TextLogSetting.struct_class = Types::TextLogSetting
 
     TextLogSettingsList.member = Shapes::ShapeRef.new(shape: TextLogSetting)
@@ -3234,6 +3536,7 @@ module Aws::LexModelsV2
     UpdateBotLocaleRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateBotLocaleRequest.add_member(:nlu_intent_confidence_threshold, Shapes::ShapeRef.new(shape: ConfidenceThreshold, required: true, location_name: "nluIntentConfidenceThreshold"))
     UpdateBotLocaleRequest.add_member(:voice_settings, Shapes::ShapeRef.new(shape: VoiceSettings, location_name: "voiceSettings"))
+    UpdateBotLocaleRequest.add_member(:generative_ai_settings, Shapes::ShapeRef.new(shape: GenerativeAISettings, location_name: "generativeAISettings"))
     UpdateBotLocaleRequest.struct_class = Types::UpdateBotLocaleRequest
 
     UpdateBotLocaleResponse.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, location_name: "botId"))
@@ -3248,6 +3551,7 @@ module Aws::LexModelsV2
     UpdateBotLocaleResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     UpdateBotLocaleResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
     UpdateBotLocaleResponse.add_member(:recommended_actions, Shapes::ShapeRef.new(shape: RecommendedActions, location_name: "recommendedActions"))
+    UpdateBotLocaleResponse.add_member(:generative_ai_settings, Shapes::ShapeRef.new(shape: GenerativeAISettings, location_name: "generativeAISettings"))
     UpdateBotLocaleResponse.struct_class = Types::UpdateBotLocaleResponse
 
     UpdateBotRecommendationRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
@@ -3322,6 +3626,7 @@ module Aws::LexModelsV2
     UpdateIntentRequest.add_member(:bot_version, Shapes::ShapeRef.new(shape: DraftBotVersion, required: true, location: "uri", location_name: "botVersion"))
     UpdateIntentRequest.add_member(:locale_id, Shapes::ShapeRef.new(shape: LocaleId, required: true, location: "uri", location_name: "localeId"))
     UpdateIntentRequest.add_member(:initial_response_setting, Shapes::ShapeRef.new(shape: InitialResponseSetting, location_name: "initialResponseSetting"))
+    UpdateIntentRequest.add_member(:qn_a_intent_configuration, Shapes::ShapeRef.new(shape: QnAIntentConfiguration, location_name: "qnAIntentConfiguration"))
     UpdateIntentRequest.struct_class = Types::UpdateIntentRequest
 
     UpdateIntentResponse.add_member(:intent_id, Shapes::ShapeRef.new(shape: Id, location_name: "intentId"))
@@ -3343,6 +3648,7 @@ module Aws::LexModelsV2
     UpdateIntentResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
     UpdateIntentResponse.add_member(:last_updated_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDateTime"))
     UpdateIntentResponse.add_member(:initial_response_setting, Shapes::ShapeRef.new(shape: InitialResponseSetting, location_name: "initialResponseSetting"))
+    UpdateIntentResponse.add_member(:qn_a_intent_configuration, Shapes::ShapeRef.new(shape: QnAIntentConfiguration, location_name: "qnAIntentConfiguration"))
     UpdateIntentResponse.struct_class = Types::UpdateIntentResponse
 
     UpdateResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location: "uri", location_name: "resourceArn"))
@@ -3652,6 +3958,20 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_bot_replica, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateBotReplica"
+        o.http_method = "PUT"
+        o.http_request_uri = "/bots/{botId}/replicas/"
+        o.input = Shapes::ShapeRef.new(shape: CreateBotReplicaRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateBotReplicaResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_bot_version, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateBotVersion"
         o.http_method = "PUT"
@@ -3812,6 +4132,20 @@ module Aws::LexModelsV2
         o.http_request_uri = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/"
         o.input = Shapes::ShapeRef.new(shape: DeleteBotLocaleRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteBotLocaleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_bot_replica, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBotReplica"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/bots/{botId}/replicas/{replicaRegion}/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBotReplicaRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteBotReplicaResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -4016,6 +4350,31 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:describe_bot_replica, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBotReplica"
+        o.http_method = "GET"
+        o.http_request_uri = "/bots/{botId}/replicas/{replicaRegion}/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBotReplicaRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBotReplicaResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:describe_bot_resource_generation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBotResourceGeneration"
+        o.http_method = "GET"
+        o.http_request_uri = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/generations/{generationId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBotResourceGenerationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBotResourceGenerationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:describe_bot_version, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeBotVersion"
         o.http_method = "GET"
@@ -4168,6 +4527,22 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:generate_bot_element, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GenerateBotElement"
+        o.http_method = "POST"
+        o.http_request_uri = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/generate"
+        o.input = Shapes::ShapeRef.new(shape: GenerateBotElementRequest)
+        o.output = Shapes::ShapeRef.new(shape: GenerateBotElementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_test_execution_artifacts_url, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTestExecutionArtifactsUrl"
         o.http_method = "GET"
@@ -4190,6 +4565,24 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_bot_alias_replicas, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBotAliasReplicas"
+        o.http_method = "POST"
+        o.http_request_uri = "/bots/{botId}/replicas/{replicaRegion}/botaliases/"
+        o.input = Shapes::ShapeRef.new(shape: ListBotAliasReplicasRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBotAliasReplicasResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -4245,6 +4638,54 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_bot_replicas, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBotReplicas"
+        o.http_method = "POST"
+        o.http_request_uri = "/bots/{botId}/replicas/"
+        o.input = Shapes::ShapeRef.new(shape: ListBotReplicasRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBotReplicasResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_bot_resource_generations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBotResourceGenerations"
+        o.http_method = "POST"
+        o.http_request_uri = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/generations"
+        o.input = Shapes::ShapeRef.new(shape: ListBotResourceGenerationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBotResourceGenerationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_bot_version_replicas, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBotVersionReplicas"
+        o.http_method = "POST"
+        o.http_request_uri = "/bots/{botId}/replicas/{replicaRegion}/botversions/"
+        o.input = Shapes::ShapeRef.new(shape: ListBotVersionReplicasRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListBotVersionReplicasResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -4688,6 +5129,20 @@ module Aws::LexModelsV2
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:start_bot_resource_generation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartBotResourceGeneration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/startgeneration"
+        o.input = Shapes::ShapeRef.new(shape: StartBotResourceGenerationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartBotResourceGenerationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

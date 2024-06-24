@@ -35,6 +35,10 @@ module Aws::EC2
     end
     alias :volume_id :id
 
+    # <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #  </note>
+    #
     # Information about the volume attachments.
     # @return [Array<Types::VolumeAttachment>]
     def attachments
@@ -59,8 +63,8 @@ module Aws::EC2
       data[:encrypted]
     end
 
-    # The Amazon Resource Name (ARN) of the Key Management Service (KMS) KMS
-    # key that was used to protect the volume encryption key for the volume.
+    # The Amazon Resource Name (ARN) of the KMS key that was used to protect
+    # the volume encryption key for the volume.
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
@@ -112,6 +116,10 @@ module Aws::EC2
       data[:volume_type]
     end
 
+    # <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #  </note>
+    #
     # Indicates whether the volume was created using fast snapshot restore.
     # @return [Boolean]
     def fast_restored
@@ -130,6 +138,10 @@ module Aws::EC2
       data[:throughput]
     end
 
+    # <note markdown="1"> This parameter is not returned by CreateVolume.
+    #
+    #  </note>
+    #
     # Reserved for future use.
     # @return [String]
     def sse_type
@@ -150,7 +162,7 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_volumes(volume_ids: [@id])
       end
       @data = resp.volumes[0]
@@ -267,7 +279,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -294,7 +306,7 @@ module Aws::EC2
     # @return [Types::VolumeAttachment]
     def attach_to_instance(options = {})
       options = options.merge(volume_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.attach_volume(options)
       end
       resp.data
@@ -307,7 +319,7 @@ module Aws::EC2
     #     outpost_arn: "String",
     #     tag_specifications: [
     #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
     #         tags: [
     #           {
     #             key: "String",
@@ -337,11 +349,11 @@ module Aws::EC2
     #     The snapshot must be created on the same Outpost as the volume.
     #
     #   For more information, see [Create local snapshots from volumes on an
-    #   Outpost][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-snapshot
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#create-snapshot
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the snapshot during creation.
     # @option options [Boolean] :dry_run
@@ -352,7 +364,7 @@ module Aws::EC2
     # @return [Snapshot]
     def create_snapshot(options = {})
       options = options.merge(volume_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_snapshot(options)
       end
       Snapshot.new(
@@ -387,7 +399,7 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_tags(options)
       end
       options[:tags].each do |t|
@@ -434,7 +446,7 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_tags(options)
       end
       options[:tags].each do |t|
@@ -462,7 +474,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(volume_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_volume(options)
       end
       resp.data
@@ -485,7 +497,7 @@ module Aws::EC2
     # @return [Types::DescribeVolumeAttributeResult]
     def describe_attribute(options = {})
       options = options.merge(volume_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_volume_attribute(options)
       end
       resp.data
@@ -542,11 +554,7 @@ module Aws::EC2
     # @option options [Integer] :max_results
     #   The maximum number of items to return for this request. To get the
     #   next page of items, make another request with the token returned in
-    #   the output. This value can be between 5 and 1,000; if the value is
-    #   larger than 1,000, only 1,000 results are returned. If this parameter
-    #   is not used, then all items are returned. You cannot specify this
-    #   parameter and the volume IDs parameter in the same request. For more
-    #   information, see [Pagination][1].
+    #   the output. For more information, see [Pagination][1].
     #
     #
     #
@@ -562,7 +570,7 @@ module Aws::EC2
     # @return [Types::DescribeVolumeStatusResult]
     def describe_status(options = {})
       options = Aws::Util.deep_merge(options, volume_ids: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_volume_status(options)
       end
       resp.data
@@ -599,7 +607,7 @@ module Aws::EC2
     # @return [Types::VolumeAttachment]
     def detach_from_instance(options = {})
       options = options.merge(volume_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.detach_volume(options)
       end
       resp.data
@@ -619,7 +627,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def enable_io(options = {})
       options = options.merge(volume_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.enable_volume_io(options)
       end
       resp.data
@@ -645,7 +653,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(volume_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.modify_volume_attribute(options)
       end
       resp.data
@@ -734,7 +742,7 @@ module Aws::EC2
           name: "volume-id",
           values: [@id]
         }])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_snapshots(options)
         end
         resp.each_page do |page|

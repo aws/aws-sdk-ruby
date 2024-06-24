@@ -1,0 +1,1110 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DevOpsGuru
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountHealth
+      attr_accessor account_id: ::String
+      attr_accessor insight: Types::AccountInsightHealth
+      SENSITIVE: []
+    end
+
+    class AccountInsightHealth
+      attr_accessor open_proactive_insights: ::Integer
+      attr_accessor open_reactive_insights: ::Integer
+      SENSITIVE: []
+    end
+
+    class AddNotificationChannelRequest
+      attr_accessor config: Types::NotificationChannelConfig
+      SENSITIVE: []
+    end
+
+    class AddNotificationChannelResponse
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class AmazonCodeGuruProfilerIntegration
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class AnomalousLogGroup
+      attr_accessor log_group_name: ::String
+      attr_accessor impact_start_time: ::Time
+      attr_accessor impact_end_time: ::Time
+      attr_accessor number_of_log_lines_scanned: ::Integer
+      attr_accessor log_anomaly_showcases: ::Array[Types::LogAnomalyShowcase]
+      SENSITIVE: []
+    end
+
+    class AnomalyReportedTimeRange
+      attr_accessor open_time: ::Time
+      attr_accessor close_time: ::Time
+      SENSITIVE: []
+    end
+
+    class AnomalyResource
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class AnomalySourceDetails
+      attr_accessor cloud_watch_metrics: ::Array[Types::CloudWatchMetricsDetail]
+      attr_accessor performance_insights_metrics: ::Array[Types::PerformanceInsightsMetricsDetail]
+      SENSITIVE: []
+    end
+
+    class AnomalySourceMetadata
+      attr_accessor source: ::String
+      attr_accessor source_resource_name: ::String
+      attr_accessor source_resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class AnomalyTimeRange
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CloudFormationCollection
+      attr_accessor stack_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CloudFormationCollectionFilter
+      attr_accessor stack_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CloudFormationCostEstimationResourceCollectionFilter
+      attr_accessor stack_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CloudFormationHealth
+      attr_accessor stack_name: ::String
+      attr_accessor insight: Types::InsightHealth
+      attr_accessor analyzed_resource_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class CloudWatchMetricsDataSummary
+      attr_accessor timestamp_metric_value_pair_list: ::Array[Types::TimestampMetricValuePair]
+      attr_accessor status_code: ("Complete" | "InternalError" | "PartialData")
+      SENSITIVE: []
+    end
+
+    class CloudWatchMetricsDetail
+      attr_accessor metric_name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor dimensions: ::Array[Types::CloudWatchMetricsDimension]
+      attr_accessor stat: ("Sum" | "Average" | "SampleCount" | "Minimum" | "Maximum" | "p99" | "p90" | "p50")
+      attr_accessor unit: ::String
+      attr_accessor period: ::Integer
+      attr_accessor metric_data_summary: Types::CloudWatchMetricsDataSummary
+      SENSITIVE: []
+    end
+
+    class CloudWatchMetricsDimension
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class CostEstimationResourceCollectionFilter
+      attr_accessor cloud_formation: Types::CloudFormationCostEstimationResourceCollectionFilter
+      attr_accessor tags: ::Array[Types::TagCostEstimationResourceCollectionFilter]
+      SENSITIVE: []
+    end
+
+    class CostEstimationTimeRange
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteInsightRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInsightResponse < Aws::EmptyStructure
+    end
+
+    class DescribeAccountHealthRequest < Aws::EmptyStructure
+    end
+
+    class DescribeAccountHealthResponse
+      attr_accessor open_reactive_insights: ::Integer
+      attr_accessor open_proactive_insights: ::Integer
+      attr_accessor metrics_analyzed: ::Integer
+      attr_accessor resource_hours: ::Integer
+      attr_accessor analyzed_resource_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAccountOverviewRequest
+      attr_accessor from_time: ::Time
+      attr_accessor to_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeAccountOverviewResponse
+      attr_accessor reactive_insights: ::Integer
+      attr_accessor proactive_insights: ::Integer
+      attr_accessor mean_time_to_recover_in_milliseconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAnomalyRequest
+      attr_accessor id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAnomalyResponse
+      attr_accessor proactive_anomaly: Types::ProactiveAnomaly
+      attr_accessor reactive_anomaly: Types::ReactiveAnomaly
+      SENSITIVE: []
+    end
+
+    class DescribeEventSourcesConfigRequest < Aws::EmptyStructure
+    end
+
+    class DescribeEventSourcesConfigResponse
+      attr_accessor event_sources: Types::EventSourcesConfig
+      SENSITIVE: []
+    end
+
+    class DescribeFeedbackRequest
+      attr_accessor insight_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFeedbackResponse
+      attr_accessor insight_feedback: Types::InsightFeedback
+      SENSITIVE: []
+    end
+
+    class DescribeInsightRequest
+      attr_accessor id: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInsightResponse
+      attr_accessor proactive_insight: Types::ProactiveInsight
+      attr_accessor reactive_insight: Types::ReactiveInsight
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationHealthRequest
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor organizational_unit_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationHealthResponse
+      attr_accessor open_reactive_insights: ::Integer
+      attr_accessor open_proactive_insights: ::Integer
+      attr_accessor metrics_analyzed: ::Integer
+      attr_accessor resource_hours: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationOverviewRequest
+      attr_accessor from_time: ::Time
+      attr_accessor to_time: ::Time
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor organizational_unit_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationOverviewResponse
+      attr_accessor reactive_insights: ::Integer
+      attr_accessor proactive_insights: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationResourceCollectionHealthRequest
+      attr_accessor organization_resource_collection_type: ("AWS_CLOUD_FORMATION" | "AWS_SERVICE" | "AWS_ACCOUNT" | "AWS_TAGS")
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor organizational_unit_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationResourceCollectionHealthResponse
+      attr_accessor cloud_formation: ::Array[Types::CloudFormationHealth]
+      attr_accessor service: ::Array[Types::ServiceHealth]
+      attr_accessor account: ::Array[Types::AccountHealth]
+      attr_accessor next_token: ::String
+      attr_accessor tags: ::Array[Types::TagHealth]
+      SENSITIVE: []
+    end
+
+    class DescribeResourceCollectionHealthRequest
+      attr_accessor resource_collection_type: ("AWS_CLOUD_FORMATION" | "AWS_SERVICE" | "AWS_TAGS")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourceCollectionHealthResponse
+      attr_accessor cloud_formation: ::Array[Types::CloudFormationHealth]
+      attr_accessor service: ::Array[Types::ServiceHealth]
+      attr_accessor next_token: ::String
+      attr_accessor tags: ::Array[Types::TagHealth]
+      SENSITIVE: []
+    end
+
+    class DescribeServiceIntegrationRequest < Aws::EmptyStructure
+    end
+
+    class DescribeServiceIntegrationResponse
+      attr_accessor service_integration: Types::ServiceIntegrationConfig
+      SENSITIVE: []
+    end
+
+    class EndTimeRange
+      attr_accessor from_time: ::Time
+      attr_accessor to_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Event
+      attr_accessor resource_collection: Types::ResourceCollection
+      attr_accessor id: ::String
+      attr_accessor time: ::Time
+      attr_accessor event_source: ::String
+      attr_accessor name: ::String
+      attr_accessor data_source: ("AWS_CLOUD_TRAIL" | "AWS_CODE_DEPLOY")
+      attr_accessor event_class: ("INFRASTRUCTURE" | "DEPLOYMENT" | "SECURITY_CHANGE" | "CONFIG_CHANGE" | "SCHEMA_CHANGE")
+      attr_accessor resources: ::Array[Types::EventResource]
+      SENSITIVE: []
+    end
+
+    class EventResource
+      attr_accessor type: ::String
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class EventSourcesConfig
+      attr_accessor amazon_code_guru_profiler: Types::AmazonCodeGuruProfilerIntegration
+      SENSITIVE: []
+    end
+
+    class EventTimeRange
+      attr_accessor from_time: ::Time
+      attr_accessor to_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetCostEstimationRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCostEstimationResponse
+      attr_accessor resource_collection: Types::CostEstimationResourceCollectionFilter
+      attr_accessor status: ("ONGOING" | "COMPLETED")
+      attr_accessor costs: ::Array[Types::ServiceResourceCost]
+      attr_accessor time_range: Types::CostEstimationTimeRange
+      attr_accessor total_cost: ::Float
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceCollectionRequest
+      attr_accessor resource_collection_type: ("AWS_CLOUD_FORMATION" | "AWS_SERVICE" | "AWS_TAGS")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceCollectionResponse
+      attr_accessor resource_collection: Types::ResourceCollectionFilter
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class InsightFeedback
+      attr_accessor id: ::String
+      attr_accessor feedback: ("VALID_COLLECTION" | "RECOMMENDATION_USEFUL" | "ALERT_TOO_SENSITIVE" | "DATA_NOISY_ANOMALY" | "DATA_INCORRECT")
+      SENSITIVE: []
+    end
+
+    class InsightHealth
+      attr_accessor open_proactive_insights: ::Integer
+      attr_accessor open_reactive_insights: ::Integer
+      attr_accessor mean_time_to_recover_in_milliseconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class InsightTimeRange
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class KMSServerSideEncryptionIntegration
+      attr_accessor kms_key_id: ::String
+      attr_accessor opt_in_status: ("ENABLED" | "DISABLED")
+      attr_accessor type: ("CUSTOMER_MANAGED_KEY" | "AWS_OWNED_KMS_KEY")
+      SENSITIVE: []
+    end
+
+    class KMSServerSideEncryptionIntegrationConfig
+      attr_accessor kms_key_id: ::String
+      attr_accessor opt_in_status: ("ENABLED" | "DISABLED")
+      attr_accessor type: ("CUSTOMER_MANAGED_KEY" | "AWS_OWNED_KMS_KEY")
+      SENSITIVE: []
+    end
+
+    class ListAnomaliesForInsightFilters
+      attr_accessor service_collection: Types::ServiceCollection
+      SENSITIVE: []
+    end
+
+    class ListAnomaliesForInsightRequest
+      attr_accessor insight_id: ::String
+      attr_accessor start_time_range: Types::StartTimeRange
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor account_id: ::String
+      attr_accessor filters: Types::ListAnomaliesForInsightFilters
+      SENSITIVE: []
+    end
+
+    class ListAnomaliesForInsightResponse
+      attr_accessor proactive_anomalies: ::Array[Types::ProactiveAnomalySummary]
+      attr_accessor reactive_anomalies: ::Array[Types::ReactiveAnomalySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnomalousLogGroupsRequest
+      attr_accessor insight_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnomalousLogGroupsResponse
+      attr_accessor insight_id: ::String
+      attr_accessor anomalous_log_groups: ::Array[Types::AnomalousLogGroup]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventsFilters
+      attr_accessor insight_id: ::String
+      attr_accessor event_time_range: Types::EventTimeRange
+      attr_accessor event_class: ("INFRASTRUCTURE" | "DEPLOYMENT" | "SECURITY_CHANGE" | "CONFIG_CHANGE" | "SCHEMA_CHANGE")
+      attr_accessor event_source: ::String
+      attr_accessor data_source: ("AWS_CLOUD_TRAIL" | "AWS_CODE_DEPLOY")
+      attr_accessor resource_collection: Types::ResourceCollection
+      SENSITIVE: []
+    end
+
+    class ListEventsRequest
+      attr_accessor filters: Types::ListEventsFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListEventsResponse
+      attr_accessor events: ::Array[Types::Event]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInsightsAnyStatusFilter
+      attr_accessor type: ("REACTIVE" | "PROACTIVE")
+      attr_accessor start_time_range: Types::StartTimeRange
+      SENSITIVE: []
+    end
+
+    class ListInsightsClosedStatusFilter
+      attr_accessor type: ("REACTIVE" | "PROACTIVE")
+      attr_accessor end_time_range: Types::EndTimeRange
+      SENSITIVE: []
+    end
+
+    class ListInsightsOngoingStatusFilter
+      attr_accessor type: ("REACTIVE" | "PROACTIVE")
+      SENSITIVE: []
+    end
+
+    class ListInsightsRequest
+      attr_accessor status_filter: Types::ListInsightsStatusFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInsightsResponse
+      attr_accessor proactive_insights: ::Array[Types::ProactiveInsightSummary]
+      attr_accessor reactive_insights: ::Array[Types::ReactiveInsightSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInsightsStatusFilter
+      attr_accessor ongoing: Types::ListInsightsOngoingStatusFilter
+      attr_accessor closed: Types::ListInsightsClosedStatusFilter
+      attr_accessor any: Types::ListInsightsAnyStatusFilter
+      SENSITIVE: []
+    end
+
+    class ListMonitoredResourcesFilters
+      attr_accessor resource_permission: ("FULL_PERMISSION" | "MISSING_PERMISSION")
+      attr_accessor resource_type_filters: ::Array[("LOG_GROUPS" | "CLOUDFRONT_DISTRIBUTION" | "DYNAMODB_TABLE" | "EC2_NAT_GATEWAY" | "ECS_CLUSTER" | "ECS_SERVICE" | "EKS_CLUSTER" | "ELASTIC_BEANSTALK_ENVIRONMENT" | "ELASTIC_LOAD_BALANCER_LOAD_BALANCER" | "ELASTIC_LOAD_BALANCING_V2_LOAD_BALANCER" | "ELASTIC_LOAD_BALANCING_V2_TARGET_GROUP" | "ELASTICACHE_CACHE_CLUSTER" | "ELASTICSEARCH_DOMAIN" | "KINESIS_STREAM" | "LAMBDA_FUNCTION" | "OPEN_SEARCH_SERVICE_DOMAIN" | "RDS_DB_INSTANCE" | "RDS_DB_CLUSTER" | "REDSHIFT_CLUSTER" | "ROUTE53_HOSTED_ZONE" | "ROUTE53_HEALTH_CHECK" | "S3_BUCKET" | "SAGEMAKER_ENDPOINT" | "SNS_TOPIC" | "SQS_QUEUE" | "STEP_FUNCTIONS_ACTIVITY" | "STEP_FUNCTIONS_STATE_MACHINE")]
+      SENSITIVE: []
+    end
+
+    class ListMonitoredResourcesRequest
+      attr_accessor filters: Types::ListMonitoredResourcesFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMonitoredResourcesResponse
+      attr_accessor monitored_resource_identifiers: ::Array[Types::MonitoredResourceIdentifier]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotificationChannelsRequest
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotificationChannelsResponse
+      attr_accessor channels: ::Array[Types::NotificationChannel]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationInsightsRequest
+      attr_accessor status_filter: Types::ListInsightsStatusFilter
+      attr_accessor max_results: ::Integer
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor organizational_unit_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationInsightsResponse
+      attr_accessor proactive_insights: ::Array[Types::ProactiveOrganizationInsightSummary]
+      attr_accessor reactive_insights: ::Array[Types::ReactiveOrganizationInsightSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendationsRequest
+      attr_accessor insight_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor locale: ("DE_DE" | "EN_US" | "EN_GB" | "ES_ES" | "FR_FR" | "IT_IT" | "JA_JP" | "KO_KR" | "PT_BR" | "ZH_CN" | "ZH_TW")
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListRecommendationsResponse
+      attr_accessor recommendations: ::Array[Types::Recommendation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LogAnomalyClass
+      attr_accessor log_stream_name: ::String
+      attr_accessor log_anomaly_type: ("KEYWORD" | "KEYWORD_TOKEN" | "FORMAT" | "HTTP_CODE" | "BLOCK_FORMAT" | "NUMERICAL_POINT" | "NUMERICAL_NAN" | "NEW_FIELD_NAME")
+      attr_accessor log_anomaly_token: ::String
+      attr_accessor log_event_id: ::String
+      attr_accessor explanation: ::String
+      attr_accessor number_of_log_lines_occurrences: ::Integer
+      attr_accessor log_event_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class LogAnomalyShowcase
+      attr_accessor log_anomaly_classes: ::Array[Types::LogAnomalyClass]
+      SENSITIVE: []
+    end
+
+    class LogsAnomalyDetectionIntegration
+      attr_accessor opt_in_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class LogsAnomalyDetectionIntegrationConfig
+      attr_accessor opt_in_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class MonitoredResourceIdentifier
+      attr_accessor monitored_resource_name: ::String
+      attr_accessor type: ::String
+      attr_accessor resource_permission: ("FULL_PERMISSION" | "MISSING_PERMISSION")
+      attr_accessor last_updated: ::Time
+      attr_accessor resource_collection: Types::ResourceCollection
+      SENSITIVE: []
+    end
+
+    class NotificationChannel
+      attr_accessor id: ::String
+      attr_accessor config: Types::NotificationChannelConfig
+      SENSITIVE: []
+    end
+
+    class NotificationChannelConfig
+      attr_accessor sns: Types::SnsChannelConfig
+      attr_accessor filters: Types::NotificationFilterConfig
+      SENSITIVE: []
+    end
+
+    class NotificationFilterConfig
+      attr_accessor severities: ::Array[("LOW" | "MEDIUM" | "HIGH")]
+      attr_accessor message_types: ::Array[("NEW_INSIGHT" | "CLOSED_INSIGHT" | "NEW_ASSOCIATION" | "SEVERITY_UPGRADED" | "NEW_RECOMMENDATION")]
+      SENSITIVE: []
+    end
+
+    class OpsCenterIntegration
+      attr_accessor opt_in_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class OpsCenterIntegrationConfig
+      attr_accessor opt_in_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class PerformanceInsightsMetricDimensionGroup
+      attr_accessor group: ::String
+      attr_accessor dimensions: ::Array[::String]
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class PerformanceInsightsMetricQuery
+      attr_accessor metric: ::String
+      attr_accessor group_by: Types::PerformanceInsightsMetricDimensionGroup
+      attr_accessor filter: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PerformanceInsightsMetricsDetail
+      attr_accessor metric_display_name: ::String
+      attr_accessor unit: ::String
+      attr_accessor metric_query: Types::PerformanceInsightsMetricQuery
+      attr_accessor reference_data: ::Array[Types::PerformanceInsightsReferenceData]
+      attr_accessor stats_at_anomaly: ::Array[Types::PerformanceInsightsStat]
+      attr_accessor stats_at_baseline: ::Array[Types::PerformanceInsightsStat]
+      SENSITIVE: []
+    end
+
+    class PerformanceInsightsReferenceComparisonValues
+      attr_accessor reference_scalar: Types::PerformanceInsightsReferenceScalar
+      attr_accessor reference_metric: Types::PerformanceInsightsReferenceMetric
+      SENSITIVE: []
+    end
+
+    class PerformanceInsightsReferenceData
+      attr_accessor name: ::String
+      attr_accessor comparison_values: Types::PerformanceInsightsReferenceComparisonValues
+      SENSITIVE: []
+    end
+
+    class PerformanceInsightsReferenceMetric
+      attr_accessor metric_query: Types::PerformanceInsightsMetricQuery
+      SENSITIVE: []
+    end
+
+    class PerformanceInsightsReferenceScalar
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class PerformanceInsightsStat
+      attr_accessor type: ::String
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class PredictionTimeRange
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ProactiveAnomaly
+      attr_accessor id: ::String
+      attr_accessor severity: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor status: ("ONGOING" | "CLOSED")
+      attr_accessor update_time: ::Time
+      attr_accessor anomaly_time_range: Types::AnomalyTimeRange
+      attr_accessor anomaly_reported_time_range: Types::AnomalyReportedTimeRange
+      attr_accessor prediction_time_range: Types::PredictionTimeRange
+      attr_accessor source_details: Types::AnomalySourceDetails
+      attr_accessor associated_insight_id: ::String
+      attr_accessor resource_collection: Types::ResourceCollection
+      attr_accessor limit: ::Float
+      attr_accessor source_metadata: Types::AnomalySourceMetadata
+      attr_accessor anomaly_resources: ::Array[Types::AnomalyResource]
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ProactiveAnomalySummary
+      attr_accessor id: ::String
+      attr_accessor severity: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor status: ("ONGOING" | "CLOSED")
+      attr_accessor update_time: ::Time
+      attr_accessor anomaly_time_range: Types::AnomalyTimeRange
+      attr_accessor anomaly_reported_time_range: Types::AnomalyReportedTimeRange
+      attr_accessor prediction_time_range: Types::PredictionTimeRange
+      attr_accessor source_details: Types::AnomalySourceDetails
+      attr_accessor associated_insight_id: ::String
+      attr_accessor resource_collection: Types::ResourceCollection
+      attr_accessor limit: ::Float
+      attr_accessor source_metadata: Types::AnomalySourceMetadata
+      attr_accessor anomaly_resources: ::Array[Types::AnomalyResource]
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ProactiveInsight
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor severity: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor status: ("ONGOING" | "CLOSED")
+      attr_accessor insight_time_range: Types::InsightTimeRange
+      attr_accessor prediction_time_range: Types::PredictionTimeRange
+      attr_accessor resource_collection: Types::ResourceCollection
+      attr_accessor ssm_ops_item_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ProactiveInsightSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor severity: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor status: ("ONGOING" | "CLOSED")
+      attr_accessor insight_time_range: Types::InsightTimeRange
+      attr_accessor prediction_time_range: Types::PredictionTimeRange
+      attr_accessor resource_collection: Types::ResourceCollection
+      attr_accessor service_collection: Types::ServiceCollection
+      attr_accessor associated_resource_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ProactiveOrganizationInsightSummary
+      attr_accessor id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor organizational_unit_id: ::String
+      attr_accessor name: ::String
+      attr_accessor severity: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor status: ("ONGOING" | "CLOSED")
+      attr_accessor insight_time_range: Types::InsightTimeRange
+      attr_accessor prediction_time_range: Types::PredictionTimeRange
+      attr_accessor resource_collection: Types::ResourceCollection
+      attr_accessor service_collection: Types::ServiceCollection
+      SENSITIVE: []
+    end
+
+    class PutFeedbackRequest
+      attr_accessor insight_feedback: Types::InsightFeedback
+      SENSITIVE: []
+    end
+
+    class PutFeedbackResponse < Aws::EmptyStructure
+    end
+
+    class ReactiveAnomaly
+      attr_accessor id: ::String
+      attr_accessor severity: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor status: ("ONGOING" | "CLOSED")
+      attr_accessor anomaly_time_range: Types::AnomalyTimeRange
+      attr_accessor anomaly_reported_time_range: Types::AnomalyReportedTimeRange
+      attr_accessor source_details: Types::AnomalySourceDetails
+      attr_accessor associated_insight_id: ::String
+      attr_accessor resource_collection: Types::ResourceCollection
+      attr_accessor type: ("CAUSAL" | "CONTEXTUAL")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor causal_anomaly_id: ::String
+      attr_accessor anomaly_resources: ::Array[Types::AnomalyResource]
+      SENSITIVE: []
+    end
+
+    class ReactiveAnomalySummary
+      attr_accessor id: ::String
+      attr_accessor severity: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor status: ("ONGOING" | "CLOSED")
+      attr_accessor anomaly_time_range: Types::AnomalyTimeRange
+      attr_accessor anomaly_reported_time_range: Types::AnomalyReportedTimeRange
+      attr_accessor source_details: Types::AnomalySourceDetails
+      attr_accessor associated_insight_id: ::String
+      attr_accessor resource_collection: Types::ResourceCollection
+      attr_accessor type: ("CAUSAL" | "CONTEXTUAL")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor causal_anomaly_id: ::String
+      attr_accessor anomaly_resources: ::Array[Types::AnomalyResource]
+      SENSITIVE: []
+    end
+
+    class ReactiveInsight
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor severity: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor status: ("ONGOING" | "CLOSED")
+      attr_accessor insight_time_range: Types::InsightTimeRange
+      attr_accessor resource_collection: Types::ResourceCollection
+      attr_accessor ssm_ops_item_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ReactiveInsightSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor severity: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor status: ("ONGOING" | "CLOSED")
+      attr_accessor insight_time_range: Types::InsightTimeRange
+      attr_accessor resource_collection: Types::ResourceCollection
+      attr_accessor service_collection: Types::ServiceCollection
+      attr_accessor associated_resource_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ReactiveOrganizationInsightSummary
+      attr_accessor id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor organizational_unit_id: ::String
+      attr_accessor name: ::String
+      attr_accessor severity: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor status: ("ONGOING" | "CLOSED")
+      attr_accessor insight_time_range: Types::InsightTimeRange
+      attr_accessor resource_collection: Types::ResourceCollection
+      attr_accessor service_collection: Types::ServiceCollection
+      SENSITIVE: []
+    end
+
+    class Recommendation
+      attr_accessor description: ::String
+      attr_accessor link: ::String
+      attr_accessor name: ::String
+      attr_accessor reason: ::String
+      attr_accessor related_events: ::Array[Types::RecommendationRelatedEvent]
+      attr_accessor related_anomalies: ::Array[Types::RecommendationRelatedAnomaly]
+      attr_accessor category: ::String
+      SENSITIVE: []
+    end
+
+    class RecommendationRelatedAnomaly
+      attr_accessor resources: ::Array[Types::RecommendationRelatedAnomalyResource]
+      attr_accessor source_details: ::Array[Types::RecommendationRelatedAnomalySourceDetail]
+      attr_accessor anomaly_id: ::String
+      SENSITIVE: []
+    end
+
+    class RecommendationRelatedAnomalyResource
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class RecommendationRelatedAnomalySourceDetail
+      attr_accessor cloud_watch_metrics: ::Array[Types::RecommendationRelatedCloudWatchMetricsSourceDetail]
+      SENSITIVE: []
+    end
+
+    class RecommendationRelatedCloudWatchMetricsSourceDetail
+      attr_accessor metric_name: ::String
+      attr_accessor namespace: ::String
+      SENSITIVE: []
+    end
+
+    class RecommendationRelatedEvent
+      attr_accessor name: ::String
+      attr_accessor resources: ::Array[Types::RecommendationRelatedEventResource]
+      SENSITIVE: []
+    end
+
+    class RecommendationRelatedEventResource
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveNotificationChannelRequest
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveNotificationChannelResponse < Aws::EmptyStructure
+    end
+
+    class ResourceCollection
+      attr_accessor cloud_formation: Types::CloudFormationCollection
+      attr_accessor tags: ::Array[Types::TagCollection]
+      SENSITIVE: []
+    end
+
+    class ResourceCollectionFilter
+      attr_accessor cloud_formation: Types::CloudFormationCollectionFilter
+      attr_accessor tags: ::Array[Types::TagCollectionFilter]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class SearchInsightsFilters
+      attr_accessor severities: ::Array[("LOW" | "MEDIUM" | "HIGH")]
+      attr_accessor statuses: ::Array[("ONGOING" | "CLOSED")]
+      attr_accessor resource_collection: Types::ResourceCollection
+      attr_accessor service_collection: Types::ServiceCollection
+      SENSITIVE: []
+    end
+
+    class SearchInsightsRequest
+      attr_accessor start_time_range: Types::StartTimeRange
+      attr_accessor filters: Types::SearchInsightsFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor type: ("REACTIVE" | "PROACTIVE")
+      SENSITIVE: []
+    end
+
+    class SearchInsightsResponse
+      attr_accessor proactive_insights: ::Array[Types::ProactiveInsightSummary]
+      attr_accessor reactive_insights: ::Array[Types::ReactiveInsightSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchOrganizationInsightsFilters
+      attr_accessor severities: ::Array[("LOW" | "MEDIUM" | "HIGH")]
+      attr_accessor statuses: ::Array[("ONGOING" | "CLOSED")]
+      attr_accessor resource_collection: Types::ResourceCollection
+      attr_accessor service_collection: Types::ServiceCollection
+      SENSITIVE: []
+    end
+
+    class SearchOrganizationInsightsRequest
+      attr_accessor account_ids: ::Array[::String]
+      attr_accessor start_time_range: Types::StartTimeRange
+      attr_accessor filters: Types::SearchOrganizationInsightsFilters
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor type: ("REACTIVE" | "PROACTIVE")
+      SENSITIVE: []
+    end
+
+    class SearchOrganizationInsightsResponse
+      attr_accessor proactive_insights: ::Array[Types::ProactiveInsightSummary]
+      attr_accessor reactive_insights: ::Array[Types::ReactiveInsightSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceCollection
+      attr_accessor service_names: ::Array[("API_GATEWAY" | "APPLICATION_ELB" | "AUTO_SCALING_GROUP" | "CLOUD_FRONT" | "DYNAMO_DB" | "EC2" | "ECS" | "EKS" | "ELASTIC_BEANSTALK" | "ELASTI_CACHE" | "ELB" | "ES" | "KINESIS" | "LAMBDA" | "NAT_GATEWAY" | "NETWORK_ELB" | "RDS" | "REDSHIFT" | "ROUTE_53" | "S3" | "SAGE_MAKER" | "SNS" | "SQS" | "STEP_FUNCTIONS" | "SWF")]
+      SENSITIVE: []
+    end
+
+    class ServiceHealth
+      attr_accessor service_name: ("API_GATEWAY" | "APPLICATION_ELB" | "AUTO_SCALING_GROUP" | "CLOUD_FRONT" | "DYNAMO_DB" | "EC2" | "ECS" | "EKS" | "ELASTIC_BEANSTALK" | "ELASTI_CACHE" | "ELB" | "ES" | "KINESIS" | "LAMBDA" | "NAT_GATEWAY" | "NETWORK_ELB" | "RDS" | "REDSHIFT" | "ROUTE_53" | "S3" | "SAGE_MAKER" | "SNS" | "SQS" | "STEP_FUNCTIONS" | "SWF")
+      attr_accessor insight: Types::ServiceInsightHealth
+      attr_accessor analyzed_resource_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceInsightHealth
+      attr_accessor open_proactive_insights: ::Integer
+      attr_accessor open_reactive_insights: ::Integer
+      SENSITIVE: []
+    end
+
+    class ServiceIntegrationConfig
+      attr_accessor ops_center: Types::OpsCenterIntegration
+      attr_accessor logs_anomaly_detection: Types::LogsAnomalyDetectionIntegration
+      attr_accessor kms_server_side_encryption: Types::KMSServerSideEncryptionIntegration
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceResourceCost
+      attr_accessor type: ::String
+      attr_accessor state: ("ACTIVE" | "INACTIVE")
+      attr_accessor count: ::Integer
+      attr_accessor unit_cost: ::Float
+      attr_accessor cost: ::Float
+      SENSITIVE: []
+    end
+
+    class SnsChannelConfig
+      attr_accessor topic_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartCostEstimationRequest
+      attr_accessor resource_collection: Types::CostEstimationResourceCollectionFilter
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartCostEstimationResponse < Aws::EmptyStructure
+    end
+
+    class StartTimeRange
+      attr_accessor from_time: ::Time
+      attr_accessor to_time: ::Time
+      SENSITIVE: []
+    end
+
+    class TagCollection
+      attr_accessor app_boundary_key: ::String
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TagCollectionFilter
+      attr_accessor app_boundary_key: ::String
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TagCostEstimationResourceCollectionFilter
+      attr_accessor app_boundary_key: ::String
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TagHealth
+      attr_accessor app_boundary_key: ::String
+      attr_accessor tag_value: ::String
+      attr_accessor insight: Types::InsightHealth
+      attr_accessor analyzed_resource_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimestampMetricValuePair
+      attr_accessor timestamp: ::Time
+      attr_accessor metric_value: ::Float
+      SENSITIVE: []
+    end
+
+    class UpdateCloudFormationCollectionFilter
+      attr_accessor stack_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateEventSourcesConfigRequest
+      attr_accessor event_sources: Types::EventSourcesConfig
+      SENSITIVE: []
+    end
+
+    class UpdateEventSourcesConfigResponse < Aws::EmptyStructure
+    end
+
+    class UpdateResourceCollectionFilter
+      attr_accessor cloud_formation: Types::UpdateCloudFormationCollectionFilter
+      attr_accessor tags: ::Array[Types::UpdateTagCollectionFilter]
+      SENSITIVE: []
+    end
+
+    class UpdateResourceCollectionRequest
+      attr_accessor action: ("ADD" | "REMOVE")
+      attr_accessor resource_collection: Types::UpdateResourceCollectionFilter
+      SENSITIVE: []
+    end
+
+    class UpdateResourceCollectionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateServiceIntegrationConfig
+      attr_accessor ops_center: Types::OpsCenterIntegrationConfig
+      attr_accessor logs_anomaly_detection: Types::LogsAnomalyDetectionIntegrationConfig
+      attr_accessor kms_server_side_encryption: Types::KMSServerSideEncryptionIntegrationConfig
+      SENSITIVE: []
+    end
+
+    class UpdateServiceIntegrationRequest
+      attr_accessor service_integration: Types::UpdateServiceIntegrationConfig
+      SENSITIVE: []
+    end
+
+    class UpdateServiceIntegrationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateTagCollectionFilter
+      attr_accessor app_boundary_key: ::String
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("UNKNOWN_OPERATION" | "CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "OTHER" | "INVALID_PARAMETER_COMBINATION" | "PARAMETER_INCONSISTENT_WITH_SERVICE_STATE")
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

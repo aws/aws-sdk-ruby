@@ -1,0 +1,809 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoTEvents
+  module Types
+
+    class AcknowledgeFlow
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class Action
+      attr_accessor set_variable: Types::SetVariableAction
+      attr_accessor sns: Types::SNSTopicPublishAction
+      attr_accessor iot_topic_publish: Types::IotTopicPublishAction
+      attr_accessor set_timer: Types::SetTimerAction
+      attr_accessor clear_timer: Types::ClearTimerAction
+      attr_accessor reset_timer: Types::ResetTimerAction
+      attr_accessor lambda: Types::LambdaAction
+      attr_accessor iot_events: Types::IotEventsAction
+      attr_accessor sqs: Types::SqsAction
+      attr_accessor firehose: Types::FirehoseAction
+      attr_accessor dynamo_db: Types::DynamoDBAction
+      attr_accessor dynamo_d_bv_2: Types::DynamoDBv2Action
+      attr_accessor iot_site_wise: Types::IotSiteWiseAction
+      SENSITIVE: []
+    end
+
+    class AlarmAction
+      attr_accessor sns: Types::SNSTopicPublishAction
+      attr_accessor iot_topic_publish: Types::IotTopicPublishAction
+      attr_accessor lambda: Types::LambdaAction
+      attr_accessor iot_events: Types::IotEventsAction
+      attr_accessor sqs: Types::SqsAction
+      attr_accessor firehose: Types::FirehoseAction
+      attr_accessor dynamo_db: Types::DynamoDBAction
+      attr_accessor dynamo_d_bv_2: Types::DynamoDBv2Action
+      attr_accessor iot_site_wise: Types::IotSiteWiseAction
+      SENSITIVE: []
+    end
+
+    class AlarmCapabilities
+      attr_accessor initialization_configuration: Types::InitializationConfiguration
+      attr_accessor acknowledge_flow: Types::AcknowledgeFlow
+      SENSITIVE: []
+    end
+
+    class AlarmEventActions
+      attr_accessor alarm_actions: ::Array[Types::AlarmAction]
+      SENSITIVE: []
+    end
+
+    class AlarmModelSummary
+      attr_accessor creation_time: ::Time
+      attr_accessor alarm_model_description: ::String
+      attr_accessor alarm_model_name: ::String
+      SENSITIVE: []
+    end
+
+    class AlarmModelVersionSummary
+      attr_accessor alarm_model_name: ::String
+      attr_accessor alarm_model_arn: ::String
+      attr_accessor alarm_model_version: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor status: ("ACTIVE" | "ACTIVATING" | "INACTIVE" | "FAILED")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class AlarmNotification
+      attr_accessor notification_actions: ::Array[Types::NotificationAction]
+      SENSITIVE: []
+    end
+
+    class AlarmRule
+      attr_accessor simple_rule: Types::SimpleRule
+      SENSITIVE: []
+    end
+
+    class AnalysisResult
+      attr_accessor type: ::String
+      attr_accessor level: ("INFO" | "WARNING" | "ERROR")
+      attr_accessor message: ::String
+      attr_accessor locations: ::Array[Types::AnalysisResultLocation]
+      SENSITIVE: []
+    end
+
+    class AnalysisResultLocation
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class AssetPropertyTimestamp
+      attr_accessor time_in_seconds: ::String
+      attr_accessor offset_in_nanos: ::String
+      SENSITIVE: []
+    end
+
+    class AssetPropertyValue
+      attr_accessor value: Types::AssetPropertyVariant
+      attr_accessor timestamp: Types::AssetPropertyTimestamp
+      attr_accessor quality: ::String
+      SENSITIVE: []
+    end
+
+    class AssetPropertyVariant
+      attr_accessor string_value: ::String
+      attr_accessor integer_value: ::String
+      attr_accessor double_value: ::String
+      attr_accessor boolean_value: ::String
+      SENSITIVE: []
+    end
+
+    class Attribute
+      attr_accessor json_path: ::String
+      SENSITIVE: []
+    end
+
+    class ClearTimerAction
+      attr_accessor timer_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAlarmModelRequest
+      attr_accessor alarm_model_name: ::String
+      attr_accessor alarm_model_description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor key: ::String
+      attr_accessor severity: ::Integer
+      attr_accessor alarm_rule: Types::AlarmRule
+      attr_accessor alarm_notification: Types::AlarmNotification
+      attr_accessor alarm_event_actions: Types::AlarmEventActions
+      attr_accessor alarm_capabilities: Types::AlarmCapabilities
+      SENSITIVE: []
+    end
+
+    class CreateAlarmModelResponse
+      attr_accessor creation_time: ::Time
+      attr_accessor alarm_model_arn: ::String
+      attr_accessor alarm_model_version: ::String
+      attr_accessor last_update_time: ::Time
+      attr_accessor status: ("ACTIVE" | "ACTIVATING" | "INACTIVE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class CreateDetectorModelRequest
+      attr_accessor detector_model_name: ::String
+      attr_accessor detector_model_definition: Types::DetectorModelDefinition
+      attr_accessor detector_model_description: ::String
+      attr_accessor key: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor evaluation_method: ("BATCH" | "SERIAL")
+      SENSITIVE: []
+    end
+
+    class CreateDetectorModelResponse
+      attr_accessor detector_model_configuration: Types::DetectorModelConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateInputRequest
+      attr_accessor input_name: ::String
+      attr_accessor input_description: ::String
+      attr_accessor input_definition: Types::InputDefinition
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateInputResponse
+      attr_accessor input_configuration: Types::InputConfiguration
+      SENSITIVE: []
+    end
+
+    class DeleteAlarmModelRequest
+      attr_accessor alarm_model_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAlarmModelResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDetectorModelRequest
+      attr_accessor detector_model_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDetectorModelResponse < Aws::EmptyStructure
+    end
+
+    class DeleteInputRequest
+      attr_accessor input_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInputResponse < Aws::EmptyStructure
+    end
+
+    class DescribeAlarmModelRequest
+      attr_accessor alarm_model_name: ::String
+      attr_accessor alarm_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAlarmModelResponse
+      attr_accessor creation_time: ::Time
+      attr_accessor alarm_model_arn: ::String
+      attr_accessor alarm_model_version: ::String
+      attr_accessor last_update_time: ::Time
+      attr_accessor status: ("ACTIVE" | "ACTIVATING" | "INACTIVE" | "FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor alarm_model_name: ::String
+      attr_accessor alarm_model_description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor key: ::String
+      attr_accessor severity: ::Integer
+      attr_accessor alarm_rule: Types::AlarmRule
+      attr_accessor alarm_notification: Types::AlarmNotification
+      attr_accessor alarm_event_actions: Types::AlarmEventActions
+      attr_accessor alarm_capabilities: Types::AlarmCapabilities
+      SENSITIVE: []
+    end
+
+    class DescribeDetectorModelAnalysisRequest
+      attr_accessor analysis_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDetectorModelAnalysisResponse
+      attr_accessor status: ("RUNNING" | "COMPLETE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class DescribeDetectorModelRequest
+      attr_accessor detector_model_name: ::String
+      attr_accessor detector_model_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDetectorModelResponse
+      attr_accessor detector_model: Types::DetectorModel
+      SENSITIVE: []
+    end
+
+    class DescribeInputRequest
+      attr_accessor input_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInputResponse
+      attr_accessor input: Types::Input
+      SENSITIVE: []
+    end
+
+    class DescribeLoggingOptionsRequest < Aws::EmptyStructure
+    end
+
+    class DescribeLoggingOptionsResponse
+      attr_accessor logging_options: Types::LoggingOptions
+      SENSITIVE: []
+    end
+
+    class DetectorDebugOption
+      attr_accessor detector_model_name: ::String
+      attr_accessor key_value: ::String
+      SENSITIVE: []
+    end
+
+    class DetectorModel
+      attr_accessor detector_model_definition: Types::DetectorModelDefinition
+      attr_accessor detector_model_configuration: Types::DetectorModelConfiguration
+      SENSITIVE: []
+    end
+
+    class DetectorModelConfiguration
+      attr_accessor detector_model_name: ::String
+      attr_accessor detector_model_version: ::String
+      attr_accessor detector_model_description: ::String
+      attr_accessor detector_model_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor status: ("ACTIVE" | "ACTIVATING" | "INACTIVE" | "DEPRECATED" | "DRAFT" | "PAUSED" | "FAILED")
+      attr_accessor key: ::String
+      attr_accessor evaluation_method: ("BATCH" | "SERIAL")
+      SENSITIVE: []
+    end
+
+    class DetectorModelDefinition
+      attr_accessor states: ::Array[Types::State]
+      attr_accessor initial_state_name: ::String
+      SENSITIVE: []
+    end
+
+    class DetectorModelSummary
+      attr_accessor detector_model_name: ::String
+      attr_accessor detector_model_description: ::String
+      attr_accessor creation_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DetectorModelVersionSummary
+      attr_accessor detector_model_name: ::String
+      attr_accessor detector_model_version: ::String
+      attr_accessor detector_model_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor status: ("ACTIVE" | "ACTIVATING" | "INACTIVE" | "DEPRECATED" | "DRAFT" | "PAUSED" | "FAILED")
+      attr_accessor evaluation_method: ("BATCH" | "SERIAL")
+      SENSITIVE: []
+    end
+
+    class DynamoDBAction
+      attr_accessor hash_key_type: ::String
+      attr_accessor hash_key_field: ::String
+      attr_accessor hash_key_value: ::String
+      attr_accessor range_key_type: ::String
+      attr_accessor range_key_field: ::String
+      attr_accessor range_key_value: ::String
+      attr_accessor operation: ::String
+      attr_accessor payload_field: ::String
+      attr_accessor table_name: ::String
+      attr_accessor payload: Types::Payload
+      SENSITIVE: []
+    end
+
+    class DynamoDBv2Action
+      attr_accessor table_name: ::String
+      attr_accessor payload: Types::Payload
+      SENSITIVE: []
+    end
+
+    class EmailConfiguration
+      attr_accessor from: ::String
+      attr_accessor content: Types::EmailContent
+      attr_accessor recipients: Types::EmailRecipients
+      SENSITIVE: []
+    end
+
+    class EmailContent
+      attr_accessor subject: ::String
+      attr_accessor additional_message: ::String
+      SENSITIVE: []
+    end
+
+    class EmailRecipients
+      attr_accessor to: ::Array[Types::RecipientDetail]
+      SENSITIVE: []
+    end
+
+    class Event
+      attr_accessor event_name: ::String
+      attr_accessor condition: ::String
+      attr_accessor actions: ::Array[Types::Action]
+      SENSITIVE: []
+    end
+
+    class FirehoseAction
+      attr_accessor delivery_stream_name: ::String
+      attr_accessor separator: ::String
+      attr_accessor payload: Types::Payload
+      SENSITIVE: []
+    end
+
+    class GetDetectorModelAnalysisResultsRequest
+      attr_accessor analysis_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDetectorModelAnalysisResultsResponse
+      attr_accessor analysis_results: ::Array[Types::AnalysisResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class InitializationConfiguration
+      attr_accessor disabled_on_initialization: bool
+      SENSITIVE: []
+    end
+
+    class Input
+      attr_accessor input_configuration: Types::InputConfiguration
+      attr_accessor input_definition: Types::InputDefinition
+      SENSITIVE: []
+    end
+
+    class InputConfiguration
+      attr_accessor input_name: ::String
+      attr_accessor input_description: ::String
+      attr_accessor input_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class InputDefinition
+      attr_accessor attributes: ::Array[Types::Attribute]
+      SENSITIVE: []
+    end
+
+    class InputIdentifier
+      attr_accessor iot_events_input_identifier: Types::IotEventsInputIdentifier
+      attr_accessor iot_site_wise_input_identifier: Types::IotSiteWiseInputIdentifier
+      SENSITIVE: []
+    end
+
+    class InputSummary
+      attr_accessor input_name: ::String
+      attr_accessor input_description: ::String
+      attr_accessor input_arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_update_time: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "ACTIVE" | "DELETING")
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IotEventsAction
+      attr_accessor input_name: ::String
+      attr_accessor payload: Types::Payload
+      SENSITIVE: []
+    end
+
+    class IotEventsInputIdentifier
+      attr_accessor input_name: ::String
+      SENSITIVE: []
+    end
+
+    class IotSiteWiseAction
+      attr_accessor entry_id: ::String
+      attr_accessor asset_id: ::String
+      attr_accessor property_id: ::String
+      attr_accessor property_alias: ::String
+      attr_accessor property_value: Types::AssetPropertyValue
+      SENSITIVE: []
+    end
+
+    class IotSiteWiseAssetModelPropertyIdentifier
+      attr_accessor asset_model_id: ::String
+      attr_accessor property_id: ::String
+      SENSITIVE: []
+    end
+
+    class IotSiteWiseInputIdentifier
+      attr_accessor iot_site_wise_asset_model_property_identifier: Types::IotSiteWiseAssetModelPropertyIdentifier
+      SENSITIVE: []
+    end
+
+    class IotTopicPublishAction
+      attr_accessor mqtt_topic: ::String
+      attr_accessor payload: Types::Payload
+      SENSITIVE: []
+    end
+
+    class LambdaAction
+      attr_accessor function_arn: ::String
+      attr_accessor payload: Types::Payload
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAlarmModelVersionsRequest
+      attr_accessor alarm_model_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAlarmModelVersionsResponse
+      attr_accessor alarm_model_version_summaries: ::Array[Types::AlarmModelVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAlarmModelsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAlarmModelsResponse
+      attr_accessor alarm_model_summaries: ::Array[Types::AlarmModelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDetectorModelVersionsRequest
+      attr_accessor detector_model_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDetectorModelVersionsResponse
+      attr_accessor detector_model_version_summaries: ::Array[Types::DetectorModelVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDetectorModelsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDetectorModelsResponse
+      attr_accessor detector_model_summaries: ::Array[Types::DetectorModelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInputRoutingsRequest
+      attr_accessor input_identifier: Types::InputIdentifier
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInputRoutingsResponse
+      attr_accessor routed_resources: ::Array[Types::RoutedResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListInputsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListInputsResponse
+      attr_accessor input_summaries: ::Array[Types::InputSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LoggingOptions
+      attr_accessor role_arn: ::String
+      attr_accessor level: ("ERROR" | "INFO" | "DEBUG")
+      attr_accessor enabled: bool
+      attr_accessor detector_debug_options: ::Array[Types::DetectorDebugOption]
+      SENSITIVE: []
+    end
+
+    class NotificationAction
+      attr_accessor action: Types::NotificationTargetActions
+      attr_accessor sms_configurations: ::Array[Types::SMSConfiguration]
+      attr_accessor email_configurations: ::Array[Types::EmailConfiguration]
+      SENSITIVE: []
+    end
+
+    class NotificationTargetActions
+      attr_accessor lambda_action: Types::LambdaAction
+      SENSITIVE: []
+    end
+
+    class OnEnterLifecycle
+      attr_accessor events: ::Array[Types::Event]
+      SENSITIVE: []
+    end
+
+    class OnExitLifecycle
+      attr_accessor events: ::Array[Types::Event]
+      SENSITIVE: []
+    end
+
+    class OnInputLifecycle
+      attr_accessor events: ::Array[Types::Event]
+      attr_accessor transition_events: ::Array[Types::TransitionEvent]
+      SENSITIVE: []
+    end
+
+    class Payload
+      attr_accessor content_expression: ::String
+      attr_accessor type: ("STRING" | "JSON")
+      SENSITIVE: []
+    end
+
+    class PutLoggingOptionsRequest
+      attr_accessor logging_options: Types::LoggingOptions
+      SENSITIVE: []
+    end
+
+    class RecipientDetail
+      attr_accessor sso_identity: Types::SSOIdentity
+      SENSITIVE: []
+    end
+
+    class ResetTimerAction
+      attr_accessor timer_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RoutedResource
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class SMSConfiguration
+      attr_accessor sender_id: ::String
+      attr_accessor additional_message: ::String
+      attr_accessor recipients: ::Array[Types::RecipientDetail]
+      SENSITIVE: []
+    end
+
+    class SNSTopicPublishAction
+      attr_accessor target_arn: ::String
+      attr_accessor payload: Types::Payload
+      SENSITIVE: []
+    end
+
+    class SSOIdentity
+      attr_accessor identity_store_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SetTimerAction
+      attr_accessor timer_name: ::String
+      attr_accessor seconds: ::Integer
+      attr_accessor duration_expression: ::String
+      SENSITIVE: []
+    end
+
+    class SetVariableAction
+      attr_accessor variable_name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SimpleRule
+      attr_accessor input_property: ::String
+      attr_accessor comparison_operator: ("GREATER" | "GREATER_OR_EQUAL" | "LESS" | "LESS_OR_EQUAL" | "EQUAL" | "NOT_EQUAL")
+      attr_accessor threshold: ::String
+      SENSITIVE: []
+    end
+
+    class SqsAction
+      attr_accessor queue_url: ::String
+      attr_accessor use_base_64: bool
+      attr_accessor payload: Types::Payload
+      SENSITIVE: []
+    end
+
+    class StartDetectorModelAnalysisRequest
+      attr_accessor detector_model_definition: Types::DetectorModelDefinition
+      SENSITIVE: []
+    end
+
+    class StartDetectorModelAnalysisResponse
+      attr_accessor analysis_id: ::String
+      SENSITIVE: []
+    end
+
+    class State
+      attr_accessor state_name: ::String
+      attr_accessor on_input: Types::OnInputLifecycle
+      attr_accessor on_enter: Types::OnEnterLifecycle
+      attr_accessor on_exit: Types::OnExitLifecycle
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TransitionEvent
+      attr_accessor event_name: ::String
+      attr_accessor condition: ::String
+      attr_accessor actions: ::Array[Types::Action]
+      attr_accessor next_state: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAlarmModelRequest
+      attr_accessor alarm_model_name: ::String
+      attr_accessor alarm_model_description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor severity: ::Integer
+      attr_accessor alarm_rule: Types::AlarmRule
+      attr_accessor alarm_notification: Types::AlarmNotification
+      attr_accessor alarm_event_actions: Types::AlarmEventActions
+      attr_accessor alarm_capabilities: Types::AlarmCapabilities
+      SENSITIVE: []
+    end
+
+    class UpdateAlarmModelResponse
+      attr_accessor creation_time: ::Time
+      attr_accessor alarm_model_arn: ::String
+      attr_accessor alarm_model_version: ::String
+      attr_accessor last_update_time: ::Time
+      attr_accessor status: ("ACTIVE" | "ACTIVATING" | "INACTIVE" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class UpdateDetectorModelRequest
+      attr_accessor detector_model_name: ::String
+      attr_accessor detector_model_definition: Types::DetectorModelDefinition
+      attr_accessor detector_model_description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor evaluation_method: ("BATCH" | "SERIAL")
+      SENSITIVE: []
+    end
+
+    class UpdateDetectorModelResponse
+      attr_accessor detector_model_configuration: Types::DetectorModelConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateInputRequest
+      attr_accessor input_name: ::String
+      attr_accessor input_description: ::String
+      attr_accessor input_definition: Types::InputDefinition
+      SENSITIVE: []
+    end
+
+    class UpdateInputResponse
+      attr_accessor input_configuration: Types::InputConfiguration
+      SENSITIVE: []
+    end
+  end
+end

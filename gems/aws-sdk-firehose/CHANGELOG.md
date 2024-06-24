@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2024-06-06)
+------------------
+
+* Feature - Adds integration with Secrets Manager for Redshift, Splunk, HttpEndpoint, and Snowflake destinations
+
+1.69.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.68.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.66.0 (2024-03-22)
+------------------
+
+* Feature - Updates Amazon Firehose documentation for message regarding Enforcing Tags IAM Policy.
+
+1.65.0 (2024-02-20)
+------------------
+
+* Feature - This release updates a few Firehose related APIs.
+
+1.64.0 (2024-02-16)
+------------------
+
+* Feature - This release adds support for Data Message Extraction for decompressed CloudWatch logs, and to use a custom file extension or time zone for S3 destinations.
+
+1.63.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2024-01-18)
+------------------
+
+* Feature - Allow support for Snowflake as a Kinesis Data Firehose delivery destination.
+
+1.61.0 (2023-12-14)
+------------------
+
+* Feature - This release, 1) adds configurable buffering hints for the Splunk destination, and 2) reduces the minimum configurable buffering interval for supported destinations
+
+1.60.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.59.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.58.0 (2023-09-27)
 ------------------
 

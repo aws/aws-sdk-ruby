@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.98.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.97.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.96.0 (2024-04-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.95.0 (2024-04-11)
+------------------
+
+* Feature - For CreateOpenIDConnectProvider API, the ThumbprintList parameter is no longer required.
+
+1.94.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.93.0 (2023-12-26)
+------------------
+
+* Feature - Documentation updates for AWS Identity and Access Management (IAM).
+
+1.92.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.90.0 (2023-11-06)
+------------------
+
+* Feature - Add partitional endpoint for iso-e.
+
+1.89.0 (2023-10-25)
+------------------
+
+* Feature - Updates to GetAccessKeyLastUsed action to replace NoSuchEntity error with AccessDeniedException error.
+
+1.88.0 (2023-10-24)
+------------------
+
+* Feature - Add the partitional endpoint for IAM in iso-f.
+
 1.87.0 (2023-09-27)
 ------------------
 

@@ -756,6 +756,73 @@ module Aws::States
     #   state machine version ARN, this field will be null.
     #   @return [String]
     #
+    # @!attribute [rw] redrive_count
+    #   The number of times you've redriven an execution. If you have not
+    #   yet redriven an execution, the `redriveCount` is 0. This count is
+    #   only updated if you successfully redrive an execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] redrive_date
+    #   The date the execution was last redriven. If you have not yet
+    #   redriven an execution, the `redriveDate` is null.
+    #
+    #   The `redriveDate` is unavailable if you redrive a Map Run that
+    #   starts child workflow executions of type `EXPRESS`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] redrive_status
+    #   Indicates whether or not an execution can be redriven at a given
+    #   point in time.
+    #
+    #   * For executions of type `STANDARD`, `redriveStatus` is
+    #     `NOT_REDRIVABLE` if calling the RedriveExecution API action would
+    #     return the `ExecutionNotRedrivable` error.
+    #
+    #   * For a Distributed Map that includes child workflows of type
+    #     `STANDARD`, `redriveStatus` indicates whether or not the Map Run
+    #     can redrive child workflow executions.
+    #
+    #   * For a Distributed Map that includes child workflows of type
+    #     `EXPRESS`, `redriveStatus` indicates whether or not the Map Run
+    #     can redrive child workflow executions.
+    #
+    #     You can redrive failed or timed out `EXPRESS` workflows *only if*
+    #     they're a part of a Map Run. When you [redrive][1] the Map Run,
+    #     these workflows are restarted using the StartExecution API action.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html
+    #   @return [String]
+    #
+    # @!attribute [rw] redrive_status_reason
+    #   When `redriveStatus` is `NOT_REDRIVABLE`, `redriveStatusReason`
+    #   specifies the reason why an execution cannot be redriven.
+    #
+    #   * For executions of type `STANDARD`, or for a Distributed Map that
+    #     includes child workflows of type `STANDARD`, `redriveStatusReason`
+    #     can include one of the following reasons:
+    #
+    #     * `State machine is in DELETING status`.
+    #
+    #     * `Execution is RUNNING and cannot be redriven`.
+    #
+    #     * `Execution is SUCCEEDED and cannot be redriven`.
+    #
+    #     * `Execution was started before the launch of RedriveExecution`.
+    #
+    #     * `Execution history event limit exceeded`.
+    #
+    #     * `Execution has exceeded the max execution time`.
+    #
+    #     * `Execution redrivable period exceeded`.
+    #
+    #   * For a Distributed Map that includes child workflows of type
+    #     `EXPRESS`, `redriveStatusReason` is only returned if the child
+    #     workflows are not redrivable. This happens when the child workflow
+    #     executions have completed successfully.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecutionOutput AWS API Documentation
     #
     class DescribeExecutionOutput < Struct.new(
@@ -774,8 +841,12 @@ module Aws::States
       :error,
       :cause,
       :state_machine_version_arn,
-      :state_machine_alias_arn)
-      SENSITIVE = [:input, :output, :error, :cause]
+      :state_machine_alias_arn,
+      :redrive_count,
+      :redrive_date,
+      :redrive_status,
+      :redrive_status_reason)
+      SENSITIVE = [:input, :output, :error, :cause, :redrive_status_reason]
       include Aws::Structure
     end
 
@@ -840,6 +911,17 @@ module Aws::States
     #   `succeeded`.
     #   @return [Types::MapRunExecutionCounts]
     #
+    # @!attribute [rw] redrive_count
+    #   The number of times you've redriven a Map Run. If you have not yet
+    #   redriven a Map Run, the `redriveCount` is 0. This count is only
+    #   updated if you successfully redrive a Map Run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] redrive_date
+    #   The date a Map Run was last redriven. If you have not yet redriven a
+    #   Map Run, the `redriveDate` is null.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeMapRunOutput AWS API Documentation
     #
     class DescribeMapRunOutput < Struct.new(
@@ -852,7 +934,9 @@ module Aws::States
       :tolerated_failure_percentage,
       :tolerated_failure_count,
       :item_counts,
-      :execution_counts)
+      :execution_counts,
+      :redrive_count,
+      :redrive_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1282,6 +1366,16 @@ module Aws::States
     #   or a version ARN, it returns null.
     #   @return [String]
     #
+    # @!attribute [rw] redrive_count
+    #   The number of times you've redriven an execution. If you have not
+    #   yet redriven an execution, the `redriveCount` is 0. This count is
+    #   only updated when you successfully redrive an execution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] redrive_date
+    #   The date the execution was last redriven.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionListItem AWS API Documentation
     #
     class ExecutionListItem < Struct.new(
@@ -1294,7 +1388,40 @@ module Aws::States
       :map_run_arn,
       :item_count,
       :state_machine_version_arn,
-      :state_machine_alias_arn)
+      :state_machine_alias_arn,
+      :redrive_count,
+      :redrive_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The execution Amazon Resource Name (ARN) that you specified for
+    # `executionArn` cannot be redriven.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionNotRedrivable AWS API Documentation
+    #
+    class ExecutionNotRedrivable < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a redriven execution.
+    #
+    # @!attribute [rw] redrive_count
+    #   The number of times you've redriven an execution. If you have not
+    #   yet redriven an execution, the `redriveCount` is 0. This count is
+    #   not updated for redrives that failed to start or are pending to be
+    #   redriven.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionRedrivenEventDetails AWS API Documentation
+    #
+    class ExecutionRedrivenEventDetails < Struct.new(
+      :redrive_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1584,6 +1711,10 @@ module Aws::States
     #   the execution.
     #   @return [Types::ExecutionTimedOutEventDetails]
     #
+    # @!attribute [rw] execution_redriven_event_details
+    #   Contains details about the redrive attempt of an execution.
+    #   @return [Types::ExecutionRedrivenEventDetails]
+    #
     # @!attribute [rw] map_state_started_event_details
     #   Contains details about Map state that was started.
     #   @return [Types::MapStateStartedEventDetails]
@@ -1652,6 +1783,10 @@ module Aws::States
     #   Contains error and cause details about a Map Run that failed.
     #   @return [Types::MapRunFailedEventDetails]
     #
+    # @!attribute [rw] map_run_redriven_event_details
+    #   Contains details about the redrive attempt of a Map Run.
+    #   @return [Types::MapRunRedrivenEventDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/HistoryEvent AWS API Documentation
     #
     class HistoryEvent < Struct.new(
@@ -1678,6 +1813,7 @@ module Aws::States
       :execution_succeeded_event_details,
       :execution_aborted_event_details,
       :execution_timed_out_event_details,
+      :execution_redriven_event_details,
       :map_state_started_event_details,
       :map_iteration_started_event_details,
       :map_iteration_succeeded_event_details,
@@ -1692,7 +1828,8 @@ module Aws::States
       :state_entered_event_details,
       :state_exited_event_details,
       :map_run_started_event_details,
-      :map_run_failed_event_details)
+      :map_run_failed_event_details,
+      :map_run_redriven_event_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1708,6 +1845,149 @@ module Aws::States
     #
     class HistoryEventExecutionDataDetails < Struct.new(
       :truncated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains additional details about the state's execution, including
+    # its input and output data processing flow, and HTTP request and
+    # response information.
+    #
+    # @!attribute [rw] input
+    #   The raw state input.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_input_path
+    #   The input after Step Functions applies the [InputPath][1] filter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-inputpath
+    #   @return [String]
+    #
+    # @!attribute [rw] after_parameters
+    #   The effective input after Step Functions applies the [Parameters][1]
+    #   filter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-parameters
+    #   @return [String]
+    #
+    # @!attribute [rw] result
+    #   The state's raw result.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_result_selector
+    #   The effective result after Step Functions applies the
+    #   [ResultSelector][1] filter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-inputpath-params.html#input-output-resultselector
+    #   @return [String]
+    #
+    # @!attribute [rw] after_result_path
+    #   The effective result combined with the raw state input after Step
+    #   Functions applies the [ResultPath][1] filter.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultpath.html
+    #   @return [String]
+    #
+    # @!attribute [rw] request
+    #   The raw HTTP request that is sent when you test an HTTP Task.
+    #   @return [Types::InspectionDataRequest]
+    #
+    # @!attribute [rw] response
+    #   The raw HTTP response that is returned when you test an HTTP Task.
+    #   @return [Types::InspectionDataResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InspectionData AWS API Documentation
+    #
+    class InspectionData < Struct.new(
+      :input,
+      :after_input_path,
+      :after_parameters,
+      :result,
+      :after_result_selector,
+      :after_result_path,
+      :request,
+      :response)
+      SENSITIVE = [:input, :after_input_path, :after_parameters, :result, :after_result_selector, :after_result_path]
+      include Aws::Structure
+    end
+
+    # Contains additional details about the state's execution, including
+    # its input and output data processing flow, and HTTP request
+    # information.
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used to make the HTTP request.
+    #   @return [String]
+    #
+    # @!attribute [rw] method
+    #   The HTTP method used for the HTTP request.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The API endpoint used for the HTTP request.
+    #   @return [String]
+    #
+    # @!attribute [rw] headers
+    #   The request headers associated with the HTTP request.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The request body for the HTTP request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InspectionDataRequest AWS API Documentation
+    #
+    class InspectionDataRequest < Struct.new(
+      :protocol,
+      :method,
+      :url,
+      :headers,
+      :body)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains additional details about the state's execution, including
+    # its input and output data processing flow, and HTTP response
+    # information. The `inspectionLevel` request parameter specifies which
+    # details are returned.
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used to return the HTTP response.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The HTTP response status code for the HTTP response.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The message associated with the HTTP status code.
+    #   @return [String]
+    #
+    # @!attribute [rw] headers
+    #   The response headers associated with the HTTP response.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   The HTTP response returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/InspectionDataResponse AWS API Documentation
+    #
+    class InspectionDataResponse < Struct.new(
+      :protocol,
+      :status_code,
+      :status_message,
+      :headers,
+      :body)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2059,6 +2339,20 @@ module Aws::States
     #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html
     #   @return [String]
     #
+    # @!attribute [rw] redrive_filter
+    #   Sets a filter to list executions based on whether or not they have
+    #   been redriven.
+    #
+    #   For a Distributed Map, `redriveFilter` sets a filter to list child
+    #   workflow executions based on whether or not they have been redriven.
+    #
+    #   If you do not provide a `redriveFilter`, Step Functions returns a
+    #   list of both redriven and non-redriven executions.
+    #
+    #   If you provide a state machine ARN in `redriveFilter`, the API
+    #   returns a validation exception.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutionsInput AWS API Documentation
     #
     class ListExecutionsInput < Struct.new(
@@ -2066,7 +2360,8 @@ module Aws::States
       :status_filter,
       :max_results,
       :next_token,
-      :map_run_arn)
+      :map_run_arn,
+      :redrive_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2452,6 +2747,21 @@ module Aws::States
     #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html
     #   @return [Integer]
     #
+    # @!attribute [rw] failures_not_redrivable
+    #   The number of `FAILED`, `ABORTED`, or `TIMED_OUT` child workflow
+    #   executions that cannot be redriven because their execution status is
+    #   terminal. For example, child workflows with an execution status of
+    #   `FAILED`, `ABORTED`, or `TIMED_OUT` and a `redriveStatus` of
+    #   `NOT_REDRIVABLE`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pending_redrive
+    #   The number of unsuccessful child workflow executions currently
+    #   waiting to be redriven. The status of these child workflow
+    #   executions could be `FAILED`, `ABORTED`, or `TIMED_OUT` in the
+    #   original execution attempt or a previous redrive attempt.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MapRunExecutionCounts AWS API Documentation
     #
     class MapRunExecutionCounts < Struct.new(
@@ -2462,7 +2772,9 @@ module Aws::States
       :timed_out,
       :aborted,
       :total,
-      :results_written)
+      :results_written,
+      :failures_not_redrivable,
+      :pending_redrive)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2536,6 +2848,19 @@ module Aws::States
     #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html
     #   @return [Integer]
     #
+    # @!attribute [rw] failures_not_redrivable
+    #   The number of `FAILED`, `ABORTED`, or `TIMED_OUT` items in child
+    #   workflow executions that cannot be redriven because the execution
+    #   status of those child workflows is terminal. For example, child
+    #   workflows with an execution status of `FAILED`, `ABORTED`, or
+    #   `TIMED_OUT` and a `redriveStatus` of `NOT_REDRIVABLE`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pending_redrive
+    #   The number of unsuccessful items in child workflow executions
+    #   currently waiting to be redriven.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MapRunItemCounts AWS API Documentation
     #
     class MapRunItemCounts < Struct.new(
@@ -2546,7 +2871,9 @@ module Aws::States
       :timed_out,
       :aborted,
       :total,
-      :results_written)
+      :results_written,
+      :failures_not_redrivable,
+      :pending_redrive)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2582,6 +2909,27 @@ module Aws::States
       :state_machine_arn,
       :start_date,
       :stop_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a Map Run that was redriven.
+    #
+    # @!attribute [rw] map_run_arn
+    #   The Amazon Resource Name (ARN) of a Map Run that was redriven.
+    #   @return [String]
+    #
+    # @!attribute [rw] redrive_count
+    #   The number of times the Map Run has been redriven at this point in
+    #   the execution's history including this event. The redrive count for
+    #   a redriven Map Run is always greater than 0.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/MapRunRedrivenEventDetails AWS API Documentation
+    #
+    class MapRunRedrivenEventDetails < Struct.new(
+      :map_run_arn,
+      :redrive_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2683,6 +3031,44 @@ module Aws::States
       include Aws::Structure
     end
 
+    # @!attribute [rw] execution_arn
+    #   The Amazon Resource Name (ARN) of the execution to be redriven.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don’t specify a client token, the
+    #   Amazon Web Services SDK automatically generates a client token and
+    #   uses it for the request to ensure idempotency. The API will return
+    #   idempotent responses for the last 10 client tokens used to
+    #   successfully redrive the execution. These client tokens are valid
+    #   for up to 15 minutes after they are first used.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/RedriveExecutionInput AWS API Documentation
+    #
+    class RedriveExecutionInput < Struct.new(
+      :execution_arn,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] redrive_date
+    #   The date the execution was last redriven.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/RedriveExecutionOutput AWS API Documentation
+    #
+    class RedriveExecutionOutput < Struct.new(
+      :redrive_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Could not find the referenced resource.
     #
     # @!attribute [rw] message
@@ -2714,9 +3100,9 @@ module Aws::States
     #   @return [String]
     #
     # @!attribute [rw] weight
-    #   The percentage of traffic you want to route to the second state
-    #   machine version. The sum of the weights in the routing configuration
-    #   must be equal to 100.
+    #   The percentage of traffic you want to route to a state machine
+    #   version. The sum of the weights in the routing configuration must be
+    #   equal to 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/RoutingConfigurationListItem AWS API Documentation
@@ -2871,6 +3257,10 @@ module Aws::States
     #   Amazon Web Services account, Region, and state machine for 90 days.
     #   For more information, see [ Limits Related to State Machine
     #   Executions][1] in the *Step Functions Developer Guide*.
+    #
+    #   If you don't provide a name for the execution, Step Functions
+    #   automatically generates a universally unique identifier (UUID) as
+    #   the execution name.
     #
     #   A name must *not* contain:
     #
@@ -3390,6 +3780,8 @@ module Aws::States
       include Aws::Structure
     end
 
+    # The activity does not exist.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -3618,6 +4010,9 @@ module Aws::States
       include Aws::Structure
     end
 
+    # The task token has either expired or the task associated with the
+    # token has already been closed.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -3656,6 +4051,118 @@ module Aws::States
       :error,
       :cause)
       SENSITIVE = [:error, :cause]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] definition
+    #   The [Amazon States Language][1] (ASL) definition of the state.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the execution role with the
+    #   required IAM permissions for the state.
+    #   @return [String]
+    #
+    # @!attribute [rw] input
+    #   A string that contains the JSON input data for the state.
+    #   @return [String]
+    #
+    # @!attribute [rw] inspection_level
+    #   Determines the values to return when a state is tested. You can
+    #   specify one of the following types:
+    #
+    #   * `INFO`: Shows the final state output. By default, Step Functions
+    #     sets `inspectionLevel` to `INFO` if you don't specify a level.
+    #
+    #   * `DEBUG`: Shows the final state output along with the input and
+    #     output data processing result.
+    #
+    #   * `TRACE`: Shows the HTTP request and response for an HTTP Task.
+    #     This level also shows the final state output along with the input
+    #     and output data processing result.
+    #
+    #   Each of these levels also provide information about the status of
+    #   the state execution and the next state to transition to.
+    #   @return [String]
+    #
+    # @!attribute [rw] reveal_secrets
+    #   Specifies whether or not to include secret information in the test
+    #   result. For HTTP Tasks, a secret includes the data that an
+    #   EventBridge connection adds to modify the HTTP request headers,
+    #   query parameters, and body. Step Functions doesn't omit any
+    #   information included in the state definition or the HTTP response.
+    #
+    #   If you set `revealSecrets` to `true`, you must make sure that the
+    #   IAM user that calls the `TestState` API has permission for the
+    #   `states:RevealSecrets` action. For an example of IAM policy that
+    #   sets the `states:RevealSecrets` permission, see [IAM permissions to
+    #   test a state][1]. Without this permission, Step Functions throws an
+    #   access denied error.
+    #
+    #   By default, `revealSecrets` is set to `false`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TestStateInput AWS API Documentation
+    #
+    class TestStateInput < Struct.new(
+      :definition,
+      :role_arn,
+      :input,
+      :inspection_level,
+      :reveal_secrets)
+      SENSITIVE = [:definition, :input]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] output
+    #   The JSON output data of the state. Length constraints apply to the
+    #   payload size, and are expressed as bytes in UTF-8 encoding.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error returned when the execution of a state fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] cause
+    #   A detailed explanation of the cause for the error when the execution
+    #   of a state fails.
+    #   @return [String]
+    #
+    # @!attribute [rw] inspection_data
+    #   Returns additional details about the state's execution, including
+    #   its input and output data processing flow, and HTTP request and
+    #   response information. The `inspectionLevel` request parameter
+    #   specifies which details are returned.
+    #   @return [Types::InspectionData]
+    #
+    # @!attribute [rw] next_state
+    #   The name of the next state to transition to. If you haven't defined
+    #   a next state in your definition or if the execution of the state
+    #   fails, this ﬁeld doesn't contain a value.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The execution status of the state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/TestStateOutput AWS API Documentation
+    #
+    class TestStateOutput < Struct.new(
+      :output,
+      :error,
+      :cause,
+      :inspection_data,
+      :next_state,
+      :status)
+      SENSITIVE = [:output, :error, :cause, :inspection_data]
       include Aws::Structure
     end
 
@@ -3862,6 +4369,85 @@ module Aws::States
       :update_date,
       :revision_id,
       :state_machine_version_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an error found during validation. Validation errors found in
+    # the definition return in the response as **diagnostic elements**,
+    # rather than raise an exception.
+    #
+    # @!attribute [rw] severity
+    #   A value of `ERROR` means that you cannot create or update a state
+    #   machine with this definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   Identifying code for the diagnostic.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Message describing the diagnostic condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   Location of the issue in the state machine, if available.
+    #
+    #   For errors specific to a field, the location could be in the format:
+    #   `/States/<StateName>/<FieldName>`, for example:
+    #   `/States/FailState/ErrorPath`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ValidateStateMachineDefinitionDiagnostic AWS API Documentation
+    #
+    class ValidateStateMachineDefinitionDiagnostic < Struct.new(
+      :severity,
+      :code,
+      :message,
+      :location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] definition
+    #   The Amazon States Language definition of the state machine. For more
+    #   information, see [Amazon States Language][1] (ASL).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The target type of state machine for this definition. The default is
+    #   `STANDARD`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ValidateStateMachineDefinitionInput AWS API Documentation
+    #
+    class ValidateStateMachineDefinitionInput < Struct.new(
+      :definition,
+      :type)
+      SENSITIVE = [:definition]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result
+    #   The result value will be `OK` when no syntax errors are found, or
+    #   `FAIL` if the workflow definition does not pass verification.
+    #   @return [String]
+    #
+    # @!attribute [rw] diagnostics
+    #   If the result is `OK`, this field will be empty. When there are
+    #   errors, this field will contain an array of **Diagnostic** objects
+    #   to help you troubleshoot.
+    #   @return [Array<Types::ValidateStateMachineDefinitionDiagnostic>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ValidateStateMachineDefinitionOutput AWS API Documentation
+    #
+    class ValidateStateMachineDefinitionOutput < Struct.new(
+      :result,
+      :diagnostics)
       SENSITIVE = []
       include Aws::Structure
     end

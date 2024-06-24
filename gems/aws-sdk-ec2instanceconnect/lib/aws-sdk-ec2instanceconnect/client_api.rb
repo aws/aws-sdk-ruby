@@ -31,6 +31,7 @@ module Aws::EC2InstanceConnect
     SerialConsoleAccessDisabledException = Shapes::StructureShape.new(name: 'SerialConsoleAccessDisabledException')
     SerialConsoleSessionLimitExceededException = Shapes::StructureShape.new(name: 'SerialConsoleSessionLimitExceededException')
     SerialConsoleSessionUnavailableException = Shapes::StructureShape.new(name: 'SerialConsoleSessionUnavailableException')
+    SerialConsoleSessionUnsupportedException = Shapes::StructureShape.new(name: 'SerialConsoleSessionUnsupportedException')
     SerialPort = Shapes::IntegerShape.new(name: 'SerialPort')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
     String = Shapes::StringShape.new(name: 'String')
@@ -82,6 +83,9 @@ module Aws::EC2InstanceConnect
 
     SerialConsoleSessionUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     SerialConsoleSessionUnavailableException.struct_class = Types::SerialConsoleSessionUnavailableException
+
+    SerialConsoleSessionUnsupportedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    SerialConsoleSessionUnsupportedException.struct_class = Types::SerialConsoleSessionUnsupportedException
 
     ServiceException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ServiceException.struct_class = Types::ServiceException
@@ -140,6 +144,7 @@ module Aws::EC2InstanceConnect
         o.errors << Shapes::ShapeRef.new(shape: SerialConsoleSessionUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: EC2InstanceStateInvalidException)
         o.errors << Shapes::ShapeRef.new(shape: EC2InstanceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: SerialConsoleSessionUnsupportedException)
       end)
     end
 

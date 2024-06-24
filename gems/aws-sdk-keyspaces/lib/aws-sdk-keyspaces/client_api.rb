@@ -15,6 +15,10 @@ module Aws::Keyspaces
 
     ARN = Shapes::StringShape.new(name: 'ARN')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AutoScalingPolicy = Shapes::StructureShape.new(name: 'AutoScalingPolicy')
+    AutoScalingSettings = Shapes::StructureShape.new(name: 'AutoScalingSettings')
+    AutoScalingSpecification = Shapes::StructureShape.new(name: 'AutoScalingSpecification')
+    BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     CapacitySpecification = Shapes::StructureShape.new(name: 'CapacitySpecification')
     CapacitySpecificationSummary = Shapes::StructureShape.new(name: 'CapacitySpecificationSummary')
     CapacityUnits = Shapes::IntegerShape.new(name: 'CapacityUnits')
@@ -35,13 +39,17 @@ module Aws::Keyspaces
     DeleteKeyspaceResponse = Shapes::StructureShape.new(name: 'DeleteKeyspaceResponse')
     DeleteTableRequest = Shapes::StructureShape.new(name: 'DeleteTableRequest')
     DeleteTableResponse = Shapes::StructureShape.new(name: 'DeleteTableResponse')
+    DoubleObject = Shapes::FloatShape.new(name: 'DoubleObject')
     EncryptionSpecification = Shapes::StructureShape.new(name: 'EncryptionSpecification')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
     GetKeyspaceRequest = Shapes::StructureShape.new(name: 'GetKeyspaceRequest')
     GetKeyspaceResponse = Shapes::StructureShape.new(name: 'GetKeyspaceResponse')
+    GetTableAutoScalingSettingsRequest = Shapes::StructureShape.new(name: 'GetTableAutoScalingSettingsRequest')
+    GetTableAutoScalingSettingsResponse = Shapes::StructureShape.new(name: 'GetTableAutoScalingSettingsResponse')
     GetTableRequest = Shapes::StructureShape.new(name: 'GetTableRequest')
     GetTableResponse = Shapes::StructureShape.new(name: 'GetTableResponse')
+    IntegerObject = Shapes::IntegerShape.new(name: 'IntegerObject')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     KeyspaceName = Shapes::StringShape.new(name: 'KeyspaceName')
     KeyspaceSummary = Shapes::StructureShape.new(name: 'KeyspaceSummary')
@@ -60,6 +68,12 @@ module Aws::Keyspaces
     PointInTimeRecoveryStatus = Shapes::StringShape.new(name: 'PointInTimeRecoveryStatus')
     PointInTimeRecoverySummary = Shapes::StructureShape.new(name: 'PointInTimeRecoverySummary')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
+    ReplicaAutoScalingSpecification = Shapes::StructureShape.new(name: 'ReplicaAutoScalingSpecification')
+    ReplicaAutoScalingSpecificationList = Shapes::ListShape.new(name: 'ReplicaAutoScalingSpecificationList')
+    ReplicaSpecification = Shapes::StructureShape.new(name: 'ReplicaSpecification')
+    ReplicaSpecificationList = Shapes::ListShape.new(name: 'ReplicaSpecificationList')
+    ReplicaSpecificationSummary = Shapes::StructureShape.new(name: 'ReplicaSpecificationSummary')
+    ReplicaSpecificationSummaryList = Shapes::ListShape.new(name: 'ReplicaSpecificationSummaryList')
     ReplicationSpecification = Shapes::StructureShape.new(name: 'ReplicationSpecification')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RestoreTableRequest = Shapes::StructureShape.new(name: 'RestoreTableRequest')
@@ -80,6 +94,7 @@ module Aws::Keyspaces
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TargetTrackingScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'TargetTrackingScalingPolicyConfiguration')
     ThroughputMode = Shapes::StringShape.new(name: 'ThroughputMode')
     TimeToLive = Shapes::StructureShape.new(name: 'TimeToLive')
     TimeToLiveStatus = Shapes::StringShape.new(name: 'TimeToLiveStatus')
@@ -95,6 +110,19 @@ module Aws::Keyspaces
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AutoScalingPolicy.add_member(:target_tracking_scaling_policy_configuration, Shapes::ShapeRef.new(shape: TargetTrackingScalingPolicyConfiguration, location_name: "targetTrackingScalingPolicyConfiguration"))
+    AutoScalingPolicy.struct_class = Types::AutoScalingPolicy
+
+    AutoScalingSettings.add_member(:auto_scaling_disabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "autoScalingDisabled"))
+    AutoScalingSettings.add_member(:minimum_units, Shapes::ShapeRef.new(shape: CapacityUnits, location_name: "minimumUnits"))
+    AutoScalingSettings.add_member(:maximum_units, Shapes::ShapeRef.new(shape: CapacityUnits, location_name: "maximumUnits"))
+    AutoScalingSettings.add_member(:scaling_policy, Shapes::ShapeRef.new(shape: AutoScalingPolicy, location_name: "scalingPolicy"))
+    AutoScalingSettings.struct_class = Types::AutoScalingSettings
+
+    AutoScalingSpecification.add_member(:write_capacity_auto_scaling, Shapes::ShapeRef.new(shape: AutoScalingSettings, location_name: "writeCapacityAutoScaling"))
+    AutoScalingSpecification.add_member(:read_capacity_auto_scaling, Shapes::ShapeRef.new(shape: AutoScalingSettings, location_name: "readCapacityAutoScaling"))
+    AutoScalingSpecification.struct_class = Types::AutoScalingSpecification
 
     CapacitySpecification.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, required: true, location_name: "throughputMode"))
     CapacitySpecification.add_member(:read_capacity_units, Shapes::ShapeRef.new(shape: CapacityUnits, location_name: "readCapacityUnits"))
@@ -147,6 +175,8 @@ module Aws::Keyspaces
     CreateTableRequest.add_member(:default_time_to_live, Shapes::ShapeRef.new(shape: DefaultTimeToLive, location_name: "defaultTimeToLive"))
     CreateTableRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateTableRequest.add_member(:client_side_timestamps, Shapes::ShapeRef.new(shape: ClientSideTimestamps, location_name: "clientSideTimestamps"))
+    CreateTableRequest.add_member(:auto_scaling_specification, Shapes::ShapeRef.new(shape: AutoScalingSpecification, location_name: "autoScalingSpecification"))
+    CreateTableRequest.add_member(:replica_specifications, Shapes::ShapeRef.new(shape: ReplicaSpecificationList, location_name: "replicaSpecifications"))
     CreateTableRequest.struct_class = Types::CreateTableRequest
 
     CreateTableResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "resourceArn"))
@@ -176,6 +206,17 @@ module Aws::Keyspaces
     GetKeyspaceResponse.add_member(:replication_regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "replicationRegions"))
     GetKeyspaceResponse.struct_class = Types::GetKeyspaceResponse
 
+    GetTableAutoScalingSettingsRequest.add_member(:keyspace_name, Shapes::ShapeRef.new(shape: KeyspaceName, required: true, location_name: "keyspaceName"))
+    GetTableAutoScalingSettingsRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "tableName"))
+    GetTableAutoScalingSettingsRequest.struct_class = Types::GetTableAutoScalingSettingsRequest
+
+    GetTableAutoScalingSettingsResponse.add_member(:keyspace_name, Shapes::ShapeRef.new(shape: KeyspaceName, required: true, location_name: "keyspaceName"))
+    GetTableAutoScalingSettingsResponse.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "tableName"))
+    GetTableAutoScalingSettingsResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "resourceArn"))
+    GetTableAutoScalingSettingsResponse.add_member(:auto_scaling_specification, Shapes::ShapeRef.new(shape: AutoScalingSpecification, location_name: "autoScalingSpecification"))
+    GetTableAutoScalingSettingsResponse.add_member(:replica_specifications, Shapes::ShapeRef.new(shape: ReplicaAutoScalingSpecificationList, location_name: "replicaSpecifications"))
+    GetTableAutoScalingSettingsResponse.struct_class = Types::GetTableAutoScalingSettingsResponse
+
     GetTableRequest.add_member(:keyspace_name, Shapes::ShapeRef.new(shape: KeyspaceName, required: true, location_name: "keyspaceName"))
     GetTableRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "tableName"))
     GetTableRequest.struct_class = Types::GetTableRequest
@@ -193,6 +234,7 @@ module Aws::Keyspaces
     GetTableResponse.add_member(:default_time_to_live, Shapes::ShapeRef.new(shape: DefaultTimeToLive, location_name: "defaultTimeToLive"))
     GetTableResponse.add_member(:comment, Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
     GetTableResponse.add_member(:client_side_timestamps, Shapes::ShapeRef.new(shape: ClientSideTimestamps, location_name: "clientSideTimestamps"))
+    GetTableResponse.add_member(:replica_specifications, Shapes::ShapeRef.new(shape: ReplicaSpecificationSummaryList, location_name: "replicaSpecifications"))
     GetTableResponse.struct_class = Types::GetTableResponse
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -246,6 +288,26 @@ module Aws::Keyspaces
 
     RegionList.member = Shapes::ShapeRef.new(shape: region)
 
+    ReplicaAutoScalingSpecification.add_member(:region, Shapes::ShapeRef.new(shape: region, location_name: "region"))
+    ReplicaAutoScalingSpecification.add_member(:auto_scaling_specification, Shapes::ShapeRef.new(shape: AutoScalingSpecification, location_name: "autoScalingSpecification"))
+    ReplicaAutoScalingSpecification.struct_class = Types::ReplicaAutoScalingSpecification
+
+    ReplicaAutoScalingSpecificationList.member = Shapes::ShapeRef.new(shape: ReplicaAutoScalingSpecification)
+
+    ReplicaSpecification.add_member(:region, Shapes::ShapeRef.new(shape: region, required: true, location_name: "region"))
+    ReplicaSpecification.add_member(:read_capacity_units, Shapes::ShapeRef.new(shape: CapacityUnits, location_name: "readCapacityUnits"))
+    ReplicaSpecification.add_member(:read_capacity_auto_scaling, Shapes::ShapeRef.new(shape: AutoScalingSettings, location_name: "readCapacityAutoScaling"))
+    ReplicaSpecification.struct_class = Types::ReplicaSpecification
+
+    ReplicaSpecificationList.member = Shapes::ShapeRef.new(shape: ReplicaSpecification)
+
+    ReplicaSpecificationSummary.add_member(:region, Shapes::ShapeRef.new(shape: region, location_name: "region"))
+    ReplicaSpecificationSummary.add_member(:status, Shapes::ShapeRef.new(shape: TableStatus, location_name: "status"))
+    ReplicaSpecificationSummary.add_member(:capacity_specification, Shapes::ShapeRef.new(shape: CapacitySpecificationSummary, location_name: "capacitySpecification"))
+    ReplicaSpecificationSummary.struct_class = Types::ReplicaSpecificationSummary
+
+    ReplicaSpecificationSummaryList.member = Shapes::ShapeRef.new(shape: ReplicaSpecificationSummary)
+
     ReplicationSpecification.add_member(:replication_strategy, Shapes::ShapeRef.new(shape: rs, required: true, location_name: "replicationStrategy"))
     ReplicationSpecification.add_member(:region_list, Shapes::ShapeRef.new(shape: RegionList, location_name: "regionList"))
     ReplicationSpecification.struct_class = Types::ReplicationSpecification
@@ -263,6 +325,8 @@ module Aws::Keyspaces
     RestoreTableRequest.add_member(:encryption_specification_override, Shapes::ShapeRef.new(shape: EncryptionSpecification, location_name: "encryptionSpecificationOverride"))
     RestoreTableRequest.add_member(:point_in_time_recovery_override, Shapes::ShapeRef.new(shape: PointInTimeRecovery, location_name: "pointInTimeRecoveryOverride"))
     RestoreTableRequest.add_member(:tags_override, Shapes::ShapeRef.new(shape: TagList, location_name: "tagsOverride"))
+    RestoreTableRequest.add_member(:auto_scaling_specification, Shapes::ShapeRef.new(shape: AutoScalingSpecification, location_name: "autoScalingSpecification"))
+    RestoreTableRequest.add_member(:replica_specifications, Shapes::ShapeRef.new(shape: ReplicaSpecificationList, location_name: "replicaSpecifications"))
     RestoreTableRequest.struct_class = Types::RestoreTableRequest
 
     RestoreTableResponse.add_member(:restored_table_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "restoredTableARN"))
@@ -301,6 +365,12 @@ module Aws::Keyspaces
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TargetTrackingScalingPolicyConfiguration.add_member(:disable_scale_in, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "disableScaleIn"))
+    TargetTrackingScalingPolicyConfiguration.add_member(:scale_in_cooldown, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "scaleInCooldown"))
+    TargetTrackingScalingPolicyConfiguration.add_member(:scale_out_cooldown, Shapes::ShapeRef.new(shape: IntegerObject, location_name: "scaleOutCooldown"))
+    TargetTrackingScalingPolicyConfiguration.add_member(:target_value, Shapes::ShapeRef.new(shape: DoubleObject, required: true, location_name: "targetValue"))
+    TargetTrackingScalingPolicyConfiguration.struct_class = Types::TargetTrackingScalingPolicyConfiguration
+
     TimeToLive.add_member(:status, Shapes::ShapeRef.new(shape: TimeToLiveStatus, required: true, location_name: "status"))
     TimeToLive.struct_class = Types::TimeToLive
 
@@ -319,6 +389,8 @@ module Aws::Keyspaces
     UpdateTableRequest.add_member(:ttl, Shapes::ShapeRef.new(shape: TimeToLive, location_name: "ttl"))
     UpdateTableRequest.add_member(:default_time_to_live, Shapes::ShapeRef.new(shape: DefaultTimeToLive, location_name: "defaultTimeToLive"))
     UpdateTableRequest.add_member(:client_side_timestamps, Shapes::ShapeRef.new(shape: ClientSideTimestamps, location_name: "clientSideTimestamps"))
+    UpdateTableRequest.add_member(:auto_scaling_specification, Shapes::ShapeRef.new(shape: AutoScalingSpecification, location_name: "autoScalingSpecification"))
+    UpdateTableRequest.add_member(:replica_specifications, Shapes::ShapeRef.new(shape: ReplicaSpecificationList, location_name: "replicaSpecifications"))
     UpdateTableRequest.struct_class = Types::UpdateTableRequest
 
     UpdateTableResponse.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "resourceArn"))
@@ -420,6 +492,19 @@ module Aws::Keyspaces
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetTableRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTableResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_table_auto_scaling_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTableAutoScalingSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTableAutoScalingSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTableAutoScalingSettingsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

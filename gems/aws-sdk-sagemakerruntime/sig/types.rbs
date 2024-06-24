@@ -1,0 +1,130 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SageMakerRuntime
+  module Types
+
+    class InternalDependencyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalFailure
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalStreamFailure
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class InvokeEndpointAsyncInput
+      attr_accessor endpoint_name: ::String
+      attr_accessor content_type: ::String
+      attr_accessor accept: ::String
+      attr_accessor custom_attributes: ::String
+      attr_accessor inference_id: ::String
+      attr_accessor input_location: ::String
+      attr_accessor request_ttl_seconds: ::Integer
+      attr_accessor invocation_timeout_seconds: ::Integer
+      SENSITIVE: [:custom_attributes]
+    end
+
+    class InvokeEndpointAsyncOutput
+      attr_accessor inference_id: ::String
+      attr_accessor output_location: ::String
+      attr_accessor failure_location: ::String
+      SENSITIVE: []
+    end
+
+    class InvokeEndpointInput
+      attr_accessor endpoint_name: ::String
+      attr_accessor body: ::String
+      attr_accessor content_type: ::String
+      attr_accessor accept: ::String
+      attr_accessor custom_attributes: ::String
+      attr_accessor target_model: ::String
+      attr_accessor target_variant: ::String
+      attr_accessor target_container_hostname: ::String
+      attr_accessor inference_id: ::String
+      attr_accessor enable_explanations: ::String
+      attr_accessor inference_component_name: ::String
+      SENSITIVE: [:body, :custom_attributes]
+    end
+
+    class InvokeEndpointOutput
+      attr_accessor body: ::String
+      attr_accessor content_type: ::String
+      attr_accessor invoked_production_variant: ::String
+      attr_accessor custom_attributes: ::String
+      SENSITIVE: [:body, :custom_attributes]
+    end
+
+    class InvokeEndpointWithResponseStreamInput
+      attr_accessor endpoint_name: ::String
+      attr_accessor body: ::String
+      attr_accessor content_type: ::String
+      attr_accessor accept: ::String
+      attr_accessor custom_attributes: ::String
+      attr_accessor target_variant: ::String
+      attr_accessor target_container_hostname: ::String
+      attr_accessor inference_id: ::String
+      attr_accessor inference_component_name: ::String
+      SENSITIVE: [:body, :custom_attributes]
+    end
+
+    class InvokeEndpointWithResponseStreamOutput
+      attr_accessor body: Types::ResponseStream
+      attr_accessor content_type: ::String
+      attr_accessor invoked_production_variant: ::String
+      attr_accessor custom_attributes: ::String
+      SENSITIVE: [:custom_attributes]
+    end
+
+    class ModelError
+      attr_accessor message: ::String
+      attr_accessor original_status_code: ::Integer
+      attr_accessor original_message: ::String
+      attr_accessor log_stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ModelNotReadyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ModelStreamError
+      attr_accessor message: ::String
+      attr_accessor error_code: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class PayloadPart
+      attr_accessor bytes: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: [:bytes]
+    end
+
+    class ServiceUnavailable
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResponseStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:payload_part, :model_stream_error, :internal_stream_failure]
+    end
+  end
+end

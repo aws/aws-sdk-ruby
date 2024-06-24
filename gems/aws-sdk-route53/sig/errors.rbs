@@ -1,0 +1,224 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Route53
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class CidrBlockInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CidrCollectionAlreadyExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CidrCollectionInUseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CidrCollectionVersionMismatchException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConcurrentModification < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConflictingDomainExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConflictingTypes < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DNSSECNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DelegationSetAlreadyCreated < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DelegationSetAlreadyReusable < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DelegationSetInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DelegationSetNotAvailable < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DelegationSetNotReusable < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class HealthCheckAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class HealthCheckInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class HealthCheckVersionMismatch < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class HostedZoneAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class HostedZoneNotEmpty < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class HostedZoneNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class HostedZoneNotPrivate < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class HostedZonePartiallyDelegated < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class IncompatibleVersion < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InsufficientCloudWatchLogsResourcePolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidArgument < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidChangeBatch < ::Aws::Errors::ServiceError
+        def messages: () -> ::String
+        def message: () -> ::String
+      end
+      class InvalidDomainName < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidInput < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidKMSArn < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidKeySigningKeyName < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidKeySigningKeyStatus < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidPaginationToken < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidSigningStatus < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidTrafficPolicyDocument < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidVPCId < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KeySigningKeyAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KeySigningKeyInParentDSRecord < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KeySigningKeyInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class KeySigningKeyWithActiveStatusNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LastVPCAssociation < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitsExceeded < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchChange < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchCidrCollectionException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchCidrLocationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchCloudWatchLogsLogGroup < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchDelegationSet < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchGeoLocation < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchHealthCheck < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchHostedZone < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchKeySigningKey < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchQueryLoggingConfig < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchTrafficPolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NoSuchTrafficPolicyInstance < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotAuthorizedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PriorRequestNotComplete < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PublicZoneVPCAssociation < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class QueryLoggingConfigAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyHealthChecks < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyHostedZones < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyKeySigningKeys < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTrafficPolicies < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTrafficPolicyInstances < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTrafficPolicyVersionsForCurrentPolicy < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyVPCAssociationAuthorizations < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TrafficPolicyAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TrafficPolicyInUse < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TrafficPolicyInstanceAlreadyExists < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class VPCAssociationAuthorizationNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class VPCAssociationNotFound < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

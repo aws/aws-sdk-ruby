@@ -343,6 +343,7 @@ module Aws::Pinpoint
     ListOfInAppMessageContent = Shapes::ListShape.new(name: 'ListOfInAppMessageContent')
     ListOfJourneyResponse = Shapes::ListShape.new(name: 'ListOfJourneyResponse')
     ListOfJourneyRunResponse = Shapes::ListShape.new(name: 'ListOfJourneyRunResponse')
+    ListOfMessageHeader = Shapes::ListShape.new(name: 'ListOfMessageHeader')
     ListOfMultiConditionalBranch = Shapes::ListShape.new(name: 'ListOfMultiConditionalBranch')
     ListOfOpenHoursRules = Shapes::ListShape.new(name: 'ListOfOpenHoursRules')
     ListOfRandomSplitEntry = Shapes::ListShape.new(name: 'ListOfRandomSplitEntry')
@@ -389,6 +390,7 @@ module Aws::Pinpoint
     Message = Shapes::StructureShape.new(name: 'Message')
     MessageBody = Shapes::StructureShape.new(name: 'MessageBody')
     MessageConfiguration = Shapes::StructureShape.new(name: 'MessageConfiguration')
+    MessageHeader = Shapes::StructureShape.new(name: 'MessageHeader')
     MessageRequest = Shapes::StructureShape.new(name: 'MessageRequest')
     MessageResponse = Shapes::StructureShape.new(name: 'MessageResponse')
     MessageResult = Shapes::StructureShape.new(name: 'MessageResult')
@@ -864,6 +866,7 @@ module Aws::Pinpoint
 
     CampaignEmailMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     CampaignEmailMessage.add_member(:from_address, Shapes::ShapeRef.new(shape: __string, location_name: "FromAddress"))
+    CampaignEmailMessage.add_member(:headers, Shapes::ShapeRef.new(shape: ListOfMessageHeader, location_name: "Headers"))
     CampaignEmailMessage.add_member(:html_body, Shapes::ShapeRef.new(shape: __string, location_name: "HtmlBody"))
     CampaignEmailMessage.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
     CampaignEmailMessage.struct_class = Types::CampaignEmailMessage
@@ -1375,6 +1378,7 @@ module Aws::Pinpoint
     EmailChannelRequest.add_member(:from_address, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "FromAddress"))
     EmailChannelRequest.add_member(:identity, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Identity"))
     EmailChannelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
+    EmailChannelRequest.add_member(:orchestration_sending_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "OrchestrationSendingRoleArn"))
     EmailChannelRequest.struct_class = Types::EmailChannelRequest
 
     EmailChannelResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
@@ -1391,6 +1395,7 @@ module Aws::Pinpoint
     EmailChannelResponse.add_member(:messages_per_second, Shapes::ShapeRef.new(shape: __integer, location_name: "MessagesPerSecond"))
     EmailChannelResponse.add_member(:platform, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Platform"))
     EmailChannelResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
+    EmailChannelResponse.add_member(:orchestration_sending_role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "OrchestrationSendingRoleArn"))
     EmailChannelResponse.add_member(:version, Shapes::ShapeRef.new(shape: __integer, location_name: "Version"))
     EmailChannelResponse.struct_class = Types::EmailChannelResponse
 
@@ -1413,6 +1418,7 @@ module Aws::Pinpoint
     EmailTemplateRequest.add_member(:html_part, Shapes::ShapeRef.new(shape: __string, location_name: "HtmlPart"))
     EmailTemplateRequest.add_member(:recommender_id, Shapes::ShapeRef.new(shape: __string, location_name: "RecommenderId"))
     EmailTemplateRequest.add_member(:subject, Shapes::ShapeRef.new(shape: __string, location_name: "Subject"))
+    EmailTemplateRequest.add_member(:headers, Shapes::ShapeRef.new(shape: ListOfMessageHeader, location_name: "Headers"))
     EmailTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
     EmailTemplateRequest.add_member(:template_description, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateDescription"))
     EmailTemplateRequest.add_member(:text_part, Shapes::ShapeRef.new(shape: __string, location_name: "TextPart"))
@@ -1425,6 +1431,7 @@ module Aws::Pinpoint
     EmailTemplateResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "LastModifiedDate"))
     EmailTemplateResponse.add_member(:recommender_id, Shapes::ShapeRef.new(shape: __string, location_name: "RecommenderId"))
     EmailTemplateResponse.add_member(:subject, Shapes::ShapeRef.new(shape: __string, location_name: "Subject"))
+    EmailTemplateResponse.add_member(:headers, Shapes::ShapeRef.new(shape: ListOfMessageHeader, location_name: "Headers"))
     EmailTemplateResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "tags"))
     EmailTemplateResponse.add_member(:template_description, Shapes::ShapeRef.new(shape: __string, location_name: "TemplateDescription"))
     EmailTemplateResponse.add_member(:template_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "TemplateName"))
@@ -2398,6 +2405,8 @@ module Aws::Pinpoint
 
     ListOfJourneyRunResponse.member = Shapes::ShapeRef.new(shape: JourneyRunResponse)
 
+    ListOfMessageHeader.member = Shapes::ShapeRef.new(shape: MessageHeader)
+
     ListOfMultiConditionalBranch.member = Shapes::ShapeRef.new(shape: MultiConditionalBranch)
 
     ListOfOpenHoursRules.member = Shapes::ShapeRef.new(shape: OpenHoursRule)
@@ -2550,6 +2559,10 @@ module Aws::Pinpoint
     MessageConfiguration.add_member(:sms_message, Shapes::ShapeRef.new(shape: CampaignSmsMessage, location_name: "SMSMessage"))
     MessageConfiguration.add_member(:in_app_message, Shapes::ShapeRef.new(shape: CampaignInAppMessage, location_name: "InAppMessage"))
     MessageConfiguration.struct_class = Types::MessageConfiguration
+
+    MessageHeader.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    MessageHeader.add_member(:value, Shapes::ShapeRef.new(shape: __string, location_name: "Value"))
+    MessageHeader.struct_class = Types::MessageHeader
 
     MessageRequest.add_member(:addresses, Shapes::ShapeRef.new(shape: MapOfAddressConfiguration, location_name: "Addresses"))
     MessageRequest.add_member(:context, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Context"))
@@ -2973,6 +2986,7 @@ module Aws::Pinpoint
     SimpleEmail.add_member(:html_part, Shapes::ShapeRef.new(shape: SimpleEmailPart, location_name: "HtmlPart"))
     SimpleEmail.add_member(:subject, Shapes::ShapeRef.new(shape: SimpleEmailPart, location_name: "Subject"))
     SimpleEmail.add_member(:text_part, Shapes::ShapeRef.new(shape: SimpleEmailPart, location_name: "TextPart"))
+    SimpleEmail.add_member(:headers, Shapes::ShapeRef.new(shape: ListOfMessageHeader, location_name: "Headers"))
     SimpleEmail.struct_class = Types::SimpleEmail
 
     SimpleEmailPart.add_member(:charset, Shapes::ShapeRef.new(shape: __string, location_name: "Charset"))

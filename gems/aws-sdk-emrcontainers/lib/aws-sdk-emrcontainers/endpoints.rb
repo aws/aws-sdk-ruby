@@ -54,6 +54,20 @@ module Aws::EMRContainers
       end
     end
 
+    class CreateSecurityConfiguration
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EMRContainers::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateVirtualCluster
       def self.build(context)
         unless context.config.regional_endpoint
@@ -152,6 +166,20 @@ module Aws::EMRContainers
       end
     end
 
+    class DescribeSecurityConfiguration
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EMRContainers::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DescribeVirtualCluster
       def self.build(context)
         unless context.config.regional_endpoint
@@ -209,6 +237,20 @@ module Aws::EMRContainers
     end
 
     class ListManagedEndpoints
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::EMRContainers::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListSecurityConfigurations
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

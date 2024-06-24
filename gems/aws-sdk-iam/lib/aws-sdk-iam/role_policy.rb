@@ -68,7 +68,7 @@ module Aws::IAM
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_role_policy(
         role_name: @role_name,
         policy_name: @name
@@ -188,7 +188,7 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -205,7 +205,7 @@ module Aws::IAM
         role_name: @role_name,
         policy_name: @name
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_role_policy(options)
       end
       resp.data
@@ -246,7 +246,7 @@ module Aws::IAM
         role_name: @role_name,
         policy_name: @name
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.put_role_policy(options)
       end
       resp.data

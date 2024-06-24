@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::ApplicationDiscoveryService
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::ApplicationDiscoveryService
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::ApplicationDiscoveryService
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::ApplicationDiscoveryService
     #   @option options [Aws::ApplicationDiscoveryService::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ApplicationDiscoveryService::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -424,6 +449,42 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
+    # Deletes one or more agents or collectors as specified by ID. Deleting
+    # an agent or collector does not delete the previously discovered data.
+    # To delete the data collected, use `StartBatchDeleteConfigurationTask`.
+    #
+    # @option params [required, Array<Types::DeleteAgent>] :delete_agents
+    #   The list of agents to delete.
+    #
+    # @return [Types::BatchDeleteAgentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteAgentsResponse#errors #errors} => Array&lt;Types::BatchDeleteAgentError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_agents({
+    #     delete_agents: [ # required
+    #       {
+    #         agent_id: "AgentId", # required
+    #         force: false,
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].agent_id #=> String
+    #   resp.errors[0].error_message #=> String
+    #   resp.errors[0].error_code #=> String, one of "NOT_FOUND", "INTERNAL_SERVER_ERROR", "AGENT_IN_USE"
+    #
+    # @overload batch_delete_agents(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_agents(params = {}, options = {})
+      req = build_request(:batch_delete_agents, params)
+      req.send_request(options)
+    end
+
     # Deletes one or more import tasks, each identified by their import ID.
     # Each import task has a number of records that can identify servers or
     # applications.
@@ -439,6 +500,10 @@ module Aws::ApplicationDiscoveryService
     # @option params [required, Array<String>] :import_task_ids
     #   The IDs for the import tasks that you want to delete.
     #
+    # @option params [Boolean] :delete_history
+    #   Set to `true` to remove the deleted import task from
+    #   DescribeImportTasks.
+    #
     # @return [Types::BatchDeleteImportDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchDeleteImportDataResponse#errors #errors} => Array&lt;Types::BatchDeleteImportDataError&gt;
@@ -447,6 +512,7 @@ module Aws::ApplicationDiscoveryService
     #
     #   resp = client.batch_delete_import_data({
     #     import_task_ids: ["ImportTaskIdentifier"], # required
+    #     delete_history: false,
     #   })
     #
     # @example Response structure
@@ -616,6 +682,8 @@ module Aws::ApplicationDiscoveryService
     #   * {Types::DescribeAgentsResponse#agents_info #agents_info} => Array&lt;Types::AgentInfo&gt;
     #   * {Types::DescribeAgentsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_agents({
@@ -652,6 +720,49 @@ module Aws::ApplicationDiscoveryService
     # @param [Hash] params ({})
     def describe_agents(params = {}, options = {})
       req = build_request(:describe_agents, params)
+      req.send_request(options)
+    end
+
+    # Takes a unique deletion task identifier as input and returns metadata
+    # about a configuration deletion task.
+    #
+    # @option params [required, String] :task_id
+    #   The ID of the task to delete.
+    #
+    # @return [Types::DescribeBatchDeleteConfigurationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBatchDeleteConfigurationTaskResponse#task #task} => Types::BatchDeleteConfigurationTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_batch_delete_configuration_task({
+    #     task_id: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task.task_id #=> String
+    #   resp.task.status #=> String, one of "INITIALIZING", "VALIDATING", "DELETING", "COMPLETED", "FAILED"
+    #   resp.task.start_time #=> Time
+    #   resp.task.end_time #=> Time
+    #   resp.task.configuration_type #=> String, one of "SERVER"
+    #   resp.task.requested_configurations #=> Array
+    #   resp.task.requested_configurations[0] #=> String
+    #   resp.task.deleted_configurations #=> Array
+    #   resp.task.deleted_configurations[0] #=> String
+    #   resp.task.failed_configurations #=> Array
+    #   resp.task.failed_configurations[0].configuration_id #=> String
+    #   resp.task.failed_configurations[0].error_status_code #=> Integer
+    #   resp.task.failed_configurations[0].error_message #=> String
+    #   resp.task.deletion_warnings #=> Array
+    #   resp.task.deletion_warnings[0].configuration_id #=> String
+    #   resp.task.deletion_warnings[0].warning_code #=> Integer
+    #   resp.task.deletion_warnings[0].warning_text #=> String
+    #
+    # @overload describe_batch_delete_configuration_task(params = {})
+    # @param [Hash] params ({})
+    def describe_batch_delete_configuration_task(params = {}, options = {})
+      req = build_request(:describe_batch_delete_configuration_task, params)
       req.send_request(options)
     end
 
@@ -781,6 +892,8 @@ module Aws::ApplicationDiscoveryService
     #   * {Types::DescribeExportConfigurationsResponse#exports_info #exports_info} => Array&lt;Types::ExportInfo&gt;
     #   * {Types::DescribeExportConfigurationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_export_configurations({
@@ -840,6 +953,8 @@ module Aws::ApplicationDiscoveryService
     #
     #   * {Types::DescribeExportTasksResponse#exports_info #exports_info} => Array&lt;Types::ExportInfo&gt;
     #   * {Types::DescribeExportTasksResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -970,6 +1085,8 @@ module Aws::ApplicationDiscoveryService
     #
     #   * {Types::DescribeTagsResponse#tags #tags} => Array&lt;Types::ConfigurationTag&gt;
     #   * {Types::DescribeTagsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -1154,6 +1271,8 @@ module Aws::ApplicationDiscoveryService
     #   * {Types::ListConfigurationsResponse#configurations #configurations} => Array&lt;Hash&lt;String,String&gt;&gt;
     #   * {Types::ListConfigurationsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_configurations({
@@ -1244,6 +1363,38 @@ module Aws::ApplicationDiscoveryService
     # @param [Hash] params ({})
     def list_server_neighbors(params = {}, options = {})
       req = build_request(:list_server_neighbors, params)
+      req.send_request(options)
+    end
+
+    # Takes a list of configurationId as input and starts an asynchronous
+    # deletion task to remove the configurationItems. Returns a unique
+    # deletion task identifier.
+    #
+    # @option params [required, String] :configuration_type
+    #   The type of configuration item to delete. Supported types are: SERVER.
+    #
+    # @option params [required, Array<String>] :configuration_ids
+    #   The list of configuration IDs that will be deleted by the task.
+    #
+    # @return [Types::StartBatchDeleteConfigurationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartBatchDeleteConfigurationTaskResponse#task_id #task_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_batch_delete_configuration_task({
+    #     configuration_type: "SERVER", # required, accepts SERVER
+    #     configuration_ids: ["ConfigurationId"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_id #=> String
+    #
+    # @overload start_batch_delete_configuration_task(params = {})
+    # @param [Hash] params ({})
+    def start_batch_delete_configuration_task(params = {}, options = {})
+      req = build_request(:start_batch_delete_configuration_task, params)
       req.send_request(options)
     end
 
@@ -1625,7 +1776,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

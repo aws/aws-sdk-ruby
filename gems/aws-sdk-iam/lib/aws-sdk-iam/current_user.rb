@@ -145,7 +145,7 @@ module Aws::IAM
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_user
       end
       @data = resp.user
@@ -262,7 +262,7 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -289,7 +289,7 @@ module Aws::IAM
     # @return [AccessKey::Collection]
     def access_keys(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_access_keys(options)
         end
         resp.each_page do |page|
@@ -328,7 +328,7 @@ module Aws::IAM
     # @return [MfaDevice::Collection]
     def mfa_devices(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_mfa_devices(options)
         end
         resp.each_page do |page|
@@ -368,7 +368,7 @@ module Aws::IAM
     # @return [SigningCertificate::Collection]
     def signing_certificates(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_signing_certificates(options)
         end
         resp.each_page do |page|

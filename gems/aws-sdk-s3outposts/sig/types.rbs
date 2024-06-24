@@ -1,0 +1,139 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::S3Outposts
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEndpointRequest
+      attr_accessor outpost_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor security_group_id: ::String
+      attr_accessor access_type: ("Private" | "CustomerOwnedIp")
+      attr_accessor customer_owned_ipv_4_pool: ::String
+      SENSITIVE: []
+    end
+
+    class CreateEndpointResult
+      attr_accessor endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEndpointRequest
+      attr_accessor endpoint_id: ::String
+      attr_accessor outpost_id: ::String
+      SENSITIVE: []
+    end
+
+    class Endpoint
+      attr_accessor endpoint_arn: ::String
+      attr_accessor outposts_id: ::String
+      attr_accessor cidr_block: ::String
+      attr_accessor status: ("Pending" | "Available" | "Deleting" | "Create_Failed" | "Delete_Failed")
+      attr_accessor creation_time: ::Time
+      attr_accessor network_interfaces: ::Array[Types::NetworkInterface]
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_id: ::String
+      attr_accessor security_group_id: ::String
+      attr_accessor access_type: ("Private" | "CustomerOwnedIp")
+      attr_accessor customer_owned_ipv_4_pool: ::String
+      attr_accessor failed_reason: Types::FailedReason
+      SENSITIVE: []
+    end
+
+    class FailedReason
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListEndpointsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEndpointsResult
+      attr_accessor endpoints: ::Array[Types::Endpoint]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOutpostsWithS3Request
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOutpostsWithS3Result
+      attr_accessor outposts: ::Array[Types::Outpost]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSharedEndpointsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor outpost_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListSharedEndpointsResult
+      attr_accessor endpoints: ::Array[Types::Endpoint]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkInterface
+      attr_accessor network_interface_id: ::String
+      SENSITIVE: []
+    end
+
+    class Outpost
+      attr_accessor outpost_arn: ::String
+      attr_accessor s3_outpost_arn: ::String
+      attr_accessor outpost_id: ::String
+      attr_accessor owner_id: ::String
+      attr_accessor capacity_in_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class OutpostOfflineException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

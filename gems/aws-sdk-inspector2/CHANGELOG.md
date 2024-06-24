@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.29.0 (2024-05-03)
+------------------
+
+* Feature - This release adds CSV format to GetCisScanReport for Inspector v2
+
+1.28.0 (2024-04-29)
+------------------
+
+* Feature - Update Inspector2 to include new Agentless API parameters.
+
+1.27.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2024-01-26)
+------------------
+
+* Feature - This release adds ECR container image scanning based on their lastRecordedPullTime.
+
+1.25.0 (2024-01-23)
+------------------
+
+* Feature - This release adds support for CIS scans on EC2 instances.
+
+1.24.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2023-10-12)
+------------------
+
+* Feature - Add MacOs ec2 platform support
+
 1.21.0 (2023-09-27)
 ------------------
 

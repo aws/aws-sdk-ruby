@@ -53,6 +53,6 @@ require_relative 'aws-sdk-internetmonitor/customizations'
 # @!group service
 module Aws::InternetMonitor
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.20.0'
 
 end

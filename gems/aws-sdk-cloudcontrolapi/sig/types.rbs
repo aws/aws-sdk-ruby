@@ -1,0 +1,249 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudControlApi
+  module Types
+
+    class AlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CancelResourceRequestInput
+      attr_accessor request_token: ::String
+      SENSITIVE: []
+    end
+
+    class CancelResourceRequestOutput
+      attr_accessor progress_event: Types::ProgressEvent
+      SENSITIVE: []
+    end
+
+    class ClientTokenConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateResourceInput
+      attr_accessor type_name: ::String
+      attr_accessor type_version_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor desired_state: ::String
+      SENSITIVE: [:desired_state]
+    end
+
+    class CreateResourceOutput
+      attr_accessor progress_event: Types::ProgressEvent
+      SENSITIVE: []
+    end
+
+    class DeleteResourceInput
+      attr_accessor type_name: ::String
+      attr_accessor type_version_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourceOutput
+      attr_accessor progress_event: Types::ProgressEvent
+      SENSITIVE: []
+    end
+
+    class GeneralServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceInput
+      attr_accessor type_name: ::String
+      attr_accessor type_version_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceOutput
+      attr_accessor type_name: ::String
+      attr_accessor resource_description: Types::ResourceDescription
+      SENSITIVE: []
+    end
+
+    class GetResourceRequestStatusInput
+      attr_accessor request_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceRequestStatusOutput
+      attr_accessor progress_event: Types::ProgressEvent
+      SENSITIVE: []
+    end
+
+    class HandlerFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HandlerInternalFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidCredentialsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceRequestsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor resource_request_status_filter: Types::ResourceRequestStatusFilter
+      SENSITIVE: []
+    end
+
+    class ListResourceRequestsOutput
+      attr_accessor resource_request_status_summaries: ::Array[Types::ProgressEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcesInput
+      attr_accessor type_name: ::String
+      attr_accessor type_version_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor resource_model: ::String
+      SENSITIVE: [:resource_model]
+    end
+
+    class ListResourcesOutput
+      attr_accessor type_name: ::String
+      attr_accessor resource_descriptions: ::Array[Types::ResourceDescription]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class NetworkFailureException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotStabilizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotUpdatableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PrivateTypeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ProgressEvent
+      attr_accessor type_name: ::String
+      attr_accessor identifier: ::String
+      attr_accessor request_token: ::String
+      attr_accessor operation: ("CREATE" | "DELETE" | "UPDATE")
+      attr_accessor operation_status: ("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETE")
+      attr_accessor event_time: ::Time
+      attr_accessor resource_model: ::String
+      attr_accessor status_message: ::String
+      attr_accessor error_code: ("NotUpdatable" | "InvalidRequest" | "AccessDenied" | "InvalidCredentials" | "AlreadyExists" | "NotFound" | "ResourceConflict" | "Throttling" | "ServiceLimitExceeded" | "NotStabilized" | "GeneralServiceException" | "ServiceInternalError" | "ServiceTimeout" | "NetworkFailure" | "InternalFailure")
+      attr_accessor retry_after: ::Time
+      SENSITIVE: [:resource_model]
+    end
+
+    class RequestTokenNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceDescription
+      attr_accessor identifier: ::String
+      attr_accessor properties: ::String
+      SENSITIVE: [:properties]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceRequestStatusFilter
+      attr_accessor operations: ::Array[("CREATE" | "DELETE" | "UPDATE")]
+      attr_accessor operation_statuses: ::Array[("PENDING" | "IN_PROGRESS" | "SUCCESS" | "FAILED" | "CANCEL_IN_PROGRESS" | "CANCEL_COMPLETE")]
+      SENSITIVE: []
+    end
+
+    class ServiceInternalErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TypeNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedActionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateResourceInput
+      attr_accessor type_name: ::String
+      attr_accessor type_version_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor identifier: ::String
+      attr_accessor patch_document: ::String
+      SENSITIVE: [:patch_document]
+    end
+
+    class UpdateResourceOutput
+      attr_accessor progress_event: Types::ProgressEvent
+      SENSITIVE: []
+    end
+  end
+end

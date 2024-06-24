@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::WorkSpaces
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::WorkSpaces
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::WorkSpaces
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,56 +357,110 @@ module Aws::WorkSpaces
     #   @option options [Aws::WorkSpaces::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::WorkSpaces::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
+
+    # Accepts the account link invitation.
+    #
+    # There's currently no unlinking capability after you accept the
+    # account linking invitation.
+    #
+    # @option params [required, String] :link_id
+    #   The identifier of the account link.
+    #
+    # @option params [String] :client_token
+    #   A string of up to 64 ASCII characters that Amazon EFS uses to ensure
+    #   idempotent creation.
+    #
+    # @return [Types::AcceptAccountLinkInvitationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptAccountLinkInvitationResult#account_link #account_link} => Types::AccountLink
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_account_link_invitation({
+    #     link_id: "LinkId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_link.account_link_id #=> String
+    #   resp.account_link.account_link_status #=> String, one of "LINKED", "LINKING_FAILED", "LINK_NOT_FOUND", "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT", "REJECTED"
+    #   resp.account_link.source_account_id #=> String
+    #   resp.account_link.target_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AcceptAccountLinkInvitation AWS API Documentation
+    #
+    # @overload accept_account_link_invitation(params = {})
+    # @param [Hash] params ({})
+    def accept_account_link_invitation(params = {}, options = {})
+      req = build_request(:accept_account_link_invitation, params)
+      req.send_request(options)
+    end
 
     # Associates the specified connection alias with the specified directory
     # to enable cross-Region redirection. For more information, see [
@@ -613,6 +677,42 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Creates the account link invitation.
+    #
+    # @option params [required, String] :target_account_id
+    #   The identifier of the target account.
+    #
+    # @option params [String] :client_token
+    #   A string of up to 64 ASCII characters that Amazon EFS uses to ensure
+    #   idempotent creation.
+    #
+    # @return [Types::CreateAccountLinkInvitationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAccountLinkInvitationResult#account_link #account_link} => Types::AccountLink
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_account_link_invitation({
+    #     target_account_id: "AwsAccount", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_link.account_link_id #=> String
+    #   resp.account_link.account_link_status #=> String, one of "LINKED", "LINKING_FAILED", "LINK_NOT_FOUND", "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT", "REJECTED"
+    #   resp.account_link.source_account_id #=> String
+    #   resp.account_link.target_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateAccountLinkInvitation AWS API Documentation
+    #
+    # @overload create_account_link_invitation(params = {})
+    # @param [Hash] params ({})
+    def create_account_link_invitation(params = {}, options = {})
+      req = build_request(:create_account_link_invitation, params)
+      req.send_request(options)
+    end
+
     # Creates a client-add-in for Amazon Connect within a directory. You can
     # create only one Amazon Connect client add-in within a directory.
     #
@@ -795,6 +895,7 @@ module Aws::WorkSpaces
     #             value: "TagValue",
     #           },
     #         ],
+    #         data_replication: "NO_REPLICATION", # accepts NO_REPLICATION, PRIMARY_AS_SOURCE
     #       },
     #     ],
     #   })
@@ -808,6 +909,7 @@ module Aws::WorkSpaces
     #   resp.failed_standby_requests[0].standby_workspace_request.tags #=> Array
     #   resp.failed_standby_requests[0].standby_workspace_request.tags[0].key #=> String
     #   resp.failed_standby_requests[0].standby_workspace_request.tags[0].value #=> String
+    #   resp.failed_standby_requests[0].standby_workspace_request.data_replication #=> String, one of "NO_REPLICATION", "PRIMARY_AS_SOURCE"
     #   resp.failed_standby_requests[0].error_code #=> String
     #   resp.failed_standby_requests[0].error_message #=> String
     #   resp.pending_standby_requests #=> Array
@@ -1083,9 +1185,15 @@ module Aws::WorkSpaces
     # This operation is asynchronous and returns before the WorkSpaces are
     # created.
     #
-    # <note markdown="1"> The `MANUAL` running mode value is only supported by Amazon WorkSpaces
-    # Core. Contact your account team to be allow-listed to use this value.
-    # For more information, see [Amazon WorkSpaces Core][1].
+    # <note markdown="1"> * The `MANUAL` running mode value is only supported by Amazon
+    #   WorkSpaces Core. Contact your account team to be allow-listed to use
+    #   this value. For more information, see [Amazon WorkSpaces Core][1].
+    #
+    # * You don't need to specify the `PCOIP` protocol for Linux bundles
+    #   because `WSP` is the default protocol for those bundles.
+    #
+    # * User-decoupled WorkSpaces are only supported by Amazon WorkSpaces
+    #   Core.
     #
     #  </note>
     #
@@ -1127,6 +1235,7 @@ module Aws::WorkSpaces
     #             value: "TagValue",
     #           },
     #         ],
+    #         workspace_name: "WorkspaceName",
     #       },
     #     ],
     #   })
@@ -1151,6 +1260,7 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_request.tags #=> Array
     #   resp.failed_requests[0].workspace_request.tags[0].key #=> String
     #   resp.failed_requests[0].workspace_request.tags[0].value #=> String
+    #   resp.failed_requests[0].workspace_request.workspace_name #=> String
     #   resp.failed_requests[0].error_code #=> String
     #   resp.failed_requests[0].error_message #=> String
     #   resp.pending_requests #=> Array
@@ -1167,6 +1277,7 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].volume_encryption_key #=> String
     #   resp.pending_requests[0].user_volume_encryption_enabled #=> Boolean
     #   resp.pending_requests[0].root_volume_encryption_enabled #=> Boolean
+    #   resp.pending_requests[0].workspace_name #=> String
     #   resp.pending_requests[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON", "MANUAL"
     #   resp.pending_requests[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.pending_requests[0].workspace_properties.root_volume_size_gib #=> Integer
@@ -1183,6 +1294,12 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].related_workspaces[0].region #=> String
     #   resp.pending_requests[0].related_workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "RESTORING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
     #   resp.pending_requests[0].related_workspaces[0].type #=> String, one of "PRIMARY", "STANDBY"
+    #   resp.pending_requests[0].data_replication_settings.data_replication #=> String, one of "NO_REPLICATION", "PRIMARY_AS_SOURCE"
+    #   resp.pending_requests[0].data_replication_settings.recovery_snapshot_time #=> Time
+    #   resp.pending_requests[0].standby_workspaces_properties #=> Array
+    #   resp.pending_requests[0].standby_workspaces_properties[0].standby_workspace_id #=> String
+    #   resp.pending_requests[0].standby_workspaces_properties[0].data_replication #=> String, one of "NO_REPLICATION", "PRIMARY_AS_SOURCE"
+    #   resp.pending_requests[0].standby_workspaces_properties[0].recovery_snapshot_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaces AWS API Documentation
     #
@@ -1190,6 +1307,42 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def create_workspaces(params = {}, options = {})
       req = build_request(:create_workspaces, params)
+      req.send_request(options)
+    end
+
+    # Deletes the account link invitation.
+    #
+    # @option params [required, String] :link_id
+    #   The identifier of the account link.
+    #
+    # @option params [String] :client_token
+    #   A string of up to 64 ASCII characters that Amazon EFS uses to ensure
+    #   idempotent creation.
+    #
+    # @return [Types::DeleteAccountLinkInvitationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAccountLinkInvitationResult#account_link #account_link} => Types::AccountLink
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_account_link_invitation({
+    #     link_id: "LinkId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_link.account_link_id #=> String
+    #   resp.account_link.account_link_status #=> String, one of "LINKED", "LINKING_FAILED", "LINK_NOT_FOUND", "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT", "REJECTED"
+    #   resp.account_link.source_account_id #=> String
+    #   resp.account_link.target_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteAccountLinkInvitation AWS API Documentation
+    #
+    # @overload delete_account_link_invitation(params = {})
+    # @param [Hash] params ({})
+    def delete_account_link_invitation(params = {}, options = {})
+      req = build_request(:delete_account_link_invitation, params)
       req.send_request(options)
     end
 
@@ -1498,11 +1651,13 @@ module Aws::WorkSpaces
     #
     #   * {Types::DescribeAccountResult#dedicated_tenancy_support #dedicated_tenancy_support} => String
     #   * {Types::DescribeAccountResult#dedicated_tenancy_management_cidr_range #dedicated_tenancy_management_cidr_range} => String
+    #   * {Types::DescribeAccountResult#dedicated_tenancy_account_type #dedicated_tenancy_account_type} => String
     #
     # @example Response structure
     #
     #   resp.dedicated_tenancy_support #=> String, one of "ENABLED", "DISABLED"
     #   resp.dedicated_tenancy_management_cidr_range #=> String
+    #   resp.dedicated_tenancy_account_type #=> String, one of "SOURCE_ACCOUNT", "TARGET_ACCOUNT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeAccount AWS API Documentation
     #
@@ -2452,6 +2607,9 @@ module Aws::WorkSpaces
     #   If you received a `NextToken` from a previous call that was paginated,
     #   provide this token to receive the next set of results.
     #
+    # @option params [String] :workspace_name
+    #   The name of the user-decoupled WorkSpace.
+    #
     # @return [Types::DescribeWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeWorkspacesResult#workspaces #workspaces} => Array&lt;Types::Workspace&gt;
@@ -2468,6 +2626,7 @@ module Aws::WorkSpaces
     #     bundle_id: "BundleId",
     #     limit: 1,
     #     next_token: "PaginationToken",
+    #     workspace_name: "WorkspaceName",
     #   })
     #
     # @example Response structure
@@ -2486,6 +2645,7 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].volume_encryption_key #=> String
     #   resp.workspaces[0].user_volume_encryption_enabled #=> Boolean
     #   resp.workspaces[0].root_volume_encryption_enabled #=> Boolean
+    #   resp.workspaces[0].workspace_name #=> String
     #   resp.workspaces[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON", "MANUAL"
     #   resp.workspaces[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.workspaces[0].workspace_properties.root_volume_size_gib #=> Integer
@@ -2502,6 +2662,12 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].related_workspaces[0].region #=> String
     #   resp.workspaces[0].related_workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "RESTORING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
     #   resp.workspaces[0].related_workspaces[0].type #=> String, one of "PRIMARY", "STANDBY"
+    #   resp.workspaces[0].data_replication_settings.data_replication #=> String, one of "NO_REPLICATION", "PRIMARY_AS_SOURCE"
+    #   resp.workspaces[0].data_replication_settings.recovery_snapshot_time #=> Time
+    #   resp.workspaces[0].standby_workspaces_properties #=> Array
+    #   resp.workspaces[0].standby_workspaces_properties[0].standby_workspace_id #=> String
+    #   resp.workspaces[0].standby_workspaces_properties[0].data_replication #=> String, one of "NO_REPLICATION", "PRIMARY_AS_SOURCE"
+    #   resp.workspaces[0].standby_workspaces_properties[0].recovery_snapshot_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaces AWS API Documentation
@@ -2652,6 +2818,41 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def disassociate_workspace_application(params = {}, options = {})
       req = build_request(:disassociate_workspace_application, params)
+      req.send_request(options)
+    end
+
+    # Retrieves account link information.
+    #
+    # @option params [String] :link_id
+    #   The identifier of the account to link.
+    #
+    # @option params [String] :linked_account_id
+    #   The identifier of the account link
+    #
+    # @return [Types::GetAccountLinkResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountLinkResult#account_link #account_link} => Types::AccountLink
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_account_link({
+    #     link_id: "LinkId",
+    #     linked_account_id: "AwsAccount",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_link.account_link_id #=> String
+    #   resp.account_link.account_link_status #=> String, one of "LINKED", "LINKING_FAILED", "LINK_NOT_FOUND", "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT", "REJECTED"
+    #   resp.account_link.source_account_id #=> String
+    #   resp.account_link.target_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/GetAccountLink AWS API Documentation
+    #
+    # @overload get_account_link(params = {})
+    # @param [Hash] params ({})
+    def get_account_link(params = {}, options = {})
+      req = build_request(:get_account_link, params)
       req.send_request(options)
     end
 
@@ -2914,6 +3115,51 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def import_workspace_image(params = {}, options = {})
       req = build_request(:import_workspace_image, params)
+      req.send_request(options)
+    end
+
+    # Lists all account links.
+    #
+    # @option params [Array<String>] :link_status_filter
+    #   Filters the account based on their link status.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of accounts to return.
+    #
+    # @return [Types::ListAccountLinksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAccountLinksResult#account_links #account_links} => Array&lt;Types::AccountLink&gt;
+    #   * {Types::ListAccountLinksResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_account_links({
+    #     link_status_filter: ["LINKED"], # accepts LINKED, LINKING_FAILED, LINK_NOT_FOUND, PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT, REJECTED
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_links #=> Array
+    #   resp.account_links[0].account_link_id #=> String
+    #   resp.account_links[0].account_link_status #=> String, one of "LINKED", "LINKING_FAILED", "LINK_NOT_FOUND", "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT", "REJECTED"
+    #   resp.account_links[0].source_account_id #=> String
+    #   resp.account_links[0].target_account_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ListAccountLinks AWS API Documentation
+    #
+    # @overload list_account_links(params = {})
+    # @param [Hash] params ({})
+    def list_account_links(params = {}, options = {})
+      req = build_request(:list_account_links, params)
       req.send_request(options)
     end
 
@@ -3292,8 +3538,11 @@ module Aws::WorkSpaces
     # @option params [required, String] :workspace_id
     #   The identifier of the WorkSpace.
     #
-    # @option params [required, Types::WorkspaceProperties] :workspace_properties
+    # @option params [Types::WorkspaceProperties] :workspace_properties
     #   The properties of the WorkSpace.
+    #
+    # @option params [String] :data_replication
+    #   Indicates the data replication status.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3301,7 +3550,7 @@ module Aws::WorkSpaces
     #
     #   resp = client.modify_workspace_properties({
     #     workspace_id: "WorkspaceId", # required
-    #     workspace_properties: { # required
+    #     workspace_properties: {
     #       running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON, MANUAL
     #       running_mode_auto_stop_timeout_in_minutes: 1,
     #       root_volume_size_gib: 1,
@@ -3310,6 +3559,7 @@ module Aws::WorkSpaces
     #       protocols: ["PCOIP"], # accepts PCOIP, WSP
     #       operating_system_name: "AMAZON_LINUX_2", # accepts AMAZON_LINUX_2, UBUNTU_18_04, UBUNTU_20_04, UBUNTU_22_04, UNKNOWN, WINDOWS_10, WINDOWS_11, WINDOWS_7, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022
     #     },
+    #     data_replication: "NO_REPLICATION", # accepts NO_REPLICATION, PRIMARY_AS_SOURCE
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceProperties AWS API Documentation
@@ -3355,8 +3605,10 @@ module Aws::WorkSpaces
 
     # Reboots the specified WorkSpaces.
     #
-    # You cannot reboot a WorkSpace unless its state is `AVAILABLE` or
-    # `UNHEALTHY`.
+    # You cannot reboot a WorkSpace unless its state is `AVAILABLE`,
+    # `UNHEALTHY`, or `REBOOTING`. Reboot a WorkSpace in the `REBOOTING`
+    # state only if your WorkSpace has been stuck in the `REBOOTING` state
+    # for over 20 minutes.
     #
     # This operation is asynchronous and returns before the WorkSpaces have
     # rebooted.
@@ -3518,6 +3770,41 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def register_workspace_directory(params = {}, options = {})
       req = build_request(:register_workspace_directory, params)
+      req.send_request(options)
+    end
+
+    # Rejects the account link invitation.
+    #
+    # @option params [required, String] :link_id
+    #   The identifier of the account link
+    #
+    # @option params [String] :client_token
+    #   The client token of the account link invitation to reject.
+    #
+    # @return [Types::RejectAccountLinkInvitationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RejectAccountLinkInvitationResult#account_link #account_link} => Types::AccountLink
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_account_link_invitation({
+    #     link_id: "LinkId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.account_link.account_link_id #=> String
+    #   resp.account_link.account_link_status #=> String, one of "LINKED", "LINKING_FAILED", "LINK_NOT_FOUND", "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT", "REJECTED"
+    #   resp.account_link.source_account_id #=> String
+    #   resp.account_link.target_account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RejectAccountLinkInvitation AWS API Documentation
+    #
+    # @overload reject_account_link_invitation(params = {})
+    # @param [Hash] params ({})
+    def reject_account_link_invitation(params = {}, options = {})
+      req = build_request(:reject_account_link_invitation, params)
       req.send_request(options)
     end
 
@@ -3966,7 +4253,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

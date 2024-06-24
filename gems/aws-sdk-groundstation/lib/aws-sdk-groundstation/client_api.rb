@@ -131,6 +131,7 @@ module Aws::GroundStation
     IpV4Address = Shapes::StringShape.new(name: 'IpV4Address')
     JsonString = Shapes::StringShape.new(name: 'JsonString')
     KeyAliasArn = Shapes::StringShape.new(name: 'KeyAliasArn')
+    KeyAliasName = Shapes::StringShape.new(name: 'KeyAliasName')
     KeyArn = Shapes::StringShape.new(name: 'KeyArn')
     KmsKey = Shapes::UnionShape.new(name: 'KmsKey')
     ListConfigsRequest = Shapes::StructureShape.new(name: 'ListConfigsRequest')
@@ -336,6 +337,8 @@ module Aws::GroundStation
     ContactData.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
     ContactData.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     ContactData.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    ContactData.add_member(:visibility_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "visibilityEndTime"))
+    ContactData.add_member(:visibility_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "visibilityStartTime"))
     ContactData.struct_class = Types::ContactData
 
     ContactIdResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "contactId"))
@@ -445,6 +448,8 @@ module Aws::GroundStation
     DescribeContactResponse.add_member(:satellite_arn, Shapes::ShapeRef.new(shape: satelliteArn, location_name: "satelliteArn"))
     DescribeContactResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     DescribeContactResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    DescribeContactResponse.add_member(:visibility_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "visibilityEndTime"))
+    DescribeContactResponse.add_member(:visibility_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "visibilityStartTime"))
     DescribeContactResponse.struct_class = Types::DescribeContactResponse
 
     DescribeEphemerisRequest.add_member(:ephemeris_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "ephemerisId"))
@@ -628,9 +633,11 @@ module Aws::GroundStation
     IpAddressList.member = Shapes::ShapeRef.new(shape: IpV4Address)
 
     KmsKey.add_member(:kms_alias_arn, Shapes::ShapeRef.new(shape: KeyAliasArn, location_name: "kmsAliasArn"))
+    KmsKey.add_member(:kms_alias_name, Shapes::ShapeRef.new(shape: KeyAliasName, location_name: "kmsAliasName"))
     KmsKey.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KeyArn, location_name: "kmsKeyArn"))
     KmsKey.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     KmsKey.add_member_subclass(:kms_alias_arn, Types::KmsKey::KmsAliasArn)
+    KmsKey.add_member_subclass(:kms_alias_name, Types::KmsKey::KmsAliasName)
     KmsKey.add_member_subclass(:kms_key_arn, Types::KmsKey::KmsKeyArn)
     KmsKey.add_member_subclass(:unknown, Types::KmsKey::Unknown)
     KmsKey.struct_class = Types::KmsKey

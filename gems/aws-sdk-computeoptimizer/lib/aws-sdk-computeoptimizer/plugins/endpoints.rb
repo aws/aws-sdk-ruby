@@ -14,6 +14,7 @@ module Aws::ComputeOptimizer
       option(
         :endpoint_provider,
         doc_type: 'Aws::ComputeOptimizer::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::ComputeOptimizer
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -72,6 +74,8 @@ module Aws::ComputeOptimizer
             Aws::ComputeOptimizer::Endpoints::ExportLambdaFunctionRecommendations.build(context)
           when :export_license_recommendations
             Aws::ComputeOptimizer::Endpoints::ExportLicenseRecommendations.build(context)
+          when :export_rds_database_recommendations
+            Aws::ComputeOptimizer::Endpoints::ExportRDSDatabaseRecommendations.build(context)
           when :get_auto_scaling_group_recommendations
             Aws::ComputeOptimizer::Endpoints::GetAutoScalingGroupRecommendations.build(context)
           when :get_ebs_volume_recommendations
@@ -94,6 +98,10 @@ module Aws::ComputeOptimizer
             Aws::ComputeOptimizer::Endpoints::GetLambdaFunctionRecommendations.build(context)
           when :get_license_recommendations
             Aws::ComputeOptimizer::Endpoints::GetLicenseRecommendations.build(context)
+          when :get_rds_database_recommendation_projected_metrics
+            Aws::ComputeOptimizer::Endpoints::GetRDSDatabaseRecommendationProjectedMetrics.build(context)
+          when :get_rds_database_recommendations
+            Aws::ComputeOptimizer::Endpoints::GetRDSDatabaseRecommendations.build(context)
           when :get_recommendation_preferences
             Aws::ComputeOptimizer::Endpoints::GetRecommendationPreferences.build(context)
           when :get_recommendation_summaries

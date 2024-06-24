@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::ServiceCatalog
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::ServiceCatalog
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::ServiceCatalog
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::ServiceCatalog
     #   @option options [Aws::ServiceCatalog::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ServiceCatalog::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -479,7 +504,7 @@ module Aws::ServiceCatalog
     # required.
     #
     # You can associate a maximum of 10 Principals with a portfolio using
-    # `PrincipalType` as `IAM_PATTERN`
+    # `PrincipalType` as `IAM_PATTERN`.
     #
     # <note markdown="1"> When you associate a principal with portfolio, a potential privilege
     # escalation path may occur when that portfolio is then shared with
@@ -650,6 +675,15 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
+    # @option params [String] :idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests from the same Amazon Web Services account use the
+    #   same idempotency token, the same response is returned for each
+    #   repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -659,6 +693,7 @@ module Aws::ServiceCatalog
     #     provisioning_artifact_id: "Id", # required
     #     service_action_id: "Id", # required
     #     accept_language: "AcceptLanguage",
+    #     idempotency_token: "IdempotencyToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateServiceActionWithProvisioningArtifact AWS API Documentation
@@ -1160,8 +1195,13 @@ module Aws::ServiceCatalog
     #   share. If this flag is not provided, TagOptions sharing is disabled.
     #
     # @option params [Boolean] :share_principals
+    #   This parameter is only supported for portfolios with an
+    #   **OrganizationalNode** Type of `ORGANIZATION` or
+    #   `ORGANIZATIONAL_UNIT`.
+    #
     #   Enables or disables `Principal` sharing when creating the portfolio
-    #   share. If this flag is not provided, principal sharing is disabled.
+    #   share. If you do **not** provide this flag, principal sharing is
+    #   disabled.
     #
     #   When you enable Principal Name Sharing for a portfolio share, the
     #   share recipient account end users with a principal that matches any of
@@ -1285,7 +1325,7 @@ module Aws::ServiceCatalog
     #     support_description: "SupportDescription",
     #     support_email: "SupportEmail",
     #     support_url: "SupportUrl",
-    #     product_type: "CLOUD_FORMATION_TEMPLATE", # required, accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE, TERRAFORM_OPEN_SOURCE, TERRAFORM_CLOUD
+    #     product_type: "CLOUD_FORMATION_TEMPLATE", # required, accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE, TERRAFORM_OPEN_SOURCE, TERRAFORM_CLOUD, EXTERNAL
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1298,7 +1338,7 @@ module Aws::ServiceCatalog
     #       info: {
     #         "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #       },
-    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR, TERRAFORM_OPEN_SOURCE, TERRAFORM_CLOUD
+    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR, TERRAFORM_OPEN_SOURCE, TERRAFORM_CLOUD, EXTERNAL
     #       disable_template_validation: false,
     #     },
     #     idempotency_token: "IdempotencyToken", # required
@@ -1322,7 +1362,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.product_view_summary.name #=> String
     #   resp.product_view_detail.product_view_summary.owner #=> String
     #   resp.product_view_detail.product_view_summary.short_description #=> String
-    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD"
+    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD", "EXTERNAL"
     #   resp.product_view_detail.product_view_summary.distributor #=> String
     #   resp.product_view_detail.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_detail.product_view_summary.support_email #=> String
@@ -1344,7 +1384,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD", "EXTERNAL"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
@@ -1530,7 +1570,7 @@ module Aws::ServiceCatalog
     #       info: {
     #         "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
     #       },
-    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR, TERRAFORM_OPEN_SOURCE, TERRAFORM_CLOUD
+    #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE, MARKETPLACE_AMI, MARKETPLACE_CAR, TERRAFORM_OPEN_SOURCE, TERRAFORM_CLOUD, EXTERNAL
     #       disable_template_validation: false,
     #     },
     #     idempotency_token: "IdempotencyToken", # required
@@ -1541,7 +1581,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD", "EXTERNAL"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
@@ -1930,6 +1970,15 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
+    # @option params [String] :idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests from the same Amazon Web Services account use the
+    #   same idempotency token, the same response is returned for each
+    #   repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1937,6 +1986,7 @@ module Aws::ServiceCatalog
     #   resp = client.delete_service_action({
     #     id: "Id", # required
     #     accept_language: "AcceptLanguage",
+    #     idempotency_token: "IdempotencyToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteServiceAction AWS API Documentation
@@ -2274,7 +2324,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_summary.name #=> String
     #   resp.product_view_summary.owner #=> String
     #   resp.product_view_summary.short_description #=> String
-    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD"
+    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD", "EXTERNAL"
     #   resp.product_view_summary.distributor #=> String
     #   resp.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_summary.support_email #=> String
@@ -2351,7 +2401,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.product_view_summary.name #=> String
     #   resp.product_view_detail.product_view_summary.owner #=> String
     #   resp.product_view_detail.product_view_summary.short_description #=> String
-    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD"
+    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD", "EXTERNAL"
     #   resp.product_view_detail.product_view_summary.distributor #=> String
     #   resp.product_view_detail.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_detail.product_view_summary.support_email #=> String
@@ -2429,7 +2479,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_summary.name #=> String
     #   resp.product_view_summary.owner #=> String
     #   resp.product_view_summary.short_description #=> String
-    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD"
+    #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD", "EXTERNAL"
     #   resp.product_view_summary.distributor #=> String
     #   resp.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_summary.support_email #=> String
@@ -2650,7 +2700,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD", "EXTERNAL"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
@@ -3180,6 +3230,15 @@ module Aws::ServiceCatalog
     #
     #   * `zh` - Chinese
     #
+    # @option params [String] :idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests from the same Amazon Web Services account use the
+    #   same idempotency token, the same response is returned for each
+    #   repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3189,6 +3248,7 @@ module Aws::ServiceCatalog
     #     provisioning_artifact_id: "Id", # required
     #     service_action_id: "Id", # required
     #     accept_language: "AcceptLanguage",
+    #     idempotency_token: "IdempotencyToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateServiceActionFromProvisioningArtifact AWS API Documentation
@@ -4218,7 +4278,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_details[0].id #=> String
     #   resp.provisioning_artifact_details[0].name #=> String
     #   resp.provisioning_artifact_details[0].description #=> String
-    #   resp.provisioning_artifact_details[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD"
+    #   resp.provisioning_artifact_details[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD", "EXTERNAL"
     #   resp.provisioning_artifact_details[0].created_time #=> Time
     #   resp.provisioning_artifact_details[0].active #=> Boolean
     #   resp.provisioning_artifact_details[0].guidance #=> String, one of "DEFAULT", "DEPRECATED"
@@ -4278,7 +4338,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_views[0].product_view_summary.name #=> String
     #   resp.provisioning_artifact_views[0].product_view_summary.owner #=> String
     #   resp.provisioning_artifact_views[0].product_view_summary.short_description #=> String
-    #   resp.provisioning_artifact_views[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD"
+    #   resp.provisioning_artifact_views[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD", "EXTERNAL"
     #   resp.provisioning_artifact_views[0].product_view_summary.distributor #=> String
     #   resp.provisioning_artifact_views[0].product_view_summary.has_default_path #=> Boolean
     #   resp.provisioning_artifact_views[0].product_view_summary.support_email #=> String
@@ -5119,7 +5179,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_summaries[0].name #=> String
     #   resp.product_view_summaries[0].owner #=> String
     #   resp.product_view_summaries[0].short_description #=> String
-    #   resp.product_view_summaries[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD"
+    #   resp.product_view_summaries[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD", "EXTERNAL"
     #   resp.product_view_summaries[0].distributor #=> String
     #   resp.product_view_summaries[0].has_default_path #=> Boolean
     #   resp.product_view_summaries[0].support_email #=> String
@@ -5203,7 +5263,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_details[0].product_view_summary.name #=> String
     #   resp.product_view_details[0].product_view_summary.owner #=> String
     #   resp.product_view_details[0].product_view_summary.short_description #=> String
-    #   resp.product_view_details[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD"
+    #   resp.product_view_details[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD", "EXTERNAL"
     #   resp.product_view_details[0].product_view_summary.distributor #=> String
     #   resp.product_view_details[0].product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_details[0].product_view_summary.support_email #=> String
@@ -5805,7 +5865,7 @@ module Aws::ServiceCatalog
     #   resp.product_view_detail.product_view_summary.name #=> String
     #   resp.product_view_detail.product_view_summary.owner #=> String
     #   resp.product_view_detail.product_view_summary.short_description #=> String
-    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD"
+    #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD", "EXTERNAL"
     #   resp.product_view_detail.product_view_summary.distributor #=> String
     #   resp.product_view_detail.product_view_summary.has_default_path #=> Boolean
     #   resp.product_view_detail.product_view_summary.support_email #=> String
@@ -6128,7 +6188,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.id #=> String
     #   resp.provisioning_artifact_detail.name #=> String
     #   resp.provisioning_artifact_detail.description #=> String
-    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD"
+    #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR", "TERRAFORM_OPEN_SOURCE", "TERRAFORM_CLOUD", "EXTERNAL"
     #   resp.provisioning_artifact_detail.created_time #=> Time
     #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.provisioning_artifact_detail.guidance #=> String, one of "DEFAULT", "DEPRECATED"
@@ -6254,7 +6314,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

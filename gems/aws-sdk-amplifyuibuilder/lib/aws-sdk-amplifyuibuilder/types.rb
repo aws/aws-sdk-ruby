@@ -2549,6 +2549,31 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) to use to list tags.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of tag key value pairs for a specified Amazon Resource Name
+    #   (ARN).
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] app_id
     #   The unique ID for the Amplify app.
     #   @return [String]
@@ -2998,6 +3023,28 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) to use to tag a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tag key value pairs for a specified Amazon Resource Name
+    #   (ARN).
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # A theme is a collection of style settings that apply globally to the
     # components associated with an Amplify application.
     #
@@ -3146,6 +3193,27 @@ module Aws::AmplifyUIBuilder
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) to use to untag a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys to use to untag a resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Updates and saves all of the information about a component, based on
     # component ID.

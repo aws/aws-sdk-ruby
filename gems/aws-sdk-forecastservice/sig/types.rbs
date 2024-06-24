@@ -1,0 +1,1351 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ForecastService
+  module Types
+
+    class Action
+      attr_accessor attribute_name: ::String
+      attr_accessor operation: ("ADD" | "SUBTRACT" | "MULTIPLY" | "DIVIDE")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class AdditionalDataset
+      attr_accessor name: ::String
+      attr_accessor configuration: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class AttributeConfig
+      attr_accessor attribute_name: ::String
+      attr_accessor transformations: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Baseline
+      attr_accessor predictor_baseline: Types::PredictorBaseline
+      SENSITIVE: []
+    end
+
+    class BaselineMetric
+      attr_accessor name: ::String
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class CategoricalParameterRange
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ContinuousParameterRange
+      attr_accessor name: ::String
+      attr_accessor max_value: ::Float
+      attr_accessor min_value: ::Float
+      attr_accessor scaling_type: ("Auto" | "Linear" | "Logarithmic" | "ReverseLogarithmic")
+      SENSITIVE: []
+    end
+
+    class CreateAutoPredictorRequest
+      attr_accessor predictor_name: ::String
+      attr_accessor forecast_horizon: ::Integer
+      attr_accessor forecast_types: ::Array[::String]
+      attr_accessor forecast_dimensions: ::Array[::String]
+      attr_accessor forecast_frequency: ::String
+      attr_accessor data_config: Types::DataConfig
+      attr_accessor encryption_config: Types::EncryptionConfig
+      attr_accessor reference_predictor_arn: ::String
+      attr_accessor optimization_metric: ("WAPE" | "RMSE" | "AverageWeightedQuantileLoss" | "MASE" | "MAPE")
+      attr_accessor explain_predictor: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor monitor_config: Types::MonitorConfig
+      attr_accessor time_alignment_boundary: Types::TimeAlignmentBoundary
+      SENSITIVE: []
+    end
+
+    class CreateAutoPredictorResponse
+      attr_accessor predictor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetGroupRequest
+      attr_accessor dataset_group_name: ::String
+      attr_accessor domain: ("RETAIL" | "CUSTOM" | "INVENTORY_PLANNING" | "EC2_CAPACITY" | "WORK_FORCE" | "WEB_TRAFFIC" | "METRICS")
+      attr_accessor dataset_arns: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDatasetGroupResponse
+      attr_accessor dataset_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetImportJobRequest
+      attr_accessor dataset_import_job_name: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor timestamp_format: ::String
+      attr_accessor time_zone: ::String
+      attr_accessor use_geolocation_for_time_zone: bool
+      attr_accessor geolocation_format: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor format: ::String
+      attr_accessor import_mode: ("FULL" | "INCREMENTAL")
+      SENSITIVE: []
+    end
+
+    class CreateDatasetImportJobResponse
+      attr_accessor dataset_import_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDatasetRequest
+      attr_accessor dataset_name: ::String
+      attr_accessor domain: ("RETAIL" | "CUSTOM" | "INVENTORY_PLANNING" | "EC2_CAPACITY" | "WORK_FORCE" | "WEB_TRAFFIC" | "METRICS")
+      attr_accessor dataset_type: ("TARGET_TIME_SERIES" | "RELATED_TIME_SERIES" | "ITEM_METADATA")
+      attr_accessor data_frequency: ::String
+      attr_accessor schema: Types::Schema
+      attr_accessor encryption_config: Types::EncryptionConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDatasetResponse
+      attr_accessor dataset_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateExplainabilityExportRequest
+      attr_accessor explainability_export_name: ::String
+      attr_accessor explainability_arn: ::String
+      attr_accessor destination: Types::DataDestination
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor format: ::String
+      SENSITIVE: []
+    end
+
+    class CreateExplainabilityExportResponse
+      attr_accessor explainability_export_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateExplainabilityRequest
+      attr_accessor explainability_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor explainability_config: Types::ExplainabilityConfig
+      attr_accessor data_source: Types::DataSource
+      attr_accessor schema: Types::Schema
+      attr_accessor enable_visualization: bool
+      attr_accessor start_date_time: ::String
+      attr_accessor end_date_time: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateExplainabilityResponse
+      attr_accessor explainability_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateForecastExportJobRequest
+      attr_accessor forecast_export_job_name: ::String
+      attr_accessor forecast_arn: ::String
+      attr_accessor destination: Types::DataDestination
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor format: ::String
+      SENSITIVE: []
+    end
+
+    class CreateForecastExportJobResponse
+      attr_accessor forecast_export_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateForecastRequest
+      attr_accessor forecast_name: ::String
+      attr_accessor predictor_arn: ::String
+      attr_accessor forecast_types: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor time_series_selector: Types::TimeSeriesSelector
+      SENSITIVE: []
+    end
+
+    class CreateForecastResponse
+      attr_accessor forecast_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMonitorRequest
+      attr_accessor monitor_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateMonitorResponse
+      attr_accessor monitor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePredictorBacktestExportJobRequest
+      attr_accessor predictor_backtest_export_job_name: ::String
+      attr_accessor predictor_arn: ::String
+      attr_accessor destination: Types::DataDestination
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor format: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePredictorBacktestExportJobResponse
+      attr_accessor predictor_backtest_export_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePredictorRequest
+      attr_accessor predictor_name: ::String
+      attr_accessor algorithm_arn: ::String
+      attr_accessor forecast_horizon: ::Integer
+      attr_accessor forecast_types: ::Array[::String]
+      attr_accessor perform_auto_ml: bool
+      attr_accessor auto_ml_override_strategy: ("LatencyOptimized" | "AccuracyOptimized")
+      attr_accessor perform_hpo: bool
+      attr_accessor training_parameters: ::Hash[::String, ::String]
+      attr_accessor evaluation_parameters: Types::EvaluationParameters
+      attr_accessor hpo_config: Types::HyperParameterTuningJobConfig
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor featurization_config: Types::FeaturizationConfig
+      attr_accessor encryption_config: Types::EncryptionConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor optimization_metric: ("WAPE" | "RMSE" | "AverageWeightedQuantileLoss" | "MASE" | "MAPE")
+      SENSITIVE: []
+    end
+
+    class CreatePredictorResponse
+      attr_accessor predictor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWhatIfAnalysisRequest
+      attr_accessor what_if_analysis_name: ::String
+      attr_accessor forecast_arn: ::String
+      attr_accessor time_series_selector: Types::TimeSeriesSelector
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateWhatIfAnalysisResponse
+      attr_accessor what_if_analysis_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWhatIfForecastExportRequest
+      attr_accessor what_if_forecast_export_name: ::String
+      attr_accessor what_if_forecast_arns: ::Array[::String]
+      attr_accessor destination: Types::DataDestination
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor format: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWhatIfForecastExportResponse
+      attr_accessor what_if_forecast_export_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWhatIfForecastRequest
+      attr_accessor what_if_forecast_name: ::String
+      attr_accessor what_if_analysis_arn: ::String
+      attr_accessor time_series_transformations: ::Array[Types::TimeSeriesTransformation]
+      attr_accessor time_series_replacements_data_source: Types::TimeSeriesReplacementsDataSource
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateWhatIfForecastResponse
+      attr_accessor what_if_forecast_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataConfig
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor attribute_configs: ::Array[Types::AttributeConfig]
+      attr_accessor additional_datasets: ::Array[Types::AdditionalDataset]
+      SENSITIVE: []
+    end
+
+    class DataDestination
+      attr_accessor s3_config: Types::S3Config
+      SENSITIVE: []
+    end
+
+    class DataSource
+      attr_accessor s3_config: Types::S3Config
+      SENSITIVE: []
+    end
+
+    class DatasetGroupSummary
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor dataset_group_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DatasetImportJobSummary
+      attr_accessor dataset_import_job_arn: ::String
+      attr_accessor dataset_import_job_name: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor import_mode: ("FULL" | "INCREMENTAL")
+      SENSITIVE: []
+    end
+
+    class DatasetSummary
+      attr_accessor dataset_arn: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor dataset_type: ("TARGET_TIME_SERIES" | "RELATED_TIME_SERIES" | "ITEM_METADATA")
+      attr_accessor domain: ("RETAIL" | "CUSTOM" | "INVENTORY_PLANNING" | "EC2_CAPACITY" | "WORK_FORCE" | "WEB_TRAFFIC" | "METRICS")
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetGroupRequest
+      attr_accessor dataset_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetImportJobRequest
+      attr_accessor dataset_import_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDatasetRequest
+      attr_accessor dataset_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteExplainabilityExportRequest
+      attr_accessor explainability_export_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteExplainabilityRequest
+      attr_accessor explainability_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteForecastExportJobRequest
+      attr_accessor forecast_export_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteForecastRequest
+      attr_accessor forecast_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMonitorRequest
+      attr_accessor monitor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePredictorBacktestExportJobRequest
+      attr_accessor predictor_backtest_export_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePredictorRequest
+      attr_accessor predictor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourceTreeRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWhatIfAnalysisRequest
+      attr_accessor what_if_analysis_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWhatIfForecastExportRequest
+      attr_accessor what_if_forecast_export_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWhatIfForecastRequest
+      attr_accessor what_if_forecast_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAutoPredictorRequest
+      attr_accessor predictor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAutoPredictorResponse
+      attr_accessor predictor_arn: ::String
+      attr_accessor predictor_name: ::String
+      attr_accessor forecast_horizon: ::Integer
+      attr_accessor forecast_types: ::Array[::String]
+      attr_accessor forecast_frequency: ::String
+      attr_accessor forecast_dimensions: ::Array[::String]
+      attr_accessor dataset_import_job_arns: ::Array[::String]
+      attr_accessor data_config: Types::DataConfig
+      attr_accessor encryption_config: Types::EncryptionConfig
+      attr_accessor reference_predictor_summary: Types::ReferencePredictorSummary
+      attr_accessor estimated_time_remaining_in_minutes: ::Integer
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor optimization_metric: ("WAPE" | "RMSE" | "AverageWeightedQuantileLoss" | "MASE" | "MAPE")
+      attr_accessor explainability_info: Types::ExplainabilityInfo
+      attr_accessor monitor_info: Types::MonitorInfo
+      attr_accessor time_alignment_boundary: Types::TimeAlignmentBoundary
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetGroupRequest
+      attr_accessor dataset_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetGroupResponse
+      attr_accessor dataset_group_name: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor dataset_arns: ::Array[::String]
+      attr_accessor domain: ("RETAIL" | "CUSTOM" | "INVENTORY_PLANNING" | "EC2_CAPACITY" | "WORK_FORCE" | "WEB_TRAFFIC" | "METRICS")
+      attr_accessor status: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetImportJobRequest
+      attr_accessor dataset_import_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetImportJobResponse
+      attr_accessor dataset_import_job_name: ::String
+      attr_accessor dataset_import_job_arn: ::String
+      attr_accessor dataset_arn: ::String
+      attr_accessor timestamp_format: ::String
+      attr_accessor time_zone: ::String
+      attr_accessor use_geolocation_for_time_zone: bool
+      attr_accessor geolocation_format: ::String
+      attr_accessor data_source: Types::DataSource
+      attr_accessor estimated_time_remaining_in_minutes: ::Integer
+      attr_accessor field_statistics: ::Hash[::String, Types::Statistics]
+      attr_accessor data_size: ::Float
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor format: ::String
+      attr_accessor import_mode: ("FULL" | "INCREMENTAL")
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetRequest
+      attr_accessor dataset_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDatasetResponse
+      attr_accessor dataset_arn: ::String
+      attr_accessor dataset_name: ::String
+      attr_accessor domain: ("RETAIL" | "CUSTOM" | "INVENTORY_PLANNING" | "EC2_CAPACITY" | "WORK_FORCE" | "WEB_TRAFFIC" | "METRICS")
+      attr_accessor dataset_type: ("TARGET_TIME_SERIES" | "RELATED_TIME_SERIES" | "ITEM_METADATA")
+      attr_accessor data_frequency: ::String
+      attr_accessor schema: Types::Schema
+      attr_accessor encryption_config: Types::EncryptionConfig
+      attr_accessor status: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeExplainabilityExportRequest
+      attr_accessor explainability_export_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeExplainabilityExportResponse
+      attr_accessor explainability_export_arn: ::String
+      attr_accessor explainability_export_name: ::String
+      attr_accessor explainability_arn: ::String
+      attr_accessor destination: Types::DataDestination
+      attr_accessor message: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor format: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeExplainabilityRequest
+      attr_accessor explainability_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeExplainabilityResponse
+      attr_accessor explainability_arn: ::String
+      attr_accessor explainability_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor explainability_config: Types::ExplainabilityConfig
+      attr_accessor enable_visualization: bool
+      attr_accessor data_source: Types::DataSource
+      attr_accessor schema: Types::Schema
+      attr_accessor start_date_time: ::String
+      attr_accessor end_date_time: ::String
+      attr_accessor estimated_time_remaining_in_minutes: ::Integer
+      attr_accessor message: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeForecastExportJobRequest
+      attr_accessor forecast_export_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeForecastExportJobResponse
+      attr_accessor forecast_export_job_arn: ::String
+      attr_accessor forecast_export_job_name: ::String
+      attr_accessor forecast_arn: ::String
+      attr_accessor destination: Types::DataDestination
+      attr_accessor message: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor format: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeForecastRequest
+      attr_accessor forecast_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeForecastResponse
+      attr_accessor forecast_arn: ::String
+      attr_accessor forecast_name: ::String
+      attr_accessor forecast_types: ::Array[::String]
+      attr_accessor predictor_arn: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor estimated_time_remaining_in_minutes: ::Integer
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor time_series_selector: Types::TimeSeriesSelector
+      SENSITIVE: []
+    end
+
+    class DescribeMonitorRequest
+      attr_accessor monitor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMonitorResponse
+      attr_accessor monitor_name: ::String
+      attr_accessor monitor_arn: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor last_evaluation_time: ::Time
+      attr_accessor last_evaluation_state: ::String
+      attr_accessor baseline: Types::Baseline
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor estimated_evaluation_time_remaining_in_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribePredictorBacktestExportJobRequest
+      attr_accessor predictor_backtest_export_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePredictorBacktestExportJobResponse
+      attr_accessor predictor_backtest_export_job_arn: ::String
+      attr_accessor predictor_backtest_export_job_name: ::String
+      attr_accessor predictor_arn: ::String
+      attr_accessor destination: Types::DataDestination
+      attr_accessor message: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor format: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePredictorRequest
+      attr_accessor predictor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePredictorResponse
+      attr_accessor predictor_arn: ::String
+      attr_accessor predictor_name: ::String
+      attr_accessor algorithm_arn: ::String
+      attr_accessor auto_ml_algorithm_arns: ::Array[::String]
+      attr_accessor forecast_horizon: ::Integer
+      attr_accessor forecast_types: ::Array[::String]
+      attr_accessor perform_auto_ml: bool
+      attr_accessor auto_ml_override_strategy: ("LatencyOptimized" | "AccuracyOptimized")
+      attr_accessor perform_hpo: bool
+      attr_accessor training_parameters: ::Hash[::String, ::String]
+      attr_accessor evaluation_parameters: Types::EvaluationParameters
+      attr_accessor hpo_config: Types::HyperParameterTuningJobConfig
+      attr_accessor input_data_config: Types::InputDataConfig
+      attr_accessor featurization_config: Types::FeaturizationConfig
+      attr_accessor encryption_config: Types::EncryptionConfig
+      attr_accessor predictor_execution_details: Types::PredictorExecutionDetails
+      attr_accessor estimated_time_remaining_in_minutes: ::Integer
+      attr_accessor is_auto_predictor: bool
+      attr_accessor dataset_import_job_arns: ::Array[::String]
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor optimization_metric: ("WAPE" | "RMSE" | "AverageWeightedQuantileLoss" | "MASE" | "MAPE")
+      SENSITIVE: []
+    end
+
+    class DescribeWhatIfAnalysisRequest
+      attr_accessor what_if_analysis_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWhatIfAnalysisResponse
+      attr_accessor what_if_analysis_name: ::String
+      attr_accessor what_if_analysis_arn: ::String
+      attr_accessor forecast_arn: ::String
+      attr_accessor estimated_time_remaining_in_minutes: ::Integer
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor time_series_selector: Types::TimeSeriesSelector
+      SENSITIVE: []
+    end
+
+    class DescribeWhatIfForecastExportRequest
+      attr_accessor what_if_forecast_export_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWhatIfForecastExportResponse
+      attr_accessor what_if_forecast_export_arn: ::String
+      attr_accessor what_if_forecast_export_name: ::String
+      attr_accessor what_if_forecast_arns: ::Array[::String]
+      attr_accessor destination: Types::DataDestination
+      attr_accessor message: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor estimated_time_remaining_in_minutes: ::Integer
+      attr_accessor last_modification_time: ::Time
+      attr_accessor format: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWhatIfForecastRequest
+      attr_accessor what_if_forecast_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWhatIfForecastResponse
+      attr_accessor what_if_forecast_name: ::String
+      attr_accessor what_if_forecast_arn: ::String
+      attr_accessor what_if_analysis_arn: ::String
+      attr_accessor estimated_time_remaining_in_minutes: ::Integer
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor time_series_transformations: ::Array[Types::TimeSeriesTransformation]
+      attr_accessor time_series_replacements_data_source: Types::TimeSeriesReplacementsDataSource
+      attr_accessor forecast_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EncryptionConfig
+      attr_accessor role_arn: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ErrorMetric
+      attr_accessor forecast_type: ::String
+      attr_accessor wape: ::Float
+      attr_accessor rmse: ::Float
+      attr_accessor mase: ::Float
+      attr_accessor mape: ::Float
+      SENSITIVE: []
+    end
+
+    class EvaluationParameters
+      attr_accessor number_of_backtest_windows: ::Integer
+      attr_accessor back_test_window_offset: ::Integer
+      SENSITIVE: []
+    end
+
+    class EvaluationResult
+      attr_accessor algorithm_arn: ::String
+      attr_accessor test_windows: ::Array[Types::WindowSummary]
+      SENSITIVE: []
+    end
+
+    class ExplainabilityConfig
+      attr_accessor time_series_granularity: ("ALL" | "SPECIFIC")
+      attr_accessor time_point_granularity: ("ALL" | "SPECIFIC")
+      SENSITIVE: []
+    end
+
+    class ExplainabilityExportSummary
+      attr_accessor explainability_export_arn: ::String
+      attr_accessor explainability_export_name: ::String
+      attr_accessor destination: Types::DataDestination
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ExplainabilityInfo
+      attr_accessor explainability_arn: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class ExplainabilitySummary
+      attr_accessor explainability_arn: ::String
+      attr_accessor explainability_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor explainability_config: Types::ExplainabilityConfig
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Featurization
+      attr_accessor attribute_name: ::String
+      attr_accessor featurization_pipeline: ::Array[Types::FeaturizationMethod]
+      SENSITIVE: []
+    end
+
+    class FeaturizationConfig
+      attr_accessor forecast_frequency: ::String
+      attr_accessor forecast_dimensions: ::Array[::String]
+      attr_accessor featurizations: ::Array[Types::Featurization]
+      SENSITIVE: []
+    end
+
+    class FeaturizationMethod
+      attr_accessor featurization_method_name: ("filling")
+      attr_accessor featurization_method_parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor condition: ("IS" | "IS_NOT")
+      SENSITIVE: []
+    end
+
+    class ForecastExportJobSummary
+      attr_accessor forecast_export_job_arn: ::String
+      attr_accessor forecast_export_job_name: ::String
+      attr_accessor destination: Types::DataDestination
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ForecastSummary
+      attr_accessor forecast_arn: ::String
+      attr_accessor forecast_name: ::String
+      attr_accessor predictor_arn: ::String
+      attr_accessor created_using_auto_predictor: bool
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetAccuracyMetricsRequest
+      attr_accessor predictor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccuracyMetricsResponse
+      attr_accessor predictor_evaluation_results: ::Array[Types::EvaluationResult]
+      attr_accessor is_auto_predictor: bool
+      attr_accessor auto_ml_override_strategy: ("LatencyOptimized" | "AccuracyOptimized")
+      attr_accessor optimization_metric: ("WAPE" | "RMSE" | "AverageWeightedQuantileLoss" | "MASE" | "MAPE")
+      SENSITIVE: []
+    end
+
+    class HyperParameterTuningJobConfig
+      attr_accessor parameter_ranges: Types::ParameterRanges
+      SENSITIVE: []
+    end
+
+    class InputDataConfig
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor supplementary_features: ::Array[Types::SupplementaryFeature]
+      SENSITIVE: []
+    end
+
+    class IntegerParameterRange
+      attr_accessor name: ::String
+      attr_accessor max_value: ::Integer
+      attr_accessor min_value: ::Integer
+      attr_accessor scaling_type: ("Auto" | "Linear" | "Logarithmic" | "ReverseLogarithmic")
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatasetGroupsResponse
+      attr_accessor dataset_groups: ::Array[Types::DatasetGroupSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetImportJobsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListDatasetImportJobsResponse
+      attr_accessor dataset_import_jobs: ::Array[Types::DatasetImportJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDatasetsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDatasetsResponse
+      attr_accessor datasets: ::Array[Types::DatasetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExplainabilitiesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListExplainabilitiesResponse
+      attr_accessor explainabilities: ::Array[Types::ExplainabilitySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExplainabilityExportsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListExplainabilityExportsResponse
+      attr_accessor explainability_exports: ::Array[Types::ExplainabilityExportSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListForecastExportJobsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListForecastExportJobsResponse
+      attr_accessor forecast_export_jobs: ::Array[Types::ForecastExportJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListForecastsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListForecastsResponse
+      attr_accessor forecasts: ::Array[Types::ForecastSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMonitorEvaluationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor monitor_arn: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListMonitorEvaluationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor predictor_monitor_evaluations: ::Array[Types::PredictorMonitorEvaluation]
+      SENSITIVE: []
+    end
+
+    class ListMonitorsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListMonitorsResponse
+      attr_accessor monitors: ::Array[Types::MonitorSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPredictorBacktestExportJobsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListPredictorBacktestExportJobsResponse
+      attr_accessor predictor_backtest_export_jobs: ::Array[Types::PredictorBacktestExportJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPredictorsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListPredictorsResponse
+      attr_accessor predictors: ::Array[Types::PredictorSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListWhatIfAnalysesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListWhatIfAnalysesResponse
+      attr_accessor what_if_analyses: ::Array[Types::WhatIfAnalysisSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWhatIfForecastExportsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListWhatIfForecastExportsResponse
+      attr_accessor what_if_forecast_exports: ::Array[Types::WhatIfForecastExportSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWhatIfForecastsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListWhatIfForecastsResponse
+      attr_accessor what_if_forecasts: ::Array[Types::WhatIfForecastSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MetricResult
+      attr_accessor metric_name: ::String
+      attr_accessor metric_value: ::Float
+      SENSITIVE: []
+    end
+
+    class Metrics
+      attr_accessor rmse: ::Float
+      attr_accessor weighted_quantile_losses: ::Array[Types::WeightedQuantileLoss]
+      attr_accessor error_metrics: ::Array[Types::ErrorMetric]
+      attr_accessor average_weighted_quantile_loss: ::Float
+      SENSITIVE: []
+    end
+
+    class MonitorConfig
+      attr_accessor monitor_name: ::String
+      SENSITIVE: []
+    end
+
+    class MonitorDataSource
+      attr_accessor dataset_import_job_arn: ::String
+      attr_accessor forecast_arn: ::String
+      attr_accessor predictor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MonitorInfo
+      attr_accessor monitor_arn: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class MonitorSummary
+      attr_accessor monitor_arn: ::String
+      attr_accessor monitor_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ParameterRanges
+      attr_accessor categorical_parameter_ranges: ::Array[Types::CategoricalParameterRange]
+      attr_accessor continuous_parameter_ranges: ::Array[Types::ContinuousParameterRange]
+      attr_accessor integer_parameter_ranges: ::Array[Types::IntegerParameterRange]
+      SENSITIVE: []
+    end
+
+    class PredictorBacktestExportJobSummary
+      attr_accessor predictor_backtest_export_job_arn: ::String
+      attr_accessor predictor_backtest_export_job_name: ::String
+      attr_accessor destination: Types::DataDestination
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PredictorBaseline
+      attr_accessor baseline_metrics: ::Array[Types::BaselineMetric]
+      SENSITIVE: []
+    end
+
+    class PredictorEvent
+      attr_accessor detail: ::String
+      attr_accessor datetime: ::Time
+      SENSITIVE: []
+    end
+
+    class PredictorExecution
+      attr_accessor algorithm_arn: ::String
+      attr_accessor test_windows: ::Array[Types::TestWindowSummary]
+      SENSITIVE: []
+    end
+
+    class PredictorExecutionDetails
+      attr_accessor predictor_executions: ::Array[Types::PredictorExecution]
+      SENSITIVE: []
+    end
+
+    class PredictorMonitorEvaluation
+      attr_accessor resource_arn: ::String
+      attr_accessor monitor_arn: ::String
+      attr_accessor evaluation_time: ::Time
+      attr_accessor evaluation_state: ::String
+      attr_accessor window_start_datetime: ::Time
+      attr_accessor window_end_datetime: ::Time
+      attr_accessor predictor_event: Types::PredictorEvent
+      attr_accessor monitor_data_source: Types::MonitorDataSource
+      attr_accessor metric_results: ::Array[Types::MetricResult]
+      attr_accessor num_items_evaluated: ::Integer
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PredictorSummary
+      attr_accessor predictor_arn: ::String
+      attr_accessor predictor_name: ::String
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor is_auto_predictor: bool
+      attr_accessor reference_predictor_summary: Types::ReferencePredictorSummary
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ReferencePredictorSummary
+      attr_accessor arn: ::String
+      attr_accessor state: ("Active" | "Deleted")
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResumeResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class S3Config
+      attr_accessor path: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Schema
+      attr_accessor attributes: ::Array[Types::SchemaAttribute]
+      SENSITIVE: []
+    end
+
+    class SchemaAttribute
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_type: ("string" | "integer" | "float" | "timestamp" | "geolocation")
+      SENSITIVE: []
+    end
+
+    class Statistics
+      attr_accessor count: ::Integer
+      attr_accessor count_distinct: ::Integer
+      attr_accessor count_null: ::Integer
+      attr_accessor count_nan: ::Integer
+      attr_accessor min: ::String
+      attr_accessor max: ::String
+      attr_accessor avg: ::Float
+      attr_accessor stddev: ::Float
+      attr_accessor count_long: ::Integer
+      attr_accessor count_distinct_long: ::Integer
+      attr_accessor count_null_long: ::Integer
+      attr_accessor count_nan_long: ::Integer
+      SENSITIVE: []
+    end
+
+    class StopResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SupplementaryFeature
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: [:key, :value]
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TestWindowSummary
+      attr_accessor test_window_start: ::Time
+      attr_accessor test_window_end: ::Time
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimeAlignmentBoundary
+      attr_accessor month: ("JANUARY" | "FEBRUARY" | "MARCH" | "APRIL" | "MAY" | "JUNE" | "JULY" | "AUGUST" | "SEPTEMBER" | "OCTOBER" | "NOVEMBER" | "DECEMBER")
+      attr_accessor day_of_month: ::Integer
+      attr_accessor day_of_week: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")
+      attr_accessor hour: ::Integer
+      SENSITIVE: []
+    end
+
+    class TimeSeriesCondition
+      attr_accessor attribute_name: ::String
+      attr_accessor attribute_value: ::String
+      attr_accessor condition: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN")
+      SENSITIVE: []
+    end
+
+    class TimeSeriesIdentifiers
+      attr_accessor data_source: Types::DataSource
+      attr_accessor schema: Types::Schema
+      attr_accessor format: ::String
+      SENSITIVE: []
+    end
+
+    class TimeSeriesReplacementsDataSource
+      attr_accessor s3_config: Types::S3Config
+      attr_accessor schema: Types::Schema
+      attr_accessor format: ::String
+      attr_accessor timestamp_format: ::String
+      SENSITIVE: []
+    end
+
+    class TimeSeriesSelector
+      attr_accessor time_series_identifiers: Types::TimeSeriesIdentifiers
+      SENSITIVE: []
+    end
+
+    class TimeSeriesTransformation
+      attr_accessor action: Types::Action
+      attr_accessor time_series_conditions: ::Array[Types::TimeSeriesCondition]
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDatasetGroupRequest
+      attr_accessor dataset_group_arn: ::String
+      attr_accessor dataset_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateDatasetGroupResponse < Aws::EmptyStructure
+    end
+
+    class WeightedQuantileLoss
+      attr_accessor quantile: ::Float
+      attr_accessor loss_value: ::Float
+      SENSITIVE: []
+    end
+
+    class WhatIfAnalysisSummary
+      attr_accessor what_if_analysis_arn: ::String
+      attr_accessor what_if_analysis_name: ::String
+      attr_accessor forecast_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class WhatIfForecastExportSummary
+      attr_accessor what_if_forecast_export_arn: ::String
+      attr_accessor what_if_forecast_arns: ::Array[::String]
+      attr_accessor what_if_forecast_export_name: ::String
+      attr_accessor destination: Types::DataDestination
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class WhatIfForecastSummary
+      attr_accessor what_if_forecast_arn: ::String
+      attr_accessor what_if_forecast_name: ::String
+      attr_accessor what_if_analysis_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      SENSITIVE: []
+    end
+
+    class WindowSummary
+      attr_accessor test_window_start: ::Time
+      attr_accessor test_window_end: ::Time
+      attr_accessor item_count: ::Integer
+      attr_accessor evaluation_type: ("SUMMARY" | "COMPUTED")
+      attr_accessor metrics: Types::Metrics
+      SENSITIVE: []
+    end
+  end
+end

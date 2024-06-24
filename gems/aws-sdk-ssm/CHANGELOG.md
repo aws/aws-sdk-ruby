@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.170.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.169.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.168.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.167.0 (2024-04-24)
+------------------
+
+* Feature - Add SSM DescribeInstanceProperties API to public AWS SDK.
+
+1.166.0 (2024-03-12)
+------------------
+
+* Feature - March 2024 doc-only updates for Systems Manager.
+
+1.165.0 (2024-02-21)
+------------------
+
+* Feature - This release adds support for sharing Systems Manager parameters with other AWS accounts.
+
+1.164.0 (2024-01-31)
+------------------
+
+* Feature - This release adds an optional Duration parameter to StateManager Associations. This allows customers to specify how long an apply-only-on-cron association execution should run. Once the specified Duration is out all the ongoing cancellable commands or automations are cancelled.
+
+1.163.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.162.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.161.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.160.0 (2023-11-16)
+------------------
+
+* Feature - This release introduces the ability to filter automation execution steps which have parent steps. In addition, runbook variable information is returned by GetAutomationExecution and parent step information is returned by the DescribeAutomationStepExecutions API.
+
+1.159.0 (2023-10-20)
+------------------
+
+* Feature - This release introduces a new API: DeleteOpsItem. This allows deletion of an OpsItem.
+
 1.158.0 (2023-09-27)
 ------------------
 

@@ -1507,11 +1507,30 @@ module Aws::GreengrassV2
     #   [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html
     #   @return [String]
     #
+    # @!attribute [rw] s3_endpoint_type
+    #   Specifies the endpoint to use when getting Amazon S3 pre-signed
+    #   URLs.
+    #
+    #   All Amazon Web Services Regions except US East (N. Virginia) use
+    #   `REGIONAL` in all cases. In the US East (N. Virginia) Region the
+    #   default is `GLOBAL`, but you can change it to `REGIONAL` with this
+    #   parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] iot_endpoint_type
+    #   Determines if the Amazon S3 URL returned is a FIPS pre-signed URL
+    #   endpoint. Specify `fips` if you want the returned Amazon S3
+    #   pre-signed URL to point to an Amazon S3 FIPS endpoint. If you don't
+    #   specify a value, the default is `standard`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetComponentVersionArtifactRequest AWS API Documentation
     #
     class GetComponentVersionArtifactRequest < Struct.new(
       :arn,
-      :artifact_name)
+      :artifact_name,
+      :s3_endpoint_type,
+      :iot_endpoint_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1816,8 +1835,8 @@ module Aws::GreengrassV2
     # @!attribute [rw] last_installation_source
     #   The most recent deployment source that brought the component to the
     #   Greengrass core device. For a thing group deployment or thing
-    #   deployment, the source will be the The ID of the deployment. and for
-    #   local deployments it will be `LOCAL`.
+    #   deployment, the source will be the ID of the last deployment that
+    #   contained the component. For local deployments it will be `LOCAL`.
     #
     #   <note markdown="1"> Any deployment will attempt to reinstall currently broken components
     #   on the device, which will update the last installation source.
@@ -2544,6 +2563,8 @@ module Aws::GreengrassV2
     #
     # @!attribute [rw] max_results
     #   The maximum number of results to be returned per paginated request.
+    #
+    #   Default: `50`
     #   @return [Integer]
     #
     # @!attribute [rw] next_token

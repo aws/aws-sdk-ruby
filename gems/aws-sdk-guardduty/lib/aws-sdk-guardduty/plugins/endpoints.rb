@@ -14,6 +14,7 @@ module Aws::GuardDuty
       option(
         :endpoint_provider,
         doc_type: 'Aws::GuardDuty::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::GuardDuty
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -68,6 +70,8 @@ module Aws::GuardDuty
             Aws::GuardDuty::Endpoints::CreateFilter.build(context)
           when :create_ip_set
             Aws::GuardDuty::Endpoints::CreateIPSet.build(context)
+          when :create_malware_protection_plan
+            Aws::GuardDuty::Endpoints::CreateMalwareProtectionPlan.build(context)
           when :create_members
             Aws::GuardDuty::Endpoints::CreateMembers.build(context)
           when :create_publishing_destination
@@ -86,6 +90,8 @@ module Aws::GuardDuty
             Aws::GuardDuty::Endpoints::DeleteIPSet.build(context)
           when :delete_invitations
             Aws::GuardDuty::Endpoints::DeleteInvitations.build(context)
+          when :delete_malware_protection_plan
+            Aws::GuardDuty::Endpoints::DeleteMalwareProtectionPlan.build(context)
           when :delete_members
             Aws::GuardDuty::Endpoints::DeleteMembers.build(context)
           when :delete_publishing_destination
@@ -124,6 +130,8 @@ module Aws::GuardDuty
             Aws::GuardDuty::Endpoints::GetIPSet.build(context)
           when :get_invitations_count
             Aws::GuardDuty::Endpoints::GetInvitationsCount.build(context)
+          when :get_malware_protection_plan
+            Aws::GuardDuty::Endpoints::GetMalwareProtectionPlan.build(context)
           when :get_malware_scan_settings
             Aws::GuardDuty::Endpoints::GetMalwareScanSettings.build(context)
           when :get_master_account
@@ -132,6 +140,8 @@ module Aws::GuardDuty
             Aws::GuardDuty::Endpoints::GetMemberDetectors.build(context)
           when :get_members
             Aws::GuardDuty::Endpoints::GetMembers.build(context)
+          when :get_organization_statistics
+            Aws::GuardDuty::Endpoints::GetOrganizationStatistics.build(context)
           when :get_remaining_free_trial_days
             Aws::GuardDuty::Endpoints::GetRemainingFreeTrialDays.build(context)
           when :get_threat_intel_set
@@ -152,6 +162,8 @@ module Aws::GuardDuty
             Aws::GuardDuty::Endpoints::ListIPSets.build(context)
           when :list_invitations
             Aws::GuardDuty::Endpoints::ListInvitations.build(context)
+          when :list_malware_protection_plans
+            Aws::GuardDuty::Endpoints::ListMalwareProtectionPlans.build(context)
           when :list_members
             Aws::GuardDuty::Endpoints::ListMembers.build(context)
           when :list_organization_admin_accounts
@@ -182,6 +194,8 @@ module Aws::GuardDuty
             Aws::GuardDuty::Endpoints::UpdateFindingsFeedback.build(context)
           when :update_ip_set
             Aws::GuardDuty::Endpoints::UpdateIPSet.build(context)
+          when :update_malware_protection_plan
+            Aws::GuardDuty::Endpoints::UpdateMalwareProtectionPlan.build(context)
           when :update_malware_scan_settings
             Aws::GuardDuty::Endpoints::UpdateMalwareScanSettings.build(context)
           when :update_member_detectors

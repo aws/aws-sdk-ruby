@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::MarketplaceCommerceAnalytics
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::MarketplaceCommerceAnalytics
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::MarketplaceCommerceAnalytics
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::MarketplaceCommerceAnalytics
     #   @option options [Aws::MarketplaceCommerceAnalytics::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::MarketplaceCommerceAnalytics::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -570,23 +595,12 @@ module Aws::MarketplaceCommerceAnalytics
       req.send_request(options)
     end
 
-    # Given a data set type and a from date, asynchronously publishes the
-    # requested customer support data to the specified S3 bucket and
-    # notifies the specified SNS topic once the data is available. Returns a
-    # unique request identifier that can be used to correlate requests with
-    # notifications from the SNS topic. Data sets will be published in
-    # comma-separated values (CSV) format with the file name
-    # \\\{data\_set\_type\\}\_YYYY-MM-DD'T'HH-mm-ss'Z'.csv. If a file
-    # with the same name already exists (e.g. if the same data set is
-    # requested twice), the original file will be overwritten by the new
-    # file. Requires a Role with an attached permissions policy providing
-    # Allow permissions for the following actions: s3:PutObject,
-    # s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish,
-    # iam:GetRolePolicy.
+    # *This target has been deprecated.* Given a data set type and a from date, asynchronously publishes the requested customer support data to the specified S3 bucket and notifies the specified SNS topic once the data is available. Returns a unique request identifier that can be used to correlate requests with notifications from the SNS topic. Data sets will be published in comma-separated values (CSV) format with the file name \\\{data\_set\_type\\}\_YYYY-MM-DD'T'HH-mm-ss'Z'.csv. If a file with the same name already exists (e.g. if the same data set is requested twice), the original file will be overwritten by the new file. Requires a Role with an attached permissions policy providing Allow permissions for the following actions: s3:PutObject, s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish, iam:GetRolePolicy.
     #
     # @option params [required, String] :data_set_type
-    #   Specifies the data set type to be written to the output csv file. The
-    #   data set types customer\_support\_contacts\_data and
+    #   *This target has been deprecated.* Specifies the data set type to be
+    #   written to the output csv file. The data set types
+    #   customer\_support\_contacts\_data and
     #   test\_customer\_support\_contacts\_data both result in a csv file
     #   containing the following fields: Product Id, Product Code, Customer
     #   Guid, Subscription Guid, Subscription Start Date, Organization, AWS
@@ -602,33 +616,22 @@ module Aws::MarketplaceCommerceAnalytics
     #     customer\_support\_contacts\_data
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :from_date
-    #   The start date from which to retrieve the data set in UTC. This
-    #   parameter only affects the customer\_support\_contacts\_data data set
-    #   type.
+    #   *This target has been deprecated.* The start date from which to retrieve the data set in UTC. This parameter only affects the customer\_support\_contacts\_data data set type.
     #
     # @option params [required, String] :role_name_arn
-    #   The Amazon Resource Name (ARN) of the Role with an attached
-    #   permissions policy to interact with the provided AWS services.
+    #   *This target has been deprecated.* The Amazon Resource Name (ARN) of the Role with an attached permissions policy to interact with the provided AWS services.
     #
     # @option params [required, String] :destination_s3_bucket_name
-    #   The name (friendly name, not ARN) of the destination S3 bucket.
+    #   *This target has been deprecated.* The name (friendly name, not ARN) of the destination S3 bucket.
     #
     # @option params [String] :destination_s3_prefix
-    #   (Optional) The desired S3 prefix for the published data set, similar
-    #   to a directory path in standard file systems. For example, if given
-    #   the bucket name "mybucket" and the prefix "myprefix/mydatasets",
-    #   the output file "outputfile" would be published to
-    #   "s3://mybucket/myprefix/mydatasets/outputfile". If the prefix
-    #   directory structure does not exist, it will be created. If no prefix
-    #   is provided, the data set will be published to the S3 bucket root.
+    #   *This target has been deprecated.* (Optional) The desired S3 prefix for the published data set, similar to a directory path in standard file systems. For example, if given the bucket name "mybucket" and the prefix "myprefix/mydatasets", the output file "outputfile" would be published to "s3://mybucket/myprefix/mydatasets/outputfile". If the prefix directory structure does not exist, it will be created. If no prefix is provided, the data set will be published to the S3 bucket root.
     #
     # @option params [required, String] :sns_topic_arn
-    #   Amazon Resource Name (ARN) for the SNS Topic that will be notified
-    #   when the data set has been published or if an error has occurred.
+    #   *This target has been deprecated.* Amazon Resource Name (ARN) for the SNS Topic that will be notified when the data set has been published or if an error has occurred.
     #
     # @option params [Hash<String,String>] :customer_defined_values
-    #   (Optional) Key-value pairs which will be returned, unmodified, in the
-    #   Amazon SNS notification message and the data set metadata file.
+    #   *This target has been deprecated.* (Optional) Key-value pairs which will be returned, unmodified, in the Amazon SNS notification message and the data set metadata file.
     #
     # @return [Types::StartSupportDataExportResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -674,7 +677,7 @@ module Aws::MarketplaceCommerceAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecommerceanalytics'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

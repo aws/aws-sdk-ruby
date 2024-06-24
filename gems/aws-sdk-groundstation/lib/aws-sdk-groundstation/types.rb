@@ -490,6 +490,30 @@ module Aws::GroundStation
     #   Tags assigned to a contact.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] visibility_end_time
+    #   Projected time in UTC your satellite will set below the [receive
+    #   mask][1]. This time is based on the satellite's current active
+    #   ephemeris for future contacts and the ephemeris that was active
+    #   during contact execution for completed contacts. *This field is not
+    #   present for contacts with a `SCHEDULING` or `SCHEDULED` status.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] visibility_start_time
+    #   Projected time in UTC your satellite will rise above the [receive
+    #   mask][1]. This time is based on the satellite's current active
+    #   ephemeris for future contacts and the ephemeris that was active
+    #   during contact execution for completed contacts. *This field is not
+    #   present for contacts with a `SCHEDULING` or `SCHEDULED` status.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/ContactData AWS API Documentation
     #
     class ContactData < Struct.new(
@@ -505,7 +529,9 @@ module Aws::GroundStation
       :region,
       :satellite_arn,
       :start_time,
-      :tags)
+      :tags,
+      :visibility_end_time,
+      :visibility_start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -640,12 +666,13 @@ module Aws::GroundStation
 
     # @!attribute [rw] contact_post_pass_duration_seconds
     #   Amount of time after a contact ends that you’d like to receive a
-    #   CloudWatch event indicating the pass has finished.
+    #   Ground Station Contact State Change event indicating the pass has
+    #   finished.
     #   @return [Integer]
     #
     # @!attribute [rw] contact_pre_pass_duration_seconds
-    #   Amount of time prior to contact start you’d like to receive a
-    #   CloudWatch event indicating an upcoming pass.
+    #   Amount of time prior to contact start you’d like to receive a Ground
+    #   Station Contact State Change event indicating an upcoming pass.
     #   @return [Integer]
     #
     # @!attribute [rw] dataflow_edges
@@ -968,6 +995,28 @@ module Aws::GroundStation
     #   Tags assigned to a contact.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] visibility_end_time
+    #   Projected time in UTC your satellite will set below the [receive
+    #   mask][1]. This time is based on the satellite's current active
+    #   ephemeris for future contacts and the ephemeris that was active
+    #   during contact execution for completed contacts.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] visibility_start_time
+    #   Projected time in UTC your satellite will rise above the [receive
+    #   mask][1]. This time is based on the satellite's current active
+    #   ephemeris for future contacts and the ephemeris that was active
+    #   during contact execution for completed contacts.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/groundstation-2019-05-23/DescribeContactResponse AWS API Documentation
     #
     class DescribeContactResponse < Struct.new(
@@ -984,7 +1033,9 @@ module Aws::GroundStation
       :region,
       :satellite_arn,
       :start_time,
-      :tags)
+      :tags,
+      :visibility_end_time,
+      :visibility_start_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1809,6 +1860,10 @@ module Aws::GroundStation
     #   KMS Alias Arn.
     #   @return [String]
     #
+    # @!attribute [rw] kms_alias_name
+    #   KMS Alias Name.
+    #   @return [String]
+    #
     # @!attribute [rw] kms_key_arn
     #   KMS Key Arn.
     #   @return [String]
@@ -1817,6 +1872,7 @@ module Aws::GroundStation
     #
     class KmsKey < Struct.new(
       :kms_alias_arn,
+      :kms_alias_name,
       :kms_key_arn,
       :unknown)
       SENSITIVE = []
@@ -1824,6 +1880,7 @@ module Aws::GroundStation
       include Aws::Structure::Union
 
       class KmsAliasArn < KmsKey; end
+      class KmsAliasName < KmsKey; end
       class KmsKeyArn < KmsKey; end
       class Unknown < KmsKey; end
     end
@@ -2796,12 +2853,14 @@ module Aws::GroundStation
 
     # @!attribute [rw] contact_post_pass_duration_seconds
     #   Amount of time after a contact ends that you’d like to receive a
-    #   CloudWatch event indicating the pass has finished.
+    #   Ground Station Contact State Change event indicating the pass has
+    #   finished.
     #   @return [Integer]
     #
     # @!attribute [rw] contact_pre_pass_duration_seconds
     #   Amount of time after a contact ends that you’d like to receive a
-    #   CloudWatch event indicating the pass has finished.
+    #   Ground Station Contact State Change event indicating the pass has
+    #   finished.
     #   @return [Integer]
     #
     # @!attribute [rw] dataflow_edges

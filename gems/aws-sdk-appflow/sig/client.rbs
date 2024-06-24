@@ -1,0 +1,1442 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Appflow
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CancelFlowExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelFlowExecutionsResponse]
+        def invalid_executions: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#cancel_flow_executions-instance_method
+      def cancel_flow_executions: (
+                                    flow_name: ::String,
+                                    ?execution_ids: Array[::String]
+                                  ) -> _CancelFlowExecutionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelFlowExecutionsResponseSuccess
+
+      interface _CreateConnectorProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConnectorProfileResponse]
+        def connector_profile_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#create_connector_profile-instance_method
+      def create_connector_profile: (
+                                      connector_profile_name: ::String,
+                                      ?kms_arn: ::String,
+                                      connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot"),
+                                      ?connector_label: ::String,
+                                      connection_mode: ("Public" | "Private"),
+                                      connector_profile_config: {
+                                        connector_profile_properties: {
+                                          amplitude: {
+                                          }?,
+                                          datadog: {
+                                            instance_url: ::String
+                                          }?,
+                                          dynatrace: {
+                                            instance_url: ::String
+                                          }?,
+                                          google_analytics: {
+                                          }?,
+                                          honeycode: {
+                                          }?,
+                                          infor_nexus: {
+                                            instance_url: ::String
+                                          }?,
+                                          marketo: {
+                                            instance_url: ::String
+                                          }?,
+                                          redshift: {
+                                            database_url: ::String?,
+                                            bucket_name: ::String,
+                                            bucket_prefix: ::String?,
+                                            role_arn: ::String,
+                                            data_api_role_arn: ::String?,
+                                            is_redshift_serverless: bool?,
+                                            cluster_identifier: ::String?,
+                                            workgroup_name: ::String?,
+                                            database_name: ::String?
+                                          }?,
+                                          salesforce: {
+                                            instance_url: ::String?,
+                                            is_sandbox_environment: bool?,
+                                            use_private_link_for_metadata_and_authorization: bool?
+                                          }?,
+                                          service_now: {
+                                            instance_url: ::String
+                                          }?,
+                                          singular: {
+                                          }?,
+                                          slack: {
+                                            instance_url: ::String
+                                          }?,
+                                          snowflake: {
+                                            warehouse: ::String,
+                                            stage: ::String,
+                                            bucket_name: ::String,
+                                            bucket_prefix: ::String?,
+                                            private_link_service_name: ::String?,
+                                            account_name: ::String?,
+                                            region: ::String?
+                                          }?,
+                                          trendmicro: {
+                                          }?,
+                                          veeva: {
+                                            instance_url: ::String
+                                          }?,
+                                          zendesk: {
+                                            instance_url: ::String
+                                          }?,
+                                          sapo_data: {
+                                            application_host_url: ::String,
+                                            application_service_path: ::String,
+                                            port_number: ::Integer,
+                                            client_number: ::String,
+                                            logon_language: ::String?,
+                                            private_link_service_name: ::String?,
+                                            o_auth_properties: {
+                                              token_url: ::String,
+                                              auth_code_url: ::String,
+                                              o_auth_scopes: Array[::String]
+                                            }?,
+                                            disable_sso: bool?
+                                          }?,
+                                          custom_connector: {
+                                            profile_properties: Hash[::String, ::String]?,
+                                            o_auth_2_properties: {
+                                              token_url: ::String,
+                                              o_auth_2_grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "JWT_BEARER"),
+                                              token_url_custom_properties: Hash[::String, ::String]?
+                                            }?
+                                          }?,
+                                          pardot: {
+                                            instance_url: ::String?,
+                                            is_sandbox_environment: bool?,
+                                            business_unit_id: ::String?
+                                          }?
+                                        },
+                                        connector_profile_credentials: {
+                                          amplitude: {
+                                            api_key: ::String,
+                                            secret_key: ::String
+                                          }?,
+                                          datadog: {
+                                            api_key: ::String,
+                                            application_key: ::String
+                                          }?,
+                                          dynatrace: {
+                                            api_token: ::String
+                                          }?,
+                                          google_analytics: {
+                                            client_id: ::String,
+                                            client_secret: ::String,
+                                            access_token: ::String?,
+                                            refresh_token: ::String?,
+                                            o_auth_request: {
+                                              auth_code: ::String?,
+                                              redirect_uri: ::String?
+                                            }?
+                                          }?,
+                                          honeycode: {
+                                            access_token: ::String?,
+                                            refresh_token: ::String?,
+                                            o_auth_request: {
+                                              auth_code: ::String?,
+                                              redirect_uri: ::String?
+                                            }?
+                                          }?,
+                                          infor_nexus: {
+                                            access_key_id: ::String,
+                                            user_id: ::String,
+                                            secret_access_key: ::String,
+                                            datakey: ::String
+                                          }?,
+                                          marketo: {
+                                            client_id: ::String,
+                                            client_secret: ::String,
+                                            access_token: ::String?,
+                                            o_auth_request: {
+                                              auth_code: ::String?,
+                                              redirect_uri: ::String?
+                                            }?
+                                          }?,
+                                          redshift: {
+                                            username: ::String?,
+                                            password: ::String?
+                                          }?,
+                                          salesforce: {
+                                            access_token: ::String?,
+                                            refresh_token: ::String?,
+                                            o_auth_request: {
+                                              auth_code: ::String?,
+                                              redirect_uri: ::String?
+                                            }?,
+                                            client_credentials_arn: ::String?,
+                                            o_auth_2_grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "JWT_BEARER")?,
+                                            jwt_token: ::String?
+                                          }?,
+                                          service_now: {
+                                            username: ::String?,
+                                            password: ::String?,
+                                            o_auth_2_credentials: {
+                                              client_id: ::String?,
+                                              client_secret: ::String?,
+                                              access_token: ::String?,
+                                              refresh_token: ::String?,
+                                              o_auth_request: {
+                                                auth_code: ::String?,
+                                                redirect_uri: ::String?
+                                              }?
+                                            }?
+                                          }?,
+                                          singular: {
+                                            api_key: ::String
+                                          }?,
+                                          slack: {
+                                            client_id: ::String,
+                                            client_secret: ::String,
+                                            access_token: ::String?,
+                                            o_auth_request: {
+                                              auth_code: ::String?,
+                                              redirect_uri: ::String?
+                                            }?
+                                          }?,
+                                          snowflake: {
+                                            username: ::String,
+                                            password: ::String
+                                          }?,
+                                          trendmicro: {
+                                            api_secret_key: ::String
+                                          }?,
+                                          veeva: {
+                                            username: ::String,
+                                            password: ::String
+                                          }?,
+                                          zendesk: {
+                                            client_id: ::String,
+                                            client_secret: ::String,
+                                            access_token: ::String?,
+                                            o_auth_request: {
+                                              auth_code: ::String?,
+                                              redirect_uri: ::String?
+                                            }?
+                                          }?,
+                                          sapo_data: {
+                                            basic_auth_credentials: {
+                                              username: ::String,
+                                              password: ::String
+                                            }?,
+                                            o_auth_credentials: {
+                                              client_id: ::String,
+                                              client_secret: ::String,
+                                              access_token: ::String?,
+                                              refresh_token: ::String?,
+                                              o_auth_request: {
+                                                auth_code: ::String?,
+                                                redirect_uri: ::String?
+                                              }?
+                                            }?
+                                          }?,
+                                          custom_connector: {
+                                            authentication_type: ("OAUTH2" | "APIKEY" | "BASIC" | "CUSTOM"),
+                                            basic: {
+                                              username: ::String,
+                                              password: ::String
+                                            }?,
+                                            oauth2: {
+                                              client_id: ::String?,
+                                              client_secret: ::String?,
+                                              access_token: ::String?,
+                                              refresh_token: ::String?,
+                                              o_auth_request: {
+                                                auth_code: ::String?,
+                                                redirect_uri: ::String?
+                                              }?
+                                            }?,
+                                            api_key: {
+                                              api_key: ::String,
+                                              api_secret_key: ::String?
+                                            }?,
+                                            custom: {
+                                              custom_authentication_type: ::String,
+                                              credentials_map: Hash[::String, ::String]?
+                                            }?
+                                          }?,
+                                          pardot: {
+                                            access_token: ::String?,
+                                            refresh_token: ::String?,
+                                            o_auth_request: {
+                                              auth_code: ::String?,
+                                              redirect_uri: ::String?
+                                            }?,
+                                            client_credentials_arn: ::String?
+                                          }?
+                                        }?
+                                      },
+                                      ?client_token: ::String
+                                    ) -> _CreateConnectorProfileResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectorProfileResponseSuccess
+
+      interface _CreateFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFlowResponse]
+        def flow_arn: () -> ::String
+        def flow_status: () -> ("Active" | "Deprecated" | "Deleted" | "Draft" | "Errored" | "Suspended")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#create_flow-instance_method
+      def create_flow: (
+                         flow_name: ::String,
+                         ?description: ::String,
+                         ?kms_arn: ::String,
+                         trigger_config: {
+                           trigger_type: ("Scheduled" | "Event" | "OnDemand"),
+                           trigger_properties: {
+                             scheduled: {
+                               schedule_expression: ::String,
+                               data_pull_mode: ("Incremental" | "Complete")?,
+                               schedule_start_time: ::Time?,
+                               schedule_end_time: ::Time?,
+                               timezone: ::String?,
+                               schedule_offset: ::Integer?,
+                               first_execution_from: ::Time?,
+                               flow_error_deactivation_threshold: ::Integer?
+                             }?
+                           }?
+                         },
+                         source_flow_config: {
+                           connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot"),
+                           api_version: ::String?,
+                           connector_profile_name: ::String?,
+                           source_connector_properties: {
+                             amplitude: {
+                               object: ::String
+                             }?,
+                             datadog: {
+                               object: ::String
+                             }?,
+                             dynatrace: {
+                               object: ::String
+                             }?,
+                             google_analytics: {
+                               object: ::String
+                             }?,
+                             infor_nexus: {
+                               object: ::String
+                             }?,
+                             marketo: {
+                               object: ::String
+                             }?,
+                             s3: {
+                               bucket_name: ::String,
+                               bucket_prefix: ::String?,
+                               s3_input_format_config: {
+                                 s3_input_file_type: ("CSV" | "JSON")?
+                               }?
+                             }?,
+                             salesforce: {
+                               object: ::String,
+                               enable_dynamic_field_update: bool?,
+                               include_deleted_records: bool?,
+                               data_transfer_api: ("AUTOMATIC" | "BULKV2" | "REST_SYNC")?
+                             }?,
+                             service_now: {
+                               object: ::String
+                             }?,
+                             singular: {
+                               object: ::String
+                             }?,
+                             slack: {
+                               object: ::String
+                             }?,
+                             trendmicro: {
+                               object: ::String
+                             }?,
+                             veeva: {
+                               object: ::String,
+                               document_type: ::String?,
+                               include_source_files: bool?,
+                               include_renditions: bool?,
+                               include_all_versions: bool?
+                             }?,
+                             zendesk: {
+                               object: ::String
+                             }?,
+                             sapo_data: {
+                               object_path: ::String?,
+                               parallelism_config: {
+                                 max_parallelism: ::Integer
+                               }?,
+                               pagination_config: {
+                                 max_page_size: ::Integer
+                               }?
+                             }?,
+                             custom_connector: {
+                               entity_name: ::String,
+                               custom_properties: Hash[::String, ::String]?,
+                               data_transfer_api: {
+                                 name: ::String?,
+                                 type: ("SYNC" | "ASYNC" | "AUTOMATIC")?
+                               }?
+                             }?,
+                             pardot: {
+                               object: ::String
+                             }?
+                           },
+                           incremental_pull_config: {
+                             datetime_type_field_name: ::String?
+                           }?
+                         },
+                         destination_flow_config_list: Array[
+                           {
+                             connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot"),
+                             api_version: ::String?,
+                             connector_profile_name: ::String?,
+                             destination_connector_properties: {
+                               redshift: {
+                                 object: ::String,
+                                 intermediate_bucket_name: ::String,
+                                 bucket_prefix: ::String?,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?
+                               }?,
+                               s3: {
+                                 bucket_name: ::String,
+                                 bucket_prefix: ::String?,
+                                 s3_output_format_config: {
+                                   file_type: ("CSV" | "JSON" | "PARQUET")?,
+                                   prefix_config: {
+                                     prefix_type: ("FILENAME" | "PATH" | "PATH_AND_FILENAME")?,
+                                     prefix_format: ("YEAR" | "MONTH" | "DAY" | "HOUR" | "MINUTE")?,
+                                     path_prefix_hierarchy: Array[("EXECUTION_ID" | "SCHEMA_VERSION")]?
+                                   }?,
+                                   aggregation_config: {
+                                     aggregation_type: ("None" | "SingleFile")?,
+                                     target_file_size: ::Integer?
+                                   }?,
+                                   preserve_source_data_typing: bool?
+                                 }?
+                               }?,
+                               salesforce: {
+                                 object: ::String,
+                                 id_field_names: Array[::String]?,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?,
+                                 write_operation_type: ("INSERT" | "UPSERT" | "UPDATE" | "DELETE")?,
+                                 data_transfer_api: ("AUTOMATIC" | "BULKV2" | "REST_SYNC")?
+                               }?,
+                               snowflake: {
+                                 object: ::String,
+                                 intermediate_bucket_name: ::String,
+                                 bucket_prefix: ::String?,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?
+                               }?,
+                               event_bridge: {
+                                 object: ::String,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?
+                               }?,
+                               lookout_metrics: {
+                               }?,
+                               upsolver: {
+                                 bucket_name: ::String,
+                                 bucket_prefix: ::String?,
+                                 s3_output_format_config: {
+                                   file_type: ("CSV" | "JSON" | "PARQUET")?,
+                                   prefix_config: {
+                                     prefix_type: ("FILENAME" | "PATH" | "PATH_AND_FILENAME")?,
+                                     prefix_format: ("YEAR" | "MONTH" | "DAY" | "HOUR" | "MINUTE")?,
+                                     path_prefix_hierarchy: Array[("EXECUTION_ID" | "SCHEMA_VERSION")]?
+                                   },
+                                   aggregation_config: {
+                                     aggregation_type: ("None" | "SingleFile")?,
+                                     target_file_size: ::Integer?
+                                   }?
+                                 }
+                               }?,
+                               honeycode: {
+                                 object: ::String,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?
+                               }?,
+                               customer_profiles: {
+                                 domain_name: ::String,
+                                 object_type_name: ::String?
+                               }?,
+                               zendesk: {
+                                 object: ::String,
+                                 id_field_names: Array[::String]?,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?,
+                                 write_operation_type: ("INSERT" | "UPSERT" | "UPDATE" | "DELETE")?
+                               }?,
+                               marketo: {
+                                 object: ::String,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?
+                               }?,
+                               custom_connector: {
+                                 entity_name: ::String,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?,
+                                 write_operation_type: ("INSERT" | "UPSERT" | "UPDATE" | "DELETE")?,
+                                 id_field_names: Array[::String]?,
+                                 custom_properties: Hash[::String, ::String]?
+                               }?,
+                               sapo_data: {
+                                 object_path: ::String,
+                                 success_response_handling_config: {
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?,
+                                 id_field_names: Array[::String]?,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?,
+                                 write_operation_type: ("INSERT" | "UPSERT" | "UPDATE" | "DELETE")?
+                               }?
+                             }
+                           },
+                         ],
+                         tasks: Array[
+                           {
+                             source_fields: Array[::String],
+                             connector_operator: {
+                               amplitude: ("BETWEEN")?,
+                               datadog: ("PROJECTION" | "BETWEEN" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               dynatrace: ("PROJECTION" | "BETWEEN" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               google_analytics: ("PROJECTION" | "BETWEEN")?,
+                               infor_nexus: ("PROJECTION" | "BETWEEN" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               marketo: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               s3: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               salesforce: ("PROJECTION" | "LESS_THAN" | "CONTAINS" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               service_now: ("PROJECTION" | "CONTAINS" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               singular: ("PROJECTION" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               slack: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               trendmicro: ("PROJECTION" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               veeva: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "CONTAINS" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               zendesk: ("PROJECTION" | "GREATER_THAN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               sapo_data: ("PROJECTION" | "LESS_THAN" | "CONTAINS" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               custom_connector: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "CONTAINS" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               pardot: ("PROJECTION" | "EQUAL_TO" | "NO_OP" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC")?
+                             }?,
+                             destination_field: ::String?,
+                             task_type: ("Arithmetic" | "Filter" | "Map" | "Map_all" | "Mask" | "Merge" | "Passthrough" | "Truncate" | "Validate" | "Partition"),
+                             task_properties: Hash[("VALUE" | "VALUES" | "DATA_TYPE" | "UPPER_BOUND" | "LOWER_BOUND" | "SOURCE_DATA_TYPE" | "DESTINATION_DATA_TYPE" | "VALIDATION_ACTION" | "MASK_VALUE" | "MASK_LENGTH" | "TRUNCATE_LENGTH" | "MATH_OPERATION_FIELDS_ORDER" | "CONCAT_FORMAT" | "SUBFIELD_CATEGORY_MAP" | "EXCLUDE_SOURCE_FIELDS_LIST" | "INCLUDE_NEW_FIELDS" | "ORDERED_PARTITION_KEYS_LIST"), ::String]?
+                           },
+                         ],
+                         ?tags: Hash[::String, ::String],
+                         ?metadata_catalog_config: {
+                           glue_data_catalog: {
+                             role_arn: ::String,
+                             database_name: ::String,
+                             table_prefix: ::String
+                           }?
+                         },
+                         ?client_token: ::String
+                       ) -> _CreateFlowResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFlowResponseSuccess
+
+      interface _DeleteConnectorProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectorProfileResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#delete_connector_profile-instance_method
+      def delete_connector_profile: (
+                                      connector_profile_name: ::String,
+                                      ?force_delete: bool
+                                    ) -> _DeleteConnectorProfileResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectorProfileResponseSuccess
+
+      interface _DeleteFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFlowResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#delete_flow-instance_method
+      def delete_flow: (
+                         flow_name: ::String,
+                         ?force_delete: bool
+                       ) -> _DeleteFlowResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFlowResponseSuccess
+
+      interface _DescribeConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConnectorResponse]
+        def connector_configuration: () -> Types::ConnectorConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#describe_connector-instance_method
+      def describe_connector: (
+                                connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot"),
+                                ?connector_label: ::String
+                              ) -> _DescribeConnectorResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectorResponseSuccess
+
+      interface _DescribeConnectorEntityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConnectorEntityResponse]
+        def connector_entity_fields: () -> ::Array[Types::ConnectorEntityField]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#describe_connector_entity-instance_method
+      def describe_connector_entity: (
+                                       connector_entity_name: ::String,
+                                       ?connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot"),
+                                       ?connector_profile_name: ::String,
+                                       ?api_version: ::String
+                                     ) -> _DescribeConnectorEntityResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectorEntityResponseSuccess
+
+      interface _DescribeConnectorProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConnectorProfilesResponse]
+        def connector_profile_details: () -> ::Array[Types::ConnectorProfile]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#describe_connector_profiles-instance_method
+      def describe_connector_profiles: (
+                                         ?connector_profile_names: Array[::String],
+                                         ?connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot"),
+                                         ?connector_label: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _DescribeConnectorProfilesResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectorProfilesResponseSuccess
+
+      interface _DescribeConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConnectorsResponse]
+        def connector_configurations: () -> ::Hash[("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot"), Types::ConnectorConfiguration]
+        def connectors: () -> ::Array[Types::ConnectorDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#describe_connectors-instance_method
+      def describe_connectors: (
+                                 ?connector_types: Array[("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot")],
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _DescribeConnectorsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectorsResponseSuccess
+
+      interface _DescribeFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFlowResponse]
+        def flow_arn: () -> ::String
+        def description: () -> ::String
+        def flow_name: () -> ::String
+        def kms_arn: () -> ::String
+        def flow_status: () -> ("Active" | "Deprecated" | "Deleted" | "Draft" | "Errored" | "Suspended")
+        def flow_status_message: () -> ::String
+        def source_flow_config: () -> Types::SourceFlowConfig
+        def destination_flow_config_list: () -> ::Array[Types::DestinationFlowConfig]
+        def last_run_execution_details: () -> Types::ExecutionDetails
+        def trigger_config: () -> Types::TriggerConfig
+        def tasks: () -> ::Array[Types::Task]
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def created_by: () -> ::String
+        def last_updated_by: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+        def metadata_catalog_config: () -> Types::MetadataCatalogConfig
+        def last_run_metadata_catalog_details: () -> ::Array[Types::MetadataCatalogDetail]
+        def schema_version: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#describe_flow-instance_method
+      def describe_flow: (
+                           flow_name: ::String
+                         ) -> _DescribeFlowResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFlowResponseSuccess
+
+      interface _DescribeFlowExecutionRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFlowExecutionRecordsResponse]
+        def flow_executions: () -> ::Array[Types::ExecutionRecord]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#describe_flow_execution_records-instance_method
+      def describe_flow_execution_records: (
+                                             flow_name: ::String,
+                                             ?max_results: ::Integer,
+                                             ?next_token: ::String
+                                           ) -> _DescribeFlowExecutionRecordsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFlowExecutionRecordsResponseSuccess
+
+      interface _ListConnectorEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectorEntitiesResponse]
+        def connector_entity_map: () -> ::Hash[::String, ::Array[Types::ConnectorEntity]]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#list_connector_entities-instance_method
+      def list_connector_entities: (
+                                     ?connector_profile_name: ::String,
+                                     ?connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot"),
+                                     ?entities_path: ::String,
+                                     ?api_version: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListConnectorEntitiesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectorEntitiesResponseSuccess
+
+      interface _ListConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConnectorsResponse]
+        def connectors: () -> ::Array[Types::ConnectorDetail]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#list_connectors-instance_method
+      def list_connectors: (
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListConnectorsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConnectorsResponseSuccess
+
+      interface _ListFlowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFlowsResponse]
+        def flows: () -> ::Array[Types::FlowDefinition]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#list_flows-instance_method
+      def list_flows: (
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListFlowsResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RegisterConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterConnectorResponse]
+        def connector_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#register_connector-instance_method
+      def register_connector: (
+                                ?connector_label: ::String,
+                                ?description: ::String,
+                                ?connector_provisioning_type: ("LAMBDA"),
+                                ?connector_provisioning_config: {
+                                  lambda: {
+                                    lambda_arn: ::String
+                                  }?
+                                },
+                                ?client_token: ::String
+                              ) -> _RegisterConnectorResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterConnectorResponseSuccess
+
+      interface _ResetConnectorMetadataCacheResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetConnectorMetadataCacheResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#reset_connector_metadata_cache-instance_method
+      def reset_connector_metadata_cache: (
+                                            ?connector_profile_name: ::String,
+                                            ?connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot"),
+                                            ?connector_entity_name: ::String,
+                                            ?entities_path: ::String,
+                                            ?api_version: ::String
+                                          ) -> _ResetConnectorMetadataCacheResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetConnectorMetadataCacheResponseSuccess
+
+      interface _StartFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartFlowResponse]
+        def flow_arn: () -> ::String
+        def flow_status: () -> ("Active" | "Deprecated" | "Deleted" | "Draft" | "Errored" | "Suspended")
+        def execution_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#start_flow-instance_method
+      def start_flow: (
+                        flow_name: ::String,
+                        ?client_token: ::String
+                      ) -> _StartFlowResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFlowResponseSuccess
+
+      interface _StopFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopFlowResponse]
+        def flow_arn: () -> ::String
+        def flow_status: () -> ("Active" | "Deprecated" | "Deleted" | "Draft" | "Errored" | "Suspended")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#stop_flow-instance_method
+      def stop_flow: (
+                       flow_name: ::String
+                     ) -> _StopFlowResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopFlowResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UnregisterConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UnregisterConnectorResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#unregister_connector-instance_method
+      def unregister_connector: (
+                                  connector_label: ::String,
+                                  ?force_delete: bool
+                                ) -> _UnregisterConnectorResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UnregisterConnectorResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateConnectorProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectorProfileResponse]
+        def connector_profile_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#update_connector_profile-instance_method
+      def update_connector_profile: (
+                                      connector_profile_name: ::String,
+                                      connection_mode: ("Public" | "Private"),
+                                      connector_profile_config: {
+                                        connector_profile_properties: {
+                                          amplitude: {
+                                          }?,
+                                          datadog: {
+                                            instance_url: ::String
+                                          }?,
+                                          dynatrace: {
+                                            instance_url: ::String
+                                          }?,
+                                          google_analytics: {
+                                          }?,
+                                          honeycode: {
+                                          }?,
+                                          infor_nexus: {
+                                            instance_url: ::String
+                                          }?,
+                                          marketo: {
+                                            instance_url: ::String
+                                          }?,
+                                          redshift: {
+                                            database_url: ::String?,
+                                            bucket_name: ::String,
+                                            bucket_prefix: ::String?,
+                                            role_arn: ::String,
+                                            data_api_role_arn: ::String?,
+                                            is_redshift_serverless: bool?,
+                                            cluster_identifier: ::String?,
+                                            workgroup_name: ::String?,
+                                            database_name: ::String?
+                                          }?,
+                                          salesforce: {
+                                            instance_url: ::String?,
+                                            is_sandbox_environment: bool?,
+                                            use_private_link_for_metadata_and_authorization: bool?
+                                          }?,
+                                          service_now: {
+                                            instance_url: ::String
+                                          }?,
+                                          singular: {
+                                          }?,
+                                          slack: {
+                                            instance_url: ::String
+                                          }?,
+                                          snowflake: {
+                                            warehouse: ::String,
+                                            stage: ::String,
+                                            bucket_name: ::String,
+                                            bucket_prefix: ::String?,
+                                            private_link_service_name: ::String?,
+                                            account_name: ::String?,
+                                            region: ::String?
+                                          }?,
+                                          trendmicro: {
+                                          }?,
+                                          veeva: {
+                                            instance_url: ::String
+                                          }?,
+                                          zendesk: {
+                                            instance_url: ::String
+                                          }?,
+                                          sapo_data: {
+                                            application_host_url: ::String,
+                                            application_service_path: ::String,
+                                            port_number: ::Integer,
+                                            client_number: ::String,
+                                            logon_language: ::String?,
+                                            private_link_service_name: ::String?,
+                                            o_auth_properties: {
+                                              token_url: ::String,
+                                              auth_code_url: ::String,
+                                              o_auth_scopes: Array[::String]
+                                            }?,
+                                            disable_sso: bool?
+                                          }?,
+                                          custom_connector: {
+                                            profile_properties: Hash[::String, ::String]?,
+                                            o_auth_2_properties: {
+                                              token_url: ::String,
+                                              o_auth_2_grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "JWT_BEARER"),
+                                              token_url_custom_properties: Hash[::String, ::String]?
+                                            }?
+                                          }?,
+                                          pardot: {
+                                            instance_url: ::String?,
+                                            is_sandbox_environment: bool?,
+                                            business_unit_id: ::String?
+                                          }?
+                                        },
+                                        connector_profile_credentials: {
+                                          amplitude: {
+                                            api_key: ::String,
+                                            secret_key: ::String
+                                          }?,
+                                          datadog: {
+                                            api_key: ::String,
+                                            application_key: ::String
+                                          }?,
+                                          dynatrace: {
+                                            api_token: ::String
+                                          }?,
+                                          google_analytics: {
+                                            client_id: ::String,
+                                            client_secret: ::String,
+                                            access_token: ::String?,
+                                            refresh_token: ::String?,
+                                            o_auth_request: {
+                                              auth_code: ::String?,
+                                              redirect_uri: ::String?
+                                            }?
+                                          }?,
+                                          honeycode: {
+                                            access_token: ::String?,
+                                            refresh_token: ::String?,
+                                            o_auth_request: {
+                                              auth_code: ::String?,
+                                              redirect_uri: ::String?
+                                            }?
+                                          }?,
+                                          infor_nexus: {
+                                            access_key_id: ::String,
+                                            user_id: ::String,
+                                            secret_access_key: ::String,
+                                            datakey: ::String
+                                          }?,
+                                          marketo: {
+                                            client_id: ::String,
+                                            client_secret: ::String,
+                                            access_token: ::String?,
+                                            o_auth_request: {
+                                              auth_code: ::String?,
+                                              redirect_uri: ::String?
+                                            }?
+                                          }?,
+                                          redshift: {
+                                            username: ::String?,
+                                            password: ::String?
+                                          }?,
+                                          salesforce: {
+                                            access_token: ::String?,
+                                            refresh_token: ::String?,
+                                            o_auth_request: {
+                                              auth_code: ::String?,
+                                              redirect_uri: ::String?
+                                            }?,
+                                            client_credentials_arn: ::String?,
+                                            o_auth_2_grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "JWT_BEARER")?,
+                                            jwt_token: ::String?
+                                          }?,
+                                          service_now: {
+                                            username: ::String?,
+                                            password: ::String?,
+                                            o_auth_2_credentials: {
+                                              client_id: ::String?,
+                                              client_secret: ::String?,
+                                              access_token: ::String?,
+                                              refresh_token: ::String?,
+                                              o_auth_request: {
+                                                auth_code: ::String?,
+                                                redirect_uri: ::String?
+                                              }?
+                                            }?
+                                          }?,
+                                          singular: {
+                                            api_key: ::String
+                                          }?,
+                                          slack: {
+                                            client_id: ::String,
+                                            client_secret: ::String,
+                                            access_token: ::String?,
+                                            o_auth_request: {
+                                              auth_code: ::String?,
+                                              redirect_uri: ::String?
+                                            }?
+                                          }?,
+                                          snowflake: {
+                                            username: ::String,
+                                            password: ::String
+                                          }?,
+                                          trendmicro: {
+                                            api_secret_key: ::String
+                                          }?,
+                                          veeva: {
+                                            username: ::String,
+                                            password: ::String
+                                          }?,
+                                          zendesk: {
+                                            client_id: ::String,
+                                            client_secret: ::String,
+                                            access_token: ::String?,
+                                            o_auth_request: {
+                                              auth_code: ::String?,
+                                              redirect_uri: ::String?
+                                            }?
+                                          }?,
+                                          sapo_data: {
+                                            basic_auth_credentials: {
+                                              username: ::String,
+                                              password: ::String
+                                            }?,
+                                            o_auth_credentials: {
+                                              client_id: ::String,
+                                              client_secret: ::String,
+                                              access_token: ::String?,
+                                              refresh_token: ::String?,
+                                              o_auth_request: {
+                                                auth_code: ::String?,
+                                                redirect_uri: ::String?
+                                              }?
+                                            }?
+                                          }?,
+                                          custom_connector: {
+                                            authentication_type: ("OAUTH2" | "APIKEY" | "BASIC" | "CUSTOM"),
+                                            basic: {
+                                              username: ::String,
+                                              password: ::String
+                                            }?,
+                                            oauth2: {
+                                              client_id: ::String?,
+                                              client_secret: ::String?,
+                                              access_token: ::String?,
+                                              refresh_token: ::String?,
+                                              o_auth_request: {
+                                                auth_code: ::String?,
+                                                redirect_uri: ::String?
+                                              }?
+                                            }?,
+                                            api_key: {
+                                              api_key: ::String,
+                                              api_secret_key: ::String?
+                                            }?,
+                                            custom: {
+                                              custom_authentication_type: ::String,
+                                              credentials_map: Hash[::String, ::String]?
+                                            }?
+                                          }?,
+                                          pardot: {
+                                            access_token: ::String?,
+                                            refresh_token: ::String?,
+                                            o_auth_request: {
+                                              auth_code: ::String?,
+                                              redirect_uri: ::String?
+                                            }?,
+                                            client_credentials_arn: ::String?
+                                          }?
+                                        }?
+                                      },
+                                      ?client_token: ::String
+                                    ) -> _UpdateConnectorProfileResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectorProfileResponseSuccess
+
+      interface _UpdateConnectorRegistrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConnectorRegistrationResponse]
+        def connector_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#update_connector_registration-instance_method
+      def update_connector_registration: (
+                                           connector_label: ::String,
+                                           ?description: ::String,
+                                           ?connector_provisioning_config: {
+                                             lambda: {
+                                               lambda_arn: ::String
+                                             }?
+                                           },
+                                           ?client_token: ::String
+                                         ) -> _UpdateConnectorRegistrationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectorRegistrationResponseSuccess
+
+      interface _UpdateFlowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFlowResponse]
+        def flow_status: () -> ("Active" | "Deprecated" | "Deleted" | "Draft" | "Errored" | "Suspended")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Appflow/Client.html#update_flow-instance_method
+      def update_flow: (
+                         flow_name: ::String,
+                         ?description: ::String,
+                         trigger_config: {
+                           trigger_type: ("Scheduled" | "Event" | "OnDemand"),
+                           trigger_properties: {
+                             scheduled: {
+                               schedule_expression: ::String,
+                               data_pull_mode: ("Incremental" | "Complete")?,
+                               schedule_start_time: ::Time?,
+                               schedule_end_time: ::Time?,
+                               timezone: ::String?,
+                               schedule_offset: ::Integer?,
+                               first_execution_from: ::Time?,
+                               flow_error_deactivation_threshold: ::Integer?
+                             }?
+                           }?
+                         },
+                         source_flow_config: {
+                           connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot"),
+                           api_version: ::String?,
+                           connector_profile_name: ::String?,
+                           source_connector_properties: {
+                             amplitude: {
+                               object: ::String
+                             }?,
+                             datadog: {
+                               object: ::String
+                             }?,
+                             dynatrace: {
+                               object: ::String
+                             }?,
+                             google_analytics: {
+                               object: ::String
+                             }?,
+                             infor_nexus: {
+                               object: ::String
+                             }?,
+                             marketo: {
+                               object: ::String
+                             }?,
+                             s3: {
+                               bucket_name: ::String,
+                               bucket_prefix: ::String?,
+                               s3_input_format_config: {
+                                 s3_input_file_type: ("CSV" | "JSON")?
+                               }?
+                             }?,
+                             salesforce: {
+                               object: ::String,
+                               enable_dynamic_field_update: bool?,
+                               include_deleted_records: bool?,
+                               data_transfer_api: ("AUTOMATIC" | "BULKV2" | "REST_SYNC")?
+                             }?,
+                             service_now: {
+                               object: ::String
+                             }?,
+                             singular: {
+                               object: ::String
+                             }?,
+                             slack: {
+                               object: ::String
+                             }?,
+                             trendmicro: {
+                               object: ::String
+                             }?,
+                             veeva: {
+                               object: ::String,
+                               document_type: ::String?,
+                               include_source_files: bool?,
+                               include_renditions: bool?,
+                               include_all_versions: bool?
+                             }?,
+                             zendesk: {
+                               object: ::String
+                             }?,
+                             sapo_data: {
+                               object_path: ::String?,
+                               parallelism_config: {
+                                 max_parallelism: ::Integer
+                               }?,
+                               pagination_config: {
+                                 max_page_size: ::Integer
+                               }?
+                             }?,
+                             custom_connector: {
+                               entity_name: ::String,
+                               custom_properties: Hash[::String, ::String]?,
+                               data_transfer_api: {
+                                 name: ::String?,
+                                 type: ("SYNC" | "ASYNC" | "AUTOMATIC")?
+                               }?
+                             }?,
+                             pardot: {
+                               object: ::String
+                             }?
+                           },
+                           incremental_pull_config: {
+                             datetime_type_field_name: ::String?
+                           }?
+                         },
+                         destination_flow_config_list: Array[
+                           {
+                             connector_type: ("Salesforce" | "Singular" | "Slack" | "Redshift" | "S3" | "Marketo" | "Googleanalytics" | "Zendesk" | "Servicenow" | "Datadog" | "Trendmicro" | "Snowflake" | "Dynatrace" | "Infornexus" | "Amplitude" | "Veeva" | "EventBridge" | "LookoutMetrics" | "Upsolver" | "Honeycode" | "CustomerProfiles" | "SAPOData" | "CustomConnector" | "Pardot"),
+                             api_version: ::String?,
+                             connector_profile_name: ::String?,
+                             destination_connector_properties: {
+                               redshift: {
+                                 object: ::String,
+                                 intermediate_bucket_name: ::String,
+                                 bucket_prefix: ::String?,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?
+                               }?,
+                               s3: {
+                                 bucket_name: ::String,
+                                 bucket_prefix: ::String?,
+                                 s3_output_format_config: {
+                                   file_type: ("CSV" | "JSON" | "PARQUET")?,
+                                   prefix_config: {
+                                     prefix_type: ("FILENAME" | "PATH" | "PATH_AND_FILENAME")?,
+                                     prefix_format: ("YEAR" | "MONTH" | "DAY" | "HOUR" | "MINUTE")?,
+                                     path_prefix_hierarchy: Array[("EXECUTION_ID" | "SCHEMA_VERSION")]?
+                                   }?,
+                                   aggregation_config: {
+                                     aggregation_type: ("None" | "SingleFile")?,
+                                     target_file_size: ::Integer?
+                                   }?,
+                                   preserve_source_data_typing: bool?
+                                 }?
+                               }?,
+                               salesforce: {
+                                 object: ::String,
+                                 id_field_names: Array[::String]?,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?,
+                                 write_operation_type: ("INSERT" | "UPSERT" | "UPDATE" | "DELETE")?,
+                                 data_transfer_api: ("AUTOMATIC" | "BULKV2" | "REST_SYNC")?
+                               }?,
+                               snowflake: {
+                                 object: ::String,
+                                 intermediate_bucket_name: ::String,
+                                 bucket_prefix: ::String?,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?
+                               }?,
+                               event_bridge: {
+                                 object: ::String,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?
+                               }?,
+                               lookout_metrics: {
+                               }?,
+                               upsolver: {
+                                 bucket_name: ::String,
+                                 bucket_prefix: ::String?,
+                                 s3_output_format_config: {
+                                   file_type: ("CSV" | "JSON" | "PARQUET")?,
+                                   prefix_config: {
+                                     prefix_type: ("FILENAME" | "PATH" | "PATH_AND_FILENAME")?,
+                                     prefix_format: ("YEAR" | "MONTH" | "DAY" | "HOUR" | "MINUTE")?,
+                                     path_prefix_hierarchy: Array[("EXECUTION_ID" | "SCHEMA_VERSION")]?
+                                   },
+                                   aggregation_config: {
+                                     aggregation_type: ("None" | "SingleFile")?,
+                                     target_file_size: ::Integer?
+                                   }?
+                                 }
+                               }?,
+                               honeycode: {
+                                 object: ::String,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?
+                               }?,
+                               customer_profiles: {
+                                 domain_name: ::String,
+                                 object_type_name: ::String?
+                               }?,
+                               zendesk: {
+                                 object: ::String,
+                                 id_field_names: Array[::String]?,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?,
+                                 write_operation_type: ("INSERT" | "UPSERT" | "UPDATE" | "DELETE")?
+                               }?,
+                               marketo: {
+                                 object: ::String,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?
+                               }?,
+                               custom_connector: {
+                                 entity_name: ::String,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?,
+                                 write_operation_type: ("INSERT" | "UPSERT" | "UPDATE" | "DELETE")?,
+                                 id_field_names: Array[::String]?,
+                                 custom_properties: Hash[::String, ::String]?
+                               }?,
+                               sapo_data: {
+                                 object_path: ::String,
+                                 success_response_handling_config: {
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?,
+                                 id_field_names: Array[::String]?,
+                                 error_handling_config: {
+                                   fail_on_first_destination_error: bool?,
+                                   bucket_prefix: ::String?,
+                                   bucket_name: ::String?
+                                 }?,
+                                 write_operation_type: ("INSERT" | "UPSERT" | "UPDATE" | "DELETE")?
+                               }?
+                             }
+                           },
+                         ],
+                         tasks: Array[
+                           {
+                             source_fields: Array[::String],
+                             connector_operator: {
+                               amplitude: ("BETWEEN")?,
+                               datadog: ("PROJECTION" | "BETWEEN" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               dynatrace: ("PROJECTION" | "BETWEEN" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               google_analytics: ("PROJECTION" | "BETWEEN")?,
+                               infor_nexus: ("PROJECTION" | "BETWEEN" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               marketo: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               s3: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               salesforce: ("PROJECTION" | "LESS_THAN" | "CONTAINS" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               service_now: ("PROJECTION" | "CONTAINS" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               singular: ("PROJECTION" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               slack: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               trendmicro: ("PROJECTION" | "EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               veeva: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "CONTAINS" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               zendesk: ("PROJECTION" | "GREATER_THAN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               sapo_data: ("PROJECTION" | "LESS_THAN" | "CONTAINS" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               custom_connector: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "CONTAINS" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                               pardot: ("PROJECTION" | "EQUAL_TO" | "NO_OP" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC")?
+                             }?,
+                             destination_field: ::String?,
+                             task_type: ("Arithmetic" | "Filter" | "Map" | "Map_all" | "Mask" | "Merge" | "Passthrough" | "Truncate" | "Validate" | "Partition"),
+                             task_properties: Hash[("VALUE" | "VALUES" | "DATA_TYPE" | "UPPER_BOUND" | "LOWER_BOUND" | "SOURCE_DATA_TYPE" | "DESTINATION_DATA_TYPE" | "VALIDATION_ACTION" | "MASK_VALUE" | "MASK_LENGTH" | "TRUNCATE_LENGTH" | "MATH_OPERATION_FIELDS_ORDER" | "CONCAT_FORMAT" | "SUBFIELD_CATEGORY_MAP" | "EXCLUDE_SOURCE_FIELDS_LIST" | "INCLUDE_NEW_FIELDS" | "ORDERED_PARTITION_KEYS_LIST"), ::String]?
+                           },
+                         ],
+                         ?metadata_catalog_config: {
+                           glue_data_catalog: {
+                             role_arn: ::String,
+                             database_name: ::String,
+                             table_prefix: ::String
+                           }?
+                         },
+                         ?client_token: ::String
+                       ) -> _UpdateFlowResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlowResponseSuccess
+    end
+  end
+end
+

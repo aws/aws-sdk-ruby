@@ -223,6 +223,73 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # A playlist of media (VOD and/or live) to be played instead of the
+    # default media on a particular program.
+    #
+    # @!attribute [rw] ad_breaks
+    #   Ad break configuration parameters defined in AlternateMedia.
+    #   @return [Array<Types::AdBreak>]
+    #
+    # @!attribute [rw] clip_range
+    #   Clip range configuration for the VOD source associated with the
+    #   program.
+    #   @return [Types::ClipRange]
+    #
+    # @!attribute [rw] duration_millis
+    #   The duration of the alternateMedia in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] live_source_name
+    #   The name of the live source for alternateMedia.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_start_time_millis
+    #   The date and time that the alternateMedia is scheduled to start, in
+    #   epoch milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_location_name
+    #   The name of the source location for alternateMedia.
+    #   @return [String]
+    #
+    # @!attribute [rw] vod_source_name
+    #   The name of the VOD source for alternateMedia.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AlternateMedia AWS API Documentation
+    #
+    class AlternateMedia < Struct.new(
+      :ad_breaks,
+      :clip_range,
+      :duration_millis,
+      :live_source_name,
+      :scheduled_start_time_millis,
+      :source_location_name,
+      :vod_source_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An AudienceMedia object contains an Audience and a list of
+    # AlternateMedia.
+    #
+    # @!attribute [rw] alternate_media
+    #   The list of AlternateMedia defined in AudienceMedia.
+    #   @return [Array<Types::AlternateMedia>]
+    #
+    # @!attribute [rw] audience
+    #   The Audience defined in AudienceMedia.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AudienceMedia AWS API Documentation
+    #
+    class AudienceMedia < Struct.new(
+      :alternate_media,
+      :audience)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # MediaTailor only places (consumes) prefetched ads if the ad break
     # meets the criteria defined by the dynamic variables. This gives you
     # granular control over which ad break to place the prefetched ads into.
@@ -398,6 +465,10 @@ module Aws::MediaTailor
     #   The ARN of the channel.
     #   @return [String]
     #
+    # @!attribute [rw] audiences
+    #   The list of audiences defined in channel.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -459,6 +530,7 @@ module Aws::MediaTailor
     #
     class Channel < Struct.new(
       :arn,
+      :audiences,
       :channel_name,
       :channel_state,
       :creation_time,
@@ -481,10 +553,17 @@ module Aws::MediaTailor
     #   beginning of the VOD source associated with the program.
     #   @return [Integer]
     #
+    # @!attribute [rw] start_offset_millis
+    #   The start offset of the clip range, in milliseconds. This offset
+    #   truncates the start at the number of milliseconds into the duration
+    #   of the VOD source.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ClipRange AWS API Documentation
     #
     class ClipRange < Struct.new(
-      :end_offset_millis)
+      :end_offset_millis,
+      :start_offset_millis)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -573,6 +652,10 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # @!attribute [rw] audiences
+    #   The list of audiences defined in channel.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -614,15 +697,22 @@ module Aws::MediaTailor
     #   The tier of the channel.
     #   @return [String]
     #
+    # @!attribute [rw] time_shift_configuration
+    #   The time-shifted viewing configuration you want to associate to the
+    #   channel.
+    #   @return [Types::TimeShiftConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateChannelRequest AWS API Documentation
     #
     class CreateChannelRequest < Struct.new(
+      :audiences,
       :channel_name,
       :filler_slate,
       :outputs,
       :playback_mode,
       :tags,
-      :tier)
+      :tier,
+      :time_shift_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -630,6 +720,10 @@ module Aws::MediaTailor
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) to assign to the channel.
     #   @return [String]
+    #
+    # @!attribute [rw] audiences
+    #   The list of audiences defined in channel.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] channel_name
     #   The name to assign to the channel.
@@ -675,10 +769,15 @@ module Aws::MediaTailor
     #   The tier of the channel.
     #   @return [String]
     #
+    # @!attribute [rw] time_shift_configuration
+    #   The time-shifted viewing configuration assigned to the channel.
+    #   @return [Types::TimeShiftConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CreateChannelResponse AWS API Documentation
     #
     class CreateChannelResponse < Struct.new(
       :arn,
+      :audiences,
       :channel_name,
       :channel_state,
       :creation_time,
@@ -687,7 +786,8 @@ module Aws::MediaTailor
       :outputs,
       :playback_mode,
       :tags,
-      :tier)
+      :tier,
+      :time_shift_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -872,6 +972,10 @@ module Aws::MediaTailor
     #   The ad break configuration settings.
     #   @return [Array<Types::AdBreak>]
     #
+    # @!attribute [rw] audience_media
+    #   The list of AudienceMedia defined in program.
+    #   @return [Array<Types::AudienceMedia>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel for this Program.
     #   @return [String]
@@ -900,6 +1004,7 @@ module Aws::MediaTailor
     #
     class CreateProgramRequest < Struct.new(
       :ad_breaks,
+      :audience_media,
       :channel_name,
       :live_source_name,
       :program_name,
@@ -917,6 +1022,10 @@ module Aws::MediaTailor
     # @!attribute [rw] arn
     #   The ARN to assign to the program.
     #   @return [String]
+    #
+    # @!attribute [rw] audience_media
+    #   The list of AudienceMedia defined in program.
+    #   @return [Array<Types::AudienceMedia>]
     #
     # @!attribute [rw] channel_name
     #   The name to assign to the channel for this program.
@@ -959,6 +1068,7 @@ module Aws::MediaTailor
     class CreateProgramResponse < Struct.new(
       :ad_breaks,
       :arn,
+      :audience_media,
       :channel_name,
       :clip_range,
       :creation_time,
@@ -1460,6 +1570,10 @@ module Aws::MediaTailor
     #   The ARN of the channel.
     #   @return [String]
     #
+    # @!attribute [rw] audiences
+    #   The list of audiences defined in channel.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -1508,10 +1622,15 @@ module Aws::MediaTailor
     #   The channel's tier.
     #   @return [String]
     #
+    # @!attribute [rw] time_shift_configuration
+    #   The time-shifted viewing configuration for the channel.
+    #   @return [Types::TimeShiftConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DescribeChannelResponse AWS API Documentation
     #
     class DescribeChannelResponse < Struct.new(
       :arn,
+      :audiences,
       :channel_name,
       :channel_state,
       :creation_time,
@@ -1521,7 +1640,8 @@ module Aws::MediaTailor
       :outputs,
       :playback_mode,
       :tags,
-      :tier)
+      :tier,
+      :time_shift_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1617,6 +1737,10 @@ module Aws::MediaTailor
     #   The ARN of the program.
     #   @return [String]
     #
+    # @!attribute [rw] audience_media
+    #   The list of AudienceMedia defined in program.
+    #   @return [Array<Types::AudienceMedia>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel that the program belongs to.
     #   @return [String]
@@ -1661,6 +1785,7 @@ module Aws::MediaTailor
     class DescribeProgramResponse < Struct.new(
       :ad_breaks,
       :arn,
+      :audience_media,
       :channel_name,
       :clip_range,
       :creation_time,
@@ -1843,6 +1968,10 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # @!attribute [rw] audience
+    #   The single audience for GetChannelScheduleRequest.
+    #   @return [String]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel associated with this Channel Schedule.
     #   @return [String]
@@ -1876,6 +2005,7 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetChannelScheduleRequest AWS API Documentation
     #
     class GetChannelScheduleRequest < Struct.new(
+      :audience,
       :channel_name,
       :duration_minutes,
       :max_results,
@@ -1966,6 +2096,15 @@ module Aws::MediaTailor
     # @!attribute [rw] hls_configuration
     #   The configuration for HLS content.
     #   @return [Types::HlsConfiguration]
+    #
+    # @!attribute [rw] insertion_mode
+    #   The setting that controls whether players can use stitched or guided
+    #   ad insertion. The default, `STITCHED_ONLY`, forces all player
+    #   sessions to use stitched (server-side) ad insertion. Choosing
+    #   `PLAYER_SELECT` allows players to select either stitched or guided
+    #   ad insertion at session-initialization time. The default for players
+    #   that do not specify an insertion mode is stitched.
+    #   @return [String]
     #
     # @!attribute [rw] live_pre_roll_configuration
     #   The configuration for pre-roll ad insertion.
@@ -2058,6 +2197,7 @@ module Aws::MediaTailor
       :configuration_aliases,
       :dash_configuration,
       :hls_configuration,
+      :insertion_mode,
       :live_pre_roll_configuration,
       :log_configuration,
       :manifest_processing_rules,
@@ -2812,6 +2952,15 @@ module Aws::MediaTailor
     #   The configuration for HLS content.
     #   @return [Types::HlsConfiguration]
     #
+    # @!attribute [rw] insertion_mode
+    #   The setting that controls whether players can use stitched or guided
+    #   ad insertion. The default, `STITCHED_ONLY`, forces all player
+    #   sessions to use stitched (server-side) ad insertion. Choosing
+    #   `PLAYER_SELECT` allows players to select either stitched or guided
+    #   ad insertion at session-initialization time. The default for players
+    #   that do not specify an insertion mode is stitched.
+    #   @return [String]
+    #
     # @!attribute [rw] live_pre_roll_configuration
     #   The configuration for pre-roll ad insertion.
     #   @return [Types::LivePreRollConfiguration]
@@ -2903,6 +3052,7 @@ module Aws::MediaTailor
       :configuration_aliases,
       :dash_configuration,
       :hls_configuration,
+      :insertion_mode,
       :live_pre_roll_configuration,
       :log_configuration,
       :manifest_processing_rules,
@@ -3118,6 +3268,15 @@ module Aws::MediaTailor
     #   The configuration for DASH content.
     #   @return [Types::DashConfigurationForPut]
     #
+    # @!attribute [rw] insertion_mode
+    #   The setting that controls whether players can use stitched or guided
+    #   ad insertion. The default, `STITCHED_ONLY`, forces all player
+    #   sessions to use stitched (server-side) ad insertion. Choosing
+    #   `PLAYER_SELECT` allows players to select either stitched or guided
+    #   ad insertion at session-initialization time. The default for players
+    #   that do not specify an insertion mode is stitched.
+    #   @return [String]
+    #
     # @!attribute [rw] live_pre_roll_configuration
     #   The configuration for pre-roll ad insertion.
     #   @return [Types::LivePreRollConfiguration]
@@ -3190,6 +3349,7 @@ module Aws::MediaTailor
       :cdn_configuration,
       :configuration_aliases,
       :dash_configuration,
+      :insertion_mode,
       :live_pre_roll_configuration,
       :manifest_processing_rules,
       :name,
@@ -3253,6 +3413,15 @@ module Aws::MediaTailor
     # @!attribute [rw] hls_configuration
     #   The configuration for HLS content.
     #   @return [Types::HlsConfiguration]
+    #
+    # @!attribute [rw] insertion_mode
+    #   The setting that controls whether players can use stitched or guided
+    #   ad insertion. The default, `STITCHED_ONLY`, forces all player
+    #   sessions to use stitched (server-side) ad insertion. Choosing
+    #   `PLAYER_SELECT` allows players to select either stitched or guided
+    #   ad insertion at session-initialization time. The default for players
+    #   that do not specify an insertion mode is stitched.
+    #   @return [String]
     #
     # @!attribute [rw] live_pre_roll_configuration
     #   The configuration for pre-roll ad insertion.
@@ -3346,6 +3515,7 @@ module Aws::MediaTailor
       :configuration_aliases,
       :dash_configuration,
       :hls_configuration,
+      :insertion_mode,
       :live_pre_roll_configuration,
       :log_configuration,
       :manifest_processing_rules,
@@ -3493,6 +3663,10 @@ module Aws::MediaTailor
     #   The ARN of the program.
     #   @return [String]
     #
+    # @!attribute [rw] audiences
+    #   The list of audiences defined in ScheduleEntry.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel that uses this schedule.
     #   @return [String]
@@ -3527,6 +3701,7 @@ module Aws::MediaTailor
       :approximate_duration_seconds,
       :approximate_start_time,
       :arn,
+      :audiences,
       :channel_name,
       :live_source_name,
       :program_name,
@@ -3867,6 +4042,22 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The configuration for time-shifted viewing.
+    #
+    # @!attribute [rw] max_time_delay_seconds
+    #   The maximum time delay for time-shifted viewing. The minimum allowed
+    #   maximum time delay is 0 seconds, and the maximum allowed maximum
+    #   time delay is 21600 seconds (6 hours).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/TimeShiftConfiguration AWS API Documentation
+    #
+    class TimeShiftConfiguration < Struct.new(
+      :max_time_delay_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The SCTE-35 `time_signal` message can be sent with one or more
     # `segmentation_descriptor` messages. A `time_signal` message can be
     # sent only if a single `segmentation_descriptor` message is sent.
@@ -3963,6 +4154,10 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # @!attribute [rw] audiences
+    #   The list of audiences defined in channel.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel.
     #   @return [String]
@@ -3978,12 +4173,19 @@ module Aws::MediaTailor
     #   The channel's output properties.
     #   @return [Array<Types::RequestOutputItem>]
     #
+    # @!attribute [rw] time_shift_configuration
+    #   The time-shifted viewing configuration you want to associate to the
+    #   channel.
+    #   @return [Types::TimeShiftConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateChannelRequest AWS API Documentation
     #
     class UpdateChannelRequest < Struct.new(
+      :audiences,
       :channel_name,
       :filler_slate,
-      :outputs)
+      :outputs,
+      :time_shift_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3991,6 +4193,10 @@ module Aws::MediaTailor
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) associated with the channel.
     #   @return [String]
+    #
+    # @!attribute [rw] audiences
+    #   The list of audiences defined in channel.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] channel_name
     #   The name of the channel.
@@ -4044,10 +4250,15 @@ module Aws::MediaTailor
     #   The tier associated with this Channel.
     #   @return [String]
     #
+    # @!attribute [rw] time_shift_configuration
+    #   The time-shifted viewing configuration for the channel.
+    #   @return [Types::TimeShiftConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/UpdateChannelResponse AWS API Documentation
     #
     class UpdateChannelResponse < Struct.new(
       :arn,
+      :audiences,
       :channel_name,
       :channel_state,
       :creation_time,
@@ -4056,7 +4267,8 @@ module Aws::MediaTailor
       :outputs,
       :playback_mode,
       :tags,
-      :tier)
+      :tier,
+      :time_shift_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4138,6 +4350,10 @@ module Aws::MediaTailor
     #   The ad break configuration settings.
     #   @return [Array<Types::AdBreak>]
     #
+    # @!attribute [rw] audience_media
+    #   The list of AudienceMedia defined in program.
+    #   @return [Array<Types::AudienceMedia>]
+    #
     # @!attribute [rw] channel_name
     #   The name of the channel for this Program.
     #   @return [String]
@@ -4154,6 +4370,7 @@ module Aws::MediaTailor
     #
     class UpdateProgramRequest < Struct.new(
       :ad_breaks,
+      :audience_media,
       :channel_name,
       :program_name,
       :schedule_configuration)
@@ -4168,6 +4385,10 @@ module Aws::MediaTailor
     # @!attribute [rw] arn
     #   The ARN to assign to the program.
     #   @return [String]
+    #
+    # @!attribute [rw] audience_media
+    #   The list of AudienceMedia defined in program.
+    #   @return [Array<Types::AudienceMedia>]
     #
     # @!attribute [rw] channel_name
     #   The name to assign to the channel for this program.
@@ -4210,6 +4431,7 @@ module Aws::MediaTailor
     class UpdateProgramResponse < Struct.new(
       :ad_breaks,
       :arn,
+      :audience_media,
       :channel_name,
       :clip_range,
       :creation_time,

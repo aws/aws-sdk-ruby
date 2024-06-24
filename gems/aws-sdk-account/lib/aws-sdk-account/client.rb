@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Account
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Account
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::Account
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,56 +347,135 @@ module Aws::Account
     #   @option options [Aws::Account::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Account::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
+
+    # Accepts the request that originated from StartPrimaryEmailUpdate to
+    # update the primary email address (also known as the root user email
+    # address) for the specified account.
+    #
+    # @option params [required, String] :account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. To use
+    #   this parameter, the caller must be an identity in the [organization's
+    #   management account][1] or a delegated administrator account. The
+    #   specified account ID must be a member account in the same
+    #   organization. The organization must have [all features enabled][2],
+    #   and the organization must have [trusted access][3] enabled for the
+    #   Account Management service, and optionally a [delegated admin][4]
+    #   account assigned.
+    #
+    #   This operation can only be called from the management account or the
+    #   delegated administrator account of an organization for a member
+    #   account.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #
+    # @option params [required, String] :otp
+    #   The OTP code sent to the `PrimaryEmail` specified on the
+    #   `StartPrimaryEmailUpdate` API call.
+    #
+    # @option params [required, String] :primary_email
+    #   The new primary email address for use with the specified account. This
+    #   must match the `PrimaryEmail` from the `StartPrimaryEmailUpdate` API
+    #   call.
+    #
+    # @return [Types::AcceptPrimaryEmailUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptPrimaryEmailUpdateResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_primary_email_update({
+    #     account_id: "AccountId", # required
+    #     otp: "Otp", # required
+    #     primary_email: "PrimaryEmailAddress", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PENDING", "ACCEPTED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/AcceptPrimaryEmailUpdate AWS API Documentation
+    #
+    # @overload accept_primary_email_update(params = {})
+    # @param [Hash] params ({})
+    def accept_primary_email_update(params = {}, options = {})
+      req = build_request(:accept_primary_email_update, params)
+      req.send_request(options)
+    end
 
     # Deletes the specified alternate contact from an Amazon Web Services
     # account.
@@ -463,6 +552,11 @@ module Aws::Account
 
     # Disables (opts-out) a particular Region for an account.
     #
+    # <note markdown="1"> The act of disabling a Region will remove all IAM access to any
+    # resources that reside in that Region.
+    #
+    #  </note>
+    #
     # @option params [String] :account_id
     #   Specifies the 12-digit account ID number of the Amazon Web Services
     #   account that you want to access or modify with this operation. If you
@@ -470,7 +564,7 @@ module Aws::Account
     #   account of the identity used to call the operation. To use this
     #   parameter, the caller must be an identity in the [organization's
     #   management account][1] or a delegated administrator account. The
-    #   specified account ID must also be a member account in the same
+    #   specified account ID must be a member account in the same
     #   organization. The organization must have [all features enabled][2],
     #   and the organization must have [trusted access][3] enabled for the
     #   Account Management service, and optionally a [delegated admin][4]
@@ -529,7 +623,7 @@ module Aws::Account
     #   account of the identity used to call the operation. To use this
     #   parameter, the caller must be an identity in the [organization's
     #   management account][1] or a delegated administrator account. The
-    #   specified account ID must also be a member account in the same
+    #   specified account ID must be a member account in the same
     #   organization. The organization must have [all features enabled][2],
     #   and the organization must have [trusted access][3] enabled for the
     #   Account Management service, and optionally a [delegated admin][4]
@@ -680,7 +774,7 @@ module Aws::Account
     #   account of the identity used to call the operation. To use this
     #   parameter, the caller must be an identity in the [organization's
     #   management account][1] or a delegated administrator account. The
-    #   specified account ID must also be a member account in the same
+    #   specified account ID must be a member account in the same
     #   organization. The organization must have [all features enabled][2],
     #   and the organization must have [trusted access][3] enabled for the
     #   Account Management service, and optionally a [delegated admin][4]
@@ -738,6 +832,57 @@ module Aws::Account
       req.send_request(options)
     end
 
+    # Retrieves the primary email address for the specified account.
+    #
+    # @option params [required, String] :account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. To use
+    #   this parameter, the caller must be an identity in the [organization's
+    #   management account][1] or a delegated administrator account. The
+    #   specified account ID must be a member account in the same
+    #   organization. The organization must have [all features enabled][2],
+    #   and the organization must have [trusted access][3] enabled for the
+    #   Account Management service, and optionally a [delegated admin][4]
+    #   account assigned.
+    #
+    #   This operation can only be called from the management account or the
+    #   delegated administrator account of an organization for a member
+    #   account.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #
+    # @return [Types::GetPrimaryEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPrimaryEmailResponse#primary_email #primary_email} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_primary_email({
+    #     account_id: "AccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.primary_email #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/GetPrimaryEmail AWS API Documentation
+    #
+    # @overload get_primary_email(params = {})
+    # @param [Hash] params ({})
+    def get_primary_email(params = {}, options = {})
+      req = build_request(:get_primary_email, params)
+      req.send_request(options)
+    end
+
     # Retrieves the opt-in status of a particular Region.
     #
     # @option params [String] :account_id
@@ -747,7 +892,7 @@ module Aws::Account
     #   account of the identity used to call the operation. To use this
     #   parameter, the caller must be an identity in the [organization's
     #   management account][1] or a delegated administrator account. The
-    #   specified account ID must also be a member account in the same
+    #   specified account ID must be a member account in the same
     #   organization. The organization must have [all features enabled][2],
     #   and the organization must have [trusted access][3] enabled for the
     #   Account Management service, and optionally a [delegated admin][4]
@@ -813,7 +958,7 @@ module Aws::Account
     #   account of the identity used to call the operation. To use this
     #   parameter, the caller must be an identity in the [organization's
     #   management account][1] or a delegated administrator account. The
-    #   specified account ID must also be a member account in the same
+    #   specified account ID must be a member account in the same
     #   organization. The organization must have [all features enabled][2],
     #   and the organization must have [trusted access][3] enabled for the
     #   Account Management service, and optionally a [delegated admin][4]
@@ -1005,7 +1150,7 @@ module Aws::Account
     #   account of the identity used to call the operation. To use this
     #   parameter, the caller must be an identity in the [organization's
     #   management account][1] or a delegated administrator account. The
-    #   specified account ID must also be a member account in the same
+    #   specified account ID must be a member account in the same
     #   organization. The organization must have [all features enabled][2],
     #   and the organization must have [trusted access][3] enabled for the
     #   Account Management service, and optionally a [delegated admin][4]
@@ -1064,6 +1209,63 @@ module Aws::Account
       req.send_request(options)
     end
 
+    # Starts the process to update the primary email address for the
+    # specified account.
+    #
+    # @option params [required, String] :account_id
+    #   Specifies the 12-digit account ID number of the Amazon Web Services
+    #   account that you want to access or modify with this operation. To use
+    #   this parameter, the caller must be an identity in the [organization's
+    #   management account][1] or a delegated administrator account. The
+    #   specified account ID must be a member account in the same
+    #   organization. The organization must have [all features enabled][2],
+    #   and the organization must have [trusted access][3] enabled for the
+    #   Account Management service, and optionally a [delegated admin][4]
+    #   account assigned.
+    #
+    #   This operation can only be called from the management account or the
+    #   delegated administrator account of an organization for a member
+    #   account.
+    #
+    #   <note markdown="1"> The management account can't specify its own `AccountId`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+    #   [3]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
+    #   [4]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+    #
+    # @option params [required, String] :primary_email
+    #   The new primary email address (also known as the root user email
+    #   address) to use in the specified account.
+    #
+    # @return [Types::StartPrimaryEmailUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartPrimaryEmailUpdateResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_primary_email_update({
+    #     account_id: "AccountId", # required
+    #     primary_email: "PrimaryEmailAddress", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PENDING", "ACCEPTED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/account-2021-02-01/StartPrimaryEmailUpdate AWS API Documentation
+    #
+    # @overload start_primary_email_update(params = {})
+    # @param [Hash] params ({})
+    def start_primary_email_update(params = {}, options = {})
+      req = build_request(:start_primary_email_update, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1077,7 +1279,7 @@ module Aws::Account
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-account'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

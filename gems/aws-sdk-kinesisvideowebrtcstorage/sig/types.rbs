@@ -1,0 +1,36 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::KinesisVideoWebRTCStorage
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ClientLimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class JoinStorageSessionInput
+      attr_accessor channel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

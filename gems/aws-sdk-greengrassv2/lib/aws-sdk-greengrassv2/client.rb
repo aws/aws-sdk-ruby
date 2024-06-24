@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::GreengrassV2
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::GreengrassV2
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::GreengrassV2
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::GreengrassV2
     #   @option options [Aws::GreengrassV2::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::GreengrassV2::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -587,26 +612,9 @@ module Aws::GreengrassV2
     #   migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass
     #   V2.
     #
-    #   This function only accepts Lambda functions that use the following
-    #   runtimes:
-    #
-    #   * Python 2.7 – `python2.7`
-    #
-    #   * Python 3.7 – `python3.7`
-    #
-    #   * Python 3.8 – `python3.8`
-    #
-    #   * Python 3.9 – `python3.9`
-    #
-    #   * Java 8 – `java8`
-    #
-    #   * Java 11 – `java11`
-    #
-    #   * Node.js 10 – `nodejs10.x`
-    #
-    #   * Node.js 12 – `nodejs12.x`
-    #
-    #   * Node.js 14 – `nodejs14.x`
+    #   This function accepts Lambda functions in all supported versions of
+    #   Python, Node.js, and Java runtimes. IoT Greengrass doesn't apply
+    #   any additional restrictions on deprecated Lambda runtime versions.
     #
     #   To create a component from a Lambda function, specify
     #   `lambdaFunction` when you call this operation.
@@ -842,7 +850,7 @@ module Aws::GreengrassV2
     #     deployment_name: "DeploymentNameString",
     #     components: {
     #       "NonEmptyString" => {
-    #         component_version: "ComponentVersionString",
+    #         component_version: "ComponentVersionString", # required
     #         configuration_update: {
     #           merge: "ComponentConfigurationString",
     #           reset: ["ComponentConfigurationPath"],
@@ -1162,6 +1170,20 @@ module Aws::GreengrassV2
     #
     #   [1]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html
     #
+    # @option params [String] :s3_endpoint_type
+    #   Specifies the endpoint to use when getting Amazon S3 pre-signed URLs.
+    #
+    #   All Amazon Web Services Regions except US East (N. Virginia) use
+    #   `REGIONAL` in all cases. In the US East (N. Virginia) Region the
+    #   default is `GLOBAL`, but you can change it to `REGIONAL` with this
+    #   parameter.
+    #
+    # @option params [String] :iot_endpoint_type
+    #   Determines if the Amazon S3 URL returned is a FIPS pre-signed URL
+    #   endpoint. Specify `fips` if you want the returned Amazon S3 pre-signed
+    #   URL to point to an Amazon S3 FIPS endpoint. If you don't specify a
+    #   value, the default is `standard`.
+    #
     # @return [Types::GetComponentVersionArtifactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetComponentVersionArtifactResponse#pre_signed_url #pre_signed_url} => String
@@ -1171,6 +1193,8 @@ module Aws::GreengrassV2
     #   resp = client.get_component_version_artifact({
     #     arn: "ComponentVersionARN", # required
     #     artifact_name: "NonEmptyString", # required
+    #     s3_endpoint_type: "REGIONAL", # accepts REGIONAL, GLOBAL
+    #     iot_endpoint_type: "fips", # accepts fips, standard
     #   })
     #
     # @example Response structure
@@ -1675,6 +1699,8 @@ module Aws::GreengrassV2
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per paginated request.
     #
+    #   Default: `50`
+    #
     # @option params [String] :next_token
     #   The token to be used for the next set of paginated results.
     #
@@ -2112,7 +2138,7 @@ module Aws::GreengrassV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrassv2'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

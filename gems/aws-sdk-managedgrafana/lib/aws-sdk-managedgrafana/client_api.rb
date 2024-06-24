@@ -36,12 +36,21 @@ module Aws::ManagedGrafana
     CreateWorkspaceApiKeyResponse = Shapes::StructureShape.new(name: 'CreateWorkspaceApiKeyResponse')
     CreateWorkspaceRequest = Shapes::StructureShape.new(name: 'CreateWorkspaceRequest')
     CreateWorkspaceResponse = Shapes::StructureShape.new(name: 'CreateWorkspaceResponse')
+    CreateWorkspaceServiceAccountRequest = Shapes::StructureShape.new(name: 'CreateWorkspaceServiceAccountRequest')
+    CreateWorkspaceServiceAccountResponse = Shapes::StructureShape.new(name: 'CreateWorkspaceServiceAccountResponse')
+    CreateWorkspaceServiceAccountTokenRequest = Shapes::StructureShape.new(name: 'CreateWorkspaceServiceAccountTokenRequest')
+    CreateWorkspaceServiceAccountTokenRequestSecondsToLiveInteger = Shapes::IntegerShape.new(name: 'CreateWorkspaceServiceAccountTokenRequestSecondsToLiveInteger')
+    CreateWorkspaceServiceAccountTokenResponse = Shapes::StructureShape.new(name: 'CreateWorkspaceServiceAccountTokenResponse')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     DataSourceTypesList = Shapes::ListShape.new(name: 'DataSourceTypesList')
     DeleteWorkspaceApiKeyRequest = Shapes::StructureShape.new(name: 'DeleteWorkspaceApiKeyRequest')
     DeleteWorkspaceApiKeyResponse = Shapes::StructureShape.new(name: 'DeleteWorkspaceApiKeyResponse')
     DeleteWorkspaceRequest = Shapes::StructureShape.new(name: 'DeleteWorkspaceRequest')
     DeleteWorkspaceResponse = Shapes::StructureShape.new(name: 'DeleteWorkspaceResponse')
+    DeleteWorkspaceServiceAccountRequest = Shapes::StructureShape.new(name: 'DeleteWorkspaceServiceAccountRequest')
+    DeleteWorkspaceServiceAccountResponse = Shapes::StructureShape.new(name: 'DeleteWorkspaceServiceAccountResponse')
+    DeleteWorkspaceServiceAccountTokenRequest = Shapes::StructureShape.new(name: 'DeleteWorkspaceServiceAccountTokenRequest')
+    DeleteWorkspaceServiceAccountTokenResponse = Shapes::StructureShape.new(name: 'DeleteWorkspaceServiceAccountTokenResponse')
     DescribeWorkspaceAuthenticationRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceAuthenticationRequest')
     DescribeWorkspaceAuthenticationResponse = Shapes::StructureShape.new(name: 'DescribeWorkspaceAuthenticationResponse')
     DescribeWorkspaceConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceConfigurationRequest')
@@ -52,6 +61,7 @@ module Aws::ManagedGrafana
     DisassociateLicenseRequest = Shapes::StructureShape.new(name: 'DisassociateLicenseRequest')
     DisassociateLicenseResponse = Shapes::StructureShape.new(name: 'DisassociateLicenseResponse')
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
+    GrafanaToken = Shapes::StringShape.new(name: 'GrafanaToken')
     GrafanaVersion = Shapes::StringShape.new(name: 'GrafanaVersion')
     GrafanaVersionList = Shapes::ListShape.new(name: 'GrafanaVersionList')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
@@ -68,6 +78,12 @@ module Aws::ManagedGrafana
     ListVersionsRequest = Shapes::StructureShape.new(name: 'ListVersionsRequest')
     ListVersionsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListVersionsRequestMaxResultsInteger')
     ListVersionsResponse = Shapes::StructureShape.new(name: 'ListVersionsResponse')
+    ListWorkspaceServiceAccountTokensRequest = Shapes::StructureShape.new(name: 'ListWorkspaceServiceAccountTokensRequest')
+    ListWorkspaceServiceAccountTokensRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListWorkspaceServiceAccountTokensRequestMaxResultsInteger')
+    ListWorkspaceServiceAccountTokensResponse = Shapes::StructureShape.new(name: 'ListWorkspaceServiceAccountTokensResponse')
+    ListWorkspaceServiceAccountsRequest = Shapes::StructureShape.new(name: 'ListWorkspaceServiceAccountsRequest')
+    ListWorkspaceServiceAccountsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListWorkspaceServiceAccountsRequestMaxResultsInteger')
+    ListWorkspaceServiceAccountsResponse = Shapes::StructureShape.new(name: 'ListWorkspaceServiceAccountsResponse')
     ListWorkspacesRequest = Shapes::StructureShape.new(name: 'ListWorkspacesRequest')
     ListWorkspacesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListWorkspacesRequestMaxResultsInteger')
     ListWorkspacesResponse = Shapes::StructureShape.new(name: 'ListWorkspacesResponse')
@@ -96,6 +112,14 @@ module Aws::ManagedGrafana
     SamlConfigurationStatus = Shapes::StringShape.new(name: 'SamlConfigurationStatus')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
+    ServiceAccountList = Shapes::ListShape.new(name: 'ServiceAccountList')
+    ServiceAccountName = Shapes::StringShape.new(name: 'ServiceAccountName')
+    ServiceAccountSummary = Shapes::StructureShape.new(name: 'ServiceAccountSummary')
+    ServiceAccountTokenKey = Shapes::StringShape.new(name: 'ServiceAccountTokenKey')
+    ServiceAccountTokenList = Shapes::ListShape.new(name: 'ServiceAccountTokenList')
+    ServiceAccountTokenName = Shapes::StringShape.new(name: 'ServiceAccountTokenName')
+    ServiceAccountTokenSummary = Shapes::StructureShape.new(name: 'ServiceAccountTokenSummary')
+    ServiceAccountTokenSummaryWithKey = Shapes::StructureShape.new(name: 'ServiceAccountTokenSummaryWithKey')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SsoId = Shapes::StringShape.new(name: 'SsoId')
     StackSetName = Shapes::StringShape.new(name: 'StackSetName')
@@ -156,6 +180,7 @@ module Aws::ManagedGrafana
     AssertionAttributes.add_member(:role, Shapes::ShapeRef.new(shape: AssertionAttribute, location_name: "role"))
     AssertionAttributes.struct_class = Types::AssertionAttributes
 
+    AssociateLicenseRequest.add_member(:grafana_token, Shapes::ShapeRef.new(shape: GrafanaToken, location: "header", location_name: "Grafana-Token"))
     AssociateLicenseRequest.add_member(:license_type, Shapes::ShapeRef.new(shape: LicenseType, required: true, location: "uri", location_name: "licenseType"))
     AssociateLicenseRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     AssociateLicenseRequest.struct_class = Types::AssociateLicenseRequest
@@ -215,6 +240,28 @@ module Aws::ManagedGrafana
     CreateWorkspaceResponse.add_member(:workspace, Shapes::ShapeRef.new(shape: WorkspaceDescription, required: true, location_name: "workspace"))
     CreateWorkspaceResponse.struct_class = Types::CreateWorkspaceResponse
 
+    CreateWorkspaceServiceAccountRequest.add_member(:grafana_role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "grafanaRole"))
+    CreateWorkspaceServiceAccountRequest.add_member(:name, Shapes::ShapeRef.new(shape: ServiceAccountName, required: true, location_name: "name"))
+    CreateWorkspaceServiceAccountRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    CreateWorkspaceServiceAccountRequest.struct_class = Types::CreateWorkspaceServiceAccountRequest
+
+    CreateWorkspaceServiceAccountResponse.add_member(:grafana_role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "grafanaRole"))
+    CreateWorkspaceServiceAccountResponse.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    CreateWorkspaceServiceAccountResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    CreateWorkspaceServiceAccountResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspaceId"))
+    CreateWorkspaceServiceAccountResponse.struct_class = Types::CreateWorkspaceServiceAccountResponse
+
+    CreateWorkspaceServiceAccountTokenRequest.add_member(:name, Shapes::ShapeRef.new(shape: ServiceAccountTokenName, required: true, location_name: "name"))
+    CreateWorkspaceServiceAccountTokenRequest.add_member(:seconds_to_live, Shapes::ShapeRef.new(shape: CreateWorkspaceServiceAccountTokenRequestSecondsToLiveInteger, required: true, location_name: "secondsToLive"))
+    CreateWorkspaceServiceAccountTokenRequest.add_member(:service_account_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "serviceAccountId"))
+    CreateWorkspaceServiceAccountTokenRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    CreateWorkspaceServiceAccountTokenRequest.struct_class = Types::CreateWorkspaceServiceAccountTokenRequest
+
+    CreateWorkspaceServiceAccountTokenResponse.add_member(:service_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceAccountId"))
+    CreateWorkspaceServiceAccountTokenResponse.add_member(:service_account_token, Shapes::ShapeRef.new(shape: ServiceAccountTokenSummaryWithKey, required: true, location_name: "serviceAccountToken"))
+    CreateWorkspaceServiceAccountTokenResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspaceId"))
+    CreateWorkspaceServiceAccountTokenResponse.struct_class = Types::CreateWorkspaceServiceAccountTokenResponse
+
     DataSourceTypesList.member = Shapes::ShapeRef.new(shape: DataSourceType)
 
     DeleteWorkspaceApiKeyRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: ApiKeyName, required: true, location: "uri", location_name: "keyName"))
@@ -230,6 +277,24 @@ module Aws::ManagedGrafana
 
     DeleteWorkspaceResponse.add_member(:workspace, Shapes::ShapeRef.new(shape: WorkspaceDescription, required: true, location_name: "workspace"))
     DeleteWorkspaceResponse.struct_class = Types::DeleteWorkspaceResponse
+
+    DeleteWorkspaceServiceAccountRequest.add_member(:service_account_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "serviceAccountId"))
+    DeleteWorkspaceServiceAccountRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    DeleteWorkspaceServiceAccountRequest.struct_class = Types::DeleteWorkspaceServiceAccountRequest
+
+    DeleteWorkspaceServiceAccountResponse.add_member(:service_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceAccountId"))
+    DeleteWorkspaceServiceAccountResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspaceId"))
+    DeleteWorkspaceServiceAccountResponse.struct_class = Types::DeleteWorkspaceServiceAccountResponse
+
+    DeleteWorkspaceServiceAccountTokenRequest.add_member(:service_account_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "serviceAccountId"))
+    DeleteWorkspaceServiceAccountTokenRequest.add_member(:token_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "tokenId"))
+    DeleteWorkspaceServiceAccountTokenRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    DeleteWorkspaceServiceAccountTokenRequest.struct_class = Types::DeleteWorkspaceServiceAccountTokenRequest
+
+    DeleteWorkspaceServiceAccountTokenResponse.add_member(:service_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceAccountId"))
+    DeleteWorkspaceServiceAccountTokenResponse.add_member(:token_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "tokenId"))
+    DeleteWorkspaceServiceAccountTokenResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspaceId"))
+    DeleteWorkspaceServiceAccountTokenResponse.struct_class = Types::DeleteWorkspaceServiceAccountTokenResponse
 
     DescribeWorkspaceAuthenticationRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     DescribeWorkspaceAuthenticationRequest.struct_class = Types::DescribeWorkspaceAuthenticationRequest
@@ -298,6 +363,28 @@ module Aws::ManagedGrafana
     ListVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListVersionsResponse.struct_class = Types::ListVersionsResponse
 
+    ListWorkspaceServiceAccountTokensRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListWorkspaceServiceAccountTokensRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListWorkspaceServiceAccountTokensRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListWorkspaceServiceAccountTokensRequest.add_member(:service_account_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "serviceAccountId"))
+    ListWorkspaceServiceAccountTokensRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    ListWorkspaceServiceAccountTokensRequest.struct_class = Types::ListWorkspaceServiceAccountTokensRequest
+
+    ListWorkspaceServiceAccountTokensResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWorkspaceServiceAccountTokensResponse.add_member(:service_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceAccountId"))
+    ListWorkspaceServiceAccountTokensResponse.add_member(:service_account_tokens, Shapes::ShapeRef.new(shape: ServiceAccountTokenList, required: true, location_name: "serviceAccountTokens"))
+    ListWorkspaceServiceAccountTokensResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspaceId"))
+    ListWorkspaceServiceAccountTokensResponse.struct_class = Types::ListWorkspaceServiceAccountTokensResponse
+
+    ListWorkspaceServiceAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListWorkspaceServiceAccountsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListWorkspaceServiceAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListWorkspaceServiceAccountsRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    ListWorkspaceServiceAccountsRequest.struct_class = Types::ListWorkspaceServiceAccountsRequest
+
+    ListWorkspaceServiceAccountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListWorkspaceServiceAccountsResponse.add_member(:service_accounts, Shapes::ShapeRef.new(shape: ServiceAccountList, required: true, location_name: "serviceAccounts"))
+    ListWorkspaceServiceAccountsResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspaceId"))
+    ListWorkspaceServiceAccountsResponse.struct_class = Types::ListWorkspaceServiceAccountsResponse
+
     ListWorkspacesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListWorkspacesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
     ListWorkspacesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
     ListWorkspacesRequest.struct_class = Types::ListWorkspacesRequest
@@ -345,6 +432,28 @@ module Aws::ManagedGrafana
     SamlConfiguration.struct_class = Types::SamlConfiguration
 
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
+
+    ServiceAccountList.member = Shapes::ShapeRef.new(shape: ServiceAccountSummary)
+
+    ServiceAccountSummary.add_member(:grafana_role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "grafanaRole"))
+    ServiceAccountSummary.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    ServiceAccountSummary.add_member(:is_disabled, Shapes::ShapeRef.new(shape: String, required: true, location_name: "isDisabled"))
+    ServiceAccountSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ServiceAccountSummary.struct_class = Types::ServiceAccountSummary
+
+    ServiceAccountTokenList.member = Shapes::ShapeRef.new(shape: ServiceAccountTokenSummary)
+
+    ServiceAccountTokenSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    ServiceAccountTokenSummary.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "expiresAt"))
+    ServiceAccountTokenSummary.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    ServiceAccountTokenSummary.add_member(:last_used_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUsedAt"))
+    ServiceAccountTokenSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ServiceAccountTokenSummary.struct_class = Types::ServiceAccountTokenSummary
+
+    ServiceAccountTokenSummaryWithKey.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    ServiceAccountTokenSummaryWithKey.add_member(:key, Shapes::ShapeRef.new(shape: ServiceAccountTokenKey, required: true, location_name: "key"))
+    ServiceAccountTokenSummaryWithKey.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ServiceAccountTokenSummaryWithKey.struct_class = Types::ServiceAccountTokenSummaryWithKey
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "quotaCode"))
@@ -465,6 +574,7 @@ module Aws::ManagedGrafana
     WorkspaceDescription.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, required: true, location_name: "endpoint"))
     WorkspaceDescription.add_member(:free_trial_consumed, Shapes::ShapeRef.new(shape: Boolean, location_name: "freeTrialConsumed"))
     WorkspaceDescription.add_member(:free_trial_expiration, Shapes::ShapeRef.new(shape: Timestamp, location_name: "freeTrialExpiration"))
+    WorkspaceDescription.add_member(:grafana_token, Shapes::ShapeRef.new(shape: GrafanaToken, location_name: "grafanaToken"))
     WorkspaceDescription.add_member(:grafana_version, Shapes::ShapeRef.new(shape: GrafanaVersion, required: true, location_name: "grafanaVersion"))
     WorkspaceDescription.add_member(:id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "id"))
     WorkspaceDescription.add_member(:license_expiration, Shapes::ShapeRef.new(shape: Timestamp, location_name: "licenseExpiration"))
@@ -489,8 +599,10 @@ module Aws::ManagedGrafana
     WorkspaceSummary.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "created"))
     WorkspaceSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     WorkspaceSummary.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, required: true, location_name: "endpoint"))
+    WorkspaceSummary.add_member(:grafana_token, Shapes::ShapeRef.new(shape: GrafanaToken, location_name: "grafanaToken"))
     WorkspaceSummary.add_member(:grafana_version, Shapes::ShapeRef.new(shape: GrafanaVersion, required: true, location_name: "grafanaVersion"))
     WorkspaceSummary.add_member(:id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "id"))
+    WorkspaceSummary.add_member(:license_type, Shapes::ShapeRef.new(shape: LicenseType, location_name: "licenseType"))
     WorkspaceSummary.add_member(:modified, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "modified"))
     WorkspaceSummary.add_member(:name, Shapes::ShapeRef.new(shape: WorkspaceName, location_name: "name"))
     WorkspaceSummary.add_member(:notification_destinations, Shapes::ShapeRef.new(shape: NotificationDestinationsList, location_name: "notificationDestinations"))
@@ -509,6 +621,7 @@ module Aws::ManagedGrafana
         "endpointPrefix" => "grafana",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon Managed Grafana",
         "serviceId" => "grafana",
         "signatureVersion" => "v4",
@@ -558,6 +671,36 @@ module Aws::ManagedGrafana
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_workspace_service_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWorkspaceServiceAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/workspaces/{workspaceId}/serviceaccounts"
+        o.input = Shapes::ShapeRef.new(shape: CreateWorkspaceServiceAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateWorkspaceServiceAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:create_workspace_service_account_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWorkspaceServiceAccountToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/workspaces/{workspaceId}/serviceaccounts/{serviceAccountId}/tokens"
+        o.input = Shapes::ShapeRef.new(shape: CreateWorkspaceServiceAccountTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateWorkspaceServiceAccountTokenResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:delete_workspace, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteWorkspace"
         o.http_method = "DELETE"
@@ -578,6 +721,34 @@ module Aws::ManagedGrafana
         o.http_request_uri = "/workspaces/{workspaceId}/apikeys/{keyName}"
         o.input = Shapes::ShapeRef.new(shape: DeleteWorkspaceApiKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteWorkspaceApiKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_workspace_service_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteWorkspaceServiceAccount"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/workspaces/{workspaceId}/serviceaccounts/{serviceAccountId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteWorkspaceServiceAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteWorkspaceServiceAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_workspace_service_account_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteWorkspaceServiceAccountToken"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/workspaces/{workspaceId}/serviceaccounts/{serviceAccountId}/tokens/{tokenId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteWorkspaceServiceAccountTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteWorkspaceServiceAccountTokenResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -607,6 +778,7 @@ module Aws::ManagedGrafana
         o.output = Shapes::ShapeRef.new(shape: DescribeWorkspaceAuthenticationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -677,6 +849,46 @@ module Aws::ManagedGrafana
         o.output = Shapes::ShapeRef.new(shape: ListVersionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_workspace_service_account_tokens, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWorkspaceServiceAccountTokens"
+        o.http_method = "GET"
+        o.http_request_uri = "/workspaces/{workspaceId}/serviceaccounts/{serviceAccountId}/tokens"
+        o.input = Shapes::ShapeRef.new(shape: ListWorkspaceServiceAccountTokensRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWorkspaceServiceAccountTokensResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_workspace_service_accounts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWorkspaceServiceAccounts"
+        o.http_method = "GET"
+        o.http_request_uri = "/workspaces/{workspaceId}/serviceaccounts"
+        o.input = Shapes::ShapeRef.new(shape: ListWorkspaceServiceAccountsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWorkspaceServiceAccountsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

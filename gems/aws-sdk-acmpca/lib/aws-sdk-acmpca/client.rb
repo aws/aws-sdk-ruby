@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::ACMPCA
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::ACMPCA
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::ACMPCA
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::ACMPCA
     #   @option options [Aws::ACMPCA::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ACMPCA::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -428,7 +453,7 @@ module Aws::ACMPCA
     #
     #
     # [1]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies
-    # [2]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption
+    # [2]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#crl-encryption
     #
     # @option params [required, Types::CertificateAuthorityConfiguration] :certificate_authority_configuration
     #   Name and bit size of the private key algorithm, the name of the
@@ -622,6 +647,9 @@ module Aws::ACMPCA
     #         custom_cname: "CnameString",
     #         s3_bucket_name: "S3BucketName3To255",
     #         s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
+    #         crl_distribution_point_extension_configuration: {
+    #           omit_extension: false, # required
+    #         },
     #       },
     #       ocsp_configuration: {
     #         enabled: false, # required
@@ -1138,6 +1166,7 @@ module Aws::ACMPCA
     #   resp.certificate_authority.revocation_configuration.crl_configuration.custom_cname #=> String
     #   resp.certificate_authority.revocation_configuration.crl_configuration.s3_bucket_name #=> String
     #   resp.certificate_authority.revocation_configuration.crl_configuration.s3_object_acl #=> String, one of "PUBLIC_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.certificate_authority.revocation_configuration.crl_configuration.crl_distribution_point_extension_configuration.omit_extension #=> Boolean
     #   resp.certificate_authority.revocation_configuration.ocsp_configuration.enabled #=> Boolean
     #   resp.certificate_authority.revocation_configuration.ocsp_configuration.ocsp_custom_cname #=> String
     #   resp.certificate_authority.restorable_until #=> Time
@@ -1489,44 +1518,46 @@ module Aws::ACMPCA
     # Amazon Web Services Private CA allows the following extensions to be
     # marked critical in the imported CA certificate or chain.
     #
-    # * Basic constraints (*must* be marked critical)
-    #
-    # * Subject alternative names
-    #
-    # * Key usage
-    #
-    # * Extended key usage
-    #
     # * Authority key identifier
     #
-    # * Subject key identifier
-    #
-    # * Issuer alternative name
-    #
-    # * Subject directory attributes
-    #
-    # * Subject information access
+    # * Basic constraints (*must* be marked critical)
     #
     # * Certificate policies
     #
-    # * Policy mappings
+    # * Extended key usage
     #
     # * Inhibit anyPolicy
+    #
+    # * Issuer alternative name
+    #
+    # * Key usage
+    #
+    # * Name constraints
+    #
+    # * Policy mappings
+    #
+    # * Subject alternative name
+    #
+    # * Subject directory attributes
+    #
+    # * Subject key identifier
+    #
+    # * Subject information access
     #
     # Amazon Web Services Private CA rejects the following extensions when
     # they are marked critical in an imported CA certificate or chain.
     #
-    # * Name constraints
-    #
-    # * Policy constraints
+    # * Authority information access
     #
     # * CRL distribution points
     #
-    # * Authority information access
-    #
     # * Freshest CRL
     #
-    # * Any other extension
+    # * Policy constraints
+    #
+    # Amazon Web Services Private Certificate Authority will also reject any
+    # other extension marked as critical not contained on the preceding list
+    # of allowed extensions.
     #
     #
     #
@@ -1886,6 +1917,9 @@ module Aws::ACMPCA
     #   sent in the response. Use this `NextToken` value in a subsequent
     #   request to retrieve additional items.
     #
+    #   Although the maximum value is 1000, the action only returns a maximum
+    #   of 100 items.
+    #
     # @option params [String] :resource_owner
     #   Use this parameter to filter the returned set of certificate
     #   authorities based on their owner. The default is SELF.
@@ -1980,6 +2014,7 @@ module Aws::ACMPCA
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.custom_cname #=> String
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.s3_bucket_name #=> String
     #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.s3_object_acl #=> String, one of "PUBLIC_READ", "BUCKET_OWNER_FULL_CONTROL"
+    #   resp.certificate_authorities[0].revocation_configuration.crl_configuration.crl_distribution_point_extension_configuration.omit_extension #=> Boolean
     #   resp.certificate_authorities[0].revocation_configuration.ocsp_configuration.enabled #=> Boolean
     #   resp.certificate_authorities[0].revocation_configuration.ocsp_configuration.ocsp_custom_cname #=> String
     #   resp.certificate_authorities[0].restorable_until #=> Time
@@ -2555,6 +2590,9 @@ module Aws::ACMPCA
     #         custom_cname: "CnameString",
     #         s3_bucket_name: "S3BucketName3To255",
     #         s3_object_acl: "PUBLIC_READ", # accepts PUBLIC_READ, BUCKET_OWNER_FULL_CONTROL
+    #         crl_distribution_point_extension_configuration: {
+    #           omit_extension: false, # required
+    #         },
     #       },
     #       ocsp_configuration: {
     #         enabled: false, # required
@@ -2586,7 +2624,7 @@ module Aws::ACMPCA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acmpca'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2656,7 +2694,7 @@ module Aws::ACMPCA
     # | --------------------------------- | ---------------------------------------------------- | -------- | ------------- |
     # | audit_report_created              | {Client#describe_certificate_authority_audit_report} | 3        | 60            |
     # | certificate_authority_csr_created | {Client#get_certificate_authority_csr}               | 3        | 60            |
-    # | certificate_issued                | {Client#get_certificate}                             | 3        | 60            |
+    # | certificate_issued                | {Client#get_certificate}                             | 1        | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

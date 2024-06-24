@@ -1,0 +1,34 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module KinesisVideoSignalingChannels
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ClientLimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidArgumentException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidClientException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotAuthorizedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SessionExpiredException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

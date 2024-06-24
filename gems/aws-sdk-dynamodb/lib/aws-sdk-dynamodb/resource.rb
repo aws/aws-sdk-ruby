@@ -39,7 +39,7 @@ module Aws::DynamoDB
     #
     #   dynamo_db.batch_get_item({
     #     request_items: { # required
-    #       "TableName" => {
+    #       "TableArn" => {
     #         keys: [ # required
     #           {
     #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -57,9 +57,9 @@ module Aws::DynamoDB
     #   })
     # @param [Hash] options ({})
     # @option options [required, Hash<String,Types::KeysAndAttributes>] :request_items
-    #   A map of one or more table names and, for each table, a map that
-    #   describes one or more items to retrieve from that table. Each table
-    #   name can be used only once per `BatchGetItem` request.
+    #   A map of one or more table names or table ARNs and, for each table, a
+    #   map that describes one or more items to retrieve from that table. Each
+    #   table name or ARN can be used only once per `BatchGetItem` request.
     #
     #   Each element in the map of items to retrieve consists of the
     #   following:
@@ -160,7 +160,7 @@ module Aws::DynamoDB
     #   * `NONE` - No `ConsumedCapacity` details are included in the response.
     # @return [Types::BatchGetItemOutput]
     def batch_get_item(options = {})
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.batch_get_item(options)
       end
       resp.data
@@ -170,7 +170,7 @@ module Aws::DynamoDB
     #
     #   dynamo_db.batch_write_item({
     #     request_items: { # required
-    #       "TableName" => [
+    #       "TableArn" => [
     #         {
     #           put_request: {
     #             item: { # required
@@ -190,9 +190,9 @@ module Aws::DynamoDB
     #   })
     # @param [Hash] options ({})
     # @option options [required, Hash<String,Array>] :request_items
-    #   A map of one or more table names and, for each table, a list of
-    #   operations to be performed (`DeleteRequest` or `PutRequest`). Each
-    #   element in the map consists of the following:
+    #   A map of one or more table names or table ARNs and, for each table, a
+    #   list of operations to be performed (`DeleteRequest` or `PutRequest`).
+    #   Each element in the map consists of the following:
     #
     #   * `DeleteRequest` - Perform a `DeleteItem` operation on the specified
     #     item. The item to be deleted is identified by a `Key` subelement:
@@ -243,7 +243,7 @@ module Aws::DynamoDB
     #   response. If set to `NONE` (the default), no statistics are returned.
     # @return [Types::BatchWriteItemOutput]
     def batch_write_item(options = {})
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.batch_write_item(options)
       end
       resp.data
@@ -258,7 +258,7 @@ module Aws::DynamoDB
     #         attribute_type: "S", # required, accepts S, N, B
     #       },
     #     ],
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     key_schema: [ # required
     #       {
     #         attribute_name: "KeySchemaAttributeName", # required
@@ -297,6 +297,10 @@ module Aws::DynamoDB
     #           read_capacity_units: 1, # required
     #           write_capacity_units: 1, # required
     #         },
+    #         on_demand_throughput: {
+    #           max_read_request_units: 1,
+    #           max_write_request_units: 1,
+    #         },
     #       },
     #     ],
     #     billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
@@ -321,13 +325,19 @@ module Aws::DynamoDB
     #     ],
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #     deletion_protection_enabled: false,
+    #     resource_policy: "ResourcePolicy",
+    #     on_demand_throughput: {
+    #       max_read_request_units: 1,
+    #       max_write_request_units: 1,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, Array<Types::AttributeDefinition>] :attribute_definitions
     #   An array of attributes that describe the key schema for the table and
     #   indexes.
     # @option options [required, String] :table_name
-    #   The name of the table to create.
+    #   The name of the table to create. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     # @option options [required, Array<Types::KeySchemaElement>] :key_schema
     #   Specifies the attributes that make up the primary key for a table or
     #   an index. The attributes in `KeySchema` must also be defined in the
@@ -457,16 +467,16 @@ module Aws::DynamoDB
     #
     #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
     #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
-    #     Mode][1].
+    #     capacity mode][1].
     #
     #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
     #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
-    #     [On-Demand Mode][2].
+    #     [On-demand capacity mode][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
-    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html
     # @option options [Types::ProvisionedThroughput] :provisioned_throughput
     #   Represents the provisioned throughput settings for a specified table
     #   or index. The settings can be modified using the `UpdateTable`
@@ -520,9 +530,35 @@ module Aws::DynamoDB
     # @option options [Boolean] :deletion_protection_enabled
     #   Indicates whether deletion protection is to be enabled (true) or
     #   disabled (false) on the table.
+    # @option options [String] :resource_policy
+    #   An Amazon Web Services resource-based policy document in JSON format
+    #   that will be attached to the table.
+    #
+    #   When you attach a resource-based policy while creating a table, the
+    #   policy application is *strongly consistent*.
+    #
+    #   The maximum size supported for a resource-based policy document is 20
+    #   KB. DynamoDB counts whitespaces when calculating the size of a policy
+    #   against this limit. For a full list of all considerations that apply
+    #   for resource-based policies, see [Resource-based policy
+    #   considerations][1].
+    #
+    #   <note markdown="1"> You need to specify the `CreateTable` and `PutResourcePolicy` IAM
+    #   actions for authorizing a user to create a table with a resource-based
+    #   policy.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html
+    # @option options [Types::OnDemandThroughput] :on_demand_throughput
+    #   Sets the maximum number of read and write units for the specified
+    #   table in on-demand capacity mode. If you use this parameter, you must
+    #   specify `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     # @return [Table]
     def create_table(options = {})
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_table(options)
       end
       Table.new(
@@ -550,7 +586,7 @@ module Aws::DynamoDB
     # @return [Table::Collection]
     def tables(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_tables(options)
         end
         resp.each_page do |page|

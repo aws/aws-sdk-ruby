@@ -91,12 +91,11 @@ module Aws::EC2
     end
 
     # Reserved. If you need to sustain traffic greater than the [documented
-    # limits][1], contact us through the [Support Center][2].
+    # limits][1], contact Amazon Web Services Support.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html
-    # [2]: https://console.aws.amazon.com/support/home?
+    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-gateways
     # @return [Types::ProvisionedBandwidth]
     def provisioned_bandwidth
       data[:provisioned_bandwidth]
@@ -163,7 +162,7 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_nat_gateways(nat_gateway_ids: [@id])
       end
       @data = resp.nat_gateways[0]
@@ -280,7 +279,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -312,7 +311,7 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_tags(options)
       end
       options[:tags].each do |t|
@@ -359,7 +358,7 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_tags(options)
       end
       options[:tags].each do |t|
@@ -387,7 +386,7 @@ module Aws::EC2
     # @return [Types::DeleteNatGatewayResult]
     def delete(options = {})
       options = options.merge(nat_gateway_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_nat_gateway(options)
       end
       resp.data

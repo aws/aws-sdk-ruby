@@ -32,12 +32,7 @@ module {{module_name}}
       {{#parameters}}
       self[:{{underscore_name}}] = options[:{{underscore_name}}]
       {{#default?}}
-      {{#boolean_default?}}
-      self[:{{underscore_name}}] = {{default}} if self[:{{underscore_name}}].nil?
-      {{/boolean_default?}}
-      {{^boolean_default?}}
-      self[:{{underscore_name}}] ||= '{{default}}' if self[:{{underscore_name}}].nil?
-      {{/boolean_default?}}
+      self[:{{underscore_name}}] = {{{default}}} if self[:{{underscore_name}}].nil?
       {{/default?}}
       {{#required}}
       if self[:{{underscore_name}}].nil?

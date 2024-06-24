@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.79.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.78.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.77.0 (2024-04-24)
+------------------
+
+* Feature - Amazon GameLift releases container fleets support for public preview. Deploy Linux-based containerized game server software for hosting on Amazon GameLift.
+
+1.76.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.75.0 (2023-12-14)
+------------------
+
+* Feature - Amazon GameLift adds the ability to add and update the game properties of active game sessions.
+
+1.74.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.72.0 (2023-11-02)
+------------------
+
+* Feature - Amazon GameLift adds support for shared credentials, which allows applications that are deployed on managed EC2 fleets to interact with other AWS resources.
+
 1.71.0 (2023-09-27)
 ------------------
 

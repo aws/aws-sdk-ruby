@@ -1,0 +1,147 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SageMaker
+    module Waiters
+
+      class EndpointDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    endpoint_name: ::String
+                  ) -> Client::_DescribeEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeEndpointResponseSuccess
+      end
+
+      class EndpointInService
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    endpoint_name: ::String
+                  ) -> Client::_DescribeEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeEndpointResponseSuccess
+      end
+
+      class ImageCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    image_name: ::String
+                  ) -> Client::_DescribeImageResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeImageResponseSuccess
+      end
+
+      class ImageDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    image_name: ::String
+                  ) -> Client::_DescribeImageResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeImageResponseSuccess
+      end
+
+      class ImageUpdated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    image_name: ::String
+                  ) -> Client::_DescribeImageResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeImageResponseSuccess
+      end
+
+      class ImageVersionCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    image_name: ::String,
+                    ?version: ::Integer,
+                    ?alias: ::String
+                  ) -> Client::_DescribeImageVersionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeImageVersionResponseSuccess
+      end
+
+      class ImageVersionDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    image_name: ::String,
+                    ?version: ::Integer,
+                    ?alias: ::String
+                  ) -> Client::_DescribeImageVersionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeImageVersionResponseSuccess
+      end
+
+      class NotebookInstanceDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    notebook_instance_name: ::String
+                  ) -> Client::_DescribeNotebookInstanceResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeNotebookInstanceResponseSuccess
+      end
+
+      class NotebookInstanceInService
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    notebook_instance_name: ::String
+                  ) -> Client::_DescribeNotebookInstanceResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeNotebookInstanceResponseSuccess
+      end
+
+      class NotebookInstanceStopped
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    notebook_instance_name: ::String
+                  ) -> Client::_DescribeNotebookInstanceResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeNotebookInstanceResponseSuccess
+      end
+
+      class ProcessingJobCompletedOrStopped
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    processing_job_name: ::String
+                  ) -> Client::_DescribeProcessingJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeProcessingJobResponseSuccess
+      end
+
+      class TrainingJobCompletedOrStopped
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    training_job_name: ::String
+                  ) -> Client::_DescribeTrainingJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeTrainingJobResponseSuccess
+      end
+
+      class TransformJobCompletedOrStopped
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    transform_job_name: ::String
+                  ) -> Client::_DescribeTransformJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeTransformJobResponseSuccess
+      end
+    end
+  end
+end

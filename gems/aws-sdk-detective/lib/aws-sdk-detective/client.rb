@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Detective
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Detective
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::Detective
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::Detective
     #   @option options [Aws::Detective::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Detective::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -501,13 +526,6 @@ module Aws::Detective
     # Creates a new behavior graph for the calling account, and sets that
     # account as the administrator account. This operation is called by the
     # account that is enabling Detective.
-    #
-    # Before you try to enable Detective, make sure that your account has
-    # been enrolled in Amazon GuardDuty for at least 48 hours. If you do not
-    # meet this requirement, you cannot enable Detective. If you do meet the
-    # GuardDuty prerequisite, then when you make the request to enable
-    # Detective, it checks whether your data volume is within the Detective
-    # quota. If it exceeds the quota, then you cannot enable Detective.
     #
     # The operation also enables Detective for the calling account in the
     # currently selected Region. It returns the ARN of the new behavior
@@ -877,6 +895,61 @@ module Aws::Detective
       req.send_request(options)
     end
 
+    # Detective investigations lets you investigate IAM users and IAM roles
+    # using indicators of compromise. An indicator of compromise (IOC) is an
+    # artifact observed in or on a network, system, or environment that can
+    # (with a high level of confidence) identify malicious activity or a
+    # security incident. `GetInvestigation` returns the investigation
+    # results of an investigation for a behavior graph.
+    #
+    # @option params [required, String] :graph_arn
+    #   The Amazon Resource Name (ARN) of the behavior graph.
+    #
+    # @option params [required, String] :investigation_id
+    #   The investigation ID of the investigation report.
+    #
+    # @return [Types::GetInvestigationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInvestigationResponse#graph_arn #graph_arn} => String
+    #   * {Types::GetInvestigationResponse#investigation_id #investigation_id} => String
+    #   * {Types::GetInvestigationResponse#entity_arn #entity_arn} => String
+    #   * {Types::GetInvestigationResponse#entity_type #entity_type} => String
+    #   * {Types::GetInvestigationResponse#created_time #created_time} => Time
+    #   * {Types::GetInvestigationResponse#scope_start_time #scope_start_time} => Time
+    #   * {Types::GetInvestigationResponse#scope_end_time #scope_end_time} => Time
+    #   * {Types::GetInvestigationResponse#status #status} => String
+    #   * {Types::GetInvestigationResponse#severity #severity} => String
+    #   * {Types::GetInvestigationResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_investigation({
+    #     graph_arn: "GraphArn", # required
+    #     investigation_id: "InvestigationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.graph_arn #=> String
+    #   resp.investigation_id #=> String
+    #   resp.entity_arn #=> String
+    #   resp.entity_type #=> String, one of "IAM_ROLE", "IAM_USER"
+    #   resp.created_time #=> Time
+    #   resp.scope_start_time #=> Time
+    #   resp.scope_end_time #=> Time
+    #   resp.status #=> String, one of "RUNNING", "FAILED", "SUCCESSFUL"
+    #   resp.severity #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.state #=> String, one of "ACTIVE", "ARCHIVED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/GetInvestigation AWS API Documentation
+    #
+    # @overload get_investigation(params = {})
+    # @param [Hash] params ({})
+    def get_investigation(params = {}, options = {})
+      req = build_request(:get_investigation, params)
+      req.send_request(options)
+    end
+
     # Returns the membership details for specified member accounts for a
     # behavior graph.
     #
@@ -1028,6 +1101,180 @@ module Aws::Detective
     # @param [Hash] params ({})
     def list_graphs(params = {}, options = {})
       req = build_request(:list_graphs, params)
+      req.send_request(options)
+    end
+
+    # Gets the indicators from an investigation. You can use the information
+    # from the indicators to determine if an IAM user and/or IAM role is
+    # involved in an unusual activity that could indicate malicious behavior
+    # and its impact.
+    #
+    # @option params [required, String] :graph_arn
+    #   The Amazon Resource Name (ARN) of the behavior graph.
+    #
+    # @option params [required, String] :investigation_id
+    #   The investigation ID of the investigation report.
+    #
+    # @option params [String] :indicator_type
+    #   For the list of indicators of compromise that are generated by
+    #   Detective investigations, see [Detective investigations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/detective/latest/userguide/detective-investigations.html
+    #
+    # @option params [String] :next_token
+    #   Lists if there are more results available. The value of nextToken is a
+    #   unique pagination token for each page. Repeat the call using the
+    #   returned token to retrieve the next page. Keep all other arguments
+    #   unchanged.
+    #
+    #   Each pagination token expires after 24 hours. Using an expired
+    #   pagination token will return a Validation Exception error.
+    #
+    # @option params [Integer] :max_results
+    #   Lists the maximum number of indicators in a page.
+    #
+    # @return [Types::ListIndicatorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIndicatorsResponse#graph_arn #graph_arn} => String
+    #   * {Types::ListIndicatorsResponse#investigation_id #investigation_id} => String
+    #   * {Types::ListIndicatorsResponse#next_token #next_token} => String
+    #   * {Types::ListIndicatorsResponse#indicators #indicators} => Array&lt;Types::Indicator&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_indicators({
+    #     graph_arn: "GraphArn", # required
+    #     investigation_id: "InvestigationId", # required
+    #     indicator_type: "TTP_OBSERVED", # accepts TTP_OBSERVED, IMPOSSIBLE_TRAVEL, FLAGGED_IP_ADDRESS, NEW_GEOLOCATION, NEW_ASO, NEW_USER_AGENT, RELATED_FINDING, RELATED_FINDING_GROUP
+    #     next_token: "AiPaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.graph_arn #=> String
+    #   resp.investigation_id #=> String
+    #   resp.next_token #=> String
+    #   resp.indicators #=> Array
+    #   resp.indicators[0].indicator_type #=> String, one of "TTP_OBSERVED", "IMPOSSIBLE_TRAVEL", "FLAGGED_IP_ADDRESS", "NEW_GEOLOCATION", "NEW_ASO", "NEW_USER_AGENT", "RELATED_FINDING", "RELATED_FINDING_GROUP"
+    #   resp.indicators[0].indicator_detail.tt_ps_observed_detail.tactic #=> String
+    #   resp.indicators[0].indicator_detail.tt_ps_observed_detail.technique #=> String
+    #   resp.indicators[0].indicator_detail.tt_ps_observed_detail.procedure #=> String
+    #   resp.indicators[0].indicator_detail.tt_ps_observed_detail.ip_address #=> String
+    #   resp.indicators[0].indicator_detail.tt_ps_observed_detail.api_name #=> String
+    #   resp.indicators[0].indicator_detail.tt_ps_observed_detail.api_success_count #=> Integer
+    #   resp.indicators[0].indicator_detail.tt_ps_observed_detail.api_failure_count #=> Integer
+    #   resp.indicators[0].indicator_detail.impossible_travel_detail.starting_ip_address #=> String
+    #   resp.indicators[0].indicator_detail.impossible_travel_detail.ending_ip_address #=> String
+    #   resp.indicators[0].indicator_detail.impossible_travel_detail.starting_location #=> String
+    #   resp.indicators[0].indicator_detail.impossible_travel_detail.ending_location #=> String
+    #   resp.indicators[0].indicator_detail.impossible_travel_detail.hourly_time_delta #=> Integer
+    #   resp.indicators[0].indicator_detail.flagged_ip_address_detail.ip_address #=> String
+    #   resp.indicators[0].indicator_detail.flagged_ip_address_detail.reason #=> String, one of "AWS_THREAT_INTELLIGENCE"
+    #   resp.indicators[0].indicator_detail.new_geolocation_detail.location #=> String
+    #   resp.indicators[0].indicator_detail.new_geolocation_detail.ip_address #=> String
+    #   resp.indicators[0].indicator_detail.new_geolocation_detail.is_new_for_entire_account #=> Boolean
+    #   resp.indicators[0].indicator_detail.new_aso_detail.aso #=> String
+    #   resp.indicators[0].indicator_detail.new_aso_detail.is_new_for_entire_account #=> Boolean
+    #   resp.indicators[0].indicator_detail.new_user_agent_detail.user_agent #=> String
+    #   resp.indicators[0].indicator_detail.new_user_agent_detail.is_new_for_entire_account #=> Boolean
+    #   resp.indicators[0].indicator_detail.related_finding_detail.arn #=> String
+    #   resp.indicators[0].indicator_detail.related_finding_detail.type #=> String
+    #   resp.indicators[0].indicator_detail.related_finding_detail.ip_address #=> String
+    #   resp.indicators[0].indicator_detail.related_finding_group_detail.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListIndicators AWS API Documentation
+    #
+    # @overload list_indicators(params = {})
+    # @param [Hash] params ({})
+    def list_indicators(params = {}, options = {})
+      req = build_request(:list_indicators, params)
+      req.send_request(options)
+    end
+
+    # Detective investigations lets you investigate IAM users and IAM roles
+    # using indicators of compromise. An indicator of compromise (IOC) is an
+    # artifact observed in or on a network, system, or environment that can
+    # (with a high level of confidence) identify malicious activity or a
+    # security incident. `ListInvestigations` lists all active Detective
+    # investigations.
+    #
+    # @option params [required, String] :graph_arn
+    #   The Amazon Resource Name (ARN) of the behavior graph.
+    #
+    # @option params [String] :next_token
+    #   Lists if there are more results available. The value of nextToken is a
+    #   unique pagination token for each page. Repeat the call using the
+    #   returned token to retrieve the next page. Keep all other arguments
+    #   unchanged.
+    #
+    #   Each pagination token expires after 24 hours. Using an expired
+    #   pagination token will return a Validation Exception error.
+    #
+    # @option params [Integer] :max_results
+    #   Lists the maximum number of investigations in a page.
+    #
+    # @option params [Types::FilterCriteria] :filter_criteria
+    #   Filters the investigation results based on a criteria.
+    #
+    # @option params [Types::SortCriteria] :sort_criteria
+    #   Sorts the investigation results based on a criteria.
+    #
+    # @return [Types::ListInvestigationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInvestigationsResponse#investigation_details #investigation_details} => Array&lt;Types::InvestigationDetail&gt;
+    #   * {Types::ListInvestigationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_investigations({
+    #     graph_arn: "GraphArn", # required
+    #     next_token: "AiPaginationToken",
+    #     max_results: 1,
+    #     filter_criteria: {
+    #       severity: {
+    #         value: "Value", # required
+    #       },
+    #       status: {
+    #         value: "Value", # required
+    #       },
+    #       state: {
+    #         value: "Value", # required
+    #       },
+    #       entity_arn: {
+    #         value: "Value", # required
+    #       },
+    #       created_time: {
+    #         start_inclusive: Time.now, # required
+    #         end_inclusive: Time.now, # required
+    #       },
+    #     },
+    #     sort_criteria: {
+    #       field: "SEVERITY", # accepts SEVERITY, STATUS, CREATED_TIME
+    #       sort_order: "ASC", # accepts ASC, DESC
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.investigation_details #=> Array
+    #   resp.investigation_details[0].investigation_id #=> String
+    #   resp.investigation_details[0].severity #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH", "CRITICAL"
+    #   resp.investigation_details[0].status #=> String, one of "RUNNING", "FAILED", "SUCCESSFUL"
+    #   resp.investigation_details[0].state #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.investigation_details[0].created_time #=> Time
+    #   resp.investigation_details[0].entity_arn #=> String
+    #   resp.investigation_details[0].entity_type #=> String, one of "IAM_ROLE", "IAM_USER"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListInvestigations AWS API Documentation
+    #
+    # @overload list_investigations(params = {})
+    # @param [Hash] params ({})
+    def list_investigations(params = {}, options = {})
+      req = build_request(:list_investigations, params)
       req.send_request(options)
     end
 
@@ -1274,6 +1521,53 @@ module Aws::Detective
       req.send_request(options)
     end
 
+    # Detective investigations lets you investigate IAM users and IAM roles
+    # using indicators of compromise. An indicator of compromise (IOC) is an
+    # artifact observed in or on a network, system, or environment that can
+    # (with a high level of confidence) identify malicious activity or a
+    # security incident. `StartInvestigation` initiates an investigation on
+    # an entity in a behavior graph.
+    #
+    # @option params [required, String] :graph_arn
+    #   The Amazon Resource Name (ARN) of the behavior graph.
+    #
+    # @option params [required, String] :entity_arn
+    #   The unique Amazon Resource Name (ARN) of the IAM user and IAM role.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :scope_start_time
+    #   The data and time when the investigation began. The value is an UTC
+    #   ISO8601 formatted string. For example, `2021-08-18T16:35:56.284Z`.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :scope_end_time
+    #   The data and time when the investigation ended. The value is an UTC
+    #   ISO8601 formatted string. For example, `2021-08-18T16:35:56.284Z`.
+    #
+    # @return [Types::StartInvestigationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartInvestigationResponse#investigation_id #investigation_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_investigation({
+    #     graph_arn: "GraphArn", # required
+    #     entity_arn: "EntityArn", # required
+    #     scope_start_time: Time.now, # required
+    #     scope_end_time: Time.now, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.investigation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/StartInvestigation AWS API Documentation
+    #
+    # @overload start_investigation(params = {})
+    # @param [Hash] params ({})
+    def start_investigation(params = {}, options = {})
+      req = build_request(:start_investigation, params)
+      req.send_request(options)
+    end
+
     # Sends a request to enable data ingest for a member account that has a
     # status of `ACCEPTED_BUT_DISABLED`.
     #
@@ -1396,6 +1690,37 @@ module Aws::Detective
       req.send_request(options)
     end
 
+    # Updates the state of an investigation.
+    #
+    # @option params [required, String] :graph_arn
+    #   The Amazon Resource Name (ARN) of the behavior graph.
+    #
+    # @option params [required, String] :investigation_id
+    #   The investigation ID of the investigation report.
+    #
+    # @option params [required, String] :state
+    #   The current state of the investigation. An archived investigation
+    #   indicates you have completed reviewing the investigation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_investigation_state({
+    #     graph_arn: "GraphArn", # required
+    #     investigation_id: "InvestigationId", # required
+    #     state: "ACTIVE", # required, accepts ACTIVE, ARCHIVED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/UpdateInvestigationState AWS API Documentation
+    #
+    # @overload update_investigation_state(params = {})
+    # @param [Hash] params ({})
+    def update_investigation_state(params = {}, options = {})
+      req = build_request(:update_investigation_state, params)
+      req.send_request(options)
+    end
+
     # Updates the configuration for the Organizations integration in the
     # current Region. Can only be called by the Detective administrator
     # account for the organization.
@@ -1438,7 +1763,7 @@ module Aws::Detective
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-detective'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

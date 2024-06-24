@@ -1,6 +1,91 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2024-06-19)
+------------------
+
+* Feature - This release enables customers to use JSON Web Tokens (JWT) for authentication on their Amazon OpenSearch Service domains.
+
+1.43.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2024-05-22)
+------------------
+
+* Feature - This release adds support for enabling or disabling a data source configured as part of Zero-ETL integration with Amazon S3, by setting its status.
+
+1.41.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2024-04-30)
+------------------
+
+* Feature - This release enables customers to create Route53 A and AAAA alias record types to point custom endpoint domain to OpenSearch domain's dualstack search endpoint.
+
+1.39.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.38.0 (2024-02-15)
+------------------
+
+* Feature - Adds additional supported instance types.
+
+1.37.0 (2024-02-06)
+------------------
+
+* Feature - This release adds clear visibility to the customers on the changes that they make on the domain.
+
+1.36.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2024-01-04)
+------------------
+
+* Feature - This release adds support for new or existing Amazon OpenSearch domains to enable TLS 1.3 or TLS 1.2 with perfect forward secrecy cipher suites for domain endpoints.
+
+1.34.0 (2023-12-14)
+------------------
+
+* Feature - Updating documentation for Amazon OpenSearch Service support for new zero-ETL integration with Amazon S3.
+
+1.33.0 (2023-11-29)
+------------------
+
+* Feature - Launching Amazon OpenSearch Service support for new zero-ETL integration with Amazon S3. Customers can now manage their direct query data sources to Amazon S3 programatically
+
+1.32.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2023-10-26)
+------------------
+
+* Feature - You can specify ipv4 or dualstack IPAddressType for cluster endpoints. If you specify IPAddressType as dualstack, the new endpoint will be visible under the 'EndpointV2' parameter and will support IPv4 and IPv6 requests. Whereas, the 'Endpoint' will continue to serve IPv4 requests.
+
+1.29.0 (2023-10-19)
+------------------
+
+* Feature - Added Cluster Administrative options for node restart, opensearch process restart and opensearch dashboard restart for Multi-AZ without standby domains
+
+1.28.0 (2023-10-16)
+------------------
+
+* Feature - This release allows customers to list and associate optional plugin packages with compatible Amazon OpenSearch Service clusters for enhanced functionality.
+
 1.27.0 (2023-09-27)
 ------------------
 

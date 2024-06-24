@@ -23,6 +23,141 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
+    # Represents the content of a particular audit event.
+    #
+    # @!attribute [rw] event_id
+    #   Unique identifier of a case audit history event.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   A list of Case Audit History event fields.
+    #   @return [Array<Types::AuditEventField>]
+    #
+    # @!attribute [rw] performed_by
+    #   Information of the user which performed the audit.
+    #   @return [Types::AuditEventPerformedBy]
+    #
+    # @!attribute [rw] performed_time
+    #   Time at which an Audit History event took place.
+    #   @return [Time]
+    #
+    # @!attribute [rw] related_item_type
+    #   The Type of the related item.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The Type of an audit history event.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/AuditEvent AWS API Documentation
+    #
+    class AuditEvent < Struct.new(
+      :event_id,
+      :fields,
+      :performed_by,
+      :performed_time,
+      :related_item_type,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Fields for audit event.
+    #
+    # @!attribute [rw] event_field_id
+    #   Unique identifier of field in an Audit History entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_value
+    #   Union of potential field value types.
+    #   @return [Types::AuditEventFieldValueUnion]
+    #
+    # @!attribute [rw] old_value
+    #   Union of potential field value types.
+    #   @return [Types::AuditEventFieldValueUnion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/AuditEventField AWS API Documentation
+    #
+    class AuditEventField < Struct.new(
+      :event_field_id,
+      :new_value,
+      :old_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object to store union of Field values.
+    #
+    # @note AuditEventFieldValueUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AuditEventFieldValueUnion corresponding to the set member.
+    #
+    # @!attribute [rw] boolean_value
+    #   Can be either null, or have a Boolean value type. Only one value can
+    #   be provided.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] double_value
+    #   Can be either null, or have a Double value type. Only one value can
+    #   be provided.
+    #   @return [Float]
+    #
+    # @!attribute [rw] empty_value
+    #   An empty value. You cannot set `EmptyFieldValue` on a field that is
+    #   required on a case template.
+    #
+    #   This structure will never have any data members. It signifies an
+    #   empty value on a case field.
+    #   @return [Types::EmptyFieldValue]
+    #
+    # @!attribute [rw] string_value
+    #   Can be either null, or have a String value type. Only one value can
+    #   be provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_arn_value
+    #   Can be either null, or have a String value type formatted as an ARN.
+    #   Only one value can be provided.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/AuditEventFieldValueUnion AWS API Documentation
+    #
+    class AuditEventFieldValueUnion < Struct.new(
+      :boolean_value,
+      :double_value,
+      :empty_value,
+      :string_value,
+      :user_arn_value,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class BooleanValue < AuditEventFieldValueUnion; end
+      class DoubleValue < AuditEventFieldValueUnion; end
+      class EmptyValue < AuditEventFieldValueUnion; end
+      class StringValue < AuditEventFieldValueUnion; end
+      class UserArnValue < AuditEventFieldValueUnion; end
+      class Unknown < AuditEventFieldValueUnion; end
+    end
+
+    # Information of the user which performed the audit.
+    #
+    # @!attribute [rw] iam_principal_arn
+    #   Unique identifier of an IAM role.
+    #   @return [String]
+    #
+    # @!attribute [rw] user
+    #   Represents the identity of the person who performed the action.
+    #   @return [Types::UserUnion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/AuditEventPerformedBy AWS API Documentation
+    #
+    class AuditEventPerformedBy < Struct.new(
+      :iam_principal_arn,
+      :user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Content specific to `BasicLayout` type. It configures fields in the
     # top panel and More Info tab of agent application.
     #
@@ -308,6 +443,10 @@ module Aws::ConnectCases
     #   ListFields/DescribeField) and value union data.
     #   @return [Array<Types::FieldValue>]
     #
+    # @!attribute [rw] performed_by
+    #   Represents the identity of the person who performed the action.
+    #   @return [Types::UserUnion]
+    #
     # @!attribute [rw] template_id
     #   A unique identifier of a template.
     #   @return [String]
@@ -318,6 +457,7 @@ module Aws::ConnectCases
       :client_token,
       :domain_id,
       :fields,
+      :performed_by,
       :template_id)
       SENSITIVE = []
       include Aws::Structure
@@ -472,6 +612,10 @@ module Aws::ConnectCases
     #   The unique identifier of the Cases domain.
     #   @return [String]
     #
+    # @!attribute [rw] performed_by
+    #   Represents the creator of the related item.
+    #   @return [Types::UserUnion]
+    #
     # @!attribute [rw] type
     #   The type of a related item.
     #   @return [String]
@@ -482,6 +626,7 @@ module Aws::ConnectCases
       :case_id,
       :content,
       :domain_id,
+      :performed_by,
       :type)
       SENSITIVE = []
       include Aws::Structure
@@ -574,6 +719,69 @@ module Aws::ConnectCases
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteDomainResponse AWS API Documentation
     #
     class DeleteDomainResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_id
+    #   The unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_id
+    #   Unique identifier of the field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteFieldRequest AWS API Documentation
+    #
+    class DeleteFieldRequest < Struct.new(
+      :domain_id,
+      :field_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteFieldResponse AWS API Documentation
+    #
+    class DeleteFieldResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_id
+    #   The unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] layout_id
+    #   The unique identifier of the layout.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteLayoutRequest AWS API Documentation
+    #
+    class DeleteLayoutRequest < Struct.new(
+      :domain_id,
+      :layout_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteLayoutResponse AWS API Documentation
+    #
+    class DeleteLayoutResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_id
+    #   The unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_id
+    #   A unique identifier of a template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteTemplateRequest AWS API Documentation
+    #
+    class DeleteTemplateRequest < Struct.new(
+      :domain_id,
+      :template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/DeleteTemplateResponse AWS API Documentation
+    #
+    class DeleteTemplateResponse < Aws::EmptyStructure; end
 
     # Object for the summarized details of the domain.
     #
@@ -881,6 +1089,11 @@ module Aws::ConnectCases
 
     # Object to store union of Field values.
     #
+    # <note markdown="1"> The `Summary` system field accepts 1500 characters while all other
+    # fields accept 500 characters.
+    #
+    #  </note>
+    #
     # @note FieldValueUnion is a union - when making an API calls you must set exactly one of the members.
     #
     # @note FieldValueUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of FieldValueUnion corresponding to the set member.
@@ -903,6 +1116,10 @@ module Aws::ConnectCases
     #   String value type.
     #   @return [String]
     #
+    # @!attribute [rw] user_arn_value
+    #   Represents the user that performed the audit.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/FieldValueUnion AWS API Documentation
     #
     class FieldValueUnion < Struct.new(
@@ -910,6 +1127,7 @@ module Aws::ConnectCases
       :double_value,
       :empty_value,
       :string_value,
+      :user_arn_value,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -919,7 +1137,86 @@ module Aws::ConnectCases
       class DoubleValue < FieldValueUnion; end
       class EmptyValue < FieldValueUnion; end
       class StringValue < FieldValueUnion; end
+      class UserArnValue < FieldValueUnion; end
       class Unknown < FieldValueUnion; end
+    end
+
+    # An object that represents a content of an Amazon Connect file object.
+    #
+    # @!attribute [rw] file_arn
+    #   The Amazon Resource Name (ARN) of a File in Amazon Connect.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/FileContent AWS API Documentation
+    #
+    class FileContent < Struct.new(
+      :file_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for related items of type `File`.
+    #
+    # @!attribute [rw] file_arn
+    #   The Amazon Resource Name (ARN) of the file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/FileFilter AWS API Documentation
+    #
+    class FileFilter < Struct.new(
+      :file_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] case_id
+    #   A unique identifier of the case.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of audit events to return. The current maximum
+    #   supported value is 25. This is also the default when no other value
+    #   is provided.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetCaseAuditEventsRequest AWS API Documentation
+    #
+    class GetCaseAuditEventsRequest < Struct.new(
+      :case_id,
+      :domain_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] audit_events
+    #   A list of case audits where each represents a particular edit of the
+    #   case.
+    #   @return [Array<Types::AuditEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. This is null if there are no
+    #   more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetCaseAuditEventsResponse AWS API Documentation
+    #
+    class GetCaseAuditEventsResponse < Struct.new(
+      :audit_events,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # @!attribute [rw] domain_id
@@ -1057,6 +1354,14 @@ module Aws::ConnectCases
 
     # Object to store detailed field information.
     #
+    # @!attribute [rw] created_time
+    #   Timestamp at which the resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deleted
+    #   Denotes whether or not the resource has been deleted.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] description
     #   Description of the field.
     #   @return [String]
@@ -1068,6 +1373,10 @@ module Aws::ConnectCases
     # @!attribute [rw] field_id
     #   Unique identifier of the field.
     #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Timestamp at which the resource was created or last modified.
+    #   @return [Time]
     #
     # @!attribute [rw] name
     #   Name of the field.
@@ -1089,9 +1398,12 @@ module Aws::ConnectCases
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetFieldResponse AWS API Documentation
     #
     class GetFieldResponse < Struct.new(
+      :created_time,
+      :deleted,
       :description,
       :field_arn,
       :field_id,
+      :last_modified_time,
       :name,
       :namespace,
       :tags,
@@ -1122,6 +1434,18 @@ module Aws::ConnectCases
     #   order of the fields, and read-only attribute of the field.
     #   @return [Types::LayoutContent]
     #
+    # @!attribute [rw] created_time
+    #   Timestamp at which the resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deleted
+    #   Denotes whether or not the resource has been deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Timestamp at which the resource was created or last modified.
+    #   @return [Time]
+    #
     # @!attribute [rw] layout_arn
     #   The Amazon Resource Name (ARN) of the newly created layout.
     #   @return [String]
@@ -1143,6 +1467,9 @@ module Aws::ConnectCases
     #
     class GetLayoutResponse < Struct.new(
       :content,
+      :created_time,
+      :deleted,
+      :last_modified_time,
       :layout_arn,
       :layout_id,
       :name,
@@ -1168,9 +1495,21 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
+    # @!attribute [rw] created_time
+    #   Timestamp at which the resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deleted
+    #   Denotes whether or not the resource has been deleted.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] description
     #   A brief description of the template.
     #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Timestamp at which the resource was created or last modified.
+    #   @return [Time]
     #
     # @!attribute [rw] layout_configuration
     #   Configuration of layouts associated to the template.
@@ -1205,7 +1544,10 @@ module Aws::ConnectCases
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetTemplateResponse AWS API Documentation
     #
     class GetTemplateResponse < Struct.new(
+      :created_time,
+      :deleted,
       :description,
+      :last_modified_time,
       :layout_configuration,
       :name,
       :required_fields,
@@ -1640,11 +1982,16 @@ module Aws::ConnectCases
     #   Represents the content of a contact to be returned to agents.
     #   @return [Types::ContactContent]
     #
+    # @!attribute [rw] file
+    #   Represents the content of a File to be returned to agents.
+    #   @return [Types::FileContent]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/RelatedItemContent AWS API Documentation
     #
     class RelatedItemContent < Struct.new(
       :comment,
       :contact,
+      :file,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1652,6 +1999,7 @@ module Aws::ConnectCases
 
       class Comment < RelatedItemContent; end
       class Contact < RelatedItemContent; end
+      class File < RelatedItemContent; end
       class Unknown < RelatedItemContent; end
     end
 
@@ -1684,11 +2032,16 @@ module Aws::ConnectCases
     #   field.
     #   @return [Types::Contact]
     #
+    # @!attribute [rw] file
+    #   A file of related items.
+    #   @return [Types::FileContent]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/RelatedItemInputContent AWS API Documentation
     #
     class RelatedItemInputContent < Struct.new(
       :comment,
       :contact,
+      :file,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1696,6 +2049,7 @@ module Aws::ConnectCases
 
       class Comment < RelatedItemInputContent; end
       class Contact < RelatedItemInputContent; end
+      class File < RelatedItemInputContent; end
       class Unknown < RelatedItemInputContent; end
     end
 
@@ -1712,11 +2066,16 @@ module Aws::ConnectCases
     #   A filter for related items of type `Contact`.
     #   @return [Types::ContactFilter]
     #
+    # @!attribute [rw] file
+    #   A filter for related items of this type of `File`.
+    #   @return [Types::FileFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/RelatedItemTypeFilter AWS API Documentation
     #
     class RelatedItemTypeFilter < Struct.new(
       :comment,
       :contact,
+      :file,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1724,6 +2083,7 @@ module Aws::ConnectCases
 
       class Comment < RelatedItemTypeFilter; end
       class Contact < RelatedItemTypeFilter; end
+      class File < RelatedItemTypeFilter; end
       class Unknown < RelatedItemTypeFilter; end
     end
 
@@ -1926,6 +2286,10 @@ module Aws::ConnectCases
     #   Represents the content of a particular type of related item.
     #   @return [Types::RelatedItemContent]
     #
+    # @!attribute [rw] performed_by
+    #   Represents the creator of the related item.
+    #   @return [Types::UserUnion]
+    #
     # @!attribute [rw] related_item_id
     #   Unique identifier of a related item.
     #   @return [String]
@@ -1944,6 +2308,7 @@ module Aws::ConnectCases
     class SearchRelatedItemsResponseItem < Struct.new(
       :association_time,
       :content,
+      :performed_by,
       :related_item_id,
       :tags,
       :type)
@@ -2104,12 +2469,17 @@ module Aws::ConnectCases
     #   to `CreateCase`.
     #   @return [Array<Types::FieldValue>]
     #
+    # @!attribute [rw] performed_by
+    #   Represents the identity of the person who performed the action.
+    #   @return [Types::UserUnion]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UpdateCaseRequest AWS API Documentation
     #
     class UpdateCaseRequest < Struct.new(
       :case_id,
       :domain_id,
-      :fields)
+      :fields,
+      :performed_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2151,7 +2521,7 @@ module Aws::ConnectCases
 
     # @!attribute [rw] content
     #   Information about which fields will be present in the layout, the
-    #   order of the fields, and a read-only attribute of the field.
+    #   order of the fields.
     #   @return [Types::LayoutContent]
     #
     # @!attribute [rw] domain_id
@@ -2227,6 +2597,29 @@ module Aws::ConnectCases
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UpdateTemplateResponse AWS API Documentation
     #
     class UpdateTemplateResponse < Aws::EmptyStructure; end
+
+    # Represents the identity of the person who performed the action.
+    #
+    # @note UserUnion is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note UserUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of UserUnion corresponding to the set member.
+    #
+    # @!attribute [rw] user_arn
+    #   Represents the Amazon Connect ARN of the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/UserUnion AWS API Documentation
+    #
+    class UserUnion < Struct.new(
+      :user_arn,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class UserArn < UserUnion; end
+      class Unknown < UserUnion; end
+    end
 
     # The request isn't valid. Check the syntax and try again.
     #

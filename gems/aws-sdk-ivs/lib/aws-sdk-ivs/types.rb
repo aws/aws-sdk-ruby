@@ -57,7 +57,7 @@ module Aws::IVS
     # Error related to a specific channel, specified by its ARN.
     #
     # @!attribute [rw] arn
-    #   Channel ARN.
+    #   ARN of an IVS resource; e.g., channel.
     #   @return [String]
     #
     # @!attribute [rw] code
@@ -241,12 +241,17 @@ module Aws::IVS
     # @!attribute [rw] latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
     #   video up to Full HD. Use `LOW` for near-real-time interaction with
-    #   viewers. Default: `LOW`. (Note: In the Amazon IVS console, `LOW` and
-    #   `NORMAL` correspond to Ultra-low and Standard, respectively.)
+    #   viewers. Default: `LOW`.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   Channel name.
+    #   @return [String]
+    #
+    # @!attribute [rw] playback_restriction_policy_arn
+    #   Playback-restriction-policy ARN. A valid ARN value here both
+    #   specifies the ARN and enables playback restriction. Default: ""
+    #   (empty string, no playback restriction policy is applied).
     #   @return [String]
     #
     # @!attribute [rw] playback_url
@@ -262,10 +267,15 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] recording_configuration_arn
-    #   Recording-configuration ARN. A value other than an empty string
-    #   indicates that recording is enabled. Default: "" (empty string,
+    #   Recording-configuration ARN. A valid ARN value here both specifies
+    #   the ARN and enables recording. Default: "" (empty string,
     #   recording is disabled).
     #   @return [String]
+    #
+    # @!attribute [rw] srt
+    #   Specifies the endpoint and optional passphrase for streaming with
+    #   the SRT protocol.
+    #   @return [Types::Srt]
     #
     # @!attribute [rw] tags
     #   Tags attached to the resource. Array of 1-50 maps, each of the form
@@ -299,9 +309,11 @@ module Aws::IVS
       :insecure_ingest,
       :latency_mode,
       :name,
+      :playback_restriction_policy_arn,
       :playback_url,
       :preset,
       :recording_configuration_arn,
+      :srt,
       :tags,
       :type)
       SENSITIVE = []
@@ -338,12 +350,17 @@ module Aws::IVS
     # @!attribute [rw] latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
     #   video up to Full HD. Use `LOW` for near-real-time interaction with
-    #   viewers. Default: `LOW`. (Note: In the Amazon IVS console, `LOW` and
-    #   `NORMAL` correspond to Ultra-low and Standard, respectively.)
+    #   viewers. Default: `LOW`.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   Channel name.
+    #   @return [String]
+    #
+    # @!attribute [rw] playback_restriction_policy_arn
+    #   Playback-restriction-policy ARN. A valid ARN value here both
+    #   specifies the ARN and enables playback restriction. Default: ""
+    #   (empty string, no playback restriction policy is applied).
     #   @return [String]
     #
     # @!attribute [rw] preset
@@ -355,8 +372,8 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] recording_configuration_arn
-    #   Recording-configuration ARN. A value other than an empty string
-    #   indicates that recording is enabled. Default: "" (empty string,
+    #   Recording-configuration ARN. A valid ARN value here both specifies
+    #   the ARN and enables recording. Default: "" (empty string,
     #   recording is disabled).
     #   @return [String]
     #
@@ -391,6 +408,7 @@ module Aws::IVS
       :insecure_ingest,
       :latency_mode,
       :name,
+      :playback_restriction_policy_arn,
       :preset,
       :recording_configuration_arn,
       :tags,
@@ -417,18 +435,24 @@ module Aws::IVS
     #   @return [Boolean]
     #
     # @!attribute [rw] insecure_ingest
-    #   Whether the channel allows insecure RTMP ingest. Default: `false`.
+    #   Whether the channel allows insecure RTMP and SRT ingest. Default:
+    #   `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
     #   video up to Full HD. Use `LOW` for near-real-time interaction with
-    #   viewers. (Note: In the Amazon IVS console, `LOW` and `NORMAL`
-    #   correspond to Ultra-low and Standard, respectively.) Default: `LOW`.
+    #   viewers. Default: `LOW`.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   Channel name.
+    #   @return [String]
+    #
+    # @!attribute [rw] playback_restriction_policy_arn
+    #   Playback-restriction-policy ARN. A valid ARN value here both
+    #   specifies the ARN and enables playback restriction. Default: ""
+    #   (empty string, no playback restriction policy is applied).
     #   @return [String]
     #
     # @!attribute [rw] preset
@@ -440,8 +464,9 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] recording_configuration_arn
-    #   Recording-configuration ARN. Default: "" (empty string, recording
-    #   is disabled).
+    #   Recording-configuration ARN. A valid ARN value here both specifies
+    #   the ARN and enables recording. Default: "" (empty string,
+    #   recording is disabled).
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -474,6 +499,7 @@ module Aws::IVS
       :insecure_ingest,
       :latency_mode,
       :name,
+      :playback_restriction_policy_arn,
       :preset,
       :recording_configuration_arn,
       :tags,
@@ -493,6 +519,72 @@ module Aws::IVS
     class CreateChannelResponse < Struct.new(
       :channel,
       :stream_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] allowed_countries
+    #   A list of country codes that control geoblocking restriction.
+    #   Allowed values are the officially assigned [ISO 3166-1 alpha-2][1]
+    #   codes. Default: All countries (an empty array).
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_origins
+    #   A list of origin sites that control CORS restriction. Allowed values
+    #   are the same as valid values of the Origin header defined at
+    #   [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin][1].
+    #   Default: All origins (an empty array).
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] enable_strict_origin_enforcement
+    #   Whether channel playback is constrained by origin site. Default:
+    #   `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   Playback-restriction-policy name. The value does not need to be
+    #   unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`.
+    #   See [Tagging Amazon Web Services Resources][1] for more information,
+    #   including restrictions that apply to tags and "Tag naming limits
+    #   and requirements"; Amazon IVS has no service-specific constraints
+    #   beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreatePlaybackRestrictionPolicyRequest AWS API Documentation
+    #
+    class CreatePlaybackRestrictionPolicyRequest < Struct.new(
+      :allowed_countries,
+      :allowed_origins,
+      :enable_strict_origin_enforcement,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] playback_restriction_policy
+    #   @return [Types::PlaybackRestrictionPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreatePlaybackRestrictionPolicyResponse AWS API Documentation
+    #
+    class CreatePlaybackRestrictionPolicyResponse < Struct.new(
+      :playback_restriction_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -628,6 +720,18 @@ module Aws::IVS
     class DeletePlaybackKeyPairResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] arn
+    #   ARN of the playback restriction policy to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/DeletePlaybackRestrictionPolicyRequest AWS API Documentation
+    #
+    class DeletePlaybackRestrictionPolicyRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
     #   ARN of the recording configuration to be deleted.
     #   @return [String]
     #
@@ -714,6 +818,29 @@ module Aws::IVS
     #
     class GetPlaybackKeyPairResponse < Struct.new(
       :key_pair)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   ARN of the playback restriction policy to be returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetPlaybackRestrictionPolicyRequest AWS API Documentation
+    #
+    class GetPlaybackRestrictionPolicyRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] playback_restriction_policy
+    #   @return [Types::PlaybackRestrictionPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetPlaybackRestrictionPolicyResponse AWS API Documentation
+    #
+    class GetPlaybackRestrictionPolicyResponse < Struct.new(
+      :playback_restriction_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -901,6 +1028,10 @@ module Aws::IVS
     #   Filters the channel list to match the specified name.
     #   @return [String]
     #
+    # @!attribute [rw] filter_by_playback_restriction_policy_arn
+    #   Filters the channel list to match the specified policy.
+    #   @return [String]
+    #
     # @!attribute [rw] filter_by_recording_configuration_arn
     #   Filters the channel list to match the specified
     #   recording-configuration ARN.
@@ -919,6 +1050,7 @@ module Aws::IVS
     #
     class ListChannelsRequest < Struct.new(
       :filter_by_name,
+      :filter_by_playback_restriction_policy_arn,
       :filter_by_recording_configuration_arn,
       :max_results,
       :next_token)
@@ -977,6 +1109,42 @@ module Aws::IVS
     class ListPlaybackKeyPairsResponse < Struct.new(
       :key_pairs,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   Maximum number of policies to return. Default: 1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The first policy to retrieve. This is used for pagination; see the
+    #   `nextToken` response field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListPlaybackRestrictionPoliciesRequest AWS API Documentation
+    #
+    class ListPlaybackRestrictionPoliciesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are more channels than `maxResults`, use `nextToken` in the
+    #   request to get the next set.
+    #   @return [String]
+    #
+    # @!attribute [rw] playback_restriction_policies
+    #   List of the matching policies.
+    #   @return [Array<Types::PlaybackRestrictionPolicySummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListPlaybackRestrictionPoliciesResponse AWS API Documentation
+    #
+    class ListPlaybackRestrictionPoliciesResponse < Struct.new(
+      :next_token,
+      :playback_restriction_policies)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1248,6 +1416,131 @@ module Aws::IVS
       include Aws::Structure
     end
 
+    # An object representing a policy to constrain playback by country
+    # and/or origin sites.
+    #
+    # @!attribute [rw] allowed_countries
+    #   A list of country codes that control geoblocking restriction.
+    #   Allowed values are the officially assigned [ISO 3166-1 alpha-2][1]
+    #   codes. Default: All countries (an empty array).
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_origins
+    #   A list of origin sites that control CORS restriction. Allowed values
+    #   are the same as valid values of the Origin header defined at
+    #   [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin][1].
+    #   Default: All origins (an empty array).
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] arn
+    #   Playback-restriction-policy ARN
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_strict_origin_enforcement
+    #   Whether channel playback is constrained by origin site. Default:
+    #   `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   Playback-restriction-policy name. The value does not need to be
+    #   unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of 1-50 maps, each of the form
+    #   `string:string (key:value)`. See [Tagging Amazon Web Services
+    #   Resources][1] for more information, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/PlaybackRestrictionPolicy AWS API Documentation
+    #
+    class PlaybackRestrictionPolicy < Struct.new(
+      :allowed_countries,
+      :allowed_origins,
+      :arn,
+      :enable_strict_origin_enforcement,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a PlaybackRestrictionPolicy.
+    #
+    # @!attribute [rw] allowed_countries
+    #   A list of country codes that control geoblocking restriction.
+    #   Allowed values are the officially assigned [ISO 3166-1 alpha-2][1]
+    #   codes. Default: All countries (an empty array).
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_origins
+    #   A list of origin sites that control CORS restriction. Allowed values
+    #   are the same as valid values of the Origin header defined at
+    #   [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin][1].
+    #   Default: All origins (an empty array).
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] arn
+    #   Playback-restriction-policy ARN
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_strict_origin_enforcement
+    #   Whether channel playback is constrained by origin site. Default:
+    #   `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   Playback-restriction-policy name. The value does not need to be
+    #   unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the resource. Array of 1-50 maps, each of the form
+    #   `string:string (key:value)`. See [Tagging Amazon Web Services
+    #   Resources][1] for more information, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/PlaybackRestrictionPolicySummary AWS API Documentation
+    #
+    class PlaybackRestrictionPolicySummary < Struct.new(
+      :allowed_countries,
+      :allowed_origins,
+      :arn,
+      :enable_strict_origin_enforcement,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_arn
     #   ARN of the channel into which metadata is inserted. This channel
     #   must have an active stream.
@@ -1445,6 +1738,28 @@ module Aws::IVS
     class ServiceQuotaExceededException < Struct.new(
       :exception_message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies information needed to stream using the SRT protocol.
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint to be used when streaming with IVS using the SRT
+    #   protocol.
+    #   @return [String]
+    #
+    # @!attribute [rw] passphrase
+    #   Auto-generated passphrase to enable encryption. This field is
+    #   applicable only if the end user has *not* enabled the
+    #   `insecureIngest` option for the channel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/Srt AWS API Documentation
+    #
+    class Srt < Struct.new(
+      :endpoint,
+      :passphrase)
+      SENSITIVE = [:passphrase]
       include Aws::Structure
     end
 
@@ -1918,7 +2233,7 @@ module Aws::IVS
     #
     # @!attribute [rw] tag_keys
     #   Array of tags to be removed. Array of maps, each of the form
-    #   s`tring:string (key:value)`. See [Tagging Amazon Web Services
+    #   `string:string (key:value)`. See [Tagging Amazon Web Services
     #   Resources][1] for more information, including restrictions that
     #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
     #   has no service-specific constraints beyond what is documented there.
@@ -1950,18 +2265,24 @@ module Aws::IVS
     #   @return [Boolean]
     #
     # @!attribute [rw] insecure_ingest
-    #   Whether the channel allows insecure RTMP ingest. Default: `false`.
+    #   Whether the channel allows insecure RTMP and SRT ingest. Default:
+    #   `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] latency_mode
     #   Channel latency mode. Use `NORMAL` to broadcast and deliver live
     #   video up to Full HD. Use `LOW` for near-real-time interaction with
-    #   viewers. (Note: In the Amazon IVS console, `LOW` and `NORMAL`
-    #   correspond to Ultra-low and Standard, respectively.)
+    #   viewers.
     #   @return [String]
     #
     # @!attribute [rw] name
     #   Channel name.
+    #   @return [String]
+    #
+    # @!attribute [rw] playback_restriction_policy_arn
+    #   Playback-restriction-policy ARN. A valid ARN value here both
+    #   specifies the ARN and enables playback restriction. If this is set
+    #   to an empty string, playback restriction policy is disabled.
     #   @return [String]
     #
     # @!attribute [rw] preset
@@ -1973,9 +2294,9 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] recording_configuration_arn
-    #   Recording-configuration ARN. If this is set to an empty string,
-    #   recording is disabled. A value other than an empty string indicates
-    #   that recording is enabled
+    #   Recording-configuration ARN. A valid ARN value here both specifies
+    #   the ARN and enables recording. If this is set to an empty string,
+    #   recording is disabled.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1997,6 +2318,7 @@ module Aws::IVS
       :insecure_ingest,
       :latency_mode,
       :name,
+      :playback_restriction_policy_arn,
       :preset,
       :recording_configuration_arn,
       :type)
@@ -2005,13 +2327,72 @@ module Aws::IVS
     end
 
     # @!attribute [rw] channel
-    #   Object specifying a channel.
+    #   Object specifying the updated channel.
     #   @return [Types::Channel]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateChannelResponse AWS API Documentation
     #
     class UpdateChannelResponse < Struct.new(
       :channel)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] allowed_countries
+    #   A list of country codes that control geoblocking restriction.
+    #   Allowed values are the officially assigned [ISO 3166-1 alpha-2][1]
+    #   codes. Default: All countries (an empty array).
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_origins
+    #   A list of origin sites that control CORS restriction. Allowed values
+    #   are the same as valid values of the Origin header defined at
+    #   [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin][1].
+    #   Default: All origins (an empty array).
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] arn
+    #   ARN of the playback-restriction-policy to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_strict_origin_enforcement
+    #   Whether channel playback is constrained by origin site. Default:
+    #   `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   Playback-restriction-policy name. The value does not need to be
+    #   unique.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdatePlaybackRestrictionPolicyRequest AWS API Documentation
+    #
+    class UpdatePlaybackRestrictionPolicyRequest < Struct.new(
+      :allowed_countries,
+      :allowed_origins,
+      :arn,
+      :enable_strict_origin_enforcement,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] playback_restriction_policy
+    #   Object specifying the updated policy.
+    #   @return [Types::PlaybackRestrictionPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdatePlaybackRestrictionPolicyResponse AWS API Documentation
+    #
+    class UpdatePlaybackRestrictionPolicyResponse < Struct.new(
+      :playback_restriction_policy)
       SENSITIVE = []
       include Aws::Structure
     end

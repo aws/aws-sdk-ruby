@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::ResourceExplorer2
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::ResourceExplorer2
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::ResourceExplorer2
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::ResourceExplorer2
     #   @option options [Aws::ResourceExplorer2::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ResourceExplorer2::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -539,7 +564,7 @@ module Aws::ResourceExplorer2
     #   This value helps ensure idempotency. Resource Explorer uses this value
     #   to prevent the accidental creation of duplicate versions. We recommend
     #   that you generate a [UUID-type value][1] to ensure the uniqueness of
-    #   your views.
+    #   your index.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -643,6 +668,10 @@ module Aws::ResourceExplorer2
     #   The default is an empty list, with no optional fields included in the
     #   results.
     #
+    # @option params [String] :scope
+    #   The root ARN of the account, an organizational unit (OU), or an
+    #   organization ARN. If left empty, the default is account.
+    #
     # @option params [Hash<String,String>] :tags
     #   Tag key and value pairs that are attached to the view.
     #
@@ -670,6 +699,7 @@ module Aws::ResourceExplorer2
     #         name: "IncludedPropertyNameString", # required
     #       },
     #     ],
+    #     scope: "CreateViewInputScopeString",
     #     tags: {
     #       "String" => "String",
     #     },
@@ -804,6 +834,30 @@ module Aws::ResourceExplorer2
       req.send_request(options)
     end
 
+    # Retrieves the status of your account's Amazon Web Services service
+    # access, and validates the service linked role required to access the
+    # multi-account search feature. Only the management account or a
+    # delegated administrator with service access enabled can invoke this
+    # API call.
+    #
+    # @return [Types::GetAccountLevelServiceConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountLevelServiceConfigurationOutput#org_configuration #org_configuration} => Types::OrgConfiguration
+    #
+    # @example Response structure
+    #
+    #   resp.org_configuration.aws_service_access_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.org_configuration.service_linked_role #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/GetAccountLevelServiceConfiguration AWS API Documentation
+    #
+    # @overload get_account_level_service_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_account_level_service_configuration(params = {}, options = {})
+      req = build_request(:get_account_level_service_configuration, params)
+      req.send_request(options)
+    end
+
     # Retrieves the Amazon Resource Name (ARN) of the view that is the
     # default for the Amazon Web Services Region in which you call this
     # operation. You can then call GetView to retrieve the details of that
@@ -930,7 +984,8 @@ module Aws::ResourceExplorer2
     #   `NextToken` response in a previous request. A `NextToken` response
     #   indicates that more output is available. Set this parameter to the
     #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
     #
     # @option params [Array<String>] :regions
     #   If specified, limits the response to only information about the index
@@ -975,6 +1030,72 @@ module Aws::ResourceExplorer2
       req.send_request(options)
     end
 
+    # Retrieves a list of a member's indexes in all Amazon Web Services
+    # Regions that are currently collecting resource information for Amazon
+    # Web Services Resource Explorer. Only the management account or a
+    # delegated administrator with service access enabled can invoke this
+    # API call.
+    #
+    # @option params [required, Array<String>] :account_id_list
+    #   The account IDs will limit the output to only indexes from these
+    #   accounts.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that you want included on each page of
+    #   the response. If you do not include this parameter, it defaults to a
+    #   value appropriate to the operation. If additional items exist beyond
+    #   those included in the current response, the `NextToken` response
+    #   element is present and has a value (is not null). Include that value
+    #   as the `NextToken` request parameter in the next call to the operation
+    #   to get the next part of the results.
+    #
+    #   <note markdown="1"> An API operation can return fewer results than the maximum even when
+    #   there are more results available. You should check `NextToken` after
+    #   every operation to ensure that you receive all of the results.
+    #
+    #    </note>
+    #
+    # @option params [String] :next_token
+    #   The parameter for receiving additional results if you receive a
+    #   `NextToken` response in a previous request. A `NextToken` response
+    #   indicates that more output is available. Set this parameter to the
+    #   value of the previous call's `NextToken` response to indicate where
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
+    #
+    # @return [Types::ListIndexesForMembersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIndexesForMembersOutput#indexes #indexes} => Array&lt;Types::MemberIndex&gt;
+    #   * {Types::ListIndexesForMembersOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_indexes_for_members({
+    #     account_id_list: ["AccountId"], # required
+    #     max_results: 1,
+    #     next_token: "ListIndexesForMembersInputNextTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.indexes #=> Array
+    #   resp.indexes[0].account_id #=> String
+    #   resp.indexes[0].arn #=> String
+    #   resp.indexes[0].region #=> String
+    #   resp.indexes[0].type #=> String, one of "LOCAL", "AGGREGATOR"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resource-explorer-2-2022-07-28/ListIndexesForMembers AWS API Documentation
+    #
+    # @overload list_indexes_for_members(params = {})
+    # @param [Hash] params ({})
+    def list_indexes_for_members(params = {}, options = {})
+      req = build_request(:list_indexes_for_members, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of all resource types currently supported by Amazon
     # Web Services Resource Explorer.
     #
@@ -998,7 +1119,8 @@ module Aws::ResourceExplorer2
     #   `NextToken` response in a previous request. A `NextToken` response
     #   indicates that more output is available. Set this parameter to the
     #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
     #
     # @return [Types::ListSupportedResourceTypesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1099,7 +1221,8 @@ module Aws::ResourceExplorer2
     #   `NextToken` response in a previous request. A `NextToken` response
     #   indicates that more output is available. Set this parameter to the
     #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
     #
     # @return [Types::ListViewsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1172,7 +1295,8 @@ module Aws::ResourceExplorer2
     #   `NextToken` response in a previous request. A `NextToken` response
     #   indicates that more output is available. Set this parameter to the
     #   value of the previous call's `NextToken` response to indicate where
-    #   the output should continue from.
+    #   the output should continue from. The pagination tokens expire after 24
+    #   hours.
     #
     # @option params [required, String] :query_string
     #   A string that includes keywords and filters that specify the resources
@@ -1512,7 +1636,7 @@ module Aws::ResourceExplorer2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourceexplorer2'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

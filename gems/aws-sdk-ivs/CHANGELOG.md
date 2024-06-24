@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.47.0 (2024-04-25)
+------------------
+
+* Feature - Bug Fix: IVS does not support arns with the `svs` prefix
+
+1.46.0 (2024-04-04)
+------------------
+
+* Feature - API update to include an SRT ingest endpoint and passphrase for all channels.
+
+1.45.0 (2024-02-01)
+------------------
+
+* Feature - This release introduces a new resource Playback Restriction Policy which can be used to geo-restrict or domain-restrict channel stream playback when associated with a channel.  New APIs to support this resource were introduced in the form of Create/Delete/Get/Update/List.
+
+1.44.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2023-11-17)
+------------------
+
+* Feature - type & defaulting refinement to various range properties
+
 1.40.0 (2023-09-27)
 ------------------
 

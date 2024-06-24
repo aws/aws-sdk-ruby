@@ -1,0 +1,899 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module TranscribeService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateCallAnalyticsCategoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCallAnalyticsCategoryResponse]
+        def category_properties: () -> Types::CategoryProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#create_call_analytics_category-instance_method
+      def create_call_analytics_category: (
+                                            category_name: ::String,
+                                            rules: Array[
+                                              {
+                                                non_talk_time_filter: {
+                                                  threshold: ::Integer?,
+                                                  absolute_time_range: {
+                                                    start_time: ::Integer?,
+                                                    end_time: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  relative_time_range: {
+                                                    start_percentage: ::Integer?,
+                                                    end_percentage: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  negate: bool?
+                                                }?,
+                                                interruption_filter: {
+                                                  threshold: ::Integer?,
+                                                  participant_role: ("AGENT" | "CUSTOMER")?,
+                                                  absolute_time_range: {
+                                                    start_time: ::Integer?,
+                                                    end_time: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  relative_time_range: {
+                                                    start_percentage: ::Integer?,
+                                                    end_percentage: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  negate: bool?
+                                                }?,
+                                                transcript_filter: {
+                                                  transcript_filter_type: ("EXACT"),
+                                                  absolute_time_range: {
+                                                    start_time: ::Integer?,
+                                                    end_time: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  relative_time_range: {
+                                                    start_percentage: ::Integer?,
+                                                    end_percentage: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  participant_role: ("AGENT" | "CUSTOMER")?,
+                                                  negate: bool?,
+                                                  targets: Array[::String]
+                                                }?,
+                                                sentiment_filter: {
+                                                  sentiments: Array[("POSITIVE" | "NEGATIVE" | "NEUTRAL" | "MIXED")],
+                                                  absolute_time_range: {
+                                                    start_time: ::Integer?,
+                                                    end_time: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  relative_time_range: {
+                                                    start_percentage: ::Integer?,
+                                                    end_percentage: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  participant_role: ("AGENT" | "CUSTOMER")?,
+                                                  negate: bool?
+                                                }?
+                                              },
+                                            ],
+                                            ?input_type: ("REAL_TIME" | "POST_CALL")
+                                          ) -> _CreateCallAnalyticsCategoryResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCallAnalyticsCategoryResponseSuccess
+
+      interface _CreateLanguageModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLanguageModelResponse]
+        def language_code: () -> ("en-US" | "hi-IN" | "es-US" | "en-GB" | "en-AU" | "de-DE" | "ja-JP")
+        def base_model_name: () -> ("NarrowBand" | "WideBand")
+        def model_name: () -> ::String
+        def input_data_config: () -> Types::InputDataConfig
+        def model_status: () -> ("IN_PROGRESS" | "FAILED" | "COMPLETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#create_language_model-instance_method
+      def create_language_model: (
+                                   language_code: ("en-US" | "hi-IN" | "es-US" | "en-GB" | "en-AU" | "de-DE" | "ja-JP"),
+                                   base_model_name: ("NarrowBand" | "WideBand"),
+                                   model_name: ::String,
+                                   input_data_config: {
+                                     s3_uri: ::String,
+                                     tuning_data_s3_uri: ::String?,
+                                     data_access_role_arn: ::String
+                                   },
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ]
+                                 ) -> _CreateLanguageModelResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLanguageModelResponseSuccess
+
+      interface _CreateMedicalVocabularyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMedicalVocabularyResponse]
+        def vocabulary_name: () -> ::String
+        def language_code: () -> ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+        def vocabulary_state: () -> ("PENDING" | "READY" | "FAILED")
+        def last_modified_time: () -> ::Time
+        def failure_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#create_medical_vocabulary-instance_method
+      def create_medical_vocabulary: (
+                                       vocabulary_name: ::String,
+                                       language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA"),
+                                       vocabulary_file_uri: ::String,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String,
+                                           value: ::String
+                                         },
+                                       ]
+                                     ) -> _CreateMedicalVocabularyResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMedicalVocabularyResponseSuccess
+
+      interface _CreateVocabularyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVocabularyResponse]
+        def vocabulary_name: () -> ::String
+        def language_code: () -> ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+        def vocabulary_state: () -> ("PENDING" | "READY" | "FAILED")
+        def last_modified_time: () -> ::Time
+        def failure_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#create_vocabulary-instance_method
+      def create_vocabulary: (
+                               vocabulary_name: ::String,
+                               language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA"),
+                               ?phrases: Array[::String],
+                               ?vocabulary_file_uri: ::String,
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ],
+                               ?data_access_role_arn: ::String
+                             ) -> _CreateVocabularyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVocabularyResponseSuccess
+
+      interface _CreateVocabularyFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVocabularyFilterResponse]
+        def vocabulary_filter_name: () -> ::String
+        def language_code: () -> ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+        def last_modified_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#create_vocabulary_filter-instance_method
+      def create_vocabulary_filter: (
+                                      vocabulary_filter_name: ::String,
+                                      language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA"),
+                                      ?words: Array[::String],
+                                      ?vocabulary_filter_file_uri: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ],
+                                      ?data_access_role_arn: ::String
+                                    ) -> _CreateVocabularyFilterResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVocabularyFilterResponseSuccess
+
+      interface _DeleteCallAnalyticsCategoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCallAnalyticsCategoryResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#delete_call_analytics_category-instance_method
+      def delete_call_analytics_category: (
+                                            category_name: ::String
+                                          ) -> _DeleteCallAnalyticsCategoryResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCallAnalyticsCategoryResponseSuccess
+
+      interface _DeleteCallAnalyticsJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCallAnalyticsJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#delete_call_analytics_job-instance_method
+      def delete_call_analytics_job: (
+                                       call_analytics_job_name: ::String
+                                     ) -> _DeleteCallAnalyticsJobResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCallAnalyticsJobResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#delete_language_model-instance_method
+      def delete_language_model: (
+                                   model_name: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#delete_medical_scribe_job-instance_method
+      def delete_medical_scribe_job: (
+                                       medical_scribe_job_name: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#delete_medical_transcription_job-instance_method
+      def delete_medical_transcription_job: (
+                                              medical_transcription_job_name: ::String
+                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#delete_medical_vocabulary-instance_method
+      def delete_medical_vocabulary: (
+                                       vocabulary_name: ::String
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#delete_transcription_job-instance_method
+      def delete_transcription_job: (
+                                      transcription_job_name: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#delete_vocabulary-instance_method
+      def delete_vocabulary: (
+                               vocabulary_name: ::String
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#delete_vocabulary_filter-instance_method
+      def delete_vocabulary_filter: (
+                                      vocabulary_filter_name: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeLanguageModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLanguageModelResponse]
+        def language_model: () -> Types::LanguageModel
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#describe_language_model-instance_method
+      def describe_language_model: (
+                                     model_name: ::String
+                                   ) -> _DescribeLanguageModelResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLanguageModelResponseSuccess
+
+      interface _GetCallAnalyticsCategoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCallAnalyticsCategoryResponse]
+        def category_properties: () -> Types::CategoryProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#get_call_analytics_category-instance_method
+      def get_call_analytics_category: (
+                                         category_name: ::String
+                                       ) -> _GetCallAnalyticsCategoryResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCallAnalyticsCategoryResponseSuccess
+
+      interface _GetCallAnalyticsJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCallAnalyticsJobResponse]
+        def call_analytics_job: () -> Types::CallAnalyticsJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#get_call_analytics_job-instance_method
+      def get_call_analytics_job: (
+                                    call_analytics_job_name: ::String
+                                  ) -> _GetCallAnalyticsJobResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCallAnalyticsJobResponseSuccess
+
+      interface _GetMedicalScribeJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMedicalScribeJobResponse]
+        def medical_scribe_job: () -> Types::MedicalScribeJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#get_medical_scribe_job-instance_method
+      def get_medical_scribe_job: (
+                                    medical_scribe_job_name: ::String
+                                  ) -> _GetMedicalScribeJobResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMedicalScribeJobResponseSuccess
+
+      interface _GetMedicalTranscriptionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMedicalTranscriptionJobResponse]
+        def medical_transcription_job: () -> Types::MedicalTranscriptionJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#get_medical_transcription_job-instance_method
+      def get_medical_transcription_job: (
+                                           medical_transcription_job_name: ::String
+                                         ) -> _GetMedicalTranscriptionJobResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMedicalTranscriptionJobResponseSuccess
+
+      interface _GetMedicalVocabularyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMedicalVocabularyResponse]
+        def vocabulary_name: () -> ::String
+        def language_code: () -> ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+        def vocabulary_state: () -> ("PENDING" | "READY" | "FAILED")
+        def last_modified_time: () -> ::Time
+        def failure_reason: () -> ::String
+        def download_uri: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#get_medical_vocabulary-instance_method
+      def get_medical_vocabulary: (
+                                    vocabulary_name: ::String
+                                  ) -> _GetMedicalVocabularyResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMedicalVocabularyResponseSuccess
+
+      interface _GetTranscriptionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTranscriptionJobResponse]
+        def transcription_job: () -> Types::TranscriptionJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#get_transcription_job-instance_method
+      def get_transcription_job: (
+                                   transcription_job_name: ::String
+                                 ) -> _GetTranscriptionJobResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTranscriptionJobResponseSuccess
+
+      interface _GetVocabularyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVocabularyResponse]
+        def vocabulary_name: () -> ::String
+        def language_code: () -> ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+        def vocabulary_state: () -> ("PENDING" | "READY" | "FAILED")
+        def last_modified_time: () -> ::Time
+        def failure_reason: () -> ::String
+        def download_uri: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#get_vocabulary-instance_method
+      def get_vocabulary: (
+                            vocabulary_name: ::String
+                          ) -> _GetVocabularyResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVocabularyResponseSuccess
+
+      interface _GetVocabularyFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVocabularyFilterResponse]
+        def vocabulary_filter_name: () -> ::String
+        def language_code: () -> ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+        def last_modified_time: () -> ::Time
+        def download_uri: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#get_vocabulary_filter-instance_method
+      def get_vocabulary_filter: (
+                                   vocabulary_filter_name: ::String
+                                 ) -> _GetVocabularyFilterResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVocabularyFilterResponseSuccess
+
+      interface _ListCallAnalyticsCategoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCallAnalyticsCategoriesResponse]
+        def next_token: () -> ::String
+        def categories: () -> ::Array[Types::CategoryProperties]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#list_call_analytics_categories-instance_method
+      def list_call_analytics_categories: (
+                                            ?next_token: ::String,
+                                            ?max_results: ::Integer
+                                          ) -> _ListCallAnalyticsCategoriesResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCallAnalyticsCategoriesResponseSuccess
+
+      interface _ListCallAnalyticsJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCallAnalyticsJobsResponse]
+        def status: () -> ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+        def next_token: () -> ::String
+        def call_analytics_job_summaries: () -> ::Array[Types::CallAnalyticsJobSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#list_call_analytics_jobs-instance_method
+      def list_call_analytics_jobs: (
+                                      ?status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED"),
+                                      ?job_name_contains: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListCallAnalyticsJobsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCallAnalyticsJobsResponseSuccess
+
+      interface _ListLanguageModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLanguageModelsResponse]
+        def next_token: () -> ::String
+        def models: () -> ::Array[Types::LanguageModel]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#list_language_models-instance_method
+      def list_language_models: (
+                                  ?status_equals: ("IN_PROGRESS" | "FAILED" | "COMPLETED"),
+                                  ?name_contains: ::String,
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListLanguageModelsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLanguageModelsResponseSuccess
+
+      interface _ListMedicalScribeJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMedicalScribeJobsResponse]
+        def status: () -> ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+        def next_token: () -> ::String
+        def medical_scribe_job_summaries: () -> ::Array[Types::MedicalScribeJobSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#list_medical_scribe_jobs-instance_method
+      def list_medical_scribe_jobs: (
+                                      ?status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED"),
+                                      ?job_name_contains: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListMedicalScribeJobsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMedicalScribeJobsResponseSuccess
+
+      interface _ListMedicalTranscriptionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMedicalTranscriptionJobsResponse]
+        def status: () -> ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+        def next_token: () -> ::String
+        def medical_transcription_job_summaries: () -> ::Array[Types::MedicalTranscriptionJobSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#list_medical_transcription_jobs-instance_method
+      def list_medical_transcription_jobs: (
+                                             ?status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED"),
+                                             ?job_name_contains: ::String,
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _ListMedicalTranscriptionJobsResponseSuccess
+                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMedicalTranscriptionJobsResponseSuccess
+
+      interface _ListMedicalVocabulariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMedicalVocabulariesResponse]
+        def status: () -> ("PENDING" | "READY" | "FAILED")
+        def next_token: () -> ::String
+        def vocabularies: () -> ::Array[Types::VocabularyInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#list_medical_vocabularies-instance_method
+      def list_medical_vocabularies: (
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer,
+                                       ?state_equals: ("PENDING" | "READY" | "FAILED"),
+                                       ?name_contains: ::String
+                                     ) -> _ListMedicalVocabulariesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMedicalVocabulariesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def resource_arn: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListTranscriptionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTranscriptionJobsResponse]
+        def status: () -> ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+        def next_token: () -> ::String
+        def transcription_job_summaries: () -> ::Array[Types::TranscriptionJobSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#list_transcription_jobs-instance_method
+      def list_transcription_jobs: (
+                                     ?status: ("QUEUED" | "IN_PROGRESS" | "FAILED" | "COMPLETED"),
+                                     ?job_name_contains: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListTranscriptionJobsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTranscriptionJobsResponseSuccess
+
+      interface _ListVocabulariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVocabulariesResponse]
+        def status: () -> ("PENDING" | "READY" | "FAILED")
+        def next_token: () -> ::String
+        def vocabularies: () -> ::Array[Types::VocabularyInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#list_vocabularies-instance_method
+      def list_vocabularies: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer,
+                               ?state_equals: ("PENDING" | "READY" | "FAILED"),
+                               ?name_contains: ::String
+                             ) -> _ListVocabulariesResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVocabulariesResponseSuccess
+
+      interface _ListVocabularyFiltersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVocabularyFiltersResponse]
+        def next_token: () -> ::String
+        def vocabulary_filters: () -> ::Array[Types::VocabularyFilterInfo]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#list_vocabulary_filters-instance_method
+      def list_vocabulary_filters: (
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer,
+                                     ?name_contains: ::String
+                                   ) -> _ListVocabularyFiltersResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVocabularyFiltersResponseSuccess
+
+      interface _StartCallAnalyticsJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCallAnalyticsJobResponse]
+        def call_analytics_job: () -> Types::CallAnalyticsJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#start_call_analytics_job-instance_method
+      def start_call_analytics_job: (
+                                      call_analytics_job_name: ::String,
+                                      media: {
+                                        media_file_uri: ::String?,
+                                        redacted_media_file_uri: ::String?
+                                      },
+                                      ?output_location: ::String,
+                                      ?output_encryption_kms_key_id: ::String,
+                                      ?data_access_role_arn: ::String,
+                                      ?settings: {
+                                        vocabulary_name: ::String?,
+                                        vocabulary_filter_name: ::String?,
+                                        vocabulary_filter_method: ("remove" | "mask" | "tag")?,
+                                        language_model_name: ::String?,
+                                        content_redaction: {
+                                          redaction_type: ("PII"),
+                                          redaction_output: ("redacted" | "redacted_and_unredacted"),
+                                          pii_entity_types: Array[("BANK_ACCOUNT_NUMBER" | "BANK_ROUTING" | "CREDIT_DEBIT_NUMBER" | "CREDIT_DEBIT_CVV" | "CREDIT_DEBIT_EXPIRY" | "PIN" | "EMAIL" | "ADDRESS" | "NAME" | "PHONE" | "SSN" | "ALL")]?
+                                        }?,
+                                        language_options: Array[("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")]?,
+                                        language_id_settings: Hash[("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA"), {
+                                            vocabulary_name: ::String?,
+                                            vocabulary_filter_name: ::String?,
+                                            language_model_name: ::String?
+                                          }]?,
+                                        summarization: {
+                                          generate_abstractive_summary: bool
+                                        }?
+                                      },
+                                      ?channel_definitions: Array[
+                                        {
+                                          channel_id: ::Integer?,
+                                          participant_role: ("AGENT" | "CUSTOMER")?
+                                        },
+                                      ]
+                                    ) -> _StartCallAnalyticsJobResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCallAnalyticsJobResponseSuccess
+
+      interface _StartMedicalScribeJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMedicalScribeJobResponse]
+        def medical_scribe_job: () -> Types::MedicalScribeJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#start_medical_scribe_job-instance_method
+      def start_medical_scribe_job: (
+                                      medical_scribe_job_name: ::String,
+                                      media: {
+                                        media_file_uri: ::String?,
+                                        redacted_media_file_uri: ::String?
+                                      },
+                                      output_bucket_name: ::String,
+                                      ?output_encryption_kms_key_id: ::String,
+                                      ?kms_encryption_context: Hash[::String, ::String],
+                                      data_access_role_arn: ::String,
+                                      settings: {
+                                        show_speaker_labels: bool?,
+                                        max_speaker_labels: ::Integer?,
+                                        channel_identification: bool?,
+                                        vocabulary_name: ::String?,
+                                        vocabulary_filter_name: ::String?,
+                                        vocabulary_filter_method: ("remove" | "mask" | "tag")?
+                                      },
+                                      ?channel_definitions: Array[
+                                        {
+                                          channel_id: ::Integer,
+                                          participant_role: ("PATIENT" | "CLINICIAN")
+                                        },
+                                      ],
+                                      ?tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String
+                                        },
+                                      ]
+                                    ) -> _StartMedicalScribeJobResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMedicalScribeJobResponseSuccess
+
+      interface _StartMedicalTranscriptionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMedicalTranscriptionJobResponse]
+        def medical_transcription_job: () -> Types::MedicalTranscriptionJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#start_medical_transcription_job-instance_method
+      def start_medical_transcription_job: (
+                                             medical_transcription_job_name: ::String,
+                                             language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA"),
+                                             ?media_sample_rate_hertz: ::Integer,
+                                             ?media_format: ("mp3" | "mp4" | "wav" | "flac" | "ogg" | "amr" | "webm" | "m4a"),
+                                             media: {
+                                               media_file_uri: ::String?,
+                                               redacted_media_file_uri: ::String?
+                                             },
+                                             output_bucket_name: ::String,
+                                             ?output_key: ::String,
+                                             ?output_encryption_kms_key_id: ::String,
+                                             ?kms_encryption_context: Hash[::String, ::String],
+                                             ?settings: {
+                                               show_speaker_labels: bool?,
+                                               max_speaker_labels: ::Integer?,
+                                               channel_identification: bool?,
+                                               show_alternatives: bool?,
+                                               max_alternatives: ::Integer?,
+                                               vocabulary_name: ::String?
+                                             },
+                                             ?content_identification_type: ("PHI"),
+                                             specialty: ("PRIMARYCARE"),
+                                             type: ("CONVERSATION" | "DICTATION"),
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String,
+                                                 value: ::String
+                                               },
+                                             ]
+                                           ) -> _StartMedicalTranscriptionJobResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMedicalTranscriptionJobResponseSuccess
+
+      interface _StartTranscriptionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTranscriptionJobResponse]
+        def transcription_job: () -> Types::TranscriptionJob
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#start_transcription_job-instance_method
+      def start_transcription_job: (
+                                     transcription_job_name: ::String,
+                                     ?language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA"),
+                                     ?media_sample_rate_hertz: ::Integer,
+                                     ?media_format: ("mp3" | "mp4" | "wav" | "flac" | "ogg" | "amr" | "webm" | "m4a"),
+                                     media: {
+                                       media_file_uri: ::String?,
+                                       redacted_media_file_uri: ::String?
+                                     },
+                                     ?output_bucket_name: ::String,
+                                     ?output_key: ::String,
+                                     ?output_encryption_kms_key_id: ::String,
+                                     ?kms_encryption_context: Hash[::String, ::String],
+                                     ?settings: {
+                                       vocabulary_name: ::String?,
+                                       show_speaker_labels: bool?,
+                                       max_speaker_labels: ::Integer?,
+                                       channel_identification: bool?,
+                                       show_alternatives: bool?,
+                                       max_alternatives: ::Integer?,
+                                       vocabulary_filter_name: ::String?,
+                                       vocabulary_filter_method: ("remove" | "mask" | "tag")?
+                                     },
+                                     ?model_settings: {
+                                       language_model_name: ::String?
+                                     },
+                                     ?job_execution_settings: {
+                                       allow_deferred_execution: bool?,
+                                       data_access_role_arn: ::String?
+                                     },
+                                     ?content_redaction: {
+                                       redaction_type: ("PII"),
+                                       redaction_output: ("redacted" | "redacted_and_unredacted"),
+                                       pii_entity_types: Array[("BANK_ACCOUNT_NUMBER" | "BANK_ROUTING" | "CREDIT_DEBIT_NUMBER" | "CREDIT_DEBIT_CVV" | "CREDIT_DEBIT_EXPIRY" | "PIN" | "EMAIL" | "ADDRESS" | "NAME" | "PHONE" | "SSN" | "ALL")]?
+                                     },
+                                     ?identify_language: bool,
+                                     ?identify_multiple_languages: bool,
+                                     ?language_options: Array[("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")],
+                                     ?subtitles: {
+                                       formats: Array[("vtt" | "srt")]?,
+                                       output_start_index: ::Integer?
+                                     },
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       },
+                                     ],
+                                     ?language_id_settings: Hash[("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA"), {
+                                         vocabulary_name: ::String?,
+                                         vocabulary_filter_name: ::String?,
+                                         language_model_name: ::String?
+                                       }],
+                                     ?toxicity_detection: Array[
+                                       {
+                                         toxicity_categories: Array[("ALL")]
+                                       },
+                                     ]
+                                   ) -> _StartTranscriptionJobResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTranscriptionJobResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateCallAnalyticsCategoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCallAnalyticsCategoryResponse]
+        def category_properties: () -> Types::CategoryProperties
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#update_call_analytics_category-instance_method
+      def update_call_analytics_category: (
+                                            category_name: ::String,
+                                            rules: Array[
+                                              {
+                                                non_talk_time_filter: {
+                                                  threshold: ::Integer?,
+                                                  absolute_time_range: {
+                                                    start_time: ::Integer?,
+                                                    end_time: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  relative_time_range: {
+                                                    start_percentage: ::Integer?,
+                                                    end_percentage: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  negate: bool?
+                                                }?,
+                                                interruption_filter: {
+                                                  threshold: ::Integer?,
+                                                  participant_role: ("AGENT" | "CUSTOMER")?,
+                                                  absolute_time_range: {
+                                                    start_time: ::Integer?,
+                                                    end_time: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  relative_time_range: {
+                                                    start_percentage: ::Integer?,
+                                                    end_percentage: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  negate: bool?
+                                                }?,
+                                                transcript_filter: {
+                                                  transcript_filter_type: ("EXACT"),
+                                                  absolute_time_range: {
+                                                    start_time: ::Integer?,
+                                                    end_time: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  relative_time_range: {
+                                                    start_percentage: ::Integer?,
+                                                    end_percentage: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  participant_role: ("AGENT" | "CUSTOMER")?,
+                                                  negate: bool?,
+                                                  targets: Array[::String]
+                                                }?,
+                                                sentiment_filter: {
+                                                  sentiments: Array[("POSITIVE" | "NEGATIVE" | "NEUTRAL" | "MIXED")],
+                                                  absolute_time_range: {
+                                                    start_time: ::Integer?,
+                                                    end_time: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  relative_time_range: {
+                                                    start_percentage: ::Integer?,
+                                                    end_percentage: ::Integer?,
+                                                    first: ::Integer?,
+                                                    last: ::Integer?
+                                                  }?,
+                                                  participant_role: ("AGENT" | "CUSTOMER")?,
+                                                  negate: bool?
+                                                }?
+                                              },
+                                            ],
+                                            ?input_type: ("REAL_TIME" | "POST_CALL")
+                                          ) -> _UpdateCallAnalyticsCategoryResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCallAnalyticsCategoryResponseSuccess
+
+      interface _UpdateMedicalVocabularyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMedicalVocabularyResponse]
+        def vocabulary_name: () -> ::String
+        def language_code: () -> ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+        def last_modified_time: () -> ::Time
+        def vocabulary_state: () -> ("PENDING" | "READY" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#update_medical_vocabulary-instance_method
+      def update_medical_vocabulary: (
+                                       vocabulary_name: ::String,
+                                       language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA"),
+                                       vocabulary_file_uri: ::String
+                                     ) -> _UpdateMedicalVocabularyResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMedicalVocabularyResponseSuccess
+
+      interface _UpdateVocabularyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVocabularyResponse]
+        def vocabulary_name: () -> ::String
+        def language_code: () -> ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+        def last_modified_time: () -> ::Time
+        def vocabulary_state: () -> ("PENDING" | "READY" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#update_vocabulary-instance_method
+      def update_vocabulary: (
+                               vocabulary_name: ::String,
+                               language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA"),
+                               ?phrases: Array[::String],
+                               ?vocabulary_file_uri: ::String,
+                               ?data_access_role_arn: ::String
+                             ) -> _UpdateVocabularyResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVocabularyResponseSuccess
+
+      interface _UpdateVocabularyFilterResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateVocabularyFilterResponse]
+        def vocabulary_filter_name: () -> ::String
+        def language_code: () -> ("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zu-ZA")
+        def last_modified_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#update_vocabulary_filter-instance_method
+      def update_vocabulary_filter: (
+                                      vocabulary_filter_name: ::String,
+                                      ?words: Array[::String],
+                                      ?vocabulary_filter_file_uri: ::String,
+                                      ?data_access_role_arn: ::String
+                                    ) -> _UpdateVocabularyFilterResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVocabularyFilterResponseSuccess
+    end
+  end
+end
+

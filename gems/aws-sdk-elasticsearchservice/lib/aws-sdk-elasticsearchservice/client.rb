@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::ElasticsearchService
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::ElasticsearchService
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::ElasticsearchService
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::ElasticsearchService
     #   @option options [Aws::ElasticsearchService::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ElasticsearchService::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -528,6 +553,46 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def authorize_vpc_endpoint_access(params = {}, options = {})
       req = build_request(:authorize_vpc_endpoint_access, params)
+      req.send_request(options)
+    end
+
+    # Cancels a pending configuration change on an Amazon OpenSearch Service
+    # domain.
+    #
+    # @option params [required, String] :domain_name
+    #   Name of the OpenSearch Service domain configuration request to cancel.
+    #
+    # @option params [Boolean] :dry_run
+    #   When set to **True**, returns the list of change IDs and properties
+    #   that will be cancelled without actually cancelling the change.
+    #
+    # @return [Types::CancelDomainConfigChangeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelDomainConfigChangeResponse#dry_run #dry_run} => Boolean
+    #   * {Types::CancelDomainConfigChangeResponse#cancelled_change_ids #cancelled_change_ids} => Array&lt;String&gt;
+    #   * {Types::CancelDomainConfigChangeResponse#cancelled_change_properties #cancelled_change_properties} => Array&lt;Types::CancelledChangeProperty&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_domain_config_change({
+    #     domain_name: "DomainName", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dry_run #=> Boolean
+    #   resp.cancelled_change_ids #=> Array
+    #   resp.cancelled_change_ids[0] #=> String
+    #   resp.cancelled_change_properties #=> Array
+    #   resp.cancelled_change_properties[0].property_name #=> String
+    #   resp.cancelled_change_properties[0].cancelled_value #=> String
+    #   resp.cancelled_change_properties[0].active_value #=> String
+    #
+    # @overload cancel_domain_config_change(params = {})
+    # @param [Hash] params ({})
+    def cancel_domain_config_change(params = {}, options = {})
+      req = build_request(:cancel_domain_config_change, params)
       req.send_request(options)
     end
 
@@ -723,7 +788,7 @@ module Aws::ElasticsearchService
     #     },
     #     domain_endpoint_options: {
     #       enforce_https: false,
-    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07, Policy-Min-TLS-1-2-PFS-2023-10
     #       custom_endpoint_enabled: false,
     #       custom_endpoint: "DomainNameFqdn",
     #       custom_endpoint_certificate_arn: "ARN",
@@ -830,7 +895,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
     #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
-    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_status.domain_endpoint_options.custom_endpoint #=> String
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
@@ -848,6 +913,16 @@ module Aws::ElasticsearchService
     #   resp.domain_status.auto_tune_options.error_message #=> String
     #   resp.domain_status.change_progress_details.change_id #=> String
     #   resp.domain_status.change_progress_details.message #=> String
+    #   resp.domain_status.change_progress_details.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.domain_status.change_progress_details.start_time #=> Time
+    #   resp.domain_status.change_progress_details.last_updated_time #=> Time
+    #   resp.domain_status.change_progress_details.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.domain_status.domain_processing_status #=> String, one of "Creating", "Active", "Modifying", "UpgradingEngineVersion", "UpdatingServiceSoftware", "Isolated", "Deleting"
+    #   resp.domain_status.modifying_properties #=> Array
+    #   resp.domain_status.modifying_properties[0].name #=> String
+    #   resp.domain_status.modifying_properties[0].active_value #=> String
+    #   resp.domain_status.modifying_properties[0].pending_value #=> String
+    #   resp.domain_status.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #
     # @overload create_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -1089,7 +1164,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
     #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
-    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_status.domain_endpoint_options.custom_endpoint #=> String
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
@@ -1107,6 +1182,16 @@ module Aws::ElasticsearchService
     #   resp.domain_status.auto_tune_options.error_message #=> String
     #   resp.domain_status.change_progress_details.change_id #=> String
     #   resp.domain_status.change_progress_details.message #=> String
+    #   resp.domain_status.change_progress_details.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.domain_status.change_progress_details.start_time #=> Time
+    #   resp.domain_status.change_progress_details.last_updated_time #=> Time
+    #   resp.domain_status.change_progress_details.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.domain_status.domain_processing_status #=> String, one of "Creating", "Active", "Modifying", "UpgradingEngineVersion", "UpdatingServiceSoftware", "Isolated", "Deleting"
+    #   resp.domain_status.modifying_properties #=> Array
+    #   resp.domain_status.modifying_properties[0].name #=> String
+    #   resp.domain_status.modifying_properties[0].active_value #=> String
+    #   resp.domain_status.modifying_properties[0].pending_value #=> String
+    #   resp.domain_status.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #
     # @overload delete_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -1355,6 +1440,9 @@ module Aws::ElasticsearchService
     #   resp.change_progress_status.change_progress_stages[0].status #=> String
     #   resp.change_progress_status.change_progress_stages[0].description #=> String
     #   resp.change_progress_status.change_progress_stages[0].last_updated #=> Time
+    #   resp.change_progress_status.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.change_progress_status.last_updated_time #=> Time
+    #   resp.change_progress_status.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
     #
     # @overload describe_domain_change_progress(params = {})
     # @param [Hash] params ({})
@@ -1439,7 +1527,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status.service_software_options.automated_update_date #=> Time
     #   resp.domain_status.service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status.domain_endpoint_options.enforce_https #=> Boolean
-    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status.domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_status.domain_endpoint_options.custom_endpoint #=> String
     #   resp.domain_status.domain_endpoint_options.custom_endpoint_certificate_arn #=> String
@@ -1457,6 +1545,16 @@ module Aws::ElasticsearchService
     #   resp.domain_status.auto_tune_options.error_message #=> String
     #   resp.domain_status.change_progress_details.change_id #=> String
     #   resp.domain_status.change_progress_details.message #=> String
+    #   resp.domain_status.change_progress_details.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.domain_status.change_progress_details.start_time #=> Time
+    #   resp.domain_status.change_progress_details.last_updated_time #=> Time
+    #   resp.domain_status.change_progress_details.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.domain_status.domain_processing_status #=> String, one of "Creating", "Active", "Modifying", "UpgradingEngineVersion", "UpdatingServiceSoftware", "Isolated", "Deleting"
+    #   resp.domain_status.modifying_properties #=> Array
+    #   resp.domain_status.modifying_properties[0].name #=> String
+    #   resp.domain_status.modifying_properties[0].active_value #=> String
+    #   resp.domain_status.modifying_properties[0].pending_value #=> String
+    #   resp.domain_status.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #
     # @overload describe_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -1578,7 +1676,7 @@ module Aws::ElasticsearchService
     #   resp.domain_config.log_publishing_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
-    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint #=> String
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_certificate_arn #=> String
@@ -1617,6 +1715,15 @@ module Aws::ElasticsearchService
     #   resp.domain_config.auto_tune_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.change_progress_details.change_id #=> String
     #   resp.domain_config.change_progress_details.message #=> String
+    #   resp.domain_config.change_progress_details.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.domain_config.change_progress_details.start_time #=> Time
+    #   resp.domain_config.change_progress_details.last_updated_time #=> Time
+    #   resp.domain_config.change_progress_details.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.domain_config.modifying_properties #=> Array
+    #   resp.domain_config.modifying_properties[0].name #=> String
+    #   resp.domain_config.modifying_properties[0].active_value #=> String
+    #   resp.domain_config.modifying_properties[0].pending_value #=> String
+    #   resp.domain_config.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #
     # @overload describe_elasticsearch_domain_config(params = {})
     # @param [Hash] params ({})
@@ -1702,7 +1809,7 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].service_software_options.automated_update_date #=> Time
     #   resp.domain_status_list[0].service_software_options.optional_deployment #=> Boolean
     #   resp.domain_status_list[0].domain_endpoint_options.enforce_https #=> Boolean
-    #   resp.domain_status_list[0].domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_status_list[0].domain_endpoint_options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"
     #   resp.domain_status_list[0].domain_endpoint_options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_status_list[0].domain_endpoint_options.custom_endpoint #=> String
     #   resp.domain_status_list[0].domain_endpoint_options.custom_endpoint_certificate_arn #=> String
@@ -1720,6 +1827,16 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].auto_tune_options.error_message #=> String
     #   resp.domain_status_list[0].change_progress_details.change_id #=> String
     #   resp.domain_status_list[0].change_progress_details.message #=> String
+    #   resp.domain_status_list[0].change_progress_details.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.domain_status_list[0].change_progress_details.start_time #=> Time
+    #   resp.domain_status_list[0].change_progress_details.last_updated_time #=> Time
+    #   resp.domain_status_list[0].change_progress_details.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.domain_status_list[0].domain_processing_status #=> String, one of "Creating", "Active", "Modifying", "UpgradingEngineVersion", "UpdatingServiceSoftware", "Isolated", "Deleting"
+    #   resp.domain_status_list[0].modifying_properties #=> Array
+    #   resp.domain_status_list[0].modifying_properties[0].name #=> String
+    #   resp.domain_status_list[0].modifying_properties[0].active_value #=> String
+    #   resp.domain_status_list[0].modifying_properties[0].pending_value #=> String
+    #   resp.domain_status_list[0].modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #
     # @overload describe_elasticsearch_domains(params = {})
     # @param [Hash] params ({})
@@ -2965,7 +3082,7 @@ module Aws::ElasticsearchService
     #     },
     #     domain_endpoint_options: {
     #       enforce_https: false,
-    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07
+    #       tls_security_policy: "Policy-Min-TLS-1-0-2019-07", # accepts Policy-Min-TLS-1-0-2019-07, Policy-Min-TLS-1-2-2019-07, Policy-Min-TLS-1-2-PFS-2023-10
     #       custom_endpoint_enabled: false,
     #       custom_endpoint: "DomainNameFqdn",
     #       custom_endpoint_certificate_arn: "ARN",
@@ -3112,7 +3229,7 @@ module Aws::ElasticsearchService
     #   resp.domain_config.log_publishing_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.log_publishing_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.enforce_https #=> Boolean
-    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07"
+    #   resp.domain_config.domain_endpoint_options.options.tls_security_policy #=> String, one of "Policy-Min-TLS-1-0-2019-07", "Policy-Min-TLS-1-2-2019-07", "Policy-Min-TLS-1-2-PFS-2023-10"
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_enabled #=> Boolean
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint #=> String
     #   resp.domain_config.domain_endpoint_options.options.custom_endpoint_certificate_arn #=> String
@@ -3151,6 +3268,15 @@ module Aws::ElasticsearchService
     #   resp.domain_config.auto_tune_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.change_progress_details.change_id #=> String
     #   resp.domain_config.change_progress_details.message #=> String
+    #   resp.domain_config.change_progress_details.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.domain_config.change_progress_details.start_time #=> Time
+    #   resp.domain_config.change_progress_details.last_updated_time #=> Time
+    #   resp.domain_config.change_progress_details.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.domain_config.modifying_properties #=> Array
+    #   resp.domain_config.modifying_properties[0].name #=> String
+    #   resp.domain_config.modifying_properties[0].active_value #=> String
+    #   resp.domain_config.modifying_properties[0].pending_value #=> String
+    #   resp.domain_config.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #   resp.dry_run_results.deployment_type #=> String
     #   resp.dry_run_results.message #=> String
     #
@@ -3296,6 +3422,10 @@ module Aws::ElasticsearchService
     #   resp.perform_check_only #=> Boolean
     #   resp.change_progress_details.change_id #=> String
     #   resp.change_progress_details.message #=> String
+    #   resp.change_progress_details.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
+    #   resp.change_progress_details.start_time #=> Time
+    #   resp.change_progress_details.last_updated_time #=> Time
+    #   resp.change_progress_details.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
     #
     # @overload upgrade_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -3317,7 +3447,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

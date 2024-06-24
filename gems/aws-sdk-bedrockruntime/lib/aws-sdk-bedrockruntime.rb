@@ -16,6 +16,7 @@ require_relative 'aws-sdk-bedrockruntime/client_api'
 require_relative 'aws-sdk-bedrockruntime/plugins/endpoints.rb'
 require_relative 'aws-sdk-bedrockruntime/client'
 require_relative 'aws-sdk-bedrockruntime/errors'
+require_relative 'aws-sdk-bedrockruntime/waiters'
 require_relative 'aws-sdk-bedrockruntime/resource'
 require_relative 'aws-sdk-bedrockruntime/endpoint_parameters'
 require_relative 'aws-sdk-bedrockruntime/endpoint_provider'
@@ -33,7 +34,7 @@ require_relative 'aws-sdk-bedrockruntime/event_streams'
 # structure.
 #
 #     bedrock_runtime = Aws::BedrockRuntime::Client.new
-#     resp = bedrock_runtime.invoke_model(params)
+#     resp = bedrock_runtime.converse(params)
 #
 # See {Client} for more information.
 #
@@ -53,6 +54,6 @@ require_relative 'aws-sdk-bedrockruntime/event_streams'
 # @!group service
 module Aws::BedrockRuntime
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.12.0'
 
 end

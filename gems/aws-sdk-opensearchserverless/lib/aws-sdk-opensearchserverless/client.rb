@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::OpenSearchServerless
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::OpenSearchServerless
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::OpenSearchServerless
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::OpenSearchServerless
     #   @option options [Aws::OpenSearchServerless::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::OpenSearchServerless::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -444,6 +469,7 @@ module Aws::OpenSearchServerless
     #   resp.collection_details[0].kms_key_arn #=> String
     #   resp.collection_details[0].last_modified_date #=> Integer
     #   resp.collection_details[0].name #=> String
+    #   resp.collection_details[0].standby_replicas #=> String, one of "ENABLED", "DISABLED"
     #   resp.collection_details[0].status #=> String, one of "CREATING", "DELETING", "ACTIVE", "FAILED"
     #   resp.collection_details[0].type #=> String, one of "SEARCH", "TIMESERIES", "VECTORSEARCH"
     #   resp.collection_error_details #=> Array
@@ -458,6 +484,108 @@ module Aws::OpenSearchServerless
     # @param [Hash] params ({})
     def batch_get_collection(params = {}, options = {})
       req = build_request(:batch_get_collection, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of successful and failed retrievals for the OpenSearch
+    # Serverless indexes. For more information, see [Viewing data lifecycle
+    # policies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list
+    #
+    # @option params [required, Array<Types::LifecyclePolicyResourceIdentifier>] :resource_identifiers
+    #   The unique identifiers of policy types and resource names.
+    #
+    # @return [Types::BatchGetEffectiveLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetEffectiveLifecyclePolicyResponse#effective_lifecycle_policy_details #effective_lifecycle_policy_details} => Array&lt;Types::EffectiveLifecyclePolicyDetail&gt;
+    #   * {Types::BatchGetEffectiveLifecyclePolicyResponse#effective_lifecycle_policy_error_details #effective_lifecycle_policy_error_details} => Array&lt;Types::EffectiveLifecyclePolicyErrorDetail&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_effective_lifecycle_policy({
+    #     resource_identifiers: [ # required
+    #       {
+    #         resource: "ResourceName", # required
+    #         type: "retention", # required, accepts retention
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.effective_lifecycle_policy_details #=> Array
+    #   resp.effective_lifecycle_policy_details[0].no_min_retention_period #=> Boolean
+    #   resp.effective_lifecycle_policy_details[0].policy_name #=> String
+    #   resp.effective_lifecycle_policy_details[0].resource #=> String
+    #   resp.effective_lifecycle_policy_details[0].resource_type #=> String, one of "index"
+    #   resp.effective_lifecycle_policy_details[0].retention_period #=> String
+    #   resp.effective_lifecycle_policy_details[0].type #=> String, one of "retention"
+    #   resp.effective_lifecycle_policy_error_details #=> Array
+    #   resp.effective_lifecycle_policy_error_details[0].error_code #=> String
+    #   resp.effective_lifecycle_policy_error_details[0].error_message #=> String
+    #   resp.effective_lifecycle_policy_error_details[0].resource #=> String
+    #   resp.effective_lifecycle_policy_error_details[0].type #=> String, one of "retention"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/BatchGetEffectiveLifecyclePolicy AWS API Documentation
+    #
+    # @overload batch_get_effective_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def batch_get_effective_lifecycle_policy(params = {}, options = {})
+      req = build_request(:batch_get_effective_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
+    # Returns one or more configured OpenSearch Serverless lifecycle
+    # policies. For more information, see [Viewing data lifecycle
+    # policies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list
+    #
+    # @option params [required, Array<Types::LifecyclePolicyIdentifier>] :identifiers
+    #   The unique identifiers of policy types and policy names.
+    #
+    # @return [Types::BatchGetLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetLifecyclePolicyResponse#lifecycle_policy_details #lifecycle_policy_details} => Array&lt;Types::LifecyclePolicyDetail&gt;
+    #   * {Types::BatchGetLifecyclePolicyResponse#lifecycle_policy_error_details #lifecycle_policy_error_details} => Array&lt;Types::LifecyclePolicyErrorDetail&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_lifecycle_policy({
+    #     identifiers: [ # required
+    #       {
+    #         name: "PolicyName", # required
+    #         type: "retention", # required, accepts retention
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_policy_details #=> Array
+    #   resp.lifecycle_policy_details[0].created_date #=> Integer
+    #   resp.lifecycle_policy_details[0].description #=> String
+    #   resp.lifecycle_policy_details[0].last_modified_date #=> Integer
+    #   resp.lifecycle_policy_details[0].name #=> String
+    #   resp.lifecycle_policy_details[0].policy_version #=> String
+    #   resp.lifecycle_policy_details[0].type #=> String, one of "retention"
+    #   resp.lifecycle_policy_error_details #=> Array
+    #   resp.lifecycle_policy_error_details[0].error_code #=> String
+    #   resp.lifecycle_policy_error_details[0].error_message #=> String
+    #   resp.lifecycle_policy_error_details[0].name #=> String
+    #   resp.lifecycle_policy_error_details[0].type #=> String, one of "retention"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/BatchGetLifecyclePolicy AWS API Documentation
+    #
+    # @overload batch_get_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def batch_get_lifecycle_policy(params = {}, options = {})
+      req = build_request(:batch_get_lifecycle_policy, params)
       req.send_request(options)
     end
 
@@ -592,6 +720,9 @@ module Aws::OpenSearchServerless
     # @option params [required, String] :name
     #   Name of the collection.
     #
+    # @option params [String] :standby_replicas
+    #   Indicates whether standby replicas should be used for a collection.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   An arbitrary set of tags (key–value pairs) to associate with the
     #   OpenSearch Serverless collection.
@@ -609,6 +740,7 @@ module Aws::OpenSearchServerless
     #     client_token: "ClientToken",
     #     description: "CreateCollectionRequestDescriptionString",
     #     name: "CollectionName", # required
+    #     standby_replicas: "ENABLED", # accepts ENABLED, DISABLED
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -627,6 +759,7 @@ module Aws::OpenSearchServerless
     #   resp.create_collection_detail.kms_key_arn #=> String
     #   resp.create_collection_detail.last_modified_date #=> Integer
     #   resp.create_collection_detail.name #=> String
+    #   resp.create_collection_detail.standby_replicas #=> String, one of "ENABLED", "DISABLED"
     #   resp.create_collection_detail.status #=> String, one of "CREATING", "DELETING", "ACTIVE", "FAILED"
     #   resp.create_collection_detail.type #=> String, one of "SEARCH", "TIMESERIES", "VECTORSEARCH"
     #
@@ -636,6 +769,67 @@ module Aws::OpenSearchServerless
     # @param [Hash] params ({})
     def create_collection(params = {}, options = {})
       req = build_request(:create_collection, params)
+      req.send_request(options)
+    end
+
+    # Creates a lifecyle policy to be applied to OpenSearch Serverless
+    # indexes. Lifecycle policies define the number of days or hours to
+    # retain the data on an OpenSearch Serverless index. For more
+    # information, see [Creating data lifecycle policies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-create
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :description
+    #   A description of the lifecycle policy.
+    #
+    # @option params [required, String] :name
+    #   The name of the lifecycle policy.
+    #
+    # @option params [required, String] :policy
+    #   The JSON policy document to use as the content for the lifecycle
+    #   policy.
+    #
+    # @option params [required, String] :type
+    #   The type of lifecycle policy.
+    #
+    # @return [Types::CreateLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLifecyclePolicyResponse#lifecycle_policy_detail #lifecycle_policy_detail} => Types::LifecyclePolicyDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_lifecycle_policy({
+    #     client_token: "ClientToken",
+    #     description: "PolicyDescription",
+    #     name: "PolicyName", # required
+    #     policy: "PolicyDocument", # required
+    #     type: "retention", # required, accepts retention
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_policy_detail.created_date #=> Integer
+    #   resp.lifecycle_policy_detail.description #=> String
+    #   resp.lifecycle_policy_detail.last_modified_date #=> Integer
+    #   resp.lifecycle_policy_detail.name #=> String
+    #   resp.lifecycle_policy_detail.policy_version #=> String
+    #   resp.lifecycle_policy_detail.type #=> String, one of "retention"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateLifecyclePolicy AWS API Documentation
+    #
+    # @overload create_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def create_lifecycle_policy(params = {}, options = {})
+      req = build_request(:create_lifecycle_policy, params)
       req.send_request(options)
     end
 
@@ -920,6 +1114,45 @@ module Aws::OpenSearchServerless
       req.send_request(options)
     end
 
+    # Deletes an OpenSearch Serverless lifecycle policy. For more
+    # information, see [Deleting data lifecycle policies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-delete
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   The name of the policy to delete.
+    #
+    # @option params [required, String] :type
+    #   The type of lifecycle policy.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_lifecycle_policy({
+    #     client_token: "ClientToken",
+    #     name: "PolicyName", # required
+    #     type: "retention", # required, accepts retention
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/DeleteLifecyclePolicy AWS API Documentation
+    #
+    # @overload delete_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_lifecycle_policy(params = {}, options = {})
+      req = build_request(:delete_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes a security configuration for OpenSearch Serverless. For more
     # information, see [SAML authentication for Amazon OpenSearch
     # Serverless][1].
@@ -1047,7 +1280,7 @@ module Aws::OpenSearchServerless
     #   The name of the access policy.
     #
     # @option params [required, String] :type
-    #   Tye type of policy. Currently the only supported value is `data`.
+    #   Tye type of policy. Currently, the only supported value is `data`.
     #
     # @return [Types::GetAccessPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1104,6 +1337,7 @@ module Aws::OpenSearchServerless
     # @return [Types::GetPoliciesStatsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPoliciesStatsResponse#access_policy_stats #access_policy_stats} => Types::AccessPolicyStats
+    #   * {Types::GetPoliciesStatsResponse#lifecycle_policy_stats #lifecycle_policy_stats} => Types::LifecyclePolicyStats
     #   * {Types::GetPoliciesStatsResponse#security_config_stats #security_config_stats} => Types::SecurityConfigStats
     #   * {Types::GetPoliciesStatsResponse#security_policy_stats #security_policy_stats} => Types::SecurityPolicyStats
     #   * {Types::GetPoliciesStatsResponse#total_policy_count #total_policy_count} => Integer
@@ -1111,6 +1345,7 @@ module Aws::OpenSearchServerless
     # @example Response structure
     #
     #   resp.access_policy_stats.data_policy_count #=> Integer
+    #   resp.lifecycle_policy_stats.retention_policy_count #=> Integer
     #   resp.security_config_stats.saml_config_count #=> Integer
     #   resp.security_policy_stats.encryption_policy_count #=> Integer
     #   resp.security_policy_stats.network_policy_count #=> Integer
@@ -1283,7 +1518,7 @@ module Aws::OpenSearchServerless
     # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html
     #
     # @option params [Types::CollectionFilters] :collection_filters
-    #   List of filter names and values that you can use for requests.
+    #   A list of filter names and values that you can use for requests.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return. Default is 20. You can use
@@ -1327,6 +1562,67 @@ module Aws::OpenSearchServerless
     # @param [Hash] params ({})
     def list_collections(params = {}, options = {})
       req = build_request(:list_collections, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of OpenSearch Serverless lifecycle policies. For more
+    # information, see [Viewing data lifecycle policies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-list
+    #
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use use `nextToken` to get the next page of results.
+    #   The default is 10.
+    #
+    # @option params [String] :next_token
+    #   If your initial `ListLifecyclePolicies` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListLifecyclePolicies` operations, which returns results in the next
+    #   page.
+    #
+    # @option params [Array<String>] :resources
+    #   Resource filters that policies can apply to. Currently, the only
+    #   supported resource type is `index`.
+    #
+    # @option params [required, String] :type
+    #   The type of lifecycle policy.
+    #
+    # @return [Types::ListLifecyclePoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLifecyclePoliciesResponse#lifecycle_policy_summaries #lifecycle_policy_summaries} => Array&lt;Types::LifecyclePolicySummary&gt;
+    #   * {Types::ListLifecyclePoliciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_lifecycle_policies({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     resources: ["LifecycleResource"],
+    #     type: "retention", # required, accepts retention
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_policy_summaries #=> Array
+    #   resp.lifecycle_policy_summaries[0].created_date #=> Integer
+    #   resp.lifecycle_policy_summaries[0].description #=> String
+    #   resp.lifecycle_policy_summaries[0].last_modified_date #=> Integer
+    #   resp.lifecycle_policy_summaries[0].name #=> String
+    #   resp.lifecycle_policy_summaries[0].policy_version #=> String
+    #   resp.lifecycle_policy_summaries[0].type #=> String, one of "retention"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListLifecyclePolicies AWS API Documentation
+    #
+    # @overload list_lifecycle_policies(params = {})
+    # @param [Hash] params ({})
+    def list_lifecycle_policies(params = {}, options = {})
+      req = build_request(:list_lifecycle_policies, params)
       req.send_request(options)
     end
 
@@ -1769,6 +2065,69 @@ module Aws::OpenSearchServerless
       req.send_request(options)
     end
 
+    # Updates an OpenSearch Serverless access policy. For more information,
+    # see [Updating data lifecycle policies][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-lifecycle.html#serverless-lifecycle-update
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :description
+    #   A description of the lifecycle policy.
+    #
+    # @option params [required, String] :name
+    #   The name of the policy.
+    #
+    # @option params [String] :policy
+    #   The JSON policy document to use as the content for the lifecycle
+    #   policy.
+    #
+    # @option params [required, String] :policy_version
+    #   The version of the policy being updated.
+    #
+    # @option params [required, String] :type
+    #   The type of lifecycle policy.
+    #
+    # @return [Types::UpdateLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLifecyclePolicyResponse#lifecycle_policy_detail #lifecycle_policy_detail} => Types::LifecyclePolicyDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_lifecycle_policy({
+    #     client_token: "ClientToken",
+    #     description: "PolicyDescription",
+    #     name: "PolicyName", # required
+    #     policy: "PolicyDocument",
+    #     policy_version: "PolicyVersion", # required
+    #     type: "retention", # required, accepts retention
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_policy_detail.created_date #=> Integer
+    #   resp.lifecycle_policy_detail.description #=> String
+    #   resp.lifecycle_policy_detail.last_modified_date #=> Integer
+    #   resp.lifecycle_policy_detail.name #=> String
+    #   resp.lifecycle_policy_detail.policy_version #=> String
+    #   resp.lifecycle_policy_detail.type #=> String, one of "retention"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/UpdateLifecyclePolicy AWS API Documentation
+    #
+    # @overload update_lifecycle_policy(params = {})
+    # @param [Hash] params ({})
+    def update_lifecycle_policy(params = {}, options = {})
+      req = build_request(:update_lifecycle_policy, params)
+      req.send_request(options)
+    end
+
     # Updates a security configuration for OpenSearch Serverless. For more
     # information, see [SAML authentication for Amazon OpenSearch
     # Serverless][1].
@@ -1987,7 +2346,7 @@ module Aws::OpenSearchServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opensearchserverless'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

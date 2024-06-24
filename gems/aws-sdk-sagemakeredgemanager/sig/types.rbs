@@ -1,0 +1,110 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SagemakerEdgeManager
+  module Types
+
+    class Checksum
+      attr_accessor type: ("SHA1")
+      attr_accessor sum: ::String
+      SENSITIVE: []
+    end
+
+    class Definition
+      attr_accessor model_handle: ::String
+      attr_accessor s3_url: ::String
+      attr_accessor checksum: Types::Checksum
+      attr_accessor state: ("DEPLOY" | "UNDEPLOY")
+      SENSITIVE: []
+    end
+
+    class DeploymentModel
+      attr_accessor model_handle: ::String
+      attr_accessor model_name: ::String
+      attr_accessor model_version: ::String
+      attr_accessor desired_state: ("DEPLOY" | "UNDEPLOY")
+      attr_accessor state: ("DEPLOY" | "UNDEPLOY")
+      attr_accessor status: ("SUCCESS" | "FAIL")
+      attr_accessor status_reason: ::String
+      attr_accessor rollback_failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class DeploymentResult
+      attr_accessor deployment_name: ::String
+      attr_accessor deployment_status: ::String
+      attr_accessor deployment_status_message: ::String
+      attr_accessor deployment_start_time: ::Time
+      attr_accessor deployment_end_time: ::Time
+      attr_accessor deployment_models: ::Array[Types::DeploymentModel]
+      SENSITIVE: []
+    end
+
+    class EdgeDeployment
+      attr_accessor deployment_name: ::String
+      attr_accessor type: ("Model")
+      attr_accessor failure_handling_policy: ("ROLLBACK_ON_FAILURE" | "DO_NOTHING")
+      attr_accessor definitions: ::Array[Types::Definition]
+      SENSITIVE: []
+    end
+
+    class EdgeMetric
+      attr_accessor dimension: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor value: ::Float
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class GetDeploymentsRequest
+      attr_accessor device_name: ::String
+      attr_accessor device_fleet_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentsResult
+      attr_accessor deployments: ::Array[Types::EdgeDeployment]
+      SENSITIVE: []
+    end
+
+    class GetDeviceRegistrationRequest
+      attr_accessor device_name: ::String
+      attr_accessor device_fleet_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeviceRegistrationResult
+      attr_accessor device_registration: ::String
+      attr_accessor cache_ttl: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Model
+      attr_accessor model_name: ::String
+      attr_accessor model_version: ::String
+      attr_accessor latest_sample_time: ::Time
+      attr_accessor latest_inference: ::Time
+      attr_accessor model_metrics: ::Array[Types::EdgeMetric]
+      SENSITIVE: []
+    end
+
+    class SendHeartbeatRequest
+      attr_accessor agent_metrics: ::Array[Types::EdgeMetric]
+      attr_accessor models: ::Array[Types::Model]
+      attr_accessor agent_version: ::String
+      attr_accessor device_name: ::String
+      attr_accessor device_fleet_name: ::String
+      attr_accessor deployment_result: Types::DeploymentResult
+      SENSITIVE: []
+    end
+  end
+end

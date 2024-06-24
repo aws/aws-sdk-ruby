@@ -1,0 +1,118 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Proton
+    module Waiters
+
+      class ComponentDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String
+                  ) -> Client::_GetComponentResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetComponentResponseSuccess
+      end
+
+      class ComponentDeployed
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String
+                  ) -> Client::_GetComponentResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetComponentResponseSuccess
+      end
+
+      class EnvironmentDeployed
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String
+                  ) -> Client::_GetEnvironmentResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetEnvironmentResponseSuccess
+      end
+
+      class EnvironmentTemplateVersionRegistered
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    major_version: ::String,
+                    minor_version: ::String,
+                    template_name: ::String
+                  ) -> Client::_GetEnvironmentTemplateVersionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetEnvironmentTemplateVersionResponseSuccess
+      end
+
+      class ServiceCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String
+                  ) -> Client::_GetServiceResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetServiceResponseSuccess
+      end
+
+      class ServiceDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String
+                  ) -> Client::_GetServiceResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetServiceResponseSuccess
+      end
+
+      class ServiceInstanceDeployed
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String,
+                    service_name: ::String
+                  ) -> Client::_GetServiceInstanceResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetServiceInstanceResponseSuccess
+      end
+
+      class ServicePipelineDeployed
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String
+                  ) -> Client::_GetServiceResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetServiceResponseSuccess
+      end
+
+      class ServiceTemplateVersionRegistered
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    major_version: ::String,
+                    minor_version: ::String,
+                    template_name: ::String
+                  ) -> Client::_GetServiceTemplateVersionResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetServiceTemplateVersionResponseSuccess
+      end
+
+      class ServiceUpdated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    name: ::String
+                  ) -> Client::_GetServiceResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetServiceResponseSuccess
+      end
+    end
+  end
+end

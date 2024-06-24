@@ -14,6 +14,7 @@ module Aws::Backup
       option(
         :endpoint_provider,
         doc_type: 'Aws::Backup::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::Backup
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -72,6 +74,10 @@ module Aws::Backup
             Aws::Backup::Endpoints::CreateLogicallyAirGappedBackupVault.build(context)
           when :create_report_plan
             Aws::Backup::Endpoints::CreateReportPlan.build(context)
+          when :create_restore_testing_plan
+            Aws::Backup::Endpoints::CreateRestoreTestingPlan.build(context)
+          when :create_restore_testing_selection
+            Aws::Backup::Endpoints::CreateRestoreTestingSelection.build(context)
           when :delete_backup_plan
             Aws::Backup::Endpoints::DeleteBackupPlan.build(context)
           when :delete_backup_selection
@@ -90,6 +96,10 @@ module Aws::Backup
             Aws::Backup::Endpoints::DeleteRecoveryPoint.build(context)
           when :delete_report_plan
             Aws::Backup::Endpoints::DeleteReportPlan.build(context)
+          when :delete_restore_testing_plan
+            Aws::Backup::Endpoints::DeleteRestoreTestingPlan.build(context)
+          when :delete_restore_testing_selection
+            Aws::Backup::Endpoints::DeleteRestoreTestingSelection.build(context)
           when :describe_backup_job
             Aws::Backup::Endpoints::DescribeBackupJob.build(context)
           when :describe_backup_vault
@@ -134,8 +144,18 @@ module Aws::Backup
             Aws::Backup::Endpoints::GetLegalHold.build(context)
           when :get_recovery_point_restore_metadata
             Aws::Backup::Endpoints::GetRecoveryPointRestoreMetadata.build(context)
+          when :get_restore_job_metadata
+            Aws::Backup::Endpoints::GetRestoreJobMetadata.build(context)
+          when :get_restore_testing_inferred_metadata
+            Aws::Backup::Endpoints::GetRestoreTestingInferredMetadata.build(context)
+          when :get_restore_testing_plan
+            Aws::Backup::Endpoints::GetRestoreTestingPlan.build(context)
+          when :get_restore_testing_selection
+            Aws::Backup::Endpoints::GetRestoreTestingSelection.build(context)
           when :get_supported_resource_types
             Aws::Backup::Endpoints::GetSupportedResourceTypes.build(context)
+          when :list_backup_job_summaries
+            Aws::Backup::Endpoints::ListBackupJobSummaries.build(context)
           when :list_backup_jobs
             Aws::Backup::Endpoints::ListBackupJobs.build(context)
           when :list_backup_plan_templates
@@ -148,6 +168,8 @@ module Aws::Backup
             Aws::Backup::Endpoints::ListBackupSelections.build(context)
           when :list_backup_vaults
             Aws::Backup::Endpoints::ListBackupVaults.build(context)
+          when :list_copy_job_summaries
+            Aws::Backup::Endpoints::ListCopyJobSummaries.build(context)
           when :list_copy_jobs
             Aws::Backup::Endpoints::ListCopyJobs.build(context)
           when :list_frameworks
@@ -168,8 +190,16 @@ module Aws::Backup
             Aws::Backup::Endpoints::ListReportJobs.build(context)
           when :list_report_plans
             Aws::Backup::Endpoints::ListReportPlans.build(context)
+          when :list_restore_job_summaries
+            Aws::Backup::Endpoints::ListRestoreJobSummaries.build(context)
           when :list_restore_jobs
             Aws::Backup::Endpoints::ListRestoreJobs.build(context)
+          when :list_restore_jobs_by_protected_resource
+            Aws::Backup::Endpoints::ListRestoreJobsByProtectedResource.build(context)
+          when :list_restore_testing_plans
+            Aws::Backup::Endpoints::ListRestoreTestingPlans.build(context)
+          when :list_restore_testing_selections
+            Aws::Backup::Endpoints::ListRestoreTestingSelections.build(context)
           when :list_tags
             Aws::Backup::Endpoints::ListTags.build(context)
           when :put_backup_vault_access_policy
@@ -178,6 +208,8 @@ module Aws::Backup
             Aws::Backup::Endpoints::PutBackupVaultLockConfiguration.build(context)
           when :put_backup_vault_notifications
             Aws::Backup::Endpoints::PutBackupVaultNotifications.build(context)
+          when :put_restore_validation_result
+            Aws::Backup::Endpoints::PutRestoreValidationResult.build(context)
           when :start_backup_job
             Aws::Backup::Endpoints::StartBackupJob.build(context)
           when :start_copy_job
@@ -204,6 +236,10 @@ module Aws::Backup
             Aws::Backup::Endpoints::UpdateRegionSettings.build(context)
           when :update_report_plan
             Aws::Backup::Endpoints::UpdateReportPlan.build(context)
+          when :update_restore_testing_plan
+            Aws::Backup::Endpoints::UpdateRestoreTestingPlan.build(context)
+          when :update_restore_testing_selection
+            Aws::Backup::Endpoints::UpdateRestoreTestingSelection.build(context)
           end
         end
       end

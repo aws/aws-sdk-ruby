@@ -1,0 +1,50 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Lex
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class BadGatewayException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class BadRequestException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DependencyFailedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalFailureException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def retry_after_seconds: () -> ::String
+        def message: () -> ::String
+      end
+      class LoopDetectedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotAcceptableException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class RequestTimeoutException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedMediaTypeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

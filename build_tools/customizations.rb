@@ -174,6 +174,10 @@ module BuildTools
         end
       end
 
+      # Ensure Expires is a timestamp regardless of model to be backwards
+      # compatible. Add ExpiresString in cases where Expires cannot be parsed
+      # as a Timestamp.
+      api['shapes']['Expires'] = { 'type' => 'timestamp' }
       api['shapes']['ExpiresString'] = { 'type' => 'string' }
       %w(HeadObjectOutput GetObjectOutput).each do |shape|
         members = api['shapes'][shape]['members']

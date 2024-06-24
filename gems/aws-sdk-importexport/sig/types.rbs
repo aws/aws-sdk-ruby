@@ -1,0 +1,232 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ImportExport
+  module Types
+
+    class Artifact
+      attr_accessor description: ::String
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class BucketPermissionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CancelJobInput
+      attr_accessor job_id: ::String
+      attr_accessor api_version: ::String
+      SENSITIVE: []
+    end
+
+    class CancelJobOutput
+      attr_accessor success: bool
+      SENSITIVE: []
+    end
+
+    class CanceledJobIdException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateJobInput
+      attr_accessor job_type: ("Import" | "Export")
+      attr_accessor manifest: ::String
+      attr_accessor manifest_addendum: ::String
+      attr_accessor validate_only: bool
+      attr_accessor api_version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateJobOutput
+      attr_accessor job_id: ::String
+      attr_accessor job_type: ("Import" | "Export")
+      attr_accessor signature: ::String
+      attr_accessor signature_file_contents: ::String
+      attr_accessor warning_message: ::String
+      attr_accessor artifact_list: ::Array[Types::Artifact]
+      SENSITIVE: []
+    end
+
+    class CreateJobQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExpiredJobIdException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetShippingLabelInput
+      attr_accessor job_ids: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor company: ::String
+      attr_accessor phone_number: ::String
+      attr_accessor country: ::String
+      attr_accessor state_or_province: ::String
+      attr_accessor city: ::String
+      attr_accessor postal_code: ::String
+      attr_accessor street1: ::String
+      attr_accessor street2: ::String
+      attr_accessor street3: ::String
+      attr_accessor api_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetShippingLabelOutput
+      attr_accessor shipping_label_url: ::String
+      attr_accessor warning: ::String
+      SENSITIVE: []
+    end
+
+    class GetStatusInput
+      attr_accessor job_id: ::String
+      attr_accessor api_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetStatusOutput
+      attr_accessor job_id: ::String
+      attr_accessor job_type: ("Import" | "Export")
+      attr_accessor location_code: ::String
+      attr_accessor location_message: ::String
+      attr_accessor progress_code: ::String
+      attr_accessor progress_message: ::String
+      attr_accessor carrier: ::String
+      attr_accessor tracking_number: ::String
+      attr_accessor log_bucket: ::String
+      attr_accessor log_key: ::String
+      attr_accessor error_count: ::Integer
+      attr_accessor signature: ::String
+      attr_accessor signature_file_contents: ::String
+      attr_accessor current_manifest: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor artifact_list: ::Array[Types::Artifact]
+      SENSITIVE: []
+    end
+
+    class InvalidAccessKeyIdException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidAddressException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidCustomsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidFileSystemException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidJobIdException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidManifestFieldException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidVersionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Job
+      attr_accessor job_id: ::String
+      attr_accessor creation_date: ::Time
+      attr_accessor is_canceled: bool
+      attr_accessor job_type: ("Import" | "Export")
+      SENSITIVE: []
+    end
+
+    class ListJobsInput
+      attr_accessor max_jobs: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor api_version: ::String
+      SENSITIVE: []
+    end
+
+    class ListJobsOutput
+      attr_accessor jobs: ::Array[Types::Job]
+      attr_accessor is_truncated: bool
+      SENSITIVE: []
+    end
+
+    class MalformedManifestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MissingCustomsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MissingManifestFieldException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MissingParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MultipleRegionsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NoSuchBucketException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnableToCancelJobIdException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnableToUpdateJobIdException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateJobInput
+      attr_accessor job_id: ::String
+      attr_accessor manifest: ::String
+      attr_accessor job_type: ("Import" | "Export")
+      attr_accessor validate_only: bool
+      attr_accessor api_version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateJobOutput
+      attr_accessor success: bool
+      attr_accessor warning_message: ::String
+      attr_accessor artifact_list: ::Array[Types::Artifact]
+      SENSITIVE: []
+    end
+  end
+end

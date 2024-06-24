@@ -1,0 +1,399 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ChimeSDKMeetings
+  module Types
+
+    class Attendee
+      attr_accessor external_user_id: ::String
+      attr_accessor attendee_id: ::String
+      attr_accessor join_token: ::String
+      attr_accessor capabilities: Types::AttendeeCapabilities
+      SENSITIVE: [:external_user_id, :join_token]
+    end
+
+    class AttendeeCapabilities
+      attr_accessor audio: ("SendReceive" | "Send" | "Receive" | "None")
+      attr_accessor video: ("SendReceive" | "Send" | "Receive" | "None")
+      attr_accessor content: ("SendReceive" | "Send" | "Receive" | "None")
+      SENSITIVE: []
+    end
+
+    class AttendeeFeatures
+      attr_accessor max_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class AttendeeIdItem
+      attr_accessor attendee_id: ::String
+      SENSITIVE: []
+    end
+
+    class AudioFeatures
+      attr_accessor echo_reduction: ("AVAILABLE" | "UNAVAILABLE")
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateAttendeeRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor attendees: ::Array[Types::CreateAttendeeRequestItem]
+      SENSITIVE: []
+    end
+
+    class BatchCreateAttendeeResponse
+      attr_accessor attendees: ::Array[Types::Attendee]
+      attr_accessor errors: ::Array[Types::CreateAttendeeError]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateAttendeeCapabilitiesExceptRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor excluded_attendee_ids: ::Array[Types::AttendeeIdItem]
+      attr_accessor capabilities: Types::AttendeeCapabilities
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class ContentFeatures
+      attr_accessor max_resolution: ("None" | "FHD" | "UHD")
+      SENSITIVE: []
+    end
+
+    class CreateAttendeeError
+      attr_accessor external_user_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: [:external_user_id]
+    end
+
+    class CreateAttendeeRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor external_user_id: ::String
+      attr_accessor capabilities: Types::AttendeeCapabilities
+      SENSITIVE: [:external_user_id]
+    end
+
+    class CreateAttendeeRequestItem
+      attr_accessor external_user_id: ::String
+      attr_accessor capabilities: Types::AttendeeCapabilities
+      SENSITIVE: [:external_user_id]
+    end
+
+    class CreateAttendeeResponse
+      attr_accessor attendee: Types::Attendee
+      SENSITIVE: []
+    end
+
+    class CreateMeetingRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor media_region: ::String
+      attr_accessor meeting_host_id: ::String
+      attr_accessor external_meeting_id: ::String
+      attr_accessor notifications_configuration: Types::NotificationsConfiguration
+      attr_accessor meeting_features: Types::MeetingFeaturesConfiguration
+      attr_accessor primary_meeting_id: ::String
+      attr_accessor tenant_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:client_request_token, :meeting_host_id, :external_meeting_id]
+    end
+
+    class CreateMeetingResponse
+      attr_accessor meeting: Types::Meeting
+      SENSITIVE: []
+    end
+
+    class CreateMeetingWithAttendeesRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor media_region: ::String
+      attr_accessor meeting_host_id: ::String
+      attr_accessor external_meeting_id: ::String
+      attr_accessor meeting_features: Types::MeetingFeaturesConfiguration
+      attr_accessor notifications_configuration: Types::NotificationsConfiguration
+      attr_accessor attendees: ::Array[Types::CreateAttendeeRequestItem]
+      attr_accessor primary_meeting_id: ::String
+      attr_accessor tenant_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:client_request_token, :meeting_host_id, :external_meeting_id]
+    end
+
+    class CreateMeetingWithAttendeesResponse
+      attr_accessor meeting: Types::Meeting
+      attr_accessor attendees: ::Array[Types::Attendee]
+      attr_accessor errors: ::Array[Types::CreateAttendeeError]
+      SENSITIVE: []
+    end
+
+    class DeleteAttendeeRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor attendee_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMeetingRequest
+      attr_accessor meeting_id: ::String
+      SENSITIVE: []
+    end
+
+    class EngineTranscribeMedicalSettings
+      attr_accessor language_code: ("en-US")
+      attr_accessor specialty: ("PRIMARYCARE" | "CARDIOLOGY" | "NEUROLOGY" | "ONCOLOGY" | "RADIOLOGY" | "UROLOGY")
+      attr_accessor type: ("CONVERSATION" | "DICTATION")
+      attr_accessor vocabulary_name: ::String
+      attr_accessor region: ("us-east-1" | "us-east-2" | "us-west-2" | "ap-southeast-2" | "ca-central-1" | "eu-west-1" | "auto")
+      attr_accessor content_identification_type: ("PHI")
+      SENSITIVE: []
+    end
+
+    class EngineTranscribeSettings
+      attr_accessor language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "th-TH" | "hi-IN")
+      attr_accessor vocabulary_filter_method: ("remove" | "mask" | "tag")
+      attr_accessor vocabulary_filter_name: ::String
+      attr_accessor vocabulary_name: ::String
+      attr_accessor region: ("us-east-2" | "us-east-1" | "us-west-2" | "ap-northeast-2" | "ap-southeast-2" | "ap-northeast-1" | "ca-central-1" | "eu-central-1" | "eu-west-1" | "eu-west-2" | "sa-east-1" | "auto" | "us-gov-west-1")
+      attr_accessor enable_partial_results_stabilization: bool
+      attr_accessor partial_results_stability: ("low" | "medium" | "high")
+      attr_accessor content_identification_type: ("PII")
+      attr_accessor content_redaction_type: ("PII")
+      attr_accessor pii_entity_types: ::String
+      attr_accessor language_model_name: ::String
+      attr_accessor identify_language: bool
+      attr_accessor language_options: ::String
+      attr_accessor preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "th-TH" | "hi-IN")
+      attr_accessor vocabulary_names: ::String
+      attr_accessor vocabulary_filter_names: ::String
+      SENSITIVE: []
+    end
+
+    class ForbiddenException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAttendeeRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor attendee_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAttendeeResponse
+      attr_accessor attendee: Types::Attendee
+      SENSITIVE: []
+    end
+
+    class GetMeetingRequest
+      attr_accessor meeting_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMeetingResponse
+      attr_accessor meeting: Types::Meeting
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListAttendeesRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAttendeesResponse
+      attr_accessor attendees: ::Array[Types::Attendee]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MediaPlacement
+      attr_accessor audio_host_url: ::String
+      attr_accessor audio_fallback_url: ::String
+      attr_accessor signaling_url: ::String
+      attr_accessor turn_control_url: ::String
+      attr_accessor screen_data_url: ::String
+      attr_accessor screen_viewing_url: ::String
+      attr_accessor screen_sharing_url: ::String
+      attr_accessor event_ingestion_url: ::String
+      SENSITIVE: []
+    end
+
+    class Meeting
+      attr_accessor meeting_id: ::String
+      attr_accessor meeting_host_id: ::String
+      attr_accessor external_meeting_id: ::String
+      attr_accessor media_region: ::String
+      attr_accessor media_placement: Types::MediaPlacement
+      attr_accessor meeting_features: Types::MeetingFeaturesConfiguration
+      attr_accessor primary_meeting_id: ::String
+      attr_accessor tenant_ids: ::Array[::String]
+      attr_accessor meeting_arn: ::String
+      SENSITIVE: [:meeting_host_id, :external_meeting_id]
+    end
+
+    class MeetingFeaturesConfiguration
+      attr_accessor audio: Types::AudioFeatures
+      attr_accessor video: Types::VideoFeatures
+      attr_accessor content: Types::ContentFeatures
+      attr_accessor attendee: Types::AttendeeFeatures
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class NotificationsConfiguration
+      attr_accessor lambda_function_arn: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor sqs_queue_arn: ::String
+      SENSITIVE: [:lambda_function_arn, :sns_topic_arn, :sqs_queue_arn]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceFailureException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor retry_after_seconds: ::String
+      SENSITIVE: []
+    end
+
+    class StartMeetingTranscriptionRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor transcription_configuration: Types::TranscriptionConfiguration
+      SENSITIVE: []
+    end
+
+    class StopMeetingTranscriptionRequest
+      attr_accessor meeting_id: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class TranscriptionConfiguration
+      attr_accessor engine_transcribe_settings: Types::EngineTranscribeSettings
+      attr_accessor engine_transcribe_medical_settings: Types::EngineTranscribeMedicalSettings
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class UnprocessableEntityException
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      attr_accessor request_id: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAttendeeCapabilitiesRequest
+      attr_accessor meeting_id: ::String
+      attr_accessor attendee_id: ::String
+      attr_accessor capabilities: Types::AttendeeCapabilities
+      SENSITIVE: []
+    end
+
+    class UpdateAttendeeCapabilitiesResponse
+      attr_accessor attendee: Types::Attendee
+      SENSITIVE: []
+    end
+
+    class VideoFeatures
+      attr_accessor max_resolution: ("None" | "HD" | "FHD")
+      SENSITIVE: []
+    end
+  end
+end

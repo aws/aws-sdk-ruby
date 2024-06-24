@@ -139,6 +139,28 @@ module Aws::CloudWatchRUM
     # @!attribute [rw] guest_role_arn
     #   The ARN of the guest IAM role that is attached to the Amazon Cognito
     #   identity pool that is used to authorize the sending of data to RUM.
+    #
+    #   <note markdown="1"> It is possible that an app monitor does not have a value for
+    #   `GuestRoleArn`. For example, this can happen when you use the
+    #   console to create an app monitor and you allow CloudWatch RUM to
+    #   create a new identity pool for Authorization. In this case,
+    #   `GuestRoleArn` is not present in the [GetAppMonitor][1] response
+    #   because it is not stored by the service.
+    #
+    #    If this issue affects you, you can take one of the following steps:
+    #
+    #    * Use the Cloud Development Kit (CDK) to create an identity pool and
+    #     the associated IAM role, and use that for your app monitor.
+    #
+    #   * Make a separate [GetIdentityPoolRoles][2] call to Amazon Cognito
+    #     to retrieve the `GuestRoleArn`.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_GetAppMonitor.html
+    #   [2]: https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetIdentityPoolRoles.html
     #   @return [String]
     #
     # @!attribute [rw] identity_pool_id
@@ -295,9 +317,9 @@ module Aws::CloudWatchRUM
     # @!attribute [rw] destination
     #   The destination to send the metrics to. Valid values are
     #   `CloudWatch` and `Evidently`. If you specify `Evidently`, you must
-    #   also specify the ARN of the CloudWatchEvidently experiment that will
-    #   receive the metrics and an IAM role that has permission to write to
-    #   the experiment.
+    #   also specify the Amazon Resource Name (ARN) of the
+    #   CloudWatchEvidently experiment that will receive the metrics and an
+    #   IAM role that has permission to write to the experiment.
     #   @return [String]
     #
     # @!attribute [rw] destination_arn
@@ -530,7 +552,7 @@ module Aws::CloudWatchRUM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/monitoring/CloudWatch-RUM-get-started-authorization.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html
     #   @return [Types::AppMonitorConfiguration]
     #
     # @!attribute [rw] custom_events
@@ -997,8 +1019,8 @@ module Aws::CloudWatchRUM
 
     # Use this structure to define one extended metric or custom metric that
     # RUM will send to CloudWatch or CloudWatch Evidently. For more
-    # information, see [ Additional metrics that you can send to CloudWatch
-    # and CloudWatch Evidently][1].
+    # information, see [ Custom metrics and extended metrics that you can
+    # send to CloudWatch and CloudWatch Evidently][1].
     #
     # This structure is validated differently for extended metrics and
     # custom metrics. For extended metrics that are sent to the `AWS/RUM`
@@ -1008,8 +1030,8 @@ module Aws::CloudWatchRUM
     #
     # * Only certain combinations of values for `Name`, `ValueKey`, and
     #   `EventPattern` are valid. In addition to what is displayed in the
-    #   list below, the `EventPattern` can also include information used by
-    #   the `DimensionKeys` field.
+    #   following list, the `EventPattern` can also include information used
+    #   by the `DimensionKeys` field.
     #
     #   * If `Name` is `PerformanceNavigationDuration`, then `ValueKey`must
     #     be `event_details.duration` and the `EventPattern` must include
@@ -1059,6 +1081,20 @@ module Aws::CloudWatchRUM
     #   * If `Name` is `SessionCount`, then `ValueKey`must be null and the
     #     `EventPattern` must include
     #     `\{"event_type":["com.amazon.rum.session_start_event"]\}`
+    #
+    #   * If `Name` is `PageViewCount`, then `ValueKey`must be null and the
+    #     `EventPattern` must include
+    #     `\{"event_type":["com.amazon.rum.page_view_event"]\}`
+    #
+    #   * If `Name` is `Http4xxCount`, then `ValueKey`must be null and the
+    #     `EventPattern` must include `\{"event_type":
+    #     ["com.amazon.rum.http_event"],"event_details":\{"response":\{"status":[\{"numeric":[">=",400,"<",500]\}]\}\}\}
+    #     \}`
+    #
+    #   * If `Name` is `Http5xxCount`, then `ValueKey`must be null and the
+    #     `EventPattern` must include `\{"event_type":
+    #     ["com.amazon.rum.http_event"],"event_details":\{"response":\{"status":[\{"numeric":[">=",500,"<=",599]\}]\}\}\}
+    #     \}`
     #
     # For custom metrics, the following validation rules apply:
     #
@@ -1123,7 +1159,7 @@ module Aws::CloudWatchRUM
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-and-extended-metrics.html
     # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-datacollected.html#CloudWatch-RUM-datacollected-eventDetails
     #
     # @!attribute [rw] dimension_keys
@@ -1175,7 +1211,7 @@ module Aws::CloudWatchRUM
     #     "event_details": \{ "duration": [\{ "numeric": [ ">=", 2000, "<",
     #     8000 ] \}] \} \}'`
     #
-    #   If the metrics destination' is `CloudWatch` and the event also
+    #   If the metrics destination is `CloudWatch` and the event also
     #   matches a value in `DimensionKeys`, then the metric is published
     #   with the specified dimensions.
     #   @return [String]
@@ -1228,12 +1264,12 @@ module Aws::CloudWatchRUM
     #   from.
     #
     #   If you omit this field, a hardcoded value of 1 is pushed as the
-    #   metric value. This is useful if you just want to count the number of
+    #   metric value. This is useful if you want to count the number of
     #   events that the filter catches.
     #
     #   If this metric is sent to CloudWatch Evidently, this field will be
-    #   passed to Evidently raw and Evidently will handle data extraction
-    #   from the event.
+    #   passed to Evidently raw. Evidently will handle data extraction from
+    #   the event.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/MetricDefinitionRequest AWS API Documentation
@@ -1336,11 +1372,21 @@ module Aws::CloudWatchRUM
     #
     # @!attribute [rw] iam_role_arn
     #   This parameter is required if `Destination` is `Evidently`. If
-    #   `Destination` is `CloudWatch`, do not use this parameter.
+    #   `Destination` is `CloudWatch`, don't use this parameter.
     #
     #   This parameter specifies the ARN of an IAM role that RUM will assume
     #   to write to the Evidently experiment that you are sending metrics
     #   to. This role must have permission to write to that experiment.
+    #
+    #   If you specify this parameter, you must be signed on to a role that
+    #   has [PassRole][1] permissions attached to it, to allow the role to
+    #   be passed. The [ CloudWatchAmazonCloudWatchRUMFullAccess][2] policy
+    #   doesn't include `PassRole` permissions.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/auth-and-access-control-cw.html#managed-policies-cloudwatch-RUM
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rum-2018-05-10/PutRumMetricsDestinationRequest AWS API Documentation
@@ -1573,7 +1619,7 @@ module Aws::CloudWatchRUM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/monitoring/CloudWatch-RUM-get-started-authorization.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html
     #   @return [Types::AppMonitorConfiguration]
     #
     # @!attribute [rw] custom_events

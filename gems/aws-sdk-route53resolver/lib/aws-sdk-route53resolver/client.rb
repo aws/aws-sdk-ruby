@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Route53Resolver
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Route53Resolver
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::Route53Resolver
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::Route53Resolver
     #   @option options [Aws::Route53Resolver::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Route53Resolver::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -541,9 +566,11 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
-    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.outpost_arn #=> String
     #   resp.resolver_endpoint.preferred_instance_type #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.protocols #=> Array
+    #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/AssociateResolverEndpointIpAddress AWS API Documentation
     #
@@ -811,6 +838,58 @@ module Aws::Route53Resolver
     # @option params [required, String] :name
     #   A name that lets you identify the rule in the rule group.
     #
+    # @option params [String] :firewall_domain_redirection_action
+    #   How you want the the rule to evaluate DNS redirection in the DNS
+    #   redirection chain, such as CNAME or DNAME.
+    #
+    #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
+    #   redirection chain. The individual domains in the redirection chain
+    #   must be added to the domain list.
+    #
+    #   `Trust_Redirection_Domain ` inspects only the first domain in the
+    #   redirection chain. You don't need to add the subsequent domains in
+    #   the domain in the redirection list to the domain list.
+    #
+    # @option params [String] :qtype
+    #   The DNS query type you want the rule to evaluate. Allowed values are;
+    #
+    #   * A: Returns an IPv4 address.
+    #
+    #   * AAAA: Returns an Ipv6 address.
+    #
+    #   * CAA: Restricts CAs that can create SSL/TLS certifications for the
+    #     domain.
+    #
+    #   * CNAME: Returns another domain name.
+    #
+    #   * DS: Record that identifies the DNSSEC signing key of a delegated
+    #     zone.
+    #
+    #   * MX: Specifies mail servers.
+    #
+    #   * NAPTR: Regular-expression-based rewriting of domain names.
+    #
+    #   * NS: Authoritative name servers.
+    #
+    #   * PTR: Maps an IP address to a domain name.
+    #
+    #   * SOA: Start of authority record for the zone.
+    #
+    #   * SPF: Lists the servers authorized to send emails from a domain.
+    #
+    #   * SRV: Application specific values that identify servers.
+    #
+    #   * TXT: Verifies email senders and application-specific values.
+    #
+    #   * A query type you define by using the DNS type ID, for example 28 for
+    #     AAAA. The values must be defined as TYPENUMBER, where the NUMBER can
+    #     be 1-65334, for example, TYPE28. For more information, see [List of
+    #     DNS record types][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+    #
     # @return [Types::CreateFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFirewallRuleResponse#firewall_rule #firewall_rule} => Types::FirewallRule
@@ -828,6 +907,8 @@ module Aws::Route53Resolver
     #     block_override_dns_type: "CNAME", # accepts CNAME
     #     block_override_ttl: 1,
     #     name: "Name", # required
+    #     firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN", # accepts INSPECT_REDIRECTION_DOMAIN, TRUST_REDIRECTION_DOMAIN
+    #     qtype: "Qtype",
     #   })
     #
     # @example Response structure
@@ -844,6 +925,8 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.creator_request_id #=> String
     #   resp.firewall_rule.creation_time #=> String
     #   resp.firewall_rule.modification_time #=> String
+    #   resp.firewall_rule.firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
+    #   resp.firewall_rule.qtype #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateFirewallRule AWS API Documentation
     #
@@ -913,7 +996,7 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
-    # Creates an Route 53 Resolver on an Outpost.
+    # Creates a Route 53 Resolver on an Outpost.
     #
     # @option params [required, String] :creator_request_id
     #   A unique string that identifies the request and that allows failed
@@ -1013,6 +1096,18 @@ module Aws::Route53Resolver
     #   outbound access, open the port that you're using for DNS queries on
     #   your network.
     #
+    #   Some security group rules will cause your connection to be tracked.
+    #   For outbound resolver endpoint, it can potentially impact the maximum
+    #   queries per second from outbound endpoint to your target name server.
+    #   For inbound resolver endpoint, it can bring down the overall maximum
+    #   queries per second per IP address to as low as 1500. To avoid
+    #   connection tracking caused by security group, see [Untracked
+    #   connections][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#untracked-connectionsl
+    #
     # @option params [required, String] :direction
     #   Specify the applicable value:
     #
@@ -1027,6 +1122,19 @@ module Aws::Route53Resolver
     #   from (for outbound endpoints) or that you forward DNS queries to (for
     #   inbound endpoints). The subnet ID uniquely identifies a VPC.
     #
+    #   <note markdown="1"> Even though the minimum is 1, Route 53 requires that you create at
+    #   least two.
+    #
+    #    </note>
+    #
+    # @option params [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the Outpost. If you specify this,
+    #   you must also specify a value for the `PreferredInstanceType`.
+    #
+    # @option params [String] :preferred_instance_type
+    #   The instance type. If you specify this, you must also specify a value
+    #   for the `OutpostArn`.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   A list of the tag keys and values that you want to associate with the
     #   endpoint.
@@ -1036,13 +1144,33 @@ module Aws::Route53Resolver
     #   A dual-stack endpoint means that it will resolve via both IPv4 and
     #   IPv6. This endpoint type is applied to all IP addresses.
     #
-    # @option params [String] :outpost_arn
-    #   The Amazon Resource Name (ARN) of the Outpost. If you specify this,
-    #   you must also specify a value for the `PreferredInstanceType`.
+    # @option params [Array<String>] :protocols
+    #   The protocols you want to use for the endpoint. DoH-FIPS is applicable
+    #   for inbound endpoints only.
     #
-    # @option params [String] :preferred_instance_type
-    #   The instance type. If you specify this, you must also specify a value
-    #   for the `OutpostArn`.
+    #   For an inbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 and DoH-FIPS in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * DoH-FIPS alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   For an outbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * None, which is treated as Do53.
     #
     # @return [Types::CreateResolverEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1062,6 +1190,8 @@ module Aws::Route53Resolver
     #         ipv_6: "Ipv6",
     #       },
     #     ],
+    #     outpost_arn: "OutpostArn",
+    #     preferred_instance_type: "OutpostInstanceType",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1069,8 +1199,7 @@ module Aws::Route53Resolver
     #       },
     #     ],
     #     resolver_endpoint_type: "IPV6", # accepts IPV6, IPV4, DUALSTACK
-    #     outpost_arn: "OutpostArn",
-    #     preferred_instance_type: "OutpostInstanceType",
+    #     protocols: ["DoH"], # accepts DoH, Do53, DoH-FIPS
     #   })
     #
     # @example Response structure
@@ -1088,9 +1217,11 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
-    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.outpost_arn #=> String
     #   resp.resolver_endpoint.preferred_instance_type #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.protocols #=> Array
+    #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateResolverEndpoint AWS API Documentation
     #
@@ -1230,7 +1361,7 @@ module Aws::Route53Resolver
     #   Currently, only Resolver can create rules that have a value of
     #   `RECURSIVE` for `RuleType`.
     #
-    # @option params [required, String] :domain_name
+    # @option params [String] :domain_name
     #   DNS queries for this domain name are forwarded to the IP addresses
     #   that you specify in `TargetIps`. If a query matches multiple Resolver
     #   rules (example.com and www.example.com), outbound DNS queries are
@@ -1263,12 +1394,13 @@ module Aws::Route53Resolver
     #     creator_request_id: "CreatorRequestId", # required
     #     name: "Name",
     #     rule_type: "FORWARD", # required, accepts FORWARD, SYSTEM, RECURSIVE
-    #     domain_name: "DomainName", # required
+    #     domain_name: "DomainName",
     #     target_ips: [
     #       {
     #         ip: "Ip",
     #         port: 1,
     #         ipv_6: "Ipv6",
+    #         protocol: "DoH", # accepts DoH, Do53, DoH-FIPS
     #       },
     #     ],
     #     resolver_endpoint_id: "ResourceId",
@@ -1294,6 +1426,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips[0].ip #=> String
     #   resp.resolver_rule.target_ips[0].port #=> Integer
     #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
+    #   resp.resolver_rule.target_ips[0].protocol #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -1355,6 +1488,47 @@ module Aws::Route53Resolver
     # @option params [required, String] :firewall_domain_list_id
     #   The ID of the domain list that's used in the rule.
     #
+    # @option params [String] :qtype
+    #   The DNS query type that the rule you are deleting evaluates. Allowed
+    #   values are;
+    #
+    #   * A: Returns an IPv4 address.
+    #
+    #   * AAAA: Returns an Ipv6 address.
+    #
+    #   * CAA: Restricts CAs that can create SSL/TLS certifications for the
+    #     domain.
+    #
+    #   * CNAME: Returns another domain name.
+    #
+    #   * DS: Record that identifies the DNSSEC signing key of a delegated
+    #     zone.
+    #
+    #   * MX: Specifies mail servers.
+    #
+    #   * NAPTR: Regular-expression-based rewriting of domain names.
+    #
+    #   * NS: Authoritative name servers.
+    #
+    #   * PTR: Maps an IP address to a domain name.
+    #
+    #   * SOA: Start of authority record for the zone.
+    #
+    #   * SPF: Lists the servers authorized to send emails from a domain.
+    #
+    #   * SRV: Application specific values that identify servers.
+    #
+    #   * TXT: Verifies email senders and application-specific values.
+    #
+    #   * A query type you define by using the DNS type ID, for example 28 for
+    #     AAAA. The values must be defined as TYPENUMBER, where the NUMBER can
+    #     be 1-65334, for example, TYPE28. For more information, see [List of
+    #     DNS record types][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+    #
     # @return [Types::DeleteFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteFirewallRuleResponse#firewall_rule #firewall_rule} => Types::FirewallRule
@@ -1364,6 +1538,7 @@ module Aws::Route53Resolver
     #   resp = client.delete_firewall_rule({
     #     firewall_rule_group_id: "ResourceId", # required
     #     firewall_domain_list_id: "ResourceId", # required
+    #     qtype: "Qtype",
     #   })
     #
     # @example Response structure
@@ -1380,6 +1555,8 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.creator_request_id #=> String
     #   resp.firewall_rule.creation_time #=> String
     #   resp.firewall_rule.modification_time #=> String
+    #   resp.firewall_rule.firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
+    #   resp.firewall_rule.qtype #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteFirewallRule AWS API Documentation
     #
@@ -1505,9 +1682,11 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
-    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.outpost_arn #=> String
     #   resp.resolver_endpoint.preferred_instance_type #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.protocols #=> Array
+    #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteResolverEndpoint AWS API Documentation
     #
@@ -1612,6 +1791,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips[0].ip #=> String
     #   resp.resolver_rule.target_ips[0].port #=> Integer
     #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
+    #   resp.resolver_rule.target_ips[0].protocol #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -1717,9 +1897,11 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
-    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.outpost_arn #=> String
     #   resp.resolver_endpoint.preferred_instance_type #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.protocols #=> Array
+    #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DisassociateResolverEndpointIpAddress AWS API Documentation
     #
@@ -2145,9 +2327,11 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
-    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.outpost_arn #=> String
     #   resp.resolver_endpoint.preferred_instance_type #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.protocols #=> Array
+    #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverEndpoint AWS API Documentation
     #
@@ -2298,6 +2482,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips[0].ip #=> String
     #   resp.resolver_rule.target_ips[0].port #=> Integer
     #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
+    #   resp.resolver_rule.target_ips[0].protocol #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -2851,6 +3036,8 @@ module Aws::Route53Resolver
     #   resp.firewall_rules[0].creator_request_id #=> String
     #   resp.firewall_rules[0].creation_time #=> String
     #   resp.firewall_rules[0].modification_time #=> String
+    #   resp.firewall_rules[0].firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
+    #   resp.firewall_rules[0].qtype #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListFirewallRules AWS API Documentation
     #
@@ -3155,9 +3342,11 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoints[0].status_message #=> String
     #   resp.resolver_endpoints[0].creation_time #=> String
     #   resp.resolver_endpoints[0].modification_time #=> String
-    #   resp.resolver_endpoints[0].resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoints[0].outpost_arn #=> String
     #   resp.resolver_endpoints[0].preferred_instance_type #=> String
+    #   resp.resolver_endpoints[0].resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoints[0].protocols #=> Array
+    #   resp.resolver_endpoints[0].protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverEndpoints AWS API Documentation
     #
@@ -3589,6 +3778,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rules[0].target_ips[0].ip #=> String
     #   resp.resolver_rules[0].target_ips[0].port #=> Integer
     #   resp.resolver_rules[0].target_ips[0].ipv_6 #=> String
+    #   resp.resolver_rules[0].target_ips[0].protocol #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_rules[0].resolver_endpoint_id #=> String
     #   resp.resolver_rules[0].owner_id #=> String
     #   resp.resolver_rules[0].share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -4073,6 +4263,58 @@ module Aws::Route53Resolver
     # @option params [String] :name
     #   The name of the rule.
     #
+    # @option params [String] :firewall_domain_redirection_action
+    #   How you want the the rule to evaluate DNS redirection in the DNS
+    #   redirection chain, such as CNAME or DNAME.
+    #
+    #   `Inspect_Redirection_Domain `(Default) inspects all domains in the
+    #   redirection chain. The individual domains in the redirection chain
+    #   must be added to the domain list.
+    #
+    #   `Trust_Redirection_Domain ` inspects only the first domain in the
+    #   redirection chain. You don't need to add the subsequent domains in
+    #   the domain in the redirection list to the domain list.
+    #
+    # @option params [String] :qtype
+    #   The DNS query type you want the rule to evaluate. Allowed values are;
+    #
+    #   * A: Returns an IPv4 address.
+    #
+    #   * AAAA: Returns an Ipv6 address.
+    #
+    #   * CAA: Restricts CAs that can create SSL/TLS certifications for the
+    #     domain.
+    #
+    #   * CNAME: Returns another domain name.
+    #
+    #   * DS: Record that identifies the DNSSEC signing key of a delegated
+    #     zone.
+    #
+    #   * MX: Specifies mail servers.
+    #
+    #   * NAPTR: Regular-expression-based rewriting of domain names.
+    #
+    #   * NS: Authoritative name servers.
+    #
+    #   * PTR: Maps an IP address to a domain name.
+    #
+    #   * SOA: Start of authority record for the zone.
+    #
+    #   * SPF: Lists the servers authorized to send emails from a domain.
+    #
+    #   * SRV: Application specific values that identify servers.
+    #
+    #   * TXT: Verifies email senders and application-specific values.
+    #
+    #   * A query type you define by using the DNS type ID, for example 28 for
+    #     AAAA. The values must be defined as TYPENUMBER, where the NUMBER can
+    #     be 1-65334, for example, TYPE28. For more information, see [List of
+    #     DNS record types][1].
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
+    #
     # @return [Types::UpdateFirewallRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFirewallRuleResponse#firewall_rule #firewall_rule} => Types::FirewallRule
@@ -4089,6 +4331,8 @@ module Aws::Route53Resolver
     #     block_override_dns_type: "CNAME", # accepts CNAME
     #     block_override_ttl: 1,
     #     name: "Name",
+    #     firewall_domain_redirection_action: "INSPECT_REDIRECTION_DOMAIN", # accepts INSPECT_REDIRECTION_DOMAIN, TRUST_REDIRECTION_DOMAIN
+    #     qtype: "Qtype",
     #   })
     #
     # @example Response structure
@@ -4105,6 +4349,8 @@ module Aws::Route53Resolver
     #   resp.firewall_rule.creator_request_id #=> String
     #   resp.firewall_rule.creation_time #=> String
     #   resp.firewall_rule.modification_time #=> String
+    #   resp.firewall_rule.firewall_domain_redirection_action #=> String, one of "INSPECT_REDIRECTION_DOMAIN", "TRUST_REDIRECTION_DOMAIN"
+    #   resp.firewall_rule.qtype #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateFirewallRule AWS API Documentation
     #
@@ -4326,7 +4572,7 @@ module Aws::Route53Resolver
       req.send_request(options)
     end
 
-    # Updates the name, or enpoint type for an inbound or an outbound
+    # Updates the name, or endpoint type for an inbound or an outbound
     # Resolver endpoint. You can only update between IPV4 and DUALSTACK,
     # IPV6 endpoint type can't be updated to other type.
     #
@@ -4347,6 +4593,42 @@ module Aws::Route53Resolver
     #   IPv4 to dual-stack. If you don't specify an IPv6 address, one will be
     #   automatically chosen from your subnet.
     #
+    # @option params [Array<String>] :protocols
+    #   The protocols you want to use for the endpoint. DoH-FIPS is applicable
+    #   for inbound endpoints only.
+    #
+    #   For an inbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 and DoH-FIPS in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * DoH-FIPS alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   For an outbound endpoint you can apply the protocols as follows:
+    #
+    #   * Do53 and DoH in combination.
+    #
+    #   * Do53 alone.
+    #
+    #   * DoH alone.
+    #
+    #   * None, which is treated as Do53.
+    #
+    #   You can't change the protocol of an inbound endpoint directly from
+    #   only Do53 to only DoH, or DoH-FIPS. This is to prevent a sudden
+    #   disruption to incoming traffic that relies on Do53. To change the
+    #   protocol from Do53 to DoH, or DoH-FIPS, you must first enable both
+    #   Do53 and DoH, or Do53 and DoH-FIPS, to make sure that all incoming
+    #   traffic has transferred to using the DoH protocol, or DoH-FIPS, and
+    #   then remove the Do53.
+    #
     # @return [Types::UpdateResolverEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateResolverEndpointResponse#resolver_endpoint #resolver_endpoint} => Types::ResolverEndpoint
@@ -4363,6 +4645,7 @@ module Aws::Route53Resolver
     #         ipv_6: "Ipv6", # required
     #       },
     #     ],
+    #     protocols: ["DoH"], # accepts DoH, Do53, DoH-FIPS
     #   })
     #
     # @example Response structure
@@ -4380,9 +4663,11 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.status_message #=> String
     #   resp.resolver_endpoint.creation_time #=> String
     #   resp.resolver_endpoint.modification_time #=> String
-    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
     #   resp.resolver_endpoint.outpost_arn #=> String
     #   resp.resolver_endpoint.preferred_instance_type #=> String
+    #   resp.resolver_endpoint.resolver_endpoint_type #=> String, one of "IPV6", "IPV4", "DUALSTACK"
+    #   resp.resolver_endpoint.protocols #=> Array
+    #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverEndpoint AWS API Documentation
     #
@@ -4418,6 +4703,7 @@ module Aws::Route53Resolver
     #           ip: "Ip",
     #           port: 1,
     #           ipv_6: "Ipv6",
+    #           protocol: "DoH", # accepts DoH, Do53, DoH-FIPS
     #         },
     #       ],
     #       resolver_endpoint_id: "ResourceId",
@@ -4438,6 +4724,7 @@ module Aws::Route53Resolver
     #   resp.resolver_rule.target_ips[0].ip #=> String
     #   resp.resolver_rule.target_ips[0].port #=> Integer
     #   resp.resolver_rule.target_ips[0].ipv_6 #=> String
+    #   resp.resolver_rule.target_ips[0].protocol #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_rule.resolver_endpoint_id #=> String
     #   resp.resolver_rule.owner_id #=> String
     #   resp.resolver_rule.share_status #=> String, one of "NOT_SHARED", "SHARED_WITH_ME", "SHARED_BY_ME"
@@ -4466,7 +4753,7 @@ module Aws::Route53Resolver
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

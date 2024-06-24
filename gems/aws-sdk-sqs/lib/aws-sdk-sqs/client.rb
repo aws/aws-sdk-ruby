@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -32,7 +33,7 @@ require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/sign.rb'
-require 'aws-sdk-core/plugins/protocols/query.rb'
+require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-sqs/plugins/queue_urls.rb'
 require 'aws-sdk-sqs/plugins/md5s.rb'
 
@@ -74,6 +75,7 @@ module Aws::SQS
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -84,7 +86,7 @@ module Aws::SQS
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Sign)
-    add_plugin(Aws::Plugins::Protocols::Query)
+    add_plugin(Aws::Plugins::Protocols::JsonRpc)
     add_plugin(Aws::SQS::Plugins::QueueUrls)
     add_plugin(Aws::SQS::Plugins::Md5s)
     add_plugin(Aws::SQS::Plugins::Endpoints)
@@ -200,10 +202,17 @@ module Aws::SQS
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -296,12 +305,23 @@ module Aws::SQS
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
     #   @option options [String] :session_token
+    #
+    #   @option options [Boolean] :simple_json (false)
+    #     Disables request parameter conversion, validation, and formatting.
+    #     Also disable response data type conversions. This option is useful
+    #     when you want to ensure the highest level of performance by
+    #     avoiding overhead of walking request parameters and response data
+    #     structures.
+    #
+    #     When `:simple_json` is enabled, the request parameters hash must
+    #     be formatted exactly as the DynamoDB API expects.
     #
     #   @option options [Boolean] :stub_responses (false)
     #     Causes the client to return stubbed responses. By default
@@ -347,50 +367,65 @@ module Aws::SQS
     #   @option options [Aws::SQS::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::SQS::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -507,8 +542,6 @@ module Aws::SQS
     #   queue is the dead-letter queue (DLQ), while the destination queue
     #   can be the original source queue (from which the messages were
     #   driven to the dead-letter-queue), or a custom destination queue.
-    #
-    # * Currently, only standard queues are supported.
     #
     # * Only one active message movement task is supported per queue at any
     #   given time.
@@ -1536,8 +1569,6 @@ module Aws::SQS
     #   can be the original source queue (from which the messages were
     #   driven to the dead-letter-queue), or a custom destination queue.
     #
-    # * Currently, only standard queues are supported.
-    #
     # * Only one active message movement task is supported per queue at any
     #   given time.
     #
@@ -1799,6 +1830,54 @@ module Aws::SQS
     #   Queue URLs and names are case-sensitive.
     #
     # @option params [Array<String>] :attribute_names
+    #   This parameter has been deprecated but will be supported for backward
+    #   compatibility. To provide attribute names, you are encouraged to use
+    #   `MessageSystemAttributeNames`.
+    #
+    #   A list of attributes that need to be returned along with each message.
+    #   These attributes include:
+    #
+    #   * `All` – Returns all values.
+    #
+    #   * `ApproximateFirstReceiveTimestamp` – Returns the time the message
+    #     was first received from the queue ([epoch time][1] in milliseconds).
+    #
+    #   * `ApproximateReceiveCount` – Returns the number of times a message
+    #     has been received across all queues but not deleted.
+    #
+    #   * `AWSTraceHeader` – Returns the X-Ray trace header string.
+    #
+    #   * `SenderId`
+    #
+    #     * For a user, returns the user ID, for example
+    #       `ABCDEFGHI1JKLMNOPQ23R`.
+    #
+    #     * For an IAM role, returns the IAM role ID, for example
+    #       `ABCDE1F2GH3I4JK5LMNOP:i-a123b456`.
+    #
+    #   * `SentTimestamp` – Returns the time the message was sent to the queue
+    #     ([epoch time][1] in milliseconds).
+    #
+    #   * `SqsManagedSseEnabled` – Enables server-side queue encryption using
+    #     SQS owned encryption keys. Only one server-side encryption option is
+    #     supported per queue (for example, [SSE-KMS][2] or [SSE-SQS][3]).
+    #
+    #   * `MessageDeduplicationId` – Returns the value provided by the
+    #     producer that calls the ` SendMessage ` action.
+    #
+    #   * `MessageGroupId` – Returns the value provided by the producer that
+    #     calls the ` SendMessage ` action. Messages with the same
+    #     `MessageGroupId` are returned in sequence.
+    #
+    #   * `SequenceNumber` – Returns the value provided by Amazon SQS.
+    #
+    #
+    #
+    #   [1]: http://en.wikipedia.org/wiki/Unix_time
+    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html
+    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html
+    #
+    # @option params [Array<String>] :message_system_attribute_names
     #   A list of attributes that need to be returned along with each message.
     #   These attributes include:
     #
@@ -1878,8 +1957,8 @@ module Aws::SQS
     #   The duration (in seconds) for which the call waits for a message to
     #   arrive in the queue before returning. If a message is available, the
     #   call returns sooner than `WaitTimeSeconds`. If no messages are
-    #   available and the wait time expires, the call returns successfully
-    #   with an empty list of messages.
+    #   available and the wait time expires, the call does not return a
+    #   message list.
     #
     #   To avoid HTTP errors, ensure that the HTTP response timeout for
     #   `ReceiveMessage` requests is longer than the `WaitTimeSeconds`
@@ -1907,10 +1986,6 @@ module Aws::SQS
     #
     #   * When you set `FifoQueue`, a caller of the `ReceiveMessage` action
     #     can provide a `ReceiveRequestAttemptId` explicitly.
-    #
-    #   * If a caller of the `ReceiveMessage` action doesn't provide a
-    #     `ReceiveRequestAttemptId`, Amazon SQS generates a
-    #     `ReceiveRequestAttemptId`.
     #
     #   * It is possible to retry the `ReceiveMessage` action with the same
     #     `ReceiveRequestAttemptId` if none of the messages have been modified
@@ -1966,6 +2041,7 @@ module Aws::SQS
     #   resp = client.receive_message({
     #     queue_url: "String", # required
     #     attribute_names: ["All"], # accepts All, Policy, VisibilityTimeout, MaximumMessageSize, MessageRetentionPeriod, ApproximateNumberOfMessages, ApproximateNumberOfMessagesNotVisible, CreatedTimestamp, LastModifiedTimestamp, QueueArn, ApproximateNumberOfMessagesDelayed, DelaySeconds, ReceiveMessageWaitTimeSeconds, RedrivePolicy, FifoQueue, ContentBasedDeduplication, KmsMasterKeyId, KmsDataKeyReusePeriodSeconds, DeduplicationScope, FifoThroughputLimit, RedriveAllowPolicy, SqsManagedSseEnabled
+    #     message_system_attribute_names: ["All"], # accepts All, SenderId, SentTimestamp, ApproximateReceiveCount, ApproximateFirstReceiveTimestamp, SequenceNumber, MessageDeduplicationId, MessageGroupId, AWSTraceHeader, DeadLetterQueueSourceArn
     #     message_attribute_names: ["MessageAttributeName"],
     #     max_number_of_messages: 1,
     #     visibility_timeout: 1,
@@ -2050,13 +2126,17 @@ module Aws::SQS
     # Delivers a message to the specified queue.
     #
     # A message can include only XML, JSON, and unformatted text. The
-    # following Unicode characters are allowed:
+    # following Unicode characters are allowed. For more information, see
+    # the [W3C specification for characters][1].
     #
     #  `#x9` \| `#xA` \| `#xD` \| `#x20` to `#xD7FF` \| `#xE000` to `#xFFFD`
     # \| `#x10000` to `#x10FFFF`
     #
-    #  Any characters not included in this list will be rejected. For more
-    # information, see the [W3C specification for characters][1].
+    #  Amazon SQS does not throw an exception or completely reject the
+    # message if it contains invalid characters. Instead, it replaces those
+    # invalid characters with `U+FFFD` before storing the message in the
+    # queue, as long as the message body contains at least one valid
+    # character.
     #
     #
     #
@@ -2072,13 +2152,17 @@ module Aws::SQS
     #   size is 256 KiB.
     #
     #   A message can include only XML, JSON, and unformatted text. The
-    #   following Unicode characters are allowed:
+    #   following Unicode characters are allowed. For more information, see
+    #   the [W3C specification for characters][1].
     #
     #    `#x9` \| `#xA` \| `#xD` \| `#x20` to `#xD7FF` \| `#xE000` to `#xFFFD`
     #   \| `#x10000` to `#x10FFFF`
     #
-    #    Any characters not included in this list will be rejected. For more
-    #   information, see the [W3C specification for characters][1].
+    #    Amazon SQS does not throw an exception or completely reject the
+    #   message if it contains invalid characters. Instead, it replaces those
+    #   invalid characters with `U+FFFD` before storing the message in the
+    #   queue, as long as the message body contains at least one valid
+    #   character.
     #
     #
     #
@@ -2197,8 +2281,8 @@ module Aws::SQS
     #     `MessageGroupId` values. For each `MessageGroupId`, the messages are
     #     sorted by time sent. The caller can't specify a `MessageGroupId`.
     #
-    #   The length of `MessageGroupId` is 128 characters. Valid values:
-    #   alphanumeric characters and punctuation ``
+    #   The maximum length of `MessageGroupId` is 128 characters. Valid
+    #   values: alphanumeric characters and punctuation ``
     #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
     #
     #   For best practices of using `MessageGroupId`, see [Using the
@@ -2280,13 +2364,17 @@ module Aws::SQS
     # messages) are both 256 KiB (262,144 bytes).
     #
     # A message can include only XML, JSON, and unformatted text. The
-    # following Unicode characters are allowed:
+    # following Unicode characters are allowed. For more information, see
+    # the [W3C specification for characters][1].
     #
     #  `#x9` \| `#xA` \| `#xD` \| `#x20` to `#xD7FF` \| `#xE000` to `#xFFFD`
     # \| `#x10000` to `#x10FFFF`
     #
-    #  Any characters not included in this list will be rejected. For more
-    # information, see the [W3C specification for characters][1].
+    #  Amazon SQS does not throw an exception or completely reject the
+    # message if it contains invalid characters. Instead, it replaces those
+    # invalid characters with `U+FFFD` before storing the message in the
+    # queue, as long as the message body contains at least one valid
+    # character.
     #
     # If you don't specify the `DelaySeconds` parameter for an entry,
     # Amazon SQS uses the default value for the queue.
@@ -2365,13 +2453,14 @@ module Aws::SQS
       req.send_request(options)
     end
 
-    # Sets the value of one or more queue attributes. When you change a
-    # queue's attributes, the change can take up to 60 seconds for most of
-    # the attributes to propagate throughout the Amazon SQS system. Changes
-    # made to the `MessageRetentionPeriod` attribute can take up to 15
-    # minutes and will impact existing messages in the queue potentially
-    # causing them to be expired and deleted if the `MessageRetentionPeriod`
-    # is reduced below the age of existing messages.
+    # Sets the value of one or more queue attributes, like a policy. When
+    # you change a queue's attributes, the change can take up to 60 seconds
+    # for most of the attributes to propagate throughout the Amazon SQS
+    # system. Changes made to the `MessageRetentionPeriod` attribute can
+    # take up to 15 minutes and will impact existing messages in the queue
+    # potentially causing them to be expired and deleted if the
+    # `MessageRetentionPeriod` is reduced below the age of existing
+    # messages.
     #
     # <note markdown="1"> * In the future, new attributes might be added. If you write code that
     #   calls this action, we recommend that you structure your code so that
@@ -2619,9 +2708,6 @@ module Aws::SQS
     #   original source queue (from which the messages were driven to the
     #   dead-letter-queue), or a custom destination queue.
     #
-    # * Currently, only standard queues support redrive. FIFO queues don't
-    #   support redrive.
-    #
     # * Only one active message movement task is supported per queue at any
     #   given time.
     #
@@ -2786,7 +2872,7 @@ module Aws::SQS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sqs'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

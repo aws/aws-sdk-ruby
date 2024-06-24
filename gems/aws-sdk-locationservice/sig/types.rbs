@@ -1,0 +1,1362 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::LocationService
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ApiKeyFilter
+      attr_accessor key_status: ("Active" | "Expired")
+      SENSITIVE: []
+    end
+
+    class ApiKeyRestrictions
+      attr_accessor allow_actions: ::Array[::String]
+      attr_accessor allow_resources: ::Array[::String]
+      attr_accessor allow_referers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociateTrackerConsumerRequest
+      attr_accessor tracker_name: ::String
+      attr_accessor consumer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateTrackerConsumerResponse < Aws::EmptyStructure
+    end
+
+    class BatchDeleteDevicePositionHistoryError
+      attr_accessor device_id: ::String
+      attr_accessor error: Types::BatchItemError
+      SENSITIVE: []
+    end
+
+    class BatchDeleteDevicePositionHistoryRequest
+      attr_accessor tracker_name: ::String
+      attr_accessor device_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteDevicePositionHistoryResponse
+      attr_accessor errors: ::Array[Types::BatchDeleteDevicePositionHistoryError]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteGeofenceError
+      attr_accessor geofence_id: ::String
+      attr_accessor error: Types::BatchItemError
+      SENSITIVE: []
+    end
+
+    class BatchDeleteGeofenceRequest
+      attr_accessor collection_name: ::String
+      attr_accessor geofence_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteGeofenceResponse
+      attr_accessor errors: ::Array[Types::BatchDeleteGeofenceError]
+      SENSITIVE: []
+    end
+
+    class BatchEvaluateGeofencesError
+      attr_accessor device_id: ::String
+      attr_accessor sample_time: ::Time
+      attr_accessor error: Types::BatchItemError
+      SENSITIVE: []
+    end
+
+    class BatchEvaluateGeofencesRequest
+      attr_accessor collection_name: ::String
+      attr_accessor device_position_updates: ::Array[Types::DevicePositionUpdate]
+      SENSITIVE: []
+    end
+
+    class BatchEvaluateGeofencesResponse
+      attr_accessor errors: ::Array[Types::BatchEvaluateGeofencesError]
+      SENSITIVE: []
+    end
+
+    class BatchGetDevicePositionError
+      attr_accessor device_id: ::String
+      attr_accessor error: Types::BatchItemError
+      SENSITIVE: []
+    end
+
+    class BatchGetDevicePositionRequest
+      attr_accessor tracker_name: ::String
+      attr_accessor device_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetDevicePositionResponse
+      attr_accessor errors: ::Array[Types::BatchGetDevicePositionError]
+      attr_accessor device_positions: ::Array[Types::DevicePosition]
+      SENSITIVE: []
+    end
+
+    class BatchItemError
+      attr_accessor code: ("AccessDeniedError" | "ConflictError" | "InternalServerError" | "ResourceNotFoundError" | "ThrottlingError" | "ValidationError")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchPutGeofenceError
+      attr_accessor geofence_id: ::String
+      attr_accessor error: Types::BatchItemError
+      SENSITIVE: []
+    end
+
+    class BatchPutGeofenceRequest
+      attr_accessor collection_name: ::String
+      attr_accessor entries: ::Array[Types::BatchPutGeofenceRequestEntry]
+      SENSITIVE: []
+    end
+
+    class BatchPutGeofenceRequestEntry
+      attr_accessor geofence_id: ::String
+      attr_accessor geometry: Types::GeofenceGeometry
+      attr_accessor geofence_properties: ::Hash[::String, ::String]
+      SENSITIVE: [:geofence_properties]
+    end
+
+    class BatchPutGeofenceResponse
+      attr_accessor successes: ::Array[Types::BatchPutGeofenceSuccess]
+      attr_accessor errors: ::Array[Types::BatchPutGeofenceError]
+      SENSITIVE: []
+    end
+
+    class BatchPutGeofenceSuccess
+      attr_accessor geofence_id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class BatchUpdateDevicePositionError
+      attr_accessor device_id: ::String
+      attr_accessor sample_time: ::Time
+      attr_accessor error: Types::BatchItemError
+      SENSITIVE: []
+    end
+
+    class BatchUpdateDevicePositionRequest
+      attr_accessor tracker_name: ::String
+      attr_accessor updates: ::Array[Types::DevicePositionUpdate]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateDevicePositionResponse
+      attr_accessor errors: ::Array[Types::BatchUpdateDevicePositionError]
+      SENSITIVE: []
+    end
+
+    class CalculateRouteCarModeOptions
+      attr_accessor avoid_ferries: bool
+      attr_accessor avoid_tolls: bool
+      SENSITIVE: []
+    end
+
+    class CalculateRouteMatrixRequest
+      attr_accessor calculator_name: ::String
+      attr_accessor departure_positions: ::Array[::Array[::Float]]
+      attr_accessor destination_positions: ::Array[::Array[::Float]]
+      attr_accessor travel_mode: ("Car" | "Truck" | "Walking" | "Bicycle" | "Motorcycle")
+      attr_accessor departure_time: ::Time
+      attr_accessor depart_now: bool
+      attr_accessor distance_unit: ("Kilometers" | "Miles")
+      attr_accessor car_mode_options: Types::CalculateRouteCarModeOptions
+      attr_accessor truck_mode_options: Types::CalculateRouteTruckModeOptions
+      attr_accessor key: ::String
+      SENSITIVE: [:key]
+    end
+
+    class CalculateRouteMatrixResponse
+      attr_accessor route_matrix: ::Array[::Array[Types::RouteMatrixEntry]]
+      attr_accessor snapped_departure_positions: ::Array[::Array[::Float]]
+      attr_accessor snapped_destination_positions: ::Array[::Array[::Float]]
+      attr_accessor summary: Types::CalculateRouteMatrixSummary
+      SENSITIVE: []
+    end
+
+    class CalculateRouteMatrixSummary
+      attr_accessor data_source: ::String
+      attr_accessor route_count: ::Integer
+      attr_accessor error_count: ::Integer
+      attr_accessor distance_unit: ("Kilometers" | "Miles")
+      SENSITIVE: []
+    end
+
+    class CalculateRouteRequest
+      attr_accessor calculator_name: ::String
+      attr_accessor departure_position: ::Array[::Float]
+      attr_accessor destination_position: ::Array[::Float]
+      attr_accessor waypoint_positions: ::Array[::Array[::Float]]
+      attr_accessor travel_mode: ("Car" | "Truck" | "Walking" | "Bicycle" | "Motorcycle")
+      attr_accessor departure_time: ::Time
+      attr_accessor depart_now: bool
+      attr_accessor distance_unit: ("Kilometers" | "Miles")
+      attr_accessor include_leg_geometry: bool
+      attr_accessor car_mode_options: Types::CalculateRouteCarModeOptions
+      attr_accessor truck_mode_options: Types::CalculateRouteTruckModeOptions
+      attr_accessor arrival_time: ::Time
+      attr_accessor optimize_for: ("FastestRoute" | "ShortestRoute")
+      attr_accessor key: ::String
+      SENSITIVE: [:departure_position, :destination_position, :key]
+    end
+
+    class CalculateRouteResponse
+      attr_accessor legs: ::Array[Types::Leg]
+      attr_accessor summary: Types::CalculateRouteSummary
+      SENSITIVE: []
+    end
+
+    class CalculateRouteSummary
+      attr_accessor route_b_box: ::Array[::Float]
+      attr_accessor data_source: ::String
+      attr_accessor distance: ::Float
+      attr_accessor duration_seconds: ::Float
+      attr_accessor distance_unit: ("Kilometers" | "Miles")
+      SENSITIVE: [:route_b_box]
+    end
+
+    class CalculateRouteTruckModeOptions
+      attr_accessor avoid_ferries: bool
+      attr_accessor avoid_tolls: bool
+      attr_accessor dimensions: Types::TruckDimensions
+      attr_accessor weight: Types::TruckWeight
+      SENSITIVE: []
+    end
+
+    class CellSignals
+      attr_accessor lte_cell_details: ::Array[Types::LteCellDetails]
+      SENSITIVE: []
+    end
+
+    class Circle
+      attr_accessor center: ::Array[::Float]
+      attr_accessor radius: ::Float
+      SENSITIVE: [:center]
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGeofenceCollectionRequest
+      attr_accessor collection_name: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor pricing_plan_data_source: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGeofenceCollectionResponse
+      attr_accessor collection_name: ::String
+      attr_accessor collection_arn: ::String
+      attr_accessor create_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateKeyRequest
+      attr_accessor key_name: ::String
+      attr_accessor restrictions: Types::ApiKeyRestrictions
+      attr_accessor description: ::String
+      attr_accessor expire_time: ::Time
+      attr_accessor no_expiry: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateKeyResponse
+      attr_accessor key: ::String
+      attr_accessor key_arn: ::String
+      attr_accessor key_name: ::String
+      attr_accessor create_time: ::Time
+      SENSITIVE: [:key]
+    end
+
+    class CreateMapRequest
+      attr_accessor map_name: ::String
+      attr_accessor configuration: Types::MapConfiguration
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateMapResponse
+      attr_accessor map_name: ::String
+      attr_accessor map_arn: ::String
+      attr_accessor create_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreatePlaceIndexRequest
+      attr_accessor index_name: ::String
+      attr_accessor data_source: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor description: ::String
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePlaceIndexResponse
+      attr_accessor index_name: ::String
+      attr_accessor index_arn: ::String
+      attr_accessor create_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateRouteCalculatorRequest
+      attr_accessor calculator_name: ::String
+      attr_accessor data_source: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRouteCalculatorResponse
+      attr_accessor calculator_name: ::String
+      attr_accessor calculator_arn: ::String
+      attr_accessor create_time: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateTrackerRequest
+      attr_accessor tracker_name: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor kms_key_id: ::String
+      attr_accessor pricing_plan_data_source: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor position_filtering: ("TimeBased" | "DistanceBased" | "AccuracyBased")
+      attr_accessor event_bridge_enabled: bool
+      attr_accessor kms_key_enable_geospatial_queries: bool
+      SENSITIVE: []
+    end
+
+    class CreateTrackerResponse
+      attr_accessor tracker_name: ::String
+      attr_accessor tracker_arn: ::String
+      attr_accessor create_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DataSourceConfiguration
+      attr_accessor intended_use: ("SingleUse" | "Storage")
+      SENSITIVE: []
+    end
+
+    class DeleteGeofenceCollectionRequest
+      attr_accessor collection_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGeofenceCollectionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteKeyRequest
+      attr_accessor key_name: ::String
+      attr_accessor force_delete: bool
+      SENSITIVE: []
+    end
+
+    class DeleteKeyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteMapRequest
+      attr_accessor map_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMapResponse < Aws::EmptyStructure
+    end
+
+    class DeletePlaceIndexRequest
+      attr_accessor index_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePlaceIndexResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRouteCalculatorRequest
+      attr_accessor calculator_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRouteCalculatorResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTrackerRequest
+      attr_accessor tracker_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTrackerResponse < Aws::EmptyStructure
+    end
+
+    class DescribeGeofenceCollectionRequest
+      attr_accessor collection_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGeofenceCollectionResponse
+      attr_accessor collection_name: ::String
+      attr_accessor collection_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor pricing_plan_data_source: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor geofence_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeKeyRequest
+      attr_accessor key_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeKeyResponse
+      attr_accessor key: ::String
+      attr_accessor key_arn: ::String
+      attr_accessor key_name: ::String
+      attr_accessor restrictions: Types::ApiKeyRestrictions
+      attr_accessor create_time: ::Time
+      attr_accessor expire_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:key]
+    end
+
+    class DescribeMapRequest
+      attr_accessor map_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMapResponse
+      attr_accessor map_name: ::String
+      attr_accessor map_arn: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor data_source: ::String
+      attr_accessor configuration: Types::MapConfiguration
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribePlaceIndexRequest
+      attr_accessor index_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePlaceIndexResponse
+      attr_accessor index_name: ::String
+      attr_accessor index_arn: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor description: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor data_source: ::String
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeRouteCalculatorRequest
+      attr_accessor calculator_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRouteCalculatorResponse
+      attr_accessor calculator_name: ::String
+      attr_accessor calculator_arn: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor description: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor data_source: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeTrackerRequest
+      attr_accessor tracker_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTrackerResponse
+      attr_accessor tracker_name: ::String
+      attr_accessor tracker_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor pricing_plan_data_source: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor kms_key_id: ::String
+      attr_accessor position_filtering: ("TimeBased" | "DistanceBased" | "AccuracyBased")
+      attr_accessor event_bridge_enabled: bool
+      attr_accessor kms_key_enable_geospatial_queries: bool
+      SENSITIVE: []
+    end
+
+    class DevicePosition
+      attr_accessor device_id: ::String
+      attr_accessor sample_time: ::Time
+      attr_accessor received_time: ::Time
+      attr_accessor position: ::Array[::Float]
+      attr_accessor accuracy: Types::PositionalAccuracy
+      attr_accessor position_properties: ::Hash[::String, ::String]
+      SENSITIVE: [:position, :position_properties]
+    end
+
+    class DevicePositionUpdate
+      attr_accessor device_id: ::String
+      attr_accessor sample_time: ::Time
+      attr_accessor position: ::Array[::Float]
+      attr_accessor accuracy: Types::PositionalAccuracy
+      attr_accessor position_properties: ::Hash[::String, ::String]
+      SENSITIVE: [:position, :position_properties]
+    end
+
+    class DeviceState
+      attr_accessor device_id: ::String
+      attr_accessor sample_time: ::Time
+      attr_accessor position: ::Array[::Float]
+      attr_accessor accuracy: Types::PositionalAccuracy
+      attr_accessor ipv_4_address: ::String
+      attr_accessor wi_fi_access_points: ::Array[Types::WiFiAccessPoint]
+      attr_accessor cell_signals: Types::CellSignals
+      SENSITIVE: [:position]
+    end
+
+    class DisassociateTrackerConsumerRequest
+      attr_accessor tracker_name: ::String
+      attr_accessor consumer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateTrackerConsumerResponse < Aws::EmptyStructure
+    end
+
+    class ForecastGeofenceEventsDeviceState
+      attr_accessor position: ::Array[::Float]
+      attr_accessor speed: ::Float
+      SENSITIVE: [:position]
+    end
+
+    class ForecastGeofenceEventsRequest
+      attr_accessor collection_name: ::String
+      attr_accessor device_state: Types::ForecastGeofenceEventsDeviceState
+      attr_accessor time_horizon_minutes: ::Float
+      attr_accessor distance_unit: ("Kilometers" | "Miles")
+      attr_accessor speed_unit: ("KilometersPerHour" | "MilesPerHour")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ForecastGeofenceEventsResponse
+      attr_accessor forecasted_events: ::Array[Types::ForecastedEvent]
+      attr_accessor next_token: ::String
+      attr_accessor distance_unit: ("Kilometers" | "Miles")
+      attr_accessor speed_unit: ("KilometersPerHour" | "MilesPerHour")
+      SENSITIVE: []
+    end
+
+    class ForecastedEvent
+      attr_accessor event_id: ::String
+      attr_accessor geofence_id: ::String
+      attr_accessor is_device_in_geofence: bool
+      attr_accessor nearest_distance: ::Float
+      attr_accessor event_type: ("ENTER" | "EXIT" | "IDLE")
+      attr_accessor forecasted_breach_time: ::Time
+      attr_accessor geofence_properties: ::Hash[::String, ::String]
+      SENSITIVE: [:geofence_properties]
+    end
+
+    class GeofenceGeometry
+      attr_accessor polygon: ::Array[::Array[::Array[::Float]]]
+      attr_accessor circle: Types::Circle
+      attr_accessor geobuf: ::String
+      SENSITIVE: [:circle, :geobuf]
+    end
+
+    class GetDevicePositionHistoryRequest
+      attr_accessor tracker_name: ::String
+      attr_accessor device_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor start_time_inclusive: ::Time
+      attr_accessor end_time_exclusive: ::Time
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetDevicePositionHistoryResponse
+      attr_accessor device_positions: ::Array[Types::DevicePosition]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDevicePositionRequest
+      attr_accessor tracker_name: ::String
+      attr_accessor device_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDevicePositionResponse
+      attr_accessor device_id: ::String
+      attr_accessor sample_time: ::Time
+      attr_accessor received_time: ::Time
+      attr_accessor position: ::Array[::Float]
+      attr_accessor accuracy: Types::PositionalAccuracy
+      attr_accessor position_properties: ::Hash[::String, ::String]
+      SENSITIVE: [:position, :position_properties]
+    end
+
+    class GetGeofenceRequest
+      attr_accessor collection_name: ::String
+      attr_accessor geofence_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGeofenceResponse
+      attr_accessor geofence_id: ::String
+      attr_accessor geometry: Types::GeofenceGeometry
+      attr_accessor status: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor geofence_properties: ::Hash[::String, ::String]
+      SENSITIVE: [:geofence_properties]
+    end
+
+    class GetMapGlyphsRequest
+      attr_accessor map_name: ::String
+      attr_accessor font_stack: ::String
+      attr_accessor font_unicode_range: ::String
+      attr_accessor key: ::String
+      SENSITIVE: [:key]
+    end
+
+    class GetMapGlyphsResponse
+      attr_accessor blob: ::IO
+      attr_accessor content_type: ::String
+      attr_accessor cache_control: ::String
+      SENSITIVE: []
+    end
+
+    class GetMapSpritesRequest
+      attr_accessor map_name: ::String
+      attr_accessor file_name: ::String
+      attr_accessor key: ::String
+      SENSITIVE: [:key]
+    end
+
+    class GetMapSpritesResponse
+      attr_accessor blob: ::IO
+      attr_accessor content_type: ::String
+      attr_accessor cache_control: ::String
+      SENSITIVE: []
+    end
+
+    class GetMapStyleDescriptorRequest
+      attr_accessor map_name: ::String
+      attr_accessor key: ::String
+      SENSITIVE: [:key]
+    end
+
+    class GetMapStyleDescriptorResponse
+      attr_accessor blob: ::IO
+      attr_accessor content_type: ::String
+      attr_accessor cache_control: ::String
+      SENSITIVE: []
+    end
+
+    class GetMapTileRequest
+      attr_accessor map_name: ::String
+      attr_accessor z: ::String
+      attr_accessor x: ::String
+      attr_accessor y: ::String
+      attr_accessor key: ::String
+      SENSITIVE: [:key]
+    end
+
+    class GetMapTileResponse
+      attr_accessor blob: ::IO
+      attr_accessor content_type: ::String
+      attr_accessor cache_control: ::String
+      SENSITIVE: []
+    end
+
+    class GetPlaceRequest
+      attr_accessor index_name: ::String
+      attr_accessor place_id: ::String
+      attr_accessor language: ::String
+      attr_accessor key: ::String
+      SENSITIVE: [:key]
+    end
+
+    class GetPlaceResponse
+      attr_accessor place: Types::Place
+      SENSITIVE: []
+    end
+
+    class InferredState
+      attr_accessor position: ::Array[::Float]
+      attr_accessor accuracy: Types::PositionalAccuracy
+      attr_accessor deviation_distance: ::Float
+      attr_accessor proxy_detected: bool
+      SENSITIVE: [:position]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Leg
+      attr_accessor start_position: ::Array[::Float]
+      attr_accessor end_position: ::Array[::Float]
+      attr_accessor distance: ::Float
+      attr_accessor duration_seconds: ::Float
+      attr_accessor geometry: Types::LegGeometry
+      attr_accessor steps: ::Array[Types::Step]
+      SENSITIVE: [:start_position, :end_position]
+    end
+
+    class LegGeometry
+      attr_accessor line_string: ::Array[::Array[::Float]]
+      SENSITIVE: []
+    end
+
+    class ListDevicePositionsRequest
+      attr_accessor tracker_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filter_geometry: Types::TrackingFilterGeometry
+      SENSITIVE: []
+    end
+
+    class ListDevicePositionsResponse
+      attr_accessor entries: ::Array[Types::ListDevicePositionsResponseEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDevicePositionsResponseEntry
+      attr_accessor device_id: ::String
+      attr_accessor sample_time: ::Time
+      attr_accessor position: ::Array[::Float]
+      attr_accessor accuracy: Types::PositionalAccuracy
+      attr_accessor position_properties: ::Hash[::String, ::String]
+      SENSITIVE: [:position, :position_properties]
+    end
+
+    class ListGeofenceCollectionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGeofenceCollectionsResponse
+      attr_accessor entries: ::Array[Types::ListGeofenceCollectionsResponseEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGeofenceCollectionsResponseEntry
+      attr_accessor collection_name: ::String
+      attr_accessor description: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor pricing_plan_data_source: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListGeofenceResponseEntry
+      attr_accessor geofence_id: ::String
+      attr_accessor geometry: Types::GeofenceGeometry
+      attr_accessor status: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      attr_accessor geofence_properties: ::Hash[::String, ::String]
+      SENSITIVE: [:geofence_properties]
+    end
+
+    class ListGeofencesRequest
+      attr_accessor collection_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGeofencesResponse
+      attr_accessor entries: ::Array[Types::ListGeofenceResponseEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKeysRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filter: Types::ApiKeyFilter
+      SENSITIVE: []
+    end
+
+    class ListKeysResponse
+      attr_accessor entries: ::Array[Types::ListKeysResponseEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListKeysResponseEntry
+      attr_accessor key_name: ::String
+      attr_accessor expire_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor restrictions: Types::ApiKeyRestrictions
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListMapsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMapsResponse
+      attr_accessor entries: ::Array[Types::ListMapsResponseEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMapsResponseEntry
+      attr_accessor map_name: ::String
+      attr_accessor description: ::String
+      attr_accessor data_source: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListPlaceIndexesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlaceIndexesResponse
+      attr_accessor entries: ::Array[Types::ListPlaceIndexesResponseEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPlaceIndexesResponseEntry
+      attr_accessor index_name: ::String
+      attr_accessor description: ::String
+      attr_accessor data_source: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListRouteCalculatorsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRouteCalculatorsResponse
+      attr_accessor entries: ::Array[Types::ListRouteCalculatorsResponseEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRouteCalculatorsResponseEntry
+      attr_accessor calculator_name: ::String
+      attr_accessor description: ::String
+      attr_accessor data_source: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTrackerConsumersRequest
+      attr_accessor tracker_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrackerConsumersResponse
+      attr_accessor consumer_arns: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrackersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrackersResponse
+      attr_accessor entries: ::Array[Types::ListTrackersResponseEntry]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTrackersResponseEntry
+      attr_accessor tracker_name: ::String
+      attr_accessor description: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor pricing_plan_data_source: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class LteCellDetails
+      attr_accessor cell_id: ::Integer
+      attr_accessor mcc: ::Integer
+      attr_accessor mnc: ::Integer
+      attr_accessor local_id: Types::LteLocalId
+      attr_accessor network_measurements: ::Array[Types::LteNetworkMeasurements]
+      attr_accessor timing_advance: ::Integer
+      attr_accessor nr_capable: bool
+      attr_accessor rsrp: ::Integer
+      attr_accessor rsrq: ::Float
+      attr_accessor tac: ::Integer
+      SENSITIVE: []
+    end
+
+    class LteLocalId
+      attr_accessor earfcn: ::Integer
+      attr_accessor pci: ::Integer
+      SENSITIVE: []
+    end
+
+    class LteNetworkMeasurements
+      attr_accessor earfcn: ::Integer
+      attr_accessor cell_id: ::Integer
+      attr_accessor pci: ::Integer
+      attr_accessor rsrp: ::Integer
+      attr_accessor rsrq: ::Float
+      SENSITIVE: []
+    end
+
+    class MapConfiguration
+      attr_accessor style: ::String
+      attr_accessor political_view: ::String
+      attr_accessor custom_layers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MapConfigurationUpdate
+      attr_accessor political_view: ::String
+      attr_accessor custom_layers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Place
+      attr_accessor label: ::String
+      attr_accessor geometry: Types::PlaceGeometry
+      attr_accessor address_number: ::String
+      attr_accessor street: ::String
+      attr_accessor neighborhood: ::String
+      attr_accessor municipality: ::String
+      attr_accessor sub_region: ::String
+      attr_accessor region: ::String
+      attr_accessor country: ::String
+      attr_accessor postal_code: ::String
+      attr_accessor interpolated: bool
+      attr_accessor time_zone: Types::TimeZone
+      attr_accessor unit_type: ::String
+      attr_accessor unit_number: ::String
+      attr_accessor categories: ::Array[::String]
+      attr_accessor supplemental_categories: ::Array[::String]
+      attr_accessor sub_municipality: ::String
+      SENSITIVE: []
+    end
+
+    class PlaceGeometry
+      attr_accessor point: ::Array[::Float]
+      SENSITIVE: [:point]
+    end
+
+    class PositionalAccuracy
+      attr_accessor horizontal: ::Float
+      SENSITIVE: []
+    end
+
+    class PutGeofenceRequest
+      attr_accessor collection_name: ::String
+      attr_accessor geofence_id: ::String
+      attr_accessor geometry: Types::GeofenceGeometry
+      attr_accessor geofence_properties: ::Hash[::String, ::String]
+      SENSITIVE: [:geofence_properties]
+    end
+
+    class PutGeofenceResponse
+      attr_accessor geofence_id: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RouteMatrixEntry
+      attr_accessor distance: ::Float
+      attr_accessor duration_seconds: ::Float
+      attr_accessor error: Types::RouteMatrixEntryError
+      SENSITIVE: []
+    end
+
+    class RouteMatrixEntryError
+      attr_accessor code: ("RouteNotFound" | "RouteTooLong" | "PositionsNotFound" | "DestinationPositionNotFound" | "DeparturePositionNotFound" | "OtherValidationError")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SearchForPositionResult
+      attr_accessor place: Types::Place
+      attr_accessor distance: ::Float
+      attr_accessor place_id: ::String
+      SENSITIVE: []
+    end
+
+    class SearchForSuggestionsResult
+      attr_accessor text: ::String
+      attr_accessor place_id: ::String
+      attr_accessor categories: ::Array[::String]
+      attr_accessor supplemental_categories: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SearchForTextResult
+      attr_accessor place: Types::Place
+      attr_accessor distance: ::Float
+      attr_accessor relevance: ::Float
+      attr_accessor place_id: ::String
+      SENSITIVE: []
+    end
+
+    class SearchPlaceIndexForPositionRequest
+      attr_accessor index_name: ::String
+      attr_accessor position: ::Array[::Float]
+      attr_accessor max_results: ::Integer
+      attr_accessor language: ::String
+      attr_accessor key: ::String
+      SENSITIVE: [:position, :key]
+    end
+
+    class SearchPlaceIndexForPositionResponse
+      attr_accessor summary: Types::SearchPlaceIndexForPositionSummary
+      attr_accessor results: ::Array[Types::SearchForPositionResult]
+      SENSITIVE: []
+    end
+
+    class SearchPlaceIndexForPositionSummary
+      attr_accessor position: ::Array[::Float]
+      attr_accessor max_results: ::Integer
+      attr_accessor data_source: ::String
+      attr_accessor language: ::String
+      SENSITIVE: [:position]
+    end
+
+    class SearchPlaceIndexForSuggestionsRequest
+      attr_accessor index_name: ::String
+      attr_accessor text: ::String
+      attr_accessor bias_position: ::Array[::Float]
+      attr_accessor filter_b_box: ::Array[::Float]
+      attr_accessor filter_countries: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor language: ::String
+      attr_accessor filter_categories: ::Array[::String]
+      attr_accessor key: ::String
+      SENSITIVE: [:text, :bias_position, :filter_b_box, :key]
+    end
+
+    class SearchPlaceIndexForSuggestionsResponse
+      attr_accessor summary: Types::SearchPlaceIndexForSuggestionsSummary
+      attr_accessor results: ::Array[Types::SearchForSuggestionsResult]
+      SENSITIVE: []
+    end
+
+    class SearchPlaceIndexForSuggestionsSummary
+      attr_accessor text: ::String
+      attr_accessor bias_position: ::Array[::Float]
+      attr_accessor filter_b_box: ::Array[::Float]
+      attr_accessor filter_countries: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor data_source: ::String
+      attr_accessor language: ::String
+      attr_accessor filter_categories: ::Array[::String]
+      SENSITIVE: [:text, :bias_position, :filter_b_box]
+    end
+
+    class SearchPlaceIndexForTextRequest
+      attr_accessor index_name: ::String
+      attr_accessor text: ::String
+      attr_accessor bias_position: ::Array[::Float]
+      attr_accessor filter_b_box: ::Array[::Float]
+      attr_accessor filter_countries: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor language: ::String
+      attr_accessor filter_categories: ::Array[::String]
+      attr_accessor key: ::String
+      SENSITIVE: [:text, :bias_position, :filter_b_box, :key]
+    end
+
+    class SearchPlaceIndexForTextResponse
+      attr_accessor summary: Types::SearchPlaceIndexForTextSummary
+      attr_accessor results: ::Array[Types::SearchForTextResult]
+      SENSITIVE: []
+    end
+
+    class SearchPlaceIndexForTextSummary
+      attr_accessor text: ::String
+      attr_accessor bias_position: ::Array[::Float]
+      attr_accessor filter_b_box: ::Array[::Float]
+      attr_accessor filter_countries: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor result_b_box: ::Array[::Float]
+      attr_accessor data_source: ::String
+      attr_accessor language: ::String
+      attr_accessor filter_categories: ::Array[::String]
+      SENSITIVE: [:text, :bias_position, :filter_b_box, :result_b_box]
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Step
+      attr_accessor start_position: ::Array[::Float]
+      attr_accessor end_position: ::Array[::Float]
+      attr_accessor distance: ::Float
+      attr_accessor duration_seconds: ::Float
+      attr_accessor geometry_offset: ::Integer
+      SENSITIVE: [:start_position, :end_position]
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TimeZone
+      attr_accessor name: ::String
+      attr_accessor offset: ::Integer
+      SENSITIVE: []
+    end
+
+    class TrackingFilterGeometry
+      attr_accessor polygon: ::Array[::Array[::Array[::Float]]]
+      SENSITIVE: []
+    end
+
+    class TruckDimensions
+      attr_accessor length: ::Float
+      attr_accessor height: ::Float
+      attr_accessor width: ::Float
+      attr_accessor unit: ("Meters" | "Feet")
+      SENSITIVE: []
+    end
+
+    class TruckWeight
+      attr_accessor total: ::Float
+      attr_accessor unit: ("Kilograms" | "Pounds")
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateGeofenceCollectionRequest
+      attr_accessor collection_name: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor pricing_plan_data_source: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGeofenceCollectionResponse
+      attr_accessor collection_name: ::String
+      attr_accessor collection_arn: ::String
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateKeyRequest
+      attr_accessor key_name: ::String
+      attr_accessor description: ::String
+      attr_accessor expire_time: ::Time
+      attr_accessor no_expiry: bool
+      attr_accessor force_update: bool
+      attr_accessor restrictions: Types::ApiKeyRestrictions
+      SENSITIVE: []
+    end
+
+    class UpdateKeyResponse
+      attr_accessor key_arn: ::String
+      attr_accessor key_name: ::String
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateMapRequest
+      attr_accessor map_name: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor description: ::String
+      attr_accessor configuration_update: Types::MapConfigurationUpdate
+      SENSITIVE: []
+    end
+
+    class UpdateMapResponse
+      attr_accessor map_name: ::String
+      attr_accessor map_arn: ::String
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdatePlaceIndexRequest
+      attr_accessor index_name: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor description: ::String
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdatePlaceIndexResponse
+      attr_accessor index_name: ::String
+      attr_accessor index_arn: ::String
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateRouteCalculatorRequest
+      attr_accessor calculator_name: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRouteCalculatorResponse
+      attr_accessor calculator_name: ::String
+      attr_accessor calculator_arn: ::String
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateTrackerRequest
+      attr_accessor tracker_name: ::String
+      attr_accessor pricing_plan: ("RequestBasedUsage" | "MobileAssetTracking" | "MobileAssetManagement")
+      attr_accessor pricing_plan_data_source: ::String
+      attr_accessor description: ::String
+      attr_accessor position_filtering: ("TimeBased" | "DistanceBased" | "AccuracyBased")
+      attr_accessor event_bridge_enabled: bool
+      attr_accessor kms_key_enable_geospatial_queries: bool
+      SENSITIVE: []
+    end
+
+    class UpdateTrackerResponse
+      attr_accessor tracker_name: ::String
+      attr_accessor tracker_arn: ::String
+      attr_accessor update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("UnknownOperation" | "Missing" | "CannotParse" | "FieldValidationFailed" | "Other")
+      attr_accessor field_list: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VerifyDevicePositionRequest
+      attr_accessor tracker_name: ::String
+      attr_accessor device_state: Types::DeviceState
+      attr_accessor distance_unit: ("Kilometers" | "Miles")
+      SENSITIVE: []
+    end
+
+    class VerifyDevicePositionResponse
+      attr_accessor inferred_state: Types::InferredState
+      attr_accessor device_id: ::String
+      attr_accessor sample_time: ::Time
+      attr_accessor received_time: ::Time
+      attr_accessor distance_unit: ("Kilometers" | "Miles")
+      SENSITIVE: []
+    end
+
+    class WiFiAccessPoint
+      attr_accessor mac_address: ::String
+      attr_accessor rss: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

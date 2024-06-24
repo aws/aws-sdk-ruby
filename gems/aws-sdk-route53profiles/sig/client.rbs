@@ -1,0 +1,269 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Route53Profiles
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateProfileResponse]
+        def profile_association: () -> Types::ProfileAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#associate_profile-instance_method
+      def associate_profile: (
+                               name: ::String,
+                               profile_id: ::String,
+                               resource_id: ::String,
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String
+                                 },
+                               ]
+                             ) -> _AssociateProfileResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateProfileResponseSuccess
+
+      interface _AssociateResourceToProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateResourceToProfileResponse]
+        def profile_resource_association: () -> Types::ProfileResourceAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#associate_resource_to_profile-instance_method
+      def associate_resource_to_profile: (
+                                           name: ::String,
+                                           profile_id: ::String,
+                                           resource_arn: ::String,
+                                           ?resource_properties: ::String
+                                         ) -> _AssociateResourceToProfileResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateResourceToProfileResponseSuccess
+
+      interface _CreateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProfileResponse]
+        def profile: () -> Types::Profile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#create_profile-instance_method
+      def create_profile: (
+                            client_token: ::String,
+                            name: ::String,
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreateProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
+
+      interface _DeleteProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProfileResponse]
+        def profile: () -> Types::Profile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#delete_profile-instance_method
+      def delete_profile: (
+                            profile_id: ::String
+                          ) -> _DeleteProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProfileResponseSuccess
+
+      interface _DisassociateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateProfileResponse]
+        def profile_association: () -> Types::ProfileAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#disassociate_profile-instance_method
+      def disassociate_profile: (
+                                  profile_id: ::String,
+                                  resource_id: ::String
+                                ) -> _DisassociateProfileResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateProfileResponseSuccess
+
+      interface _DisassociateResourceFromProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateResourceFromProfileResponse]
+        def profile_resource_association: () -> Types::ProfileResourceAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#disassociate_resource_from_profile-instance_method
+      def disassociate_resource_from_profile: (
+                                                profile_id: ::String,
+                                                resource_arn: ::String
+                                              ) -> _DisassociateResourceFromProfileResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateResourceFromProfileResponseSuccess
+
+      interface _GetProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileResponse]
+        def profile: () -> Types::Profile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#get_profile-instance_method
+      def get_profile: (
+                         profile_id: ::String
+                       ) -> _GetProfileResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileResponseSuccess
+
+      interface _GetProfileAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileAssociationResponse]
+        def profile_association: () -> Types::ProfileAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#get_profile_association-instance_method
+      def get_profile_association: (
+                                     profile_association_id: ::String
+                                   ) -> _GetProfileAssociationResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileAssociationResponseSuccess
+
+      interface _GetProfileResourceAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileResourceAssociationResponse]
+        def profile_resource_association: () -> Types::ProfileResourceAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#get_profile_resource_association-instance_method
+      def get_profile_resource_association: (
+                                              profile_resource_association_id: ::String
+                                            ) -> _GetProfileResourceAssociationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileResourceAssociationResponseSuccess
+
+      interface _ListProfileAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfileAssociationsResponse]
+        def next_token: () -> ::String
+        def profile_associations: () -> ::Array[Types::ProfileAssociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#list_profile_associations-instance_method
+      def list_profile_associations: (
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String,
+                                       ?profile_id: ::String,
+                                       ?resource_id: ::String
+                                     ) -> _ListProfileAssociationsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfileAssociationsResponseSuccess
+
+      interface _ListProfileResourceAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfileResourceAssociationsResponse]
+        def next_token: () -> ::String
+        def profile_resource_associations: () -> ::Array[Types::ProfileResourceAssociation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#list_profile_resource_associations-instance_method
+      def list_profile_resource_associations: (
+                                                ?max_results: ::Integer,
+                                                ?next_token: ::String,
+                                                profile_id: ::String,
+                                                ?resource_type: ::String
+                                              ) -> _ListProfileResourceAssociationsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfileResourceAssociationsResponseSuccess
+
+      interface _ListProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfilesResponse]
+        def next_token: () -> ::String
+        def profile_summaries: () -> ::Array[Types::ProfileSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#list_profiles-instance_method
+      def list_profiles: (
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListProfilesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfilesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateProfileResourceAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProfileResourceAssociationResponse]
+        def profile_resource_association: () -> Types::ProfileResourceAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Profiles/Client.html#update_profile_resource_association-instance_method
+      def update_profile_resource_association: (
+                                                 ?name: ::String,
+                                                 profile_resource_association_id: ::String,
+                                                 ?resource_properties: ::String
+                                               ) -> _UpdateProfileResourceAssociationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileResourceAssociationResponseSuccess
+    end
+  end
+end
+

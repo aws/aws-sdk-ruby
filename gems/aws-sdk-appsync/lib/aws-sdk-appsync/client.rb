@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::AppSync
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::AppSync
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::AppSync
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::AppSync
     #   @option options [Aws::AppSync::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::AppSync::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -611,6 +636,21 @@ module Aws::AppSync
     #
     #   * **R4\_8XLARGE**: A r4.8xlarge instance type.
     #
+    # @option params [String] :health_metrics_config
+    #   Controls how cache health metrics will be emitted to CloudWatch. Cache
+    #   health metrics include:
+    #
+    #   * NetworkBandwidthOutAllowanceExceeded: The network packets dropped
+    #     because the throughput exceeded the aggregated bandwidth limit. This
+    #     is useful for diagnosing bottlenecks in a cache configuration.
+    #
+    #   * EngineCPUUtilization: The CPU utilization (percentage) allocated to
+    #     the Redis process. This is useful for diagnosing bottlenecks in a
+    #     cache configuration.
+    #
+    #   Metrics will be recorded by API ID. You can set the value to `ENABLED`
+    #   or `DISABLED`.
+    #
     # @return [Types::CreateApiCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApiCacheResponse#api_cache #api_cache} => Types::ApiCache
@@ -624,6 +664,7 @@ module Aws::AppSync
     #     at_rest_encryption_enabled: false,
     #     api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
     #     type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE, SMALL, MEDIUM, LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X
+    #     health_metrics_config: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -634,6 +675,7 @@ module Aws::AppSync
     #   resp.api_cache.at_rest_encryption_enabled #=> Boolean
     #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE", "SMALL", "MEDIUM", "LARGE", "XLARGE", "LARGE_2X", "LARGE_4X", "LARGE_8X", "LARGE_12X"
     #   resp.api_cache.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "MODIFYING", "FAILED"
+    #   resp.api_cache.health_metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiCache AWS API Documentation
     #
@@ -732,6 +774,16 @@ module Aws::AppSync
     # @option params [Types::EventBridgeDataSourceConfig] :event_bridge_config
     #   Amazon EventBridge settings.
     #
+    # @option params [String] :metrics_config
+    #   Enables or disables enhanced data source metrics for specified data
+    #   sources. Note that `metricsConfig` won't be used unless the
+    #   `dataSourceLevelMetricsBehavior` value is set to
+    #   `PER_DATA_SOURCE_METRICS`. If the `dataSourceLevelMetricsBehavior` is
+    #   set to `FULL_REQUEST_DATA_SOURCE_METRICS` instead, `metricsConfig`
+    #   will be ignored. However, you can still set its value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataSourceResponse#data_source #data_source} => Types::DataSource
@@ -789,6 +841,7 @@ module Aws::AppSync
     #     event_bridge_config: {
     #       event_bus_arn: "String", # required
     #     },
+    #     metrics_config: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -821,6 +874,7 @@ module Aws::AppSync
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.schema #=> String
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
     #   resp.data_source.event_bridge_config.event_bus_arn #=> String
+    #   resp.data_source.metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDataSource AWS API Documentation
     #
@@ -1032,6 +1086,42 @@ module Aws::AppSync
     #   This field accepts any string input with a length of 0 - 256
     #   characters.
     #
+    # @option params [String] :introspection_config
+    #   Sets the value of the GraphQL API to enable (`ENABLED`) or disable
+    #   (`DISABLED`) introspection. If no value is provided, the introspection
+    #   configuration will be set to `ENABLED` by default. This field will
+    #   produce an error if the operation attempts to use the introspection
+    #   feature while this field is disabled.
+    #
+    #   For more information about introspection, see [GraphQL
+    #   introspection][1].
+    #
+    #
+    #
+    #   [1]: https://graphql.org/learn/introspection/
+    #
+    # @option params [Integer] :query_depth_limit
+    #   The maximum depth a query can have in a single request. Depth refers
+    #   to the amount of nested levels allowed in the body of query. The
+    #   default value is `0` (or unspecified), which indicates there's no
+    #   depth limit. If you set a limit, it can be between `1` and `75` nested
+    #   levels. This field will produce a limit error if the operation falls
+    #   out of bounds.
+    #
+    #   Note that fields can still be set to nullable or non-nullable. If a
+    #   non-nullable field produces an error, the error will be thrown upwards
+    #   to the first nullable field available.
+    #
+    # @option params [Integer] :resolver_count_limit
+    #   The maximum number of resolvers that can be invoked in a single
+    #   request. The default value is `0` (or unspecified), which will set the
+    #   limit to `10000`. When specified, the limit value can be between `1`
+    #   and `10000`. This field will produce a limit error if the operation
+    #   falls out of bounds.
+    #
+    # @option params [Types::EnhancedMetricsConfig] :enhanced_metrics_config
+    #   The `enhancedMetricsConfig` object.
+    #
     # @return [Types::CreateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGraphqlApiResponse#graphql_api #graphql_api} => Types::GraphqlApi
@@ -1092,6 +1182,14 @@ module Aws::AppSync
     #     api_type: "GRAPHQL", # accepts GRAPHQL, MERGED
     #     merged_api_execution_role_arn: "String",
     #     owner_contact: "String",
+    #     introspection_config: "ENABLED", # accepts ENABLED, DISABLED
+    #     query_depth_limit: 1,
+    #     resolver_count_limit: 1,
+    #     enhanced_metrics_config: {
+    #       resolver_level_metrics_behavior: "FULL_REQUEST_RESOLVER_METRICS", # required, accepts FULL_REQUEST_RESOLVER_METRICS, PER_RESOLVER_METRICS
+    #       data_source_level_metrics_behavior: "FULL_REQUEST_DATA_SOURCE_METRICS", # required, accepts FULL_REQUEST_DATA_SOURCE_METRICS, PER_DATA_SOURCE_METRICS
+    #       operation_level_metrics_config: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
     #   })
     #
     # @example Response structure
@@ -1139,6 +1237,12 @@ module Aws::AppSync
     #   resp.graphql_api.merged_api_execution_role_arn #=> String
     #   resp.graphql_api.owner #=> String
     #   resp.graphql_api.owner_contact #=> String
+    #   resp.graphql_api.introspection_config #=> String, one of "ENABLED", "DISABLED"
+    #   resp.graphql_api.query_depth_limit #=> Integer
+    #   resp.graphql_api.resolver_count_limit #=> Integer
+    #   resp.graphql_api.enhanced_metrics_config.resolver_level_metrics_behavior #=> String, one of "FULL_REQUEST_RESOLVER_METRICS", "PER_RESOLVER_METRICS"
+    #   resp.graphql_api.enhanced_metrics_config.data_source_level_metrics_behavior #=> String, one of "FULL_REQUEST_DATA_SOURCE_METRICS", "PER_DATA_SOURCE_METRICS"
+    #   resp.graphql_api.enhanced_metrics_config.operation_level_metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApi AWS API Documentation
     #
@@ -1216,6 +1320,16 @@ module Aws::AppSync
     #   When code is used, the `runtime` is required. The `runtime` value must
     #   be `APPSYNC_JS`.
     #
+    # @option params [String] :metrics_config
+    #   Enables or disables enhanced resolver metrics for specified resolvers.
+    #   Note that `metricsConfig` won't be used unless the
+    #   `resolverLevelMetricsBehavior` value is set to `PER_RESOLVER_METRICS`.
+    #   If the `resolverLevelMetricsBehavior` is set to
+    #   `FULL_REQUEST_RESOLVER_METRICS` instead, `metricsConfig` will be
+    #   ignored. However, you can still set its value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #
     # @return [Types::CreateResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResolverResponse#resolver #resolver} => Types::Resolver
@@ -1250,6 +1364,7 @@ module Aws::AppSync
     #       runtime_version: "String", # required
     #     },
     #     code: "Code",
+    #     metrics_config: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -1273,6 +1388,7 @@ module Aws::AppSync
     #   resp.resolver.runtime.name #=> String, one of "APPSYNC_JS"
     #   resp.resolver.runtime.runtime_version #=> String
     #   resp.resolver.code #=> String
+    #   resp.resolver.metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolver AWS API Documentation
     #
@@ -1818,6 +1934,7 @@ module Aws::AppSync
     #   resp.api_cache.at_rest_encryption_enabled #=> Boolean
     #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE", "SMALL", "MEDIUM", "LARGE", "XLARGE", "LARGE_2X", "LARGE_4X", "LARGE_8X", "LARGE_12X"
     #   resp.api_cache.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "MODIFYING", "FAILED"
+    #   resp.api_cache.health_metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetApiCache AWS API Documentation
     #
@@ -1877,6 +1994,7 @@ module Aws::AppSync
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.schema #=> String
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
     #   resp.data_source.event_bridge_config.event_bus_arn #=> String
+    #   resp.data_source.metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDataSource AWS API Documentation
     #
@@ -1884,6 +2002,80 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def get_data_source(params = {}, options = {})
       req = build_request(:get_data_source, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the record of an existing introspection. If the retrieval is
+    # successful, the result of the instrospection will also be returned. If
+    # the retrieval fails the operation, an error message will be returned
+    # instead.
+    #
+    # @option params [required, String] :introspection_id
+    #   The introspection ID. Each introspection contains a unique ID that can
+    #   be used to reference the instrospection record.
+    #
+    # @option params [Boolean] :include_models_sdl
+    #   A boolean flag that determines whether SDL should be generated for
+    #   introspected types or not. If set to `true`, each model will contain
+    #   an `sdl` property that contains the SDL for that type. The SDL only
+    #   contains the type data and no additional metadata or directives.
+    #
+    # @option params [String] :next_token
+    #   Determines the number of types to be returned in a single response
+    #   before paginating. This value is typically taken from `nextToken`
+    #   value from the previous response.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of introspected types that will be returned in a
+    #   single response.
+    #
+    # @return [Types::GetDataSourceIntrospectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataSourceIntrospectionResponse#introspection_id #introspection_id} => String
+    #   * {Types::GetDataSourceIntrospectionResponse#introspection_status #introspection_status} => String
+    #   * {Types::GetDataSourceIntrospectionResponse#introspection_status_detail #introspection_status_detail} => String
+    #   * {Types::GetDataSourceIntrospectionResponse#introspection_result #introspection_result} => Types::DataSourceIntrospectionResult
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_data_source_introspection({
+    #     introspection_id: "String", # required
+    #     include_models_sdl: false,
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.introspection_id #=> String
+    #   resp.introspection_status #=> String, one of "PROCESSING", "FAILED", "SUCCESS"
+    #   resp.introspection_status_detail #=> String
+    #   resp.introspection_result.models #=> Array
+    #   resp.introspection_result.models[0].name #=> String
+    #   resp.introspection_result.models[0].fields #=> Array
+    #   resp.introspection_result.models[0].fields[0].name #=> String
+    #   resp.introspection_result.models[0].fields[0].type.kind #=> String
+    #   resp.introspection_result.models[0].fields[0].type.name #=> String
+    #   resp.introspection_result.models[0].fields[0].type.type #=> Types::DataSourceIntrospectionModelFieldType
+    #   resp.introspection_result.models[0].fields[0].type.values #=> Array
+    #   resp.introspection_result.models[0].fields[0].type.values[0] #=> String
+    #   resp.introspection_result.models[0].fields[0].length #=> Integer
+    #   resp.introspection_result.models[0].primary_key.name #=> String
+    #   resp.introspection_result.models[0].primary_key.fields #=> Array
+    #   resp.introspection_result.models[0].primary_key.fields[0] #=> String
+    #   resp.introspection_result.models[0].indexes #=> Array
+    #   resp.introspection_result.models[0].indexes[0].name #=> String
+    #   resp.introspection_result.models[0].indexes[0].fields #=> Array
+    #   resp.introspection_result.models[0].indexes[0].fields[0] #=> String
+    #   resp.introspection_result.models[0].sdl #=> String
+    #   resp.introspection_result.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDataSourceIntrospection AWS API Documentation
+    #
+    # @overload get_data_source_introspection(params = {})
+    # @param [Hash] params ({})
+    def get_data_source_introspection(params = {}, options = {})
+      req = build_request(:get_data_source_introspection, params)
       req.send_request(options)
     end
 
@@ -2025,6 +2217,12 @@ module Aws::AppSync
     #   resp.graphql_api.merged_api_execution_role_arn #=> String
     #   resp.graphql_api.owner #=> String
     #   resp.graphql_api.owner_contact #=> String
+    #   resp.graphql_api.introspection_config #=> String, one of "ENABLED", "DISABLED"
+    #   resp.graphql_api.query_depth_limit #=> Integer
+    #   resp.graphql_api.resolver_count_limit #=> Integer
+    #   resp.graphql_api.enhanced_metrics_config.resolver_level_metrics_behavior #=> String, one of "FULL_REQUEST_RESOLVER_METRICS", "PER_RESOLVER_METRICS"
+    #   resp.graphql_api.enhanced_metrics_config.data_source_level_metrics_behavior #=> String, one of "FULL_REQUEST_DATA_SOURCE_METRICS", "PER_DATA_SOURCE_METRICS"
+    #   resp.graphql_api.enhanced_metrics_config.operation_level_metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApi AWS API Documentation
     #
@@ -2032,6 +2230,37 @@ module Aws::AppSync
     # @param [Hash] params ({})
     def get_graphql_api(params = {}, options = {})
       req = build_request(:get_graphql_api, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the list of environmental variable key-value pairs
+    # associated with an API by its ID value.
+    #
+    # @option params [required, String] :api_id
+    #   The ID of the API from which the environmental variable list will be
+    #   retrieved.
+    #
+    # @return [Types::GetGraphqlApiEnvironmentVariablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGraphqlApiEnvironmentVariablesResponse#environment_variables #environment_variables} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_graphql_api_environment_variables({
+    #     api_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.environment_variables #=> Hash
+    #   resp.environment_variables["EnvironmentVariableKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApiEnvironmentVariables AWS API Documentation
+    #
+    # @overload get_graphql_api_environment_variables(params = {})
+    # @param [Hash] params ({})
+    def get_graphql_api_environment_variables(params = {}, options = {})
+      req = build_request(:get_graphql_api_environment_variables, params)
       req.send_request(options)
     end
 
@@ -2116,6 +2345,7 @@ module Aws::AppSync
     #   resp.resolver.runtime.name #=> String, one of "APPSYNC_JS"
     #   resp.resolver.runtime.runtime_version #=> String
     #   resp.resolver.code #=> String
+    #   resp.resolver.metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetResolver AWS API Documentation
     #
@@ -2351,6 +2581,7 @@ module Aws::AppSync
     #   resp.data_sources[0].relational_database_config.rds_http_endpoint_config.schema #=> String
     #   resp.data_sources[0].relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
     #   resp.data_sources[0].event_bridge_config.event_bus_arn #=> String
+    #   resp.data_sources[0].metrics_config #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListDataSources AWS API Documentation
@@ -2535,6 +2766,12 @@ module Aws::AppSync
     #   resp.graphql_apis[0].merged_api_execution_role_arn #=> String
     #   resp.graphql_apis[0].owner #=> String
     #   resp.graphql_apis[0].owner_contact #=> String
+    #   resp.graphql_apis[0].introspection_config #=> String, one of "ENABLED", "DISABLED"
+    #   resp.graphql_apis[0].query_depth_limit #=> Integer
+    #   resp.graphql_apis[0].resolver_count_limit #=> Integer
+    #   resp.graphql_apis[0].enhanced_metrics_config.resolver_level_metrics_behavior #=> String, one of "FULL_REQUEST_RESOLVER_METRICS", "PER_RESOLVER_METRICS"
+    #   resp.graphql_apis[0].enhanced_metrics_config.data_source_level_metrics_behavior #=> String, one of "FULL_REQUEST_DATA_SOURCE_METRICS", "PER_DATA_SOURCE_METRICS"
+    #   resp.graphql_apis[0].enhanced_metrics_config.operation_level_metrics_config #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListGraphqlApis AWS API Documentation
@@ -2598,6 +2835,7 @@ module Aws::AppSync
     #   resp.resolvers[0].runtime.name #=> String, one of "APPSYNC_JS"
     #   resp.resolvers[0].runtime.runtime_version #=> String
     #   resp.resolvers[0].code #=> String
+    #   resp.resolvers[0].metrics_config #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolvers AWS API Documentation
@@ -2661,6 +2899,7 @@ module Aws::AppSync
     #   resp.resolvers[0].runtime.name #=> String, one of "APPSYNC_JS"
     #   resp.resolvers[0].runtime.runtime_version #=> String
     #   resp.resolvers[0].code #=> String
+    #   resp.resolvers[0].metrics_config #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversByFunction AWS API Documentation
@@ -2855,6 +3094,141 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Creates a list of environmental variables in an API by its ID value.
+    #
+    # When creating an environmental variable, it must follow the
+    # constraints below:
+    #
+    # * Both JavaScript and VTL templates support environmental variables.
+    #
+    # * Environmental variables are not evaluated before function
+    #   invocation.
+    #
+    # * Environmental variables only support string values.
+    #
+    # * Any defined value in an environmental variable is considered a
+    #   string literal and not expanded.
+    #
+    # * Variable evaluations should ideally be performed in the function
+    #   code.
+    #
+    # When creating an environmental variable key-value pair, it must follow
+    # the additional constraints below:
+    #
+    # * Keys must begin with a letter.
+    #
+    # * Keys must be at least two characters long.
+    #
+    # * Keys can only contain letters, numbers, and the underscore character
+    #   (\_).
+    #
+    # * Values can be up to 512 characters long.
+    #
+    # * You can configure up to 50 key-value pairs in a GraphQL API.
+    #
+    # You can create a list of environmental variables by adding it to the
+    # `environmentVariables` payload as a list in the format
+    # `\{"key1":"value1","key2":"value2", …\}`. Note that each call of the
+    # `PutGraphqlApiEnvironmentVariables` action will result in the
+    # overwriting of the existing environmental variable list of that API.
+    # This means the existing environmental variables will be lost. To avoid
+    # this, you must include all existing and new environmental variables in
+    # the list each time you call this action.
+    #
+    # @option params [required, String] :api_id
+    #   The ID of the API to which the environmental variable list will be
+    #   written.
+    #
+    # @option params [required, Hash<String,String>] :environment_variables
+    #   The list of environmental variables to add to the API.
+    #
+    #   When creating an environmental variable key-value pair, it must follow
+    #   the additional constraints below:
+    #
+    #   * Keys must begin with a letter.
+    #
+    #   * Keys must be at least two characters long.
+    #
+    #   * Keys can only contain letters, numbers, and the underscore character
+    #     (\_).
+    #
+    #   * Values can be up to 512 characters long.
+    #
+    #   * You can configure up to 50 key-value pairs in a GraphQL API.
+    #
+    #   You can create a list of environmental variables by adding it to the
+    #   `environmentVariables` payload as a list in the format
+    #   `\{"key1":"value1","key2":"value2", …\}`. Note that each call of the
+    #   `PutGraphqlApiEnvironmentVariables` action will result in the
+    #   overwriting of the existing environmental variable list of that API.
+    #   This means the existing environmental variables will be lost. To avoid
+    #   this, you must include all existing and new environmental variables in
+    #   the list each time you call this action.
+    #
+    # @return [Types::PutGraphqlApiEnvironmentVariablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutGraphqlApiEnvironmentVariablesResponse#environment_variables #environment_variables} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_graphql_api_environment_variables({
+    #     api_id: "String", # required
+    #     environment_variables: { # required
+    #       "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.environment_variables #=> Hash
+    #   resp.environment_variables["EnvironmentVariableKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/PutGraphqlApiEnvironmentVariables AWS API Documentation
+    #
+    # @overload put_graphql_api_environment_variables(params = {})
+    # @param [Hash] params ({})
+    def put_graphql_api_environment_variables(params = {}, options = {})
+      req = build_request(:put_graphql_api_environment_variables, params)
+      req.send_request(options)
+    end
+
+    # Creates a new introspection. Returns the `introspectionId` of the new
+    # introspection after its creation.
+    #
+    # @option params [Types::RdsDataApiConfig] :rds_data_api_config
+    #   The `rdsDataApiConfig` object data.
+    #
+    # @return [Types::StartDataSourceIntrospectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDataSourceIntrospectionResponse#introspection_id #introspection_id} => String
+    #   * {Types::StartDataSourceIntrospectionResponse#introspection_status #introspection_status} => String
+    #   * {Types::StartDataSourceIntrospectionResponse#introspection_status_detail #introspection_status_detail} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_data_source_introspection({
+    #     rds_data_api_config: {
+    #       resource_arn: "RdsDataApiConfigResourceArn", # required
+    #       secret_arn: "RdsDataApiConfigSecretArn", # required
+    #       database_name: "RdsDataApiConfigDatabaseName", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.introspection_id #=> String
+    #   resp.introspection_status #=> String, one of "PROCESSING", "FAILED", "SUCCESS"
+    #   resp.introspection_status_detail #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/StartDataSourceIntrospection AWS API Documentation
+    #
+    # @overload start_data_source_introspection(params = {})
+    # @param [Hash] params ({})
+    def start_data_source_introspection(params = {}, options = {})
+      req = build_request(:start_data_source_introspection, params)
+      req.send_request(options)
+    end
+
     # Adds a new schema to your GraphQL API.
     #
     # This operation is asynchronous. Use to determine when it has
@@ -3040,6 +3414,21 @@ module Aws::AppSync
     #
     #   * **R4\_8XLARGE**: A r4.8xlarge instance type.
     #
+    # @option params [String] :health_metrics_config
+    #   Controls how cache health metrics will be emitted to CloudWatch. Cache
+    #   health metrics include:
+    #
+    #   * NetworkBandwidthOutAllowanceExceeded: The network packets dropped
+    #     because the throughput exceeded the aggregated bandwidth limit. This
+    #     is useful for diagnosing bottlenecks in a cache configuration.
+    #
+    #   * EngineCPUUtilization: The CPU utilization (percentage) allocated to
+    #     the Redis process. This is useful for diagnosing bottlenecks in a
+    #     cache configuration.
+    #
+    #   Metrics will be recorded by API ID. You can set the value to `ENABLED`
+    #   or `DISABLED`.
+    #
     # @return [Types::UpdateApiCacheResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApiCacheResponse#api_cache #api_cache} => Types::ApiCache
@@ -3051,6 +3440,7 @@ module Aws::AppSync
     #     ttl: 1, # required
     #     api_caching_behavior: "FULL_REQUEST_CACHING", # required, accepts FULL_REQUEST_CACHING, PER_RESOLVER_CACHING
     #     type: "T2_SMALL", # required, accepts T2_SMALL, T2_MEDIUM, R4_LARGE, R4_XLARGE, R4_2XLARGE, R4_4XLARGE, R4_8XLARGE, SMALL, MEDIUM, LARGE, XLARGE, LARGE_2X, LARGE_4X, LARGE_8X, LARGE_12X
+    #     health_metrics_config: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -3061,6 +3451,7 @@ module Aws::AppSync
     #   resp.api_cache.at_rest_encryption_enabled #=> Boolean
     #   resp.api_cache.type #=> String, one of "T2_SMALL", "T2_MEDIUM", "R4_LARGE", "R4_XLARGE", "R4_2XLARGE", "R4_4XLARGE", "R4_8XLARGE", "SMALL", "MEDIUM", "LARGE", "XLARGE", "LARGE_2X", "LARGE_4X", "LARGE_8X", "LARGE_12X"
     #   resp.api_cache.status #=> String, one of "AVAILABLE", "CREATING", "DELETING", "MODIFYING", "FAILED"
+    #   resp.api_cache.health_metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiCache AWS API Documentation
     #
@@ -3160,6 +3551,16 @@ module Aws::AppSync
     # @option params [Types::EventBridgeDataSourceConfig] :event_bridge_config
     #   The new Amazon EventBridge settings.
     #
+    # @option params [String] :metrics_config
+    #   Enables or disables enhanced data source metrics for specified data
+    #   sources. Note that `metricsConfig` won't be used unless the
+    #   `dataSourceLevelMetricsBehavior` value is set to
+    #   `PER_DATA_SOURCE_METRICS`. If the `dataSourceLevelMetricsBehavior` is
+    #   set to `FULL_REQUEST_DATA_SOURCE_METRICS` instead, `metricsConfig`
+    #   will be ignored. However, you can still set its value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #
     # @return [Types::UpdateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDataSourceResponse#data_source #data_source} => Types::DataSource
@@ -3217,6 +3618,7 @@ module Aws::AppSync
     #     event_bridge_config: {
     #       event_bus_arn: "String", # required
     #     },
+    #     metrics_config: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -3249,6 +3651,7 @@ module Aws::AppSync
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.schema #=> String
     #   resp.data_source.relational_database_config.rds_http_endpoint_config.aws_secret_store_arn #=> String
     #   resp.data_source.event_bridge_config.event_bus_arn #=> String
+    #   resp.data_source.metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDataSource AWS API Documentation
     #
@@ -3412,7 +3815,7 @@ module Aws::AppSync
     # @option params [Types::LogConfig] :log_config
     #   The Amazon CloudWatch Logs configuration for the `GraphqlApi` object.
     #
-    # @option params [String] :authentication_type
+    # @option params [required, String] :authentication_type
     #   The new authentication type for the `GraphqlApi` object.
     #
     # @option params [Types::UserPoolConfig] :user_pool_config
@@ -3445,6 +3848,42 @@ module Aws::AppSync
     #   This field accepts any string input with a length of 0 - 256
     #   characters.
     #
+    # @option params [String] :introspection_config
+    #   Sets the value of the GraphQL API to enable (`ENABLED`) or disable
+    #   (`DISABLED`) introspection. If no value is provided, the introspection
+    #   configuration will be set to `ENABLED` by default. This field will
+    #   produce an error if the operation attempts to use the introspection
+    #   feature while this field is disabled.
+    #
+    #   For more information about introspection, see [GraphQL
+    #   introspection][1].
+    #
+    #
+    #
+    #   [1]: https://graphql.org/learn/introspection/
+    #
+    # @option params [Integer] :query_depth_limit
+    #   The maximum depth a query can have in a single request. Depth refers
+    #   to the amount of nested levels allowed in the body of query. The
+    #   default value is `0` (or unspecified), which indicates there's no
+    #   depth limit. If you set a limit, it can be between `1` and `75` nested
+    #   levels. This field will produce a limit error if the operation falls
+    #   out of bounds.
+    #
+    #   Note that fields can still be set to nullable or non-nullable. If a
+    #   non-nullable field produces an error, the error will be thrown upwards
+    #   to the first nullable field available.
+    #
+    # @option params [Integer] :resolver_count_limit
+    #   The maximum number of resolvers that can be invoked in a single
+    #   request. The default value is `0` (or unspecified), which will set the
+    #   limit to `10000`. When specified, the limit value can be between `1`
+    #   and `10000`. This field will produce a limit error if the operation
+    #   falls out of bounds.
+    #
+    # @option params [Types::EnhancedMetricsConfig] :enhanced_metrics_config
+    #   The `enhancedMetricsConfig` object.
+    #
     # @return [Types::UpdateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateGraphqlApiResponse#graphql_api #graphql_api} => Types::GraphqlApi
@@ -3459,7 +3898,7 @@ module Aws::AppSync
     #       cloud_watch_logs_role_arn: "String", # required
     #       exclude_verbose_content: false,
     #     },
-    #     authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
+    #     authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
     #     user_pool_config: {
     #       user_pool_id: "String", # required
     #       aws_region: "String", # required
@@ -3501,6 +3940,14 @@ module Aws::AppSync
     #     },
     #     merged_api_execution_role_arn: "String",
     #     owner_contact: "String",
+    #     introspection_config: "ENABLED", # accepts ENABLED, DISABLED
+    #     query_depth_limit: 1,
+    #     resolver_count_limit: 1,
+    #     enhanced_metrics_config: {
+    #       resolver_level_metrics_behavior: "FULL_REQUEST_RESOLVER_METRICS", # required, accepts FULL_REQUEST_RESOLVER_METRICS, PER_RESOLVER_METRICS
+    #       data_source_level_metrics_behavior: "FULL_REQUEST_DATA_SOURCE_METRICS", # required, accepts FULL_REQUEST_DATA_SOURCE_METRICS, PER_DATA_SOURCE_METRICS
+    #       operation_level_metrics_config: "ENABLED", # required, accepts ENABLED, DISABLED
+    #     },
     #   })
     #
     # @example Response structure
@@ -3548,6 +3995,12 @@ module Aws::AppSync
     #   resp.graphql_api.merged_api_execution_role_arn #=> String
     #   resp.graphql_api.owner #=> String
     #   resp.graphql_api.owner_contact #=> String
+    #   resp.graphql_api.introspection_config #=> String, one of "ENABLED", "DISABLED"
+    #   resp.graphql_api.query_depth_limit #=> Integer
+    #   resp.graphql_api.resolver_count_limit #=> Integer
+    #   resp.graphql_api.enhanced_metrics_config.resolver_level_metrics_behavior #=> String, one of "FULL_REQUEST_RESOLVER_METRICS", "PER_RESOLVER_METRICS"
+    #   resp.graphql_api.enhanced_metrics_config.data_source_level_metrics_behavior #=> String, one of "FULL_REQUEST_DATA_SOURCE_METRICS", "PER_DATA_SOURCE_METRICS"
+    #   resp.graphql_api.enhanced_metrics_config.operation_level_metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApi AWS API Documentation
     #
@@ -3621,6 +4074,16 @@ module Aws::AppSync
     #   When code is used, the `runtime` is required. The `runtime` value must
     #   be `APPSYNC_JS`.
     #
+    # @option params [String] :metrics_config
+    #   Enables or disables enhanced resolver metrics for specified resolvers.
+    #   Note that `metricsConfig` won't be used unless the
+    #   `resolverLevelMetricsBehavior` value is set to `PER_RESOLVER_METRICS`.
+    #   If the `resolverLevelMetricsBehavior` is set to
+    #   `FULL_REQUEST_RESOLVER_METRICS` instead, `metricsConfig` will be
+    #   ignored. However, you can still set its value.
+    #
+    #   `metricsConfig` can be `ENABLED` or `DISABLED`.
+    #
     # @return [Types::UpdateResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateResolverResponse#resolver #resolver} => Types::Resolver
@@ -3655,6 +4118,7 @@ module Aws::AppSync
     #       runtime_version: "String", # required
     #     },
     #     code: "Code",
+    #     metrics_config: "ENABLED", # accepts ENABLED, DISABLED
     #   })
     #
     # @example Response structure
@@ -3678,6 +4142,7 @@ module Aws::AppSync
     #   resp.resolver.runtime.name #=> String, one of "APPSYNC_JS"
     #   resp.resolver.runtime.runtime_version #=> String
     #   resp.resolver.code #=> String
+    #   resp.resolver.metrics_config #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolver AWS API Documentation
     #
@@ -3803,7 +4268,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

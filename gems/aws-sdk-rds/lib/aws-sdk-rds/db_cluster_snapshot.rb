@@ -209,6 +209,16 @@ module Aws::RDS
       data[:db_cluster_resource_id]
     end
 
+    # The storage throughput for the DB cluster snapshot. The throughput is
+    # automatically set based on the IOPS that you provision, and is not
+    # configurable.
+    #
+    # This setting is only for non-Aurora Multi-AZ DB clusters.
+    # @return [Integer]
+    def storage_throughput
+      data[:storage_throughput]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -223,7 +233,7 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_db_cluster_snapshots(db_cluster_snapshot_identifier: @snapshot_id)
       end
       @data = resp.db_cluster_snapshots[0]
@@ -340,7 +350,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -366,7 +376,7 @@ module Aws::RDS
         db_cluster_identifier: @cluster_id,
         db_cluster_snapshot_identifier: @snapshot_id
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_db_cluster_snapshot(options)
       end
       DBClusterSnapshot.new(
@@ -502,7 +512,7 @@ module Aws::RDS
     # @return [DBClusterSnapshot]
     def copy(options = {})
       options = options.merge(source_db_cluster_snapshot_identifier: @snapshot_id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.copy_db_cluster_snapshot(options)
       end
       DBClusterSnapshot.new(
@@ -520,7 +530,7 @@ module Aws::RDS
     # @return [DBClusterSnapshot]
     def delete(options = {})
       options = options.merge(db_cluster_snapshot_identifier: @snapshot_id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_db_cluster_snapshot(options)
       end
       DBClusterSnapshot.new(
@@ -576,6 +586,12 @@ module Aws::RDS
     #       max_capacity: 1.0,
     #     },
     #     network_type: "String",
+    #     rds_custom_cluster_configuration: {
+    #       interconnect_subnet_id: "String",
+    #       transit_gateway_multicast_domain_id: "String",
+    #       replica_mode: "open-read-only", # accepts open-read-only, mounted
+    #     },
+    #     engine_lifecycle_support: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :availability_zones
@@ -954,10 +970,48 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    # @option options [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
+    #   Reserved for future use.
+    # @option options [String] :engine_lifecycle_support
+    #   The life cycle type for this DB cluster.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB cluster into Amazon RDS Extended Support. At the
+    #   end of standard support, you can avoid charges for Extended Support by
+    #   setting the value to `open-source-rds-extended-support-disabled`. In
+    #   this case, RDS automatically upgrades your restored DB cluster to a
+    #   higher engine version, if the major engine version is past its end of
+    #   standard support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB cluster into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the selected
+    #   major engine version on your DB cluster past the end of standard
+    #   support for that engine version. For more information, see the
+    #   following sections:
+    #
+    #   * Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
+    #     Support][1] in the *Amazon Aurora User Guide*
+    #
+    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
+    #     RDS User Guide*
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(snapshot_identifier: @snapshot_id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.restore_db_cluster_from_snapshot(options)
       end
       DBCluster.new(
@@ -1028,7 +1082,7 @@ module Aws::RDS
           source_type: "db-cluster-snapshot",
           source_identifier: @snapshot_id
         )
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_events(options)
         end
         resp.each_page do |page|

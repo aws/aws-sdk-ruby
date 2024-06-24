@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::ECS
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::ECS
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::ECS
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::ECS
     #   @option options [Aws::ECS::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ECS::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -464,6 +489,7 @@ module Aws::ECS
     #         instance_warmup_period: 1,
     #       },
     #       managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #       managed_draining: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     tags: [
     #       {
@@ -485,6 +511,7 @@ module Aws::ECS
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_draining #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
@@ -685,6 +712,10 @@ module Aws::ECS
     #           s3_key_prefix: "String",
     #         },
     #       },
+    #       managed_storage_configuration: {
+    #         kms_key_id: "String",
+    #         fargate_ephemeral_storage_kms_key_id: "String",
+    #       },
     #     },
     #     capacity_providers: ["String"],
     #     default_capacity_provider_strategy: [
@@ -710,6 +741,8 @@ module Aws::ECS
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.kms_key_id #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.fargate_ephemeral_storage_kms_key_id #=> String
     #   resp.cluster.status #=> String
     #   resp.cluster.registered_container_instances_count #=> Integer
     #   resp.cluster.running_tasks_count #=> Integer
@@ -755,14 +788,10 @@ module Aws::ECS
     # specified cluster. To update an existing service, see the
     # UpdateService action.
     #
-    # <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
-    # customers to Amazon Elastic Inference (EI), and will help current
-    # customers migrate their workloads to options that offer better price
-    # and performance. After April 15, 2023, new customers will not be able
-    # to launch instances with Amazon EI accelerators in Amazon SageMaker,
-    # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
-    # at least once during the past 30-day period are considered current
-    # customers and will be able to continue using the service.
+    # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
+    # revision before authorization. When a task definition revision is not
+    # specified, authorization will occur using the latest revision of a
+    # task definition.
     #
     #  </note>
     #
@@ -772,6 +801,12 @@ module Aws::ECS
     # associated with the service. For more information, see [Service load
     # balancing][1] in the *Amazon Elastic Container Service Developer
     # Guide*.
+    #
+    # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
+    # the volume when creating or updating a service. `volumeConfigurations`
+    # is only supported for REPLICA service and not DAEMON service. For more
+    # infomation, see [Amazon EBS volumes][2] in the *Amazon Elastic
+    # Container Service Developer Guide*.
     #
     # Tasks for services that don't use a load balancer are considered
     # healthy if they're in the `RUNNING` state. Tasks for services that
@@ -785,7 +820,7 @@ module Aws::ECS
     #   service scheduler spreads tasks across Availability Zones. You can
     #   use task placement strategies and constraints to customize task
     #   placement decisions. For more information, see [Service scheduler
-    #   concepts][2] in the *Amazon Elastic Container Service Developer
+    #   concepts][3] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     # * `DAEMON` - The daemon scheduling strategy deploys exactly one task
@@ -796,7 +831,7 @@ module Aws::ECS
     #   constraints. When using this strategy, you don't need to specify a
     #   desired number of tasks, a task placement strategy, or use Service
     #   Auto Scaling policies. For more information, see [Service scheduler
-    #   concepts][2] in the *Amazon Elastic Container Service Developer
+    #   concepts][3] in the *Amazon Elastic Container Service Developer
     #   Guide*.
     #
     # You can optionally specify a deployment configuration for your
@@ -852,20 +887,30 @@ module Aws::ECS
     # controller, you can specify only parameters that aren't controlled at
     # the task set level. The only required parameter is the service name.
     # You control your services using the CreateTaskSet operation. For more
-    # information, see [Amazon ECS deployment types][3] in the *Amazon
+    # information, see [Amazon ECS deployment types][4] in the *Amazon
     # Elastic Container Service Developer Guide*.
     #
     # When the service scheduler launches new tasks, it determines task
     # placement. For information about task placement and task placement
-    # strategies, see [Amazon ECS task placement][4] in the *Amazon Elastic
-    # Container Service Developer Guide*.
+    # strategies, see [Amazon ECS task placement][5] in the *Amazon Elastic
+    # Container Service Developer Guide*
+    #
+    # Starting April 15, 2023, Amazon Web Services will not onboard new
+    # customers to Amazon Elastic Inference (EI), and will help current
+    # customers migrate their workloads to options that offer better price
+    # and performance. After April 15, 2023, new customers will not be able
+    # to launch instances with Amazon EI accelerators in Amazon SageMaker,
+    # Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI
+    # at least once during the past 30-day period are considered current
+    # customers and will be able to continue using the service.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
-    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
-    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
-    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    # [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -974,8 +1019,8 @@ module Aws::ECS
     #
     # @option params [String] :client_token
     #   An identifier that you provide to ensure the idempotency of the
-    #   request. It must be unique and is case sensitive. Up to 32 ASCII
-    #   characters are allowed.
+    #   request. It must be unique and is case sensitive. Up to 36 ASCII
+    #   characters in the range of 33-126 (inclusive) are allowed.
     #
     # @option params [String] :launch_type
     #   The infrastructure that you run your service on. For more information,
@@ -987,7 +1032,7 @@ module Aws::ECS
     #
     #   <note markdown="1"> Fargate Spot infrastructure is available for use but a capacity
     #   provider strategy must be used. For more information, see [Fargate
-    #   capacity providers][2] in the *Amazon ECS User Guide for Fargate*.
+    #   capacity providers][2] in the *Amazon ECS Developer Guide*.
     #
     #    </note>
     #
@@ -1004,7 +1049,7 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-capacity-providers.html
     #
     # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
     #   The capacity provider strategy to use for the service.
@@ -1192,11 +1237,16 @@ module Aws::ECS
     #   can only be propagated to the task during task creation. To add tags
     #   to a task after task creation, use the [TagResource][1] API action.
     #
+    #   You must set this to a value other than `NONE` when you use Cost
+    #   Explorer. For more information, see [Amazon ECS usage reports][2] in
+    #   the *Amazon Elastic Container Service Developer Guide*.
+    #
     #   The default is `NONE`.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/usage-reports.html
     #
     # @option params [Boolean] :enable_execute_command
     #   Determines whether the execute command functionality is turned on for
@@ -1219,6 +1269,11 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
+    #
+    # @option params [Array<Types::ServiceVolumeConfiguration>] :volume_configurations
+    #   The configuration for a volume specified in the task definition as a
+    #   volume that is configured at launch time. Currently, the only
+    #   supported volume type is an Amazon EBS volume.
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1274,10 +1329,10 @@ module Aws::ECS
     #       ], 
     #       pending_count: 0, 
     #       running_count: 0, 
-    #       service_arn: "arn:aws:ecs:us-east-1:012345678910:service/ecs-simple-service", 
+    #       service_arn: "arn:aws:ecs:us-east-1:012345678910:service/default/ecs-simple-service", 
     #       service_name: "ecs-simple-service", 
     #       status: "ACTIVE", 
-    #       task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6", 
+    #       task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/default/hello_world:6", 
     #     }, 
     #   }
     #
@@ -1335,10 +1390,10 @@ module Aws::ECS
     #       pending_count: 0, 
     #       role_arn: "arn:aws:iam::012345678910:role/ecsServiceRole", 
     #       running_count: 0, 
-    #       service_arn: "arn:aws:ecs:us-east-1:012345678910:service/ecs-simple-service-elb", 
+    #       service_arn: "arn:aws:ecs:us-east-1:012345678910:service/default/ecs-simple-service-elb", 
     #       service_name: "ecs-simple-service-elb", 
     #       status: "ACTIVE", 
-    #       task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/console-sample-app-static:6", 
+    #       task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/default/console-sample-app-static:6", 
     #     }, 
     #   }
     #
@@ -1436,6 +1491,17 @@ module Aws::ECS
     #             },
     #           ],
     #           ingress_port_override: 1,
+    #           timeout: {
+    #             idle_timeout_seconds: 1,
+    #             per_request_timeout_seconds: 1,
+    #           },
+    #           tls: {
+    #             issuer_certificate_authority: { # required
+    #               aws_pca_authority_arn: "String",
+    #             },
+    #             kms_key: "String",
+    #             role_arn: "String",
+    #           },
     #         },
     #       ],
     #       log_configuration: {
@@ -1451,6 +1517,34 @@ module Aws::ECS
     #         ],
     #       },
     #     },
+    #     volume_configurations: [
+    #       {
+    #         name: "ECSVolumeName", # required
+    #         managed_ebs_volume: {
+    #           encrypted: false,
+    #           kms_key_id: "EBSKMSKeyId",
+    #           volume_type: "EBSVolumeType",
+    #           size_in_gi_b: 1,
+    #           snapshot_id: "EBSSnapshotId",
+    #           iops: 1,
+    #           throughput: 1,
+    #           tag_specifications: [
+    #             {
+    #               resource_type: "volume", # required, accepts volume
+    #               tags: [
+    #                 {
+    #                   key: "TagKey",
+    #                   value: "TagValue",
+    #                 },
+    #               ],
+    #               propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE, NONE
+    #             },
+    #           ],
+    #           role_arn: "IAMRoleArn", # required
+    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1531,6 +1625,7 @@ module Aws::ECS
     #   resp.service.task_sets[0].tags #=> Array
     #   resp.service.task_sets[0].tags[0].key #=> String
     #   resp.service.task_sets[0].tags[0].value #=> String
+    #   resp.service.task_sets[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.deployments #=> Array
     #   resp.service.deployments[0].id #=> String
     #   resp.service.deployments[0].status #=> String
@@ -1564,6 +1659,11 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
     #   resp.service.deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.idle_timeout_seconds #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.per_request_timeout_seconds #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.issuer_certificate_authority.aws_pca_authority_arn #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.kms_key #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.role_arn #=> String
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.options #=> Hash
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.options["String"] #=> String
@@ -1573,6 +1673,24 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_resources #=> Array
     #   resp.service.deployments[0].service_connect_resources[0].discovery_name #=> String
     #   resp.service.deployments[0].service_connect_resources[0].discovery_arn #=> String
+    #   resp.service.deployments[0].volume_configurations #=> Array
+    #   resp.service.deployments[0].volume_configurations[0].name #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.encrypted #=> Boolean
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.kms_key_id #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.volume_type #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.size_in_gi_b #=> Integer
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.snapshot_id #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.iops #=> Integer
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.throughput #=> Integer
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications #=> Array
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].resource_type #=> String, one of "volume"
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags #=> Array
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].key #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].value #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.service.deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -1615,9 +1733,21 @@ module Aws::ECS
     # more information, see [Amazon ECS deployment types][1] in the *Amazon
     # Elastic Container Service Developer Guide*.
     #
+    # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
+    # revision before authorization. When a task definition revision is not
+    # specified, authorization will occur using the latest revision of a
+    # task definition.
+    #
+    #  </note>
+    #
+    # For information about the maximum number of task sets and otther
+    # quotas, see [Amazon ECS service quotas][2] in the *Amazon Elastic
+    # Container Service Developer Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html
     #
     # @option params [required, String] :service
     #   The short name or full Amazon Resource Name (ARN) of the service to
@@ -1704,9 +1834,9 @@ module Aws::ECS
     #   and keep running in the task set.
     #
     # @option params [String] :client_token
-    #   The identifier that you provide to ensure the idempotency of the
-    #   request. It's case sensitive and must be unique. It can be up to 32
-    #   ASCII characters are allowed.
+    #   An identifier that you provide to ensure the idempotency of the
+    #   request. It must be unique and is case sensitive. Up to 36 ASCII
+    #   characters in the range of 33-126 (inclusive) are allowed.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to the task set to help you categorize and
@@ -1838,6 +1968,7 @@ module Aws::ECS
     #   resp.task_set.tags #=> Array
     #   resp.task_set.tags[0].key #=> String
     #   resp.task_set.tags[0].value #=> String
+    #   resp.task_set.fargate_ephemeral_storage.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateTaskSet AWS API Documentation
     #
@@ -1913,15 +2044,16 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
+    #   resp.setting.type #=> String, one of "user", "aws_managed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAccountSetting AWS API Documentation
     #
@@ -2026,6 +2158,7 @@ module Aws::ECS
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_draining #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
@@ -2099,6 +2232,8 @@ module Aws::ECS
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.kms_key_id #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.fargate_ephemeral_storage_kms_key_id #=> String
     #   resp.cluster.status #=> String
     #   resp.cluster.registered_container_instances_count #=> Integer
     #   resp.cluster.running_tasks_count #=> Integer
@@ -2278,6 +2413,7 @@ module Aws::ECS
     #   resp.service.task_sets[0].tags #=> Array
     #   resp.service.task_sets[0].tags[0].key #=> String
     #   resp.service.task_sets[0].tags[0].value #=> String
+    #   resp.service.task_sets[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.deployments #=> Array
     #   resp.service.deployments[0].id #=> String
     #   resp.service.deployments[0].status #=> String
@@ -2311,6 +2447,11 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
     #   resp.service.deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.idle_timeout_seconds #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.per_request_timeout_seconds #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.issuer_certificate_authority.aws_pca_authority_arn #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.kms_key #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.role_arn #=> String
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.options #=> Hash
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.options["String"] #=> String
@@ -2320,6 +2461,24 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_resources #=> Array
     #   resp.service.deployments[0].service_connect_resources[0].discovery_name #=> String
     #   resp.service.deployments[0].service_connect_resources[0].discovery_arn #=> String
+    #   resp.service.deployments[0].volume_configurations #=> Array
+    #   resp.service.deployments[0].volume_configurations[0].name #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.encrypted #=> Boolean
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.kms_key_id #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.volume_type #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.size_in_gi_b #=> Integer
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.snapshot_id #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.iops #=> Integer
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.throughput #=> Integer
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications #=> Array
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].resource_type #=> String, one of "volume"
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags #=> Array
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].key #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].value #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.service.deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -2542,6 +2701,7 @@ module Aws::ECS
     #   resp.task_definitions[0].volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
     #   resp.task_definitions[0].volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
     #   resp.task_definitions[0].volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.domain #=> String
+    #   resp.task_definitions[0].volumes[0].configured_at_launch #=> Boolean
     #   resp.task_definitions[0].status #=> String, one of "ACTIVE", "INACTIVE", "DELETE_IN_PROGRESS"
     #   resp.task_definitions[0].requires_attributes #=> Array
     #   resp.task_definitions[0].requires_attributes[0].name #=> String
@@ -2669,6 +2829,7 @@ module Aws::ECS
     #   resp.task_set.tags #=> Array
     #   resp.task_set.tags[0].key #=> String
     #   resp.task_set.tags[0].value #=> String
+    #   resp.task_set.fargate_ephemeral_storage.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteTaskSet AWS API Documentation
     #
@@ -2997,6 +3158,7 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.domain #=> String
+    #   resp.task_definition.volumes[0].configured_at_launch #=> Boolean
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE", "DELETE_IN_PROGRESS"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -3103,6 +3265,7 @@ module Aws::ECS
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_providers[0].auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_providers[0].auto_scaling_group_provider.managed_draining #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_providers[0].update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_providers[0].update_status_reason #=> String
     #   resp.capacity_providers[0].tags #=> Array
@@ -3198,6 +3361,8 @@ module Aws::ECS
     #   resp.clusters[0].configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
     #   resp.clusters[0].configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
     #   resp.clusters[0].configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
+    #   resp.clusters[0].configuration.managed_storage_configuration.kms_key_id #=> String
+    #   resp.clusters[0].configuration.managed_storage_configuration.fargate_ephemeral_storage_kms_key_id #=> String
     #   resp.clusters[0].status #=> String
     #   resp.clusters[0].registered_container_instances_count #=> Integer
     #   resp.clusters[0].running_tasks_count #=> Integer
@@ -3286,7 +3451,7 @@ module Aws::ECS
     #     container_instances: [
     #       {
     #         agent_connected: true, 
-    #         container_instance_arn: "arn:aws:ecs:us-east-1:012345678910:container-instance/f2756532-8f13-4d53-87c9-aed50dc94cd7", 
+    #         container_instance_arn: "arn:aws:ecs:us-east-1:012345678910:container-instance/default/f2756532-8f13-4d53-87c9-aed50dc94cd7", 
     #         ec2_instance_id: "i-807f3249", 
     #         pending_tasks_count: 0, 
     #         registered_resources: [
@@ -3502,10 +3667,10 @@ module Aws::ECS
     #         ], 
     #         pending_count: 0, 
     #         running_count: 0, 
-    #         service_arn: "arn:aws:ecs:us-east-1:012345678910:service/ecs-simple-service", 
+    #         service_arn: "arn:aws:ecs:us-east-1:012345678910:service/default/ecs-simple-service", 
     #         service_name: "ecs-simple-service", 
     #         status: "ACTIVE", 
-    #         task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/hello_world:6", 
+    #         task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/default/hello_world:6", 
     #       }, 
     #     ], 
     #   }
@@ -3597,6 +3762,7 @@ module Aws::ECS
     #   resp.services[0].task_sets[0].tags #=> Array
     #   resp.services[0].task_sets[0].tags[0].key #=> String
     #   resp.services[0].task_sets[0].tags[0].value #=> String
+    #   resp.services[0].task_sets[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.services[0].deployments #=> Array
     #   resp.services[0].deployments[0].id #=> String
     #   resp.services[0].deployments[0].status #=> String
@@ -3630,6 +3796,11 @@ module Aws::ECS
     #   resp.services[0].deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
     #   resp.services[0].deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
     #   resp.services[0].deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].timeout.idle_timeout_seconds #=> Integer
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].timeout.per_request_timeout_seconds #=> Integer
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].tls.issuer_certificate_authority.aws_pca_authority_arn #=> String
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].tls.kms_key #=> String
+    #   resp.services[0].deployments[0].service_connect_configuration.services[0].tls.role_arn #=> String
     #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.options #=> Hash
     #   resp.services[0].deployments[0].service_connect_configuration.log_configuration.options["String"] #=> String
@@ -3639,6 +3810,24 @@ module Aws::ECS
     #   resp.services[0].deployments[0].service_connect_resources #=> Array
     #   resp.services[0].deployments[0].service_connect_resources[0].discovery_name #=> String
     #   resp.services[0].deployments[0].service_connect_resources[0].discovery_arn #=> String
+    #   resp.services[0].deployments[0].volume_configurations #=> Array
+    #   resp.services[0].deployments[0].volume_configurations[0].name #=> String
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.encrypted #=> Boolean
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.kms_key_id #=> String
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.volume_type #=> String
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.size_in_gi_b #=> Integer
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.snapshot_id #=> String
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.iops #=> Integer
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.throughput #=> Integer
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications #=> Array
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].resource_type #=> String, one of "volume"
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags #=> Array
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].key #=> String
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].value #=> String
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
+    #   resp.services[0].deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.services[0].deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.services[0].role_arn #=> String
     #   resp.services[0].events #=> Array
     #   resp.services[0].events[0].id #=> String
@@ -3915,6 +4104,7 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.domain #=> String
+    #   resp.task_definition.volumes[0].configured_at_launch #=> Boolean
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE", "DELETE_IN_PROGRESS"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -4043,6 +4233,7 @@ module Aws::ECS
     #   resp.task_sets[0].tags #=> Array
     #   resp.task_sets[0].tags[0].key #=> String
     #   resp.task_sets[0].tags[0].value #=> String
+    #   resp.task_sets[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -4105,7 +4296,7 @@ module Aws::ECS
     #     tasks: [
     #       {
     #         cluster_arn: "arn:aws:ecs:<region>:<aws_account_id>:cluster/default", 
-    #         container_instance_arn: "arn:aws:ecs:<region>:<aws_account_id>:container-instance/18f9eda5-27d7-4c19-b133-45adc516e8fb", 
+    #         container_instance_arn: "arn:aws:ecs:<region>:<aws_account_id>:container-instance/default/18f9eda5-27d7-4c19-b133-45adc516e8fb", 
     #         containers: [
     #           {
     #             name: "ecs-demo", 
@@ -4118,7 +4309,7 @@ module Aws::ECS
     #                 host_port: 80, 
     #               }, 
     #             ], 
-    #             task_arn: "arn:aws:ecs:<region>:<aws_account_id>:task/c5cba4eb-5dad-405e-96db-71ef8eefe6a8", 
+    #             task_arn: "arn:aws:ecs:<region>:<aws_account_id>:task/default/c5cba4eb-5dad-405e-96db-71ef8eefe6a8", 
     #           }, 
     #         ], 
     #         desired_status: "RUNNING", 
@@ -4131,7 +4322,7 @@ module Aws::ECS
     #           ], 
     #         }, 
     #         started_by: "ecs-svc/9223370608528463088", 
-    #         task_arn: "arn:aws:ecs:<region>:<aws_account_id>:task/c5cba4eb-5dad-405e-96db-71ef8eefe6a8", 
+    #         task_arn: "arn:aws:ecs:<region>:<aws_account_id>:task/default/c5cba4eb-5dad-405e-96db-71ef8eefe6a8", 
     #         task_definition_arn: "arn:aws:ecs:<region>:<aws_account_id>:task-definition/amazon-ecs-sample:1", 
     #       }, 
     #     ], 
@@ -4252,6 +4443,8 @@ module Aws::ECS
     #   resp.tasks[0].task_definition_arn #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.tasks[0].fargate_ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.tasks[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -4428,7 +4621,7 @@ module Aws::ECS
     #       {
     #         expiration_date: Time.parse("2022-11-02T06:56:32.553Z"), 
     #         protection_enabled: true, 
-    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772", 
+    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772", 
     #       }, 
     #     ], 
     #   }
@@ -4579,7 +4772,7 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_account_settings({
-    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod
+    #     name: "serviceLongArnFormat", # accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate
     #     value: "String",
     #     principal_arn: "String",
     #     effective_settings: false,
@@ -4590,9 +4783,10 @@ module Aws::ECS
     # @example Response structure
     #
     #   resp.settings #=> Array
-    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod"
+    #   resp.settings[0].name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate"
     #   resp.settings[0].value #=> String
     #   resp.settings[0].principal_arn #=> String
+    #   resp.settings[0].type #=> String, one of "user", "aws_managed"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAccountSettings AWS API Documentation
@@ -4829,8 +5023,8 @@ module Aws::ECS
     #   resp.to_h outputs the following:
     #   {
     #     container_instance_arns: [
-    #       "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/f6bbb147-5370-4ace-8c73-c7181ded911f", 
-    #       "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/ffe3d344-77e2-476c-a4d0-bf560ad50acb", 
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/default/f6bbb147-5370-4ace-8c73-c7181ded911f", 
+    #       "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/default/ffe3d344-77e2-476c-a4d0-bf560ad50acb", 
     #     ], 
     #   }
     #
@@ -4914,7 +5108,7 @@ module Aws::ECS
     #   resp.to_h outputs the following:
     #   {
     #     service_arns: [
-    #       "arn:aws:ecs:us-east-1:012345678910:service/my-http-service", 
+    #       "arn:aws:ecs:us-east-1:012345678910:service/default/my-http-service", 
     #     ], 
     #   }
     #
@@ -5398,8 +5592,8 @@ module Aws::ECS
     #   resp.to_h outputs the following:
     #   {
     #     task_arns: [
-    #       "arn:aws:ecs:us-east-1:012345678910:task/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84", 
-    #       "arn:aws:ecs:us-east-1:012345678910:task/6b809ef6-c67e-4467-921f-ee261c15a0a1", 
+    #       "arn:aws:ecs:us-east-1:012345678910:task/default/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84", 
+    #       "arn:aws:ecs:us-east-1:012345678910:task/default/6b809ef6-c67e-4467-921f-ee261c15a0a1", 
     #     ], 
     #   }
     #
@@ -5416,7 +5610,7 @@ module Aws::ECS
     #   resp.to_h outputs the following:
     #   {
     #     task_arns: [
-    #       "arn:aws:ecs:us-east-1:012345678910:task/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84", 
+    #       "arn:aws:ecs:us-east-1:012345678910:task/default/0cc43cdb-3bee-4407-9c26-c0e6ea5bee84", 
     #     ], 
     #   }
     #
@@ -5457,77 +5651,103 @@ module Aws::ECS
     # account settings. For more information, see [Account Settings][1] in
     # the *Amazon Elastic Container Service Developer Guide*.
     #
-    # When you specify `serviceLongArnFormat`, `taskLongArnFormat`, or
-    # `containerInstanceLongArnFormat`, the Amazon Resource Name (ARN) and
-    # resource ID format of the resource type for a specified user, role, or
-    # the root user for an account is affected. The opt-in and opt-out
-    # account setting must be set for each Amazon ECS resource separately.
-    # The ARN and resource ID format of a resource is defined by the opt-in
-    # status of the user or role that created the resource. You must turn on
-    # this setting to use Amazon ECS features such as resource tagging.
-    #
-    # When you specify `awsvpcTrunking`, the elastic network interface (ENI)
-    # limit for any new container instances that support the feature is
-    # changed. If `awsvpcTrunking` is turned on, any new container instances
-    # that support the feature are launched have the increased ENI limits
-    # available to them. For more information, see [Elastic Network
-    # Interface Trunking][2] in the *Amazon Elastic Container Service
-    # Developer Guide*.
-    #
-    # When you specify `containerInsights`, the default setting indicating
-    # whether Amazon Web Services CloudWatch Container Insights is turned on
-    # for your clusters is changed. If `containerInsights` is turned on, any
-    # new clusters that are created will have Container Insights turned on
-    # unless you disable it during cluster creation. For more information,
-    # see [CloudWatch Container Insights][3] in the *Amazon Elastic
-    # Container Service Developer Guide*.
-    #
-    # Amazon ECS is introducing tagging authorization for resource creation.
-    # Users must have permissions for actions that create the resource, such
-    # as `ecsCreateCluster`. If tags are specified when you create a
-    # resource, Amazon Web Services performs additional authorization to
-    # verify if users or roles have permissions to create tags. Therefore,
-    # you must grant explicit permissions to use the `ecs:TagResource`
-    # action. For more information, see [Grant permission to tag resources
-    # on creation][4] in the *Amazon ECS Developer Guide*.
-    #
-    # When Amazon Web Services determines that a security or infrastructure
-    # update is needed for an Amazon ECS task hosted on Fargate, the tasks
-    # need to be stopped and new tasks launched to replace them. Use
-    # `fargateTaskRetirementWaitPeriod` to configure the wait time to retire
-    # a Fargate task. For information about the Fargate tasks maintenance,
-    # see [Amazon Web Services Fargate task maintenance][5] in the *Amazon
-    # ECS Developer Guide*.
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html
-    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html
-    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html
-    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/supported-iam-actions-tagging.html
-    # [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html
     #
     # @option params [required, String] :name
-    #   The Amazon ECS resource name for which to modify the account setting.
-    #   If you specify `serviceLongArnFormat`, the ARN for your Amazon ECS
-    #   services is affected. If you specify `taskLongArnFormat`, the ARN and
-    #   resource ID for your Amazon ECS tasks is affected. If you specify
-    #   `containerInstanceLongArnFormat`, the ARN and resource ID for your
-    #   Amazon ECS container instances is affected. If you specify
-    #   `awsvpcTrunking`, the elastic network interface (ENI) limit for your
-    #   Amazon ECS container instances is affected. If you specify
-    #   `containerInsights`, the default setting for Amazon Web Services
-    #   CloudWatch Container Insights for your clusters is affected. If you
-    #   specify `fargateFIPSMode`, Fargate FIPS 140 compliance is affected. If
-    #   you specify `tagResourceAuthorization`, the opt-in option for tagging
-    #   resources on creation is affected. For information about the opt-in
-    #   timeline, see [Tagging authorization timeline][1] in the *Amazon ECS
-    #   Developer Guide*. If you specify `fargateTaskRetirementWaitPeriod`,
-    #   the wait time to retire a Fargate task is affected.
+    #   The Amazon ECS account setting name to modify.
+    #
+    #   The following are the valid values for the account setting name.
+    #
+    #   * `serviceLongArnFormat` - When modified, the Amazon Resource Name
+    #     (ARN) and resource ID format of the resource type for a specified
+    #     user, role, or the root user for an account is affected. The opt-in
+    #     and opt-out account setting must be set for each Amazon ECS resource
+    #     separately. The ARN and resource ID format of a resource is defined
+    #     by the opt-in status of the user or role that created the resource.
+    #     You must turn on this setting to use Amazon ECS features such as
+    #     resource tagging.
+    #
+    #   * `taskLongArnFormat` - When modified, the Amazon Resource Name (ARN)
+    #     and resource ID format of the resource type for a specified user,
+    #     role, or the root user for an account is affected. The opt-in and
+    #     opt-out account setting must be set for each Amazon ECS resource
+    #     separately. The ARN and resource ID format of a resource is defined
+    #     by the opt-in status of the user or role that created the resource.
+    #     You must turn on this setting to use Amazon ECS features such as
+    #     resource tagging.
+    #
+    #   * `containerInstanceLongArnFormat` - When modified, the Amazon
+    #     Resource Name (ARN) and resource ID format of the resource type for
+    #     a specified user, role, or the root user for an account is affected.
+    #     The opt-in and opt-out account setting must be set for each Amazon
+    #     ECS resource separately. The ARN and resource ID format of a
+    #     resource is defined by the opt-in status of the user or role that
+    #     created the resource. You must turn on this setting to use Amazon
+    #     ECS features such as resource tagging.
+    #
+    #   * `awsvpcTrunking` - When modified, the elastic network interface
+    #     (ENI) limit for any new container instances that support the feature
+    #     is changed. If `awsvpcTrunking` is turned on, any new container
+    #     instances that support the feature are launched have the increased
+    #     ENI limits available to them. For more information, see [Elastic
+    #     Network Interface Trunking][1] in the *Amazon Elastic Container
+    #     Service Developer Guide*.
+    #
+    #   * `containerInsights` - When modified, the default setting indicating
+    #     whether Amazon Web Services CloudWatch Container Insights is turned
+    #     on for your clusters is changed. If `containerInsights` is turned
+    #     on, any new clusters that are created will have Container Insights
+    #     turned on unless you disable it during cluster creation. For more
+    #     information, see [CloudWatch Container Insights][2] in the *Amazon
+    #     Elastic Container Service Developer Guide*.
+    #
+    #   * `dualStackIPv6` - When turned on, when using a VPC in dual stack
+    #     mode, your tasks using the `awsvpc` network mode can have an IPv6
+    #     address assigned. For more information on using IPv6 with tasks
+    #     launched on Amazon EC2 instances, see [Using a VPC in dual-stack
+    #     mode][3]. For more information on using IPv6 with tasks launched on
+    #     Fargate, see [Using a VPC in dual-stack mode][4].
+    #
+    #   * `fargateFIPSMode` - If you specify `fargateFIPSMode`, Fargate FIPS
+    #     140 compliance is affected.
+    #
+    #   * `fargateTaskRetirementWaitPeriod` - When Amazon Web Services
+    #     determines that a security or infrastructure update is needed for an
+    #     Amazon ECS task hosted on Fargate, the tasks need to be stopped and
+    #     new tasks launched to replace them. Use
+    #     `fargateTaskRetirementWaitPeriod` to configure the wait time to
+    #     retire a Fargate task. For information about the Fargate tasks
+    #     maintenance, see [Amazon Web Services Fargate task maintenance][5]
+    #     in the *Amazon ECS Developer Guide*.
+    #
+    #   * `tagResourceAuthorization` - Amazon ECS is introducing tagging
+    #     authorization for resource creation. Users must have permissions for
+    #     actions that create the resource, such as `ecsCreateCluster`. If
+    #     tags are specified when you create a resource, Amazon Web Services
+    #     performs additional authorization to verify if users or roles have
+    #     permissions to create tags. Therefore, you must grant explicit
+    #     permissions to use the `ecs:TagResource` action. For more
+    #     information, see [Grant permission to tag resources on creation][6]
+    #     in the *Amazon ECS Developer Guide*.
+    #
+    #   * `guardDutyActivate` - The `guardDutyActivate` parameter is read-only
+    #     in Amazon ECS and indicates whether Amazon ECS Runtime Monitoring is
+    #     enabled or disabled by your security administrator in your Amazon
+    #     ECS account. Amazon GuardDuty controls this account setting on your
+    #     behalf. For more information, see [Protecting Amazon ECS workloads
+    #     with Amazon ECS Runtime Monitoring][7].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking-awsvpc.html#task-networking-vpc-dual-stack
+    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-task-networking.html#fargate-task-networking-vpc-dual-stack
+    #   [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html
+    #   [6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/supported-iam-actions-tagging.html
+    #   [7]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
@@ -5609,16 +5829,17 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate
     #     value: "String", # required
     #     principal_arn: "String",
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
+    #   resp.setting.type #=> String, one of "user", "aws_managed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSetting AWS API Documentation
     #
@@ -5634,42 +5855,98 @@ module Aws::ECS
     # set on a per-Region basis.
     #
     # @option params [required, String] :name
-    #   The resource name for which to modify the account setting. If you
-    #   specify `serviceLongArnFormat`, the ARN for your Amazon ECS services
-    #   is affected. If you specify `taskLongArnFormat`, the ARN and resource
-    #   ID for your Amazon ECS tasks is affected. If you specify
-    #   `containerInstanceLongArnFormat`, the ARN and resource ID for your
-    #   Amazon ECS container instances is affected. If you specify
-    #   `awsvpcTrunking`, the ENI limit for your Amazon ECS container
-    #   instances is affected. If you specify `containerInsights`, the default
-    #   setting for Amazon Web Services CloudWatch Container Insights for your
-    #   clusters is affected. If you specify `tagResourceAuthorization`, the
-    #   opt-in option for tagging resources on creation is affected. For
-    #   information about the opt-in timeline, see [Tagging authorization
-    #   timeline][1] in the *Amazon ECS Developer Guide*. If you specify
-    #   `fargateTaskRetirementWaitPeriod`, the default wait time to retire a
-    #   Fargate task due to required maintenance is affected.
+    #   The resource name for which to modify the account setting.
     #
-    #   When you specify `fargateFIPSMode` for the `name` and `enabled` for
-    #   the `value`, Fargate uses FIPS-140 compliant cryptographic algorithms
-    #   on your tasks. For more information about FIPS-140 compliance with
-    #   Fargate, see [ Amazon Web Services Fargate Federal Information
-    #   Processing Standard (FIPS) 140-2 compliance][2] in the *Amazon Elastic
-    #   Container Service Developer Guide*.
+    #   The following are the valid values for the account setting name.
     #
-    #   When Amazon Web Services determines that a security or infrastructure
-    #   update is needed for an Amazon ECS task hosted on Fargate, the tasks
-    #   need to be stopped and new tasks launched to replace them. Use
-    #   `fargateTaskRetirementWaitPeriod` to set the wait time to retire a
-    #   Fargate task to the default. For information about the Fargate tasks
-    #   maintenance, see [Amazon Web Services Fargate task maintenance][3] in
-    #   the *Amazon ECS Developer Guide*.
+    #   * `serviceLongArnFormat` - When modified, the Amazon Resource Name
+    #     (ARN) and resource ID format of the resource type for a specified
+    #     user, role, or the root user for an account is affected. The opt-in
+    #     and opt-out account setting must be set for each Amazon ECS resource
+    #     separately. The ARN and resource ID format of a resource is defined
+    #     by the opt-in status of the user or role that created the resource.
+    #     You must turn on this setting to use Amazon ECS features such as
+    #     resource tagging.
+    #
+    #   * `taskLongArnFormat` - When modified, the Amazon Resource Name (ARN)
+    #     and resource ID format of the resource type for a specified user,
+    #     role, or the root user for an account is affected. The opt-in and
+    #     opt-out account setting must be set for each Amazon ECS resource
+    #     separately. The ARN and resource ID format of a resource is defined
+    #     by the opt-in status of the user or role that created the resource.
+    #     You must turn on this setting to use Amazon ECS features such as
+    #     resource tagging.
+    #
+    #   * `containerInstanceLongArnFormat` - When modified, the Amazon
+    #     Resource Name (ARN) and resource ID format of the resource type for
+    #     a specified user, role, or the root user for an account is affected.
+    #     The opt-in and opt-out account setting must be set for each Amazon
+    #     ECS resource separately. The ARN and resource ID format of a
+    #     resource is defined by the opt-in status of the user or role that
+    #     created the resource. You must turn on this setting to use Amazon
+    #     ECS features such as resource tagging.
+    #
+    #   * `awsvpcTrunking` - When modified, the elastic network interface
+    #     (ENI) limit for any new container instances that support the feature
+    #     is changed. If `awsvpcTrunking` is turned on, any new container
+    #     instances that support the feature are launched have the increased
+    #     ENI limits available to them. For more information, see [Elastic
+    #     Network Interface Trunking][1] in the *Amazon Elastic Container
+    #     Service Developer Guide*.
+    #
+    #   * `containerInsights` - When modified, the default setting indicating
+    #     whether Amazon Web Services CloudWatch Container Insights is turned
+    #     on for your clusters is changed. If `containerInsights` is turned
+    #     on, any new clusters that are created will have Container Insights
+    #     turned on unless you disable it during cluster creation. For more
+    #     information, see [CloudWatch Container Insights][2] in the *Amazon
+    #     Elastic Container Service Developer Guide*.
+    #
+    #   * `dualStackIPv6` - When turned on, when using a VPC in dual stack
+    #     mode, your tasks using the `awsvpc` network mode can have an IPv6
+    #     address assigned. For more information on using IPv6 with tasks
+    #     launched on Amazon EC2 instances, see [Using a VPC in dual-stack
+    #     mode][3]. For more information on using IPv6 with tasks launched on
+    #     Fargate, see [Using a VPC in dual-stack mode][4].
+    #
+    #   * `fargateFIPSMode` - If you specify `fargateFIPSMode`, Fargate FIPS
+    #     140 compliance is affected.
+    #
+    #   * `fargateTaskRetirementWaitPeriod` - When Amazon Web Services
+    #     determines that a security or infrastructure update is needed for an
+    #     Amazon ECS task hosted on Fargate, the tasks need to be stopped and
+    #     new tasks launched to replace them. Use
+    #     `fargateTaskRetirementWaitPeriod` to configure the wait time to
+    #     retire a Fargate task. For information about the Fargate tasks
+    #     maintenance, see [Amazon Web Services Fargate task maintenance][5]
+    #     in the *Amazon ECS Developer Guide*.
+    #
+    #   * `tagResourceAuthorization` - Amazon ECS is introducing tagging
+    #     authorization for resource creation. Users must have permissions for
+    #     actions that create the resource, such as `ecsCreateCluster`. If
+    #     tags are specified when you create a resource, Amazon Web Services
+    #     performs additional authorization to verify if users or roles have
+    #     permissions to create tags. Therefore, you must grant explicit
+    #     permissions to use the `ecs:TagResource` action. For more
+    #     information, see [Grant permission to tag resources on creation][6]
+    #     in the *Amazon ECS Developer Guide*.
+    #
+    #   * `guardDutyActivate` - The `guardDutyActivate` parameter is read-only
+    #     in Amazon ECS and indicates whether Amazon ECS Runtime Monitoring is
+    #     enabled or disabled by your security administrator in your Amazon
+    #     ECS account. Amazon GuardDuty controls this account setting on your
+    #     behalf. For more information, see [Protecting Amazon ECS workloads
+    #     with Amazon ECS Runtime Monitoring][7].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#tag-resources
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-fips-compliance.html
-    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-eni.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch-container-insights.html
+    #   [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking-awsvpc.html#task-networking-vpc-dual-stack
+    #   [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-task-networking.html#fargate-task-networking-vpc-dual-stack
+    #   [5]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-maintenance.html
+    #   [6]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/supported-iam-actions-tagging.html
+    #   [7]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-guard-duty-integration.html
     #
     # @option params [required, String] :value
     #   The account setting value for the specified principal ARN. Accepted
@@ -5715,15 +5992,16 @@ module Aws::ECS
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_setting_default({
-    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod
+    #     name: "serviceLongArnFormat", # required, accepts serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking, containerInsights, fargateFIPSMode, tagResourceAuthorization, fargateTaskRetirementWaitPeriod, guardDutyActivate
     #     value: "String", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod"
+    #   resp.setting.name #=> String, one of "serviceLongArnFormat", "taskLongArnFormat", "containerInstanceLongArnFormat", "awsvpcTrunking", "containerInsights", "fargateFIPSMode", "tagResourceAuthorization", "fargateTaskRetirementWaitPeriod", "guardDutyActivate"
     #   resp.setting.value #=> String
     #   resp.setting.principal_arn #=> String
+    #   resp.setting.type #=> String, one of "user", "aws_managed"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAccountSettingDefault AWS API Documentation
     #
@@ -5878,6 +6156,8 @@ module Aws::ECS
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.kms_key_id #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.fargate_ephemeral_storage_kms_key_id #=> String
     #   resp.cluster.status #=> String
     #   resp.cluster.registered_container_instances_count #=> Integer
     #   resp.cluster.running_tasks_count #=> Integer
@@ -6452,8 +6732,8 @@ module Aws::ECS
     #   The amount of ephemeral storage to allocate for the task. This
     #   parameter is used to expand the total amount of ephemeral storage
     #   available, beyond the default amount, for tasks hosted on Fargate. For
-    #   more information, see [Fargate task storage][1] in the *Amazon ECS
-    #   User Guide for Fargate*.
+    #   more information, see [Using data volumes in tasks][1] in the *Amazon
+    #   ECS Developer Guide*.
     #
     #   <note markdown="1"> For tasks using the Fargate launch type, the task requires the
     #   following platforms:
@@ -6466,14 +6746,11 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html
     #
     # @option params [Types::RuntimePlatform] :runtime_platform
     #   The operating system that your tasks definitions run on. A platform
     #   family is specified only for tasks using the Fargate launch type.
-    #
-    #   When you specify a task definition in a service, this value must match
-    #   the `runtimePlatform` value of the service.
     #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6733,6 +7010,7 @@ module Aws::ECS
     #             domain: "String", # required
     #           },
     #         },
+    #         configured_at_launch: false,
     #       },
     #     ],
     #     placement_constraints: [
@@ -6911,6 +7189,7 @@ module Aws::ECS
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.root_directory #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.credentials_parameter #=> String
     #   resp.task_definition.volumes[0].fsx_windows_file_server_volume_configuration.authorization_config.domain #=> String
+    #   resp.task_definition.volumes[0].configured_at_launch #=> Boolean
     #   resp.task_definition.status #=> String, one of "ACTIVE", "INACTIVE", "DELETE_IN_PROGRESS"
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
@@ -6957,6 +7236,13 @@ module Aws::ECS
 
     # Starts a new task using the specified task definition.
     #
+    # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
+    # revision before authorization. When a task definition revision is not
+    # specified, authorization will occur using the latest revision of a
+    # task definition.
+    #
+    #  </note>
+    #
     # You can allow Amazon ECS to place tasks for you, or you can customize
     # how Amazon ECS places tasks using placement constraints and placement
     # strategies. For more information, see [Scheduling Tasks][1] in the
@@ -6965,7 +7251,7 @@ module Aws::ECS
     # Alternatively, you can use StartTask to use your own scheduler or
     # place tasks manually on specific container instances.
     #
-    # <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
+    # Starting April 15, 2023, Amazon Web Services will not onboard new
     # customers to Amazon Elastic Inference (EI), and will help current
     # customers migrate their workloads to options that offer better price
     # and performance. After April 15, 2023, new customers will not be able
@@ -6974,7 +7260,10 @@ module Aws::ECS
     # at least once during the past 30-day period are considered current
     # customers and will be able to continue using the service.
     #
-    #  </note>
+    # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
+    # the volume when creating or updating a service. For more infomation,
+    # see [Amazon EBS volumes][2] in the *Amazon Elastic Container Service
+    # Developer Guide*.
     #
     # The Amazon ECS API follows an eventual consistency model. This is
     # because of the distributed nature of the system supporting the API.
@@ -7001,6 +7290,7 @@ module Aws::ECS
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
     #
     # @option params [Array<Types::CapacityProviderStrategyItem>] :capacity_provider_strategy
     #   The capacity provider strategy to use for the task.
@@ -7057,7 +7347,7 @@ module Aws::ECS
     #
     #   <note markdown="1"> Fargate Spot infrastructure is available for use but a capacity
     #   provider strategy must be used. For more information, see [Fargate
-    #   capacity providers][2] in the *Amazon ECS User Guide for Fargate*.
+    #   capacity providers][2] in the *Amazon ECS Developer Guide*.
     #
     #    </note>
     #
@@ -7077,7 +7367,7 @@ module Aws::ECS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
-    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/fargate-capacity-providers.html
     #
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   The network configuration for the task. This parameter is required for
@@ -7144,7 +7434,7 @@ module Aws::ECS
     #   apply a unique identifier for that job to your task with the
     #   `startedBy` parameter. You can then identify which tasks belong to
     #   that job by filtering the results of a ListTasks call with the
-    #   `startedBy` value. Up to 36 letters (uppercase and lowercase),
+    #   `startedBy` value. Up to 128 letters (uppercase and lowercase),
     #   numbers, hyphens (-), and underscores (\_) are allowed.
     #
     #   If a task is started by an Amazon ECS service, then the `startedBy`
@@ -7185,32 +7475,50 @@ module Aws::ECS
     #   task definition to run. If a `revision` isn't specified, the latest
     #   `ACTIVE` revision is used.
     #
-    #   When you create a policy for run-task, you can set the resource to be
-    #   the latest task definition revision, or a specific revision.
-    #
     #   The full ARN value must match the value that you specified as the
     #   `Resource` of the principal's permissions policy.
     #
-    #   When you specify the policy resource as the latest task definition
-    #   version (by setting the `Resource` in the policy to
-    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName`),
-    #   then set this value to
-    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName`.
+    #   When you specify a task definition, you must either specify a specific
+    #   revision, or all revisions in the ARN.
     #
-    #   When you specify the policy resource as a specific task definition
-    #   version (by setting the `Resource` in the policy to
-    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1`
-    #   or
-    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*`),
-    #   then set this value to
-    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1`.
+    #   To specify a specific revision, include the revision number in the
+    #   ARN. For example, to specify revision 2, use
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:2`.
+    #
+    #   To specify all revisions, use the wildcard (*) in the ARN. For
+    #   example, to specify all revisions, use
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*`.
     #
     #   For more information, see [Policy Resources for Amazon ECS][1] in the
-    #   Amazon Elastic Container Service developer Guide.
+    #   Amazon Elastic Container Service Developer Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-resources
+    #
+    # @option params [String] :client_token
+    #   An identifier that you provide to ensure the idempotency of the
+    #   request. It must be unique and is case sensitive. Up to 64 characters
+    #   are allowed. The valid characters are characters in the range of
+    #   33-126, inclusive. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/ECS_Idempotency.html
+    #
+    # @option params [Array<Types::TaskVolumeConfiguration>] :volume_configurations
+    #   The details of the volume that was `configuredAtLaunch`. You can
+    #   configure the size, volumeType, IOPS, throughput, snapshot and
+    #   encryption in in [TaskManagedEBSVolumeConfiguration][1]. The `name` of
+    #   the volume must match the `name` from the task definition.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TaskManagedEBSVolumeConfiguration.html
     #
     # @return [Types::RunTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7231,13 +7539,13 @@ module Aws::ECS
     #   {
     #     tasks: [
     #       {
-    #         container_instance_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/ffe3d344-77e2-476c-a4d0-bf560ad50acb", 
+    #         container_instance_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:container-instance/default/ffe3d344-77e2-476c-a4d0-bf560ad50acb", 
     #         containers: [
     #           {
     #             name: "sleep", 
-    #             container_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:container/58591c8e-be29-4ddf-95aa-ee459d4c59fd", 
+    #             container_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:container/default/58591c8e-be29-4ddf-95aa-ee459d4c59fd", 
     #             last_status: "PENDING", 
-    #             task_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:task/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0", 
+    #             task_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:task/default/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0", 
     #           }, 
     #         ], 
     #         desired_status: "RUNNING", 
@@ -7249,7 +7557,7 @@ module Aws::ECS
     #             }, 
     #           ], 
     #         }, 
-    #         task_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:task/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0", 
+    #         task_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:task/default/a9f21ea7-c9f5-44b1-b8e6-b31f50ed33c0", 
     #         task_definition_arn: "arn:aws:ecs:us-east-1:<aws_account_id>:task-definition/sleep360:1", 
     #       }, 
     #     ], 
@@ -7343,6 +7651,38 @@ module Aws::ECS
     #       },
     #     ],
     #     task_definition: "String", # required
+    #     client_token: "String",
+    #     volume_configurations: [
+    #       {
+    #         name: "ECSVolumeName", # required
+    #         managed_ebs_volume: {
+    #           encrypted: false,
+    #           kms_key_id: "EBSKMSKeyId",
+    #           volume_type: "EBSVolumeType",
+    #           size_in_gi_b: 1,
+    #           snapshot_id: "EBSSnapshotId",
+    #           iops: 1,
+    #           throughput: 1,
+    #           tag_specifications: [
+    #             {
+    #               resource_type: "volume", # required, accepts volume
+    #               tags: [
+    #                 {
+    #                   key: "TagKey",
+    #                   value: "TagValue",
+    #                 },
+    #               ],
+    #               propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE, NONE
+    #             },
+    #           ],
+    #           role_arn: "IAMRoleArn", # required
+    #           termination_policy: {
+    #             delete_on_termination: false, # required
+    #           },
+    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -7452,6 +7792,8 @@ module Aws::ECS
     #   resp.tasks[0].task_definition_arn #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.tasks[0].fargate_ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.tasks[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -7469,7 +7811,14 @@ module Aws::ECS
     # Starts a new task from the specified task definition on the specified
     # container instance or instances.
     #
-    # <note markdown="1"> Starting April 15, 2023, Amazon Web Services will not onboard new
+    # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
+    # revision before authorization. When a task definition revision is not
+    # specified, authorization will occur using the latest revision of a
+    # task definition.
+    #
+    #  </note>
+    #
+    # Starting April 15, 2023, Amazon Web Services will not onboard new
     # customers to Amazon Elastic Inference (EI), and will help current
     # customers migrate their workloads to options that offer better price
     # and performance. After April 15, 2023, new customers will not be able
@@ -7478,15 +7827,19 @@ module Aws::ECS
     # at least once during the past 30-day period are considered current
     # customers and will be able to continue using the service.
     #
-    #  </note>
-    #
     # Alternatively, you can use RunTask to place tasks for you. For more
     # information, see [Scheduling Tasks][1] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
+    # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
+    # the volume when creating or updating a service. For more infomation,
+    # see [Amazon EBS volumes][2] in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster where
@@ -7592,6 +7945,16 @@ module Aws::ECS
     #   task definition to start. If a `revision` isn't specified, the latest
     #   `ACTIVE` revision is used.
     #
+    # @option params [Array<Types::TaskVolumeConfiguration>] :volume_configurations
+    #   The details of the volume that was `configuredAtLaunch`. You can
+    #   configure the size, volumeType, IOPS, throughput, snapshot and
+    #   encryption in [TaskManagedEBSVolumeConfiguration][1]. The `name` of
+    #   the volume must match the `name` from the task definition.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TaskManagedEBSVolumeConfiguration.html
+    #
     # @return [Types::StartTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTaskResponse#tasks #tasks} => Array&lt;Types::Task&gt;
@@ -7664,6 +8027,37 @@ module Aws::ECS
     #       },
     #     ],
     #     task_definition: "String", # required
+    #     volume_configurations: [
+    #       {
+    #         name: "ECSVolumeName", # required
+    #         managed_ebs_volume: {
+    #           encrypted: false,
+    #           kms_key_id: "EBSKMSKeyId",
+    #           volume_type: "EBSVolumeType",
+    #           size_in_gi_b: 1,
+    #           snapshot_id: "EBSSnapshotId",
+    #           iops: 1,
+    #           throughput: 1,
+    #           tag_specifications: [
+    #             {
+    #               resource_type: "volume", # required, accepts volume
+    #               tags: [
+    #                 {
+    #                   key: "TagKey",
+    #                   value: "TagValue",
+    #                 },
+    #               ],
+    #               propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE, NONE
+    #             },
+    #           ],
+    #           role_arn: "IAMRoleArn", # required
+    #           termination_policy: {
+    #             delete_on_termination: false, # required
+    #           },
+    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -7773,6 +8167,8 @@ module Aws::ECS
     #   resp.tasks[0].task_definition_arn #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.tasks[0].fargate_ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.tasks[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -7797,16 +8193,22 @@ module Aws::ECS
     # the container handles the `SIGTERM` value gracefully and exits within
     # 30 seconds from receiving it, no `SIGKILL` value is sent.
     #
+    # For Windows containers, POSIX signals do not work and runtime stops
+    # the container by sending a `CTRL_SHUTDOWN_EVENT`. For more
+    # information, see [Unable to react to graceful shutdown of (Windows)
+    # container #25982][1] on GitHub.
+    #
     # <note markdown="1"> The default 30-second timeout can be configured on the Amazon ECS
     # container agent with the `ECS_CONTAINER_STOP_TIMEOUT` variable. For
-    # more information, see [Amazon ECS Container Agent Configuration][1] in
+    # more information, see [Amazon ECS Container Agent Configuration][2] in
     # the *Amazon Elastic Container Service Developer Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
+    # [1]: https://github.com/moby/moby/issues/25982
+    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -7820,8 +8222,7 @@ module Aws::ECS
     #   An optional message specified when a task is stopped. For example, if
     #   you're using a custom scheduler, you can use this parameter to
     #   specify the reason for stopping the task here, and the message appears
-    #   in subsequent DescribeTasks API operations on this task. Up to 255
-    #   characters are allowed in this message.
+    #   in subsequent DescribeTasks API operations on this task.
     #
     # @return [Types::StopTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7941,6 +8342,8 @@ module Aws::ECS
     #   resp.task.task_definition_arn #=> String
     #   resp.task.version #=> Integer
     #   resp.task.ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.task.fargate_ephemeral_storage.size_in_gi_b #=> Integer
+    #   resp.task.fargate_ephemeral_storage.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask AWS API Documentation
     #
@@ -8317,6 +8720,7 @@ module Aws::ECS
     #         instance_warmup_period: 1,
     #       },
     #       managed_termination_protection: "ENABLED", # accepts ENABLED, DISABLED
+    #       managed_draining: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #   })
     #
@@ -8332,6 +8736,7 @@ module Aws::ECS
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.maximum_scaling_step_size #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_scaling.instance_warmup_period #=> Integer
     #   resp.capacity_provider.auto_scaling_group_provider.managed_termination_protection #=> String, one of "ENABLED", "DISABLED"
+    #   resp.capacity_provider.auto_scaling_group_provider.managed_draining #=> String, one of "ENABLED", "DISABLED"
     #   resp.capacity_provider.update_status #=> String, one of "DELETE_IN_PROGRESS", "DELETE_COMPLETE", "DELETE_FAILED", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_FAILED"
     #   resp.capacity_provider.update_status_reason #=> String
     #   resp.capacity_provider.tags #=> Array
@@ -8406,6 +8811,10 @@ module Aws::ECS
     #           s3_key_prefix: "String",
     #         },
     #       },
+    #       managed_storage_configuration: {
+    #         kms_key_id: "String",
+    #         fargate_ephemeral_storage_kms_key_id: "String",
+    #       },
     #     },
     #     service_connect_defaults: {
     #       namespace: "String", # required
@@ -8423,6 +8832,8 @@ module Aws::ECS
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.kms_key_id #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.fargate_ephemeral_storage_kms_key_id #=> String
     #   resp.cluster.status #=> String
     #   resp.cluster.registered_container_instances_count #=> Integer
     #   resp.cluster.running_tasks_count #=> Integer
@@ -8507,6 +8918,8 @@ module Aws::ECS
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_bucket_name #=> String
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_encryption_enabled #=> Boolean
     #   resp.cluster.configuration.execute_command_configuration.log_configuration.s3_key_prefix #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.kms_key_id #=> String
+    #   resp.cluster.configuration.managed_storage_configuration.fargate_ephemeral_storage_kms_key_id #=> String
     #   resp.cluster.status #=> String
     #   resp.cluster.registered_container_instances_count #=> Integer
     #   resp.cluster.running_tasks_count #=> Integer
@@ -8819,6 +9232,13 @@ module Aws::ECS
 
     # Modifies the parameters of a service.
     #
+    # <note markdown="1"> On March 21, 2024, a change was made to resolve the task definition
+    # revision before authorization. When a task definition revision is not
+    # specified, authorization will occur using the latest revision of a
+    # task definition.
+    #
+    #  </note>
+    #
     # For services using the rolling update (`ECS`) you can update the
     # desired count, deployment configuration, network configuration, load
     # balancers, service registries, enable ECS managed tags option,
@@ -8826,13 +9246,24 @@ module Aws::ECS
     # task definition. When you update any of these parameters, Amazon ECS
     # starts new tasks with the new configuration.
     #
+    # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
+    # the volume when starting or running a task, or when creating or
+    # updating a service. For more infomation, see [Amazon EBS volumes][1]
+    # in the *Amazon Elastic Container Service Developer Guide*. You can
+    # update your volume configurations and trigger a new deployment.
+    # `volumeConfigurations` is only supported for REPLICA service and not
+    # DAEMON service. If you leave `volumeConfigurations` `null`, it
+    # doesn't trigger a new deployment. For more infomation on volumes, see
+    # [Amazon EBS volumes][1] in the *Amazon Elastic Container Service
+    # Developer Guide*.
+    #
     # For services using the blue/green (`CODE_DEPLOY`) deployment
     # controller, only the desired count, deployment configuration, health
     # check grace period, task placement constraints and strategies, enable
     # ECS managed tags option, and propagate tags can be updated using this
     # API. If the network configuration, platform version, task definition,
     # or load balancer need to be updated, create a new CodeDeploy
-    # deployment. For more information, see [CreateDeployment][1] in the
+    # deployment. For more information, see [CreateDeployment][2] in the
     # *CodeDeploy API Reference*.
     #
     # For services using an external deployment controller, you can update
@@ -8847,7 +9278,12 @@ module Aws::ECS
     # definition in a service by specifying the cluster that the service is
     # running in and a new `desiredCount` parameter.
     #
-    # If you have updated the Docker image of your application, you can
+    # You can attach Amazon EBS volumes to Amazon ECS tasks by configuring
+    # the volume when starting or running a task, or when creating or
+    # updating a service. For more infomation, see [Amazon EBS volumes][1]
+    # in the *Amazon Elastic Container Service Developer Guide*.
+    #
+    # If you have updated the container image of your application, you can
     # create a new task definition with that image and deploy it to your
     # service. The service scheduler uses the minimum healthy percent and
     # maximum percent parameters (in the service's deployment
@@ -8936,14 +9372,15 @@ module Aws::ECS
     # * `serviceRegistries`
     #
     #  For more information about the role see the `CreateService` request
-    # parameter [ `role` ][2].
+    # parameter [ `role` ][3].
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html
-    # [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ebs-volumes.html#ebs-volume-types
+    # [2]: https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html#ECS-CreateService-request-role
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -9152,6 +9589,18 @@ module Aws::ECS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
     #
+    # @option params [Array<Types::ServiceVolumeConfiguration>] :volume_configurations
+    #   The details of the volume that was `configuredAtLaunch`. You can
+    #   configure the size, volumeType, IOPS, throughput, snapshot and
+    #   encryption in [ServiceManagedEBSVolumeConfiguration][1]. The `name` of
+    #   the volume must match the `name` from the task definition. If set to
+    #   null, no new deployment is triggered. Otherwise, if this configuration
+    #   differs from the existing one, it triggers a new deployment.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ServiceManagedEBSVolumeConfiguration.html
+    #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateServiceResponse#service #service} => Types::Service
@@ -9265,6 +9714,17 @@ module Aws::ECS
     #             },
     #           ],
     #           ingress_port_override: 1,
+    #           timeout: {
+    #             idle_timeout_seconds: 1,
+    #             per_request_timeout_seconds: 1,
+    #           },
+    #           tls: {
+    #             issuer_certificate_authority: { # required
+    #               aws_pca_authority_arn: "String",
+    #             },
+    #             kms_key: "String",
+    #             role_arn: "String",
+    #           },
     #         },
     #       ],
     #       log_configuration: {
@@ -9280,6 +9740,34 @@ module Aws::ECS
     #         ],
     #       },
     #     },
+    #     volume_configurations: [
+    #       {
+    #         name: "ECSVolumeName", # required
+    #         managed_ebs_volume: {
+    #           encrypted: false,
+    #           kms_key_id: "EBSKMSKeyId",
+    #           volume_type: "EBSVolumeType",
+    #           size_in_gi_b: 1,
+    #           snapshot_id: "EBSSnapshotId",
+    #           iops: 1,
+    #           throughput: 1,
+    #           tag_specifications: [
+    #             {
+    #               resource_type: "volume", # required, accepts volume
+    #               tags: [
+    #                 {
+    #                   key: "TagKey",
+    #                   value: "TagValue",
+    #                 },
+    #               ],
+    #               propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE, NONE
+    #             },
+    #           ],
+    #           role_arn: "IAMRoleArn", # required
+    #           filesystem_type: "ext3", # accepts ext3, ext4, xfs
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -9360,6 +9848,7 @@ module Aws::ECS
     #   resp.service.task_sets[0].tags #=> Array
     #   resp.service.task_sets[0].tags[0].key #=> String
     #   resp.service.task_sets[0].tags[0].value #=> String
+    #   resp.service.task_sets[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.deployments #=> Array
     #   resp.service.deployments[0].id #=> String
     #   resp.service.deployments[0].status #=> String
@@ -9393,6 +9882,11 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].port #=> Integer
     #   resp.service.deployments[0].service_connect_configuration.services[0].client_aliases[0].dns_name #=> String
     #   resp.service.deployments[0].service_connect_configuration.services[0].ingress_port_override #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.idle_timeout_seconds #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].timeout.per_request_timeout_seconds #=> Integer
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.issuer_certificate_authority.aws_pca_authority_arn #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.kms_key #=> String
+    #   resp.service.deployments[0].service_connect_configuration.services[0].tls.role_arn #=> String
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.options #=> Hash
     #   resp.service.deployments[0].service_connect_configuration.log_configuration.options["String"] #=> String
@@ -9402,6 +9896,24 @@ module Aws::ECS
     #   resp.service.deployments[0].service_connect_resources #=> Array
     #   resp.service.deployments[0].service_connect_resources[0].discovery_name #=> String
     #   resp.service.deployments[0].service_connect_resources[0].discovery_arn #=> String
+    #   resp.service.deployments[0].volume_configurations #=> Array
+    #   resp.service.deployments[0].volume_configurations[0].name #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.encrypted #=> Boolean
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.kms_key_id #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.volume_type #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.size_in_gi_b #=> Integer
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.snapshot_id #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.iops #=> Integer
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.throughput #=> Integer
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications #=> Array
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].resource_type #=> String, one of "volume"
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags #=> Array
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].key #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].tags[0].value #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.tag_specifications[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.role_arn #=> String
+    #   resp.service.deployments[0].volume_configurations[0].managed_ebs_volume.filesystem_type #=> String, one of "ext3", "ext4", "xfs"
+    #   resp.service.deployments[0].fargate_ephemeral_storage.kms_key_id #=> String
     #   resp.service.role_arn #=> String
     #   resp.service.events #=> Array
     #   resp.service.events[0].id #=> String
@@ -9518,6 +10030,7 @@ module Aws::ECS
     #   resp.task_set.tags #=> Array
     #   resp.task_set.tags[0].key #=> String
     #   resp.task_set.tags[0].value #=> String
+    #   resp.task_set.fargate_ephemeral_storage.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServicePrimaryTaskSet AWS API Documentation
     #
@@ -9616,7 +10129,7 @@ module Aws::ECS
     #       {
     #         expiration_date: Time.parse("2022-11-02T06:56:32.553Z"), 
     #         protection_enabled: true, 
-    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772", 
+    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772", 
     #       }, 
     #     ], 
     #   }
@@ -9642,7 +10155,7 @@ module Aws::ECS
     #       {
     #         expiration_date: Time.parse("2022-11-02T06:56:32.553Z"), 
     #         protection_enabled: true, 
-    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772", 
+    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772", 
     #       }, 
     #     ], 
     #   }
@@ -9666,7 +10179,7 @@ module Aws::ECS
     #     protected_tasks: [
     #       {
     #         protection_enabled: false, 
-    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/b8b1cf532d0e46ba8d44a40d1de16772", 
+    #         task_arn: "arn:aws:ecs:us-west-2:012345678910:task/default/b8b1cf532d0e46ba8d44a40d1de16772", 
     #       }, 
     #     ], 
     #   }
@@ -9785,6 +10298,7 @@ module Aws::ECS
     #   resp.task_set.tags #=> Array
     #   resp.task_set.tags[0].key #=> String
     #   resp.task_set.tags[0].value #=> String
+    #   resp.task_set.fargate_ephemeral_storage.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateTaskSet AWS API Documentation
     #
@@ -9808,7 +10322,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.148.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

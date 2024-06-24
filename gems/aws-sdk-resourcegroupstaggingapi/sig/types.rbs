@@ -1,0 +1,182 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::ResourceGroupsTaggingAPI
+  module Types
+
+    class ComplianceDetails
+      attr_accessor noncompliant_keys: ::Array[::String]
+      attr_accessor keys_with_noncompliant_values: ::Array[::String]
+      attr_accessor compliance_status: bool
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConstraintViolationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReportCreationInput < Aws::EmptyStructure
+    end
+
+    class DescribeReportCreationOutput
+      attr_accessor status: ::String
+      attr_accessor s3_location: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class FailureInfo
+      attr_accessor status_code: ::Integer
+      attr_accessor error_code: ("InternalServiceException" | "InvalidParameterException")
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class GetComplianceSummaryInput
+      attr_accessor target_id_filters: ::Array[::String]
+      attr_accessor region_filters: ::Array[::String]
+      attr_accessor resource_type_filters: ::Array[::String]
+      attr_accessor tag_key_filters: ::Array[::String]
+      attr_accessor group_by: ::Array[("TARGET_ID" | "REGION" | "RESOURCE_TYPE")]
+      attr_accessor max_results: ::Integer
+      attr_accessor pagination_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetComplianceSummaryOutput
+      attr_accessor summary_list: ::Array[Types::Summary]
+      attr_accessor pagination_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcesInput
+      attr_accessor pagination_token: ::String
+      attr_accessor tag_filters: ::Array[Types::TagFilter]
+      attr_accessor resources_per_page: ::Integer
+      attr_accessor tags_per_page: ::Integer
+      attr_accessor resource_type_filters: ::Array[::String]
+      attr_accessor include_compliance_details: bool
+      attr_accessor exclude_compliant_resources: bool
+      attr_accessor resource_arn_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetResourcesOutput
+      attr_accessor pagination_token: ::String
+      attr_accessor resource_tag_mapping_list: ::Array[Types::ResourceTagMapping]
+      SENSITIVE: []
+    end
+
+    class GetTagKeysInput
+      attr_accessor pagination_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetTagKeysOutput
+      attr_accessor pagination_token: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetTagValuesInput
+      attr_accessor pagination_token: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class GetTagValuesOutput
+      attr_accessor pagination_token: ::String
+      attr_accessor tag_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InternalServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PaginationTokenExpiredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceTagMapping
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor compliance_details: Types::ComplianceDetails
+      SENSITIVE: []
+    end
+
+    class StartReportCreationInput
+      attr_accessor s3_bucket: ::String
+      SENSITIVE: []
+    end
+
+    class StartReportCreationOutput < Aws::EmptyStructure
+    end
+
+    class Summary
+      attr_accessor last_updated: ::String
+      attr_accessor target_id: ::String
+      attr_accessor target_id_type: ("ACCOUNT" | "OU" | "ROOT")
+      attr_accessor region: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor non_compliant_resources: ::Integer
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TagResourcesInput
+      attr_accessor resource_arn_list: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourcesOutput
+      attr_accessor failed_resources_map: ::Hash[::String, Types::FailureInfo]
+      SENSITIVE: []
+    end
+
+    class ThrottledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourcesInput
+      attr_accessor resource_arn_list: ::Array[::String]
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourcesOutput
+      attr_accessor failed_resources_map: ::Hash[::String, Types::FailureInfo]
+      SENSITIVE: []
+    end
+  end
+end

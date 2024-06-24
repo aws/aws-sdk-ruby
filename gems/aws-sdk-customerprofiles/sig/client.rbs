@@ -1,0 +1,1307 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CustomerProfiles
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddProfileKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddProfileKeyResponse]
+        def key_name: () -> ::String
+        def values: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#add_profile_key-instance_method
+      def add_profile_key: (
+                             profile_id: ::String,
+                             key_name: ::String,
+                             values: Array[::String],
+                             domain_name: ::String
+                           ) -> _AddProfileKeyResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddProfileKeyResponseSuccess
+
+      interface _CreateCalculatedAttributeDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCalculatedAttributeDefinitionResponse]
+        def calculated_attribute_name: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+        def attribute_details: () -> Types::AttributeDetails
+        def conditions: () -> Types::Conditions
+        def statistic: () -> ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#create_calculated_attribute_definition-instance_method
+      def create_calculated_attribute_definition: (
+                                                    domain_name: ::String,
+                                                    calculated_attribute_name: ::String,
+                                                    ?display_name: ::String,
+                                                    ?description: ::String,
+                                                    attribute_details: {
+                                                      attributes: Array[
+                                                        {
+                                                          name: ::String
+                                                        },
+                                                      ],
+                                                      expression: ::String
+                                                    },
+                                                    ?conditions: {
+                                                      range: {
+                                                        value: ::Integer,
+                                                        unit: ("DAYS")
+                                                      }?,
+                                                      object_count: ::Integer?,
+                                                      threshold: {
+                                                        value: ::String,
+                                                        operator: ("EQUAL_TO" | "GREATER_THAN" | "LESS_THAN" | "NOT_EQUAL_TO")
+                                                      }?
+                                                    },
+                                                    statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE"),
+                                                    ?tags: Hash[::String, ::String]
+                                                  ) -> _CreateCalculatedAttributeDefinitionResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCalculatedAttributeDefinitionResponseSuccess
+
+      interface _CreateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDomainResponse]
+        def domain_name: () -> ::String
+        def default_expiration_days: () -> ::Integer
+        def default_encryption_key: () -> ::String
+        def dead_letter_queue_url: () -> ::String
+        def matching: () -> Types::MatchingResponse
+        def rule_based_matching: () -> Types::RuleBasedMatchingResponse
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#create_domain-instance_method
+      def create_domain: (
+                           domain_name: ::String,
+                           default_expiration_days: ::Integer,
+                           ?default_encryption_key: ::String,
+                           ?dead_letter_queue_url: ::String,
+                           ?matching: {
+                             enabled: bool,
+                             job_schedule: {
+                               day_of_the_week: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY"),
+                               time: ::String
+                             }?,
+                             auto_merging: {
+                               enabled: bool,
+                               consolidation: {
+                                 matching_attributes_list: Array[
+                                   Array[::String],
+                                 ]
+                               }?,
+                               conflict_resolution: {
+                                 conflict_resolving_model: ("RECENCY" | "SOURCE"),
+                                 source_name: ::String?
+                               }?,
+                               min_allowed_confidence_score_for_merging: ::Float?
+                             }?,
+                             exporting_config: {
+                               s3_exporting: {
+                                 s3_bucket_name: ::String,
+                                 s3_key_name: ::String?
+                               }?
+                             }?
+                           },
+                           ?rule_based_matching: {
+                             enabled: bool,
+                             matching_rules: Array[
+                               {
+                                 rule: Array[::String]
+                               },
+                             ]?,
+                             max_allowed_rule_level_for_merging: ::Integer?,
+                             max_allowed_rule_level_for_matching: ::Integer?,
+                             attribute_types_selector: {
+                               attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
+                               address: Array[::String]?,
+                               phone_number: Array[::String]?,
+                               email_address: Array[::String]?
+                             }?,
+                             conflict_resolution: {
+                               conflict_resolving_model: ("RECENCY" | "SOURCE"),
+                               source_name: ::String?
+                             }?,
+                             exporting_config: {
+                               s3_exporting: {
+                                 s3_bucket_name: ::String,
+                                 s3_key_name: ::String?
+                               }?
+                             }?
+                           },
+                           ?tags: Hash[::String, ::String]
+                         ) -> _CreateDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
+
+      interface _CreateEventStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventStreamResponse]
+        def event_stream_arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#create_event_stream-instance_method
+      def create_event_stream: (
+                                 domain_name: ::String,
+                                 uri: ::String,
+                                 event_stream_name: ::String,
+                                 ?tags: Hash[::String, ::String]
+                               ) -> _CreateEventStreamResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventStreamResponseSuccess
+
+      interface _CreateIntegrationWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIntegrationWorkflowResponse]
+        def workflow_id: () -> ::String
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#create_integration_workflow-instance_method
+      def create_integration_workflow: (
+                                         domain_name: ::String,
+                                         workflow_type: ("APPFLOW_INTEGRATION"),
+                                         integration_config: {
+                                           appflow_integration: {
+                                             flow_definition: {
+                                               description: ::String?,
+                                               flow_name: ::String,
+                                               kms_arn: ::String,
+                                               source_flow_config: {
+                                                 connector_profile_name: ::String?,
+                                                 connector_type: ("Salesforce" | "Marketo" | "Zendesk" | "Servicenow" | "S3"),
+                                                 incremental_pull_config: {
+                                                   datetime_type_field_name: ::String?
+                                                 }?,
+                                                 source_connector_properties: {
+                                                   marketo: {
+                                                     object: ::String
+                                                   }?,
+                                                   s3: {
+                                                     bucket_name: ::String,
+                                                     bucket_prefix: ::String?
+                                                   }?,
+                                                   salesforce: {
+                                                     object: ::String,
+                                                     enable_dynamic_field_update: bool?,
+                                                     include_deleted_records: bool?
+                                                   }?,
+                                                   service_now: {
+                                                     object: ::String
+                                                   }?,
+                                                   zendesk: {
+                                                     object: ::String
+                                                   }?
+                                                 }
+                                               },
+                                               tasks: Array[
+                                                 {
+                                                   connector_operator: {
+                                                     marketo: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                                                     s3: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                                                     salesforce: ("PROJECTION" | "LESS_THAN" | "CONTAINS" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                                                     service_now: ("PROJECTION" | "CONTAINS" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                                                     zendesk: ("PROJECTION" | "GREATER_THAN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?
+                                                   }?,
+                                                   destination_field: ::String?,
+                                                   source_fields: Array[::String],
+                                                   task_properties: Hash[("VALUE" | "VALUES" | "DATA_TYPE" | "UPPER_BOUND" | "LOWER_BOUND" | "SOURCE_DATA_TYPE" | "DESTINATION_DATA_TYPE" | "VALIDATION_ACTION" | "MASK_VALUE" | "MASK_LENGTH" | "TRUNCATE_LENGTH" | "MATH_OPERATION_FIELDS_ORDER" | "CONCAT_FORMAT" | "SUBFIELD_CATEGORY_MAP"), ::String]?,
+                                                   task_type: ("Arithmetic" | "Filter" | "Map" | "Mask" | "Merge" | "Truncate" | "Validate")
+                                                 },
+                                               ],
+                                               trigger_config: {
+                                                 trigger_type: ("Scheduled" | "Event" | "OnDemand"),
+                                                 trigger_properties: {
+                                                   scheduled: {
+                                                     schedule_expression: ::String,
+                                                     data_pull_mode: ("Incremental" | "Complete")?,
+                                                     schedule_start_time: ::Time?,
+                                                     schedule_end_time: ::Time?,
+                                                     timezone: ::String?,
+                                                     schedule_offset: ::Integer?,
+                                                     first_execution_from: ::Time?
+                                                   }?
+                                                 }?
+                                               }
+                                             },
+                                             batches: Array[
+                                               {
+                                                 start_time: ::Time,
+                                                 end_time: ::Time
+                                               },
+                                             ]?
+                                           }?
+                                         },
+                                         object_type_name: ::String,
+                                         role_arn: ::String,
+                                         ?tags: Hash[::String, ::String]
+                                       ) -> _CreateIntegrationWorkflowResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntegrationWorkflowResponseSuccess
+
+      interface _CreateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProfileResponse]
+        def profile_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#create_profile-instance_method
+      def create_profile: (
+                            domain_name: ::String,
+                            ?account_number: ::String,
+                            ?additional_information: ::String,
+                            ?party_type: ("INDIVIDUAL" | "BUSINESS" | "OTHER"),
+                            ?business_name: ::String,
+                            ?first_name: ::String,
+                            ?middle_name: ::String,
+                            ?last_name: ::String,
+                            ?birth_date: ::String,
+                            ?gender: ("MALE" | "FEMALE" | "UNSPECIFIED"),
+                            ?phone_number: ::String,
+                            ?mobile_phone_number: ::String,
+                            ?home_phone_number: ::String,
+                            ?business_phone_number: ::String,
+                            ?email_address: ::String,
+                            ?personal_email_address: ::String,
+                            ?business_email_address: ::String,
+                            ?address: {
+                              address_1: ::String?,
+                              address_2: ::String?,
+                              address_3: ::String?,
+                              address_4: ::String?,
+                              city: ::String?,
+                              county: ::String?,
+                              state: ::String?,
+                              province: ::String?,
+                              country: ::String?,
+                              postal_code: ::String?
+                            },
+                            ?shipping_address: {
+                              address_1: ::String?,
+                              address_2: ::String?,
+                              address_3: ::String?,
+                              address_4: ::String?,
+                              city: ::String?,
+                              county: ::String?,
+                              state: ::String?,
+                              province: ::String?,
+                              country: ::String?,
+                              postal_code: ::String?
+                            },
+                            ?mailing_address: {
+                              address_1: ::String?,
+                              address_2: ::String?,
+                              address_3: ::String?,
+                              address_4: ::String?,
+                              city: ::String?,
+                              county: ::String?,
+                              state: ::String?,
+                              province: ::String?,
+                              country: ::String?,
+                              postal_code: ::String?
+                            },
+                            ?billing_address: {
+                              address_1: ::String?,
+                              address_2: ::String?,
+                              address_3: ::String?,
+                              address_4: ::String?,
+                              city: ::String?,
+                              county: ::String?,
+                              state: ::String?,
+                              province: ::String?,
+                              country: ::String?,
+                              postal_code: ::String?
+                            },
+                            ?attributes: Hash[::String, ::String],
+                            ?party_type_string: ::String,
+                            ?gender_string: ::String
+                          ) -> _CreateProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
+
+      interface _DeleteCalculatedAttributeDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCalculatedAttributeDefinitionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_calculated_attribute_definition-instance_method
+      def delete_calculated_attribute_definition: (
+                                                    domain_name: ::String,
+                                                    calculated_attribute_name: ::String
+                                                  ) -> _DeleteCalculatedAttributeDefinitionResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCalculatedAttributeDefinitionResponseSuccess
+
+      interface _DeleteDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDomainResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_domain-instance_method
+      def delete_domain: (
+                           domain_name: ::String
+                         ) -> _DeleteDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainResponseSuccess
+
+      interface _DeleteEventStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEventStreamResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_event_stream-instance_method
+      def delete_event_stream: (
+                                 domain_name: ::String,
+                                 event_stream_name: ::String
+                               ) -> _DeleteEventStreamResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEventStreamResponseSuccess
+
+      interface _DeleteIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIntegrationResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_integration-instance_method
+      def delete_integration: (
+                                domain_name: ::String,
+                                uri: ::String
+                              ) -> _DeleteIntegrationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIntegrationResponseSuccess
+
+      interface _DeleteProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProfileResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_profile-instance_method
+      def delete_profile: (
+                            profile_id: ::String,
+                            domain_name: ::String
+                          ) -> _DeleteProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProfileResponseSuccess
+
+      interface _DeleteProfileKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProfileKeyResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_profile_key-instance_method
+      def delete_profile_key: (
+                                profile_id: ::String,
+                                key_name: ::String,
+                                values: Array[::String],
+                                domain_name: ::String
+                              ) -> _DeleteProfileKeyResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProfileKeyResponseSuccess
+
+      interface _DeleteProfileObjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProfileObjectResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_profile_object-instance_method
+      def delete_profile_object: (
+                                   profile_id: ::String,
+                                   profile_object_unique_key: ::String,
+                                   object_type_name: ::String,
+                                   domain_name: ::String
+                                 ) -> _DeleteProfileObjectResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProfileObjectResponseSuccess
+
+      interface _DeleteProfileObjectTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProfileObjectTypeResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_profile_object_type-instance_method
+      def delete_profile_object_type: (
+                                        domain_name: ::String,
+                                        object_type_name: ::String
+                                      ) -> _DeleteProfileObjectTypeResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProfileObjectTypeResponseSuccess
+
+      interface _DeleteWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkflowResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#delete_workflow-instance_method
+      def delete_workflow: (
+                             domain_name: ::String,
+                             workflow_id: ::String
+                           ) -> _DeleteWorkflowResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteWorkflowResponseSuccess
+
+      interface _DetectProfileObjectTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DetectProfileObjectTypeResponse]
+        def detected_profile_object_types: () -> ::Array[Types::DetectedProfileObjectType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#detect_profile_object_type-instance_method
+      def detect_profile_object_type: (
+                                        objects: Array[::String],
+                                        domain_name: ::String
+                                      ) -> _DetectProfileObjectTypeResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectProfileObjectTypeResponseSuccess
+
+      interface _GetAutoMergingPreviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAutoMergingPreviewResponse]
+        def domain_name: () -> ::String
+        def number_of_matches_in_sample: () -> ::Integer
+        def number_of_profiles_in_sample: () -> ::Integer
+        def number_of_profiles_will_be_merged: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_auto_merging_preview-instance_method
+      def get_auto_merging_preview: (
+                                      domain_name: ::String,
+                                      consolidation: {
+                                        matching_attributes_list: Array[
+                                          Array[::String],
+                                        ]
+                                      },
+                                      conflict_resolution: {
+                                        conflict_resolving_model: ("RECENCY" | "SOURCE"),
+                                        source_name: ::String?
+                                      },
+                                      ?min_allowed_confidence_score_for_merging: ::Float
+                                    ) -> _GetAutoMergingPreviewResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAutoMergingPreviewResponseSuccess
+
+      interface _GetCalculatedAttributeDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCalculatedAttributeDefinitionResponse]
+        def calculated_attribute_name: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def statistic: () -> ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+        def conditions: () -> Types::Conditions
+        def attribute_details: () -> Types::AttributeDetails
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_calculated_attribute_definition-instance_method
+      def get_calculated_attribute_definition: (
+                                                 domain_name: ::String,
+                                                 calculated_attribute_name: ::String
+                                               ) -> _GetCalculatedAttributeDefinitionResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCalculatedAttributeDefinitionResponseSuccess
+
+      interface _GetCalculatedAttributeForProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCalculatedAttributeForProfileResponse]
+        def calculated_attribute_name: () -> ::String
+        def display_name: () -> ::String
+        def is_data_partial: () -> ::String
+        def value: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_calculated_attribute_for_profile-instance_method
+      def get_calculated_attribute_for_profile: (
+                                                  domain_name: ::String,
+                                                  profile_id: ::String,
+                                                  calculated_attribute_name: ::String
+                                                ) -> _GetCalculatedAttributeForProfileResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCalculatedAttributeForProfileResponseSuccess
+
+      interface _GetDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDomainResponse]
+        def domain_name: () -> ::String
+        def default_expiration_days: () -> ::Integer
+        def default_encryption_key: () -> ::String
+        def dead_letter_queue_url: () -> ::String
+        def stats: () -> Types::DomainStats
+        def matching: () -> Types::MatchingResponse
+        def rule_based_matching: () -> Types::RuleBasedMatchingResponse
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_domain-instance_method
+      def get_domain: (
+                        domain_name: ::String
+                      ) -> _GetDomainResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDomainResponseSuccess
+
+      interface _GetEventStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventStreamResponse]
+        def domain_name: () -> ::String
+        def event_stream_arn: () -> ::String
+        def created_at: () -> ::Time
+        def state: () -> ("RUNNING" | "STOPPED")
+        def stopped_since: () -> ::Time
+        def destination_details: () -> Types::EventStreamDestinationDetails
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_event_stream-instance_method
+      def get_event_stream: (
+                              domain_name: ::String,
+                              event_stream_name: ::String
+                            ) -> _GetEventStreamResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventStreamResponseSuccess
+
+      interface _GetIdentityResolutionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIdentityResolutionJobResponse]
+        def domain_name: () -> ::String
+        def job_id: () -> ::String
+        def status: () -> ("PENDING" | "PREPROCESSING" | "FIND_MATCHING" | "MERGING" | "COMPLETED" | "PARTIAL_SUCCESS" | "FAILED")
+        def message: () -> ::String
+        def job_start_time: () -> ::Time
+        def job_end_time: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def job_expiration_time: () -> ::Time
+        def auto_merging: () -> Types::AutoMerging
+        def exporting_location: () -> Types::ExportingLocation
+        def job_stats: () -> Types::JobStats
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_identity_resolution_job-instance_method
+      def get_identity_resolution_job: (
+                                         domain_name: ::String,
+                                         job_id: ::String
+                                       ) -> _GetIdentityResolutionJobResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIdentityResolutionJobResponseSuccess
+
+      interface _GetIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIntegrationResponse]
+        def domain_name: () -> ::String
+        def uri: () -> ::String
+        def object_type_name: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+        def object_type_names: () -> ::Hash[::String, ::String]
+        def workflow_id: () -> ::String
+        def is_unstructured: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_integration-instance_method
+      def get_integration: (
+                             domain_name: ::String,
+                             uri: ::String
+                           ) -> _GetIntegrationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIntegrationResponseSuccess
+
+      interface _GetMatchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMatchesResponse]
+        def next_token: () -> ::String
+        def match_generation_date: () -> ::Time
+        def potential_matches: () -> ::Integer
+        def matches: () -> ::Array[Types::MatchItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_matches-instance_method
+      def get_matches: (
+                         ?next_token: ::String,
+                         ?max_results: ::Integer,
+                         domain_name: ::String
+                       ) -> _GetMatchesResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMatchesResponseSuccess
+
+      interface _GetProfileObjectTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileObjectTypeResponse]
+        def object_type_name: () -> ::String
+        def description: () -> ::String
+        def template_id: () -> ::String
+        def expiration_days: () -> ::Integer
+        def encryption_key: () -> ::String
+        def allow_profile_creation: () -> bool
+        def source_last_updated_timestamp_format: () -> ::String
+        def fields: () -> ::Hash[::String, Types::ObjectTypeField]
+        def keys: () -> ::Hash[::String, ::Array[Types::ObjectTypeKey]]
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_profile_object_type-instance_method
+      def get_profile_object_type: (
+                                     domain_name: ::String,
+                                     object_type_name: ::String
+                                   ) -> _GetProfileObjectTypeResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileObjectTypeResponseSuccess
+
+      interface _GetProfileObjectTypeTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileObjectTypeTemplateResponse]
+        def template_id: () -> ::String
+        def source_name: () -> ::String
+        def source_object: () -> ::String
+        def allow_profile_creation: () -> bool
+        def source_last_updated_timestamp_format: () -> ::String
+        def fields: () -> ::Hash[::String, Types::ObjectTypeField]
+        def keys: () -> ::Hash[::String, ::Array[Types::ObjectTypeKey]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_profile_object_type_template-instance_method
+      def get_profile_object_type_template: (
+                                              template_id: ::String
+                                            ) -> _GetProfileObjectTypeTemplateResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileObjectTypeTemplateResponseSuccess
+
+      interface _GetSimilarProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSimilarProfilesResponse]
+        def profile_ids: () -> ::Array[::String]
+        def match_id: () -> ::String
+        def match_type: () -> ("RULE_BASED_MATCHING" | "ML_BASED_MATCHING")
+        def rule_level: () -> ::Integer
+        def confidence_score: () -> ::Float
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_similar_profiles-instance_method
+      def get_similar_profiles: (
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  domain_name: ::String,
+                                  match_type: ("RULE_BASED_MATCHING" | "ML_BASED_MATCHING"),
+                                  search_key: ::String,
+                                  search_value: ::String
+                                ) -> _GetSimilarProfilesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSimilarProfilesResponseSuccess
+
+      interface _GetWorkflowResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowResponse]
+        def workflow_id: () -> ::String
+        def workflow_type: () -> ("APPFLOW_INTEGRATION")
+        def status: () -> ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "SPLIT" | "RETRY" | "CANCELLED")
+        def error_description: () -> ::String
+        def start_date: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def attributes: () -> Types::WorkflowAttributes
+        def metrics: () -> Types::WorkflowMetrics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_workflow-instance_method
+      def get_workflow: (
+                          domain_name: ::String,
+                          workflow_id: ::String
+                        ) -> _GetWorkflowResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowResponseSuccess
+
+      interface _GetWorkflowStepsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkflowStepsResponse]
+        def workflow_id: () -> ::String
+        def workflow_type: () -> ("APPFLOW_INTEGRATION")
+        def items: () -> ::Array[Types::WorkflowStepItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#get_workflow_steps-instance_method
+      def get_workflow_steps: (
+                                domain_name: ::String,
+                                workflow_id: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _GetWorkflowStepsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWorkflowStepsResponseSuccess
+
+      interface _ListAccountIntegrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccountIntegrationsResponse]
+        def items: () -> ::Array[Types::ListIntegrationItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_account_integrations-instance_method
+      def list_account_integrations: (
+                                       uri: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer,
+                                       ?include_hidden: bool
+                                     ) -> _ListAccountIntegrationsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccountIntegrationsResponseSuccess
+
+      interface _ListCalculatedAttributeDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCalculatedAttributeDefinitionsResponse]
+        def items: () -> ::Array[Types::ListCalculatedAttributeDefinitionItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_calculated_attribute_definitions-instance_method
+      def list_calculated_attribute_definitions: (
+                                                   domain_name: ::String,
+                                                   ?next_token: ::String,
+                                                   ?max_results: ::Integer
+                                                 ) -> _ListCalculatedAttributeDefinitionsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCalculatedAttributeDefinitionsResponseSuccess
+
+      interface _ListCalculatedAttributesForProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCalculatedAttributesForProfileResponse]
+        def items: () -> ::Array[Types::ListCalculatedAttributeForProfileItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_calculated_attributes_for_profile-instance_method
+      def list_calculated_attributes_for_profile: (
+                                                    ?next_token: ::String,
+                                                    ?max_results: ::Integer,
+                                                    domain_name: ::String,
+                                                    profile_id: ::String
+                                                  ) -> _ListCalculatedAttributesForProfileResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCalculatedAttributesForProfileResponseSuccess
+
+      interface _ListDomainsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDomainsResponse]
+        def items: () -> ::Array[Types::ListDomainItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_domains-instance_method
+      def list_domains: (
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListDomainsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDomainsResponseSuccess
+
+      interface _ListEventStreamsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventStreamsResponse]
+        def items: () -> ::Array[Types::EventStreamSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_event_streams-instance_method
+      def list_event_streams: (
+                                domain_name: ::String,
+                                ?next_token: ::String,
+                                ?max_results: ::Integer
+                              ) -> _ListEventStreamsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventStreamsResponseSuccess
+
+      interface _ListIdentityResolutionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIdentityResolutionJobsResponse]
+        def identity_resolution_jobs_list: () -> ::Array[Types::IdentityResolutionJob]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_identity_resolution_jobs-instance_method
+      def list_identity_resolution_jobs: (
+                                           domain_name: ::String,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _ListIdentityResolutionJobsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdentityResolutionJobsResponseSuccess
+
+      interface _ListIntegrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIntegrationsResponse]
+        def items: () -> ::Array[Types::ListIntegrationItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_integrations-instance_method
+      def list_integrations: (
+                               domain_name: ::String,
+                               ?next_token: ::String,
+                               ?max_results: ::Integer,
+                               ?include_hidden: bool
+                             ) -> _ListIntegrationsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIntegrationsResponseSuccess
+
+      interface _ListProfileObjectTypeTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfileObjectTypeTemplatesResponse]
+        def items: () -> ::Array[Types::ListProfileObjectTypeTemplateItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_profile_object_type_templates-instance_method
+      def list_profile_object_type_templates: (
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListProfileObjectTypeTemplatesResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfileObjectTypeTemplatesResponseSuccess
+
+      interface _ListProfileObjectTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfileObjectTypesResponse]
+        def items: () -> ::Array[Types::ListProfileObjectTypeItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_profile_object_types-instance_method
+      def list_profile_object_types: (
+                                       domain_name: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListProfileObjectTypesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfileObjectTypesResponseSuccess
+
+      interface _ListProfileObjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProfileObjectsResponse]
+        def items: () -> ::Array[Types::ListProfileObjectsItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_profile_objects-instance_method
+      def list_profile_objects: (
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer,
+                                  domain_name: ::String,
+                                  object_type_name: ::String,
+                                  profile_id: ::String,
+                                  ?object_filter: {
+                                    key_name: ::String,
+                                    values: Array[::String]
+                                  }
+                                ) -> _ListProfileObjectsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProfileObjectsResponseSuccess
+
+      interface _ListRuleBasedMatchesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRuleBasedMatchesResponse]
+        def match_ids: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_rule_based_matches-instance_method
+      def list_rule_based_matches: (
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer,
+                                     domain_name: ::String
+                                   ) -> _ListRuleBasedMatchesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRuleBasedMatchesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ListWorkflowsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListWorkflowsResponse]
+        def items: () -> ::Array[Types::ListWorkflowsItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#list_workflows-instance_method
+      def list_workflows: (
+                            domain_name: ::String,
+                            ?workflow_type: ("APPFLOW_INTEGRATION"),
+                            ?status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "SPLIT" | "RETRY" | "CANCELLED"),
+                            ?query_start_date: ::Time,
+                            ?query_end_date: ::Time,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListWorkflowsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowsResponseSuccess
+
+      interface _MergeProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MergeProfilesResponse]
+        def message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#merge_profiles-instance_method
+      def merge_profiles: (
+                            domain_name: ::String,
+                            main_profile_id: ::String,
+                            profile_ids_to_be_merged: Array[::String],
+                            ?field_source_profile_ids: {
+                              account_number: ::String?,
+                              additional_information: ::String?,
+                              party_type: ::String?,
+                              business_name: ::String?,
+                              first_name: ::String?,
+                              middle_name: ::String?,
+                              last_name: ::String?,
+                              birth_date: ::String?,
+                              gender: ::String?,
+                              phone_number: ::String?,
+                              mobile_phone_number: ::String?,
+                              home_phone_number: ::String?,
+                              business_phone_number: ::String?,
+                              email_address: ::String?,
+                              personal_email_address: ::String?,
+                              business_email_address: ::String?,
+                              address: ::String?,
+                              shipping_address: ::String?,
+                              mailing_address: ::String?,
+                              billing_address: ::String?,
+                              attributes: Hash[::String, ::String]?
+                            }
+                          ) -> _MergeProfilesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MergeProfilesResponseSuccess
+
+      interface _PutIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutIntegrationResponse]
+        def domain_name: () -> ::String
+        def uri: () -> ::String
+        def object_type_name: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+        def object_type_names: () -> ::Hash[::String, ::String]
+        def workflow_id: () -> ::String
+        def is_unstructured: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#put_integration-instance_method
+      def put_integration: (
+                             domain_name: ::String,
+                             ?uri: ::String,
+                             ?object_type_name: ::String,
+                             ?tags: Hash[::String, ::String],
+                             ?flow_definition: {
+                               description: ::String?,
+                               flow_name: ::String,
+                               kms_arn: ::String,
+                               source_flow_config: {
+                                 connector_profile_name: ::String?,
+                                 connector_type: ("Salesforce" | "Marketo" | "Zendesk" | "Servicenow" | "S3"),
+                                 incremental_pull_config: {
+                                   datetime_type_field_name: ::String?
+                                 }?,
+                                 source_connector_properties: {
+                                   marketo: {
+                                     object: ::String
+                                   }?,
+                                   s3: {
+                                     bucket_name: ::String,
+                                     bucket_prefix: ::String?
+                                   }?,
+                                   salesforce: {
+                                     object: ::String,
+                                     enable_dynamic_field_update: bool?,
+                                     include_deleted_records: bool?
+                                   }?,
+                                   service_now: {
+                                     object: ::String
+                                   }?,
+                                   zendesk: {
+                                     object: ::String
+                                   }?
+                                 }
+                               },
+                               tasks: Array[
+                                 {
+                                   connector_operator: {
+                                     marketo: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                                     s3: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                                     salesforce: ("PROJECTION" | "LESS_THAN" | "CONTAINS" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                                     service_now: ("PROJECTION" | "CONTAINS" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+                                     zendesk: ("PROJECTION" | "GREATER_THAN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?
+                                   }?,
+                                   destination_field: ::String?,
+                                   source_fields: Array[::String],
+                                   task_properties: Hash[("VALUE" | "VALUES" | "DATA_TYPE" | "UPPER_BOUND" | "LOWER_BOUND" | "SOURCE_DATA_TYPE" | "DESTINATION_DATA_TYPE" | "VALIDATION_ACTION" | "MASK_VALUE" | "MASK_LENGTH" | "TRUNCATE_LENGTH" | "MATH_OPERATION_FIELDS_ORDER" | "CONCAT_FORMAT" | "SUBFIELD_CATEGORY_MAP"), ::String]?,
+                                   task_type: ("Arithmetic" | "Filter" | "Map" | "Mask" | "Merge" | "Truncate" | "Validate")
+                                 },
+                               ],
+                               trigger_config: {
+                                 trigger_type: ("Scheduled" | "Event" | "OnDemand"),
+                                 trigger_properties: {
+                                   scheduled: {
+                                     schedule_expression: ::String,
+                                     data_pull_mode: ("Incremental" | "Complete")?,
+                                     schedule_start_time: ::Time?,
+                                     schedule_end_time: ::Time?,
+                                     timezone: ::String?,
+                                     schedule_offset: ::Integer?,
+                                     first_execution_from: ::Time?
+                                   }?
+                                 }?
+                               }
+                             },
+                             ?object_type_names: Hash[::String, ::String]
+                           ) -> _PutIntegrationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutIntegrationResponseSuccess
+
+      interface _PutProfileObjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutProfileObjectResponse]
+        def profile_object_unique_key: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#put_profile_object-instance_method
+      def put_profile_object: (
+                                object_type_name: ::String,
+                                object: ::String,
+                                domain_name: ::String
+                              ) -> _PutProfileObjectResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutProfileObjectResponseSuccess
+
+      interface _PutProfileObjectTypeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutProfileObjectTypeResponse]
+        def object_type_name: () -> ::String
+        def description: () -> ::String
+        def template_id: () -> ::String
+        def expiration_days: () -> ::Integer
+        def encryption_key: () -> ::String
+        def allow_profile_creation: () -> bool
+        def source_last_updated_timestamp_format: () -> ::String
+        def fields: () -> ::Hash[::String, Types::ObjectTypeField]
+        def keys: () -> ::Hash[::String, ::Array[Types::ObjectTypeKey]]
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#put_profile_object_type-instance_method
+      def put_profile_object_type: (
+                                     domain_name: ::String,
+                                     object_type_name: ::String,
+                                     description: ::String,
+                                     ?template_id: ::String,
+                                     ?expiration_days: ::Integer,
+                                     ?encryption_key: ::String,
+                                     ?allow_profile_creation: bool,
+                                     ?source_last_updated_timestamp_format: ::String,
+                                     ?fields: Hash[::String, {
+                                         source: ::String?,
+                                         target: ::String?,
+                                         content_type: ("STRING" | "NUMBER" | "PHONE_NUMBER" | "EMAIL_ADDRESS" | "NAME")?
+                                       }],
+                                     ?keys: Hash[::String, Array[
+                                         {
+                                           standard_identifiers: Array[("PROFILE" | "ASSET" | "CASE" | "UNIQUE" | "SECONDARY" | "LOOKUP_ONLY" | "NEW_ONLY" | "ORDER")]?,
+                                           field_names: Array[::String]?
+                                         },
+                                       ]],
+                                     ?tags: Hash[::String, ::String]
+                                   ) -> _PutProfileObjectTypeResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutProfileObjectTypeResponseSuccess
+
+      interface _SearchProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchProfilesResponse]
+        def items: () -> ::Array[Types::Profile]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#search_profiles-instance_method
+      def search_profiles: (
+                             ?next_token: ::String,
+                             ?max_results: ::Integer,
+                             domain_name: ::String,
+                             key_name: ::String,
+                             values: Array[::String],
+                             ?additional_search_keys: Array[
+                               {
+                                 key_name: ::String,
+                                 values: Array[::String]
+                               },
+                             ],
+                             ?logical_operator: ("AND" | "OR")
+                           ) -> _SearchProfilesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchProfilesResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateCalculatedAttributeDefinitionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCalculatedAttributeDefinitionResponse]
+        def calculated_attribute_name: () -> ::String
+        def display_name: () -> ::String
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def statistic: () -> ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE")
+        def conditions: () -> Types::Conditions
+        def attribute_details: () -> Types::AttributeDetails
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#update_calculated_attribute_definition-instance_method
+      def update_calculated_attribute_definition: (
+                                                    domain_name: ::String,
+                                                    calculated_attribute_name: ::String,
+                                                    ?display_name: ::String,
+                                                    ?description: ::String,
+                                                    ?conditions: {
+                                                      range: {
+                                                        value: ::Integer,
+                                                        unit: ("DAYS")
+                                                      }?,
+                                                      object_count: ::Integer?,
+                                                      threshold: {
+                                                        value: ::String,
+                                                        operator: ("EQUAL_TO" | "GREATER_THAN" | "LESS_THAN" | "NOT_EQUAL_TO")
+                                                      }?
+                                                    }
+                                                  ) -> _UpdateCalculatedAttributeDefinitionResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCalculatedAttributeDefinitionResponseSuccess
+
+      interface _UpdateDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDomainResponse]
+        def domain_name: () -> ::String
+        def default_expiration_days: () -> ::Integer
+        def default_encryption_key: () -> ::String
+        def dead_letter_queue_url: () -> ::String
+        def matching: () -> Types::MatchingResponse
+        def rule_based_matching: () -> Types::RuleBasedMatchingResponse
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#update_domain-instance_method
+      def update_domain: (
+                           domain_name: ::String,
+                           ?default_expiration_days: ::Integer,
+                           ?default_encryption_key: ::String,
+                           ?dead_letter_queue_url: ::String,
+                           ?matching: {
+                             enabled: bool,
+                             job_schedule: {
+                               day_of_the_week: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY"),
+                               time: ::String
+                             }?,
+                             auto_merging: {
+                               enabled: bool,
+                               consolidation: {
+                                 matching_attributes_list: Array[
+                                   Array[::String],
+                                 ]
+                               }?,
+                               conflict_resolution: {
+                                 conflict_resolving_model: ("RECENCY" | "SOURCE"),
+                                 source_name: ::String?
+                               }?,
+                               min_allowed_confidence_score_for_merging: ::Float?
+                             }?,
+                             exporting_config: {
+                               s3_exporting: {
+                                 s3_bucket_name: ::String,
+                                 s3_key_name: ::String?
+                               }?
+                             }?
+                           },
+                           ?rule_based_matching: {
+                             enabled: bool,
+                             matching_rules: Array[
+                               {
+                                 rule: Array[::String]
+                               },
+                             ]?,
+                             max_allowed_rule_level_for_merging: ::Integer?,
+                             max_allowed_rule_level_for_matching: ::Integer?,
+                             attribute_types_selector: {
+                               attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
+                               address: Array[::String]?,
+                               phone_number: Array[::String]?,
+                               email_address: Array[::String]?
+                             }?,
+                             conflict_resolution: {
+                               conflict_resolving_model: ("RECENCY" | "SOURCE"),
+                               source_name: ::String?
+                             }?,
+                             exporting_config: {
+                               s3_exporting: {
+                                 s3_bucket_name: ::String,
+                                 s3_key_name: ::String?
+                               }?
+                             }?
+                           },
+                           ?tags: Hash[::String, ::String]
+                         ) -> _UpdateDomainResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainResponseSuccess
+
+      interface _UpdateProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProfileResponse]
+        def profile_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#update_profile-instance_method
+      def update_profile: (
+                            domain_name: ::String,
+                            profile_id: ::String,
+                            ?additional_information: ::String,
+                            ?account_number: ::String,
+                            ?party_type: ("INDIVIDUAL" | "BUSINESS" | "OTHER"),
+                            ?business_name: ::String,
+                            ?first_name: ::String,
+                            ?middle_name: ::String,
+                            ?last_name: ::String,
+                            ?birth_date: ::String,
+                            ?gender: ("MALE" | "FEMALE" | "UNSPECIFIED"),
+                            ?phone_number: ::String,
+                            ?mobile_phone_number: ::String,
+                            ?home_phone_number: ::String,
+                            ?business_phone_number: ::String,
+                            ?email_address: ::String,
+                            ?personal_email_address: ::String,
+                            ?business_email_address: ::String,
+                            ?address: {
+                              address_1: ::String?,
+                              address_2: ::String?,
+                              address_3: ::String?,
+                              address_4: ::String?,
+                              city: ::String?,
+                              county: ::String?,
+                              state: ::String?,
+                              province: ::String?,
+                              country: ::String?,
+                              postal_code: ::String?
+                            },
+                            ?shipping_address: {
+                              address_1: ::String?,
+                              address_2: ::String?,
+                              address_3: ::String?,
+                              address_4: ::String?,
+                              city: ::String?,
+                              county: ::String?,
+                              state: ::String?,
+                              province: ::String?,
+                              country: ::String?,
+                              postal_code: ::String?
+                            },
+                            ?mailing_address: {
+                              address_1: ::String?,
+                              address_2: ::String?,
+                              address_3: ::String?,
+                              address_4: ::String?,
+                              city: ::String?,
+                              county: ::String?,
+                              state: ::String?,
+                              province: ::String?,
+                              country: ::String?,
+                              postal_code: ::String?
+                            },
+                            ?billing_address: {
+                              address_1: ::String?,
+                              address_2: ::String?,
+                              address_3: ::String?,
+                              address_4: ::String?,
+                              city: ::String?,
+                              county: ::String?,
+                              state: ::String?,
+                              province: ::String?,
+                              country: ::String?,
+                              postal_code: ::String?
+                            },
+                            ?attributes: Hash[::String, ::String],
+                            ?party_type_string: ::String,
+                            ?gender_string: ::String
+                          ) -> _UpdateProfileResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileResponseSuccess
+    end
+  end
+end
+

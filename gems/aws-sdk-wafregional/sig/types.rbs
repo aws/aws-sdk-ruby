@@ -1,0 +1,1393 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::WAFRegional
+  module Types
+
+    class ActivatedRule
+      attr_accessor priority: ::Integer
+      attr_accessor rule_id: ::String
+      attr_accessor action: Types::WafAction
+      attr_accessor override_action: Types::WafOverrideAction
+      attr_accessor type: ("REGULAR" | "RATE_BASED" | "GROUP")
+      attr_accessor excluded_rules: ::Array[Types::ExcludedRule]
+      SENSITIVE: []
+    end
+
+    class AssociateWebACLRequest
+      attr_accessor web_acl_id: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateWebACLResponse < Aws::EmptyStructure
+    end
+
+    class ByteMatchSet
+      attr_accessor byte_match_set_id: ::String
+      attr_accessor name: ::String
+      attr_accessor byte_match_tuples: ::Array[Types::ByteMatchTuple]
+      SENSITIVE: []
+    end
+
+    class ByteMatchSetSummary
+      attr_accessor byte_match_set_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ByteMatchSetUpdate
+      attr_accessor action: ("INSERT" | "DELETE")
+      attr_accessor byte_match_tuple: Types::ByteMatchTuple
+      SENSITIVE: []
+    end
+
+    class ByteMatchTuple
+      attr_accessor field_to_match: Types::FieldToMatch
+      attr_accessor target_string: ::String
+      attr_accessor text_transformation: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE")
+      attr_accessor positional_constraint: ("EXACTLY" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CONTAINS_WORD")
+      SENSITIVE: []
+    end
+
+    class CreateByteMatchSetRequest
+      attr_accessor name: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateByteMatchSetResponse
+      attr_accessor byte_match_set: Types::ByteMatchSet
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGeoMatchSetRequest
+      attr_accessor name: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGeoMatchSetResponse
+      attr_accessor geo_match_set: Types::GeoMatchSet
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIPSetRequest
+      attr_accessor name: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIPSetResponse
+      attr_accessor ip_set: Types::IPSet
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRateBasedRuleRequest
+      attr_accessor name: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor rate_key: ("IP")
+      attr_accessor rate_limit: ::Integer
+      attr_accessor change_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRateBasedRuleResponse
+      attr_accessor rule: Types::RateBasedRule
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRegexMatchSetRequest
+      attr_accessor name: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRegexMatchSetResponse
+      attr_accessor regex_match_set: Types::RegexMatchSet
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRegexPatternSetRequest
+      attr_accessor name: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRegexPatternSetResponse
+      attr_accessor regex_pattern_set: Types::RegexPatternSet
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRuleGroupRequest
+      attr_accessor name: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor change_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRuleGroupResponse
+      attr_accessor rule_group: Types::RuleGroup
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRuleRequest
+      attr_accessor name: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor change_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRuleResponse
+      attr_accessor rule: Types::Rule
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSizeConstraintSetRequest
+      attr_accessor name: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSizeConstraintSetResponse
+      attr_accessor size_constraint_set: Types::SizeConstraintSet
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSqlInjectionMatchSetRequest
+      attr_accessor name: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSqlInjectionMatchSetResponse
+      attr_accessor sql_injection_match_set: Types::SqlInjectionMatchSet
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWebACLMigrationStackRequest
+      attr_accessor web_acl_id: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor ignore_unsupported_type: bool
+      SENSITIVE: []
+    end
+
+    class CreateWebACLMigrationStackResponse
+      attr_accessor s3_object_url: ::String
+      SENSITIVE: []
+    end
+
+    class CreateWebACLRequest
+      attr_accessor name: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor default_action: Types::WafAction
+      attr_accessor change_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateWebACLResponse
+      attr_accessor web_acl: Types::WebACL
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateXssMatchSetRequest
+      attr_accessor name: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateXssMatchSetResponse
+      attr_accessor xss_match_set: Types::XssMatchSet
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteByteMatchSetRequest
+      attr_accessor byte_match_set_id: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteByteMatchSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGeoMatchSetRequest
+      attr_accessor geo_match_set_id: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGeoMatchSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIPSetRequest
+      attr_accessor ip_set_id: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIPSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLoggingConfigurationRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLoggingConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeletePermissionPolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePermissionPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRateBasedRuleRequest
+      attr_accessor rule_id: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRateBasedRuleResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRegexMatchSetRequest
+      attr_accessor regex_match_set_id: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRegexMatchSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRegexPatternSetRequest
+      attr_accessor regex_pattern_set_id: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRegexPatternSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRuleGroupRequest
+      attr_accessor rule_group_id: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRuleGroupResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRuleRequest
+      attr_accessor rule_id: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRuleResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSizeConstraintSetRequest
+      attr_accessor size_constraint_set_id: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSizeConstraintSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSqlInjectionMatchSetRequest
+      attr_accessor sql_injection_match_set_id: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSqlInjectionMatchSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWebACLRequest
+      attr_accessor web_acl_id: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWebACLResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteXssMatchSetRequest
+      attr_accessor xss_match_set_id: ::String
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteXssMatchSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateWebACLRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateWebACLResponse < Aws::EmptyStructure
+    end
+
+    class ExcludedRule
+      attr_accessor rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class FieldToMatch
+      attr_accessor type: ("URI" | "QUERY_STRING" | "HEADER" | "METHOD" | "BODY" | "SINGLE_QUERY_ARG" | "ALL_QUERY_ARGS")
+      attr_accessor data: ::String
+      SENSITIVE: []
+    end
+
+    class GeoMatchConstraint
+      attr_accessor type: ("Country")
+      attr_accessor value: ("AF" | "AX" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BQ" | "BA" | "BW" | "BV" | "BR" | "IO" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CG" | "CD" | "CK" | "CR" | "CI" | "HR" | "CU" | "CW" | "CY" | "CZ" | "DK" | "DJ" | "DM" | "DO" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "GF" | "PF" | "TF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GP" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HM" | "VA" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KP" | "KR" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MQ" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "NF" | "MP" | "NO" | "OM" | "PK" | "PW" | "PS" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "GS" | "SS" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TL" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "UG" | "UA" | "AE" | "GB" | "US" | "UM" | "UY" | "UZ" | "VU" | "VE" | "VN" | "VG" | "VI" | "WF" | "EH" | "YE" | "ZM" | "ZW")
+      SENSITIVE: []
+    end
+
+    class GeoMatchSet
+      attr_accessor geo_match_set_id: ::String
+      attr_accessor name: ::String
+      attr_accessor geo_match_constraints: ::Array[Types::GeoMatchConstraint]
+      SENSITIVE: []
+    end
+
+    class GeoMatchSetSummary
+      attr_accessor geo_match_set_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GeoMatchSetUpdate
+      attr_accessor action: ("INSERT" | "DELETE")
+      attr_accessor geo_match_constraint: Types::GeoMatchConstraint
+      SENSITIVE: []
+    end
+
+    class GetByteMatchSetRequest
+      attr_accessor byte_match_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetByteMatchSetResponse
+      attr_accessor byte_match_set: Types::ByteMatchSet
+      SENSITIVE: []
+    end
+
+    class GetChangeTokenRequest < Aws::EmptyStructure
+    end
+
+    class GetChangeTokenResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetChangeTokenStatusRequest
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetChangeTokenStatusResponse
+      attr_accessor change_token_status: ("PROVISIONED" | "PENDING" | "INSYNC")
+      SENSITIVE: []
+    end
+
+    class GetGeoMatchSetRequest
+      attr_accessor geo_match_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGeoMatchSetResponse
+      attr_accessor geo_match_set: Types::GeoMatchSet
+      SENSITIVE: []
+    end
+
+    class GetIPSetRequest
+      attr_accessor ip_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetIPSetResponse
+      attr_accessor ip_set: Types::IPSet
+      SENSITIVE: []
+    end
+
+    class GetLoggingConfigurationRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetLoggingConfigurationResponse
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class GetPermissionPolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetPermissionPolicyResponse
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetRateBasedRuleManagedKeysRequest
+      attr_accessor rule_id: ::String
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class GetRateBasedRuleManagedKeysResponse
+      attr_accessor managed_keys: ::Array[::String]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class GetRateBasedRuleRequest
+      attr_accessor rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRateBasedRuleResponse
+      attr_accessor rule: Types::RateBasedRule
+      SENSITIVE: []
+    end
+
+    class GetRegexMatchSetRequest
+      attr_accessor regex_match_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRegexMatchSetResponse
+      attr_accessor regex_match_set: Types::RegexMatchSet
+      SENSITIVE: []
+    end
+
+    class GetRegexPatternSetRequest
+      attr_accessor regex_pattern_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRegexPatternSetResponse
+      attr_accessor regex_pattern_set: Types::RegexPatternSet
+      SENSITIVE: []
+    end
+
+    class GetRuleGroupRequest
+      attr_accessor rule_group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRuleGroupResponse
+      attr_accessor rule_group: Types::RuleGroup
+      SENSITIVE: []
+    end
+
+    class GetRuleRequest
+      attr_accessor rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetRuleResponse
+      attr_accessor rule: Types::Rule
+      SENSITIVE: []
+    end
+
+    class GetSampledRequestsRequest
+      attr_accessor web_acl_id: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor time_window: Types::TimeWindow
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetSampledRequestsResponse
+      attr_accessor sampled_requests: ::Array[Types::SampledHTTPRequest]
+      attr_accessor population_size: ::Integer
+      attr_accessor time_window: Types::TimeWindow
+      SENSITIVE: []
+    end
+
+    class GetSizeConstraintSetRequest
+      attr_accessor size_constraint_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSizeConstraintSetResponse
+      attr_accessor size_constraint_set: Types::SizeConstraintSet
+      SENSITIVE: []
+    end
+
+    class GetSqlInjectionMatchSetRequest
+      attr_accessor sql_injection_match_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSqlInjectionMatchSetResponse
+      attr_accessor sql_injection_match_set: Types::SqlInjectionMatchSet
+      SENSITIVE: []
+    end
+
+    class GetWebACLForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetWebACLForResourceResponse
+      attr_accessor web_acl_summary: Types::WebACLSummary
+      SENSITIVE: []
+    end
+
+    class GetWebACLRequest
+      attr_accessor web_acl_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWebACLResponse
+      attr_accessor web_acl: Types::WebACL
+      SENSITIVE: []
+    end
+
+    class GetXssMatchSetRequest
+      attr_accessor xss_match_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetXssMatchSetResponse
+      attr_accessor xss_match_set: Types::XssMatchSet
+      SENSITIVE: []
+    end
+
+    class HTTPHeader
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class HTTPRequest
+      attr_accessor client_ip: ::String
+      attr_accessor country: ::String
+      attr_accessor uri: ::String
+      attr_accessor method: ::String
+      attr_accessor http_version: ::String
+      attr_accessor headers: ::Array[Types::HTTPHeader]
+      SENSITIVE: []
+    end
+
+    class IPSet
+      attr_accessor ip_set_id: ::String
+      attr_accessor name: ::String
+      attr_accessor ip_set_descriptors: ::Array[Types::IPSetDescriptor]
+      SENSITIVE: []
+    end
+
+    class IPSetDescriptor
+      attr_accessor type: ("IPV4" | "IPV6")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class IPSetSummary
+      attr_accessor ip_set_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class IPSetUpdate
+      attr_accessor action: ("INSERT" | "DELETE")
+      attr_accessor ip_set_descriptor: Types::IPSetDescriptor
+      SENSITIVE: []
+    end
+
+    class ListActivatedRulesInRuleGroupRequest
+      attr_accessor rule_group_id: ::String
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListActivatedRulesInRuleGroupResponse
+      attr_accessor next_marker: ::String
+      attr_accessor activated_rules: ::Array[Types::ActivatedRule]
+      SENSITIVE: []
+    end
+
+    class ListByteMatchSetsRequest
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListByteMatchSetsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor byte_match_sets: ::Array[Types::ByteMatchSetSummary]
+      SENSITIVE: []
+    end
+
+    class ListGeoMatchSetsRequest
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGeoMatchSetsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor geo_match_sets: ::Array[Types::GeoMatchSetSummary]
+      SENSITIVE: []
+    end
+
+    class ListIPSetsRequest
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIPSetsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor ip_sets: ::Array[Types::IPSetSummary]
+      SENSITIVE: []
+    end
+
+    class ListLoggingConfigurationsRequest
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLoggingConfigurationsResponse
+      attr_accessor logging_configurations: ::Array[Types::LoggingConfiguration]
+      attr_accessor next_marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListRateBasedRulesRequest
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRateBasedRulesResponse
+      attr_accessor next_marker: ::String
+      attr_accessor rules: ::Array[Types::RuleSummary]
+      SENSITIVE: []
+    end
+
+    class ListRegexMatchSetsRequest
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRegexMatchSetsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor regex_match_sets: ::Array[Types::RegexMatchSetSummary]
+      SENSITIVE: []
+    end
+
+    class ListRegexPatternSetsRequest
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRegexPatternSetsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor regex_pattern_sets: ::Array[Types::RegexPatternSetSummary]
+      SENSITIVE: []
+    end
+
+    class ListResourcesForWebACLRequest
+      attr_accessor web_acl_id: ::String
+      attr_accessor resource_type: ("APPLICATION_LOAD_BALANCER" | "API_GATEWAY")
+      SENSITIVE: []
+    end
+
+    class ListResourcesForWebACLResponse
+      attr_accessor resource_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListRuleGroupsRequest
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRuleGroupsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor rule_groups: ::Array[Types::RuleGroupSummary]
+      SENSITIVE: []
+    end
+
+    class ListRulesRequest
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRulesResponse
+      attr_accessor next_marker: ::String
+      attr_accessor rules: ::Array[Types::RuleSummary]
+      SENSITIVE: []
+    end
+
+    class ListSizeConstraintSetsRequest
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSizeConstraintSetsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor size_constraint_sets: ::Array[Types::SizeConstraintSetSummary]
+      SENSITIVE: []
+    end
+
+    class ListSqlInjectionMatchSetsRequest
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSqlInjectionMatchSetsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor sql_injection_match_sets: ::Array[Types::SqlInjectionMatchSetSummary]
+      SENSITIVE: []
+    end
+
+    class ListSubscribedRuleGroupsRequest
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSubscribedRuleGroupsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor rule_groups: ::Array[Types::SubscribedRuleGroupSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor next_marker: ::String
+      attr_accessor tag_info_for_resource: Types::TagInfoForResource
+      SENSITIVE: []
+    end
+
+    class ListWebACLsRequest
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWebACLsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor web_acls: ::Array[Types::WebACLSummary]
+      SENSITIVE: []
+    end
+
+    class ListXssMatchSetsRequest
+      attr_accessor next_marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListXssMatchSetsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor xss_match_sets: ::Array[Types::XssMatchSetSummary]
+      SENSITIVE: []
+    end
+
+    class LoggingConfiguration
+      attr_accessor resource_arn: ::String
+      attr_accessor log_destination_configs: ::Array[::String]
+      attr_accessor redacted_fields: ::Array[Types::FieldToMatch]
+      SENSITIVE: []
+    end
+
+    class Predicate
+      attr_accessor negated: bool
+      attr_accessor type: ("IPMatch" | "ByteMatch" | "SqlInjectionMatch" | "GeoMatch" | "SizeConstraint" | "XssMatch" | "RegexMatch")
+      attr_accessor data_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutLoggingConfigurationRequest
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class PutLoggingConfigurationResponse
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class PutPermissionPolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutPermissionPolicyResponse < Aws::EmptyStructure
+    end
+
+    class RateBasedRule
+      attr_accessor rule_id: ::String
+      attr_accessor name: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor match_predicates: ::Array[Types::Predicate]
+      attr_accessor rate_key: ("IP")
+      attr_accessor rate_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class RegexMatchSet
+      attr_accessor regex_match_set_id: ::String
+      attr_accessor name: ::String
+      attr_accessor regex_match_tuples: ::Array[Types::RegexMatchTuple]
+      SENSITIVE: []
+    end
+
+    class RegexMatchSetSummary
+      attr_accessor regex_match_set_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class RegexMatchSetUpdate
+      attr_accessor action: ("INSERT" | "DELETE")
+      attr_accessor regex_match_tuple: Types::RegexMatchTuple
+      SENSITIVE: []
+    end
+
+    class RegexMatchTuple
+      attr_accessor field_to_match: Types::FieldToMatch
+      attr_accessor text_transformation: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE")
+      attr_accessor regex_pattern_set_id: ::String
+      SENSITIVE: []
+    end
+
+    class RegexPatternSet
+      attr_accessor regex_pattern_set_id: ::String
+      attr_accessor name: ::String
+      attr_accessor regex_pattern_strings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RegexPatternSetSummary
+      attr_accessor regex_pattern_set_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class RegexPatternSetUpdate
+      attr_accessor action: ("INSERT" | "DELETE")
+      attr_accessor regex_pattern_string: ::String
+      SENSITIVE: []
+    end
+
+    class Rule
+      attr_accessor rule_id: ::String
+      attr_accessor name: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor predicates: ::Array[Types::Predicate]
+      SENSITIVE: []
+    end
+
+    class RuleGroup
+      attr_accessor rule_group_id: ::String
+      attr_accessor name: ::String
+      attr_accessor metric_name: ::String
+      SENSITIVE: []
+    end
+
+    class RuleGroupSummary
+      attr_accessor rule_group_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class RuleGroupUpdate
+      attr_accessor action: ("INSERT" | "DELETE")
+      attr_accessor activated_rule: Types::ActivatedRule
+      SENSITIVE: []
+    end
+
+    class RuleSummary
+      attr_accessor rule_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class RuleUpdate
+      attr_accessor action: ("INSERT" | "DELETE")
+      attr_accessor predicate: Types::Predicate
+      SENSITIVE: []
+    end
+
+    class SampledHTTPRequest
+      attr_accessor request: Types::HTTPRequest
+      attr_accessor weight: ::Integer
+      attr_accessor timestamp: ::Time
+      attr_accessor action: ::String
+      attr_accessor rule_within_rule_group: ::String
+      SENSITIVE: []
+    end
+
+    class SizeConstraint
+      attr_accessor field_to_match: Types::FieldToMatch
+      attr_accessor text_transformation: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE")
+      attr_accessor comparison_operator: ("EQ" | "NE" | "LE" | "LT" | "GE" | "GT")
+      attr_accessor size: ::Integer
+      SENSITIVE: []
+    end
+
+    class SizeConstraintSet
+      attr_accessor size_constraint_set_id: ::String
+      attr_accessor name: ::String
+      attr_accessor size_constraints: ::Array[Types::SizeConstraint]
+      SENSITIVE: []
+    end
+
+    class SizeConstraintSetSummary
+      attr_accessor size_constraint_set_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class SizeConstraintSetUpdate
+      attr_accessor action: ("INSERT" | "DELETE")
+      attr_accessor size_constraint: Types::SizeConstraint
+      SENSITIVE: []
+    end
+
+    class SqlInjectionMatchSet
+      attr_accessor sql_injection_match_set_id: ::String
+      attr_accessor name: ::String
+      attr_accessor sql_injection_match_tuples: ::Array[Types::SqlInjectionMatchTuple]
+      SENSITIVE: []
+    end
+
+    class SqlInjectionMatchSetSummary
+      attr_accessor sql_injection_match_set_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class SqlInjectionMatchSetUpdate
+      attr_accessor action: ("INSERT" | "DELETE")
+      attr_accessor sql_injection_match_tuple: Types::SqlInjectionMatchTuple
+      SENSITIVE: []
+    end
+
+    class SqlInjectionMatchTuple
+      attr_accessor field_to_match: Types::FieldToMatch
+      attr_accessor text_transformation: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE")
+      SENSITIVE: []
+    end
+
+    class SubscribedRuleGroupSummary
+      attr_accessor rule_group_id: ::String
+      attr_accessor name: ::String
+      attr_accessor metric_name: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagInfoForResource
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TimeWindow
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateByteMatchSetRequest
+      attr_accessor byte_match_set_id: ::String
+      attr_accessor change_token: ::String
+      attr_accessor updates: ::Array[Types::ByteMatchSetUpdate]
+      SENSITIVE: []
+    end
+
+    class UpdateByteMatchSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGeoMatchSetRequest
+      attr_accessor geo_match_set_id: ::String
+      attr_accessor change_token: ::String
+      attr_accessor updates: ::Array[Types::GeoMatchSetUpdate]
+      SENSITIVE: []
+    end
+
+    class UpdateGeoMatchSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateIPSetRequest
+      attr_accessor ip_set_id: ::String
+      attr_accessor change_token: ::String
+      attr_accessor updates: ::Array[Types::IPSetUpdate]
+      SENSITIVE: []
+    end
+
+    class UpdateIPSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRateBasedRuleRequest
+      attr_accessor rule_id: ::String
+      attr_accessor change_token: ::String
+      attr_accessor updates: ::Array[Types::RuleUpdate]
+      attr_accessor rate_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateRateBasedRuleResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRegexMatchSetRequest
+      attr_accessor regex_match_set_id: ::String
+      attr_accessor updates: ::Array[Types::RegexMatchSetUpdate]
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRegexMatchSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRegexPatternSetRequest
+      attr_accessor regex_pattern_set_id: ::String
+      attr_accessor updates: ::Array[Types::RegexPatternSetUpdate]
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRegexPatternSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRuleGroupRequest
+      attr_accessor rule_group_id: ::String
+      attr_accessor updates: ::Array[Types::RuleGroupUpdate]
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRuleGroupResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRuleRequest
+      attr_accessor rule_id: ::String
+      attr_accessor change_token: ::String
+      attr_accessor updates: ::Array[Types::RuleUpdate]
+      SENSITIVE: []
+    end
+
+    class UpdateRuleResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSizeConstraintSetRequest
+      attr_accessor size_constraint_set_id: ::String
+      attr_accessor change_token: ::String
+      attr_accessor updates: ::Array[Types::SizeConstraintSetUpdate]
+      SENSITIVE: []
+    end
+
+    class UpdateSizeConstraintSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSqlInjectionMatchSetRequest
+      attr_accessor sql_injection_match_set_id: ::String
+      attr_accessor change_token: ::String
+      attr_accessor updates: ::Array[Types::SqlInjectionMatchSetUpdate]
+      SENSITIVE: []
+    end
+
+    class UpdateSqlInjectionMatchSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateWebACLRequest
+      attr_accessor web_acl_id: ::String
+      attr_accessor change_token: ::String
+      attr_accessor updates: ::Array[Types::WebACLUpdate]
+      attr_accessor default_action: Types::WafAction
+      SENSITIVE: []
+    end
+
+    class UpdateWebACLResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateXssMatchSetRequest
+      attr_accessor xss_match_set_id: ::String
+      attr_accessor change_token: ::String
+      attr_accessor updates: ::Array[Types::XssMatchSetUpdate]
+      SENSITIVE: []
+    end
+
+    class UpdateXssMatchSetResponse
+      attr_accessor change_token: ::String
+      SENSITIVE: []
+    end
+
+    class WAFBadRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFDisallowedNameException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFEntityMigrationException
+      attr_accessor message: ::String
+      attr_accessor migration_error_type: ("ENTITY_NOT_SUPPORTED" | "ENTITY_NOT_FOUND" | "S3_BUCKET_NO_PERMISSION" | "S3_BUCKET_NOT_ACCESSIBLE" | "S3_BUCKET_NOT_FOUND" | "S3_BUCKET_INVALID_REGION" | "S3_INTERNAL_ERROR")
+      attr_accessor migration_error_reason: ::String
+      SENSITIVE: []
+    end
+
+    class WAFInternalErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFInvalidAccountException < Aws::EmptyStructure
+    end
+
+    class WAFInvalidOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFInvalidParameterException
+      attr_accessor field: ("CHANGE_ACTION" | "WAF_ACTION" | "WAF_OVERRIDE_ACTION" | "PREDICATE_TYPE" | "IPSET_TYPE" | "BYTE_MATCH_FIELD_TYPE" | "SQL_INJECTION_MATCH_FIELD_TYPE" | "BYTE_MATCH_TEXT_TRANSFORMATION" | "BYTE_MATCH_POSITIONAL_CONSTRAINT" | "SIZE_CONSTRAINT_COMPARISON_OPERATOR" | "GEO_MATCH_LOCATION_TYPE" | "GEO_MATCH_LOCATION_VALUE" | "RATE_KEY" | "RULE_TYPE" | "NEXT_MARKER" | "RESOURCE_ARN" | "TAGS" | "TAG_KEYS")
+      attr_accessor parameter: ::String
+      attr_accessor reason: ("INVALID_OPTION" | "ILLEGAL_COMBINATION" | "ILLEGAL_ARGUMENT" | "INVALID_TAG_KEY")
+      SENSITIVE: []
+    end
+
+    class WAFInvalidPermissionPolicyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFInvalidRegexPatternException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFLimitsExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFNonEmptyEntityException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFNonexistentContainerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFNonexistentItemException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFReferencedItemException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFServiceLinkedRoleErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFStaleDataException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFSubscriptionNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFTagOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFTagOperationInternalErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WAFUnavailableEntityException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class WafAction
+      attr_accessor type: ("BLOCK" | "ALLOW" | "COUNT")
+      SENSITIVE: []
+    end
+
+    class WafOverrideAction
+      attr_accessor type: ("NONE" | "COUNT")
+      SENSITIVE: []
+    end
+
+    class WebACL
+      attr_accessor web_acl_id: ::String
+      attr_accessor name: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor default_action: Types::WafAction
+      attr_accessor rules: ::Array[Types::ActivatedRule]
+      attr_accessor web_acl_arn: ::String
+      SENSITIVE: []
+    end
+
+    class WebACLSummary
+      attr_accessor web_acl_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class WebACLUpdate
+      attr_accessor action: ("INSERT" | "DELETE")
+      attr_accessor activated_rule: Types::ActivatedRule
+      SENSITIVE: []
+    end
+
+    class XssMatchSet
+      attr_accessor xss_match_set_id: ::String
+      attr_accessor name: ::String
+      attr_accessor xss_match_tuples: ::Array[Types::XssMatchTuple]
+      SENSITIVE: []
+    end
+
+    class XssMatchSetSummary
+      attr_accessor xss_match_set_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class XssMatchSetUpdate
+      attr_accessor action: ("INSERT" | "DELETE")
+      attr_accessor xss_match_tuple: Types::XssMatchTuple
+      SENSITIVE: []
+    end
+
+    class XssMatchTuple
+      attr_accessor field_to_match: Types::FieldToMatch
+      attr_accessor text_transformation: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE")
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,93 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MachineLearning
+    module Waiters
+
+      class BatchPredictionAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "IAMUser" | "MLModelId" | "DataSourceId" | "DataURI"),
+                    ?eq: ::String,
+                    ?gt: ::String,
+                    ?lt: ::String,
+                    ?ge: ::String,
+                    ?le: ::String,
+                    ?ne: ::String,
+                    ?prefix: ::String,
+                    ?sort_order: ("asc" | "dsc"),
+                    ?next_token: ::String,
+                    ?limit: ::Integer
+                  ) -> Client::_DescribeBatchPredictionsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeBatchPredictionsResponseSuccess
+      end
+
+      class DataSourceAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "DataLocationS3" | "IAMUser"),
+                    ?eq: ::String,
+                    ?gt: ::String,
+                    ?lt: ::String,
+                    ?ge: ::String,
+                    ?le: ::String,
+                    ?ne: ::String,
+                    ?prefix: ::String,
+                    ?sort_order: ("asc" | "dsc"),
+                    ?next_token: ::String,
+                    ?limit: ::Integer
+                  ) -> Client::_DescribeDataSourcesResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeDataSourcesResponseSuccess
+      end
+
+      class EvaluationAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "IAMUser" | "MLModelId" | "DataSourceId" | "DataURI"),
+                    ?eq: ::String,
+                    ?gt: ::String,
+                    ?lt: ::String,
+                    ?ge: ::String,
+                    ?le: ::String,
+                    ?ne: ::String,
+                    ?prefix: ::String,
+                    ?sort_order: ("asc" | "dsc"),
+                    ?next_token: ::String,
+                    ?limit: ::Integer
+                  ) -> Client::_DescribeEvaluationsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeEvaluationsResponseSuccess
+      end
+
+      class MLModelAvailable
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filter_variable: ("CreatedAt" | "LastUpdatedAt" | "Status" | "Name" | "IAMUser" | "TrainingDataSourceId" | "RealtimeEndpointStatus" | "MLModelType" | "Algorithm" | "TrainingDataURI"),
+                    ?eq: ::String,
+                    ?gt: ::String,
+                    ?lt: ::String,
+                    ?ge: ::String,
+                    ?le: ::String,
+                    ?ne: ::String,
+                    ?prefix: ::String,
+                    ?sort_order: ("asc" | "dsc"),
+                    ?next_token: ::String,
+                    ?limit: ::Integer
+                  ) -> Client::_DescribeMLModelsResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeMLModelsResponseSuccess
+      end
+    end
+  end
+end

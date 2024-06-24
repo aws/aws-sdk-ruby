@@ -60,6 +60,14 @@ module Aws::Amplify
     #
     # @!attribute [rw] environment_variables
     #   The environment variables for the Amplify app.
+    #
+    #   For a list of the environment variables that are accessible to
+    #   Amplify by default, see [Amplify Environment variables][1] in the
+    #   *Amplify Hosting User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] default_domain
@@ -71,7 +79,7 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_branch_auto_deletion
-    #   Automatically disconnect a branch in the Amplify Console when you
+    #   Automatically disconnect a branch in the Amplify console when you
     #   delete a branch from your Git repository.
     #   @return [Boolean]
     #
@@ -245,7 +253,27 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Describes the backend environment for an Amplify app.
+    # Describes the backend associated with an Amplify `Branch`.
+    #
+    # This property is available to Amplify Gen 2 apps only. When you deploy
+    # an application with Amplify Gen 2, you provision the app's backend
+    # infrastructure using Typescript code.
+    #
+    # @!attribute [rw] stack_arn
+    #   The Amazon Resource Name (ARN) for the CloudFormation stack.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Backend AWS API Documentation
+    #
+    class Backend < Struct.new(
+      :stack_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the backend environment associated with a `Branch` of a Gen
+    # 1 Amplify app. Amplify Gen 1 applications are created using Amplify
+    # Studio or the Amplify command line interface (CLI).
     #
     # @!attribute [rw] backend_environment_arn
     #   The Amazon Resource Name (ARN) for a backend environment that is
@@ -422,7 +450,19 @@ module Aws::Amplify
     # @!attribute [rw] backend_environment_arn
     #   The Amazon Resource Name (ARN) for a backend environment that is
     #   part of an Amplify app.
+    #
+    #   This property is available to Amplify Gen 1 apps only. When you
+    #   deploy an application with Amplify Gen 2, you provision the app's
+    #   backend infrastructure using Typescript code.
     #   @return [String]
+    #
+    # @!attribute [rw] backend
+    #   Describes the backend associated with an Amplify `Branch`.
+    #
+    #   This property is available to Amplify Gen 2 apps only. When you
+    #   deploy an application with Amplify Gen 2, you provision the app's
+    #   backend infrastructure using Typescript code.
+    #   @return [Types::Backend]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Branch AWS API Documentation
     #
@@ -453,23 +493,108 @@ module Aws::Amplify
       :pull_request_environment_name,
       :destination_branch,
       :source_branch,
-      :backend_environment_arn)
+      :backend_environment_arn,
+      :backend)
       SENSITIVE = [:basic_auth_credentials, :build_spec]
+      include Aws::Structure
+    end
+
+    # Describes the current SSL/TLS certificate that is in use for the
+    # domain. If you are using `CreateDomainAssociation` to create a new
+    # domain association, `Certificate` describes the new certificate that
+    # you are creating.
+    #
+    # @!attribute [rw] type
+    #   The type of SSL/TLS certificate that you want to use.
+    #
+    #   Specify `AMPLIFY_MANAGED` to use the default certificate that
+    #   Amplify provisions for you.
+    #
+    #   Specify `CUSTOM` to use your own certificate that you have already
+    #   added to Certificate Manager in your Amazon Web Services account.
+    #   Make sure you request (or import) the certificate in the US East (N.
+    #   Virginia) Region (us-east-1). For more information about using ACM,
+    #   see [Importing certificates into Certificate Manager][1] in the *ACM
+    #   User guide* .
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_certificate_arn
+    #   The Amazon resource name (ARN) for a custom certificate that you
+    #   have already added to Certificate Manager in your Amazon Web
+    #   Services account.
+    #
+    #   This field is required only when the certificate type is `CUSTOM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_verification_dns_record
+    #   The DNS record for certificate verification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/Certificate AWS API Documentation
+    #
+    class Certificate < Struct.new(
+      :type,
+      :custom_certificate_arn,
+      :certificate_verification_dns_record)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The type of SSL/TLS certificate to use for your custom domain. If a
+    # certificate type isn't specified, Amplify uses the default
+    # `AMPLIFY_MANAGED` certificate.
+    #
+    # @!attribute [rw] type
+    #   The certificate type.
+    #
+    #   Specify `AMPLIFY_MANAGED` to use the default certificate that
+    #   Amplify provisions for you.
+    #
+    #   Specify `CUSTOM` to use your own certificate that you have already
+    #   added to Certificate Manager in your Amazon Web Services account.
+    #   Make sure you request (or import) the certificate in the US East (N.
+    #   Virginia) Region (us-east-1). For more information about using ACM,
+    #   see [Importing certificates into Certificate Manager][1] in the *ACM
+    #   User guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_certificate_arn
+    #   The Amazon resource name (ARN) for the custom certificate that you
+    #   have already added to Certificate Manager in your Amazon Web
+    #   Services account.
+    #
+    #   This field is required only when the certificate type is `CUSTOM`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CertificateSettings AWS API Documentation
+    #
+    class CertificateSettings < Struct.new(
+      :type,
+      :custom_certificate_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
     # The request structure used to create apps in Amplify.
     #
     # @!attribute [rw] name
-    #   The name for an Amplify app.
+    #   The name of the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description for an Amplify app.
+    #   The description of the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] repository
-    #   The repository for an Amplify app.
+    #   The Git repository for the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] platform
@@ -506,7 +631,7 @@ module Aws::Amplify
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #   @return [String]
     #
     # @!attribute [rw] access_token
@@ -530,11 +655,19 @@ module Aws::Amplify
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #   @return [String]
     #
     # @!attribute [rw] environment_variables
     #   The environment variables map for an Amplify app.
+    #
+    #   For a list of the environment variables that are accessible to
+    #   Amplify by default, see [Amplify Environment variables][1] in the
+    #   *Amplify Hosting User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] enable_branch_auto_build
@@ -542,7 +675,7 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_branch_auto_deletion
-    #   Automatically disconnects a branch in the Amplify Console when you
+    #   Automatically disconnects a branch in the Amplify console when you
     #   delete a branch from your Git repository.
     #   @return [Boolean]
     #
@@ -747,8 +880,21 @@ module Aws::Amplify
     #
     # @!attribute [rw] backend_environment_arn
     #   The Amazon Resource Name (ARN) for a backend environment that is
-    #   part of an Amplify app.
+    #   part of a Gen 1 Amplify app.
+    #
+    #   This field is available to Amplify Gen 1 apps only where the backend
+    #   is created using Amplify Studio or the Amplify command line
+    #   interface (CLI).
     #   @return [String]
+    #
+    # @!attribute [rw] backend
+    #   The backend for a `Branch` of an Amplify app. Use for a backend
+    #   created from an CloudFormation stack.
+    #
+    #   This field is available to Amplify Gen 2 apps only. When you deploy
+    #   an application with Amplify Gen 2, you provision the app's backend
+    #   infrastructure using Typescript code.
+    #   @return [Types::Backend]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateBranchRequest AWS API Documentation
     #
@@ -770,7 +916,8 @@ module Aws::Amplify
       :display_name,
       :enable_pull_request_preview,
       :pull_request_environment_name,
-      :backend_environment_arn)
+      :backend_environment_arn,
+      :backend)
       SENSITIVE = [:basic_auth_credentials, :build_spec]
       include Aws::Structure
     end
@@ -797,7 +944,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for the branch, for the job.
+    #   The name of the branch to use for the job.
     #   @return [String]
     #
     # @!attribute [rw] file_map
@@ -872,6 +1019,12 @@ module Aws::Amplify
     #   subdomains.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_settings
+    #   The type of SSL/TLS certificate to use for your custom domain. If
+    #   you don't specify a certificate type, Amplify uses the default
+    #   certificate that it provisions and manages for you.
+    #   @return [Types::CertificateSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateDomainAssociationRequest AWS API Documentation
     #
     class CreateDomainAssociationRequest < Struct.new(
@@ -880,7 +1033,8 @@ module Aws::Amplify
       :enable_auto_sub_domain,
       :sub_domain_settings,
       :auto_sub_domain_creation_patterns,
-      :auto_sub_domain_iam_role)
+      :auto_sub_domain_iam_role,
+      :certificate_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -958,7 +1112,7 @@ module Aws::Amplify
     #
     #   301
     #
-    #   : Represents a 301 (moved pemanently) redirect rule. This and all
+    #   : Represents a 301 (moved permanently) redirect rule. This and all
     #     future requests should be directed to the target URL.
     #
     #   302
@@ -1059,7 +1213,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for the branch.
+    #   The name of the branch.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteBranchRequest AWS API Documentation
@@ -1106,8 +1260,8 @@ module Aws::Amplify
     end
 
     # @!attribute [rw] domain_association
-    #   Describes a domain association that associates a custom domain with
-    #   an Amplify app.
+    #   Describes the association between a custom domain and an Amplify
+    #   app.
     #   @return [Types::DomainAssociation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteDomainAssociationResult AWS API Documentation
@@ -1125,7 +1279,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for the branch, for the job.
+    #   The name of the branch to use for the job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -1198,8 +1352,7 @@ module Aws::Amplify
       include Aws::Structure
     end
 
-    # Describes a domain association that associates a custom domain with an
-    # Amplify app.
+    # Describes the association between a custom domain and an Amplify app.
     #
     # @!attribute [rw] domain_association_arn
     #   The Amazon Resource Name (ARN) for the domain association.
@@ -1227,8 +1380,56 @@ module Aws::Amplify
     #   The current status of the domain association.
     #   @return [String]
     #
+    # @!attribute [rw] update_status
+    #   The status of the domain update operation that is currently in
+    #   progress. The following list describes the valid update states.
+    #
+    #   REQUESTING\_CERTIFICATE
+    #
+    #   : The certificate is in the process of being updated.
+    #
+    #   PENDING\_VERIFICATION
+    #
+    #   : Indicates that an Amplify managed certificate is in the process of
+    #     being verified. This occurs during the creation of a custom domain
+    #     or when a custom domain is updated to use a managed certificate.
+    #
+    #   IMPORTING\_CUSTOM\_CERTIFICATE
+    #
+    #   : Indicates that an Amplify custom certificate is in the process of
+    #     being imported. This occurs during the creation of a custom domain
+    #     or when a custom domain is updated to use a custom certificate.
+    #
+    #   PENDING\_DEPLOYMENT
+    #
+    #   : Indicates that the subdomain or certificate changes are being
+    #     propagated.
+    #
+    #   AWAITING\_APP\_CNAME
+    #
+    #   : Amplify is waiting for CNAME records corresponding to subdomains
+    #     to be propagated. If your custom domain is on Route 53, Amplify
+    #     handles this for you automatically. For more information about
+    #     custom domains, see [Setting up custom domains][1] in the *Amplify
+    #     Hosting User Guide*.
+    #
+    #   UPDATE\_COMPLETE
+    #
+    #   : The certificate has been associated with a domain.
+    #
+    #   UPDATE\_FAILED
+    #
+    #   : The certificate has failed to be provisioned or associated, and
+    #     there is no existing active certificate to roll back to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/custom-domains.html
+    #   @return [String]
+    #
     # @!attribute [rw] status_reason
-    #   The reason for the current status of the domain association.
+    #   Additional information that describes why the domain association is
+    #   in the current state.
     #   @return [String]
     #
     # @!attribute [rw] certificate_verification_dns_record
@@ -1239,6 +1440,17 @@ module Aws::Amplify
     #   The subdomains for the domain association.
     #   @return [Array<Types::SubDomain>]
     #
+    # @!attribute [rw] certificate
+    #   Describes the SSL/TLS certificate for the domain association. This
+    #   can be your own custom certificate or the default certificate that
+    #   Amplify provisions for you.
+    #
+    #   If you are updating your domain to use a different certificate,
+    #   `certificate` points to the new certificate that is being created
+    #   instead of the current active certificate. Otherwise, `certificate`
+    #   points to the current active certificate.
+    #   @return [Types::Certificate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DomainAssociation AWS API Documentation
     #
     class DomainAssociation < Struct.new(
@@ -1248,9 +1460,11 @@ module Aws::Amplify
       :auto_sub_domain_creation_patterns,
       :auto_sub_domain_iam_role,
       :domain_status,
+      :update_status,
       :status_reason,
       :certificate_verification_dns_record,
-      :sub_domains)
+      :sub_domains,
+      :certificate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1400,7 +1614,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for the branch.
+    #   The name of the branch.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetBranchRequest AWS API Documentation
@@ -1466,7 +1680,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The branch name for the job.
+    #   The name of the branch to use for the job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -1876,7 +2090,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for a branch.
+    #   The name of the branch to use for the request.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2063,7 +2277,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for the branch, for the job.
+    #   The name of the branch to use for the job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -2110,7 +2324,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The branch name for the job.
+    #   The name of the branch to use for the job.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -2121,13 +2335,14 @@ module Aws::Amplify
     # @!attribute [rw] job_type
     #   Describes the type for the job. The job type `RELEASE` starts a new
     #   job with the latest change from the specified branch. This value is
-    #   available only for apps that are connected to a repository. The job
-    #   type `RETRY` retries an existing job. If the job type value is
-    #   `RETRY`, the `jobId` is also required.
+    #   available only for apps that are connected to a repository.
+    #
+    #   The job type `RETRY` retries an existing job. If the job type value
+    #   is `RETRY`, the `jobId` is also required.
     #   @return [String]
     #
     # @!attribute [rw] job_reason
-    #   A descriptive reason for starting this job.
+    #   A descriptive reason for starting the job.
     #   @return [String]
     #
     # @!attribute [rw] commit_id
@@ -2244,7 +2459,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for the branch, for the job.
+    #   The name of the branch to use for the stop job request.
     #   @return [String]
     #
     # @!attribute [rw] job_id
@@ -2417,7 +2632,7 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_branch_auto_deletion
-    #   Automatically disconnects a branch in the Amplify Console when you
+    #   Automatically disconnects a branch in the Amplify console when you
     #   delete a branch from your Git repository.
     #   @return [Boolean]
     #
@@ -2457,7 +2672,7 @@ module Aws::Amplify
     #   @return [Types::AutoBranchCreationConfig]
     #
     # @!attribute [rw] repository
-    #   The name of the repository for an Amplify app
+    #   The name of the Git repository for an Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] oauth_token
@@ -2483,7 +2698,7 @@ module Aws::Amplify
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #   @return [String]
     #
     # @!attribute [rw] access_token
@@ -2507,7 +2722,7 @@ module Aws::Amplify
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amplify/latest/UserGuide/setting-up-GitHub-access.html#migrating-to-github-app-auth
+    #   [1]: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html#migrating-to-github-app-auth
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateAppRequest AWS API Documentation
@@ -2557,7 +2772,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The name for the branch.
+    #   The name of the branch.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2626,8 +2841,21 @@ module Aws::Amplify
     #
     # @!attribute [rw] backend_environment_arn
     #   The Amazon Resource Name (ARN) for a backend environment that is
-    #   part of an Amplify app.
+    #   part of a Gen 1 Amplify app.
+    #
+    #   This field is available to Amplify Gen 1 apps only where the backend
+    #   is created using Amplify Studio or the Amplify command line
+    #   interface (CLI).
     #   @return [String]
+    #
+    # @!attribute [rw] backend
+    #   The backend for a `Branch` of an Amplify app. Use for a backend
+    #   created from an CloudFormation stack.
+    #
+    #   This field is available to Amplify Gen 2 apps only. When you deploy
+    #   an application with Amplify Gen 2, you provision the app's backend
+    #   infrastructure using Typescript code.
+    #   @return [Types::Backend]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateBranchRequest AWS API Documentation
     #
@@ -2648,7 +2876,8 @@ module Aws::Amplify
       :display_name,
       :enable_pull_request_preview,
       :pull_request_environment_name,
-      :backend_environment_arn)
+      :backend_environment_arn,
+      :backend)
       SENSITIVE = [:basic_auth_credentials, :build_spec]
       include Aws::Structure
     end
@@ -2696,6 +2925,10 @@ module Aws::Amplify
     #   subdomains.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_settings
+    #   The type of SSL/TLS certificate to use for your custom domain.
+    #   @return [Types::CertificateSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateDomainAssociationRequest AWS API Documentation
     #
     class UpdateDomainAssociationRequest < Struct.new(
@@ -2704,7 +2937,8 @@ module Aws::Amplify
       :enable_auto_sub_domain,
       :sub_domain_settings,
       :auto_sub_domain_creation_patterns,
-      :auto_sub_domain_iam_role)
+      :auto_sub_domain_iam_role,
+      :certificate_settings)
       SENSITIVE = []
       include Aws::Structure
     end

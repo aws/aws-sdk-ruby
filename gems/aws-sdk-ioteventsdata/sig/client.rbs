@@ -1,0 +1,278 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTEventsData
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEventsData/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchAcknowledgeAlarmResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchAcknowledgeAlarmResponse]
+        def error_entries: () -> ::Array[Types::BatchAlarmActionErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEventsData/Client.html#batch_acknowledge_alarm-instance_method
+      def batch_acknowledge_alarm: (
+                                     acknowledge_action_requests: Array[
+                                       {
+                                         request_id: ::String,
+                                         alarm_model_name: ::String,
+                                         key_value: ::String?,
+                                         note: ::String?
+                                       },
+                                     ]
+                                   ) -> _BatchAcknowledgeAlarmResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAcknowledgeAlarmResponseSuccess
+
+      interface _BatchDeleteDetectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteDetectorResponse]
+        def batch_delete_detector_error_entries: () -> ::Array[Types::BatchDeleteDetectorErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEventsData/Client.html#batch_delete_detector-instance_method
+      def batch_delete_detector: (
+                                   detectors: Array[
+                                     {
+                                       message_id: ::String,
+                                       detector_model_name: ::String,
+                                       key_value: ::String?
+                                     },
+                                   ]
+                                 ) -> _BatchDeleteDetectorResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteDetectorResponseSuccess
+
+      interface _BatchDisableAlarmResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDisableAlarmResponse]
+        def error_entries: () -> ::Array[Types::BatchAlarmActionErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEventsData/Client.html#batch_disable_alarm-instance_method
+      def batch_disable_alarm: (
+                                 disable_action_requests: Array[
+                                   {
+                                     request_id: ::String,
+                                     alarm_model_name: ::String,
+                                     key_value: ::String?,
+                                     note: ::String?
+                                   },
+                                 ]
+                               ) -> _BatchDisableAlarmResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisableAlarmResponseSuccess
+
+      interface _BatchEnableAlarmResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchEnableAlarmResponse]
+        def error_entries: () -> ::Array[Types::BatchAlarmActionErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEventsData/Client.html#batch_enable_alarm-instance_method
+      def batch_enable_alarm: (
+                                enable_action_requests: Array[
+                                  {
+                                    request_id: ::String,
+                                    alarm_model_name: ::String,
+                                    key_value: ::String?,
+                                    note: ::String?
+                                  },
+                                ]
+                              ) -> _BatchEnableAlarmResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchEnableAlarmResponseSuccess
+
+      interface _BatchPutMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchPutMessageResponse]
+        def batch_put_message_error_entries: () -> ::Array[Types::BatchPutMessageErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEventsData/Client.html#batch_put_message-instance_method
+      def batch_put_message: (
+                               messages: Array[
+                                 {
+                                   message_id: ::String,
+                                   input_name: ::String,
+                                   payload: ::String,
+                                   timestamp: {
+                                     time_in_millis: ::Integer?
+                                   }?
+                                 },
+                               ]
+                             ) -> _BatchPutMessageResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutMessageResponseSuccess
+
+      interface _BatchResetAlarmResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchResetAlarmResponse]
+        def error_entries: () -> ::Array[Types::BatchAlarmActionErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEventsData/Client.html#batch_reset_alarm-instance_method
+      def batch_reset_alarm: (
+                               reset_action_requests: Array[
+                                 {
+                                   request_id: ::String,
+                                   alarm_model_name: ::String,
+                                   key_value: ::String?,
+                                   note: ::String?
+                                 },
+                               ]
+                             ) -> _BatchResetAlarmResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchResetAlarmResponseSuccess
+
+      interface _BatchSnoozeAlarmResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchSnoozeAlarmResponse]
+        def error_entries: () -> ::Array[Types::BatchAlarmActionErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEventsData/Client.html#batch_snooze_alarm-instance_method
+      def batch_snooze_alarm: (
+                                snooze_action_requests: Array[
+                                  {
+                                    request_id: ::String,
+                                    alarm_model_name: ::String,
+                                    key_value: ::String?,
+                                    note: ::String?,
+                                    snooze_duration: ::Integer
+                                  },
+                                ]
+                              ) -> _BatchSnoozeAlarmResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchSnoozeAlarmResponseSuccess
+
+      interface _BatchUpdateDetectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateDetectorResponse]
+        def batch_update_detector_error_entries: () -> ::Array[Types::BatchUpdateDetectorErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEventsData/Client.html#batch_update_detector-instance_method
+      def batch_update_detector: (
+                                   detectors: Array[
+                                     {
+                                       message_id: ::String,
+                                       detector_model_name: ::String,
+                                       key_value: ::String?,
+                                       state: {
+                                         state_name: ::String,
+                                         variables: Array[
+                                           {
+                                             name: ::String,
+                                             value: ::String
+                                           },
+                                         ],
+                                         timers: Array[
+                                           {
+                                             name: ::String,
+                                             seconds: ::Integer
+                                           },
+                                         ]
+                                       }
+                                     },
+                                   ]
+                                 ) -> _BatchUpdateDetectorResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateDetectorResponseSuccess
+
+      interface _DescribeAlarmResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAlarmResponse]
+        def alarm: () -> Types::Alarm
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEventsData/Client.html#describe_alarm-instance_method
+      def describe_alarm: (
+                            alarm_model_name: ::String,
+                            ?key_value: ::String
+                          ) -> _DescribeAlarmResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAlarmResponseSuccess
+
+      interface _DescribeDetectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDetectorResponse]
+        def detector: () -> Types::Detector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEventsData/Client.html#describe_detector-instance_method
+      def describe_detector: (
+                               detector_model_name: ::String,
+                               ?key_value: ::String
+                             ) -> _DescribeDetectorResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDetectorResponseSuccess
+
+      interface _ListAlarmsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAlarmsResponse]
+        def alarm_summaries: () -> ::Array[Types::AlarmSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEventsData/Client.html#list_alarms-instance_method
+      def list_alarms: (
+                         alarm_model_name: ::String,
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListAlarmsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAlarmsResponseSuccess
+
+      interface _ListDetectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDetectorsResponse]
+        def detector_summaries: () -> ::Array[Types::DetectorSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEventsData/Client.html#list_detectors-instance_method
+      def list_detectors: (
+                            detector_model_name: ::String,
+                            ?state_name: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListDetectorsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDetectorsResponseSuccess
+    end
+  end
+end
+

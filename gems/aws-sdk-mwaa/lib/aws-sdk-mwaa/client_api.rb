@@ -15,7 +15,9 @@ module Aws::MWAA
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AirflowConfigurationOptions = Shapes::MapShape.new(name: 'AirflowConfigurationOptions')
+    AirflowIdentity = Shapes::StringShape.new(name: 'AirflowIdentity')
     AirflowVersion = Shapes::StringShape.new(name: 'AirflowVersion')
+    CeleryExecutorQueue = Shapes::StringShape.new(name: 'CeleryExecutorQueue')
     CloudWatchLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogGroupArn')
     ConfigKey = Shapes::StringShape.new(name: 'ConfigKey')
     ConfigValue = Shapes::StringShape.new(name: 'ConfigValue')
@@ -31,6 +33,7 @@ module Aws::MWAA
     Dimension = Shapes::StructureShape.new(name: 'Dimension')
     Dimensions = Shapes::ListShape.new(name: 'Dimensions')
     Double = Shapes::FloatShape.new(name: 'Double')
+    EndpointManagement = Shapes::StringShape.new(name: 'EndpointManagement')
     Environment = Shapes::StructureShape.new(name: 'Environment')
     EnvironmentArn = Shapes::StringShape.new(name: 'EnvironmentArn')
     EnvironmentClass = Shapes::StringShape.new(name: 'EnvironmentClass')
@@ -42,6 +45,7 @@ module Aws::MWAA
     GetEnvironmentInput = Shapes::StructureShape.new(name: 'GetEnvironmentInput')
     GetEnvironmentOutput = Shapes::StructureShape.new(name: 'GetEnvironmentOutput')
     Hostname = Shapes::StringShape.new(name: 'Hostname')
+    IamIdentity = Shapes::StringShape.new(name: 'IamIdentity')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -56,9 +60,11 @@ module Aws::MWAA
     LoggingConfigurationInput = Shapes::StructureShape.new(name: 'LoggingConfigurationInput')
     LoggingEnabled = Shapes::BooleanShape.new(name: 'LoggingEnabled')
     LoggingLevel = Shapes::StringShape.new(name: 'LoggingLevel')
+    MaxWebservers = Shapes::IntegerShape.new(name: 'MaxWebservers')
     MaxWorkers = Shapes::IntegerShape.new(name: 'MaxWorkers')
     MetricData = Shapes::ListShape.new(name: 'MetricData')
     MetricDatum = Shapes::StructureShape.new(name: 'MetricDatum')
+    MinWebservers = Shapes::IntegerShape.new(name: 'MinWebservers')
     MinWorkers = Shapes::IntegerShape.new(name: 'MinWorkers')
     ModuleLoggingConfiguration = Shapes::StructureShape.new(name: 'ModuleLoggingConfiguration')
     ModuleLoggingConfigurationInput = Shapes::StructureShape.new(name: 'ModuleLoggingConfigurationInput')
@@ -96,6 +102,7 @@ module Aws::MWAA
     UpdateSource = Shapes::StringShape.new(name: 'UpdateSource')
     UpdateStatus = Shapes::StringShape.new(name: 'UpdateStatus')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    VpcEndpointServiceName = Shapes::StringShape.new(name: 'VpcEndpointServiceName')
     WebserverAccessMode = Shapes::StringShape.new(name: 'WebserverAccessMode')
     WebserverUrl = Shapes::StringShape.new(name: 'WebserverUrl')
     WeeklyMaintenanceWindowStart = Shapes::StringShape.new(name: 'WeeklyMaintenanceWindowStart')
@@ -113,28 +120,31 @@ module Aws::MWAA
     CreateCliTokenResponse.add_member(:web_server_hostname, Shapes::ShapeRef.new(shape: Hostname, location_name: "WebServerHostname"))
     CreateCliTokenResponse.struct_class = Types::CreateCliTokenResponse
 
-    CreateEnvironmentInput.add_member(:airflow_configuration_options, Shapes::ShapeRef.new(shape: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
-    CreateEnvironmentInput.add_member(:airflow_version, Shapes::ShapeRef.new(shape: AirflowVersion, location_name: "AirflowVersion"))
-    CreateEnvironmentInput.add_member(:dag_s3_path, Shapes::ShapeRef.new(shape: RelativePath, required: true, location_name: "DagS3Path"))
-    CreateEnvironmentInput.add_member(:environment_class, Shapes::ShapeRef.new(shape: EnvironmentClass, location_name: "EnvironmentClass"))
-    CreateEnvironmentInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "ExecutionRoleArn"))
-    CreateEnvironmentInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKey"))
-    CreateEnvironmentInput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfigurationInput, location_name: "LoggingConfiguration"))
-    CreateEnvironmentInput.add_member(:max_workers, Shapes::ShapeRef.new(shape: MaxWorkers, location_name: "MaxWorkers"))
-    CreateEnvironmentInput.add_member(:min_workers, Shapes::ShapeRef.new(shape: MinWorkers, location_name: "MinWorkers"))
     CreateEnvironmentInput.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location: "uri", location_name: "Name"))
-    CreateEnvironmentInput.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, required: true, location_name: "NetworkConfiguration"))
-    CreateEnvironmentInput.add_member(:plugins_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "PluginsS3ObjectVersion"))
-    CreateEnvironmentInput.add_member(:plugins_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "PluginsS3Path"))
-    CreateEnvironmentInput.add_member(:requirements_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "RequirementsS3ObjectVersion"))
-    CreateEnvironmentInput.add_member(:requirements_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "RequirementsS3Path"))
-    CreateEnvironmentInput.add_member(:schedulers, Shapes::ShapeRef.new(shape: Schedulers, location_name: "Schedulers"))
+    CreateEnvironmentInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "ExecutionRoleArn"))
     CreateEnvironmentInput.add_member(:source_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, required: true, location_name: "SourceBucketArn"))
-    CreateEnvironmentInput.add_member(:startup_script_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "StartupScriptS3ObjectVersion"))
+    CreateEnvironmentInput.add_member(:dag_s3_path, Shapes::ShapeRef.new(shape: RelativePath, required: true, location_name: "DagS3Path"))
+    CreateEnvironmentInput.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, required: true, location_name: "NetworkConfiguration"))
+    CreateEnvironmentInput.add_member(:plugins_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "PluginsS3Path"))
+    CreateEnvironmentInput.add_member(:plugins_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "PluginsS3ObjectVersion"))
+    CreateEnvironmentInput.add_member(:requirements_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "RequirementsS3Path"))
+    CreateEnvironmentInput.add_member(:requirements_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "RequirementsS3ObjectVersion"))
     CreateEnvironmentInput.add_member(:startup_script_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "StartupScriptS3Path"))
+    CreateEnvironmentInput.add_member(:startup_script_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "StartupScriptS3ObjectVersion"))
+    CreateEnvironmentInput.add_member(:airflow_configuration_options, Shapes::ShapeRef.new(shape: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
+    CreateEnvironmentInput.add_member(:environment_class, Shapes::ShapeRef.new(shape: EnvironmentClass, location_name: "EnvironmentClass"))
+    CreateEnvironmentInput.add_member(:max_workers, Shapes::ShapeRef.new(shape: MaxWorkers, location_name: "MaxWorkers"))
+    CreateEnvironmentInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKey"))
+    CreateEnvironmentInput.add_member(:airflow_version, Shapes::ShapeRef.new(shape: AirflowVersion, location_name: "AirflowVersion"))
+    CreateEnvironmentInput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfigurationInput, location_name: "LoggingConfiguration"))
+    CreateEnvironmentInput.add_member(:weekly_maintenance_window_start, Shapes::ShapeRef.new(shape: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
     CreateEnvironmentInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateEnvironmentInput.add_member(:webserver_access_mode, Shapes::ShapeRef.new(shape: WebserverAccessMode, location_name: "WebserverAccessMode"))
-    CreateEnvironmentInput.add_member(:weekly_maintenance_window_start, Shapes::ShapeRef.new(shape: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
+    CreateEnvironmentInput.add_member(:min_workers, Shapes::ShapeRef.new(shape: MinWorkers, location_name: "MinWorkers"))
+    CreateEnvironmentInput.add_member(:schedulers, Shapes::ShapeRef.new(shape: Schedulers, location_name: "Schedulers"))
+    CreateEnvironmentInput.add_member(:endpoint_management, Shapes::ShapeRef.new(shape: EndpointManagement, location_name: "EndpointManagement"))
+    CreateEnvironmentInput.add_member(:min_webservers, Shapes::ShapeRef.new(shape: MinWebservers, location_name: "MinWebservers"))
+    CreateEnvironmentInput.add_member(:max_webservers, Shapes::ShapeRef.new(shape: MaxWebservers, location_name: "MaxWebservers"))
     CreateEnvironmentInput.struct_class = Types::CreateEnvironmentInput
 
     CreateEnvironmentOutput.add_member(:arn, Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "Arn"))
@@ -143,8 +153,10 @@ module Aws::MWAA
     CreateWebLoginTokenRequest.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location: "uri", location_name: "Name"))
     CreateWebLoginTokenRequest.struct_class = Types::CreateWebLoginTokenRequest
 
-    CreateWebLoginTokenResponse.add_member(:web_server_hostname, Shapes::ShapeRef.new(shape: Hostname, location_name: "WebServerHostname"))
     CreateWebLoginTokenResponse.add_member(:web_token, Shapes::ShapeRef.new(shape: Token, location_name: "WebToken"))
+    CreateWebLoginTokenResponse.add_member(:web_server_hostname, Shapes::ShapeRef.new(shape: Hostname, location_name: "WebServerHostname"))
+    CreateWebLoginTokenResponse.add_member(:iam_identity, Shapes::ShapeRef.new(shape: IamIdentity, location_name: "IamIdentity"))
+    CreateWebLoginTokenResponse.add_member(:airflow_identity, Shapes::ShapeRef.new(shape: AirflowIdentity, location_name: "AirflowIdentity"))
     CreateWebLoginTokenResponse.struct_class = Types::CreateWebLoginTokenResponse
 
     DeleteEnvironmentInput.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location: "uri", location_name: "Name"))
@@ -156,36 +168,42 @@ module Aws::MWAA
     Dimension.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
     Dimension.struct_class = Types::Dimension
 
-    Dimensions.member = Shapes::ShapeRef.new(shape: Dimension)
+    Dimensions.member = Shapes::ShapeRef.new(shape: Dimension, deprecated: true)
 
-    Environment.add_member(:airflow_configuration_options, Shapes::ShapeRef.new(shape: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
-    Environment.add_member(:airflow_version, Shapes::ShapeRef.new(shape: AirflowVersion, location_name: "AirflowVersion"))
+    Environment.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "Name"))
+    Environment.add_member(:status, Shapes::ShapeRef.new(shape: EnvironmentStatus, location_name: "Status"))
     Environment.add_member(:arn, Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "Arn"))
     Environment.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "CreatedAt"))
-    Environment.add_member(:dag_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "DagS3Path"))
-    Environment.add_member(:environment_class, Shapes::ShapeRef.new(shape: EnvironmentClass, location_name: "EnvironmentClass"))
+    Environment.add_member(:webserver_url, Shapes::ShapeRef.new(shape: WebserverUrl, location_name: "WebserverUrl"))
     Environment.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "ExecutionRoleArn"))
-    Environment.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKey"))
-    Environment.add_member(:last_update, Shapes::ShapeRef.new(shape: LastUpdate, location_name: "LastUpdate"))
-    Environment.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
-    Environment.add_member(:max_workers, Shapes::ShapeRef.new(shape: MaxWorkers, location_name: "MaxWorkers"))
-    Environment.add_member(:min_workers, Shapes::ShapeRef.new(shape: MinWorkers, location_name: "MinWorkers"))
-    Environment.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "Name"))
-    Environment.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
-    Environment.add_member(:plugins_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "PluginsS3ObjectVersion"))
-    Environment.add_member(:plugins_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "PluginsS3Path"))
-    Environment.add_member(:requirements_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "RequirementsS3ObjectVersion"))
-    Environment.add_member(:requirements_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "RequirementsS3Path"))
-    Environment.add_member(:schedulers, Shapes::ShapeRef.new(shape: Schedulers, location_name: "Schedulers"))
     Environment.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "ServiceRoleArn"))
+    Environment.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKey"))
+    Environment.add_member(:airflow_version, Shapes::ShapeRef.new(shape: AirflowVersion, location_name: "AirflowVersion"))
     Environment.add_member(:source_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "SourceBucketArn"))
-    Environment.add_member(:startup_script_s3_object_version, Shapes::ShapeRef.new(shape: String, location_name: "StartupScriptS3ObjectVersion"))
+    Environment.add_member(:dag_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "DagS3Path"))
+    Environment.add_member(:plugins_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "PluginsS3Path"))
+    Environment.add_member(:plugins_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "PluginsS3ObjectVersion"))
+    Environment.add_member(:requirements_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "RequirementsS3Path"))
+    Environment.add_member(:requirements_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "RequirementsS3ObjectVersion"))
     Environment.add_member(:startup_script_s3_path, Shapes::ShapeRef.new(shape: String, location_name: "StartupScriptS3Path"))
-    Environment.add_member(:status, Shapes::ShapeRef.new(shape: EnvironmentStatus, location_name: "Status"))
+    Environment.add_member(:startup_script_s3_object_version, Shapes::ShapeRef.new(shape: String, location_name: "StartupScriptS3ObjectVersion"))
+    Environment.add_member(:airflow_configuration_options, Shapes::ShapeRef.new(shape: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
+    Environment.add_member(:environment_class, Shapes::ShapeRef.new(shape: EnvironmentClass, location_name: "EnvironmentClass"))
+    Environment.add_member(:max_workers, Shapes::ShapeRef.new(shape: MaxWorkers, location_name: "MaxWorkers"))
+    Environment.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    Environment.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
+    Environment.add_member(:last_update, Shapes::ShapeRef.new(shape: LastUpdate, location_name: "LastUpdate"))
+    Environment.add_member(:weekly_maintenance_window_start, Shapes::ShapeRef.new(shape: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
     Environment.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Environment.add_member(:webserver_access_mode, Shapes::ShapeRef.new(shape: WebserverAccessMode, location_name: "WebserverAccessMode"))
-    Environment.add_member(:webserver_url, Shapes::ShapeRef.new(shape: WebserverUrl, location_name: "WebserverUrl"))
-    Environment.add_member(:weekly_maintenance_window_start, Shapes::ShapeRef.new(shape: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
+    Environment.add_member(:min_workers, Shapes::ShapeRef.new(shape: MinWorkers, location_name: "MinWorkers"))
+    Environment.add_member(:schedulers, Shapes::ShapeRef.new(shape: Schedulers, location_name: "Schedulers"))
+    Environment.add_member(:webserver_vpc_endpoint_service, Shapes::ShapeRef.new(shape: VpcEndpointServiceName, location_name: "WebserverVpcEndpointService"))
+    Environment.add_member(:database_vpc_endpoint_service, Shapes::ShapeRef.new(shape: VpcEndpointServiceName, location_name: "DatabaseVpcEndpointService"))
+    Environment.add_member(:celery_executor_queue, Shapes::ShapeRef.new(shape: CeleryExecutorQueue, location_name: "CeleryExecutorQueue"))
+    Environment.add_member(:endpoint_management, Shapes::ShapeRef.new(shape: EndpointManagement, location_name: "EndpointManagement"))
+    Environment.add_member(:min_webservers, Shapes::ShapeRef.new(shape: MinWebservers, location_name: "MinWebservers"))
+    Environment.add_member(:max_webservers, Shapes::ShapeRef.new(shape: MaxWebservers, location_name: "MaxWebservers"))
     Environment.struct_class = Types::Environment
 
     EnvironmentList.member = Shapes::ShapeRef.new(shape: EnvironmentName)
@@ -199,14 +217,14 @@ module Aws::MWAA
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    LastUpdate.add_member(:status, Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "Status"))
     LastUpdate.add_member(:created_at, Shapes::ShapeRef.new(shape: UpdateCreatedAt, location_name: "CreatedAt"))
     LastUpdate.add_member(:error, Shapes::ShapeRef.new(shape: UpdateError, location_name: "Error"))
     LastUpdate.add_member(:source, Shapes::ShapeRef.new(shape: UpdateSource, location_name: "Source"))
-    LastUpdate.add_member(:status, Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "Status"))
     LastUpdate.struct_class = Types::LastUpdate
 
-    ListEnvironmentsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEnvironmentsInputMaxResultsInteger, location: "querystring", location_name: "MaxResults"))
     ListEnvironmentsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListEnvironmentsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEnvironmentsInputMaxResultsInteger, location: "querystring", location_name: "MaxResults"))
     ListEnvironmentsInput.struct_class = Types::ListEnvironmentsInput
 
     ListEnvironmentsOutput.add_member(:environments, Shapes::ShapeRef.new(shape: EnvironmentList, required: true, location_name: "Environments"))
@@ -221,43 +239,43 @@ module Aws::MWAA
 
     LoggingConfiguration.add_member(:dag_processing_logs, Shapes::ShapeRef.new(shape: ModuleLoggingConfiguration, location_name: "DagProcessingLogs"))
     LoggingConfiguration.add_member(:scheduler_logs, Shapes::ShapeRef.new(shape: ModuleLoggingConfiguration, location_name: "SchedulerLogs"))
-    LoggingConfiguration.add_member(:task_logs, Shapes::ShapeRef.new(shape: ModuleLoggingConfiguration, location_name: "TaskLogs"))
     LoggingConfiguration.add_member(:webserver_logs, Shapes::ShapeRef.new(shape: ModuleLoggingConfiguration, location_name: "WebserverLogs"))
     LoggingConfiguration.add_member(:worker_logs, Shapes::ShapeRef.new(shape: ModuleLoggingConfiguration, location_name: "WorkerLogs"))
+    LoggingConfiguration.add_member(:task_logs, Shapes::ShapeRef.new(shape: ModuleLoggingConfiguration, location_name: "TaskLogs"))
     LoggingConfiguration.struct_class = Types::LoggingConfiguration
 
     LoggingConfigurationInput.add_member(:dag_processing_logs, Shapes::ShapeRef.new(shape: ModuleLoggingConfigurationInput, location_name: "DagProcessingLogs"))
     LoggingConfigurationInput.add_member(:scheduler_logs, Shapes::ShapeRef.new(shape: ModuleLoggingConfigurationInput, location_name: "SchedulerLogs"))
-    LoggingConfigurationInput.add_member(:task_logs, Shapes::ShapeRef.new(shape: ModuleLoggingConfigurationInput, location_name: "TaskLogs"))
     LoggingConfigurationInput.add_member(:webserver_logs, Shapes::ShapeRef.new(shape: ModuleLoggingConfigurationInput, location_name: "WebserverLogs"))
     LoggingConfigurationInput.add_member(:worker_logs, Shapes::ShapeRef.new(shape: ModuleLoggingConfigurationInput, location_name: "WorkerLogs"))
+    LoggingConfigurationInput.add_member(:task_logs, Shapes::ShapeRef.new(shape: ModuleLoggingConfigurationInput, location_name: "TaskLogs"))
     LoggingConfigurationInput.struct_class = Types::LoggingConfigurationInput
 
-    MetricData.member = Shapes::ShapeRef.new(shape: MetricDatum)
+    MetricData.member = Shapes::ShapeRef.new(shape: MetricDatum, deprecated: true)
 
-    MetricDatum.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
     MetricDatum.add_member(:metric_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MetricName"))
-    MetricDatum.add_member(:statistic_values, Shapes::ShapeRef.new(shape: StatisticSet, location_name: "StatisticValues"))
     MetricDatum.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
-    MetricDatum.add_member(:unit, Shapes::ShapeRef.new(shape: Unit, location_name: "Unit"))
+    MetricDatum.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, deprecated: true, location_name: "Dimensions"))
     MetricDatum.add_member(:value, Shapes::ShapeRef.new(shape: Double, location_name: "Value"))
+    MetricDatum.add_member(:unit, Shapes::ShapeRef.new(shape: Unit, location_name: "Unit"))
+    MetricDatum.add_member(:statistic_values, Shapes::ShapeRef.new(shape: StatisticSet, deprecated: true, location_name: "StatisticValues"))
     MetricDatum.struct_class = Types::MetricDatum
 
-    ModuleLoggingConfiguration.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupArn, location_name: "CloudWatchLogGroupArn"))
     ModuleLoggingConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: LoggingEnabled, location_name: "Enabled"))
     ModuleLoggingConfiguration.add_member(:log_level, Shapes::ShapeRef.new(shape: LoggingLevel, location_name: "LogLevel"))
+    ModuleLoggingConfiguration.add_member(:cloud_watch_log_group_arn, Shapes::ShapeRef.new(shape: CloudWatchLogGroupArn, location_name: "CloudWatchLogGroupArn"))
     ModuleLoggingConfiguration.struct_class = Types::ModuleLoggingConfiguration
 
     ModuleLoggingConfigurationInput.add_member(:enabled, Shapes::ShapeRef.new(shape: LoggingEnabled, required: true, location_name: "Enabled"))
     ModuleLoggingConfigurationInput.add_member(:log_level, Shapes::ShapeRef.new(shape: LoggingLevel, required: true, location_name: "LogLevel"))
     ModuleLoggingConfigurationInput.struct_class = Types::ModuleLoggingConfigurationInput
 
-    NetworkConfiguration.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupList, location_name: "SecurityGroupIds"))
     NetworkConfiguration.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetList, location_name: "SubnetIds"))
+    NetworkConfiguration.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupList, location_name: "SecurityGroupIds"))
     NetworkConfiguration.struct_class = Types::NetworkConfiguration
 
     PublishMetricsInput.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location: "uri", location_name: "EnvironmentName"))
-    PublishMetricsInput.add_member(:metric_data, Shapes::ShapeRef.new(shape: MetricData, required: true, location_name: "MetricData"))
+    PublishMetricsInput.add_member(:metric_data, Shapes::ShapeRef.new(shape: MetricData, required: true, deprecated: true, location_name: "MetricData"))
     PublishMetricsInput.struct_class = Types::PublishMetricsInput
 
     PublishMetricsOutput.struct_class = Types::PublishMetricsOutput
@@ -267,10 +285,10 @@ module Aws::MWAA
 
     SecurityGroupList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
-    StatisticSet.add_member(:maximum, Shapes::ShapeRef.new(shape: Double, location_name: "Maximum"))
-    StatisticSet.add_member(:minimum, Shapes::ShapeRef.new(shape: Double, location_name: "Minimum"))
     StatisticSet.add_member(:sample_count, Shapes::ShapeRef.new(shape: Integer, location_name: "SampleCount"))
     StatisticSet.add_member(:sum, Shapes::ShapeRef.new(shape: Double, location_name: "Sum"))
+    StatisticSet.add_member(:minimum, Shapes::ShapeRef.new(shape: Double, location_name: "Minimum"))
+    StatisticSet.add_member(:maximum, Shapes::ShapeRef.new(shape: Double, location_name: "Maximum"))
     StatisticSet.struct_class = Types::StatisticSet
 
     SubnetList.member = Shapes::ShapeRef.new(shape: SubnetId)
@@ -292,26 +310,28 @@ module Aws::MWAA
 
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
-    UpdateEnvironmentInput.add_member(:airflow_configuration_options, Shapes::ShapeRef.new(shape: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
-    UpdateEnvironmentInput.add_member(:airflow_version, Shapes::ShapeRef.new(shape: AirflowVersion, location_name: "AirflowVersion"))
-    UpdateEnvironmentInput.add_member(:dag_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "DagS3Path"))
-    UpdateEnvironmentInput.add_member(:environment_class, Shapes::ShapeRef.new(shape: EnvironmentClass, location_name: "EnvironmentClass"))
-    UpdateEnvironmentInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "ExecutionRoleArn"))
-    UpdateEnvironmentInput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfigurationInput, location_name: "LoggingConfiguration"))
-    UpdateEnvironmentInput.add_member(:max_workers, Shapes::ShapeRef.new(shape: MaxWorkers, location_name: "MaxWorkers"))
-    UpdateEnvironmentInput.add_member(:min_workers, Shapes::ShapeRef.new(shape: MinWorkers, location_name: "MinWorkers"))
     UpdateEnvironmentInput.add_member(:name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location: "uri", location_name: "Name"))
-    UpdateEnvironmentInput.add_member(:network_configuration, Shapes::ShapeRef.new(shape: UpdateNetworkConfigurationInput, location_name: "NetworkConfiguration"))
-    UpdateEnvironmentInput.add_member(:plugins_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "PluginsS3ObjectVersion"))
-    UpdateEnvironmentInput.add_member(:plugins_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "PluginsS3Path"))
-    UpdateEnvironmentInput.add_member(:requirements_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "RequirementsS3ObjectVersion"))
-    UpdateEnvironmentInput.add_member(:requirements_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "RequirementsS3Path"))
-    UpdateEnvironmentInput.add_member(:schedulers, Shapes::ShapeRef.new(shape: Schedulers, location_name: "Schedulers"))
+    UpdateEnvironmentInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "ExecutionRoleArn"))
+    UpdateEnvironmentInput.add_member(:airflow_version, Shapes::ShapeRef.new(shape: AirflowVersion, location_name: "AirflowVersion"))
     UpdateEnvironmentInput.add_member(:source_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "SourceBucketArn"))
-    UpdateEnvironmentInput.add_member(:startup_script_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "StartupScriptS3ObjectVersion"))
+    UpdateEnvironmentInput.add_member(:dag_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "DagS3Path"))
+    UpdateEnvironmentInput.add_member(:plugins_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "PluginsS3Path"))
+    UpdateEnvironmentInput.add_member(:plugins_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "PluginsS3ObjectVersion"))
+    UpdateEnvironmentInput.add_member(:requirements_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "RequirementsS3Path"))
+    UpdateEnvironmentInput.add_member(:requirements_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "RequirementsS3ObjectVersion"))
     UpdateEnvironmentInput.add_member(:startup_script_s3_path, Shapes::ShapeRef.new(shape: RelativePath, location_name: "StartupScriptS3Path"))
-    UpdateEnvironmentInput.add_member(:webserver_access_mode, Shapes::ShapeRef.new(shape: WebserverAccessMode, location_name: "WebserverAccessMode"))
+    UpdateEnvironmentInput.add_member(:startup_script_s3_object_version, Shapes::ShapeRef.new(shape: S3ObjectVersion, location_name: "StartupScriptS3ObjectVersion"))
+    UpdateEnvironmentInput.add_member(:airflow_configuration_options, Shapes::ShapeRef.new(shape: AirflowConfigurationOptions, location_name: "AirflowConfigurationOptions"))
+    UpdateEnvironmentInput.add_member(:environment_class, Shapes::ShapeRef.new(shape: EnvironmentClass, location_name: "EnvironmentClass"))
+    UpdateEnvironmentInput.add_member(:max_workers, Shapes::ShapeRef.new(shape: MaxWorkers, location_name: "MaxWorkers"))
+    UpdateEnvironmentInput.add_member(:network_configuration, Shapes::ShapeRef.new(shape: UpdateNetworkConfigurationInput, location_name: "NetworkConfiguration"))
+    UpdateEnvironmentInput.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfigurationInput, location_name: "LoggingConfiguration"))
     UpdateEnvironmentInput.add_member(:weekly_maintenance_window_start, Shapes::ShapeRef.new(shape: WeeklyMaintenanceWindowStart, location_name: "WeeklyMaintenanceWindowStart"))
+    UpdateEnvironmentInput.add_member(:webserver_access_mode, Shapes::ShapeRef.new(shape: WebserverAccessMode, location_name: "WebserverAccessMode"))
+    UpdateEnvironmentInput.add_member(:min_workers, Shapes::ShapeRef.new(shape: MinWorkers, location_name: "MinWorkers"))
+    UpdateEnvironmentInput.add_member(:schedulers, Shapes::ShapeRef.new(shape: Schedulers, location_name: "Schedulers"))
+    UpdateEnvironmentInput.add_member(:min_webservers, Shapes::ShapeRef.new(shape: MinWebservers, location_name: "MinWebservers"))
+    UpdateEnvironmentInput.add_member(:max_webservers, Shapes::ShapeRef.new(shape: MaxWebservers, location_name: "MaxWebservers"))
     UpdateEnvironmentInput.struct_class = Types::UpdateEnvironmentInput
 
     UpdateEnvironmentOutput.add_member(:arn, Shapes::ShapeRef.new(shape: EnvironmentArn, location_name: "Arn"))
@@ -336,8 +356,8 @@ module Aws::MWAA
       api.metadata = {
         "apiVersion" => "2020-07-01",
         "endpointPrefix" => "airflow",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "AmazonMWAA",
         "serviceId" => "MWAA",
         "signatureVersion" => "v4",
@@ -450,6 +470,7 @@ module Aws::MWAA
         o.name = "PublishMetrics"
         o.http_method = "POST"
         o.http_request_uri = "/metrics/environments/{EnvironmentName}"
+        o.deprecated = true
         o.endpoint_pattern = {
           "hostPrefix" => "ops.",
         }

@@ -4,8 +4,15 @@ module Aws
   module Rest
     module Request
       class QuerystringBuilder
-
         include Seahorse::Model::Shapes
+
+        SUPPORTED_TYPES = [
+          BooleanShape,
+          FloatShape,
+          IntegerShape,
+          StringShape,
+          TimestampShape
+        ].freeze
 
         # Provide shape references and param values:
         #
@@ -23,39 +30,32 @@ module Aws
         #
         # @return [String] Returns a built querystring
         def build(params)
+          # keys in query maps must NOT override other keys
+          query_keys = query_keys(params)
           params.map do |(shape_ref, param_value)|
-            build_part(shape_ref, param_value)
-          end.join('&')
+            build_part(shape_ref, param_value, query_keys)
+          end.reject { |p| p.nil? || p.empty? }.join('&')
         end
 
         private
 
-        def build_part(shape_ref, param_value)
+        def query_keys(params)
+          keys = Set.new
+          params.each do |(shape_ref, _)|
+            keys << shape_ref.location_name unless shape_ref.shape.is_a?(MapShape)
+          end
+          keys
+        end
+
+        def build_part(shape_ref, param_value, query_keys)
           case shape_ref.shape
           # supported scalar types
-          when StringShape, BooleanShape, FloatShape, IntegerShape, StringShape
-            param_name = shape_ref.location_name
-            "#{param_name}=#{escape(param_value.to_s)}"
-          when TimestampShape
-            param_name = shape_ref.location_name
-            "#{param_name}=#{escape(timestamp(shape_ref, param_value))}"
+          when *SUPPORTED_TYPES
+            "#{shape_ref.location_name}=#{query_value(shape_ref, param_value)}"
           when MapShape
-            if StringShape === shape_ref.shape.value.shape
-              query_map_of_string(param_value)
-            elsif ListShape === shape_ref.shape.value.shape
-              query_map_of_string_list(param_value)
-            else
-              msg = "only map of string and string list supported"
-              raise NotImplementedError, msg
-            end
+            generate_query_map(shape_ref, param_value, query_keys)
           when ListShape
-            if StringShape === shape_ref.shape.member.shape
-              list_of_strings(shape_ref.location_name, param_value)
-            else
-              msg = "Only list of strings supported, got "\
-                    "#{shape_ref.shape.member.shape.class.name}"
-              raise NotImplementedError, msg
-            end
+            generate_query_list(shape_ref, param_value)
           else
             raise NotImplementedError
           end
@@ -71,34 +71,60 @@ module Aws
           end
         end
 
-        def query_map_of_string(hash)
+        def query_value(ref, value)
+          case ref.shape
+          when TimestampShape
+            escape(timestamp(ref, value))
+          when *SUPPORTED_TYPES
+            escape(value.to_s)
+          else
+            raise NotImplementedError
+          end
+        end
+
+        def generate_query_list(ref, values)
+          member_ref = ref.shape.member
+          values.map do |value|
+            value = query_value(member_ref, value)
+            "#{ref.location_name}=#{value}"
+          end
+        end
+
+        def generate_query_map(ref, value, query_keys)
+          case ref.shape.value.shape
+          when StringShape
+            query_map_of_string(value, query_keys)
+          when ListShape
+            query_map_of_string_list(value, query_keys)
+          else
+            msg = 'Only map of string and string list supported'
+            raise NotImplementedError, msg
+          end
+        end
+
+        def query_map_of_string(hash, query_keys)
           list = []
           hash.each_pair do |key, value|
-            list << "#{escape(key)}=#{escape(value)}"
+            key = escape(key)
+            list << "#{key}=#{escape(value)}" unless query_keys.include?(key)
           end
           list
         end
 
-        def query_map_of_string_list(hash)
+        def query_map_of_string_list(hash, query_keys)
           list = []
           hash.each_pair do |key, values|
+            key = escape(key)
             values.each do |value|
-              list << "#{escape(key)}=#{escape(value)}"
+              list << "#{key}=#{escape(value)}" unless query_keys.include?(key)
             end
           end
           list
         end
 
-        def list_of_strings(name, values)
-          values.map do |value|
-            "#{name}=#{escape(value)}"
-          end
-        end
-
         def escape(string)
           Seahorse::Util.uri_escape(string)
         end
-
       end
     end
   end

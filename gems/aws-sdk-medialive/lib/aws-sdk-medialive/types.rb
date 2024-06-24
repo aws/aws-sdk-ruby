@@ -164,6 +164,10 @@ module Aws::MediaLive
     end
 
     # @!attribute [rw] kms_key_id
+    #   Specifies the KMS key to use for all features that use key
+    #   encryption. Specify the ARN of a KMS key that you have created. Or
+    #   leave blank to use the key that MediaLive creates and manages for
+    #   you.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AccountConfiguration AWS API Documentation
@@ -436,6 +440,18 @@ module Aws::MediaLive
     #   displayed by the player (eg. English, or Director Commentary).
     #   @return [String]
     #
+    # @!attribute [rw] audio_dash_roles
+    #   Identifies the DASH roles to assign to this audio output. Applies
+    #   only when the audio output is configured for DVB DASH accessibility
+    #   signaling.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dvb_dash_accessibility
+    #   Identifies DVB DASH accessibility signaling in this audio output.
+    #   Used in Microsoft Smooth Streaming outputs to signal accessibility
+    #   information to packagers.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AudioDescription AWS API Documentation
     #
     class AudioDescription < Struct.new(
@@ -449,7 +465,9 @@ module Aws::MediaLive
       :language_code_control,
       :name,
       :remix_settings,
-      :stream_name)
+      :stream_name,
+      :audio_dash_roles,
+      :dvb_dash_accessibility)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -796,10 +814,25 @@ module Aws::MediaLive
     #   server for possible update.
     #   @return [Types::AvailSettings]
     #
+    # @!attribute [rw] scte_35_segmentation_scope
+    #   Configures whether SCTE 35 passthrough triggers segment breaks in
+    #   all output groups that use segmented outputs. Insertion of a SCTE 35
+    #   message typically results in a segment break, in addition to the
+    #   regular cadence of breaks. The segment breaks appear in video
+    #   outputs, audio outputs, and captions outputs (if any).
+    #   ALL\_OUTPUT\_GROUPS: Default. Insert the segment break in in all
+    #   output groups that have segmented outputs. This is the legacy
+    #   behavior. SCTE35\_ENABLED\_OUTPUT\_GROUPS: Insert the segment break
+    #   only in output groups that have SCTE 35 passthrough enabled. This is
+    #   the recommended value, because it reduces unnecessary segment
+    #   breaks.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AvailConfiguration AWS API Documentation
     #
     class AvailConfiguration < Struct.new(
-      :avail_settings)
+      :avail_settings,
+      :scte_35_segmentation_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1455,7 +1488,8 @@ module Aws::MediaLive
     # @!attribute [rw] accessibility
     #   Indicates whether the caption track implements accessibility
     #   features such as written descriptions of spoken dialog, music, and
-    #   sounds.
+    #   sounds. This signaling is added to HLS output group and MediaPackage
+    #   output group.
     #   @return [String]
     #
     # @!attribute [rw] caption_selector_name
@@ -1483,6 +1517,18 @@ module Aws::MediaLive
     #   description with an output. Names must be unique within an event.
     #   @return [String]
     #
+    # @!attribute [rw] caption_dash_roles
+    #   Identifies the DASH roles to assign to this captions output. Applies
+    #   only when the captions output is configured for DVB DASH
+    #   accessibility signaling.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dvb_dash_accessibility
+    #   Identifies DVB DASH accessibility signaling in this captions output.
+    #   Used in Microsoft Smooth Streaming outputs to signal accessibility
+    #   information to packagers.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CaptionDescription AWS API Documentation
     #
     class CaptionDescription < Struct.new(
@@ -1491,7 +1537,9 @@ module Aws::MediaLive
       :destination_settings,
       :language_code,
       :language_description,
-      :name)
+      :name,
+      :caption_dash_roles,
+      :dvb_dash_accessibility)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1977,6 +2025,55 @@ module Aws::MediaLive
     #
     class ClaimDeviceResponse < Aws::EmptyStructure; end
 
+    # Property of ColorCorrectionSettings. Used for custom color space
+    # conversion. The object identifies one 3D LUT file and specifies the
+    # input/output color space combination that the file will be used for.
+    #
+    # @!attribute [rw] input_color_space
+    #   The color space of the input.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_color_space
+    #   The color space of the output.
+    #   @return [String]
+    #
+    # @!attribute [rw] uri
+    #   The URI of the 3D LUT file. The protocol must be 's3:' or
+    #   's3ssl:':.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ColorCorrection AWS API Documentation
+    #
+    class ColorCorrection < Struct.new(
+      :input_color_space,
+      :output_color_space,
+      :uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Property of encoderSettings. Controls color conversion when you are
+    # using 3D LUT files to perform color conversion on video.
+    #
+    # @!attribute [rw] global_color_corrections
+    #   An array of colorCorrections that applies when you are using 3D LUT
+    #   files to perform color conversion on video. Each colorCorrection
+    #   contains one 3D LUT file (that defines the color mapping for
+    #   converting an input color space to an output color space), and the
+    #   input/output combination that this 3D LUT file applies to. MediaLive
+    #   reads the color space in the input metadata, determines the color
+    #   space that you have specified for the output, and finds and uses the
+    #   LUT file that applies to this combination.
+    #   @return [Array<Types::ColorCorrection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ColorCorrectionSettings AWS API Documentation
+    #
+    class ColorCorrectionSettings < Struct.new(
+      :global_color_corrections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Passthrough applies no color space conversion to the output
     #
     # @api private
@@ -2033,7 +2130,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   Unique request ID to be specified. This is needed to prevent retries from creating multiple resources. **A suitable default value is auto-generated.** You should normally
+    #   Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
@@ -2194,7 +2291,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   Unique identifier of the request to ensure the request is handled exactly once in case of retries. **A suitable default value is auto-generated.** You should normally
+    #   Unique identifier of the request to ensure the request is handled exactly once in case of retries.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
@@ -2377,7 +2474,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   Unique request ID. This prevents retries from creating multiple resources. **A suitable default value is auto-generated.** You should normally
+    #   Unique request ID. This prevents retries from creating multiple resources.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
@@ -2406,7 +2503,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   Unique request ID. This prevents retries from creating multiple resources. **A suitable default value is auto-generated.** You should normally
+    #   Unique request ID. This prevents retries from creating multiple resources.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
@@ -2525,7 +2622,7 @@ module Aws::MediaLive
     end
 
     # @!attribute [rw] request_id
-    #   Unique identifier of the request to ensure the request is handled exactly once in case of retries. **A suitable default value is auto-generated.** You should normally
+    #   Unique identifier of the request to ensure the request is handled exactly once in case of retries.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
@@ -2958,6 +3055,36 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationRequest AWS API Documentation
+    #
+    class DescribeAccountConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationResponse AWS API Documentation
+    #
+    class DescribeAccountConfigurationResponse < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The account's configuration.
+    #
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationResultModel AWS API Documentation
+    #
+    class DescribeAccountConfigurationResultModel < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_id
     #   @return [String]
     #
@@ -3155,6 +3282,8 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] accept
+    #   The HTTP Accept header. Indicates the requested type fothe
+    #   thumbnail.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDeviceThumbnailRequest AWS API Documentation
@@ -3167,9 +3296,12 @@ module Aws::MediaLive
     end
 
     # @!attribute [rw] body
+    #   The binary data for the thumbnail that the Link device has most
+    #   recently sent to MediaLive.
     #   @return [IO]
     #
     # @!attribute [rw] content_type
+    #   Specifies the media type of the thumbnail.
     #   @return [String]
     #
     # @!attribute [rw] content_length
@@ -3179,6 +3311,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] last_modified
+    #   Placeholder documentation for \_\_timestamp
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInputDeviceThumbnailResponse AWS API Documentation
@@ -3623,6 +3756,49 @@ module Aws::MediaLive
     class DescribeScheduleResponse < Struct.new(
       :next_token,
       :schedule_actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_id
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnail_type
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsRequest AWS API Documentation
+    #
+    class DescribeThumbnailsRequest < Struct.new(
+      :channel_id,
+      :pipeline_id,
+      :thumbnail_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] thumbnail_details
+    #   @return [Array<Types::ThumbnailDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsResponse AWS API Documentation
+    #
+    class DescribeThumbnailsResponse < Struct.new(
+      :thumbnail_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Thumbnail details for all the pipelines of a running channel.
+    #
+    # @!attribute [rw] thumbnail_details
+    #   @return [Array<Types::ThumbnailDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsResultModel AWS API Documentation
+    #
+    class DescribeThumbnailsResultModel < Struct.new(
+      :thumbnail_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4231,6 +4407,10 @@ module Aws::MediaLive
     #   Thumbnail configuration settings.
     #   @return [Types::ThumbnailConfiguration]
     #
+    # @!attribute [rw] color_correction_settings
+    #   Color Correction Settings
+    #   @return [Types::ColorCorrectionSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EncoderSettings AWS API Documentation
     #
     class EncoderSettings < Struct.new(
@@ -4246,7 +4426,8 @@ module Aws::MediaLive
       :output_groups,
       :timecode_config,
       :video_descriptions,
-      :thumbnail_configuration)
+      :thumbnail_configuration,
+      :color_correction_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4382,10 +4563,17 @@ module Aws::MediaLive
     #   first delete all input prepare actions from the schedule.
     #   @return [String]
     #
+    # @!attribute [rw] output_static_image_overlay_schedule_actions
+    #   Enables the output static image overlay feature. Enabling this
+    #   feature allows you to send channel schedule updates to
+    #   display/clear/modify image overlays on an output-by-output bases.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/FeatureActivations AWS API Documentation
     #
     class FeatureActivations < Struct.new(
-      :input_prepare_schedule_actions)
+      :input_prepare_schedule_actions,
+      :output_static_image_overlay_schedule_actions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4612,79 +4800,6 @@ module Aws::MediaLive
     #
     class GatewayTimeoutException < Struct.new(
       :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @api private
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationRequest AWS API Documentation
-    #
-    class DescribeAccountConfigurationRequest < Aws::EmptyStructure; end
-
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationResponse AWS API Documentation
-    #
-    class DescribeAccountConfigurationResponse < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The account's configuration.
-    #
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeAccountConfigurationResultModel AWS API Documentation
-    #
-    class DescribeAccountConfigurationResultModel < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] channel_id
-    #   @return [String]
-    #
-    # @!attribute [rw] pipeline_id
-    #   @return [String]
-    #
-    # @!attribute [rw] thumbnail_type
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsRequest AWS API Documentation
-    #
-    class DescribeThumbnailsRequest < Struct.new(
-      :channel_id,
-      :pipeline_id,
-      :thumbnail_type)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] thumbnail_details
-    #   @return [Array<Types::ThumbnailDetail>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsResponse AWS API Documentation
-    #
-    class DescribeThumbnailsResponse < Struct.new(
-      :thumbnail_details)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Thumbnail details for all the pipelines of a running channel.
-    #
-    # @!attribute [rw] thumbnail_details
-    #   @return [Array<Types::ThumbnailDetail>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeThumbnailsResultModel AWS API Documentation
-    #
-    class DescribeThumbnailsResultModel < Struct.new(
-      :thumbnail_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5357,6 +5472,47 @@ module Aws::MediaLive
     #   Timecode burn-in settings
     #   @return [Types::TimecodeBurninSettings]
     #
+    # @!attribute [rw] mv_over_picture_boundaries
+    #   If you are setting up the picture as a tile, you must set this to
+    #   "disabled". In all other configurations, you typically enter
+    #   "enabled".
+    #   @return [String]
+    #
+    # @!attribute [rw] mv_temporal_predictor
+    #   If you are setting up the picture as a tile, you must set this to
+    #   "disabled". In other configurations, you typically enter
+    #   "enabled".
+    #   @return [String]
+    #
+    # @!attribute [rw] tile_height
+    #   Set this field to set up the picture as a tile. You must also set
+    #   tileWidth. The tile height must result in 22 or fewer rows in the
+    #   frame. The tile width must result in 20 or fewer columns in the
+    #   frame. And finally, the product of the column count and row count
+    #   must be 64 of less. If the tile width and height are specified,
+    #   MediaLive will override the video codec slices field with a value
+    #   that MediaLive calculates
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tile_padding
+    #   Set to "padded" to force MediaLive to add padding to the frame, to
+    #   obtain a frame that is a whole multiple of the tile size. If you are
+    #   setting up the picture as a tile, you must enter "padded". In all
+    #   other configurations, you typically enter "none".
+    #   @return [String]
+    #
+    # @!attribute [rw] tile_width
+    #   Set this field to set up the picture as a tile. See tileHeight for
+    #   more information.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] treeblock_size
+    #   Select the tree block size used for encoding. If you enter "auto",
+    #   the encoder will pick the best size. If you are setting up the
+    #   picture as a tile, you must set this to 32x32. In all other
+    #   configurations, you typically enter "auto".
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H265Settings AWS API Documentation
     #
     class H265Settings < Struct.new(
@@ -5389,7 +5545,13 @@ module Aws::MediaLive
       :slices,
       :tier,
       :timecode_insertion,
-      :timecode_burnin_settings)
+      :timecode_burnin_settings,
+      :mv_over_picture_boundaries,
+      :mv_temporal_predictor,
+      :tile_height,
+      :tile_padding,
+      :tile_width,
+      :treeblock_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6501,6 +6663,16 @@ module Aws::MediaLive
     #   parameter.
     #   @return [Types::InputDeviceMediaConnectConfigurableSettings]
     #
+    # @!attribute [rw] audio_channel_pairs
+    #   An array of eight audio configurations, one for each audio pair in
+    #   the source. Set up each audio configuration either to exclude the
+    #   pair, or to format it and include it in the output from the device.
+    #   This parameter applies only to UHD devices, and only when the device
+    #   is configured as the source for a MediaConnect flow. For an HD
+    #   device, you configure the audio by setting up audio selectors in the
+    #   channel configuration.
+    #   @return [Array<Types::InputDeviceConfigurableAudioChannelPairConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceConfigurableSettings AWS API Documentation
     #
     class InputDeviceConfigurableSettings < Struct.new(
@@ -6508,7 +6680,8 @@ module Aws::MediaLive
       :max_bitrate,
       :latency_ms,
       :codec,
-      :mediaconnect_settings)
+      :mediaconnect_settings,
+      :audio_channel_pairs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6865,6 +7038,14 @@ module Aws::MediaLive
     #   Returned only if the outputType is MEDIACONNECT\_FLOW.
     #   @return [Types::InputDeviceMediaConnectSettings]
     #
+    # @!attribute [rw] audio_channel_pairs
+    #   An array of eight audio configurations, one for each audio pair in
+    #   the source. Each audio configuration specifies either to exclude the
+    #   pair, or to format it and include it in the output from the UHD
+    #   device. Applies only when the device is configured as the source for
+    #   a MediaConnect flow.
+    #   @return [Array<Types::InputDeviceUhdAudioChannelPairConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceUhdSettings AWS API Documentation
     #
     class InputDeviceUhdSettings < Struct.new(
@@ -6878,7 +7059,8 @@ module Aws::MediaLive
       :width,
       :latency_ms,
       :codec,
-      :mediaconnect_settings)
+      :mediaconnect_settings,
+      :audio_channel_pairs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9776,6 +9958,10 @@ module Aws::MediaLive
     #   Udp Group Settings
     #   @return [Types::UdpGroupSettings]
     #
+    # @!attribute [rw] cmaf_ingest_group_settings
+    #   Cmaf Ingest Group Settings
+    #   @return [Types::CmafIngestGroupSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputGroupSettings AWS API Documentation
     #
     class OutputGroupSettings < Struct.new(
@@ -9786,7 +9972,8 @@ module Aws::MediaLive
       :ms_smooth_group_settings,
       :multiplex_group_settings,
       :rtmp_group_settings,
-      :udp_group_settings)
+      :udp_group_settings,
+      :cmaf_ingest_group_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9857,6 +10044,10 @@ module Aws::MediaLive
     #   Udp Output Settings
     #   @return [Types::UdpOutputSettings]
     #
+    # @!attribute [rw] cmaf_ingest_output_settings
+    #   Cmaf Ingest Output Settings
+    #   @return [Types::CmafIngestOutputSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/OutputSettings AWS API Documentation
     #
     class OutputSettings < Struct.new(
@@ -9867,7 +10058,8 @@ module Aws::MediaLive
       :ms_smooth_output_settings,
       :multiplex_output_settings,
       :rtmp_output_settings,
-      :udp_output_settings)
+      :udp_output_settings,
+      :cmaf_ingest_output_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10559,6 +10751,16 @@ module Aws::MediaLive
     #   Action to deactivate a static image overlay
     #   @return [Types::StaticImageDeactivateScheduleActionSettings]
     #
+    # @!attribute [rw] static_image_output_activate_settings
+    #   Action to activate a static image overlay in one or more specified
+    #   outputs
+    #   @return [Types::StaticImageOutputActivateScheduleActionSettings]
+    #
+    # @!attribute [rw] static_image_output_deactivate_settings
+    #   Action to deactivate a static image overlay in one or more specified
+    #   outputs
+    #   @return [Types::StaticImageOutputDeactivateScheduleActionSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ScheduleActionSettings AWS API Documentation
     #
     class ScheduleActionSettings < Struct.new(
@@ -10574,7 +10776,9 @@ module Aws::MediaLive
       :scte_35_splice_insert_settings,
       :scte_35_time_signal_settings,
       :static_image_activate_settings,
-      :static_image_deactivate_settings)
+      :static_image_deactivate_settings,
+      :static_image_output_activate_settings,
+      :static_image_output_deactivate_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10979,54 +11183,6 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationRequest AWS API Documentation
-    #
-    class UpdateAccountConfigurationRequest < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The desired new account configuration.
-    #
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationRequestModel AWS API Documentation
-    #
-    class UpdateAccountConfigurationRequestModel < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationResponse AWS API Documentation
-    #
-    class UpdateAccountConfigurationResponse < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The account's updated configuration.
-    #
-    # @!attribute [rw] account_configuration
-    #   @return [Types::AccountConfiguration]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationResultModel AWS API Documentation
-    #
-    class UpdateAccountConfigurationResultModel < Struct.new(
-      :account_configuration)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Smpte Tt Destination Settings
     #
     # @api private
@@ -11361,6 +11517,120 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # Settings for the action to activate a static image.
+    #
+    # @!attribute [rw] duration
+    #   The duration in milliseconds for the image to remain on the video.
+    #   If omitted or set to 0 the duration is unlimited and the image will
+    #   remain until it is explicitly deactivated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fade_in
+    #   The time in milliseconds for the image to fade in. The fade-in
+    #   starts at the start time of the overlay. Default is 0 (no fade-in).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fade_out
+    #   Applies only if a duration is specified. The time in milliseconds
+    #   for the image to fade out. The fade-out starts when the duration
+    #   time is hit, so it effectively extends the duration. Default is 0
+    #   (no fade-out).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] height
+    #   The height of the image when inserted into the video, in pixels. The
+    #   overlay will be scaled up or down to the specified height. Leave
+    #   blank to use the native height of the overlay.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] image
+    #   The location and filename of the image file to overlay on the video.
+    #   The file must be a 32-bit BMP, PNG, or TGA file, and must not be
+    #   larger (in pixels) than the input video.
+    #   @return [Types::InputLocation]
+    #
+    # @!attribute [rw] image_x
+    #   Placement of the left edge of the overlay relative to the left edge
+    #   of the video frame, in pixels. 0 (the default) is the left edge of
+    #   the frame. If the placement causes the overlay to extend beyond the
+    #   right edge of the underlying video, then the overlay is cropped on
+    #   the right.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] image_y
+    #   Placement of the top edge of the overlay relative to the top edge of
+    #   the video frame, in pixels. 0 (the default) is the top edge of the
+    #   frame. If the placement causes the overlay to extend beyond the
+    #   bottom edge of the underlying video, then the overlay is cropped on
+    #   the bottom.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] layer
+    #   The number of the layer, 0 to 7. There are 8 layers that can be
+    #   overlaid on the video, each layer with a different image. The layers
+    #   are in Z order, which means that overlays with higher values of
+    #   layer are inserted on top of overlays with lower values of layer.
+    #   Default is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] opacity
+    #   Opacity of image where 0 is transparent and 100 is fully opaque.
+    #   Default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_names
+    #   The name(s) of the output(s) the activation should apply to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] width
+    #   The width of the image when inserted into the video, in pixels. The
+    #   overlay will be scaled up or down to the specified width. Leave
+    #   blank to use the native width of the overlay.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticImageOutputActivateScheduleActionSettings AWS API Documentation
+    #
+    class StaticImageOutputActivateScheduleActionSettings < Struct.new(
+      :duration,
+      :fade_in,
+      :fade_out,
+      :height,
+      :image,
+      :image_x,
+      :image_y,
+      :layer,
+      :opacity,
+      :output_names,
+      :width)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Settings for the action to deactivate the image in a specific layer.
+    #
+    # @!attribute [rw] fade_out
+    #   The time in milliseconds for the image to fade out. Default is 0 (no
+    #   fade-out).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] layer
+    #   The image overlay layer to deactivate, 0 to 7. Default is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] output_names
+    #   The name(s) of the output(s) the deactivation should apply to.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StaticImageOutputDeactivateScheduleActionSettings AWS API Documentation
+    #
+    class StaticImageOutputDeactivateScheduleActionSettings < Struct.new(
+      :fade_out,
+      :layer,
+      :output_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Static Key Settings
     #
     # @!attribute [rw] key_provider_server
@@ -11671,7 +11941,9 @@ module Aws::MediaLive
     # Thumbnail Configuration
     #
     # @!attribute [rw] state
-    #   Whether Thumbnail is enabled.
+    #   Enables the thumbnail feature. The feature generates thumbnails of
+    #   the incoming video in each pipeline in the channel. AUTO turns the
+    #   feature on, DISABLE turns the feature off.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ThumbnailConfiguration AWS API Documentation
@@ -11974,6 +12246,54 @@ module Aws::MediaLive
     class UnprocessableEntityException < Struct.new(
       :element_path,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationRequest AWS API Documentation
+    #
+    class UpdateAccountConfigurationRequest < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The desired new account configuration.
+    #
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationRequestModel AWS API Documentation
+    #
+    class UpdateAccountConfigurationRequestModel < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationResponse AWS API Documentation
+    #
+    class UpdateAccountConfigurationResponse < Struct.new(
+      :account_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The account's updated configuration.
+    #
+    # @!attribute [rw] account_configuration
+    #   @return [Types::AccountConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateAccountConfigurationResultModel AWS API Documentation
+    #
+    class UpdateAccountConfigurationResultModel < Struct.new(
+      :account_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12985,6 +13305,4087 @@ module Aws::MediaLive
     #
     class WebvttDestinationSettings < Struct.new(
       :style_control)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One audio configuration that specifies the format for one audio pair
+    # that the device produces as output.
+    #
+    # @!attribute [rw] id
+    #   The ID for one audio pair configuration, a value from 1 to 8.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] profile
+    #   The profile to set for one audio pair configuration. Choose an
+    #   enumeration value. Each value describes one audio configuration
+    #   using the format (rate control
+    #   algorithm)-(codec)\_(quality)-(bitrate in bytes). For example,
+    #   CBR-AAC\_HQ-192000. Or choose DISABLED, in which case the device
+    #   won't produce audio for this pair.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceConfigurableAudioChannelPairConfig AWS API Documentation
+    #
+    class InputDeviceConfigurableAudioChannelPairConfig < Struct.new(
+      :id,
+      :profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One audio configuration that specifies the format for one audio pair
+    # that the device produces as output.
+    #
+    # @!attribute [rw] id
+    #   The ID for one audio pair configuration, a value from 1 to 8.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] profile
+    #   The profile for one audio pair configuration. This property
+    #   describes one audio configuration in the format (rate control
+    #   algorithm)-(codec)\_(quality)-(bitrate in bytes). For example,
+    #   CBR-AAC\_HQ-192000. Or DISABLED, in which case the device won't
+    #   produce audio for this pair.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputDeviceUhdAudioChannelPairConfig AWS API Documentation
+    #
+    class InputDeviceUhdAudioChannelPairConfig < Struct.new(
+      :id,
+      :profile)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] channel_id
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_ids
+    #   An array of pipelines to restart in this channel. Format PIPELINE\_0
+    #   or PIPELINE\_1.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RestartChannelPipelinesRequest AWS API Documentation
+    #
+    class RestartChannelPipelinesRequest < Struct.new(
+      :channel_id,
+      :pipeline_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] cdi_input_specification
+    #   @return [Types::CdiInputSpecification]
+    #
+    # @!attribute [rw] channel_class
+    #   A standard channel has two encoding pipelines and a single pipeline
+    #   channel only has one.
+    #   @return [String]
+    #
+    # @!attribute [rw] destinations
+    #   @return [Array<Types::OutputDestination>]
+    #
+    # @!attribute [rw] egress_endpoints
+    #   @return [Array<Types::ChannelEgressEndpoint>]
+    #
+    # @!attribute [rw] encoder_settings
+    #   Encoder Settings
+    #   @return [Types::EncoderSettings]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] input_attachments
+    #   @return [Array<Types::InputAttachment>]
+    #
+    # @!attribute [rw] input_specification
+    #   @return [Types::InputSpecification]
+    #
+    # @!attribute [rw] log_level
+    #   The log level the user wants for their channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance
+    #   @return [Types::MaintenanceStatus]
+    #
+    # @!attribute [rw] maintenance_status
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] pipeline_details
+    #   @return [Array<Types::PipelineDetail>]
+    #
+    # @!attribute [rw] pipelines_running_count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] role_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] vpc
+    #   The properties for a private VPC Output
+    #   @return [Types::VpcOutputSettingsDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RestartChannelPipelinesResponse AWS API Documentation
+    #
+    class RestartChannelPipelinesResponse < Struct.new(
+      :arn,
+      :cdi_input_specification,
+      :channel_class,
+      :destinations,
+      :egress_endpoints,
+      :encoder_settings,
+      :id,
+      :input_attachments,
+      :input_specification,
+      :log_level,
+      :maintenance,
+      :maintenance_status,
+      :name,
+      :pipeline_details,
+      :pipelines_running_count,
+      :role_arn,
+      :state,
+      :tags,
+      :vpc)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Cmaf Ingest Group Settings
+    #
+    # @!attribute [rw] destination
+    #   A HTTP destination for the tracks
+    #   @return [Types::OutputLocationRef]
+    #
+    # @!attribute [rw] nielsen_id_3_behavior
+    #   If set to passthrough, Nielsen inaudible tones for media tracking
+    #   will be detected in the input audio and an equivalent ID3 tag will
+    #   be inserted in the output.
+    #   @return [String]
+    #
+    # @!attribute [rw] scte_35_type
+    #   Type of scte35 track to add. none or scte35WithoutSegmentation
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_length
+    #   The nominal duration of segments. The units are specified in
+    #   SegmentLengthUnits. The segments will end on the next keyframe after
+    #   the specified duration, so the actual segment length might be
+    #   longer, and it might be a fraction of the units.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segment_length_units
+    #   Time unit for segment length parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] send_delay_ms
+    #   Number of milliseconds to delay the output from the second pipeline.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CmafIngestGroupSettings AWS API Documentation
+    #
+    class CmafIngestGroupSettings < Struct.new(
+      :destination,
+      :nielsen_id_3_behavior,
+      :scte_35_type,
+      :segment_length,
+      :segment_length_units,
+      :send_delay_ms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Cmaf Ingest Output Settings
+    #
+    # @!attribute [rw] name_modifier
+    #   String concatenated to the end of the destination filename. Required
+    #   for multiple outputs of the same type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CmafIngestOutputSettings AWS API Documentation
+    #
+    class CmafIngestOutputSettings < Struct.new(
+      :name_modifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input fails to satisfy the constraints specified by an AWS
+    # service.
+    #
+    # @!attribute [rw] message
+    #   Exception error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/BadRequestExceptionResponseContent AWS API Documentation
+    #
+    class BadRequestExceptionResponseContent < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   A cloudwatch alarm template group's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A cloudwatch alarm template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_count
+    #   The number of templates in a group.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CloudWatchAlarmTemplateGroupSummary AWS API Documentation
+    #
+    class CloudWatchAlarmTemplateGroupSummary < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :modified_at,
+      :name,
+      :tags,
+      :template_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   A cloudwatch alarm template's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_operator
+    #   The comparison operator used to compare the specified statistic and
+    #   the threshold.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] datapoints_to_alarm
+    #   The number of datapoints within the evaluation period that must be
+    #   breaching to trigger the alarm.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_periods
+    #   The number of periods over which data is compared to the specified
+    #   threshold.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_id
+    #   A cloudwatch alarm template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A cloudwatch alarm template's id. AWS provided templates have ids
+    #   that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric associated with the alarm. Must be compatible
+    #   with targetResourceType.
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The period, in seconds, over which the specified statistic is
+    #   applied.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic to apply to the alarm's metric data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_resource_type
+    #   The resource type this template should dynamically generate
+    #   cloudwatch metric alarms for.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   The threshold value to compare with the specified statistic.
+    #   @return [Float]
+    #
+    # @!attribute [rw] treat_missing_data
+    #   Specifies how missing data points are treated when evaluating the
+    #   alarm's condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CloudWatchAlarmTemplateSummary AWS API Documentation
+    #
+    class CloudWatchAlarmTemplateSummary < Struct.new(
+      :arn,
+      :comparison_operator,
+      :created_at,
+      :datapoints_to_alarm,
+      :description,
+      :evaluation_periods,
+      :group_id,
+      :id,
+      :metric_name,
+      :modified_at,
+      :name,
+      :period,
+      :statistic,
+      :tags,
+      :target_resource_type,
+      :threshold,
+      :treat_missing_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Updating or deleting a resource can cause an inconsistent state.
+    #
+    # @!attribute [rw] message
+    #   Exception error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ConflictExceptionResponseContent AWS API Documentation
+    #
+    class ConflictExceptionResponseContent < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateCloudWatchAlarmTemplateGroupRequest AWS API Documentation
+    #
+    class CreateCloudWatchAlarmTemplateGroupRequest < Struct.new(
+      :description,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateCloudWatchAlarmTemplateGroupRequestContent AWS API Documentation
+    #
+    class CreateCloudWatchAlarmTemplateGroupRequestContent < Struct.new(
+      :description,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateCloudWatchAlarmTemplateGroupResponse AWS API Documentation
+    #
+    class CreateCloudWatchAlarmTemplateGroupResponse < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   A cloudwatch alarm template group's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A cloudwatch alarm template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateCloudWatchAlarmTemplateGroupResponseContent AWS API Documentation
+    #
+    class CreateCloudWatchAlarmTemplateGroupResponseContent < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comparison_operator
+    #   The comparison operator used to compare the specified statistic and
+    #   the threshold.
+    #   @return [String]
+    #
+    # @!attribute [rw] datapoints_to_alarm
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_periods
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic to apply to the alarm's metric data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_resource_type
+    #   The resource type this template should dynamically generate
+    #   cloudwatch metric alarms for.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   @return [Float]
+    #
+    # @!attribute [rw] treat_missing_data
+    #   Specifies how missing data points are treated when evaluating the
+    #   alarm's condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateCloudWatchAlarmTemplateRequest AWS API Documentation
+    #
+    class CreateCloudWatchAlarmTemplateRequest < Struct.new(
+      :comparison_operator,
+      :datapoints_to_alarm,
+      :description,
+      :evaluation_periods,
+      :group_identifier,
+      :metric_name,
+      :name,
+      :period,
+      :statistic,
+      :tags,
+      :target_resource_type,
+      :threshold,
+      :treat_missing_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comparison_operator
+    #   The comparison operator used to compare the specified statistic and
+    #   the threshold.
+    #   @return [String]
+    #
+    # @!attribute [rw] datapoints_to_alarm
+    #   The number of datapoints within the evaluation period that must be
+    #   breaching to trigger the alarm.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_periods
+    #   The number of periods over which data is compared to the specified
+    #   threshold.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_identifier
+    #   A cloudwatch alarm template group's identifier. Can be either be
+    #   its id or current name.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric associated with the alarm. Must be compatible
+    #   with targetResourceType.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The period, in seconds, over which the specified statistic is
+    #   applied.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic to apply to the alarm's metric data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_resource_type
+    #   The resource type this template should dynamically generate
+    #   cloudwatch metric alarms for.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   The threshold value to compare with the specified statistic.
+    #   @return [Float]
+    #
+    # @!attribute [rw] treat_missing_data
+    #   Specifies how missing data points are treated when evaluating the
+    #   alarm's condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateCloudWatchAlarmTemplateRequestContent AWS API Documentation
+    #
+    class CreateCloudWatchAlarmTemplateRequestContent < Struct.new(
+      :comparison_operator,
+      :datapoints_to_alarm,
+      :description,
+      :evaluation_periods,
+      :group_identifier,
+      :metric_name,
+      :name,
+      :period,
+      :statistic,
+      :tags,
+      :target_resource_type,
+      :threshold,
+      :treat_missing_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_operator
+    #   The comparison operator used to compare the specified statistic and
+    #   the threshold.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] datapoints_to_alarm
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_periods
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_id
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic to apply to the alarm's metric data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_resource_type
+    #   The resource type this template should dynamically generate
+    #   cloudwatch metric alarms for.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   @return [Float]
+    #
+    # @!attribute [rw] treat_missing_data
+    #   Specifies how missing data points are treated when evaluating the
+    #   alarm's condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateCloudWatchAlarmTemplateResponse AWS API Documentation
+    #
+    class CreateCloudWatchAlarmTemplateResponse < Struct.new(
+      :arn,
+      :comparison_operator,
+      :created_at,
+      :datapoints_to_alarm,
+      :description,
+      :evaluation_periods,
+      :group_id,
+      :id,
+      :metric_name,
+      :modified_at,
+      :name,
+      :period,
+      :statistic,
+      :tags,
+      :target_resource_type,
+      :threshold,
+      :treat_missing_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   A cloudwatch alarm template's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_operator
+    #   The comparison operator used to compare the specified statistic and
+    #   the threshold.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] datapoints_to_alarm
+    #   The number of datapoints within the evaluation period that must be
+    #   breaching to trigger the alarm.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_periods
+    #   The number of periods over which data is compared to the specified
+    #   threshold.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_id
+    #   A cloudwatch alarm template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A cloudwatch alarm template's id. AWS provided templates have ids
+    #   that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric associated with the alarm. Must be compatible
+    #   with targetResourceType.
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The period, in seconds, over which the specified statistic is
+    #   applied.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic to apply to the alarm's metric data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_resource_type
+    #   The resource type this template should dynamically generate
+    #   cloudwatch metric alarms for.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   The threshold value to compare with the specified statistic.
+    #   @return [Float]
+    #
+    # @!attribute [rw] treat_missing_data
+    #   Specifies how missing data points are treated when evaluating the
+    #   alarm's condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateCloudWatchAlarmTemplateResponseContent AWS API Documentation
+    #
+    class CreateCloudWatchAlarmTemplateResponseContent < Struct.new(
+      :arn,
+      :comparison_operator,
+      :created_at,
+      :datapoints_to_alarm,
+      :description,
+      :evaluation_periods,
+      :group_id,
+      :id,
+      :metric_name,
+      :modified_at,
+      :name,
+      :period,
+      :statistic,
+      :tags,
+      :target_resource_type,
+      :threshold,
+      :treat_missing_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateEventBridgeRuleTemplateGroupRequest AWS API Documentation
+    #
+    class CreateEventBridgeRuleTemplateGroupRequest < Struct.new(
+      :description,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateEventBridgeRuleTemplateGroupRequestContent AWS API Documentation
+    #
+    class CreateEventBridgeRuleTemplateGroupRequestContent < Struct.new(
+      :description,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateEventBridgeRuleTemplateGroupResponse AWS API Documentation
+    #
+    class CreateEventBridgeRuleTemplateGroupResponse < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   An eventbridge rule template group's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   An eventbridge rule template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateEventBridgeRuleTemplateGroupResponseContent AWS API Documentation
+    #
+    class CreateEventBridgeRuleTemplateGroupResponseContent < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] event_targets
+    #   @return [Array<Types::EventBridgeRuleTemplateTarget>]
+    #
+    # @!attribute [rw] event_type
+    #   The type of event to match with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateEventBridgeRuleTemplateRequest AWS API Documentation
+    #
+    class CreateEventBridgeRuleTemplateRequest < Struct.new(
+      :description,
+      :event_targets,
+      :event_type,
+      :group_identifier,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_targets
+    #   @return [Array<Types::EventBridgeRuleTemplateTarget>]
+    #
+    # @!attribute [rw] event_type
+    #   The type of event to match with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_identifier
+    #   An eventbridge rule template group's identifier. Can be either be
+    #   its id or current name.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateEventBridgeRuleTemplateRequestContent AWS API Documentation
+    #
+    class CreateEventBridgeRuleTemplateRequestContent < Struct.new(
+      :description,
+      :event_targets,
+      :event_type,
+      :group_identifier,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] event_targets
+    #   @return [Array<Types::EventBridgeRuleTemplateTarget>]
+    #
+    # @!attribute [rw] event_type
+    #   The type of event to match with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateEventBridgeRuleTemplateResponse AWS API Documentation
+    #
+    class CreateEventBridgeRuleTemplateResponse < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :event_targets,
+      :event_type,
+      :group_id,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   An eventbridge rule template's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_targets
+    #   @return [Array<Types::EventBridgeRuleTemplateTarget>]
+    #
+    # @!attribute [rw] event_type
+    #   The type of event to match with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   An eventbridge rule template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   An eventbridge rule template's id. AWS provided templates have ids
+    #   that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateEventBridgeRuleTemplateResponseContent AWS API Documentation
+    #
+    class CreateEventBridgeRuleTemplateResponseContent < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :event_targets,
+      :event_type,
+      :group_id,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_watch_alarm_template_group_identifiers
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_entry_point_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_rule_template_group_identifiers
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateSignalMapRequest AWS API Documentation
+    #
+    class CreateSignalMapRequest < Struct.new(
+      :cloud_watch_alarm_template_group_identifiers,
+      :description,
+      :discovery_entry_point_arn,
+      :event_bridge_rule_template_group_identifiers,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_watch_alarm_template_group_identifiers
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_entry_point_arn
+    #   A top-level supported AWS resource ARN to discovery a signal map
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_rule_template_group_identifiers
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateSignalMapRequestContent AWS API Documentation
+    #
+    class CreateSignalMapRequestContent < Struct.new(
+      :cloud_watch_alarm_template_group_identifiers,
+      :description,
+      :discovery_entry_point_arn,
+      :event_bridge_rule_template_group_identifiers,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_alarm_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_entry_point_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_rule_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed_media_resource_map
+    #   A map representing an incomplete AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] last_discovered_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_successful_monitor_deployment
+    #   Represents the latest successful monitor deployment of a signal map.
+    #   @return [Types::SuccessfulMonitorDeployment]
+    #
+    # @!attribute [rw] media_resource_map
+    #   A map representing an AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] monitor_changes_pending_deployment
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] monitor_deployment
+    #   Represents the latest monitor deployment of a signal map.
+    #   @return [Types::MonitorDeployment]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A signal map's current status which is dependent on its lifecycle
+    #   actions or associated jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateSignalMapResponse AWS API Documentation
+    #
+    class CreateSignalMapResponse < Struct.new(
+      :arn,
+      :cloud_watch_alarm_template_group_ids,
+      :created_at,
+      :description,
+      :discovery_entry_point_arn,
+      :error_message,
+      :event_bridge_rule_template_group_ids,
+      :failed_media_resource_map,
+      :id,
+      :last_discovered_at,
+      :last_successful_monitor_deployment,
+      :media_resource_map,
+      :modified_at,
+      :monitor_changes_pending_deployment,
+      :monitor_deployment,
+      :name,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   A signal map's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_alarm_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_entry_point_arn
+    #   A top-level supported AWS resource ARN to discovery a signal map
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Error message associated with a failed creation or failed update
+    #   attempt of a signal map.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_rule_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed_media_resource_map
+    #   A map representing an incomplete AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] id
+    #   A signal map's id.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_discovered_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_successful_monitor_deployment
+    #   Represents the latest successful monitor deployment of a signal map.
+    #   @return [Types::SuccessfulMonitorDeployment]
+    #
+    # @!attribute [rw] media_resource_map
+    #   A map representing an AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] monitor_changes_pending_deployment
+    #   If true, there are pending monitor changes for this signal map that
+    #   can be deployed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] monitor_deployment
+    #   Represents the latest monitor deployment of a signal map.
+    #   @return [Types::MonitorDeployment]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A signal map's current status which is dependent on its lifecycle
+    #   actions or associated jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CreateSignalMapResponseContent AWS API Documentation
+    #
+    class CreateSignalMapResponseContent < Struct.new(
+      :arn,
+      :cloud_watch_alarm_template_group_ids,
+      :created_at,
+      :description,
+      :discovery_entry_point_arn,
+      :error_message,
+      :event_bridge_rule_template_group_ids,
+      :failed_media_resource_map,
+      :id,
+      :last_discovered_at,
+      :last_successful_monitor_deployment,
+      :media_resource_map,
+      :modified_at,
+      :monitor_changes_pending_deployment,
+      :monitor_deployment,
+      :name,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteCloudWatchAlarmTemplateGroupRequest AWS API Documentation
+    #
+    class DeleteCloudWatchAlarmTemplateGroupRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteCloudWatchAlarmTemplateRequest AWS API Documentation
+    #
+    class DeleteCloudWatchAlarmTemplateRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteEventBridgeRuleTemplateGroupRequest AWS API Documentation
+    #
+    class DeleteEventBridgeRuleTemplateGroupRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteEventBridgeRuleTemplateRequest AWS API Documentation
+    #
+    class DeleteEventBridgeRuleTemplateRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteSignalMapRequest AWS API Documentation
+    #
+    class DeleteSignalMapRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   An eventbridge rule template group's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   An eventbridge rule template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] template_count
+    #   The number of templates in a group.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EventBridgeRuleTemplateGroupSummary AWS API Documentation
+    #
+    class EventBridgeRuleTemplateGroupSummary < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :modified_at,
+      :name,
+      :tags,
+      :template_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   An eventbridge rule template's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_target_count
+    #   The number of targets configured to send matching events.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] event_type
+    #   The type of event to match with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   An eventbridge rule template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   An eventbridge rule template's id. AWS provided templates have ids
+    #   that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EventBridgeRuleTemplateSummary AWS API Documentation
+    #
+    class EventBridgeRuleTemplateSummary < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :event_target_count,
+      :event_type,
+      :group_id,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The target to which to send matching events.
+    #
+    # @!attribute [rw] arn
+    #   Target ARNs must be either an SNS topic or CloudWatch log group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EventBridgeRuleTemplateTarget AWS API Documentation
+    #
+    class EventBridgeRuleTemplateTarget < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # User does not have sufficient access to perform this action.
+    #
+    # @!attribute [rw] message
+    #   Exception error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ForbiddenExceptionResponseContent AWS API Documentation
+    #
+    class ForbiddenExceptionResponseContent < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetCloudWatchAlarmTemplateGroupRequest AWS API Documentation
+    #
+    class GetCloudWatchAlarmTemplateGroupRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetCloudWatchAlarmTemplateGroupResponse AWS API Documentation
+    #
+    class GetCloudWatchAlarmTemplateGroupResponse < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   A cloudwatch alarm template group's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A cloudwatch alarm template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetCloudWatchAlarmTemplateGroupResponseContent AWS API Documentation
+    #
+    class GetCloudWatchAlarmTemplateGroupResponseContent < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetCloudWatchAlarmTemplateRequest AWS API Documentation
+    #
+    class GetCloudWatchAlarmTemplateRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_operator
+    #   The comparison operator used to compare the specified statistic and
+    #   the threshold.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] datapoints_to_alarm
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_periods
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_id
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic to apply to the alarm's metric data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_resource_type
+    #   The resource type this template should dynamically generate
+    #   cloudwatch metric alarms for.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   @return [Float]
+    #
+    # @!attribute [rw] treat_missing_data
+    #   Specifies how missing data points are treated when evaluating the
+    #   alarm's condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetCloudWatchAlarmTemplateResponse AWS API Documentation
+    #
+    class GetCloudWatchAlarmTemplateResponse < Struct.new(
+      :arn,
+      :comparison_operator,
+      :created_at,
+      :datapoints_to_alarm,
+      :description,
+      :evaluation_periods,
+      :group_id,
+      :id,
+      :metric_name,
+      :modified_at,
+      :name,
+      :period,
+      :statistic,
+      :tags,
+      :target_resource_type,
+      :threshold,
+      :treat_missing_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   A cloudwatch alarm template's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_operator
+    #   The comparison operator used to compare the specified statistic and
+    #   the threshold.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] datapoints_to_alarm
+    #   The number of datapoints within the evaluation period that must be
+    #   breaching to trigger the alarm.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_periods
+    #   The number of periods over which data is compared to the specified
+    #   threshold.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_id
+    #   A cloudwatch alarm template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A cloudwatch alarm template's id. AWS provided templates have ids
+    #   that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric associated with the alarm. Must be compatible
+    #   with targetResourceType.
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The period, in seconds, over which the specified statistic is
+    #   applied.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic to apply to the alarm's metric data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_resource_type
+    #   The resource type this template should dynamically generate
+    #   cloudwatch metric alarms for.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   The threshold value to compare with the specified statistic.
+    #   @return [Float]
+    #
+    # @!attribute [rw] treat_missing_data
+    #   Specifies how missing data points are treated when evaluating the
+    #   alarm's condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetCloudWatchAlarmTemplateResponseContent AWS API Documentation
+    #
+    class GetCloudWatchAlarmTemplateResponseContent < Struct.new(
+      :arn,
+      :comparison_operator,
+      :created_at,
+      :datapoints_to_alarm,
+      :description,
+      :evaluation_periods,
+      :group_id,
+      :id,
+      :metric_name,
+      :modified_at,
+      :name,
+      :period,
+      :statistic,
+      :tags,
+      :target_resource_type,
+      :threshold,
+      :treat_missing_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetEventBridgeRuleTemplateGroupRequest AWS API Documentation
+    #
+    class GetEventBridgeRuleTemplateGroupRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetEventBridgeRuleTemplateGroupResponse AWS API Documentation
+    #
+    class GetEventBridgeRuleTemplateGroupResponse < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   An eventbridge rule template group's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   An eventbridge rule template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetEventBridgeRuleTemplateGroupResponseContent AWS API Documentation
+    #
+    class GetEventBridgeRuleTemplateGroupResponseContent < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetEventBridgeRuleTemplateRequest AWS API Documentation
+    #
+    class GetEventBridgeRuleTemplateRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] event_targets
+    #   @return [Array<Types::EventBridgeRuleTemplateTarget>]
+    #
+    # @!attribute [rw] event_type
+    #   The type of event to match with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetEventBridgeRuleTemplateResponse AWS API Documentation
+    #
+    class GetEventBridgeRuleTemplateResponse < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :event_targets,
+      :event_type,
+      :group_id,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   An eventbridge rule template's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_targets
+    #   @return [Array<Types::EventBridgeRuleTemplateTarget>]
+    #
+    # @!attribute [rw] event_type
+    #   The type of event to match with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   An eventbridge rule template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   An eventbridge rule template's id. AWS provided templates have ids
+    #   that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetEventBridgeRuleTemplateResponseContent AWS API Documentation
+    #
+    class GetEventBridgeRuleTemplateResponseContent < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :event_targets,
+      :event_type,
+      :group_id,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetSignalMapRequest AWS API Documentation
+    #
+    class GetSignalMapRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_alarm_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_entry_point_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_rule_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed_media_resource_map
+    #   A map representing an incomplete AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] last_discovered_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_successful_monitor_deployment
+    #   Represents the latest successful monitor deployment of a signal map.
+    #   @return [Types::SuccessfulMonitorDeployment]
+    #
+    # @!attribute [rw] media_resource_map
+    #   A map representing an AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] monitor_changes_pending_deployment
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] monitor_deployment
+    #   Represents the latest monitor deployment of a signal map.
+    #   @return [Types::MonitorDeployment]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A signal map's current status which is dependent on its lifecycle
+    #   actions or associated jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetSignalMapResponse AWS API Documentation
+    #
+    class GetSignalMapResponse < Struct.new(
+      :arn,
+      :cloud_watch_alarm_template_group_ids,
+      :created_at,
+      :description,
+      :discovery_entry_point_arn,
+      :error_message,
+      :event_bridge_rule_template_group_ids,
+      :failed_media_resource_map,
+      :id,
+      :last_discovered_at,
+      :last_successful_monitor_deployment,
+      :media_resource_map,
+      :modified_at,
+      :monitor_changes_pending_deployment,
+      :monitor_deployment,
+      :name,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   A signal map's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_alarm_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_entry_point_arn
+    #   A top-level supported AWS resource ARN to discovery a signal map
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Error message associated with a failed creation or failed update
+    #   attempt of a signal map.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_rule_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed_media_resource_map
+    #   A map representing an incomplete AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] id
+    #   A signal map's id.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_discovered_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_successful_monitor_deployment
+    #   Represents the latest successful monitor deployment of a signal map.
+    #   @return [Types::SuccessfulMonitorDeployment]
+    #
+    # @!attribute [rw] media_resource_map
+    #   A map representing an AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] monitor_changes_pending_deployment
+    #   If true, there are pending monitor changes for this signal map that
+    #   can be deployed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] monitor_deployment
+    #   Represents the latest monitor deployment of a signal map.
+    #   @return [Types::MonitorDeployment]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A signal map's current status which is dependent on its lifecycle
+    #   actions or associated jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/GetSignalMapResponseContent AWS API Documentation
+    #
+    class GetSignalMapResponseContent < Struct.new(
+      :arn,
+      :cloud_watch_alarm_template_group_ids,
+      :created_at,
+      :description,
+      :discovery_entry_point_arn,
+      :error_message,
+      :event_bridge_rule_template_group_ids,
+      :failed_media_resource_map,
+      :id,
+      :last_discovered_at,
+      :last_successful_monitor_deployment,
+      :media_resource_map,
+      :modified_at,
+      :monitor_changes_pending_deployment,
+      :monitor_deployment,
+      :name,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Unexpected error during processing of request.
+    #
+    # @!attribute [rw] message
+    #   Exception error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InternalServerErrorExceptionResponseContent AWS API Documentation
+    #
+    class InternalServerErrorExceptionResponseContent < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   @return [String]
+    #
+    # @!attribute [rw] signal_map_identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListCloudWatchAlarmTemplateGroupsRequest AWS API Documentation
+    #
+    class ListCloudWatchAlarmTemplateGroupsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :scope,
+      :signal_map_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_watch_alarm_template_groups
+    #   @return [Array<Types::CloudWatchAlarmTemplateGroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListCloudWatchAlarmTemplateGroupsResponse AWS API Documentation
+    #
+    class ListCloudWatchAlarmTemplateGroupsResponse < Struct.new(
+      :cloud_watch_alarm_template_groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_watch_alarm_template_groups
+    #   @return [Array<Types::CloudWatchAlarmTemplateGroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token used to retrieve the next set of results in paginated list
+    #   responses.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListCloudWatchAlarmTemplateGroupsResponseContent AWS API Documentation
+    #
+    class ListCloudWatchAlarmTemplateGroupsResponseContent < Struct.new(
+      :cloud_watch_alarm_template_groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   @return [String]
+    #
+    # @!attribute [rw] signal_map_identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListCloudWatchAlarmTemplatesRequest AWS API Documentation
+    #
+    class ListCloudWatchAlarmTemplatesRequest < Struct.new(
+      :group_identifier,
+      :max_results,
+      :next_token,
+      :scope,
+      :signal_map_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_watch_alarm_templates
+    #   @return [Array<Types::CloudWatchAlarmTemplateSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListCloudWatchAlarmTemplatesResponse AWS API Documentation
+    #
+    class ListCloudWatchAlarmTemplatesResponse < Struct.new(
+      :cloud_watch_alarm_templates,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_watch_alarm_templates
+    #   @return [Array<Types::CloudWatchAlarmTemplateSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token used to retrieve the next set of results in paginated list
+    #   responses.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListCloudWatchAlarmTemplatesResponseContent AWS API Documentation
+    #
+    class ListCloudWatchAlarmTemplatesResponseContent < Struct.new(
+      :cloud_watch_alarm_templates,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] signal_map_identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListEventBridgeRuleTemplateGroupsRequest AWS API Documentation
+    #
+    class ListEventBridgeRuleTemplateGroupsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :signal_map_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_bridge_rule_template_groups
+    #   @return [Array<Types::EventBridgeRuleTemplateGroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListEventBridgeRuleTemplateGroupsResponse AWS API Documentation
+    #
+    class ListEventBridgeRuleTemplateGroupsResponse < Struct.new(
+      :event_bridge_rule_template_groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_bridge_rule_template_groups
+    #   @return [Array<Types::EventBridgeRuleTemplateGroupSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token used to retrieve the next set of results in paginated list
+    #   responses.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListEventBridgeRuleTemplateGroupsResponseContent AWS API Documentation
+    #
+    class ListEventBridgeRuleTemplateGroupsResponseContent < Struct.new(
+      :event_bridge_rule_template_groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] signal_map_identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListEventBridgeRuleTemplatesRequest AWS API Documentation
+    #
+    class ListEventBridgeRuleTemplatesRequest < Struct.new(
+      :group_identifier,
+      :max_results,
+      :next_token,
+      :signal_map_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_bridge_rule_templates
+    #   @return [Array<Types::EventBridgeRuleTemplateSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListEventBridgeRuleTemplatesResponse AWS API Documentation
+    #
+    class ListEventBridgeRuleTemplatesResponse < Struct.new(
+      :event_bridge_rule_templates,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_bridge_rule_templates
+    #   @return [Array<Types::EventBridgeRuleTemplateSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token used to retrieve the next set of results in paginated list
+    #   responses.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListEventBridgeRuleTemplatesResponseContent AWS API Documentation
+    #
+    class ListEventBridgeRuleTemplatesResponseContent < Struct.new(
+      :event_bridge_rule_templates,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_watch_alarm_template_group_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_rule_template_group_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListSignalMapsRequest AWS API Documentation
+    #
+    class ListSignalMapsRequest < Struct.new(
+      :cloud_watch_alarm_template_group_identifier,
+      :event_bridge_rule_template_group_identifier,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] signal_maps
+    #   @return [Array<Types::SignalMapSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListSignalMapsResponse AWS API Documentation
+    #
+    class ListSignalMapsResponse < Struct.new(
+      :next_token,
+      :signal_maps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token used to retrieve the next set of results in paginated list
+    #   responses.
+    #   @return [String]
+    #
+    # @!attribute [rw] signal_maps
+    #   @return [Array<Types::SignalMapSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListSignalMapsResponseContent AWS API Documentation
+    #
+    class ListSignalMapsResponseContent < Struct.new(
+      :next_token,
+      :signal_maps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An AWS resource used in media workflows.
+    #
+    # @!attribute [rw] destinations
+    #   @return [Array<Types::MediaResourceNeighbor>]
+    #
+    # @!attribute [rw] name
+    #   The logical name of an AWS media resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   @return [Array<Types::MediaResourceNeighbor>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaResource AWS API Documentation
+    #
+    class MediaResource < Struct.new(
+      :destinations,
+      :name,
+      :sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A direct source or destination neighbor to an AWS media resource.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of a resource used in AWS media workflows.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The logical name of an AWS media resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaResourceNeighbor AWS API Documentation
+    #
+    class MediaResourceNeighbor < Struct.new(
+      :arn,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the latest monitor deployment of a signal map.
+    #
+    # @!attribute [rw] details_uri
+    #   URI associated with a signal map's monitor deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Error message associated with a failed monitor deployment of a
+    #   signal map.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A signal map's monitor deployment status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MonitorDeployment AWS API Documentation
+    #
+    class MonitorDeployment < Struct.new(
+      :details_uri,
+      :error_message,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request references a resource which does not exist.
+    #
+    # @!attribute [rw] message
+    #   Exception error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NotFoundExceptionResponseContent AWS API Documentation
+    #
+    class NotFoundExceptionResponseContent < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   A signal map's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A signal map's id.
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] monitor_deployment_status
+    #   A signal map's monitor deployment status.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A signal map's current status which is dependent on its lifecycle
+    #   actions or associated jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SignalMapSummary AWS API Documentation
+    #
+    class SignalMapSummary < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :modified_at,
+      :monitor_deployment_status,
+      :name,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartDeleteMonitorDeploymentRequest AWS API Documentation
+    #
+    class StartDeleteMonitorDeploymentRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_alarm_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_entry_point_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_rule_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed_media_resource_map
+    #   A map representing an incomplete AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] last_discovered_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_successful_monitor_deployment
+    #   Represents the latest successful monitor deployment of a signal map.
+    #   @return [Types::SuccessfulMonitorDeployment]
+    #
+    # @!attribute [rw] media_resource_map
+    #   A map representing an AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] monitor_changes_pending_deployment
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] monitor_deployment
+    #   Represents the latest monitor deployment of a signal map.
+    #   @return [Types::MonitorDeployment]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A signal map's current status which is dependent on its lifecycle
+    #   actions or associated jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartDeleteMonitorDeploymentResponse AWS API Documentation
+    #
+    class StartDeleteMonitorDeploymentResponse < Struct.new(
+      :arn,
+      :cloud_watch_alarm_template_group_ids,
+      :created_at,
+      :description,
+      :discovery_entry_point_arn,
+      :error_message,
+      :event_bridge_rule_template_group_ids,
+      :failed_media_resource_map,
+      :id,
+      :last_discovered_at,
+      :last_successful_monitor_deployment,
+      :media_resource_map,
+      :modified_at,
+      :monitor_changes_pending_deployment,
+      :monitor_deployment,
+      :name,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   A signal map's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_alarm_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_entry_point_arn
+    #   A top-level supported AWS resource ARN to discovery a signal map
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Error message associated with a failed creation or failed update
+    #   attempt of a signal map.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_rule_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed_media_resource_map
+    #   A map representing an incomplete AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] id
+    #   A signal map's id.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_discovered_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_successful_monitor_deployment
+    #   Represents the latest successful monitor deployment of a signal map.
+    #   @return [Types::SuccessfulMonitorDeployment]
+    #
+    # @!attribute [rw] media_resource_map
+    #   A map representing an AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] monitor_changes_pending_deployment
+    #   If true, there are pending monitor changes for this signal map that
+    #   can be deployed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] monitor_deployment
+    #   Represents the latest monitor deployment of a signal map.
+    #   @return [Types::MonitorDeployment]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A signal map's current status which is dependent on its lifecycle
+    #   actions or associated jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartDeleteMonitorDeploymentResponseContent AWS API Documentation
+    #
+    class StartDeleteMonitorDeploymentResponseContent < Struct.new(
+      :arn,
+      :cloud_watch_alarm_template_group_ids,
+      :created_at,
+      :description,
+      :discovery_entry_point_arn,
+      :error_message,
+      :event_bridge_rule_template_group_ids,
+      :failed_media_resource_map,
+      :id,
+      :last_discovered_at,
+      :last_successful_monitor_deployment,
+      :media_resource_map,
+      :modified_at,
+      :monitor_changes_pending_deployment,
+      :monitor_deployment,
+      :name,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartMonitorDeploymentRequest AWS API Documentation
+    #
+    class StartMonitorDeploymentRequest < Struct.new(
+      :dry_run,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartMonitorDeploymentRequestContent AWS API Documentation
+    #
+    class StartMonitorDeploymentRequestContent < Struct.new(
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_alarm_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_entry_point_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_rule_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed_media_resource_map
+    #   A map representing an incomplete AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] last_discovered_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_successful_monitor_deployment
+    #   Represents the latest successful monitor deployment of a signal map.
+    #   @return [Types::SuccessfulMonitorDeployment]
+    #
+    # @!attribute [rw] media_resource_map
+    #   A map representing an AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] monitor_changes_pending_deployment
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] monitor_deployment
+    #   Represents the latest monitor deployment of a signal map.
+    #   @return [Types::MonitorDeployment]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A signal map's current status which is dependent on its lifecycle
+    #   actions or associated jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartMonitorDeploymentResponse AWS API Documentation
+    #
+    class StartMonitorDeploymentResponse < Struct.new(
+      :arn,
+      :cloud_watch_alarm_template_group_ids,
+      :created_at,
+      :description,
+      :discovery_entry_point_arn,
+      :error_message,
+      :event_bridge_rule_template_group_ids,
+      :failed_media_resource_map,
+      :id,
+      :last_discovered_at,
+      :last_successful_monitor_deployment,
+      :media_resource_map,
+      :modified_at,
+      :monitor_changes_pending_deployment,
+      :monitor_deployment,
+      :name,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   A signal map's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_alarm_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_entry_point_arn
+    #   A top-level supported AWS resource ARN to discovery a signal map
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Error message associated with a failed creation or failed update
+    #   attempt of a signal map.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_rule_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed_media_resource_map
+    #   A map representing an incomplete AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] id
+    #   A signal map's id.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_discovered_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_successful_monitor_deployment
+    #   Represents the latest successful monitor deployment of a signal map.
+    #   @return [Types::SuccessfulMonitorDeployment]
+    #
+    # @!attribute [rw] media_resource_map
+    #   A map representing an AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] monitor_changes_pending_deployment
+    #   If true, there are pending monitor changes for this signal map that
+    #   can be deployed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] monitor_deployment
+    #   Represents the latest monitor deployment of a signal map.
+    #   @return [Types::MonitorDeployment]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A signal map's current status which is dependent on its lifecycle
+    #   actions or associated jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartMonitorDeploymentResponseContent AWS API Documentation
+    #
+    class StartMonitorDeploymentResponseContent < Struct.new(
+      :arn,
+      :cloud_watch_alarm_template_group_ids,
+      :created_at,
+      :description,
+      :discovery_entry_point_arn,
+      :error_message,
+      :event_bridge_rule_template_group_ids,
+      :failed_media_resource_map,
+      :id,
+      :last_discovered_at,
+      :last_successful_monitor_deployment,
+      :media_resource_map,
+      :modified_at,
+      :monitor_changes_pending_deployment,
+      :monitor_deployment,
+      :name,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_watch_alarm_template_group_identifiers
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_entry_point_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_rule_template_group_identifiers
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] force_rediscovery
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartUpdateSignalMapRequest AWS API Documentation
+    #
+    class StartUpdateSignalMapRequest < Struct.new(
+      :cloud_watch_alarm_template_group_identifiers,
+      :description,
+      :discovery_entry_point_arn,
+      :event_bridge_rule_template_group_identifiers,
+      :force_rediscovery,
+      :identifier,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_watch_alarm_template_group_identifiers
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_entry_point_arn
+    #   A top-level supported AWS resource ARN to discovery a signal map
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_rule_template_group_identifiers
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] force_rediscovery
+    #   If true, will force a rediscovery of a signal map if an unchanged
+    #   discoveryEntryPointArn is provided.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartUpdateSignalMapRequestContent AWS API Documentation
+    #
+    class StartUpdateSignalMapRequestContent < Struct.new(
+      :cloud_watch_alarm_template_group_identifiers,
+      :description,
+      :discovery_entry_point_arn,
+      :event_bridge_rule_template_group_identifiers,
+      :force_rediscovery,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_alarm_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_entry_point_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_rule_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed_media_resource_map
+    #   A map representing an incomplete AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] last_discovered_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_successful_monitor_deployment
+    #   Represents the latest successful monitor deployment of a signal map.
+    #   @return [Types::SuccessfulMonitorDeployment]
+    #
+    # @!attribute [rw] media_resource_map
+    #   A map representing an AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] monitor_changes_pending_deployment
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] monitor_deployment
+    #   Represents the latest monitor deployment of a signal map.
+    #   @return [Types::MonitorDeployment]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A signal map's current status which is dependent on its lifecycle
+    #   actions or associated jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartUpdateSignalMapResponse AWS API Documentation
+    #
+    class StartUpdateSignalMapResponse < Struct.new(
+      :arn,
+      :cloud_watch_alarm_template_group_ids,
+      :created_at,
+      :description,
+      :discovery_entry_point_arn,
+      :error_message,
+      :event_bridge_rule_template_group_ids,
+      :failed_media_resource_map,
+      :id,
+      :last_discovered_at,
+      :last_successful_monitor_deployment,
+      :media_resource_map,
+      :modified_at,
+      :monitor_changes_pending_deployment,
+      :monitor_deployment,
+      :name,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   A signal map's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_alarm_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] discovery_entry_point_arn
+    #   A top-level supported AWS resource ARN to discovery a signal map
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   Error message associated with a failed creation or failed update
+    #   attempt of a signal map.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_bridge_rule_template_group_ids
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed_media_resource_map
+    #   A map representing an incomplete AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] id
+    #   A signal map's id.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_discovered_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_successful_monitor_deployment
+    #   Represents the latest successful monitor deployment of a signal map.
+    #   @return [Types::SuccessfulMonitorDeployment]
+    #
+    # @!attribute [rw] media_resource_map
+    #   A map representing an AWS media workflow as a graph.
+    #   @return [Hash<String,Types::MediaResource>]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] monitor_changes_pending_deployment
+    #   If true, there are pending monitor changes for this signal map that
+    #   can be deployed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] monitor_deployment
+    #   Represents the latest monitor deployment of a signal map.
+    #   @return [Types::MonitorDeployment]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A signal map's current status which is dependent on its lifecycle
+    #   actions or associated jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/StartUpdateSignalMapResponseContent AWS API Documentation
+    #
+    class StartUpdateSignalMapResponseContent < Struct.new(
+      :arn,
+      :cloud_watch_alarm_template_group_ids,
+      :created_at,
+      :description,
+      :discovery_entry_point_arn,
+      :error_message,
+      :event_bridge_rule_template_group_ids,
+      :failed_media_resource_map,
+      :id,
+      :last_discovered_at,
+      :last_successful_monitor_deployment,
+      :media_resource_map,
+      :modified_at,
+      :monitor_changes_pending_deployment,
+      :monitor_deployment,
+      :name,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the latest successful monitor deployment of a signal map.
+    #
+    # @!attribute [rw] details_uri
+    #   URI associated with a signal map's monitor deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   A signal map's monitor deployment status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/SuccessfulMonitorDeployment AWS API Documentation
+    #
+    class SuccessfulMonitorDeployment < Struct.new(
+      :details_uri,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request was denied due to request throttling.
+    #
+    # @!attribute [rw] message
+    #   Exception error message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TooManyRequestsExceptionResponseContent AWS API Documentation
+    #
+    class TooManyRequestsExceptionResponseContent < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateCloudWatchAlarmTemplateGroupRequest AWS API Documentation
+    #
+    class UpdateCloudWatchAlarmTemplateGroupRequest < Struct.new(
+      :description,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateCloudWatchAlarmTemplateGroupRequestContent AWS API Documentation
+    #
+    class UpdateCloudWatchAlarmTemplateGroupRequestContent < Struct.new(
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateCloudWatchAlarmTemplateGroupResponse AWS API Documentation
+    #
+    class UpdateCloudWatchAlarmTemplateGroupResponse < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   A cloudwatch alarm template group's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A cloudwatch alarm template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateCloudWatchAlarmTemplateGroupResponseContent AWS API Documentation
+    #
+    class UpdateCloudWatchAlarmTemplateGroupResponseContent < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comparison_operator
+    #   The comparison operator used to compare the specified statistic and
+    #   the threshold.
+    #   @return [String]
+    #
+    # @!attribute [rw] datapoints_to_alarm
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_periods
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic to apply to the alarm's metric data.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_resource_type
+    #   The resource type this template should dynamically generate
+    #   cloudwatch metric alarms for.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   @return [Float]
+    #
+    # @!attribute [rw] treat_missing_data
+    #   Specifies how missing data points are treated when evaluating the
+    #   alarm's condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateCloudWatchAlarmTemplateRequest AWS API Documentation
+    #
+    class UpdateCloudWatchAlarmTemplateRequest < Struct.new(
+      :comparison_operator,
+      :datapoints_to_alarm,
+      :description,
+      :evaluation_periods,
+      :group_identifier,
+      :identifier,
+      :metric_name,
+      :name,
+      :period,
+      :statistic,
+      :target_resource_type,
+      :threshold,
+      :treat_missing_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] comparison_operator
+    #   The comparison operator used to compare the specified statistic and
+    #   the threshold.
+    #   @return [String]
+    #
+    # @!attribute [rw] datapoints_to_alarm
+    #   The number of datapoints within the evaluation period that must be
+    #   breaching to trigger the alarm.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_periods
+    #   The number of periods over which data is compared to the specified
+    #   threshold.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_identifier
+    #   A cloudwatch alarm template group's identifier. Can be either be
+    #   its id or current name.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric associated with the alarm. Must be compatible
+    #   with targetResourceType.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The period, in seconds, over which the specified statistic is
+    #   applied.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic to apply to the alarm's metric data.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_resource_type
+    #   The resource type this template should dynamically generate
+    #   cloudwatch metric alarms for.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   The threshold value to compare with the specified statistic.
+    #   @return [Float]
+    #
+    # @!attribute [rw] treat_missing_data
+    #   Specifies how missing data points are treated when evaluating the
+    #   alarm's condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateCloudWatchAlarmTemplateRequestContent AWS API Documentation
+    #
+    class UpdateCloudWatchAlarmTemplateRequestContent < Struct.new(
+      :comparison_operator,
+      :datapoints_to_alarm,
+      :description,
+      :evaluation_periods,
+      :group_identifier,
+      :metric_name,
+      :name,
+      :period,
+      :statistic,
+      :target_resource_type,
+      :threshold,
+      :treat_missing_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_operator
+    #   The comparison operator used to compare the specified statistic and
+    #   the threshold.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] datapoints_to_alarm
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_periods
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_id
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic to apply to the alarm's metric data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_resource_type
+    #   The resource type this template should dynamically generate
+    #   cloudwatch metric alarms for.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   @return [Float]
+    #
+    # @!attribute [rw] treat_missing_data
+    #   Specifies how missing data points are treated when evaluating the
+    #   alarm's condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateCloudWatchAlarmTemplateResponse AWS API Documentation
+    #
+    class UpdateCloudWatchAlarmTemplateResponse < Struct.new(
+      :arn,
+      :comparison_operator,
+      :created_at,
+      :datapoints_to_alarm,
+      :description,
+      :evaluation_periods,
+      :group_id,
+      :id,
+      :metric_name,
+      :modified_at,
+      :name,
+      :period,
+      :statistic,
+      :tags,
+      :target_resource_type,
+      :threshold,
+      :treat_missing_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   A cloudwatch alarm template's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_operator
+    #   The comparison operator used to compare the specified statistic and
+    #   the threshold.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] datapoints_to_alarm
+    #   The number of datapoints within the evaluation period that must be
+    #   breaching to trigger the alarm.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_periods
+    #   The number of periods over which data is compared to the specified
+    #   threshold.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] group_id
+    #   A cloudwatch alarm template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A cloudwatch alarm template's id. AWS provided templates have ids
+    #   that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric associated with the alarm. Must be compatible
+    #   with targetResourceType.
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The period, in seconds, over which the specified statistic is
+    #   applied.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] statistic
+    #   The statistic to apply to the alarm's metric data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_resource_type
+    #   The resource type this template should dynamically generate
+    #   cloudwatch metric alarms for.
+    #   @return [String]
+    #
+    # @!attribute [rw] threshold
+    #   The threshold value to compare with the specified statistic.
+    #   @return [Float]
+    #
+    # @!attribute [rw] treat_missing_data
+    #   Specifies how missing data points are treated when evaluating the
+    #   alarm's condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateCloudWatchAlarmTemplateResponseContent AWS API Documentation
+    #
+    class UpdateCloudWatchAlarmTemplateResponseContent < Struct.new(
+      :arn,
+      :comparison_operator,
+      :created_at,
+      :datapoints_to_alarm,
+      :description,
+      :evaluation_periods,
+      :group_id,
+      :id,
+      :metric_name,
+      :modified_at,
+      :name,
+      :period,
+      :statistic,
+      :tags,
+      :target_resource_type,
+      :threshold,
+      :treat_missing_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateEventBridgeRuleTemplateGroupRequest AWS API Documentation
+    #
+    class UpdateEventBridgeRuleTemplateGroupRequest < Struct.new(
+      :description,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateEventBridgeRuleTemplateGroupRequestContent AWS API Documentation
+    #
+    class UpdateEventBridgeRuleTemplateGroupRequestContent < Struct.new(
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateEventBridgeRuleTemplateGroupResponse AWS API Documentation
+    #
+    class UpdateEventBridgeRuleTemplateGroupResponse < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   An eventbridge rule template group's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   An eventbridge rule template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateEventBridgeRuleTemplateGroupResponseContent AWS API Documentation
+    #
+    class UpdateEventBridgeRuleTemplateGroupResponseContent < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] event_targets
+    #   @return [Array<Types::EventBridgeRuleTemplateTarget>]
+    #
+    # @!attribute [rw] event_type
+    #   The type of event to match with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateEventBridgeRuleTemplateRequest AWS API Documentation
+    #
+    class UpdateEventBridgeRuleTemplateRequest < Struct.new(
+      :description,
+      :event_targets,
+      :event_type,
+      :group_identifier,
+      :identifier,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_targets
+    #   @return [Array<Types::EventBridgeRuleTemplateTarget>]
+    #
+    # @!attribute [rw] event_type
+    #   The type of event to match with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_identifier
+    #   An eventbridge rule template group's identifier. Can be either be
+    #   its id or current name.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateEventBridgeRuleTemplateRequestContent AWS API Documentation
+    #
+    class UpdateEventBridgeRuleTemplateRequestContent < Struct.new(
+      :description,
+      :event_targets,
+      :event_type,
+      :group_identifier,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] event_targets
+    #   @return [Array<Types::EventBridgeRuleTemplateTarget>]
+    #
+    # @!attribute [rw] event_type
+    #   The type of event to match with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateEventBridgeRuleTemplateResponse AWS API Documentation
+    #
+    class UpdateEventBridgeRuleTemplateResponse < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :event_targets,
+      :event_type,
+      :group_id,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   An eventbridge rule template's ARN (Amazon Resource Name)
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A resource's optional description.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_targets
+    #   @return [Array<Types::EventBridgeRuleTemplateTarget>]
+    #
+    # @!attribute [rw] event_type
+    #   The type of event to match with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   An eventbridge rule template group's id. AWS provided template
+    #   groups have ids that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   An eventbridge rule template's id. AWS provided templates have ids
+    #   that start with `aws-`
+    #   @return [String]
+    #
+    # @!attribute [rw] modified_at
+    #   @return [Time]
+    #
+    # @!attribute [rw] name
+    #   A resource's name. Names must be unique within the scope of a
+    #   resource type in a specific region.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Represents the tags associated with a resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateEventBridgeRuleTemplateResponseContent AWS API Documentation
+    #
+    class UpdateEventBridgeRuleTemplateResponseContent < Struct.new(
+      :arn,
+      :created_at,
+      :description,
+      :event_targets,
+      :event_type,
+      :group_id,
+      :id,
+      :modified_at,
+      :name,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

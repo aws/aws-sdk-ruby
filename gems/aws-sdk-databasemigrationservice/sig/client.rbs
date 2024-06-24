@@ -1,0 +1,2643 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DatabaseMigrationService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AddTagsToResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddTagsToResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#add_tags_to_resource-instance_method
+      def add_tags_to_resource: (
+                                  resource_arn: ::String,
+                                  tags: Array[
+                                    {
+                                      key: ::String?,
+                                      value: ::String?,
+                                      resource_arn: ::String?
+                                    },
+                                  ]
+                                ) -> _AddTagsToResourceResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsToResourceResponseSuccess
+
+      interface _ApplyPendingMaintenanceActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ApplyPendingMaintenanceActionResponse]
+        def resource_pending_maintenance_actions: () -> Types::ResourcePendingMaintenanceActions
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#apply_pending_maintenance_action-instance_method
+      def apply_pending_maintenance_action: (
+                                              replication_instance_arn: ::String,
+                                              apply_action: ::String,
+                                              opt_in_type: ::String
+                                            ) -> _ApplyPendingMaintenanceActionResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ApplyPendingMaintenanceActionResponseSuccess
+
+      interface _BatchStartRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchStartRecommendationsResponse]
+        def error_entries: () -> ::Array[Types::BatchStartRecommendationsErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#batch_start_recommendations-instance_method
+      def batch_start_recommendations: (
+                                         ?data: Array[
+                                           {
+                                             database_id: ::String,
+                                             settings: {
+                                               instance_sizing_type: ::String,
+                                               workload_type: ::String
+                                             }
+                                           },
+                                         ]
+                                       ) -> _BatchStartRecommendationsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchStartRecommendationsResponseSuccess
+
+      interface _CancelReplicationTaskAssessmentRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelReplicationTaskAssessmentRunResponse]
+        def replication_task_assessment_run: () -> Types::ReplicationTaskAssessmentRun
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#cancel_replication_task_assessment_run-instance_method
+      def cancel_replication_task_assessment_run: (
+                                                    replication_task_assessment_run_arn: ::String
+                                                  ) -> _CancelReplicationTaskAssessmentRunResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelReplicationTaskAssessmentRunResponseSuccess
+
+      interface _CreateDataProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataProviderResponse]
+        def data_provider: () -> Types::DataProvider
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#create_data_provider-instance_method
+      def create_data_provider: (
+                                  ?data_provider_name: ::String,
+                                  ?description: ::String,
+                                  engine: ::String,
+                                  settings: {
+                                    redshift_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?
+                                    }?,
+                                    postgre_sql_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      certificate_arn: ::String?
+                                    }?,
+                                    my_sql_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      certificate_arn: ::String?
+                                    }?,
+                                    oracle_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      certificate_arn: ::String?,
+                                      asm_server: ::String?,
+                                      secrets_manager_oracle_asm_secret_id: ::String?,
+                                      secrets_manager_oracle_asm_access_role_arn: ::String?,
+                                      secrets_manager_security_db_encryption_secret_id: ::String?,
+                                      secrets_manager_security_db_encryption_access_role_arn: ::String?
+                                    }?,
+                                    microsoft_sql_server_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      certificate_arn: ::String?
+                                    }?,
+                                    doc_db_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      certificate_arn: ::String?
+                                    }?,
+                                    maria_db_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      certificate_arn: ::String?
+                                    }?,
+                                    mongo_db_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      certificate_arn: ::String?,
+                                      auth_type: ("no" | "password")?,
+                                      auth_source: ::String?,
+                                      auth_mechanism: ("default" | "mongodb_cr" | "scram_sha_1")?
+                                    }?
+                                  },
+                                  ?tags: Array[
+                                    {
+                                      key: ::String?,
+                                      value: ::String?,
+                                      resource_arn: ::String?
+                                    },
+                                  ]
+                                ) -> _CreateDataProviderResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataProviderResponseSuccess
+
+      interface _CreateEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEndpointResponse]
+        def endpoint: () -> Types::Endpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#create_endpoint-instance_method
+      def create_endpoint: (
+                             endpoint_identifier: ::String,
+                             endpoint_type: ("source" | "target"),
+                             engine_name: ::String,
+                             ?username: ::String,
+                             ?password: ::String,
+                             ?server_name: ::String,
+                             ?port: ::Integer,
+                             ?database_name: ::String,
+                             ?extra_connection_attributes: ::String,
+                             ?kms_key_id: ::String,
+                             ?tags: Array[
+                               {
+                                 key: ::String?,
+                                 value: ::String?,
+                                 resource_arn: ::String?
+                               },
+                             ],
+                             ?certificate_arn: ::String,
+                             ?ssl_mode: ("none" | "require" | "verify-ca" | "verify-full"),
+                             ?service_access_role_arn: ::String,
+                             ?external_table_definition: ::String,
+                             ?dynamo_db_settings: {
+                               service_access_role_arn: ::String
+                             },
+                             ?s3_settings: {
+                               service_access_role_arn: ::String?,
+                               external_table_definition: ::String?,
+                               csv_row_delimiter: ::String?,
+                               csv_delimiter: ::String?,
+                               bucket_folder: ::String?,
+                               bucket_name: ::String?,
+                               compression_type: ("none" | "gzip")?,
+                               encryption_mode: ("sse-s3" | "sse-kms")?,
+                               server_side_encryption_kms_key_id: ::String?,
+                               data_format: ("csv" | "parquet")?,
+                               encoding_type: ("plain" | "plain-dictionary" | "rle-dictionary")?,
+                               dict_page_size_limit: ::Integer?,
+                               row_group_length: ::Integer?,
+                               data_page_size: ::Integer?,
+                               parquet_version: ("parquet-1-0" | "parquet-2-0")?,
+                               enable_statistics: bool?,
+                               include_op_for_full_load: bool?,
+                               cdc_inserts_only: bool?,
+                               timestamp_column_name: ::String?,
+                               parquet_timestamp_in_millisecond: bool?,
+                               cdc_inserts_and_updates: bool?,
+                               date_partition_enabled: bool?,
+                               date_partition_sequence: ("YYYYMMDD" | "YYYYMMDDHH" | "YYYYMM" | "MMYYYYDD" | "DDMMYYYY")?,
+                               date_partition_delimiter: ("SLASH" | "UNDERSCORE" | "DASH" | "NONE")?,
+                               use_csv_no_sup_value: bool?,
+                               csv_no_sup_value: ::String?,
+                               preserve_transactions: bool?,
+                               cdc_path: ::String?,
+                               use_task_start_time_for_full_load_timestamp: bool?,
+                               canned_acl_for_objects: ("none" | "private" | "public-read" | "public-read-write" | "authenticated-read" | "aws-exec-read" | "bucket-owner-read" | "bucket-owner-full-control")?,
+                               add_column_name: bool?,
+                               cdc_max_batch_interval: ::Integer?,
+                               cdc_min_file_size: ::Integer?,
+                               csv_null_value: ::String?,
+                               ignore_header_rows: ::Integer?,
+                               max_file_size: ::Integer?,
+                               rfc_4180: bool?,
+                               date_partition_timezone: ::String?,
+                               add_trailing_padding_character: bool?,
+                               expected_bucket_owner: ::String?,
+                               glue_catalog_generation: bool?
+                             },
+                             ?dms_transfer_settings: {
+                               service_access_role_arn: ::String?,
+                               bucket_name: ::String?
+                             },
+                             ?mongo_db_settings: {
+                               username: ::String?,
+                               password: ::String?,
+                               server_name: ::String?,
+                               port: ::Integer?,
+                               database_name: ::String?,
+                               auth_type: ("no" | "password")?,
+                               auth_mechanism: ("default" | "mongodb_cr" | "scram_sha_1")?,
+                               nesting_level: ("none" | "one")?,
+                               extract_doc_id: ::String?,
+                               docs_to_investigate: ::String?,
+                               auth_source: ::String?,
+                               kms_key_id: ::String?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               use_update_look_up: bool?,
+                               replicate_shard_collections: bool?
+                             },
+                             ?kinesis_settings: {
+                               stream_arn: ::String?,
+                               message_format: ("json" | "json-unformatted")?,
+                               service_access_role_arn: ::String?,
+                               include_transaction_details: bool?,
+                               include_partition_value: bool?,
+                               partition_include_schema_table: bool?,
+                               include_table_alter_operations: bool?,
+                               include_control_details: bool?,
+                               include_null_and_empty: bool?,
+                               no_hex_prefix: bool?
+                             },
+                             ?kafka_settings: {
+                               broker: ::String?,
+                               topic: ::String?,
+                               message_format: ("json" | "json-unformatted")?,
+                               include_transaction_details: bool?,
+                               include_partition_value: bool?,
+                               partition_include_schema_table: bool?,
+                               include_table_alter_operations: bool?,
+                               include_control_details: bool?,
+                               message_max_bytes: ::Integer?,
+                               include_null_and_empty: bool?,
+                               security_protocol: ("plaintext" | "ssl-authentication" | "ssl-encryption" | "sasl-ssl")?,
+                               ssl_client_certificate_arn: ::String?,
+                               ssl_client_key_arn: ::String?,
+                               ssl_client_key_password: ::String?,
+                               ssl_ca_certificate_arn: ::String?,
+                               sasl_username: ::String?,
+                               sasl_password: ::String?,
+                               no_hex_prefix: bool?,
+                               sasl_mechanism: ("scram-sha-512" | "plain")?,
+                               ssl_endpoint_identification_algorithm: ("none" | "https")?
+                             },
+                             ?elasticsearch_settings: {
+                               service_access_role_arn: ::String,
+                               endpoint_uri: ::String,
+                               full_load_error_percentage: ::Integer?,
+                               error_retry_duration: ::Integer?,
+                               use_new_mapping_type: bool?
+                             },
+                             ?neptune_settings: {
+                               service_access_role_arn: ::String?,
+                               s3_bucket_name: ::String,
+                               s3_bucket_folder: ::String,
+                               error_retry_duration: ::Integer?,
+                               max_file_size: ::Integer?,
+                               max_retry_count: ::Integer?,
+                               iam_auth_enabled: bool?
+                             },
+                             ?redshift_settings: {
+                               accept_any_date: bool?,
+                               after_connect_script: ::String?,
+                               bucket_folder: ::String?,
+                               bucket_name: ::String?,
+                               case_sensitive_names: bool?,
+                               comp_update: bool?,
+                               connection_timeout: ::Integer?,
+                               database_name: ::String?,
+                               date_format: ::String?,
+                               empty_as_null: bool?,
+                               encryption_mode: ("sse-s3" | "sse-kms")?,
+                               explicit_ids: bool?,
+                               file_transfer_upload_streams: ::Integer?,
+                               load_timeout: ::Integer?,
+                               max_file_size: ::Integer?,
+                               password: ::String?,
+                               port: ::Integer?,
+                               remove_quotes: bool?,
+                               replace_invalid_chars: ::String?,
+                               replace_chars: ::String?,
+                               server_name: ::String?,
+                               service_access_role_arn: ::String?,
+                               server_side_encryption_kms_key_id: ::String?,
+                               time_format: ::String?,
+                               trim_blanks: bool?,
+                               truncate_columns: bool?,
+                               username: ::String?,
+                               write_buffer_size: ::Integer?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               map_boolean_as_boolean: bool?
+                             },
+                             ?postgre_sql_settings: {
+                               after_connect_script: ::String?,
+                               capture_ddls: bool?,
+                               max_file_size: ::Integer?,
+                               database_name: ::String?,
+                               ddl_artifacts_schema: ::String?,
+                               execute_timeout: ::Integer?,
+                               fail_tasks_on_lob_truncation: bool?,
+                               heartbeat_enable: bool?,
+                               heartbeat_schema: ::String?,
+                               heartbeat_frequency: ::Integer?,
+                               password: ::String?,
+                               port: ::Integer?,
+                               server_name: ::String?,
+                               username: ::String?,
+                               slot_name: ::String?,
+                               plugin_name: ("no-preference" | "test-decoding" | "pglogical")?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               trim_space_in_char: bool?,
+                               map_boolean_as_boolean: bool?,
+                               map_jsonb_as_clob: bool?,
+                               map_long_varchar_as: ("wstring" | "clob" | "nclob")?,
+                               database_mode: ("default" | "babelfish")?,
+                               babelfish_database_name: ::String?
+                             },
+                             ?my_sql_settings: {
+                               after_connect_script: ::String?,
+                               clean_source_metadata_on_mismatch: bool?,
+                               database_name: ::String?,
+                               events_poll_interval: ::Integer?,
+                               target_db_type: ("specific-database" | "multiple-databases")?,
+                               max_file_size: ::Integer?,
+                               parallel_load_threads: ::Integer?,
+                               password: ::String?,
+                               port: ::Integer?,
+                               server_name: ::String?,
+                               server_timezone: ::String?,
+                               username: ::String?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               execute_timeout: ::Integer?
+                             },
+                             ?oracle_settings: {
+                               add_supplemental_logging: bool?,
+                               archived_log_dest_id: ::Integer?,
+                               additional_archived_log_dest_id: ::Integer?,
+                               extra_archived_log_dest_ids: Array[::Integer]?,
+                               allow_select_nested_tables: bool?,
+                               parallel_asm_read_threads: ::Integer?,
+                               read_ahead_blocks: ::Integer?,
+                               access_alternate_directly: bool?,
+                               use_alternate_folder_for_online: bool?,
+                               oracle_path_prefix: ::String?,
+                               use_path_prefix: ::String?,
+                               replace_path_prefix: bool?,
+                               enable_homogenous_tablespace: bool?,
+                               direct_path_no_log: bool?,
+                               archived_logs_only: bool?,
+                               asm_password: ::String?,
+                               asm_server: ::String?,
+                               asm_user: ::String?,
+                               char_length_semantics: ("default" | "char" | "byte")?,
+                               database_name: ::String?,
+                               direct_path_parallel_load: bool?,
+                               fail_tasks_on_lob_truncation: bool?,
+                               number_datatype_scale: ::Integer?,
+                               password: ::String?,
+                               port: ::Integer?,
+                               read_table_space_name: bool?,
+                               retry_interval: ::Integer?,
+                               security_db_encryption: ::String?,
+                               security_db_encryption_name: ::String?,
+                               server_name: ::String?,
+                               spatial_data_option_to_geo_json_function_name: ::String?,
+                               standby_delay_time: ::Integer?,
+                               username: ::String?,
+                               use_b_file: bool?,
+                               use_direct_path_full_load: bool?,
+                               use_logminer_reader: bool?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               secrets_manager_oracle_asm_access_role_arn: ::String?,
+                               secrets_manager_oracle_asm_secret_id: ::String?,
+                               trim_space_in_char: bool?,
+                               convert_timestamp_with_zone_to_utc: bool?,
+                               open_transaction_window: ::Integer?
+                             },
+                             ?sybase_settings: {
+                               database_name: ::String?,
+                               password: ::String?,
+                               port: ::Integer?,
+                               server_name: ::String?,
+                               username: ::String?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?
+                             },
+                             ?microsoft_sql_server_settings: {
+                               port: ::Integer?,
+                               bcp_packet_size: ::Integer?,
+                               database_name: ::String?,
+                               control_tables_file_group: ::String?,
+                               password: ::String?,
+                               query_single_always_on_node: bool?,
+                               read_backup_only: bool?,
+                               safeguard_policy: ("rely-on-sql-server-replication-agent" | "exclusive-automatic-truncation" | "shared-automatic-truncation")?,
+                               server_name: ::String?,
+                               username: ::String?,
+                               use_bcp_full_load: bool?,
+                               use_third_party_backup_device: bool?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               trim_space_in_char: bool?,
+                               tlog_access_mode: ("BackupOnly" | "PreferBackup" | "PreferTlog" | "TlogOnly")?,
+                               force_lob_lookup: bool?
+                             },
+                             ?ibm_db_2_settings: {
+                               database_name: ::String?,
+                               password: ::String?,
+                               port: ::Integer?,
+                               server_name: ::String?,
+                               set_data_capture_changes: bool?,
+                               current_lsn: ::String?,
+                               max_k_bytes_per_read: ::Integer?,
+                               username: ::String?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               load_timeout: ::Integer?,
+                               write_buffer_size: ::Integer?,
+                               max_file_size: ::Integer?,
+                               keep_csv_files: bool?
+                             },
+                             ?resource_identifier: ::String,
+                             ?doc_db_settings: {
+                               username: ::String?,
+                               password: ::String?,
+                               server_name: ::String?,
+                               port: ::Integer?,
+                               database_name: ::String?,
+                               nesting_level: ("none" | "one")?,
+                               extract_doc_id: bool?,
+                               docs_to_investigate: ::Integer?,
+                               kms_key_id: ::String?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               use_update_look_up: bool?,
+                               replicate_shard_collections: bool?
+                             },
+                             ?redis_settings: {
+                               server_name: ::String,
+                               port: ::Integer,
+                               ssl_security_protocol: ("plaintext" | "ssl-encryption")?,
+                               auth_type: ("none" | "auth-role" | "auth-token")?,
+                               auth_user_name: ::String?,
+                               auth_password: ::String?,
+                               ssl_ca_certificate_arn: ::String?
+                             },
+                             ?gcp_my_sql_settings: {
+                               after_connect_script: ::String?,
+                               clean_source_metadata_on_mismatch: bool?,
+                               database_name: ::String?,
+                               events_poll_interval: ::Integer?,
+                               target_db_type: ("specific-database" | "multiple-databases")?,
+                               max_file_size: ::Integer?,
+                               parallel_load_threads: ::Integer?,
+                               password: ::String?,
+                               port: ::Integer?,
+                               server_name: ::String?,
+                               server_timezone: ::String?,
+                               username: ::String?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?
+                             },
+                             ?timestream_settings: {
+                               database_name: ::String,
+                               memory_duration: ::Integer,
+                               magnetic_duration: ::Integer,
+                               cdc_inserts_and_updates: bool?,
+                               enable_magnetic_store_writes: bool?
+                             }
+                           ) -> _CreateEndpointResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEndpointResponseSuccess
+
+      interface _CreateEventSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventSubscriptionResponse]
+        def event_subscription: () -> Types::EventSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#create_event_subscription-instance_method
+      def create_event_subscription: (
+                                       subscription_name: ::String,
+                                       sns_topic_arn: ::String,
+                                       ?source_type: ::String,
+                                       ?event_categories: Array[::String],
+                                       ?source_ids: Array[::String],
+                                       ?enabled: bool,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String?,
+                                           value: ::String?,
+                                           resource_arn: ::String?
+                                         },
+                                       ]
+                                     ) -> _CreateEventSubscriptionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventSubscriptionResponseSuccess
+
+      interface _CreateFleetAdvisorCollectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFleetAdvisorCollectorResponse]
+        def collector_referenced_id: () -> ::String
+        def collector_name: () -> ::String
+        def description: () -> ::String
+        def service_access_role_arn: () -> ::String
+        def s3_bucket_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#create_fleet_advisor_collector-instance_method
+      def create_fleet_advisor_collector: (
+                                            collector_name: ::String,
+                                            ?description: ::String,
+                                            service_access_role_arn: ::String,
+                                            s3_bucket_name: ::String
+                                          ) -> _CreateFleetAdvisorCollectorResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetAdvisorCollectorResponseSuccess
+
+      interface _CreateInstanceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInstanceProfileResponse]
+        def instance_profile: () -> Types::InstanceProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#create_instance_profile-instance_method
+      def create_instance_profile: (
+                                     ?availability_zone: ::String,
+                                     ?kms_key_arn: ::String,
+                                     ?publicly_accessible: bool,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?,
+                                         resource_arn: ::String?
+                                       },
+                                     ],
+                                     ?network_type: ::String,
+                                     ?instance_profile_name: ::String,
+                                     ?description: ::String,
+                                     ?subnet_group_identifier: ::String,
+                                     ?vpc_security_groups: Array[::String]
+                                   ) -> _CreateInstanceProfileResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInstanceProfileResponseSuccess
+
+      interface _CreateMigrationProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMigrationProjectResponse]
+        def migration_project: () -> Types::MigrationProject
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#create_migration_project-instance_method
+      def create_migration_project: (
+                                      ?migration_project_name: ::String,
+                                      source_data_provider_descriptors: Array[
+                                        {
+                                          data_provider_identifier: ::String,
+                                          secrets_manager_secret_id: ::String?,
+                                          secrets_manager_access_role_arn: ::String?
+                                        },
+                                      ],
+                                      target_data_provider_descriptors: Array[
+                                        {
+                                          data_provider_identifier: ::String,
+                                          secrets_manager_secret_id: ::String?,
+                                          secrets_manager_access_role_arn: ::String?
+                                        },
+                                      ],
+                                      instance_profile_identifier: ::String,
+                                      ?transformation_rules: ::String,
+                                      ?description: ::String,
+                                      ?tags: Array[
+                                        {
+                                          key: ::String?,
+                                          value: ::String?,
+                                          resource_arn: ::String?
+                                        },
+                                      ],
+                                      ?schema_conversion_application_attributes: {
+                                        s3_bucket_path: ::String?,
+                                        s3_bucket_role_arn: ::String?
+                                      }
+                                    ) -> _CreateMigrationProjectResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMigrationProjectResponseSuccess
+
+      interface _CreateReplicationConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReplicationConfigResponse]
+        def replication_config: () -> Types::ReplicationConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#create_replication_config-instance_method
+      def create_replication_config: (
+                                       replication_config_identifier: ::String,
+                                       source_endpoint_arn: ::String,
+                                       target_endpoint_arn: ::String,
+                                       compute_config: {
+                                         availability_zone: ::String?,
+                                         dns_name_servers: ::String?,
+                                         kms_key_id: ::String?,
+                                         max_capacity_units: ::Integer?,
+                                         min_capacity_units: ::Integer?,
+                                         multi_az: bool?,
+                                         preferred_maintenance_window: ::String?,
+                                         replication_subnet_group_id: ::String?,
+                                         vpc_security_group_ids: Array[::String]?
+                                       },
+                                       replication_type: ("full-load" | "cdc" | "full-load-and-cdc"),
+                                       table_mappings: ::String,
+                                       ?replication_settings: ::String,
+                                       ?supplemental_settings: ::String,
+                                       ?resource_identifier: ::String,
+                                       ?tags: Array[
+                                         {
+                                           key: ::String?,
+                                           value: ::String?,
+                                           resource_arn: ::String?
+                                         },
+                                       ]
+                                     ) -> _CreateReplicationConfigResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReplicationConfigResponseSuccess
+
+      interface _CreateReplicationInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReplicationInstanceResponse]
+        def replication_instance: () -> Types::ReplicationInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#create_replication_instance-instance_method
+      def create_replication_instance: (
+                                         replication_instance_identifier: ::String,
+                                         ?allocated_storage: ::Integer,
+                                         replication_instance_class: ::String,
+                                         ?vpc_security_group_ids: Array[::String],
+                                         ?availability_zone: ::String,
+                                         ?replication_subnet_group_identifier: ::String,
+                                         ?preferred_maintenance_window: ::String,
+                                         ?multi_az: bool,
+                                         ?engine_version: ::String,
+                                         ?auto_minor_version_upgrade: bool,
+                                         ?tags: Array[
+                                           {
+                                             key: ::String?,
+                                             value: ::String?,
+                                             resource_arn: ::String?
+                                           },
+                                         ],
+                                         ?kms_key_id: ::String,
+                                         ?publicly_accessible: bool,
+                                         ?dns_name_servers: ::String,
+                                         ?resource_identifier: ::String,
+                                         ?network_type: ::String
+                                       ) -> _CreateReplicationInstanceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReplicationInstanceResponseSuccess
+
+      interface _CreateReplicationSubnetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReplicationSubnetGroupResponse]
+        def replication_subnet_group: () -> Types::ReplicationSubnetGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#create_replication_subnet_group-instance_method
+      def create_replication_subnet_group: (
+                                             replication_subnet_group_identifier: ::String,
+                                             replication_subnet_group_description: ::String,
+                                             subnet_ids: Array[::String],
+                                             ?tags: Array[
+                                               {
+                                                 key: ::String?,
+                                                 value: ::String?,
+                                                 resource_arn: ::String?
+                                               },
+                                             ]
+                                           ) -> _CreateReplicationSubnetGroupResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReplicationSubnetGroupResponseSuccess
+
+      interface _CreateReplicationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReplicationTaskResponse]
+        def replication_task: () -> Types::ReplicationTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#create_replication_task-instance_method
+      def create_replication_task: (
+                                     replication_task_identifier: ::String,
+                                     source_endpoint_arn: ::String,
+                                     target_endpoint_arn: ::String,
+                                     replication_instance_arn: ::String,
+                                     migration_type: ("full-load" | "cdc" | "full-load-and-cdc"),
+                                     table_mappings: ::String,
+                                     ?replication_task_settings: ::String,
+                                     ?cdc_start_time: ::Time,
+                                     ?cdc_start_position: ::String,
+                                     ?cdc_stop_position: ::String,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?,
+                                         resource_arn: ::String?
+                                       },
+                                     ],
+                                     ?task_data: ::String,
+                                     ?resource_identifier: ::String
+                                   ) -> _CreateReplicationTaskResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReplicationTaskResponseSuccess
+
+      interface _DeleteCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCertificateResponse]
+        def certificate: () -> Types::Certificate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#delete_certificate-instance_method
+      def delete_certificate: (
+                                certificate_arn: ::String
+                              ) -> _DeleteCertificateResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCertificateResponseSuccess
+
+      interface _DeleteConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConnectionResponse]
+        def connection: () -> Types::Connection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#delete_connection-instance_method
+      def delete_connection: (
+                               endpoint_arn: ::String,
+                               replication_instance_arn: ::String
+                             ) -> _DeleteConnectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectionResponseSuccess
+
+      interface _DeleteDataProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataProviderResponse]
+        def data_provider: () -> Types::DataProvider
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#delete_data_provider-instance_method
+      def delete_data_provider: (
+                                  data_provider_identifier: ::String
+                                ) -> _DeleteDataProviderResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataProviderResponseSuccess
+
+      interface _DeleteEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEndpointResponse]
+        def endpoint: () -> Types::Endpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#delete_endpoint-instance_method
+      def delete_endpoint: (
+                             endpoint_arn: ::String
+                           ) -> _DeleteEndpointResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEndpointResponseSuccess
+
+      interface _DeleteEventSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEventSubscriptionResponse]
+        def event_subscription: () -> Types::EventSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#delete_event_subscription-instance_method
+      def delete_event_subscription: (
+                                       subscription_name: ::String
+                                     ) -> _DeleteEventSubscriptionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEventSubscriptionResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#delete_fleet_advisor_collector-instance_method
+      def delete_fleet_advisor_collector: (
+                                            collector_referenced_id: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteFleetAdvisorDatabasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFleetAdvisorDatabasesResponse]
+        def database_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#delete_fleet_advisor_databases-instance_method
+      def delete_fleet_advisor_databases: (
+                                            database_ids: Array[::String]
+                                          ) -> _DeleteFleetAdvisorDatabasesResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFleetAdvisorDatabasesResponseSuccess
+
+      interface _DeleteInstanceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInstanceProfileResponse]
+        def instance_profile: () -> Types::InstanceProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#delete_instance_profile-instance_method
+      def delete_instance_profile: (
+                                     instance_profile_identifier: ::String
+                                   ) -> _DeleteInstanceProfileResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInstanceProfileResponseSuccess
+
+      interface _DeleteMigrationProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMigrationProjectResponse]
+        def migration_project: () -> Types::MigrationProject
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#delete_migration_project-instance_method
+      def delete_migration_project: (
+                                      migration_project_identifier: ::String
+                                    ) -> _DeleteMigrationProjectResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMigrationProjectResponseSuccess
+
+      interface _DeleteReplicationConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReplicationConfigResponse]
+        def replication_config: () -> Types::ReplicationConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#delete_replication_config-instance_method
+      def delete_replication_config: (
+                                       replication_config_arn: ::String
+                                     ) -> _DeleteReplicationConfigResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReplicationConfigResponseSuccess
+
+      interface _DeleteReplicationInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReplicationInstanceResponse]
+        def replication_instance: () -> Types::ReplicationInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#delete_replication_instance-instance_method
+      def delete_replication_instance: (
+                                         replication_instance_arn: ::String
+                                       ) -> _DeleteReplicationInstanceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReplicationInstanceResponseSuccess
+
+      interface _DeleteReplicationSubnetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReplicationSubnetGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#delete_replication_subnet_group-instance_method
+      def delete_replication_subnet_group: (
+                                             replication_subnet_group_identifier: ::String
+                                           ) -> _DeleteReplicationSubnetGroupResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReplicationSubnetGroupResponseSuccess
+
+      interface _DeleteReplicationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReplicationTaskResponse]
+        def replication_task: () -> Types::ReplicationTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#delete_replication_task-instance_method
+      def delete_replication_task: (
+                                     replication_task_arn: ::String
+                                   ) -> _DeleteReplicationTaskResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReplicationTaskResponseSuccess
+
+      interface _DeleteReplicationTaskAssessmentRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteReplicationTaskAssessmentRunResponse]
+        def replication_task_assessment_run: () -> Types::ReplicationTaskAssessmentRun
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#delete_replication_task_assessment_run-instance_method
+      def delete_replication_task_assessment_run: (
+                                                    replication_task_assessment_run_arn: ::String
+                                                  ) -> _DeleteReplicationTaskAssessmentRunResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteReplicationTaskAssessmentRunResponseSuccess
+
+      interface _DescribeAccountAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAccountAttributesResponse]
+        def account_quotas: () -> ::Array[Types::AccountQuota]
+        def unique_account_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_account_attributes-instance_method
+      def describe_account_attributes: (
+                                       ) -> _DescribeAccountAttributesResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAccountAttributesResponseSuccess
+
+      interface _DescribeApplicableIndividualAssessmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeApplicableIndividualAssessmentsResponse]
+        def individual_assessment_names: () -> ::Array[::String]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_applicable_individual_assessments-instance_method
+      def describe_applicable_individual_assessments: (
+                                                        ?replication_task_arn: ::String,
+                                                        ?replication_instance_arn: ::String,
+                                                        ?source_engine_name: ::String,
+                                                        ?target_engine_name: ::String,
+                                                        ?migration_type: ("full-load" | "cdc" | "full-load-and-cdc"),
+                                                        ?max_records: ::Integer,
+                                                        ?marker: ::String
+                                                      ) -> _DescribeApplicableIndividualAssessmentsResponseSuccess
+                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeApplicableIndividualAssessmentsResponseSuccess
+
+      interface _DescribeCertificatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCertificatesResponse]
+        def marker: () -> ::String
+        def certificates: () -> ::Array[Types::Certificate]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_certificates-instance_method
+      def describe_certificates: (
+                                   ?filters: Array[
+                                     {
+                                       name: ::String,
+                                       values: Array[::String]
+                                     },
+                                   ],
+                                   ?max_records: ::Integer,
+                                   ?marker: ::String
+                                 ) -> _DescribeCertificatesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCertificatesResponseSuccess
+
+      interface _DescribeConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConnectionsResponse]
+        def marker: () -> ::String
+        def connections: () -> ::Array[Types::Connection]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_connections-instance_method
+      def describe_connections: (
+                                  ?filters: Array[
+                                    {
+                                      name: ::String,
+                                      values: Array[::String]
+                                    },
+                                  ],
+                                  ?max_records: ::Integer,
+                                  ?marker: ::String
+                                ) -> _DescribeConnectionsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectionsResponseSuccess
+
+      interface _DescribeConversionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConversionConfigurationResponse]
+        def migration_project_identifier: () -> ::String
+        def conversion_configuration: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_conversion_configuration-instance_method
+      def describe_conversion_configuration: (
+                                               migration_project_identifier: ::String
+                                             ) -> _DescribeConversionConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConversionConfigurationResponseSuccess
+
+      interface _DescribeDataProvidersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDataProvidersResponse]
+        def marker: () -> ::String
+        def data_providers: () -> ::Array[Types::DataProvider]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_data_providers-instance_method
+      def describe_data_providers: (
+                                     ?filters: Array[
+                                       {
+                                         name: ::String,
+                                         values: Array[::String]
+                                       },
+                                     ],
+                                     ?max_records: ::Integer,
+                                     ?marker: ::String
+                                   ) -> _DescribeDataProvidersResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDataProvidersResponseSuccess
+
+      interface _DescribeEndpointSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEndpointSettingsResponse]
+        def marker: () -> ::String
+        def endpoint_settings: () -> ::Array[Types::EndpointSetting]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_endpoint_settings-instance_method
+      def describe_endpoint_settings: (
+                                        engine_name: ::String,
+                                        ?max_records: ::Integer,
+                                        ?marker: ::String
+                                      ) -> _DescribeEndpointSettingsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEndpointSettingsResponseSuccess
+
+      interface _DescribeEndpointTypesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEndpointTypesResponse]
+        def marker: () -> ::String
+        def supported_endpoint_types: () -> ::Array[Types::SupportedEndpointType]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_endpoint_types-instance_method
+      def describe_endpoint_types: (
+                                     ?filters: Array[
+                                       {
+                                         name: ::String,
+                                         values: Array[::String]
+                                       },
+                                     ],
+                                     ?max_records: ::Integer,
+                                     ?marker: ::String
+                                   ) -> _DescribeEndpointTypesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEndpointTypesResponseSuccess
+
+      interface _DescribeEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEndpointsResponse]
+        def marker: () -> ::String
+        def endpoints: () -> ::Array[Types::Endpoint]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_endpoints-instance_method
+      def describe_endpoints: (
+                                ?filters: Array[
+                                  {
+                                    name: ::String,
+                                    values: Array[::String]
+                                  },
+                                ],
+                                ?max_records: ::Integer,
+                                ?marker: ::String
+                              ) -> _DescribeEndpointsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEndpointsResponseSuccess
+
+      interface _DescribeEngineVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEngineVersionsResponse]
+        def engine_versions: () -> ::Array[Types::EngineVersion]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_engine_versions-instance_method
+      def describe_engine_versions: (
+                                      ?max_records: ::Integer,
+                                      ?marker: ::String
+                                    ) -> _DescribeEngineVersionsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEngineVersionsResponseSuccess
+
+      interface _DescribeEventCategoriesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventCategoriesResponse]
+        def event_category_group_list: () -> ::Array[Types::EventCategoryGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_event_categories-instance_method
+      def describe_event_categories: (
+                                       ?source_type: ::String,
+                                       ?filters: Array[
+                                         {
+                                           name: ::String,
+                                           values: Array[::String]
+                                         },
+                                       ]
+                                     ) -> _DescribeEventCategoriesResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventCategoriesResponseSuccess
+
+      interface _DescribeEventSubscriptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventSubscriptionsResponse]
+        def marker: () -> ::String
+        def event_subscriptions_list: () -> ::Array[Types::EventSubscription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_event_subscriptions-instance_method
+      def describe_event_subscriptions: (
+                                          ?subscription_name: ::String,
+                                          ?filters: Array[
+                                            {
+                                              name: ::String,
+                                              values: Array[::String]
+                                            },
+                                          ],
+                                          ?max_records: ::Integer,
+                                          ?marker: ::String
+                                        ) -> _DescribeEventSubscriptionsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventSubscriptionsResponseSuccess
+
+      interface _DescribeEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEventsResponse]
+        def marker: () -> ::String
+        def events: () -> ::Array[Types::Event]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_events-instance_method
+      def describe_events: (
+                             ?source_identifier: ::String,
+                             ?source_type: ("replication-instance"),
+                             ?start_time: ::Time,
+                             ?end_time: ::Time,
+                             ?duration: ::Integer,
+                             ?event_categories: Array[::String],
+                             ?filters: Array[
+                               {
+                                 name: ::String,
+                                 values: Array[::String]
+                               },
+                             ],
+                             ?max_records: ::Integer,
+                             ?marker: ::String
+                           ) -> _DescribeEventsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventsResponseSuccess
+
+      interface _DescribeExtensionPackAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeExtensionPackAssociationsResponse]
+        def marker: () -> ::String
+        def requests: () -> ::Array[Types::SchemaConversionRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_extension_pack_associations-instance_method
+      def describe_extension_pack_associations: (
+                                                  migration_project_identifier: ::String,
+                                                  ?filters: Array[
+                                                    {
+                                                      name: ::String,
+                                                      values: Array[::String]
+                                                    },
+                                                  ],
+                                                  ?marker: ::String,
+                                                  ?max_records: ::Integer
+                                                ) -> _DescribeExtensionPackAssociationsResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeExtensionPackAssociationsResponseSuccess
+
+      interface _DescribeFleetAdvisorCollectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFleetAdvisorCollectorsResponse]
+        def collectors: () -> ::Array[Types::CollectorResponse]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_fleet_advisor_collectors-instance_method
+      def describe_fleet_advisor_collectors: (
+                                               ?filters: Array[
+                                                 {
+                                                   name: ::String,
+                                                   values: Array[::String]
+                                                 },
+                                               ],
+                                               ?max_records: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _DescribeFleetAdvisorCollectorsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFleetAdvisorCollectorsResponseSuccess
+
+      interface _DescribeFleetAdvisorDatabasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFleetAdvisorDatabasesResponse]
+        def databases: () -> ::Array[Types::DatabaseResponse]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_fleet_advisor_databases-instance_method
+      def describe_fleet_advisor_databases: (
+                                              ?filters: Array[
+                                                {
+                                                  name: ::String,
+                                                  values: Array[::String]
+                                                },
+                                              ],
+                                              ?max_records: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _DescribeFleetAdvisorDatabasesResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFleetAdvisorDatabasesResponseSuccess
+
+      interface _DescribeFleetAdvisorLsaAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFleetAdvisorLsaAnalysisResponse]
+        def analysis: () -> ::Array[Types::FleetAdvisorLsaAnalysisResponse]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_fleet_advisor_lsa_analysis-instance_method
+      def describe_fleet_advisor_lsa_analysis: (
+                                                 ?max_records: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _DescribeFleetAdvisorLsaAnalysisResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFleetAdvisorLsaAnalysisResponseSuccess
+
+      interface _DescribeFleetAdvisorSchemaObjectSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFleetAdvisorSchemaObjectSummaryResponse]
+        def fleet_advisor_schema_objects: () -> ::Array[Types::FleetAdvisorSchemaObjectResponse]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_fleet_advisor_schema_object_summary-instance_method
+      def describe_fleet_advisor_schema_object_summary: (
+                                                          ?filters: Array[
+                                                            {
+                                                              name: ::String,
+                                                              values: Array[::String]
+                                                            },
+                                                          ],
+                                                          ?max_records: ::Integer,
+                                                          ?next_token: ::String
+                                                        ) -> _DescribeFleetAdvisorSchemaObjectSummaryResponseSuccess
+                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFleetAdvisorSchemaObjectSummaryResponseSuccess
+
+      interface _DescribeFleetAdvisorSchemasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFleetAdvisorSchemasResponse]
+        def fleet_advisor_schemas: () -> ::Array[Types::SchemaResponse]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_fleet_advisor_schemas-instance_method
+      def describe_fleet_advisor_schemas: (
+                                            ?filters: Array[
+                                              {
+                                                name: ::String,
+                                                values: Array[::String]
+                                              },
+                                            ],
+                                            ?max_records: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _DescribeFleetAdvisorSchemasResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeFleetAdvisorSchemasResponseSuccess
+
+      interface _DescribeInstanceProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInstanceProfilesResponse]
+        def marker: () -> ::String
+        def instance_profiles: () -> ::Array[Types::InstanceProfile]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_instance_profiles-instance_method
+      def describe_instance_profiles: (
+                                        ?filters: Array[
+                                          {
+                                            name: ::String,
+                                            values: Array[::String]
+                                          },
+                                        ],
+                                        ?max_records: ::Integer,
+                                        ?marker: ::String
+                                      ) -> _DescribeInstanceProfilesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstanceProfilesResponseSuccess
+
+      interface _DescribeMetadataModelAssessmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMetadataModelAssessmentsResponse]
+        def marker: () -> ::String
+        def requests: () -> ::Array[Types::SchemaConversionRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_metadata_model_assessments-instance_method
+      def describe_metadata_model_assessments: (
+                                                 migration_project_identifier: ::String,
+                                                 ?filters: Array[
+                                                   {
+                                                     name: ::String,
+                                                     values: Array[::String]
+                                                   },
+                                                 ],
+                                                 ?marker: ::String,
+                                                 ?max_records: ::Integer
+                                               ) -> _DescribeMetadataModelAssessmentsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMetadataModelAssessmentsResponseSuccess
+
+      interface _DescribeMetadataModelConversionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMetadataModelConversionsResponse]
+        def marker: () -> ::String
+        def requests: () -> ::Array[Types::SchemaConversionRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_metadata_model_conversions-instance_method
+      def describe_metadata_model_conversions: (
+                                                 migration_project_identifier: ::String,
+                                                 ?filters: Array[
+                                                   {
+                                                     name: ::String,
+                                                     values: Array[::String]
+                                                   },
+                                                 ],
+                                                 ?marker: ::String,
+                                                 ?max_records: ::Integer
+                                               ) -> _DescribeMetadataModelConversionsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMetadataModelConversionsResponseSuccess
+
+      interface _DescribeMetadataModelExportsAsScriptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMetadataModelExportsAsScriptResponse]
+        def marker: () -> ::String
+        def requests: () -> ::Array[Types::SchemaConversionRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_metadata_model_exports_as_script-instance_method
+      def describe_metadata_model_exports_as_script: (
+                                                       migration_project_identifier: ::String,
+                                                       ?filters: Array[
+                                                         {
+                                                           name: ::String,
+                                                           values: Array[::String]
+                                                         },
+                                                       ],
+                                                       ?marker: ::String,
+                                                       ?max_records: ::Integer
+                                                     ) -> _DescribeMetadataModelExportsAsScriptResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMetadataModelExportsAsScriptResponseSuccess
+
+      interface _DescribeMetadataModelExportsToTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMetadataModelExportsToTargetResponse]
+        def marker: () -> ::String
+        def requests: () -> ::Array[Types::SchemaConversionRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_metadata_model_exports_to_target-instance_method
+      def describe_metadata_model_exports_to_target: (
+                                                       migration_project_identifier: ::String,
+                                                       ?filters: Array[
+                                                         {
+                                                           name: ::String,
+                                                           values: Array[::String]
+                                                         },
+                                                       ],
+                                                       ?marker: ::String,
+                                                       ?max_records: ::Integer
+                                                     ) -> _DescribeMetadataModelExportsToTargetResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMetadataModelExportsToTargetResponseSuccess
+
+      interface _DescribeMetadataModelImportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMetadataModelImportsResponse]
+        def marker: () -> ::String
+        def requests: () -> ::Array[Types::SchemaConversionRequest]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_metadata_model_imports-instance_method
+      def describe_metadata_model_imports: (
+                                             migration_project_identifier: ::String,
+                                             ?filters: Array[
+                                               {
+                                                 name: ::String,
+                                                 values: Array[::String]
+                                               },
+                                             ],
+                                             ?marker: ::String,
+                                             ?max_records: ::Integer
+                                           ) -> _DescribeMetadataModelImportsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMetadataModelImportsResponseSuccess
+
+      interface _DescribeMigrationProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeMigrationProjectsResponse]
+        def marker: () -> ::String
+        def migration_projects: () -> ::Array[Types::MigrationProject]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_migration_projects-instance_method
+      def describe_migration_projects: (
+                                         ?filters: Array[
+                                           {
+                                             name: ::String,
+                                             values: Array[::String]
+                                           },
+                                         ],
+                                         ?max_records: ::Integer,
+                                         ?marker: ::String
+                                       ) -> _DescribeMigrationProjectsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeMigrationProjectsResponseSuccess
+
+      interface _DescribeOrderableReplicationInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeOrderableReplicationInstancesResponse]
+        def orderable_replication_instances: () -> ::Array[Types::OrderableReplicationInstance]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_orderable_replication_instances-instance_method
+      def describe_orderable_replication_instances: (
+                                                      ?max_records: ::Integer,
+                                                      ?marker: ::String
+                                                    ) -> _DescribeOrderableReplicationInstancesResponseSuccess
+                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeOrderableReplicationInstancesResponseSuccess
+
+      interface _DescribePendingMaintenanceActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePendingMaintenanceActionsResponse]
+        def pending_maintenance_actions: () -> ::Array[Types::ResourcePendingMaintenanceActions]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_pending_maintenance_actions-instance_method
+      def describe_pending_maintenance_actions: (
+                                                  ?replication_instance_arn: ::String,
+                                                  ?filters: Array[
+                                                    {
+                                                      name: ::String,
+                                                      values: Array[::String]
+                                                    },
+                                                  ],
+                                                  ?marker: ::String,
+                                                  ?max_records: ::Integer
+                                                ) -> _DescribePendingMaintenanceActionsResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePendingMaintenanceActionsResponseSuccess
+
+      interface _DescribeRecommendationLimitationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRecommendationLimitationsResponse]
+        def next_token: () -> ::String
+        def limitations: () -> ::Array[Types::Limitation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_recommendation_limitations-instance_method
+      def describe_recommendation_limitations: (
+                                                 ?filters: Array[
+                                                   {
+                                                     name: ::String,
+                                                     values: Array[::String]
+                                                   },
+                                                 ],
+                                                 ?max_records: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _DescribeRecommendationLimitationsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRecommendationLimitationsResponseSuccess
+
+      interface _DescribeRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRecommendationsResponse]
+        def next_token: () -> ::String
+        def recommendations: () -> ::Array[Types::Recommendation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_recommendations-instance_method
+      def describe_recommendations: (
+                                      ?filters: Array[
+                                        {
+                                          name: ::String,
+                                          values: Array[::String]
+                                        },
+                                      ],
+                                      ?max_records: ::Integer,
+                                      ?next_token: ::String
+                                    ) -> _DescribeRecommendationsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRecommendationsResponseSuccess
+
+      interface _DescribeRefreshSchemasStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRefreshSchemasStatusResponse]
+        def refresh_schemas_status: () -> Types::RefreshSchemasStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_refresh_schemas_status-instance_method
+      def describe_refresh_schemas_status: (
+                                             endpoint_arn: ::String
+                                           ) -> _DescribeRefreshSchemasStatusResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRefreshSchemasStatusResponseSuccess
+
+      interface _DescribeReplicationConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReplicationConfigsResponse]
+        def marker: () -> ::String
+        def replication_configs: () -> ::Array[Types::ReplicationConfig]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_replication_configs-instance_method
+      def describe_replication_configs: (
+                                          ?filters: Array[
+                                            {
+                                              name: ::String,
+                                              values: Array[::String]
+                                            },
+                                          ],
+                                          ?max_records: ::Integer,
+                                          ?marker: ::String
+                                        ) -> _DescribeReplicationConfigsResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicationConfigsResponseSuccess
+
+      interface _DescribeReplicationInstanceTaskLogsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReplicationInstanceTaskLogsResponse]
+        def replication_instance_arn: () -> ::String
+        def replication_instance_task_logs: () -> ::Array[Types::ReplicationInstanceTaskLog]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_replication_instance_task_logs-instance_method
+      def describe_replication_instance_task_logs: (
+                                                     replication_instance_arn: ::String,
+                                                     ?max_records: ::Integer,
+                                                     ?marker: ::String
+                                                   ) -> _DescribeReplicationInstanceTaskLogsResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicationInstanceTaskLogsResponseSuccess
+
+      interface _DescribeReplicationInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReplicationInstancesResponse]
+        def marker: () -> ::String
+        def replication_instances: () -> ::Array[Types::ReplicationInstance]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_replication_instances-instance_method
+      def describe_replication_instances: (
+                                            ?filters: Array[
+                                              {
+                                                name: ::String,
+                                                values: Array[::String]
+                                              },
+                                            ],
+                                            ?max_records: ::Integer,
+                                            ?marker: ::String
+                                          ) -> _DescribeReplicationInstancesResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicationInstancesResponseSuccess
+
+      interface _DescribeReplicationSubnetGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReplicationSubnetGroupsResponse]
+        def marker: () -> ::String
+        def replication_subnet_groups: () -> ::Array[Types::ReplicationSubnetGroup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_replication_subnet_groups-instance_method
+      def describe_replication_subnet_groups: (
+                                                ?filters: Array[
+                                                  {
+                                                    name: ::String,
+                                                    values: Array[::String]
+                                                  },
+                                                ],
+                                                ?max_records: ::Integer,
+                                                ?marker: ::String
+                                              ) -> _DescribeReplicationSubnetGroupsResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicationSubnetGroupsResponseSuccess
+
+      interface _DescribeReplicationTableStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReplicationTableStatisticsResponse]
+        def replication_config_arn: () -> ::String
+        def marker: () -> ::String
+        def replication_table_statistics: () -> ::Array[Types::TableStatistics]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_replication_table_statistics-instance_method
+      def describe_replication_table_statistics: (
+                                                   replication_config_arn: ::String,
+                                                   ?max_records: ::Integer,
+                                                   ?marker: ::String,
+                                                   ?filters: Array[
+                                                     {
+                                                       name: ::String,
+                                                       values: Array[::String]
+                                                     },
+                                                   ]
+                                                 ) -> _DescribeReplicationTableStatisticsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicationTableStatisticsResponseSuccess
+
+      interface _DescribeReplicationTaskAssessmentResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReplicationTaskAssessmentResultsResponse]
+        def marker: () -> ::String
+        def bucket_name: () -> ::String
+        def replication_task_assessment_results: () -> ::Array[Types::ReplicationTaskAssessmentResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_replication_task_assessment_results-instance_method
+      def describe_replication_task_assessment_results: (
+                                                          ?replication_task_arn: ::String,
+                                                          ?max_records: ::Integer,
+                                                          ?marker: ::String
+                                                        ) -> _DescribeReplicationTaskAssessmentResultsResponseSuccess
+                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicationTaskAssessmentResultsResponseSuccess
+
+      interface _DescribeReplicationTaskAssessmentRunsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReplicationTaskAssessmentRunsResponse]
+        def marker: () -> ::String
+        def replication_task_assessment_runs: () -> ::Array[Types::ReplicationTaskAssessmentRun]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_replication_task_assessment_runs-instance_method
+      def describe_replication_task_assessment_runs: (
+                                                       ?filters: Array[
+                                                         {
+                                                           name: ::String,
+                                                           values: Array[::String]
+                                                         },
+                                                       ],
+                                                       ?max_records: ::Integer,
+                                                       ?marker: ::String
+                                                     ) -> _DescribeReplicationTaskAssessmentRunsResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicationTaskAssessmentRunsResponseSuccess
+
+      interface _DescribeReplicationTaskIndividualAssessmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReplicationTaskIndividualAssessmentsResponse]
+        def marker: () -> ::String
+        def replication_task_individual_assessments: () -> ::Array[Types::ReplicationTaskIndividualAssessment]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_replication_task_individual_assessments-instance_method
+      def describe_replication_task_individual_assessments: (
+                                                              ?filters: Array[
+                                                                {
+                                                                  name: ::String,
+                                                                  values: Array[::String]
+                                                                },
+                                                              ],
+                                                              ?max_records: ::Integer,
+                                                              ?marker: ::String
+                                                            ) -> _DescribeReplicationTaskIndividualAssessmentsResponseSuccess
+                                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicationTaskIndividualAssessmentsResponseSuccess
+
+      interface _DescribeReplicationTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReplicationTasksResponse]
+        def marker: () -> ::String
+        def replication_tasks: () -> ::Array[Types::ReplicationTask]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_replication_tasks-instance_method
+      def describe_replication_tasks: (
+                                        ?filters: Array[
+                                          {
+                                            name: ::String,
+                                            values: Array[::String]
+                                          },
+                                        ],
+                                        ?max_records: ::Integer,
+                                        ?marker: ::String,
+                                        ?without_settings: bool
+                                      ) -> _DescribeReplicationTasksResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicationTasksResponseSuccess
+
+      interface _DescribeReplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReplicationsResponse]
+        def marker: () -> ::String
+        def replications: () -> ::Array[Types::Replication]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_replications-instance_method
+      def describe_replications: (
+                                   ?filters: Array[
+                                     {
+                                       name: ::String,
+                                       values: Array[::String]
+                                     },
+                                   ],
+                                   ?max_records: ::Integer,
+                                   ?marker: ::String
+                                 ) -> _DescribeReplicationsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicationsResponseSuccess
+
+      interface _DescribeSchemasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSchemasResponse]
+        def marker: () -> ::String
+        def schemas: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_schemas-instance_method
+      def describe_schemas: (
+                              endpoint_arn: ::String,
+                              ?max_records: ::Integer,
+                              ?marker: ::String
+                            ) -> _DescribeSchemasResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSchemasResponseSuccess
+
+      interface _DescribeTableStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTableStatisticsResponse]
+        def replication_task_arn: () -> ::String
+        def table_statistics: () -> ::Array[Types::TableStatistics]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#describe_table_statistics-instance_method
+      def describe_table_statistics: (
+                                       replication_task_arn: ::String,
+                                       ?max_records: ::Integer,
+                                       ?marker: ::String,
+                                       ?filters: Array[
+                                         {
+                                           name: ::String,
+                                           values: Array[::String]
+                                         },
+                                       ]
+                                     ) -> _DescribeTableStatisticsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTableStatisticsResponseSuccess
+
+      interface _ExportMetadataModelAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportMetadataModelAssessmentResponse]
+        def pdf_report: () -> Types::ExportMetadataModelAssessmentResultEntry
+        def csv_report: () -> Types::ExportMetadataModelAssessmentResultEntry
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#export_metadata_model_assessment-instance_method
+      def export_metadata_model_assessment: (
+                                              migration_project_identifier: ::String,
+                                              selection_rules: ::String,
+                                              ?file_name: ::String,
+                                              ?assessment_report_types: Array[("pdf" | "csv")]
+                                            ) -> _ExportMetadataModelAssessmentResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportMetadataModelAssessmentResponseSuccess
+
+      interface _ImportCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ImportCertificateResponse]
+        def certificate: () -> Types::Certificate
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#import_certificate-instance_method
+      def import_certificate: (
+                                certificate_identifier: ::String,
+                                ?certificate_pem: ::String,
+                                ?certificate_wallet: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String?,
+                                    value: ::String?,
+                                    resource_arn: ::String?
+                                  },
+                                ]
+                              ) -> _ImportCertificateResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportCertificateResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tag_list: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    ?resource_arn: ::String,
+                                    ?resource_arn_list: Array[::String]
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _ModifyConversionConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyConversionConfigurationResponse]
+        def migration_project_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#modify_conversion_configuration-instance_method
+      def modify_conversion_configuration: (
+                                             migration_project_identifier: ::String,
+                                             conversion_configuration: ::String
+                                           ) -> _ModifyConversionConfigurationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyConversionConfigurationResponseSuccess
+
+      interface _ModifyDataProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyDataProviderResponse]
+        def data_provider: () -> Types::DataProvider
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#modify_data_provider-instance_method
+      def modify_data_provider: (
+                                  data_provider_identifier: ::String,
+                                  ?data_provider_name: ::String,
+                                  ?description: ::String,
+                                  ?engine: ::String,
+                                  ?exact_settings: bool,
+                                  ?settings: {
+                                    redshift_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?
+                                    }?,
+                                    postgre_sql_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      certificate_arn: ::String?
+                                    }?,
+                                    my_sql_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      certificate_arn: ::String?
+                                    }?,
+                                    oracle_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      certificate_arn: ::String?,
+                                      asm_server: ::String?,
+                                      secrets_manager_oracle_asm_secret_id: ::String?,
+                                      secrets_manager_oracle_asm_access_role_arn: ::String?,
+                                      secrets_manager_security_db_encryption_secret_id: ::String?,
+                                      secrets_manager_security_db_encryption_access_role_arn: ::String?
+                                    }?,
+                                    microsoft_sql_server_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      certificate_arn: ::String?
+                                    }?,
+                                    doc_db_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      certificate_arn: ::String?
+                                    }?,
+                                    maria_db_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      certificate_arn: ::String?
+                                    }?,
+                                    mongo_db_settings: {
+                                      server_name: ::String?,
+                                      port: ::Integer?,
+                                      database_name: ::String?,
+                                      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+                                      certificate_arn: ::String?,
+                                      auth_type: ("no" | "password")?,
+                                      auth_source: ::String?,
+                                      auth_mechanism: ("default" | "mongodb_cr" | "scram_sha_1")?
+                                    }?
+                                  }
+                                ) -> _ModifyDataProviderResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDataProviderResponseSuccess
+
+      interface _ModifyEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyEndpointResponse]
+        def endpoint: () -> Types::Endpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#modify_endpoint-instance_method
+      def modify_endpoint: (
+                             endpoint_arn: ::String,
+                             ?endpoint_identifier: ::String,
+                             ?endpoint_type: ("source" | "target"),
+                             ?engine_name: ::String,
+                             ?username: ::String,
+                             ?password: ::String,
+                             ?server_name: ::String,
+                             ?port: ::Integer,
+                             ?database_name: ::String,
+                             ?extra_connection_attributes: ::String,
+                             ?certificate_arn: ::String,
+                             ?ssl_mode: ("none" | "require" | "verify-ca" | "verify-full"),
+                             ?service_access_role_arn: ::String,
+                             ?external_table_definition: ::String,
+                             ?dynamo_db_settings: {
+                               service_access_role_arn: ::String
+                             },
+                             ?s3_settings: {
+                               service_access_role_arn: ::String?,
+                               external_table_definition: ::String?,
+                               csv_row_delimiter: ::String?,
+                               csv_delimiter: ::String?,
+                               bucket_folder: ::String?,
+                               bucket_name: ::String?,
+                               compression_type: ("none" | "gzip")?,
+                               encryption_mode: ("sse-s3" | "sse-kms")?,
+                               server_side_encryption_kms_key_id: ::String?,
+                               data_format: ("csv" | "parquet")?,
+                               encoding_type: ("plain" | "plain-dictionary" | "rle-dictionary")?,
+                               dict_page_size_limit: ::Integer?,
+                               row_group_length: ::Integer?,
+                               data_page_size: ::Integer?,
+                               parquet_version: ("parquet-1-0" | "parquet-2-0")?,
+                               enable_statistics: bool?,
+                               include_op_for_full_load: bool?,
+                               cdc_inserts_only: bool?,
+                               timestamp_column_name: ::String?,
+                               parquet_timestamp_in_millisecond: bool?,
+                               cdc_inserts_and_updates: bool?,
+                               date_partition_enabled: bool?,
+                               date_partition_sequence: ("YYYYMMDD" | "YYYYMMDDHH" | "YYYYMM" | "MMYYYYDD" | "DDMMYYYY")?,
+                               date_partition_delimiter: ("SLASH" | "UNDERSCORE" | "DASH" | "NONE")?,
+                               use_csv_no_sup_value: bool?,
+                               csv_no_sup_value: ::String?,
+                               preserve_transactions: bool?,
+                               cdc_path: ::String?,
+                               use_task_start_time_for_full_load_timestamp: bool?,
+                               canned_acl_for_objects: ("none" | "private" | "public-read" | "public-read-write" | "authenticated-read" | "aws-exec-read" | "bucket-owner-read" | "bucket-owner-full-control")?,
+                               add_column_name: bool?,
+                               cdc_max_batch_interval: ::Integer?,
+                               cdc_min_file_size: ::Integer?,
+                               csv_null_value: ::String?,
+                               ignore_header_rows: ::Integer?,
+                               max_file_size: ::Integer?,
+                               rfc_4180: bool?,
+                               date_partition_timezone: ::String?,
+                               add_trailing_padding_character: bool?,
+                               expected_bucket_owner: ::String?,
+                               glue_catalog_generation: bool?
+                             },
+                             ?dms_transfer_settings: {
+                               service_access_role_arn: ::String?,
+                               bucket_name: ::String?
+                             },
+                             ?mongo_db_settings: {
+                               username: ::String?,
+                               password: ::String?,
+                               server_name: ::String?,
+                               port: ::Integer?,
+                               database_name: ::String?,
+                               auth_type: ("no" | "password")?,
+                               auth_mechanism: ("default" | "mongodb_cr" | "scram_sha_1")?,
+                               nesting_level: ("none" | "one")?,
+                               extract_doc_id: ::String?,
+                               docs_to_investigate: ::String?,
+                               auth_source: ::String?,
+                               kms_key_id: ::String?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               use_update_look_up: bool?,
+                               replicate_shard_collections: bool?
+                             },
+                             ?kinesis_settings: {
+                               stream_arn: ::String?,
+                               message_format: ("json" | "json-unformatted")?,
+                               service_access_role_arn: ::String?,
+                               include_transaction_details: bool?,
+                               include_partition_value: bool?,
+                               partition_include_schema_table: bool?,
+                               include_table_alter_operations: bool?,
+                               include_control_details: bool?,
+                               include_null_and_empty: bool?,
+                               no_hex_prefix: bool?
+                             },
+                             ?kafka_settings: {
+                               broker: ::String?,
+                               topic: ::String?,
+                               message_format: ("json" | "json-unformatted")?,
+                               include_transaction_details: bool?,
+                               include_partition_value: bool?,
+                               partition_include_schema_table: bool?,
+                               include_table_alter_operations: bool?,
+                               include_control_details: bool?,
+                               message_max_bytes: ::Integer?,
+                               include_null_and_empty: bool?,
+                               security_protocol: ("plaintext" | "ssl-authentication" | "ssl-encryption" | "sasl-ssl")?,
+                               ssl_client_certificate_arn: ::String?,
+                               ssl_client_key_arn: ::String?,
+                               ssl_client_key_password: ::String?,
+                               ssl_ca_certificate_arn: ::String?,
+                               sasl_username: ::String?,
+                               sasl_password: ::String?,
+                               no_hex_prefix: bool?,
+                               sasl_mechanism: ("scram-sha-512" | "plain")?,
+                               ssl_endpoint_identification_algorithm: ("none" | "https")?
+                             },
+                             ?elasticsearch_settings: {
+                               service_access_role_arn: ::String,
+                               endpoint_uri: ::String,
+                               full_load_error_percentage: ::Integer?,
+                               error_retry_duration: ::Integer?,
+                               use_new_mapping_type: bool?
+                             },
+                             ?neptune_settings: {
+                               service_access_role_arn: ::String?,
+                               s3_bucket_name: ::String,
+                               s3_bucket_folder: ::String,
+                               error_retry_duration: ::Integer?,
+                               max_file_size: ::Integer?,
+                               max_retry_count: ::Integer?,
+                               iam_auth_enabled: bool?
+                             },
+                             ?redshift_settings: {
+                               accept_any_date: bool?,
+                               after_connect_script: ::String?,
+                               bucket_folder: ::String?,
+                               bucket_name: ::String?,
+                               case_sensitive_names: bool?,
+                               comp_update: bool?,
+                               connection_timeout: ::Integer?,
+                               database_name: ::String?,
+                               date_format: ::String?,
+                               empty_as_null: bool?,
+                               encryption_mode: ("sse-s3" | "sse-kms")?,
+                               explicit_ids: bool?,
+                               file_transfer_upload_streams: ::Integer?,
+                               load_timeout: ::Integer?,
+                               max_file_size: ::Integer?,
+                               password: ::String?,
+                               port: ::Integer?,
+                               remove_quotes: bool?,
+                               replace_invalid_chars: ::String?,
+                               replace_chars: ::String?,
+                               server_name: ::String?,
+                               service_access_role_arn: ::String?,
+                               server_side_encryption_kms_key_id: ::String?,
+                               time_format: ::String?,
+                               trim_blanks: bool?,
+                               truncate_columns: bool?,
+                               username: ::String?,
+                               write_buffer_size: ::Integer?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               map_boolean_as_boolean: bool?
+                             },
+                             ?postgre_sql_settings: {
+                               after_connect_script: ::String?,
+                               capture_ddls: bool?,
+                               max_file_size: ::Integer?,
+                               database_name: ::String?,
+                               ddl_artifacts_schema: ::String?,
+                               execute_timeout: ::Integer?,
+                               fail_tasks_on_lob_truncation: bool?,
+                               heartbeat_enable: bool?,
+                               heartbeat_schema: ::String?,
+                               heartbeat_frequency: ::Integer?,
+                               password: ::String?,
+                               port: ::Integer?,
+                               server_name: ::String?,
+                               username: ::String?,
+                               slot_name: ::String?,
+                               plugin_name: ("no-preference" | "test-decoding" | "pglogical")?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               trim_space_in_char: bool?,
+                               map_boolean_as_boolean: bool?,
+                               map_jsonb_as_clob: bool?,
+                               map_long_varchar_as: ("wstring" | "clob" | "nclob")?,
+                               database_mode: ("default" | "babelfish")?,
+                               babelfish_database_name: ::String?
+                             },
+                             ?my_sql_settings: {
+                               after_connect_script: ::String?,
+                               clean_source_metadata_on_mismatch: bool?,
+                               database_name: ::String?,
+                               events_poll_interval: ::Integer?,
+                               target_db_type: ("specific-database" | "multiple-databases")?,
+                               max_file_size: ::Integer?,
+                               parallel_load_threads: ::Integer?,
+                               password: ::String?,
+                               port: ::Integer?,
+                               server_name: ::String?,
+                               server_timezone: ::String?,
+                               username: ::String?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               execute_timeout: ::Integer?
+                             },
+                             ?oracle_settings: {
+                               add_supplemental_logging: bool?,
+                               archived_log_dest_id: ::Integer?,
+                               additional_archived_log_dest_id: ::Integer?,
+                               extra_archived_log_dest_ids: Array[::Integer]?,
+                               allow_select_nested_tables: bool?,
+                               parallel_asm_read_threads: ::Integer?,
+                               read_ahead_blocks: ::Integer?,
+                               access_alternate_directly: bool?,
+                               use_alternate_folder_for_online: bool?,
+                               oracle_path_prefix: ::String?,
+                               use_path_prefix: ::String?,
+                               replace_path_prefix: bool?,
+                               enable_homogenous_tablespace: bool?,
+                               direct_path_no_log: bool?,
+                               archived_logs_only: bool?,
+                               asm_password: ::String?,
+                               asm_server: ::String?,
+                               asm_user: ::String?,
+                               char_length_semantics: ("default" | "char" | "byte")?,
+                               database_name: ::String?,
+                               direct_path_parallel_load: bool?,
+                               fail_tasks_on_lob_truncation: bool?,
+                               number_datatype_scale: ::Integer?,
+                               password: ::String?,
+                               port: ::Integer?,
+                               read_table_space_name: bool?,
+                               retry_interval: ::Integer?,
+                               security_db_encryption: ::String?,
+                               security_db_encryption_name: ::String?,
+                               server_name: ::String?,
+                               spatial_data_option_to_geo_json_function_name: ::String?,
+                               standby_delay_time: ::Integer?,
+                               username: ::String?,
+                               use_b_file: bool?,
+                               use_direct_path_full_load: bool?,
+                               use_logminer_reader: bool?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               secrets_manager_oracle_asm_access_role_arn: ::String?,
+                               secrets_manager_oracle_asm_secret_id: ::String?,
+                               trim_space_in_char: bool?,
+                               convert_timestamp_with_zone_to_utc: bool?,
+                               open_transaction_window: ::Integer?
+                             },
+                             ?sybase_settings: {
+                               database_name: ::String?,
+                               password: ::String?,
+                               port: ::Integer?,
+                               server_name: ::String?,
+                               username: ::String?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?
+                             },
+                             ?microsoft_sql_server_settings: {
+                               port: ::Integer?,
+                               bcp_packet_size: ::Integer?,
+                               database_name: ::String?,
+                               control_tables_file_group: ::String?,
+                               password: ::String?,
+                               query_single_always_on_node: bool?,
+                               read_backup_only: bool?,
+                               safeguard_policy: ("rely-on-sql-server-replication-agent" | "exclusive-automatic-truncation" | "shared-automatic-truncation")?,
+                               server_name: ::String?,
+                               username: ::String?,
+                               use_bcp_full_load: bool?,
+                               use_third_party_backup_device: bool?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               trim_space_in_char: bool?,
+                               tlog_access_mode: ("BackupOnly" | "PreferBackup" | "PreferTlog" | "TlogOnly")?,
+                               force_lob_lookup: bool?
+                             },
+                             ?ibm_db_2_settings: {
+                               database_name: ::String?,
+                               password: ::String?,
+                               port: ::Integer?,
+                               server_name: ::String?,
+                               set_data_capture_changes: bool?,
+                               current_lsn: ::String?,
+                               max_k_bytes_per_read: ::Integer?,
+                               username: ::String?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               load_timeout: ::Integer?,
+                               write_buffer_size: ::Integer?,
+                               max_file_size: ::Integer?,
+                               keep_csv_files: bool?
+                             },
+                             ?doc_db_settings: {
+                               username: ::String?,
+                               password: ::String?,
+                               server_name: ::String?,
+                               port: ::Integer?,
+                               database_name: ::String?,
+                               nesting_level: ("none" | "one")?,
+                               extract_doc_id: bool?,
+                               docs_to_investigate: ::Integer?,
+                               kms_key_id: ::String?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?,
+                               use_update_look_up: bool?,
+                               replicate_shard_collections: bool?
+                             },
+                             ?redis_settings: {
+                               server_name: ::String,
+                               port: ::Integer,
+                               ssl_security_protocol: ("plaintext" | "ssl-encryption")?,
+                               auth_type: ("none" | "auth-role" | "auth-token")?,
+                               auth_user_name: ::String?,
+                               auth_password: ::String?,
+                               ssl_ca_certificate_arn: ::String?
+                             },
+                             ?exact_settings: bool,
+                             ?gcp_my_sql_settings: {
+                               after_connect_script: ::String?,
+                               clean_source_metadata_on_mismatch: bool?,
+                               database_name: ::String?,
+                               events_poll_interval: ::Integer?,
+                               target_db_type: ("specific-database" | "multiple-databases")?,
+                               max_file_size: ::Integer?,
+                               parallel_load_threads: ::Integer?,
+                               password: ::String?,
+                               port: ::Integer?,
+                               server_name: ::String?,
+                               server_timezone: ::String?,
+                               username: ::String?,
+                               secrets_manager_access_role_arn: ::String?,
+                               secrets_manager_secret_id: ::String?
+                             },
+                             ?timestream_settings: {
+                               database_name: ::String,
+                               memory_duration: ::Integer,
+                               magnetic_duration: ::Integer,
+                               cdc_inserts_and_updates: bool?,
+                               enable_magnetic_store_writes: bool?
+                             }
+                           ) -> _ModifyEndpointResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyEndpointResponseSuccess
+
+      interface _ModifyEventSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyEventSubscriptionResponse]
+        def event_subscription: () -> Types::EventSubscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#modify_event_subscription-instance_method
+      def modify_event_subscription: (
+                                       subscription_name: ::String,
+                                       ?sns_topic_arn: ::String,
+                                       ?source_type: ::String,
+                                       ?event_categories: Array[::String],
+                                       ?enabled: bool
+                                     ) -> _ModifyEventSubscriptionResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyEventSubscriptionResponseSuccess
+
+      interface _ModifyInstanceProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyInstanceProfileResponse]
+        def instance_profile: () -> Types::InstanceProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#modify_instance_profile-instance_method
+      def modify_instance_profile: (
+                                     instance_profile_identifier: ::String,
+                                     ?availability_zone: ::String,
+                                     ?kms_key_arn: ::String,
+                                     ?publicly_accessible: bool,
+                                     ?network_type: ::String,
+                                     ?instance_profile_name: ::String,
+                                     ?description: ::String,
+                                     ?subnet_group_identifier: ::String,
+                                     ?vpc_security_groups: Array[::String]
+                                   ) -> _ModifyInstanceProfileResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyInstanceProfileResponseSuccess
+
+      interface _ModifyMigrationProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyMigrationProjectResponse]
+        def migration_project: () -> Types::MigrationProject
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#modify_migration_project-instance_method
+      def modify_migration_project: (
+                                      migration_project_identifier: ::String,
+                                      ?migration_project_name: ::String,
+                                      ?source_data_provider_descriptors: Array[
+                                        {
+                                          data_provider_identifier: ::String,
+                                          secrets_manager_secret_id: ::String?,
+                                          secrets_manager_access_role_arn: ::String?
+                                        },
+                                      ],
+                                      ?target_data_provider_descriptors: Array[
+                                        {
+                                          data_provider_identifier: ::String,
+                                          secrets_manager_secret_id: ::String?,
+                                          secrets_manager_access_role_arn: ::String?
+                                        },
+                                      ],
+                                      ?instance_profile_identifier: ::String,
+                                      ?transformation_rules: ::String,
+                                      ?description: ::String,
+                                      ?schema_conversion_application_attributes: {
+                                        s3_bucket_path: ::String?,
+                                        s3_bucket_role_arn: ::String?
+                                      }
+                                    ) -> _ModifyMigrationProjectResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyMigrationProjectResponseSuccess
+
+      interface _ModifyReplicationConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyReplicationConfigResponse]
+        def replication_config: () -> Types::ReplicationConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#modify_replication_config-instance_method
+      def modify_replication_config: (
+                                       replication_config_arn: ::String,
+                                       ?replication_config_identifier: ::String,
+                                       ?replication_type: ("full-load" | "cdc" | "full-load-and-cdc"),
+                                       ?table_mappings: ::String,
+                                       ?replication_settings: ::String,
+                                       ?supplemental_settings: ::String,
+                                       ?compute_config: {
+                                         availability_zone: ::String?,
+                                         dns_name_servers: ::String?,
+                                         kms_key_id: ::String?,
+                                         max_capacity_units: ::Integer?,
+                                         min_capacity_units: ::Integer?,
+                                         multi_az: bool?,
+                                         preferred_maintenance_window: ::String?,
+                                         replication_subnet_group_id: ::String?,
+                                         vpc_security_group_ids: Array[::String]?
+                                       },
+                                       ?source_endpoint_arn: ::String,
+                                       ?target_endpoint_arn: ::String
+                                     ) -> _ModifyReplicationConfigResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyReplicationConfigResponseSuccess
+
+      interface _ModifyReplicationInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyReplicationInstanceResponse]
+        def replication_instance: () -> Types::ReplicationInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#modify_replication_instance-instance_method
+      def modify_replication_instance: (
+                                         replication_instance_arn: ::String,
+                                         ?allocated_storage: ::Integer,
+                                         ?apply_immediately: bool,
+                                         ?replication_instance_class: ::String,
+                                         ?vpc_security_group_ids: Array[::String],
+                                         ?preferred_maintenance_window: ::String,
+                                         ?multi_az: bool,
+                                         ?engine_version: ::String,
+                                         ?allow_major_version_upgrade: bool,
+                                         ?auto_minor_version_upgrade: bool,
+                                         ?replication_instance_identifier: ::String,
+                                         ?network_type: ::String
+                                       ) -> _ModifyReplicationInstanceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyReplicationInstanceResponseSuccess
+
+      interface _ModifyReplicationSubnetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyReplicationSubnetGroupResponse]
+        def replication_subnet_group: () -> Types::ReplicationSubnetGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#modify_replication_subnet_group-instance_method
+      def modify_replication_subnet_group: (
+                                             replication_subnet_group_identifier: ::String,
+                                             ?replication_subnet_group_description: ::String,
+                                             subnet_ids: Array[::String]
+                                           ) -> _ModifyReplicationSubnetGroupResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyReplicationSubnetGroupResponseSuccess
+
+      interface _ModifyReplicationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyReplicationTaskResponse]
+        def replication_task: () -> Types::ReplicationTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#modify_replication_task-instance_method
+      def modify_replication_task: (
+                                     replication_task_arn: ::String,
+                                     ?replication_task_identifier: ::String,
+                                     ?migration_type: ("full-load" | "cdc" | "full-load-and-cdc"),
+                                     ?table_mappings: ::String,
+                                     ?replication_task_settings: ::String,
+                                     ?cdc_start_time: ::Time,
+                                     ?cdc_start_position: ::String,
+                                     ?cdc_stop_position: ::String,
+                                     ?task_data: ::String
+                                   ) -> _ModifyReplicationTaskResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyReplicationTaskResponseSuccess
+
+      interface _MoveReplicationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::MoveReplicationTaskResponse]
+        def replication_task: () -> Types::ReplicationTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#move_replication_task-instance_method
+      def move_replication_task: (
+                                   replication_task_arn: ::String,
+                                   target_replication_instance_arn: ::String
+                                 ) -> _MoveReplicationTaskResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MoveReplicationTaskResponseSuccess
+
+      interface _RebootReplicationInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RebootReplicationInstanceResponse]
+        def replication_instance: () -> Types::ReplicationInstance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#reboot_replication_instance-instance_method
+      def reboot_replication_instance: (
+                                         replication_instance_arn: ::String,
+                                         ?force_failover: bool,
+                                         ?force_planned_failover: bool
+                                       ) -> _RebootReplicationInstanceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootReplicationInstanceResponseSuccess
+
+      interface _RefreshSchemasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RefreshSchemasResponse]
+        def refresh_schemas_status: () -> Types::RefreshSchemasStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#refresh_schemas-instance_method
+      def refresh_schemas: (
+                             endpoint_arn: ::String,
+                             replication_instance_arn: ::String
+                           ) -> _RefreshSchemasResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RefreshSchemasResponseSuccess
+
+      interface _ReloadReplicationTablesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReloadReplicationTablesResponse]
+        def replication_config_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#reload_replication_tables-instance_method
+      def reload_replication_tables: (
+                                       replication_config_arn: ::String,
+                                       tables_to_reload: Array[
+                                         {
+                                           schema_name: ::String,
+                                           table_name: ::String
+                                         },
+                                       ],
+                                       ?reload_option: ("data-reload" | "validate-only")
+                                     ) -> _ReloadReplicationTablesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReloadReplicationTablesResponseSuccess
+
+      interface _ReloadTablesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ReloadTablesResponse]
+        def replication_task_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#reload_tables-instance_method
+      def reload_tables: (
+                           replication_task_arn: ::String,
+                           tables_to_reload: Array[
+                             {
+                               schema_name: ::String,
+                               table_name: ::String
+                             },
+                           ],
+                           ?reload_option: ("data-reload" | "validate-only")
+                         ) -> _ReloadTablesResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReloadTablesResponseSuccess
+
+      interface _RemoveTagsFromResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveTagsFromResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#remove_tags_from_resource-instance_method
+      def remove_tags_from_resource: (
+                                       resource_arn: ::String,
+                                       tag_keys: Array[::String]
+                                     ) -> _RemoveTagsFromResourceResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveTagsFromResourceResponseSuccess
+
+      interface _RunFleetAdvisorLsaAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RunFleetAdvisorLsaAnalysisResponse]
+        def lsa_analysis_id: () -> ::String
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#run_fleet_advisor_lsa_analysis-instance_method
+      def run_fleet_advisor_lsa_analysis: () -> _RunFleetAdvisorLsaAnalysisResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RunFleetAdvisorLsaAnalysisResponseSuccess
+
+      interface _StartExtensionPackAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartExtensionPackAssociationResponse]
+        def request_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#start_extension_pack_association-instance_method
+      def start_extension_pack_association: (
+                                              migration_project_identifier: ::String
+                                            ) -> _StartExtensionPackAssociationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartExtensionPackAssociationResponseSuccess
+
+      interface _StartMetadataModelAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMetadataModelAssessmentResponse]
+        def request_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#start_metadata_model_assessment-instance_method
+      def start_metadata_model_assessment: (
+                                             migration_project_identifier: ::String,
+                                             selection_rules: ::String
+                                           ) -> _StartMetadataModelAssessmentResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMetadataModelAssessmentResponseSuccess
+
+      interface _StartMetadataModelConversionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMetadataModelConversionResponse]
+        def request_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#start_metadata_model_conversion-instance_method
+      def start_metadata_model_conversion: (
+                                             migration_project_identifier: ::String,
+                                             selection_rules: ::String
+                                           ) -> _StartMetadataModelConversionResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMetadataModelConversionResponseSuccess
+
+      interface _StartMetadataModelExportAsScriptResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMetadataModelExportAsScriptResponse]
+        def request_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#start_metadata_model_export_as_script-instance_method
+      def start_metadata_model_export_as_script: (
+                                                   migration_project_identifier: ::String,
+                                                   selection_rules: ::String,
+                                                   origin: ("SOURCE" | "TARGET"),
+                                                   ?file_name: ::String
+                                                 ) -> _StartMetadataModelExportAsScriptResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMetadataModelExportAsScriptResponseSuccess
+
+      interface _StartMetadataModelExportToTargetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMetadataModelExportToTargetResponse]
+        def request_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#start_metadata_model_export_to_target-instance_method
+      def start_metadata_model_export_to_target: (
+                                                   migration_project_identifier: ::String,
+                                                   selection_rules: ::String,
+                                                   ?overwrite_extension_pack: bool
+                                                 ) -> _StartMetadataModelExportToTargetResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMetadataModelExportToTargetResponseSuccess
+
+      interface _StartMetadataModelImportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartMetadataModelImportResponse]
+        def request_identifier: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#start_metadata_model_import-instance_method
+      def start_metadata_model_import: (
+                                         migration_project_identifier: ::String,
+                                         selection_rules: ::String,
+                                         origin: ("SOURCE" | "TARGET"),
+                                         ?refresh: bool
+                                       ) -> _StartMetadataModelImportResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMetadataModelImportResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#start_recommendations-instance_method
+      def start_recommendations: (
+                                   database_id: ::String,
+                                   settings: {
+                                     instance_sizing_type: ::String,
+                                     workload_type: ::String
+                                   }
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StartReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartReplicationResponse]
+        def replication: () -> Types::Replication
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#start_replication-instance_method
+      def start_replication: (
+                               replication_config_arn: ::String,
+                               start_replication_type: ::String,
+                               ?cdc_start_time: ::Time,
+                               ?cdc_start_position: ::String,
+                               ?cdc_stop_position: ::String
+                             ) -> _StartReplicationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReplicationResponseSuccess
+
+      interface _StartReplicationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartReplicationTaskResponse]
+        def replication_task: () -> Types::ReplicationTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#start_replication_task-instance_method
+      def start_replication_task: (
+                                    replication_task_arn: ::String,
+                                    start_replication_task_type: ("start-replication" | "resume-processing" | "reload-target"),
+                                    ?cdc_start_time: ::Time,
+                                    ?cdc_start_position: ::String,
+                                    ?cdc_stop_position: ::String
+                                  ) -> _StartReplicationTaskResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReplicationTaskResponseSuccess
+
+      interface _StartReplicationTaskAssessmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartReplicationTaskAssessmentResponse]
+        def replication_task: () -> Types::ReplicationTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#start_replication_task_assessment-instance_method
+      def start_replication_task_assessment: (
+                                               replication_task_arn: ::String
+                                             ) -> _StartReplicationTaskAssessmentResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReplicationTaskAssessmentResponseSuccess
+
+      interface _StartReplicationTaskAssessmentRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartReplicationTaskAssessmentRunResponse]
+        def replication_task_assessment_run: () -> Types::ReplicationTaskAssessmentRun
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#start_replication_task_assessment_run-instance_method
+      def start_replication_task_assessment_run: (
+                                                   replication_task_arn: ::String,
+                                                   service_access_role_arn: ::String,
+                                                   result_location_bucket: ::String,
+                                                   ?result_location_folder: ::String,
+                                                   ?result_encryption_mode: ::String,
+                                                   ?result_kms_key_arn: ::String,
+                                                   assessment_run_name: ::String,
+                                                   ?include_only: Array[::String],
+                                                   ?exclude: Array[::String]
+                                                 ) -> _StartReplicationTaskAssessmentRunResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReplicationTaskAssessmentRunResponseSuccess
+
+      interface _StopReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopReplicationResponse]
+        def replication: () -> Types::Replication
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#stop_replication-instance_method
+      def stop_replication: (
+                              replication_config_arn: ::String
+                            ) -> _StopReplicationResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopReplicationResponseSuccess
+
+      interface _StopReplicationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopReplicationTaskResponse]
+        def replication_task: () -> Types::ReplicationTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#stop_replication_task-instance_method
+      def stop_replication_task: (
+                                   replication_task_arn: ::String
+                                 ) -> _StopReplicationTaskResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopReplicationTaskResponseSuccess
+
+      interface _TestConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TestConnectionResponse]
+        def connection: () -> Types::Connection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#test_connection-instance_method
+      def test_connection: (
+                             replication_instance_arn: ::String,
+                             endpoint_arn: ::String
+                           ) -> _TestConnectionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestConnectionResponseSuccess
+
+      interface _UpdateSubscriptionsToEventBridgeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubscriptionsToEventBridgeResponse]
+        def result: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#update_subscriptions_to_event_bridge-instance_method
+      def update_subscriptions_to_event_bridge: (
+                                                  ?force_move: bool
+                                                ) -> _UpdateSubscriptionsToEventBridgeResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubscriptionsToEventBridgeResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DatabaseMigrationService/Client.html#wait_until-instance_method
+      def wait_until: (:endpoint_deleted waiter_name, 
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeEndpointsResponseSuccess
+                    | (:endpoint_deleted waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeEndpointsResponseSuccess
+                    | (:replication_instance_available waiter_name, 
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeReplicationInstancesResponseSuccess
+                    | (:replication_instance_available waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeReplicationInstancesResponseSuccess
+                    | (:replication_instance_deleted waiter_name, 
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeReplicationInstancesResponseSuccess
+                    | (:replication_instance_deleted waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeReplicationInstancesResponseSuccess
+                    | (:replication_task_deleted waiter_name, 
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?without_settings: bool
+                  ) -> Client::_DescribeReplicationTasksResponseSuccess
+                    | (:replication_task_deleted waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeReplicationTasksResponseSuccess
+                    | (:replication_task_ready waiter_name, 
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?without_settings: bool
+                  ) -> Client::_DescribeReplicationTasksResponseSuccess
+                    | (:replication_task_ready waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeReplicationTasksResponseSuccess
+                    | (:replication_task_running waiter_name, 
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?without_settings: bool
+                  ) -> Client::_DescribeReplicationTasksResponseSuccess
+                    | (:replication_task_running waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeReplicationTasksResponseSuccess
+                    | (:replication_task_stopped waiter_name, 
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String,
+                    ?without_settings: bool
+                  ) -> Client::_DescribeReplicationTasksResponseSuccess
+                    | (:replication_task_stopped waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeReplicationTasksResponseSuccess
+                    | (:test_connection_succeeds waiter_name, 
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?max_records: ::Integer,
+                    ?marker: ::String
+                  ) -> Client::_DescribeConnectionsResponseSuccess
+                    | (:test_connection_succeeds waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeConnectionsResponseSuccess
+    end
+  end
+end
+

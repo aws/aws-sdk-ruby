@@ -54,14 +54,15 @@ module Aws::SNS
     #   APNS (Apple Push Notification Service), APNS\_SANDBOX, and GCM
     #   (Firebase Cloud Messaging).
     # @option options [required, Hash<String,String>] :attributes
-    #   For a list of attributes, see [SetPlatformApplicationAttributes][1].
+    #   For a list of attributes, see [ `SetPlatformApplicationAttributes`
+    #   ][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html
     # @return [PlatformApplication]
     def create_platform_application(options = {})
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_platform_application(options)
       end
       PlatformApplication.new(
@@ -98,7 +99,7 @@ module Aws::SNS
     # @option options [Hash<String,String>] :attributes
     #   A map of attributes with their corresponding values.
     #
-    #   The following lists the names, descriptions, and values of the special
+    #   The following lists names, descriptions, and values of the special
     #   request parameters that the `CreateTopic` action uses:
     #
     #   * `DeliveryPolicy` – The policy that defines how Amazon SNS retries
@@ -136,7 +137,13 @@ module Aws::SNS
     #
     #   The following attributes apply only to [FIFO topics][4]:
     #
-    #   * `FifoTopic` – When this is set to `true`, a FIFO topic is created.
+    #   * `ArchivePolicy` – Adds or updates an inline policy document to
+    #     archive messages stored in the specified Amazon SNS topic.
+    #
+    #   * `BeginningArchiveTime` – The earliest starting point at which a
+    #     message in the topic’s archive can be replayed from. This point in
+    #     time is based on the configured message retention period set by the
+    #     topic’s message archiving policy.
     #
     #   * `ContentBasedDeduplication` – Enables content-based deduplication
     #     for FIFO topics.
@@ -178,7 +185,7 @@ module Aws::SNS
     #   Length Constraints: Maximum length of 30,720.
     # @return [Topic]
     def create_topic(options = {})
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_topic(options)
       end
       Topic.new(
@@ -205,7 +212,7 @@ module Aws::SNS
     # @return [PlatformApplication::Collection]
     def platform_applications(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_platform_applications(options)
         end
         resp.each_page do |page|
@@ -247,7 +254,7 @@ module Aws::SNS
     # @return [Subscription::Collection]
     def subscriptions(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_subscriptions(options)
         end
         resp.each_page do |page|
@@ -280,7 +287,7 @@ module Aws::SNS
     # @return [Topic::Collection]
     def topics(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_topics(options)
         end
         resp.each_page do |page|

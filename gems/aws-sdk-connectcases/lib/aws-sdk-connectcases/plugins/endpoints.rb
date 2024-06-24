@@ -14,6 +14,7 @@ module Aws::ConnectCases
       option(
         :endpoint_provider,
         doc_type: 'Aws::ConnectCases::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::ConnectCases
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -74,8 +76,16 @@ module Aws::ConnectCases
             Aws::ConnectCases::Endpoints::CreateTemplate.build(context)
           when :delete_domain
             Aws::ConnectCases::Endpoints::DeleteDomain.build(context)
+          when :delete_field
+            Aws::ConnectCases::Endpoints::DeleteField.build(context)
+          when :delete_layout
+            Aws::ConnectCases::Endpoints::DeleteLayout.build(context)
+          when :delete_template
+            Aws::ConnectCases::Endpoints::DeleteTemplate.build(context)
           when :get_case
             Aws::ConnectCases::Endpoints::GetCase.build(context)
+          when :get_case_audit_events
+            Aws::ConnectCases::Endpoints::GetCaseAuditEvents.build(context)
           when :get_case_event_configuration
             Aws::ConnectCases::Endpoints::GetCaseEventConfiguration.build(context)
           when :get_domain

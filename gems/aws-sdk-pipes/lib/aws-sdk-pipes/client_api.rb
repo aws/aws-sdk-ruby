@@ -38,6 +38,9 @@ module Aws::Pipes
     CapacityProviderStrategyItem = Shapes::StructureShape.new(name: 'CapacityProviderStrategyItem')
     CapacityProviderStrategyItemBase = Shapes::IntegerShape.new(name: 'CapacityProviderStrategyItemBase')
     CapacityProviderStrategyItemWeight = Shapes::IntegerShape.new(name: 'CapacityProviderStrategyItemWeight')
+    CloudwatchLogGroupArn = Shapes::StringShape.new(name: 'CloudwatchLogGroupArn')
+    CloudwatchLogsLogDestination = Shapes::StructureShape.new(name: 'CloudwatchLogsLogDestination')
+    CloudwatchLogsLogDestinationParameters = Shapes::StructureShape.new(name: 'CloudwatchLogsLogDestinationParameters')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreatePipeRequest = Shapes::StructureShape.new(name: 'CreatePipeRequest')
     CreatePipeResponse = Shapes::StructureShape.new(name: 'CreatePipeResponse')
@@ -48,6 +51,11 @@ module Aws::Pipes
     DeletePipeResponse = Shapes::StructureShape.new(name: 'DeletePipeResponse')
     DescribePipeRequest = Shapes::StructureShape.new(name: 'DescribePipeRequest')
     DescribePipeResponse = Shapes::StructureShape.new(name: 'DescribePipeResponse')
+    DimensionMapping = Shapes::StructureShape.new(name: 'DimensionMapping')
+    DimensionMappings = Shapes::ListShape.new(name: 'DimensionMappings')
+    DimensionName = Shapes::StringShape.new(name: 'DimensionName')
+    DimensionValue = Shapes::StringShape.new(name: 'DimensionValue')
+    DimensionValueType = Shapes::StringShape.new(name: 'DimensionValueType')
     DynamoDBStreamStartPosition = Shapes::StringShape.new(name: 'DynamoDBStreamStartPosition')
     EcsContainerOverride = Shapes::StructureShape.new(name: 'EcsContainerOverride')
     EcsContainerOverrideList = Shapes::ListShape.new(name: 'EcsContainerOverrideList')
@@ -65,6 +73,7 @@ module Aws::Pipes
     EcsTaskOverride = Shapes::StructureShape.new(name: 'EcsTaskOverride')
     EndpointString = Shapes::StringShape.new(name: 'EndpointString')
     EphemeralStorageSize = Shapes::IntegerShape.new(name: 'EphemeralStorageSize')
+    EpochTimeUnit = Shapes::StringShape.new(name: 'EpochTimeUnit')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EventBridgeDetailType = Shapes::StringShape.new(name: 'EventBridgeDetailType')
     EventBridgeEndpointId = Shapes::StringShape.new(name: 'EventBridgeEndpointId')
@@ -74,9 +83,14 @@ module Aws::Pipes
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterCriteria = Shapes::StructureShape.new(name: 'FilterCriteria')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
+    FirehoseArn = Shapes::StringShape.new(name: 'FirehoseArn')
+    FirehoseLogDestination = Shapes::StructureShape.new(name: 'FirehoseLogDestination')
+    FirehoseLogDestinationParameters = Shapes::StructureShape.new(name: 'FirehoseLogDestinationParameters')
     HeaderKey = Shapes::StringShape.new(name: 'HeaderKey')
     HeaderParametersMap = Shapes::MapShape.new(name: 'HeaderParametersMap')
     HeaderValue = Shapes::StringShape.new(name: 'HeaderValue')
+    IncludeExecutionData = Shapes::ListShape.new(name: 'IncludeExecutionData')
+    IncludeExecutionDataOption = Shapes::StringShape.new(name: 'IncludeExecutionDataOption')
     InputTemplate = Shapes::StringShape.new(name: 'InputTemplate')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
@@ -94,6 +108,7 @@ module Aws::Pipes
     ListPipesResponse = Shapes::StructureShape.new(name: 'ListPipesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    LogLevel = Shapes::StringShape.new(name: 'LogLevel')
     LogStreamName = Shapes::StringShape.new(name: 'LogStreamName')
     MQBrokerAccessCredentials = Shapes::UnionShape.new(name: 'MQBrokerAccessCredentials')
     MQBrokerQueueName = Shapes::StringShape.new(name: 'MQBrokerQueueName')
@@ -102,8 +117,17 @@ module Aws::Pipes
     MaximumBatchingWindowInSeconds = Shapes::IntegerShape.new(name: 'MaximumBatchingWindowInSeconds')
     MaximumRecordAgeInSeconds = Shapes::IntegerShape.new(name: 'MaximumRecordAgeInSeconds')
     MaximumRetryAttemptsESM = Shapes::IntegerShape.new(name: 'MaximumRetryAttemptsESM')
+    MeasureName = Shapes::StringShape.new(name: 'MeasureName')
+    MeasureValue = Shapes::StringShape.new(name: 'MeasureValue')
+    MeasureValueType = Shapes::StringShape.new(name: 'MeasureValueType')
     MessageDeduplicationId = Shapes::StringShape.new(name: 'MessageDeduplicationId')
     MessageGroupId = Shapes::StringShape.new(name: 'MessageGroupId')
+    MultiMeasureAttributeMapping = Shapes::StructureShape.new(name: 'MultiMeasureAttributeMapping')
+    MultiMeasureAttributeMappings = Shapes::ListShape.new(name: 'MultiMeasureAttributeMappings')
+    MultiMeasureAttributeName = Shapes::StringShape.new(name: 'MultiMeasureAttributeName')
+    MultiMeasureMapping = Shapes::StructureShape.new(name: 'MultiMeasureMapping')
+    MultiMeasureMappings = Shapes::ListShape.new(name: 'MultiMeasureMappings')
+    MultiMeasureName = Shapes::StringShape.new(name: 'MultiMeasureName')
     NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
@@ -117,6 +141,8 @@ module Aws::Pipes
     PipeEnrichmentHttpParameters = Shapes::StructureShape.new(name: 'PipeEnrichmentHttpParameters')
     PipeEnrichmentParameters = Shapes::StructureShape.new(name: 'PipeEnrichmentParameters')
     PipeList = Shapes::ListShape.new(name: 'PipeList')
+    PipeLogConfiguration = Shapes::StructureShape.new(name: 'PipeLogConfiguration')
+    PipeLogConfigurationParameters = Shapes::StructureShape.new(name: 'PipeLogConfigurationParameters')
     PipeName = Shapes::StringShape.new(name: 'PipeName')
     PipeSourceActiveMQBrokerParameters = Shapes::StructureShape.new(name: 'PipeSourceActiveMQBrokerParameters')
     PipeSourceDynamoDBStreamParameters = Shapes::StructureShape.new(name: 'PipeSourceDynamoDBStreamParameters')
@@ -141,6 +167,7 @@ module Aws::Pipes
     PipeTargetSageMakerPipelineParameters = Shapes::StructureShape.new(name: 'PipeTargetSageMakerPipelineParameters')
     PipeTargetSqsQueueParameters = Shapes::StructureShape.new(name: 'PipeTargetSqsQueueParameters')
     PipeTargetStateMachineParameters = Shapes::StructureShape.new(name: 'PipeTargetStateMachineParameters')
+    PipeTargetTimestreamParameters = Shapes::StructureShape.new(name: 'PipeTargetTimestreamParameters')
     PlacementConstraint = Shapes::StructureShape.new(name: 'PlacementConstraint')
     PlacementConstraintExpression = Shapes::StringShape.new(name: 'PlacementConstraintExpression')
     PlacementConstraintType = Shapes::StringShape.new(name: 'PlacementConstraintType')
@@ -158,6 +185,12 @@ module Aws::Pipes
     RequestedPipeStateDescribeResponse = Shapes::StringShape.new(name: 'RequestedPipeStateDescribeResponse')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3LogDestination = Shapes::StructureShape.new(name: 'S3LogDestination')
+    S3LogDestinationParameters = Shapes::StructureShape.new(name: 'S3LogDestinationParameters')
+    S3LogDestinationParametersBucketNameString = Shapes::StringShape.new(name: 'S3LogDestinationParametersBucketNameString')
+    S3LogDestinationParametersBucketOwnerString = Shapes::StringShape.new(name: 'S3LogDestinationParametersBucketOwnerString')
+    S3LogDestinationParametersPrefixString = Shapes::StringShape.new(name: 'S3LogDestinationParametersPrefixString')
+    S3OutputFormat = Shapes::StringShape.new(name: 'S3OutputFormat')
     SageMakerPipelineParameter = Shapes::StructureShape.new(name: 'SageMakerPipelineParameter')
     SageMakerPipelineParameterList = Shapes::ListShape.new(name: 'SageMakerPipelineParameterList')
     SageMakerPipelineParameterName = Shapes::StringShape.new(name: 'SageMakerPipelineParameterName')
@@ -172,6 +205,8 @@ module Aws::Pipes
     SelfManagedKafkaAccessConfigurationVpc = Shapes::StructureShape.new(name: 'SelfManagedKafkaAccessConfigurationVpc')
     SelfManagedKafkaStartPosition = Shapes::StringShape.new(name: 'SelfManagedKafkaStartPosition')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SingleMeasureMapping = Shapes::StructureShape.new(name: 'SingleMeasureMapping')
+    SingleMeasureMappings = Shapes::ListShape.new(name: 'SingleMeasureMappings')
     Sql = Shapes::StringShape.new(name: 'Sql')
     Sqls = Shapes::ListShape.new(name: 'Sqls')
     StartPipeRequest = Shapes::StructureShape.new(name: 'StartPipeRequest')
@@ -194,7 +229,10 @@ module Aws::Pipes
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    TimeFieldType = Shapes::StringShape.new(name: 'TimeFieldType')
+    TimeValue = Shapes::StringShape.new(name: 'TimeValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TimestampFormat = Shapes::StringShape.new(name: 'TimestampFormat')
     URI = Shapes::StringShape.new(name: 'URI')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -211,10 +249,11 @@ module Aws::Pipes
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
+    VersionValue = Shapes::StringShape.new(name: 'VersionValue')
 
-    AwsVpcConfiguration.add_member(:assign_public_ip, Shapes::ShapeRef.new(shape: AssignPublicIp, location_name: "AssignPublicIp"))
-    AwsVpcConfiguration.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "SecurityGroups"))
     AwsVpcConfiguration.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "Subnets"))
+    AwsVpcConfiguration.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "SecurityGroups"))
+    AwsVpcConfiguration.add_member(:assign_public_ip, Shapes::ShapeRef.new(shape: AssignPublicIp, location_name: "AssignPublicIp"))
     AwsVpcConfiguration.struct_class = Types::AwsVpcConfiguration
 
     BatchArrayProperties.add_member(:size, Shapes::ShapeRef.new(shape: BatchArraySize, location_name: "Size"))
@@ -252,35 +291,42 @@ module Aws::Pipes
 
     CapacityProviderStrategy.member = Shapes::ShapeRef.new(shape: CapacityProviderStrategyItem)
 
-    CapacityProviderStrategyItem.add_member(:base, Shapes::ShapeRef.new(shape: CapacityProviderStrategyItemBase, location_name: "base"))
     CapacityProviderStrategyItem.add_member(:capacity_provider, Shapes::ShapeRef.new(shape: CapacityProvider, required: true, location_name: "capacityProvider"))
     CapacityProviderStrategyItem.add_member(:weight, Shapes::ShapeRef.new(shape: CapacityProviderStrategyItemWeight, location_name: "weight"))
+    CapacityProviderStrategyItem.add_member(:base, Shapes::ShapeRef.new(shape: CapacityProviderStrategyItemBase, location_name: "base"))
     CapacityProviderStrategyItem.struct_class = Types::CapacityProviderStrategyItem
+
+    CloudwatchLogsLogDestination.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: CloudwatchLogGroupArn, location_name: "LogGroupArn"))
+    CloudwatchLogsLogDestination.struct_class = Types::CloudwatchLogsLogDestination
+
+    CloudwatchLogsLogDestinationParameters.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: CloudwatchLogGroupArn, required: true, location_name: "LogGroupArn"))
+    CloudwatchLogsLogDestinationParameters.struct_class = Types::CloudwatchLogsLogDestinationParameters
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
+    CreatePipeRequest.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, required: true, location: "uri", location_name: "Name"))
     CreatePipeRequest.add_member(:description, Shapes::ShapeRef.new(shape: PipeDescription, location_name: "Description"))
     CreatePipeRequest.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location_name: "DesiredState"))
-    CreatePipeRequest.add_member(:enrichment, Shapes::ShapeRef.new(shape: OptionalArn, location_name: "Enrichment"))
-    CreatePipeRequest.add_member(:enrichment_parameters, Shapes::ShapeRef.new(shape: PipeEnrichmentParameters, location_name: "EnrichmentParameters"))
-    CreatePipeRequest.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, required: true, location: "uri", location_name: "Name"))
-    CreatePipeRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreatePipeRequest.add_member(:source, Shapes::ShapeRef.new(shape: ArnOrUrl, required: true, location_name: "Source"))
     CreatePipeRequest.add_member(:source_parameters, Shapes::ShapeRef.new(shape: PipeSourceParameters, location_name: "SourceParameters"))
-    CreatePipeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreatePipeRequest.add_member(:enrichment, Shapes::ShapeRef.new(shape: OptionalArn, location_name: "Enrichment"))
+    CreatePipeRequest.add_member(:enrichment_parameters, Shapes::ShapeRef.new(shape: PipeEnrichmentParameters, location_name: "EnrichmentParameters"))
     CreatePipeRequest.add_member(:target, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Target"))
     CreatePipeRequest.add_member(:target_parameters, Shapes::ShapeRef.new(shape: PipeTargetParameters, location_name: "TargetParameters"))
+    CreatePipeRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    CreatePipeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreatePipeRequest.add_member(:log_configuration, Shapes::ShapeRef.new(shape: PipeLogConfigurationParameters, location_name: "LogConfiguration"))
     CreatePipeRequest.struct_class = Types::CreatePipeRequest
 
     CreatePipeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: PipeArn, location_name: "Arn"))
-    CreatePipeResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
-    CreatePipeResponse.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location_name: "CurrentState"))
-    CreatePipeResponse.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location_name: "DesiredState"))
-    CreatePipeResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     CreatePipeResponse.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, location_name: "Name"))
+    CreatePipeResponse.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location_name: "DesiredState"))
+    CreatePipeResponse.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location_name: "CurrentState"))
+    CreatePipeResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    CreatePipeResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     CreatePipeResponse.struct_class = Types::CreatePipeResponse
 
     DeadLetterConfig.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -290,33 +336,41 @@ module Aws::Pipes
     DeletePipeRequest.struct_class = Types::DeletePipeRequest
 
     DeletePipeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: PipeArn, location_name: "Arn"))
-    DeletePipeResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
-    DeletePipeResponse.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location_name: "CurrentState"))
-    DeletePipeResponse.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeStateDescribeResponse, location_name: "DesiredState"))
-    DeletePipeResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DeletePipeResponse.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, location_name: "Name"))
+    DeletePipeResponse.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeStateDescribeResponse, location_name: "DesiredState"))
+    DeletePipeResponse.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location_name: "CurrentState"))
+    DeletePipeResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DeletePipeResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DeletePipeResponse.struct_class = Types::DeletePipeResponse
 
     DescribePipeRequest.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, required: true, location: "uri", location_name: "Name"))
     DescribePipeRequest.struct_class = Types::DescribePipeRequest
 
     DescribePipeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: PipeArn, location_name: "Arn"))
-    DescribePipeResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
-    DescribePipeResponse.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location_name: "CurrentState"))
+    DescribePipeResponse.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, location_name: "Name"))
     DescribePipeResponse.add_member(:description, Shapes::ShapeRef.new(shape: PipeDescription, location_name: "Description"))
     DescribePipeResponse.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeStateDescribeResponse, location_name: "DesiredState"))
-    DescribePipeResponse.add_member(:enrichment, Shapes::ShapeRef.new(shape: OptionalArn, location_name: "Enrichment"))
-    DescribePipeResponse.add_member(:enrichment_parameters, Shapes::ShapeRef.new(shape: PipeEnrichmentParameters, location_name: "EnrichmentParameters"))
-    DescribePipeResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
-    DescribePipeResponse.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, location_name: "Name"))
-    DescribePipeResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    DescribePipeResponse.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location_name: "CurrentState"))
+    DescribePipeResponse.add_member(:state_reason, Shapes::ShapeRef.new(shape: PipeStateReason, location_name: "StateReason"))
     DescribePipeResponse.add_member(:source, Shapes::ShapeRef.new(shape: ArnOrUrl, location_name: "Source"))
     DescribePipeResponse.add_member(:source_parameters, Shapes::ShapeRef.new(shape: PipeSourceParameters, location_name: "SourceParameters"))
-    DescribePipeResponse.add_member(:state_reason, Shapes::ShapeRef.new(shape: PipeStateReason, location_name: "StateReason"))
-    DescribePipeResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    DescribePipeResponse.add_member(:enrichment, Shapes::ShapeRef.new(shape: OptionalArn, location_name: "Enrichment"))
+    DescribePipeResponse.add_member(:enrichment_parameters, Shapes::ShapeRef.new(shape: PipeEnrichmentParameters, location_name: "EnrichmentParameters"))
     DescribePipeResponse.add_member(:target, Shapes::ShapeRef.new(shape: Arn, location_name: "Target"))
     DescribePipeResponse.add_member(:target_parameters, Shapes::ShapeRef.new(shape: PipeTargetParameters, location_name: "TargetParameters"))
+    DescribePipeResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    DescribePipeResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    DescribePipeResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DescribePipeResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    DescribePipeResponse.add_member(:log_configuration, Shapes::ShapeRef.new(shape: PipeLogConfiguration, location_name: "LogConfiguration"))
     DescribePipeResponse.struct_class = Types::DescribePipeResponse
+
+    DimensionMapping.add_member(:dimension_value, Shapes::ShapeRef.new(shape: DimensionValue, required: true, location_name: "DimensionValue"))
+    DimensionMapping.add_member(:dimension_value_type, Shapes::ShapeRef.new(shape: DimensionValueType, required: true, location_name: "DimensionValueType"))
+    DimensionMapping.add_member(:dimension_name, Shapes::ShapeRef.new(shape: DimensionName, required: true, location_name: "DimensionName"))
+    DimensionMapping.struct_class = Types::DimensionMapping
+
+    DimensionMappings.member = Shapes::ShapeRef.new(shape: DimensionMapping)
 
     EcsContainerOverride.add_member(:command, Shapes::ShapeRef.new(shape: StringList, location_name: "Command"))
     EcsContainerOverride.add_member(:cpu, Shapes::ShapeRef.new(shape: Integer, location_name: "Cpu"))
@@ -376,8 +430,16 @@ module Aws::Pipes
 
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
 
+    FirehoseLogDestination.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: FirehoseArn, location_name: "DeliveryStreamArn"))
+    FirehoseLogDestination.struct_class = Types::FirehoseLogDestination
+
+    FirehoseLogDestinationParameters.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: FirehoseArn, required: true, location_name: "DeliveryStreamArn"))
+    FirehoseLogDestinationParameters.struct_class = Types::FirehoseLogDestinationParameters
+
     HeaderParametersMap.key = Shapes::ShapeRef.new(shape: HeaderKey)
     HeaderParametersMap.value = Shapes::ShapeRef.new(shape: HeaderValue)
+
+    IncludeExecutionData.member = Shapes::ShapeRef.new(shape: IncludeExecutionDataOption)
 
     InternalException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
@@ -385,17 +447,17 @@ module Aws::Pipes
 
     KafkaBootstrapServers.member = Shapes::ShapeRef.new(shape: EndpointString)
 
-    ListPipesRequest.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location: "querystring", location_name: "CurrentState"))
-    ListPipesRequest.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location: "querystring", location_name: "DesiredState"))
-    ListPipesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitMax100, location: "querystring", location_name: "Limit"))
     ListPipesRequest.add_member(:name_prefix, Shapes::ShapeRef.new(shape: PipeName, location: "querystring", location_name: "NamePrefix"))
-    ListPipesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListPipesRequest.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location: "querystring", location_name: "DesiredState"))
+    ListPipesRequest.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location: "querystring", location_name: "CurrentState"))
     ListPipesRequest.add_member(:source_prefix, Shapes::ShapeRef.new(shape: ResourceArn, location: "querystring", location_name: "SourcePrefix"))
     ListPipesRequest.add_member(:target_prefix, Shapes::ShapeRef.new(shape: ResourceArn, location: "querystring", location_name: "TargetPrefix"))
+    ListPipesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListPipesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitMax100, location: "querystring", location_name: "Limit"))
     ListPipesRequest.struct_class = Types::ListPipesRequest
 
-    ListPipesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListPipesResponse.add_member(:pipes, Shapes::ShapeRef.new(shape: PipeList, location_name: "Pipes"))
+    ListPipesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListPipesResponse.struct_class = Types::ListPipesResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: PipeArn, required: true, location: "uri", location_name: "resourceArn"))
@@ -410,13 +472,26 @@ module Aws::Pipes
     MQBrokerAccessCredentials.add_member_subclass(:unknown, Types::MQBrokerAccessCredentials::Unknown)
     MQBrokerAccessCredentials.struct_class = Types::MQBrokerAccessCredentials
 
-    MSKAccessCredentials.add_member(:client_certificate_tls_auth, Shapes::ShapeRef.new(shape: SecretManagerArn, location_name: "ClientCertificateTlsAuth"))
     MSKAccessCredentials.add_member(:sasl_scram_512_auth, Shapes::ShapeRef.new(shape: SecretManagerArn, location_name: "SaslScram512Auth"))
+    MSKAccessCredentials.add_member(:client_certificate_tls_auth, Shapes::ShapeRef.new(shape: SecretManagerArn, location_name: "ClientCertificateTlsAuth"))
     MSKAccessCredentials.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
-    MSKAccessCredentials.add_member_subclass(:client_certificate_tls_auth, Types::MSKAccessCredentials::ClientCertificateTlsAuth)
     MSKAccessCredentials.add_member_subclass(:sasl_scram_512_auth, Types::MSKAccessCredentials::SaslScram512Auth)
+    MSKAccessCredentials.add_member_subclass(:client_certificate_tls_auth, Types::MSKAccessCredentials::ClientCertificateTlsAuth)
     MSKAccessCredentials.add_member_subclass(:unknown, Types::MSKAccessCredentials::Unknown)
     MSKAccessCredentials.struct_class = Types::MSKAccessCredentials
+
+    MultiMeasureAttributeMapping.add_member(:measure_value, Shapes::ShapeRef.new(shape: MeasureValue, required: true, location_name: "MeasureValue"))
+    MultiMeasureAttributeMapping.add_member(:measure_value_type, Shapes::ShapeRef.new(shape: MeasureValueType, required: true, location_name: "MeasureValueType"))
+    MultiMeasureAttributeMapping.add_member(:multi_measure_attribute_name, Shapes::ShapeRef.new(shape: MultiMeasureAttributeName, required: true, location_name: "MultiMeasureAttributeName"))
+    MultiMeasureAttributeMapping.struct_class = Types::MultiMeasureAttributeMapping
+
+    MultiMeasureAttributeMappings.member = Shapes::ShapeRef.new(shape: MultiMeasureAttributeMapping)
+
+    MultiMeasureMapping.add_member(:multi_measure_name, Shapes::ShapeRef.new(shape: MultiMeasureName, required: true, location_name: "MultiMeasureName"))
+    MultiMeasureMapping.add_member(:multi_measure_attribute_mappings, Shapes::ShapeRef.new(shape: MultiMeasureAttributeMappings, required: true, location_name: "MultiMeasureAttributeMappings"))
+    MultiMeasureMapping.struct_class = Types::MultiMeasureMapping
+
+    MultiMeasureMappings.member = Shapes::ShapeRef.new(shape: MultiMeasureMapping)
 
     NetworkConfiguration.add_member(:awsvpc_configuration, Shapes::ShapeRef.new(shape: AwsVpcConfiguration, location_name: "awsvpcConfiguration"))
     NetworkConfiguration.struct_class = Types::NetworkConfiguration
@@ -426,89 +501,103 @@ module Aws::Pipes
 
     PathParameterList.member = Shapes::ShapeRef.new(shape: PathParameter)
 
-    Pipe.add_member(:arn, Shapes::ShapeRef.new(shape: PipeArn, location_name: "Arn"))
-    Pipe.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
-    Pipe.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location_name: "CurrentState"))
-    Pipe.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location_name: "DesiredState"))
-    Pipe.add_member(:enrichment, Shapes::ShapeRef.new(shape: OptionalArn, location_name: "Enrichment"))
-    Pipe.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     Pipe.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, location_name: "Name"))
-    Pipe.add_member(:source, Shapes::ShapeRef.new(shape: ArnOrUrl, location_name: "Source"))
+    Pipe.add_member(:arn, Shapes::ShapeRef.new(shape: PipeArn, location_name: "Arn"))
+    Pipe.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location_name: "DesiredState"))
+    Pipe.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location_name: "CurrentState"))
     Pipe.add_member(:state_reason, Shapes::ShapeRef.new(shape: PipeStateReason, location_name: "StateReason"))
+    Pipe.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    Pipe.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    Pipe.add_member(:source, Shapes::ShapeRef.new(shape: ArnOrUrl, location_name: "Source"))
     Pipe.add_member(:target, Shapes::ShapeRef.new(shape: Arn, location_name: "Target"))
+    Pipe.add_member(:enrichment, Shapes::ShapeRef.new(shape: OptionalArn, location_name: "Enrichment"))
     Pipe.struct_class = Types::Pipe
 
-    PipeEnrichmentHttpParameters.add_member(:header_parameters, Shapes::ShapeRef.new(shape: HeaderParametersMap, location_name: "HeaderParameters"))
     PipeEnrichmentHttpParameters.add_member(:path_parameter_values, Shapes::ShapeRef.new(shape: PathParameterList, location_name: "PathParameterValues"))
+    PipeEnrichmentHttpParameters.add_member(:header_parameters, Shapes::ShapeRef.new(shape: HeaderParametersMap, location_name: "HeaderParameters"))
     PipeEnrichmentHttpParameters.add_member(:query_string_parameters, Shapes::ShapeRef.new(shape: QueryStringParametersMap, location_name: "QueryStringParameters"))
     PipeEnrichmentHttpParameters.struct_class = Types::PipeEnrichmentHttpParameters
 
-    PipeEnrichmentParameters.add_member(:http_parameters, Shapes::ShapeRef.new(shape: PipeEnrichmentHttpParameters, location_name: "HttpParameters"))
     PipeEnrichmentParameters.add_member(:input_template, Shapes::ShapeRef.new(shape: InputTemplate, location_name: "InputTemplate"))
+    PipeEnrichmentParameters.add_member(:http_parameters, Shapes::ShapeRef.new(shape: PipeEnrichmentHttpParameters, location_name: "HttpParameters"))
     PipeEnrichmentParameters.struct_class = Types::PipeEnrichmentParameters
 
     PipeList.member = Shapes::ShapeRef.new(shape: Pipe)
 
-    PipeSourceActiveMQBrokerParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
+    PipeLogConfiguration.add_member(:s3_log_destination, Shapes::ShapeRef.new(shape: S3LogDestination, location_name: "S3LogDestination"))
+    PipeLogConfiguration.add_member(:firehose_log_destination, Shapes::ShapeRef.new(shape: FirehoseLogDestination, location_name: "FirehoseLogDestination"))
+    PipeLogConfiguration.add_member(:cloudwatch_logs_log_destination, Shapes::ShapeRef.new(shape: CloudwatchLogsLogDestination, location_name: "CloudwatchLogsLogDestination"))
+    PipeLogConfiguration.add_member(:level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "Level"))
+    PipeLogConfiguration.add_member(:include_execution_data, Shapes::ShapeRef.new(shape: IncludeExecutionData, location_name: "IncludeExecutionData"))
+    PipeLogConfiguration.struct_class = Types::PipeLogConfiguration
+
+    PipeLogConfigurationParameters.add_member(:s3_log_destination, Shapes::ShapeRef.new(shape: S3LogDestinationParameters, location_name: "S3LogDestination"))
+    PipeLogConfigurationParameters.add_member(:firehose_log_destination, Shapes::ShapeRef.new(shape: FirehoseLogDestinationParameters, location_name: "FirehoseLogDestination"))
+    PipeLogConfigurationParameters.add_member(:cloudwatch_logs_log_destination, Shapes::ShapeRef.new(shape: CloudwatchLogsLogDestinationParameters, location_name: "CloudwatchLogsLogDestination"))
+    PipeLogConfigurationParameters.add_member(:level, Shapes::ShapeRef.new(shape: LogLevel, required: true, location_name: "Level"))
+    PipeLogConfigurationParameters.add_member(:include_execution_data, Shapes::ShapeRef.new(shape: IncludeExecutionData, location_name: "IncludeExecutionData"))
+    PipeLogConfigurationParameters.struct_class = Types::PipeLogConfigurationParameters
+
     PipeSourceActiveMQBrokerParameters.add_member(:credentials, Shapes::ShapeRef.new(shape: MQBrokerAccessCredentials, required: true, location_name: "Credentials"))
-    PipeSourceActiveMQBrokerParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     PipeSourceActiveMQBrokerParameters.add_member(:queue_name, Shapes::ShapeRef.new(shape: MQBrokerQueueName, required: true, location_name: "QueueName"))
+    PipeSourceActiveMQBrokerParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
+    PipeSourceActiveMQBrokerParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     PipeSourceActiveMQBrokerParameters.struct_class = Types::PipeSourceActiveMQBrokerParameters
 
     PipeSourceDynamoDBStreamParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
     PipeSourceDynamoDBStreamParameters.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
+    PipeSourceDynamoDBStreamParameters.add_member(:on_partial_batch_item_failure, Shapes::ShapeRef.new(shape: OnPartialBatchItemFailureStreams, location_name: "OnPartialBatchItemFailure"))
     PipeSourceDynamoDBStreamParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     PipeSourceDynamoDBStreamParameters.add_member(:maximum_record_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumRecordAgeInSeconds, location_name: "MaximumRecordAgeInSeconds"))
     PipeSourceDynamoDBStreamParameters.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttemptsESM, location_name: "MaximumRetryAttempts"))
-    PipeSourceDynamoDBStreamParameters.add_member(:on_partial_batch_item_failure, Shapes::ShapeRef.new(shape: OnPartialBatchItemFailureStreams, location_name: "OnPartialBatchItemFailure"))
     PipeSourceDynamoDBStreamParameters.add_member(:parallelization_factor, Shapes::ShapeRef.new(shape: LimitMax10, location_name: "ParallelizationFactor"))
     PipeSourceDynamoDBStreamParameters.add_member(:starting_position, Shapes::ShapeRef.new(shape: DynamoDBStreamStartPosition, required: true, location_name: "StartingPosition"))
     PipeSourceDynamoDBStreamParameters.struct_class = Types::PipeSourceDynamoDBStreamParameters
 
     PipeSourceKinesisStreamParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
     PipeSourceKinesisStreamParameters.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
+    PipeSourceKinesisStreamParameters.add_member(:on_partial_batch_item_failure, Shapes::ShapeRef.new(shape: OnPartialBatchItemFailureStreams, location_name: "OnPartialBatchItemFailure"))
     PipeSourceKinesisStreamParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     PipeSourceKinesisStreamParameters.add_member(:maximum_record_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumRecordAgeInSeconds, location_name: "MaximumRecordAgeInSeconds"))
     PipeSourceKinesisStreamParameters.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttemptsESM, location_name: "MaximumRetryAttempts"))
-    PipeSourceKinesisStreamParameters.add_member(:on_partial_batch_item_failure, Shapes::ShapeRef.new(shape: OnPartialBatchItemFailureStreams, location_name: "OnPartialBatchItemFailure"))
     PipeSourceKinesisStreamParameters.add_member(:parallelization_factor, Shapes::ShapeRef.new(shape: LimitMax10, location_name: "ParallelizationFactor"))
     PipeSourceKinesisStreamParameters.add_member(:starting_position, Shapes::ShapeRef.new(shape: KinesisStreamStartPosition, required: true, location_name: "StartingPosition"))
     PipeSourceKinesisStreamParameters.add_member(:starting_position_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartingPositionTimestamp"))
     PipeSourceKinesisStreamParameters.struct_class = Types::PipeSourceKinesisStreamParameters
 
+    PipeSourceManagedStreamingKafkaParameters.add_member(:topic_name, Shapes::ShapeRef.new(shape: KafkaTopicName, required: true, location_name: "TopicName"))
+    PipeSourceManagedStreamingKafkaParameters.add_member(:starting_position, Shapes::ShapeRef.new(shape: MSKStartPosition, location_name: "StartingPosition"))
     PipeSourceManagedStreamingKafkaParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
+    PipeSourceManagedStreamingKafkaParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     PipeSourceManagedStreamingKafkaParameters.add_member(:consumer_group_id, Shapes::ShapeRef.new(shape: URI, location_name: "ConsumerGroupID"))
     PipeSourceManagedStreamingKafkaParameters.add_member(:credentials, Shapes::ShapeRef.new(shape: MSKAccessCredentials, location_name: "Credentials"))
-    PipeSourceManagedStreamingKafkaParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
-    PipeSourceManagedStreamingKafkaParameters.add_member(:starting_position, Shapes::ShapeRef.new(shape: MSKStartPosition, location_name: "StartingPosition"))
-    PipeSourceManagedStreamingKafkaParameters.add_member(:topic_name, Shapes::ShapeRef.new(shape: KafkaTopicName, required: true, location_name: "TopicName"))
     PipeSourceManagedStreamingKafkaParameters.struct_class = Types::PipeSourceManagedStreamingKafkaParameters
 
-    PipeSourceParameters.add_member(:active_mq_broker_parameters, Shapes::ShapeRef.new(shape: PipeSourceActiveMQBrokerParameters, location_name: "ActiveMQBrokerParameters"))
-    PipeSourceParameters.add_member(:dynamo_db_stream_parameters, Shapes::ShapeRef.new(shape: PipeSourceDynamoDBStreamParameters, location_name: "DynamoDBStreamParameters"))
     PipeSourceParameters.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: FilterCriteria, location_name: "FilterCriteria"))
     PipeSourceParameters.add_member(:kinesis_stream_parameters, Shapes::ShapeRef.new(shape: PipeSourceKinesisStreamParameters, location_name: "KinesisStreamParameters"))
-    PipeSourceParameters.add_member(:managed_streaming_kafka_parameters, Shapes::ShapeRef.new(shape: PipeSourceManagedStreamingKafkaParameters, location_name: "ManagedStreamingKafkaParameters"))
-    PipeSourceParameters.add_member(:rabbit_mq_broker_parameters, Shapes::ShapeRef.new(shape: PipeSourceRabbitMQBrokerParameters, location_name: "RabbitMQBrokerParameters"))
-    PipeSourceParameters.add_member(:self_managed_kafka_parameters, Shapes::ShapeRef.new(shape: PipeSourceSelfManagedKafkaParameters, location_name: "SelfManagedKafkaParameters"))
+    PipeSourceParameters.add_member(:dynamo_db_stream_parameters, Shapes::ShapeRef.new(shape: PipeSourceDynamoDBStreamParameters, location_name: "DynamoDBStreamParameters"))
     PipeSourceParameters.add_member(:sqs_queue_parameters, Shapes::ShapeRef.new(shape: PipeSourceSqsQueueParameters, location_name: "SqsQueueParameters"))
+    PipeSourceParameters.add_member(:active_mq_broker_parameters, Shapes::ShapeRef.new(shape: PipeSourceActiveMQBrokerParameters, location_name: "ActiveMQBrokerParameters"))
+    PipeSourceParameters.add_member(:rabbit_mq_broker_parameters, Shapes::ShapeRef.new(shape: PipeSourceRabbitMQBrokerParameters, location_name: "RabbitMQBrokerParameters"))
+    PipeSourceParameters.add_member(:managed_streaming_kafka_parameters, Shapes::ShapeRef.new(shape: PipeSourceManagedStreamingKafkaParameters, location_name: "ManagedStreamingKafkaParameters"))
+    PipeSourceParameters.add_member(:self_managed_kafka_parameters, Shapes::ShapeRef.new(shape: PipeSourceSelfManagedKafkaParameters, location_name: "SelfManagedKafkaParameters"))
     PipeSourceParameters.struct_class = Types::PipeSourceParameters
 
-    PipeSourceRabbitMQBrokerParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
     PipeSourceRabbitMQBrokerParameters.add_member(:credentials, Shapes::ShapeRef.new(shape: MQBrokerAccessCredentials, required: true, location_name: "Credentials"))
-    PipeSourceRabbitMQBrokerParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     PipeSourceRabbitMQBrokerParameters.add_member(:queue_name, Shapes::ShapeRef.new(shape: MQBrokerQueueName, required: true, location_name: "QueueName"))
     PipeSourceRabbitMQBrokerParameters.add_member(:virtual_host, Shapes::ShapeRef.new(shape: URI, location_name: "VirtualHost"))
+    PipeSourceRabbitMQBrokerParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
+    PipeSourceRabbitMQBrokerParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     PipeSourceRabbitMQBrokerParameters.struct_class = Types::PipeSourceRabbitMQBrokerParameters
 
+    PipeSourceSelfManagedKafkaParameters.add_member(:topic_name, Shapes::ShapeRef.new(shape: KafkaTopicName, required: true, location_name: "TopicName"))
+    PipeSourceSelfManagedKafkaParameters.add_member(:starting_position, Shapes::ShapeRef.new(shape: SelfManagedKafkaStartPosition, location_name: "StartingPosition"))
     PipeSourceSelfManagedKafkaParameters.add_member(:additional_bootstrap_servers, Shapes::ShapeRef.new(shape: KafkaBootstrapServers, location_name: "AdditionalBootstrapServers"))
     PipeSourceSelfManagedKafkaParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
+    PipeSourceSelfManagedKafkaParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     PipeSourceSelfManagedKafkaParameters.add_member(:consumer_group_id, Shapes::ShapeRef.new(shape: URI, location_name: "ConsumerGroupID"))
     PipeSourceSelfManagedKafkaParameters.add_member(:credentials, Shapes::ShapeRef.new(shape: SelfManagedKafkaAccessConfigurationCredentials, location_name: "Credentials"))
-    PipeSourceSelfManagedKafkaParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     PipeSourceSelfManagedKafkaParameters.add_member(:server_root_ca_certificate, Shapes::ShapeRef.new(shape: SecretManagerArn, location_name: "ServerRootCaCertificate"))
-    PipeSourceSelfManagedKafkaParameters.add_member(:starting_position, Shapes::ShapeRef.new(shape: SelfManagedKafkaStartPosition, location_name: "StartingPosition"))
-    PipeSourceSelfManagedKafkaParameters.add_member(:topic_name, Shapes::ShapeRef.new(shape: KafkaTopicName, required: true, location_name: "TopicName"))
     PipeSourceSelfManagedKafkaParameters.add_member(:vpc, Shapes::ShapeRef.new(shape: SelfManagedKafkaAccessConfigurationVpc, location_name: "Vpc"))
     PipeSourceSelfManagedKafkaParameters.struct_class = Types::PipeSourceSelfManagedKafkaParameters
 
@@ -516,45 +605,45 @@ module Aws::Pipes
     PipeSourceSqsQueueParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     PipeSourceSqsQueueParameters.struct_class = Types::PipeSourceSqsQueueParameters
 
-    PipeTargetBatchJobParameters.add_member(:array_properties, Shapes::ShapeRef.new(shape: BatchArrayProperties, location_name: "ArrayProperties"))
-    PipeTargetBatchJobParameters.add_member(:container_overrides, Shapes::ShapeRef.new(shape: BatchContainerOverrides, location_name: "ContainerOverrides"))
-    PipeTargetBatchJobParameters.add_member(:depends_on, Shapes::ShapeRef.new(shape: BatchDependsOn, location_name: "DependsOn"))
     PipeTargetBatchJobParameters.add_member(:job_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "JobDefinition"))
     PipeTargetBatchJobParameters.add_member(:job_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "JobName"))
-    PipeTargetBatchJobParameters.add_member(:parameters, Shapes::ShapeRef.new(shape: BatchParametersMap, location_name: "Parameters"))
+    PipeTargetBatchJobParameters.add_member(:array_properties, Shapes::ShapeRef.new(shape: BatchArrayProperties, location_name: "ArrayProperties"))
     PipeTargetBatchJobParameters.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: BatchRetryStrategy, location_name: "RetryStrategy"))
+    PipeTargetBatchJobParameters.add_member(:container_overrides, Shapes::ShapeRef.new(shape: BatchContainerOverrides, location_name: "ContainerOverrides"))
+    PipeTargetBatchJobParameters.add_member(:depends_on, Shapes::ShapeRef.new(shape: BatchDependsOn, location_name: "DependsOn"))
+    PipeTargetBatchJobParameters.add_member(:parameters, Shapes::ShapeRef.new(shape: BatchParametersMap, location_name: "Parameters"))
     PipeTargetBatchJobParameters.struct_class = Types::PipeTargetBatchJobParameters
 
     PipeTargetCloudWatchLogsParameters.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, location_name: "LogStreamName"))
     PipeTargetCloudWatchLogsParameters.add_member(:timestamp, Shapes::ShapeRef.new(shape: JsonPath, location_name: "Timestamp"))
     PipeTargetCloudWatchLogsParameters.struct_class = Types::PipeTargetCloudWatchLogsParameters
 
+    PipeTargetEcsTaskParameters.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: ArnOrJsonPath, required: true, location_name: "TaskDefinitionArn"))
+    PipeTargetEcsTaskParameters.add_member(:task_count, Shapes::ShapeRef.new(shape: LimitMin1, location_name: "TaskCount"))
+    PipeTargetEcsTaskParameters.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "LaunchType"))
+    PipeTargetEcsTaskParameters.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    PipeTargetEcsTaskParameters.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "PlatformVersion"))
+    PipeTargetEcsTaskParameters.add_member(:group, Shapes::ShapeRef.new(shape: String, location_name: "Group"))
     PipeTargetEcsTaskParameters.add_member(:capacity_provider_strategy, Shapes::ShapeRef.new(shape: CapacityProviderStrategy, location_name: "CapacityProviderStrategy"))
     PipeTargetEcsTaskParameters.add_member(:enable_ecs_managed_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableECSManagedTags"))
     PipeTargetEcsTaskParameters.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableExecuteCommand"))
-    PipeTargetEcsTaskParameters.add_member(:group, Shapes::ShapeRef.new(shape: String, location_name: "Group"))
-    PipeTargetEcsTaskParameters.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "LaunchType"))
-    PipeTargetEcsTaskParameters.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
-    PipeTargetEcsTaskParameters.add_member(:overrides, Shapes::ShapeRef.new(shape: EcsTaskOverride, location_name: "Overrides"))
     PipeTargetEcsTaskParameters.add_member(:placement_constraints, Shapes::ShapeRef.new(shape: PlacementConstraints, location_name: "PlacementConstraints"))
     PipeTargetEcsTaskParameters.add_member(:placement_strategy, Shapes::ShapeRef.new(shape: PlacementStrategies, location_name: "PlacementStrategy"))
-    PipeTargetEcsTaskParameters.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "PlatformVersion"))
     PipeTargetEcsTaskParameters.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: PropagateTags, location_name: "PropagateTags"))
     PipeTargetEcsTaskParameters.add_member(:reference_id, Shapes::ShapeRef.new(shape: ReferenceId, location_name: "ReferenceId"))
+    PipeTargetEcsTaskParameters.add_member(:overrides, Shapes::ShapeRef.new(shape: EcsTaskOverride, location_name: "Overrides"))
     PipeTargetEcsTaskParameters.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
-    PipeTargetEcsTaskParameters.add_member(:task_count, Shapes::ShapeRef.new(shape: LimitMin1, location_name: "TaskCount"))
-    PipeTargetEcsTaskParameters.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: ArnOrJsonPath, required: true, location_name: "TaskDefinitionArn"))
     PipeTargetEcsTaskParameters.struct_class = Types::PipeTargetEcsTaskParameters
 
-    PipeTargetEventBridgeEventBusParameters.add_member(:detail_type, Shapes::ShapeRef.new(shape: EventBridgeDetailType, location_name: "DetailType"))
     PipeTargetEventBridgeEventBusParameters.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EventBridgeEndpointId, location_name: "EndpointId"))
-    PipeTargetEventBridgeEventBusParameters.add_member(:resources, Shapes::ShapeRef.new(shape: EventBridgeEventResourceList, location_name: "Resources"))
+    PipeTargetEventBridgeEventBusParameters.add_member(:detail_type, Shapes::ShapeRef.new(shape: EventBridgeDetailType, location_name: "DetailType"))
     PipeTargetEventBridgeEventBusParameters.add_member(:source, Shapes::ShapeRef.new(shape: EventBridgeEventSource, location_name: "Source"))
+    PipeTargetEventBridgeEventBusParameters.add_member(:resources, Shapes::ShapeRef.new(shape: EventBridgeEventResourceList, location_name: "Resources"))
     PipeTargetEventBridgeEventBusParameters.add_member(:time, Shapes::ShapeRef.new(shape: JsonPath, location_name: "Time"))
     PipeTargetEventBridgeEventBusParameters.struct_class = Types::PipeTargetEventBridgeEventBusParameters
 
-    PipeTargetHttpParameters.add_member(:header_parameters, Shapes::ShapeRef.new(shape: HeaderParametersMap, location_name: "HeaderParameters"))
     PipeTargetHttpParameters.add_member(:path_parameter_values, Shapes::ShapeRef.new(shape: PathParameterList, location_name: "PathParameterValues"))
+    PipeTargetHttpParameters.add_member(:header_parameters, Shapes::ShapeRef.new(shape: HeaderParametersMap, location_name: "HeaderParameters"))
     PipeTargetHttpParameters.add_member(:query_string_parameters, Shapes::ShapeRef.new(shape: QueryStringParametersMap, location_name: "QueryStringParameters"))
     PipeTargetHttpParameters.struct_class = Types::PipeTargetHttpParameters
 
@@ -564,52 +653,75 @@ module Aws::Pipes
     PipeTargetLambdaFunctionParameters.add_member(:invocation_type, Shapes::ShapeRef.new(shape: PipeTargetInvocationType, location_name: "InvocationType"))
     PipeTargetLambdaFunctionParameters.struct_class = Types::PipeTargetLambdaFunctionParameters
 
-    PipeTargetParameters.add_member(:batch_job_parameters, Shapes::ShapeRef.new(shape: PipeTargetBatchJobParameters, location_name: "BatchJobParameters"))
-    PipeTargetParameters.add_member(:cloud_watch_logs_parameters, Shapes::ShapeRef.new(shape: PipeTargetCloudWatchLogsParameters, location_name: "CloudWatchLogsParameters"))
-    PipeTargetParameters.add_member(:ecs_task_parameters, Shapes::ShapeRef.new(shape: PipeTargetEcsTaskParameters, location_name: "EcsTaskParameters"))
-    PipeTargetParameters.add_member(:event_bridge_event_bus_parameters, Shapes::ShapeRef.new(shape: PipeTargetEventBridgeEventBusParameters, location_name: "EventBridgeEventBusParameters"))
-    PipeTargetParameters.add_member(:http_parameters, Shapes::ShapeRef.new(shape: PipeTargetHttpParameters, location_name: "HttpParameters"))
     PipeTargetParameters.add_member(:input_template, Shapes::ShapeRef.new(shape: InputTemplate, location_name: "InputTemplate"))
-    PipeTargetParameters.add_member(:kinesis_stream_parameters, Shapes::ShapeRef.new(shape: PipeTargetKinesisStreamParameters, location_name: "KinesisStreamParameters"))
     PipeTargetParameters.add_member(:lambda_function_parameters, Shapes::ShapeRef.new(shape: PipeTargetLambdaFunctionParameters, location_name: "LambdaFunctionParameters"))
+    PipeTargetParameters.add_member(:step_function_state_machine_parameters, Shapes::ShapeRef.new(shape: PipeTargetStateMachineParameters, location_name: "StepFunctionStateMachineParameters"))
+    PipeTargetParameters.add_member(:kinesis_stream_parameters, Shapes::ShapeRef.new(shape: PipeTargetKinesisStreamParameters, location_name: "KinesisStreamParameters"))
+    PipeTargetParameters.add_member(:ecs_task_parameters, Shapes::ShapeRef.new(shape: PipeTargetEcsTaskParameters, location_name: "EcsTaskParameters"))
+    PipeTargetParameters.add_member(:batch_job_parameters, Shapes::ShapeRef.new(shape: PipeTargetBatchJobParameters, location_name: "BatchJobParameters"))
+    PipeTargetParameters.add_member(:sqs_queue_parameters, Shapes::ShapeRef.new(shape: PipeTargetSqsQueueParameters, location_name: "SqsQueueParameters"))
+    PipeTargetParameters.add_member(:http_parameters, Shapes::ShapeRef.new(shape: PipeTargetHttpParameters, location_name: "HttpParameters"))
     PipeTargetParameters.add_member(:redshift_data_parameters, Shapes::ShapeRef.new(shape: PipeTargetRedshiftDataParameters, location_name: "RedshiftDataParameters"))
     PipeTargetParameters.add_member(:sage_maker_pipeline_parameters, Shapes::ShapeRef.new(shape: PipeTargetSageMakerPipelineParameters, location_name: "SageMakerPipelineParameters"))
-    PipeTargetParameters.add_member(:sqs_queue_parameters, Shapes::ShapeRef.new(shape: PipeTargetSqsQueueParameters, location_name: "SqsQueueParameters"))
-    PipeTargetParameters.add_member(:step_function_state_machine_parameters, Shapes::ShapeRef.new(shape: PipeTargetStateMachineParameters, location_name: "StepFunctionStateMachineParameters"))
+    PipeTargetParameters.add_member(:event_bridge_event_bus_parameters, Shapes::ShapeRef.new(shape: PipeTargetEventBridgeEventBusParameters, location_name: "EventBridgeEventBusParameters"))
+    PipeTargetParameters.add_member(:cloud_watch_logs_parameters, Shapes::ShapeRef.new(shape: PipeTargetCloudWatchLogsParameters, location_name: "CloudWatchLogsParameters"))
+    PipeTargetParameters.add_member(:timestream_parameters, Shapes::ShapeRef.new(shape: PipeTargetTimestreamParameters, location_name: "TimestreamParameters"))
     PipeTargetParameters.struct_class = Types::PipeTargetParameters
 
+    PipeTargetRedshiftDataParameters.add_member(:secret_manager_arn, Shapes::ShapeRef.new(shape: SecretManagerArnOrJsonPath, location_name: "SecretManagerArn"))
     PipeTargetRedshiftDataParameters.add_member(:database, Shapes::ShapeRef.new(shape: Database, required: true, location_name: "Database"))
     PipeTargetRedshiftDataParameters.add_member(:db_user, Shapes::ShapeRef.new(shape: DbUser, location_name: "DbUser"))
-    PipeTargetRedshiftDataParameters.add_member(:secret_manager_arn, Shapes::ShapeRef.new(shape: SecretManagerArnOrJsonPath, location_name: "SecretManagerArn"))
-    PipeTargetRedshiftDataParameters.add_member(:sqls, Shapes::ShapeRef.new(shape: Sqls, required: true, location_name: "Sqls"))
     PipeTargetRedshiftDataParameters.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, location_name: "StatementName"))
     PipeTargetRedshiftDataParameters.add_member(:with_event, Shapes::ShapeRef.new(shape: Boolean, location_name: "WithEvent"))
+    PipeTargetRedshiftDataParameters.add_member(:sqls, Shapes::ShapeRef.new(shape: Sqls, required: true, location_name: "Sqls"))
     PipeTargetRedshiftDataParameters.struct_class = Types::PipeTargetRedshiftDataParameters
 
     PipeTargetSageMakerPipelineParameters.add_member(:pipeline_parameter_list, Shapes::ShapeRef.new(shape: SageMakerPipelineParameterList, location_name: "PipelineParameterList"))
     PipeTargetSageMakerPipelineParameters.struct_class = Types::PipeTargetSageMakerPipelineParameters
 
-    PipeTargetSqsQueueParameters.add_member(:message_deduplication_id, Shapes::ShapeRef.new(shape: MessageDeduplicationId, location_name: "MessageDeduplicationId"))
     PipeTargetSqsQueueParameters.add_member(:message_group_id, Shapes::ShapeRef.new(shape: MessageGroupId, location_name: "MessageGroupId"))
+    PipeTargetSqsQueueParameters.add_member(:message_deduplication_id, Shapes::ShapeRef.new(shape: MessageDeduplicationId, location_name: "MessageDeduplicationId"))
     PipeTargetSqsQueueParameters.struct_class = Types::PipeTargetSqsQueueParameters
 
     PipeTargetStateMachineParameters.add_member(:invocation_type, Shapes::ShapeRef.new(shape: PipeTargetInvocationType, location_name: "InvocationType"))
     PipeTargetStateMachineParameters.struct_class = Types::PipeTargetStateMachineParameters
 
-    PlacementConstraint.add_member(:expression, Shapes::ShapeRef.new(shape: PlacementConstraintExpression, location_name: "expression"))
+    PipeTargetTimestreamParameters.add_member(:time_value, Shapes::ShapeRef.new(shape: TimeValue, required: true, location_name: "TimeValue"))
+    PipeTargetTimestreamParameters.add_member(:epoch_time_unit, Shapes::ShapeRef.new(shape: EpochTimeUnit, location_name: "EpochTimeUnit"))
+    PipeTargetTimestreamParameters.add_member(:time_field_type, Shapes::ShapeRef.new(shape: TimeFieldType, location_name: "TimeFieldType"))
+    PipeTargetTimestreamParameters.add_member(:timestamp_format, Shapes::ShapeRef.new(shape: TimestampFormat, location_name: "TimestampFormat"))
+    PipeTargetTimestreamParameters.add_member(:version_value, Shapes::ShapeRef.new(shape: VersionValue, required: true, location_name: "VersionValue"))
+    PipeTargetTimestreamParameters.add_member(:dimension_mappings, Shapes::ShapeRef.new(shape: DimensionMappings, required: true, location_name: "DimensionMappings"))
+    PipeTargetTimestreamParameters.add_member(:single_measure_mappings, Shapes::ShapeRef.new(shape: SingleMeasureMappings, location_name: "SingleMeasureMappings"))
+    PipeTargetTimestreamParameters.add_member(:multi_measure_mappings, Shapes::ShapeRef.new(shape: MultiMeasureMappings, location_name: "MultiMeasureMappings"))
+    PipeTargetTimestreamParameters.struct_class = Types::PipeTargetTimestreamParameters
+
     PlacementConstraint.add_member(:type, Shapes::ShapeRef.new(shape: PlacementConstraintType, location_name: "type"))
+    PlacementConstraint.add_member(:expression, Shapes::ShapeRef.new(shape: PlacementConstraintExpression, location_name: "expression"))
     PlacementConstraint.struct_class = Types::PlacementConstraint
 
     PlacementConstraints.member = Shapes::ShapeRef.new(shape: PlacementConstraint)
 
     PlacementStrategies.member = Shapes::ShapeRef.new(shape: PlacementStrategy)
 
-    PlacementStrategy.add_member(:field, Shapes::ShapeRef.new(shape: PlacementStrategyField, location_name: "field"))
     PlacementStrategy.add_member(:type, Shapes::ShapeRef.new(shape: PlacementStrategyType, location_name: "type"))
+    PlacementStrategy.add_member(:field, Shapes::ShapeRef.new(shape: PlacementStrategyField, location_name: "field"))
     PlacementStrategy.struct_class = Types::PlacementStrategy
 
     QueryStringParametersMap.key = Shapes::ShapeRef.new(shape: QueryStringKey)
     QueryStringParametersMap.value = Shapes::ShapeRef.new(shape: QueryStringValue)
+
+    S3LogDestination.add_member(:bucket_name, Shapes::ShapeRef.new(shape: String, location_name: "BucketName"))
+    S3LogDestination.add_member(:prefix, Shapes::ShapeRef.new(shape: String, location_name: "Prefix"))
+    S3LogDestination.add_member(:bucket_owner, Shapes::ShapeRef.new(shape: String, location_name: "BucketOwner"))
+    S3LogDestination.add_member(:output_format, Shapes::ShapeRef.new(shape: S3OutputFormat, location_name: "OutputFormat"))
+    S3LogDestination.struct_class = Types::S3LogDestination
+
+    S3LogDestinationParameters.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3LogDestinationParametersBucketNameString, required: true, location_name: "BucketName"))
+    S3LogDestinationParameters.add_member(:bucket_owner, Shapes::ShapeRef.new(shape: S3LogDestinationParametersBucketOwnerString, required: true, location_name: "BucketOwner"))
+    S3LogDestinationParameters.add_member(:output_format, Shapes::ShapeRef.new(shape: S3OutputFormat, location_name: "OutputFormat"))
+    S3LogDestinationParameters.add_member(:prefix, Shapes::ShapeRef.new(shape: S3LogDestinationParametersPrefixString, location_name: "Prefix"))
+    S3LogDestinationParameters.struct_class = Types::S3LogDestinationParameters
 
     SageMakerPipelineParameter.add_member(:name, Shapes::ShapeRef.new(shape: SageMakerPipelineParameterName, required: true, location_name: "Name"))
     SageMakerPipelineParameter.add_member(:value, Shapes::ShapeRef.new(shape: SageMakerPipelineParameterValue, required: true, location_name: "Value"))
@@ -622,27 +734,34 @@ module Aws::Pipes
     SecurityGroups.member = Shapes::ShapeRef.new(shape: SecurityGroup)
 
     SelfManagedKafkaAccessConfigurationCredentials.add_member(:basic_auth, Shapes::ShapeRef.new(shape: SecretManagerArn, location_name: "BasicAuth"))
-    SelfManagedKafkaAccessConfigurationCredentials.add_member(:client_certificate_tls_auth, Shapes::ShapeRef.new(shape: SecretManagerArn, location_name: "ClientCertificateTlsAuth"))
-    SelfManagedKafkaAccessConfigurationCredentials.add_member(:sasl_scram_256_auth, Shapes::ShapeRef.new(shape: SecretManagerArn, location_name: "SaslScram256Auth"))
     SelfManagedKafkaAccessConfigurationCredentials.add_member(:sasl_scram_512_auth, Shapes::ShapeRef.new(shape: SecretManagerArn, location_name: "SaslScram512Auth"))
+    SelfManagedKafkaAccessConfigurationCredentials.add_member(:sasl_scram_256_auth, Shapes::ShapeRef.new(shape: SecretManagerArn, location_name: "SaslScram256Auth"))
+    SelfManagedKafkaAccessConfigurationCredentials.add_member(:client_certificate_tls_auth, Shapes::ShapeRef.new(shape: SecretManagerArn, location_name: "ClientCertificateTlsAuth"))
     SelfManagedKafkaAccessConfigurationCredentials.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     SelfManagedKafkaAccessConfigurationCredentials.add_member_subclass(:basic_auth, Types::SelfManagedKafkaAccessConfigurationCredentials::BasicAuth)
-    SelfManagedKafkaAccessConfigurationCredentials.add_member_subclass(:client_certificate_tls_auth, Types::SelfManagedKafkaAccessConfigurationCredentials::ClientCertificateTlsAuth)
-    SelfManagedKafkaAccessConfigurationCredentials.add_member_subclass(:sasl_scram_256_auth, Types::SelfManagedKafkaAccessConfigurationCredentials::SaslScram256Auth)
     SelfManagedKafkaAccessConfigurationCredentials.add_member_subclass(:sasl_scram_512_auth, Types::SelfManagedKafkaAccessConfigurationCredentials::SaslScram512Auth)
+    SelfManagedKafkaAccessConfigurationCredentials.add_member_subclass(:sasl_scram_256_auth, Types::SelfManagedKafkaAccessConfigurationCredentials::SaslScram256Auth)
+    SelfManagedKafkaAccessConfigurationCredentials.add_member_subclass(:client_certificate_tls_auth, Types::SelfManagedKafkaAccessConfigurationCredentials::ClientCertificateTlsAuth)
     SelfManagedKafkaAccessConfigurationCredentials.add_member_subclass(:unknown, Types::SelfManagedKafkaAccessConfigurationCredentials::Unknown)
     SelfManagedKafkaAccessConfigurationCredentials.struct_class = Types::SelfManagedKafkaAccessConfigurationCredentials
 
-    SelfManagedKafkaAccessConfigurationVpc.add_member(:security_group, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroup"))
     SelfManagedKafkaAccessConfigurationVpc.add_member(:subnets, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "Subnets"))
+    SelfManagedKafkaAccessConfigurationVpc.add_member(:security_group, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "SecurityGroup"))
     SelfManagedKafkaAccessConfigurationVpc.struct_class = Types::SelfManagedKafkaAccessConfigurationVpc
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
-    ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "quotaCode"))
     ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
     ServiceQuotaExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceCode"))
+    ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "quotaCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    SingleMeasureMapping.add_member(:measure_value, Shapes::ShapeRef.new(shape: MeasureValue, required: true, location_name: "MeasureValue"))
+    SingleMeasureMapping.add_member(:measure_value_type, Shapes::ShapeRef.new(shape: MeasureValueType, required: true, location_name: "MeasureValueType"))
+    SingleMeasureMapping.add_member(:measure_name, Shapes::ShapeRef.new(shape: MeasureName, required: true, location_name: "MeasureName"))
+    SingleMeasureMapping.struct_class = Types::SingleMeasureMapping
+
+    SingleMeasureMappings.member = Shapes::ShapeRef.new(shape: SingleMeasureMapping)
 
     Sqls.member = Shapes::ShapeRef.new(shape: Sql)
 
@@ -650,22 +769,22 @@ module Aws::Pipes
     StartPipeRequest.struct_class = Types::StartPipeRequest
 
     StartPipeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: PipeArn, location_name: "Arn"))
-    StartPipeResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
-    StartPipeResponse.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location_name: "CurrentState"))
-    StartPipeResponse.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location_name: "DesiredState"))
-    StartPipeResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     StartPipeResponse.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, location_name: "Name"))
+    StartPipeResponse.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location_name: "DesiredState"))
+    StartPipeResponse.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location_name: "CurrentState"))
+    StartPipeResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    StartPipeResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     StartPipeResponse.struct_class = Types::StartPipeResponse
 
     StopPipeRequest.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, required: true, location: "uri", location_name: "Name"))
     StopPipeRequest.struct_class = Types::StopPipeRequest
 
     StopPipeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: PipeArn, location_name: "Arn"))
-    StopPipeResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
-    StopPipeResponse.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location_name: "CurrentState"))
-    StopPipeResponse.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location_name: "DesiredState"))
-    StopPipeResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     StopPipeResponse.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, location_name: "Name"))
+    StopPipeResponse.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location_name: "DesiredState"))
+    StopPipeResponse.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location_name: "CurrentState"))
+    StopPipeResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    StopPipeResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     StopPipeResponse.struct_class = Types::StopPipeResponse
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
@@ -692,9 +811,9 @@ module Aws::Pipes
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
-    ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: PipeArn, required: true, location: "uri", location_name: "resourceArn"))
@@ -703,45 +822,46 @@ module Aws::Pipes
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdatePipeRequest.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, required: true, location: "uri", location_name: "Name"))
     UpdatePipeRequest.add_member(:description, Shapes::ShapeRef.new(shape: PipeDescription, location_name: "Description"))
     UpdatePipeRequest.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location_name: "DesiredState"))
+    UpdatePipeRequest.add_member(:source_parameters, Shapes::ShapeRef.new(shape: UpdatePipeSourceParameters, location_name: "SourceParameters"))
     UpdatePipeRequest.add_member(:enrichment, Shapes::ShapeRef.new(shape: OptionalArn, location_name: "Enrichment"))
     UpdatePipeRequest.add_member(:enrichment_parameters, Shapes::ShapeRef.new(shape: PipeEnrichmentParameters, location_name: "EnrichmentParameters"))
-    UpdatePipeRequest.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, required: true, location: "uri", location_name: "Name"))
-    UpdatePipeRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
-    UpdatePipeRequest.add_member(:source_parameters, Shapes::ShapeRef.new(shape: UpdatePipeSourceParameters, location_name: "SourceParameters"))
     UpdatePipeRequest.add_member(:target, Shapes::ShapeRef.new(shape: Arn, location_name: "Target"))
     UpdatePipeRequest.add_member(:target_parameters, Shapes::ShapeRef.new(shape: PipeTargetParameters, location_name: "TargetParameters"))
+    UpdatePipeRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    UpdatePipeRequest.add_member(:log_configuration, Shapes::ShapeRef.new(shape: PipeLogConfigurationParameters, location_name: "LogConfiguration"))
     UpdatePipeRequest.struct_class = Types::UpdatePipeRequest
 
     UpdatePipeResponse.add_member(:arn, Shapes::ShapeRef.new(shape: PipeArn, location_name: "Arn"))
-    UpdatePipeResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
-    UpdatePipeResponse.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location_name: "CurrentState"))
-    UpdatePipeResponse.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location_name: "DesiredState"))
-    UpdatePipeResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     UpdatePipeResponse.add_member(:name, Shapes::ShapeRef.new(shape: PipeName, location_name: "Name"))
+    UpdatePipeResponse.add_member(:desired_state, Shapes::ShapeRef.new(shape: RequestedPipeState, location_name: "DesiredState"))
+    UpdatePipeResponse.add_member(:current_state, Shapes::ShapeRef.new(shape: PipeState, location_name: "CurrentState"))
+    UpdatePipeResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    UpdatePipeResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     UpdatePipeResponse.struct_class = Types::UpdatePipeResponse
 
-    UpdatePipeSourceActiveMQBrokerParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
     UpdatePipeSourceActiveMQBrokerParameters.add_member(:credentials, Shapes::ShapeRef.new(shape: MQBrokerAccessCredentials, required: true, location_name: "Credentials"))
+    UpdatePipeSourceActiveMQBrokerParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
     UpdatePipeSourceActiveMQBrokerParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     UpdatePipeSourceActiveMQBrokerParameters.struct_class = Types::UpdatePipeSourceActiveMQBrokerParameters
 
     UpdatePipeSourceDynamoDBStreamParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
     UpdatePipeSourceDynamoDBStreamParameters.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
+    UpdatePipeSourceDynamoDBStreamParameters.add_member(:on_partial_batch_item_failure, Shapes::ShapeRef.new(shape: OnPartialBatchItemFailureStreams, location_name: "OnPartialBatchItemFailure"))
     UpdatePipeSourceDynamoDBStreamParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     UpdatePipeSourceDynamoDBStreamParameters.add_member(:maximum_record_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumRecordAgeInSeconds, location_name: "MaximumRecordAgeInSeconds"))
     UpdatePipeSourceDynamoDBStreamParameters.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttemptsESM, location_name: "MaximumRetryAttempts"))
-    UpdatePipeSourceDynamoDBStreamParameters.add_member(:on_partial_batch_item_failure, Shapes::ShapeRef.new(shape: OnPartialBatchItemFailureStreams, location_name: "OnPartialBatchItemFailure"))
     UpdatePipeSourceDynamoDBStreamParameters.add_member(:parallelization_factor, Shapes::ShapeRef.new(shape: LimitMax10, location_name: "ParallelizationFactor"))
     UpdatePipeSourceDynamoDBStreamParameters.struct_class = Types::UpdatePipeSourceDynamoDBStreamParameters
 
     UpdatePipeSourceKinesisStreamParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
     UpdatePipeSourceKinesisStreamParameters.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
+    UpdatePipeSourceKinesisStreamParameters.add_member(:on_partial_batch_item_failure, Shapes::ShapeRef.new(shape: OnPartialBatchItemFailureStreams, location_name: "OnPartialBatchItemFailure"))
     UpdatePipeSourceKinesisStreamParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     UpdatePipeSourceKinesisStreamParameters.add_member(:maximum_record_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumRecordAgeInSeconds, location_name: "MaximumRecordAgeInSeconds"))
     UpdatePipeSourceKinesisStreamParameters.add_member(:maximum_retry_attempts, Shapes::ShapeRef.new(shape: MaximumRetryAttemptsESM, location_name: "MaximumRetryAttempts"))
-    UpdatePipeSourceKinesisStreamParameters.add_member(:on_partial_batch_item_failure, Shapes::ShapeRef.new(shape: OnPartialBatchItemFailureStreams, location_name: "OnPartialBatchItemFailure"))
     UpdatePipeSourceKinesisStreamParameters.add_member(:parallelization_factor, Shapes::ShapeRef.new(shape: LimitMax10, location_name: "ParallelizationFactor"))
     UpdatePipeSourceKinesisStreamParameters.struct_class = Types::UpdatePipeSourceKinesisStreamParameters
 
@@ -750,24 +870,24 @@ module Aws::Pipes
     UpdatePipeSourceManagedStreamingKafkaParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     UpdatePipeSourceManagedStreamingKafkaParameters.struct_class = Types::UpdatePipeSourceManagedStreamingKafkaParameters
 
-    UpdatePipeSourceParameters.add_member(:active_mq_broker_parameters, Shapes::ShapeRef.new(shape: UpdatePipeSourceActiveMQBrokerParameters, location_name: "ActiveMQBrokerParameters"))
-    UpdatePipeSourceParameters.add_member(:dynamo_db_stream_parameters, Shapes::ShapeRef.new(shape: UpdatePipeSourceDynamoDBStreamParameters, location_name: "DynamoDBStreamParameters"))
     UpdatePipeSourceParameters.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: FilterCriteria, location_name: "FilterCriteria"))
     UpdatePipeSourceParameters.add_member(:kinesis_stream_parameters, Shapes::ShapeRef.new(shape: UpdatePipeSourceKinesisStreamParameters, location_name: "KinesisStreamParameters"))
-    UpdatePipeSourceParameters.add_member(:managed_streaming_kafka_parameters, Shapes::ShapeRef.new(shape: UpdatePipeSourceManagedStreamingKafkaParameters, location_name: "ManagedStreamingKafkaParameters"))
-    UpdatePipeSourceParameters.add_member(:rabbit_mq_broker_parameters, Shapes::ShapeRef.new(shape: UpdatePipeSourceRabbitMQBrokerParameters, location_name: "RabbitMQBrokerParameters"))
-    UpdatePipeSourceParameters.add_member(:self_managed_kafka_parameters, Shapes::ShapeRef.new(shape: UpdatePipeSourceSelfManagedKafkaParameters, location_name: "SelfManagedKafkaParameters"))
+    UpdatePipeSourceParameters.add_member(:dynamo_db_stream_parameters, Shapes::ShapeRef.new(shape: UpdatePipeSourceDynamoDBStreamParameters, location_name: "DynamoDBStreamParameters"))
     UpdatePipeSourceParameters.add_member(:sqs_queue_parameters, Shapes::ShapeRef.new(shape: UpdatePipeSourceSqsQueueParameters, location_name: "SqsQueueParameters"))
+    UpdatePipeSourceParameters.add_member(:active_mq_broker_parameters, Shapes::ShapeRef.new(shape: UpdatePipeSourceActiveMQBrokerParameters, location_name: "ActiveMQBrokerParameters"))
+    UpdatePipeSourceParameters.add_member(:rabbit_mq_broker_parameters, Shapes::ShapeRef.new(shape: UpdatePipeSourceRabbitMQBrokerParameters, location_name: "RabbitMQBrokerParameters"))
+    UpdatePipeSourceParameters.add_member(:managed_streaming_kafka_parameters, Shapes::ShapeRef.new(shape: UpdatePipeSourceManagedStreamingKafkaParameters, location_name: "ManagedStreamingKafkaParameters"))
+    UpdatePipeSourceParameters.add_member(:self_managed_kafka_parameters, Shapes::ShapeRef.new(shape: UpdatePipeSourceSelfManagedKafkaParameters, location_name: "SelfManagedKafkaParameters"))
     UpdatePipeSourceParameters.struct_class = Types::UpdatePipeSourceParameters
 
-    UpdatePipeSourceRabbitMQBrokerParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
     UpdatePipeSourceRabbitMQBrokerParameters.add_member(:credentials, Shapes::ShapeRef.new(shape: MQBrokerAccessCredentials, required: true, location_name: "Credentials"))
+    UpdatePipeSourceRabbitMQBrokerParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
     UpdatePipeSourceRabbitMQBrokerParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     UpdatePipeSourceRabbitMQBrokerParameters.struct_class = Types::UpdatePipeSourceRabbitMQBrokerParameters
 
     UpdatePipeSourceSelfManagedKafkaParameters.add_member(:batch_size, Shapes::ShapeRef.new(shape: LimitMax10000, location_name: "BatchSize"))
-    UpdatePipeSourceSelfManagedKafkaParameters.add_member(:credentials, Shapes::ShapeRef.new(shape: SelfManagedKafkaAccessConfigurationCredentials, location_name: "Credentials"))
     UpdatePipeSourceSelfManagedKafkaParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
+    UpdatePipeSourceSelfManagedKafkaParameters.add_member(:credentials, Shapes::ShapeRef.new(shape: SelfManagedKafkaAccessConfigurationCredentials, location_name: "Credentials"))
     UpdatePipeSourceSelfManagedKafkaParameters.add_member(:server_root_ca_certificate, Shapes::ShapeRef.new(shape: SecretManagerArn, location_name: "ServerRootCaCertificate"))
     UpdatePipeSourceSelfManagedKafkaParameters.add_member(:vpc, Shapes::ShapeRef.new(shape: SelfManagedKafkaAccessConfigurationVpc, location_name: "Vpc"))
     UpdatePipeSourceSelfManagedKafkaParameters.struct_class = Types::UpdatePipeSourceSelfManagedKafkaParameters
@@ -776,12 +896,12 @@ module Aws::Pipes
     UpdatePipeSourceSqsQueueParameters.add_member(:maximum_batching_window_in_seconds, Shapes::ShapeRef.new(shape: MaximumBatchingWindowInSeconds, location_name: "MaximumBatchingWindowInSeconds"))
     UpdatePipeSourceSqsQueueParameters.struct_class = Types::UpdatePipeSourceSqsQueueParameters
 
-    ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    ValidationException.add_member(:field_list, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fieldList"))
     ValidationException.struct_class = Types::ValidationException
 
-    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ValidationExceptionField.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    ValidationExceptionField.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
@@ -795,8 +915,8 @@ module Aws::Pipes
       api.metadata = {
         "apiVersion" => "2015-10-07",
         "endpointPrefix" => "pipes",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceFullName" => "Amazon EventBridge Pipes",
         "serviceId" => "Pipes",
         "signatureVersion" => "v4",

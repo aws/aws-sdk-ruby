@@ -30,6 +30,7 @@ module Aws::SsmSap
   # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
+  # * {UnauthorizedException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -73,6 +74,21 @@ module Aws::SsmSap
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SsmSap::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class UnauthorizedException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SsmSap::Types::UnauthorizedException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -12,22 +12,41 @@ module Seahorse
         @sync_queue = options[:sync_queue]
       end
 
+      # @return [RequestContext]
       def context
         @response.context
       end
 
+      # @return [StandardError, nil]
       def error
         @response.error
       end
 
+      # @overload on(status_code, &block)
+      #   @param [Integer] status_code The block will be
+      #     triggered only for responses with the given status code.
+      #
+      # @overload on(status_code_range, &block)
+      #   @param [Range<Integer>] status_code_range The block will be
+      #     triggered only for responses with a status code that falls
+      #     witin the given range.
+      #
+      # @return [self]
       def on(range, &block)
         @response.on(range, &block)
         self
       end
 
+      # @api private
       def on_complete(&block)
         @response.on_complete(&block)
         self
+      end
+
+      # @return [Boolean] Returns `true` if the response is complete with
+      #   no error.
+      def successful?
+        @response.error.nil?
       end
 
       def wait

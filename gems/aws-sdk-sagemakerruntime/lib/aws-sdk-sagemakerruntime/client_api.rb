@@ -19,6 +19,7 @@ module Aws::SageMakerRuntime
     EndpointName = Shapes::StringShape.new(name: 'EndpointName')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     Header = Shapes::StringShape.new(name: 'Header')
+    InferenceComponentHeader = Shapes::StringShape.new(name: 'InferenceComponentHeader')
     InferenceId = Shapes::StringShape.new(name: 'InferenceId')
     InputLocationHeader = Shapes::StringShape.new(name: 'InputLocationHeader')
     InternalDependencyException = Shapes::StructureShape.new(name: 'InternalDependencyException')
@@ -81,6 +82,7 @@ module Aws::SageMakerRuntime
     InvokeEndpointInput.add_member(:target_container_hostname, Shapes::ShapeRef.new(shape: TargetContainerHostnameHeader, location: "header", location_name: "X-Amzn-SageMaker-Target-Container-Hostname"))
     InvokeEndpointInput.add_member(:inference_id, Shapes::ShapeRef.new(shape: InferenceId, location: "header", location_name: "X-Amzn-SageMaker-Inference-Id"))
     InvokeEndpointInput.add_member(:enable_explanations, Shapes::ShapeRef.new(shape: EnableExplanationsHeader, location: "header", location_name: "X-Amzn-SageMaker-Enable-Explanations"))
+    InvokeEndpointInput.add_member(:inference_component_name, Shapes::ShapeRef.new(shape: InferenceComponentHeader, location: "header", location_name: "X-Amzn-SageMaker-Inference-Component"))
     InvokeEndpointInput.struct_class = Types::InvokeEndpointInput
     InvokeEndpointInput[:payload] = :body
     InvokeEndpointInput[:payload_member] = InvokeEndpointInput.member(:body)
@@ -101,6 +103,7 @@ module Aws::SageMakerRuntime
     InvokeEndpointWithResponseStreamInput.add_member(:target_variant, Shapes::ShapeRef.new(shape: TargetVariantHeader, location: "header", location_name: "X-Amzn-SageMaker-Target-Variant"))
     InvokeEndpointWithResponseStreamInput.add_member(:target_container_hostname, Shapes::ShapeRef.new(shape: TargetContainerHostnameHeader, location: "header", location_name: "X-Amzn-SageMaker-Target-Container-Hostname"))
     InvokeEndpointWithResponseStreamInput.add_member(:inference_id, Shapes::ShapeRef.new(shape: InferenceId, location: "header", location_name: "X-Amzn-SageMaker-Inference-Id"))
+    InvokeEndpointWithResponseStreamInput.add_member(:inference_component_name, Shapes::ShapeRef.new(shape: InferenceComponentHeader, location: "header", location_name: "X-Amzn-SageMaker-Inference-Component"))
     InvokeEndpointWithResponseStreamInput.struct_class = Types::InvokeEndpointWithResponseStreamInput
     InvokeEndpointWithResponseStreamInput[:payload] = :body
     InvokeEndpointWithResponseStreamInput[:payload_member] = InvokeEndpointWithResponseStreamInput.member(:body)

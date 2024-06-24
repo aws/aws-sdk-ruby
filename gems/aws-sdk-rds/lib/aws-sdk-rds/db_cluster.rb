@@ -211,6 +211,12 @@ module Aws::RDS
       data[:read_replica_identifiers]
     end
 
+    # Reserved for future use.
+    # @return [Array<Types::DBClusterStatusInfo>]
+    def status_infos
+      data[:status_infos]
+    end
+
     # The list of DB instances that make up the DB cluster.
     # @return [Array<Types::DBClusterMember>]
     def db_cluster_members
@@ -364,6 +370,12 @@ module Aws::RDS
       data[:scaling_configuration_info]
     end
 
+    # Reserved for future use.
+    # @return [Types::RdsCustomClusterConfiguration]
+    def rds_custom_cluster_configuration
+      data[:rds_custom_cluster_configuration]
+    end
+
     # Indicates whether the DB cluster has deletion protection enabled. The
     # database can't be deleted when deletion protection is enabled.
     # @return [Boolean]
@@ -371,16 +383,16 @@ module Aws::RDS
       data[:deletion_protection]
     end
 
-    # Indicates whether the HTTP endpoint for an Aurora Serverless v1 DB
-    # cluster is enabled.
+    # Indicates whether the HTTP endpoint is enabled for an Aurora DB
+    # cluster.
     #
     # When enabled, the HTTP endpoint provides a connectionless web service
-    # API for running SQL queries on the Aurora Serverless v1 DB cluster.
-    # You can also query your database from inside the RDS console with the
+    # API (RDS Data API) for running SQL queries on the DB cluster. You can
+    # also query your database from inside the RDS console with the RDS
     # query editor.
     #
-    # For more information, see [Using the Data API for Aurora Serverless
-    # v1][1] in the *Amazon Aurora User Guide*.
+    # For more information, see [Using RDS Data API][1] in the *Amazon
+    # Aurora User Guide*.
     #
     #
     #
@@ -668,6 +680,46 @@ module Aws::RDS
       data[:aws_backup_recovery_point_arn]
     end
 
+    # The details for Aurora Limitless Database.
+    # @return [Types::LimitlessDatabase]
+    def limitless_database
+      data[:limitless_database]
+    end
+
+    # The storage throughput for the DB cluster. The throughput is
+    # automatically set based on the IOPS that you provision, and is not
+    # configurable.
+    #
+    # This setting is only for non-Aurora Multi-AZ DB clusters.
+    # @return [Integer]
+    def storage_throughput
+      data[:storage_throughput]
+    end
+
+    # Returns the details of the DB instance’s server certificate.
+    #
+    # For more information, see [Using SSL/TLS to encrypt a connection to a
+    # DB instance][1] in the *Amazon RDS User Guide* and [ Using SSL/TLS to
+    # encrypt a connection to a DB cluster][2] in the *Amazon Aurora User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html
+    # @return [Types::CertificateDetails]
+    def certificate_details
+      data[:certificate_details]
+    end
+
+    # The life cycle type for the DB cluster.
+    #
+    # For more information, see CreateDBCluster.
+    # @return [String]
+    def engine_lifecycle_support
+      data[:engine_lifecycle_support]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -682,7 +734,7 @@ module Aws::RDS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_db_clusters(db_cluster_identifier: @id)
       end
       @data = resp.db_clusters[0]
@@ -799,7 +851,7 @@ module Aws::RDS
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -846,6 +898,11 @@ module Aws::RDS
     #       timeout_action: "String",
     #       seconds_before_timeout: 1,
     #     },
+    #     rds_custom_cluster_configuration: {
+    #       interconnect_subnet_id: "String",
+    #       transit_gateway_multicast_domain_id: "String",
+    #       replica_mode: "open-read-only", # accepts open-read-only, mounted
+    #     },
     #     deletion_protection: false,
     #     global_cluster_identifier: "String",
     #     enable_http_endpoint: false,
@@ -864,6 +921,7 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     performance_insights_retention_period: 1,
+    #     enable_limitless_database: false,
     #     serverless_v2_scaling_configuration: {
     #       min_capacity: 1.0,
     #       max_capacity: 1.0,
@@ -873,22 +931,29 @@ module Aws::RDS
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
     #     enable_local_write_forwarding: false,
+    #     ca_certificate_identifier: "String",
+    #     engine_lifecycle_support: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :availability_zones
-    #   A list of Availability Zones (AZs) where DB instances in the DB
-    #   cluster can be created.
+    #   A list of Availability Zones (AZs) where you specifically want to
+    #   create DB instances in the DB cluster.
     #
-    #   For information on Amazon Web Services Regions and Availability Zones,
-    #   see [Choosing the Regions and Availability Zones][1] in the *Amazon
+    #   For information on AZs, see [Availability Zones][1] in the *Amazon
     #   Aurora User Guide*.
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
+    #   Constraints:
+    #
+    #   * Can't specify more than three AZs.
+    #
+    #   ^
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.AvailabilityZones
     # @option options [Integer] :backup_retention_period
     #   The number of days for which automated backups are retained.
     #
@@ -907,9 +972,9 @@ module Aws::RDS
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     # @option options [String] :database_name
-    #   The name for your database of up to 64 alphanumeric characters. If you
-    #   don't provide a name, Amazon RDS doesn't create a database in the DB
-    #   cluster you are creating.
+    #   The name for your database of up to 64 alphanumeric characters. A
+    #   database named `postgres` is always created. If this parameter is
+    #   specified, an additional database with this name is created.
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :db_cluster_parameter_group_name
@@ -948,7 +1013,22 @@ module Aws::RDS
     #
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     #
-    #   Valid Values: `aurora-mysql | aurora-postgresql | mysql | postgres`
+    #   Valid Values:
+    #
+    #   * `aurora-mysql`
+    #
+    #   * `aurora-postgresql`
+    #
+    #   * `mysql`
+    #
+    #   * `postgres`
+    #
+    #   * `neptune` - For information about using Amazon Neptune, see the [
+    #     *Amazon Neptune User Guide* ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/intro.html
     # @option options [String] :engine_version
     #   The version number of the database engine to use.
     #
@@ -1248,7 +1328,8 @@ module Aws::RDS
     #   `serverless`.
     #
     #   The `serverless` engine mode only applies for Aurora Serverless v1 DB
-    #   clusters.
+    #   clusters. Aurora Serverless v2 DB clusters use the `provisioned`
+    #   engine mode.
     #
     #   For information about limitations and requirements for Serverless DB
     #   clusters, see the following sections in the *Amazon Aurora User
@@ -1269,6 +1350,8 @@ module Aws::RDS
     #   of the DB cluster.
     #
     #   Valid for Cluster Type: Aurora DB clusters only
+    # @option options [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
+    #   Reserved for future use.
     # @option options [Boolean] :deletion_protection
     #   Specifies whether the DB cluster has deletion protection enabled. The
     #   database can't be deleted when deletion protection is enabled. By
@@ -1281,16 +1364,22 @@ module Aws::RDS
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     # @option options [Boolean] :enable_http_endpoint
-    #   Specifies whether to enable the HTTP endpoint for an Aurora Serverless
-    #   v1 DB cluster. By default, the HTTP endpoint is disabled.
+    #   Specifies whether to enable the HTTP endpoint for the DB cluster. By
+    #   default, the HTTP endpoint isn't enabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web service
-    #   API for running SQL queries on the Aurora Serverless v1 DB cluster.
-    #   You can also query your database from inside the RDS console with the
+    #   API (RDS Data API) for running SQL queries on the DB cluster. You can
+    #   also query your database from inside the RDS console with the RDS
     #   query editor.
     #
-    #   For more information, see [Using the Data API for Aurora Serverless
-    #   v1][1] in the *Amazon Aurora User Guide*.
+    #   RDS Data API is supported with the following DB clusters:
+    #
+    #   * Aurora PostgreSQL Serverless v2 and provisioned
+    #
+    #   * Aurora PostgreSQL and Aurora MySQL Serverless v1
+    #
+    #   For more information, see [Using RDS Data API][1] in the *Amazon
+    #   Aurora User Guide*.
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
@@ -1378,7 +1467,7 @@ module Aws::RDS
     #
     #   * Aurora DB clusters - `aurora | aurora-iopt1`
     #
-    #   * Multi-AZ DB clusters - `io1`
+    #   * Multi-AZ DB clusters - `io1 | io2 | gp3`
     #
     #   Default:
     #
@@ -1531,6 +1620,11 @@ module Aws::RDS
     #
     #   If you specify a retention period that isn't valid, such as `94`,
     #   Amazon RDS issues an error.
+    # @option options [Boolean] :enable_limitless_database
+    #   Specifies whether to enable Aurora Limitless Database. You must enable
+    #   Aurora Limitless Database to create a DB shard group.
+    #
+    #   Valid for: Aurora DB clusters only
     # @option options [Types::ServerlessV2ScalingConfiguration] :serverless_v2_scaling_configuration
     #   Contains the scaling configuration of an Aurora Serverless v2 DB
     #   cluster.
@@ -1612,13 +1706,60 @@ module Aws::RDS
     #   aren't allowed on reader DB instances.
     #
     #   Valid for: Aurora DB clusters only
+    # @option options [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB cluster's server
+    #   certificate.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide*.
+    #
+    #   Valid for Cluster Type: Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
+    # @option options [String] :engine_lifecycle_support
+    #   The life cycle type for this DB cluster.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB cluster into Amazon RDS Extended Support. At the
+    #   end of standard support, you can avoid charges for Extended Support by
+    #   setting the value to `open-source-rds-extended-support-disabled`. In
+    #   this case, creating the DB cluster will fail if the DB major version
+    #   is past its end of standard support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB cluster into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the selected
+    #   major engine version on your DB cluster past the end of standard
+    #   support for that engine version. For more information, see the
+    #   following sections:
+    #
+    #   * Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
+    #     Support][1] in the *Amazon Aurora User Guide*
+    #
+    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
+    #     RDS User Guide*
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
     # @return [DBCluster]
     def create(options = {})
       options = options.merge(db_cluster_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_db_cluster(options)
       end
       DBCluster.new(
@@ -1658,7 +1799,7 @@ module Aws::RDS
     # @return [DBClusterSnapshot]
     def create_snapshot(options = {})
       options = options.merge(db_cluster_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_db_cluster_snapshot(options)
       end
       DBClusterSnapshot.new(
@@ -1714,7 +1855,7 @@ module Aws::RDS
     # @return [DBCluster]
     def delete(options = {})
       options = options.merge(db_cluster_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_db_cluster(options)
       end
       DBCluster.new(
@@ -1741,7 +1882,7 @@ module Aws::RDS
     # @return [DBCluster]
     def failover(options = {})
       options = options.merge(db_cluster_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.failover_db_cluster(options)
       end
       DBCluster.new(
@@ -1809,6 +1950,8 @@ module Aws::RDS
     #     allow_engine_mode_change: false,
     #     enable_local_write_forwarding: false,
     #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
+    #     enable_limitless_database: false,
+    #     ca_certificate_identifier: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -2094,15 +2237,22 @@ module Aws::RDS
     #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Boolean] :enable_http_endpoint
     #   Specifies whether to enable the HTTP endpoint for an Aurora Serverless
-    #   v1 DB cluster. By default, the HTTP endpoint is disabled.
+    #   v1 DB cluster. By default, the HTTP endpoint isn't enabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web service
-    #   API for running SQL queries on the Aurora Serverless v1 DB cluster.
-    #   You can also query your database from inside the RDS console with the
-    #   query editor.
+    #   API (RDS Data API) for running SQL queries on the Aurora Serverless v1
+    #   DB cluster. You can also query your database from inside the RDS
+    #   console with the RDS query editor.
     #
-    #   For more information, see [Using the Data API for Aurora Serverless
-    #   v1][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using RDS Data API][1] in the *Amazon
+    #   Aurora User Guide*.
+    #
+    #   <note markdown="1"> This parameter applies only to Aurora Serverless v1 DB clusters. To
+    #   enable or disable the HTTP endpoint for an Aurora PostgreSQL
+    #   Serverless v2 or provisioned DB cluster, use the `EnableHttpEndpoint`
+    #   and `DisableHttpEndpoint` operations.
+    #
+    #    </note>
     #
     #   Valid for Cluster Type: Aurora DB clusters only
     #
@@ -2165,7 +2315,7 @@ module Aws::RDS
     #
     #   * Aurora DB clusters - `aurora | aurora-iopt1`
     #
-    #   * Multi-AZ DB clusters - `io1`
+    #   * Multi-AZ DB clusters - `io1 | io2 | gp3`
     #
     #   Default:
     #
@@ -2426,10 +2576,27 @@ module Aws::RDS
     # @option options [String] :aws_backup_recovery_point_arn
     #   The Amazon Resource Name (ARN) of the recovery point in Amazon Web
     #   Services Backup.
+    # @option options [Boolean] :enable_limitless_database
+    #   Specifies whether to enable Aurora Limitless Database. You must enable
+    #   Aurora Limitless Database to create a DB shard group.
+    #
+    #   Valid for: Aurora DB clusters only
+    # @option options [String] :ca_certificate_identifier
+    #   The CA certificate identifier to use for the DB cluster's server
+    #   certificate.
+    #
+    #   For more information, see [Using SSL/TLS to encrypt a connection to a
+    #   DB instance][1] in the *Amazon RDS User Guide*.
+    #
+    #   Valid for Cluster Type: Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.modify_db_cluster(options)
       end
       DBCluster.new(
@@ -2484,6 +2651,12 @@ module Aws::RDS
     #     },
     #     network_type: "String",
     #     source_db_cluster_resource_id: "String",
+    #     rds_custom_cluster_configuration: {
+    #       interconnect_subnet_id: "String",
+    #       transit_gateway_multicast_domain_id: "String",
+    #       replica_mode: "open-read-only", # accepts open-read-only, mounted
+    #     },
+    #     engine_lifecycle_support: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_cluster_identifier
@@ -2841,10 +3014,48 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @option options [String] :source_db_cluster_resource_id
     #   The resource ID of the source DB cluster from which to restore.
+    # @option options [Types::RdsCustomClusterConfiguration] :rds_custom_cluster_configuration
+    #   Reserved for future use.
+    # @option options [String] :engine_lifecycle_support
+    #   The life cycle type for this DB cluster.
+    #
+    #   <note markdown="1"> By default, this value is set to `open-source-rds-extended-support`,
+    #   which enrolls your DB cluster into Amazon RDS Extended Support. At the
+    #   end of standard support, you can avoid charges for Extended Support by
+    #   setting the value to `open-source-rds-extended-support-disabled`. In
+    #   this case, RDS automatically upgrades your restored DB cluster to a
+    #   higher engine version, if the major engine version is past its end of
+    #   standard support date.
+    #
+    #    </note>
+    #
+    #   You can use this setting to enroll your DB cluster into Amazon RDS
+    #   Extended Support. With RDS Extended Support, you can run the selected
+    #   major engine version on your DB cluster past the end of standard
+    #   support for that engine version. For more information, see the
+    #   following sections:
+    #
+    #   * Amazon Aurora (PostgreSQL only) - [Using Amazon RDS Extended
+    #     Support][1] in the *Amazon Aurora User Guide*
+    #
+    #   * Amazon RDS - [Using Amazon RDS Extended Support][2] in the *Amazon
+    #     RDS User Guide*
+    #
+    #   Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #   Valid Values: `open-source-rds-extended-support |
+    #   open-source-rds-extended-support-disabled`
+    #
+    #   Default: `open-source-rds-extended-support`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.restore_db_cluster_to_point_in_time(options)
       end
       DBCluster.new(
@@ -2907,7 +3118,7 @@ module Aws::RDS
           source_type: "db-cluster",
           source_identifier: @id
         )
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_events(options)
         end
         resp.each_page do |page|
@@ -3055,7 +3266,7 @@ module Aws::RDS
     def snapshots(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(db_cluster_identifier: @id)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_db_cluster_snapshots(options)
         end
         resp.each_page do |page|

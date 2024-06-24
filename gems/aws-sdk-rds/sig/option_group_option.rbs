@@ -1,0 +1,82 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html
+    class OptionGroupOption
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#name-instance_method
+      def name: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#description-instance_method
+      def description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#engine_name-instance_method
+      def engine_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#major_engine_version-instance_method
+      def major_engine_version: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#minimum_required_minor_engine_version-instance_method
+      def minimum_required_minor_engine_version: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#port_required-instance_method
+      def port_required: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#default_port-instance_method
+      def default_port: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#options_depended_on-instance_method
+      def options_depended_on: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#options_conflicts_with-instance_method
+      def options_conflicts_with: () -> ::Array[::String]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#persistent-instance_method
+      def persistent: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#permanent-instance_method
+      def permanent: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#requires_auto_minor_engine_version_upgrade-instance_method
+      def requires_auto_minor_engine_version_upgrade: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#vpc_only-instance_method
+      def vpc_only: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#supports_option_version_downgrade-instance_method
+      def supports_option_version_downgrade: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#option_group_option_settings-instance_method
+      def option_group_option_settings: () -> ::Array[Types::OptionGroupOptionSetting]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#option_group_option_versions-instance_method
+      def option_group_option_versions: () -> ::Array[Types::OptionVersion]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#copyable_cross_account-instance_method
+      def copyable_cross_account: () -> bool
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#data-instance_method
+      def data: () -> Types::OptionGroupOption
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      class Collection < ::Aws::Resources::Collection[OptionGroupOption]
+      end
+    end
+  end
+end

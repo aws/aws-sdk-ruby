@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2024-03-26)
+------------------
+
+* Feature - Add new operation delete-kx-cluster-node and add status parameter to list-kx-cluster-node operation.
+
+1.30.0 (2024-03-19)
+------------------
+
+* Feature - Adding new attributes readWrite and onDemand to dataview models for Database Maintenance operations.
+
+1.29.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.28.0 (2024-01-22)
+------------------
+
+* Feature - Allow customer to set zip default through command line arguments.
+
+1.27.0 (2023-12-08)
+------------------
+
+* Feature - Releasing Scaling Group, Dataview, and Volume APIs
+
+1.26.0 (2023-12-04)
+------------------
+
+* Feature - Release General Purpose type clusters
+
+1.25.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2023-11-15)
+------------------
+
+* Feature - Adding deprecated trait on Dataset Browser Environment APIs
+
+1.22.0 (2023-10-30)
+------------------
+
+* Feature - Introducing new API UpdateKxClusterCodeConfiguration, introducing new cache types for clusters and introducing new deployment modes for updating clusters.
+
 1.21.0 (2023-09-27)
 ------------------
 

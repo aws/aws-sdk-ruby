@@ -1,0 +1,334 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ResourceGroups
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateGroupOutput]
+        def group: () -> Types::Group
+        def resource_query: () -> Types::ResourceQuery
+        def tags: () -> ::Hash[::String, ::String]
+        def group_configuration: () -> Types::GroupConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#create_group-instance_method
+      def create_group: (
+                          name: ::String,
+                          ?description: ::String,
+                          ?resource_query: {
+                            type: ("TAG_FILTERS_1_0" | "CLOUDFORMATION_STACK_1_0"),
+                            query: ::String
+                          },
+                          ?tags: Hash[::String, ::String],
+                          ?configuration: Array[
+                            {
+                              type: ::String,
+                              parameters: Array[
+                                {
+                                  name: ::String,
+                                  values: Array[::String]?
+                                },
+                              ]?
+                            },
+                          ]
+                        ) -> _CreateGroupResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGroupResponseSuccess
+
+      interface _DeleteGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteGroupOutput]
+        def group: () -> Types::Group
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#delete_group-instance_method
+      def delete_group: (
+                          ?group_name: ::String,
+                          ?group: ::String
+                        ) -> _DeleteGroupResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteGroupResponseSuccess
+
+      interface _GetAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountSettingsOutput]
+        def account_settings: () -> Types::AccountSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#get_account_settings-instance_method
+      def get_account_settings: () -> _GetAccountSettingsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccountSettingsResponseSuccess
+
+      interface _GetGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupOutput]
+        def group: () -> Types::Group
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#get_group-instance_method
+      def get_group: (
+                       ?group_name: ::String,
+                       ?group: ::String
+                     ) -> _GetGroupResponseSuccess
+                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupResponseSuccess
+
+      interface _GetGroupConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupConfigurationOutput]
+        def group_configuration: () -> Types::GroupConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#get_group_configuration-instance_method
+      def get_group_configuration: (
+                                     ?group: ::String
+                                   ) -> _GetGroupConfigurationResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupConfigurationResponseSuccess
+
+      interface _GetGroupQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetGroupQueryOutput]
+        def group_query: () -> Types::GroupQuery
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#get_group_query-instance_method
+      def get_group_query: (
+                             ?group_name: ::String,
+                             ?group: ::String
+                           ) -> _GetGroupQueryResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupQueryResponseSuccess
+
+      interface _GetTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTagsOutput]
+        def arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#get_tags-instance_method
+      def get_tags: (
+                      arn: ::String
+                    ) -> _GetTagsResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTagsResponseSuccess
+
+      interface _GroupResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GroupResourcesOutput]
+        def succeeded: () -> ::Array[::String]
+        def failed: () -> ::Array[Types::FailedResource]
+        def pending: () -> ::Array[Types::PendingResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#group_resources-instance_method
+      def group_resources: (
+                             group: ::String,
+                             resource_arns: Array[::String]
+                           ) -> _GroupResourcesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GroupResourcesResponseSuccess
+
+      interface _ListGroupResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupResourcesOutput]
+        def resources: () -> ::Array[Types::ListGroupResourcesItem]
+        def resource_identifiers: () -> ::Array[Types::ResourceIdentifier]
+        def next_token: () -> ::String
+        def query_errors: () -> ::Array[Types::QueryError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#list_group_resources-instance_method
+      def list_group_resources: (
+                                  ?group_name: ::String,
+                                  ?group: ::String,
+                                  ?filters: Array[
+                                    {
+                                      name: ("resource-type"),
+                                      values: Array[::String]
+                                    },
+                                  ],
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListGroupResourcesResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupResourcesResponseSuccess
+
+      interface _ListGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListGroupsOutput]
+        def group_identifiers: () -> ::Array[Types::GroupIdentifier]
+        def groups: () -> ::Array[Types::Group]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#list_groups-instance_method
+      def list_groups: (
+                         ?filters: Array[
+                           {
+                             name: ("resource-type" | "configuration-type"),
+                             values: Array[::String]
+                           },
+                         ],
+                         ?max_results: ::Integer,
+                         ?next_token: ::String
+                       ) -> _ListGroupsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupsResponseSuccess
+
+      interface _PutGroupConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutGroupConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#put_group_configuration-instance_method
+      def put_group_configuration: (
+                                     ?group: ::String,
+                                     ?configuration: Array[
+                                       {
+                                         type: ::String,
+                                         parameters: Array[
+                                           {
+                                             name: ::String,
+                                             values: Array[::String]?
+                                           },
+                                         ]?
+                                       },
+                                     ]
+                                   ) -> _PutGroupConfigurationResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutGroupConfigurationResponseSuccess
+
+      interface _SearchResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchResourcesOutput]
+        def resource_identifiers: () -> ::Array[Types::ResourceIdentifier]
+        def next_token: () -> ::String
+        def query_errors: () -> ::Array[Types::QueryError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#search_resources-instance_method
+      def search_resources: (
+                              resource_query: {
+                                type: ("TAG_FILTERS_1_0" | "CLOUDFORMATION_STACK_1_0"),
+                                query: ::String
+                              },
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _SearchResourcesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchResourcesResponseSuccess
+
+      interface _TagResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagOutput]
+        def arn: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#tag-instance_method
+      def tag: (
+                 arn: ::String,
+                 tags: Hash[::String, ::String]
+               ) -> _TagResponseSuccess
+             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResponseSuccess
+
+      interface _UngroupResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UngroupResourcesOutput]
+        def succeeded: () -> ::Array[::String]
+        def failed: () -> ::Array[Types::FailedResource]
+        def pending: () -> ::Array[Types::PendingResource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#ungroup_resources-instance_method
+      def ungroup_resources: (
+                               group: ::String,
+                               resource_arns: Array[::String]
+                             ) -> _UngroupResourcesResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UngroupResourcesResponseSuccess
+
+      interface _UntagResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagOutput]
+        def arn: () -> ::String
+        def keys: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#untag-instance_method
+      def untag: (
+                   arn: ::String,
+                   keys: Array[::String]
+                 ) -> _UntagResponseSuccess
+               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResponseSuccess
+
+      interface _UpdateAccountSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAccountSettingsOutput]
+        def account_settings: () -> Types::AccountSettings
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#update_account_settings-instance_method
+      def update_account_settings: (
+                                     ?group_lifecycle_events_desired_status: ("ACTIVE" | "INACTIVE")
+                                   ) -> _UpdateAccountSettingsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountSettingsResponseSuccess
+
+      interface _UpdateGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGroupOutput]
+        def group: () -> Types::Group
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#update_group-instance_method
+      def update_group: (
+                          ?group_name: ::String,
+                          ?group: ::String,
+                          ?description: ::String
+                        ) -> _UpdateGroupResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGroupResponseSuccess
+
+      interface _UpdateGroupQueryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateGroupQueryOutput]
+        def group_query: () -> Types::GroupQuery
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ResourceGroups/Client.html#update_group_query-instance_method
+      def update_group_query: (
+                                ?group_name: ::String,
+                                ?group: ::String,
+                                resource_query: {
+                                  type: ("TAG_FILTERS_1_0" | "CLOUDFORMATION_STACK_1_0"),
+                                  query: ::String
+                                }
+                              ) -> _UpdateGroupQueryResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGroupQueryResponseSuccess
+    end
+  end
+end
+

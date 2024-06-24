@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::IoT
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::IoT
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::IoT
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::IoT
     #   @option options [Aws::IoT::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::IoT::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -548,9 +573,15 @@ module Aws::IoT
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
-    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #   <note markdown="1"> The `namespaceId` feature is only supported by IoT Greengrass at this
+    #   time. For more information, see [Setting up IoT Greengrass core
+    #   devices.][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
     #
     # @return [Types::AssociateTargetsWithJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1311,6 +1342,82 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Creates an Amazon Web Services IoT Core certificate provider. You can
+    # use Amazon Web Services IoT Core certificate provider to customize how
+    # to sign a certificate signing request (CSR) in IoT fleet provisioning.
+    # For more information, see [Customizing certificate signing using
+    # Amazon Web Services IoT Core certificate provider][1] from *Amazon Web
+    # Services IoT Core Developer Guide*.
+    #
+    # Requires permission to access the [CreateCertificateProvider][2]
+    # action.
+    #
+    # After you create a certificate provider, the behavior of [
+    # `CreateCertificateFromCsr` API for fleet provisioning][3] will change
+    # and all API calls to `CreateCertificateFromCsr` will invoke the
+    # certificate provider to create the certificates. It can take up to a
+    # few minutes for this behavior to change after a certificate provider
+    # is created.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/provisioning-cert-provider.html
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    # [3]: https://docs.aws.amazon.com/iot/latest/developerguide/fleet-provision-api.html#create-cert-csr
+    #
+    # @option params [required, String] :certificate_provider_name
+    #   The name of the certificate provider.
+    #
+    # @option params [required, String] :lambda_function_arn
+    #   The ARN of the Lambda function that defines the authentication logic.
+    #
+    # @option params [required, Array<String>] :account_default_for_operations
+    #   A list of the operations that the certificate provider will use to
+    #   generate certificates. Valid value: `CreateCertificateFromCsr`.
+    #
+    # @option params [String] :client_token
+    #   A string that you can optionally pass in the
+    #   `CreateCertificateProvider` request to make sure the request is
+    #   idempotent.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the certificate provider.
+    #
+    # @return [Types::CreateCertificateProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCertificateProviderResponse#certificate_provider_name #certificate_provider_name} => String
+    #   * {Types::CreateCertificateProviderResponse#certificate_provider_arn #certificate_provider_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_certificate_provider({
+    #     certificate_provider_name: "CertificateProviderName", # required
+    #     lambda_function_arn: "CertificateProviderFunctionArn", # required
+    #     account_default_for_operations: ["CreateCertificateFromCsr"], # required, accepts CreateCertificateFromCsr
+    #     client_token: "ClientToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_provider_name #=> String
+    #   resp.certificate_provider_arn #=> String
+    #
+    # @overload create_certificate_provider(params = {})
+    # @param [Hash] params ({})
+    def create_certificate_provider(params = {}, options = {})
+      req = build_request(:create_certificate_provider, params)
+      req.send_request(options)
+    end
+
     # Use this API to define a Custom Metric published by your devices to
     # Device Defender.
     #
@@ -1505,6 +1612,9 @@ module Aws::IoT
     # @option params [Types::TlsConfig] :tls_config
     #   An object that specifies the TLS configuration for a domain.
     #
+    # @option params [Types::ServerCertificateConfig] :server_certificate_config
+    #   The server certificate configuration.
+    #
     # @return [Types::CreateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
@@ -1530,6 +1640,9 @@ module Aws::IoT
     #     ],
     #     tls_config: {
     #       security_policy: "SecurityPolicy",
+    #     },
+    #     server_certificate_config: {
+    #       enable_ocsp_check: false,
     #     },
     #   })
     #
@@ -1799,9 +1912,15 @@ module Aws::IoT
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
-    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #   <note markdown="1"> The `namespaceId` feature is only supported by IoT Greengrass at this
+    #   time. For more information, see [Setting up IoT Greengrass core
+    #   devices.][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
     #
     # @option params [String] :job_template_arn
     #   The ARN of the job template used to create the job.
@@ -1826,10 +1945,16 @@ module Aws::IoT
     #
     # @option params [Array<String>] :destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed on
-    #   the device when the job successfully completes.
+    #   the device when the job successfully completes. The package version
+    #   must be in either the Published or Deprecated state when the job
+    #   deploys. For more information, see [Package version lifecycle][1].
     #
-    #   **Note:**The following Length Constraints relates to a single string.
-    #   Up to five strings are allowed.
+    #   **Note:**The following Length Constraints relates to a single ARN. Up
+    #   to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1984,10 +2109,16 @@ module Aws::IoT
     #
     # @option params [Array<String>] :destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed on
-    #   the device when the job successfully completes.
+    #   the device when the job successfully completes. The package version
+    #   must be in either the Published or Deprecated state when the job
+    #   deploys. For more information, see [Package version lifecycle][1].
     #
-    #   **Note:**The following Length Constraints relates to a single string.
-    #   Up to five strings are allowed.
+    #   **Note:**The following Length Constraints relates to a single ARN. Up
+    #   to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #
     # @return [Types::CreateJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2998,6 +3129,9 @@ module Aws::IoT
     # @option params [Array<Types::Tag>] :tags
     #   Metadata that can be used to manage the security profile.
     #
+    # @option params [Types::MetricsExportConfig] :metrics_export_config
+    #   Specifies the MQTT topic and role ARN required for metric export.
+    #
     # @return [Types::CreateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSecurityProfileResponse#security_profile_name #security_profile_name} => String
@@ -3037,6 +3171,7 @@ module Aws::IoT
     #           },
     #         },
     #         suppress_alerts: false,
+    #         export_metric: false,
     #       },
     #     ],
     #     alert_targets: {
@@ -3053,6 +3188,7 @@ module Aws::IoT
     #           dimension_name: "DimensionName", # required
     #           operator: "IN", # accepts IN, NOT_IN
     #         },
+    #         export_metric: false,
     #       },
     #     ],
     #     tags: [
@@ -3061,6 +3197,10 @@ module Aws::IoT
     #         value: "TagValue",
     #       },
     #     ],
+    #     metrics_export_config: {
+    #       mqtt_topic: "MqttTopic", # required
+    #       role_arn: "RoleArn", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -3220,6 +3360,9 @@ module Aws::IoT
     #
     # <note markdown="1"> This is a control plane operation. See [Authorization][1] for
     # information about authorizing control plane actions.
+    #
+    #  If the `ThingGroup` that you create has the exact same attributes as
+    # an existing `ThingGroup`, you will get a 200 success response.
     #
     #  </note>
     #
@@ -4062,6 +4205,37 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Deletes a certificate provider.
+    #
+    # Requires permission to access the [DeleteCertificateProvider][1]
+    # action.
+    #
+    # If you delete the certificate provider resource, the behavior of
+    # `CreateCertificateFromCsr` will resume, and IoT will create
+    # certificates signed by IoT from a certificate signing request (CSR).
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :certificate_provider_name
+    #   The name of the certificate provider.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_certificate_provider({
+    #     certificate_provider_name: "CertificateProviderName", # required
+    #   })
+    #
+    # @overload delete_certificate_provider(params = {})
+    # @param [Hash] params ({})
+    def delete_certificate_provider(params = {}, options = {})
+      req = build_request(:delete_certificate_provider, params)
+      req.send_request(options)
+    end
+
     # Deletes a Device Defender detect custom metric.
     #
     # Requires permission to access the [DeleteCustomMetric][1] action.
@@ -4260,9 +4434,15 @@ module Aws::IoT
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
-    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #   <note markdown="1"> The `namespaceId` feature is only supported by IoT Greengrass at this
+    #   time. For more information, see [Setting up IoT Greengrass core
+    #   devices.][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4326,9 +4506,15 @@ module Aws::IoT
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
-    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #   <note markdown="1"> The `namespaceId` feature is only supported by IoT Greengrass at this
+    #   time. For more information, see [Setting up IoT Greengrass core
+    #   devices.][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4941,7 +5127,7 @@ module Aws::IoT
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_v2_logging_level({
-    #     target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, EVENT_TYPE, DEVICE_DEFENDER
+    #     target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
     #     target_name: "LogTargetName", # required
     #   })
     #
@@ -5469,6 +5655,50 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Describes a certificate provider.
+    #
+    # Requires permission to access the [DescribeCertificateProvider][1]
+    # action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :certificate_provider_name
+    #   The name of the certificate provider.
+    #
+    # @return [Types::DescribeCertificateProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCertificateProviderResponse#certificate_provider_name #certificate_provider_name} => String
+    #   * {Types::DescribeCertificateProviderResponse#certificate_provider_arn #certificate_provider_arn} => String
+    #   * {Types::DescribeCertificateProviderResponse#lambda_function_arn #lambda_function_arn} => String
+    #   * {Types::DescribeCertificateProviderResponse#account_default_for_operations #account_default_for_operations} => Array&lt;String&gt;
+    #   * {Types::DescribeCertificateProviderResponse#creation_date #creation_date} => Time
+    #   * {Types::DescribeCertificateProviderResponse#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_certificate_provider({
+    #     certificate_provider_name: "CertificateProviderName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_provider_name #=> String
+    #   resp.certificate_provider_arn #=> String
+    #   resp.lambda_function_arn #=> String
+    #   resp.account_default_for_operations #=> Array
+    #   resp.account_default_for_operations[0] #=> String, one of "CreateCertificateFromCsr"
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #
+    # @overload describe_certificate_provider(params = {})
+    # @param [Hash] params ({})
+    def describe_certificate_provider(params = {}, options = {})
+      req = build_request(:describe_certificate_provider, params)
+      req.send_request(options)
+    end
+
     # Gets information about a Device Defender detect custom metric.
     #
     # Requires permission to access the [DescribeCustomMetric][1] action.
@@ -5673,6 +5903,7 @@ module Aws::IoT
     #   * {Types::DescribeDomainConfigurationResponse#domain_type #domain_type} => String
     #   * {Types::DescribeDomainConfigurationResponse#last_status_change_date #last_status_change_date} => Time
     #   * {Types::DescribeDomainConfigurationResponse#tls_config #tls_config} => Types::TlsConfig
+    #   * {Types::DescribeDomainConfigurationResponse#server_certificate_config #server_certificate_config} => Types::ServerCertificateConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -5696,6 +5927,7 @@ module Aws::IoT
     #   resp.domain_type #=> String, one of "ENDPOINT", "AWS_MANAGED", "CUSTOMER_MANAGED"
     #   resp.last_status_change_date #=> Time
     #   resp.tls_config.security_policy #=> String
+    #   resp.server_certificate_config.enable_ocsp_check #=> Boolean
     #
     # @overload describe_domain_configuration(params = {})
     # @param [Hash] params ({})
@@ -5704,8 +5936,13 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Returns a unique endpoint specific to the Amazon Web Services account
-    # making the call.
+    # Returns or creates a unique endpoint specific to the Amazon Web
+    # Services account making the call.
+    #
+    # <note markdown="1"> The first time `DescribeEndpoint` is called, an endpoint is created.
+    # All subsequent calls to `DescribeEndpoint` return the same endpoint.
+    #
+    #  </note>
     #
     # Requires permission to access the [DescribeEndpoint][1] action.
     #
@@ -6393,6 +6630,7 @@ module Aws::IoT
     #   * {Types::DescribeSecurityProfileResponse#version #version} => Integer
     #   * {Types::DescribeSecurityProfileResponse#creation_date #creation_date} => Time
     #   * {Types::DescribeSecurityProfileResponse#last_modified_date #last_modified_date} => Time
+    #   * {Types::DescribeSecurityProfileResponse#metrics_export_config #metrics_export_config} => Types::MetricsExportConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -6427,6 +6665,7 @@ module Aws::IoT
     #   resp.behaviors[0].criteria.statistical_threshold.statistic #=> String
     #   resp.behaviors[0].criteria.ml_detection_config.confidence_level #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.behaviors[0].suppress_alerts #=> Boolean
+    #   resp.behaviors[0].export_metric #=> Boolean
     #   resp.alert_targets #=> Hash
     #   resp.alert_targets["AlertTargetType"].alert_target_arn #=> String
     #   resp.alert_targets["AlertTargetType"].role_arn #=> String
@@ -6436,9 +6675,12 @@ module Aws::IoT
     #   resp.additional_metrics_to_retain_v2[0].metric #=> String
     #   resp.additional_metrics_to_retain_v2[0].metric_dimension.dimension_name #=> String
     #   resp.additional_metrics_to_retain_v2[0].metric_dimension.operator #=> String, one of "IN", "NOT_IN"
+    #   resp.additional_metrics_to_retain_v2[0].export_metric #=> Boolean
     #   resp.version #=> Integer
     #   resp.creation_date #=> Time
     #   resp.last_modified_date #=> Time
+    #   resp.metrics_export_config.mqtt_topic #=> String
+    #   resp.metrics_export_config.role_arn #=> String
     #
     # @overload describe_security_profile(params = {})
     # @param [Hash] params ({})
@@ -7122,6 +7364,9 @@ module Aws::IoT
     #   resp.thing_indexing_configuration.custom_fields[0].type #=> String, one of "Number", "String", "Boolean"
     #   resp.thing_indexing_configuration.filter.named_shadow_names #=> Array
     #   resp.thing_indexing_configuration.filter.named_shadow_names[0] #=> String
+    #   resp.thing_indexing_configuration.filter.geo_locations #=> Array
+    #   resp.thing_indexing_configuration.filter.geo_locations[0].name #=> String
+    #   resp.thing_indexing_configuration.filter.geo_locations[0].order #=> String, one of "LatLon", "LonLat"
     #   resp.thing_group_indexing_configuration.thing_group_indexing_mode #=> String, one of "OFF", "ON"
     #   resp.thing_group_indexing_configuration.managed_fields #=> Array
     #   resp.thing_group_indexing_configuration.managed_fields[0].name #=> String
@@ -7550,6 +7795,11 @@ module Aws::IoT
     end
 
     # Gets a registration code used to register a CA certificate with IoT.
+    #
+    # IoT will create a registration code as part of this API call if the
+    # registration code doesn't exist or has been deleted. If you already
+    # have a registration code, this API call will return the same
+    # registration code.
     #
     # Requires permission to access the [GetRegistrationCode][1] action.
     #
@@ -8061,6 +8311,7 @@ module Aws::IoT
     #   resp.active_violations[0].behavior.criteria.statistical_threshold.statistic #=> String
     #   resp.active_violations[0].behavior.criteria.ml_detection_config.confidence_level #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.active_violations[0].behavior.suppress_alerts #=> Boolean
+    #   resp.active_violations[0].behavior.export_metric #=> Boolean
     #   resp.active_violations[0].last_violation_value.count #=> Integer
     #   resp.active_violations[0].last_violation_value.cidrs #=> Array
     #   resp.active_violations[0].last_violation_value.cidrs[0] #=> String
@@ -8724,6 +8975,50 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Lists all your certificate providers in your Amazon Web Services
+    # account.
+    #
+    # Requires permission to access the [ListCertificateProviders][1]
+    # action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or `null` if there are no more
+    #   results.
+    #
+    # @option params [Boolean] :ascending_order
+    #   Returns the list of certificate providers in ascending alphabetical
+    #   order.
+    #
+    # @return [Types::ListCertificateProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCertificateProvidersResponse#certificate_providers #certificate_providers} => Array&lt;Types::CertificateProviderSummary&gt;
+    #   * {Types::ListCertificateProvidersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_certificate_providers({
+    #     next_token: "Marker",
+    #     ascending_order: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_providers #=> Array
+    #   resp.certificate_providers[0].certificate_provider_name #=> String
+    #   resp.certificate_providers[0].certificate_provider_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_certificate_providers(params = {})
+    # @param [Hash] params ({})
+    def list_certificate_providers(params = {}, options = {})
+      req = build_request(:list_certificate_providers, params)
+      req.send_request(options)
+    end
+
     # Lists the certificates registered in your Amazon Web Services account.
     #
     # The results are paginated with a default page size of 25. You can use
@@ -9287,9 +9582,15 @@ module Aws::IoT
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
-    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #   <note markdown="1"> The `namespaceId` feature is only supported by IoT Greengrass at this
+    #   time. For more information, see [Setting up IoT Greengrass core
+    #   devices.][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned per request.
@@ -9431,9 +9732,15 @@ module Aws::IoT
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
-    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #   <note markdown="1"> The `namespaceId` feature is only supported by IoT Greengrass at this
+    #   time. For more information, see [Setting up IoT Greengrass core
+    #   devices.][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
     #
     # @return [Types::ListJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11286,7 +11593,7 @@ module Aws::IoT
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_v2_logging_levels({
-    #     target_type: "DEFAULT", # accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, EVENT_TYPE, DEVICE_DEFENDER
+    #     target_type: "DEFAULT", # accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -11294,7 +11601,7 @@ module Aws::IoT
     # @example Response structure
     #
     #   resp.log_target_configurations #=> Array
-    #   resp.log_target_configurations[0].log_target.target_type #=> String, one of "DEFAULT", "THING_GROUP", "CLIENT_ID", "SOURCE_IP", "PRINCIPAL_ID", "EVENT_TYPE", "DEVICE_DEFENDER"
+    #   resp.log_target_configurations[0].log_target.target_type #=> String, one of "DEFAULT", "THING_GROUP", "CLIENT_ID", "SOURCE_IP", "PRINCIPAL_ID"
     #   resp.log_target_configurations[0].log_target.target_name #=> String
     #   resp.log_target_configurations[0].log_level #=> String, one of "DEBUG", "INFO", "ERROR", "WARN", "DISABLED"
     #   resp.next_token #=> String
@@ -11394,6 +11701,7 @@ module Aws::IoT
     #   resp.violation_events[0].behavior.criteria.statistical_threshold.statistic #=> String
     #   resp.violation_events[0].behavior.criteria.ml_detection_config.confidence_level #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.violation_events[0].behavior.suppress_alerts #=> Boolean
+    #   resp.violation_events[0].behavior.export_metric #=> Boolean
     #   resp.violation_events[0].metric_value.count #=> Integer
     #   resp.violation_events[0].metric_value.cidrs #=> Array
     #   resp.violation_events[0].metric_value.cidrs[0] #=> String
@@ -12300,7 +12608,14 @@ module Aws::IoT
     #   no additional results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return at one time.
+    #   The maximum number of results to return per page at one time. This
+    #   maximum number cannot exceed 100. The response might contain fewer
+    #   results but will never contain more. You can use [ `nextToken` ][1] to
+    #   retrieve the next set of results until `nextToken` returns `NULL`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_SearchIndex.html#iot-SearchIndex-request-nextToken
     #
     # @option params [String] :query_version
     #   The query version.
@@ -12473,7 +12788,7 @@ module Aws::IoT
     #
     #   resp = client.set_v2_logging_level({
     #     log_target: { # required
-    #       target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, EVENT_TYPE, DEVICE_DEFENDER
+    #       target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
     #       target_name: "LogTargetName",
     #     },
     #     log_level: "DEBUG", # required, accepts DEBUG, INFO, ERROR, WARN, DISABLED
@@ -13360,6 +13675,51 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates a certificate provider.
+    #
+    # Requires permission to access the [UpdateCertificateProvider][1]
+    # action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+    #
+    # @option params [required, String] :certificate_provider_name
+    #   The name of the certificate provider.
+    #
+    # @option params [String] :lambda_function_arn
+    #   The Lambda function ARN that's associated with the certificate
+    #   provider.
+    #
+    # @option params [Array<String>] :account_default_for_operations
+    #   A list of the operations that the certificate provider will use to
+    #   generate certificates. Valid value: `CreateCertificateFromCsr`.
+    #
+    # @return [Types::UpdateCertificateProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCertificateProviderResponse#certificate_provider_name #certificate_provider_name} => String
+    #   * {Types::UpdateCertificateProviderResponse#certificate_provider_arn #certificate_provider_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_certificate_provider({
+    #     certificate_provider_name: "CertificateProviderName", # required
+    #     lambda_function_arn: "CertificateProviderFunctionArn",
+    #     account_default_for_operations: ["CreateCertificateFromCsr"], # accepts CreateCertificateFromCsr
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_provider_name #=> String
+    #   resp.certificate_provider_arn #=> String
+    #
+    # @overload update_certificate_provider(params = {})
+    # @param [Hash] params ({})
+    def update_certificate_provider(params = {}, options = {})
+      req = build_request(:update_certificate_provider, params)
+      req.send_request(options)
+    end
+
     # Updates a Device Defender detect custom metric.
     #
     # Requires permission to access the [UpdateCustomMetric][1] action.
@@ -13484,6 +13844,9 @@ module Aws::IoT
     # @option params [Types::TlsConfig] :tls_config
     #   An object that specifies the TLS configuration for a domain.
     #
+    # @option params [Types::ServerCertificateConfig] :server_certificate_config
+    #   The server certificate configuration.
+    #
     # @return [Types::UpdateDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainConfigurationResponse#domain_configuration_name #domain_configuration_name} => String
@@ -13501,6 +13864,9 @@ module Aws::IoT
     #     remove_authorizer_config: false,
     #     tls_config: {
     #       security_policy: "SecurityPolicy",
+    #     },
+    #     server_certificate_config: {
+    #       enable_ocsp_check: false,
     #     },
     #   })
     #
@@ -13726,6 +14092,12 @@ module Aws::IoT
     #       ],
     #       filter: {
     #         named_shadow_names: ["ShadowName"],
+    #         geo_locations: [
+    #           {
+    #             name: "TargetFieldName",
+    #             order: "LatLon", # accepts LatLon, LonLat
+    #           },
+    #         ],
     #       },
     #     },
     #     thing_group_indexing_configuration: {
@@ -13791,9 +14163,15 @@ module Aws::IoT
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
-    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #   <note markdown="1"> The `namespaceId` feature is only supported by IoT Greengrass at this
+    #   time. For more information, see [Setting up IoT Greengrass core
+    #   devices.][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
     #
     # @option params [Types::JobExecutionsRetryConfig] :job_executions_retry_config
     #   Allows you to create the criteria to retry a job.
@@ -14304,6 +14682,12 @@ module Aws::IoT
     #   value that is different from the actual version, a
     #   `VersionConflictException` is thrown.
     #
+    # @option params [Types::MetricsExportConfig] :metrics_export_config
+    #   Specifies the MQTT topic and role ARN required for metric export.
+    #
+    # @option params [Boolean] :delete_metrics_export_config
+    #   Set the value as true to delete metrics export related configurations.
+    #
     # @return [Types::UpdateSecurityProfileResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSecurityProfileResponse#security_profile_name #security_profile_name} => String
@@ -14316,6 +14700,7 @@ module Aws::IoT
     #   * {Types::UpdateSecurityProfileResponse#version #version} => Integer
     #   * {Types::UpdateSecurityProfileResponse#creation_date #creation_date} => Time
     #   * {Types::UpdateSecurityProfileResponse#last_modified_date #last_modified_date} => Time
+    #   * {Types::UpdateSecurityProfileResponse#metrics_export_config #metrics_export_config} => Types::MetricsExportConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -14351,6 +14736,7 @@ module Aws::IoT
     #           },
     #         },
     #         suppress_alerts: false,
+    #         export_metric: false,
     #       },
     #     ],
     #     alert_targets: {
@@ -14367,12 +14753,18 @@ module Aws::IoT
     #           dimension_name: "DimensionName", # required
     #           operator: "IN", # accepts IN, NOT_IN
     #         },
+    #         export_metric: false,
     #       },
     #     ],
     #     delete_behaviors: false,
     #     delete_alert_targets: false,
     #     delete_additional_metrics_to_retain: false,
     #     expected_version: 1,
+    #     metrics_export_config: {
+    #       mqtt_topic: "MqttTopic", # required
+    #       role_arn: "RoleArn", # required
+    #     },
+    #     delete_metrics_export_config: false,
     #   })
     #
     # @example Response structure
@@ -14402,6 +14794,7 @@ module Aws::IoT
     #   resp.behaviors[0].criteria.statistical_threshold.statistic #=> String
     #   resp.behaviors[0].criteria.ml_detection_config.confidence_level #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.behaviors[0].suppress_alerts #=> Boolean
+    #   resp.behaviors[0].export_metric #=> Boolean
     #   resp.alert_targets #=> Hash
     #   resp.alert_targets["AlertTargetType"].alert_target_arn #=> String
     #   resp.alert_targets["AlertTargetType"].role_arn #=> String
@@ -14411,9 +14804,12 @@ module Aws::IoT
     #   resp.additional_metrics_to_retain_v2[0].metric #=> String
     #   resp.additional_metrics_to_retain_v2[0].metric_dimension.dimension_name #=> String
     #   resp.additional_metrics_to_retain_v2[0].metric_dimension.operator #=> String, one of "IN", "NOT_IN"
+    #   resp.additional_metrics_to_retain_v2[0].export_metric #=> Boolean
     #   resp.version #=> Integer
     #   resp.creation_date #=> Time
     #   resp.last_modified_date #=> Time
+    #   resp.metrics_export_config.mqtt_topic #=> String
+    #   resp.metrics_export_config.role_arn #=> String
     #
     # @overload update_security_profile(params = {})
     # @param [Hash] params ({})
@@ -14745,6 +15141,7 @@ module Aws::IoT
     #           },
     #         },
     #         suppress_alerts: false,
+    #         export_metric: false,
     #       },
     #     ],
     #   })
@@ -14775,7 +15172,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.111.0'
+      context[:gem_version] = '1.124.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

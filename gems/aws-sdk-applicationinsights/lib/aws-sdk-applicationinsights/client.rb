@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::ApplicationInsights
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::ApplicationInsights
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::ApplicationInsights
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::ApplicationInsights
     #   @option options [Aws::ApplicationInsights::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ApplicationInsights::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -481,6 +506,10 @@ module Aws::ApplicationInsights
     #   or on an account. To create an account-based application using all of
     #   the resources in the account, set this parameter to `ACCOUNT_BASED`.
     #
+    # @option params [Boolean] :attach_missing_permission
+    #   If set to true, the managed policies for SSM and CW will be attached
+    #   to the instance roles if they are missing.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_info #application_info} => Types::ApplicationInfo
@@ -501,6 +530,7 @@ module Aws::ApplicationInsights
     #     auto_config_enabled: false,
     #     auto_create: false,
     #     grouping_type: "ACCOUNT_BASED", # accepts ACCOUNT_BASED
+    #     attach_missing_permission: false,
     #   })
     #
     # @example Response structure
@@ -514,6 +544,7 @@ module Aws::ApplicationInsights
     #   resp.application_info.remarks #=> String
     #   resp.application_info.auto_config_enabled #=> Boolean
     #   resp.application_info.discovery_type #=> String, one of "RESOURCE_GROUP_BASED", "ACCOUNT_BASED"
+    #   resp.application_info.attach_missing_permission #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/CreateApplication AWS API Documentation
     #
@@ -726,6 +757,7 @@ module Aws::ApplicationInsights
     #   resp.application_info.remarks #=> String
     #   resp.application_info.auto_config_enabled #=> Boolean
     #   resp.application_info.discovery_type #=> String, one of "RESOURCE_GROUP_BASED", "ACCOUNT_BASED"
+    #   resp.application_info.attach_missing_permission #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/DescribeApplication AWS API Documentation
     #
@@ -835,6 +867,9 @@ module Aws::ApplicationInsights
     # @option params [required, String] :tier
     #   The tier of the application component.
     #
+    # @option params [String] :workload_name
+    #   The name of the workload.
+    #
     # @option params [String] :recommendation_type
     #   The recommended configuration type.
     #
@@ -848,6 +883,7 @@ module Aws::ApplicationInsights
     #     resource_group_name: "ResourceGroupName", # required
     #     component_name: "ComponentName", # required
     #     tier: "CUSTOM", # required, accepts CUSTOM, DEFAULT, DOT_NET_CORE, DOT_NET_WORKER, DOT_NET_WEB_TIER, DOT_NET_WEB, SQL_SERVER, SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP, MYSQL, POSTGRESQL, JAVA_JMX, ORACLE, SAP_HANA_MULTI_NODE, SAP_HANA_SINGLE_NODE, SAP_HANA_HIGH_AVAILABILITY, SQL_SERVER_FAILOVER_CLUSTER_INSTANCE, SHAREPOINT, ACTIVE_DIRECTORY, SAP_NETWEAVER_STANDARD, SAP_NETWEAVER_DISTRIBUTED, SAP_NETWEAVER_HIGH_AVAILABILITY
+    #     workload_name: "WorkloadName",
     #     recommendation_type: "INFRA_ONLY", # accepts INFRA_ONLY, WORKLOAD_ONLY, ALL
     #   })
     #
@@ -1198,6 +1234,7 @@ module Aws::ApplicationInsights
     #   resp.application_info_list[0].remarks #=> String
     #   resp.application_info_list[0].auto_config_enabled #=> Boolean
     #   resp.application_info_list[0].discovery_type #=> String, one of "RESOURCE_GROUP_BASED", "ACCOUNT_BASED"
+    #   resp.application_info_list[0].attach_missing_permission #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/ListApplications AWS API Documentation
@@ -1771,6 +1808,10 @@ module Aws::ApplicationInsights
     # @option params [Boolean] :auto_config_enabled
     #   Turns auto-configuration on or off.
     #
+    # @option params [Boolean] :attach_missing_permission
+    #   If set to true, the managed policies for SSM and CW will be attached
+    #   to the instance roles if they are missing.
+    #
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateApplicationResponse#application_info #application_info} => Types::ApplicationInfo
@@ -1784,6 +1825,7 @@ module Aws::ApplicationInsights
     #     ops_item_sns_topic_arn: "OpsItemSNSTopicArn",
     #     remove_sns_topic: false,
     #     auto_config_enabled: false,
+    #     attach_missing_permission: false,
     #   })
     #
     # @example Response structure
@@ -1797,6 +1839,7 @@ module Aws::ApplicationInsights
     #   resp.application_info.remarks #=> String
     #   resp.application_info.auto_config_enabled #=> Boolean
     #   resp.application_info.discovery_type #=> String, one of "RESOURCE_GROUP_BASED", "ACCOUNT_BASED"
+    #   resp.application_info.attach_missing_permission #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-insights-2018-11-25/UpdateApplication AWS API Documentation
     #
@@ -2056,7 +2099,7 @@ module Aws::ApplicationInsights
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationinsights'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

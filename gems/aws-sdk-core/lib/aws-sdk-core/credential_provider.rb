@@ -11,7 +11,7 @@ module Aws
 
     # @return [Boolean]
     def set?
-      !!credentials && credentials.set?
+      !!@credentials && @credentials.set?
     end
 
   end

@@ -1,0 +1,857 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::LookoutMetrics
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Action
+      attr_accessor sns_configuration: Types::SNSConfiguration
+      attr_accessor lambda_configuration: Types::LambdaConfiguration
+      SENSITIVE: []
+    end
+
+    class ActivateAnomalyDetectorRequest
+      attr_accessor anomaly_detector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ActivateAnomalyDetectorResponse < Aws::EmptyStructure
+    end
+
+    class Alert
+      attr_accessor action: Types::Action
+      attr_accessor alert_description: ::String
+      attr_accessor alert_arn: ::String
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor alert_name: ::String
+      attr_accessor alert_sensitivity_threshold: ::Integer
+      attr_accessor alert_type: ("SNS" | "LAMBDA")
+      attr_accessor alert_status: ("ACTIVE" | "INACTIVE")
+      attr_accessor last_modification_time: ::Time
+      attr_accessor creation_time: ::Time
+      attr_accessor alert_filters: Types::AlertFilters
+      SENSITIVE: []
+    end
+
+    class AlertFilters
+      attr_accessor metric_list: ::Array[::String]
+      attr_accessor dimension_filter_list: ::Array[Types::DimensionFilter]
+      SENSITIVE: []
+    end
+
+    class AlertSummary
+      attr_accessor alert_arn: ::String
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor alert_name: ::String
+      attr_accessor alert_sensitivity_threshold: ::Integer
+      attr_accessor alert_type: ("SNS" | "LAMBDA")
+      attr_accessor alert_status: ("ACTIVE" | "INACTIVE")
+      attr_accessor last_modification_time: ::Time
+      attr_accessor creation_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AnomalyDetectorConfig
+      attr_accessor anomaly_detector_frequency: ("P1D" | "PT1H" | "PT10M" | "PT5M")
+      SENSITIVE: []
+    end
+
+    class AnomalyDetectorConfigSummary
+      attr_accessor anomaly_detector_frequency: ("P1D" | "PT1H" | "PT10M" | "PT5M")
+      SENSITIVE: []
+    end
+
+    class AnomalyDetectorDataQualityMetric
+      attr_accessor start_timestamp: ::Time
+      attr_accessor metric_set_data_quality_metric_list: ::Array[Types::MetricSetDataQualityMetric]
+      SENSITIVE: []
+    end
+
+    class AnomalyDetectorSummary
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor anomaly_detector_name: ::String
+      attr_accessor anomaly_detector_description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor status: ("ACTIVE" | "ACTIVATING" | "DELETING" | "FAILED" | "INACTIVE" | "LEARNING" | "BACK_TEST_ACTIVATING" | "BACK_TEST_ACTIVE" | "BACK_TEST_COMPLETE" | "DEACTIVATED" | "DEACTIVATING")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class AnomalyGroup
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      attr_accessor anomaly_group_id: ::String
+      attr_accessor anomaly_group_score: ::Float
+      attr_accessor primary_metric_name: ::String
+      attr_accessor metric_level_impact_list: ::Array[Types::MetricLevelImpact]
+      SENSITIVE: []
+    end
+
+    class AnomalyGroupStatistics
+      attr_accessor evaluation_start_date: ::String
+      attr_accessor total_count: ::Integer
+      attr_accessor itemized_metric_stats_list: ::Array[Types::ItemizedMetricStats]
+      SENSITIVE: []
+    end
+
+    class AnomalyGroupSummary
+      attr_accessor start_time: ::String
+      attr_accessor end_time: ::String
+      attr_accessor anomaly_group_id: ::String
+      attr_accessor anomaly_group_score: ::Float
+      attr_accessor primary_metric_name: ::String
+      SENSITIVE: []
+    end
+
+    class AnomalyGroupTimeSeries
+      attr_accessor anomaly_group_id: ::String
+      attr_accessor time_series_id: ::String
+      SENSITIVE: []
+    end
+
+    class AnomalyGroupTimeSeriesFeedback
+      attr_accessor anomaly_group_id: ::String
+      attr_accessor time_series_id: ::String
+      attr_accessor is_anomaly: bool
+      SENSITIVE: []
+    end
+
+    class AppFlowConfig
+      attr_accessor role_arn: ::String
+      attr_accessor flow_name: ::String
+      SENSITIVE: []
+    end
+
+    class AthenaSourceConfig
+      attr_accessor role_arn: ::String
+      attr_accessor database_name: ::String
+      attr_accessor data_catalog: ::String
+      attr_accessor table_name: ::String
+      attr_accessor work_group_name: ::String
+      attr_accessor s3_results_path: ::String
+      attr_accessor back_test_configuration: Types::BackTestConfiguration
+      SENSITIVE: []
+    end
+
+    class AttributeValue
+      attr_accessor s: ::String
+      attr_accessor n: ::String
+      attr_accessor b: ::String
+      attr_accessor ss: ::Array[::String]
+      attr_accessor ns: ::Array[::String]
+      attr_accessor bs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AutoDetectionMetricSource
+      attr_accessor s3_source_config: Types::AutoDetectionS3SourceConfig
+      SENSITIVE: []
+    end
+
+    class AutoDetectionS3SourceConfig
+      attr_accessor templated_path_list: ::Array[::String]
+      attr_accessor historical_data_path_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BackTestAnomalyDetectorRequest
+      attr_accessor anomaly_detector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BackTestAnomalyDetectorResponse < Aws::EmptyStructure
+    end
+
+    class BackTestConfiguration
+      attr_accessor run_back_test_mode: bool
+      SENSITIVE: []
+    end
+
+    class CloudWatchConfig
+      attr_accessor role_arn: ::String
+      attr_accessor back_test_configuration: Types::BackTestConfiguration
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ContributionMatrix
+      attr_accessor dimension_contribution_list: ::Array[Types::DimensionContribution]
+      SENSITIVE: []
+    end
+
+    class CreateAlertRequest
+      attr_accessor alert_name: ::String
+      attr_accessor alert_sensitivity_threshold: ::Integer
+      attr_accessor alert_description: ::String
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor action: Types::Action
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor alert_filters: Types::AlertFilters
+      SENSITIVE: []
+    end
+
+    class CreateAlertResponse
+      attr_accessor alert_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAnomalyDetectorRequest
+      attr_accessor anomaly_detector_name: ::String
+      attr_accessor anomaly_detector_description: ::String
+      attr_accessor anomaly_detector_config: Types::AnomalyDetectorConfig
+      attr_accessor kms_key_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateAnomalyDetectorResponse
+      attr_accessor anomaly_detector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMetricSetRequest
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor metric_set_name: ::String
+      attr_accessor metric_set_description: ::String
+      attr_accessor metric_list: ::Array[Types::Metric]
+      attr_accessor offset: ::Integer
+      attr_accessor timestamp_column: Types::TimestampColumn
+      attr_accessor dimension_list: ::Array[::String]
+      attr_accessor metric_set_frequency: ("P1D" | "PT1H" | "PT10M" | "PT5M")
+      attr_accessor metric_source: Types::MetricSource
+      attr_accessor timezone: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor dimension_filter_list: ::Array[Types::MetricSetDimensionFilter]
+      SENSITIVE: []
+    end
+
+    class CreateMetricSetResponse
+      attr_accessor metric_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CsvFormatDescriptor
+      attr_accessor file_compression: ("NONE" | "GZIP")
+      attr_accessor charset: ::String
+      attr_accessor contains_header: bool
+      attr_accessor delimiter: ::String
+      attr_accessor header_list: ::Array[::String]
+      attr_accessor quote_symbol: ::String
+      SENSITIVE: []
+    end
+
+    class DataQualityMetric
+      attr_accessor metric_type: ("COLUMN_COMPLETENESS" | "DIMENSION_UNIQUENESS" | "TIME_SERIES_COUNT" | "ROWS_PROCESSED" | "ROWS_PARTIAL_COMPLIANCE" | "INVALID_ROWS_COMPLIANCE" | "BACKTEST_TRAINING_DATA_START_TIME_STAMP" | "BACKTEST_TRAINING_DATA_END_TIME_STAMP" | "BACKTEST_INFERENCE_DATA_START_TIME_STAMP" | "BACKTEST_INFERENCE_DATA_END_TIME_STAMP")
+      attr_accessor metric_description: ::String
+      attr_accessor related_column_name: ::String
+      attr_accessor metric_value: ::Float
+      SENSITIVE: []
+    end
+
+    class DeactivateAnomalyDetectorRequest
+      attr_accessor anomaly_detector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeactivateAnomalyDetectorResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAlertRequest
+      attr_accessor alert_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAlertResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAnomalyDetectorRequest
+      attr_accessor anomaly_detector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAnomalyDetectorResponse < Aws::EmptyStructure
+    end
+
+    class DescribeAlertRequest
+      attr_accessor alert_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAlertResponse
+      attr_accessor alert: Types::Alert
+      SENSITIVE: []
+    end
+
+    class DescribeAnomalyDetectionExecutionsRequest
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor timestamp: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAnomalyDetectionExecutionsResponse
+      attr_accessor execution_list: ::Array[Types::ExecutionStatus]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAnomalyDetectorRequest
+      attr_accessor anomaly_detector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAnomalyDetectorResponse
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor anomaly_detector_name: ::String
+      attr_accessor anomaly_detector_description: ::String
+      attr_accessor anomaly_detector_config: Types::AnomalyDetectorConfigSummary
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor status: ("ACTIVE" | "ACTIVATING" | "DELETING" | "FAILED" | "INACTIVE" | "LEARNING" | "BACK_TEST_ACTIVATING" | "BACK_TEST_ACTIVE" | "BACK_TEST_COMPLETE" | "DEACTIVATED" | "DEACTIVATING")
+      attr_accessor failure_reason: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor failure_type: ("ACTIVATION_FAILURE" | "BACK_TEST_ACTIVATION_FAILURE" | "DELETION_FAILURE" | "DEACTIVATION_FAILURE")
+      SENSITIVE: []
+    end
+
+    class DescribeMetricSetRequest
+      attr_accessor metric_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMetricSetResponse
+      attr_accessor metric_set_arn: ::String
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor metric_set_name: ::String
+      attr_accessor metric_set_description: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor offset: ::Integer
+      attr_accessor metric_list: ::Array[Types::Metric]
+      attr_accessor timestamp_column: Types::TimestampColumn
+      attr_accessor dimension_list: ::Array[::String]
+      attr_accessor metric_set_frequency: ("P1D" | "PT1H" | "PT10M" | "PT5M")
+      attr_accessor timezone: ::String
+      attr_accessor metric_source: Types::MetricSource
+      attr_accessor dimension_filter_list: ::Array[Types::MetricSetDimensionFilter]
+      SENSITIVE: []
+    end
+
+    class DetectMetricSetConfigRequest
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor auto_detection_metric_source: Types::AutoDetectionMetricSource
+      SENSITIVE: []
+    end
+
+    class DetectMetricSetConfigResponse
+      attr_accessor detected_metric_set_config: Types::DetectedMetricSetConfig
+      SENSITIVE: []
+    end
+
+    class DetectedCsvFormatDescriptor
+      attr_accessor file_compression: Types::DetectedField
+      attr_accessor charset: Types::DetectedField
+      attr_accessor contains_header: Types::DetectedField
+      attr_accessor delimiter: Types::DetectedField
+      attr_accessor header_list: Types::DetectedField
+      attr_accessor quote_symbol: Types::DetectedField
+      SENSITIVE: []
+    end
+
+    class DetectedField
+      attr_accessor value: Types::AttributeValue
+      attr_accessor confidence: ("HIGH" | "LOW" | "NONE")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DetectedFileFormatDescriptor
+      attr_accessor csv_format_descriptor: Types::DetectedCsvFormatDescriptor
+      attr_accessor json_format_descriptor: Types::DetectedJsonFormatDescriptor
+      SENSITIVE: []
+    end
+
+    class DetectedJsonFormatDescriptor
+      attr_accessor file_compression: Types::DetectedField
+      attr_accessor charset: Types::DetectedField
+      SENSITIVE: []
+    end
+
+    class DetectedMetricSetConfig
+      attr_accessor offset: Types::DetectedField
+      attr_accessor metric_set_frequency: Types::DetectedField
+      attr_accessor metric_source: Types::DetectedMetricSource
+      SENSITIVE: []
+    end
+
+    class DetectedMetricSource
+      attr_accessor s3_source_config: Types::DetectedS3SourceConfig
+      SENSITIVE: []
+    end
+
+    class DetectedS3SourceConfig
+      attr_accessor file_format_descriptor: Types::DetectedFileFormatDescriptor
+      SENSITIVE: []
+    end
+
+    class DimensionContribution
+      attr_accessor dimension_name: ::String
+      attr_accessor dimension_value_contribution_list: ::Array[Types::DimensionValueContribution]
+      SENSITIVE: []
+    end
+
+    class DimensionFilter
+      attr_accessor dimension_name: ::String
+      attr_accessor dimension_value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DimensionNameValue
+      attr_accessor dimension_name: ::String
+      attr_accessor dimension_value: ::String
+      SENSITIVE: []
+    end
+
+    class DimensionValueContribution
+      attr_accessor dimension_value: ::String
+      attr_accessor contribution_score: ::Float
+      SENSITIVE: []
+    end
+
+    class ExecutionStatus
+      attr_accessor timestamp: ::String
+      attr_accessor status: ("PENDING" | "IN_PROGRESS" | "COMPLETED" | "FAILED" | "FAILED_TO_SCHEDULE")
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class FileFormatDescriptor
+      attr_accessor csv_format_descriptor: Types::CsvFormatDescriptor
+      attr_accessor json_format_descriptor: Types::JsonFormatDescriptor
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor dimension_value: ::String
+      attr_accessor filter_operation: ("EQUALS")
+      SENSITIVE: []
+    end
+
+    class GetAnomalyGroupRequest
+      attr_accessor anomaly_group_id: ::String
+      attr_accessor anomaly_detector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetAnomalyGroupResponse
+      attr_accessor anomaly_group: Types::AnomalyGroup
+      SENSITIVE: []
+    end
+
+    class GetDataQualityMetricsRequest
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor metric_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataQualityMetricsResponse
+      attr_accessor anomaly_detector_data_quality_metric_list: ::Array[Types::AnomalyDetectorDataQualityMetric]
+      SENSITIVE: []
+    end
+
+    class GetFeedbackRequest
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor anomaly_group_time_series_feedback: Types::AnomalyGroupTimeSeries
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetFeedbackResponse
+      attr_accessor anomaly_group_time_series_feedback: ::Array[Types::TimeSeriesFeedback]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSampleDataRequest
+      attr_accessor s3_source_config: Types::SampleDataS3SourceConfig
+      SENSITIVE: []
+    end
+
+    class GetSampleDataResponse
+      attr_accessor header_values: ::Array[::String]
+      attr_accessor sample_rows: ::Array[::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class InterMetricImpactDetails
+      attr_accessor metric_name: ::String
+      attr_accessor anomaly_group_id: ::String
+      attr_accessor relationship_type: ("CAUSE_OF_INPUT_ANOMALY_GROUP" | "EFFECT_OF_INPUT_ANOMALY_GROUP")
+      attr_accessor contribution_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ItemizedMetricStats
+      attr_accessor metric_name: ::String
+      attr_accessor occurrence_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class JsonFormatDescriptor
+      attr_accessor file_compression: ("NONE" | "GZIP")
+      attr_accessor charset: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor lambda_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListAlertsRequest
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAlertsResponse
+      attr_accessor alert_summary_list: ::Array[Types::AlertSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnomalyDetectorsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnomalyDetectorsResponse
+      attr_accessor anomaly_detector_summary_list: ::Array[Types::AnomalyDetectorSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnomalyGroupRelatedMetricsRequest
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor anomaly_group_id: ::String
+      attr_accessor relationship_type_filter: ("CAUSE_OF_INPUT_ANOMALY_GROUP" | "EFFECT_OF_INPUT_ANOMALY_GROUP")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnomalyGroupRelatedMetricsResponse
+      attr_accessor inter_metric_impact_list: ::Array[Types::InterMetricImpactDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnomalyGroupSummariesRequest
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor sensitivity_threshold: ::Integer
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnomalyGroupSummariesResponse
+      attr_accessor anomaly_group_summary_list: ::Array[Types::AnomalyGroupSummary]
+      attr_accessor anomaly_group_statistics: Types::AnomalyGroupStatistics
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnomalyGroupTimeSeriesRequest
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor anomaly_group_id: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAnomalyGroupTimeSeriesResponse
+      attr_accessor anomaly_group_id: ::String
+      attr_accessor metric_name: ::String
+      attr_accessor timestamp_list: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor time_series_list: ::Array[Types::TimeSeries]
+      SENSITIVE: []
+    end
+
+    class ListMetricSetsRequest
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMetricSetsResponse
+      attr_accessor metric_set_summary_list: ::Array[Types::MetricSetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Metric
+      attr_accessor metric_name: ::String
+      attr_accessor aggregation_function: ("AVG" | "SUM")
+      attr_accessor namespace: ::String
+      SENSITIVE: []
+    end
+
+    class MetricLevelImpact
+      attr_accessor metric_name: ::String
+      attr_accessor num_time_series: ::Integer
+      attr_accessor contribution_matrix: Types::ContributionMatrix
+      SENSITIVE: []
+    end
+
+    class MetricSetDataQualityMetric
+      attr_accessor metric_set_arn: ::String
+      attr_accessor data_quality_metric_list: ::Array[Types::DataQualityMetric]
+      SENSITIVE: []
+    end
+
+    class MetricSetDimensionFilter
+      attr_accessor name: ::String
+      attr_accessor filter_list: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class MetricSetSummary
+      attr_accessor metric_set_arn: ::String
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor metric_set_description: ::String
+      attr_accessor metric_set_name: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modification_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MetricSource
+      attr_accessor s3_source_config: Types::S3SourceConfig
+      attr_accessor app_flow_config: Types::AppFlowConfig
+      attr_accessor cloud_watch_config: Types::CloudWatchConfig
+      attr_accessor rds_source_config: Types::RDSSourceConfig
+      attr_accessor redshift_source_config: Types::RedshiftSourceConfig
+      attr_accessor athena_source_config: Types::AthenaSourceConfig
+      SENSITIVE: []
+    end
+
+    class PutFeedbackRequest
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor anomaly_group_time_series_feedback: Types::AnomalyGroupTimeSeriesFeedback
+      SENSITIVE: []
+    end
+
+    class PutFeedbackResponse < Aws::EmptyStructure
+    end
+
+    class RDSSourceConfig
+      attr_accessor db_instance_identifier: ::String
+      attr_accessor database_host: ::String
+      attr_accessor database_port: ::Integer
+      attr_accessor secret_manager_arn: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      SENSITIVE: []
+    end
+
+    class RedshiftSourceConfig
+      attr_accessor cluster_identifier: ::String
+      attr_accessor database_host: ::String
+      attr_accessor database_port: ::Integer
+      attr_accessor secret_manager_arn: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor vpc_configuration: Types::VpcConfiguration
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class S3SourceConfig
+      attr_accessor role_arn: ::String
+      attr_accessor templated_path_list: ::Array[::String]
+      attr_accessor historical_data_path_list: ::Array[::String]
+      attr_accessor file_format_descriptor: Types::FileFormatDescriptor
+      SENSITIVE: []
+    end
+
+    class SNSConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor sns_format: ("LONG_TEXT" | "SHORT_TEXT" | "JSON")
+      SENSITIVE: []
+    end
+
+    class SampleDataS3SourceConfig
+      attr_accessor role_arn: ::String
+      attr_accessor templated_path_list: ::Array[::String]
+      attr_accessor historical_data_path_list: ::Array[::String]
+      attr_accessor file_format_descriptor: Types::FileFormatDescriptor
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TimeSeries
+      attr_accessor time_series_id: ::String
+      attr_accessor dimension_list: ::Array[Types::DimensionNameValue]
+      attr_accessor metric_value_list: ::Array[::Float]
+      SENSITIVE: []
+    end
+
+    class TimeSeriesFeedback
+      attr_accessor time_series_id: ::String
+      attr_accessor is_anomaly: bool
+      SENSITIVE: []
+    end
+
+    class TimestampColumn
+      attr_accessor column_name: ::String
+      attr_accessor column_format: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAlertRequest
+      attr_accessor alert_arn: ::String
+      attr_accessor alert_description: ::String
+      attr_accessor alert_sensitivity_threshold: ::Integer
+      attr_accessor action: Types::Action
+      attr_accessor alert_filters: Types::AlertFilters
+      SENSITIVE: []
+    end
+
+    class UpdateAlertResponse
+      attr_accessor alert_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAnomalyDetectorRequest
+      attr_accessor anomaly_detector_arn: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor anomaly_detector_description: ::String
+      attr_accessor anomaly_detector_config: Types::AnomalyDetectorConfig
+      SENSITIVE: []
+    end
+
+    class UpdateAnomalyDetectorResponse
+      attr_accessor anomaly_detector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateMetricSetRequest
+      attr_accessor metric_set_arn: ::String
+      attr_accessor metric_set_description: ::String
+      attr_accessor metric_list: ::Array[Types::Metric]
+      attr_accessor offset: ::Integer
+      attr_accessor timestamp_column: Types::TimestampColumn
+      attr_accessor dimension_list: ::Array[::String]
+      attr_accessor metric_set_frequency: ("P1D" | "PT1H" | "PT10M" | "PT5M")
+      attr_accessor metric_source: Types::MetricSource
+      attr_accessor dimension_filter_list: ::Array[Types::MetricSetDimensionFilter]
+      SENSITIVE: []
+    end
+
+    class UpdateMetricSetResponse
+      attr_accessor metric_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("UNKNOWN_OPERATION" | "CANNOT_PARSE" | "FIELD_VALIDATION_FAILED" | "OTHER")
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VpcConfiguration
+      attr_accessor subnet_id_list: ::Array[::String]
+      attr_accessor security_group_id_list: ::Array[::String]
+      SENSITIVE: []
+    end
+  end
+end

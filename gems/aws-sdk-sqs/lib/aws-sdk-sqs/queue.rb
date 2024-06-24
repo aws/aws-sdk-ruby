@@ -54,7 +54,7 @@ module Aws::SQS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_queue_attributes(
         queue_url: @url,
         attribute_names: ["All"]
@@ -125,7 +125,7 @@ module Aws::SQS
     # @return [EmptyStructure]
     def add_permission(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.add_permission(options)
       end
       resp.data
@@ -149,7 +149,7 @@ module Aws::SQS
     # @return [Types::ChangeMessageVisibilityBatchResult]
     def change_message_visibility_batch(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.change_message_visibility_batch(options)
       end
       resp.data
@@ -162,7 +162,7 @@ module Aws::SQS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_queue(options)
       end
       resp.data
@@ -184,7 +184,7 @@ module Aws::SQS
     # @return [Types::DeleteMessageBatchResult]
     def delete_messages(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_message_batch(options)
       end
       resp.data
@@ -197,7 +197,7 @@ module Aws::SQS
     # @return [EmptyStructure]
     def purge(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.purge_queue(options)
       end
       resp.data
@@ -207,6 +207,7 @@ module Aws::SQS
     #
     #   message = queue.receive_messages({
     #     attribute_names: ["All"], # accepts All, Policy, VisibilityTimeout, MaximumMessageSize, MessageRetentionPeriod, ApproximateNumberOfMessages, ApproximateNumberOfMessagesNotVisible, CreatedTimestamp, LastModifiedTimestamp, QueueArn, ApproximateNumberOfMessagesDelayed, DelaySeconds, ReceiveMessageWaitTimeSeconds, RedrivePolicy, FifoQueue, ContentBasedDeduplication, KmsMasterKeyId, KmsDataKeyReusePeriodSeconds, DeduplicationScope, FifoThroughputLimit, RedriveAllowPolicy, SqsManagedSseEnabled
+    #     message_system_attribute_names: ["All"], # accepts All, SenderId, SentTimestamp, ApproximateReceiveCount, ApproximateFirstReceiveTimestamp, SequenceNumber, MessageDeduplicationId, MessageGroupId, AWSTraceHeader, DeadLetterQueueSourceArn
     #     message_attribute_names: ["MessageAttributeName"],
     #     max_number_of_messages: 1,
     #     visibility_timeout: 1,
@@ -215,6 +216,53 @@ module Aws::SQS
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :attribute_names
+    #   This parameter has been deprecated but will be supported for backward
+    #   compatibility. To provide attribute names, you are encouraged to use
+    #   `MessageSystemAttributeNames`.
+    #
+    #   A list of attributes that need to be returned along with each message.
+    #   These attributes include:
+    #
+    #   * `All` – Returns all values.
+    #
+    #   * `ApproximateFirstReceiveTimestamp` – Returns the time the message
+    #     was first received from the queue ([epoch time][1] in milliseconds).
+    #
+    #   * `ApproximateReceiveCount` – Returns the number of times a message
+    #     has been received across all queues but not deleted.
+    #
+    #   * `AWSTraceHeader` – Returns the X-Ray trace header string.
+    #
+    #   * `SenderId`
+    #
+    #     * For a user, returns the user ID, for example
+    #       `ABCDEFGHI1JKLMNOPQ23R`.
+    #
+    #     * For an IAM role, returns the IAM role ID, for example
+    #       `ABCDE1F2GH3I4JK5LMNOP:i-a123b456`.
+    #
+    #   * `SentTimestamp` – Returns the time the message was sent to the queue
+    #     ([epoch time][1] in milliseconds).
+    #
+    #   * `SqsManagedSseEnabled` – Enables server-side queue encryption using
+    #     SQS owned encryption keys. Only one server-side encryption option is
+    #     supported per queue (for example, [SSE-KMS][2] or [SSE-SQS][3]).
+    #
+    #   * `MessageDeduplicationId` – Returns the value provided by the
+    #     producer that calls the ` SendMessage ` action.
+    #
+    #   * `MessageGroupId` – Returns the value provided by the producer that
+    #     calls the ` SendMessage ` action. Messages with the same
+    #     `MessageGroupId` are returned in sequence.
+    #
+    #   * `SequenceNumber` – Returns the value provided by Amazon SQS.
+    #
+    #
+    #
+    #   [1]: http://en.wikipedia.org/wiki/Unix_time
+    #   [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html
+    #   [3]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html
+    # @option options [Array<String>] :message_system_attribute_names
     #   A list of attributes that need to be returned along with each message.
     #   These attributes include:
     #
@@ -290,8 +338,8 @@ module Aws::SQS
     #   The duration (in seconds) for which the call waits for a message to
     #   arrive in the queue before returning. If a message is available, the
     #   call returns sooner than `WaitTimeSeconds`. If no messages are
-    #   available and the wait time expires, the call returns successfully
-    #   with an empty list of messages.
+    #   available and the wait time expires, the call does not return a
+    #   message list.
     #
     #   To avoid HTTP errors, ensure that the HTTP response timeout for
     #   `ReceiveMessage` requests is longer than the `WaitTimeSeconds`
@@ -318,10 +366,6 @@ module Aws::SQS
     #
     #   * When you set `FifoQueue`, a caller of the `ReceiveMessage` action
     #     can provide a `ReceiveRequestAttemptId` explicitly.
-    #
-    #   * If a caller of the `ReceiveMessage` action doesn't provide a
-    #     `ReceiveRequestAttemptId`, Amazon SQS generates a
-    #     `ReceiveRequestAttemptId`.
     #
     #   * It is possible to retry the `ReceiveMessage` action with the same
     #     `ReceiveRequestAttemptId` if none of the messages have been modified
@@ -371,7 +415,7 @@ module Aws::SQS
     def receive_messages(options = {})
       batch = []
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.receive_message(options)
       end
       resp.data.messages.each do |m|
@@ -397,7 +441,7 @@ module Aws::SQS
     # @return [EmptyStructure]
     def remove_permission(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.remove_permission(options)
       end
       resp.data
@@ -435,13 +479,17 @@ module Aws::SQS
     #   size is 256 KiB.
     #
     #   A message can include only XML, JSON, and unformatted text. The
-    #   following Unicode characters are allowed:
+    #   following Unicode characters are allowed. For more information, see
+    #   the [W3C specification for characters][1].
     #
     #    `#x9` \| `#xA` \| `#xD` \| `#x20` to `#xD7FF` \| `#xE000` to `#xFFFD`
     #   \| `#x10000` to `#x10FFFF`
     #
-    #    Any characters not included in this list will be rejected. For more
-    #   information, see the [W3C specification for characters][1].
+    #    Amazon SQS does not throw an exception or completely reject the
+    #   message if it contains invalid characters. Instead, it replaces those
+    #   invalid characters with `U+FFFD` before storing the message in the
+    #   queue, as long as the message body contains at least one valid
+    #   character.
     #
     #
     #
@@ -555,8 +603,8 @@ module Aws::SQS
     #     `MessageGroupId` values. For each `MessageGroupId`, the messages are
     #     sorted by time sent. The caller can't specify a `MessageGroupId`.
     #
-    #   The length of `MessageGroupId` is 128 characters. Valid values:
-    #   alphanumeric characters and punctuation ``
+    #   The maximum length of `MessageGroupId` is 128 characters. Valid
+    #   values: alphanumeric characters and punctuation ``
     #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
     #
     #   For best practices of using `MessageGroupId`, see [Using the
@@ -571,7 +619,7 @@ module Aws::SQS
     # @return [Types::SendMessageResult]
     def send_message(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.send_message(options)
       end
       resp.data
@@ -614,7 +662,7 @@ module Aws::SQS
     # @return [Types::SendMessageBatchResult]
     def send_messages(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.send_message_batch(options)
       end
       resp.data
@@ -819,7 +867,7 @@ module Aws::SQS
     # @return [EmptyStructure]
     def set_attributes(options = {})
       options = options.merge(queue_url: @url)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.set_queue_attributes(options)
       end
       resp.data
@@ -835,7 +883,7 @@ module Aws::SQS
     def dead_letter_source_queues(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(queue_url: @url)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_dead_letter_source_queues(options)
         end
         resp.each_page do |page|

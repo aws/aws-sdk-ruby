@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.99.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.98.0 (2024-04-23)
+------------------
+
+* Feature - Added additional metadata that might be applicable to your reservation recommendations.
+
+1.97.0 (2024-03-26)
+------------------
+
+* Feature - Adds support for backfill of cost allocation tags, with new StartCostAllocationTagBackfill and ListCostAllocationTagBackfillHistory API.
+
+1.96.0 (2024-02-28)
+------------------
+
+* Feature - This release introduces the new API 'GetApproximateUsageRecords', which retrieves estimated usage records for hourly granularity or resource-level data at daily granularity.
+
+1.95.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.94.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.93.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2023-11-06)
+------------------
+
+* Feature - This release extends the GetReservationPurchaseRecommendation API to support recommendations for Amazon MemoryDB reservations.
+
 1.91.0 (2023-09-27)
 ------------------
 

@@ -10,16 +10,20 @@
     "CommitTransaction": "<p>Attempts to commit the specified transaction. Returns an exception if the transaction was previously aborted. This API action is idempotent if called multiple times for the same transaction.</p>",
     "CreateDataCellsFilter": "<p>Creates a data cell filter to allow one to grant access to certain columns on certain rows.</p>",
     "CreateLFTag": "<p>Creates an LF-tag with the specified name and values.</p>",
+    "CreateLakeFormationIdentityCenterConfiguration": "<p>Creates an IAM Identity Center connection with Lake Formation to allow IAM Identity Center users and groups to access Data Catalog resources.</p>",
     "CreateLakeFormationOptIn": "<p>Enforce Lake Formation permissions for the given databases, tables, and principals.</p>",
     "DeleteDataCellsFilter": "<p>Deletes a data cell filter.</p>",
     "DeleteLFTag": "<p>Deletes the specified LF-tag given a key name. If the input parameter tag key was not found, then the operation will throw an exception. When you delete an LF-tag, the <code>LFTagPolicy</code> attached to the LF-tag becomes invalid. If the deleted LF-tag was still assigned to any resource, the tag policy attach to the deleted LF-tag will no longer be applied to the resource.</p>",
+    "DeleteLakeFormationIdentityCenterConfiguration": "<p>Deletes an IAM Identity Center connection with Lake Formation.</p>",
     "DeleteLakeFormationOptIn": "<p>Remove the Lake Formation permissions enforcement of the given databases, tables, and principals.</p>",
     "DeleteObjectsOnCancel": "<p>For a specific governed table, provides a list of Amazon S3 objects that will be written during the current transaction and that can be automatically deleted if the transaction is canceled. Without this call, no Amazon S3 objects are automatically deleted when a transaction cancels. </p> <p> The Glue ETL library function <code>write_dynamic_frame.from_catalog()</code> includes an option to automatically call <code>DeleteObjectsOnCancel</code> before writes. For more information, see <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/transactions-data-operations.html#rolling-back-writes\">Rolling Back Amazon S3 Writes</a>. </p>",
     "DeregisterResource": "<p>Deregisters the resource as managed by the Data Catalog.</p> <p>When you deregister a path, Lake Formation removes the path from the inline policy attached to your service-linked role.</p>",
+    "DescribeLakeFormationIdentityCenterConfiguration": "<p>Retrieves the instance ARN and application ARN for the connection.</p>",
     "DescribeResource": "<p>Retrieves the current data access role for the given resource registered in Lake Formation.</p>",
     "DescribeTransaction": "<p>Returns the details of a single transaction.</p>",
     "ExtendTransaction": "<p>Indicates to the service that the specified transaction is still active and should not be treated as idle and aborted.</p> <p>Write transactions that remain idle for a long period are automatically aborted unless explicitly extended.</p>",
     "GetDataCellsFilter": "<p>Returns a data cells filter.</p>",
+    "GetDataLakePrincipal": "<p>Returns the identity of the invoking principal.</p>",
     "GetDataLakeSettings": "<p>Retrieves the list of the data lake administrators of a Lake Formation-managed data lake. </p>",
     "GetEffectivePermissionsForPath": "<p>Returns the Lake Formation permissions for a specified table or database resource located at a path in Amazon S3. <code>GetEffectivePermissionsForPath</code> will not return databases and tables if the catalog is encrypted.</p>",
     "GetLFTag": "<p>Returns an LF-tag definition.</p>",
@@ -49,6 +53,7 @@
     "StartTransaction": "<p>Starts a new transaction and returns its transaction ID. Transaction IDs are opaque objects that you can use to identify a transaction.</p>",
     "UpdateDataCellsFilter": "<p>Updates a data cell filter.</p>",
     "UpdateLFTag": "<p>Updates the list of possible values for the specified LF-tag key. If the LF-tag does not exist, the operation throws an EntityNotFoundException. The values in the delete key values will be deleted from list of possible values. If any value in the delete key values is attached to a resource, then API errors out with a 400 Exception - \"Update not allowed\". Untag the attribute before deleting the LF-tag key's value. </p>",
+    "UpdateLakeFormationIdentityCenterConfiguration": "<p>Updates the IAM Identity Center connection parameters.</p>",
     "UpdateResource": "<p>Updates the data access role used for vending access to the given (registered) resource in Lake Formation. </p>",
     "UpdateTableObjects": "<p>Updates the manifest of Amazon S3 objects that make up the specified governed table.</p>",
     "UpdateTableStorageOptimizer": "<p>Updates the configuration of the storage optimizers for a table.</p>"
@@ -83,6 +88,12 @@
         "WriteOperation$AddObject": "<p>A new object to add to the governed table.</p>"
       }
     },
+    "AdditionalContextMap": {
+      "base": null,
+      "refs": {
+        "QuerySessionContext$AdditionalContext": "<p>An opaque string-string map passed by the query engine.</p>"
+      }
+    },
     "AllRowsWildcard": {
       "base": "<p>A structure that you pass to indicate you want all rows in a filter. </p>",
       "refs": {
@@ -92,6 +103,19 @@
     "AlreadyExistsException": {
       "base": "<p>A resource to be created or added already exists.</p>",
       "refs": {
+      }
+    },
+    "ApplicationArn": {
+      "base": null,
+      "refs": {
+        "CreateLakeFormationIdentityCenterConfigurationResponse$ApplicationArn": "<p>The Amazon Resource Name (ARN) of the Lake Formation application integrated with IAM Identity Center.</p>",
+        "DescribeLakeFormationIdentityCenterConfigurationResponse$ApplicationArn": "<p>The Amazon Resource Name (ARN) of the Lake Formation application integrated with IAM Identity Center.</p>"
+      }
+    },
+    "ApplicationStatus": {
+      "base": null,
+      "refs": {
+        "UpdateLakeFormationIdentityCenterConfigurationRequest$ApplicationStatus": "<p>Allows to enable or disable the IAM Identity Center connection.</p>"
       }
     },
     "AssumeDecoratedRoleWithSAMLRequest": {
@@ -193,13 +217,17 @@
         "BatchGrantPermissionsRequest$CatalogId": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>",
         "BatchRevokePermissionsRequest$CatalogId": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>",
         "CreateLFTagRequest$CatalogId": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>",
+        "CreateLakeFormationIdentityCenterConfigurationRequest$CatalogId": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, view definitions, and other control information to manage your Lake Formation environment.</p>",
         "DataCellsFilter$TableCatalogId": "<p>The ID of the catalog to which the table belongs.</p>",
         "DataCellsFilterResource$TableCatalogId": "<p>The ID of the catalog to which the table belongs.</p>",
         "DataLocationResource$CatalogId": "<p>The identifier for the Data Catalog where the location is registered with Lake Formation. By default, it is the account ID of the caller.</p>",
         "DatabaseResource$CatalogId": "<p>The identifier for the Data Catalog. By default, it is the account ID of the caller.</p>",
         "DeleteDataCellsFilterRequest$TableCatalogId": "<p>The ID of the catalog to which the table belongs.</p>",
         "DeleteLFTagRequest$CatalogId": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>",
+        "DeleteLakeFormationIdentityCenterConfigurationRequest$CatalogId": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, view definition, and other control information to manage your Lake Formation environment.</p>",
         "DeleteObjectsOnCancelRequest$CatalogId": "<p>The Glue data catalog that contains the governed table. Defaults to the current account ID.</p>",
+        "DescribeLakeFormationIdentityCenterConfigurationRequest$CatalogId": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.</p>",
+        "DescribeLakeFormationIdentityCenterConfigurationResponse$CatalogId": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.</p>",
         "GetDataCellsFilterRequest$TableCatalogId": "<p>The ID of the catalog to which the table belongs.</p>",
         "GetDataLakeSettingsRequest$CatalogId": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>",
         "GetEffectivePermissionsForPathRequest$CatalogId": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>",
@@ -225,6 +253,7 @@
         "TableWithColumnsResource$CatalogId": "<p>The identifier for the Data Catalog. By default, it is the account ID of the caller.</p>",
         "TrustedResourceOwners$member": null,
         "UpdateLFTagRequest$CatalogId": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>",
+        "UpdateLakeFormationIdentityCenterConfigurationRequest$CatalogId": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, view definitions, and other control information to manage your Lake Formation environment.</p>",
         "UpdateTableObjectsRequest$CatalogId": "<p>The catalog containing the governed table to update. Defaults to the caller’s account ID.</p>",
         "UpdateTableStorageOptimizerRequest$CatalogId": "<p>The Catalog ID of the table.</p>"
       }
@@ -284,6 +313,18 @@
       "refs": {
       }
     },
+    "ContextKey": {
+      "base": null,
+      "refs": {
+        "AdditionalContextMap$key": null
+      }
+    },
+    "ContextValue": {
+      "base": null,
+      "refs": {
+        "AdditionalContextMap$value": null
+      }
+    },
     "CreateDataCellsFilterRequest": {
       "base": null,
       "refs": {
@@ -300,6 +341,16 @@
       }
     },
     "CreateLFTagResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CreateLakeFormationIdentityCenterConfigurationRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CreateLakeFormationIdentityCenterConfigurationResponse": {
       "base": null,
       "refs": {
       }
@@ -362,9 +413,12 @@
     "DataLakePrincipalList": {
       "base": null,
       "refs": {
+        "CreateLakeFormationIdentityCenterConfigurationRequest$ShareRecipients": "<p>A list of Amazon Web Services account IDs and/or Amazon Web Services organization/organizational unit ARNs that are allowed to access data managed by Lake Formation. </p> <p>If the <code>ShareRecipients</code> list includes valid values, a resource share is created with the principals you want to have access to the resources.</p> <p>If the <code>ShareRecipients</code> value is null or the list is empty, no resource share is created.</p>",
         "DataLakeSettings$DataLakeAdmins": "<p>A list of Lake Formation principals. Supported principals are IAM users or IAM roles.</p>",
         "DataLakeSettings$ReadOnlyAdmins": "<p>A list of Lake Formation principals with only view access to the resources, without the ability to make changes. Supported principals are IAM users or IAM roles.</p>",
-        "DataLakeSettings$ExternalDataFilteringAllowList": "<p>A list of the account IDs of Amazon Web Services accounts with Amazon EMR clusters that are to perform data filtering.&gt;</p>"
+        "DataLakeSettings$ExternalDataFilteringAllowList": "<p>A list of the account IDs of Amazon Web Services accounts with Amazon EMR clusters that are to perform data filtering.&gt;</p>",
+        "DescribeLakeFormationIdentityCenterConfigurationResponse$ShareRecipients": "<p>A list of Amazon Web Services account IDs or Amazon Web Services organization/organizational unit ARNs that are allowed to access data managed by Lake Formation. </p> <p>If the <code>ShareRecipients</code> list includes valid values, a resource share is created with the principals you want to have access to the resources as the <code>ShareRecipients</code>.</p> <p>If the <code>ShareRecipients</code> value is null or the list is empty, no resource share is created.</p>",
+        "UpdateLakeFormationIdentityCenterConfigurationRequest$ShareRecipients": "<p>A list of Amazon Web Services account IDs or Amazon Web Services organization/organizational unit ARNs that are allowed to access to access data managed by Lake Formation. </p> <p>If the <code>ShareRecipients</code> list includes valid values, then the resource share is updated with the principals you want to have access to the resources.</p> <p>If the <code>ShareRecipients</code> value is null, both the list of share recipients and the resource share remain unchanged.</p> <p>If the <code>ShareRecipients</code> value is an empty list, then the existing share recipients list will be cleared, and the resource share will be deleted.</p>"
       }
     },
     "DataLakePrincipalString": {
@@ -431,6 +485,16 @@
       "refs": {
       }
     },
+    "DeleteLakeFormationIdentityCenterConfigurationRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DeleteLakeFormationIdentityCenterConfigurationResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
     "DeleteLakeFormationOptInRequest": {
       "base": null,
       "refs": {
@@ -463,6 +527,16 @@
       }
     },
     "DeregisterResourceResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DescribeLakeFormationIdentityCenterConfigurationRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DescribeLakeFormationIdentityCenterConfigurationResponse": {
       "base": null,
       "refs": {
       }
@@ -506,6 +580,12 @@
         "DeleteObjectInput$ETag": "<p>The Amazon S3 ETag of the object. Returned by <code>GetTableObjects</code> for validation and used to identify changes to the underlying data.</p>",
         "TableObject$ETag": "<p>The Amazon S3 ETag of the object. Returned by <code>GetTableObjects</code> for validation and used to identify changes to the underlying data.</p>",
         "VirtualObject$ETag": "<p>The ETag of the Amazon S3 object.</p>"
+      }
+    },
+    "EnableStatus": {
+      "base": null,
+      "refs": {
+        "ExternalFilteringConfiguration$Status": "<p>Allows to enable or disable the third-party applications that are allowed to access data managed by Lake Formation.</p>"
       }
     },
     "EntityNotFoundException": {
@@ -563,6 +643,14 @@
       "refs": {
       }
     },
+    "ExternalFilteringConfiguration": {
+      "base": "<p>Configuration for enabling external data filtering for third-party applications to access data managed by Lake Formation .</p>",
+      "refs": {
+        "CreateLakeFormationIdentityCenterConfigurationRequest$ExternalFiltering": "<p>A list of the account IDs of Amazon Web Services accounts of third-party applications that are allowed to access data managed by Lake Formation.</p>",
+        "DescribeLakeFormationIdentityCenterConfigurationResponse$ExternalFiltering": "<p>Indicates if external filtering is enabled.</p>",
+        "UpdateLakeFormationIdentityCenterConfigurationRequest$ExternalFiltering": "<p>A list of the account IDs of Amazon Web Services accounts of third-party applications that are allowed to access data managed by Lake Formation.</p>"
+      }
+    },
     "FieldNameString": {
       "base": null,
       "refs": {
@@ -587,6 +675,16 @@
       }
     },
     "GetDataCellsFilterResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetDataLakePrincipalRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetDataLakePrincipalResponse": {
       "base": null,
       "refs": {
       }
@@ -746,6 +844,13 @@
       "refs": {
       }
     },
+    "HashString": {
+      "base": null,
+      "refs": {
+        "QuerySessionContext$QueryId": "<p>A unique identifier generated by the query engine for the query.</p>",
+        "QuerySessionContext$QueryAuthorizationId": "<p>A cryptographically generated query identifier generated by Glue or Lake Formation.</p>"
+      }
+    },
     "IAMRoleArn": {
       "base": null,
       "refs": {
@@ -765,6 +870,19 @@
       "base": null,
       "refs": {
         "BatchPermissionsRequestEntry$Id": "<p>A unique identifier for the batch permissions request entry.</p>"
+      }
+    },
+    "IdentityCenterInstanceArn": {
+      "base": null,
+      "refs": {
+        "CreateLakeFormationIdentityCenterConfigurationRequest$InstanceArn": "<p>The ARN of the IAM Identity Center instance for which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.</p>",
+        "DescribeLakeFormationIdentityCenterConfigurationResponse$InstanceArn": "<p>The Amazon Resource Name (ARN) of the connection.</p>"
+      }
+    },
+    "IdentityString": {
+      "base": null,
+      "refs": {
+        "GetDataLakePrincipalResponse$Identity": "<p>A unique identifier of the invoking principal.</p>"
       }
     },
     "Integer": {
@@ -1028,6 +1146,12 @@
         "UpdateResourceRequest$HybridAccessEnabled": "<p> Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies. </p>"
       }
     },
+    "NullableString": {
+      "base": null,
+      "refs": {
+        "QuerySessionContext$ClusterId": "<p>An identifier string for the consumer cluster.</p>"
+      }
+    },
     "NumberOfBytes": {
       "base": null,
       "refs": {
@@ -1087,7 +1211,7 @@
     "ParametersMap": {
       "base": null,
       "refs": {
-        "DataLakeSettings$Parameters": "<p>A key-value map that provides an additional configuration on your data lake. CrossAccountVersion is the key you can configure in the Parameters field. Accepted values for the CrossAccountVersion key are 1, 2, and 3.</p>"
+        "DataLakeSettings$Parameters": "<p>A key-value map that provides an additional configuration on your data lake. CROSS_ACCOUNT_VERSION is the key you can configure in the Parameters field. Accepted values for the CrossAccountVersion key are 1, 2, 3, and 4.</p>"
       }
     },
     "ParametersMapValue": {
@@ -1126,6 +1250,19 @@
       "base": null,
       "refs": {
         "GetTableObjectsResponse$Objects": "<p>A list of objects organized by partition keys.</p>"
+      }
+    },
+    "PathString": {
+      "base": null,
+      "refs": {
+        "GetTemporaryGlueTableCredentialsRequest$S3Path": "<p>The Amazon S3 path for the table.</p>",
+        "PathStringList$member": null
+      }
+    },
+    "PathStringList": {
+      "base": null,
+      "refs": {
+        "GetTemporaryGlueTableCredentialsResponse$VendedS3Path": "<p>The Amazon S3 path for the temporary credentials.</p>"
       }
     },
     "Permission": {
@@ -1242,6 +1379,12 @@
         "QueryPlanningContext$DatabaseName": "<p>The database containing the table.</p>"
       }
     },
+    "QuerySessionContext": {
+      "base": "<p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>",
+      "refs": {
+        "GetTemporaryGlueTableCredentialsRequest$QuerySessionContext": "<p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>"
+      }
+    },
     "QueryStateString": {
       "base": null,
       "refs": {
@@ -1251,6 +1394,7 @@
     "RAMResourceShareArn": {
       "base": null,
       "refs": {
+        "DescribeLakeFormationIdentityCenterConfigurationResponse$ResourceShare": "<p>The Amazon Resource Name (ARN) of the RAM share.</p>",
         "ResourceShareList$member": null
       }
     },
@@ -1378,6 +1522,18 @@
       "base": null,
       "refs": {
         "AssumeDecoratedRoleWithSAMLRequest$SAMLAssertion": "<p>A SAML assertion consisting of an assertion statement for the user who needs temporary credentials. This must match the SAML assertion that was issued to IAM. This must be Base64 encoded.</p>"
+      }
+    },
+    "ScopeTarget": {
+      "base": null,
+      "refs": {
+        "ScopeTargets$member": null
+      }
+    },
+    "ScopeTargets": {
+      "base": null,
+      "refs": {
+        "ExternalFilteringConfiguration$AuthorizedTargets": "<p>List of third-party application <code>ARNs</code> integrated with Lake Formation.</p>"
       }
     },
     "SearchDatabasesByLFTagsRequest": {
@@ -1588,6 +1744,7 @@
       "refs": {
         "GetTableObjectsRequest$QueryAsOfTime": "<p>The time as of when to read the governed table contents. If not set, the most recent transaction commit time is used. Cannot be specified along with <code>TransactionId</code>.</p>",
         "QueryPlanningContext$QueryAsOfTime": "<p>The time as of when to read the table contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with <code>TransactionId</code>.</p>",
+        "QuerySessionContext$QueryStartTime": "<p>A timestamp provided by the query engine for when the query started.</p>",
         "TransactionDescription$TransactionStartTime": "<p>The time when the transaction started.</p>",
         "TransactionDescription$TransactionEndTime": "<p>The time when the transaction committed or aborted, if it is not currently active.</p>"
       }
@@ -1614,7 +1771,7 @@
         "SearchDatabasesByLFTagsRequest$NextToken": "<p>A continuation token, if this is not the first call to retrieve this list.</p>",
         "SearchDatabasesByLFTagsResponse$NextToken": "<p>A continuation token, present if the current list segment is not the last.</p>",
         "SearchTablesByLFTagsRequest$NextToken": "<p>A continuation token, if this is not the first call to retrieve this list.</p>",
-        "SearchTablesByLFTagsResponse$NextToken": "<p>A continuation token, present if the current list segment is not the last.</p>"
+        "SearchTablesByLFTagsResponse$NextToken": "<p>A continuation token, present if the current list segment is not the last. On the first run, if you include a not null (a value) token you can get empty pages.</p>"
       }
     },
     "TokenString": {
@@ -1725,6 +1882,16 @@
       }
     },
     "UpdateLFTagResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateLakeFormationIdentityCenterConfigurationRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateLakeFormationIdentityCenterConfigurationResponse": {
       "base": null,
       "refs": {
       }

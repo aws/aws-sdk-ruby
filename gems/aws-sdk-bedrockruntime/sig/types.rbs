@@ -1,0 +1,568 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::BedrockRuntime
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AnyToolChoice < Aws::EmptyStructure
+    end
+
+    class AutoToolChoice < Aws::EmptyStructure
+    end
+
+    class ContentBlock
+      attr_accessor text: ::String
+      attr_accessor image: Types::ImageBlock
+      attr_accessor document: Types::DocumentBlock
+      attr_accessor tool_use: Types::ToolUseBlock
+      attr_accessor tool_result: Types::ToolResultBlock
+      attr_accessor guard_content: Types::GuardrailConverseContentBlock
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < ContentBlock
+      end
+      class Image < ContentBlock
+      end
+      class Document < ContentBlock
+      end
+      class ToolUse < ContentBlock
+      end
+      class ToolResult < ContentBlock
+      end
+      class GuardContent < ContentBlock
+      end
+      class Unknown < ContentBlock
+      end
+    end
+
+    class ContentBlockDelta
+      attr_accessor text: ::String
+      attr_accessor tool_use: Types::ToolUseBlockDelta
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < ContentBlockDelta
+      end
+      class ToolUse < ContentBlockDelta
+      end
+      class Unknown < ContentBlockDelta
+      end
+    end
+
+    class ContentBlockDeltaEvent
+      attr_accessor delta: Types::ContentBlockDelta
+      attr_accessor content_block_index: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ContentBlockStart
+      attr_accessor tool_use: Types::ToolUseBlockStart
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ToolUse < ContentBlockStart
+      end
+      class Unknown < ContentBlockStart
+      end
+    end
+
+    class ContentBlockStartEvent
+      attr_accessor start: Types::ContentBlockStart
+      attr_accessor content_block_index: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ContentBlockStopEvent
+      attr_accessor content_block_index: ::Integer
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ConverseMetrics
+      attr_accessor latency_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConverseOutput
+      attr_accessor message: Types::Message
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Message < ConverseOutput
+      end
+      class Unknown < ConverseOutput
+      end
+    end
+
+    class ConverseRequest
+      attr_accessor model_id: ::String
+      attr_accessor messages: ::Array[Types::Message]
+      attr_accessor system: ::Array[Types::SystemContentBlock]
+      attr_accessor inference_config: Types::InferenceConfiguration
+      attr_accessor tool_config: Types::ToolConfiguration
+      attr_accessor guardrail_config: Types::GuardrailConfiguration
+      attr_accessor additional_model_request_fields: untyped
+      attr_accessor additional_model_response_field_paths: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConverseResponse
+      attr_accessor output: Types::ConverseOutput
+      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered")
+      attr_accessor usage: Types::TokenUsage
+      attr_accessor metrics: Types::ConverseMetrics
+      attr_accessor additional_model_response_fields: untyped
+      attr_accessor trace: Types::ConverseTrace
+      SENSITIVE: []
+    end
+
+    class ConverseStreamMetadataEvent
+      attr_accessor usage: Types::TokenUsage
+      attr_accessor metrics: Types::ConverseStreamMetrics
+      attr_accessor trace: Types::ConverseStreamTrace
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ConverseStreamMetrics
+      attr_accessor latency_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConverseStreamRequest
+      attr_accessor model_id: ::String
+      attr_accessor messages: ::Array[Types::Message]
+      attr_accessor system: ::Array[Types::SystemContentBlock]
+      attr_accessor inference_config: Types::InferenceConfiguration
+      attr_accessor tool_config: Types::ToolConfiguration
+      attr_accessor guardrail_config: Types::GuardrailStreamConfiguration
+      attr_accessor additional_model_request_fields: untyped
+      attr_accessor additional_model_response_field_paths: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConverseStreamResponse
+      attr_accessor stream: Types::ConverseStreamOutput
+      SENSITIVE: []
+    end
+
+    class ConverseStreamTrace
+      attr_accessor guardrail: Types::GuardrailTraceAssessment
+      SENSITIVE: []
+    end
+
+    class ConverseTrace
+      attr_accessor guardrail: Types::GuardrailTraceAssessment
+      SENSITIVE: []
+    end
+
+    class DocumentBlock
+      attr_accessor format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")
+      attr_accessor name: ::String
+      attr_accessor source: Types::DocumentSource
+      SENSITIVE: []
+    end
+
+    class DocumentSource
+      attr_accessor bytes: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Bytes < DocumentSource
+      end
+      class Unknown < DocumentSource
+      end
+    end
+
+    class GuardrailAssessment
+      attr_accessor topic_policy: Types::GuardrailTopicPolicyAssessment
+      attr_accessor content_policy: Types::GuardrailContentPolicyAssessment
+      attr_accessor word_policy: Types::GuardrailWordPolicyAssessment
+      attr_accessor sensitive_information_policy: Types::GuardrailSensitiveInformationPolicyAssessment
+      SENSITIVE: []
+    end
+
+    class GuardrailConfiguration
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor guardrail_version: ::String
+      attr_accessor trace: ("enabled" | "disabled")
+      SENSITIVE: []
+    end
+
+    class GuardrailContentFilter
+      attr_accessor type: ("INSULTS" | "HATE" | "SEXUAL" | "VIOLENCE" | "MISCONDUCT" | "PROMPT_ATTACK")
+      attr_accessor confidence: ("NONE" | "LOW" | "MEDIUM" | "HIGH")
+      attr_accessor action: ("BLOCKED")
+      SENSITIVE: []
+    end
+
+    class GuardrailContentPolicyAssessment
+      attr_accessor filters: ::Array[Types::GuardrailContentFilter]
+      SENSITIVE: []
+    end
+
+    class GuardrailConverseContentBlock
+      attr_accessor text: Types::GuardrailConverseTextBlock
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < GuardrailConverseContentBlock
+      end
+      class Unknown < GuardrailConverseContentBlock
+      end
+    end
+
+    class GuardrailConverseTextBlock
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class GuardrailCustomWord
+      attr_accessor match: ::String
+      attr_accessor action: ("BLOCKED")
+      SENSITIVE: []
+    end
+
+    class GuardrailManagedWord
+      attr_accessor match: ::String
+      attr_accessor type: ("PROFANITY")
+      attr_accessor action: ("BLOCKED")
+      SENSITIVE: []
+    end
+
+    class GuardrailPiiEntityFilter
+      attr_accessor match: ::String
+      attr_accessor type: ("ADDRESS" | "AGE" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "DRIVER_ID" | "EMAIL" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "IP_ADDRESS" | "LICENSE_PLATE" | "MAC_ADDRESS" | "NAME" | "PASSWORD" | "PHONE" | "PIN" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "URL" | "USERNAME" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "VEHICLE_IDENTIFICATION_NUMBER")
+      attr_accessor action: ("ANONYMIZED" | "BLOCKED")
+      SENSITIVE: []
+    end
+
+    class GuardrailRegexFilter
+      attr_accessor name: ::String
+      attr_accessor match: ::String
+      attr_accessor regex: ::String
+      attr_accessor action: ("ANONYMIZED" | "BLOCKED")
+      SENSITIVE: []
+    end
+
+    class GuardrailSensitiveInformationPolicyAssessment
+      attr_accessor pii_entities: ::Array[Types::GuardrailPiiEntityFilter]
+      attr_accessor regexes: ::Array[Types::GuardrailRegexFilter]
+      SENSITIVE: []
+    end
+
+    class GuardrailStreamConfiguration
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor guardrail_version: ::String
+      attr_accessor trace: ("enabled" | "disabled")
+      attr_accessor stream_processing_mode: ("sync" | "async")
+      SENSITIVE: []
+    end
+
+    class GuardrailTopic
+      attr_accessor name: ::String
+      attr_accessor type: ("DENY")
+      attr_accessor action: ("BLOCKED")
+      SENSITIVE: []
+    end
+
+    class GuardrailTopicPolicyAssessment
+      attr_accessor topics: ::Array[Types::GuardrailTopic]
+      SENSITIVE: []
+    end
+
+    class GuardrailTraceAssessment
+      attr_accessor model_output: ::Array[::String]
+      attr_accessor input_assessment: ::Hash[::String, Types::GuardrailAssessment]
+      attr_accessor output_assessments: ::Hash[::String, ::Array[Types::GuardrailAssessment]]
+      SENSITIVE: []
+    end
+
+    class GuardrailWordPolicyAssessment
+      attr_accessor custom_words: ::Array[Types::GuardrailCustomWord]
+      attr_accessor managed_word_lists: ::Array[Types::GuardrailManagedWord]
+      SENSITIVE: []
+    end
+
+    class ImageBlock
+      attr_accessor format: ("png" | "jpeg" | "gif" | "webp")
+      attr_accessor source: Types::ImageSource
+      SENSITIVE: []
+    end
+
+    class ImageSource
+      attr_accessor bytes: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Bytes < ImageSource
+      end
+      class Unknown < ImageSource
+      end
+    end
+
+    class InferenceConfiguration
+      attr_accessor max_tokens: ::Integer
+      attr_accessor temperature: ::Float
+      attr_accessor top_p: ::Float
+      attr_accessor stop_sequences: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class InvokeModelRequest
+      attr_accessor body: ::String
+      attr_accessor content_type: ::String
+      attr_accessor accept: ::String
+      attr_accessor model_id: ::String
+      attr_accessor trace: ("ENABLED" | "DISABLED")
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor guardrail_version: ::String
+      SENSITIVE: [:body]
+    end
+
+    class InvokeModelResponse
+      attr_accessor body: ::String
+      attr_accessor content_type: ::String
+      SENSITIVE: [:body]
+    end
+
+    class InvokeModelWithResponseStreamRequest
+      attr_accessor body: ::String
+      attr_accessor content_type: ::String
+      attr_accessor accept: ::String
+      attr_accessor model_id: ::String
+      attr_accessor trace: ("ENABLED" | "DISABLED")
+      attr_accessor guardrail_identifier: ::String
+      attr_accessor guardrail_version: ::String
+      SENSITIVE: [:body]
+    end
+
+    class InvokeModelWithResponseStreamResponse
+      attr_accessor body: Types::ResponseStream
+      attr_accessor content_type: ::String
+      SENSITIVE: []
+    end
+
+    class Message
+      attr_accessor role: ("user" | "assistant")
+      attr_accessor content: ::Array[Types::ContentBlock]
+      SENSITIVE: []
+    end
+
+    class MessageStartEvent
+      attr_accessor role: ("user" | "assistant")
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class MessageStopEvent
+      attr_accessor stop_reason: ("end_turn" | "tool_use" | "max_tokens" | "stop_sequence" | "guardrail_intervened" | "content_filtered")
+      attr_accessor additional_model_response_fields: untyped
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ModelErrorException
+      attr_accessor message: ::String
+      attr_accessor original_status_code: ::Integer
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ModelNotReadyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ModelStreamErrorException
+      attr_accessor message: ::String
+      attr_accessor original_status_code: ::Integer
+      attr_accessor original_message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ModelTimeoutException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class PayloadPart
+      attr_accessor bytes: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: [:bytes]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SpecificToolChoice
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class SystemContentBlock
+      attr_accessor text: ::String
+      attr_accessor guard_content: Types::GuardrailConverseContentBlock
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Text < SystemContentBlock
+      end
+      class GuardContent < SystemContentBlock
+      end
+      class Unknown < SystemContentBlock
+      end
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class TokenUsage
+      attr_accessor input_tokens: ::Integer
+      attr_accessor output_tokens: ::Integer
+      attr_accessor total_tokens: ::Integer
+      SENSITIVE: []
+    end
+
+    class Tool
+      attr_accessor tool_spec: Types::ToolSpecification
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ToolSpec < Tool
+      end
+      class Unknown < Tool
+      end
+    end
+
+    class ToolChoice
+      attr_accessor auto: Types::AutoToolChoice
+      attr_accessor any: Types::AnyToolChoice
+      attr_accessor tool: Types::SpecificToolChoice
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Auto < ToolChoice
+      end
+      class Any < ToolChoice
+      end
+      class Tool < ToolChoice
+      end
+      class Unknown < ToolChoice
+      end
+    end
+
+    class ToolConfiguration
+      attr_accessor tools: ::Array[Types::Tool]
+      attr_accessor tool_choice: Types::ToolChoice
+      SENSITIVE: []
+    end
+
+    class ToolInputSchema
+      attr_accessor json: untyped
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Json < ToolInputSchema
+      end
+      class Unknown < ToolInputSchema
+      end
+    end
+
+    class ToolResultBlock
+      attr_accessor tool_use_id: ::String
+      attr_accessor content: ::Array[Types::ToolResultContentBlock]
+      attr_accessor status: ("success" | "error")
+      SENSITIVE: []
+    end
+
+    class ToolResultContentBlock
+      attr_accessor json: untyped
+      attr_accessor text: ::String
+      attr_accessor image: Types::ImageBlock
+      attr_accessor document: Types::DocumentBlock
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Json < ToolResultContentBlock
+      end
+      class Text < ToolResultContentBlock
+      end
+      class Image < ToolResultContentBlock
+      end
+      class Document < ToolResultContentBlock
+      end
+      class Unknown < ToolResultContentBlock
+      end
+    end
+
+    class ToolSpecification
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor input_schema: Types::ToolInputSchema
+      SENSITIVE: []
+    end
+
+    class ToolUseBlock
+      attr_accessor tool_use_id: ::String
+      attr_accessor name: ::String
+      attr_accessor input: untyped
+      SENSITIVE: []
+    end
+
+    class ToolUseBlockDelta
+      attr_accessor input: ::String
+      SENSITIVE: []
+    end
+
+    class ToolUseBlockStart
+      attr_accessor tool_use_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ConverseStreamOutput < Enumerator[untyped, untyped]
+      def event_types: () -> [:message_start, :content_block_start, :content_block_delta, :content_block_stop, :message_stop, :metadata, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception]
+    end
+
+    class ResponseStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:chunk, :internal_server_exception, :model_stream_error_exception, :validation_exception, :throttling_exception, :model_timeout_exception]
+    end
+  end
+end

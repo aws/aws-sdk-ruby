@@ -52,6 +52,8 @@ module Aws::IoTFleetWise
     CreateVehicleRequestItem = Shapes::StructureShape.new(name: 'CreateVehicleRequestItem')
     CreateVehicleResponse = Shapes::StructureShape.new(name: 'CreateVehicleResponse')
     CreateVehicleResponseItem = Shapes::StructureShape.new(name: 'CreateVehicleResponseItem')
+    CustomProperty = Shapes::StructureShape.new(name: 'CustomProperty')
+    CustomStruct = Shapes::StructureShape.new(name: 'CustomStruct')
     DataDestinationConfig = Shapes::UnionShape.new(name: 'DataDestinationConfig')
     DataDestinationConfigs = Shapes::ListShape.new(name: 'DataDestinationConfigs')
     DataExtraDimensionNodePathList = Shapes::ListShape.new(name: 'DataExtraDimensionNodePathList')
@@ -146,6 +148,7 @@ module Aws::IoTFleetWise
     ListVehiclesResponse = Shapes::StructureShape.new(name: 'ListVehiclesResponse')
     LogType = Shapes::StringShape.new(name: 'LogType')
     ManifestStatus = Shapes::StringShape.new(name: 'ManifestStatus')
+    MessageSignal = Shapes::StructureShape.new(name: 'MessageSignal')
     ModelManifestSummary = Shapes::StructureShape.new(name: 'ModelManifestSummary')
     ModelSignalsMap = Shapes::MapShape.new(name: 'ModelSignalsMap')
     NetworkFileBlob = Shapes::BlobShape.new(name: 'NetworkFileBlob')
@@ -158,6 +161,7 @@ module Aws::IoTFleetWise
     NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
     Node = Shapes::UnionShape.new(name: 'Node')
     NodeCounts = Shapes::StructureShape.new(name: 'NodeCounts')
+    NodeDataEncoding = Shapes::StringShape.new(name: 'NodeDataEncoding')
     NodeDataType = Shapes::StringShape.new(name: 'NodeDataType')
     NodePath = Shapes::StringShape.new(name: 'NodePath')
     NodePaths = Shapes::ListShape.new(name: 'NodePaths')
@@ -169,12 +173,18 @@ module Aws::IoTFleetWise
     ObdSignal = Shapes::StructureShape.new(name: 'ObdSignal')
     ObdStandard = Shapes::StringShape.new(name: 'ObdStandard')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
+    PrimitiveBoolean = Shapes::BooleanShape.new(name: 'PrimitiveBoolean')
+    PrimitiveMessageDefinition = Shapes::UnionShape.new(name: 'PrimitiveMessageDefinition')
     ProtocolName = Shapes::StringShape.new(name: 'ProtocolName')
     ProtocolVersion = Shapes::StringShape.new(name: 'ProtocolVersion')
     PutEncryptionConfigurationRequest = Shapes::StructureShape.new(name: 'PutEncryptionConfigurationRequest')
+    PutEncryptionConfigurationRequestKmsKeyIdString = Shapes::StringShape.new(name: 'PutEncryptionConfigurationRequestKmsKeyIdString')
     PutEncryptionConfigurationResponse = Shapes::StructureShape.new(name: 'PutEncryptionConfigurationResponse')
     PutLoggingOptionsRequest = Shapes::StructureShape.new(name: 'PutLoggingOptionsRequest')
     PutLoggingOptionsResponse = Shapes::StructureShape.new(name: 'PutLoggingOptionsResponse')
+    ROS2PrimitiveMessageDefinition = Shapes::StructureShape.new(name: 'ROS2PrimitiveMessageDefinition')
+    ROS2PrimitiveMessageDefinitionUpperBoundLong = Shapes::IntegerShape.new(name: 'ROS2PrimitiveMessageDefinitionUpperBoundLong')
+    ROS2PrimitiveType = Shapes::StringShape.new(name: 'ROS2PrimitiveType')
     RegisterAccountRequest = Shapes::StructureShape.new(name: 'RegisterAccountRequest')
     RegisterAccountResponse = Shapes::StructureShape.new(name: 'RegisterAccountResponse')
     RegistrationStatus = Shapes::StringShape.new(name: 'RegistrationStatus')
@@ -190,9 +200,16 @@ module Aws::IoTFleetWise
     SignalDecoders = Shapes::ListShape.new(name: 'SignalDecoders')
     SignalInformation = Shapes::StructureShape.new(name: 'SignalInformation')
     SignalInformationList = Shapes::ListShape.new(name: 'SignalInformationList')
+    SignalNodeType = Shapes::StringShape.new(name: 'SignalNodeType')
     SpoolingMode = Shapes::StringShape.new(name: 'SpoolingMode')
     StorageCompressionFormat = Shapes::StringShape.new(name: 'StorageCompressionFormat')
     String = Shapes::StringShape.new(name: 'String')
+    StructureMessageName = Shapes::StringShape.new(name: 'StructureMessageName')
+    StructuredMessage = Shapes::UnionShape.new(name: 'StructuredMessage')
+    StructuredMessageDefinition = Shapes::ListShape.new(name: 'StructuredMessageDefinition')
+    StructuredMessageFieldNameAndDataTypePair = Shapes::StructureShape.new(name: 'StructuredMessageFieldNameAndDataTypePair')
+    StructuredMessageListDefinition = Shapes::StructureShape.new(name: 'StructuredMessageListDefinition')
+    StructuredMessageListType = Shapes::StringShape.new(name: 'StructuredMessageListType')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -208,6 +225,7 @@ module Aws::IoTFleetWise
     TimestreamResources = Shapes::StructureShape.new(name: 'TimestreamResources')
     TimestreamTableArn = Shapes::StringShape.new(name: 'TimestreamTableArn')
     TimestreamTableName = Shapes::StringShape.new(name: 'TimestreamTableName')
+    TopicName = Shapes::StringShape.new(name: 'TopicName')
     TriggerMode = Shapes::StringShape.new(name: 'TriggerMode')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -233,15 +251,19 @@ module Aws::IoTFleetWise
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     VehicleAssociationBehavior = Shapes::StringShape.new(name: 'VehicleAssociationBehavior')
+    VehicleMiddleware = Shapes::StructureShape.new(name: 'VehicleMiddleware')
+    VehicleMiddlewareName = Shapes::StringShape.new(name: 'VehicleMiddlewareName')
+    VehicleMiddlewareProtocol = Shapes::StringShape.new(name: 'VehicleMiddlewareProtocol')
     VehicleState = Shapes::StringShape.new(name: 'VehicleState')
     VehicleStatus = Shapes::StructureShape.new(name: 'VehicleStatus')
     VehicleStatusList = Shapes::ListShape.new(name: 'VehicleStatusList')
     VehicleSummary = Shapes::StructureShape.new(name: 'VehicleSummary')
     arn = Shapes::StringShape.new(name: 'arn')
     attributeName = Shapes::StringShape.new(name: 'attributeName')
+    attributeNamesList = Shapes::ListShape.new(name: 'attributeNamesList')
     attributeValue = Shapes::StringShape.new(name: 'attributeValue')
+    attributeValuesList = Shapes::ListShape.new(name: 'attributeValuesList')
     attributesMap = Shapes::MapShape.new(name: 'attributesMap')
-    boolean = Shapes::BooleanShape.new(name: 'boolean')
     campaignName = Shapes::StringShape.new(name: 'campaignName')
     campaignSummaries = Shapes::ListShape.new(name: 'campaignSummaries')
     collectionPeriodMs = Shapes::IntegerShape.new(name: 'collectionPeriodMs')
@@ -296,6 +318,7 @@ module Aws::IoTFleetWise
     Actuator.add_member(:assigned_value, Shapes::ShapeRef.new(shape: string, deprecated: true, location_name: "assignedValue", metadata: {"deprecatedMessage"=>"assignedValue is no longer in use"}))
     Actuator.add_member(:deprecation_message, Shapes::ShapeRef.new(shape: message, location_name: "deprecationMessage"))
     Actuator.add_member(:comment, Shapes::ShapeRef.new(shape: message, location_name: "comment"))
+    Actuator.add_member(:struct_fully_qualified_name, Shapes::ShapeRef.new(shape: NodePath, location_name: "structFullyQualifiedName"))
     Actuator.struct_class = Types::Actuator
 
     AssociateVehicleFleetRequest.add_member(:vehicle_name, Shapes::ShapeRef.new(shape: vehicleName, required: true, location_name: "vehicleName"))
@@ -358,8 +381,8 @@ module Aws::IoTFleetWise
     CanInterface.struct_class = Types::CanInterface
 
     CanSignal.add_member(:message_id, Shapes::ShapeRef.new(shape: nonNegativeInteger, required: true, location_name: "messageId"))
-    CanSignal.add_member(:is_big_endian, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "isBigEndian"))
-    CanSignal.add_member(:is_signed, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "isSigned"))
+    CanSignal.add_member(:is_big_endian, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "isBigEndian"))
+    CanSignal.add_member(:is_signed, Shapes::ShapeRef.new(shape: PrimitiveBoolean, required: true, location_name: "isSigned"))
     CanSignal.add_member(:start_bit, Shapes::ShapeRef.new(shape: nonNegativeInteger, required: true, location_name: "startBit"))
     CanSignal.add_member(:offset, Shapes::ShapeRef.new(shape: double, required: true, location_name: "offset"))
     CanSignal.add_member(:factor, Shapes::ShapeRef.new(shape: double, required: true, location_name: "factor"))
@@ -486,6 +509,21 @@ module Aws::IoTFleetWise
     CreateVehicleResponseItem.add_member(:thing_arn, Shapes::ShapeRef.new(shape: arn, location_name: "thingArn"))
     CreateVehicleResponseItem.struct_class = Types::CreateVehicleResponseItem
 
+    CustomProperty.add_member(:fully_qualified_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "fullyQualifiedName"))
+    CustomProperty.add_member(:data_type, Shapes::ShapeRef.new(shape: NodeDataType, required: true, location_name: "dataType"))
+    CustomProperty.add_member(:data_encoding, Shapes::ShapeRef.new(shape: NodeDataEncoding, location_name: "dataEncoding"))
+    CustomProperty.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
+    CustomProperty.add_member(:deprecation_message, Shapes::ShapeRef.new(shape: message, location_name: "deprecationMessage"))
+    CustomProperty.add_member(:comment, Shapes::ShapeRef.new(shape: message, location_name: "comment"))
+    CustomProperty.add_member(:struct_fully_qualified_name, Shapes::ShapeRef.new(shape: NodePath, location_name: "structFullyQualifiedName"))
+    CustomProperty.struct_class = Types::CustomProperty
+
+    CustomStruct.add_member(:fully_qualified_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "fullyQualifiedName"))
+    CustomStruct.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
+    CustomStruct.add_member(:deprecation_message, Shapes::ShapeRef.new(shape: message, location_name: "deprecationMessage"))
+    CustomStruct.add_member(:comment, Shapes::ShapeRef.new(shape: message, location_name: "comment"))
+    CustomStruct.struct_class = Types::CustomStruct
+
     DataDestinationConfig.add_member(:s3_config, Shapes::ShapeRef.new(shape: S3Config, location_name: "s3Config"))
     DataDestinationConfig.add_member(:timestream_config, Shapes::ShapeRef.new(shape: TimestreamConfig, location_name: "timestreamConfig"))
     DataDestinationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -505,6 +543,7 @@ module Aws::IoTFleetWise
     DecoderManifestSummary.add_member(:status, Shapes::ShapeRef.new(shape: ManifestStatus, location_name: "status"))
     DecoderManifestSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "creationTime"))
     DecoderManifestSummary.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "lastModificationTime"))
+    DecoderManifestSummary.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "message"))
     DecoderManifestSummary.struct_class = Types::DecoderManifestSummary
 
     DecoderManifestValidationException.add_member(:invalid_signals, Shapes::ShapeRef.new(shape: InvalidSignalDecoders, location_name: "invalidSignals"))
@@ -610,6 +649,7 @@ module Aws::IoTFleetWise
     GetDecoderManifestResponse.add_member(:status, Shapes::ShapeRef.new(shape: ManifestStatus, location_name: "status"))
     GetDecoderManifestResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "creationTime"))
     GetDecoderManifestResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "lastModificationTime"))
+    GetDecoderManifestResponse.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "message"))
     GetDecoderManifestResponse.struct_class = Types::GetDecoderManifestResponse
 
     GetEncryptionConfigurationRequest.struct_class = Types::GetEncryptionConfigurationRequest
@@ -741,6 +781,7 @@ module Aws::IoTFleetWise
 
     InvalidSignalDecoder.add_member(:name, Shapes::ShapeRef.new(shape: FullyQualifiedName, location_name: "name"))
     InvalidSignalDecoder.add_member(:reason, Shapes::ShapeRef.new(shape: SignalDecoderFailureReason, location_name: "reason"))
+    InvalidSignalDecoder.add_member(:hint, Shapes::ShapeRef.new(shape: message, location_name: "hint"))
     InvalidSignalDecoder.struct_class = Types::InvalidSignalDecoder
 
     InvalidSignalDecoders.member = Shapes::ShapeRef.new(shape: InvalidSignalDecoder)
@@ -830,6 +871,7 @@ module Aws::IoTFleetWise
     ListSignalCatalogNodesRequest.add_member(:name, Shapes::ShapeRef.new(shape: resourceName, required: true, location_name: "name"))
     ListSignalCatalogNodesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
     ListSignalCatalogNodesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxResults, location_name: "maxResults"))
+    ListSignalCatalogNodesRequest.add_member(:signal_node_type, Shapes::ShapeRef.new(shape: SignalNodeType, location_name: "signalNodeType"))
     ListSignalCatalogNodesRequest.struct_class = Types::ListSignalCatalogNodesRequest
 
     ListSignalCatalogNodesResponse.add_member(:nodes, Shapes::ShapeRef.new(shape: Nodes, location_name: "nodes"))
@@ -860,6 +902,8 @@ module Aws::IoTFleetWise
     ListVehiclesInFleetResponse.struct_class = Types::ListVehiclesInFleetResponse
 
     ListVehiclesRequest.add_member(:model_manifest_arn, Shapes::ShapeRef.new(shape: arn, location_name: "modelManifestArn"))
+    ListVehiclesRequest.add_member(:attribute_names, Shapes::ShapeRef.new(shape: attributeNamesList, location_name: "attributeNames"))
+    ListVehiclesRequest.add_member(:attribute_values, Shapes::ShapeRef.new(shape: attributeValuesList, location_name: "attributeValues"))
     ListVehiclesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
     ListVehiclesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: listVehiclesMaxResults, location_name: "maxResults"))
     ListVehiclesRequest.struct_class = Types::ListVehiclesRequest
@@ -867,6 +911,10 @@ module Aws::IoTFleetWise
     ListVehiclesResponse.add_member(:vehicle_summaries, Shapes::ShapeRef.new(shape: vehicleSummaries, location_name: "vehicleSummaries"))
     ListVehiclesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "nextToken"))
     ListVehiclesResponse.struct_class = Types::ListVehiclesResponse
+
+    MessageSignal.add_member(:topic_name, Shapes::ShapeRef.new(shape: TopicName, required: true, location_name: "topicName"))
+    MessageSignal.add_member(:structured_message, Shapes::ShapeRef.new(shape: StructuredMessage, required: true, location_name: "structuredMessage"))
+    MessageSignal.struct_class = Types::MessageSignal
 
     ModelManifestSummary.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
     ModelManifestSummary.add_member(:arn, Shapes::ShapeRef.new(shape: arn, location_name: "arn"))
@@ -894,6 +942,7 @@ module Aws::IoTFleetWise
     NetworkInterface.add_member(:type, Shapes::ShapeRef.new(shape: NetworkInterfaceType, required: true, location_name: "type"))
     NetworkInterface.add_member(:can_interface, Shapes::ShapeRef.new(shape: CanInterface, location_name: "canInterface"))
     NetworkInterface.add_member(:obd_interface, Shapes::ShapeRef.new(shape: ObdInterface, location_name: "obdInterface"))
+    NetworkInterface.add_member(:vehicle_middleware, Shapes::ShapeRef.new(shape: VehicleMiddleware, location_name: "vehicleMiddleware"))
     NetworkInterface.struct_class = Types::NetworkInterface
 
     NetworkInterfaces.member = Shapes::ShapeRef.new(shape: NetworkInterface)
@@ -902,11 +951,15 @@ module Aws::IoTFleetWise
     Node.add_member(:sensor, Shapes::ShapeRef.new(shape: Sensor, location_name: "sensor"))
     Node.add_member(:actuator, Shapes::ShapeRef.new(shape: Actuator, location_name: "actuator"))
     Node.add_member(:attribute, Shapes::ShapeRef.new(shape: Attribute, location_name: "attribute"))
+    Node.add_member(:struct, Shapes::ShapeRef.new(shape: CustomStruct, location_name: "struct"))
+    Node.add_member(:property, Shapes::ShapeRef.new(shape: CustomProperty, location_name: "property"))
     Node.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Node.add_member_subclass(:branch, Types::Node::Branch)
     Node.add_member_subclass(:sensor, Types::Node::Sensor)
     Node.add_member_subclass(:actuator, Types::Node::Actuator)
     Node.add_member_subclass(:attribute, Types::Node::Attribute)
+    Node.add_member_subclass(:struct, Types::Node::Struct)
+    Node.add_member_subclass(:property, Types::Node::Property)
     Node.add_member_subclass(:unknown, Types::Node::Unknown)
     Node.struct_class = Types::Node
 
@@ -915,6 +968,8 @@ module Aws::IoTFleetWise
     NodeCounts.add_member(:total_sensors, Shapes::ShapeRef.new(shape: number, location_name: "totalSensors"))
     NodeCounts.add_member(:total_attributes, Shapes::ShapeRef.new(shape: number, location_name: "totalAttributes"))
     NodeCounts.add_member(:total_actuators, Shapes::ShapeRef.new(shape: number, location_name: "totalActuators"))
+    NodeCounts.add_member(:total_structs, Shapes::ShapeRef.new(shape: number, location_name: "totalStructs"))
+    NodeCounts.add_member(:total_properties, Shapes::ShapeRef.new(shape: number, location_name: "totalProperties"))
     NodeCounts.struct_class = Types::NodeCounts
 
     NodePaths.member = Shapes::ShapeRef.new(shape: NodePath)
@@ -926,8 +981,8 @@ module Aws::IoTFleetWise
     ObdInterface.add_member(:obd_standard, Shapes::ShapeRef.new(shape: ObdStandard, location_name: "obdStandard"))
     ObdInterface.add_member(:pid_request_interval_seconds, Shapes::ShapeRef.new(shape: nonNegativeInteger, location_name: "pidRequestIntervalSeconds"))
     ObdInterface.add_member(:dtc_request_interval_seconds, Shapes::ShapeRef.new(shape: nonNegativeInteger, location_name: "dtcRequestIntervalSeconds"))
-    ObdInterface.add_member(:use_extended_ids, Shapes::ShapeRef.new(shape: boolean, location_name: "useExtendedIds"))
-    ObdInterface.add_member(:has_transmission_ecu, Shapes::ShapeRef.new(shape: boolean, location_name: "hasTransmissionEcu"))
+    ObdInterface.add_member(:use_extended_ids, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "useExtendedIds"))
+    ObdInterface.add_member(:has_transmission_ecu, Shapes::ShapeRef.new(shape: PrimitiveBoolean, location_name: "hasTransmissionEcu"))
     ObdInterface.struct_class = Types::ObdInterface
 
     ObdSignal.add_member(:pid_response_length, Shapes::ShapeRef.new(shape: positiveInteger, required: true, location_name: "pidResponseLength"))
@@ -941,7 +996,13 @@ module Aws::IoTFleetWise
     ObdSignal.add_member(:bit_mask_length, Shapes::ShapeRef.new(shape: ObdBitmaskLength, location_name: "bitMaskLength"))
     ObdSignal.struct_class = Types::ObdSignal
 
-    PutEncryptionConfigurationRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
+    PrimitiveMessageDefinition.add_member(:ros2_primitive_message_definition, Shapes::ShapeRef.new(shape: ROS2PrimitiveMessageDefinition, location_name: "ros2PrimitiveMessageDefinition"))
+    PrimitiveMessageDefinition.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PrimitiveMessageDefinition.add_member_subclass(:ros2_primitive_message_definition, Types::PrimitiveMessageDefinition::Ros2PrimitiveMessageDefinition)
+    PrimitiveMessageDefinition.add_member_subclass(:unknown, Types::PrimitiveMessageDefinition::Unknown)
+    PrimitiveMessageDefinition.struct_class = Types::PrimitiveMessageDefinition
+
+    PutEncryptionConfigurationRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: PutEncryptionConfigurationRequestKmsKeyIdString, location_name: "kmsKeyId"))
     PutEncryptionConfigurationRequest.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "encryptionType"))
     PutEncryptionConfigurationRequest.struct_class = Types::PutEncryptionConfigurationRequest
 
@@ -954,6 +1015,12 @@ module Aws::IoTFleetWise
     PutLoggingOptionsRequest.struct_class = Types::PutLoggingOptionsRequest
 
     PutLoggingOptionsResponse.struct_class = Types::PutLoggingOptionsResponse
+
+    ROS2PrimitiveMessageDefinition.add_member(:primitive_type, Shapes::ShapeRef.new(shape: ROS2PrimitiveType, required: true, location_name: "primitiveType"))
+    ROS2PrimitiveMessageDefinition.add_member(:offset, Shapes::ShapeRef.new(shape: double, location_name: "offset"))
+    ROS2PrimitiveMessageDefinition.add_member(:scaling, Shapes::ShapeRef.new(shape: double, location_name: "scaling"))
+    ROS2PrimitiveMessageDefinition.add_member(:upper_bound, Shapes::ShapeRef.new(shape: ROS2PrimitiveMessageDefinitionUpperBoundLong, location_name: "upperBound"))
+    ROS2PrimitiveMessageDefinition.struct_class = Types::ROS2PrimitiveMessageDefinition
 
     RegisterAccountRequest.add_member(:timestream_resources, Shapes::ShapeRef.new(shape: TimestreamResources, deprecated: true, location_name: "timestreamResources", metadata: {"deprecatedMessage"=>"Amazon Timestream metadata is now passed in the CreateCampaign API."}))
     RegisterAccountRequest.add_member(:iam_resources, Shapes::ShapeRef.new(shape: IamResources, deprecated: true, location_name: "iamResources", metadata: {"deprecatedMessage"=>"iamResources is no longer used or needed as input"}))
@@ -986,6 +1053,7 @@ module Aws::IoTFleetWise
     Sensor.add_member(:max, Shapes::ShapeRef.new(shape: double, location_name: "max"))
     Sensor.add_member(:deprecation_message, Shapes::ShapeRef.new(shape: message, location_name: "deprecationMessage"))
     Sensor.add_member(:comment, Shapes::ShapeRef.new(shape: message, location_name: "comment"))
+    Sensor.add_member(:struct_fully_qualified_name, Shapes::ShapeRef.new(shape: NodePath, location_name: "structFullyQualifiedName"))
     Sensor.struct_class = Types::Sensor
 
     SignalCatalogSummary.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
@@ -999,6 +1067,7 @@ module Aws::IoTFleetWise
     SignalDecoder.add_member(:interface_id, Shapes::ShapeRef.new(shape: InterfaceId, required: true, location_name: "interfaceId"))
     SignalDecoder.add_member(:can_signal, Shapes::ShapeRef.new(shape: CanSignal, location_name: "canSignal"))
     SignalDecoder.add_member(:obd_signal, Shapes::ShapeRef.new(shape: ObdSignal, location_name: "obdSignal"))
+    SignalDecoder.add_member(:message_signal, Shapes::ShapeRef.new(shape: MessageSignal, location_name: "messageSignal"))
     SignalDecoder.struct_class = Types::SignalDecoder
 
     SignalDecoders.member = Shapes::ShapeRef.new(shape: SignalDecoder)
@@ -1009,6 +1078,28 @@ module Aws::IoTFleetWise
     SignalInformation.struct_class = Types::SignalInformation
 
     SignalInformationList.member = Shapes::ShapeRef.new(shape: SignalInformation)
+
+    StructuredMessage.add_member(:primitive_message_definition, Shapes::ShapeRef.new(shape: PrimitiveMessageDefinition, location_name: "primitiveMessageDefinition"))
+    StructuredMessage.add_member(:structured_message_list_definition, Shapes::ShapeRef.new(shape: StructuredMessageListDefinition, location_name: "structuredMessageListDefinition"))
+    StructuredMessage.add_member(:structured_message_definition, Shapes::ShapeRef.new(shape: StructuredMessageDefinition, location_name: "structuredMessageDefinition"))
+    StructuredMessage.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    StructuredMessage.add_member_subclass(:primitive_message_definition, Types::StructuredMessage::PrimitiveMessageDefinition)
+    StructuredMessage.add_member_subclass(:structured_message_list_definition, Types::StructuredMessage::StructuredMessageListDefinition)
+    StructuredMessage.add_member_subclass(:structured_message_definition, Types::StructuredMessage::StructuredMessageDefinition)
+    StructuredMessage.add_member_subclass(:unknown, Types::StructuredMessage::Unknown)
+    StructuredMessage.struct_class = Types::StructuredMessage
+
+    StructuredMessageDefinition.member = Shapes::ShapeRef.new(shape: StructuredMessageFieldNameAndDataTypePair)
+
+    StructuredMessageFieldNameAndDataTypePair.add_member(:field_name, Shapes::ShapeRef.new(shape: StructureMessageName, required: true, location_name: "fieldName"))
+    StructuredMessageFieldNameAndDataTypePair.add_member(:data_type, Shapes::ShapeRef.new(shape: StructuredMessage, required: true, location_name: "dataType"))
+    StructuredMessageFieldNameAndDataTypePair.struct_class = Types::StructuredMessageFieldNameAndDataTypePair
+
+    StructuredMessageListDefinition.add_member(:name, Shapes::ShapeRef.new(shape: StructureMessageName, required: true, location_name: "name"))
+    StructuredMessageListDefinition.add_member(:member_type, Shapes::ShapeRef.new(shape: StructuredMessage, required: true, location_name: "memberType"))
+    StructuredMessageListDefinition.add_member(:list_type, Shapes::ShapeRef.new(shape: StructuredMessageListType, required: true, location_name: "listType"))
+    StructuredMessageListDefinition.add_member(:capacity, Shapes::ShapeRef.new(shape: nonNegativeInteger, location_name: "capacity"))
+    StructuredMessageListDefinition.struct_class = Types::StructuredMessageListDefinition
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -1149,6 +1240,10 @@ module Aws::IoTFleetWise
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
+    VehicleMiddleware.add_member(:name, Shapes::ShapeRef.new(shape: VehicleMiddlewareName, required: true, location_name: "name"))
+    VehicleMiddleware.add_member(:protocol_name, Shapes::ShapeRef.new(shape: VehicleMiddlewareProtocol, required: true, location_name: "protocolName"))
+    VehicleMiddleware.struct_class = Types::VehicleMiddleware
+
     VehicleStatus.add_member(:campaign_name, Shapes::ShapeRef.new(shape: string, location_name: "campaignName"))
     VehicleStatus.add_member(:vehicle_name, Shapes::ShapeRef.new(shape: vehicleName, location_name: "vehicleName"))
     VehicleStatus.add_member(:status, Shapes::ShapeRef.new(shape: VehicleState, location_name: "status"))
@@ -1162,7 +1257,12 @@ module Aws::IoTFleetWise
     VehicleSummary.add_member(:decoder_manifest_arn, Shapes::ShapeRef.new(shape: arn, required: true, location_name: "decoderManifestArn"))
     VehicleSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "creationTime"))
     VehicleSummary.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "lastModificationTime"))
+    VehicleSummary.add_member(:attributes, Shapes::ShapeRef.new(shape: attributesMap, location_name: "attributes"))
     VehicleSummary.struct_class = Types::VehicleSummary
+
+    attributeNamesList.member = Shapes::ShapeRef.new(shape: attributeName)
+
+    attributeValuesList.member = Shapes::ShapeRef.new(shape: attributeValue)
 
     attributesMap.key = Shapes::ShapeRef.new(shape: attributeName)
     attributesMap.value = Shapes::ShapeRef.new(shape: attributeValue)
@@ -1224,6 +1324,7 @@ module Aws::IoTFleetWise
         o.output = Shapes::ShapeRef.new(shape: AssociateVehicleFleetResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

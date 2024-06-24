@@ -71,7 +71,7 @@
         "CustomLogSourceAttributes$tableArn": "<p>The ARN of the Glue table.</p>",
         "DataLakeResource$dataLakeArn": "<p>The Amazon Resource Name (ARN) created by you to provide to the subscriber. For more information about ARNs and how to use them in policies, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/subscriber-management.html\">Amazon Security Lake User Guide</a>.</p>",
         "GetDataLakeSourcesResponse$dataLakeArn": "<p>The Amazon Resource Name (ARN) created by you to provide to the subscriber. For more information about ARNs and how to use them in policies, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/subscriber-management.html\">Amazon Security Lake User Guide</a>.</p>",
-        "ListTagsForResourceRequest$resourceArn": "<p>The Amazon Resource Name (ARN) of the Amazon Security Lake resource to retrieve the tags for.</p>",
+        "ListTagsForResourceRequest$resourceArn": "<p>The Amazon Resource Name (ARN) of the Amazon Security Lake resource for which you want to retrieve the tags.</p>",
         "SubscriberResource$subscriberArn": "<p>The subscriber ARN of the Amazon Security Lake subscriber account.</p>",
         "TagResourceRequest$resourceArn": "<p>The Amazon Resource Name (ARN) of the Amazon Security Lake resource to add or update the tags for.</p>",
         "UntagResourceRequest$resourceArn": "<p>The Amazon Resource Name (ARN) of the Amazon Security Lake resource to remove one or more tags from.</p>"
@@ -87,9 +87,9 @@
     "AwsIdentity": {
       "base": "<p>The AWS identity.</p>",
       "refs": {
-        "CreateSubscriberRequest$subscriberIdentity": "<p>The AWS identity used to access your data.</p>",
+        "CreateSubscriberRequest$subscriberIdentity": "<p>The Amazon Web Services identity used to access your data.</p>",
         "CustomLogSourceConfiguration$providerIdentity": "<p>The identity of the log provider for the third-party custom source.</p>",
-        "SubscriberResource$subscriberIdentity": "<p>The AWS identity used to access your data.</p>",
+        "SubscriberResource$subscriberIdentity": "<p>The Amazon Web Services identity used to access your data.</p>",
         "UpdateSubscriberRequest$subscriberIdentity": "<p>The AWS identity used to access your data.</p>"
       }
     },
@@ -362,7 +362,7 @@
       }
     },
     "DataLakeReplicationConfiguration": {
-      "base": "<p>Provides replication details of Amazon Security Lake object.</p>",
+      "base": "<p>Provides replication details for objects stored in the Amazon Security Lake data lake.</p>",
       "refs": {
         "DataLakeConfiguration$replicationConfiguration": "<p>Provides replication details of Amazon Security Lake object.</p>",
         "DataLakeResource$replicationConfiguration": "<p>Provides replication details of Amazon Security Lake object.</p>"
@@ -734,11 +734,11 @@
       "base": null,
       "refs": {
         "AwsLogSourceConfiguration$regions": "<p>Specify the Regions where you want to enable Security Lake.</p>",
-        "DataLakeReplicationConfiguration$regions": "<p>Replication enables automatic, asynchronous copying of objects across Amazon S3 buckets. Amazon S3 buckets that are configured for object replication can be owned by the same Amazon Web Services account or by different accounts. You can replicate objects to a single destination bucket or to multiple destination buckets. The destination buckets can be in different Amazon Web Services Regions or within the same Region as the source bucket.</p> <p>Set up one or more rollup Regions by providing the Region or Regions that should contribute to the central rollup Region.</p>",
+        "DataLakeReplicationConfiguration$regions": "<p>Specifies one or more centralized rollup Regions. The Amazon Web Services Region specified in the <code>region</code> parameter of the <a href=\"https://docs.aws.amazon.com/security-lake/latest/APIReference/API_CreateDataLake.html\"> <code>CreateDataLake</code> </a> or <a href=\"https://docs.aws.amazon.com/security-lake/latest/APIReference/API_UpdateDataLake.html\"> <code>UpdateDataLake</code> </a> operations contributes data to the rollup Region or Regions specified in this parameter.</p> <p>Replication enables automatic, asynchronous copying of objects across Amazon S3 buckets. S3 buckets that are configured for object replication can be owned by the same Amazon Web Services account or by different accounts. You can replicate objects to a single destination bucket or to multiple destination buckets. The destination buckets can be in different Regions or within the same Region as the source bucket.</p>",
         "DeleteDataLakeRequest$regions": "<p>The list of Regions where Security Lake is enabled.</p>",
-        "ListDataLakeExceptionsRequest$regions": "<p>List the Amazon Web Services Regions from which exceptions are retrieved.</p>",
-        "ListDataLakesRequest$regions": "<p>The list of regions where Security Lake is enabled.</p>",
-        "ListLogSourcesRequest$regions": "<p>The list of regions for which log sources are displayed.</p>"
+        "ListDataLakeExceptionsRequest$regions": "<p>The Amazon Web Services Regions from which exceptions are retrieved.</p>",
+        "ListDataLakesRequest$regions": "<p>The list of Regions where Security Lake is enabled.</p>",
+        "ListLogSourcesRequest$regions": "<p>The list of Regions for which log sources are displayed.</p>"
       }
     },
     "RegisterDataLakeDelegatedAdministratorRequest": {
@@ -759,7 +759,7 @@
     "ResourceShareArn": {
       "base": null,
       "refs": {
-        "SubscriberResource$resourceShareArn": "<p>The Amazon Resource Name (ARN) which uniquely defines the AWS RAM resource share. Before accepting the RAM resource share invitation, you can view details related to the RAM resource share.</p> <p>This field is available only for Lake Formation subscribers created after March 8, 2023.</p>"
+        "SubscriberResource$resourceShareArn": "<p>The Amazon Resource Name (ARN) which uniquely defines the Amazon Web Services RAM resource share. Before accepting the RAM resource share invitation, you can view details related to the RAM resource share.</p> <p>This field is available only for Lake Formation subscribers created after March 8, 2023.</p>"
       }
     },
     "ResourceShareName": {
@@ -776,7 +776,8 @@
         "CustomLogSourceProvider$roleArn": "<p>The ARN of the IAM role to be used by the entity putting logs into your custom source partition. Security Lake will apply the correct access policies to this role, but you must first manually create the trust policy for this role. The IAM role name must start with the text 'Security Lake'. The IAM role must trust the <code>logProviderAccountId</code> to assume the role.</p>",
         "DataLakeReplicationConfiguration$roleArn": "<p>Replication settings for the Amazon S3 buckets. This parameter uses the Identity and Access Management (IAM) role you created that is managed by Security Lake, to ensure the replication setting is correct.</p>",
         "HttpsNotificationConfiguration$targetRoleArn": "<p>The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you created. For more information about ARNs and how to use them in policies, see <a href=\"https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html\">Managing data access</a> and <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html\">Amazon Web Services Managed Policies</a> in the <i>Amazon Security Lake User Guide</i>.</p>",
-        "SubscriberResource$roleArn": "<p>The Amazon Resource Name (ARN) specifying the role of the subscriber.</p>"
+        "SubscriberResource$roleArn": "<p>The Amazon Resource Name (ARN) specifying the role of the subscriber.</p>",
+        "UpdateDataLakeRequest$metaStoreManagerRoleArn": "<p>The Amazon Resource Name (ARN) used to create and update the Glue table. This table contains partitions generated by the ingestion and normalization of Amazon Web Services log sources and custom sources.</p>"
       }
     },
     "S3BucketArn": {

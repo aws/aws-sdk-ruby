@@ -1,0 +1,491 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DAX
+  module Types
+
+    class Cluster
+      attr_accessor cluster_name: ::String
+      attr_accessor description: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor total_nodes: ::Integer
+      attr_accessor active_nodes: ::Integer
+      attr_accessor node_type: ::String
+      attr_accessor status: ::String
+      attr_accessor cluster_discovery_endpoint: Types::Endpoint
+      attr_accessor node_ids_to_remove: ::Array[::String]
+      attr_accessor nodes: ::Array[Types::Node]
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor notification_configuration: Types::NotificationConfiguration
+      attr_accessor subnet_group: ::String
+      attr_accessor security_groups: ::Array[Types::SecurityGroupMembership]
+      attr_accessor iam_role_arn: ::String
+      attr_accessor parameter_group: Types::ParameterGroupStatus
+      attr_accessor sse_description: Types::SSEDescription
+      attr_accessor cluster_endpoint_encryption_type: ("NONE" | "TLS")
+      SENSITIVE: []
+    end
+
+    class ClusterAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ClusterNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ClusterQuotaForCustomerExceededFault < Aws::EmptyStructure
+    end
+
+    class CreateClusterRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor node_type: ::String
+      attr_accessor description: ::String
+      attr_accessor replication_factor: ::Integer
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor subnet_group_name: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor notification_topic_arn: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor parameter_group_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor sse_specification: Types::SSESpecification
+      attr_accessor cluster_endpoint_encryption_type: ("NONE" | "TLS")
+      SENSITIVE: []
+    end
+
+    class CreateClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class CreateParameterGroupRequest
+      attr_accessor parameter_group_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class CreateParameterGroupResponse
+      attr_accessor parameter_group: Types::ParameterGroup
+      SENSITIVE: []
+    end
+
+    class CreateSubnetGroupRequest
+      attr_accessor subnet_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateSubnetGroupResponse
+      attr_accessor subnet_group: Types::SubnetGroup
+      SENSITIVE: []
+    end
+
+    class DecreaseReplicationFactorRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor new_replication_factor: ::Integer
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor node_ids_to_remove: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DecreaseReplicationFactorResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DeleteClusterRequest
+      attr_accessor cluster_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DeleteParameterGroupRequest
+      attr_accessor parameter_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteParameterGroupResponse
+      attr_accessor deletion_message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSubnetGroupRequest
+      attr_accessor subnet_group_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSubnetGroupResponse
+      attr_accessor deletion_message: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClustersRequest
+      attr_accessor cluster_names: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClustersResponse
+      attr_accessor next_token: ::String
+      attr_accessor clusters: ::Array[Types::Cluster]
+      SENSITIVE: []
+    end
+
+    class DescribeDefaultParametersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDefaultParametersResponse
+      attr_accessor next_token: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      SENSITIVE: []
+    end
+
+    class DescribeEventsRequest
+      attr_accessor source_name: ::String
+      attr_accessor source_type: ("CLUSTER" | "PARAMETER_GROUP" | "SUBNET_GROUP")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor duration: ::Integer
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventsResponse
+      attr_accessor next_token: ::String
+      attr_accessor events: ::Array[Types::Event]
+      SENSITIVE: []
+    end
+
+    class DescribeParameterGroupsRequest
+      attr_accessor parameter_group_names: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeParameterGroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor parameter_groups: ::Array[Types::ParameterGroup]
+      SENSITIVE: []
+    end
+
+    class DescribeParametersRequest
+      attr_accessor parameter_group_name: ::String
+      attr_accessor source: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeParametersResponse
+      attr_accessor next_token: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      SENSITIVE: []
+    end
+
+    class DescribeSubnetGroupsRequest
+      attr_accessor subnet_group_names: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSubnetGroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor subnet_groups: ::Array[Types::SubnetGroup]
+      SENSITIVE: []
+    end
+
+    class Endpoint
+      attr_accessor address: ::String
+      attr_accessor port: ::Integer
+      attr_accessor url: ::String
+      SENSITIVE: []
+    end
+
+    class Event
+      attr_accessor source_name: ::String
+      attr_accessor source_type: ("CLUSTER" | "PARAMETER_GROUP" | "SUBNET_GROUP")
+      attr_accessor message: ::String
+      attr_accessor date: ::Time
+      SENSITIVE: []
+    end
+
+    class IncreaseReplicationFactorRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor new_replication_factor: ::Integer
+      attr_accessor availability_zones: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IncreaseReplicationFactorResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class InsufficientClusterCapacityFault < Aws::EmptyStructure
+    end
+
+    class InvalidARNFault < Aws::EmptyStructure
+    end
+
+    class InvalidClusterStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidParameterCombinationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterGroupStateFault < Aws::EmptyStructure
+    end
+
+    class InvalidParameterValueException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSubnet < Aws::EmptyStructure
+    end
+
+    class InvalidVPCNetworkStateFault < Aws::EmptyStructure
+    end
+
+    class ListTagsRequest
+      attr_accessor resource_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class Node
+      attr_accessor node_id: ::String
+      attr_accessor endpoint: Types::Endpoint
+      attr_accessor node_create_time: ::Time
+      attr_accessor availability_zone: ::String
+      attr_accessor node_status: ::String
+      attr_accessor parameter_group_status: ::String
+      SENSITIVE: []
+    end
+
+    class NodeNotFoundFault < Aws::EmptyStructure
+    end
+
+    class NodeQuotaForClusterExceededFault < Aws::EmptyStructure
+    end
+
+    class NodeQuotaForCustomerExceededFault < Aws::EmptyStructure
+    end
+
+    class NodeTypeSpecificValue
+      attr_accessor node_type: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class NotificationConfiguration
+      attr_accessor topic_arn: ::String
+      attr_accessor topic_status: ::String
+      SENSITIVE: []
+    end
+
+    class Parameter
+      attr_accessor parameter_name: ::String
+      attr_accessor parameter_type: ("DEFAULT" | "NODE_TYPE_SPECIFIC")
+      attr_accessor parameter_value: ::String
+      attr_accessor node_type_specific_values: ::Array[Types::NodeTypeSpecificValue]
+      attr_accessor description: ::String
+      attr_accessor source: ::String
+      attr_accessor data_type: ::String
+      attr_accessor allowed_values: ::String
+      attr_accessor is_modifiable: ("TRUE" | "FALSE" | "CONDITIONAL")
+      attr_accessor change_type: ("IMMEDIATE" | "REQUIRES_REBOOT")
+      SENSITIVE: []
+    end
+
+    class ParameterGroup
+      attr_accessor parameter_group_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterGroupAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class ParameterGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ParameterGroupQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class ParameterGroupStatus
+      attr_accessor parameter_group_name: ::String
+      attr_accessor parameter_apply_status: ::String
+      attr_accessor node_ids_to_reboot: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ParameterNameValue
+      attr_accessor parameter_name: ::String
+      attr_accessor parameter_value: ::String
+      SENSITIVE: []
+    end
+
+    class RebootNodeRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor node_id: ::String
+      SENSITIVE: []
+    end
+
+    class RebootNodeResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class SSEDescription
+      attr_accessor status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class SSESpecification
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class SecurityGroupMembership
+      attr_accessor security_group_identifier: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceLinkedRoleNotFoundFault < Aws::EmptyStructure
+    end
+
+    class ServiceQuotaExceededException < Aws::EmptyStructure
+    end
+
+    class Subnet
+      attr_accessor subnet_identifier: ::String
+      attr_accessor subnet_availability_zone: ::String
+      SENSITIVE: []
+    end
+
+    class SubnetGroup
+      attr_accessor subnet_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnets: ::Array[Types::Subnet]
+      SENSITIVE: []
+    end
+
+    class SubnetGroupAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class SubnetGroupInUseFault < Aws::EmptyStructure
+    end
+
+    class SubnetGroupNotFoundFault < Aws::EmptyStructure
+    end
+
+    class SubnetGroupQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class SubnetInUse < Aws::EmptyStructure
+    end
+
+    class SubnetQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagNotFoundFault < Aws::EmptyStructure
+    end
+
+    class TagQuotaPerResourceExceeded < Aws::EmptyStructure
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_name: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UpdateClusterRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor description: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor notification_topic_arn: ::String
+      attr_accessor notification_topic_status: ::String
+      attr_accessor parameter_group_name: ::String
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class UpdateParameterGroupRequest
+      attr_accessor parameter_group_name: ::String
+      attr_accessor parameter_name_values: ::Array[Types::ParameterNameValue]
+      SENSITIVE: []
+    end
+
+    class UpdateParameterGroupResponse
+      attr_accessor parameter_group: Types::ParameterGroup
+      SENSITIVE: []
+    end
+
+    class UpdateSubnetGroupRequest
+      attr_accessor subnet_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateSubnetGroupResponse
+      attr_accessor subnet_group: Types::SubnetGroup
+      SENSITIVE: []
+    end
+  end
+end

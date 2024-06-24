@@ -52,6 +52,6 @@ require_relative 'aws-sdk-networkmanager/customizations'
 # @!group service
 module Aws::NetworkManager
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.45.0'
 
 end

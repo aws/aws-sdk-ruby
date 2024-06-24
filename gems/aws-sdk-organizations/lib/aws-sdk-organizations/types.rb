@@ -540,9 +540,9 @@ module Aws::Organizations
     #   the same marketplace.
     #
     # * MASTER\_ACCOUNT\_MISSING\_BUSINESS\_LICENSE: Applies only to the
-    #   Amazon Web Services /&gt; Regions in China. To create an
-    #   organization, the master must have a valid business license. For
-    #   more information, contact customer support.
+    #   Amazon Web Services Regions in China. To create an organization, the
+    #   master must have a valid business license. For more information,
+    #   contact customer support.
     #
     # * MASTER\_ACCOUNT\_MISSING\_CONTACT\_INFO: To complete this operation,
     #   you must first provide a valid contact address and phone number for
@@ -1178,6 +1178,14 @@ module Aws::Organizations
     #   The policy text content to add to the new policy. The text that you
     #   supply must adhere to the rules of the policy type you specify in
     #   the `Type` parameter.
+    #
+    #   The maximum size of a policy document depends on the policy's type.
+    #   For more information, see [Maximum and minimum values][1] in the
+    #   *Organizations User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html#min-max-values
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3818,7 +3826,8 @@ module Aws::Organizations
     # accounts contained in that OU and in any child OUs.
     #
     # @!attribute [rw] id
-    #   The unique identifier (ID) associated with this OU.
+    #   The unique identifier (ID) associated with this OU. The ID is unique
+    #   to the organization only.
     #
     #   The [regex pattern][1] for an organizational unit ID string requires
     #   "ou-" followed by from 4 to 32 lowercase letters or digits (the ID
@@ -4375,7 +4384,8 @@ module Aws::Organizations
     # account in the organization.
     #
     # @!attribute [rw] id
-    #   The unique identifier (ID) for the root.
+    #   The unique identifier (ID) for the root. The ID is unique to the
+    #   organization only.
     #
     #   The [regex pattern][1] for a root ID string requires "r-" followed
     #   by from 4 to 32 lowercase letters or digits.
@@ -4709,9 +4719,14 @@ module Aws::Organizations
     #   policy's type. For more information, see [SCP syntax][1] in the
     #   *Organizations User Guide*.
     #
+    #   The maximum size of a policy document depends on the policy's type.
+    #   For more information, see [Maximum and minimum values][2] in the
+    #   *Organizations User Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html#min-max-values
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/UpdatePolicyRequest AWS API Documentation

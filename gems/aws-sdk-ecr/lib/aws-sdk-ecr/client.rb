@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::ECR
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::ECR
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::ECR
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::ECR
     #   @option options [Aws::ECR::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::ECR::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -532,7 +557,7 @@ module Aws::ECR
     #   resp.failures #=> Array
     #   resp.failures[0].image_id.image_digest #=> String
     #   resp.failures[0].image_id.image_tag #=> String
-    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList", "KmsError"
+    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList", "KmsError", "UpstreamAccessDenied", "UpstreamTooManyRequests", "UpstreamUnavailable"
     #   resp.failures[0].failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchDeleteImage AWS API Documentation
@@ -633,7 +658,7 @@ module Aws::ECR
     #   resp.failures #=> Array
     #   resp.failures[0].image_id.image_digest #=> String
     #   resp.failures[0].image_id.image_tag #=> String
-    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList", "KmsError"
+    #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag", "ImageReferencedByManifestList", "KmsError", "UpstreamAccessDenied", "UpstreamTooManyRequests", "UpstreamUnavailable"
     #   resp.failures[0].failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchGetImage AWS API Documentation
@@ -747,8 +772,13 @@ module Aws::ECR
     end
 
     # Creates a pull through cache rule. A pull through cache rule provides
-    # a way to cache images from an external public registry in your Amazon
-    # ECR private registry.
+    # a way to cache images from an upstream registry source in your Amazon
+    # ECR private registry. For more information, see [Using pull through
+    # cache rules][1] in the *Amazon Elastic Container Registry User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html
     #
     # @option params [required, String] :ecr_repository_prefix
     #   The repository name prefix to use when caching images from the source
@@ -756,12 +786,37 @@ module Aws::ECR
     #
     # @option params [required, String] :upstream_registry_url
     #   The registry URL of the upstream public registry to use as the source
-    #   for the pull through cache rule.
+    #   for the pull through cache rule. The following is the syntax to use
+    #   for each supported upstream registry.
+    #
+    #   * Amazon ECR Public (`ecr-public`) - `public.ecr.aws`
+    #
+    #   * Docker Hub (`docker-hub`) - `registry-1.docker.io`
+    #
+    #   * Quay (`quay`) - `quay.io`
+    #
+    #   * Kubernetes (`k8s`) - `registry.k8s.io`
+    #
+    #   * GitHub Container Registry (`github-container-registry`) - `ghcr.io`
+    #
+    #   * Microsoft Azure Container Registry (`azure-container-registry`) -
+    #     `<custom>.azurecr.io`
+    #
+    #   * GitLab Container Registry (`gitlab-container-registry`) -
+    #     `registry.gitlab.com`
     #
     # @option params [String] :registry_id
     #   The Amazon Web Services account ID associated with the registry to
     #   create the pull through cache rule for. If you do not specify a
     #   registry, the default registry is assumed.
+    #
+    # @option params [String] :upstream_registry
+    #   The name of the upstream registry.
+    #
+    # @option params [String] :credential_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that identifies the credentials to authenticate to the
+    #   upstream registry.
     #
     # @return [Types::CreatePullThroughCacheRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -769,6 +824,8 @@ module Aws::ECR
     #   * {Types::CreatePullThroughCacheRuleResponse#upstream_registry_url #upstream_registry_url} => String
     #   * {Types::CreatePullThroughCacheRuleResponse#created_at #created_at} => Time
     #   * {Types::CreatePullThroughCacheRuleResponse#registry_id #registry_id} => String
+    #   * {Types::CreatePullThroughCacheRuleResponse#upstream_registry #upstream_registry} => String
+    #   * {Types::CreatePullThroughCacheRuleResponse#credential_arn #credential_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -776,6 +833,8 @@ module Aws::ECR
     #     ecr_repository_prefix: "PullThroughCacheRuleRepositoryPrefix", # required
     #     upstream_registry_url: "Url", # required
     #     registry_id: "RegistryId",
+    #     upstream_registry: "ecr-public", # accepts ecr-public, quay, k8s, docker-hub, github-container-registry, azure-container-registry, gitlab-container-registry
+    #     credential_arn: "CredentialArn",
     #   })
     #
     # @example Response structure
@@ -784,6 +843,8 @@ module Aws::ECR
     #   resp.upstream_registry_url #=> String
     #   resp.created_at #=> Time
     #   resp.registry_id #=> String
+    #   resp.upstream_registry #=> String, one of "ecr-public", "quay", "k8s", "docker-hub", "github-container-registry", "azure-container-registry", "gitlab-container-registry"
+    #   resp.credential_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreatePullThroughCacheRule AWS API Documentation
     #
@@ -961,6 +1022,7 @@ module Aws::ECR
     #   * {Types::DeletePullThroughCacheRuleResponse#upstream_registry_url #upstream_registry_url} => String
     #   * {Types::DeletePullThroughCacheRuleResponse#created_at #created_at} => Time
     #   * {Types::DeletePullThroughCacheRuleResponse#registry_id #registry_id} => String
+    #   * {Types::DeletePullThroughCacheRuleResponse#credential_arn #credential_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -975,6 +1037,7 @@ module Aws::ECR
     #   resp.upstream_registry_url #=> String
     #   resp.created_at #=> Time
     #   resp.registry_id #=> String
+    #   resp.credential_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeletePullThroughCacheRule AWS API Documentation
     #
@@ -1006,9 +1069,10 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Deletes a repository. If the repository contains images, you must
-    # either delete all images in the repository or use the `force` option
-    # to delete the repository.
+    # Deletes a repository. If the repository isn't empty, you must either
+    # delete the contents of the repository or use the `force` option to
+    # delete the repository and have Amazon ECR delete all of its contents
+    # on your behalf.
     #
     # @option params [String] :registry_id
     #   The Amazon Web Services account ID associated with the registry that
@@ -1019,7 +1083,9 @@ module Aws::ECR
     #   The name of the repository to delete.
     #
     # @option params [Boolean] :force
-    #   If a repository contains images, forces the deletion.
+    #   If true, deleting the repository force deletes the contents of the
+    #   repository. If false, the repository must be empty before attempting
+    #   to delete it.
     #
     # @return [Types::DeleteRepositoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1486,6 +1552,9 @@ module Aws::ECR
     #   resp.pull_through_cache_rules[0].upstream_registry_url #=> String
     #   resp.pull_through_cache_rules[0].created_at #=> Time
     #   resp.pull_through_cache_rules[0].registry_id #=> String
+    #   resp.pull_through_cache_rules[0].credential_arn #=> String
+    #   resp.pull_through_cache_rules[0].upstream_registry #=> String, one of "ecr-public", "quay", "k8s", "docker-hub", "github-container-registry", "azure-container-registry", "gitlab-container-registry"
+    #   resp.pull_through_cache_rules[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribePullThroughCacheRules AWS API Documentation
@@ -2792,6 +2861,53 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Updates an existing pull through cache rule.
+    #
+    # @option params [String] :registry_id
+    #   The Amazon Web Services account ID associated with the registry
+    #   associated with the pull through cache rule. If you do not specify a
+    #   registry, the default registry is assumed.
+    #
+    # @option params [required, String] :ecr_repository_prefix
+    #   The repository name prefix to use when caching images from the source
+    #   registry.
+    #
+    # @option params [required, String] :credential_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Secrets
+    #   Manager secret that identifies the credentials to authenticate to the
+    #   upstream registry.
+    #
+    # @return [Types::UpdatePullThroughCacheRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePullThroughCacheRuleResponse#ecr_repository_prefix #ecr_repository_prefix} => String
+    #   * {Types::UpdatePullThroughCacheRuleResponse#registry_id #registry_id} => String
+    #   * {Types::UpdatePullThroughCacheRuleResponse#updated_at #updated_at} => Time
+    #   * {Types::UpdatePullThroughCacheRuleResponse#credential_arn #credential_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_pull_through_cache_rule({
+    #     registry_id: "RegistryId",
+    #     ecr_repository_prefix: "PullThroughCacheRuleRepositoryPrefix", # required
+    #     credential_arn: "CredentialArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ecr_repository_prefix #=> String
+    #   resp.registry_id #=> String
+    #   resp.updated_at #=> Time
+    #   resp.credential_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UpdatePullThroughCacheRule AWS API Documentation
+    #
+    # @overload update_pull_through_cache_rule(params = {})
+    # @param [Hash] params ({})
+    def update_pull_through_cache_rule(params = {}, options = {})
+      req = build_request(:update_pull_through_cache_rule, params)
+      req.send_request(options)
+    end
+
     # Uploads an image layer part to Amazon ECR.
     #
     # When an image is pushed, each new image layer is uploaded in parts.
@@ -2862,6 +2978,54 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # Validates an existing pull through cache rule for an upstream registry
+    # that requires authentication. This will retrieve the contents of the
+    # Amazon Web Services Secrets Manager secret, verify the syntax, and
+    # then validate that authentication to the upstream registry is
+    # successful.
+    #
+    # @option params [required, String] :ecr_repository_prefix
+    #   The repository name prefix associated with the pull through cache
+    #   rule.
+    #
+    # @option params [String] :registry_id
+    #   The registry ID associated with the pull through cache rule. If you do
+    #   not specify a registry, the default registry is assumed.
+    #
+    # @return [Types::ValidatePullThroughCacheRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ValidatePullThroughCacheRuleResponse#ecr_repository_prefix #ecr_repository_prefix} => String
+    #   * {Types::ValidatePullThroughCacheRuleResponse#registry_id #registry_id} => String
+    #   * {Types::ValidatePullThroughCacheRuleResponse#upstream_registry_url #upstream_registry_url} => String
+    #   * {Types::ValidatePullThroughCacheRuleResponse#credential_arn #credential_arn} => String
+    #   * {Types::ValidatePullThroughCacheRuleResponse#is_valid #is_valid} => Boolean
+    #   * {Types::ValidatePullThroughCacheRuleResponse#failure #failure} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.validate_pull_through_cache_rule({
+    #     ecr_repository_prefix: "PullThroughCacheRuleRepositoryPrefix", # required
+    #     registry_id: "RegistryId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ecr_repository_prefix #=> String
+    #   resp.registry_id #=> String
+    #   resp.upstream_registry_url #=> String
+    #   resp.credential_arn #=> String
+    #   resp.is_valid #=> Boolean
+    #   resp.failure #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ValidatePullThroughCacheRule AWS API Documentation
+    #
+    # @overload validate_pull_through_cache_rule(params = {})
+    # @param [Hash] params ({})
+    def validate_pull_through_cache_rule(params = {}, options = {})
+      req = build_request(:validate_pull_through_cache_rule, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2875,7 +3039,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

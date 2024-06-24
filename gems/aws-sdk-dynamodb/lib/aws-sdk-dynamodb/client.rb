@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -75,6 +76,7 @@ module Aws::DynamoDB
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -208,10 +210,17 @@ module Aws::DynamoDB
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -303,8 +312,9 @@ module Aws::DynamoDB
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -366,50 +376,65 @@ module Aws::DynamoDB
     #   @option options [Aws::DynamoDB::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::DynamoDB::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -576,9 +601,9 @@ module Aws::DynamoDB
     # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#CapacityUnitCalculations
     #
     # @option params [required, Hash<String,Types::KeysAndAttributes>] :request_items
-    #   A map of one or more table names and, for each table, a map that
-    #   describes one or more items to retrieve from that table. Each table
-    #   name can be used only once per `BatchGetItem` request.
+    #   A map of one or more table names or table ARNs and, for each table, a
+    #   map that describes one or more items to retrieve from that table. Each
+    #   table name or ARN can be used only once per `BatchGetItem` request.
     #
     #   Each element in the map of items to retrieve consists of the
     #   following:
@@ -736,7 +761,7 @@ module Aws::DynamoDB
     #
     #   resp = client.batch_get_item({
     #     request_items: { # required
-    #       "TableName" => {
+    #       "TableArn" => {
     #         keys: [ # required
     #           {
     #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -756,19 +781,19 @@ module Aws::DynamoDB
     # @example Response structure
     #
     #   resp.responses #=> Hash
-    #   resp.responses["TableName"] #=> Array
-    #   resp.responses["TableName"][0] #=> Hash
-    #   resp.responses["TableName"][0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.responses["TableArn"] #=> Array
+    #   resp.responses["TableArn"][0] #=> Hash
+    #   resp.responses["TableArn"][0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.unprocessed_keys #=> Hash
-    #   resp.unprocessed_keys["TableName"].keys #=> Array
-    #   resp.unprocessed_keys["TableName"].keys[0] #=> Hash
-    #   resp.unprocessed_keys["TableName"].keys[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #   resp.unprocessed_keys["TableName"].attributes_to_get #=> Array
-    #   resp.unprocessed_keys["TableName"].attributes_to_get[0] #=> String
-    #   resp.unprocessed_keys["TableName"].consistent_read #=> Boolean
-    #   resp.unprocessed_keys["TableName"].projection_expression #=> String
-    #   resp.unprocessed_keys["TableName"].expression_attribute_names #=> Hash
-    #   resp.unprocessed_keys["TableName"].expression_attribute_names["ExpressionAttributeNameVariable"] #=> String
+    #   resp.unprocessed_keys["TableArn"].keys #=> Array
+    #   resp.unprocessed_keys["TableArn"].keys[0] #=> Hash
+    #   resp.unprocessed_keys["TableArn"].keys[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.unprocessed_keys["TableArn"].attributes_to_get #=> Array
+    #   resp.unprocessed_keys["TableArn"].attributes_to_get[0] #=> String
+    #   resp.unprocessed_keys["TableArn"].consistent_read #=> Boolean
+    #   resp.unprocessed_keys["TableArn"].projection_expression #=> String
+    #   resp.unprocessed_keys["TableArn"].expression_attribute_names #=> Hash
+    #   resp.unprocessed_keys["TableArn"].expression_attribute_names["ExpressionAttributeNameVariable"] #=> String
     #   resp.consumed_capacity #=> Array
     #   resp.consumed_capacity[0].table_name #=> String
     #   resp.consumed_capacity[0].capacity_units #=> Float
@@ -882,15 +907,19 @@ module Aws::DynamoDB
     #
     # * The total request size exceeds 16 MB.
     #
+    # * Any individual items with keys exceeding the key length limits. For
+    #   a partition key, the limit is 2048 bytes and for a sort key, the
+    #   limit is 1024 bytes.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html
     # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#Programming.Errors.BatchOperations
     #
     # @option params [required, Hash<String,Array>] :request_items
-    #   A map of one or more table names and, for each table, a list of
-    #   operations to be performed (`DeleteRequest` or `PutRequest`). Each
-    #   element in the map consists of the following:
+    #   A map of one or more table names or table ARNs and, for each table, a
+    #   list of operations to be performed (`DeleteRequest` or `PutRequest`).
+    #   Each element in the map consists of the following:
     #
     #   * `DeleteRequest` - Perform a `DeleteItem` operation on the specified
     #     item. The item to be deleted is identified by a `Key` subelement:
@@ -995,7 +1024,7 @@ module Aws::DynamoDB
     #
     #   resp = client.batch_write_item({
     #     request_items: { # required
-    #       "TableName" => [
+    #       "TableArn" => [
     #         {
     #           put_request: {
     #             item: { # required
@@ -1017,17 +1046,17 @@ module Aws::DynamoDB
     # @example Response structure
     #
     #   resp.unprocessed_items #=> Hash
-    #   resp.unprocessed_items["TableName"] #=> Array
-    #   resp.unprocessed_items["TableName"][0].put_request.item #=> Hash
-    #   resp.unprocessed_items["TableName"][0].put_request.item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #   resp.unprocessed_items["TableName"][0].delete_request.key #=> Hash
-    #   resp.unprocessed_items["TableName"][0].delete_request.key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.unprocessed_items["TableArn"] #=> Array
+    #   resp.unprocessed_items["TableArn"][0].put_request.item #=> Hash
+    #   resp.unprocessed_items["TableArn"][0].put_request.item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.unprocessed_items["TableArn"][0].delete_request.key #=> Hash
+    #   resp.unprocessed_items["TableArn"][0].delete_request.key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.item_collection_metrics #=> Hash
-    #   resp.item_collection_metrics["TableName"] #=> Array
-    #   resp.item_collection_metrics["TableName"][0].item_collection_key #=> Hash
-    #   resp.item_collection_metrics["TableName"][0].item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #   resp.item_collection_metrics["TableName"][0].size_estimate_range_gb #=> Array
-    #   resp.item_collection_metrics["TableName"][0].size_estimate_range_gb[0] #=> Float
+    #   resp.item_collection_metrics["TableArn"] #=> Array
+    #   resp.item_collection_metrics["TableArn"][0].item_collection_key #=> Hash
+    #   resp.item_collection_metrics["TableArn"][0].item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.item_collection_metrics["TableArn"][0].size_estimate_range_gb #=> Array
+    #   resp.item_collection_metrics["TableArn"][0].size_estimate_range_gb[0] #=> Float
     #   resp.consumed_capacity #=> Array
     #   resp.consumed_capacity[0].table_name #=> String
     #   resp.consumed_capacity[0].capacity_units #=> Float
@@ -1088,7 +1117,8 @@ module Aws::DynamoDB
     # * Provisioned read and write capacity
     #
     # @option params [required, String] :table_name
-    #   The name of the table.
+    #   The name of the table. You can also provide the Amazon Resource Name
+    #   (ARN) of the table in this parameter.
     #
     # @option params [required, String] :backup_name
     #   Specified name for the backup.
@@ -1100,7 +1130,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_backup({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     backup_name: "BackupName", # required
     #   })
     #
@@ -1127,14 +1157,16 @@ module Aws::DynamoDB
     # a replication relationship between two or more DynamoDB tables with
     # the same table name in the provided Regions.
     #
-    # This operation only applies to [Version 2017.11.29 (Legacy)][1] of
-    # global tables. We recommend using [Version 2019.11.21 (Current)][2]
-    # when creating new global tables, as it provides greater flexibility,
-    # higher efficiency and consumes less write capacity than 2017.11.29
-    # (Legacy). To determine which version you are using, see [Determining
-    # the version][3]. To update existing global tables from version
-    # 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [ Updating
-    # global tables][4].
+    # This documentation is for version 2017.11.29 (Legacy) of global
+    # tables, which should be avoided for new global tables. Customers
+    # should use [Global Tables version 2019.11.21 (Current)][1] when
+    # possible, because it provides greater flexibility, higher efficiency,
+    # and consumes less write capacity than 2017.11.29 (Legacy).
+    #
+    #  To determine which version you're using, see [Determining the global
+    # table version you are using][2]. To update existing global tables from
+    # version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see
+    # [Upgrading global tables][3].
     #
     # If you want to add a new replica table to a global table, each of the
     # following conditions must be true:
@@ -1177,10 +1209,9 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
-    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
-    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
+    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
     #
     # @option params [required, String] :global_table_name
     #   The global table name.
@@ -1212,9 +1243,11 @@ module Aws::DynamoDB
     #   resp.global_table_description.replication_group[0].replica_status_percent_progress #=> String
     #   resp.global_table_description.replication_group[0].kms_master_key_id #=> String
     #   resp.global_table_description.replication_group[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.global_table_description.replication_group[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.global_table_description.replication_group[0].global_secondary_indexes #=> Array
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].index_name #=> String
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.global_table_description.replication_group[0].replica_inaccessible_date_time #=> Time
     #   resp.global_table_description.replication_group[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.global_table_description.replication_group[0].replica_table_class_summary.last_update_date_time #=> Time
@@ -1256,7 +1289,8 @@ module Aws::DynamoDB
     #   indexes.
     #
     # @option params [required, String] :table_name
-    #   The name of the table to create.
+    #   The name of the table to create. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, Array<Types::KeySchemaElement>] :key_schema
     #   Specifies the attributes that make up the primary key for a table or
@@ -1390,16 +1424,16 @@ module Aws::DynamoDB
     #
     #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
     #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
-    #     Mode][1].
+    #     capacity mode][1].
     #
     #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
     #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
-    #     [On-Demand Mode][2].
+    #     [On-demand capacity mode][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
-    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html
     #
     # @option params [Types::ProvisionedThroughput] :provisioned_throughput
     #   Represents the provisioned throughput settings for a specified table
@@ -1459,6 +1493,34 @@ module Aws::DynamoDB
     # @option params [Boolean] :deletion_protection_enabled
     #   Indicates whether deletion protection is to be enabled (true) or
     #   disabled (false) on the table.
+    #
+    # @option params [String] :resource_policy
+    #   An Amazon Web Services resource-based policy document in JSON format
+    #   that will be attached to the table.
+    #
+    #   When you attach a resource-based policy while creating a table, the
+    #   policy application is *strongly consistent*.
+    #
+    #   The maximum size supported for a resource-based policy document is 20
+    #   KB. DynamoDB counts whitespaces when calculating the size of a policy
+    #   against this limit. For a full list of all considerations that apply
+    #   for resource-based policies, see [Resource-based policy
+    #   considerations][1].
+    #
+    #   <note markdown="1"> You need to specify the `CreateTable` and `PutResourcePolicy` IAM
+    #   actions for authorizing a user to create a table with a resource-based
+    #   policy.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html
+    #
+    # @option params [Types::OnDemandThroughput] :on_demand_throughput
+    #   Sets the maximum number of read and write units for the specified
+    #   table in on-demand capacity mode. If you use this parameter, you must
+    #   specify `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     #
     # @return [Types::CreateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1541,7 +1603,7 @@ module Aws::DynamoDB
     #         attribute_type: "S", # required, accepts S, N, B
     #       },
     #     ],
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     key_schema: [ # required
     #       {
     #         attribute_name: "KeySchemaAttributeName", # required
@@ -1580,6 +1642,10 @@ module Aws::DynamoDB
     #           read_capacity_units: 1, # required
     #           write_capacity_units: 1, # required
     #         },
+    #         on_demand_throughput: {
+    #           max_read_request_units: 1,
+    #           max_write_request_units: 1,
+    #         },
     #       },
     #     ],
     #     billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
@@ -1604,6 +1670,11 @@ module Aws::DynamoDB
     #     ],
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #     deletion_protection_enabled: false,
+    #     resource_policy: "ResourcePolicy",
+    #     on_demand_throughput: {
+    #       max_read_request_units: 1,
+    #       max_write_request_units: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1657,6 +1728,8 @@ module Aws::DynamoDB
     #   resp.table_description.global_secondary_indexes[0].index_size_bytes #=> Integer
     #   resp.table_description.global_secondary_indexes[0].item_count #=> Integer
     #   resp.table_description.global_secondary_indexes[0].index_arn #=> String
+    #   resp.table_description.global_secondary_indexes[0].on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.table_description.global_secondary_indexes[0].on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table_description.stream_specification.stream_enabled #=> Boolean
     #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table_description.latest_stream_label #=> String
@@ -1669,9 +1742,11 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
     #   resp.table_description.replicas[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].global_secondary_indexes[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
@@ -1689,6 +1764,8 @@ module Aws::DynamoDB
     #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.table_class_summary.last_update_date_time #=> Time
     #   resp.table_description.deletion_protection_enabled #=> Boolean
+    #   resp.table_description.on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.table_description.on_demand_throughput.max_write_request_units #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTable AWS API Documentation
     #
@@ -1735,6 +1812,8 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_details.table_creation_date_time #=> Time
     #   resp.backup_description.source_table_details.provisioned_throughput.read_capacity_units #=> Integer
     #   resp.backup_description.source_table_details.provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.backup_description.source_table_details.on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.backup_description.source_table_details.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.backup_description.source_table_details.item_count #=> Integer
     #   resp.backup_description.source_table_details.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.backup_description.source_table_feature_details.local_secondary_indexes #=> Array
@@ -1755,6 +1834,8 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].projection.non_key_attributes[0] #=> String
     #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].provisioned_throughput.read_capacity_units #=> Integer
     #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].on_demand_throughput.max_write_request_units #=> Integer
     #   resp.backup_description.source_table_feature_details.stream_description.stream_enabled #=> Boolean
     #   resp.backup_description.source_table_feature_details.stream_description.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.time_to_live_status #=> String, one of "ENABLING", "DISABLING", "ENABLED", "DISABLED"
@@ -1790,7 +1871,8 @@ module Aws::DynamoDB
     # delete. Otherwise, the item is not deleted.
     #
     # @option params [required, String] :table_name
-    #   The name of the table from which to delete the item.
+    #   The name of the table from which to delete the item. You can also
+    #   provide the Amazon Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, Hash<String,Types::AttributeValue>] :key
     #   A map of attribute names to `AttributeValue` objects, representing the
@@ -1999,7 +2081,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_item({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     key: { # required
     #       "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     },
@@ -2058,6 +2140,67 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # Deletes the resource-based policy attached to the resource, which can
+    # be a table or stream.
+    #
+    # `DeleteResourcePolicy` is an idempotent operation; running it multiple
+    # times on the same resource *doesn't* result in an error response,
+    # unless you specify an `ExpectedRevisionId`, which will then return a
+    # `PolicyNotFoundException`.
+    #
+    # To make sure that you don't inadvertently lock yourself out of your
+    # own resources, the root principal in your Amazon Web Services account
+    # can perform `DeleteResourcePolicy` requests, even if your
+    # resource-based policy explicitly denies the root principal's access.
+    #
+    # <note markdown="1"> `DeleteResourcePolicy` is an asynchronous operation. If you issue a
+    # `GetResourcePolicy` request immediately after running the
+    # `DeleteResourcePolicy` request, DynamoDB might still return the
+    # deleted policy. This is because the policy for your resource might not
+    # have been deleted yet. Wait for a few seconds, and then try the
+    # `GetResourcePolicy` request again.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the DynamoDB resource from which the
+    #   policy will be removed. The resources you can specify include tables
+    #   and streams. If you remove the policy of a table, it will also remove
+    #   the permissions for the table's indexes defined in that policy
+    #   document. This is because index permissions are defined in the
+    #   table's policy.
+    #
+    # @option params [String] :expected_revision_id
+    #   A string value that you can use to conditionally delete your policy.
+    #   When you provide an expected revision ID, if the revision ID of the
+    #   existing policy on the resource doesn't match or if there's no
+    #   policy attached to the resource, the request will fail and return a
+    #   `PolicyNotFoundException`.
+    #
+    # @return [Types::DeleteResourcePolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteResourcePolicyOutput#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "ResourceArnString", # required
+    #     expected_revision_id: "PolicyRevisionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
     # The `DeleteTable` operation deletes a table and all of its items.
     # After a `DeleteTable` request, the specified table is in the
     # `DELETING` state until DynamoDB completes the deletion. If the table
@@ -2067,8 +2210,8 @@ module Aws::DynamoDB
     # DynamoDB returns a `ResourceNotFoundException`. If table is already in
     # the `DELETING` state, no error is returned.
     #
-    # This operation only applies to [Version 2019.11.21 (Current)][1] of
-    # global tables.
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version).
     #
     # <note markdown="1"> DynamoDB might continue to accept data read and write operations, such
     # as `GetItem` and `PutItem`, on a table in the `DELETING` state until
@@ -2084,12 +2227,9 @@ module Aws::DynamoDB
     #
     # Use the `DescribeTable` action to check the status of the table.
     #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-    #
     # @option params [required, String] :table_name
-    #   The name of the table to delete.
+    #   The name of the table to delete. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @return [Types::DeleteTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2122,7 +2262,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_table({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #   })
     #
     # @example Response structure
@@ -2176,6 +2316,8 @@ module Aws::DynamoDB
     #   resp.table_description.global_secondary_indexes[0].index_size_bytes #=> Integer
     #   resp.table_description.global_secondary_indexes[0].item_count #=> Integer
     #   resp.table_description.global_secondary_indexes[0].index_arn #=> String
+    #   resp.table_description.global_secondary_indexes[0].on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.table_description.global_secondary_indexes[0].on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table_description.stream_specification.stream_enabled #=> Boolean
     #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table_description.latest_stream_label #=> String
@@ -2188,9 +2330,11 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
     #   resp.table_description.replicas[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].global_secondary_indexes[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
@@ -2208,6 +2352,8 @@ module Aws::DynamoDB
     #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.table_class_summary.last_update_date_time #=> Time
     #   resp.table_description.deletion_protection_enabled #=> Boolean
+    #   resp.table_description.on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.table_description.on_demand_throughput.max_write_request_units #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTable AWS API Documentation
     #
@@ -2255,6 +2401,8 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_details.table_creation_date_time #=> Time
     #   resp.backup_description.source_table_details.provisioned_throughput.read_capacity_units #=> Integer
     #   resp.backup_description.source_table_details.provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.backup_description.source_table_details.on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.backup_description.source_table_details.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.backup_description.source_table_details.item_count #=> Integer
     #   resp.backup_description.source_table_details.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.backup_description.source_table_feature_details.local_secondary_indexes #=> Array
@@ -2275,6 +2423,8 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].projection.non_key_attributes[0] #=> String
     #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].provisioned_throughput.read_capacity_units #=> Integer
     #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].on_demand_throughput.max_write_request_units #=> Integer
     #   resp.backup_description.source_table_feature_details.stream_description.stream_enabled #=> Boolean
     #   resp.backup_description.source_table_feature_details.stream_description.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.time_to_live_status #=> String, one of "ENABLING", "DISABLING", "ENABLED", "DISABLED"
@@ -2313,6 +2463,9 @@ module Aws::DynamoDB
     #   Name of the table for which the customer wants to check the continuous
     #   backups and point in time recovery settings.
     #
+    #   You can also provide the Amazon Resource Name (ARN) of the table in
+    #   this parameter.
+    #
     # @return [Types::DescribeContinuousBackupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeContinuousBackupsOutput#continuous_backups_description #continuous_backups_description} => Types::ContinuousBackupsDescription
@@ -2320,7 +2473,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_continuous_backups({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #   })
     #
     # @example Response structure
@@ -2343,7 +2496,8 @@ module Aws::DynamoDB
     # global secondary index.
     #
     # @option params [required, String] :table_name
-    #   The name of the table to describe.
+    #   The name of the table to describe. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @option params [String] :index_name
     #   The name of the global secondary index to describe, if applicable.
@@ -2360,7 +2514,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_contributor_insights({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     index_name: "IndexName",
     #   })
     #
@@ -2462,21 +2616,22 @@ module Aws::DynamoDB
 
     # Returns information about the specified global table.
     #
-    # This operation only applies to [Version 2017.11.29 (Legacy)][1] of
-    # global tables. We recommend using [Version 2019.11.21 (Current)][2]
-    # when creating new global tables, as it provides greater flexibility,
-    # higher efficiency and consumes less write capacity than 2017.11.29
-    # (Legacy). To determine which version you are using, see [Determining
-    # the version][3]. To update existing global tables from version
-    # 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [ Updating
-    # global tables][4].
+    # This documentation is for version 2017.11.29 (Legacy) of global
+    # tables, which should be avoided for new global tables. Customers
+    # should use [Global Tables version 2019.11.21 (Current)][1] when
+    # possible, because it provides greater flexibility, higher efficiency,
+    # and consumes less write capacity than 2017.11.29 (Legacy).
+    #
+    #  To determine which version you're using, see [Determining the global
+    # table version you are using][2]. To update existing global tables from
+    # version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see
+    # [Upgrading global tables][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
-    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
-    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
+    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
     #
     # @option params [required, String] :global_table_name
     #   The name of the global table.
@@ -2500,9 +2655,11 @@ module Aws::DynamoDB
     #   resp.global_table_description.replication_group[0].replica_status_percent_progress #=> String
     #   resp.global_table_description.replication_group[0].kms_master_key_id #=> String
     #   resp.global_table_description.replication_group[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.global_table_description.replication_group[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.global_table_description.replication_group[0].global_secondary_indexes #=> Array
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].index_name #=> String
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.global_table_description.replication_group[0].replica_inaccessible_date_time #=> Time
     #   resp.global_table_description.replication_group[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.global_table_description.replication_group[0].replica_table_class_summary.last_update_date_time #=> Time
@@ -2522,21 +2679,22 @@ module Aws::DynamoDB
 
     # Describes Region-specific settings for a global table.
     #
-    # This operation only applies to [Version 2017.11.29 (Legacy)][1] of
-    # global tables. We recommend using [Version 2019.11.21 (Current)][2]
-    # when creating new global tables, as it provides greater flexibility,
-    # higher efficiency and consumes less write capacity than 2017.11.29
-    # (Legacy). To determine which version you are using, see [Determining
-    # the version][3]. To update existing global tables from version
-    # 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [ Updating
-    # global tables][4].
+    # This documentation is for version 2017.11.29 (Legacy) of global
+    # tables, which should be avoided for new global tables. Customers
+    # should use [Global Tables version 2019.11.21 (Current)][1] when
+    # possible, because it provides greater flexibility, higher efficiency,
+    # and consumes less write capacity than 2017.11.29 (Legacy).
+    #
+    #  To determine which version you're using, see [Determining the global
+    # table version you are using][2]. To update existing global tables from
+    # version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see
+    # [Upgrading global tables][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
-    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
-    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
+    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
     #
     # @option params [required, String] :global_table_name
     #   The name of the global table to describe.
@@ -2662,6 +2820,8 @@ module Aws::DynamoDB
     #   resp.import_table_description.table_creation_parameters.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.import_table_description.table_creation_parameters.provisioned_throughput.read_capacity_units #=> Integer
     #   resp.import_table_description.table_creation_parameters.provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.import_table_description.table_creation_parameters.on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.import_table_description.table_creation_parameters.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.import_table_description.table_creation_parameters.sse_specification.enabled #=> Boolean
     #   resp.import_table_description.table_creation_parameters.sse_specification.sse_type #=> String, one of "AES256", "KMS"
     #   resp.import_table_description.table_creation_parameters.sse_specification.kms_master_key_id #=> String
@@ -2675,6 +2835,8 @@ module Aws::DynamoDB
     #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].projection.non_key_attributes[0] #=> String
     #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].provisioned_throughput.read_capacity_units #=> Integer
     #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].on_demand_throughput.max_write_request_units #=> Integer
     #   resp.import_table_description.start_time #=> Time
     #   resp.import_table_description.end_time #=> Time
     #   resp.import_table_description.processed_size_bytes #=> Integer
@@ -2695,7 +2857,8 @@ module Aws::DynamoDB
     # Returns information about the status of Kinesis streaming.
     #
     # @option params [required, String] :table_name
-    #   The name of the table being described.
+    #   The name of the table being described. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @return [Types::DescribeKinesisStreamingDestinationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2705,7 +2868,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_kinesis_streaming_destination({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #   })
     #
     # @example Response structure
@@ -2713,8 +2876,9 @@ module Aws::DynamoDB
     #   resp.table_name #=> String
     #   resp.kinesis_data_stream_destinations #=> Array
     #   resp.kinesis_data_stream_destinations[0].stream_arn #=> String
-    #   resp.kinesis_data_stream_destinations[0].destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED"
+    #   resp.kinesis_data_stream_destinations[0].destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED", "UPDATING"
     #   resp.kinesis_data_stream_destinations[0].destination_status_description #=> String
+    #   resp.kinesis_data_stream_destinations[0].approximate_creation_date_time_precision #=> String, one of "MILLISECOND", "MICROSECOND"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeKinesisStreamingDestination AWS API Documentation
     #
@@ -2839,8 +3003,8 @@ module Aws::DynamoDB
     # the table, when it was created, the primary key schema, and any
     # indexes on the table.
     #
-    # This operation only applies to [Version 2019.11.21 (Current)][1] of
-    # global tables.
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version).
     #
     # <note markdown="1"> If you issue a `DescribeTable` request immediately after a
     # `CreateTable` request, DynamoDB might return a
@@ -2851,12 +3015,9 @@ module Aws::DynamoDB
     #
     #  </note>
     #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-    #
     # @option params [required, String] :table_name
-    #   The name of the table to describe.
+    #   The name of the table to describe. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @return [Types::DescribeTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2910,7 +3071,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_table({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #   })
     #
     # @example Response structure
@@ -2964,6 +3125,8 @@ module Aws::DynamoDB
     #   resp.table.global_secondary_indexes[0].index_size_bytes #=> Integer
     #   resp.table.global_secondary_indexes[0].item_count #=> Integer
     #   resp.table.global_secondary_indexes[0].index_arn #=> String
+    #   resp.table.global_secondary_indexes[0].on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.table.global_secondary_indexes[0].on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table.stream_specification.stream_enabled #=> Boolean
     #   resp.table.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table.latest_stream_label #=> String
@@ -2976,9 +3139,11 @@ module Aws::DynamoDB
     #   resp.table.replicas[0].replica_status_percent_progress #=> String
     #   resp.table.replicas[0].kms_master_key_id #=> String
     #   resp.table.replicas[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table.replicas[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table.replicas[0].global_secondary_indexes #=> Array
     #   resp.table.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table.replicas[0].global_secondary_indexes[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
@@ -2996,6 +3161,8 @@ module Aws::DynamoDB
     #   resp.table.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table.table_class_summary.last_update_date_time #=> Time
     #   resp.table.deletion_protection_enabled #=> Boolean
+    #   resp.table.on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.table.on_demand_throughput.max_write_request_units #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3015,15 +3182,12 @@ module Aws::DynamoDB
     # Describes auto scaling settings across replicas of the global table at
     # once.
     #
-    # This operation only applies to [Version 2019.11.21 (Current)][1] of
-    # global tables.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version).
     #
     # @option params [required, String] :table_name
-    #   The name of the table.
+    #   The name of the table. You can also provide the Amazon Resource Name
+    #   (ARN) of the table in this parameter.
     #
     # @return [Types::DescribeTableReplicaAutoScalingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3032,7 +3196,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_table_replica_auto_scaling({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #   })
     #
     # @example Response structure
@@ -3099,7 +3263,8 @@ module Aws::DynamoDB
     # table.
     #
     # @option params [required, String] :table_name
-    #   The name of the table to be described.
+    #   The name of the table to be described. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @return [Types::DescribeTimeToLiveOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3108,7 +3273,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_time_to_live({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #   })
     #
     # @example Response structure
@@ -3129,29 +3294,39 @@ module Aws::DynamoDB
     # This is done without deleting either of the resources.
     #
     # @option params [required, String] :table_name
-    #   The name of the DynamoDB table.
+    #   The name of the DynamoDB table. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, String] :stream_arn
     #   The ARN for a Kinesis data stream.
+    #
+    # @option params [Types::EnableKinesisStreamingConfiguration] :enable_kinesis_streaming_configuration
+    #   The source for the Kinesis streaming information that is being
+    #   enabled.
     #
     # @return [Types::KinesisStreamingDestinationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::KinesisStreamingDestinationOutput#table_name #table_name} => String
     #   * {Types::KinesisStreamingDestinationOutput#stream_arn #stream_arn} => String
     #   * {Types::KinesisStreamingDestinationOutput#destination_status #destination_status} => String
+    #   * {Types::KinesisStreamingDestinationOutput#enable_kinesis_streaming_configuration #enable_kinesis_streaming_configuration} => Types::EnableKinesisStreamingConfiguration
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.disable_kinesis_streaming_destination({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     stream_arn: "StreamArn", # required
+    #     enable_kinesis_streaming_configuration: {
+    #       approximate_creation_date_time_precision: "MILLISECOND", # accepts MILLISECOND, MICROSECOND
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.table_name #=> String
     #   resp.stream_arn #=> String
-    #   resp.destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED"
+    #   resp.destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED", "UPDATING"
+    #   resp.enable_kinesis_streaming_configuration.approximate_creation_date_time_precision #=> String, one of "MILLISECOND", "MICROSECOND"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DisableKinesisStreamingDestination AWS API Documentation
     #
@@ -3169,29 +3344,39 @@ module Aws::DynamoDB
     # Kinesis data stream is ACTIVE.
     #
     # @option params [required, String] :table_name
-    #   The name of the DynamoDB table.
+    #   The name of the DynamoDB table. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, String] :stream_arn
     #   The ARN for a Kinesis data stream.
+    #
+    # @option params [Types::EnableKinesisStreamingConfiguration] :enable_kinesis_streaming_configuration
+    #   The source for the Kinesis streaming information that is being
+    #   enabled.
     #
     # @return [Types::KinesisStreamingDestinationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::KinesisStreamingDestinationOutput#table_name #table_name} => String
     #   * {Types::KinesisStreamingDestinationOutput#stream_arn #stream_arn} => String
     #   * {Types::KinesisStreamingDestinationOutput#destination_status #destination_status} => String
+    #   * {Types::KinesisStreamingDestinationOutput#enable_kinesis_streaming_configuration #enable_kinesis_streaming_configuration} => Types::EnableKinesisStreamingConfiguration
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_kinesis_streaming_destination({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     stream_arn: "StreamArn", # required
+    #     enable_kinesis_streaming_configuration: {
+    #       approximate_creation_date_time_precision: "MILLISECOND", # accepts MILLISECOND, MICROSECOND
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.table_name #=> String
     #   resp.stream_arn #=> String
-    #   resp.destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED"
+    #   resp.destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED", "UPDATING"
+    #   resp.enable_kinesis_streaming_configuration.approximate_creation_date_time_precision #=> String, one of "MILLISECOND", "MICROSECOND"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/EnableKinesisStreamingDestination AWS API Documentation
     #
@@ -3445,6 +3630,11 @@ module Aws::DynamoDB
     #   The ID of the Amazon Web Services account that owns the bucket the
     #   export will be stored in.
     #
+    #   <note markdown="1"> S3BucketOwner is a required parameter when exporting to a S3 bucket in
+    #   another account.
+    #
+    #    </note>
+    #
     # @option params [String] :s3_prefix
     #   The Amazon S3 bucket prefix to use as the file name and path of the
     #   exported snapshot.
@@ -3467,9 +3657,9 @@ module Aws::DynamoDB
     #
     # @option params [String] :export_type
     #   Choice of whether to execute as a full export or incremental export.
-    #   Valid values are `FULL_EXPORT` or `INCREMENTAL_EXPORT`. If
-    #   `INCREMENTAL_EXPORT` is provided, the `IncrementalExportSpecification`
-    #   must also be used.
+    #   Valid values are FULL\_EXPORT or INCREMENTAL\_EXPORT. The default
+    #   value is FULL\_EXPORT. If INCREMENTAL\_EXPORT is provided, the
+    #   IncrementalExportSpecification must also be used.
     #
     # @option params [Types::IncrementalExportSpecification] :incremental_export_specification
     #   Optional object containing the parameters specific to an incremental
@@ -3546,7 +3736,8 @@ module Aws::DynamoDB
     # value.
     #
     # @option params [required, String] :table_name
-    #   The name of the table containing the requested item.
+    #   The name of the table containing the requested item. You can also
+    #   provide the Amazon Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, Hash<String,Types::AttributeValue>] :key
     #   A map of attribute names to `AttributeValue` objects, representing the
@@ -3686,7 +3877,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_item({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     key: { # required
     #       "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     },
@@ -3725,6 +3916,73 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def get_item(params = {}, options = {})
       req = build_request(:get_item, params)
+      req.send_request(options)
+    end
+
+    # Returns the resource-based policy document attached to the resource,
+    # which can be a table or stream, in JSON format.
+    #
+    # `GetResourcePolicy` follows an [ *eventually consistent* ][1] model.
+    # The following list describes the outcomes when you issue the
+    # `GetResourcePolicy` request immediately after issuing another request:
+    #
+    # * If you issue a `GetResourcePolicy` request immediately after a
+    #   `PutResourcePolicy` request, DynamoDB might return a
+    #   `PolicyNotFoundException`.
+    #
+    # * If you issue a `GetResourcePolicy`request immediately after a
+    #   `DeleteResourcePolicy` request, DynamoDB might return the policy
+    #   that was present before the deletion request.
+    #
+    # * If you issue a `GetResourcePolicy` request immediately after a
+    #   `CreateTable` request, which includes a resource-based policy,
+    #   DynamoDB might return a `ResourceNotFoundException` or a
+    #   `PolicyNotFoundException`.
+    #
+    # Because `GetResourcePolicy` uses an *eventually consistent* query, the
+    # metadata for your policy or table might not be available at that
+    # moment. Wait for a few seconds, and then retry the `GetResourcePolicy`
+    # request.
+    #
+    # After a `GetResourcePolicy` request returns a policy created using the
+    # `PutResourcePolicy` request, the policy will be applied in the
+    # authorization of requests to the resource. Because this process is
+    # eventually consistent, it will take some time to apply the policy to
+    # all requests to a resource. Policies that you attach while creating a
+    # table using the `CreateTable` request will always be applied to all
+    # requests for that table.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the DynamoDB resource to which the
+    #   policy is attached. The resources you can specify include tables and
+    #   streams.
+    #
+    # @return [Types::GetResourcePolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyOutput#policy #policy} => String
+    #   * {Types::GetResourcePolicyOutput#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "ResourceArnString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
       req.send_request(options)
     end
 
@@ -3805,6 +4063,10 @@ module Aws::DynamoDB
     #         read_capacity_units: 1, # required
     #         write_capacity_units: 1, # required
     #       },
+    #       on_demand_throughput: {
+    #         max_read_request_units: 1,
+    #         max_write_request_units: 1,
+    #       },
     #       sse_specification: {
     #         enabled: false,
     #         sse_type: "AES256", # accepts AES256, KMS
@@ -3826,6 +4088,10 @@ module Aws::DynamoDB
     #           provisioned_throughput: {
     #             read_capacity_units: 1, # required
     #             write_capacity_units: 1, # required
+    #           },
+    #           on_demand_throughput: {
+    #             max_read_request_units: 1,
+    #             max_write_request_units: 1,
     #           },
     #         },
     #       ],
@@ -3859,6 +4125,8 @@ module Aws::DynamoDB
     #   resp.import_table_description.table_creation_parameters.billing_mode #=> String, one of "PROVISIONED", "PAY_PER_REQUEST"
     #   resp.import_table_description.table_creation_parameters.provisioned_throughput.read_capacity_units #=> Integer
     #   resp.import_table_description.table_creation_parameters.provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.import_table_description.table_creation_parameters.on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.import_table_description.table_creation_parameters.on_demand_throughput.max_write_request_units #=> Integer
     #   resp.import_table_description.table_creation_parameters.sse_specification.enabled #=> Boolean
     #   resp.import_table_description.table_creation_parameters.sse_specification.sse_type #=> String, one of "AES256", "KMS"
     #   resp.import_table_description.table_creation_parameters.sse_specification.kms_master_key_id #=> String
@@ -3872,6 +4140,8 @@ module Aws::DynamoDB
     #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].projection.non_key_attributes[0] #=> String
     #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].provisioned_throughput.read_capacity_units #=> Integer
     #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.import_table_description.table_creation_parameters.global_secondary_indexes[0].on_demand_throughput.max_write_request_units #=> Integer
     #   resp.import_table_description.start_time #=> Time
     #   resp.import_table_description.end_time #=> Time
     #   resp.import_table_description.processed_size_bytes #=> Integer
@@ -3910,7 +4180,9 @@ module Aws::DynamoDB
     # [1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ListBackupJobs.html
     #
     # @option params [String] :table_name
-    #   The backups from the table specified by `TableName` are listed.
+    #   Lists the backups from the table specified in `TableName`. You can
+    #   also provide the Amazon Resource Name (ARN) of the table in this
+    #   parameter.
     #
     # @option params [Integer] :limit
     #   Maximum number of backups to return at once.
@@ -3950,7 +4222,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_backups({
-    #     table_name: "TableName",
+    #     table_name: "TableArn",
     #     limit: 1,
     #     time_range_lower_bound: Time.now,
     #     time_range_upper_bound: Time.now,
@@ -3986,7 +4258,8 @@ module Aws::DynamoDB
     # global secondary indexes.
     #
     # @option params [String] :table_name
-    #   The name of the table.
+    #   The name of the table. You can also provide the Amazon Resource Name
+    #   (ARN) of the table in this parameter.
     #
     # @option params [String] :next_token
     #   A token to for the desired page, if there is one.
@@ -4004,7 +4277,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_contributor_insights({
-    #     table_name: "TableName",
+    #     table_name: "TableArn",
     #     next_token: "NextTokenString",
     #     max_results: 1,
     #   })
@@ -4073,21 +4346,22 @@ module Aws::DynamoDB
 
     # Lists all global tables that have a replica in the specified Region.
     #
-    # This operation only applies to [Version 2017.11.29 (Legacy)][1] of
-    # global tables. We recommend using [Version 2019.11.21 (Current)][2]
-    # when creating new global tables, as it provides greater flexibility,
-    # higher efficiency and consumes less write capacity than 2017.11.29
-    # (Legacy). To determine which version you are using, see [Determining
-    # the version][3]. To update existing global tables from version
-    # 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [ Updating
-    # global tables][4].
+    # This documentation is for version 2017.11.29 (Legacy) of global
+    # tables, which should be avoided for new global tables. Customers
+    # should use [Global Tables version 2019.11.21 (Current)][1] when
+    # possible, because it provides greater flexibility, higher efficiency,
+    # and consumes less write capacity than 2017.11.29 (Legacy).
+    #
+    #  To determine which version you're using, see [Determining the global
+    # table version you are using][2]. To update existing global tables from
+    # version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see
+    # [Upgrading global tables][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
-    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
-    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
+    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
     #
     # @option params [String] :exclusive_start_global_table_name
     #   The first global table name that this operation will evaluate.
@@ -4332,7 +4606,8 @@ module Aws::DynamoDB
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html
     #
     # @option params [required, String] :table_name
-    #   The name of the table to contain the item.
+    #   The name of the table to contain the item. You can also provide the
+    #   Amazon Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, Hash<String,Types::AttributeValue>] :item
     #   A map of attribute name/value pairs, one for each attribute. Only the
@@ -4564,7 +4839,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_item({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     item: { # required
     #       "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     },
@@ -4620,6 +4895,107 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def put_item(params = {}, options = {})
       req = build_request(:put_item, params)
+      req.send_request(options)
+    end
+
+    # Attaches a resource-based policy document to the resource, which can
+    # be a table or stream. When you attach a resource-based policy using
+    # this API, the policy application is [ *eventually consistent* ][1].
+    #
+    # `PutResourcePolicy` is an idempotent operation; running it multiple
+    # times on the same resource using the same policy document will return
+    # the same revision ID. If you specify an `ExpectedRevisionId` that
+    # doesn't match the current policy's `RevisionId`, the
+    # `PolicyNotFoundException` will be returned.
+    #
+    # <note markdown="1"> `PutResourcePolicy` is an asynchronous operation. If you issue a
+    # `GetResourcePolicy` request immediately after a `PutResourcePolicy`
+    # request, DynamoDB might return your previous policy, if there was one,
+    # or return the `PolicyNotFoundException`. This is because
+    # `GetResourcePolicy` uses an eventually consistent query, and the
+    # metadata for your policy or table might not be available at that
+    # moment. Wait for a few seconds, and then try the `GetResourcePolicy`
+    # request again.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the DynamoDB resource to which the
+    #   policy will be attached. The resources you can specify include tables
+    #   and streams.
+    #
+    #   You can control index permissions using the base table's policy. To
+    #   specify the same permission level for your table and its indexes, you
+    #   can provide both the table and index Amazon Resource Name (ARN)s in
+    #   the `Resource` field of a given `Statement` in your policy document.
+    #   Alternatively, to specify different permissions for your table,
+    #   indexes, or both, you can define multiple `Statement` fields in your
+    #   policy document.
+    #
+    # @option params [required, String] :policy
+    #   An Amazon Web Services resource-based policy document in JSON format.
+    #
+    #   * The maximum size supported for a resource-based policy document is
+    #     20 KB. DynamoDB counts whitespaces when calculating the size of a
+    #     policy against this limit.
+    #
+    #   * Within a resource-based policy, if the action for a DynamoDB
+    #     service-linked role (SLR) to replicate data for a global table is
+    #     denied, adding or deleting a replica will fail with an error.
+    #
+    #   For a full list of all considerations that apply while attaching a
+    #   resource-based policy, see [Resource-based policy considerations][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-considerations.html
+    #
+    # @option params [String] :expected_revision_id
+    #   A string value that you can use to conditionally update your policy.
+    #   You can provide the revision ID of your existing policy to make
+    #   mutating requests against that policy.
+    #
+    #   <note markdown="1"> When you provide an expected revision ID, if the revision ID of the
+    #   existing policy on the resource doesn't match or if there's no
+    #   policy attached to the resource, your request will be rejected with a
+    #   `PolicyNotFoundException`.
+    #
+    #    </note>
+    #
+    #   To conditionally attach a policy when no policy exists for the
+    #   resource, specify `NO_POLICY` for the revision ID.
+    #
+    # @option params [Boolean] :confirm_remove_self_resource_access
+    #   Set this parameter to `true` to confirm that you want to remove your
+    #   permissions to change the policy of this resource in the future.
+    #
+    # @return [Types::PutResourcePolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyOutput#revision_id #revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     resource_arn: "ResourceArnString", # required
+    #     policy: "ResourcePolicy", # required
+    #     expected_revision_id: "PolicyRevisionId",
+    #     confirm_remove_self_resource_access: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
       req.send_request(options)
     end
 
@@ -4688,7 +5064,8 @@ module Aws::DynamoDB
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html#Query.Pagination
     #
     # @option params [required, String] :table_name
-    #   The name of the table containing the requested items.
+    #   The name of the table containing the requested items. You can also
+    #   provide the Amazon Resource Name (ARN) of the table in this parameter.
     #
     # @option params [String] :index_name
     #   The name of an index to query. This index can be any local secondary
@@ -4888,7 +5265,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.FilterExpression.html
     #
     # @option params [String] :key_condition_expression
     #   The condition that specifies the key values for items to be retrieved
@@ -5091,7 +5468,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.query({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     index_name: "IndexName",
     #     select: "ALL_ATTRIBUTES", # accepts ALL_ATTRIBUTES, ALL_PROJECTED_ATTRIBUTES, SPECIFIC_ATTRIBUTES, COUNT
     #     attributes_to_get: ["AttributeName"],
@@ -5203,6 +5580,11 @@ module Aws::DynamoDB
     # @option params [Types::ProvisionedThroughput] :provisioned_throughput_override
     #   Provisioned throughput settings for the restored table.
     #
+    # @option params [Types::OnDemandThroughput] :on_demand_throughput_override
+    #   Sets the maximum number of read and write units for the specified
+    #   on-demand table. If you use this parameter, you must specify
+    #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    #
     # @option params [Types::SSESpecification] :sse_specification_override
     #   The new server-side encryption settings for the restored table.
     #
@@ -5233,6 +5615,10 @@ module Aws::DynamoDB
     #           read_capacity_units: 1, # required
     #           write_capacity_units: 1, # required
     #         },
+    #         on_demand_throughput: {
+    #           max_read_request_units: 1,
+    #           max_write_request_units: 1,
+    #         },
     #       },
     #     ],
     #     local_secondary_index_override: [
@@ -5253,6 +5639,10 @@ module Aws::DynamoDB
     #     provisioned_throughput_override: {
     #       read_capacity_units: 1, # required
     #       write_capacity_units: 1, # required
+    #     },
+    #     on_demand_throughput_override: {
+    #       max_read_request_units: 1,
+    #       max_write_request_units: 1,
     #     },
     #     sse_specification_override: {
     #       enabled: false,
@@ -5312,6 +5702,8 @@ module Aws::DynamoDB
     #   resp.table_description.global_secondary_indexes[0].index_size_bytes #=> Integer
     #   resp.table_description.global_secondary_indexes[0].item_count #=> Integer
     #   resp.table_description.global_secondary_indexes[0].index_arn #=> String
+    #   resp.table_description.global_secondary_indexes[0].on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.table_description.global_secondary_indexes[0].on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table_description.stream_specification.stream_enabled #=> Boolean
     #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table_description.latest_stream_label #=> String
@@ -5324,9 +5716,11 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
     #   resp.table_description.replicas[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].global_secondary_indexes[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
@@ -5344,6 +5738,8 @@ module Aws::DynamoDB
     #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.table_class_summary.last_update_date_time #=> Time
     #   resp.table_description.deletion_protection_enabled #=> Boolean
+    #   resp.table_description.on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.table_description.on_demand_throughput.max_write_request_units #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackup AWS API Documentation
     #
@@ -5357,7 +5753,7 @@ module Aws::DynamoDB
     # Restores the specified table to the specified point in time within
     # `EarliestRestorableDateTime` and `LatestRestorableDateTime`. You can
     # restore your table to any point in time during the last 35 days. Any
-    # number of users can execute up to 4 concurrent restores (any type of
+    # number of users can execute up to 50 concurrent restores (any type of
     # restore) in a given account.
     #
     # When you restore using point in time recovery, DynamoDB restores your
@@ -5428,6 +5824,11 @@ module Aws::DynamoDB
     # @option params [Types::ProvisionedThroughput] :provisioned_throughput_override
     #   Provisioned throughput settings for the restored table.
     #
+    # @option params [Types::OnDemandThroughput] :on_demand_throughput_override
+    #   Sets the maximum number of read and write units for the specified
+    #   on-demand table. If you use this parameter, you must specify
+    #   `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    #
     # @option params [Types::SSESpecification] :sse_specification_override
     #   The new server-side encryption settings for the restored table.
     #
@@ -5461,6 +5862,10 @@ module Aws::DynamoDB
     #           read_capacity_units: 1, # required
     #           write_capacity_units: 1, # required
     #         },
+    #         on_demand_throughput: {
+    #           max_read_request_units: 1,
+    #           max_write_request_units: 1,
+    #         },
     #       },
     #     ],
     #     local_secondary_index_override: [
@@ -5481,6 +5886,10 @@ module Aws::DynamoDB
     #     provisioned_throughput_override: {
     #       read_capacity_units: 1, # required
     #       write_capacity_units: 1, # required
+    #     },
+    #     on_demand_throughput_override: {
+    #       max_read_request_units: 1,
+    #       max_write_request_units: 1,
     #     },
     #     sse_specification_override: {
     #       enabled: false,
@@ -5540,6 +5949,8 @@ module Aws::DynamoDB
     #   resp.table_description.global_secondary_indexes[0].index_size_bytes #=> Integer
     #   resp.table_description.global_secondary_indexes[0].item_count #=> Integer
     #   resp.table_description.global_secondary_indexes[0].index_arn #=> String
+    #   resp.table_description.global_secondary_indexes[0].on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.table_description.global_secondary_indexes[0].on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table_description.stream_specification.stream_enabled #=> Boolean
     #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table_description.latest_stream_label #=> String
@@ -5552,9 +5963,11 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
     #   resp.table_description.replicas[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].global_secondary_indexes[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
@@ -5572,6 +5985,8 @@ module Aws::DynamoDB
     #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.table_class_summary.last_update_date_time #=> Time
     #   resp.table_description.deletion_protection_enabled #=> Boolean
+    #   resp.table_description.on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.table_description.on_demand_throughput.max_write_request_units #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTime AWS API Documentation
     #
@@ -5639,9 +6054,11 @@ module Aws::DynamoDB
     # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.ParallelScan
     #
     # @option params [required, String] :table_name
-    #   The name of the table containing the requested items; or, if you
-    #   provide `IndexName`, the name of the table to which that index
-    #   belongs.
+    #   The name of the table containing the requested items or if you provide
+    #   `IndexName`, the name of the table to which that index belongs.
+    #
+    #   You can also provide the Amazon Resource Name (ARN) of the table in
+    #   this parameter.
     #
     # @option params [String] :index_name
     #   The name of a secondary index to scan. This index can be any local
@@ -5839,7 +6256,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.FilterExpression
     #
     # @option params [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
@@ -5985,7 +6402,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.scan({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     index_name: "IndexName",
     #     attributes_to_get: ["AttributeName"],
     #     limit: 1,
@@ -6135,7 +6552,7 @@ module Aws::DynamoDB
     #           key: { # required
     #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #           },
-    #           table_name: "TableName", # required
+    #           table_name: "TableArn", # required
     #           projection_expression: "ProjectionExpression",
     #           expression_attribute_names: {
     #             "ExpressionAttributeNameVariable" => "AttributeName",
@@ -6305,7 +6722,7 @@ module Aws::DynamoDB
     #           key: { # required
     #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #           },
-    #           table_name: "TableName", # required
+    #           table_name: "TableArn", # required
     #           condition_expression: "ConditionExpression", # required
     #           expression_attribute_names: {
     #             "ExpressionAttributeNameVariable" => "AttributeName",
@@ -6319,7 +6736,7 @@ module Aws::DynamoDB
     #           item: { # required
     #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #           },
-    #           table_name: "TableName", # required
+    #           table_name: "TableArn", # required
     #           condition_expression: "ConditionExpression",
     #           expression_attribute_names: {
     #             "ExpressionAttributeNameVariable" => "AttributeName",
@@ -6333,7 +6750,7 @@ module Aws::DynamoDB
     #           key: { # required
     #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #           },
-    #           table_name: "TableName", # required
+    #           table_name: "TableArn", # required
     #           condition_expression: "ConditionExpression",
     #           expression_attribute_names: {
     #             "ExpressionAttributeNameVariable" => "AttributeName",
@@ -6348,7 +6765,7 @@ module Aws::DynamoDB
     #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #           },
     #           update_expression: "UpdateExpression", # required
-    #           table_name: "TableName", # required
+    #           table_name: "TableArn", # required
     #           condition_expression: "ConditionExpression",
     #           expression_attribute_names: {
     #             "ExpressionAttributeNameVariable" => "AttributeName",
@@ -6384,11 +6801,11 @@ module Aws::DynamoDB
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.item_collection_metrics #=> Hash
-    #   resp.item_collection_metrics["TableName"] #=> Array
-    #   resp.item_collection_metrics["TableName"][0].item_collection_key #=> Hash
-    #   resp.item_collection_metrics["TableName"][0].item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-    #   resp.item_collection_metrics["TableName"][0].size_estimate_range_gb #=> Array
-    #   resp.item_collection_metrics["TableName"][0].size_estimate_range_gb[0] #=> Float
+    #   resp.item_collection_metrics["TableArn"] #=> Array
+    #   resp.item_collection_metrics["TableArn"][0].item_collection_key #=> Hash
+    #   resp.item_collection_metrics["TableArn"][0].item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.item_collection_metrics["TableArn"][0].size_estimate_range_gb #=> Array
+    #   resp.item_collection_metrics["TableArn"][0].size_estimate_range_gb[0] #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TransactWriteItems AWS API Documentation
     #
@@ -6451,7 +6868,8 @@ module Aws::DynamoDB
     # 35 days.
     #
     # @option params [required, String] :table_name
-    #   The name of the table.
+    #   The name of the table. You can also provide the Amazon Resource Name
+    #   (ARN) of the table in this parameter.
     #
     # @option params [required, Types::PointInTimeRecoverySpecification] :point_in_time_recovery_specification
     #   Represents the settings used to enable point in time recovery.
@@ -6463,7 +6881,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_continuous_backups({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     point_in_time_recovery_specification: { # required
     #       point_in_time_recovery_enabled: false, # required
     #     },
@@ -6495,7 +6913,8 @@ module Aws::DynamoDB
     # CloudWatch Contributor Insights for DynamoDB for this table.
     #
     # @option params [required, String] :table_name
-    #   The name of the table.
+    #   The name of the table. You can also provide the Amazon Resource Name
+    #   (ARN) of the table in this parameter.
     #
     # @option params [String] :index_name
     #   The global secondary index name, if applicable.
@@ -6512,7 +6931,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_contributor_insights({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     index_name: "IndexName",
     #     contributor_insights_action: "ENABLE", # required, accepts ENABLE, DISABLE
     #   })
@@ -6538,18 +6957,20 @@ module Aws::DynamoDB
     # have the same key schema, have DynamoDB Streams enabled, and have the
     # same provisioned and maximum write capacity units.
     #
-    # This operation only applies to [Version 2017.11.29 (Legacy)][1] of
-    # global tables. We recommend using [Version 2019.11.21 (Current)][2]
-    # when creating new global tables, as it provides greater flexibility,
-    # higher efficiency and consumes less write capacity than 2017.11.29
-    # (Legacy). To determine which version you are using, see [Determining
-    # the version][3]. To update existing global tables from version
-    # 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [ Updating
-    # global tables][4].
+    # This documentation is for version 2017.11.29 (Legacy) of global
+    # tables, which should be avoided for new global tables. Customers
+    # should use [Global Tables version 2019.11.21 (Current)][1] when
+    # possible, because it provides greater flexibility, higher efficiency,
+    # and consumes less write capacity than 2017.11.29 (Legacy).
     #
-    # <note markdown="1"> This operation only applies to [Version 2017.11.29][1] of global
-    # tables. If you are using global tables [Version 2019.11.21][2] you can
-    # use [DescribeTable][5] instead.
+    #  To determine which version you're using, see [Determining the global
+    # table version you are using][2]. To update existing global tables from
+    # version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see
+    # [Upgrading global tables][3].
+    #
+    # <note markdown="1"> For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version). If you are using global tables
+    # [Version 2019.11.21][1] you can use [UpdateTable][4] instead.
     #
     #  Although you can use `UpdateGlobalTable` to add replicas and remove
     # replicas in a single request, for simplicity we recommend that you
@@ -6570,11 +6991,10 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
-    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
-    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
-    # [5]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTable.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
+    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
+    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html
     #
     # @option params [required, String] :global_table_name
     #   The global table name.
@@ -6612,9 +7032,11 @@ module Aws::DynamoDB
     #   resp.global_table_description.replication_group[0].replica_status_percent_progress #=> String
     #   resp.global_table_description.replication_group[0].kms_master_key_id #=> String
     #   resp.global_table_description.replication_group[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.global_table_description.replication_group[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.global_table_description.replication_group[0].global_secondary_indexes #=> Array
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].index_name #=> String
     #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.global_table_description.replication_group[0].global_secondary_indexes[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.global_table_description.replication_group[0].replica_inaccessible_date_time #=> Time
     #   resp.global_table_description.replication_group[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.global_table_description.replication_group[0].replica_table_class_summary.last_update_date_time #=> Time
@@ -6634,21 +7056,22 @@ module Aws::DynamoDB
 
     # Updates settings for a global table.
     #
-    # This operation only applies to [Version 2017.11.29 (Legacy)][1] of
-    # global tables. We recommend using [Version 2019.11.21 (Current)][2]
-    # when creating new global tables, as it provides greater flexibility,
-    # higher efficiency and consumes less write capacity than 2017.11.29
-    # (Legacy). To determine which version you are using, see [Determining
-    # the version][3]. To update existing global tables from version
-    # 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [ Updating
-    # global tables][4].
+    # This documentation is for version 2017.11.29 (Legacy) of global
+    # tables, which should be avoided for new global tables. Customers
+    # should use [Global Tables version 2019.11.21 (Current)][1] when
+    # possible, because it provides greater flexibility, higher efficiency,
+    # and consumes less write capacity than 2017.11.29 (Legacy).
+    #
+    #  To determine which version you're using, see [Determining the global
+    # table version you are using][2]. To update existing global tables from
+    # version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see
+    # [Upgrading global tables][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html
-    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
-    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
-    # [4]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
+    # [3]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
     #
     # @option params [required, String] :global_table_name
     #   The name of the global table
@@ -6660,16 +7083,16 @@ module Aws::DynamoDB
     #
     #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
     #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
-    #     Mode][1].
+    #     capacity mode][1].
     #
     #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
     #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
-    #     [On-Demand Mode][2].
+    #     [On-demand capacity mode][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
-    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html
     #
     # @option params [Integer] :global_table_provisioned_write_capacity_units
     #   The maximum number of writes consumed per second before DynamoDB
@@ -6857,7 +7280,8 @@ module Aws::DynamoDB
     # `UpdateItem` operation using the `ReturnValues` parameter.
     #
     # @option params [required, String] :table_name
-    #   The name of the table containing the item to update.
+    #   The name of the table containing the item to update. You can also
+    #   provide the Amazon Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, Hash<String,Types::AttributeValue>] :key
     #   The primary key of the item to be updated. Each element consists of an
@@ -7182,7 +7606,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_item({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     key: { # required
     #       "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #     },
@@ -7248,11 +7672,56 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # The command to update the Kinesis stream destination.
+    #
+    # @option params [required, String] :table_name
+    #   The table name for the Kinesis streaming destination input. You can
+    #   also provide the ARN of the table in this parameter.
+    #
+    # @option params [required, String] :stream_arn
+    #   The Amazon Resource Name (ARN) for the Kinesis stream input.
+    #
+    # @option params [Types::UpdateKinesisStreamingConfiguration] :update_kinesis_streaming_configuration
+    #   The command to update the Kinesis stream configuration.
+    #
+    # @return [Types::UpdateKinesisStreamingDestinationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateKinesisStreamingDestinationOutput#table_name #table_name} => String
+    #   * {Types::UpdateKinesisStreamingDestinationOutput#stream_arn #stream_arn} => String
+    #   * {Types::UpdateKinesisStreamingDestinationOutput#destination_status #destination_status} => String
+    #   * {Types::UpdateKinesisStreamingDestinationOutput#update_kinesis_streaming_configuration #update_kinesis_streaming_configuration} => Types::UpdateKinesisStreamingConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_kinesis_streaming_destination({
+    #     table_name: "TableArn", # required
+    #     stream_arn: "StreamArn", # required
+    #     update_kinesis_streaming_configuration: {
+    #       approximate_creation_date_time_precision: "MILLISECOND", # accepts MILLISECOND, MICROSECOND
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_name #=> String
+    #   resp.stream_arn #=> String
+    #   resp.destination_status #=> String, one of "ENABLING", "ACTIVE", "DISABLING", "DISABLED", "ENABLE_FAILED", "UPDATING"
+    #   resp.update_kinesis_streaming_configuration.approximate_creation_date_time_precision #=> String, one of "MILLISECOND", "MICROSECOND"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateKinesisStreamingDestination AWS API Documentation
+    #
+    # @overload update_kinesis_streaming_destination(params = {})
+    # @param [Hash] params ({})
+    def update_kinesis_streaming_destination(params = {}, options = {})
+      req = build_request(:update_kinesis_streaming_destination, params)
+      req.send_request(options)
+    end
+
     # Modifies the provisioned throughput settings, global secondary
     # indexes, or DynamoDB Streams settings for a given table.
     #
-    # This operation only applies to [Version 2019.11.21 (Current)][1] of
-    # global tables.
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version).
     #
     # You can only perform one of the following operations at once:
     #
@@ -7264,15 +7733,11 @@ module Aws::DynamoDB
     #   begins backfilling, you can use `UpdateTable` to perform other
     #   operations.
     #
-    # `UpdateTable` is an asynchronous operation; while it is executing, the
-    # table status changes from `ACTIVE` to `UPDATING`. While it is
-    # `UPDATING`, you cannot issue another `UpdateTable` request. When the
+    # `UpdateTable` is an asynchronous operation; while it's executing, the
+    # table status changes from `ACTIVE` to `UPDATING`. While it's
+    # `UPDATING`, you can't issue another `UpdateTable` request. When the
     # table returns to the `ACTIVE` state, the `UpdateTable` operation is
     # complete.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     #
     # @option params [Array<Types::AttributeDefinition>] :attribute_definitions
     #   An array of attributes that describe the key schema for the table and
@@ -7281,7 +7746,8 @@ module Aws::DynamoDB
     #   index.
     #
     # @option params [required, String] :table_name
-    #   The name of the table to be updated.
+    #   The name of the table to be updated. You can also provide the Amazon
+    #   Resource Name (ARN) of the table in this parameter.
     #
     # @option params [String] :billing_mode
     #   Controls how you are charged for read and write throughput and how you
@@ -7293,16 +7759,16 @@ module Aws::DynamoDB
     #
     #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
     #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
-    #     Mode][1].
+    #     capacity mode][1].
     #
     #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
     #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
-    #     [On-Demand Mode][2].
+    #     [On-demand capacity mode][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
-    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html
     #
     # @option params [Types::ProvisionedThroughput] :provisioned_throughput
     #   The new provisioned throughput settings for the specified table or
@@ -7332,9 +7798,9 @@ module Aws::DynamoDB
     # @option params [Types::StreamSpecification] :stream_specification
     #   Represents the DynamoDB Streams configuration for the table.
     #
-    #   <note markdown="1"> You receive a `ResourceInUseException` if you try to enable a stream
-    #   on a table that already has a stream, or if you try to disable a
-    #   stream on a table that doesn't have a stream.
+    #   <note markdown="1"> You receive a `ValidationException` if you try to enable a stream on a
+    #   table that already has a stream, or if you try to disable a stream on
+    #   a table that doesn't have a stream.
     #
     #    </note>
     #
@@ -7345,14 +7811,10 @@ module Aws::DynamoDB
     #   A list of replica update actions (create, delete, or update) for the
     #   table.
     #
-    #   <note markdown="1"> This property only applies to [Version 2019.11.21 (Current)][1] of
-    #   global tables.
+    #   <note markdown="1"> For global tables, this property only applies to global tables using
+    #   Version 2019.11.21 (Current version).
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     #
     # @option params [String] :table_class
     #   The table class of the table to be updated. Valid values are
@@ -7361,6 +7823,11 @@ module Aws::DynamoDB
     # @option params [Boolean] :deletion_protection_enabled
     #   Indicates whether deletion protection is to be enabled (true) or
     #   disabled (false) on the table.
+    #
+    # @option params [Types::OnDemandThroughput] :on_demand_throughput
+    #   Updates the maximum number of read and write units for the specified
+    #   table in on-demand capacity mode. If you use this parameter, you must
+    #   specify `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     #
     # @return [Types::UpdateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7425,7 +7892,7 @@ module Aws::DynamoDB
     #         attribute_type: "S", # required, accepts S, N, B
     #       },
     #     ],
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     billing_mode: "PROVISIONED", # accepts PROVISIONED, PAY_PER_REQUEST
     #     provisioned_throughput: {
     #       read_capacity_units: 1, # required
@@ -7435,9 +7902,13 @@ module Aws::DynamoDB
     #       {
     #         update: {
     #           index_name: "IndexName", # required
-    #           provisioned_throughput: { # required
+    #           provisioned_throughput: {
     #             read_capacity_units: 1, # required
     #             write_capacity_units: 1, # required
+    #           },
+    #           on_demand_throughput: {
+    #             max_read_request_units: 1,
+    #             max_write_request_units: 1,
     #           },
     #         },
     #         create: {
@@ -7455,6 +7926,10 @@ module Aws::DynamoDB
     #           provisioned_throughput: {
     #             read_capacity_units: 1, # required
     #             write_capacity_units: 1, # required
+    #           },
+    #           on_demand_throughput: {
+    #             max_read_request_units: 1,
+    #             max_write_request_units: 1,
     #           },
     #         },
     #         delete: {
@@ -7479,11 +7954,17 @@ module Aws::DynamoDB
     #           provisioned_throughput_override: {
     #             read_capacity_units: 1,
     #           },
+    #           on_demand_throughput_override: {
+    #             max_read_request_units: 1,
+    #           },
     #           global_secondary_indexes: [
     #             {
     #               index_name: "IndexName", # required
     #               provisioned_throughput_override: {
     #                 read_capacity_units: 1,
+    #               },
+    #               on_demand_throughput_override: {
+    #                 max_read_request_units: 1,
     #               },
     #             },
     #           ],
@@ -7495,11 +7976,17 @@ module Aws::DynamoDB
     #           provisioned_throughput_override: {
     #             read_capacity_units: 1,
     #           },
+    #           on_demand_throughput_override: {
+    #             max_read_request_units: 1,
+    #           },
     #           global_secondary_indexes: [
     #             {
     #               index_name: "IndexName", # required
     #               provisioned_throughput_override: {
     #                 read_capacity_units: 1,
+    #               },
+    #               on_demand_throughput_override: {
+    #                 max_read_request_units: 1,
     #               },
     #             },
     #           ],
@@ -7512,6 +7999,10 @@ module Aws::DynamoDB
     #     ],
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #     deletion_protection_enabled: false,
+    #     on_demand_throughput: {
+    #       max_read_request_units: 1,
+    #       max_write_request_units: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -7565,6 +8056,8 @@ module Aws::DynamoDB
     #   resp.table_description.global_secondary_indexes[0].index_size_bytes #=> Integer
     #   resp.table_description.global_secondary_indexes[0].item_count #=> Integer
     #   resp.table_description.global_secondary_indexes[0].index_arn #=> String
+    #   resp.table_description.global_secondary_indexes[0].on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.table_description.global_secondary_indexes[0].on_demand_throughput.max_write_request_units #=> Integer
     #   resp.table_description.stream_specification.stream_enabled #=> Boolean
     #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table_description.latest_stream_label #=> String
@@ -7577,9 +8070,11 @@ module Aws::DynamoDB
     #   resp.table_description.replicas[0].replica_status_percent_progress #=> String
     #   resp.table_description.replicas[0].kms_master_key_id #=> String
     #   resp.table_description.replicas[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table_description.replicas[0].global_secondary_indexes #=> Array
     #   resp.table_description.replicas[0].global_secondary_indexes[0].index_name #=> String
     #   resp.table_description.replicas[0].global_secondary_indexes[0].provisioned_throughput_override.read_capacity_units #=> Integer
+    #   resp.table_description.replicas[0].global_secondary_indexes[0].on_demand_throughput_override.max_read_request_units #=> Integer
     #   resp.table_description.replicas[0].replica_inaccessible_date_time #=> Time
     #   resp.table_description.replicas[0].replica_table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.replicas[0].replica_table_class_summary.last_update_date_time #=> Time
@@ -7597,6 +8092,8 @@ module Aws::DynamoDB
     #   resp.table_description.table_class_summary.table_class #=> String, one of "STANDARD", "STANDARD_INFREQUENT_ACCESS"
     #   resp.table_description.table_class_summary.last_update_date_time #=> Time
     #   resp.table_description.deletion_protection_enabled #=> Boolean
+    #   resp.table_description.on_demand_throughput.max_read_request_units #=> Integer
+    #   resp.table_description.on_demand_throughput.max_write_request_units #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTable AWS API Documentation
     #
@@ -7609,19 +8106,16 @@ module Aws::DynamoDB
 
     # Updates auto scaling settings on your global tables at once.
     #
-    # This operation only applies to [Version 2019.11.21 (Current)][1] of
-    # global tables.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
+    # For global tables, this operation only applies to global tables using
+    # Version 2019.11.21 (Current version).
     #
     # @option params [Array<Types::GlobalSecondaryIndexAutoScalingUpdate>] :global_secondary_index_updates
     #   Represents the auto scaling settings of the global secondary indexes
     #   of the replica to be updated.
     #
     # @option params [required, String] :table_name
-    #   The name of the global table to be updated.
+    #   The name of the global table to be updated. You can also provide the
+    #   Amazon Resource Name (ARN) of the table in this parameter.
     #
     # @option params [Types::AutoScalingSettingsUpdate] :provisioned_write_capacity_auto_scaling_update
     #   Represents the auto scaling settings to be modified for a global table
@@ -7658,7 +8152,7 @@ module Aws::DynamoDB
     #         },
     #       },
     #     ],
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     provisioned_write_capacity_auto_scaling_update: {
     #       minimum_units: 1,
     #       maximum_units: 1,
@@ -7814,7 +8308,8 @@ module Aws::DynamoDB
     # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html
     #
     # @option params [required, String] :table_name
-    #   The name of the table to be configured.
+    #   The name of the table to be configured. You can also provide the
+    #   Amazon Resource Name (ARN) of the table in this parameter.
     #
     # @option params [required, Types::TimeToLiveSpecification] :time_to_live_specification
     #   Represents the settings used to enable or disable Time to Live for the
@@ -7827,7 +8322,7 @@ module Aws::DynamoDB
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_time_to_live({
-    #     table_name: "TableName", # required
+    #     table_name: "TableArn", # required
     #     time_to_live_specification: { # required
     #       enabled: false, # required
     #       attribute_name: "TimeToLiveAttributeName", # required
@@ -7861,7 +8356,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.113.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

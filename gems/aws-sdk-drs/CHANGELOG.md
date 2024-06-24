@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2024-04-18)
+------------------
+
+* Feature - Outpost ARN added to Source Server and Recovery Instance
+
+1.29.0 (2024-02-26)
+------------------
+
+* Feature - Added volume status to DescribeSourceServer replicated volumes.
+
+1.28.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2024-01-18)
+------------------
+
+* Feature - Removed invalid and unnecessary default values.
+
+1.26.0 (2023-12-13)
+------------------
+
+* Feature - Adding AgentVersion to SourceServer and RecoveryInstance structures
+
+1.25.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2023-10-16)
+------------------
+
+* Feature - Updated exsiting API to allow AWS Elastic Disaster Recovery support of launching recovery into existing EC2 instances.
+
 1.22.0 (2023-09-27)
 ------------------
 

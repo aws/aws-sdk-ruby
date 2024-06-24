@@ -90,7 +90,7 @@ module Aws::CloudFormation
     # @option options [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
     #   and a maximum length of 51,200 bytes. For more information, go to
-    #   [Template anatomy][1] in the CloudFormation User Guide.
+    #   [Template anatomy][1] in the *CloudFormation User Guide*.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
@@ -102,7 +102,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that's located in an Amazon S3
     #   bucket or a Systems Manager document. For more information, go to the
-    #   [Template anatomy][1] in the CloudFormation User Guide.
+    #   [Template anatomy][1] in the *CloudFormation User Guide*. The location
+    #   for an Amazon S3 bucket must start with `https://`.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
@@ -129,7 +130,7 @@ module Aws::CloudFormation
     #   period afterwards.
     # @option options [Integer] :timeout_in_minutes
     #   The amount of time that can pass before the stack status becomes
-    #   CREATE\_FAILED; if `DisableRollback` is not set or is set to `false`,
+    #   `CREATE_FAILED`; if `DisableRollback` is not set or is set to `false`,
     #   the stack will be rolled back.
     # @option options [Array<String>] :notification_arns
     #   The Amazon Simple Notification Service (Amazon SNS) topic ARNs to
@@ -163,17 +164,17 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ AWS::IAM::AccessKey][1]
+    #     * [AWS::IAM::AccessKey][1]
     #
-    #     * [ AWS::IAM::Group][2]
+    #     * [AWS::IAM::Group][2]
     #
     #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ AWS::IAM::Policy][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ AWS::IAM::Role][5]
+    #     * [AWS::IAM::Role][5]
     #
-    #     * [ AWS::IAM::User][6]
+    #     * [AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
     #
@@ -210,6 +211,11 @@ module Aws::CloudFormation
     #     For more information, see [Using CloudFormation macros to perform
     #     custom processing on templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -240,6 +246,11 @@ module Aws::CloudFormation
     #   (IAM) uses this parameter for CloudFormation-specific condition keys
     #   in IAM policies. For more information, see [Controlling Access with
     #   Identity and Access Management][1].
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #
@@ -275,8 +286,9 @@ module Aws::CloudFormation
     # @option options [String] :stack_policy_url
     #   Location of a file containing the stack policy. The URL must point to
     #   a policy (maximum size: 16 KB) located in an S3 bucket in the same
-    #   Region as the stack. You can specify either the `StackPolicyBody` or
-    #   the `StackPolicyURL` parameter, but not both.
+    #   Region as the stack. The location for an Amazon S3 bucket must start
+    #   with `https://`. You can specify either the `StackPolicyBody` or the
+    #   `StackPolicyURL` parameter, but not both.
     # @option options [Array<Types::Tag>] :tags
     #   Key-value pairs to associate with this stack. CloudFormation also
     #   propagates these tags to the resources created in the stack. A maximum
@@ -324,7 +336,7 @@ module Aws::CloudFormation
     #   Default: `false`
     # @return [Stack]
     def create_stack(options = {})
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_stack(options)
       end
       Stack.new(
@@ -391,7 +403,7 @@ module Aws::CloudFormation
     # @return [Stack::Collection]
     def stacks(options = {})
       batches = Enumerator.new do |y|
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_stacks(options)
         end
         resp.each_page do |page|

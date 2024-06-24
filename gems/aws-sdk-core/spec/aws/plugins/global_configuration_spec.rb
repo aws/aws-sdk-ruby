@@ -13,10 +13,23 @@ module Aws
         option(:property, 'plugin-default')
       end)
 
+      let(:plugin) do
+        p = double('plugin')
+        allow(p).to receive(:is_a?).with(kind_of(Class)).and_return(false)
+        p
+      end
+
+      let(:options) do
+        {
+          region: 'us-east-1',
+          credentials: Credentials.new('akid', 'secret'),
+          plugins: [plugin]
+        }
+      end
+
       before(:each) do
         Aws.config.clear
-        Aws.config[:region] = 'us-east-1'
-        Aws.config[:credentials] = Credentials.new('akid', 'secret')
+        Aws.config = options
       end
 
       before(:all) do
@@ -43,6 +56,43 @@ module Aws
         Aws.config[:property] = 'aws-default'
         Aws.config[:svc] = { property: 'svc-default' }
         expect(GlobalConfigClient.new(property: 'arg').config.property).to eq('arg')
+      end
+
+      context 'plugins' do
+        it 'instructs plugins to #before_initialize' do
+          expect(plugin).to receive(:before_initialize).with(GlobalConfigClient, options)
+          GlobalConfigClient.new
+        end
+
+        it 'instructs plugins to #add_options' do
+          expect(plugin).to receive(:add_options)
+          GlobalConfigClient.new
+        end
+
+        it 'instructs plugins to #add_handlers' do
+          expect(plugin).to receive(:add_handlers).
+            with(kind_of(Seahorse::Client::HandlerList), kind_of(Struct))
+          GlobalConfigClient.new
+        end
+
+        it 'instructs plugins to #after_initialize' do
+          expect(plugin).to receive(:after_initialize).with(kind_of(Seahorse::Client::Base))
+          GlobalConfigClient.new
+        end
+
+        it 'does not call methods that plugin does not respond to' do
+          plugin = Object.new
+          allow(plugin).to receive(:respond_to?).with(:before_initialize).and_return(false)
+          allow(plugin).to receive(:respond_to?).with(:add_options).and_return(false)
+          allow(plugin).to receive(:respond_to?).with(:add_handlers).and_return(false)
+          allow(plugin).to receive(:respond_to?).with(:after_initialize).and_return(false)
+          expect(plugin).not_to receive(:before_initialize)
+          expect(plugin).not_to receive(:add_options)
+          expect(plugin).not_to receive(:add_handlers)
+          expect(plugin).not_to receive(:after_initialize)
+          Aws.config[:plugins] = [plugin]
+          GlobalConfigClient.new
+        end
       end
 
     end

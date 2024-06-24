@@ -1,0 +1,403 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AppIntegrationsService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#create_application-instance_method
+      def create_application: (
+                                name: ::String,
+                                namespace: ::String,
+                                ?description: ::String,
+                                application_source_config: {
+                                  external_url_config: {
+                                    access_url: ::String,
+                                    approved_origins: Array[::String]?
+                                  }?
+                                },
+                                ?subscriptions: Array[
+                                  {
+                                    event: ::String,
+                                    description: ::String?
+                                  },
+                                ],
+                                ?publications: Array[
+                                  {
+                                    event: ::String,
+                                    schema: ::String,
+                                    description: ::String?
+                                  },
+                                ],
+                                ?client_token: ::String,
+                                ?tags: Hash[::String, ::String],
+                                ?permissions: Array[::String]
+                              ) -> _CreateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _CreateDataIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataIntegrationResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def kms_key: () -> ::String
+        def source_uri: () -> ::String
+        def schedule_configuration: () -> Types::ScheduleConfiguration
+        def tags: () -> ::Hash[::String, ::String]
+        def client_token: () -> ::String
+        def file_configuration: () -> Types::FileConfiguration
+        def object_configuration: () -> ::Hash[::String, ::Hash[::String, ::Array[::String]]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#create_data_integration-instance_method
+      def create_data_integration: (
+                                     name: ::String,
+                                     ?description: ::String,
+                                     kms_key: ::String,
+                                     source_uri: ::String,
+                                     ?schedule_config: {
+                                       first_execution_from: ::String?,
+                                       object: ::String?,
+                                       schedule_expression: ::String
+                                     },
+                                     ?tags: Hash[::String, ::String],
+                                     ?client_token: ::String,
+                                     ?file_configuration: {
+                                       folders: Array[::String],
+                                       filters: Hash[::String, Array[::String]]?
+                                     },
+                                     ?object_configuration: Hash[::String, Hash[::String, Array[::String]]]
+                                   ) -> _CreateDataIntegrationResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataIntegrationResponseSuccess
+
+      interface _CreateEventIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEventIntegrationResponse]
+        def event_integration_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#create_event_integration-instance_method
+      def create_event_integration: (
+                                      name: ::String,
+                                      ?description: ::String,
+                                      event_filter: {
+                                        source: ::String
+                                      },
+                                      event_bridge_bus: ::String,
+                                      ?client_token: ::String,
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _CreateEventIntegrationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventIntegrationResponseSuccess
+
+      interface _DeleteApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#delete_application-instance_method
+      def delete_application: (
+                                arn: ::String
+                              ) -> _DeleteApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationResponseSuccess
+
+      interface _DeleteDataIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataIntegrationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#delete_data_integration-instance_method
+      def delete_data_integration: (
+                                     data_integration_identifier: ::String
+                                   ) -> _DeleteDataIntegrationResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataIntegrationResponseSuccess
+
+      interface _DeleteEventIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteEventIntegrationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#delete_event_integration-instance_method
+      def delete_event_integration: (
+                                      name: ::String
+                                    ) -> _DeleteEventIntegrationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteEventIntegrationResponseSuccess
+
+      interface _GetApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def namespace: () -> ::String
+        def description: () -> ::String
+        def application_source_config: () -> Types::ApplicationSourceConfig
+        def subscriptions: () -> ::Array[Types::Subscription]
+        def publications: () -> ::Array[Types::Publication]
+        def created_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+        def permissions: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#get_application-instance_method
+      def get_application: (
+                             arn: ::String
+                           ) -> _GetApplicationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationResponseSuccess
+
+      interface _GetDataIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataIntegrationResponse]
+        def arn: () -> ::String
+        def id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def kms_key: () -> ::String
+        def source_uri: () -> ::String
+        def schedule_configuration: () -> Types::ScheduleConfiguration
+        def tags: () -> ::Hash[::String, ::String]
+        def file_configuration: () -> Types::FileConfiguration
+        def object_configuration: () -> ::Hash[::String, ::Hash[::String, ::Array[::String]]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#get_data_integration-instance_method
+      def get_data_integration: (
+                                  identifier: ::String
+                                ) -> _GetDataIntegrationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataIntegrationResponseSuccess
+
+      interface _GetEventIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEventIntegrationResponse]
+        def name: () -> ::String
+        def description: () -> ::String
+        def event_integration_arn: () -> ::String
+        def event_bridge_bus: () -> ::String
+        def event_filter: () -> Types::EventFilter
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#get_event_integration-instance_method
+      def get_event_integration: (
+                                   name: ::String
+                                 ) -> _GetEventIntegrationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEventIntegrationResponseSuccess
+
+      interface _ListApplicationAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationAssociationsResponse]
+        def application_associations: () -> ::Array[Types::ApplicationAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#list_application_associations-instance_method
+      def list_application_associations: (
+                                           application_id: ::String,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _ListApplicationAssociationsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationAssociationsResponseSuccess
+
+      interface _ListApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListApplicationsResponse]
+        def applications: () -> ::Array[Types::ApplicationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#list_applications-instance_method
+      def list_applications: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListApplicationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
+
+      interface _ListDataIntegrationAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataIntegrationAssociationsResponse]
+        def data_integration_associations: () -> ::Array[Types::DataIntegrationAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#list_data_integration_associations-instance_method
+      def list_data_integration_associations: (
+                                                data_integration_identifier: ::String,
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListDataIntegrationAssociationsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataIntegrationAssociationsResponseSuccess
+
+      interface _ListDataIntegrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataIntegrationsResponse]
+        def data_integrations: () -> ::Array[Types::DataIntegrationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#list_data_integrations-instance_method
+      def list_data_integrations: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListDataIntegrationsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataIntegrationsResponseSuccess
+
+      interface _ListEventIntegrationAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventIntegrationAssociationsResponse]
+        def event_integration_associations: () -> ::Array[Types::EventIntegrationAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#list_event_integration_associations-instance_method
+      def list_event_integration_associations: (
+                                                 event_integration_name: ::String,
+                                                 ?next_token: ::String,
+                                                 ?max_results: ::Integer
+                                               ) -> _ListEventIntegrationAssociationsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventIntegrationAssociationsResponseSuccess
+
+      interface _ListEventIntegrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEventIntegrationsResponse]
+        def event_integrations: () -> ::Array[Types::EventIntegration]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#list_event_integrations-instance_method
+      def list_event_integrations: (
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListEventIntegrationsResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEventIntegrationsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#update_application-instance_method
+      def update_application: (
+                                arn: ::String,
+                                ?name: ::String,
+                                ?description: ::String,
+                                ?application_source_config: {
+                                  external_url_config: {
+                                    access_url: ::String,
+                                    approved_origins: Array[::String]?
+                                  }?
+                                },
+                                ?subscriptions: Array[
+                                  {
+                                    event: ::String,
+                                    description: ::String?
+                                  },
+                                ],
+                                ?publications: Array[
+                                  {
+                                    event: ::String,
+                                    schema: ::String,
+                                    description: ::String?
+                                  },
+                                ],
+                                ?permissions: Array[::String]
+                              ) -> _UpdateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
+
+      interface _UpdateDataIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataIntegrationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#update_data_integration-instance_method
+      def update_data_integration: (
+                                     identifier: ::String,
+                                     ?name: ::String,
+                                     ?description: ::String
+                                   ) -> _UpdateDataIntegrationResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataIntegrationResponseSuccess
+
+      interface _UpdateEventIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEventIntegrationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#update_event_integration-instance_method
+      def update_event_integration: (
+                                      name: ::String,
+                                      ?description: ::String
+                                    ) -> _UpdateEventIntegrationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventIntegrationResponseSuccess
+    end
+  end
+end
+

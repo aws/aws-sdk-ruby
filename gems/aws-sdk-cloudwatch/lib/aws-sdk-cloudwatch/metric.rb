@@ -63,7 +63,7 @@ module Aws::CloudWatch
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.list_metrics(
         metric_name: @name,
         namespace: @namespace
@@ -183,7 +183,7 @@ module Aws::CloudWatch
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -304,7 +304,7 @@ module Aws::CloudWatch
         namespace: @namespace,
         metric_name: @name
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_metric_statistics(options)
       end
       resp.data
@@ -409,10 +409,22 @@ module Aws::CloudWatch
     #
     #   ^
     #
+    #   **Lambda actions:**
+    #
+    #   * Invoke the latest version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name `
+    #
+    #   * Invoke a specific version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:version-number
+    #     `
+    #
+    #   * Invoke a function by using an alias Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:alias-name
+    #     `
+    #
     #   **SNS notification action:**
     #
-    #   * `arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-    #     `
+    #   * `arn:aws:sns:region:account-id:sns-topic-name `
     #
     #   ^
     #
@@ -452,10 +464,22 @@ module Aws::CloudWatch
     #
     #   ^
     #
+    #   **Lambda actions:**
+    #
+    #   * Invoke the latest version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name `
+    #
+    #   * Invoke a specific version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:version-number
+    #     `
+    #
+    #   * Invoke a function by using an alias Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:alias-name
+    #     `
+    #
     #   **SNS notification action:**
     #
-    #   * `arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-    #     `
+    #   * `arn:aws:sns:region:account-id:sns-topic-name `
     #
     #   ^
     #
@@ -495,10 +519,22 @@ module Aws::CloudWatch
     #
     #   ^
     #
+    #   **Lambda actions:**
+    #
+    #   * Invoke the latest version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name `
+    #
+    #   * Invoke a specific version of a Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:version-number
+    #     `
+    #
+    #   * Invoke a function by using an alias Lambda function:
+    #     `arn:aws:lambda:region:account-id:function:function-name:alias-name
+    #     `
+    #
     #   **SNS notification action:**
     #
-    #   * `arn:aws:sns:region:account-id:sns-topic-name:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name
-    #     `
+    #   * `arn:aws:sns:region:account-id:sns-topic-name `
     #
     #   ^
     #
@@ -584,6 +620,9 @@ module Aws::CloudWatch
     #   You can also specify a unit when you create a custom metric. Units
     #   help provide conceptual meaning to your data. Metric data points that
     #   specify a unit of measure, such as Percent, are aggregated separately.
+    #   If you are creating an alarm based on a metric math expression, you
+    #   can specify the unit for each metric (if needed) within the objects in
+    #   the `Metrics` array.
     #
     #   If you don't specify `Unit`, CloudWatch retrieves all unit types that
     #   have been published for the metric and attempts to evaluate the alarm.
@@ -676,10 +715,10 @@ module Aws::CloudWatch
     #   [MetricDataQuery][1].
     #
     #   If you use the `Metrics` parameter, you cannot include the
-    #   `MetricName`, `Dimensions`, `Period`, `Namespace`, `Statistic`, or
-    #   `ExtendedStatistic` parameters of `PutMetricAlarm` in the same
-    #   operation. Instead, you retrieve the metrics you are using in your
-    #   math expression as part of the `Metrics` array.
+    #   `Namespace`, `MetricName`, `Dimensions`, `Period`, `Unit`,
+    #   `Statistic`, or `ExtendedStatistic` parameters of `PutMetricAlarm` in
+    #   the same operation. Instead, you retrieve the metrics you are using in
+    #   your math expression as part of the `Metrics` array.
     #
     #
     #
@@ -717,7 +756,7 @@ module Aws::CloudWatch
         namespace: @namespace,
         metric_name: @name
       )
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.put_metric_alarm(options)
       end
       Alarm.new(
@@ -763,7 +802,7 @@ module Aws::CloudWatch
         namespace: @namespace,
         metric_data: [{ metric_name: @name }]
       )
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.put_metric_data(options)
       end
       resp.data
@@ -808,7 +847,7 @@ module Aws::CloudWatch
           namespace: @namespace,
           metric_name: @name
         )
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_alarms_for_metric(options)
         end
         resp.data.metric_alarms.each do |m|

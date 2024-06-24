@@ -1,0 +1,413 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Route53RecoveryControlConfig
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssertionRule
+      attr_accessor asserted_controls: ::Array[::String]
+      attr_accessor control_panel_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor rule_config: Types::RuleConfig
+      attr_accessor safety_rule_arn: ::String
+      attr_accessor status: ("PENDING" | "DEPLOYED" | "PENDING_DELETION")
+      attr_accessor wait_period_ms: ::Integer
+      attr_accessor owner: ::String
+      SENSITIVE: []
+    end
+
+    class AssertionRuleUpdate
+      attr_accessor name: ::String
+      attr_accessor safety_rule_arn: ::String
+      attr_accessor wait_period_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class Cluster
+      attr_accessor cluster_arn: ::String
+      attr_accessor cluster_endpoints: ::Array[Types::ClusterEndpoint]
+      attr_accessor name: ::String
+      attr_accessor status: ("PENDING" | "DEPLOYED" | "PENDING_DELETION")
+      attr_accessor owner: ::String
+      SENSITIVE: []
+    end
+
+    class ClusterEndpoint
+      attr_accessor endpoint: ::String
+      attr_accessor region: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ControlPanel
+      attr_accessor cluster_arn: ::String
+      attr_accessor control_panel_arn: ::String
+      attr_accessor default_control_panel: bool
+      attr_accessor name: ::String
+      attr_accessor routing_control_count: ::Integer
+      attr_accessor status: ("PENDING" | "DEPLOYED" | "PENDING_DELETION")
+      attr_accessor owner: ::String
+      SENSITIVE: []
+    end
+
+    class CreateClusterRequest
+      attr_accessor client_token: ::String
+      attr_accessor cluster_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class CreateControlPanelRequest
+      attr_accessor client_token: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor control_panel_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateControlPanelResponse
+      attr_accessor control_panel: Types::ControlPanel
+      SENSITIVE: []
+    end
+
+    class CreateRoutingControlRequest
+      attr_accessor client_token: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor control_panel_arn: ::String
+      attr_accessor routing_control_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRoutingControlResponse
+      attr_accessor routing_control: Types::RoutingControl
+      SENSITIVE: []
+    end
+
+    class CreateSafetyRuleRequest
+      attr_accessor assertion_rule: Types::NewAssertionRule
+      attr_accessor client_token: ::String
+      attr_accessor gating_rule: Types::NewGatingRule
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSafetyRuleResponse
+      attr_accessor assertion_rule: Types::AssertionRule
+      attr_accessor gating_rule: Types::GatingRule
+      SENSITIVE: []
+    end
+
+    class DeleteClusterRequest
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteClusterResponse < Aws::EmptyStructure
+    end
+
+    class DeleteControlPanelRequest
+      attr_accessor control_panel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteControlPanelResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRoutingControlRequest
+      attr_accessor routing_control_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRoutingControlResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSafetyRuleRequest
+      attr_accessor safety_rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSafetyRuleResponse < Aws::EmptyStructure
+    end
+
+    class DescribeClusterRequest
+      attr_accessor cluster_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeClusterResponse
+      attr_accessor cluster: Types::Cluster
+      SENSITIVE: []
+    end
+
+    class DescribeControlPanelRequest
+      attr_accessor control_panel_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeControlPanelResponse
+      attr_accessor control_panel: Types::ControlPanel
+      SENSITIVE: []
+    end
+
+    class DescribeRoutingControlRequest
+      attr_accessor routing_control_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRoutingControlResponse
+      attr_accessor routing_control: Types::RoutingControl
+      SENSITIVE: []
+    end
+
+    class DescribeSafetyRuleRequest
+      attr_accessor safety_rule_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSafetyRuleResponse
+      attr_accessor assertion_rule: Types::AssertionRule
+      attr_accessor gating_rule: Types::GatingRule
+      SENSITIVE: []
+    end
+
+    class GatingRule
+      attr_accessor control_panel_arn: ::String
+      attr_accessor gating_controls: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor rule_config: Types::RuleConfig
+      attr_accessor safety_rule_arn: ::String
+      attr_accessor status: ("PENDING" | "DEPLOYED" | "PENDING_DELETION")
+      attr_accessor target_controls: ::Array[::String]
+      attr_accessor wait_period_ms: ::Integer
+      attr_accessor owner: ::String
+      SENSITIVE: []
+    end
+
+    class GatingRuleUpdate
+      attr_accessor name: ::String
+      attr_accessor safety_rule_arn: ::String
+      attr_accessor wait_period_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyResponse
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociatedRoute53HealthChecksRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor routing_control_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListAssociatedRoute53HealthChecksResponse
+      attr_accessor health_check_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClustersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListClustersResponse
+      attr_accessor clusters: ::Array[Types::Cluster]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListControlPanelsRequest
+      attr_accessor cluster_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListControlPanelsResponse
+      attr_accessor control_panels: ::Array[Types::ControlPanel]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoutingControlsRequest
+      attr_accessor control_panel_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRoutingControlsResponse
+      attr_accessor next_token: ::String
+      attr_accessor routing_controls: ::Array[Types::RoutingControl]
+      SENSITIVE: []
+    end
+
+    class ListSafetyRulesRequest
+      attr_accessor control_panel_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSafetyRulesResponse
+      attr_accessor next_token: ::String
+      attr_accessor safety_rules: ::Array[Types::Rule]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NewAssertionRule
+      attr_accessor asserted_controls: ::Array[::String]
+      attr_accessor control_panel_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor rule_config: Types::RuleConfig
+      attr_accessor wait_period_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class NewGatingRule
+      attr_accessor control_panel_arn: ::String
+      attr_accessor gating_controls: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor rule_config: Types::RuleConfig
+      attr_accessor target_controls: ::Array[::String]
+      attr_accessor wait_period_ms: ::Integer
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RoutingControl
+      attr_accessor control_panel_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor routing_control_arn: ::String
+      attr_accessor status: ("PENDING" | "DEPLOYED" | "PENDING_DELETION")
+      attr_accessor owner: ::String
+      SENSITIVE: []
+    end
+
+    class Rule
+      attr_accessor assertion: Types::AssertionRule
+      attr_accessor gating: Types::GatingRule
+      SENSITIVE: []
+    end
+
+    class RuleConfig
+      attr_accessor inverted: bool
+      attr_accessor threshold: ::Integer
+      attr_accessor type: ("ATLEAST" | "AND" | "OR")
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateControlPanelRequest
+      attr_accessor control_panel_arn: ::String
+      attr_accessor control_panel_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateControlPanelResponse
+      attr_accessor control_panel: Types::ControlPanel
+      SENSITIVE: []
+    end
+
+    class UpdateRoutingControlRequest
+      attr_accessor routing_control_arn: ::String
+      attr_accessor routing_control_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRoutingControlResponse
+      attr_accessor routing_control: Types::RoutingControl
+      SENSITIVE: []
+    end
+
+    class UpdateSafetyRuleRequest
+      attr_accessor assertion_rule_update: Types::AssertionRuleUpdate
+      attr_accessor gating_rule_update: Types::GatingRuleUpdate
+      SENSITIVE: []
+    end
+
+    class UpdateSafetyRuleResponse
+      attr_accessor assertion_rule: Types::AssertionRule
+      attr_accessor gating_rule: Types::GatingRule
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Organizations
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Organizations
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::Organizations
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::Organizations
     #   @option options [Aws::Organizations::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Organizations::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -770,12 +795,12 @@ module Aws::Organizations
     #   information on using CloudTrail with Organizations, see [Logging and
     #   monitoring in Organizations][2] in the *Organizations User Guide*.
     #
-    # <note markdown="1"> * You can close only 10% of member accounts, between 10 and 200,
+    # <note markdown="1"> * You can close only 10% of member accounts, between 10 and 1000,
     #   within a rolling 30 day period. This quota is not bound by a
     #   calendar month, but starts when you close an account. After you
     #   reach this limit, you can close additional accounts. For more
     #   information, see [Closing a member account in your organization][3]
-    #   in the *Organizations User Guide*.
+    #   and [Quotas for Organizations][4]in the *Organizations User Guide*.
     #
     # * To reinstate a closed account, contact Amazon Web Services Support
     #   within the 90-day grace period while the account is in SUSPENDED
@@ -785,7 +810,7 @@ module Aws::Organizations
     #   an Amazon Web Services GovCloud (US) account, the `CloseAccount`
     #   request will close both accounts. To learn important pre-closure
     #   details, see [ Closing an Amazon Web Services GovCloud (US)
-    #   account][4] in the <i> Amazon Web Services GovCloud User Guide</i>.
+    #   account][5] in the <i> Amazon Web Services GovCloud User Guide</i>.
     #
     #  </note>
     #
@@ -794,7 +819,8 @@ module Aws::Organizations
     # [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
     # [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration
     # [3]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html
-    # [4]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html
+    # [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html
+    # [5]: https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html
     #
     # @option params [required, String] :account_id
     #   Retrieves the Amazon Web Services account Id for the current
@@ -1606,6 +1632,14 @@ module Aws::Organizations
     #   The policy text content to add to the new policy. The text that you
     #   supply must adhere to the rules of the policy type you specify in the
     #   `Type` parameter.
+    #
+    #   The maximum size of a policy document depends on the policy's type.
+    #   For more information, see [Maximum and minimum values][1] in the
+    #   *Organizations User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html#min-max-values
     #
     # @option params [required, String] :description
     #   An optional description to assign to the policy.
@@ -5635,9 +5669,14 @@ module Aws::Organizations
     #   policy's type. For more information, see [SCP syntax][1] in the
     #   *Organizations User Guide*.
     #
+    #   The maximum size of a policy document depends on the policy's type.
+    #   For more information, see [Maximum and minimum values][2] in the
+    #   *Organizations User Guide*.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html
+    #   [2]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html#min-max-values
     #
     # @return [Types::UpdatePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5736,7 +5775,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

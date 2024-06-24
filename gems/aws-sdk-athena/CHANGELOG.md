@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2024-06-19)
+------------------
+
+* Feature - Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
+1.85.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.84.0 (2024-05-29)
+------------------
+
+* Feature - Throwing validation errors on CreateNotebook with Name containing `/`,`:`,`\`
+
+1.83.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.82.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.81.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2024-01-19)
+------------------
+
+* Feature - Introducing new NotebookS3LocationUri parameter to Athena ImportNotebook API. Payload is no longer required and either Payload or NotebookS3LocationUri needs to be provided (not both) for a successful ImportNotebook API call. If both are provided, an InvalidRequestException will be thrown.
+
+1.79.0 (2023-12-05)
+------------------
+
+* Feature - Adding IdentityCenter enabled request for interactive query
+
+1.78.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.77.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.76.0 (2023-11-17)
+------------------
+
+* Feature - Adding SerivicePreProcessing time metric
+
 1.75.0 (2023-09-27)
 ------------------
 

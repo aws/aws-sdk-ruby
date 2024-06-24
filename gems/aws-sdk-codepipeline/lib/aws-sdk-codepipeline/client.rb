@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CodePipeline
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CodePipeline
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::CodePipeline
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::CodePipeline
     #   @option options [Aws::CodePipeline::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CodePipeline::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -678,11 +703,61 @@ module Aws::CodePipeline
     #               role_arn: "RoleArn",
     #               region: "AWSRegionName",
     #               namespace: "ActionNamespace",
+    #               timeout_in_minutes: 1,
     #             },
     #           ],
+    #           on_failure: {
+    #             result: "ROLLBACK", # accepts ROLLBACK
+    #           },
     #         },
     #       ],
     #       version: 1,
+    #       execution_mode: "QUEUED", # accepts QUEUED, SUPERSEDED, PARALLEL
+    #       pipeline_type: "V1", # accepts V1, V2
+    #       variables: [
+    #         {
+    #           name: "PipelineVariableName", # required
+    #           default_value: "PipelineVariableValue",
+    #           description: "PipelineVariableDescription",
+    #         },
+    #       ],
+    #       triggers: [
+    #         {
+    #           provider_type: "CodeStarSourceConnection", # required, accepts CodeStarSourceConnection
+    #           git_configuration: { # required
+    #             source_action_name: "ActionName", # required
+    #             push: [
+    #               {
+    #                 tags: {
+    #                   includes: ["GitTagNamePattern"],
+    #                   excludes: ["GitTagNamePattern"],
+    #                 },
+    #                 branches: {
+    #                   includes: ["GitBranchNamePattern"],
+    #                   excludes: ["GitBranchNamePattern"],
+    #                 },
+    #                 file_paths: {
+    #                   includes: ["GitFilePathPattern"],
+    #                   excludes: ["GitFilePathPattern"],
+    #                 },
+    #               },
+    #             ],
+    #             pull_request: [
+    #               {
+    #                 events: ["OPEN"], # accepts OPEN, UPDATED, CLOSED
+    #                 branches: {
+    #                   includes: ["GitBranchNamePattern"],
+    #                   excludes: ["GitBranchNamePattern"],
+    #                 },
+    #                 file_paths: {
+    #                   includes: ["GitFilePathPattern"],
+    #                   excludes: ["GitFilePathPattern"],
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       ],
     #     },
     #     tags: [
     #       {
@@ -726,7 +801,42 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
+    #   resp.pipeline.stages[0].actions[0].timeout_in_minutes #=> Integer
+    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK"
     #   resp.pipeline.version #=> Integer
+    #   resp.pipeline.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
+    #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
+    #   resp.pipeline.variables #=> Array
+    #   resp.pipeline.variables[0].name #=> String
+    #   resp.pipeline.variables[0].default_value #=> String
+    #   resp.pipeline.variables[0].description #=> String
+    #   resp.pipeline.triggers #=> Array
+    #   resp.pipeline.triggers[0].provider_type #=> String, one of "CodeStarSourceConnection"
+    #   resp.pipeline.triggers[0].git_configuration.source_action_name #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].events #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].events[0] #=> String, one of "OPEN", "UPDATED", "CLOSED"
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.excludes[0] #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -1143,7 +1253,42 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
+    #   resp.pipeline.stages[0].actions[0].timeout_in_minutes #=> Integer
+    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK"
     #   resp.pipeline.version #=> Integer
+    #   resp.pipeline.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
+    #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
+    #   resp.pipeline.variables #=> Array
+    #   resp.pipeline.variables[0].name #=> String
+    #   resp.pipeline.variables[0].default_value #=> String
+    #   resp.pipeline.variables[0].description #=> String
+    #   resp.pipeline.triggers #=> Array
+    #   resp.pipeline.triggers[0].provider_type #=> String, one of "CodeStarSourceConnection"
+    #   resp.pipeline.triggers[0].git_configuration.source_action_name #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].events #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].events[0] #=> String, one of "OPEN", "UPDATED", "CLOSED"
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.excludes[0] #=> String
     #   resp.metadata.pipeline_arn #=> String
     #   resp.metadata.created #=> Time
     #   resp.metadata.updated #=> Time
@@ -1195,6 +1340,14 @@ module Aws::CodePipeline
     #   resp.pipeline_execution.artifact_revisions[0].revision_summary #=> String
     #   resp.pipeline_execution.artifact_revisions[0].created #=> Time
     #   resp.pipeline_execution.artifact_revisions[0].revision_url #=> String
+    #   resp.pipeline_execution.variables #=> Array
+    #   resp.pipeline_execution.variables[0].name #=> String
+    #   resp.pipeline_execution.variables[0].resolved_value #=> String
+    #   resp.pipeline_execution.trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision", "WebhookV2", "ManualRollback", "AutomatedRollback"
+    #   resp.pipeline_execution.trigger.trigger_detail #=> String
+    #   resp.pipeline_execution.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
+    #   resp.pipeline_execution.execution_type #=> String, one of "STANDARD", "ROLLBACK"
+    #   resp.pipeline_execution.rollback_metadata.rollback_target_pipeline_execution_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineExecution AWS API Documentation
     #
@@ -1239,6 +1392,11 @@ module Aws::CodePipeline
     #   resp.stage_states[0].stage_name #=> String
     #   resp.stage_states[0].inbound_execution.pipeline_execution_id #=> String
     #   resp.stage_states[0].inbound_execution.status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
+    #   resp.stage_states[0].inbound_execution.type #=> String, one of "STANDARD", "ROLLBACK"
+    #   resp.stage_states[0].inbound_executions #=> Array
+    #   resp.stage_states[0].inbound_executions[0].pipeline_execution_id #=> String
+    #   resp.stage_states[0].inbound_executions[0].status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
+    #   resp.stage_states[0].inbound_executions[0].type #=> String, one of "STANDARD", "ROLLBACK"
     #   resp.stage_states[0].inbound_transition_state.enabled #=> Boolean
     #   resp.stage_states[0].inbound_transition_state.last_changed_by #=> String
     #   resp.stage_states[0].inbound_transition_state.last_changed_at #=> Time
@@ -1263,6 +1421,7 @@ module Aws::CodePipeline
     #   resp.stage_states[0].action_states[0].revision_url #=> String
     #   resp.stage_states[0].latest_execution.pipeline_execution_id #=> String
     #   resp.stage_states[0].latest_execution.status #=> String, one of "Cancelled", "InProgress", "Failed", "Stopped", "Stopping", "Succeeded"
+    #   resp.stage_states[0].latest_execution.type #=> String, one of "STANDARD", "ROLLBACK"
     #   resp.created #=> Time
     #   resp.updated #=> Time
     #
@@ -1362,11 +1521,6 @@ module Aws::CodePipeline
     #   value. Action execution history is retained for up to 12 months, based
     #   on action execution start times. Default value is 100.
     #
-    #   <note markdown="1"> Detailed execution history is available for executions run on or after
-    #   February 21, 2019.
-    #
-    #    </note>
-    #
     # @option params [String] :next_token
     #   The token that was returned from the previous `ListActionExecutions`
     #   call, which can be used to return the next set of action executions in
@@ -1385,6 +1539,10 @@ module Aws::CodePipeline
     #     pipeline_name: "PipelineName", # required
     #     filter: {
     #       pipeline_execution_id: "PipelineExecutionId",
+    #       latest_in_pipeline_execution: {
+    #         pipeline_execution_id: "PipelineExecutionId", # required
+    #         start_time_range: "Latest", # required, accepts Latest, All
+    #       },
     #     },
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -1400,6 +1558,7 @@ module Aws::CodePipeline
     #   resp.action_execution_details[0].action_name #=> String
     #   resp.action_execution_details[0].start_time #=> Time
     #   resp.action_execution_details[0].last_update_time #=> Time
+    #   resp.action_execution_details[0].updated_by #=> String
     #   resp.action_execution_details[0].status #=> String, one of "InProgress", "Abandoned", "Succeeded", "Failed"
     #   resp.action_execution_details[0].input.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
     #   resp.action_execution_details[0].input.action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
@@ -1423,6 +1582,8 @@ module Aws::CodePipeline
     #   resp.action_execution_details[0].output.execution_result.external_execution_id #=> String
     #   resp.action_execution_details[0].output.execution_result.external_execution_summary #=> String
     #   resp.action_execution_details[0].output.execution_result.external_execution_url #=> String
+    #   resp.action_execution_details[0].output.execution_result.error_details.code #=> String
+    #   resp.action_execution_details[0].output.execution_result.error_details.message #=> String
     #   resp.action_execution_details[0].output.output_variables #=> Hash
     #   resp.action_execution_details[0].output.output_variables["OutputVariablesKey"] #=> String
     #   resp.next_token #=> String
@@ -1502,6 +1663,12 @@ module Aws::CodePipeline
 
     # Gets a summary of the most recent executions for a pipeline.
     #
+    # <note markdown="1"> When applying the filter for pipeline executions that have succeeded
+    # in the stage, the operation returns all executions in the current
+    # pipeline version beginning on February 1, 2024.
+    #
+    #  </note>
+    #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline for which you want to get execution summary
     #   information.
@@ -1511,6 +1678,9 @@ module Aws::CodePipeline
     #   the remaining results, make another call with the returned nextToken
     #   value. Pipeline history is limited to the most recent 12 months, based
     #   on pipeline execution start times. Default value is 100.
+    #
+    # @option params [Types::PipelineExecutionFilter] :filter
+    #   The pipeline execution to filter on.
     #
     # @option params [String] :next_token
     #   The token that was returned from the previous `ListPipelineExecutions`
@@ -1529,6 +1699,11 @@ module Aws::CodePipeline
     #   resp = client.list_pipeline_executions({
     #     pipeline_name: "PipelineName", # required
     #     max_results: 1,
+    #     filter: {
+    #       succeeded_in_stage: {
+    #         stage_name: "StageName",
+    #       },
+    #     },
     #     next_token: "NextToken",
     #   })
     #
@@ -1537,6 +1712,7 @@ module Aws::CodePipeline
     #   resp.pipeline_execution_summaries #=> Array
     #   resp.pipeline_execution_summaries[0].pipeline_execution_id #=> String
     #   resp.pipeline_execution_summaries[0].status #=> String, one of "Cancelled", "InProgress", "Stopped", "Stopping", "Succeeded", "Superseded", "Failed"
+    #   resp.pipeline_execution_summaries[0].status_summary #=> String
     #   resp.pipeline_execution_summaries[0].start_time #=> Time
     #   resp.pipeline_execution_summaries[0].last_update_time #=> Time
     #   resp.pipeline_execution_summaries[0].source_revisions #=> Array
@@ -1544,9 +1720,12 @@ module Aws::CodePipeline
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_id #=> String
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_summary #=> String
     #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_url #=> String
-    #   resp.pipeline_execution_summaries[0].trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision"
+    #   resp.pipeline_execution_summaries[0].trigger.trigger_type #=> String, one of "CreatePipeline", "StartPipelineExecution", "PollForSourceChanges", "Webhook", "CloudWatchEvent", "PutActionRevision", "WebhookV2", "ManualRollback", "AutomatedRollback"
     #   resp.pipeline_execution_summaries[0].trigger.trigger_detail #=> String
     #   resp.pipeline_execution_summaries[0].stop_trigger.reason #=> String
+    #   resp.pipeline_execution_summaries[0].execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
+    #   resp.pipeline_execution_summaries[0].execution_type #=> String, one of "STANDARD", "ROLLBACK"
+    #   resp.pipeline_execution_summaries[0].rollback_metadata.rollback_target_pipeline_execution_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutions AWS API Documentation
@@ -1589,6 +1768,8 @@ module Aws::CodePipeline
     #   resp.pipelines #=> Array
     #   resp.pipelines[0].name #=> String
     #   resp.pipelines[0].version #=> Integer
+    #   resp.pipelines[0].pipeline_type #=> String, one of "V1", "V2"
+    #   resp.pipelines[0].execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
     #   resp.pipelines[0].created #=> Time
     #   resp.pipelines[0].updated #=> Time
     #   resp.next_token #=> String
@@ -2229,10 +2410,15 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
-    # Resumes the pipeline execution by retrying the last failed actions in
-    # a stage. You can retry a stage immediately if any of the actions in
-    # the stage fail. When you retry, all actions that are still in progress
-    # continue working, and failed actions are triggered again.
+    # You can retry a stage that has failed without having to run a pipeline
+    # again from the beginning. You do this by either retrying the failed
+    # actions in a stage or by retrying all actions in the stage starting
+    # from the first action in the stage. When you retry the failed actions
+    # in a stage, all actions that are still in progress continue working,
+    # and failed actions are triggered again. When you retry a failed stage
+    # from the first action in the stage, the stage cannot have any actions
+    # in progress. Before a stage can be retried, it must either have all
+    # actions failed or some actions failed and some succeeded.
     #
     # @option params [required, String] :pipeline_name
     #   The name of the pipeline that contains the failed stage.
@@ -2246,8 +2432,7 @@ module Aws::CodePipeline
     #   pipelineExecutionId of the failed stage
     #
     # @option params [required, String] :retry_mode
-    #   The scope of the retry attempt. Currently, the only supported value is
-    #   FAILED\_ACTIONS.
+    #   The scope of the retry attempt.
     #
     # @return [Types::RetryStageExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2259,7 +2444,7 @@ module Aws::CodePipeline
     #     pipeline_name: "PipelineName", # required
     #     stage_name: "StageName", # required
     #     pipeline_execution_id: "PipelineExecutionId", # required
-    #     retry_mode: "FAILED_ACTIONS", # required, accepts FAILED_ACTIONS
+    #     retry_mode: "FAILED_ACTIONS", # required, accepts FAILED_ACTIONS, ALL_ACTIONS
     #   })
     #
     # @example Response structure
@@ -2275,6 +2460,42 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
+    # Rolls back a stage execution.
+    #
+    # @option params [required, String] :pipeline_name
+    #   The name of the pipeline for which the stage will be rolled back.
+    #
+    # @option params [required, String] :stage_name
+    #   The name of the stage in the pipeline to be rolled back.
+    #
+    # @option params [required, String] :target_pipeline_execution_id
+    #   The pipeline execution ID for the stage to be rolled back to.
+    #
+    # @return [Types::RollbackStageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RollbackStageOutput#pipeline_execution_id #pipeline_execution_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.rollback_stage({
+    #     pipeline_name: "PipelineName", # required
+    #     stage_name: "StageName", # required
+    #     target_pipeline_execution_id: "PipelineExecutionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pipeline_execution_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RollbackStage AWS API Documentation
+    #
+    # @overload rollback_stage(params = {})
+    # @param [Hash] params ({})
+    def rollback_stage(params = {}, options = {})
+      req = build_request(:rollback_stage, params)
+      req.send_request(options)
+    end
+
     # Starts the specified pipeline. Specifically, it begins processing the
     # latest commit to the source location specified as part of the
     # pipeline.
@@ -2282,12 +2503,23 @@ module Aws::CodePipeline
     # @option params [required, String] :name
     #   The name of the pipeline to start.
     #
+    # @option params [Array<Types::PipelineVariable>] :variables
+    #   A list that overrides pipeline variables for a pipeline execution
+    #   that's being started. Variable names must match `[A-Za-z0-9@\-_]+`,
+    #   and the values can be anything except an empty string.
+    #
     # @option params [String] :client_request_token
     #   The system-generated unique ID used to identify a unique execution
     #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    # @option params [Array<Types::SourceRevisionOverride>] :source_revisions
+    #   A list that allows you to specify, or override, the source revision
+    #   for a pipeline execution that's being started. A source revision is
+    #   the version with all the changes to your application code, or source
+    #   artifact, for the pipeline execution.
     #
     # @return [Types::StartPipelineExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2297,7 +2529,20 @@ module Aws::CodePipeline
     #
     #   resp = client.start_pipeline_execution({
     #     name: "PipelineName", # required
+    #     variables: [
+    #       {
+    #         name: "PipelineVariableName", # required
+    #         value: "PipelineVariableValue", # required
+    #       },
+    #     ],
     #     client_request_token: "ClientRequestToken",
+    #     source_revisions: [
+    #       {
+    #         action_name: "ActionName", # required
+    #         revision_type: "COMMIT_ID", # required, accepts COMMIT_ID, IMAGE_DIGEST, S3_OBJECT_VERSION_ID, S3_OBJECT_KEY
+    #         revision_value: "Revision", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2570,11 +2815,61 @@ module Aws::CodePipeline
     #               role_arn: "RoleArn",
     #               region: "AWSRegionName",
     #               namespace: "ActionNamespace",
+    #               timeout_in_minutes: 1,
     #             },
     #           ],
+    #           on_failure: {
+    #             result: "ROLLBACK", # accepts ROLLBACK
+    #           },
     #         },
     #       ],
     #       version: 1,
+    #       execution_mode: "QUEUED", # accepts QUEUED, SUPERSEDED, PARALLEL
+    #       pipeline_type: "V1", # accepts V1, V2
+    #       variables: [
+    #         {
+    #           name: "PipelineVariableName", # required
+    #           default_value: "PipelineVariableValue",
+    #           description: "PipelineVariableDescription",
+    #         },
+    #       ],
+    #       triggers: [
+    #         {
+    #           provider_type: "CodeStarSourceConnection", # required, accepts CodeStarSourceConnection
+    #           git_configuration: { # required
+    #             source_action_name: "ActionName", # required
+    #             push: [
+    #               {
+    #                 tags: {
+    #                   includes: ["GitTagNamePattern"],
+    #                   excludes: ["GitTagNamePattern"],
+    #                 },
+    #                 branches: {
+    #                   includes: ["GitBranchNamePattern"],
+    #                   excludes: ["GitBranchNamePattern"],
+    #                 },
+    #                 file_paths: {
+    #                   includes: ["GitFilePathPattern"],
+    #                   excludes: ["GitFilePathPattern"],
+    #                 },
+    #               },
+    #             ],
+    #             pull_request: [
+    #               {
+    #                 events: ["OPEN"], # accepts OPEN, UPDATED, CLOSED
+    #                 branches: {
+    #                   includes: ["GitBranchNamePattern"],
+    #                   excludes: ["GitBranchNamePattern"],
+    #                 },
+    #                 file_paths: {
+    #                   includes: ["GitFilePathPattern"],
+    #                   excludes: ["GitFilePathPattern"],
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -2612,7 +2907,42 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.stages[0].actions[0].region #=> String
     #   resp.pipeline.stages[0].actions[0].namespace #=> String
+    #   resp.pipeline.stages[0].actions[0].timeout_in_minutes #=> Integer
+    #   resp.pipeline.stages[0].on_failure.result #=> String, one of "ROLLBACK"
     #   resp.pipeline.version #=> Integer
+    #   resp.pipeline.execution_mode #=> String, one of "QUEUED", "SUPERSEDED", "PARALLEL"
+    #   resp.pipeline.pipeline_type #=> String, one of "V1", "V2"
+    #   resp.pipeline.variables #=> Array
+    #   resp.pipeline.variables[0].name #=> String
+    #   resp.pipeline.variables[0].default_value #=> String
+    #   resp.pipeline.variables[0].description #=> String
+    #   resp.pipeline.triggers #=> Array
+    #   resp.pipeline.triggers[0].provider_type #=> String, one of "CodeStarSourceConnection"
+    #   resp.pipeline.triggers[0].git_configuration.source_action_name #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].tags.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].branches.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.push[0].file_paths.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].events #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].events[0] #=> String, one of "OPEN", "UPDATED", "CLOSED"
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].branches.excludes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.includes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.includes[0] #=> String
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.excludes #=> Array
+    #   resp.pipeline.triggers[0].git_configuration.pull_request[0].file_paths.excludes[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdatePipeline AWS API Documentation
     #
@@ -2636,7 +2966,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

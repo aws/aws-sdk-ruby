@@ -21,13 +21,13 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/request_compression.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
-require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/sign.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-core/plugins/event_stream_configuration.rb'
@@ -54,13 +54,13 @@ module Aws::TranscribeStreamingService
     add_plugin(Aws::Plugins::RegionalEndpoint)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::RequestCompression)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
-    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::Sign)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::Plugins::EventStreamConfiguration)
@@ -147,10 +147,17 @@ module Aws::TranscribeStreamingService
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Proc] :event_stream_handler
     #     When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
@@ -237,8 +244,9 @@ module Aws::TranscribeStreamingService
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -281,6 +289,44 @@ module Aws::TranscribeStreamingService
     #
     #   @option options [Aws::TranscribeStreamingService::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::TranscribeStreamingService::EndpointParameters`
+    #
+    #   @option options [Integer] :connection_read_timeout (60)
+    #     Connection read timeout in seconds, defaults to 60 sec.
+    #
+    #   @option options [Integer] :connection_timeout (60)
+    #     Connection timeout in seconds, defaults to 60 sec.
+    #
+    #   @option options [Boolean] :enable_alpn (false)
+    #     Set to `true` to enable ALPN in HTTP2 over TLS. Requires Openssl version >= 1.0.2.
+    #     Defaults to false. Note: not all service HTTP2 operations supports ALPN on server
+    #     side, please refer to service documentation.
+    #
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`, HTTP2 debug output will be sent to the `:logger`.
+    #
+    #   @option options [Integer] :max_concurrent_streams (100)
+    #     Maximum concurrent streams used in HTTP2 connection, defaults to 100. Note that server may send back
+    #     :settings_max_concurrent_streams value which will take priority when initializing new streams.
+    #
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     Defaults to `true`, raises errors if exist when #wait or #join! is called upon async response.
+    #
+    #   @option options [Integer] :read_chunk_size (1024)
+    #
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates. If you do not pass `:ssl_ca_directory` or `:ssl_ca_bundle`
+    #     the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate authority
+    #     files for verifying peer certificates. If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       unless Kernel.const_defined?("HTTP2")
@@ -506,19 +552,20 @@ module Aws::TranscribeStreamingService
     #
     # @example Bi-directional EventStream Operation Example
     #
-    #   You can signal input events after initial request is
-    #   established, events will be sent to stream
-    #   immediately (once stream connection is established successfully).
+    #   You can signal input events after the initial request is established. Events
+    #   will be sent to the stream immediately once the stream connection is
+    #   established successfully.
     #
-    #   To signal events, you can call #signal methods from an Aws::TranscribeStreamingService::EventStreams::AudioStream object.
-    #   Make sure signal events before calling #wait or #join! at async response.
+    #   To signal events, you can call the #signal methods from an Aws::TranscribeStreamingService::EventStreams::AudioStream
+    #   object. You must signal events before calling #wait or #join! on the async response.
     #
     #     input_stream = Aws::TranscribeStreamingService::EventStreams::AudioStream.new
     #
-    #     async_resp = client.start_call_analytics_stream_transcription( # params input,
+    #     async_resp = client.start_call_analytics_stream_transcription(
+    #       # params input
     #       input_event_stream_handler: input_stream) do |out_stream|
     #
-    #       # register callbacks for events arrival
+    #       # register callbacks for events
     #       out_stream.on_utterance_event_event do |event|
     #         event # => Aws::TranscribeStreamingService::Types::UtteranceEvent
     #       end
@@ -542,25 +589,25 @@ module Aws::TranscribeStreamingService
     #       end
     #
     #     end
-    #     # => returns Aws::Seahorse::Client::AsyncResponse
+    #     # => Aws::Seahorse::Client::AsyncResponse
     #
     #     # signal events
     #     input_stream.signal_audio_event_event( ... )
     #     input_stream.signal_configuration_event_event( ... )
     #
-    #     # make sure signaling :end_stream in the end
+    #     # make sure to signal :end_stream at the end
     #     input_stream.signal_end_stream
     #
-    #     # wait until stream is closed before finalizing sync response
+    #     # wait until stream is closed before finalizing the sync response
     #     resp = async_resp.wait
-    #     # Or close stream and finalizing sync response immediately
+    #     # Or close the stream and finalize sync response immediately
     #     # resp = async_resp.join!
     #
-    #   Inorder to streamingly processing events received, you can also provide an Aws::TranscribeStreamingService::EventStreams::CallAnalyticsTranscriptResultStream
-    #   object to register callbacks before initializing request instead of processing from request block
+    #   You can also provide an Aws::TranscribeStreamingService::EventStreams::CallAnalyticsTranscriptResultStream object to register callbacks
+    #   before initializing the request instead of processing from the request block.
     #
     #     output_stream = Aws::TranscribeStreamingService::EventStreams::CallAnalyticsTranscriptResultStream.new
-    #     # register callbacks for events arrival
+    #     # register callbacks for output events
     #     output_stream.on_utterance_event_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::UtteranceEvent
     #     end
@@ -591,15 +638,15 @@ module Aws::TranscribeStreamingService
     #       # event.error_message => String
     #     end
     #
-    #     async_resp = client.start_call_analytics_stream_transcription ( #params input,
+    #     async_resp = client.start_call_analytics_stream_transcription (
+    #       # params input
     #       input_event_stream_handler: input_stream
     #       output_event_stream_handler: output_stream
     #     )
     #
-    #     resp = async_resp.wait!
+    #     resp = async_resp.join!
     #
-    #   Besides above usage patterns for process events when they arrive immediately, you can also
-    #   iterate through events after response complete.
+    #   You can also iterate through events after the response is complete.
     #
     #   Events are available at resp.call_analytics_transcript_result_stream # => Enumerator
     #
@@ -856,19 +903,20 @@ module Aws::TranscribeStreamingService
     #
     # @example Bi-directional EventStream Operation Example
     #
-    #   You can signal input events after initial request is
-    #   established, events will be sent to stream
-    #   immediately (once stream connection is established successfully).
+    #   You can signal input events after the initial request is established. Events
+    #   will be sent to the stream immediately once the stream connection is
+    #   established successfully.
     #
-    #   To signal events, you can call #signal methods from an Aws::TranscribeStreamingService::EventStreams::AudioStream object.
-    #   Make sure signal events before calling #wait or #join! at async response.
+    #   To signal events, you can call the #signal methods from an Aws::TranscribeStreamingService::EventStreams::AudioStream
+    #   object. You must signal events before calling #wait or #join! on the async response.
     #
     #     input_stream = Aws::TranscribeStreamingService::EventStreams::AudioStream.new
     #
-    #     async_resp = client.start_medical_stream_transcription( # params input,
+    #     async_resp = client.start_medical_stream_transcription(
+    #       # params input
     #       input_event_stream_handler: input_stream) do |out_stream|
     #
-    #       # register callbacks for events arrival
+    #       # register callbacks for events
     #       out_stream.on_transcript_event_event do |event|
     #         event # => Aws::TranscribeStreamingService::Types::TranscriptEvent
     #       end
@@ -889,25 +937,25 @@ module Aws::TranscribeStreamingService
     #       end
     #
     #     end
-    #     # => returns Aws::Seahorse::Client::AsyncResponse
+    #     # => Aws::Seahorse::Client::AsyncResponse
     #
     #     # signal events
     #     input_stream.signal_audio_event_event( ... )
     #     input_stream.signal_configuration_event_event( ... )
     #
-    #     # make sure signaling :end_stream in the end
+    #     # make sure to signal :end_stream at the end
     #     input_stream.signal_end_stream
     #
-    #     # wait until stream is closed before finalizing sync response
+    #     # wait until stream is closed before finalizing the sync response
     #     resp = async_resp.wait
-    #     # Or close stream and finalizing sync response immediately
+    #     # Or close the stream and finalize sync response immediately
     #     # resp = async_resp.join!
     #
-    #   Inorder to streamingly processing events received, you can also provide an Aws::TranscribeStreamingService::EventStreams::MedicalTranscriptResultStream
-    #   object to register callbacks before initializing request instead of processing from request block
+    #   You can also provide an Aws::TranscribeStreamingService::EventStreams::MedicalTranscriptResultStream object to register callbacks
+    #   before initializing the request instead of processing from the request block.
     #
     #     output_stream = Aws::TranscribeStreamingService::EventStreams::MedicalTranscriptResultStream.new
-    #     # register callbacks for events arrival
+    #     # register callbacks for output events
     #     output_stream.on_transcript_event_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::TranscriptEvent
     #     end
@@ -935,15 +983,15 @@ module Aws::TranscribeStreamingService
     #       # event.error_message => String
     #     end
     #
-    #     async_resp = client.start_medical_stream_transcription ( #params input,
+    #     async_resp = client.start_medical_stream_transcription (
+    #       # params input
     #       input_event_stream_handler: input_stream
     #       output_event_stream_handler: output_stream
     #     )
     #
-    #     resp = async_resp.wait!
+    #     resp = async_resp.join!
     #
-    #   Besides above usage patterns for process events when they arrive immediately, you can also
-    #   iterate through events after response complete.
+    #   You can also iterate through events after the response is complete.
     #
     #   Events are available at resp.transcript_result_stream # => Enumerator
     #
@@ -1060,7 +1108,8 @@ module Aws::TranscribeStreamingService
     #
     # The following parameters are required:
     #
-    # * `language-code` or `identify-language`
+    # * `language-code` or `identify-language` or
+    #   `identify-multiple-language`
     #
     # * `media-encoding`
     #
@@ -1306,7 +1355,8 @@ module Aws::TranscribeStreamingService
     #   channel.
     #
     #   Note that you must include either `LanguageCode` or `IdentifyLanguage`
-    #   in your request. If you include both parameters, your request fails.
+    #   or `IdentifyMultipleLanguages` in your request. If you include more
+    #   than one of these parameters, your transcription job fails.
     #
     #   Streaming language identification can't be combined with custom
     #   language models or redaction.
@@ -1339,6 +1389,26 @@ module Aws::TranscribeStreamingService
     #
     #   You can only use this parameter if you've included `IdentifyLanguage`
     #   and `LanguageOptions` in your request.
+    #
+    # @option params [Boolean] :identify_multiple_languages
+    #   Enables automatic multi-language identification in your transcription
+    #   job request. Use this parameter if your stream contains more than one
+    #   language. If your stream contains only one language, use
+    #   IdentifyLanguage instead.
+    #
+    #   If you include `IdentifyMultipleLanguages`, you can optionally include
+    #   a list of language codes, using `LanguageOptions`, that you think may
+    #   be present in your stream. Including `LanguageOptions` restricts
+    #   `IdentifyMultipleLanguages` to only the language options that you
+    #   specify, which can improve transcription accuracy.
+    #
+    #   If you want to apply a custom vocabulary or a custom vocabulary filter
+    #   to your automatic multiple language identification request, include
+    #   `VocabularyNames` or `VocabularyFilterNames`.
+    #
+    #   Note that you must include one of `LanguageCode`, `IdentifyLanguage`,
+    #   or `IdentifyMultipleLanguages` in your request. If you include more
+    #   than one of these parameters, your transcription job fails.
     #
     # @option params [String] :vocabulary_names
     #   Specify the names of the custom vocabularies that you want to use when
@@ -1403,24 +1473,26 @@ module Aws::TranscribeStreamingService
     #   * {Types::StartStreamTranscriptionResponse#identify_language #identify_language} => Boolean
     #   * {Types::StartStreamTranscriptionResponse#language_options #language_options} => String
     #   * {Types::StartStreamTranscriptionResponse#preferred_language #preferred_language} => String
+    #   * {Types::StartStreamTranscriptionResponse#identify_multiple_languages #identify_multiple_languages} => Boolean
     #   * {Types::StartStreamTranscriptionResponse#vocabulary_names #vocabulary_names} => String
     #   * {Types::StartStreamTranscriptionResponse#vocabulary_filter_names #vocabulary_filter_names} => String
     #
     # @example Bi-directional EventStream Operation Example
     #
-    #   You can signal input events after initial request is
-    #   established, events will be sent to stream
-    #   immediately (once stream connection is established successfully).
+    #   You can signal input events after the initial request is established. Events
+    #   will be sent to the stream immediately once the stream connection is
+    #   established successfully.
     #
-    #   To signal events, you can call #signal methods from an Aws::TranscribeStreamingService::EventStreams::AudioStream object.
-    #   Make sure signal events before calling #wait or #join! at async response.
+    #   To signal events, you can call the #signal methods from an Aws::TranscribeStreamingService::EventStreams::AudioStream
+    #   object. You must signal events before calling #wait or #join! on the async response.
     #
     #     input_stream = Aws::TranscribeStreamingService::EventStreams::AudioStream.new
     #
-    #     async_resp = client.start_stream_transcription( # params input,
+    #     async_resp = client.start_stream_transcription(
+    #       # params input
     #       input_event_stream_handler: input_stream) do |out_stream|
     #
-    #       # register callbacks for events arrival
+    #       # register callbacks for events
     #       out_stream.on_transcript_event_event do |event|
     #         event # => Aws::TranscribeStreamingService::Types::TranscriptEvent
     #       end
@@ -1441,25 +1513,25 @@ module Aws::TranscribeStreamingService
     #       end
     #
     #     end
-    #     # => returns Aws::Seahorse::Client::AsyncResponse
+    #     # => Aws::Seahorse::Client::AsyncResponse
     #
     #     # signal events
     #     input_stream.signal_audio_event_event( ... )
     #     input_stream.signal_configuration_event_event( ... )
     #
-    #     # make sure signaling :end_stream in the end
+    #     # make sure to signal :end_stream at the end
     #     input_stream.signal_end_stream
     #
-    #     # wait until stream is closed before finalizing sync response
+    #     # wait until stream is closed before finalizing the sync response
     #     resp = async_resp.wait
-    #     # Or close stream and finalizing sync response immediately
+    #     # Or close the stream and finalize sync response immediately
     #     # resp = async_resp.join!
     #
-    #   Inorder to streamingly processing events received, you can also provide an Aws::TranscribeStreamingService::EventStreams::TranscriptResultStream
-    #   object to register callbacks before initializing request instead of processing from request block
+    #   You can also provide an Aws::TranscribeStreamingService::EventStreams::TranscriptResultStream object to register callbacks
+    #   before initializing the request instead of processing from the request block.
     #
     #     output_stream = Aws::TranscribeStreamingService::EventStreams::TranscriptResultStream.new
-    #     # register callbacks for events arrival
+    #     # register callbacks for output events
     #     output_stream.on_transcript_event_event do |event|
     #       event # => Aws::TranscribeStreamingService::Types::TranscriptEvent
     #     end
@@ -1487,15 +1559,15 @@ module Aws::TranscribeStreamingService
     #       # event.error_message => String
     #     end
     #
-    #     async_resp = client.start_stream_transcription ( #params input,
+    #     async_resp = client.start_stream_transcription (
+    #       # params input
     #       input_event_stream_handler: input_stream
     #       output_event_stream_handler: output_stream
     #     )
     #
-    #     resp = async_resp.wait!
+    #     resp = async_resp.join!
     #
-    #   Besides above usage patterns for process events when they arrive immediately, you can also
-    #   iterate through events after response complete.
+    #   You can also iterate through events after the response is complete.
     #
     #   Events are available at resp.transcript_result_stream # => Enumerator
     #
@@ -1522,6 +1594,7 @@ module Aws::TranscribeStreamingService
     #     identify_language: false,
     #     language_options: "LanguageOptions",
     #     preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN, hi-IN, th-TH
+    #     identify_multiple_languages: false,
     #     vocabulary_names: "VocabularyNames",
     #     vocabulary_filter_names: "VocabularyFilterNames",
     #   })
@@ -1601,6 +1674,7 @@ module Aws::TranscribeStreamingService
     #   resp.identify_language #=> Boolean
     #   resp.language_options #=> String
     #   resp.preferred_language #=> String, one of "en-US", "en-GB", "es-US", "fr-CA", "fr-FR", "en-AU", "it-IT", "de-DE", "pt-BR", "ja-JP", "ko-KR", "zh-CN", "hi-IN", "th-TH"
+    #   resp.identify_multiple_languages #=> Boolean
     #   resp.vocabulary_names #=> String
     #   resp.vocabulary_filter_names #=> String
     #
@@ -1647,7 +1721,7 @@ module Aws::TranscribeStreamingService
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribestreamingservice'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

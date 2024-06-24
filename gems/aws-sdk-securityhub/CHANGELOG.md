@@ -1,6 +1,86 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2024-06-20)
+------------------
+
+* Feature - Documentation updates for Security Hub
+
+1.109.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.108.0 (2024-05-29)
+------------------
+
+* Feature - Add ROOT type for TargetType model
+
+1.107.0 (2024-05-15)
+------------------
+
+* Feature - Documentation-only update for AWS Security Hub
+
+1.106.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.105.0 (2024-05-01)
+------------------
+
+* Feature - Updated CreateMembers API request with limits.
+
+1.104.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.103.0 (2024-04-02)
+------------------
+
+* Feature - Documentation updates for AWS Security Hub
+
+1.102.0 (2024-03-22)
+------------------
+
+* Feature - Added new resource detail object to ASFF, including resource for LastKnownExploitAt
+
+1.101.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2024-01-16)
+------------------
+
+* Feature - Documentation updates for AWS Security Hub
+
+1.99.0 (2023-12-11)
+------------------
+
+* Feature - Added new resource detail objects to ASFF, including resources for AwsDynamoDbTable, AwsEc2ClientVpnEndpoint, AwsMskCluster, AwsS3AccessPoint, AwsS3Bucket
+
+1.98.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.97.0 (2023-11-27)
+------------------
+
+* Feature - Adds and updates APIs to support central configuration. This feature allows the Security Hub delegated administrator to configure Security Hub for their entire AWS Org across multiple regions from a home Region. With this release, findings also include account name and application metadata.
+
+1.96.0 (2023-11-27)
+------------------
+
+* Feature - Adds and updates APIs to support customizable security controls. This feature allows Security Hub customers to provide custom parameters for security controls. With this release, findings for controls that support custom parameters will include the parameters used to generate the findings.
+
+1.95.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.94.0 (2023-10-05)
 ------------------
 

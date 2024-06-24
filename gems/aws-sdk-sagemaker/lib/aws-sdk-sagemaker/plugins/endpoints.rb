@@ -14,6 +14,7 @@ module Aws::SageMaker
       option(
         :endpoint_provider,
         doc_type: 'Aws::SageMaker::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::SageMaker
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -78,6 +80,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::CreateAutoMLJob.build(context)
           when :create_auto_ml_job_v2
             Aws::SageMaker::Endpoints::CreateAutoMLJobV2.build(context)
+          when :create_cluster
+            Aws::SageMaker::Endpoints::CreateCluster.build(context)
           when :create_code_repository
             Aws::SageMaker::Endpoints::CreateCodeRepository.build(context)
           when :create_compilation_job
@@ -108,6 +112,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::CreateFlowDefinition.build(context)
           when :create_hub
             Aws::SageMaker::Endpoints::CreateHub.build(context)
+          when :create_hub_content_reference
+            Aws::SageMaker::Endpoints::CreateHubContentReference.build(context)
           when :create_human_task_ui
             Aws::SageMaker::Endpoints::CreateHumanTaskUi.build(context)
           when :create_hyper_parameter_tuning_job
@@ -116,12 +122,16 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::CreateImage.build(context)
           when :create_image_version
             Aws::SageMaker::Endpoints::CreateImageVersion.build(context)
+          when :create_inference_component
+            Aws::SageMaker::Endpoints::CreateInferenceComponent.build(context)
           when :create_inference_experiment
             Aws::SageMaker::Endpoints::CreateInferenceExperiment.build(context)
           when :create_inference_recommendations_job
             Aws::SageMaker::Endpoints::CreateInferenceRecommendationsJob.build(context)
           when :create_labeling_job
             Aws::SageMaker::Endpoints::CreateLabelingJob.build(context)
+          when :create_mlflow_tracking_server
+            Aws::SageMaker::Endpoints::CreateMlflowTrackingServer.build(context)
           when :create_model
             Aws::SageMaker::Endpoints::CreateModel.build(context)
           when :create_model_bias_job_definition
@@ -148,6 +158,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::CreatePipeline.build(context)
           when :create_presigned_domain_url
             Aws::SageMaker::Endpoints::CreatePresignedDomainUrl.build(context)
+          when :create_presigned_mlflow_tracking_server_url
+            Aws::SageMaker::Endpoints::CreatePresignedMlflowTrackingServerUrl.build(context)
           when :create_presigned_notebook_instance_url
             Aws::SageMaker::Endpoints::CreatePresignedNotebookInstanceUrl.build(context)
           when :create_processing_job
@@ -184,8 +196,12 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DeleteArtifact.build(context)
           when :delete_association
             Aws::SageMaker::Endpoints::DeleteAssociation.build(context)
+          when :delete_cluster
+            Aws::SageMaker::Endpoints::DeleteCluster.build(context)
           when :delete_code_repository
             Aws::SageMaker::Endpoints::DeleteCodeRepository.build(context)
+          when :delete_compilation_job
+            Aws::SageMaker::Endpoints::DeleteCompilationJob.build(context)
           when :delete_context
             Aws::SageMaker::Endpoints::DeleteContext.build(context)
           when :delete_data_quality_job_definition
@@ -212,14 +228,22 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DeleteHub.build(context)
           when :delete_hub_content
             Aws::SageMaker::Endpoints::DeleteHubContent.build(context)
+          when :delete_hub_content_reference
+            Aws::SageMaker::Endpoints::DeleteHubContentReference.build(context)
           when :delete_human_task_ui
             Aws::SageMaker::Endpoints::DeleteHumanTaskUi.build(context)
+          when :delete_hyper_parameter_tuning_job
+            Aws::SageMaker::Endpoints::DeleteHyperParameterTuningJob.build(context)
           when :delete_image
             Aws::SageMaker::Endpoints::DeleteImage.build(context)
           when :delete_image_version
             Aws::SageMaker::Endpoints::DeleteImageVersion.build(context)
+          when :delete_inference_component
+            Aws::SageMaker::Endpoints::DeleteInferenceComponent.build(context)
           when :delete_inference_experiment
             Aws::SageMaker::Endpoints::DeleteInferenceExperiment.build(context)
+          when :delete_mlflow_tracking_server
+            Aws::SageMaker::Endpoints::DeleteMlflowTrackingServer.build(context)
           when :delete_model
             Aws::SageMaker::Endpoints::DeleteModel.build(context)
           when :delete_model_bias_job_definition
@@ -278,6 +302,10 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DescribeAutoMLJob.build(context)
           when :describe_auto_ml_job_v2
             Aws::SageMaker::Endpoints::DescribeAutoMLJobV2.build(context)
+          when :describe_cluster
+            Aws::SageMaker::Endpoints::DescribeCluster.build(context)
+          when :describe_cluster_node
+            Aws::SageMaker::Endpoints::DescribeClusterNode.build(context)
           when :describe_code_repository
             Aws::SageMaker::Endpoints::DescribeCodeRepository.build(context)
           when :describe_compilation_job
@@ -320,6 +348,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DescribeImage.build(context)
           when :describe_image_version
             Aws::SageMaker::Endpoints::DescribeImageVersion.build(context)
+          when :describe_inference_component
+            Aws::SageMaker::Endpoints::DescribeInferenceComponent.build(context)
           when :describe_inference_experiment
             Aws::SageMaker::Endpoints::DescribeInferenceExperiment.build(context)
           when :describe_inference_recommendations_job
@@ -328,6 +358,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::DescribeLabelingJob.build(context)
           when :describe_lineage_group
             Aws::SageMaker::Endpoints::DescribeLineageGroup.build(context)
+          when :describe_mlflow_tracking_server
+            Aws::SageMaker::Endpoints::DescribeMlflowTrackingServer.build(context)
           when :describe_model
             Aws::SageMaker::Endpoints::DescribeModel.build(context)
           when :describe_model_bias_job_definition
@@ -418,6 +450,10 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::ListAutoMLJobs.build(context)
           when :list_candidates_for_auto_ml_job
             Aws::SageMaker::Endpoints::ListCandidatesForAutoMLJob.build(context)
+          when :list_cluster_nodes
+            Aws::SageMaker::Endpoints::ListClusterNodes.build(context)
+          when :list_clusters
+            Aws::SageMaker::Endpoints::ListClusters.build(context)
           when :list_code_repositories
             Aws::SageMaker::Endpoints::ListCodeRepositories.build(context)
           when :list_compilation_jobs
@@ -460,6 +496,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::ListImageVersions.build(context)
           when :list_images
             Aws::SageMaker::Endpoints::ListImages.build(context)
+          when :list_inference_components
+            Aws::SageMaker::Endpoints::ListInferenceComponents.build(context)
           when :list_inference_experiments
             Aws::SageMaker::Endpoints::ListInferenceExperiments.build(context)
           when :list_inference_recommendations_job_steps
@@ -472,6 +510,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::ListLabelingJobsForWorkteam.build(context)
           when :list_lineage_groups
             Aws::SageMaker::Endpoints::ListLineageGroups.build(context)
+          when :list_mlflow_tracking_servers
+            Aws::SageMaker::Endpoints::ListMlflowTrackingServers.build(context)
           when :list_model_bias_job_definitions
             Aws::SageMaker::Endpoints::ListModelBiasJobDefinitions.build(context)
           when :list_model_card_export_jobs
@@ -564,6 +604,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::StartEdgeDeploymentStage.build(context)
           when :start_inference_experiment
             Aws::SageMaker::Endpoints::StartInferenceExperiment.build(context)
+          when :start_mlflow_tracking_server
+            Aws::SageMaker::Endpoints::StartMlflowTrackingServer.build(context)
           when :start_monitoring_schedule
             Aws::SageMaker::Endpoints::StartMonitoringSchedule.build(context)
           when :start_notebook_instance
@@ -586,6 +628,8 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::StopInferenceRecommendationsJob.build(context)
           when :stop_labeling_job
             Aws::SageMaker::Endpoints::StopLabelingJob.build(context)
+          when :stop_mlflow_tracking_server
+            Aws::SageMaker::Endpoints::StopMlflowTrackingServer.build(context)
           when :stop_monitoring_schedule
             Aws::SageMaker::Endpoints::StopMonitoringSchedule.build(context)
           when :stop_notebook_instance
@@ -604,6 +648,10 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::UpdateAppImageConfig.build(context)
           when :update_artifact
             Aws::SageMaker::Endpoints::UpdateArtifact.build(context)
+          when :update_cluster
+            Aws::SageMaker::Endpoints::UpdateCluster.build(context)
+          when :update_cluster_software
+            Aws::SageMaker::Endpoints::UpdateClusterSoftware.build(context)
           when :update_code_repository
             Aws::SageMaker::Endpoints::UpdateCodeRepository.build(context)
           when :update_context
@@ -630,8 +678,14 @@ module Aws::SageMaker
             Aws::SageMaker::Endpoints::UpdateImage.build(context)
           when :update_image_version
             Aws::SageMaker::Endpoints::UpdateImageVersion.build(context)
+          when :update_inference_component
+            Aws::SageMaker::Endpoints::UpdateInferenceComponent.build(context)
+          when :update_inference_component_runtime_config
+            Aws::SageMaker::Endpoints::UpdateInferenceComponentRuntimeConfig.build(context)
           when :update_inference_experiment
             Aws::SageMaker::Endpoints::UpdateInferenceExperiment.build(context)
+          when :update_mlflow_tracking_server
+            Aws::SageMaker::Endpoints::UpdateMlflowTrackingServer.build(context)
           when :update_model_card
             Aws::SageMaker::Endpoints::UpdateModelCard.build(context)
           when :update_model_package

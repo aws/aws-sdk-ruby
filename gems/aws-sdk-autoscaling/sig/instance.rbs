@@ -1,0 +1,125 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AutoScaling
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html
+    class Instance
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#initialize-instance_method
+      def initialize: (String group_name, String id, Hash[Symbol, untyped] options) -> void
+                    | (group_name: String, id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#group_name-instance_method
+      def group_name: () -> String
+      alias auto_scaling_group_name group_name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#id-instance_method
+      def id: () -> String
+      alias instance_id id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#instance_type-instance_method
+      def instance_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#availability_zone-instance_method
+      def availability_zone: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#lifecycle_state-instance_method
+      def lifecycle_state: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#health_status-instance_method
+      def health_status: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#launch_configuration_name-instance_method
+      def launch_configuration_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#launch_template-instance_method
+      def launch_template: () -> Types::LaunchTemplateSpecification
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#protected_from_scale_in-instance_method
+      def protected_from_scale_in: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#weighted_capacity-instance_method
+      def weighted_capacity: () -> ::String
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#data-instance_method
+      def data: () -> Types::AutoScalingInstanceDetails
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#attach-instance_method
+      def attach: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#detach-instance_method
+      def detach: (
+                    should_decrement_desired_capacity: bool
+                  ) -> Activity::Collection
+                | (?Hash[Symbol, untyped]) -> Activity::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#enter_standby-instance_method
+      def enter_standby: (
+                           should_decrement_desired_capacity: bool
+                         ) -> Activity::Collection
+                       | (?Hash[Symbol, untyped]) -> Activity::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#exit_standby-instance_method
+      def exit_standby: (
+                        ) -> Activity::Collection
+                      | (?Hash[Symbol, untyped]) -> Activity::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#set_health-instance_method
+      def set_health: (
+                        health_status: ::String,
+                        ?should_respect_grace_period: bool
+                      ) -> ::Aws::EmptyStructure
+                    | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#terminate-instance_method
+      def terminate: (
+                       should_decrement_desired_capacity: bool
+                     ) -> Activity
+                   | (?Hash[Symbol, untyped]) -> Activity
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#group-instance_method
+      def group: () -> AutoScalingGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Instance.html#launch_configuration-instance_method
+      def launch_configuration: () -> LaunchConfiguration?
+
+      class Collection < ::Aws::Resources::Collection[Instance]
+
+        def batch_attach: (
+                          ) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def batch_detach: (
+                            should_decrement_desired_capacity: bool
+                          ) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def batch_enter_standby: (
+                                   should_decrement_desired_capacity: bool
+                                 ) -> void
+                             | (?Hash[Symbol, untyped]) -> void
+
+        def batch_exit_standby: (
+                                ) -> void
+                            | (?Hash[Symbol, untyped]) -> void
+      end
+    end
+  end
+end

@@ -14,6 +14,7 @@ module Aws::DynamoDB
       option(
         :endpoint_provider,
         doc_type: 'Aws::DynamoDB::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::DynamoDB
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -72,6 +74,8 @@ module Aws::DynamoDB
             Aws::DynamoDB::Endpoints::DeleteBackup.build(context)
           when :delete_item
             Aws::DynamoDB::Endpoints::DeleteItem.build(context)
+          when :delete_resource_policy
+            Aws::DynamoDB::Endpoints::DeleteResourcePolicy.build(context)
           when :delete_table
             Aws::DynamoDB::Endpoints::DeleteTable.build(context)
           when :describe_backup
@@ -112,6 +116,8 @@ module Aws::DynamoDB
             Aws::DynamoDB::Endpoints::ExportTableToPointInTime.build(context)
           when :get_item
             Aws::DynamoDB::Endpoints::GetItem.build(context)
+          when :get_resource_policy
+            Aws::DynamoDB::Endpoints::GetResourcePolicy.build(context)
           when :import_table
             Aws::DynamoDB::Endpoints::ImportTable.build(context)
           when :list_backups
@@ -130,6 +136,8 @@ module Aws::DynamoDB
             Aws::DynamoDB::Endpoints::ListTagsOfResource.build(context)
           when :put_item
             Aws::DynamoDB::Endpoints::PutItem.build(context)
+          when :put_resource_policy
+            Aws::DynamoDB::Endpoints::PutResourcePolicy.build(context)
           when :query
             Aws::DynamoDB::Endpoints::Query.build(context)
           when :restore_table_from_backup
@@ -156,6 +164,8 @@ module Aws::DynamoDB
             Aws::DynamoDB::Endpoints::UpdateGlobalTableSettings.build(context)
           when :update_item
             Aws::DynamoDB::Endpoints::UpdateItem.build(context)
+          when :update_kinesis_streaming_destination
+            Aws::DynamoDB::Endpoints::UpdateKinesisStreamingDestination.build(context)
           when :update_table
             Aws::DynamoDB::Endpoints::UpdateTable.build(context)
           when :update_table_replica_auto_scaling

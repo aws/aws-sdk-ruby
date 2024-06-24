@@ -218,6 +218,34 @@ module Aws::CloudFormation
       data[:retain_except_on_create]
     end
 
+    # Specifies the deletion mode for the stack. Possible values are:
+    #
+    # * `STANDARD` - Use the standard behavior. Specifying this value is the
+    #   same as not specifying this parameter.
+    #
+    # * `FORCE_DELETE_STACK` - Delete the stack if it's stuck in a
+    #   `DELETE_FAILED` state due to resource deletion failure.
+    # @return [String]
+    def deletion_mode
+      data[:deletion_mode]
+    end
+
+    # The detailed status of the resource or stack. If
+    # `CONFIGURATION_COMPLETE` is present, the resource or resource
+    # configuration phase has completed and the stabilization of the
+    # resources is in progress. The stack sets `CONFIGURATION_COMPLETE` when
+    # all of the resources in the stack have reached that event. For more
+    # information, see [CloudFormation stack deployment][1] in the
+    # *CloudFormation User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html
+    # @return [String]
+    def detailed_status
+      data[:detailed_status]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -232,7 +260,7 @@ module Aws::CloudFormation
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_stacks(stack_name: @name)
       end
       @data = resp.stacks[0]
@@ -279,7 +307,7 @@ module Aws::CloudFormation
       options, params = separate_params_and_options(options)
       waiter = Waiters::StackExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(stack_name: @name))
       end
       Stack.new({
@@ -382,7 +410,7 @@ module Aws::CloudFormation
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -404,7 +432,7 @@ module Aws::CloudFormation
     # @return [EmptyStructure]
     def cancel_update(options = {})
       options = options.merge(stack_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.cancel_update_stack(options)
       end
       resp.data
@@ -455,7 +483,7 @@ module Aws::CloudFormation
     # @option options [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
     #   and a maximum length of 51,200 bytes. For more information, go to
-    #   [Template anatomy][1] in the CloudFormation User Guide.
+    #   [Template anatomy][1] in the *CloudFormation User Guide*.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
@@ -467,7 +495,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template (max size: 460,800 bytes) that's located in an Amazon S3
     #   bucket or a Systems Manager document. For more information, go to the
-    #   [Template anatomy][1] in the CloudFormation User Guide.
+    #   [Template anatomy][1] in the *CloudFormation User Guide*. The location
+    #   for an Amazon S3 bucket must start with `https://`.
     #
     #   Conditional: You must specify either the `TemplateBody` or the
     #   `TemplateURL` parameter, but not both.
@@ -494,7 +523,7 @@ module Aws::CloudFormation
     #   period afterwards.
     # @option options [Integer] :timeout_in_minutes
     #   The amount of time that can pass before the stack status becomes
-    #   CREATE\_FAILED; if `DisableRollback` is not set or is set to `false`,
+    #   `CREATE_FAILED`; if `DisableRollback` is not set or is set to `false`,
     #   the stack will be rolled back.
     # @option options [Array<String>] :notification_arns
     #   The Amazon Simple Notification Service (Amazon SNS) topic ARNs to
@@ -528,17 +557,17 @@ module Aws::CloudFormation
     #     you review all permissions associated with them and edit their
     #     permissions if necessary.
     #
-    #     * [ AWS::IAM::AccessKey][1]
+    #     * [AWS::IAM::AccessKey][1]
     #
-    #     * [ AWS::IAM::Group][2]
+    #     * [AWS::IAM::Group][2]
     #
     #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ AWS::IAM::Policy][4]
+    #     * [AWS::IAM::Policy][4]
     #
-    #     * [ AWS::IAM::Role][5]
+    #     * [AWS::IAM::Role][5]
     #
-    #     * [ AWS::IAM::User][6]
+    #     * [AWS::IAM::User][6]
     #
     #     * [AWS::IAM::UserToGroupAddition][7]
     #
@@ -575,6 +604,11 @@ module Aws::CloudFormation
     #     For more information, see [Using CloudFormation macros to perform
     #     custom processing on templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -605,6 +639,11 @@ module Aws::CloudFormation
     #   (IAM) uses this parameter for CloudFormation-specific condition keys
     #   in IAM policies. For more information, see [Controlling Access with
     #   Identity and Access Management][1].
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #
@@ -640,8 +679,9 @@ module Aws::CloudFormation
     # @option options [String] :stack_policy_url
     #   Location of a file containing the stack policy. The URL must point to
     #   a policy (maximum size: 16 KB) located in an S3 bucket in the same
-    #   Region as the stack. You can specify either the `StackPolicyBody` or
-    #   the `StackPolicyURL` parameter, but not both.
+    #   Region as the stack. The location for an Amazon S3 bucket must start
+    #   with `https://`. You can specify either the `StackPolicyBody` or the
+    #   `StackPolicyURL` parameter, but not both.
     # @option options [Array<Types::Tag>] :tags
     #   Key-value pairs to associate with this stack. CloudFormation also
     #   propagates these tags to the resources created in the stack. A maximum
@@ -690,7 +730,7 @@ module Aws::CloudFormation
     # @return [Types::CreateStackOutput]
     def create(options = {})
       options = options.merge(stack_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_stack(options)
       end
       resp.data
@@ -702,6 +742,7 @@ module Aws::CloudFormation
     #     retain_resources: ["LogicalResourceId"],
     #     role_arn: "RoleARN",
     #     client_request_token: "ClientRequestToken",
+    #     deletion_mode: "STANDARD", # accepts STANDARD, FORCE_DELETE_STACK
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :retain_resources
@@ -742,10 +783,18 @@ module Aws::CloudFormation
     #   stack using the console, each stack event would be assigned the same
     #   token in the following format:
     #   `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
+    # @option options [String] :deletion_mode
+    #   Specifies the deletion mode for the stack. Possible values are:
+    #
+    #   * `STANDARD` - Use the standard behavior. Specifying this value is the
+    #     same as not specifying this parameter.
+    #
+    #   * `FORCE_DELETE_STACK` - Delete the stack if it's stuck in a
+    #     `DELETE_FAILED` state due to resource deletion failure.
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(stack_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_stack(options)
       end
       resp.data
@@ -796,7 +845,7 @@ module Aws::CloudFormation
     # @option options [String] :template_body
     #   Structure containing the template body with a minimum length of 1 byte
     #   and a maximum length of 51,200 bytes. (For more information, go to
-    #   [Template Anatomy][1] in the CloudFormation User Guide.)
+    #   [Template Anatomy][1] in the *CloudFormation User Guide*.)
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
@@ -809,7 +858,8 @@ module Aws::CloudFormation
     #   Location of file containing the template body. The URL must point to a
     #   template that's located in an Amazon S3 bucket or a Systems Manager
     #   document. For more information, go to [Template Anatomy][1] in the
-    #   CloudFormation User Guide.
+    #   *CloudFormation User Guide*. The location for an Amazon S3 bucket must
+    #   start with `https://`.
     #
     #   Conditional: You must specify only one of the following parameters:
     #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
@@ -837,7 +887,8 @@ module Aws::CloudFormation
     # @option options [String] :stack_policy_during_update_url
     #   Location of a file containing the temporary overriding stack policy.
     #   The URL must point to a policy (max size: 16KB) located in an S3
-    #   bucket in the same Region as the stack. You can specify either the
+    #   bucket in the same Region as the stack. The location for an Amazon S3
+    #   bucket must start with `https://`. You can specify either the
     #   `StackPolicyDuringUpdateBody` or the `StackPolicyDuringUpdateURL`
     #   parameter, but not both.
     #
@@ -886,7 +937,7 @@ module Aws::CloudFormation
     #
     #     * [AWS::IAM::InstanceProfile][3]
     #
-    #     * [ AWS::IAM::Policy][4]
+    #     * [AWS::IAM::Policy][4]
     #
     #     * [ AWS::IAM::Role][5]
     #
@@ -927,6 +978,11 @@ module Aws::CloudFormation
     #     For more information, see [Using CloudFormation Macros to Perform
     #     Custom Processing on Templates][11].
     #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html
@@ -951,6 +1007,11 @@ module Aws::CloudFormation
     #   (IAM) uses this parameter for CloudFormation-specific condition keys
     #   in IAM policies. For more information, see [Controlling Access with
     #   Identity and Access Management][1].
+    #
+    #   <note markdown="1"> Only one of the `Capabilities` and `ResourceType` parameters can be
+    #   specified.
+    #
+    #    </note>
     #
     #
     #
@@ -983,8 +1044,9 @@ module Aws::CloudFormation
     # @option options [String] :stack_policy_url
     #   Location of a file containing the updated stack policy. The URL must
     #   point to a policy (max size: 16KB) located in an S3 bucket in the same
-    #   Region as the stack. You can specify either the `StackPolicyBody` or
-    #   the `StackPolicyURL` parameter, but not both.
+    #   Region as the stack. The location for an Amazon S3 bucket must start
+    #   with `https://`. You can specify either the `StackPolicyBody` or the
+    #   `StackPolicyURL` parameter, but not both.
     #
     #   You might update the stack policy, for example, in order to protect a
     #   new resource that you created during a stack update. If you don't
@@ -1036,7 +1098,7 @@ module Aws::CloudFormation
     # @return [Types::UpdateStackOutput]
     def update(options = {})
       options = options.merge(stack_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.update_stack(options)
       end
       resp.data
@@ -1052,7 +1114,7 @@ module Aws::CloudFormation
     def events(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(stack_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_stack_events(options)
         end
         resp.each_page do |page|
@@ -1088,7 +1150,7 @@ module Aws::CloudFormation
     def resource_summaries(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(stack_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_stack_resources(options)
         end
         resp.each_page do |page|

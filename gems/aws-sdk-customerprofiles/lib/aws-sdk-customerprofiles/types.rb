@@ -639,7 +639,7 @@ module Aws::CustomerProfiles
       :conditions,
       :statistic,
       :tags)
-      SENSITIVE = [:attribute_details, :conditions, :statistic]
+      SENSITIVE = [:description, :attribute_details, :conditions, :statistic]
       include Aws::Structure
     end
 
@@ -696,7 +696,7 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags)
-      SENSITIVE = [:attribute_details, :conditions, :statistic]
+      SENSITIVE = [:description, :attribute_details, :conditions, :statistic]
       include Aws::Structure
     end
 
@@ -1373,6 +1373,61 @@ module Aws::CustomerProfiles
       include Aws::Structure
     end
 
+    # @!attribute [rw] objects
+    #   A string that is serialized from a JSON object.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] domain_name
+    #   The unique name of the domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DetectProfileObjectTypeRequest AWS API Documentation
+    #
+    class DetectProfileObjectTypeRequest < Struct.new(
+      :objects,
+      :domain_name)
+      SENSITIVE = [:objects]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] detected_profile_object_types
+    #   Detected `ProfileObjectType` mappings from given objects. A maximum
+    #   of one mapping is supported.
+    #   @return [Array<Types::DetectedProfileObjectType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DetectProfileObjectTypeResponse AWS API Documentation
+    #
+    class DetectProfileObjectTypeResponse < Struct.new(
+      :detected_profile_object_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains `ProfileObjectType` mapping information from the model.
+    #
+    # @!attribute [rw] source_last_updated_timestamp_format
+    #   The format of `sourceLastUpdatedTimestamp` that was detected in
+    #   fields.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   A map of the name and the `ObjectType` field.
+    #   @return [Hash<String,Types::ObjectTypeField>]
+    #
+    # @!attribute [rw] keys
+    #   A list of unique keys that can be used to map data to a profile.
+    #   @return [Hash<String,Array<Types::ObjectTypeKey>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DetectedProfileObjectType AWS API Documentation
+    #
+    class DetectedProfileObjectType < Struct.new(
+      :source_last_updated_timestamp_format,
+      :fields,
+      :keys)
+      SENSITIVE = [:fields, :keys]
+      include Aws::Structure
+    end
+
     # Usage-specific statistics about the domain.
     #
     # @!attribute [rw] profile_count
@@ -1838,7 +1893,7 @@ module Aws::CustomerProfiles
       :conditions,
       :attribute_details,
       :tags)
-      SENSITIVE = [:statistic, :conditions, :attribute_details]
+      SENSITIVE = [:description, :statistic, :conditions, :attribute_details]
       include Aws::Structure
     end
 
@@ -2886,7 +2941,7 @@ module Aws::CustomerProfiles
       :created_at,
       :last_updated_at,
       :tags)
-      SENSITIVE = []
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -2928,7 +2983,7 @@ module Aws::CustomerProfiles
     class ListCalculatedAttributeDefinitionsResponse < Struct.new(
       :items,
       :next_token)
-      SENSITIVE = []
+      SENSITIVE = [:items]
       include Aws::Structure
     end
 
@@ -5138,7 +5193,7 @@ module Aws::CustomerProfiles
       :display_name,
       :description,
       :conditions)
-      SENSITIVE = [:conditions]
+      SENSITIVE = [:description, :conditions]
       include Aws::Structure
     end
 
@@ -5195,7 +5250,7 @@ module Aws::CustomerProfiles
       :conditions,
       :attribute_details,
       :tags)
-      SENSITIVE = [:statistic, :conditions, :attribute_details]
+      SENSITIVE = [:description, :statistic, :conditions, :attribute_details]
       include Aws::Structure
     end
 

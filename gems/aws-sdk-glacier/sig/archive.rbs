@@ -1,0 +1,53 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Glacier
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Archive.html
+    class Archive
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Archive.html#initialize-instance_method
+      def initialize: (String account_id, String vault_name, String id, Hash[Symbol, untyped] options) -> void
+                    | (account_id: String, vault_name: String, id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Archive.html#account_id-instance_method
+      def account_id: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Archive.html#vault_name-instance_method
+      def vault_name: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Archive.html#id-instance_method
+      def id: () -> String
+
+      def client: () -> Client
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Archive.html#data-instance_method
+      def data: () -> EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Archive.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Archive.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Archive.html#initiate_archive_retrieval-instance_method
+      def initiate_archive_retrieval: (
+                                      ) -> Job
+                                    | (?Hash[Symbol, untyped]) -> Job
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Archive.html#vault-instance_method
+      def vault: () -> Vault
+
+      class Collection < ::Aws::Resources::Collection[Archive]
+      end
+    end
+  end
+end

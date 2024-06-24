@@ -1,0 +1,510 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Route53RecoveryReadiness
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateCellResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCellResponse]
+        def cell_arn: () -> ::String
+        def cell_name: () -> ::String
+        def cells: () -> ::Array[::String]
+        def parent_readiness_scopes: () -> ::Array[::String]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#create_cell-instance_method
+      def create_cell: (
+                         cell_name: ::String,
+                         ?cells: Array[::String],
+                         ?tags: Hash[::String, ::String]
+                       ) -> _CreateCellResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCellResponseSuccess
+
+      interface _CreateCrossAccountAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCrossAccountAuthorizationResponse]
+        def cross_account_authorization: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#create_cross_account_authorization-instance_method
+      def create_cross_account_authorization: (
+                                                cross_account_authorization: ::String
+                                              ) -> _CreateCrossAccountAuthorizationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCrossAccountAuthorizationResponseSuccess
+
+      interface _CreateReadinessCheckResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateReadinessCheckResponse]
+        def readiness_check_arn: () -> ::String
+        def readiness_check_name: () -> ::String
+        def resource_set: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#create_readiness_check-instance_method
+      def create_readiness_check: (
+                                    readiness_check_name: ::String,
+                                    resource_set_name: ::String,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateReadinessCheckResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReadinessCheckResponseSuccess
+
+      interface _CreateRecoveryGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateRecoveryGroupResponse]
+        def cells: () -> ::Array[::String]
+        def recovery_group_arn: () -> ::String
+        def recovery_group_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#create_recovery_group-instance_method
+      def create_recovery_group: (
+                                   ?cells: Array[::String],
+                                   recovery_group_name: ::String,
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreateRecoveryGroupResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRecoveryGroupResponseSuccess
+
+      interface _CreateResourceSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateResourceSetResponse]
+        def resource_set_arn: () -> ::String
+        def resource_set_name: () -> ::String
+        def resource_set_type: () -> ::String
+        def resources: () -> ::Array[Types::Resource]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#create_resource_set-instance_method
+      def create_resource_set: (
+                                 resource_set_name: ::String,
+                                 resource_set_type: ::String,
+                                 resources: Array[
+                                   {
+                                     component_id: ::String?,
+                                     dns_target_resource: {
+                                       domain_name: ::String?,
+                                       hosted_zone_arn: ::String?,
+                                       record_set_id: ::String?,
+                                       record_type: ::String?,
+                                       target_resource: {
+                                         nlb_resource: {
+                                           arn: ::String?
+                                         }?,
+                                         r53_resource: {
+                                           domain_name: ::String?,
+                                           record_set_id: ::String?
+                                         }?
+                                       }?
+                                     }?,
+                                     readiness_scopes: Array[::String]?,
+                                     resource_arn: ::String?
+                                   },
+                                 ],
+                                 ?tags: Hash[::String, ::String]
+                               ) -> _CreateResourceSetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceSetResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#delete_cell-instance_method
+      def delete_cell: (
+                         cell_name: ::String
+                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteCrossAccountAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCrossAccountAuthorizationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#delete_cross_account_authorization-instance_method
+      def delete_cross_account_authorization: (
+                                                cross_account_authorization: ::String
+                                              ) -> _DeleteCrossAccountAuthorizationResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCrossAccountAuthorizationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#delete_readiness_check-instance_method
+      def delete_readiness_check: (
+                                    readiness_check_name: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#delete_recovery_group-instance_method
+      def delete_recovery_group: (
+                                   recovery_group_name: ::String
+                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#delete_resource_set-instance_method
+      def delete_resource_set: (
+                                 resource_set_name: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetArchitectureRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetArchitectureRecommendationsResponse]
+        def last_audit_timestamp: () -> ::Time
+        def next_token: () -> ::String
+        def recommendations: () -> ::Array[Types::Recommendation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#get_architecture_recommendations-instance_method
+      def get_architecture_recommendations: (
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String,
+                                              recovery_group_name: ::String
+                                            ) -> _GetArchitectureRecommendationsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetArchitectureRecommendationsResponseSuccess
+
+      interface _GetCellResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCellResponse]
+        def cell_arn: () -> ::String
+        def cell_name: () -> ::String
+        def cells: () -> ::Array[::String]
+        def parent_readiness_scopes: () -> ::Array[::String]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#get_cell-instance_method
+      def get_cell: (
+                      cell_name: ::String
+                    ) -> _GetCellResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCellResponseSuccess
+
+      interface _GetCellReadinessSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCellReadinessSummaryResponse]
+        def next_token: () -> ::String
+        def readiness: () -> ("READY" | "NOT_READY" | "UNKNOWN" | "NOT_AUTHORIZED")
+        def readiness_checks: () -> ::Array[Types::ReadinessCheckSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#get_cell_readiness_summary-instance_method
+      def get_cell_readiness_summary: (
+                                        cell_name: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _GetCellReadinessSummaryResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCellReadinessSummaryResponseSuccess
+
+      interface _GetReadinessCheckResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReadinessCheckResponse]
+        def readiness_check_arn: () -> ::String
+        def readiness_check_name: () -> ::String
+        def resource_set: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#get_readiness_check-instance_method
+      def get_readiness_check: (
+                                 readiness_check_name: ::String
+                               ) -> _GetReadinessCheckResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReadinessCheckResponseSuccess
+
+      interface _GetReadinessCheckResourceStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReadinessCheckResourceStatusResponse]
+        def next_token: () -> ::String
+        def readiness: () -> ("READY" | "NOT_READY" | "UNKNOWN" | "NOT_AUTHORIZED")
+        def rules: () -> ::Array[Types::RuleResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#get_readiness_check_resource_status-instance_method
+      def get_readiness_check_resource_status: (
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String,
+                                                 readiness_check_name: ::String,
+                                                 resource_identifier: ::String
+                                               ) -> _GetReadinessCheckResourceStatusResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReadinessCheckResourceStatusResponseSuccess
+
+      interface _GetReadinessCheckStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetReadinessCheckStatusResponse]
+        def messages: () -> ::Array[Types::Message]
+        def next_token: () -> ::String
+        def readiness: () -> ("READY" | "NOT_READY" | "UNKNOWN" | "NOT_AUTHORIZED")
+        def resources: () -> ::Array[Types::ResourceResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#get_readiness_check_status-instance_method
+      def get_readiness_check_status: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        readiness_check_name: ::String
+                                      ) -> _GetReadinessCheckStatusResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetReadinessCheckStatusResponseSuccess
+
+      interface _GetRecoveryGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecoveryGroupResponse]
+        def cells: () -> ::Array[::String]
+        def recovery_group_arn: () -> ::String
+        def recovery_group_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#get_recovery_group-instance_method
+      def get_recovery_group: (
+                                recovery_group_name: ::String
+                              ) -> _GetRecoveryGroupResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecoveryGroupResponseSuccess
+
+      interface _GetRecoveryGroupReadinessSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecoveryGroupReadinessSummaryResponse]
+        def next_token: () -> ::String
+        def readiness: () -> ("READY" | "NOT_READY" | "UNKNOWN" | "NOT_AUTHORIZED")
+        def readiness_checks: () -> ::Array[Types::ReadinessCheckSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#get_recovery_group_readiness_summary-instance_method
+      def get_recovery_group_readiness_summary: (
+                                                  ?max_results: ::Integer,
+                                                  ?next_token: ::String,
+                                                  recovery_group_name: ::String
+                                                ) -> _GetRecoveryGroupReadinessSummaryResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecoveryGroupReadinessSummaryResponseSuccess
+
+      interface _GetResourceSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourceSetResponse]
+        def resource_set_arn: () -> ::String
+        def resource_set_name: () -> ::String
+        def resource_set_type: () -> ::String
+        def resources: () -> ::Array[Types::Resource]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#get_resource_set-instance_method
+      def get_resource_set: (
+                              resource_set_name: ::String
+                            ) -> _GetResourceSetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceSetResponseSuccess
+
+      interface _ListCellsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCellsResponse]
+        def cells: () -> ::Array[Types::CellOutput]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#list_cells-instance_method
+      def list_cells: (
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListCellsResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCellsResponseSuccess
+
+      interface _ListCrossAccountAuthorizationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCrossAccountAuthorizationsResponse]
+        def cross_account_authorizations: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#list_cross_account_authorizations-instance_method
+      def list_cross_account_authorizations: (
+                                               ?max_results: ::Integer,
+                                               ?next_token: ::String
+                                             ) -> _ListCrossAccountAuthorizationsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCrossAccountAuthorizationsResponseSuccess
+
+      interface _ListReadinessChecksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReadinessChecksResponse]
+        def next_token: () -> ::String
+        def readiness_checks: () -> ::Array[Types::ReadinessCheckOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#list_readiness_checks-instance_method
+      def list_readiness_checks: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListReadinessChecksResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReadinessChecksResponseSuccess
+
+      interface _ListRecoveryGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRecoveryGroupsResponse]
+        def next_token: () -> ::String
+        def recovery_groups: () -> ::Array[Types::RecoveryGroupOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#list_recovery_groups-instance_method
+      def list_recovery_groups: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListRecoveryGroupsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRecoveryGroupsResponseSuccess
+
+      interface _ListResourceSetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourceSetsResponse]
+        def next_token: () -> ::String
+        def resource_sets: () -> ::Array[Types::ResourceSetOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#list_resource_sets-instance_method
+      def list_resource_sets: (
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListResourceSetsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceSetsResponseSuccess
+
+      interface _ListRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListRulesResponse]
+        def next_token: () -> ::String
+        def rules: () -> ::Array[Types::ListRulesOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#list_rules-instance_method
+      def list_rules: (
+                        ?max_results: ::Integer,
+                        ?next_token: ::String,
+                        ?resource_type: ::String
+                      ) -> _ListRulesResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRulesResponseSuccess
+
+      interface _ListTagsForResourcesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourcesResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#list_tags_for_resources-instance_method
+      def list_tags_for_resources: (
+                                     resource_arn: ::String
+                                   ) -> _ListTagsForResourcesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourcesResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdateCellResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCellResponse]
+        def cell_arn: () -> ::String
+        def cell_name: () -> ::String
+        def cells: () -> ::Array[::String]
+        def parent_readiness_scopes: () -> ::Array[::String]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#update_cell-instance_method
+      def update_cell: (
+                         cell_name: ::String,
+                         cells: Array[::String]
+                       ) -> _UpdateCellResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCellResponseSuccess
+
+      interface _UpdateReadinessCheckResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateReadinessCheckResponse]
+        def readiness_check_arn: () -> ::String
+        def readiness_check_name: () -> ::String
+        def resource_set: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#update_readiness_check-instance_method
+      def update_readiness_check: (
+                                    readiness_check_name: ::String,
+                                    resource_set_name: ::String
+                                  ) -> _UpdateReadinessCheckResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReadinessCheckResponseSuccess
+
+      interface _UpdateRecoveryGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRecoveryGroupResponse]
+        def cells: () -> ::Array[::String]
+        def recovery_group_arn: () -> ::String
+        def recovery_group_name: () -> ::String
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#update_recovery_group-instance_method
+      def update_recovery_group: (
+                                   cells: Array[::String],
+                                   recovery_group_name: ::String
+                                 ) -> _UpdateRecoveryGroupResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecoveryGroupResponseSuccess
+
+      interface _UpdateResourceSetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourceSetResponse]
+        def resource_set_arn: () -> ::String
+        def resource_set_name: () -> ::String
+        def resource_set_type: () -> ::String
+        def resources: () -> ::Array[Types::Resource]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53RecoveryReadiness/Client.html#update_resource_set-instance_method
+      def update_resource_set: (
+                                 resource_set_name: ::String,
+                                 resource_set_type: ::String,
+                                 resources: Array[
+                                   {
+                                     component_id: ::String?,
+                                     dns_target_resource: {
+                                       domain_name: ::String?,
+                                       hosted_zone_arn: ::String?,
+                                       record_set_id: ::String?,
+                                       record_type: ::String?,
+                                       target_resource: {
+                                         nlb_resource: {
+                                           arn: ::String?
+                                         }?,
+                                         r53_resource: {
+                                           domain_name: ::String?,
+                                           record_set_id: ::String?
+                                         }?
+                                       }?
+                                     }?,
+                                     readiness_scopes: Array[::String]?,
+                                     resource_arn: ::String?
+                                   },
+                                 ]
+                               ) -> _UpdateResourceSetResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceSetResponseSuccess
+    end
+  end
+end
+

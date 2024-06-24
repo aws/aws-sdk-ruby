@@ -7,21 +7,14 @@
 
 Feature: Smoke tests for EFS
 
-Background:
-  Given I create a client in region 'us-west-2'
-
   @efs @smoke
-  Scenario: Call Aws::EFS::Client#describe_file_systems and expect it to succeed
-  When I call the operation 'describe_file_systems' with params:
-    """
+  Scenario: DescribeFileSystemsSuccess
+    Given I create a 'Aws::EFS' client with config:
+      """
+{"region":"us-west-2"}
+      """
+    When I call the operation 'describe_file_systems' with params:
+      """
 {}
-    """
-  Then I expect an error was not raised
-
-  @efs @smoke
-  Scenario: Call Aws::Aws::EFS::Client#delete_file_system and expect it to fail
-  When I call the operation 'delete_file_system' with params:
-    """
-{"file_system_id":"fs-c5a1446c"}
-    """
-  Then I expect an error was raised
+      """
+    Then I expect an error was not raised

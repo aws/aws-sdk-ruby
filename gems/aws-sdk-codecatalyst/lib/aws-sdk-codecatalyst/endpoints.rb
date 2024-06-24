@@ -233,6 +233,32 @@ module Aws::CodeCatalyst
       end
     end
 
+    class GetWorkflow
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CodeCatalyst::EndpointParameters.new(
+          use_fips: context.config.use_fips_endpoint,
+          region: context.config.region,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetWorkflowRun
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CodeCatalyst::EndpointParameters.new(
+          use_fips: context.config.use_fips_endpoint,
+          region: context.config.region,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ListAccessTokens
       def self.build(context)
         unless context.config.regional_endpoint
@@ -337,6 +363,32 @@ module Aws::CodeCatalyst
       end
     end
 
+    class ListWorkflowRuns
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CodeCatalyst::EndpointParameters.new(
+          use_fips: context.config.use_fips_endpoint,
+          region: context.config.region,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListWorkflows
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CodeCatalyst::EndpointParameters.new(
+          use_fips: context.config.use_fips_endpoint,
+          region: context.config.region,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class StartDevEnvironment
       def self.build(context)
         unless context.config.regional_endpoint
@@ -351,6 +403,19 @@ module Aws::CodeCatalyst
     end
 
     class StartDevEnvironmentSession
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::CodeCatalyst::EndpointParameters.new(
+          use_fips: context.config.use_fips_endpoint,
+          region: context.config.region,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class StartWorkflowRun
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

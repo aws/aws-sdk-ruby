@@ -70,7 +70,7 @@ module Aws::FSx
     end
 
     # Describes a specific Amazon FSx administrative action for the current
-    # Windows, Lustre, or OpenZFS file system.
+    # Windows, Lustre, OpenZFS, or ONTAP file system or volume.
     #
     # @!attribute [rw] administrative_action_type
     #   Describes the type of administrative action, as follows:
@@ -105,10 +105,9 @@ module Aws::FSx
     #     completed successfully, the parent `FILE_SYSTEM_UPDATE` action
     #     status changes to `COMPLETED`. For more information, see [Managing
     #     storage capacity][2] in the *Amazon FSx for Windows File Server
-    #     User Guide*, [Managing storage and throughput capacity][3] in the
-    #     *Amazon FSx for Lustre User Guide*, and [Managing storage capacity
-    #     and provisioned IOPS][4] in the *Amazon FSx for NetApp ONTAP User
-    #     Guide*.
+    #     User Guide*, [Managing storage capacity][3] in the *Amazon FSx for
+    #     Lustre User Guide*, and [Managing storage capacity and provisioned
+    #     IOPS][4] in the *Amazon FSx for NetApp ONTAP User Guide*.
     #
     #   * `FILE_SYSTEM_ALIAS_ASSOCIATION` - A file system update to
     #     associate a new Domain Name System (DNS) alias with the file
@@ -127,8 +126,8 @@ module Aws::FSx
     #     `ProgressPercent` property. When `IOPS_OPTIMIZATION` has been
     #     completed successfully, the parent `FILE_SYSTEM_UPDATE` action
     #     status changes to `COMPLETED`. For more information, see [Managing
-    #     provisioned SSD IOPS][7] in the *Amazon FSx for Windows File
-    #     Server User Guide*.
+    #     provisioned SSD IOPS][7] in the Amazon FSx for Windows File Server
+    #     User Guide.
     #
     #   * `STORAGE_TYPE_OPTIMIZATION` - After the `FILE_SYSTEM_UPDATE` task
     #     to increase a file system's throughput capacity has been
@@ -139,9 +138,9 @@ module Aws::FSx
     #     been completed successfully, the parent `FILE_SYSTEM_UPDATE`
     #     action status changes to `COMPLETED`.
     #
-    #   * `VOLUME_UPDATE` - A volume update to an Amazon FSx for NetApp
-    #     ONTAP or Amazon FSx for OpenZFS volume initiated from the Amazon
-    #     FSx console, API (`UpdateVolume`), or CLI (`update-volume`).
+    #   * `VOLUME_UPDATE` - A volume update to an Amazon FSx for OpenZFS
+    #     volume initiated from the Amazon FSx console, API
+    #     (`UpdateVolume`), or CLI (`update-volume`).
     #
     #   * `VOLUME_RESTORE` - An Amazon FSx for OpenZFS volume is returned to
     #     the state saved by the specified snapshot, initiated from an API
@@ -154,6 +153,18 @@ module Aws::FSx
     #
     #   * `RELEASE_NFS_V3_LOCKS` - Tracks the release of Network File System
     #     (NFS) V3 locks on an Amazon FSx for OpenZFS file system.
+    #
+    #   * `VOLUME_INITIALIZE_WITH_SNAPSHOT` - A volume is being created from
+    #     a snapshot on a different FSx for OpenZFS file system. You can
+    #     initiate this from the Amazon FSx console, API (`CreateVolume`),
+    #     or CLI (`create-volume`) when using the using the `FULL_COPY`
+    #     strategy.
+    #
+    #   * `VOLUME_UPDATE_WITH_SNAPSHOT` - A volume is being updated from a
+    #     snapshot on a different FSx for OpenZFS file system. You can
+    #     initiate this from the Amazon FSx console, API
+    #     (`CopySnapshotAndUpdateVolume`), or CLI
+    #     (`copy-snapshot-and-update-volume`).
     #
     #
     #
@@ -177,7 +188,7 @@ module Aws::FSx
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   Describes the status of the administrative action, as follows:
+    #   The status of the administrative action, as follows:
     #
     #   * `FAILED` - Amazon FSx failed to process the administrative action
     #     successfully.
@@ -197,9 +208,9 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] target_file_system_values
-    #   Describes the target value for the administration action, provided
-    #   in the `UpdateFileSystem` operation. Returned for
-    #   `FILE_SYSTEM_UPDATE` administrative actions.
+    #   The target value for the administration action, provided in the
+    #   `UpdateFileSystem` operation. Returned for `FILE_SYSTEM_UPDATE`
+    #   administrative actions.
     #   @return [Types::FileSystem]
     #
     # @!attribute [rw] failure_details
@@ -207,13 +218,22 @@ module Aws::FSx
     #   @return [Types::AdministrativeActionFailureDetails]
     #
     # @!attribute [rw] target_volume_values
-    #   Describes an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS
-    #   volume.
+    #   Describes an Amazon FSx volume.
     #   @return [Types::Volume]
     #
     # @!attribute [rw] target_snapshot_values
     #   A snapshot of an Amazon FSx for OpenZFS volume.
     #   @return [Types::Snapshot]
+    #
+    # @!attribute [rw] total_transfer_bytes
+    #   The number of bytes that have transferred for the FSx for OpenZFS
+    #   snapshot that you're copying.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] remaining_transfer_bytes
+    #   The remaining bytes to transfer for the FSx for OpenZFS snapshot
+    #   that you're copying.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AdministrativeAction AWS API Documentation
     #
@@ -225,7 +245,9 @@ module Aws::FSx
       :target_file_system_values,
       :failure_details,
       :target_volume_values,
-      :target_snapshot_values)
+      :target_snapshot_values,
+      :total_transfer_bytes,
+      :remaining_transfer_bytes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -241,6 +263,43 @@ module Aws::FSx
     #
     class AdministrativeActionFailureDetails < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used to specify configuration options for a volume’s storage aggregate
+    # or aggregates.
+    #
+    # @!attribute [rw] aggregates
+    #   The list of aggregates that this volume resides on. Aggregates are
+    #   storage pools which make up your primary storage tier. Each
+    #   high-availability (HA) pair has one aggregate. The names of the
+    #   aggregates map to the names of the aggregates in the ONTAP CLI and
+    #   REST API. For FlexVols, there will always be a single entry.
+    #
+    #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
+    #   the following conditions:
+    #
+    #   * The strings in the value of `Aggregates` are not are not formatted
+    #     as `aggrX`, where X is a number between 1 and 6.
+    #
+    #   * The value of `Aggregates` contains aggregates that are not
+    #     present.
+    #
+    #   * One or more of the aggregates supplied are too close to the volume
+    #     limit to support adding more volumes.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] total_constituents
+    #   The total number of constituents this FlexGroup volume has. Not
+    #   applicable for FlexVols.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/AggregateConfiguration AWS API Documentation
+    #
+    class AggregateConfiguration < Struct.new(
+      :aggregates,
+      :total_constituents)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -570,8 +629,7 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] volume
-    #   Describes an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS
-    #   volume.
+    #   Describes an Amazon FSx volume.
     #   @return [Types::Volume]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/Backup AWS API Documentation
@@ -881,6 +939,128 @@ module Aws::FSx
     #
     class CopyBackupResponse < Struct.new(
       :backup)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_id
+    #   Specifies the ID of the volume that you are copying the snapshot to.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_snapshot_arn
+    #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
+    #   identify Amazon Web Services resources. We require an ARN when you
+    #   need to specify a resource unambiguously across all of Amazon Web
+    #   Services. For more information, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] copy_strategy
+    #   Specifies the strategy to use when copying data from a snapshot to
+    #   the volume.
+    #
+    #   * `FULL_COPY` - Copies all data from the snapshot to the volume.
+    #
+    #   * `INCREMENTAL_COPY` - Copies only the snapshot data that's changed
+    #     since the previous replication.
+    #
+    #   <note markdown="1"> `CLONE` isn't a valid copy strategy option for the
+    #   `CopySnapshotAndUpdateVolume` operation.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   Confirms that you want to delete data on the destination volume that
+    #   wasn’t there during the previous snapshot replication.
+    #
+    #   Your replication will fail if you don’t include an option for a
+    #   specific type of data and that data is on your destination. For
+    #   example, if you don’t include `DELETE_INTERMEDIATE_SNAPSHOTS` and
+    #   there are intermediate snapshots on the destination, you can’t copy
+    #   the snapshot.
+    #
+    #   * `DELETE_INTERMEDIATE_SNAPSHOTS` - Deletes snapshots on the
+    #     destination volume that aren’t on the source volume.
+    #
+    #   * `DELETE_CLONED_VOLUMES` - Deletes snapshot clones on the
+    #     destination volume that aren't on the source volume.
+    #
+    #   * `DELETE_INTERMEDIATE_DATA` - Overwrites snapshots on the
+    #     destination volume that don’t match the source snapshot that
+    #     you’re copying.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CopySnapshotAndUpdateVolumeRequest AWS API Documentation
+    #
+    class CopySnapshotAndUpdateVolumeRequest < Struct.new(
+      :client_request_token,
+      :volume_id,
+      :source_snapshot_arn,
+      :copy_strategy,
+      :options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] volume_id
+    #   The ID of the volume that you copied the snapshot to.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle
+    #   The lifecycle state of the destination volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] administrative_actions
+    #   A list of administrative actions for the file system that are in
+    #   process or waiting to be processed. Administrative actions describe
+    #   changes to the Amazon FSx system.
+    #   @return [Array<Types::AdministrativeAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CopySnapshotAndUpdateVolumeResponse AWS API Documentation
+    #
+    class CopySnapshotAndUpdateVolumeResponse < Struct.new(
+      :volume_id,
+      :lifecycle,
+      :administrative_actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Used to specify the configuration options for an FSx for ONTAP
+    # volume's storage aggregate or aggregates.
+    #
+    # @!attribute [rw] aggregates
+    #   Used to specify the names of aggregates on which the volume will be
+    #   created.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] constituents_per_aggregate
+    #   Used to explicitly set the number of constituents within the
+    #   FlexGroup per storage aggregate. This field is optional when
+    #   creating a FlexGroup volume. If unspecified, the default value will
+    #   be 8. This field cannot be provided when creating a FlexVol volume.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateAggregateConfiguration AWS API Documentation
+    #
+    class CreateAggregateConfiguration < Struct.new(
+      :aggregates,
+      :constituents_per_aggregate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1463,7 +1643,8 @@ module Aws::FSx
     #
     #   If used to create a file system other than OpenZFS, you must provide
     #   a value that matches the backup's `StorageCapacity` value. If you
-    #   provide any other value, Amazon FSx responds with a 400 Bad Request.
+    #   provide any other value, Amazon FSx responds with with an HTTP
+    #   status code 400 Bad Request.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackupRequest AWS API Documentation
@@ -1595,12 +1776,14 @@ module Aws::FSx
     #   Choose `PERSISTENT_2` for longer-term storage and for
     #   latency-sensitive workloads that require the highest levels of
     #   IOPS/throughput. `PERSISTENT_2` supports SSD storage, and offers
-    #   higher `PerUnitStorageThroughput` (up to 1000 MB/s/TiB).
-    #   `PERSISTENT_2` is available in a limited number of Amazon Web
-    #   Services Regions. For more information, and an up-to-date list of
-    #   Amazon Web Services Regions in which `PERSISTENT_2` is available,
-    #   see [File system deployment options for FSx for Lustre][1] in the
-    #   *Amazon FSx for Lustre User Guide*.
+    #   higher `PerUnitStorageThroughput` (up to 1000 MB/s/TiB). You can
+    #   optionally specify a metadata configuration mode for `PERSISTENT_2`
+    #   which supports increasing metadata performance. `PERSISTENT_2` is
+    #   available in a limited number of Amazon Web Services Regions. For
+    #   more information, and an up-to-date list of Amazon Web Services
+    #   Regions in which `PERSISTENT_2` is available, see [File system
+    #   deployment options for FSx for Lustre][1] in the *Amazon FSx for
+    #   Lustre User Guide*.
     #
     #   <note markdown="1"> If you choose `PERSISTENT_2`, and you set `FileSystemTypeVersion` to
     #   `2.10`, the `CreateFileSystem` operation fails.
@@ -1608,7 +1791,7 @@ module Aws::FSx
     #    </note>
     #
     #   Encryption of data in transit is automatically turned on when you
-    #   access `SCRATCH_2`, `PERSISTENT_1` and `PERSISTENT_2` file systems
+    #   access `SCRATCH_2`, `PERSISTENT_1`, and `PERSISTENT_2` file systems
     #   from Amazon EC2 instances that support automatic encryption in the
     #   Amazon Web Services Regions where they are available. For more
     #   information about encryption in transit for FSx for Lustre file
@@ -1756,6 +1939,11 @@ module Aws::FSx
     #   as a root user.
     #   @return [Types::LustreRootSquashConfiguration]
     #
+    # @!attribute [rw] metadata_configuration
+    #   The Lustre metadata performance configuration for the creation of an
+    #   FSx for Lustre file system using a `PERSISTENT_2` deployment type.
+    #   @return [Types::CreateFileSystemLustreMetadataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreConfiguration AWS API Documentation
     #
     class CreateFileSystemLustreConfiguration < Struct.new(
@@ -1772,7 +1960,60 @@ module Aws::FSx
       :drive_cache_type,
       :data_compression_type,
       :log_configuration,
-      :root_squash_configuration)
+      :root_squash_configuration,
+      :metadata_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Lustre metadata performance configuration for the creation of an
+    # Amazon FSx for Lustre file system using a `PERSISTENT_2` deployment
+    # type. The configuration uses a Metadata IOPS value to set the maximum
+    # rate of metadata disk IOPS supported by the file system.
+    #
+    # After creation, the file system supports increasing metadata
+    # performance. For more information on Metadata IOPS, see [Lustre
+    # metadata performance configuration][1] in the *Amazon FSx for Lustre
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-metadata-performance.html#metadata-configuration
+    #
+    # @!attribute [rw] iops
+    #   (USER\_PROVISIONED mode only) Specifies the number of Metadata IOPS
+    #   to provision for the file system. This parameter sets the maximum
+    #   rate of metadata disk IOPS supported by the file system. Valid
+    #   values are `1500`, `3000`, `6000`, `12000`, and multiples of `12000`
+    #   up to a maximum of `192000`.
+    #
+    #   <note markdown="1"> Iops doesn’t have a default value. If you're using
+    #   USER\_PROVISIONED mode, you can choose to specify a valid value. If
+    #   you're using AUTOMATIC mode, you cannot specify a value because FSx
+    #   for Lustre automatically sets the value based on your file system
+    #   storage capacity.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mode
+    #   The metadata configuration mode for provisioning Metadata IOPS for
+    #   an FSx for Lustre file system using a `PERSISTENT_2` deployment
+    #   type.
+    #
+    #   * In AUTOMATIC mode, FSx for Lustre automatically provisions and
+    #     scales the number of Metadata IOPS for your file system based on
+    #     your file system storage capacity.
+    #
+    #   * In USER\_PROVISIONED mode, you specify the number of Metadata IOPS
+    #     to provision for your file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemLustreMetadataConfiguration AWS API Documentation
+    #
+    class CreateFileSystemLustreMetadataConfiguration < Struct.new(
+      :iops,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1801,6 +2042,9 @@ module Aws::FSx
     #     Availability Zone (AZ) unavailability.
     #
     #   * `SINGLE_AZ_1` - A file system configured for Single-AZ redundancy.
+    #
+    #   * `SINGLE_AZ_2` - A file system configured with multiple
+    #     high-availability (HA) pairs for Single-AZ redundancy.
     #
     #   For information about the use cases for Multi-AZ and Single-AZ
     #   deployments, refer to [Choosing a file system deployment type][1].
@@ -1844,11 +2088,34 @@ module Aws::FSx
     #   You should specify all virtual private cloud (VPC) route tables
     #   associated with the subnets in which your clients are located. By
     #   default, Amazon FSx selects your VPC's default route table.
+    #
+    #   <note markdown="1"> Amazon FSx manages these route tables for Multi-AZ file systems
+    #   using tag-based authentication. These route tables are tagged with
+    #   `Key: AmazonFSx; Value: ManagedByAmazonFSx`. When creating FSx for
+    #   ONTAP Multi-AZ file systems using CloudFormation we recommend that
+    #   you add the `Key: AmazonFSx; Value: ManagedByAmazonFSx` tag
+    #   manually.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] throughput_capacity
     #   Sets the throughput capacity for the file system that you're
-    #   creating. Valid values are 128, 256, 512, 1024, 2048, and 4096 MBps.
+    #   creating in megabytes per second (MBps). For more information, see
+    #   [Managing throughput capacity][1] in the FSx for ONTAP User Guide.
+    #
+    #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
+    #   the following conditions:
+    #
+    #   * The value of `ThroughputCapacity` and
+    #     `ThroughputCapacityPerHAPair` are not the same value.
+    #
+    #   * The value of `ThroughputCapacity` when divided by the value of
+    #     `HAPairs` is outside of the valid range for `ThroughputCapacity`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-throughput-capacity.html
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -1868,6 +2135,58 @@ module Aws::FSx
     #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
     #   @return [String]
     #
+    # @!attribute [rw] ha_pairs
+    #   Specifies how many high-availability (HA) pairs of file servers will
+    #   power your file system. Scale-up file systems are powered by 1 HA
+    #   pair. The default value is 1. FSx for ONTAP scale-out file systems
+    #   are powered by up to 12 HA pairs. The value of this property affects
+    #   the values of `StorageCapacity`, `Iops`, and `ThroughputCapacity`.
+    #   For more information, see [High-availability (HA) pairs][1] in the
+    #   FSx for ONTAP user guide.
+    #
+    #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
+    #   the following conditions:
+    #
+    #   * The value of `HAPairs` is less than 1 or greater than 12.
+    #
+    #   * The value of `HAPairs` is greater than 1 and the value of
+    #     `DeploymentType` is `SINGLE_AZ_1` or `MULTI_AZ_1`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/administering-file-systems.html#HA-pairs
+    #   @return [Integer]
+    #
+    # @!attribute [rw] throughput_capacity_per_ha_pair
+    #   Use to choose the throughput capacity per HA pair, rather than the
+    #   total throughput for the file system.
+    #
+    #   You can define either the `ThroughputCapacityPerHAPair` or the
+    #   `ThroughputCapacity` when creating a file system, but not both.
+    #
+    #   This field and `ThroughputCapacity` are the same for scale-up file
+    #   systems powered by one HA pair.
+    #
+    #   * For `SINGLE_AZ_1` and `MULTI_AZ_1` file systems, valid values are
+    #     128, 256, 512, 1024, 2048, or 4096 MBps.
+    #
+    #   * For `SINGLE_AZ_2` file systems, valid values are 3072 or 6144
+    #     MBps.
+    #
+    #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
+    #   the following conditions:
+    #
+    #   * The value of `ThroughputCapacity` and
+    #     `ThroughputCapacityPerHAPair` are not the same value for file
+    #     systems with one HA pair.
+    #
+    #   * The value of deployment type is `SINGLE_AZ_2` and
+    #     `ThroughputCapacity` / `ThroughputCapacityPerHAPair` is a valid HA
+    #     pair (a value between 2 and 12).
+    #
+    #   * The value of `ThroughputCapacityPerHAPair` is not a valid value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemOntapConfiguration AWS API Documentation
     #
     class CreateFileSystemOntapConfiguration < Struct.new(
@@ -1880,7 +2199,9 @@ module Aws::FSx
       :preferred_subnet_id,
       :route_table_ids,
       :throughput_capacity,
-      :weekly_maintenance_start_time)
+      :weekly_maintenance_start_time,
+      :ha_pairs,
+      :throughput_capacity_per_ha_pair)
       SENSITIVE = [:fsx_admin_password]
       include Aws::Structure
     end
@@ -2068,7 +2389,7 @@ module Aws::FSx
     #   that you can configure depends on the value that you set for
     #   `StorageType` and the Lustre `DeploymentType`, as follows:
     #
-    #   * For `SCRATCH_2`, `PERSISTENT_2` and `PERSISTENT_1` deployment
+    #   * For `SCRATCH_2`, `PERSISTENT_2`, and `PERSISTENT_1` deployment
     #     types using SSD storage type, the valid values are 1200 GiB, 2400
     #     GiB, and increments of 2400 GiB.
     #
@@ -2080,7 +2401,9 @@ module Aws::FSx
     #     GiB, and increments of 3600 GiB.
     #
     #   **FSx for ONTAP file systems** - The amount of storage capacity that
-    #   you can configure is from 1024 GiB up to 196,608 GiB (192 TiB).
+    #   you can configure depends on the value of the `HAPairs` property.
+    #   The minimum value is calculated as 1,024 * `HAPairs` and the
+    #   maximum is calculated as 524,288 * `HAPairs`.
     #
     #   **FSx for OpenZFS file systems** - The amount of storage capacity
     #   that you can configure is from 64 GiB up to 524,288 GiB (512 TiB).
@@ -2142,6 +2465,9 @@ module Aws::FSx
     #   A list of IDs specifying the security groups to apply to all network
     #   interfaces created for file system access. This list isn't returned
     #   in later requests to describe the file system.
+    #
+    #   You must specify a security group if you are creating a Multi-AZ FSx
+    #   for ONTAP file system in a VPC subnet that has been shared with you.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -2203,24 +2529,26 @@ module Aws::FSx
     #   @return [Types::CreateFileSystemOntapConfiguration]
     #
     # @!attribute [rw] file_system_type_version
-    #   (Optional) For FSx for Lustre file systems, sets the Lustre version
-    #   for the file system that you're creating. Valid values are `2.10`,
-    #   `2.12`, and `2.15`:
+    #   For FSx for Lustre file systems, sets the Lustre version for the
+    #   file system that you're creating. Valid values are `2.10`, `2.12`,
+    #   and `2.15`:
     #
-    #   * 2\.10 is supported by the Scratch and Persistent\_1 Lustre
+    #   * `2.10` is supported by the Scratch and Persistent\_1 Lustre
     #     deployment types.
     #
-    #   * 2\.12 and 2.15 are supported by all Lustre deployment types. `2.12`
-    #     or `2.15` is required when setting FSx for Lustre `DeploymentType`
-    #     to `PERSISTENT_2`.
+    #   * `2.12` is supported by all Lustre deployment types, except for
+    #     `PERSISTENT_2` with a metadata configuration mode.
     #
-    #   Default value = `2.10`, except when `DeploymentType` is set to
-    #   `PERSISTENT_2`, then the default is `2.12`.
+    #   * `2.15` is supported by all Lustre deployment types and is
+    #     recommended for all new file systems.
     #
-    #   <note markdown="1"> If you set `FileSystemTypeVersion` to `2.10` for a `PERSISTENT_2`
-    #   Lustre deployment type, the `CreateFileSystem` operation fails.
+    #   Default value is `2.10`, except for the following deployments:
     #
-    #    </note>
+    #   * Default value is `2.12` when `DeploymentType` is set to
+    #     `PERSISTENT_2` without a metadata configuration mode.
+    #
+    #   * Default value is `2.15` when `DeploymentType` is set to
+    #     `PERSISTENT_2` with a metadata configuration mode.
     #   @return [String]
     #
     # @!attribute [rw] open_zfs_configuration
@@ -2437,9 +2765,8 @@ module Aws::FSx
     #   Specifies the security style for the volume. If a volume's security
     #   style is not specified, it is automatically set to the root
     #   volume's security style. The security style determines the type of
-    #   permissions that FSx for ONTAP uses to control data access. For more
-    #   information, see [Volume security style][1] in the *Amazon FSx for
-    #   NetApp ONTAP User Guide*. Specify one of the following values:
+    #   permissions that FSx for ONTAP uses to control data access. Specify
+    #   one of the following values:
     #
     #   * `UNIX` if the file system is managed by a UNIX administrator, the
     #     majority of users are NFS clients, and an application accessing
@@ -2449,23 +2776,31 @@ module Aws::FSx
     #     the majority of users are SMB clients, and an application
     #     accessing the data uses a Windows user as the service account.
     #
-    #   * `MIXED` if the file system is managed by both UNIX and Windows
-    #     administrators and users consist of both NFS and SMB clients.
+    #   * `MIXED` This is an advanced setting. For more information, see the
+    #     topic [What the security styles and their effects are][1] in the
+    #     NetApp Documentation Center.
+    #
+    #   For more information, see [Volume security style][2] in the FSx for
+    #   ONTAP User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-volumes.html#volume-security-style
+    #   [1]: https://docs.netapp.com/us-en/ontap/nfs-admin/security-styles-their-effects-concept.html
+    #   [2]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-volumes.html#volume-security-style
     #   @return [String]
     #
     # @!attribute [rw] size_in_megabytes
-    #   Specifies the size of the volume, in megabytes (MB), that you are
-    #   creating.
+    #   Use `SizeInBytes` instead. Specifies the size of the volume, in
+    #   megabytes (MB), that you are creating.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_efficiency_enabled
     #   Set to true to enable deduplication, compression, and compaction
     #   storage efficiency features on the volume, or set to false to
-    #   disable them. This parameter is required.
+    #   disable them.
+    #
+    #   `StorageEfficiencyEnabled` is required when creating a `RW` volume
+    #   (`OntapVolumeType` set to `RW`).
     #   @return [Boolean]
     #
     # @!attribute [rw] storage_virtual_machine_id
@@ -2514,12 +2849,12 @@ module Aws::FSx
     #     read-only and can be used as the destination of a NetApp
     #     SnapMirror relationship.
     #
-    #   For more information, see [Volume types][1] in the *Amazon FSx for
-    #   NetApp ONTAP User Guide*.
+    #   For more information, see [Volume types][1] in the Amazon FSx for
+    #   NetApp ONTAP User Guide.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-volumes.html#volume-types
     #   @return [String]
     #
     # @!attribute [rw] snapshot_policy
@@ -2542,8 +2877,8 @@ module Aws::FSx
     #   You can also provide the name of a custom policy that you created
     #   with the ONTAP CLI or REST API.
     #
-    #   For more information, see [Snapshot policies][1] in the *Amazon FSx
-    #   for NetApp ONTAP User Guide*.
+    #   For more information, see [Snapshot policies][1] in the Amazon FSx
+    #   for NetApp ONTAP User Guide.
     #
     #
     #
@@ -2565,6 +2900,26 @@ module Aws::FSx
     #   Specifies the SnapLock configuration for an FSx for ONTAP volume.
     #   @return [Types::CreateSnaplockConfiguration]
     #
+    # @!attribute [rw] volume_style
+    #   Use to specify the style of an ONTAP volume. FSx for ONTAP offers
+    #   two styles of volumes that you can use for different purposes,
+    #   FlexVol and FlexGroup volumes. For more information, see [Volume
+    #   styles][1] in the Amazon FSx for NetApp ONTAP User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-volumes.html#volume-styles
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregate_configuration
+    #   Use to specify configuration options for a volume’s storage
+    #   aggregate or aggregates.
+    #   @return [Types::CreateAggregateConfiguration]
+    #
+    # @!attribute [rw] size_in_bytes
+    #   Specifies the configured size of the volume, in bytes.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateOntapVolumeConfiguration AWS API Documentation
     #
     class CreateOntapVolumeConfiguration < Struct.new(
@@ -2577,13 +2932,16 @@ module Aws::FSx
       :ontap_volume_type,
       :snapshot_policy,
       :copy_tags_to_backups,
-      :snaplock_configuration)
+      :snaplock_configuration,
+      :volume_style,
+      :aggregate_configuration,
+      :size_in_bytes)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The snapshot configuration to use when creating an OpenZFS volume from
-    # a snapshot.
+    # The snapshot configuration to use when creating an Amazon FSx for
+    # OpenZFS volume from a snapshot.
     #
     # @!attribute [rw] snapshot_arn
     #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
@@ -2598,8 +2956,8 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] copy_strategy
-    #   The strategy used when copying data from the snapshot to the new
-    #   volume.
+    #   Specifies the strategy used when copying data from the snapshot to
+    #   the new volume.
     #
     #   * `CLONE` - The new volume references the data in the origin
     #     snapshot. Cloning a snapshot is faster than copying data from the
@@ -2608,6 +2966,19 @@ module Aws::FSx
     #     volume using its copied data.
     #
     #   * `FULL_COPY` - Copies all data from the snapshot to the new volume.
+    #
+    #     Specify this option to create the volume from a snapshot on
+    #     another FSx for OpenZFS file system.
+    #
+    #   <note markdown="1"> The `INCREMENTAL_COPY` option is only for updating an existing
+    #   volume by using a snapshot from another FSx for OpenZFS file system.
+    #   For more information, see [CopySnapshotAndUpdateVolume][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopySnapshotAndUpdateVolume.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateOpenZFSOriginSnapshotConfiguration AWS API Documentation
@@ -2727,8 +3098,7 @@ module Aws::FSx
     #   @return [Array<Types::OpenZFSNfsExport>]
     #
     # @!attribute [rw] user_and_group_quotas
-    #   An object specifying how much storage users or groups can use on the
-    #   volume.
+    #   Configures how much storage users and groups can use on the volume.
     #   @return [Array<Types::OpenZFSUserOrGroupQuota>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateOpenZFSVolumeConfiguration AWS API Documentation
@@ -2888,7 +3258,7 @@ module Aws::FSx
     #   Describes the self-managed Microsoft Active Directory to which you
     #   want to join the SVM. Joining an Active Directory provides user
     #   authentication and access control for SMB clients, including
-    #   Microsoft Windows and macOS client accessing the file system.
+    #   Microsoft Windows and macOS clients accessing the file system.
     #   @return [Types::CreateSvmActiveDirectoryConfiguration]
     #
     # @!attribute [rw] client_request_token
@@ -2927,12 +3297,20 @@ module Aws::FSx
     #     majority of users are NFS clients, and an application accessing
     #     the data uses a UNIX user as the service account.
     #
-    #   * `NTFS` if the file system is managed by a Windows administrator,
-    #     the majority of users are SMB clients, and an application
-    #     accessing the data uses a Windows user as the service account.
+    #   * `NTFS` if the file system is managed by a Microsoft Windows
+    #     administrator, the majority of users are SMB clients, and an
+    #     application accessing the data uses a Microsoft Windows user as
+    #     the service account.
     #
-    #   * `MIXED` if the file system is managed by both UNIX and Windows
-    #     administrators and users consist of both NFS and SMB clients.
+    #   * `MIXED` This is an advanced setting. For more information, see
+    #     [Volume security style][1] in the Amazon FSx for NetApp ONTAP User
+    #     Guide.
+    #
+    #
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-security-style.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateStorageVirtualMachineRequest AWS API Documentation
@@ -2964,7 +3342,7 @@ module Aws::FSx
 
     # The configuration that Amazon FSx uses to join the ONTAP storage
     # virtual machine (SVM) to your self-managed (including on-premises)
-    # Microsoft Active Directory (AD) directory.
+    # Microsoft Active Directory directory.
     #
     # @!attribute [rw] net_bios_name
     #   The NetBIOS name of the Active Directory computer object that will
@@ -4681,6 +5059,25 @@ module Aws::FSx
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSharedVpcConfigurationRequest AWS API Documentation
+    #
+    class DescribeSharedVpcConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] enable_fsx_route_table_updates_from_participant_accounts
+    #   Indicates whether participant accounts can create FSx for ONTAP
+    #   Multi-AZ file systems in shared subnets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSharedVpcConfigurationResponse AWS API Documentation
+    #
+    class DescribeSharedVpcConfigurationResponse < Struct.new(
+      :enable_fsx_route_table_updates_from_participant_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] snapshot_ids
     #   The IDs of the snapshots that you want to retrieve. This parameter
     #   value overrides any filters. If any IDs aren't found, a
@@ -4704,13 +5101,21 @@ module Aws::FSx
     #   `NextToken` value left off.
     #   @return [String]
     #
+    # @!attribute [rw] include_shared
+    #   Set to `false` (default) if you want to only see the snapshots owned
+    #   by your Amazon Web Services account. Set to `true` if you want to
+    #   see the snapshots in your account and the ones shared with you from
+    #   another account.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSnapshotsRequest AWS API Documentation
     #
     class DescribeSnapshotsRequest < Struct.new(
       :snapshot_ids,
       :filters,
       :max_results,
-      :next_token)
+      :next_token,
+      :include_shared)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4901,12 +5306,21 @@ module Aws::FSx
     #
     # @!attribute [rw] mode
     #   Specifies whether the file system is using the `AUTOMATIC` setting
-    #   of SSD IOPS of 3 IOPS per GB of storage capacity, , or if it using a
+    #   of SSD IOPS of 3 IOPS per GB of storage capacity, or if it using a
     #   `USER_PROVISIONED` value.
     #   @return [String]
     #
     # @!attribute [rw] iops
     #   The total number of SSD IOPS provisioned for the file system.
+    #
+    #   The minimum and maximum values for this property depend on the value
+    #   of `HAPairs` and `StorageCapacity`. The minimum value is calculated
+    #   as `StorageCapacity` * 3 * `HAPairs` (3 IOPS per GB of
+    #   `StorageCapacity`). The maximum value is calculated as 200,000 *
+    #   `HAPairs`.
+    #
+    #   Amazon FSx responds with an HTTP status code 400 (Bad Request) if
+    #   the value of `Iops` is outside of the minimum or maximum values.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DiskIopsConfiguration AWS API Documentation
@@ -5263,7 +5677,7 @@ module Aws::FSx
     #     * If you are not using the `DataRepositorySubdirectories`
     #       parameter, the path is to an NFS Export directory (or one of its
     #       subdirectories) in the format
-    #       `nsf://nfs-domain-name/exportpath`. You can therefore link a
+    #       `nfs://nfs-domain-name/exportpath`. You can therefore link a
     #       single NFS Export to a single data repository association.
     #
     #     * If you are using the `DataRepositorySubdirectories` parameter,
@@ -5488,6 +5902,10 @@ module Aws::FSx
     #
     # @!attribute [rw] storage_capacity
     #   The storage capacity of the file system in gibibytes (GiB).
+    #
+    #   Amazon FSx responds with an HTTP status code 400 (Bad Request) if
+    #   the value of `StorageCapacity` is outside of the minimum or maximum
+    #   values.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_type
@@ -5559,12 +5977,12 @@ module Aws::FSx
     #
     # @!attribute [rw] tags
     #   The tags to associate with the file system. For more information,
-    #   see [Tagging your Amazon EC2 resources][1] in the *Amazon EC2 User
-    #   Guide*.
+    #   see [Tagging your Amazon FSx resources][1] in the *Amazon FSx for
+    #   Lustre User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/tag-resources.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] windows_configuration
@@ -5680,6 +6098,38 @@ module Aws::FSx
     #
     class FileSystemFailureDetails < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Lustre metadata performance configuration of an Amazon FSx for
+    # Lustre file system using a `PERSISTENT_2` deployment type. The
+    # configuration enables the file system to support increasing metadata
+    # performance.
+    #
+    # @!attribute [rw] iops
+    #   The number of Metadata IOPS provisioned for the file system. Valid
+    #   values are `1500`, `3000`, `6000`, `12000`, and multiples of `12000`
+    #   up to a maximum of `192000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mode
+    #   The metadata configuration mode for provisioning Metadata IOPS for
+    #   the file system.
+    #
+    #   * In AUTOMATIC mode, FSx for Lustre automatically provisions and
+    #     scales the number of Metadata IOPS on your file system based on
+    #     your file system storage capacity.
+    #
+    #   * In USER\_PROVISIONED mode, you can choose to specify the number of
+    #     Metadata IOPS to provision for your file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/FileSystemLustreMetadataConfiguration AWS API Documentation
+    #
+    class FileSystemLustreMetadataConfiguration < Struct.new(
+      :iops,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6096,6 +6546,11 @@ module Aws::FSx
     #   from clients that try to access your file system as a root user.
     #   @return [Types::LustreRootSquashConfiguration]
     #
+    # @!attribute [rw] metadata_configuration
+    #   The Lustre metadata performance configuration for an Amazon FSx for
+    #   Lustre file system using a `PERSISTENT_2` deployment type.
+    #   @return [Types::FileSystemLustreMetadataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/LustreFileSystemConfiguration AWS API Documentation
     #
     class LustreFileSystemConfiguration < Struct.new(
@@ -6110,7 +6565,8 @@ module Aws::FSx
       :drive_cache_type,
       :data_compression_type,
       :log_configuration,
-      :root_squash_configuration)
+      :root_squash_configuration,
+      :metadata_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6379,6 +6835,9 @@ module Aws::FSx
     #
     #   * `SINGLE_AZ_1` - A file system configured for Single-AZ redundancy.
     #
+    #   * `SINGLE_AZ_2` - A file system configured with multiple
+    #     high-availability (HA) pairs for Single-AZ redundancy.
+    #
     #   For information about the use cases for Multi-AZ and Single-AZ
     #   deployments, refer to [Choosing Multi-AZ or Single-AZ file system
     #   deployment][1].
@@ -6453,6 +6912,55 @@ module Aws::FSx
     #   response.
     #   @return [String]
     #
+    # @!attribute [rw] ha_pairs
+    #   Specifies how many high-availability (HA) file server pairs the file
+    #   system will have. The default value is 1. The value of this property
+    #   affects the values of `StorageCapacity`, `Iops`, and
+    #   `ThroughputCapacity`. For more information, see [High-availability
+    #   (HA) pairs][1] in the FSx for ONTAP user guide.
+    #
+    #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
+    #   the following conditions:
+    #
+    #   * The value of `HAPairs` is less than 1 or greater than 12.
+    #
+    #   * The value of `HAPairs` is greater than 1 and the value of
+    #     `DeploymentType` is `SINGLE_AZ_1` or `MULTI_AZ_1`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/HA-pairs.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] throughput_capacity_per_ha_pair
+    #   Use to choose the throughput capacity per HA pair. When the value of
+    #   `HAPairs` is equal to 1, the value of `ThroughputCapacityPerHAPair`
+    #   is the total throughput for the file system.
+    #
+    #   This field and `ThroughputCapacity` cannot be defined in the same
+    #   API call, but one is required.
+    #
+    #   This field and `ThroughputCapacity` are the same for file systems
+    #   with one HA pair.
+    #
+    #   * For `SINGLE_AZ_1` and `MULTI_AZ_1`, valid values are 128, 256,
+    #     512, 1024, 2048, or 4096 MBps.
+    #
+    #   * For `SINGLE_AZ_2`, valid values are 3072 or 6144 MBps.
+    #
+    #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
+    #   the following conditions:
+    #
+    #   * The value of `ThroughputCapacity` and
+    #     `ThroughputCapacityPerHAPair` are not the same value.
+    #
+    #   * The value of deployment type is `SINGLE_AZ_2` and
+    #     `ThroughputCapacity` / `ThroughputCapacityPerHAPair` is a valid HA
+    #     pair (a value between 2 and 12).
+    #
+    #   * The value of `ThroughputCapacityPerHAPair` is not a valid value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapFileSystemConfiguration AWS API Documentation
     #
     class OntapFileSystemConfiguration < Struct.new(
@@ -6466,7 +6974,9 @@ module Aws::FSx
       :route_table_ids,
       :throughput_capacity,
       :weekly_maintenance_start_time,
-      :fsx_admin_password)
+      :fsx_admin_password,
+      :ha_pairs,
+      :throughput_capacity_per_ha_pair)
       SENSITIVE = [:fsx_admin_password]
       include Aws::Structure
     end
@@ -6568,8 +7078,8 @@ module Aws::FSx
     #   You can also provide the name of a custom policy that you created
     #   with the ONTAP CLI or REST API.
     #
-    #   For more information, see [Snapshot policies][1] in the *Amazon FSx
-    #   for NetApp ONTAP User Guide*.
+    #   For more information, see [Snapshot policies][1] in the Amazon FSx
+    #   for NetApp ONTAP User Guide.
     #
     #
     #
@@ -6592,6 +7102,25 @@ module Aws::FSx
     #   volume.
     #   @return [Types::SnaplockConfiguration]
     #
+    # @!attribute [rw] volume_style
+    #   Use to specify the style of an ONTAP volume. For more information
+    #   about FlexVols and FlexGroups, see [Volume types][1] in Amazon FSx
+    #   for NetApp ONTAP User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregate_configuration
+    #   This structure specifies configuration options for a volume’s
+    #   storage aggregate or aggregates.
+    #   @return [Types::AggregateConfiguration]
+    #
+    # @!attribute [rw] size_in_bytes
+    #   The configured size of the volume, in bytes.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OntapVolumeConfiguration AWS API Documentation
     #
     class OntapVolumeConfiguration < Struct.new(
@@ -6607,7 +7136,10 @@ module Aws::FSx
       :ontap_volume_type,
       :snapshot_policy,
       :copy_tags_to_backups,
-      :snaplock_configuration)
+      :snaplock_configuration,
+      :volume_style,
+      :aggregate_configuration,
+      :size_in_bytes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6861,8 +7393,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The snapshot configuration to use when creating an OpenZFS volume from
-    # a snapshot.
+    # The snapshot configuration used when creating an Amazon FSx for
+    # OpenZFS volume from a snapshot.
     #
     # @!attribute [rw] snapshot_arn
     #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
@@ -6887,6 +7419,16 @@ module Aws::FSx
     #     volume using its copied data.
     #
     #   * `FULL_COPY` - Copies all data from the snapshot to the new volume.
+    #
+    #   <note markdown="1"> The `INCREMENTAL_COPY` option is only for updating an existing
+    #   volume by using a snapshot from another FSx for OpenZFS file system.
+    #   For more information, see [CopySnapshotAndUpdateVolume][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopySnapshotAndUpdateVolume.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OpenZFSOriginSnapshotConfiguration AWS API Documentation
@@ -6898,20 +7440,24 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The configuration for how much storage a user or group can use on the
-    # volume.
+    # Used to configure quotas that define how much storage a user or group
+    # can use on an FSx for OpenZFS volume. For more information, see
+    # [Volume properties][1] in the FSx for OpenZFS User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-volumes.html#volume-properties
     #
     # @!attribute [rw] type
-    #   A value that specifies whether the quota applies to a user or group.
+    #   Specifies whether the quota applies to a user or group.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The ID of the user or group.
+    #   The ID of the user or group that the quota applies to.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_capacity_quota_gi_b
-    #   The amount of storage that the user or group can use in gibibytes
-    #   (GiB).
+    #   The user or group's storage quota, in gibibytes (GiB).
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OpenZFSUserOrGroupQuota AWS API Documentation
@@ -7017,6 +7563,55 @@ module Aws::FSx
     #   restored from snapshot.
     #   @return [Boolean]
     #
+    # @!attribute [rw] delete_intermediate_data
+    #   A Boolean value indicating whether snapshot data that differs
+    #   between the current state and the specified snapshot should be
+    #   overwritten when a volume is restored from a snapshot.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] source_snapshot_arn
+    #   The Amazon Resource Name (ARN) for a given resource. ARNs uniquely
+    #   identify Amazon Web Services resources. We require an ARN when you
+    #   need to specify a resource unambiguously across all of Amazon Web
+    #   Services. For more information, see [Amazon Resource Names
+    #   (ARNs)][1] in the *Amazon Web Services General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_snapshot
+    #   The ID of the snapshot that's being copied or was most recently
+    #   copied to the destination volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] copy_strategy
+    #   Specifies the strategy used when copying data from the snapshot to
+    #   the new volume.
+    #
+    #   * `CLONE` - The new volume references the data in the origin
+    #     snapshot. Cloning a snapshot is faster than copying data from the
+    #     snapshot to a new volume and doesn't consume disk throughput.
+    #     However, the origin snapshot can't be deleted if there is a
+    #     volume using its copied data.
+    #
+    #   * `FULL_COPY` - Copies all data from the snapshot to the new volume.
+    #
+    #     Specify this option to create the volume from a snapshot on
+    #     another FSx for OpenZFS file system.
+    #
+    #   <note markdown="1"> The `INCREMENTAL_COPY` option is only for updating an existing
+    #   volume by using a snapshot from another FSx for OpenZFS file system.
+    #   For more information, see [CopySnapshotAndUpdateVolume][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_CopySnapshotAndUpdateVolume.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OpenZFSVolumeConfiguration AWS API Documentation
     #
     class OpenZFSVolumeConfiguration < Struct.new(
@@ -7033,7 +7628,11 @@ module Aws::FSx
       :user_and_group_quotas,
       :restore_to_snapshot,
       :delete_intermediate_snaphots,
-      :delete_cloned_volumes)
+      :delete_cloned_volumes,
+      :delete_intermediate_data,
+      :source_snapshot_arn,
+      :destination_snapshot,
+      :copy_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7417,13 +8016,13 @@ module Aws::FSx
     end
 
     # Specifies changes you are making to the self-managed Microsoft Active
-    # Directory (AD) configuration to which an FSx for Windows File Server
-    # file system or an FSx for ONTAP SVM is joined.
+    # Directory configuration to which an FSx for Windows File Server file
+    # system or an FSx for ONTAP SVM is joined.
     #
     # @!attribute [rw] user_name
     #   Specifies the updated user name for the service account on your
-    #   self-managed AD domain. Amazon FSx uses this account to join to your
-    #   self-managed AD domain.
+    #   self-managed Active Directory domain. Amazon FSx uses this account
+    #   to join to your self-managed Active Directory domain.
     #
     #   This account must have the permissions required to join computers to
     #   the domain in the organizational unit provided in
@@ -7432,29 +8031,29 @@ module Aws::FSx
     #
     # @!attribute [rw] password
     #   Specifies the updated password for the service account on your
-    #   self-managed AD domain. Amazon FSx uses this account to join to your
-    #   self-managed AD domain.
+    #   self-managed Active Directory domain. Amazon FSx uses this account
+    #   to join to your self-managed Active Directory domain.
     #   @return [String]
     #
     # @!attribute [rw] dns_ips
     #   A list of up to three DNS server or domain controller IP addresses
-    #   in your self-managed AD domain.
+    #   in your self-managed Active Directory domain.
     #   @return [Array<String>]
     #
     # @!attribute [rw] domain_name
     #   Specifies an updated fully qualified domain name of your
-    #   self-managed AD configuration.
+    #   self-managed Active Directory configuration.
     #   @return [String]
     #
     # @!attribute [rw] organizational_unit_distinguished_name
     #   Specifies an updated fully qualified distinguished name of the
-    #   organization unit within your self-managed AD.
+    #   organization unit within your self-managed Active Directory.
     #   @return [String]
     #
     # @!attribute [rw] file_system_administrators_group
-    #   Specifies the updated name of the self-managed AD domain group whose
-    #   members are granted administrative privileges for the Amazon FSx
-    #   resource.
+    #   For FSx for ONTAP file systems only - Specifies the updated name of
+    #   the self-managed Active Directory domain group whose members are
+    #   granted administrative privileges for the Amazon FSx resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/SelfManagedActiveDirectoryConfigurationUpdates AWS API Documentation
@@ -8367,6 +8966,32 @@ module Aws::FSx
     #   as a root user.
     #   @return [Types::LustreRootSquashConfiguration]
     #
+    # @!attribute [rw] per_unit_storage_throughput
+    #   The throughput of an Amazon FSx for Lustre Persistent SSD-based file
+    #   system, measured in megabytes per second per tebibyte (MB/s/TiB).
+    #   You can increase or decrease your file system's throughput. Valid
+    #   values depend on the deployment type of the file system, as follows:
+    #
+    #   * For `PERSISTENT_1` SSD-based deployment types, valid values are
+    #     50, 100, and 200 MB/s/TiB.
+    #
+    #   * For `PERSISTENT_2` SSD-based deployment types, valid values are
+    #     125, 250, 500, and 1000 MB/s/TiB.
+    #
+    #   For more information, see [ Managing throughput capacity][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-throughput-capacity.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] metadata_configuration
+    #   The Lustre metadata performance configuration for an Amazon FSx for
+    #   Lustre file system using a `PERSISTENT_2` deployment type. When this
+    #   configuration is enabled, the file system supports increasing
+    #   metadata performance.
+    #   @return [Types::UpdateFileSystemLustreMetadataConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemLustreConfiguration AWS API Documentation
     #
     class UpdateFileSystemLustreConfiguration < Struct.new(
@@ -8376,7 +9001,61 @@ module Aws::FSx
       :auto_import_policy,
       :data_compression_type,
       :log_configuration,
-      :root_squash_configuration)
+      :root_squash_configuration,
+      :per_unit_storage_throughput,
+      :metadata_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Lustre metadata performance configuration update for an Amazon FSx
+    # for Lustre file system using a `PERSISTENT_2` deployment type. You can
+    # request an increase in your file system's Metadata IOPS and/or switch
+    # your file system's metadata configuration mode. For more information,
+    # see [Managing metadata performance][1] in the *Amazon FSx for Lustre
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-metadata-performance.html
+    #
+    # @!attribute [rw] iops
+    #   (USER\_PROVISIONED mode only) Specifies the number of Metadata IOPS
+    #   to provision for your file system. Valid values are `1500`, `3000`,
+    #   `6000`, `12000`, and multiples of `12000` up to a maximum of
+    #   `192000`.
+    #
+    #   The value you provide must be greater than or equal to the current
+    #   number of Metadata IOPS provisioned for the file system.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mode
+    #   The metadata configuration mode for provisioning Metadata IOPS for
+    #   an FSx for Lustre file system using a `PERSISTENT_2` deployment
+    #   type.
+    #
+    #   * To increase the Metadata IOPS or to switch from AUTOMATIC mode,
+    #     specify `USER_PROVISIONED` as the value for this parameter. Then
+    #     use the Iops parameter to provide a Metadata IOPS value that is
+    #     greater than or equal to the current number of Metadata IOPS
+    #     provisioned for the file system.
+    #
+    #   * To switch from USER\_PROVISIONED mode, specify `AUTOMATIC` as the
+    #     value for this parameter, but do not input a value for Iops.
+    #
+    #     <note markdown="1"> If you request to switch from USER\_PROVISIONED to AUTOMATIC mode
+    #     and the current Metadata IOPS value is greater than the automated
+    #     default, FSx for Lustre rejects the request because downscaling
+    #     Metadata IOPS is not supported.
+    #
+    #      </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemLustreMetadataConfiguration AWS API Documentation
+    #
+    class UpdateFileSystemLustreMetadataConfiguration < Struct.new(
+      :iops,
+      :mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8441,10 +9120,18 @@ module Aws::FSx
     #
     # @!attribute [rw] throughput_capacity
     #   Enter a new value to change the amount of throughput capacity for
-    #   the file system. Throughput capacity is measured in megabytes per
-    #   second (MBps). Valid values are 128, 256, 512, 1024, 2048, and 4096
-    #   MBps. For more information, see [Managing throughput capacity][1] in
-    #   the FSx for ONTAP User Guide.
+    #   the file system in megabytes per second (MBps). For more
+    #   information, see [Managing throughput capacity][1] in the FSx for
+    #   ONTAP User Guide.
+    #
+    #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
+    #   the following conditions:
+    #
+    #   * The value of `ThroughputCapacity` and
+    #     `ThroughputCapacityPerHAPair` are not the same value.
+    #
+    #   * The value of `ThroughputCapacity` when divided by the value of
+    #     `HAPairs` is outside of the valid range for `ThroughputCapacity`.
     #
     #
     #
@@ -8464,6 +9151,35 @@ module Aws::FSx
     #   the list of VPC route table IDs for a file system.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] throughput_capacity_per_ha_pair
+    #   Use to choose the throughput capacity per HA pair, rather than the
+    #   total throughput for the file system.
+    #
+    #   This field and `ThroughputCapacity` cannot be defined in the same
+    #   API call, but one is required.
+    #
+    #   This field and `ThroughputCapacity` are the same for file systems
+    #   with one HA pair.
+    #
+    #   * For `SINGLE_AZ_1` and `MULTI_AZ_1`, valid values are 128, 256,
+    #     512, 1024, 2048, or 4096 MBps.
+    #
+    #   * For `SINGLE_AZ_2`, valid values are 3072 or 6144 MBps.
+    #
+    #   Amazon FSx responds with an HTTP status code 400 (Bad Request) for
+    #   the following conditions:
+    #
+    #   * The value of `ThroughputCapacity` and
+    #     `ThroughputCapacityPerHAPair` are not the same value for file
+    #     systems with one HA pair.
+    #
+    #   * The value of deployment type is `SINGLE_AZ_2` and
+    #     `ThroughputCapacity` / `ThroughputCapacityPerHAPair` is a valid HA
+    #     pair (a value between 2 and 12).
+    #
+    #   * The value of `ThroughputCapacityPerHAPair` is not a valid value.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemOntapConfiguration AWS API Documentation
     #
     class UpdateFileSystemOntapConfiguration < Struct.new(
@@ -8474,7 +9190,8 @@ module Aws::FSx
       :disk_iops_configuration,
       :throughput_capacity,
       :add_route_table_ids,
-      :remove_route_table_ids)
+      :remove_route_table_ids,
+      :throughput_capacity_per_ha_pair)
       SENSITIVE = [:fsx_admin_password]
       include Aws::Structure
     end
@@ -8520,7 +9237,7 @@ module Aws::FSx
     #   DeploymentType you choose, as follows:
     #
     #   * For `MULTI_AZ_1` and `SINGLE_AZ_2`, valid values are 160, 320,
-    #     640, 1280, 2560, 3840, 5120, 7680, or 10240 MBps.
+    #     640, 1280, 2560, 3840, 5120, 7680, or 10240 MB/s.
     #
     #   * For `SINGLE_AZ_1`, valid values are 64, 128, 256, 512, 1024, 2048,
     #     3072, or 4096 MB/s.
@@ -8851,6 +9568,10 @@ module Aws::FSx
     #   an FSx for ONTAP SnapLock volume.
     #   @return [Types::UpdateSnaplockConfiguration]
     #
+    # @!attribute [rw] size_in_bytes
+    #   The configured size of the volume, in bytes.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateOntapVolumeConfiguration AWS API Documentation
     #
     class UpdateOntapVolumeConfiguration < Struct.new(
@@ -8861,7 +9582,8 @@ module Aws::FSx
       :tiering_policy,
       :snapshot_policy,
       :copy_tags_to_backups,
-      :snaplock_configuration)
+      :snaplock_configuration,
+      :size_in_bytes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8939,6 +9661,44 @@ module Aws::FSx
       :nfs_exports,
       :user_and_group_quotas,
       :read_only)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enable_fsx_route_table_updates_from_participant_accounts
+    #   Specifies whether participant accounts can create FSx for ONTAP
+    #   Multi-AZ file systems in shared subnets. Set to `true` to enable or
+    #   `false` to disable.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string
+    #   of up to 63 ASCII characters. This token is automatically filled on
+    #   your behalf when you use the Command Line Interface (CLI) or an
+    #   Amazon Web Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSharedVpcConfigurationRequest AWS API Documentation
+    #
+    class UpdateSharedVpcConfigurationRequest < Struct.new(
+      :enable_fsx_route_table_updates_from_participant_accounts,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enable_fsx_route_table_updates_from_participant_accounts
+    #   Indicates whether participant accounts can create FSx for ONTAP
+    #   Multi-AZ file systems in shared subnets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSharedVpcConfigurationResponse AWS API Documentation
+    #
+    class UpdateSharedVpcConfigurationResponse < Struct.new(
+      :enable_fsx_route_table_updates_from_participant_accounts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9106,7 +9866,7 @@ module Aws::FSx
     #
     # @!attribute [rw] self_managed_active_directory_configuration
     #   Specifies changes you are making to the self-managed Microsoft
-    #   Active Directory (AD) configuration to which an FSx for Windows File
+    #   Active Directory configuration to which an FSx for Windows File
     #   Server file system or an FSx for ONTAP SVM is joined.
     #   @return [Types::SelfManagedActiveDirectoryConfigurationUpdates]
     #
@@ -9179,8 +9939,7 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # Describes an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS
-    # volume.
+    # Describes an Amazon FSx volume.
     #
     # @!attribute [rw] creation_time
     #   The time that the resource was created, in seconds (since

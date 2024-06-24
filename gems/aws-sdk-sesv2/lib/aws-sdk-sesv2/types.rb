@@ -322,12 +322,36 @@ module Aws::SESV2
     #   The `ReplacementEmailContent` associated with a `BulkEmailEntry`.
     #   @return [Types::ReplacementEmailContent]
     #
+    # @!attribute [rw] replacement_headers
+    #   The list of message headers associated with the `BulkEmailEntry`
+    #   data type.
+    #
+    #   * Headers Not Present in `BulkEmailEntry`: If a header is specified
+    #     in [ `Template` ][1] but not in `BulkEmailEntry`, the header from
+    #     `Template` will be added to the outgoing email.
+    #
+    #   * Headers Present in `BulkEmailEntry`: If a header is specified in
+    #     `BulkEmailEntry`, it takes precedence over any header of the same
+    #     name specified in [ `Template` ][1]:
+    #
+    #     * If the header is also defined within `Template`, the value from
+    #       `BulkEmailEntry` will replace the header's value in the email.
+    #
+    #     * If the header is not defined within `Template`, it will simply
+    #       be added to the email as specified in `BulkEmailEntry`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_Template.html
+    #   @return [Array<Types::MessageHeader>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/BulkEmailEntry AWS API Documentation
     #
     class BulkEmailEntry < Struct.new(
       :destination,
       :replacement_tags,
-      :replacement_email_content)
+      :replacement_email_content,
+      :replacement_headers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2063,7 +2087,10 @@ module Aws::SESV2
     #   * If you include attachments, they must be in a file format that the
     #     Amazon SES API v2 supports.
     #
-    #   * The entire message must be Base64 encoded.
+    #   * The raw data of the message needs to base64-encoded if you are
+    #     accessing Amazon SES directly through the HTTPS interface. If you
+    #     are accessing Amazon SES using an Amazon Web Services SDK, the SDK
+    #     takes care of the base 64-encoding for you.
     #
     #   * If any of the MIME parts in your message contain content that is
     #     outside of the 7-bit ASCII character range, you should encode that
@@ -2162,6 +2189,23 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # An object that defines an Amazon EventBridge destination for email
+    # events. You can use Amazon EventBridge to send notifications when
+    # certain email events occur.
+    #
+    # @!attribute [rw] event_bus_arn
+    #   The Amazon Resource Name (ARN) of the Amazon EventBridge bus to
+    #   publish email events to. Only the default bus is supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/EventBridgeDestination AWS API Documentation
+    #
+    class EventBridgeDestination < Struct.new(
+      :event_bus_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # In the Amazon SES API v2, *events* include message sends, deliveries,
     # opens, clicks, bounces, complaints and delivery delays. *Event
     # destinations* are places that you can send information about these
@@ -2251,9 +2295,15 @@ module Aws::SESV2
     #
     # @!attribute [rw] sns_destination
     #   An object that defines an Amazon SNS destination for email events.
-    #   You can use Amazon SNS to send notification when certain email
+    #   You can use Amazon SNS to send notifications when certain email
     #   events occur.
     #   @return [Types::SnsDestination]
+    #
+    # @!attribute [rw] event_bridge_destination
+    #   An object that defines an Amazon EventBridge destination for email
+    #   events. You can use Amazon EventBridge to send notifications when
+    #   certain email events occur.
+    #   @return [Types::EventBridgeDestination]
     #
     # @!attribute [rw] pinpoint_destination
     #   An object that defines an Amazon Pinpoint project destination for
@@ -2277,6 +2327,7 @@ module Aws::SESV2
       :kinesis_firehose_destination,
       :cloud_watch_destination,
       :sns_destination,
+      :event_bridge_destination,
       :pinpoint_destination)
       SENSITIVE = []
       include Aws::Structure
@@ -2316,9 +2367,15 @@ module Aws::SESV2
     #
     # @!attribute [rw] sns_destination
     #   An object that defines an Amazon SNS destination for email events.
-    #   You can use Amazon SNS to send notification when certain email
+    #   You can use Amazon SNS to send notifications when certain email
     #   events occur.
     #   @return [Types::SnsDestination]
+    #
+    # @!attribute [rw] event_bridge_destination
+    #   An object that defines an Amazon EventBridge destination for email
+    #   events. You can use Amazon EventBridge to send notifications when
+    #   certain email events occur.
+    #   @return [Types::EventBridgeDestination]
     #
     # @!attribute [rw] pinpoint_destination
     #   An object that defines an Amazon Pinpoint project destination for
@@ -2341,6 +2398,7 @@ module Aws::SESV2
       :kinesis_firehose_destination,
       :cloud_watch_destination,
       :sns_destination,
+      :event_bridge_destination,
       :pinpoint_destination)
       SENSITIVE = []
       include Aws::Structure
@@ -2602,10 +2660,7 @@ module Aws::SESV2
     #
     #   If the value is `false`, then your account is in the *sandbox*. When
     #   your account is in the sandbox, you can only send email to verified
-    #   identities. Additionally, the maximum number of emails you can send
-    #   in a 24-hour period (your sending quota) is 200, and the maximum
-    #   number of emails you can send per second (your maximum sending rate)
-    #   is 1.
+    #   identities.
     #
     #   If the value is `true`, then your account has production access.
     #   When your account has production access, you can send email to any
@@ -3400,6 +3455,11 @@ module Aws::SESV2
     #     for the identity.
     #   @return [String]
     #
+    # @!attribute [rw] verification_info
+    #   An object that contains additional information about the
+    #   verification status for the identity.
+    #   @return [Types::VerificationInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetEmailIdentityResponse AWS API Documentation
     #
     class GetEmailIdentityResponse < Struct.new(
@@ -3411,7 +3471,8 @@ module Aws::SESV2
       :policies,
       :tags,
       :configuration_set_name,
-      :verification_status)
+      :verification_status,
+      :verification_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4464,7 +4525,7 @@ module Aws::SESV2
     #   `NextToken` element, which you can use to obtain additional results.
     #
     #   The value you specify has to be at least 1, and can be no more than
-    #   10.
+    #   100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListEmailTemplatesRequest AWS API Documentation
@@ -4858,11 +4919,47 @@ module Aws::SESV2
     #   message, a text-only version of the message, or both.
     #   @return [Types::Body]
     #
+    # @!attribute [rw] headers
+    #   The list of message headers that will be added to the email message.
+    #   @return [Array<Types::MessageHeader>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/Message AWS API Documentation
     #
     class Message < Struct.new(
       :subject,
-      :body)
+      :body,
+      :headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the name and value of a message header that you add to an
+    # email.
+    #
+    # @!attribute [rw] name
+    #   The name of the message header. The message header name has to meet
+    #   the following criteria:
+    #
+    #   * Can contain any printable ASCII character (33 - 126) except for
+    #     colon (:).
+    #
+    #   * Can contain no more than 126 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the message header. The message header value has to
+    #   meet the following criteria:
+    #
+    #   * Can contain any printable ASCII character.
+    #
+    #   * Can contain no more than 870 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MessageHeader AWS API Documentation
+    #
+    class MessageHeader < Struct.new(
+      :name,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5247,10 +5344,7 @@ module Aws::SESV2
     #
     #   If the value is `false`, then your account is in the *sandbox*. When
     #   your account is in the sandbox, you can only send email to verified
-    #   identities. Additionally, the maximum number of emails you can send
-    #   in a 24-hour period (your sending quota) is 200, and the maximum
-    #   number of emails you can send per second (your maximum sending rate)
-    #   is 1.
+    #   identities.
     #
     #   If the value is `true`, then your account has production access.
     #   When your account has production access, you can send email to any
@@ -5976,7 +6070,10 @@ module Aws::SESV2
     #
     #   * Attachments must be in a file format that the Amazon SES supports.
     #
-    #   * The entire message must be Base64 encoded.
+    #   * The raw data of the message needs to base64-encoded if you are
+    #     accessing Amazon SES directly through the HTTPS interface. If you
+    #     are accessing Amazon SES using an Amazon Web Services SDK, the SDK
+    #     takes care of the base 64-encoding for you.
     #
     #   * If any of the MIME parts in your message contain content that is
     #     outside of the 7-bit ASCII character range, you should encode that
@@ -6135,6 +6232,31 @@ module Aws::SESV2
     class ReviewDetails < Struct.new(
       :status,
       :case_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information about the start of authority (SOA)
+    # record associated with the identity.
+    #
+    # @!attribute [rw] primary_name_server
+    #   Primary name server specified in the SOA record.
+    #   @return [String]
+    #
+    # @!attribute [rw] admin_email
+    #   Administrative contact email from the SOA record.
+    #   @return [String]
+    #
+    # @!attribute [rw] serial_number
+    #   Serial number from the SOA record.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SOARecord AWS API Documentation
+    #
+    class SOARecord < Struct.new(
+      :primary_name_server,
+      :admin_email,
+      :serial_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6371,7 +6493,7 @@ module Aws::SESV2
     #
     # @!attribute [rw] content
     #   An object that contains the body of the message. You can send either
-    #   a Simple message Raw message or a template Message.
+    #   a Simple message, Raw message, or a Templated message.
     #   @return [Types::EmailContent]
     #
     # @!attribute [rw] email_tags
@@ -6415,9 +6537,10 @@ module Aws::SESV2
     #   message is accepted.
     #
     #   <note markdown="1"> It's possible for Amazon SES to accept a message without sending
-    #   it. This can happen when the message that you're trying to send has
-    #   an attachment contains a virus, or when you send a templated email
-    #   that contains invalid personalization content, for example.
+    #   it. For example, this can happen when the message that you're
+    #   trying to send has an attachment that contains a virus, or when you
+    #   send a templated email that contains invalid personalization
+    #   content.
     #
     #    </note>
     #   @return [String]
@@ -6487,7 +6610,7 @@ module Aws::SESV2
     class SendingPausedException < Aws::EmptyStructure; end
 
     # An object that defines an Amazon SNS destination for email events. You
-    # can use Amazon SNS to send notification when certain email events
+    # can use Amazon SNS to send notifications when certain email events
     # occur.
     #
     # @!attribute [rw] topic_arn
@@ -6763,12 +6886,17 @@ module Aws::SESV2
     #   defines the value to use for that variable.
     #   @return [String]
     #
+    # @!attribute [rw] headers
+    #   The list of message headers that will be added to the email message.
+    #   @return [Array<Types::MessageHeader>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/Template AWS API Documentation
     #
     class Template < Struct.new(
       :template_name,
       :template_arn,
-      :template_data)
+      :template_data,
+      :headers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7229,6 +7357,57 @@ module Aws::SESV2
     class VdmOptions < Struct.new(
       :dashboard_options,
       :guardian_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains additional information about the verification
+    # status for the identity.
+    #
+    # @!attribute [rw] last_checked_timestamp
+    #   The last time a verification attempt was made for this identity.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_success_timestamp
+    #   The last time a successful verification was made for this identity.
+    #   @return [Time]
+    #
+    # @!attribute [rw] error_type
+    #   Provides the reason for the failure describing why Amazon SES was
+    #   not able to successfully verify the identity. Below are the possible
+    #   values:
+    #
+    #   * `INVALID_VALUE` – Amazon SES was able to find the record, but the
+    #     value contained within the record was invalid. Ensure you have
+    #     published the correct values for the record.
+    #
+    #   * `TYPE_NOT_FOUND` – The queried hostname exists but does not have
+    #     the requested type of DNS record. Ensure that you have published
+    #     the correct type of DNS record.
+    #
+    #   * `HOST_NOT_FOUND` – The queried hostname does not exist or was not
+    #     reachable at the time of the request. Ensure that you have
+    #     published the required DNS record(s).
+    #
+    #   * `SERVICE_ERROR` – A temporary issue is preventing Amazon SES from
+    #     determining the verification status of the domain.
+    #
+    #   * `DNS_SERVER_ERROR` – The DNS server encountered an issue and was
+    #     unable to complete the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] soa_record
+    #   An object that contains information about the start of authority
+    #   (SOA) record associated with the identity.
+    #   @return [Types::SOARecord]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/VerificationInfo AWS API Documentation
+    #
+    class VerificationInfo < Struct.new(
+      :last_checked_timestamp,
+      :last_success_timestamp,
+      :error_type,
+      :soa_record)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -2049,6 +2049,15 @@ module Aws::Pinpoint
     #   application.
     #   @return [String]
     #
+    # @!attribute [rw] headers
+    #   The list of [MessageHeaders][1] for the email. You can have up to 15
+    #   MessageHeaders for each email.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-campaigns-campaign-id.html#apps-application-id-campaigns-campaign-id-model-messageheader
+    #   @return [Array<Types::MessageHeader>]
+    #
     # @!attribute [rw] html_body
     #   The body of the email, in HTML format, for recipients whose email
     #   clients render HTML content.
@@ -2063,6 +2072,7 @@ module Aws::Pinpoint
     class CampaignEmailMessage < Struct.new(
       :body,
       :from_address,
+      :headers,
       :html_body,
       :title)
       SENSITIVE = []
@@ -2182,7 +2192,7 @@ module Aws::Pinpoint
     #   The maximum number of messages that a campaign can send each second.
     #   For an application, this value specifies the default limit for the
     #   number of messages that campaigns can send each second. The minimum
-    #   value is 50. The maximum value is 20,000.
+    #   value is 1. The maximum value is 20,000.
     #   @return [Integer]
     #
     # @!attribute [rw] total
@@ -4142,6 +4152,11 @@ module Aws::Pinpoint
     #   data for the channel.
     #   @return [String]
     #
+    # @!attribute [rw] orchestration_sending_role_arn
+    #   The ARN of an IAM role for Amazon Pinpoint to use to send email from
+    #   your campaigns or journeys through Amazon SES.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/EmailChannelRequest AWS API Documentation
     #
     class EmailChannelRequest < Struct.new(
@@ -4149,7 +4164,8 @@ module Aws::Pinpoint
       :enabled,
       :from_address,
       :identity,
-      :role_arn)
+      :role_arn,
+      :orchestration_sending_role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4230,6 +4246,11 @@ module Aws::Pinpoint
     #   channel.
     #   @return [String]
     #
+    # @!attribute [rw] orchestration_sending_role_arn
+    #   The ARN of an IAM role for Amazon Pinpoint to use to send email from
+    #   your campaigns or journeys through Amazon SES.
+    #   @return [String]
+    #
     # @!attribute [rw] version
     #   The current version of the email channel.
     #   @return [Integer]
@@ -4251,6 +4272,7 @@ module Aws::Pinpoint
       :messages_per_second,
       :platform,
       :role_arn,
+      :orchestration_sending_role_arn,
       :version)
       SENSITIVE = []
       include Aws::Structure
@@ -4385,6 +4407,15 @@ module Aws::Pinpoint
     #   on the message template.
     #   @return [String]
     #
+    # @!attribute [rw] headers
+    #   The list of [MessageHeaders][1] for the email. You can have up to 15
+    #   Headers.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/apireference/templates-template-name-email.html#templates-template-name-email-model-messageheader
+    #   @return [Array<Types::MessageHeader>]
+    #
     # @!attribute [rw] tags
     #   <note markdown="1">As of **22-05-2023** tags has been deprecated for update operations.
     #   After this date any value in tags is not processed and an error code
@@ -4426,6 +4457,7 @@ module Aws::Pinpoint
       :html_part,
       :recommender_id,
       :subject,
+      :headers,
       :tags,
       :template_description,
       :text_part)
@@ -4473,6 +4505,9 @@ module Aws::Pinpoint
     #   based on the message template.
     #   @return [String]
     #
+    # @!attribute [rw] headers
+    #   @return [Array<Types::MessageHeader>]
+    #
     # @!attribute [rw] tags
     #   A string-to-string map of key-value pairs that identifies the tags
     #   that are associated with the message template. Each tag consists of
@@ -4513,6 +4548,7 @@ module Aws::Pinpoint
       :last_modified_date,
       :recommender_id,
       :subject,
+      :headers,
       :tags,
       :template_description,
       :template_name,
@@ -4581,7 +4617,9 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The unique identifier for the endpoint in the context of the batch.
+    #   The case insensitive unique identifier for the endpoint in the
+    #   context of the batch. The identifier can't contain `$`, `\{` or
+    #   `\}`.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -4798,8 +4836,6 @@ module Aws::Pinpoint
     #
     #   * THROTTLED - Amazon Pinpoint throttled the operation to send the
     #     message to the endpoint.
-    #
-    #   * TIMEOUT - The message couldn't be sent within the timeout period.
     #
     #   * UNKNOWN\_FAILURE - An unknown error occurred.
     #   @return [String]
@@ -9498,8 +9534,6 @@ module Aws::Pinpoint
     #   * THROTTLED - Amazon Pinpoint throttled the operation to send the
     #     message to the endpoint address.
     #
-    #   * TIMEOUT - The message couldn't be sent within the timeout period.
-    #
     #   * UNKNOWN\_FAILURE - An unknown error occurred.
     #   @return [String]
     #
@@ -11708,12 +11742,42 @@ module Aws::Pinpoint
     #   such as mobile devices.
     #   @return [Types::SimpleEmailPart]
     #
+    # @!attribute [rw] headers
+    #   List of Headers for the email.
+    #   @return [Array<Types::MessageHeader>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/SimpleEmail AWS API Documentation
     #
     class SimpleEmail < Struct.new(
       :html_part,
       :subject,
-      :text_part)
+      :text_part,
+      :headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the name and value pair of an email header to add to your
+    # email. You can have up to 15 MessageHeaders. A header can contain
+    # information such as the sender, receiver, route, or timestamp.
+    #
+    # @!attribute [rw] name
+    #   The name of the message header. The header name can contain up to
+    #   126 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the message header. The header value can contain up to
+    #   870 characters, including the length of any rendered attributes. For
+    #   example if you add the \\\{CreationDate\\} attribute, it renders as
+    #   YYYY-MM-DDTHH:MM:SS.SSSZ and is 24 characters in length.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/MessageHeader AWS API Documentation
+    #
+    class MessageHeader < Struct.new(
+      :name,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end

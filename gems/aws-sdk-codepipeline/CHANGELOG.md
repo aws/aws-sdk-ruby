@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2024-06-07)
+------------------
+
+* Feature - CodePipeline now supports overriding S3 Source Object Key during StartPipelineExecution, as part of Source Overrides.
+
+1.73.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.72.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.71.0 (2024-04-26)
+------------------
+
+* Feature - Add ability to manually and automatically roll back a pipeline stage to a previously successful execution.
+
+1.70.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2024-02-08)
+------------------
+
+* Feature - Add ability to execute pipelines with new parallel & queued execution modes and add support for triggers with filtering on branches and file paths.
+
+1.68.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.66.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.65.0 (2023-11-17)
+------------------
+
+* Feature - CodePipeline now supports overriding source revisions to achieve manual re-deploy of a past revision
+
+1.64.0 (2023-10-24)
+------------------
+
+* Feature - Add ability to trigger pipelines from git tags, define variables at pipeline level and new pipeline type V2.
+
+1.63.0 (2023-10-17)
+------------------
+
+* Feature - Add retryMode ALL_ACTIONS to RetryStageExecution API that retries a failed stage starting from first action in the stage
+
 1.62.0 (2023-09-27)
 ------------------
 

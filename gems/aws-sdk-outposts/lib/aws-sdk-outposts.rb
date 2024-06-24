@@ -32,7 +32,7 @@ require_relative 'aws-sdk-outposts/customizations'
 # structure.
 #
 #     outposts = Aws::Outposts::Client.new
-#     resp = outposts.cancel_order(params)
+#     resp = outposts.cancel_capacity_task(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-outposts/customizations'
 # @!group service
 module Aws::Outposts
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.58.0'
 
 end

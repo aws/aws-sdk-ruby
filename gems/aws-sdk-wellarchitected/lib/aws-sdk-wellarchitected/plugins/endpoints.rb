@@ -14,6 +14,7 @@ module Aws::WellArchitected
       option(
         :endpoint_provider,
         doc_type: 'Aws::WellArchitected::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::WellArchitected
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -104,6 +106,8 @@ module Aws::WellArchitected
             Aws::WellArchitected::Endpoints::GetAnswer.build(context)
           when :get_consolidated_report
             Aws::WellArchitected::Endpoints::GetConsolidatedReport.build(context)
+          when :get_global_settings
+            Aws::WellArchitected::Endpoints::GetGlobalSettings.build(context)
           when :get_lens
             Aws::WellArchitected::Endpoints::GetLens.build(context)
           when :get_lens_review
@@ -174,6 +178,8 @@ module Aws::WellArchitected
             Aws::WellArchitected::Endpoints::UpdateAnswer.build(context)
           when :update_global_settings
             Aws::WellArchitected::Endpoints::UpdateGlobalSettings.build(context)
+          when :update_integration
+            Aws::WellArchitected::Endpoints::UpdateIntegration.build(context)
           when :update_lens_review
             Aws::WellArchitected::Endpoints::UpdateLensReview.build(context)
           when :update_profile

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::PersonalizeRuntime
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::PersonalizeRuntime
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::PersonalizeRuntime
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,56 +347,159 @@ module Aws::PersonalizeRuntime
     #   @option options [Aws::PersonalizeRuntime::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::PersonalizeRuntime::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
     end
 
     # @!group API Operations
+
+    # Returns a list of recommended actions in sorted in descending order by
+    # prediction score. Use the `GetActionRecommendations` API if you have a
+    # custom campaign that deploys a solution version trained with a
+    # PERSONALIZED\_ACTIONS recipe.
+    #
+    # For more information about PERSONALIZED\_ACTIONS recipes, see
+    # [PERSONALIZED\_ACTIONS recipes][1]. For more information about getting
+    # action recommendations, see [Getting action recommendations][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/personalize/latest/dg/nexts-best-action-recipes.html
+    # [2]: https://docs.aws.amazon.com/personalize/latest/dg/get-action-recommendations.html
+    #
+    # @option params [String] :campaign_arn
+    #   The Amazon Resource Name (ARN) of the campaign to use for getting
+    #   action recommendations. This campaign must deploy a solution version
+    #   trained with a PERSONALIZED\_ACTIONS recipe.
+    #
+    # @option params [String] :user_id
+    #   The user ID of the user to provide action recommendations for.
+    #
+    # @option params [Integer] :num_results
+    #   The number of results to return. The default is 5. The maximum is 100.
+    #
+    # @option params [String] :filter_arn
+    #   The ARN of the filter to apply to the returned recommendations. For
+    #   more information, see [Filtering Recommendations][1].
+    #
+    #   When using this parameter, be sure the filter resource is `ACTIVE`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
+    #
+    # @option params [Hash<String,String>] :filter_values
+    #   The values to use when filtering recommendations. For each placeholder
+    #   parameter in your filter expression, provide the parameter name (in
+    #   matching case) as a key and the filter value(s) as the corresponding
+    #   value. Separate multiple values for one parameter with a comma.
+    #
+    #   For filter expressions that use an `INCLUDE` element to include
+    #   actions, you must provide values for all parameters that are defined
+    #   in the expression. For filters with expressions that use an `EXCLUDE`
+    #   element to exclude actions, you can omit the `filter-values`. In this
+    #   case, Amazon Personalize doesn't use that portion of the expression
+    #   to filter recommendations.
+    #
+    #   For more information, see [Filtering recommendations and user
+    #   segments][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
+    #
+    # @return [Types::GetActionRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetActionRecommendationsResponse#action_list #action_list} => Array&lt;Types::PredictedAction&gt;
+    #   * {Types::GetActionRecommendationsResponse#recommendation_id #recommendation_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_action_recommendations({
+    #     campaign_arn: "Arn",
+    #     user_id: "UserID",
+    #     num_results: 1,
+    #     filter_arn: "Arn",
+    #     filter_values: {
+    #       "FilterAttributeName" => "FilterAttributeValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_list #=> Array
+    #   resp.action_list[0].action_id #=> String
+    #   resp.action_list[0].score #=> Float
+    #   resp.recommendation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetActionRecommendations AWS API Documentation
+    #
+    # @overload get_action_recommendations(params = {})
+    # @param [Hash] params ({})
+    def get_action_recommendations(params = {}, options = {})
+      req = build_request(:get_action_recommendations, params)
+      req.send_request(options)
+    end
 
     # Re-ranks a list of recommended items for the given user. The first
     # item in the list is deemed the most likely item to be of interest to
@@ -404,7 +517,8 @@ module Aws::PersonalizeRuntime
     # @option params [required, Array<String>] :input_list
     #   A list of items (by `itemId`) to rank. If an item was not included in
     #   the training dataset, the item is appended to the end of the reranked
-    #   list. The maximum is 500.
+    #   list. If you are including metadata in recommendations, the maximum is
+    #   50. Otherwise, the maximum is 500.
     #
     # @option params [required, String] :user_id
     #   The user for which you want the campaign to provide a personalized
@@ -444,6 +558,20 @@ module Aws::PersonalizeRuntime
     #
     #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
     #
+    # @option params [Hash<String,Array>] :metadata_columns
+    #   If you enabled metadata in recommendations when you created or updated
+    #   the campaign, specify metadata columns from your Items dataset to
+    #   include in the personalized ranking. The map key is `ITEMS` and the
+    #   value is a list of column names from your Items dataset. The maximum
+    #   number of columns you can provide is 10.
+    #
+    #   For information about enabling metadata for a campaign, see [Enabling
+    #   metadata in recommendations for a campaign][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata
+    #
     # @return [Types::GetPersonalizedRankingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPersonalizedRankingResponse#personalized_ranking #personalized_ranking} => Array&lt;Types::PredictedItem&gt;
@@ -462,6 +590,9 @@ module Aws::PersonalizeRuntime
     #     filter_values: {
     #       "FilterAttributeName" => "FilterAttributeValue",
     #     },
+    #     metadata_columns: {
+    #       "DatasetType" => ["ColumnName"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -470,6 +601,10 @@ module Aws::PersonalizeRuntime
     #   resp.personalized_ranking[0].item_id #=> String
     #   resp.personalized_ranking[0].score #=> Float
     #   resp.personalized_ranking[0].promotion_name #=> String
+    #   resp.personalized_ranking[0].metadata #=> Hash
+    #   resp.personalized_ranking[0].metadata["ColumnName"] #=> String
+    #   resp.personalized_ranking[0].reason #=> Array
+    #   resp.personalized_ranking[0].reason[0] #=> String
     #   resp.recommendation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetPersonalizedRanking AWS API Documentation
@@ -519,8 +654,9 @@ module Aws::PersonalizeRuntime
     #   Required for `USER_PERSONALIZATION` recipe type.
     #
     # @option params [Integer] :num_results
-    #   The number of results to return. The default is 25. The maximum is
-    #   500.
+    #   The number of results to return. The default is 25. If you are
+    #   including metadata in recommendations, the maximum is 50. Otherwise,
+    #   the maximum is 500.
     #
     # @option params [Hash<String,String>] :context
     #   The contextual metadata to use when getting recommendations.
@@ -568,6 +704,23 @@ module Aws::PersonalizeRuntime
     #   defines additional business rules that apply to a configurable subset
     #   of recommended items.
     #
+    # @option params [Hash<String,Array>] :metadata_columns
+    #   If you enabled metadata in recommendations when you created or updated
+    #   the campaign or recommender, specify the metadata columns from your
+    #   Items dataset to include in item recommendations. The map key is
+    #   `ITEMS` and the value is a list of column names from your Items
+    #   dataset. The maximum number of columns you can provide is 10.
+    #
+    #   For information about enabling metadata for a campaign, see [Enabling
+    #   metadata in recommendations for a campaign][1]. For information about
+    #   enabling metadata for a recommender, see [Enabling metadata in
+    #   recommendations for a recommender][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata
+    #   [2]: https://docs.aws.amazon.com/personalize/latest/dg/creating-recommenders.html#create-recommender-return-metadata
+    #
     # @return [Types::GetRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRecommendationsResponse#item_list #item_list} => Array&lt;Types::PredictedItem&gt;
@@ -598,6 +751,9 @@ module Aws::PersonalizeRuntime
     #         },
     #       },
     #     ],
+    #     metadata_columns: {
+    #       "DatasetType" => ["ColumnName"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -606,6 +762,10 @@ module Aws::PersonalizeRuntime
     #   resp.item_list[0].item_id #=> String
     #   resp.item_list[0].score #=> Float
     #   resp.item_list[0].promotion_name #=> String
+    #   resp.item_list[0].metadata #=> Hash
+    #   resp.item_list[0].metadata["ColumnName"] #=> String
+    #   resp.item_list[0].reason #=> Array
+    #   resp.item_list[0].reason[0] #=> String
     #   resp.recommendation_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-runtime-2018-05-22/GetRecommendations AWS API Documentation
@@ -630,7 +790,7 @@ module Aws::PersonalizeRuntime
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalizeruntime'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

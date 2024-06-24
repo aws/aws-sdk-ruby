@@ -60,7 +60,7 @@ module Aws::S3
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_bucket_acl(bucket: @bucket_name)
       end
       @data = resp.data
@@ -177,7 +177,7 @@ module Aws::S3
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -235,12 +235,12 @@ module Aws::S3
     #   [1]: http://www.ietf.org/rfc/rfc1864.txt
     # @option options [String] :checksum_algorithm
     #   Indicates the algorithm used to create the checksum for the object
-    #   when using the SDK. This header will not provide any additional
-    #   functionality if not using the SDK. When sending this header, there
-    #   must be a corresponding `x-amz-checksum` or `x-amz-trailer` header
-    #   sent. Otherwise, Amazon S3 fails the request with the HTTP status code
-    #   `400 Bad Request`. For more information, see [Checking object
-    #   integrity][1] in the *Amazon S3 User Guide*.
+    #   when you use the SDK. This header will not provide any additional
+    #   functionality if you don't use the SDK. When you send this header,
+    #   there must be a corresponding `x-amz-checksum` or `x-amz-trailer`
+    #   header sent. Otherwise, Amazon S3 fails the request with the HTTP
+    #   status code `400 Bad Request`. For more information, see [Checking
+    #   object integrity][1] in the *Amazon S3 User Guide*.
     #
     #   If you provide an individual checksum, Amazon S3 ignores any provided
     #   `ChecksumAlgorithm` parameter.
@@ -263,13 +263,13 @@ module Aws::S3
     # @option options [String] :grant_write_acp
     #   Allows grantee to write the ACL for the applicable bucket.
     # @option options [String] :expected_bucket_owner
-    #   The account ID of the expected bucket owner. If the bucket is owned by
-    #   a different account, the request fails with the HTTP status code `403
-    #   Forbidden` (access denied).
+    #   The account ID of the expected bucket owner. If the account ID that
+    #   you provide does not match the actual owner of the bucket, the request
+    #   fails with the HTTP status code `403 Forbidden` (access denied).
     # @return [EmptyStructure]
     def put(options = {})
       options = options.merge(bucket: @bucket_name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.put_bucket_acl(options)
       end
       resp.data

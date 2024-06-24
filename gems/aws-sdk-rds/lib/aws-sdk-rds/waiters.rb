@@ -77,6 +77,8 @@ module Aws::RDS
   # | db_instance_deleted           | {Client#describe_db_instances}         | 30       | 60            |
   # | db_snapshot_available         | {Client#describe_db_snapshots}         | 30       | 60            |
   # | db_snapshot_deleted           | {Client#describe_db_snapshots}         | 30       | 60            |
+  # | tenant_database_available     | {Client#describe_tenant_databases}     | 30       | 60            |
+  # | tenant_database_deleted       | {Client#describe_tenant_databases}     | 30       | 60            |
   #
   module Waiters
 
@@ -611,6 +613,105 @@ module Aws::RDS
 
       # @option (see Client#describe_db_snapshots)
       # @return (see Client#describe_db_snapshots)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class TenantDatabaseAvailable
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_tenant_databases,
+            acceptors: [
+              {
+                "expected" => "available",
+                "matcher" => "pathAll",
+                "state" => "success",
+                "argument" => "tenant_databases[].status"
+              },
+              {
+                "expected" => "deleted",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "tenant_databases[].status"
+              },
+              {
+                "expected" => "incompatible-parameters",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "tenant_databases[].status"
+              },
+              {
+                "expected" => "incompatible-restore",
+                "matcher" => "pathAny",
+                "state" => "failure",
+                "argument" => "tenant_databases[].status"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_tenant_databases)
+      # @return (see Client#describe_tenant_databases)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class TenantDatabaseDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_tenant_databases,
+            acceptors: [
+              {
+                "expected" => true,
+                "matcher" => "path",
+                "state" => "success",
+                "argument" => "length(tenant_databases) == `0`"
+              },
+              {
+                "expected" => "DBInstanceNotFoundFault",
+                "matcher" => "error",
+                "state" => "success"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_tenant_databases)
+      # @return (see Client#describe_tenant_databases)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

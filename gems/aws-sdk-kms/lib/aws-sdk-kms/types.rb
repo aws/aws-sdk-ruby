@@ -242,6 +242,21 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # The request was rejected because an automatic rotation of this key is
+    # currently in progress or scheduled to begin within the next 20
+    # minutes.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] custom_key_store_id
     #   Enter the key store ID of the custom key store that you want to
     #   connect. To find the ID of a custom key store, use the
@@ -418,7 +433,7 @@ module Aws::KMS
     #
     #   * An external key store with `PUBLIC_ENDPOINT` connectivity cannot
     #     use the same `XksProxyUriEndpoint` value as an external key store
-    #     with `VPC_ENDPOINT_SERVICE` connectivity in the same Amazon Web
+    #     with `VPC_ENDPOINT_SERVICE` connectivity in this Amazon Web
     #     Services Region.
     #
     #   * Each external key store with `VPC_ENDPOINT_SERVICE` connectivity
@@ -826,14 +841,17 @@ module Aws::KMS
     #
     #   * For HMAC KMS keys (symmetric), specify `GENERATE_VERIFY_MAC`.
     #
-    #   * For asymmetric KMS keys with RSA key material, specify
+    #   * For asymmetric KMS keys with RSA key pairs, specify
     #     `ENCRYPT_DECRYPT` or `SIGN_VERIFY`.
     #
-    #   * For asymmetric KMS keys with ECC key material, specify
+    #   * For asymmetric KMS keys with NIST-recommended elliptic curve key
+    #     pairs, specify `SIGN_VERIFY` or `KEY_AGREEMENT`.
+    #
+    #   * For asymmetric KMS keys with `ECC_SECG_P256K1` key pairs specify
     #     `SIGN_VERIFY`.
     #
-    #   * For asymmetric KMS keys with SM2 key material (China Regions
-    #     only), specify `ENCRYPT_DECRYPT` or `SIGN_VERIFY`.
+    #   * For asymmetric KMS keys with SM2 key pairs (China Regions only),
+    #     specify `ENCRYPT_DECRYPT`, `SIGN_VERIFY`, or `KEY_AGREEMENT`.
     #
     #
     #
@@ -889,7 +907,8 @@ module Aws::KMS
     #
     #     * `HMAC_512`
     #
-    #   * Asymmetric RSA key pairs
+    #   * Asymmetric RSA key pairs (encryption and decryption -or- signing
+    #     and verification)
     #
     #     * `RSA_2048`
     #
@@ -897,7 +916,8 @@ module Aws::KMS
     #
     #     * `RSA_4096`
     #
-    #   * Asymmetric NIST-recommended elliptic curve key pairs
+    #   * Asymmetric NIST-recommended elliptic curve key pairs (signing and
+    #     verification -or- deriving shared secrets)
     #
     #     * `ECC_NIST_P256` (secp256r1)
     #
@@ -905,16 +925,18 @@ module Aws::KMS
     #
     #     * `ECC_NIST_P521` (secp521r1)
     #
-    #   * Other asymmetric elliptic curve key pairs
+    #   * Other asymmetric elliptic curve key pairs (signing and
+    #     verification)
     #
     #     * `ECC_SECG_P256K1` (secp256k1), commonly used for
     #       cryptocurrencies.
     #
     #     ^
     #
-    #   * SM2 key pairs (China Regions only)
+    #   * SM2 key pairs (encryption and decryption -or- signing and
+    #     verification -or- deriving shared secrets)
     #
-    #     * `SM2`
+    #     * `SM2` (China Regions only)
     #
     #     ^
     #
@@ -992,12 +1014,13 @@ module Aws::KMS
     #   Management Service Developer Guide*.
     #
     #   Use this parameter only when you intend to prevent the principal
-    #   that is making the request from making a subsequent PutKeyPolicy
-    #   request on the KMS key.
+    #   that is making the request from making a subsequent
+    #   [PutKeyPolicy][2] request on the KMS key.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#prevent-unmanageable-key
+    #   [2]: https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -1596,7 +1619,7 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc
+    #   [1]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-concepts.html#term-attestdoc
     #   [2]: https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk
     #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html
     #   @return [Types::RecipientInfo]
@@ -1745,6 +1768,195 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # @!attribute [rw] key_id
+    #   Identifies an asymmetric NIST-recommended ECC or SM2 (China Regions
+    #   only) KMS key. KMS uses the private key in the specified key pair to
+    #   derive the shared secret. The key usage of the KMS key must be
+    #   `KEY_AGREEMENT`. To find the `KeyUsage` of a KMS key, use the
+    #   DescribeKey operation.
+    #
+    #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
+    #   ARN. When using an alias name, prefix it with `"alias/"`. To specify
+    #   a KMS key in a different Amazon Web Services account, you must use
+    #   the key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a KMS key, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_agreement_algorithm
+    #   Specifies the key agreement algorithm used to derive the shared
+    #   secret. The only valid value is `ECDH`.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_key
+    #   Specifies the public key in your peer's NIST-recommended elliptic
+    #   curve (ECC) or SM2 (China Regions only) key pair.
+    #
+    #   The public key must be a DER-encoded X.509 public key, also known as
+    #   `SubjectPublicKeyInfo` (SPKI), as defined in [RFC 5280][1].
+    #
+    #   GetPublicKey returns the public key of an asymmetric KMS key pair in
+    #   the required DER-encoded format.
+    #
+    #   <note markdown="1"> If you use [Amazon Web Services CLI version 1][2], you must provide
+    #   the DER-encoded X.509 public key in a file. Otherwise, the Amazon
+    #   Web Services CLI Base64-encodes the public key a second time,
+    #   resulting in a `ValidationException`.
+    #
+    #    </note>
+    #
+    #   You can specify the public key as binary data in a file using fileb
+    #   (`fileb://<path-to-file>`) or in-line using a Base64 encoded string.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc5280
+    #   [2]: https://docs.aws.amazon.com/cli/v1/userguide/cli-chap-welcome.html
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_tokens
+    #   A list of grant tokens.
+    #
+    #   Use a grant token when your permission to call this operation comes
+    #   from a new grant that has not yet achieved *eventual consistency*.
+    #   For more information, see [Grant token][1] and [Using a grant
+    #   token][2] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your KMS
+    #   API calls][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] recipient
+    #   A signed [attestation document][1] from an Amazon Web Services Nitro
+    #   enclave and the encryption algorithm to use with the enclave's
+    #   public key. The only valid encryption algorithm is
+    #   `RSAES_OAEP_SHA_256`.
+    #
+    #   This parameter only supports attestation documents for Amazon Web
+    #   Services Nitro Enclaves. To call DeriveSharedSecret for an Amazon
+    #   Web Services Nitro Enclaves, use the [Amazon Web Services Nitro
+    #   Enclaves SDK][2] to generate the attestation document and then use
+    #   the Recipient parameter from any Amazon Web Services SDK to provide
+    #   the attestation document for the enclave.
+    #
+    #   When you use this parameter, instead of returning a plaintext copy
+    #   of the shared secret, KMS encrypts the plaintext shared secret under
+    #   the public key in the attestation document, and returns the
+    #   resulting ciphertext in the `CiphertextForRecipient` field in the
+    #   response. This ciphertext can be decrypted only with the private key
+    #   in the enclave. The `CiphertextBlob` field in the response contains
+    #   the encrypted shared secret derived from the KMS key specified by
+    #   the `KeyId` parameter and public key specified by the `PublicKey`
+    #   parameter. The `SharedSecret` field in the response is null or
+    #   empty.
+    #
+    #   For information about the interaction between KMS and Amazon Web
+    #   Services Nitro Enclaves, see [How Amazon Web Services Nitro Enclaves
+    #   uses KMS][3] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc
+    #   [2]: https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html
+    #   @return [Types::RecipientInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeriveSharedSecretRequest AWS API Documentation
+    #
+    class DeriveSharedSecretRequest < Struct.new(
+      :key_id,
+      :key_agreement_algorithm,
+      :public_key,
+      :grant_tokens,
+      :dry_run,
+      :recipient)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
+    #   Identifies the KMS key used to derive the shared secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_secret
+    #   The raw secret derived from the specified key agreement algorithm,
+    #   private key in the asymmetric KMS key, and your peer's public key.
+    #
+    #   If the response includes the `CiphertextForRecipient` field, the
+    #   `SharedSecret` field is null or empty.
+    #   @return [String]
+    #
+    # @!attribute [rw] ciphertext_for_recipient
+    #   The plaintext shared secret encrypted with the public key in the
+    #   attestation document.
+    #
+    #   This field is included in the response only when the `Recipient`
+    #   parameter in the request includes a valid attestation document from
+    #   an Amazon Web Services Nitro enclave. For information about the
+    #   interaction between KMS and Amazon Web Services Nitro Enclaves, see
+    #   [How Amazon Web Services Nitro Enclaves uses KMS][1] in the *Key
+    #   Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html
+    #   @return [String]
+    #
+    # @!attribute [rw] key_agreement_algorithm
+    #   Identifies the key agreement algorithm used to derive the shared
+    #   secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_origin
+    #   The source of the key material for the specified KMS key.
+    #
+    #   When this value is `AWS_KMS`, KMS created the key material. When
+    #   this value is `EXTERNAL`, the key material was imported or the KMS
+    #   key doesn't have any key material.
+    #
+    #   The only valid values for DeriveSharedSecret are `AWS_KMS` and
+    #   `EXTERNAL`. DeriveSharedSecret does not support KMS keys with a
+    #   `KeyOrigin` value of `AWS_CLOUDHSM` or `EXTERNAL_KEY_STORE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeriveSharedSecretResponse AWS API Documentation
+    #
+    class DeriveSharedSecretResponse < Struct.new(
+      :key_id,
+      :shared_secret,
+      :ciphertext_for_recipient,
+      :key_agreement_algorithm,
+      :key_origin)
+      SENSITIVE = [:shared_secret]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] custom_key_store_id
     #   Gets only information about the specified custom key store. Enter
     #   the key store ID.
@@ -1800,8 +2012,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in
-    #   thisresponse to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeCustomKeyStoresResponse AWS API Documentation
@@ -2035,10 +2247,31 @@ module Aws::KMS
     #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
     #   @return [String]
     #
+    # @!attribute [rw] rotation_period_in_days
+    #   Use this parameter to specify a custom period of time between each
+    #   rotation date. If no value is specified, the default value is 365
+    #   days.
+    #
+    #   The rotation period defines the number of days after you enable
+    #   automatic key rotation that KMS will rotate your key material, and
+    #   the number of days between each automatic rotation thereafter.
+    #
+    #   You can use the [ `kms:RotationPeriodInDays` ][1] condition key to
+    #   further constrain the values that principals can specify in the
+    #   `RotationPeriodInDays` parameter.
+    #
+    #
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-rotation-period-in-days
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRotationRequest AWS API Documentation
     #
     class EnableKeyRotationRequest < Struct.new(
-      :key_id)
+      :key_id,
+      :rotation_period_in_days)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2280,8 +2513,11 @@ module Aws::KMS
     #   `RSAES_OAEP_SHA_256`.
     #
     #   This parameter only supports attestation documents for Amazon Web
-    #   Services Nitro Enclaves. To include this parameter, use the [Amazon
-    #   Web Services Nitro Enclaves SDK][2] or any Amazon Web Services SDK.
+    #   Services Nitro Enclaves. To call DeriveSharedSecret for an Amazon
+    #   Web Services Nitro Enclaves, use the [Amazon Web Services Nitro
+    #   Enclaves SDK][2] to generate the attestation document and then use
+    #   the Recipient parameter from any Amazon Web Services SDK to provide
+    #   the attestation document for the enclave.
     #
     #   When you use this parameter, instead of returning a plaintext copy
     #   of the private data key, KMS encrypts the plaintext private data key
@@ -3047,7 +3283,8 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] policy_name
-    #   Specifies the name of the key policy. The only valid name is
+    #   Specifies the name of the key policy. If no policy name is
+    #   specified, the default value is `default`. The only valid name is
     #   `default`. To get the names of key policies, use ListKeyPolicies.
     #   @return [String]
     #
@@ -3064,10 +3301,15 @@ module Aws::KMS
     #   A key policy document in JSON format.
     #   @return [String]
     #
+    # @!attribute [rw] policy_name
+    #   The name of the key policy. The only valid value is `default`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicyResponse AWS API Documentation
     #
     class GetKeyPolicyResponse < Struct.new(
-      :policy)
+      :policy,
+      :policy_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3102,10 +3344,42 @@ module Aws::KMS
     #   A Boolean value that specifies whether key rotation is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] key_id
+    #   Identifies the specified symmetric encryption KMS key.
+    #   @return [String]
+    #
+    # @!attribute [rw] rotation_period_in_days
+    #   The number of days between each automatic rotation. The default
+    #   value is 365 days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_rotation_date
+    #   The next date that KMS will automatically rotate the key material.
+    #   @return [Time]
+    #
+    # @!attribute [rw] on_demand_rotation_start_date
+    #   Identifies the date and time that an in progress on-demand rotation
+    #   was initiated.
+    #
+    #   The KMS API follows an [eventual consistency][1] model due to the
+    #   distributed nature of the system. As a result, there might be a
+    #   slight delay between initiating on-demand key rotation and the
+    #   rotation's completion. Once the on-demand rotation is complete, use
+    #   ListKeyRotations to view the details of the on-demand rotation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyRotationStatusResponse AWS API Documentation
     #
     class GetKeyRotationStatusResponse < Struct.new(
-      :key_rotation_enabled)
+      :key_rotation_enabled,
+      :key_id,
+      :rotation_period_in_days,
+      :next_rotation_date,
+      :on_demand_rotation_start_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3167,8 +3441,8 @@ module Aws::KMS
     #     You cannot use the RSAES\_OAEP\_SHA\_1 wrapping algorithm with the
     #     RSA\_2048 wrapping key spec to wrap ECC\_NIST\_P521 key material.
     #
-    #   * **RSAES\_PKCS1\_V1\_5** (Deprecated) — Supported only for
-    #     symmetric encryption key material (and only in legacy mode).
+    #   * **RSAES\_PKCS1\_V1\_5** (Deprecated) — As of October 10, 2023, KMS
+    #     does not support the RSAES\_PKCS1\_V1\_5 wrapping algorithm.
     #   @return [String]
     #
     # @!attribute [rw] wrapping_key_spec
@@ -3313,12 +3587,12 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_usage
-    #   The permitted use of the public key. Valid values are
-    #   `ENCRYPT_DECRYPT` or `SIGN_VERIFY`.
+    #   The permitted use of the public key. Valid values for asymmetric key
+    #   pairs are `ENCRYPT_DECRYPT`, `SIGN_VERIFY`, and `KEY_AGREEMENT`.
     #
-    #   This information is critical. If a public key with `SIGN_VERIFY` key
-    #   usage encrypts data outside of KMS, the ciphertext cannot be
-    #   decrypted.
+    #   This information is critical. For example, if a public key with
+    #   `SIGN_VERIFY` key usage encrypts data outside of KMS, the ciphertext
+    #   cannot be decrypted.
     #   @return [String]
     #
     # @!attribute [rw] encryption_algorithms
@@ -3339,6 +3613,12 @@ module Aws::KMS
     #   public key is `SIGN_VERIFY`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] key_agreement_algorithms
+    #   The key agreement algorithm used to derive a shared secret. This
+    #   field is present only when the KMS key has a `KeyUsage` value of
+    #   `KEY_AGREEMENT`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetPublicKeyResponse AWS API Documentation
     #
     class GetPublicKeyResponse < Struct.new(
@@ -3348,7 +3628,8 @@ module Aws::KMS
       :key_spec,
       :key_usage,
       :encryption_algorithms,
-      :signing_algorithms)
+      :signing_algorithms,
+      :key_agreement_algorithms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3736,8 +4017,9 @@ module Aws::KMS
     # the `KeyUsage` must be `ENCRYPT_DECRYPT`. For signing and verifying
     # messages, the `KeyUsage` must be `SIGN_VERIFY`. For generating and
     # verifying message authentication codes (MACs), the `KeyUsage` must be
-    # `GENERATE_VERIFY_MAC`. To find the `KeyUsage` of a KMS key, use the
-    # DescribeKey operation.
+    # `GENERATE_VERIFY_MAC`. For deriving key agreement secrets, the
+    # `KeyUsage` must be `KEY_AGREEMENT`. To find the `KeyUsage` of a KMS
+    # key, use the DescribeKey operation.
     #
     # To find the encryption or signing algorithms supported for a
     # particular KMS key, use the DescribeKey operation.
@@ -4016,6 +4298,10 @@ module Aws::KMS
     #   `SIGN_VERIFY`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] key_agreement_algorithms
+    #   The key agreement algorithm used to derive a shared secret.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] multi_region
     #   Indicates whether the KMS key is a multi-Region (`True`) or regional
     #   (`False`) key. This value is `True` for multi-Region primary and
@@ -4109,6 +4395,7 @@ module Aws::KMS
       :key_spec,
       :encryption_algorithms,
       :signing_algorithms,
+      :key_agreement_algorithms,
       :multi_region,
       :multi_region_configuration,
       :pending_deletion_window_in_days,
@@ -4209,8 +4496,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in
-    #   thisresponse to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliasesResponse AWS API Documentation
@@ -4292,8 +4579,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in
-    #   thisresponse to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrantsResponse AWS API Documentation
@@ -4362,14 +4649,82 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in
-    #   thisresponse to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPoliciesResponse AWS API Documentation
     #
     class ListKeyPoliciesResponse < Struct.new(
       :policy_names,
+      :next_marker,
+      :truncated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
+    #   Gets the key rotations for the specified KMS key.
+    #
+    #   Specify the key ID or key ARN of the KMS key.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a KMS key, use ListKeys or
+    #   DescribeKey.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, KMS does not return more than the
+    #   specified number of items, but it might return fewer.
+    #
+    #   This value is optional. If you include a value, it must be between 1
+    #   and 1000, inclusive. If you do not include a value, it defaults to
+    #   100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyRotationsRequest AWS API Documentation
+    #
+    class ListKeyRotationsRequest < Struct.new(
+      :key_id,
+      :limit,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rotations
+    #   A list of completed key material rotations.
+    #   @return [Array<Types::RotationsListEntry>]
+    #
+    # @!attribute [rw] next_marker
+    #   When `Truncated` is true, this element is present and contains the
+    #   value to use for the `Marker` parameter in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] truncated
+    #   A flag that indicates whether there are more items in the list. When
+    #   this value is true, the list in this response is truncated. To get
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyRotationsResponse AWS API Documentation
+    #
+    class ListKeyRotationsResponse < Struct.new(
+      :rotations,
       :next_marker,
       :truncated)
       SENSITIVE = []
@@ -4413,8 +4768,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in
-    #   thisresponse to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeysResponse AWS API Documentation
@@ -4495,8 +4850,8 @@ module Aws::KMS
     # @!attribute [rw] truncated
     #   A flag that indicates whether there are more items in the list. When
     #   this value is true, the list in this response is truncated. To get
-    #   more items, pass the value of the `NextMarker` element in
-    #   thisresponse to the `Marker` parameter in a subsequent request.
+    #   more items, pass the value of the `NextMarker` element in this
+    #   response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListResourceTagsResponse AWS API Documentation
@@ -4649,7 +5004,8 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] policy_name
-    #   The name of the key policy. The only valid value is `default`.
+    #   The name of the key policy. If no policy name is specified, the
+    #   default value is `default`. The only valid value is `default`.
     #   @return [String]
     #
     # @!attribute [rw] policy
@@ -4710,12 +5066,13 @@ module Aws::KMS
     #   Management Service Developer Guide*.
     #
     #   Use this parameter only when you intend to prevent the principal
-    #   that is making the request from making a subsequent PutKeyPolicy
-    #   request on the KMS key.
+    #   that is making the request from making a subsequent
+    #   [PutKeyPolicy][2] request on the KMS key.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#prevent-unmanageable-key
+    #   [2]: https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/PutKeyPolicyRequest AWS API Documentation
@@ -5107,12 +5464,13 @@ module Aws::KMS
     #   Management Service Developer Guide*.
     #
     #   Use this parameter only when you intend to prevent the principal
-    #   that is making the request from making a subsequent PutKeyPolicy
-    #   request on the KMS key.
+    #   that is making the request from making a subsequent
+    #   [PutKeyPolicy][2] request on the KMS key.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html#prevent-unmanageable-key
+    #   [2]: https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html
     #   @return [Boolean]
     #
     # @!attribute [rw] description
@@ -5313,6 +5671,87 @@ module Aws::KMS
       :key_id,
       :grant_id,
       :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
+    #   Identifies a symmetric encryption KMS key. You cannot perform
+    #   on-demand rotation of [asymmetric KMS keys][1], [HMAC KMS keys][2],
+    #   KMS keys with [imported key material][3], or KMS keys in a [custom
+    #   key store][4]. To perform on-demand rotation of a set of related
+    #   [multi-Region keys][5], invoke the on-demand rotation on the primary
+    #   key.
+    #
+    #   Specify the key ID or key ARN of the KMS key.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   To get the key ID and key ARN for a KMS key, use ListKeys or
+    #   DescribeKey.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    #   [4]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RotateKeyOnDemandRequest AWS API Documentation
+    #
+    class RotateKeyOnDemandRequest < Struct.new(
+      :key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
+    #   Identifies the symmetric encryption KMS key that you initiated
+    #   on-demand rotation on.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RotateKeyOnDemandResponse AWS API Documentation
+    #
+    class RotateKeyOnDemandResponse < Struct.new(
+      :key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about completed key material rotations.
+    #
+    # @!attribute [rw] key_id
+    #   Unique identifier of the key.
+    #   @return [String]
+    #
+    # @!attribute [rw] rotation_date
+    #   Date and time that the key material rotation completed. Formatted as
+    #   Unix time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] rotation_type
+    #   Identifies whether the key material rotation was a scheduled
+    #   [automatic rotation][1] or an [on-demand rotation][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotating-keys-enable-disable
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotating-keys-on-demand
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RotationsListEntry AWS API Documentation
+    #
+    class RotationsListEntry < Struct.new(
+      :key_id,
+      :rotation_date,
+      :rotation_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6243,9 +6682,9 @@ module Aws::KMS
     end
 
     # The request was rejected because the (`XksKeyId`) is already
-    # associated with a KMS key in this external key store. Each KMS key in
-    # an external key store must be associated with a different external
-    # key.
+    # associated with another KMS key in this external key store. Each KMS
+    # key in an external key store must be associated with a different
+    # external key.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6424,9 +6863,9 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # The request was rejected because the Amazon VPC endpoint service
-    # configuration does not fulfill the requirements for an external key
-    # store proxy. For details, see the exception message.
+    # The request was rejected because the external key store proxy is not
+    # configured correctly. To identify the cause, see the error message
+    # that accompanies the exception.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6455,11 +6894,10 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # The request was rejected because the concatenation of the
-    # `XksProxyUriEndpoint` is already associated with an external key store
-    # in the Amazon Web Services account and Region. Each external key store
-    # in an account and Region must use a unique external key store proxy
-    # address.
+    # The request was rejected because the `XksProxyUriEndpoint` is already
+    # associated with another external key store in this Amazon Web Services
+    # Region. To identify the cause, see the error message that accompanies
+    # the exception.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6474,9 +6912,9 @@ module Aws::KMS
 
     # The request was rejected because the concatenation of the
     # `XksProxyUriEndpoint` and `XksProxyUriPath` is already associated with
-    # an external key store in the Amazon Web Services account and Region.
-    # Each external key store in an account and Region must use a unique
-    # external key store proxy API address.
+    # another external key store in this Amazon Web Services Region. Each
+    # external key store in a Region must use a unique external key store
+    # proxy API address.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6509,10 +6947,9 @@ module Aws::KMS
     end
 
     # The request was rejected because the specified Amazon VPC endpoint
-    # service is already associated with an external key store in the Amazon
-    # Web Services account and Region. Each external key store in an Amazon
-    # Web Services account and Region must use a different Amazon VPC
-    # endpoint service.
+    # service is already associated with another external key store in this
+    # Amazon Web Services Region. Each external key store in a Region must
+    # use a different Amazon VPC endpoint service.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -6527,10 +6964,13 @@ module Aws::KMS
 
     # The request was rejected because the Amazon VPC endpoint service
     # configuration does not fulfill the requirements for an external key
-    # store proxy. For details, see the exception message and [review the
-    # requirements](kms/latest/developerguide/vpc-connectivity.html#xks-vpc-requirements)
-    # for Amazon VPC endpoint service connectivity for an external key
-    # store.
+    # store. To identify the cause, see the error message that accompanies
+    # the exception and [review the requirements][1] for Amazon VPC endpoint
+    # service connectivity for an external key store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/vpc-connectivity.html#xks-vpc-requirements
     #
     # @!attribute [rw] message
     #   @return [String]

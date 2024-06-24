@@ -1,0 +1,74 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudFormation
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html
+    class StackResource
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#initialize-instance_method
+      def initialize: (String stack_name, String logical_id, Hash[Symbol, untyped] options) -> void
+                    | (stack_name: String, logical_id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#stack_name-instance_method
+      def stack_name: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#logical_id-instance_method
+      def logical_id: () -> String
+      alias logical_resource_id logical_id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#stack_id-instance_method
+      def stack_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#physical_resource_id-instance_method
+      def physical_resource_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#resource_type-instance_method
+      def resource_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#last_updated_timestamp-instance_method
+      def last_updated_timestamp: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#resource_status-instance_method
+      def resource_status: () -> ("CREATE_IN_PROGRESS" | "CREATE_FAILED" | "CREATE_COMPLETE" | "DELETE_IN_PROGRESS" | "DELETE_FAILED" | "DELETE_COMPLETE" | "DELETE_SKIPPED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "UPDATE_COMPLETE" | "IMPORT_FAILED" | "IMPORT_COMPLETE" | "IMPORT_IN_PROGRESS" | "IMPORT_ROLLBACK_IN_PROGRESS" | "IMPORT_ROLLBACK_FAILED" | "IMPORT_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_IN_PROGRESS" | "UPDATE_ROLLBACK_COMPLETE" | "UPDATE_ROLLBACK_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_COMPLETE" | "ROLLBACK_FAILED")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#resource_status_reason-instance_method
+      def resource_status_reason: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#description-instance_method
+      def description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#metadata-instance_method
+      def metadata: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#drift_information-instance_method
+      def drift_information: () -> Types::StackResourceDriftInformation
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#module_info-instance_method
+      def module_info: () -> Types::ModuleInfo
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#data-instance_method
+      def data: () -> Types::StackResourceDetail
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/StackResource.html#stack-instance_method
+      def stack: () -> Stack
+
+      class Collection < ::Aws::Resources::Collection[StackResource]
+      end
+    end
+  end
+end

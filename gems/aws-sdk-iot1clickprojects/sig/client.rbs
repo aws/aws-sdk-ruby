@@ -1,0 +1,263 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoT1ClickProjects
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateDeviceWithPlacementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateDeviceWithPlacementResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#associate_device_with_placement-instance_method
+      def associate_device_with_placement: (
+                                             project_name: ::String,
+                                             placement_name: ::String,
+                                             device_id: ::String,
+                                             device_template_name: ::String
+                                           ) -> _AssociateDeviceWithPlacementResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateDeviceWithPlacementResponseSuccess
+
+      interface _CreatePlacementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePlacementResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#create_placement-instance_method
+      def create_placement: (
+                              placement_name: ::String,
+                              project_name: ::String,
+                              ?attributes: Hash[::String, ::String]
+                            ) -> _CreatePlacementResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePlacementResponseSuccess
+
+      interface _CreateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#create_project-instance_method
+      def create_project: (
+                            project_name: ::String,
+                            ?description: ::String,
+                            ?placement_template: {
+                              default_attributes: Hash[::String, ::String]?,
+                              device_templates: Hash[::String, {
+                                  device_type: ::String?,
+                                  callback_overrides: Hash[::String, ::String]?
+                                }]?
+                            },
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
+
+      interface _DeletePlacementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePlacementResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#delete_placement-instance_method
+      def delete_placement: (
+                              placement_name: ::String,
+                              project_name: ::String
+                            ) -> _DeletePlacementResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePlacementResponseSuccess
+
+      interface _DeleteProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#delete_project-instance_method
+      def delete_project: (
+                            project_name: ::String
+                          ) -> _DeleteProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProjectResponseSuccess
+
+      interface _DescribePlacementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePlacementResponse]
+        def placement: () -> Types::PlacementDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#describe_placement-instance_method
+      def describe_placement: (
+                                placement_name: ::String,
+                                project_name: ::String
+                              ) -> _DescribePlacementResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePlacementResponseSuccess
+
+      interface _DescribeProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProjectResponse]
+        def project: () -> Types::ProjectDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#describe_project-instance_method
+      def describe_project: (
+                              project_name: ::String
+                            ) -> _DescribeProjectResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProjectResponseSuccess
+
+      interface _DisassociateDeviceFromPlacementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateDeviceFromPlacementResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#disassociate_device_from_placement-instance_method
+      def disassociate_device_from_placement: (
+                                                project_name: ::String,
+                                                placement_name: ::String,
+                                                device_template_name: ::String
+                                              ) -> _DisassociateDeviceFromPlacementResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateDeviceFromPlacementResponseSuccess
+
+      interface _GetDevicesInPlacementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDevicesInPlacementResponse]
+        def devices: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#get_devices_in_placement-instance_method
+      def get_devices_in_placement: (
+                                      project_name: ::String,
+                                      placement_name: ::String
+                                    ) -> _GetDevicesInPlacementResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDevicesInPlacementResponseSuccess
+
+      interface _ListPlacementsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPlacementsResponse]
+        def placements: () -> ::Array[Types::PlacementSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#list_placements-instance_method
+      def list_placements: (
+                             project_name: ::String,
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListPlacementsResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPlacementsResponseSuccess
+
+      interface _ListProjectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProjectsResponse]
+        def projects: () -> ::Array[Types::ProjectSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#list_projects-instance_method
+      def list_projects: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListProjectsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdatePlacementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePlacementResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#update_placement-instance_method
+      def update_placement: (
+                              placement_name: ::String,
+                              project_name: ::String,
+                              ?attributes: Hash[::String, ::String]
+                            ) -> _UpdatePlacementResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePlacementResponseSuccess
+
+      interface _UpdateProjectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT1ClickProjects/Client.html#update_project-instance_method
+      def update_project: (
+                            project_name: ::String,
+                            ?description: ::String,
+                            ?placement_template: {
+                              default_attributes: Hash[::String, ::String]?,
+                              device_templates: Hash[::String, {
+                                  device_type: ::String?,
+                                  callback_overrides: Hash[::String, ::String]?
+                                }]?
+                            }
+                          ) -> _UpdateProjectResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProjectResponseSuccess
+    end
+  end
+end
+

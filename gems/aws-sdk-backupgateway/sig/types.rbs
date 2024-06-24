@@ -1,0 +1,436 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::BackupGateway
+  module Types
+
+    class AccessDeniedException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateGatewayToServerInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor server_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateGatewayToServerOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class BandwidthRateLimitInterval
+      attr_accessor average_upload_rate_limit_in_bits_per_sec: ::Integer
+      attr_accessor days_of_week: ::Array[::Integer]
+      attr_accessor end_hour_of_day: ::Integer
+      attr_accessor end_minute_of_hour: ::Integer
+      attr_accessor start_hour_of_day: ::Integer
+      attr_accessor start_minute_of_hour: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGatewayInput
+      attr_accessor activation_key: ::String
+      attr_accessor gateway_display_name: ::String
+      attr_accessor gateway_type: ("BACKUP_VM")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateGatewayOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHypervisorInput
+      attr_accessor hypervisor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteHypervisorOutput
+      attr_accessor hypervisor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateGatewayFromServerInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateGatewayFromServerOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Gateway
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_display_name: ::String
+      attr_accessor gateway_type: ("BACKUP_VM")
+      attr_accessor hypervisor_id: ::String
+      attr_accessor last_seen_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GatewayDetails
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_display_name: ::String
+      attr_accessor gateway_type: ("BACKUP_VM")
+      attr_accessor hypervisor_id: ::String
+      attr_accessor last_seen_time: ::Time
+      attr_accessor maintenance_start_time: Types::MaintenanceStartTime
+      attr_accessor next_update_availability_time: ::Time
+      attr_accessor vpc_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class GetBandwidthRateLimitScheduleInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetBandwidthRateLimitScheduleOutput
+      attr_accessor bandwidth_rate_limit_intervals: ::Array[Types::BandwidthRateLimitInterval]
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetGatewayInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetGatewayOutput
+      attr_accessor gateway: Types::GatewayDetails
+      SENSITIVE: []
+    end
+
+    class GetHypervisorInput
+      attr_accessor hypervisor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetHypervisorOutput
+      attr_accessor hypervisor: Types::HypervisorDetails
+      SENSITIVE: []
+    end
+
+    class GetHypervisorPropertyMappingsInput
+      attr_accessor hypervisor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetHypervisorPropertyMappingsOutput
+      attr_accessor hypervisor_arn: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor vmware_to_aws_tag_mappings: ::Array[Types::VmwareToAwsTagMapping]
+      SENSITIVE: []
+    end
+
+    class GetVirtualMachineInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetVirtualMachineOutput
+      attr_accessor virtual_machine: Types::VirtualMachineDetails
+      SENSITIVE: []
+    end
+
+    class Hypervisor
+      attr_accessor host: ::String
+      attr_accessor hypervisor_arn: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("PENDING" | "ONLINE" | "OFFLINE" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class HypervisorDetails
+      attr_accessor host: ::String
+      attr_accessor hypervisor_arn: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor last_successful_metadata_sync_time: ::Time
+      attr_accessor latest_metadata_sync_status: ("CREATED" | "RUNNING" | "FAILED" | "PARTIALLY_FAILED" | "SUCCEEDED")
+      attr_accessor latest_metadata_sync_status_message: ::String
+      attr_accessor log_group_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("PENDING" | "ONLINE" | "OFFLINE" | "ERROR")
+      SENSITIVE: []
+    end
+
+    class ImportHypervisorConfigurationInput
+      attr_accessor host: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor password: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor username: ::String
+      SENSITIVE: [:password, :username]
+    end
+
+    class ImportHypervisorConfigurationOutput
+      attr_accessor hypervisor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewaysInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewaysOutput
+      attr_accessor gateways: ::Array[Types::Gateway]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHypervisorsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHypervisorsOutput
+      attr_accessor hypervisors: ::Array[Types::Hypervisor]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListVirtualMachinesInput
+      attr_accessor hypervisor_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListVirtualMachinesOutput
+      attr_accessor next_token: ::String
+      attr_accessor virtual_machines: ::Array[Types::VirtualMachine]
+      SENSITIVE: []
+    end
+
+    class MaintenanceStartTime
+      attr_accessor day_of_month: ::Integer
+      attr_accessor day_of_week: ::Integer
+      attr_accessor hour_of_day: ::Integer
+      attr_accessor minute_of_hour: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutBandwidthRateLimitScheduleInput
+      attr_accessor bandwidth_rate_limit_intervals: ::Array[Types::BandwidthRateLimitInterval]
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutBandwidthRateLimitScheduleOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutHypervisorPropertyMappingsInput
+      attr_accessor hypervisor_arn: ::String
+      attr_accessor iam_role_arn: ::String
+      attr_accessor vmware_to_aws_tag_mappings: ::Array[Types::VmwareToAwsTagMapping]
+      SENSITIVE: []
+    end
+
+    class PutHypervisorPropertyMappingsOutput
+      attr_accessor hypervisor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutMaintenanceStartTimeInput
+      attr_accessor day_of_month: ::Integer
+      attr_accessor day_of_week: ::Integer
+      attr_accessor gateway_arn: ::String
+      attr_accessor hour_of_day: ::Integer
+      attr_accessor minute_of_hour: ::Integer
+      SENSITIVE: []
+    end
+
+    class PutMaintenanceStartTimeOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartVirtualMachinesMetadataSyncInput
+      attr_accessor hypervisor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartVirtualMachinesMetadataSyncOutput
+      attr_accessor hypervisor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TestHypervisorConfigurationInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor host: ::String
+      attr_accessor password: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:password, :username]
+    end
+
+    class TestHypervisorConfigurationOutput < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayInformationInput
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_display_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayInformationOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGatewaySoftwareNowInput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGatewaySoftwareNowOutput
+      attr_accessor gateway_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateHypervisorInput
+      attr_accessor host: ::String
+      attr_accessor hypervisor_arn: ::String
+      attr_accessor log_group_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor password: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:password, :username]
+    end
+
+    class UpdateHypervisorOutput
+      attr_accessor hypervisor_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor error_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualMachine
+      attr_accessor host_name: ::String
+      attr_accessor hypervisor_id: ::String
+      attr_accessor last_backup_date: ::Time
+      attr_accessor name: ::String
+      attr_accessor path: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class VirtualMachineDetails
+      attr_accessor host_name: ::String
+      attr_accessor hypervisor_id: ::String
+      attr_accessor last_backup_date: ::Time
+      attr_accessor name: ::String
+      attr_accessor path: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor vmware_tags: ::Array[Types::VmwareTag]
+      SENSITIVE: []
+    end
+
+    class VmwareTag
+      attr_accessor vmware_category: ::String
+      attr_accessor vmware_tag_description: ::String
+      attr_accessor vmware_tag_name: ::String
+      SENSITIVE: []
+    end
+
+    class VmwareToAwsTagMapping
+      attr_accessor aws_tag_key: ::String
+      attr_accessor aws_tag_value: ::String
+      attr_accessor vmware_category: ::String
+      attr_accessor vmware_tag_name: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Drs
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Drs
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::Drs
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::Drs
     #   @option options [Aws::Drs::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Drs::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -480,6 +505,7 @@ module Aws::Drs
     #
     # @example Response structure
     #
+    #   resp.source_server.agent_version #=> String
     #   resp.source_server.arn #=> String
     #   resp.source_server.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
     #   resp.source_server.data_replication_info.data_replication_error.raw_error #=> String
@@ -497,7 +523,9 @@ module Aws::Drs
     #   resp.source_server.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE", "PENDING"
     #   resp.source_server.data_replication_info.staging_availability_zone #=> String
+    #   resp.source_server.data_replication_info.staging_outpost_arn #=> String
     #   resp.source_server.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.source_server.life_cycle.added_to_service_date_time #=> String
     #   resp.source_server.life_cycle.elapsed_replication_duration #=> String
@@ -513,6 +541,7 @@ module Aws::Drs
     #   resp.source_server.source_cloud_properties.origin_account_id #=> String
     #   resp.source_server.source_cloud_properties.origin_availability_zone #=> String
     #   resp.source_server.source_cloud_properties.origin_region #=> String
+    #   resp.source_server.source_cloud_properties.source_outpost_arn #=> String
     #   resp.source_server.source_network_id #=> String
     #   resp.source_server.source_properties.cpus #=> Array
     #   resp.source_server.source_properties.cpus[0].cores #=> Integer
@@ -565,6 +594,11 @@ module Aws::Drs
     # @option params [String] :launch_disposition
     #   Launch disposition.
     #
+    # @option params [Boolean] :launch_into_source_instance
+    #   DRS will set the 'launch into instance ID' of any source server when
+    #   performing a drill, recovery or failback to the previous region or
+    #   availability zone, using the instance ID of the source instance.
+    #
     # @option params [Types::Licensing] :licensing
     #   Licensing.
     #
@@ -589,6 +623,7 @@ module Aws::Drs
     #     copy_tags: false,
     #     export_bucket_arn: "ARN",
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     launch_into_source_instance: false,
     #     licensing: {
     #       os_byol: false,
     #     },
@@ -607,6 +642,7 @@ module Aws::Drs
     #   resp.launch_configuration_template.export_bucket_arn #=> String
     #   resp.launch_configuration_template.launch_configuration_template_id #=> String
     #   resp.launch_configuration_template.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_configuration_template.launch_into_source_instance #=> Boolean
     #   resp.launch_configuration_template.licensing.os_byol #=> Boolean
     #   resp.launch_configuration_template.post_launch_enabled #=> Boolean
     #   resp.launch_configuration_template.tags #=> Hash
@@ -1005,6 +1041,10 @@ module Aws::Drs
     #   resp.items[0].event_data.conversion_properties.volume_to_conversion_map #=> Hash
     #   resp.items[0].event_data.conversion_properties.volume_to_conversion_map["LargeBoundedString"] #=> Hash
     #   resp.items[0].event_data.conversion_properties.volume_to_conversion_map["LargeBoundedString"]["EbsSnapshot"] #=> String
+    #   resp.items[0].event_data.conversion_properties.volume_to_product_codes #=> Hash
+    #   resp.items[0].event_data.conversion_properties.volume_to_product_codes["LargeBoundedString"] #=> Array
+    #   resp.items[0].event_data.conversion_properties.volume_to_product_codes["LargeBoundedString"][0].product_code_id #=> String
+    #   resp.items[0].event_data.conversion_properties.volume_to_product_codes["LargeBoundedString"][0].product_code_mode #=> String, one of "ENABLED", "DISABLED"
     #   resp.items[0].event_data.conversion_properties.volume_to_volume_size #=> Hash
     #   resp.items[0].event_data.conversion_properties.volume_to_volume_size["LargeBoundedString"] #=> Integer
     #   resp.items[0].event_data.conversion_server_id #=> String
@@ -1149,6 +1189,7 @@ module Aws::Drs
     #   resp.items[0].export_bucket_arn #=> String
     #   resp.items[0].launch_configuration_template_id #=> String
     #   resp.items[0].launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.items[0].launch_into_source_instance #=> Boolean
     #   resp.items[0].licensing.os_byol #=> Boolean
     #   resp.items[0].post_launch_enabled #=> Boolean
     #   resp.items[0].tags #=> Hash
@@ -1197,6 +1238,7 @@ module Aws::Drs
     # @example Response structure
     #
     #   resp.items #=> Array
+    #   resp.items[0].agent_version #=> String
     #   resp.items[0].arn #=> String
     #   resp.items[0].data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "FAILBACK_CLIENT_NOT_SEEN", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT", "FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE", "FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE", "FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION", "FAILED_GETTING_REPLICATION_STATE", "SNAPSHOTS_FAILURE", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
     #   resp.items[0].data_replication_info.data_replication_error.raw_error #=> String
@@ -1214,6 +1256,7 @@ module Aws::Drs
     #   resp.items[0].data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.staging_availability_zone #=> String
+    #   resp.items[0].data_replication_info.staging_outpost_arn #=> String
     #   resp.items[0].ec2_instance_id #=> String
     #   resp.items[0].ec2_instance_state #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED", "SHUTTING-DOWN", "TERMINATED", "NOT_FOUND"
     #   resp.items[0].failback.agent_last_seen_by_service_date_time #=> String
@@ -1251,6 +1294,7 @@ module Aws::Drs
     #   resp.items[0].recovery_instance_properties.network_interfaces[0].mac_address #=> String
     #   resp.items[0].recovery_instance_properties.os.full_string #=> String
     #   resp.items[0].recovery_instance_properties.ram_bytes #=> Integer
+    #   resp.items[0].source_outpost_arn #=> String
     #   resp.items[0].source_server_id #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
@@ -1480,6 +1524,7 @@ module Aws::Drs
     # @example Response structure
     #
     #   resp.items #=> Array
+    #   resp.items[0].agent_version #=> String
     #   resp.items[0].arn #=> String
     #   resp.items[0].data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
     #   resp.items[0].data_replication_info.data_replication_error.raw_error #=> String
@@ -1497,7 +1542,9 @@ module Aws::Drs
     #   resp.items[0].data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.items[0].data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.items[0].data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE", "PENDING"
     #   resp.items[0].data_replication_info.staging_availability_zone #=> String
+    #   resp.items[0].data_replication_info.staging_outpost_arn #=> String
     #   resp.items[0].last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.items[0].life_cycle.added_to_service_date_time #=> String
     #   resp.items[0].life_cycle.elapsed_replication_duration #=> String
@@ -1513,6 +1560,7 @@ module Aws::Drs
     #   resp.items[0].source_cloud_properties.origin_account_id #=> String
     #   resp.items[0].source_cloud_properties.origin_availability_zone #=> String
     #   resp.items[0].source_cloud_properties.origin_region #=> String
+    #   resp.items[0].source_cloud_properties.source_outpost_arn #=> String
     #   resp.items[0].source_network_id #=> String
     #   resp.items[0].source_properties.cpus #=> Array
     #   resp.items[0].source_properties.cpus[0].cores #=> Integer
@@ -1606,6 +1654,7 @@ module Aws::Drs
     #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::SourceServer#agent_version #agent_version} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#last_launch_result #last_launch_result} => String
@@ -1628,6 +1677,7 @@ module Aws::Drs
     #
     # @example Response structure
     #
+    #   resp.agent_version #=> String
     #   resp.arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
@@ -1645,7 +1695,9 @@ module Aws::Drs
     #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE", "PENDING"
     #   resp.data_replication_info.staging_availability_zone #=> String
+    #   resp.data_replication_info.staging_outpost_arn #=> String
     #   resp.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -1661,6 +1713,7 @@ module Aws::Drs
     #   resp.source_cloud_properties.origin_account_id #=> String
     #   resp.source_cloud_properties.origin_availability_zone #=> String
     #   resp.source_cloud_properties.origin_region #=> String
+    #   resp.source_cloud_properties.source_outpost_arn #=> String
     #   resp.source_network_id #=> String
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
@@ -1776,6 +1829,7 @@ module Aws::Drs
     #   * {Types::LaunchConfiguration#copy_tags #copy_tags} => Boolean
     #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
     #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
+    #   * {Types::LaunchConfiguration#launch_into_instance_properties #launch_into_instance_properties} => Types::LaunchIntoInstanceProperties
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
     #   * {Types::LaunchConfiguration#name #name} => String
     #   * {Types::LaunchConfiguration#post_launch_enabled #post_launch_enabled} => Boolean
@@ -1794,6 +1848,7 @@ module Aws::Drs
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
     #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_into_instance_properties.launch_into_ec2_instance_id #=> String
     #   resp.licensing.os_byol #=> Boolean
     #   resp.name #=> String
     #   resp.post_launch_enabled #=> Boolean
@@ -2087,7 +2142,7 @@ module Aws::Drs
     # @option params [required, String] :category
     #   Launch action category.
     #
-    # @option params [String] :description
+    # @option params [required, String] :description
     #   Launch action description.
     #
     # @option params [required, String] :name
@@ -2128,7 +2183,7 @@ module Aws::Drs
     #     action_version: "LaunchActionVersion", # required
     #     active: false, # required
     #     category: "MONITORING", # required, accepts MONITORING, VALIDATION, CONFIGURATION, SECURITY, OTHER
-    #     description: "LaunchActionDescription",
+    #     description: "LaunchActionDescription", # required
     #     name: "LaunchActionName", # required
     #     optional: false, # required
     #     order: 1, # required
@@ -2178,6 +2233,7 @@ module Aws::Drs
     #
     # @return [Types::SourceServer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::SourceServer#agent_version #agent_version} => String
     #   * {Types::SourceServer#arn #arn} => String
     #   * {Types::SourceServer#data_replication_info #data_replication_info} => Types::DataReplicationInfo
     #   * {Types::SourceServer#last_launch_result #last_launch_result} => String
@@ -2200,6 +2256,7 @@ module Aws::Drs
     #
     # @example Response structure
     #
+    #   resp.agent_version #=> String
     #   resp.arn #=> String
     #   resp.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
     #   resp.data_replication_info.data_replication_error.raw_error #=> String
@@ -2217,7 +2274,9 @@ module Aws::Drs
     #   resp.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE", "PENDING"
     #   resp.data_replication_info.staging_availability_zone #=> String
+    #   resp.data_replication_info.staging_outpost_arn #=> String
     #   resp.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.life_cycle.added_to_service_date_time #=> String
     #   resp.life_cycle.elapsed_replication_duration #=> String
@@ -2233,6 +2292,7 @@ module Aws::Drs
     #   resp.source_cloud_properties.origin_account_id #=> String
     #   resp.source_cloud_properties.origin_availability_zone #=> String
     #   resp.source_cloud_properties.origin_region #=> String
+    #   resp.source_cloud_properties.source_outpost_arn #=> String
     #   resp.source_network_id #=> String
     #   resp.source_properties.cpus #=> Array
     #   resp.source_properties.cpus[0].cores #=> Integer
@@ -2471,6 +2531,7 @@ module Aws::Drs
     #
     # @example Response structure
     #
+    #   resp.source_server.agent_version #=> String
     #   resp.source_server.arn #=> String
     #   resp.source_server.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
     #   resp.source_server.data_replication_info.data_replication_error.raw_error #=> String
@@ -2488,7 +2549,9 @@ module Aws::Drs
     #   resp.source_server.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE", "PENDING"
     #   resp.source_server.data_replication_info.staging_availability_zone #=> String
+    #   resp.source_server.data_replication_info.staging_outpost_arn #=> String
     #   resp.source_server.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.source_server.life_cycle.added_to_service_date_time #=> String
     #   resp.source_server.life_cycle.elapsed_replication_duration #=> String
@@ -2504,6 +2567,7 @@ module Aws::Drs
     #   resp.source_server.source_cloud_properties.origin_account_id #=> String
     #   resp.source_server.source_cloud_properties.origin_availability_zone #=> String
     #   resp.source_server.source_cloud_properties.origin_region #=> String
+    #   resp.source_server.source_cloud_properties.source_outpost_arn #=> String
     #   resp.source_server.source_network_id #=> String
     #   resp.source_server.source_properties.cpus #=> Array
     #   resp.source_server.source_properties.cpus[0].cores #=> Integer
@@ -2706,6 +2770,7 @@ module Aws::Drs
     #
     # @example Response structure
     #
+    #   resp.source_server.agent_version #=> String
     #   resp.source_server.arn #=> String
     #   resp.source_server.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
     #   resp.source_server.data_replication_info.data_replication_error.raw_error #=> String
@@ -2723,7 +2788,9 @@ module Aws::Drs
     #   resp.source_server.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
     #   resp.source_server.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.replicated_disks[0].volume_status #=> String, one of "REGULAR", "CONTAINS_MARKETPLACE_PRODUCT_CODES", "MISSING_VOLUME_ATTRIBUTES", "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE", "PENDING"
     #   resp.source_server.data_replication_info.staging_availability_zone #=> String
+    #   resp.source_server.data_replication_info.staging_outpost_arn #=> String
     #   resp.source_server.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
     #   resp.source_server.life_cycle.added_to_service_date_time #=> String
     #   resp.source_server.life_cycle.elapsed_replication_duration #=> String
@@ -2739,6 +2806,7 @@ module Aws::Drs
     #   resp.source_server.source_cloud_properties.origin_account_id #=> String
     #   resp.source_server.source_cloud_properties.origin_availability_zone #=> String
     #   resp.source_server.source_cloud_properties.origin_region #=> String
+    #   resp.source_server.source_cloud_properties.source_outpost_arn #=> String
     #   resp.source_server.source_network_id #=> String
     #   resp.source_server.source_properties.cpus #=> Array
     #   resp.source_server.source_properties.cpus[0].cores #=> Integer
@@ -2992,6 +3060,9 @@ module Aws::Drs
     #   The state of the Recovery Instance in EC2 after the recovery
     #   operation.
     #
+    # @option params [Types::LaunchIntoInstanceProperties] :launch_into_instance_properties
+    #   Launch into existing instance properties.
+    #
     # @option params [Types::Licensing] :licensing
     #   The licensing configuration to be used for this launch configuration.
     #
@@ -3016,6 +3087,7 @@ module Aws::Drs
     #   * {Types::LaunchConfiguration#copy_tags #copy_tags} => Boolean
     #   * {Types::LaunchConfiguration#ec2_launch_template_id #ec2_launch_template_id} => String
     #   * {Types::LaunchConfiguration#launch_disposition #launch_disposition} => String
+    #   * {Types::LaunchConfiguration#launch_into_instance_properties #launch_into_instance_properties} => Types::LaunchIntoInstanceProperties
     #   * {Types::LaunchConfiguration#licensing #licensing} => Types::Licensing
     #   * {Types::LaunchConfiguration#name #name} => String
     #   * {Types::LaunchConfiguration#post_launch_enabled #post_launch_enabled} => Boolean
@@ -3028,6 +3100,9 @@ module Aws::Drs
     #     copy_private_ip: false,
     #     copy_tags: false,
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     launch_into_instance_properties: {
+    #       launch_into_ec2_instance_id: "EC2InstanceID",
+    #     },
     #     licensing: {
     #       os_byol: false,
     #     },
@@ -3043,6 +3118,7 @@ module Aws::Drs
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
     #   resp.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_into_instance_properties.launch_into_ec2_instance_id #=> String
     #   resp.licensing.os_byol #=> Boolean
     #   resp.name #=> String
     #   resp.post_launch_enabled #=> Boolean
@@ -3075,6 +3151,11 @@ module Aws::Drs
     # @option params [String] :launch_disposition
     #   Launch disposition.
     #
+    # @option params [Boolean] :launch_into_source_instance
+    #   DRS will set the 'launch into instance ID' of any source server when
+    #   performing a drill, recovery or failback to the previous region or
+    #   availability zone, using the instance ID of the source instance.
+    #
     # @option params [Types::Licensing] :licensing
     #   Licensing.
     #
@@ -3096,6 +3177,7 @@ module Aws::Drs
     #     export_bucket_arn: "ARN",
     #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
     #     launch_disposition: "STOPPED", # accepts STOPPED, STARTED
+    #     launch_into_source_instance: false,
     #     licensing: {
     #       os_byol: false,
     #     },
@@ -3111,6 +3193,7 @@ module Aws::Drs
     #   resp.launch_configuration_template.export_bucket_arn #=> String
     #   resp.launch_configuration_template.launch_configuration_template_id #=> String
     #   resp.launch_configuration_template.launch_disposition #=> String, one of "STOPPED", "STARTED"
+    #   resp.launch_configuration_template.launch_into_source_instance #=> Boolean
     #   resp.launch_configuration_template.licensing.os_byol #=> Boolean
     #   resp.launch_configuration_template.post_launch_enabled #=> Boolean
     #   resp.launch_configuration_template.tags #=> Hash
@@ -3447,7 +3530,7 @@ module Aws::Drs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

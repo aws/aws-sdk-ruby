@@ -1,0 +1,111 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MediaStoreData
+  module Types
+
+    class ContainerNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteObjectRequest
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteObjectResponse < Aws::EmptyStructure
+    end
+
+    class DescribeObjectRequest
+      attr_accessor path: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeObjectResponse
+      attr_accessor etag: ::String
+      attr_accessor content_type: ::String
+      attr_accessor content_length: ::Integer
+      attr_accessor cache_control: ::String
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class GetObjectRequest
+      attr_accessor path: ::String
+      attr_accessor range: ::String
+      SENSITIVE: []
+    end
+
+    class GetObjectResponse
+      attr_accessor body: ::IO
+      attr_accessor cache_control: ::String
+      attr_accessor content_range: ::String
+      attr_accessor content_length: ::Integer
+      attr_accessor content_type: ::String
+      attr_accessor etag: ::String
+      attr_accessor last_modified: ::Time
+      attr_accessor status_code: ::Integer
+      SENSITIVE: []
+    end
+
+    class InternalServerError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Item
+      attr_accessor name: ::String
+      attr_accessor type: ("OBJECT" | "FOLDER")
+      attr_accessor etag: ::String
+      attr_accessor last_modified: ::Time
+      attr_accessor content_type: ::String
+      attr_accessor content_length: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListItemsRequest
+      attr_accessor path: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListItemsResponse
+      attr_accessor items: ::Array[Types::Item]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ObjectNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutObjectRequest
+      attr_accessor body: ::IO
+      attr_accessor path: ::String
+      attr_accessor content_type: ::String
+      attr_accessor cache_control: ::String
+      attr_accessor storage_class: ("TEMPORAL")
+      attr_accessor upload_availability: ("STANDARD" | "STREAMING")
+      SENSITIVE: []
+    end
+
+    class PutObjectResponse
+      attr_accessor content_sha256: ::String
+      attr_accessor etag: ::String
+      attr_accessor storage_class: ("TEMPORAL")
+      SENSITIVE: []
+    end
+
+    class RequestedRangeNotSatisfiableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -43,7 +43,7 @@ module AwsSdkCodeGenerator
       end
 
       def files
-        ['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb']
+        ['LICENSE.txt', 'CHANGELOG.md', 'VERSION', 'lib/**/*.rb', 'sig/**/*.rbs']
       end
 
       # @return [String]
@@ -54,7 +54,9 @@ module AwsSdkCodeGenerator
           if @service.short_name != @service.full_name
             abbreviation = " (#{@service.short_name})"
           end
-          desc = "Official AWS Ruby gem for #{@service.full_name}#{abbreviation}. "
+          desc = ''
+          desc += '[DEPRECATED] ' if @service.deprecated?
+          desc += "Official AWS Ruby gem for #{@service.full_name}#{abbreviation}. "
           desc += 'This gem is part of the AWS SDK for Ruby.'
         end
         desc
@@ -72,7 +74,15 @@ module AwsSdkCodeGenerator
         end
       end
 
-      Dependency = Struct.new(:gem, :version)
+      def deprecated?
+        @service.deprecated?
+      end
+
+      Dependency = Struct.new(:gem, :version) do
+        def gem_version
+          [gem, version].compact.map { |s| "'#{s}'"}.join(', ')
+        end
+      end
 
     end
   end

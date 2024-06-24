@@ -1,0 +1,492 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Shield
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateDRTLogBucketResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateDRTLogBucketResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#associate_drt_log_bucket-instance_method
+      def associate_drt_log_bucket: (
+                                      log_bucket: ::String
+                                    ) -> _AssociateDRTLogBucketResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateDRTLogBucketResponseSuccess
+
+      interface _AssociateDRTRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateDRTRoleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#associate_drt_role-instance_method
+      def associate_drt_role: (
+                                role_arn: ::String
+                              ) -> _AssociateDRTRoleResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateDRTRoleResponseSuccess
+
+      interface _AssociateHealthCheckResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateHealthCheckResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#associate_health_check-instance_method
+      def associate_health_check: (
+                                    protection_id: ::String,
+                                    health_check_arn: ::String
+                                  ) -> _AssociateHealthCheckResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateHealthCheckResponseSuccess
+
+      interface _AssociateProactiveEngagementDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateProactiveEngagementDetailsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#associate_proactive_engagement_details-instance_method
+      def associate_proactive_engagement_details: (
+                                                    emergency_contact_list: Array[
+                                                      {
+                                                        email_address: ::String,
+                                                        phone_number: ::String?,
+                                                        contact_notes: ::String?
+                                                      },
+                                                    ]
+                                                  ) -> _AssociateProactiveEngagementDetailsResponseSuccess
+                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateProactiveEngagementDetailsResponseSuccess
+
+      interface _CreateProtectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProtectionResponse]
+        def protection_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#create_protection-instance_method
+      def create_protection: (
+                               name: ::String,
+                               resource_arn: ::String,
+                               ?tags: Array[
+                                 {
+                                   key: ::String?,
+                                   value: ::String?
+                                 },
+                               ]
+                             ) -> _CreateProtectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProtectionResponseSuccess
+
+      interface _CreateProtectionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProtectionGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#create_protection_group-instance_method
+      def create_protection_group: (
+                                     protection_group_id: ::String,
+                                     aggregation: ("SUM" | "MEAN" | "MAX"),
+                                     pattern: ("ALL" | "ARBITRARY" | "BY_RESOURCE_TYPE"),
+                                     ?resource_type: ("CLOUDFRONT_DISTRIBUTION" | "ROUTE_53_HOSTED_ZONE" | "ELASTIC_IP_ALLOCATION" | "CLASSIC_LOAD_BALANCER" | "APPLICATION_LOAD_BALANCER" | "GLOBAL_ACCELERATOR"),
+                                     ?members: Array[::String],
+                                     ?tags: Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?
+                                       },
+                                     ]
+                                   ) -> _CreateProtectionGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProtectionGroupResponseSuccess
+
+      interface _CreateSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSubscriptionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#create_subscription-instance_method
+      def create_subscription: (
+                               ) -> _CreateSubscriptionResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriptionResponseSuccess
+
+      interface _DeleteProtectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProtectionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#delete_protection-instance_method
+      def delete_protection: (
+                               protection_id: ::String
+                             ) -> _DeleteProtectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProtectionResponseSuccess
+
+      interface _DeleteProtectionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProtectionGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#delete_protection_group-instance_method
+      def delete_protection_group: (
+                                     protection_group_id: ::String
+                                   ) -> _DeleteProtectionGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteProtectionGroupResponseSuccess
+
+      interface _DeleteSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSubscriptionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#delete_subscription-instance_method
+      def delete_subscription: (
+                               ) -> _DeleteSubscriptionResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSubscriptionResponseSuccess
+
+      interface _DescribeAttackResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAttackResponse]
+        def attack: () -> Types::AttackDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#describe_attack-instance_method
+      def describe_attack: (
+                             attack_id: ::String
+                           ) -> _DescribeAttackResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAttackResponseSuccess
+
+      interface _DescribeAttackStatisticsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAttackStatisticsResponse]
+        def time_range: () -> Types::TimeRange
+        def data_items: () -> ::Array[Types::AttackStatisticsDataItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#describe_attack_statistics-instance_method
+      def describe_attack_statistics: (
+                                      ) -> _DescribeAttackStatisticsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAttackStatisticsResponseSuccess
+
+      interface _DescribeDRTAccessResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDRTAccessResponse]
+        def role_arn: () -> ::String
+        def log_bucket_list: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#describe_drt_access-instance_method
+      def describe_drt_access: (
+                               ) -> _DescribeDRTAccessResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDRTAccessResponseSuccess
+
+      interface _DescribeEmergencyContactSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeEmergencyContactSettingsResponse]
+        def emergency_contact_list: () -> ::Array[Types::EmergencyContact]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#describe_emergency_contact_settings-instance_method
+      def describe_emergency_contact_settings: (
+                                               ) -> _DescribeEmergencyContactSettingsResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEmergencyContactSettingsResponseSuccess
+
+      interface _DescribeProtectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProtectionResponse]
+        def protection: () -> Types::Protection
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#describe_protection-instance_method
+      def describe_protection: (
+                                 ?protection_id: ::String,
+                                 ?resource_arn: ::String
+                               ) -> _DescribeProtectionResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProtectionResponseSuccess
+
+      interface _DescribeProtectionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeProtectionGroupResponse]
+        def protection_group: () -> Types::ProtectionGroup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#describe_protection_group-instance_method
+      def describe_protection_group: (
+                                       protection_group_id: ::String
+                                     ) -> _DescribeProtectionGroupResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeProtectionGroupResponseSuccess
+
+      interface _DescribeSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeSubscriptionResponse]
+        def subscription: () -> Types::Subscription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#describe_subscription-instance_method
+      def describe_subscription: (
+                                 ) -> _DescribeSubscriptionResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSubscriptionResponseSuccess
+
+      interface _DisableApplicationLayerAutomaticResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableApplicationLayerAutomaticResponseResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#disable_application_layer_automatic_response-instance_method
+      def disable_application_layer_automatic_response: (
+                                                          resource_arn: ::String
+                                                        ) -> _DisableApplicationLayerAutomaticResponseResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableApplicationLayerAutomaticResponseResponseSuccess
+
+      interface _DisableProactiveEngagementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisableProactiveEngagementResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#disable_proactive_engagement-instance_method
+      def disable_proactive_engagement: (
+                                        ) -> _DisableProactiveEngagementResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisableProactiveEngagementResponseSuccess
+
+      interface _DisassociateDRTLogBucketResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateDRTLogBucketResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#disassociate_drt_log_bucket-instance_method
+      def disassociate_drt_log_bucket: (
+                                         log_bucket: ::String
+                                       ) -> _DisassociateDRTLogBucketResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateDRTLogBucketResponseSuccess
+
+      interface _DisassociateDRTRoleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateDRTRoleResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#disassociate_drt_role-instance_method
+      def disassociate_drt_role: (
+                                 ) -> _DisassociateDRTRoleResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateDRTRoleResponseSuccess
+
+      interface _DisassociateHealthCheckResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateHealthCheckResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#disassociate_health_check-instance_method
+      def disassociate_health_check: (
+                                       protection_id: ::String,
+                                       health_check_arn: ::String
+                                     ) -> _DisassociateHealthCheckResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateHealthCheckResponseSuccess
+
+      interface _EnableApplicationLayerAutomaticResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableApplicationLayerAutomaticResponseResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#enable_application_layer_automatic_response-instance_method
+      def enable_application_layer_automatic_response: (
+                                                         resource_arn: ::String,
+                                                         action: {
+                                                           block: {
+                                                           }?,
+                                                           count: {
+                                                           }?
+                                                         }
+                                                       ) -> _EnableApplicationLayerAutomaticResponseResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableApplicationLayerAutomaticResponseResponseSuccess
+
+      interface _EnableProactiveEngagementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::EnableProactiveEngagementResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#enable_proactive_engagement-instance_method
+      def enable_proactive_engagement: (
+                                       ) -> _EnableProactiveEngagementResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableProactiveEngagementResponseSuccess
+
+      interface _GetSubscriptionStateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSubscriptionStateResponse]
+        def subscription_state: () -> ("ACTIVE" | "INACTIVE")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#get_subscription_state-instance_method
+      def get_subscription_state: (
+                                  ) -> _GetSubscriptionStateResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubscriptionStateResponseSuccess
+
+      interface _ListAttacksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAttacksResponse]
+        def attack_summaries: () -> ::Array[Types::AttackSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#list_attacks-instance_method
+      def list_attacks: (
+                          ?resource_arns: Array[::String],
+                          ?start_time: {
+                            from_inclusive: ::Time?,
+                            to_exclusive: ::Time?
+                          },
+                          ?end_time: {
+                            from_inclusive: ::Time?,
+                            to_exclusive: ::Time?
+                          },
+                          ?next_token: ::String,
+                          ?max_results: ::Integer
+                        ) -> _ListAttacksResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAttacksResponseSuccess
+
+      interface _ListProtectionGroupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProtectionGroupsResponse]
+        def protection_groups: () -> ::Array[Types::ProtectionGroup]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#list_protection_groups-instance_method
+      def list_protection_groups: (
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer,
+                                    ?inclusion_filters: {
+                                      protection_group_ids: Array[::String]?,
+                                      patterns: Array[("ALL" | "ARBITRARY" | "BY_RESOURCE_TYPE")]?,
+                                      resource_types: Array[("CLOUDFRONT_DISTRIBUTION" | "ROUTE_53_HOSTED_ZONE" | "ELASTIC_IP_ALLOCATION" | "CLASSIC_LOAD_BALANCER" | "APPLICATION_LOAD_BALANCER" | "GLOBAL_ACCELERATOR")]?,
+                                      aggregations: Array[("SUM" | "MEAN" | "MAX")]?
+                                    }
+                                  ) -> _ListProtectionGroupsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProtectionGroupsResponseSuccess
+
+      interface _ListProtectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProtectionsResponse]
+        def protections: () -> ::Array[Types::Protection]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#list_protections-instance_method
+      def list_protections: (
+                              ?next_token: ::String,
+                              ?max_results: ::Integer,
+                              ?inclusion_filters: {
+                                resource_arns: Array[::String]?,
+                                protection_names: Array[::String]?,
+                                resource_types: Array[("CLOUDFRONT_DISTRIBUTION" | "ROUTE_53_HOSTED_ZONE" | "ELASTIC_IP_ALLOCATION" | "CLASSIC_LOAD_BALANCER" | "APPLICATION_LOAD_BALANCER" | "GLOBAL_ACCELERATOR")]?
+                              }
+                            ) -> _ListProtectionsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProtectionsResponseSuccess
+
+      interface _ListResourcesInProtectionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListResourcesInProtectionGroupResponse]
+        def resource_arns: () -> ::Array[::String]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#list_resources_in_protection_group-instance_method
+      def list_resources_in_protection_group: (
+                                                protection_group_id: ::String,
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListResourcesInProtectionGroupResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourcesInProtectionGroupResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String?,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateApplicationLayerAutomaticResponseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationLayerAutomaticResponseResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#update_application_layer_automatic_response-instance_method
+      def update_application_layer_automatic_response: (
+                                                         resource_arn: ::String,
+                                                         action: {
+                                                           block: {
+                                                           }?,
+                                                           count: {
+                                                           }?
+                                                         }
+                                                       ) -> _UpdateApplicationLayerAutomaticResponseResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationLayerAutomaticResponseResponseSuccess
+
+      interface _UpdateEmergencyContactSettingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEmergencyContactSettingsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#update_emergency_contact_settings-instance_method
+      def update_emergency_contact_settings: (
+                                               ?emergency_contact_list: Array[
+                                                 {
+                                                   email_address: ::String,
+                                                   phone_number: ::String?,
+                                                   contact_notes: ::String?
+                                                 },
+                                               ]
+                                             ) -> _UpdateEmergencyContactSettingsResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEmergencyContactSettingsResponseSuccess
+
+      interface _UpdateProtectionGroupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProtectionGroupResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#update_protection_group-instance_method
+      def update_protection_group: (
+                                     protection_group_id: ::String,
+                                     aggregation: ("SUM" | "MEAN" | "MAX"),
+                                     pattern: ("ALL" | "ARBITRARY" | "BY_RESOURCE_TYPE"),
+                                     ?resource_type: ("CLOUDFRONT_DISTRIBUTION" | "ROUTE_53_HOSTED_ZONE" | "ELASTIC_IP_ALLOCATION" | "CLASSIC_LOAD_BALANCER" | "APPLICATION_LOAD_BALANCER" | "GLOBAL_ACCELERATOR"),
+                                     ?members: Array[::String]
+                                   ) -> _UpdateProtectionGroupResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProtectionGroupResponseSuccess
+
+      interface _UpdateSubscriptionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSubscriptionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Shield/Client.html#update_subscription-instance_method
+      def update_subscription: (
+                                 ?auto_renew: ("ENABLED" | "DISABLED")
+                               ) -> _UpdateSubscriptionResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubscriptionResponseSuccess
+    end
+  end
+end
+

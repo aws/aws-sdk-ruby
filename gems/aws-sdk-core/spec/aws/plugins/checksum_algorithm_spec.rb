@@ -9,7 +9,6 @@ module Aws
       let(:creds) { Aws::Credentials.new('akid', 'secret') }
       let(:client_opts) { { credentials: creds, stub_responses: true } }
 
-
       # Don't include CRC32C in these definitions - increases complexity of testing
       # with and without CRT
       ChecksumClient = ApiHelper.sample_service(
@@ -70,6 +69,18 @@ module Aws
       ).const_get(:Client)
       let(:client) { ChecksumClient.new(client_opts) }
 
+      let(:default_algorithm_plugin) do
+        Class.new(Seahorse::Client::Plugin) do
+          class Handler < Seahorse::Client::Handler
+            def call(context)
+              context[:default_request_checksum_algorithm] = 'CRC32'
+              @handler.call(context)
+            end
+          end
+          handler(Handler)
+        end
+      end
+
       context 'request algorithm selection' do
         it 'uses crc32 in the header' do
           resp = client.some_operation(checksum_algorithm: 'CRC32')
@@ -107,6 +118,13 @@ module Aws
           expect do
             client.some_operation(checksum_algorithm: 'no-such-algorithm')
           end.to raise_error(ArgumentError)
+        end
+
+        it 'will use a default algorithm from the context' do
+          ChecksumClient.add_plugin(default_algorithm_plugin)
+          resp = client.some_operation
+          expect(resp.context.http_request.headers['x-amz-checksum-crc32']).to_not be_nil
+          ChecksumClient.remove_plugin(default_algorithm_plugin)
         end
       end
 

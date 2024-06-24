@@ -73,7 +73,7 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_route_tables(route_table_ids: [@id])
       end
       @data = resp.route_tables[0]
@@ -190,7 +190,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -217,7 +217,7 @@ module Aws::EC2
     # @return [RouteTableAssociation]
     def associate_with_subnet(options = {})
       options = options.merge(route_table_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.associate_route_table(options)
       end
       RouteTableAssociation.new(
@@ -293,7 +293,7 @@ module Aws::EC2
     # @return [Route]
     def create_route(options = {})
       options = options.merge(route_table_id: @id)
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_route(options)
       end
       Route.new(
@@ -328,7 +328,7 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_tags(options)
       end
       options[:tags].each do |t|
@@ -375,7 +375,7 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_tags(options)
       end
       options[:tags].each do |t|
@@ -403,7 +403,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(route_table_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_route_table(options)
       end
       resp.data

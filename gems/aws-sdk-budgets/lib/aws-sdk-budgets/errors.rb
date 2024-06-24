@@ -36,6 +36,7 @@ module Aws::Budgets
   # * {InvalidParameterException}
   # * {NotFoundException}
   # * {ResourceLockedException}
+  # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -169,6 +170,21 @@ module Aws::Budgets
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Budgets::Types::ResourceLockedException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Budgets::Types::ServiceQuotaExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

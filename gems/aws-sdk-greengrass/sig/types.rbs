@@ -1,0 +1,1561 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Greengrass
+  module Types
+
+    class AssociateRoleToGroupRequest
+      attr_accessor group_id: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateRoleToGroupResponse
+      attr_accessor associated_at: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateServiceRoleToAccountRequest
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateServiceRoleToAccountResponse
+      attr_accessor associated_at: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class BulkDeployment
+      attr_accessor bulk_deployment_arn: ::String
+      attr_accessor bulk_deployment_id: ::String
+      attr_accessor created_at: ::String
+      SENSITIVE: []
+    end
+
+    class BulkDeploymentMetrics
+      attr_accessor invalid_input_records: ::Integer
+      attr_accessor records_processed: ::Integer
+      attr_accessor retry_attempts: ::Integer
+      SENSITIVE: []
+    end
+
+    class BulkDeploymentResult
+      attr_accessor created_at: ::String
+      attr_accessor deployment_arn: ::String
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_status: ::String
+      attr_accessor deployment_type: ("NewDeployment" | "Redeployment" | "ResetDeployment" | "ForceResetDeployment")
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
+      attr_accessor error_message: ::String
+      attr_accessor group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ConnectivityInfo
+      attr_accessor host_address: ::String
+      attr_accessor id: ::String
+      attr_accessor metadata: ::String
+      attr_accessor port_number: ::Integer
+      SENSITIVE: []
+    end
+
+    class Connector
+      attr_accessor connector_arn: ::String
+      attr_accessor id: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ConnectorDefinitionVersion
+      attr_accessor connectors: ::Array[Types::Connector]
+      SENSITIVE: []
+    end
+
+    class Core
+      attr_accessor certificate_arn: ::String
+      attr_accessor id: ::String
+      attr_accessor sync_shadow: bool
+      attr_accessor thing_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CoreDefinitionVersion
+      attr_accessor cores: ::Array[Types::Core]
+      SENSITIVE: []
+    end
+
+    class CreateConnectorDefinitionRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor initial_version: Types::ConnectorDefinitionVersion
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateConnectorDefinitionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateConnectorDefinitionVersionRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor connector_definition_id: ::String
+      attr_accessor connectors: ::Array[Types::Connector]
+      SENSITIVE: []
+    end
+
+    class CreateConnectorDefinitionVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCoreDefinitionRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor initial_version: Types::CoreDefinitionVersion
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCoreDefinitionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCoreDefinitionVersionRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor core_definition_id: ::String
+      attr_accessor cores: ::Array[Types::Core]
+      SENSITIVE: []
+    end
+
+    class CreateCoreDefinitionVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_type: ("NewDeployment" | "Redeployment" | "ResetDeployment" | "ForceResetDeployment")
+      attr_accessor group_id: ::String
+      attr_accessor group_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentResponse
+      attr_accessor deployment_arn: ::String
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeviceDefinitionRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor initial_version: Types::DeviceDefinitionVersion
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDeviceDefinitionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeviceDefinitionVersionRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor device_definition_id: ::String
+      attr_accessor devices: ::Array[Types::Device]
+      SENSITIVE: []
+    end
+
+    class CreateDeviceDefinitionVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFunctionDefinitionRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor initial_version: Types::FunctionDefinitionVersion
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateFunctionDefinitionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFunctionDefinitionVersionRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor default_config: Types::FunctionDefaultConfig
+      attr_accessor function_definition_id: ::String
+      attr_accessor functions: ::Array[Types::Function]
+      SENSITIVE: []
+    end
+
+    class CreateFunctionDefinitionVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGroupCertificateAuthorityRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGroupCertificateAuthorityResponse
+      attr_accessor group_certificate_authority_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGroupRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor initial_version: Types::GroupVersion
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGroupVersionRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor connector_definition_version_arn: ::String
+      attr_accessor core_definition_version_arn: ::String
+      attr_accessor device_definition_version_arn: ::String
+      attr_accessor function_definition_version_arn: ::String
+      attr_accessor group_id: ::String
+      attr_accessor logger_definition_version_arn: ::String
+      attr_accessor resource_definition_version_arn: ::String
+      attr_accessor subscription_definition_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGroupVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLoggerDefinitionRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor initial_version: Types::LoggerDefinitionVersion
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateLoggerDefinitionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLoggerDefinitionVersionRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor logger_definition_id: ::String
+      attr_accessor loggers: ::Array[Types::Logger]
+      SENSITIVE: []
+    end
+
+    class CreateLoggerDefinitionVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateResourceDefinitionRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor initial_version: Types::ResourceDefinitionVersion
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateResourceDefinitionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateResourceDefinitionVersionRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor resource_definition_id: ::String
+      attr_accessor resources: ::Array[Types::Resource]
+      SENSITIVE: []
+    end
+
+    class CreateResourceDefinitionVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSoftwareUpdateJobRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor s3_url_signer_role: ::String
+      attr_accessor software_to_update: ("core" | "ota_agent")
+      attr_accessor update_agent_log_level: ("NONE" | "TRACE" | "DEBUG" | "VERBOSE" | "INFO" | "WARN" | "ERROR" | "FATAL")
+      attr_accessor update_targets: ::Array[::String]
+      attr_accessor update_targets_architecture: ("armv6l" | "armv7l" | "x86_64" | "aarch64")
+      attr_accessor update_targets_operating_system: ("ubuntu" | "raspbian" | "amazon_linux" | "openwrt")
+      SENSITIVE: []
+    end
+
+    class CreateSoftwareUpdateJobResponse
+      attr_accessor iot_job_arn: ::String
+      attr_accessor iot_job_id: ::String
+      attr_accessor platform_software_version: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSubscriptionDefinitionRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor initial_version: Types::SubscriptionDefinitionVersion
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSubscriptionDefinitionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSubscriptionDefinitionVersionRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor subscription_definition_id: ::String
+      attr_accessor subscriptions: ::Array[Types::Subscription]
+      SENSITIVE: []
+    end
+
+    class CreateSubscriptionDefinitionVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class DefinitionInformation
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteConnectorDefinitionRequest
+      attr_accessor connector_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectorDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteCoreDefinitionRequest
+      attr_accessor core_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCoreDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteDeviceDefinitionRequest
+      attr_accessor device_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDeviceDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteFunctionDefinitionRequest
+      attr_accessor function_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFunctionDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteGroupRequest
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteLoggerDefinitionRequest
+      attr_accessor logger_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLoggerDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteResourceDefinitionRequest
+      attr_accessor resource_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourceDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSubscriptionDefinitionRequest
+      attr_accessor subscription_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSubscriptionDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class Deployment
+      attr_accessor created_at: ::String
+      attr_accessor deployment_arn: ::String
+      attr_accessor deployment_id: ::String
+      attr_accessor deployment_type: ("NewDeployment" | "Redeployment" | "ResetDeployment" | "ForceResetDeployment")
+      attr_accessor group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Device
+      attr_accessor certificate_arn: ::String
+      attr_accessor id: ::String
+      attr_accessor sync_shadow: bool
+      attr_accessor thing_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeviceDefinitionVersion
+      attr_accessor devices: ::Array[Types::Device]
+      SENSITIVE: []
+    end
+
+    class DisassociateRoleFromGroupRequest
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateRoleFromGroupResponse
+      attr_accessor disassociated_at: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateServiceRoleFromAccountRequest < Aws::EmptyStructure
+    end
+
+    class DisassociateServiceRoleFromAccountResponse
+      attr_accessor disassociated_at: ::String
+      SENSITIVE: []
+    end
+
+    class Empty < Aws::EmptyStructure
+    end
+
+    class ErrorDetail
+      attr_accessor detailed_error_code: ::String
+      attr_accessor detailed_error_message: ::String
+      SENSITIVE: []
+    end
+
+    class Function
+      attr_accessor function_arn: ::String
+      attr_accessor function_configuration: Types::FunctionConfiguration
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class FunctionConfiguration
+      attr_accessor encoding_type: ("binary" | "json")
+      attr_accessor environment: Types::FunctionConfigurationEnvironment
+      attr_accessor exec_args: ::String
+      attr_accessor executable: ::String
+      attr_accessor memory_size: ::Integer
+      attr_accessor pinned: bool
+      attr_accessor timeout: ::Integer
+      attr_accessor function_runtime_override: ::String
+      SENSITIVE: []
+    end
+
+    class FunctionConfigurationEnvironment
+      attr_accessor access_sysfs: bool
+      attr_accessor execution: Types::FunctionExecutionConfig
+      attr_accessor resource_access_policies: ::Array[Types::ResourceAccessPolicy]
+      attr_accessor variables: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class FunctionDefaultConfig
+      attr_accessor execution: Types::FunctionDefaultExecutionConfig
+      SENSITIVE: []
+    end
+
+    class FunctionDefaultExecutionConfig
+      attr_accessor isolation_mode: ("GreengrassContainer" | "NoContainer")
+      attr_accessor run_as: Types::FunctionRunAsConfig
+      SENSITIVE: []
+    end
+
+    class FunctionDefinitionVersion
+      attr_accessor default_config: Types::FunctionDefaultConfig
+      attr_accessor functions: ::Array[Types::Function]
+      SENSITIVE: []
+    end
+
+    class FunctionExecutionConfig
+      attr_accessor isolation_mode: ("GreengrassContainer" | "NoContainer")
+      attr_accessor run_as: Types::FunctionRunAsConfig
+      SENSITIVE: []
+    end
+
+    class FunctionRunAsConfig
+      attr_accessor gid: ::Integer
+      attr_accessor uid: ::Integer
+      SENSITIVE: []
+    end
+
+    class GeneralError
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssociatedRoleRequest
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAssociatedRoleResponse
+      attr_accessor associated_at: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetBulkDeploymentStatusRequest
+      attr_accessor bulk_deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetBulkDeploymentStatusResponse
+      attr_accessor bulk_deployment_metrics: Types::BulkDeploymentMetrics
+      attr_accessor bulk_deployment_status: ("Initializing" | "Running" | "Completed" | "Stopping" | "Stopped" | "Failed")
+      attr_accessor created_at: ::String
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
+      attr_accessor error_message: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetConnectivityInfoRequest
+      attr_accessor thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectivityInfoResponse
+      attr_accessor connectivity_info: ::Array[Types::ConnectivityInfo]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectorDefinitionRequest
+      attr_accessor connector_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectorDefinitionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetConnectorDefinitionVersionRequest
+      attr_accessor connector_definition_id: ::String
+      attr_accessor connector_definition_version_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectorDefinitionVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor definition: Types::ConnectorDefinitionVersion
+      attr_accessor id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetCoreDefinitionRequest
+      attr_accessor core_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCoreDefinitionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetCoreDefinitionVersionRequest
+      attr_accessor core_definition_id: ::String
+      attr_accessor core_definition_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCoreDefinitionVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor definition: Types::CoreDefinitionVersion
+      attr_accessor id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentStatusRequest
+      attr_accessor deployment_id: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeploymentStatusResponse
+      attr_accessor deployment_status: ::String
+      attr_accessor deployment_type: ("NewDeployment" | "Redeployment" | "ResetDeployment" | "ForceResetDeployment")
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
+      attr_accessor error_message: ::String
+      attr_accessor updated_at: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeviceDefinitionRequest
+      attr_accessor device_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeviceDefinitionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetDeviceDefinitionVersionRequest
+      attr_accessor device_definition_id: ::String
+      attr_accessor device_definition_version_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDeviceDefinitionVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor definition: Types::DeviceDefinitionVersion
+      attr_accessor id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionDefinitionRequest
+      attr_accessor function_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionDefinitionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetFunctionDefinitionVersionRequest
+      attr_accessor function_definition_id: ::String
+      attr_accessor function_definition_version_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionDefinitionVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor definition: Types::FunctionDefinitionVersion
+      attr_accessor id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupCertificateAuthorityRequest
+      attr_accessor certificate_authority_id: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupCertificateAuthorityResponse
+      attr_accessor group_certificate_authority_arn: ::String
+      attr_accessor group_certificate_authority_id: ::String
+      attr_accessor pem_encoded_certificate: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupCertificateConfigurationRequest
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupCertificateConfigurationResponse
+      attr_accessor certificate_authority_expiry_in_milliseconds: ::String
+      attr_accessor certificate_expiry_in_milliseconds: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupRequest
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetGroupVersionRequest
+      attr_accessor group_id: ::String
+      attr_accessor group_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetGroupVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor definition: Types::GroupVersion
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetLoggerDefinitionRequest
+      attr_accessor logger_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLoggerDefinitionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetLoggerDefinitionVersionRequest
+      attr_accessor logger_definition_id: ::String
+      attr_accessor logger_definition_version_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetLoggerDefinitionVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor definition: Types::LoggerDefinitionVersion
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceDefinitionRequest
+      attr_accessor resource_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceDefinitionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetResourceDefinitionVersionRequest
+      attr_accessor resource_definition_id: ::String
+      attr_accessor resource_definition_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceDefinitionVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor definition: Types::ResourceDefinitionVersion
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetServiceRoleForAccountRequest < Aws::EmptyStructure
+    end
+
+    class GetServiceRoleForAccountResponse
+      attr_accessor associated_at: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionDefinitionRequest
+      attr_accessor subscription_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionDefinitionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionDefinitionVersionRequest
+      attr_accessor next_token: ::String
+      attr_accessor subscription_definition_id: ::String
+      attr_accessor subscription_definition_version_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSubscriptionDefinitionVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor definition: Types::SubscriptionDefinitionVersion
+      attr_accessor id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetThingRuntimeConfigurationRequest
+      attr_accessor thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetThingRuntimeConfigurationResponse
+      attr_accessor runtime_configuration: Types::RuntimeConfiguration
+      SENSITIVE: []
+    end
+
+    class GroupCertificateAuthorityProperties
+      attr_accessor group_certificate_authority_arn: ::String
+      attr_accessor group_certificate_authority_id: ::String
+      SENSITIVE: []
+    end
+
+    class GroupCertificateConfiguration
+      attr_accessor certificate_authority_expiry_in_milliseconds: ::String
+      attr_accessor certificate_expiry_in_milliseconds: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class GroupInformation
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor last_updated_timestamp: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor latest_version_arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GroupOwnerSetting
+      attr_accessor auto_add_group_owner: bool
+      attr_accessor group_owner: ::String
+      SENSITIVE: []
+    end
+
+    class GroupVersion
+      attr_accessor connector_definition_version_arn: ::String
+      attr_accessor core_definition_version_arn: ::String
+      attr_accessor device_definition_version_arn: ::String
+      attr_accessor function_definition_version_arn: ::String
+      attr_accessor logger_definition_version_arn: ::String
+      attr_accessor resource_definition_version_arn: ::String
+      attr_accessor subscription_definition_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerErrorException
+      attr_accessor error_details: ::Array[Types::ErrorDetail]
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListBulkDeploymentDetailedReportsRequest
+      attr_accessor bulk_deployment_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBulkDeploymentDetailedReportsResponse
+      attr_accessor deployments: ::Array[Types::BulkDeploymentResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBulkDeploymentsRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBulkDeploymentsResponse
+      attr_accessor bulk_deployments: ::Array[Types::BulkDeployment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectorDefinitionVersionsRequest
+      attr_accessor connector_definition_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectorDefinitionVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor versions: ::Array[Types::VersionInformation]
+      SENSITIVE: []
+    end
+
+    class ListConnectorDefinitionsRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectorDefinitionsResponse
+      attr_accessor definitions: ::Array[Types::DefinitionInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCoreDefinitionVersionsRequest
+      attr_accessor core_definition_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCoreDefinitionVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor versions: ::Array[Types::VersionInformation]
+      SENSITIVE: []
+    end
+
+    class ListCoreDefinitionsRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCoreDefinitionsResponse
+      attr_accessor definitions: ::Array[Types::DefinitionInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDefinitionsResponse
+      attr_accessor definitions: ::Array[Types::DefinitionInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentsRequest
+      attr_accessor group_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentsResponse
+      attr_accessor deployments: ::Array[Types::Deployment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeviceDefinitionVersionsRequest
+      attr_accessor device_definition_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeviceDefinitionVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor versions: ::Array[Types::VersionInformation]
+      SENSITIVE: []
+    end
+
+    class ListDeviceDefinitionsRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeviceDefinitionsResponse
+      attr_accessor definitions: ::Array[Types::DefinitionInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFunctionDefinitionVersionsRequest
+      attr_accessor function_definition_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFunctionDefinitionVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor versions: ::Array[Types::VersionInformation]
+      SENSITIVE: []
+    end
+
+    class ListFunctionDefinitionsRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFunctionDefinitionsResponse
+      attr_accessor definitions: ::Array[Types::DefinitionInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupCertificateAuthoritiesRequest
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupCertificateAuthoritiesResponse
+      attr_accessor group_certificate_authorities: ::Array[Types::GroupCertificateAuthorityProperties]
+      SENSITIVE: []
+    end
+
+    class ListGroupVersionsRequest
+      attr_accessor group_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor versions: ::Array[Types::VersionInformation]
+      SENSITIVE: []
+    end
+
+    class ListGroupsRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupsResponse
+      attr_accessor groups: ::Array[Types::GroupInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLoggerDefinitionVersionsRequest
+      attr_accessor logger_definition_id: ::String
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLoggerDefinitionVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor versions: ::Array[Types::VersionInformation]
+      SENSITIVE: []
+    end
+
+    class ListLoggerDefinitionsRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLoggerDefinitionsResponse
+      attr_accessor definitions: ::Array[Types::DefinitionInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceDefinitionVersionsRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      attr_accessor resource_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceDefinitionVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor versions: ::Array[Types::VersionInformation]
+      SENSITIVE: []
+    end
+
+    class ListResourceDefinitionsRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceDefinitionsResponse
+      attr_accessor definitions: ::Array[Types::DefinitionInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionDefinitionVersionsRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      attr_accessor subscription_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionDefinitionVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor versions: ::Array[Types::VersionInformation]
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionDefinitionsRequest
+      attr_accessor max_results: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSubscriptionDefinitionsResponse
+      attr_accessor definitions: ::Array[Types::DefinitionInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListVersionsResponse
+      attr_accessor next_token: ::String
+      attr_accessor versions: ::Array[Types::VersionInformation]
+      SENSITIVE: []
+    end
+
+    class LocalDeviceResourceData
+      attr_accessor group_owner_setting: Types::GroupOwnerSetting
+      attr_accessor source_path: ::String
+      SENSITIVE: []
+    end
+
+    class LocalVolumeResourceData
+      attr_accessor destination_path: ::String
+      attr_accessor group_owner_setting: Types::GroupOwnerSetting
+      attr_accessor source_path: ::String
+      SENSITIVE: []
+    end
+
+    class Logger
+      attr_accessor component: ("GreengrassSystem" | "Lambda")
+      attr_accessor id: ::String
+      attr_accessor level: ("DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL")
+      attr_accessor space: ::Integer
+      attr_accessor type: ("FileSystem" | "AWSCloudWatch")
+      SENSITIVE: []
+    end
+
+    class LoggerDefinitionVersion
+      attr_accessor loggers: ::Array[Types::Logger]
+      SENSITIVE: []
+    end
+
+    class ResetDeploymentsRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor force: bool
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResetDeploymentsResponse
+      attr_accessor deployment_arn: ::String
+      attr_accessor deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class Resource
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor resource_data_container: Types::ResourceDataContainer
+      SENSITIVE: []
+    end
+
+    class ResourceAccessPolicy
+      attr_accessor permission: ("ro" | "rw")
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceDataContainer
+      attr_accessor local_device_resource_data: Types::LocalDeviceResourceData
+      attr_accessor local_volume_resource_data: Types::LocalVolumeResourceData
+      attr_accessor s3_machine_learning_model_resource_data: Types::S3MachineLearningModelResourceData
+      attr_accessor sage_maker_machine_learning_model_resource_data: Types::SageMakerMachineLearningModelResourceData
+      attr_accessor secrets_manager_secret_resource_data: Types::SecretsManagerSecretResourceData
+      SENSITIVE: []
+    end
+
+    class ResourceDefinitionVersion
+      attr_accessor resources: ::Array[Types::Resource]
+      SENSITIVE: []
+    end
+
+    class ResourceDownloadOwnerSetting
+      attr_accessor group_owner: ::String
+      attr_accessor group_permission: ("ro" | "rw")
+      SENSITIVE: []
+    end
+
+    class RuntimeConfiguration
+      attr_accessor telemetry_configuration: Types::TelemetryConfiguration
+      SENSITIVE: []
+    end
+
+    class RuntimeConfigurationUpdate
+      attr_accessor telemetry_configuration: Types::TelemetryConfigurationUpdate
+      SENSITIVE: []
+    end
+
+    class S3MachineLearningModelResourceData
+      attr_accessor destination_path: ::String
+      attr_accessor owner_setting: Types::ResourceDownloadOwnerSetting
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class SageMakerMachineLearningModelResourceData
+      attr_accessor destination_path: ::String
+      attr_accessor owner_setting: Types::ResourceDownloadOwnerSetting
+      attr_accessor sage_maker_job_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SecretsManagerSecretResourceData
+      attr_accessor arn: ::String
+      attr_accessor additional_staging_labels_to_download: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StartBulkDeploymentRequest
+      attr_accessor amzn_client_token: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor input_file_uri: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartBulkDeploymentResponse
+      attr_accessor bulk_deployment_arn: ::String
+      attr_accessor bulk_deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopBulkDeploymentRequest
+      attr_accessor bulk_deployment_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopBulkDeploymentResponse < Aws::EmptyStructure
+    end
+
+    class Subscription
+      attr_accessor id: ::String
+      attr_accessor source: ::String
+      attr_accessor subject: ::String
+      attr_accessor target: ::String
+      SENSITIVE: []
+    end
+
+    class SubscriptionDefinitionVersion
+      attr_accessor subscriptions: ::Array[Types::Subscription]
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TelemetryConfiguration
+      attr_accessor configuration_sync_status: ("InSync" | "OutOfSync")
+      attr_accessor telemetry: ("On" | "Off")
+      SENSITIVE: []
+    end
+
+    class TelemetryConfigurationUpdate
+      attr_accessor telemetry: ("On" | "Off")
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateConnectivityInfoRequest
+      attr_accessor connectivity_info: ::Array[Types::ConnectivityInfo]
+      attr_accessor thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectivityInfoResponse
+      attr_accessor message: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorDefinitionRequest
+      attr_accessor connector_definition_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConnectorDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCoreDefinitionRequest
+      attr_accessor core_definition_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCoreDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDeviceDefinitionRequest
+      attr_accessor device_definition_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDeviceDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateFunctionDefinitionRequest
+      attr_accessor function_definition_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFunctionDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateGroupCertificateConfigurationRequest
+      attr_accessor certificate_expiry_in_milliseconds: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGroupCertificateConfigurationResponse
+      attr_accessor certificate_authority_expiry_in_milliseconds: ::String
+      attr_accessor certificate_expiry_in_milliseconds: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGroupRequest
+      attr_accessor group_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGroupResponse < Aws::EmptyStructure
+    end
+
+    class UpdateLoggerDefinitionRequest
+      attr_accessor logger_definition_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLoggerDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateResourceDefinitionRequest
+      attr_accessor name: ::String
+      attr_accessor resource_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateResourceDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateSubscriptionDefinitionRequest
+      attr_accessor name: ::String
+      attr_accessor subscription_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateSubscriptionDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class UpdateThingRuntimeConfigurationRequest
+      attr_accessor telemetry_configuration: Types::TelemetryConfigurationUpdate
+      attr_accessor thing_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateThingRuntimeConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class VersionInformation
+      attr_accessor arn: ::String
+      attr_accessor creation_timestamp: ::String
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+  end
+end

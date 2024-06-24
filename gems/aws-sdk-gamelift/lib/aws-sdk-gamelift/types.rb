@@ -30,7 +30,7 @@ module Aws::GameLift
       :ticket_id,
       :player_ids,
       :acceptance_type)
-      SENSITIVE = []
+      SENSITIVE = [:player_ids]
       include Aws::Structure
     end
 
@@ -105,8 +105,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Amazon GameLift Anywhere configuration options for your Anywhere
-    # fleets.
+    # Amazon GameLift configuration options for your Anywhere fleets.
     #
     # @!attribute [rw] cost
     #   The cost to run your fleet per hour. Amazon GameLift uses the
@@ -302,6 +301,9 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # **This data type has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
+    #
     # Determines whether a TLS/SSL certificate is generated for a fleet.
     # This feature must be enabled when creating the fleet. All instances in
     # a fleet share the same certificate. The certificate can be retrieved
@@ -396,9 +398,20 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # An Amazon GameLift compute resource for hosting your game servers. A
-    # compute can be an EC2instance in a managed EC2 fleet or a registered
-    # compute in an Anywhere fleet.
+    # **This data type has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
+    #
+    # An Amazon GameLift compute resource for hosting your game servers.
+    # Computes in an Amazon GameLift fleet differs depending on the fleet's
+    # compute type property as follows:
+    #
+    # * For `EC2` fleets, a compute is an EC2 instance.
+    #
+    # * For `ANYWHERE` fleets, a compute is a computing resource that you
+    #   provide and is registered to the fleet.
+    #
+    # * For `CONTAINER` fleets, a compute is a container that's registered
+    #   to the fleet.
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet that the compute belongs to.
@@ -411,13 +424,14 @@ module Aws::GameLift
     #
     # @!attribute [rw] compute_name
     #   A descriptive label for the compute resource. For instances in a
-    #   managed EC2 fleet, the compute name is an instance ID.
+    #   managed EC2 fleet, the compute name is the same value as the
+    #   `InstanceId` ID.
     #   @return [String]
     #
     # @!attribute [rw] compute_arn
     #   The ARN that is assigned to a compute resource and uniquely
     #   identifies it. ARNs are unique across locations. Instances in
-    #   managed EC2 fleets are not assigned a ComputeARN.
+    #   managed EC2 fleets are not assigned a Compute ARN.
     #   @return [String]
     #
     # @!attribute [rw] ip_address
@@ -462,6 +476,19 @@ module Aws::GameLift
     #   this endpoint to connect to the Amazon GameLift service.
     #   @return [String]
     #
+    # @!attribute [rw] game_lift_agent_endpoint
+    #   The endpoint of the Amazon GameLift Agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The `InstanceID` of the `Instance` hosting the compute for Container
+    #   and Managed EC2 fleets.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_attributes
+    #   Some attributes of a container.
+    #   @return [Types::ContainerAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/Compute AWS API Documentation
     #
     class Compute < Struct.new(
@@ -476,8 +503,11 @@ module Aws::GameLift
       :creation_time,
       :operating_system,
       :type,
-      :game_lift_service_sdk_endpoint)
-      SENSITIVE = []
+      :game_lift_service_sdk_endpoint,
+      :game_lift_agent_endpoint,
+      :instance_id,
+      :container_attributes)
+      SENSITIVE = [:ip_address]
       include Aws::Structure
     end
 
@@ -493,6 +523,982 @@ module Aws::GameLift
     class ConflictException < Struct.new(
       :message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # **This operation has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
+    #
+    # The set of port numbers to open on each instance in a container fleet.
+    # Connection ports are used by inbound traffic to connect with processes
+    # that are running in containers on the fleet.
+    #
+    # **Part of:** ContainerGroupsConfiguration, ContainerGroupsAttributes
+    #
+    # @!attribute [rw] from_port
+    #   Starting value for the port range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   Ending value for the port. Port numbers are end-inclusive. This
+    #   value must be equal to or greater than `FromPort`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ConnectionPortRange AWS API Documentation
+    #
+    class ConnectionPortRange < Struct.new(
+      :from_port,
+      :to_port)
+      SENSITIVE = [:from_port, :to_port]
+      include Aws::Structure
+    end
+
+    # **This data type is used with the Amazon GameLift containers feature,
+    # which is currently in public preview.**
+    #
+    # Describes attributes of containers that are deployed to a fleet with
+    # compute type `CONTAINER`.
+    #
+    # @!attribute [rw] container_port_mappings
+    #   Describes how container ports map to connection ports on the fleet
+    #   instance. Incoming traffic connects to a game via a connection port.
+    #   A `ContainerPortMapping` directs the traffic from a connection port
+    #   to a port on the container that hosts the game session.
+    #   @return [Array<Types::ContainerPortMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerAttributes AWS API Documentation
+    #
+    class ContainerAttributes < Struct.new(
+      :container_port_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # **This data type is used with the Amazon GameLift containers feature,
+    # which is currently in public preview.**
+    #
+    # Describes a container in a container fleet, the resources available to
+    # the container, and the commands that are run when the container
+    # starts. Container properties can't be updated. To change a property,
+    # create a new container group definition. See also
+    # ContainerDefinitionInput.
+    #
+    # **Part of:** ContainerGroupDefinition
+    #
+    # **Returned by:** DescribeContainerGroupDefinition,
+    # ListContainerGroupDefinitions
+    #
+    # @!attribute [rw] container_name
+    #   The container definition identifier. Container names are unique
+    #   within a container group definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_uri
+    #   The URI to the image that $short; copied and deployed to a container
+    #   fleet. For a more specific identifier, see `ResolvedImageDigest`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolved_image_digest
+    #   A unique and immutable identifier for the container image that is
+    #   deployed to a container fleet. The digest is a SHA 256 hash of the
+    #   container image manifest.
+    #   @return [String]
+    #
+    # @!attribute [rw] memory_limits
+    #   The amount of memory that Amazon GameLift makes available to the
+    #   container. If memory limits aren't set for an individual container,
+    #   the container shares the container group's total memory allocation.
+    #
+    #   <b>Related data type: </b> ContainerGroupDefinition$TotalMemoryLimit
+    #   @return [Types::ContainerMemoryLimits]
+    #
+    # @!attribute [rw] port_configuration
+    #   Defines the ports that are available to assign to processes in the
+    #   container. For example, a game server process requires a container
+    #   port to allow game clients to connect to it. Container ports aren't
+    #   directly accessed by inbound traffic. Amazon GameLift maps these
+    #   container ports to externally accessible connection ports, which are
+    #   assigned as needed from the container fleet's
+    #   `ConnectionPortRange`.
+    #   @return [Types::ContainerPortConfiguration]
+    #
+    # @!attribute [rw] cpu
+    #   The number of CPU units that are reserved for the container. Note: 1
+    #   vCPU unit equals 1024 CPU units. If no resources are reserved, the
+    #   container shares the total CPU limit for the container group.
+    #
+    #   <b>Related data type: </b> ContainerGroupDefinition$TotalCpuLimit
+    #   @return [Integer]
+    #
+    # @!attribute [rw] health_check
+    #   A configuration for a non-terminal health check. A container, which
+    #   automatically restarts if it stops functioning, also restarts if it
+    #   fails this health check. If an essential container in the daemon
+    #   group fails a health check, the entire container group is restarted.
+    #   The essential container in the replica group doesn't use this
+    #   health check mechanism, because the Amazon GameLift Agent
+    #   automatically handles the task.
+    #   @return [Types::ContainerHealthCheck]
+    #
+    # @!attribute [rw] command
+    #   A command that's passed to the container on startup. Each argument
+    #   for the command is an additional string in the array. See the
+    #   [ContainerDefinition::command][1] parameter in the *Amazon Elastic
+    #   Container Service API reference.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-command
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] essential
+    #   Indicates whether the container is vital to the container group. If
+    #   an essential container fails, the entire container group is
+    #   restarted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] entry_point
+    #   The entry point that's passed to the container on startup. If there
+    #   are multiple arguments, each argument is an additional string in the
+    #   array. See the [ContainerDefinition::entryPoint][1] parameter in the
+    #   *Amazon Elastic Container Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-entryPoint
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] working_directory
+    #   The directory in the container where commands are run. See the
+    #   [ContainerDefinition::workingDirectory][1] parameter in the *Amazon
+    #   Elastic Container Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-workingDirectory
+    #   @return [String]
+    #
+    # @!attribute [rw] environment
+    #   A set of environment variables that's passed to the container on
+    #   startup. See the [ContainerDefinition::environment][1] parameter in
+    #   the *Amazon Elastic Container Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-environment
+    #   @return [Array<Types::ContainerEnvironment>]
+    #
+    # @!attribute [rw] depends_on
+    #   Indicates that the container relies on the status of other
+    #   containers in the same container group during its startup and
+    #   shutdown sequences. A container might have dependencies on multiple
+    #   containers.
+    #   @return [Array<Types::ContainerDependency>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerDefinition AWS API Documentation
+    #
+    class ContainerDefinition < Struct.new(
+      :container_name,
+      :image_uri,
+      :resolved_image_digest,
+      :memory_limits,
+      :port_configuration,
+      :cpu,
+      :health_check,
+      :command,
+      :essential,
+      :entry_point,
+      :working_directory,
+      :environment,
+      :depends_on)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # **This data type is used with the Amazon GameLift containers feature,
+    # which is currently in public preview.**
+    #
+    # Describes a container's configuration, resources, and start
+    # instructions. Use this data type to create a container group
+    # definition. For the properties of a container that's been deployed to
+    # a fleet, see ContainerDefinition. You can't change these properties
+    # after you've created the container group definition. If you need a
+    # container group with different properties, then you must create a new
+    # one.
+    #
+    # <b>Used with: </b> CreateContainerGroupDefinition
+    #
+    # @!attribute [rw] container_name
+    #   A string that uniquely identifies the container definition within a
+    #   container group.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_uri
+    #   The location of a container image that $short; will copy and deploy
+    #   to a container fleet. Images in Amazon Elastic Container Registry
+    #   private repositories are supported. The repository must be in the
+    #   same Amazon Web Services account and Amazon Web Services Region
+    #   where you're creating the container group definition. For limits on
+    #   image size, see [Amazon GameLift endpoints and quotas][1]. You can
+    #   use any of the following image URI formats:
+    #
+    #   * Image ID only: `[AWS account].dkr.ecr.[AWS
+    #     region].amazonaws.com/[repository ID]`
+    #
+    #   * Image ID and digest: `[AWS account].dkr.ecr.[AWS
+    #     region].amazonaws.com/[repository ID]@[digest]`
+    #
+    #   * Image ID and tag: `[AWS account].dkr.ecr.[AWS
+    #     region].amazonaws.com/[repository ID]:[tag]`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/gamelift.html
+    #   @return [String]
+    #
+    # @!attribute [rw] memory_limits
+    #   The amount of memory to make available to the container. If you
+    #   don't specify memory limits for this container, then it shares the
+    #   container group's total memory allocation.
+    #
+    #   <b>Related data type: </b> ContainerGroupDefinition$TotalMemoryLimit
+    #   @return [Types::ContainerMemoryLimits]
+    #
+    # @!attribute [rw] port_configuration
+    #   A set of ports that Amazon GameLift can assign to processes in the
+    #   container. All processes that accept inbound traffic connections,
+    #   including game server processes, must be assigned a port from this
+    #   set. The set of ports must be large enough to assign one to each
+    #   process in the container that needs one. If the container includes
+    #   your game server, include enough ports to assign one port to each
+    #   concurrent server process (as defined in a container fleet's
+    #   RuntimeConfiguration). For more details, see [Networking for
+    #   container fleets][1].
+    #
+    #   Container ports aren't directly accessed by inbound traffic. Amazon
+    #   GameLift maps these container ports to externally accessible
+    #   connection ports, which are assigned as needed from the container
+    #   fleet's `ConnectionPortRange`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-network
+    #   @return [Types::ContainerPortConfiguration]
+    #
+    # @!attribute [rw] cpu
+    #   The number of CPU units to reserve for this container. The container
+    #   can use more resources when needed, if available. Note: 1 vCPU unit
+    #   equals 1024 CPU units. If you don't reserve CPU units for this
+    #   container, then it shares the total CPU limit for the container
+    #   group. This property is similar to the Amazon ECS container
+    #   definition parameter [environment][1] (*Amazon Elastic Container
+    #   Service Developer Guide).*
+    #
+    #   <b>Related data type: </b> ContainerGroupDefinition$TotalCpuLimit
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definition_environment
+    #   @return [Integer]
+    #
+    # @!attribute [rw] health_check
+    #   Configuration for a non-terminal health check. A container
+    #   automatically restarts if it stops functioning. This parameter lets
+    #   you define additional reasons to consider a container unhealthy and
+    #   restart it. You can set a health check for any container except for
+    #   the essential container in the replica container group. If an
+    #   essential container in the daemon group fails a health check, the
+    #   entire container group is restarted.
+    #   @return [Types::ContainerHealthCheck]
+    #
+    # @!attribute [rw] command
+    #   A command to pass to the container on startup. Add multiple
+    #   arguments as additional strings in the array. See the
+    #   [ContainerDefinition command][1] parameter in the *Amazon Elastic
+    #   Container Service API reference.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-command
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] essential
+    #   Specifies whether the container is vital for the container group to
+    #   function properly. If an essential container fails, it causes the
+    #   entire container group to restart. Each container group must have an
+    #   essential container.
+    #
+    #   **Replica container groups** - A replica group must have exactly one
+    #   essential container. Use the following to configure an essential
+    #   replica container:
+    #
+    #   * Choose a container is running your game server and the Amazon
+    #     GameLift Agent.
+    #
+    #   * Include a port configuration. This container runs your game server
+    #     processes, and each process requires a container port to allow
+    #     access to game clients.
+    #
+    #   * Don't configure a health check. The Agent handles this task for
+    #     the essential replica container.
+    #
+    #   **Daemon container groups** - A daemon group must have at least one
+    #   essential container.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] entry_point
+    #   An entry point to pass to the container on startup. Add multiple
+    #   arguments as additional strings in the array. See the
+    #   [ContainerDefinition::entryPoint][1] parameter in the *Amazon
+    #   Elastic Container Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-entryPoint
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] working_directory
+    #   The directory in the container where commands are run. See the
+    #   [ContainerDefinition::workingDirectory parameter][1] in the *Amazon
+    #   Elastic Container Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-workingDirectory
+    #   @return [String]
+    #
+    # @!attribute [rw] environment
+    #   A set of environment variables to pass to the container on startup.
+    #   See the [ContainerDefinition::environment][1] parameter in the
+    #   *Amazon Elastic Container Service API Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-environment
+    #   @return [Array<Types::ContainerEnvironment>]
+    #
+    # @!attribute [rw] depends_on
+    #   Sets up dependencies between this container and the status of other
+    #   containers in the same container group. A container can have
+    #   dependencies on multiple different containers.
+    #
+    #   You can use dependencies to establish a startup/shutdown sequence
+    #   across the container group. A container startup dependency is
+    #   reversed on shutdown.
+    #
+    #   For example, you might specify that SideCarContainerB has a `START`
+    #   dependency on SideCarContainerA. This dependency means that
+    #   SideCarContainerB can't start until after SideCarContainerA has
+    #   started. This dependency is reversed on shutdown, which means that
+    #   SideCarContainerB must shut down before SideCarContainerA can shut
+    #   down.
+    #   @return [Array<Types::ContainerDependency>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerDefinitionInput AWS API Documentation
+    #
+    class ContainerDefinitionInput < Struct.new(
+      :container_name,
+      :image_uri,
+      :memory_limits,
+      :port_configuration,
+      :cpu,
+      :health_check,
+      :command,
+      :essential,
+      :entry_point,
+      :working_directory,
+      :environment,
+      :depends_on)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # **This data type is used with the Amazon GameLift containers feature,
+    # which is currently in public preview.**
+    #
+    # A container's dependency on another container in the same container
+    # group. The dependency impacts how the dependent container is able to
+    # start or shut down based the status of the other container.
+    #
+    # For example, ContainerA is configured with the following dependency: a
+    # `START` dependency on ContainerB. This means that ContainerA can't
+    # start until ContainerB has started. It also means that ContainerA must
+    # shut down before ContainerB.
+    #
+    # **Part of:** ContainerDefinition
+    #
+    # @!attribute [rw] container_name
+    #   A descriptive label for the container definition that this container
+    #   depends on.
+    #   @return [String]
+    #
+    # @!attribute [rw] condition
+    #   The condition that the dependency container must reach before the
+    #   dependent container can start. Valid conditions include:
+    #
+    #   * START - The dependency container must have started.
+    #
+    #   * COMPLETE - The dependency container has run to completion (exits).
+    #     Use this condition with nonessential containers, such as those
+    #     that run a script and then exit. The dependency container can't
+    #     be an essential container.
+    #
+    #   * SUCCESS - The dependency container has run to completion and
+    #     exited with a zero status. The dependency container can't be an
+    #     essential container.
+    #
+    #   * HEALTHY - The dependency container has passed its Docker health
+    #     check. Use this condition with dependency containers that have
+    #     health checks configured. This condition is confirmed at container
+    #     group startup only.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerDependency AWS API Documentation
+    #
+    class ContainerDependency < Struct.new(
+      :container_name,
+      :condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # **This data type is used with the Amazon GameLift containers feature,
+    # which is currently in public preview.**
+    #
+    # An environment variable to set inside a container, in the form of a
+    # key-value pair.
+    #
+    # <b>Related data type: </b> ContainerDefinition$Environment
+    #
+    # @!attribute [rw] name
+    #   The environment variable name.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The environment variable value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerEnvironment AWS API Documentation
+    #
+    class ContainerEnvironment < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # **This data type is used with the Amazon GameLift containers feature,
+    # which is currently in public preview.**
+    #
+    # The properties that describe a container group resource. Container
+    # group definition properties can't be updated. To change a property,
+    # create a new container group definition.
+    #
+    # **Used with:** CreateContainerGroupDefinition
+    #
+    # **Returned by:** DescribeContainerGroupDefinition,
+    # ListContainerGroupDefinitions
+    #
+    # @!attribute [rw] container_group_definition_arn
+    #   The Amazon Resource Name ([ARN][1]) that is assigned to an Amazon
+    #   GameLift `ContainerGroupDefinition` resource. It uniquely identifies
+    #   the resource across all Amazon Web Services Regions. Format is
+    #   `arn:aws:gamelift:<region>::containergroupdefinition/[container
+    #   group definition name]`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A time stamp indicating when this data object was created. Format is
+    #   a number expressed in Unix time as milliseconds (for example
+    #   `"1469498468.057"`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] operating_system
+    #   The platform required for all containers in the container group
+    #   definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A descriptive identifier for the container group definition. The
+    #   name value is unique in an Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduling_strategy
+    #   The method for deploying the container group across fleet instances.
+    #   A replica container group might have multiple copies on each fleet
+    #   instance. A daemon container group maintains only one copy per fleet
+    #   instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_memory_limit
+    #   The amount of memory (in MiB) on a fleet instance to allocate for
+    #   the container group. All containers in the group share these
+    #   resources.
+    #
+    #   You can set additional limits for each ContainerDefinition in the
+    #   group. If individual containers have limits, this value must meet
+    #   the following requirements:
+    #
+    #   * Equal to or greater than the sum of all container-specific soft
+    #     memory limits in the group.
+    #
+    #   * Equal to or greater than any container-specific hard limits in the
+    #     group.
+    #
+    #   For more details on memory allocation, see the [Container fleet
+    #   design guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-design-fleet
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_cpu_limit
+    #   The amount of CPU units on a fleet instance to allocate for the
+    #   container group. All containers in the group share these resources.
+    #   This property is an integer value in CPU units (1 vCPU is equal to
+    #   1024 CPU units).
+    #
+    #   You can set additional limits for each ContainerDefinition in the
+    #   group. If individual containers have limits, this value must be
+    #   equal to or greater than the sum of all container-specific CPU
+    #   limits in the group.
+    #
+    #   For more details on memory allocation, see the [Container fleet
+    #   design guide][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-design-fleet
+    #   @return [Integer]
+    #
+    # @!attribute [rw] container_definitions
+    #   The set of container definitions that are included in the container
+    #   group.
+    #   @return [Array<Types::ContainerDefinition>]
+    #
+    # @!attribute [rw] status
+    #   Current status of the container group definition resource. Values
+    #   include:
+    #
+    #   * `COPYING` -- Amazon GameLift is in the process of making copies of
+    #     all container images that are defined in the group. While in this
+    #     state, the resource can't be used to create a container fleet.
+    #
+    #   * `READY` -- Amazon GameLift has copied the registry images for all
+    #     containers that are defined in the group. You can use a container
+    #     group definition in this status to create a container fleet.
+    #
+    #   * `FAILED` -- Amazon GameLift failed to create a valid container
+    #     group definition resource. For more details on the cause of the
+    #     failure, see `StatusReason`. A container group definition resource
+    #     in failed status will be deleted within a few minutes.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about a container group definition that's in
+    #   `FAILED` status. Possible reasons include:
+    #
+    #   * An internal issue prevented Amazon GameLift from creating the
+    #     container group definition resource. Delete the failed resource
+    #     and call CreateContainerGroupDefinitionagain.
+    #
+    #   * An access-denied message means that you don't have permissions to
+    #     access the container image on ECR. See [ IAM permission
+    #     examples][1] for help setting up required IAM permissions for
+    #     Amazon GameLift.
+    #
+    #   * The `ImageUri` value for at least one of the containers in the
+    #     container group definition was invalid or not found in the current
+    #     Amazon Web Services account.
+    #
+    #   * At least one of the container images referenced in the container
+    #     group definition exceeds the allowed size. For size limits, see [
+    #     Amazon GameLift endpoints and quotas][2].
+    #
+    #   * At least one of the container images referenced in the container
+    #     group definition uses a different operating system than the one
+    #     defined for the container group.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-iam-policy-examples.html
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/gamelift.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerGroupDefinition AWS API Documentation
+    #
+    class ContainerGroupDefinition < Struct.new(
+      :container_group_definition_arn,
+      :creation_time,
+      :operating_system,
+      :name,
+      :scheduling_strategy,
+      :total_memory_limit,
+      :total_cpu_limit,
+      :container_definitions,
+      :status,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # **This data type is used with the Amazon GameLift containers feature,
+    # which is currently in public preview.**
+    #
+    # The properties of a container group that is deployed to a container
+    # fleet.
+    #
+    # **Part of:** ContainerGroupsAttributes
+    #
+    # **Returned by:** DescribeFleetAttributes
+    #
+    # @!attribute [rw] scheduling_strategy
+    #   The method for scheduling and maintaining copies of the container
+    #   group across a container fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_group_definition_name
+    #   The unique identifier for the container group definition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerGroupDefinitionProperty AWS API Documentation
+    #
+    class ContainerGroupDefinitionProperty < Struct.new(
+      :scheduling_strategy,
+      :container_group_definition_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # **This data type is used with the Amazon GameLift containers feature,
+    # which is currently in public preview.**
+    #
+    # The properties of container groups that are running on a container
+    # fleet. Container group properties for a fleet can't be changed.
+    #
+    # **Returned by:** DescribeFleetAttributes, CreateFleet
+    #
+    # @!attribute [rw] container_group_definition_properties
+    #   A collection of properties that describe each container group in the
+    #   fleet. A container fleet is deployed with one or more
+    #   ContainerGroupDefinition resources, which is where these properties
+    #   are set.
+    #   @return [Array<Types::ContainerGroupDefinitionProperty>]
+    #
+    # @!attribute [rw] connection_port_range
+    #   A set of ports that allow inbound traffic to connect to processes
+    #   running in the fleet's container groups. Amazon GameLift maps each
+    #   connection port to a container port, which is assigned to a specific
+    #   container process. A fleet's connection port range can't be
+    #   changed, but you can control access to connection ports by updating
+    #   a fleet's `EC2InboundPermissions` with UpdateFleetPortSettings.
+    #   @return [Types::ConnectionPortRange]
+    #
+    # @!attribute [rw] container_groups_per_instance
+    #   Details about the number of replica container groups that Amazon
+    #   GameLift deploys to each instance in the container fleet.
+    #   @return [Types::ContainerGroupsPerInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerGroupsAttributes AWS API Documentation
+    #
+    class ContainerGroupsAttributes < Struct.new(
+      :container_group_definition_properties,
+      :connection_port_range,
+      :container_groups_per_instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # **This data type is used with the Amazon GameLift containers feature,
+    # which is currently in public preview.**
+    #
+    # Configuration details for a set of container groups, for use when
+    # creating a fleet with compute type `CONTAINER`.
+    #
+    # **Used with:** CreateFleet
+    #
+    # @!attribute [rw] container_group_definition_names
+    #   The list of container group definition names to deploy to a new
+    #   container fleet.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] connection_port_range
+    #   A set of ports to allow inbound traffic, including game clients, to
+    #   connect to processes running in the container fleet.
+    #
+    #   Connection ports are dynamically mapped to container ports, which
+    #   are assigned to individual processes running in a container. The
+    #   connection port range must have enough ports to map to all container
+    #   ports across a fleet instance. To calculate the minimum connection
+    #   ports needed, use the following formula:
+    #
+    #   *\[Total number of container ports as defined for containers in the
+    #   replica container group\] * \[Desired or calculated number of
+    #   replica container groups per instance\] + \[Total number of
+    #   container ports as defined for containers in the daemon container
+    #   group\]*
+    #
+    #   As a best practice, double the minimum number of connection ports.
+    #
+    #   <note markdown="1"> Use the fleet's `EC2InboundPermissions` property to control
+    #   external access to connection ports. Set this property to the
+    #   connection port numbers that you want to open access to. See
+    #   IpPermission for more details.
+    #
+    #    </note>
+    #   @return [Types::ConnectionPortRange]
+    #
+    # @!attribute [rw] desired_replica_container_groups_per_instance
+    #   The number of times to replicate the replica container group on each
+    #   instance in a container fleet. By default, Amazon GameLift
+    #   calculates the maximum number of replica container groups that can
+    #   fit on a fleet instance (based on CPU and memory resources). Leave
+    #   this parameter empty if you want to use the maximum number, or
+    #   specify a desired number to override the maximum. The desired number
+    #   is used if it's less than the maximum number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerGroupsConfiguration AWS API Documentation
+    #
+    class ContainerGroupsConfiguration < Struct.new(
+      :container_group_definition_names,
+      :connection_port_range,
+      :desired_replica_container_groups_per_instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # **This data type is used with the Amazon GameLift containers feature,
+    # which is currently in public preview.**
+    #
+    # Determines how many replica container groups that Amazon GameLift
+    # deploys to each instance in a container fleet.
+    #
+    # Amazon GameLift calculates the maximum possible replica groups per
+    # instance based on the instance 's CPU and memory resources. When
+    # deploying a fleet, Amazon GameLift places replica container groups on
+    # each fleet instance based on the following:
+    #
+    # * If no desired value is set, Amazon GameLift places the calculated
+    #   maximum.
+    #
+    # * If a desired number is set to a value higher than the calculated
+    #   maximum, Amazon GameLift places the calculated maximum.
+    #
+    # * If a desired number is set to a value lower than the calculated
+    #   maximum, Amazon GameLift places the desired number.
+    #
+    # **Part of:** ContainerGroupsConfiguration, ContainerGroupsAttributes
+    #
+    # **Returned by:** DescribeFleetAttributes, CreateFleet
+    #
+    # @!attribute [rw] desired_replica_container_groups_per_instance
+    #   The desired number of replica container groups to place on each
+    #   fleet instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_replica_container_groups_per_instance
+    #   The maximum possible number of replica container groups that each
+    #   fleet instance can have.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerGroupsPerInstance AWS API Documentation
+    #
+    class ContainerGroupsPerInstance < Struct.new(
+      :desired_replica_container_groups_per_instance,
+      :max_replica_container_groups_per_instance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Instructions on when and how to check the health of a container in a
+    # container fleet. When health check properties are set in a container
+    # definition, they override any Docker health checks in the container
+    # image. For more information on container health checks, see
+    # [HealthCheck command][1] in the *Amazon Elastic Container Service
+    # API*.
+    #
+    # The following example instructions tell the container to wait 100
+    # seconds after launch before counting failed health checks, then
+    # initiate the health check command every 60 seconds. After issuing the
+    # health check command, wait 10 seconds for it to succeed. If it fails,
+    # retry the command 3 times before considering the container to be
+    # unhealthy.
+    #
+    # `\{"Command": [ "CMD-SHELL", "ps cax | grep "processmanager" || exit
+    # 1" ], "Interval": 300, "Timeout": 30, "Retries": 5, "StartPeriod": 100
+    # \}`
+    #
+    # **Part of:** ContainerDefinition$HealthCheck
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html#ECS-Type-HealthCheck-command
+    #
+    # @!attribute [rw] command
+    #   A string array that specifies the command that the container runs to
+    #   determine if it's healthy.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] interval
+    #   The time period (in seconds) between each health check.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout
+    #   The time period (in seconds) to wait for a health check to succeed
+    #   before a failed health check is counted.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retries
+    #   The number of times to retry a failed health check before the
+    #   container is considered unhealthy. The first run of the command does
+    #   not count as a retry.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_period
+    #   The optional grace period (in seconds) to give a container time to
+    #   bootstrap before the first failed health check counts toward the
+    #   number of retries.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerHealthCheck AWS API Documentation
+    #
+    class ContainerHealthCheck < Struct.new(
+      :command,
+      :interval,
+      :timeout,
+      :retries,
+      :start_period)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies how much memory is available to a container. You can't
+    # change this value after you create this object.
+    #
+    # <b>Part of: </b> ContainerDefinition$MemoryLimits
+    #
+    # @!attribute [rw] soft_limit
+    #   The amount of memory that is reserved for a container. When the
+    #   container group's shared memory is under contention, the system
+    #   attempts to maintain the container memory usage at this soft limit.
+    #   However, the container can use more memory when needed, if
+    #   available. This property is similar to the Amazon ECS container
+    #   definition parameter [memoryreservation][1] (*Amazon Elastic
+    #   Container Service Developer Guide*).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#ContainerDefinition-memoryReservation
+    #   @return [Integer]
+    #
+    # @!attribute [rw] hard_limit
+    #   The maximum amount of memory that the container can use. If a
+    #   container attempts to exceed this limit, the container is stopped.
+    #   This property is similar to the Amazon ECS container definition
+    #   parameter [memory][1] in the *Amazon Elastic Container Service
+    #   Developer Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definition_memory
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerMemoryLimits AWS API Documentation
+    #
+    class ContainerMemoryLimits < Struct.new(
+      :soft_limit,
+      :hard_limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines ranges of ports that server processes can connect to.
+    #
+    # **Part of:** ContainerDefinition$PortConfiguration
+    #
+    # @!attribute [rw] container_port_ranges
+    #   Specifies one or more ranges of ports on a container. These ranges
+    #   must not overlap.
+    #   @return [Array<Types::ContainerPortRange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerPortConfiguration AWS API Documentation
+    #
+    class ContainerPortConfiguration < Struct.new(
+      :container_port_ranges)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # **This data type is used with the Amazon GameLift containers feature,
+    # which is currently in public preview.**
+    #
+    # Defines how an internal-facing container port is mapped to an
+    # external-facing connection port on a fleet instance of compute type
+    # `CONTAINER`. Incoming traffic, such as a game client, uses a
+    # connection port to connect to a process in the container fleet. Amazon
+    # GameLift directs the inbound traffic to the container port that is
+    # assigned to the process, such as a game session, running on a
+    # container.
+    #
+    # **Part of:** ContainerAttributes
+    #
+    # @!attribute [rw] container_port
+    #   The port opened on the container.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] connection_port
+    #   The port opened on the fleet instance. This is also called the
+    #   "host port".
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The network protocol that this mapping supports.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerPortMapping AWS API Documentation
+    #
+    class ContainerPortMapping < Struct.new(
+      :container_port,
+      :connection_port,
+      :protocol)
+      SENSITIVE = [:container_port, :connection_port]
+      include Aws::Structure
+    end
+
+    # **This data type is used with the Amazon GameLift containers feature,
+    # which is currently in public preview.**
+    #
+    # A set of one or more port numbers that can be opened on the container.
+    #
+    # **Part of:** ContainerPortConfiguration
+    #
+    # @!attribute [rw] from_port
+    #   A starting value for the range of allowed port numbers.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   An ending value for the range of allowed port numbers. Port numbers
+    #   are end-inclusive. This value must be equal to or greater than
+    #   `FromPort`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The network protocol that these ports support.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ContainerPortRange AWS API Documentation
+    #
+    class ContainerPortRange < Struct.new(
+      :from_port,
+      :to_port,
+      :protocol)
+      SENSITIVE = [:from_port, :to_port]
       include Aws::Structure
     end
 
@@ -663,6 +1669,94 @@ module Aws::GameLift
     end
 
     # @!attribute [rw] name
+    #   A descriptive identifier for the container group definition. The
+    #   name value must be unique in an Amazon Web Services Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduling_strategy
+    #   The method for deploying the container group across fleet instances.
+    #   A replica container group might have multiple copies on each fleet
+    #   instance. A daemon container group has one copy per fleet instance.
+    #   Default value is `REPLICA`.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_memory_limit
+    #   The maximum amount of memory (in MiB) to allocate to the container
+    #   group. All containers in the group share this memory. If you specify
+    #   memory limits for individual containers, set this parameter based on
+    #   the following guidelines. The value must be (1) greater than the sum
+    #   of the soft memory limits for all containers in the group, and (2)
+    #   greater than any individual container's hard memory limit.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_cpu_limit
+    #   The maximum amount of CPU units to allocate to the container group.
+    #   Set this parameter to an integer value in CPU units (1 vCPU is equal
+    #   to 1024 CPU units). All containers in the group share this memory.
+    #   If you specify CPU limits for individual containers, set this
+    #   parameter based on the following guidelines. The value must be equal
+    #   to or greater than the sum of the CPU limits for all containers in
+    #   the group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] container_definitions
+    #   Definitions for all containers in this group. Each container
+    #   definition identifies the container image and specifies
+    #   configuration settings for the container. See the [ Container fleet
+    #   design guide][1] for container guidelines.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/containers-design-fleet.html
+    #   @return [Array<Types::ContainerDefinitionInput>]
+    #
+    # @!attribute [rw] operating_system
+    #   The platform that is used by containers in the container group
+    #   definition. All containers in a group must run on the same operating
+    #   system.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of labels to assign to the container group definition
+    #   resource. Tags are developer-defined key-value pairs. Tagging Amazon
+    #   Web Services resources are useful for resource management, access
+    #   management and cost allocation. For more information, see [ Tagging
+    #   Amazon Web Services Resources][1] in the *Amazon Web Services
+    #   General Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateContainerGroupDefinitionInput AWS API Documentation
+    #
+    class CreateContainerGroupDefinitionInput < Struct.new(
+      :name,
+      :scheduling_strategy,
+      :total_memory_limit,
+      :total_cpu_limit,
+      :container_definitions,
+      :operating_system,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_group_definition
+    #   The properties of the newly created container group definition
+    #   resource. You use this resource to create a container fleet.
+    #   @return [Types::ContainerGroupDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateContainerGroupDefinitionOutput AWS API Documentation
+    #
+    class CreateContainerGroupDefinitionOutput < Struct.new(
+      :container_group_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
     #   A descriptive label that is associated with a fleet. Fleet names do
     #   not need to be unique.
     #   @return [String]
@@ -673,16 +1767,18 @@ module Aws::GameLift
     #
     # @!attribute [rw] build_id
     #   The unique identifier for a custom game server build to be deployed
-    #   on fleet instances. You can use either the build ID or ARN. The
-    #   build must be uploaded to Amazon GameLift and in `READY` status.
-    #   This fleet property cannot be changed later.
+    #   to a fleet with compute type `EC2`. You can use either the build ID
+    #   or ARN. The build must be uploaded to Amazon GameLift and in `READY`
+    #   status. This fleet property can't be changed after the fleet is
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] script_id
     #   The unique identifier for a Realtime configuration script to be
-    #   deployed on fleet instances. You can use either the script ID or
-    #   ARN. Scripts must be uploaded to Amazon GameLift prior to creating
-    #   the fleet. This fleet property cannot be changed later.
+    #   deployed to a fleet with compute type `EC2`. You can use either the
+    #   script ID or ARN. Scripts must be uploaded to Amazon GameLift prior
+    #   to creating the fleet. This fleet property can't be changed after
+    #   the fleet is created.
     #   @return [String]
     #
     # @!attribute [rw] server_launch_path
@@ -711,8 +1807,8 @@ module Aws::GameLift
     #   @return [Array<String>]
     #
     # @!attribute [rw] ec2_instance_type
-    #   The Amazon GameLift-supported Amazon EC2 instance type to use for
-    #   all fleet instances. Instance type determines the computing
+    #   The Amazon GameLift-supported Amazon EC2 instance type to use with
+    #   EC2 and container fleets. Instance type determines the computing
     #   resources that will be used to host your game servers, including
     #   CPU, memory, storage, and networking capacity. See [Amazon Elastic
     #   Compute Cloud Instance Types][1] for detailed descriptions of Amazon
@@ -724,11 +1820,20 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] ec2_inbound_permissions
-    #   The allowed IP address ranges and port settings that allow inbound
-    #   traffic to access game sessions on this fleet. If the fleet is
-    #   hosting a custom game build, this property must be set before
-    #   players can connect to game sessions. For Realtime Servers fleets,
-    #   Amazon GameLift automatically sets TCP and UDP ranges.
+    #   The IP address ranges and port settings that allow inbound traffic
+    #   to access game server processes and other processes on this fleet.
+    #   Set this parameter for EC2 and container fleets. You can leave this
+    #   parameter empty when creating the fleet, but you must call
+    #   UpdateFleetPortSettings to set it before players can connect to game
+    #   sessions. As a best practice, we recommend opening ports for remote
+    #   access only when you need them and closing them when you're
+    #   finished. For Realtime Servers fleets, Amazon GameLift automatically
+    #   sets TCP and UDP ranges.
+    #
+    #   To manage inbound access for a container fleet, set this parameter
+    #   to the same port numbers that you set for the fleet's connection
+    #   port range. During the life of the fleet, update this parameter to
+    #   control which connection ports are open to inbound traffic.
     #   @return [Array<Types::IpPermission>]
     #
     # @!attribute [rw] new_game_session_protection_policy
@@ -746,14 +1851,15 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] runtime_configuration
-    #   Instructions for how to launch and maintain server processes on
-    #   instances in the fleet. The runtime configuration defines one or
-    #   more server process configurations, each identifying a build
-    #   executable or Realtime script file and the number of processes of
-    #   that type to run concurrently.
+    #   Instructions for how to launch and run server processes on the
+    #   fleet. Set runtime configuration for EC2 fleets and container
+    #   fleets. For an Anywhere fleets, set this parameter only if the fleet
+    #   is running the Amazon GameLift Agent. The runtime configuration
+    #   defines one or more server process configurations. Each server
+    #   process identifies a game executable or Realtime script file and the
+    #   number of processes to run concurrently.
     #
-    #   <note markdown="1"> The `RuntimeConfiguration` parameter is required unless the fleet is
-    #   being configured using the older parameters `ServerLaunchPath` and
+    #   <note markdown="1"> This parameter replaces the parameters `ServerLaunchPath` and
     #   `ServerLaunchParameters`, which are still supported for backward
     #   compatibility.
     #
@@ -797,8 +1903,8 @@ module Aws::GameLift
     # @!attribute [rw] fleet_type
     #   Indicates whether to use On-Demand or Spot instances for this fleet.
     #   By default, this property is set to `ON_DEMAND`. Learn more about
-    #   when to use [ On-Demand versus Spot Instances][1]. This property
-    #   cannot be changed after the fleet is created.
+    #   when to use [ On-Demand versus Spot Instances][1]. This fleet
+    #   property can't be changed after the fleet is created.
     #
     #
     #
@@ -806,20 +1912,19 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] instance_role_arn
-    #   A unique identifier for an IAM role that manages access to your
-    #   Amazon Web Services services. With an instance role ARN set, any
-    #   application that runs on an instance in this fleet can assume the
-    #   role, including install scripts, server processes, and daemons
-    #   (background processes). Create a role or look up a role's ARN by
-    #   using the [IAM dashboard][1] in the Amazon Web Services Management
-    #   Console. Learn more about using on-box credentials for your game
-    #   servers at [ Access external resources from a game server][2]. This
-    #   property cannot be changed after the fleet is created.
+    #   A unique identifier for an IAM role with access permissions to other
+    #   Amazon Web Services services. Any application that runs on an
+    #   instance in the fleet--including install scripts, server processes,
+    #   and other processes--can use these permissions to interact with
+    #   Amazon Web Services resources that you own or have access to. For
+    #   more information about using the role with your game server builds,
+    #   see [ Communicate with other Amazon Web Services resources from your
+    #   fleets][1]. This fleet property can't be changed after the fleet is
+    #   created.
     #
     #
     #
-    #   [1]: https://console.aws.amazon.com/iam/
-    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
     #   @return [String]
     #
     # @!attribute [rw] certificate_configuration
@@ -854,11 +1959,12 @@ module Aws::GameLift
     #   creating fleets in Amazon Web Services Regions that support multiple
     #   locations. You can add any Amazon GameLift-supported Amazon Web
     #   Services Region as a remote location, in the form of an Amazon Web
-    #   Services Region code such as `us-west-2`. To create a fleet with
-    #   instances in the home Region only, don't use this parameter.
+    #   Services Region code, such as `us-west-2` or Local Zone code. To
+    #   create a fleet with instances in the home Region only, don't set
+    #   this parameter.
     #
-    #   To use this parameter, Amazon GameLift requires you to use your home
-    #   location in the request.
+    #   When using this parameter, Amazon GameLift requires you to include
+    #   your home location in the request.
     #   @return [Array<Types::LocationConfiguration>]
     #
     # @!attribute [rw] tags
@@ -875,15 +1981,49 @@ module Aws::GameLift
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] compute_type
-    #   The type of compute resource used to host your game servers. You can
-    #   use your own compute resources with Amazon GameLift Anywhere or use
-    #   Amazon EC2 instances with managed Amazon GameLift. By default, this
-    #   property is set to `EC2`.
+    #   The type of compute resource used to host your game servers.
+    #
+    #   * `EC2` – The game server build is deployed to Amazon EC2 instances
+    #     for cloud hosting. This is the default setting.
+    #
+    #   * `CONTAINER` – Container images with your game server build and
+    #     supporting software are deployed to Amazon EC2 instances for cloud
+    #     hosting. With this compute type, you must specify the
+    #     `ContainerGroupsConfiguration` parameter.
+    #
+    #   * `ANYWHERE` – Game servers or container images with your game
+    #     server and supporting software are deployed to compute resources
+    #     that are provided and managed by you. With this compute type, you
+    #     can also set the `AnywhereConfiguration` parameter.
     #   @return [String]
     #
     # @!attribute [rw] anywhere_configuration
     #   Amazon GameLift Anywhere configuration options.
     #   @return [Types::AnywhereConfiguration]
+    #
+    # @!attribute [rw] instance_role_credentials_provider
+    #   Prompts Amazon GameLift to generate a shared credentials file for
+    #   the IAM role that's defined in `InstanceRoleArn`. The shared
+    #   credentials file is stored on each fleet instance and refreshed as
+    #   needed. Use shared credentials for applications that are deployed
+    #   along with the game server executable, if the game server is
+    #   integrated with server SDK version 5.x. For more information about
+    #   using shared credentials, see [ Communicate with other Amazon Web
+    #   Services resources from your fleets][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #   @return [String]
+    #
+    # @!attribute [rw] container_groups_configuration
+    #   The container groups to deploy to instances in the container fleet
+    #   and other fleet-level configuration settings. Use the
+    #   CreateContainerGroupDefinition action to create container groups. A
+    #   container fleet must have exactly one replica container group, and
+    #   can optionally have one daemon container group. You can't change
+    #   this property after you create the fleet.
+    #   @return [Types::ContainerGroupsConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetInput AWS API Documentation
     #
@@ -909,7 +2049,9 @@ module Aws::GameLift
       :locations,
       :tags,
       :compute_type,
-      :anywhere_configuration)
+      :anywhere_configuration,
+      :instance_role_credentials_provider,
+      :container_groups_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1196,14 +2338,14 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   A set of custom properties for a game session, formatted as
-    #   key:value pairs. These properties are passed to a game server
-    #   process with a request to start a new game session (see [Start a
-    #   Game Session][1]).
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   For an example, see [Create a game session with custom
+    #   properties][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-create
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] creator_id
@@ -1508,16 +2650,11 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   A set of custom properties for a game session, formatted as
-    #   key:value pairs. These properties are passed to a game server
-    #   process with a request to start a new game session (see [Start a
-    #   Game Session][1]). This information is added to the new
-    #   `GameSession` object that is created for a successful match. This
-    #   parameter is not used if `FlexMatchMode` is set to `STANDALONE`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   This information is added to the new `GameSession` object that is
+    #   created for a successful match. This parameter is not used if
+    #   `FlexMatchMode` is set to `STANDALONE`.
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] game_session_data
@@ -1679,7 +2816,7 @@ module Aws::GameLift
       :game_session_id,
       :player_id,
       :player_data)
-      SENSITIVE = []
+      SENSITIVE = [:player_id]
       include Aws::Structure
     end
 
@@ -1717,7 +2854,7 @@ module Aws::GameLift
       :game_session_id,
       :player_ids,
       :player_data_map)
-      SENSITIVE = []
+      SENSITIVE = [:player_ids]
       include Aws::Structure
     end
 
@@ -1931,6 +3068,19 @@ module Aws::GameLift
     #
     class DeleteBuildInput < Struct.new(
       :build_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The unique identifier for the container group definition to delete.
+    #   You can use either the `Name` or `ARN` value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteContainerGroupDefinitionInput AWS API Documentation
+    #
+    class DeleteContainerGroupDefinitionInput < Struct.new(
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2204,8 +3354,11 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] compute_name
-    #   The name of the compute resource to remove from the specified
-    #   Anywhere fleet.
+    #   The unique identifier of the compute resource to deregister. For an
+    #   Anywhere fleet compute, use the registered compute name. For a
+    #   container fleet, use the compute name (for example,
+    #   `a123b456c789012d3e4567f8a901b23c/1a234b56-7cd8-9e0f-a1b2-c34d567ef8a9`)
+    #   or the compute ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeregisterComputeInput AWS API Documentation
@@ -2291,14 +3444,17 @@ module Aws::GameLift
     end
 
     # @!attribute [rw] fleet_id
-    #   A unique identifier for the fleet that the compute is registered to.
-    #   You can use either the fleet ID or ARN value.
+    #   A unique identifier for the fleet that the compute belongs to. You
+    #   can use either the fleet ID or ARN value.
     #   @return [String]
     #
     # @!attribute [rw] compute_name
     #   The unique identifier of the compute resource to retrieve properties
     #   for. For an Anywhere fleet compute, use the registered compute name.
-    #   For a managed EC2 fleet instance, use the instance ID.
+    #   For an EC2 fleet instance, use the instance ID. For a container
+    #   fleet, use the compute name (for example,
+    #   `a123b456c789012d3e4567f8a901b23c/1a234b56-7cd8-9e0f-a1b2-c34d567ef8a9`)
+    #   or the compute ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeComputeInput AWS API Documentation
@@ -2318,6 +3474,31 @@ module Aws::GameLift
     #
     class DescribeComputeOutput < Struct.new(
       :compute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The unique identifier for the container group definition to retrieve
+    #   properties for. You can use either the `Name` or `ARN` value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeContainerGroupDefinitionInput AWS API Documentation
+    #
+    class DescribeContainerGroupDefinitionInput < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_group_definition
+    #   The properties of the requested container group definition resource.
+    #   @return [Types::ContainerGroupDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeContainerGroupDefinitionOutput AWS API Documentation
+    #
+    class DescribeContainerGroupDefinitionOutput < Struct.new(
+      :container_group_definition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3357,7 +4538,7 @@ module Aws::GameLift
       :player_session_status_filter,
       :limit,
       :next_token)
-      SENSITIVE = []
+      SENSITIVE = [:player_id]
       include Aws::Structure
     end
 
@@ -3395,8 +4576,8 @@ module Aws::GameLift
     end
 
     # @!attribute [rw] runtime_configuration
-    #   Instructions that describe how server processes should be launched
-    #   and maintained on each instance in the fleet.
+    #   Instructions that describe how server processes are launched and
+    #   maintained on computes in the fleet.
     #   @return [Types::RuntimeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeRuntimeConfigurationOutput AWS API Documentation
@@ -3572,7 +4753,7 @@ module Aws::GameLift
     class DesiredPlayerSession < Struct.new(
       :player_id,
       :player_data)
-      SENSITIVE = []
+      SENSITIVE = [:player_id]
       include Aws::Structure
     end
 
@@ -3809,17 +4990,18 @@ module Aws::GameLift
     #     operating system of the Fleet.
     #
     #   * SERVER\_PROCESS\_SDK\_INITIALIZATION\_TIMEOUT -- The server
-    #     process did not call InitSDK() within the time expected. Check
-    #     your game session log to see why InitSDK() was not called in time.
+    #     process did not call `InitSDK()` within the time expected (5
+    #     minutes). Check your game session log to see why `InitSDK()` was
+    #     not called in time.
     #
     #   * SERVER\_PROCESS\_PROCESS\_READY\_TIMEOUT -- The server process did
-    #     not call ProcessReady() within the time expected after calling
-    #     InitSDK(). Check your game session log to see why ProcessReady()
-    #     was not called in time.
+    #     not call `ProcessReady()` within the time expected (5 minutes)
+    #     after calling `InitSDK()`. Check your game session log to see why
+    #     `ProcessReady()` was not called in time.
     #
     #   * SERVER\_PROCESS\_CRASHED -- The server process exited without
-    #     calling ProcessEnding(). Check your game session log to see why
-    #     ProcessEnding() was not called.
+    #     calling `ProcessEnding()`. Check your game session log to see why
+    #     `ProcessEnding()` was not called.
     #
     #   * SERVER\_PROCESS\_TERMINATED\_UNHEALTHY -- The server process did
     #     not report a valid health check for too long and was therefore
@@ -3827,20 +5009,20 @@ module Aws::GameLift
     #     thread became stuck processing a synchronous task for too long.
     #
     #   * SERVER\_PROCESS\_FORCE\_TERMINATED -- The server process did not
-    #     exit cleanly after OnProcessTerminate() was sent within the time
-    #     expected. Check your game session log to see why termination took
+    #     exit cleanly within the time expected after `OnProcessTerminate()`
+    #     was sent. Check your game session log to see why termination took
     #     longer than expected.
     #
     #   * SERVER\_PROCESS\_PROCESS\_EXIT\_TIMEOUT -- The server process did
-    #     not exit cleanly within the time expected after calling
-    #     ProcessEnding(). Check your game session log to see why
+    #     not exit cleanly within the time expected (30 seconds) after
+    #     calling `ProcessEnding()`. Check your game session log to see why
     #     termination took longer than expected.
     #
     #   **Game session events:**
     #
     #   * GAME\_SESSION\_ACTIVATION\_TIMEOUT -- GameSession failed to
     #     activate within the expected time. Check your game session log to
-    #     see why ActivateGameSession() took longer to complete than
+    #     see why `ActivateGameSession()` took longer to complete than
     #     expected.
     #
     #   ^
@@ -3882,6 +5064,10 @@ module Aws::GameLift
     #   Amazon GameLift console.
     #   @return [String]
     #
+    # @!attribute [rw] count
+    #   The number of times that this event occurred.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/Event AWS API Documentation
     #
     class Event < Struct.new(
@@ -3890,7 +5076,8 @@ module Aws::GameLift
       :event_code,
       :message,
       :event_time,
-      :pre_signed_log_url)
+      :pre_signed_log_url,
+      :count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3914,9 +5101,25 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Describes a Amazon GameLift fleet of game hosting resources.
+    # **This operation has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
     #
-    # **Related actions**
+    # Describes an Amazon GameLift fleet of game hosting resources.
+    # Attributes differ based on the fleet's compute type, as follows:
+    #
+    # * EC2 fleet attributes identify a `Build` resource (for fleets with
+    #   customer game server builds) or a `Script` resource (for Realtime
+    #   Servers fleets).
+    #
+    # * Container fleets have `ContainerGroupsAttributes`, which identify
+    #   the fleet's `ContainerGroupDefinition` resources.
+    #
+    # * Amazon GameLift Anywhere fleets have an abbreviated set of
+    #   attributes, because most fleet configurations are set directly on
+    #   the fleet's computes. Attributes include fleet identifiers and
+    #   descriptive properties, creation/termination time, and fleet status.
+    #
+    # **Returned by:** DescribeFleetAttributes
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet.
@@ -3936,10 +5139,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_type
-    #   Indicates whether to use On-Demand or Spot instances for this fleet.
-    #   By default, this property is set to `ON_DEMAND`. Learn more about
-    #   when to use [ On-Demand versus Spot Instances][1]. This property
-    #   cannot be changed after the fleet is created.
+    #   Indicates whether the fleet uses On-Demand or Spot instances. For
+    #   more information, see [ On-Demand versus Spot Instances][1]. This
+    #   fleet property can't be changed after the fleet is created.
     #
     #
     #
@@ -3947,10 +5149,12 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The Amazon EC2 instance type that determines the computing resources
-    #   of each instance in the fleet. Instance type defines the CPU,
-    #   memory, storage, and networking capacity. See [Amazon Elastic
-    #   Compute Cloud Instance Types][1] for detailed descriptions.
+    #   The Amazon EC2 instance type that the fleet uses. Instance type
+    #   determines the computing resources of each instance in the fleet,
+    #   including CPU, memory, storage, and networking capacity. See [Amazon
+    #   Elastic Compute Cloud Instance Types][1] for detailed descriptions.
+    #   This attribute is used with fleets where `ComputeType` is "EC2" or
+    #   "Container".
     #
     #
     #
@@ -3982,33 +5186,35 @@ module Aws::GameLift
     #   Current status of the fleet. Possible fleet statuses include the
     #   following:
     #
-    #   * **NEW** -- A new fleet has been defined and desired instances is
-    #     set to 1.
+    #   * NEW -- A new fleet has been defined and desired instances is set
+    #     to 1.
     #
-    #   * **DOWNLOADING/VALIDATING/BUILDING/ACTIVATING** -- Amazon GameLift
-    #     is setting up the new fleet, creating new instances with the game
+    #   * DOWNLOADING/VALIDATING/BUILDING/ACTIVATING -- Amazon GameLift is
+    #     setting up the new fleet, creating new instances with the game
     #     build or Realtime script and starting server processes.
     #
-    #   * **ACTIVE** -- Hosts can now accept game sessions.
+    #   * ACTIVE -- Hosts can now accept game sessions.
     #
-    #   * **ERROR** -- An error occurred when downloading, validating,
-    #     building, or activating the fleet.
+    #   * ERROR -- An error occurred when downloading, validating, building,
+    #     or activating the fleet.
     #
-    #   * **DELETING** -- Hosts are responding to a delete fleet request.
+    #   * DELETING -- Hosts are responding to a delete fleet request.
     #
-    #   * **TERMINATED** -- The fleet no longer exists.
+    #   * TERMINATED -- The fleet no longer exists.
     #   @return [String]
     #
     # @!attribute [rw] build_id
     #   A unique identifier for the build resource that is deployed on
-    #   instances in this fleet.
+    #   instances in this fleet. This attribute is used with fleets where
+    #   `ComputeType` is "EC2".
     #   @return [String]
     #
     # @!attribute [rw] build_arn
     #   The Amazon Resource Name ([ARN][1]) associated with the Amazon
     #   GameLift build resource that is deployed on instances in this fleet.
     #   In a GameLift build ARN, the resource ID matches the `BuildId`
-    #   value.
+    #   value. This attribute is used with fleets where `ComputeType` is
+    #   "EC2".
     #
     #
     #
@@ -4017,7 +5223,8 @@ module Aws::GameLift
     #
     # @!attribute [rw] script_id
     #   A unique identifier for the Realtime script resource that is
-    #   deployed on instances in this fleet.
+    #   deployed on instances in this fleet. This attribute is used with
+    #   fleets where `ComputeType` is "EC2".
     #   @return [String]
     #
     # @!attribute [rw] script_arn
@@ -4033,7 +5240,7 @@ module Aws::GameLift
     # @!attribute [rw] server_launch_path
     #   **This parameter is no longer used.** Server launch paths are now
     #   defined using the fleet's [RuntimeConfiguration][1] . Requests that
-    #   use this parameter instead continue to be valid.
+    #   use this parameter continue to be valid.
     #
     #
     #
@@ -4043,7 +5250,7 @@ module Aws::GameLift
     # @!attribute [rw] server_launch_parameters
     #   **This parameter is no longer used.** Server launch parameters are
     #   now defined using the fleet's runtime configuration . Requests that
-    #   use this parameter instead continue to be valid.
+    #   use this parameter continue to be valid.
     #   @return [String]
     #
     # @!attribute [rw] log_paths
@@ -4059,7 +5266,8 @@ module Aws::GameLift
     #
     # @!attribute [rw] new_game_session_protection_policy
     #   The type of game session protection to set on all new instances that
-    #   are started in the fleet.
+    #   are started in the fleet. This attribute is used with fleets where
+    #   `ComputeType` is "EC2" or "Container".
     #
     #   * **NoProtection** -- The game session can be terminated during a
     #     scale-down event.
@@ -4071,7 +5279,8 @@ module Aws::GameLift
     # @!attribute [rw] operating_system
     #   The operating system of the fleet's computing resources. A fleet's
     #   operating system is determined by the OS of the build or script that
-    #   is deployed on this fleet.
+    #   is deployed on this fleet. This attribute is used with fleets where
+    #   `ComputeType` is "EC2" or "Container".
     #   @return [String]
     #
     # @!attribute [rw] resource_creation_limit_policy
@@ -4089,12 +5298,15 @@ module Aws::GameLift
     #   Name of a metric group that metrics for this fleet are added to. In
     #   Amazon CloudWatch, you can view aggregated metrics for fleets that
     #   are in a metric group. A fleet can be included in only one metric
-    #   group at a time.
+    #   group at a time. This attribute is used with fleets where
+    #   `ComputeType` is "EC2" or "Container".
     #   @return [Array<String>]
     #
     # @!attribute [rw] stopped_actions
     #   A list of fleet activity that has been suspended using
-    #   [StopFleetActions][1] . This includes fleet auto-scaling.
+    #   [StopFleetActions][1]. This includes fleet auto-scaling. This
+    #   attribute is used with fleets where `ComputeType` is "EC2" or
+    #   "Container".
     #
     #
     #
@@ -4102,31 +5314,25 @@ module Aws::GameLift
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_role_arn
-    #   A unique identifier for an IAM role that manages access to your
-    #   Amazon Web Services services. With an instance role ARN set, any
-    #   application that runs on an instance in this fleet can assume the
-    #   role, including install scripts, server processes, and daemons
-    #   (background processes). Create a role or look up a role's ARN by
-    #   using the [IAM dashboard][1] in the Amazon Web Services Management
-    #   Console. Learn more about using on-box credentials for your game
-    #   servers at [ Access external resources from a game server][2].
+    #   A unique identifier for an IAM role with access permissions to other
+    #   Amazon Web Services services. Any application that runs on an
+    #   instance in the fleet--including install scripts, server processes,
+    #   and other processes--can use these permissions to interact with
+    #   Amazon Web Services resources that you own or have access to. For
+    #   more information about using the role with your game server builds,
+    #   see [ Communicate with other Amazon Web Services resources from your
+    #   fleets][1]. This attribute is used with fleets where `ComputeType`
+    #   is "EC2" or "Container".
     #
     #
     #
-    #   [1]: https://console.aws.amazon.com/iam/
-    #   [2]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
     #   @return [String]
     #
     # @!attribute [rw] certificate_configuration
     #   Determines whether a TLS/SSL certificate is generated for a fleet.
     #   This feature must be enabled when creating the fleet. All instances
-    #   in a fleet share the same certificate. The certificate can be
-    #   retrieved by calling the [Amazon GameLift Server SDK][1] operation
-    #   `GetInstanceCertificate`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk.html
+    #   in a fleet share the same certificate.
     #   @return [Types::CertificateConfiguration]
     #
     # @!attribute [rw] compute_type
@@ -4136,9 +5342,35 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] anywhere_configuration
-    #   Amazon GameLift Anywhere configuration options for your Anywhere
-    #   fleets.
+    #   **This property is used with the Amazon GameLift containers feature,
+    #   which is currently in public preview.** A set of attributes that
+    #   describe the container groups that are deployed on the fleet. These
+    #   attributes are included for fleets with compute type `CONTAINER`
+    #   only. This attribute is used with fleets where `ComputeType` is
+    #   "Container".
     #   @return [Types::AnywhereConfiguration]
+    #
+    # @!attribute [rw] instance_role_credentials_provider
+    #   Indicates that fleet instances maintain a shared credentials file
+    #   for the IAM role defined in `InstanceRoleArn`. Shared credentials
+    #   allow applications that are deployed with the game server executable
+    #   to communicate with other Amazon Web Services resources. This
+    #   property is used only when the game server is integrated with the
+    #   server SDK version 5.x. For more information about using shared
+    #   credentials, see [ Communicate with other Amazon Web Services
+    #   resources from your fleets][1]. This attribute is used with fleets
+    #   where `ComputeType` is "EC2" or "Container".
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html
+    #   @return [String]
+    #
+    # @!attribute [rw] container_groups_attributes
+    #   A set of properties that describe the container groups that are
+    #   deployed to the fleet. These attributes are included for fleets with
+    #   compute type `CONTAINER`.
+    #   @return [Types::ContainerGroupsAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetAttributes AWS API Documentation
     #
@@ -4167,19 +5399,19 @@ module Aws::GameLift
       :instance_role_arn,
       :certificate_configuration,
       :compute_type,
-      :anywhere_configuration)
+      :anywhere_configuration,
+      :instance_role_credentials_provider,
+      :container_groups_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Current resource capacity settings in a specified fleet or location.
-    # The location value might refer to a fleet's remote location or its
-    # home Region.
+    # Current resource capacity settings for managed EC2 fleets and
+    # container fleets. For multi-location fleets, location values might
+    # refer to a fleet's remote location or its home Region.
     #
-    # **Related actions**
-    #
-    # [DescribeFleetCapacity][1] \| [DescribeFleetLocationCapacity][2] \|
-    # [UpdateFleetCapacity][3]
+    # **Returned by:** [DescribeFleetCapacity][1],
+    # [DescribeFleetLocationCapacity][2], [UpdateFleetCapacity][3]
     #
     #
     #
@@ -4203,10 +5435,10 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The Amazon EC2 instance type that is used for all instances in a
-    #   fleet. The instance type determines the computing resources in use,
-    #   including CPU, memory, storage, and networking capacity. See [Amazon
-    #   Elastic Compute Cloud Instance Types][1] for detailed descriptions.
+    #   The Amazon EC2 instance type that is used for instances in a fleet.
+    #   Instance type determines the computing resources in use, including
+    #   CPU, memory, storage, and networking capacity. See [Amazon Elastic
+    #   Compute Cloud Instance Types][1] for detailed descriptions.
     #
     #
     #
@@ -4214,16 +5446,22 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] instance_counts
-    #   Resource capacity settings. Fleet capacity is measured in Amazon EC2
-    #   instances. Pending and terminating counts are non-zero when the
-    #   fleet capacity is adjusting to a scaling event or if access to
-    #   resources is temporarily affected.
+    #   The current number of instances in the fleet, listed by instance
+    #   status. Counts for pending and terminating instances might be
+    #   non-zero if the fleet is adjusting to a scaling event or if access
+    #   to resources is temporarily affected.
     #   @return [Types::EC2InstanceCounts]
     #
     # @!attribute [rw] location
     #   The fleet location for the instance count information, expressed as
     #   an Amazon Web Services Region code, such as `us-west-2`.
     #   @return [String]
+    #
+    # @!attribute [rw] replica_container_group_counts
+    #   **This property is used with the Amazon GameLift containers feature,
+    #   which is currently in public preview.** The number and status of
+    #   replica container groups in a container fleet.
+    #   @return [Types::ReplicaContainerGroupCounts]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetCapacity AWS API Documentation
     #
@@ -4232,7 +5470,8 @@ module Aws::GameLift
       :fleet_arn,
       :instance_type,
       :instance_counts,
-      :location)
+      :location,
+      :replica_container_group_counts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4254,9 +5493,7 @@ module Aws::GameLift
 
     # Current resource utilization statistics in a specified fleet or
     # location. The location value might refer to a fleet's remote location
-    # or its home Region.
-    #
-    # **Related actions**
+    # or its home region.
     #
     # @!attribute [rw] fleet_id
     #   A unique identifier for the fleet associated with the location.
@@ -4313,17 +5550,23 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Set of key-value pairs that contain information about a game session.
-    # When included in a game session request, these properties communicate
-    # details to be used when setting up the new game session. For example,
-    # a game property might specify a game mode, level, or map. Game
-    # properties are passed to the game server process when initiating a new
-    # game session. For more information, see the [ Amazon GameLift
-    # Developer Guide][1].
+    # This key-value pair can store custom data about a game session. For
+    # example, you might use a `GameProperty` to track a game session's
+    # map, level of difficulty, or remaining time. The difficulty level
+    # could be specified like this: `\{"Key": "difficulty",
+    # "Value":"Novice"\}`.
+    #
+    # You can set game properties when creating a game session. You can also
+    # modify game properties of an active game session. When searching for
+    # game sessions, you can filter on game property keys and values. You
+    # can't delete game properties from a game session.
+    #
+    # For examples of working with game properties, see [Create a game
+    # session with properties][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-create
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties
     #
     # @!attribute [rw] key
     #   The game property identifier.
@@ -4746,14 +5989,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   A set of custom properties for a game session, formatted as
-    #   key:value pairs. These properties are passed to a game server
-    #   process with a request to start a new game session (see [Start a
-    #   Game Session][1]).
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] ip_address
@@ -4850,7 +6087,7 @@ module Aws::GameLift
       :game_session_data,
       :matchmaker_data,
       :location)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address, :port]
       include Aws::Structure
     end
 
@@ -4908,7 +6145,7 @@ module Aws::GameLift
       :dns_name,
       :port,
       :matched_player_sessions)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address]
       include Aws::Structure
     end
 
@@ -4998,14 +6235,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   A set of custom properties for a game session, formatted as
-    #   key:value pairs. These properties are passed to a game server
-    #   process with a request to start a new game session (see [Start a
-    #   Game Session][1]).
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] maximum_player_session_count
@@ -5138,7 +6369,7 @@ module Aws::GameLift
       :placed_player_sessions,
       :game_session_data,
       :matchmaker_data)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address, :port]
       include Aws::Structure
     end
 
@@ -5253,15 +6484,17 @@ module Aws::GameLift
     end
 
     # @!attribute [rw] fleet_id
-    #   A unique identifier for the fleet that contains the compute resource
-    #   you want to connect to. You can use either the fleet ID or ARN
+    #   A unique identifier for the fleet that holds the compute resource
+    #   that you want to connect to. You can use either the fleet ID or ARN
     #   value.
     #   @return [String]
     #
     # @!attribute [rw] compute_name
     #   A unique identifier for the compute resource that you want to
-    #   connect to. You can use either a registered compute name or an
-    #   instance ID.
+    #   connect to. For an EC2 fleet compute, use the instance ID. For a
+    #   container fleet, use the compute name (for example,
+    #   `a123b456c789012d3e4567f8a901b23c/1a234b56-7cd8-9e0f-a1b2-c34d567ef8a9`)
+    #   or the compute ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetComputeAccessInput AWS API Documentation
@@ -5274,8 +6507,7 @@ module Aws::GameLift
     end
 
     # @!attribute [rw] fleet_id
-    #   The ID of the fleet that contains the compute resource to be
-    #   accessed.
+    #   The ID of the fleet that holds the compute resource to be accessed.
     #   @return [String]
     #
     # @!attribute [rw] fleet_arn
@@ -5311,6 +6543,11 @@ module Aws::GameLift
     #   (SSM).
     #   @return [Types::AwsCredentials]
     #
+    # @!attribute [rw] target
+    #   (For container fleets only) The instance ID where the compute
+    #   resource is running.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetComputeAccessOutput AWS API Documentation
     #
     class GetComputeAccessOutput < Struct.new(
@@ -5318,7 +6555,8 @@ module Aws::GameLift
       :fleet_arn,
       :compute_name,
       :compute_arn,
-      :credentials)
+      :credentials,
+      :target)
       SENSITIVE = [:credentials]
       include Aws::Structure
     end
@@ -5329,7 +6567,11 @@ module Aws::GameLift
     #
     # @!attribute [rw] compute_name
     #   The name of the compute resource you are requesting the
-    #   authentication token for.
+    #   authentication token for. For an Anywhere fleet compute, use the
+    #   registered compute name. For an EC2 fleet instance, use the instance
+    #   ID. For a container fleet, use the compute name (for example,
+    #   `a123b456c789012d3e4567f8a901b23c/1a234b56-7cd8-9e0f-a1b2-c34d567ef8a9`)
+    #   or the compute ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetComputeAuthTokenInput AWS API Documentation
@@ -5571,7 +6813,7 @@ module Aws::GameLift
       :status,
       :creation_time,
       :location)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address]
       include Aws::Structure
     end
 
@@ -5608,7 +6850,7 @@ module Aws::GameLift
       :ip_address,
       :operating_system,
       :credentials)
-      SENSITIVE = [:credentials]
+      SENSITIVE = [:ip_address, :credentials]
       include Aws::Structure
     end
 
@@ -5734,12 +6976,13 @@ module Aws::GameLift
     end
 
     # A range of IP addresses and port settings that allow inbound traffic
-    # to connect to server processes on an instance in a fleet. New game
-    # sessions are assigned an IP address/port number combination, which
-    # must fall into the fleet's allowed ranges. Fleets with custom game
-    # builds must have permissions explicitly set. For Realtime Servers
-    # fleets, Amazon GameLift automatically opens two port ranges, one for
-    # TCP messaging and one for UDP.
+    # to connect to processes on an instance in a fleet. Processes are
+    # assigned an IP address/port number combination, which must fall into
+    # the fleet's allowed ranges. For container fleets, the port settings
+    # must use the same port numbers as the fleet's connection ports.
+    #
+    # For Realtime Servers fleets, Amazon GameLift automatically opens two
+    # port ranges, one for TCP messaging and one for UDP.
     #
     # @!attribute [rw] from_port
     #   A starting value for a range of allowed port numbers.
@@ -5778,7 +7021,7 @@ module Aws::GameLift
       :to_port,
       :ip_range,
       :protocol)
-      SENSITIVE = []
+      SENSITIVE = [:from_port, :to_port, :ip_range]
       include Aws::Structure
     end
 
@@ -5960,7 +7203,11 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The name of a location to retrieve compute resources for.
+    #   The name of a location to retrieve compute resources for. For an
+    #   Amazon GameLift Anywhere fleet, use a custom location. For a
+    #   multi-location EC2 or container fleet, provide a Amazon Web Services
+    #   Region or Local Zone code (for example: `us-west-2` or
+    #   `us-west-2-lax-1`).
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -6005,6 +7252,58 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # @!attribute [rw] scheduling_strategy
+    #   The type of container group definitions to retrieve.
+    #
+    #   * `DAEMON` -- Daemon container groups run background processes and
+    #     are deployed once per fleet instance.
+    #
+    #   * `REPLICA` -- Replica container groups run your game server
+    #     application and supporting software. Replica groups might be
+    #     deployed multiple times per fleet instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of results to return. Use this parameter with
+    #   `NextToken` to get results as a set of sequential pages.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates the start of the next sequential page of
+    #   results. Use the token that is returned with a previous call to this
+    #   operation. To start at the beginning of the result set, do not
+    #   specify a value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListContainerGroupDefinitionsInput AWS API Documentation
+    #
+    class ListContainerGroupDefinitionsInput < Struct.new(
+      :scheduling_strategy,
+      :limit,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_group_definitions
+    #   A result set of container group definitions that match the request.
+    #   @return [Array<Types::ContainerGroupDefinition>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where to resume retrieving results on the
+    #   next call to this operation. If no token is returned, these results
+    #   represent the end of the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListContainerGroupDefinitionsOutput AWS API Documentation
+    #
+    class ListContainerGroupDefinitionsOutput < Struct.new(
+      :container_group_definitions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] build_id
     #   A unique identifier for the build to request fleets for. Use this
     #   parameter to return only fleets using a specified build. Use either
@@ -6015,6 +7314,12 @@ module Aws::GameLift
     #   A unique identifier for the Realtime script to request fleets for.
     #   Use this parameter to return only fleets using a specified script.
     #   Use either the script ID or ARN value.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_group_definition_name
+    #   The container group definition name to request fleets for. Use this
+    #   parameter to return only fleets that are deployed with the specified
+    #   container group definition.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -6034,6 +7339,7 @@ module Aws::GameLift
     class ListFleetsInput < Struct.new(
       :build_id,
       :script_id,
+      :container_group_definition_name,
       :limit,
       :next_token)
       SENSITIVE = []
@@ -6295,6 +7601,9 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # **This data type has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
+    #
     # A remote location where a multi-location fleet can deploy game servers
     # for game hosting.
     #
@@ -6310,7 +7619,13 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Properties of a location
+    # Properties of a custom location for use in an Amazon GameLift Anywhere
+    # fleet. This data type is returned in response to a call to
+    # [https://docs.aws.amazon.com/gamelift/latest/apireference/API\_CreateLocation.html][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateLocation.html
     #
     # @!attribute [rw] location_name
     #   The location's name.
@@ -6402,7 +7717,7 @@ module Aws::GameLift
     class MatchedPlayerSession < Struct.new(
       :player_id,
       :player_session_id)
-      SENSITIVE = []
+      SENSITIVE = [:player_id]
       include Aws::Structure
     end
 
@@ -6510,16 +7825,11 @@ module Aws::GameLift
     #   @return [Time]
     #
     # @!attribute [rw] game_properties
-    #   A set of custom properties for a game session, formatted as
-    #   key:value pairs. These properties are passed to a game server
-    #   process with a request to start a new game session (see [Start a
-    #   Game Session][1]). This information is added to the new
-    #   `GameSession` object that is created for a successful match. This
-    #   parameter is not used when `FlexMatchMode` is set to `STANDALONE`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   This information is added to the new `GameSession` object that is
+    #   created for a successful match. This parameter is not used when
+    #   `FlexMatchMode` is set to `STANDALONE`.
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] game_session_data
@@ -6809,6 +8119,25 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # The operation failed because Amazon GameLift has not yet finished
+    # validating this compute. We recommend attempting 8 to 10 retries over
+    # 3 to 5 minutes with [exponential backoffs and jitter][1].
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/blogs/https:/aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/NotReadyException AWS API Documentation
+    #
+    class NotReadyException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified game server group has no available game servers to
     # fulfill a `ClaimGameServer` request. Clients can retry such requests
     # immediately or after a waiting period.
@@ -6846,7 +8175,7 @@ module Aws::GameLift
     class PlacedPlayerSession < Struct.new(
       :player_id,
       :player_session_id)
-      SENSITIVE = []
+      SENSITIVE = [:player_id]
       include Aws::Structure
     end
 
@@ -6893,7 +8222,7 @@ module Aws::GameLift
       :player_attributes,
       :team,
       :latency_in_ms)
-      SENSITIVE = []
+      SENSITIVE = [:player_id]
       include Aws::Structure
     end
 
@@ -6923,7 +8252,7 @@ module Aws::GameLift
       :player_id,
       :region_identifier,
       :latency_in_milliseconds)
-      SENSITIVE = []
+      SENSITIVE = [:player_id]
       include Aws::Structure
     end
 
@@ -7081,7 +8410,7 @@ module Aws::GameLift
       :dns_name,
       :port,
       :player_data)
-      SENSITIVE = []
+      SENSITIVE = [:player_id, :ip_address, :port]
       include Aws::Structure
     end
 
@@ -7317,7 +8646,7 @@ module Aws::GameLift
       :dns_name,
       :ip_address,
       :location)
-      SENSITIVE = []
+      SENSITIVE = [:ip_address]
       include Aws::Structure
     end
 
@@ -7382,6 +8711,46 @@ module Aws::GameLift
     #
     class RegisterGameServerOutput < Struct.new(
       :game_server)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # **This data type is used with the Amazon GameLift containers feature,
+    # which is currently in public preview.**
+    #
+    # The number and status of replica container groups that are deployed
+    # across a fleet with compute type `CONTAINER`. This information,
+    # combined with the number of server processes being hosted per
+    # container group (see `RuntimeConfiguration`), tells you how many game
+    # sessions the fleet is currently capable of hosting concurrently.
+    #
+    # **Returned by:** DescribeFleetCapacity, DescribeFleetLocationCapacity
+    #
+    # @!attribute [rw] pending
+    #   The number of container groups that are starting up but have not yet
+    #   registered.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] active
+    #   The number of container groups that have active game sessions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] idle
+    #   The number of container groups that have no active game sessions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] terminating
+    #   The number of container groups that are in the process of shutting
+    #   down.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ReplicaContainerGroupCounts AWS API Documentation
+    #
+    class ReplicaContainerGroupCounts < Struct.new(
+      :pending,
+      :active,
+      :idle,
+      :terminating)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7561,18 +8930,24 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # A collection of server process configurations that describe the set of
-    # processes to run on each instance in a fleet. Server processes run
-    # either an executable in a custom game build or a Realtime Servers
-    # script. Amazon GameLift launches the configured processes, manages
-    # their life cycle, and replaces them as needed. Each instance checks
-    # regularly for an updated runtime configuration.
+    # **This data type has been expanded to use with the Amazon GameLift
+    # containers feature, which is currently in public preview.**
     #
-    # A Amazon GameLift instance is limited to 50 processes running
-    # concurrently. To calculate the total number of processes in a runtime
-    # configuration, add the values of the `ConcurrentExecutions` parameter
-    # for each server process. Learn more about [ Running Multiple Processes
-    # on a Fleet][1].
+    # A set of instructions that define the set of server processes to run
+    # on computes in a fleet. Server processes run either an executable in a
+    # custom game build or a Realtime Servers script. Amazon GameLift
+    # launches the processes, manages their life cycle, and replaces them as
+    # needed. Computes check regularly for an updated runtime configuration.
+    #
+    # On a container fleet, the Amazon GameLift Agent uses the runtime
+    # configuration to manage the lifecycle of server processes in a replica
+    # container group.
+    #
+    # An Amazon GameLift instance is limited to 50 processes running
+    # concurrently. To calculate the total number of processes defined in a
+    # runtime configuration, add the values of the `ConcurrentExecutions`
+    # parameter for each server process. Learn more about [ Running Multiple
+    # Processes on a Fleet][1].
     #
     #
     #
@@ -7580,13 +8955,13 @@ module Aws::GameLift
     #
     # @!attribute [rw] server_processes
     #   A collection of server process configurations that identify what
-    #   server processes to run on each instance in a fleet.
+    #   server processes to run on fleet computes.
     #   @return [Array<Types::ServerProcess>]
     #
     # @!attribute [rw] max_concurrent_game_session_activations
     #   The number of game sessions in status `ACTIVATING` to allow on an
-    #   instance. This setting limits the instance resources that can be
-    #   used for new game activations at any one time.
+    #   instance or container. This setting limits the instance resources
+    #   that can be used for new game activations at any one time.
     #   @return [Integer]
     #
     # @!attribute [rw] game_session_activation_timeout_seconds
@@ -8032,8 +9407,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # A set of instructions for launching server processes on each instance
-    # in a fleet. Server processes run either an executable in a custom game
+    # A set of instructions for launching server processes on fleet
+    # computes. Server processes run either an executable in a custom game
     # build or a Realtime Servers script. Server process configurations are
     # part of a fleet's runtime configuration.
     #
@@ -8063,7 +9438,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] concurrent_executions
     #   The number of server processes using this configuration that run
-    #   concurrently on each instance.
+    #   concurrently on each instance or container..
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ServerProcess AWS API Documentation
@@ -8137,14 +9512,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   A set of custom properties for a game session, formatted as
-    #   key:value pairs. These properties are passed to a game server
-    #   process with a request to start a new game session (see [Start a
-    #   Game Session][1]).
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] maximum_player_session_count
@@ -9122,6 +10491,19 @@ module Aws::GameLift
     #     status, it cannot be terminated during a scale-down event.
     #   @return [String]
     #
+    # @!attribute [rw] game_properties
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   You can use this parameter to modify game properties in an active
+    #   game session. This action adds new properties and modifies existing
+    #   properties. There is no way to delete properties. For an example,
+    #   see [Update the value of a game property][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#game-properties-update
+    #   @return [Array<Types::GameProperty>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSessionInput AWS API Documentation
     #
     class UpdateGameSessionInput < Struct.new(
@@ -9129,7 +10511,8 @@ module Aws::GameLift
       :maximum_player_session_count,
       :name,
       :player_session_creation_policy,
-      :protection_policy)
+      :protection_policy,
+      :game_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9312,16 +10695,11 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   A set of custom properties for a game session, formatted as
-    #   key:value pairs. These properties are passed to a game server
-    #   process with a request to start a new game session (see [Start a
-    #   Game Session][1]). This information is added to the new
-    #   `GameSession` object that is created for a successful match. This
-    #   parameter is not used if `FlexMatchMode` is set to `STANDALONE`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   A set of key-value pairs that can store custom data in a game
+    #   session. For example: `\{"Key": "difficulty", "Value": "novice"\}`.
+    #   This information is added to the new `GameSession` object that is
+    #   created for a successful match. This parameter is not used if
+    #   `FlexMatchMode` is set to `STANDALONE`.
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] game_session_data
@@ -9407,11 +10785,11 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] runtime_configuration
-    #   Instructions for launching server processes on each instance in the
-    #   fleet. Server processes run either a custom game build executable or
-    #   a Realtime Servers script. The runtime configuration lists the types
-    #   of server processes to run on an instance, how to launch them, and
-    #   the number of processes to run concurrently.
+    #   Instructions for launching server processes on fleet computes.
+    #   Server processes run either a custom game build executable or a
+    #   Realtime Servers script. The runtime configuration lists the types
+    #   of server processes to run, how to launch them, and the number of
+    #   processes to run concurrently.
     #   @return [Types::RuntimeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateRuntimeConfigurationInput AWS API Documentation
@@ -9424,8 +10802,8 @@ module Aws::GameLift
     end
 
     # @!attribute [rw] runtime_configuration
-    #   The runtime configuration currently in use by all instances in the
-    #   fleet. If the update was successful, all property changes are shown.
+    #   The runtime configuration currently in use by computes in the fleet.
+    #   If the update is successful, all property changes are shown.
     #   @return [Types::RuntimeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateRuntimeConfigurationOutput AWS API Documentation

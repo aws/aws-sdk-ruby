@@ -1,0 +1,903 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTAnalytics
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchPutMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchPutMessageResponse]
+        def batch_put_message_error_entries: () -> ::Array[Types::BatchPutMessageErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#batch_put_message-instance_method
+      def batch_put_message: (
+                               channel_name: ::String,
+                               messages: Array[
+                                 {
+                                   message_id: ::String,
+                                   payload: ::String
+                                 },
+                               ]
+                             ) -> _BatchPutMessageResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutMessageResponseSuccess
+
+      interface _CancelPipelineReprocessingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelPipelineReprocessingResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#cancel_pipeline_reprocessing-instance_method
+      def cancel_pipeline_reprocessing: (
+                                          pipeline_name: ::String,
+                                          reprocessing_id: ::String
+                                        ) -> _CancelPipelineReprocessingResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelPipelineReprocessingResponseSuccess
+
+      interface _CreateChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelResponse]
+        def channel_name: () -> ::String
+        def channel_arn: () -> ::String
+        def retention_period: () -> Types::RetentionPeriod
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#create_channel-instance_method
+      def create_channel: (
+                            channel_name: ::String,
+                            ?channel_storage: {
+                              service_managed_s3: {
+                              }?,
+                              customer_managed_s3: {
+                                bucket: ::String,
+                                key_prefix: ::String?,
+                                role_arn: ::String
+                              }?
+                            },
+                            ?retention_period: {
+                              unlimited: bool?,
+                              number_of_days: ::Integer?
+                            },
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreateChannelResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
+
+      interface _CreateDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetResponse]
+        def dataset_name: () -> ::String
+        def dataset_arn: () -> ::String
+        def retention_period: () -> Types::RetentionPeriod
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#create_dataset-instance_method
+      def create_dataset: (
+                            dataset_name: ::String,
+                            actions: Array[
+                              {
+                                action_name: ::String?,
+                                query_action: {
+                                  sql_query: ::String,
+                                  filters: Array[
+                                    {
+                                      delta_time: {
+                                        offset_seconds: ::Integer,
+                                        time_expression: ::String
+                                      }?
+                                    },
+                                  ]?
+                                }?,
+                                container_action: {
+                                  image: ::String,
+                                  execution_role_arn: ::String,
+                                  resource_configuration: {
+                                    compute_type: ("ACU_1" | "ACU_2"),
+                                    volume_size_in_gb: ::Integer
+                                  },
+                                  variables: Array[
+                                    {
+                                      name: ::String,
+                                      string_value: ::String?,
+                                      double_value: ::Float?,
+                                      dataset_content_version_value: {
+                                        dataset_name: ::String
+                                      }?,
+                                      output_file_uri_value: {
+                                        file_name: ::String
+                                      }?
+                                    },
+                                  ]?
+                                }?
+                              },
+                            ],
+                            ?triggers: Array[
+                              {
+                                schedule: {
+                                  expression: ::String?
+                                }?,
+                                dataset: {
+                                  name: ::String
+                                }?
+                              },
+                            ],
+                            ?content_delivery_rules: Array[
+                              {
+                                entry_name: ::String?,
+                                destination: {
+                                  iot_events_destination_configuration: {
+                                    input_name: ::String,
+                                    role_arn: ::String
+                                  }?,
+                                  s3_destination_configuration: {
+                                    bucket: ::String,
+                                    key: ::String,
+                                    glue_configuration: {
+                                      table_name: ::String,
+                                      database_name: ::String
+                                    }?,
+                                    role_arn: ::String
+                                  }?
+                                }
+                              },
+                            ],
+                            ?retention_period: {
+                              unlimited: bool?,
+                              number_of_days: ::Integer?
+                            },
+                            ?versioning_configuration: {
+                              unlimited: bool?,
+                              max_versions: ::Integer?
+                            },
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ],
+                            ?late_data_rules: Array[
+                              {
+                                rule_name: ::String?,
+                                rule_configuration: {
+                                  delta_time_session_window_configuration: {
+                                    timeout_in_minutes: ::Integer
+                                  }?
+                                }
+                              },
+                            ]
+                          ) -> _CreateDatasetResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
+
+      interface _CreateDatasetContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetContentResponse]
+        def version_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#create_dataset_content-instance_method
+      def create_dataset_content: (
+                                    dataset_name: ::String,
+                                    ?version_id: ::String
+                                  ) -> _CreateDatasetContentResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetContentResponseSuccess
+
+      interface _CreateDatastoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatastoreResponse]
+        def datastore_name: () -> ::String
+        def datastore_arn: () -> ::String
+        def retention_period: () -> Types::RetentionPeriod
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#create_datastore-instance_method
+      def create_datastore: (
+                              datastore_name: ::String,
+                              ?datastore_storage: {
+                                service_managed_s3: {
+                                }?,
+                                customer_managed_s3: {
+                                  bucket: ::String,
+                                  key_prefix: ::String?,
+                                  role_arn: ::String
+                                }?,
+                                iot_site_wise_multi_layer_storage: {
+                                  customer_managed_s3_storage: {
+                                    bucket: ::String,
+                                    key_prefix: ::String?
+                                  }
+                                }?
+                              },
+                              ?retention_period: {
+                                unlimited: bool?,
+                                number_of_days: ::Integer?
+                              },
+                              ?tags: Array[
+                                {
+                                  key: ::String,
+                                  value: ::String
+                                },
+                              ],
+                              ?file_format_configuration: {
+                                json_configuration: {
+                                }?,
+                                parquet_configuration: {
+                                  schema_definition: {
+                                    columns: Array[
+                                      {
+                                        name: ::String,
+                                        type: ::String
+                                      },
+                                    ]?
+                                  }?
+                                }?
+                              },
+                              ?datastore_partitions: {
+                                partitions: Array[
+                                  {
+                                    attribute_partition: {
+                                      attribute_name: ::String
+                                    }?,
+                                    timestamp_partition: {
+                                      attribute_name: ::String,
+                                      timestamp_format: ::String?
+                                    }?
+                                  },
+                                ]?
+                              }
+                            ) -> _CreateDatastoreResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatastoreResponseSuccess
+
+      interface _CreatePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePipelineResponse]
+        def pipeline_name: () -> ::String
+        def pipeline_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#create_pipeline-instance_method
+      def create_pipeline: (
+                             pipeline_name: ::String,
+                             pipeline_activities: Array[
+                               {
+                                 channel: {
+                                   name: ::String,
+                                   channel_name: ::String,
+                                   next: ::String?
+                                 }?,
+                                 lambda: {
+                                   name: ::String,
+                                   lambda_name: ::String,
+                                   batch_size: ::Integer,
+                                   next: ::String?
+                                 }?,
+                                 datastore: {
+                                   name: ::String,
+                                   datastore_name: ::String
+                                 }?,
+                                 add_attributes: {
+                                   name: ::String,
+                                   attributes: Hash[::String, ::String],
+                                   next: ::String?
+                                 }?,
+                                 remove_attributes: {
+                                   name: ::String,
+                                   attributes: Array[::String],
+                                   next: ::String?
+                                 }?,
+                                 select_attributes: {
+                                   name: ::String,
+                                   attributes: Array[::String],
+                                   next: ::String?
+                                 }?,
+                                 filter: {
+                                   name: ::String,
+                                   filter: ::String,
+                                   next: ::String?
+                                 }?,
+                                 math: {
+                                   name: ::String,
+                                   attribute: ::String,
+                                   math: ::String,
+                                   next: ::String?
+                                 }?,
+                                 device_registry_enrich: {
+                                   name: ::String,
+                                   attribute: ::String,
+                                   thing_name: ::String,
+                                   role_arn: ::String,
+                                   next: ::String?
+                                 }?,
+                                 device_shadow_enrich: {
+                                   name: ::String,
+                                   attribute: ::String,
+                                   thing_name: ::String,
+                                   role_arn: ::String,
+                                   next: ::String?
+                                 }?
+                               },
+                             ],
+                             ?tags: Array[
+                               {
+                                 key: ::String,
+                                 value: ::String
+                               },
+                             ]
+                           ) -> _CreatePipelineResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePipelineResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#delete_channel-instance_method
+      def delete_channel: (
+                            channel_name: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#delete_dataset-instance_method
+      def delete_dataset: (
+                            dataset_name: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#delete_dataset_content-instance_method
+      def delete_dataset_content: (
+                                    dataset_name: ::String,
+                                    ?version_id: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#delete_datastore-instance_method
+      def delete_datastore: (
+                              datastore_name: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#delete_pipeline-instance_method
+      def delete_pipeline: (
+                             pipeline_name: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeChannelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeChannelResponse]
+        def channel: () -> Types::Channel
+        def statistics: () -> Types::ChannelStatistics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#describe_channel-instance_method
+      def describe_channel: (
+                              channel_name: ::String,
+                              ?include_statistics: bool
+                            ) -> _DescribeChannelResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeChannelResponseSuccess
+
+      interface _DescribeDatasetResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetResponse]
+        def dataset: () -> Types::Dataset
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#describe_dataset-instance_method
+      def describe_dataset: (
+                              dataset_name: ::String
+                            ) -> _DescribeDatasetResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatasetResponseSuccess
+
+      interface _DescribeDatastoreResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatastoreResponse]
+        def datastore: () -> Types::Datastore
+        def statistics: () -> Types::DatastoreStatistics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#describe_datastore-instance_method
+      def describe_datastore: (
+                                datastore_name: ::String,
+                                ?include_statistics: bool
+                              ) -> _DescribeDatastoreResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDatastoreResponseSuccess
+
+      interface _DescribeLoggingOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoggingOptionsResponse]
+        def logging_options: () -> Types::LoggingOptions
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#describe_logging_options-instance_method
+      def describe_logging_options: (
+                                    ) -> _DescribeLoggingOptionsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoggingOptionsResponseSuccess
+
+      interface _DescribePipelineResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribePipelineResponse]
+        def pipeline: () -> Types::Pipeline
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#describe_pipeline-instance_method
+      def describe_pipeline: (
+                               pipeline_name: ::String
+                             ) -> _DescribePipelineResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribePipelineResponseSuccess
+
+      interface _GetDatasetContentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDatasetContentResponse]
+        def entries: () -> ::Array[Types::DatasetEntry]
+        def timestamp: () -> ::Time
+        def status: () -> Types::DatasetContentStatus
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#get_dataset_content-instance_method
+      def get_dataset_content: (
+                                 dataset_name: ::String,
+                                 ?version_id: ::String
+                               ) -> _GetDatasetContentResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDatasetContentResponseSuccess
+
+      interface _ListChannelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListChannelsResponse]
+        def channel_summaries: () -> ::Array[Types::ChannelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#list_channels-instance_method
+      def list_channels: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListChannelsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsResponseSuccess
+
+      interface _ListDatasetContentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetContentsResponse]
+        def dataset_content_summaries: () -> ::Array[Types::DatasetContentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#list_dataset_contents-instance_method
+      def list_dataset_contents: (
+                                   dataset_name: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   ?scheduled_on_or_after: ::Time,
+                                   ?scheduled_before: ::Time
+                                 ) -> _ListDatasetContentsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetContentsResponseSuccess
+
+      interface _ListDatasetsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetsResponse]
+        def dataset_summaries: () -> ::Array[Types::DatasetSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#list_datasets-instance_method
+      def list_datasets: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer
+                         ) -> _ListDatasetsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetsResponseSuccess
+
+      interface _ListDatastoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDatastoresResponse]
+        def datastore_summaries: () -> ::Array[Types::DatastoreSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#list_datastores-instance_method
+      def list_datastores: (
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _ListDatastoresResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatastoresResponseSuccess
+
+      interface _ListPipelinesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPipelinesResponse]
+        def pipeline_summaries: () -> ::Array[Types::PipelineSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#list_pipelines-instance_method
+      def list_pipelines: (
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListPipelinesResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPipelinesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#put_logging_options-instance_method
+      def put_logging_options: (
+                                 logging_options: {
+                                   role_arn: ::String,
+                                   level: ("ERROR"),
+                                   enabled: bool
+                                 }
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _RunPipelineActivityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RunPipelineActivityResponse]
+        def payloads: () -> ::Array[::String]
+        def log_result: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#run_pipeline_activity-instance_method
+      def run_pipeline_activity: (
+                                   pipeline_activity: {
+                                     channel: {
+                                       name: ::String,
+                                       channel_name: ::String,
+                                       next: ::String?
+                                     }?,
+                                     lambda: {
+                                       name: ::String,
+                                       lambda_name: ::String,
+                                       batch_size: ::Integer,
+                                       next: ::String?
+                                     }?,
+                                     datastore: {
+                                       name: ::String,
+                                       datastore_name: ::String
+                                     }?,
+                                     add_attributes: {
+                                       name: ::String,
+                                       attributes: Hash[::String, ::String],
+                                       next: ::String?
+                                     }?,
+                                     remove_attributes: {
+                                       name: ::String,
+                                       attributes: Array[::String],
+                                       next: ::String?
+                                     }?,
+                                     select_attributes: {
+                                       name: ::String,
+                                       attributes: Array[::String],
+                                       next: ::String?
+                                     }?,
+                                     filter: {
+                                       name: ::String,
+                                       filter: ::String,
+                                       next: ::String?
+                                     }?,
+                                     math: {
+                                       name: ::String,
+                                       attribute: ::String,
+                                       math: ::String,
+                                       next: ::String?
+                                     }?,
+                                     device_registry_enrich: {
+                                       name: ::String,
+                                       attribute: ::String,
+                                       thing_name: ::String,
+                                       role_arn: ::String,
+                                       next: ::String?
+                                     }?,
+                                     device_shadow_enrich: {
+                                       name: ::String,
+                                       attribute: ::String,
+                                       thing_name: ::String,
+                                       role_arn: ::String,
+                                       next: ::String?
+                                     }?
+                                   },
+                                   payloads: Array[::String]
+                                 ) -> _RunPipelineActivityResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RunPipelineActivityResponseSuccess
+
+      interface _SampleChannelDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SampleChannelDataResponse]
+        def payloads: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#sample_channel_data-instance_method
+      def sample_channel_data: (
+                                 channel_name: ::String,
+                                 ?max_messages: ::Integer,
+                                 ?start_time: ::Time,
+                                 ?end_time: ::Time
+                               ) -> _SampleChannelDataResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SampleChannelDataResponseSuccess
+
+      interface _StartPipelineReprocessingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartPipelineReprocessingResponse]
+        def reprocessing_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#start_pipeline_reprocessing-instance_method
+      def start_pipeline_reprocessing: (
+                                         pipeline_name: ::String,
+                                         ?start_time: ::Time,
+                                         ?end_time: ::Time,
+                                         ?channel_messages: {
+                                           s3_paths: Array[::String]?
+                                         }
+                                       ) -> _StartPipelineReprocessingResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPipelineReprocessingResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#update_channel-instance_method
+      def update_channel: (
+                            channel_name: ::String,
+                            ?channel_storage: {
+                              service_managed_s3: {
+                              }?,
+                              customer_managed_s3: {
+                                bucket: ::String,
+                                key_prefix: ::String?,
+                                role_arn: ::String
+                              }?
+                            },
+                            ?retention_period: {
+                              unlimited: bool?,
+                              number_of_days: ::Integer?
+                            }
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#update_dataset-instance_method
+      def update_dataset: (
+                            dataset_name: ::String,
+                            actions: Array[
+                              {
+                                action_name: ::String?,
+                                query_action: {
+                                  sql_query: ::String,
+                                  filters: Array[
+                                    {
+                                      delta_time: {
+                                        offset_seconds: ::Integer,
+                                        time_expression: ::String
+                                      }?
+                                    },
+                                  ]?
+                                }?,
+                                container_action: {
+                                  image: ::String,
+                                  execution_role_arn: ::String,
+                                  resource_configuration: {
+                                    compute_type: ("ACU_1" | "ACU_2"),
+                                    volume_size_in_gb: ::Integer
+                                  },
+                                  variables: Array[
+                                    {
+                                      name: ::String,
+                                      string_value: ::String?,
+                                      double_value: ::Float?,
+                                      dataset_content_version_value: {
+                                        dataset_name: ::String
+                                      }?,
+                                      output_file_uri_value: {
+                                        file_name: ::String
+                                      }?
+                                    },
+                                  ]?
+                                }?
+                              },
+                            ],
+                            ?triggers: Array[
+                              {
+                                schedule: {
+                                  expression: ::String?
+                                }?,
+                                dataset: {
+                                  name: ::String
+                                }?
+                              },
+                            ],
+                            ?content_delivery_rules: Array[
+                              {
+                                entry_name: ::String?,
+                                destination: {
+                                  iot_events_destination_configuration: {
+                                    input_name: ::String,
+                                    role_arn: ::String
+                                  }?,
+                                  s3_destination_configuration: {
+                                    bucket: ::String,
+                                    key: ::String,
+                                    glue_configuration: {
+                                      table_name: ::String,
+                                      database_name: ::String
+                                    }?,
+                                    role_arn: ::String
+                                  }?
+                                }
+                              },
+                            ],
+                            ?retention_period: {
+                              unlimited: bool?,
+                              number_of_days: ::Integer?
+                            },
+                            ?versioning_configuration: {
+                              unlimited: bool?,
+                              max_versions: ::Integer?
+                            },
+                            ?late_data_rules: Array[
+                              {
+                                rule_name: ::String?,
+                                rule_configuration: {
+                                  delta_time_session_window_configuration: {
+                                    timeout_in_minutes: ::Integer
+                                  }?
+                                }
+                              },
+                            ]
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#update_datastore-instance_method
+      def update_datastore: (
+                              datastore_name: ::String,
+                              ?retention_period: {
+                                unlimited: bool?,
+                                number_of_days: ::Integer?
+                              },
+                              ?datastore_storage: {
+                                service_managed_s3: {
+                                }?,
+                                customer_managed_s3: {
+                                  bucket: ::String,
+                                  key_prefix: ::String?,
+                                  role_arn: ::String
+                                }?,
+                                iot_site_wise_multi_layer_storage: {
+                                  customer_managed_s3_storage: {
+                                    bucket: ::String,
+                                    key_prefix: ::String?
+                                  }
+                                }?
+                              },
+                              ?file_format_configuration: {
+                                json_configuration: {
+                                }?,
+                                parquet_configuration: {
+                                  schema_definition: {
+                                    columns: Array[
+                                      {
+                                        name: ::String,
+                                        type: ::String
+                                      },
+                                    ]?
+                                  }?
+                                }?
+                              }
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTAnalytics/Client.html#update_pipeline-instance_method
+      def update_pipeline: (
+                             pipeline_name: ::String,
+                             pipeline_activities: Array[
+                               {
+                                 channel: {
+                                   name: ::String,
+                                   channel_name: ::String,
+                                   next: ::String?
+                                 }?,
+                                 lambda: {
+                                   name: ::String,
+                                   lambda_name: ::String,
+                                   batch_size: ::Integer,
+                                   next: ::String?
+                                 }?,
+                                 datastore: {
+                                   name: ::String,
+                                   datastore_name: ::String
+                                 }?,
+                                 add_attributes: {
+                                   name: ::String,
+                                   attributes: Hash[::String, ::String],
+                                   next: ::String?
+                                 }?,
+                                 remove_attributes: {
+                                   name: ::String,
+                                   attributes: Array[::String],
+                                   next: ::String?
+                                 }?,
+                                 select_attributes: {
+                                   name: ::String,
+                                   attributes: Array[::String],
+                                   next: ::String?
+                                 }?,
+                                 filter: {
+                                   name: ::String,
+                                   filter: ::String,
+                                   next: ::String?
+                                 }?,
+                                 math: {
+                                   name: ::String,
+                                   attribute: ::String,
+                                   math: ::String,
+                                   next: ::String?
+                                 }?,
+                                 device_registry_enrich: {
+                                   name: ::String,
+                                   attribute: ::String,
+                                   thing_name: ::String,
+                                   role_arn: ::String,
+                                   next: ::String?
+                                 }?,
+                                 device_shadow_enrich: {
+                                   name: ::String,
+                                   attribute: ::String,
+                                   thing_name: ::String,
+                                   role_arn: ::String,
+                                   next: ::String?
+                                 }?
+                               },
+                             ]
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+    end
+  end
+end
+

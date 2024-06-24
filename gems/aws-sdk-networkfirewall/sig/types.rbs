@@ -1,0 +1,982 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::NetworkFirewall
+  module Types
+
+    class ActionDefinition
+      attr_accessor publish_metric_action: Types::PublishMetricAction
+      SENSITIVE: []
+    end
+
+    class Address
+      attr_accessor address_definition: ::String
+      SENSITIVE: []
+    end
+
+    class AnalysisResult
+      attr_accessor identified_rule_ids: ::Array[::String]
+      attr_accessor identified_type: ("STATELESS_RULE_FORWARDING_ASYMMETRICALLY" | "STATELESS_RULE_CONTAINS_TCP_FLAGS")
+      attr_accessor analysis_detail: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateFirewallPolicyRequest
+      attr_accessor update_token: ::String
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor firewall_policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateFirewallPolicyResponse
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor firewall_policy_arn: ::String
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateSubnetsRequest
+      attr_accessor update_token: ::String
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor subnet_mappings: ::Array[Types::SubnetMapping]
+      SENSITIVE: []
+    end
+
+    class AssociateSubnetsResponse
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor subnet_mappings: ::Array[Types::SubnetMapping]
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class Attachment
+      attr_accessor subnet_id: ::String
+      attr_accessor endpoint_id: ::String
+      attr_accessor status: ("CREATING" | "DELETING" | "FAILED" | "ERROR" | "SCALING" | "READY")
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class CIDRSummary
+      attr_accessor available_cidr_count: ::Integer
+      attr_accessor utilized_cidr_count: ::Integer
+      attr_accessor ip_set_references: ::Hash[::String, Types::IPSetMetadata]
+      SENSITIVE: []
+    end
+
+    class CapacityUsageSummary
+      attr_accessor cid_rs: Types::CIDRSummary
+      SENSITIVE: []
+    end
+
+    class CheckCertificateRevocationStatusActions
+      attr_accessor revoked_status_action: ("PASS" | "DROP" | "REJECT")
+      attr_accessor unknown_status_action: ("PASS" | "DROP" | "REJECT")
+      SENSITIVE: []
+    end
+
+    class CreateFirewallPolicyRequest
+      attr_accessor firewall_policy_name: ::String
+      attr_accessor firewall_policy: Types::FirewallPolicy
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor dry_run: bool
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateFirewallPolicyResponse
+      attr_accessor update_token: ::String
+      attr_accessor firewall_policy_response: Types::FirewallPolicyResponse
+      SENSITIVE: []
+    end
+
+    class CreateFirewallRequest
+      attr_accessor firewall_name: ::String
+      attr_accessor firewall_policy_arn: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_mappings: ::Array[Types::SubnetMapping]
+      attr_accessor delete_protection: bool
+      attr_accessor subnet_change_protection: bool
+      attr_accessor firewall_policy_change_protection: bool
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateFirewallResponse
+      attr_accessor firewall: Types::Firewall
+      attr_accessor firewall_status: Types::FirewallStatus
+      SENSITIVE: []
+    end
+
+    class CreateRuleGroupRequest
+      attr_accessor rule_group_name: ::String
+      attr_accessor rule_group: Types::RuleGroup
+      attr_accessor rules: ::String
+      attr_accessor type: ("STATELESS" | "STATEFUL")
+      attr_accessor description: ::String
+      attr_accessor capacity: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor dry_run: bool
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor source_metadata: Types::SourceMetadata
+      attr_accessor analyze_rule_group: bool
+      SENSITIVE: []
+    end
+
+    class CreateRuleGroupResponse
+      attr_accessor update_token: ::String
+      attr_accessor rule_group_response: Types::RuleGroupResponse
+      SENSITIVE: []
+    end
+
+    class CreateTLSInspectionConfigurationRequest
+      attr_accessor tls_inspection_configuration_name: ::String
+      attr_accessor tls_inspection_configuration: Types::TLSInspectionConfiguration
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateTLSInspectionConfigurationResponse
+      attr_accessor update_token: ::String
+      attr_accessor tls_inspection_configuration_response: Types::TLSInspectionConfigurationResponse
+      SENSITIVE: []
+    end
+
+    class CustomAction
+      attr_accessor action_name: ::String
+      attr_accessor action_definition: Types::ActionDefinition
+      SENSITIVE: []
+    end
+
+    class DeleteFirewallPolicyRequest
+      attr_accessor firewall_policy_name: ::String
+      attr_accessor firewall_policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFirewallPolicyResponse
+      attr_accessor firewall_policy_response: Types::FirewallPolicyResponse
+      SENSITIVE: []
+    end
+
+    class DeleteFirewallRequest
+      attr_accessor firewall_name: ::String
+      attr_accessor firewall_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFirewallResponse
+      attr_accessor firewall: Types::Firewall
+      attr_accessor firewall_status: Types::FirewallStatus
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRuleGroupRequest
+      attr_accessor rule_group_name: ::String
+      attr_accessor rule_group_arn: ::String
+      attr_accessor type: ("STATELESS" | "STATEFUL")
+      SENSITIVE: []
+    end
+
+    class DeleteRuleGroupResponse
+      attr_accessor rule_group_response: Types::RuleGroupResponse
+      SENSITIVE: []
+    end
+
+    class DeleteTLSInspectionConfigurationRequest
+      attr_accessor tls_inspection_configuration_arn: ::String
+      attr_accessor tls_inspection_configuration_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTLSInspectionConfigurationResponse
+      attr_accessor tls_inspection_configuration_response: Types::TLSInspectionConfigurationResponse
+      SENSITIVE: []
+    end
+
+    class DescribeFirewallPolicyRequest
+      attr_accessor firewall_policy_name: ::String
+      attr_accessor firewall_policy_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFirewallPolicyResponse
+      attr_accessor update_token: ::String
+      attr_accessor firewall_policy_response: Types::FirewallPolicyResponse
+      attr_accessor firewall_policy: Types::FirewallPolicy
+      SENSITIVE: []
+    end
+
+    class DescribeFirewallRequest
+      attr_accessor firewall_name: ::String
+      attr_accessor firewall_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFirewallResponse
+      attr_accessor update_token: ::String
+      attr_accessor firewall: Types::Firewall
+      attr_accessor firewall_status: Types::FirewallStatus
+      SENSITIVE: []
+    end
+
+    class DescribeLoggingConfigurationRequest
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLoggingConfigurationResponse
+      attr_accessor firewall_arn: ::String
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class DescribeResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourcePolicyResponse
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRuleGroupMetadataRequest
+      attr_accessor rule_group_name: ::String
+      attr_accessor rule_group_arn: ::String
+      attr_accessor type: ("STATELESS" | "STATEFUL")
+      SENSITIVE: []
+    end
+
+    class DescribeRuleGroupMetadataResponse
+      attr_accessor rule_group_arn: ::String
+      attr_accessor rule_group_name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("STATELESS" | "STATEFUL")
+      attr_accessor capacity: ::Integer
+      attr_accessor stateful_rule_options: Types::StatefulRuleOptions
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeRuleGroupRequest
+      attr_accessor rule_group_name: ::String
+      attr_accessor rule_group_arn: ::String
+      attr_accessor type: ("STATELESS" | "STATEFUL")
+      attr_accessor analyze_rule_group: bool
+      SENSITIVE: []
+    end
+
+    class DescribeRuleGroupResponse
+      attr_accessor update_token: ::String
+      attr_accessor rule_group: Types::RuleGroup
+      attr_accessor rule_group_response: Types::RuleGroupResponse
+      SENSITIVE: []
+    end
+
+    class DescribeTLSInspectionConfigurationRequest
+      attr_accessor tls_inspection_configuration_arn: ::String
+      attr_accessor tls_inspection_configuration_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTLSInspectionConfigurationResponse
+      attr_accessor update_token: ::String
+      attr_accessor tls_inspection_configuration: Types::TLSInspectionConfiguration
+      attr_accessor tls_inspection_configuration_response: Types::TLSInspectionConfigurationResponse
+      SENSITIVE: []
+    end
+
+    class Dimension
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateSubnetsRequest
+      attr_accessor update_token: ::String
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DisassociateSubnetsResponse
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor subnet_mappings: ::Array[Types::SubnetMapping]
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class EncryptionConfiguration
+      attr_accessor key_id: ::String
+      attr_accessor type: ("CUSTOMER_KMS" | "AWS_OWNED_KMS_KEY")
+      SENSITIVE: []
+    end
+
+    class Firewall
+      attr_accessor firewall_name: ::String
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_policy_arn: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_mappings: ::Array[Types::SubnetMapping]
+      attr_accessor delete_protection: bool
+      attr_accessor subnet_change_protection: bool
+      attr_accessor firewall_policy_change_protection: bool
+      attr_accessor description: ::String
+      attr_accessor firewall_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class FirewallMetadata
+      attr_accessor firewall_name: ::String
+      attr_accessor firewall_arn: ::String
+      SENSITIVE: []
+    end
+
+    class FirewallPolicy
+      attr_accessor stateless_rule_group_references: ::Array[Types::StatelessRuleGroupReference]
+      attr_accessor stateless_default_actions: ::Array[::String]
+      attr_accessor stateless_fragment_default_actions: ::Array[::String]
+      attr_accessor stateless_custom_actions: ::Array[Types::CustomAction]
+      attr_accessor stateful_rule_group_references: ::Array[Types::StatefulRuleGroupReference]
+      attr_accessor stateful_default_actions: ::Array[::String]
+      attr_accessor stateful_engine_options: Types::StatefulEngineOptions
+      attr_accessor tls_inspection_configuration_arn: ::String
+      attr_accessor policy_variables: Types::PolicyVariables
+      SENSITIVE: []
+    end
+
+    class FirewallPolicyMetadata
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class FirewallPolicyResponse
+      attr_accessor firewall_policy_name: ::String
+      attr_accessor firewall_policy_arn: ::String
+      attr_accessor firewall_policy_id: ::String
+      attr_accessor description: ::String
+      attr_accessor firewall_policy_status: ("ACTIVE" | "DELETING" | "ERROR")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor consumed_stateless_rule_capacity: ::Integer
+      attr_accessor consumed_stateful_rule_capacity: ::Integer
+      attr_accessor number_of_associations: ::Integer
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor last_modified_time: ::Time
+      SENSITIVE: []
+    end
+
+    class FirewallStatus
+      attr_accessor status: ("PROVISIONING" | "DELETING" | "READY")
+      attr_accessor configuration_sync_state_summary: ("PENDING" | "IN_SYNC" | "CAPACITY_CONSTRAINED")
+      attr_accessor sync_states: ::Hash[::String, Types::SyncState]
+      attr_accessor capacity_usage_summary: Types::CapacityUsageSummary
+      SENSITIVE: []
+    end
+
+    class Header
+      attr_accessor protocol: ("IP" | "TCP" | "UDP" | "ICMP" | "HTTP" | "FTP" | "TLS" | "SMB" | "DNS" | "DCERPC" | "SSH" | "SMTP" | "IMAP" | "MSN" | "KRB5" | "IKEV2" | "TFTP" | "NTP" | "DHCP")
+      attr_accessor source: ::String
+      attr_accessor source_port: ::String
+      attr_accessor direction: ("FORWARD" | "ANY")
+      attr_accessor destination: ::String
+      attr_accessor destination_port: ::String
+      SENSITIVE: []
+    end
+
+    class IPSet
+      attr_accessor definition: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class IPSetMetadata
+      attr_accessor resolved_cidr_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class IPSetReference
+      attr_accessor reference_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InsufficientCapacityException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidResourcePolicyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListFirewallPoliciesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFirewallPoliciesResponse
+      attr_accessor next_token: ::String
+      attr_accessor firewall_policies: ::Array[Types::FirewallPolicyMetadata]
+      SENSITIVE: []
+    end
+
+    class ListFirewallsRequest
+      attr_accessor next_token: ::String
+      attr_accessor vpc_ids: ::Array[::String]
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFirewallsResponse
+      attr_accessor next_token: ::String
+      attr_accessor firewalls: ::Array[Types::FirewallMetadata]
+      SENSITIVE: []
+    end
+
+    class ListRuleGroupsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor scope: ("MANAGED" | "ACCOUNT")
+      attr_accessor managed_type: ("AWS_MANAGED_THREAT_SIGNATURES" | "AWS_MANAGED_DOMAIN_LISTS")
+      attr_accessor type: ("STATELESS" | "STATEFUL")
+      SENSITIVE: []
+    end
+
+    class ListRuleGroupsResponse
+      attr_accessor next_token: ::String
+      attr_accessor rule_groups: ::Array[Types::RuleGroupMetadata]
+      SENSITIVE: []
+    end
+
+    class ListTLSInspectionConfigurationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTLSInspectionConfigurationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor tls_inspection_configurations: ::Array[Types::TLSInspectionConfigurationMetadata]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor next_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class LogDestinationConfig
+      attr_accessor log_type: ("ALERT" | "FLOW")
+      attr_accessor log_destination_type: ("S3" | "CloudWatchLogs" | "KinesisDataFirehose")
+      attr_accessor log_destination: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class LogDestinationPermissionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LoggingConfiguration
+      attr_accessor log_destination_configs: ::Array[Types::LogDestinationConfig]
+      SENSITIVE: []
+    end
+
+    class MatchAttributes
+      attr_accessor sources: ::Array[Types::Address]
+      attr_accessor destinations: ::Array[Types::Address]
+      attr_accessor source_ports: ::Array[Types::PortRange]
+      attr_accessor destination_ports: ::Array[Types::PortRange]
+      attr_accessor protocols: ::Array[::Integer]
+      attr_accessor tcp_flags: ::Array[Types::TCPFlagField]
+      SENSITIVE: []
+    end
+
+    class PerObjectStatus
+      attr_accessor sync_status: ("PENDING" | "IN_SYNC" | "CAPACITY_CONSTRAINED")
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyVariables
+      attr_accessor rule_variables: ::Hash[::String, Types::IPSet]
+      SENSITIVE: []
+    end
+
+    class PortRange
+      attr_accessor from_port: ::Integer
+      attr_accessor to_port: ::Integer
+      SENSITIVE: []
+    end
+
+    class PortSet
+      attr_accessor definition: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PublishMetricAction
+      attr_accessor dimensions: ::Array[Types::Dimension]
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse < Aws::EmptyStructure
+    end
+
+    class ReferenceSets
+      attr_accessor ip_set_references: ::Hash[::String, Types::IPSetReference]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceOwnerCheckException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RuleDefinition
+      attr_accessor match_attributes: Types::MatchAttributes
+      attr_accessor actions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RuleGroup
+      attr_accessor rule_variables: Types::RuleVariables
+      attr_accessor reference_sets: Types::ReferenceSets
+      attr_accessor rules_source: Types::RulesSource
+      attr_accessor stateful_rule_options: Types::StatefulRuleOptions
+      SENSITIVE: []
+    end
+
+    class RuleGroupMetadata
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class RuleGroupResponse
+      attr_accessor rule_group_arn: ::String
+      attr_accessor rule_group_name: ::String
+      attr_accessor rule_group_id: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("STATELESS" | "STATEFUL")
+      attr_accessor capacity: ::Integer
+      attr_accessor rule_group_status: ("ACTIVE" | "DELETING" | "ERROR")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor consumed_capacity: ::Integer
+      attr_accessor number_of_associations: ::Integer
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor source_metadata: Types::SourceMetadata
+      attr_accessor sns_topic: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor analysis_results: ::Array[Types::AnalysisResult]
+      SENSITIVE: []
+    end
+
+    class RuleOption
+      attr_accessor keyword: ::String
+      attr_accessor settings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RuleVariables
+      attr_accessor ip_sets: ::Hash[::String, Types::IPSet]
+      attr_accessor port_sets: ::Hash[::String, Types::PortSet]
+      SENSITIVE: []
+    end
+
+    class RulesSource
+      attr_accessor rules_string: ::String
+      attr_accessor rules_source_list: Types::RulesSourceList
+      attr_accessor stateful_rules: ::Array[Types::StatefulRule]
+      attr_accessor stateless_rules_and_custom_actions: Types::StatelessRulesAndCustomActions
+      SENSITIVE: []
+    end
+
+    class RulesSourceList
+      attr_accessor targets: ::Array[::String]
+      attr_accessor target_types: ::Array[("TLS_SNI" | "HTTP_HOST")]
+      attr_accessor generated_rules_type: ("ALLOWLIST" | "DENYLIST")
+      SENSITIVE: []
+    end
+
+    class ServerCertificate
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ServerCertificateConfiguration
+      attr_accessor server_certificates: ::Array[Types::ServerCertificate]
+      attr_accessor scopes: ::Array[Types::ServerCertificateScope]
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor check_certificate_revocation_status: Types::CheckCertificateRevocationStatusActions
+      SENSITIVE: []
+    end
+
+    class ServerCertificateScope
+      attr_accessor sources: ::Array[Types::Address]
+      attr_accessor destinations: ::Array[Types::Address]
+      attr_accessor source_ports: ::Array[Types::PortRange]
+      attr_accessor destination_ports: ::Array[Types::PortRange]
+      attr_accessor protocols: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class SourceMetadata
+      attr_accessor source_arn: ::String
+      attr_accessor source_update_token: ::String
+      SENSITIVE: []
+    end
+
+    class StatefulEngineOptions
+      attr_accessor rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")
+      attr_accessor stream_exception_policy: ("DROP" | "CONTINUE" | "REJECT")
+      SENSITIVE: []
+    end
+
+    class StatefulRule
+      attr_accessor action: ("PASS" | "DROP" | "ALERT" | "REJECT")
+      attr_accessor header: Types::Header
+      attr_accessor rule_options: ::Array[Types::RuleOption]
+      SENSITIVE: []
+    end
+
+    class StatefulRuleGroupOverride
+      attr_accessor action: ("DROP_TO_ALERT")
+      SENSITIVE: []
+    end
+
+    class StatefulRuleGroupReference
+      attr_accessor resource_arn: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor override: Types::StatefulRuleGroupOverride
+      SENSITIVE: []
+    end
+
+    class StatefulRuleOptions
+      attr_accessor rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")
+      SENSITIVE: []
+    end
+
+    class StatelessRule
+      attr_accessor rule_definition: Types::RuleDefinition
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class StatelessRuleGroupReference
+      attr_accessor resource_arn: ::String
+      attr_accessor priority: ::Integer
+      SENSITIVE: []
+    end
+
+    class StatelessRulesAndCustomActions
+      attr_accessor stateless_rules: ::Array[Types::StatelessRule]
+      attr_accessor custom_actions: ::Array[Types::CustomAction]
+      SENSITIVE: []
+    end
+
+    class SubnetMapping
+      attr_accessor subnet_id: ::String
+      attr_accessor ip_address_type: ("DUALSTACK" | "IPV4" | "IPV6")
+      SENSITIVE: []
+    end
+
+    class SyncState
+      attr_accessor attachment: Types::Attachment
+      attr_accessor config: ::Hash[::String, Types::PerObjectStatus]
+      SENSITIVE: []
+    end
+
+    class TCPFlagField
+      attr_accessor flags: ::Array[("FIN" | "SYN" | "RST" | "PSH" | "ACK" | "URG" | "ECE" | "CWR")]
+      attr_accessor masks: ::Array[("FIN" | "SYN" | "RST" | "PSH" | "ACK" | "URG" | "ECE" | "CWR")]
+      SENSITIVE: []
+    end
+
+    class TLSInspectionConfiguration
+      attr_accessor server_certificate_configurations: ::Array[Types::ServerCertificateConfiguration]
+      SENSITIVE: []
+    end
+
+    class TLSInspectionConfigurationMetadata
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class TLSInspectionConfigurationResponse
+      attr_accessor tls_inspection_configuration_arn: ::String
+      attr_accessor tls_inspection_configuration_name: ::String
+      attr_accessor tls_inspection_configuration_id: ::String
+      attr_accessor tls_inspection_configuration_status: ("ACTIVE" | "DELETING" | "ERROR")
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor last_modified_time: ::Time
+      attr_accessor number_of_associations: ::Integer
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor certificates: ::Array[Types::TlsCertificateData]
+      attr_accessor certificate_authority: Types::TlsCertificateData
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TlsCertificateData
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_serial: ::String
+      attr_accessor status: ::String
+      attr_accessor status_message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateFirewallDeleteProtectionRequest
+      attr_accessor update_token: ::String
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor delete_protection: bool
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallDeleteProtectionResponse
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor delete_protection: bool
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallDescriptionRequest
+      attr_accessor update_token: ::String
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallDescriptionResponse
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor description: ::String
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallEncryptionConfigurationRequest
+      attr_accessor update_token: ::String
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallEncryptionConfigurationResponse
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor update_token: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallPolicyChangeProtectionRequest
+      attr_accessor update_token: ::String
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor firewall_policy_change_protection: bool
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallPolicyChangeProtectionResponse
+      attr_accessor update_token: ::String
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor firewall_policy_change_protection: bool
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallPolicyRequest
+      attr_accessor update_token: ::String
+      attr_accessor firewall_policy_arn: ::String
+      attr_accessor firewall_policy_name: ::String
+      attr_accessor firewall_policy: Types::FirewallPolicy
+      attr_accessor description: ::String
+      attr_accessor dry_run: bool
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateFirewallPolicyResponse
+      attr_accessor update_token: ::String
+      attr_accessor firewall_policy_response: Types::FirewallPolicyResponse
+      SENSITIVE: []
+    end
+
+    class UpdateLoggingConfigurationRequest
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateLoggingConfigurationResponse
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor logging_configuration: Types::LoggingConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateRuleGroupRequest
+      attr_accessor update_token: ::String
+      attr_accessor rule_group_arn: ::String
+      attr_accessor rule_group_name: ::String
+      attr_accessor rule_group: Types::RuleGroup
+      attr_accessor rules: ::String
+      attr_accessor type: ("STATELESS" | "STATEFUL")
+      attr_accessor description: ::String
+      attr_accessor dry_run: bool
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor source_metadata: Types::SourceMetadata
+      attr_accessor analyze_rule_group: bool
+      SENSITIVE: []
+    end
+
+    class UpdateRuleGroupResponse
+      attr_accessor update_token: ::String
+      attr_accessor rule_group_response: Types::RuleGroupResponse
+      SENSITIVE: []
+    end
+
+    class UpdateSubnetChangeProtectionRequest
+      attr_accessor update_token: ::String
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor subnet_change_protection: bool
+      SENSITIVE: []
+    end
+
+    class UpdateSubnetChangeProtectionResponse
+      attr_accessor update_token: ::String
+      attr_accessor firewall_arn: ::String
+      attr_accessor firewall_name: ::String
+      attr_accessor subnet_change_protection: bool
+      SENSITIVE: []
+    end
+
+    class UpdateTLSInspectionConfigurationRequest
+      attr_accessor tls_inspection_configuration_arn: ::String
+      attr_accessor tls_inspection_configuration_name: ::String
+      attr_accessor tls_inspection_configuration: Types::TLSInspectionConfiguration
+      attr_accessor description: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor update_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTLSInspectionConfigurationResponse
+      attr_accessor update_token: ::String
+      attr_accessor tls_inspection_configuration_response: Types::TLSInspectionConfigurationResponse
+      SENSITIVE: []
+    end
+  end
+end

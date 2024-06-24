@@ -212,6 +212,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * SageMaker inference component - The resource type is
+    #     `inference-component` and the unique identifier is the resource
+    #     ID. Example: `inference-component/my-inference-component`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -286,6 +290,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
     #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #
+    #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
+    #     copies across an endpoint for a SageMaker inference component.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyRequest AWS API Documentation
@@ -386,6 +393,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * SageMaker inference component - The resource type is
+    #     `inference-component` and the unique identifier is the resource
+    #     ID. Example: `inference-component/my-inference-component`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -460,6 +471,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
     #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #
+    #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
+    #     copies across an endpoint for a SageMaker inference component.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledActionRequest AWS API Documentation
@@ -556,6 +570,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * SageMaker inference component - The resource type is
+    #     `inference-component` and the unique identifier is the resource
+    #     ID. Example: `inference-component/my-inference-component`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -631,6 +649,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
     #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #
+    #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
+    #     copies across an endpoint for a SageMaker inference component.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetRequest AWS API Documentation
@@ -726,6 +747,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * SageMaker inference component - The resource type is
+    #     `inference-component` and the unique identifier is the resource
+    #     ID. Example: `inference-component/my-inference-component`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -802,6 +827,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
     #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #
+    #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
+    #     copies across an endpoint for a SageMaker inference component.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -928,6 +956,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * SageMaker inference component - The resource type is
+    #     `inference-component` and the unique identifier is the resource
+    #     ID. Example: `inference-component/my-inference-component`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1003,6 +1035,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
     #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #
+    #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
+    #     copies across an endpoint for a SageMaker inference component.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1147,6 +1182,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * SageMaker inference component - The resource type is
+    #     `inference-component` and the unique identifier is the resource
+    #     ID. Example: `inference-component/my-inference-component`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1222,6 +1261,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
     #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #
+    #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
+    #     copies across an endpoint for a SageMaker inference component.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1353,6 +1395,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * SageMaker inference component - The resource type is
+    #     `inference-component` and the unique identifier is the resource
+    #     ID. Example: `inference-component/my-inference-component`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1428,6 +1474,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
     #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #
+    #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
+    #     copies across an endpoint for a SageMaker inference component.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1661,8 +1710,9 @@ module Aws::ApplicationAutoScaling
     # Only the Amazon Web Services that you're using send metrics to Amazon
     # CloudWatch. To determine whether a desired metric already exists by
     # looking up its namespace and dimension using the CloudWatch metrics
-    # dashboard in the console, follow the procedure in [Building dashboards
-    # with CloudWatch][1] in the *Application Auto Scaling User Guide*.
+    # dashboard in the console, follow the procedure in [Monitor your
+    # resources using CloudWatch][1] in the *Application Auto Scaling User
+    # Guide*.
     #
     #
     #
@@ -1800,6 +1850,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * SageMaker inference component - The resource type is
+    #     `inference-component` and the unique identifier is the resource
+    #     ID. Example: `inference-component/my-inference-component`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -1874,6 +1928,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
     #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #
+    #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
+    #     copies across an endpoint for a SageMaker inference component.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -1882,7 +1939,7 @@ module Aws::ApplicationAutoScaling
     #
     #   The following policy types are supported:
     #
-    #   `TargetTrackingScaling`—Not supported for Amazon EMR
+    #   `TargetTrackingScaling`—Not supported for Amazon EMR.
     #
     #   `StepScaling`—Not supported for DynamoDB, Amazon Comprehend, Lambda,
     #   Amazon Keyspaces, Amazon MSK, Amazon ElastiCache, or Neptune.
@@ -2076,6 +2133,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * SageMaker inference component - The resource type is
+    #     `inference-component` and the unique identifier is the resource
+    #     ID. Example: `inference-component/my-inference-component`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2150,6 +2211,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
     #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #
+    #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
+    #     copies across an endpoint for a SageMaker inference component.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -2269,6 +2333,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * SageMaker inference component - The resource type is
+    #     `inference-component` and the unique identifier is the resource
+    #     ID. Example: `inference-component/my-inference-component`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2344,6 +2412,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
     #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #
+    #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
+    #     copies across an endpoint for a SageMaker inference component.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -2595,6 +2666,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * SageMaker inference component - The resource type is
+    #     `inference-component` and the unique identifier is the resource
+    #     ID. Example: `inference-component/my-inference-component`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2670,6 +2745,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
     #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #
+    #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
+    #     copies across an endpoint for a SageMaker inference component.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -2835,6 +2913,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * SageMaker inference component - The resource type is
+    #     `inference-component` and the unique identifier is the resource
+    #     ID. Example: `inference-component/my-inference-component`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -2909,6 +2991,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
     #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #
+    #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
+    #     copies across an endpoint for a SageMaker inference component.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3066,6 +3151,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * SageMaker inference component - The resource type is
+    #     `inference-component` and the unique identifier is the resource
+    #     ID. Example: `inference-component/my-inference-component`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -3140,6 +3229,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
     #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #
+    #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
+    #     copies across an endpoint for a SageMaker inference component.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -3313,6 +3405,10 @@ module Aws::ApplicationAutoScaling
     #     the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * SageMaker inference component - The resource type is
+    #     `inference-component` and the unique identifier is the resource
+    #     ID. Example: `inference-component/my-inference-component`.
+    #
     #
     #
     #   [1]: https://github.com/aws/aws-auto-scaling-custom-resource
@@ -3387,6 +3483,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredProvisionedConcurrency` - The
     #     provisioned concurrency for a SageMaker Serverless endpoint.
+    #
+    #   * `sagemaker:inference-component:DesiredCopyCount` - The number of
+    #     copies across an endpoint for a SageMaker inference component.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -3550,7 +3649,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html#step-scaling-cooldown
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/step-scaling-policy-overview.html#step-scaling-cooldown
     #   @return [Integer]
     #
     # @!attribute [rw] metric_aggregation_type
@@ -3879,7 +3978,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html#target-tracking-cooldown
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown
     #   @return [Integer]
     #
     # @!attribute [rw] scale_in_cooldown
@@ -3890,7 +3989,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html#target-tracking-cooldown
+    #   [1]: https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown
     #   @return [Integer]
     #
     # @!attribute [rw] disable_scale_in

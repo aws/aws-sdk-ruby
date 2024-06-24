@@ -1,6 +1,56 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.63.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2024-05-02)
+------------------
+
+* Feature - This releases ability to delete users and their data, including their metadata and interactions data, from a dataset group.
+
+1.61.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2024-04-19)
+------------------
+
+* Feature - This releases auto training capability while creating a solution and automatically syncing latest solution versions when creating/updating a campaign
+
+1.59.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.58.0 (2024-01-16)
+------------------
+
+* Feature - Documentation updates for Amazon Personalize.
+
+1.57.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.56.0 (2023-11-27)
+------------------
+
+* Feature - Enables metadata in recommendations, recommendations with themes, and next best action recommendations
+
+1.55.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.54.0 (2023-09-27)
 ------------------
 

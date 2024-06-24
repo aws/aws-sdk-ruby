@@ -14,6 +14,7 @@ module Aws::Connect
     include Seahorse::Model
 
     ARN = Shapes::StringShape.new(name: 'ARN')
+    AWSAccountId = Shapes::StringShape.new(name: 'AWSAccountId')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     ActionSummaries = Shapes::ListShape.new(name: 'ActionSummaries')
     ActionSummary = Shapes::StructureShape.new(name: 'ActionSummary')
@@ -26,9 +27,14 @@ module Aws::Connect
     AgentContactReference = Shapes::StructureShape.new(name: 'AgentContactReference')
     AgentContactReferenceList = Shapes::ListShape.new(name: 'AgentContactReferenceList')
     AgentFirstName = Shapes::StringShape.new(name: 'AgentFirstName')
+    AgentHierarchyGroup = Shapes::StructureShape.new(name: 'AgentHierarchyGroup')
+    AgentHierarchyGroups = Shapes::StructureShape.new(name: 'AgentHierarchyGroups')
     AgentInfo = Shapes::StructureShape.new(name: 'AgentInfo')
     AgentLastName = Shapes::StringShape.new(name: 'AgentLastName')
+    AgentPauseDurationInSeconds = Shapes::IntegerShape.new(name: 'AgentPauseDurationInSeconds')
+    AgentQualityMetrics = Shapes::StructureShape.new(name: 'AgentQualityMetrics')
     AgentResourceId = Shapes::StringShape.new(name: 'AgentResourceId')
+    AgentResourceIdList = Shapes::ListShape.new(name: 'AgentResourceIdList')
     AgentStatus = Shapes::StructureShape.new(name: 'AgentStatus')
     AgentStatusDescription = Shapes::StringShape.new(name: 'AgentStatusDescription')
     AgentStatusId = Shapes::StringShape.new(name: 'AgentStatusId')
@@ -44,17 +50,27 @@ module Aws::Connect
     AgentsMinOneMaxHundred = Shapes::ListShape.new(name: 'AgentsMinOneMaxHundred')
     AliasArn = Shapes::StringShape.new(name: 'AliasArn')
     AllowedAccessControlTags = Shapes::MapShape.new(name: 'AllowedAccessControlTags')
+    AllowedCapabilities = Shapes::StructureShape.new(name: 'AllowedCapabilities')
     AllowedMonitorCapabilities = Shapes::ListShape.new(name: 'AllowedMonitorCapabilities')
+    AnalyticsDataAssociationResult = Shapes::StructureShape.new(name: 'AnalyticsDataAssociationResult')
+    AnalyticsDataAssociationResults = Shapes::ListShape.new(name: 'AnalyticsDataAssociationResults')
     AnswerMachineDetectionConfig = Shapes::StructureShape.new(name: 'AnswerMachineDetectionConfig')
+    AnsweringMachineDetectionStatus = Shapes::StringShape.new(name: 'AnsweringMachineDetectionStatus')
     Application = Shapes::StructureShape.new(name: 'Application')
     ApplicationPermissions = Shapes::ListShape.new(name: 'ApplicationPermissions')
     Applications = Shapes::ListShape.new(name: 'Applications')
     ApproximateTotalCount = Shapes::IntegerShape.new(name: 'ApproximateTotalCount')
+    ArtifactId = Shapes::StringShape.new(name: 'ArtifactId')
+    ArtifactStatus = Shapes::StringShape.new(name: 'ArtifactStatus')
     AssignContactCategoryActionDefinition = Shapes::StructureShape.new(name: 'AssignContactCategoryActionDefinition')
+    AssociateAnalyticsDataSetRequest = Shapes::StructureShape.new(name: 'AssociateAnalyticsDataSetRequest')
+    AssociateAnalyticsDataSetResponse = Shapes::StructureShape.new(name: 'AssociateAnalyticsDataSetResponse')
     AssociateApprovedOriginRequest = Shapes::StructureShape.new(name: 'AssociateApprovedOriginRequest')
     AssociateBotRequest = Shapes::StructureShape.new(name: 'AssociateBotRequest')
     AssociateDefaultVocabularyRequest = Shapes::StructureShape.new(name: 'AssociateDefaultVocabularyRequest')
     AssociateDefaultVocabularyResponse = Shapes::StructureShape.new(name: 'AssociateDefaultVocabularyResponse')
+    AssociateFlowRequest = Shapes::StructureShape.new(name: 'AssociateFlowRequest')
+    AssociateFlowResponse = Shapes::StructureShape.new(name: 'AssociateFlowResponse')
     AssociateInstanceStorageConfigRequest = Shapes::StructureShape.new(name: 'AssociateInstanceStorageConfigRequest')
     AssociateInstanceStorageConfigResponse = Shapes::StructureShape.new(name: 'AssociateInstanceStorageConfigResponse')
     AssociateLambdaFunctionRequest = Shapes::StructureShape.new(name: 'AssociateLambdaFunctionRequest')
@@ -66,29 +82,59 @@ module Aws::Connect
     AssociateSecurityKeyResponse = Shapes::StructureShape.new(name: 'AssociateSecurityKeyResponse')
     AssociateTrafficDistributionGroupUserRequest = Shapes::StructureShape.new(name: 'AssociateTrafficDistributionGroupUserRequest')
     AssociateTrafficDistributionGroupUserResponse = Shapes::StructureShape.new(name: 'AssociateTrafficDistributionGroupUserResponse')
+    AssociateUserProficienciesRequest = Shapes::StructureShape.new(name: 'AssociateUserProficienciesRequest')
+    AssociatedQueueIdList = Shapes::ListShape.new(name: 'AssociatedQueueIdList')
     AssociationId = Shapes::StringShape.new(name: 'AssociationId')
+    AttachedFile = Shapes::StructureShape.new(name: 'AttachedFile')
+    AttachedFileError = Shapes::StructureShape.new(name: 'AttachedFileError')
+    AttachedFileErrorsList = Shapes::ListShape.new(name: 'AttachedFileErrorsList')
+    AttachedFileInvalidRequestExceptionReason = Shapes::StringShape.new(name: 'AttachedFileInvalidRequestExceptionReason')
+    AttachedFilesList = Shapes::ListShape.new(name: 'AttachedFilesList')
+    AttachmentName = Shapes::StringShape.new(name: 'AttachmentName')
     AttachmentReference = Shapes::StructureShape.new(name: 'AttachmentReference')
+    Attendee = Shapes::StructureShape.new(name: 'Attendee')
+    AttendeeId = Shapes::StringShape.new(name: 'AttendeeId')
     Attribute = Shapes::StructureShape.new(name: 'Attribute')
+    AttributeAndCondition = Shapes::StructureShape.new(name: 'AttributeAndCondition')
+    AttributeCondition = Shapes::StructureShape.new(name: 'AttributeCondition')
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
+    AttributeOrConditionList = Shapes::ListShape.new(name: 'AttributeOrConditionList')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     Attributes = Shapes::MapShape.new(name: 'Attributes')
     AttributesList = Shapes::ListShape.new(name: 'AttributesList')
+    AudioFeatures = Shapes::StructureShape.new(name: 'AudioFeatures')
+    AudioQualityMetricsInfo = Shapes::StructureShape.new(name: 'AudioQualityMetricsInfo')
+    AudioQualityScore = Shapes::FloatShape.new(name: 'AudioQualityScore')
     AutoAccept = Shapes::BooleanShape.new(name: 'AutoAccept')
     AvailableNumberSummary = Shapes::StructureShape.new(name: 'AvailableNumberSummary')
     AvailableNumbersList = Shapes::ListShape.new(name: 'AvailableNumbersList')
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
+    BatchAssociateAnalyticsDataSetRequest = Shapes::StructureShape.new(name: 'BatchAssociateAnalyticsDataSetRequest')
+    BatchAssociateAnalyticsDataSetResponse = Shapes::StructureShape.new(name: 'BatchAssociateAnalyticsDataSetResponse')
+    BatchDisassociateAnalyticsDataSetRequest = Shapes::StructureShape.new(name: 'BatchDisassociateAnalyticsDataSetRequest')
+    BatchDisassociateAnalyticsDataSetResponse = Shapes::StructureShape.new(name: 'BatchDisassociateAnalyticsDataSetResponse')
+    BatchGetAttachedFileMetadataRequest = Shapes::StructureShape.new(name: 'BatchGetAttachedFileMetadataRequest')
+    BatchGetAttachedFileMetadataResponse = Shapes::StructureShape.new(name: 'BatchGetAttachedFileMetadataResponse')
+    BatchGetFlowAssociationRequest = Shapes::StructureShape.new(name: 'BatchGetFlowAssociationRequest')
+    BatchGetFlowAssociationResponse = Shapes::StructureShape.new(name: 'BatchGetFlowAssociationResponse')
+    BatchPutContactRequest = Shapes::StructureShape.new(name: 'BatchPutContactRequest')
+    BatchPutContactResponse = Shapes::StructureShape.new(name: 'BatchPutContactResponse')
     BehaviorType = Shapes::StringShape.new(name: 'BehaviorType')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BotName = Shapes::StringShape.new(name: 'BotName')
     BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
+    Campaign = Shapes::StructureShape.new(name: 'Campaign')
     CampaignId = Shapes::StringShape.new(name: 'CampaignId')
     Channel = Shapes::StringShape.new(name: 'Channel')
+    ChannelList = Shapes::ListShape.new(name: 'ChannelList')
     ChannelToCountMap = Shapes::MapShape.new(name: 'ChannelToCountMap')
     Channels = Shapes::ListShape.new(name: 'Channels')
     ChatContent = Shapes::StringShape.new(name: 'ChatContent')
     ChatContentType = Shapes::StringShape.new(name: 'ChatContentType')
     ChatDurationInMinutes = Shapes::IntegerShape.new(name: 'ChatDurationInMinutes')
+    ChatEvent = Shapes::StructureShape.new(name: 'ChatEvent')
+    ChatEventType = Shapes::StringShape.new(name: 'ChatEventType')
     ChatMessage = Shapes::StructureShape.new(name: 'ChatMessage')
     ChatParticipantRoleConfig = Shapes::StructureShape.new(name: 'ChatParticipantRoleConfig')
     ChatStreamingConfiguration = Shapes::StructureShape.new(name: 'ChatStreamingConfiguration')
@@ -99,8 +145,16 @@ module Aws::Connect
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CommonNameLength127 = Shapes::StringShape.new(name: 'CommonNameLength127')
     Comparison = Shapes::StringShape.new(name: 'Comparison')
+    ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
+    CompleteAttachedFileUploadRequest = Shapes::StructureShape.new(name: 'CompleteAttachedFileUploadRequest')
+    CompleteAttachedFileUploadResponse = Shapes::StructureShape.new(name: 'CompleteAttachedFileUploadResponse')
     Concurrency = Shapes::IntegerShape.new(name: 'Concurrency')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectionData = Shapes::StructureShape.new(name: 'ConnectionData')
     Contact = Shapes::StructureShape.new(name: 'Contact')
+    ContactAnalysis = Shapes::StructureShape.new(name: 'ContactAnalysis')
+    ContactDataRequest = Shapes::StructureShape.new(name: 'ContactDataRequest')
+    ContactDataRequestList = Shapes::ListShape.new(name: 'ContactDataRequestList')
     ContactFilter = Shapes::StructureShape.new(name: 'ContactFilter')
     ContactFlow = Shapes::StructureShape.new(name: 'ContactFlow')
     ContactFlowContent = Shapes::StringShape.new(name: 'ContactFlowContent')
@@ -111,13 +165,22 @@ module Aws::Connect
     ContactFlowModuleDescription = Shapes::StringShape.new(name: 'ContactFlowModuleDescription')
     ContactFlowModuleId = Shapes::StringShape.new(name: 'ContactFlowModuleId')
     ContactFlowModuleName = Shapes::StringShape.new(name: 'ContactFlowModuleName')
+    ContactFlowModuleSearchConditionList = Shapes::ListShape.new(name: 'ContactFlowModuleSearchConditionList')
+    ContactFlowModuleSearchCriteria = Shapes::StructureShape.new(name: 'ContactFlowModuleSearchCriteria')
+    ContactFlowModuleSearchFilter = Shapes::StructureShape.new(name: 'ContactFlowModuleSearchFilter')
+    ContactFlowModuleSearchSummaryList = Shapes::ListShape.new(name: 'ContactFlowModuleSearchSummaryList')
     ContactFlowModuleState = Shapes::StringShape.new(name: 'ContactFlowModuleState')
     ContactFlowModuleStatus = Shapes::StringShape.new(name: 'ContactFlowModuleStatus')
     ContactFlowModuleSummary = Shapes::StructureShape.new(name: 'ContactFlowModuleSummary')
     ContactFlowModulesSummaryList = Shapes::ListShape.new(name: 'ContactFlowModulesSummaryList')
     ContactFlowName = Shapes::StringShape.new(name: 'ContactFlowName')
     ContactFlowNotPublishedException = Shapes::StructureShape.new(name: 'ContactFlowNotPublishedException')
+    ContactFlowSearchConditionList = Shapes::ListShape.new(name: 'ContactFlowSearchConditionList')
+    ContactFlowSearchCriteria = Shapes::StructureShape.new(name: 'ContactFlowSearchCriteria')
+    ContactFlowSearchFilter = Shapes::StructureShape.new(name: 'ContactFlowSearchFilter')
+    ContactFlowSearchSummaryList = Shapes::ListShape.new(name: 'ContactFlowSearchSummaryList')
     ContactFlowState = Shapes::StringShape.new(name: 'ContactFlowState')
+    ContactFlowStatus = Shapes::StringShape.new(name: 'ContactFlowStatus')
     ContactFlowSummary = Shapes::StructureShape.new(name: 'ContactFlowSummary')
     ContactFlowSummaryList = Shapes::ListShape.new(name: 'ContactFlowSummaryList')
     ContactFlowType = Shapes::StringShape.new(name: 'ContactFlowType')
@@ -126,12 +189,23 @@ module Aws::Connect
     ContactInitiationMethod = Shapes::StringShape.new(name: 'ContactInitiationMethod')
     ContactNotFoundException = Shapes::StructureShape.new(name: 'ContactNotFoundException')
     ContactReferences = Shapes::MapShape.new(name: 'ContactReferences')
+    ContactSearchSummary = Shapes::StructureShape.new(name: 'ContactSearchSummary')
+    ContactSearchSummaryAgentInfo = Shapes::StructureShape.new(name: 'ContactSearchSummaryAgentInfo')
+    ContactSearchSummaryQueueInfo = Shapes::StructureShape.new(name: 'ContactSearchSummaryQueueInfo')
     ContactState = Shapes::StringShape.new(name: 'ContactState')
     ContactStates = Shapes::ListShape.new(name: 'ContactStates')
+    ContactTagKey = Shapes::StringShape.new(name: 'ContactTagKey')
+    ContactTagKeys = Shapes::ListShape.new(name: 'ContactTagKeys')
+    ContactTagMap = Shapes::MapShape.new(name: 'ContactTagMap')
+    ContactTagValue = Shapes::StringShape.new(name: 'ContactTagValue')
+    Contacts = Shapes::ListShape.new(name: 'Contacts')
     Content = Shapes::StringShape.new(name: 'Content')
+    ContentType = Shapes::StringShape.new(name: 'ContentType')
     ControlPlaneTagFilter = Shapes::StructureShape.new(name: 'ControlPlaneTagFilter')
+    ControlPlaneUserAttributeFilter = Shapes::StructureShape.new(name: 'ControlPlaneUserAttributeFilter')
     CreateAgentStatusRequest = Shapes::StructureShape.new(name: 'CreateAgentStatusRequest')
     CreateAgentStatusResponse = Shapes::StructureShape.new(name: 'CreateAgentStatusResponse')
+    CreateCaseActionDefinition = Shapes::StructureShape.new(name: 'CreateCaseActionDefinition')
     CreateContactFlowModuleRequest = Shapes::StructureShape.new(name: 'CreateContactFlowModuleRequest')
     CreateContactFlowModuleResponse = Shapes::StructureShape.new(name: 'CreateContactFlowModuleResponse')
     CreateContactFlowRequest = Shapes::StructureShape.new(name: 'CreateContactFlowRequest')
@@ -146,6 +220,9 @@ module Aws::Connect
     CreateIntegrationAssociationResponse = Shapes::StructureShape.new(name: 'CreateIntegrationAssociationResponse')
     CreateParticipantRequest = Shapes::StructureShape.new(name: 'CreateParticipantRequest')
     CreateParticipantResponse = Shapes::StructureShape.new(name: 'CreateParticipantResponse')
+    CreatePersistentContactAssociationRequest = Shapes::StructureShape.new(name: 'CreatePersistentContactAssociationRequest')
+    CreatePersistentContactAssociationResponse = Shapes::StructureShape.new(name: 'CreatePersistentContactAssociationResponse')
+    CreatePredefinedAttributeRequest = Shapes::StructureShape.new(name: 'CreatePredefinedAttributeRequest')
     CreatePromptRequest = Shapes::StructureShape.new(name: 'CreatePromptRequest')
     CreatePromptResponse = Shapes::StructureShape.new(name: 'CreatePromptResponse')
     CreateQueueRequest = Shapes::StructureShape.new(name: 'CreateQueueRequest')
@@ -175,6 +252,7 @@ module Aws::Connect
     CreateViewVersionResponse = Shapes::StructureShape.new(name: 'CreateViewVersionResponse')
     CreateVocabularyRequest = Shapes::StructureShape.new(name: 'CreateVocabularyRequest')
     CreateVocabularyResponse = Shapes::StructureShape.new(name: 'CreateVocabularyResponse')
+    CreatedByInfo = Shapes::UnionShape.new(name: 'CreatedByInfo')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
     CrossChannelBehavior = Shapes::StructureShape.new(name: 'CrossChannelBehavior')
     CurrentMetric = Shapes::StructureShape.new(name: 'CurrentMetric')
@@ -186,12 +264,19 @@ module Aws::Connect
     CurrentMetricSortCriteria = Shapes::StructureShape.new(name: 'CurrentMetricSortCriteria')
     CurrentMetricSortCriteriaMaxOne = Shapes::ListShape.new(name: 'CurrentMetricSortCriteriaMaxOne')
     CurrentMetrics = Shapes::ListShape.new(name: 'CurrentMetrics')
+    Customer = Shapes::StructureShape.new(name: 'Customer')
+    CustomerQualityMetrics = Shapes::StructureShape.new(name: 'CustomerQualityMetrics')
+    CustomerVoiceActivity = Shapes::StructureShape.new(name: 'CustomerVoiceActivity')
+    DataSetId = Shapes::StringShape.new(name: 'DataSetId')
+    DataSetIds = Shapes::ListShape.new(name: 'DataSetIds')
     DateReference = Shapes::StructureShape.new(name: 'DateReference')
     DeactivateEvaluationFormRequest = Shapes::StructureShape.new(name: 'DeactivateEvaluationFormRequest')
     DeactivateEvaluationFormResponse = Shapes::StructureShape.new(name: 'DeactivateEvaluationFormResponse')
     DefaultVocabulary = Shapes::StructureShape.new(name: 'DefaultVocabulary')
     DefaultVocabularyList = Shapes::ListShape.new(name: 'DefaultVocabularyList')
     Delay = Shapes::IntegerShape.new(name: 'Delay')
+    DeleteAttachedFileRequest = Shapes::StructureShape.new(name: 'DeleteAttachedFileRequest')
+    DeleteAttachedFileResponse = Shapes::StructureShape.new(name: 'DeleteAttachedFileResponse')
     DeleteContactEvaluationRequest = Shapes::StructureShape.new(name: 'DeleteContactEvaluationRequest')
     DeleteContactFlowModuleRequest = Shapes::StructureShape.new(name: 'DeleteContactFlowModuleRequest')
     DeleteContactFlowModuleResponse = Shapes::StructureShape.new(name: 'DeleteContactFlowModuleResponse')
@@ -201,6 +286,7 @@ module Aws::Connect
     DeleteHoursOfOperationRequest = Shapes::StructureShape.new(name: 'DeleteHoursOfOperationRequest')
     DeleteInstanceRequest = Shapes::StructureShape.new(name: 'DeleteInstanceRequest')
     DeleteIntegrationAssociationRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationAssociationRequest')
+    DeletePredefinedAttributeRequest = Shapes::StructureShape.new(name: 'DeletePredefinedAttributeRequest')
     DeletePromptRequest = Shapes::StructureShape.new(name: 'DeletePromptRequest')
     DeleteQueueRequest = Shapes::StructureShape.new(name: 'DeleteQueueRequest')
     DeleteQuickConnectRequest = Shapes::StructureShape.new(name: 'DeleteQuickConnectRequest')
@@ -242,6 +328,8 @@ module Aws::Connect
     DescribeInstanceStorageConfigResponse = Shapes::StructureShape.new(name: 'DescribeInstanceStorageConfigResponse')
     DescribePhoneNumberRequest = Shapes::StructureShape.new(name: 'DescribePhoneNumberRequest')
     DescribePhoneNumberResponse = Shapes::StructureShape.new(name: 'DescribePhoneNumberResponse')
+    DescribePredefinedAttributeRequest = Shapes::StructureShape.new(name: 'DescribePredefinedAttributeRequest')
+    DescribePredefinedAttributeResponse = Shapes::StructureShape.new(name: 'DescribePredefinedAttributeResponse')
     DescribePromptRequest = Shapes::StructureShape.new(name: 'DescribePromptRequest')
     DescribePromptResponse = Shapes::StructureShape.new(name: 'DescribePromptResponse')
     DescribeQueueRequest = Shapes::StructureShape.new(name: 'DescribeQueueRequest')
@@ -268,7 +356,9 @@ module Aws::Connect
     DescribeVocabularyResponse = Shapes::StructureShape.new(name: 'DescribeVocabularyResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     Description250 = Shapes::StringShape.new(name: 'Description250')
+    DestinationId = Shapes::StringShape.new(name: 'DestinationId')
     DestinationNotAllowedException = Shapes::StructureShape.new(name: 'DestinationNotAllowedException')
+    DeviceInfo = Shapes::StructureShape.new(name: 'DeviceInfo')
     Dimensions = Shapes::StructureShape.new(name: 'Dimensions')
     DimensionsV2Key = Shapes::StringShape.new(name: 'DimensionsV2Key')
     DimensionsV2Map = Shapes::MapShape.new(name: 'DimensionsV2Map')
@@ -277,8 +367,11 @@ module Aws::Connect
     DirectoryId = Shapes::StringShape.new(name: 'DirectoryId')
     DirectoryType = Shapes::StringShape.new(name: 'DirectoryType')
     DirectoryUserId = Shapes::StringShape.new(name: 'DirectoryUserId')
+    DisassociateAnalyticsDataSetRequest = Shapes::StructureShape.new(name: 'DisassociateAnalyticsDataSetRequest')
     DisassociateApprovedOriginRequest = Shapes::StructureShape.new(name: 'DisassociateApprovedOriginRequest')
     DisassociateBotRequest = Shapes::StructureShape.new(name: 'DisassociateBotRequest')
+    DisassociateFlowRequest = Shapes::StructureShape.new(name: 'DisassociateFlowRequest')
+    DisassociateFlowResponse = Shapes::StructureShape.new(name: 'DisassociateFlowResponse')
     DisassociateInstanceStorageConfigRequest = Shapes::StructureShape.new(name: 'DisassociateInstanceStorageConfigRequest')
     DisassociateLambdaFunctionRequest = Shapes::StructureShape.new(name: 'DisassociateLambdaFunctionRequest')
     DisassociateLexBotRequest = Shapes::StructureShape.new(name: 'DisassociateLexBotRequest')
@@ -288,16 +381,32 @@ module Aws::Connect
     DisassociateSecurityKeyRequest = Shapes::StructureShape.new(name: 'DisassociateSecurityKeyRequest')
     DisassociateTrafficDistributionGroupUserRequest = Shapes::StructureShape.new(name: 'DisassociateTrafficDistributionGroupUserRequest')
     DisassociateTrafficDistributionGroupUserResponse = Shapes::StructureShape.new(name: 'DisassociateTrafficDistributionGroupUserResponse')
+    DisassociateUserProficienciesRequest = Shapes::StructureShape.new(name: 'DisassociateUserProficienciesRequest')
+    DisconnectDetails = Shapes::StructureShape.new(name: 'DisconnectDetails')
+    DisconnectReason = Shapes::StructureShape.new(name: 'DisconnectReason')
+    DisconnectReasonCode = Shapes::StringShape.new(name: 'DisconnectReasonCode')
     DismissUserContactRequest = Shapes::StructureShape.new(name: 'DismissUserContactRequest')
     DismissUserContactResponse = Shapes::StructureShape.new(name: 'DismissUserContactResponse')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     Distribution = Shapes::StructureShape.new(name: 'Distribution')
     DistributionList = Shapes::ListShape.new(name: 'DistributionList')
+    Double = Shapes::FloatShape.new(name: 'Double')
+    DownloadUrlMetadata = Shapes::StructureShape.new(name: 'DownloadUrlMetadata')
     DuplicateResourceException = Shapes::StructureShape.new(name: 'DuplicateResourceException')
+    DurationInSeconds = Shapes::IntegerShape.new(name: 'DurationInSeconds')
     Email = Shapes::StringShape.new(name: 'Email')
     EmailReference = Shapes::StructureShape.new(name: 'EmailReference')
+    EmptyFieldValue = Shapes::StructureShape.new(name: 'EmptyFieldValue')
     EncryptionConfig = Shapes::StructureShape.new(name: 'EncryptionConfig')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
+    EndAssociatedTasksActionDefinition = Shapes::StructureShape.new(name: 'EndAssociatedTasksActionDefinition')
+    Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
+    EndpointAddress = Shapes::StringShape.new(name: 'EndpointAddress')
+    EndpointType = Shapes::StringShape.new(name: 'EndpointType')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ErrorResult = Shapes::StructureShape.new(name: 'ErrorResult')
+    ErrorResults = Shapes::ListShape.new(name: 'ErrorResults')
     Evaluation = Shapes::StructureShape.new(name: 'Evaluation')
     EvaluationAnswerData = Shapes::UnionShape.new(name: 'EvaluationAnswerData')
     EvaluationAnswerDataNumericValue = Shapes::FloatShape.new(name: 'EvaluationAnswerDataNumericValue')
@@ -309,6 +418,7 @@ module Aws::Connect
     EvaluationForm = Shapes::StructureShape.new(name: 'EvaluationForm')
     EvaluationFormContent = Shapes::StructureShape.new(name: 'EvaluationFormContent')
     EvaluationFormDescription = Shapes::StringShape.new(name: 'EvaluationFormDescription')
+    EvaluationFormId = Shapes::StringShape.new(name: 'EvaluationFormId')
     EvaluationFormItem = Shapes::UnionShape.new(name: 'EvaluationFormItem')
     EvaluationFormItemWeight = Shapes::FloatShape.new(name: 'EvaluationFormItemWeight')
     EvaluationFormItemsList = Shapes::ListShape.new(name: 'EvaluationFormItemsList')
@@ -355,12 +465,34 @@ module Aws::Connect
     EventBridgeActionDefinition = Shapes::StructureShape.new(name: 'EventBridgeActionDefinition')
     EventBridgeActionName = Shapes::StringShape.new(name: 'EventBridgeActionName')
     EventSourceName = Shapes::StringShape.new(name: 'EventSourceName')
+    Expiry = Shapes::StructureShape.new(name: 'Expiry')
+    Expression = Shapes::StructureShape.new(name: 'Expression')
+    Expressions = Shapes::ListShape.new(name: 'Expressions')
+    FailedRequest = Shapes::StructureShape.new(name: 'FailedRequest')
+    FailedRequestList = Shapes::ListShape.new(name: 'FailedRequestList')
+    FailureReasonCode = Shapes::StringShape.new(name: 'FailureReasonCode')
+    FieldStringValue = Shapes::StringShape.new(name: 'FieldStringValue')
+    FieldValue = Shapes::StructureShape.new(name: 'FieldValue')
+    FieldValueId = Shapes::StringShape.new(name: 'FieldValueId')
+    FieldValueUnion = Shapes::StructureShape.new(name: 'FieldValueUnion')
+    FieldValues = Shapes::ListShape.new(name: 'FieldValues')
+    FileId = Shapes::StringShape.new(name: 'FileId')
+    FileIdList = Shapes::ListShape.new(name: 'FileIdList')
+    FileName = Shapes::StringShape.new(name: 'FileName')
+    FileSizeInBytes = Shapes::IntegerShape.new(name: 'FileSizeInBytes')
+    FileStatusType = Shapes::StringShape.new(name: 'FileStatusType')
+    FileUseCaseType = Shapes::StringShape.new(name: 'FileUseCaseType')
     FilterV2 = Shapes::StructureShape.new(name: 'FilterV2')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
     Filters = Shapes::StructureShape.new(name: 'Filters')
     FiltersV2List = Shapes::ListShape.new(name: 'FiltersV2List')
+    FlowAssociationResourceType = Shapes::StringShape.new(name: 'FlowAssociationResourceType')
+    FlowAssociationSummary = Shapes::StructureShape.new(name: 'FlowAssociationSummary')
+    FlowAssociationSummaryList = Shapes::ListShape.new(name: 'FlowAssociationSummaryList')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     FunctionArnsList = Shapes::ListShape.new(name: 'FunctionArnsList')
+    GetAttachedFileRequest = Shapes::StructureShape.new(name: 'GetAttachedFileRequest')
+    GetAttachedFileResponse = Shapes::StructureShape.new(name: 'GetAttachedFileResponse')
     GetContactAttributesRequest = Shapes::StructureShape.new(name: 'GetContactAttributesRequest')
     GetContactAttributesResponse = Shapes::StructureShape.new(name: 'GetContactAttributesResponse')
     GetCurrentMetricDataRequest = Shapes::StructureShape.new(name: 'GetCurrentMetricDataRequest')
@@ -369,6 +501,8 @@ module Aws::Connect
     GetCurrentUserDataResponse = Shapes::StructureShape.new(name: 'GetCurrentUserDataResponse')
     GetFederationTokenRequest = Shapes::StructureShape.new(name: 'GetFederationTokenRequest')
     GetFederationTokenResponse = Shapes::StructureShape.new(name: 'GetFederationTokenResponse')
+    GetFlowAssociationRequest = Shapes::StructureShape.new(name: 'GetFlowAssociationRequest')
+    GetFlowAssociationResponse = Shapes::StructureShape.new(name: 'GetFlowAssociationResponse')
     GetMetricDataRequest = Shapes::StructureShape.new(name: 'GetMetricDataRequest')
     GetMetricDataResponse = Shapes::StructureShape.new(name: 'GetMetricDataResponse')
     GetMetricDataV2Request = Shapes::StructureShape.new(name: 'GetMetricDataV2Request')
@@ -386,17 +520,21 @@ module Aws::Connect
     HierarchyGroup = Shapes::StructureShape.new(name: 'HierarchyGroup')
     HierarchyGroupCondition = Shapes::StructureShape.new(name: 'HierarchyGroupCondition')
     HierarchyGroupId = Shapes::StringShape.new(name: 'HierarchyGroupId')
+    HierarchyGroupIdList = Shapes::ListShape.new(name: 'HierarchyGroupIdList')
     HierarchyGroupMatchType = Shapes::StringShape.new(name: 'HierarchyGroupMatchType')
     HierarchyGroupName = Shapes::StringShape.new(name: 'HierarchyGroupName')
     HierarchyGroupSummary = Shapes::StructureShape.new(name: 'HierarchyGroupSummary')
     HierarchyGroupSummaryList = Shapes::ListShape.new(name: 'HierarchyGroupSummaryList')
     HierarchyGroupSummaryReference = Shapes::StructureShape.new(name: 'HierarchyGroupSummaryReference')
+    HierarchyGroups = Shapes::StructureShape.new(name: 'HierarchyGroups')
     HierarchyLevel = Shapes::StructureShape.new(name: 'HierarchyLevel')
     HierarchyLevelId = Shapes::StringShape.new(name: 'HierarchyLevelId')
     HierarchyLevelName = Shapes::StringShape.new(name: 'HierarchyLevelName')
     HierarchyLevelUpdate = Shapes::StructureShape.new(name: 'HierarchyLevelUpdate')
     HierarchyPath = Shapes::StructureShape.new(name: 'HierarchyPath')
     HierarchyPathReference = Shapes::StructureShape.new(name: 'HierarchyPathReference')
+    HierarchyRestrictedResourceList = Shapes::ListShape.new(name: 'HierarchyRestrictedResourceList')
+    HierarchyRestrictedResourceName = Shapes::StringShape.new(name: 'HierarchyRestrictedResourceName')
     HierarchyStructure = Shapes::StructureShape.new(name: 'HierarchyStructure')
     HierarchyStructureUpdate = Shapes::StructureShape.new(name: 'HierarchyStructureUpdate')
     HistoricalMetric = Shapes::StructureShape.new(name: 'HistoricalMetric')
@@ -424,7 +562,11 @@ module Aws::Connect
     HoursOfOperationTimeSlice = Shapes::StructureShape.new(name: 'HoursOfOperationTimeSlice')
     ISO8601Datetime = Shapes::StringShape.new(name: 'ISO8601Datetime')
     IdempotencyException = Shapes::StructureShape.new(name: 'IdempotencyException')
+    ImportPhoneNumberRequest = Shapes::StructureShape.new(name: 'ImportPhoneNumberRequest')
+    ImportPhoneNumberResponse = Shapes::StructureShape.new(name: 'ImportPhoneNumberResponse')
     InboundCallsEnabled = Shapes::BooleanShape.new(name: 'InboundCallsEnabled')
+    Index = Shapes::IntegerShape.new(name: 'Index')
+    InitiationMethodList = Shapes::ListShape.new(name: 'InitiationMethodList')
     Instance = Shapes::StructureShape.new(name: 'Instance')
     InstanceArn = Shapes::StringShape.new(name: 'InstanceArn')
     InstanceAttributeType = Shapes::StringShape.new(name: 'InstanceAttributeType')
@@ -451,8 +593,10 @@ module Aws::Connect
     InvalidContactFlowModuleException = Shapes::StructureShape.new(name: 'InvalidContactFlowModuleException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    InvalidRequestExceptionReason = Shapes::UnionShape.new(name: 'InvalidRequestExceptionReason')
     InvisibleFieldInfo = Shapes::StructureShape.new(name: 'InvisibleFieldInfo')
     InvisibleTaskTemplateFields = Shapes::ListShape.new(name: 'InvisibleTaskTemplateFields')
+    JoinToken = Shapes::StringShape.new(name: 'JoinToken')
     KeyId = Shapes::StringShape.new(name: 'KeyId')
     KinesisFirehoseConfig = Shapes::StructureShape.new(name: 'KinesisFirehoseConfig')
     KinesisStreamConfig = Shapes::StructureShape.new(name: 'KinesisStreamConfig')
@@ -468,6 +612,8 @@ module Aws::Connect
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAgentStatusRequest = Shapes::StructureShape.new(name: 'ListAgentStatusRequest')
     ListAgentStatusResponse = Shapes::StructureShape.new(name: 'ListAgentStatusResponse')
+    ListAnalyticsDataAssociationsRequest = Shapes::StructureShape.new(name: 'ListAnalyticsDataAssociationsRequest')
+    ListAnalyticsDataAssociationsResponse = Shapes::StructureShape.new(name: 'ListAnalyticsDataAssociationsResponse')
     ListApprovedOriginsRequest = Shapes::StructureShape.new(name: 'ListApprovedOriginsRequest')
     ListApprovedOriginsResponse = Shapes::StructureShape.new(name: 'ListApprovedOriginsResponse')
     ListBotsRequest = Shapes::StructureShape.new(name: 'ListBotsRequest')
@@ -486,6 +632,9 @@ module Aws::Connect
     ListEvaluationFormVersionsResponse = Shapes::StructureShape.new(name: 'ListEvaluationFormVersionsResponse')
     ListEvaluationFormsRequest = Shapes::StructureShape.new(name: 'ListEvaluationFormsRequest')
     ListEvaluationFormsResponse = Shapes::StructureShape.new(name: 'ListEvaluationFormsResponse')
+    ListFlowAssociationResourceType = Shapes::StringShape.new(name: 'ListFlowAssociationResourceType')
+    ListFlowAssociationsRequest = Shapes::StructureShape.new(name: 'ListFlowAssociationsRequest')
+    ListFlowAssociationsResponse = Shapes::StructureShape.new(name: 'ListFlowAssociationsResponse')
     ListHoursOfOperationsRequest = Shapes::StructureShape.new(name: 'ListHoursOfOperationsRequest')
     ListHoursOfOperationsResponse = Shapes::StructureShape.new(name: 'ListHoursOfOperationsResponse')
     ListInstanceAttributesRequest = Shapes::StructureShape.new(name: 'ListInstanceAttributesRequest')
@@ -506,6 +655,8 @@ module Aws::Connect
     ListPhoneNumbersSummaryList = Shapes::ListShape.new(name: 'ListPhoneNumbersSummaryList')
     ListPhoneNumbersV2Request = Shapes::StructureShape.new(name: 'ListPhoneNumbersV2Request')
     ListPhoneNumbersV2Response = Shapes::StructureShape.new(name: 'ListPhoneNumbersV2Response')
+    ListPredefinedAttributesRequest = Shapes::StructureShape.new(name: 'ListPredefinedAttributesRequest')
+    ListPredefinedAttributesResponse = Shapes::StructureShape.new(name: 'ListPredefinedAttributesResponse')
     ListPromptsRequest = Shapes::StructureShape.new(name: 'ListPromptsRequest')
     ListPromptsResponse = Shapes::StructureShape.new(name: 'ListPromptsResponse')
     ListQueueQuickConnectsRequest = Shapes::StructureShape.new(name: 'ListQueueQuickConnectsRequest')
@@ -514,6 +665,8 @@ module Aws::Connect
     ListQueuesResponse = Shapes::StructureShape.new(name: 'ListQueuesResponse')
     ListQuickConnectsRequest = Shapes::StructureShape.new(name: 'ListQuickConnectsRequest')
     ListQuickConnectsResponse = Shapes::StructureShape.new(name: 'ListQuickConnectsResponse')
+    ListRealtimeContactAnalysisSegmentsV2Request = Shapes::StructureShape.new(name: 'ListRealtimeContactAnalysisSegmentsV2Request')
+    ListRealtimeContactAnalysisSegmentsV2Response = Shapes::StructureShape.new(name: 'ListRealtimeContactAnalysisSegmentsV2Response')
     ListRoutingProfileQueuesRequest = Shapes::StructureShape.new(name: 'ListRoutingProfileQueuesRequest')
     ListRoutingProfileQueuesResponse = Shapes::StructureShape.new(name: 'ListRoutingProfileQueuesResponse')
     ListRoutingProfilesRequest = Shapes::StructureShape.new(name: 'ListRoutingProfilesRequest')
@@ -540,6 +693,8 @@ module Aws::Connect
     ListUseCasesResponse = Shapes::StructureShape.new(name: 'ListUseCasesResponse')
     ListUserHierarchyGroupsRequest = Shapes::StructureShape.new(name: 'ListUserHierarchyGroupsRequest')
     ListUserHierarchyGroupsResponse = Shapes::StructureShape.new(name: 'ListUserHierarchyGroupsResponse')
+    ListUserProficienciesRequest = Shapes::StructureShape.new(name: 'ListUserProficienciesRequest')
+    ListUserProficienciesResponse = Shapes::StructureShape.new(name: 'ListUserProficienciesResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
     ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
     ListViewVersionsRequest = Shapes::StructureShape.new(name: 'ListViewVersionsRequest')
@@ -553,12 +708,20 @@ module Aws::Connect
     MaxResult2 = Shapes::IntegerShape.new(name: 'MaxResult2')
     MaxResult200 = Shapes::IntegerShape.new(name: 'MaxResult200')
     MaxResult25 = Shapes::IntegerShape.new(name: 'MaxResult25')
+    MaxResult500 = Shapes::IntegerShape.new(name: 'MaxResult500')
     MaxResult7 = Shapes::IntegerShape.new(name: 'MaxResult7')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumResultReturnedException = Shapes::StructureShape.new(name: 'MaximumResultReturnedException')
     MediaConcurrencies = Shapes::ListShape.new(name: 'MediaConcurrencies')
     MediaConcurrency = Shapes::StructureShape.new(name: 'MediaConcurrency')
+    MediaPlacement = Shapes::StructureShape.new(name: 'MediaPlacement')
+    MediaRegion = Shapes::StringShape.new(name: 'MediaRegion')
+    Meeting = Shapes::StructureShape.new(name: 'Meeting')
+    MeetingFeatureStatus = Shapes::StringShape.new(name: 'MeetingFeatureStatus')
+    MeetingFeaturesConfiguration = Shapes::StructureShape.new(name: 'MeetingFeaturesConfiguration')
+    MeetingId = Shapes::StringShape.new(name: 'MeetingId')
     Message = Shapes::StringShape.new(name: 'Message')
+    MetadataUrl = Shapes::StringShape.new(name: 'MetadataUrl')
     MetricDataCollectionsV2 = Shapes::ListShape.new(name: 'MetricDataCollectionsV2')
     MetricDataV2 = Shapes::StructureShape.new(name: 'MetricDataV2')
     MetricFilterV2 = Shapes::StructureShape.new(name: 'MetricFilterV2')
@@ -577,6 +740,8 @@ module Aws::Connect
     Name = Shapes::StringShape.new(name: 'Name')
     Name128 = Shapes::StringShape.new(name: 'Name128')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
+    NewChatCreated = Shapes::BooleanShape.new(name: 'NewChatCreated')
+    NewSessionDetails = Shapes::StructureShape.new(name: 'NewSessionDetails')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NextToken2500 = Shapes::StringShape.new(name: 'NextToken2500')
     NotificationContentType = Shapes::StringShape.new(name: 'NotificationContentType')
@@ -585,13 +750,16 @@ module Aws::Connect
     NumberReference = Shapes::StructureShape.new(name: 'NumberReference')
     NumericQuestionPropertyAutomationLabel = Shapes::StringShape.new(name: 'NumericQuestionPropertyAutomationLabel')
     NumericQuestionPropertyValueAutomation = Shapes::StructureShape.new(name: 'NumericQuestionPropertyValueAutomation')
+    OperatingSystem = Shapes::StringShape.new(name: 'OperatingSystem')
     Origin = Shapes::StringShape.new(name: 'Origin')
     OriginsList = Shapes::ListShape.new(name: 'OriginsList')
     OutboundCallerConfig = Shapes::StructureShape.new(name: 'OutboundCallerConfig')
     OutboundCallerIdName = Shapes::StringShape.new(name: 'OutboundCallerIdName')
     OutboundCallsEnabled = Shapes::BooleanShape.new(name: 'OutboundCallsEnabled')
     OutboundContactNotPermittedException = Shapes::StructureShape.new(name: 'OutboundContactNotPermittedException')
+    OutputTypeNotFoundException = Shapes::StructureShape.new(name: 'OutputTypeNotFoundException')
     PEM = Shapes::StringShape.new(name: 'PEM')
+    ParticipantCapabilities = Shapes::StructureShape.new(name: 'ParticipantCapabilities')
     ParticipantDetails = Shapes::StructureShape.new(name: 'ParticipantDetails')
     ParticipantDetailsToAdd = Shapes::StructureShape.new(name: 'ParticipantDetailsToAdd')
     ParticipantId = Shapes::StringShape.new(name: 'ParticipantId')
@@ -605,6 +773,8 @@ module Aws::Connect
     ParticipantToken = Shapes::StringShape.new(name: 'ParticipantToken')
     ParticipantTokenCredentials = Shapes::StructureShape.new(name: 'ParticipantTokenCredentials')
     Password = Shapes::StringShape.new(name: 'Password')
+    PauseContactRequest = Shapes::StructureShape.new(name: 'PauseContactRequest')
+    PauseContactResponse = Shapes::StructureShape.new(name: 'PauseContactResponse')
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
     Permission = Shapes::StringShape.new(name: 'Permission')
     PermissionsList = Shapes::ListShape.new(name: 'PermissionsList')
@@ -624,11 +794,28 @@ module Aws::Connect
     PhoneNumberWorkflowMessage = Shapes::StringShape.new(name: 'PhoneNumberWorkflowMessage')
     PhoneNumberWorkflowStatus = Shapes::StringShape.new(name: 'PhoneNumberWorkflowStatus')
     PhoneType = Shapes::StringShape.new(name: 'PhoneType')
+    PlatformName = Shapes::StringShape.new(name: 'PlatformName')
+    PlatformVersion = Shapes::StringShape.new(name: 'PlatformVersion')
+    PotentialAudioQualityIssue = Shapes::StringShape.new(name: 'PotentialAudioQualityIssue')
+    PotentialAudioQualityIssues = Shapes::ListShape.new(name: 'PotentialAudioQualityIssues')
+    PotentialDisconnectIssue = Shapes::StringShape.new(name: 'PotentialDisconnectIssue')
+    PredefinedAttribute = Shapes::StructureShape.new(name: 'PredefinedAttribute')
+    PredefinedAttributeName = Shapes::StringShape.new(name: 'PredefinedAttributeName')
+    PredefinedAttributeSearchConditionList = Shapes::ListShape.new(name: 'PredefinedAttributeSearchConditionList')
+    PredefinedAttributeSearchCriteria = Shapes::StructureShape.new(name: 'PredefinedAttributeSearchCriteria')
+    PredefinedAttributeSearchSummaryList = Shapes::ListShape.new(name: 'PredefinedAttributeSearchSummaryList')
+    PredefinedAttributeStringValue = Shapes::StringShape.new(name: 'PredefinedAttributeStringValue')
+    PredefinedAttributeStringValuesList = Shapes::ListShape.new(name: 'PredefinedAttributeStringValuesList')
+    PredefinedAttributeSummary = Shapes::StructureShape.new(name: 'PredefinedAttributeSummary')
+    PredefinedAttributeSummaryList = Shapes::ListShape.new(name: 'PredefinedAttributeSummaryList')
+    PredefinedAttributeValues = Shapes::UnionShape.new(name: 'PredefinedAttributeValues')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
     Priority = Shapes::IntegerShape.new(name: 'Priority')
     ProblemDetail = Shapes::StructureShape.new(name: 'ProblemDetail')
     ProblemMessageString = Shapes::StringShape.new(name: 'ProblemMessageString')
     Problems = Shapes::ListShape.new(name: 'Problems')
+    ProficiencyLevel = Shapes::FloatShape.new(name: 'ProficiencyLevel')
+    ProficiencyValue = Shapes::StringShape.new(name: 'ProficiencyValue')
     Prompt = Shapes::StructureShape.new(name: 'Prompt')
     PromptDescription = Shapes::StringShape.new(name: 'PromptDescription')
     PromptId = Shapes::StringShape.new(name: 'PromptId')
@@ -646,12 +833,15 @@ module Aws::Connect
     PropertyValidationExceptionReason = Shapes::StringShape.new(name: 'PropertyValidationExceptionReason')
     PutUserStatusRequest = Shapes::StructureShape.new(name: 'PutUserStatusRequest')
     PutUserStatusResponse = Shapes::StructureShape.new(name: 'PutUserStatusResponse')
+    QualityMetrics = Shapes::StructureShape.new(name: 'QualityMetrics')
     Queue = Shapes::StructureShape.new(name: 'Queue')
     QueueDescription = Shapes::StringShape.new(name: 'QueueDescription')
     QueueId = Shapes::StringShape.new(name: 'QueueId')
+    QueueIdList = Shapes::ListShape.new(name: 'QueueIdList')
     QueueInfo = Shapes::StructureShape.new(name: 'QueueInfo')
     QueueMaxContacts = Shapes::IntegerShape.new(name: 'QueueMaxContacts')
     QueueName = Shapes::StringShape.new(name: 'QueueName')
+    QueuePriority = Shapes::IntegerShape.new(name: 'QueuePriority')
     QueueQuickConnectConfig = Shapes::StructureShape.new(name: 'QueueQuickConnectConfig')
     QueueReference = Shapes::StructureShape.new(name: 'QueueReference')
     QueueSearchConditionList = Shapes::ListShape.new(name: 'QueueSearchConditionList')
@@ -661,6 +851,7 @@ module Aws::Connect
     QueueStatus = Shapes::StringShape.new(name: 'QueueStatus')
     QueueSummary = Shapes::StructureShape.new(name: 'QueueSummary')
     QueueSummaryList = Shapes::ListShape.new(name: 'QueueSummaryList')
+    QueueTimeAdjustmentSeconds = Shapes::IntegerShape.new(name: 'QueueTimeAdjustmentSeconds')
     QueueType = Shapes::StringShape.new(name: 'QueueType')
     QueueTypes = Shapes::ListShape.new(name: 'QueueTypes')
     Queues = Shapes::ListShape.new(name: 'Queues')
@@ -680,6 +871,42 @@ module Aws::Connect
     QuickConnectsList = Shapes::ListShape.new(name: 'QuickConnectsList')
     ReadOnlyFieldInfo = Shapes::StructureShape.new(name: 'ReadOnlyFieldInfo')
     ReadOnlyTaskTemplateFields = Shapes::ListShape.new(name: 'ReadOnlyTaskTemplateFields')
+    RealTimeContactAnalysisAttachment = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisAttachment')
+    RealTimeContactAnalysisAttachments = Shapes::ListShape.new(name: 'RealTimeContactAnalysisAttachments')
+    RealTimeContactAnalysisCategoryDetails = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisCategoryDetails')
+    RealTimeContactAnalysisCategoryName = Shapes::StringShape.new(name: 'RealTimeContactAnalysisCategoryName')
+    RealTimeContactAnalysisCharacterInterval = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisCharacterInterval')
+    RealTimeContactAnalysisCharacterIntervals = Shapes::ListShape.new(name: 'RealTimeContactAnalysisCharacterIntervals')
+    RealTimeContactAnalysisContentType = Shapes::StringShape.new(name: 'RealTimeContactAnalysisContentType')
+    RealTimeContactAnalysisEventType = Shapes::StringShape.new(name: 'RealTimeContactAnalysisEventType')
+    RealTimeContactAnalysisId256 = Shapes::StringShape.new(name: 'RealTimeContactAnalysisId256')
+    RealTimeContactAnalysisIssueDetected = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisIssueDetected')
+    RealTimeContactAnalysisIssuesDetected = Shapes::ListShape.new(name: 'RealTimeContactAnalysisIssuesDetected')
+    RealTimeContactAnalysisMatchedDetails = Shapes::MapShape.new(name: 'RealTimeContactAnalysisMatchedDetails')
+    RealTimeContactAnalysisOffset = Shapes::IntegerShape.new(name: 'RealTimeContactAnalysisOffset')
+    RealTimeContactAnalysisOutputType = Shapes::StringShape.new(name: 'RealTimeContactAnalysisOutputType')
+    RealTimeContactAnalysisPointOfInterest = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisPointOfInterest')
+    RealTimeContactAnalysisPointsOfInterest = Shapes::ListShape.new(name: 'RealTimeContactAnalysisPointsOfInterest')
+    RealTimeContactAnalysisSegmentAttachments = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentAttachments')
+    RealTimeContactAnalysisSegmentCategories = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentCategories')
+    RealTimeContactAnalysisSegmentEvent = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentEvent')
+    RealTimeContactAnalysisSegmentIssues = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentIssues')
+    RealTimeContactAnalysisSegmentTranscript = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentTranscript')
+    RealTimeContactAnalysisSegmentType = Shapes::StringShape.new(name: 'RealTimeContactAnalysisSegmentType')
+    RealTimeContactAnalysisSegmentTypes = Shapes::ListShape.new(name: 'RealTimeContactAnalysisSegmentTypes')
+    RealTimeContactAnalysisSentimentLabel = Shapes::StringShape.new(name: 'RealTimeContactAnalysisSentimentLabel')
+    RealTimeContactAnalysisStatus = Shapes::StringShape.new(name: 'RealTimeContactAnalysisStatus')
+    RealTimeContactAnalysisSupportedChannel = Shapes::StringShape.new(name: 'RealTimeContactAnalysisSupportedChannel')
+    RealTimeContactAnalysisTimeData = Shapes::UnionShape.new(name: 'RealTimeContactAnalysisTimeData')
+    RealTimeContactAnalysisTimeInstant = Shapes::TimestampShape.new(name: 'RealTimeContactAnalysisTimeInstant', timestampFormat: "iso8601")
+    RealTimeContactAnalysisTranscriptContent = Shapes::StringShape.new(name: 'RealTimeContactAnalysisTranscriptContent')
+    RealTimeContactAnalysisTranscriptItemRedaction = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisTranscriptItemRedaction')
+    RealTimeContactAnalysisTranscriptItemWithCharacterOffsets = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisTranscriptItemWithCharacterOffsets')
+    RealTimeContactAnalysisTranscriptItemWithContent = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisTranscriptItemWithContent')
+    RealTimeContactAnalysisTranscriptItemsWithCharacterOffsets = Shapes::ListShape.new(name: 'RealTimeContactAnalysisTranscriptItemsWithCharacterOffsets')
+    RealTimeContactAnalysisTranscriptItemsWithContent = Shapes::ListShape.new(name: 'RealTimeContactAnalysisTranscriptItemsWithContent')
+    RealtimeContactAnalysisSegment = Shapes::UnionShape.new(name: 'RealtimeContactAnalysisSegment')
+    RealtimeContactAnalysisSegments = Shapes::ListShape.new(name: 'RealtimeContactAnalysisSegments')
     Reference = Shapes::StructureShape.new(name: 'Reference')
     ReferenceId = Shapes::StringShape.new(name: 'ReferenceId')
     ReferenceKey = Shapes::StringShape.new(name: 'ReferenceKey')
@@ -689,10 +916,12 @@ module Aws::Connect
     ReferenceType = Shapes::StringShape.new(name: 'ReferenceType')
     ReferenceTypes = Shapes::ListShape.new(name: 'ReferenceTypes')
     ReferenceValue = Shapes::StringShape.new(name: 'ReferenceValue')
+    RegionName = Shapes::StringShape.new(name: 'RegionName')
     RehydrationType = Shapes::StringShape.new(name: 'RehydrationType')
     ReleasePhoneNumberRequest = Shapes::StructureShape.new(name: 'ReleasePhoneNumberRequest')
     ReplicateInstanceRequest = Shapes::StructureShape.new(name: 'ReplicateInstanceRequest')
     ReplicateInstanceResponse = Shapes::StructureShape.new(name: 'ReplicateInstanceResponse')
+    RequestIdentifier = Shapes::StringShape.new(name: 'RequestIdentifier')
     RequiredFieldInfo = Shapes::StructureShape.new(name: 'RequiredFieldInfo')
     RequiredTaskTemplateFields = Shapes::ListShape.new(name: 'RequiredTaskTemplateFields')
     ResourceArnOrId = Shapes::StringShape.new(name: 'ResourceArnOrId')
@@ -706,6 +935,12 @@ module Aws::Connect
     ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
     ResumeContactRecordingRequest = Shapes::StructureShape.new(name: 'ResumeContactRecordingRequest')
     ResumeContactRecordingResponse = Shapes::StructureShape.new(name: 'ResumeContactRecordingResponse')
+    ResumeContactRequest = Shapes::StructureShape.new(name: 'ResumeContactRequest')
+    ResumeContactResponse = Shapes::StructureShape.new(name: 'ResumeContactResponse')
+    RoutingCriteria = Shapes::StructureShape.new(name: 'RoutingCriteria')
+    RoutingCriteriaStepStatus = Shapes::StringShape.new(name: 'RoutingCriteriaStepStatus')
+    RoutingExpression = Shapes::StringShape.new(name: 'RoutingExpression')
+    RoutingExpressions = Shapes::ListShape.new(name: 'RoutingExpressions')
     RoutingProfile = Shapes::StructureShape.new(name: 'RoutingProfile')
     RoutingProfileDescription = Shapes::StringShape.new(name: 'RoutingProfileDescription')
     RoutingProfileId = Shapes::StringShape.new(name: 'RoutingProfileId')
@@ -738,8 +973,20 @@ module Aws::Connect
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SearchAvailablePhoneNumbersRequest = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersRequest')
     SearchAvailablePhoneNumbersResponse = Shapes::StructureShape.new(name: 'SearchAvailablePhoneNumbersResponse')
+    SearchContactFlowModulesRequest = Shapes::StructureShape.new(name: 'SearchContactFlowModulesRequest')
+    SearchContactFlowModulesResponse = Shapes::StructureShape.new(name: 'SearchContactFlowModulesResponse')
+    SearchContactFlowsRequest = Shapes::StructureShape.new(name: 'SearchContactFlowsRequest')
+    SearchContactFlowsResponse = Shapes::StructureShape.new(name: 'SearchContactFlowsResponse')
+    SearchContactsMatchType = Shapes::StringShape.new(name: 'SearchContactsMatchType')
+    SearchContactsRequest = Shapes::StructureShape.new(name: 'SearchContactsRequest')
+    SearchContactsResponse = Shapes::StructureShape.new(name: 'SearchContactsResponse')
+    SearchContactsTimeRange = Shapes::StructureShape.new(name: 'SearchContactsTimeRange')
+    SearchContactsTimeRangeType = Shapes::StringShape.new(name: 'SearchContactsTimeRangeType')
+    SearchCriteria = Shapes::StructureShape.new(name: 'SearchCriteria')
     SearchHoursOfOperationsRequest = Shapes::StructureShape.new(name: 'SearchHoursOfOperationsRequest')
     SearchHoursOfOperationsResponse = Shapes::StructureShape.new(name: 'SearchHoursOfOperationsResponse')
+    SearchPredefinedAttributesRequest = Shapes::StructureShape.new(name: 'SearchPredefinedAttributesRequest')
+    SearchPredefinedAttributesResponse = Shapes::StructureShape.new(name: 'SearchPredefinedAttributesResponse')
     SearchPromptsRequest = Shapes::StructureShape.new(name: 'SearchPromptsRequest')
     SearchPromptsResponse = Shapes::StructureShape.new(name: 'SearchPromptsResponse')
     SearchQueuesRequest = Shapes::StructureShape.new(name: 'SearchQueuesRequest')
@@ -752,10 +999,18 @@ module Aws::Connect
     SearchRoutingProfilesResponse = Shapes::StructureShape.new(name: 'SearchRoutingProfilesResponse')
     SearchSecurityProfilesRequest = Shapes::StructureShape.new(name: 'SearchSecurityProfilesRequest')
     SearchSecurityProfilesResponse = Shapes::StructureShape.new(name: 'SearchSecurityProfilesResponse')
+    SearchText = Shapes::StringShape.new(name: 'SearchText')
+    SearchTextList = Shapes::ListShape.new(name: 'SearchTextList')
     SearchUsersRequest = Shapes::StructureShape.new(name: 'SearchUsersRequest')
     SearchUsersResponse = Shapes::StructureShape.new(name: 'SearchUsersResponse')
     SearchVocabulariesRequest = Shapes::StructureShape.new(name: 'SearchVocabulariesRequest')
     SearchVocabulariesResponse = Shapes::StructureShape.new(name: 'SearchVocabulariesResponse')
+    SearchableContactAttributeKey = Shapes::StringShape.new(name: 'SearchableContactAttributeKey')
+    SearchableContactAttributeValue = Shapes::StringShape.new(name: 'SearchableContactAttributeValue')
+    SearchableContactAttributeValueList = Shapes::ListShape.new(name: 'SearchableContactAttributeValueList')
+    SearchableContactAttributes = Shapes::StructureShape.new(name: 'SearchableContactAttributes')
+    SearchableContactAttributesCriteria = Shapes::StructureShape.new(name: 'SearchableContactAttributesCriteria')
+    SearchableContactAttributesCriteriaList = Shapes::ListShape.new(name: 'SearchableContactAttributesCriteriaList')
     SearchableQueueType = Shapes::StringShape.new(name: 'SearchableQueueType')
     SecurityKey = Shapes::StructureShape.new(name: 'SecurityKey')
     SecurityKeysList = Shapes::ListShape.new(name: 'SecurityKeysList')
@@ -775,6 +1030,12 @@ module Aws::Connect
     SecurityProfilesSearchFilter = Shapes::StructureShape.new(name: 'SecurityProfilesSearchFilter')
     SecurityProfilesSearchSummaryList = Shapes::ListShape.new(name: 'SecurityProfilesSearchSummaryList')
     SecurityToken = Shapes::StringShape.new(name: 'SecurityToken')
+    SegmentAttributeName = Shapes::StringShape.new(name: 'SegmentAttributeName')
+    SegmentAttributeValue = Shapes::StructureShape.new(name: 'SegmentAttributeValue')
+    SegmentAttributeValueString = Shapes::StringShape.new(name: 'SegmentAttributeValueString')
+    SegmentAttributes = Shapes::MapShape.new(name: 'SegmentAttributes')
+    SendChatIntegrationEventRequest = Shapes::StructureShape.new(name: 'SendChatIntegrationEventRequest')
+    SendChatIntegrationEventResponse = Shapes::StructureShape.new(name: 'SendChatIntegrationEventResponse')
     SendNotificationActionDefinition = Shapes::StructureShape.new(name: 'SendNotificationActionDefinition')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SignInConfig = Shapes::StructureShape.new(name: 'SignInConfig')
@@ -785,9 +1046,14 @@ module Aws::Connect
     SingleSelectQuestionRuleCategoryAutomationCondition = Shapes::StringShape.new(name: 'SingleSelectQuestionRuleCategoryAutomationCondition')
     SingleSelectQuestionRuleCategoryAutomationLabel = Shapes::StringShape.new(name: 'SingleSelectQuestionRuleCategoryAutomationLabel')
     SnapshotVersion = Shapes::StringShape.new(name: 'SnapshotVersion')
+    Sort = Shapes::StructureShape.new(name: 'Sort')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    SortableFieldName = Shapes::StringShape.new(name: 'SortableFieldName')
     SourceApplicationName = Shapes::StringShape.new(name: 'SourceApplicationName')
+    SourceId = Shapes::StringShape.new(name: 'SourceId')
     SourceType = Shapes::StringShape.new(name: 'SourceType')
+    StartAttachedFileUploadRequest = Shapes::StructureShape.new(name: 'StartAttachedFileUploadRequest')
+    StartAttachedFileUploadResponse = Shapes::StructureShape.new(name: 'StartAttachedFileUploadResponse')
     StartChatContactRequest = Shapes::StructureShape.new(name: 'StartChatContactRequest')
     StartChatContactResponse = Shapes::StructureShape.new(name: 'StartChatContactResponse')
     StartContactEvaluationRequest = Shapes::StructureShape.new(name: 'StartContactEvaluationRequest')
@@ -800,7 +1066,11 @@ module Aws::Connect
     StartOutboundVoiceContactResponse = Shapes::StructureShape.new(name: 'StartOutboundVoiceContactResponse')
     StartTaskContactRequest = Shapes::StructureShape.new(name: 'StartTaskContactRequest')
     StartTaskContactResponse = Shapes::StructureShape.new(name: 'StartTaskContactResponse')
+    StartWebRTCContactRequest = Shapes::StructureShape.new(name: 'StartWebRTCContactRequest')
+    StartWebRTCContactResponse = Shapes::StructureShape.new(name: 'StartWebRTCContactResponse')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
+    Step = Shapes::StructureShape.new(name: 'Step')
+    Steps = Shapes::ListShape.new(name: 'Steps')
     StopContactRecordingRequest = Shapes::StructureShape.new(name: 'StopContactRecordingRequest')
     StopContactRecordingResponse = Shapes::StructureShape.new(name: 'StopContactRecordingResponse')
     StopContactRequest = Shapes::StructureShape.new(name: 'StopContactRequest')
@@ -814,14 +1084,20 @@ module Aws::Connect
     StringCondition = Shapes::StructureShape.new(name: 'StringCondition')
     StringReference = Shapes::StructureShape.new(name: 'StringReference')
     Subject = Shapes::StringShape.new(name: 'Subject')
+    SubmitAutoEvaluationActionDefinition = Shapes::StructureShape.new(name: 'SubmitAutoEvaluationActionDefinition')
     SubmitContactEvaluationRequest = Shapes::StructureShape.new(name: 'SubmitContactEvaluationRequest')
     SubmitContactEvaluationResponse = Shapes::StructureShape.new(name: 'SubmitContactEvaluationResponse')
+    Subtype = Shapes::StringShape.new(name: 'Subtype')
+    SuccessfulRequest = Shapes::StructureShape.new(name: 'SuccessfulRequest')
+    SuccessfulRequestList = Shapes::ListShape.new(name: 'SuccessfulRequestList')
     SupportedMessagingContentType = Shapes::StringShape.new(name: 'SupportedMessagingContentType')
     SupportedMessagingContentTypes = Shapes::ListShape.new(name: 'SupportedMessagingContentTypes')
     SuspendContactRecordingRequest = Shapes::StructureShape.new(name: 'SuspendContactRecordingRequest')
     SuspendContactRecordingResponse = Shapes::StructureShape.new(name: 'SuspendContactRecordingResponse')
     TagAndConditionList = Shapes::ListShape.new(name: 'TagAndConditionList')
     TagCondition = Shapes::StructureShape.new(name: 'TagCondition')
+    TagContactRequest = Shapes::StructureShape.new(name: 'TagContactRequest')
+    TagContactResponse = Shapes::StructureShape.new(name: 'TagContactResponse')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagKeyString = Shapes::StringShape.new(name: 'TagKeyString')
@@ -858,6 +1134,7 @@ module Aws::Connect
     TaskTemplateSingleSelectOption = Shapes::StringShape.new(name: 'TaskTemplateSingleSelectOption')
     TaskTemplateStatus = Shapes::StringShape.new(name: 'TaskTemplateStatus')
     TelephonyConfig = Shapes::StructureShape.new(name: 'TelephonyConfig')
+    TemplateId = Shapes::StringShape.new(name: 'TemplateId')
     Threshold = Shapes::StructureShape.new(name: 'Threshold')
     ThresholdCollections = Shapes::ListShape.new(name: 'ThresholdCollections')
     ThresholdV2 = Shapes::StructureShape.new(name: 'ThresholdV2')
@@ -867,6 +1144,9 @@ module Aws::Connect
     TimerEligibleParticipantRoles = Shapes::StringShape.new(name: 'TimerEligibleParticipantRoles')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
+    TotalPauseCount = Shapes::IntegerShape.new(name: 'TotalPauseCount')
+    TotalPauseDurationInSeconds = Shapes::IntegerShape.new(name: 'TotalPauseDurationInSeconds')
     TrafficDistributionGroup = Shapes::StructureShape.new(name: 'TrafficDistributionGroup')
     TrafficDistributionGroupArn = Shapes::StringShape.new(name: 'TrafficDistributionGroupArn')
     TrafficDistributionGroupId = Shapes::StringShape.new(name: 'TrafficDistributionGroupId')
@@ -877,13 +1157,20 @@ module Aws::Connect
     TrafficDistributionGroupUserSummary = Shapes::StructureShape.new(name: 'TrafficDistributionGroupUserSummary')
     TrafficDistributionGroupUserSummaryList = Shapes::ListShape.new(name: 'TrafficDistributionGroupUserSummaryList')
     TrafficType = Shapes::StringShape.new(name: 'TrafficType')
+    Transcript = Shapes::StructureShape.new(name: 'Transcript')
+    TranscriptCriteria = Shapes::StructureShape.new(name: 'TranscriptCriteria')
+    TranscriptCriteriaList = Shapes::ListShape.new(name: 'TranscriptCriteriaList')
     TransferContactRequest = Shapes::StructureShape.new(name: 'TransferContactRequest')
     TransferContactResponse = Shapes::StructureShape.new(name: 'TransferContactResponse')
     URI = Shapes::StringShape.new(name: 'URI')
+    URLExpiryInSeconds = Shapes::IntegerShape.new(name: 'URLExpiryInSeconds')
     Unit = Shapes::StringShape.new(name: 'Unit')
+    UntagContactRequest = Shapes::StructureShape.new(name: 'UntagContactRequest')
+    UntagContactResponse = Shapes::StructureShape.new(name: 'UntagContactResponse')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateAgentStatusDescription = Shapes::StringShape.new(name: 'UpdateAgentStatusDescription')
     UpdateAgentStatusRequest = Shapes::StructureShape.new(name: 'UpdateAgentStatusRequest')
+    UpdateCaseActionDefinition = Shapes::StructureShape.new(name: 'UpdateCaseActionDefinition')
     UpdateContactAttributesRequest = Shapes::StructureShape.new(name: 'UpdateContactAttributesRequest')
     UpdateContactAttributesResponse = Shapes::StructureShape.new(name: 'UpdateContactAttributesResponse')
     UpdateContactEvaluationRequest = Shapes::StructureShape.new(name: 'UpdateContactEvaluationRequest')
@@ -900,6 +1187,8 @@ module Aws::Connect
     UpdateContactFlowNameResponse = Shapes::StructureShape.new(name: 'UpdateContactFlowNameResponse')
     UpdateContactRequest = Shapes::StructureShape.new(name: 'UpdateContactRequest')
     UpdateContactResponse = Shapes::StructureShape.new(name: 'UpdateContactResponse')
+    UpdateContactRoutingDataRequest = Shapes::StructureShape.new(name: 'UpdateContactRoutingDataRequest')
+    UpdateContactRoutingDataResponse = Shapes::StructureShape.new(name: 'UpdateContactRoutingDataResponse')
     UpdateContactScheduleRequest = Shapes::StructureShape.new(name: 'UpdateContactScheduleRequest')
     UpdateContactScheduleResponse = Shapes::StructureShape.new(name: 'UpdateContactScheduleResponse')
     UpdateEvaluationFormRequest = Shapes::StructureShape.new(name: 'UpdateEvaluationFormRequest')
@@ -911,8 +1200,10 @@ module Aws::Connect
     UpdateParticipantRoleConfigChannelInfo = Shapes::UnionShape.new(name: 'UpdateParticipantRoleConfigChannelInfo')
     UpdateParticipantRoleConfigRequest = Shapes::StructureShape.new(name: 'UpdateParticipantRoleConfigRequest')
     UpdateParticipantRoleConfigResponse = Shapes::StructureShape.new(name: 'UpdateParticipantRoleConfigResponse')
+    UpdatePhoneNumberMetadataRequest = Shapes::StructureShape.new(name: 'UpdatePhoneNumberMetadataRequest')
     UpdatePhoneNumberRequest = Shapes::StructureShape.new(name: 'UpdatePhoneNumberRequest')
     UpdatePhoneNumberResponse = Shapes::StructureShape.new(name: 'UpdatePhoneNumberResponse')
+    UpdatePredefinedAttributeRequest = Shapes::StructureShape.new(name: 'UpdatePredefinedAttributeRequest')
     UpdatePromptRequest = Shapes::StructureShape.new(name: 'UpdatePromptRequest')
     UpdatePromptResponse = Shapes::StructureShape.new(name: 'UpdatePromptResponse')
     UpdateQueueHoursOfOperationRequest = Shapes::StructureShape.new(name: 'UpdateQueueHoursOfOperationRequest')
@@ -939,13 +1230,18 @@ module Aws::Connect
     UpdateUserHierarchyStructureRequest = Shapes::StructureShape.new(name: 'UpdateUserHierarchyStructureRequest')
     UpdateUserIdentityInfoRequest = Shapes::StructureShape.new(name: 'UpdateUserIdentityInfoRequest')
     UpdateUserPhoneConfigRequest = Shapes::StructureShape.new(name: 'UpdateUserPhoneConfigRequest')
+    UpdateUserProficienciesRequest = Shapes::StructureShape.new(name: 'UpdateUserProficienciesRequest')
     UpdateUserRoutingProfileRequest = Shapes::StructureShape.new(name: 'UpdateUserRoutingProfileRequest')
     UpdateUserSecurityProfilesRequest = Shapes::StructureShape.new(name: 'UpdateUserSecurityProfilesRequest')
     UpdateViewContentRequest = Shapes::StructureShape.new(name: 'UpdateViewContentRequest')
     UpdateViewContentResponse = Shapes::StructureShape.new(name: 'UpdateViewContentResponse')
     UpdateViewMetadataRequest = Shapes::StructureShape.new(name: 'UpdateViewMetadataRequest')
     UpdateViewMetadataResponse = Shapes::StructureShape.new(name: 'UpdateViewMetadataResponse')
+    UploadUrlMetadata = Shapes::StructureShape.new(name: 'UploadUrlMetadata')
     Url = Shapes::StringShape.new(name: 'Url')
+    UrlMetadataSignedHeaders = Shapes::MapShape.new(name: 'UrlMetadataSignedHeaders')
+    UrlMetadataSignedHeadersKey = Shapes::StringShape.new(name: 'UrlMetadataSignedHeadersKey')
+    UrlMetadataSignedHeadersValue = Shapes::StringShape.new(name: 'UrlMetadataSignedHeadersValue')
     UrlReference = Shapes::StructureShape.new(name: 'UrlReference')
     UseCase = Shapes::StructureShape.new(name: 'UseCase')
     UseCaseId = Shapes::StringShape.new(name: 'UseCaseId')
@@ -962,6 +1258,10 @@ module Aws::Connect
     UserIdentityInfoLite = Shapes::StructureShape.new(name: 'UserIdentityInfoLite')
     UserNotFoundException = Shapes::StructureShape.new(name: 'UserNotFoundException')
     UserPhoneConfig = Shapes::StructureShape.new(name: 'UserPhoneConfig')
+    UserProficiency = Shapes::StructureShape.new(name: 'UserProficiency')
+    UserProficiencyDisassociate = Shapes::StructureShape.new(name: 'UserProficiencyDisassociate')
+    UserProficiencyDisassociateList = Shapes::ListShape.new(name: 'UserProficiencyDisassociateList')
+    UserProficiencyList = Shapes::ListShape.new(name: 'UserProficiencyList')
     UserQuickConnectConfig = Shapes::StructureShape.new(name: 'UserQuickConnectConfig')
     UserReference = Shapes::StructureShape.new(name: 'UserReference')
     UserSearchConditionList = Shapes::ListShape.new(name: 'UserSearchConditionList')
@@ -974,6 +1274,7 @@ module Aws::Connect
     UserTagMap = Shapes::MapShape.new(name: 'UserTagMap')
     Value = Shapes::FloatShape.new(name: 'Value')
     VersionNumber = Shapes::IntegerShape.new(name: 'VersionNumber')
+    VideoCapability = Shapes::StringShape.new(name: 'VideoCapability')
     View = Shapes::StructureShape.new(name: 'View')
     ViewAction = Shapes::StringShape.new(name: 'ViewAction')
     ViewActions = Shapes::ListShape.new(name: 'ViewActions')
@@ -1009,6 +1310,7 @@ module Aws::Connect
     VoiceRecordingConfiguration = Shapes::StructureShape.new(name: 'VoiceRecordingConfiguration')
     VoiceRecordingTrack = Shapes::StringShape.new(name: 'VoiceRecordingTrack')
     WisdomInfo = Shapes::StructureShape.new(name: 'WisdomInfo')
+    resourceArnListMaxLimit100 = Shapes::ListShape.new(name: 'resourceArnListMaxLimit100')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
@@ -1043,9 +1345,28 @@ module Aws::Connect
 
     AgentContactReferenceList.member = Shapes::ShapeRef.new(shape: AgentContactReference)
 
+    AgentHierarchyGroup.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    AgentHierarchyGroup.struct_class = Types::AgentHierarchyGroup
+
+    AgentHierarchyGroups.add_member(:l1_ids, Shapes::ShapeRef.new(shape: HierarchyGroupIdList, location_name: "L1Ids"))
+    AgentHierarchyGroups.add_member(:l2_ids, Shapes::ShapeRef.new(shape: HierarchyGroupIdList, location_name: "L2Ids"))
+    AgentHierarchyGroups.add_member(:l3_ids, Shapes::ShapeRef.new(shape: HierarchyGroupIdList, location_name: "L3Ids"))
+    AgentHierarchyGroups.add_member(:l4_ids, Shapes::ShapeRef.new(shape: HierarchyGroupIdList, location_name: "L4Ids"))
+    AgentHierarchyGroups.add_member(:l5_ids, Shapes::ShapeRef.new(shape: HierarchyGroupIdList, location_name: "L5Ids"))
+    AgentHierarchyGroups.struct_class = Types::AgentHierarchyGroups
+
     AgentInfo.add_member(:id, Shapes::ShapeRef.new(shape: AgentResourceId, location_name: "Id"))
     AgentInfo.add_member(:connected_to_agent_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ConnectedToAgentTimestamp"))
+    AgentInfo.add_member(:agent_pause_duration_in_seconds, Shapes::ShapeRef.new(shape: AgentPauseDurationInSeconds, location_name: "AgentPauseDurationInSeconds"))
+    AgentInfo.add_member(:hierarchy_groups, Shapes::ShapeRef.new(shape: HierarchyGroups, location_name: "HierarchyGroups"))
+    AgentInfo.add_member(:device_info, Shapes::ShapeRef.new(shape: DeviceInfo, location_name: "DeviceInfo"))
+    AgentInfo.add_member(:capabilities, Shapes::ShapeRef.new(shape: ParticipantCapabilities, location_name: "Capabilities"))
     AgentInfo.struct_class = Types::AgentInfo
+
+    AgentQualityMetrics.add_member(:audio, Shapes::ShapeRef.new(shape: AudioQualityMetricsInfo, location_name: "Audio"))
+    AgentQualityMetrics.struct_class = Types::AgentQualityMetrics
+
+    AgentResourceIdList.member = Shapes::ShapeRef.new(shape: AgentResourceId)
 
     AgentStatus.add_member(:agent_status_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "AgentStatusARN"))
     AgentStatus.add_member(:agent_status_id, Shapes::ShapeRef.new(shape: AgentStatusId, location_name: "AgentStatusId"))
@@ -1055,6 +1376,8 @@ module Aws::Connect
     AgentStatus.add_member(:display_order, Shapes::ShapeRef.new(shape: AgentStatusOrderNumber, location_name: "DisplayOrder"))
     AgentStatus.add_member(:state, Shapes::ShapeRef.new(shape: AgentStatusState, location_name: "State"))
     AgentStatus.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    AgentStatus.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    AgentStatus.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     AgentStatus.struct_class = Types::AgentStatus
 
     AgentStatusReference.add_member(:status_start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StatusStartTimestamp"))
@@ -1066,6 +1389,8 @@ module Aws::Connect
     AgentStatusSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     AgentStatusSummary.add_member(:name, Shapes::ShapeRef.new(shape: AgentStatusName, location_name: "Name"))
     AgentStatusSummary.add_member(:type, Shapes::ShapeRef.new(shape: AgentStatusType, location_name: "Type"))
+    AgentStatusSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    AgentStatusSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     AgentStatusSummary.struct_class = Types::AgentStatusSummary
 
     AgentStatusSummaryList.member = Shapes::ShapeRef.new(shape: AgentStatusSummary)
@@ -1077,7 +1402,19 @@ module Aws::Connect
     AllowedAccessControlTags.key = Shapes::ShapeRef.new(shape: SecurityProfilePolicyKey)
     AllowedAccessControlTags.value = Shapes::ShapeRef.new(shape: SecurityProfilePolicyValue)
 
+    AllowedCapabilities.add_member(:customer, Shapes::ShapeRef.new(shape: ParticipantCapabilities, location_name: "Customer"))
+    AllowedCapabilities.add_member(:agent, Shapes::ShapeRef.new(shape: ParticipantCapabilities, location_name: "Agent"))
+    AllowedCapabilities.struct_class = Types::AllowedCapabilities
+
     AllowedMonitorCapabilities.member = Shapes::ShapeRef.new(shape: MonitorCapability)
+
+    AnalyticsDataAssociationResult.add_member(:data_set_id, Shapes::ShapeRef.new(shape: DataSetId, location_name: "DataSetId"))
+    AnalyticsDataAssociationResult.add_member(:target_account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "TargetAccountId"))
+    AnalyticsDataAssociationResult.add_member(:resource_share_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceShareId"))
+    AnalyticsDataAssociationResult.add_member(:resource_share_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceShareArn"))
+    AnalyticsDataAssociationResult.struct_class = Types::AnalyticsDataAssociationResult
+
+    AnalyticsDataAssociationResults.member = Shapes::ShapeRef.new(shape: AnalyticsDataAssociationResult)
 
     AnswerMachineDetectionConfig.add_member(:enable_answer_machine_detection, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableAnswerMachineDetection"))
     AnswerMachineDetectionConfig.add_member(:await_answer_machine_prompt, Shapes::ShapeRef.new(shape: Boolean, location_name: "AwaitAnswerMachinePrompt"))
@@ -1092,6 +1429,17 @@ module Aws::Connect
     Applications.member = Shapes::ShapeRef.new(shape: Application)
 
     AssignContactCategoryActionDefinition.struct_class = Types::AssignContactCategoryActionDefinition
+
+    AssociateAnalyticsDataSetRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    AssociateAnalyticsDataSetRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: DataSetId, required: true, location_name: "DataSetId"))
+    AssociateAnalyticsDataSetRequest.add_member(:target_account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "TargetAccountId"))
+    AssociateAnalyticsDataSetRequest.struct_class = Types::AssociateAnalyticsDataSetRequest
+
+    AssociateAnalyticsDataSetResponse.add_member(:data_set_id, Shapes::ShapeRef.new(shape: DataSetId, location_name: "DataSetId"))
+    AssociateAnalyticsDataSetResponse.add_member(:target_account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "TargetAccountId"))
+    AssociateAnalyticsDataSetResponse.add_member(:resource_share_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceShareId"))
+    AssociateAnalyticsDataSetResponse.add_member(:resource_share_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceShareArn"))
+    AssociateAnalyticsDataSetResponse.struct_class = Types::AssociateAnalyticsDataSetResponse
 
     AssociateApprovedOriginRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     AssociateApprovedOriginRequest.add_member(:origin, Shapes::ShapeRef.new(shape: Origin, required: true, location_name: "Origin"))
@@ -1108,6 +1456,14 @@ module Aws::Connect
     AssociateDefaultVocabularyRequest.struct_class = Types::AssociateDefaultVocabularyRequest
 
     AssociateDefaultVocabularyResponse.struct_class = Types::AssociateDefaultVocabularyResponse
+
+    AssociateFlowRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    AssociateFlowRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ResourceId"))
+    AssociateFlowRequest.add_member(:flow_id, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "FlowId"))
+    AssociateFlowRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: FlowAssociationResourceType, required: true, location_name: "ResourceType"))
+    AssociateFlowRequest.struct_class = Types::AssociateFlowRequest
+
+    AssociateFlowResponse.struct_class = Types::AssociateFlowResponse
 
     AssociateInstanceStorageConfigRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     AssociateInstanceStorageConfigRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: InstanceStorageResourceType, required: true, location_name: "ResourceType"))
@@ -1154,19 +1510,70 @@ module Aws::Connect
 
     AssociateTrafficDistributionGroupUserResponse.struct_class = Types::AssociateTrafficDistributionGroupUserResponse
 
+    AssociateUserProficienciesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    AssociateUserProficienciesRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
+    AssociateUserProficienciesRequest.add_member(:user_proficiencies, Shapes::ShapeRef.new(shape: UserProficiencyList, required: true, location_name: "UserProficiencies"))
+    AssociateUserProficienciesRequest.struct_class = Types::AssociateUserProficienciesRequest
+
+    AssociatedQueueIdList.member = Shapes::ShapeRef.new(shape: QueueId)
+
+    AttachedFile.add_member(:creation_time, Shapes::ShapeRef.new(shape: ISO8601Datetime, required: true, location_name: "CreationTime"))
+    AttachedFile.add_member(:file_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "FileArn"))
+    AttachedFile.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, required: true, location_name: "FileId"))
+    AttachedFile.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, required: true, location_name: "FileName"))
+    AttachedFile.add_member(:file_size_in_bytes, Shapes::ShapeRef.new(shape: FileSizeInBytes, required: true, location_name: "FileSizeInBytes", metadata: {"box"=>true}))
+    AttachedFile.add_member(:file_status, Shapes::ShapeRef.new(shape: FileStatusType, required: true, location_name: "FileStatus"))
+    AttachedFile.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedByInfo, location_name: "CreatedBy"))
+    AttachedFile.add_member(:file_use_case_type, Shapes::ShapeRef.new(shape: FileUseCaseType, location_name: "FileUseCaseType"))
+    AttachedFile.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "AssociatedResourceArn"))
+    AttachedFile.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    AttachedFile.struct_class = Types::AttachedFile
+
+    AttachedFileError.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    AttachedFileError.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    AttachedFileError.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, location_name: "FileId"))
+    AttachedFileError.struct_class = Types::AttachedFileError
+
+    AttachedFileErrorsList.member = Shapes::ShapeRef.new(shape: AttachedFileError)
+
+    AttachedFilesList.member = Shapes::ShapeRef.new(shape: AttachedFile)
+
     AttachmentReference.add_member(:name, Shapes::ShapeRef.new(shape: ReferenceKey, location_name: "Name"))
     AttachmentReference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, location_name: "Value"))
     AttachmentReference.add_member(:status, Shapes::ShapeRef.new(shape: ReferenceStatus, location_name: "Status"))
     AttachmentReference.struct_class = Types::AttachmentReference
 
+    Attendee.add_member(:attendee_id, Shapes::ShapeRef.new(shape: AttendeeId, location_name: "AttendeeId"))
+    Attendee.add_member(:join_token, Shapes::ShapeRef.new(shape: JoinToken, location_name: "JoinToken"))
+    Attendee.struct_class = Types::Attendee
+
     Attribute.add_member(:attribute_type, Shapes::ShapeRef.new(shape: InstanceAttributeType, location_name: "AttributeType"))
     Attribute.add_member(:value, Shapes::ShapeRef.new(shape: InstanceAttributeValue, location_name: "Value"))
     Attribute.struct_class = Types::Attribute
+
+    AttributeAndCondition.add_member(:tag_conditions, Shapes::ShapeRef.new(shape: TagAndConditionList, location_name: "TagConditions"))
+    AttributeAndCondition.add_member(:hierarchy_group_condition, Shapes::ShapeRef.new(shape: HierarchyGroupCondition, location_name: "HierarchyGroupCondition"))
+    AttributeAndCondition.struct_class = Types::AttributeAndCondition
+
+    AttributeCondition.add_member(:name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, location_name: "Name"))
+    AttributeCondition.add_member(:value, Shapes::ShapeRef.new(shape: ProficiencyValue, location_name: "Value"))
+    AttributeCondition.add_member(:proficiency_level, Shapes::ShapeRef.new(shape: ProficiencyLevel, location_name: "ProficiencyLevel"))
+    AttributeCondition.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, location_name: "ComparisonOperator"))
+    AttributeCondition.struct_class = Types::AttributeCondition
+
+    AttributeOrConditionList.member = Shapes::ShapeRef.new(shape: AttributeAndCondition)
 
     Attributes.key = Shapes::ShapeRef.new(shape: AttributeName)
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
 
     AttributesList.member = Shapes::ShapeRef.new(shape: Attribute)
+
+    AudioFeatures.add_member(:echo_reduction, Shapes::ShapeRef.new(shape: MeetingFeatureStatus, location_name: "EchoReduction"))
+    AudioFeatures.struct_class = Types::AudioFeatures
+
+    AudioQualityMetricsInfo.add_member(:quality_score, Shapes::ShapeRef.new(shape: AudioQualityScore, location_name: "QualityScore"))
+    AudioQualityMetricsInfo.add_member(:potential_quality_issues, Shapes::ShapeRef.new(shape: PotentialAudioQualityIssues, location_name: "PotentialQualityIssues"))
+    AudioQualityMetricsInfo.struct_class = Types::AudioQualityMetricsInfo
 
     AvailableNumberSummary.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "PhoneNumber"))
     AvailableNumberSummary.add_member(:phone_number_country_code, Shapes::ShapeRef.new(shape: PhoneNumberCountryCode, location_name: "PhoneNumberCountryCode"))
@@ -1175,10 +1582,64 @@ module Aws::Connect
 
     AvailableNumbersList.member = Shapes::ShapeRef.new(shape: AvailableNumberSummary)
 
+    BatchAssociateAnalyticsDataSetRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    BatchAssociateAnalyticsDataSetRequest.add_member(:data_set_ids, Shapes::ShapeRef.new(shape: DataSetIds, required: true, location_name: "DataSetIds"))
+    BatchAssociateAnalyticsDataSetRequest.add_member(:target_account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "TargetAccountId"))
+    BatchAssociateAnalyticsDataSetRequest.struct_class = Types::BatchAssociateAnalyticsDataSetRequest
+
+    BatchAssociateAnalyticsDataSetResponse.add_member(:created, Shapes::ShapeRef.new(shape: AnalyticsDataAssociationResults, location_name: "Created"))
+    BatchAssociateAnalyticsDataSetResponse.add_member(:errors, Shapes::ShapeRef.new(shape: ErrorResults, location_name: "Errors"))
+    BatchAssociateAnalyticsDataSetResponse.struct_class = Types::BatchAssociateAnalyticsDataSetResponse
+
+    BatchDisassociateAnalyticsDataSetRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    BatchDisassociateAnalyticsDataSetRequest.add_member(:data_set_ids, Shapes::ShapeRef.new(shape: DataSetIds, required: true, location_name: "DataSetIds"))
+    BatchDisassociateAnalyticsDataSetRequest.add_member(:target_account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "TargetAccountId"))
+    BatchDisassociateAnalyticsDataSetRequest.struct_class = Types::BatchDisassociateAnalyticsDataSetRequest
+
+    BatchDisassociateAnalyticsDataSetResponse.add_member(:deleted, Shapes::ShapeRef.new(shape: DataSetIds, location_name: "Deleted"))
+    BatchDisassociateAnalyticsDataSetResponse.add_member(:errors, Shapes::ShapeRef.new(shape: ErrorResults, location_name: "Errors"))
+    BatchDisassociateAnalyticsDataSetResponse.struct_class = Types::BatchDisassociateAnalyticsDataSetResponse
+
+    BatchGetAttachedFileMetadataRequest.add_member(:file_ids, Shapes::ShapeRef.new(shape: FileIdList, required: true, location_name: "FileIds"))
+    BatchGetAttachedFileMetadataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    BatchGetAttachedFileMetadataRequest.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "associatedResourceArn"))
+    BatchGetAttachedFileMetadataRequest.struct_class = Types::BatchGetAttachedFileMetadataRequest
+
+    BatchGetAttachedFileMetadataResponse.add_member(:files, Shapes::ShapeRef.new(shape: AttachedFilesList, location_name: "Files"))
+    BatchGetAttachedFileMetadataResponse.add_member(:errors, Shapes::ShapeRef.new(shape: AttachedFileErrorsList, location_name: "Errors"))
+    BatchGetAttachedFileMetadataResponse.struct_class = Types::BatchGetAttachedFileMetadataResponse
+
+    BatchGetFlowAssociationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    BatchGetFlowAssociationRequest.add_member(:resource_ids, Shapes::ShapeRef.new(shape: resourceArnListMaxLimit100, required: true, location_name: "ResourceIds"))
+    BatchGetFlowAssociationRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ListFlowAssociationResourceType, location_name: "ResourceType"))
+    BatchGetFlowAssociationRequest.struct_class = Types::BatchGetFlowAssociationRequest
+
+    BatchGetFlowAssociationResponse.add_member(:flow_association_summary_list, Shapes::ShapeRef.new(shape: FlowAssociationSummaryList, location_name: "FlowAssociationSummaryList"))
+    BatchGetFlowAssociationResponse.struct_class = Types::BatchGetFlowAssociationResponse
+
+    BatchPutContactRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    BatchPutContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    BatchPutContactRequest.add_member(:contact_data_request_list, Shapes::ShapeRef.new(shape: ContactDataRequestList, required: true, location_name: "ContactDataRequestList"))
+    BatchPutContactRequest.struct_class = Types::BatchPutContactRequest
+
+    BatchPutContactResponse.add_member(:successful_request_list, Shapes::ShapeRef.new(shape: SuccessfulRequestList, location_name: "SuccessfulRequestList"))
+    BatchPutContactResponse.add_member(:failed_request_list, Shapes::ShapeRef.new(shape: FailedRequestList, location_name: "FailedRequestList"))
+    BatchPutContactResponse.struct_class = Types::BatchPutContactResponse
+
+    Campaign.add_member(:campaign_id, Shapes::ShapeRef.new(shape: CampaignId, location_name: "CampaignId"))
+    Campaign.struct_class = Types::Campaign
+
+    ChannelList.member = Shapes::ShapeRef.new(shape: Channel)
+
     ChannelToCountMap.key = Shapes::ShapeRef.new(shape: Channel)
     ChannelToCountMap.value = Shapes::ShapeRef.new(shape: IntegerCount)
 
     Channels.member = Shapes::ShapeRef.new(shape: Channel)
+
+    ChatEvent.add_member(:type, Shapes::ShapeRef.new(shape: ChatEventType, required: true, location_name: "Type"))
+    ChatEvent.add_member(:content_type, Shapes::ShapeRef.new(shape: ChatContentType, location_name: "ContentType"))
+    ChatEvent.add_member(:content, Shapes::ShapeRef.new(shape: ChatContent, location_name: "Content"))
+    ChatEvent.struct_class = Types::ChatEvent
 
     ChatMessage.add_member(:content_type, Shapes::ShapeRef.new(shape: ChatContentType, required: true, location_name: "ContentType"))
     ChatMessage.add_member(:content, Shapes::ShapeRef.new(shape: ChatContent, required: true, location_name: "Content"))
@@ -1190,7 +1651,8 @@ module Aws::Connect
     ChatStreamingConfiguration.add_member(:streaming_endpoint_arn, Shapes::ShapeRef.new(shape: ChatStreamingEndpointARN, required: true, location_name: "StreamingEndpointArn"))
     ChatStreamingConfiguration.struct_class = Types::ChatStreamingConfiguration
 
-    ClaimPhoneNumberRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "TargetArn"))
+    ClaimPhoneNumberRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "TargetArn"))
+    ClaimPhoneNumberRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     ClaimPhoneNumberRequest.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "PhoneNumber"))
     ClaimPhoneNumberRequest.add_member(:phone_number_description, Shapes::ShapeRef.new(shape: PhoneNumberDescription, location_name: "PhoneNumberDescription"))
     ClaimPhoneNumberRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -1208,9 +1670,25 @@ module Aws::Connect
     ClaimedPhoneNumberSummary.add_member(:phone_number_type, Shapes::ShapeRef.new(shape: PhoneNumberType, location_name: "PhoneNumberType"))
     ClaimedPhoneNumberSummary.add_member(:phone_number_description, Shapes::ShapeRef.new(shape: PhoneNumberDescription, location_name: "PhoneNumberDescription"))
     ClaimedPhoneNumberSummary.add_member(:target_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "TargetArn"))
+    ClaimedPhoneNumberSummary.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     ClaimedPhoneNumberSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ClaimedPhoneNumberSummary.add_member(:phone_number_status, Shapes::ShapeRef.new(shape: PhoneNumberStatus, location_name: "PhoneNumberStatus"))
+    ClaimedPhoneNumberSummary.add_member(:source_phone_number_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourcePhoneNumberArn"))
     ClaimedPhoneNumberSummary.struct_class = Types::ClaimedPhoneNumberSummary
+
+    CompleteAttachedFileUploadRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CompleteAttachedFileUploadRequest.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, required: true, location: "uri", location_name: "FileId"))
+    CompleteAttachedFileUploadRequest.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "associatedResourceArn"))
+    CompleteAttachedFileUploadRequest.struct_class = Types::CompleteAttachedFileUploadRequest
+
+    CompleteAttachedFileUploadResponse.struct_class = Types::CompleteAttachedFileUploadResponse
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
+
+    ConnectionData.add_member(:attendee, Shapes::ShapeRef.new(shape: Attendee, location_name: "Attendee"))
+    ConnectionData.add_member(:meeting, Shapes::ShapeRef.new(shape: Meeting, location_name: "Meeting"))
+    ConnectionData.struct_class = Types::ConnectionData
 
     Contact.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     Contact.add_member(:id, Shapes::ShapeRef.new(shape: ContactId, location_name: "Id"))
@@ -1225,10 +1703,39 @@ module Aws::Connect
     Contact.add_member(:initiation_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "InitiationTimestamp"))
     Contact.add_member(:disconnect_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "DisconnectTimestamp"))
     Contact.add_member(:last_update_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdateTimestamp"))
+    Contact.add_member(:last_paused_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastPausedTimestamp"))
+    Contact.add_member(:last_resumed_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastResumedTimestamp"))
+    Contact.add_member(:total_pause_count, Shapes::ShapeRef.new(shape: TotalPauseCount, location_name: "TotalPauseCount"))
+    Contact.add_member(:total_pause_duration_in_seconds, Shapes::ShapeRef.new(shape: TotalPauseDurationInSeconds, location_name: "TotalPauseDurationInSeconds"))
     Contact.add_member(:scheduled_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ScheduledTimestamp"))
     Contact.add_member(:related_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "RelatedContactId"))
     Contact.add_member(:wisdom_info, Shapes::ShapeRef.new(shape: WisdomInfo, location_name: "WisdomInfo"))
+    Contact.add_member(:queue_time_adjustment_seconds, Shapes::ShapeRef.new(shape: QueueTimeAdjustmentSeconds, location_name: "QueueTimeAdjustmentSeconds"))
+    Contact.add_member(:queue_priority, Shapes::ShapeRef.new(shape: QueuePriority, location_name: "QueuePriority"))
+    Contact.add_member(:tags, Shapes::ShapeRef.new(shape: ContactTagMap, location_name: "Tags"))
+    Contact.add_member(:connected_to_system_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ConnectedToSystemTimestamp"))
+    Contact.add_member(:routing_criteria, Shapes::ShapeRef.new(shape: RoutingCriteria, location_name: "RoutingCriteria"))
+    Contact.add_member(:customer, Shapes::ShapeRef.new(shape: Customer, location_name: "Customer"))
+    Contact.add_member(:campaign, Shapes::ShapeRef.new(shape: Campaign, location_name: "Campaign"))
+    Contact.add_member(:answering_machine_detection_status, Shapes::ShapeRef.new(shape: AnsweringMachineDetectionStatus, location_name: "AnsweringMachineDetectionStatus"))
+    Contact.add_member(:customer_voice_activity, Shapes::ShapeRef.new(shape: CustomerVoiceActivity, location_name: "CustomerVoiceActivity"))
+    Contact.add_member(:quality_metrics, Shapes::ShapeRef.new(shape: QualityMetrics, location_name: "QualityMetrics"))
+    Contact.add_member(:disconnect_details, Shapes::ShapeRef.new(shape: DisconnectDetails, location_name: "DisconnectDetails"))
+    Contact.add_member(:segment_attributes, Shapes::ShapeRef.new(shape: SegmentAttributes, location_name: "SegmentAttributes"))
     Contact.struct_class = Types::Contact
+
+    ContactAnalysis.add_member(:transcript, Shapes::ShapeRef.new(shape: Transcript, location_name: "Transcript"))
+    ContactAnalysis.struct_class = Types::ContactAnalysis
+
+    ContactDataRequest.add_member(:system_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "SystemEndpoint"))
+    ContactDataRequest.add_member(:customer_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "CustomerEndpoint"))
+    ContactDataRequest.add_member(:request_identifier, Shapes::ShapeRef.new(shape: RequestIdentifier, location_name: "RequestIdentifier"))
+    ContactDataRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, location_name: "QueueId"))
+    ContactDataRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
+    ContactDataRequest.add_member(:campaign, Shapes::ShapeRef.new(shape: Campaign, location_name: "Campaign"))
+    ContactDataRequest.struct_class = Types::ContactDataRequest
+
+    ContactDataRequestList.member = Shapes::ShapeRef.new(shape: ContactDataRequest)
 
     ContactFilter.add_member(:contact_states, Shapes::ShapeRef.new(shape: ContactStates, location_name: "ContactStates"))
     ContactFilter.struct_class = Types::ContactFilter
@@ -1238,6 +1745,7 @@ module Aws::Connect
     ContactFlow.add_member(:name, Shapes::ShapeRef.new(shape: ContactFlowName, location_name: "Name"))
     ContactFlow.add_member(:type, Shapes::ShapeRef.new(shape: ContactFlowType, location_name: "Type"))
     ContactFlow.add_member(:state, Shapes::ShapeRef.new(shape: ContactFlowState, location_name: "State"))
+    ContactFlow.add_member(:status, Shapes::ShapeRef.new(shape: ContactFlowStatus, location_name: "Status"))
     ContactFlow.add_member(:description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "Description"))
     ContactFlow.add_member(:content, Shapes::ShapeRef.new(shape: ContactFlowContent, location_name: "Content"))
     ContactFlow.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -1253,6 +1761,18 @@ module Aws::Connect
     ContactFlowModule.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ContactFlowModule.struct_class = Types::ContactFlowModule
 
+    ContactFlowModuleSearchConditionList.member = Shapes::ShapeRef.new(shape: ContactFlowModuleSearchCriteria)
+
+    ContactFlowModuleSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: ContactFlowModuleSearchConditionList, location_name: "OrConditions"))
+    ContactFlowModuleSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: ContactFlowModuleSearchConditionList, location_name: "AndConditions"))
+    ContactFlowModuleSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    ContactFlowModuleSearchCriteria.struct_class = Types::ContactFlowModuleSearchCriteria
+
+    ContactFlowModuleSearchFilter.add_member(:tag_filter, Shapes::ShapeRef.new(shape: ControlPlaneTagFilter, location_name: "TagFilter"))
+    ContactFlowModuleSearchFilter.struct_class = Types::ContactFlowModuleSearchFilter
+
+    ContactFlowModuleSearchSummaryList.member = Shapes::ShapeRef.new(shape: ContactFlowModule)
+
     ContactFlowModuleSummary.add_member(:id, Shapes::ShapeRef.new(shape: ContactFlowModuleId, location_name: "Id"))
     ContactFlowModuleSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     ContactFlowModuleSummary.add_member(:name, Shapes::ShapeRef.new(shape: ContactFlowModuleName, location_name: "Name"))
@@ -1264,11 +1784,27 @@ module Aws::Connect
     ContactFlowNotPublishedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ContactFlowNotPublishedException.struct_class = Types::ContactFlowNotPublishedException
 
+    ContactFlowSearchConditionList.member = Shapes::ShapeRef.new(shape: ContactFlowSearchCriteria)
+
+    ContactFlowSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: ContactFlowSearchConditionList, location_name: "OrConditions"))
+    ContactFlowSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: ContactFlowSearchConditionList, location_name: "AndConditions"))
+    ContactFlowSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    ContactFlowSearchCriteria.add_member(:type_condition, Shapes::ShapeRef.new(shape: ContactFlowType, location_name: "TypeCondition"))
+    ContactFlowSearchCriteria.add_member(:state_condition, Shapes::ShapeRef.new(shape: ContactFlowState, location_name: "StateCondition"))
+    ContactFlowSearchCriteria.add_member(:status_condition, Shapes::ShapeRef.new(shape: ContactFlowStatus, location_name: "StatusCondition"))
+    ContactFlowSearchCriteria.struct_class = Types::ContactFlowSearchCriteria
+
+    ContactFlowSearchFilter.add_member(:tag_filter, Shapes::ShapeRef.new(shape: ControlPlaneTagFilter, location_name: "TagFilter"))
+    ContactFlowSearchFilter.struct_class = Types::ContactFlowSearchFilter
+
+    ContactFlowSearchSummaryList.member = Shapes::ShapeRef.new(shape: ContactFlow)
+
     ContactFlowSummary.add_member(:id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "Id"))
     ContactFlowSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     ContactFlowSummary.add_member(:name, Shapes::ShapeRef.new(shape: ContactFlowName, location_name: "Name"))
     ContactFlowSummary.add_member(:contact_flow_type, Shapes::ShapeRef.new(shape: ContactFlowType, location_name: "ContactFlowType"))
     ContactFlowSummary.add_member(:contact_flow_state, Shapes::ShapeRef.new(shape: ContactFlowState, location_name: "ContactFlowState"))
+    ContactFlowSummary.add_member(:contact_flow_status, Shapes::ShapeRef.new(shape: ContactFlowStatus, location_name: "ContactFlowStatus"))
     ContactFlowSummary.struct_class = Types::ContactFlowSummary
 
     ContactFlowSummaryList.member = Shapes::ShapeRef.new(shape: ContactFlowSummary)
@@ -1281,12 +1817,46 @@ module Aws::Connect
     ContactReferences.key = Shapes::ShapeRef.new(shape: ReferenceKey)
     ContactReferences.value = Shapes::ShapeRef.new(shape: Reference)
 
+    ContactSearchSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    ContactSearchSummary.add_member(:id, Shapes::ShapeRef.new(shape: ContactId, location_name: "Id"))
+    ContactSearchSummary.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "InitialContactId"))
+    ContactSearchSummary.add_member(:previous_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "PreviousContactId"))
+    ContactSearchSummary.add_member(:initiation_method, Shapes::ShapeRef.new(shape: ContactInitiationMethod, location_name: "InitiationMethod"))
+    ContactSearchSummary.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "Channel"))
+    ContactSearchSummary.add_member(:queue_info, Shapes::ShapeRef.new(shape: ContactSearchSummaryQueueInfo, location_name: "QueueInfo"))
+    ContactSearchSummary.add_member(:agent_info, Shapes::ShapeRef.new(shape: ContactSearchSummaryAgentInfo, location_name: "AgentInfo"))
+    ContactSearchSummary.add_member(:initiation_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "InitiationTimestamp"))
+    ContactSearchSummary.add_member(:disconnect_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "DisconnectTimestamp"))
+    ContactSearchSummary.add_member(:scheduled_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ScheduledTimestamp"))
+    ContactSearchSummary.struct_class = Types::ContactSearchSummary
+
+    ContactSearchSummaryAgentInfo.add_member(:id, Shapes::ShapeRef.new(shape: AgentResourceId, location_name: "Id"))
+    ContactSearchSummaryAgentInfo.add_member(:connected_to_agent_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ConnectedToAgentTimestamp"))
+    ContactSearchSummaryAgentInfo.struct_class = Types::ContactSearchSummaryAgentInfo
+
+    ContactSearchSummaryQueueInfo.add_member(:id, Shapes::ShapeRef.new(shape: QueueId, location_name: "Id"))
+    ContactSearchSummaryQueueInfo.add_member(:enqueue_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "EnqueueTimestamp"))
+    ContactSearchSummaryQueueInfo.struct_class = Types::ContactSearchSummaryQueueInfo
+
     ContactStates.member = Shapes::ShapeRef.new(shape: ContactState)
+
+    ContactTagKeys.member = Shapes::ShapeRef.new(shape: ContactTagKey)
+
+    ContactTagMap.key = Shapes::ShapeRef.new(shape: ContactTagKey)
+    ContactTagMap.value = Shapes::ShapeRef.new(shape: ContactTagValue)
+
+    Contacts.member = Shapes::ShapeRef.new(shape: ContactSearchSummary)
 
     ControlPlaneTagFilter.add_member(:or_conditions, Shapes::ShapeRef.new(shape: TagOrConditionList, location_name: "OrConditions"))
     ControlPlaneTagFilter.add_member(:and_conditions, Shapes::ShapeRef.new(shape: TagAndConditionList, location_name: "AndConditions"))
     ControlPlaneTagFilter.add_member(:tag_condition, Shapes::ShapeRef.new(shape: TagCondition, location_name: "TagCondition"))
     ControlPlaneTagFilter.struct_class = Types::ControlPlaneTagFilter
+
+    ControlPlaneUserAttributeFilter.add_member(:or_conditions, Shapes::ShapeRef.new(shape: AttributeOrConditionList, location_name: "OrConditions"))
+    ControlPlaneUserAttributeFilter.add_member(:and_condition, Shapes::ShapeRef.new(shape: AttributeAndCondition, location_name: "AndCondition"))
+    ControlPlaneUserAttributeFilter.add_member(:tag_condition, Shapes::ShapeRef.new(shape: TagCondition, location_name: "TagCondition"))
+    ControlPlaneUserAttributeFilter.add_member(:hierarchy_group_condition, Shapes::ShapeRef.new(shape: HierarchyGroupCondition, location_name: "HierarchyGroupCondition"))
+    ControlPlaneUserAttributeFilter.struct_class = Types::ControlPlaneUserAttributeFilter
 
     CreateAgentStatusRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreateAgentStatusRequest.add_member(:name, Shapes::ShapeRef.new(shape: AgentStatusName, required: true, location_name: "Name"))
@@ -1299,6 +1869,10 @@ module Aws::Connect
     CreateAgentStatusResponse.add_member(:agent_status_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "AgentStatusARN"))
     CreateAgentStatusResponse.add_member(:agent_status_id, Shapes::ShapeRef.new(shape: AgentStatusId, location_name: "AgentStatusId"))
     CreateAgentStatusResponse.struct_class = Types::CreateAgentStatusResponse
+
+    CreateCaseActionDefinition.add_member(:fields, Shapes::ShapeRef.new(shape: FieldValues, required: true, location_name: "Fields"))
+    CreateCaseActionDefinition.add_member(:template_id, Shapes::ShapeRef.new(shape: TemplateId, required: true, location_name: "TemplateId"))
+    CreateCaseActionDefinition.struct_class = Types::CreateCaseActionDefinition
 
     CreateContactFlowModuleRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreateContactFlowModuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: ContactFlowModuleName, required: true, location_name: "Name"))
@@ -1317,6 +1891,7 @@ module Aws::Connect
     CreateContactFlowRequest.add_member(:type, Shapes::ShapeRef.new(shape: ContactFlowType, required: true, location_name: "Type"))
     CreateContactFlowRequest.add_member(:description, Shapes::ShapeRef.new(shape: ContactFlowDescription, location_name: "Description"))
     CreateContactFlowRequest.add_member(:content, Shapes::ShapeRef.new(shape: ContactFlowContent, required: true, location_name: "Content"))
+    CreateContactFlowRequest.add_member(:status, Shapes::ShapeRef.new(shape: ContactFlowStatus, location_name: "Status"))
     CreateContactFlowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateContactFlowRequest.struct_class = Types::CreateContactFlowRequest
 
@@ -1354,6 +1929,7 @@ module Aws::Connect
     CreateInstanceRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
     CreateInstanceRequest.add_member(:inbound_calls_enabled, Shapes::ShapeRef.new(shape: InboundCallsEnabled, required: true, location_name: "InboundCallsEnabled"))
     CreateInstanceRequest.add_member(:outbound_calls_enabled, Shapes::ShapeRef.new(shape: OutboundCallsEnabled, required: true, location_name: "OutboundCallsEnabled"))
+    CreateInstanceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateInstanceRequest.struct_class = Types::CreateInstanceRequest
 
     CreateInstanceResponse.add_member(:id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "Id"))
@@ -1382,6 +1958,21 @@ module Aws::Connect
     CreateParticipantResponse.add_member(:participant_credentials, Shapes::ShapeRef.new(shape: ParticipantTokenCredentials, location_name: "ParticipantCredentials"))
     CreateParticipantResponse.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "ParticipantId"))
     CreateParticipantResponse.struct_class = Types::CreateParticipantResponse
+
+    CreatePersistentContactAssociationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CreatePersistentContactAssociationRequest.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "uri", location_name: "InitialContactId"))
+    CreatePersistentContactAssociationRequest.add_member(:rehydration_type, Shapes::ShapeRef.new(shape: RehydrationType, required: true, location_name: "RehydrationType"))
+    CreatePersistentContactAssociationRequest.add_member(:source_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "SourceContactId"))
+    CreatePersistentContactAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    CreatePersistentContactAssociationRequest.struct_class = Types::CreatePersistentContactAssociationRequest
+
+    CreatePersistentContactAssociationResponse.add_member(:continued_from_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContinuedFromContactId"))
+    CreatePersistentContactAssociationResponse.struct_class = Types::CreatePersistentContactAssociationResponse
+
+    CreatePredefinedAttributeRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CreatePredefinedAttributeRequest.add_member(:name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, required: true, location_name: "Name"))
+    CreatePredefinedAttributeRequest.add_member(:values, Shapes::ShapeRef.new(shape: PredefinedAttributeValues, required: true, location_name: "Values"))
+    CreatePredefinedAttributeRequest.struct_class = Types::CreatePredefinedAttributeRequest
 
     CreatePromptRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     CreatePromptRequest.add_member(:name, Shapes::ShapeRef.new(shape: CommonNameLength127, required: true, location_name: "Name"))
@@ -1454,6 +2045,8 @@ module Aws::Connect
     CreateSecurityProfileRequest.add_member(:allowed_access_control_tags, Shapes::ShapeRef.new(shape: AllowedAccessControlTags, location_name: "AllowedAccessControlTags"))
     CreateSecurityProfileRequest.add_member(:tag_restricted_resources, Shapes::ShapeRef.new(shape: TagRestrictedResourceList, location_name: "TagRestrictedResources"))
     CreateSecurityProfileRequest.add_member(:applications, Shapes::ShapeRef.new(shape: Applications, location_name: "Applications"))
+    CreateSecurityProfileRequest.add_member(:hierarchy_restricted_resources, Shapes::ShapeRef.new(shape: HierarchyRestrictedResourceList, location_name: "HierarchyRestrictedResources"))
+    CreateSecurityProfileRequest.add_member(:allowed_access_control_hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "AllowedAccessControlHierarchyGroupId"))
     CreateSecurityProfileRequest.struct_class = Types::CreateSecurityProfileRequest
 
     CreateSecurityProfileResponse.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, location_name: "SecurityProfileId"))
@@ -1556,6 +2149,14 @@ module Aws::Connect
     CreateVocabularyResponse.add_member(:state, Shapes::ShapeRef.new(shape: VocabularyState, required: true, location_name: "State"))
     CreateVocabularyResponse.struct_class = Types::CreateVocabularyResponse
 
+    CreatedByInfo.add_member(:connect_user_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ConnectUserArn"))
+    CreatedByInfo.add_member(:aws_identity_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "AWSIdentityArn"))
+    CreatedByInfo.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CreatedByInfo.add_member_subclass(:connect_user_arn, Types::CreatedByInfo::ConnectUserArn)
+    CreatedByInfo.add_member_subclass(:aws_identity_arn, Types::CreatedByInfo::AwsIdentityArn)
+    CreatedByInfo.add_member_subclass(:unknown, Types::CreatedByInfo::Unknown)
+    CreatedByInfo.struct_class = Types::CreatedByInfo
+
     Credentials.add_member(:access_token, Shapes::ShapeRef.new(shape: SecurityToken, location_name: "AccessToken"))
     Credentials.add_member(:access_token_expiration, Shapes::ShapeRef.new(shape: timestamp, location_name: "AccessTokenExpiration"))
     Credentials.add_member(:refresh_token, Shapes::ShapeRef.new(shape: SecurityToken, location_name: "RefreshToken"))
@@ -1589,6 +2190,19 @@ module Aws::Connect
 
     CurrentMetrics.member = Shapes::ShapeRef.new(shape: CurrentMetric)
 
+    Customer.add_member(:device_info, Shapes::ShapeRef.new(shape: DeviceInfo, location_name: "DeviceInfo"))
+    Customer.add_member(:capabilities, Shapes::ShapeRef.new(shape: ParticipantCapabilities, location_name: "Capabilities"))
+    Customer.struct_class = Types::Customer
+
+    CustomerQualityMetrics.add_member(:audio, Shapes::ShapeRef.new(shape: AudioQualityMetricsInfo, location_name: "Audio"))
+    CustomerQualityMetrics.struct_class = Types::CustomerQualityMetrics
+
+    CustomerVoiceActivity.add_member(:greeting_start_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "GreetingStartTimestamp"))
+    CustomerVoiceActivity.add_member(:greeting_end_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "GreetingEndTimestamp"))
+    CustomerVoiceActivity.struct_class = Types::CustomerVoiceActivity
+
+    DataSetIds.member = Shapes::ShapeRef.new(shape: DataSetId)
+
     DateReference.add_member(:name, Shapes::ShapeRef.new(shape: ReferenceKey, location_name: "Name"))
     DateReference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, location_name: "Value"))
     DateReference.struct_class = Types::DateReference
@@ -1611,6 +2225,13 @@ module Aws::Connect
 
     DefaultVocabularyList.member = Shapes::ShapeRef.new(shape: DefaultVocabulary)
 
+    DeleteAttachedFileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteAttachedFileRequest.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, required: true, location: "uri", location_name: "FileId"))
+    DeleteAttachedFileRequest.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "associatedResourceArn"))
+    DeleteAttachedFileRequest.struct_class = Types::DeleteAttachedFileRequest
+
+    DeleteAttachedFileResponse.struct_class = Types::DeleteAttachedFileResponse
+
     DeleteContactEvaluationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteContactEvaluationRequest.add_member(:evaluation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "EvaluationId"))
     DeleteContactEvaluationRequest.struct_class = Types::DeleteContactEvaluationRequest
@@ -1629,7 +2250,7 @@ module Aws::Connect
 
     DeleteEvaluationFormRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteEvaluationFormRequest.add_member(:evaluation_form_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "EvaluationFormId"))
-    DeleteEvaluationFormRequest.add_member(:evaluation_form_version, Shapes::ShapeRef.new(shape: VersionNumber, location: "querystring", location_name: "version"))
+    DeleteEvaluationFormRequest.add_member(:evaluation_form_version, Shapes::ShapeRef.new(shape: VersionNumber, location: "querystring", location_name: "version", metadata: {"box"=>true}))
     DeleteEvaluationFormRequest.struct_class = Types::DeleteEvaluationFormRequest
 
     DeleteHoursOfOperationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -1642,6 +2263,10 @@ module Aws::Connect
     DeleteIntegrationAssociationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteIntegrationAssociationRequest.add_member(:integration_association_id, Shapes::ShapeRef.new(shape: IntegrationAssociationId, required: true, location: "uri", location_name: "IntegrationAssociationId"))
     DeleteIntegrationAssociationRequest.struct_class = Types::DeleteIntegrationAssociationRequest
+
+    DeletePredefinedAttributeRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeletePredefinedAttributeRequest.add_member(:name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, required: true, location: "uri", location_name: "Name"))
+    DeletePredefinedAttributeRequest.struct_class = Types::DeletePredefinedAttributeRequest
 
     DeletePromptRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeletePromptRequest.add_member(:prompt_id, Shapes::ShapeRef.new(shape: PromptId, required: true, location: "uri", location_name: "PromptId"))
@@ -1751,7 +2376,7 @@ module Aws::Connect
 
     DescribeEvaluationFormRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DescribeEvaluationFormRequest.add_member(:evaluation_form_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "EvaluationFormId"))
-    DescribeEvaluationFormRequest.add_member(:evaluation_form_version, Shapes::ShapeRef.new(shape: VersionNumber, location: "querystring", location_name: "version"))
+    DescribeEvaluationFormRequest.add_member(:evaluation_form_version, Shapes::ShapeRef.new(shape: VersionNumber, location: "querystring", location_name: "version", metadata: {"box"=>true}))
     DescribeEvaluationFormRequest.struct_class = Types::DescribeEvaluationFormRequest
 
     DescribeEvaluationFormResponse.add_member(:evaluation_form, Shapes::ShapeRef.new(shape: EvaluationForm, required: true, location_name: "EvaluationForm"))
@@ -1790,6 +2415,13 @@ module Aws::Connect
 
     DescribePhoneNumberResponse.add_member(:claimed_phone_number_summary, Shapes::ShapeRef.new(shape: ClaimedPhoneNumberSummary, location_name: "ClaimedPhoneNumberSummary"))
     DescribePhoneNumberResponse.struct_class = Types::DescribePhoneNumberResponse
+
+    DescribePredefinedAttributeRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DescribePredefinedAttributeRequest.add_member(:name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, required: true, location: "uri", location_name: "Name"))
+    DescribePredefinedAttributeRequest.struct_class = Types::DescribePredefinedAttributeRequest
+
+    DescribePredefinedAttributeResponse.add_member(:predefined_attribute, Shapes::ShapeRef.new(shape: PredefinedAttribute, location_name: "PredefinedAttribute"))
+    DescribePredefinedAttributeResponse.struct_class = Types::DescribePredefinedAttributeResponse
 
     DescribePromptRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DescribePromptRequest.add_member(:prompt_id, Shapes::ShapeRef.new(shape: PromptId, required: true, location: "uri", location_name: "PromptId"))
@@ -1876,13 +2508,24 @@ module Aws::Connect
     DestinationNotAllowedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     DestinationNotAllowedException.struct_class = Types::DestinationNotAllowedException
 
+    DeviceInfo.add_member(:platform_name, Shapes::ShapeRef.new(shape: PlatformName, location_name: "PlatformName"))
+    DeviceInfo.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "PlatformVersion"))
+    DeviceInfo.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
+    DeviceInfo.struct_class = Types::DeviceInfo
+
     Dimensions.add_member(:queue, Shapes::ShapeRef.new(shape: QueueReference, location_name: "Queue"))
     Dimensions.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "Channel"))
     Dimensions.add_member(:routing_profile, Shapes::ShapeRef.new(shape: RoutingProfileReference, location_name: "RoutingProfile"))
+    Dimensions.add_member(:routing_step_expression, Shapes::ShapeRef.new(shape: RoutingExpression, location_name: "RoutingStepExpression"))
     Dimensions.struct_class = Types::Dimensions
 
     DimensionsV2Map.key = Shapes::ShapeRef.new(shape: DimensionsV2Key)
     DimensionsV2Map.value = Shapes::ShapeRef.new(shape: DimensionsV2Value)
+
+    DisassociateAnalyticsDataSetRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DisassociateAnalyticsDataSetRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: DataSetId, required: true, location_name: "DataSetId"))
+    DisassociateAnalyticsDataSetRequest.add_member(:target_account_id, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "TargetAccountId"))
+    DisassociateAnalyticsDataSetRequest.struct_class = Types::DisassociateAnalyticsDataSetRequest
 
     DisassociateApprovedOriginRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DisassociateApprovedOriginRequest.add_member(:origin, Shapes::ShapeRef.new(shape: Origin, required: true, location: "querystring", location_name: "origin"))
@@ -1892,6 +2535,13 @@ module Aws::Connect
     DisassociateBotRequest.add_member(:lex_bot, Shapes::ShapeRef.new(shape: LexBot, location_name: "LexBot"))
     DisassociateBotRequest.add_member(:lex_v2_bot, Shapes::ShapeRef.new(shape: LexV2Bot, location_name: "LexV2Bot"))
     DisassociateBotRequest.struct_class = Types::DisassociateBotRequest
+
+    DisassociateFlowRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DisassociateFlowRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ResourceId"))
+    DisassociateFlowRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: FlowAssociationResourceType, required: true, location: "uri", location_name: "ResourceType"))
+    DisassociateFlowRequest.struct_class = Types::DisassociateFlowRequest
+
+    DisassociateFlowResponse.struct_class = Types::DisassociateFlowResponse
 
     DisassociateInstanceStorageConfigRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DisassociateInstanceStorageConfigRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, required: true, location: "uri", location_name: "AssociationId"))
@@ -1932,6 +2582,17 @@ module Aws::Connect
 
     DisassociateTrafficDistributionGroupUserResponse.struct_class = Types::DisassociateTrafficDistributionGroupUserResponse
 
+    DisassociateUserProficienciesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DisassociateUserProficienciesRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
+    DisassociateUserProficienciesRequest.add_member(:user_proficiencies, Shapes::ShapeRef.new(shape: UserProficiencyDisassociateList, required: true, location_name: "UserProficiencies"))
+    DisassociateUserProficienciesRequest.struct_class = Types::DisassociateUserProficienciesRequest
+
+    DisconnectDetails.add_member(:potential_disconnect_issue, Shapes::ShapeRef.new(shape: PotentialDisconnectIssue, location_name: "PotentialDisconnectIssue"))
+    DisconnectDetails.struct_class = Types::DisconnectDetails
+
+    DisconnectReason.add_member(:code, Shapes::ShapeRef.new(shape: DisconnectReasonCode, location_name: "Code"))
+    DisconnectReason.struct_class = Types::DisconnectReason
+
     DismissUserContactRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
     DismissUserContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DismissUserContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
@@ -1945,6 +2606,10 @@ module Aws::Connect
 
     DistributionList.member = Shapes::ShapeRef.new(shape: Distribution)
 
+    DownloadUrlMetadata.add_member(:url, Shapes::ShapeRef.new(shape: MetadataUrl, location_name: "Url"))
+    DownloadUrlMetadata.add_member(:url_expiry, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "UrlExpiry"))
+    DownloadUrlMetadata.struct_class = Types::DownloadUrlMetadata
+
     DuplicateResourceException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     DuplicateResourceException.struct_class = Types::DuplicateResourceException
 
@@ -1952,9 +2617,23 @@ module Aws::Connect
     EmailReference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, location_name: "Value"))
     EmailReference.struct_class = Types::EmailReference
 
+    EmptyFieldValue.struct_class = Types::EmptyFieldValue
+
     EncryptionConfig.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "EncryptionType"))
     EncryptionConfig.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, required: true, location_name: "KeyId"))
     EncryptionConfig.struct_class = Types::EncryptionConfig
+
+    EndAssociatedTasksActionDefinition.struct_class = Types::EndAssociatedTasksActionDefinition
+
+    Endpoint.add_member(:type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "Type"))
+    Endpoint.add_member(:address, Shapes::ShapeRef.new(shape: EndpointAddress, location_name: "Address"))
+    Endpoint.struct_class = Types::Endpoint
+
+    ErrorResult.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
+    ErrorResult.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
+    ErrorResult.struct_class = Types::ErrorResult
+
+    ErrorResults.member = Shapes::ShapeRef.new(shape: ErrorResult)
 
     Evaluation.add_member(:evaluation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "EvaluationId"))
     Evaluation.add_member(:evaluation_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "EvaluationArn"))
@@ -2109,7 +2788,7 @@ module Aws::Connect
     EvaluationFormSummary.add_member(:last_activated_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastActivatedTime"))
     EvaluationFormSummary.add_member(:last_activated_by, Shapes::ShapeRef.new(shape: ARN, location_name: "LastActivatedBy"))
     EvaluationFormSummary.add_member(:latest_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "LatestVersion"))
-    EvaluationFormSummary.add_member(:active_version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "ActiveVersion"))
+    EvaluationFormSummary.add_member(:active_version, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "ActiveVersion", metadata: {"box"=>true}))
     EvaluationFormSummary.struct_class = Types::EvaluationFormSummary
 
     EvaluationFormSummaryList.member = Shapes::ShapeRef.new(shape: EvaluationFormSummary)
@@ -2163,6 +2842,38 @@ module Aws::Connect
     EventBridgeActionDefinition.add_member(:name, Shapes::ShapeRef.new(shape: EventBridgeActionName, required: true, location_name: "Name"))
     EventBridgeActionDefinition.struct_class = Types::EventBridgeActionDefinition
 
+    Expiry.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "DurationInSeconds"))
+    Expiry.add_member(:expiry_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ExpiryTimestamp"))
+    Expiry.struct_class = Types::Expiry
+
+    Expression.add_member(:attribute_condition, Shapes::ShapeRef.new(shape: AttributeCondition, location_name: "AttributeCondition"))
+    Expression.add_member(:and_expression, Shapes::ShapeRef.new(shape: Expressions, location_name: "AndExpression"))
+    Expression.add_member(:or_expression, Shapes::ShapeRef.new(shape: Expressions, location_name: "OrExpression"))
+    Expression.struct_class = Types::Expression
+
+    Expressions.member = Shapes::ShapeRef.new(shape: Expression)
+
+    FailedRequest.add_member(:request_identifier, Shapes::ShapeRef.new(shape: RequestIdentifier, location_name: "RequestIdentifier"))
+    FailedRequest.add_member(:failure_reason_code, Shapes::ShapeRef.new(shape: FailureReasonCode, location_name: "FailureReasonCode"))
+    FailedRequest.add_member(:failure_reason_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureReasonMessage"))
+    FailedRequest.struct_class = Types::FailedRequest
+
+    FailedRequestList.member = Shapes::ShapeRef.new(shape: FailedRequest)
+
+    FieldValue.add_member(:id, Shapes::ShapeRef.new(shape: FieldValueId, required: true, location_name: "Id"))
+    FieldValue.add_member(:value, Shapes::ShapeRef.new(shape: FieldValueUnion, required: true, location_name: "Value"))
+    FieldValue.struct_class = Types::FieldValue
+
+    FieldValueUnion.add_member(:boolean_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "BooleanValue"))
+    FieldValueUnion.add_member(:double_value, Shapes::ShapeRef.new(shape: Double, location_name: "DoubleValue"))
+    FieldValueUnion.add_member(:empty_value, Shapes::ShapeRef.new(shape: EmptyFieldValue, location_name: "EmptyValue"))
+    FieldValueUnion.add_member(:string_value, Shapes::ShapeRef.new(shape: FieldStringValue, location_name: "StringValue"))
+    FieldValueUnion.struct_class = Types::FieldValueUnion
+
+    FieldValues.member = Shapes::ShapeRef.new(shape: FieldValue)
+
+    FileIdList.member = Shapes::ShapeRef.new(shape: FileId)
+
     FilterV2.add_member(:filter_key, Shapes::ShapeRef.new(shape: ResourceArnOrId, location_name: "FilterKey"))
     FilterV2.add_member(:filter_values, Shapes::ShapeRef.new(shape: FilterValueList, location_name: "FilterValues"))
     FilterV2.struct_class = Types::FilterV2
@@ -2172,11 +2883,38 @@ module Aws::Connect
     Filters.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
     Filters.add_member(:channels, Shapes::ShapeRef.new(shape: Channels, location_name: "Channels"))
     Filters.add_member(:routing_profiles, Shapes::ShapeRef.new(shape: RoutingProfiles, location_name: "RoutingProfiles"))
+    Filters.add_member(:routing_step_expressions, Shapes::ShapeRef.new(shape: RoutingExpressions, location_name: "RoutingStepExpressions"))
     Filters.struct_class = Types::Filters
 
     FiltersV2List.member = Shapes::ShapeRef.new(shape: FilterV2)
 
+    FlowAssociationSummary.add_member(:resource_id, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceId"))
+    FlowAssociationSummary.add_member(:flow_id, Shapes::ShapeRef.new(shape: ARN, location_name: "FlowId"))
+    FlowAssociationSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ListFlowAssociationResourceType, location_name: "ResourceType"))
+    FlowAssociationSummary.struct_class = Types::FlowAssociationSummary
+
+    FlowAssociationSummaryList.member = Shapes::ShapeRef.new(shape: FlowAssociationSummary)
+
     FunctionArnsList.member = Shapes::ShapeRef.new(shape: FunctionArn)
+
+    GetAttachedFileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    GetAttachedFileRequest.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, required: true, location: "uri", location_name: "FileId"))
+    GetAttachedFileRequest.add_member(:url_expiry_in_seconds, Shapes::ShapeRef.new(shape: URLExpiryInSeconds, location: "querystring", location_name: "urlExpiryInSeconds"))
+    GetAttachedFileRequest.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "associatedResourceArn"))
+    GetAttachedFileRequest.struct_class = Types::GetAttachedFileRequest
+
+    GetAttachedFileResponse.add_member(:file_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "FileArn"))
+    GetAttachedFileResponse.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, location_name: "FileId"))
+    GetAttachedFileResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "CreationTime"))
+    GetAttachedFileResponse.add_member(:file_status, Shapes::ShapeRef.new(shape: FileStatusType, location_name: "FileStatus"))
+    GetAttachedFileResponse.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, location_name: "FileName"))
+    GetAttachedFileResponse.add_member(:file_size_in_bytes, Shapes::ShapeRef.new(shape: FileSizeInBytes, required: true, location_name: "FileSizeInBytes", metadata: {"box"=>true}))
+    GetAttachedFileResponse.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "AssociatedResourceArn"))
+    GetAttachedFileResponse.add_member(:file_use_case_type, Shapes::ShapeRef.new(shape: FileUseCaseType, location_name: "FileUseCaseType"))
+    GetAttachedFileResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedByInfo, location_name: "CreatedBy"))
+    GetAttachedFileResponse.add_member(:download_url_metadata, Shapes::ShapeRef.new(shape: DownloadUrlMetadata, location_name: "DownloadUrlMetadata"))
+    GetAttachedFileResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    GetAttachedFileResponse.struct_class = Types::GetAttachedFileResponse
 
     GetContactAttributesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     GetContactAttributesRequest.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "uri", location_name: "InitialContactId"))
@@ -2220,6 +2958,16 @@ module Aws::Connect
     GetFederationTokenResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: AgentResourceId, location_name: "UserId"))
     GetFederationTokenResponse.struct_class = Types::GetFederationTokenResponse
 
+    GetFlowAssociationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    GetFlowAssociationRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "ResourceId"))
+    GetFlowAssociationRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: FlowAssociationResourceType, required: true, location: "uri", location_name: "ResourceType"))
+    GetFlowAssociationRequest.struct_class = Types::GetFlowAssociationRequest
+
+    GetFlowAssociationResponse.add_member(:resource_id, Shapes::ShapeRef.new(shape: ARN, location_name: "ResourceId"))
+    GetFlowAssociationResponse.add_member(:flow_id, Shapes::ShapeRef.new(shape: ARN, location_name: "FlowId"))
+    GetFlowAssociationResponse.add_member(:resource_type, Shapes::ShapeRef.new(shape: FlowAssociationResourceType, location_name: "ResourceType"))
+    GetFlowAssociationResponse.struct_class = Types::GetFlowAssociationResponse
+
     GetMetricDataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     GetMetricDataRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "StartTime"))
     GetMetricDataRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "EndTime"))
@@ -2254,6 +3002,8 @@ module Aws::Connect
     GetPromptFileRequest.struct_class = Types::GetPromptFileRequest
 
     GetPromptFileResponse.add_member(:prompt_presigned_url, Shapes::ShapeRef.new(shape: PromptPresignedUrl, location_name: "PromptPresignedUrl"))
+    GetPromptFileResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    GetPromptFileResponse.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     GetPromptFileResponse.struct_class = Types::GetPromptFileResponse
 
     GetTaskTemplateRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -2296,15 +3046,21 @@ module Aws::Connect
     HierarchyGroup.add_member(:level_id, Shapes::ShapeRef.new(shape: HierarchyLevelId, location_name: "LevelId"))
     HierarchyGroup.add_member(:hierarchy_path, Shapes::ShapeRef.new(shape: HierarchyPath, location_name: "HierarchyPath"))
     HierarchyGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    HierarchyGroup.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    HierarchyGroup.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     HierarchyGroup.struct_class = Types::HierarchyGroup
 
     HierarchyGroupCondition.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
     HierarchyGroupCondition.add_member(:hierarchy_group_match_type, Shapes::ShapeRef.new(shape: HierarchyGroupMatchType, location_name: "HierarchyGroupMatchType"))
     HierarchyGroupCondition.struct_class = Types::HierarchyGroupCondition
 
+    HierarchyGroupIdList.member = Shapes::ShapeRef.new(shape: HierarchyGroupId)
+
     HierarchyGroupSummary.add_member(:id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "Id"))
     HierarchyGroupSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     HierarchyGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: HierarchyGroupName, location_name: "Name"))
+    HierarchyGroupSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    HierarchyGroupSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     HierarchyGroupSummary.struct_class = Types::HierarchyGroupSummary
 
     HierarchyGroupSummaryList.member = Shapes::ShapeRef.new(shape: HierarchyGroupSummary)
@@ -2313,9 +3069,18 @@ module Aws::Connect
     HierarchyGroupSummaryReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     HierarchyGroupSummaryReference.struct_class = Types::HierarchyGroupSummaryReference
 
+    HierarchyGroups.add_member(:level_1, Shapes::ShapeRef.new(shape: AgentHierarchyGroup, location_name: "Level1"))
+    HierarchyGroups.add_member(:level_2, Shapes::ShapeRef.new(shape: AgentHierarchyGroup, location_name: "Level2"))
+    HierarchyGroups.add_member(:level_3, Shapes::ShapeRef.new(shape: AgentHierarchyGroup, location_name: "Level3"))
+    HierarchyGroups.add_member(:level_4, Shapes::ShapeRef.new(shape: AgentHierarchyGroup, location_name: "Level4"))
+    HierarchyGroups.add_member(:level_5, Shapes::ShapeRef.new(shape: AgentHierarchyGroup, location_name: "Level5"))
+    HierarchyGroups.struct_class = Types::HierarchyGroups
+
     HierarchyLevel.add_member(:id, Shapes::ShapeRef.new(shape: HierarchyLevelId, location_name: "Id"))
     HierarchyLevel.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     HierarchyLevel.add_member(:name, Shapes::ShapeRef.new(shape: HierarchyLevelName, location_name: "Name"))
+    HierarchyLevel.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    HierarchyLevel.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     HierarchyLevel.struct_class = Types::HierarchyLevel
 
     HierarchyLevelUpdate.add_member(:name, Shapes::ShapeRef.new(shape: HierarchyLevelName, required: true, location_name: "Name"))
@@ -2334,6 +3099,8 @@ module Aws::Connect
     HierarchyPathReference.add_member(:level_four, Shapes::ShapeRef.new(shape: HierarchyGroupSummaryReference, location_name: "LevelFour"))
     HierarchyPathReference.add_member(:level_five, Shapes::ShapeRef.new(shape: HierarchyGroupSummaryReference, location_name: "LevelFive"))
     HierarchyPathReference.struct_class = Types::HierarchyPathReference
+
+    HierarchyRestrictedResourceList.member = Shapes::ShapeRef.new(shape: HierarchyRestrictedResourceName)
 
     HierarchyStructure.add_member(:level_one, Shapes::ShapeRef.new(shape: HierarchyLevel, location_name: "LevelOne"))
     HierarchyStructure.add_member(:level_two, Shapes::ShapeRef.new(shape: HierarchyLevel, location_name: "LevelTwo"))
@@ -2376,6 +3143,8 @@ module Aws::Connect
     HoursOfOperation.add_member(:time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "TimeZone"))
     HoursOfOperation.add_member(:config, Shapes::ShapeRef.new(shape: HoursOfOperationConfigList, location_name: "Config"))
     HoursOfOperation.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    HoursOfOperation.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    HoursOfOperation.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     HoursOfOperation.struct_class = Types::HoursOfOperation
 
     HoursOfOperationConfig.add_member(:day, Shapes::ShapeRef.new(shape: HoursOfOperationDays, required: true, location_name: "Day"))
@@ -2400,6 +3169,8 @@ module Aws::Connect
     HoursOfOperationSummary.add_member(:id, Shapes::ShapeRef.new(shape: HoursOfOperationId, location_name: "Id"))
     HoursOfOperationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     HoursOfOperationSummary.add_member(:name, Shapes::ShapeRef.new(shape: HoursOfOperationName, location_name: "Name"))
+    HoursOfOperationSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    HoursOfOperationSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     HoursOfOperationSummary.struct_class = Types::HoursOfOperationSummary
 
     HoursOfOperationSummaryList.member = Shapes::ShapeRef.new(shape: HoursOfOperationSummary)
@@ -2410,6 +3181,19 @@ module Aws::Connect
 
     IdempotencyException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     IdempotencyException.struct_class = Types::IdempotencyException
+
+    ImportPhoneNumberRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    ImportPhoneNumberRequest.add_member(:source_phone_number_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "SourcePhoneNumberArn"))
+    ImportPhoneNumberRequest.add_member(:phone_number_description, Shapes::ShapeRef.new(shape: PhoneNumberDescription, location_name: "PhoneNumberDescription"))
+    ImportPhoneNumberRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    ImportPhoneNumberRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    ImportPhoneNumberRequest.struct_class = Types::ImportPhoneNumberRequest
+
+    ImportPhoneNumberResponse.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: PhoneNumberId, location_name: "PhoneNumberId"))
+    ImportPhoneNumberResponse.add_member(:phone_number_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "PhoneNumberArn"))
+    ImportPhoneNumberResponse.struct_class = Types::ImportPhoneNumberResponse
+
+    InitiationMethodList.member = Shapes::ShapeRef.new(shape: ContactInitiationMethod)
 
     Instance.add_member(:id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "Id"))
     Instance.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
@@ -2422,6 +3206,7 @@ module Aws::Connect
     Instance.add_member(:inbound_calls_enabled, Shapes::ShapeRef.new(shape: InboundCallsEnabled, location_name: "InboundCallsEnabled"))
     Instance.add_member(:outbound_calls_enabled, Shapes::ShapeRef.new(shape: OutboundCallsEnabled, location_name: "OutboundCallsEnabled"))
     Instance.add_member(:instance_access_url, Shapes::ShapeRef.new(shape: Url, location_name: "InstanceAccessUrl"))
+    Instance.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     Instance.struct_class = Types::Instance
 
     InstanceStatusReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -2480,7 +3265,14 @@ module Aws::Connect
     InvalidParameterException.struct_class = Types::InvalidParameterException
 
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    InvalidRequestException.add_member(:reason, Shapes::ShapeRef.new(shape: InvalidRequestExceptionReason, location_name: "Reason"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    InvalidRequestExceptionReason.add_member(:attached_file_invalid_request_exception_reason, Shapes::ShapeRef.new(shape: AttachedFileInvalidRequestExceptionReason, location_name: "AttachedFileInvalidRequestExceptionReason"))
+    InvalidRequestExceptionReason.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    InvalidRequestExceptionReason.add_member_subclass(:attached_file_invalid_request_exception_reason, Types::InvalidRequestExceptionReason::AttachedFileInvalidRequestExceptionReason)
+    InvalidRequestExceptionReason.add_member_subclass(:unknown, Types::InvalidRequestExceptionReason::Unknown)
+    InvalidRequestExceptionReason.struct_class = Types::InvalidRequestExceptionReason
 
     InvisibleFieldInfo.add_member(:id, Shapes::ShapeRef.new(shape: TaskTemplateFieldIdentifier, location_name: "Id"))
     InvisibleFieldInfo.struct_class = Types::InvisibleFieldInfo
@@ -2525,6 +3317,16 @@ module Aws::Connect
     ListAgentStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAgentStatusResponse.add_member(:agent_status_summary_list, Shapes::ShapeRef.new(shape: AgentStatusSummaryList, location_name: "AgentStatusSummaryList"))
     ListAgentStatusResponse.struct_class = Types::ListAgentStatusResponse
+
+    ListAnalyticsDataAssociationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListAnalyticsDataAssociationsRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: DataSetId, location: "querystring", location_name: "DataSetId"))
+    ListAnalyticsDataAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListAnalyticsDataAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults"))
+    ListAnalyticsDataAssociationsRequest.struct_class = Types::ListAnalyticsDataAssociationsRequest
+
+    ListAnalyticsDataAssociationsResponse.add_member(:results, Shapes::ShapeRef.new(shape: AnalyticsDataAssociationResults, location_name: "Results"))
+    ListAnalyticsDataAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAnalyticsDataAssociationsResponse.struct_class = Types::ListAnalyticsDataAssociationsResponse
 
     ListApprovedOriginsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListApprovedOriginsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -2613,6 +3415,16 @@ module Aws::Connect
     ListEvaluationFormsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListEvaluationFormsResponse.struct_class = Types::ListEvaluationFormsResponse
 
+    ListFlowAssociationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListFlowAssociationsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ListFlowAssociationResourceType, location: "querystring", location_name: "ResourceType"))
+    ListFlowAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListFlowAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListFlowAssociationsRequest.struct_class = Types::ListFlowAssociationsRequest
+
+    ListFlowAssociationsResponse.add_member(:flow_association_summary_list, Shapes::ShapeRef.new(shape: FlowAssociationSummaryList, location_name: "FlowAssociationSummaryList"))
+    ListFlowAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListFlowAssociationsResponse.struct_class = Types::ListFlowAssociationsResponse
+
     ListHoursOfOperationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListHoursOfOperationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListHoursOfOperationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults"))
@@ -2653,6 +3465,7 @@ module Aws::Connect
     ListIntegrationAssociationsRequest.add_member(:integration_type, Shapes::ShapeRef.new(shape: IntegrationType, location: "querystring", location_name: "integrationType"))
     ListIntegrationAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListIntegrationAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListIntegrationAssociationsRequest.add_member(:integration_arn, Shapes::ShapeRef.new(shape: ARN, location: "querystring", location_name: "integrationArn"))
     ListIntegrationAssociationsRequest.struct_class = Types::ListIntegrationAssociationsRequest
 
     ListIntegrationAssociationsResponse.add_member(:integration_association_summary_list, Shapes::ShapeRef.new(shape: IntegrationAssociationSummaryList, location_name: "IntegrationAssociationSummaryList"))
@@ -2694,11 +3507,15 @@ module Aws::Connect
     ListPhoneNumbersSummary.add_member(:phone_number_country_code, Shapes::ShapeRef.new(shape: PhoneNumberCountryCode, location_name: "PhoneNumberCountryCode"))
     ListPhoneNumbersSummary.add_member(:phone_number_type, Shapes::ShapeRef.new(shape: PhoneNumberType, location_name: "PhoneNumberType"))
     ListPhoneNumbersSummary.add_member(:target_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "TargetArn"))
+    ListPhoneNumbersSummary.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
+    ListPhoneNumbersSummary.add_member(:phone_number_description, Shapes::ShapeRef.new(shape: PhoneNumberDescription, location_name: "PhoneNumberDescription"))
+    ListPhoneNumbersSummary.add_member(:source_phone_number_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SourcePhoneNumberArn"))
     ListPhoneNumbersSummary.struct_class = Types::ListPhoneNumbersSummary
 
     ListPhoneNumbersSummaryList.member = Shapes::ShapeRef.new(shape: ListPhoneNumbersSummary)
 
     ListPhoneNumbersV2Request.add_member(:target_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "TargetArn"))
+    ListPhoneNumbersV2Request.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     ListPhoneNumbersV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location_name: "MaxResults", metadata: {"box"=>true}))
     ListPhoneNumbersV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
     ListPhoneNumbersV2Request.add_member(:phone_number_country_codes, Shapes::ShapeRef.new(shape: PhoneNumberCountryCodes, location_name: "PhoneNumberCountryCodes"))
@@ -2709,6 +3526,15 @@ module Aws::Connect
     ListPhoneNumbersV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
     ListPhoneNumbersV2Response.add_member(:list_phone_numbers_summary_list, Shapes::ShapeRef.new(shape: ListPhoneNumbersSummaryList, location_name: "ListPhoneNumbersSummaryList"))
     ListPhoneNumbersV2Response.struct_class = Types::ListPhoneNumbersV2Response
+
+    ListPredefinedAttributesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListPredefinedAttributesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListPredefinedAttributesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListPredefinedAttributesRequest.struct_class = Types::ListPredefinedAttributesRequest
+
+    ListPredefinedAttributesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListPredefinedAttributesResponse.add_member(:predefined_attribute_summary_list, Shapes::ShapeRef.new(shape: PredefinedAttributeSummaryList, location_name: "PredefinedAttributeSummaryList"))
+    ListPredefinedAttributesResponse.struct_class = Types::ListPredefinedAttributesResponse
 
     ListPromptsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListPromptsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -2727,6 +3553,8 @@ module Aws::Connect
 
     ListQueueQuickConnectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListQueueQuickConnectsResponse.add_member(:quick_connect_summary_list, Shapes::ShapeRef.new(shape: QuickConnectSummaryList, location_name: "QuickConnectSummaryList"))
+    ListQueueQuickConnectsResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ListQueueQuickConnectsResponse.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     ListQueueQuickConnectsResponse.struct_class = Types::ListQueueQuickConnectsResponse
 
     ListQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -2749,6 +3577,20 @@ module Aws::Connect
     ListQuickConnectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListQuickConnectsResponse.struct_class = Types::ListQuickConnectsResponse
 
+    ListRealtimeContactAnalysisSegmentsV2Request.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListRealtimeContactAnalysisSegmentsV2Request.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "uri", location_name: "ContactId"))
+    ListRealtimeContactAnalysisSegmentsV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults"))
+    ListRealtimeContactAnalysisSegmentsV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
+    ListRealtimeContactAnalysisSegmentsV2Request.add_member(:output_type, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisOutputType, required: true, location_name: "OutputType"))
+    ListRealtimeContactAnalysisSegmentsV2Request.add_member(:segment_types, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentTypes, required: true, location_name: "SegmentTypes"))
+    ListRealtimeContactAnalysisSegmentsV2Request.struct_class = Types::ListRealtimeContactAnalysisSegmentsV2Request
+
+    ListRealtimeContactAnalysisSegmentsV2Response.add_member(:channel, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSupportedChannel, required: true, location_name: "Channel"))
+    ListRealtimeContactAnalysisSegmentsV2Response.add_member(:status, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisStatus, required: true, location_name: "Status"))
+    ListRealtimeContactAnalysisSegmentsV2Response.add_member(:segments, Shapes::ShapeRef.new(shape: RealtimeContactAnalysisSegments, required: true, location_name: "Segments"))
+    ListRealtimeContactAnalysisSegmentsV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
+    ListRealtimeContactAnalysisSegmentsV2Response.struct_class = Types::ListRealtimeContactAnalysisSegmentsV2Response
+
     ListRoutingProfileQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListRoutingProfileQueuesRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
     ListRoutingProfileQueuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -2757,6 +3599,8 @@ module Aws::Connect
 
     ListRoutingProfileQueuesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListRoutingProfileQueuesResponse.add_member(:routing_profile_queue_config_summary_list, Shapes::ShapeRef.new(shape: RoutingProfileQueueConfigSummaryList, location_name: "RoutingProfileQueueConfigSummaryList"))
+    ListRoutingProfileQueuesResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ListRoutingProfileQueuesResponse.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     ListRoutingProfileQueuesResponse.struct_class = Types::ListRoutingProfileQueuesResponse
 
     ListRoutingProfilesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -2796,6 +3640,8 @@ module Aws::Connect
 
     ListSecurityProfileApplicationsResponse.add_member(:applications, Shapes::ShapeRef.new(shape: Applications, location_name: "Applications"))
     ListSecurityProfileApplicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSecurityProfileApplicationsResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ListSecurityProfileApplicationsResponse.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     ListSecurityProfileApplicationsResponse.struct_class = Types::ListSecurityProfileApplicationsResponse
 
     ListSecurityProfilePermissionsRequest.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, required: true, location: "uri", location_name: "SecurityProfileId"))
@@ -2806,6 +3652,8 @@ module Aws::Connect
 
     ListSecurityProfilePermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionsList, location_name: "Permissions"))
     ListSecurityProfilePermissionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSecurityProfilePermissionsResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ListSecurityProfilePermissionsResponse.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     ListSecurityProfilePermissionsResponse.struct_class = Types::ListSecurityProfilePermissionsResponse
 
     ListSecurityProfilesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -2871,6 +3719,18 @@ module Aws::Connect
     ListUserHierarchyGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListUserHierarchyGroupsResponse.struct_class = Types::ListUserHierarchyGroupsResponse
 
+    ListUserProficienciesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListUserProficienciesRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
+    ListUserProficienciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListUserProficienciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListUserProficienciesRequest.struct_class = Types::ListUserProficienciesRequest
+
+    ListUserProficienciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListUserProficienciesResponse.add_member(:user_proficiency_list, Shapes::ShapeRef.new(shape: UserProficiencyList, location_name: "UserProficiencyList"))
+    ListUserProficienciesResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ListUserProficienciesResponse.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    ListUserProficienciesResponse.struct_class = Types::ListUserProficienciesResponse
+
     ListUsersRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
@@ -2909,6 +3769,22 @@ module Aws::Connect
     MediaConcurrency.add_member(:concurrency, Shapes::ShapeRef.new(shape: Concurrency, required: true, location_name: "Concurrency"))
     MediaConcurrency.add_member(:cross_channel_behavior, Shapes::ShapeRef.new(shape: CrossChannelBehavior, location_name: "CrossChannelBehavior"))
     MediaConcurrency.struct_class = Types::MediaConcurrency
+
+    MediaPlacement.add_member(:audio_host_url, Shapes::ShapeRef.new(shape: URI, location_name: "AudioHostUrl"))
+    MediaPlacement.add_member(:audio_fallback_url, Shapes::ShapeRef.new(shape: URI, location_name: "AudioFallbackUrl"))
+    MediaPlacement.add_member(:signaling_url, Shapes::ShapeRef.new(shape: URI, location_name: "SignalingUrl"))
+    MediaPlacement.add_member(:turn_control_url, Shapes::ShapeRef.new(shape: URI, location_name: "TurnControlUrl"))
+    MediaPlacement.add_member(:event_ingestion_url, Shapes::ShapeRef.new(shape: URI, location_name: "EventIngestionUrl"))
+    MediaPlacement.struct_class = Types::MediaPlacement
+
+    Meeting.add_member(:media_region, Shapes::ShapeRef.new(shape: MediaRegion, location_name: "MediaRegion"))
+    Meeting.add_member(:media_placement, Shapes::ShapeRef.new(shape: MediaPlacement, location_name: "MediaPlacement"))
+    Meeting.add_member(:meeting_features, Shapes::ShapeRef.new(shape: MeetingFeaturesConfiguration, location_name: "MeetingFeatures"))
+    Meeting.add_member(:meeting_id, Shapes::ShapeRef.new(shape: MeetingId, location_name: "MeetingId"))
+    Meeting.struct_class = Types::Meeting
+
+    MeetingFeaturesConfiguration.add_member(:audio, Shapes::ShapeRef.new(shape: AudioFeatures, location_name: "Audio"))
+    MeetingFeaturesConfiguration.struct_class = Types::MeetingFeaturesConfiguration
 
     MetricDataCollectionsV2.member = Shapes::ShapeRef.new(shape: MetricDataV2)
 
@@ -2955,6 +3831,12 @@ module Aws::Connect
     MonitorContactResponse.add_member(:contact_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ContactArn"))
     MonitorContactResponse.struct_class = Types::MonitorContactResponse
 
+    NewSessionDetails.add_member(:supported_messaging_content_types, Shapes::ShapeRef.new(shape: SupportedMessagingContentTypes, location_name: "SupportedMessagingContentTypes"))
+    NewSessionDetails.add_member(:participant_details, Shapes::ShapeRef.new(shape: ParticipantDetails, location_name: "ParticipantDetails"))
+    NewSessionDetails.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
+    NewSessionDetails.add_member(:streaming_configuration, Shapes::ShapeRef.new(shape: ChatStreamingConfiguration, location_name: "StreamingConfiguration"))
+    NewSessionDetails.struct_class = Types::NewSessionDetails
+
     NotificationRecipientType.add_member(:user_tags, Shapes::ShapeRef.new(shape: UserTagMap, location_name: "UserTags"))
     NotificationRecipientType.add_member(:user_ids, Shapes::ShapeRef.new(shape: UserIdList, location_name: "UserIds"))
     NotificationRecipientType.struct_class = Types::NotificationRecipientType
@@ -2975,6 +3857,12 @@ module Aws::Connect
 
     OutboundContactNotPermittedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     OutboundContactNotPermittedException.struct_class = Types::OutboundContactNotPermittedException
+
+    OutputTypeNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    OutputTypeNotFoundException.struct_class = Types::OutputTypeNotFoundException
+
+    ParticipantCapabilities.add_member(:video, Shapes::ShapeRef.new(shape: VideoCapability, location_name: "Video"))
+    ParticipantCapabilities.struct_class = Types::ParticipantCapabilities
 
     ParticipantDetails.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "DisplayName"))
     ParticipantDetails.struct_class = Types::ParticipantDetails
@@ -3002,6 +3890,13 @@ module Aws::Connect
     ParticipantTokenCredentials.add_member(:expiry, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "Expiry"))
     ParticipantTokenCredentials.struct_class = Types::ParticipantTokenCredentials
 
+    PauseContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    PauseContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    PauseContactRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "ContactFlowId"))
+    PauseContactRequest.struct_class = Types::PauseContactRequest
+
+    PauseContactResponse.struct_class = Types::PauseContactResponse
+
     PermissionsList.member = Shapes::ShapeRef.new(shape: SecurityProfilePermission)
 
     PersistentChat.add_member(:rehydration_type, Shapes::ShapeRef.new(shape: RehydrationType, location_name: "RehydrationType"))
@@ -3028,6 +3923,38 @@ module Aws::Connect
 
     PhoneNumberTypes.member = Shapes::ShapeRef.new(shape: PhoneNumberType)
 
+    PotentialAudioQualityIssues.member = Shapes::ShapeRef.new(shape: PotentialAudioQualityIssue)
+
+    PredefinedAttribute.add_member(:name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, location_name: "Name"))
+    PredefinedAttribute.add_member(:values, Shapes::ShapeRef.new(shape: PredefinedAttributeValues, location_name: "Values"))
+    PredefinedAttribute.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    PredefinedAttribute.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    PredefinedAttribute.struct_class = Types::PredefinedAttribute
+
+    PredefinedAttributeSearchConditionList.member = Shapes::ShapeRef.new(shape: PredefinedAttributeSearchCriteria)
+
+    PredefinedAttributeSearchCriteria.add_member(:or_conditions, Shapes::ShapeRef.new(shape: PredefinedAttributeSearchConditionList, location_name: "OrConditions"))
+    PredefinedAttributeSearchCriteria.add_member(:and_conditions, Shapes::ShapeRef.new(shape: PredefinedAttributeSearchConditionList, location_name: "AndConditions"))
+    PredefinedAttributeSearchCriteria.add_member(:string_condition, Shapes::ShapeRef.new(shape: StringCondition, location_name: "StringCondition"))
+    PredefinedAttributeSearchCriteria.struct_class = Types::PredefinedAttributeSearchCriteria
+
+    PredefinedAttributeSearchSummaryList.member = Shapes::ShapeRef.new(shape: PredefinedAttribute)
+
+    PredefinedAttributeStringValuesList.member = Shapes::ShapeRef.new(shape: PredefinedAttributeStringValue)
+
+    PredefinedAttributeSummary.add_member(:name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, location_name: "Name"))
+    PredefinedAttributeSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    PredefinedAttributeSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    PredefinedAttributeSummary.struct_class = Types::PredefinedAttributeSummary
+
+    PredefinedAttributeSummaryList.member = Shapes::ShapeRef.new(shape: PredefinedAttributeSummary)
+
+    PredefinedAttributeValues.add_member(:string_list, Shapes::ShapeRef.new(shape: PredefinedAttributeStringValuesList, location_name: "StringList"))
+    PredefinedAttributeValues.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PredefinedAttributeValues.add_member_subclass(:string_list, Types::PredefinedAttributeValues::StringList)
+    PredefinedAttributeValues.add_member_subclass(:unknown, Types::PredefinedAttributeValues::Unknown)
+    PredefinedAttributeValues.struct_class = Types::PredefinedAttributeValues
+
     ProblemDetail.add_member(:message, Shapes::ShapeRef.new(shape: ProblemMessageString, location_name: "message"))
     ProblemDetail.struct_class = Types::ProblemDetail
 
@@ -3038,6 +3965,8 @@ module Aws::Connect
     Prompt.add_member(:name, Shapes::ShapeRef.new(shape: CommonNameLength127, location_name: "Name"))
     Prompt.add_member(:description, Shapes::ShapeRef.new(shape: PromptDescription, location_name: "Description"))
     Prompt.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    Prompt.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    Prompt.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     Prompt.struct_class = Types::Prompt
 
     PromptList.member = Shapes::ShapeRef.new(shape: Prompt)
@@ -3055,6 +3984,8 @@ module Aws::Connect
     PromptSummary.add_member(:id, Shapes::ShapeRef.new(shape: PromptId, location_name: "Id"))
     PromptSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     PromptSummary.add_member(:name, Shapes::ShapeRef.new(shape: PromptName, location_name: "Name"))
+    PromptSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    PromptSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     PromptSummary.struct_class = Types::PromptSummary
 
     PromptSummaryList.member = Shapes::ShapeRef.new(shape: PromptSummary)
@@ -3077,6 +4008,10 @@ module Aws::Connect
 
     PutUserStatusResponse.struct_class = Types::PutUserStatusResponse
 
+    QualityMetrics.add_member(:agent, Shapes::ShapeRef.new(shape: AgentQualityMetrics, location_name: "Agent"))
+    QualityMetrics.add_member(:customer, Shapes::ShapeRef.new(shape: CustomerQualityMetrics, location_name: "Customer"))
+    QualityMetrics.struct_class = Types::QualityMetrics
+
     Queue.add_member(:name, Shapes::ShapeRef.new(shape: CommonNameLength127, location_name: "Name"))
     Queue.add_member(:queue_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "QueueArn"))
     Queue.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, location_name: "QueueId"))
@@ -3086,7 +4021,11 @@ module Aws::Connect
     Queue.add_member(:max_contacts, Shapes::ShapeRef.new(shape: QueueMaxContacts, location_name: "MaxContacts", metadata: {"box"=>true}))
     Queue.add_member(:status, Shapes::ShapeRef.new(shape: QueueStatus, location_name: "Status"))
     Queue.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    Queue.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    Queue.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     Queue.struct_class = Types::Queue
+
+    QueueIdList.member = Shapes::ShapeRef.new(shape: QueueId)
 
     QueueInfo.add_member(:id, Shapes::ShapeRef.new(shape: QueueId, location_name: "Id"))
     QueueInfo.add_member(:enqueue_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "EnqueueTimestamp"))
@@ -3117,6 +4056,8 @@ module Aws::Connect
     QueueSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     QueueSummary.add_member(:name, Shapes::ShapeRef.new(shape: QueueName, location_name: "Name"))
     QueueSummary.add_member(:queue_type, Shapes::ShapeRef.new(shape: QueueType, location_name: "QueueType"))
+    QueueSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    QueueSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     QueueSummary.struct_class = Types::QueueSummary
 
     QueueSummaryList.member = Shapes::ShapeRef.new(shape: QueueSummary)
@@ -3131,6 +4072,8 @@ module Aws::Connect
     QuickConnect.add_member(:description, Shapes::ShapeRef.new(shape: QuickConnectDescription, location_name: "Description"))
     QuickConnect.add_member(:quick_connect_config, Shapes::ShapeRef.new(shape: QuickConnectConfig, location_name: "QuickConnectConfig"))
     QuickConnect.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    QuickConnect.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    QuickConnect.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     QuickConnect.struct_class = Types::QuickConnect
 
     QuickConnectConfig.add_member(:quick_connect_type, Shapes::ShapeRef.new(shape: QuickConnectType, required: true, location_name: "QuickConnectType"))
@@ -3155,6 +4098,8 @@ module Aws::Connect
     QuickConnectSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     QuickConnectSummary.add_member(:name, Shapes::ShapeRef.new(shape: QuickConnectName, location_name: "Name"))
     QuickConnectSummary.add_member(:quick_connect_type, Shapes::ShapeRef.new(shape: QuickConnectType, location_name: "QuickConnectType"))
+    QuickConnectSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    QuickConnectSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     QuickConnectSummary.struct_class = Types::QuickConnectSummary
 
     QuickConnectSummaryList.member = Shapes::ShapeRef.new(shape: QuickConnectSummary)
@@ -3167,6 +4112,109 @@ module Aws::Connect
     ReadOnlyFieldInfo.struct_class = Types::ReadOnlyFieldInfo
 
     ReadOnlyTaskTemplateFields.member = Shapes::ShapeRef.new(shape: ReadOnlyFieldInfo)
+
+    RealTimeContactAnalysisAttachment.add_member(:attachment_name, Shapes::ShapeRef.new(shape: AttachmentName, required: true, location_name: "AttachmentName"))
+    RealTimeContactAnalysisAttachment.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
+    RealTimeContactAnalysisAttachment.add_member(:attachment_id, Shapes::ShapeRef.new(shape: ArtifactId, required: true, location_name: "AttachmentId"))
+    RealTimeContactAnalysisAttachment.add_member(:status, Shapes::ShapeRef.new(shape: ArtifactStatus, location_name: "Status"))
+    RealTimeContactAnalysisAttachment.struct_class = Types::RealTimeContactAnalysisAttachment
+
+    RealTimeContactAnalysisAttachments.member = Shapes::ShapeRef.new(shape: RealTimeContactAnalysisAttachment)
+
+    RealTimeContactAnalysisCategoryDetails.add_member(:points_of_interest, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisPointsOfInterest, required: true, location_name: "PointsOfInterest"))
+    RealTimeContactAnalysisCategoryDetails.struct_class = Types::RealTimeContactAnalysisCategoryDetails
+
+    RealTimeContactAnalysisCharacterInterval.add_member(:begin_offset_char, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisOffset, required: true, location_name: "BeginOffsetChar"))
+    RealTimeContactAnalysisCharacterInterval.add_member(:end_offset_char, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisOffset, required: true, location_name: "EndOffsetChar"))
+    RealTimeContactAnalysisCharacterInterval.struct_class = Types::RealTimeContactAnalysisCharacterInterval
+
+    RealTimeContactAnalysisCharacterIntervals.member = Shapes::ShapeRef.new(shape: RealTimeContactAnalysisCharacterInterval)
+
+    RealTimeContactAnalysisIssueDetected.add_member(:transcript_items, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisTranscriptItemsWithContent, required: true, location_name: "TranscriptItems"))
+    RealTimeContactAnalysisIssueDetected.struct_class = Types::RealTimeContactAnalysisIssueDetected
+
+    RealTimeContactAnalysisIssuesDetected.member = Shapes::ShapeRef.new(shape: RealTimeContactAnalysisIssueDetected)
+
+    RealTimeContactAnalysisMatchedDetails.key = Shapes::ShapeRef.new(shape: RealTimeContactAnalysisCategoryName)
+    RealTimeContactAnalysisMatchedDetails.value = Shapes::ShapeRef.new(shape: RealTimeContactAnalysisCategoryDetails)
+
+    RealTimeContactAnalysisPointOfInterest.add_member(:transcript_items, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisTranscriptItemsWithCharacterOffsets, location_name: "TranscriptItems"))
+    RealTimeContactAnalysisPointOfInterest.struct_class = Types::RealTimeContactAnalysisPointOfInterest
+
+    RealTimeContactAnalysisPointsOfInterest.member = Shapes::ShapeRef.new(shape: RealTimeContactAnalysisPointOfInterest)
+
+    RealTimeContactAnalysisSegmentAttachments.add_member(:id, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisId256, required: true, location_name: "Id"))
+    RealTimeContactAnalysisSegmentAttachments.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "ParticipantId"))
+    RealTimeContactAnalysisSegmentAttachments.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, required: true, location_name: "ParticipantRole"))
+    RealTimeContactAnalysisSegmentAttachments.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    RealTimeContactAnalysisSegmentAttachments.add_member(:attachments, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisAttachments, required: true, location_name: "Attachments"))
+    RealTimeContactAnalysisSegmentAttachments.add_member(:time, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisTimeData, required: true, location_name: "Time"))
+    RealTimeContactAnalysisSegmentAttachments.struct_class = Types::RealTimeContactAnalysisSegmentAttachments
+
+    RealTimeContactAnalysisSegmentCategories.add_member(:matched_details, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisMatchedDetails, required: true, location_name: "MatchedDetails"))
+    RealTimeContactAnalysisSegmentCategories.struct_class = Types::RealTimeContactAnalysisSegmentCategories
+
+    RealTimeContactAnalysisSegmentEvent.add_member(:id, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisId256, required: true, location_name: "Id"))
+    RealTimeContactAnalysisSegmentEvent.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "ParticipantId"))
+    RealTimeContactAnalysisSegmentEvent.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, location_name: "ParticipantRole"))
+    RealTimeContactAnalysisSegmentEvent.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    RealTimeContactAnalysisSegmentEvent.add_member(:event_type, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisEventType, required: true, location_name: "EventType"))
+    RealTimeContactAnalysisSegmentEvent.add_member(:time, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisTimeData, required: true, location_name: "Time"))
+    RealTimeContactAnalysisSegmentEvent.struct_class = Types::RealTimeContactAnalysisSegmentEvent
+
+    RealTimeContactAnalysisSegmentIssues.add_member(:issues_detected, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisIssuesDetected, required: true, location_name: "IssuesDetected"))
+    RealTimeContactAnalysisSegmentIssues.struct_class = Types::RealTimeContactAnalysisSegmentIssues
+
+    RealTimeContactAnalysisSegmentTranscript.add_member(:id, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisId256, required: true, location_name: "Id"))
+    RealTimeContactAnalysisSegmentTranscript.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, required: true, location_name: "ParticipantId"))
+    RealTimeContactAnalysisSegmentTranscript.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, required: true, location_name: "ParticipantRole"))
+    RealTimeContactAnalysisSegmentTranscript.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    RealTimeContactAnalysisSegmentTranscript.add_member(:content, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisTranscriptContent, required: true, location_name: "Content"))
+    RealTimeContactAnalysisSegmentTranscript.add_member(:content_type, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisContentType, location_name: "ContentType"))
+    RealTimeContactAnalysisSegmentTranscript.add_member(:time, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisTimeData, required: true, location_name: "Time"))
+    RealTimeContactAnalysisSegmentTranscript.add_member(:redaction, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisTranscriptItemRedaction, location_name: "Redaction"))
+    RealTimeContactAnalysisSegmentTranscript.add_member(:sentiment, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSentimentLabel, location_name: "Sentiment"))
+    RealTimeContactAnalysisSegmentTranscript.struct_class = Types::RealTimeContactAnalysisSegmentTranscript
+
+    RealTimeContactAnalysisSegmentTypes.member = Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentType)
+
+    RealTimeContactAnalysisTimeData.add_member(:absolute_time, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisTimeInstant, location_name: "AbsoluteTime"))
+    RealTimeContactAnalysisTimeData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RealTimeContactAnalysisTimeData.add_member_subclass(:absolute_time, Types::RealTimeContactAnalysisTimeData::AbsoluteTime)
+    RealTimeContactAnalysisTimeData.add_member_subclass(:unknown, Types::RealTimeContactAnalysisTimeData::Unknown)
+    RealTimeContactAnalysisTimeData.struct_class = Types::RealTimeContactAnalysisTimeData
+
+    RealTimeContactAnalysisTranscriptItemRedaction.add_member(:character_offsets, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisCharacterIntervals, location_name: "CharacterOffsets"))
+    RealTimeContactAnalysisTranscriptItemRedaction.struct_class = Types::RealTimeContactAnalysisTranscriptItemRedaction
+
+    RealTimeContactAnalysisTranscriptItemWithCharacterOffsets.add_member(:id, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisId256, required: true, location_name: "Id"))
+    RealTimeContactAnalysisTranscriptItemWithCharacterOffsets.add_member(:character_offsets, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisCharacterInterval, location_name: "CharacterOffsets"))
+    RealTimeContactAnalysisTranscriptItemWithCharacterOffsets.struct_class = Types::RealTimeContactAnalysisTranscriptItemWithCharacterOffsets
+
+    RealTimeContactAnalysisTranscriptItemWithContent.add_member(:content, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisTranscriptContent, location_name: "Content"))
+    RealTimeContactAnalysisTranscriptItemWithContent.add_member(:id, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisId256, required: true, location_name: "Id"))
+    RealTimeContactAnalysisTranscriptItemWithContent.add_member(:character_offsets, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisCharacterInterval, location_name: "CharacterOffsets"))
+    RealTimeContactAnalysisTranscriptItemWithContent.struct_class = Types::RealTimeContactAnalysisTranscriptItemWithContent
+
+    RealTimeContactAnalysisTranscriptItemsWithCharacterOffsets.member = Shapes::ShapeRef.new(shape: RealTimeContactAnalysisTranscriptItemWithCharacterOffsets)
+
+    RealTimeContactAnalysisTranscriptItemsWithContent.member = Shapes::ShapeRef.new(shape: RealTimeContactAnalysisTranscriptItemWithContent)
+
+    RealtimeContactAnalysisSegment.add_member(:transcript, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentTranscript, location_name: "Transcript"))
+    RealtimeContactAnalysisSegment.add_member(:categories, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentCategories, location_name: "Categories"))
+    RealtimeContactAnalysisSegment.add_member(:issues, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentIssues, location_name: "Issues"))
+    RealtimeContactAnalysisSegment.add_member(:event, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentEvent, location_name: "Event"))
+    RealtimeContactAnalysisSegment.add_member(:attachments, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentAttachments, location_name: "Attachments"))
+    RealtimeContactAnalysisSegment.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RealtimeContactAnalysisSegment.add_member_subclass(:transcript, Types::RealtimeContactAnalysisSegment::Transcript)
+    RealtimeContactAnalysisSegment.add_member_subclass(:categories, Types::RealtimeContactAnalysisSegment::Categories)
+    RealtimeContactAnalysisSegment.add_member_subclass(:issues, Types::RealtimeContactAnalysisSegment::Issues)
+    RealtimeContactAnalysisSegment.add_member_subclass(:event, Types::RealtimeContactAnalysisSegment::Event)
+    RealtimeContactAnalysisSegment.add_member_subclass(:attachments, Types::RealtimeContactAnalysisSegment::Attachments)
+    RealtimeContactAnalysisSegment.add_member_subclass(:unknown, Types::RealtimeContactAnalysisSegment::Unknown)
+    RealtimeContactAnalysisSegment.struct_class = Types::RealtimeContactAnalysisSegment
+
+    RealtimeContactAnalysisSegments.member = Shapes::ShapeRef.new(shape: RealtimeContactAnalysisSegment)
 
     Reference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, required: true, location_name: "Value"))
     Reference.add_member(:type, Shapes::ShapeRef.new(shape: ReferenceType, required: true, location_name: "Type"))
@@ -3237,6 +4285,20 @@ module Aws::Connect
 
     ResumeContactRecordingResponse.struct_class = Types::ResumeContactRecordingResponse
 
+    ResumeContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    ResumeContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    ResumeContactRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "ContactFlowId"))
+    ResumeContactRequest.struct_class = Types::ResumeContactRequest
+
+    ResumeContactResponse.struct_class = Types::ResumeContactResponse
+
+    RoutingCriteria.add_member(:steps, Shapes::ShapeRef.new(shape: Steps, location_name: "Steps"))
+    RoutingCriteria.add_member(:activation_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ActivationTimestamp"))
+    RoutingCriteria.add_member(:index, Shapes::ShapeRef.new(shape: Index, location_name: "Index"))
+    RoutingCriteria.struct_class = Types::RoutingCriteria
+
+    RoutingExpressions.member = Shapes::ShapeRef.new(shape: RoutingExpression)
+
     RoutingProfile.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     RoutingProfile.add_member(:name, Shapes::ShapeRef.new(shape: RoutingProfileName, location_name: "Name"))
     RoutingProfile.add_member(:routing_profile_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "RoutingProfileArn"))
@@ -3248,6 +4310,10 @@ module Aws::Connect
     RoutingProfile.add_member(:number_of_associated_queues, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfAssociatedQueues"))
     RoutingProfile.add_member(:number_of_associated_users, Shapes::ShapeRef.new(shape: Long, location_name: "NumberOfAssociatedUsers"))
     RoutingProfile.add_member(:agent_availability_timer, Shapes::ShapeRef.new(shape: AgentAvailabilityTimer, location_name: "AgentAvailabilityTimer"))
+    RoutingProfile.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    RoutingProfile.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    RoutingProfile.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefault"))
+    RoutingProfile.add_member(:associated_queue_ids, Shapes::ShapeRef.new(shape: AssociatedQueueIdList, location_name: "AssociatedQueueIds"))
     RoutingProfile.struct_class = Types::RoutingProfile
 
     RoutingProfileList.member = Shapes::ShapeRef.new(shape: RoutingProfile)
@@ -3292,6 +4358,8 @@ module Aws::Connect
     RoutingProfileSummary.add_member(:id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "Id"))
     RoutingProfileSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     RoutingProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: RoutingProfileName, location_name: "Name"))
+    RoutingProfileSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    RoutingProfileSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     RoutingProfileSummary.struct_class = Types::RoutingProfileSummary
 
     RoutingProfileSummaryList.member = Shapes::ShapeRef.new(shape: RoutingProfileSummary)
@@ -3316,6 +4384,10 @@ module Aws::Connect
     RuleAction.add_member(:event_bridge_action, Shapes::ShapeRef.new(shape: EventBridgeActionDefinition, location_name: "EventBridgeAction"))
     RuleAction.add_member(:assign_contact_category_action, Shapes::ShapeRef.new(shape: AssignContactCategoryActionDefinition, location_name: "AssignContactCategoryAction"))
     RuleAction.add_member(:send_notification_action, Shapes::ShapeRef.new(shape: SendNotificationActionDefinition, location_name: "SendNotificationAction"))
+    RuleAction.add_member(:create_case_action, Shapes::ShapeRef.new(shape: CreateCaseActionDefinition, location_name: "CreateCaseAction"))
+    RuleAction.add_member(:update_case_action, Shapes::ShapeRef.new(shape: UpdateCaseActionDefinition, location_name: "UpdateCaseAction"))
+    RuleAction.add_member(:end_associated_tasks_action, Shapes::ShapeRef.new(shape: EndAssociatedTasksActionDefinition, location_name: "EndAssociatedTasksAction"))
+    RuleAction.add_member(:submit_auto_evaluation_action, Shapes::ShapeRef.new(shape: SubmitAutoEvaluationActionDefinition, location_name: "SubmitAutoEvaluationAction"))
     RuleAction.struct_class = Types::RuleAction
 
     RuleActions.member = Shapes::ShapeRef.new(shape: RuleAction)
@@ -3341,7 +4413,8 @@ module Aws::Connect
     S3Config.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "EncryptionConfig"))
     S3Config.struct_class = Types::S3Config
 
-    SearchAvailablePhoneNumbersRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "TargetArn"))
+    SearchAvailablePhoneNumbersRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "TargetArn"))
+    SearchAvailablePhoneNumbersRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     SearchAvailablePhoneNumbersRequest.add_member(:phone_number_country_code, Shapes::ShapeRef.new(shape: PhoneNumberCountryCode, required: true, location_name: "PhoneNumberCountryCode"))
     SearchAvailablePhoneNumbersRequest.add_member(:phone_number_type, Shapes::ShapeRef.new(shape: PhoneNumberType, required: true, location_name: "PhoneNumberType"))
     SearchAvailablePhoneNumbersRequest.add_member(:phone_number_prefix, Shapes::ShapeRef.new(shape: PhoneNumberPrefix, location_name: "PhoneNumberPrefix"))
@@ -3352,6 +4425,57 @@ module Aws::Connect
     SearchAvailablePhoneNumbersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
     SearchAvailablePhoneNumbersResponse.add_member(:available_numbers_list, Shapes::ShapeRef.new(shape: AvailableNumbersList, location_name: "AvailableNumbersList"))
     SearchAvailablePhoneNumbersResponse.struct_class = Types::SearchAvailablePhoneNumbersResponse
+
+    SearchContactFlowModulesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SearchContactFlowModulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchContactFlowModulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchContactFlowModulesRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: ContactFlowModuleSearchFilter, location_name: "SearchFilter"))
+    SearchContactFlowModulesRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: ContactFlowModuleSearchCriteria, location_name: "SearchCriteria"))
+    SearchContactFlowModulesRequest.struct_class = Types::SearchContactFlowModulesRequest
+
+    SearchContactFlowModulesResponse.add_member(:contact_flow_modules, Shapes::ShapeRef.new(shape: ContactFlowModuleSearchSummaryList, location_name: "ContactFlowModules"))
+    SearchContactFlowModulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchContactFlowModulesResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
+    SearchContactFlowModulesResponse.struct_class = Types::SearchContactFlowModulesResponse
+
+    SearchContactFlowsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SearchContactFlowsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchContactFlowsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchContactFlowsRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: ContactFlowSearchFilter, location_name: "SearchFilter"))
+    SearchContactFlowsRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: ContactFlowSearchCriteria, location_name: "SearchCriteria"))
+    SearchContactFlowsRequest.struct_class = Types::SearchContactFlowsRequest
+
+    SearchContactFlowsResponse.add_member(:contact_flows, Shapes::ShapeRef.new(shape: ContactFlowSearchSummaryList, location_name: "ContactFlows"))
+    SearchContactFlowsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchContactFlowsResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
+    SearchContactFlowsResponse.struct_class = Types::SearchContactFlowsResponse
+
+    SearchContactsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SearchContactsRequest.add_member(:time_range, Shapes::ShapeRef.new(shape: SearchContactsTimeRange, required: true, location_name: "TimeRange"))
+    SearchContactsRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: SearchCriteria, location_name: "SearchCriteria"))
+    SearchContactsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchContactsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
+    SearchContactsRequest.add_member(:sort, Shapes::ShapeRef.new(shape: Sort, location_name: "Sort"))
+    SearchContactsRequest.struct_class = Types::SearchContactsRequest
+
+    SearchContactsResponse.add_member(:contacts, Shapes::ShapeRef.new(shape: Contacts, required: true, location_name: "Contacts"))
+    SearchContactsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
+    SearchContactsResponse.add_member(:total_count, Shapes::ShapeRef.new(shape: TotalCount, location_name: "TotalCount"))
+    SearchContactsResponse.struct_class = Types::SearchContactsResponse
+
+    SearchContactsTimeRange.add_member(:type, Shapes::ShapeRef.new(shape: SearchContactsTimeRangeType, required: true, location_name: "Type"))
+    SearchContactsTimeRange.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    SearchContactsTimeRange.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    SearchContactsTimeRange.struct_class = Types::SearchContactsTimeRange
+
+    SearchCriteria.add_member(:agent_ids, Shapes::ShapeRef.new(shape: AgentResourceIdList, location_name: "AgentIds"))
+    SearchCriteria.add_member(:agent_hierarchy_groups, Shapes::ShapeRef.new(shape: AgentHierarchyGroups, location_name: "AgentHierarchyGroups"))
+    SearchCriteria.add_member(:channels, Shapes::ShapeRef.new(shape: ChannelList, location_name: "Channels"))
+    SearchCriteria.add_member(:contact_analysis, Shapes::ShapeRef.new(shape: ContactAnalysis, location_name: "ContactAnalysis"))
+    SearchCriteria.add_member(:initiation_methods, Shapes::ShapeRef.new(shape: InitiationMethodList, location_name: "InitiationMethods"))
+    SearchCriteria.add_member(:queue_ids, Shapes::ShapeRef.new(shape: QueueIdList, location_name: "QueueIds"))
+    SearchCriteria.add_member(:searchable_contact_attributes, Shapes::ShapeRef.new(shape: SearchableContactAttributes, location_name: "SearchableContactAttributes"))
+    SearchCriteria.struct_class = Types::SearchCriteria
 
     SearchHoursOfOperationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SearchHoursOfOperationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
@@ -3364,6 +4488,17 @@ module Aws::Connect
     SearchHoursOfOperationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
     SearchHoursOfOperationsResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
     SearchHoursOfOperationsResponse.struct_class = Types::SearchHoursOfOperationsResponse
+
+    SearchPredefinedAttributesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    SearchPredefinedAttributesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchPredefinedAttributesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchPredefinedAttributesRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: PredefinedAttributeSearchCriteria, location_name: "SearchCriteria"))
+    SearchPredefinedAttributesRequest.struct_class = Types::SearchPredefinedAttributesRequest
+
+    SearchPredefinedAttributesResponse.add_member(:predefined_attributes, Shapes::ShapeRef.new(shape: PredefinedAttributeSearchSummaryList, location_name: "PredefinedAttributes"))
+    SearchPredefinedAttributesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
+    SearchPredefinedAttributesResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
+    SearchPredefinedAttributesResponse.struct_class = Types::SearchPredefinedAttributesResponse
 
     SearchPromptsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SearchPromptsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
@@ -3379,7 +4514,7 @@ module Aws::Connect
 
     SearchQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SearchQueuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
-    SearchQueuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchQueuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult500, location_name: "MaxResults", metadata: {"box"=>true}))
     SearchQueuesRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: QueueSearchFilter, location_name: "SearchFilter"))
     SearchQueuesRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: QueueSearchCriteria, location_name: "SearchCriteria"))
     SearchQueuesRequest.struct_class = Types::SearchQueuesRequest
@@ -3414,7 +4549,7 @@ module Aws::Connect
 
     SearchRoutingProfilesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SearchRoutingProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
-    SearchRoutingProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchRoutingProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult500, location_name: "MaxResults", metadata: {"box"=>true}))
     SearchRoutingProfilesRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: RoutingProfileSearchFilter, location_name: "SearchFilter"))
     SearchRoutingProfilesRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: RoutingProfileSearchCriteria, location_name: "SearchCriteria"))
     SearchRoutingProfilesRequest.struct_class = Types::SearchRoutingProfilesRequest
@@ -3436,9 +4571,11 @@ module Aws::Connect
     SearchSecurityProfilesResponse.add_member(:approximate_total_count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, location_name: "ApproximateTotalCount"))
     SearchSecurityProfilesResponse.struct_class = Types::SearchSecurityProfilesResponse
 
-    SearchUsersRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
+    SearchTextList.member = Shapes::ShapeRef.new(shape: SearchText)
+
+    SearchUsersRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SearchUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
-    SearchUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    SearchUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult500, location_name: "MaxResults", metadata: {"box"=>true}))
     SearchUsersRequest.add_member(:search_filter, Shapes::ShapeRef.new(shape: UserSearchFilter, location_name: "SearchFilter"))
     SearchUsersRequest.add_member(:search_criteria, Shapes::ShapeRef.new(shape: UserSearchCriteria, location_name: "SearchCriteria"))
     SearchUsersRequest.struct_class = Types::SearchUsersRequest
@@ -3460,6 +4597,18 @@ module Aws::Connect
     SearchVocabulariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: VocabularyNextToken, location_name: "NextToken"))
     SearchVocabulariesResponse.struct_class = Types::SearchVocabulariesResponse
 
+    SearchableContactAttributeValueList.member = Shapes::ShapeRef.new(shape: SearchableContactAttributeValue)
+
+    SearchableContactAttributes.add_member(:criteria, Shapes::ShapeRef.new(shape: SearchableContactAttributesCriteriaList, required: true, location_name: "Criteria"))
+    SearchableContactAttributes.add_member(:match_type, Shapes::ShapeRef.new(shape: SearchContactsMatchType, location_name: "MatchType"))
+    SearchableContactAttributes.struct_class = Types::SearchableContactAttributes
+
+    SearchableContactAttributesCriteria.add_member(:key, Shapes::ShapeRef.new(shape: SearchableContactAttributeKey, required: true, location_name: "Key"))
+    SearchableContactAttributesCriteria.add_member(:values, Shapes::ShapeRef.new(shape: SearchableContactAttributeValueList, required: true, location_name: "Values"))
+    SearchableContactAttributesCriteria.struct_class = Types::SearchableContactAttributesCriteria
+
+    SearchableContactAttributesCriteriaList.member = Shapes::ShapeRef.new(shape: SearchableContactAttributesCriteria)
+
     SecurityKey.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
     SecurityKey.add_member(:key, Shapes::ShapeRef.new(shape: PEM, location_name: "Key"))
     SecurityKey.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
@@ -3475,6 +4624,10 @@ module Aws::Connect
     SecurityProfile.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     SecurityProfile.add_member(:allowed_access_control_tags, Shapes::ShapeRef.new(shape: AllowedAccessControlTags, location_name: "AllowedAccessControlTags"))
     SecurityProfile.add_member(:tag_restricted_resources, Shapes::ShapeRef.new(shape: TagRestrictedResourceList, location_name: "TagRestrictedResources"))
+    SecurityProfile.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    SecurityProfile.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    SecurityProfile.add_member(:hierarchy_restricted_resources, Shapes::ShapeRef.new(shape: HierarchyRestrictedResourceList, location_name: "HierarchyRestrictedResources"))
+    SecurityProfile.add_member(:allowed_access_control_hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "AllowedAccessControlHierarchyGroupId"))
     SecurityProfile.struct_class = Types::SecurityProfile
 
     SecurityProfileIds.member = Shapes::ShapeRef.new(shape: SecurityProfileId)
@@ -3497,6 +4650,8 @@ module Aws::Connect
     SecurityProfileSummary.add_member(:id, Shapes::ShapeRef.new(shape: SecurityProfileId, location_name: "Id"))
     SecurityProfileSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     SecurityProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: SecurityProfileName, location_name: "Name"))
+    SecurityProfileSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    SecurityProfileSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     SecurityProfileSummary.struct_class = Types::SecurityProfileSummary
 
     SecurityProfileSummaryList.member = Shapes::ShapeRef.new(shape: SecurityProfileSummary)
@@ -3505,6 +4660,23 @@ module Aws::Connect
     SecurityProfilesSearchFilter.struct_class = Types::SecurityProfilesSearchFilter
 
     SecurityProfilesSearchSummaryList.member = Shapes::ShapeRef.new(shape: SecurityProfileSearchSummary)
+
+    SegmentAttributeValue.add_member(:value_string, Shapes::ShapeRef.new(shape: SegmentAttributeValueString, location_name: "ValueString"))
+    SegmentAttributeValue.struct_class = Types::SegmentAttributeValue
+
+    SegmentAttributes.key = Shapes::ShapeRef.new(shape: SegmentAttributeName)
+    SegmentAttributes.value = Shapes::ShapeRef.new(shape: SegmentAttributeValue)
+
+    SendChatIntegrationEventRequest.add_member(:source_id, Shapes::ShapeRef.new(shape: SourceId, required: true, location_name: "SourceId"))
+    SendChatIntegrationEventRequest.add_member(:destination_id, Shapes::ShapeRef.new(shape: DestinationId, required: true, location_name: "DestinationId"))
+    SendChatIntegrationEventRequest.add_member(:subtype, Shapes::ShapeRef.new(shape: Subtype, location_name: "Subtype"))
+    SendChatIntegrationEventRequest.add_member(:event, Shapes::ShapeRef.new(shape: ChatEvent, required: true, location_name: "Event"))
+    SendChatIntegrationEventRequest.add_member(:new_session_details, Shapes::ShapeRef.new(shape: NewSessionDetails, location_name: "NewSessionDetails"))
+    SendChatIntegrationEventRequest.struct_class = Types::SendChatIntegrationEventRequest
+
+    SendChatIntegrationEventResponse.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "InitialContactId"))
+    SendChatIntegrationEventResponse.add_member(:new_chat_created, Shapes::ShapeRef.new(shape: NewChatCreated, location_name: "NewChatCreated"))
+    SendChatIntegrationEventResponse.struct_class = Types::SendChatIntegrationEventResponse
 
     SendNotificationActionDefinition.add_member(:delivery_method, Shapes::ShapeRef.new(shape: NotificationDeliveryType, required: true, location_name: "DeliveryMethod"))
     SendNotificationActionDefinition.add_member(:subject, Shapes::ShapeRef.new(shape: Subject, location_name: "Subject"))
@@ -3532,6 +4704,29 @@ module Aws::Connect
     SingleSelectQuestionRuleCategoryAutomation.add_member(:option_ref_id, Shapes::ShapeRef.new(shape: ReferenceId, required: true, location_name: "OptionRefId"))
     SingleSelectQuestionRuleCategoryAutomation.struct_class = Types::SingleSelectQuestionRuleCategoryAutomation
 
+    Sort.add_member(:field_name, Shapes::ShapeRef.new(shape: SortableFieldName, required: true, location_name: "FieldName"))
+    Sort.add_member(:order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "Order"))
+    Sort.struct_class = Types::Sort
+
+    StartAttachedFileUploadRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartAttachedFileUploadRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    StartAttachedFileUploadRequest.add_member(:file_name, Shapes::ShapeRef.new(shape: FileName, required: true, location_name: "FileName"))
+    StartAttachedFileUploadRequest.add_member(:file_size_in_bytes, Shapes::ShapeRef.new(shape: FileSizeInBytes, required: true, location_name: "FileSizeInBytes", metadata: {"box"=>true}))
+    StartAttachedFileUploadRequest.add_member(:url_expiry_in_seconds, Shapes::ShapeRef.new(shape: URLExpiryInSeconds, location_name: "UrlExpiryInSeconds"))
+    StartAttachedFileUploadRequest.add_member(:file_use_case_type, Shapes::ShapeRef.new(shape: FileUseCaseType, required: true, location_name: "FileUseCaseType"))
+    StartAttachedFileUploadRequest.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "associatedResourceArn"))
+    StartAttachedFileUploadRequest.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedByInfo, location_name: "CreatedBy"))
+    StartAttachedFileUploadRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    StartAttachedFileUploadRequest.struct_class = Types::StartAttachedFileUploadRequest
+
+    StartAttachedFileUploadResponse.add_member(:file_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "FileArn"))
+    StartAttachedFileUploadResponse.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, location_name: "FileId"))
+    StartAttachedFileUploadResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "CreationTime"))
+    StartAttachedFileUploadResponse.add_member(:file_status, Shapes::ShapeRef.new(shape: FileStatusType, location_name: "FileStatus"))
+    StartAttachedFileUploadResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedByInfo, location_name: "CreatedBy"))
+    StartAttachedFileUploadResponse.add_member(:upload_url_metadata, Shapes::ShapeRef.new(shape: UploadUrlMetadata, location_name: "UploadUrlMetadata"))
+    StartAttachedFileUploadResponse.struct_class = Types::StartAttachedFileUploadResponse
+
     StartChatContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     StartChatContactRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "ContactFlowId"))
     StartChatContactRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
@@ -3542,6 +4737,7 @@ module Aws::Connect
     StartChatContactRequest.add_member(:supported_messaging_content_types, Shapes::ShapeRef.new(shape: SupportedMessagingContentTypes, location_name: "SupportedMessagingContentTypes"))
     StartChatContactRequest.add_member(:persistent_chat, Shapes::ShapeRef.new(shape: PersistentChat, location_name: "PersistentChat"))
     StartChatContactRequest.add_member(:related_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "RelatedContactId"))
+    StartChatContactRequest.add_member(:segment_attributes, Shapes::ShapeRef.new(shape: SegmentAttributes, location_name: "SegmentAttributes"))
     StartChatContactRequest.struct_class = Types::StartChatContactRequest
 
     StartChatContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
@@ -3577,6 +4773,10 @@ module Aws::Connect
     StartContactStreamingResponse.add_member(:streaming_id, Shapes::ShapeRef.new(shape: StreamingId, required: true, location_name: "StreamingId"))
     StartContactStreamingResponse.struct_class = Types::StartContactStreamingResponse
 
+    StartOutboundVoiceContactRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    StartOutboundVoiceContactRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    StartOutboundVoiceContactRequest.add_member(:references, Shapes::ShapeRef.new(shape: ContactReferences, location_name: "References"))
+    StartOutboundVoiceContactRequest.add_member(:related_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "RelatedContactId"))
     StartOutboundVoiceContactRequest.add_member(:destination_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "DestinationPhoneNumber"))
     StartOutboundVoiceContactRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "ContactFlowId"))
     StartOutboundVoiceContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
@@ -3609,6 +4809,30 @@ module Aws::Connect
     StartTaskContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
     StartTaskContactResponse.struct_class = Types::StartTaskContactResponse
 
+    StartWebRTCContactRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
+    StartWebRTCContactRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartWebRTCContactRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "ContactFlowId"))
+    StartWebRTCContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    StartWebRTCContactRequest.add_member(:allowed_capabilities, Shapes::ShapeRef.new(shape: AllowedCapabilities, location_name: "AllowedCapabilities"))
+    StartWebRTCContactRequest.add_member(:participant_details, Shapes::ShapeRef.new(shape: ParticipantDetails, required: true, location_name: "ParticipantDetails"))
+    StartWebRTCContactRequest.add_member(:related_contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "RelatedContactId"))
+    StartWebRTCContactRequest.add_member(:references, Shapes::ShapeRef.new(shape: ContactReferences, location_name: "References"))
+    StartWebRTCContactRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    StartWebRTCContactRequest.struct_class = Types::StartWebRTCContactRequest
+
+    StartWebRTCContactResponse.add_member(:connection_data, Shapes::ShapeRef.new(shape: ConnectionData, location_name: "ConnectionData"))
+    StartWebRTCContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
+    StartWebRTCContactResponse.add_member(:participant_id, Shapes::ShapeRef.new(shape: ParticipantId, location_name: "ParticipantId"))
+    StartWebRTCContactResponse.add_member(:participant_token, Shapes::ShapeRef.new(shape: ParticipantToken, location_name: "ParticipantToken"))
+    StartWebRTCContactResponse.struct_class = Types::StartWebRTCContactResponse
+
+    Step.add_member(:expiry, Shapes::ShapeRef.new(shape: Expiry, location_name: "Expiry"))
+    Step.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, location_name: "Expression"))
+    Step.add_member(:status, Shapes::ShapeRef.new(shape: RoutingCriteriaStepStatus, location_name: "Status"))
+    Step.struct_class = Types::Step
+
+    Steps.member = Shapes::ShapeRef.new(shape: Step)
+
     StopContactRecordingRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     StopContactRecordingRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
     StopContactRecordingRequest.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "InitialContactId"))
@@ -3618,6 +4842,7 @@ module Aws::Connect
 
     StopContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
     StopContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    StopContactRequest.add_member(:disconnect_reason, Shapes::ShapeRef.new(shape: DisconnectReason, location_name: "DisconnectReason"))
     StopContactRequest.struct_class = Types::StopContactRequest
 
     StopContactResponse.struct_class = Types::StopContactResponse
@@ -3638,6 +4863,9 @@ module Aws::Connect
     StringReference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, location_name: "Value"))
     StringReference.struct_class = Types::StringReference
 
+    SubmitAutoEvaluationActionDefinition.add_member(:evaluation_form_id, Shapes::ShapeRef.new(shape: EvaluationFormId, required: true, location_name: "EvaluationFormId"))
+    SubmitAutoEvaluationActionDefinition.struct_class = Types::SubmitAutoEvaluationActionDefinition
+
     SubmitContactEvaluationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     SubmitContactEvaluationRequest.add_member(:evaluation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "EvaluationId"))
     SubmitContactEvaluationRequest.add_member(:answers, Shapes::ShapeRef.new(shape: EvaluationAnswersInputMap, location_name: "Answers"))
@@ -3647,6 +4875,12 @@ module Aws::Connect
     SubmitContactEvaluationResponse.add_member(:evaluation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "EvaluationId"))
     SubmitContactEvaluationResponse.add_member(:evaluation_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "EvaluationArn"))
     SubmitContactEvaluationResponse.struct_class = Types::SubmitContactEvaluationResponse
+
+    SuccessfulRequest.add_member(:request_identifier, Shapes::ShapeRef.new(shape: RequestIdentifier, location_name: "RequestIdentifier"))
+    SuccessfulRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
+    SuccessfulRequest.struct_class = Types::SuccessfulRequest
+
+    SuccessfulRequestList.member = Shapes::ShapeRef.new(shape: SuccessfulRequest)
 
     SupportedMessagingContentTypes.member = Shapes::ShapeRef.new(shape: SupportedMessagingContentType)
 
@@ -3662,6 +4896,13 @@ module Aws::Connect
     TagCondition.add_member(:tag_key, Shapes::ShapeRef.new(shape: String, location_name: "TagKey"))
     TagCondition.add_member(:tag_value, Shapes::ShapeRef.new(shape: String, location_name: "TagValue"))
     TagCondition.struct_class = Types::TagCondition
+
+    TagContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    TagContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    TagContactRequest.add_member(:tags, Shapes::ShapeRef.new(shape: ContactTagMap, required: true, location_name: "Tags"))
+    TagContactRequest.struct_class = Types::TagContactRequest
+
+    TagContactResponse.struct_class = Types::TagContactResponse
 
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
@@ -3774,6 +5015,17 @@ module Aws::Connect
 
     TrafficDistributionGroupUserSummaryList.member = Shapes::ShapeRef.new(shape: TrafficDistributionGroupUserSummary)
 
+    Transcript.add_member(:criteria, Shapes::ShapeRef.new(shape: TranscriptCriteriaList, required: true, location_name: "Criteria"))
+    Transcript.add_member(:match_type, Shapes::ShapeRef.new(shape: SearchContactsMatchType, location_name: "MatchType"))
+    Transcript.struct_class = Types::Transcript
+
+    TranscriptCriteria.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, required: true, location_name: "ParticipantRole"))
+    TranscriptCriteria.add_member(:search_text, Shapes::ShapeRef.new(shape: SearchTextList, required: true, location_name: "SearchText"))
+    TranscriptCriteria.add_member(:match_type, Shapes::ShapeRef.new(shape: SearchContactsMatchType, required: true, location_name: "MatchType"))
+    TranscriptCriteria.struct_class = Types::TranscriptCriteria
+
+    TranscriptCriteriaList.member = Shapes::ShapeRef.new(shape: TranscriptCriteria)
+
     TransferContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     TransferContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
     TransferContactRequest.add_member(:queue_id, Shapes::ShapeRef.new(shape: QueueId, location_name: "QueueId"))
@@ -3785,6 +5037,13 @@ module Aws::Connect
     TransferContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
     TransferContactResponse.add_member(:contact_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ContactArn"))
     TransferContactResponse.struct_class = Types::TransferContactResponse
+
+    UntagContactRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "uri", location_name: "ContactId"))
+    UntagContactRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UntagContactRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: ContactTagKeys, required: true, location: "querystring", location_name: "TagKeys"))
+    UntagContactRequest.struct_class = Types::UntagContactRequest
+
+    UntagContactResponse.struct_class = Types::UntagContactResponse
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
@@ -3798,6 +5057,9 @@ module Aws::Connect
     UpdateAgentStatusRequest.add_member(:display_order, Shapes::ShapeRef.new(shape: AgentStatusOrderNumber, location_name: "DisplayOrder", metadata: {"box"=>true}))
     UpdateAgentStatusRequest.add_member(:reset_order_number, Shapes::ShapeRef.new(shape: Boolean, location_name: "ResetOrderNumber"))
     UpdateAgentStatusRequest.struct_class = Types::UpdateAgentStatusRequest
+
+    UpdateCaseActionDefinition.add_member(:fields, Shapes::ShapeRef.new(shape: FieldValues, required: true, location_name: "Fields"))
+    UpdateCaseActionDefinition.struct_class = Types::UpdateCaseActionDefinition
 
     UpdateContactAttributesRequest.add_member(:initial_contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "InitialContactId"))
     UpdateContactAttributesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
@@ -3865,6 +5127,14 @@ module Aws::Connect
 
     UpdateContactResponse.struct_class = Types::UpdateContactResponse
 
+    UpdateContactRoutingDataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateContactRoutingDataRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "uri", location_name: "ContactId"))
+    UpdateContactRoutingDataRequest.add_member(:queue_time_adjustment_seconds, Shapes::ShapeRef.new(shape: QueueTimeAdjustmentSeconds, location_name: "QueueTimeAdjustmentSeconds"))
+    UpdateContactRoutingDataRequest.add_member(:queue_priority, Shapes::ShapeRef.new(shape: QueuePriority, location_name: "QueuePriority"))
+    UpdateContactRoutingDataRequest.struct_class = Types::UpdateContactRoutingDataRequest
+
+    UpdateContactRoutingDataResponse.struct_class = Types::UpdateContactRoutingDataResponse
+
     UpdateContactScheduleRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     UpdateContactScheduleRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
     UpdateContactScheduleRequest.add_member(:scheduled_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ScheduledTime"))
@@ -3875,7 +5145,7 @@ module Aws::Connect
     UpdateEvaluationFormRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateEvaluationFormRequest.add_member(:evaluation_form_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "EvaluationFormId"))
     UpdateEvaluationFormRequest.add_member(:evaluation_form_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "EvaluationFormVersion"))
-    UpdateEvaluationFormRequest.add_member(:create_new_version, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "CreateNewVersion"))
+    UpdateEvaluationFormRequest.add_member(:create_new_version, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "CreateNewVersion", metadata: {"box"=>true}))
     UpdateEvaluationFormRequest.add_member(:title, Shapes::ShapeRef.new(shape: EvaluationFormTitle, required: true, location_name: "Title"))
     UpdateEvaluationFormRequest.add_member(:description, Shapes::ShapeRef.new(shape: EvaluationFormDescription, location_name: "Description"))
     UpdateEvaluationFormRequest.add_member(:items, Shapes::ShapeRef.new(shape: EvaluationFormItemsList, required: true, location_name: "Items"))
@@ -3920,14 +5190,25 @@ module Aws::Connect
 
     UpdateParticipantRoleConfigResponse.struct_class = Types::UpdateParticipantRoleConfigResponse
 
+    UpdatePhoneNumberMetadataRequest.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: PhoneNumberId, required: true, location: "uri", location_name: "PhoneNumberId"))
+    UpdatePhoneNumberMetadataRequest.add_member(:phone_number_description, Shapes::ShapeRef.new(shape: PhoneNumberDescription, location_name: "PhoneNumberDescription"))
+    UpdatePhoneNumberMetadataRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    UpdatePhoneNumberMetadataRequest.struct_class = Types::UpdatePhoneNumberMetadataRequest
+
     UpdatePhoneNumberRequest.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: PhoneNumberId, required: true, location: "uri", location_name: "PhoneNumberId"))
-    UpdatePhoneNumberRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "TargetArn"))
+    UpdatePhoneNumberRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "TargetArn"))
+    UpdatePhoneNumberRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     UpdatePhoneNumberRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     UpdatePhoneNumberRequest.struct_class = Types::UpdatePhoneNumberRequest
 
     UpdatePhoneNumberResponse.add_member(:phone_number_id, Shapes::ShapeRef.new(shape: PhoneNumberId, location_name: "PhoneNumberId"))
     UpdatePhoneNumberResponse.add_member(:phone_number_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "PhoneNumberArn"))
     UpdatePhoneNumberResponse.struct_class = Types::UpdatePhoneNumberResponse
+
+    UpdatePredefinedAttributeRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdatePredefinedAttributeRequest.add_member(:name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, required: true, location: "uri", location_name: "Name"))
+    UpdatePredefinedAttributeRequest.add_member(:values, Shapes::ShapeRef.new(shape: PredefinedAttributeValues, location_name: "Values"))
+    UpdatePredefinedAttributeRequest.struct_class = Types::UpdatePredefinedAttributeRequest
 
     UpdatePromptRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdatePromptRequest.add_member(:prompt_id, Shapes::ShapeRef.new(shape: PromptId, required: true, location: "uri", location_name: "PromptId"))
@@ -4018,6 +5299,8 @@ module Aws::Connect
     UpdateSecurityProfileRequest.add_member(:allowed_access_control_tags, Shapes::ShapeRef.new(shape: AllowedAccessControlTags, location_name: "AllowedAccessControlTags"))
     UpdateSecurityProfileRequest.add_member(:tag_restricted_resources, Shapes::ShapeRef.new(shape: TagRestrictedResourceList, location_name: "TagRestrictedResources"))
     UpdateSecurityProfileRequest.add_member(:applications, Shapes::ShapeRef.new(shape: Applications, location_name: "Applications"))
+    UpdateSecurityProfileRequest.add_member(:hierarchy_restricted_resources, Shapes::ShapeRef.new(shape: HierarchyRestrictedResourceList, location_name: "HierarchyRestrictedResources"))
+    UpdateSecurityProfileRequest.add_member(:allowed_access_control_hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "AllowedAccessControlHierarchyGroupId"))
     UpdateSecurityProfileRequest.struct_class = Types::UpdateSecurityProfileRequest
 
     UpdateTaskTemplateRequest.add_member(:task_template_id, Shapes::ShapeRef.new(shape: TaskTemplateId, required: true, location: "uri", location_name: "TaskTemplateId"))
@@ -4077,6 +5360,11 @@ module Aws::Connect
     UpdateUserPhoneConfigRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     UpdateUserPhoneConfigRequest.struct_class = Types::UpdateUserPhoneConfigRequest
 
+    UpdateUserProficienciesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateUserProficienciesRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
+    UpdateUserProficienciesRequest.add_member(:user_proficiencies, Shapes::ShapeRef.new(shape: UserProficiencyList, required: true, location_name: "UserProficiencies"))
+    UpdateUserProficienciesRequest.struct_class = Types::UpdateUserProficienciesRequest
+
     UpdateUserRoutingProfileRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location_name: "RoutingProfileId"))
     UpdateUserRoutingProfileRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
     UpdateUserRoutingProfileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -4104,6 +5392,14 @@ module Aws::Connect
 
     UpdateViewMetadataResponse.struct_class = Types::UpdateViewMetadataResponse
 
+    UploadUrlMetadata.add_member(:url, Shapes::ShapeRef.new(shape: MetadataUrl, location_name: "Url"))
+    UploadUrlMetadata.add_member(:url_expiry, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "UrlExpiry"))
+    UploadUrlMetadata.add_member(:headers_to_include, Shapes::ShapeRef.new(shape: UrlMetadataSignedHeaders, location_name: "HeadersToInclude"))
+    UploadUrlMetadata.struct_class = Types::UploadUrlMetadata
+
+    UrlMetadataSignedHeaders.key = Shapes::ShapeRef.new(shape: UrlMetadataSignedHeadersKey)
+    UrlMetadataSignedHeaders.value = Shapes::ShapeRef.new(shape: UrlMetadataSignedHeadersValue)
+
     UrlReference.add_member(:name, Shapes::ShapeRef.new(shape: ReferenceKey, location_name: "Name"))
     UrlReference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, location_name: "Value"))
     UrlReference.struct_class = Types::UrlReference
@@ -4125,6 +5421,8 @@ module Aws::Connect
     User.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "RoutingProfileId"))
     User.add_member(:hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "HierarchyGroupId"))
     User.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    User.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    User.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     User.struct_class = Types::User
 
     UserData.add_member(:user, Shapes::ShapeRef.new(shape: UserReference, location_name: "User"))
@@ -4171,6 +5469,19 @@ module Aws::Connect
     UserPhoneConfig.add_member(:desk_phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, location_name: "DeskPhoneNumber"))
     UserPhoneConfig.struct_class = Types::UserPhoneConfig
 
+    UserProficiency.add_member(:attribute_name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, required: true, location_name: "AttributeName"))
+    UserProficiency.add_member(:attribute_value, Shapes::ShapeRef.new(shape: PredefinedAttributeStringValue, required: true, location_name: "AttributeValue"))
+    UserProficiency.add_member(:level, Shapes::ShapeRef.new(shape: ProficiencyLevel, required: true, location_name: "Level"))
+    UserProficiency.struct_class = Types::UserProficiency
+
+    UserProficiencyDisassociate.add_member(:attribute_name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, required: true, location_name: "AttributeName"))
+    UserProficiencyDisassociate.add_member(:attribute_value, Shapes::ShapeRef.new(shape: PredefinedAttributeStringValue, required: true, location_name: "AttributeValue"))
+    UserProficiencyDisassociate.struct_class = Types::UserProficiencyDisassociate
+
+    UserProficiencyDisassociateList.member = Shapes::ShapeRef.new(shape: UserProficiencyDisassociate)
+
+    UserProficiencyList.member = Shapes::ShapeRef.new(shape: UserProficiency)
+
     UserQuickConnectConfig.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
     UserQuickConnectConfig.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "ContactFlowId"))
     UserQuickConnectConfig.struct_class = Types::UserQuickConnectConfig
@@ -4188,6 +5499,7 @@ module Aws::Connect
     UserSearchCriteria.struct_class = Types::UserSearchCriteria
 
     UserSearchFilter.add_member(:tag_filter, Shapes::ShapeRef.new(shape: ControlPlaneTagFilter, location_name: "TagFilter"))
+    UserSearchFilter.add_member(:user_attribute_filter, Shapes::ShapeRef.new(shape: ControlPlaneUserAttributeFilter, location_name: "UserAttributeFilter"))
     UserSearchFilter.struct_class = Types::UserSearchFilter
 
     UserSearchSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
@@ -4207,6 +5519,8 @@ module Aws::Connect
     UserSummary.add_member(:id, Shapes::ShapeRef.new(shape: UserId, location_name: "Id"))
     UserSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     UserSummary.add_member(:username, Shapes::ShapeRef.new(shape: AgentUsername, location_name: "Username"))
+    UserSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    UserSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
     UserSummary.struct_class = Types::UserSummary
 
     UserSummaryList.member = Shapes::ShapeRef.new(shape: UserSummary)
@@ -4289,6 +5603,8 @@ module Aws::Connect
     WisdomInfo.add_member(:session_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SessionArn"))
     WisdomInfo.struct_class = Types::WisdomInfo
 
+    resourceArnListMaxLimit100.member = Shapes::ShapeRef.new(shape: ARN)
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -4300,6 +5616,7 @@ module Aws::Connect
         "endpointPrefix" => "connect",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
+        "protocols" => ["rest-json"],
         "serviceAbbreviation" => "Amazon Connect",
         "serviceFullName" => "Amazon Connect Service",
         "serviceId" => "Connect",
@@ -4319,6 +5636,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+      end)
+
+      api.add_operation(:associate_analytics_data_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateAnalyticsDataSet"
+        o.http_method = "PUT"
+        o.http_request_uri = "/analytics-data/instance/{InstanceId}/association"
+        o.input = Shapes::ShapeRef.new(shape: AssociateAnalyticsDataSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateAnalyticsDataSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:associate_approved_origin, Seahorse::Model::Operation.new.tap do |o|
@@ -4362,6 +5692,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:associate_flow, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateFlow"
+        o.http_method = "PUT"
+        o.http_request_uri = "/flow-associations/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: AssociateFlowRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateFlowResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:associate_instance_storage_config, Seahorse::Model::Operation.new.tap do |o|
@@ -4477,6 +5821,86 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:associate_user_proficiencies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateUserProficiencies"
+        o.http_method = "POST"
+        o.http_request_uri = "/users/{InstanceId}/{UserId}/associate-proficiencies"
+        o.input = Shapes::ShapeRef.new(shape: AssociateUserProficienciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:batch_associate_analytics_data_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchAssociateAnalyticsDataSet"
+        o.http_method = "PUT"
+        o.http_request_uri = "/analytics-data/instance/{InstanceId}/associations"
+        o.input = Shapes::ShapeRef.new(shape: BatchAssociateAnalyticsDataSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchAssociateAnalyticsDataSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:batch_disassociate_analytics_data_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDisassociateAnalyticsDataSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/analytics-data/instance/{InstanceId}/associations"
+        o.input = Shapes::ShapeRef.new(shape: BatchDisassociateAnalyticsDataSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDisassociateAnalyticsDataSetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:batch_get_attached_file_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetAttachedFileMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/attached-files/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetAttachedFileMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetAttachedFileMetadataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:batch_get_flow_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetFlowAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/flow-associations-batch/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetFlowAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetFlowAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:batch_put_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchPutContact"
+        o.http_method = "PUT"
+        o.http_request_uri = "/contact/batch/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: BatchPutContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchPutContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotencyException)
+      end)
+
       api.add_operation(:claim_phone_number, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ClaimPhoneNumber"
         o.http_method = "POST"
@@ -4489,6 +5913,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: IdempotencyException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:complete_attached_file_upload, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CompleteAttachedFileUpload"
+        o.http_method = "POST"
+        o.http_request_uri = "/attached-files/{InstanceId}/{FileId}"
+        o.input = Shapes::ShapeRef.new(shape: CompleteAttachedFileUploadRequest)
+        o.output = Shapes::ShapeRef.new(shape: CompleteAttachedFileUploadResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_agent_status, Seahorse::Model::Operation.new.tap do |o|
@@ -4606,6 +6043,35 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_persistent_contact_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePersistentContactAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/persistent-contact-association/{InstanceId}/{InitialContactId}"
+        o.input = Shapes::ShapeRef.new(shape: CreatePersistentContactAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePersistentContactAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:create_predefined_attribute, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePredefinedAttribute"
+        o.http_method = "PUT"
+        o.http_request_uri = "/predefined-attributes/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: CreatePredefinedAttributeRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:create_prompt, Seahorse::Model::Operation.new.tap do |o|
@@ -4831,6 +6297,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
 
+      api.add_operation(:delete_attached_file, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAttachedFile"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/attached-files/{InstanceId}/{FileId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAttachedFileRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAttachedFileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:delete_contact_evaluation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteContactEvaluation"
         o.http_method = "DELETE"
@@ -4919,6 +6398,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:delete_predefined_attribute, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePredefinedAttribute"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/predefined-attributes/{InstanceId}/{Name}"
+        o.input = Shapes::ShapeRef.new(shape: DeletePredefinedAttributeRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:delete_prompt, Seahorse::Model::Operation.new.tap do |o|
@@ -5253,6 +6746,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:describe_predefined_attribute, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePredefinedAttribute"
+        o.http_method = "GET"
+        o.http_request_uri = "/predefined-attributes/{InstanceId}/{Name}"
+        o.input = Shapes::ShapeRef.new(shape: DescribePredefinedAttributeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePredefinedAttributeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:describe_prompt, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribePrompt"
         o.http_method = "GET"
@@ -5410,6 +6916,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:disassociate_analytics_data_set, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateAnalyticsDataSet"
+        o.http_method = "POST"
+        o.http_request_uri = "/analytics-data/instance/{InstanceId}/association"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateAnalyticsDataSetRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:disassociate_approved_origin, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateApprovedOrigin"
         o.http_method = "DELETE"
@@ -5432,6 +6951,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:disassociate_flow, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateFlow"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/flow-associations/{InstanceId}/{ResourceId}/{ResourceType}"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateFlowRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateFlowResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
@@ -5540,6 +7073,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:disassociate_user_proficiencies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateUserProficiencies"
+        o.http_method = "POST"
+        o.http_request_uri = "/users/{InstanceId}/{UserId}/disassociate-proficiencies"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateUserProficienciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:dismiss_user_contact, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DismissUserContact"
         o.http_method = "POST"
@@ -5552,6 +7098,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:get_attached_file, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAttachedFile"
+        o.http_method = "GET"
+        o.http_request_uri = "/attached-files/{InstanceId}/{FileId}"
+        o.input = Shapes::ShapeRef.new(shape: GetAttachedFileRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAttachedFileResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_contact_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -5615,6 +7174,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
+      end)
+
+      api.add_operation(:get_flow_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFlowAssociation"
+        o.http_method = "GET"
+        o.http_request_uri = "/flow-associations/{InstanceId}/{ResourceId}/{ResourceType}"
+        o.input = Shapes::ShapeRef.new(shape: GetFlowAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFlowAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_metric_data, Seahorse::Model::Operation.new.tap do |o|
@@ -5694,6 +7267,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:import_phone_number, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportPhoneNumber"
+        o.http_method = "POST"
+        o.http_request_uri = "/phone-number/import"
+        o.input = Shapes::ShapeRef.new(shape: ImportPhoneNumberRequest)
+        o.output = Shapes::ShapeRef.new(shape: ImportPhoneNumberResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotencyException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:list_agent_statuses, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAgentStatuses"
         o.http_method = "GET"
@@ -5711,6 +7298,19 @@ module Aws::Connect
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_analytics_data_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAnalyticsDataAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/analytics-data/instance/{InstanceId}/association"
+        o.input = Shapes::ShapeRef.new(shape: ListAnalyticsDataAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAnalyticsDataAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:list_approved_origins, Seahorse::Model::Operation.new.tap do |o|
@@ -5870,6 +7470,26 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_flow_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFlowAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/flow-associations-summary/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListFlowAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFlowAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -6045,6 +7665,25 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:list_predefined_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPredefinedAttributes"
+        o.http_method = "GET"
+        o.http_request_uri = "/predefined-attributes/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListPredefinedAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPredefinedAttributesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_prompts, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPrompts"
         o.http_method = "GET"
@@ -6113,6 +7752,26 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_realtime_contact_analysis_segments_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListRealtimeContactAnalysisSegmentsV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/list-real-time-analysis-segments-v2/{InstanceId}/{ContactId}"
+        o.input = Shapes::ShapeRef.new(shape: ListRealtimeContactAnalysisSegmentsV2Request)
+        o.output = Shapes::ShapeRef.new(shape: ListRealtimeContactAnalysisSegmentsV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: OutputTypeNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -6360,6 +8019,25 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:list_user_proficiencies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListUserProficiencies"
+        o.http_method = "GET"
+        o.http_request_uri = "/users/{InstanceId}/{UserId}/proficiencies"
+        o.input = Shapes::ShapeRef.new(shape: ListUserProficienciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListUserProficienciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_users, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListUsers"
         o.http_method = "GET"
@@ -6434,6 +8112,22 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:pause_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PauseContact"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/pause"
+        o.input = Shapes::ShapeRef.new(shape: PauseContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: PauseContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:put_user_status, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutUserStatus"
         o.http_method = "PUT"
@@ -6479,6 +8173,21 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
 
+      api.add_operation(:resume_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResumeContact"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/resume"
+        o.input = Shapes::ShapeRef.new(shape: ResumeContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResumeContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:resume_contact_recording, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ResumeContactRecording"
         o.http_method = "POST"
@@ -6508,12 +8217,88 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:search_contact_flow_modules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchContactFlowModules"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-contact-flow-modules"
+        o.input = Shapes::ShapeRef.new(shape: SearchContactFlowModulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchContactFlowModulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_contact_flows, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchContactFlows"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-contact-flows"
+        o.input = Shapes::ShapeRef.new(shape: SearchContactFlowsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchContactFlowsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_contacts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchContacts"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-contacts"
+        o.input = Shapes::ShapeRef.new(shape: SearchContactsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchContactsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:search_hours_of_operations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "SearchHoursOfOperations"
         o.http_method = "POST"
         o.http_request_uri = "/search-hours-of-operations"
         o.input = Shapes::ShapeRef.new(shape: SearchHoursOfOperationsRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchHoursOfOperationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_predefined_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchPredefinedAttributes"
+        o.http_method = "POST"
+        o.http_request_uri = "/search-predefined-attributes"
+        o.input = Shapes::ShapeRef.new(shape: SearchPredefinedAttributesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchPredefinedAttributesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -6679,6 +8464,33 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:send_chat_integration_event, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendChatIntegrationEvent"
+        o.http_method = "POST"
+        o.http_request_uri = "/chat-integration-event"
+        o.input = Shapes::ShapeRef.new(shape: SendChatIntegrationEventRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendChatIntegrationEventResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:start_attached_file_upload, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartAttachedFileUpload"
+        o.http_method = "PUT"
+        o.http_request_uri = "/attached-files/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: StartAttachedFileUploadRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartAttachedFileUploadResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:start_chat_contact, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartChatContact"
         o.http_method = "PUT"
@@ -6760,6 +8572,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:start_web_rtc_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartWebRTCContact"
+        o.http_method = "PUT"
+        o.http_request_uri = "/contact/webrtc"
+        o.input = Shapes::ShapeRef.new(shape: StartWebRTCContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartWebRTCContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:stop_contact, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopContact"
         o.http_method = "POST"
@@ -6820,6 +8645,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:tag_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagContact"
+        o.http_method = "POST"
+        o.http_request_uri = "/contact/tags"
+        o.input = Shapes::ShapeRef.new(shape: TagContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -6846,6 +8684,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:untag_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagContact"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/contact/tags/{InstanceId}/{ContactId}"
+        o.input = Shapes::ShapeRef.new(shape: UntagContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -6985,6 +8836,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:update_contact_routing_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateContactRoutingData"
+        o.http_method = "POST"
+        o.http_request_uri = "/contacts/{InstanceId}/{ContactId}/routing-data"
+        o.input = Shapes::ShapeRef.new(shape: UpdateContactRoutingDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateContactRoutingDataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:update_contact_schedule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateContactSchedule"
         o.http_method = "POST"
@@ -7080,6 +8945,35 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: IdempotencyException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_phone_number_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePhoneNumberMetadata"
+        o.http_method = "PUT"
+        o.http_request_uri = "/phone-number/{PhoneNumberId}/metadata"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePhoneNumberMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotencyException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_predefined_attribute, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePredefinedAttribute"
+        o.http_method = "POST"
+        o.http_request_uri = "/predefined-attributes/{InstanceId}/{Name}"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePredefinedAttributeRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:update_prompt, Seahorse::Model::Operation.new.tap do |o|
@@ -7367,6 +9261,19 @@ module Aws::Connect
         o.http_method = "POST"
         o.http_request_uri = "/users/{InstanceId}/{UserId}/phone-config"
         o.input = Shapes::ShapeRef.new(shape: UpdateUserPhoneConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_user_proficiencies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateUserProficiencies"
+        o.http_method = "POST"
+        o.http_request_uri = "/users/{InstanceId}/{UserId}/proficiencies"
+        o.input = Shapes::ShapeRef.new(shape: UpdateUserProficienciesRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)

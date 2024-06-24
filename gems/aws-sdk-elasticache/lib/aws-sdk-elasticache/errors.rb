@@ -54,11 +54,14 @@ module Aws::ElastiCache
   # * {InvalidCacheClusterStateFault}
   # * {InvalidCacheParameterGroupStateFault}
   # * {InvalidCacheSecurityGroupStateFault}
+  # * {InvalidCredentialsException}
   # * {InvalidGlobalReplicationGroupStateFault}
   # * {InvalidKMSKeyFault}
   # * {InvalidParameterCombinationException}
   # * {InvalidParameterValueException}
   # * {InvalidReplicationGroupStateFault}
+  # * {InvalidServerlessCacheSnapshotStateFault}
+  # * {InvalidServerlessCacheStateFault}
   # * {InvalidSnapshotStateFault}
   # * {InvalidSubnet}
   # * {InvalidUserGroupStateFault}
@@ -77,6 +80,12 @@ module Aws::ElastiCache
   # * {ReservedCacheNodeNotFoundFault}
   # * {ReservedCacheNodeQuotaExceededFault}
   # * {ReservedCacheNodesOfferingNotFoundFault}
+  # * {ServerlessCacheAlreadyExistsFault}
+  # * {ServerlessCacheNotFoundFault}
+  # * {ServerlessCacheQuotaForCustomerExceededFault}
+  # * {ServerlessCacheSnapshotAlreadyExistsFault}
+  # * {ServerlessCacheSnapshotNotFoundFault}
+  # * {ServerlessCacheSnapshotQuotaExceededFault}
   # * {ServiceLinkedRoleNotFoundFault}
   # * {ServiceUpdateNotFoundFault}
   # * {SnapshotAlreadyExistsFault}
@@ -371,6 +380,16 @@ module Aws::ElastiCache
       end
     end
 
+    class InvalidCredentialsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::InvalidCredentialsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
     class InvalidGlobalReplicationGroupStateFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -426,6 +445,26 @@ module Aws::ElastiCache
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ElastiCache::Types::InvalidReplicationGroupStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidServerlessCacheSnapshotStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::InvalidServerlessCacheSnapshotStateFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidServerlessCacheStateFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::InvalidServerlessCacheStateFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -606,6 +645,66 @@ module Aws::ElastiCache
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ElastiCache::Types::ReservedCacheNodesOfferingNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ServerlessCacheAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::ServerlessCacheAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ServerlessCacheNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::ServerlessCacheNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ServerlessCacheQuotaForCustomerExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::ServerlessCacheQuotaForCustomerExceededFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ServerlessCacheSnapshotAlreadyExistsFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::ServerlessCacheSnapshotAlreadyExistsFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ServerlessCacheSnapshotNotFoundFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::ServerlessCacheSnapshotNotFoundFault] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class ServerlessCacheSnapshotQuotaExceededFault < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ElastiCache::Types::ServerlessCacheSnapshotQuotaExceededFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

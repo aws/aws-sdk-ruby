@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CostandUsageReportService
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CostandUsageReportService
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::CostandUsageReportService
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::CostandUsageReportService
     #   @option options [Aws::CostandUsageReportService::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CostandUsageReportService::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -398,9 +423,10 @@ module Aws::CostandUsageReportService
 
     # @!group API Operations
 
-    # Deletes the specified report.
+    # Deletes the specified report. Any tags associated with the report are
+    # also deleted.
     #
-    # @option params [String] :report_name
+    # @option params [required, String] :report_name
     #   The name of the report that you want to delete. The name must be
     #   unique, is case sensitive, and can't include spaces.
     #
@@ -420,7 +446,7 @@ module Aws::CostandUsageReportService
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_report_definition({
-    #     report_name: "ReportName",
+    #     report_name: "ReportName", # required
     #   })
     #
     # @example Response structure
@@ -436,10 +462,12 @@ module Aws::CostandUsageReportService
       req.send_request(options)
     end
 
-    # Lists the AWS Cost and Usage reports available to this account.
+    # Lists the Amazon Web Services Cost and Usage Report available to this
+    # account.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results that AWS returns for the operation.
+    #   The maximum number of results that Amazon Web Services returns for the
+    #   operation.
     #
     # @option params [String] :next_token
     #   A generic string.
@@ -511,7 +539,7 @@ module Aws::CostandUsageReportService
     #   resp.report_definitions[0].format #=> String, one of "textORcsv", "Parquet"
     #   resp.report_definitions[0].compression #=> String, one of "ZIP", "GZIP", "Parquet"
     #   resp.report_definitions[0].additional_schema_elements #=> Array
-    #   resp.report_definitions[0].additional_schema_elements[0] #=> String, one of "RESOURCES", "SPLIT_COST_ALLOCATION_DATA"
+    #   resp.report_definitions[0].additional_schema_elements[0] #=> String, one of "RESOURCES", "SPLIT_COST_ALLOCATION_DATA", "MANUAL_DISCOUNT_COMPATIBILITY"
     #   resp.report_definitions[0].s3_bucket #=> String
     #   resp.report_definitions[0].s3_prefix #=> String
     #   resp.report_definitions[0].s3_region #=> String, one of "af-south-1", "ap-east-1", "ap-south-1", "ap-south-2", "ap-southeast-1", "ap-southeast-2", "ap-southeast-3", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ca-central-1", "eu-central-1", "eu-central-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-north-1", "eu-south-1", "eu-south-2", "me-central-1", "me-south-1", "sa-east-1", "us-east-1", "us-east-2", "us-west-1", "us-west-2", "cn-north-1", "cn-northwest-1"
@@ -520,6 +548,8 @@ module Aws::CostandUsageReportService
     #   resp.report_definitions[0].refresh_closed_reports #=> Boolean
     #   resp.report_definitions[0].report_versioning #=> String, one of "CREATE_NEW_REPORT", "OVERWRITE_REPORT"
     #   resp.report_definitions[0].billing_view_arn #=> String
+    #   resp.report_definitions[0].report_status.last_delivery #=> String
+    #   resp.report_definitions[0].report_status.last_status #=> String, one of "SUCCESS", "ERROR_PERMISSIONS", "ERROR_NO_BUCKET"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/DescribeReportDefinitions AWS API Documentation
@@ -531,16 +561,48 @@ module Aws::CostandUsageReportService
       req.send_request(options)
     end
 
-    # Allows you to programatically update your report preferences.
+    # Lists the tags associated with the specified report definition.
+    #
+    # @option params [required, String] :report_name
+    #   The report name of the report definition that tags are to be returned
+    #   for.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     report_name: "ReportName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Allows you to programmatically update your report preferences.
     #
     # @option params [required, String] :report_name
     #   The name of the report that you want to create. The name must be
     #   unique, is case sensitive, and can't include spaces.
     #
     # @option params [required, Types::ReportDefinition] :report_definition
-    #   The definition of AWS Cost and Usage Report. You can specify the
-    #   report name, time unit, report format, compression format, S3 bucket,
-    #   additional artifacts, and schema elements in the definition.
+    #   The definition of Amazon Web Services Cost and Usage Report. You can
+    #   specify the report name, time unit, report format, compression format,
+    #   S3 bucket, additional artifacts, and schema elements in the
+    #   definition.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -553,7 +615,7 @@ module Aws::CostandUsageReportService
     #       time_unit: "HOURLY", # required, accepts HOURLY, DAILY, MONTHLY
     #       format: "textORcsv", # required, accepts textORcsv, Parquet
     #       compression: "ZIP", # required, accepts ZIP, GZIP, Parquet
-    #       additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES, SPLIT_COST_ALLOCATION_DATA
+    #       additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES, SPLIT_COST_ALLOCATION_DATA, MANUAL_DISCOUNT_COMPATIBILITY
     #       s3_bucket: "S3Bucket", # required
     #       s3_prefix: "S3Prefix", # required
     #       s3_region: "af-south-1", # required, accepts af-south-1, ap-east-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, eu-north-1, eu-south-1, eu-south-2, me-central-1, me-south-1, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2, cn-north-1, cn-northwest-1
@@ -561,6 +623,10 @@ module Aws::CostandUsageReportService
     #       refresh_closed_reports: false,
     #       report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
     #       billing_view_arn: "BillingViewArn",
+    #       report_status: {
+    #         last_delivery: "LastDelivery",
+    #         last_status: "SUCCESS", # accepts SUCCESS, ERROR_PERMISSIONS, ERROR_NO_BUCKET
+    #       },
     #     },
     #   })
     #
@@ -578,6 +644,9 @@ module Aws::CostandUsageReportService
     # @option params [required, Types::ReportDefinition] :report_definition
     #   Represents the output of the PutReportDefinition operation. The
     #   content consists of the detailed metadata and data file information.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to be assigned to the report definition resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -613,7 +682,7 @@ module Aws::CostandUsageReportService
     #       time_unit: "HOURLY", # required, accepts HOURLY, DAILY, MONTHLY
     #       format: "textORcsv", # required, accepts textORcsv, Parquet
     #       compression: "ZIP", # required, accepts ZIP, GZIP, Parquet
-    #       additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES, SPLIT_COST_ALLOCATION_DATA
+    #       additional_schema_elements: ["RESOURCES"], # required, accepts RESOURCES, SPLIT_COST_ALLOCATION_DATA, MANUAL_DISCOUNT_COMPATIBILITY
     #       s3_bucket: "S3Bucket", # required
     #       s3_prefix: "S3Prefix", # required
     #       s3_region: "af-south-1", # required, accepts af-south-1, ap-east-1, ap-south-1, ap-south-2, ap-southeast-1, ap-southeast-2, ap-southeast-3, ap-northeast-1, ap-northeast-2, ap-northeast-3, ca-central-1, eu-central-1, eu-central-2, eu-west-1, eu-west-2, eu-west-3, eu-north-1, eu-south-1, eu-south-2, me-central-1, me-south-1, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2, cn-north-1, cn-northwest-1
@@ -621,7 +690,17 @@ module Aws::CostandUsageReportService
     #       refresh_closed_reports: false,
     #       report_versioning: "CREATE_NEW_REPORT", # accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
     #       billing_view_arn: "BillingViewArn",
+    #       report_status: {
+    #         last_delivery: "LastDelivery",
+    #         last_status: "SUCCESS", # accepts SUCCESS, ERROR_PERMISSIONS, ERROR_NO_BUCKET
+    #       },
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/PutReportDefinition AWS API Documentation
@@ -630,6 +709,65 @@ module Aws::CostandUsageReportService
     # @param [Hash] params ({})
     def put_report_definition(params = {}, options = {})
       req = build_request(:put_report_definition, params)
+      req.send_request(options)
+    end
+
+    # Associates a set of tags with a report definition.
+    #
+    # @option params [required, String] :report_name
+    #   The report name of the report definition that tags are to be
+    #   associated with.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The tags to be assigned to the report definition resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     report_name: "ReportName", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a set of tags from a report definition.
+    #
+    # @option params [required, String] :report_name
+    #   The report name of the report definition that tags are to be
+    #   disassociated from.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tags to be disassociated from the report definition resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     report_name: "ReportName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cur-2017-01-06/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -646,7 +784,7 @@ module Aws::CostandUsageReportService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costandusagereportservice'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

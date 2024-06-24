@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2024-06-06)
+------------------
+
+* Feature - Added two new APIs, VerifyDevicePosition and ForecastGeofenceEvents. Added support for putting larger geofences up to 100,000 vertices with Geobuf fields.
+
+1.50.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.47.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.46.0 (2024-01-12)
+------------------
+
+* Feature - Location SDK documentation update. Added missing fonts to the MapConfiguration data type. Updated note for the SubMunicipality property in the place data type.
+
+1.45.0 (2024-01-10)
+------------------
+
+* Feature - This release adds API support for custom layers for the maps service APIs: CreateMap, UpdateMap, DescribeMap.
+
+1.44.0 (2023-12-29)
+------------------
+
+* Feature - This release introduces a new parameter to bypasses an API key's expiry conditions and delete the key.
+
+1.43.0 (2023-12-12)
+------------------
+
+* Feature - This release 1)  adds sub-municipality field in Places API for searching and getting places information, and 2) allows optimizing route calculation based on expected arrival time.
+
+1.42.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.40.0 (2023-11-17)
+------------------
+
+* Feature - Remove default value and allow nullable for request parameters having minimum value larger than zero.
+
+1.39.0 (2023-10-12)
+------------------
+
+* Feature - This release adds endpoint updates for all AWS Location resource operations.
+
 1.38.0 (2023-10-03)
 ------------------
 

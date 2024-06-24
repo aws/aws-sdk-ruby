@@ -1,0 +1,2762 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DatabaseMigrationService
+  module Types
+
+    class AccessDeniedFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountQuota
+      attr_accessor account_quota_name: ::String
+      attr_accessor used: ::Integer
+      attr_accessor max: ::Integer
+      SENSITIVE: []
+    end
+
+    class AddTagsToResourceMessage
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AddTagsToResourceResponse < Aws::EmptyStructure
+    end
+
+    class ApplyPendingMaintenanceActionMessage
+      attr_accessor replication_instance_arn: ::String
+      attr_accessor apply_action: ::String
+      attr_accessor opt_in_type: ::String
+      SENSITIVE: []
+    end
+
+    class ApplyPendingMaintenanceActionResponse
+      attr_accessor resource_pending_maintenance_actions: Types::ResourcePendingMaintenanceActions
+      SENSITIVE: []
+    end
+
+    class AvailabilityZone
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class BatchStartRecommendationsErrorEntry
+      attr_accessor database_id: ::String
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class BatchStartRecommendationsRequest
+      attr_accessor data: ::Array[Types::StartRecommendationsRequestEntry]
+      SENSITIVE: []
+    end
+
+    class BatchStartRecommendationsResponse
+      attr_accessor error_entries: ::Array[Types::BatchStartRecommendationsErrorEntry]
+      SENSITIVE: []
+    end
+
+    class CancelReplicationTaskAssessmentRunMessage
+      attr_accessor replication_task_assessment_run_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CancelReplicationTaskAssessmentRunResponse
+      attr_accessor replication_task_assessment_run: Types::ReplicationTaskAssessmentRun
+      SENSITIVE: []
+    end
+
+    class Certificate
+      attr_accessor certificate_identifier: ::String
+      attr_accessor certificate_creation_date: ::Time
+      attr_accessor certificate_pem: ::String
+      attr_accessor certificate_wallet: ::String
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_owner: ::String
+      attr_accessor valid_from_date: ::Time
+      attr_accessor valid_to_date: ::Time
+      attr_accessor signing_algorithm: ::String
+      attr_accessor key_length: ::Integer
+      SENSITIVE: []
+    end
+
+    class CollectorHealthCheck
+      attr_accessor collector_status: ("UNREGISTERED" | "ACTIVE")
+      attr_accessor local_collector_s3_access: bool
+      attr_accessor web_collector_s3_access: bool
+      attr_accessor web_collector_granted_role_based_access: bool
+      SENSITIVE: []
+    end
+
+    class CollectorNotFoundFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CollectorResponse
+      attr_accessor collector_referenced_id: ::String
+      attr_accessor collector_name: ::String
+      attr_accessor collector_version: ::String
+      attr_accessor version_status: ("UP_TO_DATE" | "OUTDATED" | "UNSUPPORTED")
+      attr_accessor description: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor collector_health_check: Types::CollectorHealthCheck
+      attr_accessor last_data_received: ::String
+      attr_accessor registered_date: ::String
+      attr_accessor created_date: ::String
+      attr_accessor modified_date: ::String
+      attr_accessor inventory_data: Types::InventoryData
+      SENSITIVE: []
+    end
+
+    class CollectorShortInfoResponse
+      attr_accessor collector_referenced_id: ::String
+      attr_accessor collector_name: ::String
+      SENSITIVE: []
+    end
+
+    class ComputeConfig
+      attr_accessor availability_zone: ::String
+      attr_accessor dns_name_servers: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor max_capacity_units: ::Integer
+      attr_accessor min_capacity_units: ::Integer
+      attr_accessor multi_az: bool
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor replication_subnet_group_id: ::String
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Connection
+      attr_accessor replication_instance_arn: ::String
+      attr_accessor endpoint_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor last_failure_message: ::String
+      attr_accessor endpoint_identifier: ::String
+      attr_accessor replication_instance_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDataProviderMessage
+      attr_accessor data_provider_name: ::String
+      attr_accessor description: ::String
+      attr_accessor engine: ::String
+      attr_accessor settings: Types::DataProviderSettings
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDataProviderResponse
+      attr_accessor data_provider: Types::DataProvider
+      SENSITIVE: []
+    end
+
+    class CreateEndpointMessage
+      attr_accessor endpoint_identifier: ::String
+      attr_accessor endpoint_type: ("source" | "target")
+      attr_accessor engine_name: ::String
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor database_name: ::String
+      attr_accessor extra_connection_attributes: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor certificate_arn: ::String
+      attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor external_table_definition: ::String
+      attr_accessor dynamo_db_settings: Types::DynamoDbSettings
+      attr_accessor s3_settings: Types::S3Settings
+      attr_accessor dms_transfer_settings: Types::DmsTransferSettings
+      attr_accessor mongo_db_settings: Types::MongoDbSettings
+      attr_accessor kinesis_settings: Types::KinesisSettings
+      attr_accessor kafka_settings: Types::KafkaSettings
+      attr_accessor elasticsearch_settings: Types::ElasticsearchSettings
+      attr_accessor neptune_settings: Types::NeptuneSettings
+      attr_accessor redshift_settings: Types::RedshiftSettings
+      attr_accessor postgre_sql_settings: Types::PostgreSQLSettings
+      attr_accessor my_sql_settings: Types::MySQLSettings
+      attr_accessor oracle_settings: Types::OracleSettings
+      attr_accessor sybase_settings: Types::SybaseSettings
+      attr_accessor microsoft_sql_server_settings: Types::MicrosoftSQLServerSettings
+      attr_accessor ibm_db_2_settings: Types::IBMDb2Settings
+      attr_accessor resource_identifier: ::String
+      attr_accessor doc_db_settings: Types::DocDbSettings
+      attr_accessor redis_settings: Types::RedisSettings
+      attr_accessor gcp_my_sql_settings: Types::GcpMySQLSettings
+      attr_accessor timestream_settings: Types::TimestreamSettings
+      SENSITIVE: [:password]
+    end
+
+    class CreateEndpointResponse
+      attr_accessor endpoint: Types::Endpoint
+      SENSITIVE: []
+    end
+
+    class CreateEventSubscriptionMessage
+      attr_accessor subscription_name: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor source_type: ::String
+      attr_accessor event_categories: ::Array[::String]
+      attr_accessor source_ids: ::Array[::String]
+      attr_accessor enabled: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateEventSubscriptionResponse
+      attr_accessor event_subscription: Types::EventSubscription
+      SENSITIVE: []
+    end
+
+    class CreateFleetAdvisorCollectorRequest
+      attr_accessor collector_name: ::String
+      attr_accessor description: ::String
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor s3_bucket_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateFleetAdvisorCollectorResponse
+      attr_accessor collector_referenced_id: ::String
+      attr_accessor collector_name: ::String
+      attr_accessor description: ::String
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor s3_bucket_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateInstanceProfileMessage
+      attr_accessor availability_zone: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor publicly_accessible: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor network_type: ::String
+      attr_accessor instance_profile_name: ::String
+      attr_accessor description: ::String
+      attr_accessor subnet_group_identifier: ::String
+      attr_accessor vpc_security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateInstanceProfileResponse
+      attr_accessor instance_profile: Types::InstanceProfile
+      SENSITIVE: []
+    end
+
+    class CreateMigrationProjectMessage
+      attr_accessor migration_project_name: ::String
+      attr_accessor source_data_provider_descriptors: ::Array[Types::DataProviderDescriptorDefinition]
+      attr_accessor target_data_provider_descriptors: ::Array[Types::DataProviderDescriptorDefinition]
+      attr_accessor instance_profile_identifier: ::String
+      attr_accessor transformation_rules: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor schema_conversion_application_attributes: Types::SCApplicationAttributes
+      SENSITIVE: []
+    end
+
+    class CreateMigrationProjectResponse
+      attr_accessor migration_project: Types::MigrationProject
+      SENSITIVE: []
+    end
+
+    class CreateReplicationConfigMessage
+      attr_accessor replication_config_identifier: ::String
+      attr_accessor source_endpoint_arn: ::String
+      attr_accessor target_endpoint_arn: ::String
+      attr_accessor compute_config: Types::ComputeConfig
+      attr_accessor replication_type: ("full-load" | "cdc" | "full-load-and-cdc")
+      attr_accessor table_mappings: ::String
+      attr_accessor replication_settings: ::String
+      attr_accessor supplemental_settings: ::String
+      attr_accessor resource_identifier: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateReplicationConfigResponse
+      attr_accessor replication_config: Types::ReplicationConfig
+      SENSITIVE: []
+    end
+
+    class CreateReplicationInstanceMessage
+      attr_accessor replication_instance_identifier: ::String
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor replication_instance_class: ::String
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor availability_zone: ::String
+      attr_accessor replication_subnet_group_identifier: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor multi_az: bool
+      attr_accessor engine_version: ::String
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor kms_key_id: ::String
+      attr_accessor publicly_accessible: bool
+      attr_accessor dns_name_servers: ::String
+      attr_accessor resource_identifier: ::String
+      attr_accessor network_type: ::String
+      SENSITIVE: []
+    end
+
+    class CreateReplicationInstanceResponse
+      attr_accessor replication_instance: Types::ReplicationInstance
+      SENSITIVE: []
+    end
+
+    class CreateReplicationSubnetGroupMessage
+      attr_accessor replication_subnet_group_identifier: ::String
+      attr_accessor replication_subnet_group_description: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateReplicationSubnetGroupResponse
+      attr_accessor replication_subnet_group: Types::ReplicationSubnetGroup
+      SENSITIVE: []
+    end
+
+    class CreateReplicationTaskMessage
+      attr_accessor replication_task_identifier: ::String
+      attr_accessor source_endpoint_arn: ::String
+      attr_accessor target_endpoint_arn: ::String
+      attr_accessor replication_instance_arn: ::String
+      attr_accessor migration_type: ("full-load" | "cdc" | "full-load-and-cdc")
+      attr_accessor table_mappings: ::String
+      attr_accessor replication_task_settings: ::String
+      attr_accessor cdc_start_time: ::Time
+      attr_accessor cdc_start_position: ::String
+      attr_accessor cdc_stop_position: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor task_data: ::String
+      attr_accessor resource_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CreateReplicationTaskResponse
+      attr_accessor replication_task: Types::ReplicationTask
+      SENSITIVE: []
+    end
+
+    class DataProvider
+      attr_accessor data_provider_name: ::String
+      attr_accessor data_provider_arn: ::String
+      attr_accessor data_provider_creation_time: ::Time
+      attr_accessor description: ::String
+      attr_accessor engine: ::String
+      attr_accessor settings: Types::DataProviderSettings
+      SENSITIVE: []
+    end
+
+    class DataProviderDescriptor
+      attr_accessor secrets_manager_secret_id: ::String
+      attr_accessor secrets_manager_access_role_arn: ::String
+      attr_accessor data_provider_name: ::String
+      attr_accessor data_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataProviderDescriptorDefinition
+      attr_accessor data_provider_identifier: ::String
+      attr_accessor secrets_manager_secret_id: ::String
+      attr_accessor secrets_manager_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DataProviderSettings
+      attr_accessor redshift_settings: Types::RedshiftDataProviderSettings
+      attr_accessor postgre_sql_settings: Types::PostgreSqlDataProviderSettings
+      attr_accessor my_sql_settings: Types::MySqlDataProviderSettings
+      attr_accessor oracle_settings: Types::OracleDataProviderSettings
+      attr_accessor microsoft_sql_server_settings: Types::MicrosoftSqlServerDataProviderSettings
+      attr_accessor doc_db_settings: Types::DocDbDataProviderSettings
+      attr_accessor maria_db_settings: Types::MariaDbDataProviderSettings
+      attr_accessor mongo_db_settings: Types::MongoDbDataProviderSettings
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RedshiftSettings < DataProviderSettings
+      end
+      class PostgreSqlSettings < DataProviderSettings
+      end
+      class MySqlSettings < DataProviderSettings
+      end
+      class OracleSettings < DataProviderSettings
+      end
+      class MicrosoftSqlServerSettings < DataProviderSettings
+      end
+      class DocDbSettings < DataProviderSettings
+      end
+      class MariaDbSettings < DataProviderSettings
+      end
+      class MongoDbSettings < DataProviderSettings
+      end
+      class Unknown < DataProviderSettings
+      end
+    end
+
+    class DatabaseInstanceSoftwareDetailsResponse
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor engine_edition: ::String
+      attr_accessor service_pack: ::String
+      attr_accessor support_level: ::String
+      attr_accessor os_architecture: ::Integer
+      attr_accessor tooltip: ::String
+      SENSITIVE: []
+    end
+
+    class DatabaseResponse
+      attr_accessor database_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor number_of_schemas: ::Integer
+      attr_accessor server: Types::ServerShortInfoResponse
+      attr_accessor software_details: Types::DatabaseInstanceSoftwareDetailsResponse
+      attr_accessor collectors: ::Array[Types::CollectorShortInfoResponse]
+      SENSITIVE: []
+    end
+
+    class DatabaseShortInfoResponse
+      attr_accessor database_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor database_ip_address: ::String
+      attr_accessor database_engine: ::String
+      SENSITIVE: []
+    end
+
+    class DefaultErrorDetails
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCertificateMessage
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCertificateResponse
+      attr_accessor certificate: Types::Certificate
+      SENSITIVE: []
+    end
+
+    class DeleteCollectorRequest
+      attr_accessor collector_referenced_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionMessage
+      attr_accessor endpoint_arn: ::String
+      attr_accessor replication_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectionResponse
+      attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class DeleteDataProviderMessage
+      attr_accessor data_provider_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataProviderResponse
+      attr_accessor data_provider: Types::DataProvider
+      SENSITIVE: []
+    end
+
+    class DeleteEndpointMessage
+      attr_accessor endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEndpointResponse
+      attr_accessor endpoint: Types::Endpoint
+      SENSITIVE: []
+    end
+
+    class DeleteEventSubscriptionMessage
+      attr_accessor subscription_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEventSubscriptionResponse
+      attr_accessor event_subscription: Types::EventSubscription
+      SENSITIVE: []
+    end
+
+    class DeleteFleetAdvisorDatabasesRequest
+      attr_accessor database_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteFleetAdvisorDatabasesResponse
+      attr_accessor database_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DeleteInstanceProfileMessage
+      attr_accessor instance_profile_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInstanceProfileResponse
+      attr_accessor instance_profile: Types::InstanceProfile
+      SENSITIVE: []
+    end
+
+    class DeleteMigrationProjectMessage
+      attr_accessor migration_project_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMigrationProjectResponse
+      attr_accessor migration_project: Types::MigrationProject
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationConfigMessage
+      attr_accessor replication_config_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationConfigResponse
+      attr_accessor replication_config: Types::ReplicationConfig
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationInstanceMessage
+      attr_accessor replication_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationInstanceResponse
+      attr_accessor replication_instance: Types::ReplicationInstance
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationSubnetGroupMessage
+      attr_accessor replication_subnet_group_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationSubnetGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteReplicationTaskAssessmentRunMessage
+      attr_accessor replication_task_assessment_run_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationTaskAssessmentRunResponse
+      attr_accessor replication_task_assessment_run: Types::ReplicationTaskAssessmentRun
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationTaskMessage
+      attr_accessor replication_task_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteReplicationTaskResponse
+      attr_accessor replication_task: Types::ReplicationTask
+      SENSITIVE: []
+    end
+
+    class DescribeAccountAttributesMessage < Aws::EmptyStructure
+    end
+
+    class DescribeAccountAttributesResponse
+      attr_accessor account_quotas: ::Array[Types::AccountQuota]
+      attr_accessor unique_account_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicableIndividualAssessmentsMessage
+      attr_accessor replication_task_arn: ::String
+      attr_accessor replication_instance_arn: ::String
+      attr_accessor source_engine_name: ::String
+      attr_accessor target_engine_name: ::String
+      attr_accessor migration_type: ("full-load" | "cdc" | "full-load-and-cdc")
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicableIndividualAssessmentsResponse
+      attr_accessor individual_assessment_names: ::Array[::String]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCertificatesMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCertificatesResponse
+      attr_accessor marker: ::String
+      attr_accessor certificates: ::Array[Types::Certificate]
+      SENSITIVE: []
+    end
+
+    class DescribeConnectionsMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConnectionsResponse
+      attr_accessor marker: ::String
+      attr_accessor connections: ::Array[Types::Connection]
+      SENSITIVE: []
+    end
+
+    class DescribeConversionConfigurationMessage
+      attr_accessor migration_project_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeConversionConfigurationResponse
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor conversion_configuration: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataProvidersMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDataProvidersResponse
+      attr_accessor marker: ::String
+      attr_accessor data_providers: ::Array[Types::DataProvider]
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointSettingsMessage
+      attr_accessor engine_name: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointSettingsResponse
+      attr_accessor marker: ::String
+      attr_accessor endpoint_settings: ::Array[Types::EndpointSetting]
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointTypesMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointTypesResponse
+      attr_accessor marker: ::String
+      attr_accessor supported_endpoint_types: ::Array[Types::SupportedEndpointType]
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointsMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEndpointsResponse
+      attr_accessor marker: ::String
+      attr_accessor endpoints: ::Array[Types::Endpoint]
+      SENSITIVE: []
+    end
+
+    class DescribeEngineVersionsMessage
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEngineVersionsResponse
+      attr_accessor engine_versions: ::Array[Types::EngineVersion]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventCategoriesMessage
+      attr_accessor source_type: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class DescribeEventCategoriesResponse
+      attr_accessor event_category_group_list: ::Array[Types::EventCategoryGroup]
+      SENSITIVE: []
+    end
+
+    class DescribeEventSubscriptionsMessage
+      attr_accessor subscription_name: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventSubscriptionsResponse
+      attr_accessor marker: ::String
+      attr_accessor event_subscriptions_list: ::Array[Types::EventSubscription]
+      SENSITIVE: []
+    end
+
+    class DescribeEventsMessage
+      attr_accessor source_identifier: ::String
+      attr_accessor source_type: ("replication-instance")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor duration: ::Integer
+      attr_accessor event_categories: ::Array[::String]
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventsResponse
+      attr_accessor marker: ::String
+      attr_accessor events: ::Array[Types::Event]
+      SENSITIVE: []
+    end
+
+    class DescribeExtensionPackAssociationsMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeExtensionPackAssociationsResponse
+      attr_accessor marker: ::String
+      attr_accessor requests: ::Array[Types::SchemaConversionRequest]
+      SENSITIVE: []
+    end
+
+    class DescribeFleetAdvisorCollectorsRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFleetAdvisorCollectorsResponse
+      attr_accessor collectors: ::Array[Types::CollectorResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFleetAdvisorDatabasesRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFleetAdvisorDatabasesResponse
+      attr_accessor databases: ::Array[Types::DatabaseResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFleetAdvisorLsaAnalysisRequest
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFleetAdvisorLsaAnalysisResponse
+      attr_accessor analysis: ::Array[Types::FleetAdvisorLsaAnalysisResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFleetAdvisorSchemaObjectSummaryRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFleetAdvisorSchemaObjectSummaryResponse
+      attr_accessor fleet_advisor_schema_objects: ::Array[Types::FleetAdvisorSchemaObjectResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFleetAdvisorSchemasRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFleetAdvisorSchemasResponse
+      attr_accessor fleet_advisor_schemas: ::Array[Types::SchemaResponse]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceProfilesMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInstanceProfilesResponse
+      attr_accessor marker: ::String
+      attr_accessor instance_profiles: ::Array[Types::InstanceProfile]
+      SENSITIVE: []
+    end
+
+    class DescribeMetadataModelAssessmentsMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeMetadataModelAssessmentsResponse
+      attr_accessor marker: ::String
+      attr_accessor requests: ::Array[Types::SchemaConversionRequest]
+      SENSITIVE: []
+    end
+
+    class DescribeMetadataModelConversionsMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeMetadataModelConversionsResponse
+      attr_accessor marker: ::String
+      attr_accessor requests: ::Array[Types::SchemaConversionRequest]
+      SENSITIVE: []
+    end
+
+    class DescribeMetadataModelExportsAsScriptMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeMetadataModelExportsAsScriptResponse
+      attr_accessor marker: ::String
+      attr_accessor requests: ::Array[Types::SchemaConversionRequest]
+      SENSITIVE: []
+    end
+
+    class DescribeMetadataModelExportsToTargetMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeMetadataModelExportsToTargetResponse
+      attr_accessor marker: ::String
+      attr_accessor requests: ::Array[Types::SchemaConversionRequest]
+      SENSITIVE: []
+    end
+
+    class DescribeMetadataModelImportsMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeMetadataModelImportsResponse
+      attr_accessor marker: ::String
+      attr_accessor requests: ::Array[Types::SchemaConversionRequest]
+      SENSITIVE: []
+    end
+
+    class DescribeMigrationProjectsMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMigrationProjectsResponse
+      attr_accessor marker: ::String
+      attr_accessor migration_projects: ::Array[Types::MigrationProject]
+      SENSITIVE: []
+    end
+
+    class DescribeOrderableReplicationInstancesMessage
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOrderableReplicationInstancesResponse
+      attr_accessor orderable_replication_instances: ::Array[Types::OrderableReplicationInstance]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePendingMaintenanceActionsMessage
+      attr_accessor replication_instance_arn: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribePendingMaintenanceActionsResponse
+      attr_accessor pending_maintenance_actions: ::Array[Types::ResourcePendingMaintenanceActions]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRecommendationLimitationsRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRecommendationLimitationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor limitations: ::Array[Types::Limitation]
+      SENSITIVE: []
+    end
+
+    class DescribeRecommendationsRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRecommendationsResponse
+      attr_accessor next_token: ::String
+      attr_accessor recommendations: ::Array[Types::Recommendation]
+      SENSITIVE: []
+    end
+
+    class DescribeRefreshSchemasStatusMessage
+      attr_accessor endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRefreshSchemasStatusResponse
+      attr_accessor refresh_schemas_status: Types::RefreshSchemasStatus
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationConfigsMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationConfigsResponse
+      attr_accessor marker: ::String
+      attr_accessor replication_configs: ::Array[Types::ReplicationConfig]
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationInstanceTaskLogsMessage
+      attr_accessor replication_instance_arn: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationInstanceTaskLogsResponse
+      attr_accessor replication_instance_arn: ::String
+      attr_accessor replication_instance_task_logs: ::Array[Types::ReplicationInstanceTaskLog]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationInstancesMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationInstancesResponse
+      attr_accessor marker: ::String
+      attr_accessor replication_instances: ::Array[Types::ReplicationInstance]
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationSubnetGroupsMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationSubnetGroupsResponse
+      attr_accessor marker: ::String
+      attr_accessor replication_subnet_groups: ::Array[Types::ReplicationSubnetGroup]
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationTableStatisticsMessage
+      attr_accessor replication_config_arn: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationTableStatisticsResponse
+      attr_accessor replication_config_arn: ::String
+      attr_accessor marker: ::String
+      attr_accessor replication_table_statistics: ::Array[Types::TableStatistics]
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationTaskAssessmentResultsMessage
+      attr_accessor replication_task_arn: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationTaskAssessmentResultsResponse
+      attr_accessor marker: ::String
+      attr_accessor bucket_name: ::String
+      attr_accessor replication_task_assessment_results: ::Array[Types::ReplicationTaskAssessmentResult]
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationTaskAssessmentRunsMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationTaskAssessmentRunsResponse
+      attr_accessor marker: ::String
+      attr_accessor replication_task_assessment_runs: ::Array[Types::ReplicationTaskAssessmentRun]
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationTaskIndividualAssessmentsMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationTaskIndividualAssessmentsResponse
+      attr_accessor marker: ::String
+      attr_accessor replication_task_individual_assessments: ::Array[Types::ReplicationTaskIndividualAssessment]
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationTasksMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor without_settings: bool
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationTasksResponse
+      attr_accessor marker: ::String
+      attr_accessor replication_tasks: ::Array[Types::ReplicationTask]
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationsMessage
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationsResponse
+      attr_accessor marker: ::String
+      attr_accessor replications: ::Array[Types::Replication]
+      SENSITIVE: []
+    end
+
+    class DescribeSchemasMessage
+      attr_accessor endpoint_arn: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSchemasResponse
+      attr_accessor marker: ::String
+      attr_accessor schemas: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeTableStatisticsMessage
+      attr_accessor replication_task_arn: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class DescribeTableStatisticsResponse
+      attr_accessor replication_task_arn: ::String
+      attr_accessor table_statistics: ::Array[Types::TableStatistics]
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DmsTransferSettings
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor bucket_name: ::String
+      SENSITIVE: []
+    end
+
+    class DocDbDataProviderSettings
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor database_name: ::String
+      attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DocDbSettings
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor database_name: ::String
+      attr_accessor nesting_level: ("none" | "one")
+      attr_accessor extract_doc_id: bool
+      attr_accessor docs_to_investigate: ::Integer
+      attr_accessor kms_key_id: ::String
+      attr_accessor secrets_manager_access_role_arn: ::String
+      attr_accessor secrets_manager_secret_id: ::String
+      attr_accessor use_update_look_up: bool
+      attr_accessor replicate_shard_collections: bool
+      SENSITIVE: [:password]
+    end
+
+    class DynamoDbSettings
+      attr_accessor service_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ElasticsearchSettings
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor endpoint_uri: ::String
+      attr_accessor full_load_error_percentage: ::Integer
+      attr_accessor error_retry_duration: ::Integer
+      attr_accessor use_new_mapping_type: bool
+      SENSITIVE: []
+    end
+
+    class Endpoint
+      attr_accessor endpoint_identifier: ::String
+      attr_accessor endpoint_type: ("source" | "target")
+      attr_accessor engine_name: ::String
+      attr_accessor engine_display_name: ::String
+      attr_accessor username: ::String
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor database_name: ::String
+      attr_accessor extra_connection_attributes: ::String
+      attr_accessor status: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor endpoint_arn: ::String
+      attr_accessor certificate_arn: ::String
+      attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor external_table_definition: ::String
+      attr_accessor external_id: ::String
+      attr_accessor dynamo_db_settings: Types::DynamoDbSettings
+      attr_accessor s3_settings: Types::S3Settings
+      attr_accessor dms_transfer_settings: Types::DmsTransferSettings
+      attr_accessor mongo_db_settings: Types::MongoDbSettings
+      attr_accessor kinesis_settings: Types::KinesisSettings
+      attr_accessor kafka_settings: Types::KafkaSettings
+      attr_accessor elasticsearch_settings: Types::ElasticsearchSettings
+      attr_accessor neptune_settings: Types::NeptuneSettings
+      attr_accessor redshift_settings: Types::RedshiftSettings
+      attr_accessor postgre_sql_settings: Types::PostgreSQLSettings
+      attr_accessor my_sql_settings: Types::MySQLSettings
+      attr_accessor oracle_settings: Types::OracleSettings
+      attr_accessor sybase_settings: Types::SybaseSettings
+      attr_accessor microsoft_sql_server_settings: Types::MicrosoftSQLServerSettings
+      attr_accessor ibm_db_2_settings: Types::IBMDb2Settings
+      attr_accessor doc_db_settings: Types::DocDbSettings
+      attr_accessor redis_settings: Types::RedisSettings
+      attr_accessor gcp_my_sql_settings: Types::GcpMySQLSettings
+      attr_accessor timestream_settings: Types::TimestreamSettings
+      SENSITIVE: []
+    end
+
+    class EndpointSetting
+      attr_accessor name: ::String
+      attr_accessor type: ("string" | "boolean" | "integer" | "enum")
+      attr_accessor enum_values: ::Array[::String]
+      attr_accessor sensitive: bool
+      attr_accessor units: ::String
+      attr_accessor applicability: ::String
+      attr_accessor int_value_min: ::Integer
+      attr_accessor int_value_max: ::Integer
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class EngineVersion
+      attr_accessor version: ::String
+      attr_accessor lifecycle: ::String
+      attr_accessor release_status: ("beta" | "prod")
+      attr_accessor launch_date: ::Time
+      attr_accessor auto_upgrade_date: ::Time
+      attr_accessor deprecation_date: ::Time
+      attr_accessor force_upgrade_date: ::Time
+      attr_accessor available_upgrades: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ErrorDetails
+      attr_accessor default_error_details: Types::DefaultErrorDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DefaultErrorDetails < ErrorDetails
+      end
+      class Unknown < ErrorDetails
+      end
+    end
+
+    class Event
+      attr_accessor source_identifier: ::String
+      attr_accessor source_type: ("replication-instance")
+      attr_accessor message: ::String
+      attr_accessor event_categories: ::Array[::String]
+      attr_accessor date: ::Time
+      SENSITIVE: []
+    end
+
+    class EventCategoryGroup
+      attr_accessor source_type: ::String
+      attr_accessor event_categories: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class EventSubscription
+      attr_accessor customer_aws_id: ::String
+      attr_accessor cust_subscription_id: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor subscription_creation_time: ::String
+      attr_accessor source_type: ::String
+      attr_accessor source_ids_list: ::Array[::String]
+      attr_accessor event_categories_list: ::Array[::String]
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ExportMetadataModelAssessmentMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor selection_rules: ::String
+      attr_accessor file_name: ::String
+      attr_accessor assessment_report_types: ::Array[("pdf" | "csv")]
+      SENSITIVE: []
+    end
+
+    class ExportMetadataModelAssessmentResponse
+      attr_accessor pdf_report: Types::ExportMetadataModelAssessmentResultEntry
+      attr_accessor csv_report: Types::ExportMetadataModelAssessmentResultEntry
+      SENSITIVE: []
+    end
+
+    class ExportMetadataModelAssessmentResultEntry
+      attr_accessor s3_object_key: ::String
+      attr_accessor object_url: ::String
+      SENSITIVE: []
+    end
+
+    class ExportSqlDetails
+      attr_accessor s3_object_key: ::String
+      attr_accessor object_url: ::String
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FleetAdvisorLsaAnalysisResponse
+      attr_accessor lsa_analysis_id: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class FleetAdvisorSchemaObjectResponse
+      attr_accessor schema_id: ::String
+      attr_accessor object_type: ::String
+      attr_accessor number_of_objects: ::Integer
+      attr_accessor code_line_count: ::Integer
+      attr_accessor code_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class GcpMySQLSettings
+      attr_accessor after_connect_script: ::String
+      attr_accessor clean_source_metadata_on_mismatch: bool
+      attr_accessor database_name: ::String
+      attr_accessor events_poll_interval: ::Integer
+      attr_accessor target_db_type: ("specific-database" | "multiple-databases")
+      attr_accessor max_file_size: ::Integer
+      attr_accessor parallel_load_threads: ::Integer
+      attr_accessor password: ::String
+      attr_accessor port: ::Integer
+      attr_accessor server_name: ::String
+      attr_accessor server_timezone: ::String
+      attr_accessor username: ::String
+      attr_accessor secrets_manager_access_role_arn: ::String
+      attr_accessor secrets_manager_secret_id: ::String
+      SENSITIVE: [:password]
+    end
+
+    class IBMDb2Settings
+      attr_accessor database_name: ::String
+      attr_accessor password: ::String
+      attr_accessor port: ::Integer
+      attr_accessor server_name: ::String
+      attr_accessor set_data_capture_changes: bool
+      attr_accessor current_lsn: ::String
+      attr_accessor max_k_bytes_per_read: ::Integer
+      attr_accessor username: ::String
+      attr_accessor secrets_manager_access_role_arn: ::String
+      attr_accessor secrets_manager_secret_id: ::String
+      attr_accessor load_timeout: ::Integer
+      attr_accessor write_buffer_size: ::Integer
+      attr_accessor max_file_size: ::Integer
+      attr_accessor keep_csv_files: bool
+      SENSITIVE: [:password]
+    end
+
+    class ImportCertificateMessage
+      attr_accessor certificate_identifier: ::String
+      attr_accessor certificate_pem: ::String
+      attr_accessor certificate_wallet: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:certificate_pem]
+    end
+
+    class ImportCertificateResponse
+      attr_accessor certificate: Types::Certificate
+      SENSITIVE: []
+    end
+
+    class InstanceProfile
+      attr_accessor instance_profile_arn: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor publicly_accessible: bool
+      attr_accessor network_type: ::String
+      attr_accessor instance_profile_name: ::String
+      attr_accessor description: ::String
+      attr_accessor instance_profile_creation_time: ::Time
+      attr_accessor subnet_group_identifier: ::String
+      attr_accessor vpc_security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InsufficientResourceCapacityFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidCertificateFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidOperationFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidResourceStateFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidSubnet
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InventoryData
+      attr_accessor number_of_databases: ::Integer
+      attr_accessor number_of_schemas: ::Integer
+      SENSITIVE: []
+    end
+
+    class KMSAccessDeniedFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSDisabledFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSInvalidStateFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSKeyNotAccessibleFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSNotFoundFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSThrottlingFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KafkaSettings
+      attr_accessor broker: ::String
+      attr_accessor topic: ::String
+      attr_accessor message_format: ("json" | "json-unformatted")
+      attr_accessor include_transaction_details: bool
+      attr_accessor include_partition_value: bool
+      attr_accessor partition_include_schema_table: bool
+      attr_accessor include_table_alter_operations: bool
+      attr_accessor include_control_details: bool
+      attr_accessor message_max_bytes: ::Integer
+      attr_accessor include_null_and_empty: bool
+      attr_accessor security_protocol: ("plaintext" | "ssl-authentication" | "ssl-encryption" | "sasl-ssl")
+      attr_accessor ssl_client_certificate_arn: ::String
+      attr_accessor ssl_client_key_arn: ::String
+      attr_accessor ssl_client_key_password: ::String
+      attr_accessor ssl_ca_certificate_arn: ::String
+      attr_accessor sasl_username: ::String
+      attr_accessor sasl_password: ::String
+      attr_accessor no_hex_prefix: bool
+      attr_accessor sasl_mechanism: ("scram-sha-512" | "plain")
+      attr_accessor ssl_endpoint_identification_algorithm: ("none" | "https")
+      SENSITIVE: [:ssl_client_key_password, :sasl_password]
+    end
+
+    class KinesisSettings
+      attr_accessor stream_arn: ::String
+      attr_accessor message_format: ("json" | "json-unformatted")
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor include_transaction_details: bool
+      attr_accessor include_partition_value: bool
+      attr_accessor partition_include_schema_table: bool
+      attr_accessor include_table_alter_operations: bool
+      attr_accessor include_control_details: bool
+      attr_accessor include_null_and_empty: bool
+      attr_accessor no_hex_prefix: bool
+      SENSITIVE: []
+    end
+
+    class Limitation
+      attr_accessor database_id: ::String
+      attr_accessor engine_name: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor impact: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceMessage
+      attr_accessor resource_arn: ::String
+      attr_accessor resource_arn_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class MariaDbDataProviderSettings
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MicrosoftSQLServerSettings
+      attr_accessor port: ::Integer
+      attr_accessor bcp_packet_size: ::Integer
+      attr_accessor database_name: ::String
+      attr_accessor control_tables_file_group: ::String
+      attr_accessor password: ::String
+      attr_accessor query_single_always_on_node: bool
+      attr_accessor read_backup_only: bool
+      attr_accessor safeguard_policy: ("rely-on-sql-server-replication-agent" | "exclusive-automatic-truncation" | "shared-automatic-truncation")
+      attr_accessor server_name: ::String
+      attr_accessor username: ::String
+      attr_accessor use_bcp_full_load: bool
+      attr_accessor use_third_party_backup_device: bool
+      attr_accessor secrets_manager_access_role_arn: ::String
+      attr_accessor secrets_manager_secret_id: ::String
+      attr_accessor trim_space_in_char: bool
+      attr_accessor tlog_access_mode: ("BackupOnly" | "PreferBackup" | "PreferTlog" | "TlogOnly")
+      attr_accessor force_lob_lookup: bool
+      SENSITIVE: [:password]
+    end
+
+    class MicrosoftSqlServerDataProviderSettings
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor database_name: ::String
+      attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MigrationProject
+      attr_accessor migration_project_name: ::String
+      attr_accessor migration_project_arn: ::String
+      attr_accessor migration_project_creation_time: ::Time
+      attr_accessor source_data_provider_descriptors: ::Array[Types::DataProviderDescriptor]
+      attr_accessor target_data_provider_descriptors: ::Array[Types::DataProviderDescriptor]
+      attr_accessor instance_profile_arn: ::String
+      attr_accessor instance_profile_name: ::String
+      attr_accessor transformation_rules: ::String
+      attr_accessor description: ::String
+      attr_accessor schema_conversion_application_attributes: Types::SCApplicationAttributes
+      SENSITIVE: []
+    end
+
+    class ModifyConversionConfigurationMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor conversion_configuration: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyConversionConfigurationResponse
+      attr_accessor migration_project_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyDataProviderMessage
+      attr_accessor data_provider_identifier: ::String
+      attr_accessor data_provider_name: ::String
+      attr_accessor description: ::String
+      attr_accessor engine: ::String
+      attr_accessor exact_settings: bool
+      attr_accessor settings: Types::DataProviderSettings
+      SENSITIVE: []
+    end
+
+    class ModifyDataProviderResponse
+      attr_accessor data_provider: Types::DataProvider
+      SENSITIVE: []
+    end
+
+    class ModifyEndpointMessage
+      attr_accessor endpoint_arn: ::String
+      attr_accessor endpoint_identifier: ::String
+      attr_accessor endpoint_type: ("source" | "target")
+      attr_accessor engine_name: ::String
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor database_name: ::String
+      attr_accessor extra_connection_attributes: ::String
+      attr_accessor certificate_arn: ::String
+      attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor external_table_definition: ::String
+      attr_accessor dynamo_db_settings: Types::DynamoDbSettings
+      attr_accessor s3_settings: Types::S3Settings
+      attr_accessor dms_transfer_settings: Types::DmsTransferSettings
+      attr_accessor mongo_db_settings: Types::MongoDbSettings
+      attr_accessor kinesis_settings: Types::KinesisSettings
+      attr_accessor kafka_settings: Types::KafkaSettings
+      attr_accessor elasticsearch_settings: Types::ElasticsearchSettings
+      attr_accessor neptune_settings: Types::NeptuneSettings
+      attr_accessor redshift_settings: Types::RedshiftSettings
+      attr_accessor postgre_sql_settings: Types::PostgreSQLSettings
+      attr_accessor my_sql_settings: Types::MySQLSettings
+      attr_accessor oracle_settings: Types::OracleSettings
+      attr_accessor sybase_settings: Types::SybaseSettings
+      attr_accessor microsoft_sql_server_settings: Types::MicrosoftSQLServerSettings
+      attr_accessor ibm_db_2_settings: Types::IBMDb2Settings
+      attr_accessor doc_db_settings: Types::DocDbSettings
+      attr_accessor redis_settings: Types::RedisSettings
+      attr_accessor exact_settings: bool
+      attr_accessor gcp_my_sql_settings: Types::GcpMySQLSettings
+      attr_accessor timestream_settings: Types::TimestreamSettings
+      SENSITIVE: [:password]
+    end
+
+    class ModifyEndpointResponse
+      attr_accessor endpoint: Types::Endpoint
+      SENSITIVE: []
+    end
+
+    class ModifyEventSubscriptionMessage
+      attr_accessor subscription_name: ::String
+      attr_accessor sns_topic_arn: ::String
+      attr_accessor source_type: ::String
+      attr_accessor event_categories: ::Array[::String]
+      attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ModifyEventSubscriptionResponse
+      attr_accessor event_subscription: Types::EventSubscription
+      SENSITIVE: []
+    end
+
+    class ModifyInstanceProfileMessage
+      attr_accessor instance_profile_identifier: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor publicly_accessible: bool
+      attr_accessor network_type: ::String
+      attr_accessor instance_profile_name: ::String
+      attr_accessor description: ::String
+      attr_accessor subnet_group_identifier: ::String
+      attr_accessor vpc_security_groups: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ModifyInstanceProfileResponse
+      attr_accessor instance_profile: Types::InstanceProfile
+      SENSITIVE: []
+    end
+
+    class ModifyMigrationProjectMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor migration_project_name: ::String
+      attr_accessor source_data_provider_descriptors: ::Array[Types::DataProviderDescriptorDefinition]
+      attr_accessor target_data_provider_descriptors: ::Array[Types::DataProviderDescriptorDefinition]
+      attr_accessor instance_profile_identifier: ::String
+      attr_accessor transformation_rules: ::String
+      attr_accessor description: ::String
+      attr_accessor schema_conversion_application_attributes: Types::SCApplicationAttributes
+      SENSITIVE: []
+    end
+
+    class ModifyMigrationProjectResponse
+      attr_accessor migration_project: Types::MigrationProject
+      SENSITIVE: []
+    end
+
+    class ModifyReplicationConfigMessage
+      attr_accessor replication_config_arn: ::String
+      attr_accessor replication_config_identifier: ::String
+      attr_accessor replication_type: ("full-load" | "cdc" | "full-load-and-cdc")
+      attr_accessor table_mappings: ::String
+      attr_accessor replication_settings: ::String
+      attr_accessor supplemental_settings: ::String
+      attr_accessor compute_config: Types::ComputeConfig
+      attr_accessor source_endpoint_arn: ::String
+      attr_accessor target_endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyReplicationConfigResponse
+      attr_accessor replication_config: Types::ReplicationConfig
+      SENSITIVE: []
+    end
+
+    class ModifyReplicationInstanceMessage
+      attr_accessor replication_instance_arn: ::String
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor apply_immediately: bool
+      attr_accessor replication_instance_class: ::String
+      attr_accessor vpc_security_group_ids: ::Array[::String]
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor multi_az: bool
+      attr_accessor engine_version: ::String
+      attr_accessor allow_major_version_upgrade: bool
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor replication_instance_identifier: ::String
+      attr_accessor network_type: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyReplicationInstanceResponse
+      attr_accessor replication_instance: Types::ReplicationInstance
+      SENSITIVE: []
+    end
+
+    class ModifyReplicationSubnetGroupMessage
+      attr_accessor replication_subnet_group_identifier: ::String
+      attr_accessor replication_subnet_group_description: ::String
+      attr_accessor subnet_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ModifyReplicationSubnetGroupResponse
+      attr_accessor replication_subnet_group: Types::ReplicationSubnetGroup
+      SENSITIVE: []
+    end
+
+    class ModifyReplicationTaskMessage
+      attr_accessor replication_task_arn: ::String
+      attr_accessor replication_task_identifier: ::String
+      attr_accessor migration_type: ("full-load" | "cdc" | "full-load-and-cdc")
+      attr_accessor table_mappings: ::String
+      attr_accessor replication_task_settings: ::String
+      attr_accessor cdc_start_time: ::Time
+      attr_accessor cdc_start_position: ::String
+      attr_accessor cdc_stop_position: ::String
+      attr_accessor task_data: ::String
+      SENSITIVE: []
+    end
+
+    class ModifyReplicationTaskResponse
+      attr_accessor replication_task: Types::ReplicationTask
+      SENSITIVE: []
+    end
+
+    class MongoDbDataProviderSettings
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor database_name: ::String
+      attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
+      attr_accessor certificate_arn: ::String
+      attr_accessor auth_type: ("no" | "password")
+      attr_accessor auth_source: ::String
+      attr_accessor auth_mechanism: ("default" | "mongodb_cr" | "scram_sha_1")
+      SENSITIVE: []
+    end
+
+    class MongoDbSettings
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor database_name: ::String
+      attr_accessor auth_type: ("no" | "password")
+      attr_accessor auth_mechanism: ("default" | "mongodb_cr" | "scram_sha_1")
+      attr_accessor nesting_level: ("none" | "one")
+      attr_accessor extract_doc_id: ::String
+      attr_accessor docs_to_investigate: ::String
+      attr_accessor auth_source: ::String
+      attr_accessor kms_key_id: ::String
+      attr_accessor secrets_manager_access_role_arn: ::String
+      attr_accessor secrets_manager_secret_id: ::String
+      attr_accessor use_update_look_up: bool
+      attr_accessor replicate_shard_collections: bool
+      SENSITIVE: [:password]
+    end
+
+    class MoveReplicationTaskMessage
+      attr_accessor replication_task_arn: ::String
+      attr_accessor target_replication_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class MoveReplicationTaskResponse
+      attr_accessor replication_task: Types::ReplicationTask
+      SENSITIVE: []
+    end
+
+    class MySQLSettings
+      attr_accessor after_connect_script: ::String
+      attr_accessor clean_source_metadata_on_mismatch: bool
+      attr_accessor database_name: ::String
+      attr_accessor events_poll_interval: ::Integer
+      attr_accessor target_db_type: ("specific-database" | "multiple-databases")
+      attr_accessor max_file_size: ::Integer
+      attr_accessor parallel_load_threads: ::Integer
+      attr_accessor password: ::String
+      attr_accessor port: ::Integer
+      attr_accessor server_name: ::String
+      attr_accessor server_timezone: ::String
+      attr_accessor username: ::String
+      attr_accessor secrets_manager_access_role_arn: ::String
+      attr_accessor secrets_manager_secret_id: ::String
+      attr_accessor execute_timeout: ::Integer
+      SENSITIVE: [:password]
+    end
+
+    class MySqlDataProviderSettings
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class NeptuneSettings
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_bucket_folder: ::String
+      attr_accessor error_retry_duration: ::Integer
+      attr_accessor max_file_size: ::Integer
+      attr_accessor max_retry_count: ::Integer
+      attr_accessor iam_auth_enabled: bool
+      SENSITIVE: []
+    end
+
+    class OracleDataProviderSettings
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor database_name: ::String
+      attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
+      attr_accessor certificate_arn: ::String
+      attr_accessor asm_server: ::String
+      attr_accessor secrets_manager_oracle_asm_secret_id: ::String
+      attr_accessor secrets_manager_oracle_asm_access_role_arn: ::String
+      attr_accessor secrets_manager_security_db_encryption_secret_id: ::String
+      attr_accessor secrets_manager_security_db_encryption_access_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class OracleSettings
+      attr_accessor add_supplemental_logging: bool
+      attr_accessor archived_log_dest_id: ::Integer
+      attr_accessor additional_archived_log_dest_id: ::Integer
+      attr_accessor extra_archived_log_dest_ids: ::Array[::Integer]
+      attr_accessor allow_select_nested_tables: bool
+      attr_accessor parallel_asm_read_threads: ::Integer
+      attr_accessor read_ahead_blocks: ::Integer
+      attr_accessor access_alternate_directly: bool
+      attr_accessor use_alternate_folder_for_online: bool
+      attr_accessor oracle_path_prefix: ::String
+      attr_accessor use_path_prefix: ::String
+      attr_accessor replace_path_prefix: bool
+      attr_accessor enable_homogenous_tablespace: bool
+      attr_accessor direct_path_no_log: bool
+      attr_accessor archived_logs_only: bool
+      attr_accessor asm_password: ::String
+      attr_accessor asm_server: ::String
+      attr_accessor asm_user: ::String
+      attr_accessor char_length_semantics: ("default" | "char" | "byte")
+      attr_accessor database_name: ::String
+      attr_accessor direct_path_parallel_load: bool
+      attr_accessor fail_tasks_on_lob_truncation: bool
+      attr_accessor number_datatype_scale: ::Integer
+      attr_accessor password: ::String
+      attr_accessor port: ::Integer
+      attr_accessor read_table_space_name: bool
+      attr_accessor retry_interval: ::Integer
+      attr_accessor security_db_encryption: ::String
+      attr_accessor security_db_encryption_name: ::String
+      attr_accessor server_name: ::String
+      attr_accessor spatial_data_option_to_geo_json_function_name: ::String
+      attr_accessor standby_delay_time: ::Integer
+      attr_accessor username: ::String
+      attr_accessor use_b_file: bool
+      attr_accessor use_direct_path_full_load: bool
+      attr_accessor use_logminer_reader: bool
+      attr_accessor secrets_manager_access_role_arn: ::String
+      attr_accessor secrets_manager_secret_id: ::String
+      attr_accessor secrets_manager_oracle_asm_access_role_arn: ::String
+      attr_accessor secrets_manager_oracle_asm_secret_id: ::String
+      attr_accessor trim_space_in_char: bool
+      attr_accessor convert_timestamp_with_zone_to_utc: bool
+      attr_accessor open_transaction_window: ::Integer
+      SENSITIVE: [:asm_password, :password, :security_db_encryption]
+    end
+
+    class OrderableReplicationInstance
+      attr_accessor engine_version: ::String
+      attr_accessor replication_instance_class: ::String
+      attr_accessor storage_type: ::String
+      attr_accessor min_allocated_storage: ::Integer
+      attr_accessor max_allocated_storage: ::Integer
+      attr_accessor default_allocated_storage: ::Integer
+      attr_accessor included_allocated_storage: ::Integer
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor release_status: ("beta" | "prod")
+      SENSITIVE: []
+    end
+
+    class PendingMaintenanceAction
+      attr_accessor action: ::String
+      attr_accessor auto_applied_after_date: ::Time
+      attr_accessor forced_apply_date: ::Time
+      attr_accessor opt_in_status: ::String
+      attr_accessor current_apply_date: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class PostgreSQLSettings
+      attr_accessor after_connect_script: ::String
+      attr_accessor capture_ddls: bool
+      attr_accessor max_file_size: ::Integer
+      attr_accessor database_name: ::String
+      attr_accessor ddl_artifacts_schema: ::String
+      attr_accessor execute_timeout: ::Integer
+      attr_accessor fail_tasks_on_lob_truncation: bool
+      attr_accessor heartbeat_enable: bool
+      attr_accessor heartbeat_schema: ::String
+      attr_accessor heartbeat_frequency: ::Integer
+      attr_accessor password: ::String
+      attr_accessor port: ::Integer
+      attr_accessor server_name: ::String
+      attr_accessor username: ::String
+      attr_accessor slot_name: ::String
+      attr_accessor plugin_name: ("no-preference" | "test-decoding" | "pglogical")
+      attr_accessor secrets_manager_access_role_arn: ::String
+      attr_accessor secrets_manager_secret_id: ::String
+      attr_accessor trim_space_in_char: bool
+      attr_accessor map_boolean_as_boolean: bool
+      attr_accessor map_jsonb_as_clob: bool
+      attr_accessor map_long_varchar_as: ("wstring" | "clob" | "nclob")
+      attr_accessor database_mode: ("default" | "babelfish")
+      attr_accessor babelfish_database_name: ::String
+      SENSITIVE: [:password]
+    end
+
+    class PostgreSqlDataProviderSettings
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor database_name: ::String
+      attr_accessor ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisionData
+      attr_accessor provision_state: ::String
+      attr_accessor provisioned_capacity_units: ::Integer
+      attr_accessor date_provisioned: ::Time
+      attr_accessor is_new_provisioning_available: bool
+      attr_accessor date_new_provisioning_data_available: ::Time
+      attr_accessor reason_for_new_provisioning_data: ::String
+      SENSITIVE: []
+    end
+
+    class RdsConfiguration
+      attr_accessor engine_edition: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor instance_vcpu: ::Float
+      attr_accessor instance_memory: ::Float
+      attr_accessor storage_type: ::String
+      attr_accessor storage_size: ::Integer
+      attr_accessor storage_iops: ::Integer
+      attr_accessor deployment_option: ::String
+      attr_accessor engine_version: ::String
+      SENSITIVE: []
+    end
+
+    class RdsRecommendation
+      attr_accessor requirements_to_target: Types::RdsRequirements
+      attr_accessor target_configuration: Types::RdsConfiguration
+      SENSITIVE: []
+    end
+
+    class RdsRequirements
+      attr_accessor engine_edition: ::String
+      attr_accessor instance_vcpu: ::Float
+      attr_accessor instance_memory: ::Float
+      attr_accessor storage_size: ::Integer
+      attr_accessor storage_iops: ::Integer
+      attr_accessor deployment_option: ::String
+      attr_accessor engine_version: ::String
+      SENSITIVE: []
+    end
+
+    class RebootReplicationInstanceMessage
+      attr_accessor replication_instance_arn: ::String
+      attr_accessor force_failover: bool
+      attr_accessor force_planned_failover: bool
+      SENSITIVE: []
+    end
+
+    class RebootReplicationInstanceResponse
+      attr_accessor replication_instance: Types::ReplicationInstance
+      SENSITIVE: []
+    end
+
+    class Recommendation
+      attr_accessor database_id: ::String
+      attr_accessor engine_name: ::String
+      attr_accessor created_date: ::String
+      attr_accessor status: ::String
+      attr_accessor preferred: bool
+      attr_accessor settings: Types::RecommendationSettings
+      attr_accessor data: Types::RecommendationData
+      SENSITIVE: []
+    end
+
+    class RecommendationData
+      attr_accessor rds_engine: Types::RdsRecommendation
+      SENSITIVE: []
+    end
+
+    class RecommendationSettings
+      attr_accessor instance_sizing_type: ::String
+      attr_accessor workload_type: ::String
+      SENSITIVE: []
+    end
+
+    class RedisSettings
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor ssl_security_protocol: ("plaintext" | "ssl-encryption")
+      attr_accessor auth_type: ("none" | "auth-role" | "auth-token")
+      attr_accessor auth_user_name: ::String
+      attr_accessor auth_password: ::String
+      attr_accessor ssl_ca_certificate_arn: ::String
+      SENSITIVE: [:auth_password]
+    end
+
+    class RedshiftDataProviderSettings
+      attr_accessor server_name: ::String
+      attr_accessor port: ::Integer
+      attr_accessor database_name: ::String
+      SENSITIVE: []
+    end
+
+    class RedshiftSettings
+      attr_accessor accept_any_date: bool
+      attr_accessor after_connect_script: ::String
+      attr_accessor bucket_folder: ::String
+      attr_accessor bucket_name: ::String
+      attr_accessor case_sensitive_names: bool
+      attr_accessor comp_update: bool
+      attr_accessor connection_timeout: ::Integer
+      attr_accessor database_name: ::String
+      attr_accessor date_format: ::String
+      attr_accessor empty_as_null: bool
+      attr_accessor encryption_mode: ("sse-s3" | "sse-kms")
+      attr_accessor explicit_ids: bool
+      attr_accessor file_transfer_upload_streams: ::Integer
+      attr_accessor load_timeout: ::Integer
+      attr_accessor max_file_size: ::Integer
+      attr_accessor password: ::String
+      attr_accessor port: ::Integer
+      attr_accessor remove_quotes: bool
+      attr_accessor replace_invalid_chars: ::String
+      attr_accessor replace_chars: ::String
+      attr_accessor server_name: ::String
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor server_side_encryption_kms_key_id: ::String
+      attr_accessor time_format: ::String
+      attr_accessor trim_blanks: bool
+      attr_accessor truncate_columns: bool
+      attr_accessor username: ::String
+      attr_accessor write_buffer_size: ::Integer
+      attr_accessor secrets_manager_access_role_arn: ::String
+      attr_accessor secrets_manager_secret_id: ::String
+      attr_accessor map_boolean_as_boolean: bool
+      SENSITIVE: [:password]
+    end
+
+    class RefreshSchemasMessage
+      attr_accessor endpoint_arn: ::String
+      attr_accessor replication_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RefreshSchemasResponse
+      attr_accessor refresh_schemas_status: Types::RefreshSchemasStatus
+      SENSITIVE: []
+    end
+
+    class RefreshSchemasStatus
+      attr_accessor endpoint_arn: ::String
+      attr_accessor replication_instance_arn: ::String
+      attr_accessor status: ("successful" | "failed" | "refreshing")
+      attr_accessor last_refresh_date: ::Time
+      attr_accessor last_failure_message: ::String
+      SENSITIVE: []
+    end
+
+    class ReloadReplicationTablesMessage
+      attr_accessor replication_config_arn: ::String
+      attr_accessor tables_to_reload: ::Array[Types::TableToReload]
+      attr_accessor reload_option: ("data-reload" | "validate-only")
+      SENSITIVE: []
+    end
+
+    class ReloadReplicationTablesResponse
+      attr_accessor replication_config_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ReloadTablesMessage
+      attr_accessor replication_task_arn: ::String
+      attr_accessor tables_to_reload: ::Array[Types::TableToReload]
+      attr_accessor reload_option: ("data-reload" | "validate-only")
+      SENSITIVE: []
+    end
+
+    class ReloadTablesResponse
+      attr_accessor replication_task_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveTagsFromResourceMessage
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemoveTagsFromResourceResponse < Aws::EmptyStructure
+    end
+
+    class Replication
+      attr_accessor replication_config_identifier: ::String
+      attr_accessor replication_config_arn: ::String
+      attr_accessor source_endpoint_arn: ::String
+      attr_accessor target_endpoint_arn: ::String
+      attr_accessor replication_type: ("full-load" | "cdc" | "full-load-and-cdc")
+      attr_accessor status: ::String
+      attr_accessor provision_data: Types::ProvisionData
+      attr_accessor stop_reason: ::String
+      attr_accessor failure_messages: ::Array[::String]
+      attr_accessor replication_stats: Types::ReplicationStats
+      attr_accessor start_replication_type: ::String
+      attr_accessor cdc_start_time: ::Time
+      attr_accessor cdc_start_position: ::String
+      attr_accessor cdc_stop_position: ::String
+      attr_accessor recovery_checkpoint: ::String
+      attr_accessor replication_create_time: ::Time
+      attr_accessor replication_update_time: ::Time
+      attr_accessor replication_last_stop_time: ::Time
+      attr_accessor replication_deprovision_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ReplicationConfig
+      attr_accessor replication_config_identifier: ::String
+      attr_accessor replication_config_arn: ::String
+      attr_accessor source_endpoint_arn: ::String
+      attr_accessor target_endpoint_arn: ::String
+      attr_accessor replication_type: ("full-load" | "cdc" | "full-load-and-cdc")
+      attr_accessor compute_config: Types::ComputeConfig
+      attr_accessor replication_settings: ::String
+      attr_accessor supplemental_settings: ::String
+      attr_accessor table_mappings: ::String
+      attr_accessor replication_config_create_time: ::Time
+      attr_accessor replication_config_update_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ReplicationInstance
+      attr_accessor replication_instance_identifier: ::String
+      attr_accessor replication_instance_class: ::String
+      attr_accessor replication_instance_status: ::String
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor instance_create_time: ::Time
+      attr_accessor vpc_security_groups: ::Array[Types::VpcSecurityGroupMembership]
+      attr_accessor availability_zone: ::String
+      attr_accessor replication_subnet_group: Types::ReplicationSubnetGroup
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor pending_modified_values: Types::ReplicationPendingModifiedValues
+      attr_accessor multi_az: bool
+      attr_accessor engine_version: ::String
+      attr_accessor auto_minor_version_upgrade: bool
+      attr_accessor kms_key_id: ::String
+      attr_accessor replication_instance_arn: ::String
+      attr_accessor replication_instance_public_ip_address: ::String
+      attr_accessor replication_instance_private_ip_address: ::String
+      attr_accessor replication_instance_public_ip_addresses: ::Array[::String]
+      attr_accessor replication_instance_private_ip_addresses: ::Array[::String]
+      attr_accessor replication_instance_ipv_6_addresses: ::Array[::String]
+      attr_accessor publicly_accessible: bool
+      attr_accessor secondary_availability_zone: ::String
+      attr_accessor free_until: ::Time
+      attr_accessor dns_name_servers: ::String
+      attr_accessor network_type: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationInstanceTaskLog
+      attr_accessor replication_task_name: ::String
+      attr_accessor replication_task_arn: ::String
+      attr_accessor replication_instance_task_log_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ReplicationPendingModifiedValues
+      attr_accessor replication_instance_class: ::String
+      attr_accessor allocated_storage: ::Integer
+      attr_accessor multi_az: bool
+      attr_accessor engine_version: ::String
+      attr_accessor network_type: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationStats
+      attr_accessor full_load_progress_percent: ::Integer
+      attr_accessor elapsed_time_millis: ::Integer
+      attr_accessor tables_loaded: ::Integer
+      attr_accessor tables_loading: ::Integer
+      attr_accessor tables_queued: ::Integer
+      attr_accessor tables_errored: ::Integer
+      attr_accessor fresh_start_date: ::Time
+      attr_accessor start_date: ::Time
+      attr_accessor stop_date: ::Time
+      attr_accessor full_load_start_date: ::Time
+      attr_accessor full_load_finish_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ReplicationSubnetGroup
+      attr_accessor replication_subnet_group_identifier: ::String
+      attr_accessor replication_subnet_group_description: ::String
+      attr_accessor vpc_id: ::String
+      attr_accessor subnet_group_status: ::String
+      attr_accessor subnets: ::Array[Types::Subnet]
+      attr_accessor supported_network_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ReplicationSubnetGroupDoesNotCoverEnoughAZs
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationTask
+      attr_accessor replication_task_identifier: ::String
+      attr_accessor source_endpoint_arn: ::String
+      attr_accessor target_endpoint_arn: ::String
+      attr_accessor replication_instance_arn: ::String
+      attr_accessor migration_type: ("full-load" | "cdc" | "full-load-and-cdc")
+      attr_accessor table_mappings: ::String
+      attr_accessor replication_task_settings: ::String
+      attr_accessor status: ::String
+      attr_accessor last_failure_message: ::String
+      attr_accessor stop_reason: ::String
+      attr_accessor replication_task_creation_date: ::Time
+      attr_accessor replication_task_start_date: ::Time
+      attr_accessor cdc_start_position: ::String
+      attr_accessor cdc_stop_position: ::String
+      attr_accessor recovery_checkpoint: ::String
+      attr_accessor replication_task_arn: ::String
+      attr_accessor replication_task_stats: Types::ReplicationTaskStats
+      attr_accessor task_data: ::String
+      attr_accessor target_replication_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationTaskAssessmentResult
+      attr_accessor replication_task_identifier: ::String
+      attr_accessor replication_task_arn: ::String
+      attr_accessor replication_task_last_assessment_date: ::Time
+      attr_accessor assessment_status: ::String
+      attr_accessor assessment_results_file: ::String
+      attr_accessor assessment_results: ::String
+      attr_accessor s3_object_url: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationTaskAssessmentRun
+      attr_accessor replication_task_assessment_run_arn: ::String
+      attr_accessor replication_task_arn: ::String
+      attr_accessor status: ::String
+      attr_accessor replication_task_assessment_run_creation_date: ::Time
+      attr_accessor assessment_progress: Types::ReplicationTaskAssessmentRunProgress
+      attr_accessor last_failure_message: ::String
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor result_location_bucket: ::String
+      attr_accessor result_location_folder: ::String
+      attr_accessor result_encryption_mode: ::String
+      attr_accessor result_kms_key_arn: ::String
+      attr_accessor assessment_run_name: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationTaskAssessmentRunProgress
+      attr_accessor individual_assessment_count: ::Integer
+      attr_accessor individual_assessment_completed_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class ReplicationTaskIndividualAssessment
+      attr_accessor replication_task_individual_assessment_arn: ::String
+      attr_accessor replication_task_assessment_run_arn: ::String
+      attr_accessor individual_assessment_name: ::String
+      attr_accessor status: ::String
+      attr_accessor replication_task_individual_assessment_start_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ReplicationTaskStats
+      attr_accessor full_load_progress_percent: ::Integer
+      attr_accessor elapsed_time_millis: ::Integer
+      attr_accessor tables_loaded: ::Integer
+      attr_accessor tables_loading: ::Integer
+      attr_accessor tables_queued: ::Integer
+      attr_accessor tables_errored: ::Integer
+      attr_accessor fresh_start_date: ::Time
+      attr_accessor start_date: ::Time
+      attr_accessor stop_date: ::Time
+      attr_accessor full_load_start_date: ::Time
+      attr_accessor full_load_finish_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsFault
+      attr_accessor message: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcePendingMaintenanceActions
+      attr_accessor resource_identifier: ::String
+      attr_accessor pending_maintenance_action_details: ::Array[Types::PendingMaintenanceAction]
+      SENSITIVE: []
+    end
+
+    class ResourceQuotaExceededFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RunFleetAdvisorLsaAnalysisResponse
+      attr_accessor lsa_analysis_id: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class S3AccessDeniedFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3ResourceNotFoundFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Settings
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor external_table_definition: ::String
+      attr_accessor csv_row_delimiter: ::String
+      attr_accessor csv_delimiter: ::String
+      attr_accessor bucket_folder: ::String
+      attr_accessor bucket_name: ::String
+      attr_accessor compression_type: ("none" | "gzip")
+      attr_accessor encryption_mode: ("sse-s3" | "sse-kms")
+      attr_accessor server_side_encryption_kms_key_id: ::String
+      attr_accessor data_format: ("csv" | "parquet")
+      attr_accessor encoding_type: ("plain" | "plain-dictionary" | "rle-dictionary")
+      attr_accessor dict_page_size_limit: ::Integer
+      attr_accessor row_group_length: ::Integer
+      attr_accessor data_page_size: ::Integer
+      attr_accessor parquet_version: ("parquet-1-0" | "parquet-2-0")
+      attr_accessor enable_statistics: bool
+      attr_accessor include_op_for_full_load: bool
+      attr_accessor cdc_inserts_only: bool
+      attr_accessor timestamp_column_name: ::String
+      attr_accessor parquet_timestamp_in_millisecond: bool
+      attr_accessor cdc_inserts_and_updates: bool
+      attr_accessor date_partition_enabled: bool
+      attr_accessor date_partition_sequence: ("YYYYMMDD" | "YYYYMMDDHH" | "YYYYMM" | "MMYYYYDD" | "DDMMYYYY")
+      attr_accessor date_partition_delimiter: ("SLASH" | "UNDERSCORE" | "DASH" | "NONE")
+      attr_accessor use_csv_no_sup_value: bool
+      attr_accessor csv_no_sup_value: ::String
+      attr_accessor preserve_transactions: bool
+      attr_accessor cdc_path: ::String
+      attr_accessor use_task_start_time_for_full_load_timestamp: bool
+      attr_accessor canned_acl_for_objects: ("none" | "private" | "public-read" | "public-read-write" | "authenticated-read" | "aws-exec-read" | "bucket-owner-read" | "bucket-owner-full-control")
+      attr_accessor add_column_name: bool
+      attr_accessor cdc_max_batch_interval: ::Integer
+      attr_accessor cdc_min_file_size: ::Integer
+      attr_accessor csv_null_value: ::String
+      attr_accessor ignore_header_rows: ::Integer
+      attr_accessor max_file_size: ::Integer
+      attr_accessor rfc_4180: bool
+      attr_accessor date_partition_timezone: ::String
+      attr_accessor add_trailing_padding_character: bool
+      attr_accessor expected_bucket_owner: ::String
+      attr_accessor glue_catalog_generation: bool
+      SENSITIVE: []
+    end
+
+    class SCApplicationAttributes
+      attr_accessor s3_bucket_path: ::String
+      attr_accessor s3_bucket_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SNSInvalidTopicFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SNSNoAuthorizationFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SchemaConversionRequest
+      attr_accessor status: ::String
+      attr_accessor request_identifier: ::String
+      attr_accessor migration_project_arn: ::String
+      attr_accessor error: Types::ErrorDetails
+      attr_accessor export_sql_details: Types::ExportSqlDetails
+      SENSITIVE: []
+    end
+
+    class SchemaResponse
+      attr_accessor code_line_count: ::Integer
+      attr_accessor code_size: ::Integer
+      attr_accessor complexity: ::String
+      attr_accessor server: Types::ServerShortInfoResponse
+      attr_accessor database_instance: Types::DatabaseShortInfoResponse
+      attr_accessor schema_id: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor original_schema: Types::SchemaShortInfoResponse
+      attr_accessor similarity: ::Float
+      SENSITIVE: []
+    end
+
+    class SchemaShortInfoResponse
+      attr_accessor schema_id: ::String
+      attr_accessor schema_name: ::String
+      attr_accessor database_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor database_ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class ServerShortInfoResponse
+      attr_accessor server_id: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor server_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartExtensionPackAssociationMessage
+      attr_accessor migration_project_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartExtensionPackAssociationResponse
+      attr_accessor request_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartMetadataModelAssessmentMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor selection_rules: ::String
+      SENSITIVE: []
+    end
+
+    class StartMetadataModelAssessmentResponse
+      attr_accessor request_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartMetadataModelConversionMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor selection_rules: ::String
+      SENSITIVE: []
+    end
+
+    class StartMetadataModelConversionResponse
+      attr_accessor request_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartMetadataModelExportAsScriptMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor selection_rules: ::String
+      attr_accessor origin: ("SOURCE" | "TARGET")
+      attr_accessor file_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartMetadataModelExportAsScriptResponse
+      attr_accessor request_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartMetadataModelExportToTargetMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor selection_rules: ::String
+      attr_accessor overwrite_extension_pack: bool
+      SENSITIVE: []
+    end
+
+    class StartMetadataModelExportToTargetResponse
+      attr_accessor request_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartMetadataModelImportMessage
+      attr_accessor migration_project_identifier: ::String
+      attr_accessor selection_rules: ::String
+      attr_accessor origin: ("SOURCE" | "TARGET")
+      attr_accessor refresh: bool
+      SENSITIVE: []
+    end
+
+    class StartMetadataModelImportResponse
+      attr_accessor request_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class StartRecommendationsRequest
+      attr_accessor database_id: ::String
+      attr_accessor settings: Types::RecommendationSettings
+      SENSITIVE: []
+    end
+
+    class StartRecommendationsRequestEntry
+      attr_accessor database_id: ::String
+      attr_accessor settings: Types::RecommendationSettings
+      SENSITIVE: []
+    end
+
+    class StartReplicationMessage
+      attr_accessor replication_config_arn: ::String
+      attr_accessor start_replication_type: ::String
+      attr_accessor cdc_start_time: ::Time
+      attr_accessor cdc_start_position: ::String
+      attr_accessor cdc_stop_position: ::String
+      SENSITIVE: []
+    end
+
+    class StartReplicationResponse
+      attr_accessor replication: Types::Replication
+      SENSITIVE: []
+    end
+
+    class StartReplicationTaskAssessmentMessage
+      attr_accessor replication_task_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartReplicationTaskAssessmentResponse
+      attr_accessor replication_task: Types::ReplicationTask
+      SENSITIVE: []
+    end
+
+    class StartReplicationTaskAssessmentRunMessage
+      attr_accessor replication_task_arn: ::String
+      attr_accessor service_access_role_arn: ::String
+      attr_accessor result_location_bucket: ::String
+      attr_accessor result_location_folder: ::String
+      attr_accessor result_encryption_mode: ::String
+      attr_accessor result_kms_key_arn: ::String
+      attr_accessor assessment_run_name: ::String
+      attr_accessor include_only: ::Array[::String]
+      attr_accessor exclude: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StartReplicationTaskAssessmentRunResponse
+      attr_accessor replication_task_assessment_run: Types::ReplicationTaskAssessmentRun
+      SENSITIVE: []
+    end
+
+    class StartReplicationTaskMessage
+      attr_accessor replication_task_arn: ::String
+      attr_accessor start_replication_task_type: ("start-replication" | "resume-processing" | "reload-target")
+      attr_accessor cdc_start_time: ::Time
+      attr_accessor cdc_start_position: ::String
+      attr_accessor cdc_stop_position: ::String
+      SENSITIVE: []
+    end
+
+    class StartReplicationTaskResponse
+      attr_accessor replication_task: Types::ReplicationTask
+      SENSITIVE: []
+    end
+
+    class StopReplicationMessage
+      attr_accessor replication_config_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopReplicationResponse
+      attr_accessor replication: Types::Replication
+      SENSITIVE: []
+    end
+
+    class StopReplicationTaskMessage
+      attr_accessor replication_task_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopReplicationTaskResponse
+      attr_accessor replication_task: Types::ReplicationTask
+      SENSITIVE: []
+    end
+
+    class StorageQuotaExceededFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Subnet
+      attr_accessor subnet_identifier: ::String
+      attr_accessor subnet_availability_zone: Types::AvailabilityZone
+      attr_accessor subnet_status: ::String
+      SENSITIVE: []
+    end
+
+    class SubnetAlreadyInUse
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SupportedEndpointType
+      attr_accessor engine_name: ::String
+      attr_accessor supports_cdc: bool
+      attr_accessor endpoint_type: ("source" | "target")
+      attr_accessor replication_instance_engine_minimum_version: ::String
+      attr_accessor engine_display_name: ::String
+      SENSITIVE: []
+    end
+
+    class SybaseSettings
+      attr_accessor database_name: ::String
+      attr_accessor password: ::String
+      attr_accessor port: ::Integer
+      attr_accessor server_name: ::String
+      attr_accessor username: ::String
+      attr_accessor secrets_manager_access_role_arn: ::String
+      attr_accessor secrets_manager_secret_id: ::String
+      SENSITIVE: [:password]
+    end
+
+    class TableStatistics
+      attr_accessor schema_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor inserts: ::Integer
+      attr_accessor deletes: ::Integer
+      attr_accessor updates: ::Integer
+      attr_accessor ddls: ::Integer
+      attr_accessor applied_inserts: ::Integer
+      attr_accessor applied_deletes: ::Integer
+      attr_accessor applied_updates: ::Integer
+      attr_accessor applied_ddls: ::Integer
+      attr_accessor full_load_rows: ::Integer
+      attr_accessor full_load_condtnl_chk_failed_rows: ::Integer
+      attr_accessor full_load_error_rows: ::Integer
+      attr_accessor full_load_start_time: ::Time
+      attr_accessor full_load_end_time: ::Time
+      attr_accessor full_load_reloaded: bool
+      attr_accessor last_update_time: ::Time
+      attr_accessor table_state: ::String
+      attr_accessor validation_pending_records: ::Integer
+      attr_accessor validation_failed_records: ::Integer
+      attr_accessor validation_suspended_records: ::Integer
+      attr_accessor validation_state: ::String
+      attr_accessor validation_state_details: ::String
+      SENSITIVE: []
+    end
+
+    class TableToReload
+      attr_accessor schema_name: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TestConnectionMessage
+      attr_accessor replication_instance_arn: ::String
+      attr_accessor endpoint_arn: ::String
+      SENSITIVE: []
+    end
+
+    class TestConnectionResponse
+      attr_accessor connection: Types::Connection
+      SENSITIVE: []
+    end
+
+    class TimestreamSettings
+      attr_accessor database_name: ::String
+      attr_accessor memory_duration: ::Integer
+      attr_accessor magnetic_duration: ::Integer
+      attr_accessor cdc_inserts_and_updates: bool
+      attr_accessor enable_magnetic_store_writes: bool
+      SENSITIVE: []
+    end
+
+    class UpdateSubscriptionsToEventBridgeMessage
+      attr_accessor force_move: bool
+      SENSITIVE: []
+    end
+
+    class UpdateSubscriptionsToEventBridgeResponse
+      attr_accessor result: ::String
+      SENSITIVE: []
+    end
+
+    class UpgradeDependencyFailureFault
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class VpcSecurityGroupMembership
+      attr_accessor vpc_security_group_id: ::String
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+  end
+end

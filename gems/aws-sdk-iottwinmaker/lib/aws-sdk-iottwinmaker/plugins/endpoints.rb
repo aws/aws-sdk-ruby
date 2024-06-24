@@ -14,6 +14,7 @@ module Aws::IoTTwinMaker
       option(
         :endpoint_provider,
         doc_type: 'Aws::IoTTwinMaker::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::IoTTwinMaker
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -58,10 +60,14 @@ module Aws::IoTTwinMaker
           case context.operation_name
           when :batch_put_property_values
             Aws::IoTTwinMaker::Endpoints::BatchPutPropertyValues.build(context)
+          when :cancel_metadata_transfer_job
+            Aws::IoTTwinMaker::Endpoints::CancelMetadataTransferJob.build(context)
           when :create_component_type
             Aws::IoTTwinMaker::Endpoints::CreateComponentType.build(context)
           when :create_entity
             Aws::IoTTwinMaker::Endpoints::CreateEntity.build(context)
+          when :create_metadata_transfer_job
+            Aws::IoTTwinMaker::Endpoints::CreateMetadataTransferJob.build(context)
           when :create_scene
             Aws::IoTTwinMaker::Endpoints::CreateScene.build(context)
           when :create_sync_job
@@ -84,6 +90,8 @@ module Aws::IoTTwinMaker
             Aws::IoTTwinMaker::Endpoints::GetComponentType.build(context)
           when :get_entity
             Aws::IoTTwinMaker::Endpoints::GetEntity.build(context)
+          when :get_metadata_transfer_job
+            Aws::IoTTwinMaker::Endpoints::GetMetadataTransferJob.build(context)
           when :get_pricing_plan
             Aws::IoTTwinMaker::Endpoints::GetPricingPlan.build(context)
           when :get_property_value
@@ -98,8 +106,14 @@ module Aws::IoTTwinMaker
             Aws::IoTTwinMaker::Endpoints::GetWorkspace.build(context)
           when :list_component_types
             Aws::IoTTwinMaker::Endpoints::ListComponentTypes.build(context)
+          when :list_components
+            Aws::IoTTwinMaker::Endpoints::ListComponents.build(context)
           when :list_entities
             Aws::IoTTwinMaker::Endpoints::ListEntities.build(context)
+          when :list_metadata_transfer_jobs
+            Aws::IoTTwinMaker::Endpoints::ListMetadataTransferJobs.build(context)
+          when :list_properties
+            Aws::IoTTwinMaker::Endpoints::ListProperties.build(context)
           when :list_scenes
             Aws::IoTTwinMaker::Endpoints::ListScenes.build(context)
           when :list_sync_jobs

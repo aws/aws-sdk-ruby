@@ -1,0 +1,164 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SQS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html
+    class Queue
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#initialize-instance_method
+      def initialize: (String url, Hash[Symbol, untyped] options) -> void
+                    | (url: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#url-instance_method
+      def url: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#attributes-instance_method
+      def attributes: () -> ::Hash[("All" | "Policy" | "VisibilityTimeout" | "MaximumMessageSize" | "MessageRetentionPeriod" | "ApproximateNumberOfMessages" | "ApproximateNumberOfMessagesNotVisible" | "CreatedTimestamp" | "LastModifiedTimestamp" | "QueueArn" | "ApproximateNumberOfMessagesDelayed" | "DelaySeconds" | "ReceiveMessageWaitTimeSeconds" | "RedrivePolicy" | "FifoQueue" | "ContentBasedDeduplication" | "KmsMasterKeyId" | "KmsDataKeyReusePeriodSeconds" | "DeduplicationScope" | "FifoThroughputLimit" | "RedriveAllowPolicy" | "SqsManagedSseEnabled"), ::String]
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#data-instance_method
+      def data: () -> Types::GetQueueAttributesResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#add_permission-instance_method
+      def add_permission: (
+                            label: ::String,
+                            aws_account_ids: Array[::String],
+                            actions: Array[::String]
+                          ) -> ::Aws::EmptyStructure
+                        | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#change_message_visibility_batch-instance_method
+      def change_message_visibility_batch: (
+                                             entries: Array[
+                                               {
+                                                 id: ::String,
+                                                 receipt_handle: ::String,
+                                                 visibility_timeout: ::Integer?
+                                               },
+                                             ]
+                                           ) -> Types::ChangeMessageVisibilityBatchResult
+                                         | (?Hash[Symbol, untyped]) -> Types::ChangeMessageVisibilityBatchResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#delete_messages-instance_method
+      def delete_messages: (
+                             entries: Array[
+                               {
+                                 id: ::String,
+                                 receipt_handle: ::String
+                               },
+                             ]
+                           ) -> Types::DeleteMessageBatchResult
+                         | (?Hash[Symbol, untyped]) -> Types::DeleteMessageBatchResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#purge-instance_method
+      def purge: (
+                 ) -> ::Aws::EmptyStructure
+               | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#receive_messages-instance_method
+      def receive_messages: (
+                              ?attribute_names: Array[("All" | "Policy" | "VisibilityTimeout" | "MaximumMessageSize" | "MessageRetentionPeriod" | "ApproximateNumberOfMessages" | "ApproximateNumberOfMessagesNotVisible" | "CreatedTimestamp" | "LastModifiedTimestamp" | "QueueArn" | "ApproximateNumberOfMessagesDelayed" | "DelaySeconds" | "ReceiveMessageWaitTimeSeconds" | "RedrivePolicy" | "FifoQueue" | "ContentBasedDeduplication" | "KmsMasterKeyId" | "KmsDataKeyReusePeriodSeconds" | "DeduplicationScope" | "FifoThroughputLimit" | "RedriveAllowPolicy" | "SqsManagedSseEnabled")],
+                              ?message_system_attribute_names: Array[("All" | "SenderId" | "SentTimestamp" | "ApproximateReceiveCount" | "ApproximateFirstReceiveTimestamp" | "SequenceNumber" | "MessageDeduplicationId" | "MessageGroupId" | "AWSTraceHeader" | "DeadLetterQueueSourceArn")],
+                              ?message_attribute_names: Array[::String],
+                              ?max_number_of_messages: ::Integer,
+                              ?visibility_timeout: ::Integer,
+                              ?wait_time_seconds: ::Integer,
+                              ?receive_request_attempt_id: ::String
+                            ) -> Message::Collection
+                          | (?Hash[Symbol, untyped]) -> Message::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#remove_permission-instance_method
+      def remove_permission: (
+                               label: ::String
+                             ) -> ::Aws::EmptyStructure
+                           | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#send_message-instance_method
+      def send_message: (
+                          message_body: ::String,
+                          ?delay_seconds: ::Integer,
+                          ?message_attributes: Hash[::String, {
+                              string_value: ::String?,
+                              binary_value: ::String?,
+                              string_list_values: Array[::String]?,
+                              binary_list_values: Array[::String]?,
+                              data_type: ::String
+                            }],
+                          ?message_system_attributes: Hash[("AWSTraceHeader"), {
+                              string_value: ::String?,
+                              binary_value: ::String?,
+                              string_list_values: Array[::String]?,
+                              binary_list_values: Array[::String]?,
+                              data_type: ::String
+                            }],
+                          ?message_deduplication_id: ::String,
+                          ?message_group_id: ::String
+                        ) -> Types::SendMessageResult
+                      | (?Hash[Symbol, untyped]) -> Types::SendMessageResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#send_messages-instance_method
+      def send_messages: (
+                           entries: Array[
+                             {
+                               id: ::String,
+                               message_body: ::String,
+                               delay_seconds: ::Integer?,
+                               message_attributes: Hash[::String, {
+                                   string_value: ::String?,
+                                   binary_value: ::String?,
+                                   string_list_values: Array[::String]?,
+                                   binary_list_values: Array[::String]?,
+                                   data_type: ::String
+                                 }]?,
+                               message_system_attributes: Hash[("AWSTraceHeader"), {
+                                   string_value: ::String?,
+                                   binary_value: ::String?,
+                                   string_list_values: Array[::String]?,
+                                   binary_list_values: Array[::String]?,
+                                   data_type: ::String
+                                 }]?,
+                               message_deduplication_id: ::String?,
+                               message_group_id: ::String?
+                             },
+                           ]
+                         ) -> Types::SendMessageBatchResult
+                       | (?Hash[Symbol, untyped]) -> Types::SendMessageBatchResult
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#set_attributes-instance_method
+      def set_attributes: (
+                            attributes: Hash[("All" | "Policy" | "VisibilityTimeout" | "MaximumMessageSize" | "MessageRetentionPeriod" | "ApproximateNumberOfMessages" | "ApproximateNumberOfMessagesNotVisible" | "CreatedTimestamp" | "LastModifiedTimestamp" | "QueueArn" | "ApproximateNumberOfMessagesDelayed" | "DelaySeconds" | "ReceiveMessageWaitTimeSeconds" | "RedrivePolicy" | "FifoQueue" | "ContentBasedDeduplication" | "KmsMasterKeyId" | "KmsDataKeyReusePeriodSeconds" | "DeduplicationScope" | "FifoThroughputLimit" | "RedriveAllowPolicy" | "SqsManagedSseEnabled"), ::String]
+                          ) -> ::Aws::EmptyStructure
+                        | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#dead_letter_source_queues-instance_method
+      def dead_letter_source_queues: (
+                                     ) -> Queue::Collection
+                                   | (?Hash[Symbol, untyped]) -> Queue::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SQS/Queue.html#message-instance_method
+      def message: (String receipt_handle) -> Message
+
+      class Collection < ::Aws::Resources::Collection[Queue]
+      end
+    end
+  end
+end

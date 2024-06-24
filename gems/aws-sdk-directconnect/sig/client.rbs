@@ -1,0 +1,1374 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DirectConnect
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptDirectConnectGatewayAssociationProposalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptDirectConnectGatewayAssociationProposalResult]
+        def direct_connect_gateway_association: () -> Types::DirectConnectGatewayAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#accept_direct_connect_gateway_association_proposal-instance_method
+      def accept_direct_connect_gateway_association_proposal: (
+                                                                direct_connect_gateway_id: ::String,
+                                                                proposal_id: ::String,
+                                                                associated_gateway_owner_account: ::String,
+                                                                ?override_allowed_prefixes_to_direct_connect_gateway: Array[
+                                                                  {
+                                                                    cidr: ::String?
+                                                                  },
+                                                                ]
+                                                              ) -> _AcceptDirectConnectGatewayAssociationProposalResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptDirectConnectGatewayAssociationProposalResponseSuccess
+
+      interface _AllocateConnectionOnInterconnectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Connection]
+        def owner_account: () -> ::String
+        def connection_id: () -> ::String
+        def connection_name: () -> ::String
+        def connection_state: () -> ("ordering" | "requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+        def region: () -> ::String
+        def location: () -> ::String
+        def bandwidth: () -> ::String
+        def vlan: () -> ::Integer
+        def partner_name: () -> ::String
+        def loa_issue_time: () -> ::Time
+        def lag_id: () -> ::String
+        def aws_device: () -> ::String
+        def jumbo_frame_capable: () -> bool
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def has_logical_redundancy: () -> ("unknown" | "yes" | "no")
+        def tags: () -> ::Array[Types::Tag]
+        def provider_name: () -> ::String
+        def mac_sec_capable: () -> bool
+        def port_encryption_status: () -> ::String
+        def encryption_mode: () -> ::String
+        def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#allocate_connection_on_interconnect-instance_method
+      def allocate_connection_on_interconnect: (
+                                                 bandwidth: ::String,
+                                                 connection_name: ::String,
+                                                 owner_account: ::String,
+                                                 interconnect_id: ::String,
+                                                 vlan: ::Integer
+                                               ) -> _AllocateConnectionOnInterconnectResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AllocateConnectionOnInterconnectResponseSuccess
+
+      interface _AllocateHostedConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Connection]
+        def owner_account: () -> ::String
+        def connection_id: () -> ::String
+        def connection_name: () -> ::String
+        def connection_state: () -> ("ordering" | "requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+        def region: () -> ::String
+        def location: () -> ::String
+        def bandwidth: () -> ::String
+        def vlan: () -> ::Integer
+        def partner_name: () -> ::String
+        def loa_issue_time: () -> ::Time
+        def lag_id: () -> ::String
+        def aws_device: () -> ::String
+        def jumbo_frame_capable: () -> bool
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def has_logical_redundancy: () -> ("unknown" | "yes" | "no")
+        def tags: () -> ::Array[Types::Tag]
+        def provider_name: () -> ::String
+        def mac_sec_capable: () -> bool
+        def port_encryption_status: () -> ::String
+        def encryption_mode: () -> ::String
+        def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#allocate_hosted_connection-instance_method
+      def allocate_hosted_connection: (
+                                        connection_id: ::String,
+                                        owner_account: ::String,
+                                        bandwidth: ::String,
+                                        connection_name: ::String,
+                                        vlan: ::Integer,
+                                        ?tags: Array[
+                                          {
+                                            key: ::String,
+                                            value: ::String?
+                                          },
+                                        ]
+                                      ) -> _AllocateHostedConnectionResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AllocateHostedConnectionResponseSuccess
+
+      interface _AllocatePrivateVirtualInterfaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VirtualInterface]
+        def owner_account: () -> ::String
+        def virtual_interface_id: () -> ::String
+        def location: () -> ::String
+        def connection_id: () -> ::String
+        def virtual_interface_type: () -> ::String
+        def virtual_interface_name: () -> ::String
+        def vlan: () -> ::Integer
+        def asn: () -> ::Integer
+        def amazon_side_asn: () -> ::Integer
+        def auth_key: () -> ::String
+        def amazon_address: () -> ::String
+        def customer_address: () -> ::String
+        def address_family: () -> ("ipv4" | "ipv6")
+        def virtual_interface_state: () -> ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+        def customer_router_config: () -> ::String
+        def mtu: () -> ::Integer
+        def jumbo_frame_capable: () -> bool
+        def virtual_gateway_id: () -> ::String
+        def direct_connect_gateway_id: () -> ::String
+        def route_filter_prefixes: () -> ::Array[Types::RouteFilterPrefix]
+        def bgp_peers: () -> ::Array[Types::BGPPeer]
+        def region: () -> ::String
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+        def site_link_enabled: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#allocate_private_virtual_interface-instance_method
+      def allocate_private_virtual_interface: (
+                                                connection_id: ::String,
+                                                owner_account: ::String,
+                                                new_private_virtual_interface_allocation: {
+                                                  virtual_interface_name: ::String,
+                                                  vlan: ::Integer,
+                                                  asn: ::Integer,
+                                                  mtu: ::Integer?,
+                                                  auth_key: ::String?,
+                                                  amazon_address: ::String?,
+                                                  address_family: ("ipv4" | "ipv6")?,
+                                                  customer_address: ::String?,
+                                                  tags: Array[
+                                                    {
+                                                      key: ::String,
+                                                      value: ::String?
+                                                    },
+                                                  ]?
+                                                }
+                                              ) -> _AllocatePrivateVirtualInterfaceResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AllocatePrivateVirtualInterfaceResponseSuccess
+
+      interface _AllocatePublicVirtualInterfaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VirtualInterface]
+        def owner_account: () -> ::String
+        def virtual_interface_id: () -> ::String
+        def location: () -> ::String
+        def connection_id: () -> ::String
+        def virtual_interface_type: () -> ::String
+        def virtual_interface_name: () -> ::String
+        def vlan: () -> ::Integer
+        def asn: () -> ::Integer
+        def amazon_side_asn: () -> ::Integer
+        def auth_key: () -> ::String
+        def amazon_address: () -> ::String
+        def customer_address: () -> ::String
+        def address_family: () -> ("ipv4" | "ipv6")
+        def virtual_interface_state: () -> ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+        def customer_router_config: () -> ::String
+        def mtu: () -> ::Integer
+        def jumbo_frame_capable: () -> bool
+        def virtual_gateway_id: () -> ::String
+        def direct_connect_gateway_id: () -> ::String
+        def route_filter_prefixes: () -> ::Array[Types::RouteFilterPrefix]
+        def bgp_peers: () -> ::Array[Types::BGPPeer]
+        def region: () -> ::String
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+        def site_link_enabled: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#allocate_public_virtual_interface-instance_method
+      def allocate_public_virtual_interface: (
+                                               connection_id: ::String,
+                                               owner_account: ::String,
+                                               new_public_virtual_interface_allocation: {
+                                                 virtual_interface_name: ::String,
+                                                 vlan: ::Integer,
+                                                 asn: ::Integer,
+                                                 auth_key: ::String?,
+                                                 amazon_address: ::String?,
+                                                 customer_address: ::String?,
+                                                 address_family: ("ipv4" | "ipv6")?,
+                                                 route_filter_prefixes: Array[
+                                                   {
+                                                     cidr: ::String?
+                                                   },
+                                                 ]?,
+                                                 tags: Array[
+                                                   {
+                                                     key: ::String,
+                                                     value: ::String?
+                                                   },
+                                                 ]?
+                                               }
+                                             ) -> _AllocatePublicVirtualInterfaceResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AllocatePublicVirtualInterfaceResponseSuccess
+
+      interface _AllocateTransitVirtualInterfaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AllocateTransitVirtualInterfaceResult]
+        def virtual_interface: () -> Types::VirtualInterface
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#allocate_transit_virtual_interface-instance_method
+      def allocate_transit_virtual_interface: (
+                                                connection_id: ::String,
+                                                owner_account: ::String,
+                                                new_transit_virtual_interface_allocation: {
+                                                  virtual_interface_name: ::String?,
+                                                  vlan: ::Integer?,
+                                                  asn: ::Integer?,
+                                                  mtu: ::Integer?,
+                                                  auth_key: ::String?,
+                                                  amazon_address: ::String?,
+                                                  customer_address: ::String?,
+                                                  address_family: ("ipv4" | "ipv6")?,
+                                                  tags: Array[
+                                                    {
+                                                      key: ::String,
+                                                      value: ::String?
+                                                    },
+                                                  ]?
+                                                }
+                                              ) -> _AllocateTransitVirtualInterfaceResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AllocateTransitVirtualInterfaceResponseSuccess
+
+      interface _AssociateConnectionWithLagResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Connection]
+        def owner_account: () -> ::String
+        def connection_id: () -> ::String
+        def connection_name: () -> ::String
+        def connection_state: () -> ("ordering" | "requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+        def region: () -> ::String
+        def location: () -> ::String
+        def bandwidth: () -> ::String
+        def vlan: () -> ::Integer
+        def partner_name: () -> ::String
+        def loa_issue_time: () -> ::Time
+        def lag_id: () -> ::String
+        def aws_device: () -> ::String
+        def jumbo_frame_capable: () -> bool
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def has_logical_redundancy: () -> ("unknown" | "yes" | "no")
+        def tags: () -> ::Array[Types::Tag]
+        def provider_name: () -> ::String
+        def mac_sec_capable: () -> bool
+        def port_encryption_status: () -> ::String
+        def encryption_mode: () -> ::String
+        def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#associate_connection_with_lag-instance_method
+      def associate_connection_with_lag: (
+                                           connection_id: ::String,
+                                           lag_id: ::String
+                                         ) -> _AssociateConnectionWithLagResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateConnectionWithLagResponseSuccess
+
+      interface _AssociateHostedConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Connection]
+        def owner_account: () -> ::String
+        def connection_id: () -> ::String
+        def connection_name: () -> ::String
+        def connection_state: () -> ("ordering" | "requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+        def region: () -> ::String
+        def location: () -> ::String
+        def bandwidth: () -> ::String
+        def vlan: () -> ::Integer
+        def partner_name: () -> ::String
+        def loa_issue_time: () -> ::Time
+        def lag_id: () -> ::String
+        def aws_device: () -> ::String
+        def jumbo_frame_capable: () -> bool
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def has_logical_redundancy: () -> ("unknown" | "yes" | "no")
+        def tags: () -> ::Array[Types::Tag]
+        def provider_name: () -> ::String
+        def mac_sec_capable: () -> bool
+        def port_encryption_status: () -> ::String
+        def encryption_mode: () -> ::String
+        def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#associate_hosted_connection-instance_method
+      def associate_hosted_connection: (
+                                         connection_id: ::String,
+                                         parent_connection_id: ::String
+                                       ) -> _AssociateHostedConnectionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateHostedConnectionResponseSuccess
+
+      interface _AssociateMacSecKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateMacSecKeyResponse]
+        def connection_id: () -> ::String
+        def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#associate_mac_sec_key-instance_method
+      def associate_mac_sec_key: (
+                                   connection_id: ::String,
+                                   ?secret_arn: ::String,
+                                   ?ckn: ::String,
+                                   ?cak: ::String
+                                 ) -> _AssociateMacSecKeyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateMacSecKeyResponseSuccess
+
+      interface _AssociateVirtualInterfaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VirtualInterface]
+        def owner_account: () -> ::String
+        def virtual_interface_id: () -> ::String
+        def location: () -> ::String
+        def connection_id: () -> ::String
+        def virtual_interface_type: () -> ::String
+        def virtual_interface_name: () -> ::String
+        def vlan: () -> ::Integer
+        def asn: () -> ::Integer
+        def amazon_side_asn: () -> ::Integer
+        def auth_key: () -> ::String
+        def amazon_address: () -> ::String
+        def customer_address: () -> ::String
+        def address_family: () -> ("ipv4" | "ipv6")
+        def virtual_interface_state: () -> ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+        def customer_router_config: () -> ::String
+        def mtu: () -> ::Integer
+        def jumbo_frame_capable: () -> bool
+        def virtual_gateway_id: () -> ::String
+        def direct_connect_gateway_id: () -> ::String
+        def route_filter_prefixes: () -> ::Array[Types::RouteFilterPrefix]
+        def bgp_peers: () -> ::Array[Types::BGPPeer]
+        def region: () -> ::String
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+        def site_link_enabled: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#associate_virtual_interface-instance_method
+      def associate_virtual_interface: (
+                                         virtual_interface_id: ::String,
+                                         connection_id: ::String
+                                       ) -> _AssociateVirtualInterfaceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateVirtualInterfaceResponseSuccess
+
+      interface _ConfirmConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfirmConnectionResponse]
+        def connection_state: () -> ("ordering" | "requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#confirm_connection-instance_method
+      def confirm_connection: (
+                                connection_id: ::String
+                              ) -> _ConfirmConnectionResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfirmConnectionResponseSuccess
+
+      interface _ConfirmCustomerAgreementResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfirmCustomerAgreementResponse]
+        def status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#confirm_customer_agreement-instance_method
+      def confirm_customer_agreement: (
+                                        ?agreement_name: ::String
+                                      ) -> _ConfirmCustomerAgreementResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfirmCustomerAgreementResponseSuccess
+
+      interface _ConfirmPrivateVirtualInterfaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfirmPrivateVirtualInterfaceResponse]
+        def virtual_interface_state: () -> ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#confirm_private_virtual_interface-instance_method
+      def confirm_private_virtual_interface: (
+                                               virtual_interface_id: ::String,
+                                               ?virtual_gateway_id: ::String,
+                                               ?direct_connect_gateway_id: ::String
+                                             ) -> _ConfirmPrivateVirtualInterfaceResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfirmPrivateVirtualInterfaceResponseSuccess
+
+      interface _ConfirmPublicVirtualInterfaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfirmPublicVirtualInterfaceResponse]
+        def virtual_interface_state: () -> ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#confirm_public_virtual_interface-instance_method
+      def confirm_public_virtual_interface: (
+                                              virtual_interface_id: ::String
+                                            ) -> _ConfirmPublicVirtualInterfaceResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfirmPublicVirtualInterfaceResponseSuccess
+
+      interface _ConfirmTransitVirtualInterfaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConfirmTransitVirtualInterfaceResponse]
+        def virtual_interface_state: () -> ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#confirm_transit_virtual_interface-instance_method
+      def confirm_transit_virtual_interface: (
+                                               virtual_interface_id: ::String,
+                                               direct_connect_gateway_id: ::String
+                                             ) -> _ConfirmTransitVirtualInterfaceResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfirmTransitVirtualInterfaceResponseSuccess
+
+      interface _CreateBGPPeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateBGPPeerResponse]
+        def virtual_interface: () -> Types::VirtualInterface
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_bgp_peer-instance_method
+      def create_bgp_peer: (
+                             ?virtual_interface_id: ::String,
+                             ?new_bgp_peer: {
+                               asn: ::Integer?,
+                               auth_key: ::String?,
+                               address_family: ("ipv4" | "ipv6")?,
+                               amazon_address: ::String?,
+                               customer_address: ::String?
+                             }
+                           ) -> _CreateBGPPeerResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBGPPeerResponseSuccess
+
+      interface _CreateConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Connection]
+        def owner_account: () -> ::String
+        def connection_id: () -> ::String
+        def connection_name: () -> ::String
+        def connection_state: () -> ("ordering" | "requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+        def region: () -> ::String
+        def location: () -> ::String
+        def bandwidth: () -> ::String
+        def vlan: () -> ::Integer
+        def partner_name: () -> ::String
+        def loa_issue_time: () -> ::Time
+        def lag_id: () -> ::String
+        def aws_device: () -> ::String
+        def jumbo_frame_capable: () -> bool
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def has_logical_redundancy: () -> ("unknown" | "yes" | "no")
+        def tags: () -> ::Array[Types::Tag]
+        def provider_name: () -> ::String
+        def mac_sec_capable: () -> bool
+        def port_encryption_status: () -> ::String
+        def encryption_mode: () -> ::String
+        def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_connection-instance_method
+      def create_connection: (
+                               location: ::String,
+                               bandwidth: ::String,
+                               connection_name: ::String,
+                               ?lag_id: ::String,
+                               ?tags: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String?
+                                 },
+                               ],
+                               ?provider_name: ::String,
+                               ?request_mac_sec: bool
+                             ) -> _CreateConnectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectionResponseSuccess
+
+      interface _CreateDirectConnectGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDirectConnectGatewayResult]
+        def direct_connect_gateway: () -> Types::DirectConnectGateway
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_direct_connect_gateway-instance_method
+      def create_direct_connect_gateway: (
+                                           direct_connect_gateway_name: ::String,
+                                           ?amazon_side_asn: ::Integer
+                                         ) -> _CreateDirectConnectGatewayResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDirectConnectGatewayResponseSuccess
+
+      interface _CreateDirectConnectGatewayAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDirectConnectGatewayAssociationResult]
+        def direct_connect_gateway_association: () -> Types::DirectConnectGatewayAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_direct_connect_gateway_association-instance_method
+      def create_direct_connect_gateway_association: (
+                                                       direct_connect_gateway_id: ::String,
+                                                       ?gateway_id: ::String,
+                                                       ?add_allowed_prefixes_to_direct_connect_gateway: Array[
+                                                         {
+                                                           cidr: ::String?
+                                                         },
+                                                       ],
+                                                       ?virtual_gateway_id: ::String
+                                                     ) -> _CreateDirectConnectGatewayAssociationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDirectConnectGatewayAssociationResponseSuccess
+
+      interface _CreateDirectConnectGatewayAssociationProposalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDirectConnectGatewayAssociationProposalResult]
+        def direct_connect_gateway_association_proposal: () -> Types::DirectConnectGatewayAssociationProposal
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_direct_connect_gateway_association_proposal-instance_method
+      def create_direct_connect_gateway_association_proposal: (
+                                                                direct_connect_gateway_id: ::String,
+                                                                direct_connect_gateway_owner_account: ::String,
+                                                                gateway_id: ::String,
+                                                                ?add_allowed_prefixes_to_direct_connect_gateway: Array[
+                                                                  {
+                                                                    cidr: ::String?
+                                                                  },
+                                                                ],
+                                                                ?remove_allowed_prefixes_to_direct_connect_gateway: Array[
+                                                                  {
+                                                                    cidr: ::String?
+                                                                  },
+                                                                ]
+                                                              ) -> _CreateDirectConnectGatewayAssociationProposalResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDirectConnectGatewayAssociationProposalResponseSuccess
+
+      interface _CreateInterconnectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Interconnect]
+        def interconnect_id: () -> ::String
+        def interconnect_name: () -> ::String
+        def interconnect_state: () -> ("requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "unknown")
+        def region: () -> ::String
+        def location: () -> ::String
+        def bandwidth: () -> ::String
+        def loa_issue_time: () -> ::Time
+        def lag_id: () -> ::String
+        def aws_device: () -> ::String
+        def jumbo_frame_capable: () -> bool
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def has_logical_redundancy: () -> ("unknown" | "yes" | "no")
+        def tags: () -> ::Array[Types::Tag]
+        def provider_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_interconnect-instance_method
+      def create_interconnect: (
+                                 interconnect_name: ::String,
+                                 bandwidth: ::String,
+                                 location: ::String,
+                                 ?lag_id: ::String,
+                                 ?tags: Array[
+                                   {
+                                     key: ::String,
+                                     value: ::String?
+                                   },
+                                 ],
+                                 ?provider_name: ::String
+                               ) -> _CreateInterconnectResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInterconnectResponseSuccess
+
+      interface _CreateLagResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Lag]
+        def connections_bandwidth: () -> ::String
+        def number_of_connections: () -> ::Integer
+        def lag_id: () -> ::String
+        def owner_account: () -> ::String
+        def lag_name: () -> ::String
+        def lag_state: () -> ("requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "unknown")
+        def location: () -> ::String
+        def region: () -> ::String
+        def minimum_links: () -> ::Integer
+        def aws_device: () -> ::String
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def connections: () -> ::Array[Types::Connection]
+        def allows_hosted_connections: () -> bool
+        def jumbo_frame_capable: () -> bool
+        def has_logical_redundancy: () -> ("unknown" | "yes" | "no")
+        def tags: () -> ::Array[Types::Tag]
+        def provider_name: () -> ::String
+        def mac_sec_capable: () -> bool
+        def encryption_mode: () -> ::String
+        def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_lag-instance_method
+      def create_lag: (
+                        number_of_connections: ::Integer,
+                        location: ::String,
+                        connections_bandwidth: ::String,
+                        lag_name: ::String,
+                        ?connection_id: ::String,
+                        ?tags: Array[
+                          {
+                            key: ::String,
+                            value: ::String?
+                          },
+                        ],
+                        ?child_connection_tags: Array[
+                          {
+                            key: ::String,
+                            value: ::String?
+                          },
+                        ],
+                        ?provider_name: ::String,
+                        ?request_mac_sec: bool
+                      ) -> _CreateLagResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLagResponseSuccess
+
+      interface _CreatePrivateVirtualInterfaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VirtualInterface]
+        def owner_account: () -> ::String
+        def virtual_interface_id: () -> ::String
+        def location: () -> ::String
+        def connection_id: () -> ::String
+        def virtual_interface_type: () -> ::String
+        def virtual_interface_name: () -> ::String
+        def vlan: () -> ::Integer
+        def asn: () -> ::Integer
+        def amazon_side_asn: () -> ::Integer
+        def auth_key: () -> ::String
+        def amazon_address: () -> ::String
+        def customer_address: () -> ::String
+        def address_family: () -> ("ipv4" | "ipv6")
+        def virtual_interface_state: () -> ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+        def customer_router_config: () -> ::String
+        def mtu: () -> ::Integer
+        def jumbo_frame_capable: () -> bool
+        def virtual_gateway_id: () -> ::String
+        def direct_connect_gateway_id: () -> ::String
+        def route_filter_prefixes: () -> ::Array[Types::RouteFilterPrefix]
+        def bgp_peers: () -> ::Array[Types::BGPPeer]
+        def region: () -> ::String
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+        def site_link_enabled: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_private_virtual_interface-instance_method
+      def create_private_virtual_interface: (
+                                              connection_id: ::String,
+                                              new_private_virtual_interface: {
+                                                virtual_interface_name: ::String,
+                                                vlan: ::Integer,
+                                                asn: ::Integer,
+                                                mtu: ::Integer?,
+                                                auth_key: ::String?,
+                                                amazon_address: ::String?,
+                                                customer_address: ::String?,
+                                                address_family: ("ipv4" | "ipv6")?,
+                                                virtual_gateway_id: ::String?,
+                                                direct_connect_gateway_id: ::String?,
+                                                tags: Array[
+                                                  {
+                                                    key: ::String,
+                                                    value: ::String?
+                                                  },
+                                                ]?,
+                                                enable_site_link: bool?
+                                              }
+                                            ) -> _CreatePrivateVirtualInterfaceResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePrivateVirtualInterfaceResponseSuccess
+
+      interface _CreatePublicVirtualInterfaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VirtualInterface]
+        def owner_account: () -> ::String
+        def virtual_interface_id: () -> ::String
+        def location: () -> ::String
+        def connection_id: () -> ::String
+        def virtual_interface_type: () -> ::String
+        def virtual_interface_name: () -> ::String
+        def vlan: () -> ::Integer
+        def asn: () -> ::Integer
+        def amazon_side_asn: () -> ::Integer
+        def auth_key: () -> ::String
+        def amazon_address: () -> ::String
+        def customer_address: () -> ::String
+        def address_family: () -> ("ipv4" | "ipv6")
+        def virtual_interface_state: () -> ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+        def customer_router_config: () -> ::String
+        def mtu: () -> ::Integer
+        def jumbo_frame_capable: () -> bool
+        def virtual_gateway_id: () -> ::String
+        def direct_connect_gateway_id: () -> ::String
+        def route_filter_prefixes: () -> ::Array[Types::RouteFilterPrefix]
+        def bgp_peers: () -> ::Array[Types::BGPPeer]
+        def region: () -> ::String
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+        def site_link_enabled: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_public_virtual_interface-instance_method
+      def create_public_virtual_interface: (
+                                             connection_id: ::String,
+                                             new_public_virtual_interface: {
+                                               virtual_interface_name: ::String,
+                                               vlan: ::Integer,
+                                               asn: ::Integer,
+                                               auth_key: ::String?,
+                                               amazon_address: ::String?,
+                                               customer_address: ::String?,
+                                               address_family: ("ipv4" | "ipv6")?,
+                                               route_filter_prefixes: Array[
+                                                 {
+                                                   cidr: ::String?
+                                                 },
+                                               ]?,
+                                               tags: Array[
+                                                 {
+                                                   key: ::String,
+                                                   value: ::String?
+                                                 },
+                                               ]?
+                                             }
+                                           ) -> _CreatePublicVirtualInterfaceResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePublicVirtualInterfaceResponseSuccess
+
+      interface _CreateTransitVirtualInterfaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTransitVirtualInterfaceResult]
+        def virtual_interface: () -> Types::VirtualInterface
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#create_transit_virtual_interface-instance_method
+      def create_transit_virtual_interface: (
+                                              connection_id: ::String,
+                                              new_transit_virtual_interface: {
+                                                virtual_interface_name: ::String?,
+                                                vlan: ::Integer?,
+                                                asn: ::Integer?,
+                                                mtu: ::Integer?,
+                                                auth_key: ::String?,
+                                                amazon_address: ::String?,
+                                                customer_address: ::String?,
+                                                address_family: ("ipv4" | "ipv6")?,
+                                                direct_connect_gateway_id: ::String?,
+                                                tags: Array[
+                                                  {
+                                                    key: ::String,
+                                                    value: ::String?
+                                                  },
+                                                ]?,
+                                                enable_site_link: bool?
+                                              }
+                                            ) -> _CreateTransitVirtualInterfaceResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTransitVirtualInterfaceResponseSuccess
+
+      interface _DeleteBGPPeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBGPPeerResponse]
+        def virtual_interface: () -> Types::VirtualInterface
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#delete_bgp_peer-instance_method
+      def delete_bgp_peer: (
+                             ?virtual_interface_id: ::String,
+                             ?asn: ::Integer,
+                             ?customer_address: ::String,
+                             ?bgp_peer_id: ::String
+                           ) -> _DeleteBGPPeerResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBGPPeerResponseSuccess
+
+      interface _DeleteConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Connection]
+        def owner_account: () -> ::String
+        def connection_id: () -> ::String
+        def connection_name: () -> ::String
+        def connection_state: () -> ("ordering" | "requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+        def region: () -> ::String
+        def location: () -> ::String
+        def bandwidth: () -> ::String
+        def vlan: () -> ::Integer
+        def partner_name: () -> ::String
+        def loa_issue_time: () -> ::Time
+        def lag_id: () -> ::String
+        def aws_device: () -> ::String
+        def jumbo_frame_capable: () -> bool
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def has_logical_redundancy: () -> ("unknown" | "yes" | "no")
+        def tags: () -> ::Array[Types::Tag]
+        def provider_name: () -> ::String
+        def mac_sec_capable: () -> bool
+        def port_encryption_status: () -> ::String
+        def encryption_mode: () -> ::String
+        def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#delete_connection-instance_method
+      def delete_connection: (
+                               connection_id: ::String
+                             ) -> _DeleteConnectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConnectionResponseSuccess
+
+      interface _DeleteDirectConnectGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDirectConnectGatewayResult]
+        def direct_connect_gateway: () -> Types::DirectConnectGateway
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#delete_direct_connect_gateway-instance_method
+      def delete_direct_connect_gateway: (
+                                           direct_connect_gateway_id: ::String
+                                         ) -> _DeleteDirectConnectGatewayResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDirectConnectGatewayResponseSuccess
+
+      interface _DeleteDirectConnectGatewayAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDirectConnectGatewayAssociationResult]
+        def direct_connect_gateway_association: () -> Types::DirectConnectGatewayAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#delete_direct_connect_gateway_association-instance_method
+      def delete_direct_connect_gateway_association: (
+                                                       ?association_id: ::String,
+                                                       ?direct_connect_gateway_id: ::String,
+                                                       ?virtual_gateway_id: ::String
+                                                     ) -> _DeleteDirectConnectGatewayAssociationResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDirectConnectGatewayAssociationResponseSuccess
+
+      interface _DeleteDirectConnectGatewayAssociationProposalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDirectConnectGatewayAssociationProposalResult]
+        def direct_connect_gateway_association_proposal: () -> Types::DirectConnectGatewayAssociationProposal
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#delete_direct_connect_gateway_association_proposal-instance_method
+      def delete_direct_connect_gateway_association_proposal: (
+                                                                proposal_id: ::String
+                                                              ) -> _DeleteDirectConnectGatewayAssociationProposalResponseSuccess
+                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDirectConnectGatewayAssociationProposalResponseSuccess
+
+      interface _DeleteInterconnectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInterconnectResponse]
+        def interconnect_state: () -> ("requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "unknown")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#delete_interconnect-instance_method
+      def delete_interconnect: (
+                                 interconnect_id: ::String
+                               ) -> _DeleteInterconnectResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInterconnectResponseSuccess
+
+      interface _DeleteLagResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Lag]
+        def connections_bandwidth: () -> ::String
+        def number_of_connections: () -> ::Integer
+        def lag_id: () -> ::String
+        def owner_account: () -> ::String
+        def lag_name: () -> ::String
+        def lag_state: () -> ("requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "unknown")
+        def location: () -> ::String
+        def region: () -> ::String
+        def minimum_links: () -> ::Integer
+        def aws_device: () -> ::String
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def connections: () -> ::Array[Types::Connection]
+        def allows_hosted_connections: () -> bool
+        def jumbo_frame_capable: () -> bool
+        def has_logical_redundancy: () -> ("unknown" | "yes" | "no")
+        def tags: () -> ::Array[Types::Tag]
+        def provider_name: () -> ::String
+        def mac_sec_capable: () -> bool
+        def encryption_mode: () -> ::String
+        def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#delete_lag-instance_method
+      def delete_lag: (
+                        lag_id: ::String
+                      ) -> _DeleteLagResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLagResponseSuccess
+
+      interface _DeleteVirtualInterfaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteVirtualInterfaceResponse]
+        def virtual_interface_state: () -> ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#delete_virtual_interface-instance_method
+      def delete_virtual_interface: (
+                                      virtual_interface_id: ::String
+                                    ) -> _DeleteVirtualInterfaceResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteVirtualInterfaceResponseSuccess
+
+      interface _DescribeConnectionLoaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConnectionLoaResponse]
+        def loa: () -> Types::Loa
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_connection_loa-instance_method
+      def describe_connection_loa: (
+                                     connection_id: ::String,
+                                     ?provider_name: ::String,
+                                     ?loa_content_type: ("application/pdf")
+                                   ) -> _DescribeConnectionLoaResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectionLoaResponseSuccess
+
+      interface _DescribeConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Connections]
+        def connections: () -> ::Array[Types::Connection]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_connections-instance_method
+      def describe_connections: (
+                                  ?connection_id: ::String
+                                ) -> _DescribeConnectionsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectionsResponseSuccess
+
+      interface _DescribeConnectionsOnInterconnectResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Connections]
+        def connections: () -> ::Array[Types::Connection]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_connections_on_interconnect-instance_method
+      def describe_connections_on_interconnect: (
+                                                  interconnect_id: ::String
+                                                ) -> _DescribeConnectionsOnInterconnectResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConnectionsOnInterconnectResponseSuccess
+
+      interface _DescribeCustomerMetadataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeCustomerMetadataResponse]
+        def agreements: () -> ::Array[Types::CustomerAgreement]
+        def nni_partner_type: () -> ("v1" | "v2" | "nonPartner")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_customer_metadata-instance_method
+      def describe_customer_metadata: () -> _DescribeCustomerMetadataResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeCustomerMetadataResponseSuccess
+
+      interface _DescribeDirectConnectGatewayAssociationProposalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDirectConnectGatewayAssociationProposalsResult]
+        def direct_connect_gateway_association_proposals: () -> ::Array[Types::DirectConnectGatewayAssociationProposal]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_direct_connect_gateway_association_proposals-instance_method
+      def describe_direct_connect_gateway_association_proposals: (
+                                                                   ?direct_connect_gateway_id: ::String,
+                                                                   ?proposal_id: ::String,
+                                                                   ?associated_gateway_id: ::String,
+                                                                   ?max_results: ::Integer,
+                                                                   ?next_token: ::String
+                                                                 ) -> _DescribeDirectConnectGatewayAssociationProposalsResponseSuccess
+                                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDirectConnectGatewayAssociationProposalsResponseSuccess
+
+      interface _DescribeDirectConnectGatewayAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDirectConnectGatewayAssociationsResult]
+        def direct_connect_gateway_associations: () -> ::Array[Types::DirectConnectGatewayAssociation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_direct_connect_gateway_associations-instance_method
+      def describe_direct_connect_gateway_associations: (
+                                                          ?association_id: ::String,
+                                                          ?associated_gateway_id: ::String,
+                                                          ?direct_connect_gateway_id: ::String,
+                                                          ?max_results: ::Integer,
+                                                          ?next_token: ::String,
+                                                          ?virtual_gateway_id: ::String
+                                                        ) -> _DescribeDirectConnectGatewayAssociationsResponseSuccess
+                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDirectConnectGatewayAssociationsResponseSuccess
+
+      interface _DescribeDirectConnectGatewayAttachmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDirectConnectGatewayAttachmentsResult]
+        def direct_connect_gateway_attachments: () -> ::Array[Types::DirectConnectGatewayAttachment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_direct_connect_gateway_attachments-instance_method
+      def describe_direct_connect_gateway_attachments: (
+                                                         ?direct_connect_gateway_id: ::String,
+                                                         ?virtual_interface_id: ::String,
+                                                         ?max_results: ::Integer,
+                                                         ?next_token: ::String
+                                                       ) -> _DescribeDirectConnectGatewayAttachmentsResponseSuccess
+                                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDirectConnectGatewayAttachmentsResponseSuccess
+
+      interface _DescribeDirectConnectGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDirectConnectGatewaysResult]
+        def direct_connect_gateways: () -> ::Array[Types::DirectConnectGateway]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_direct_connect_gateways-instance_method
+      def describe_direct_connect_gateways: (
+                                              ?direct_connect_gateway_id: ::String,
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _DescribeDirectConnectGatewaysResponseSuccess
+                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDirectConnectGatewaysResponseSuccess
+
+      interface _DescribeHostedConnectionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Connections]
+        def connections: () -> ::Array[Types::Connection]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_hosted_connections-instance_method
+      def describe_hosted_connections: (
+                                         connection_id: ::String
+                                       ) -> _DescribeHostedConnectionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeHostedConnectionsResponseSuccess
+
+      interface _DescribeInterconnectLoaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInterconnectLoaResponse]
+        def loa: () -> Types::Loa
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_interconnect_loa-instance_method
+      def describe_interconnect_loa: (
+                                       interconnect_id: ::String,
+                                       ?provider_name: ::String,
+                                       ?loa_content_type: ("application/pdf")
+                                     ) -> _DescribeInterconnectLoaResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInterconnectLoaResponseSuccess
+
+      interface _DescribeInterconnectsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Interconnects]
+        def interconnects: () -> ::Array[Types::Interconnect]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_interconnects-instance_method
+      def describe_interconnects: (
+                                    ?interconnect_id: ::String
+                                  ) -> _DescribeInterconnectsResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInterconnectsResponseSuccess
+
+      interface _DescribeLagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Lags]
+        def lags: () -> ::Array[Types::Lag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_lags-instance_method
+      def describe_lags: (
+                           ?lag_id: ::String
+                         ) -> _DescribeLagsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLagsResponseSuccess
+
+      interface _DescribeLoaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Loa]
+        def loa_content: () -> ::String
+        def loa_content_type: () -> ("application/pdf")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_loa-instance_method
+      def describe_loa: (
+                          connection_id: ::String,
+                          ?provider_name: ::String,
+                          ?loa_content_type: ("application/pdf")
+                        ) -> _DescribeLoaResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoaResponseSuccess
+
+      interface _DescribeLocationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Locations]
+        def locations: () -> ::Array[Types::Location]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_locations-instance_method
+      def describe_locations: () -> _DescribeLocationsResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLocationsResponseSuccess
+
+      interface _DescribeRouterConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRouterConfigurationResponse]
+        def customer_router_config: () -> ::String
+        def router: () -> Types::RouterType
+        def virtual_interface_id: () -> ::String
+        def virtual_interface_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_router_configuration-instance_method
+      def describe_router_configuration: (
+                                           virtual_interface_id: ::String,
+                                           ?router_type_identifier: ::String
+                                         ) -> _DescribeRouterConfigurationResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRouterConfigurationResponseSuccess
+
+      interface _DescribeTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTagsResponse]
+        def resource_tags: () -> ::Array[Types::ResourceTag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_tags-instance_method
+      def describe_tags: (
+                           resource_arns: Array[::String]
+                         ) -> _DescribeTagsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagsResponseSuccess
+
+      interface _DescribeVirtualGatewaysResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VirtualGateways]
+        def virtual_gateways: () -> ::Array[Types::VirtualGateway]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_virtual_gateways-instance_method
+      def describe_virtual_gateways: () -> _DescribeVirtualGatewaysResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVirtualGatewaysResponseSuccess
+
+      interface _DescribeVirtualInterfacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VirtualInterfaces]
+        def virtual_interfaces: () -> ::Array[Types::VirtualInterface]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#describe_virtual_interfaces-instance_method
+      def describe_virtual_interfaces: (
+                                         ?connection_id: ::String,
+                                         ?virtual_interface_id: ::String
+                                       ) -> _DescribeVirtualInterfacesResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVirtualInterfacesResponseSuccess
+
+      interface _DisassociateConnectionFromLagResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Connection]
+        def owner_account: () -> ::String
+        def connection_id: () -> ::String
+        def connection_name: () -> ::String
+        def connection_state: () -> ("ordering" | "requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+        def region: () -> ::String
+        def location: () -> ::String
+        def bandwidth: () -> ::String
+        def vlan: () -> ::Integer
+        def partner_name: () -> ::String
+        def loa_issue_time: () -> ::Time
+        def lag_id: () -> ::String
+        def aws_device: () -> ::String
+        def jumbo_frame_capable: () -> bool
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def has_logical_redundancy: () -> ("unknown" | "yes" | "no")
+        def tags: () -> ::Array[Types::Tag]
+        def provider_name: () -> ::String
+        def mac_sec_capable: () -> bool
+        def port_encryption_status: () -> ::String
+        def encryption_mode: () -> ::String
+        def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#disassociate_connection_from_lag-instance_method
+      def disassociate_connection_from_lag: (
+                                              connection_id: ::String,
+                                              lag_id: ::String
+                                            ) -> _DisassociateConnectionFromLagResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateConnectionFromLagResponseSuccess
+
+      interface _DisassociateMacSecKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateMacSecKeyResponse]
+        def connection_id: () -> ::String
+        def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#disassociate_mac_sec_key-instance_method
+      def disassociate_mac_sec_key: (
+                                      connection_id: ::String,
+                                      secret_arn: ::String
+                                    ) -> _DisassociateMacSecKeyResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateMacSecKeyResponseSuccess
+
+      interface _ListVirtualInterfaceTestHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVirtualInterfaceTestHistoryResponse]
+        def virtual_interface_test_history: () -> ::Array[Types::VirtualInterfaceTestHistory]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#list_virtual_interface_test_history-instance_method
+      def list_virtual_interface_test_history: (
+                                                 ?test_id: ::String,
+                                                 ?virtual_interface_id: ::String,
+                                                 ?bgp_peers: Array[::String],
+                                                 ?status: ::String,
+                                                 ?max_results: ::Integer,
+                                                 ?next_token: ::String
+                                               ) -> _ListVirtualInterfaceTestHistoryResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVirtualInterfaceTestHistoryResponseSuccess
+
+      interface _StartBgpFailoverTestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartBgpFailoverTestResponse]
+        def virtual_interface_test: () -> Types::VirtualInterfaceTestHistory
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#start_bgp_failover_test-instance_method
+      def start_bgp_failover_test: (
+                                     virtual_interface_id: ::String,
+                                     ?bgp_peers: Array[::String],
+                                     ?test_duration_in_minutes: ::Integer
+                                   ) -> _StartBgpFailoverTestResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBgpFailoverTestResponseSuccess
+
+      interface _StopBgpFailoverTestResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopBgpFailoverTestResponse]
+        def virtual_interface_test: () -> Types::VirtualInterfaceTestHistory
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#stop_bgp_failover_test-instance_method
+      def stop_bgp_failover_test: (
+                                    virtual_interface_id: ::String
+                                  ) -> _StopBgpFailoverTestResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopBgpFailoverTestResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String?
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateConnectionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Connection]
+        def owner_account: () -> ::String
+        def connection_id: () -> ::String
+        def connection_name: () -> ::String
+        def connection_state: () -> ("ordering" | "requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+        def region: () -> ::String
+        def location: () -> ::String
+        def bandwidth: () -> ::String
+        def vlan: () -> ::Integer
+        def partner_name: () -> ::String
+        def loa_issue_time: () -> ::Time
+        def lag_id: () -> ::String
+        def aws_device: () -> ::String
+        def jumbo_frame_capable: () -> bool
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def has_logical_redundancy: () -> ("unknown" | "yes" | "no")
+        def tags: () -> ::Array[Types::Tag]
+        def provider_name: () -> ::String
+        def mac_sec_capable: () -> bool
+        def port_encryption_status: () -> ::String
+        def encryption_mode: () -> ::String
+        def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#update_connection-instance_method
+      def update_connection: (
+                               connection_id: ::String,
+                               ?connection_name: ::String,
+                               ?encryption_mode: ::String
+                             ) -> _UpdateConnectionResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectionResponseSuccess
+
+      interface _UpdateDirectConnectGatewayResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDirectConnectGatewayResponse]
+        def direct_connect_gateway: () -> Types::DirectConnectGateway
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#update_direct_connect_gateway-instance_method
+      def update_direct_connect_gateway: (
+                                           direct_connect_gateway_id: ::String,
+                                           new_direct_connect_gateway_name: ::String
+                                         ) -> _UpdateDirectConnectGatewayResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDirectConnectGatewayResponseSuccess
+
+      interface _UpdateDirectConnectGatewayAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDirectConnectGatewayAssociationResult]
+        def direct_connect_gateway_association: () -> Types::DirectConnectGatewayAssociation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#update_direct_connect_gateway_association-instance_method
+      def update_direct_connect_gateway_association: (
+                                                       ?association_id: ::String,
+                                                       ?add_allowed_prefixes_to_direct_connect_gateway: Array[
+                                                         {
+                                                           cidr: ::String?
+                                                         },
+                                                       ],
+                                                       ?remove_allowed_prefixes_to_direct_connect_gateway: Array[
+                                                         {
+                                                           cidr: ::String?
+                                                         },
+                                                       ]
+                                                     ) -> _UpdateDirectConnectGatewayAssociationResponseSuccess
+                                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDirectConnectGatewayAssociationResponseSuccess
+
+      interface _UpdateLagResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::Lag]
+        def connections_bandwidth: () -> ::String
+        def number_of_connections: () -> ::Integer
+        def lag_id: () -> ::String
+        def owner_account: () -> ::String
+        def lag_name: () -> ::String
+        def lag_state: () -> ("requested" | "pending" | "available" | "down" | "deleting" | "deleted" | "unknown")
+        def location: () -> ::String
+        def region: () -> ::String
+        def minimum_links: () -> ::Integer
+        def aws_device: () -> ::String
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def connections: () -> ::Array[Types::Connection]
+        def allows_hosted_connections: () -> bool
+        def jumbo_frame_capable: () -> bool
+        def has_logical_redundancy: () -> ("unknown" | "yes" | "no")
+        def tags: () -> ::Array[Types::Tag]
+        def provider_name: () -> ::String
+        def mac_sec_capable: () -> bool
+        def encryption_mode: () -> ::String
+        def mac_sec_keys: () -> ::Array[Types::MacSecKey]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#update_lag-instance_method
+      def update_lag: (
+                        lag_id: ::String,
+                        ?lag_name: ::String,
+                        ?minimum_links: ::Integer,
+                        ?encryption_mode: ::String
+                      ) -> _UpdateLagResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLagResponseSuccess
+
+      interface _UpdateVirtualInterfaceAttributesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VirtualInterface]
+        def owner_account: () -> ::String
+        def virtual_interface_id: () -> ::String
+        def location: () -> ::String
+        def connection_id: () -> ::String
+        def virtual_interface_type: () -> ::String
+        def virtual_interface_name: () -> ::String
+        def vlan: () -> ::Integer
+        def asn: () -> ::Integer
+        def amazon_side_asn: () -> ::Integer
+        def auth_key: () -> ::String
+        def amazon_address: () -> ::String
+        def customer_address: () -> ::String
+        def address_family: () -> ("ipv4" | "ipv6")
+        def virtual_interface_state: () -> ("confirming" | "verifying" | "pending" | "available" | "down" | "deleting" | "deleted" | "rejected" | "unknown")
+        def customer_router_config: () -> ::String
+        def mtu: () -> ::Integer
+        def jumbo_frame_capable: () -> bool
+        def virtual_gateway_id: () -> ::String
+        def direct_connect_gateway_id: () -> ::String
+        def route_filter_prefixes: () -> ::Array[Types::RouteFilterPrefix]
+        def bgp_peers: () -> ::Array[Types::BGPPeer]
+        def region: () -> ::String
+        def aws_device_v2: () -> ::String
+        def aws_logical_device_id: () -> ::String
+        def tags: () -> ::Array[Types::Tag]
+        def site_link_enabled: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DirectConnect/Client.html#update_virtual_interface_attributes-instance_method
+      def update_virtual_interface_attributes: (
+                                                 virtual_interface_id: ::String,
+                                                 ?mtu: ::Integer,
+                                                 ?enable_site_link: bool,
+                                                 ?virtual_interface_name: ::String
+                                               ) -> _UpdateVirtualInterfaceAttributesResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVirtualInterfaceAttributesResponseSuccess
+    end
+  end
+end
+

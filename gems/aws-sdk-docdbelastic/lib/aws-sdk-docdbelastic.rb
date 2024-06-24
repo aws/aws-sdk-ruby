@@ -32,7 +32,7 @@ require_relative 'aws-sdk-docdbelastic/customizations'
 # structure.
 #
 #     doc_db_elastic = Aws::DocDBElastic::Client.new
-#     resp = doc_db_elastic.create_cluster(params)
+#     resp = doc_db_elastic.copy_cluster_snapshot(params)
 #
 # See {Client} for more information.
 #
@@ -52,6 +52,6 @@ require_relative 'aws-sdk-docdbelastic/customizations'
 # @!group service
 module Aws::DocDBElastic
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.15.0'
 
 end

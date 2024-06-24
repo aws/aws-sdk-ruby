@@ -1,0 +1,2116 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTEvents
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAlarmModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAlarmModelResponse]
+        def creation_time: () -> ::Time
+        def alarm_model_arn: () -> ::String
+        def alarm_model_version: () -> ::String
+        def last_update_time: () -> ::Time
+        def status: () -> ("ACTIVE" | "ACTIVATING" | "INACTIVE" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#create_alarm_model-instance_method
+      def create_alarm_model: (
+                                alarm_model_name: ::String,
+                                ?alarm_model_description: ::String,
+                                role_arn: ::String,
+                                ?tags: Array[
+                                  {
+                                    key: ::String,
+                                    value: ::String
+                                  },
+                                ],
+                                ?key: ::String,
+                                ?severity: ::Integer,
+                                alarm_rule: {
+                                  simple_rule: {
+                                    input_property: ::String,
+                                    comparison_operator: ("GREATER" | "GREATER_OR_EQUAL" | "LESS" | "LESS_OR_EQUAL" | "EQUAL" | "NOT_EQUAL"),
+                                    threshold: ::String
+                                  }?
+                                },
+                                ?alarm_notification: {
+                                  notification_actions: Array[
+                                    {
+                                      action: {
+                                        lambda_action: {
+                                          function_arn: ::String,
+                                          payload: {
+                                            content_expression: ::String,
+                                            type: ("STRING" | "JSON")
+                                          }?
+                                        }?
+                                      },
+                                      sms_configurations: Array[
+                                        {
+                                          sender_id: ::String?,
+                                          additional_message: ::String?,
+                                          recipients: Array[
+                                            {
+                                              sso_identity: {
+                                                identity_store_id: ::String,
+                                                user_id: ::String?
+                                              }?
+                                            },
+                                          ]
+                                        },
+                                      ]?,
+                                      email_configurations: Array[
+                                        {
+                                          from: ::String,
+                                          content: {
+                                            subject: ::String?,
+                                            additional_message: ::String?
+                                          }?,
+                                          recipients: {
+                                            to: Array[
+                                              {
+                                                sso_identity: {
+                                                  identity_store_id: ::String,
+                                                  user_id: ::String?
+                                                }?
+                                              },
+                                            ]?
+                                          }
+                                        },
+                                      ]?
+                                    },
+                                  ]?
+                                },
+                                ?alarm_event_actions: {
+                                  alarm_actions: Array[
+                                    {
+                                      sns: {
+                                        target_arn: ::String,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      iot_topic_publish: {
+                                        mqtt_topic: ::String,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      lambda: {
+                                        function_arn: ::String,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      iot_events: {
+                                        input_name: ::String,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      sqs: {
+                                        queue_url: ::String,
+                                        use_base_64: bool?,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      firehose: {
+                                        delivery_stream_name: ::String,
+                                        separator: ::String?,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      dynamo_db: {
+                                        hash_key_type: ::String?,
+                                        hash_key_field: ::String,
+                                        hash_key_value: ::String,
+                                        range_key_type: ::String?,
+                                        range_key_field: ::String?,
+                                        range_key_value: ::String?,
+                                        operation: ::String?,
+                                        payload_field: ::String?,
+                                        table_name: ::String,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      dynamo_d_bv_2: {
+                                        table_name: ::String,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      iot_site_wise: {
+                                        entry_id: ::String?,
+                                        asset_id: ::String?,
+                                        property_id: ::String?,
+                                        property_alias: ::String?,
+                                        property_value: {
+                                          value: {
+                                            string_value: ::String?,
+                                            integer_value: ::String?,
+                                            double_value: ::String?,
+                                            boolean_value: ::String?
+                                          }?,
+                                          timestamp: {
+                                            time_in_seconds: ::String,
+                                            offset_in_nanos: ::String?
+                                          }?,
+                                          quality: ::String?
+                                        }?
+                                      }?
+                                    },
+                                  ]?
+                                },
+                                ?alarm_capabilities: {
+                                  initialization_configuration: {
+                                    disabled_on_initialization: bool
+                                  }?,
+                                  acknowledge_flow: {
+                                    enabled: bool
+                                  }?
+                                }
+                              ) -> _CreateAlarmModelResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAlarmModelResponseSuccess
+
+      interface _CreateDetectorModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDetectorModelResponse]
+        def detector_model_configuration: () -> Types::DetectorModelConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#create_detector_model-instance_method
+      def create_detector_model: (
+                                   detector_model_name: ::String,
+                                   detector_model_definition: {
+                                     states: Array[
+                                       {
+                                         state_name: ::String,
+                                         on_input: {
+                                           events: Array[
+                                             {
+                                               event_name: ::String,
+                                               condition: ::String?,
+                                               actions: Array[
+                                                 {
+                                                   set_variable: {
+                                                     variable_name: ::String,
+                                                     value: ::String
+                                                   }?,
+                                                   sns: {
+                                                     target_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_topic_publish: {
+                                                     mqtt_topic: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   set_timer: {
+                                                     timer_name: ::String,
+                                                     seconds: ::Integer?,
+                                                     duration_expression: ::String?
+                                                   }?,
+                                                   clear_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   reset_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   lambda: {
+                                                     function_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_events: {
+                                                     input_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   sqs: {
+                                                     queue_url: ::String,
+                                                     use_base_64: bool?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   firehose: {
+                                                     delivery_stream_name: ::String,
+                                                     separator: ::String?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_db: {
+                                                     hash_key_type: ::String?,
+                                                     hash_key_field: ::String,
+                                                     hash_key_value: ::String,
+                                                     range_key_type: ::String?,
+                                                     range_key_field: ::String?,
+                                                     range_key_value: ::String?,
+                                                     operation: ::String?,
+                                                     payload_field: ::String?,
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_d_bv_2: {
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_site_wise: {
+                                                     entry_id: ::String?,
+                                                     asset_id: ::String?,
+                                                     property_id: ::String?,
+                                                     property_alias: ::String?,
+                                                     property_value: {
+                                                       value: {
+                                                         string_value: ::String?,
+                                                         integer_value: ::String?,
+                                                         double_value: ::String?,
+                                                         boolean_value: ::String?
+                                                       }?,
+                                                       timestamp: {
+                                                         time_in_seconds: ::String,
+                                                         offset_in_nanos: ::String?
+                                                       }?,
+                                                       quality: ::String?
+                                                     }?
+                                                   }?
+                                                 },
+                                               ]?
+                                             },
+                                           ]?,
+                                           transition_events: Array[
+                                             {
+                                               event_name: ::String,
+                                               condition: ::String,
+                                               actions: Array[
+                                                 {
+                                                   set_variable: {
+                                                     variable_name: ::String,
+                                                     value: ::String
+                                                   }?,
+                                                   sns: {
+                                                     target_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_topic_publish: {
+                                                     mqtt_topic: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   set_timer: {
+                                                     timer_name: ::String,
+                                                     seconds: ::Integer?,
+                                                     duration_expression: ::String?
+                                                   }?,
+                                                   clear_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   reset_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   lambda: {
+                                                     function_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_events: {
+                                                     input_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   sqs: {
+                                                     queue_url: ::String,
+                                                     use_base_64: bool?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   firehose: {
+                                                     delivery_stream_name: ::String,
+                                                     separator: ::String?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_db: {
+                                                     hash_key_type: ::String?,
+                                                     hash_key_field: ::String,
+                                                     hash_key_value: ::String,
+                                                     range_key_type: ::String?,
+                                                     range_key_field: ::String?,
+                                                     range_key_value: ::String?,
+                                                     operation: ::String?,
+                                                     payload_field: ::String?,
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_d_bv_2: {
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_site_wise: {
+                                                     entry_id: ::String?,
+                                                     asset_id: ::String?,
+                                                     property_id: ::String?,
+                                                     property_alias: ::String?,
+                                                     property_value: {
+                                                       value: {
+                                                         string_value: ::String?,
+                                                         integer_value: ::String?,
+                                                         double_value: ::String?,
+                                                         boolean_value: ::String?
+                                                       }?,
+                                                       timestamp: {
+                                                         time_in_seconds: ::String,
+                                                         offset_in_nanos: ::String?
+                                                       }?,
+                                                       quality: ::String?
+                                                     }?
+                                                   }?
+                                                 },
+                                               ]?,
+                                               next_state: ::String
+                                             },
+                                           ]?
+                                         }?,
+                                         on_enter: {
+                                           events: Array[
+                                             {
+                                               event_name: ::String,
+                                               condition: ::String?,
+                                               actions: Array[
+                                                 {
+                                                   set_variable: {
+                                                     variable_name: ::String,
+                                                     value: ::String
+                                                   }?,
+                                                   sns: {
+                                                     target_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_topic_publish: {
+                                                     mqtt_topic: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   set_timer: {
+                                                     timer_name: ::String,
+                                                     seconds: ::Integer?,
+                                                     duration_expression: ::String?
+                                                   }?,
+                                                   clear_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   reset_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   lambda: {
+                                                     function_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_events: {
+                                                     input_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   sqs: {
+                                                     queue_url: ::String,
+                                                     use_base_64: bool?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   firehose: {
+                                                     delivery_stream_name: ::String,
+                                                     separator: ::String?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_db: {
+                                                     hash_key_type: ::String?,
+                                                     hash_key_field: ::String,
+                                                     hash_key_value: ::String,
+                                                     range_key_type: ::String?,
+                                                     range_key_field: ::String?,
+                                                     range_key_value: ::String?,
+                                                     operation: ::String?,
+                                                     payload_field: ::String?,
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_d_bv_2: {
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_site_wise: {
+                                                     entry_id: ::String?,
+                                                     asset_id: ::String?,
+                                                     property_id: ::String?,
+                                                     property_alias: ::String?,
+                                                     property_value: {
+                                                       value: {
+                                                         string_value: ::String?,
+                                                         integer_value: ::String?,
+                                                         double_value: ::String?,
+                                                         boolean_value: ::String?
+                                                       }?,
+                                                       timestamp: {
+                                                         time_in_seconds: ::String,
+                                                         offset_in_nanos: ::String?
+                                                       }?,
+                                                       quality: ::String?
+                                                     }?
+                                                   }?
+                                                 },
+                                               ]?
+                                             },
+                                           ]?
+                                         }?,
+                                         on_exit: {
+                                           events: Array[
+                                             {
+                                               event_name: ::String,
+                                               condition: ::String?,
+                                               actions: Array[
+                                                 {
+                                                   set_variable: {
+                                                     variable_name: ::String,
+                                                     value: ::String
+                                                   }?,
+                                                   sns: {
+                                                     target_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_topic_publish: {
+                                                     mqtt_topic: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   set_timer: {
+                                                     timer_name: ::String,
+                                                     seconds: ::Integer?,
+                                                     duration_expression: ::String?
+                                                   }?,
+                                                   clear_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   reset_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   lambda: {
+                                                     function_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_events: {
+                                                     input_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   sqs: {
+                                                     queue_url: ::String,
+                                                     use_base_64: bool?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   firehose: {
+                                                     delivery_stream_name: ::String,
+                                                     separator: ::String?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_db: {
+                                                     hash_key_type: ::String?,
+                                                     hash_key_field: ::String,
+                                                     hash_key_value: ::String,
+                                                     range_key_type: ::String?,
+                                                     range_key_field: ::String?,
+                                                     range_key_value: ::String?,
+                                                     operation: ::String?,
+                                                     payload_field: ::String?,
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_d_bv_2: {
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_site_wise: {
+                                                     entry_id: ::String?,
+                                                     asset_id: ::String?,
+                                                     property_id: ::String?,
+                                                     property_alias: ::String?,
+                                                     property_value: {
+                                                       value: {
+                                                         string_value: ::String?,
+                                                         integer_value: ::String?,
+                                                         double_value: ::String?,
+                                                         boolean_value: ::String?
+                                                       }?,
+                                                       timestamp: {
+                                                         time_in_seconds: ::String,
+                                                         offset_in_nanos: ::String?
+                                                       }?,
+                                                       quality: ::String?
+                                                     }?
+                                                   }?
+                                                 },
+                                               ]?
+                                             },
+                                           ]?
+                                         }?
+                                       },
+                                     ],
+                                     initial_state_name: ::String
+                                   },
+                                   ?detector_model_description: ::String,
+                                   ?key: ::String,
+                                   role_arn: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ],
+                                   ?evaluation_method: ("BATCH" | "SERIAL")
+                                 ) -> _CreateDetectorModelResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDetectorModelResponseSuccess
+
+      interface _CreateInputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateInputResponse]
+        def input_configuration: () -> Types::InputConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#create_input-instance_method
+      def create_input: (
+                          input_name: ::String,
+                          ?input_description: ::String,
+                          input_definition: {
+                            attributes: Array[
+                              {
+                                json_path: ::String
+                              },
+                            ]
+                          },
+                          ?tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _CreateInputResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInputResponseSuccess
+
+      interface _DeleteAlarmModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAlarmModelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#delete_alarm_model-instance_method
+      def delete_alarm_model: (
+                                alarm_model_name: ::String
+                              ) -> _DeleteAlarmModelResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAlarmModelResponseSuccess
+
+      interface _DeleteDetectorModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDetectorModelResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#delete_detector_model-instance_method
+      def delete_detector_model: (
+                                   detector_model_name: ::String
+                                 ) -> _DeleteDetectorModelResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDetectorModelResponseSuccess
+
+      interface _DeleteInputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteInputResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#delete_input-instance_method
+      def delete_input: (
+                          input_name: ::String
+                        ) -> _DeleteInputResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteInputResponseSuccess
+
+      interface _DescribeAlarmModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAlarmModelResponse]
+        def creation_time: () -> ::Time
+        def alarm_model_arn: () -> ::String
+        def alarm_model_version: () -> ::String
+        def last_update_time: () -> ::Time
+        def status: () -> ("ACTIVE" | "ACTIVATING" | "INACTIVE" | "FAILED")
+        def status_message: () -> ::String
+        def alarm_model_name: () -> ::String
+        def alarm_model_description: () -> ::String
+        def role_arn: () -> ::String
+        def key: () -> ::String
+        def severity: () -> ::Integer
+        def alarm_rule: () -> Types::AlarmRule
+        def alarm_notification: () -> Types::AlarmNotification
+        def alarm_event_actions: () -> Types::AlarmEventActions
+        def alarm_capabilities: () -> Types::AlarmCapabilities
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#describe_alarm_model-instance_method
+      def describe_alarm_model: (
+                                  alarm_model_name: ::String,
+                                  ?alarm_model_version: ::String
+                                ) -> _DescribeAlarmModelResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAlarmModelResponseSuccess
+
+      interface _DescribeDetectorModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDetectorModelResponse]
+        def detector_model: () -> Types::DetectorModel
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#describe_detector_model-instance_method
+      def describe_detector_model: (
+                                     detector_model_name: ::String,
+                                     ?detector_model_version: ::String
+                                   ) -> _DescribeDetectorModelResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDetectorModelResponseSuccess
+
+      interface _DescribeDetectorModelAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDetectorModelAnalysisResponse]
+        def status: () -> ("RUNNING" | "COMPLETE" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#describe_detector_model_analysis-instance_method
+      def describe_detector_model_analysis: (
+                                              analysis_id: ::String
+                                            ) -> _DescribeDetectorModelAnalysisResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDetectorModelAnalysisResponseSuccess
+
+      interface _DescribeInputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeInputResponse]
+        def input: () -> Types::Input
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#describe_input-instance_method
+      def describe_input: (
+                            input_name: ::String
+                          ) -> _DescribeInputResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInputResponseSuccess
+
+      interface _DescribeLoggingOptionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeLoggingOptionsResponse]
+        def logging_options: () -> Types::LoggingOptions
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#describe_logging_options-instance_method
+      def describe_logging_options: (
+                                    ) -> _DescribeLoggingOptionsResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLoggingOptionsResponseSuccess
+
+      interface _GetDetectorModelAnalysisResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDetectorModelAnalysisResultsResponse]
+        def analysis_results: () -> ::Array[Types::AnalysisResult]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#get_detector_model_analysis_results-instance_method
+      def get_detector_model_analysis_results: (
+                                                 analysis_id: ::String,
+                                                 ?next_token: ::String,
+                                                 ?max_results: ::Integer
+                                               ) -> _GetDetectorModelAnalysisResultsResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDetectorModelAnalysisResultsResponseSuccess
+
+      interface _ListAlarmModelVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAlarmModelVersionsResponse]
+        def alarm_model_version_summaries: () -> ::Array[Types::AlarmModelVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#list_alarm_model_versions-instance_method
+      def list_alarm_model_versions: (
+                                       alarm_model_name: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListAlarmModelVersionsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAlarmModelVersionsResponseSuccess
+
+      interface _ListAlarmModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAlarmModelsResponse]
+        def alarm_model_summaries: () -> ::Array[Types::AlarmModelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#list_alarm_models-instance_method
+      def list_alarm_models: (
+                               ?next_token: ::String,
+                               ?max_results: ::Integer
+                             ) -> _ListAlarmModelsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAlarmModelsResponseSuccess
+
+      interface _ListDetectorModelVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDetectorModelVersionsResponse]
+        def detector_model_version_summaries: () -> ::Array[Types::DetectorModelVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#list_detector_model_versions-instance_method
+      def list_detector_model_versions: (
+                                          detector_model_name: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListDetectorModelVersionsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDetectorModelVersionsResponseSuccess
+
+      interface _ListDetectorModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDetectorModelsResponse]
+        def detector_model_summaries: () -> ::Array[Types::DetectorModelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#list_detector_models-instance_method
+      def list_detector_models: (
+                                  ?next_token: ::String,
+                                  ?max_results: ::Integer
+                                ) -> _ListDetectorModelsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDetectorModelsResponseSuccess
+
+      interface _ListInputRoutingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInputRoutingsResponse]
+        def routed_resources: () -> ::Array[Types::RoutedResource]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#list_input_routings-instance_method
+      def list_input_routings: (
+                                 input_identifier: {
+                                   iot_events_input_identifier: {
+                                     input_name: ::String
+                                   }?,
+                                   iot_site_wise_input_identifier: {
+                                     iot_site_wise_asset_model_property_identifier: {
+                                       asset_model_id: ::String,
+                                       property_id: ::String
+                                     }?
+                                   }?
+                                 },
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListInputRoutingsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInputRoutingsResponseSuccess
+
+      interface _ListInputsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInputsResponse]
+        def input_summaries: () -> ::Array[Types::InputSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#list_inputs-instance_method
+      def list_inputs: (
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListInputsResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInputsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#put_logging_options-instance_method
+      def put_logging_options: (
+                                 logging_options: {
+                                   role_arn: ::String,
+                                   level: ("ERROR" | "INFO" | "DEBUG"),
+                                   enabled: bool,
+                                   detector_debug_options: Array[
+                                     {
+                                       detector_model_name: ::String,
+                                       key_value: ::String?
+                                     },
+                                   ]?
+                                 }
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _StartDetectorModelAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDetectorModelAnalysisResponse]
+        def analysis_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#start_detector_model_analysis-instance_method
+      def start_detector_model_analysis: (
+                                           detector_model_definition: {
+                                             states: Array[
+                                               {
+                                                 state_name: ::String,
+                                                 on_input: {
+                                                   events: Array[
+                                                     {
+                                                       event_name: ::String,
+                                                       condition: ::String?,
+                                                       actions: Array[
+                                                         {
+                                                           set_variable: {
+                                                             variable_name: ::String,
+                                                             value: ::String
+                                                           }?,
+                                                           sns: {
+                                                             target_arn: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           iot_topic_publish: {
+                                                             mqtt_topic: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           set_timer: {
+                                                             timer_name: ::String,
+                                                             seconds: ::Integer?,
+                                                             duration_expression: ::String?
+                                                           }?,
+                                                           clear_timer: {
+                                                             timer_name: ::String
+                                                           }?,
+                                                           reset_timer: {
+                                                             timer_name: ::String
+                                                           }?,
+                                                           lambda: {
+                                                             function_arn: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           iot_events: {
+                                                             input_name: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           sqs: {
+                                                             queue_url: ::String,
+                                                             use_base_64: bool?,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           firehose: {
+                                                             delivery_stream_name: ::String,
+                                                             separator: ::String?,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           dynamo_db: {
+                                                             hash_key_type: ::String?,
+                                                             hash_key_field: ::String,
+                                                             hash_key_value: ::String,
+                                                             range_key_type: ::String?,
+                                                             range_key_field: ::String?,
+                                                             range_key_value: ::String?,
+                                                             operation: ::String?,
+                                                             payload_field: ::String?,
+                                                             table_name: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           dynamo_d_bv_2: {
+                                                             table_name: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           iot_site_wise: {
+                                                             entry_id: ::String?,
+                                                             asset_id: ::String?,
+                                                             property_id: ::String?,
+                                                             property_alias: ::String?,
+                                                             property_value: {
+                                                               value: {
+                                                                 string_value: ::String?,
+                                                                 integer_value: ::String?,
+                                                                 double_value: ::String?,
+                                                                 boolean_value: ::String?
+                                                               }?,
+                                                               timestamp: {
+                                                                 time_in_seconds: ::String,
+                                                                 offset_in_nanos: ::String?
+                                                               }?,
+                                                               quality: ::String?
+                                                             }?
+                                                           }?
+                                                         },
+                                                       ]?
+                                                     },
+                                                   ]?,
+                                                   transition_events: Array[
+                                                     {
+                                                       event_name: ::String,
+                                                       condition: ::String,
+                                                       actions: Array[
+                                                         {
+                                                           set_variable: {
+                                                             variable_name: ::String,
+                                                             value: ::String
+                                                           }?,
+                                                           sns: {
+                                                             target_arn: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           iot_topic_publish: {
+                                                             mqtt_topic: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           set_timer: {
+                                                             timer_name: ::String,
+                                                             seconds: ::Integer?,
+                                                             duration_expression: ::String?
+                                                           }?,
+                                                           clear_timer: {
+                                                             timer_name: ::String
+                                                           }?,
+                                                           reset_timer: {
+                                                             timer_name: ::String
+                                                           }?,
+                                                           lambda: {
+                                                             function_arn: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           iot_events: {
+                                                             input_name: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           sqs: {
+                                                             queue_url: ::String,
+                                                             use_base_64: bool?,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           firehose: {
+                                                             delivery_stream_name: ::String,
+                                                             separator: ::String?,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           dynamo_db: {
+                                                             hash_key_type: ::String?,
+                                                             hash_key_field: ::String,
+                                                             hash_key_value: ::String,
+                                                             range_key_type: ::String?,
+                                                             range_key_field: ::String?,
+                                                             range_key_value: ::String?,
+                                                             operation: ::String?,
+                                                             payload_field: ::String?,
+                                                             table_name: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           dynamo_d_bv_2: {
+                                                             table_name: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           iot_site_wise: {
+                                                             entry_id: ::String?,
+                                                             asset_id: ::String?,
+                                                             property_id: ::String?,
+                                                             property_alias: ::String?,
+                                                             property_value: {
+                                                               value: {
+                                                                 string_value: ::String?,
+                                                                 integer_value: ::String?,
+                                                                 double_value: ::String?,
+                                                                 boolean_value: ::String?
+                                                               }?,
+                                                               timestamp: {
+                                                                 time_in_seconds: ::String,
+                                                                 offset_in_nanos: ::String?
+                                                               }?,
+                                                               quality: ::String?
+                                                             }?
+                                                           }?
+                                                         },
+                                                       ]?,
+                                                       next_state: ::String
+                                                     },
+                                                   ]?
+                                                 }?,
+                                                 on_enter: {
+                                                   events: Array[
+                                                     {
+                                                       event_name: ::String,
+                                                       condition: ::String?,
+                                                       actions: Array[
+                                                         {
+                                                           set_variable: {
+                                                             variable_name: ::String,
+                                                             value: ::String
+                                                           }?,
+                                                           sns: {
+                                                             target_arn: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           iot_topic_publish: {
+                                                             mqtt_topic: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           set_timer: {
+                                                             timer_name: ::String,
+                                                             seconds: ::Integer?,
+                                                             duration_expression: ::String?
+                                                           }?,
+                                                           clear_timer: {
+                                                             timer_name: ::String
+                                                           }?,
+                                                           reset_timer: {
+                                                             timer_name: ::String
+                                                           }?,
+                                                           lambda: {
+                                                             function_arn: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           iot_events: {
+                                                             input_name: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           sqs: {
+                                                             queue_url: ::String,
+                                                             use_base_64: bool?,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           firehose: {
+                                                             delivery_stream_name: ::String,
+                                                             separator: ::String?,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           dynamo_db: {
+                                                             hash_key_type: ::String?,
+                                                             hash_key_field: ::String,
+                                                             hash_key_value: ::String,
+                                                             range_key_type: ::String?,
+                                                             range_key_field: ::String?,
+                                                             range_key_value: ::String?,
+                                                             operation: ::String?,
+                                                             payload_field: ::String?,
+                                                             table_name: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           dynamo_d_bv_2: {
+                                                             table_name: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           iot_site_wise: {
+                                                             entry_id: ::String?,
+                                                             asset_id: ::String?,
+                                                             property_id: ::String?,
+                                                             property_alias: ::String?,
+                                                             property_value: {
+                                                               value: {
+                                                                 string_value: ::String?,
+                                                                 integer_value: ::String?,
+                                                                 double_value: ::String?,
+                                                                 boolean_value: ::String?
+                                                               }?,
+                                                               timestamp: {
+                                                                 time_in_seconds: ::String,
+                                                                 offset_in_nanos: ::String?
+                                                               }?,
+                                                               quality: ::String?
+                                                             }?
+                                                           }?
+                                                         },
+                                                       ]?
+                                                     },
+                                                   ]?
+                                                 }?,
+                                                 on_exit: {
+                                                   events: Array[
+                                                     {
+                                                       event_name: ::String,
+                                                       condition: ::String?,
+                                                       actions: Array[
+                                                         {
+                                                           set_variable: {
+                                                             variable_name: ::String,
+                                                             value: ::String
+                                                           }?,
+                                                           sns: {
+                                                             target_arn: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           iot_topic_publish: {
+                                                             mqtt_topic: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           set_timer: {
+                                                             timer_name: ::String,
+                                                             seconds: ::Integer?,
+                                                             duration_expression: ::String?
+                                                           }?,
+                                                           clear_timer: {
+                                                             timer_name: ::String
+                                                           }?,
+                                                           reset_timer: {
+                                                             timer_name: ::String
+                                                           }?,
+                                                           lambda: {
+                                                             function_arn: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           iot_events: {
+                                                             input_name: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           sqs: {
+                                                             queue_url: ::String,
+                                                             use_base_64: bool?,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           firehose: {
+                                                             delivery_stream_name: ::String,
+                                                             separator: ::String?,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           dynamo_db: {
+                                                             hash_key_type: ::String?,
+                                                             hash_key_field: ::String,
+                                                             hash_key_value: ::String,
+                                                             range_key_type: ::String?,
+                                                             range_key_field: ::String?,
+                                                             range_key_value: ::String?,
+                                                             operation: ::String?,
+                                                             payload_field: ::String?,
+                                                             table_name: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           dynamo_d_bv_2: {
+                                                             table_name: ::String,
+                                                             payload: {
+                                                               content_expression: ::String,
+                                                               type: ("STRING" | "JSON")
+                                                             }?
+                                                           }?,
+                                                           iot_site_wise: {
+                                                             entry_id: ::String?,
+                                                             asset_id: ::String?,
+                                                             property_id: ::String?,
+                                                             property_alias: ::String?,
+                                                             property_value: {
+                                                               value: {
+                                                                 string_value: ::String?,
+                                                                 integer_value: ::String?,
+                                                                 double_value: ::String?,
+                                                                 boolean_value: ::String?
+                                                               }?,
+                                                               timestamp: {
+                                                                 time_in_seconds: ::String,
+                                                                 offset_in_nanos: ::String?
+                                                               }?,
+                                                               quality: ::String?
+                                                             }?
+                                                           }?
+                                                         },
+                                                       ]?
+                                                     },
+                                                   ]?
+                                                 }?
+                                               },
+                                             ],
+                                             initial_state_name: ::String
+                                           }
+                                         ) -> _StartDetectorModelAnalysisResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDetectorModelAnalysisResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAlarmModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAlarmModelResponse]
+        def creation_time: () -> ::Time
+        def alarm_model_arn: () -> ::String
+        def alarm_model_version: () -> ::String
+        def last_update_time: () -> ::Time
+        def status: () -> ("ACTIVE" | "ACTIVATING" | "INACTIVE" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#update_alarm_model-instance_method
+      def update_alarm_model: (
+                                alarm_model_name: ::String,
+                                ?alarm_model_description: ::String,
+                                role_arn: ::String,
+                                ?severity: ::Integer,
+                                alarm_rule: {
+                                  simple_rule: {
+                                    input_property: ::String,
+                                    comparison_operator: ("GREATER" | "GREATER_OR_EQUAL" | "LESS" | "LESS_OR_EQUAL" | "EQUAL" | "NOT_EQUAL"),
+                                    threshold: ::String
+                                  }?
+                                },
+                                ?alarm_notification: {
+                                  notification_actions: Array[
+                                    {
+                                      action: {
+                                        lambda_action: {
+                                          function_arn: ::String,
+                                          payload: {
+                                            content_expression: ::String,
+                                            type: ("STRING" | "JSON")
+                                          }?
+                                        }?
+                                      },
+                                      sms_configurations: Array[
+                                        {
+                                          sender_id: ::String?,
+                                          additional_message: ::String?,
+                                          recipients: Array[
+                                            {
+                                              sso_identity: {
+                                                identity_store_id: ::String,
+                                                user_id: ::String?
+                                              }?
+                                            },
+                                          ]
+                                        },
+                                      ]?,
+                                      email_configurations: Array[
+                                        {
+                                          from: ::String,
+                                          content: {
+                                            subject: ::String?,
+                                            additional_message: ::String?
+                                          }?,
+                                          recipients: {
+                                            to: Array[
+                                              {
+                                                sso_identity: {
+                                                  identity_store_id: ::String,
+                                                  user_id: ::String?
+                                                }?
+                                              },
+                                            ]?
+                                          }
+                                        },
+                                      ]?
+                                    },
+                                  ]?
+                                },
+                                ?alarm_event_actions: {
+                                  alarm_actions: Array[
+                                    {
+                                      sns: {
+                                        target_arn: ::String,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      iot_topic_publish: {
+                                        mqtt_topic: ::String,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      lambda: {
+                                        function_arn: ::String,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      iot_events: {
+                                        input_name: ::String,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      sqs: {
+                                        queue_url: ::String,
+                                        use_base_64: bool?,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      firehose: {
+                                        delivery_stream_name: ::String,
+                                        separator: ::String?,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      dynamo_db: {
+                                        hash_key_type: ::String?,
+                                        hash_key_field: ::String,
+                                        hash_key_value: ::String,
+                                        range_key_type: ::String?,
+                                        range_key_field: ::String?,
+                                        range_key_value: ::String?,
+                                        operation: ::String?,
+                                        payload_field: ::String?,
+                                        table_name: ::String,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      dynamo_d_bv_2: {
+                                        table_name: ::String,
+                                        payload: {
+                                          content_expression: ::String,
+                                          type: ("STRING" | "JSON")
+                                        }?
+                                      }?,
+                                      iot_site_wise: {
+                                        entry_id: ::String?,
+                                        asset_id: ::String?,
+                                        property_id: ::String?,
+                                        property_alias: ::String?,
+                                        property_value: {
+                                          value: {
+                                            string_value: ::String?,
+                                            integer_value: ::String?,
+                                            double_value: ::String?,
+                                            boolean_value: ::String?
+                                          }?,
+                                          timestamp: {
+                                            time_in_seconds: ::String,
+                                            offset_in_nanos: ::String?
+                                          }?,
+                                          quality: ::String?
+                                        }?
+                                      }?
+                                    },
+                                  ]?
+                                },
+                                ?alarm_capabilities: {
+                                  initialization_configuration: {
+                                    disabled_on_initialization: bool
+                                  }?,
+                                  acknowledge_flow: {
+                                    enabled: bool
+                                  }?
+                                }
+                              ) -> _UpdateAlarmModelResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAlarmModelResponseSuccess
+
+      interface _UpdateDetectorModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDetectorModelResponse]
+        def detector_model_configuration: () -> Types::DetectorModelConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#update_detector_model-instance_method
+      def update_detector_model: (
+                                   detector_model_name: ::String,
+                                   detector_model_definition: {
+                                     states: Array[
+                                       {
+                                         state_name: ::String,
+                                         on_input: {
+                                           events: Array[
+                                             {
+                                               event_name: ::String,
+                                               condition: ::String?,
+                                               actions: Array[
+                                                 {
+                                                   set_variable: {
+                                                     variable_name: ::String,
+                                                     value: ::String
+                                                   }?,
+                                                   sns: {
+                                                     target_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_topic_publish: {
+                                                     mqtt_topic: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   set_timer: {
+                                                     timer_name: ::String,
+                                                     seconds: ::Integer?,
+                                                     duration_expression: ::String?
+                                                   }?,
+                                                   clear_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   reset_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   lambda: {
+                                                     function_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_events: {
+                                                     input_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   sqs: {
+                                                     queue_url: ::String,
+                                                     use_base_64: bool?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   firehose: {
+                                                     delivery_stream_name: ::String,
+                                                     separator: ::String?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_db: {
+                                                     hash_key_type: ::String?,
+                                                     hash_key_field: ::String,
+                                                     hash_key_value: ::String,
+                                                     range_key_type: ::String?,
+                                                     range_key_field: ::String?,
+                                                     range_key_value: ::String?,
+                                                     operation: ::String?,
+                                                     payload_field: ::String?,
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_d_bv_2: {
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_site_wise: {
+                                                     entry_id: ::String?,
+                                                     asset_id: ::String?,
+                                                     property_id: ::String?,
+                                                     property_alias: ::String?,
+                                                     property_value: {
+                                                       value: {
+                                                         string_value: ::String?,
+                                                         integer_value: ::String?,
+                                                         double_value: ::String?,
+                                                         boolean_value: ::String?
+                                                       }?,
+                                                       timestamp: {
+                                                         time_in_seconds: ::String,
+                                                         offset_in_nanos: ::String?
+                                                       }?,
+                                                       quality: ::String?
+                                                     }?
+                                                   }?
+                                                 },
+                                               ]?
+                                             },
+                                           ]?,
+                                           transition_events: Array[
+                                             {
+                                               event_name: ::String,
+                                               condition: ::String,
+                                               actions: Array[
+                                                 {
+                                                   set_variable: {
+                                                     variable_name: ::String,
+                                                     value: ::String
+                                                   }?,
+                                                   sns: {
+                                                     target_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_topic_publish: {
+                                                     mqtt_topic: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   set_timer: {
+                                                     timer_name: ::String,
+                                                     seconds: ::Integer?,
+                                                     duration_expression: ::String?
+                                                   }?,
+                                                   clear_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   reset_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   lambda: {
+                                                     function_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_events: {
+                                                     input_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   sqs: {
+                                                     queue_url: ::String,
+                                                     use_base_64: bool?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   firehose: {
+                                                     delivery_stream_name: ::String,
+                                                     separator: ::String?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_db: {
+                                                     hash_key_type: ::String?,
+                                                     hash_key_field: ::String,
+                                                     hash_key_value: ::String,
+                                                     range_key_type: ::String?,
+                                                     range_key_field: ::String?,
+                                                     range_key_value: ::String?,
+                                                     operation: ::String?,
+                                                     payload_field: ::String?,
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_d_bv_2: {
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_site_wise: {
+                                                     entry_id: ::String?,
+                                                     asset_id: ::String?,
+                                                     property_id: ::String?,
+                                                     property_alias: ::String?,
+                                                     property_value: {
+                                                       value: {
+                                                         string_value: ::String?,
+                                                         integer_value: ::String?,
+                                                         double_value: ::String?,
+                                                         boolean_value: ::String?
+                                                       }?,
+                                                       timestamp: {
+                                                         time_in_seconds: ::String,
+                                                         offset_in_nanos: ::String?
+                                                       }?,
+                                                       quality: ::String?
+                                                     }?
+                                                   }?
+                                                 },
+                                               ]?,
+                                               next_state: ::String
+                                             },
+                                           ]?
+                                         }?,
+                                         on_enter: {
+                                           events: Array[
+                                             {
+                                               event_name: ::String,
+                                               condition: ::String?,
+                                               actions: Array[
+                                                 {
+                                                   set_variable: {
+                                                     variable_name: ::String,
+                                                     value: ::String
+                                                   }?,
+                                                   sns: {
+                                                     target_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_topic_publish: {
+                                                     mqtt_topic: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   set_timer: {
+                                                     timer_name: ::String,
+                                                     seconds: ::Integer?,
+                                                     duration_expression: ::String?
+                                                   }?,
+                                                   clear_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   reset_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   lambda: {
+                                                     function_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_events: {
+                                                     input_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   sqs: {
+                                                     queue_url: ::String,
+                                                     use_base_64: bool?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   firehose: {
+                                                     delivery_stream_name: ::String,
+                                                     separator: ::String?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_db: {
+                                                     hash_key_type: ::String?,
+                                                     hash_key_field: ::String,
+                                                     hash_key_value: ::String,
+                                                     range_key_type: ::String?,
+                                                     range_key_field: ::String?,
+                                                     range_key_value: ::String?,
+                                                     operation: ::String?,
+                                                     payload_field: ::String?,
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_d_bv_2: {
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_site_wise: {
+                                                     entry_id: ::String?,
+                                                     asset_id: ::String?,
+                                                     property_id: ::String?,
+                                                     property_alias: ::String?,
+                                                     property_value: {
+                                                       value: {
+                                                         string_value: ::String?,
+                                                         integer_value: ::String?,
+                                                         double_value: ::String?,
+                                                         boolean_value: ::String?
+                                                       }?,
+                                                       timestamp: {
+                                                         time_in_seconds: ::String,
+                                                         offset_in_nanos: ::String?
+                                                       }?,
+                                                       quality: ::String?
+                                                     }?
+                                                   }?
+                                                 },
+                                               ]?
+                                             },
+                                           ]?
+                                         }?,
+                                         on_exit: {
+                                           events: Array[
+                                             {
+                                               event_name: ::String,
+                                               condition: ::String?,
+                                               actions: Array[
+                                                 {
+                                                   set_variable: {
+                                                     variable_name: ::String,
+                                                     value: ::String
+                                                   }?,
+                                                   sns: {
+                                                     target_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_topic_publish: {
+                                                     mqtt_topic: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   set_timer: {
+                                                     timer_name: ::String,
+                                                     seconds: ::Integer?,
+                                                     duration_expression: ::String?
+                                                   }?,
+                                                   clear_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   reset_timer: {
+                                                     timer_name: ::String
+                                                   }?,
+                                                   lambda: {
+                                                     function_arn: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_events: {
+                                                     input_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   sqs: {
+                                                     queue_url: ::String,
+                                                     use_base_64: bool?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   firehose: {
+                                                     delivery_stream_name: ::String,
+                                                     separator: ::String?,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_db: {
+                                                     hash_key_type: ::String?,
+                                                     hash_key_field: ::String,
+                                                     hash_key_value: ::String,
+                                                     range_key_type: ::String?,
+                                                     range_key_field: ::String?,
+                                                     range_key_value: ::String?,
+                                                     operation: ::String?,
+                                                     payload_field: ::String?,
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   dynamo_d_bv_2: {
+                                                     table_name: ::String,
+                                                     payload: {
+                                                       content_expression: ::String,
+                                                       type: ("STRING" | "JSON")
+                                                     }?
+                                                   }?,
+                                                   iot_site_wise: {
+                                                     entry_id: ::String?,
+                                                     asset_id: ::String?,
+                                                     property_id: ::String?,
+                                                     property_alias: ::String?,
+                                                     property_value: {
+                                                       value: {
+                                                         string_value: ::String?,
+                                                         integer_value: ::String?,
+                                                         double_value: ::String?,
+                                                         boolean_value: ::String?
+                                                       }?,
+                                                       timestamp: {
+                                                         time_in_seconds: ::String,
+                                                         offset_in_nanos: ::String?
+                                                       }?,
+                                                       quality: ::String?
+                                                     }?
+                                                   }?
+                                                 },
+                                               ]?
+                                             },
+                                           ]?
+                                         }?
+                                       },
+                                     ],
+                                     initial_state_name: ::String
+                                   },
+                                   ?detector_model_description: ::String,
+                                   role_arn: ::String,
+                                   ?evaluation_method: ("BATCH" | "SERIAL")
+                                 ) -> _UpdateDetectorModelResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDetectorModelResponseSuccess
+
+      interface _UpdateInputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateInputResponse]
+        def input_configuration: () -> Types::InputConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTEvents/Client.html#update_input-instance_method
+      def update_input: (
+                          input_name: ::String,
+                          ?input_description: ::String,
+                          input_definition: {
+                            attributes: Array[
+                              {
+                                json_path: ::String
+                              },
+                            ]
+                          }
+                        ) -> _UpdateInputResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInputResponseSuccess
+    end
+  end
+end
+

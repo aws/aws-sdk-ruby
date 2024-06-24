@@ -327,6 +327,8 @@ module Aws::CognitoIdentityProvider
     PasswordType = Shapes::StringShape.new(name: 'PasswordType')
     PoolQueryLimitType = Shapes::IntegerShape.new(name: 'PoolQueryLimitType')
     PreSignedUrlType = Shapes::StringShape.new(name: 'PreSignedUrlType')
+    PreTokenGenerationLambdaVersionType = Shapes::StringShape.new(name: 'PreTokenGenerationLambdaVersionType')
+    PreTokenGenerationVersionConfigType = Shapes::StructureShape.new(name: 'PreTokenGenerationVersionConfigType')
     PrecedenceType = Shapes::IntegerShape.new(name: 'PrecedenceType')
     PreconditionNotMetException = Shapes::StructureShape.new(name: 'PreconditionNotMetException')
     PreventUserExistenceErrorTypes = Shapes::StringShape.new(name: 'PreventUserExistenceErrorTypes')
@@ -1326,6 +1328,7 @@ module Aws::CognitoIdentityProvider
     LambdaConfigType.add_member(:verify_auth_challenge_response, Shapes::ShapeRef.new(shape: ArnType, location_name: "VerifyAuthChallengeResponse"))
     LambdaConfigType.add_member(:pre_token_generation, Shapes::ShapeRef.new(shape: ArnType, location_name: "PreTokenGeneration"))
     LambdaConfigType.add_member(:user_migration, Shapes::ShapeRef.new(shape: ArnType, location_name: "UserMigration"))
+    LambdaConfigType.add_member(:pre_token_generation_config, Shapes::ShapeRef.new(shape: PreTokenGenerationVersionConfigType, location_name: "PreTokenGenerationConfig"))
     LambdaConfigType.add_member(:custom_sms_sender, Shapes::ShapeRef.new(shape: CustomSMSLambdaVersionConfigType, location_name: "CustomSMSSender"))
     LambdaConfigType.add_member(:custom_email_sender, Shapes::ShapeRef.new(shape: CustomEmailLambdaVersionConfigType, location_name: "CustomEmailSender"))
     LambdaConfigType.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: ArnType, location_name: "KMSKeyID"))
@@ -1488,6 +1491,10 @@ module Aws::CognitoIdentityProvider
 
     PasswordResetRequiredException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     PasswordResetRequiredException.struct_class = Types::PasswordResetRequiredException
+
+    PreTokenGenerationVersionConfigType.add_member(:lambda_version, Shapes::ShapeRef.new(shape: PreTokenGenerationLambdaVersionType, required: true, location_name: "LambdaVersion"))
+    PreTokenGenerationVersionConfigType.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "LambdaArn"))
+    PreTokenGenerationVersionConfigType.struct_class = Types::PreTokenGenerationVersionConfigType
 
     PreconditionNotMetException.add_member(:message, Shapes::ShapeRef.new(shape: MessageType, location_name: "message"))
     PreconditionNotMetException.struct_class = Types::PreconditionNotMetException
@@ -2054,9 +2061,11 @@ module Aws::CognitoIdentityProvider
 
       api.metadata = {
         "apiVersion" => "2016-04-18",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "cognito-idp",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Cognito Identity Provider",
         "serviceId" => "Cognito Identity Provider",
         "signatureVersion" => "v4",
@@ -3485,6 +3494,7 @@ module Aws::CognitoIdentityProvider
         o.output = Shapes::ShapeRef.new(shape: SetUserPoolMfaConfigResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
@@ -3526,6 +3536,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: UsernameExistsException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)

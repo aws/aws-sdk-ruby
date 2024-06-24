@@ -51,6 +51,35 @@ module Aws::MigrationHubStrategyRecommendations
       class Unknown < AnalysisStatusUnion; end
     end
 
+    # Summary information about an analyzable server.
+    #
+    # @!attribute [rw] hostname
+    #   The host name of the analyzable server.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address
+    #   The ip address of the analyzable server.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The data source of the analyzable server.
+    #   @return [String]
+    #
+    # @!attribute [rw] vm_id
+    #   The virtual machine id of the analyzable server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/AnalyzableServerSummary AWS API Documentation
+    #
+    class AnalyzableServerSummary < Struct.new(
+      :hostname,
+      :ip_address,
+      :source,
+      :vm_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The combination of the existing analyzers.
     #
     # @note AnalyzerNameUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AnalyzerNameUnion corresponding to the set member.
@@ -1255,6 +1284,57 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
+    # Represents input for ListAnalyzableServers operation.
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to include in the response. The maximum
+    #   value is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token from a previous call that you use to retrieve the next set
+    #   of results. For example, if a previous call to this action returned
+    #   100 items, but you set maxResults to 10. You'll receive a set of 10
+    #   results along with a token. You then use the returned token to
+    #   retrieve the next set of 10.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort
+    #   Specifies whether to sort by ascending (ASC) or descending (DESC)
+    #   order.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/ListAnalyzableServersRequest AWS API Documentation
+    #
+    class ListAnalyzableServersRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :sort)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents output for ListAnalyzableServers operation.
+    #
+    # @!attribute [rw] analyzable_servers
+    #   The list of analyzable servers with summary information about each
+    #   server.
+    #   @return [Array<Types::AnalyzableServerSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token you use to retrieve the next set of results, or null if
+    #   there are no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/ListAnalyzableServersResponse AWS API Documentation
+    #
+    class ListAnalyzableServersResponse < Struct.new(
+      :analyzable_servers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] application_component_criteria
     #   Criteria for filtering the list of application components.
     #   @return [String]
@@ -2050,6 +2130,10 @@ module Aws::MigrationHubStrategyRecommendations
       include Aws::Structure
     end
 
+    # @!attribute [rw] assessment_data_source_type
+    #   The data source type of an assessment to be started.
+    #   @return [String]
+    #
     # @!attribute [rw] assessment_targets
     #   List of criteria for assessment.
     #   @return [Array<Types::AssessmentTarget>]
@@ -2067,6 +2151,7 @@ module Aws::MigrationHubStrategyRecommendations
     # @see http://docs.aws.amazon.com/goto/WebAPI/migrationhubstrategy-2020-02-19/StartAssessmentRequest AWS API Documentation
     #
     class StartAssessmentRequest < Struct.new(
+      :assessment_data_source_type,
       :assessment_targets,
       :s3bucket_for_analysis_data,
       :s3bucket_for_report_data)

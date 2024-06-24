@@ -1,0 +1,363 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Health
+  module Types
+
+    class AccountEntityAggregate
+      attr_accessor account_id: ::String
+      attr_accessor count: ::Integer
+      attr_accessor statuses: ::Hash[("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class AffectedEntity
+      attr_accessor entity_arn: ::String
+      attr_accessor event_arn: ::String
+      attr_accessor entity_value: ::String
+      attr_accessor entity_url: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor last_updated_time: ::Time
+      attr_accessor status_code: ("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DateTimeRange
+      attr_accessor from: ::Time
+      attr_accessor to: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeAffectedAccountsForOrganizationRequest
+      attr_accessor event_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAffectedAccountsForOrganizationResponse
+      attr_accessor affected_accounts: ::Array[::String]
+      attr_accessor event_scope_code: ("PUBLIC" | "ACCOUNT_SPECIFIC" | "NONE")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAffectedEntitiesForOrganizationRequest
+      attr_accessor organization_entity_filters: ::Array[Types::EventAccountFilter]
+      attr_accessor locale: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor organization_entity_account_filters: ::Array[Types::EntityAccountFilter]
+      SENSITIVE: []
+    end
+
+    class DescribeAffectedEntitiesForOrganizationResponse
+      attr_accessor entities: ::Array[Types::AffectedEntity]
+      attr_accessor failed_set: ::Array[Types::OrganizationAffectedEntitiesErrorItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAffectedEntitiesRequest
+      attr_accessor filter: Types::EntityFilter
+      attr_accessor locale: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeAffectedEntitiesResponse
+      attr_accessor entities: ::Array[Types::AffectedEntity]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEntityAggregatesForOrganizationRequest
+      attr_accessor event_arns: ::Array[::String]
+      attr_accessor aws_account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeEntityAggregatesForOrganizationResponse
+      attr_accessor organization_entity_aggregates: ::Array[Types::OrganizationEntityAggregate]
+      SENSITIVE: []
+    end
+
+    class DescribeEntityAggregatesRequest
+      attr_accessor event_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribeEntityAggregatesResponse
+      attr_accessor entity_aggregates: ::Array[Types::EntityAggregate]
+      SENSITIVE: []
+    end
+
+    class DescribeEventAggregatesRequest
+      attr_accessor filter: Types::EventFilter
+      attr_accessor aggregate_field: ("eventTypeCategory")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventAggregatesResponse
+      attr_accessor event_aggregates: ::Array[Types::EventAggregate]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventDetailsForOrganizationRequest
+      attr_accessor organization_event_detail_filters: ::Array[Types::EventAccountFilter]
+      attr_accessor locale: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventDetailsForOrganizationResponse
+      attr_accessor successful_set: ::Array[Types::OrganizationEventDetails]
+      attr_accessor failed_set: ::Array[Types::OrganizationEventDetailsErrorItem]
+      SENSITIVE: []
+    end
+
+    class DescribeEventDetailsRequest
+      attr_accessor event_arns: ::Array[::String]
+      attr_accessor locale: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventDetailsResponse
+      attr_accessor successful_set: ::Array[Types::EventDetails]
+      attr_accessor failed_set: ::Array[Types::EventDetailsErrorItem]
+      SENSITIVE: []
+    end
+
+    class DescribeEventTypesRequest
+      attr_accessor filter: Types::EventTypeFilter
+      attr_accessor locale: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeEventTypesResponse
+      attr_accessor event_types: ::Array[Types::EventType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventsForOrganizationRequest
+      attr_accessor filter: Types::OrganizationEventFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor locale: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventsForOrganizationResponse
+      attr_accessor events: ::Array[Types::OrganizationEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventsRequest
+      attr_accessor filter: Types::EventFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor locale: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEventsResponse
+      attr_accessor events: ::Array[Types::Event]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeHealthServiceStatusForOrganizationResponse
+      attr_accessor health_service_access_status_for_organization: ::String
+      SENSITIVE: []
+    end
+
+    class EntityAccountFilter
+      attr_accessor event_arn: ::String
+      attr_accessor aws_account_id: ::String
+      attr_accessor status_codes: ::Array[("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED")]
+      SENSITIVE: []
+    end
+
+    class EntityAggregate
+      attr_accessor event_arn: ::String
+      attr_accessor count: ::Integer
+      attr_accessor statuses: ::Hash[("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED"), ::Integer]
+      SENSITIVE: []
+    end
+
+    class EntityFilter
+      attr_accessor event_arns: ::Array[::String]
+      attr_accessor entity_arns: ::Array[::String]
+      attr_accessor entity_values: ::Array[::String]
+      attr_accessor last_updated_times: ::Array[Types::DateTimeRange]
+      attr_accessor tags: ::Array[::Hash[::String, ::String]]
+      attr_accessor status_codes: ::Array[("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED")]
+      SENSITIVE: []
+    end
+
+    class Event
+      attr_accessor arn: ::String
+      attr_accessor service: ::String
+      attr_accessor event_type_code: ::String
+      attr_accessor event_type_category: ("issue" | "accountNotification" | "scheduledChange" | "investigation")
+      attr_accessor region: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor status_code: ("open" | "closed" | "upcoming")
+      attr_accessor event_scope_code: ("PUBLIC" | "ACCOUNT_SPECIFIC" | "NONE")
+      SENSITIVE: []
+    end
+
+    class EventAccountFilter
+      attr_accessor event_arn: ::String
+      attr_accessor aws_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class EventAggregate
+      attr_accessor aggregate_value: ::String
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class EventDescription
+      attr_accessor latest_description: ::String
+      SENSITIVE: []
+    end
+
+    class EventDetails
+      attr_accessor event: Types::Event
+      attr_accessor event_description: Types::EventDescription
+      attr_accessor event_metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EventDetailsErrorItem
+      attr_accessor event_arn: ::String
+      attr_accessor error_name: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class EventFilter
+      attr_accessor event_arns: ::Array[::String]
+      attr_accessor event_type_codes: ::Array[::String]
+      attr_accessor services: ::Array[::String]
+      attr_accessor regions: ::Array[::String]
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor start_times: ::Array[Types::DateTimeRange]
+      attr_accessor end_times: ::Array[Types::DateTimeRange]
+      attr_accessor last_updated_times: ::Array[Types::DateTimeRange]
+      attr_accessor entity_arns: ::Array[::String]
+      attr_accessor entity_values: ::Array[::String]
+      attr_accessor event_type_categories: ::Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]
+      attr_accessor tags: ::Array[::Hash[::String, ::String]]
+      attr_accessor event_status_codes: ::Array[("open" | "closed" | "upcoming")]
+      SENSITIVE: []
+    end
+
+    class EventType
+      attr_accessor service: ::String
+      attr_accessor code: ::String
+      attr_accessor category: ("issue" | "accountNotification" | "scheduledChange" | "investigation")
+      SENSITIVE: []
+    end
+
+    class EventTypeFilter
+      attr_accessor event_type_codes: ::Array[::String]
+      attr_accessor services: ::Array[::String]
+      attr_accessor event_type_categories: ::Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]
+      SENSITIVE: []
+    end
+
+    class InvalidPaginationToken
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OrganizationAffectedEntitiesErrorItem
+      attr_accessor aws_account_id: ::String
+      attr_accessor event_arn: ::String
+      attr_accessor error_name: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class OrganizationEntityAggregate
+      attr_accessor event_arn: ::String
+      attr_accessor count: ::Integer
+      attr_accessor statuses: ::Hash[("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED"), ::Integer]
+      attr_accessor accounts: ::Array[Types::AccountEntityAggregate]
+      SENSITIVE: []
+    end
+
+    class OrganizationEvent
+      attr_accessor arn: ::String
+      attr_accessor service: ::String
+      attr_accessor event_type_code: ::String
+      attr_accessor event_type_category: ("issue" | "accountNotification" | "scheduledChange" | "investigation")
+      attr_accessor event_scope_code: ("PUBLIC" | "ACCOUNT_SPECIFIC" | "NONE")
+      attr_accessor region: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor status_code: ("open" | "closed" | "upcoming")
+      SENSITIVE: []
+    end
+
+    class OrganizationEventDetails
+      attr_accessor aws_account_id: ::String
+      attr_accessor event: Types::Event
+      attr_accessor event_description: Types::EventDescription
+      attr_accessor event_metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class OrganizationEventDetailsErrorItem
+      attr_accessor aws_account_id: ::String
+      attr_accessor event_arn: ::String
+      attr_accessor error_name: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class OrganizationEventFilter
+      attr_accessor event_type_codes: ::Array[::String]
+      attr_accessor aws_account_ids: ::Array[::String]
+      attr_accessor services: ::Array[::String]
+      attr_accessor regions: ::Array[::String]
+      attr_accessor start_time: Types::DateTimeRange
+      attr_accessor end_time: Types::DateTimeRange
+      attr_accessor last_updated_time: Types::DateTimeRange
+      attr_accessor entity_arns: ::Array[::String]
+      attr_accessor entity_values: ::Array[::String]
+      attr_accessor event_type_categories: ::Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]
+      attr_accessor event_status_codes: ::Array[("open" | "closed" | "upcoming")]
+      SENSITIVE: []
+    end
+
+    class UnsupportedLocale
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

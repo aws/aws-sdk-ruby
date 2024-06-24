@@ -107,6 +107,36 @@ module Aws::CodeBuild
     end
 
     # @!attribute [rw] names
+    #   The names or ARNs of the compute fleets.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetFleetsInput AWS API Documentation
+    #
+    class BatchGetFleetsInput < Struct.new(
+      :names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fleets
+    #   Information about the requested compute fleets.
+    #   @return [Array<Types::Fleet>]
+    #
+    # @!attribute [rw] fleets_not_found
+    #   The names of compute fleets for which information could not be
+    #   found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetFleetsOutput AWS API Documentation
+    #
+    class BatchGetFleetsOutput < Struct.new(
+      :fleets,
+      :fleets_not_found)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] names
     #   The names or ARNs of the build projects. To get information about a
     #   project shared with your Amazon Web Services account, its ARN must
     #   be specified. You cannot specify a shared project using its name.
@@ -358,8 +388,9 @@ module Aws::CodeBuild
     #   @return [Types::LogsLocation]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   How long, in minutes, for CodeBuild to wait before timing out this
-    #   build if it does not get marked as completed.
+    #   How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to
+    #   wait before timing out this build if it does not get marked as
+    #   completed.
     #   @return [Integer]
     #
     # @!attribute [rw] queued_timeout_in_minutes
@@ -377,7 +408,7 @@ module Aws::CodeBuild
     #   * If CodePipeline started the build, the pipeline's name (for
     #     example, `codepipeline/my-demo-pipeline`).
     #
-    #   * If an IAM user started the build, the user's name (for example,
+    #   * If a user started the build, the user's name (for example,
     #     `MyUserName`).
     #
     #   * If the Jenkins plugin for CodeBuild started the build, the string
@@ -720,7 +751,7 @@ module Aws::CodeBuild
     #   * If CodePipeline started the build, the pipeline's name (for
     #     example, `codepipeline/my-demo-pipeline`).
     #
-    #   * If an IAM user started the build, the user's name.
+    #   * If a user started the build, the user's name.
     #
     #   * If the Jenkins plugin for CodeBuild started the build, the string
     #     `CodeBuild-Jenkins-Plugin`.
@@ -1367,6 +1398,181 @@ module Aws::CodeBuild
     end
 
     # @!attribute [rw] name
+    #   The name of the compute fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_capacity
+    #   The initial number of machines allocated to the ﬂeet, which deﬁnes
+    #   the number of builds that can run in parallel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] environment_type
+    #   The environment type of the compute fleet.
+    #
+    #   * The environment type `ARM_CONTAINER` is available only in regions
+    #     US East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia
+    #     Pacific (Singapore), Asia Pacific (Sydney), EU (Frankfurt), and
+    #     South America (São Paulo).
+    #
+    #   * The environment type `LINUX_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
+    #
+    #   * The environment type `LINUX_GPU_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia
+    #     Pacific (Sydney).
+    #
+    #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia
+    #     Pacific (Mumbai) and EU (Ireland).
+    #
+    #   * The environment type `WINDOWS_SERVER_2022_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Sydney),
+    #     Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São
+    #     Paulo) and Asia Pacific (Mumbai).
+    #
+    #   For more information, see [Build environment compute types][1] in
+    #   the *CodeBuild user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_type
+    #   Information about the compute resources the compute fleet uses.
+    #   Available values include:
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
+    #     824 GB of SSD storage for builds. This compute type supports
+    #     Docker images up to 100 GB uncompressed.
+    #
+    #   If you use `BUILD_GENERAL1_SMALL`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #     memory and 2 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
+    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #     memory and 2 vCPUs on ARM-based processors for builds.
+    #
+    #   If you use `BUILD_GENERAL1_LARGE`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #     memory and 8 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255
+    #     GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
+    #     memory and 8 vCPUs on ARM-based processors for builds.
+    #
+    #   For more information, see [Build environment compute types][1] in
+    #   the *CodeBuild User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_configuration
+    #   The scaling configuration of the compute fleet.
+    #   @return [Types::ScalingConfigurationInput]
+    #
+    # @!attribute [rw] overflow_behavior
+    #   The compute fleet overflow behavior.
+    #
+    #   * For overflow behavior `QUEUE`, your overflow builds need to wait
+    #     on the existing fleet instance to become available.
+    #
+    #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
+    #     CodeBuild on-demand.
+    #
+    #     <note markdown="1"> If you choose to set your overflow behavior to on-demand while
+    #     creating a VPC-connected fleet, make sure that you add the
+    #     required VPC permissions to your project service role. For more
+    #     information, see [Example policy statement to allow CodeBuild
+    #     access to Amazon Web Services services required to create a VPC
+    #     network interface][1].
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Information about the VPC configuration that CodeBuild accesses.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] fleet_service_role
+    #   The service role associated with the compute fleet. For more
+    #   information, see [ Allow a user to add a permission policy for a
+    #   fleet service role][1] in the *CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tag key and value pairs associated with this compute
+    #   fleet.
+    #
+    #   These tags are available for use by Amazon Web Services services
+    #   that support CodeBuild build project tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateFleetInput AWS API Documentation
+    #
+    class CreateFleetInput < Struct.new(
+      :name,
+      :base_capacity,
+      :environment_type,
+      :compute_type,
+      :scaling_configuration,
+      :overflow_behavior,
+      :vpc_config,
+      :fleet_service_role,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fleet
+    #   Information about the compute fleet
+    #   @return [Types::Fleet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateFleetOutput AWS API Documentation
+    #
+    class CreateFleetOutput < Struct.new(
+      :fleet)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
     #   The name of the build project.
     #   @return [String]
     #
@@ -1395,6 +1601,8 @@ module Aws::CodeBuild
     #     format `pr/pull-request-ID` (for example `pr/25`). If a branch
     #     name is specified, the branch's HEAD commit ID is used. If not
     #     specified, the default branch's HEAD commit ID is used.
+    #
+    #   * For GitLab: the commit ID, branch, or Git tag to use.
     #
     #   * For Bitbucket: the commit ID, branch name, or tag name that
     #     corresponds to the version of the source code you want to build.
@@ -1448,9 +1656,9 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait
-    #   before it times out any build that has not been marked as completed.
-    #   The default is 60 minutes.
+    #   How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to
+    #   wait before it times out any build that has not been marked as
+    #   completed. The default is 60 minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] queued_timeout_in_minutes
@@ -1482,6 +1690,11 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] vpc_config
     #   VpcConfig enables CodeBuild to access resources in an Amazon VPC.
+    #
+    #   <note markdown="1"> If you're using compute fleets during project creation, do not
+    #   provide vpcConfig.
+    #
+    #    </note>
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] badge_enabled
@@ -1628,13 +1841,35 @@ module Aws::CodeBuild
     #   Specifies the type of build this webhook will trigger.
     #   @return [String]
     #
+    # @!attribute [rw] manual_creation
+    #   If manualCreation is true, CodeBuild doesn't create a webhook in
+    #   GitHub and instead returns `payloadUrl` and `secret` values for the
+    #   webhook. The `payloadUrl` and `secret` values in the output can be
+    #   used to manually create a webhook within GitHub.
+    #
+    #   <note markdown="1"> `manualCreation` is only available for GitHub webhooks.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] scope_configuration
+    #   The scope configuration for global or organization webhooks.
+    #
+    #   <note markdown="1"> Global or organization webhooks are only available for GitHub and
+    #   Github Enterprise webhooks.
+    #
+    #    </note>
+    #   @return [Types::ScopeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhookInput AWS API Documentation
     #
     class CreateWebhookInput < Struct.new(
       :project_name,
       :branch_filter,
       :filter_groups,
-      :build_type)
+      :build_type,
+      :manual_creation,
+      :scope_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1713,6 +1948,22 @@ module Aws::CodeBuild
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] arn
+    #   The ARN of the compute fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteFleetInput AWS API Documentation
+    #
+    class DeleteFleetInput < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteFleetOutput AWS API Documentation
+    #
+    class DeleteFleetOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] name
     #   The name of the build project.
@@ -2044,27 +2295,33 @@ module Aws::CodeBuild
     #
     #   We strongly discourage the use of `PLAINTEXT` environment variables
     #   to store sensitive values, especially Amazon Web Services secret key
-    #   IDs and secret access keys. `PLAINTEXT` environment variables can be
-    #   displayed in plain text using the CodeBuild console and the CLI. For
-    #   sensitive values, we recommend you use an environment variable of
-    #   type `PARAMETER_STORE` or `SECRETS_MANAGER`.
+    #   IDs. `PLAINTEXT` environment variables can be displayed in plain
+    #   text using the CodeBuild console and the CLI. For sensitive values,
+    #   we recommend you use an environment variable of type
+    #   `PARAMETER_STORE` or `SECRETS_MANAGER`.
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of environment variable. Valid values include:
     #
     #   * `PARAMETER_STORE`: An environment variable stored in Systems
-    #     Manager Parameter Store. To learn how to specify a parameter store
-    #     environment variable, see [env/parameter-store][1] in the
-    #     *CodeBuild User Guide*.
+    #     Manager Parameter Store. For environment variables of this type,
+    #     specify the name of the parameter as the `value` of the
+    #     EnvironmentVariable. The parameter value will be substituted for
+    #     the name at runtime. You can also define Parameter Store
+    #     environment variables in the buildspec. To learn how to do so, see
+    #     [env/parameter-store][1] in the *CodeBuild User Guide*.
     #
     #   * `PLAINTEXT`: An environment variable in plain text format. This is
     #     the default value.
     #
     #   * `SECRETS_MANAGER`: An environment variable stored in Secrets
-    #     Manager. To learn how to specify a secrets manager environment
-    #     variable, see [env/secrets-manager][2] in the *CodeBuild User
-    #     Guide*.
+    #     Manager. For environment variables of this type, specify the name
+    #     of the secret as the `value` of the EnvironmentVariable. The
+    #     secret value will be substituted for the name at runtime. You can
+    #     also define Secrets Manager environment variables in the
+    #     buildspec. To learn how to do so, see [env/secrets-manager][2] in
+    #     the *CodeBuild User Guide*.
     #
     #
     #
@@ -2113,6 +2370,241 @@ module Aws::CodeBuild
     class ExportedEnvironmentVariable < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A set of dedicated instances for your build environment.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the compute fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the compute fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the compute fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] created
+    #   The time at which the compute fleet was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified
+    #   The time at which the compute fleet was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the compute fleet.
+    #   @return [Types::FleetStatus]
+    #
+    # @!attribute [rw] base_capacity
+    #   The initial number of machines allocated to the compute ﬂeet, which
+    #   deﬁnes the number of builds that can run in parallel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] environment_type
+    #   The environment type of the compute fleet.
+    #
+    #   * The environment type `ARM_CONTAINER` is available only in regions
+    #     US East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia
+    #     Pacific (Singapore), Asia Pacific (Sydney), EU (Frankfurt), and
+    #     South America (São Paulo).
+    #
+    #   * The environment type `LINUX_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
+    #
+    #   * The environment type `LINUX_GPU_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia
+    #     Pacific (Sydney).
+    #
+    #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia
+    #     Pacific (Mumbai) and EU (Ireland).
+    #
+    #   * The environment type `WINDOWS_SERVER_2022_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Sydney),
+    #     Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São
+    #     Paulo) and Asia Pacific (Mumbai).
+    #
+    #   For more information, see [Build environment compute types][1] in
+    #   the *CodeBuild user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_type
+    #   Information about the compute resources the compute fleet uses.
+    #   Available values include:
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
+    #     824 GB of SSD storage for builds. This compute type supports
+    #     Docker images up to 100 GB uncompressed.
+    #
+    #   If you use `BUILD_GENERAL1_SMALL`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #     memory and 2 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
+    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #     memory and 2 vCPUs on ARM-based processors for builds.
+    #
+    #   If you use `BUILD_GENERAL1_LARGE`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #     memory and 8 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255
+    #     GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
+    #     memory and 8 vCPUs on ARM-based processors for builds.
+    #
+    #   For more information, see [Build environment compute types][1] in
+    #   the *CodeBuild User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_configuration
+    #   The scaling configuration of the compute fleet.
+    #   @return [Types::ScalingConfigurationOutput]
+    #
+    # @!attribute [rw] overflow_behavior
+    #   The compute fleet overflow behavior.
+    #
+    #   * For overflow behavior `QUEUE`, your overflow builds need to wait
+    #     on the existing fleet instance to become available.
+    #
+    #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
+    #     CodeBuild on-demand.
+    #
+    #     <note markdown="1"> If you choose to set your overflow behavior to on-demand while
+    #     creating a VPC-connected fleet, make sure that you add the
+    #     required VPC permissions to your project service role. For more
+    #     information, see [Example policy statement to allow CodeBuild
+    #     access to Amazon Web Services services required to create a VPC
+    #     network interface][1].
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Information about the VPC configuration that CodeBuild accesses.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] fleet_service_role
+    #   The service role associated with the compute fleet. For more
+    #   information, see [ Allow a user to add a permission policy for a
+    #   fleet service role][1] in the *CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tag key and value pairs associated with this compute
+    #   fleet.
+    #
+    #   These tags are available for use by Amazon Web Services services
+    #   that support CodeBuild build project tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Fleet AWS API Documentation
+    #
+    class Fleet < Struct.new(
+      :arn,
+      :name,
+      :id,
+      :created,
+      :last_modified,
+      :status,
+      :base_capacity,
+      :environment_type,
+      :compute_type,
+      :scaling_configuration,
+      :overflow_behavior,
+      :vpc_config,
+      :fleet_service_role,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of the compute fleet.
+    #
+    # @!attribute [rw] status_code
+    #   The status code of the compute fleet. Valid values include:
+    #
+    #   * `CREATING`: The compute fleet is being created.
+    #
+    #   * `UPDATING`: The compute fleet is being updated.
+    #
+    #   * `ROTATING`: The compute fleet is being rotated.
+    #
+    #   * `PENDING_DELETION`: The compute fleet is pending deletion.
+    #
+    #   * `DELETING`: The compute fleet is being deleted.
+    #
+    #   * `CREATE_FAILED`: The compute fleet has failed to create.
+    #
+    #   * `UPDATE_ROLLBACK_FAILED`: The compute fleet has failed to update
+    #     and could not rollback to previous state.
+    #
+    #   * `ACTIVE`: The compute fleet has succeeded and is active.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   Additional information about a compute fleet. Valid values include:
+    #
+    #   * `CREATE_FAILED`: The compute fleet has failed to create.
+    #
+    #   * `UPDATE_FAILED`: The compute fleet has failed to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message associated with the status of a compute fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/FleetStatus AWS API Documentation
+    #
+    class FleetStatus < Struct.new(
+      :status_code,
+      :context,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2257,7 +2749,8 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] token
     #   For GitHub or GitHub Enterprise, this is the personal access token.
-    #   For Bitbucket, this is the app password.
+    #   For Bitbucket, this is either the access token or the app password.
+    #   For the `authType` CODECONNECTIONS, this is the `connectionArn`.
     #   @return [String]
     #
     # @!attribute [rw] server_type
@@ -2266,9 +2759,10 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] auth_type
     #   The type of authentication used to connect to a GitHub, GitHub
-    #   Enterprise, or Bitbucket repository. An OAUTH connection is not
-    #   supported by the API and must be created using the CodeBuild
-    #   console.
+    #   Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository. An
+    #   OAUTH connection is not supported by the API and must be created
+    #   using the CodeBuild console. Note that CODECONNECTIONS is only valid
+    #   for GitLab and GitLab Self Managed.
     #   @return [String]
     #
     # @!attribute [rw] should_overwrite
@@ -2564,6 +3058,79 @@ module Aws::CodeBuild
     #
     class ListCuratedEnvironmentImagesOutput < Struct.new(
       :platforms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   During a previous call, if there are more than 100 items in the
+    #   list, only the first 100 items are returned, along with a unique
+    #   string called a *nextToken*. To get the next batch of items in the
+    #   list, call this operation again, adding the next token to the call.
+    #   To get all of the items in the list, keep calling this operation
+    #   with each subsequent next token that is returned, until no more next
+    #   tokens are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of paginated compute fleets returned per
+    #   response. Use `nextToken` to iterate pages in the list of returned
+    #   compute fleets.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sort_order
+    #   The order in which to list compute fleets. Valid values include:
+    #
+    #   * `ASCENDING`: List in ascending order.
+    #
+    #   * `DESCENDING`: List in descending order.
+    #
+    #   Use `sortBy` to specify the criterion to be used to list compute
+    #   fleet names.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The criterion to be used to list compute fleet names. Valid values
+    #   include:
+    #
+    #   * `CREATED_TIME`: List based on when each compute fleet was created.
+    #
+    #   * `LAST_MODIFIED_TIME`: List based on when information about each
+    #     compute fleet was last changed.
+    #
+    #   * `NAME`: List based on each compute fleet's name.
+    #
+    #   Use `sortOrder` to specify in what order to list the compute fleet
+    #   names based on the preceding criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListFleetsInput AWS API Documentation
+    #
+    class ListFleetsInput < Struct.new(
+      :next_token,
+      :max_results,
+      :sort_order,
+      :sort_by)
+      SENSITIVE = [:next_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are more than 100 items in the list, only the first 100
+    #   items are returned, along with a unique string called a *nextToken*.
+    #   To get the next batch of items in the list, call this operation
+    #   again, adding the next token to the call.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleets
+    #   The list of compute fleet names.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListFleetsOutput AWS API Documentation
+    #
+    class ListFleetsOutput < Struct.new(
+      :next_token,
+      :fleets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3027,7 +3594,9 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] deep_link
-    #   The URL to an individual build log in CloudWatch Logs.
+    #   The URL to an individual build log in CloudWatch Logs. The log
+    #   stream is created during the PROVISIONING phase of a build and the
+    #   `deeplink` will not be valid until it is created.
     #   @return [String]
     #
     # @!attribute [rw] s3_deep_link
@@ -3035,9 +3604,12 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_logs_arn
-    #   The ARN of CloudWatch Logs for a build project. Its format is
+    #   The ARN of the CloudWatch Logs stream for a build execution. Its
+    #   format is
     #   `arn:$\{Partition\}:logs:$\{Region\}:$\{Account\}:log-group:$\{LogGroupName\}:log-stream:$\{LogStreamName\}`.
-    #   For more information, see [Resources Defined by CloudWatch Logs][1].
+    #   The CloudWatch Logs stream is created during the PROVISIONING phase
+    #   of a build and the ARN will not be valid until it is created. For
+    #   more information, see [Resources Defined by CloudWatch Logs][1].
     #
     #
     #
@@ -3160,6 +3732,8 @@ module Aws::CodeBuild
     #     name is specified, the branch's HEAD commit ID is used. If not
     #     specified, the default branch's HEAD commit ID is used.
     #
+    #   * For GitLab: the commit ID, branch, or Git tag to use.
+    #
     #   * For Bitbucket: the commit ID, branch name, or tag name that
     #     corresponds to the version of the source code you want to build.
     #     If a branch name is specified, the branch's HEAD commit ID is
@@ -3210,8 +3784,8 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait
-    #   before timing out any related build that did not get marked as
+    #   How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to
+    #   wait before timing out any related build that did not get marked as
     #   completed. The default is 60 minutes.
     #   @return [Integer]
     #
@@ -3718,12 +4292,11 @@ module Aws::CodeBuild
     #     (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia
     #     Pacific (Sydney), and EU (Frankfurt).
     #
-    #   * The environment type `LINUX_CONTAINER` with compute type
-    #     `build.general1.2xlarge` is available only in regions US East (N.
-    #     Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU
-    #     (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia
-    #     Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney),
-    #     China (Beijing), and China (Ningxia).
+    #   * The environment type `LINUX_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     Canada (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia
+    #     Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore),
+    #     Asia Pacific (Sydney), China (Beijing), and China (Ningxia).
     #
     #   * The environment type `LINUX_GPU_CONTAINER` is available only in
     #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
@@ -3732,12 +4305,27 @@ module Aws::CodeBuild
     #     Asia Pacific (Sydney) , China (Beijing), and China (Ningxia).
     #   ^
     #
+    #   * The environment types `ARM_LAMBDA_CONTAINER` and
+    #     `LINUX_LAMBDA_CONTAINER` are available only in regions US East (N.
+    #     Virginia), US East (Ohio), US West (Oregon), Asia Pacific
+    #     (Mumbai), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia
+    #     Pacific (Tokyo), EU (Frankfurt), EU (Ireland), and South America
+    #     (São Paulo).
+    #
+    #   ^
+    #   ^
+    #
     #   * The environment types `WINDOWS_CONTAINER` and
     #     `WINDOWS_SERVER_2019_CONTAINER` are available only in regions US
     #     East (N. Virginia), US East (Ohio), US West (Oregon), and EU
     #     (Ireland).
     #
     #   ^
+    #
+    #   <note markdown="1"> If you're using compute fleets during project creation, `type` will
+    #   be ignored.
+    #
+    #    </note>
     #
     #   For more information, see [Build environment compute types][1] in
     #   the *CodeBuild user guide*.
@@ -3782,9 +4370,43 @@ module Aws::CodeBuild
     #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
     #     builds, depending on your environment type.
     #
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #     builds, depending on your environment type.
+    #
     #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
     #     824 GB of SSD storage for builds. This compute type supports
     #     Docker images up to 100 GB uncompressed.
+    #
+    #   * `BUILD_LAMBDA_1GB`: Use up to 1 GB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_2GB`: Use up to 2 GB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_4GB`: Use up to 4 GB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_8GB`: Use up to 8 GB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   * `BUILD_LAMBDA_10GB`: Use up to 10 GB memory for builds. Only
+    #     available for environment type `LINUX_LAMBDA_CONTAINER` and
+    #     `ARM_LAMBDA_CONTAINER`.
+    #
+    #   If you use `BUILD_GENERAL1_SMALL`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #     memory and 2 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
+    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #     memory and 2 vCPUs on ARM-based processors for builds.
     #
     #   If you use `BUILD_GENERAL1_LARGE`:
     #
@@ -3797,6 +4419,11 @@ module Aws::CodeBuild
     #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
     #     memory and 8 vCPUs on ARM-based processors for builds.
     #
+    #   <note markdown="1"> If you're using compute fleets during project creation,
+    #   `computeType` will be ignored.
+    #
+    #    </note>
+    #
     #   For more information, see [Build Environment Compute Types][1] in
     #   the *CodeBuild User Guide.*
     #
@@ -3804,6 +4431,10 @@ module Aws::CodeBuild
     #
     #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
     #   @return [String]
+    #
+    # @!attribute [rw] fleet
+    #   A ProjectFleet object to use for this build project.
+    #   @return [Types::ProjectFleet]
     #
     # @!attribute [rw] environment_variables
     #   A set of environment variables to make available to builds for this
@@ -3873,6 +4504,7 @@ module Aws::CodeBuild
       :type,
       :image,
       :compute_type,
+      :fleet,
       :environment_variables,
       :privileged_mode,
       :certificate,
@@ -3946,6 +4578,25 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Information about the compute fleet of the build project. For more
+    # information, see [Working with reserved capacity in CodeBuild][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/fleets.html
+    #
+    # @!attribute [rw] fleet_arn
+    #   Specifies the compute fleet ARN for the build project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectFleet AWS API Documentation
+    #
+    class ProjectFleet < Struct.new(
+      :fleet_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the build input source code for the build project.
     #
     # @!attribute [rw] type
@@ -3959,11 +4610,15 @@ module Aws::CodeBuild
     #   * `CODEPIPELINE`: The source code settings are specified in the
     #     source action of a pipeline in CodePipeline.
     #
-    #   * `GITHUB`: The source code is in a GitHub or GitHub Enterprise
-    #     Cloud repository.
+    #   * `GITHUB`: The source code is in a GitHub repository.
     #
     #   * `GITHUB_ENTERPRISE`: The source code is in a GitHub Enterprise
     #     Server repository.
+    #
+    #   * `GITLAB`: The source code is in a GitLab repository.
+    #
+    #   * `GITLAB_SELF_MANAGED`: The source code is in a self-managed GitLab
+    #     repository.
     #
     #   * `NO_SOURCE`: The project does not have input source code.
     #
@@ -4007,6 +4662,21 @@ module Aws::CodeBuild
     #     project. You can leave the CodeBuild console.) To instruct
     #     CodeBuild to use this connection, in the `source` object, set the
     #     `auth` object's `type` value to `OAUTH`.
+    #
+    #   * For source code in an GitLab or self-managed GitLab repository,
+    #     the HTTPS clone URL to the repository that contains the source and
+    #     the buildspec file. You must connect your Amazon Web Services
+    #     account to your GitLab account. Use the CodeBuild console to start
+    #     creating a build project. When you use the console to connect (or
+    #     reconnect) with GitLab, on the Connections **Authorize
+    #     application** page, choose **Authorize**. Then on the
+    #     CodeConnections **Create GitLab connection** page, choose
+    #     **Connect to GitLab**. (After you have connected to your GitLab
+    #     account, you do not need to finish creating the build project. You
+    #     can leave the CodeBuild console.) To instruct CodeBuild to
+    #     override the default connection and use this connection instead,
+    #     set the `auth` object's `type` value to `CODECONNECTIONS` in the
+    #     `source` object.
     #
     #   * For source code in a Bitbucket repository, the HTTPS clone URL to
     #     the repository that contains the source and the buildspec file.
@@ -4065,9 +4735,9 @@ module Aws::CodeBuild
     # @!attribute [rw] report_build_status
     #   Set to true to report the status of a build's start and finish to
     #   your source provider. This option is valid only when your source
-    #   provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set
-    #   and you use a different source provider, an `invalidInputException`
-    #   is thrown.
+    #   provider is GitHub, GitHub Enterprise, GitLab, GitLab Self Managed,
+    #   or Bitbucket. If this is set and you use a different source
+    #   provider, an `invalidInputException` is thrown.
     #
     #   To be able to report the build status to the source provider, the
     #   user associated with the source provider must have write access to
@@ -4142,6 +4812,8 @@ module Aws::CodeBuild
     #     format `pr/pull-request-ID` (for example, `pr/25`). If a branch
     #     name is specified, the branch's HEAD commit ID is used. If not
     #     specified, the default branch's HEAD commit ID is used.
+    #
+    #   * For GitLab: the commit ID, branch, or Git tag to use.
     #
     #   * For Bitbucket: the commit ID, branch name, or tag name that
     #     corresponds to the version of the source code you want to build.
@@ -4735,6 +5407,87 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # The scaling configuration input of a compute fleet.
+    #
+    # @!attribute [rw] scaling_type
+    #   The scaling type for a compute fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_tracking_scaling_configs
+    #   A list of `TargetTrackingScalingConfiguration` objects.
+    #   @return [Array<Types::TargetTrackingScalingConfiguration>]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum number of instances in the ﬂeet when auto-scaling.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ScalingConfigurationInput AWS API Documentation
+    #
+    class ScalingConfigurationInput < Struct.new(
+      :scaling_type,
+      :target_tracking_scaling_configs,
+      :max_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scaling configuration output of a compute fleet.
+    #
+    # @!attribute [rw] scaling_type
+    #   The scaling type for a compute fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_tracking_scaling_configs
+    #   A list of `TargetTrackingScalingConfiguration` objects.
+    #   @return [Array<Types::TargetTrackingScalingConfiguration>]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum number of instances in the ﬂeet when auto-scaling.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] desired_capacity
+    #   The desired number of instances in the ﬂeet when auto-scaling.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ScalingConfigurationOutput AWS API Documentation
+    #
+    class ScalingConfigurationOutput < Struct.new(
+      :scaling_type,
+      :target_tracking_scaling_configs,
+      :max_capacity,
+      :desired_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains configuration information about the scope for a webhook.
+    #
+    # @!attribute [rw] name
+    #   The name of either the enterprise or organization that will send
+    #   webhook events to CodeBuild, depending on if the webhook is a global
+    #   or organization webhook respectively.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain
+    #   The domain of the GitHub Enterprise organization. Note that this
+    #   parameter is only required if your project's source type is
+    #   GITHUB\_ENTERPRISE
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   The type of scope for a GitHub webhook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ScopeConfiguration AWS API Documentation
+    #
+    class ScopeConfiguration < Struct.new(
+      :name,
+      :domain,
+      :scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the authorization settings for CodeBuild to access
     # the source code to be built.
     #
@@ -4742,12 +5495,8 @@ module Aws::CodeBuild
     # should not get or set this information directly.
     #
     # @!attribute [rw] type
-    #   <note markdown="1"> This data type is deprecated and is no longer accurate or used.
-    #
-    #    </note>
-    #
-    #   The authorization type to use. The only valid value is `OAUTH`,
-    #   which represents the OAuth authorization type.
+    #   The authorization type to use. Valid options are OAUTH or
+    #   CODECONNECTIONS.
     #   @return [String]
     #
     # @!attribute [rw] resource
@@ -4763,8 +5512,8 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # Information about the credentials for a GitHub, GitHub Enterprise, or
-    # Bitbucket repository.
+    # Information about the credentials for a GitHub, GitHub Enterprise,
+    # GitLab, GitLab Self Managed, or Bitbucket repository.
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the token.
@@ -4772,12 +5521,17 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] server_type
     #   The type of source provider. The valid options are GITHUB,
-    #   GITHUB\_ENTERPRISE, or BITBUCKET.
+    #   GITHUB\_ENTERPRISE, GITLAB, GITLAB\_SELF\_MANAGED, or BITBUCKET.
     #   @return [String]
     #
     # @!attribute [rw] auth_type
     #   The type of authentication used by the credentials. Valid options
-    #   are OAUTH, BASIC\_AUTH, or PERSONAL\_ACCESS\_TOKEN.
+    #   are OAUTH, BASIC\_AUTH, PERSONAL\_ACCESS\_TOKEN, or CODECONNECTIONS.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The connection ARN if your serverType type is GITLAB or
+    #   GITLAB\_SELF\_MANAGED and your authType is CODECONNECTIONS.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/SourceCredentialsInfo AWS API Documentation
@@ -4785,7 +5539,8 @@ module Aws::CodeBuild
     class SourceCredentialsInfo < Struct.new(
       :arn,
       :server_type,
-      :auth_type)
+      :auth_type,
+      :resource)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5121,6 +5876,10 @@ module Aws::CodeBuild
     #     specified, the branch's HEAD commit ID is used. If not specified,
     #     the default branch's HEAD commit ID is used.
     #
+    #   GitLab
+    #
+    #   : The commit ID, branch, or Git tag to use.
+    #
     #   Bitbucket
     #
     #   : The commit ID, branch name, or tag name that corresponds to the
@@ -5171,7 +5930,8 @@ module Aws::CodeBuild
     # @!attribute [rw] source_auth_override
     #   An authorization type for this build that overrides the one defined
     #   in the build project. This override applies only if the build
-    #   project's source is BitBucket or GitHub.
+    #   project's source is BitBucket, GitHub, GitLab, or GitLab Self
+    #   Managed.
     #   @return [Types::SourceAuth]
     #
     # @!attribute [rw] git_clone_depth_override
@@ -5186,8 +5946,9 @@ module Aws::CodeBuild
     #   @return [Types::GitSubmodulesConfig]
     #
     # @!attribute [rw] buildspec_override
-    #   A buildspec file declaration that overrides, for this build only,
-    #   the latest one already defined in the build project.
+    #   A buildspec file declaration that overrides the latest one defined
+    #   in the build project, for this build only. The buildspec defined on
+    #   the project is not changed.
     #
     #   If this value is set, it can be either an inline buildspec
     #   definition, the path to an alternate buildspec file relative to the
@@ -5199,6 +5960,15 @@ module Aws::CodeBuild
     #   not provided or is set to an empty string, the source code must
     #   contain a buildspec file in its root directory. For more
     #   information, see [Buildspec File Name and Storage Location][1].
+    #
+    #   <note markdown="1"> Since this property allows you to change the build commands that
+    #   will run in the container, you should note that an IAM principal
+    #   with the ability to call this API and set this parameter can
+    #   override the default settings. Moreover, we encourage that you use a
+    #   trustworthy buildspec location like a file in your source repository
+    #   or a Amazon S3 bucket.
+    #
+    #    </note>
     #
     #
     #
@@ -5277,7 +6047,7 @@ module Aws::CodeBuild
     #   @return [Boolean]
     #
     # @!attribute [rw] timeout_in_minutes_override
-    #   The number of build timeout minutes, from 5 to 480 (8 hours), that
+    #   The number of build timeout minutes, from 5 to 2160 (36 hours), that
     #   overrides, for this build only, the latest setting already defined
     #   in the build project.
     #   @return [Integer]
@@ -5347,6 +6117,11 @@ module Aws::CodeBuild
     #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] fleet_override
+    #   A ProjectFleet object specified for this build that overrides the
+    #   one defined in the build project.
+    #   @return [Types::ProjectFleet]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildInput AWS API Documentation
     #
     class StartBuildInput < Struct.new(
@@ -5380,7 +6155,8 @@ module Aws::CodeBuild
       :logs_config_override,
       :registry_credential_override,
       :image_pull_credentials_type_override,
-      :debug_session_enabled)
+      :debug_session_enabled,
+      :fleet_override)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5463,6 +6239,25 @@ module Aws::CodeBuild
     class Tag < Struct.new(
       :key,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines when a new instance is auto-scaled into the compute fleet.
+    #
+    # @!attribute [rw] metric_type
+    #   The metric type to determine auto-scaling.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_value
+    #   The value of `metricType` when to start scaling.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/TargetTrackingScalingConfiguration AWS API Documentation
+    #
+    class TargetTrackingScalingConfiguration < Struct.new(
+      :metric_type,
+      :target_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5584,6 +6379,181 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The ARN of the compute fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] base_capacity
+    #   The initial number of machines allocated to the compute ﬂeet, which
+    #   deﬁnes the number of builds that can run in parallel.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] environment_type
+    #   The environment type of the compute fleet.
+    #
+    #   * The environment type `ARM_CONTAINER` is available only in regions
+    #     US East (N. Virginia), US East (Ohio), US West (Oregon), EU
+    #     (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia
+    #     Pacific (Singapore), Asia Pacific (Sydney), EU (Frankfurt), and
+    #     South America (São Paulo).
+    #
+    #   * The environment type `LINUX_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific
+    #     (Singapore), Asia Pacific (Sydney), South America (São Paulo), and
+    #     Asia Pacific (Mumbai).
+    #
+    #   * The environment type `LINUX_GPU_CONTAINER` is available only in
+    #     regions US East (N. Virginia), US East (Ohio), US West (Oregon),
+    #     EU (Ireland), EU (Frankfurt), Asia Pacific (Tokyo), and Asia
+    #     Pacific (Sydney).
+    #
+    #   * The environment type `WINDOWS_SERVER_2019_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), Asia Pacific (Sydney), Asia Pacific (Tokyo), Asia
+    #     Pacific (Mumbai) and EU (Ireland).
+    #
+    #   * The environment type `WINDOWS_SERVER_2022_CONTAINER` is available
+    #     only in regions US East (N. Virginia), US East (Ohio), US West
+    #     (Oregon), EU (Ireland), EU (Frankfurt), Asia Pacific (Sydney),
+    #     Asia Pacific (Singapore), Asia Pacific (Tokyo), South America (São
+    #     Paulo) and Asia Pacific (Mumbai).
+    #
+    #   For more information, see [Build environment compute types][1] in
+    #   the *CodeBuild user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_type
+    #   Information about the compute resources the compute fleet uses.
+    #   Available values include:
+    #
+    #   * `BUILD_GENERAL1_SMALL`: Use up to 3 GB memory and 2 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_MEDIUM`: Use up to 7 GB memory and 4 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_LARGE`: Use up to 16 GB memory and 8 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_XLARGE`: Use up to 70 GB memory and 36 vCPUs for
+    #     builds, depending on your environment type.
+    #
+    #   * `BUILD_GENERAL1_2XLARGE`: Use up to 145 GB memory, 72 vCPUs, and
+    #     824 GB of SSD storage for builds. This compute type supports
+    #     Docker images up to 100 GB uncompressed.
+    #
+    #   If you use `BUILD_GENERAL1_SMALL`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 3 GB
+    #     memory and 2 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 16
+    #     GB memory, 4 vCPUs, and 1 NVIDIA A10G Tensor Core GPU for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 4 GB
+    #     memory and 2 vCPUs on ARM-based processors for builds.
+    #
+    #   If you use `BUILD_GENERAL1_LARGE`:
+    #
+    #   * For environment type `LINUX_CONTAINER`, you can use up to 15 GB
+    #     memory and 8 vCPUs for builds.
+    #
+    #   * For environment type `LINUX_GPU_CONTAINER`, you can use up to 255
+    #     GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.
+    #
+    #   * For environment type `ARM_CONTAINER`, you can use up to 16 GB
+    #     memory and 8 vCPUs on ARM-based processors for builds.
+    #
+    #   For more information, see [Build environment compute types][1] in
+    #   the *CodeBuild User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_configuration
+    #   The scaling configuration of the compute fleet.
+    #   @return [Types::ScalingConfigurationInput]
+    #
+    # @!attribute [rw] overflow_behavior
+    #   The compute fleet overflow behavior.
+    #
+    #   * For overflow behavior `QUEUE`, your overflow builds need to wait
+    #     on the existing fleet instance to become available.
+    #
+    #   * For overflow behavior `ON_DEMAND`, your overflow builds run on
+    #     CodeBuild on-demand.
+    #
+    #     <note markdown="1"> If you choose to set your overflow behavior to on-demand while
+    #     creating a VPC-connected fleet, make sure that you add the
+    #     required VPC permissions to your project service role. For more
+    #     information, see [Example policy statement to allow CodeBuild
+    #     access to Amazon Web Services services required to create a VPC
+    #     network interface][1].
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-create-vpc-network-interface
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Information about the VPC configuration that CodeBuild accesses.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] fleet_service_role
+    #   The service role associated with the compute fleet. For more
+    #   information, see [ Allow a user to add a permission policy for a
+    #   fleet service role][1] in the *CodeBuild User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/codebuild/latest/userguide/auth-and-access-control-iam-identity-based-access-control.html#customer-managed-policies-example-permission-policy-fleet-service-role.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tag key and value pairs associated with this compute
+    #   fleet.
+    #
+    #   These tags are available for use by Amazon Web Services services
+    #   that support CodeBuild build project tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateFleetInput AWS API Documentation
+    #
+    class UpdateFleetInput < Struct.new(
+      :arn,
+      :base_capacity,
+      :environment_type,
+      :compute_type,
+      :scaling_configuration,
+      :overflow_behavior,
+      :vpc_config,
+      :fleet_service_role,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fleet
+    #   A `Fleet` object.
+    #   @return [Types::Fleet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateFleetOutput AWS API Documentation
+    #
+    class UpdateFleetOutput < Struct.new(
+      :fleet)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the build project.
     #
@@ -5618,6 +6588,8 @@ module Aws::CodeBuild
     #     format `pr/pull-request-ID` (for example `pr/25`). If a branch
     #     name is specified, the branch's HEAD commit ID is used. If not
     #     specified, the default branch's HEAD commit ID is used.
+    #
+    #   * For GitLab: the commit ID, branch, or Git tag to use.
     #
     #   * For Bitbucket: the commit ID, branch name, or tag name that
     #     corresponds to the version of the source code you want to build.
@@ -5672,7 +6644,7 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   The replacement value in minutes, from 5 to 480 (8 hours), for
+    #   The replacement value in minutes, from 5 to 2160 (36 hours), for
     #   CodeBuild to wait before timing out any related build that did not
     #   get marked as completed.
     #   @return [Integer]
@@ -6011,10 +6983,30 @@ module Aws::CodeBuild
     #   Specifies the type of build this webhook will trigger.
     #   @return [String]
     #
+    # @!attribute [rw] manual_creation
+    #   If manualCreation is true, CodeBuild doesn't create a webhook in
+    #   GitHub and instead returns `payloadUrl` and `secret` values for the
+    #   webhook. The `payloadUrl` and `secret` values in the output can be
+    #   used to manually create a webhook within GitHub.
+    #
+    #   <note markdown="1"> manualCreation is only available for GitHub webhooks.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @!attribute [rw] last_modified_secret
     #   A timestamp that indicates the last time a repository's secret
     #   token was modified.
     #   @return [Time]
+    #
+    # @!attribute [rw] scope_configuration
+    #   The scope configuration for global or organization webhooks.
+    #
+    #   <note markdown="1"> Global or organization webhooks are only available for GitHub and
+    #   Github Enterprise webhooks.
+    #
+    #    </note>
+    #   @return [Types::ScopeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Webhook AWS API Documentation
     #
@@ -6025,7 +7017,9 @@ module Aws::CodeBuild
       :branch_filter,
       :filter_groups,
       :build_type,
-      :last_modified_secret)
+      :manual_creation,
+      :last_modified_secret,
+      :scope_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6033,71 +7027,114 @@ module Aws::CodeBuild
     # A filter used to determine which webhooks trigger a build.
     #
     # @!attribute [rw] type
-    #   The type of webhook filter. There are six webhook filter types:
+    #   The type of webhook filter. There are nine webhook filter types:
     #   `EVENT`, `ACTOR_ACCOUNT_ID`, `HEAD_REF`, `BASE_REF`, `FILE_PATH`,
-    #   and `COMMIT_MESSAGE`.
+    #   `COMMIT_MESSAGE`, `TAG_NAME`, `RELEASE_NAME`, and `WORKFLOW_NAME`.
     #
-    #   EVENT
+    #   * EVENT
     #
-    #   : A webhook event triggers a build when the provided `pattern`
-    #     matches one of five event types: `PUSH`, `PULL_REQUEST_CREATED`,
-    #     `PULL_REQUEST_UPDATED`, `PULL_REQUEST_REOPENED`, and
-    #     `PULL_REQUEST_MERGED`. The `EVENT` patterns are specified as a
-    #     comma-separated string. For example, `PUSH, PULL_REQUEST_CREATED,
-    #     PULL_REQUEST_UPDATED` filters all push, pull request created, and
-    #     pull request updated events.
+    #     * A webhook event triggers a build when the provided `pattern`
+    #       matches one of nine event types: `PUSH`, `PULL_REQUEST_CREATED`,
+    #       `PULL_REQUEST_UPDATED`, `PULL_REQUEST_CLOSED`,
+    #       `PULL_REQUEST_REOPENED`, `PULL_REQUEST_MERGED`, `RELEASED`,
+    #       `PRERELEASED`, and `WORKFLOW_JOB_QUEUED`. The `EVENT` patterns
+    #       are specified as a comma-separated string. For example, `PUSH,
+    #       PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED` filters all push,
+    #       pull request created, and pull request updated events.
     #
-    #     <note markdown="1"> The `PULL_REQUEST_REOPENED` works with GitHub and GitHub
-    #     Enterprise only.
+    #       <note markdown="1"> Types `PULL_REQUEST_REOPENED` and `WORKFLOW_JOB_QUEUED` work
+    #       with GitHub and GitHub Enterprise only. Types `RELEASED` and
+    #       `PRERELEASED` work with GitHub only.
     #
-    #      </note>
+    #        </note>
     #
-    #   ACTOR\_ACCOUNT\_ID
+    #   * ACTOR\_ACCOUNT\_ID
     #
-    #   : A webhook event triggers a build when a GitHub, GitHub Enterprise,
-    #     or Bitbucket account ID matches the regular expression `pattern`.
+    #     * A webhook event triggers a build when a GitHub, GitHub
+    #       Enterprise, or Bitbucket account ID matches the regular
+    #       expression `pattern`.
     #
-    #   HEAD\_REF
+    #     ^
     #
-    #   : A webhook event triggers a build when the head reference matches
-    #     the regular expression `pattern`. For example,
-    #     `refs/heads/branch-name` and `refs/tags/tag-name`.
+    #   * HEAD\_REF
     #
-    #     Works with GitHub and GitHub Enterprise push, GitHub and GitHub
-    #     Enterprise pull request, Bitbucket push, and Bitbucket pull
-    #     request events.
+    #     * A webhook event triggers a build when the head reference matches
+    #       the regular expression `pattern`. For example,
+    #       `refs/heads/branch-name` and `refs/tags/tag-name`.
     #
-    #   BASE\_REF
+    #       <note markdown="1"> Works with GitHub and GitHub Enterprise push, GitHub and GitHub
+    #       Enterprise pull request, Bitbucket push, and Bitbucket pull
+    #       request events.
     #
-    #   : A webhook event triggers a build when the base reference matches
-    #     the regular expression `pattern`. For example,
-    #     `refs/heads/branch-name`.
+    #        </note>
     #
-    #     <note markdown="1"> Works with pull request events only.
+    #   * BASE\_REF
     #
-    #      </note>
+    #     * A webhook event triggers a build when the base reference matches
+    #       the regular expression `pattern`. For example,
+    #       `refs/heads/branch-name`.
     #
-    #   FILE\_PATH
+    #       <note markdown="1"> Works with pull request events only.
     #
-    #   : A webhook triggers a build when the path of a changed file matches
-    #     the regular expression `pattern`.
+    #        </note>
     #
-    #     <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
-    #     events. Also works with GitHub Enterprise push events, but does
-    #     not work with GitHub Enterprise pull request events.
+    #   * FILE\_PATH
     #
-    #      </note>
+    #     * A webhook triggers a build when the path of a changed file
+    #       matches the regular expression `pattern`.
     #
-    #   COMMIT\_MESSAGE
+    #       <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
+    #       events. Also works with GitHub Enterprise push events, but does
+    #       not work with GitHub Enterprise pull request events.
     #
-    #   : A webhook triggers a build when the head commit message matches
-    #     the regular expression `pattern`.
+    #        </note>
     #
-    #     <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
-    #     events. Also works with GitHub Enterprise push events, but does
-    #     not work with GitHub Enterprise pull request events.
+    #   * COMMIT\_MESSAGE
     #
-    #      </note>
+    #     * A webhook triggers a build when the head commit message matches
+    #       the regular expression `pattern`.
+    #
+    #       <note markdown="1"> Works with GitHub and Bitbucket events push and pull requests
+    #       events. Also works with GitHub Enterprise push events, but does
+    #       not work with GitHub Enterprise pull request events.
+    #
+    #        </note>
+    #
+    #   * TAG\_NAME
+    #
+    #     * A webhook triggers a build when the tag name of the release
+    #       matches the regular expression `pattern`.
+    #
+    #       <note markdown="1"> Works with `RELEASED` and `PRERELEASED` events only.
+    #
+    #        </note>
+    #
+    #   * RELEASE\_NAME
+    #
+    #     * A webhook triggers a build when the release name matches the
+    #       regular expression `pattern`.
+    #
+    #       <note markdown="1"> Works with `RELEASED` and `PRERELEASED` events only.
+    #
+    #        </note>
+    #
+    #   * REPOSITORY\_NAME
+    #
+    #     * A webhook triggers a build when the repository name matches the
+    #       regular expression pattern.
+    #
+    #       <note markdown="1"> Works with GitHub global or organization webhooks only.
+    #
+    #        </note>
+    #
+    #   * WORKFLOW\_NAME
+    #
+    #     * A webhook triggers a build when the workflow name matches the
+    #       regular expression `pattern`.
+    #
+    #       <note markdown="1"> Works with `WORKFLOW_JOB_QUEUED` events only.
+    #
+    #        </note>
     #   @return [String]
     #
     # @!attribute [rw] pattern

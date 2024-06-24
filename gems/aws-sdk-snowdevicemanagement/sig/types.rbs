@@ -1,0 +1,340 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SnowDeviceManagement
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CancelTaskInput
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelTaskOutput
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class Capacity
+      attr_accessor available: ::Integer
+      attr_accessor name: ::String
+      attr_accessor total: ::Integer
+      attr_accessor unit: ::String
+      attr_accessor used: ::Integer
+      SENSITIVE: []
+    end
+
+    class Command
+      attr_accessor reboot: Types::Reboot
+      attr_accessor unlock: Types::Unlock
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Reboot < Command
+      end
+      class Unlock < Command
+      end
+      class Unknown < Command
+      end
+    end
+
+    class CpuOptions
+      attr_accessor core_count: ::Integer
+      attr_accessor threads_per_core: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateTaskInput
+      attr_accessor client_token: ::String
+      attr_accessor command: Types::Command
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor targets: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateTaskOutput
+      attr_accessor task_arn: ::String
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDeviceEc2Input
+      attr_accessor instance_ids: ::Array[::String]
+      attr_accessor managed_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDeviceEc2Output
+      attr_accessor instances: ::Array[Types::InstanceSummary]
+      SENSITIVE: []
+    end
+
+    class DescribeDeviceInput
+      attr_accessor managed_device_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDeviceOutput
+      attr_accessor associated_with_job: ::String
+      attr_accessor device_capacities: ::Array[Types::Capacity]
+      attr_accessor device_state: ("UNLOCKED" | "LOCKED" | "UNLOCKING")
+      attr_accessor device_type: ::String
+      attr_accessor last_reached_out_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor managed_device_arn: ::String
+      attr_accessor managed_device_id: ::String
+      attr_accessor physical_network_interfaces: ::Array[Types::PhysicalNetworkInterface]
+      attr_accessor software: Types::SoftwareInformation
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeExecutionInput
+      attr_accessor managed_device_id: ::String
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeExecutionOutput
+      attr_accessor execution_id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor managed_device_id: ::String
+      attr_accessor started_at: ::Time
+      attr_accessor state: ("QUEUED" | "IN_PROGRESS" | "CANCELED" | "FAILED" | "SUCCEEDED" | "REJECTED" | "TIMED_OUT")
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTaskInput
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTaskOutput
+      attr_accessor completed_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor state: ("IN_PROGRESS" | "CANCELED" | "COMPLETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor targets: ::Array[::String]
+      attr_accessor task_arn: ::String
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeviceSummary
+      attr_accessor associated_with_job: ::String
+      attr_accessor managed_device_arn: ::String
+      attr_accessor managed_device_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class EbsInstanceBlockDevice
+      attr_accessor attach_time: ::Time
+      attr_accessor delete_on_termination: bool
+      attr_accessor status: ("ATTACHING" | "ATTACHED" | "DETACHING" | "DETACHED")
+      attr_accessor volume_id: ::String
+      SENSITIVE: []
+    end
+
+    class ExecutionSummary
+      attr_accessor execution_id: ::String
+      attr_accessor managed_device_id: ::String
+      attr_accessor state: ("QUEUED" | "IN_PROGRESS" | "CANCELED" | "FAILED" | "SUCCEEDED" | "REJECTED" | "TIMED_OUT")
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class Instance
+      attr_accessor ami_launch_index: ::Integer
+      attr_accessor block_device_mappings: ::Array[Types::InstanceBlockDeviceMapping]
+      attr_accessor cpu_options: Types::CpuOptions
+      attr_accessor created_at: ::Time
+      attr_accessor image_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor private_ip_address: ::String
+      attr_accessor public_ip_address: ::String
+      attr_accessor root_device_name: ::String
+      attr_accessor security_groups: ::Array[Types::SecurityGroupIdentifier]
+      attr_accessor state: Types::InstanceState
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class InstanceBlockDeviceMapping
+      attr_accessor device_name: ::String
+      attr_accessor ebs: Types::EbsInstanceBlockDevice
+      SENSITIVE: []
+    end
+
+    class InstanceState
+      attr_accessor code: ::Integer
+      attr_accessor name: ("PENDING" | "RUNNING" | "SHUTTING_DOWN" | "TERMINATED" | "STOPPING" | "STOPPED")
+      SENSITIVE: []
+    end
+
+    class InstanceSummary
+      attr_accessor instance: Types::Instance
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeviceResourcesInput
+      attr_accessor managed_device_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeviceResourcesOutput
+      attr_accessor next_token: ::String
+      attr_accessor resources: ::Array[Types::ResourceSummary]
+      SENSITIVE: []
+    end
+
+    class ListDevicesInput
+      attr_accessor job_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDevicesOutput
+      attr_accessor devices: ::Array[Types::DeviceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListExecutionsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor state: ("QUEUED" | "IN_PROGRESS" | "CANCELED" | "FAILED" | "SUCCEEDED" | "REJECTED" | "TIMED_OUT")
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListExecutionsOutput
+      attr_accessor executions: ::Array[Types::ExecutionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTasksInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor state: ("IN_PROGRESS" | "CANCELED" | "COMPLETED")
+      SENSITIVE: []
+    end
+
+    class ListTasksOutput
+      attr_accessor next_token: ::String
+      attr_accessor tasks: ::Array[Types::TaskSummary]
+      SENSITIVE: []
+    end
+
+    class PhysicalNetworkInterface
+      attr_accessor default_gateway: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor ip_address_assignment: ("DHCP" | "STATIC")
+      attr_accessor mac_address: ::String
+      attr_accessor netmask: ::String
+      attr_accessor physical_connector_type: ("RJ45" | "SFP_PLUS" | "QSFP" | "RJ45_2" | "WIFI")
+      attr_accessor physical_network_interface_id: ::String
+      SENSITIVE: []
+    end
+
+    class Reboot < Aws::EmptyStructure
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceSummary
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class SecurityGroupIdentifier
+      attr_accessor group_id: ::String
+      attr_accessor group_name: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SoftwareInformation
+      attr_accessor install_state: ::String
+      attr_accessor installed_version: ::String
+      attr_accessor installing_version: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TaskSummary
+      attr_accessor state: ("IN_PROGRESS" | "CANCELED" | "COMPLETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor task_arn: ::String
+      attr_accessor task_id: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Unlock < Aws::EmptyStructure
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

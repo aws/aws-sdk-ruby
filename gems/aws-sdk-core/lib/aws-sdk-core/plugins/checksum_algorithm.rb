@@ -117,7 +117,8 @@ module Aws
 
         def call(context)
           if should_calculate_request_checksum?(context)
-            request_algorithm_input = ChecksumAlgorithm.request_algorithm_selection(context)
+            request_algorithm_input = ChecksumAlgorithm.request_algorithm_selection(context) ||
+                                      context[:default_request_checksum_algorithm]
             context[:checksum_algorithms] = request_algorithm_input
 
             request_checksum_property = {
@@ -140,7 +141,8 @@ module Aws
 
         def should_calculate_request_checksum?(context)
           context.operation.http_checksum &&
-            ChecksumAlgorithm.request_algorithm_selection(context)
+            (ChecksumAlgorithm.request_algorithm_selection(context) ||
+              context[:default_request_checksum_algorithm])
         end
 
         def should_verify_response_checksum?(context)

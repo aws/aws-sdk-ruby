@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::VerifiedPermissions
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::VerifiedPermissions
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::VerifiedPermissions
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::VerifiedPermissions
     #   @option options [Aws::VerifiedPermissions::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::VerifiedPermissions::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -398,51 +423,315 @@ module Aws::VerifiedPermissions
 
     # @!group API Operations
 
-    # Creates a reference to an Amazon Cognito user pool as an external
-    # identity provider (IdP).
+    # Makes a series of decisions about multiple authorization requests for
+    # one principal or resource. Each request contains the equivalent
+    # content of an `IsAuthorized` request: principal, action, resource, and
+    # context. Either the `principal` or the `resource` parameter must be
+    # identical across all requests. For example, Verified Permissions
+    # won't evaluate a pair of requests where `bob` views `photo1` and
+    # `alice` views `photo2`. Authorization of `bob` to view `photo1` and
+    # `photo2`, or `bob` and `alice` to view `photo1`, are valid batches.
+    #
+    # The request is evaluated against all policies in the specified policy
+    # store that match the entities that you declare. The result of the
+    # decisions is a series of `Allow` or `Deny` responses, along with the
+    # IDs of the policies that produced each decision.
+    #
+    # The `entities` of a `BatchIsAuthorized` API request can contain up to
+    # 100 principals and up to 100 resources. The `requests` of a
+    # `BatchIsAuthorized` API request can contain up to 30 requests.
+    #
+    # <note markdown="1"> The `BatchIsAuthorized` operation doesn't have its own IAM
+    # permission. To authorize this operation for Amazon Web Services
+    # principals, include the permission `verifiedpermissions:IsAuthorized`
+    # in their IAM policies.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :policy_store_id
+    #   Specifies the ID of the policy store. Policies in this policy store
+    #   will be used to make the authorization decisions for the input.
+    #
+    # @option params [Types::EntitiesDefinition] :entities
+    #   Specifies the list of resources and principals and their associated
+    #   attributes that Verified Permissions can examine when evaluating the
+    #   policies.
+    #
+    #   <note markdown="1"> You can include only principal and resource entities in this
+    #   parameter; you can't include actions. You must specify actions in the
+    #   schema.
+    #
+    #    </note>
+    #
+    # @option params [required, Array<Types::BatchIsAuthorizedInputItem>] :requests
+    #   An array of up to 30 requests that you want Verified Permissions to
+    #   evaluate.
+    #
+    # @return [Types::BatchIsAuthorizedOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchIsAuthorizedOutput#results #results} => Array&lt;Types::BatchIsAuthorizedOutputItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_is_authorized({
+    #     policy_store_id: "PolicyStoreId", # required
+    #     entities: {
+    #       entity_list: [
+    #         {
+    #           identifier: { # required
+    #             entity_type: "EntityType", # required
+    #             entity_id: "EntityId", # required
+    #           },
+    #           attributes: {
+    #             "String" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           parents: [
+    #             {
+    #               entity_type: "EntityType", # required
+    #               entity_id: "EntityId", # required
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
+    #     requests: [ # required
+    #       {
+    #         principal: {
+    #           entity_type: "EntityType", # required
+    #           entity_id: "EntityId", # required
+    #         },
+    #         action: {
+    #           action_type: "ActionType", # required
+    #           action_id: "ActionId", # required
+    #         },
+    #         resource: {
+    #           entity_type: "EntityType", # required
+    #           entity_id: "EntityId", # required
+    #         },
+    #         context: {
+    #           context_map: {
+    #             "String" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].request.principal.entity_type #=> String
+    #   resp.results[0].request.principal.entity_id #=> String
+    #   resp.results[0].request.action.action_type #=> String
+    #   resp.results[0].request.action.action_id #=> String
+    #   resp.results[0].request.resource.entity_type #=> String
+    #   resp.results[0].request.resource.entity_id #=> String
+    #   resp.results[0].request.context.context_map #=> Hash
+    #   resp.results[0].request.context.context_map["String"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.results[0].decision #=> String, one of "ALLOW", "DENY"
+    #   resp.results[0].determining_policies #=> Array
+    #   resp.results[0].determining_policies[0].policy_id #=> String
+    #   resp.results[0].errors #=> Array
+    #   resp.results[0].errors[0].error_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchIsAuthorized AWS API Documentation
+    #
+    # @overload batch_is_authorized(params = {})
+    # @param [Hash] params ({})
+    def batch_is_authorized(params = {}, options = {})
+      req = build_request(:batch_is_authorized, params)
+      req.send_request(options)
+    end
+
+    # Makes a series of decisions about multiple authorization requests for
+    # one token. The principal in this request comes from an external
+    # identity source in the form of an identity or access token, formatted
+    # as a [JSON web token (JWT)][1]. The information in the parameters can
+    # also define additional context that Verified Permissions can include
+    # in the evaluations.
+    #
+    # The request is evaluated against all policies in the specified policy
+    # store that match the entities that you provide in the entities
+    # declaration and in the token. The result of the decisions is a series
+    # of `Allow` or `Deny` responses, along with the IDs of the policies
+    # that produced each decision.
+    #
+    # The `entities` of a `BatchIsAuthorizedWithToken` API request can
+    # contain up to 100 resources and up to 99 user groups. The `requests`
+    # of a `BatchIsAuthorizedWithToken` API request can contain up to 30
+    # requests.
+    #
+    # <note markdown="1"> The `BatchIsAuthorizedWithToken` operation doesn't have its own IAM
+    # permission. To authorize this operation for Amazon Web Services
+    # principals, include the permission
+    # `verifiedpermissions:IsAuthorizedWithToken` in their IAM policies.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://wikipedia.org/wiki/JSON_Web_Token
+    #
+    # @option params [required, String] :policy_store_id
+    #   Specifies the ID of the policy store. Policies in this policy store
+    #   will be used to make an authorization decision for the input.
+    #
+    # @option params [String] :identity_token
+    #   Specifies an identity (ID) token for the principal that you want to
+    #   authorize in each request. This token is provided to you by the
+    #   identity provider (IdP) associated with the specified identity source.
+    #   You must specify either an `accessToken`, an `identityToken`, or both.
+    #
+    #   Must be an ID token. Verified Permissions returns an error if the
+    #   `token_use` claim in the submitted token isn't `id`.
+    #
+    # @option params [String] :access_token
+    #   Specifies an access token for the principal that you want to authorize
+    #   in each request. This token is provided to you by the identity
+    #   provider (IdP) associated with the specified identity source. You must
+    #   specify either an `accessToken`, an `identityToken`, or both.
+    #
+    #   Must be an access token. Verified Permissions returns an error if the
+    #   `token_use` claim in the submitted token isn't `access`.
+    #
+    # @option params [Types::EntitiesDefinition] :entities
+    #   Specifies the list of resources and their associated attributes that
+    #   Verified Permissions can examine when evaluating the policies.
+    #
+    #   You can't include principals in this parameter, only resource and
+    #   action entities. This parameter can't include any entities of a type
+    #   that matches the user or group entity types that you defined in your
+    #   identity source.
+    #
+    #    * The `BatchIsAuthorizedWithToken` operation takes principal
+    #     attributes from <b> <i>only</i> </b> the `identityToken` or
+    #     `accessToken` passed to the operation.
+    #
+    #   * For action entities, you can include only their `Identifier` and
+    #     `EntityType`.
+    #
+    # @option params [required, Array<Types::BatchIsAuthorizedWithTokenInputItem>] :requests
+    #   An array of up to 30 requests that you want Verified Permissions to
+    #   evaluate.
+    #
+    # @return [Types::BatchIsAuthorizedWithTokenOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchIsAuthorizedWithTokenOutput#principal #principal} => Types::EntityIdentifier
+    #   * {Types::BatchIsAuthorizedWithTokenOutput#results #results} => Array&lt;Types::BatchIsAuthorizedWithTokenOutputItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_is_authorized_with_token({
+    #     policy_store_id: "PolicyStoreId", # required
+    #     identity_token: "Token",
+    #     access_token: "Token",
+    #     entities: {
+    #       entity_list: [
+    #         {
+    #           identifier: { # required
+    #             entity_type: "EntityType", # required
+    #             entity_id: "EntityId", # required
+    #           },
+    #           attributes: {
+    #             "String" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #           parents: [
+    #             {
+    #               entity_type: "EntityType", # required
+    #               entity_id: "EntityId", # required
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #     },
+    #     requests: [ # required
+    #       {
+    #         action: {
+    #           action_type: "ActionType", # required
+    #           action_id: "ActionId", # required
+    #         },
+    #         resource: {
+    #           entity_type: "EntityType", # required
+    #           entity_id: "EntityId", # required
+    #         },
+    #         context: {
+    #           context_map: {
+    #             "String" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.principal.entity_type #=> String
+    #   resp.principal.entity_id #=> String
+    #   resp.results #=> Array
+    #   resp.results[0].request.action.action_type #=> String
+    #   resp.results[0].request.action.action_id #=> String
+    #   resp.results[0].request.resource.entity_type #=> String
+    #   resp.results[0].request.resource.entity_id #=> String
+    #   resp.results[0].request.context.context_map #=> Hash
+    #   resp.results[0].request.context.context_map["String"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.results[0].decision #=> String, one of "ALLOW", "DENY"
+    #   resp.results[0].determining_policies #=> Array
+    #   resp.results[0].determining_policies[0].policy_id #=> String
+    #   resp.results[0].errors #=> Array
+    #   resp.results[0].errors[0].error_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/BatchIsAuthorizedWithToken AWS API Documentation
+    #
+    # @overload batch_is_authorized_with_token(params = {})
+    # @param [Hash] params ({})
+    def batch_is_authorized_with_token(params = {}, options = {})
+      req = build_request(:batch_is_authorized_with_token, params)
+      req.send_request(options)
+    end
+
+    # Adds an identity source to a policy store–an Amazon Cognito user pool
+    # or OpenID Connect (OIDC) identity provider (IdP).
     #
     # After you create an identity source, you can use the identities
     # provided by the IdP as proxies for the principal in authorization
-    # queries that use the [IsAuthorizedWithToken][1] operation. These
-    # identities take the form of tokens that contain claims about the user,
-    # such as IDs, attributes and group memberships. Amazon Cognito provides
-    # both identity tokens and access tokens, and Verified Permissions can
-    # use either or both. Any combination of identity and access tokens
-    # results in the same Cedar principal. Verified Permissions
-    # automatically translates the information about the identities into the
-    # standard Cedar attributes that can be evaluated by your policies.
-    # Because the Amazon Cognito identity and access tokens can contain
-    # different information, the tokens you choose to use determine which
-    # principal attributes are available to access when evaluating Cedar
-    # policies.
+    # queries that use the [IsAuthorizedWithToken][1] or
+    # [BatchIsAuthorizedWithToken][2] API operations. These identities take
+    # the form of tokens that contain claims about the user, such as IDs,
+    # attributes and group memberships. Identity sources provide identity
+    # (ID) tokens and access tokens. Verified Permissions derives
+    # information about your user and session from token claims. Access
+    # tokens provide action `context` to your policies, and ID tokens
+    # provide principal `Attributes`.
     #
-    # If you delete a Amazon Cognito user pool or user, tokens from that
-    # deleted pool or that deleted user continue to be usable until they
-    # expire.
+    # Tokens from an identity source user continue to be usable until they
+    # expire. Token revocation and resource deletion have no effect on the
+    # validity of a token in your policy store
     #
     # <note markdown="1"> To reference a user from this identity source in your Cedar policies,
-    # use the following syntax.
+    # refer to the following syntax examples.
     #
-    #  *IdentityType::"&lt;CognitoUserPoolIdentifier&gt;\|&lt;CognitoClientId&gt;*
+    #  * Amazon Cognito user pool: `Namespace::[Entity type]::[User pool
+    #   ID]|[user principal attribute]`, for example
+    #   `MyCorp::User::us-east-1_EXAMPLE|a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
     #
-    #  Where `IdentityType` is the string that you provide to the
-    # `PrincipalEntityType` parameter for this operation. The
-    # `CognitoUserPoolId` and `CognitoClientId` are defined by the Amazon
-    # Cognito user pool.
+    # * OpenID Connect (OIDC) provider: `Namespace::[Entity
+    #   type]::[principalIdClaim]|[user principal attribute]`, for example
+    #   `MyCorp::User::MyOIDCProvider|a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
     #
     #  </note>
     #
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
+    # [2]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorizedWithToken.html
     #
     # @option params [String] :client_token
     #   Specifies a unique, case-sensitive ID that you provide to ensure the
@@ -456,8 +745,12 @@ module Aws::VerifiedPermissions
     #   random one for you.
     #
     #   If you retry the operation with the same `ClientToken`, but with
-    #   different parameters, the retry fails with an
-    #   `IdempotentParameterMismatch` error.
+    #   different parameters, the retry fails with an `ConflictException`
+    #   error.
+    #
+    #   Verified Permissions recognizes a `ClientToken` for eight hours. After
+    #   eight hours, the next request with the same parameters performs the
+    #   operation again regardless of the value of `ClientToken`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -475,13 +768,6 @@ module Aws::VerifiedPermissions
     # @option params [required, Types::Configuration] :configuration
     #   Specifies the details required to communicate with the identity
     #   provider (IdP) associated with this identity source.
-    #
-    #   <note markdown="1"> At this time, the only valid member of this structure is a Amazon
-    #   Cognito user pool configuration.
-    #
-    #    You must specify a `UserPoolArn`, and optionally, a `ClientId`.
-    #
-    #    </note>
     #
     # @option params [String] :principal_entity_type
     #   Specifies the namespace and data type of the principals generated for
@@ -503,6 +789,27 @@ module Aws::VerifiedPermissions
     #       cognito_user_pool_configuration: {
     #         user_pool_arn: "UserPoolArn", # required
     #         client_ids: ["ClientId"],
+    #         group_configuration: {
+    #           group_entity_type: "GroupEntityType", # required
+    #         },
+    #       },
+    #       open_id_connect_configuration: {
+    #         issuer: "Issuer", # required
+    #         entity_id_prefix: "EntityIdPrefix",
+    #         group_configuration: {
+    #           group_claim: "Claim", # required
+    #           group_entity_type: "GroupEntityType", # required
+    #         },
+    #         token_selection: { # required
+    #           access_token_only: {
+    #             principal_id_claim: "Claim",
+    #             audiences: ["Audience"],
+    #           },
+    #           identity_token_only: {
+    #             principal_id_claim: "Claim",
+    #             client_ids: ["ClientId"],
+    #           },
+    #         },
     #       },
     #     },
     #     principal_entity_type: "PrincipalEntityType",
@@ -547,8 +854,8 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -564,8 +871,12 @@ module Aws::VerifiedPermissions
     #   random one for you.
     #
     #   If you retry the operation with the same `ClientToken`, but with
-    #   different parameters, the retry fails with an
-    #   `IdempotentParameterMismatch` error.
+    #   different parameters, the retry fails with an `ConflictException`
+    #   error.
+    #
+    #   Verified Permissions recognizes a `ClientToken` for eight hours. After
+    #   eight hours, the next request with the same parameters performs the
+    #   operation again regardless of the value of `ClientToken`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -591,8 +902,10 @@ module Aws::VerifiedPermissions
     #   * {Types::CreatePolicyOutput#policy_type #policy_type} => String
     #   * {Types::CreatePolicyOutput#principal #principal} => Types::EntityIdentifier
     #   * {Types::CreatePolicyOutput#resource #resource} => Types::EntityIdentifier
+    #   * {Types::CreatePolicyOutput#actions #actions} => Array&lt;Types::ActionIdentifier&gt;
     #   * {Types::CreatePolicyOutput#created_date #created_date} => Time
     #   * {Types::CreatePolicyOutput#last_updated_date #last_updated_date} => Time
+    #   * {Types::CreatePolicyOutput#effect #effect} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -627,8 +940,12 @@ module Aws::VerifiedPermissions
     #   resp.principal.entity_id #=> String
     #   resp.resource.entity_type #=> String
     #   resp.resource.entity_id #=> String
+    #   resp.actions #=> Array
+    #   resp.actions[0].action_type #=> String
+    #   resp.actions[0].action_id #=> String
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
+    #   resp.effect #=> String, one of "Permit", "Forbid"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/CreatePolicy AWS API Documentation
     #
@@ -650,14 +967,14 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://docs.cedarpolicy.com/schema.html#namespace
+    # [1]: https://docs.cedarpolicy.com/schema/schema.html#namespace
     #
     # @option params [String] :client_token
     #   Specifies a unique, case-sensitive ID that you provide to ensure the
@@ -671,8 +988,12 @@ module Aws::VerifiedPermissions
     #   random one for you.
     #
     #   If you retry the operation with the same `ClientToken`, but with
-    #   different parameters, the retry fails with an
-    #   `IdempotentParameterMismatch` error.
+    #   different parameters, the retry fails with an `ConflictException`
+    #   error.
+    #
+    #   Verified Permissions recognizes a `ClientToken` for eight hours. After
+    #   eight hours, the next request with the same parameters performs the
+    #   operation again regardless of the value of `ClientToken`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -697,6 +1018,10 @@ module Aws::VerifiedPermissions
     #
     #   [1]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyStore
     #
+    # @option params [String] :description
+    #   Descriptive text that you can provide to help with identification of
+    #   the current policy store.
+    #
     # @return [Types::CreatePolicyStoreOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePolicyStoreOutput#policy_store_id #policy_store_id} => String
@@ -711,6 +1036,7 @@ module Aws::VerifiedPermissions
     #     validation_settings: { # required
     #       mode: "OFF", # required, accepts OFF, STRICT
     #     },
+    #     description: "PolicyStoreDescription",
     #   })
     #
     # @example Response structure
@@ -741,8 +1067,8 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -758,8 +1084,12 @@ module Aws::VerifiedPermissions
     #   random one for you.
     #
     #   If you retry the operation with the same `ClientToken`, but with
-    #   different parameters, the retry fails with an
-    #   `IdempotentParameterMismatch` error.
+    #   different parameters, the retry fails with an `ConflictException`
+    #   error.
+    #
+    #   Verified Permissions recognizes a `ClientToken` for eight hours. After
+    #   eight hours, the next request with the same parameters performs the
+    #   operation again regardless of the value of `ClientToken`.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -951,6 +1281,7 @@ module Aws::VerifiedPermissions
     #   * {Types::GetIdentitySourceOutput#last_updated_date #last_updated_date} => Time
     #   * {Types::GetIdentitySourceOutput#policy_store_id #policy_store_id} => String
     #   * {Types::GetIdentitySourceOutput#principal_entity_type #principal_entity_type} => String
+    #   * {Types::GetIdentitySourceOutput#configuration #configuration} => Types::ConfigurationDetail
     #
     # @example Request syntax with placeholder values
     #
@@ -971,6 +1302,21 @@ module Aws::VerifiedPermissions
     #   resp.last_updated_date #=> Time
     #   resp.policy_store_id #=> String
     #   resp.principal_entity_type #=> String
+    #   resp.configuration.cognito_user_pool_configuration.user_pool_arn #=> String
+    #   resp.configuration.cognito_user_pool_configuration.client_ids #=> Array
+    #   resp.configuration.cognito_user_pool_configuration.client_ids[0] #=> String
+    #   resp.configuration.cognito_user_pool_configuration.issuer #=> String
+    #   resp.configuration.cognito_user_pool_configuration.group_configuration.group_entity_type #=> String
+    #   resp.configuration.open_id_connect_configuration.issuer #=> String
+    #   resp.configuration.open_id_connect_configuration.entity_id_prefix #=> String
+    #   resp.configuration.open_id_connect_configuration.group_configuration.group_claim #=> String
+    #   resp.configuration.open_id_connect_configuration.group_configuration.group_entity_type #=> String
+    #   resp.configuration.open_id_connect_configuration.token_selection.access_token_only.principal_id_claim #=> String
+    #   resp.configuration.open_id_connect_configuration.token_selection.access_token_only.audiences #=> Array
+    #   resp.configuration.open_id_connect_configuration.token_selection.access_token_only.audiences[0] #=> String
+    #   resp.configuration.open_id_connect_configuration.token_selection.identity_token_only.principal_id_claim #=> String
+    #   resp.configuration.open_id_connect_configuration.token_selection.identity_token_only.client_ids #=> Array
+    #   resp.configuration.open_id_connect_configuration.token_selection.identity_token_only.client_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetIdentitySource AWS API Documentation
     #
@@ -997,9 +1343,11 @@ module Aws::VerifiedPermissions
     #   * {Types::GetPolicyOutput#policy_type #policy_type} => String
     #   * {Types::GetPolicyOutput#principal #principal} => Types::EntityIdentifier
     #   * {Types::GetPolicyOutput#resource #resource} => Types::EntityIdentifier
+    #   * {Types::GetPolicyOutput#actions #actions} => Array&lt;Types::ActionIdentifier&gt;
     #   * {Types::GetPolicyOutput#definition #definition} => Types::PolicyDefinitionDetail
     #   * {Types::GetPolicyOutput#created_date #created_date} => Time
     #   * {Types::GetPolicyOutput#last_updated_date #last_updated_date} => Time
+    #   * {Types::GetPolicyOutput#effect #effect} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1017,6 +1365,9 @@ module Aws::VerifiedPermissions
     #   resp.principal.entity_id #=> String
     #   resp.resource.entity_type #=> String
     #   resp.resource.entity_id #=> String
+    #   resp.actions #=> Array
+    #   resp.actions[0].action_type #=> String
+    #   resp.actions[0].action_id #=> String
     #   resp.definition.static.description #=> String
     #   resp.definition.static.statement #=> String
     #   resp.definition.template_linked.policy_template_id #=> String
@@ -1026,6 +1377,7 @@ module Aws::VerifiedPermissions
     #   resp.definition.template_linked.resource.entity_id #=> String
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
+    #   resp.effect #=> String, one of "Permit", "Forbid"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicy AWS API Documentation
     #
@@ -1048,6 +1400,7 @@ module Aws::VerifiedPermissions
     #   * {Types::GetPolicyStoreOutput#validation_settings #validation_settings} => Types::ValidationSettings
     #   * {Types::GetPolicyStoreOutput#created_date #created_date} => Time
     #   * {Types::GetPolicyStoreOutput#last_updated_date #last_updated_date} => Time
+    #   * {Types::GetPolicyStoreOutput#description #description} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1062,6 +1415,7 @@ module Aws::VerifiedPermissions
     #   resp.validation_settings.mode #=> String, one of "OFF", "STRICT"
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
+    #   resp.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetPolicyStore AWS API Documentation
     #
@@ -1129,6 +1483,7 @@ module Aws::VerifiedPermissions
     #   * {Types::GetSchemaOutput#schema #schema} => String
     #   * {Types::GetSchemaOutput#created_date #created_date} => Time
     #   * {Types::GetSchemaOutput#last_updated_date #last_updated_date} => Time
+    #   * {Types::GetSchemaOutput#namespaces #namespaces} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1142,6 +1497,8 @@ module Aws::VerifiedPermissions
     #   resp.schema #=> String
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
+    #   resp.namespaces #=> Array
+    #   resp.namespaces[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/GetSchema AWS API Documentation
     #
@@ -1266,23 +1623,15 @@ module Aws::VerifiedPermissions
     # `Allow` or `Deny`, along with a list of the policies that resulted in
     # the decision.
     #
-    # If you specify the `identityToken` parameter, then this operation
-    # derives the principal from that token. You must not also include that
-    # principal in the `entities` parameter or the operation fails and
-    # reports a conflict between the two entity sources.
-    #
-    #  If you provide only an `accessToken`, then you can include the entity
-    # as part of the `entities` parameter to provide additional attributes.
-    #
     # At this time, Verified Permissions accepts tokens from only Amazon
     # Cognito.
     #
     # Verified Permissions validates each token that is specified in a
     # request by checking its expiration date and its signature.
     #
-    # If you delete a Amazon Cognito user pool or user, tokens from that
-    # deleted pool or that deleted user continue to be usable until they
-    # expire.
+    # Tokens from an identity source user continue to be usable until they
+    # expire. Token revocation and resource deletion have no effect on the
+    # validity of a token in your policy store
     #
     #
     #
@@ -1296,13 +1645,19 @@ module Aws::VerifiedPermissions
     #   Specifies an identity token for the principal to be authorized. This
     #   token is provided to you by the identity provider (IdP) associated
     #   with the specified identity source. You must specify either an
-    #   `AccessToken` or an `IdentityToken`, or both.
+    #   `accessToken`, an `identityToken`, or both.
+    #
+    #   Must be an ID token. Verified Permissions returns an error if the
+    #   `token_use` claim in the submitted token isn't `id`.
     #
     # @option params [String] :access_token
     #   Specifies an access token for the principal to be authorized. This
     #   token is provided to you by the identity provider (IdP) associated
     #   with the specified identity source. You must specify either an
-    #   `AccessToken`, or an `IdentityToken`, or both.
+    #   `accessToken`, an `identityToken`, or both.
+    #
+    #   Must be an access token. Verified Permissions returns an error if the
+    #   `token_use` claim in the submitted token isn't `access`.
     #
     # @option params [Types::ActionIdentifier] :action
     #   Specifies the requested action to be authorized. Is the specified
@@ -1321,8 +1676,10 @@ module Aws::VerifiedPermissions
     #   Specifies the list of resources and their associated attributes that
     #   Verified Permissions can examine when evaluating the policies.
     #
-    #   <note markdown="1"> You can include only resource and action entities in this parameter;
-    #   you can't include principals.
+    #   You can't include principals in this parameter, only resource and
+    #   action entities. This parameter can't include any entities of a type
+    #   that matches the user or group entity types that you defined in your
+    #   identity source.
     #
     #    * The `IsAuthorizedWithToken` operation takes principal attributes
     #     from <b> <i>only</i> </b> the `identityToken` or `accessToken`
@@ -1331,13 +1688,12 @@ module Aws::VerifiedPermissions
     #   * For action entities, you can include only their `Identifier` and
     #     `EntityType`.
     #
-    #    </note>
-    #
     # @return [Types::IsAuthorizedWithTokenOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::IsAuthorizedWithTokenOutput#decision #decision} => String
     #   * {Types::IsAuthorizedWithTokenOutput#determining_policies #determining_policies} => Array&lt;Types::DeterminingPolicyItem&gt;
     #   * {Types::IsAuthorizedWithTokenOutput#errors #errors} => Array&lt;Types::EvaluationErrorItem&gt;
+    #   * {Types::IsAuthorizedWithTokenOutput#principal #principal} => Types::EntityIdentifier
     #
     # @example Request syntax with placeholder values
     #
@@ -1386,6 +1742,8 @@ module Aws::VerifiedPermissions
     #   resp.determining_policies[0].policy_id #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].error_description #=> String
+    #   resp.principal.entity_type #=> String
+    #   resp.principal.entity_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/IsAuthorizedWithToken AWS API Documentation
     #
@@ -1421,7 +1779,7 @@ module Aws::VerifiedPermissions
     #   every operation to ensure that you receive all of the results.
     #
     #   If you do not specify this parameter, the operation defaults to 10
-    #   identity sources per response. You can specify a maximum of 200
+    #   identity sources per response. You can specify a maximum of 50
     #   identity sources per response.
     #
     # @option params [Array<Types::IdentitySourceFilter>] :filters
@@ -1462,6 +1820,21 @@ module Aws::VerifiedPermissions
     #   resp.identity_sources[0].last_updated_date #=> Time
     #   resp.identity_sources[0].policy_store_id #=> String
     #   resp.identity_sources[0].principal_entity_type #=> String
+    #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.user_pool_arn #=> String
+    #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.client_ids #=> Array
+    #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.client_ids[0] #=> String
+    #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.issuer #=> String
+    #   resp.identity_sources[0].configuration.cognito_user_pool_configuration.group_configuration.group_entity_type #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.issuer #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.entity_id_prefix #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.group_configuration.group_claim #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.group_configuration.group_entity_type #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.token_selection.access_token_only.principal_id_claim #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.token_selection.access_token_only.audiences #=> Array
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.token_selection.access_token_only.audiences[0] #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.token_selection.identity_token_only.principal_id_claim #=> String
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.token_selection.identity_token_only.client_ids #=> Array
+    #   resp.identity_sources[0].configuration.open_id_connect_configuration.token_selection.identity_token_only.client_ids[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListIdentitySources AWS API Documentation
     #
@@ -1548,6 +1921,9 @@ module Aws::VerifiedPermissions
     #   resp.policies[0].principal.entity_id #=> String
     #   resp.policies[0].resource.entity_type #=> String
     #   resp.policies[0].resource.entity_id #=> String
+    #   resp.policies[0].actions #=> Array
+    #   resp.policies[0].actions[0].action_type #=> String
+    #   resp.policies[0].actions[0].action_id #=> String
     #   resp.policies[0].definition.static.description #=> String
     #   resp.policies[0].definition.template_linked.policy_template_id #=> String
     #   resp.policies[0].definition.template_linked.principal.entity_type #=> String
@@ -1556,6 +1932,7 @@ module Aws::VerifiedPermissions
     #   resp.policies[0].definition.template_linked.resource.entity_id #=> String
     #   resp.policies[0].created_date #=> Time
     #   resp.policies[0].last_updated_date #=> Time
+    #   resp.policies[0].effect #=> String, one of "Permit", "Forbid"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListPolicies AWS API Documentation
     #
@@ -1611,6 +1988,8 @@ module Aws::VerifiedPermissions
     #   resp.policy_stores[0].policy_store_id #=> String
     #   resp.policy_stores[0].arn #=> String
     #   resp.policy_stores[0].created_date #=> Time
+    #   resp.policy_stores[0].last_updated_date #=> Time
+    #   resp.policy_stores[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/ListPolicyStores AWS API Documentation
     #
@@ -1694,8 +2073,8 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -1740,14 +2119,14 @@ module Aws::VerifiedPermissions
     end
 
     # Updates the specified identity source to use a new identity provider
-    # (IdP) source, or to change the mapping of identities from the IdP to a
+    # (IdP), or to change the mapping of identities from the IdP to a
     # different principal entity type.
     #
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -1789,6 +2168,27 @@ module Aws::VerifiedPermissions
     #       cognito_user_pool_configuration: {
     #         user_pool_arn: "UserPoolArn", # required
     #         client_ids: ["ClientId"],
+    #         group_configuration: {
+    #           group_entity_type: "GroupEntityType", # required
+    #         },
+    #       },
+    #       open_id_connect_configuration: {
+    #         issuer: "Issuer", # required
+    #         entity_id_prefix: "EntityIdPrefix",
+    #         group_configuration: {
+    #           group_claim: "Claim", # required
+    #           group_entity_type: "GroupEntityType", # required
+    #         },
+    #         token_selection: { # required
+    #           access_token_only: {
+    #             principal_id_claim: "Claim",
+    #             audiences: ["Audience"],
+    #           },
+    #           identity_token_only: {
+    #             principal_id_claim: "Claim",
+    #             client_ids: ["ClientId"],
+    #           },
+    #         },
     #       },
     #     },
     #     principal_entity_type: "PrincipalEntityType",
@@ -1822,7 +2222,7 @@ module Aws::VerifiedPermissions
     #   doesn't pass validation, the operation fails and the update isn't
     #   stored.
     #
-    # * When you edit a static policy, You can change only certain elements
+    # * When you edit a static policy, you can change only certain elements
     #   of a static policy:
     #
     #   * The action referenced by the policy.
@@ -1848,8 +2248,8 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -1898,8 +2298,10 @@ module Aws::VerifiedPermissions
     #   * {Types::UpdatePolicyOutput#policy_type #policy_type} => String
     #   * {Types::UpdatePolicyOutput#principal #principal} => Types::EntityIdentifier
     #   * {Types::UpdatePolicyOutput#resource #resource} => Types::EntityIdentifier
+    #   * {Types::UpdatePolicyOutput#actions #actions} => Array&lt;Types::ActionIdentifier&gt;
     #   * {Types::UpdatePolicyOutput#created_date #created_date} => Time
     #   * {Types::UpdatePolicyOutput#last_updated_date #last_updated_date} => Time
+    #   * {Types::UpdatePolicyOutput#effect #effect} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1923,8 +2325,12 @@ module Aws::VerifiedPermissions
     #   resp.principal.entity_id #=> String
     #   resp.resource.entity_type #=> String
     #   resp.resource.entity_id #=> String
+    #   resp.actions #=> Array
+    #   resp.actions[0].action_type #=> String
+    #   resp.actions[0].action_id #=> String
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
+    #   resp.effect #=> String, one of "Permit", "Forbid"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/verifiedpermissions-2021-12-01/UpdatePolicy AWS API Documentation
     #
@@ -1940,8 +2346,8 @@ module Aws::VerifiedPermissions
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -1951,6 +2357,10 @@ module Aws::VerifiedPermissions
     # @option params [required, Types::ValidationSettings] :validation_settings
     #   A structure that defines the validation settings that want to enable
     #   for the policy store.
+    #
+    # @option params [String] :description
+    #   Descriptive text that you can provide to help with identification of
+    #   the current policy store.
     #
     # @return [Types::UpdatePolicyStoreOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1966,6 +2376,7 @@ module Aws::VerifiedPermissions
     #     validation_settings: { # required
     #       mode: "OFF", # required, accepts OFF, STRICT
     #     },
+    #     description: "PolicyStoreDescription",
     #   })
     #
     # @example Response structure
@@ -1988,14 +2399,15 @@ module Aws::VerifiedPermissions
     # description and the some elements of the [policyBody][1].
     #
     # Changes you make to the policy template content are immediately
-    # reflected in authorization decisions that involve all template-linked
-    # policies instantiated from this template.
+    # (within the constraints of eventual consistency) reflected in
+    # authorization decisions that involve all template-linked policies
+    # instantiated from this template.
     #
     # <note markdown="1"> Verified Permissions is <i> <a
     # href="https://wikipedia.org/wiki/Eventual_consistency">eventually
     # consistent</a> </i>. It can take a few seconds for a new or changed
-    # element to be propagate through the service and be visible in the
-    # results of other Verified Permissions operations.
+    # element to propagate through the service and be visible in the results
+    # of other Verified Permissions operations.
     #
     #  </note>
     #
@@ -2076,7 +2488,7 @@ module Aws::VerifiedPermissions
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-verifiedpermissions'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

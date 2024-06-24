@@ -1,0 +1,911 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module NimbleStudio
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AcceptEulasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AcceptEulasResponse]
+        def eula_acceptances: () -> ::Array[Types::EulaAcceptance]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#accept_eulas-instance_method
+      def accept_eulas: (
+                          ?client_token: ::String,
+                          ?eula_ids: Array[::String],
+                          studio_id: ::String
+                        ) -> _AcceptEulasResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptEulasResponseSuccess
+
+      interface _CreateLaunchProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLaunchProfileResponse]
+        def launch_profile: () -> Types::LaunchProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#create_launch_profile-instance_method
+      def create_launch_profile: (
+                                   ?client_token: ::String,
+                                   ?description: ::String,
+                                   ec2_subnet_ids: Array[::String],
+                                   launch_profile_protocol_versions: Array[::String],
+                                   name: ::String,
+                                   stream_configuration: {
+                                     automatic_termination_mode: ("DEACTIVATED" | "ACTIVATED")?,
+                                     clipboard_mode: ("ENABLED" | "DISABLED"),
+                                     ec2_instance_types: Array[("g4dn.xlarge" | "g4dn.2xlarge" | "g4dn.4xlarge" | "g4dn.8xlarge" | "g4dn.12xlarge" | "g4dn.16xlarge" | "g3.4xlarge" | "g3s.xlarge" | "g5.xlarge" | "g5.2xlarge" | "g5.4xlarge" | "g5.8xlarge" | "g5.16xlarge")],
+                                     max_session_length_in_minutes: ::Integer?,
+                                     max_stopped_session_length_in_minutes: ::Integer?,
+                                     session_backup: {
+                                       max_backups_to_retain: ::Integer?,
+                                       mode: ("AUTOMATIC" | "DEACTIVATED")?
+                                     }?,
+                                     session_persistence_mode: ("DEACTIVATED" | "ACTIVATED")?,
+                                     session_storage: {
+                                       mode: Array[("UPLOAD")],
+                                       root: {
+                                         linux: ::String?,
+                                         windows: ::String?
+                                       }?
+                                     }?,
+                                     streaming_image_ids: Array[::String],
+                                     volume_configuration: {
+                                       iops: ::Integer?,
+                                       size: ::Integer?,
+                                       throughput: ::Integer?
+                                     }?
+                                   },
+                                   studio_component_ids: Array[::String],
+                                   studio_id: ::String,
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreateLaunchProfileResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLaunchProfileResponseSuccess
+
+      interface _CreateStreamingImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStreamingImageResponse]
+        def streaming_image: () -> Types::StreamingImage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#create_streaming_image-instance_method
+      def create_streaming_image: (
+                                    ?client_token: ::String,
+                                    ?description: ::String,
+                                    ec2_image_id: ::String,
+                                    name: ::String,
+                                    studio_id: ::String,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreateStreamingImageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamingImageResponseSuccess
+
+      interface _CreateStreamingSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStreamingSessionResponse]
+        def session: () -> Types::StreamingSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#create_streaming_session-instance_method
+      def create_streaming_session: (
+                                      ?client_token: ::String,
+                                      ?ec2_instance_type: ("g4dn.xlarge" | "g4dn.2xlarge" | "g4dn.4xlarge" | "g4dn.8xlarge" | "g4dn.12xlarge" | "g4dn.16xlarge" | "g3.4xlarge" | "g3s.xlarge" | "g5.xlarge" | "g5.2xlarge" | "g5.4xlarge" | "g5.8xlarge" | "g5.16xlarge"),
+                                      launch_profile_id: ::String,
+                                      ?owned_by: ::String,
+                                      ?streaming_image_id: ::String,
+                                      studio_id: ::String,
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _CreateStreamingSessionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamingSessionResponseSuccess
+
+      interface _CreateStreamingSessionStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStreamingSessionStreamResponse]
+        def stream: () -> Types::StreamingSessionStream
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#create_streaming_session_stream-instance_method
+      def create_streaming_session_stream: (
+                                             ?client_token: ::String,
+                                             ?expiration_in_seconds: ::Integer,
+                                             session_id: ::String,
+                                             studio_id: ::String
+                                           ) -> _CreateStreamingSessionStreamResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamingSessionStreamResponseSuccess
+
+      interface _CreateStudioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStudioResponse]
+        def studio: () -> Types::Studio
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#create_studio-instance_method
+      def create_studio: (
+                           admin_role_arn: ::String,
+                           ?client_token: ::String,
+                           display_name: ::String,
+                           ?studio_encryption_configuration: {
+                             key_arn: ::String?,
+                             key_type: ("AWS_OWNED_KEY" | "CUSTOMER_MANAGED_KEY")
+                           },
+                           studio_name: ::String,
+                           ?tags: Hash[::String, ::String],
+                           user_role_arn: ::String
+                         ) -> _CreateStudioResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStudioResponseSuccess
+
+      interface _CreateStudioComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStudioComponentResponse]
+        def studio_component: () -> Types::StudioComponent
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#create_studio_component-instance_method
+      def create_studio_component: (
+                                     ?client_token: ::String,
+                                     ?configuration: {
+                                       active_directory_configuration: {
+                                         computer_attributes: Array[
+                                           {
+                                             name: ::String?,
+                                             value: ::String?
+                                           },
+                                         ]?,
+                                         directory_id: ::String?,
+                                         organizational_unit_distinguished_name: ::String?
+                                       }?,
+                                       compute_farm_configuration: {
+                                         active_directory_user: ::String?,
+                                         endpoint: ::String?
+                                       }?,
+                                       license_service_configuration: {
+                                         endpoint: ::String?
+                                       }?,
+                                       shared_file_system_configuration: {
+                                         endpoint: ::String?,
+                                         file_system_id: ::String?,
+                                         linux_mount_point: ::String?,
+                                         share_name: ::String?,
+                                         windows_mount_drive: ::String?
+                                       }?
+                                     },
+                                     ?description: ::String,
+                                     ?ec2_security_group_ids: Array[::String],
+                                     ?initialization_scripts: Array[
+                                       {
+                                         launch_profile_protocol_version: ::String?,
+                                         platform: ("LINUX" | "WINDOWS")?,
+                                         run_context: ("SYSTEM_INITIALIZATION" | "USER_INITIALIZATION")?,
+                                         script: ::String?
+                                       },
+                                     ],
+                                     name: ::String,
+                                     ?runtime_role_arn: ::String,
+                                     ?script_parameters: Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?
+                                       },
+                                     ],
+                                     ?secure_initialization_role_arn: ::String,
+                                     studio_id: ::String,
+                                     ?subtype: ("AWS_MANAGED_MICROSOFT_AD" | "AMAZON_FSX_FOR_WINDOWS" | "AMAZON_FSX_FOR_LUSTRE" | "CUSTOM"),
+                                     ?tags: Hash[::String, ::String],
+                                     type: ("ACTIVE_DIRECTORY" | "SHARED_FILE_SYSTEM" | "COMPUTE_FARM" | "LICENSE_SERVICE" | "CUSTOM")
+                                   ) -> _CreateStudioComponentResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStudioComponentResponseSuccess
+
+      interface _DeleteLaunchProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLaunchProfileResponse]
+        def launch_profile: () -> Types::LaunchProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#delete_launch_profile-instance_method
+      def delete_launch_profile: (
+                                   ?client_token: ::String,
+                                   launch_profile_id: ::String,
+                                   studio_id: ::String
+                                 ) -> _DeleteLaunchProfileResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLaunchProfileResponseSuccess
+
+      interface _DeleteLaunchProfileMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLaunchProfileMemberResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#delete_launch_profile_member-instance_method
+      def delete_launch_profile_member: (
+                                          ?client_token: ::String,
+                                          launch_profile_id: ::String,
+                                          principal_id: ::String,
+                                          studio_id: ::String
+                                        ) -> _DeleteLaunchProfileMemberResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLaunchProfileMemberResponseSuccess
+
+      interface _DeleteStreamingImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStreamingImageResponse]
+        def streaming_image: () -> Types::StreamingImage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#delete_streaming_image-instance_method
+      def delete_streaming_image: (
+                                    ?client_token: ::String,
+                                    streaming_image_id: ::String,
+                                    studio_id: ::String
+                                  ) -> _DeleteStreamingImageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStreamingImageResponseSuccess
+
+      interface _DeleteStreamingSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStreamingSessionResponse]
+        def session: () -> Types::StreamingSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#delete_streaming_session-instance_method
+      def delete_streaming_session: (
+                                      ?client_token: ::String,
+                                      session_id: ::String,
+                                      studio_id: ::String
+                                    ) -> _DeleteStreamingSessionResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStreamingSessionResponseSuccess
+
+      interface _DeleteStudioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStudioResponse]
+        def studio: () -> Types::Studio
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#delete_studio-instance_method
+      def delete_studio: (
+                           ?client_token: ::String,
+                           studio_id: ::String
+                         ) -> _DeleteStudioResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStudioResponseSuccess
+
+      interface _DeleteStudioComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStudioComponentResponse]
+        def studio_component: () -> Types::StudioComponent
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#delete_studio_component-instance_method
+      def delete_studio_component: (
+                                     ?client_token: ::String,
+                                     studio_component_id: ::String,
+                                     studio_id: ::String
+                                   ) -> _DeleteStudioComponentResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStudioComponentResponseSuccess
+
+      interface _DeleteStudioMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStudioMemberResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#delete_studio_member-instance_method
+      def delete_studio_member: (
+                                  ?client_token: ::String,
+                                  principal_id: ::String,
+                                  studio_id: ::String
+                                ) -> _DeleteStudioMemberResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStudioMemberResponseSuccess
+
+      interface _GetEulaResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEulaResponse]
+        def eula: () -> Types::Eula
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#get_eula-instance_method
+      def get_eula: (
+                      eula_id: ::String
+                    ) -> _GetEulaResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEulaResponseSuccess
+
+      interface _GetLaunchProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLaunchProfileResponse]
+        def launch_profile: () -> Types::LaunchProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#get_launch_profile-instance_method
+      def get_launch_profile: (
+                                launch_profile_id: ::String,
+                                studio_id: ::String
+                              ) -> _GetLaunchProfileResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLaunchProfileResponseSuccess
+
+      interface _GetLaunchProfileDetailsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLaunchProfileDetailsResponse]
+        def launch_profile: () -> Types::LaunchProfile
+        def streaming_images: () -> ::Array[Types::StreamingImage]
+        def studio_component_summaries: () -> ::Array[Types::StudioComponentSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#get_launch_profile_details-instance_method
+      def get_launch_profile_details: (
+                                        launch_profile_id: ::String,
+                                        studio_id: ::String
+                                      ) -> _GetLaunchProfileDetailsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLaunchProfileDetailsResponseSuccess
+
+      interface _GetLaunchProfileInitializationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLaunchProfileInitializationResponse]
+        def launch_profile_initialization: () -> Types::LaunchProfileInitialization
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#get_launch_profile_initialization-instance_method
+      def get_launch_profile_initialization: (
+                                               launch_profile_id: ::String,
+                                               launch_profile_protocol_versions: Array[::String],
+                                               launch_purpose: ::String,
+                                               platform: ::String,
+                                               studio_id: ::String
+                                             ) -> _GetLaunchProfileInitializationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLaunchProfileInitializationResponseSuccess
+
+      interface _GetLaunchProfileMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLaunchProfileMemberResponse]
+        def member: () -> Types::LaunchProfileMembership
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#get_launch_profile_member-instance_method
+      def get_launch_profile_member: (
+                                       launch_profile_id: ::String,
+                                       principal_id: ::String,
+                                       studio_id: ::String
+                                     ) -> _GetLaunchProfileMemberResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLaunchProfileMemberResponseSuccess
+
+      interface _GetStreamingImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStreamingImageResponse]
+        def streaming_image: () -> Types::StreamingImage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#get_streaming_image-instance_method
+      def get_streaming_image: (
+                                 streaming_image_id: ::String,
+                                 studio_id: ::String
+                               ) -> _GetStreamingImageResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamingImageResponseSuccess
+
+      interface _GetStreamingSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStreamingSessionResponse]
+        def session: () -> Types::StreamingSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#get_streaming_session-instance_method
+      def get_streaming_session: (
+                                   session_id: ::String,
+                                   studio_id: ::String
+                                 ) -> _GetStreamingSessionResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamingSessionResponseSuccess
+
+      interface _GetStreamingSessionBackupResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStreamingSessionBackupResponse]
+        def streaming_session_backup: () -> Types::StreamingSessionBackup
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#get_streaming_session_backup-instance_method
+      def get_streaming_session_backup: (
+                                          backup_id: ::String,
+                                          studio_id: ::String
+                                        ) -> _GetStreamingSessionBackupResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamingSessionBackupResponseSuccess
+
+      interface _GetStreamingSessionStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStreamingSessionStreamResponse]
+        def stream: () -> Types::StreamingSessionStream
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#get_streaming_session_stream-instance_method
+      def get_streaming_session_stream: (
+                                          session_id: ::String,
+                                          stream_id: ::String,
+                                          studio_id: ::String
+                                        ) -> _GetStreamingSessionStreamResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamingSessionStreamResponseSuccess
+
+      interface _GetStudioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStudioResponse]
+        def studio: () -> Types::Studio
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#get_studio-instance_method
+      def get_studio: (
+                        studio_id: ::String
+                      ) -> _GetStudioResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStudioResponseSuccess
+
+      interface _GetStudioComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStudioComponentResponse]
+        def studio_component: () -> Types::StudioComponent
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#get_studio_component-instance_method
+      def get_studio_component: (
+                                  studio_component_id: ::String,
+                                  studio_id: ::String
+                                ) -> _GetStudioComponentResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStudioComponentResponseSuccess
+
+      interface _GetStudioMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStudioMemberResponse]
+        def member: () -> Types::StudioMembership
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#get_studio_member-instance_method
+      def get_studio_member: (
+                               principal_id: ::String,
+                               studio_id: ::String
+                             ) -> _GetStudioMemberResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStudioMemberResponseSuccess
+
+      interface _ListEulaAcceptancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEulaAcceptancesResponse]
+        def eula_acceptances: () -> ::Array[Types::EulaAcceptance]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#list_eula_acceptances-instance_method
+      def list_eula_acceptances: (
+                                   ?eula_ids: Array[::String],
+                                   ?next_token: ::String,
+                                   studio_id: ::String
+                                 ) -> _ListEulaAcceptancesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEulaAcceptancesResponseSuccess
+
+      interface _ListEulasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEulasResponse]
+        def eulas: () -> ::Array[Types::Eula]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#list_eulas-instance_method
+      def list_eulas: (
+                        ?eula_ids: Array[::String],
+                        ?next_token: ::String
+                      ) -> _ListEulasResponseSuccess
+                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEulasResponseSuccess
+
+      interface _ListLaunchProfileMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLaunchProfileMembersResponse]
+        def members: () -> ::Array[Types::LaunchProfileMembership]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#list_launch_profile_members-instance_method
+      def list_launch_profile_members: (
+                                         launch_profile_id: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String,
+                                         studio_id: ::String
+                                       ) -> _ListLaunchProfileMembersResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLaunchProfileMembersResponseSuccess
+
+      interface _ListLaunchProfilesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLaunchProfilesResponse]
+        def launch_profiles: () -> ::Array[Types::LaunchProfile]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#list_launch_profiles-instance_method
+      def list_launch_profiles: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String,
+                                  ?principal_id: ::String,
+                                  ?states: Array[("CREATE_IN_PROGRESS" | "READY" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "DELETED" | "DELETE_FAILED" | "CREATE_FAILED" | "UPDATE_FAILED")],
+                                  studio_id: ::String
+                                ) -> _ListLaunchProfilesResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLaunchProfilesResponseSuccess
+
+      interface _ListStreamingImagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamingImagesResponse]
+        def next_token: () -> ::String
+        def streaming_images: () -> ::Array[Types::StreamingImage]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#list_streaming_images-instance_method
+      def list_streaming_images: (
+                                   ?next_token: ::String,
+                                   ?owner: ::String,
+                                   studio_id: ::String
+                                 ) -> _ListStreamingImagesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamingImagesResponseSuccess
+
+      interface _ListStreamingSessionBackupsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamingSessionBackupsResponse]
+        def next_token: () -> ::String
+        def streaming_session_backups: () -> ::Array[Types::StreamingSessionBackup]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#list_streaming_session_backups-instance_method
+      def list_streaming_session_backups: (
+                                            ?next_token: ::String,
+                                            ?owned_by: ::String,
+                                            studio_id: ::String
+                                          ) -> _ListStreamingSessionBackupsResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamingSessionBackupsResponseSuccess
+
+      interface _ListStreamingSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamingSessionsResponse]
+        def next_token: () -> ::String
+        def sessions: () -> ::Array[Types::StreamingSession]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#list_streaming_sessions-instance_method
+      def list_streaming_sessions: (
+                                     ?created_by: ::String,
+                                     ?next_token: ::String,
+                                     ?owned_by: ::String,
+                                     ?session_ids: ::String,
+                                     studio_id: ::String
+                                   ) -> _ListStreamingSessionsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamingSessionsResponseSuccess
+
+      interface _ListStudioComponentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStudioComponentsResponse]
+        def next_token: () -> ::String
+        def studio_components: () -> ::Array[Types::StudioComponent]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#list_studio_components-instance_method
+      def list_studio_components: (
+                                    ?max_results: ::Integer,
+                                    ?next_token: ::String,
+                                    ?states: Array[("CREATE_IN_PROGRESS" | "READY" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "DELETED" | "DELETE_FAILED" | "CREATE_FAILED" | "UPDATE_FAILED")],
+                                    studio_id: ::String,
+                                    ?types: Array[("ACTIVE_DIRECTORY" | "SHARED_FILE_SYSTEM" | "COMPUTE_FARM" | "LICENSE_SERVICE" | "CUSTOM")]
+                                  ) -> _ListStudioComponentsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStudioComponentsResponseSuccess
+
+      interface _ListStudioMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStudioMembersResponse]
+        def members: () -> ::Array[Types::StudioMembership]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#list_studio_members-instance_method
+      def list_studio_members: (
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 studio_id: ::String
+                               ) -> _ListStudioMembersResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStudioMembersResponseSuccess
+
+      interface _ListStudiosResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStudiosResponse]
+        def next_token: () -> ::String
+        def studios: () -> ::Array[Types::Studio]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#list_studios-instance_method
+      def list_studios: (
+                          ?next_token: ::String
+                        ) -> _ListStudiosResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStudiosResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _PutLaunchProfileMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutLaunchProfileMembersResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#put_launch_profile_members-instance_method
+      def put_launch_profile_members: (
+                                        ?client_token: ::String,
+                                        identity_store_id: ::String,
+                                        launch_profile_id: ::String,
+                                        members: Array[
+                                          {
+                                            persona: ("USER"),
+                                            principal_id: ::String
+                                          },
+                                        ],
+                                        studio_id: ::String
+                                      ) -> _PutLaunchProfileMembersResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLaunchProfileMembersResponseSuccess
+
+      interface _PutStudioMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutStudioMembersResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#put_studio_members-instance_method
+      def put_studio_members: (
+                                ?client_token: ::String,
+                                identity_store_id: ::String,
+                                members: Array[
+                                  {
+                                    persona: ("ADMINISTRATOR"),
+                                    principal_id: ::String
+                                  },
+                                ],
+                                studio_id: ::String
+                              ) -> _PutStudioMembersResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutStudioMembersResponseSuccess
+
+      interface _StartStreamingSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartStreamingSessionResponse]
+        def session: () -> Types::StreamingSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#start_streaming_session-instance_method
+      def start_streaming_session: (
+                                     ?backup_id: ::String,
+                                     ?client_token: ::String,
+                                     session_id: ::String,
+                                     studio_id: ::String
+                                   ) -> _StartStreamingSessionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartStreamingSessionResponseSuccess
+
+      interface _StartStudioSSOConfigurationRepairResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartStudioSSOConfigurationRepairResponse]
+        def studio: () -> Types::Studio
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#start_studio_sso_configuration_repair-instance_method
+      def start_studio_sso_configuration_repair: (
+                                                   ?client_token: ::String,
+                                                   studio_id: ::String
+                                                 ) -> _StartStudioSSOConfigurationRepairResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartStudioSSOConfigurationRepairResponseSuccess
+
+      interface _StopStreamingSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopStreamingSessionResponse]
+        def session: () -> Types::StreamingSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#stop_streaming_session-instance_method
+      def stop_streaming_session: (
+                                    ?client_token: ::String,
+                                    session_id: ::String,
+                                    studio_id: ::String,
+                                    ?volume_retention_mode: ("RETAIN" | "DELETE")
+                                  ) -> _StopStreamingSessionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopStreamingSessionResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          ?tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateLaunchProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLaunchProfileResponse]
+        def launch_profile: () -> Types::LaunchProfile
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#update_launch_profile-instance_method
+      def update_launch_profile: (
+                                   ?client_token: ::String,
+                                   ?description: ::String,
+                                   launch_profile_id: ::String,
+                                   ?launch_profile_protocol_versions: Array[::String],
+                                   ?name: ::String,
+                                   ?stream_configuration: {
+                                     automatic_termination_mode: ("DEACTIVATED" | "ACTIVATED")?,
+                                     clipboard_mode: ("ENABLED" | "DISABLED"),
+                                     ec2_instance_types: Array[("g4dn.xlarge" | "g4dn.2xlarge" | "g4dn.4xlarge" | "g4dn.8xlarge" | "g4dn.12xlarge" | "g4dn.16xlarge" | "g3.4xlarge" | "g3s.xlarge" | "g5.xlarge" | "g5.2xlarge" | "g5.4xlarge" | "g5.8xlarge" | "g5.16xlarge")],
+                                     max_session_length_in_minutes: ::Integer?,
+                                     max_stopped_session_length_in_minutes: ::Integer?,
+                                     session_backup: {
+                                       max_backups_to_retain: ::Integer?,
+                                       mode: ("AUTOMATIC" | "DEACTIVATED")?
+                                     }?,
+                                     session_persistence_mode: ("DEACTIVATED" | "ACTIVATED")?,
+                                     session_storage: {
+                                       mode: Array[("UPLOAD")],
+                                       root: {
+                                         linux: ::String?,
+                                         windows: ::String?
+                                       }?
+                                     }?,
+                                     streaming_image_ids: Array[::String],
+                                     volume_configuration: {
+                                       iops: ::Integer?,
+                                       size: ::Integer?,
+                                       throughput: ::Integer?
+                                     }?
+                                   },
+                                   ?studio_component_ids: Array[::String],
+                                   studio_id: ::String
+                                 ) -> _UpdateLaunchProfileResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLaunchProfileResponseSuccess
+
+      interface _UpdateLaunchProfileMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLaunchProfileMemberResponse]
+        def member: () -> Types::LaunchProfileMembership
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#update_launch_profile_member-instance_method
+      def update_launch_profile_member: (
+                                          ?client_token: ::String,
+                                          launch_profile_id: ::String,
+                                          persona: ("USER"),
+                                          principal_id: ::String,
+                                          studio_id: ::String
+                                        ) -> _UpdateLaunchProfileMemberResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLaunchProfileMemberResponseSuccess
+
+      interface _UpdateStreamingImageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStreamingImageResponse]
+        def streaming_image: () -> Types::StreamingImage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#update_streaming_image-instance_method
+      def update_streaming_image: (
+                                    ?client_token: ::String,
+                                    ?description: ::String,
+                                    ?name: ::String,
+                                    streaming_image_id: ::String,
+                                    studio_id: ::String
+                                  ) -> _UpdateStreamingImageResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStreamingImageResponseSuccess
+
+      interface _UpdateStudioResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStudioResponse]
+        def studio: () -> Types::Studio
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#update_studio-instance_method
+      def update_studio: (
+                           ?admin_role_arn: ::String,
+                           ?client_token: ::String,
+                           ?display_name: ::String,
+                           studio_id: ::String,
+                           ?user_role_arn: ::String
+                         ) -> _UpdateStudioResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStudioResponseSuccess
+
+      interface _UpdateStudioComponentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateStudioComponentResponse]
+        def studio_component: () -> Types::StudioComponent
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#update_studio_component-instance_method
+      def update_studio_component: (
+                                     ?client_token: ::String,
+                                     ?configuration: {
+                                       active_directory_configuration: {
+                                         computer_attributes: Array[
+                                           {
+                                             name: ::String?,
+                                             value: ::String?
+                                           },
+                                         ]?,
+                                         directory_id: ::String?,
+                                         organizational_unit_distinguished_name: ::String?
+                                       }?,
+                                       compute_farm_configuration: {
+                                         active_directory_user: ::String?,
+                                         endpoint: ::String?
+                                       }?,
+                                       license_service_configuration: {
+                                         endpoint: ::String?
+                                       }?,
+                                       shared_file_system_configuration: {
+                                         endpoint: ::String?,
+                                         file_system_id: ::String?,
+                                         linux_mount_point: ::String?,
+                                         share_name: ::String?,
+                                         windows_mount_drive: ::String?
+                                       }?
+                                     },
+                                     ?description: ::String,
+                                     ?ec2_security_group_ids: Array[::String],
+                                     ?initialization_scripts: Array[
+                                       {
+                                         launch_profile_protocol_version: ::String?,
+                                         platform: ("LINUX" | "WINDOWS")?,
+                                         run_context: ("SYSTEM_INITIALIZATION" | "USER_INITIALIZATION")?,
+                                         script: ::String?
+                                       },
+                                     ],
+                                     ?name: ::String,
+                                     ?runtime_role_arn: ::String,
+                                     ?script_parameters: Array[
+                                       {
+                                         key: ::String?,
+                                         value: ::String?
+                                       },
+                                     ],
+                                     ?secure_initialization_role_arn: ::String,
+                                     studio_component_id: ::String,
+                                     studio_id: ::String,
+                                     ?subtype: ("AWS_MANAGED_MICROSOFT_AD" | "AMAZON_FSX_FOR_WINDOWS" | "AMAZON_FSX_FOR_LUSTRE" | "CUSTOM"),
+                                     ?type: ("ACTIVE_DIRECTORY" | "SHARED_FILE_SYSTEM" | "COMPUTE_FARM" | "LICENSE_SERVICE" | "CUSTOM")
+                                   ) -> _UpdateStudioComponentResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStudioComponentResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NimbleStudio/Client.html#wait_until-instance_method
+      def wait_until: (:launch_profile_deleted waiter_name, 
+                    launch_profile_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetLaunchProfileResponseSuccess
+                    | (:launch_profile_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetLaunchProfileResponseSuccess
+                    | (:launch_profile_ready waiter_name, 
+                    launch_profile_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetLaunchProfileResponseSuccess
+                    | (:launch_profile_ready waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetLaunchProfileResponseSuccess
+                    | (:streaming_image_deleted waiter_name, 
+                    streaming_image_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStreamingImageResponseSuccess
+                    | (:streaming_image_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStreamingImageResponseSuccess
+                    | (:streaming_image_ready waiter_name, 
+                    streaming_image_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStreamingImageResponseSuccess
+                    | (:streaming_image_ready waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStreamingImageResponseSuccess
+                    | (:streaming_session_deleted waiter_name, 
+                    session_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStreamingSessionResponseSuccess
+                    | (:streaming_session_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStreamingSessionResponseSuccess
+                    | (:streaming_session_ready waiter_name, 
+                    session_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStreamingSessionResponseSuccess
+                    | (:streaming_session_ready waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStreamingSessionResponseSuccess
+                    | (:streaming_session_stopped waiter_name, 
+                    session_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStreamingSessionResponseSuccess
+                    | (:streaming_session_stopped waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStreamingSessionResponseSuccess
+                    | (:streaming_session_stream_ready waiter_name, 
+                    session_id: ::String,
+                    stream_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStreamingSessionStreamResponseSuccess
+                    | (:streaming_session_stream_ready waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStreamingSessionStreamResponseSuccess
+                    | (:studio_component_deleted waiter_name, 
+                    studio_component_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStudioComponentResponseSuccess
+                    | (:studio_component_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStudioComponentResponseSuccess
+                    | (:studio_component_ready waiter_name, 
+                    studio_component_id: ::String,
+                    studio_id: ::String
+                  ) -> Client::_GetStudioComponentResponseSuccess
+                    | (:studio_component_ready waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStudioComponentResponseSuccess
+                    | (:studio_deleted waiter_name, 
+                    studio_id: ::String
+                  ) -> Client::_GetStudioResponseSuccess
+                    | (:studio_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStudioResponseSuccess
+                    | (:studio_ready waiter_name, 
+                    studio_id: ::String
+                  ) -> Client::_GetStudioResponseSuccess
+                    | (:studio_ready waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStudioResponseSuccess
+    end
+  end
+end
+

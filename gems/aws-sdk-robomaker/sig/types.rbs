@@ -1,0 +1,1370 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::RoboMaker
+  module Types
+
+    class BatchDeleteWorldsRequest
+      attr_accessor worlds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDeleteWorldsResponse
+      attr_accessor unprocessed_worlds: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDescribeSimulationJobRequest
+      attr_accessor jobs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchDescribeSimulationJobResponse
+      attr_accessor jobs: ::Array[Types::SimulationJob]
+      attr_accessor unprocessed_jobs: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchPolicy
+      attr_accessor timeout_in_seconds: ::Integer
+      attr_accessor max_concurrency: ::Integer
+      SENSITIVE: []
+    end
+
+    class CancelDeploymentJobRequest
+      attr_accessor job: ::String
+      SENSITIVE: []
+    end
+
+    class CancelDeploymentJobResponse < Aws::EmptyStructure
+    end
+
+    class CancelSimulationJobBatchRequest
+      attr_accessor batch: ::String
+      SENSITIVE: []
+    end
+
+    class CancelSimulationJobBatchResponse < Aws::EmptyStructure
+    end
+
+    class CancelSimulationJobRequest
+      attr_accessor job: ::String
+      SENSITIVE: []
+    end
+
+    class CancelSimulationJobResponse < Aws::EmptyStructure
+    end
+
+    class CancelWorldExportJobRequest
+      attr_accessor job: ::String
+      SENSITIVE: []
+    end
+
+    class CancelWorldExportJobResponse < Aws::EmptyStructure
+    end
+
+    class CancelWorldGenerationJobRequest
+      attr_accessor job: ::String
+      SENSITIVE: []
+    end
+
+    class CancelWorldGenerationJobResponse < Aws::EmptyStructure
+    end
+
+    class Compute
+      attr_accessor simulation_unit_limit: ::Integer
+      attr_accessor compute_type: ("CPU" | "GPU_AND_CPU")
+      attr_accessor gpu_unit_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ComputeResponse
+      attr_accessor simulation_unit_limit: ::Integer
+      attr_accessor compute_type: ("CPU" | "GPU_AND_CPU")
+      attr_accessor gpu_unit_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class ConcurrentDeploymentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentJobRequest
+      attr_accessor deployment_config: Types::DeploymentConfig
+      attr_accessor client_request_token: ::String
+      attr_accessor fleet: ::String
+      attr_accessor deployment_application_configs: ::Array[Types::DeploymentApplicationConfig]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDeploymentJobResponse
+      attr_accessor arn: ::String
+      attr_accessor fleet: ::String
+      attr_accessor status: ("Pending" | "Preparing" | "InProgress" | "Failed" | "Succeeded" | "Canceled")
+      attr_accessor deployment_application_configs: ::Array[Types::DeploymentApplicationConfig]
+      attr_accessor failure_reason: ::String
+      attr_accessor failure_code: ("ResourceNotFound" | "EnvironmentSetupError" | "EtagMismatch" | "FailureThresholdBreached" | "RobotDeploymentAborted" | "RobotDeploymentNoResponse" | "RobotAgentConnectionTimeout" | "GreengrassDeploymentFailed" | "InvalidGreengrassGroup" | "MissingRobotArchitecture" | "MissingRobotApplicationArchitecture" | "MissingRobotDeploymentResource" | "GreengrassGroupVersionDoesNotExist" | "LambdaDeleted" | "ExtractingBundleFailure" | "PreLaunchFileFailure" | "PostLaunchFileFailure" | "BadPermissionError" | "DownloadConditionFailed" | "BadLambdaAssociated" | "InternalServerError" | "RobotApplicationDoesNotExist" | "DeploymentFleetDoesNotExist" | "FleetDeploymentTimeout")
+      attr_accessor created_at: ::Time
+      attr_accessor deployment_config: Types::DeploymentConfig
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateFleetRequest
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateFleetResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRobotApplicationRequest
+      attr_accessor name: ::String
+      attr_accessor sources: ::Array[Types::SourceConfig]
+      attr_accessor robot_software_suite: Types::RobotSoftwareSuite
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class CreateRobotApplicationResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor sources: ::Array[Types::Source]
+      attr_accessor robot_software_suite: Types::RobotSoftwareSuite
+      attr_accessor last_updated_at: ::Time
+      attr_accessor revision_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class CreateRobotApplicationVersionRequest
+      attr_accessor application: ::String
+      attr_accessor current_revision_id: ::String
+      attr_accessor s3_etags: ::Array[::String]
+      attr_accessor image_digest: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRobotApplicationVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor sources: ::Array[Types::Source]
+      attr_accessor robot_software_suite: Types::RobotSoftwareSuite
+      attr_accessor last_updated_at: ::Time
+      attr_accessor revision_id: ::String
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class CreateRobotRequest
+      attr_accessor name: ::String
+      attr_accessor architecture: ("X86_64" | "ARM64" | "ARMHF")
+      attr_accessor greengrass_group_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateRobotResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor greengrass_group_id: ::String
+      attr_accessor architecture: ("X86_64" | "ARM64" | "ARMHF")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSimulationApplicationRequest
+      attr_accessor name: ::String
+      attr_accessor sources: ::Array[Types::SourceConfig]
+      attr_accessor simulation_software_suite: Types::SimulationSoftwareSuite
+      attr_accessor robot_software_suite: Types::RobotSoftwareSuite
+      attr_accessor rendering_engine: Types::RenderingEngine
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class CreateSimulationApplicationResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor sources: ::Array[Types::Source]
+      attr_accessor simulation_software_suite: Types::SimulationSoftwareSuite
+      attr_accessor robot_software_suite: Types::RobotSoftwareSuite
+      attr_accessor rendering_engine: Types::RenderingEngine
+      attr_accessor last_updated_at: ::Time
+      attr_accessor revision_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class CreateSimulationApplicationVersionRequest
+      attr_accessor application: ::String
+      attr_accessor current_revision_id: ::String
+      attr_accessor s3_etags: ::Array[::String]
+      attr_accessor image_digest: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSimulationApplicationVersionResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor sources: ::Array[Types::Source]
+      attr_accessor simulation_software_suite: Types::SimulationSoftwareSuite
+      attr_accessor robot_software_suite: Types::RobotSoftwareSuite
+      attr_accessor rendering_engine: Types::RenderingEngine
+      attr_accessor last_updated_at: ::Time
+      attr_accessor revision_id: ::String
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class CreateSimulationJobRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor output_location: Types::OutputLocation
+      attr_accessor logging_config: Types::LoggingConfig
+      attr_accessor max_job_duration_in_seconds: ::Integer
+      attr_accessor iam_role: ::String
+      attr_accessor failure_behavior: ("Fail" | "Continue")
+      attr_accessor robot_applications: ::Array[Types::RobotApplicationConfig]
+      attr_accessor simulation_applications: ::Array[Types::SimulationApplicationConfig]
+      attr_accessor data_sources: ::Array[Types::DataSourceConfig]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_config: Types::VPCConfig
+      attr_accessor compute: Types::Compute
+      SENSITIVE: []
+    end
+
+    class CreateSimulationJobResponse
+      attr_accessor arn: ::String
+      attr_accessor status: ("Pending" | "Preparing" | "Running" | "Restarting" | "Completed" | "Failed" | "RunningFailed" | "Terminating" | "Terminated" | "Canceled")
+      attr_accessor last_started_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor failure_behavior: ("Fail" | "Continue")
+      attr_accessor failure_code: ("InternalServiceError" | "RobotApplicationCrash" | "SimulationApplicationCrash" | "RobotApplicationHealthCheckFailure" | "SimulationApplicationHealthCheckFailure" | "BadPermissionsRobotApplication" | "BadPermissionsSimulationApplication" | "BadPermissionsS3Object" | "BadPermissionsS3Output" | "BadPermissionsCloudwatchLogs" | "SubnetIpLimitExceeded" | "ENILimitExceeded" | "BadPermissionsUserCredentials" | "InvalidBundleRobotApplication" | "InvalidBundleSimulationApplication" | "InvalidS3Resource" | "ThrottlingError" | "LimitExceeded" | "MismatchedEtag" | "RobotApplicationVersionMismatchedEtag" | "SimulationApplicationVersionMismatchedEtag" | "ResourceNotFound" | "RequestThrottled" | "BatchTimedOut" | "BatchCanceled" | "InvalidInput" | "WrongRegionS3Bucket" | "WrongRegionS3Output" | "WrongRegionRobotApplication" | "WrongRegionSimulationApplication" | "UploadContentMismatchError")
+      attr_accessor client_request_token: ::String
+      attr_accessor output_location: Types::OutputLocation
+      attr_accessor logging_config: Types::LoggingConfig
+      attr_accessor max_job_duration_in_seconds: ::Integer
+      attr_accessor simulation_time_millis: ::Integer
+      attr_accessor iam_role: ::String
+      attr_accessor robot_applications: ::Array[Types::RobotApplicationConfig]
+      attr_accessor simulation_applications: ::Array[Types::SimulationApplicationConfig]
+      attr_accessor data_sources: ::Array[Types::DataSource]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_config: Types::VPCConfigResponse
+      attr_accessor compute: Types::ComputeResponse
+      SENSITIVE: []
+    end
+
+    class CreateWorldExportJobRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor worlds: ::Array[::String]
+      attr_accessor output_location: Types::OutputLocation
+      attr_accessor iam_role: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateWorldExportJobResponse
+      attr_accessor arn: ::String
+      attr_accessor status: ("Pending" | "Running" | "Completed" | "Failed" | "Canceling" | "Canceled")
+      attr_accessor created_at: ::Time
+      attr_accessor failure_code: ("InternalServiceError" | "LimitExceeded" | "ResourceNotFound" | "RequestThrottled" | "InvalidInput" | "AccessDenied")
+      attr_accessor client_request_token: ::String
+      attr_accessor output_location: Types::OutputLocation
+      attr_accessor iam_role: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateWorldGenerationJobRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor template: ::String
+      attr_accessor world_count: Types::WorldCount
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor world_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateWorldGenerationJobResponse
+      attr_accessor arn: ::String
+      attr_accessor status: ("Pending" | "Running" | "Completed" | "Failed" | "PartialFailed" | "Canceling" | "Canceled")
+      attr_accessor created_at: ::Time
+      attr_accessor failure_code: ("InternalServiceError" | "LimitExceeded" | "ResourceNotFound" | "RequestThrottled" | "InvalidInput" | "AllWorldGenerationFailed")
+      attr_accessor client_request_token: ::String
+      attr_accessor template: ::String
+      attr_accessor world_count: Types::WorldCount
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor world_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateWorldTemplateRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor name: ::String
+      attr_accessor template_body: ::String
+      attr_accessor template_location: Types::TemplateLocation
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateWorldTemplateResponse
+      attr_accessor arn: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DataSource
+      attr_accessor name: ::String
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_keys: ::Array[Types::S3KeyOutput]
+      attr_accessor type: ("Prefix" | "Archive" | "File")
+      attr_accessor destination: ::String
+      SENSITIVE: []
+    end
+
+    class DataSourceConfig
+      attr_accessor name: ::String
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_keys: ::Array[::String]
+      attr_accessor type: ("Prefix" | "Archive" | "File")
+      attr_accessor destination: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFleetRequest
+      attr_accessor fleet: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteFleetResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRobotApplicationRequest
+      attr_accessor application: ::String
+      attr_accessor application_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRobotApplicationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRobotRequest
+      attr_accessor robot: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRobotResponse < Aws::EmptyStructure
+    end
+
+    class DeleteSimulationApplicationRequest
+      attr_accessor application: ::String
+      attr_accessor application_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSimulationApplicationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteWorldTemplateRequest
+      attr_accessor template: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteWorldTemplateResponse < Aws::EmptyStructure
+    end
+
+    class DeploymentApplicationConfig
+      attr_accessor application: ::String
+      attr_accessor application_version: ::String
+      attr_accessor launch_config: Types::DeploymentLaunchConfig
+      SENSITIVE: []
+    end
+
+    class DeploymentConfig
+      attr_accessor concurrent_deployment_percentage: ::Integer
+      attr_accessor failure_threshold_percentage: ::Integer
+      attr_accessor robot_deployment_timeout_in_seconds: ::Integer
+      attr_accessor download_condition_file: Types::S3Object
+      SENSITIVE: []
+    end
+
+    class DeploymentJob
+      attr_accessor arn: ::String
+      attr_accessor fleet: ::String
+      attr_accessor status: ("Pending" | "Preparing" | "InProgress" | "Failed" | "Succeeded" | "Canceled")
+      attr_accessor deployment_application_configs: ::Array[Types::DeploymentApplicationConfig]
+      attr_accessor deployment_config: Types::DeploymentConfig
+      attr_accessor failure_reason: ::String
+      attr_accessor failure_code: ("ResourceNotFound" | "EnvironmentSetupError" | "EtagMismatch" | "FailureThresholdBreached" | "RobotDeploymentAborted" | "RobotDeploymentNoResponse" | "RobotAgentConnectionTimeout" | "GreengrassDeploymentFailed" | "InvalidGreengrassGroup" | "MissingRobotArchitecture" | "MissingRobotApplicationArchitecture" | "MissingRobotDeploymentResource" | "GreengrassGroupVersionDoesNotExist" | "LambdaDeleted" | "ExtractingBundleFailure" | "PreLaunchFileFailure" | "PostLaunchFileFailure" | "BadPermissionError" | "DownloadConditionFailed" | "BadLambdaAssociated" | "InternalServerError" | "RobotApplicationDoesNotExist" | "DeploymentFleetDoesNotExist" | "FleetDeploymentTimeout")
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeploymentLaunchConfig
+      attr_accessor package_name: ::String
+      attr_accessor pre_launch_file: ::String
+      attr_accessor launch_file: ::String
+      attr_accessor post_launch_file: ::String
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeregisterRobotRequest
+      attr_accessor fleet: ::String
+      attr_accessor robot: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterRobotResponse
+      attr_accessor fleet: ::String
+      attr_accessor robot: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDeploymentJobRequest
+      attr_accessor job: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDeploymentJobResponse
+      attr_accessor arn: ::String
+      attr_accessor fleet: ::String
+      attr_accessor status: ("Pending" | "Preparing" | "InProgress" | "Failed" | "Succeeded" | "Canceled")
+      attr_accessor deployment_config: Types::DeploymentConfig
+      attr_accessor deployment_application_configs: ::Array[Types::DeploymentApplicationConfig]
+      attr_accessor failure_reason: ::String
+      attr_accessor failure_code: ("ResourceNotFound" | "EnvironmentSetupError" | "EtagMismatch" | "FailureThresholdBreached" | "RobotDeploymentAborted" | "RobotDeploymentNoResponse" | "RobotAgentConnectionTimeout" | "GreengrassDeploymentFailed" | "InvalidGreengrassGroup" | "MissingRobotArchitecture" | "MissingRobotApplicationArchitecture" | "MissingRobotDeploymentResource" | "GreengrassGroupVersionDoesNotExist" | "LambdaDeleted" | "ExtractingBundleFailure" | "PreLaunchFileFailure" | "PostLaunchFileFailure" | "BadPermissionError" | "DownloadConditionFailed" | "BadLambdaAssociated" | "InternalServerError" | "RobotApplicationDoesNotExist" | "DeploymentFleetDoesNotExist" | "FleetDeploymentTimeout")
+      attr_accessor created_at: ::Time
+      attr_accessor robot_deployment_summary: ::Array[Types::RobotDeployment]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeFleetRequest
+      attr_accessor fleet: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeFleetResponse
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor robots: ::Array[Types::Robot]
+      attr_accessor created_at: ::Time
+      attr_accessor last_deployment_status: ("Pending" | "Preparing" | "InProgress" | "Failed" | "Succeeded" | "Canceled")
+      attr_accessor last_deployment_job: ::String
+      attr_accessor last_deployment_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeRobotApplicationRequest
+      attr_accessor application: ::String
+      attr_accessor application_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRobotApplicationResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor sources: ::Array[Types::Source]
+      attr_accessor robot_software_suite: Types::RobotSoftwareSuite
+      attr_accessor revision_id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor environment: Types::Environment
+      attr_accessor image_digest: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRobotRequest
+      attr_accessor robot: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeRobotResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor fleet_arn: ::String
+      attr_accessor status: ("Available" | "Registered" | "PendingNewDeployment" | "Deploying" | "Failed" | "InSync" | "NoResponse")
+      attr_accessor greengrass_group_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor architecture: ("X86_64" | "ARM64" | "ARMHF")
+      attr_accessor last_deployment_job: ::String
+      attr_accessor last_deployment_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeSimulationApplicationRequest
+      attr_accessor application: ::String
+      attr_accessor application_version: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSimulationApplicationResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor sources: ::Array[Types::Source]
+      attr_accessor simulation_software_suite: Types::SimulationSoftwareSuite
+      attr_accessor robot_software_suite: Types::RobotSoftwareSuite
+      attr_accessor rendering_engine: Types::RenderingEngine
+      attr_accessor revision_id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor environment: Types::Environment
+      attr_accessor image_digest: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSimulationJobBatchRequest
+      attr_accessor batch: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSimulationJobBatchResponse
+      attr_accessor arn: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Failed" | "Completed" | "Canceled" | "Canceling" | "Completing" | "TimingOut" | "TimedOut")
+      attr_accessor last_updated_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor client_request_token: ::String
+      attr_accessor batch_policy: Types::BatchPolicy
+      attr_accessor failure_code: ("InternalServiceError")
+      attr_accessor failure_reason: ::String
+      attr_accessor failed_requests: ::Array[Types::FailedCreateSimulationJobRequest]
+      attr_accessor pending_requests: ::Array[Types::SimulationJobRequest]
+      attr_accessor created_requests: ::Array[Types::SimulationJobSummary]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeSimulationJobRequest
+      attr_accessor job: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSimulationJobResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("Pending" | "Preparing" | "Running" | "Restarting" | "Completed" | "Failed" | "RunningFailed" | "Terminating" | "Terminated" | "Canceled")
+      attr_accessor last_started_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor failure_behavior: ("Fail" | "Continue")
+      attr_accessor failure_code: ("InternalServiceError" | "RobotApplicationCrash" | "SimulationApplicationCrash" | "RobotApplicationHealthCheckFailure" | "SimulationApplicationHealthCheckFailure" | "BadPermissionsRobotApplication" | "BadPermissionsSimulationApplication" | "BadPermissionsS3Object" | "BadPermissionsS3Output" | "BadPermissionsCloudwatchLogs" | "SubnetIpLimitExceeded" | "ENILimitExceeded" | "BadPermissionsUserCredentials" | "InvalidBundleRobotApplication" | "InvalidBundleSimulationApplication" | "InvalidS3Resource" | "ThrottlingError" | "LimitExceeded" | "MismatchedEtag" | "RobotApplicationVersionMismatchedEtag" | "SimulationApplicationVersionMismatchedEtag" | "ResourceNotFound" | "RequestThrottled" | "BatchTimedOut" | "BatchCanceled" | "InvalidInput" | "WrongRegionS3Bucket" | "WrongRegionS3Output" | "WrongRegionRobotApplication" | "WrongRegionSimulationApplication" | "UploadContentMismatchError")
+      attr_accessor failure_reason: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor output_location: Types::OutputLocation
+      attr_accessor logging_config: Types::LoggingConfig
+      attr_accessor max_job_duration_in_seconds: ::Integer
+      attr_accessor simulation_time_millis: ::Integer
+      attr_accessor iam_role: ::String
+      attr_accessor robot_applications: ::Array[Types::RobotApplicationConfig]
+      attr_accessor simulation_applications: ::Array[Types::SimulationApplicationConfig]
+      attr_accessor data_sources: ::Array[Types::DataSource]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_config: Types::VPCConfigResponse
+      attr_accessor network_interface: Types::NetworkInterface
+      attr_accessor compute: Types::ComputeResponse
+      SENSITIVE: []
+    end
+
+    class DescribeWorldExportJobRequest
+      attr_accessor job: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorldExportJobResponse
+      attr_accessor arn: ::String
+      attr_accessor status: ("Pending" | "Running" | "Completed" | "Failed" | "Canceling" | "Canceled")
+      attr_accessor created_at: ::Time
+      attr_accessor failure_code: ("InternalServiceError" | "LimitExceeded" | "ResourceNotFound" | "RequestThrottled" | "InvalidInput" | "AccessDenied")
+      attr_accessor failure_reason: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor worlds: ::Array[::String]
+      attr_accessor output_location: Types::OutputLocation
+      attr_accessor iam_role: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeWorldGenerationJobRequest
+      attr_accessor job: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorldGenerationJobResponse
+      attr_accessor arn: ::String
+      attr_accessor status: ("Pending" | "Running" | "Completed" | "Failed" | "PartialFailed" | "Canceling" | "Canceled")
+      attr_accessor created_at: ::Time
+      attr_accessor failure_code: ("InternalServiceError" | "LimitExceeded" | "ResourceNotFound" | "RequestThrottled" | "InvalidInput" | "AllWorldGenerationFailed")
+      attr_accessor failure_reason: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor template: ::String
+      attr_accessor world_count: Types::WorldCount
+      attr_accessor finished_worlds_summary: Types::FinishedWorldsSummary
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor world_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DescribeWorldRequest
+      attr_accessor world: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorldResponse
+      attr_accessor arn: ::String
+      attr_accessor generation_job: ::String
+      attr_accessor template: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor world_description_body: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorldTemplateRequest
+      attr_accessor template: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeWorldTemplateResponse
+      attr_accessor arn: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class Environment
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class FailedCreateSimulationJobRequest
+      attr_accessor request: Types::SimulationJobRequest
+      attr_accessor failure_reason: ::String
+      attr_accessor failure_code: ("InternalServiceError" | "RobotApplicationCrash" | "SimulationApplicationCrash" | "RobotApplicationHealthCheckFailure" | "SimulationApplicationHealthCheckFailure" | "BadPermissionsRobotApplication" | "BadPermissionsSimulationApplication" | "BadPermissionsS3Object" | "BadPermissionsS3Output" | "BadPermissionsCloudwatchLogs" | "SubnetIpLimitExceeded" | "ENILimitExceeded" | "BadPermissionsUserCredentials" | "InvalidBundleRobotApplication" | "InvalidBundleSimulationApplication" | "InvalidS3Resource" | "ThrottlingError" | "LimitExceeded" | "MismatchedEtag" | "RobotApplicationVersionMismatchedEtag" | "SimulationApplicationVersionMismatchedEtag" | "ResourceNotFound" | "RequestThrottled" | "BatchTimedOut" | "BatchCanceled" | "InvalidInput" | "WrongRegionS3Bucket" | "WrongRegionS3Output" | "WrongRegionRobotApplication" | "WrongRegionSimulationApplication" | "UploadContentMismatchError")
+      attr_accessor failed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class FailureSummary
+      attr_accessor total_failure_count: ::Integer
+      attr_accessor failures: ::Array[Types::WorldFailure]
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FinishedWorldsSummary
+      attr_accessor finished_count: ::Integer
+      attr_accessor succeeded_worlds: ::Array[::String]
+      attr_accessor failure_summary: Types::FailureSummary
+      SENSITIVE: []
+    end
+
+    class Fleet
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_deployment_status: ("Pending" | "Preparing" | "InProgress" | "Failed" | "Succeeded" | "Canceled")
+      attr_accessor last_deployment_job: ::String
+      attr_accessor last_deployment_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetWorldTemplateBodyRequest
+      attr_accessor template: ::String
+      attr_accessor generation_job: ::String
+      SENSITIVE: []
+    end
+
+    class GetWorldTemplateBodyResponse
+      attr_accessor template_body: ::String
+      SENSITIVE: []
+    end
+
+    class IdempotentParameterMismatchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LaunchConfig
+      attr_accessor package_name: ::String
+      attr_accessor launch_file: ::String
+      attr_accessor environment_variables: ::Hash[::String, ::String]
+      attr_accessor port_forwarding_config: Types::PortForwardingConfig
+      attr_accessor stream_ui: bool
+      attr_accessor command: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListDeploymentJobsRequest
+      attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDeploymentJobsResponse
+      attr_accessor deployment_jobs: ::Array[Types::DeploymentJob]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListFleetsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListFleetsResponse
+      attr_accessor fleet_details: ::Array[Types::Fleet]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRobotApplicationsRequest
+      attr_accessor version_qualifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListRobotApplicationsResponse
+      attr_accessor robot_application_summaries: ::Array[Types::RobotApplicationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRobotsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListRobotsResponse
+      attr_accessor robots: ::Array[Types::Robot]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSimulationApplicationsRequest
+      attr_accessor version_qualifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListSimulationApplicationsResponse
+      attr_accessor simulation_application_summaries: ::Array[Types::SimulationApplicationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSimulationJobBatchesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListSimulationJobBatchesResponse
+      attr_accessor simulation_job_batch_summaries: ::Array[Types::SimulationJobBatchSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSimulationJobsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListSimulationJobsResponse
+      attr_accessor simulation_job_summaries: ::Array[Types::SimulationJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListWorldExportJobsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListWorldExportJobsResponse
+      attr_accessor world_export_job_summaries: ::Array[Types::WorldExportJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorldGenerationJobsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListWorldGenerationJobsResponse
+      attr_accessor world_generation_job_summaries: ::Array[Types::WorldGenerationJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorldTemplatesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListWorldTemplatesResponse
+      attr_accessor template_summaries: ::Array[Types::TemplateSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListWorldsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class ListWorldsResponse
+      attr_accessor world_summaries: ::Array[Types::WorldSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LoggingConfig
+      attr_accessor record_all_ros_topics: bool
+      SENSITIVE: []
+    end
+
+    class NetworkInterface
+      attr_accessor network_interface_id: ::String
+      attr_accessor private_ip_address: ::String
+      attr_accessor public_ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class OutputLocation
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class PortForwardingConfig
+      attr_accessor port_mappings: ::Array[Types::PortMapping]
+      SENSITIVE: []
+    end
+
+    class PortMapping
+      attr_accessor job_port: ::Integer
+      attr_accessor application_port: ::Integer
+      attr_accessor enable_on_public_ip: bool
+      SENSITIVE: []
+    end
+
+    class ProgressDetail
+      attr_accessor current_progress: ("Validating" | "DownloadingExtracting" | "ExecutingDownloadCondition" | "ExecutingPreLaunch" | "Launching" | "ExecutingPostLaunch" | "Finished")
+      attr_accessor percent_done: ::Float
+      attr_accessor estimated_time_remaining_seconds: ::Integer
+      attr_accessor target_resource: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterRobotRequest
+      attr_accessor fleet: ::String
+      attr_accessor robot: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterRobotResponse
+      attr_accessor fleet: ::String
+      attr_accessor robot: ::String
+      SENSITIVE: []
+    end
+
+    class RenderingEngine
+      attr_accessor name: ("OGRE")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceAlreadyExistsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RestartSimulationJobRequest
+      attr_accessor job: ::String
+      SENSITIVE: []
+    end
+
+    class RestartSimulationJobResponse < Aws::EmptyStructure
+    end
+
+    class Robot
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor fleet_arn: ::String
+      attr_accessor status: ("Available" | "Registered" | "PendingNewDeployment" | "Deploying" | "Failed" | "InSync" | "NoResponse")
+      attr_accessor green_grass_group_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor architecture: ("X86_64" | "ARM64" | "ARMHF")
+      attr_accessor last_deployment_job: ::String
+      attr_accessor last_deployment_time: ::Time
+      SENSITIVE: []
+    end
+
+    class RobotApplicationConfig
+      attr_accessor application: ::String
+      attr_accessor application_version: ::String
+      attr_accessor launch_config: Types::LaunchConfig
+      attr_accessor upload_configurations: ::Array[Types::UploadConfiguration]
+      attr_accessor use_default_upload_configurations: bool
+      attr_accessor tools: ::Array[Types::Tool]
+      attr_accessor use_default_tools: bool
+      SENSITIVE: []
+    end
+
+    class RobotApplicationSummary
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor version: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor robot_software_suite: Types::RobotSoftwareSuite
+      SENSITIVE: []
+    end
+
+    class RobotDeployment
+      attr_accessor arn: ::String
+      attr_accessor deployment_start_time: ::Time
+      attr_accessor deployment_finish_time: ::Time
+      attr_accessor status: ("Available" | "Registered" | "PendingNewDeployment" | "Deploying" | "Failed" | "InSync" | "NoResponse")
+      attr_accessor progress_detail: Types::ProgressDetail
+      attr_accessor failure_reason: ::String
+      attr_accessor failure_code: ("ResourceNotFound" | "EnvironmentSetupError" | "EtagMismatch" | "FailureThresholdBreached" | "RobotDeploymentAborted" | "RobotDeploymentNoResponse" | "RobotAgentConnectionTimeout" | "GreengrassDeploymentFailed" | "InvalidGreengrassGroup" | "MissingRobotArchitecture" | "MissingRobotApplicationArchitecture" | "MissingRobotDeploymentResource" | "GreengrassGroupVersionDoesNotExist" | "LambdaDeleted" | "ExtractingBundleFailure" | "PreLaunchFileFailure" | "PostLaunchFileFailure" | "BadPermissionError" | "DownloadConditionFailed" | "BadLambdaAssociated" | "InternalServerError" | "RobotApplicationDoesNotExist" | "DeploymentFleetDoesNotExist" | "FleetDeploymentTimeout")
+      SENSITIVE: []
+    end
+
+    class RobotSoftwareSuite
+      attr_accessor name: ("ROS" | "ROS2" | "General")
+      attr_accessor version: ("Kinetic" | "Melodic" | "Dashing" | "Foxy")
+      SENSITIVE: []
+    end
+
+    class S3KeyOutput
+      attr_accessor s3_key: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class S3Object
+      attr_accessor bucket: ::String
+      attr_accessor key: ::String
+      attr_accessor etag: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SimulationApplicationConfig
+      attr_accessor application: ::String
+      attr_accessor application_version: ::String
+      attr_accessor launch_config: Types::LaunchConfig
+      attr_accessor upload_configurations: ::Array[Types::UploadConfiguration]
+      attr_accessor world_configs: ::Array[Types::WorldConfig]
+      attr_accessor use_default_upload_configurations: bool
+      attr_accessor tools: ::Array[Types::Tool]
+      attr_accessor use_default_tools: bool
+      SENSITIVE: []
+    end
+
+    class SimulationApplicationSummary
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor version: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor robot_software_suite: Types::RobotSoftwareSuite
+      attr_accessor simulation_software_suite: Types::SimulationSoftwareSuite
+      SENSITIVE: []
+    end
+
+    class SimulationJob
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("Pending" | "Preparing" | "Running" | "Restarting" | "Completed" | "Failed" | "RunningFailed" | "Terminating" | "Terminated" | "Canceled")
+      attr_accessor last_started_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor failure_behavior: ("Fail" | "Continue")
+      attr_accessor failure_code: ("InternalServiceError" | "RobotApplicationCrash" | "SimulationApplicationCrash" | "RobotApplicationHealthCheckFailure" | "SimulationApplicationHealthCheckFailure" | "BadPermissionsRobotApplication" | "BadPermissionsSimulationApplication" | "BadPermissionsS3Object" | "BadPermissionsS3Output" | "BadPermissionsCloudwatchLogs" | "SubnetIpLimitExceeded" | "ENILimitExceeded" | "BadPermissionsUserCredentials" | "InvalidBundleRobotApplication" | "InvalidBundleSimulationApplication" | "InvalidS3Resource" | "ThrottlingError" | "LimitExceeded" | "MismatchedEtag" | "RobotApplicationVersionMismatchedEtag" | "SimulationApplicationVersionMismatchedEtag" | "ResourceNotFound" | "RequestThrottled" | "BatchTimedOut" | "BatchCanceled" | "InvalidInput" | "WrongRegionS3Bucket" | "WrongRegionS3Output" | "WrongRegionRobotApplication" | "WrongRegionSimulationApplication" | "UploadContentMismatchError")
+      attr_accessor failure_reason: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor output_location: Types::OutputLocation
+      attr_accessor logging_config: Types::LoggingConfig
+      attr_accessor max_job_duration_in_seconds: ::Integer
+      attr_accessor simulation_time_millis: ::Integer
+      attr_accessor iam_role: ::String
+      attr_accessor robot_applications: ::Array[Types::RobotApplicationConfig]
+      attr_accessor simulation_applications: ::Array[Types::SimulationApplicationConfig]
+      attr_accessor data_sources: ::Array[Types::DataSource]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_config: Types::VPCConfigResponse
+      attr_accessor network_interface: Types::NetworkInterface
+      attr_accessor compute: Types::ComputeResponse
+      SENSITIVE: []
+    end
+
+    class SimulationJobBatchSummary
+      attr_accessor arn: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("Pending" | "InProgress" | "Failed" | "Completed" | "Canceled" | "Canceling" | "Completing" | "TimingOut" | "TimedOut")
+      attr_accessor failed_request_count: ::Integer
+      attr_accessor pending_request_count: ::Integer
+      attr_accessor created_request_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SimulationJobRequest
+      attr_accessor output_location: Types::OutputLocation
+      attr_accessor logging_config: Types::LoggingConfig
+      attr_accessor max_job_duration_in_seconds: ::Integer
+      attr_accessor iam_role: ::String
+      attr_accessor failure_behavior: ("Fail" | "Continue")
+      attr_accessor use_default_applications: bool
+      attr_accessor robot_applications: ::Array[Types::RobotApplicationConfig]
+      attr_accessor simulation_applications: ::Array[Types::SimulationApplicationConfig]
+      attr_accessor data_sources: ::Array[Types::DataSourceConfig]
+      attr_accessor vpc_config: Types::VPCConfig
+      attr_accessor compute: Types::Compute
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SimulationJobSummary
+      attr_accessor arn: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor status: ("Pending" | "Preparing" | "Running" | "Restarting" | "Completed" | "Failed" | "RunningFailed" | "Terminating" | "Terminated" | "Canceled")
+      attr_accessor simulation_application_names: ::Array[::String]
+      attr_accessor robot_application_names: ::Array[::String]
+      attr_accessor data_source_names: ::Array[::String]
+      attr_accessor compute_type: ("CPU" | "GPU_AND_CPU")
+      SENSITIVE: []
+    end
+
+    class SimulationSoftwareSuite
+      attr_accessor name: ("Gazebo" | "RosbagPlay" | "SimulationRuntime")
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class Source
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key: ::String
+      attr_accessor etag: ::String
+      attr_accessor architecture: ("X86_64" | "ARM64" | "ARMHF")
+      SENSITIVE: []
+    end
+
+    class SourceConfig
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key: ::String
+      attr_accessor architecture: ("X86_64" | "ARM64" | "ARMHF")
+      SENSITIVE: []
+    end
+
+    class StartSimulationJobBatchRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor batch_policy: Types::BatchPolicy
+      attr_accessor create_simulation_job_requests: ::Array[Types::SimulationJobRequest]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartSimulationJobBatchResponse
+      attr_accessor arn: ::String
+      attr_accessor status: ("Pending" | "InProgress" | "Failed" | "Completed" | "Canceled" | "Canceling" | "Completing" | "TimingOut" | "TimedOut")
+      attr_accessor created_at: ::Time
+      attr_accessor client_request_token: ::String
+      attr_accessor batch_policy: Types::BatchPolicy
+      attr_accessor failure_code: ("InternalServiceError")
+      attr_accessor failure_reason: ::String
+      attr_accessor failed_requests: ::Array[Types::FailedCreateSimulationJobRequest]
+      attr_accessor pending_requests: ::Array[Types::SimulationJobRequest]
+      attr_accessor created_requests: ::Array[Types::SimulationJobSummary]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SyncDeploymentJobRequest
+      attr_accessor client_request_token: ::String
+      attr_accessor fleet: ::String
+      SENSITIVE: []
+    end
+
+    class SyncDeploymentJobResponse
+      attr_accessor arn: ::String
+      attr_accessor fleet: ::String
+      attr_accessor status: ("Pending" | "Preparing" | "InProgress" | "Failed" | "Succeeded" | "Canceled")
+      attr_accessor deployment_config: Types::DeploymentConfig
+      attr_accessor deployment_application_configs: ::Array[Types::DeploymentApplicationConfig]
+      attr_accessor failure_reason: ::String
+      attr_accessor failure_code: ("ResourceNotFound" | "EnvironmentSetupError" | "EtagMismatch" | "FailureThresholdBreached" | "RobotDeploymentAborted" | "RobotDeploymentNoResponse" | "RobotAgentConnectionTimeout" | "GreengrassDeploymentFailed" | "InvalidGreengrassGroup" | "MissingRobotArchitecture" | "MissingRobotApplicationArchitecture" | "MissingRobotDeploymentResource" | "GreengrassGroupVersionDoesNotExist" | "LambdaDeleted" | "ExtractingBundleFailure" | "PreLaunchFileFailure" | "PostLaunchFileFailure" | "BadPermissionError" | "DownloadConditionFailed" | "BadLambdaAssociated" | "InternalServerError" | "RobotApplicationDoesNotExist" | "DeploymentFleetDoesNotExist" | "FleetDeploymentTimeout")
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TemplateLocation
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key: ::String
+      SENSITIVE: []
+    end
+
+    class TemplateSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tool
+      attr_accessor stream_ui: bool
+      attr_accessor name: ::String
+      attr_accessor command: ::String
+      attr_accessor stream_output_to_cloud_watch: bool
+      attr_accessor exit_behavior: ("FAIL" | "RESTART")
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRobotApplicationRequest
+      attr_accessor application: ::String
+      attr_accessor sources: ::Array[Types::SourceConfig]
+      attr_accessor robot_software_suite: Types::RobotSoftwareSuite
+      attr_accessor current_revision_id: ::String
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class UpdateRobotApplicationResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor sources: ::Array[Types::Source]
+      attr_accessor robot_software_suite: Types::RobotSoftwareSuite
+      attr_accessor last_updated_at: ::Time
+      attr_accessor revision_id: ::String
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class UpdateSimulationApplicationRequest
+      attr_accessor application: ::String
+      attr_accessor sources: ::Array[Types::SourceConfig]
+      attr_accessor simulation_software_suite: Types::SimulationSoftwareSuite
+      attr_accessor robot_software_suite: Types::RobotSoftwareSuite
+      attr_accessor rendering_engine: Types::RenderingEngine
+      attr_accessor current_revision_id: ::String
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class UpdateSimulationApplicationResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor version: ::String
+      attr_accessor sources: ::Array[Types::Source]
+      attr_accessor simulation_software_suite: Types::SimulationSoftwareSuite
+      attr_accessor robot_software_suite: Types::RobotSoftwareSuite
+      attr_accessor rendering_engine: Types::RenderingEngine
+      attr_accessor last_updated_at: ::Time
+      attr_accessor revision_id: ::String
+      attr_accessor environment: Types::Environment
+      SENSITIVE: []
+    end
+
+    class UpdateWorldTemplateRequest
+      attr_accessor template: ::String
+      attr_accessor name: ::String
+      attr_accessor template_body: ::String
+      attr_accessor template_location: Types::TemplateLocation
+      SENSITIVE: []
+    end
+
+    class UpdateWorldTemplateResponse
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UploadConfiguration
+      attr_accessor name: ::String
+      attr_accessor path: ::String
+      attr_accessor upload_behavior: ("UPLOAD_ON_TERMINATE" | "UPLOAD_ROLLING_AUTO_REMOVE")
+      SENSITIVE: []
+    end
+
+    class VPCConfig
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor assign_public_ip: bool
+      SENSITIVE: []
+    end
+
+    class VPCConfigResponse
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor security_groups: ::Array[::String]
+      attr_accessor vpc_id: ::String
+      attr_accessor assign_public_ip: bool
+      SENSITIVE: []
+    end
+
+    class WorldConfig
+      attr_accessor world: ::String
+      SENSITIVE: []
+    end
+
+    class WorldCount
+      attr_accessor floorplan_count: ::Integer
+      attr_accessor interior_count_per_floorplan: ::Integer
+      SENSITIVE: []
+    end
+
+    class WorldExportJobSummary
+      attr_accessor arn: ::String
+      attr_accessor status: ("Pending" | "Running" | "Completed" | "Failed" | "Canceling" | "Canceled")
+      attr_accessor created_at: ::Time
+      attr_accessor worlds: ::Array[::String]
+      attr_accessor output_location: Types::OutputLocation
+      SENSITIVE: []
+    end
+
+    class WorldFailure
+      attr_accessor failure_code: ("InternalServiceError" | "LimitExceeded" | "ResourceNotFound" | "RequestThrottled" | "InvalidInput" | "AllWorldGenerationFailed")
+      attr_accessor sample_failure_reason: ::String
+      attr_accessor failure_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class WorldGenerationJobSummary
+      attr_accessor arn: ::String
+      attr_accessor template: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("Pending" | "Running" | "Completed" | "Failed" | "PartialFailed" | "Canceling" | "Canceled")
+      attr_accessor world_count: Types::WorldCount
+      attr_accessor succeeded_world_count: ::Integer
+      attr_accessor failed_world_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class WorldSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor generation_job: ::String
+      attr_accessor template: ::String
+      SENSITIVE: []
+    end
+  end
+end

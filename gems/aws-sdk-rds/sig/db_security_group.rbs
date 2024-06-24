@@ -1,0 +1,118 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html
+    class DBSecurityGroup
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#name-instance_method
+      def name: () -> String
+      alias db_security_group_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#owner_id-instance_method
+      def owner_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#db_security_group_description-instance_method
+      def db_security_group_description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#vpc_id-instance_method
+      def vpc_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#ec2_security_groups-instance_method
+      def ec2_security_groups: () -> ::Array[Types::EC2SecurityGroup]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#ip_ranges-instance_method
+      def ip_ranges: () -> ::Array[Types::IPRange]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#db_security_group_arn-instance_method
+      def db_security_group_arn: () -> ::String
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#data-instance_method
+      def data: () -> Types::DBSecurityGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#authorize_ingress-instance_method
+      def authorize_ingress: (
+                               ?cidrip: ::String,
+                               ?ec2_security_group_name: ::String,
+                               ?ec2_security_group_id: ::String,
+                               ?ec2_security_group_owner_id: ::String
+                             ) -> DBSecurityGroup
+                           | (?Hash[Symbol, untyped]) -> DBSecurityGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#create-instance_method
+      def create: (
+                    db_security_group_description: ::String,
+                    ?tags: Array[
+                      {
+                        key: ::String?,
+                        value: ::String?
+                      },
+                    ]
+                  ) -> DBSecurityGroup
+                | (?Hash[Symbol, untyped]) -> DBSecurityGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#delete-instance_method
+      def delete: (
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#revoke_ingress-instance_method
+      def revoke_ingress: (
+                            ?cidrip: ::String,
+                            ?ec2_security_group_name: ::String,
+                            ?ec2_security_group_id: ::String,
+                            ?ec2_security_group_owner_id: ::String
+                          ) -> DBSecurityGroup
+                        | (?Hash[Symbol, untyped]) -> DBSecurityGroup
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#subscribe_to-instance_method
+      def subscribe_to: (
+                          subscription_name: ::String
+                        ) -> EventSubscription
+                      | (?Hash[Symbol, untyped]) -> EventSubscription
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#unsubscribe_from-instance_method
+      def unsubscribe_from: (
+                              subscription_name: ::String
+                            ) -> EventSubscription
+                          | (?Hash[Symbol, untyped]) -> EventSubscription
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSecurityGroup.html#events-instance_method
+      def events: (
+                    ?start_time: ::Time,
+                    ?end_time: ::Time,
+                    ?duration: ::Integer,
+                    ?event_categories: Array[::String],
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ]
+                  ) -> Event::Collection
+                | (?Hash[Symbol, untyped]) -> Event::Collection
+
+      class Collection < ::Aws::Resources::Collection[DBSecurityGroup]
+      end
+    end
+  end
+end

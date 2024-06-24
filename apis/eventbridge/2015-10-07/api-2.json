@@ -5,6 +5,7 @@
     "endpointPrefix":"events",
     "jsonVersion":"1.1",
     "protocol":"json",
+    "protocols":["json"],
     "serviceFullName":"Amazon EventBridge",
     "serviceId":"EventBridge",
     "signatureVersion":"v4",
@@ -793,6 +794,21 @@
         {"shape":"ConcurrentModificationException"},
         {"shape":"InternalException"}
       ]
+    },
+    "UpdateEventBus":{
+      "name":"UpdateEventBus",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateEventBusRequest"},
+      "output":{"shape":"UpdateEventBusResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalException"},
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"OperationDisabledException"}
+      ]
     }
   },
   "shapes":{
@@ -872,6 +888,12 @@
         "ACTIVE",
         "INACTIVE"
       ]
+    },
+    "AppSyncParameters":{
+      "type":"structure",
+      "members":{
+        "GraphQLOperation":{"shape":"GraphQLOperation"}
+      }
     },
     "Archive":{
       "type":"structure",
@@ -1361,13 +1383,19 @@
       "members":{
         "Name":{"shape":"EventBusName"},
         "EventSourceName":{"shape":"EventSourceName"},
+        "Description":{"shape":"EventBusDescription"},
+        "KmsKeyIdentifier":{"shape":"KmsKeyIdentifier"},
+        "DeadLetterConfig":{"shape":"DeadLetterConfig"},
         "Tags":{"shape":"TagList"}
       }
     },
     "CreateEventBusResponse":{
       "type":"structure",
       "members":{
-        "EventBusArn":{"shape":"String"}
+        "EventBusArn":{"shape":"String"},
+        "Description":{"shape":"EventBusDescription"},
+        "KmsKeyIdentifier":{"shape":"KmsKeyIdentifier"},
+        "DeadLetterConfig":{"shape":"DeadLetterConfig"}
       }
     },
     "CreatePartnerEventSourceRequest":{
@@ -1617,7 +1645,12 @@
       "members":{
         "Name":{"shape":"String"},
         "Arn":{"shape":"String"},
-        "Policy":{"shape":"String"}
+        "Description":{"shape":"EventBusDescription"},
+        "KmsKeyIdentifier":{"shape":"KmsKeyIdentifier"},
+        "DeadLetterConfig":{"shape":"DeadLetterConfig"},
+        "Policy":{"shape":"String"},
+        "CreationTime":{"shape":"Timestamp"},
+        "LastModifiedTime":{"shape":"Timestamp"}
       }
     },
     "DescribeEventSourceRequest":{
@@ -1824,8 +1857,15 @@
       "members":{
         "Name":{"shape":"String"},
         "Arn":{"shape":"String"},
-        "Policy":{"shape":"String"}
+        "Description":{"shape":"EventBusDescription"},
+        "Policy":{"shape":"String"},
+        "CreationTime":{"shape":"Timestamp"},
+        "LastModifiedTime":{"shape":"Timestamp"}
       }
+    },
+    "EventBusDescription":{
+      "type":"string",
+      "max":512
     },
     "EventBusList":{
       "type":"list",
@@ -1905,6 +1945,12 @@
         "Primary":{"shape":"Primary"},
         "Secondary":{"shape":"Secondary"}
       }
+    },
+    "GraphQLOperation":{
+      "type":"string",
+      "max":1048576,
+      "min":1,
+      "sensitive":true
     },
     "HeaderKey":{
       "type":"string",
@@ -2005,6 +2051,10 @@
       "members":{
         "PartitionKeyPath":{"shape":"TargetPartitionKeyPath"}
       }
+    },
+    "KmsKeyIdentifier":{
+      "type":"string",
+      "max":2048
     },
     "LaunchType":{
       "type":"string",
@@ -2804,7 +2854,8 @@
       "type":"string",
       "enum":[
         "ENABLED",
-        "DISABLED"
+        "DISABLED",
+        "ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS"
       ]
     },
     "RunCommandParameters":{
@@ -3031,7 +3082,8 @@
         "RedshiftDataParameters":{"shape":"RedshiftDataParameters"},
         "SageMakerPipelineParameters":{"shape":"SageMakerPipelineParameters"},
         "DeadLetterConfig":{"shape":"DeadLetterConfig"},
-        "RetryPolicy":{"shape":"RetryPolicy"}
+        "RetryPolicy":{"shape":"RetryPolicy"},
+        "AppSyncParameters":{"shape":"AppSyncParameters"}
       }
     },
     "TargetArn":{
@@ -3242,6 +3294,25 @@
         "EndpointId":{"shape":"EndpointId"},
         "EndpointUrl":{"shape":"EndpointUrl"},
         "State":{"shape":"EndpointState"}
+      }
+    },
+    "UpdateEventBusRequest":{
+      "type":"structure",
+      "members":{
+        "Name":{"shape":"EventBusName"},
+        "KmsKeyIdentifier":{"shape":"KmsKeyIdentifier"},
+        "Description":{"shape":"EventBusDescription"},
+        "DeadLetterConfig":{"shape":"DeadLetterConfig"}
+      }
+    },
+    "UpdateEventBusResponse":{
+      "type":"structure",
+      "members":{
+        "Arn":{"shape":"String"},
+        "Name":{"shape":"EventBusName"},
+        "KmsKeyIdentifier":{"shape":"KmsKeyIdentifier"},
+        "Description":{"shape":"EventBusDescription"},
+        "DeadLetterConfig":{"shape":"DeadLetterConfig"}
       }
     }
   }

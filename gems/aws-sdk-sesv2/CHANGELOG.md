@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2024-06-12)
+------------------
+
+* Feature - This release adds support for Amazon EventBridge as an email sending events destination.
+
+1.50.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2024-05-03)
+------------------
+
+* Feature - Adds support for specifying replacement headers per BulkEmailEntry in SendBulkEmail in SESv2.
+
+1.47.0 (2024-05-01)
+------------------
+
+* Feature - Fixes ListContacts and ListImportJobs APIs to use POST instead of GET.
+
+1.46.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2024-03-05)
+------------------
+
+* Feature - Adds support for providing custom headers within SendEmail and SendBulkEmail for SESv2.
+
+1.44.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.41.0 (2023-10-16)
+------------------
+
+* Feature - This release provides enhanced visibility into your SES identity verification status. This will offer you more actionable insights, enabling you to promptly address any verification-related issues.
+
 1.40.0 (2023-09-27)
 ------------------
 

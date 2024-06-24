@@ -47,6 +47,19 @@ module Aws::EC2
       data[:availability_zone]
     end
 
+    # A security group connection tracking configuration that enables you to
+    # set the timeout for connection tracking on an Elastic network
+    # interface. For more information, see [Connection tracking timeouts][1]
+    # in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts
+    # @return [Types::ConnectionTrackingConfiguration]
+    def connection_tracking_configuration
+      data[:connection_tracking_configuration]
+    end
+
     # A description.
     # @return [String]
     def description
@@ -202,7 +215,7 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_network_interfaces(network_interface_ids: [@id])
       end
       @data = resp.network_interfaces[0]
@@ -319,7 +332,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -361,7 +374,7 @@ module Aws::EC2
     # @return [Types::AssignPrivateIpAddressesResult]
     def assign_private_ip_addresses(options = {})
       options = options.merge(network_interface_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.assign_private_ip_addresses(options)
       end
       resp.data
@@ -401,7 +414,7 @@ module Aws::EC2
     # @return [Types::AttachNetworkInterfaceResult]
     def attach(options = {})
       options = options.merge(network_interface_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.attach_network_interface(options)
       end
       resp.data
@@ -432,7 +445,7 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_tags(options)
       end
       options[:tags].each do |t|
@@ -479,7 +492,7 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_tags(options)
       end
       options[:tags].each do |t|
@@ -507,7 +520,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(network_interface_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_network_interface(options)
       end
       resp.data
@@ -516,7 +529,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   network_interface.describe_attribute({
-    #     attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment
+    #     attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment, associatePublicIpAddress
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -530,7 +543,7 @@ module Aws::EC2
     # @return [Types::DescribeNetworkInterfaceAttributeResult]
     def describe_attribute(options = {})
       options = options.merge(network_interface_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_network_interface_attribute(options)
       end
       resp.data
@@ -573,7 +586,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def detach(options = {})
       options = options.merge(attachment_id: data[:attachment][:attachment_id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.detach_network_interface(options)
       end
       resp.data
@@ -599,6 +612,12 @@ module Aws::EC2
     #       },
     #     },
     #     enable_primary_ipv_6: false,
+    #     connection_tracking_specification: {
+    #       tcp_established_timeout: 1,
+    #       udp_stream_timeout: 1,
+    #       udp_timeout: 1,
+    #     },
+    #     associate_public_ip_address: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Types::NetworkInterfaceAttachmentChanges] :attachment
@@ -643,10 +662,16 @@ module Aws::EC2
     #   with an ENI attached to your instance and you enable a primary IPv6
     #   address, the first IPv6 GUA address associated with the ENI becomes
     #   the primary IPv6 address.
+    # @option options [Types::ConnectionTrackingSpecificationRequest] :connection_tracking_specification
+    #   A connection tracking specification.
+    # @option options [Boolean] :associate_public_ip_address
+    #   Indicates whether to assign a public IPv4 address to a network
+    #   interface. This option can be enabled for any network interface but
+    #   will only apply to the primary network interface (eth0).
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(network_interface_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.modify_network_interface_attribute(options)
       end
       resp.data
@@ -669,7 +694,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def reset_attribute(options = {})
       options = options.merge(network_interface_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.reset_network_interface_attribute(options)
       end
       resp.data
@@ -691,7 +716,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def unassign_private_ip_addresses(options = {})
       options = options.merge(network_interface_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.unassign_private_ip_addresses(options)
       end
       resp.data

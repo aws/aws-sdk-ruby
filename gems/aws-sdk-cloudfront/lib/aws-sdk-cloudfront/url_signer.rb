@@ -34,7 +34,7 @@ module Aws
         )
 
         start_flag = uri.include?('?') ? '&' : '?'
-        signature = signed_content.map{ |k, v| "#{k}=#{v}" }.join('&').gsub("\n", '')
+        signature = signed_content.map{ |k, v| "#{k}=#{v}" }.join('&').delete("\n")
         uri = "#{uri}#{start_flag}#{signature}"
 
         if scheme == 'rtmp'

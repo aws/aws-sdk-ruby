@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CodeGuruSecurity
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CodeGuruSecurity
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::CodeGuruSecurity
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::CodeGuruSecurity
     #   @option options [Aws::CodeGuruSecurity::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CodeGuruSecurity::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -388,7 +413,7 @@ module Aws::CodeGuruSecurity
 
     # @!group API Operations
 
-    # Returns a list of all requested findings.
+    # Returns a list of requested findings from standard scans.
     #
     # @option params [required, Array<Types::FindingIdentifier>] :finding_identifiers
     #   A list of finding identifiers. Each identifier consists of a
@@ -463,7 +488,7 @@ module Aws::CodeGuruSecurity
       req.send_request(options)
     end
 
-    # Use to create a scan using code uploaded to an S3 bucket.
+    # Use to create a scan using code uploaded to an Amazon S3 bucket.
     #
     # @option params [String] :analysis_type
     #   The type of analysis you want CodeGuru Security to perform in the
@@ -480,12 +505,12 @@ module Aws::CodeGuruSecurity
     #   not need to pass this option.**
     #
     # @option params [required, Types::ResourceId] :resource_id
-    #   The identifier for an input resource used to create a scan.
+    #   The identifier for the resource object to be scanned.
     #
     # @option params [required, String] :scan_name
     #   The unique name that CodeGuru Security uses to track revisions across
     #   multiple scans of the same resource. Only allowed for a `STANDARD`
-    #   scan type. If not specified, it will be auto generated.
+    #   scan type.
     #
     # @option params [String] :scan_type
     #   The type of scan, either `Standard` or `Express`. Defaults to
@@ -547,11 +572,11 @@ module Aws::CodeGuruSecurity
       req.send_request(options)
     end
 
-    # Generates a pre-signed URL and request headers used to upload a code
-    # resource.
+    # Generates a pre-signed URL, request headers used to upload a code
+    # resource, and code artifact identifier for the uploaded resource.
     #
-    # You can upload your code resource to the URL and add the request
-    # headers using any HTTP client.
+    # You can upload your code resource to the URL with the request headers
+    # using any HTTP client.
     #
     # @option params [required, String] :scan_name
     #   The name of the scan that will use the uploaded resource. CodeGuru
@@ -587,7 +612,7 @@ module Aws::CodeGuruSecurity
       req.send_request(options)
     end
 
-    # Use to get account level configuration.
+    # Use to get the encryption configuration for an account.
     #
     # @return [Types::GetAccountConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -613,7 +638,7 @@ module Aws::CodeGuruSecurity
     #   parameter when paginating results. If additional results exist beyond
     #   the number you specify, the `nextToken` element is returned in the
     #   response. Use `nextToken` in a subsequent request to retrieve
-    #   additional results.
+    #   additional results. If not specified, returns 1000 results.
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
@@ -692,16 +717,14 @@ module Aws::CodeGuruSecurity
       req.send_request(options)
     end
 
-    # Returns top level metrics about an account from a specified date,
+    # Returns a summary of metrics for an account from a specified date,
     # including number of open findings, the categories with most findings,
     # the scans with most open findings, and scans with most open critical
     # findings.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :date
     #   The date you want to retrieve summary metrics from, rounded to the
-    #   nearest day. The date must be within the past two years since metrics
-    #   data is only stored for two years. If a date outside of this range is
-    #   passed, the response will be empty.
+    #   nearest day. The date must be within the past two years.
     #
     # @return [Types::GetMetricsSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -755,6 +778,7 @@ module Aws::CodeGuruSecurity
     #
     #   * {Types::GetScanResponse#analysis_type #analysis_type} => String
     #   * {Types::GetScanResponse#created_at #created_at} => Time
+    #   * {Types::GetScanResponse#error_message #error_message} => String
     #   * {Types::GetScanResponse#number_of_revisions #number_of_revisions} => Integer
     #   * {Types::GetScanResponse#run_id #run_id} => String
     #   * {Types::GetScanResponse#scan_name #scan_name} => String
@@ -773,6 +797,7 @@ module Aws::CodeGuruSecurity
     #
     #   resp.analysis_type #=> String, one of "Security", "All"
     #   resp.created_at #=> Time
+    #   resp.error_message #=> String
     #   resp.number_of_revisions #=> Integer
     #   resp.run_id #=> String
     #   resp.scan_name #=> String
@@ -794,13 +819,14 @@ module Aws::CodeGuruSecurity
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :end_date
     #   The end date of the interval which you want to retrieve metrics from.
+    #   Round to the nearest day.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response. Use this
     #   parameter when paginating results. If additional results exist beyond
     #   the number you specify, the `nextToken` element is returned in the
     #   response. Use `nextToken` in a subsequent request to retrieve
-    #   additional results.
+    #   additional results. If not specified, returns 1000 results.
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
@@ -810,7 +836,7 @@ module Aws::CodeGuruSecurity
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_date
     #   The start date of the interval which you want to retrieve metrics
-    #   from.
+    #   from. Rounds to the nearest day.
     #
     # @return [Types::ListFindingsMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -863,15 +889,15 @@ module Aws::CodeGuruSecurity
       req.send_request(options)
     end
 
-    # Returns a list of all the standard scans in an account. Does not
-    # return express scans.
+    # Returns a list of all scans in an account. Does not return `EXPRESS`
+    # scans.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response. Use this
     #   parameter when paginating results. If additional results exist beyond
     #   the number you specify, the `nextToken` element is returned in the
     #   response. Use `nextToken` in a subsequent request to retrieve
-    #   additional results.
+    #   additional results. If not specified, returns 100 results.
     #
     # @option params [String] :next_token
     #   A token to use for paginating results that are returned in the
@@ -917,7 +943,7 @@ module Aws::CodeGuruSecurity
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the `ScanName` object. You can retrieve this ARN by calling
-    #   `ListScans` or `GetScan`.
+    #   `CreateScan`, `ListScans`, or `GetScan`.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -947,7 +973,7 @@ module Aws::CodeGuruSecurity
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the `ScanName` object. You can retrieve this ARN by calling
-    #   `ListScans` or `GetScan`.
+    #   `CreateScan`, `ListScans`, or `GetScan`.
     #
     # @option params [required, Hash<String,String>] :tags
     #   An array of key-value pairs used to tag an existing scan. A tag is a
@@ -984,7 +1010,7 @@ module Aws::CodeGuruSecurity
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the `ScanName` object. You can retrieve this ARN by calling
-    #   `ListScans` or `GetScan`.
+    #   `CreateScan`, `ListScans`, or `GetScan`.
     #
     # @option params [required, Array<String>] :tag_keys
     #   A list of keys for each tag you want to remove from a scan.
@@ -1007,11 +1033,14 @@ module Aws::CodeGuruSecurity
       req.send_request(options)
     end
 
-    # Use to update account-level configuration with an encryption key.
+    # Use to update the encryption configuration for an account.
     #
     # @option params [required, Types::EncryptionConfig] :encryption_config
-    #   The KMS key ARN you want to use for encryption. Defaults to
-    #   service-side encryption if missing.
+    #   The customer-managed KMS key ARN you want to use for encryption. If
+    #   not specified, CodeGuru Security will use an AWS-managed key for
+    #   encryption. If you previously specified a customer-managed KMS key and
+    #   want CodeGuru Security to use an AWS-managed key for encryption
+    #   instead, pass nothing.
     #
     # @return [Types::UpdateAccountConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1051,7 +1080,7 @@ module Aws::CodeGuruSecurity
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codegurusecurity'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

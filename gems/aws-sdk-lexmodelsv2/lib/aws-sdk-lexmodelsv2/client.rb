@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::LexModelsV2
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::LexModelsV2
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::LexModelsV2
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::LexModelsV2
     #   @option options [Aws::LexModelsV2::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::LexModelsV2::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -864,6 +889,7 @@ module Aws::LexModelsV2
     #               log_prefix: "LogPrefix", # required
     #             },
     #           },
+    #           selective_logging_enabled: false,
     #         },
     #       ],
     #       audio_log_settings: [
@@ -876,6 +902,7 @@ module Aws::LexModelsV2
     #               log_prefix: "LogPrefix", # required
     #             },
     #           },
+    #           selective_logging_enabled: false,
     #         },
     #       ],
     #     },
@@ -902,11 +929,13 @@ module Aws::LexModelsV2
     #   resp.conversation_log_settings.text_log_settings[0].enabled #=> Boolean
     #   resp.conversation_log_settings.text_log_settings[0].destination.cloud_watch.cloud_watch_log_group_arn #=> String
     #   resp.conversation_log_settings.text_log_settings[0].destination.cloud_watch.log_prefix #=> String
+    #   resp.conversation_log_settings.text_log_settings[0].selective_logging_enabled #=> Boolean
     #   resp.conversation_log_settings.audio_log_settings #=> Array
     #   resp.conversation_log_settings.audio_log_settings[0].enabled #=> Boolean
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.kms_key_arn #=> String
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.s3_bucket_arn #=> String
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.log_prefix #=> String
+    #   resp.conversation_log_settings.audio_log_settings[0].selective_logging_enabled #=> Boolean
     #   resp.sentiment_analysis_settings.detect_sentiment #=> Boolean
     #   resp.bot_alias_status #=> String, one of "Creating", "Available", "Deleting", "Failed"
     #   resp.bot_id #=> String
@@ -974,6 +1003,10 @@ module Aws::LexModelsV2
     #   The Amazon Polly voice ID that Amazon Lex uses for voice interaction
     #   with the user.
     #
+    # @option params [Types::GenerativeAISettings] :generative_ai_settings
+    #   Contains specifications about the generative AI capabilities from
+    #   Amazon Bedrock that you can turn on for your bot.
+    #
     # @return [Types::CreateBotLocaleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBotLocaleResponse#bot_id #bot_id} => String
@@ -985,6 +1018,7 @@ module Aws::LexModelsV2
     #   * {Types::CreateBotLocaleResponse#voice_settings #voice_settings} => Types::VoiceSettings
     #   * {Types::CreateBotLocaleResponse#bot_locale_status #bot_locale_status} => String
     #   * {Types::CreateBotLocaleResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::CreateBotLocaleResponse#generative_ai_settings #generative_ai_settings} => Types::GenerativeAISettings
     #
     # @example Request syntax with placeholder values
     #
@@ -997,6 +1031,30 @@ module Aws::LexModelsV2
     #     voice_settings: {
     #       voice_id: "VoiceId", # required
     #       engine: "standard", # accepts standard, neural
+    #     },
+    #     generative_ai_settings: {
+    #       runtime_settings: {
+    #         slot_resolution_improvement: {
+    #           enabled: false, # required
+    #           bedrock_model_specification: {
+    #             model_arn: "BedrockModelArn", # required
+    #           },
+    #         },
+    #       },
+    #       buildtime_settings: {
+    #         descriptive_bot_builder: {
+    #           enabled: false, # required
+    #           bedrock_model_specification: {
+    #             model_arn: "BedrockModelArn", # required
+    #           },
+    #         },
+    #         sample_utterance_generation: {
+    #           enabled: false, # required
+    #           bedrock_model_specification: {
+    #             model_arn: "BedrockModelArn", # required
+    #           },
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -1012,6 +1070,12 @@ module Aws::LexModelsV2
     #   resp.voice_settings.engine #=> String, one of "standard", "neural"
     #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"
     #   resp.creation_date_time #=> Time
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.enabled #=> Boolean
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.model_arn #=> String
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.enabled #=> Boolean
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.model_arn #=> String
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.enabled #=> Boolean
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.model_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotLocale AWS API Documentation
     #
@@ -1022,13 +1086,55 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
-    # Creates a new version of the bot based on the `DRAFT` version. If the
-    # `DRAFT` version of this resource hasn't changed since you created the
-    # last version, Amazon Lex doesn't create a new version, it returns the
-    # last created version.
+    # Action to create a replication of the source bot in the secondary
+    # region.
     #
-    # When you create the first version of a bot, Amazon Lex sets the
-    # version to 1. Subsequent versions increment by 1.
+    # @option params [required, String] :bot_id
+    #   The request for the unique bot ID of the source bot to be replicated
+    #   in the secondary region.
+    #
+    # @option params [required, String] :replica_region
+    #   The request for the secondary region that will be used in the
+    #   replication of the source bot.
+    #
+    # @return [Types::CreateBotReplicaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBotReplicaResponse#bot_id #bot_id} => String
+    #   * {Types::CreateBotReplicaResponse#replica_region #replica_region} => String
+    #   * {Types::CreateBotReplicaResponse#source_region #source_region} => String
+    #   * {Types::CreateBotReplicaResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::CreateBotReplicaResponse#bot_replica_status #bot_replica_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_bot_replica({
+    #     bot_id: "Id", # required
+    #     replica_region: "ReplicaRegion", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.replica_region #=> String
+    #   resp.source_region #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.bot_replica_status #=> String, one of "Enabling", "Enabled", "Deleting", "Failed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotReplica AWS API Documentation
+    #
+    # @overload create_bot_replica(params = {})
+    # @param [Hash] params ({})
+    def create_bot_replica(params = {}, options = {})
+      req = build_request(:create_bot_replica, params)
+      req.send_request(options)
+    end
+
+    # Creates an immutable version of the bot. When you create the first
+    # version of a bot, Amazon Lex sets the version number to 1. Subsequent
+    # bot versions increase in an increment of 1. The version number will
+    # always represent the total number of versions created of the bot, not
+    # the current number of versions. If a bot version is deleted, that bot
+    # version number will not be reused.
     #
     # @option params [required, String] :bot_id
     #   The identifier of the bot to create the version for.
@@ -1307,6 +1413,12 @@ module Aws::LexModelsV2
     #   Configuration settings for the response that is sent to the user at
     #   the beginning of a conversation, before eliciting slot values.
     #
+    # @option params [Types::QnAIntentConfiguration] :qn_a_intent_configuration
+    #   Specifies the configuration of the built-in `Amazon.QnAIntent`. The
+    #   `AMAZON.QnAIntent` intent is called when Amazon Lex can't determine
+    #   another intent to invoke. If you specify this field, you can't
+    #   specify the `kendraConfiguration` field.
+    #
     # @return [Types::CreateIntentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateIntentResponse#intent_id #intent_id} => String
@@ -1326,6 +1438,7 @@ module Aws::LexModelsV2
     #   * {Types::CreateIntentResponse#locale_id #locale_id} => String
     #   * {Types::CreateIntentResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::CreateIntentResponse#initial_response_setting #initial_response_setting} => Types::InitialResponseSetting
+    #   * {Types::CreateIntentResponse#qn_a_intent_configuration #qn_a_intent_configuration} => Types::QnAIntentConfiguration
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateIntent AWS API Documentation
     #
@@ -2179,6 +2292,7 @@ module Aws::LexModelsV2
     #   resp.value_elicitation_setting.slot_capture_setting.code_hook.post_code_hook_specification.timeout_conditional.default_branch.response.allow_interrupt #=> Boolean
     #   resp.value_elicitation_setting.slot_capture_setting.elicitation_code_hook.enable_code_hook_invocation #=> Boolean
     #   resp.value_elicitation_setting.slot_capture_setting.elicitation_code_hook.invocation_label #=> String
+    #   resp.value_elicitation_setting.slot_resolution_setting.slot_resolution_strategy #=> String, one of "EnhancedFallback", "Default"
     #   resp.obfuscation_setting.obfuscation_setting_type #=> String, one of "None", "DefaultObfuscation"
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
@@ -2673,6 +2787,43 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def delete_bot_locale(params = {}, options = {})
       req = build_request(:delete_bot_locale, params)
+      req.send_request(options)
+    end
+
+    # The action to delete the replicated bot in the secondary region.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique ID of the replicated bot to be deleted from the secondary
+    #   region
+    #
+    # @option params [required, String] :replica_region
+    #   The secondary region of the replicated bot that will be deleted.
+    #
+    # @return [Types::DeleteBotReplicaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteBotReplicaResponse#bot_id #bot_id} => String
+    #   * {Types::DeleteBotReplicaResponse#replica_region #replica_region} => String
+    #   * {Types::DeleteBotReplicaResponse#bot_replica_status #bot_replica_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bot_replica({
+    #     bot_id: "Id", # required
+    #     replica_region: "ReplicaRegion", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.replica_region #=> String
+    #   resp.bot_replica_status #=> String, one of "Enabling", "Enabled", "Deleting", "Failed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBotReplica AWS API Documentation
+    #
+    # @overload delete_bot_replica(params = {})
+    # @param [Hash] params ({})
+    def delete_bot_replica(params = {}, options = {})
+      req = build_request(:delete_bot_replica, params)
       req.send_request(options)
     end
 
@@ -3244,11 +3395,13 @@ module Aws::LexModelsV2
     #   resp.conversation_log_settings.text_log_settings[0].enabled #=> Boolean
     #   resp.conversation_log_settings.text_log_settings[0].destination.cloud_watch.cloud_watch_log_group_arn #=> String
     #   resp.conversation_log_settings.text_log_settings[0].destination.cloud_watch.log_prefix #=> String
+    #   resp.conversation_log_settings.text_log_settings[0].selective_logging_enabled #=> Boolean
     #   resp.conversation_log_settings.audio_log_settings #=> Array
     #   resp.conversation_log_settings.audio_log_settings[0].enabled #=> Boolean
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.kms_key_arn #=> String
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.s3_bucket_arn #=> String
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.log_prefix #=> String
+    #   resp.conversation_log_settings.audio_log_settings[0].selective_logging_enabled #=> Boolean
     #   resp.sentiment_analysis_settings.detect_sentiment #=> Boolean
     #   resp.bot_alias_history_events #=> Array
     #   resp.bot_alias_history_events[0].bot_version #=> String
@@ -3311,6 +3464,7 @@ module Aws::LexModelsV2
     #   * {Types::DescribeBotLocaleResponse#last_build_submitted_date_time #last_build_submitted_date_time} => Time
     #   * {Types::DescribeBotLocaleResponse#bot_locale_history_events #bot_locale_history_events} => Array&lt;Types::BotLocaleHistoryEvent&gt;
     #   * {Types::DescribeBotLocaleResponse#recommended_actions #recommended_actions} => Array&lt;String&gt;
+    #   * {Types::DescribeBotLocaleResponse#generative_ai_settings #generative_ai_settings} => Types::GenerativeAISettings
     #
     # @example Request syntax with placeholder values
     #
@@ -3343,6 +3497,12 @@ module Aws::LexModelsV2
     #   resp.bot_locale_history_events[0].event_date #=> Time
     #   resp.recommended_actions #=> Array
     #   resp.recommended_actions[0] #=> String
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.enabled #=> Boolean
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.model_arn #=> String
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.enabled #=> Boolean
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.model_arn #=> String
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.enabled #=> Boolean
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.model_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3440,6 +3600,117 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def describe_bot_recommendation(params = {}, options = {})
       req = build_request(:describe_bot_recommendation, params)
+      req.send_request(options)
+    end
+
+    # Monitors the bot replication status through the UI console.
+    #
+    # @option params [required, String] :bot_id
+    #   The request for the unique bot ID of the replicated bot being
+    #   monitored.
+    #
+    # @option params [required, String] :replica_region
+    #   The request for the region of the replicated bot being monitored.
+    #
+    # @return [Types::DescribeBotReplicaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBotReplicaResponse#bot_id #bot_id} => String
+    #   * {Types::DescribeBotReplicaResponse#replica_region #replica_region} => String
+    #   * {Types::DescribeBotReplicaResponse#source_region #source_region} => String
+    #   * {Types::DescribeBotReplicaResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::DescribeBotReplicaResponse#bot_replica_status #bot_replica_status} => String
+    #   * {Types::DescribeBotReplicaResponse#failure_reasons #failure_reasons} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_bot_replica({
+    #     bot_id: "Id", # required
+    #     replica_region: "ReplicaRegion", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.replica_region #=> String
+    #   resp.source_region #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.bot_replica_status #=> String, one of "Enabling", "Enabled", "Deleting", "Failed"
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotReplica AWS API Documentation
+    #
+    # @overload describe_bot_replica(params = {})
+    # @param [Hash] params ({})
+    def describe_bot_replica(params = {}, options = {})
+      req = build_request(:describe_bot_replica, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a request to generate a bot through natural
+    # language description, made through the `StartBotResource` API. Use the
+    # `generatedBotLocaleUrl` to retrieve the Amazon S3 object containing
+    # the bot locale configuration. You can then modify and import this
+    # configuration.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot for which to return the generation
+    #   details.
+    #
+    # @option params [required, String] :bot_version
+    #   The version of the bot for which to return the generation details.
+    #
+    # @option params [required, String] :locale_id
+    #   The locale of the bot for which to return the generation details.
+    #
+    # @option params [required, String] :generation_id
+    #   The unique identifier of the generation request for which to return
+    #   the generation details.
+    #
+    # @return [Types::DescribeBotResourceGenerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBotResourceGenerationResponse#bot_id #bot_id} => String
+    #   * {Types::DescribeBotResourceGenerationResponse#bot_version #bot_version} => String
+    #   * {Types::DescribeBotResourceGenerationResponse#locale_id #locale_id} => String
+    #   * {Types::DescribeBotResourceGenerationResponse#generation_id #generation_id} => String
+    #   * {Types::DescribeBotResourceGenerationResponse#failure_reasons #failure_reasons} => Array&lt;String&gt;
+    #   * {Types::DescribeBotResourceGenerationResponse#generation_status #generation_status} => String
+    #   * {Types::DescribeBotResourceGenerationResponse#generation_input_prompt #generation_input_prompt} => String
+    #   * {Types::DescribeBotResourceGenerationResponse#generated_bot_locale_url #generated_bot_locale_url} => String
+    #   * {Types::DescribeBotResourceGenerationResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::DescribeBotResourceGenerationResponse#model_arn #model_arn} => String
+    #   * {Types::DescribeBotResourceGenerationResponse#last_updated_date_time #last_updated_date_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_bot_resource_generation({
+    #     bot_id: "Id", # required
+    #     bot_version: "BotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #     generation_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.generation_id #=> String
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0] #=> String
+    #   resp.generation_status #=> String, one of "Failed", "Complete", "InProgress"
+    #   resp.generation_input_prompt #=> String
+    #   resp.generated_bot_locale_url #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.model_arn #=> String
+    #   resp.last_updated_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotResourceGeneration AWS API Documentation
+    #
+    # @overload describe_bot_resource_generation(params = {})
+    # @param [Hash] params ({})
+    def describe_bot_resource_generation(params = {}, options = {})
+      req = build_request(:describe_bot_resource_generation, params)
       req.send_request(options)
     end
 
@@ -3734,6 +4005,7 @@ module Aws::LexModelsV2
     #   * {Types::DescribeIntentResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::DescribeIntentResponse#last_updated_date_time #last_updated_date_time} => Time
     #   * {Types::DescribeIntentResponse#initial_response_setting #initial_response_setting} => Types::InitialResponseSetting
+    #   * {Types::DescribeIntentResponse#qn_a_intent_configuration #qn_a_intent_configuration} => Types::QnAIntentConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -4453,6 +4725,7 @@ module Aws::LexModelsV2
     #   resp.value_elicitation_setting.slot_capture_setting.code_hook.post_code_hook_specification.timeout_conditional.default_branch.response.allow_interrupt #=> Boolean
     #   resp.value_elicitation_setting.slot_capture_setting.elicitation_code_hook.enable_code_hook_invocation #=> Boolean
     #   resp.value_elicitation_setting.slot_capture_setting.elicitation_code_hook.invocation_label #=> String
+    #   resp.value_elicitation_setting.slot_resolution_setting.slot_resolution_strategy #=> String, one of "EnhancedFallback", "Default"
     #   resp.obfuscation_setting.obfuscation_setting_type #=> String, one of "None", "DefaultObfuscation"
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
@@ -4864,6 +5137,55 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Generates sample utterances for an intent.
+    #
+    # @option params [required, String] :intent_id
+    #   The intent unique Id for the bot request to generate utterances.
+    #
+    # @option params [required, String] :bot_id
+    #   The bot unique Id for the bot request to generate utterances.
+    #
+    # @option params [required, String] :bot_version
+    #   The bot version for the bot request to generate utterances.
+    #
+    # @option params [required, String] :locale_id
+    #   The unique locale Id for the bot request to generate utterances.
+    #
+    # @return [Types::GenerateBotElementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GenerateBotElementResponse#bot_id #bot_id} => String
+    #   * {Types::GenerateBotElementResponse#bot_version #bot_version} => String
+    #   * {Types::GenerateBotElementResponse#locale_id #locale_id} => String
+    #   * {Types::GenerateBotElementResponse#intent_id #intent_id} => String
+    #   * {Types::GenerateBotElementResponse#sample_utterances #sample_utterances} => Array&lt;Types::SampleUtterance&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.generate_bot_element({
+    #     intent_id: "Id", # required
+    #     bot_id: "Id", # required
+    #     bot_version: "BotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.intent_id #=> String
+    #   resp.sample_utterances #=> Array
+    #   resp.sample_utterances[0].utterance #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/GenerateBotElement AWS API Documentation
+    #
+    # @overload generate_bot_element(params = {})
+    # @param [Hash] params ({})
+    def generate_bot_element(params = {}, options = {})
+      req = build_request(:generate_bot_element, params)
+      req.send_request(options)
+    end
+
     # The pre-signed Amazon S3 URL to download the test execution result
     # artifacts.
     #
@@ -5032,6 +5354,68 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def list_aggregated_utterances(params = {}, options = {})
       req = build_request(:list_aggregated_utterances, params)
+      req.send_request(options)
+    end
+
+    # The action to list the replicated bots created from the source bot
+    # alias.
+    #
+    # @option params [required, String] :bot_id
+    #   The request for the unique bot ID of the replicated bot created from
+    #   the source bot alias.
+    #
+    # @option params [required, String] :replica_region
+    #   The request for the secondary region of the replicated bot created
+    #   from the source bot alias.
+    #
+    # @option params [Integer] :max_results
+    #   The request for maximum results to list the replicated bots created
+    #   from the source bot alias.
+    #
+    # @option params [String] :next_token
+    #   The request for the next token for the replicated bot created from the
+    #   source bot alias.
+    #
+    # @return [Types::ListBotAliasReplicasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBotAliasReplicasResponse#bot_id #bot_id} => String
+    #   * {Types::ListBotAliasReplicasResponse#source_region #source_region} => String
+    #   * {Types::ListBotAliasReplicasResponse#replica_region #replica_region} => String
+    #   * {Types::ListBotAliasReplicasResponse#bot_alias_replica_summaries #bot_alias_replica_summaries} => Array&lt;Types::BotAliasReplicaSummary&gt;
+    #   * {Types::ListBotAliasReplicasResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bot_alias_replicas({
+    #     bot_id: "Id", # required
+    #     replica_region: "ReplicaRegion", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.source_region #=> String
+    #   resp.replica_region #=> String
+    #   resp.bot_alias_replica_summaries #=> Array
+    #   resp.bot_alias_replica_summaries[0].bot_alias_id #=> String
+    #   resp.bot_alias_replica_summaries[0].bot_alias_replication_status #=> String, one of "Creating", "Updating", "Available", "Deleting", "Failed"
+    #   resp.bot_alias_replica_summaries[0].bot_version #=> String
+    #   resp.bot_alias_replica_summaries[0].creation_date_time #=> Time
+    #   resp.bot_alias_replica_summaries[0].last_updated_date_time #=> Time
+    #   resp.bot_alias_replica_summaries[0].failure_reasons #=> Array
+    #   resp.bot_alias_replica_summaries[0].failure_reasons[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotAliasReplicas AWS API Documentation
+    #
+    # @overload list_bot_alias_replicas(params = {})
+    # @param [Hash] params ({})
+    def list_bot_alias_replicas(params = {}, options = {})
+      req = build_request(:list_bot_alias_replicas, params)
       req.send_request(options)
     end
 
@@ -5230,6 +5614,176 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def list_bot_recommendations(params = {}, options = {})
       req = build_request(:list_bot_recommendations, params)
+      req.send_request(options)
+    end
+
+    # The action to list the replicated bots.
+    #
+    # @option params [required, String] :bot_id
+    #   The request for the unique bot IDs in the list of replicated bots.
+    #
+    # @return [Types::ListBotReplicasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBotReplicasResponse#bot_id #bot_id} => String
+    #   * {Types::ListBotReplicasResponse#source_region #source_region} => String
+    #   * {Types::ListBotReplicasResponse#bot_replica_summaries #bot_replica_summaries} => Array&lt;Types::BotReplicaSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bot_replicas({
+    #     bot_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.source_region #=> String
+    #   resp.bot_replica_summaries #=> Array
+    #   resp.bot_replica_summaries[0].replica_region #=> String
+    #   resp.bot_replica_summaries[0].creation_date_time #=> Time
+    #   resp.bot_replica_summaries[0].bot_replica_status #=> String, one of "Enabling", "Enabled", "Deleting", "Failed"
+    #   resp.bot_replica_summaries[0].failure_reasons #=> Array
+    #   resp.bot_replica_summaries[0].failure_reasons[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotReplicas AWS API Documentation
+    #
+    # @overload list_bot_replicas(params = {})
+    # @param [Hash] params ({})
+    def list_bot_replicas(params = {}, options = {})
+      req = build_request(:list_bot_replicas, params)
+      req.send_request(options)
+    end
+
+    # Lists the generation requests made for a bot locale.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot whose generation requests you want to
+    #   view.
+    #
+    # @option params [required, String] :bot_version
+    #   The version of the bot whose generation requests you want to view.
+    #
+    # @option params [required, String] :locale_id
+    #   The locale of the bot whose generation requests you want to view.
+    #
+    # @option params [Types::GenerationSortBy] :sort_by
+    #   An object containing information about the attribute and the method by
+    #   which to sort the results
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the number specified in
+    #   the `maxResults`, the response returns a token in the `nextToken`
+    #   field. Use this token when making a request to return the next batch
+    #   of results.
+    #
+    # @return [Types::ListBotResourceGenerationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBotResourceGenerationsResponse#bot_id #bot_id} => String
+    #   * {Types::ListBotResourceGenerationsResponse#bot_version #bot_version} => String
+    #   * {Types::ListBotResourceGenerationsResponse#locale_id #locale_id} => String
+    #   * {Types::ListBotResourceGenerationsResponse#generation_summaries #generation_summaries} => Array&lt;Types::GenerationSummary&gt;
+    #   * {Types::ListBotResourceGenerationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bot_resource_generations({
+    #     bot_id: "Id", # required
+    #     bot_version: "BotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #     sort_by: {
+    #       attribute: "creationStartTime", # required, accepts creationStartTime, lastUpdatedTime
+    #       order: "Ascending", # required, accepts Ascending, Descending
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.generation_summaries #=> Array
+    #   resp.generation_summaries[0].generation_id #=> String
+    #   resp.generation_summaries[0].generation_status #=> String, one of "Failed", "Complete", "InProgress"
+    #   resp.generation_summaries[0].creation_date_time #=> Time
+    #   resp.generation_summaries[0].last_updated_date_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotResourceGenerations AWS API Documentation
+    #
+    # @overload list_bot_resource_generations(params = {})
+    # @param [Hash] params ({})
+    def list_bot_resource_generations(params = {}, options = {})
+      req = build_request(:list_bot_resource_generations, params)
+      req.send_request(options)
+    end
+
+    # Contains information about all the versions replication statuses
+    # applicable for Global Resiliency.
+    #
+    # @option params [required, String] :bot_id
+    #   The request for the unique ID in the list of replicated bots.
+    #
+    # @option params [required, String] :replica_region
+    #   The request for the region used in the list of replicated bots.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum results given in the list of replicated bots.
+    #
+    # @option params [String] :next_token
+    #   The next token given in the list of replicated bots.
+    #
+    # @option params [Types::BotVersionReplicaSortBy] :sort_by
+    #   The requested sort category for the list of replicated bots.
+    #
+    # @return [Types::ListBotVersionReplicasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBotVersionReplicasResponse#bot_id #bot_id} => String
+    #   * {Types::ListBotVersionReplicasResponse#source_region #source_region} => String
+    #   * {Types::ListBotVersionReplicasResponse#replica_region #replica_region} => String
+    #   * {Types::ListBotVersionReplicasResponse#bot_version_replica_summaries #bot_version_replica_summaries} => Array&lt;Types::BotVersionReplicaSummary&gt;
+    #   * {Types::ListBotVersionReplicasResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bot_version_replicas({
+    #     bot_id: "Id", # required
+    #     replica_region: "ReplicaRegion", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     sort_by: {
+    #       attribute: "BotVersion", # required, accepts BotVersion
+    #       order: "Ascending", # required, accepts Ascending, Descending
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.source_region #=> String
+    #   resp.replica_region #=> String
+    #   resp.bot_version_replica_summaries #=> Array
+    #   resp.bot_version_replica_summaries[0].bot_version #=> String
+    #   resp.bot_version_replica_summaries[0].bot_version_replication_status #=> String, one of "Creating", "Available", "Deleting", "Failed"
+    #   resp.bot_version_replica_summaries[0].creation_date_time #=> Time
+    #   resp.bot_version_replica_summaries[0].failure_reasons #=> Array
+    #   resp.bot_version_replica_summaries[0].failure_reasons[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotVersionReplicas AWS API Documentation
+    #
+    # @overload list_bot_version_replicas(params = {})
+    # @param [Hash] params ({})
+    def list_bot_version_replicas(params = {}, options = {})
+      req = build_request(:list_bot_version_replicas, params)
       req.send_request(options)
     end
 
@@ -7672,6 +8226,68 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Starts a request for the descriptive bot builder to generate a bot
+    # locale configuration based on the prompt you provide it. After you
+    # make this call, use the `DescribeBotResourceGeneration` operation to
+    # check on the status of the generation and for the
+    # `generatedBotLocaleUrl` when the generation is complete. Use that
+    # value to retrieve the Amazon S3 object containing the bot locale
+    # configuration. You can then modify and import this configuration.
+    #
+    # @option params [required, String] :generation_input_prompt
+    #   The prompt to generate intents and slot types for the bot locale. Your
+    #   description should be both *detailed* and *precise* to help generate
+    #   appropriate and sufficient intents for your bot. Include a list of
+    #   actions to improve the intent creation process.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot for which to generate intents and
+    #   slot types.
+    #
+    # @option params [required, String] :bot_version
+    #   The version of the bot for which to generate intents and slot types.
+    #
+    # @option params [required, String] :locale_id
+    #   The locale of the bot for which to generate intents and slot types.
+    #
+    # @return [Types::StartBotResourceGenerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartBotResourceGenerationResponse#generation_input_prompt #generation_input_prompt} => String
+    #   * {Types::StartBotResourceGenerationResponse#generation_id #generation_id} => String
+    #   * {Types::StartBotResourceGenerationResponse#bot_id #bot_id} => String
+    #   * {Types::StartBotResourceGenerationResponse#bot_version #bot_version} => String
+    #   * {Types::StartBotResourceGenerationResponse#locale_id #locale_id} => String
+    #   * {Types::StartBotResourceGenerationResponse#generation_status #generation_status} => String
+    #   * {Types::StartBotResourceGenerationResponse#creation_date_time #creation_date_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_bot_resource_generation({
+    #     generation_input_prompt: "GenerationInput", # required
+    #     bot_id: "Id", # required
+    #     bot_version: "BotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.generation_input_prompt #=> String
+    #   resp.generation_id #=> String
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.generation_status #=> String, one of "Failed", "Complete", "InProgress"
+    #   resp.creation_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartBotResourceGeneration AWS API Documentation
+    #
+    # @overload start_bot_resource_generation(params = {})
+    # @param [Hash] params ({})
+    def start_bot_resource_generation(params = {}, options = {})
+      req = build_request(:start_bot_resource_generation, params)
+      req.send_request(options)
+    end
+
     # Starts importing a bot, bot locale, or custom vocabulary from a zip
     # archive that you uploaded to an S3 bucket.
     #
@@ -8251,6 +8867,7 @@ module Aws::LexModelsV2
     #               log_prefix: "LogPrefix", # required
     #             },
     #           },
+    #           selective_logging_enabled: false,
     #         },
     #       ],
     #       audio_log_settings: [
@@ -8263,6 +8880,7 @@ module Aws::LexModelsV2
     #               log_prefix: "LogPrefix", # required
     #             },
     #           },
+    #           selective_logging_enabled: false,
     #         },
     #       ],
     #     },
@@ -8286,11 +8904,13 @@ module Aws::LexModelsV2
     #   resp.conversation_log_settings.text_log_settings[0].enabled #=> Boolean
     #   resp.conversation_log_settings.text_log_settings[0].destination.cloud_watch.cloud_watch_log_group_arn #=> String
     #   resp.conversation_log_settings.text_log_settings[0].destination.cloud_watch.log_prefix #=> String
+    #   resp.conversation_log_settings.text_log_settings[0].selective_logging_enabled #=> Boolean
     #   resp.conversation_log_settings.audio_log_settings #=> Array
     #   resp.conversation_log_settings.audio_log_settings[0].enabled #=> Boolean
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.kms_key_arn #=> String
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.s3_bucket_arn #=> String
     #   resp.conversation_log_settings.audio_log_settings[0].destination.s3_bucket.log_prefix #=> String
+    #   resp.conversation_log_settings.audio_log_settings[0].selective_logging_enabled #=> Boolean
     #   resp.sentiment_analysis_settings.detect_sentiment #=> Boolean
     #   resp.bot_alias_status #=> String, one of "Creating", "Available", "Deleting", "Failed"
     #   resp.bot_id #=> String
@@ -8336,6 +8956,12 @@ module Aws::LexModelsV2
     #   The new Amazon Polly voice Amazon Lex should use for voice interaction
     #   with the user.
     #
+    # @option params [Types::GenerativeAISettings] :generative_ai_settings
+    #   Contains settings for generative AI features powered by Amazon Bedrock
+    #   for your bot locale. Use this object to turn generative AI features on
+    #   and off. Pricing may differ if you turn a feature on. For more
+    #   information, see LINK.
+    #
     # @return [Types::UpdateBotLocaleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateBotLocaleResponse#bot_id #bot_id} => String
@@ -8350,6 +8976,7 @@ module Aws::LexModelsV2
     #   * {Types::UpdateBotLocaleResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::UpdateBotLocaleResponse#last_updated_date_time #last_updated_date_time} => Time
     #   * {Types::UpdateBotLocaleResponse#recommended_actions #recommended_actions} => Array&lt;String&gt;
+    #   * {Types::UpdateBotLocaleResponse#generative_ai_settings #generative_ai_settings} => Types::GenerativeAISettings
     #
     # @example Request syntax with placeholder values
     #
@@ -8362,6 +8989,30 @@ module Aws::LexModelsV2
     #     voice_settings: {
     #       voice_id: "VoiceId", # required
     #       engine: "standard", # accepts standard, neural
+    #     },
+    #     generative_ai_settings: {
+    #       runtime_settings: {
+    #         slot_resolution_improvement: {
+    #           enabled: false, # required
+    #           bedrock_model_specification: {
+    #             model_arn: "BedrockModelArn", # required
+    #           },
+    #         },
+    #       },
+    #       buildtime_settings: {
+    #         descriptive_bot_builder: {
+    #           enabled: false, # required
+    #           bedrock_model_specification: {
+    #             model_arn: "BedrockModelArn", # required
+    #           },
+    #         },
+    #         sample_utterance_generation: {
+    #           enabled: false, # required
+    #           bedrock_model_specification: {
+    #             model_arn: "BedrockModelArn", # required
+    #           },
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -8382,6 +9033,12 @@ module Aws::LexModelsV2
     #   resp.last_updated_date_time #=> Time
     #   resp.recommended_actions #=> Array
     #   resp.recommended_actions[0] #=> String
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.enabled #=> Boolean
+    #   resp.generative_ai_settings.runtime_settings.slot_resolution_improvement.bedrock_model_specification.model_arn #=> String
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.enabled #=> Boolean
+    #   resp.generative_ai_settings.buildtime_settings.descriptive_bot_builder.bedrock_model_specification.model_arn #=> String
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.enabled #=> Boolean
+    #   resp.generative_ai_settings.buildtime_settings.sample_utterance_generation.bedrock_model_specification.model_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocale AWS API Documentation
     #
@@ -8601,6 +9258,12 @@ module Aws::LexModelsV2
     #   Configuration settings for a response sent to the user before Amazon
     #   Lex starts eliciting slots.
     #
+    # @option params [Types::QnAIntentConfiguration] :qn_a_intent_configuration
+    #   Specifies the configuration of the built-in `Amazon.QnAIntent`. The
+    #   `AMAZON.QnAIntent` intent is called when Amazon Lex can't determine
+    #   another intent to invoke. If you specify this field, you can't
+    #   specify the `kendraConfiguration` field.
+    #
     # @return [Types::UpdateIntentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateIntentResponse#intent_id #intent_id} => String
@@ -8622,6 +9285,7 @@ module Aws::LexModelsV2
     #   * {Types::UpdateIntentResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::UpdateIntentResponse#last_updated_date_time #last_updated_date_time} => Time
     #   * {Types::UpdateIntentResponse#initial_response_setting #initial_response_setting} => Types::InitialResponseSetting
+    #   * {Types::UpdateIntentResponse#qn_a_intent_configuration #qn_a_intent_configuration} => Types::QnAIntentConfiguration
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateIntent AWS API Documentation
     #
@@ -9376,6 +10040,7 @@ module Aws::LexModelsV2
     #   resp.value_elicitation_setting.slot_capture_setting.code_hook.post_code_hook_specification.timeout_conditional.default_branch.response.allow_interrupt #=> Boolean
     #   resp.value_elicitation_setting.slot_capture_setting.elicitation_code_hook.enable_code_hook_invocation #=> Boolean
     #   resp.value_elicitation_setting.slot_capture_setting.elicitation_code_hook.invocation_label #=> String
+    #   resp.value_elicitation_setting.slot_resolution_setting.slot_resolution_strategy #=> String, one of "EnhancedFallback", "Default"
     #   resp.obfuscation_setting.obfuscation_setting_type #=> String, one of "None", "DefaultObfuscation"
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
@@ -9716,7 +10381,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -14,6 +14,7 @@ module Aws::TranscribeService
       option(
         :endpoint_provider,
         doc_type: 'Aws::TranscribeService::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::TranscribeService
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -72,6 +74,8 @@ module Aws::TranscribeService
             Aws::TranscribeService::Endpoints::DeleteCallAnalyticsJob.build(context)
           when :delete_language_model
             Aws::TranscribeService::Endpoints::DeleteLanguageModel.build(context)
+          when :delete_medical_scribe_job
+            Aws::TranscribeService::Endpoints::DeleteMedicalScribeJob.build(context)
           when :delete_medical_transcription_job
             Aws::TranscribeService::Endpoints::DeleteMedicalTranscriptionJob.build(context)
           when :delete_medical_vocabulary
@@ -88,6 +92,8 @@ module Aws::TranscribeService
             Aws::TranscribeService::Endpoints::GetCallAnalyticsCategory.build(context)
           when :get_call_analytics_job
             Aws::TranscribeService::Endpoints::GetCallAnalyticsJob.build(context)
+          when :get_medical_scribe_job
+            Aws::TranscribeService::Endpoints::GetMedicalScribeJob.build(context)
           when :get_medical_transcription_job
             Aws::TranscribeService::Endpoints::GetMedicalTranscriptionJob.build(context)
           when :get_medical_vocabulary
@@ -104,6 +110,8 @@ module Aws::TranscribeService
             Aws::TranscribeService::Endpoints::ListCallAnalyticsJobs.build(context)
           when :list_language_models
             Aws::TranscribeService::Endpoints::ListLanguageModels.build(context)
+          when :list_medical_scribe_jobs
+            Aws::TranscribeService::Endpoints::ListMedicalScribeJobs.build(context)
           when :list_medical_transcription_jobs
             Aws::TranscribeService::Endpoints::ListMedicalTranscriptionJobs.build(context)
           when :list_medical_vocabularies
@@ -118,6 +126,8 @@ module Aws::TranscribeService
             Aws::TranscribeService::Endpoints::ListVocabularyFilters.build(context)
           when :start_call_analytics_job
             Aws::TranscribeService::Endpoints::StartCallAnalyticsJob.build(context)
+          when :start_medical_scribe_job
+            Aws::TranscribeService::Endpoints::StartMedicalScribeJob.build(context)
           when :start_medical_transcription_job
             Aws::TranscribeService::Endpoints::StartMedicalTranscriptionJob.build(context)
           when :start_transcription_job

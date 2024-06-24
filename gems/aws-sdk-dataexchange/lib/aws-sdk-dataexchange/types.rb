@@ -771,6 +771,22 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # Extra details specific to a data update type notification.
+    #
+    # @!attribute [rw] data_updated_at
+    #   A datetime in the past when the data was updated. This typically
+    #   means that the underlying resource supporting the data set was
+    #   updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/DataUpdateRequestDetails AWS API Documentation
+    #
+    class DataUpdateRequestDetails < Struct.new(
+      :data_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The LF-tag policy for database resources.
     #
     # @!attribute [rw] expression
@@ -863,6 +879,20 @@ module Aws::DataExchange
     class DeleteRevisionRequest < Struct.new(
       :data_set_id,
       :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Extra details specific to a deprecation type notification.
+    #
+    # @!attribute [rw] deprecation_at
+    #   A datetime in the future when the data set will be deprecated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/DeprecationRequestDetails AWS API Documentation
+    #
+    class DeprecationRequestDetails < Struct.new(
+      :deprecation_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2167,6 +2197,25 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # Extra details specific to the affected scope in this LF data set.
+    #
+    # @!attribute [rw] database
+    #   The underlying Glue database that the notification is referring to.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The underlying Glue table that the notification is referring to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/LakeFormationTagPolicyDetails AWS API Documentation
+    #
+    class LakeFormationTagPolicyDetails < Struct.new(
+      :database,
+      :table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] data_set_id
     #   The unique identifier for a data set.
     #   @return [String]
@@ -2409,6 +2458,30 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # Extra details specific to this notification.
+    #
+    # @!attribute [rw] data_update
+    #   Extra details specific to a data update type notification.
+    #   @return [Types::DataUpdateRequestDetails]
+    #
+    # @!attribute [rw] deprecation
+    #   Extra details specific to a deprecation type notification.
+    #   @return [Types::DeprecationRequestDetails]
+    #
+    # @!attribute [rw] schema_change
+    #   Extra details specific to a schema change type notification.
+    #   @return [Types::SchemaChangeRequestDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/NotificationDetails AWS API Documentation
+    #
+    class NotificationDetails < Struct.new(
+      :data_update,
+      :deprecation,
+      :schema_change)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details about the origin of the data set.
     #
     # @!attribute [rw] product_id
@@ -2447,6 +2520,52 @@ module Aws::DataExchange
     #
     class RedshiftDataShareAssetSourceEntry < Struct.new(
       :data_share_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Extra details specific to the affected scope in this Redshift data
+    # set.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the underlying Redshift data share that is being affected
+    #   by this notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The database name in the Redshift data share that is being affected
+    #   by this notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] function
+    #   A function name in the Redshift database that is being affected by
+    #   this notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   A table name in the Redshift database that is being affected by this
+    #   notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   A schema name in the Redshift database that is being affected by
+    #   this notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] view
+    #   A view name in the Redshift database that is being affected by this
+    #   notification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RedshiftDataShareDetails AWS API Documentation
+    #
+    class RedshiftDataShareDetails < Struct.new(
+      :arn,
+      :database,
+      :function,
+      :table,
+      :schema,
+      :view)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2885,6 +3004,28 @@ module Aws::DataExchange
       include Aws::Structure
     end
 
+    # Extra details specific to the affected scope in this S3 Data Access
+    # data set.
+    #
+    # @!attribute [rw] key_prefixes
+    #   A list of the key prefixes affected by this notification. This can
+    #   have up to 50 entries.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] keys
+    #   A list of the keys affected by this notification. This can have up
+    #   to 50 entries.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/S3DataAccessDetails AWS API Documentation
+    #
+    class S3DataAccessDetails < Struct.new(
+      :key_prefixes,
+      :keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon S3 object that is the asset.
     #
     # @!attribute [rw] size
@@ -2895,6 +3036,79 @@ module Aws::DataExchange
     #
     class S3SnapshotAsset < Struct.new(
       :size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object encompassing information about a schema change to a single,
+    # particular field, a notification can have up to 100 of these.
+    #
+    # @!attribute [rw] name
+    #   Name of the changing field. This value can be up to 255 characters
+    #   long.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Is the field being added, removed, or modified?
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Description of what's changing about this field. This value can be
+    #   up to 512 characters long.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/SchemaChangeDetails AWS API Documentation
+    #
+    class SchemaChangeDetails < Struct.new(
+      :name,
+      :type,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Extra details specific to this schema change type notification.
+    #
+    # @!attribute [rw] changes
+    #   List of schema changes happening in the scope of this notification.
+    #   This can have up to 100 entries.
+    #   @return [Array<Types::SchemaChangeDetails>]
+    #
+    # @!attribute [rw] schema_change_at
+    #   A date in the future when the schema change is taking effect.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/SchemaChangeRequestDetails AWS API Documentation
+    #
+    class SchemaChangeRequestDetails < Struct.new(
+      :changes,
+      :schema_change_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the scope of the notifications such as the affected
+    # resources.
+    #
+    # @!attribute [rw] lake_formation_tag_policies
+    #   Underlying LF resources that will be affected by this notification.
+    #   @return [Array<Types::LakeFormationTagPolicyDetails>]
+    #
+    # @!attribute [rw] redshift_data_shares
+    #   Underlying Redshift resources that will be affected by this
+    #   notification.
+    #   @return [Array<Types::RedshiftDataShareDetails>]
+    #
+    # @!attribute [rw] s3_data_accesses
+    #   Underlying S3 resources that will be affected by this notification.
+    #   @return [Array<Types::S3DataAccessDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/ScopeDetails AWS API Documentation
+    #
+    class ScopeDetails < Struct.new(
+      :lake_formation_tag_policies,
+      :redshift_data_shares,
+      :s3_data_accesses)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2970,6 +3184,55 @@ module Aws::DataExchange
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] scope
+    #   Affected scope of this notification such as the underlying resources
+    #   affected by the notification event.
+    #   @return [Types::ScopeDetails]
+    #
+    # @!attribute [rw] client_token
+    #   Idempotency key for the notification, this key allows us to
+    #   deduplicate notifications that are sent in quick succession
+    #   erroneously.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   Free-form text field for providers to add information about their
+    #   notifications.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_set_id
+    #   Affected data set of the notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   Extra details specific to this notification type.
+    #   @return [Types::NotificationDetails]
+    #
+    # @!attribute [rw] type
+    #   The type of the notification. Describing the kind of event the
+    #   notification is alerting you to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/SendDataSetNotificationRequest AWS API Documentation
+    #
+    class SendDataSetNotificationRequest < Struct.new(
+      :scope,
+      :client_token,
+      :comment,
+      :data_set_id,
+      :details,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/SendDataSetNotificationResponse AWS API Documentation
+    #
+    class SendDataSetNotificationResponse < Aws::EmptyStructure; end
 
     # The request has exceeded the quotas imposed by the service.
     #

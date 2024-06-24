@@ -4,6 +4,10 @@ require_relative '../spec_helper'
 
 module Aws
   describe 'Credential Resolution Chain' do
+    before(:each) do
+      allow_any_instance_of(ProcessCredentials).to receive(:warn)
+    end
+
     let(:mock_credential_file) do
       File.expand_path(
         File.join(

@@ -1,6 +1,76 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2024-06-07)
+------------------
+
+* Feature - This release adds OpenIdConnect (OIDC) configuration support for IdentitySources, allowing for external IDPs to be used in authorization requests.
+
+1.23.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2024-05-09)
+------------------
+
+* Feature - Adds policy effect and actions fields to Policy API's.
+
+1.20.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2024-04-05)
+------------------
+
+* Feature - Adding BatchIsAuthorizedWithToken API which supports multiple authorization requests against a PolicyStore given a bearer token.
+
+1.18.0 (2024-04-04)
+------------------
+
+* Feature - Adds GroupConfiguration field to Identity Source API's
+
+1.17.0 (2024-03-06)
+------------------
+
+* Feature - Deprecating details in favor of configuration for GetIdentitySource and ListIdentitySources APIs.
+
+1.16.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2023-12-01)
+------------------
+
+* Feature - Adds description field to PolicyStore API's and namespaces field to GetSchema.
+
+1.14.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.13.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.12.0 (2023-11-17)
+------------------
+
+* Feature - Adding BatchIsAuthorized API which supports multiple authorization requests against a PolicyStore
+
+1.11.0 (2023-10-19)
+------------------
+
+* Feature - Improving Amazon Verified Permissions Create experience
+
 1.10.0 (2023-09-27)
 ------------------
 

@@ -68,6 +68,20 @@ module Aws::IVS
       end
     end
 
+    class CreatePlaybackRestrictionPolicy
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::IVS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class CreateRecordingConfiguration
       def self.build(context)
         unless context.config.regional_endpoint
@@ -124,6 +138,20 @@ module Aws::IVS
       end
     end
 
+    class DeletePlaybackRestrictionPolicy
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::IVS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteRecordingConfiguration
       def self.build(context)
         unless context.config.regional_endpoint
@@ -167,6 +195,20 @@ module Aws::IVS
     end
 
     class GetPlaybackKeyPair
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::IVS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class GetPlaybackRestrictionPolicy
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -265,6 +307,20 @@ module Aws::IVS
     end
 
     class ListPlaybackKeyPairs
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::IVS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class ListPlaybackRestrictionPolicies
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -419,6 +475,20 @@ module Aws::IVS
     end
 
     class UpdateChannel
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::IVS::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdatePlaybackRestrictionPolicy
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

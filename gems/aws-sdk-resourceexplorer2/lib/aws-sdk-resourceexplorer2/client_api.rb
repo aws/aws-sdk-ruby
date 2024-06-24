@@ -13,7 +13,9 @@ module Aws::ResourceExplorer2
 
     include Seahorse::Model
 
+    AWSServiceAccessStatus = Shapes::StringShape.new(name: 'AWSServiceAccessStatus')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountId = Shapes::StringShape.new(name: 'AccountId')
     AssociateDefaultViewInput = Shapes::StructureShape.new(name: 'AssociateDefaultViewInput')
     AssociateDefaultViewInputViewArnString = Shapes::StringShape.new(name: 'AssociateDefaultViewInputViewArnString')
     AssociateDefaultViewOutput = Shapes::StructureShape.new(name: 'AssociateDefaultViewOutput')
@@ -28,6 +30,7 @@ module Aws::ResourceExplorer2
     CreateIndexOutput = Shapes::StructureShape.new(name: 'CreateIndexOutput')
     CreateViewInput = Shapes::StructureShape.new(name: 'CreateViewInput')
     CreateViewInputClientTokenString = Shapes::StringShape.new(name: 'CreateViewInputClientTokenString')
+    CreateViewInputScopeString = Shapes::StringShape.new(name: 'CreateViewInputScopeString')
     CreateViewOutput = Shapes::StructureShape.new(name: 'CreateViewOutput')
     DeleteIndexInput = Shapes::StructureShape.new(name: 'DeleteIndexInput')
     DeleteIndexOutput = Shapes::StructureShape.new(name: 'DeleteIndexOutput')
@@ -35,6 +38,7 @@ module Aws::ResourceExplorer2
     DeleteViewInputViewArnString = Shapes::StringShape.new(name: 'DeleteViewInputViewArnString')
     DeleteViewOutput = Shapes::StructureShape.new(name: 'DeleteViewOutput')
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
+    GetAccountLevelServiceConfigurationOutput = Shapes::StructureShape.new(name: 'GetAccountLevelServiceConfigurationOutput')
     GetDefaultViewOutput = Shapes::StructureShape.new(name: 'GetDefaultViewOutput')
     GetIndexOutput = Shapes::StructureShape.new(name: 'GetIndexOutput')
     GetViewInput = Shapes::StructureShape.new(name: 'GetViewInput')
@@ -48,6 +52,11 @@ module Aws::ResourceExplorer2
     IndexState = Shapes::StringShape.new(name: 'IndexState')
     IndexType = Shapes::StringShape.new(name: 'IndexType')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    ListIndexesForMembersInput = Shapes::StructureShape.new(name: 'ListIndexesForMembersInput')
+    ListIndexesForMembersInputAccountIdListList = Shapes::ListShape.new(name: 'ListIndexesForMembersInputAccountIdListList')
+    ListIndexesForMembersInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListIndexesForMembersInputMaxResultsInteger')
+    ListIndexesForMembersInputNextTokenString = Shapes::StringShape.new(name: 'ListIndexesForMembersInputNextTokenString')
+    ListIndexesForMembersOutput = Shapes::StructureShape.new(name: 'ListIndexesForMembersOutput')
     ListIndexesInput = Shapes::StructureShape.new(name: 'ListIndexesInput')
     ListIndexesInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListIndexesInputMaxResultsInteger')
     ListIndexesInputNextTokenString = Shapes::StringShape.new(name: 'ListIndexesInputNextTokenString')
@@ -62,6 +71,9 @@ module Aws::ResourceExplorer2
     ListViewsInputMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListViewsInputMaxResultsInteger')
     ListViewsOutput = Shapes::StructureShape.new(name: 'ListViewsOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MemberIndex = Shapes::StructureShape.new(name: 'MemberIndex')
+    MemberIndexList = Shapes::ListShape.new(name: 'MemberIndexList')
+    OrgConfiguration = Shapes::StructureShape.new(name: 'OrgConfiguration')
     QueryString = Shapes::StringShape.new(name: 'QueryString')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
     Resource = Shapes::StructureShape.new(name: 'Resource')
@@ -144,6 +156,7 @@ module Aws::ResourceExplorer2
     CreateViewInput.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateViewInputClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateViewInput.add_member(:filters, Shapes::ShapeRef.new(shape: SearchFilter, location_name: "Filters"))
     CreateViewInput.add_member(:included_properties, Shapes::ShapeRef.new(shape: IncludedPropertyList, location_name: "IncludedProperties"))
+    CreateViewInput.add_member(:scope, Shapes::ShapeRef.new(shape: CreateViewInputScopeString, location_name: "Scope"))
     CreateViewInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateViewInput.add_member(:view_name, Shapes::ShapeRef.new(shape: ViewName, required: true, location_name: "ViewName"))
     CreateViewInput.struct_class = Types::CreateViewInput
@@ -164,6 +177,9 @@ module Aws::ResourceExplorer2
 
     DeleteViewOutput.add_member(:view_arn, Shapes::ShapeRef.new(shape: String, location_name: "ViewArn"))
     DeleteViewOutput.struct_class = Types::DeleteViewOutput
+
+    GetAccountLevelServiceConfigurationOutput.add_member(:org_configuration, Shapes::ShapeRef.new(shape: OrgConfiguration, location_name: "OrgConfiguration"))
+    GetAccountLevelServiceConfigurationOutput.struct_class = Types::GetAccountLevelServiceConfigurationOutput
 
     GetDefaultViewOutput.add_member(:view_arn, Shapes::ShapeRef.new(shape: String, location_name: "ViewArn"))
     GetDefaultViewOutput.struct_class = Types::GetDefaultViewOutput
@@ -200,6 +216,17 @@ module Aws::ResourceExplorer2
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    ListIndexesForMembersInput.add_member(:account_id_list, Shapes::ShapeRef.new(shape: ListIndexesForMembersInputAccountIdListList, required: true, location_name: "AccountIdList"))
+    ListIndexesForMembersInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListIndexesForMembersInputMaxResultsInteger, location_name: "MaxResults"))
+    ListIndexesForMembersInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListIndexesForMembersInputNextTokenString, location_name: "NextToken"))
+    ListIndexesForMembersInput.struct_class = Types::ListIndexesForMembersInput
+
+    ListIndexesForMembersInputAccountIdListList.member = Shapes::ShapeRef.new(shape: AccountId)
+
+    ListIndexesForMembersOutput.add_member(:indexes, Shapes::ShapeRef.new(shape: MemberIndexList, location_name: "Indexes"))
+    ListIndexesForMembersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListIndexesForMembersOutput.struct_class = Types::ListIndexesForMembersOutput
+
     ListIndexesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListIndexesInputMaxResultsInteger, location_name: "MaxResults"))
     ListIndexesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListIndexesInputNextTokenString, location_name: "NextToken"))
     ListIndexesInput.add_member(:regions, Shapes::ShapeRef.new(shape: ListIndexesInputRegionsList, location_name: "Regions"))
@@ -233,6 +260,18 @@ module Aws::ResourceExplorer2
     ListViewsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListViewsOutput.add_member(:views, Shapes::ShapeRef.new(shape: ViewArnList, location_name: "Views"))
     ListViewsOutput.struct_class = Types::ListViewsOutput
+
+    MemberIndex.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "AccountId"))
+    MemberIndex.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
+    MemberIndex.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "Region"))
+    MemberIndex.add_member(:type, Shapes::ShapeRef.new(shape: IndexType, location_name: "Type"))
+    MemberIndex.struct_class = Types::MemberIndex
+
+    MemberIndexList.member = Shapes::ShapeRef.new(shape: MemberIndex)
+
+    OrgConfiguration.add_member(:aws_service_access_status, Shapes::ShapeRef.new(shape: AWSServiceAccessStatus, required: true, location_name: "AWSServiceAccessStatus"))
+    OrgConfiguration.add_member(:service_linked_role, Shapes::ShapeRef.new(shape: String, location_name: "ServiceLinkedRole"))
+    OrgConfiguration.struct_class = Types::OrgConfiguration
 
     RegionList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -455,8 +494,21 @@ module Aws::ResourceExplorer2
         o.http_request_uri = "/DisassociateDefaultView"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_account_level_service_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAccountLevelServiceConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetAccountLevelServiceConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: GetAccountLevelServiceConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
@@ -507,6 +559,24 @@ module Aws::ResourceExplorer2
         o.http_request_uri = "/ListIndexes"
         o.input = Shapes::ShapeRef.new(shape: ListIndexesInput)
         o.output = Shapes::ShapeRef.new(shape: ListIndexesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_indexes_for_members, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIndexesForMembers"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListIndexesForMembers"
+        o.input = Shapes::ShapeRef.new(shape: ListIndexesForMembersInput)
+        o.output = Shapes::ShapeRef.new(shape: ListIndexesForMembersOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

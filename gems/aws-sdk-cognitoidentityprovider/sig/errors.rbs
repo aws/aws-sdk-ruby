@@ -1,0 +1,139 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CognitoIdentityProvider
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AliasExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CodeDeliveryFailureException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class CodeMismatchException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class DuplicateProviderException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class EnableSoftwareTokenMFAException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ExpiredCodeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ForbiddenException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class GroupExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InternalErrorException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidEmailRoleAccessPolicyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidLambdaResponseException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidOAuthFlowException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidParameterException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidPasswordException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidSmsRoleAccessPolicyException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidSmsRoleTrustRelationshipException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class InvalidUserPoolConfigurationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class LimitExceededException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class MFAMethodNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class NotAuthorizedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PasswordResetRequiredException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class PreconditionNotMetException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class ScopeDoesNotExistException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class SoftwareTokenMFANotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyFailedAttemptsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class TooManyRequestsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnauthorizedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnexpectedLambdaException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedIdentityProviderException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedOperationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedTokenTypeException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UnsupportedUserStateException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UserImportInProgressException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UserLambdaValidationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UserNotConfirmedException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UserNotFoundException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UserPoolAddOnNotEnabledException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UserPoolTaggingException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+      class UsernameExistsException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
+    end
+  end
+end

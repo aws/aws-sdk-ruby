@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2024-06-18)
+------------------
+
+* Feature - Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
+1.81.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2024-05-30)
+------------------
+
+* Feature - CloudTrail Lake returns PartitionKeys in the GetEventDataStore API response. Events are grouped into partitions based on these keys for better query performance. For example, the calendarday key groups events by day, while combining the calendarday key with the hour key groups them by day and hour.
+
+1.79.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.78.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.77.0 (2024-03-08)
+------------------
+
+* Feature - Added exceptions to CreateTrail, DescribeTrails, and ListImportFailures APIs.
+
+1.76.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.75.0 (2024-01-18)
+------------------
+
+* Feature - This release adds a new API ListInsightsMetricData to retrieve metric data from CloudTrail Insights.
+
+1.74.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2023-11-27)
+------------------
+
+* Feature - CloudTrail Lake now supports federating event data stores. giving users the ability to run queries against their event data using Amazon Athena.
+
+1.72.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.71.0 (2023-11-15)
+------------------
+
+* Feature - The Lake Repricing feature lets customers configure a BillingMode for an event data store. The BillingMode determines the cost for ingesting and storing events and the default and maximum retention period for the event data store.
+
+1.70.0 (2023-11-09)
+------------------
+
+* Feature - The Insights in Lake feature lets customers enable CloudTrail Insights on a source CloudTrail Lake event data store and create a destination event data store to collect Insights events based on unusual management event activity in the source event data store.
+
 1.69.0 (2023-09-27)
 ------------------
 

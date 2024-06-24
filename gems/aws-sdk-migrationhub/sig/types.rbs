@@ -1,0 +1,313 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::MigrationHub
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ApplicationState
+      attr_accessor application_id: ::String
+      attr_accessor application_status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED")
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class AssociateCreatedArtifactRequest
+      attr_accessor progress_update_stream: ::String
+      attr_accessor migration_task_name: ::String
+      attr_accessor created_artifact: Types::CreatedArtifact
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class AssociateCreatedArtifactResult < Aws::EmptyStructure
+    end
+
+    class AssociateDiscoveredResourceRequest
+      attr_accessor progress_update_stream: ::String
+      attr_accessor migration_task_name: ::String
+      attr_accessor discovered_resource: Types::DiscoveredResource
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class AssociateDiscoveredResourceResult < Aws::EmptyStructure
+    end
+
+    class CreateProgressUpdateStreamRequest
+      attr_accessor progress_update_stream_name: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class CreateProgressUpdateStreamResult < Aws::EmptyStructure
+    end
+
+    class CreatedArtifact
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProgressUpdateStreamRequest
+      attr_accessor progress_update_stream_name: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DeleteProgressUpdateStreamResult < Aws::EmptyStructure
+    end
+
+    class DescribeApplicationStateRequest
+      attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeApplicationStateResult
+      attr_accessor application_status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED")
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeMigrationTaskRequest
+      attr_accessor progress_update_stream: ::String
+      attr_accessor migration_task_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMigrationTaskResult
+      attr_accessor migration_task: Types::MigrationTask
+      SENSITIVE: []
+    end
+
+    class DisassociateCreatedArtifactRequest
+      attr_accessor progress_update_stream: ::String
+      attr_accessor migration_task_name: ::String
+      attr_accessor created_artifact_name: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DisassociateCreatedArtifactResult < Aws::EmptyStructure
+    end
+
+    class DisassociateDiscoveredResourceRequest
+      attr_accessor progress_update_stream: ::String
+      attr_accessor migration_task_name: ::String
+      attr_accessor configuration_id: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DisassociateDiscoveredResourceResult < Aws::EmptyStructure
+    end
+
+    class DiscoveredResource
+      attr_accessor configuration_id: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class DryRunOperation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HomeRegionNotSetException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ImportMigrationTaskRequest
+      attr_accessor progress_update_stream: ::String
+      attr_accessor migration_task_name: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class ImportMigrationTaskResult < Aws::EmptyStructure
+    end
+
+    class InternalServerError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListApplicationStatesRequest
+      attr_accessor application_ids: ::Array[::String]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListApplicationStatesResult
+      attr_accessor application_state_list: ::Array[Types::ApplicationState]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCreatedArtifactsRequest
+      attr_accessor progress_update_stream: ::String
+      attr_accessor migration_task_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCreatedArtifactsResult
+      attr_accessor next_token: ::String
+      attr_accessor created_artifact_list: ::Array[Types::CreatedArtifact]
+      SENSITIVE: []
+    end
+
+    class ListDiscoveredResourcesRequest
+      attr_accessor progress_update_stream: ::String
+      attr_accessor migration_task_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDiscoveredResourcesResult
+      attr_accessor next_token: ::String
+      attr_accessor discovered_resource_list: ::Array[Types::DiscoveredResource]
+      SENSITIVE: []
+    end
+
+    class ListMigrationTasksRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListMigrationTasksResult
+      attr_accessor next_token: ::String
+      attr_accessor migration_task_summary_list: ::Array[Types::MigrationTaskSummary]
+      SENSITIVE: []
+    end
+
+    class ListProgressUpdateStreamsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProgressUpdateStreamsResult
+      attr_accessor progress_update_stream_summary_list: ::Array[Types::ProgressUpdateStreamSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MigrationTask
+      attr_accessor progress_update_stream: ::String
+      attr_accessor migration_task_name: ::String
+      attr_accessor task: Types::Task
+      attr_accessor update_date_time: ::Time
+      attr_accessor resource_attribute_list: ::Array[Types::ResourceAttribute]
+      SENSITIVE: []
+    end
+
+    class MigrationTaskSummary
+      attr_accessor progress_update_stream: ::String
+      attr_accessor migration_task_name: ::String
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor progress_percent: ::Integer
+      attr_accessor status_detail: ::String
+      attr_accessor update_date_time: ::Time
+      SENSITIVE: []
+    end
+
+    class NotifyApplicationStateRequest
+      attr_accessor application_id: ::String
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "COMPLETED")
+      attr_accessor update_date_time: ::Time
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class NotifyApplicationStateResult < Aws::EmptyStructure
+    end
+
+    class NotifyMigrationTaskStateRequest
+      attr_accessor progress_update_stream: ::String
+      attr_accessor migration_task_name: ::String
+      attr_accessor task: Types::Task
+      attr_accessor update_date_time: ::Time
+      attr_accessor next_update_seconds: ::Integer
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class NotifyMigrationTaskStateResult < Aws::EmptyStructure
+    end
+
+    class PolicyErrorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ProgressUpdateStreamSummary
+      attr_accessor progress_update_stream_name: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourceAttributesRequest
+      attr_accessor progress_update_stream: ::String
+      attr_accessor migration_task_name: ::String
+      attr_accessor resource_attribute_list: ::Array[Types::ResourceAttribute]
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class PutResourceAttributesResult < Aws::EmptyStructure
+    end
+
+    class ResourceAttribute
+      attr_accessor type: ("IPV4_ADDRESS" | "IPV6_ADDRESS" | "MAC_ADDRESS" | "FQDN" | "VM_MANAGER_ID" | "VM_MANAGED_OBJECT_REFERENCE" | "VM_NAME" | "VM_PATH" | "BIOS_ID" | "MOTHERBOARD_SERIAL_NUMBER")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Task
+      attr_accessor status: ("NOT_STARTED" | "IN_PROGRESS" | "FAILED" | "COMPLETED")
+      attr_accessor status_detail: ::String
+      attr_accessor progress_percent: ::Integer
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UnauthorizedOperation
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -173,6 +173,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] port_name
     #   The port name of the local connection.
+    #
+    #   Length Constraints: 128.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ActionLocalPortDetails AWS API Documentation
@@ -230,6 +232,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] port_name
     #   The port name of the remote connection.
+    #
+    #   Length Constraints: 128.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ActionRemotePortDetails AWS API Documentation
@@ -325,6 +329,36 @@ module Aws::SecurityHub
     #
     class AssociatedStandard < Struct.new(
       :standards_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options for filtering the `ListConfigurationPolicyAssociations`
+    # response. You can filter by the Amazon Resource Name (ARN) or
+    # universally unique identifier (UUID) of a configuration policy,
+    # `AssociationType`, or `AssociationStatus`.
+    #
+    # @!attribute [rw] configuration_policy_id
+    #   The ARN or UUID of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_type
+    #   Indicates whether the association between a target and a
+    #   configuration was directly applied by the Security Hub delegated
+    #   administrator or inherited from a parent.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status
+    #   The current status of the association between a target and a
+    #   configuration policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AssociationFilters AWS API Documentation
+    #
+    class AssociationFilters < Struct.new(
+      :configuration_policy_id,
+      :association_type,
+      :association_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -475,25 +509,49 @@ module Aws::SecurityHub
     # @!attribute [rw] created_at
     #   A timestamp that indicates when the rule was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
     #   A timestamp that indicates when the rule was most recently updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Time]
     #
     # @!attribute [rw] created_by
@@ -621,15 +679,27 @@ module Aws::SecurityHub
     #   captured by a finding was first observed by the security findings
     #   product.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    #
-    #
-    #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] last_observed_at
@@ -637,44 +707,80 @@ module Aws::SecurityHub
     #   captured by a finding was most recently observed by the security
     #   findings product.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    #
-    #
-    #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] created_at
     #   A timestamp that indicates when this finding record was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    #
-    #
-    #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] updated_at
     #   A timestamp that indicates when the finding record was most recently
     #   updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    #
-    #
-    #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] confidence
@@ -861,16 +967,29 @@ module Aws::SecurityHub
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] note_updated_at
-    #   The timestamp of when the note was updated. Uses the date-time
-    #   format specified in [RFC 3339 section 5.6, Internet Date/Time
-    #   Format][1]. The value cannot contain spaces. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   The timestamp of when the note was updated.
+    #
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    #
-    #
-    #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] note_updated_by
@@ -885,6 +1004,26 @@ module Aws::SecurityHub
     #
     #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
     #   @return [Array<Types::MapFilter>]
+    #
+    # @!attribute [rw] resource_application_arn
+    #   The Amazon Resource Name (ARN) of the application that is related to
+    #   a finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_application_name
+    #   The name of the application that is related to a finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] aws_account_name
+    #   The name of the Amazon Web Services account in which a finding was
+    #   generated.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 20 items.
+    #   @return [Array<Types::StringFilter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesFindingFilters AWS API Documentation
     #
@@ -923,7 +1062,10 @@ module Aws::SecurityHub
       :note_text,
       :note_updated_at,
       :note_updated_by,
-      :user_defined_fields)
+      :user_defined_fields,
+      :resource_application_arn,
+      :resource_application_name,
+      :aws_account_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -974,25 +1116,49 @@ module Aws::SecurityHub
     # @!attribute [rw] created_at
     #   A timestamp that indicates when the rule was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
     #   A timestamp that indicates when the rule was most recently updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
-    #   example, `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Time]
     #
     # @!attribute [rw] created_by
@@ -1353,11 +1519,15 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] api
     #   The name of the API method that was issued.
+    #
+    #   Length Constraints: 128.
     #   @return [String]
     #
     # @!attribute [rw] service_name
     #   The name of the Amazon Web Services service that the API method
     #   belongs to.
+    #
+    #   Length Constraints: 128.
     #   @return [String]
     #
     # @!attribute [rw] caller_type
@@ -1380,31 +1550,52 @@ module Aws::SecurityHub
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] first_seen
-    #   An ISO8601-formatted timestamp that indicates when the API call was
-    #   first observed.
+    #   A timestamp that indicates when the API call was first observed.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] last_seen
-    #   An ISO8601-formatted timestamp that indicates when the API call was
-    #   most recently observed.
+    #   A timestamp that indicates when the API call was most recently
+    #   observed.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiCallAction AWS API Documentation
@@ -1427,6 +1618,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] domain
     #   The name of the DNS domain that issued the API call.
+    #
+    #   Length Constraints: 128.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsApiCallActionDomainDetails AWS API Documentation
@@ -1627,14 +1820,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_date
     #   Indicates when the API was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -1754,27 +1958,49 @@ module Aws::SecurityHub
     # @!attribute [rw] created_date
     #   Indicates when the stage was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] last_updated_date
     #   Indicates when the stage was most recently updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] web_acl_arn
@@ -1826,14 +2052,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_date
     #   Indicates when the API was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1940,14 +2177,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_date
     #   Indicates when the stage was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1965,14 +2213,25 @@ module Aws::SecurityHub
     # @!attribute [rw] last_updated_date
     #   Indicates when the stage was most recently updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] route_settings
@@ -2407,14 +2666,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_time
     #   Indicates when the auto scaling group was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] mixed_instances_policy
@@ -2750,14 +3020,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_time
     #   The creation date and time for the launch configuration.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] ebs_optimized
@@ -3423,14 +3704,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_at
     #   Indicates when the certificate was requested.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -3468,14 +3760,25 @@ module Aws::SecurityHub
     #   Indicates when the certificate was imported. Provided if the
     #   certificate type is `IMPORTED`.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] in_use_by
@@ -3487,14 +3790,25 @@ module Aws::SecurityHub
     #   Indicates when the certificate was issued. Provided if the
     #   certificate type is `AMAZON_ISSUED`.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] issuer
@@ -3516,27 +3830,49 @@ module Aws::SecurityHub
     # @!attribute [rw] not_after
     #   The time after which the certificate becomes invalid.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] not_before
     #   The time before which the certificate is not valid.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] options
@@ -3759,14 +4095,25 @@ module Aws::SecurityHub
     # @!attribute [rw] updated_at
     #   Indicates when the renewal summary was last updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCertificateManagerCertificateRenewalSummary AWS API Documentation
@@ -4028,14 +4375,25 @@ module Aws::SecurityHub
     # @!attribute [rw] last_modified_time
     #   Indicates when that the distribution was last modified.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] logging
@@ -4232,7 +4590,7 @@ module Aws::SecurityHub
     end
 
     # A complex type that describes the Amazon S3 bucket, HTTP server (for
-    # example, a web server), AWS Elemental MediaStore, or other server from
+    # example, a web server), Elemental MediaStore, or other server from
     # which CloudFront gets your files.
     #
     # @!attribute [rw] domain_name
@@ -5426,14 +5784,25 @@ module Aws::SecurityHub
     #   If the billing mode is `PAY_PER_REQUEST`, indicates when the billing
     #   mode was set to that value.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableBillingModeSummary AWS API Documentation
@@ -5458,14 +5827,25 @@ module Aws::SecurityHub
     # @!attribute [rw] creation_date_time
     #   Indicates when the table was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] global_secondary_indexes
@@ -5547,6 +5927,11 @@ module Aws::SecurityHub
     #   * `UPDATING`
     #   @return [String]
     #
+    # @!attribute [rw] deletion_protection_enabled
+    #   Indicates whether deletion protection is to be enabled (true) or
+    #   disabled (false) on the table.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsDynamoDbTableDetails AWS API Documentation
     #
     class AwsDynamoDbTableDetails < Struct.new(
@@ -5568,7 +5953,8 @@ module Aws::SecurityHub
       :table_id,
       :table_name,
       :table_size_bytes,
-      :table_status)
+      :table_status,
+      :deletion_protection_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5722,27 +6108,49 @@ module Aws::SecurityHub
     # @!attribute [rw] last_decrease_date_time
     #   Indicates when the provisioned throughput was last decreased.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] last_increase_date_time
     #   Indicates when the provisioned throughput was last increased.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] number_of_decreases_today
@@ -5870,14 +6278,25 @@ module Aws::SecurityHub
     # @!attribute [rw] restore_date_time
     #   Indicates the point in time that the table was restored to.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] restore_in_progress
@@ -5901,14 +6320,25 @@ module Aws::SecurityHub
     #   If the key is inaccessible, the date and time when DynamoDB detected
     #   that the key was inaccessible.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -5949,6 +6379,281 @@ module Aws::SecurityHub
     class AwsDynamoDbTableStreamSpecification < Struct.new(
       :stream_enabled,
       :stream_view_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an Active Directory that’s used to authenticate
+    # an Client VPN endpoint.
+    #
+    # @!attribute [rw] directory_id
+    #   The ID of the Active Directory used for authentication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails < Struct.new(
+      :directory_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the authentication method used by the Client VPN
+    # endpoint.
+    #
+    # @!attribute [rw] type
+    #   The authentication type used.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_directory
+    #   Information about the Active Directory, if applicable. With Active
+    #   Directory authentication, clients are authenticated against existing
+    #   Active Directory groups.
+    #   @return [Types::AwsEc2ClientVpnEndpointAuthenticationOptionsActiveDirectoryDetails]
+    #
+    # @!attribute [rw] mutual_authentication
+    #   Information about the authentication certificates, if applicable.
+    #   @return [Types::AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails]
+    #
+    # @!attribute [rw] federated_authentication
+    #   Information about the IAM SAML identity provider, if applicable.
+    #   @return [Types::AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointAuthenticationOptionsDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointAuthenticationOptionsDetails < Struct.new(
+      :type,
+      :active_directory,
+      :mutual_authentication,
+      :federated_authentication)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the IAM SAML identity providers used for federated
+    # authentication.
+    #
+    # @!attribute [rw] saml_provider_arn
+    #   The Amazon Resource Name (ARN) of the IAM SAML identity provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] self_service_saml_provider_arn
+    #   The Amazon Resource Name (ARN) of the IAM SAML identity provider for
+    #   the self-service portal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointAuthenticationOptionsFederatedAuthenticationDetails < Struct.new(
+      :saml_provider_arn,
+      :self_service_saml_provider_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the client certificate used for authentication.
+    #
+    # @!attribute [rw] client_root_certificate_chain
+    #   The Amazon Resource Name (ARN) of the client certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails < Struct.new(
+      :client_root_certificate_chain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for managing connection authorization for new client
+    # connections.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether client connect options are enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The Amazon Resource Name (ARN) of the Lambda function used for
+    #   connection authorization.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of any updates to the client connect options.
+    #   @return [Types::AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointClientConnectOptionsDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointClientConnectOptionsDetails < Struct.new(
+      :enabled,
+      :lambda_function_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the status of the Client VPN endpoint attribute.
+    #
+    # @!attribute [rw] code
+    #   The status code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The status message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointClientConnectOptionsStatusDetails < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options for enabling a customizable text banner that will be displayed
+    # on Amazon Web Services provided clients when a VPN session is
+    # established.
+    #
+    # @!attribute [rw] enabled
+    #   Current state of text banner feature.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] banner_text
+    #   Customizable text that will be displayed in a banner on Amazon Web
+    #   Services provided clients when a VPN session is established.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails < Struct.new(
+      :enabled,
+      :banner_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the client connection logging options for the Client
+    # VPN endpoint.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether client connection logging is enabled for the
+    #   Client VPN endpoint.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cloudwatch_log_group
+    #   The name of the Amazon CloudWatch Logs log group to which connection
+    #   logging data is published.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloudwatch_log_stream
+    #   The name of the Amazon CloudWatch Logs log stream to which
+    #   connection logging data is published.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointConnectionLogOptionsDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointConnectionLogOptionsDetails < Struct.new(
+      :enabled,
+      :cloudwatch_log_group,
+      :cloudwatch_log_stream)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an Client VPN endpoint. A Client VPN endpoint is the
+    # resource that you create and configure to enable and manage client VPN
+    # sessions. It's the termination point for all client VPN sessions.
+    #
+    # @!attribute [rw] client_vpn_endpoint_id
+    #   The ID of the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_cidr_block
+    #   The IPv4 address range, in CIDR notation, from which client IP
+    #   addresses are assigned.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_server
+    #   Information about the DNS servers to be used for DNS resolution.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] split_tunnel
+    #   Indicates whether split-tunnel is enabled in the Client VPN
+    #   endpoint.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] transport_protocol
+    #   The transport protocol used by the Client VPN endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_port
+    #   The port number for the Client VPN endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_certificate_arn
+    #   The Amazon Resource Name (ARN) of the server certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] authentication_options
+    #   Information about the authentication method used by the Client VPN
+    #   endpoint.
+    #   @return [Array<Types::AwsEc2ClientVpnEndpointAuthenticationOptionsDetails>]
+    #
+    # @!attribute [rw] connection_log_options
+    #   Information about the client connection logging options for the
+    #   Client VPN endpoint.
+    #   @return [Types::AwsEc2ClientVpnEndpointConnectionLogOptionsDetails]
+    #
+    # @!attribute [rw] security_group_id_set
+    #   The IDs of the security groups for the target network.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] self_service_portal_url
+    #   The URL of the self-service portal.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_connect_options
+    #   The options for managing connection authorization for new client
+    #   connections.
+    #   @return [Types::AwsEc2ClientVpnEndpointClientConnectOptionsDetails]
+    #
+    # @!attribute [rw] session_timeout_hours
+    #   The maximum VPN session duration time in hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_login_banner_options
+    #   Options for enabling a customizable text banner that will be
+    #   displayed on Amazon Web Services provided clients when a VPN session
+    #   is established.
+    #   @return [Types::AwsEc2ClientVpnEndpointClientLoginBannerOptionsDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEc2ClientVpnEndpointDetails AWS API Documentation
+    #
+    class AwsEc2ClientVpnEndpointDetails < Struct.new(
+      :client_vpn_endpoint_id,
+      :description,
+      :client_cidr_block,
+      :dns_server,
+      :split_tunnel,
+      :transport_protocol,
+      :vpn_port,
+      :server_certificate_arn,
+      :authentication_options,
+      :connection_log_options,
+      :security_group_id_set,
+      :vpc_id,
+      :self_service_portal_url,
+      :client_connect_options,
+      :session_timeout_hours,
+      :client_login_banner_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6058,14 +6763,25 @@ module Aws::SecurityHub
     # @!attribute [rw] launched_at
     #   Indicates when the instance was launched.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] network_interfaces
@@ -7563,14 +8279,25 @@ module Aws::SecurityHub
     # @!attribute [rw] attach_time
     #   Indicates when the attachment initiated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] attachment_id
@@ -8154,14 +8881,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_time
     #   Indicates when the volume was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] device_name
@@ -8691,14 +9429,25 @@ module Aws::SecurityHub
     # @!attribute [rw] last_status_change
     #   The date and time of the last change in status.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] outside_ip_address
@@ -8759,14 +9508,25 @@ module Aws::SecurityHub
     # @!attribute [rw] image_published_at
     #   The date and time when the image was pushed to the repository.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsEcrContainerImageDetails AWS API Documentation
@@ -11936,14 +12696,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_time
     #   Indicates when the load balancer was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] dns_name
@@ -12233,14 +13004,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_time
     #   Indicates when the load balancer was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] dns_name
@@ -12798,14 +13580,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_at
     #   Indicates when the IAM access key was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] principal_id
@@ -12877,14 +13670,25 @@ module Aws::SecurityHub
     # @!attribute [rw] creation_date
     #   Indicates when the session was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamAccessKeySessionContextAttributes AWS API Documentation
@@ -12961,14 +13765,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_date
     #   Indicates when the IAM group was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] group_id
@@ -13023,14 +13838,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_date
     #   Indicates when the instance profile was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] instance_profile_id
@@ -13075,14 +13901,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_date
     #   Indicates when the role was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -13140,14 +13977,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_date
     #   When the policy was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] default_version_id
@@ -13186,14 +14034,25 @@ module Aws::SecurityHub
     # @!attribute [rw] update_date
     #   When the policy was most recently updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamPolicyDetails AWS API Documentation
@@ -13227,14 +14086,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_date
     #   Indicates when the version was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsIamPolicyVersion AWS API Documentation
@@ -13261,14 +14131,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_date
     #   Indicates when the role was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] instance_profile_list
@@ -13341,14 +14222,25 @@ module Aws::SecurityHub
     # @!attribute [rw] create_date
     #   Indicates when the user was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] group_list
@@ -13473,14 +14365,25 @@ module Aws::SecurityHub
     # @!attribute [rw] creation_date
     #   Indicates when the KMS key was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Float]
     #
     # @!attribute [rw] key_id
@@ -13626,14 +14529,25 @@ module Aws::SecurityHub
     # @!attribute [rw] last_modified
     #   Indicates when the function was last updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] layers
@@ -13818,25 +14732,51 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] compatible_runtimes
-    #   The layer's compatible runtimes. Maximum number of five items.
+    #   The layer's compatible [function runtimes][1].
     #
-    #   Valid values: `nodejs10.x` \| `nodejs12.x` \| `java8` \| `java11` \|
-    #   `python2.7` \| `python3.6` \| `python3.7` \| `python3.8` \|
-    #   `dotnetcore1.0` \| `dotnetcore2.1` \| `go1.x` \| `ruby2.5` \|
-    #   `provided`
+    #   The following list includes deprecated runtimes. For more
+    #   information, see [Runtime deprecation policy][2] in the *Lambda
+    #   Developer Guide*.
+    #
+    #   Array Members: Maximum number of 5 items.
+    #
+    #   Valid Values: `nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 |
+    #   nodejs10.x | nodejs12.x | nodejs14.x | nodejs16.x | java8 |
+    #   java8.al2 | java11 | python2.7 | python3.6 | python3.7 | python3.8 |
+    #   python3.9 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 |
+    #   dotnetcore3.1 | dotnet6 | nodejs4.3-edge | go1.x | ruby2.5 | ruby2.7
+    #   | provided | provided.al2 | nodejs18.x | python3.10 | java17 |
+    #   ruby3.2 | python3.11 | nodejs20.x | provided.al2023 | python3.12 |
+    #   java21`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+    #   [2]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
     #   @return [Array<String>]
     #
     # @!attribute [rw] created_date
     #   Indicates when the version was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsLambdaLayerVersionDetails AWS API Documentation
@@ -13978,7 +14918,8 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Provide details about an Amazon MSK cluster.
+    # Provide details about an Amazon Managed Streaming for Apache Kafka
+    # (Amazon MSK) cluster.
     #
     # @!attribute [rw] encryption_info
     #   Includes encryption-related information, such as the KMS key used
@@ -13987,7 +14928,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsMskClusterClusterInfoEncryptionInfoDetails]
     #
     # @!attribute [rw] current_version
-    #   The current version of the MSK cluster.
+    #   The current version of the cluster.
     #   @return [String]
     #
     # @!attribute [rw] number_of_broker_nodes
@@ -14002,6 +14943,10 @@ module Aws::SecurityHub
     #   Provides information for different modes of client authentication.
     #   @return [Types::AwsMskClusterClusterInfoClientAuthenticationDetails]
     #
+    # @!attribute [rw] enhanced_monitoring
+    #   Specifies the level of monitoring for the cluster.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsMskClusterClusterInfoDetails AWS API Documentation
     #
     class AwsMskClusterClusterInfoDetails < Struct.new(
@@ -14009,7 +14954,8 @@ module Aws::SecurityHub
       :current_version,
       :number_of_broker_nodes,
       :cluster_name,
-      :client_authentication)
+      :client_authentication,
+      :enhanced_monitoring)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14832,14 +15778,25 @@ module Aws::SecurityHub
     #   Indicates when the DB cluster was created, in Universal Coordinated
     #   Time (UTC).
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] enabled_cloud_watch_logs_exports
@@ -15065,14 +16022,25 @@ module Aws::SecurityHub
     # @!attribute [rw] snapshot_create_time
     #   Indicates when the snapshot was taken.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -15101,14 +16069,25 @@ module Aws::SecurityHub
     #   Indicates when the DB cluster was created, in Universal Coordinated
     #   Time (UTC).
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] master_username
@@ -15344,14 +16323,25 @@ module Aws::SecurityHub
     # @!attribute [rw] instance_create_time
     #   Indicates when the DB instance was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -15452,14 +16442,25 @@ module Aws::SecurityHub
     #   Specifies the latest time to which a database can be restored with
     #   point-in-time restore.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -16266,14 +17267,25 @@ module Aws::SecurityHub
     # @!attribute [rw] subscription_creation_time
     #   The datetime when the event notification subscription was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsEventSubscriptionDetails AWS API Documentation
@@ -16458,14 +17470,25 @@ module Aws::SecurityHub
     # @!attribute [rw] defer_maintenance_end_time
     #   The end of the time window for which maintenance was deferred.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] defer_maintenance_identifier
@@ -16475,14 +17498,25 @@ module Aws::SecurityHub
     # @!attribute [rw] defer_maintenance_start_time
     #   The start of the time window for which maintenance was deferred.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterDeferredMaintenanceWindow AWS API Documentation
@@ -16530,14 +17564,25 @@ module Aws::SecurityHub
     # @!attribute [rw] cluster_create_time
     #   Indicates when the cluster was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] cluster_identifier
@@ -16634,14 +17679,25 @@ module Aws::SecurityHub
     #   cluster must have a valid snapshot schedule and have backups
     #   enabled.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] expected_next_snapshot_schedule_time_status
@@ -16689,14 +17745,25 @@ module Aws::SecurityHub
     # @!attribute [rw] next_maintenance_window_start_time
     #   Indicates the start of the next maintenance window.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] node_type
@@ -16924,27 +17991,49 @@ module Aws::SecurityHub
     # @!attribute [rw] last_failure_time
     #   The last time when logs failed to be delivered.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] last_successful_delivery_time
     #   The last time that logs were delivered successfully.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] logging_enabled
@@ -17254,6 +18343,78 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Returns configuration information about the specified Amazon S3 access
+    # point. S3 access points are named network endpoints that are attached
+    # to buckets that you can use to perform S3 object operations.
+    #
+    # @!attribute [rw] access_point_arn
+    #   The Amazon Resource Name (ARN) of the access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   The name or alias of the access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket associated with the specified access
+    #   point.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_account_id
+    #   The Amazon Web Services account ID associated with the S3 bucket
+    #   associated with this access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the specified access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_origin
+    #   Indicates whether this access point allows access from the public
+    #   internet.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_access_block_configuration
+    #   provides information about the Amazon S3 Public Access Block
+    #   configuration for accounts.
+    #   @return [Types::AwsS3AccountPublicAccessBlockDetails]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Contains the virtual private cloud (VPC) configuration for the
+    #   specified access point.
+    #   @return [Types::AwsS3AccessPointVpcConfigurationDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3AccessPointDetails AWS API Documentation
+    #
+    class AwsS3AccessPointDetails < Struct.new(
+      :access_point_arn,
+      :alias,
+      :bucket,
+      :bucket_account_id,
+      :name,
+      :network_origin,
+      :public_access_block_configuration,
+      :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The virtual private cloud (VPC) configuration for an Amazon S3 access
+    # point.
+    #
+    # @!attribute [rw] vpc_id
+    #   If this field is specified, this access point will only allow
+    #   connections from the specified VPC ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3AccessPointVpcConfigurationDetails AWS API Documentation
+    #
+    class AwsS3AccessPointVpcConfigurationDetails < Struct.new(
+      :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # provides information about the Amazon S3 Public Access Block
     # configuration for accounts.
     #
@@ -17331,14 +18492,25 @@ module Aws::SecurityHub
     # @!attribute [rw] expiration_date
     #   The date when objects are moved or deleted.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] expiration_in_days
@@ -17541,14 +18713,25 @@ module Aws::SecurityHub
     #   A date on which to transition objects to the specified storage
     #   class. If you provide `Date`, you cannot provide `Days`.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] days
@@ -17604,7 +18787,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # The details of an Amazon S3 bucket.
+    # The details of an Amazon Simple Storage Service (Amazon S3) bucket.
     #
     # @!attribute [rw] owner_id
     #   The canonical user ID of the owner of the S3 bucket.
@@ -17622,14 +18805,25 @@ module Aws::SecurityHub
     # @!attribute [rw] created_at
     #   Indicates when the S3 bucket was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] server_side_encryption_configuration
@@ -17637,7 +18831,7 @@ module Aws::SecurityHub
     #   @return [Types::AwsS3BucketServerSideEncryptionConfiguration]
     #
     # @!attribute [rw] bucket_lifecycle_configuration
-    #   The lifecycle configuration for objects in the S3 bucket.
+    #   The lifecycle configuration for objects in the specified bucket.
     #   @return [Types::AwsS3BucketBucketLifecycleConfigurationDetails]
     #
     # @!attribute [rw] public_access_block_configuration
@@ -17667,8 +18861,12 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] object_lock_configuration
     #   Specifies which rule Amazon S3 applies by default to every new
-    #   object placed in the specified bucket.
+    #   object placed in the bucket.
     #   @return [Types::AwsS3BucketObjectLockConfiguration]
+    #
+    # @!attribute [rw] name
+    #   The name of the bucket.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsS3BucketDetails AWS API Documentation
     #
@@ -17685,7 +18883,8 @@ module Aws::SecurityHub
       :bucket_website_configuration,
       :bucket_notification_configuration,
       :bucket_versioning_configuration,
-      :object_lock_configuration)
+      :object_lock_configuration,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18066,14 +19265,25 @@ module Aws::SecurityHub
     # @!attribute [rw] last_modified
     #   Indicates when the object was last modified.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -18360,11 +19570,14 @@ module Aws::SecurityHub
     #  </note>
     #
     # @!attribute [rw] schema_version
-    #   The schema version that a finding is formatted for.
+    #   The schema version that a finding is formatted for. The value is
+    #   `2018-10-08`.
     #   @return [String]
     #
     # @!attribute [rw] id
     #   The security findings provider-specific identifier for a finding.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 512.
     #   @return [String]
     #
     # @!attribute [rw] product_arn
@@ -18372,6 +19585,8 @@ module Aws::SecurityHub
     #   that generates findings. This can be the ARN for a third-party
     #   product that is integrated with Security Hub, or the ARN for a
     #   custom integration.
+    #
+    #   Length Constraints: Minimum length of 12. Maximum length of 2048.
     #   @return [String]
     #
     # @!attribute [rw] product_name
@@ -18384,6 +19599,8 @@ module Aws::SecurityHub
     #
     #   When you use the Security Hub console or API to filter findings by
     #   product name, you use this attribute.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 128.
     #   @return [String]
     #
     # @!attribute [rw] company_name
@@ -18396,6 +19613,8 @@ module Aws::SecurityHub
     #
     #   When you use the Security Hub console or API to filter findings by
     #   company name, you use this attribute.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 128.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -18404,17 +19623,23 @@ module Aws::SecurityHub
     #   Security Hub populates this attribute automatically for each
     #   finding. You cannot update it using `BatchImportFindings` or
     #   `BatchUpdateFindings`.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 16.
     #   @return [String]
     #
     # @!attribute [rw] generator_id
     #   The identifier for the solution-specific component (a discrete unit
     #   of logic) that generated a finding. In various security findings
     #   providers' solutions, this generator can be called a rule, a check,
-    #   a detector, a plugin, etc.
+    #   a detector, a plugin, or something else.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 512.
     #   @return [String]
     #
     # @!attribute [rw] aws_account_id
     #   The Amazon Web Services account ID that a finding is generated in.
+    #
+    #   Length Constraints: 12.
     #   @return [String]
     #
     # @!attribute [rw] types
@@ -18424,62 +19649,108 @@ module Aws::SecurityHub
     #   Valid namespace values are: Software and Configuration Checks \|
     #   TTPs \| Effects \| Unusual Behaviors \| Sensitive Data
     #   Identifications
+    #
+    #   Array Members: Maximum number of 50 items.
     #   @return [Array<String>]
     #
     # @!attribute [rw] first_observed_at
     #   Indicates when the security findings provider first observed the
     #   potential security issue that a finding captured.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] last_observed_at
     #   Indicates when the security findings provider most recently observed
     #   the potential security issue that a finding captured.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] created_at
     #   Indicates when the security findings provider created the potential
     #   security issue that a finding captured.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] updated_at
     #   Indicates when the security findings provider last updated the
     #   finding record.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] severity
@@ -18505,19 +19776,15 @@ module Aws::SecurityHub
     #   @return [Integer]
     #
     # @!attribute [rw] title
-    #   A finding's title.
+    #   A finding's title. `Title` is a required property.
     #
-    #   <note markdown="1"> In this release, `Title` is a required property.
-    #
-    #    </note>
+    #   Length Constraints: Minimum length of 1. Maximum length of 256.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A finding's description.
+    #   A finding's description. `Description` is a required property.
     #
-    #   <note markdown="1"> In this release, `Description` is a required property.
-    #
-    #    </note>
+    #   Length Constraints: Minimum length of 1. Maximum length of 1024.
     #   @return [String]
     #
     # @!attribute [rw] remediation
@@ -18542,10 +19809,16 @@ module Aws::SecurityHub
     # @!attribute [rw] user_defined_fields
     #   A list of name/value string pairs associated with the finding. These
     #   are custom, user-defined fields added to a finding.
+    #
+    #   Can contain up to 50 key-value pairs. For each key-value pair, the
+    #   key can contain up to 128 characters, and the value can contain up
+    #   to 1024 characters.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] malware
     #   A list of malware related to a finding.
+    #
+    #   Array Members: Maximum number of 5 items.
     #   @return [Array<Types::Malware>]
     #
     # @!attribute [rw] network
@@ -18565,15 +19838,21 @@ module Aws::SecurityHub
     # @!attribute [rw] threats
     #   Details about the threat detected in a security finding and the file
     #   paths that were affected by the threat.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 32 items.
     #   @return [Array<Types::Threat>]
     #
     # @!attribute [rw] threat_intel_indicators
     #   Threat intelligence details related to a finding.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 5 items.
     #   @return [Array<Types::ThreatIntelIndicator>]
     #
     # @!attribute [rw] resources
     #   A set of resource data types that describe the resources that the
     #   finding refers to.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 32 items.
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] compliance
@@ -18602,6 +19881,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] related_findings
     #   A list of related findings.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 10 items.
     #   @return [Array<Types::RelatedFinding>]
     #
     # @!attribute [rw] note
@@ -18640,6 +19921,38 @@ module Aws::SecurityHub
     #   developed in collaboration with Amazon CodeGuru. Security Hub
     #   receives those findings.
     #   @return [Types::GeneratorDetails]
+    #
+    # @!attribute [rw] processed_at
+    #   A timestamp that indicates when Security Hub received a finding and
+    #   begins to process it.
+    #
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_name
+    #   The name of the Amazon Web Services account from which a finding was
+    #   generated.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 50.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFinding AWS API Documentation
     #
@@ -18685,17 +19998,18 @@ module Aws::SecurityHub
       :action,
       :finding_provider_fields,
       :sample,
-      :generator_details)
+      :generator_details,
+      :processed_at,
+      :aws_account_name)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A collection of attributes that are applied to all active Security
-    # Hub-aggregated findings and that result in a subset of findings that
-    # are included in this insight.
+    # A collection of filters that are applied to all active findings
+    # aggregated by Security Hub.
     #
-    # You can filter by up to 10 finding attributes. For each attribute, you
-    # can provide up to 20 filter values.
+    # You can filter by up to ten finding attributes. For each attribute,
+    # you can provide up to 20 filter values.
     #
     # @!attribute [rw] product_arn
     #   The ARN generated by Security Hub that uniquely identifies a
@@ -18705,7 +20019,7 @@ module Aws::SecurityHub
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] aws_account_id
-    #   The Amazon Web Services account ID that a finding is generated in.
+    #   The Amazon Web Services account ID in which a finding is generated.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] id
@@ -18729,62 +20043,104 @@ module Aws::SecurityHub
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] first_observed_at
-    #   An ISO8601-formatted timestamp that indicates when the security
-    #   findings provider first observed the potential security issue that a
-    #   finding captured.
+    #   A timestamp that indicates when the security findings provider first
+    #   observed the potential security issue that a finding captured.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] last_observed_at
-    #   An ISO8601-formatted timestamp that indicates when the security
-    #   findings provider most recently observed the potential security
-    #   issue that a finding captured.
+    #   A timestamp that indicates when the security findings provider most
+    #   recently observed the potential security issue that a finding
+    #   captured.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] created_at
-    #   An ISO8601-formatted timestamp that indicates when the security
-    #   findings provider captured the potential security issue that a
-    #   finding captured.
+    #   A timestamp that indicates when the security findings provider
+    #   created the potential security issue that a finding reflects.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] updated_at
-    #   An ISO8601-formatted timestamp that indicates when the security
-    #   findings provider last updated the finding record.
+    #   A timestamp that indicates when the security findings provider last
+    #   updated the finding record.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] severity_product
@@ -18943,27 +20299,49 @@ module Aws::SecurityHub
     # @!attribute [rw] process_launched_at
     #   A timestamp that identifies when the process was launched.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] process_terminated_at
     #   A timestamp that identifies when the process was terminated.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] threat_intel_indicator_type
@@ -19093,14 +20471,25 @@ module Aws::SecurityHub
     # @!attribute [rw] resource_container_launched_at
     #   A timestamp that identifies when the container was started.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Array<Types::DateFilter>]
     #
     # @!attribute [rw] resource_details_other
@@ -19273,6 +20662,39 @@ module Aws::SecurityHub
     #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html
     #   @return [Array<Types::StringFilter>]
     #
+    # @!attribute [rw] vulnerabilities_exploit_available
+    #   Indicates whether a software vulnerability in your environment has a
+    #   known exploit. You can filter findings by this field only if you use
+    #   Security Hub and Amazon Inspector.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] vulnerabilities_fix_available
+    #   Indicates whether a vulnerability is fixed in a newer version of the
+    #   affected software packages. You can filter findings by this field
+    #   only if you use Security Hub and Amazon Inspector.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] compliance_security_control_parameters_name
+    #   The name of a security control parameter.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] compliance_security_control_parameters_value
+    #   The current value of a security control parameter.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] aws_account_name
+    #   The name of the Amazon Web Services account in which a finding is
+    #   generated.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_application_name
+    #   The name of the application that is related to a finding.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] resource_application_arn
+    #   The ARN of the application that is related to a finding.
+    #   @return [Array<Types::StringFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFindingFilters AWS API Documentation
     #
     class AwsSecurityFindingFilters < Struct.new(
@@ -19372,7 +20794,14 @@ module Aws::SecurityHub
       :finding_provider_fields_types,
       :sample,
       :compliance_security_control_id,
-      :compliance_associated_standards_id)
+      :compliance_associated_standards_id,
+      :vulnerabilities_exploit_available,
+      :vulnerabilities_fix_available,
+      :compliance_security_control_parameters_name,
+      :compliance_security_control_parameters_value,
+      :aws_account_name,
+      :resource_application_name,
+      :resource_application_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21076,6 +22505,38 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] configuration_policy_association_identifiers
+    #   Specifies one or more target account IDs, organizational unit (OU)
+    #   IDs, or the root ID to retrieve associations for.
+    #   @return [Array<Types::ConfigurationPolicyAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetConfigurationPolicyAssociationsRequest AWS API Documentation
+    #
+    class BatchGetConfigurationPolicyAssociationsRequest < Struct.new(
+      :configuration_policy_association_identifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_policy_associations
+    #   Describes associations for the target accounts, OUs, or the root.
+    #   @return [Array<Types::ConfigurationPolicyAssociationSummary>]
+    #
+    # @!attribute [rw] unprocessed_configuration_policy_associations
+    #   An array of configuration policy associations, one for each
+    #   configuration policy association identifier, that was specified in
+    #   the request but couldn’t be processed due to an error.
+    #   @return [Array<Types::UnprocessedConfigurationPolicyAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BatchGetConfigurationPolicyAssociationsResponse AWS API Documentation
+    #
+    class BatchGetConfigurationPolicyAssociationsResponse < Struct.new(
+      :configuration_policy_associations,
+      :unprocessed_configuration_policy_associations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] security_control_ids
     #   A list of security controls (identified with `SecurityControlId`,
     #   `SecurityControlArn`, or a mix of both parameters). The security
@@ -21431,6 +22892,21 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The options for customizing a security control parameter with a
+    # boolean. For a boolean parameter, the options are `true` and `false`.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a boolean parameter.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BooleanConfigurationOptions AWS API Documentation
+    #
+    class BooleanConfigurationOptions < Struct.new(
+      :default_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Boolean filter for querying findings.
     #
     # @!attribute [rw] value
@@ -21661,14 +23137,16 @@ module Aws::SecurityHub
     #     * `NOT_AVAILABLE` - Check could not be performed due to a service
     #       outage, API error, or because the result of the Config
     #       evaluation was `NOT_APPLICABLE`. If the Config evaluation result
-    #       was `NOT_APPLICABLE`, then after 3 days, Security Hub
-    #       automatically archives the finding.
+    #       was `NOT_APPLICABLE` for a Security Hub control, Security Hub
+    #       automatically archives the finding after 3 days.
     #   @return [String]
     #
     # @!attribute [rw] related_requirements
     #   For a control, the industry or regulatory framework requirements
     #   that are related to the control. The check for that control is
     #   aligned with these requirements.
+    #
+    #   Array Members: Maximum number of 32 items.
     #   @return [Array<String>]
     #
     # @!attribute [rw] status_reasons
@@ -21693,6 +23171,10 @@ module Aws::SecurityHub
     #   currently enabled.
     #   @return [Array<Types::AssociatedStandard>]
     #
+    # @!attribute [rw] security_control_parameters
+    #   An object that includes security control parameter names and values.
+    #   @return [Array<Types::SecurityControlParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Compliance AWS API Documentation
     #
     class Compliance < Struct.new(
@@ -21700,7 +23182,194 @@ module Aws::SecurityHub
       :related_requirements,
       :status_reasons,
       :security_control_id,
-      :associated_standards)
+      :associated_standards,
+      :security_control_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for customizing a security control parameter.
+    #
+    # @note ConfigurationOptions is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ConfigurationOptions corresponding to the set member.
+    #
+    # @!attribute [rw] integer
+    #   The options for customizing a security control parameter that is an
+    #   integer.
+    #   @return [Types::IntegerConfigurationOptions]
+    #
+    # @!attribute [rw] integer_list
+    #   The options for customizing a security control parameter that is a
+    #   list of integers.
+    #   @return [Types::IntegerListConfigurationOptions]
+    #
+    # @!attribute [rw] double
+    #   The options for customizing a security control parameter that is a
+    #   double.
+    #   @return [Types::DoubleConfigurationOptions]
+    #
+    # @!attribute [rw] string
+    #   The options for customizing a security control parameter that is a
+    #   string data type.
+    #   @return [Types::StringConfigurationOptions]
+    #
+    # @!attribute [rw] string_list
+    #   The options for customizing a security control parameter that is a
+    #   list of strings.
+    #   @return [Types::StringListConfigurationOptions]
+    #
+    # @!attribute [rw] boolean
+    #   The options for customizing a security control parameter that is a
+    #   boolean. For a boolean parameter, the options are `true` and
+    #   `false`.
+    #   @return [Types::BooleanConfigurationOptions]
+    #
+    # @!attribute [rw] enum
+    #   The options for customizing a security control parameter that is an
+    #   enum.
+    #   @return [Types::EnumConfigurationOptions]
+    #
+    # @!attribute [rw] enum_list
+    #   The options for customizing a security control parameter that is a
+    #   list of enums.
+    #   @return [Types::EnumListConfigurationOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConfigurationOptions AWS API Documentation
+    #
+    class ConfigurationOptions < Struct.new(
+      :integer,
+      :integer_list,
+      :double,
+      :string,
+      :string_list,
+      :boolean,
+      :enum,
+      :enum_list,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Integer < ConfigurationOptions; end
+      class IntegerList < ConfigurationOptions; end
+      class Double < ConfigurationOptions; end
+      class String < ConfigurationOptions; end
+      class StringList < ConfigurationOptions; end
+      class Boolean < ConfigurationOptions; end
+      class Enum < ConfigurationOptions; end
+      class EnumList < ConfigurationOptions; end
+      class Unknown < ConfigurationOptions; end
+    end
+
+    # Provides details about the association between an Security Hub
+    # configuration and a target account, organizational unit, or the root.
+    # An association can exist between a target and a configuration policy,
+    # or between a target and self-managed behavior.
+    #
+    # @!attribute [rw] target
+    #   The target account, organizational unit, or the root.
+    #   @return [Types::Target]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConfigurationPolicyAssociation AWS API Documentation
+    #
+    class ConfigurationPolicyAssociation < Struct.new(
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains the details of a configuration policy
+    # association that’s returned in a `ListConfigurationPolicyAssociations`
+    # request.
+    #
+    # @!attribute [rw] configuration_policy_id
+    #   The universally unique identifier (UUID) of the configuration
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_id
+    #   The identifier of the target account, organizational unit, or the
+    #   root.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   Specifies whether the target is an Amazon Web Services account,
+    #   organizational unit, or the root.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_type
+    #   Indicates whether the association between the specified target and
+    #   the configuration was directly applied by the Security Hub delegated
+    #   administrator or inherited from a parent.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy association was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] association_status
+    #   The current status of the association between the specified target
+    #   and the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status_message
+    #   The explanation for a `FAILED` value for `AssociationStatus`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConfigurationPolicyAssociationSummary AWS API Documentation
+    #
+    class ConfigurationPolicyAssociationSummary < Struct.new(
+      :configuration_policy_id,
+      :target_id,
+      :target_type,
+      :association_type,
+      :updated_at,
+      :association_status,
+      :association_status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains the details of an Security Hub configuration
+    # policy that’s returned in a `ListConfigurationPolicies` request.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The universally unique identifier (UUID) of the configuration
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration policy. Alphanumeric characters and
+    #   the following ASCII characters are permitted: `-, ., !, *, /`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_enabled
+    #   Indicates whether the service that the configuration policy applies
+    #   to is enabled in the policy.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ConfigurationPolicySummary AWS API Documentation
+    #
+    class ConfigurationPolicySummary < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :description,
+      :updated_at,
+      :service_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21726,14 +23395,25 @@ module Aws::SecurityHub
     # @!attribute [rw] launched_at
     #   Indicates when the container started.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] volume_mounts
@@ -21816,7 +23496,7 @@ module Aws::SecurityHub
     end
 
     # @!attribute [rw] tags
-    #   User-defined tags that help you label the purpose of a rule.
+    #   User-defined tags associated with an automation rule.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] rule_status
@@ -21891,6 +23571,103 @@ module Aws::SecurityHub
     #
     class CreateAutomationRuleResponse < Struct.new(
       :rule_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the configuration policy. Alphanumeric characters and
+    #   the following ASCII characters are permitted: `-, ., !, *, /`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_policy
+    #   An object that defines how Security Hub is configured. It includes
+    #   whether Security Hub is enabled or disabled, a list of enabled
+    #   security standards, a list of enabled or disabled security controls,
+    #   and a list of custom parameter values for specified controls. If you
+    #   provide a list of security controls that are enabled in the
+    #   configuration policy, Security Hub disables all other controls
+    #   (including newly released controls). If you provide a list of
+    #   security controls that are disabled in the configuration policy,
+    #   Security Hub enables all other controls (including newly released
+    #   controls).
+    #   @return [Types::Policy]
+    #
+    # @!attribute [rw] tags
+    #   User-defined tags associated with a configuration policy. For more
+    #   information, see [Tagging Security Hub resources][1] in the
+    #   *Security Hub user guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/tagging-resources.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateConfigurationPolicyRequest AWS API Documentation
+    #
+    class CreateConfigurationPolicyRequest < Struct.new(
+      :name,
+      :description,
+      :configuration_policy,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The universally unique identifier (UUID) of the configuration
+    #   policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configuration_policy
+    #   An object that defines how Security Hub is configured. It includes
+    #   whether Security Hub is enabled or disabled, a list of enabled
+    #   security standards, a list of enabled or disabled security controls,
+    #   and a list of custom parameter values for specified controls. If the
+    #   request included a list of security controls that are enabled in the
+    #   configuration policy, Security Hub disables all other controls
+    #   (including newly released controls). If the request included a list
+    #   of security controls that are disabled in the configuration policy,
+    #   Security Hub enables all other controls (including newly released
+    #   controls).
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CreateConfigurationPolicyResponse AWS API Documentation
+    #
+    class CreateConfigurationPolicyResponse < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :description,
+      :updated_at,
+      :created_at,
+      :configuration_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22149,27 +23926,49 @@ module Aws::SecurityHub
     # @!attribute [rw] start
     #   A timestamp that provides the start date for the date filter.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] end
     #   A timestamp that provides the end date for the date filter.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] date_range
@@ -22256,6 +24055,23 @@ module Aws::SecurityHub
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] identifier
+    #   The Amazon Resource Name (ARN) or universally unique identifier
+    #   (UUID) of the configuration policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteConfigurationPolicyRequest AWS API Documentation
+    #
+    class DeleteConfigurationPolicyRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DeleteConfigurationPolicyResponse AWS API Documentation
+    #
+    class DeleteConfigurationPolicyResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] finding_aggregator_arn
     #   The ARN of the finding aggregator to delete. To obtain the ARN, use
@@ -22463,11 +24279,19 @@ module Aws::SecurityHub
     class DescribeOrganizationConfigurationRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] auto_enable
-    #   Whether to automatically enable Security Hub for new accounts in the
-    #   organization.
+    #   Whether to automatically enable Security Hub in new member accounts
+    #   when they join the organization.
     #
-    #   If set to `true`, then Security Hub is enabled for new accounts. If
-    #   set to false, then new accounts are not added automatically.
+    #   If set to `true`, then Security Hub is automatically enabled in new
+    #   accounts. If set to `false`, then Security Hub isn't enabled in new
+    #   accounts automatically. The default value is `false`.
+    #
+    #   If the `ConfigurationType` of your organization is set to `CENTRAL`,
+    #   then this field is set to `false` and can't be changed in the home
+    #   Region and linked Regions. However, in that case, the delegated
+    #   administrator can create a configuration policy in which Security
+    #   Hub is enabled and associate the policy with new organization
+    #   accounts.
     #   @return [Boolean]
     #
     # @!attribute [rw] member_account_limit_reached
@@ -22477,26 +24301,37 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] auto_enable_standards
     #   Whether to automatically enable Security Hub [default standards][1]
-    #   for new member accounts in the organization.
-    #
-    #   The default value of this parameter is equal to `DEFAULT`.
+    #   in new member accounts when they join the organization.
     #
     #   If equal to `DEFAULT`, then Security Hub default standards are
     #   automatically enabled for new member accounts. If equal to `NONE`,
     #   then default standards are not automatically enabled for new member
-    #   accounts.
+    #   accounts. The default value of this parameter is equal to `DEFAULT`.
+    #
+    #   If the `ConfigurationType` of your organization is set to `CENTRAL`,
+    #   then this field is set to `NONE` and can't be changed in the home
+    #   Region and linked Regions. However, in that case, the delegated
+    #   administrator can create a configuration policy in which specific
+    #   security standards are enabled and associate the policy with new
+    #   organization accounts.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html
     #   @return [String]
     #
+    # @!attribute [rw] organization_configuration
+    #   Provides information about the way an organization is configured in
+    #   Security Hub.
+    #   @return [Types::OrganizationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfigurationResponse AWS API Documentation
     #
     class DescribeOrganizationConfigurationResponse < Struct.new(
       :auto_enable,
       :member_account_limit_reached,
-      :auto_enable_standards)
+      :auto_enable_standards,
+      :organization_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22718,10 +24553,14 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] domain
     #   The DNS domain that is associated with the DNS request.
+    #
+    #   Length Constraints: 128.
     #   @return [String]
     #
     # @!attribute [rw] protocol
     #   The protocol that was used for the DNS request.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 64.
     #   @return [String]
     #
     # @!attribute [rw] blocked
@@ -22734,6 +24573,32 @@ module Aws::SecurityHub
       :domain,
       :protocol,
       :blocked)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for customizing a security control parameter that is a
+    # double.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a control parameter that is a
+    #   double.
+    #   @return [Float]
+    #
+    # @!attribute [rw] min
+    #   The minimum valid value for a control parameter that is a double.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max
+    #   The maximum valid value for a control parameter that is a double.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DoubleConfigurationOptions AWS API Documentation
+    #
+    class DoubleConfigurationOptions < Struct.new(
+      :default_value,
+      :min,
+      :max)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22823,26 +24688,82 @@ module Aws::SecurityHub
     #
     class EnableSecurityHubResponse < Aws::EmptyStructure; end
 
+    # The options for customizing a security control parameter that is an
+    # enum.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a control parameter that is an
+    #   enum.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_values
+    #   The valid values for a control parameter that is an enum.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnumConfigurationOptions AWS API Documentation
+    #
+    class EnumConfigurationOptions < Struct.new(
+      :default_value,
+      :allowed_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for customizing a security control parameter that is a
+    # list of enums.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a control parameter that is a
+    #   list of enums.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of list items that an enum list control parameter
+    #   can accept.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] allowed_values
+    #   The valid values for a control parameter that is a list of enums.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/EnumListConfigurationOptions AWS API Documentation
+    #
+    class EnumListConfigurationOptions < Struct.new(
+      :default_value,
+      :max_items,
+      :allowed_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the file paths that were affected by the
     # threat.
     #
     # @!attribute [rw] file_path
     #   Path to the infected or suspicious file on the resource it was
     #   detected on.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 128 length.
     #   @return [String]
     #
     # @!attribute [rw] file_name
     #   The name of the infected or suspicious file corresponding to the
     #   hash.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 128 length.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
     #   The Amazon Resource Name (ARN) of the resource on which the threat
     #   was detected.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 128 length.
     #   @return [String]
     #
     # @!attribute [rw] hash
     #   The hash value for the infected or suspicious file.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 128 length.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FilePaths AWS API Documentation
@@ -22882,17 +24803,28 @@ module Aws::SecurityHub
     #   @return [Types::AwsSecurityFindingIdentifier]
     #
     # @!attribute [rw] update_time
-    #   An ISO 8601-formatted timestamp that indicates when Security Hub
-    #   processed the updated finding record.
+    #   A timestamp that indicates when Security Hub processed the updated
+    #   finding record.
     #
-    #   A correctly formatted example is `2020-05-21T20:16:34.724Z`. The
-    #   value cannot contain spaces, and date and time should be separated
-    #   by `T`. For more information, see [RFC 3339 section 5.6, Internet
-    #   Date/Time Format][1].
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [Time]
     #
     # @!attribute [rw] finding_created
@@ -23006,9 +24938,45 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # In a `BatchImportFindings` request, finding providers use
-    # `FindingProviderFields` to provide and update values for confidence,
-    # criticality, related findings, severity, and types.
+    # In a [ `BatchImportFindings` ][1] request, finding providers use
+    # `FindingProviderFields` to provide and update values for the following
+    # fields:
+    #
+    # * `Confidence`
+    #
+    # * `Criticality`
+    #
+    # * `RelatedFindings`
+    #
+    # * `Severity`
+    #
+    # * `Types`
+    #
+    # The preceding fields are nested under the `FindingProviderFields`
+    # object, but also have analogues of the same name as top-level ASFF
+    # fields. When a new finding is sent to Security Hub by a finding
+    # provider, Security Hub populates the `FindingProviderFields` object
+    # automatically, if it is empty, based on the corresponding top-level
+    # fields.
+    #
+    # Finding providers can update `FindingProviderFields` only by using the
+    # `BatchImportFindings` operation. Finding providers can't update this
+    # object with the [ `BatchUpdateFindings` ][2] operation. Customers can
+    # update the top-level fields by using the `BatchUpdateFindings`
+    # operation. Customers can't update `FindingProviderFields`.
+    #
+    # For information about how Security Hub handles updates from
+    # `BatchImportFindings` to `FindingProviderFields` and to the
+    # corresponding top-level attributes, see [Using `FindingProviderFields`
+    # ][3] in the *Security Hub User Guide*.
+    #
+    #
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html
+    # [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html
+    # [3]: https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchimportfindings.html#batchimportfindings-findingproviderfields
     #
     # @!attribute [rw] confidence
     #   A finding's confidence. Confidence is defined as the likelihood
@@ -23057,7 +25025,39 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # The severity assigned to the finding by the finding provider.
+    # The severity assigned to a finding by the finding provider. This
+    # object may include one or more of the following attributes:
+    #
+    # * `Label`
+    #
+    # * `Normalized`
+    #
+    # * `Original`
+    #
+    # * `Product`
+    #
+    # If a [ `BatchImportFindings` ][1] request for a new finding only
+    # provides `Label` or only provides `Normalized`, Security Hub
+    # automatically populates the value of the other field.
+    #
+    # The `Normalized` and `Product` attributes are included in the
+    # `FindingProviderSeverity` structure to preserve the historical
+    # information associated with the finding, even if the top-level
+    # `Severity` object is later modified using the [ `BatchUpdateFindings`
+    # ][2] operation.
+    #
+    # If the top-level `Finding.Severity` object is present, but
+    # `Finding.FindingProviderFields` isn't present, Security Hub creates
+    # the `FindingProviderFields.Severity` object and copies the entire
+    # `Finding.Severity` object into it. This ensures that the original,
+    # provider-supplied details are retained within the
+    # `FindingProviderFields.Severity` object, even if the top-level
+    # `Severity` object is overwritten.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html
+    # [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html
     #
     # @!attribute [rw] label
     #   The severity label assigned to the finding by the finding provider.
@@ -23065,6 +25065,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] original
     #   The finding provider's original value for the severity.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 64.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingProviderSeverity AWS API Documentation
@@ -23192,6 +25194,9 @@ module Aws::SecurityHub
     # @!attribute [rw] labels
     #   An array of tags used to identify the detector associated with the
     #   finding.
+    #
+    #   Array Members: Minimum number of 0 items. Maximum number of 10
+    #   items.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GeneratorDetails AWS API Documentation
@@ -23237,6 +25242,133 @@ module Aws::SecurityHub
     #
     class GetAdministratorAccountResponse < Struct.new(
       :administrator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target
+    #   The target account ID, organizational unit ID, or the root ID to
+    #   retrieve the association for.
+    #   @return [Types::Target]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConfigurationPolicyAssociationRequest AWS API Documentation
+    #
+    class GetConfigurationPolicyAssociationRequest < Struct.new(
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_policy_id
+    #   The universally unique identifier (UUID) of a configuration policy.
+    #   For self-managed behavior, the value is `SELF_MANAGED_SECURITY_HUB`.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_id
+    #   The target account ID, organizational unit ID, or the root ID for
+    #   which the association is retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   Specifies whether the target is an Amazon Web Services account,
+    #   organizational unit, or the organization root.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_type
+    #   Indicates whether the association between the specified target and
+    #   the configuration was directly applied by the Security Hub delegated
+    #   administrator or inherited from a parent.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy association was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] association_status
+    #   The current status of the association between the specified target
+    #   and the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status_message
+    #   The explanation for a `FAILED` value for `AssociationStatus`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConfigurationPolicyAssociationResponse AWS API Documentation
+    #
+    class GetConfigurationPolicyAssociationResponse < Struct.new(
+      :configuration_policy_id,
+      :target_id,
+      :target_type,
+      :association_type,
+      :updated_at,
+      :association_status,
+      :association_status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   The Amazon Resource Name (ARN) or universally unique identifier
+    #   (UUID) of the configuration policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConfigurationPolicyRequest AWS API Documentation
+    #
+    class GetConfigurationPolicyRequest < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The UUID of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configuration_policy
+    #   An object that defines how Security Hub is configured. It includes
+    #   whether Security Hub is enabled or disabled, a list of enabled
+    #   security standards, a list of enabled or disabled security controls,
+    #   and a list of custom parameter values for specified controls. If the
+    #   policy includes a list of security controls that are enabled,
+    #   Security Hub disables all other controls (including newly released
+    #   controls). If the policy includes a list of security controls that
+    #   are disabled, Security Hub enables all other controls (including
+    #   newly released controls).
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetConfigurationPolicyResponse AWS API Documentation
+    #
+    class GetConfigurationPolicyResponse < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :description,
+      :updated_at,
+      :created_at,
+      :configuration_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23334,11 +25466,8 @@ module Aws::SecurityHub
     #   @return [Types::AwsSecurityFindingIdentifier]
     #
     # @!attribute [rw] start_time
-    #   An ISO 8601-formatted timestamp that indicates the start time of the
-    #   requested finding history. A correctly formatted example is
-    #   `2020-05-21T20:16:34.724Z`. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For more information, see
-    #   [RFC 3339 section 5.6, Internet Date/Time Format][1].
+    #   A timestamp that indicates the start time of the requested finding
+    #   history.
     #
     #   If you provide values for both `StartTime` and `EndTime`, Security
     #   Hub returns finding history for the specified time period. If you
@@ -23346,25 +25475,41 @@ module Aws::SecurityHub
     #   returns finding history from the `StartTime` to the time at which
     #   the API is called. If you provide a value for `EndTime` but not for
     #   `StartTime`, Security Hub returns finding history from the
-    #   [CreatedAt][2] timestamp of the finding to the `EndTime`. If you
+    #   [CreatedAt][1] timestamp of the finding to the `EndTime`. If you
     #   provide neither `StartTime` nor `EndTime`, Security Hub returns
     #   finding history from the CreatedAt timestamp of the finding to the
     #   time at which the API is called. In all of these scenarios, the
     #   response is limited to 100 results, and the maximum time period is
     #   limited to 90 days.
     #
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
-    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   An ISO 8601-formatted timestamp that indicates the end time of the
-    #   requested finding history. A correctly formatted example is
-    #   `2020-05-21T20:16:34.724Z`. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For more information, see
-    #   [RFC 3339 section 5.6, Internet Date/Time Format][1].
+    #   requested finding history.
     #
     #   If you provide values for both `StartTime` and `EndTime`, Security
     #   Hub returns finding history for the specified time period. If you
@@ -23372,17 +25517,36 @@ module Aws::SecurityHub
     #   returns finding history from the `StartTime` to the time at which
     #   the API is called. If you provide a value for `EndTime` but not for
     #   `StartTime`, Security Hub returns finding history from the
-    #   [CreatedAt][2] timestamp of the finding to the `EndTime`. If you
+    #   [CreatedAt][1] timestamp of the finding to the `EndTime`. If you
     #   provide neither `StartTime` nor `EndTime`, Security Hub returns
     #   finding history from the CreatedAt timestamp of the finding to the
     #   time at which the API is called. In all of these scenarios, the
     #   response is limited to 100 results, and the maximum time period is
     #   limited to 90 days.
     #
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
+    #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #
     #
-    #   [1]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
-    #   [2]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_AwsSecurityFindingFilters.html#securityhub-Type-AwsSecurityFindingFilters-CreatedAt
     #   @return [Time]
     #
     # @!attribute [rw] next_token
@@ -23628,6 +25792,34 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] security_control_id
+    #   The ID of the security control to retrieve the definition for. This
+    #   field doesn’t accept an Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSecurityControlDefinitionRequest AWS API Documentation
+    #
+    class GetSecurityControlDefinitionRequest < Struct.new(
+      :security_control_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_control_definition
+    #   Provides metadata for a security control, including its unique
+    #   standard-agnostic identifier, title, description, severity,
+    #   availability in Amazon Web Services Regions, and a link to
+    #   remediation steps.
+    #   @return [Types::SecurityControlDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSecurityControlDefinitionResponse AWS API Documentation
+    #
+    class GetSecurityControlDefinitionResponse < Struct.new(
+      :security_control_definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An Internet Control Message Protocol (ICMP) type and code.
     #
     # @!attribute [rw] code
@@ -23688,8 +25880,9 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] filters
     #   One or more attributes used to filter the findings included in the
-    #   insight. The insight only includes findings that match the criteria
-    #   defined in the filters.
+    #   insight. You can filter by up to ten finding attributes. For each
+    #   attribute, you can provide up to 20 filter values. The insight only
+    #   includes findings that match the criteria defined in the filters.
     #   @return [Types::AwsSecurityFindingFilters]
     #
     # @!attribute [rw] group_by_attribute
@@ -23756,6 +25949,66 @@ module Aws::SecurityHub
       :insight_arn,
       :group_by_attribute,
       :result_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for customizing a security control parameter that is an
+    # integer.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a control parameter that is an
+    #   integer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min
+    #   The minimum valid value for a control parameter that is an integer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum valid value for a control parameter that is an integer.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/IntegerConfigurationOptions AWS API Documentation
+    #
+    class IntegerConfigurationOptions < Struct.new(
+      :default_value,
+      :min,
+      :max)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for customizing a security control parameter that is a
+    # list of integers.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a control parameter that is a
+    #   list of integers.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] min
+    #   The minimum valid value for a control parameter that is a list of
+    #   integers.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max
+    #   The maximum valid value for a control parameter that is a list of
+    #   integers.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of list items that an interger list control
+    #   parameter can accept.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/IntegerListConfigurationOptions AWS API Documentation
+    #
+    class IntegerListConfigurationOptions < Struct.new(
+      :default_value,
+      :min,
+      :max,
+      :max_items)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24017,6 +26270,117 @@ module Aws::SecurityHub
     #
     class ListAutomationRulesResponse < Struct.new(
       :automation_rules_metadata,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The NextToken value that's returned from a previous paginated
+    #   `ListConfigurationPolicies` request where `MaxResults` was used but
+    #   the results exceeded the value of that parameter. Pagination
+    #   continues from the `MaxResults` was used but the results exceeded
+    #   the value of that parameter. Pagination continues from the end of
+    #   the previous response that returned the `NextToken` value. This
+    #   value is `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that's returned by
+    #   `ListConfigurationPolicies` in each page of the response. When this
+    #   parameter is used, `ListConfigurationPolicies` returns the specified
+    #   number of results in a single page and a `NextToken` response
+    #   element. You can see the remaining results of the initial request by
+    #   sending another `ListConfigurationPolicies` request with the
+    #   returned `NextToken` value. A valid range for `MaxResults` is
+    #   between 1 and 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConfigurationPoliciesRequest AWS API Documentation
+    #
+    class ListConfigurationPoliciesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_policy_summaries
+    #   Provides metadata for each of your configuration policies.
+    #   @return [Array<Types::ConfigurationPolicySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The `NextToken` value to include in the next
+    #   `ListConfigurationPolicies` request. When the results of a
+    #   `ListConfigurationPolicies` request exceed `MaxResults`, this value
+    #   can be used to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConfigurationPoliciesResponse AWS API Documentation
+    #
+    class ListConfigurationPoliciesResponse < Struct.new(
+      :configuration_policy_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The `NextToken` value that's returned from a previous paginated
+    #   `ListConfigurationPolicyAssociations` request where `MaxResults` was
+    #   used but the results exceeded the value of that parameter.
+    #   Pagination continues from the end of the previous response that
+    #   returned the `NextToken` value. This value is `null` when there are
+    #   no more results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that's returned by
+    #   `ListConfigurationPolicies` in each page of the response. When this
+    #   parameter is used, `ListConfigurationPolicyAssociations` returns the
+    #   specified number of results in a single page and a `NextToken`
+    #   response element. You can see the remaining results of the initial
+    #   request by sending another `ListConfigurationPolicyAssociations`
+    #   request with the returned `NextToken` value. A valid range for
+    #   `MaxResults` is between 1 and 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   Options for filtering the `ListConfigurationPolicyAssociations`
+    #   response. You can filter by the Amazon Resource Name (ARN) or
+    #   universally unique identifier (UUID) of a configuration,
+    #   `AssociationType`, or `AssociationStatus`.
+    #   @return [Types::AssociationFilters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConfigurationPolicyAssociationsRequest AWS API Documentation
+    #
+    class ListConfigurationPolicyAssociationsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_policy_association_summaries
+    #   An object that contains the details of each configuration policy
+    #   association that’s returned in a
+    #   `ListConfigurationPolicyAssociations` request.
+    #   @return [Array<Types::ConfigurationPolicyAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The `NextToken` value to include in the next
+    #   `ListConfigurationPolicyAssociations` request. When the results of a
+    #   `ListConfigurationPolicyAssociations` request exceed `MaxResults`,
+    #   this value can be used to retrieve the next page of results. This
+    #   value is `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListConfigurationPolicyAssociationsResponse AWS API Documentation
+    #
+    class ListConfigurationPolicyAssociationsResponse < Struct.new(
+      :configuration_policy_association_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -24385,6 +26749,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] name
     #   The name of the malware that was observed.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 64.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -24393,6 +26759,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] path
     #   The file system path of the malware that was observed.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 512.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -24585,6 +26953,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] protocol
     #   The protocol of network-related information about a finding.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 16.
     #   @return [String]
     #
     # @!attribute [rw] open_port_range
@@ -24607,6 +26977,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] source_domain
     #   The source domain of network-related information about a finding.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 128.
     #   @return [String]
     #
     # @!attribute [rw] source_mac
@@ -24631,6 +27003,8 @@ module Aws::SecurityHub
     # @!attribute [rw] destination_domain
     #   The destination domain of network-related information about a
     #   finding.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 128.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Network AWS API Documentation
@@ -24674,6 +27048,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] protocol
     #   The protocol used to make the network connection request.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 64.
     #   @return [String]
     #
     # @!attribute [rw] blocked
@@ -24698,6 +27074,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] protocol
     #   The protocol used for the component.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 16.
     #   @return [String]
     #
     # @!attribute [rw] destination
@@ -24722,10 +27100,14 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] component_id
     #   The identifier of a component in the network path.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 32.
     #   @return [String]
     #
     # @!attribute [rw] component_type
     #   The type of component.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 32.
     #   @return [String]
     #
     # @!attribute [rw] egress
@@ -24773,6 +27155,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] text
     #   The text of a note.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 512.
     #   @return [String]
     #
     # @!attribute [rw] updated_by
@@ -24780,16 +27164,27 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   The timestamp of when the note was updated.
+    #   A timestamp that indicates when the note was updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Note AWS API Documentation
@@ -24833,6 +27228,16 @@ module Aws::SecurityHub
     #   querying for findings.
     #   @return [Float]
     #
+    # @!attribute [rw] gt
+    #   The greater-than condition to be applied to a single field when
+    #   querying for findings.
+    #   @return [Float]
+    #
+    # @!attribute [rw] lt
+    #   The less-than condition to be applied to a single field when
+    #   querying for findings.
+    #   @return [Float]
+    #
     # @!attribute [rw] eq
     #   The equal-to condition to be applied to a single field when querying
     #   for findings.
@@ -24843,6 +27248,8 @@ module Aws::SecurityHub
     class NumberFilter < Struct.new(
       :gte,
       :lte,
+      :gt,
+      :lt,
       :eq)
       SENSITIVE = []
       include Aws::Structure
@@ -24888,6 +27295,53 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides information about the way an organization is configured in
+    # Security Hub.
+    #
+    # @!attribute [rw] configuration_type
+    #   Indicates whether the organization uses local or central
+    #   configuration.
+    #
+    #   If you use local configuration, the Security Hub delegated
+    #   administrator can set `AutoEnable` to `true` and
+    #   `AutoEnableStandards` to `DEFAULT`. This automatically enables
+    #   Security Hub and default security standards in new organization
+    #   accounts. These new account settings must be set separately in each
+    #   Amazon Web Services Region, and settings may be different in each
+    #   Region.
+    #
+    #   If you use central configuration, the delegated administrator can
+    #   create configuration policies. Configuration policies can be used to
+    #   configure Security Hub, security standards, and security controls in
+    #   multiple accounts and Regions. If you want new organization accounts
+    #   to use a specific configuration, you can create a configuration
+    #   policy and associate it with the root or specific organizational
+    #   units (OUs). New accounts will inherit the policy from the root or
+    #   their assigned OU.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Describes whether central configuration could be enabled as the
+    #   `ConfigurationType` for the organization. If your
+    #   `ConfigurationType` is local configuration, then the value of
+    #   `Status` is always `ENABLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Provides an explanation if the value of `Status` is equal to
+    #   `FAILED` when `ConfigurationType` is equal to `CENTRAL`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/OrganizationConfiguration AWS API Documentation
+    #
+    class OrganizationConfiguration < Struct.new(
+      :configuration_type,
+      :status,
+      :status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An occurrence of sensitive data in an Adobe Portable Document Format
     # (PDF) file.
     #
@@ -24915,78 +27369,235 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # An object that provides the current value of a security control
+    # parameter and identifies whether it has been customized.
+    #
+    # @!attribute [rw] value_type
+    #   Identifies whether a control parameter uses a custom user-defined
+    #   value or subscribes to the default Security Hub behavior.
+    #
+    #   When `ValueType` is set equal to `DEFAULT`, the default behavior can
+    #   be a specific Security Hub default value, or the default behavior
+    #   can be to ignore a specific parameter. When `ValueType` is set equal
+    #   to `DEFAULT`, Security Hub ignores user-provided input for the
+    #   `Value` field.
+    #
+    #   When `ValueType` is set equal to `CUSTOM`, the `Value` field can't
+    #   be empty.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The current value of a control parameter.
+    #   @return [Types::ParameterValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ParameterConfiguration AWS API Documentation
+    #
+    class ParameterConfiguration < Struct.new(
+      :value_type,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that describes a security control parameter and the options
+    # for customizing it.
+    #
+    # @!attribute [rw] description
+    #   Description of a control parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_options
+    #   The options for customizing a control parameter. Customization
+    #   options vary based on the data type of the parameter.
+    #   @return [Types::ConfigurationOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ParameterDefinition AWS API Documentation
+    #
+    class ParameterDefinition < Struct.new(
+      :description,
+      :configuration_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that includes the data type of a security control parameter
+    # and its current value.
+    #
+    # @note ParameterValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ParameterValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ParameterValue corresponding to the set member.
+    #
+    # @!attribute [rw] integer
+    #   A control parameter that is an integer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] integer_list
+    #   A control parameter that is a list of integers.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] double
+    #   A control parameter that is a double.
+    #   @return [Float]
+    #
+    # @!attribute [rw] string
+    #   A control parameter that is a string.
+    #   @return [String]
+    #
+    # @!attribute [rw] string_list
+    #   A control parameter that is a list of strings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] boolean
+    #   A control parameter that is a boolean.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enum
+    #   A control parameter that is an enum.
+    #   @return [String]
+    #
+    # @!attribute [rw] enum_list
+    #   A control parameter that is a list of enums.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ParameterValue AWS API Documentation
+    #
+    class ParameterValue < Struct.new(
+      :integer,
+      :integer_list,
+      :double,
+      :string,
+      :string_list,
+      :boolean,
+      :enum,
+      :enum_list,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Integer < ParameterValue; end
+      class IntegerList < ParameterValue; end
+      class Double < ParameterValue; end
+      class String < ParameterValue; end
+      class StringList < ParameterValue; end
+      class Boolean < ParameterValue; end
+      class Enum < ParameterValue; end
+      class EnumList < ParameterValue; end
+      class Unknown < ParameterValue; end
+    end
+
     # Provides an overview of the patch compliance status for an instance
     # against a selected compliance standard.
     #
     # @!attribute [rw] id
     #   The identifier of the compliance standard that was used to determine
     #   the patch compliance status.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256.
     #   @return [String]
     #
     # @!attribute [rw] installed_count
     #   The number of patches from the compliance standard that were
     #   installed successfully.
+    #
+    #   The value can be an integer from `0` to `100000`.
     #   @return [Integer]
     #
     # @!attribute [rw] missing_count
     #   The number of patches that are part of the compliance standard but
     #   are not installed. The count includes patches that failed to
     #   install.
+    #
+    #   The value can be an integer from `0` to `100000`.
     #   @return [Integer]
     #
     # @!attribute [rw] failed_count
     #   The number of patches from the compliance standard that failed to
     #   install.
+    #
+    #   The value can be an integer from `0` to `100000`.
     #   @return [Integer]
     #
     # @!attribute [rw] installed_other_count
     #   The number of installed patches that are not part of the compliance
     #   standard.
+    #
+    #   The value can be an integer from `0` to `100000`.
     #   @return [Integer]
     #
     # @!attribute [rw] installed_rejected_count
     #   The number of patches that are installed but are also on a list of
     #   patches that the customer rejected.
+    #
+    #   The value can be an integer from `0` to `100000`.
     #   @return [Integer]
     #
     # @!attribute [rw] installed_pending_reboot
     #   The number of patches that were applied, but that require the
     #   instance to be rebooted in order to be marked as installed.
+    #
+    #   The value can be an integer from `0` to `100000`.
     #   @return [Integer]
     #
     # @!attribute [rw] operation_start_time
     #   Indicates when the operation started.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] operation_end_time
     #   Indicates when the operation completed.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] reboot_option
     #   The reboot option specified for the instance.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256.
     #   @return [String]
     #
     # @!attribute [rw] operation
     #   The type of patch operation performed. For Patch Manager, the values
     #   are `SCAN` and `INSTALL`.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/PatchSummary AWS API Documentation
@@ -25005,6 +27616,37 @@ module Aws::SecurityHub
       :operation)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # An object that defines how Security Hub is configured. It includes
+    # whether Security Hub is enabled or disabled, a list of enabled
+    # security standards, a list of enabled or disabled security controls,
+    # and a list of custom parameter values for specified controls. If you
+    # provide a list of security controls that are enabled in the
+    # configuration policy, Security Hub disables all other controls
+    # (including newly released controls). If you provide a list of security
+    # controls that are disabled in the configuration policy, Security Hub
+    # enables all other controls (including newly released controls).
+    #
+    # @note Policy is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Policy is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Policy corresponding to the set member.
+    #
+    # @!attribute [rw] security_hub
+    #   The Amazon Web Service that the configuration policy applies to.
+    #   @return [Types::SecurityHubPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Policy AWS API Documentation
+    #
+    class Policy < Struct.new(
+      :security_hub,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SecurityHub < Policy; end
+      class Unknown < Policy; end
     end
 
     # Provided if `ActionType` is `PORT_PROBE`. It provides details about
@@ -25098,10 +27740,14 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] name
     #   The name of the process.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 64.
     #   @return [String]
     #
     # @!attribute [rw] path
     #   The path to the process executable.
+    #
+    #   Length Constraints: Minimum of 1. Maximum of 512.
     #   @return [String]
     #
     # @!attribute [rw] pid
@@ -25116,27 +27762,49 @@ module Aws::SecurityHub
     # @!attribute [rw] launched_at
     #   Indicates when the process was launched.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] terminated_at
     #   Indicates when the process was terminated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ProcessDetails AWS API Documentation
@@ -25272,6 +27940,8 @@ module Aws::SecurityHub
     # @!attribute [rw] text
     #   Describes the recommended steps to take to remediate an issue
     #   identified in a finding.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 512 length.
     #   @return [String]
     #
     # @!attribute [rw] url
@@ -25356,6 +28026,8 @@ module Aws::SecurityHub
     #
     #   If the resource does not match any of the provided types, then set
     #   `Type` to `Other`.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 256.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -25370,6 +28042,8 @@ module Aws::SecurityHub
     # @!attribute [rw] region
     #   The canonical Amazon Web Services external Region name where this
     #   resource is located.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 16.
     #   @return [String]
     #
     # @!attribute [rw] resource_role
@@ -25379,7 +28053,12 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] tags
     #   A list of Amazon Web Services tags associated with a resource at the
-    #   time the finding was processed.
+    #   time the finding was processed. Tags must follow [Amazon Web
+    #   Services tag naming limits and requirements][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html#tag-conventions
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] data_classification
@@ -25391,6 +28070,15 @@ module Aws::SecurityHub
     #   Additional details about the resource related to a finding.
     #   @return [Types::ResourceDetails]
     #
+    # @!attribute [rw] application_name
+    #   The name of the application that is related to a finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the application that is related to
+    #   a finding.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Resource AWS API Documentation
     #
     class Resource < Struct.new(
@@ -25401,7 +28089,9 @@ module Aws::SecurityHub
       :resource_role,
       :tags,
       :data_classification,
-      :details)
+      :details,
+      :application_name,
+      :application_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25881,6 +28571,20 @@ module Aws::SecurityHub
     #   (Amazon MSK) cluster.
     #   @return [Types::AwsMskClusterDetails]
     #
+    # @!attribute [rw] aws_s3_access_point
+    #   Provides details about an Amazon Simple Storage Service (Amazon S3)
+    #   access point. S3 access points are named network endpoints that are
+    #   attached to S3 buckets that you can use to perform S3 object
+    #   operations.
+    #   @return [Types::AwsS3AccessPointDetails]
+    #
+    # @!attribute [rw] aws_ec2_client_vpn_endpoint
+    #   Provides details about an Client VPN endpoint. A Client VPN endpoint
+    #   is the resource that you create and configure to enable and manage
+    #   client VPN sessions. It's the termination point for all client VPN
+    #   sessions.
+    #   @return [Types::AwsEc2ClientVpnEndpointDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -25980,7 +28684,28 @@ module Aws::SecurityHub
       :aws_dms_replication_task,
       :aws_dms_replication_instance,
       :aws_route_53_hosted_zone,
-      :aws_msk_cluster)
+      :aws_msk_cluster,
+      :aws_s3_access_point,
+      :aws_ec2_client_vpn_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request was rejected because it conflicts with the resource's
+    # availability. For example, you tried to update a security control
+    # that's currently in the `UPDATING` state.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceInUseException AWS API Documentation
+    #
+    class ResourceInUseException < Struct.new(
+      :message,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26598,6 +29323,32 @@ module Aws::SecurityHub
     #   The enablement status of a security control in a specific standard.
     #   @return [String]
     #
+    # @!attribute [rw] update_status
+    #   Identifies whether customizable properties of a security control are
+    #   reflected in Security Hub findings. A status of `READY` indicates
+    #   findings include the current parameter values. A status of
+    #   `UPDATING` indicates that all findings may not include the current
+    #   parameter values.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   An object that identifies the name of a control parameter, its
+    #   current value, and whether it has been customized.
+    #   @return [Hash<String,Types::ParameterConfiguration>]
+    #
+    # @!attribute [rw] last_update_reason
+    #   The most recent reason for updating the customizable properties of a
+    #   security control. This differs from the `UpdateReason` field of the
+    #   [ `BatchUpdateStandardsControlAssociations` ][1] API, which tracks
+    #   the reason for updating the enablement status of a control. This
+    #   field accepts alphanumeric characters in addition to white spaces,
+    #   dashes, and underscores.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateStandardsControlAssociations.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControl AWS API Documentation
     #
     class SecurityControl < Struct.new(
@@ -26607,7 +29358,31 @@ module Aws::SecurityHub
       :description,
       :remediation_url,
       :severity_rating,
-      :security_control_status)
+      :security_control_status,
+      :update_status,
+      :parameters,
+      :last_update_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of security controls and control parameter values that are
+    # included in a configuration policy.
+    #
+    # @!attribute [rw] security_control_id
+    #   The ID of the security control.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   An object that specifies parameter values for a control in a
+    #   configuration policy.
+    #   @return [Hash<String,Types::ParameterConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControlCustomParameter AWS API Documentation
+    #
+    class SecurityControlCustomParameter < Struct.new(
+      :security_control_id,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26658,6 +29433,18 @@ module Aws::SecurityHub
     #   Amazon Web Services Region.
     #   @return [String]
     #
+    # @!attribute [rw] customizable_properties
+    #   Security control properties that you can customize. Currently, only
+    #   parameter customization is supported for select controls. An empty
+    #   array is returned for controls that don’t support custom properties.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] parameter_definitions
+    #   An object that provides a security control parameter name,
+    #   description, and the options for customizing it. This object is
+    #   excluded for a control that doesn't support custom parameters.
+    #   @return [Hash<String,Types::ParameterDefinition>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControlDefinition AWS API Documentation
     #
     class SecurityControlDefinition < Struct.new(
@@ -26666,7 +29453,95 @@ module Aws::SecurityHub
       :description,
       :remediation_url,
       :severity_rating,
-      :current_region_availability)
+      :current_region_availability,
+      :customizable_properties,
+      :parameter_definitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A parameter that a security control accepts.
+    #
+    # @!attribute [rw] name
+    #   The name of a
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The current value of a control parameter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControlParameter AWS API Documentation
+    #
+    class SecurityControlParameter < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that defines which security controls are enabled in an
+    # Security Hub configuration policy. The enablement status of a control
+    # is aligned across all of the enabled standards in an account.
+    #
+    # @!attribute [rw] enabled_security_control_identifiers
+    #   A list of security controls that are enabled in the configuration
+    #   policy. Security Hub disables all other controls (including newly
+    #   released controls) other than the listed controls.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] disabled_security_control_identifiers
+    #   A list of security controls that are disabled in the configuration
+    #   policy. Security Hub enables all other controls (including newly
+    #   released controls) other than the listed controls.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_control_custom_parameters
+    #   A list of security controls and control parameter values that are
+    #   included in a configuration policy.
+    #   @return [Array<Types::SecurityControlCustomParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityControlsConfiguration AWS API Documentation
+    #
+    class SecurityControlsConfiguration < Struct.new(
+      :enabled_security_control_identifiers,
+      :disabled_security_control_identifiers,
+      :security_control_custom_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that defines how Security Hub is configured. The
+    # configuration policy includes whether Security Hub is enabled or
+    # disabled, a list of enabled security standards, a list of enabled or
+    # disabled security controls, and a list of custom parameter values for
+    # specified controls. If you provide a list of security controls that
+    # are enabled in the configuration policy, Security Hub disables all
+    # other controls (including newly released controls). If you provide a
+    # list of security controls that are disabled in the configuration
+    # policy, Security Hub enables all other controls (including newly
+    # released controls).
+    #
+    # @!attribute [rw] service_enabled
+    #   Indicates whether Security Hub is enabled in the policy.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enabled_standard_identifiers
+    #   A list that defines which security standards are enabled in the
+    #   configuration policy.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_controls_configuration
+    #   An object that defines which security controls are enabled in the
+    #   configuration policy. The enablement status of a control is aligned
+    #   across all of the enabled standards in an account.
+    #   @return [Types::SecurityControlsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SecurityHubPolicy AWS API Documentation
+    #
+    class SecurityHubPolicy < Struct.new(
+      :service_enabled,
+      :enabled_standard_identifiers,
+      :security_controls_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26737,8 +29612,8 @@ module Aws::SecurityHub
     # attribute.
     #
     # @!attribute [rw] product
-    #   Deprecated. This attribute is being deprecated. Instead of providing
-    #   `Product`, provide `Original`.
+    #   Deprecated. This attribute isn't included in findings. Instead of
+    #   providing `Product`, provide `Original`.
     #
     #   The native severity as defined by the Amazon Web Services service or
     #   integrated partner product that generated the finding.
@@ -26774,9 +29649,10 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] normalized
-    #   Deprecated. The normalized severity of a finding. This attribute is
-    #   being deprecated. Instead of providing `Normalized`, provide
-    #   `Label`.
+    #   Deprecated. The normalized severity of a finding. Instead of
+    #   providing `Normalized`, provide `Label`.
+    #
+    #   The value of `Normalized` can be an integer between `0` and `100`.
     #
     #   If you provide `Label` and do not provide `Normalized`, then
     #   `Normalized` is set automatically as follows.
@@ -26795,6 +29671,8 @@ module Aws::SecurityHub
     # @!attribute [rw] original
     #   The native severity from the finding product that generated the
     #   finding.
+    #
+    #   Length Constraints: Minimum length of 1. Maximum length of 64.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Severity AWS API Documentation
@@ -27189,7 +30067,7 @@ module Aws::SecurityHub
     #   @return [Time]
     #
     # @!attribute [rw] updated_reason
-    #   The reason for updating the control's enablement status in a
+    #   The reason for updating a control's enablement status in a
     #   specified standard.
     #   @return [String]
     #
@@ -27362,6 +30240,100 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] configuration_policy_identifier
+    #   The Amazon Resource Name (ARN) of a configuration policy, the
+    #   universally unique identifier (UUID) of a configuration policy, or a
+    #   value of `SELF_MANAGED_SECURITY_HUB` for a self-managed
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The identifier of the target account, organizational unit, or the
+    #   root to associate with the specified configuration.
+    #   @return [Types::Target]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartConfigurationPolicyAssociationRequest AWS API Documentation
+    #
+    class StartConfigurationPolicyAssociationRequest < Struct.new(
+      :configuration_policy_identifier,
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_policy_id
+    #   The UUID of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_id
+    #   The identifier of the target account, organizational unit, or the
+    #   organization root with which the configuration is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   Indicates whether the target is an Amazon Web Services account,
+    #   organizational unit, or the organization root.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_type
+    #   Indicates whether the association between the specified target and
+    #   the configuration was directly applied by the Security Hub delegated
+    #   administrator or inherited from a parent.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy association was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] association_status
+    #   The current status of the association between the specified target
+    #   and the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status_message
+    #   An explanation for a `FAILED` value for `AssociationStatus`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartConfigurationPolicyAssociationResponse AWS API Documentation
+    #
+    class StartConfigurationPolicyAssociationResponse < Struct.new(
+      :configuration_policy_id,
+      :target_id,
+      :target_type,
+      :association_type,
+      :updated_at,
+      :association_status,
+      :association_status_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target
+    #   The identifier of the target account, organizational unit, or the
+    #   root to disassociate from the specified configuration.
+    #   @return [Types::Target]
+    #
+    # @!attribute [rw] configuration_policy_identifier
+    #   The Amazon Resource Name (ARN) of a configuration policy, the
+    #   universally unique identifier (UUID) of a configuration policy, or a
+    #   value of `SELF_MANAGED_SECURITY_HUB` for a self-managed
+    #   configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartConfigurationPolicyDisassociationRequest AWS API Documentation
+    #
+    class StartConfigurationPolicyDisassociationRequest < Struct.new(
+      :target,
+      :configuration_policy_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartConfigurationPolicyDisassociationResponse AWS API Documentation
+    #
+    class StartConfigurationPolicyDisassociationResponse < Aws::EmptyStructure; end
+
     # The definition of a custom action that can be used for stateless
     # packet handling.
     #
@@ -27426,6 +30398,33 @@ module Aws::SecurityHub
     class StatusReason < Struct.new(
       :reason_code,
       :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options for customizing a security control parameter that is a
+    # string.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a control parameter that is a
+    #   string.
+    #   @return [String]
+    #
+    # @!attribute [rw] re_2_expression
+    #   An RE2 regular expression that Security Hub uses to validate a
+    #   user-provided control parameter string.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression_description
+    #   The description of the RE2 regular expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StringConfigurationOptions AWS API Documentation
+    #
+    class StringConfigurationOptions < Struct.new(
+      :default_value,
+      :re_2_expression,
+      :expression_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27537,6 +30536,39 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The options for customizing a security control parameter that is a
+    # list of strings.
+    #
+    # @!attribute [rw] default_value
+    #   The Security Hub default value for a control parameter that is a
+    #   list of strings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] re_2_expression
+    #   An RE2 regular expression that Security Hub uses to validate a
+    #   user-provided list of strings for a control parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of list items that a string list control
+    #   parameter can accept.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] expression_description
+    #   The description of the RE2 regular expression.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StringListConfigurationOptions AWS API Documentation
+    #
+    class StringListConfigurationOptions < Struct.new(
+      :default_value,
+      :re_2_expression,
+      :max_items,
+      :expression_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource to apply the tags to.
     #   @return [String]
@@ -27560,15 +30592,56 @@ module Aws::SecurityHub
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # The target account, organizational unit, or the root that is
+    # associated with an Security Hub configuration. The configuration can
+    # be a configuration policy or self-managed behavior.
+    #
+    # @note Target is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note Target is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Target corresponding to the set member.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the target account.
+    #   @return [String]
+    #
+    # @!attribute [rw] organizational_unit_id
+    #   The organizational unit ID of the target organizational unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_id
+    #   The ID of the organization root.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Target AWS API Documentation
+    #
+    class Target < Struct.new(
+      :account_id,
+      :organizational_unit_id,
+      :root_id,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AccountId < Target; end
+      class OrganizationalUnitId < Target; end
+      class RootId < Target; end
+      class Unknown < Target; end
+    end
+
     # Provides information about the threat detected in a security finding
     # and the file paths that were affected by the threat.
     #
     # @!attribute [rw] name
     #   The name of the threat.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 128 length.
     #   @return [String]
     #
     # @!attribute [rw] severity
     #   The severity of the threat.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 128 length.
     #   @return [String]
     #
     # @!attribute [rw] item_count
@@ -27578,6 +30651,8 @@ module Aws::SecurityHub
     # @!attribute [rw] file_paths
     #   Provides information about the file paths that were affected by the
     #   threat.
+    #
+    #   Array Members: Minimum number of 1 item. Maximum number of 5 items.
     #   @return [Array<Types::FilePaths>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Threat AWS API Documentation
@@ -27599,6 +30674,8 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] value
     #   The value of a threat intelligence indicator.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 512 length.
     #   @return [String]
     #
     # @!attribute [rw] category
@@ -27609,18 +30686,31 @@ module Aws::SecurityHub
     #   Indicates when the most recent instance of a threat intelligence
     #   indicator was observed.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] source
     #   The source of the threat intelligence indicator.
+    #
+    #   Length Constraints: Minimum of 1 length. Maximum of 64 length.
     #   @return [String]
     #
     # @!attribute [rw] source_url
@@ -27664,6 +30754,37 @@ module Aws::SecurityHub
       :rule_arn,
       :error_code,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An array of configuration policy associations, one for each
+    # configuration policy association identifier, that was specified in a
+    # `BatchGetConfigurationPolicyAssociations` request but couldn’t be
+    # processed due to an error.
+    #
+    # @!attribute [rw] configuration_policy_association_identifiers
+    #   Configuration policy association identifiers that were specified in
+    #   a `BatchGetConfigurationPolicyAssociations` request but couldn’t be
+    #   processed due to an error.
+    #   @return [Types::ConfigurationPolicyAssociation]
+    #
+    # @!attribute [rw] error_code
+    #   An HTTP status code that identifies why the configuration policy
+    #   association failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_reason
+    #   A string that identifies why the configuration policy association
+    #   failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UnprocessedConfigurationPolicyAssociation AWS API Documentation
+    #
+    class UnprocessedConfigurationPolicyAssociation < Struct.new(
+      :configuration_policy_association_identifiers,
+      :error_code,
+      :error_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27890,6 +31011,107 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] identifier
+    #   The Amazon Resource Name (ARN) or universally unique identifier
+    #   (UUID) of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration policy. Alphanumeric characters and
+    #   the following ASCII characters are permitted: `-, ., !, *, /`.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_reason
+    #   The reason for updating the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_policy
+    #   An object that defines how Security Hub is configured. It includes
+    #   whether Security Hub is enabled or disabled, a list of enabled
+    #   security standards, a list of enabled or disabled security controls,
+    #   and a list of custom parameter values for specified controls. If you
+    #   provide a list of security controls that are enabled in the
+    #   configuration policy, Security Hub disables all other controls
+    #   (including newly released controls). If you provide a list of
+    #   security controls that are disabled in the configuration policy,
+    #   Security Hub enables all other controls (including newly released
+    #   controls).
+    #
+    #   When updating a configuration policy, provide a complete list of
+    #   standards that you want to enable and a complete list of controls
+    #   that you want to enable or disable. The updated configuration
+    #   replaces the current configuration.
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateConfigurationPolicyRequest AWS API Documentation
+    #
+    class UpdateConfigurationPolicyRequest < Struct.new(
+      :identifier,
+      :name,
+      :description,
+      :updated_reason,
+      :configuration_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The UUID of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the configuration policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time, in UTC and ISO 8601 format, that the
+    #   configuration policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configuration_policy
+    #   An object that defines how Security Hub is configured. It includes
+    #   whether Security Hub is enabled or disabled, a list of enabled
+    #   security standards, a list of enabled or disabled security controls,
+    #   and a list of custom parameter values for specified controls. If the
+    #   request included a list of security controls that are enabled in the
+    #   configuration policy, Security Hub disables all other controls
+    #   (including newly released controls). If the request included a list
+    #   of security controls that are disabled in the configuration policy,
+    #   Security Hub enables all other controls (including newly released
+    #   controls).
+    #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateConfigurationPolicyResponse AWS API Documentation
+    #
+    class UpdateConfigurationPolicyResponse < Struct.new(
+      :arn,
+      :id,
+      :name,
+      :description,
+      :updated_at,
+      :created_at,
+      :configuration_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] finding_aggregator_arn
     #   The ARN of the finding aggregator. To obtain the ARN, use
     #   `ListFindingAggregators`.
@@ -28030,37 +31252,55 @@ module Aws::SecurityHub
     class UpdateInsightResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] auto_enable
-    #   Whether to automatically enable Security Hub for new accounts in the
-    #   organization.
+    #   Whether to automatically enable Security Hub in new member accounts
+    #   when they join the organization.
     #
-    #   By default, this is `false`, and new accounts are not added
-    #   automatically.
+    #   If set to `true`, then Security Hub is automatically enabled in new
+    #   accounts. If set to `false`, then Security Hub isn't enabled in new
+    #   accounts automatically. The default value is `false`.
     #
-    #   To automatically enable Security Hub for new accounts, set this to
-    #   `true`.
+    #   If the `ConfigurationType` of your organization is set to `CENTRAL`,
+    #   then this field is set to `false` and can't be changed in the home
+    #   Region and linked Regions. However, in that case, the delegated
+    #   administrator can create a configuration policy in which Security
+    #   Hub is enabled and associate the policy with new organization
+    #   accounts.
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_enable_standards
     #   Whether to automatically enable Security Hub [default standards][1]
-    #   for new member accounts in the organization.
+    #   in new member accounts when they join the organization.
     #
-    #   By default, this parameter is equal to `DEFAULT`, and new member
-    #   accounts are automatically enabled with default Security Hub
-    #   standards.
+    #   The default value of this parameter is equal to `DEFAULT`.
     #
-    #   To opt out of enabling default standards for new member accounts,
-    #   set this parameter equal to `NONE`.
+    #   If equal to `DEFAULT`, then Security Hub default standards are
+    #   automatically enabled for new member accounts. If equal to `NONE`,
+    #   then default standards are not automatically enabled for new member
+    #   accounts.
+    #
+    #   If the `ConfigurationType` of your organization is set to `CENTRAL`,
+    #   then this field is set to `NONE` and can't be changed in the home
+    #   Region and linked Regions. However, in that case, the delegated
+    #   administrator can create a configuration policy in which specific
+    #   security standards are enabled and associate the policy with new
+    #   organization accounts.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html
     #   @return [String]
     #
+    # @!attribute [rw] organization_configuration
+    #   Provides information about the way an organization is configured in
+    #   Security Hub.
+    #   @return [Types::OrganizationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfigurationRequest AWS API Documentation
     #
     class UpdateOrganizationConfigurationRequest < Struct.new(
       :auto_enable,
-      :auto_enable_standards)
+      :auto_enable_standards,
+      :organization_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28068,6 +31308,35 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfigurationResponse AWS API Documentation
     #
     class UpdateOrganizationConfigurationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] security_control_id
+    #   The Amazon Resource Name (ARN) or ID of the control to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   An object that specifies which security control parameters to
+    #   update.
+    #   @return [Hash<String,Types::ParameterConfiguration>]
+    #
+    # @!attribute [rw] last_update_reason
+    #   The most recent reason for updating the properties of the security
+    #   control. This field accepts alphanumeric characters in addition to
+    #   white spaces, dashes, and underscores.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateSecurityControlRequest AWS API Documentation
+    #
+    class UpdateSecurityControlRequest < Struct.new(
+      :security_control_id,
+      :parameters,
+      :last_update_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateSecurityControlResponse AWS API Documentation
+    #
+    class UpdateSecurityControlResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] auto_enable_controls
     #   Whether to automatically enable new controls when they are added to
@@ -28261,6 +31530,11 @@ module Aws::SecurityHub
     #   Whether an exploit is available for a finding.
     #   @return [String]
     #
+    # @!attribute [rw] last_known_exploit_at
+    #   The date and time of the last exploit associated with a finding
+    #   discovered in your environment.
+    #   @return [String]
+    #
     # @!attribute [rw] code_vulnerabilities
     #   The vulnerabilities found in your Lambda function code. This field
     #   pertains to findings that Security Hub receives from Amazon
@@ -28279,6 +31553,7 @@ module Aws::SecurityHub
       :fix_available,
       :epss_score,
       :exploit_available,
+      :last_known_exploit_at,
       :code_vulnerabilities)
       SENSITIVE = []
       include Aws::Structure
@@ -28330,27 +31605,49 @@ module Aws::SecurityHub
     # @!attribute [rw] vendor_created_at
     #   Indicates when the vulnerability advisory was created.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @!attribute [rw] vendor_updated_at
     #   Indicates when the vulnerability advisory was last updated.
     #
-    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
-    #   Internet Date/Time Format][1]. The value cannot contain spaces, and
-    #   date and time should be separated by `T`. For example,
-    #   `2020-03-22T13:22:13.933Z`.
+    #   This field accepts only the specified formats. Timestamps can end
+    #   with `Z` or `("+" / "-") time-hour [":" time-minute]`. The
+    #   time-secfrac after seconds is limited to a maximum of 9 digits. The
+    #   offset is bounded by +/-18:00. Here are valid timestamp formats with
+    #   examples:
     #
+    #   * `YYYY-MM-DDTHH:MM:SSZ` (for example, `2019-01-31T23:00:00Z`)
     #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmmZ` (for example,
+    #     `2019-01-31T23:00:00.123456789Z`)
     #
-    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   * `YYYY-MM-DDTHH:MM:SS+HH:MM` (for example,
+    #     `2024-01-04T15:25:10+17:59`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS-HHMM` (for example,
+    #     `2024-01-04T15:25:10-1759`)
+    #
+    #   * `YYYY-MM-DDTHH:MM:SS.mmmmmmmmm+HH:MM` (for example,
+    #     `2024-01-04T15:25:10.123456789+17:59`)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/VulnerabilityVendor AWS API Documentation

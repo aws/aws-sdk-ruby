@@ -1,0 +1,273 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDS
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html
+    class DBSnapshot
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#initialize-instance_method
+      def initialize: (String instance_id, String snapshot_id, Hash[Symbol, untyped] options) -> void
+                    | (instance_id: String, snapshot_id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#instance_id-instance_method
+      def instance_id: () -> String
+      alias db_instance_identifier instance_id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#snapshot_id-instance_method
+      def snapshot_id: () -> String
+      alias db_snapshot_identifier snapshot_id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#snapshot_create_time-instance_method
+      def snapshot_create_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#engine-instance_method
+      def engine: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#allocated_storage-instance_method
+      def allocated_storage: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#status-instance_method
+      def status: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#port-instance_method
+      def port: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#availability_zone-instance_method
+      def availability_zone: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#vpc_id-instance_method
+      def vpc_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#instance_create_time-instance_method
+      def instance_create_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#master_username-instance_method
+      def master_username: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#engine_version-instance_method
+      def engine_version: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#license_model-instance_method
+      def license_model: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#snapshot_type-instance_method
+      def snapshot_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#iops-instance_method
+      def iops: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#option_group_name-instance_method
+      def option_group_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#percent_progress-instance_method
+      def percent_progress: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#source_region-instance_method
+      def source_region: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#source_db_snapshot_identifier-instance_method
+      def source_db_snapshot_identifier: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#storage_type-instance_method
+      def storage_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#tde_credential_arn-instance_method
+      def tde_credential_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#encrypted-instance_method
+      def encrypted: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#kms_key_id-instance_method
+      def kms_key_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#db_snapshot_arn-instance_method
+      def db_snapshot_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#timezone-instance_method
+      def timezone: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#iam_database_authentication_enabled-instance_method
+      def iam_database_authentication_enabled: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#processor_features-instance_method
+      def processor_features: () -> ::Array[Types::ProcessorFeature]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#dbi_resource_id-instance_method
+      def dbi_resource_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#tag_list-instance_method
+      def tag_list: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#original_snapshot_create_time-instance_method
+      def original_snapshot_create_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#snapshot_database_time-instance_method
+      def snapshot_database_time: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#snapshot_target-instance_method
+      def snapshot_target: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#storage_throughput-instance_method
+      def storage_throughput: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#db_system_id-instance_method
+      def db_system_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#dedicated_log_volume-instance_method
+      def dedicated_log_volume: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#multi_tenant-instance_method
+      def multi_tenant: () -> bool
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#data-instance_method
+      def data: () -> Types::DBSnapshot
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#create-instance_method
+      def create: (
+                    ?tags: Array[
+                      {
+                        key: ::String?,
+                        value: ::String?
+                      },
+                    ]
+                  ) -> DBSnapshot
+                | (?Hash[Symbol, untyped]) -> DBSnapshot
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#copy-instance_method
+      def copy: (
+                  target_db_snapshot_identifier: ::String,
+                  ?kms_key_id: ::String,
+                  ?tags: Array[
+                    {
+                      key: ::String?,
+                      value: ::String?
+                    },
+                  ],
+                  ?copy_tags: bool,
+                  ?pre_signed_url: ::String,
+                  ?option_group_name: ::String,
+                  ?target_custom_availability_zone: ::String,
+                  ?copy_option_group: bool,
+                  ?source_region: ::String
+                ) -> DBSnapshot
+              | (?Hash[Symbol, untyped]) -> DBSnapshot
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#delete-instance_method
+      def delete: (
+                  ) -> DBSnapshot
+                | (?Hash[Symbol, untyped]) -> DBSnapshot
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#restore-instance_method
+      def restore: (
+                     db_instance_identifier: ::String,
+                     ?db_instance_class: ::String,
+                     ?port: ::Integer,
+                     ?availability_zone: ::String,
+                     ?db_subnet_group_name: ::String,
+                     ?multi_az: bool,
+                     ?publicly_accessible: bool,
+                     ?auto_minor_version_upgrade: bool,
+                     ?license_model: ::String,
+                     ?db_name: ::String,
+                     ?engine: ::String,
+                     ?iops: ::Integer,
+                     ?option_group_name: ::String,
+                     ?tags: Array[
+                       {
+                         key: ::String?,
+                         value: ::String?
+                       },
+                     ],
+                     ?storage_type: ::String,
+                     ?tde_credential_arn: ::String,
+                     ?tde_credential_password: ::String,
+                     ?vpc_security_group_ids: Array[::String],
+                     ?domain: ::String,
+                     ?domain_fqdn: ::String,
+                     ?domain_ou: ::String,
+                     ?domain_auth_secret_arn: ::String,
+                     ?domain_dns_ips: Array[::String],
+                     ?copy_tags_to_snapshot: bool,
+                     ?domain_iam_role_name: ::String,
+                     ?enable_iam_database_authentication: bool,
+                     ?enable_cloudwatch_logs_exports: Array[::String],
+                     ?processor_features: Array[
+                       {
+                         name: ::String?,
+                         value: ::String?
+                       },
+                     ],
+                     ?use_default_processor_features: bool,
+                     ?db_parameter_group_name: ::String,
+                     ?deletion_protection: bool,
+                     ?enable_customer_owned_ip: bool,
+                     ?custom_iam_instance_profile: ::String,
+                     ?backup_target: ::String,
+                     ?network_type: ::String,
+                     ?storage_throughput: ::Integer,
+                     ?db_cluster_snapshot_identifier: ::String,
+                     ?allocated_storage: ::Integer,
+                     ?dedicated_log_volume: bool,
+                     ?ca_certificate_identifier: ::String,
+                     ?engine_lifecycle_support: ::String
+                   ) -> DBInstance
+                 | (?Hash[Symbol, untyped]) -> DBInstance
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#subscribe_to-instance_method
+      def subscribe_to: (
+                          subscription_name: ::String
+                        ) -> EventSubscription
+                      | (?Hash[Symbol, untyped]) -> EventSubscription
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#unsubscribe_from-instance_method
+      def unsubscribe_from: (
+                              subscription_name: ::String
+                            ) -> EventSubscription
+                          | (?Hash[Symbol, untyped]) -> EventSubscription
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#attributes-instance_method
+      def attributes: (
+                      ) -> DBSnapshotAttribute::Collection
+                    | (?Hash[Symbol, untyped]) -> DBSnapshotAttribute::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#events-instance_method
+      def events: (
+                    ?start_time: ::Time,
+                    ?end_time: ::Time,
+                    ?duration: ::Integer,
+                    ?event_categories: Array[::String],
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ]
+                  ) -> Event::Collection
+                | (?Hash[Symbol, untyped]) -> Event::Collection
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#instance-instance_method
+      def instance: () -> DBInstance
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/DBSnapshot.html#option_group-instance_method
+      def option_group: () -> OptionGroup?
+
+      class Collection < ::Aws::Resources::Collection[DBSnapshot]
+      end
+    end
+  end
+end

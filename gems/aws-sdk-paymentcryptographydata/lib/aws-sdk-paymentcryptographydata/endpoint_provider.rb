@@ -32,7 +32,7 @@ module Aws::PaymentCryptographyData
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
           end
           if Aws::Endpoints::Matchers.boolean_equals?(use_fips, true)
-            if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"))
+            if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
               return Aws::Endpoints::Endpoint.new(url: "https://dataplane.payment-cryptography-fips.#{region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"

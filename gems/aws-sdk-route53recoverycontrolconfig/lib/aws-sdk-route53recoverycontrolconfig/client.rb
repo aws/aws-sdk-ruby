@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Route53RecoveryControlConfig
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Route53RecoveryControlConfig
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::Route53RecoveryControlConfig
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::Route53RecoveryControlConfig
     #   @option options [Aws::Route53RecoveryControlConfig::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Route53RecoveryControlConfig::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -431,6 +456,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.cluster.cluster_endpoints[0].region #=> String
     #   resp.cluster.name #=> String
     #   resp.cluster.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.cluster.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/CreateCluster AWS API Documentation
     #
@@ -488,6 +514,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.control_panel.name #=> String
     #   resp.control_panel.routing_control_count #=> Integer
     #   resp.control_panel.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.control_panel.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/CreateControlPanel AWS API Documentation
     #
@@ -546,6 +573,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.routing_control.name #=> String
     #   resp.routing_control.routing_control_arn #=> String
     #   resp.routing_control.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.routing_control.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/CreateRoutingControl AWS API Documentation
     #
@@ -647,6 +675,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.assertion_rule.safety_rule_arn #=> String
     #   resp.assertion_rule.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
     #   resp.assertion_rule.wait_period_ms #=> Integer
+    #   resp.assertion_rule.owner #=> String
     #   resp.gating_rule.control_panel_arn #=> String
     #   resp.gating_rule.gating_controls #=> Array
     #   resp.gating_rule.gating_controls[0] #=> String
@@ -659,6 +688,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.gating_rule.target_controls #=> Array
     #   resp.gating_rule.target_controls[0] #=> String
     #   resp.gating_rule.wait_period_ms #=> Integer
+    #   resp.gating_rule.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/CreateSafetyRule AWS API Documentation
     #
@@ -778,6 +808,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.cluster.cluster_endpoints[0].region #=> String
     #   resp.cluster.name #=> String
     #   resp.cluster.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.cluster.owner #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -816,6 +847,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.control_panel.name #=> String
     #   resp.control_panel.routing_control_count #=> Integer
     #   resp.control_panel.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.control_panel.owner #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -859,6 +891,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.routing_control.name #=> String
     #   resp.routing_control.routing_control_arn #=> String
     #   resp.routing_control.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.routing_control.owner #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -902,6 +935,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.assertion_rule.safety_rule_arn #=> String
     #   resp.assertion_rule.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
     #   resp.assertion_rule.wait_period_ms #=> Integer
+    #   resp.assertion_rule.owner #=> String
     #   resp.gating_rule.control_panel_arn #=> String
     #   resp.gating_rule.gating_controls #=> Array
     #   resp.gating_rule.gating_controls[0] #=> String
@@ -914,6 +948,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.gating_rule.target_controls #=> Array
     #   resp.gating_rule.target_controls[0] #=> String
     #   resp.gating_rule.wait_period_ms #=> Integer
+    #   resp.gating_rule.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/DescribeSafetyRule AWS API Documentation
     #
@@ -921,6 +956,33 @@ module Aws::Route53RecoveryControlConfig
     # @param [Hash] params ({})
     def describe_safety_rule(params = {}, options = {})
       req = build_request(:describe_safety_rule, params)
+      req.send_request(options)
+    end
+
+    # Get information about the resource policy for a cluster.
+    #
+    # @option params [required, String] :resource_arn
+    #
+    # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResponse#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
       req.send_request(options)
     end
 
@@ -992,6 +1054,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.clusters[0].cluster_endpoints[0].region #=> String
     #   resp.clusters[0].name #=> String
     #   resp.clusters[0].status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.clusters[0].owner #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/ListClusters AWS API Documentation
@@ -1035,6 +1098,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.control_panels[0].name #=> String
     #   resp.control_panels[0].routing_control_count #=> Integer
     #   resp.control_panels[0].status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.control_panels[0].owner #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/ListControlPanels AWS API Documentation
@@ -1081,6 +1145,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.routing_controls[0].name #=> String
     #   resp.routing_controls[0].routing_control_arn #=> String
     #   resp.routing_controls[0].status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.routing_controls[0].owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/ListRoutingControls AWS API Documentation
     #
@@ -1129,6 +1194,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.safety_rules[0].assertion.safety_rule_arn #=> String
     #   resp.safety_rules[0].assertion.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
     #   resp.safety_rules[0].assertion.wait_period_ms #=> Integer
+    #   resp.safety_rules[0].assertion.owner #=> String
     #   resp.safety_rules[0].gating.control_panel_arn #=> String
     #   resp.safety_rules[0].gating.gating_controls #=> Array
     #   resp.safety_rules[0].gating.gating_controls[0] #=> String
@@ -1141,6 +1207,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.safety_rules[0].gating.target_controls #=> Array
     #   resp.safety_rules[0].gating.target_controls[0] #=> String
     #   resp.safety_rules[0].gating.wait_period_ms #=> Integer
+    #   resp.safety_rules[0].gating.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/ListSafetyRules AWS API Documentation
     #
@@ -1258,6 +1325,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.control_panel.name #=> String
     #   resp.control_panel.routing_control_count #=> Integer
     #   resp.control_panel.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.control_panel.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/UpdateControlPanel AWS API Documentation
     #
@@ -1296,6 +1364,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.routing_control.name #=> String
     #   resp.routing_control.routing_control_arn #=> String
     #   resp.routing_control.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
+    #   resp.routing_control.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/UpdateRoutingControl AWS API Documentation
     #
@@ -1348,6 +1417,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.assertion_rule.safety_rule_arn #=> String
     #   resp.assertion_rule.status #=> String, one of "PENDING", "DEPLOYED", "PENDING_DELETION"
     #   resp.assertion_rule.wait_period_ms #=> Integer
+    #   resp.assertion_rule.owner #=> String
     #   resp.gating_rule.control_panel_arn #=> String
     #   resp.gating_rule.gating_controls #=> Array
     #   resp.gating_rule.gating_controls[0] #=> String
@@ -1360,6 +1430,7 @@ module Aws::Route53RecoveryControlConfig
     #   resp.gating_rule.target_controls #=> Array
     #   resp.gating_rule.target_controls[0] #=> String
     #   resp.gating_rule.wait_period_ms #=> Integer
+    #   resp.gating_rule.owner #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-control-config-2020-11-02/UpdateSafetyRule AWS API Documentation
     #
@@ -1383,7 +1454,7 @@ module Aws::Route53RecoveryControlConfig
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53recoverycontrolconfig'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

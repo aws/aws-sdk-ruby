@@ -1,0 +1,1456 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::WorkMail
+  module Types
+
+    class AccessControlRule
+      attr_accessor name: ::String
+      attr_accessor effect: ("ALLOW" | "DENY")
+      attr_accessor description: ::String
+      attr_accessor ip_ranges: ::Array[::String]
+      attr_accessor not_ip_ranges: ::Array[::String]
+      attr_accessor actions: ::Array[::String]
+      attr_accessor not_actions: ::Array[::String]
+      attr_accessor user_ids: ::Array[::String]
+      attr_accessor not_user_ids: ::Array[::String]
+      attr_accessor date_created: ::Time
+      attr_accessor date_modified: ::Time
+      attr_accessor impersonation_role_ids: ::Array[::String]
+      attr_accessor not_impersonation_role_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AssociateDelegateToResourceRequest
+      attr_accessor organization_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor entity_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateDelegateToResourceResponse < Aws::EmptyStructure
+    end
+
+    class AssociateMemberToGroupRequest
+      attr_accessor organization_id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor member_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateMemberToGroupResponse < Aws::EmptyStructure
+    end
+
+    class AssumeImpersonationRoleRequest
+      attr_accessor organization_id: ::String
+      attr_accessor impersonation_role_id: ::String
+      SENSITIVE: []
+    end
+
+    class AssumeImpersonationRoleResponse
+      attr_accessor token: ::String
+      attr_accessor expires_in: ::Integer
+      SENSITIVE: []
+    end
+
+    class AvailabilityConfiguration
+      attr_accessor domain_name: ::String
+      attr_accessor provider_type: ("EWS" | "LAMBDA")
+      attr_accessor ews_provider: Types::RedactedEwsAvailabilityProvider
+      attr_accessor lambda_provider: Types::LambdaAvailabilityProvider
+      attr_accessor date_created: ::Time
+      attr_accessor date_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class BookingOptions
+      attr_accessor auto_accept_requests: bool
+      attr_accessor auto_decline_recurring_requests: bool
+      attr_accessor auto_decline_conflicting_requests: bool
+      SENSITIVE: []
+    end
+
+    class CancelMailboxExportJobRequest
+      attr_accessor client_token: ::String
+      attr_accessor job_id: ::String
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelMailboxExportJobResponse < Aws::EmptyStructure
+    end
+
+    class CreateAliasRequest
+      attr_accessor organization_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor alias: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAliasResponse < Aws::EmptyStructure
+    end
+
+    class CreateAvailabilityConfigurationRequest
+      attr_accessor client_token: ::String
+      attr_accessor organization_id: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor ews_provider: Types::EwsAvailabilityProvider
+      attr_accessor lambda_provider: Types::LambdaAvailabilityProvider
+      SENSITIVE: []
+    end
+
+    class CreateAvailabilityConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class CreateGroupRequest
+      attr_accessor organization_id: ::String
+      attr_accessor name: ::String
+      attr_accessor hidden_from_global_address_list: bool
+      SENSITIVE: []
+    end
+
+    class CreateGroupResponse
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateImpersonationRoleRequest
+      attr_accessor client_token: ::String
+      attr_accessor organization_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("FULL_ACCESS" | "READ_ONLY")
+      attr_accessor description: ::String
+      attr_accessor rules: ::Array[Types::ImpersonationRule]
+      SENSITIVE: []
+    end
+
+    class CreateImpersonationRoleResponse
+      attr_accessor impersonation_role_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMobileDeviceAccessRuleRequest
+      attr_accessor organization_id: ::String
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor effect: ("ALLOW" | "DENY")
+      attr_accessor device_types: ::Array[::String]
+      attr_accessor not_device_types: ::Array[::String]
+      attr_accessor device_models: ::Array[::String]
+      attr_accessor not_device_models: ::Array[::String]
+      attr_accessor device_operating_systems: ::Array[::String]
+      attr_accessor not_device_operating_systems: ::Array[::String]
+      attr_accessor device_user_agents: ::Array[::String]
+      attr_accessor not_device_user_agents: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CreateMobileDeviceAccessRuleResponse
+      attr_accessor mobile_device_access_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateOrganizationRequest
+      attr_accessor directory_id: ::String
+      attr_accessor alias: ::String
+      attr_accessor client_token: ::String
+      attr_accessor domains: ::Array[Types::Domain]
+      attr_accessor kms_key_arn: ::String
+      attr_accessor enable_interoperability: bool
+      SENSITIVE: []
+    end
+
+    class CreateOrganizationResponse
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateResourceRequest
+      attr_accessor organization_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("ROOM" | "EQUIPMENT")
+      attr_accessor description: ::String
+      attr_accessor hidden_from_global_address_list: bool
+      SENSITIVE: []
+    end
+
+    class CreateResourceResponse
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateUserRequest
+      attr_accessor organization_id: ::String
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor password: ::String
+      attr_accessor role: ("USER" | "RESOURCE" | "SYSTEM_USER" | "REMOTE_USER")
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor hidden_from_global_address_list: bool
+      SENSITIVE: [:display_name, :password, :first_name, :last_name]
+    end
+
+    class CreateUserResponse
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class Delegate
+      attr_accessor id: ::String
+      attr_accessor type: ("GROUP" | "USER")
+      SENSITIVE: []
+    end
+
+    class DeleteAccessControlRuleRequest
+      attr_accessor organization_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessControlRuleResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAliasRequest
+      attr_accessor organization_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor alias: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAliasResponse < Aws::EmptyStructure
+    end
+
+    class DeleteAvailabilityConfigurationRequest
+      attr_accessor organization_id: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAvailabilityConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteEmailMonitoringConfigurationRequest
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEmailMonitoringConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteGroupRequest
+      attr_accessor organization_id: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGroupResponse < Aws::EmptyStructure
+    end
+
+    class DeleteImpersonationRoleRequest
+      attr_accessor organization_id: ::String
+      attr_accessor impersonation_role_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteImpersonationRoleResponse < Aws::EmptyStructure
+    end
+
+    class DeleteMailboxPermissionsRequest
+      attr_accessor organization_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor grantee_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMailboxPermissionsResponse < Aws::EmptyStructure
+    end
+
+    class DeleteMobileDeviceAccessOverrideRequest
+      attr_accessor organization_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor device_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMobileDeviceAccessOverrideResponse < Aws::EmptyStructure
+    end
+
+    class DeleteMobileDeviceAccessRuleRequest
+      attr_accessor organization_id: ::String
+      attr_accessor mobile_device_access_rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMobileDeviceAccessRuleResponse < Aws::EmptyStructure
+    end
+
+    class DeleteOrganizationRequest
+      attr_accessor client_token: ::String
+      attr_accessor organization_id: ::String
+      attr_accessor delete_directory: bool
+      attr_accessor force_delete: bool
+      SENSITIVE: []
+    end
+
+    class DeleteOrganizationResponse
+      attr_accessor organization_id: ::String
+      attr_accessor state: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourceRequest
+      attr_accessor organization_id: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourceResponse < Aws::EmptyStructure
+    end
+
+    class DeleteRetentionPolicyRequest
+      attr_accessor organization_id: ::String
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRetentionPolicyResponse < Aws::EmptyStructure
+    end
+
+    class DeleteUserRequest
+      attr_accessor organization_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteUserResponse < Aws::EmptyStructure
+    end
+
+    class DeregisterFromWorkMailRequest
+      attr_accessor organization_id: ::String
+      attr_accessor entity_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterFromWorkMailResponse < Aws::EmptyStructure
+    end
+
+    class DeregisterMailDomainRequest
+      attr_accessor organization_id: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterMailDomainResponse < Aws::EmptyStructure
+    end
+
+    class DescribeEmailMonitoringConfigurationRequest
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEmailMonitoringConfigurationResponse
+      attr_accessor role_arn: ::String
+      attr_accessor log_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEntityRequest
+      attr_accessor organization_id: ::String
+      attr_accessor email: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEntityResponse
+      attr_accessor entity_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("GROUP" | "USER" | "RESOURCE")
+      SENSITIVE: []
+    end
+
+    class DescribeGroupRequest
+      attr_accessor organization_id: ::String
+      attr_accessor group_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGroupResponse
+      attr_accessor group_id: ::String
+      attr_accessor name: ::String
+      attr_accessor email: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DELETED")
+      attr_accessor enabled_date: ::Time
+      attr_accessor disabled_date: ::Time
+      attr_accessor hidden_from_global_address_list: bool
+      SENSITIVE: []
+    end
+
+    class DescribeInboundDmarcSettingsRequest
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeInboundDmarcSettingsResponse
+      attr_accessor enforced: bool
+      SENSITIVE: []
+    end
+
+    class DescribeMailboxExportJobRequest
+      attr_accessor job_id: ::String
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeMailboxExportJobResponse
+      attr_accessor entity_id: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_prefix: ::String
+      attr_accessor s3_path: ::String
+      attr_accessor estimated_progress: ::Integer
+      attr_accessor state: ("RUNNING" | "COMPLETED" | "FAILED" | "CANCELLED")
+      attr_accessor error_info: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationRequest
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationResponse
+      attr_accessor organization_id: ::String
+      attr_accessor alias: ::String
+      attr_accessor state: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor directory_type: ::String
+      attr_accessor default_mail_domain: ::String
+      attr_accessor completed_date: ::Time
+      attr_accessor error_message: ::String
+      attr_accessor arn: ::String
+      attr_accessor migration_admin: ::String
+      attr_accessor interoperability_enabled: bool
+      SENSITIVE: []
+    end
+
+    class DescribeResourceRequest
+      attr_accessor organization_id: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourceResponse
+      attr_accessor resource_id: ::String
+      attr_accessor email: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("ROOM" | "EQUIPMENT")
+      attr_accessor booking_options: Types::BookingOptions
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DELETED")
+      attr_accessor enabled_date: ::Time
+      attr_accessor disabled_date: ::Time
+      attr_accessor description: ::String
+      attr_accessor hidden_from_global_address_list: bool
+      SENSITIVE: []
+    end
+
+    class DescribeUserRequest
+      attr_accessor organization_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeUserResponse
+      attr_accessor user_id: ::String
+      attr_accessor name: ::String
+      attr_accessor email: ::String
+      attr_accessor display_name: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DELETED")
+      attr_accessor user_role: ("USER" | "RESOURCE" | "SYSTEM_USER" | "REMOTE_USER")
+      attr_accessor enabled_date: ::Time
+      attr_accessor disabled_date: ::Time
+      attr_accessor mailbox_provisioned_date: ::Time
+      attr_accessor mailbox_deprovisioned_date: ::Time
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor hidden_from_global_address_list: bool
+      attr_accessor initials: ::String
+      attr_accessor telephone: ::String
+      attr_accessor street: ::String
+      attr_accessor job_title: ::String
+      attr_accessor city: ::String
+      attr_accessor company: ::String
+      attr_accessor zip_code: ::String
+      attr_accessor department: ::String
+      attr_accessor country: ::String
+      attr_accessor office: ::String
+      SENSITIVE: [:display_name, :first_name, :last_name, :initials, :telephone, :street, :job_title, :city, :company, :zip_code, :department, :country, :office]
+    end
+
+    class DirectoryInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryServiceAuthenticationFailedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateDelegateFromResourceRequest
+      attr_accessor organization_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor entity_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateDelegateFromResourceResponse < Aws::EmptyStructure
+    end
+
+    class DisassociateMemberFromGroupRequest
+      attr_accessor organization_id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor member_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateMemberFromGroupResponse < Aws::EmptyStructure
+    end
+
+    class DnsRecord
+      attr_accessor type: ::String
+      attr_accessor hostname: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class Domain
+      attr_accessor domain_name: ::String
+      attr_accessor hosted_zone_id: ::String
+      SENSITIVE: []
+    end
+
+    class EmailAddressInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EntityAlreadyRegisteredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EntityNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EntityStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EwsAvailabilityProvider
+      attr_accessor ews_endpoint: ::String
+      attr_accessor ews_username: ::String
+      attr_accessor ews_password: ::String
+      SENSITIVE: [:ews_password]
+    end
+
+    class FolderConfiguration
+      attr_accessor name: ("INBOX" | "DELETED_ITEMS" | "SENT_ITEMS" | "DRAFTS" | "JUNK_EMAIL")
+      attr_accessor action: ("NONE" | "DELETE" | "PERMANENTLY_DELETE")
+      attr_accessor period: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetAccessControlEffectRequest
+      attr_accessor organization_id: ::String
+      attr_accessor ip_address: ::String
+      attr_accessor action: ::String
+      attr_accessor user_id: ::String
+      attr_accessor impersonation_role_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessControlEffectResponse
+      attr_accessor effect: ("ALLOW" | "DENY")
+      attr_accessor matched_rules: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetDefaultRetentionPolicyRequest
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDefaultRetentionPolicyResponse
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor folder_configurations: ::Array[Types::FolderConfiguration]
+      SENSITIVE: []
+    end
+
+    class GetImpersonationRoleEffectRequest
+      attr_accessor organization_id: ::String
+      attr_accessor impersonation_role_id: ::String
+      attr_accessor target_user: ::String
+      SENSITIVE: []
+    end
+
+    class GetImpersonationRoleEffectResponse
+      attr_accessor type: ("FULL_ACCESS" | "READ_ONLY")
+      attr_accessor effect: ("ALLOW" | "DENY")
+      attr_accessor matched_rules: ::Array[Types::ImpersonationMatchedRule]
+      SENSITIVE: []
+    end
+
+    class GetImpersonationRoleRequest
+      attr_accessor organization_id: ::String
+      attr_accessor impersonation_role_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetImpersonationRoleResponse
+      attr_accessor impersonation_role_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("FULL_ACCESS" | "READ_ONLY")
+      attr_accessor description: ::String
+      attr_accessor rules: ::Array[Types::ImpersonationRule]
+      attr_accessor date_created: ::Time
+      attr_accessor date_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class GetMailDomainRequest
+      attr_accessor organization_id: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMailDomainResponse
+      attr_accessor records: ::Array[Types::DnsRecord]
+      attr_accessor is_test_domain: bool
+      attr_accessor is_default: bool
+      attr_accessor ownership_verification_status: ("PENDING" | "VERIFIED" | "FAILED")
+      attr_accessor dkim_verification_status: ("PENDING" | "VERIFIED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class GetMailboxDetailsRequest
+      attr_accessor organization_id: ::String
+      attr_accessor user_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMailboxDetailsResponse
+      attr_accessor mailbox_quota: ::Integer
+      attr_accessor mailbox_size: ::Float
+      SENSITIVE: []
+    end
+
+    class GetMobileDeviceAccessEffectRequest
+      attr_accessor organization_id: ::String
+      attr_accessor device_type: ::String
+      attr_accessor device_model: ::String
+      attr_accessor device_operating_system: ::String
+      attr_accessor device_user_agent: ::String
+      SENSITIVE: []
+    end
+
+    class GetMobileDeviceAccessEffectResponse
+      attr_accessor effect: ("ALLOW" | "DENY")
+      attr_accessor matched_rules: ::Array[Types::MobileDeviceAccessMatchedRule]
+      SENSITIVE: []
+    end
+
+    class GetMobileDeviceAccessOverrideRequest
+      attr_accessor organization_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor device_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetMobileDeviceAccessOverrideResponse
+      attr_accessor user_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor effect: ("ALLOW" | "DENY")
+      attr_accessor description: ::String
+      attr_accessor date_created: ::Time
+      attr_accessor date_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class Group
+      attr_accessor id: ::String
+      attr_accessor email: ::String
+      attr_accessor name: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DELETED")
+      attr_accessor enabled_date: ::Time
+      attr_accessor disabled_date: ::Time
+      SENSITIVE: []
+    end
+
+    class GroupIdentifier
+      attr_accessor group_id: ::String
+      attr_accessor group_name: ::String
+      SENSITIVE: []
+    end
+
+    class ImpersonationMatchedRule
+      attr_accessor impersonation_rule_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class ImpersonationRole
+      attr_accessor impersonation_role_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("FULL_ACCESS" | "READ_ONLY")
+      attr_accessor date_created: ::Time
+      attr_accessor date_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class ImpersonationRule
+      attr_accessor impersonation_rule_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor effect: ("ALLOW" | "DENY")
+      attr_accessor target_users: ::Array[::String]
+      attr_accessor not_target_users: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InvalidConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidCustomSesConfigurationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidParameterException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidPasswordException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaAvailabilityProvider
+      attr_accessor lambda_arn: ::String
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessControlRulesRequest
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessControlRulesResponse
+      attr_accessor rules: ::Array[Types::AccessControlRule]
+      SENSITIVE: []
+    end
+
+    class ListAliasesRequest
+      attr_accessor organization_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAliasesResponse
+      attr_accessor aliases: ::Array[::String]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAvailabilityConfigurationsRequest
+      attr_accessor organization_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAvailabilityConfigurationsResponse
+      attr_accessor availability_configurations: ::Array[Types::AvailabilityConfiguration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupMembersRequest
+      attr_accessor organization_id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGroupMembersResponse
+      attr_accessor members: ::Array[Types::Member]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupsFilters
+      attr_accessor name_prefix: ::String
+      attr_accessor primary_email_prefix: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class ListGroupsForEntityFilters
+      attr_accessor group_name_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupsForEntityRequest
+      attr_accessor organization_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor filters: Types::ListGroupsForEntityFilters
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListGroupsForEntityResponse
+      attr_accessor groups: ::Array[Types::GroupIdentifier]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGroupsRequest
+      attr_accessor organization_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: Types::ListGroupsFilters
+      SENSITIVE: []
+    end
+
+    class ListGroupsResponse
+      attr_accessor groups: ::Array[Types::Group]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListImpersonationRolesRequest
+      attr_accessor organization_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListImpersonationRolesResponse
+      attr_accessor roles: ::Array[Types::ImpersonationRole]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMailDomainsRequest
+      attr_accessor organization_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMailDomainsResponse
+      attr_accessor mail_domains: ::Array[Types::MailDomainSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMailboxExportJobsRequest
+      attr_accessor organization_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMailboxExportJobsResponse
+      attr_accessor jobs: ::Array[Types::MailboxExportJob]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMailboxPermissionsRequest
+      attr_accessor organization_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMailboxPermissionsResponse
+      attr_accessor permissions: ::Array[Types::Permission]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMobileDeviceAccessOverridesRequest
+      attr_accessor organization_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListMobileDeviceAccessOverridesResponse
+      attr_accessor overrides: ::Array[Types::MobileDeviceAccessOverride]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListMobileDeviceAccessRulesRequest
+      attr_accessor organization_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListMobileDeviceAccessRulesResponse
+      attr_accessor rules: ::Array[Types::MobileDeviceAccessRule]
+      SENSITIVE: []
+    end
+
+    class ListOrganizationsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOrganizationsResponse
+      attr_accessor organization_summaries: ::Array[Types::OrganizationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourceDelegatesRequest
+      attr_accessor organization_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListResourceDelegatesResponse
+      attr_accessor delegates: ::Array[Types::Delegate]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListResourcesFilters
+      attr_accessor name_prefix: ::String
+      attr_accessor primary_email_prefix: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class ListResourcesRequest
+      attr_accessor organization_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: Types::ListResourcesFilters
+      SENSITIVE: []
+    end
+
+    class ListResourcesResponse
+      attr_accessor resources: ::Array[Types::Resource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListUsersFilters
+      attr_accessor username_prefix: ::String
+      attr_accessor display_name_prefix: ::String
+      attr_accessor primary_email_prefix: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DELETED")
+      SENSITIVE: [:display_name_prefix]
+    end
+
+    class ListUsersRequest
+      attr_accessor organization_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor filters: Types::ListUsersFilters
+      SENSITIVE: []
+    end
+
+    class ListUsersResponse
+      attr_accessor users: ::Array[Types::User]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MailDomainInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MailDomainNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MailDomainStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MailDomainSummary
+      attr_accessor domain_name: ::String
+      attr_accessor default_domain: bool
+      SENSITIVE: []
+    end
+
+    class MailboxExportJob
+      attr_accessor job_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor description: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_path: ::String
+      attr_accessor estimated_progress: ::Integer
+      attr_accessor state: ("RUNNING" | "COMPLETED" | "FAILED" | "CANCELLED")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class Member
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("GROUP" | "USER")
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DELETED")
+      attr_accessor enabled_date: ::Time
+      attr_accessor disabled_date: ::Time
+      SENSITIVE: []
+    end
+
+    class MobileDeviceAccessMatchedRule
+      attr_accessor mobile_device_access_rule_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class MobileDeviceAccessOverride
+      attr_accessor user_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor effect: ("ALLOW" | "DENY")
+      attr_accessor description: ::String
+      attr_accessor date_created: ::Time
+      attr_accessor date_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class MobileDeviceAccessRule
+      attr_accessor mobile_device_access_rule_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor effect: ("ALLOW" | "DENY")
+      attr_accessor device_types: ::Array[::String]
+      attr_accessor not_device_types: ::Array[::String]
+      attr_accessor device_models: ::Array[::String]
+      attr_accessor not_device_models: ::Array[::String]
+      attr_accessor device_operating_systems: ::Array[::String]
+      attr_accessor not_device_operating_systems: ::Array[::String]
+      attr_accessor device_user_agents: ::Array[::String]
+      attr_accessor not_device_user_agents: ::Array[::String]
+      attr_accessor date_created: ::Time
+      attr_accessor date_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class NameAvailabilityException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OrganizationNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OrganizationStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OrganizationSummary
+      attr_accessor organization_id: ::String
+      attr_accessor alias: ::String
+      attr_accessor default_mail_domain: ::String
+      attr_accessor error_message: ::String
+      attr_accessor state: ::String
+      SENSITIVE: []
+    end
+
+    class Permission
+      attr_accessor grantee_id: ::String
+      attr_accessor grantee_type: ("GROUP" | "USER")
+      attr_accessor permission_values: ::Array[("FULL_ACCESS" | "SEND_AS" | "SEND_ON_BEHALF")]
+      SENSITIVE: []
+    end
+
+    class PutAccessControlRuleRequest
+      attr_accessor name: ::String
+      attr_accessor effect: ("ALLOW" | "DENY")
+      attr_accessor description: ::String
+      attr_accessor ip_ranges: ::Array[::String]
+      attr_accessor not_ip_ranges: ::Array[::String]
+      attr_accessor actions: ::Array[::String]
+      attr_accessor not_actions: ::Array[::String]
+      attr_accessor user_ids: ::Array[::String]
+      attr_accessor not_user_ids: ::Array[::String]
+      attr_accessor organization_id: ::String
+      attr_accessor impersonation_role_ids: ::Array[::String]
+      attr_accessor not_impersonation_role_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PutAccessControlRuleResponse < Aws::EmptyStructure
+    end
+
+    class PutEmailMonitoringConfigurationRequest
+      attr_accessor organization_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor log_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutEmailMonitoringConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class PutInboundDmarcSettingsRequest
+      attr_accessor organization_id: ::String
+      attr_accessor enforced: bool
+      SENSITIVE: []
+    end
+
+    class PutInboundDmarcSettingsResponse < Aws::EmptyStructure
+    end
+
+    class PutMailboxPermissionsRequest
+      attr_accessor organization_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor grantee_id: ::String
+      attr_accessor permission_values: ::Array[("FULL_ACCESS" | "SEND_AS" | "SEND_ON_BEHALF")]
+      SENSITIVE: []
+    end
+
+    class PutMailboxPermissionsResponse < Aws::EmptyStructure
+    end
+
+    class PutMobileDeviceAccessOverrideRequest
+      attr_accessor organization_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor device_id: ::String
+      attr_accessor effect: ("ALLOW" | "DENY")
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class PutMobileDeviceAccessOverrideResponse < Aws::EmptyStructure
+    end
+
+    class PutRetentionPolicyRequest
+      attr_accessor organization_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor folder_configurations: ::Array[Types::FolderConfiguration]
+      SENSITIVE: [:description]
+    end
+
+    class PutRetentionPolicyResponse < Aws::EmptyStructure
+    end
+
+    class RedactedEwsAvailabilityProvider
+      attr_accessor ews_endpoint: ::String
+      attr_accessor ews_username: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterMailDomainRequest
+      attr_accessor client_token: ::String
+      attr_accessor organization_id: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterMailDomainResponse < Aws::EmptyStructure
+    end
+
+    class RegisterToWorkMailRequest
+      attr_accessor organization_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor email: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterToWorkMailResponse < Aws::EmptyStructure
+    end
+
+    class ReservedNameException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResetPasswordRequest
+      attr_accessor organization_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor password: ::String
+      SENSITIVE: [:password]
+    end
+
+    class ResetPasswordResponse < Aws::EmptyStructure
+    end
+
+    class Resource
+      attr_accessor id: ::String
+      attr_accessor email: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("ROOM" | "EQUIPMENT")
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DELETED")
+      attr_accessor enabled_date: ::Time
+      attr_accessor disabled_date: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartMailboxExportJobRequest
+      attr_accessor client_token: ::String
+      attr_accessor organization_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor description: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor s3_bucket_name: ::String
+      attr_accessor s3_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class StartMailboxExportJobResponse
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TestAvailabilityConfigurationRequest
+      attr_accessor organization_id: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor ews_provider: Types::EwsAvailabilityProvider
+      attr_accessor lambda_provider: Types::LambdaAvailabilityProvider
+      SENSITIVE: []
+    end
+
+    class TestAvailabilityConfigurationResponse
+      attr_accessor test_passed: bool
+      attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyTagsException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateAvailabilityConfigurationRequest
+      attr_accessor organization_id: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor ews_provider: Types::EwsAvailabilityProvider
+      attr_accessor lambda_provider: Types::LambdaAvailabilityProvider
+      SENSITIVE: []
+    end
+
+    class UpdateAvailabilityConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateDefaultMailDomainRequest
+      attr_accessor organization_id: ::String
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDefaultMailDomainResponse < Aws::EmptyStructure
+    end
+
+    class UpdateGroupRequest
+      attr_accessor organization_id: ::String
+      attr_accessor group_id: ::String
+      attr_accessor hidden_from_global_address_list: bool
+      SENSITIVE: []
+    end
+
+    class UpdateGroupResponse < Aws::EmptyStructure
+    end
+
+    class UpdateImpersonationRoleRequest
+      attr_accessor organization_id: ::String
+      attr_accessor impersonation_role_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("FULL_ACCESS" | "READ_ONLY")
+      attr_accessor description: ::String
+      attr_accessor rules: ::Array[Types::ImpersonationRule]
+      SENSITIVE: []
+    end
+
+    class UpdateImpersonationRoleResponse < Aws::EmptyStructure
+    end
+
+    class UpdateMailboxQuotaRequest
+      attr_accessor organization_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor mailbox_quota: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateMailboxQuotaResponse < Aws::EmptyStructure
+    end
+
+    class UpdateMobileDeviceAccessRuleRequest
+      attr_accessor organization_id: ::String
+      attr_accessor mobile_device_access_rule_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor effect: ("ALLOW" | "DENY")
+      attr_accessor device_types: ::Array[::String]
+      attr_accessor not_device_types: ::Array[::String]
+      attr_accessor device_models: ::Array[::String]
+      attr_accessor not_device_models: ::Array[::String]
+      attr_accessor device_operating_systems: ::Array[::String]
+      attr_accessor not_device_operating_systems: ::Array[::String]
+      attr_accessor device_user_agents: ::Array[::String]
+      attr_accessor not_device_user_agents: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateMobileDeviceAccessRuleResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePrimaryEmailAddressRequest
+      attr_accessor organization_id: ::String
+      attr_accessor entity_id: ::String
+      attr_accessor email: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePrimaryEmailAddressResponse < Aws::EmptyStructure
+    end
+
+    class UpdateResourceRequest
+      attr_accessor organization_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor name: ::String
+      attr_accessor booking_options: Types::BookingOptions
+      attr_accessor description: ::String
+      attr_accessor type: ("ROOM" | "EQUIPMENT")
+      attr_accessor hidden_from_global_address_list: bool
+      SENSITIVE: []
+    end
+
+    class UpdateResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateUserRequest
+      attr_accessor organization_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor role: ("USER" | "RESOURCE" | "SYSTEM_USER" | "REMOTE_USER")
+      attr_accessor display_name: ::String
+      attr_accessor first_name: ::String
+      attr_accessor last_name: ::String
+      attr_accessor hidden_from_global_address_list: bool
+      attr_accessor initials: ::String
+      attr_accessor telephone: ::String
+      attr_accessor street: ::String
+      attr_accessor job_title: ::String
+      attr_accessor city: ::String
+      attr_accessor company: ::String
+      attr_accessor zip_code: ::String
+      attr_accessor department: ::String
+      attr_accessor country: ::String
+      attr_accessor office: ::String
+      SENSITIVE: [:display_name, :first_name, :last_name, :initials, :telephone, :street, :job_title, :city, :company, :zip_code, :department, :country, :office]
+    end
+
+    class UpdateUserResponse < Aws::EmptyStructure
+    end
+
+    class User
+      attr_accessor id: ::String
+      attr_accessor email: ::String
+      attr_accessor name: ::String
+      attr_accessor display_name: ::String
+      attr_accessor state: ("ENABLED" | "DISABLED" | "DELETED")
+      attr_accessor user_role: ("USER" | "RESOURCE" | "SYSTEM_USER" | "REMOTE_USER")
+      attr_accessor enabled_date: ::Time
+      attr_accessor disabled_date: ::Time
+      SENSITIVE: []
+    end
+  end
+end

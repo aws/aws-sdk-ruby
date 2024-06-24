@@ -28,6 +28,13 @@ module Aws::Macie2
     AllowsUnencryptedObjectUploads = Shapes::StringShape.new(name: 'AllowsUnencryptedObjectUploads')
     ApiCallDetails = Shapes::StructureShape.new(name: 'ApiCallDetails')
     AssumedRole = Shapes::StructureShape.new(name: 'AssumedRole')
+    AutoEnableMode = Shapes::StringShape.new(name: 'AutoEnableMode')
+    AutomatedDiscoveryAccount = Shapes::StructureShape.new(name: 'AutomatedDiscoveryAccount')
+    AutomatedDiscoveryAccountStatus = Shapes::StringShape.new(name: 'AutomatedDiscoveryAccountStatus')
+    AutomatedDiscoveryAccountUpdate = Shapes::StructureShape.new(name: 'AutomatedDiscoveryAccountUpdate')
+    AutomatedDiscoveryAccountUpdateError = Shapes::StructureShape.new(name: 'AutomatedDiscoveryAccountUpdateError')
+    AutomatedDiscoveryAccountUpdateErrorCode = Shapes::StringShape.new(name: 'AutomatedDiscoveryAccountUpdateErrorCode')
+    AutomatedDiscoveryMonitoringStatus = Shapes::StringShape.new(name: 'AutomatedDiscoveryMonitoringStatus')
     AutomatedDiscoveryStatus = Shapes::StringShape.new(name: 'AutomatedDiscoveryStatus')
     AvailabilityCode = Shapes::StringShape.new(name: 'AvailabilityCode')
     AwsAccount = Shapes::StructureShape.new(name: 'AwsAccount')
@@ -35,6 +42,8 @@ module Aws::Macie2
     BatchGetCustomDataIdentifierSummary = Shapes::StructureShape.new(name: 'BatchGetCustomDataIdentifierSummary')
     BatchGetCustomDataIdentifiersRequest = Shapes::StructureShape.new(name: 'BatchGetCustomDataIdentifiersRequest')
     BatchGetCustomDataIdentifiersResponse = Shapes::StructureShape.new(name: 'BatchGetCustomDataIdentifiersResponse')
+    BatchUpdateAutomatedDiscoveryAccountsRequest = Shapes::StructureShape.new(name: 'BatchUpdateAutomatedDiscoveryAccountsRequest')
+    BatchUpdateAutomatedDiscoveryAccountsResponse = Shapes::StructureShape.new(name: 'BatchUpdateAutomatedDiscoveryAccountsResponse')
     BlockPublicAccess = Shapes::StructureShape.new(name: 'BlockPublicAccess')
     BucketCountByEffectivePermission = Shapes::StructureShape.new(name: 'BucketCountByEffectivePermission')
     BucketCountByEncryptionType = Shapes::StructureShape.new(name: 'BucketCountByEncryptionType')
@@ -213,6 +222,8 @@ module Aws::Macie2
     LastRunErrorStatusCode = Shapes::StringShape.new(name: 'LastRunErrorStatusCode')
     ListAllowListsRequest = Shapes::StructureShape.new(name: 'ListAllowListsRequest')
     ListAllowListsResponse = Shapes::StructureShape.new(name: 'ListAllowListsResponse')
+    ListAutomatedDiscoveryAccountsRequest = Shapes::StructureShape.new(name: 'ListAutomatedDiscoveryAccountsRequest')
+    ListAutomatedDiscoveryAccountsResponse = Shapes::StructureShape.new(name: 'ListAutomatedDiscoveryAccountsResponse')
     ListClassificationJobsRequest = Shapes::StructureShape.new(name: 'ListClassificationJobsRequest')
     ListClassificationJobsResponse = Shapes::StructureShape.new(name: 'ListClassificationJobsResponse')
     ListClassificationScopesRequest = Shapes::StructureShape.new(name: 'ListClassificationScopesRequest')
@@ -275,6 +286,8 @@ module Aws::Macie2
     ResourceProfileArtifact = Shapes::StructureShape.new(name: 'ResourceProfileArtifact')
     ResourceStatistics = Shapes::StructureShape.new(name: 'ResourceStatistics')
     ResourcesAffected = Shapes::StructureShape.new(name: 'ResourcesAffected')
+    RetrievalConfiguration = Shapes::StructureShape.new(name: 'RetrievalConfiguration')
+    RetrievalMode = Shapes::StringShape.new(name: 'RetrievalMode')
     RevealConfiguration = Shapes::StructureShape.new(name: 'RevealConfiguration')
     RevealRequestStatus = Shapes::StringShape.new(name: 'RevealRequestStatus')
     RevealStatus = Shapes::StringShape.new(name: 'RevealStatus')
@@ -373,6 +386,7 @@ module Aws::Macie2
     UpdateResourceProfileDetectionsResponse = Shapes::StructureShape.new(name: 'UpdateResourceProfileDetectionsResponse')
     UpdateResourceProfileRequest = Shapes::StructureShape.new(name: 'UpdateResourceProfileRequest')
     UpdateResourceProfileResponse = Shapes::StructureShape.new(name: 'UpdateResourceProfileResponse')
+    UpdateRetrievalConfiguration = Shapes::StructureShape.new(name: 'UpdateRetrievalConfiguration')
     UpdateRevealConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateRevealConfigurationRequest')
     UpdateRevealConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateRevealConfigurationResponse')
     UpdateSensitivityInspectionTemplateRequest = Shapes::StructureShape.new(name: 'UpdateSensitivityInspectionTemplateRequest')
@@ -397,6 +411,9 @@ module Aws::Macie2
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __listOfAdminAccount = Shapes::ListShape.new(name: '__listOfAdminAccount')
     __listOfAllowListSummary = Shapes::ListShape.new(name: '__listOfAllowListSummary')
+    __listOfAutomatedDiscoveryAccount = Shapes::ListShape.new(name: '__listOfAutomatedDiscoveryAccount')
+    __listOfAutomatedDiscoveryAccountUpdate = Shapes::ListShape.new(name: '__listOfAutomatedDiscoveryAccountUpdate')
+    __listOfAutomatedDiscoveryAccountUpdateError = Shapes::ListShape.new(name: '__listOfAutomatedDiscoveryAccountUpdateError')
     __listOfBatchGetCustomDataIdentifierSummary = Shapes::ListShape.new(name: '__listOfBatchGetCustomDataIdentifierSummary')
     __listOfBucketMetadata = Shapes::ListShape.new(name: '__listOfBucketMetadata')
     __listOfClassificationScopeSummary = Shapes::ListShape.new(name: '__listOfClassificationScopeSummary')
@@ -439,6 +456,7 @@ module Aws::Macie2
     __stringMin1Max128Pattern = Shapes::StringShape.new(name: '__stringMin1Max128Pattern')
     __stringMin1Max2048 = Shapes::StringShape.new(name: '__stringMin1Max2048')
     __stringMin1Max512PatternSS = Shapes::StringShape.new(name: '__stringMin1Max512PatternSS')
+    __stringMin1Max64PatternW = Shapes::StringShape.new(name: '__stringMin1Max64PatternW')
     __stringMin22Max22PatternAZ0922 = Shapes::StringShape.new(name: '__stringMin22Max22PatternAZ0922')
     __stringMin3Max255PatternAZaZ093255 = Shapes::StringShape.new(name: '__stringMin3Max255PatternAZaZ093255')
     __stringMin71Max89PatternArnAwsAwsCnAwsUsGovMacie2AZ19920D12AllowListAZ0922 = Shapes::StringShape.new(name: '__stringMin71Max89PatternArnAwsAwsCnAwsUsGovMacie2AZ19920D12AllowListAZ0922')
@@ -499,6 +517,18 @@ module Aws::Macie2
     AssumedRole.add_member(:session_context, Shapes::ShapeRef.new(shape: SessionContext, location_name: "sessionContext"))
     AssumedRole.struct_class = Types::AssumedRole
 
+    AutomatedDiscoveryAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
+    AutomatedDiscoveryAccount.add_member(:status, Shapes::ShapeRef.new(shape: AutomatedDiscoveryAccountStatus, location_name: "status"))
+    AutomatedDiscoveryAccount.struct_class = Types::AutomatedDiscoveryAccount
+
+    AutomatedDiscoveryAccountUpdate.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
+    AutomatedDiscoveryAccountUpdate.add_member(:status, Shapes::ShapeRef.new(shape: AutomatedDiscoveryAccountStatus, location_name: "status"))
+    AutomatedDiscoveryAccountUpdate.struct_class = Types::AutomatedDiscoveryAccountUpdate
+
+    AutomatedDiscoveryAccountUpdateError.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
+    AutomatedDiscoveryAccountUpdateError.add_member(:error_code, Shapes::ShapeRef.new(shape: AutomatedDiscoveryAccountUpdateErrorCode, location_name: "errorCode"))
+    AutomatedDiscoveryAccountUpdateError.struct_class = Types::AutomatedDiscoveryAccountUpdateError
+
     AwsAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
     AwsAccount.add_member(:principal_id, Shapes::ShapeRef.new(shape: __string, location_name: "principalId"))
     AwsAccount.struct_class = Types::AwsAccount
@@ -520,6 +550,12 @@ module Aws::Macie2
     BatchGetCustomDataIdentifiersResponse.add_member(:custom_data_identifiers, Shapes::ShapeRef.new(shape: __listOfBatchGetCustomDataIdentifierSummary, location_name: "customDataIdentifiers"))
     BatchGetCustomDataIdentifiersResponse.add_member(:not_found_identifier_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "notFoundIdentifierIds"))
     BatchGetCustomDataIdentifiersResponse.struct_class = Types::BatchGetCustomDataIdentifiersResponse
+
+    BatchUpdateAutomatedDiscoveryAccountsRequest.add_member(:accounts, Shapes::ShapeRef.new(shape: __listOfAutomatedDiscoveryAccountUpdate, location_name: "accounts"))
+    BatchUpdateAutomatedDiscoveryAccountsRequest.struct_class = Types::BatchUpdateAutomatedDiscoveryAccountsRequest
+
+    BatchUpdateAutomatedDiscoveryAccountsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: __listOfAutomatedDiscoveryAccountUpdateError, location_name: "errors"))
+    BatchUpdateAutomatedDiscoveryAccountsResponse.struct_class = Types::BatchUpdateAutomatedDiscoveryAccountsResponse
 
     BlockPublicAccess.add_member(:block_public_acls, Shapes::ShapeRef.new(shape: __boolean, location_name: "blockPublicAcls"))
     BlockPublicAccess.add_member(:block_public_policy, Shapes::ShapeRef.new(shape: __boolean, location_name: "blockPublicPolicy"))
@@ -569,6 +605,7 @@ module Aws::Macie2
 
     BucketMetadata.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
     BucketMetadata.add_member(:allows_unencrypted_object_uploads, Shapes::ShapeRef.new(shape: AllowsUnencryptedObjectUploads, location_name: "allowsUnencryptedObjectUploads"))
+    BucketMetadata.add_member(:automated_discovery_monitoring_status, Shapes::ShapeRef.new(shape: AutomatedDiscoveryMonitoringStatus, location_name: "automatedDiscoveryMonitoringStatus"))
     BucketMetadata.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: __string, location_name: "bucketArn"))
     BucketMetadata.add_member(:bucket_created_at, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "bucketCreatedAt"))
     BucketMetadata.add_member(:bucket_name, Shapes::ShapeRef.new(shape: __string, location_name: "bucketName"))
@@ -979,6 +1016,7 @@ module Aws::Macie2
 
     GetAutomatedDiscoveryConfigurationRequest.struct_class = Types::GetAutomatedDiscoveryConfigurationRequest
 
+    GetAutomatedDiscoveryConfigurationResponse.add_member(:auto_enable_organization_members, Shapes::ShapeRef.new(shape: AutoEnableMode, location_name: "autoEnableOrganizationMembers"))
     GetAutomatedDiscoveryConfigurationResponse.add_member(:classification_scope_id, Shapes::ShapeRef.new(shape: ClassificationScopeId, location_name: "classificationScopeId"))
     GetAutomatedDiscoveryConfigurationResponse.add_member(:disabled_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "disabledAt"))
     GetAutomatedDiscoveryConfigurationResponse.add_member(:first_enabled_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "firstEnabledAt"))
@@ -1115,6 +1153,7 @@ module Aws::Macie2
     GetRevealConfigurationRequest.struct_class = Types::GetRevealConfigurationRequest
 
     GetRevealConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: RevealConfiguration, location_name: "configuration"))
+    GetRevealConfigurationResponse.add_member(:retrieval_configuration, Shapes::ShapeRef.new(shape: RetrievalConfiguration, location_name: "retrievalConfiguration"))
     GetRevealConfigurationResponse.struct_class = Types::GetRevealConfigurationResponse
 
     GetSensitiveDataOccurrencesAvailabilityRequest.add_member(:finding_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "findingId"))
@@ -1250,6 +1289,15 @@ module Aws::Macie2
     ListAllowListsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListAllowListsResponse.struct_class = Types::ListAllowListsResponse
 
+    ListAutomatedDiscoveryAccountsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: __listOf__string, location: "querystring", location_name: "accountIds"))
+    ListAutomatedDiscoveryAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAutomatedDiscoveryAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListAutomatedDiscoveryAccountsRequest.struct_class = Types::ListAutomatedDiscoveryAccountsRequest
+
+    ListAutomatedDiscoveryAccountsResponse.add_member(:items, Shapes::ShapeRef.new(shape: __listOfAutomatedDiscoveryAccount, location_name: "items"))
+    ListAutomatedDiscoveryAccountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListAutomatedDiscoveryAccountsResponse.struct_class = Types::ListAutomatedDiscoveryAccountsResponse
+
     ListClassificationJobsRequest.add_member(:filter_criteria, Shapes::ShapeRef.new(shape: ListJobsFilterCriteria, location_name: "filterCriteria"))
     ListClassificationJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integer, location_name: "maxResults"))
     ListClassificationJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
@@ -1375,6 +1423,7 @@ module Aws::Macie2
     ManagedDataIdentifierSummary.struct_class = Types::ManagedDataIdentifierSummary
 
     MatchingBucket.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
+    MatchingBucket.add_member(:automated_discovery_monitoring_status, Shapes::ShapeRef.new(shape: AutomatedDiscoveryMonitoringStatus, location_name: "automatedDiscoveryMonitoringStatus"))
     MatchingBucket.add_member(:bucket_name, Shapes::ShapeRef.new(shape: __string, location_name: "bucketName"))
     MatchingBucket.add_member(:classifiable_object_count, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableObjectCount"))
     MatchingBucket.add_member(:classifiable_size_in_bytes, Shapes::ShapeRef.new(shape: __long, location_name: "classifiableSizeInBytes"))
@@ -1490,6 +1539,11 @@ module Aws::Macie2
     ResourcesAffected.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "s3Bucket"))
     ResourcesAffected.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "s3Object"))
     ResourcesAffected.struct_class = Types::ResourcesAffected
+
+    RetrievalConfiguration.add_member(:external_id, Shapes::ShapeRef.new(shape: __string, location_name: "externalId"))
+    RetrievalConfiguration.add_member(:retrieval_mode, Shapes::ShapeRef.new(shape: RetrievalMode, required: true, location_name: "retrievalMode"))
+    RetrievalConfiguration.add_member(:role_name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternW, location_name: "roleName"))
+    RetrievalConfiguration.struct_class = Types::RetrievalConfiguration
 
     RevealConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: __stringMin1Max2048, location_name: "kmsKeyId"))
     RevealConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: RevealStatus, required: true, location_name: "status"))
@@ -1755,6 +1809,7 @@ module Aws::Macie2
     UpdateAllowListResponse.add_member(:id, Shapes::ShapeRef.new(shape: __stringMin22Max22PatternAZ0922, location_name: "id"))
     UpdateAllowListResponse.struct_class = Types::UpdateAllowListResponse
 
+    UpdateAutomatedDiscoveryConfigurationRequest.add_member(:auto_enable_organization_members, Shapes::ShapeRef.new(shape: AutoEnableMode, location_name: "autoEnableOrganizationMembers"))
     UpdateAutomatedDiscoveryConfigurationRequest.add_member(:status, Shapes::ShapeRef.new(shape: AutomatedDiscoveryStatus, required: true, location_name: "status"))
     UpdateAutomatedDiscoveryConfigurationRequest.struct_class = Types::UpdateAutomatedDiscoveryConfigurationRequest
 
@@ -1814,10 +1869,16 @@ module Aws::Macie2
 
     UpdateResourceProfileResponse.struct_class = Types::UpdateResourceProfileResponse
 
+    UpdateRetrievalConfiguration.add_member(:retrieval_mode, Shapes::ShapeRef.new(shape: RetrievalMode, required: true, location_name: "retrievalMode"))
+    UpdateRetrievalConfiguration.add_member(:role_name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternW, location_name: "roleName"))
+    UpdateRetrievalConfiguration.struct_class = Types::UpdateRetrievalConfiguration
+
     UpdateRevealConfigurationRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: RevealConfiguration, required: true, location_name: "configuration"))
+    UpdateRevealConfigurationRequest.add_member(:retrieval_configuration, Shapes::ShapeRef.new(shape: UpdateRetrievalConfiguration, location_name: "retrievalConfiguration"))
     UpdateRevealConfigurationRequest.struct_class = Types::UpdateRevealConfigurationRequest
 
     UpdateRevealConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: RevealConfiguration, location_name: "configuration"))
+    UpdateRevealConfigurationResponse.add_member(:retrieval_configuration, Shapes::ShapeRef.new(shape: RetrievalConfiguration, location_name: "retrievalConfiguration"))
     UpdateRevealConfigurationResponse.struct_class = Types::UpdateRevealConfigurationResponse
 
     UpdateSensitivityInspectionTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
@@ -1882,6 +1943,12 @@ module Aws::Macie2
     __listOfAdminAccount.member = Shapes::ShapeRef.new(shape: AdminAccount)
 
     __listOfAllowListSummary.member = Shapes::ShapeRef.new(shape: AllowListSummary)
+
+    __listOfAutomatedDiscoveryAccount.member = Shapes::ShapeRef.new(shape: AutomatedDiscoveryAccount)
+
+    __listOfAutomatedDiscoveryAccountUpdate.member = Shapes::ShapeRef.new(shape: AutomatedDiscoveryAccountUpdate)
+
+    __listOfAutomatedDiscoveryAccountUpdateError.member = Shapes::ShapeRef.new(shape: AutomatedDiscoveryAccountUpdateError)
 
     __listOfBatchGetCustomDataIdentifierSummary.member = Shapes::ShapeRef.new(shape: BatchGetCustomDataIdentifierSummary)
 
@@ -1961,6 +2028,7 @@ module Aws::Macie2
 
       api.metadata = {
         "apiVersion" => "2020-01-01",
+        "auth" => ["aws.auth#sigv4"],
         "endpointPrefix" => "macie2",
         "jsonVersion" => "1.1",
         "protocol" => "rest-json",
@@ -1999,6 +2067,19 @@ module Aws::Macie2
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:batch_update_automated_discovery_accounts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchUpdateAutomatedDiscoveryAccounts"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/automated-discovery/accounts"
+        o.input = Shapes::ShapeRef.new(shape: BatchUpdateAutomatedDiscoveryAccountsRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchUpdateAutomatedDiscoveryAccountsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:create_allow_list, Seahorse::Model::Operation.new.tap do |o|
@@ -2675,6 +2756,25 @@ module Aws::Macie2
         o.http_request_uri = "/allow-lists"
         o.input = Shapes::ShapeRef.new(shape: ListAllowListsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAllowListsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_automated_discovery_accounts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAutomatedDiscoveryAccounts"
+        o.http_method = "GET"
+        o.http_request_uri = "/automated-discovery/accounts"
+        o.input = Shapes::ShapeRef.new(shape: ListAutomatedDiscoveryAccountsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAutomatedDiscoveryAccountsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

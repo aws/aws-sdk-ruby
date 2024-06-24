@@ -1,6 +1,106 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.112.0 (2024-05-16)
+------------------
+
+* Feature - This release adds DescribeKeyRegistration and UpdateKeyRegistration APIs to manage QuickSight Customer Managed Keys (CMK).
+
+1.111.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.110.0 (2024-04-30)
+------------------
+
+* Feature - New Q embedding supporting Generative Q&A
+
+1.109.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.108.0 (2024-04-18)
+------------------
+
+* Feature - This release adds support for the Cross Sheet Filter and Control features, and support for warnings in asset imports for any permitted errors encountered during execution
+
+1.107.0 (2024-04-05)
+------------------
+
+* Feature - Adding IAMIdentityCenterInstanceArn parameter to CreateAccountSubscription
+
+1.106.0 (2024-03-28)
+------------------
+
+* Feature - Amazon QuickSight: Adds support for setting up VPC Endpoint restrictions for accessing QuickSight Website.
+
+1.105.0 (2024-02-29)
+------------------
+
+* Feature - TooltipTarget for Combo chart visuals; ColumnConfiguration limit increase to 2000; Documentation Update
+
+1.104.0 (2024-02-08)
+------------------
+
+* Feature - General Interactions for Visuals; Waterfall Chart Color Configuration; Documentation Update
+
+1.103.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.102.0 (2023-12-29)
+------------------
+
+* Feature - Add LinkEntityArn support for different partitions; Add UnsupportedUserEditionException in UpdateDashboardLinks API; Add support for New Reader Experience Topics
+
+1.101.0 (2023-12-18)
+------------------
+
+* Feature - A docs-only release to add missing entities to the API reference.
+
+1.100.0 (2023-12-14)
+------------------
+
+* Feature - Update Dashboard Links support; SingleAxisOptions support; Scatterplot Query limit support.
+
+1.99.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.98.0 (2023-11-27)
+------------------
+
+* Feature - This release launches new APIs for trusted identity propagation setup and supports creating datasources using trusted identity propagation as authentication method for QuickSight accounts configured with IAM Identity Center.
+
+1.97.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.96.0 (2023-11-16)
+------------------
+
+* Feature - Custom permission support for QuickSight roles; Three new datasources STARBURST, TRINO, BIGQUERY; Lenient mode changes the default behavior to allow for exporting and importing with certain UI allowed errors, Support for permissions and tags export and import.
+
+1.95.0 (2023-11-02)
+------------------
+
+* Feature - This release introduces Float Decimal Type as SubType in QuickSight SPICE datasets and Custom week start and Custom timezone options in Analysis and Dashboard.
+
+1.94.0 (2023-10-19)
+------------------
+
+* Feature - This release adds the following: 1) Trino and Starburst Database Connectors 2) Custom total for tables and pivot tables 3) Enable restricted folders 4) Add rolling dates for time equality filters 5) Refine DataPathValue and introduce DataPathType 6) Add SeriesType to ReferenceLineDataConfiguration
+
 1.93.0 (2023-10-06)
 ------------------
 

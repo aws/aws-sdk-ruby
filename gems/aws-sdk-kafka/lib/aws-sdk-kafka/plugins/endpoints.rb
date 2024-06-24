@@ -14,6 +14,7 @@ module Aws::Kafka
       option(
         :endpoint_provider,
         doc_type: 'Aws::Kafka::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::Kafka
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -64,12 +66,16 @@ module Aws::Kafka
             Aws::Kafka::Endpoints::CreateClusterV2.build(context)
           when :create_configuration
             Aws::Kafka::Endpoints::CreateConfiguration.build(context)
+          when :create_replicator
+            Aws::Kafka::Endpoints::CreateReplicator.build(context)
           when :create_vpc_connection
             Aws::Kafka::Endpoints::CreateVpcConnection.build(context)
           when :delete_cluster
             Aws::Kafka::Endpoints::DeleteCluster.build(context)
           when :delete_configuration
             Aws::Kafka::Endpoints::DeleteConfiguration.build(context)
+          when :delete_replicator
+            Aws::Kafka::Endpoints::DeleteReplicator.build(context)
           when :delete_vpc_connection
             Aws::Kafka::Endpoints::DeleteVpcConnection.build(context)
           when :describe_cluster
@@ -84,6 +90,8 @@ module Aws::Kafka
             Aws::Kafka::Endpoints::DescribeConfiguration.build(context)
           when :describe_configuration_revision
             Aws::Kafka::Endpoints::DescribeConfigurationRevision.build(context)
+          when :describe_replicator
+            Aws::Kafka::Endpoints::DescribeReplicator.build(context)
           when :describe_vpc_connection
             Aws::Kafka::Endpoints::DescribeVpcConnection.build(context)
           when :batch_disassociate_scram_secret
@@ -108,6 +116,8 @@ module Aws::Kafka
             Aws::Kafka::Endpoints::ListKafkaVersions.build(context)
           when :list_nodes
             Aws::Kafka::Endpoints::ListNodes.build(context)
+          when :list_replicators
+            Aws::Kafka::Endpoints::ListReplicators.build(context)
           when :list_scram_secrets
             Aws::Kafka::Endpoints::ListScramSecrets.build(context)
           when :list_tags_for_resource
@@ -146,6 +156,8 @@ module Aws::Kafka
             Aws::Kafka::Endpoints::UpdateConnectivity.build(context)
           when :update_monitoring
             Aws::Kafka::Endpoints::UpdateMonitoring.build(context)
+          when :update_replication_info
+            Aws::Kafka::Endpoints::UpdateReplicationInfo.build(context)
           when :update_security
             Aws::Kafka::Endpoints::UpdateSecurity.build(context)
           when :update_storage

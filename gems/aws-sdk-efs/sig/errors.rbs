@@ -1,0 +1,146 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EFS
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AccessPointAlreadyExists < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+        def access_point_id: () -> ::String
+      end
+      class AccessPointLimitExceeded < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class AccessPointNotFound < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class AvailabilityZonesMismatch < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class BadRequest < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class ConflictException < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class DependencyTimeout < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class FileSystemAlreadyExists < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+        def file_system_id: () -> ::String
+      end
+      class FileSystemInUse < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class FileSystemLimitExceeded < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class FileSystemNotFound < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class IncorrectFileSystemLifeCycleState < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class IncorrectMountTargetState < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class InsufficientThroughputCapacity < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class InternalServerError < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class InvalidPolicyException < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class IpAddressInUse < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class MountTargetConflict < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class MountTargetNotFound < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class NetworkInterfaceLimitExceeded < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class NoFreeAddressesInSubnet < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class PolicyNotFound < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class ReplicationAlreadyExists < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class ReplicationNotFound < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class SecurityGroupLimitExceeded < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class SecurityGroupNotFound < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class SubnetNotFound < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class ThrottlingException < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class ThroughputLimitExceeded < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class TooManyRequests < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class UnsupportedAvailabilityZone < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+      class ValidationException < ::Aws::Errors::ServiceError
+        def error_code: () -> ::String
+        def message: () -> ::String
+      end
+    end
+  end
+end

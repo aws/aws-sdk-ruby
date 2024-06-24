@@ -1,0 +1,3150 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Lightsail
+  module Types
+
+    class AccessDeniedException
+      attr_accessor code: ::String
+      attr_accessor docs: ::String
+      attr_accessor message: ::String
+      attr_accessor tip: ::String
+      SENSITIVE: []
+    end
+
+    class AccessKey
+      attr_accessor access_key_id: ::String
+      attr_accessor secret_access_key: ::String
+      attr_accessor status: ("Active" | "Inactive")
+      attr_accessor created_at: ::Time
+      attr_accessor last_used: Types::AccessKeyLastUsed
+      SENSITIVE: [:access_key_id]
+    end
+
+    class AccessKeyLastUsed
+      attr_accessor last_used_date: ::Time
+      attr_accessor region: ::String
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class AccessRules
+      attr_accessor get_object: ("public" | "private")
+      attr_accessor allow_public_overrides: bool
+      SENSITIVE: []
+    end
+
+    class AccountLevelBpaSync
+      attr_accessor status: ("InSync" | "Failed" | "NeverSynced" | "Defaulted")
+      attr_accessor last_synced_at: ::Time
+      attr_accessor message: ("DEFAULTED_FOR_SLR_MISSING" | "SYNC_ON_HOLD" | "DEFAULTED_FOR_SLR_MISSING_ON_HOLD" | "Unknown")
+      attr_accessor bpa_impacts_lightsail: bool
+      SENSITIVE: []
+    end
+
+    class AccountSetupInProgressException
+      attr_accessor code: ::String
+      attr_accessor docs: ::String
+      attr_accessor message: ::String
+      attr_accessor tip: ::String
+      SENSITIVE: []
+    end
+
+    class AddOn
+      attr_accessor name: ::String
+      attr_accessor status: ::String
+      attr_accessor snapshot_time_of_day: ::String
+      attr_accessor next_snapshot_time_of_day: ::String
+      attr_accessor threshold: ::String
+      attr_accessor duration: ::String
+      SENSITIVE: []
+    end
+
+    class AddOnRequest
+      attr_accessor add_on_type: ("AutoSnapshot" | "StopInstanceOnIdle")
+      attr_accessor auto_snapshot_add_on_request: Types::AutoSnapshotAddOnRequest
+      attr_accessor stop_instance_on_idle_request: Types::StopInstanceOnIdleRequest
+      SENSITIVE: []
+    end
+
+    class Alarm
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor support_code: ::String
+      attr_accessor monitored_resource_info: Types::MonitoredResourceInfo
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor period: ::Integer
+      attr_accessor threshold: ::Float
+      attr_accessor datapoints_to_alarm: ::Integer
+      attr_accessor treat_missing_data: ("breaching" | "notBreaching" | "ignore" | "missing")
+      attr_accessor statistic: ("Minimum" | "Maximum" | "Sum" | "Average" | "SampleCount")
+      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "BurstCapacityTime" | "BurstCapacityPercentage")
+      attr_accessor state: ("OK" | "ALARM" | "INSUFFICIENT_DATA")
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      attr_accessor contact_protocols: ::Array[("Email" | "SMS")]
+      attr_accessor notification_triggers: ::Array[("OK" | "ALARM" | "INSUFFICIENT_DATA")]
+      attr_accessor notification_enabled: bool
+      SENSITIVE: []
+    end
+
+    class AllocateStaticIpRequest
+      attr_accessor static_ip_name: ::String
+      SENSITIVE: []
+    end
+
+    class AllocateStaticIpResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class AttachCertificateToDistributionRequest
+      attr_accessor distribution_name: ::String
+      attr_accessor certificate_name: ::String
+      SENSITIVE: []
+    end
+
+    class AttachCertificateToDistributionResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class AttachDiskRequest
+      attr_accessor disk_name: ::String
+      attr_accessor instance_name: ::String
+      attr_accessor disk_path: ::String
+      attr_accessor auto_mounting: bool
+      SENSITIVE: []
+    end
+
+    class AttachDiskResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class AttachInstancesToLoadBalancerRequest
+      attr_accessor load_balancer_name: ::String
+      attr_accessor instance_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class AttachInstancesToLoadBalancerResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class AttachLoadBalancerTlsCertificateRequest
+      attr_accessor load_balancer_name: ::String
+      attr_accessor certificate_name: ::String
+      SENSITIVE: []
+    end
+
+    class AttachLoadBalancerTlsCertificateResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class AttachStaticIpRequest
+      attr_accessor static_ip_name: ::String
+      attr_accessor instance_name: ::String
+      SENSITIVE: []
+    end
+
+    class AttachStaticIpResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class AttachedDisk
+      attr_accessor path: ::String
+      attr_accessor size_in_gb: ::Integer
+      SENSITIVE: []
+    end
+
+    class AutoSnapshotAddOnRequest
+      attr_accessor snapshot_time_of_day: ::String
+      SENSITIVE: []
+    end
+
+    class AutoSnapshotDetails
+      attr_accessor date: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("Success" | "Failed" | "InProgress" | "NotFound")
+      attr_accessor from_attached_disks: ::Array[Types::AttachedDisk]
+      SENSITIVE: []
+    end
+
+    class AvailabilityZone
+      attr_accessor zone_name: ::String
+      attr_accessor state: ::String
+      SENSITIVE: []
+    end
+
+    class Blueprint
+      attr_accessor blueprint_id: ::String
+      attr_accessor name: ::String
+      attr_accessor group: ::String
+      attr_accessor type: ("os" | "app")
+      attr_accessor description: ::String
+      attr_accessor is_active: bool
+      attr_accessor min_power: ::Integer
+      attr_accessor version: ::String
+      attr_accessor version_code: ::String
+      attr_accessor product_url: ::String
+      attr_accessor license_url: ::String
+      attr_accessor platform: ("LINUX_UNIX" | "WINDOWS")
+      attr_accessor app_category: ("LfR")
+      SENSITIVE: []
+    end
+
+    class Bucket
+      attr_accessor resource_type: ::String
+      attr_accessor access_rules: Types::AccessRules
+      attr_accessor arn: ::String
+      attr_accessor bundle_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor url: ::String
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor name: ::String
+      attr_accessor support_code: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor object_versioning: ::String
+      attr_accessor able_to_update_bundle: bool
+      attr_accessor readonly_access_accounts: ::Array[::String]
+      attr_accessor resources_receiving_access: ::Array[Types::ResourceReceivingAccess]
+      attr_accessor state: Types::BucketState
+      attr_accessor access_log_config: Types::BucketAccessLogConfig
+      SENSITIVE: []
+    end
+
+    class BucketAccessLogConfig
+      attr_accessor enabled: bool
+      attr_accessor destination: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class BucketBundle
+      attr_accessor bundle_id: ::String
+      attr_accessor name: ::String
+      attr_accessor price: ::Float
+      attr_accessor storage_per_month_in_gb: ::Integer
+      attr_accessor transfer_per_month_in_gb: ::Integer
+      attr_accessor is_active: bool
+      SENSITIVE: []
+    end
+
+    class BucketState
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Bundle
+      attr_accessor price: ::Float
+      attr_accessor cpu_count: ::Integer
+      attr_accessor disk_size_in_gb: ::Integer
+      attr_accessor bundle_id: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor is_active: bool
+      attr_accessor name: ::String
+      attr_accessor power: ::Integer
+      attr_accessor ram_size_in_gb: ::Float
+      attr_accessor transfer_per_month_in_gb: ::Integer
+      attr_accessor supported_platforms: ::Array[("LINUX_UNIX" | "WINDOWS")]
+      attr_accessor supported_app_categories: ::Array[("LfR")]
+      attr_accessor public_ipv_4_address_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class CacheBehavior
+      attr_accessor behavior: ("dont-cache" | "cache")
+      SENSITIVE: []
+    end
+
+    class CacheBehaviorPerPath
+      attr_accessor path: ::String
+      attr_accessor behavior: ("dont-cache" | "cache")
+      SENSITIVE: []
+    end
+
+    class CacheSettings
+      attr_accessor default_ttl: ::Integer
+      attr_accessor minimum_ttl: ::Integer
+      attr_accessor maximum_ttl: ::Integer
+      attr_accessor allowed_http_methods: ::String
+      attr_accessor cached_http_methods: ::String
+      attr_accessor forwarded_cookies: Types::CookieObject
+      attr_accessor forwarded_headers: Types::HeaderObject
+      attr_accessor forwarded_query_strings: Types::QueryStringObject
+      SENSITIVE: []
+    end
+
+    class Certificate
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor status: ("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")
+      attr_accessor serial_number: ::String
+      attr_accessor subject_alternative_names: ::Array[::String]
+      attr_accessor domain_validation_records: ::Array[Types::DomainValidationRecord]
+      attr_accessor request_failure_reason: ::String
+      attr_accessor in_use_resource_count: ::Integer
+      attr_accessor key_algorithm: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor issued_at: ::Time
+      attr_accessor issuer_ca: ::String
+      attr_accessor not_before: ::Time
+      attr_accessor not_after: ::Time
+      attr_accessor eligible_to_renew: ::String
+      attr_accessor renewal_summary: Types::RenewalSummary
+      attr_accessor revoked_at: ::Time
+      attr_accessor revocation_reason: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor support_code: ::String
+      SENSITIVE: []
+    end
+
+    class CertificateSummary
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_name: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor certificate_detail: Types::Certificate
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CloseInstancePublicPortsRequest
+      attr_accessor port_info: Types::PortInfo
+      attr_accessor instance_name: ::String
+      SENSITIVE: []
+    end
+
+    class CloseInstancePublicPortsResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class CloudFormationStackRecord
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor state: ("Started" | "Succeeded" | "Failed")
+      attr_accessor source_info: ::Array[Types::CloudFormationStackRecordSourceInfo]
+      attr_accessor destination_info: Types::DestinationInfo
+      SENSITIVE: []
+    end
+
+    class CloudFormationStackRecordSourceInfo
+      attr_accessor resource_type: ("ExportSnapshotRecord")
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ContactMethod
+      attr_accessor contact_endpoint: ::String
+      attr_accessor status: ("PendingVerification" | "Valid" | "Invalid")
+      attr_accessor protocol: ("Email" | "SMS")
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor support_code: ::String
+      SENSITIVE: []
+    end
+
+    class Container
+      attr_accessor image: ::String
+      attr_accessor command: ::Array[::String]
+      attr_accessor environment: ::Hash[::String, ::String]
+      attr_accessor ports: ::Hash[::String, ("HTTP" | "HTTPS" | "TCP" | "UDP")]
+      SENSITIVE: []
+    end
+
+    class ContainerImage
+      attr_accessor image: ::String
+      attr_accessor digest: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ContainerService
+      attr_accessor container_service_name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor power: ("nano" | "micro" | "small" | "medium" | "large" | "xlarge")
+      attr_accessor power_id: ::String
+      attr_accessor state: ("PENDING" | "READY" | "RUNNING" | "UPDATING" | "DELETING" | "DISABLED" | "DEPLOYING")
+      attr_accessor state_detail: Types::ContainerServiceStateDetail
+      attr_accessor scale: ::Integer
+      attr_accessor current_deployment: Types::ContainerServiceDeployment
+      attr_accessor next_deployment: Types::ContainerServiceDeployment
+      attr_accessor is_disabled: bool
+      attr_accessor principal_arn: ::String
+      attr_accessor private_domain_name: ::String
+      attr_accessor public_domain_names: ::Hash[::String, ::Array[::String]]
+      attr_accessor url: ::String
+      attr_accessor private_registry_access: Types::PrivateRegistryAccess
+      SENSITIVE: []
+    end
+
+    class ContainerServiceDeployment
+      attr_accessor version: ::Integer
+      attr_accessor state: ("ACTIVATING" | "ACTIVE" | "INACTIVE" | "FAILED")
+      attr_accessor containers: ::Hash[::String, Types::Container]
+      attr_accessor public_endpoint: Types::ContainerServiceEndpoint
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ContainerServiceDeploymentRequest
+      attr_accessor containers: ::Hash[::String, Types::Container]
+      attr_accessor public_endpoint: Types::EndpointRequest
+      SENSITIVE: []
+    end
+
+    class ContainerServiceECRImagePullerRole
+      attr_accessor is_active: bool
+      attr_accessor principal_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerServiceECRImagePullerRoleRequest
+      attr_accessor is_active: bool
+      SENSITIVE: []
+    end
+
+    class ContainerServiceEndpoint
+      attr_accessor container_name: ::String
+      attr_accessor container_port: ::Integer
+      attr_accessor health_check: Types::ContainerServiceHealthCheckConfig
+      SENSITIVE: []
+    end
+
+    class ContainerServiceHealthCheckConfig
+      attr_accessor healthy_threshold: ::Integer
+      attr_accessor unhealthy_threshold: ::Integer
+      attr_accessor timeout_seconds: ::Integer
+      attr_accessor interval_seconds: ::Integer
+      attr_accessor path: ::String
+      attr_accessor success_codes: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerServiceLogEvent
+      attr_accessor created_at: ::Time
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerServicePower
+      attr_accessor power_id: ::String
+      attr_accessor price: ::Float
+      attr_accessor cpu_count: ::Float
+      attr_accessor ram_size_in_gb: ::Float
+      attr_accessor name: ::String
+      attr_accessor is_active: bool
+      SENSITIVE: []
+    end
+
+    class ContainerServiceRegistryLogin
+      attr_accessor username: ::String
+      attr_accessor password: ::String
+      attr_accessor expires_at: ::Time
+      attr_accessor registry: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerServiceStateDetail
+      attr_accessor code: ("CREATING_SYSTEM_RESOURCES" | "CREATING_NETWORK_INFRASTRUCTURE" | "PROVISIONING_CERTIFICATE" | "PROVISIONING_SERVICE" | "CREATING_DEPLOYMENT" | "EVALUATING_HEALTH_CHECK" | "ACTIVATING_DEPLOYMENT" | "CERTIFICATE_LIMIT_EXCEEDED" | "UNKNOWN_ERROR")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ContainerServicesListResult
+      attr_accessor container_services: ::Array[Types::ContainerService]
+      SENSITIVE: []
+    end
+
+    class CookieObject
+      attr_accessor option: ("none" | "allow-list" | "all")
+      attr_accessor cookies_allow_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CopySnapshotRequest
+      attr_accessor source_snapshot_name: ::String
+      attr_accessor source_resource_name: ::String
+      attr_accessor restore_date: ::String
+      attr_accessor use_latest_restorable_auto_snapshot: bool
+      attr_accessor target_snapshot_name: ::String
+      attr_accessor source_region: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")
+      SENSITIVE: []
+    end
+
+    class CopySnapshotResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CostEstimate
+      attr_accessor usage_type: ::String
+      attr_accessor results_by_time: ::Array[Types::EstimateByTime]
+      SENSITIVE: []
+    end
+
+    class CreateBucketAccessKeyRequest
+      attr_accessor bucket_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateBucketAccessKeyResult
+      attr_accessor access_key: Types::AccessKey
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateBucketRequest
+      attr_accessor bucket_name: ::String
+      attr_accessor bundle_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor enable_object_versioning: bool
+      SENSITIVE: []
+    end
+
+    class CreateBucketResult
+      attr_accessor bucket: Types::Bucket
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateCertificateRequest
+      attr_accessor certificate_name: ::String
+      attr_accessor domain_name: ::String
+      attr_accessor subject_alternative_names: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateCertificateResult
+      attr_accessor certificate: Types::CertificateSummary
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateCloudFormationStackRequest
+      attr_accessor instances: ::Array[Types::InstanceEntry]
+      SENSITIVE: []
+    end
+
+    class CreateCloudFormationStackResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateContactMethodRequest
+      attr_accessor protocol: ("Email" | "SMS")
+      attr_accessor contact_endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class CreateContactMethodResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateContainerServiceDeploymentRequest
+      attr_accessor service_name: ::String
+      attr_accessor containers: ::Hash[::String, Types::Container]
+      attr_accessor public_endpoint: Types::EndpointRequest
+      SENSITIVE: []
+    end
+
+    class CreateContainerServiceDeploymentResult
+      attr_accessor container_service: Types::ContainerService
+      SENSITIVE: []
+    end
+
+    class CreateContainerServiceRegistryLoginRequest < Aws::EmptyStructure
+    end
+
+    class CreateContainerServiceRegistryLoginResult
+      attr_accessor registry_login: Types::ContainerServiceRegistryLogin
+      SENSITIVE: []
+    end
+
+    class CreateContainerServiceRequest
+      attr_accessor service_name: ::String
+      attr_accessor power: ("nano" | "micro" | "small" | "medium" | "large" | "xlarge")
+      attr_accessor scale: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor public_domain_names: ::Hash[::String, ::Array[::String]]
+      attr_accessor deployment: Types::ContainerServiceDeploymentRequest
+      attr_accessor private_registry_access: Types::PrivateRegistryAccessRequest
+      SENSITIVE: []
+    end
+
+    class CreateContainerServiceResult
+      attr_accessor container_service: Types::ContainerService
+      SENSITIVE: []
+    end
+
+    class CreateDiskFromSnapshotRequest
+      attr_accessor disk_name: ::String
+      attr_accessor disk_snapshot_name: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor size_in_gb: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor add_ons: ::Array[Types::AddOnRequest]
+      attr_accessor source_disk_name: ::String
+      attr_accessor restore_date: ::String
+      attr_accessor use_latest_restorable_auto_snapshot: bool
+      SENSITIVE: []
+    end
+
+    class CreateDiskFromSnapshotResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateDiskRequest
+      attr_accessor disk_name: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor size_in_gb: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor add_ons: ::Array[Types::AddOnRequest]
+      SENSITIVE: []
+    end
+
+    class CreateDiskResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateDiskSnapshotRequest
+      attr_accessor disk_name: ::String
+      attr_accessor disk_snapshot_name: ::String
+      attr_accessor instance_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDiskSnapshotResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateDistributionRequest
+      attr_accessor distribution_name: ::String
+      attr_accessor origin: Types::InputOrigin
+      attr_accessor default_cache_behavior: Types::CacheBehavior
+      attr_accessor cache_behavior_settings: Types::CacheSettings
+      attr_accessor cache_behaviors: ::Array[Types::CacheBehaviorPerPath]
+      attr_accessor bundle_id: ::String
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor certificate_name: ::String
+      attr_accessor viewer_minimum_tls_protocol_version: ("TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021")
+      SENSITIVE: []
+    end
+
+    class CreateDistributionResult
+      attr_accessor distribution: Types::LightsailDistribution
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class CreateDomainEntryRequest
+      attr_accessor domain_name: ::String
+      attr_accessor domain_entry: Types::DomainEntry
+      SENSITIVE: []
+    end
+
+    class CreateDomainEntryResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class CreateDomainRequest
+      attr_accessor domain_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDomainResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class CreateGUISessionAccessDetailsRequest
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGUISessionAccessDetailsResult
+      attr_accessor resource_name: ::String
+      attr_accessor status: ("startExpired" | "notStarted" | "started" | "starting" | "stopped" | "stopping" | "settingUpInstance" | "failedInstanceCreation" | "failedStartingGUISession" | "failedStoppingGUISession")
+      attr_accessor percentage_complete: ::Integer
+      attr_accessor failure_reason: ::String
+      attr_accessor sessions: ::Array[Types::Session]
+      SENSITIVE: []
+    end
+
+    class CreateInstanceSnapshotRequest
+      attr_accessor instance_snapshot_name: ::String
+      attr_accessor instance_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateInstanceSnapshotResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateInstancesFromSnapshotRequest
+      attr_accessor instance_names: ::Array[::String]
+      attr_accessor attached_disk_mapping: ::Hash[::String, ::Array[Types::DiskMap]]
+      attr_accessor availability_zone: ::String
+      attr_accessor instance_snapshot_name: ::String
+      attr_accessor bundle_id: ::String
+      attr_accessor user_data: ::String
+      attr_accessor key_pair_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor add_ons: ::Array[Types::AddOnRequest]
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
+      attr_accessor source_instance_name: ::String
+      attr_accessor restore_date: ::String
+      attr_accessor use_latest_restorable_auto_snapshot: bool
+      SENSITIVE: []
+    end
+
+    class CreateInstancesFromSnapshotResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateInstancesRequest
+      attr_accessor instance_names: ::Array[::String]
+      attr_accessor availability_zone: ::String
+      attr_accessor custom_image_name: ::String
+      attr_accessor blueprint_id: ::String
+      attr_accessor bundle_id: ::String
+      attr_accessor user_data: ::String
+      attr_accessor key_pair_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor add_ons: ::Array[Types::AddOnRequest]
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
+      SENSITIVE: []
+    end
+
+    class CreateInstancesResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateKeyPairRequest
+      attr_accessor key_pair_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateKeyPairResult
+      attr_accessor key_pair: Types::KeyPair
+      attr_accessor public_key_base_64: ::String
+      attr_accessor private_key_base_64: ::String
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class CreateLoadBalancerRequest
+      attr_accessor load_balancer_name: ::String
+      attr_accessor instance_port: ::Integer
+      attr_accessor health_check_path: ::String
+      attr_accessor certificate_name: ::String
+      attr_accessor certificate_domain_name: ::String
+      attr_accessor certificate_alternative_names: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
+      attr_accessor tls_policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLoadBalancerResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateLoadBalancerTlsCertificateRequest
+      attr_accessor load_balancer_name: ::String
+      attr_accessor certificate_name: ::String
+      attr_accessor certificate_domain_name: ::String
+      attr_accessor certificate_alternative_names: ::Array[::String]
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateLoadBalancerTlsCertificateResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateRelationalDatabaseFromSnapshotRequest
+      attr_accessor relational_database_name: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor publicly_accessible: bool
+      attr_accessor relational_database_snapshot_name: ::String
+      attr_accessor relational_database_bundle_id: ::String
+      attr_accessor source_relational_database_name: ::String
+      attr_accessor restore_time: ::Time
+      attr_accessor use_latest_restorable_time: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRelationalDatabaseFromSnapshotResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateRelationalDatabaseRequest
+      attr_accessor relational_database_name: ::String
+      attr_accessor availability_zone: ::String
+      attr_accessor relational_database_blueprint_id: ::String
+      attr_accessor relational_database_bundle_id: ::String
+      attr_accessor master_database_name: ::String
+      attr_accessor master_username: ::String
+      attr_accessor master_user_password: ::String
+      attr_accessor preferred_backup_window: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor publicly_accessible: bool
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:master_user_password]
+    end
+
+    class CreateRelationalDatabaseResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class CreateRelationalDatabaseSnapshotRequest
+      attr_accessor relational_database_name: ::String
+      attr_accessor relational_database_snapshot_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateRelationalDatabaseSnapshotResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteAlarmRequest
+      attr_accessor alarm_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAlarmResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteAutoSnapshotRequest
+      attr_accessor resource_name: ::String
+      attr_accessor date: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAutoSnapshotResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteBucketAccessKeyRequest
+      attr_accessor bucket_name: ::String
+      attr_accessor access_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteBucketAccessKeyResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteBucketRequest
+      attr_accessor bucket_name: ::String
+      attr_accessor force_delete: bool
+      SENSITIVE: []
+    end
+
+    class DeleteBucketResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteCertificateRequest
+      attr_accessor certificate_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCertificateResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteContactMethodRequest
+      attr_accessor protocol: ("Email" | "SMS")
+      SENSITIVE: []
+    end
+
+    class DeleteContactMethodResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteContainerImageRequest
+      attr_accessor service_name: ::String
+      attr_accessor image: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContainerImageResult < Aws::EmptyStructure
+    end
+
+    class DeleteContainerServiceRequest
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteContainerServiceResult < Aws::EmptyStructure
+    end
+
+    class DeleteDiskRequest
+      attr_accessor disk_name: ::String
+      attr_accessor force_delete_add_ons: bool
+      SENSITIVE: []
+    end
+
+    class DeleteDiskResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteDiskSnapshotRequest
+      attr_accessor disk_snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDiskSnapshotResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteDistributionRequest
+      attr_accessor distribution_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDistributionResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class DeleteDomainEntryRequest
+      attr_accessor domain_name: ::String
+      attr_accessor domain_entry: Types::DomainEntry
+      SENSITIVE: []
+    end
+
+    class DeleteDomainEntryResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class DeleteDomainRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class DeleteInstanceRequest
+      attr_accessor instance_name: ::String
+      attr_accessor force_delete_add_ons: bool
+      SENSITIVE: []
+    end
+
+    class DeleteInstanceResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteInstanceSnapshotRequest
+      attr_accessor instance_snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteInstanceSnapshotResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteKeyPairRequest
+      attr_accessor key_pair_name: ::String
+      attr_accessor expected_fingerprint: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKeyPairResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class DeleteKnownHostKeysRequest
+      attr_accessor instance_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKnownHostKeysResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteLoadBalancerRequest
+      attr_accessor load_balancer_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLoadBalancerResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteLoadBalancerTlsCertificateRequest
+      attr_accessor load_balancer_name: ::String
+      attr_accessor certificate_name: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class DeleteLoadBalancerTlsCertificateResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteRelationalDatabaseRequest
+      attr_accessor relational_database_name: ::String
+      attr_accessor skip_final_snapshot: bool
+      attr_accessor final_relational_database_snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRelationalDatabaseResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteRelationalDatabaseSnapshotRequest
+      attr_accessor relational_database_snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRelationalDatabaseSnapshotResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DestinationInfo
+      attr_accessor id: ::String
+      attr_accessor service: ::String
+      SENSITIVE: []
+    end
+
+    class DetachCertificateFromDistributionRequest
+      attr_accessor distribution_name: ::String
+      SENSITIVE: []
+    end
+
+    class DetachCertificateFromDistributionResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class DetachDiskRequest
+      attr_accessor disk_name: ::String
+      SENSITIVE: []
+    end
+
+    class DetachDiskResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DetachInstancesFromLoadBalancerRequest
+      attr_accessor load_balancer_name: ::String
+      attr_accessor instance_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DetachInstancesFromLoadBalancerResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DetachStaticIpRequest
+      attr_accessor static_ip_name: ::String
+      SENSITIVE: []
+    end
+
+    class DetachStaticIpResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DisableAddOnRequest
+      attr_accessor add_on_type: ("AutoSnapshot" | "StopInstanceOnIdle")
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class DisableAddOnResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class Disk
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor support_code: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor add_ons: ::Array[Types::AddOn]
+      attr_accessor size_in_gb: ::Integer
+      attr_accessor is_system_disk: bool
+      attr_accessor iops: ::Integer
+      attr_accessor path: ::String
+      attr_accessor state: ("pending" | "error" | "available" | "in-use" | "unknown")
+      attr_accessor attached_to: ::String
+      attr_accessor is_attached: bool
+      attr_accessor attachment_state: ::String
+      attr_accessor gb_in_use: ::Integer
+      attr_accessor auto_mount_status: ("Failed" | "Pending" | "Mounted" | "NotMounted")
+      SENSITIVE: []
+    end
+
+    class DiskInfo
+      attr_accessor name: ::String
+      attr_accessor path: ::String
+      attr_accessor size_in_gb: ::Integer
+      attr_accessor is_system_disk: bool
+      SENSITIVE: []
+    end
+
+    class DiskMap
+      attr_accessor original_disk_path: ::String
+      attr_accessor new_disk_name: ::String
+      SENSITIVE: []
+    end
+
+    class DiskSnapshot
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor support_code: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor size_in_gb: ::Integer
+      attr_accessor state: ("pending" | "completed" | "error" | "unknown")
+      attr_accessor progress: ::String
+      attr_accessor from_disk_name: ::String
+      attr_accessor from_disk_arn: ::String
+      attr_accessor from_instance_name: ::String
+      attr_accessor from_instance_arn: ::String
+      attr_accessor is_from_auto_snapshot: bool
+      SENSITIVE: []
+    end
+
+    class DiskSnapshotInfo
+      attr_accessor size_in_gb: ::Integer
+      SENSITIVE: []
+    end
+
+    class DistributionBundle
+      attr_accessor bundle_id: ::String
+      attr_accessor name: ::String
+      attr_accessor price: ::Float
+      attr_accessor transfer_per_month_in_gb: ::Integer
+      attr_accessor is_active: bool
+      SENSITIVE: []
+    end
+
+    class DnsRecordCreationState
+      attr_accessor code: ("SUCCEEDED" | "STARTED" | "FAILED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Domain
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor support_code: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor domain_entries: ::Array[Types::DomainEntry]
+      attr_accessor registered_domain_delegation_info: Types::RegisteredDomainDelegationInfo
+      SENSITIVE: []
+    end
+
+    class DomainEntry
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor target: ::String
+      attr_accessor is_alias: bool
+      attr_accessor type: ::String
+      attr_accessor options: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DomainValidationRecord
+      attr_accessor domain_name: ::String
+      attr_accessor resource_record: Types::ResourceRecord
+      attr_accessor dns_record_creation_state: Types::DnsRecordCreationState
+      attr_accessor validation_status: ("PENDING_VALIDATION" | "FAILED" | "SUCCESS")
+      SENSITIVE: []
+    end
+
+    class DownloadDefaultKeyPairRequest < Aws::EmptyStructure
+    end
+
+    class DownloadDefaultKeyPairResult
+      attr_accessor public_key_base_64: ::String
+      attr_accessor private_key_base_64: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class EnableAddOnRequest
+      attr_accessor resource_name: ::String
+      attr_accessor add_on_request: Types::AddOnRequest
+      SENSITIVE: []
+    end
+
+    class EnableAddOnResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class EndpointRequest
+      attr_accessor container_name: ::String
+      attr_accessor container_port: ::Integer
+      attr_accessor health_check: Types::ContainerServiceHealthCheckConfig
+      SENSITIVE: []
+    end
+
+    class EstimateByTime
+      attr_accessor usage_cost: ::Float
+      attr_accessor pricing_unit: ("GB" | "Hrs" | "GB-Mo" | "Bundles" | "Queries")
+      attr_accessor unit: ::Float
+      attr_accessor currency: ("USD")
+      attr_accessor time_period: Types::TimePeriod
+      SENSITIVE: []
+    end
+
+    class ExportSnapshotRecord
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor state: ("Started" | "Succeeded" | "Failed")
+      attr_accessor source_info: Types::ExportSnapshotRecordSourceInfo
+      attr_accessor destination_info: Types::DestinationInfo
+      SENSITIVE: []
+    end
+
+    class ExportSnapshotRecordSourceInfo
+      attr_accessor resource_type: ("InstanceSnapshot" | "DiskSnapshot")
+      attr_accessor created_at: ::Time
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor from_resource_name: ::String
+      attr_accessor from_resource_arn: ::String
+      attr_accessor instance_snapshot_info: Types::InstanceSnapshotInfo
+      attr_accessor disk_snapshot_info: Types::DiskSnapshotInfo
+      SENSITIVE: []
+    end
+
+    class ExportSnapshotRequest
+      attr_accessor source_snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class ExportSnapshotResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class GetActiveNamesRequest
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetActiveNamesResult
+      attr_accessor active_names: ::Array[::String]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetAlarmsRequest
+      attr_accessor alarm_name: ::String
+      attr_accessor page_token: ::String
+      attr_accessor monitored_resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAlarmsResult
+      attr_accessor alarms: ::Array[Types::Alarm]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetAutoSnapshotsRequest
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetAutoSnapshotsResult
+      attr_accessor resource_name: ::String
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor auto_snapshots: ::Array[Types::AutoSnapshotDetails]
+      SENSITIVE: []
+    end
+
+    class GetBlueprintsRequest
+      attr_accessor include_inactive: bool
+      attr_accessor page_token: ::String
+      attr_accessor app_category: ("LfR")
+      SENSITIVE: []
+    end
+
+    class GetBlueprintsResult
+      attr_accessor blueprints: ::Array[Types::Blueprint]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketAccessKeysRequest
+      attr_accessor bucket_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetBucketAccessKeysResult
+      attr_accessor access_keys: ::Array[Types::AccessKey]
+      SENSITIVE: []
+    end
+
+    class GetBucketBundlesRequest
+      attr_accessor include_inactive: bool
+      SENSITIVE: []
+    end
+
+    class GetBucketBundlesResult
+      attr_accessor bundles: ::Array[Types::BucketBundle]
+      SENSITIVE: []
+    end
+
+    class GetBucketMetricDataRequest
+      attr_accessor bucket_name: ::String
+      attr_accessor metric_name: ("BucketSizeBytes" | "NumberOfObjects")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor period: ::Integer
+      attr_accessor statistics: ::Array[("Minimum" | "Maximum" | "Sum" | "Average" | "SampleCount")]
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      SENSITIVE: []
+    end
+
+    class GetBucketMetricDataResult
+      attr_accessor metric_name: ("BucketSizeBytes" | "NumberOfObjects")
+      attr_accessor metric_data: ::Array[Types::MetricDatapoint]
+      SENSITIVE: []
+    end
+
+    class GetBucketsRequest
+      attr_accessor bucket_name: ::String
+      attr_accessor page_token: ::String
+      attr_accessor include_connected_resources: bool
+      SENSITIVE: []
+    end
+
+    class GetBucketsResult
+      attr_accessor buckets: ::Array[Types::Bucket]
+      attr_accessor next_page_token: ::String
+      attr_accessor account_level_bpa_sync: Types::AccountLevelBpaSync
+      SENSITIVE: []
+    end
+
+    class GetBundlesRequest
+      attr_accessor include_inactive: bool
+      attr_accessor page_token: ::String
+      attr_accessor app_category: ("LfR")
+      SENSITIVE: []
+    end
+
+    class GetBundlesResult
+      attr_accessor bundles: ::Array[Types::Bundle]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCertificatesRequest
+      attr_accessor certificate_statuses: ::Array[("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")]
+      attr_accessor include_certificate_details: bool
+      attr_accessor certificate_name: ::String
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCertificatesResult
+      attr_accessor certificates: ::Array[Types::CertificateSummary]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCloudFormationStackRecordsRequest
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCloudFormationStackRecordsResult
+      attr_accessor cloud_formation_stack_records: ::Array[Types::CloudFormationStackRecord]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetContactMethodsRequest
+      attr_accessor protocols: ::Array[("Email" | "SMS")]
+      SENSITIVE: []
+    end
+
+    class GetContactMethodsResult
+      attr_accessor contact_methods: ::Array[Types::ContactMethod]
+      SENSITIVE: []
+    end
+
+    class GetContainerAPIMetadataRequest < Aws::EmptyStructure
+    end
+
+    class GetContainerAPIMetadataResult
+      attr_accessor metadata: ::Array[::Hash[::String, ::String]]
+      SENSITIVE: []
+    end
+
+    class GetContainerImagesRequest
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetContainerImagesResult
+      attr_accessor container_images: ::Array[Types::ContainerImage]
+      SENSITIVE: []
+    end
+
+    class GetContainerLogRequest
+      attr_accessor service_name: ::String
+      attr_accessor container_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor filter_pattern: ::String
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetContainerLogResult
+      attr_accessor log_events: ::Array[Types::ContainerServiceLogEvent]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetContainerServiceDeploymentsRequest
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetContainerServiceDeploymentsResult
+      attr_accessor deployments: ::Array[Types::ContainerServiceDeployment]
+      SENSITIVE: []
+    end
+
+    class GetContainerServiceMetricDataRequest
+      attr_accessor service_name: ::String
+      attr_accessor metric_name: ("CPUUtilization" | "MemoryUtilization")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor period: ::Integer
+      attr_accessor statistics: ::Array[("Minimum" | "Maximum" | "Sum" | "Average" | "SampleCount")]
+      SENSITIVE: []
+    end
+
+    class GetContainerServiceMetricDataResult
+      attr_accessor metric_name: ("CPUUtilization" | "MemoryUtilization")
+      attr_accessor metric_data: ::Array[Types::MetricDatapoint]
+      SENSITIVE: []
+    end
+
+    class GetContainerServicePowersRequest < Aws::EmptyStructure
+    end
+
+    class GetContainerServicePowersResult
+      attr_accessor powers: ::Array[Types::ContainerServicePower]
+      SENSITIVE: []
+    end
+
+    class GetContainerServicesRequest
+      attr_accessor service_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetCostEstimateRequest
+      attr_accessor resource_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetCostEstimateResult
+      attr_accessor resources_budget_estimate: ::Array[Types::ResourceBudgetEstimate]
+      SENSITIVE: []
+    end
+
+    class GetDiskRequest
+      attr_accessor disk_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDiskResult
+      attr_accessor disk: Types::Disk
+      SENSITIVE: []
+    end
+
+    class GetDiskSnapshotRequest
+      attr_accessor disk_snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDiskSnapshotResult
+      attr_accessor disk_snapshot: Types::DiskSnapshot
+      SENSITIVE: []
+    end
+
+    class GetDiskSnapshotsRequest
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDiskSnapshotsResult
+      attr_accessor disk_snapshots: ::Array[Types::DiskSnapshot]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDisksRequest
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDisksResult
+      attr_accessor disks: ::Array[Types::Disk]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDistributionBundlesRequest < Aws::EmptyStructure
+    end
+
+    class GetDistributionBundlesResult
+      attr_accessor bundles: ::Array[Types::DistributionBundle]
+      SENSITIVE: []
+    end
+
+    class GetDistributionLatestCacheResetRequest
+      attr_accessor distribution_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDistributionLatestCacheResetResult
+      attr_accessor status: ::String
+      attr_accessor create_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetDistributionMetricDataRequest
+      attr_accessor distribution_name: ::String
+      attr_accessor metric_name: ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor period: ::Integer
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      attr_accessor statistics: ::Array[("Minimum" | "Maximum" | "Sum" | "Average" | "SampleCount")]
+      SENSITIVE: []
+    end
+
+    class GetDistributionMetricDataResult
+      attr_accessor metric_name: ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate")
+      attr_accessor metric_data: ::Array[Types::MetricDatapoint]
+      SENSITIVE: []
+    end
+
+    class GetDistributionsRequest
+      attr_accessor distribution_name: ::String
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDistributionsResult
+      attr_accessor distributions: ::Array[Types::LightsailDistribution]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainResult
+      attr_accessor domain: Types::Domain
+      SENSITIVE: []
+    end
+
+    class GetDomainsRequest
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainsResult
+      attr_accessor domains: ::Array[Types::Domain]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetExportSnapshotRecordsRequest
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetExportSnapshotRecordsResult
+      attr_accessor export_snapshot_records: ::Array[Types::ExportSnapshotRecord]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstanceAccessDetailsRequest
+      attr_accessor instance_name: ::String
+      attr_accessor protocol: ("ssh" | "rdp")
+      SENSITIVE: []
+    end
+
+    class GetInstanceAccessDetailsResult
+      attr_accessor access_details: Types::InstanceAccessDetails
+      SENSITIVE: []
+    end
+
+    class GetInstanceMetricDataRequest
+      attr_accessor instance_name: ::String
+      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken")
+      attr_accessor period: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      attr_accessor statistics: ::Array[("Minimum" | "Maximum" | "Sum" | "Average" | "SampleCount")]
+      SENSITIVE: []
+    end
+
+    class GetInstanceMetricDataResult
+      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken")
+      attr_accessor metric_data: ::Array[Types::MetricDatapoint]
+      SENSITIVE: []
+    end
+
+    class GetInstancePortStatesRequest
+      attr_accessor instance_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstancePortStatesResult
+      attr_accessor port_states: ::Array[Types::InstancePortState]
+      SENSITIVE: []
+    end
+
+    class GetInstanceRequest
+      attr_accessor instance_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstanceResult
+      attr_accessor instance: Types::Instance
+      SENSITIVE: []
+    end
+
+    class GetInstanceSnapshotRequest
+      attr_accessor instance_snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstanceSnapshotResult
+      attr_accessor instance_snapshot: Types::InstanceSnapshot
+      SENSITIVE: []
+    end
+
+    class GetInstanceSnapshotsRequest
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstanceSnapshotsResult
+      attr_accessor instance_snapshots: ::Array[Types::InstanceSnapshot]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstanceStateRequest
+      attr_accessor instance_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstanceStateResult
+      attr_accessor state: Types::InstanceState
+      SENSITIVE: []
+    end
+
+    class GetInstancesRequest
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetInstancesResult
+      attr_accessor instances: ::Array[Types::Instance]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetKeyPairRequest
+      attr_accessor key_pair_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetKeyPairResult
+      attr_accessor key_pair: Types::KeyPair
+      SENSITIVE: []
+    end
+
+    class GetKeyPairsRequest
+      attr_accessor page_token: ::String
+      attr_accessor include_default_key_pair: bool
+      SENSITIVE: []
+    end
+
+    class GetKeyPairsResult
+      attr_accessor key_pairs: ::Array[Types::KeyPair]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetLoadBalancerMetricDataRequest
+      attr_accessor load_balancer_name: ::String
+      attr_accessor metric_name: ("ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount")
+      attr_accessor period: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      attr_accessor statistics: ::Array[("Minimum" | "Maximum" | "Sum" | "Average" | "SampleCount")]
+      SENSITIVE: []
+    end
+
+    class GetLoadBalancerMetricDataResult
+      attr_accessor metric_name: ("ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount")
+      attr_accessor metric_data: ::Array[Types::MetricDatapoint]
+      SENSITIVE: []
+    end
+
+    class GetLoadBalancerRequest
+      attr_accessor load_balancer_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetLoadBalancerResult
+      attr_accessor load_balancer: Types::LoadBalancer
+      SENSITIVE: []
+    end
+
+    class GetLoadBalancerTlsCertificatesRequest
+      attr_accessor load_balancer_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetLoadBalancerTlsCertificatesResult
+      attr_accessor tls_certificates: ::Array[Types::LoadBalancerTlsCertificate]
+      SENSITIVE: []
+    end
+
+    class GetLoadBalancerTlsPoliciesRequest
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetLoadBalancerTlsPoliciesResult
+      attr_accessor tls_policies: ::Array[Types::LoadBalancerTlsPolicy]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetLoadBalancersRequest
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetLoadBalancersResult
+      attr_accessor load_balancers: ::Array[Types::LoadBalancer]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetOperationRequest
+      attr_accessor operation_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOperationResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class GetOperationsForResourceRequest
+      attr_accessor resource_name: ::String
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetOperationsForResourceResult
+      attr_accessor operations: ::Array[Types::Operation]
+      attr_accessor next_page_count: ::String
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetOperationsRequest
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetOperationsResult
+      attr_accessor operations: ::Array[Types::Operation]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRegionsRequest
+      attr_accessor include_availability_zones: bool
+      attr_accessor include_relational_database_availability_zones: bool
+      SENSITIVE: []
+    end
+
+    class GetRegionsResult
+      attr_accessor regions: ::Array[Types::Region]
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseBlueprintsRequest
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseBlueprintsResult
+      attr_accessor blueprints: ::Array[Types::RelationalDatabaseBlueprint]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseBundlesRequest
+      attr_accessor page_token: ::String
+      attr_accessor include_inactive: bool
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseBundlesResult
+      attr_accessor bundles: ::Array[Types::RelationalDatabaseBundle]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseEventsRequest
+      attr_accessor relational_database_name: ::String
+      attr_accessor duration_in_minutes: ::Integer
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseEventsResult
+      attr_accessor relational_database_events: ::Array[Types::RelationalDatabaseEvent]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseLogEventsRequest
+      attr_accessor relational_database_name: ::String
+      attr_accessor log_stream_name: ::String
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor start_from_head: bool
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseLogEventsResult
+      attr_accessor resource_log_events: ::Array[Types::LogEvent]
+      attr_accessor next_backward_token: ::String
+      attr_accessor next_forward_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseLogStreamsRequest
+      attr_accessor relational_database_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseLogStreamsResult
+      attr_accessor log_streams: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseMasterUserPasswordRequest
+      attr_accessor relational_database_name: ::String
+      attr_accessor password_version: ("CURRENT" | "PREVIOUS" | "PENDING")
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseMasterUserPasswordResult
+      attr_accessor master_user_password: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: [:master_user_password]
+    end
+
+    class GetRelationalDatabaseMetricDataRequest
+      attr_accessor relational_database_name: ::String
+      attr_accessor metric_name: ("CPUUtilization" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput")
+      attr_accessor period: ::Integer
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      attr_accessor statistics: ::Array[("Minimum" | "Maximum" | "Sum" | "Average" | "SampleCount")]
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseMetricDataResult
+      attr_accessor metric_name: ("CPUUtilization" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput")
+      attr_accessor metric_data: ::Array[Types::MetricDatapoint]
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseParametersRequest
+      attr_accessor relational_database_name: ::String
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseParametersResult
+      attr_accessor parameters: ::Array[Types::RelationalDatabaseParameter]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseRequest
+      attr_accessor relational_database_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseResult
+      attr_accessor relational_database: Types::RelationalDatabase
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseSnapshotRequest
+      attr_accessor relational_database_snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseSnapshotResult
+      attr_accessor relational_database_snapshot: Types::RelationalDatabaseSnapshot
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseSnapshotsRequest
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabaseSnapshotsResult
+      attr_accessor relational_database_snapshots: ::Array[Types::RelationalDatabaseSnapshot]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabasesRequest
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetRelationalDatabasesResult
+      attr_accessor relational_databases: ::Array[Types::RelationalDatabase]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSetupHistoryRequest
+      attr_accessor resource_name: ::String
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSetupHistoryResult
+      attr_accessor setup_history: ::Array[Types::SetupHistory]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetStaticIpRequest
+      attr_accessor static_ip_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetStaticIpResult
+      attr_accessor static_ip: Types::StaticIp
+      SENSITIVE: []
+    end
+
+    class GetStaticIpsRequest
+      attr_accessor page_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetStaticIpsResult
+      attr_accessor static_ips: ::Array[Types::StaticIp]
+      attr_accessor next_page_token: ::String
+      SENSITIVE: []
+    end
+
+    class HeaderObject
+      attr_accessor option: ("none" | "allow-list" | "all")
+      attr_accessor headers_allow_list: ::Array[("Accept" | "Accept-Charset" | "Accept-Datetime" | "Accept-Encoding" | "Accept-Language" | "Authorization" | "CloudFront-Forwarded-Proto" | "CloudFront-Is-Desktop-Viewer" | "CloudFront-Is-Mobile-Viewer" | "CloudFront-Is-SmartTV-Viewer" | "CloudFront-Is-Tablet-Viewer" | "CloudFront-Viewer-Country" | "Host" | "Origin" | "Referer")]
+      SENSITIVE: []
+    end
+
+    class HostKeyAttributes
+      attr_accessor algorithm: ::String
+      attr_accessor public_key: ::String
+      attr_accessor witnessed_at: ::Time
+      attr_accessor fingerprint_sha1: ::String
+      attr_accessor fingerprint_sha256: ::String
+      attr_accessor not_valid_before: ::Time
+      attr_accessor not_valid_after: ::Time
+      SENSITIVE: []
+    end
+
+    class ImportKeyPairRequest
+      attr_accessor key_pair_name: ::String
+      attr_accessor public_key_base_64: ::String
+      SENSITIVE: []
+    end
+
+    class ImportKeyPairResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class InputOrigin
+      attr_accessor name: ::String
+      attr_accessor region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")
+      attr_accessor protocol_policy: ("http-only" | "https-only")
+      attr_accessor response_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class Instance
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor support_code: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor blueprint_id: ::String
+      attr_accessor blueprint_name: ::String
+      attr_accessor bundle_id: ::String
+      attr_accessor add_ons: ::Array[Types::AddOn]
+      attr_accessor is_static_ip: bool
+      attr_accessor private_ip_address: ::String
+      attr_accessor public_ip_address: ::String
+      attr_accessor ipv6_addresses: ::Array[::String]
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
+      attr_accessor hardware: Types::InstanceHardware
+      attr_accessor networking: Types::InstanceNetworking
+      attr_accessor state: Types::InstanceState
+      attr_accessor username: ::String
+      attr_accessor ssh_key_name: ::String
+      attr_accessor metadata_options: Types::InstanceMetadataOptions
+      SENSITIVE: []
+    end
+
+    class InstanceAccessDetails
+      attr_accessor cert_key: ::String
+      attr_accessor expires_at: ::Time
+      attr_accessor ip_address: ::String
+      attr_accessor ipv6_addresses: ::Array[::String]
+      attr_accessor password: ::String
+      attr_accessor password_data: Types::PasswordData
+      attr_accessor private_key: ::String
+      attr_accessor protocol: ("ssh" | "rdp")
+      attr_accessor instance_name: ::String
+      attr_accessor username: ::String
+      attr_accessor host_keys: ::Array[Types::HostKeyAttributes]
+      SENSITIVE: []
+    end
+
+    class InstanceEntry
+      attr_accessor source_name: ::String
+      attr_accessor instance_type: ::String
+      attr_accessor port_info_source: ("DEFAULT" | "INSTANCE" | "NONE" | "CLOSED")
+      attr_accessor user_data: ::String
+      attr_accessor availability_zone: ::String
+      SENSITIVE: []
+    end
+
+    class InstanceHardware
+      attr_accessor cpu_count: ::Integer
+      attr_accessor disks: ::Array[Types::Disk]
+      attr_accessor ram_size_in_gb: ::Float
+      SENSITIVE: []
+    end
+
+    class InstanceHealthSummary
+      attr_accessor instance_name: ::String
+      attr_accessor instance_health: ("initial" | "healthy" | "unhealthy" | "unused" | "draining" | "unavailable")
+      attr_accessor instance_health_reason: ("Lb.RegistrationInProgress" | "Lb.InitialHealthChecking" | "Lb.InternalError" | "Instance.ResponseCodeMismatch" | "Instance.Timeout" | "Instance.FailedHealthChecks" | "Instance.NotRegistered" | "Instance.NotInUse" | "Instance.DeregistrationInProgress" | "Instance.InvalidState" | "Instance.IpUnusable")
+      SENSITIVE: []
+    end
+
+    class InstanceMetadataOptions
+      attr_accessor state: ("pending" | "applied")
+      attr_accessor http_tokens: ("optional" | "required")
+      attr_accessor http_endpoint: ("disabled" | "enabled")
+      attr_accessor http_put_response_hop_limit: ::Integer
+      attr_accessor http_protocol_ipv_6: ("disabled" | "enabled")
+      SENSITIVE: []
+    end
+
+    class InstanceNetworking
+      attr_accessor monthly_transfer: Types::MonthlyTransfer
+      attr_accessor ports: ::Array[Types::InstancePortInfo]
+      SENSITIVE: []
+    end
+
+    class InstancePortInfo
+      attr_accessor from_port: ::Integer
+      attr_accessor to_port: ::Integer
+      attr_accessor protocol: ("tcp" | "all" | "udp" | "icmp" | "icmpv6")
+      attr_accessor access_from: ::String
+      attr_accessor access_type: ("Public" | "Private")
+      attr_accessor common_name: ::String
+      attr_accessor access_direction: ("inbound" | "outbound")
+      attr_accessor cidrs: ::Array[::String]
+      attr_accessor ipv6_cidrs: ::Array[::String]
+      attr_accessor cidr_list_aliases: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InstancePortState
+      attr_accessor from_port: ::Integer
+      attr_accessor to_port: ::Integer
+      attr_accessor protocol: ("tcp" | "all" | "udp" | "icmp" | "icmpv6")
+      attr_accessor state: ("open" | "closed")
+      attr_accessor cidrs: ::Array[::String]
+      attr_accessor ipv6_cidrs: ::Array[::String]
+      attr_accessor cidr_list_aliases: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class InstanceSnapshot
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor support_code: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor state: ("pending" | "error" | "available")
+      attr_accessor progress: ::String
+      attr_accessor from_attached_disks: ::Array[Types::Disk]
+      attr_accessor from_instance_name: ::String
+      attr_accessor from_instance_arn: ::String
+      attr_accessor from_blueprint_id: ::String
+      attr_accessor from_bundle_id: ::String
+      attr_accessor is_from_auto_snapshot: bool
+      attr_accessor size_in_gb: ::Integer
+      SENSITIVE: []
+    end
+
+    class InstanceSnapshotInfo
+      attr_accessor from_bundle_id: ::String
+      attr_accessor from_blueprint_id: ::String
+      attr_accessor from_disk_info: ::Array[Types::DiskInfo]
+      SENSITIVE: []
+    end
+
+    class InstanceState
+      attr_accessor code: ::Integer
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor code: ::String
+      attr_accessor docs: ::String
+      attr_accessor message: ::String
+      attr_accessor tip: ::String
+      SENSITIVE: []
+    end
+
+    class IsVpcPeeredRequest < Aws::EmptyStructure
+    end
+
+    class IsVpcPeeredResult
+      attr_accessor is_peered: bool
+      SENSITIVE: []
+    end
+
+    class KeyPair
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor support_code: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor fingerprint: ::String
+      SENSITIVE: []
+    end
+
+    class LightsailDistribution
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor support_code: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor alternative_domain_names: ::Array[::String]
+      attr_accessor status: ::String
+      attr_accessor is_enabled: bool
+      attr_accessor domain_name: ::String
+      attr_accessor bundle_id: ::String
+      attr_accessor certificate_name: ::String
+      attr_accessor origin: Types::Origin
+      attr_accessor origin_public_dns: ::String
+      attr_accessor default_cache_behavior: Types::CacheBehavior
+      attr_accessor cache_behavior_settings: Types::CacheSettings
+      attr_accessor cache_behaviors: ::Array[Types::CacheBehaviorPerPath]
+      attr_accessor able_to_update_bundle: bool
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor viewer_minimum_tls_protocol_version: ::String
+      SENSITIVE: []
+    end
+
+    class LoadBalancer
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor support_code: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor dns_name: ::String
+      attr_accessor state: ("active" | "provisioning" | "active_impaired" | "failed" | "unknown")
+      attr_accessor protocol: ("HTTP_HTTPS" | "HTTP")
+      attr_accessor public_ports: ::Array[::Integer]
+      attr_accessor health_check_path: ::String
+      attr_accessor instance_port: ::Integer
+      attr_accessor instance_health_summary: ::Array[Types::InstanceHealthSummary]
+      attr_accessor tls_certificate_summaries: ::Array[Types::LoadBalancerTlsCertificateSummary]
+      attr_accessor configuration_options: ::Hash[("HealthCheckPath" | "SessionStickinessEnabled" | "SessionStickiness_LB_CookieDurationSeconds" | "HttpsRedirectionEnabled" | "TlsPolicyName"), ::String]
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
+      attr_accessor https_redirection_enabled: bool
+      attr_accessor tls_policy_name: ::String
+      SENSITIVE: []
+    end
+
+    class LoadBalancerTlsCertificate
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor support_code: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor load_balancer_name: ::String
+      attr_accessor is_attached: bool
+      attr_accessor status: ("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED" | "UNKNOWN")
+      attr_accessor domain_name: ::String
+      attr_accessor domain_validation_records: ::Array[Types::LoadBalancerTlsCertificateDomainValidationRecord]
+      attr_accessor failure_reason: ("NO_AVAILABLE_CONTACTS" | "ADDITIONAL_VERIFICATION_REQUIRED" | "DOMAIN_NOT_ALLOWED" | "INVALID_PUBLIC_DOMAIN" | "OTHER")
+      attr_accessor issued_at: ::Time
+      attr_accessor issuer: ::String
+      attr_accessor key_algorithm: ::String
+      attr_accessor not_after: ::Time
+      attr_accessor not_before: ::Time
+      attr_accessor renewal_summary: Types::LoadBalancerTlsCertificateRenewalSummary
+      attr_accessor revocation_reason: ("UNSPECIFIED" | "KEY_COMPROMISE" | "CA_COMPROMISE" | "AFFILIATION_CHANGED" | "SUPERCEDED" | "CESSATION_OF_OPERATION" | "CERTIFICATE_HOLD" | "REMOVE_FROM_CRL" | "PRIVILEGE_WITHDRAWN" | "A_A_COMPROMISE")
+      attr_accessor revoked_at: ::Time
+      attr_accessor serial: ::String
+      attr_accessor signature_algorithm: ::String
+      attr_accessor subject: ::String
+      attr_accessor subject_alternative_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LoadBalancerTlsCertificateDnsRecordCreationState
+      attr_accessor code: ("SUCCEEDED" | "STARTED" | "FAILED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class LoadBalancerTlsCertificateDomainValidationOption
+      attr_accessor domain_name: ::String
+      attr_accessor validation_status: ("PENDING_VALIDATION" | "FAILED" | "SUCCESS")
+      SENSITIVE: []
+    end
+
+    class LoadBalancerTlsCertificateDomainValidationRecord
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor value: ::String
+      attr_accessor validation_status: ("PENDING_VALIDATION" | "FAILED" | "SUCCESS")
+      attr_accessor domain_name: ::String
+      attr_accessor dns_record_creation_state: Types::LoadBalancerTlsCertificateDnsRecordCreationState
+      SENSITIVE: []
+    end
+
+    class LoadBalancerTlsCertificateRenewalSummary
+      attr_accessor renewal_status: ("PENDING_AUTO_RENEWAL" | "PENDING_VALIDATION" | "SUCCESS" | "FAILED")
+      attr_accessor domain_validation_options: ::Array[Types::LoadBalancerTlsCertificateDomainValidationOption]
+      SENSITIVE: []
+    end
+
+    class LoadBalancerTlsCertificateSummary
+      attr_accessor name: ::String
+      attr_accessor is_attached: bool
+      SENSITIVE: []
+    end
+
+    class LoadBalancerTlsPolicy
+      attr_accessor name: ::String
+      attr_accessor is_default: bool
+      attr_accessor description: ::String
+      attr_accessor protocols: ::Array[::String]
+      attr_accessor ciphers: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LogEvent
+      attr_accessor created_at: ::Time
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MetricDatapoint
+      attr_accessor average: ::Float
+      attr_accessor maximum: ::Float
+      attr_accessor minimum: ::Float
+      attr_accessor sample_count: ::Float
+      attr_accessor sum: ::Float
+      attr_accessor timestamp: ::Time
+      attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
+      SENSITIVE: []
+    end
+
+    class MonitoredResourceInfo
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      SENSITIVE: []
+    end
+
+    class MonthlyTransfer
+      attr_accessor gb_per_month_allocated: ::Integer
+      SENSITIVE: []
+    end
+
+    class NameServersUpdateState
+      attr_accessor code: ("SUCCEEDED" | "PENDING" | "FAILED" | "STARTED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor code: ::String
+      attr_accessor docs: ::String
+      attr_accessor message: ::String
+      attr_accessor tip: ::String
+      SENSITIVE: []
+    end
+
+    class OpenInstancePublicPortsRequest
+      attr_accessor port_info: Types::PortInfo
+      attr_accessor instance_name: ::String
+      SENSITIVE: []
+    end
+
+    class OpenInstancePublicPortsResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class Operation
+      attr_accessor id: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor is_terminal: bool
+      attr_accessor operation_details: ::String
+      attr_accessor operation_type: ("DeleteKnownHostKeys" | "DeleteInstance" | "CreateInstance" | "StopInstance" | "StartInstance" | "RebootInstance" | "OpenInstancePublicPorts" | "PutInstancePublicPorts" | "CloseInstancePublicPorts" | "AllocateStaticIp" | "ReleaseStaticIp" | "AttachStaticIp" | "DetachStaticIp" | "UpdateDomainEntry" | "DeleteDomainEntry" | "CreateDomain" | "DeleteDomain" | "CreateInstanceSnapshot" | "DeleteInstanceSnapshot" | "CreateInstancesFromSnapshot" | "CreateLoadBalancer" | "DeleteLoadBalancer" | "AttachInstancesToLoadBalancer" | "DetachInstancesFromLoadBalancer" | "UpdateLoadBalancerAttribute" | "CreateLoadBalancerTlsCertificate" | "DeleteLoadBalancerTlsCertificate" | "AttachLoadBalancerTlsCertificate" | "CreateDisk" | "DeleteDisk" | "AttachDisk" | "DetachDisk" | "CreateDiskSnapshot" | "DeleteDiskSnapshot" | "CreateDiskFromSnapshot" | "CreateRelationalDatabase" | "UpdateRelationalDatabase" | "DeleteRelationalDatabase" | "CreateRelationalDatabaseFromSnapshot" | "CreateRelationalDatabaseSnapshot" | "DeleteRelationalDatabaseSnapshot" | "UpdateRelationalDatabaseParameters" | "StartRelationalDatabase" | "RebootRelationalDatabase" | "StopRelationalDatabase" | "EnableAddOn" | "DisableAddOn" | "PutAlarm" | "GetAlarms" | "DeleteAlarm" | "TestAlarm" | "CreateContactMethod" | "GetContactMethods" | "SendContactMethodVerification" | "DeleteContactMethod" | "CreateDistribution" | "UpdateDistribution" | "DeleteDistribution" | "ResetDistributionCache" | "AttachCertificateToDistribution" | "DetachCertificateFromDistribution" | "UpdateDistributionBundle" | "SetIpAddressType" | "CreateCertificate" | "DeleteCertificate" | "CreateContainerService" | "UpdateContainerService" | "DeleteContainerService" | "CreateContainerServiceDeployment" | "CreateContainerServiceRegistryLogin" | "RegisterContainerImage" | "DeleteContainerImage" | "CreateBucket" | "DeleteBucket" | "CreateBucketAccessKey" | "DeleteBucketAccessKey" | "UpdateBucketBundle" | "UpdateBucket" | "SetResourceAccessForBucket" | "UpdateInstanceMetadataOptions" | "StartGUISession" | "StopGUISession" | "SetupInstanceHttps")
+      attr_accessor status: ("NotStarted" | "Started" | "Failed" | "Completed" | "Succeeded")
+      attr_accessor status_changed_at: ::Time
+      attr_accessor error_code: ::String
+      attr_accessor error_details: ::String
+      SENSITIVE: []
+    end
+
+    class OperationFailureException
+      attr_accessor code: ::String
+      attr_accessor docs: ::String
+      attr_accessor message: ::String
+      attr_accessor tip: ::String
+      SENSITIVE: []
+    end
+
+    class Origin
+      attr_accessor name: ::String
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")
+      attr_accessor protocol_policy: ("http-only" | "https-only")
+      attr_accessor response_timeout: ::Integer
+      SENSITIVE: []
+    end
+
+    class PasswordData
+      attr_accessor ciphertext: ::String
+      attr_accessor key_pair_name: ::String
+      SENSITIVE: []
+    end
+
+    class PeerVpcRequest < Aws::EmptyStructure
+    end
+
+    class PeerVpcResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class PendingMaintenanceAction
+      attr_accessor action: ::String
+      attr_accessor description: ::String
+      attr_accessor current_apply_date: ::Time
+      SENSITIVE: []
+    end
+
+    class PendingModifiedRelationalDatabaseValues
+      attr_accessor master_user_password: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor backup_retention_enabled: bool
+      SENSITIVE: []
+    end
+
+    class PortInfo
+      attr_accessor from_port: ::Integer
+      attr_accessor to_port: ::Integer
+      attr_accessor protocol: ("tcp" | "all" | "udp" | "icmp" | "icmpv6")
+      attr_accessor cidrs: ::Array[::String]
+      attr_accessor ipv6_cidrs: ::Array[::String]
+      attr_accessor cidr_list_aliases: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PrivateRegistryAccess
+      attr_accessor ecr_image_puller_role: Types::ContainerServiceECRImagePullerRole
+      SENSITIVE: []
+    end
+
+    class PrivateRegistryAccessRequest
+      attr_accessor ecr_image_puller_role: Types::ContainerServiceECRImagePullerRoleRequest
+      SENSITIVE: []
+    end
+
+    class PutAlarmRequest
+      attr_accessor alarm_name: ::String
+      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "BurstCapacityTime" | "BurstCapacityPercentage")
+      attr_accessor monitored_resource_name: ::String
+      attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
+      attr_accessor threshold: ::Float
+      attr_accessor evaluation_periods: ::Integer
+      attr_accessor datapoints_to_alarm: ::Integer
+      attr_accessor treat_missing_data: ("breaching" | "notBreaching" | "ignore" | "missing")
+      attr_accessor contact_protocols: ::Array[("Email" | "SMS")]
+      attr_accessor notification_triggers: ::Array[("OK" | "ALARM" | "INSUFFICIENT_DATA")]
+      attr_accessor notification_enabled: bool
+      SENSITIVE: []
+    end
+
+    class PutAlarmResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class PutInstancePublicPortsRequest
+      attr_accessor port_infos: ::Array[Types::PortInfo]
+      attr_accessor instance_name: ::String
+      SENSITIVE: []
+    end
+
+    class PutInstancePublicPortsResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class QueryStringObject
+      attr_accessor option: bool
+      attr_accessor query_strings_allow_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class R53HostedZoneDeletionState
+      attr_accessor code: ("SUCCEEDED" | "PENDING" | "FAILED" | "STARTED")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RebootInstanceRequest
+      attr_accessor instance_name: ::String
+      SENSITIVE: []
+    end
+
+    class RebootInstanceResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class RebootRelationalDatabaseRequest
+      attr_accessor relational_database_name: ::String
+      SENSITIVE: []
+    end
+
+    class RebootRelationalDatabaseResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class Region
+      attr_accessor continent_code: ::String
+      attr_accessor description: ::String
+      attr_accessor display_name: ::String
+      attr_accessor name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")
+      attr_accessor availability_zones: ::Array[Types::AvailabilityZone]
+      attr_accessor relational_database_availability_zones: ::Array[Types::AvailabilityZone]
+      SENSITIVE: []
+    end
+
+    class RegisterContainerImageRequest
+      attr_accessor service_name: ::String
+      attr_accessor label: ::String
+      attr_accessor digest: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterContainerImageResult
+      attr_accessor container_image: Types::ContainerImage
+      SENSITIVE: []
+    end
+
+    class RegisteredDomainDelegationInfo
+      attr_accessor name_servers_update_state: Types::NameServersUpdateState
+      attr_accessor r53_hosted_zone_deletion_state: Types::R53HostedZoneDeletionState
+      SENSITIVE: []
+    end
+
+    class RelationalDatabase
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor support_code: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor relational_database_blueprint_id: ::String
+      attr_accessor relational_database_bundle_id: ::String
+      attr_accessor master_database_name: ::String
+      attr_accessor hardware: Types::RelationalDatabaseHardware
+      attr_accessor state: ::String
+      attr_accessor secondary_availability_zone: ::String
+      attr_accessor backup_retention_enabled: bool
+      attr_accessor pending_modified_values: Types::PendingModifiedRelationalDatabaseValues
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor latest_restorable_time: ::Time
+      attr_accessor master_username: ::String
+      attr_accessor parameter_apply_status: ::String
+      attr_accessor preferred_backup_window: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor publicly_accessible: bool
+      attr_accessor master_endpoint: Types::RelationalDatabaseEndpoint
+      attr_accessor pending_maintenance_actions: ::Array[Types::PendingMaintenanceAction]
+      attr_accessor ca_certificate_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class RelationalDatabaseBlueprint
+      attr_accessor blueprint_id: ::String
+      attr_accessor engine: ("mysql")
+      attr_accessor engine_version: ::String
+      attr_accessor engine_description: ::String
+      attr_accessor engine_version_description: ::String
+      attr_accessor is_engine_default: bool
+      SENSITIVE: []
+    end
+
+    class RelationalDatabaseBundle
+      attr_accessor bundle_id: ::String
+      attr_accessor name: ::String
+      attr_accessor price: ::Float
+      attr_accessor ram_size_in_gb: ::Float
+      attr_accessor disk_size_in_gb: ::Integer
+      attr_accessor transfer_per_month_in_gb: ::Integer
+      attr_accessor cpu_count: ::Integer
+      attr_accessor is_encrypted: bool
+      attr_accessor is_active: bool
+      SENSITIVE: []
+    end
+
+    class RelationalDatabaseEndpoint
+      attr_accessor port: ::Integer
+      attr_accessor address: ::String
+      SENSITIVE: []
+    end
+
+    class RelationalDatabaseEvent
+      attr_accessor resource: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor message: ::String
+      attr_accessor event_categories: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RelationalDatabaseHardware
+      attr_accessor cpu_count: ::Integer
+      attr_accessor disk_size_in_gb: ::Integer
+      attr_accessor ram_size_in_gb: ::Float
+      SENSITIVE: []
+    end
+
+    class RelationalDatabaseParameter
+      attr_accessor allowed_values: ::String
+      attr_accessor apply_method: ::String
+      attr_accessor apply_type: ::String
+      attr_accessor data_type: ::String
+      attr_accessor description: ::String
+      attr_accessor is_modifiable: bool
+      attr_accessor parameter_name: ::String
+      attr_accessor parameter_value: ::String
+      SENSITIVE: []
+    end
+
+    class RelationalDatabaseSnapshot
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor support_code: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor engine: ::String
+      attr_accessor engine_version: ::String
+      attr_accessor size_in_gb: ::Integer
+      attr_accessor state: ::String
+      attr_accessor from_relational_database_name: ::String
+      attr_accessor from_relational_database_arn: ::String
+      attr_accessor from_relational_database_bundle_id: ::String
+      attr_accessor from_relational_database_blueprint_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReleaseStaticIpRequest
+      attr_accessor static_ip_name: ::String
+      SENSITIVE: []
+    end
+
+    class ReleaseStaticIpResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class RenewalSummary
+      attr_accessor domain_validation_records: ::Array[Types::DomainValidationRecord]
+      attr_accessor renewal_status: ("PendingAutoRenewal" | "PendingValidation" | "Success" | "Failed")
+      attr_accessor renewal_status_reason: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ResetDistributionCacheRequest
+      attr_accessor distribution_name: ::String
+      SENSITIVE: []
+    end
+
+    class ResetDistributionCacheResult
+      attr_accessor status: ::String
+      attr_accessor create_time: ::Time
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class ResourceBudgetEstimate
+      attr_accessor resource_name: ::String
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor cost_estimates: ::Array[Types::CostEstimate]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ResourceLocation
+      attr_accessor availability_zone: ::String
+      attr_accessor region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "eu-north-1")
+      SENSITIVE: []
+    end
+
+    class ResourceReceivingAccess
+      attr_accessor name: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceRecord
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class SendContactMethodVerificationRequest
+      attr_accessor protocol: ("Email")
+      SENSITIVE: []
+    end
+
+    class SendContactMethodVerificationResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class ServiceException
+      attr_accessor code: ::String
+      attr_accessor docs: ::String
+      attr_accessor message: ::String
+      attr_accessor tip: ::String
+      SENSITIVE: []
+    end
+
+    class Session
+      attr_accessor name: ::String
+      attr_accessor url: ::String
+      attr_accessor is_primary: bool
+      SENSITIVE: [:url]
+    end
+
+    class SetIpAddressTypeRequest
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor resource_name: ::String
+      attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
+      attr_accessor accept_bundle_update: bool
+      SENSITIVE: []
+    end
+
+    class SetIpAddressTypeResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class SetResourceAccessForBucketRequest
+      attr_accessor resource_name: ::String
+      attr_accessor bucket_name: ::String
+      attr_accessor access: ("allow" | "deny")
+      SENSITIVE: []
+    end
+
+    class SetResourceAccessForBucketResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class SetupExecutionDetails
+      attr_accessor command: ::String
+      attr_accessor date_time: ::Time
+      attr_accessor name: ::String
+      attr_accessor status: ("succeeded" | "failed" | "inProgress")
+      attr_accessor standard_error: ::String
+      attr_accessor standard_output: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class SetupHistory
+      attr_accessor operation_id: ::String
+      attr_accessor request: Types::SetupRequest
+      attr_accessor resource: Types::SetupHistoryResource
+      attr_accessor execution_details: ::Array[Types::SetupExecutionDetails]
+      attr_accessor status: ("succeeded" | "failed" | "inProgress")
+      SENSITIVE: []
+    end
+
+    class SetupHistoryResource
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      SENSITIVE: []
+    end
+
+    class SetupInstanceHttpsRequest
+      attr_accessor instance_name: ::String
+      attr_accessor email_address: ::String
+      attr_accessor domain_names: ::Array[::String]
+      attr_accessor certificate_provider: ("LetsEncrypt")
+      SENSITIVE: [:email_address]
+    end
+
+    class SetupInstanceHttpsResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class SetupRequest
+      attr_accessor instance_name: ::String
+      attr_accessor domain_names: ::Array[::String]
+      attr_accessor certificate_provider: ("LetsEncrypt")
+      SENSITIVE: []
+    end
+
+    class StartGUISessionRequest
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartGUISessionResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class StartInstanceRequest
+      attr_accessor instance_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartInstanceResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class StartRelationalDatabaseRequest
+      attr_accessor relational_database_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartRelationalDatabaseResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class StaticIp
+      attr_accessor name: ::String
+      attr_accessor arn: ::String
+      attr_accessor support_code: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor location: Types::ResourceLocation
+      attr_accessor resource_type: ("ContainerService" | "Instance" | "StaticIp" | "KeyPair" | "InstanceSnapshot" | "Domain" | "PeeredVpc" | "LoadBalancer" | "LoadBalancerTlsCertificate" | "Disk" | "DiskSnapshot" | "RelationalDatabase" | "RelationalDatabaseSnapshot" | "ExportSnapshotRecord" | "CloudFormationStackRecord" | "Alarm" | "ContactMethod" | "Distribution" | "Certificate" | "Bucket")
+      attr_accessor ip_address: ::String
+      attr_accessor attached_to: ::String
+      attr_accessor is_attached: bool
+      SENSITIVE: []
+    end
+
+    class StopGUISessionRequest
+      attr_accessor resource_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopGUISessionResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class StopInstanceOnIdleRequest
+      attr_accessor threshold: ::String
+      attr_accessor duration: ::String
+      SENSITIVE: []
+    end
+
+    class StopInstanceRequest
+      attr_accessor instance_name: ::String
+      attr_accessor force: bool
+      SENSITIVE: []
+    end
+
+    class StopInstanceResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class StopRelationalDatabaseRequest
+      attr_accessor relational_database_name: ::String
+      attr_accessor relational_database_snapshot_name: ::String
+      SENSITIVE: []
+    end
+
+    class StopRelationalDatabaseResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class TestAlarmRequest
+      attr_accessor alarm_name: ::String
+      attr_accessor state: ("OK" | "ALARM" | "INSUFFICIENT_DATA")
+      SENSITIVE: []
+    end
+
+    class TestAlarmResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class TimePeriod
+      attr_accessor start: ::Time
+      attr_accessor end: ::Time
+      SENSITIVE: []
+    end
+
+    class UnauthenticatedException
+      attr_accessor code: ::String
+      attr_accessor docs: ::String
+      attr_accessor message: ::String
+      attr_accessor tip: ::String
+      SENSITIVE: []
+    end
+
+    class UnpeerVpcRequest < Aws::EmptyStructure
+    end
+
+    class UnpeerVpcResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class UpdateBucketBundleRequest
+      attr_accessor bucket_name: ::String
+      attr_accessor bundle_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateBucketBundleResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class UpdateBucketRequest
+      attr_accessor bucket_name: ::String
+      attr_accessor access_rules: Types::AccessRules
+      attr_accessor versioning: ::String
+      attr_accessor readonly_access_accounts: ::Array[::String]
+      attr_accessor access_log_config: Types::BucketAccessLogConfig
+      SENSITIVE: []
+    end
+
+    class UpdateBucketResult
+      attr_accessor bucket: Types::Bucket
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class UpdateContainerServiceRequest
+      attr_accessor service_name: ::String
+      attr_accessor power: ("nano" | "micro" | "small" | "medium" | "large" | "xlarge")
+      attr_accessor scale: ::Integer
+      attr_accessor is_disabled: bool
+      attr_accessor public_domain_names: ::Hash[::String, ::Array[::String]]
+      attr_accessor private_registry_access: Types::PrivateRegistryAccessRequest
+      SENSITIVE: []
+    end
+
+    class UpdateContainerServiceResult
+      attr_accessor container_service: Types::ContainerService
+      SENSITIVE: []
+    end
+
+    class UpdateDistributionBundleRequest
+      attr_accessor distribution_name: ::String
+      attr_accessor bundle_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateDistributionBundleResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class UpdateDistributionRequest
+      attr_accessor distribution_name: ::String
+      attr_accessor origin: Types::InputOrigin
+      attr_accessor default_cache_behavior: Types::CacheBehavior
+      attr_accessor cache_behavior_settings: Types::CacheSettings
+      attr_accessor cache_behaviors: ::Array[Types::CacheBehaviorPerPath]
+      attr_accessor is_enabled: bool
+      attr_accessor viewer_minimum_tls_protocol_version: ("TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021")
+      attr_accessor certificate_name: ::String
+      attr_accessor use_default_certificate: bool
+      SENSITIVE: []
+    end
+
+    class UpdateDistributionResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class UpdateDomainEntryRequest
+      attr_accessor domain_name: ::String
+      attr_accessor domain_entry: Types::DomainEntry
+      SENSITIVE: []
+    end
+
+    class UpdateDomainEntryResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class UpdateInstanceMetadataOptionsRequest
+      attr_accessor instance_name: ::String
+      attr_accessor http_tokens: ("optional" | "required")
+      attr_accessor http_endpoint: ("disabled" | "enabled")
+      attr_accessor http_put_response_hop_limit: ::Integer
+      attr_accessor http_protocol_ipv_6: ("disabled" | "enabled")
+      SENSITIVE: []
+    end
+
+    class UpdateInstanceMetadataOptionsResult
+      attr_accessor operation: Types::Operation
+      SENSITIVE: []
+    end
+
+    class UpdateLoadBalancerAttributeRequest
+      attr_accessor load_balancer_name: ::String
+      attr_accessor attribute_name: ("HealthCheckPath" | "SessionStickinessEnabled" | "SessionStickiness_LB_CookieDurationSeconds" | "HttpsRedirectionEnabled" | "TlsPolicyName")
+      attr_accessor attribute_value: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateLoadBalancerAttributeResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class UpdateRelationalDatabaseParametersRequest
+      attr_accessor relational_database_name: ::String
+      attr_accessor parameters: ::Array[Types::RelationalDatabaseParameter]
+      SENSITIVE: []
+    end
+
+    class UpdateRelationalDatabaseParametersResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class UpdateRelationalDatabaseRequest
+      attr_accessor relational_database_name: ::String
+      attr_accessor master_user_password: ::String
+      attr_accessor rotate_master_user_password: bool
+      attr_accessor preferred_backup_window: ::String
+      attr_accessor preferred_maintenance_window: ::String
+      attr_accessor enable_backup_retention: bool
+      attr_accessor disable_backup_retention: bool
+      attr_accessor publicly_accessible: bool
+      attr_accessor apply_immediately: bool
+      attr_accessor ca_certificate_identifier: ::String
+      attr_accessor relational_database_blueprint_id: ::String
+      SENSITIVE: [:master_user_password]
+    end
+
+    class UpdateRelationalDatabaseResult
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+  end
+end

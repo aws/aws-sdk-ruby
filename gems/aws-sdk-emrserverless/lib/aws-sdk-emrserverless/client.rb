@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::EMRServerless
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::EMRServerless
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::EMRServerless
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::EMRServerless
     #   @option options [Aws::EMRServerless::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::EMRServerless::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -493,6 +518,10 @@ module Aws::EMRServerless
     # @option params [Types::MonitoringConfiguration] :monitoring_configuration
     #   The configuration setting for monitoring.
     #
+    # @option params [Types::InteractiveConfiguration] :interactive_configuration
+    #   The interactive configuration object that enables the interactive use
+    #   cases to use when running an application.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#application_id #application_id} => String
@@ -513,6 +542,7 @@ module Aws::EMRServerless
     #           cpu: "CpuSize", # required
     #           memory: "MemorySize", # required
     #           disk: "DiskSize",
+    #           disk_type: "DiskType",
     #         },
     #       },
     #     },
@@ -550,7 +580,7 @@ module Aws::EMRServerless
     #       {
     #         classification: "String1024", # required
     #         properties: {
-    #           "String1024" => "String1024",
+    #           "ConfigurationPropertyKey" => "ConfigurationPropertyValue",
     #         },
     #         configurations: {
     #           # recursive ConfigurationList
@@ -575,6 +605,13 @@ module Aws::EMRServerless
     #           "WorkerTypeString" => ["LogTypeString"],
     #         },
     #       },
+    #       prometheus_monitoring_configuration: {
+    #         remote_write_url: "PrometheusUrlString",
+    #       },
+    #     },
+    #     interactive_configuration: {
+    #       studio_enabled: false,
+    #       livy_endpoint_enabled: false,
     #     },
     #   })
     #
@@ -645,6 +682,7 @@ module Aws::EMRServerless
     #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.cpu #=> String
     #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.memory #=> String
     #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.disk #=> String
+    #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.disk_type #=> String
     #   resp.application.maximum_capacity.cpu #=> String
     #   resp.application.maximum_capacity.memory #=> String
     #   resp.application.maximum_capacity.disk #=> String
@@ -668,7 +706,7 @@ module Aws::EMRServerless
     #   resp.application.runtime_configuration #=> Array
     #   resp.application.runtime_configuration[0].classification #=> String
     #   resp.application.runtime_configuration[0].properties #=> Hash
-    #   resp.application.runtime_configuration[0].properties["String1024"] #=> String
+    #   resp.application.runtime_configuration[0].properties["ConfigurationPropertyKey"] #=> String
     #   resp.application.runtime_configuration[0].configurations #=> Types::ConfigurationList
     #   resp.application.monitoring_configuration.s3_monitoring_configuration.log_uri #=> String
     #   resp.application.monitoring_configuration.s3_monitoring_configuration.encryption_key_arn #=> String
@@ -681,6 +719,9 @@ module Aws::EMRServerless
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types #=> Hash
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
+    #   resp.application.monitoring_configuration.prometheus_monitoring_configuration.remote_write_url #=> String
+    #   resp.application.interactive_configuration.studio_enabled #=> Boolean
+    #   resp.application.interactive_configuration.livy_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetApplication AWS API Documentation
     #
@@ -711,6 +752,11 @@ module Aws::EMRServerless
     # @option params [required, String] :job_run_id
     #   The ID of the job run.
     #
+    # @option params [Integer] :attempt
+    #   An optimal parameter that indicates the amount of attempts for the
+    #   job. If not specified, this value defaults to the attempt of the
+    #   latest job.
+    #
     # @return [Types::GetDashboardForJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDashboardForJobRunResponse#url #url} => String
@@ -720,6 +766,7 @@ module Aws::EMRServerless
     #   resp = client.get_dashboard_for_job_run({
     #     application_id: "ApplicationId", # required
     #     job_run_id: "JobRunId", # required
+    #     attempt: 1,
     #   })
     #
     # @example Response structure
@@ -743,6 +790,11 @@ module Aws::EMRServerless
     # @option params [required, String] :job_run_id
     #   The ID of the job run.
     #
+    # @option params [Integer] :attempt
+    #   An optimal parameter that indicates the amount of attempts for the
+    #   job. If not specified, this value defaults to the attempt of the
+    #   latest job.
+    #
     # @return [Types::GetJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetJobRunResponse#job_run #job_run} => Types::JobRun
@@ -752,6 +804,7 @@ module Aws::EMRServerless
     #   resp = client.get_job_run({
     #     application_id: "ApplicationId", # required
     #     job_run_id: "JobRunId", # required
+    #     attempt: 1,
     #   })
     #
     # @example Response structure
@@ -770,7 +823,7 @@ module Aws::EMRServerless
     #   resp.job_run.configuration_overrides.application_configuration #=> Array
     #   resp.job_run.configuration_overrides.application_configuration[0].classification #=> String
     #   resp.job_run.configuration_overrides.application_configuration[0].properties #=> Hash
-    #   resp.job_run.configuration_overrides.application_configuration[0].properties["String1024"] #=> String
+    #   resp.job_run.configuration_overrides.application_configuration[0].properties["ConfigurationPropertyKey"] #=> String
     #   resp.job_run.configuration_overrides.application_configuration[0].configurations #=> Types::ConfigurationList
     #   resp.job_run.configuration_overrides.monitoring_configuration.s3_monitoring_configuration.log_uri #=> String
     #   resp.job_run.configuration_overrides.monitoring_configuration.s3_monitoring_configuration.encryption_key_arn #=> String
@@ -783,6 +836,7 @@ module Aws::EMRServerless
     #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_logging_configuration.log_types #=> Hash
     #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
     #   resp.job_run.configuration_overrides.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
+    #   resp.job_run.configuration_overrides.monitoring_configuration.prometheus_monitoring_configuration.remote_write_url #=> String
     #   resp.job_run.job_driver.spark_submit.entry_point #=> String
     #   resp.job_run.job_driver.spark_submit.entry_point_arguments #=> Array
     #   resp.job_run.job_driver.spark_submit.entry_point_arguments[0] #=> String
@@ -804,6 +858,12 @@ module Aws::EMRServerless
     #   resp.job_run.billed_resource_utilization.v_cpu_hour #=> Float
     #   resp.job_run.billed_resource_utilization.memory_gb_hour #=> Float
     #   resp.job_run.billed_resource_utilization.storage_gb_hour #=> Float
+    #   resp.job_run.mode #=> String, one of "BATCH", "STREAMING"
+    #   resp.job_run.retry_policy.max_attempts #=> Integer
+    #   resp.job_run.retry_policy.max_failed_attempts_per_hour #=> Integer
+    #   resp.job_run.attempt #=> Integer
+    #   resp.job_run.attempt_created_at #=> Time
+    #   resp.job_run.attempt_updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetJobRun AWS API Documentation
     #
@@ -866,6 +926,65 @@ module Aws::EMRServerless
       req.send_request(options)
     end
 
+    # Lists all attempt of a job run.
+    #
+    # @option params [required, String] :application_id
+    #   The ID of the application for which to list job runs.
+    #
+    # @option params [required, String] :job_run_id
+    #   The ID of the job run to list.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of job run attempt results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of job run attempts to list.
+    #
+    # @return [Types::ListJobRunAttemptsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListJobRunAttemptsResponse#job_run_attempts #job_run_attempts} => Array&lt;Types::JobRunAttemptSummary&gt;
+    #   * {Types::ListJobRunAttemptsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_job_run_attempts({
+    #     application_id: "ApplicationId", # required
+    #     job_run_id: "JobRunId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_run_attempts #=> Array
+    #   resp.job_run_attempts[0].application_id #=> String
+    #   resp.job_run_attempts[0].id #=> String
+    #   resp.job_run_attempts[0].name #=> String
+    #   resp.job_run_attempts[0].mode #=> String, one of "BATCH", "STREAMING"
+    #   resp.job_run_attempts[0].arn #=> String
+    #   resp.job_run_attempts[0].created_by #=> String
+    #   resp.job_run_attempts[0].job_created_at #=> Time
+    #   resp.job_run_attempts[0].created_at #=> Time
+    #   resp.job_run_attempts[0].updated_at #=> Time
+    #   resp.job_run_attempts[0].execution_role #=> String
+    #   resp.job_run_attempts[0].state #=> String, one of "SUBMITTED", "PENDING", "SCHEDULED", "RUNNING", "SUCCESS", "FAILED", "CANCELLING", "CANCELLED"
+    #   resp.job_run_attempts[0].state_details #=> String
+    #   resp.job_run_attempts[0].release_label #=> String
+    #   resp.job_run_attempts[0].type #=> String
+    #   resp.job_run_attempts[0].attempt #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/ListJobRunAttempts AWS API Documentation
+    #
+    # @overload list_job_run_attempts(params = {})
+    # @param [Hash] params ({})
+    def list_job_run_attempts(params = {}, options = {})
+      req = build_request(:list_job_run_attempts, params)
+      req.send_request(options)
+    end
+
     # Lists job runs based on a set of parameters.
     #
     # @option params [required, String] :application_id
@@ -888,6 +1007,9 @@ module Aws::EMRServerless
     #   contains multiple states, the resulting list will be grouped by the
     #   state.
     #
+    # @option params [String] :mode
+    #   The mode of the job runs to list.
+    #
     # @return [Types::ListJobRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListJobRunsResponse#job_runs #job_runs} => Array&lt;Types::JobRunSummary&gt;
@@ -904,6 +1026,7 @@ module Aws::EMRServerless
     #     created_at_after: Time.now,
     #     created_at_before: Time.now,
     #     states: ["SUBMITTED"], # accepts SUBMITTED, PENDING, SCHEDULED, RUNNING, SUCCESS, FAILED, CANCELLING, CANCELLED
+    #     mode: "BATCH", # accepts BATCH, STREAMING
     #   })
     #
     # @example Response structure
@@ -912,6 +1035,7 @@ module Aws::EMRServerless
     #   resp.job_runs[0].application_id #=> String
     #   resp.job_runs[0].id #=> String
     #   resp.job_runs[0].name #=> String
+    #   resp.job_runs[0].mode #=> String, one of "BATCH", "STREAMING"
     #   resp.job_runs[0].arn #=> String
     #   resp.job_runs[0].created_by #=> String
     #   resp.job_runs[0].created_at #=> Time
@@ -921,6 +1045,9 @@ module Aws::EMRServerless
     #   resp.job_runs[0].state_details #=> String
     #   resp.job_runs[0].release_label #=> String
     #   resp.job_runs[0].type #=> String
+    #   resp.job_runs[0].attempt #=> Integer
+    #   resp.job_runs[0].attempt_created_at #=> Time
+    #   resp.job_runs[0].attempt_updated_at #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/ListJobRuns AWS API Documentation
@@ -1017,6 +1144,12 @@ module Aws::EMRServerless
     # @option params [String] :name
     #   The optional job run name. This doesn't have to be unique.
     #
+    # @option params [String] :mode
+    #   The mode of the job run when it starts.
+    #
+    # @option params [Types::RetryPolicy] :retry_policy
+    #   The retry policy when job run starts.
+    #
     # @return [Types::StartJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartJobRunResponse#application_id #application_id} => String
@@ -1046,7 +1179,7 @@ module Aws::EMRServerless
     #         {
     #           classification: "String1024", # required
     #           properties: {
-    #             "String1024" => "String1024",
+    #             "ConfigurationPropertyKey" => "ConfigurationPropertyValue",
     #           },
     #           configurations: {
     #             # recursive ConfigurationList
@@ -1071,6 +1204,9 @@ module Aws::EMRServerless
     #             "WorkerTypeString" => ["LogTypeString"],
     #           },
     #         },
+    #         prometheus_monitoring_configuration: {
+    #           remote_write_url: "PrometheusUrlString",
+    #         },
     #       },
     #     },
     #     tags: {
@@ -1078,6 +1214,11 @@ module Aws::EMRServerless
     #     },
     #     execution_timeout_minutes: 1,
     #     name: "String256",
+    #     mode: "BATCH", # accepts BATCH, STREAMING
+    #     retry_policy: {
+    #       max_attempts: 1,
+    #       max_failed_attempts_per_hour: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1233,6 +1374,10 @@ module Aws::EMRServerless
     #   image details in this parameter for each worker type, or in
     #   `imageConfiguration` for all worker types.
     #
+    # @option params [Types::InteractiveConfiguration] :interactive_configuration
+    #   The interactive configuration object that contains new interactive use
+    #   cases when the application is updated.
+    #
     # @option params [String] :release_label
     #   The Amazon EMR release label for the application. You can change the
     #   release label to use a different release of Amazon EMR.
@@ -1266,6 +1411,7 @@ module Aws::EMRServerless
     #           cpu: "CpuSize", # required
     #           memory: "MemorySize", # required
     #           disk: "DiskSize",
+    #           disk_type: "DiskType",
     #         },
     #       },
     #     },
@@ -1296,12 +1442,16 @@ module Aws::EMRServerless
     #         },
     #       },
     #     },
+    #     interactive_configuration: {
+    #       studio_enabled: false,
+    #       livy_endpoint_enabled: false,
+    #     },
     #     release_label: "ReleaseLabel",
     #     runtime_configuration: [
     #       {
     #         classification: "String1024", # required
     #         properties: {
-    #           "String1024" => "String1024",
+    #           "ConfigurationPropertyKey" => "ConfigurationPropertyValue",
     #         },
     #         configurations: {
     #           # recursive ConfigurationList
@@ -1326,6 +1476,9 @@ module Aws::EMRServerless
     #           "WorkerTypeString" => ["LogTypeString"],
     #         },
     #       },
+    #       prometheus_monitoring_configuration: {
+    #         remote_write_url: "PrometheusUrlString",
+    #       },
     #     },
     #   })
     #
@@ -1343,6 +1496,7 @@ module Aws::EMRServerless
     #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.cpu #=> String
     #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.memory #=> String
     #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.disk #=> String
+    #   resp.application.initial_capacity["WorkerTypeString"].worker_configuration.disk_type #=> String
     #   resp.application.maximum_capacity.cpu #=> String
     #   resp.application.maximum_capacity.memory #=> String
     #   resp.application.maximum_capacity.disk #=> String
@@ -1366,7 +1520,7 @@ module Aws::EMRServerless
     #   resp.application.runtime_configuration #=> Array
     #   resp.application.runtime_configuration[0].classification #=> String
     #   resp.application.runtime_configuration[0].properties #=> Hash
-    #   resp.application.runtime_configuration[0].properties["String1024"] #=> String
+    #   resp.application.runtime_configuration[0].properties["ConfigurationPropertyKey"] #=> String
     #   resp.application.runtime_configuration[0].configurations #=> Types::ConfigurationList
     #   resp.application.monitoring_configuration.s3_monitoring_configuration.log_uri #=> String
     #   resp.application.monitoring_configuration.s3_monitoring_configuration.encryption_key_arn #=> String
@@ -1379,6 +1533,9 @@ module Aws::EMRServerless
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types #=> Hash
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"] #=> Array
     #   resp.application.monitoring_configuration.cloud_watch_logging_configuration.log_types["WorkerTypeString"][0] #=> String
+    #   resp.application.monitoring_configuration.prometheus_monitoring_configuration.remote_write_url #=> String
+    #   resp.application.interactive_configuration.studio_enabled #=> Boolean
+    #   resp.application.interactive_configuration.livy_endpoint_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/UpdateApplication AWS API Documentation
     #
@@ -1402,7 +1559,7 @@ module Aws::EMRServerless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

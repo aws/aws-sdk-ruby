@@ -52,6 +52,6 @@ require_relative 'aws-sdk-mgn/customizations'
 # @!group service
 module Aws::Mgn
 
-  GEM_VERSION = '1.26.0'
+  GEM_VERSION = '1.33.0'
 
 end

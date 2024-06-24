@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.27.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2024-04-30)
+------------------
+
+* Feature - Add support for workflow sharing and dynamic run storage
+
+1.25.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2024-04-11)
+------------------
+
+* Feature - This release adds support for retrieval of S3 direct access metadata on sequence stores and read sets, and adds support for SHA256up and SHA512up HealthOmics ETags.
+
+1.23.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2023-12-22)
+------------------
+
+* Feature - Provides minor corrections and an updated description of APIs.
+
+1.21.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2023-11-09)
+------------------
+
+* Feature - Support UBAM filetype for Omics Storage and make referenceArn optional
+
+1.18.0 (2023-11-08)
+------------------
+
+* Feature - Adding Run UUID and Run Output URI: GetRun and StartRun API response has two new fields "uuid" and "runOutputUri".
+
+1.17.0 (2023-10-19)
+------------------
+
+* Feature - This change enables customers to retrieve failure reasons with detailed status messages for their failed runs
+
 1.16.0 (2023-10-05)
 ------------------
 

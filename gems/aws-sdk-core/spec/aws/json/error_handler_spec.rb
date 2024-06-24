@@ -99,7 +99,7 @@ module Aws
       end
 
       describe 'AwsQueryCompatible' do
-        AwsQueryCompatibleClient = ApiHelper.sample_service(
+        AwsQueryCompatibleErrorClient = ApiHelper.sample_service(
           api: {
             'metadata' => {
               'apiVersion' => '2018-11-07',
@@ -127,7 +127,7 @@ module Aws
         ).const_get(:Client)
 
         let(:client_aws_query_compatible) do
-          AwsQueryCompatibleClient.new(
+          AwsQueryCompatibleErrorClient.new(
             region: 'us-west-2',
             retry_limit: 0,
             credentials: Aws::Credentials.new('akid', 'secret')

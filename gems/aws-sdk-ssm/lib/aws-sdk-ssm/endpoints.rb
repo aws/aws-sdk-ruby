@@ -264,6 +264,20 @@ module Aws::SSM
       end
     end
 
+    class DeleteOpsItem
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SSM::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteOpsMetadata
       def self.build(context)
         unless context.config.regional_endpoint
@@ -615,6 +629,20 @@ module Aws::SSM
     end
 
     class DescribeInstancePatches
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::SSM::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class DescribeInstanceProperties
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

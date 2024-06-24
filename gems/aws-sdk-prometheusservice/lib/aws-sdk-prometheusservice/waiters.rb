@@ -69,10 +69,101 @@ module Aws::PrometheusService
   #
   # | waiter_name       | params                      | :delay   | :max_attempts |
   # | ----------------- | --------------------------- | -------- | ------------- |
+  # | scraper_active    | {Client#describe_scraper}   | 2        | 60            |
+  # | scraper_deleted   | {Client#describe_scraper}   | 2        | 60            |
   # | workspace_active  | {Client#describe_workspace} | 2        | 60            |
   # | workspace_deleted | {Client#describe_workspace} | 2        | 60            |
   #
   module Waiters
+
+    # Wait until a scraper reaches ACTIVE status
+    class ScraperActive
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (2)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 2,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_scraper,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "scraper.status.status_code",
+                "state" => "success",
+                "expected" => "ACTIVE"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "scraper.status.status_code",
+                "state" => "failure",
+                "expected" => "CREATION_FAILED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_scraper)
+      # @return (see Client#describe_scraper)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until a scraper reaches DELETED status
+    class ScraperDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (2)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 2,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_scraper,
+            acceptors: [
+              {
+                "matcher" => "error",
+                "state" => "success",
+                "expected" => "ResourceNotFoundException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "scraper.status.status_code",
+                "state" => "failure",
+                "expected" => "DELETION_FAILED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_scraper)
+      # @return (see Client#describe_scraper)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
 
     # Wait until a workspace reaches ACTIVE status
     class WorkspaceActive

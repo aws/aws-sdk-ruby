@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -73,6 +74,7 @@ module Aws::SWF
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -198,10 +200,17 @@ module Aws::SWF
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -294,8 +303,9 @@ module Aws::SWF
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -349,50 +359,65 @@ module Aws::SWF
     #   @option options [Aws::SWF::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::SWF::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -786,15 +811,138 @@ module Aws::SWF
       req.send_request(options)
     end
 
+    # Deletes the specified *activity type*.
+    #
+    # Note: Prior to deletion, activity types must first be **deprecated**.
+    #
+    # After an activity type has been deleted, you cannot schedule new
+    # activities of that type. Activities that started before the type was
+    # deleted will continue to run.
+    #
+    # **Access Control**
+    #
+    # You can use IAM policies to control this action's access to Amazon
+    # SWF resources as follows:
+    #
+    # * Use a `Resource` element with the domain name to limit the action to
+    #   only specified domains.
+    #
+    # * Use an `Action` element to allow or deny permission to call this
+    #   action.
+    #
+    # * Constrain the following parameters by using a `Condition` element
+    #   with the appropriate keys.
+    #
+    #   * `activityType.name`: String constraint. The key is
+    #     `swf:activityType.name`.
+    #
+    #   * `activityType.version`: String constraint. The key is
+    #     `swf:activityType.version`.
+    #
+    # If the caller doesn't have sufficient permissions to invoke the
+    # action, or the parameter values fall outside the specified
+    # constraints, the action fails. The associated event attribute's
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #
+    # @option params [required, String] :domain
+    #   The name of the domain in which the activity type is registered.
+    #
+    # @option params [required, Types::ActivityType] :activity_type
+    #   The activity type to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_activity_type({
+    #     domain: "DomainName", # required
+    #     activity_type: { # required
+    #       name: "Name", # required
+    #       version: "Version", # required
+    #     },
+    #   })
+    #
+    # @overload delete_activity_type(params = {})
+    # @param [Hash] params ({})
+    def delete_activity_type(params = {}, options = {})
+      req = build_request(:delete_activity_type, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified *workflow type*.
+    #
+    # Note: Prior to deletion, workflow types must first be **deprecated**.
+    #
+    # After a workflow type has been deleted, you cannot create new
+    # executions of that type. Executions that started before the type was
+    # deleted will continue to run.
+    #
+    # **Access Control**
+    #
+    # You can use IAM policies to control this action's access to Amazon
+    # SWF resources as follows:
+    #
+    # * Use a `Resource` element with the domain name to limit the action to
+    #   only specified domains.
+    #
+    # * Use an `Action` element to allow or deny permission to call this
+    #   action.
+    #
+    # * Constrain the following parameters by using a `Condition` element
+    #   with the appropriate keys.
+    #
+    #   * `workflowType.name`: String constraint. The key is
+    #     `swf:workflowType.name`.
+    #
+    #   * `workflowType.version`: String constraint. The key is
+    #     `swf:workflowType.version`.
+    #
+    # If the caller doesn't have sufficient permissions to invoke the
+    # action, or the parameter values fall outside the specified
+    # constraints, the action fails. The associated event attribute's
+    # `cause` parameter is set to `OPERATION_NOT_PERMITTED`. For details and
+    # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
+    # Workflows][1] in the *Amazon SWF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+    #
+    # @option params [required, String] :domain
+    #   The name of the domain in which the workflow type is registered.
+    #
+    # @option params [required, Types::WorkflowType] :workflow_type
+    #   The workflow type to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workflow_type({
+    #     domain: "DomainName", # required
+    #     workflow_type: { # required
+    #       name: "Name", # required
+    #       version: "Version", # required
+    #     },
+    #   })
+    #
+    # @overload delete_workflow_type(params = {})
+    # @param [Hash] params ({})
+    def delete_workflow_type(params = {}, options = {})
+      req = build_request(:delete_workflow_type, params)
+      req.send_request(options)
+    end
+
     # Deprecates the specified *activity type*. After an activity type has
     # been deprecated, you cannot create new tasks of that activity type.
     # Tasks of this type that were scheduled before the type was deprecated
     # continue to run.
-    #
-    # <note markdown="1"> This operation is eventually consistent. The results are best effort
-    # and may not exactly reflect recent updates and changes.
-    #
-    #  </note>
     #
     # **Access Control**
     #
@@ -4382,7 +4530,7 @@ module Aws::SWF
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-swf'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

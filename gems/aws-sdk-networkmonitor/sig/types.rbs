@@ -1,0 +1,276 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::NetworkMonitor
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateMonitorInput
+      attr_accessor monitor_name: ::String
+      attr_accessor probes: ::Array[Types::CreateMonitorProbeInput]
+      attr_accessor aggregation_period: ::Integer
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateMonitorOutput
+      attr_accessor monitor_arn: ::String
+      attr_accessor monitor_name: ::String
+      attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING")
+      attr_accessor aggregation_period: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateMonitorProbeInput
+      attr_accessor source_arn: ::String
+      attr_accessor destination: ::String
+      attr_accessor destination_port: ::Integer
+      attr_accessor protocol: ("TCP" | "ICMP")
+      attr_accessor packet_size: ::Integer
+      attr_accessor probe_tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProbeInput
+      attr_accessor monitor_name: ::String
+      attr_accessor probe: Types::ProbeInput
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateProbeOutput
+      attr_accessor probe_id: ::String
+      attr_accessor probe_arn: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor destination: ::String
+      attr_accessor destination_port: ::Integer
+      attr_accessor protocol: ("TCP" | "ICMP")
+      attr_accessor packet_size: ::Integer
+      attr_accessor address_family: ("IPV4" | "IPV6")
+      attr_accessor vpc_id: ::String
+      attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteMonitorInput
+      attr_accessor monitor_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteMonitorOutput < Aws::EmptyStructure
+    end
+
+    class DeleteProbeInput
+      attr_accessor monitor_name: ::String
+      attr_accessor probe_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteProbeOutput < Aws::EmptyStructure
+    end
+
+    class GetMonitorInput
+      attr_accessor monitor_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetMonitorOutput
+      attr_accessor monitor_arn: ::String
+      attr_accessor monitor_name: ::String
+      attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING")
+      attr_accessor aggregation_period: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor probes: ::Array[Types::Probe]
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetProbeInput
+      attr_accessor monitor_name: ::String
+      attr_accessor probe_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetProbeOutput
+      attr_accessor probe_id: ::String
+      attr_accessor probe_arn: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor destination: ::String
+      attr_accessor destination_port: ::Integer
+      attr_accessor protocol: ("TCP" | "ICMP")
+      attr_accessor packet_size: ::Integer
+      attr_accessor address_family: ("IPV4" | "IPV6")
+      attr_accessor vpc_id: ::String
+      attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListMonitorsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor state: ::String
+      SENSITIVE: []
+    end
+
+    class ListMonitorsOutput
+      attr_accessor monitors: ::Array[Types::MonitorSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceOutput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MonitorSummary
+      attr_accessor monitor_arn: ::String
+      attr_accessor monitor_name: ::String
+      attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING")
+      attr_accessor aggregation_period: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Probe
+      attr_accessor probe_id: ::String
+      attr_accessor probe_arn: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor destination: ::String
+      attr_accessor destination_port: ::Integer
+      attr_accessor protocol: ("TCP" | "ICMP")
+      attr_accessor packet_size: ::Integer
+      attr_accessor address_family: ("IPV4" | "IPV6")
+      attr_accessor vpc_id: ::String
+      attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ProbeInput
+      attr_accessor source_arn: ::String
+      attr_accessor destination: ::String
+      attr_accessor destination_port: ::Integer
+      attr_accessor protocol: ("TCP" | "ICMP")
+      attr_accessor packet_size: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceOutput < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceInput
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateMonitorInput
+      attr_accessor monitor_name: ::String
+      attr_accessor aggregation_period: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateMonitorOutput
+      attr_accessor monitor_arn: ::String
+      attr_accessor monitor_name: ::String
+      attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING")
+      attr_accessor aggregation_period: ::Integer
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateProbeInput
+      attr_accessor monitor_name: ::String
+      attr_accessor probe_id: ::String
+      attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING" | "DELETED")
+      attr_accessor destination: ::String
+      attr_accessor destination_port: ::Integer
+      attr_accessor protocol: ("TCP" | "ICMP")
+      attr_accessor packet_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateProbeOutput
+      attr_accessor probe_id: ::String
+      attr_accessor probe_arn: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor destination: ::String
+      attr_accessor destination_port: ::Integer
+      attr_accessor protocol: ("TCP" | "ICMP")
+      attr_accessor packet_size: ::Integer
+      attr_accessor address_family: ("IPV4" | "IPV6")
+      attr_accessor vpc_id: ::String
+      attr_accessor state: ("PENDING" | "ACTIVE" | "INACTIVE" | "ERROR" | "DELETING" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor modified_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,113 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Glacier
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html
+    class Job
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#initialize-instance_method
+      def initialize: (String account_id, String vault_name, String id, Hash[Symbol, untyped] options) -> void
+                    | (account_id: String, vault_name: String, id: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#account_id-instance_method
+      def account_id: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#vault_name-instance_method
+      def vault_name: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#id-instance_method
+      def id: () -> String
+      alias job_id id
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#job_description-instance_method
+      def job_description: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#action-instance_method
+      def action: () -> ("ArchiveRetrieval" | "InventoryRetrieval" | "Select")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#archive_id-instance_method
+      def archive_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#vault_arn-instance_method
+      def vault_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#creation_date-instance_method
+      def creation_date: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#completed-instance_method
+      def completed: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#status_code-instance_method
+      def status_code: () -> ("InProgress" | "Succeeded" | "Failed")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#status_message-instance_method
+      def status_message: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#archive_size_in_bytes-instance_method
+      def archive_size_in_bytes: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#inventory_size_in_bytes-instance_method
+      def inventory_size_in_bytes: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#sns_topic-instance_method
+      def sns_topic: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#completion_date-instance_method
+      def completion_date: () -> ::Time
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#sha256_tree_hash-instance_method
+      def sha256_tree_hash: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#archive_sha256_tree_hash-instance_method
+      def archive_sha256_tree_hash: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#retrieval_byte_range-instance_method
+      def retrieval_byte_range: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#tier-instance_method
+      def tier: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#inventory_retrieval_parameters-instance_method
+      def inventory_retrieval_parameters: () -> Types::InventoryRetrievalJobDescription
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#job_output_path-instance_method
+      def job_output_path: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#select_parameters-instance_method
+      def select_parameters: () -> Types::SelectParameters
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#output_location-instance_method
+      def output_location: () -> Types::OutputLocation
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#data-instance_method
+      def data: () -> Types::GlacierJobDescription
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#get_output-instance_method
+      def get_output: (
+                        ?range: ::String
+                      ) -> Types::GetJobOutputOutput
+                    | (?Hash[Symbol, untyped]) -> Types::GetJobOutputOutput
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Job.html#vault-instance_method
+      def vault: () -> Vault
+
+      class Collection < ::Aws::Resources::Collection[Job]
+      end
+    end
+  end
+end

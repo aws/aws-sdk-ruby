@@ -28,6 +28,7 @@ module Aws::Kinesis
     CreateStreamInput = Shapes::StructureShape.new(name: 'CreateStreamInput')
     Data = Shapes::BlobShape.new(name: 'Data')
     DecreaseStreamRetentionPeriodInput = Shapes::StructureShape.new(name: 'DecreaseStreamRetentionPeriodInput')
+    DeleteResourcePolicyInput = Shapes::StructureShape.new(name: 'DeleteResourcePolicyInput')
     DeleteStreamInput = Shapes::StructureShape.new(name: 'DeleteStreamInput')
     DeregisterStreamConsumerInput = Shapes::StructureShape.new(name: 'DeregisterStreamConsumerInput')
     DescribeLimitsInput = Shapes::StructureShape.new(name: 'DescribeLimitsInput')
@@ -52,6 +53,8 @@ module Aws::Kinesis
     GetRecordsInput = Shapes::StructureShape.new(name: 'GetRecordsInput')
     GetRecordsInputLimit = Shapes::IntegerShape.new(name: 'GetRecordsInputLimit')
     GetRecordsOutput = Shapes::StructureShape.new(name: 'GetRecordsOutput')
+    GetResourcePolicyInput = Shapes::StructureShape.new(name: 'GetResourcePolicyInput')
+    GetResourcePolicyOutput = Shapes::StructureShape.new(name: 'GetResourcePolicyOutput')
     GetShardIteratorInput = Shapes::StructureShape.new(name: 'GetShardIteratorInput')
     GetShardIteratorOutput = Shapes::StructureShape.new(name: 'GetShardIteratorOutput')
     HashKey = Shapes::StringShape.new(name: 'HashKey')
@@ -87,6 +90,7 @@ module Aws::Kinesis
     OnDemandStreamCountLimitObject = Shapes::IntegerShape.new(name: 'OnDemandStreamCountLimitObject')
     OnDemandStreamCountObject = Shapes::IntegerShape.new(name: 'OnDemandStreamCountObject')
     PartitionKey = Shapes::StringShape.new(name: 'PartitionKey')
+    Policy = Shapes::StringShape.new(name: 'Policy')
     PositiveIntegerObject = Shapes::IntegerShape.new(name: 'PositiveIntegerObject')
     ProvisionedThroughputExceededException = Shapes::StructureShape.new(name: 'ProvisionedThroughputExceededException')
     PutRecordInput = Shapes::StructureShape.new(name: 'PutRecordInput')
@@ -97,11 +101,13 @@ module Aws::Kinesis
     PutRecordsRequestEntryList = Shapes::ListShape.new(name: 'PutRecordsRequestEntryList')
     PutRecordsResultEntry = Shapes::StructureShape.new(name: 'PutRecordsResultEntry')
     PutRecordsResultEntryList = Shapes::ListShape.new(name: 'PutRecordsResultEntryList')
+    PutResourcePolicyInput = Shapes::StructureShape.new(name: 'PutResourcePolicyInput')
     Record = Shapes::StructureShape.new(name: 'Record')
     RecordList = Shapes::ListShape.new(name: 'RecordList')
     RegisterStreamConsumerInput = Shapes::StructureShape.new(name: 'RegisterStreamConsumerInput')
     RegisterStreamConsumerOutput = Shapes::StructureShape.new(name: 'RegisterStreamConsumerOutput')
     RemoveTagsFromStreamInput = Shapes::StructureShape.new(name: 'RemoveTagsFromStreamInput')
+    ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RetentionPeriodHours = Shapes::IntegerShape.new(name: 'RetentionPeriodHours')
@@ -187,6 +193,9 @@ module Aws::Kinesis
     DecreaseStreamRetentionPeriodInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam"=>{"name"=>"StreamARN"}}))
     DecreaseStreamRetentionPeriodInput.struct_class = Types::DecreaseStreamRetentionPeriodInput
 
+    DeleteResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN", metadata: {"contextParam"=>{"name"=>"ResourceARN"}}))
+    DeleteResourcePolicyInput.struct_class = Types::DeleteResourcePolicyInput
+
     DeleteStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     DeleteStreamInput.add_member(:enforce_consumer_deletion, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnforceConsumerDeletion"))
     DeleteStreamInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam"=>{"name"=>"StreamARN"}}))
@@ -266,6 +275,12 @@ module Aws::Kinesis
     GetRecordsOutput.add_member(:millis_behind_latest, Shapes::ShapeRef.new(shape: MillisBehindLatest, location_name: "MillisBehindLatest"))
     GetRecordsOutput.add_member(:child_shards, Shapes::ShapeRef.new(shape: ChildShardList, location_name: "ChildShards"))
     GetRecordsOutput.struct_class = Types::GetRecordsOutput
+
+    GetResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN", metadata: {"contextParam"=>{"name"=>"ResourceARN"}}))
+    GetResourcePolicyInput.struct_class = Types::GetResourcePolicyInput
+
+    GetResourcePolicyOutput.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
+    GetResourcePolicyOutput.struct_class = Types::GetResourcePolicyOutput
 
     GetShardIteratorInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     GetShardIteratorInput.add_member(:shard_id, Shapes::ShapeRef.new(shape: ShardId, required: true, location_name: "ShardId"))
@@ -406,6 +421,10 @@ module Aws::Kinesis
     PutRecordsResultEntry.struct_class = Types::PutRecordsResultEntry
 
     PutRecordsResultEntryList.member = Shapes::ShapeRef.new(shape: PutRecordsResultEntry)
+
+    PutResourcePolicyInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN", metadata: {"contextParam"=>{"name"=>"ResourceARN"}}))
+    PutResourcePolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "Policy"))
+    PutResourcePolicyInput.struct_class = Types::PutResourcePolicyInput
 
     Record.add_member(:sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, required: true, location_name: "SequenceNumber"))
     Record.add_member(:approximate_arrival_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ApproximateArrivalTimestamp"))
@@ -630,6 +649,19 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
       api.add_operation(:delete_stream, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteStream"
         o.http_method = "POST"
@@ -748,6 +780,18 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: KMSOptInRequired)
         o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResourcePolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: GetResourcePolicyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
       end)
 
       api.add_operation(:get_shard_iterator, Seahorse::Model::Operation.new.tap do |o|
@@ -886,6 +930,19 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: KMSOptInRequired)
         o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:register_stream_consumer, Seahorse::Model::Operation.new.tap do |o|

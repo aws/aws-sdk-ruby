@@ -1,0 +1,701 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::PcaConnectorAd
+  module Types
+
+    class AccessControlEntry
+      attr_accessor access_rights: Types::AccessRights
+      attr_accessor created_at: ::Time
+      attr_accessor group_display_name: ::String
+      attr_accessor group_security_identifier: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AccessControlEntrySummary
+      attr_accessor access_rights: Types::AccessRights
+      attr_accessor created_at: ::Time
+      attr_accessor group_display_name: ::String
+      attr_accessor group_security_identifier: ::String
+      attr_accessor template_arn: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessRights
+      attr_accessor auto_enroll: ("ALLOW" | "DENY")
+      attr_accessor enroll: ("ALLOW" | "DENY")
+      SENSITIVE: []
+    end
+
+    class ApplicationPolicies
+      attr_accessor critical: bool
+      attr_accessor policies: ::Array[Types::ApplicationPolicy]
+      SENSITIVE: []
+    end
+
+    class ApplicationPolicy
+      attr_accessor policy_object_identifier: ::String
+      attr_accessor policy_type: ("ALL_APPLICATION_POLICIES" | "ANY_PURPOSE" | "ATTESTATION_IDENTITY_KEY_CERTIFICATE" | "CERTIFICATE_REQUEST_AGENT" | "CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "CTL_USAGE" | "DIGITAL_RIGHTS" | "DIRECTORY_SERVICE_EMAIL_REPLICATION" | "DISALLOWED_LIST" | "DNS_SERVER_TRUST" | "DOCUMENT_ENCRYPTION" | "DOCUMENT_SIGNING" | "DYNAMIC_CODE_GENERATOR" | "EARLY_LAUNCH_ANTIMALWARE_DRIVER" | "EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "ENCLAVE" | "ENCRYPTING_FILE_SYSTEM" | "ENDORSEMENT_KEY_CERTIFICATE" | "FILE_RECOVERY" | "HAL_EXTENSION" | "IP_SECURITY_END_SYSTEM" | "IP_SECURITY_IKE_INTERMEDIATE" | "IP_SECURITY_TUNNEL_TERMINATION" | "IP_SECURITY_USER" | "ISOLATED_USER_MODE" | "KDC_AUTHENTICATION" | "KERNEL_MODE_CODE_SIGNING" | "KEY_PACK_LICENSES" | "KEY_RECOVERY" | "KEY_RECOVERY_AGENT" | "LICENSE_SERVER_VERIFICATION" | "LIFETIME_SIGNING" | "MICROSOFT_PUBLISHER" | "MICROSOFT_TIME_STAMPING" | "MICROSOFT_TRUST_LIST_SIGNING" | "OCSP_SIGNING" | "OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "PLATFORM_CERTIFICATE" | "PREVIEW_BUILD_SIGNING" | "PRIVATE_KEY_ARCHIVAL" | "PROTECTED_PROCESS_LIGHT_VERIFICATION" | "PROTECTED_PROCESS_VERIFICATION" | "QUALIFIED_SUBORDINATION" | "REVOKED_LIST_SIGNER" | "ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION" | "ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION" | "ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL" | "ROOT_LIST_SIGNER" | "SECURE_EMAIL" | "SERVER_AUTHENTICATION" | "SMART_CARD_LOGIN" | "SPC_ENCRYPTED_DIGEST_RETRY_COUNT" | "SPC_RELAXED_PE_MARKER_CHECK" | "TIME_STAMPING" | "WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_VERIFICATION" | "WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION" | "WINDOWS_KITS_COMPONENT" | "WINDOWS_RT_VERIFICATION" | "WINDOWS_SOFTWARE_EXTENSION_VERIFICATION" | "WINDOWS_STORE" | "WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "WINDOWS_TCB_COMPONENT" | "WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT" | "WINDOWS_UPDATE")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PolicyObjectIdentifier < ApplicationPolicy
+      end
+      class PolicyType < ApplicationPolicy
+      end
+      class Unknown < ApplicationPolicy
+      end
+    end
+
+    class CertificateValidity
+      attr_accessor renewal_period: Types::ValidityPeriod
+      attr_accessor validity_period: Types::ValidityPeriod
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class Connector
+      attr_accessor arn: ::String
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor certificate_enrollment_policy_server_endpoint: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor directory_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor status_reason: ("DIRECTORY_ACCESS_DENIED" | "INTERNAL_FAILURE" | "PRIVATECA_ACCESS_DENIED" | "PRIVATECA_RESOURCE_NOT_FOUND" | "SECURITY_GROUP_NOT_IN_VPC" | "VPC_ACCESS_DENIED" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "VPC_RESOURCE_NOT_FOUND")
+      attr_accessor updated_at: ::Time
+      attr_accessor vpc_information: Types::VpcInformation
+      SENSITIVE: []
+    end
+
+    class ConnectorSummary
+      attr_accessor arn: ::String
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor certificate_enrollment_policy_server_endpoint: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor directory_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor status_reason: ("DIRECTORY_ACCESS_DENIED" | "INTERNAL_FAILURE" | "PRIVATECA_ACCESS_DENIED" | "PRIVATECA_RESOURCE_NOT_FOUND" | "SECURITY_GROUP_NOT_IN_VPC" | "VPC_ACCESS_DENIED" | "VPC_ENDPOINT_LIMIT_EXCEEDED" | "VPC_RESOURCE_NOT_FOUND")
+      attr_accessor updated_at: ::Time
+      attr_accessor vpc_information: Types::VpcInformation
+      SENSITIVE: []
+    end
+
+    class CreateConnectorRequest
+      attr_accessor certificate_authority_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor vpc_information: Types::VpcInformation
+      SENSITIVE: []
+    end
+
+    class CreateConnectorResponse
+      attr_accessor connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDirectoryRegistrationRequest
+      attr_accessor client_token: ::String
+      attr_accessor directory_id: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateDirectoryRegistrationResponse
+      attr_accessor directory_registration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateServicePrincipalNameRequest
+      attr_accessor client_token: ::String
+      attr_accessor connector_arn: ::String
+      attr_accessor directory_registration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTemplateGroupAccessControlEntryRequest
+      attr_accessor access_rights: Types::AccessRights
+      attr_accessor client_token: ::String
+      attr_accessor group_display_name: ::String
+      attr_accessor group_security_identifier: ::String
+      attr_accessor template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTemplateRequest
+      attr_accessor client_token: ::String
+      attr_accessor connector_arn: ::String
+      attr_accessor definition: Types::TemplateDefinition
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateTemplateResponse
+      attr_accessor template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConnectorRequest
+      attr_accessor connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDirectoryRegistrationRequest
+      attr_accessor directory_registration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServicePrincipalNameRequest
+      attr_accessor connector_arn: ::String
+      attr_accessor directory_registration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTemplateGroupAccessControlEntryRequest
+      attr_accessor group_security_identifier: ::String
+      attr_accessor template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTemplateRequest
+      attr_accessor template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DirectoryRegistration
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor directory_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor status_reason: ("DIRECTORY_ACCESS_DENIED" | "DIRECTORY_RESOURCE_NOT_FOUND" | "DIRECTORY_NOT_ACTIVE" | "DIRECTORY_NOT_REACHABLE" | "DIRECTORY_TYPE_NOT_SUPPORTED" | "INTERNAL_FAILURE")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DirectoryRegistrationSummary
+      attr_accessor arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor directory_id: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor status_reason: ("DIRECTORY_ACCESS_DENIED" | "DIRECTORY_RESOURCE_NOT_FOUND" | "DIRECTORY_NOT_ACTIVE" | "DIRECTORY_NOT_REACHABLE" | "DIRECTORY_TYPE_NOT_SUPPORTED" | "INTERNAL_FAILURE")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class EnrollmentFlagsV2
+      attr_accessor enable_key_reuse_on_nt_token_keyset_storage_full: bool
+      attr_accessor include_symmetric_algorithms: bool
+      attr_accessor no_security_extension: bool
+      attr_accessor remove_invalid_certificate_from_personal_store: bool
+      attr_accessor user_interaction_required: bool
+      SENSITIVE: []
+    end
+
+    class EnrollmentFlagsV3
+      attr_accessor enable_key_reuse_on_nt_token_keyset_storage_full: bool
+      attr_accessor include_symmetric_algorithms: bool
+      attr_accessor no_security_extension: bool
+      attr_accessor remove_invalid_certificate_from_personal_store: bool
+      attr_accessor user_interaction_required: bool
+      SENSITIVE: []
+    end
+
+    class EnrollmentFlagsV4
+      attr_accessor enable_key_reuse_on_nt_token_keyset_storage_full: bool
+      attr_accessor include_symmetric_algorithms: bool
+      attr_accessor no_security_extension: bool
+      attr_accessor remove_invalid_certificate_from_personal_store: bool
+      attr_accessor user_interaction_required: bool
+      SENSITIVE: []
+    end
+
+    class ExtensionsV2
+      attr_accessor application_policies: Types::ApplicationPolicies
+      attr_accessor key_usage: Types::KeyUsage
+      SENSITIVE: []
+    end
+
+    class ExtensionsV3
+      attr_accessor application_policies: Types::ApplicationPolicies
+      attr_accessor key_usage: Types::KeyUsage
+      SENSITIVE: []
+    end
+
+    class ExtensionsV4
+      attr_accessor application_policies: Types::ApplicationPolicies
+      attr_accessor key_usage: Types::KeyUsage
+      SENSITIVE: []
+    end
+
+    class GeneralFlagsV2
+      attr_accessor auto_enrollment: bool
+      attr_accessor machine_type: bool
+      SENSITIVE: []
+    end
+
+    class GeneralFlagsV3
+      attr_accessor auto_enrollment: bool
+      attr_accessor machine_type: bool
+      SENSITIVE: []
+    end
+
+    class GeneralFlagsV4
+      attr_accessor auto_enrollment: bool
+      attr_accessor machine_type: bool
+      SENSITIVE: []
+    end
+
+    class GetConnectorRequest
+      attr_accessor connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetConnectorResponse
+      attr_accessor connector: Types::Connector
+      SENSITIVE: []
+    end
+
+    class GetDirectoryRegistrationRequest
+      attr_accessor directory_registration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDirectoryRegistrationResponse
+      attr_accessor directory_registration: Types::DirectoryRegistration
+      SENSITIVE: []
+    end
+
+    class GetServicePrincipalNameRequest
+      attr_accessor connector_arn: ::String
+      attr_accessor directory_registration_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetServicePrincipalNameResponse
+      attr_accessor service_principal_name: Types::ServicePrincipalName
+      SENSITIVE: []
+    end
+
+    class GetTemplateGroupAccessControlEntryRequest
+      attr_accessor group_security_identifier: ::String
+      attr_accessor template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTemplateGroupAccessControlEntryResponse
+      attr_accessor access_control_entry: Types::AccessControlEntry
+      SENSITIVE: []
+    end
+
+    class GetTemplateRequest
+      attr_accessor template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTemplateResponse
+      attr_accessor template: Types::Template
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KeyUsage
+      attr_accessor critical: bool
+      attr_accessor usage_flags: Types::KeyUsageFlags
+      SENSITIVE: []
+    end
+
+    class KeyUsageFlags
+      attr_accessor data_encipherment: bool
+      attr_accessor digital_signature: bool
+      attr_accessor key_agreement: bool
+      attr_accessor key_encipherment: bool
+      attr_accessor non_repudiation: bool
+      SENSITIVE: []
+    end
+
+    class KeyUsageProperty
+      attr_accessor property_flags: Types::KeyUsagePropertyFlags
+      attr_accessor property_type: ("ALL")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PropertyFlags < KeyUsageProperty
+      end
+      class PropertyType < KeyUsageProperty
+      end
+      class Unknown < KeyUsageProperty
+      end
+    end
+
+    class KeyUsagePropertyFlags
+      attr_accessor decrypt: bool
+      attr_accessor key_agreement: bool
+      attr_accessor sign: bool
+      SENSITIVE: []
+    end
+
+    class ListConnectorsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConnectorsResponse
+      attr_accessor connectors: ::Array[Types::ConnectorSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDirectoryRegistrationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDirectoryRegistrationsResponse
+      attr_accessor directory_registrations: ::Array[Types::DirectoryRegistrationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicePrincipalNamesRequest
+      attr_accessor directory_registration_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListServicePrincipalNamesResponse
+      attr_accessor next_token: ::String
+      attr_accessor service_principal_names: ::Array[Types::ServicePrincipalNameSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListTemplateGroupAccessControlEntriesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTemplateGroupAccessControlEntriesResponse
+      attr_accessor access_control_entries: ::Array[Types::AccessControlEntrySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTemplatesRequest
+      attr_accessor connector_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTemplatesResponse
+      attr_accessor next_token: ::String
+      attr_accessor templates: ::Array[Types::TemplateSummary]
+      SENSITIVE: []
+    end
+
+    class PrivateKeyAttributesV2
+      attr_accessor crypto_providers: ::Array[::String]
+      attr_accessor key_spec: ("KEY_EXCHANGE" | "SIGNATURE")
+      attr_accessor minimal_key_length: ::Integer
+      SENSITIVE: []
+    end
+
+    class PrivateKeyAttributesV3
+      attr_accessor algorithm: ("RSA" | "ECDH_P256" | "ECDH_P384" | "ECDH_P521")
+      attr_accessor crypto_providers: ::Array[::String]
+      attr_accessor key_spec: ("KEY_EXCHANGE" | "SIGNATURE")
+      attr_accessor key_usage_property: Types::KeyUsageProperty
+      attr_accessor minimal_key_length: ::Integer
+      SENSITIVE: []
+    end
+
+    class PrivateKeyAttributesV4
+      attr_accessor algorithm: ("RSA" | "ECDH_P256" | "ECDH_P384" | "ECDH_P521")
+      attr_accessor crypto_providers: ::Array[::String]
+      attr_accessor key_spec: ("KEY_EXCHANGE" | "SIGNATURE")
+      attr_accessor key_usage_property: Types::KeyUsageProperty
+      attr_accessor minimal_key_length: ::Integer
+      SENSITIVE: []
+    end
+
+    class PrivateKeyFlagsV2
+      attr_accessor client_version: ("WINDOWS_SERVER_2003" | "WINDOWS_SERVER_2008" | "WINDOWS_SERVER_2008_R2" | "WINDOWS_SERVER_2012" | "WINDOWS_SERVER_2012_R2" | "WINDOWS_SERVER_2016")
+      attr_accessor exportable_key: bool
+      attr_accessor strong_key_protection_required: bool
+      SENSITIVE: []
+    end
+
+    class PrivateKeyFlagsV3
+      attr_accessor client_version: ("WINDOWS_SERVER_2008" | "WINDOWS_SERVER_2008_R2" | "WINDOWS_SERVER_2012" | "WINDOWS_SERVER_2012_R2" | "WINDOWS_SERVER_2016")
+      attr_accessor exportable_key: bool
+      attr_accessor require_alternate_signature_algorithm: bool
+      attr_accessor strong_key_protection_required: bool
+      SENSITIVE: []
+    end
+
+    class PrivateKeyFlagsV4
+      attr_accessor client_version: ("WINDOWS_SERVER_2012" | "WINDOWS_SERVER_2012_R2" | "WINDOWS_SERVER_2016")
+      attr_accessor exportable_key: bool
+      attr_accessor require_alternate_signature_algorithm: bool
+      attr_accessor require_same_key_renewal: bool
+      attr_accessor strong_key_protection_required: bool
+      attr_accessor use_legacy_provider: bool
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class ServicePrincipalName
+      attr_accessor connector_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor directory_registration_arn: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor status_reason: ("DIRECTORY_ACCESS_DENIED" | "DIRECTORY_NOT_REACHABLE" | "DIRECTORY_RESOURCE_NOT_FOUND" | "SPN_EXISTS_ON_DIFFERENT_AD_OBJECT" | "INTERNAL_FAILURE")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ServicePrincipalNameSummary
+      attr_accessor connector_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor directory_registration_arn: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
+      attr_accessor status_reason: ("DIRECTORY_ACCESS_DENIED" | "DIRECTORY_NOT_REACHABLE" | "DIRECTORY_RESOURCE_NOT_FOUND" | "SPN_EXISTS_ON_DIFFERENT_AD_OBJECT" | "INTERNAL_FAILURE")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class SubjectNameFlagsV2
+      attr_accessor require_common_name: bool
+      attr_accessor require_directory_path: bool
+      attr_accessor require_dns_as_cn: bool
+      attr_accessor require_email: bool
+      attr_accessor san_require_directory_guid: bool
+      attr_accessor san_require_dns: bool
+      attr_accessor san_require_domain_dns: bool
+      attr_accessor san_require_email: bool
+      attr_accessor san_require_spn: bool
+      attr_accessor san_require_upn: bool
+      SENSITIVE: []
+    end
+
+    class SubjectNameFlagsV3
+      attr_accessor require_common_name: bool
+      attr_accessor require_directory_path: bool
+      attr_accessor require_dns_as_cn: bool
+      attr_accessor require_email: bool
+      attr_accessor san_require_directory_guid: bool
+      attr_accessor san_require_dns: bool
+      attr_accessor san_require_domain_dns: bool
+      attr_accessor san_require_email: bool
+      attr_accessor san_require_spn: bool
+      attr_accessor san_require_upn: bool
+      SENSITIVE: []
+    end
+
+    class SubjectNameFlagsV4
+      attr_accessor require_common_name: bool
+      attr_accessor require_directory_path: bool
+      attr_accessor require_dns_as_cn: bool
+      attr_accessor require_email: bool
+      attr_accessor san_require_directory_guid: bool
+      attr_accessor san_require_dns: bool
+      attr_accessor san_require_domain_dns: bool
+      attr_accessor san_require_email: bool
+      attr_accessor san_require_spn: bool
+      attr_accessor san_require_upn: bool
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Template
+      attr_accessor arn: ::String
+      attr_accessor connector_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor definition: Types::TemplateDefinition
+      attr_accessor name: ::String
+      attr_accessor object_identifier: ::String
+      attr_accessor policy_schema: ::Integer
+      attr_accessor revision: Types::TemplateRevision
+      attr_accessor status: ("ACTIVE" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class TemplateDefinition
+      attr_accessor template_v2: Types::TemplateV2
+      attr_accessor template_v3: Types::TemplateV3
+      attr_accessor template_v4: Types::TemplateV4
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TemplateV2 < TemplateDefinition
+      end
+      class TemplateV3 < TemplateDefinition
+      end
+      class TemplateV4 < TemplateDefinition
+      end
+      class Unknown < TemplateDefinition
+      end
+    end
+
+    class TemplateRevision
+      attr_accessor major_revision: ::Integer
+      attr_accessor minor_revision: ::Integer
+      SENSITIVE: []
+    end
+
+    class TemplateSummary
+      attr_accessor arn: ::String
+      attr_accessor connector_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor definition: Types::TemplateDefinition
+      attr_accessor name: ::String
+      attr_accessor object_identifier: ::String
+      attr_accessor policy_schema: ::Integer
+      attr_accessor revision: Types::TemplateRevision
+      attr_accessor status: ("ACTIVE" | "DELETING")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class TemplateV2
+      attr_accessor certificate_validity: Types::CertificateValidity
+      attr_accessor enrollment_flags: Types::EnrollmentFlagsV2
+      attr_accessor extensions: Types::ExtensionsV2
+      attr_accessor general_flags: Types::GeneralFlagsV2
+      attr_accessor private_key_attributes: Types::PrivateKeyAttributesV2
+      attr_accessor private_key_flags: Types::PrivateKeyFlagsV2
+      attr_accessor subject_name_flags: Types::SubjectNameFlagsV2
+      attr_accessor superseded_templates: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TemplateV3
+      attr_accessor certificate_validity: Types::CertificateValidity
+      attr_accessor enrollment_flags: Types::EnrollmentFlagsV3
+      attr_accessor extensions: Types::ExtensionsV3
+      attr_accessor general_flags: Types::GeneralFlagsV3
+      attr_accessor hash_algorithm: ("SHA256" | "SHA384" | "SHA512")
+      attr_accessor private_key_attributes: Types::PrivateKeyAttributesV3
+      attr_accessor private_key_flags: Types::PrivateKeyFlagsV3
+      attr_accessor subject_name_flags: Types::SubjectNameFlagsV3
+      attr_accessor superseded_templates: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class TemplateV4
+      attr_accessor certificate_validity: Types::CertificateValidity
+      attr_accessor enrollment_flags: Types::EnrollmentFlagsV4
+      attr_accessor extensions: Types::ExtensionsV4
+      attr_accessor general_flags: Types::GeneralFlagsV4
+      attr_accessor hash_algorithm: ("SHA256" | "SHA384" | "SHA512")
+      attr_accessor private_key_attributes: Types::PrivateKeyAttributesV4
+      attr_accessor private_key_flags: Types::PrivateKeyFlagsV4
+      attr_accessor subject_name_flags: Types::SubjectNameFlagsV4
+      attr_accessor superseded_templates: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateTemplateGroupAccessControlEntryRequest
+      attr_accessor access_rights: Types::AccessRights
+      attr_accessor group_display_name: ::String
+      attr_accessor group_security_identifier: ::String
+      attr_accessor template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTemplateRequest
+      attr_accessor definition: Types::TemplateDefinition
+      attr_accessor reenroll_all_certificate_holders: bool
+      attr_accessor template_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("FIELD_VALIDATION_FAILED" | "INVALID_PERMISSION" | "INVALID_STATE" | "MISMATCHED_CONNECTOR" | "MISMATCHED_VPC" | "NO_CLIENT_TOKEN" | "UNKNOWN_OPERATION" | "OTHER")
+      SENSITIVE: []
+    end
+
+    class ValidityPeriod
+      attr_accessor period: ::Integer
+      attr_accessor period_type: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+      SENSITIVE: []
+    end
+
+    class VpcInformation
+      attr_accessor security_group_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.82.0 (2024-05-22)
+------------------
+
+* Feature - You can now use Security Lake to collect web ACL traffic data.
+
+1.81.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.79.0 (2024-04-11)
+------------------
+
+* Feature - Adds an updated version of smoke tests, including smithy trait, for SDK testing.
+
+1.78.0 (2024-03-07)
+------------------
+
+* Feature - You can increase the max request body inspection size for some regional resources. The size setting is in the web ACL association config. Also, the AWSManagedRulesBotControlRuleSet EnableMachineLearning setting now takes a Boolean instead of a primitive boolean type, for languages like Java.
+
+1.77.0 (2024-02-28)
+------------------
+
+* Feature - AWS WAF now supports configurable time windows for request aggregation with rate-based rules. Customers can now select time windows of 1 minute, 2 minutes or 10 minutes, in addition to the previously supported 5 minutes.
+
+1.76.0 (2024-02-06)
+------------------
+
+* Feature - You can now delete an API key that you've created for use with your CAPTCHA JavaScript integration API.
+
+1.75.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.74.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.72.0 (2023-10-27)
+------------------
+
+* Feature - Updates the descriptions for the calls that manage web ACL associations, to provide information for customer-managed IAM policies.
+
 1.71.0 (2023-09-28)
 ------------------
 

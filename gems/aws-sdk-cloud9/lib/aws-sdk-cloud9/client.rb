@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Cloud9
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Cloud9
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::Cloud9
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::Cloud9
     #   @option options [Aws::Cloud9::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Cloud9::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -430,30 +455,30 @@ module Aws::Cloud9
     #   The ID of the subnet in Amazon VPC that Cloud9 will use to communicate
     #   with the Amazon EC2 instance.
     #
-    # @option params [String] :image_id
+    # @option params [required, String] :image_id
     #   The identifier for the Amazon Machine Image (AMI) that's used to
     #   create the EC2 instance. To choose an AMI for the instance, you must
     #   specify a valid AMI alias or a valid Amazon EC2 Systems Manager (SSM)
     #   path.
     #
-    #   The default Amazon Linux AMI is currently used if the parameter isn't
-    #   explicitly assigned a value in the request. Because Amazon Linux AMI
-    #   has ended standard support as of December 31, 2020, we recommend you
-    #   choose Amazon Linux 2, which includes long term support through 2023.
+    #   From December 04, 2023, you will be required to include the `imageId`
+    #   parameter for the `CreateEnvironmentEC2` action. This change will be
+    #   reflected across all direct methods of communicating with the API,
+    #   such as Amazon Web Services SDK, Amazon Web Services CLI and Amazon
+    #   Web Services CloudFormation. This change will only affect direct API
+    #   consumers, and not Cloud9 console users.
     #
-    #   From December 31, 2023, the parameter for Amazon Linux will no longer
-    #   be available when you specify an AMI for your instance. Amazon Linux 2
-    #   will then become the default AMI, which is used to launch your
-    #   instance if no parameter is explicitly defined.
+    #   We recommend using Amazon Linux 2023 as the AMI to create your
+    #   environment as it is fully supported.
     #
     #   Since Ubuntu 18.04 has ended standard support as of May 31, 2023, we
     #   recommend you choose Ubuntu 22.04.
     #
     #   <b>AMI aliases </b>
     #
-    #   * <b>Amazon Linux (default): <code>amazonlinux-1-x86_64</code> </b>
-    #
     #   * Amazon Linux 2: `amazonlinux-2-x86_64`
+    #
+    #   * Amazon Linux 2023 (recommended): `amazonlinux-2023-x86_64`
     #
     #   * Ubuntu 18.04: `ubuntu-18.04-x86_64`
     #
@@ -461,12 +486,11 @@ module Aws::Cloud9
     #
     #   **SSM paths**
     #
-    #   * <b>Amazon Linux (default):
-    #     <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64</code>
-    #     </b>
-    #
     #   * Amazon Linux 2:
     #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64`
+    #
+    #   * Amazon Linux 2023 (recommended):
+    #     `resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2023-x86_64`
     #
     #   * Ubuntu 18.04:
     #     `resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64`
@@ -516,6 +540,7 @@ module Aws::Cloud9
     #     name: "my-demo-environment", 
     #     automatic_stop_time_minutes: 60, 
     #     description: "This is my demonstration environment.", 
+    #     image_id: "amazonlinux-2023-x86_64", 
     #     instance_type: "t2.micro", 
     #     owner_arn: "arn:aws:iam::123456789012:user/MyDemoUser", 
     #     subnet_id: "subnet-6300cd1b", 
@@ -534,7 +559,7 @@ module Aws::Cloud9
     #     client_request_token: "ClientRequestToken",
     #     instance_type: "InstanceType", # required
     #     subnet_id: "SubnetId",
-    #     image_id: "ImageId",
+    #     image_id: "ImageId", # required
     #     automatic_stop_time_minutes: 1,
     #     owner_arn: "UserArn",
     #     tags: [
@@ -1261,7 +1286,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

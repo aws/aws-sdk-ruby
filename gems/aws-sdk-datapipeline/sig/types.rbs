@@ -1,0 +1,349 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::DataPipeline
+  module Types
+
+    class ActivatePipelineInput
+      attr_accessor pipeline_id: ::String
+      attr_accessor parameter_values: ::Array[Types::ParameterValue]
+      attr_accessor start_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ActivatePipelineOutput < Aws::EmptyStructure
+    end
+
+    class AddTagsInput
+      attr_accessor pipeline_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class AddTagsOutput < Aws::EmptyStructure
+    end
+
+    class CreatePipelineInput
+      attr_accessor name: ::String
+      attr_accessor unique_id: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePipelineOutput
+      attr_accessor pipeline_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeactivatePipelineInput
+      attr_accessor pipeline_id: ::String
+      attr_accessor cancel_active: bool
+      SENSITIVE: []
+    end
+
+    class DeactivatePipelineOutput < Aws::EmptyStructure
+    end
+
+    class DeletePipelineInput
+      attr_accessor pipeline_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeObjectsInput
+      attr_accessor pipeline_id: ::String
+      attr_accessor object_ids: ::Array[::String]
+      attr_accessor evaluate_expressions: bool
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeObjectsOutput
+      attr_accessor pipeline_objects: ::Array[Types::PipelineObject]
+      attr_accessor marker: ::String
+      attr_accessor has_more_results: bool
+      SENSITIVE: []
+    end
+
+    class DescribePipelinesInput
+      attr_accessor pipeline_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class DescribePipelinesOutput
+      attr_accessor pipeline_description_list: ::Array[Types::PipelineDescription]
+      SENSITIVE: []
+    end
+
+    class EvaluateExpressionInput
+      attr_accessor pipeline_id: ::String
+      attr_accessor object_id: ::String
+      attr_accessor expression: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluateExpressionOutput
+      attr_accessor evaluated_expression: ::String
+      SENSITIVE: []
+    end
+
+    class Field
+      attr_accessor key: ::String
+      attr_accessor string_value: ::String
+      attr_accessor ref_value: ::String
+      SENSITIVE: []
+    end
+
+    class GetPipelineDefinitionInput
+      attr_accessor pipeline_id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class GetPipelineDefinitionOutput
+      attr_accessor pipeline_objects: ::Array[Types::PipelineObject]
+      attr_accessor parameter_objects: ::Array[Types::ParameterObject]
+      attr_accessor parameter_values: ::Array[Types::ParameterValue]
+      SENSITIVE: []
+    end
+
+    class InstanceIdentity
+      attr_accessor document: ::String
+      attr_accessor signature: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServiceError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListPipelinesInput
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class ListPipelinesOutput
+      attr_accessor pipeline_id_list: ::Array[Types::PipelineIdName]
+      attr_accessor marker: ::String
+      attr_accessor has_more_results: bool
+      SENSITIVE: []
+    end
+
+    class Operator
+      attr_accessor type: ("EQ" | "REF_EQ" | "LE" | "GE" | "BETWEEN")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ParameterAttribute
+      attr_accessor key: ::String
+      attr_accessor string_value: ::String
+      SENSITIVE: []
+    end
+
+    class ParameterObject
+      attr_accessor id: ::String
+      attr_accessor attributes: ::Array[Types::ParameterAttribute]
+      SENSITIVE: []
+    end
+
+    class ParameterValue
+      attr_accessor id: ::String
+      attr_accessor string_value: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineDeletedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineDescription
+      attr_accessor pipeline_id: ::String
+      attr_accessor name: ::String
+      attr_accessor fields: ::Array[Types::Field]
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PipelineIdName
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PipelineObject
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor fields: ::Array[Types::Field]
+      SENSITIVE: []
+    end
+
+    class PollForTaskInput
+      attr_accessor worker_group: ::String
+      attr_accessor hostname: ::String
+      attr_accessor instance_identity: Types::InstanceIdentity
+      SENSITIVE: []
+    end
+
+    class PollForTaskOutput
+      attr_accessor task_object: Types::TaskObject
+      SENSITIVE: []
+    end
+
+    class PutPipelineDefinitionInput
+      attr_accessor pipeline_id: ::String
+      attr_accessor pipeline_objects: ::Array[Types::PipelineObject]
+      attr_accessor parameter_objects: ::Array[Types::ParameterObject]
+      attr_accessor parameter_values: ::Array[Types::ParameterValue]
+      SENSITIVE: []
+    end
+
+    class PutPipelineDefinitionOutput
+      attr_accessor validation_errors: ::Array[Types::ValidationError]
+      attr_accessor validation_warnings: ::Array[Types::ValidationWarning]
+      attr_accessor errored: bool
+      SENSITIVE: []
+    end
+
+    class Query
+      attr_accessor selectors: ::Array[Types::Selector]
+      SENSITIVE: []
+    end
+
+    class QueryObjectsInput
+      attr_accessor pipeline_id: ::String
+      attr_accessor query: Types::Query
+      attr_accessor sphere: ::String
+      attr_accessor marker: ::String
+      attr_accessor limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class QueryObjectsOutput
+      attr_accessor ids: ::Array[::String]
+      attr_accessor marker: ::String
+      attr_accessor has_more_results: bool
+      SENSITIVE: []
+    end
+
+    class RemoveTagsInput
+      attr_accessor pipeline_id: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class RemoveTagsOutput < Aws::EmptyStructure
+    end
+
+    class ReportTaskProgressInput
+      attr_accessor task_id: ::String
+      attr_accessor fields: ::Array[Types::Field]
+      SENSITIVE: []
+    end
+
+    class ReportTaskProgressOutput
+      attr_accessor canceled: bool
+      SENSITIVE: []
+    end
+
+    class ReportTaskRunnerHeartbeatInput
+      attr_accessor taskrunner_id: ::String
+      attr_accessor worker_group: ::String
+      attr_accessor hostname: ::String
+      SENSITIVE: []
+    end
+
+    class ReportTaskRunnerHeartbeatOutput
+      attr_accessor terminate: bool
+      SENSITIVE: []
+    end
+
+    class Selector
+      attr_accessor field_name: ::String
+      attr_accessor operator: Types::Operator
+      SENSITIVE: []
+    end
+
+    class SetStatusInput
+      attr_accessor pipeline_id: ::String
+      attr_accessor object_ids: ::Array[::String]
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class SetTaskStatusInput
+      attr_accessor task_id: ::String
+      attr_accessor task_status: ("FINISHED" | "FAILED" | "FALSE")
+      attr_accessor error_id: ::String
+      attr_accessor error_message: ::String
+      attr_accessor error_stack_trace: ::String
+      SENSITIVE: []
+    end
+
+    class SetTaskStatusOutput < Aws::EmptyStructure
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TaskNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TaskObject
+      attr_accessor task_id: ::String
+      attr_accessor pipeline_id: ::String
+      attr_accessor attempt_id: ::String
+      attr_accessor objects: ::Hash[::String, Types::PipelineObject]
+      SENSITIVE: []
+    end
+
+    class ValidatePipelineDefinitionInput
+      attr_accessor pipeline_id: ::String
+      attr_accessor pipeline_objects: ::Array[Types::PipelineObject]
+      attr_accessor parameter_objects: ::Array[Types::ParameterObject]
+      attr_accessor parameter_values: ::Array[Types::ParameterValue]
+      SENSITIVE: []
+    end
+
+    class ValidatePipelineDefinitionOutput
+      attr_accessor validation_errors: ::Array[Types::ValidationError]
+      attr_accessor validation_warnings: ::Array[Types::ValidationWarning]
+      attr_accessor errored: bool
+      SENSITIVE: []
+    end
+
+    class ValidationError
+      attr_accessor id: ::String
+      attr_accessor errors: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ValidationWarning
+      attr_accessor id: ::String
+      attr_accessor warnings: ::Array[::String]
+      SENSITIVE: []
+    end
+  end
+end

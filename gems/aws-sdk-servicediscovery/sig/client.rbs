@@ -1,0 +1,505 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ServiceDiscovery
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateHttpNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateHttpNamespaceResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#create_http_namespace-instance_method
+      def create_http_namespace: (
+                                   name: ::String,
+                                   ?creator_request_id: ::String,
+                                   ?description: ::String,
+                                   ?tags: Array[
+                                     {
+                                       key: ::String,
+                                       value: ::String
+                                     },
+                                   ]
+                                 ) -> _CreateHttpNamespaceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHttpNamespaceResponseSuccess
+
+      interface _CreatePrivateDnsNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePrivateDnsNamespaceResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#create_private_dns_namespace-instance_method
+      def create_private_dns_namespace: (
+                                          name: ::String,
+                                          ?creator_request_id: ::String,
+                                          ?description: ::String,
+                                          vpc: ::String,
+                                          ?tags: Array[
+                                            {
+                                              key: ::String,
+                                              value: ::String
+                                            },
+                                          ],
+                                          ?properties: {
+                                            dns_properties: {
+                                              soa: {
+                                                ttl: ::Integer
+                                              }
+                                            }
+                                          }
+                                        ) -> _CreatePrivateDnsNamespaceResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePrivateDnsNamespaceResponseSuccess
+
+      interface _CreatePublicDnsNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePublicDnsNamespaceResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#create_public_dns_namespace-instance_method
+      def create_public_dns_namespace: (
+                                         name: ::String,
+                                         ?creator_request_id: ::String,
+                                         ?description: ::String,
+                                         ?tags: Array[
+                                           {
+                                             key: ::String,
+                                             value: ::String
+                                           },
+                                         ],
+                                         ?properties: {
+                                           dns_properties: {
+                                             soa: {
+                                               ttl: ::Integer
+                                             }
+                                           }
+                                         }
+                                       ) -> _CreatePublicDnsNamespaceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePublicDnsNamespaceResponseSuccess
+
+      interface _CreateServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceResponse]
+        def service: () -> Types::Service
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#create_service-instance_method
+      def create_service: (
+                            name: ::String,
+                            ?namespace_id: ::String,
+                            ?creator_request_id: ::String,
+                            ?description: ::String,
+                            ?dns_config: {
+                              namespace_id: ::String?,
+                              routing_policy: ("MULTIVALUE" | "WEIGHTED")?,
+                              dns_records: Array[
+                                {
+                                  type: ("SRV" | "A" | "AAAA" | "CNAME"),
+                                  ttl: ::Integer
+                                },
+                              ]
+                            },
+                            ?health_check_config: {
+                              type: ("HTTP" | "HTTPS" | "TCP"),
+                              resource_path: ::String?,
+                              failure_threshold: ::Integer?
+                            },
+                            ?health_check_custom_config: {
+                              failure_threshold: ::Integer?
+                            },
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ],
+                            ?type: ("HTTP")
+                          ) -> _CreateServiceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceResponseSuccess
+
+      interface _DeleteNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNamespaceResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#delete_namespace-instance_method
+      def delete_namespace: (
+                              id: ::String
+                            ) -> _DeleteNamespaceResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNamespaceResponseSuccess
+
+      interface _DeleteServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteServiceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#delete_service-instance_method
+      def delete_service: (
+                            id: ::String
+                          ) -> _DeleteServiceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteServiceResponseSuccess
+
+      interface _DeregisterInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterInstanceResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#deregister_instance-instance_method
+      def deregister_instance: (
+                                 service_id: ::String,
+                                 instance_id: ::String
+                               ) -> _DeregisterInstanceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterInstanceResponseSuccess
+
+      interface _DiscoverInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DiscoverInstancesResponse]
+        def instances: () -> ::Array[Types::HttpInstanceSummary]
+        def instances_revision: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#discover_instances-instance_method
+      def discover_instances: (
+                                namespace_name: ::String,
+                                service_name: ::String,
+                                ?max_results: ::Integer,
+                                ?query_parameters: Hash[::String, ::String],
+                                ?optional_parameters: Hash[::String, ::String],
+                                ?health_status: ("HEALTHY" | "UNHEALTHY" | "ALL" | "HEALTHY_OR_ELSE_ALL")
+                              ) -> _DiscoverInstancesResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DiscoverInstancesResponseSuccess
+
+      interface _DiscoverInstancesRevisionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DiscoverInstancesRevisionResponse]
+        def instances_revision: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#discover_instances_revision-instance_method
+      def discover_instances_revision: (
+                                         namespace_name: ::String,
+                                         service_name: ::String
+                                       ) -> _DiscoverInstancesRevisionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DiscoverInstancesRevisionResponseSuccess
+
+      interface _GetInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceResponse]
+        def instance: () -> Types::Instance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#get_instance-instance_method
+      def get_instance: (
+                          service_id: ::String,
+                          instance_id: ::String
+                        ) -> _GetInstanceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceResponseSuccess
+
+      interface _GetInstancesHealthStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetInstancesHealthStatusResponse]
+        def status: () -> ::Hash[::String, ("HEALTHY" | "UNHEALTHY" | "UNKNOWN")]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#get_instances_health_status-instance_method
+      def get_instances_health_status: (
+                                         service_id: ::String,
+                                         ?instances: Array[::String],
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _GetInstancesHealthStatusResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstancesHealthStatusResponseSuccess
+
+      interface _GetNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNamespaceResponse]
+        def namespace: () -> Types::Namespace
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#get_namespace-instance_method
+      def get_namespace: (
+                           id: ::String
+                         ) -> _GetNamespaceResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNamespaceResponseSuccess
+
+      interface _GetOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOperationResponse]
+        def operation: () -> Types::Operation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#get_operation-instance_method
+      def get_operation: (
+                           operation_id: ::String
+                         ) -> _GetOperationResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOperationResponseSuccess
+
+      interface _GetServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetServiceResponse]
+        def service: () -> Types::Service
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#get_service-instance_method
+      def get_service: (
+                         id: ::String
+                       ) -> _GetServiceResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetServiceResponseSuccess
+
+      interface _ListInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInstancesResponse]
+        def instances: () -> ::Array[Types::InstanceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#list_instances-instance_method
+      def list_instances: (
+                            service_id: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListInstancesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstancesResponseSuccess
+
+      interface _ListNamespacesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNamespacesResponse]
+        def namespaces: () -> ::Array[Types::NamespaceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#list_namespaces-instance_method
+      def list_namespaces: (
+                             ?next_token: ::String,
+                             ?max_results: ::Integer,
+                             ?filters: Array[
+                               {
+                                 name: ("TYPE" | "NAME" | "HTTP_NAME"),
+                                 values: Array[::String],
+                                 condition: ("EQ" | "IN" | "BETWEEN" | "BEGINS_WITH")?
+                               },
+                             ]
+                           ) -> _ListNamespacesResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNamespacesResponseSuccess
+
+      interface _ListOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOperationsResponse]
+        def operations: () -> ::Array[Types::OperationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#list_operations-instance_method
+      def list_operations: (
+                             ?next_token: ::String,
+                             ?max_results: ::Integer,
+                             ?filters: Array[
+                               {
+                                 name: ("NAMESPACE_ID" | "SERVICE_ID" | "STATUS" | "TYPE" | "UPDATE_DATE"),
+                                 values: Array[::String],
+                                 condition: ("EQ" | "IN" | "BETWEEN" | "BEGINS_WITH")?
+                               },
+                             ]
+                           ) -> _ListOperationsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOperationsResponseSuccess
+
+      interface _ListServicesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServicesResponse]
+        def services: () -> ::Array[Types::ServiceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#list_services-instance_method
+      def list_services: (
+                           ?next_token: ::String,
+                           ?max_results: ::Integer,
+                           ?filters: Array[
+                             {
+                               name: ("NAMESPACE_ID"),
+                               values: Array[::String],
+                               condition: ("EQ" | "IN" | "BETWEEN" | "BEGINS_WITH")?
+                             },
+                           ]
+                         ) -> _ListServicesResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RegisterInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterInstanceResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#register_instance-instance_method
+      def register_instance: (
+                               service_id: ::String,
+                               instance_id: ::String,
+                               ?creator_request_id: ::String,
+                               attributes: Hash[::String, ::String]
+                             ) -> _RegisterInstanceResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterInstanceResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateHttpNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateHttpNamespaceResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#update_http_namespace-instance_method
+      def update_http_namespace: (
+                                   id: ::String,
+                                   ?updater_request_id: ::String,
+                                   namespace: {
+                                     description: ::String
+                                   }
+                                 ) -> _UpdateHttpNamespaceResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHttpNamespaceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#update_instance_custom_health_status-instance_method
+      def update_instance_custom_health_status: (
+                                                  service_id: ::String,
+                                                  instance_id: ::String,
+                                                  status: ("HEALTHY" | "UNHEALTHY")
+                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UpdatePrivateDnsNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePrivateDnsNamespaceResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#update_private_dns_namespace-instance_method
+      def update_private_dns_namespace: (
+                                          id: ::String,
+                                          ?updater_request_id: ::String,
+                                          namespace: {
+                                            description: ::String?,
+                                            properties: {
+                                              dns_properties: {
+                                                soa: {
+                                                  ttl: ::Integer
+                                                }
+                                              }
+                                            }?
+                                          }
+                                        ) -> _UpdatePrivateDnsNamespaceResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePrivateDnsNamespaceResponseSuccess
+
+      interface _UpdatePublicDnsNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePublicDnsNamespaceResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#update_public_dns_namespace-instance_method
+      def update_public_dns_namespace: (
+                                         id: ::String,
+                                         ?updater_request_id: ::String,
+                                         namespace: {
+                                           description: ::String?,
+                                           properties: {
+                                             dns_properties: {
+                                               soa: {
+                                                 ttl: ::Integer
+                                               }
+                                             }
+                                           }?
+                                         }
+                                       ) -> _UpdatePublicDnsNamespaceResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePublicDnsNamespaceResponseSuccess
+
+      interface _UpdateServiceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateServiceResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ServiceDiscovery/Client.html#update_service-instance_method
+      def update_service: (
+                            id: ::String,
+                            service: {
+                              description: ::String?,
+                              dns_config: {
+                                dns_records: Array[
+                                  {
+                                    type: ("SRV" | "A" | "AAAA" | "CNAME"),
+                                    ttl: ::Integer
+                                  },
+                                ]
+                              }?,
+                              health_check_config: {
+                                type: ("HTTP" | "HTTPS" | "TCP"),
+                                resource_path: ::String?,
+                                failure_threshold: ::Integer?
+                              }?
+                            }
+                          ) -> _UpdateServiceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceResponseSuccess
+    end
+  end
+end
+

@@ -14,6 +14,7 @@ module Aws::RolesAnywhere
       option(
         :endpoint_provider,
         doc_type: 'Aws::RolesAnywhere::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::RolesAnywhere
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -60,6 +62,8 @@ module Aws::RolesAnywhere
             Aws::RolesAnywhere::Endpoints::CreateProfile.build(context)
           when :create_trust_anchor
             Aws::RolesAnywhere::Endpoints::CreateTrustAnchor.build(context)
+          when :delete_attribute_mapping
+            Aws::RolesAnywhere::Endpoints::DeleteAttributeMapping.build(context)
           when :delete_crl
             Aws::RolesAnywhere::Endpoints::DeleteCrl.build(context)
           when :delete_profile
@@ -98,6 +102,8 @@ module Aws::RolesAnywhere
             Aws::RolesAnywhere::Endpoints::ListTagsForResource.build(context)
           when :list_trust_anchors
             Aws::RolesAnywhere::Endpoints::ListTrustAnchors.build(context)
+          when :put_attribute_mapping
+            Aws::RolesAnywhere::Endpoints::PutAttributeMapping.build(context)
           when :put_notification_settings
             Aws::RolesAnywhere::Endpoints::PutNotificationSettings.build(context)
           when :reset_notification_settings

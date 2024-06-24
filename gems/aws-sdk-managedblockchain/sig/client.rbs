@@ -1,0 +1,509 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ManagedBlockchain
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _CreateAccessorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessorOutput]
+        def accessor_id: () -> ::String
+        def billing_token: () -> ::String
+        def network_type: () -> ("ETHEREUM_GOERLI" | "ETHEREUM_MAINNET" | "ETHEREUM_MAINNET_AND_GOERLI" | "POLYGON_MAINNET" | "POLYGON_MUMBAI")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#create_accessor-instance_method
+      def create_accessor: (
+                             client_request_token: ::String,
+                             accessor_type: ("BILLING_TOKEN"),
+                             ?tags: Hash[::String, ::String],
+                             ?network_type: ("ETHEREUM_GOERLI" | "ETHEREUM_MAINNET" | "ETHEREUM_MAINNET_AND_GOERLI" | "POLYGON_MAINNET" | "POLYGON_MUMBAI")
+                           ) -> _CreateAccessorResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccessorResponseSuccess
+
+      interface _CreateMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMemberOutput]
+        def member_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#create_member-instance_method
+      def create_member: (
+                           client_request_token: ::String,
+                           invitation_id: ::String,
+                           network_id: ::String,
+                           member_configuration: {
+                             name: ::String,
+                             description: ::String?,
+                             framework_configuration: {
+                               fabric: {
+                                 admin_username: ::String,
+                                 admin_password: ::String
+                               }?
+                             },
+                             log_publishing_configuration: {
+                               fabric: {
+                                 ca_logs: {
+                                   cloudwatch: {
+                                     enabled: bool?
+                                   }?
+                                 }?
+                               }?
+                             }?,
+                             tags: Hash[::String, ::String]?,
+                             kms_key_arn: ::String?
+                           }
+                         ) -> _CreateMemberResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMemberResponseSuccess
+
+      interface _CreateNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNetworkOutput]
+        def network_id: () -> ::String
+        def member_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#create_network-instance_method
+      def create_network: (
+                            client_request_token: ::String,
+                            name: ::String,
+                            ?description: ::String,
+                            framework: ("HYPERLEDGER_FABRIC" | "ETHEREUM"),
+                            framework_version: ::String,
+                            ?framework_configuration: {
+                              fabric: {
+                                edition: ("STARTER" | "STANDARD")
+                              }?
+                            },
+                            voting_policy: {
+                              approval_threshold_policy: {
+                                threshold_percentage: ::Integer?,
+                                proposal_duration_in_hours: ::Integer?,
+                                threshold_comparator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUAL_TO")?
+                              }?
+                            },
+                            member_configuration: {
+                              name: ::String,
+                              description: ::String?,
+                              framework_configuration: {
+                                fabric: {
+                                  admin_username: ::String,
+                                  admin_password: ::String
+                                }?
+                              },
+                              log_publishing_configuration: {
+                                fabric: {
+                                  ca_logs: {
+                                    cloudwatch: {
+                                      enabled: bool?
+                                    }?
+                                  }?
+                                }?
+                              }?,
+                              tags: Hash[::String, ::String]?,
+                              kms_key_arn: ::String?
+                            },
+                            ?tags: Hash[::String, ::String]
+                          ) -> _CreateNetworkResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNetworkResponseSuccess
+
+      interface _CreateNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNodeOutput]
+        def node_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#create_node-instance_method
+      def create_node: (
+                         client_request_token: ::String,
+                         network_id: ::String,
+                         ?member_id: ::String,
+                         node_configuration: {
+                           instance_type: ::String,
+                           availability_zone: ::String?,
+                           log_publishing_configuration: {
+                             fabric: {
+                               chaincode_logs: {
+                                 cloudwatch: {
+                                   enabled: bool?
+                                 }?
+                               }?,
+                               peer_logs: {
+                                 cloudwatch: {
+                                   enabled: bool?
+                                 }?
+                               }?
+                             }?
+                           }?,
+                           state_db: ("LevelDB" | "CouchDB")?
+                         },
+                         ?tags: Hash[::String, ::String]
+                       ) -> _CreateNodeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNodeResponseSuccess
+
+      interface _CreateProposalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateProposalOutput]
+        def proposal_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#create_proposal-instance_method
+      def create_proposal: (
+                             client_request_token: ::String,
+                             network_id: ::String,
+                             member_id: ::String,
+                             actions: {
+                               invitations: Array[
+                                 {
+                                   principal: ::String
+                                 },
+                               ]?,
+                               removals: Array[
+                                 {
+                                   member_id: ::String
+                                 },
+                               ]?
+                             },
+                             ?description: ::String,
+                             ?tags: Hash[::String, ::String]
+                           ) -> _CreateProposalResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProposalResponseSuccess
+
+      interface _DeleteAccessorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccessorOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#delete_accessor-instance_method
+      def delete_accessor: (
+                             accessor_id: ::String
+                           ) -> _DeleteAccessorResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccessorResponseSuccess
+
+      interface _DeleteMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteMemberOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#delete_member-instance_method
+      def delete_member: (
+                           network_id: ::String,
+                           member_id: ::String
+                         ) -> _DeleteMemberResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMemberResponseSuccess
+
+      interface _DeleteNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNodeOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#delete_node-instance_method
+      def delete_node: (
+                         network_id: ::String,
+                         ?member_id: ::String,
+                         node_id: ::String
+                       ) -> _DeleteNodeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNodeResponseSuccess
+
+      interface _GetAccessorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAccessorOutput]
+        def accessor: () -> Types::Accessor
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#get_accessor-instance_method
+      def get_accessor: (
+                          accessor_id: ::String
+                        ) -> _GetAccessorResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAccessorResponseSuccess
+
+      interface _GetMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMemberOutput]
+        def member: () -> Types::Member
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#get_member-instance_method
+      def get_member: (
+                        network_id: ::String,
+                        member_id: ::String
+                      ) -> _GetMemberResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMemberResponseSuccess
+
+      interface _GetNetworkResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNetworkOutput]
+        def network: () -> Types::Network
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#get_network-instance_method
+      def get_network: (
+                         network_id: ::String
+                       ) -> _GetNetworkResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNetworkResponseSuccess
+
+      interface _GetNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNodeOutput]
+        def node: () -> Types::Node
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#get_node-instance_method
+      def get_node: (
+                      network_id: ::String,
+                      ?member_id: ::String,
+                      node_id: ::String
+                    ) -> _GetNodeResponseSuccess
+                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNodeResponseSuccess
+
+      interface _GetProposalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProposalOutput]
+        def proposal: () -> Types::Proposal
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#get_proposal-instance_method
+      def get_proposal: (
+                          network_id: ::String,
+                          proposal_id: ::String
+                        ) -> _GetProposalResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProposalResponseSuccess
+
+      interface _ListAccessorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAccessorsOutput]
+        def accessors: () -> ::Array[Types::AccessorSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#list_accessors-instance_method
+      def list_accessors: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String,
+                            ?network_type: ("ETHEREUM_GOERLI" | "ETHEREUM_MAINNET" | "ETHEREUM_MAINNET_AND_GOERLI" | "POLYGON_MAINNET" | "POLYGON_MUMBAI")
+                          ) -> _ListAccessorsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAccessorsResponseSuccess
+
+      interface _ListInvitationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListInvitationsOutput]
+        def invitations: () -> ::Array[Types::Invitation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#list_invitations-instance_method
+      def list_invitations: (
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListInvitationsResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInvitationsResponseSuccess
+
+      interface _ListMembersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMembersOutput]
+        def members: () -> ::Array[Types::MemberSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#list_members-instance_method
+      def list_members: (
+                          network_id: ::String,
+                          ?name: ::String,
+                          ?status: ("CREATING" | "AVAILABLE" | "CREATE_FAILED" | "UPDATING" | "DELETING" | "DELETED" | "INACCESSIBLE_ENCRYPTION_KEY"),
+                          ?is_owned: bool,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListMembersResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMembersResponseSuccess
+
+      interface _ListNetworksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNetworksOutput]
+        def networks: () -> ::Array[Types::NetworkSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#list_networks-instance_method
+      def list_networks: (
+                           ?name: ::String,
+                           ?framework: ("HYPERLEDGER_FABRIC" | "ETHEREUM"),
+                           ?status: ("CREATING" | "AVAILABLE" | "CREATE_FAILED" | "DELETING" | "DELETED"),
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _ListNetworksResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNetworksResponseSuccess
+
+      interface _ListNodesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNodesOutput]
+        def nodes: () -> ::Array[Types::NodeSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#list_nodes-instance_method
+      def list_nodes: (
+                        network_id: ::String,
+                        ?member_id: ::String,
+                        ?status: ("CREATING" | "AVAILABLE" | "UNHEALTHY" | "CREATE_FAILED" | "UPDATING" | "DELETING" | "DELETED" | "FAILED" | "INACCESSIBLE_ENCRYPTION_KEY"),
+                        ?max_results: ::Integer,
+                        ?next_token: ::String
+                      ) -> _ListNodesResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNodesResponseSuccess
+
+      interface _ListProposalVotesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProposalVotesOutput]
+        def proposal_votes: () -> ::Array[Types::VoteSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#list_proposal_votes-instance_method
+      def list_proposal_votes: (
+                                 network_id: ::String,
+                                 proposal_id: ::String,
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String
+                               ) -> _ListProposalVotesResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProposalVotesResponseSuccess
+
+      interface _ListProposalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProposalsOutput]
+        def proposals: () -> ::Array[Types::ProposalSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#list_proposals-instance_method
+      def list_proposals: (
+                            network_id: ::String,
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListProposalsResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProposalsResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _RejectInvitationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RejectInvitationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#reject_invitation-instance_method
+      def reject_invitation: (
+                               invitation_id: ::String
+                             ) -> _RejectInvitationResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectInvitationResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Hash[::String, ::String]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateMemberResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMemberOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#update_member-instance_method
+      def update_member: (
+                           network_id: ::String,
+                           member_id: ::String,
+                           ?log_publishing_configuration: {
+                             fabric: {
+                               ca_logs: {
+                                 cloudwatch: {
+                                   enabled: bool?
+                                 }?
+                               }?
+                             }?
+                           }
+                         ) -> _UpdateMemberResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMemberResponseSuccess
+
+      interface _UpdateNodeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNodeOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#update_node-instance_method
+      def update_node: (
+                         network_id: ::String,
+                         ?member_id: ::String,
+                         node_id: ::String,
+                         ?log_publishing_configuration: {
+                           fabric: {
+                             chaincode_logs: {
+                               cloudwatch: {
+                                 enabled: bool?
+                               }?
+                             }?,
+                             peer_logs: {
+                               cloudwatch: {
+                                 enabled: bool?
+                               }?
+                             }?
+                           }?
+                         }
+                       ) -> _UpdateNodeResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNodeResponseSuccess
+
+      interface _VoteOnProposalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::VoteOnProposalOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ManagedBlockchain/Client.html#vote_on_proposal-instance_method
+      def vote_on_proposal: (
+                              network_id: ::String,
+                              proposal_id: ::String,
+                              voter_member_id: ::String,
+                              vote: ("YES" | "NO")
+                            ) -> _VoteOnProposalResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VoteOnProposalResponseSuccess
+    end
+  end
+end
+

@@ -1,0 +1,944 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Organizations
+  module Types
+
+    class AWSOrganizationsNotInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptHandshakeRequest
+      attr_accessor handshake_id: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptHandshakeResponse
+      attr_accessor handshake: Types::Handshake
+      SENSITIVE: []
+    end
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessDeniedForDependencyException
+      attr_accessor message: ::String
+      attr_accessor reason: ("ACCESS_DENIED_DURING_CREATE_SERVICE_LINKED_ROLE")
+      SENSITIVE: []
+    end
+
+    class Account
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor email: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "SUSPENDED" | "PENDING_CLOSURE")
+      attr_accessor joined_method: ("INVITED" | "CREATED")
+      attr_accessor joined_timestamp: ::Time
+      SENSITIVE: [:email, :name]
+    end
+
+    class AccountAlreadyClosedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountAlreadyRegisteredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountNotRegisteredException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccountOwnerNotVerifiedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AlreadyInOrganizationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AttachPolicyRequest
+      attr_accessor policy_id: ::String
+      attr_accessor target_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelHandshakeRequest
+      attr_accessor handshake_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelHandshakeResponse
+      attr_accessor handshake: Types::Handshake
+      SENSITIVE: []
+    end
+
+    class Child
+      attr_accessor id: ::String
+      attr_accessor type: ("ACCOUNT" | "ORGANIZATIONAL_UNIT")
+      SENSITIVE: []
+    end
+
+    class ChildNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CloseAccountRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ConcurrentModificationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConstraintViolationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("ACCOUNT_NUMBER_LIMIT_EXCEEDED" | "HANDSHAKE_RATE_LIMIT_EXCEEDED" | "OU_NUMBER_LIMIT_EXCEEDED" | "OU_DEPTH_LIMIT_EXCEEDED" | "POLICY_NUMBER_LIMIT_EXCEEDED" | "POLICY_CONTENT_LIMIT_EXCEEDED" | "MAX_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED" | "MIN_POLICY_TYPE_ATTACHMENT_LIMIT_EXCEEDED" | "ACCOUNT_CANNOT_LEAVE_ORGANIZATION" | "ACCOUNT_CANNOT_LEAVE_WITHOUT_EULA" | "ACCOUNT_CANNOT_LEAVE_WITHOUT_PHONE_VERIFICATION" | "MASTER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED" | "MEMBER_ACCOUNT_PAYMENT_INSTRUMENT_REQUIRED" | "ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED" | "MASTER_ACCOUNT_ADDRESS_DOES_NOT_MATCH_MARKETPLACE" | "MASTER_ACCOUNT_MISSING_CONTACT_INFO" | "MASTER_ACCOUNT_NOT_GOVCLOUD_ENABLED" | "ORGANIZATION_NOT_IN_ALL_FEATURES_MODE" | "CREATE_ORGANIZATION_IN_BILLING_MODE_UNSUPPORTED_REGION" | "EMAIL_VERIFICATION_CODE_EXPIRED" | "WAIT_PERIOD_ACTIVE" | "MAX_TAG_LIMIT_EXCEEDED" | "TAG_POLICY_VIOLATION" | "MAX_DELEGATED_ADMINISTRATORS_FOR_SERVICE_LIMIT_EXCEEDED" | "CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR" | "CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG" | "DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE" | "MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE" | "CANNOT_CLOSE_MANAGEMENT_ACCOUNT" | "CLOSE_ACCOUNT_QUOTA_EXCEEDED" | "CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED" | "SERVICE_ACCESS_NOT_ENABLED" | "INVALID_PAYMENT_INSTRUMENT" | "ACCOUNT_CREATION_NOT_COMPLETE")
+      SENSITIVE: []
+    end
+
+    class CreateAccountRequest
+      attr_accessor email: ::String
+      attr_accessor account_name: ::String
+      attr_accessor role_name: ::String
+      attr_accessor iam_user_access_to_billing: ("ALLOW" | "DENY")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:email, :account_name]
+    end
+
+    class CreateAccountResponse
+      attr_accessor create_account_status: Types::CreateAccountStatus
+      SENSITIVE: []
+    end
+
+    class CreateAccountStatus
+      attr_accessor id: ::String
+      attr_accessor account_name: ::String
+      attr_accessor state: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor requested_timestamp: ::Time
+      attr_accessor completed_timestamp: ::Time
+      attr_accessor account_id: ::String
+      attr_accessor gov_cloud_account_id: ::String
+      attr_accessor failure_reason: ("ACCOUNT_LIMIT_EXCEEDED" | "EMAIL_ALREADY_EXISTS" | "INVALID_ADDRESS" | "INVALID_EMAIL" | "CONCURRENT_ACCOUNT_MODIFICATION" | "INTERNAL_FAILURE" | "GOVCLOUD_ACCOUNT_ALREADY_EXISTS" | "MISSING_BUSINESS_VALIDATION" | "FAILED_BUSINESS_VALIDATION" | "PENDING_BUSINESS_VALIDATION" | "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION" | "UNKNOWN_BUSINESS_VALIDATION" | "MISSING_PAYMENT_INSTRUMENT" | "INVALID_PAYMENT_INSTRUMENT" | "UPDATE_EXISTING_RESOURCE_POLICY_WITH_TAGS_NOT_SUPPORTED")
+      SENSITIVE: [:account_name]
+    end
+
+    class CreateAccountStatusNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateGovCloudAccountRequest
+      attr_accessor email: ::String
+      attr_accessor account_name: ::String
+      attr_accessor role_name: ::String
+      attr_accessor iam_user_access_to_billing: ("ALLOW" | "DENY")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:email, :account_name]
+    end
+
+    class CreateGovCloudAccountResponse
+      attr_accessor create_account_status: Types::CreateAccountStatus
+      SENSITIVE: []
+    end
+
+    class CreateOrganizationRequest
+      attr_accessor feature_set: ("ALL" | "CONSOLIDATED_BILLING")
+      SENSITIVE: []
+    end
+
+    class CreateOrganizationResponse
+      attr_accessor organization: Types::Organization
+      SENSITIVE: []
+    end
+
+    class CreateOrganizationalUnitRequest
+      attr_accessor parent_id: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateOrganizationalUnitResponse
+      attr_accessor organizational_unit: Types::OrganizationalUnit
+      SENSITIVE: []
+    end
+
+    class CreatePolicyRequest
+      attr_accessor content: ::String
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY")
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreatePolicyResponse
+      attr_accessor policy: Types::Policy
+      SENSITIVE: []
+    end
+
+    class DeclineHandshakeRequest
+      attr_accessor handshake_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeclineHandshakeResponse
+      attr_accessor handshake: Types::Handshake
+      SENSITIVE: []
+    end
+
+    class DelegatedAdministrator
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor email: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "SUSPENDED" | "PENDING_CLOSURE")
+      attr_accessor joined_method: ("INVITED" | "CREATED")
+      attr_accessor joined_timestamp: ::Time
+      attr_accessor delegation_enabled_date: ::Time
+      SENSITIVE: [:email, :name]
+    end
+
+    class DelegatedService
+      attr_accessor service_principal: ::String
+      attr_accessor delegation_enabled_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteOrganizationalUnitRequest
+      attr_accessor organizational_unit_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePolicyRequest
+      attr_accessor policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterDelegatedAdministratorRequest
+      attr_accessor account_id: ::String
+      attr_accessor service_principal: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccountRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeAccountResponse
+      attr_accessor account: Types::Account
+      SENSITIVE: []
+    end
+
+    class DescribeCreateAccountStatusRequest
+      attr_accessor create_account_request_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeCreateAccountStatusResponse
+      attr_accessor create_account_status: Types::CreateAccountStatus
+      SENSITIVE: []
+    end
+
+    class DescribeEffectivePolicyRequest
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY")
+      attr_accessor target_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeEffectivePolicyResponse
+      attr_accessor effective_policy: Types::EffectivePolicy
+      SENSITIVE: []
+    end
+
+    class DescribeHandshakeRequest
+      attr_accessor handshake_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeHandshakeResponse
+      attr_accessor handshake: Types::Handshake
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationResponse
+      attr_accessor organization: Types::Organization
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationalUnitRequest
+      attr_accessor organizational_unit_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeOrganizationalUnitResponse
+      attr_accessor organizational_unit: Types::OrganizationalUnit
+      SENSITIVE: []
+    end
+
+    class DescribePolicyRequest
+      attr_accessor policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribePolicyResponse
+      attr_accessor policy: Types::Policy
+      SENSITIVE: []
+    end
+
+    class DescribeResourcePolicyResponse
+      attr_accessor resource_policy: Types::ResourcePolicy
+      SENSITIVE: []
+    end
+
+    class DestinationParentNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DetachPolicyRequest
+      attr_accessor policy_id: ::String
+      attr_accessor target_id: ::String
+      SENSITIVE: []
+    end
+
+    class DisableAWSServiceAccessRequest
+      attr_accessor service_principal: ::String
+      SENSITIVE: []
+    end
+
+    class DisablePolicyTypeRequest
+      attr_accessor root_id: ::String
+      attr_accessor policy_type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY")
+      SENSITIVE: []
+    end
+
+    class DisablePolicyTypeResponse
+      attr_accessor root: Types::Root
+      SENSITIVE: []
+    end
+
+    class DuplicateAccountException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DuplicateHandshakeException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DuplicateOrganizationalUnitException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DuplicatePolicyAttachmentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DuplicatePolicyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EffectivePolicy
+      attr_accessor policy_content: ::String
+      attr_accessor last_updated_timestamp: ::Time
+      attr_accessor target_id: ::String
+      attr_accessor policy_type: ("TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY")
+      SENSITIVE: []
+    end
+
+    class EffectivePolicyNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EnableAWSServiceAccessRequest
+      attr_accessor service_principal: ::String
+      SENSITIVE: []
+    end
+
+    class EnableAllFeaturesRequest < Aws::EmptyStructure
+    end
+
+    class EnableAllFeaturesResponse
+      attr_accessor handshake: Types::Handshake
+      SENSITIVE: []
+    end
+
+    class EnablePolicyTypeRequest
+      attr_accessor root_id: ::String
+      attr_accessor policy_type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY")
+      SENSITIVE: []
+    end
+
+    class EnablePolicyTypeResponse
+      attr_accessor root: Types::Root
+      SENSITIVE: []
+    end
+
+    class EnabledServicePrincipal
+      attr_accessor service_principal: ::String
+      attr_accessor date_enabled: ::Time
+      SENSITIVE: []
+    end
+
+    class FinalizingOrganizationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Handshake
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor parties: ::Array[Types::HandshakeParty]
+      attr_accessor state: ("REQUESTED" | "OPEN" | "CANCELED" | "ACCEPTED" | "DECLINED" | "EXPIRED")
+      attr_accessor requested_timestamp: ::Time
+      attr_accessor expiration_timestamp: ::Time
+      attr_accessor action: ("INVITE" | "ENABLE_ALL_FEATURES" | "APPROVE_ALL_FEATURES" | "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE")
+      attr_accessor resources: ::Array[Types::HandshakeResource]
+      SENSITIVE: []
+    end
+
+    class HandshakeAlreadyInStateException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HandshakeConstraintViolationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("ACCOUNT_NUMBER_LIMIT_EXCEEDED" | "HANDSHAKE_RATE_LIMIT_EXCEEDED" | "ALREADY_IN_AN_ORGANIZATION" | "ORGANIZATION_ALREADY_HAS_ALL_FEATURES" | "ORGANIZATION_IS_ALREADY_PENDING_ALL_FEATURES_MIGRATION" | "INVITE_DISABLED_DURING_ENABLE_ALL_FEATURES" | "PAYMENT_INSTRUMENT_REQUIRED" | "ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD" | "ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED" | "MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED")
+      SENSITIVE: []
+    end
+
+    class HandshakeFilter
+      attr_accessor action_type: ("INVITE" | "ENABLE_ALL_FEATURES" | "APPROVE_ALL_FEATURES" | "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE")
+      attr_accessor parent_handshake_id: ::String
+      SENSITIVE: []
+    end
+
+    class HandshakeNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class HandshakeParty
+      attr_accessor id: ::String
+      attr_accessor type: ("ACCOUNT" | "ORGANIZATION" | "EMAIL")
+      SENSITIVE: [:id]
+    end
+
+    class HandshakeResource
+      attr_accessor value: ::String
+      attr_accessor type: ("ACCOUNT" | "ORGANIZATION" | "ORGANIZATION_FEATURE_SET" | "EMAIL" | "MASTER_EMAIL" | "MASTER_NAME" | "NOTES" | "PARENT_HANDSHAKE")
+      attr_accessor resources: ::Array[Types::HandshakeResource]
+      SENSITIVE: [:value]
+    end
+
+    class InvalidHandshakeTransitionException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidInputException
+      attr_accessor message: ::String
+      attr_accessor reason: ("INVALID_PARTY_TYPE_TARGET" | "INVALID_SYNTAX_ORGANIZATION_ARN" | "INVALID_SYNTAX_POLICY_ID" | "INVALID_ENUM" | "INVALID_ENUM_POLICY_TYPE" | "INVALID_LIST_MEMBER" | "MAX_LENGTH_EXCEEDED" | "MAX_VALUE_EXCEEDED" | "MIN_LENGTH_EXCEEDED" | "MIN_VALUE_EXCEEDED" | "IMMUTABLE_POLICY" | "INVALID_PATTERN" | "INVALID_PATTERN_TARGET_ID" | "INPUT_REQUIRED" | "INVALID_NEXT_TOKEN" | "MAX_LIMIT_EXCEEDED_FILTER" | "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS" | "INVALID_FULL_NAME_TARGET" | "UNRECOGNIZED_SERVICE_PRINCIPAL" | "INVALID_ROLE_NAME" | "INVALID_SYSTEM_TAGS_PARAMETER" | "DUPLICATE_TAG_KEY" | "TARGET_NOT_SUPPORTED" | "INVALID_EMAIL_ADDRESS_TARGET" | "INVALID_RESOURCE_POLICY_JSON" | "UNSUPPORTED_ACTION_IN_RESOURCE_POLICY" | "UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY" | "UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY")
+      SENSITIVE: []
+    end
+
+    class InviteAccountToOrganizationRequest
+      attr_accessor target: Types::HandshakeParty
+      attr_accessor notes: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: [:notes]
+    end
+
+    class InviteAccountToOrganizationResponse
+      attr_accessor handshake: Types::Handshake
+      SENSITIVE: []
+    end
+
+    class ListAWSServiceAccessForOrganizationRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAWSServiceAccessForOrganizationResponse
+      attr_accessor enabled_service_principals: ::Array[Types::EnabledServicePrincipal]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountsForParentRequest
+      attr_accessor parent_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccountsForParentResponse
+      attr_accessor accounts: ::Array[Types::Account]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccountsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccountsResponse
+      attr_accessor accounts: ::Array[Types::Account]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListChildrenRequest
+      attr_accessor parent_id: ::String
+      attr_accessor child_type: ("ACCOUNT" | "ORGANIZATIONAL_UNIT")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListChildrenResponse
+      attr_accessor children: ::Array[Types::Child]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCreateAccountStatusRequest
+      attr_accessor states: ::Array[("IN_PROGRESS" | "SUCCEEDED" | "FAILED")]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCreateAccountStatusResponse
+      attr_accessor create_account_statuses: ::Array[Types::CreateAccountStatus]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDelegatedAdministratorsRequest
+      attr_accessor service_principal: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDelegatedAdministratorsResponse
+      attr_accessor delegated_administrators: ::Array[Types::DelegatedAdministrator]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDelegatedServicesForAccountRequest
+      attr_accessor account_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDelegatedServicesForAccountResponse
+      attr_accessor delegated_services: ::Array[Types::DelegatedService]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHandshakesForAccountRequest
+      attr_accessor filter: Types::HandshakeFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListHandshakesForAccountResponse
+      attr_accessor handshakes: ::Array[Types::Handshake]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListHandshakesForOrganizationRequest
+      attr_accessor filter: Types::HandshakeFilter
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListHandshakesForOrganizationResponse
+      attr_accessor handshakes: ::Array[Types::Handshake]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOrganizationalUnitsForParentRequest
+      attr_accessor parent_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOrganizationalUnitsForParentResponse
+      attr_accessor organizational_units: ::Array[Types::OrganizationalUnit]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListParentsRequest
+      attr_accessor child_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListParentsResponse
+      attr_accessor parents: ::Array[Types::Parent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPoliciesForTargetRequest
+      attr_accessor target_id: ::String
+      attr_accessor filter: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPoliciesForTargetResponse
+      attr_accessor policies: ::Array[Types::PolicySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPoliciesRequest
+      attr_accessor filter: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPoliciesResponse
+      attr_accessor policies: ::Array[Types::PolicySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRootsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRootsResponse
+      attr_accessor roots: ::Array[Types::Root]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTargetsForPolicyRequest
+      attr_accessor policy_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTargetsForPolicyResponse
+      attr_accessor targets: ::Array[Types::PolicyTargetSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class MalformedPolicyDocumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MasterCannotLeaveOrganizationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MoveAccountRequest
+      attr_accessor account_id: ::String
+      attr_accessor source_parent_id: ::String
+      attr_accessor destination_parent_id: ::String
+      SENSITIVE: []
+    end
+
+    class Organization
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor feature_set: ("ALL" | "CONSOLIDATED_BILLING")
+      attr_accessor master_account_arn: ::String
+      attr_accessor master_account_id: ::String
+      attr_accessor master_account_email: ::String
+      attr_accessor available_policy_types: ::Array[Types::PolicyTypeSummary]
+      SENSITIVE: [:master_account_email]
+    end
+
+    class OrganizationNotEmptyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OrganizationalUnit
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class OrganizationalUnitNotEmptyException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class OrganizationalUnitNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Parent
+      attr_accessor id: ::String
+      attr_accessor type: ("ROOT" | "ORGANIZATIONAL_UNIT")
+      SENSITIVE: []
+    end
+
+    class ParentNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Policy
+      attr_accessor policy_summary: Types::PolicySummary
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyChangesInProgressException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyInUseException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyNotAttachedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PolicySummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY")
+      attr_accessor aws_managed: bool
+      SENSITIVE: []
+    end
+
+    class PolicyTargetSummary
+      attr_accessor target_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("ACCOUNT" | "ORGANIZATIONAL_UNIT" | "ROOT")
+      SENSITIVE: []
+    end
+
+    class PolicyTypeAlreadyEnabledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyTypeNotAvailableForOrganizationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyTypeNotEnabledException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyTypeSummary
+      attr_accessor type: ("SERVICE_CONTROL_POLICY" | "TAG_POLICY" | "BACKUP_POLICY" | "AISERVICES_OPT_OUT_POLICY")
+      attr_accessor status: ("ENABLED" | "PENDING_ENABLE" | "PENDING_DISABLE")
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyRequest
+      attr_accessor content: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyResponse
+      attr_accessor resource_policy: Types::ResourcePolicy
+      SENSITIVE: []
+    end
+
+    class RegisterDelegatedAdministratorRequest
+      attr_accessor account_id: ::String
+      attr_accessor service_principal: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveAccountFromOrganizationRequest
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcePolicy
+      attr_accessor resource_policy_summary: Types::ResourcePolicySummary
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcePolicyNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourcePolicySummary
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class Root
+      attr_accessor id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor policy_types: ::Array[Types::PolicyTypeSummary]
+      SENSITIVE: []
+    end
+
+    class RootNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SourceParentNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_id: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TargetNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnsupportedAPIEndpointException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_id: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateOrganizationalUnitRequest
+      attr_accessor organizational_unit_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOrganizationalUnitResponse
+      attr_accessor organizational_unit: Types::OrganizationalUnit
+      SENSITIVE: []
+    end
+
+    class UpdatePolicyRequest
+      attr_accessor policy_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor content: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePolicyResponse
+      attr_accessor policy: Types::Policy
+      SENSITIVE: []
+    end
+  end
+end

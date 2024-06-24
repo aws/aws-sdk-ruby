@@ -14,6 +14,7 @@ module Aws::EMRContainers
       option(
         :endpoint_provider,
         doc_type: 'Aws::EMRContainers::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::EMRContainers
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -62,6 +64,8 @@ module Aws::EMRContainers
             Aws::EMRContainers::Endpoints::CreateJobTemplate.build(context)
           when :create_managed_endpoint
             Aws::EMRContainers::Endpoints::CreateManagedEndpoint.build(context)
+          when :create_security_configuration
+            Aws::EMRContainers::Endpoints::CreateSecurityConfiguration.build(context)
           when :create_virtual_cluster
             Aws::EMRContainers::Endpoints::CreateVirtualCluster.build(context)
           when :delete_job_template
@@ -76,6 +80,8 @@ module Aws::EMRContainers
             Aws::EMRContainers::Endpoints::DescribeJobTemplate.build(context)
           when :describe_managed_endpoint
             Aws::EMRContainers::Endpoints::DescribeManagedEndpoint.build(context)
+          when :describe_security_configuration
+            Aws::EMRContainers::Endpoints::DescribeSecurityConfiguration.build(context)
           when :describe_virtual_cluster
             Aws::EMRContainers::Endpoints::DescribeVirtualCluster.build(context)
           when :get_managed_endpoint_session_credentials
@@ -86,6 +92,8 @@ module Aws::EMRContainers
             Aws::EMRContainers::Endpoints::ListJobTemplates.build(context)
           when :list_managed_endpoints
             Aws::EMRContainers::Endpoints::ListManagedEndpoints.build(context)
+          when :list_security_configurations
+            Aws::EMRContainers::Endpoints::ListSecurityConfigurations.build(context)
           when :list_tags_for_resource
             Aws::EMRContainers::Endpoints::ListTagsForResource.build(context)
           when :list_virtual_clusters

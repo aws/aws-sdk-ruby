@@ -1,6 +1,96 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2024-06-20)
+------------------
+
+* Feature - Doc-only update for DynamoDB. Fixed Important note in 6 Global table APIs - CreateGlobalTable, DescribeGlobalTable, DescribeGlobalTableSettings, ListGlobalTables, UpdateGlobalTable, and UpdateGlobalTableSettings.
+
+1.112.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.111.0 (2024-05-28)
+------------------
+
+* Feature - Doc-only update for DynamoDB. Specified the IAM actions needed to authorize a user to create a table with a resource-based policy.
+
+1.110.0 (2024-05-24)
+------------------
+
+* Feature - Documentation only updates for DynamoDB.
+
+1.109.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.108.0 (2024-05-02)
+------------------
+
+* Feature - This release adds support to specify an optional, maximum OnDemandThroughput for DynamoDB tables and global secondary indexes in the CreateTable or UpdateTable APIs. You can also override the OnDemandThroughput settings by calling the ImportTable, RestoreFromPointInTime, or RestoreFromBackup APIs.
+
+1.107.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.106.0 (2024-03-20)
+------------------
+
+* Feature - This release introduces 3 new APIs ('GetResourcePolicy', 'PutResourcePolicy' and 'DeleteResourcePolicy') and modifies the existing 'CreateTable' API for the resource-based policy support. It also modifies several APIs to accept a 'TableArn' for the 'TableName' parameter.
+
+1.105.0 (2024-03-06)
+------------------
+
+* Feature - Doc only updates for DynamoDB documentation
+
+1.104.0 (2024-02-20)
+------------------
+
+* Feature - Publishing quick fix for doc only update.
+
+1.103.0 (2024-02-14)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.102.0 (2024-02-02)
+------------------
+
+* Feature - Any number of users can execute up to 50 concurrent restores (any type of restore) in a given account.
+
+1.101.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2024-01-19)
+------------------
+
+* Feature - This release adds support for including ApproximateCreationDateTimePrecision configurations in EnableKinesisStreamingDestination API, adds the same as an optional field in the response of DescribeKinesisStreamingDestination, and adds support for a new UpdateKinesisStreamingDestination API.
+
+1.99.0 (2024-01-17)
+------------------
+
+* Feature - Updating note for enabling streams for UpdateTable.
+
+1.98.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.97.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.96.0 (2023-10-18)
+------------------
+
+* Feature - Updating descriptions for several APIs.
+
 1.95.0 (2023-09-27)
 ------------------
 

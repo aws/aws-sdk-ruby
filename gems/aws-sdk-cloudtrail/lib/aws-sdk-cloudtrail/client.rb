@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CloudTrail
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CloudTrail
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::CloudTrail
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::CloudTrail
     #   @option options [Aws::CloudTrail::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CloudTrail::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -583,15 +608,15 @@ module Aws::CloudTrail
     #   CloudTrail User Guide.
     #
     #   For more information about how to use advanced event selectors to
-    #   include non-Amazon Web Services events in your event data store, see
-    #   [Create an integration to log events from outside Amazon Web
-    #   Services][3] in the CloudTrail User Guide.
+    #   include events outside of Amazon Web Services events in your event
+    #   data store, see [Create an integration to log events from outside
+    #   Amazon Web Services][3] in the CloudTrail User Guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced
-    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-eds-config
-    #   [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-lake-cli.html#lake-cli-create-integration
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-eds-cli.html#lake-cli-create-eds-config
+    #   [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-integrations-cli.html#lake-cli-create-integration
     #
     # @option params [Boolean] :multi_region_enabled
     #   Specifies whether the event data store includes events from all
@@ -603,8 +628,12 @@ module Aws::CloudTrail
     #   organization in Organizations.
     #
     # @option params [Integer] :retention_period
-    #   The retention period of the event data store, in days. You can set a
+    #   The retention period of the event data store, in days. If
+    #   `BillingMode` is set to `EXTENDABLE_RETENTION_PRICING`, you can set a
+    #   retention period of up to 3653 days, the equivalent of 10 years. If
+    #   `BillingMode` is set to `FIXED_RETENTION_PRICING`, you can set a
     #   retention period of up to 2557 days, the equivalent of seven years.
+    #
     #   CloudTrail Lake determines whether to retain an event by checking if
     #   the `eventTime` of the event is within the specified retention period.
     #   For example, if you set a retention period of 90 days, CloudTrail will
@@ -663,6 +692,33 @@ module Aws::CloudTrail
     #   Specifies whether the event data store should start ingesting live
     #   events. The default is true.
     #
+    # @option params [String] :billing_mode
+    #   The billing mode for the event data store determines the cost for
+    #   ingesting events and the default and maximum retention period for the
+    #   event data store.
+    #
+    #   The following are the possible values:
+    #
+    #   * `EXTENDABLE_RETENTION_PRICING` - This billing mode is generally
+    #     recommended if you want a flexible retention period of up to 3653
+    #     days (about 10 years). The default retention period for this billing
+    #     mode is 366 days.
+    #
+    #   * `FIXED_RETENTION_PRICING` - This billing mode is recommended if you
+    #     expect to ingest more than 25 TB of event data per month and need a
+    #     retention period of up to 2557 days (about 7 years). The default
+    #     retention period for this billing mode is 2557 days.
+    #
+    #   The default value is `EXTENDABLE_RETENTION_PRICING`.
+    #
+    #   For more information about CloudTrail pricing, see [CloudTrail
+    #   Pricing][1] and [Managing CloudTrail Lake costs][2].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/cloudtrail/pricing/
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html
+    #
     # @return [Types::CreateEventDataStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEventDataStoreResponse#event_data_store_arn #event_data_store_arn} => String
@@ -677,6 +733,7 @@ module Aws::CloudTrail
     #   * {Types::CreateEventDataStoreResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::CreateEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
     #   * {Types::CreateEventDataStoreResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::CreateEventDataStoreResponse#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -710,6 +767,7 @@ module Aws::CloudTrail
     #     ],
     #     kms_key_id: "EventDataStoreKmsKeyId",
     #     start_ingestion: false,
+    #     billing_mode: "EXTENDABLE_RETENTION_PRICING", # accepts EXTENDABLE_RETENTION_PRICING, FIXED_RETENTION_PRICING
     #   })
     #
     # @example Response structure
@@ -743,6 +801,7 @@ module Aws::CloudTrail
     #   resp.created_timestamp #=> Time
     #   resp.updated_timestamp #=> Time
     #   resp.kms_key_id #=> String
+    #   resp.billing_mode #=> String, one of "EXTENDABLE_RETENTION_PRICING", "FIXED_RETENTION_PRICING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateEventDataStore AWS API Documentation
     #
@@ -774,11 +833,12 @@ module Aws::CloudTrail
     #
     # @option params [required, String] :s3_bucket_name
     #   Specifies the name of the Amazon S3 bucket designated for publishing
-    #   log files. See [Amazon S3 Bucket Naming Requirements][1].
+    #   log files. For information about bucket naming rules, see [Bucket
+    #   naming rules][1] in the *Amazon Simple Storage Service User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
     #
     # @option params [String] :s3_key_prefix
     #   Specifies the Amazon S3 key prefix that comes after the name of the
@@ -788,7 +848,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/get-and-view-cloudtrail-log-files.html#cloudtrail-find-log-files
     #
     # @option params [String] :sns_topic_name
     #   Specifies the name of the Amazon SNS topic defined for notification of
@@ -958,8 +1018,9 @@ module Aws::CloudTrail
     # the event data store enters a `PENDING_DELETION` state, and is
     # automatically deleted after a wait period of seven days.
     # `TerminationProtectionEnabled` must be set to `False` on the event
-    # data store; this operation cannot work if
-    # `TerminationProtectionEnabled` is `True`.
+    # data store and the `FederationStatus` must be `DISABLED`. You cannot
+    # delete an event data store if `TerminationProtectionEnabled` is `True`
+    # or the `FederationStatus` is `ENABLED`.
     #
     # After you run `DeleteEventDataStore` on an event data store, you
     # cannot run `ListQueries`, `DescribeQuery`, or `GetQueryResults` on
@@ -1199,6 +1260,110 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Disables Lake query federation on the specified event data store. When
+    # you disable federation, CloudTrail disables the integration with Glue,
+    # Lake Formation, and Amazon Athena. After disabling Lake query
+    # federation, you can no longer query your event data in Amazon Athena.
+    #
+    # No CloudTrail Lake data is deleted when you disable federation and you
+    # can continue to run queries in CloudTrail Lake.
+    #
+    # @option params [required, String] :event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store for which
+    #   you want to disable Lake query federation.
+    #
+    # @return [Types::DisableFederationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableFederationResponse#event_data_store_arn #event_data_store_arn} => String
+    #   * {Types::DisableFederationResponse#federation_status #federation_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_federation({
+    #     event_data_store: "EventDataStoreArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_data_store_arn #=> String
+    #   resp.federation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DisableFederation AWS API Documentation
+    #
+    # @overload disable_federation(params = {})
+    # @param [Hash] params ({})
+    def disable_federation(params = {}, options = {})
+      req = build_request(:disable_federation, params)
+      req.send_request(options)
+    end
+
+    # Enables Lake query federation on the specified event data store.
+    # Federating an event data store lets you view the metadata associated
+    # with the event data store in the Glue [Data Catalog][1] and run SQL
+    # queries against your event data using Amazon Athena. The table
+    # metadata stored in the Glue Data Catalog lets the Athena query engine
+    # know how to find, read, and process the data that you want to query.
+    #
+    # When you enable Lake query federation, CloudTrail creates a managed
+    # database named `aws:cloudtrail` (if the database doesn't already
+    # exist) and a managed federated table in the Glue Data Catalog. The
+    # event data store ID is used for the table name. CloudTrail registers
+    # the role ARN and event data store in [Lake Formation][2], the service
+    # responsible for allowing fine-grained access control of the federated
+    # resources in the Glue Data Catalog.
+    #
+    # For more information about Lake query federation, see [Federate an
+    # event data store][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/glue/latest/dg/components-overview.html#data-catalog-intro
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation-lake-formation.html
+    # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html
+    #
+    # @option params [required, String] :event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store for which
+    #   you want to enable Lake query federation.
+    #
+    # @option params [required, String] :federation_role_arn
+    #   The ARN of the federation role to use for the event data store. Amazon
+    #   Web Services services like Lake Formation use this federation role to
+    #   access data for the federated event data store. The federation role
+    #   must exist in your account and provide the [required minimum
+    #   permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html#query-federation-permissions-role
+    #
+    # @return [Types::EnableFederationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableFederationResponse#event_data_store_arn #event_data_store_arn} => String
+    #   * {Types::EnableFederationResponse#federation_status #federation_status} => String
+    #   * {Types::EnableFederationResponse#federation_role_arn #federation_role_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_federation({
+    #     event_data_store: "EventDataStoreArn", # required
+    #     federation_role_arn: "FederationRoleArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_data_store_arn #=> String
+    #   resp.federation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.federation_role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EnableFederation AWS API Documentation
+    #
+    # @overload enable_federation(params = {})
+    # @param [Hash] params ({})
+    def enable_federation(params = {}, options = {})
+      req = build_request(:enable_federation, params)
+      req.send_request(options)
+    end
+
     # Returns information about a specific channel.
     #
     # @option params [required, String] :channel
@@ -1279,6 +1444,10 @@ module Aws::CloudTrail
     #   * {Types::GetEventDataStoreResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::GetEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
     #   * {Types::GetEventDataStoreResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::GetEventDataStoreResponse#billing_mode #billing_mode} => String
+    #   * {Types::GetEventDataStoreResponse#federation_status #federation_status} => String
+    #   * {Types::GetEventDataStoreResponse#federation_role_arn #federation_role_arn} => String
+    #   * {Types::GetEventDataStoreResponse#partition_keys #partition_keys} => Array&lt;Types::PartitionKey&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1314,6 +1483,12 @@ module Aws::CloudTrail
     #   resp.created_timestamp #=> Time
     #   resp.updated_timestamp #=> Time
     #   resp.kms_key_id #=> String
+    #   resp.billing_mode #=> String, one of "EXTENDABLE_RETENTION_PRICING", "FIXED_RETENTION_PRICING"
+    #   resp.federation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.federation_role_arn #=> String
+    #   resp.partition_keys #=> Array
+    #   resp.partition_keys[0].name #=> String
+    #   resp.partition_keys[0].type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventDataStore AWS API Documentation
     #
@@ -1471,20 +1646,26 @@ module Aws::CloudTrail
     end
 
     # Describes the settings for the Insights event selectors that you
-    # configured for your trail. `GetInsightSelectors` shows if CloudTrail
-    # Insights event logging is enabled on the trail, and if it is, which
-    # insight types are enabled. If you run `GetInsightSelectors` on a trail
-    # that does not have Insights events enabled, the operation throws the
-    # exception `InsightNotEnabledException`
+    # configured for your trail or event data store. `GetInsightSelectors`
+    # shows if CloudTrail Insights event logging is enabled on the trail or
+    # event data store, and if it is, which Insights types are enabled. If
+    # you run `GetInsightSelectors` on a trail or event data store that does
+    # not have Insights events enabled, the operation throws the exception
+    # `InsightNotEnabledException`
     #
-    # For more information, see [Logging CloudTrail Insights Events for
-    # Trails ][1] in the *CloudTrail User Guide*.
+    # Specify either the `EventDataStore` parameter to get Insights event
+    # selectors for an event data store, or the `TrailName` parameter to the
+    # get Insights event selectors for a trail. You cannot specify these
+    # parameters together.
+    #
+    # For more information, see [Logging CloudTrail Insights events][1] in
+    # the *CloudTrail User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html
     #
-    # @option params [required, String] :trail_name
+    # @option params [String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
     #   name, the string must meet the following requirements:
     #
@@ -1504,15 +1685,26 @@ module Aws::CloudTrail
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
+    #   You cannot use this parameter with the `EventDataStore` parameter.
+    #
+    # @option params [String] :event_data_store
+    #   Specifies the ARN (or ID suffix of the ARN) of the event data store
+    #   for which you want to get Insights selectors.
+    #
+    #   You cannot use this parameter with the `TrailName` parameter.
+    #
     # @return [Types::GetInsightSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetInsightSelectorsResponse#trail_arn #trail_arn} => String
     #   * {Types::GetInsightSelectorsResponse#insight_selectors #insight_selectors} => Array&lt;Types::InsightSelector&gt;
+    #   * {Types::GetInsightSelectorsResponse#event_data_store_arn #event_data_store_arn} => String
+    #   * {Types::GetInsightSelectorsResponse#insights_destination #insights_destination} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_insight_selectors({
-    #     trail_name: "String", # required
+    #     trail_name: "String",
+    #     event_data_store: "EventDataStoreArn",
     #   })
     #
     # @example Response structure
@@ -1520,6 +1712,8 @@ module Aws::CloudTrail
     #   resp.trail_arn #=> String
     #   resp.insight_selectors #=> Array
     #   resp.insight_selectors[0].insight_type #=> String, one of "ApiCallRateInsight", "ApiErrorRateInsight"
+    #   resp.event_data_store_arn #=> String
+    #   resp.insights_destination #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetInsightSelectors AWS API Documentation
     #
@@ -1934,6 +2128,134 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Returns Insights metrics data for trails that have enabled Insights.
+    # The request must include the `EventSource`, `EventName`, and
+    # `InsightType` parameters.
+    #
+    # If the `InsightType` is set to `ApiErrorRateInsight`, the request must
+    # also include the `ErrorCode` parameter.
+    #
+    # The following are the available time periods for
+    # `ListInsightsMetricData`. Each cutoff is inclusive.
+    #
+    # * Data points with a period of 60 seconds (1-minute) are available for
+    #   15 days.
+    #
+    # * Data points with a period of 300 seconds (5-minute) are available
+    #   for 63 days.
+    #
+    # * Data points with a period of 3600 seconds (1 hour) are available for
+    #   90 days.
+    #
+    # Access to the `ListInsightsMetricData` API operation is linked to the
+    # `cloudtrail:LookupEvents` action. To use this operation, you must have
+    # permissions to perform the `cloudtrail:LookupEvents` action.
+    #
+    # @option params [required, String] :event_source
+    #   The Amazon Web Services service to which the request was made, such as
+    #   `iam.amazonaws.com` or `s3.amazonaws.com`.
+    #
+    # @option params [required, String] :event_name
+    #   The name of the event, typically the Amazon Web Services API on which
+    #   unusual levels of activity were recorded.
+    #
+    # @option params [required, String] :insight_type
+    #   The type of CloudTrail Insights event, which is either
+    #   `ApiCallRateInsight` or `ApiErrorRateInsight`. The
+    #   `ApiCallRateInsight` Insights type analyzes write-only management API
+    #   calls that are aggregated per minute against a baseline API call
+    #   volume. The `ApiErrorRateInsight` Insights type analyzes management
+    #   API calls that result in error codes.
+    #
+    # @option params [String] :error_code
+    #   Conditionally required if the `InsightType` parameter is set to
+    #   `ApiErrorRateInsight`.
+    #
+    #   If returning metrics for the `ApiErrorRateInsight` Insights type, this
+    #   is the error to retrieve data for. For example, `AccessDenied`.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   Specifies, in UTC, the start time for time-series data. The value
+    #   specified is inclusive; results include data points with the specified
+    #   time stamp.
+    #
+    #   The default is 90 days before the time of request.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   Specifies, in UTC, the end time for time-series data. The value
+    #   specified is exclusive; results include data points up to the
+    #   specified time stamp.
+    #
+    #   The default is the time of request.
+    #
+    # @option params [Integer] :period
+    #   Granularity of data to retrieve, in seconds. Valid values are `60`,
+    #   `300`, and `3600`. If you specify any other value, you will get an
+    #   error. The default is 3600 seconds.
+    #
+    # @option params [String] :data_type
+    #   Type of datapoints to return. Valid values are `NonZeroData` and
+    #   `FillWithZeros`. The default is `NonZeroData`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of datapoints to return. Valid values are integers
+    #   from 1 to 21600. The default value is 21600.
+    #
+    # @option params [String] :next_token
+    #   Returned if all datapoints can't be returned in a single call. For
+    #   example, due to reaching `MaxResults`.
+    #
+    #   Add this parameter to the request to continue retrieving results
+    #   starting from the last evaluated point.
+    #
+    # @return [Types::ListInsightsMetricDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInsightsMetricDataResponse#event_source #event_source} => String
+    #   * {Types::ListInsightsMetricDataResponse#event_name #event_name} => String
+    #   * {Types::ListInsightsMetricDataResponse#insight_type #insight_type} => String
+    #   * {Types::ListInsightsMetricDataResponse#error_code #error_code} => String
+    #   * {Types::ListInsightsMetricDataResponse#timestamps #timestamps} => Array&lt;Time&gt;
+    #   * {Types::ListInsightsMetricDataResponse#values #values} => Array&lt;Float&gt;
+    #   * {Types::ListInsightsMetricDataResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_insights_metric_data({
+    #     event_source: "EventSource", # required
+    #     event_name: "EventName", # required
+    #     insight_type: "ApiCallRateInsight", # required, accepts ApiCallRateInsight, ApiErrorRateInsight
+    #     error_code: "ErrorCode",
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     period: 1,
+    #     data_type: "FillWithZeros", # accepts FillWithZeros, NonZeroData
+    #     max_results: 1,
+    #     next_token: "InsightsMetricNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_source #=> String
+    #   resp.event_name #=> String
+    #   resp.insight_type #=> String, one of "ApiCallRateInsight", "ApiErrorRateInsight"
+    #   resp.error_code #=> String
+    #   resp.timestamps #=> Array
+    #   resp.timestamps[0] #=> Time
+    #   resp.values #=> Array
+    #   resp.values[0] #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListInsightsMetricData AWS API Documentation
+    #
+    # @overload list_insights_metric_data(params = {})
+    # @param [Hash] params ({})
+    def list_insights_metric_data(params = {}, options = {})
+      req = build_request(:list_insights_metric_data, params)
+      req.send_request(options)
+    end
+
     # Returns all public keys whose private keys were used to sign the
     # digest files within the specified time range. The public key is needed
     # to validate digest files that were signed with its corresponding
@@ -2149,8 +2471,16 @@ module Aws::CloudTrail
 
     # Looks up [management events][1] or [CloudTrail Insights events][2]
     # that are captured by CloudTrail. You can look up events that occurred
-    # in a Region within the last 90 days. Lookup supports the following
-    # attributes for management events:
+    # in a Region within the last 90 days.
+    #
+    # <note markdown="1"> `LookupEvents` returns recent Insights events for trails that enable
+    # Insights. To view Insights events for an event data store, you can run
+    # queries on your Insights event data store, and you can also view the
+    # Lake dashboard for Insights.
+    #
+    #  </note>
+    #
+    # Lookup supports the following attributes for management events:
     #
     # * Amazon Web Services access key
     #
@@ -2273,10 +2603,10 @@ module Aws::CloudTrail
     # trail to log Insights events, be sure the event selector enables
     # logging of the Insights event types you want configured for your
     # trail. For more information about logging Insights events, see
-    # [Logging Insights events for trails][1] in the *CloudTrail User
-    # Guide*. By default, trails created without specific event selectors
-    # are configured to log all read and write management events, and no
-    # data events.
+    # [Logging Insights events][1] in the *CloudTrail User Guide*. By
+    # default, trails created without specific event selectors are
+    # configured to log all read and write management events, and no data
+    # events.
     #
     # When an event occurs in your account, CloudTrail evaluates the event
     # selectors or advanced event selectors in all trails. For each trail,
@@ -2446,25 +2776,51 @@ module Aws::CloudTrail
     end
 
     # Lets you enable Insights event logging by specifying the Insights
-    # selectors that you want to enable on an existing trail. You also use
-    # `PutInsightSelectors` to turn off Insights event logging, by passing
-    # an empty list of insight types. The valid Insights event types in this
-    # release are `ApiErrorRateInsight` and `ApiCallRateInsight`.
+    # selectors that you want to enable on an existing trail or event data
+    # store. You also use `PutInsightSelectors` to turn off Insights event
+    # logging, by passing an empty list of Insights types. The valid
+    # Insights event types are `ApiErrorRateInsight` and
+    # `ApiCallRateInsight`.
     #
-    # To log CloudTrail Insights events on API call volume, the trail must
-    # log `write` management events. To log CloudTrail Insights events on
-    # API error rate, the trail must log `read` or `write` management
-    # events. You can call `GetEventSelectors` on a trail to check whether
-    # the trail logs management events.
+    # To enable Insights on an event data store, you must specify the ARNs
+    # (or ID suffix of the ARNs) for the source event data store
+    # (`EventDataStore`) and the destination event data store
+    # (`InsightsDestination`). The source event data store logs management
+    # events and enables Insights. The destination event data store logs
+    # Insights events based upon the management event activity of the source
+    # event data store. The source and destination event data stores must
+    # belong to the same Amazon Web Services account.
     #
-    # @option params [required, String] :trail_name
+    # To log Insights events for a trail, you must specify the name
+    # (`TrailName`) of the CloudTrail trail for which you want to change or
+    # add Insights selectors.
+    #
+    # To log CloudTrail Insights events on API call volume, the trail or
+    # event data store must log `write` management events. To log CloudTrail
+    # Insights events on API error rate, the trail or event data store must
+    # log `read` or `write` management events. You can call
+    # `GetEventSelectors` on a trail to check whether the trail logs
+    # management events. You can call `GetEventDataStore` on an event data
+    # store to check whether the event data store logs management events.
+    #
+    # For more information, see [Logging CloudTrail Insights events][1] in
+    # the *CloudTrail User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html
+    #
+    # @option params [String] :trail_name
     #   The name of the CloudTrail trail for which you want to change or add
     #   Insights selectors.
     #
+    #   You cannot use this parameter with the `EventDataStore` and
+    #   `InsightsDestination` parameters.
+    #
     # @option params [required, Array<Types::InsightSelector>] :insight_selectors
-    #   A JSON string that contains the insight types you want to log on a
-    #   trail. `ApiCallRateInsight` and `ApiErrorRateInsight` are valid
-    #   Insight types.
+    #   A JSON string that contains the Insights types you want to log on a
+    #   trail or event data store. `ApiCallRateInsight` and
+    #   `ApiErrorRateInsight` are valid Insight types.
     #
     #   The `ApiCallRateInsight` Insights type analyzes write-only management
     #   API calls that are aggregated per minute against a baseline API call
@@ -2474,20 +2830,40 @@ module Aws::CloudTrail
     #   that result in error codes. The error is shown if the API call is
     #   unsuccessful.
     #
+    # @option params [String] :event_data_store
+    #   The ARN (or ID suffix of the ARN) of the source event data store for
+    #   which you want to change or add Insights selectors. To enable Insights
+    #   on an event data store, you must provide both the `EventDataStore` and
+    #   `InsightsDestination` parameters.
+    #
+    #   You cannot use this parameter with the `TrailName` parameter.
+    #
+    # @option params [String] :insights_destination
+    #   The ARN (or ID suffix of the ARN) of the destination event data store
+    #   that logs Insights events. To enable Insights on an event data store,
+    #   you must provide both the `EventDataStore` and `InsightsDestination`
+    #   parameters.
+    #
+    #   You cannot use this parameter with the `TrailName` parameter.
+    #
     # @return [Types::PutInsightSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutInsightSelectorsResponse#trail_arn #trail_arn} => String
     #   * {Types::PutInsightSelectorsResponse#insight_selectors #insight_selectors} => Array&lt;Types::InsightSelector&gt;
+    #   * {Types::PutInsightSelectorsResponse#event_data_store_arn #event_data_store_arn} => String
+    #   * {Types::PutInsightSelectorsResponse#insights_destination #insights_destination} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_insight_selectors({
-    #     trail_name: "String", # required
+    #     trail_name: "String",
     #     insight_selectors: [ # required
     #       {
     #         insight_type: "ApiCallRateInsight", # accepts ApiCallRateInsight, ApiErrorRateInsight
     #       },
     #     ],
+    #     event_data_store: "EventDataStoreArn",
+    #     insights_destination: "EventDataStoreArn",
     #   })
     #
     # @example Response structure
@@ -2495,6 +2871,8 @@ module Aws::CloudTrail
     #   resp.trail_arn #=> String
     #   resp.insight_selectors #=> Array
     #   resp.insight_selectors[0].insight_type #=> String, one of "ApiCallRateInsight", "ApiErrorRateInsight"
+    #   resp.event_data_store_arn #=> String
+    #   resp.insights_destination #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectors AWS API Documentation
     #
@@ -2560,8 +2938,12 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Registers an organization’s member account as the CloudTrail delegated
-    # administrator.
+    # Registers an organization’s member account as the CloudTrail
+    # [delegated administrator][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-delegated-administrator.html
     #
     # @option params [required, String] :member_account_id
     #   An organization member account ID that you want to designate as a
@@ -2648,6 +3030,7 @@ module Aws::CloudTrail
     #   * {Types::RestoreEventDataStoreResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::RestoreEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
     #   * {Types::RestoreEventDataStoreResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::RestoreEventDataStoreResponse#billing_mode #billing_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2683,6 +3066,7 @@ module Aws::CloudTrail
     #   resp.created_timestamp #=> Time
     #   resp.updated_timestamp #=> Time
     #   resp.kms_key_id #=> String
+    #   resp.billing_mode #=> String, one of "EXTENDABLE_RETENTION_PRICING", "FIXED_RETENTION_PRICING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RestoreEventDataStore AWS API Documentation
     #
@@ -2726,7 +3110,8 @@ module Aws::CloudTrail
     # for other Amazon Web Services services. If you want to import
     # CloudTrail events contained in another prefix, you must include the
     # prefix in the `S3LocationUri`. For more considerations about importing
-    # trail events, see [Considerations][1].
+    # trail events, see [Considerations for copying trail events][1] in the
+    # *CloudTrail User Guide*.
     #
     # When you start a new import, the `Destinations` and `ImportSource`
     # parameters are required. Before starting a new import, disable any
@@ -3069,17 +3454,20 @@ module Aws::CloudTrail
     # ARN or the ID portion of the ARN. Other parameters are optional, but
     # at least one optional parameter must be specified, or CloudTrail
     # throws an error. `RetentionPeriod` is in days, and valid values are
-    # integers between 90 and 2557. By default, `TerminationProtection` is
-    # enabled.
+    # integers between 7 and 3653 if the `BillingMode` is set to
+    # `EXTENDABLE_RETENTION_PRICING`, or between 7 and 2557 if `BillingMode`
+    # is set to `FIXED_RETENTION_PRICING`. By default,
+    # `TerminationProtection` is enabled.
     #
     # For event data stores for CloudTrail events, `AdvancedEventSelectors`
-    # includes or excludes management and data events in your event data
+    # includes or excludes management or data events in your event data
     # store. For more information about `AdvancedEventSelectors`, see
     # [AdvancedEventSelectors][1].
     #
-    # For event data stores for Config configuration items, Audit Manager
-    # evidence, or non-Amazon Web Services events, `AdvancedEventSelectors`
-    # includes events of that type in your event data store.
+    # For event data stores for CloudTrail Insights events, Config
+    # configuration items, Audit Manager evidence, or non-Amazon Web
+    # Services events, `AdvancedEventSelectors` includes events of that type
+    # in your event data store.
     #
     #
     #
@@ -3105,9 +3493,20 @@ module Aws::CloudTrail
     #   Specifies whether an event data store collects events logged for an
     #   organization in Organizations.
     #
+    #   <note markdown="1"> Only the management account for the organization can convert an
+    #   organization event data store to a non-organization event data store,
+    #   or convert a non-organization event data store to an organization
+    #   event data store.
+    #
+    #    </note>
+    #
     # @option params [Integer] :retention_period
-    #   The retention period of the event data store, in days. You can set a
+    #   The retention period of the event data store, in days. If
+    #   `BillingMode` is set to `EXTENDABLE_RETENTION_PRICING`, you can set a
+    #   retention period of up to 3653 days, the equivalent of 10 years. If
+    #   `BillingMode` is set to `FIXED_RETENTION_PRICING`, you can set a
     #   retention period of up to 2557 days, the equivalent of seven years.
+    #
     #   CloudTrail Lake determines whether to retain an event by checking if
     #   the `eventTime` of the event is within the specified retention period.
     #   For example, if you set a retention period of 90 days, CloudTrail will
@@ -3157,6 +3556,40 @@ module Aws::CloudTrail
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html
     #
+    # @option params [String] :billing_mode
+    #   <note markdown="1"> You can't change the billing mode from `EXTENDABLE_RETENTION_PRICING`
+    #   to `FIXED_RETENTION_PRICING`. If `BillingMode` is set to
+    #   `EXTENDABLE_RETENTION_PRICING` and you want to use
+    #   `FIXED_RETENTION_PRICING` instead, you'll need to stop ingestion on
+    #   the event data store and create a new event data store that uses
+    #   `FIXED_RETENTION_PRICING`.
+    #
+    #    </note>
+    #
+    #   The billing mode for the event data store determines the cost for
+    #   ingesting events and the default and maximum retention period for the
+    #   event data store.
+    #
+    #   The following are the possible values:
+    #
+    #   * `EXTENDABLE_RETENTION_PRICING` - This billing mode is generally
+    #     recommended if you want a flexible retention period of up to 3653
+    #     days (about 10 years). The default retention period for this billing
+    #     mode is 366 days.
+    #
+    #   * `FIXED_RETENTION_PRICING` - This billing mode is recommended if you
+    #     expect to ingest more than 25 TB of event data per month and need a
+    #     retention period of up to 2557 days (about 7 years). The default
+    #     retention period for this billing mode is 2557 days.
+    #
+    #   For more information about CloudTrail pricing, see [CloudTrail
+    #   Pricing][1] and [Managing CloudTrail Lake costs][2].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/cloudtrail/pricing/
+    #   [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-manage-costs.html
+    #
     # @return [Types::UpdateEventDataStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateEventDataStoreResponse#event_data_store_arn #event_data_store_arn} => String
@@ -3170,6 +3603,9 @@ module Aws::CloudTrail
     #   * {Types::UpdateEventDataStoreResponse#created_timestamp #created_timestamp} => Time
     #   * {Types::UpdateEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
     #   * {Types::UpdateEventDataStoreResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::UpdateEventDataStoreResponse#billing_mode #billing_mode} => String
+    #   * {Types::UpdateEventDataStoreResponse#federation_status #federation_status} => String
+    #   * {Types::UpdateEventDataStoreResponse#federation_role_arn #federation_role_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3197,6 +3633,7 @@ module Aws::CloudTrail
     #     retention_period: 1,
     #     termination_protection_enabled: false,
     #     kms_key_id: "EventDataStoreKmsKeyId",
+    #     billing_mode: "EXTENDABLE_RETENTION_PRICING", # accepts EXTENDABLE_RETENTION_PRICING, FIXED_RETENTION_PRICING
     #   })
     #
     # @example Response structure
@@ -3227,6 +3664,9 @@ module Aws::CloudTrail
     #   resp.created_timestamp #=> Time
     #   resp.updated_timestamp #=> Time
     #   resp.kms_key_id #=> String
+    #   resp.billing_mode #=> String, one of "EXTENDABLE_RETENTION_PRICING", "FIXED_RETENTION_PRICING"
+    #   resp.federation_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #   resp.federation_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateEventDataStore AWS API Documentation
     #
@@ -3267,11 +3707,11 @@ module Aws::CloudTrail
     #
     # @option params [String] :s3_bucket_name
     #   Specifies the name of the Amazon S3 bucket designated for publishing
-    #   log files. See [Amazon S3 Bucket Naming Requirements][1].
+    #   log files. See [Amazon S3 Bucket naming rules][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
     #
     # @option params [String] :s3_key_prefix
     #   Specifies the Amazon S3 key prefix that comes after the name of the
@@ -3281,7 +3721,7 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/get-and-view-cloudtrail-log-files.html#cloudtrail-find-log-files
     #
     # @option params [String] :sns_topic_name
     #   Specifies the name of the Amazon SNS topic defined for notification of
@@ -3359,13 +3799,18 @@ module Aws::CloudTrail
     #   organization in Organizations, or only for the current Amazon Web
     #   Services account. The default is false, and cannot be true unless the
     #   call is made on behalf of an Amazon Web Services account that is the
-    #   management account or delegated administrator account for an
-    #   organization in Organizations. If the trail is not an organization
-    #   trail and this is set to `true`, the trail will be created in all
-    #   Amazon Web Services accounts that belong to the organization. If the
-    #   trail is an organization trail and this is set to `false`, the trail
-    #   will remain in the current Amazon Web Services account but be deleted
-    #   from all member accounts in the organization.
+    #   management account for an organization in Organizations. If the trail
+    #   is not an organization trail and this is set to `true`, the trail will
+    #   be created in all Amazon Web Services accounts that belong to the
+    #   organization. If the trail is an organization trail and this is set to
+    #   `false`, the trail will remain in the current Amazon Web Services
+    #   account but be deleted from all member accounts in the organization.
+    #
+    #   <note markdown="1"> Only the management account for the organization can convert an
+    #   organization trail to a non-organization trail, or convert a
+    #   non-organization trail to an organization trail.
+    #
+    #    </note>
     #
     # @return [Types::UpdateTrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3437,7 +3882,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

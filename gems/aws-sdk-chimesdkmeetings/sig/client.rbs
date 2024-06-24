@@ -1,0 +1,360 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ChimeSDKMeetings
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _BatchCreateAttendeeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateAttendeeResponse]
+        def attendees: () -> ::Array[Types::Attendee]
+        def errors: () -> ::Array[Types::CreateAttendeeError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#batch_create_attendee-instance_method
+      def batch_create_attendee: (
+                                   meeting_id: ::String,
+                                   attendees: Array[
+                                     {
+                                       external_user_id: ::String,
+                                       capabilities: {
+                                         audio: ("SendReceive" | "Send" | "Receive" | "None"),
+                                         video: ("SendReceive" | "Send" | "Receive" | "None"),
+                                         content: ("SendReceive" | "Send" | "Receive" | "None")
+                                       }?
+                                     },
+                                   ]
+                                 ) -> _BatchCreateAttendeeResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateAttendeeResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#batch_update_attendee_capabilities_except-instance_method
+      def batch_update_attendee_capabilities_except: (
+                                                       meeting_id: ::String,
+                                                       excluded_attendee_ids: Array[
+                                                         {
+                                                           attendee_id: ::String
+                                                         },
+                                                       ],
+                                                       capabilities: {
+                                                         audio: ("SendReceive" | "Send" | "Receive" | "None"),
+                                                         video: ("SendReceive" | "Send" | "Receive" | "None"),
+                                                         content: ("SendReceive" | "Send" | "Receive" | "None")
+                                                       }
+                                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateAttendeeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAttendeeResponse]
+        def attendee: () -> Types::Attendee
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#create_attendee-instance_method
+      def create_attendee: (
+                             meeting_id: ::String,
+                             external_user_id: ::String,
+                             ?capabilities: {
+                               audio: ("SendReceive" | "Send" | "Receive" | "None"),
+                               video: ("SendReceive" | "Send" | "Receive" | "None"),
+                               content: ("SendReceive" | "Send" | "Receive" | "None")
+                             }
+                           ) -> _CreateAttendeeResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAttendeeResponseSuccess
+
+      interface _CreateMeetingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMeetingResponse]
+        def meeting: () -> Types::Meeting
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#create_meeting-instance_method
+      def create_meeting: (
+                            client_request_token: ::String,
+                            media_region: ::String,
+                            ?meeting_host_id: ::String,
+                            external_meeting_id: ::String,
+                            ?notifications_configuration: {
+                              lambda_function_arn: ::String?,
+                              sns_topic_arn: ::String?,
+                              sqs_queue_arn: ::String?
+                            },
+                            ?meeting_features: {
+                              audio: {
+                                echo_reduction: ("AVAILABLE" | "UNAVAILABLE")?
+                              }?,
+                              video: {
+                                max_resolution: ("None" | "HD" | "FHD")?
+                              }?,
+                              content: {
+                                max_resolution: ("None" | "FHD" | "UHD")?
+                              }?,
+                              attendee: {
+                                max_count: ::Integer?
+                              }?
+                            },
+                            ?primary_meeting_id: ::String,
+                            ?tenant_ids: Array[::String],
+                            ?tags: Array[
+                              {
+                                key: ::String,
+                                value: ::String
+                              },
+                            ]
+                          ) -> _CreateMeetingResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMeetingResponseSuccess
+
+      interface _CreateMeetingWithAttendeesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateMeetingWithAttendeesResponse]
+        def meeting: () -> Types::Meeting
+        def attendees: () -> ::Array[Types::Attendee]
+        def errors: () -> ::Array[Types::CreateAttendeeError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#create_meeting_with_attendees-instance_method
+      def create_meeting_with_attendees: (
+                                           client_request_token: ::String,
+                                           media_region: ::String,
+                                           ?meeting_host_id: ::String,
+                                           external_meeting_id: ::String,
+                                           ?meeting_features: {
+                                             audio: {
+                                               echo_reduction: ("AVAILABLE" | "UNAVAILABLE")?
+                                             }?,
+                                             video: {
+                                               max_resolution: ("None" | "HD" | "FHD")?
+                                             }?,
+                                             content: {
+                                               max_resolution: ("None" | "FHD" | "UHD")?
+                                             }?,
+                                             attendee: {
+                                               max_count: ::Integer?
+                                             }?
+                                           },
+                                           ?notifications_configuration: {
+                                             lambda_function_arn: ::String?,
+                                             sns_topic_arn: ::String?,
+                                             sqs_queue_arn: ::String?
+                                           },
+                                           attendees: Array[
+                                             {
+                                               external_user_id: ::String,
+                                               capabilities: {
+                                                 audio: ("SendReceive" | "Send" | "Receive" | "None"),
+                                                 video: ("SendReceive" | "Send" | "Receive" | "None"),
+                                                 content: ("SendReceive" | "Send" | "Receive" | "None")
+                                               }?
+                                             },
+                                           ],
+                                           ?primary_meeting_id: ::String,
+                                           ?tenant_ids: Array[::String],
+                                           ?tags: Array[
+                                             {
+                                               key: ::String,
+                                               value: ::String
+                                             },
+                                           ]
+                                         ) -> _CreateMeetingWithAttendeesResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMeetingWithAttendeesResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#delete_attendee-instance_method
+      def delete_attendee: (
+                             meeting_id: ::String,
+                             attendee_id: ::String
+                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#delete_meeting-instance_method
+      def delete_meeting: (
+                            meeting_id: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetAttendeeResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAttendeeResponse]
+        def attendee: () -> Types::Attendee
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#get_attendee-instance_method
+      def get_attendee: (
+                          meeting_id: ::String,
+                          attendee_id: ::String
+                        ) -> _GetAttendeeResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAttendeeResponseSuccess
+
+      interface _GetMeetingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetMeetingResponse]
+        def meeting: () -> Types::Meeting
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#get_meeting-instance_method
+      def get_meeting: (
+                         meeting_id: ::String
+                       ) -> _GetMeetingResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMeetingResponseSuccess
+
+      interface _ListAttendeesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAttendeesResponse]
+        def attendees: () -> ::Array[Types::Attendee]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#list_attendees-instance_method
+      def list_attendees: (
+                            meeting_id: ::String,
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListAttendeesResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAttendeesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    resource_arn: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#start_meeting_transcription-instance_method
+      def start_meeting_transcription: (
+                                         meeting_id: ::String,
+                                         transcription_configuration: {
+                                           engine_transcribe_settings: {
+                                             language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "th-TH" | "hi-IN")?,
+                                             vocabulary_filter_method: ("remove" | "mask" | "tag")?,
+                                             vocabulary_filter_name: ::String?,
+                                             vocabulary_name: ::String?,
+                                             region: ("us-east-2" | "us-east-1" | "us-west-2" | "ap-northeast-2" | "ap-southeast-2" | "ap-northeast-1" | "ca-central-1" | "eu-central-1" | "eu-west-1" | "eu-west-2" | "sa-east-1" | "auto" | "us-gov-west-1")?,
+                                             enable_partial_results_stabilization: bool?,
+                                             partial_results_stability: ("low" | "medium" | "high")?,
+                                             content_identification_type: ("PII")?,
+                                             content_redaction_type: ("PII")?,
+                                             pii_entity_types: ::String?,
+                                             language_model_name: ::String?,
+                                             identify_language: bool?,
+                                             language_options: ::String?,
+                                             preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "th-TH" | "hi-IN")?,
+                                             vocabulary_names: ::String?,
+                                             vocabulary_filter_names: ::String?
+                                           }?,
+                                           engine_transcribe_medical_settings: {
+                                             language_code: ("en-US"),
+                                             specialty: ("PRIMARYCARE" | "CARDIOLOGY" | "NEUROLOGY" | "ONCOLOGY" | "RADIOLOGY" | "UROLOGY"),
+                                             type: ("CONVERSATION" | "DICTATION"),
+                                             vocabulary_name: ::String?,
+                                             region: ("us-east-1" | "us-east-2" | "us-west-2" | "ap-southeast-2" | "ca-central-1" | "eu-west-1" | "auto")?,
+                                             content_identification_type: ("PHI")?
+                                           }?
+                                         }
+                                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#stop_meeting_transcription-instance_method
+      def stop_meeting_transcription: (
+                                        meeting_id: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateAttendeeCapabilitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateAttendeeCapabilitiesResponse]
+        def attendee: () -> Types::Attendee
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ChimeSDKMeetings/Client.html#update_attendee_capabilities-instance_method
+      def update_attendee_capabilities: (
+                                          meeting_id: ::String,
+                                          attendee_id: ::String,
+                                          capabilities: {
+                                            audio: ("SendReceive" | "Send" | "Receive" | "None"),
+                                            video: ("SendReceive" | "Send" | "Receive" | "None"),
+                                            content: ("SendReceive" | "Send" | "Receive" | "None")
+                                          }
+                                        ) -> _UpdateAttendeeCapabilitiesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAttendeeCapabilitiesResponseSuccess
+    end
+  end
+end
+

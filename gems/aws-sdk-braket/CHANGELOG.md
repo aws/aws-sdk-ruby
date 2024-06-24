@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2024-02-09)
+------------------
+
+* Feature - Creating a job will result in DeviceOfflineException when using an offline device, and DeviceRetiredException when using a retired device.
+
+1.33.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.32.0 (2023-12-04)
+------------------
+
+* Feature - This release enhances service support to create quantum tasks and hybrid jobs associated with Braket Direct Reservations.
+
+1.31.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.29.0 (2023-09-27)
 ------------------
 

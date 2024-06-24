@@ -1,0 +1,52 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ECR
+    module Waiters
+
+      class ImageScanComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?registry_id: ::String,
+                    repository_name: ::String,
+                    image_id: {
+                      image_digest: ::String?,
+                      image_tag: ::String?
+                    },
+                    ?next_token: ::String,
+                    ?max_results: ::Integer
+                  ) -> Client::_DescribeImageScanFindingsResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeImageScanFindingsResponseSuccess
+      end
+
+      class LifecyclePolicyPreviewComplete
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?registry_id: ::String,
+                    repository_name: ::String,
+                    ?image_ids: Array[
+                      {
+                        image_digest: ::String?,
+                        image_tag: ::String?
+                      },
+                    ],
+                    ?next_token: ::String,
+                    ?max_results: ::Integer,
+                    ?filter: {
+                      tag_status: ("TAGGED" | "UNTAGGED" | "ANY")?
+                    }
+                  ) -> Client::_GetLifecyclePolicyPreviewResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetLifecyclePolicyPreviewResponseSuccess
+      end
+    end
+  end
+end

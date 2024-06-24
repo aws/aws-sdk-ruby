@@ -62,7 +62,7 @@ module Aws
       def send_request(options)
         req = options[:client].build_request(@operation_name, options[:params])
         req.handlers.remove(RAISE_HANDLER)
-        Aws::Plugins::UserAgent.feature('waiter') do
+        Aws::Plugins::UserAgent.metric('WAITER') do
           req.send_request
         end
       end
@@ -97,7 +97,7 @@ module Aws
 
       def matches_error?(acceptor, response)
         Aws::Errors::ServiceError === response.error &&
-        response.error.code == acceptor['expected'].gsub('.', '')
+        response.error.code == acceptor['expected'].delete('.')
       end
 
       def path(acceptor)

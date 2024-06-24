@@ -1,0 +1,296 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoTDeviceAdvisor
+  module Types
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSuiteDefinitionRequest
+      attr_accessor suite_definition_configuration: Types::SuiteDefinitionConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateSuiteDefinitionResponse
+      attr_accessor suite_definition_id: ::String
+      attr_accessor suite_definition_arn: ::String
+      attr_accessor suite_definition_name: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DeleteSuiteDefinitionRequest
+      attr_accessor suite_definition_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSuiteDefinitionResponse < Aws::EmptyStructure
+    end
+
+    class DeviceUnderTest
+      attr_accessor thing_arn: ::String
+      attr_accessor certificate_arn: ::String
+      attr_accessor device_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetEndpointRequest
+      attr_accessor thing_arn: ::String
+      attr_accessor certificate_arn: ::String
+      attr_accessor device_role_arn: ::String
+      attr_accessor authentication_method: ("X509ClientCertificate" | "SignatureVersion4")
+      SENSITIVE: []
+    end
+
+    class GetEndpointResponse
+      attr_accessor endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class GetSuiteDefinitionRequest
+      attr_accessor suite_definition_id: ::String
+      attr_accessor suite_definition_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetSuiteDefinitionResponse
+      attr_accessor suite_definition_id: ::String
+      attr_accessor suite_definition_arn: ::String
+      attr_accessor suite_definition_version: ::String
+      attr_accessor latest_version: ::String
+      attr_accessor suite_definition_configuration: Types::SuiteDefinitionConfiguration
+      attr_accessor created_at: ::Time
+      attr_accessor last_modified_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetSuiteRunReportRequest
+      attr_accessor suite_definition_id: ::String
+      attr_accessor suite_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSuiteRunReportResponse
+      attr_accessor qualification_report_download_url: ::String
+      SENSITIVE: []
+    end
+
+    class GetSuiteRunRequest
+      attr_accessor suite_definition_id: ::String
+      attr_accessor suite_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSuiteRunResponse
+      attr_accessor suite_definition_id: ::String
+      attr_accessor suite_definition_version: ::String
+      attr_accessor suite_run_id: ::String
+      attr_accessor suite_run_arn: ::String
+      attr_accessor suite_run_configuration: Types::SuiteRunConfiguration
+      attr_accessor test_result: Types::TestResult
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor status: ("PASS" | "FAIL" | "CANCELED" | "PENDING" | "RUNNING" | "STOPPING" | "STOPPED" | "PASS_WITH_WARNINGS" | "ERROR")
+      attr_accessor error_reason: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GroupResult
+      attr_accessor group_id: ::String
+      attr_accessor group_name: ::String
+      attr_accessor tests: ::Array[Types::TestCaseRun]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListSuiteDefinitionsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSuiteDefinitionsResponse
+      attr_accessor suite_definition_information_list: ::Array[Types::SuiteDefinitionInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSuiteRunsRequest
+      attr_accessor suite_definition_id: ::String
+      attr_accessor suite_definition_version: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSuiteRunsResponse
+      attr_accessor suite_runs_list: ::Array[Types::SuiteRunInformation]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StartSuiteRunRequest
+      attr_accessor suite_definition_id: ::String
+      attr_accessor suite_definition_version: ::String
+      attr_accessor suite_run_configuration: Types::SuiteRunConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartSuiteRunResponse
+      attr_accessor suite_run_id: ::String
+      attr_accessor suite_run_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor endpoint: ::String
+      SENSITIVE: []
+    end
+
+    class StopSuiteRunRequest
+      attr_accessor suite_definition_id: ::String
+      attr_accessor suite_run_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopSuiteRunResponse < Aws::EmptyStructure
+    end
+
+    class SuiteDefinitionConfiguration
+      attr_accessor suite_definition_name: ::String
+      attr_accessor devices: ::Array[Types::DeviceUnderTest]
+      attr_accessor intended_for_qualification: bool
+      attr_accessor is_long_duration_test: bool
+      attr_accessor root_group: ::String
+      attr_accessor device_permission_role_arn: ::String
+      attr_accessor protocol: ("MqttV3_1_1" | "MqttV5" | "MqttV3_1_1_OverWebSocket" | "MqttV5_OverWebSocket")
+      SENSITIVE: []
+    end
+
+    class SuiteDefinitionInformation
+      attr_accessor suite_definition_id: ::String
+      attr_accessor suite_definition_name: ::String
+      attr_accessor default_devices: ::Array[Types::DeviceUnderTest]
+      attr_accessor intended_for_qualification: bool
+      attr_accessor is_long_duration_test: bool
+      attr_accessor protocol: ("MqttV3_1_1" | "MqttV5" | "MqttV3_1_1_OverWebSocket" | "MqttV5_OverWebSocket")
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class SuiteRunConfiguration
+      attr_accessor primary_device: Types::DeviceUnderTest
+      attr_accessor selected_test_list: ::Array[::String]
+      attr_accessor parallel_run: bool
+      SENSITIVE: []
+    end
+
+    class SuiteRunInformation
+      attr_accessor suite_definition_id: ::String
+      attr_accessor suite_definition_version: ::String
+      attr_accessor suite_definition_name: ::String
+      attr_accessor suite_run_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor started_at: ::Time
+      attr_accessor end_at: ::Time
+      attr_accessor status: ("PASS" | "FAIL" | "CANCELED" | "PENDING" | "RUNNING" | "STOPPING" | "STOPPED" | "PASS_WITH_WARNINGS" | "ERROR")
+      attr_accessor passed: ::Integer
+      attr_accessor failed: ::Integer
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TestCaseRun
+      attr_accessor test_case_run_id: ::String
+      attr_accessor test_case_definition_id: ::String
+      attr_accessor test_case_definition_name: ::String
+      attr_accessor status: ("PASS" | "FAIL" | "CANCELED" | "PENDING" | "RUNNING" | "STOPPING" | "STOPPED" | "PASS_WITH_WARNINGS" | "ERROR")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor log_url: ::String
+      attr_accessor warnings: ::String
+      attr_accessor failure: ::String
+      attr_accessor test_scenarios: ::Array[Types::TestCaseScenario]
+      SENSITIVE: []
+    end
+
+    class TestCaseScenario
+      attr_accessor test_case_scenario_id: ::String
+      attr_accessor test_case_scenario_type: ("Advanced" | "Basic")
+      attr_accessor status: ("PASS" | "FAIL" | "CANCELED" | "PENDING" | "RUNNING" | "STOPPING" | "STOPPED" | "PASS_WITH_WARNINGS" | "ERROR")
+      attr_accessor failure: ::String
+      attr_accessor system_message: ::String
+      SENSITIVE: []
+    end
+
+    class TestResult
+      attr_accessor groups: ::Array[Types::GroupResult]
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateSuiteDefinitionRequest
+      attr_accessor suite_definition_id: ::String
+      attr_accessor suite_definition_configuration: Types::SuiteDefinitionConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateSuiteDefinitionResponse
+      attr_accessor suite_definition_id: ::String
+      attr_accessor suite_definition_arn: ::String
+      attr_accessor suite_definition_name: ::String
+      attr_accessor suite_definition_version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

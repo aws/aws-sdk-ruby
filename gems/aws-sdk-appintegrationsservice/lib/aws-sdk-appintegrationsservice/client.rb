@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::AppIntegrationsService
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::AppIntegrationsService
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::AppIntegrationsService
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::AppIntegrationsService
     #   @option options [Aws::AppIntegrationsService::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::AppIntegrationsService::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -427,6 +452,10 @@ module Aws::AppIntegrationsService
     #   The tags used to organize, track, or control access for this resource.
     #   For example, \\\{ "tags": \\\{"key1":"value1",
     #   "key2":"value2"\\} \\}.
+    #
+    # @option params [Array<String>] :permissions
+    #   The configuration of events or requests that the application has
+    #   access to.
     #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -484,6 +513,7 @@ module Aws::AppIntegrationsService
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     permissions: ["Permission"],
     #   })
     #
     # @example Response structure
@@ -520,7 +550,7 @@ module Aws::AppIntegrationsService
     # @option params [required, String] :source_uri
     #   The URI of the data source.
     #
-    # @option params [required, Types::ScheduleConfiguration] :schedule_config
+    # @option params [Types::ScheduleConfiguration] :schedule_config
     #   The name of the data and how often it should be pulled from the
     #   source.
     #
@@ -569,7 +599,7 @@ module Aws::AppIntegrationsService
     #     description: "Description",
     #     kms_key: "NonBlankString", # required
     #     source_uri: "SourceURI", # required
-    #     schedule_config: { # required
+    #     schedule_config: {
     #       first_execution_from: "NonBlankString",
     #       object: "Object",
     #       schedule_expression: "NonBlankString", # required
@@ -692,6 +722,42 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
+    # Deletes the Application. Only Applications that don't have any
+    # Application Associations can be deleted.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the Application.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To delete an application
+    #
+    #   # The following deletes an application.
+    #
+    #   resp = client.delete_application({
+    #     arn: "arn:aws:app-integrations:us-west-2:0123456789012:application/98542c53-e8ac-4570-9c85-c6552c8d9c5e", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_application({
+    #     arn: "ArnOrUUID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/DeleteApplication AWS API Documentation
+    #
+    # @overload delete_application(params = {})
+    # @param [Hash] params ({})
+    def delete_application(params = {}, options = {})
+      req = build_request(:delete_application, params)
+      req.send_request(options)
+    end
+
     # Deletes the DataIntegration. Only DataIntegrations that don't have
     # any DataIntegrationAssociations can be deleted. Deleting a
     # DataIntegration also deletes the underlying Amazon AppFlow flow and
@@ -771,6 +837,7 @@ module Aws::AppIntegrationsService
     #   * {Types::GetApplicationResponse#created_time #created_time} => Time
     #   * {Types::GetApplicationResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::GetApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetApplicationResponse#permissions #permissions} => Array&lt;String&gt;
     #
     #
     # @example Example: To get an application
@@ -820,6 +887,8 @@ module Aws::AppIntegrationsService
     #   resp.last_modified_time #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.permissions #=> Array
+    #   resp.permissions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetApplication AWS API Documentation
     #
@@ -933,6 +1002,73 @@ module Aws::AppIntegrationsService
     # @param [Hash] params ({})
     def get_event_integration(params = {}, options = {})
       req = build_request(:get_event_integration, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of application associations for an
+    # application.
+    #
+    # @option params [required, String] :application_id
+    #   A unique identifier for the Application.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListApplicationAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListApplicationAssociationsResponse#application_associations #application_associations} => Array&lt;Types::ApplicationAssociationSummary&gt;
+    #   * {Types::ListApplicationAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To list application associations of an application
+    #
+    #   # The following retrives application associations of an application
+    #
+    #   resp = client.list_application_associations({
+    #     application_id: "98542c53-e8ac-4570-9c85-c6552c8d9c5e", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     application_associations: [
+    #       {
+    #         application_arn: "arn:aws:app-integrations:us-west-2:0123456789012:application/98542c53-e8ac-4570-9c85-c6552c8d9c5e", 
+    #         application_association_arn: "arn:aws:app-integrations:us-west-2:0123456789012:application-association/98542c53-e8ac-4570-9c85-c6552c8d9c5e/461dfb57-320a-454d-9bba-bb560845ff38", 
+    #         client_id: "connect.amazonaws.com", 
+    #       }, 
+    #     ], 
+    #     next_token: "abc", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_application_associations({
+    #     application_id: "ArnOrUUID", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_associations #=> Array
+    #   resp.application_associations[0].application_association_arn #=> String
+    #   resp.application_associations[0].application_arn #=> String
+    #   resp.application_associations[0].client_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ListApplicationAssociations AWS API Documentation
+    #
+    # @overload list_application_associations(params = {})
+    # @param [Hash] params ({})
+    def list_application_associations(params = {}, options = {})
+      req = build_request(:list_application_associations, params)
       req.send_request(options)
     end
 
@@ -1315,6 +1451,10 @@ module Aws::AppIntegrationsService
     # @option params [Array<Types::Publication>] :publications
     #   The events that the application publishes.
     #
+    # @option params [Array<String>] :permissions
+    #   The configuration of events or requests that the application has
+    #   access to.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -1356,6 +1496,7 @@ module Aws::AppIntegrationsService
     #         description: "Description",
     #       },
     #     ],
+    #     permissions: ["Permission"],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateApplication AWS API Documentation
@@ -1447,7 +1588,7 @@ module Aws::AppIntegrationsService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

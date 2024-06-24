@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.71.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2024-05-08)
+------------------
+
+* Feature - The policy scope resource tag is always a string value, either a non-empty string or an empty string.
+
+1.69.0 (2024-04-30)
+------------------
+
+* Feature - AWS Firewall Manager now supports the network firewall service stream exception policy feature for accounts within your organization.
+
+1.68.0 (2024-04-25)
+------------------
+
+* Feature - AWS Firewall Manager adds support for network ACL policies to manage Amazon Virtual Private Cloud (VPC) network access control lists (ACLs) for accounts in your organization.
+
+1.67.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.66.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.65.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.64.0 (2023-11-10)
+------------------
+
+* Feature - Adds optimizeUnassociatedWebACL flag to ManagedServiceData, updates third-party firewall examples, and other minor documentation updates.
+
 1.63.0 (2023-09-27)
 ------------------
 

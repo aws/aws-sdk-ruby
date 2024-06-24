@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::MedicalImaging
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::MedicalImaging
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::MedicalImaging
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::MedicalImaging
     #   @option options [Aws::MedicalImaging::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::MedicalImaging::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -463,8 +488,8 @@ module Aws::MedicalImaging
     #   The tags provided when creating a data store.
     #
     # @option params [String] :kms_key_arn
-    #   The Amazon Resource Name (ARN) assigned to the AWS Key Management
-    #   Service (AWS KMS) key for accessing encrypted data.
+    #   The Amazon Resource Name (ARN) assigned to the Key Management Service
+    #   (KMS) key for accessing encrypted data.
     #
     # @return [Types::CreateDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -571,6 +596,15 @@ module Aws::MedicalImaging
 
     # Get the import job properties to learn more about the job or job
     # progress.
+    #
+    # <note markdown="1"> The `jobStatus` refers to the execution of the import job. Therefore,
+    # an import job can return a `jobStatus` as `COMPLETED` even if
+    # validation issues are discovered during the import process. If a
+    # `jobStatus` returns as `COMPLETED`, we still recommend you review the
+    # output manifests written to S3, as they provide details on the success
+    # or failure of individual P10 object imports.
+    #
+    #  </note>
     #
     # @option params [required, String] :datastore_id
     #   The data store identifier.
@@ -779,8 +813,7 @@ module Aws::MedicalImaging
       req.send_request(options, &block)
     end
 
-    # List import jobs created by this AWS account for a specific data
-    # store.
+    # List import jobs created for a specific data store.
     #
     # @option params [required, String] :datastore_id
     #   The data store identifier.
@@ -833,7 +866,7 @@ module Aws::MedicalImaging
       req.send_request(options)
     end
 
-    # List data stores created by this AWS account.
+    # List data stores.
     #
     # @option params [String] :datastore_status
     #   The data store status.
@@ -965,6 +998,16 @@ module Aws::MedicalImaging
 
     # Search image sets based on defined input attributes.
     #
+    # <note markdown="1"> `SearchImageSets` accepts a single search query parameter and returns
+    # a paginated response of all image sets that have the matching
+    # criteria. All date range queries must be input as `(lowerBound,
+    # upperBound)`.
+    #
+    #  By default, `SearchImageSets` uses the `updatedAt` field for sorting
+    # in descending order from newest to oldest.
+    #
+    #  </note>
+    #
     # @option params [required, String] :datastore_id
     #   The identifier of the data store where the image sets reside.
     #
@@ -983,6 +1026,7 @@ module Aws::MedicalImaging
     # @return [Types::SearchImageSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SearchImageSetsResponse#image_sets_metadata_summaries #image_sets_metadata_summaries} => Array&lt;Types::ImageSetsMetadataSummary&gt;
+    #   * {Types::SearchImageSetsResponse#sort #data.sort} => Types::Sort (This method conflicts with a method on Response, call it through the data member)
     #   * {Types::SearchImageSetsResponse#next_token #next_token} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
@@ -1000,7 +1044,9 @@ module Aws::MedicalImaging
     #               dicom_accession_number: "DICOMAccessionNumber",
     #               dicom_study_id: "DICOMStudyId",
     #               dicom_study_instance_uid: "DICOMStudyInstanceUID",
+    #               dicom_series_instance_uid: "DICOMSeriesInstanceUID",
     #               created_at: Time.now,
+    #               updated_at: Time.now,
     #               dicom_study_date_and_time: {
     #                 dicom_study_date: "DICOMStudyDate", # required
     #                 dicom_study_time: "DICOMStudyTime",
@@ -1010,6 +1056,10 @@ module Aws::MedicalImaging
     #           operator: "EQUAL", # required, accepts EQUAL, BETWEEN
     #         },
     #       ],
+    #       sort: {
+    #         sort_order: "ASC", # required, accepts ASC, DESC
+    #         sort_field: "updatedAt", # required, accepts updatedAt, createdAt, DICOMStudyDateAndTime
+    #       },
     #     },
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -1032,8 +1082,14 @@ module Aws::MedicalImaging
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_number_of_study_related_series #=> Integer
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_number_of_study_related_instances #=> Integer
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_accession_number #=> String
+    #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_series_instance_uid #=> String
+    #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_series_modality #=> String
+    #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_series_body_part #=> String
+    #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_series_number #=> Integer
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_study_date #=> String
     #   resp.image_sets_metadata_summaries[0].dicom_tags.dicom_study_time #=> String
+    #   resp.data.sort.sort_order #=> String, one of "ASC", "DESC"
+    #   resp.data.sort.sort_field #=> String, one of "updatedAt", "createdAt", "DICOMStudyDateAndTime"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/SearchImageSets AWS API Documentation
@@ -1074,6 +1130,9 @@ module Aws::MedicalImaging
     #   The output prefix of the S3 bucket to upload the results of the DICOM
     #   import job.
     #
+    # @option params [String] :input_owner_account_id
+    #   The account ID of the source S3 bucket owner.
+    #
     # @return [Types::StartDICOMImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDICOMImportJobResponse#datastore_id #datastore_id} => String
@@ -1090,6 +1149,7 @@ module Aws::MedicalImaging
     #     datastore_id: "DatastoreId", # required
     #     input_s3_uri: "S3Uri", # required
     #     output_s3_uri: "S3Uri", # required
+    #     input_owner_account_id: "AwsAccountId",
     #   })
     #
     # @example Response structure
@@ -1237,7 +1297,7 @@ module Aws::MedicalImaging
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medicalimaging'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

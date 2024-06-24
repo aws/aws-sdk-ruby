@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::AppStream
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::AppStream
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::AppStream
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::AppStream
     #   @option options [Aws::AppStream::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::AppStream::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -1005,7 +1030,7 @@ module Aws::AppStream
     #     launch_path: "String", # required
     #     working_directory: "String",
     #     launch_parameters: "String",
-    #     platforms: ["WINDOWS"], # required, accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
+    #     platforms: ["WINDOWS"], # required, accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, AMAZON_LINUX2
     #     instance_families: ["String"], # required
     #     app_block_arn: "Arn", # required
     #     tags: {
@@ -1030,7 +1055,7 @@ module Aws::AppStream
     #   resp.application.icon_s3_location.s3_bucket #=> String
     #   resp.application.icon_s3_location.s3_key #=> String
     #   resp.application.platforms #=> Array
-    #   resp.application.platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.application.platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.application.instance_families #=> Array
     #   resp.application.instance_families[0] #=> String
     #   resp.application.created_time #=> Time
@@ -1304,7 +1329,7 @@ module Aws::AppStream
     #   open documents before being disconnected. After this time elapses, the
     #   instance is terminated and replaced by a new instance.
     #
-    #   Specify a value between 600 and 360000.
+    #   Specify a value between 600 and 432000.
     #
     # @option params [Integer] :disconnect_timeout_in_seconds
     #   The amount of time that a streaming session remains active after users
@@ -1418,6 +1443,10 @@ module Aws::AppStream
     #   The S3 location of the session scripts configuration zip file. This
     #   only applies to Elastic fleets.
     #
+    # @option params [Integer] :max_sessions_per_instance
+    #   The maximum number of user sessions on an instance. This only applies
+    #   to multi-session fleets.
+    #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetResult#fleet #fleet} => Types::Fleet
@@ -1431,7 +1460,8 @@ module Aws::AppStream
     #     instance_type: "String", # required
     #     fleet_type: "ALWAYS_ON", # accepts ALWAYS_ON, ON_DEMAND, ELASTIC
     #     compute_capacity: {
-    #       desired_instances: 1, # required
+    #       desired_instances: 1,
+    #       desired_sessions: 1,
     #     },
     #     vpc_config: {
     #       subnet_ids: ["String"],
@@ -1452,13 +1482,14 @@ module Aws::AppStream
     #     idle_disconnect_timeout_in_seconds: 1,
     #     iam_role_arn: "Arn",
     #     stream_view: "APP", # accepts APP, DESKTOP
-    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
+    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, AMAZON_LINUX2
     #     max_concurrent_sessions: 1,
     #     usb_device_filter_strings: ["UsbDeviceFilterString"],
     #     session_script_s3_location: {
     #       s3_bucket: "S3Bucket", # required
     #       s3_key: "S3Key",
     #     },
+    #     max_sessions_per_instance: 1,
     #   })
     #
     # @example Response structure
@@ -1475,6 +1506,10 @@ module Aws::AppStream
     #   resp.fleet.compute_capacity_status.running #=> Integer
     #   resp.fleet.compute_capacity_status.in_use #=> Integer
     #   resp.fleet.compute_capacity_status.available #=> Integer
+    #   resp.fleet.compute_capacity_status.desired_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.available_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.active_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.actual_user_sessions #=> Integer
     #   resp.fleet.max_user_duration_in_seconds #=> Integer
     #   resp.fleet.disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
@@ -1492,12 +1527,13 @@ module Aws::AppStream
     #   resp.fleet.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.iam_role_arn #=> String
     #   resp.fleet.stream_view #=> String, one of "APP", "DESKTOP"
-    #   resp.fleet.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.fleet.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.fleet.max_concurrent_sessions #=> Integer
     #   resp.fleet.usb_device_filter_strings #=> Array
     #   resp.fleet.usb_device_filter_strings[0] #=> String
     #   resp.fleet.session_script_s3_location.s3_bucket #=> String
     #   resp.fleet.session_script_s3_location.s3_key #=> String
+    #   resp.fleet.max_sessions_per_instance #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet AWS API Documentation
     #
@@ -1703,7 +1739,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -1858,6 +1894,7 @@ module Aws::AppStream
     #       {
     #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN
     #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         maximum_length: 1,
     #       },
     #     ],
     #     application_settings: {
@@ -1899,6 +1936,7 @@ module Aws::AppStream
     #   resp.stack.user_settings #=> Array
     #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE", "DOMAIN_PASSWORD_SIGNIN", "DOMAIN_SMART_CARD_SIGNIN"
     #   resp.stack.user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.stack.user_settings[0].maximum_length #=> Integer
     #   resp.stack.application_settings.enabled #=> Boolean
     #   resp.stack.application_settings.settings_group #=> String
     #   resp.stack.application_settings.s3_bucket_name #=> String
@@ -2059,7 +2097,7 @@ module Aws::AppStream
     #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.image_builder_name #=> String
-    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.image.description #=> String
     #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
     #   resp.image.state_change_reason.message #=> String
@@ -2079,7 +2117,7 @@ module Aws::AppStream
     #   resp.image.applications[0].icon_s3_location.s3_bucket #=> String
     #   resp.image.applications[0].icon_s3_location.s3_key #=> String
     #   resp.image.applications[0].platforms #=> Array
-    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.image.applications[0].instance_families #=> Array
     #   resp.image.applications[0].instance_families[0] #=> String
     #   resp.image.applications[0].created_time #=> Time
@@ -2347,7 +2385,7 @@ module Aws::AppStream
     #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.image_builder_name #=> String
-    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.image.description #=> String
     #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
     #   resp.image.state_change_reason.message #=> String
@@ -2367,7 +2405,7 @@ module Aws::AppStream
     #   resp.image.applications[0].icon_s3_location.s3_bucket #=> String
     #   resp.image.applications[0].icon_s3_location.s3_key #=> String
     #   resp.image.applications[0].platforms #=> Array
-    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.image.applications[0].instance_families #=> Array
     #   resp.image.applications[0].instance_families[0] #=> String
     #   resp.image.applications[0].created_time #=> Time
@@ -2417,7 +2455,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -2805,7 +2843,7 @@ module Aws::AppStream
     #   resp.applications[0].icon_s3_location.s3_bucket #=> String
     #   resp.applications[0].icon_s3_location.s3_key #=> String
     #   resp.applications[0].platforms #=> Array
-    #   resp.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.applications[0].instance_families #=> Array
     #   resp.applications[0].instance_families[0] #=> String
     #   resp.applications[0].created_time #=> Time
@@ -2965,6 +3003,10 @@ module Aws::AppStream
     #   resp.fleets[0].compute_capacity_status.running #=> Integer
     #   resp.fleets[0].compute_capacity_status.in_use #=> Integer
     #   resp.fleets[0].compute_capacity_status.available #=> Integer
+    #   resp.fleets[0].compute_capacity_status.desired_user_sessions #=> Integer
+    #   resp.fleets[0].compute_capacity_status.available_user_sessions #=> Integer
+    #   resp.fleets[0].compute_capacity_status.active_user_sessions #=> Integer
+    #   resp.fleets[0].compute_capacity_status.actual_user_sessions #=> Integer
     #   resp.fleets[0].max_user_duration_in_seconds #=> Integer
     #   resp.fleets[0].disconnect_timeout_in_seconds #=> Integer
     #   resp.fleets[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
@@ -2982,12 +3024,13 @@ module Aws::AppStream
     #   resp.fleets[0].idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.fleets[0].iam_role_arn #=> String
     #   resp.fleets[0].stream_view #=> String, one of "APP", "DESKTOP"
-    #   resp.fleets[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.fleets[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.fleets[0].max_concurrent_sessions #=> Integer
     #   resp.fleets[0].usb_device_filter_strings #=> Array
     #   resp.fleets[0].usb_device_filter_strings[0] #=> String
     #   resp.fleets[0].session_script_s3_location.s3_bucket #=> String
     #   resp.fleets[0].session_script_s3_location.s3_key #=> String
+    #   resp.fleets[0].max_sessions_per_instance #=> Integer
     #   resp.next_token #=> String
     #
     #
@@ -3045,7 +3088,7 @@ module Aws::AppStream
     #   resp.image_builders[0].vpc_config.security_group_ids #=> Array
     #   resp.image_builders[0].vpc_config.security_group_ids[0] #=> String
     #   resp.image_builders[0].instance_type #=> String
-    #   resp.image_builders[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.image_builders[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.image_builders[0].iam_role_arn #=> String
     #   resp.image_builders[0].state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
     #   resp.image_builders[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -3176,7 +3219,7 @@ module Aws::AppStream
     #   resp.images[0].visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.images[0].image_builder_supported #=> Boolean
     #   resp.images[0].image_builder_name #=> String
-    #   resp.images[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.images[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.images[0].description #=> String
     #   resp.images[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
     #   resp.images[0].state_change_reason.message #=> String
@@ -3196,7 +3239,7 @@ module Aws::AppStream
     #   resp.images[0].applications[0].icon_s3_location.s3_bucket #=> String
     #   resp.images[0].applications[0].icon_s3_location.s3_key #=> String
     #   resp.images[0].applications[0].platforms #=> Array
-    #   resp.images[0].applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.images[0].applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.images[0].applications[0].instance_families #=> Array
     #   resp.images[0].applications[0].instance_families[0] #=> String
     #   resp.images[0].applications[0].created_time #=> Time
@@ -3249,6 +3292,9 @@ module Aws::AppStream
     #   using a streaming URL or `SAML` for a SAML federated user. The default
     #   is to authenticate users using a streaming URL.
     #
+    # @option params [String] :instance_id
+    #   The identifier for the instance hosting the session.
+    #
     # @return [Types::DescribeSessionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeSessionsResult#sessions #sessions} => Array&lt;Types::Session&gt;
@@ -3257,12 +3303,13 @@ module Aws::AppStream
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_sessions({
-    #     stack_name: "String", # required
-    #     fleet_name: "String", # required
+    #     stack_name: "Name", # required
+    #     fleet_name: "Name", # required
     #     user_id: "UserId",
     #     next_token: "String",
     #     limit: 1,
     #     authentication_type: "API", # accepts API, SAML, USERPOOL, AWS_AD
+    #     instance_id: "String",
     #   })
     #
     # @example Response structure
@@ -3279,6 +3326,7 @@ module Aws::AppStream
     #   resp.sessions[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL", "AWS_AD"
     #   resp.sessions[0].network_access_configuration.eni_private_ip_address #=> String
     #   resp.sessions[0].network_access_configuration.eni_id #=> String
+    #   resp.sessions[0].instance_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessions AWS API Documentation
@@ -3334,6 +3382,7 @@ module Aws::AppStream
     #   resp.stacks[0].user_settings #=> Array
     #   resp.stacks[0].user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE", "DOMAIN_PASSWORD_SIGNIN", "DOMAIN_SMART_CARD_SIGNIN"
     #   resp.stacks[0].user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.stacks[0].user_settings[0].maximum_length #=> Integer
     #   resp.stacks[0].application_settings.enabled #=> Boolean
     #   resp.stacks[0].application_settings.settings_group #=> String
     #   resp.stacks[0].application_settings.s3_bucket_name #=> String
@@ -3972,7 +4021,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -4103,7 +4152,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -4300,7 +4349,7 @@ module Aws::AppStream
     #     name: "Name", # required
     #     description: "Description",
     #     display_name: "DisplayName",
-    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
+    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, AMAZON_LINUX2
     #     instance_type: "String",
     #     vpc_config: {
     #       subnet_ids: ["String"],
@@ -4421,7 +4470,7 @@ module Aws::AppStream
     #   resp.application.icon_s3_location.s3_bucket #=> String
     #   resp.application.icon_s3_location.s3_key #=> String
     #   resp.application.platforms #=> Array
-    #   resp.application.platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.application.platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.application.instance_families #=> Array
     #   resp.application.instance_families[0] #=> String
     #   resp.application.created_time #=> Time
@@ -4791,6 +4840,10 @@ module Aws::AppStream
     #   The S3 location of the session scripts configuration zip file. This
     #   only applies to Elastic fleets.
     #
+    # @option params [Integer] :max_sessions_per_instance
+    #   The maximum number of user sessions on an instance. This only applies
+    #   to multi-session fleets.
+    #
     # @return [Types::UpdateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFleetResult#fleet #fleet} => Types::Fleet
@@ -4800,10 +4853,11 @@ module Aws::AppStream
     #   resp = client.update_fleet({
     #     image_name: "String",
     #     image_arn: "Arn",
-    #     name: "String",
+    #     name: "Name",
     #     instance_type: "String",
     #     compute_capacity: {
-    #       desired_instances: 1, # required
+    #       desired_instances: 1,
+    #       desired_sessions: 1,
     #     },
     #     vpc_config: {
     #       subnet_ids: ["String"],
@@ -4820,16 +4874,17 @@ module Aws::AppStream
     #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #     },
     #     idle_disconnect_timeout_in_seconds: 1,
-    #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS, SESSION_SCRIPT_S3_LOCATION
+    #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS, SESSION_SCRIPT_S3_LOCATION, MAX_SESSIONS_PER_INSTANCE
     #     iam_role_arn: "Arn",
     #     stream_view: "APP", # accepts APP, DESKTOP
-    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
+    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, AMAZON_LINUX2
     #     max_concurrent_sessions: 1,
     #     usb_device_filter_strings: ["UsbDeviceFilterString"],
     #     session_script_s3_location: {
     #       s3_bucket: "S3Bucket", # required
     #       s3_key: "S3Key",
     #     },
+    #     max_sessions_per_instance: 1,
     #   })
     #
     # @example Response structure
@@ -4846,6 +4901,10 @@ module Aws::AppStream
     #   resp.fleet.compute_capacity_status.running #=> Integer
     #   resp.fleet.compute_capacity_status.in_use #=> Integer
     #   resp.fleet.compute_capacity_status.available #=> Integer
+    #   resp.fleet.compute_capacity_status.desired_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.available_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.active_user_sessions #=> Integer
+    #   resp.fleet.compute_capacity_status.actual_user_sessions #=> Integer
     #   resp.fleet.max_user_duration_in_seconds #=> Integer
     #   resp.fleet.disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED"
@@ -4863,12 +4922,13 @@ module Aws::AppStream
     #   resp.fleet.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.iam_role_arn #=> String
     #   resp.fleet.stream_view #=> String, one of "APP", "DESKTOP"
-    #   resp.fleet.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "AMAZON_LINUX2"
+    #   resp.fleet.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "AMAZON_LINUX2"
     #   resp.fleet.max_concurrent_sessions #=> Integer
     #   resp.fleet.usb_device_filter_strings #=> Array
     #   resp.fleet.usb_device_filter_strings[0] #=> String
     #   resp.fleet.session_script_s3_location.s3_bucket #=> String
     #   resp.fleet.session_script_s3_location.s3_key #=> String
+    #   resp.fleet.max_sessions_per_instance #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet AWS API Documentation
     #
@@ -4991,6 +5051,7 @@ module Aws::AppStream
     #       {
     #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN
     #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         maximum_length: 1,
     #       },
     #     ],
     #     application_settings: {
@@ -5029,6 +5090,7 @@ module Aws::AppStream
     #   resp.stack.user_settings #=> Array
     #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE", "DOMAIN_PASSWORD_SIGNIN", "DOMAIN_SMART_CARD_SIGNIN"
     #   resp.stack.user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.stack.user_settings[0].maximum_length #=> Integer
     #   resp.stack.application_settings.enabled #=> Boolean
     #   resp.stack.application_settings.settings_group #=> String
     #   resp.stack.application_settings.s3_bucket_name #=> String
@@ -5061,7 +5123,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

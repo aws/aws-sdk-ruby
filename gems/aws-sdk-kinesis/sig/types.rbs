@@ -1,0 +1,588 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Kinesis
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AddTagsToStreamInput
+      attr_accessor stream_name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ChildShard
+      attr_accessor shard_id: ::String
+      attr_accessor parent_shards: ::Array[::String]
+      attr_accessor hash_key_range: Types::HashKeyRange
+      SENSITIVE: []
+    end
+
+    class Consumer
+      attr_accessor consumer_name: ::String
+      attr_accessor consumer_arn: ::String
+      attr_accessor consumer_status: ("CREATING" | "DELETING" | "ACTIVE")
+      attr_accessor consumer_creation_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ConsumerDescription
+      attr_accessor consumer_name: ::String
+      attr_accessor consumer_arn: ::String
+      attr_accessor consumer_status: ("CREATING" | "DELETING" | "ACTIVE")
+      attr_accessor consumer_creation_timestamp: ::Time
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStreamInput
+      attr_accessor stream_name: ::String
+      attr_accessor shard_count: ::Integer
+      attr_accessor stream_mode_details: Types::StreamModeDetails
+      SENSITIVE: []
+    end
+
+    class DecreaseStreamRetentionPeriodInput
+      attr_accessor stream_name: ::String
+      attr_accessor retention_period_hours: ::Integer
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourcePolicyInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStreamInput
+      attr_accessor stream_name: ::String
+      attr_accessor enforce_consumer_deletion: bool
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeregisterStreamConsumerInput
+      attr_accessor stream_arn: ::String
+      attr_accessor consumer_name: ::String
+      attr_accessor consumer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeLimitsInput < Aws::EmptyStructure
+    end
+
+    class DescribeLimitsOutput
+      attr_accessor shard_limit: ::Integer
+      attr_accessor open_shard_count: ::Integer
+      attr_accessor on_demand_stream_count: ::Integer
+      attr_accessor on_demand_stream_count_limit: ::Integer
+      SENSITIVE: []
+    end
+
+    class DescribeStreamConsumerInput
+      attr_accessor stream_arn: ::String
+      attr_accessor consumer_name: ::String
+      attr_accessor consumer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStreamConsumerOutput
+      attr_accessor consumer_description: Types::ConsumerDescription
+      SENSITIVE: []
+    end
+
+    class DescribeStreamInput
+      attr_accessor stream_name: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor exclusive_start_shard_id: ::String
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStreamOutput
+      attr_accessor stream_description: Types::StreamDescription
+      SENSITIVE: []
+    end
+
+    class DescribeStreamSummaryInput
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeStreamSummaryOutput
+      attr_accessor stream_description_summary: Types::StreamDescriptionSummary
+      SENSITIVE: []
+    end
+
+    class DisableEnhancedMonitoringInput
+      attr_accessor stream_name: ::String
+      attr_accessor shard_level_metrics: ::Array[("IncomingBytes" | "IncomingRecords" | "OutgoingBytes" | "OutgoingRecords" | "WriteProvisionedThroughputExceeded" | "ReadProvisionedThroughputExceeded" | "IteratorAgeMilliseconds" | "ALL")]
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EnableEnhancedMonitoringInput
+      attr_accessor stream_name: ::String
+      attr_accessor shard_level_metrics: ::Array[("IncomingBytes" | "IncomingRecords" | "OutgoingBytes" | "OutgoingRecords" | "WriteProvisionedThroughputExceeded" | "ReadProvisionedThroughputExceeded" | "IteratorAgeMilliseconds" | "ALL")]
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class EnhancedMetrics
+      attr_accessor shard_level_metrics: ::Array[("IncomingBytes" | "IncomingRecords" | "OutgoingBytes" | "OutgoingRecords" | "WriteProvisionedThroughputExceeded" | "ReadProvisionedThroughputExceeded" | "IteratorAgeMilliseconds" | "ALL")]
+      SENSITIVE: []
+    end
+
+    class EnhancedMonitoringOutput
+      attr_accessor stream_name: ::String
+      attr_accessor current_shard_level_metrics: ::Array[("IncomingBytes" | "IncomingRecords" | "OutgoingBytes" | "OutgoingRecords" | "WriteProvisionedThroughputExceeded" | "ReadProvisionedThroughputExceeded" | "IteratorAgeMilliseconds" | "ALL")]
+      attr_accessor desired_shard_level_metrics: ::Array[("IncomingBytes" | "IncomingRecords" | "OutgoingBytes" | "OutgoingRecords" | "WriteProvisionedThroughputExceeded" | "ReadProvisionedThroughputExceeded" | "IteratorAgeMilliseconds" | "ALL")]
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ExpiredIteratorException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ExpiredNextTokenException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecordsInput
+      attr_accessor shard_iterator: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRecordsOutput
+      attr_accessor records: ::Array[Types::Record]
+      attr_accessor next_shard_iterator: ::String
+      attr_accessor millis_behind_latest: ::Integer
+      attr_accessor child_shards: ::Array[Types::ChildShard]
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourcePolicyOutput
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class GetShardIteratorInput
+      attr_accessor stream_name: ::String
+      attr_accessor shard_id: ::String
+      attr_accessor shard_iterator_type: ("AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER" | "TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP")
+      attr_accessor starting_sequence_number: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetShardIteratorOutput
+      attr_accessor shard_iterator: ::String
+      SENSITIVE: []
+    end
+
+    class HashKeyRange
+      attr_accessor starting_hash_key: ::String
+      attr_accessor ending_hash_key: ::String
+      SENSITIVE: []
+    end
+
+    class IncreaseStreamRetentionPeriodInput
+      attr_accessor stream_name: ::String
+      attr_accessor retention_period_hours: ::Integer
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InternalFailureException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class InvalidArgumentException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KMSAccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class KMSDisabledException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class KMSInvalidStateException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class KMSNotFoundException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class KMSOptInRequired
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class KMSThrottlingException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListShardsInput
+      attr_accessor stream_name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor exclusive_start_shard_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor stream_creation_timestamp: ::Time
+      attr_accessor shard_filter: Types::ShardFilter
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListShardsOutput
+      attr_accessor shards: ::Array[Types::Shard]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamConsumersInput
+      attr_accessor stream_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor stream_creation_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ListStreamConsumersOutput
+      attr_accessor consumers: ::Array[Types::Consumer]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamsInput
+      attr_accessor limit: ::Integer
+      attr_accessor exclusive_start_stream_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamsOutput
+      attr_accessor stream_names: ::Array[::String]
+      attr_accessor has_more_streams: bool
+      attr_accessor next_token: ::String
+      attr_accessor stream_summaries: ::Array[Types::StreamSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForStreamInput
+      attr_accessor stream_name: ::String
+      attr_accessor exclusive_start_tag_key: ::String
+      attr_accessor limit: ::Integer
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForStreamOutput
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor has_more_tags: bool
+      SENSITIVE: []
+    end
+
+    class MergeShardsInput
+      attr_accessor stream_name: ::String
+      attr_accessor shard_to_merge: ::String
+      attr_accessor adjacent_shard_to_merge: ::String
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ProvisionedThroughputExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PutRecordInput
+      attr_accessor stream_name: ::String
+      attr_accessor data: ::String
+      attr_accessor partition_key: ::String
+      attr_accessor explicit_hash_key: ::String
+      attr_accessor sequence_number_for_ordering: ::String
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutRecordOutput
+      attr_accessor shard_id: ::String
+      attr_accessor sequence_number: ::String
+      attr_accessor encryption_type: ("NONE" | "KMS")
+      SENSITIVE: []
+    end
+
+    class PutRecordsInput
+      attr_accessor records: ::Array[Types::PutRecordsRequestEntry]
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutRecordsOutput
+      attr_accessor failed_record_count: ::Integer
+      attr_accessor records: ::Array[Types::PutRecordsResultEntry]
+      attr_accessor encryption_type: ("NONE" | "KMS")
+      SENSITIVE: []
+    end
+
+    class PutRecordsRequestEntry
+      attr_accessor data: ::String
+      attr_accessor explicit_hash_key: ::String
+      attr_accessor partition_key: ::String
+      SENSITIVE: []
+    end
+
+    class PutRecordsResultEntry
+      attr_accessor sequence_number: ::String
+      attr_accessor shard_id: ::String
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class PutResourcePolicyInput
+      attr_accessor resource_arn: ::String
+      attr_accessor policy: ::String
+      SENSITIVE: []
+    end
+
+    class Record
+      attr_accessor sequence_number: ::String
+      attr_accessor approximate_arrival_timestamp: ::Time
+      attr_accessor data: ::String
+      attr_accessor partition_key: ::String
+      attr_accessor encryption_type: ("NONE" | "KMS")
+      SENSITIVE: []
+    end
+
+    class RegisterStreamConsumerInput
+      attr_accessor stream_arn: ::String
+      attr_accessor consumer_name: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterStreamConsumerOutput
+      attr_accessor consumer: Types::Consumer
+      SENSITIVE: []
+    end
+
+    class RemoveTagsFromStreamInput
+      attr_accessor stream_name: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceInUseException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class SequenceNumberRange
+      attr_accessor starting_sequence_number: ::String
+      attr_accessor ending_sequence_number: ::String
+      SENSITIVE: []
+    end
+
+    class Shard
+      attr_accessor shard_id: ::String
+      attr_accessor parent_shard_id: ::String
+      attr_accessor adjacent_parent_shard_id: ::String
+      attr_accessor hash_key_range: Types::HashKeyRange
+      attr_accessor sequence_number_range: Types::SequenceNumberRange
+      SENSITIVE: []
+    end
+
+    class ShardFilter
+      attr_accessor type: ("AFTER_SHARD_ID" | "AT_TRIM_HORIZON" | "FROM_TRIM_HORIZON" | "AT_LATEST" | "AT_TIMESTAMP" | "FROM_TIMESTAMP")
+      attr_accessor shard_id: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class SplitShardInput
+      attr_accessor stream_name: ::String
+      attr_accessor shard_to_split: ::String
+      attr_accessor new_starting_hash_key: ::String
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartStreamEncryptionInput
+      attr_accessor stream_name: ::String
+      attr_accessor encryption_type: ("NONE" | "KMS")
+      attr_accessor key_id: ::String
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StartingPosition
+      attr_accessor type: ("AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER" | "TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP")
+      attr_accessor sequence_number: ::String
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class StopStreamEncryptionInput
+      attr_accessor stream_name: ::String
+      attr_accessor encryption_type: ("NONE" | "KMS")
+      attr_accessor key_id: ::String
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class StreamDescription
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_status: ("CREATING" | "DELETING" | "ACTIVE" | "UPDATING")
+      attr_accessor stream_mode_details: Types::StreamModeDetails
+      attr_accessor shards: ::Array[Types::Shard]
+      attr_accessor has_more_shards: bool
+      attr_accessor retention_period_hours: ::Integer
+      attr_accessor stream_creation_timestamp: ::Time
+      attr_accessor enhanced_monitoring: ::Array[Types::EnhancedMetrics]
+      attr_accessor encryption_type: ("NONE" | "KMS")
+      attr_accessor key_id: ::String
+      SENSITIVE: []
+    end
+
+    class StreamDescriptionSummary
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_status: ("CREATING" | "DELETING" | "ACTIVE" | "UPDATING")
+      attr_accessor stream_mode_details: Types::StreamModeDetails
+      attr_accessor retention_period_hours: ::Integer
+      attr_accessor stream_creation_timestamp: ::Time
+      attr_accessor enhanced_monitoring: ::Array[Types::EnhancedMetrics]
+      attr_accessor encryption_type: ("NONE" | "KMS")
+      attr_accessor key_id: ::String
+      attr_accessor open_shard_count: ::Integer
+      attr_accessor consumer_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class StreamModeDetails
+      attr_accessor stream_mode: ("PROVISIONED" | "ON_DEMAND")
+      SENSITIVE: []
+    end
+
+    class StreamSummary
+      attr_accessor stream_name: ::String
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_status: ("CREATING" | "DELETING" | "ACTIVE" | "UPDATING")
+      attr_accessor stream_mode_details: Types::StreamModeDetails
+      attr_accessor stream_creation_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class SubscribeToShardEvent
+      attr_accessor records: ::Array[Types::Record]
+      attr_accessor continuation_sequence_number: ::String
+      attr_accessor millis_behind_latest: ::Integer
+      attr_accessor child_shards: ::Array[Types::ChildShard]
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class SubscribeToShardInput
+      attr_accessor consumer_arn: ::String
+      attr_accessor shard_id: ::String
+      attr_accessor starting_position: Types::StartingPosition
+      SENSITIVE: []
+    end
+
+    class SubscribeToShardOutput
+      attr_accessor event_stream: Types::SubscribeToShardEventStream
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateShardCountInput
+      attr_accessor stream_name: ::String
+      attr_accessor target_shard_count: ::Integer
+      attr_accessor scaling_type: ("UNIFORM_SCALING")
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateShardCountOutput
+      attr_accessor stream_name: ::String
+      attr_accessor current_shard_count: ::Integer
+      attr_accessor target_shard_count: ::Integer
+      attr_accessor stream_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateStreamModeInput
+      attr_accessor stream_arn: ::String
+      attr_accessor stream_mode_details: Types::StreamModeDetails
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SubscribeToShardEventStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:subscribe_to_shard_event, :resource_not_found_exception, :resource_in_use_exception, :kms_disabled_exception, :kms_invalid_state_exception, :kms_access_denied_exception, :kms_not_found_exception, :kms_opt_in_required, :kms_throttling_exception, :internal_failure_exception]
+    end
+  end
+end

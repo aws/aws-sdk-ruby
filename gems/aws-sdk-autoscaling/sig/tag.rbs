@@ -1,0 +1,85 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AutoScaling
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Tag.html
+    class Tag
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Tag.html#initialize-instance_method
+      def initialize: (String key, String resource_id, String resource_type, Hash[Symbol, untyped] options) -> void
+                    | (key: String, resource_id: String, resource_type: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Tag.html#key-instance_method
+      def key: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Tag.html#resource_id-instance_method
+      def resource_id: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Tag.html#resource_type-instance_method
+      def resource_type: () -> String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Tag.html#value-instance_method
+      def value: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Tag.html#propagate_at_launch-instance_method
+      def propagate_at_launch: () -> bool
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Tag.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Tag.html#data-instance_method
+      def data: () -> Types::TagDescription
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Tag.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Tag.html#create-instance_method
+      def create: (
+                    tags: Array[
+                      {
+                        resource_id: ::String?,
+                        resource_type: ::String?,
+                        key: ::String,
+                        value: ::String?,
+                        propagate_at_launch: bool?
+                      },
+                    ]
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Tag.html#delete-instance_method
+      def delete: (
+                    tags: Array[
+                      {
+                        resource_id: ::String?,
+                        resource_type: ::String?,
+                        key: ::String,
+                        value: ::String?,
+                        propagate_at_launch: bool?
+                      },
+                    ]
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      class Collection < ::Aws::Resources::Collection[Tag]
+
+        def batch_create: (
+                          ) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def batch_delete!: (
+                           ) -> void
+                       | (?Hash[Symbol, untyped]) -> void
+      end
+    end
+  end
+end

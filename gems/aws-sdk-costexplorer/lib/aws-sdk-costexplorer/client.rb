@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CostExplorer
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CostExplorer
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::CostExplorer
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::CostExplorer
     #   @option options [Aws::CostExplorer::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CostExplorer::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -1149,6 +1174,53 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
+    # Retrieves estimated usage records for hourly granularity or
+    # resource-level data at daily granularity.
+    #
+    # @option params [required, String] :granularity
+    #   How granular you want the data to be. You can enable data at hourly or
+    #   daily granularity.
+    #
+    # @option params [Array<String>] :services
+    #   The service metadata for the service or services you want to query. If
+    #   not specified, all elements are returned.
+    #
+    # @option params [required, String] :approximation_dimension
+    #   The service to evaluate for the usage records. You can choose
+    #   resource-level data at daily granularity, or hourly granularity with
+    #   or without resource-level data.
+    #
+    # @return [Types::GetApproximateUsageRecordsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetApproximateUsageRecordsResponse#services #services} => Hash&lt;String,Integer&gt;
+    #   * {Types::GetApproximateUsageRecordsResponse#total_records #total_records} => Integer
+    #   * {Types::GetApproximateUsageRecordsResponse#lookback_period #lookback_period} => Types::DateInterval
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_approximate_usage_records({
+    #     granularity: "DAILY", # required, accepts DAILY, MONTHLY, HOURLY
+    #     services: ["GenericString"],
+    #     approximation_dimension: "SERVICE", # required, accepts SERVICE, RESOURCE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.services #=> Hash
+    #   resp.services["GenericString"] #=> Integer
+    #   resp.total_records #=> Integer
+    #   resp.lookback_period.start #=> String
+    #   resp.lookback_period.end #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetApproximateUsageRecords AWS API Documentation
+    #
+    # @overload get_approximate_usage_records(params = {})
+    # @param [Hash] params ({})
+    def get_approximate_usage_records(params = {}, options = {})
+      req = build_request(:get_approximate_usage_records, params)
+      req.send_request(options)
+    end
+
     # Retrieves cost and usage metrics for your account. You can specify
     # which cost and usage-related metric that you want the request to
     # return. For example, you can specify `BlendedCosts` or
@@ -1334,8 +1406,11 @@ module Aws::CostExplorer
     # such as `SERVICE` or `AZ`, in a specific time range. For a complete
     # list of valid dimensions, see the [GetDimensionValues][1] operation.
     # Management account in an organization in Organizations have access to
-    # all member accounts. This API is currently available for the Amazon
-    # Elastic Compute Cloud – Compute service only.
+    # all member accounts.
+    #
+    # Hourly granularity is only available for EC2-Instances (Elastic
+    # Compute Cloud) resource-level data. All other resource-level data is
+    # available at daily granularity.
     #
     # <note markdown="1"> This is an opt-in only feature. You can enable this feature from the
     # Cost Explorer Settings page. For information about how to access the
@@ -2764,6 +2839,7 @@ module Aws::CostExplorer
     #
     #   resp.metadata.recommendation_id #=> String
     #   resp.metadata.generation_timestamp #=> String
+    #   resp.metadata.additional_metadata #=> String
     #   resp.recommendations #=> Array
     #   resp.recommendations[0].account_scope #=> String, one of "PAYER", "LINKED"
     #   resp.recommendations[0].lookback_period_in_days #=> String, one of "SEVEN_DAYS", "THIRTY_DAYS", "SIXTY_DAYS"
@@ -2805,6 +2881,11 @@ module Aws::CostExplorer
     #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.region #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.current_generation #=> Boolean
     #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.size_flex_eligible #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.memory_db_instance_details.family #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.memory_db_instance_details.node_type #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.memory_db_instance_details.region #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.memory_db_instance_details.current_generation #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.memory_db_instance_details.size_flex_eligible #=> Boolean
     #   resp.recommendations[0].recommendation_details[0].recommended_number_of_instances_to_purchase #=> String
     #   resp.recommendations[0].recommendation_details[0].recommended_normalized_units_to_purchase #=> String
     #   resp.recommendations[0].recommendation_details[0].minimum_number_of_instances_used_per_hour #=> String
@@ -4428,6 +4509,50 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
+    # Retrieves a list of your historical cost allocation tag backfill
+    # requests.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results. Amazon Web Services
+    #   provides the token when the response from a previous call has more
+    #   results than the maximum page size.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of objects that are returned for this request.
+    #
+    # @return [Types::ListCostAllocationTagBackfillHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCostAllocationTagBackfillHistoryResponse#backfill_requests #backfill_requests} => Array&lt;Types::CostAllocationTagBackfillRequest&gt;
+    #   * {Types::ListCostAllocationTagBackfillHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cost_allocation_tag_backfill_history({
+    #     next_token: "NextPageToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backfill_requests #=> Array
+    #   resp.backfill_requests[0].backfill_from #=> String
+    #   resp.backfill_requests[0].requested_at #=> String
+    #   resp.backfill_requests[0].completed_at #=> String
+    #   resp.backfill_requests[0].backfill_status #=> String, one of "SUCCEEDED", "PROCESSING", "FAILED"
+    #   resp.backfill_requests[0].last_updated_at #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListCostAllocationTagBackfillHistory AWS API Documentation
+    #
+    # @overload list_cost_allocation_tag_backfill_history(params = {})
+    # @param [Hash] params ({})
+    def list_cost_allocation_tag_backfill_history(params = {}, options = {})
+      req = build_request(:list_cost_allocation_tag_backfill_history, params)
+      req.send_request(options)
+    end
+
     # Get a list of cost allocation tags. All inputs in the API are optional
     # and serve as filters. By default, all cost allocation tags are
     # returned.
@@ -4668,6 +4793,44 @@ module Aws::CostExplorer
     # @param [Hash] params ({})
     def provide_anomaly_feedback(params = {}, options = {})
       req = build_request(:provide_anomaly_feedback, params)
+      req.send_request(options)
+    end
+
+    # Request a cost allocation tag backfill. This will backfill the
+    # activation status (either `active` or `inactive`) for all tag keys
+    # from `para:BackfillFrom` up to the when this request is made.
+    #
+    # You can request a backfill once every 24 hours.
+    #
+    # @option params [required, String] :backfill_from
+    #   The date you want the backfill to start from. The date can only be a
+    #   first day of the month (a billing start date). Dates can't precede
+    #   the previous twelve months, or in the future.
+    #
+    # @return [Types::StartCostAllocationTagBackfillResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartCostAllocationTagBackfillResponse#backfill_request #backfill_request} => Types::CostAllocationTagBackfillRequest
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_cost_allocation_tag_backfill({
+    #     backfill_from: "ZonedDateTime", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backfill_request.backfill_from #=> String
+    #   resp.backfill_request.requested_at #=> String
+    #   resp.backfill_request.completed_at #=> String
+    #   resp.backfill_request.backfill_status #=> String, one of "SUCCEEDED", "PROCESSING", "FAILED"
+    #   resp.backfill_request.last_updated_at #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/StartCostAllocationTagBackfill AWS API Documentation
+    #
+    # @overload start_cost_allocation_tag_backfill(params = {})
+    # @param [Hash] params ({})
+    def start_cost_allocation_tag_backfill(params = {}, options = {})
+      req = build_request(:start_cost_allocation_tag_backfill, params)
       req.send_request(options)
     end
 
@@ -5152,7 +5315,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.91.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -15,6 +15,8 @@ module Aws::AppIntegrationsService
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     ApplicationApprovedOrigins = Shapes::ListShape.new(name: 'ApplicationApprovedOrigins')
+    ApplicationAssociationSummary = Shapes::StructureShape.new(name: 'ApplicationAssociationSummary')
+    ApplicationAssociationsList = Shapes::ListShape.new(name: 'ApplicationAssociationsList')
     ApplicationName = Shapes::StringShape.new(name: 'ApplicationName')
     ApplicationNamespace = Shapes::StringShape.new(name: 'ApplicationNamespace')
     ApplicationSourceConfig = Shapes::StructureShape.new(name: 'ApplicationSourceConfig')
@@ -35,6 +37,8 @@ module Aws::AppIntegrationsService
     DataIntegrationAssociationsList = Shapes::ListShape.new(name: 'DataIntegrationAssociationsList')
     DataIntegrationSummary = Shapes::StructureShape.new(name: 'DataIntegrationSummary')
     DataIntegrationsList = Shapes::ListShape.new(name: 'DataIntegrationsList')
+    DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
+    DeleteApplicationResponse = Shapes::StructureShape.new(name: 'DeleteApplicationResponse')
     DeleteDataIntegrationRequest = Shapes::StructureShape.new(name: 'DeleteDataIntegrationRequest')
     DeleteDataIntegrationResponse = Shapes::StructureShape.new(name: 'DeleteDataIntegrationResponse')
     DeleteEventIntegrationRequest = Shapes::StructureShape.new(name: 'DeleteEventIntegrationRequest')
@@ -66,6 +70,8 @@ module Aws::AppIntegrationsService
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     InternalServiceError = Shapes::StructureShape.new(name: 'InternalServiceError')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    ListApplicationAssociationsRequest = Shapes::StructureShape.new(name: 'ListApplicationAssociationsRequest')
+    ListApplicationAssociationsResponse = Shapes::StructureShape.new(name: 'ListApplicationAssociationsResponse')
     ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
     ListApplicationsResponse = Shapes::StructureShape.new(name: 'ListApplicationsResponse')
     ListDataIntegrationAssociationsRequest = Shapes::StructureShape.new(name: 'ListDataIntegrationAssociationsRequest')
@@ -86,6 +92,8 @@ module Aws::AppIntegrationsService
     NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
     Object = Shapes::StringShape.new(name: 'Object')
     ObjectConfiguration = Shapes::MapShape.new(name: 'ObjectConfiguration')
+    Permission = Shapes::StringShape.new(name: 'Permission')
+    PermissionList = Shapes::ListShape.new(name: 'PermissionList')
     Publication = Shapes::StructureShape.new(name: 'Publication')
     PublicationList = Shapes::ListShape.new(name: 'PublicationList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -105,6 +113,7 @@ module Aws::AppIntegrationsService
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     URL = Shapes::StringShape.new(name: 'URL')
     UUID = Shapes::StringShape.new(name: 'UUID')
+    UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
@@ -118,6 +127,13 @@ module Aws::AppIntegrationsService
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     ApplicationApprovedOrigins.member = Shapes::ShapeRef.new(shape: ApplicationTrustedSource)
+
+    ApplicationAssociationSummary.add_member(:application_association_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ApplicationAssociationArn"))
+    ApplicationAssociationSummary.add_member(:application_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ApplicationArn"))
+    ApplicationAssociationSummary.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, location_name: "ClientId"))
+    ApplicationAssociationSummary.struct_class = Types::ApplicationAssociationSummary
+
+    ApplicationAssociationsList.member = Shapes::ShapeRef.new(shape: ApplicationAssociationSummary)
 
     ApplicationSourceConfig.add_member(:external_url_config, Shapes::ShapeRef.new(shape: ExternalUrlConfig, location_name: "ExternalUrlConfig"))
     ApplicationSourceConfig.struct_class = Types::ApplicationSourceConfig
@@ -139,10 +155,11 @@ module Aws::AppIntegrationsService
     CreateApplicationRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: ApplicationNamespace, required: true, location_name: "Namespace"))
     CreateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateApplicationRequest.add_member(:application_source_config, Shapes::ShapeRef.new(shape: ApplicationSourceConfig, required: true, location_name: "ApplicationSourceConfig"))
-    CreateApplicationRequest.add_member(:subscriptions, Shapes::ShapeRef.new(shape: SubscriptionList, location_name: "Subscriptions"))
-    CreateApplicationRequest.add_member(:publications, Shapes::ShapeRef.new(shape: PublicationList, location_name: "Publications"))
+    CreateApplicationRequest.add_member(:subscriptions, Shapes::ShapeRef.new(shape: SubscriptionList, deprecated: true, location_name: "Subscriptions", metadata: {"deprecatedMessage"=>"Subscriptions has been replaced with Permissions"}))
+    CreateApplicationRequest.add_member(:publications, Shapes::ShapeRef.new(shape: PublicationList, deprecated: true, location_name: "Publications", metadata: {"deprecatedMessage"=>"Publications has been replaced with Permissions"}))
     CreateApplicationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateApplicationRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -153,7 +170,7 @@ module Aws::AppIntegrationsService
     CreateDataIntegrationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateDataIntegrationRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: NonBlankString, required: true, location_name: "KmsKey"))
     CreateDataIntegrationRequest.add_member(:source_uri, Shapes::ShapeRef.new(shape: SourceURI, required: true, location_name: "SourceURI"))
-    CreateDataIntegrationRequest.add_member(:schedule_config, Shapes::ShapeRef.new(shape: ScheduleConfiguration, required: true, location_name: "ScheduleConfig"))
+    CreateDataIntegrationRequest.add_member(:schedule_config, Shapes::ShapeRef.new(shape: ScheduleConfiguration, location_name: "ScheduleConfig"))
     CreateDataIntegrationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateDataIntegrationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateDataIntegrationRequest.add_member(:file_configuration, Shapes::ShapeRef.new(shape: FileConfiguration, location_name: "FileConfiguration"))
@@ -197,6 +214,11 @@ module Aws::AppIntegrationsService
     DataIntegrationSummary.struct_class = Types::DataIntegrationSummary
 
     DataIntegrationsList.member = Shapes::ShapeRef.new(shape: DataIntegrationSummary)
+
+    DeleteApplicationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ArnOrUUID, required: true, location: "uri", location_name: "ApplicationIdentifier"))
+    DeleteApplicationRequest.struct_class = Types::DeleteApplicationRequest
+
+    DeleteApplicationResponse.struct_class = Types::DeleteApplicationResponse
 
     DeleteDataIntegrationRequest.add_member(:data_integration_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
     DeleteDataIntegrationRequest.struct_class = Types::DeleteDataIntegrationRequest
@@ -249,7 +271,7 @@ module Aws::AppIntegrationsService
 
     FolderList.member = Shapes::ShapeRef.new(shape: NonBlankLongString)
 
-    GetApplicationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ArnOrUUID, required: true, location: "uri", location_name: "Arn"))
+    GetApplicationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ArnOrUUID, required: true, location: "uri", location_name: "ApplicationIdentifier"))
     GetApplicationRequest.struct_class = Types::GetApplicationRequest
 
     GetApplicationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
@@ -258,11 +280,12 @@ module Aws::AppIntegrationsService
     GetApplicationResponse.add_member(:namespace, Shapes::ShapeRef.new(shape: ApplicationNamespace, location_name: "Namespace"))
     GetApplicationResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     GetApplicationResponse.add_member(:application_source_config, Shapes::ShapeRef.new(shape: ApplicationSourceConfig, location_name: "ApplicationSourceConfig"))
-    GetApplicationResponse.add_member(:subscriptions, Shapes::ShapeRef.new(shape: SubscriptionList, location_name: "Subscriptions"))
-    GetApplicationResponse.add_member(:publications, Shapes::ShapeRef.new(shape: PublicationList, location_name: "Publications"))
+    GetApplicationResponse.add_member(:subscriptions, Shapes::ShapeRef.new(shape: SubscriptionList, deprecated: true, location_name: "Subscriptions", metadata: {"deprecatedMessage"=>"Subscriptions has been replaced with Permissions"}))
+    GetApplicationResponse.add_member(:publications, Shapes::ShapeRef.new(shape: PublicationList, deprecated: true, location_name: "Publications", metadata: {"deprecatedMessage"=>"Publications has been replaced with Permissions"}))
     GetApplicationResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     GetApplicationResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     GetApplicationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    GetApplicationResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
     GetApplicationResponse.struct_class = Types::GetApplicationResponse
 
     GetDataIntegrationRequest.add_member(:identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location: "uri", location_name: "Identifier"))
@@ -296,6 +319,15 @@ module Aws::AppIntegrationsService
 
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
+
+    ListApplicationAssociationsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ArnOrUUID, required: true, location: "uri", location_name: "ApplicationIdentifier"))
+    ListApplicationAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListApplicationAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListApplicationAssociationsRequest.struct_class = Types::ListApplicationAssociationsRequest
+
+    ListApplicationAssociationsResponse.add_member(:application_associations, Shapes::ShapeRef.new(shape: ApplicationAssociationsList, location_name: "ApplicationAssociations"))
+    ListApplicationAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListApplicationAssociationsResponse.struct_class = Types::ListApplicationAssociationsResponse
 
     ListApplicationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -348,6 +380,8 @@ module Aws::AppIntegrationsService
     ObjectConfiguration.key = Shapes::ShapeRef.new(shape: NonBlankString)
     ObjectConfiguration.value = Shapes::ShapeRef.new(shape: FieldsMap)
 
+    PermissionList.member = Shapes::ShapeRef.new(shape: Permission)
+
     Publication.add_member(:event, Shapes::ShapeRef.new(shape: EventName, required: true, location_name: "Event"))
     Publication.add_member(:schema, Shapes::ShapeRef.new(shape: EventDefinitionSchema, required: true, location_name: "Schema"))
     Publication.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -386,18 +420,22 @@ module Aws::AppIntegrationsService
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    UnsupportedOperationException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    UnsupportedOperationException.struct_class = Types::UnsupportedOperationException
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
-    UpdateApplicationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ArnOrUUID, required: true, location: "uri", location_name: "Arn"))
+    UpdateApplicationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ArnOrUUID, required: true, location: "uri", location_name: "ApplicationIdentifier"))
     UpdateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "Name"))
     UpdateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateApplicationRequest.add_member(:application_source_config, Shapes::ShapeRef.new(shape: ApplicationSourceConfig, location_name: "ApplicationSourceConfig"))
-    UpdateApplicationRequest.add_member(:subscriptions, Shapes::ShapeRef.new(shape: SubscriptionList, location_name: "Subscriptions"))
-    UpdateApplicationRequest.add_member(:publications, Shapes::ShapeRef.new(shape: PublicationList, location_name: "Publications"))
+    UpdateApplicationRequest.add_member(:subscriptions, Shapes::ShapeRef.new(shape: SubscriptionList, deprecated: true, location_name: "Subscriptions", metadata: {"deprecatedMessage"=>"Subscriptions has been replaced with Permissions"}))
+    UpdateApplicationRequest.add_member(:publications, Shapes::ShapeRef.new(shape: PublicationList, deprecated: true, location_name: "Publications", metadata: {"deprecatedMessage"=>"Publications has been replaced with Permissions"}))
+    UpdateApplicationRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
@@ -445,6 +483,7 @@ module Aws::AppIntegrationsService
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:create_data_integration, Seahorse::Model::Operation.new.tap do |o|
@@ -471,6 +510,19 @@ module Aws::AppIntegrationsService
         o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateResourceException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteApplication"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/applications/{ApplicationIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
@@ -504,7 +556,7 @@ module Aws::AppIntegrationsService
       api.add_operation(:get_application, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetApplication"
         o.http_method = "GET"
-        o.http_request_uri = "/applications/{Arn}"
+        o.http_request_uri = "/applications/{ApplicationIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: GetApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
@@ -538,6 +590,25 @@ module Aws::AppIntegrationsService
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:list_application_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListApplicationAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/applications/{ApplicationIdentifier}/associations"
+        o.input = Shapes::ShapeRef.new(shape: ListApplicationAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListApplicationAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_applications, Seahorse::Model::Operation.new.tap do |o|
@@ -671,7 +742,7 @@ module Aws::AppIntegrationsService
       api.add_operation(:update_application, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateApplication"
         o.http_method = "PATCH"
-        o.http_request_uri = "/applications/{Arn}"
+        o.http_request_uri = "/applications/{ApplicationIdentifier}"
         o.input = Shapes::ShapeRef.new(shape: UpdateApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
@@ -679,6 +750,7 @@ module Aws::AppIntegrationsService
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
       api.add_operation(:update_data_integration, Seahorse::Model::Operation.new.tap do |o|

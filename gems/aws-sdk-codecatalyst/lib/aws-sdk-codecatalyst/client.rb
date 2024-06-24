@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CodeCatalyst
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CodeCatalyst
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::CodeCatalyst
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::CodeCatalyst
     #   @option options [Aws::CodeCatalyst::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CodeCatalyst::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -503,11 +528,16 @@ module Aws::CodeCatalyst
     #
     #    </note>
     #
+    # @option params [String] :vpc_connection_name
+    #   The name of the connection that will be used to connect to Amazon VPC,
+    #   if any.
+    #
     # @return [Types::CreateDevEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDevEnvironmentResponse#space_name #space_name} => String
     #   * {Types::CreateDevEnvironmentResponse#project_name #project_name} => String
     #   * {Types::CreateDevEnvironmentResponse#id #id} => String
+    #   * {Types::CreateDevEnvironmentResponse#vpc_connection_name #vpc_connection_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -533,6 +563,7 @@ module Aws::CodeCatalyst
     #     persistent_storage: { # required
     #       size_in_gi_b: 1, # required
     #     },
+    #     vpc_connection_name: "NameString",
     #   })
     #
     # @example Response structure
@@ -540,6 +571,7 @@ module Aws::CodeCatalyst
     #   resp.space_name #=> String
     #   resp.project_name #=> String
     #   resp.id #=> String
+    #   resp.vpc_connection_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/CreateDevEnvironment AWS API Documentation
     #
@@ -915,6 +947,7 @@ module Aws::CodeCatalyst
     #   * {Types::GetDevEnvironmentResponse#instance_type #instance_type} => String
     #   * {Types::GetDevEnvironmentResponse#inactivity_timeout_minutes #inactivity_timeout_minutes} => Integer
     #   * {Types::GetDevEnvironmentResponse#persistent_storage #persistent_storage} => Types::PersistentStorage
+    #   * {Types::GetDevEnvironmentResponse#vpc_connection_name #vpc_connection_name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -943,6 +976,7 @@ module Aws::CodeCatalyst
     #   resp.instance_type #=> String, one of "dev.standard1.small", "dev.standard1.medium", "dev.standard1.large", "dev.standard1.xlarge"
     #   resp.inactivity_timeout_minutes #=> Integer
     #   resp.persistent_storage.size_in_gi_b #=> Integer
+    #   resp.vpc_connection_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetDevEnvironment AWS API Documentation
     #
@@ -1118,6 +1152,8 @@ module Aws::CodeCatalyst
     #
     #   * {Types::GetSubscriptionResponse#subscription_type #subscription_type} => String
     #   * {Types::GetSubscriptionResponse#aws_account_name #aws_account_name} => String
+    #   * {Types::GetSubscriptionResponse#pending_subscription_type #pending_subscription_type} => String
+    #   * {Types::GetSubscriptionResponse#pending_subscription_start_time #pending_subscription_start_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1129,6 +1165,8 @@ module Aws::CodeCatalyst
     #
     #   resp.subscription_type #=> String
     #   resp.aws_account_name #=> String
+    #   resp.pending_subscription_type #=> String
+    #   resp.pending_subscription_start_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetSubscription AWS API Documentation
     #
@@ -1177,6 +1215,116 @@ module Aws::CodeCatalyst
     # @param [Hash] params ({})
     def get_user_details(params = {}, options = {})
       req = build_request(:get_user_details, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a workflow.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @option params [required, String] :id
+    #   The ID of the workflow. To rerieve a list of workflow IDs, use
+    #   ListWorkflows.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project in the space.
+    #
+    # @return [Types::GetWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkflowResponse#space_name #space_name} => String
+    #   * {Types::GetWorkflowResponse#project_name #project_name} => String
+    #   * {Types::GetWorkflowResponse#id #id} => String
+    #   * {Types::GetWorkflowResponse#name #name} => String
+    #   * {Types::GetWorkflowResponse#source_repository_name #source_repository_name} => String
+    #   * {Types::GetWorkflowResponse#source_branch_name #source_branch_name} => String
+    #   * {Types::GetWorkflowResponse#definition #definition} => Types::WorkflowDefinition
+    #   * {Types::GetWorkflowResponse#created_time #created_time} => Time
+    #   * {Types::GetWorkflowResponse#last_updated_time #last_updated_time} => Time
+    #   * {Types::GetWorkflowResponse#run_mode #run_mode} => String
+    #   * {Types::GetWorkflowResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_workflow({
+    #     space_name: "NameString", # required
+    #     id: "Uuid", # required
+    #     project_name: "GetWorkflowRequestProjectNameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.space_name #=> String
+    #   resp.project_name #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.source_repository_name #=> String
+    #   resp.source_branch_name #=> String
+    #   resp.definition.path #=> String
+    #   resp.created_time #=> Time
+    #   resp.last_updated_time #=> Time
+    #   resp.run_mode #=> String, one of "QUEUED", "PARALLEL", "SUPERSEDED"
+    #   resp.status #=> String, one of "INVALID", "ACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetWorkflow AWS API Documentation
+    #
+    # @overload get_workflow(params = {})
+    # @param [Hash] params ({})
+    def get_workflow(params = {}, options = {})
+      req = build_request(:get_workflow, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a specified run of a workflow.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @option params [required, String] :id
+    #   The ID of the workflow run. To retrieve a list of workflow run IDs,
+    #   use ListWorkflowRuns.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project in the space.
+    #
+    # @return [Types::GetWorkflowRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkflowRunResponse#space_name #space_name} => String
+    #   * {Types::GetWorkflowRunResponse#project_name #project_name} => String
+    #   * {Types::GetWorkflowRunResponse#id #id} => String
+    #   * {Types::GetWorkflowRunResponse#workflow_id #workflow_id} => String
+    #   * {Types::GetWorkflowRunResponse#status #status} => String
+    #   * {Types::GetWorkflowRunResponse#status_reasons #status_reasons} => Array&lt;Types::WorkflowRunStatusReason&gt;
+    #   * {Types::GetWorkflowRunResponse#start_time #start_time} => Time
+    #   * {Types::GetWorkflowRunResponse#end_time #end_time} => Time
+    #   * {Types::GetWorkflowRunResponse#last_updated_time #last_updated_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_workflow_run({
+    #     space_name: "NameString", # required
+    #     id: "Uuid", # required
+    #     project_name: "GetWorkflowRunRequestProjectNameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.space_name #=> String
+    #   resp.project_name #=> String
+    #   resp.id #=> String
+    #   resp.workflow_id #=> String
+    #   resp.status #=> String, one of "SUCCEEDED", "FAILED", "STOPPED", "SUPERSEDED", "CANCELLED", "NOT_RUN", "VALIDATING", "PROVISIONING", "IN_PROGRESS", "STOPPING", "ABANDONED"
+    #   resp.status_reasons #=> Array
+    #   resp.start_time #=> Time
+    #   resp.end_time #=> Time
+    #   resp.last_updated_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/GetWorkflowRun AWS API Documentation
+    #
+    # @overload get_workflow_run(params = {})
+    # @param [Hash] params ({})
+    def get_workflow_run(params = {}, options = {})
+      req = build_request(:get_workflow_run, params)
       req.send_request(options)
     end
 
@@ -1288,7 +1436,7 @@ module Aws::CodeCatalyst
     # @option params [required, String] :space_name
     #   The name of the space.
     #
-    # @option params [required, String] :project_name
+    # @option params [String] :project_name
     #   The name of the project in the space.
     #
     # @option params [Array<Types::Filter>] :filters
@@ -1316,7 +1464,7 @@ module Aws::CodeCatalyst
     #
     #   resp = client.list_dev_environments({
     #     space_name: "NameString", # required
-    #     project_name: "NameString", # required
+    #     project_name: "NameString",
     #     filters: [
     #       {
     #         key: "String", # required
@@ -1348,6 +1496,7 @@ module Aws::CodeCatalyst
     #   resp.items[0].instance_type #=> String, one of "dev.standard1.small", "dev.standard1.medium", "dev.standard1.large", "dev.standard1.xlarge"
     #   resp.items[0].inactivity_timeout_minutes #=> Integer
     #   resp.items[0].persistent_storage.size_in_gi_b #=> Integer
+    #   resp.items[0].vpc_connection_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/ListDevEnvironments AWS API Documentation
@@ -1359,9 +1508,26 @@ module Aws::CodeCatalyst
       req.send_request(options)
     end
 
-    # Retrieves a list of events that occurred during a specified time
-    # period in a space. You can use these events to audit user and system
-    # activity in a space.
+    # Retrieves a list of events that occurred during a specific time in a
+    # space. You can use these events to audit user and system activity in a
+    # space. For more information, see [Monitoring][1] in the *Amazon
+    # CodeCatalyst User Guide*.
+    #
+    # <note markdown="1"> ListEventLogs guarantees events for the last 30 days in a given space.
+    # You can also view and retrieve a list of management events over the
+    # last 90 days for Amazon CodeCatalyst in the CloudTrail console by
+    # viewing Event history, or by creating a trail to create and maintain a
+    # record of events that extends past 90 days. For more information, see
+    # [Working with CloudTrail Event History][2] and [Working with
+    # CloudTrail trails][3].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/codecatalyst/latest/userguide/ipa-monitoring.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html
+    # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-getting-started.html
     #
     # @option params [required, String] :space_name
     #   The name of the space.
@@ -1484,9 +1650,9 @@ module Aws::CodeCatalyst
     #     max_results: 1,
     #     filters: [
     #       {
-    #         key: "hasAccessTo", # required, accepts hasAccessTo
+    #         key: "hasAccessTo", # required, accepts hasAccessTo, name
     #         values: ["String"], # required
-    #         comparison_operator: "EQ", # accepts EQ, GT, GE, LT, LE
+    #         comparison_operator: "EQ", # accepts EQ, GT, GE, LT, LE, BEGINS_WITH
     #       },
     #     ],
     #   })
@@ -1654,6 +1820,138 @@ module Aws::CodeCatalyst
       req.send_request(options)
     end
 
+    # Retrieves a list of workflow runs of a specified workflow.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @option params [String] :workflow_id
+    #   The ID of the workflow. To retrieve a list of workflow IDs, use
+    #   ListWorkflows.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project in the space.
+    #
+    # @option params [String] :next_token
+    #   A token returned from a call to this API to indicate the next batch of
+    #   results to return, if any.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to show in a single call to this API. If
+    #   the number of results is larger than the number you specified, the
+    #   response will include a `NextToken` element, which you can use to
+    #   obtain additional results.
+    #
+    # @option params [Array<Types::WorkflowRunSortCriteria>] :sort_by
+    #   Information used to sort the items in the returned list.
+    #
+    # @return [Types::ListWorkflowRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkflowRunsResponse#next_token #next_token} => String
+    #   * {Types::ListWorkflowRunsResponse#items #items} => Array&lt;Types::WorkflowRunSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workflow_runs({
+    #     space_name: "NameString", # required
+    #     workflow_id: "Uuid",
+    #     project_name: "ListWorkflowRunsRequestProjectNameString", # required
+    #     next_token: "ListWorkflowRunsRequestNextTokenString",
+    #     max_results: 1,
+    #     sort_by: [
+    #       {
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].workflow_id #=> String
+    #   resp.items[0].workflow_name #=> String
+    #   resp.items[0].status #=> String, one of "SUCCEEDED", "FAILED", "STOPPED", "SUPERSEDED", "CANCELLED", "NOT_RUN", "VALIDATING", "PROVISIONING", "IN_PROGRESS", "STOPPING", "ABANDONED"
+    #   resp.items[0].status_reasons #=> Array
+    #   resp.items[0].start_time #=> Time
+    #   resp.items[0].end_time #=> Time
+    #   resp.items[0].last_updated_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/ListWorkflowRuns AWS API Documentation
+    #
+    # @overload list_workflow_runs(params = {})
+    # @param [Hash] params ({})
+    def list_workflow_runs(params = {}, options = {})
+      req = build_request(:list_workflow_runs, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of workflows in a specified project.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project in the space.
+    #
+    # @option params [String] :next_token
+    #   A token returned from a call to this API to indicate the next batch of
+    #   results to return, if any.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to show in a single call to this API. If
+    #   the number of results is larger than the number you specified, the
+    #   response will include a `NextToken` element, which you can use to
+    #   obtain additional results.
+    #
+    # @option params [Array<Types::WorkflowSortCriteria>] :sort_by
+    #   Information used to sort the items in the returned list.
+    #
+    # @return [Types::ListWorkflowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkflowsResponse#next_token #next_token} => String
+    #   * {Types::ListWorkflowsResponse#items #items} => Array&lt;Types::WorkflowSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workflows({
+    #     space_name: "ListWorkflowsRequestSpaceNameString", # required
+    #     project_name: "NameString", # required
+    #     next_token: "ListWorkflowsRequestNextTokenString",
+    #     max_results: 1,
+    #     sort_by: [
+    #       {
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].source_repository_name #=> String
+    #   resp.items[0].source_branch_name #=> String
+    #   resp.items[0].definition.path #=> String
+    #   resp.items[0].created_time #=> Time
+    #   resp.items[0].last_updated_time #=> Time
+    #   resp.items[0].run_mode #=> String, one of "QUEUED", "PARALLEL", "SUPERSEDED"
+    #   resp.items[0].status #=> String, one of "INVALID", "ACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/ListWorkflows AWS API Documentation
+    #
+    # @overload list_workflows(params = {})
+    # @param [Hash] params ({})
+    def list_workflows(params = {}, options = {})
+      req = build_request(:list_workflows, params)
+      req.send_request(options)
+    end
+
     # Starts a specified Dev Environment and puts it into an active state.
     #
     # @option params [required, String] :space_name
@@ -1768,6 +2066,60 @@ module Aws::CodeCatalyst
     # @param [Hash] params ({})
     def start_dev_environment_session(params = {}, options = {})
       req = build_request(:start_dev_environment_session, params)
+      req.send_request(options)
+    end
+
+    # Begins a run of a specified workflow.
+    #
+    # @option params [required, String] :space_name
+    #   The name of the space.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the project in the space.
+    #
+    # @option params [required, String] :workflow_id
+    #   The system-generated unique ID of the workflow. To retrieve a list of
+    #   workflow IDs, use ListWorkflows.
+    #
+    # @option params [String] :client_token
+    #   A user-specified idempotency token. Idempotency ensures that an API
+    #   request completes only once. With an idempotent request, if the
+    #   original request completes successfully, the subsequent retries return
+    #   the result from the original successful request and have no additional
+    #   effect.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartWorkflowRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartWorkflowRunResponse#space_name #space_name} => String
+    #   * {Types::StartWorkflowRunResponse#project_name #project_name} => String
+    #   * {Types::StartWorkflowRunResponse#id #id} => String
+    #   * {Types::StartWorkflowRunResponse#workflow_id #workflow_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_workflow_run({
+    #     space_name: "StartWorkflowRunRequestSpaceNameString", # required
+    #     project_name: "StartWorkflowRunRequestProjectNameString", # required
+    #     workflow_id: "Uuid", # required
+    #     client_token: "StartWorkflowRunRequestClientTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.space_name #=> String
+    #   resp.project_name #=> String
+    #   resp.id #=> String
+    #   resp.workflow_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecatalyst-2022-09-28/StartWorkflowRun AWS API Documentation
+    #
+    # @overload start_workflow_run(params = {})
+    # @param [Hash] params ({})
+    def start_workflow_run(params = {}, options = {})
+      req = build_request(:start_workflow_run, params)
       req.send_request(options)
     end
 
@@ -2070,7 +2422,7 @@ module Aws::CodeCatalyst
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecatalyst'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

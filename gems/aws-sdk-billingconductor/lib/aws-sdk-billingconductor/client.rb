@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::BillingConductor
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::BillingConductor
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::BillingConductor
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::BillingConductor
     #   @option options [Aws::BillingConductor::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::BillingConductor::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -658,6 +683,10 @@ module Aws::BillingConductor
     #   A `CustomLineItemChargeDetails` that describes the charge details for
     #   a custom line item.
     #
+    # @option params [String] :account_id
+    #   The Amazon Web Services account in which this custom line item will be
+    #   applied to.
+    #
     # @return [Types::CreateCustomLineItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateCustomLineItemOutput#arn #arn} => String
@@ -693,6 +722,7 @@ module Aws::BillingConductor
     #         },
     #       ],
     #     },
+    #     account_id: "AccountId",
     #   })
     #
     # @example Response structure
@@ -1056,6 +1086,71 @@ module Aws::BillingConductor
       req.send_request(options)
     end
 
+    # Retrieves the margin summary report, which includes the Amazon Web
+    # Services cost and charged amount (pro forma cost) by Amazon Web
+    # Service for a specific billing group.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Number (ARN) that uniquely identifies the billing
+    #   group.
+    #
+    # @option params [Types::BillingPeriodRange] :billing_period_range
+    #   A time range for which the margin summary is effective. You can
+    #   specify up to 12 months.
+    #
+    # @option params [Array<String>] :group_by
+    #   A list of strings that specify the attributes that are used to break
+    #   down costs in the margin summary reports for the billing group. For
+    #   example, you can view your costs by the Amazon Web Service name or the
+    #   billing period.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of margin summary reports to retrieve.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used on subsequent calls to get reports.
+    #
+    # @return [Types::GetBillingGroupCostReportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBillingGroupCostReportOutput#billing_group_cost_report_results #billing_group_cost_report_results} => Array&lt;Types::BillingGroupCostReportResultElement&gt;
+    #   * {Types::GetBillingGroupCostReportOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_billing_group_cost_report({
+    #     arn: "BillingGroupArn", # required
+    #     billing_period_range: {
+    #       inclusive_start_billing_period: "BillingPeriod", # required
+    #       exclusive_end_billing_period: "BillingPeriod", # required
+    #     },
+    #     group_by: ["PRODUCT_NAME"], # accepts PRODUCT_NAME, BILLING_PERIOD
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.billing_group_cost_report_results #=> Array
+    #   resp.billing_group_cost_report_results[0].arn #=> String
+    #   resp.billing_group_cost_report_results[0].aws_cost #=> String
+    #   resp.billing_group_cost_report_results[0].proforma_cost #=> String
+    #   resp.billing_group_cost_report_results[0].margin #=> String
+    #   resp.billing_group_cost_report_results[0].margin_percentage #=> String
+    #   resp.billing_group_cost_report_results[0].currency #=> String
+    #   resp.billing_group_cost_report_results[0].attributes #=> Array
+    #   resp.billing_group_cost_report_results[0].attributes[0].key #=> String
+    #   resp.billing_group_cost_report_results[0].attributes[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/GetBillingGroupCostReport AWS API Documentation
+    #
+    # @overload get_billing_group_cost_report(params = {})
+    # @param [Hash] params ({})
+    def get_billing_group_cost_report(params = {}, options = {})
+      req = build_request(:get_billing_group_cost_report, params)
+      req.send_request(options)
+    end
+
     # This is a paginated call to list linked accounts that are linked to
     # the payer account for the specified time period. If no information is
     # provided, the current billing period is used. The response will
@@ -1297,6 +1392,7 @@ module Aws::BillingConductor
     #   resp.custom_line_item_versions[0].end_billing_period #=> String
     #   resp.custom_line_item_versions[0].arn #=> String
     #   resp.custom_line_item_versions[0].start_time #=> Integer
+    #   resp.custom_line_item_versions[0].account_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItemVersions AWS API Documentation
@@ -1344,6 +1440,7 @@ module Aws::BillingConductor
     #       names: ["CustomLineItemName"],
     #       billing_groups: ["BillingGroupArn"],
     #       arns: ["CustomLineItemArn"],
+    #       account_ids: ["AccountId"],
     #     },
     #   })
     #
@@ -1367,6 +1464,7 @@ module Aws::BillingConductor
     #   resp.custom_line_items[0].creation_time #=> Integer
     #   resp.custom_line_items[0].last_modified_time #=> Integer
     #   resp.custom_line_items[0].association_size #=> Integer
+    #   resp.custom_line_items[0].account_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItems AWS API Documentation
@@ -2041,7 +2139,7 @@ module Aws::BillingConductor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-billingconductor'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

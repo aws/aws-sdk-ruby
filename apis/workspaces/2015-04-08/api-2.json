@@ -12,6 +12,22 @@
     "uid":"workspaces-2015-04-08"
   },
   "operations":{
+    "AcceptAccountLinkInvitation":{
+      "name":"AcceptAccountLinkInvitation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AcceptAccountLinkInvitationRequest"},
+      "output":{"shape":"AcceptAccountLinkInvitationResult"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ConflictException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "AssociateConnectionAlias":{
       "name":"AssociateConnectionAlias",
       "http":{
@@ -99,6 +115,21 @@
         {"shape":"OperationNotSupportedException"},
         {"shape":"AccessDeniedException"},
         {"shape":"InvalidParameterValuesException"}
+      ]
+    },
+    "CreateAccountLinkInvitation":{
+      "name":"CreateAccountLinkInvitation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateAccountLinkInvitationRequest"},
+      "output":{"shape":"CreateAccountLinkInvitationResult"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ConflictException"},
+        {"shape":"InternalServerException"}
       ]
     },
     "CreateConnectClientAddIn":{
@@ -244,6 +275,22 @@
       "errors":[
         {"shape":"ResourceLimitExceededException"},
         {"shape":"InvalidParameterValuesException"}
+      ]
+    },
+    "DeleteAccountLinkInvitation":{
+      "name":"DeleteAccountLinkInvitation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteAccountLinkInvitationRequest"},
+      "output":{"shape":"DeleteAccountLinkInvitationResult"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"InternalServerException"}
       ]
     },
     "DeleteClientBranding":{
@@ -712,6 +759,21 @@
         {"shape":"ResourceNotFoundException"}
       ]
     },
+    "GetAccountLink":{
+      "name":"GetAccountLink",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetAccountLinkRequest"},
+      "output":{"shape":"GetAccountLinkResult"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "ImportClientBranding":{
       "name":"ImportClientBranding",
       "http":{
@@ -742,6 +804,20 @@
         {"shape":"OperationNotSupportedException"},
         {"shape":"AccessDeniedException"},
         {"shape":"InvalidParameterValuesException"}
+      ]
+    },
+    "ListAccountLinks":{
+      "name":"ListAccountLinks",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListAccountLinksRequest"},
+      "output":{"shape":"ListAccountLinksResult"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"}
       ]
     },
     "ListAvailableManagementCidrRanges":{
@@ -952,6 +1028,22 @@
         {"shape":"OperationNotSupportedException"}
       ]
     },
+    "RejectAccountLinkInvitation":{
+      "name":"RejectAccountLinkInvitation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RejectAccountLinkInvitationRequest"},
+      "output":{"shape":"RejectAccountLinkInvitationResult"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ConflictException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "RestoreWorkspace":{
       "name":"RestoreWorkspace",
       "http":{
@@ -1095,6 +1187,20 @@
       "type":"string",
       "pattern":"^arn:aws:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$"
     },
+    "AcceptAccountLinkInvitationRequest":{
+      "type":"structure",
+      "required":["LinkId"],
+      "members":{
+        "LinkId":{"shape":"LinkId"},
+        "ClientToken":{"shape":"ClientToken"}
+      }
+    },
+    "AcceptAccountLinkInvitationResult":{
+      "type":"structure",
+      "members":{
+        "AccountLink":{"shape":"AccountLink"}
+      }
+    },
     "AccessDeniedException":{
       "type":"structure",
       "members":{
@@ -1107,6 +1213,29 @@
       "enum":[
         "ALLOW",
         "DENY"
+      ]
+    },
+    "AccountLink":{
+      "type":"structure",
+      "members":{
+        "AccountLinkId":{"shape":"LinkId"},
+        "AccountLinkStatus":{"shape":"AccountLinkStatusEnum"},
+        "SourceAccountId":{"shape":"AwsAccount"},
+        "TargetAccountId":{"shape":"AwsAccount"}
+      }
+    },
+    "AccountLinkList":{
+      "type":"list",
+      "member":{"shape":"AccountLink"}
+    },
+    "AccountLinkStatusEnum":{
+      "type":"string",
+      "enum":[
+        "LINKED",
+        "LINKING_FAILED",
+        "LINK_NOT_FOUND",
+        "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT",
+        "REJECTED"
       ]
     },
     "AccountModification":{
@@ -1421,6 +1550,10 @@
         "ClientProperties":{"shape":"ClientProperties"}
       }
     },
+    "ClientToken":{
+      "type":"string",
+      "pattern":"^.{1,64}$"
+    },
     "ClientUrl":{
       "type":"string",
       "max":200,
@@ -1458,6 +1591,13 @@
       }
     },
     "ComputerName":{"type":"string"},
+    "ConflictException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "exception":true
+    },
     "ConnectClientAddIn":{
       "type":"structure",
       "members":{
@@ -1578,6 +1718,20 @@
       "type":"structure",
       "members":{
         "ImageId":{"shape":"WorkspaceImageId"}
+      }
+    },
+    "CreateAccountLinkInvitationRequest":{
+      "type":"structure",
+      "required":["TargetAccountId"],
+      "members":{
+        "TargetAccountId":{"shape":"AwsAccount"},
+        "ClientToken":{"shape":"ClientToken"}
+      }
+    },
+    "CreateAccountLinkInvitationResult":{
+      "type":"structure",
+      "members":{
+        "AccountLink":{"shape":"AccountLink"}
       }
     },
     "CreateConnectClientAddInRequest":{
@@ -1749,6 +1903,27 @@
         "PendingRequests":{"shape":"WorkspaceList"}
       }
     },
+    "DataReplication":{
+      "type":"string",
+      "enum":[
+        "NO_REPLICATION",
+        "PRIMARY_AS_SOURCE"
+      ]
+    },
+    "DataReplicationSettings":{
+      "type":"structure",
+      "members":{
+        "DataReplication":{"shape":"DataReplication"},
+        "RecoverySnapshotTime":{"shape":"Timestamp"}
+      }
+    },
+    "DedicatedTenancyAccountType":{
+      "type":"string",
+      "enum":[
+        "SOURCE_ACCOUNT",
+        "TARGET_ACCOUNT"
+      ]
+    },
     "DedicatedTenancyCidrRangeList":{
       "type":"list",
       "member":{"shape":"DedicatedTenancyManagementCidrRange"}
@@ -1831,6 +2006,20 @@
         "SAML_PROPERTIES_USER_ACCESS_URL",
         "SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"
       ]
+    },
+    "DeleteAccountLinkInvitationRequest":{
+      "type":"structure",
+      "required":["LinkId"],
+      "members":{
+        "LinkId":{"shape":"LinkId"},
+        "ClientToken":{"shape":"ClientToken"}
+      }
+    },
+    "DeleteAccountLinkInvitationResult":{
+      "type":"structure",
+      "members":{
+        "AccountLink":{"shape":"AccountLink"}
+      }
     },
     "DeleteClientBrandingRequest":{
       "type":"structure",
@@ -1975,7 +2164,8 @@
       "type":"structure",
       "members":{
         "DedicatedTenancySupport":{"shape":"DedicatedTenancySupportResultEnum"},
-        "DedicatedTenancyManagementCidrRange":{"shape":"DedicatedTenancyManagementCidrRange"}
+        "DedicatedTenancyManagementCidrRange":{"shape":"DedicatedTenancyManagementCidrRange"},
+        "DedicatedTenancyAccountType":{"shape":"DedicatedTenancyAccountType"}
       }
     },
     "DescribeApplicationAssociationsRequest":{
@@ -2275,7 +2465,8 @@
         "UserName":{"shape":"UserName"},
         "BundleId":{"shape":"BundleId"},
         "Limit":{"shape":"Limit"},
-        "NextToken":{"shape":"PaginationToken"}
+        "NextToken":{"shape":"PaginationToken"},
+        "WorkspaceName":{"shape":"WorkspaceName"}
       }
     },
     "DescribeWorkspacesResult":{
@@ -2422,6 +2613,19 @@
         "ErrorMessage":{"shape":"Description"}
       }
     },
+    "GetAccountLinkRequest":{
+      "type":"structure",
+      "members":{
+        "LinkId":{"shape":"LinkId"},
+        "LinkedAccountId":{"shape":"AwsAccount"}
+      }
+    },
+    "GetAccountLinkResult":{
+      "type":"structure",
+      "members":{
+        "AccountLink":{"shape":"AccountLink"}
+      }
+    },
     "ImageAssociatedResourceType":{
       "type":"string",
       "enum":["APPLICATION"]
@@ -2516,6 +2720,13 @@
       },
       "exception":true
     },
+    "InternalServerException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "exception":true
+    },
     "InvalidParameterValuesException":{
       "type":"structure",
       "members":{
@@ -2601,6 +2812,29 @@
       "type":"integer",
       "max":25,
       "min":1
+    },
+    "LinkId":{
+      "type":"string",
+      "pattern":"^link-.{8,24}$"
+    },
+    "LinkStatusFilterList":{
+      "type":"list",
+      "member":{"shape":"AccountLinkStatusEnum"}
+    },
+    "ListAccountLinksRequest":{
+      "type":"structure",
+      "members":{
+        "LinkStatusFilter":{"shape":"LinkStatusFilterList"},
+        "NextToken":{"shape":"PaginationToken"},
+        "MaxResults":{"shape":"Limit"}
+      }
+    },
+    "ListAccountLinksResult":{
+      "type":"structure",
+      "members":{
+        "AccountLinks":{"shape":"AccountLinkList"},
+        "NextToken":{"shape":"PaginationToken"}
+      }
     },
     "ListAvailableManagementCidrRangesRequest":{
       "type":"structure",
@@ -2789,13 +3023,11 @@
     },
     "ModifyWorkspacePropertiesRequest":{
       "type":"structure",
-      "required":[
-        "WorkspaceId",
-        "WorkspaceProperties"
-      ],
+      "required":["WorkspaceId"],
       "members":{
         "WorkspaceId":{"shape":"WorkspaceId"},
-        "WorkspaceProperties":{"shape":"WorkspaceProperties"}
+        "WorkspaceProperties":{"shape":"WorkspaceProperties"},
+        "DataReplication":{"shape":"DataReplication"}
       }
     },
     "ModifyWorkspacePropertiesResult":{
@@ -2996,6 +3228,20 @@
       "max":20,
       "min":1
     },
+    "RejectAccountLinkInvitationRequest":{
+      "type":"structure",
+      "required":["LinkId"],
+      "members":{
+        "LinkId":{"shape":"LinkId"},
+        "ClientToken":{"shape":"ClientToken"}
+      }
+    },
+    "RejectAccountLinkInvitationResult":{
+      "type":"structure",
+      "members":{
+        "AccountLink":{"shape":"AccountLink"}
+      }
+    },
     "RelatedWorkspaceProperties":{
       "type":"structure",
       "members":{
@@ -3169,7 +3415,8 @@
         "PrimaryWorkspaceId":{"shape":"WorkspaceId"},
         "VolumeEncryptionKey":{"shape":"VolumeEncryptionKey"},
         "DirectoryId":{"shape":"DirectoryId"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "DataReplication":{"shape":"DataReplication"}
       }
     },
     "StandbyWorkspaceRelationshipType":{
@@ -3182,6 +3429,18 @@
     "StandbyWorkspacesList":{
       "type":"list",
       "member":{"shape":"StandbyWorkspace"}
+    },
+    "StandbyWorkspacesProperties":{
+      "type":"structure",
+      "members":{
+        "StandbyWorkspaceId":{"shape":"WorkspaceId"},
+        "DataReplication":{"shape":"DataReplication"},
+        "RecoverySnapshotTime":{"shape":"Timestamp"}
+      }
+    },
+    "StandbyWorkspacesPropertiesList":{
+      "type":"list",
+      "member":{"shape":"StandbyWorkspacesProperties"}
     },
     "StartRequest":{
       "type":"structure",
@@ -3434,6 +3693,13 @@
       }
     },
     "UserVolumeSizeGib":{"type":"integer"},
+    "ValidationException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "exception":true
+    },
     "VolumeEncryptionKey":{"type":"string"},
     "WorkSpaceApplication":{
       "type":"structure",
@@ -3513,9 +3779,12 @@
         "VolumeEncryptionKey":{"shape":"VolumeEncryptionKey"},
         "UserVolumeEncryptionEnabled":{"shape":"BooleanObject"},
         "RootVolumeEncryptionEnabled":{"shape":"BooleanObject"},
+        "WorkspaceName":{"shape":"WorkspaceName"},
         "WorkspaceProperties":{"shape":"WorkspaceProperties"},
         "ModificationStates":{"shape":"ModificationStateList"},
-        "RelatedWorkspaces":{"shape":"RelatedWorkspaces"}
+        "RelatedWorkspaces":{"shape":"RelatedWorkspaces"},
+        "DataReplicationSettings":{"shape":"DataReplicationSettings"},
+        "StandbyWorkspacesProperties":{"shape":"StandbyWorkspacesPropertiesList"}
       }
     },
     "WorkspaceAccessProperties":{
@@ -3749,6 +4018,10 @@
       "type":"list",
       "member":{"shape":"Workspace"}
     },
+    "WorkspaceName":{
+      "type":"string",
+      "pattern":"^[a-zA-Z0-9_()][a-zA-Z0-9_.()-]{1,63}$"
+    },
     "WorkspaceProperties":{
       "type":"structure",
       "members":{
@@ -3776,7 +4049,8 @@
         "UserVolumeEncryptionEnabled":{"shape":"BooleanObject"},
         "RootVolumeEncryptionEnabled":{"shape":"BooleanObject"},
         "WorkspaceProperties":{"shape":"WorkspaceProperties"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "WorkspaceName":{"shape":"WorkspaceName"}
       }
     },
     "WorkspaceRequestList":{

@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.103.0 (2024-05-17)
+------------------
+
+* Feature - This release adds dualstack-without-public-ipv4 IP address type for ALB.
+
+1.102.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.101.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2024-04-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.99.0 (2024-03-14)
+------------------
+
+* Feature - This release allows you to configure HTTP client keep-alive duration for communication between clients and Application Load Balancers.
+
+1.98.0 (2024-01-31)
+------------------
+
+* Feature - This release enables unhealthy target draining intervals for Network Load Balancers.
+
+1.97.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.96.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.95.0 (2023-11-27)
+------------------
+
+* Feature - This release enables both mutual authentication (mTLS), and Automatic Target Weights (ATW) for Application Load Balancers.
+
+1.94.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.93.0 (2023-10-12)
+------------------
+
+* Feature - This release enables routing policies with Availability Zone affinity for Network Load Balancers.
+
 1.92.0 (2023-09-27)
 ------------------
 

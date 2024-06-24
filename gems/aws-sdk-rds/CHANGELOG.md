@@ -1,6 +1,196 @@
 Unreleased Changes
 ------------------
 
+1.234.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.233.0 (2024-05-30)
+------------------
+
+* Feature - Updates Amazon RDS documentation for Aurora Postgres DBname.
+
+1.232.0 (2024-05-21)
+------------------
+
+* Feature - Updates Amazon RDS documentation for Db2 license through AWS Marketplace.
+
+1.231.0 (2024-05-20)
+------------------
+
+* Feature - This release adds support for EngineLifecycleSupport on DBInstances, DBClusters, and GlobalClusters.
+
+1.230.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.229.0 (2024-04-26)
+------------------
+
+* Feature - SupportsLimitlessDatabase field added to describe-db-engine-versions to indicate whether the DB engine version supports Aurora Limitless Database.
+
+1.228.0 (2024-04-25)
+------------------
+
+* Feature - Updates Amazon RDS documentation for setting local time zones for RDS for Db2 DB instances.
+
+1.227.0 (2024-04-23)
+------------------
+
+* Feature - Fix the example ARN for ModifyActivityStreamRequest
+
+1.226.0 (2024-04-16)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.225.0 (2024-04-11)
+------------------
+
+* Feature - Updates Amazon RDS documentation for Standard Edition 2 support in RDS Custom for Oracle.
+
+1.224.0 (2024-04-09)
+------------------
+
+* Feature - This release adds support for specifying the CA certificate to use for the new db instance when restoring from db snapshot, restoring from s3, restoring to point in time, and creating a db instance read replica.
+
+1.223.0 (2024-03-18)
+------------------
+
+* Feature - This release launches the ModifyIntegration API and support for data filtering for zero-ETL Integrations.
+
+1.222.0 (2024-03-14)
+------------------
+
+* Feature - Updates Amazon RDS documentation for EBCDIC collation for RDS for Db2.
+
+1.221.0 (2024-03-07)
+------------------
+
+* Feature - Updates Amazon RDS documentation for io2 storage for Multi-AZ DB clusters
+
+1.220.0 (2024-03-06)
+------------------
+
+* Feature - Updated the input of CreateDBCluster and ModifyDBCluster to support setting CA certificates. Updated the output of DescribeDBCluster to show current CA certificate setting value.
+
+1.219.0 (2024-02-26)
+------------------
+
+* Feature - This release adds support for gp3 data volumes for Multi-AZ DB Clusters.
+
+1.218.0 (2024-02-23)
+------------------
+
+* Feature - Add pattern and length based validations for DBShardGroupIdentifier
+
+1.217.0 (2024-02-16)
+------------------
+
+* Feature - Doc only update for a valid option in DB parameter group
+
+1.216.0 (2024-02-14)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.215.0 (2024-01-29)
+------------------
+
+* Feature - Introduced support for the InsufficientDBInstanceCapacityFault error in the RDS RestoreDBClusterFromSnapshot and RestoreDBClusterToPointInTime API methods. This provides enhanced error handling, ensuring a more robust experience.
+
+1.214.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.213.0 (2024-01-24)
+------------------
+
+* Feature - This release adds support for Aurora Limitless Database.
+
+1.212.0 (2024-01-22)
+------------------
+
+* Feature - Introduced support for the InsufficientDBInstanceCapacityFault error in the RDS CreateDBCluster API method. This provides enhanced error handling, ensuring a more robust experience when creating database clusters with insufficient instance capacity.
+
+1.211.0 (2023-12-21)
+------------------
+
+* Feature - This release adds support for using RDS Data API with Aurora PostgreSQL Serverless v2 and provisioned DB clusters.
+
+1.210.0 (2023-12-19)
+------------------
+
+* Feature - RDS - The release adds two new APIs: DescribeDBRecommendations and ModifyDBRecommendation
+
+1.209.0 (2023-12-15)
+------------------
+
+* Feature - Updates Amazon RDS documentation by adding code examples
+
+1.208.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.207.0 (2023-11-27)
+------------------
+
+* Feature - Updates Amazon RDS documentation for support for RDS for Db2.
+
+1.206.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.205.0 (2023-11-17)
+------------------
+
+* Feature - This release adds support for option groups and replica enhancements to Amazon RDS Custom.
+
+1.204.0 (2023-11-15)
+------------------
+
+* Feature - Updates Amazon RDS documentation for support for upgrading RDS for MySQL snapshots from version 5.7 to version 8.0.
+
+1.203.0 (2023-11-10)
+------------------
+
+* Feature - Updates Amazon RDS documentation for zero-ETL integrations.
+
+1.202.0 (2023-11-08)
+------------------
+
+* Feature - This Amazon RDS release adds support for patching the OS of an RDS Custom for Oracle DB instance. You can now upgrade the database or operating system using the modify-db-instance command.
+
+1.201.0 (2023-11-07)
+------------------
+
+* Feature - This Amazon RDS release adds support for the multi-tenant configuration. In this configuration, an RDS DB instance can contain multiple tenant databases. In RDS for Oracle, a tenant database is a pluggable database (PDB).
+
+1.200.0 (2023-11-01)
+------------------
+
+* Feature - This release adds support for customized networking resources to Amazon RDS Custom.
+
+1.199.0 (2023-10-30)
+------------------
+
+* Feature - This release launches the CreateIntegration, DeleteIntegration, and DescribeIntegrations APIs to manage zero-ETL Integrations.
+
+1.198.0 (2023-10-18)
+------------------
+
+* Feature - This release adds support for upgrading the storage file system configuration on the DB instance using a blue/green deployment or a read replica.
+
+1.197.0 (2023-10-12)
+------------------
+
+* Feature - This release adds support for adding a dedicated log volume to open-source RDS instances.
+
 1.196.0 (2023-10-05)
 ------------------
 

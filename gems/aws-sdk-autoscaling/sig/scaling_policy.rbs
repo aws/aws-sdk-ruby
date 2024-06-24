@@ -1,0 +1,101 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AutoScaling
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html
+    class ScalingPolicy
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#name-instance_method
+      def name: () -> String
+      alias policy_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#auto_scaling_group_name-instance_method
+      def auto_scaling_group_name: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#policy_arn-instance_method
+      def policy_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#policy_type-instance_method
+      def policy_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#adjustment_type-instance_method
+      def adjustment_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#min_adjustment_step-instance_method
+      def min_adjustment_step: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#min_adjustment_magnitude-instance_method
+      def min_adjustment_magnitude: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#scaling_adjustment-instance_method
+      def scaling_adjustment: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#cooldown-instance_method
+      def cooldown: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#step_adjustments-instance_method
+      def step_adjustments: () -> ::Array[Types::StepAdjustment]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#metric_aggregation_type-instance_method
+      def metric_aggregation_type: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#estimated_instance_warmup-instance_method
+      def estimated_instance_warmup: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#alarms-instance_method
+      def alarms: () -> ::Array[Types::Alarm]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#target_tracking_configuration-instance_method
+      def target_tracking_configuration: () -> Types::TargetTrackingConfiguration
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#enabled-instance_method
+      def enabled: () -> bool
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#predictive_scaling_configuration-instance_method
+      def predictive_scaling_configuration: () -> Types::PredictiveScalingConfiguration
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#data-instance_method
+      def data: () -> Types::ScalingPolicy
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#delete-instance_method
+      def delete: (
+                    ?auto_scaling_group_name: ::String
+                  ) -> ::Aws::EmptyStructure
+                | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#execute-instance_method
+      def execute: (
+                     ?auto_scaling_group_name: ::String,
+                     ?honor_cooldown: bool,
+                     ?metric_value: ::Float,
+                     ?breach_threshold: ::Float
+                   ) -> ::Aws::EmptyStructure
+                 | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/ScalingPolicy.html#group-instance_method
+      def group: () -> AutoScalingGroup?
+
+      class Collection < ::Aws::Resources::Collection[ScalingPolicy]
+      end
+    end
+  end
+end

@@ -1,0 +1,112 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ElasticLoadBalancingV2
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class ALPNPolicyNotSupportedException < ::Aws::Errors::ServiceError
+      end
+      class AllocationIdNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class AvailabilityZoneNotSupportedException < ::Aws::Errors::ServiceError
+      end
+      class CaCertificatesBundleNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class CertificateNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class DuplicateListenerException < ::Aws::Errors::ServiceError
+      end
+      class DuplicateLoadBalancerNameException < ::Aws::Errors::ServiceError
+      end
+      class DuplicateTagKeysException < ::Aws::Errors::ServiceError
+      end
+      class DuplicateTargetGroupNameException < ::Aws::Errors::ServiceError
+      end
+      class DuplicateTrustStoreNameException < ::Aws::Errors::ServiceError
+      end
+      class HealthUnavailableException < ::Aws::Errors::ServiceError
+      end
+      class IncompatibleProtocolsException < ::Aws::Errors::ServiceError
+      end
+      class InvalidCaCertificatesBundleException < ::Aws::Errors::ServiceError
+      end
+      class InvalidConfigurationRequestException < ::Aws::Errors::ServiceError
+      end
+      class InvalidLoadBalancerActionException < ::Aws::Errors::ServiceError
+      end
+      class InvalidRevocationContentException < ::Aws::Errors::ServiceError
+      end
+      class InvalidSchemeException < ::Aws::Errors::ServiceError
+      end
+      class InvalidSecurityGroupException < ::Aws::Errors::ServiceError
+      end
+      class InvalidSubnetException < ::Aws::Errors::ServiceError
+      end
+      class InvalidTargetException < ::Aws::Errors::ServiceError
+      end
+      class ListenerNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class LoadBalancerNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class OperationNotPermittedException < ::Aws::Errors::ServiceError
+      end
+      class PriorityInUseException < ::Aws::Errors::ServiceError
+      end
+      class ResourceInUseException < ::Aws::Errors::ServiceError
+      end
+      class RevocationContentNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class RevocationIdNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class RuleNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class SSLPolicyNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class SubnetNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class TargetGroupAssociationLimitException < ::Aws::Errors::ServiceError
+      end
+      class TargetGroupNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class TooManyActionsException < ::Aws::Errors::ServiceError
+      end
+      class TooManyCertificatesException < ::Aws::Errors::ServiceError
+      end
+      class TooManyListenersException < ::Aws::Errors::ServiceError
+      end
+      class TooManyLoadBalancersException < ::Aws::Errors::ServiceError
+      end
+      class TooManyRegistrationsForTargetIdException < ::Aws::Errors::ServiceError
+      end
+      class TooManyRulesException < ::Aws::Errors::ServiceError
+      end
+      class TooManyTagsException < ::Aws::Errors::ServiceError
+      end
+      class TooManyTargetGroupsException < ::Aws::Errors::ServiceError
+      end
+      class TooManyTargetsException < ::Aws::Errors::ServiceError
+      end
+      class TooManyTrustStoreRevocationEntriesException < ::Aws::Errors::ServiceError
+      end
+      class TooManyTrustStoresException < ::Aws::Errors::ServiceError
+      end
+      class TooManyUniqueTargetGroupsPerLoadBalancerException < ::Aws::Errors::ServiceError
+      end
+      class TrustStoreInUseException < ::Aws::Errors::ServiceError
+      end
+      class TrustStoreNotFoundException < ::Aws::Errors::ServiceError
+      end
+      class TrustStoreNotReadyException < ::Aws::Errors::ServiceError
+      end
+      class UnsupportedProtocolException < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

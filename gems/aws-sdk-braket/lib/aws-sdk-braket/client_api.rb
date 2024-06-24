@@ -15,6 +15,10 @@ module Aws::Braket
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AlgorithmSpecification = Shapes::StructureShape.new(name: 'AlgorithmSpecification')
+    Association = Shapes::StructureShape.new(name: 'Association')
+    AssociationType = Shapes::StringShape.new(name: 'AssociationType')
+    Associations = Shapes::ListShape.new(name: 'Associations')
+    BraketResourceArn = Shapes::StringShape.new(name: 'BraketResourceArn')
     CancelJobRequest = Shapes::StructureShape.new(name: 'CancelJobRequest')
     CancelJobResponse = Shapes::StructureShape.new(name: 'CancelJobResponse')
     CancelQuantumTaskRequest = Shapes::StructureShape.new(name: 'CancelQuantumTaskRequest')
@@ -24,10 +28,12 @@ module Aws::Braket
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContainerImage = Shapes::StructureShape.new(name: 'ContainerImage')
     CreateJobRequest = Shapes::StructureShape.new(name: 'CreateJobRequest')
+    CreateJobRequestAssociationsList = Shapes::ListShape.new(name: 'CreateJobRequestAssociationsList')
     CreateJobRequestInputDataConfigList = Shapes::ListShape.new(name: 'CreateJobRequestInputDataConfigList')
     CreateJobRequestJobNameString = Shapes::StringShape.new(name: 'CreateJobRequestJobNameString')
     CreateJobResponse = Shapes::StructureShape.new(name: 'CreateJobResponse')
     CreateQuantumTaskRequest = Shapes::StructureShape.new(name: 'CreateQuantumTaskRequest')
+    CreateQuantumTaskRequestAssociationsList = Shapes::ListShape.new(name: 'CreateQuantumTaskRequestAssociationsList')
     CreateQuantumTaskRequestDeviceParametersString = Shapes::StringShape.new(name: 'CreateQuantumTaskRequestDeviceParametersString')
     CreateQuantumTaskRequestOutputS3BucketString = Shapes::StringShape.new(name: 'CreateQuantumTaskRequestOutputS3BucketString')
     CreateQuantumTaskRequestOutputS3KeyPrefixString = Shapes::StringShape.new(name: 'CreateQuantumTaskRequestOutputS3KeyPrefixString')
@@ -142,6 +148,12 @@ module Aws::Braket
     AlgorithmSpecification.add_member(:script_mode_config, Shapes::ShapeRef.new(shape: ScriptModeConfig, location_name: "scriptModeConfig"))
     AlgorithmSpecification.struct_class = Types::AlgorithmSpecification
 
+    Association.add_member(:arn, Shapes::ShapeRef.new(shape: BraketResourceArn, required: true, location_name: "arn"))
+    Association.add_member(:type, Shapes::ShapeRef.new(shape: AssociationType, required: true, location_name: "type"))
+    Association.struct_class = Types::Association
+
+    Associations.member = Shapes::ShapeRef.new(shape: Association)
+
     CancelJobRequest.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, required: true, location: "uri", location_name: "jobArn"))
     CancelJobRequest.struct_class = Types::CancelJobRequest
 
@@ -164,6 +176,7 @@ module Aws::Braket
     ContainerImage.struct_class = Types::ContainerImage
 
     CreateJobRequest.add_member(:algorithm_specification, Shapes::ShapeRef.new(shape: AlgorithmSpecification, required: true, location_name: "algorithmSpecification"))
+    CreateJobRequest.add_member(:associations, Shapes::ShapeRef.new(shape: CreateJobRequestAssociationsList, location_name: "associations"))
     CreateJobRequest.add_member(:checkpoint_config, Shapes::ShapeRef.new(shape: JobCheckpointConfig, location_name: "checkpointConfig"))
     CreateJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String64, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateJobRequest.add_member(:device_config, Shapes::ShapeRef.new(shape: DeviceConfig, required: true, location_name: "deviceConfig"))
@@ -177,12 +190,15 @@ module Aws::Braket
     CreateJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
+    CreateJobRequestAssociationsList.member = Shapes::ShapeRef.new(shape: Association)
+
     CreateJobRequestInputDataConfigList.member = Shapes::ShapeRef.new(shape: InputFileConfig)
 
     CreateJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, required: true, location_name: "jobArn"))
     CreateJobResponse.struct_class = Types::CreateJobResponse
 
     CreateQuantumTaskRequest.add_member(:action, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "action", metadata: {"jsonvalue"=>true}))
+    CreateQuantumTaskRequest.add_member(:associations, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestAssociationsList, location_name: "associations"))
     CreateQuantumTaskRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String64, required: true, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreateQuantumTaskRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: DeviceArn, required: true, location_name: "deviceArn"))
     CreateQuantumTaskRequest.add_member(:device_parameters, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestDeviceParametersString, location_name: "deviceParameters", metadata: {"jsonvalue"=>true}))
@@ -192,6 +208,8 @@ module Aws::Braket
     CreateQuantumTaskRequest.add_member(:shots, Shapes::ShapeRef.new(shape: CreateQuantumTaskRequestShotsLong, required: true, location_name: "shots"))
     CreateQuantumTaskRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateQuantumTaskRequest.struct_class = Types::CreateQuantumTaskRequest
+
+    CreateQuantumTaskRequestAssociationsList.member = Shapes::ShapeRef.new(shape: Association)
 
     CreateQuantumTaskResponse.add_member(:quantum_task_arn, Shapes::ShapeRef.new(shape: QuantumTaskArn, required: true, location_name: "quantumTaskArn"))
     CreateQuantumTaskResponse.struct_class = Types::CreateQuantumTaskResponse
@@ -241,6 +259,7 @@ module Aws::Braket
     GetJobRequest.struct_class = Types::GetJobRequest
 
     GetJobResponse.add_member(:algorithm_specification, Shapes::ShapeRef.new(shape: AlgorithmSpecification, required: true, location_name: "algorithmSpecification"))
+    GetJobResponse.add_member(:associations, Shapes::ShapeRef.new(shape: Associations, location_name: "associations"))
     GetJobResponse.add_member(:billable_duration, Shapes::ShapeRef.new(shape: Integer, location_name: "billableDuration"))
     GetJobResponse.add_member(:checkpoint_config, Shapes::ShapeRef.new(shape: JobCheckpointConfig, location_name: "checkpointConfig"))
     GetJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
@@ -266,6 +285,7 @@ module Aws::Braket
     GetQuantumTaskRequest.add_member(:quantum_task_arn, Shapes::ShapeRef.new(shape: QuantumTaskArn, required: true, location: "uri", location_name: "quantumTaskArn"))
     GetQuantumTaskRequest.struct_class = Types::GetQuantumTaskRequest
 
+    GetQuantumTaskResponse.add_member(:associations, Shapes::ShapeRef.new(shape: Associations, location_name: "associations"))
     GetQuantumTaskResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
     GetQuantumTaskResponse.add_member(:device_arn, Shapes::ShapeRef.new(shape: DeviceArn, required: true, location_name: "deviceArn"))
     GetQuantumTaskResponse.add_member(:device_parameters, Shapes::ShapeRef.new(shape: JsonValue, required: true, location_name: "deviceParameters", metadata: {"jsonvalue"=>true}))
@@ -508,6 +528,7 @@ module Aws::Braket
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: DeviceOfflineException)
         o.errors << Shapes::ShapeRef.new(shape: DeviceRetiredException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)

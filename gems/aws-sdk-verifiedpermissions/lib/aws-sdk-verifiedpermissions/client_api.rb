@@ -16,14 +16,37 @@ module Aws::VerifiedPermissions
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     ActionId = Shapes::StringShape.new(name: 'ActionId')
     ActionIdentifier = Shapes::StructureShape.new(name: 'ActionIdentifier')
+    ActionIdentifierList = Shapes::ListShape.new(name: 'ActionIdentifierList')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
     AttributeValue = Shapes::UnionShape.new(name: 'AttributeValue')
+    Audience = Shapes::StringShape.new(name: 'Audience')
+    Audiences = Shapes::ListShape.new(name: 'Audiences')
+    BatchIsAuthorizedInput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedInput')
+    BatchIsAuthorizedInputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedInputItem')
+    BatchIsAuthorizedInputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedInputList')
+    BatchIsAuthorizedOutput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedOutput')
+    BatchIsAuthorizedOutputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedOutputItem')
+    BatchIsAuthorizedOutputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedOutputList')
+    BatchIsAuthorizedWithTokenInput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedWithTokenInput')
+    BatchIsAuthorizedWithTokenInputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedWithTokenInputItem')
+    BatchIsAuthorizedWithTokenInputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedWithTokenInputList')
+    BatchIsAuthorizedWithTokenOutput = Shapes::StructureShape.new(name: 'BatchIsAuthorizedWithTokenOutput')
+    BatchIsAuthorizedWithTokenOutputItem = Shapes::StructureShape.new(name: 'BatchIsAuthorizedWithTokenOutputItem')
+    BatchIsAuthorizedWithTokenOutputList = Shapes::ListShape.new(name: 'BatchIsAuthorizedWithTokenOutputList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanAttribute = Shapes::BooleanShape.new(name: 'BooleanAttribute')
+    Claim = Shapes::StringShape.new(name: 'Claim')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientIds = Shapes::ListShape.new(name: 'ClientIds')
+    CognitoGroupConfiguration = Shapes::StructureShape.new(name: 'CognitoGroupConfiguration')
+    CognitoGroupConfigurationDetail = Shapes::StructureShape.new(name: 'CognitoGroupConfigurationDetail')
+    CognitoGroupConfigurationItem = Shapes::StructureShape.new(name: 'CognitoGroupConfigurationItem')
     CognitoUserPoolConfiguration = Shapes::StructureShape.new(name: 'CognitoUserPoolConfiguration')
+    CognitoUserPoolConfigurationDetail = Shapes::StructureShape.new(name: 'CognitoUserPoolConfigurationDetail')
+    CognitoUserPoolConfigurationItem = Shapes::StructureShape.new(name: 'CognitoUserPoolConfigurationItem')
     Configuration = Shapes::UnionShape.new(name: 'Configuration')
+    ConfigurationDetail = Shapes::UnionShape.new(name: 'ConfigurationDetail')
+    ConfigurationItem = Shapes::UnionShape.new(name: 'ConfigurationItem')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContextDefinition = Shapes::UnionShape.new(name: 'ContextDefinition')
     ContextMap = Shapes::MapShape.new(name: 'ContextMap')
@@ -50,6 +73,7 @@ module Aws::VerifiedPermissions
     EntitiesDefinition = Shapes::UnionShape.new(name: 'EntitiesDefinition')
     EntityAttributes = Shapes::MapShape.new(name: 'EntityAttributes')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
+    EntityIdPrefix = Shapes::StringShape.new(name: 'EntityIdPrefix')
     EntityIdentifier = Shapes::StructureShape.new(name: 'EntityIdentifier')
     EntityItem = Shapes::StructureShape.new(name: 'EntityItem')
     EntityList = Shapes::ListShape.new(name: 'EntityList')
@@ -67,6 +91,7 @@ module Aws::VerifiedPermissions
     GetPolicyTemplateOutput = Shapes::StructureShape.new(name: 'GetPolicyTemplateOutput')
     GetSchemaInput = Shapes::StructureShape.new(name: 'GetSchemaInput')
     GetSchemaOutput = Shapes::StructureShape.new(name: 'GetSchemaOutput')
+    GroupEntityType = Shapes::StringShape.new(name: 'GroupEntityType')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
     IdentitySourceDetails = Shapes::StructureShape.new(name: 'IdentitySourceDetails')
     IdentitySourceFilter = Shapes::StructureShape.new(name: 'IdentitySourceFilter')
@@ -80,6 +105,7 @@ module Aws::VerifiedPermissions
     IsAuthorizedOutput = Shapes::StructureShape.new(name: 'IsAuthorizedOutput')
     IsAuthorizedWithTokenInput = Shapes::StructureShape.new(name: 'IsAuthorizedWithTokenInput')
     IsAuthorizedWithTokenOutput = Shapes::StructureShape.new(name: 'IsAuthorizedWithTokenOutput')
+    Issuer = Shapes::StringShape.new(name: 'Issuer')
     ListIdentitySourcesInput = Shapes::StructureShape.new(name: 'ListIdentitySourcesInput')
     ListIdentitySourcesMaxResults = Shapes::IntegerShape.new(name: 'ListIdentitySourcesMaxResults')
     ListIdentitySourcesOutput = Shapes::StructureShape.new(name: 'ListIdentitySourcesOutput')
@@ -94,16 +120,33 @@ module Aws::VerifiedPermissions
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     NamespaceList = Shapes::ListShape.new(name: 'NamespaceList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OpenIdConnectAccessTokenConfiguration = Shapes::StructureShape.new(name: 'OpenIdConnectAccessTokenConfiguration')
+    OpenIdConnectAccessTokenConfigurationDetail = Shapes::StructureShape.new(name: 'OpenIdConnectAccessTokenConfigurationDetail')
+    OpenIdConnectAccessTokenConfigurationItem = Shapes::StructureShape.new(name: 'OpenIdConnectAccessTokenConfigurationItem')
+    OpenIdConnectConfiguration = Shapes::StructureShape.new(name: 'OpenIdConnectConfiguration')
+    OpenIdConnectConfigurationDetail = Shapes::StructureShape.new(name: 'OpenIdConnectConfigurationDetail')
+    OpenIdConnectConfigurationItem = Shapes::StructureShape.new(name: 'OpenIdConnectConfigurationItem')
+    OpenIdConnectGroupConfiguration = Shapes::StructureShape.new(name: 'OpenIdConnectGroupConfiguration')
+    OpenIdConnectGroupConfigurationDetail = Shapes::StructureShape.new(name: 'OpenIdConnectGroupConfigurationDetail')
+    OpenIdConnectGroupConfigurationItem = Shapes::StructureShape.new(name: 'OpenIdConnectGroupConfigurationItem')
+    OpenIdConnectIdentityTokenConfiguration = Shapes::StructureShape.new(name: 'OpenIdConnectIdentityTokenConfiguration')
+    OpenIdConnectIdentityTokenConfigurationDetail = Shapes::StructureShape.new(name: 'OpenIdConnectIdentityTokenConfigurationDetail')
+    OpenIdConnectIdentityTokenConfigurationItem = Shapes::StructureShape.new(name: 'OpenIdConnectIdentityTokenConfigurationItem')
+    OpenIdConnectTokenSelection = Shapes::UnionShape.new(name: 'OpenIdConnectTokenSelection')
+    OpenIdConnectTokenSelectionDetail = Shapes::UnionShape.new(name: 'OpenIdConnectTokenSelectionDetail')
+    OpenIdConnectTokenSelectionItem = Shapes::UnionShape.new(name: 'OpenIdConnectTokenSelectionItem')
     OpenIdIssuer = Shapes::StringShape.new(name: 'OpenIdIssuer')
     ParentList = Shapes::ListShape.new(name: 'ParentList')
     PolicyDefinition = Shapes::UnionShape.new(name: 'PolicyDefinition')
     PolicyDefinitionDetail = Shapes::UnionShape.new(name: 'PolicyDefinitionDetail')
     PolicyDefinitionItem = Shapes::UnionShape.new(name: 'PolicyDefinitionItem')
+    PolicyEffect = Shapes::StringShape.new(name: 'PolicyEffect')
     PolicyFilter = Shapes::StructureShape.new(name: 'PolicyFilter')
     PolicyId = Shapes::StringShape.new(name: 'PolicyId')
     PolicyItem = Shapes::StructureShape.new(name: 'PolicyItem')
     PolicyList = Shapes::ListShape.new(name: 'PolicyList')
     PolicyStatement = Shapes::StringShape.new(name: 'PolicyStatement')
+    PolicyStoreDescription = Shapes::StringShape.new(name: 'PolicyStoreDescription')
     PolicyStoreId = Shapes::StringShape.new(name: 'PolicyStoreId')
     PolicyStoreItem = Shapes::StructureShape.new(name: 'PolicyStoreItem')
     PolicyStoreList = Shapes::ListShape.new(name: 'PolicyStoreList')
@@ -137,10 +180,16 @@ module Aws::VerifiedPermissions
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimestampFormat = Shapes::TimestampShape.new(name: 'TimestampFormat', timestampFormat: "iso8601")
     Token = Shapes::StringShape.new(name: 'Token')
+    UpdateCognitoGroupConfiguration = Shapes::StructureShape.new(name: 'UpdateCognitoGroupConfiguration')
     UpdateCognitoUserPoolConfiguration = Shapes::StructureShape.new(name: 'UpdateCognitoUserPoolConfiguration')
     UpdateConfiguration = Shapes::UnionShape.new(name: 'UpdateConfiguration')
     UpdateIdentitySourceInput = Shapes::StructureShape.new(name: 'UpdateIdentitySourceInput')
     UpdateIdentitySourceOutput = Shapes::StructureShape.new(name: 'UpdateIdentitySourceOutput')
+    UpdateOpenIdConnectAccessTokenConfiguration = Shapes::StructureShape.new(name: 'UpdateOpenIdConnectAccessTokenConfiguration')
+    UpdateOpenIdConnectConfiguration = Shapes::StructureShape.new(name: 'UpdateOpenIdConnectConfiguration')
+    UpdateOpenIdConnectGroupConfiguration = Shapes::StructureShape.new(name: 'UpdateOpenIdConnectGroupConfiguration')
+    UpdateOpenIdConnectIdentityTokenConfiguration = Shapes::StructureShape.new(name: 'UpdateOpenIdConnectIdentityTokenConfiguration')
+    UpdateOpenIdConnectTokenSelection = Shapes::UnionShape.new(name: 'UpdateOpenIdConnectTokenSelection')
     UpdatePolicyDefinition = Shapes::UnionShape.new(name: 'UpdatePolicyDefinition')
     UpdatePolicyInput = Shapes::StructureShape.new(name: 'UpdatePolicyInput')
     UpdatePolicyOutput = Shapes::StructureShape.new(name: 'UpdatePolicyOutput')
@@ -163,6 +212,8 @@ module Aws::VerifiedPermissions
     ActionIdentifier.add_member(:action_id, Shapes::ShapeRef.new(shape: ActionId, required: true, location_name: "actionId"))
     ActionIdentifier.struct_class = Types::ActionIdentifier
 
+    ActionIdentifierList.member = Shapes::ShapeRef.new(shape: ActionIdentifier)
+
     AttributeValue.add_member(:boolean, Shapes::ShapeRef.new(shape: BooleanAttribute, location_name: "boolean"))
     AttributeValue.add_member(:entity_identifier, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "entityIdentifier"))
     AttributeValue.add_member(:long, Shapes::ShapeRef.new(shape: LongAttribute, location_name: "long"))
@@ -179,17 +230,109 @@ module Aws::VerifiedPermissions
     AttributeValue.add_member_subclass(:unknown, Types::AttributeValue::Unknown)
     AttributeValue.struct_class = Types::AttributeValue
 
+    Audiences.member = Shapes::ShapeRef.new(shape: Audience)
+
+    BatchIsAuthorizedInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
+    BatchIsAuthorizedInput.add_member(:entities, Shapes::ShapeRef.new(shape: EntitiesDefinition, location_name: "entities"))
+    BatchIsAuthorizedInput.add_member(:requests, Shapes::ShapeRef.new(shape: BatchIsAuthorizedInputList, required: true, location_name: "requests"))
+    BatchIsAuthorizedInput.struct_class = Types::BatchIsAuthorizedInput
+
+    BatchIsAuthorizedInputItem.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
+    BatchIsAuthorizedInputItem.add_member(:action, Shapes::ShapeRef.new(shape: ActionIdentifier, location_name: "action"))
+    BatchIsAuthorizedInputItem.add_member(:resource, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "resource"))
+    BatchIsAuthorizedInputItem.add_member(:context, Shapes::ShapeRef.new(shape: ContextDefinition, location_name: "context"))
+    BatchIsAuthorizedInputItem.struct_class = Types::BatchIsAuthorizedInputItem
+
+    BatchIsAuthorizedInputList.member = Shapes::ShapeRef.new(shape: BatchIsAuthorizedInputItem)
+
+    BatchIsAuthorizedOutput.add_member(:results, Shapes::ShapeRef.new(shape: BatchIsAuthorizedOutputList, required: true, location_name: "results"))
+    BatchIsAuthorizedOutput.struct_class = Types::BatchIsAuthorizedOutput
+
+    BatchIsAuthorizedOutputItem.add_member(:request, Shapes::ShapeRef.new(shape: BatchIsAuthorizedInputItem, required: true, location_name: "request"))
+    BatchIsAuthorizedOutputItem.add_member(:decision, Shapes::ShapeRef.new(shape: Decision, required: true, location_name: "decision"))
+    BatchIsAuthorizedOutputItem.add_member(:determining_policies, Shapes::ShapeRef.new(shape: DeterminingPolicyList, required: true, location_name: "determiningPolicies"))
+    BatchIsAuthorizedOutputItem.add_member(:errors, Shapes::ShapeRef.new(shape: EvaluationErrorList, required: true, location_name: "errors"))
+    BatchIsAuthorizedOutputItem.struct_class = Types::BatchIsAuthorizedOutputItem
+
+    BatchIsAuthorizedOutputList.member = Shapes::ShapeRef.new(shape: BatchIsAuthorizedOutputItem)
+
+    BatchIsAuthorizedWithTokenInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
+    BatchIsAuthorizedWithTokenInput.add_member(:identity_token, Shapes::ShapeRef.new(shape: Token, location_name: "identityToken"))
+    BatchIsAuthorizedWithTokenInput.add_member(:access_token, Shapes::ShapeRef.new(shape: Token, location_name: "accessToken"))
+    BatchIsAuthorizedWithTokenInput.add_member(:entities, Shapes::ShapeRef.new(shape: EntitiesDefinition, location_name: "entities"))
+    BatchIsAuthorizedWithTokenInput.add_member(:requests, Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenInputList, required: true, location_name: "requests"))
+    BatchIsAuthorizedWithTokenInput.struct_class = Types::BatchIsAuthorizedWithTokenInput
+
+    BatchIsAuthorizedWithTokenInputItem.add_member(:action, Shapes::ShapeRef.new(shape: ActionIdentifier, location_name: "action"))
+    BatchIsAuthorizedWithTokenInputItem.add_member(:resource, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "resource"))
+    BatchIsAuthorizedWithTokenInputItem.add_member(:context, Shapes::ShapeRef.new(shape: ContextDefinition, location_name: "context"))
+    BatchIsAuthorizedWithTokenInputItem.struct_class = Types::BatchIsAuthorizedWithTokenInputItem
+
+    BatchIsAuthorizedWithTokenInputList.member = Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenInputItem)
+
+    BatchIsAuthorizedWithTokenOutput.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
+    BatchIsAuthorizedWithTokenOutput.add_member(:results, Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenOutputList, required: true, location_name: "results"))
+    BatchIsAuthorizedWithTokenOutput.struct_class = Types::BatchIsAuthorizedWithTokenOutput
+
+    BatchIsAuthorizedWithTokenOutputItem.add_member(:request, Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenInputItem, required: true, location_name: "request"))
+    BatchIsAuthorizedWithTokenOutputItem.add_member(:decision, Shapes::ShapeRef.new(shape: Decision, required: true, location_name: "decision"))
+    BatchIsAuthorizedWithTokenOutputItem.add_member(:determining_policies, Shapes::ShapeRef.new(shape: DeterminingPolicyList, required: true, location_name: "determiningPolicies"))
+    BatchIsAuthorizedWithTokenOutputItem.add_member(:errors, Shapes::ShapeRef.new(shape: EvaluationErrorList, required: true, location_name: "errors"))
+    BatchIsAuthorizedWithTokenOutputItem.struct_class = Types::BatchIsAuthorizedWithTokenOutputItem
+
+    BatchIsAuthorizedWithTokenOutputList.member = Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenOutputItem)
+
     ClientIds.member = Shapes::ShapeRef.new(shape: ClientId)
+
+    CognitoGroupConfiguration.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
+    CognitoGroupConfiguration.struct_class = Types::CognitoGroupConfiguration
+
+    CognitoGroupConfigurationDetail.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, location_name: "groupEntityType"))
+    CognitoGroupConfigurationDetail.struct_class = Types::CognitoGroupConfigurationDetail
+
+    CognitoGroupConfigurationItem.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, location_name: "groupEntityType"))
+    CognitoGroupConfigurationItem.struct_class = Types::CognitoGroupConfigurationItem
 
     CognitoUserPoolConfiguration.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, required: true, location_name: "userPoolArn"))
     CognitoUserPoolConfiguration.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
+    CognitoUserPoolConfiguration.add_member(:group_configuration, Shapes::ShapeRef.new(shape: CognitoGroupConfiguration, location_name: "groupConfiguration"))
     CognitoUserPoolConfiguration.struct_class = Types::CognitoUserPoolConfiguration
 
+    CognitoUserPoolConfigurationDetail.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, required: true, location_name: "userPoolArn"))
+    CognitoUserPoolConfigurationDetail.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, required: true, location_name: "clientIds"))
+    CognitoUserPoolConfigurationDetail.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, required: true, location_name: "issuer"))
+    CognitoUserPoolConfigurationDetail.add_member(:group_configuration, Shapes::ShapeRef.new(shape: CognitoGroupConfigurationDetail, location_name: "groupConfiguration"))
+    CognitoUserPoolConfigurationDetail.struct_class = Types::CognitoUserPoolConfigurationDetail
+
+    CognitoUserPoolConfigurationItem.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, required: true, location_name: "userPoolArn"))
+    CognitoUserPoolConfigurationItem.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, required: true, location_name: "clientIds"))
+    CognitoUserPoolConfigurationItem.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, required: true, location_name: "issuer"))
+    CognitoUserPoolConfigurationItem.add_member(:group_configuration, Shapes::ShapeRef.new(shape: CognitoGroupConfigurationItem, location_name: "groupConfiguration"))
+    CognitoUserPoolConfigurationItem.struct_class = Types::CognitoUserPoolConfigurationItem
+
     Configuration.add_member(:cognito_user_pool_configuration, Shapes::ShapeRef.new(shape: CognitoUserPoolConfiguration, location_name: "cognitoUserPoolConfiguration"))
+    Configuration.add_member(:open_id_connect_configuration, Shapes::ShapeRef.new(shape: OpenIdConnectConfiguration, location_name: "openIdConnectConfiguration"))
     Configuration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Configuration.add_member_subclass(:cognito_user_pool_configuration, Types::Configuration::CognitoUserPoolConfiguration)
+    Configuration.add_member_subclass(:open_id_connect_configuration, Types::Configuration::OpenIdConnectConfiguration)
     Configuration.add_member_subclass(:unknown, Types::Configuration::Unknown)
     Configuration.struct_class = Types::Configuration
+
+    ConfigurationDetail.add_member(:cognito_user_pool_configuration, Shapes::ShapeRef.new(shape: CognitoUserPoolConfigurationDetail, location_name: "cognitoUserPoolConfiguration"))
+    ConfigurationDetail.add_member(:open_id_connect_configuration, Shapes::ShapeRef.new(shape: OpenIdConnectConfigurationDetail, location_name: "openIdConnectConfiguration"))
+    ConfigurationDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ConfigurationDetail.add_member_subclass(:cognito_user_pool_configuration, Types::ConfigurationDetail::CognitoUserPoolConfiguration)
+    ConfigurationDetail.add_member_subclass(:open_id_connect_configuration, Types::ConfigurationDetail::OpenIdConnectConfiguration)
+    ConfigurationDetail.add_member_subclass(:unknown, Types::ConfigurationDetail::Unknown)
+    ConfigurationDetail.struct_class = Types::ConfigurationDetail
+
+    ConfigurationItem.add_member(:cognito_user_pool_configuration, Shapes::ShapeRef.new(shape: CognitoUserPoolConfigurationItem, location_name: "cognitoUserPoolConfiguration"))
+    ConfigurationItem.add_member(:open_id_connect_configuration, Shapes::ShapeRef.new(shape: OpenIdConnectConfigurationItem, location_name: "openIdConnectConfiguration"))
+    ConfigurationItem.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ConfigurationItem.add_member_subclass(:cognito_user_pool_configuration, Types::ConfigurationItem::CognitoUserPoolConfiguration)
+    ConfigurationItem.add_member_subclass(:open_id_connect_configuration, Types::ConfigurationItem::OpenIdConnectConfiguration)
+    ConfigurationItem.add_member_subclass(:unknown, Types::ConfigurationItem::Unknown)
+    ConfigurationItem.struct_class = Types::ConfigurationItem
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceConflictList, required: true, location_name: "resources"))
@@ -226,12 +369,15 @@ module Aws::VerifiedPermissions
     CreatePolicyOutput.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
     CreatePolicyOutput.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
     CreatePolicyOutput.add_member(:resource, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "resource"))
+    CreatePolicyOutput.add_member(:actions, Shapes::ShapeRef.new(shape: ActionIdentifierList, location_name: "actions"))
     CreatePolicyOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     CreatePolicyOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    CreatePolicyOutput.add_member(:effect, Shapes::ShapeRef.new(shape: PolicyEffect, location_name: "effect"))
     CreatePolicyOutput.struct_class = Types::CreatePolicyOutput
 
     CreatePolicyStoreInput.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
     CreatePolicyStoreInput.add_member(:validation_settings, Shapes::ShapeRef.new(shape: ValidationSettings, required: true, location_name: "validationSettings"))
+    CreatePolicyStoreInput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     CreatePolicyStoreInput.struct_class = Types::CreatePolicyStoreInput
 
     CreatePolicyStoreOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -318,11 +464,12 @@ module Aws::VerifiedPermissions
     GetIdentitySourceInput.struct_class = Types::GetIdentitySourceInput
 
     GetIdentitySourceOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
-    GetIdentitySourceOutput.add_member(:details, Shapes::ShapeRef.new(shape: IdentitySourceDetails, required: true, location_name: "details"))
+    GetIdentitySourceOutput.add_member(:details, Shapes::ShapeRef.new(shape: IdentitySourceDetails, deprecated: true, location_name: "details", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration"}))
     GetIdentitySourceOutput.add_member(:identity_source_id, Shapes::ShapeRef.new(shape: IdentitySourceId, required: true, location_name: "identitySourceId"))
     GetIdentitySourceOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
     GetIdentitySourceOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     GetIdentitySourceOutput.add_member(:principal_entity_type, Shapes::ShapeRef.new(shape: PrincipalEntityType, required: true, location_name: "principalEntityType"))
+    GetIdentitySourceOutput.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationDetail, location_name: "configuration"))
     GetIdentitySourceOutput.struct_class = Types::GetIdentitySourceOutput
 
     GetPolicyInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -334,9 +481,11 @@ module Aws::VerifiedPermissions
     GetPolicyOutput.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
     GetPolicyOutput.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
     GetPolicyOutput.add_member(:resource, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "resource"))
+    GetPolicyOutput.add_member(:actions, Shapes::ShapeRef.new(shape: ActionIdentifierList, location_name: "actions"))
     GetPolicyOutput.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinitionDetail, required: true, location_name: "definition"))
     GetPolicyOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     GetPolicyOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    GetPolicyOutput.add_member(:effect, Shapes::ShapeRef.new(shape: PolicyEffect, location_name: "effect"))
     GetPolicyOutput.struct_class = Types::GetPolicyOutput
 
     GetPolicyStoreInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -347,6 +496,7 @@ module Aws::VerifiedPermissions
     GetPolicyStoreOutput.add_member(:validation_settings, Shapes::ShapeRef.new(shape: ValidationSettings, required: true, location_name: "validationSettings"))
     GetPolicyStoreOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     GetPolicyStoreOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    GetPolicyStoreOutput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     GetPolicyStoreOutput.struct_class = Types::GetPolicyStoreOutput
 
     GetPolicyTemplateInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -368,12 +518,13 @@ module Aws::VerifiedPermissions
     GetSchemaOutput.add_member(:schema, Shapes::ShapeRef.new(shape: SchemaJson, required: true, location_name: "schema"))
     GetSchemaOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     GetSchemaOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    GetSchemaOutput.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespaceList, location_name: "namespaces"))
     GetSchemaOutput.struct_class = Types::GetSchemaOutput
 
-    IdentitySourceDetails.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
-    IdentitySourceDetails.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, location_name: "userPoolArn"))
-    IdentitySourceDetails.add_member(:discovery_url, Shapes::ShapeRef.new(shape: DiscoveryUrl, location_name: "discoveryUrl"))
-    IdentitySourceDetails.add_member(:open_id_issuer, Shapes::ShapeRef.new(shape: OpenIdIssuer, location_name: "openIdIssuer"))
+    IdentitySourceDetails.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, deprecated: true, location_name: "clientIds", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.clientIds"}))
+    IdentitySourceDetails.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, deprecated: true, location_name: "userPoolArn", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.userPoolArn"}))
+    IdentitySourceDetails.add_member(:discovery_url, Shapes::ShapeRef.new(shape: DiscoveryUrl, deprecated: true, location_name: "discoveryUrl", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.issuer"}))
+    IdentitySourceDetails.add_member(:open_id_issuer, Shapes::ShapeRef.new(shape: OpenIdIssuer, deprecated: true, location_name: "openIdIssuer", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration"}))
     IdentitySourceDetails.struct_class = Types::IdentitySourceDetails
 
     IdentitySourceFilter.add_member(:principal_entity_type, Shapes::ShapeRef.new(shape: PrincipalEntityType, location_name: "principalEntityType"))
@@ -382,17 +533,18 @@ module Aws::VerifiedPermissions
     IdentitySourceFilters.member = Shapes::ShapeRef.new(shape: IdentitySourceFilter)
 
     IdentitySourceItem.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
-    IdentitySourceItem.add_member(:details, Shapes::ShapeRef.new(shape: IdentitySourceItemDetails, required: true, location_name: "details"))
+    IdentitySourceItem.add_member(:details, Shapes::ShapeRef.new(shape: IdentitySourceItemDetails, deprecated: true, location_name: "details", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration"}))
     IdentitySourceItem.add_member(:identity_source_id, Shapes::ShapeRef.new(shape: IdentitySourceId, required: true, location_name: "identitySourceId"))
     IdentitySourceItem.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
     IdentitySourceItem.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     IdentitySourceItem.add_member(:principal_entity_type, Shapes::ShapeRef.new(shape: PrincipalEntityType, required: true, location_name: "principalEntityType"))
+    IdentitySourceItem.add_member(:configuration, Shapes::ShapeRef.new(shape: ConfigurationItem, location_name: "configuration"))
     IdentitySourceItem.struct_class = Types::IdentitySourceItem
 
-    IdentitySourceItemDetails.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
-    IdentitySourceItemDetails.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, location_name: "userPoolArn"))
-    IdentitySourceItemDetails.add_member(:discovery_url, Shapes::ShapeRef.new(shape: DiscoveryUrl, location_name: "discoveryUrl"))
-    IdentitySourceItemDetails.add_member(:open_id_issuer, Shapes::ShapeRef.new(shape: OpenIdIssuer, location_name: "openIdIssuer"))
+    IdentitySourceItemDetails.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, deprecated: true, location_name: "clientIds", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.clientIds"}))
+    IdentitySourceItemDetails.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, deprecated: true, location_name: "userPoolArn", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.userPoolArn"}))
+    IdentitySourceItemDetails.add_member(:discovery_url, Shapes::ShapeRef.new(shape: DiscoveryUrl, deprecated: true, location_name: "discoveryUrl", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration.cognitoUserPoolConfiguration.issuer"}))
+    IdentitySourceItemDetails.add_member(:open_id_issuer, Shapes::ShapeRef.new(shape: OpenIdIssuer, deprecated: true, location_name: "openIdIssuer", metadata: {"deprecatedMessage"=>"This attribute has been replaced by configuration"}))
     IdentitySourceItemDetails.struct_class = Types::IdentitySourceItemDetails
 
     IdentitySources.member = Shapes::ShapeRef.new(shape: IdentitySourceItem)
@@ -425,6 +577,7 @@ module Aws::VerifiedPermissions
     IsAuthorizedWithTokenOutput.add_member(:decision, Shapes::ShapeRef.new(shape: Decision, required: true, location_name: "decision"))
     IsAuthorizedWithTokenOutput.add_member(:determining_policies, Shapes::ShapeRef.new(shape: DeterminingPolicyList, required: true, location_name: "determiningPolicies"))
     IsAuthorizedWithTokenOutput.add_member(:errors, Shapes::ShapeRef.new(shape: EvaluationErrorList, required: true, location_name: "errors"))
+    IsAuthorizedWithTokenOutput.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
     IsAuthorizedWithTokenOutput.struct_class = Types::IsAuthorizedWithTokenOutput
 
     ListIdentitySourcesInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -466,6 +619,84 @@ module Aws::VerifiedPermissions
 
     NamespaceList.member = Shapes::ShapeRef.new(shape: Namespace)
 
+    OpenIdConnectAccessTokenConfiguration.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    OpenIdConnectAccessTokenConfiguration.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "audiences"))
+    OpenIdConnectAccessTokenConfiguration.struct_class = Types::OpenIdConnectAccessTokenConfiguration
+
+    OpenIdConnectAccessTokenConfigurationDetail.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    OpenIdConnectAccessTokenConfigurationDetail.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "audiences"))
+    OpenIdConnectAccessTokenConfigurationDetail.struct_class = Types::OpenIdConnectAccessTokenConfigurationDetail
+
+    OpenIdConnectAccessTokenConfigurationItem.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    OpenIdConnectAccessTokenConfigurationItem.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "audiences"))
+    OpenIdConnectAccessTokenConfigurationItem.struct_class = Types::OpenIdConnectAccessTokenConfigurationItem
+
+    OpenIdConnectConfiguration.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, required: true, location_name: "issuer"))
+    OpenIdConnectConfiguration.add_member(:entity_id_prefix, Shapes::ShapeRef.new(shape: EntityIdPrefix, location_name: "entityIdPrefix"))
+    OpenIdConnectConfiguration.add_member(:group_configuration, Shapes::ShapeRef.new(shape: OpenIdConnectGroupConfiguration, location_name: "groupConfiguration"))
+    OpenIdConnectConfiguration.add_member(:token_selection, Shapes::ShapeRef.new(shape: OpenIdConnectTokenSelection, required: true, location_name: "tokenSelection"))
+    OpenIdConnectConfiguration.struct_class = Types::OpenIdConnectConfiguration
+
+    OpenIdConnectConfigurationDetail.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, required: true, location_name: "issuer"))
+    OpenIdConnectConfigurationDetail.add_member(:entity_id_prefix, Shapes::ShapeRef.new(shape: EntityIdPrefix, location_name: "entityIdPrefix"))
+    OpenIdConnectConfigurationDetail.add_member(:group_configuration, Shapes::ShapeRef.new(shape: OpenIdConnectGroupConfigurationDetail, location_name: "groupConfiguration"))
+    OpenIdConnectConfigurationDetail.add_member(:token_selection, Shapes::ShapeRef.new(shape: OpenIdConnectTokenSelectionDetail, required: true, location_name: "tokenSelection"))
+    OpenIdConnectConfigurationDetail.struct_class = Types::OpenIdConnectConfigurationDetail
+
+    OpenIdConnectConfigurationItem.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, required: true, location_name: "issuer"))
+    OpenIdConnectConfigurationItem.add_member(:entity_id_prefix, Shapes::ShapeRef.new(shape: EntityIdPrefix, location_name: "entityIdPrefix"))
+    OpenIdConnectConfigurationItem.add_member(:group_configuration, Shapes::ShapeRef.new(shape: OpenIdConnectGroupConfigurationItem, location_name: "groupConfiguration"))
+    OpenIdConnectConfigurationItem.add_member(:token_selection, Shapes::ShapeRef.new(shape: OpenIdConnectTokenSelectionItem, required: true, location_name: "tokenSelection"))
+    OpenIdConnectConfigurationItem.struct_class = Types::OpenIdConnectConfigurationItem
+
+    OpenIdConnectGroupConfiguration.add_member(:group_claim, Shapes::ShapeRef.new(shape: Claim, required: true, location_name: "groupClaim"))
+    OpenIdConnectGroupConfiguration.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
+    OpenIdConnectGroupConfiguration.struct_class = Types::OpenIdConnectGroupConfiguration
+
+    OpenIdConnectGroupConfigurationDetail.add_member(:group_claim, Shapes::ShapeRef.new(shape: Claim, required: true, location_name: "groupClaim"))
+    OpenIdConnectGroupConfigurationDetail.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
+    OpenIdConnectGroupConfigurationDetail.struct_class = Types::OpenIdConnectGroupConfigurationDetail
+
+    OpenIdConnectGroupConfigurationItem.add_member(:group_claim, Shapes::ShapeRef.new(shape: Claim, required: true, location_name: "groupClaim"))
+    OpenIdConnectGroupConfigurationItem.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
+    OpenIdConnectGroupConfigurationItem.struct_class = Types::OpenIdConnectGroupConfigurationItem
+
+    OpenIdConnectIdentityTokenConfiguration.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    OpenIdConnectIdentityTokenConfiguration.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
+    OpenIdConnectIdentityTokenConfiguration.struct_class = Types::OpenIdConnectIdentityTokenConfiguration
+
+    OpenIdConnectIdentityTokenConfigurationDetail.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    OpenIdConnectIdentityTokenConfigurationDetail.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
+    OpenIdConnectIdentityTokenConfigurationDetail.struct_class = Types::OpenIdConnectIdentityTokenConfigurationDetail
+
+    OpenIdConnectIdentityTokenConfigurationItem.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    OpenIdConnectIdentityTokenConfigurationItem.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
+    OpenIdConnectIdentityTokenConfigurationItem.struct_class = Types::OpenIdConnectIdentityTokenConfigurationItem
+
+    OpenIdConnectTokenSelection.add_member(:access_token_only, Shapes::ShapeRef.new(shape: OpenIdConnectAccessTokenConfiguration, location_name: "accessTokenOnly"))
+    OpenIdConnectTokenSelection.add_member(:identity_token_only, Shapes::ShapeRef.new(shape: OpenIdConnectIdentityTokenConfiguration, location_name: "identityTokenOnly"))
+    OpenIdConnectTokenSelection.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OpenIdConnectTokenSelection.add_member_subclass(:access_token_only, Types::OpenIdConnectTokenSelection::AccessTokenOnly)
+    OpenIdConnectTokenSelection.add_member_subclass(:identity_token_only, Types::OpenIdConnectTokenSelection::IdentityTokenOnly)
+    OpenIdConnectTokenSelection.add_member_subclass(:unknown, Types::OpenIdConnectTokenSelection::Unknown)
+    OpenIdConnectTokenSelection.struct_class = Types::OpenIdConnectTokenSelection
+
+    OpenIdConnectTokenSelectionDetail.add_member(:access_token_only, Shapes::ShapeRef.new(shape: OpenIdConnectAccessTokenConfigurationDetail, location_name: "accessTokenOnly"))
+    OpenIdConnectTokenSelectionDetail.add_member(:identity_token_only, Shapes::ShapeRef.new(shape: OpenIdConnectIdentityTokenConfigurationDetail, location_name: "identityTokenOnly"))
+    OpenIdConnectTokenSelectionDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OpenIdConnectTokenSelectionDetail.add_member_subclass(:access_token_only, Types::OpenIdConnectTokenSelectionDetail::AccessTokenOnly)
+    OpenIdConnectTokenSelectionDetail.add_member_subclass(:identity_token_only, Types::OpenIdConnectTokenSelectionDetail::IdentityTokenOnly)
+    OpenIdConnectTokenSelectionDetail.add_member_subclass(:unknown, Types::OpenIdConnectTokenSelectionDetail::Unknown)
+    OpenIdConnectTokenSelectionDetail.struct_class = Types::OpenIdConnectTokenSelectionDetail
+
+    OpenIdConnectTokenSelectionItem.add_member(:access_token_only, Shapes::ShapeRef.new(shape: OpenIdConnectAccessTokenConfigurationItem, location_name: "accessTokenOnly"))
+    OpenIdConnectTokenSelectionItem.add_member(:identity_token_only, Shapes::ShapeRef.new(shape: OpenIdConnectIdentityTokenConfigurationItem, location_name: "identityTokenOnly"))
+    OpenIdConnectTokenSelectionItem.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OpenIdConnectTokenSelectionItem.add_member_subclass(:access_token_only, Types::OpenIdConnectTokenSelectionItem::AccessTokenOnly)
+    OpenIdConnectTokenSelectionItem.add_member_subclass(:identity_token_only, Types::OpenIdConnectTokenSelectionItem::IdentityTokenOnly)
+    OpenIdConnectTokenSelectionItem.add_member_subclass(:unknown, Types::OpenIdConnectTokenSelectionItem::Unknown)
+    OpenIdConnectTokenSelectionItem.struct_class = Types::OpenIdConnectTokenSelectionItem
+
     ParentList.member = Shapes::ShapeRef.new(shape: EntityIdentifier)
 
     PolicyDefinition.add_member(:static, Shapes::ShapeRef.new(shape: StaticPolicyDefinition, location_name: "static"))
@@ -503,9 +734,11 @@ module Aws::VerifiedPermissions
     PolicyItem.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
     PolicyItem.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
     PolicyItem.add_member(:resource, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "resource"))
+    PolicyItem.add_member(:actions, Shapes::ShapeRef.new(shape: ActionIdentifierList, location_name: "actions"))
     PolicyItem.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinitionItem, required: true, location_name: "definition"))
     PolicyItem.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     PolicyItem.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    PolicyItem.add_member(:effect, Shapes::ShapeRef.new(shape: PolicyEffect, location_name: "effect"))
     PolicyItem.struct_class = Types::PolicyItem
 
     PolicyList.member = Shapes::ShapeRef.new(shape: PolicyItem)
@@ -513,6 +746,8 @@ module Aws::VerifiedPermissions
     PolicyStoreItem.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     PolicyStoreItem.add_member(:arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "arn"))
     PolicyStoreItem.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
+    PolicyStoreItem.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, location_name: "lastUpdatedDate"))
+    PolicyStoreItem.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     PolicyStoreItem.struct_class = Types::PolicyStoreItem
 
     PolicyStoreList.member = Shapes::ShapeRef.new(shape: PolicyStoreItem)
@@ -596,13 +831,19 @@ module Aws::VerifiedPermissions
     ThrottlingException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    UpdateCognitoGroupConfiguration.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
+    UpdateCognitoGroupConfiguration.struct_class = Types::UpdateCognitoGroupConfiguration
+
     UpdateCognitoUserPoolConfiguration.add_member(:user_pool_arn, Shapes::ShapeRef.new(shape: UserPoolArn, required: true, location_name: "userPoolArn"))
     UpdateCognitoUserPoolConfiguration.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
+    UpdateCognitoUserPoolConfiguration.add_member(:group_configuration, Shapes::ShapeRef.new(shape: UpdateCognitoGroupConfiguration, location_name: "groupConfiguration"))
     UpdateCognitoUserPoolConfiguration.struct_class = Types::UpdateCognitoUserPoolConfiguration
 
     UpdateConfiguration.add_member(:cognito_user_pool_configuration, Shapes::ShapeRef.new(shape: UpdateCognitoUserPoolConfiguration, location_name: "cognitoUserPoolConfiguration"))
+    UpdateConfiguration.add_member(:open_id_connect_configuration, Shapes::ShapeRef.new(shape: UpdateOpenIdConnectConfiguration, location_name: "openIdConnectConfiguration"))
     UpdateConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     UpdateConfiguration.add_member_subclass(:cognito_user_pool_configuration, Types::UpdateConfiguration::CognitoUserPoolConfiguration)
+    UpdateConfiguration.add_member_subclass(:open_id_connect_configuration, Types::UpdateConfiguration::OpenIdConnectConfiguration)
     UpdateConfiguration.add_member_subclass(:unknown, Types::UpdateConfiguration::Unknown)
     UpdateConfiguration.struct_class = Types::UpdateConfiguration
 
@@ -617,6 +858,32 @@ module Aws::VerifiedPermissions
     UpdateIdentitySourceOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
     UpdateIdentitySourceOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     UpdateIdentitySourceOutput.struct_class = Types::UpdateIdentitySourceOutput
+
+    UpdateOpenIdConnectAccessTokenConfiguration.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    UpdateOpenIdConnectAccessTokenConfiguration.add_member(:audiences, Shapes::ShapeRef.new(shape: Audiences, location_name: "audiences"))
+    UpdateOpenIdConnectAccessTokenConfiguration.struct_class = Types::UpdateOpenIdConnectAccessTokenConfiguration
+
+    UpdateOpenIdConnectConfiguration.add_member(:issuer, Shapes::ShapeRef.new(shape: Issuer, required: true, location_name: "issuer"))
+    UpdateOpenIdConnectConfiguration.add_member(:entity_id_prefix, Shapes::ShapeRef.new(shape: EntityIdPrefix, location_name: "entityIdPrefix"))
+    UpdateOpenIdConnectConfiguration.add_member(:group_configuration, Shapes::ShapeRef.new(shape: UpdateOpenIdConnectGroupConfiguration, location_name: "groupConfiguration"))
+    UpdateOpenIdConnectConfiguration.add_member(:token_selection, Shapes::ShapeRef.new(shape: UpdateOpenIdConnectTokenSelection, required: true, location_name: "tokenSelection"))
+    UpdateOpenIdConnectConfiguration.struct_class = Types::UpdateOpenIdConnectConfiguration
+
+    UpdateOpenIdConnectGroupConfiguration.add_member(:group_claim, Shapes::ShapeRef.new(shape: Claim, required: true, location_name: "groupClaim"))
+    UpdateOpenIdConnectGroupConfiguration.add_member(:group_entity_type, Shapes::ShapeRef.new(shape: GroupEntityType, required: true, location_name: "groupEntityType"))
+    UpdateOpenIdConnectGroupConfiguration.struct_class = Types::UpdateOpenIdConnectGroupConfiguration
+
+    UpdateOpenIdConnectIdentityTokenConfiguration.add_member(:principal_id_claim, Shapes::ShapeRef.new(shape: Claim, location_name: "principalIdClaim"))
+    UpdateOpenIdConnectIdentityTokenConfiguration.add_member(:client_ids, Shapes::ShapeRef.new(shape: ClientIds, location_name: "clientIds"))
+    UpdateOpenIdConnectIdentityTokenConfiguration.struct_class = Types::UpdateOpenIdConnectIdentityTokenConfiguration
+
+    UpdateOpenIdConnectTokenSelection.add_member(:access_token_only, Shapes::ShapeRef.new(shape: UpdateOpenIdConnectAccessTokenConfiguration, location_name: "accessTokenOnly"))
+    UpdateOpenIdConnectTokenSelection.add_member(:identity_token_only, Shapes::ShapeRef.new(shape: UpdateOpenIdConnectIdentityTokenConfiguration, location_name: "identityTokenOnly"))
+    UpdateOpenIdConnectTokenSelection.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    UpdateOpenIdConnectTokenSelection.add_member_subclass(:access_token_only, Types::UpdateOpenIdConnectTokenSelection::AccessTokenOnly)
+    UpdateOpenIdConnectTokenSelection.add_member_subclass(:identity_token_only, Types::UpdateOpenIdConnectTokenSelection::IdentityTokenOnly)
+    UpdateOpenIdConnectTokenSelection.add_member_subclass(:unknown, Types::UpdateOpenIdConnectTokenSelection::Unknown)
+    UpdateOpenIdConnectTokenSelection.struct_class = Types::UpdateOpenIdConnectTokenSelection
 
     UpdatePolicyDefinition.add_member(:static, Shapes::ShapeRef.new(shape: UpdateStaticPolicyDefinition, location_name: "static"))
     UpdatePolicyDefinition.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -634,12 +901,15 @@ module Aws::VerifiedPermissions
     UpdatePolicyOutput.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
     UpdatePolicyOutput.add_member(:principal, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "principal"))
     UpdatePolicyOutput.add_member(:resource, Shapes::ShapeRef.new(shape: EntityIdentifier, location_name: "resource"))
+    UpdatePolicyOutput.add_member(:actions, Shapes::ShapeRef.new(shape: ActionIdentifierList, location_name: "actions"))
     UpdatePolicyOutput.add_member(:created_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "createdDate"))
     UpdatePolicyOutput.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: TimestampFormat, required: true, location_name: "lastUpdatedDate"))
+    UpdatePolicyOutput.add_member(:effect, Shapes::ShapeRef.new(shape: PolicyEffect, location_name: "effect"))
     UpdatePolicyOutput.struct_class = Types::UpdatePolicyOutput
 
     UpdatePolicyStoreInput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
     UpdatePolicyStoreInput.add_member(:validation_settings, Shapes::ShapeRef.new(shape: ValidationSettings, required: true, location_name: "validationSettings"))
+    UpdatePolicyStoreInput.add_member(:description, Shapes::ShapeRef.new(shape: PolicyStoreDescription, location_name: "description"))
     UpdatePolicyStoreInput.struct_class = Types::UpdatePolicyStoreInput
 
     UpdatePolicyStoreOutput.add_member(:policy_store_id, Shapes::ShapeRef.new(shape: PolicyStoreId, required: true, location_name: "policyStoreId"))
@@ -688,6 +958,7 @@ module Aws::VerifiedPermissions
         "endpointPrefix" => "verifiedpermissions",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceFullName" => "Amazon Verified Permissions",
         "serviceId" => "VerifiedPermissions",
         "signatureVersion" => "v4",
@@ -695,6 +966,32 @@ module Aws::VerifiedPermissions
         "targetPrefix" => "VerifiedPermissions",
         "uid" => "verifiedpermissions-2021-12-01",
       }
+
+      api.add_operation(:batch_is_authorized, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchIsAuthorized"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchIsAuthorizedInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchIsAuthorizedOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:batch_is_authorized_with_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchIsAuthorizedWithToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchIsAuthorizedWithTokenOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
 
       api.add_operation(:create_identity_source, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateIdentitySource"
@@ -704,6 +1001,7 @@ module Aws::VerifiedPermissions
         o.output = Shapes::ShapeRef.new(shape: CreateIdentitySourceOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -718,6 +1016,7 @@ module Aws::VerifiedPermissions
         o.output = Shapes::ShapeRef.new(shape: CreatePolicyOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -732,6 +1031,7 @@ module Aws::VerifiedPermissions
         o.output = Shapes::ShapeRef.new(shape: CreatePolicyStoreOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -745,6 +1045,7 @@ module Aws::VerifiedPermissions
         o.output = Shapes::ShapeRef.new(shape: CreatePolicyTemplateOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

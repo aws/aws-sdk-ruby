@@ -14,6 +14,7 @@ module Aws::AmplifyUIBuilder
       option(
         :endpoint_provider,
         doc_type: 'Aws::AmplifyUIBuilder::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::AmplifyUIBuilder
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -92,6 +94,8 @@ module Aws::AmplifyUIBuilder
             Aws::AmplifyUIBuilder::Endpoints::ListComponents.build(context)
           when :list_forms
             Aws::AmplifyUIBuilder::Endpoints::ListForms.build(context)
+          when :list_tags_for_resource
+            Aws::AmplifyUIBuilder::Endpoints::ListTagsForResource.build(context)
           when :list_themes
             Aws::AmplifyUIBuilder::Endpoints::ListThemes.build(context)
           when :put_metadata_flag
@@ -100,6 +104,10 @@ module Aws::AmplifyUIBuilder
             Aws::AmplifyUIBuilder::Endpoints::RefreshToken.build(context)
           when :start_codegen_job
             Aws::AmplifyUIBuilder::Endpoints::StartCodegenJob.build(context)
+          when :tag_resource
+            Aws::AmplifyUIBuilder::Endpoints::TagResource.build(context)
+          when :untag_resource
+            Aws::AmplifyUIBuilder::Endpoints::UntagResource.build(context)
           when :update_component
             Aws::AmplifyUIBuilder::Endpoints::UpdateComponent.build(context)
           when :update_form

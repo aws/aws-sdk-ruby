@@ -9,7 +9,7 @@ module Aws
       let(:client) { S3::Client.new(stub_responses: true) }
       let(:tmpdir) { Dir.tmpdir }
 
-      describe '#download_file' do
+      describe '#download_file', :jruby_flaky do
         let(:path) { Tempfile.new('destination').path }
 
         let(:small_obj) do
@@ -221,10 +221,9 @@ module Aws
         end
 
         it 'raises an error when checksum validation fails on multipart' do
-          client.stub_responses(:get_object, {body: 'body', checksum_sha1: 'invalid'})
+          client.stub_responses(:get_object, { body: 'body', checksum_sha1: 'invalid' })
 
           thread = double(value: nil)
-          allow(thread).to receive(:abort_on_exception=)
           expect(Thread).to receive(:new).and_yield.and_return(thread)
 
           expect do

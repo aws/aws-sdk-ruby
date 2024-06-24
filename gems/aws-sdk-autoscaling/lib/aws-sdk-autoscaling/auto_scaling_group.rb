@@ -233,6 +233,12 @@ module Aws::AutoScaling
       data[:traffic_sources]
     end
 
+    # An instance maintenance policy.
+    # @return [Types::InstanceMaintenancePolicy]
+    def instance_maintenance_policy
+      data[:instance_maintenance_policy]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -247,7 +253,7 @@ module Aws::AutoScaling
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_auto_scaling_groups(auto_scaling_group_names: [@name])
       end
       @data = resp.auto_scaling_groups[0]
@@ -294,7 +300,7 @@ module Aws::AutoScaling
       options, params = separate_params_and_options(options)
       waiter = Waiters::GroupExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(auto_scaling_group_names: [@name]))
       end
       AutoScalingGroup.new({
@@ -313,7 +319,7 @@ module Aws::AutoScaling
       options, params = separate_params_and_options(options)
       waiter = Waiters::GroupInService.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(auto_scaling_group_names: [@name]))
       end
       AutoScalingGroup.new({
@@ -332,7 +338,7 @@ module Aws::AutoScaling
       options, params = separate_params_and_options(options)
       waiter = Waiters::GroupNotExists.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(auto_scaling_group_names: [@name]))
       end
       AutoScalingGroup.new({
@@ -435,7 +441,7 @@ module Aws::AutoScaling
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -453,7 +459,7 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def attach_instances(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.attach_instances(options)
       end
       resp.data
@@ -473,7 +479,7 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_auto_scaling_group(options)
       end
       resp.data
@@ -495,7 +501,7 @@ module Aws::AutoScaling
     def detach_instances(options = {})
       batch = []
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.detach_instances(options)
       end
       resp.data.activities.each do |a|
@@ -570,7 +576,7 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def disable_metrics_collection(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.disable_metrics_collection(options)
       end
       resp.data
@@ -643,7 +649,7 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def enable_metrics_collection(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.enable_metrics_collection(options)
       end
       resp.data
@@ -961,7 +967,7 @@ module Aws::AutoScaling
     # @return [ScalingPolicy]
     def put_scaling_policy(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.put_scaling_policy(options)
       end
       ScalingPolicy.new(
@@ -1043,7 +1049,7 @@ module Aws::AutoScaling
     # @return [ScheduledAction]
     def put_scheduled_update_group_action(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.put_scheduled_update_group_action(options)
       end
       ScheduledAction.new(
@@ -1083,7 +1089,7 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def resume_processes(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.resume_processes(options)
       end
       resp.data
@@ -1109,7 +1115,7 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def set_desired_capacity(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.set_desired_capacity(options)
       end
       resp.data
@@ -1146,7 +1152,7 @@ module Aws::AutoScaling
     # @return [EmptyStructure]
     def suspend_processes(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.suspend_processes(options)
       end
       resp.data
@@ -1194,6 +1200,7 @@ module Aws::AutoScaling
     #               excluded_instance_types: ["ExcludedInstance"],
     #               instance_generations: ["current"], # accepts current, previous
     #               spot_max_price_percentage_over_lowest_price: 1,
+    #               max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
     #               on_demand_max_price_percentage_over_lowest_price: 1,
     #               bare_metal: "included", # accepts included, excluded, required
     #               burstable_performance: "included", # accepts included, excluded, required
@@ -1258,6 +1265,10 @@ module Aws::AutoScaling
     #     context: "Context",
     #     desired_capacity_type: "XmlStringMaxLen255",
     #     default_instance_warmup: 1,
+    #     instance_maintenance_policy: {
+    #       min_healthy_percentage: 1,
+    #       max_healthy_percentage: 1,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [String] :launch_configuration_name
@@ -1444,10 +1455,18 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html
+    # @option options [Types::InstanceMaintenancePolicy] :instance_maintenance_policy
+    #   An instance maintenance policy. For more information, see [Set
+    #   instance maintenance policy][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.update_auto_scaling_group(options)
       end
       AutoScalingGroup.new(
@@ -1480,7 +1499,7 @@ module Aws::AutoScaling
     def activities(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(auto_scaling_group_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_scaling_activities(options)
         end
         resp.each_page do |page|
@@ -1548,7 +1567,7 @@ module Aws::AutoScaling
       batches = Enumerator.new do |y|
         batch = []
         options = options.merge(auto_scaling_group_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_lifecycle_hooks(options)
         end
         resp.data.lifecycle_hooks.each do |l|
@@ -1576,34 +1595,27 @@ module Aws::AutoScaling
 
     # @example Request syntax with placeholder values
     #
-    #   load_balancers = auto_scaling_group.load_balancers({
-    #     next_token: "XmlString",
-    #     max_records: 1,
-    #   })
+    #   auto_scaling_group.load_balancers()
     # @param [Hash] options ({})
-    # @option options [String] :next_token
-    #   The token for the next set of items to return. (You received this
-    #   token from a previous call.)
-    # @option options [Integer] :max_records
-    #   The maximum number of items to return with this call. The default
-    #   value is `100` and the maximum value is `100`.
     # @return [LoadBalancer::Collection]
     def load_balancers(options = {})
       batches = Enumerator.new do |y|
-        batch = []
         options = options.merge(auto_scaling_group_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_load_balancers(options)
         end
-        resp.data.load_balancers.each do |l|
-          batch << LoadBalancer.new(
-            group_name: @name,
-            name: l.load_balancer_name,
-            data: l,
-            client: @client
-          )
+        resp.each_page do |page|
+          batch = []
+          page.data.load_balancers.each do |l|
+            batch << LoadBalancer.new(
+              group_name: @name,
+              name: l.load_balancer_name,
+              data: l,
+              client: @client
+            )
+          end
+          y.yield(batch)
         end
-        y.yield(batch)
       end
       LoadBalancer::Collection.new(batches)
     end
@@ -1616,7 +1628,7 @@ module Aws::AutoScaling
     def notification_configurations(options = {})
       batches = Enumerator.new do |y|
         options = Aws::Util.deep_merge(options, auto_scaling_group_names: [@name])
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_notification_configurations(options)
         end
         resp.each_page do |page|
@@ -1657,7 +1669,7 @@ module Aws::AutoScaling
     def policies(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(auto_scaling_group_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_policies(options)
         end
         resp.each_page do |page|
@@ -1699,7 +1711,7 @@ module Aws::AutoScaling
     def scheduled_actions(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(auto_scaling_group_name: @name)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.describe_scheduled_actions(options)
         end
         resp.each_page do |page|

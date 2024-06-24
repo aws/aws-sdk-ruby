@@ -33,11 +33,6 @@ module Aws
             context.operation.errors,
             context.http_response.body,
             output_handler)
-          if input_emitter = context[:input_event_emitter]
-            # #emit will be blocked until 200 success
-            # see Aws::EventEmitter#emit
-            input_emitter.signal_queue << "ready"
-          end
         end
 
         context.http_response.on_success(200) do

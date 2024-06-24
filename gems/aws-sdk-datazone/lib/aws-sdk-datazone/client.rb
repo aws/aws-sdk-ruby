@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::DataZone
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::DataZone
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::DataZone
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::DataZone
     #   @option options [Aws::DataZone::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::DataZone::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -392,6 +417,9 @@ module Aws::DataZone
     # Amazon DataZone assets.
     #
     # @option params [Array<Types::AcceptChoice>] :accept_choices
+    #   Specifies the prediction (aka, the automatically generated piece of
+    #   metadata) and the target (for example, a column name) that can be
+    #   accepted.
     #
     # @option params [Types::AcceptRule] :accept_rule
     #   Specifies the rule (or the conditions) under which a prediction can be
@@ -408,8 +436,10 @@ module Aws::DataZone
     #   The identifier of the Amazon DataZone domain.
     #
     # @option params [required, String] :identifier
+    #   The identifier of the asset.
     #
     # @option params [String] :revision
+    #   The revision that is to be made to the asset.
     #
     # @return [Types::AcceptPredictionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -422,8 +452,9 @@ module Aws::DataZone
     #   resp = client.accept_predictions({
     #     accept_choices: [
     #       {
+    #         edited_value: "EditedValue",
     #         prediction_choice: 1,
-    #         prediction_target: "String",
+    #         prediction_target: "String", # required
     #       },
     #     ],
     #     accept_rule: {
@@ -527,6 +558,64 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Associates the environment role in Amazon DataZone.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which the environment role is
+    #   associated.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The ID of the Amazon DataZone environment.
+    #
+    # @option params [required, String] :environment_role_arn
+    #   The ARN of the environment role.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_environment_role({
+    #     domain_identifier: "DomainId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #     environment_role_arn: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AssociateEnvironmentRole AWS API Documentation
+    #
+    # @overload associate_environment_role(params = {})
+    # @param [Hash] params ({})
+    def associate_environment_role(params = {}, options = {})
+      req = build_request(:associate_environment_role, params)
+      req.send_request(options)
+    end
+
+    # Cancels the metadata generation run.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which the metadata generation
+    #   run is to be cancelled.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the metadata generation run.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_metadata_generation_run({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "MetadataGenerationRunIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CancelMetadataGenerationRun AWS API Documentation
+    #
+    # @overload cancel_metadata_generation_run(params = {})
+    # @param [Hash] params ({})
+    def cancel_metadata_generation_run(params = {}, options = {})
+      req = build_request(:cancel_metadata_generation_run, params)
+      req.send_request(options)
+    end
+
     # Cancels the subscription to the specified asset.
     #
     # @option params [required, String] :domain_identifier
@@ -609,6 +698,7 @@ module Aws::DataZone
     #   Amazon DataZone domain where the asset is created.
     #
     # @option params [String] :external_identifier
+    #   The external identifier of the asset.
     #
     # @option params [Array<Types::FormInput>] :forms_input
     #   Metadata forms attached to the asset.
@@ -644,6 +734,7 @@ module Aws::DataZone
     #   * {Types::CreateAssetOutput#forms_output #forms_output} => Array&lt;Types::FormOutput&gt;
     #   * {Types::CreateAssetOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #   * {Types::CreateAssetOutput#id #id} => String
+    #   * {Types::CreateAssetOutput#latest_time_series_data_point_forms_output #latest_time_series_data_point_forms_output} => Array&lt;Types::TimeSeriesDataPointSummaryFormOutput&gt;
     #   * {Types::CreateAssetOutput#listing #listing} => Types::AssetListingDetails
     #   * {Types::CreateAssetOutput#name #name} => String
     #   * {Types::CreateAssetOutput#owning_project_id #owning_project_id} => String
@@ -697,6 +788,13 @@ module Aws::DataZone
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #   resp.id #=> String
+    #   resp.latest_time_series_data_point_forms_output #=> Array
+    #   resp.latest_time_series_data_point_forms_output[0].content_summary #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].form_name #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].id #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].timestamp #=> Time
+    #   resp.latest_time_series_data_point_forms_output[0].type_identifier #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].type_revision #=> String
     #   resp.listing.listing_id #=> String
     #   resp.listing.listing_status #=> String, one of "CREATING", "ACTIVE", "INACTIVE"
     #   resp.name #=> String
@@ -768,6 +866,7 @@ module Aws::DataZone
     #   * {Types::CreateAssetRevisionOutput#forms_output #forms_output} => Array&lt;Types::FormOutput&gt;
     #   * {Types::CreateAssetRevisionOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #   * {Types::CreateAssetRevisionOutput#id #id} => String
+    #   * {Types::CreateAssetRevisionOutput#latest_time_series_data_point_forms_output #latest_time_series_data_point_forms_output} => Array&lt;Types::TimeSeriesDataPointSummaryFormOutput&gt;
     #   * {Types::CreateAssetRevisionOutput#listing #listing} => Types::AssetListingDetails
     #   * {Types::CreateAssetRevisionOutput#name #name} => String
     #   * {Types::CreateAssetRevisionOutput#owning_project_id #owning_project_id} => String
@@ -819,6 +918,13 @@ module Aws::DataZone
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #   resp.id #=> String
+    #   resp.latest_time_series_data_point_forms_output #=> Array
+    #   resp.latest_time_series_data_point_forms_output[0].content_summary #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].form_name #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].id #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].timestamp #=> Time
+    #   resp.latest_time_series_data_point_forms_output[0].type_identifier #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].type_revision #=> String
     #   resp.listing.listing_id #=> String
     #   resp.listing.listing_status #=> String, one of "CREATING", "ACTIVE", "INACTIVE"
     #   resp.name #=> String
@@ -1007,6 +1113,7 @@ module Aws::DataZone
     #     client_token: "String",
     #     configuration: {
     #       glue_run_configuration: {
+    #         auto_import_data_quality_result: false,
     #         data_access_role: "GlueRunConfigurationInputDataAccessRoleString",
     #         relational_filter_configurations: [ # required
     #           {
@@ -1073,6 +1180,7 @@ module Aws::DataZone
     #   resp.asset_forms_output[0].type_name #=> String
     #   resp.asset_forms_output[0].type_revision #=> String
     #   resp.configuration.glue_run_configuration.account_id #=> String
+    #   resp.configuration.glue_run_configuration.auto_import_data_quality_result #=> Boolean
     #   resp.configuration.glue_run_configuration.data_access_role #=> String
     #   resp.configuration.glue_run_configuration.region #=> String
     #   resp.configuration.glue_run_configuration.relational_filter_configurations #=> Array
@@ -1218,6 +1326,15 @@ module Aws::DataZone
     #   The identifier of the Amazon DataZone domain in which the environment
     #   is created.
     #
+    # @option params [String] :environment_account_identifier
+    #   The ID of the account in which the environment is being created.
+    #
+    # @option params [String] :environment_account_region
+    #   The region of the account in which the environment is being created.
+    #
+    # @option params [String] :environment_blueprint_identifier
+    #   The ID of the blueprint with which the environment is being created.
+    #
     # @option params [required, String] :environment_profile_identifier
     #   The identifier of the environment profile that is used to create this
     #   Amazon DataZone environment.
@@ -1265,6 +1382,9 @@ module Aws::DataZone
     #   resp = client.create_environment({
     #     description: "String",
     #     domain_identifier: "DomainId", # required
+    #     environment_account_identifier: "String",
+    #     environment_account_region: "String",
+    #     environment_blueprint_identifier: "String",
     #     environment_profile_identifier: "EnvironmentProfileId", # required
     #     glossary_terms: ["GlossaryTermId"],
     #     name: "String", # required
@@ -1331,6 +1451,67 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def create_environment(params = {}, options = {})
       req = build_request(:create_environment, params)
+      req.send_request(options)
+    end
+
+    # Creates an action for the environment, for example, creates a console
+    # link for an analytics tool that is available in this environment.
+    #
+    # @option params [String] :description
+    #   The description of the environment action that is being created in the
+    #   environment.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which the environment action
+    #   is created.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The ID of the environment in which the environment action is created.
+    #
+    # @option params [required, String] :name
+    #   The name of the environment action.
+    #
+    # @option params [required, Types::ActionParameters] :parameters
+    #   The parameters of the environment action.
+    #
+    # @return [Types::CreateEnvironmentActionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEnvironmentActionOutput#description #description} => String
+    #   * {Types::CreateEnvironmentActionOutput#domain_id #domain_id} => String
+    #   * {Types::CreateEnvironmentActionOutput#environment_id #environment_id} => String
+    #   * {Types::CreateEnvironmentActionOutput#id #id} => String
+    #   * {Types::CreateEnvironmentActionOutput#name #name} => String
+    #   * {Types::CreateEnvironmentActionOutput#parameters #parameters} => Types::ActionParameters
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_environment_action({
+    #     description: "String",
+    #     domain_identifier: "DomainId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #     name: "String", # required
+    #     parameters: { # required
+    #       aws_console_link: {
+    #         uri: "String",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.environment_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.parameters.aws_console_link.uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateEnvironmentAction AWS API Documentation
+    #
+    # @overload create_environment_action(params = {})
+    # @param [Hash] params ({})
+    def create_environment_action(params = {}, options = {})
+      req = build_request(:create_environment_action, params)
       req.send_request(options)
     end
 
@@ -1683,19 +1864,30 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Publishes a listing (a record of an asset at a given time) or removes
+    # a listing from the catalog.
+    #
     # @option params [required, String] :action
+    #   Specifies whether to publish or unpublish a listing.
     #
     # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain.
     #
     # @option params [required, String] :entity_identifier
+    #   The ID of the asset.
     #
     # @option params [String] :entity_revision
+    #   The revision of an asset.
     #
     # @option params [required, String] :entity_type
+    #   The type of an entity.
     #
     # @return [Types::CreateListingChangeSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1709,7 +1901,7 @@ module Aws::DataZone
     #     action: "PUBLISH", # required, accepts PUBLISH, UNPUBLISH
     #     client_token: "ClientToken",
     #     domain_identifier: "DomainId", # required
-    #     entity_identifier: "EntityId", # required
+    #     entity_identifier: "EntityIdentifier", # required
     #     entity_revision: "Revision",
     #     entity_type: "ASSET", # required, accepts ASSET
     #   })
@@ -1749,10 +1941,12 @@ module Aws::DataZone
     #   * {Types::CreateProjectOutput#created_by #created_by} => String
     #   * {Types::CreateProjectOutput#description #description} => String
     #   * {Types::CreateProjectOutput#domain_id #domain_id} => String
+    #   * {Types::CreateProjectOutput#failure_reasons #failure_reasons} => Array&lt;Types::ProjectDeletionError&gt;
     #   * {Types::CreateProjectOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #   * {Types::CreateProjectOutput#id #id} => String
     #   * {Types::CreateProjectOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::CreateProjectOutput#name #name} => String
+    #   * {Types::CreateProjectOutput#project_status #project_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1769,11 +1963,15 @@ module Aws::DataZone
     #   resp.created_by #=> String
     #   resp.description #=> String
     #   resp.domain_id #=> String
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0].code #=> String
+    #   resp.failure_reasons[0].message #=> String
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #   resp.id #=> String
     #   resp.last_updated_at #=> Time
     #   resp.name #=> String
+    #   resp.project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateProject AWS API Documentation
     #
@@ -1931,6 +2129,7 @@ module Aws::DataZone
     #   The reason for the subscription request.
     #
     # @option params [required, Array<Types::SubscribedListingInput>] :subscribed_listings
+    #   The published asset for which the subscription grant is to be created.
     #
     # @option params [required, Array<Types::SubscribedPrincipalInput>] :subscribed_principals
     #   The Amazon DataZone principals for whom the subscription request is
@@ -2241,6 +2440,10 @@ module Aws::DataZone
     # @option params [required, String] :identifier
     #   The identifier of the data source that is deleted.
     #
+    # @option params [Boolean] :retain_permissions_on_revoke_failure
+    #   Specifies that the granted permissions are retained in case of a
+    #   self-subscribe functionality failure for a data source.
+    #
     # @return [Types::DeleteDataSourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteDataSourceOutput#asset_forms_output #asset_forms_output} => Array&lt;Types::FormOutput&gt;
@@ -2258,7 +2461,9 @@ module Aws::DataZone
     #   * {Types::DeleteDataSourceOutput#name #name} => String
     #   * {Types::DeleteDataSourceOutput#project_id #project_id} => String
     #   * {Types::DeleteDataSourceOutput#publish_on_import #publish_on_import} => Boolean
+    #   * {Types::DeleteDataSourceOutput#retain_permissions_on_revoke_failure #retain_permissions_on_revoke_failure} => Boolean
     #   * {Types::DeleteDataSourceOutput#schedule #schedule} => Types::ScheduleConfiguration
+    #   * {Types::DeleteDataSourceOutput#self_grant_status #self_grant_status} => Types::SelfGrantStatusOutput
     #   * {Types::DeleteDataSourceOutput#status #status} => String
     #   * {Types::DeleteDataSourceOutput#type #type} => String
     #   * {Types::DeleteDataSourceOutput#updated_at #updated_at} => Time
@@ -2269,6 +2474,7 @@ module Aws::DataZone
     #     client_token: "String",
     #     domain_identifier: "DomainId", # required
     #     identifier: "DataSourceId", # required
+    #     retain_permissions_on_revoke_failure: false,
     #   })
     #
     # @example Response structure
@@ -2279,6 +2485,7 @@ module Aws::DataZone
     #   resp.asset_forms_output[0].type_name #=> String
     #   resp.asset_forms_output[0].type_revision #=> String
     #   resp.configuration.glue_run_configuration.account_id #=> String
+    #   resp.configuration.glue_run_configuration.auto_import_data_quality_result #=> Boolean
     #   resp.configuration.glue_run_configuration.data_access_role #=> String
     #   resp.configuration.glue_run_configuration.region #=> String
     #   resp.configuration.glue_run_configuration.relational_filter_configurations #=> Array
@@ -2314,8 +2521,19 @@ module Aws::DataZone
     #   resp.name #=> String
     #   resp.project_id #=> String
     #   resp.publish_on_import #=> Boolean
+    #   resp.retain_permissions_on_revoke_failure #=> Boolean
     #   resp.schedule.schedule #=> String
     #   resp.schedule.timezone #=> String, one of "UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details #=> Array
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].database_name #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].failure_cause #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].schema_name #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "GRANT_FAILED", "REVOKE_FAILED"
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details #=> Array
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].database_name #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].failure_cause #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].schema_name #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "GRANT_FAILED", "REVOKE_FAILED"
     #   resp.status #=> String, one of "CREATING", "FAILED_CREATION", "READY", "UPDATING", "FAILED_UPDATE", "RUNNING", "DELETING", "FAILED_DELETION"
     #   resp.type #=> String
     #   resp.updated_at #=> Time
@@ -2342,6 +2560,10 @@ module Aws::DataZone
     #   The identifier of the Amazon Web Services domain that is to be
     #   deleted.
     #
+    # @option params [Boolean] :skip_deletion_check
+    #   Specifies the optional flag to delete all child entities within the
+    #   domain.
+    #
     # @return [Types::DeleteDomainOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteDomainOutput#status #status} => String
@@ -2351,6 +2573,7 @@ module Aws::DataZone
     #   resp = client.delete_domain({
     #     client_token: "String",
     #     identifier: "DomainId", # required
+    #     skip_deletion_check: false,
     #   })
     #
     # @example Response structure
@@ -2390,6 +2613,38 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def delete_environment(params = {}, options = {})
       req = build_request(:delete_environment, params)
+      req.send_request(options)
+    end
+
+    # Deletes an action for the environment, for example, deletes a console
+    # link for an analytics tool that is available in this environment.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which an environment action is
+    #   deleted.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The ID of the environment where an environment action is deleted.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the environment action that is deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_environment_action({
+    #     domain_identifier: "DomainId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #     identifier: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteEnvironmentAction AWS API Documentation
+    #
+    # @overload delete_environment_action(params = {})
+    # @param [Hash] params ({})
+    def delete_environment_action(params = {}, options = {})
+      req = build_request(:delete_environment_action, params)
       req.send_request(options)
     end
 
@@ -2528,9 +2783,13 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Deletes a listing (a record of an asset at a given time).
+    #
     # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain.
     #
     # @option params [required, String] :identifier
+    #   The ID of the listing to be deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2558,6 +2817,10 @@ module Aws::DataZone
     # @option params [required, String] :identifier
     #   The identifier of the project that is to be deleted.
     #
+    # @option params [Boolean] :skip_deletion_check
+    #   Specifies the optional flag to delete all child entities within the
+    #   project.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2565,6 +2828,7 @@ module Aws::DataZone
     #   resp = client.delete_project({
     #     domain_identifier: "DomainId", # required
     #     identifier: "ProjectId", # required
+    #     skip_deletion_check: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteProject AWS API Documentation
@@ -2731,6 +2995,80 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Deletes the specified time series form for the specified asset.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain that houses the asset for which
+    #   you want to delete a time series form.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of the asset for which you want to delete a time series form.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of the asset for which you want to delete a time series form.
+    #
+    # @option params [required, String] :form_name
+    #   The name of the time series form that you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_time_series_data_points({
+    #     client_token: "ClientToken",
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "EntityIdentifier", # required
+    #     entity_type: "ASSET", # required, accepts ASSET, LISTING
+    #     form_name: "TimeSeriesFormName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteTimeSeriesDataPoints AWS API Documentation
+    #
+    # @overload delete_time_series_data_points(params = {})
+    # @param [Hash] params ({})
+    def delete_time_series_data_points(params = {}, options = {})
+      req = build_request(:delete_time_series_data_points, params)
+      req.send_request(options)
+    end
+
+    # Disassociates the environment role in Amazon DataZone.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which an environment role is
+    #   disassociated.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The ID of the environment.
+    #
+    # @option params [required, String] :environment_role_arn
+    #   The ARN of the environment role.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_environment_role({
+    #     domain_identifier: "DomainId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #     environment_role_arn: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DisassociateEnvironmentRole AWS API Documentation
+    #
+    # @overload disassociate_environment_role(params = {})
+    # @param [Hash] params ({})
+    def disassociate_environment_role(params = {}, options = {})
+      req = build_request(:disassociate_environment_role, params)
+      req.send_request(options)
+    end
+
     # Gets an Amazon DataZone asset.
     #
     # @option params [required, String] :domain_identifier
@@ -2754,6 +3092,7 @@ module Aws::DataZone
     #   * {Types::GetAssetOutput#forms_output #forms_output} => Array&lt;Types::FormOutput&gt;
     #   * {Types::GetAssetOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #   * {Types::GetAssetOutput#id #id} => String
+    #   * {Types::GetAssetOutput#latest_time_series_data_point_forms_output #latest_time_series_data_point_forms_output} => Array&lt;Types::TimeSeriesDataPointSummaryFormOutput&gt;
     #   * {Types::GetAssetOutput#listing #listing} => Types::AssetListingDetails
     #   * {Types::GetAssetOutput#name #name} => String
     #   * {Types::GetAssetOutput#owning_project_id #owning_project_id} => String
@@ -2787,6 +3126,13 @@ module Aws::DataZone
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #   resp.id #=> String
+    #   resp.latest_time_series_data_point_forms_output #=> Array
+    #   resp.latest_time_series_data_point_forms_output[0].content_summary #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].form_name #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].id #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].timestamp #=> Time
+    #   resp.latest_time_series_data_point_forms_output[0].type_identifier #=> String
+    #   resp.latest_time_series_data_point_forms_output[0].type_revision #=> String
     #   resp.listing.listing_id #=> String
     #   resp.listing.listing_status #=> String, one of "CREATING", "ACTIVE", "INACTIVE"
     #   resp.name #=> String
@@ -2898,6 +3244,7 @@ module Aws::DataZone
     #   * {Types::GetDataSourceOutput#publish_on_import #publish_on_import} => Boolean
     #   * {Types::GetDataSourceOutput#recommendation #recommendation} => Types::RecommendationConfiguration
     #   * {Types::GetDataSourceOutput#schedule #schedule} => Types::ScheduleConfiguration
+    #   * {Types::GetDataSourceOutput#self_grant_status #self_grant_status} => Types::SelfGrantStatusOutput
     #   * {Types::GetDataSourceOutput#status #status} => String
     #   * {Types::GetDataSourceOutput#type #type} => String
     #   * {Types::GetDataSourceOutput#updated_at #updated_at} => Time
@@ -2917,6 +3264,7 @@ module Aws::DataZone
     #   resp.asset_forms_output[0].type_name #=> String
     #   resp.asset_forms_output[0].type_revision #=> String
     #   resp.configuration.glue_run_configuration.account_id #=> String
+    #   resp.configuration.glue_run_configuration.auto_import_data_quality_result #=> Boolean
     #   resp.configuration.glue_run_configuration.data_access_role #=> String
     #   resp.configuration.glue_run_configuration.region #=> String
     #   resp.configuration.glue_run_configuration.relational_filter_configurations #=> Array
@@ -2956,6 +3304,16 @@ module Aws::DataZone
     #   resp.recommendation.enable_business_name_generation #=> Boolean
     #   resp.schedule.schedule #=> String
     #   resp.schedule.timezone #=> String, one of "UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details #=> Array
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].database_name #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].failure_cause #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].schema_name #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "GRANT_FAILED", "REVOKE_FAILED"
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details #=> Array
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].database_name #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].failure_cause #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].schema_name #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "GRANT_FAILED", "REVOKE_FAILED"
     #   resp.status #=> String, one of "CREATING", "FAILED_CREATION", "READY", "UPDATING", "FAILED_UPDATE", "RUNNING", "DELETING", "FAILED_DELETION"
     #   resp.type #=> String
     #   resp.updated_at #=> Time
@@ -3175,6 +3533,53 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def get_environment(params = {}, options = {})
       req = build_request(:get_environment, params)
+      req.send_request(options)
+    end
+
+    # Gets the specified environment action.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which the
+    #   `GetEnvironmentAction` API is invoked.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The environment ID of the environment action.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the environment action
+    #
+    # @return [Types::GetEnvironmentActionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEnvironmentActionOutput#description #description} => String
+    #   * {Types::GetEnvironmentActionOutput#domain_id #domain_id} => String
+    #   * {Types::GetEnvironmentActionOutput#environment_id #environment_id} => String
+    #   * {Types::GetEnvironmentActionOutput#id #id} => String
+    #   * {Types::GetEnvironmentActionOutput#name #name} => String
+    #   * {Types::GetEnvironmentActionOutput#parameters #parameters} => Types::ActionParameters
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_environment_action({
+    #     domain_identifier: "DomainId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #     identifier: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.environment_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.parameters.aws_console_link.uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetEnvironmentAction AWS API Documentation
+    #
+    # @overload get_environment_action(params = {})
+    # @param [Hash] params ({})
+    def get_environment_action(params = {}, options = {})
+      req = build_request(:get_environment_action, params)
       req.send_request(options)
     end
 
@@ -3586,11 +3991,16 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Gets a listing (a record of an asset at a given time).
+    #
     # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain.
     #
     # @option params [required, String] :identifier
+    #   The ID of the listing.
     #
     # @option params [String] :listing_revision
+    #   The revision of the listing.
     #
     # @return [Types::GetListingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3629,6 +4039,13 @@ module Aws::DataZone
     #   resp.item.asset_listing.glossary_terms #=> Array
     #   resp.item.asset_listing.glossary_terms[0].name #=> String
     #   resp.item.asset_listing.glossary_terms[0].short_description #=> String
+    #   resp.item.asset_listing.latest_time_series_data_point_forms #=> Array
+    #   resp.item.asset_listing.latest_time_series_data_point_forms[0].content_summary #=> String
+    #   resp.item.asset_listing.latest_time_series_data_point_forms[0].form_name #=> String
+    #   resp.item.asset_listing.latest_time_series_data_point_forms[0].id #=> String
+    #   resp.item.asset_listing.latest_time_series_data_point_forms[0].timestamp #=> Time
+    #   resp.item.asset_listing.latest_time_series_data_point_forms[0].type_identifier #=> String
+    #   resp.item.asset_listing.latest_time_series_data_point_forms[0].type_revision #=> String
     #   resp.item.asset_listing.owning_project_id #=> String
     #   resp.listing_revision #=> String
     #   resp.name #=> String
@@ -3642,6 +4059,55 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def get_listing(params = {}, options = {})
       req = build_request(:get_listing, params)
+      req.send_request(options)
+    end
+
+    # Gets a metadata generation run in Amazon DataZone.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain the metadata generation run of
+    #   which you want to get.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier of the metadata generation run.
+    #
+    # @return [Types::GetMetadataGenerationRunOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMetadataGenerationRunOutput#created_at #created_at} => Time
+    #   * {Types::GetMetadataGenerationRunOutput#created_by #created_by} => String
+    #   * {Types::GetMetadataGenerationRunOutput#domain_id #domain_id} => String
+    #   * {Types::GetMetadataGenerationRunOutput#id #id} => String
+    #   * {Types::GetMetadataGenerationRunOutput#owning_project_id #owning_project_id} => String
+    #   * {Types::GetMetadataGenerationRunOutput#status #status} => String
+    #   * {Types::GetMetadataGenerationRunOutput#target #target} => Types::MetadataGenerationRunTarget
+    #   * {Types::GetMetadataGenerationRunOutput#type #type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_metadata_generation_run({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "MetadataGenerationRunIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.domain_id #=> String
+    #   resp.id #=> String
+    #   resp.owning_project_id #=> String
+    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"
+    #   resp.target.identifier #=> String
+    #   resp.target.revision #=> String
+    #   resp.target.type #=> String, one of "ASSET"
+    #   resp.type #=> String, one of "BUSINESS_DESCRIPTIONS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetMetadataGenerationRun AWS API Documentation
+    #
+    # @overload get_metadata_generation_run(params = {})
+    # @param [Hash] params ({})
+    def get_metadata_generation_run(params = {}, options = {})
+      req = build_request(:get_metadata_generation_run, params)
       req.send_request(options)
     end
 
@@ -3659,10 +4125,12 @@ module Aws::DataZone
     #   * {Types::GetProjectOutput#created_by #created_by} => String
     #   * {Types::GetProjectOutput#description #description} => String
     #   * {Types::GetProjectOutput#domain_id #domain_id} => String
+    #   * {Types::GetProjectOutput#failure_reasons #failure_reasons} => Array&lt;Types::ProjectDeletionError&gt;
     #   * {Types::GetProjectOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #   * {Types::GetProjectOutput#id #id} => String
     #   * {Types::GetProjectOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::GetProjectOutput#name #name} => String
+    #   * {Types::GetProjectOutput#project_status #project_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3677,11 +4145,15 @@ module Aws::DataZone
     #   resp.created_by #=> String
     #   resp.description #=> String
     #   resp.domain_id #=> String
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0].code #=> String
+    #   resp.failure_reasons[0].message #=> String
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #   resp.id #=> String
     #   resp.last_updated_at #=> Time
     #   resp.name #=> String
+    #   resp.project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetProject AWS API Documentation
     #
@@ -3955,6 +4427,65 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def get_subscription_target(params = {}, options = {})
       req = build_request(:get_subscription_target, params)
+      req.send_request(options)
+    end
+
+    # Gets the existing data point for the asset.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain that houses the asset for which
+    #   you want to get the data point.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of the asset for which you want to get the data point.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of the asset for which you want to get the data point.
+    #
+    # @option params [required, String] :form_name
+    #   The name of the time series form that houses the data point that you
+    #   want to get.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the data point that you want to get.
+    #
+    # @return [Types::GetTimeSeriesDataPointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTimeSeriesDataPointOutput#domain_id #domain_id} => String
+    #   * {Types::GetTimeSeriesDataPointOutput#entity_id #entity_id} => String
+    #   * {Types::GetTimeSeriesDataPointOutput#entity_type #entity_type} => String
+    #   * {Types::GetTimeSeriesDataPointOutput#form #form} => Types::TimeSeriesDataPointFormOutput
+    #   * {Types::GetTimeSeriesDataPointOutput#form_name #form_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_time_series_data_point({
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "EntityIdentifier", # required
+    #     entity_type: "ASSET", # required, accepts ASSET, LISTING
+    #     form_name: "TimeSeriesFormName", # required
+    #     identifier: "TimeSeriesDataPointIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_id #=> String
+    #   resp.entity_id #=> String
+    #   resp.entity_type #=> String, one of "ASSET", "LISTING"
+    #   resp.form.content #=> String
+    #   resp.form.form_name #=> String
+    #   resp.form.id #=> String
+    #   resp.form.timestamp #=> Time
+    #   resp.form.type_identifier #=> String
+    #   resp.form.type_revision #=> String
+    #   resp.form_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetTimeSeriesDataPoint AWS API Documentation
+    #
+    # @overload get_time_series_data_point(params = {})
+    # @param [Hash] params ({})
+    def get_time_series_data_point(params = {}, options = {})
+      req = build_request(:get_time_series_data_point, params)
       req.send_request(options)
     end
 
@@ -4351,6 +4882,66 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Lists existing environment actions.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which the environment actions
+    #   are listed.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The ID of the envrironment whose environment actions are listed.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of environment actions to return in a single call
+    #   to `ListEnvironmentActions`. When the number of environment actions to
+    #   be listed is greater than the value of `MaxResults`, the response
+    #   contains a `NextToken` value that you can use in a subsequent call to
+    #   `ListEnvironmentActions` to list the next set of environment actions.
+    #
+    # @option params [String] :next_token
+    #   When the number of environment actions is greater than the default
+    #   value for the `MaxResults` parameter, or if you explicitly specify a
+    #   value for `MaxResults` that is less than the number of environment
+    #   actions, the response includes a pagination token named `NextToken`.
+    #   You can specify this `NextToken` value in a subsequent call to
+    #   `ListEnvironmentActions` to list the next set of environment actions.
+    #
+    # @return [Types::ListEnvironmentActionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEnvironmentActionsOutput#items #items} => Array&lt;Types::EnvironmentActionSummary&gt;
+    #   * {Types::ListEnvironmentActionsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_environment_actions({
+    #     domain_identifier: "DomainId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].description #=> String
+    #   resp.items[0].domain_id #=> String
+    #   resp.items[0].environment_id #=> String
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].parameters.aws_console_link.uri #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListEnvironmentActions AWS API Documentation
+    #
+    # @overload list_environment_actions(params = {})
+    # @param [Hash] params ({})
+    def list_environment_actions(params = {}, options = {})
+      req = build_request(:list_environment_actions, params)
+      req.send_request(options)
+    end
+
     # Lists blueprint configurations for a Amazon DataZone environment.
     #
     # @option params [required, String] :domain_identifier
@@ -4589,6 +5180,7 @@ module Aws::DataZone
     #   `ListEnvironments` to list the next set of environments.
     #
     # @option params [String] :name
+    #   The name of the environment.
     #
     # @option params [String] :next_token
     #   When the number of environments is greater than the default value for
@@ -4654,6 +5246,75 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def list_environments(params = {}, options = {})
       req = build_request(:list_environments, params)
+      req.send_request(options)
+    end
+
+    # Lists all metadata generation runs.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain where you want to list metadata
+    #   generation runs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of metadata generation runs to return in a single
+    #   call to ListMetadataGenerationRuns. When the number of metadata
+    #   generation runs to be listed is greater than the value of MaxResults,
+    #   the response contains a NextToken value that you can use in a
+    #   subsequent call to ListMetadataGenerationRuns to list the next set of
+    #   revisions.
+    #
+    # @option params [String] :next_token
+    #   When the number of metadata generation runs is greater than the
+    #   default value for the MaxResults parameter, or if you explicitly
+    #   specify a value for MaxResults that is less than the number of
+    #   metadata generation runs, the response includes a pagination token
+    #   named NextToken. You can specify this NextToken value in a subsequent
+    #   call to ListMetadataGenerationRuns to list the next set of revisions.
+    #
+    # @option params [String] :status
+    #   The status of the metadata generation runs.
+    #
+    # @option params [String] :type
+    #   The type of the metadata generation runs.
+    #
+    # @return [Types::ListMetadataGenerationRunsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMetadataGenerationRunsOutput#items #items} => Array&lt;Types::MetadataGenerationRunItem&gt;
+    #   * {Types::ListMetadataGenerationRunsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_metadata_generation_runs({
+    #     domain_identifier: "DomainId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, CANCELED, SUCCEEDED, FAILED
+    #     type: "BUSINESS_DESCRIPTIONS", # accepts BUSINESS_DESCRIPTIONS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].created_by #=> String
+    #   resp.items[0].domain_id #=> String
+    #   resp.items[0].id #=> String
+    #   resp.items[0].owning_project_id #=> String
+    #   resp.items[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"
+    #   resp.items[0].target.identifier #=> String
+    #   resp.items[0].target.revision #=> String
+    #   resp.items[0].target.type #=> String, one of "ASSET"
+    #   resp.items[0].type #=> String, one of "BUSINESS_DESCRIPTIONS"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListMetadataGenerationRuns AWS API Documentation
+    #
+    # @overload list_metadata_generation_runs(params = {})
+    # @param [Hash] params ({})
+    def list_metadata_generation_runs(params = {}, options = {})
+      req = build_request(:list_metadata_generation_runs, params)
       req.send_request(options)
     end
 
@@ -4823,6 +5484,7 @@ module Aws::DataZone
     #   the next set of projects.
     #
     # @option params [String] :name
+    #   The name of the project.
     #
     # @option params [String] :next_token
     #   When the number of projects is greater than the default value for the
@@ -4860,8 +5522,12 @@ module Aws::DataZone
     #   resp.items[0].created_by #=> String
     #   resp.items[0].description #=> String
     #   resp.items[0].domain_id #=> String
+    #   resp.items[0].failure_reasons #=> Array
+    #   resp.items[0].failure_reasons[0].code #=> String
+    #   resp.items[0].failure_reasons[0].message #=> String
     #   resp.items[0].id #=> String
     #   resp.items[0].name #=> String
+    #   resp.items[0].project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
     #   resp.items[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -5286,6 +5952,153 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Lists time series data points.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain that houses the assets for which
+    #   you want to list time series data points.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :ended_at
+    #   The timestamp at which the data points that you wanted to list ended.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of the asset for which you want to list data points.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of the asset for which you want to list data points.
+    #
+    # @option params [required, String] :form_name
+    #   The name of the time series data points form.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of data points to return in a single call to
+    #   ListTimeSeriesDataPoints. When the number of data points to be listed
+    #   is greater than the value of MaxResults, the response contains a
+    #   NextToken value that you can use in a subsequent call to
+    #   ListTimeSeriesDataPoints to list the next set of data points.
+    #
+    # @option params [String] :next_token
+    #   When the number of data points is greater than the default value for
+    #   the MaxResults parameter, or if you explicitly specify a value for
+    #   MaxResults that is less than the number of data points, the response
+    #   includes a pagination token named NextToken. You can specify this
+    #   NextToken value in a subsequent call to ListTimeSeriesDataPoints to
+    #   list the next set of data points.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :started_at
+    #   The timestamp at which the data points that you want to list started.
+    #
+    # @return [Types::ListTimeSeriesDataPointsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTimeSeriesDataPointsOutput#items #items} => Array&lt;Types::TimeSeriesDataPointSummaryFormOutput&gt;
+    #   * {Types::ListTimeSeriesDataPointsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_time_series_data_points({
+    #     domain_identifier: "DomainId", # required
+    #     ended_at: Time.now,
+    #     entity_identifier: "EntityIdentifier", # required
+    #     entity_type: "ASSET", # required, accepts ASSET, LISTING
+    #     form_name: "TimeSeriesFormName", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     started_at: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].content_summary #=> String
+    #   resp.items[0].form_name #=> String
+    #   resp.items[0].id #=> String
+    #   resp.items[0].timestamp #=> Time
+    #   resp.items[0].type_identifier #=> String
+    #   resp.items[0].type_revision #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListTimeSeriesDataPoints AWS API Documentation
+    #
+    # @overload list_time_series_data_points(params = {})
+    # @param [Hash] params ({})
+    def list_time_series_data_points(params = {}, options = {})
+      req = build_request(:list_time_series_data_points, params)
+      req.send_request(options)
+    end
+
+    # Posts time series data points to Amazon DataZone for the specified
+    # asset.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that is provided to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain in which you want to post time
+    #   series data points.
+    #
+    # @option params [required, String] :entity_identifier
+    #   The ID of the asset for which you want to post time series data
+    #   points.
+    #
+    # @option params [required, String] :entity_type
+    #   The type of the asset for which you want to post data points.
+    #
+    # @option params [required, Array<Types::TimeSeriesDataPointFormInput>] :forms
+    #   The forms that contain the data points that you want to post.
+    #
+    # @return [Types::PostTimeSeriesDataPointsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PostTimeSeriesDataPointsOutput#domain_id #domain_id} => String
+    #   * {Types::PostTimeSeriesDataPointsOutput#entity_id #entity_id} => String
+    #   * {Types::PostTimeSeriesDataPointsOutput#entity_type #entity_type} => String
+    #   * {Types::PostTimeSeriesDataPointsOutput#forms #forms} => Array&lt;Types::TimeSeriesDataPointFormOutput&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.post_time_series_data_points({
+    #     client_token: "ClientToken",
+    #     domain_identifier: "DomainId", # required
+    #     entity_identifier: "EntityIdentifier", # required
+    #     entity_type: "ASSET", # required, accepts ASSET, LISTING
+    #     forms: [ # required
+    #       {
+    #         content: "TimeSeriesDataPointFormInputContentString",
+    #         form_name: "TimeSeriesFormName", # required
+    #         timestamp: Time.now, # required
+    #         type_identifier: "FormTypeIdentifier", # required
+    #         type_revision: "Revision",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_id #=> String
+    #   resp.entity_id #=> String
+    #   resp.entity_type #=> String, one of "ASSET", "LISTING"
+    #   resp.forms #=> Array
+    #   resp.forms[0].content #=> String
+    #   resp.forms[0].form_name #=> String
+    #   resp.forms[0].id #=> String
+    #   resp.forms[0].timestamp #=> Time
+    #   resp.forms[0].type_identifier #=> String
+    #   resp.forms[0].type_revision #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/PostTimeSeriesDataPoints AWS API Documentation
+    #
+    # @overload post_time_series_data_points(params = {})
+    # @param [Hash] params ({})
+    def post_time_series_data_points(params = {}, options = {})
+      req = build_request(:post_time_series_data_points, params)
+      req.send_request(options)
+    end
+
     # Writes the configuration for the specified environment blueprint in
     # Amazon DataZone.
     #
@@ -5373,10 +6186,16 @@ module Aws::DataZone
     #   The identifier of the prediction.
     #
     # @option params [Array<Types::RejectChoice>] :reject_choices
+    #   Specifies the prediction (aka, the automatically generated piece of
+    #   metadata) and the target (for example, a column name) that can be
+    #   rejected.
     #
     # @option params [Types::RejectRule] :reject_rule
+    #   Specifies the rule (or the conditions) under which a prediction can be
+    #   rejected.
     #
     # @option params [String] :revision
+    #   The revision that is to be made to the asset.
     #
     # @return [Types::RejectPredictionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5393,7 +6212,7 @@ module Aws::DataZone
     #     reject_choices: [
     #       {
     #         prediction_choices: [1],
-    #         prediction_target: "String",
+    #         prediction_target: "String", # required
     #       },
     #     ],
     #     reject_rule: {
@@ -5592,6 +6411,7 @@ module Aws::DataZone
     #   The identifier of the owning project specified for the search.
     #
     # @option params [Array<Types::SearchInItem>] :search_in
+    #   The details of the search.
     #
     # @option params [required, String] :search_scope
     #   The scope of the search.
@@ -5613,7 +6433,7 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #
     #   resp = client.search({
-    #     additional_attributes: ["FORMS"], # accepts FORMS
+    #     additional_attributes: ["FORMS"], # accepts FORMS, TIME_SERIES_DATA_POINT_FORMS
     #     domain_identifier: "DomainId", # required
     #     filters: {
     #       and: [
@@ -5655,6 +6475,13 @@ module Aws::DataZone
     #   resp.items[0].asset_item.additional_attributes.forms_output[0].form_name #=> String
     #   resp.items[0].asset_item.additional_attributes.forms_output[0].type_name #=> String
     #   resp.items[0].asset_item.additional_attributes.forms_output[0].type_revision #=> String
+    #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output #=> Array
+    #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output[0].content_summary #=> String
+    #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output[0].form_name #=> String
+    #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output[0].id #=> String
+    #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output[0].timestamp #=> Time
+    #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output[0].type_identifier #=> String
+    #   resp.items[0].asset_item.additional_attributes.latest_time_series_data_point_forms_output[0].type_revision #=> String
     #   resp.items[0].asset_item.additional_attributes.read_only_forms_output #=> Array
     #   resp.items[0].asset_item.additional_attributes.read_only_forms_output[0].content #=> String
     #   resp.items[0].asset_item.additional_attributes.read_only_forms_output[0].form_name #=> String
@@ -5787,7 +6614,8 @@ module Aws::DataZone
       req.send_request(options)
     end
 
-    # Searches listings in Amazon DataZone.
+    # Searches listings (records of an asset at a given time) in Amazon
+    # DataZone.
     #
     # @option params [Array<String>] :additional_attributes
     #   Specifies additional attributes for the search.
@@ -5814,6 +6642,7 @@ module Aws::DataZone
     #   next set of results.
     #
     # @option params [Array<Types::SearchInItem>] :search_in
+    #   The details of the search.
     #
     # @option params [String] :search_text
     #   Specifies the text for which to search.
@@ -5832,7 +6661,7 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #
     #   resp = client.search_listings({
-    #     additional_attributes: ["FORMS"], # accepts FORMS
+    #     additional_attributes: ["FORMS"], # accepts FORMS, TIME_SERIES_DATA_POINT_FORMS
     #     domain_identifier: "DomainId", # required
     #     filters: {
     #       and: [
@@ -5868,6 +6697,13 @@ module Aws::DataZone
     #
     #   resp.items #=> Array
     #   resp.items[0].asset_listing.additional_attributes.forms #=> String
+    #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms #=> Array
+    #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms[0].content_summary #=> String
+    #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms[0].form_name #=> String
+    #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms[0].id #=> String
+    #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms[0].timestamp #=> Time
+    #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms[0].type_identifier #=> String
+    #   resp.items[0].asset_listing.additional_attributes.latest_time_series_data_point_forms[0].type_revision #=> String
     #   resp.items[0].asset_listing.created_at #=> Time
     #   resp.items[0].asset_listing.description #=> String
     #   resp.items[0].asset_listing.entity_id #=> String
@@ -5904,6 +6740,7 @@ module Aws::DataZone
     #   The filters for the `SearchTypes` action.
     #
     # @option params [required, Boolean] :managed
+    #   Specifies whether the search is managed.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call to
@@ -5921,6 +6758,7 @@ module Aws::DataZone
     #   next set of results.
     #
     # @option params [Array<Types::SearchInItem>] :search_in
+    #   The details of the search.
     #
     # @option params [required, String] :search_scope
     #   Specifies the scope of the search for types.
@@ -6155,6 +6993,72 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Starts the metadata generation run.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :domain_identifier
+    #   The ID of the Amazon DataZone domain where you want to start a
+    #   metadata generation run.
+    #
+    # @option params [required, String] :owning_project_identifier
+    #   The ID of the project that owns the asset for which you want to start
+    #   a metadata generation run.
+    #
+    # @option params [required, Types::MetadataGenerationRunTarget] :target
+    #   The asset for which you want to start a metadata generation run.
+    #
+    # @option params [required, String] :type
+    #   The type of the metadata generation run.
+    #
+    # @return [Types::StartMetadataGenerationRunOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMetadataGenerationRunOutput#created_at #created_at} => Time
+    #   * {Types::StartMetadataGenerationRunOutput#created_by #created_by} => String
+    #   * {Types::StartMetadataGenerationRunOutput#domain_id #domain_id} => String
+    #   * {Types::StartMetadataGenerationRunOutput#id #id} => String
+    #   * {Types::StartMetadataGenerationRunOutput#owning_project_id #owning_project_id} => String
+    #   * {Types::StartMetadataGenerationRunOutput#status #status} => String
+    #   * {Types::StartMetadataGenerationRunOutput#type #type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_metadata_generation_run({
+    #     client_token: "ClientToken",
+    #     domain_identifier: "DomainId", # required
+    #     owning_project_identifier: "ProjectId", # required
+    #     target: { # required
+    #       identifier: "String", # required
+    #       revision: "Revision",
+    #       type: "ASSET", # required, accepts ASSET
+    #     },
+    #     type: "BUSINESS_DESCRIPTIONS", # required, accepts BUSINESS_DESCRIPTIONS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.domain_id #=> String
+    #   resp.id #=> String
+    #   resp.owning_project_id #=> String
+    #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"
+    #   resp.type #=> String, one of "BUSINESS_DESCRIPTIONS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartMetadataGenerationRun AWS API Documentation
+    #
+    # @overload start_metadata_generation_run(params = {})
+    # @param [Hash] params ({})
+    def start_metadata_generation_run(params = {}, options = {})
+      req = build_request(:start_metadata_generation_run, params)
+      req.send_request(options)
+    end
+
     # Tags a resource in Amazon DataZone.
     #
     # @option params [required, String] :resource_arn
@@ -6244,6 +7148,10 @@ module Aws::DataZone
     #   The recommendation to be updated as part of the `UpdateDataSource`
     #   action.
     #
+    # @option params [Boolean] :retain_permissions_on_revoke_failure
+    #   Specifies that the granted permissions are retained in case of a
+    #   self-subscribe functionality failure for a data source.
+    #
     # @option params [Types::ScheduleConfiguration] :schedule
     #   The schedule to be updated as part of the `UpdateDataSource` action.
     #
@@ -6265,7 +7173,9 @@ module Aws::DataZone
     #   * {Types::UpdateDataSourceOutput#project_id #project_id} => String
     #   * {Types::UpdateDataSourceOutput#publish_on_import #publish_on_import} => Boolean
     #   * {Types::UpdateDataSourceOutput#recommendation #recommendation} => Types::RecommendationConfiguration
+    #   * {Types::UpdateDataSourceOutput#retain_permissions_on_revoke_failure #retain_permissions_on_revoke_failure} => Boolean
     #   * {Types::UpdateDataSourceOutput#schedule #schedule} => Types::ScheduleConfiguration
+    #   * {Types::UpdateDataSourceOutput#self_grant_status #self_grant_status} => Types::SelfGrantStatusOutput
     #   * {Types::UpdateDataSourceOutput#status #status} => String
     #   * {Types::UpdateDataSourceOutput#type #type} => String
     #   * {Types::UpdateDataSourceOutput#updated_at #updated_at} => Time
@@ -6283,6 +7193,7 @@ module Aws::DataZone
     #     ],
     #     configuration: {
     #       glue_run_configuration: {
+    #         auto_import_data_quality_result: false,
     #         data_access_role: "GlueRunConfigurationInputDataAccessRoleString",
     #         relational_filter_configurations: [ # required
     #           {
@@ -6333,6 +7244,7 @@ module Aws::DataZone
     #     recommendation: {
     #       enable_business_name_generation: false,
     #     },
+    #     retain_permissions_on_revoke_failure: false,
     #     schedule: {
     #       schedule: "CronString",
     #       timezone: "UTC", # accepts UTC, AFRICA_JOHANNESBURG, AMERICA_MONTREAL, AMERICA_SAO_PAULO, ASIA_BAHRAIN, ASIA_BANGKOK, ASIA_CALCUTTA, ASIA_DUBAI, ASIA_HONG_KONG, ASIA_JAKARTA, ASIA_KUALA_LUMPUR, ASIA_SEOUL, ASIA_SHANGHAI, ASIA_SINGAPORE, ASIA_TAIPEI, ASIA_TOKYO, AUSTRALIA_MELBOURNE, AUSTRALIA_SYDNEY, CANADA_CENTRAL, CET, CST6CDT, ETC_GMT, ETC_GMT0, ETC_GMT_ADD_0, ETC_GMT_ADD_1, ETC_GMT_ADD_10, ETC_GMT_ADD_11, ETC_GMT_ADD_12, ETC_GMT_ADD_2, ETC_GMT_ADD_3, ETC_GMT_ADD_4, ETC_GMT_ADD_5, ETC_GMT_ADD_6, ETC_GMT_ADD_7, ETC_GMT_ADD_8, ETC_GMT_ADD_9, ETC_GMT_NEG_0, ETC_GMT_NEG_1, ETC_GMT_NEG_10, ETC_GMT_NEG_11, ETC_GMT_NEG_12, ETC_GMT_NEG_13, ETC_GMT_NEG_14, ETC_GMT_NEG_2, ETC_GMT_NEG_3, ETC_GMT_NEG_4, ETC_GMT_NEG_5, ETC_GMT_NEG_6, ETC_GMT_NEG_7, ETC_GMT_NEG_8, ETC_GMT_NEG_9, EUROPE_DUBLIN, EUROPE_LONDON, EUROPE_PARIS, EUROPE_STOCKHOLM, EUROPE_ZURICH, ISRAEL, MEXICO_GENERAL, MST7MDT, PACIFIC_AUCKLAND, US_CENTRAL, US_EASTERN, US_MOUNTAIN, US_PACIFIC
@@ -6347,6 +7259,7 @@ module Aws::DataZone
     #   resp.asset_forms_output[0].type_name #=> String
     #   resp.asset_forms_output[0].type_revision #=> String
     #   resp.configuration.glue_run_configuration.account_id #=> String
+    #   resp.configuration.glue_run_configuration.auto_import_data_quality_result #=> Boolean
     #   resp.configuration.glue_run_configuration.data_access_role #=> String
     #   resp.configuration.glue_run_configuration.region #=> String
     #   resp.configuration.glue_run_configuration.relational_filter_configurations #=> Array
@@ -6383,8 +7296,19 @@ module Aws::DataZone
     #   resp.project_id #=> String
     #   resp.publish_on_import #=> Boolean
     #   resp.recommendation.enable_business_name_generation #=> Boolean
+    #   resp.retain_permissions_on_revoke_failure #=> Boolean
     #   resp.schedule.schedule #=> String
     #   resp.schedule.timezone #=> String, one of "UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details #=> Array
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].database_name #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].failure_cause #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].schema_name #=> String
+    #   resp.self_grant_status.glue_self_grant_status.self_grant_status_details[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "GRANT_FAILED", "REVOKE_FAILED"
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details #=> Array
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].database_name #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].failure_cause #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].schema_name #=> String
+    #   resp.self_grant_status.redshift_self_grant_status.self_grant_status_details[0].status #=> String, one of "GRANT_PENDING", "REVOKE_PENDING", "GRANT_IN_PROGRESS", "REVOKE_IN_PROGRESS", "GRANTED", "GRANT_FAILED", "REVOKE_FAILED"
     #   resp.status #=> String, one of "CREATING", "FAILED_CREATION", "READY", "UPDATING", "FAILED_UPDATE", "RUNNING", "DELETING", "FAILED_DELETION"
     #   resp.type #=> String
     #   resp.updated_at #=> Time
@@ -6574,6 +7498,68 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def update_environment(params = {}, options = {})
       req = build_request(:update_environment, params)
+      req.send_request(options)
+    end
+
+    # Updates an environment action.
+    #
+    # @option params [String] :description
+    #   The description of the environment action.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The domain ID of the environment action.
+    #
+    # @option params [required, String] :environment_identifier
+    #   The environment ID of the environment action.
+    #
+    # @option params [required, String] :identifier
+    #   The ID of the environment action.
+    #
+    # @option params [String] :name
+    #   The name of the environment action.
+    #
+    # @option params [Types::ActionParameters] :parameters
+    #   The parameters of the environment action.
+    #
+    # @return [Types::UpdateEnvironmentActionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEnvironmentActionOutput#description #description} => String
+    #   * {Types::UpdateEnvironmentActionOutput#domain_id #domain_id} => String
+    #   * {Types::UpdateEnvironmentActionOutput#environment_id #environment_id} => String
+    #   * {Types::UpdateEnvironmentActionOutput#id #id} => String
+    #   * {Types::UpdateEnvironmentActionOutput#name #name} => String
+    #   * {Types::UpdateEnvironmentActionOutput#parameters #parameters} => Types::ActionParameters
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_environment_action({
+    #     description: "String",
+    #     domain_identifier: "DomainId", # required
+    #     environment_identifier: "EnvironmentId", # required
+    #     identifier: "String", # required
+    #     name: "String",
+    #     parameters: {
+    #       aws_console_link: {
+    #         uri: "String",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.description #=> String
+    #   resp.domain_id #=> String
+    #   resp.environment_id #=> String
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.parameters.aws_console_link.uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateEnvironmentAction AWS API Documentation
+    #
+    # @overload update_environment_action(params = {})
+    # @param [Hash] params ({})
+    def update_environment_action(params = {}, options = {})
+      req = build_request(:update_environment_action, params)
       req.send_request(options)
     end
 
@@ -6880,10 +7866,12 @@ module Aws::DataZone
     #   * {Types::UpdateProjectOutput#created_by #created_by} => String
     #   * {Types::UpdateProjectOutput#description #description} => String
     #   * {Types::UpdateProjectOutput#domain_id #domain_id} => String
+    #   * {Types::UpdateProjectOutput#failure_reasons #failure_reasons} => Array&lt;Types::ProjectDeletionError&gt;
     #   * {Types::UpdateProjectOutput#glossary_terms #glossary_terms} => Array&lt;String&gt;
     #   * {Types::UpdateProjectOutput#id #id} => String
     #   * {Types::UpdateProjectOutput#last_updated_at #last_updated_at} => Time
     #   * {Types::UpdateProjectOutput#name #name} => String
+    #   * {Types::UpdateProjectOutput#project_status #project_status} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6901,11 +7889,15 @@ module Aws::DataZone
     #   resp.created_by #=> String
     #   resp.description #=> String
     #   resp.domain_id #=> String
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0].code #=> String
+    #   resp.failure_reasons[0].message #=> String
     #   resp.glossary_terms #=> Array
     #   resp.glossary_terms[0] #=> String
     #   resp.id #=> String
     #   resp.last_updated_at #=> Time
     #   resp.name #=> String
+    #   resp.project_status #=> String, one of "ACTIVE", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateProject AWS API Documentation
     #
@@ -7245,7 +8237,7 @@ module Aws::DataZone
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

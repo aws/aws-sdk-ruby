@@ -124,6 +124,20 @@ module Aws::DynamoDB
       end
     end
 
+    class DeleteResourcePolicy
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DynamoDB::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class DeleteTable
       def self.build(context)
         unless context.config.regional_endpoint
@@ -404,6 +418,20 @@ module Aws::DynamoDB
       end
     end
 
+    class GetResourcePolicy
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DynamoDB::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
     class ImportTable
       def self.build(context)
         unless context.config.regional_endpoint
@@ -517,6 +545,20 @@ module Aws::DynamoDB
     end
 
     class PutItem
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DynamoDB::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class PutResourcePolicy
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s
@@ -699,6 +741,20 @@ module Aws::DynamoDB
     end
 
     class UpdateItem
+      def self.build(context)
+        unless context.config.regional_endpoint
+          endpoint = context.config.endpoint.to_s
+        end
+        Aws::DynamoDB::EndpointParameters.new(
+          region: context.config.region,
+          use_dual_stack: context.config.use_dualstack_endpoint,
+          use_fips: context.config.use_fips_endpoint,
+          endpoint: endpoint,
+        )
+      end
+    end
+
+    class UpdateKinesisStreamingDestination
       def self.build(context)
         unless context.config.regional_endpoint
           endpoint = context.config.endpoint.to_s

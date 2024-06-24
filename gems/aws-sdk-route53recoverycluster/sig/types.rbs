@@ -1,0 +1,129 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Route53RecoveryCluster
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class EndpointTemporarilyUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GetRoutingControlStateRequest
+      attr_accessor routing_control_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRoutingControlStateResponse
+      attr_accessor routing_control_arn: ::String
+      attr_accessor routing_control_state: ("On" | "Off")
+      attr_accessor routing_control_name: ::String
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRoutingControlsRequest
+      attr_accessor control_panel_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListRoutingControlsResponse
+      attr_accessor routing_controls: ::Array[Types::RoutingControl]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      SENSITIVE: []
+    end
+
+    class RoutingControl
+      attr_accessor control_panel_arn: ::String
+      attr_accessor control_panel_name: ::String
+      attr_accessor routing_control_arn: ::String
+      attr_accessor routing_control_name: ::String
+      attr_accessor routing_control_state: ("On" | "Off")
+      attr_accessor owner: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceLimitExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor limit_code: ::String
+      attr_accessor service_code: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateRoutingControlStateEntry
+      attr_accessor routing_control_arn: ::String
+      attr_accessor routing_control_state: ("On" | "Off")
+      SENSITIVE: []
+    end
+
+    class UpdateRoutingControlStateRequest
+      attr_accessor routing_control_arn: ::String
+      attr_accessor routing_control_state: ("On" | "Off")
+      attr_accessor safety_rules_to_override: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateRoutingControlStateResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRoutingControlStatesRequest
+      attr_accessor update_routing_control_state_entries: ::Array[Types::UpdateRoutingControlStateEntry]
+      attr_accessor safety_rules_to_override: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateRoutingControlStatesResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor reason: ("unknownOperation" | "cannotParse" | "fieldValidationFailed" | "other")
+      attr_accessor fields: ::Array[Types::ValidationExceptionField]
+      SENSITIVE: []
+    end
+
+    class ValidationExceptionField
+      attr_accessor name: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,0 +1,130 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DocDB
+    module Errors
+      class ServiceError < ::Aws::Errors::ServiceError
+      end
+
+      class AuthorizationNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class CertificateNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class DBClusterAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class DBClusterNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class DBClusterParameterGroupNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class DBClusterQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class DBClusterSnapshotAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class DBClusterSnapshotNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class DBInstanceAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class DBInstanceNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class DBParameterGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class DBParameterGroupNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class DBParameterGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class DBSecurityGroupNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class DBSnapshotAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class DBSnapshotNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class DBSubnetGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class DBSubnetGroupDoesNotCoverEnoughAZs < ::Aws::Errors::ServiceError
+      end
+      class DBSubnetGroupNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class DBSubnetGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class DBSubnetQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class DBUpgradeDependencyFailureFault < ::Aws::Errors::ServiceError
+      end
+      class EventSubscriptionQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class GlobalClusterAlreadyExistsFault < ::Aws::Errors::ServiceError
+      end
+      class GlobalClusterNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class GlobalClusterQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class InstanceQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class InsufficientDBClusterCapacityFault < ::Aws::Errors::ServiceError
+      end
+      class InsufficientDBInstanceCapacityFault < ::Aws::Errors::ServiceError
+      end
+      class InsufficientStorageClusterCapacityFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidDBClusterSnapshotStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidDBClusterStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidDBInstanceStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidDBParameterGroupStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidDBSecurityGroupStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidDBSnapshotStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidDBSubnetGroupStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidDBSubnetStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidEventSubscriptionStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidGlobalClusterStateFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidRestoreFault < ::Aws::Errors::ServiceError
+      end
+      class InvalidSubnet < ::Aws::Errors::ServiceError
+      end
+      class InvalidVPCNetworkStateFault < ::Aws::Errors::ServiceError
+      end
+      class KMSKeyNotAccessibleFault < ::Aws::Errors::ServiceError
+      end
+      class ResourceNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class SNSInvalidTopicFault < ::Aws::Errors::ServiceError
+      end
+      class SNSNoAuthorizationFault < ::Aws::Errors::ServiceError
+      end
+      class SNSTopicArnNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class SharedSnapshotQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class SnapshotQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class SourceNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class StorageQuotaExceededFault < ::Aws::Errors::ServiceError
+      end
+      class StorageTypeNotSupportedFault < ::Aws::Errors::ServiceError
+      end
+      class SubnetAlreadyInUse < ::Aws::Errors::ServiceError
+      end
+      class SubscriptionAlreadyExistFault < ::Aws::Errors::ServiceError
+      end
+      class SubscriptionCategoryNotFoundFault < ::Aws::Errors::ServiceError
+      end
+      class SubscriptionNotFoundFault < ::Aws::Errors::ServiceError
+      end
+    end
+  end
+end

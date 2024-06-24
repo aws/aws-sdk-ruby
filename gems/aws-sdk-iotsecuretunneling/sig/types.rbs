@@ -1,0 +1,159 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::IoTSecureTunneling
+  module Types
+
+    class CloseTunnelRequest
+      attr_accessor tunnel_id: ::String
+      attr_accessor delete: bool
+      SENSITIVE: []
+    end
+
+    class CloseTunnelResponse < Aws::EmptyStructure
+    end
+
+    class ConnectionState
+      attr_accessor status: ("CONNECTED" | "DISCONNECTED")
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DescribeTunnelRequest
+      attr_accessor tunnel_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeTunnelResponse
+      attr_accessor tunnel: Types::Tunnel
+      SENSITIVE: []
+    end
+
+    class DestinationConfig
+      attr_accessor thing_name: ::String
+      attr_accessor services: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class LimitExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class ListTunnelsRequest
+      attr_accessor thing_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTunnelsResponse
+      attr_accessor tunnel_summaries: ::Array[Types::TunnelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class OpenTunnelRequest
+      attr_accessor description: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor destination_config: Types::DestinationConfig
+      attr_accessor timeout_config: Types::TimeoutConfig
+      SENSITIVE: []
+    end
+
+    class OpenTunnelResponse
+      attr_accessor tunnel_id: ::String
+      attr_accessor tunnel_arn: ::String
+      attr_accessor source_access_token: ::String
+      attr_accessor destination_access_token: ::String
+      SENSITIVE: [:source_access_token, :destination_access_token]
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RotateTunnelAccessTokenRequest
+      attr_accessor tunnel_id: ::String
+      attr_accessor client_mode: ("SOURCE" | "DESTINATION" | "ALL")
+      attr_accessor destination_config: Types::DestinationConfig
+      SENSITIVE: []
+    end
+
+    class RotateTunnelAccessTokenResponse
+      attr_accessor tunnel_arn: ::String
+      attr_accessor source_access_token: ::String
+      attr_accessor destination_access_token: ::String
+      SENSITIVE: [:source_access_token, :destination_access_token]
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TimeoutConfig
+      attr_accessor max_lifetime_timeout_minutes: ::Integer
+      SENSITIVE: []
+    end
+
+    class Tunnel
+      attr_accessor tunnel_id: ::String
+      attr_accessor tunnel_arn: ::String
+      attr_accessor status: ("OPEN" | "CLOSED")
+      attr_accessor source_connection_state: Types::ConnectionState
+      attr_accessor destination_connection_state: Types::ConnectionState
+      attr_accessor description: ::String
+      attr_accessor destination_config: Types::DestinationConfig
+      attr_accessor timeout_config: Types::TimeoutConfig
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class TunnelSummary
+      attr_accessor tunnel_id: ::String
+      attr_accessor tunnel_arn: ::String
+      attr_accessor status: ("OPEN" | "CLOSED")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+  end
+end

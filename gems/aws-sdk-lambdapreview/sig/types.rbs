@@ -1,0 +1,170 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::LambdaPreview
+  module Types
+
+    class AddEventSourceRequest
+      attr_accessor event_source: ::String
+      attr_accessor function_name: ::String
+      attr_accessor role: ::String
+      attr_accessor batch_size: ::Integer
+      attr_accessor parameters: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DeleteFunctionRequest
+      attr_accessor function_name: ::String
+      SENSITIVE: []
+    end
+
+    class EventSourceConfiguration
+      attr_accessor uuid: ::String
+      attr_accessor batch_size: ::Integer
+      attr_accessor event_source: ::String
+      attr_accessor function_name: ::String
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor role: ::String
+      attr_accessor last_modified: ::Time
+      attr_accessor is_active: bool
+      attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class FunctionCodeLocation
+      attr_accessor repository_type: ::String
+      attr_accessor location: ::String
+      SENSITIVE: []
+    end
+
+    class FunctionConfiguration
+      attr_accessor function_name: ::String
+      attr_accessor function_arn: ::String
+      attr_accessor configuration_id: ::String
+      attr_accessor runtime: ("nodejs")
+      attr_accessor role: ::String
+      attr_accessor handler: ::String
+      attr_accessor mode: ("event")
+      attr_accessor code_size: ::Integer
+      attr_accessor description: ::String
+      attr_accessor timeout: ::Integer
+      attr_accessor memory_size: ::Integer
+      attr_accessor last_modified: ::Time
+      SENSITIVE: []
+    end
+
+    class GetEventSourceRequest
+      attr_accessor uuid: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionConfigurationRequest
+      attr_accessor function_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionRequest
+      attr_accessor function_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetFunctionResponse
+      attr_accessor configuration: Types::FunctionConfiguration
+      attr_accessor code: Types::FunctionCodeLocation
+      SENSITIVE: []
+    end
+
+    class InvalidParameterValueException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvalidRequestContentException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvokeAsyncRequest
+      attr_accessor function_name: ::String
+      attr_accessor invoke_args: ::IO
+      SENSITIVE: []
+    end
+
+    class InvokeAsyncResponse
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEventSourcesRequest
+      attr_accessor event_source_arn: ::String
+      attr_accessor function_name: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEventSourcesResponse
+      attr_accessor next_marker: ::String
+      attr_accessor event_sources: ::Array[Types::EventSourceConfiguration]
+      SENSITIVE: []
+    end
+
+    class ListFunctionsRequest
+      attr_accessor marker: ::String
+      attr_accessor max_items: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListFunctionsResponse
+      attr_accessor next_marker: ::String
+      attr_accessor functions: ::Array[Types::FunctionConfiguration]
+      SENSITIVE: []
+    end
+
+    class RemoveEventSourceRequest
+      attr_accessor uuid: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceException
+      attr_accessor type: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateFunctionConfigurationRequest
+      attr_accessor function_name: ::String
+      attr_accessor role: ::String
+      attr_accessor handler: ::String
+      attr_accessor description: ::String
+      attr_accessor timeout: ::Integer
+      attr_accessor memory_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class UploadFunctionRequest
+      attr_accessor function_name: ::String
+      attr_accessor function_zip: ::IO
+      attr_accessor runtime: ("nodejs")
+      attr_accessor role: ::String
+      attr_accessor handler: ::String
+      attr_accessor mode: ("event")
+      attr_accessor description: ::String
+      attr_accessor timeout: ::Integer
+      attr_accessor memory_size: ::Integer
+      SENSITIVE: []
+    end
+  end
+end

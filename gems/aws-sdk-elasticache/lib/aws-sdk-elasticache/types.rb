@@ -268,15 +268,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M7g node types**: `cache.m7g.large`, `cache.m7g.xlarge`,
+    #       `cache.m7g.2xlarge`, `cache.m7g.4xlarge`, `cache.m7g.8xlarge`,
+    #       `cache.m7g.12xlarge`, `cache.m7g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **M6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
-    #
-    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
-    #
-    #        </note>
     #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
@@ -319,16 +323,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R6g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
-    #
-    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
-    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
-    #       `cache.r6g.16xlarge`
+    #       **R7g node types**: `cache.r7g.large`, `cache.r7g.xlarge`,
+    #       `cache.r7g.2xlarge`, `cache.r7g.4xlarge`, `cache.r7g.8xlarge`,
+    #       `cache.r7g.12xlarge`, `cache.r7g.16xlarge`
     #
     #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -708,15 +715,19 @@ module Aws::ElastiCache
     #
     #   * Current generation:
     #
+    #     **M7g node types**: `cache.m7g.large`, `cache.m7g.xlarge`,
+    #     `cache.m7g.2xlarge`, `cache.m7g.4xlarge`, `cache.m7g.8xlarge`,
+    #     `cache.m7g.12xlarge`, `cache.m7g.16xlarge`
+    #
+    #     <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #      </note>
+    #
     #     **M6g node types** (available only for Redis engine version 5.0.6
     #     onward and for Memcached engine version 1.5.16 onward):
     #     `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #     `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #     `cache.m6g.16xlarge`
-    #
-    #     <note markdown="1"> For region availability, see [Supported Node Types][1]
-    #
-    #      </note>
     #
     #     **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #     `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
@@ -759,16 +770,19 @@ module Aws::ElastiCache
     #
     #   * Current generation:
     #
-    #     **R6g node types** (available only for Redis engine version 5.0.6
-    #     onward and for Memcached engine version 1.5.16 onward).
-    #
-    #     `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
-    #     `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
-    #     `cache.r6g.16xlarge`
+    #     **R7g node types**: `cache.r7g.large`, `cache.r7g.xlarge`,
+    #     `cache.r7g.2xlarge`, `cache.r7g.4xlarge`, `cache.r7g.8xlarge`,
+    #     `cache.r7g.12xlarge`, `cache.r7g.16xlarge`
     #
     #     <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #      </note>
+    #
+    #     **R6g node types** (available only for Redis engine version 5.0.6
+    #     onward and for Memcached engine version 1.5.16 onward):
+    #     `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #     `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #     `cache.r6g.16xlarge`
     #
     #     **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #     `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -1351,6 +1365,27 @@ module Aws::ElastiCache
     #
     class CacheSubnetQuotaExceededFault < Aws::EmptyStructure; end
 
+    # The usage limits for storage and ElastiCache Processing Units for the
+    # cache.
+    #
+    # @!attribute [rw] data_storage
+    #   The maximum data storage limit in the cache, expressed in Gigabytes.
+    #   @return [Types::DataStorage]
+    #
+    # @!attribute [rw] ecpu_per_second
+    #   The configuration for the number of ElastiCache Processing Units
+    #   (ECPU) the cache can consume per second.
+    #   @return [Types::ECPUPerSecond]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheUsageLimits AWS API Documentation
+    #
+    class CacheUsageLimits < Struct.new(
+      :data_storage,
+      :ecpu_per_second)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration details of the CloudWatch Logs destination.
     #
     # @!attribute [rw] log_group
@@ -1458,6 +1493,50 @@ module Aws::ElastiCache
       :new_replica_count,
       :preferred_availability_zones,
       :preferred_outpost_arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_serverless_cache_snapshot_name
+    #   The identifier of the existing serverless cache’s snapshot to be
+    #   copied. Available for Redis only.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_serverless_cache_snapshot_name
+    #   The identifier for the snapshot to be created. Available for Redis
+    #   only.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of the KMS key used to encrypt the target snapshot.
+    #   Available for Redis only.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags to be added to the target snapshot resource. A tag is
+    #   a key-value pair. Available for Redis only. Default: NULL
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopyServerlessCacheSnapshotRequest AWS API Documentation
+    #
+    class CopyServerlessCacheSnapshotRequest < Struct.new(
+      :source_serverless_cache_snapshot_name,
+      :target_serverless_cache_snapshot_name,
+      :kms_key_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache_snapshot
+    #   The response for the attempt to copy the serverless cache snapshot.
+    #   Available for Redis only.
+    #   @return [Types::ServerlessCacheSnapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopyServerlessCacheSnapshotResponse AWS API Documentation
+    #
+    class CopyServerlessCacheSnapshotResponse < Struct.new(
+      :serverless_cache_snapshot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1633,15 +1712,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M7g node types**: `cache.m7g.large`, `cache.m7g.xlarge`,
+    #       `cache.m7g.2xlarge`, `cache.m7g.4xlarge`, `cache.m7g.8xlarge`,
+    #       `cache.m7g.12xlarge`, `cache.m7g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **M6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
-    #
-    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
-    #
-    #        </note>
     #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
@@ -1684,16 +1767,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R6g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
-    #
-    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
-    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
-    #       `cache.r6g.16xlarge`
+    #       **R7g node types**: `cache.r7g.large`, `cache.r7g.xlarge`,
+    #       `cache.r7g.2xlarge`, `cache.r7g.4xlarge`, `cache.r7g.8xlarge`,
+    #       `cache.r7g.12xlarge`, `cache.r7g.16xlarge`
     #
     #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -2330,15 +2416,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M7g node types**: `cache.m7g.large`, `cache.m7g.xlarge`,
+    #       `cache.m7g.2xlarge`, `cache.m7g.4xlarge`, `cache.m7g.8xlarge`,
+    #       `cache.m7g.12xlarge`, `cache.m7g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **M6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
-    #
-    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
-    #
-    #        </note>
     #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
@@ -2381,16 +2471,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R6g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
-    #
-    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
-    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
-    #       `cache.r6g.16xlarge`
+    #       **R7g node types**: `cache.r7g.large`, `cache.r7g.xlarge`,
+    #       `cache.r7g.2xlarge`, `cache.r7g.4xlarge`, `cache.r7g.8xlarge`,
+    #       `cache.r7g.12xlarge`, `cache.r7g.16xlarge`
     #
     #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -2522,11 +2615,6 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
-    #   Specifies the weekly time range during which maintenance on the
-    #   cluster is performed. It is specified as a range in the format
-    #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-    #   window is a 60 minute period. Valid values for `ddd` are:
-    #
     #   Specifies the weekly time range during which maintenance on the
     #   cluster is performed. It is specified as a range in the format
     #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
@@ -2726,6 +2814,11 @@ module Aws::ElastiCache
     #   cluster mode configuration and set the cluster mode to Enabled.
     #   @return [String]
     #
+    # @!attribute [rw] serverless_cache_snapshot_name
+    #   The name of the snapshot used to create a replication group.
+    #   Available for Redis only.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroupMessage AWS API Documentation
     #
     class CreateReplicationGroupMessage < Struct.new(
@@ -2766,7 +2859,8 @@ module Aws::ElastiCache
       :network_type,
       :ip_discovery,
       :transit_encryption_mode,
-      :cluster_mode)
+      :cluster_mode,
+      :serverless_cache_snapshot_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2780,6 +2874,157 @@ module Aws::ElastiCache
     #
     class CreateReplicationGroupResult < Struct.new(
       :replication_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache_name
+    #   User-provided identifier for the serverless cache. This parameter is
+    #   stored as a lowercase string.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   User-provided description for the serverless cache. The default is
+    #   NULL, i.e. if no description is provided then an empty string will
+    #   be returned. The maximum length is 255 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The name of the cache engine to be used for creating the serverless
+    #   cache.
+    #   @return [String]
+    #
+    # @!attribute [rw] major_engine_version
+    #   The version of the cache engine that will be used to create the
+    #   serverless cache.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_usage_limits
+    #   Sets the cache usage limits for storage and ElastiCache Processing
+    #   Units for the cache.
+    #   @return [Types::CacheUsageLimits]
+    #
+    # @!attribute [rw] kms_key_id
+    #   ARN of the customer managed key for encrypting the data at rest. If
+    #   no KMS key is provided, a default service key is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of the one or more VPC security groups to be associated with
+    #   the serverless cache. The security group will authorize traffic
+    #   access for the VPC end-point (private-link). If no other information
+    #   is given this will be the VPC’s Default Security Group that is
+    #   associated with the cluster VPC end-point.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] snapshot_arns_to_restore
+    #   The ARN(s) of the snapshot that the new serverless cache will be
+    #   created from. Available for Redis only.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags (key, value) pairs to be added to the serverless
+    #   cache resource. Default is NULL.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] user_group_id
+    #   The identifier of the UserGroup to be associated with the serverless
+    #   cache. Available for Redis only. Default is NULL.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   A list of the identifiers of the subnets where the VPC endpoint for
+    #   the serverless cache will be deployed. All the subnetIds must belong
+    #   to the same VPC.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] snapshot_retention_limit
+    #   The number of snapshots that will be retained for the serverless
+    #   cache that is being created. As new snapshots beyond this limit are
+    #   added, the oldest snapshots will be deleted on a rolling basis.
+    #   Available for Redis only.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] daily_snapshot_time
+    #   The daily time that snapshots will be created from the new
+    #   serverless cache. By default this number is populated with 0, i.e.
+    #   no snapshots will be created on an automatic daily basis. Available
+    #   for Redis only.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateServerlessCacheRequest AWS API Documentation
+    #
+    class CreateServerlessCacheRequest < Struct.new(
+      :serverless_cache_name,
+      :description,
+      :engine,
+      :major_engine_version,
+      :cache_usage_limits,
+      :kms_key_id,
+      :security_group_ids,
+      :snapshot_arns_to_restore,
+      :tags,
+      :user_group_id,
+      :subnet_ids,
+      :snapshot_retention_limit,
+      :daily_snapshot_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache
+    #   The response for the attempt to create the serverless cache.
+    #   @return [Types::ServerlessCache]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateServerlessCacheResponse AWS API Documentation
+    #
+    class CreateServerlessCacheResponse < Struct.new(
+      :serverless_cache)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache_snapshot_name
+    #   The name for the snapshot being created. Must be unique for the
+    #   customer account. Available for Redis only. Must be between 1 and
+    #   255 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] serverless_cache_name
+    #   The name of an existing serverless cache. The snapshot is created
+    #   from this cache. Available for Redis only.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the KMS key used to encrypt the snapshot. Available for
+    #   Redis only. Default: NULL
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags to be added to the snapshot resource. A tag is a
+    #   key-value pair. Available for Redis only.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateServerlessCacheSnapshotRequest AWS API Documentation
+    #
+    class CreateServerlessCacheSnapshotRequest < Struct.new(
+      :serverless_cache_snapshot_name,
+      :serverless_cache_name,
+      :kms_key_id,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache_snapshot
+    #   The state of a serverless cache snapshot at a specific point in
+    #   time, to the millisecond. Available for Redis only.
+    #   @return [Types::ServerlessCacheSnapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateServerlessCacheSnapshotResponse AWS API Documentation
+    #
+    class CreateServerlessCacheSnapshotResponse < Struct.new(
+      :serverless_cache_snapshot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2850,7 +3095,7 @@ module Aws::ElastiCache
     # @!attribute [rw] tags
     #   A list of tags to be added to this resource. A tag is a key-value
     #   pair. A tag key must be accompanied by a tag value, although null is
-    #   accepted.
+    #   accepted. Available for Redis only.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateUserGroupMessage AWS API Documentation
@@ -2929,6 +3174,30 @@ module Aws::ElastiCache
     class CustomerNodeEndpoint < Struct.new(
       :address,
       :port)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data storage limit.
+    #
+    # @!attribute [rw] maximum
+    #   The upper limit for data storage the cache is set to use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum
+    #   The lower limit for data storage the cache is set to use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unit
+    #   The unit that the storage is measured in, in GB.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DataStorage AWS API Documentation
+    #
+    class DataStorage < Struct.new(
+      :maximum,
+      :minimum,
+      :unit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3242,6 +3511,62 @@ module Aws::ElastiCache
     #
     class DeleteReplicationGroupResult < Struct.new(
       :replication_group)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache_name
+    #   The identifier of the serverless cache to be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] final_snapshot_name
+    #   Name of the final snapshot to be taken before the serverless cache
+    #   is deleted. Available for Redis only. Default: NULL, i.e. a final
+    #   snapshot is not taken.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteServerlessCacheRequest AWS API Documentation
+    #
+    class DeleteServerlessCacheRequest < Struct.new(
+      :serverless_cache_name,
+      :final_snapshot_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache
+    #   Provides the details of the specified serverless cache that is about
+    #   to be deleted.
+    #   @return [Types::ServerlessCache]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteServerlessCacheResponse AWS API Documentation
+    #
+    class DeleteServerlessCacheResponse < Struct.new(
+      :serverless_cache)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache_snapshot_name
+    #   Idenfitier of the snapshot to be deleted. Available for Redis only.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteServerlessCacheSnapshotRequest AWS API Documentation
+    #
+    class DeleteServerlessCacheSnapshotRequest < Struct.new(
+      :serverless_cache_snapshot_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache_snapshot
+    #   The snapshot to be deleted. Available for Redis only.
+    #   @return [Types::ServerlessCacheSnapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteServerlessCacheSnapshotResponse AWS API Documentation
+    #
+    class DeleteServerlessCacheSnapshotResponse < Struct.new(
+      :serverless_cache_snapshot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3787,15 +4112,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M7g node types**: `cache.m7g.large`, `cache.m7g.xlarge`,
+    #       `cache.m7g.2xlarge`, `cache.m7g.4xlarge`, `cache.m7g.8xlarge`,
+    #       `cache.m7g.12xlarge`, `cache.m7g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **M6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
-    #
-    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
-    #
-    #        </note>
     #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
@@ -3838,16 +4167,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R6g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
-    #
-    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
-    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
-    #       `cache.r6g.16xlarge`
+    #       **R7g node types**: `cache.r7g.large`, `cache.r7g.xlarge`,
+    #       `cache.r7g.2xlarge`, `cache.r7g.4xlarge`, `cache.r7g.8xlarge`,
+    #       `cache.r7g.12xlarge`, `cache.r7g.16xlarge`
     #
     #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -3963,15 +4295,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M7g node types**: `cache.m7g.large`, `cache.m7g.xlarge`,
+    #       `cache.m7g.2xlarge`, `cache.m7g.4xlarge`, `cache.m7g.8xlarge`,
+    #       `cache.m7g.12xlarge`, `cache.m7g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **M6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
-    #
-    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
-    #
-    #        </note>
     #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
@@ -4014,16 +4350,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R6g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
-    #
-    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
-    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
-    #       `cache.r6g.16xlarge`
+    #       **R7g node types**: `cache.r7g.large`, `cache.r7g.xlarge`,
+    #       `cache.r7g.2xlarge`, `cache.r7g.4xlarge`, `cache.r7g.8xlarge`,
+    #       `cache.r7g.12xlarge`, `cache.r7g.16xlarge`
     #
     #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -4111,6 +4450,121 @@ module Aws::ElastiCache
       :offering_type,
       :max_records,
       :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache_name
+    #   The identifier of serverless cache. If this parameter is specified,
+    #   only snapshots associated with that specific serverless cache are
+    #   described. Available for Redis only.
+    #   @return [String]
+    #
+    # @!attribute [rw] serverless_cache_snapshot_name
+    #   The identifier of the serverless cache’s snapshot. If this parameter
+    #   is specified, only this snapshot is described. Available for Redis
+    #   only.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_type
+    #   The type of snapshot that is being described. Available for Redis
+    #   only.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An optional marker returned from a prior request to support
+    #   pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by max-results. Available for Redis only.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified max-results value, a market is
+    #   included in the response so that remaining results can be retrieved.
+    #   Available for Redis only.The default is 50. The Validation
+    #   Constraints are a maximum of 50.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeServerlessCacheSnapshotsRequest AWS API Documentation
+    #
+    class DescribeServerlessCacheSnapshotsRequest < Struct.new(
+      :serverless_cache_name,
+      :serverless_cache_snapshot_name,
+      :snapshot_type,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   An optional marker returned from a prior request to support
+    #   pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by max-results. Available for Redis only.
+    #   @return [String]
+    #
+    # @!attribute [rw] serverless_cache_snapshots
+    #   The serverless caches snapshots associated with a given description
+    #   request. Available for Redis only.
+    #   @return [Array<Types::ServerlessCacheSnapshot>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeServerlessCacheSnapshotsResponse AWS API Documentation
+    #
+    class DescribeServerlessCacheSnapshotsResponse < Struct.new(
+      :next_token,
+      :serverless_cache_snapshots)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache_name
+    #   The identifier for the serverless cache. If this parameter is
+    #   specified, only information about that specific serverless cache is
+    #   returned. Default: NULL
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of records in the response. If more records exist
+    #   than the specified max-records value, the next token is included in
+    #   the response so that remaining results can be retrieved. The default
+    #   is 50.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An optional marker returned from a prior request to support
+    #   pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by MaxResults.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeServerlessCachesRequest AWS API Documentation
+    #
+    class DescribeServerlessCachesRequest < Struct.new(
+      :serverless_cache_name,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   An optional marker returned from a prior request to support
+    #   pagination of results from this operation. If this parameter is
+    #   specified, the response includes only records beyond the marker, up
+    #   to the value specified by MaxResults.
+    #   @return [String]
+    #
+    # @!attribute [rw] serverless_caches
+    #   The serverless caches associated with a given description request.
+    #   @return [Array<Types::ServerlessCache>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeServerlessCachesResponse AWS API Documentation
+    #
+    class DescribeServerlessCachesResponse < Struct.new(
+      :next_token,
+      :serverless_caches)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4328,7 +4782,7 @@ module Aws::ElastiCache
     #   An optional marker returned from a prior request. Use this marker
     #   for pagination of results from this operation. If this parameter is
     #   specified, the response includes only records beyond the marker, up
-    #   to the value specified by MaxRecords. &gt;
+    #   to the value specified by MaxRecords.&gt;
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeUserGroupsResult AWS API Documentation
@@ -4494,8 +4948,30 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The configuration for the number of ElastiCache Processing Units
+    # (ECPU) the cache can consume per second.
+    #
+    # @!attribute [rw] maximum
+    #   The configuration for the maximum number of ECPUs the cache can
+    #   consume per second.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum
+    #   The configuration for the minimum number of ECPUs the cache should
+    #   be able consume per second.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ECPUPerSecond AWS API Documentation
+    #
+    class ECPUPerSecond < Struct.new(
+      :maximum,
+      :minimum)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the information required for client programs to connect to
-    # a cache node.
+    # a cache node. This value is read-only.
     #
     # @!attribute [rw] address
     #   The DNS hostname of the cache node.
@@ -4601,6 +5077,39 @@ module Aws::ElastiCache
     class EventsMessage < Struct.new(
       :marker,
       :events)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache_snapshot_name
+    #   The identifier of the serverless cache snapshot to be exported to
+    #   S3. Available for Redis only.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   Name of the Amazon S3 bucket to export the snapshot to. The Amazon
+    #   S3 bucket must also be in same region as the snapshot. Available for
+    #   Redis only.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ExportServerlessCacheSnapshotRequest AWS API Documentation
+    #
+    class ExportServerlessCacheSnapshotRequest < Struct.new(
+      :serverless_cache_snapshot_name,
+      :s3_bucket_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache_snapshot
+    #   The state of a serverless cache at a specific point in time, to the
+    #   millisecond. Available for Redis only.
+    #   @return [Types::ServerlessCacheSnapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ExportServerlessCacheSnapshotResponse AWS API Documentation
+    #
+    class ExportServerlessCacheSnapshotResponse < Struct.new(
+      :serverless_cache_snapshot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4994,6 +5503,12 @@ module Aws::ElastiCache
     #
     class InvalidCacheSecurityGroupStateFault < Aws::EmptyStructure; end
 
+    # You must enter valid credentials.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidCredentialsException AWS API Documentation
+    #
+    class InvalidCredentialsException < Aws::EmptyStructure; end
+
     # The Global datastore is not available or in primary-only state.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidGlobalReplicationGroupStateFault AWS API Documentation
@@ -5040,6 +5555,19 @@ module Aws::ElastiCache
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidReplicationGroupStateFault AWS API Documentation
     #
     class InvalidReplicationGroupStateFault < Aws::EmptyStructure; end
+
+    # The state of the serverless cache snapshot was not received. Available
+    # for Redis only.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidServerlessCacheSnapshotStateFault AWS API Documentation
+    #
+    class InvalidServerlessCacheSnapshotStateFault < Aws::EmptyStructure; end
+
+    # The account for these credentials is not currently active.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/InvalidServerlessCacheStateFault AWS API Documentation
+    #
+    class InvalidServerlessCacheStateFault < Aws::EmptyStructure; end
 
     # The current state of the snapshot does not allow the requested
     # operation to occur.
@@ -5548,9 +6076,11 @@ module Aws::ElastiCache
     #   parameter must be specified with the `auth-token` parameter.
     #   Possible values:
     #
-    #   * Rotate
+    #   * ROTATE - default, if no update strategy is provided
     #
-    #   * Set
+    #   * SET - allowed only after ROTATE
+    #
+    #   * DELETE - allowed only when transitioning to RBAC
     #
     #   For more information, see [Authenticating Users with Redis AUTH][1]
     #
@@ -5951,9 +6481,11 @@ module Aws::ElastiCache
     #   parameter must be specified with the `auth-token` parameter.
     #   Possible values:
     #
-    #   * Rotate
+    #   * ROTATE - default, if no update strategy is provided
     #
-    #   * Set
+    #   * SET - allowed only after ROTATE
+    #
+    #   * DELETE - allowed only when transitioning to RBAC
     #
     #   For more information, see [Authenticating Users with Redis AUTH][1]
     #
@@ -6151,6 +6683,82 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # @!attribute [rw] serverless_cache_name
+    #   User-provided identifier for the serverless cache to be modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   User provided description for the serverless cache. Default = NULL,
+    #   i.e. the existing description is not removed/modified. The
+    #   description has a maximum length of 255 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_usage_limits
+    #   Modify the cache usage limit for the serverless cache.
+    #   @return [Types::CacheUsageLimits]
+    #
+    # @!attribute [rw] remove_user_group
+    #   The identifier of the UserGroup to be removed from association with
+    #   the Redis serverless cache. Available for Redis only. Default is
+    #   NULL.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] user_group_id
+    #   The identifier of the UserGroup to be associated with the serverless
+    #   cache. Available for Redis only. Default is NULL - the existing
+    #   UserGroup is not removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The new list of VPC security groups to be associated with the
+    #   serverless cache. Populating this list means the current VPC
+    #   security groups will be removed. This security group is used to
+    #   authorize traffic access for the VPC end-point (private-link).
+    #   Default = NULL - the existing list of VPC security groups is not
+    #   removed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] snapshot_retention_limit
+    #   The number of days for which Elasticache retains automatic snapshots
+    #   before deleting them. Available for Redis only. Default = NULL, i.e.
+    #   the existing snapshot-retention-limit will not be removed or
+    #   modified. The maximum value allowed is 35 days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] daily_snapshot_time
+    #   The daily time during which Elasticache begins taking a daily
+    #   snapshot of the serverless cache. Available for Redis only. The
+    #   default is NULL, i.e. the existing snapshot time configured for the
+    #   cluster is not removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyServerlessCacheRequest AWS API Documentation
+    #
+    class ModifyServerlessCacheRequest < Struct.new(
+      :serverless_cache_name,
+      :description,
+      :cache_usage_limits,
+      :remove_user_group,
+      :user_group_id,
+      :security_group_ids,
+      :snapshot_retention_limit,
+      :daily_snapshot_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] serverless_cache
+    #   The response for the attempt to modify the serverless cache.
+    #   @return [Types::ServerlessCache]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyServerlessCacheResponse AWS API Documentation
+    #
+    class ModifyServerlessCacheResponse < Struct.new(
+      :serverless_cache)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_group_id
     #   The ID of the user group.
     #   @return [String]
@@ -6238,7 +6846,8 @@ module Aws::ElastiCache
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] reader_endpoint
-    #   The endpoint of the replica nodes in this node group (shard).
+    #   The endpoint of the replica nodes in this node group (shard). This
+    #   value is read-only.
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] slots
@@ -7323,15 +7932,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M7g node types**: `cache.m7g.large`, `cache.m7g.xlarge`,
+    #       `cache.m7g.2xlarge`, `cache.m7g.4xlarge`, `cache.m7g.8xlarge`,
+    #       `cache.m7g.12xlarge`, `cache.m7g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **M6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
-    #
-    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
-    #
-    #        </note>
     #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
@@ -7374,16 +7987,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R6g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
-    #
-    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
-    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
-    #       `cache.r6g.16xlarge`
+    #       **R7g node types**: `cache.r7g.large`, `cache.r7g.xlarge`,
+    #       `cache.r7g.2xlarge`, `cache.r7g.4xlarge`, `cache.r7g.8xlarge`,
+    #       `cache.r7g.12xlarge`, `cache.r7g.16xlarge`
     #
     #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -7542,15 +8158,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M7g node types**: `cache.m7g.large`, `cache.m7g.xlarge`,
+    #       `cache.m7g.2xlarge`, `cache.m7g.4xlarge`, `cache.m7g.8xlarge`,
+    #       `cache.m7g.12xlarge`, `cache.m7g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **M6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
-    #
-    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
-    #
-    #        </note>
     #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
@@ -7593,16 +8213,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R6g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
-    #
-    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
-    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
-    #       `cache.r6g.16xlarge`
+    #       **R7g node types**: `cache.r7g.large`, `cache.r7g.xlarge`,
+    #       `cache.r7g.2xlarge`, `cache.r7g.4xlarge`, `cache.r7g.8xlarge`,
+    #       `cache.r7g.12xlarge`, `cache.r7g.16xlarge`
     #
     #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -7839,6 +8462,242 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # The resource representing a serverless cache.
+    #
+    # @!attribute [rw] serverless_cache_name
+    #   The unique identifier of the serverless cache.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the serverless cache.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   When the serverless cache was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the serverless cache. The allowed values are
+    #   CREATING, AVAILABLE, DELETING, CREATE-FAILED and MODIFYING.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The engine the serverless cache is compatible with.
+    #   @return [String]
+    #
+    # @!attribute [rw] major_engine_version
+    #   The version number of the engine the serverless cache is compatible
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] full_engine_version
+    #   The name and version number of the engine the serverless cache is
+    #   compatible with.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_usage_limits
+    #   The cache usage limit for the serverless cache.
+    #   @return [Types::CacheUsageLimits]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the Amazon Web Services Key Management Service (KMS) key
+    #   that is used to encrypt data at rest in the serverless cache.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the EC2 security groups associated with the serverless
+    #   cache.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] endpoint
+    #   Represents the information required for client programs to connect
+    #   to a cache node. This value is read-only.
+    #   @return [Types::Endpoint]
+    #
+    # @!attribute [rw] reader_endpoint
+    #   Represents the information required for client programs to connect
+    #   to a cache node. This value is read-only.
+    #   @return [Types::Endpoint]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the serverless cache.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_group_id
+    #   The identifier of the user group associated with the serverless
+    #   cache. Available for Redis only. Default is NULL.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   If no subnet IDs are given and your VPC is in us-west-1, then
+    #   ElastiCache will select 2 default subnets across AZs in your VPC.
+    #   For all other Regions, if no subnet IDs are given then ElastiCache
+    #   will select 3 default subnets across AZs in your default VPC.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] snapshot_retention_limit
+    #   The current setting for the number of serverless cache snapshots the
+    #   system will retain. Available for Redis only.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] daily_snapshot_time
+    #   The daily time that a cache snapshot will be created. Default is
+    #   NULL, i.e. snapshots will not be created at a specific time on a
+    #   daily basis. Available for Redis only.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCache AWS API Documentation
+    #
+    class ServerlessCache < Struct.new(
+      :serverless_cache_name,
+      :description,
+      :create_time,
+      :status,
+      :engine,
+      :major_engine_version,
+      :full_engine_version,
+      :cache_usage_limits,
+      :kms_key_id,
+      :security_group_ids,
+      :endpoint,
+      :reader_endpoint,
+      :arn,
+      :user_group_id,
+      :subnet_ids,
+      :snapshot_retention_limit,
+      :daily_snapshot_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A serverless cache with this name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCacheAlreadyExistsFault AWS API Documentation
+    #
+    class ServerlessCacheAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # The configuration settings for a specific serverless cache.
+    #
+    # @!attribute [rw] serverless_cache_name
+    #   The identifier of a serverless cache.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The engine that the serverless cache is configured with.
+    #   @return [String]
+    #
+    # @!attribute [rw] major_engine_version
+    #   The engine version number that the serverless cache is configured
+    #   with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCacheConfiguration AWS API Documentation
+    #
+    class ServerlessCacheConfiguration < Struct.new(
+      :serverless_cache_name,
+      :engine,
+      :major_engine_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The serverless cache was not found or does not exist.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCacheNotFoundFault AWS API Documentation
+    #
+    class ServerlessCacheNotFoundFault < Aws::EmptyStructure; end
+
+    # The number of serverless caches exceeds the customer quota.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCacheQuotaForCustomerExceededFault AWS API Documentation
+    #
+    class ServerlessCacheQuotaForCustomerExceededFault < Aws::EmptyStructure; end
+
+    # The resource representing a serverless cache snapshot. Available for
+    # Redis only.
+    #
+    # @!attribute [rw] serverless_cache_snapshot_name
+    #   The identifier of a serverless cache snapshot. Available for Redis
+    #   only.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of a serverless cache snapshot.
+    #   Available for Redis only.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ID of the Amazon Web Services Key Management Service (KMS) key
+    #   of a serverless cache snapshot. Available for Redis only.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_type
+    #   The type of snapshot of serverless cache. Available for Redis only.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the serverless cache. Available for Redis
+    #   only.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The date and time that the source serverless cache's metadata and
+    #   cache data set was obtained for the snapshot. Available for Redis
+    #   only.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiry_time
+    #   The time that the serverless cache snapshot will expire. Available
+    #   for Redis only.
+    #   @return [Time]
+    #
+    # @!attribute [rw] bytes_used_for_cache
+    #   The total size of a serverless cache snapshot, in bytes. Available
+    #   for Redis only.
+    #   @return [String]
+    #
+    # @!attribute [rw] serverless_cache_configuration
+    #   The configuration of the serverless cache, at the time the snapshot
+    #   was taken. Available for Redis only.
+    #   @return [Types::ServerlessCacheConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCacheSnapshot AWS API Documentation
+    #
+    class ServerlessCacheSnapshot < Struct.new(
+      :serverless_cache_snapshot_name,
+      :arn,
+      :kms_key_id,
+      :snapshot_type,
+      :status,
+      :create_time,
+      :expiry_time,
+      :bytes_used_for_cache,
+      :serverless_cache_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A serverless cache snapshot with this name already exists. Available
+    # for Redis only.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCacheSnapshotAlreadyExistsFault AWS API Documentation
+    #
+    class ServerlessCacheSnapshotAlreadyExistsFault < Aws::EmptyStructure; end
+
+    # This serverless cache snapshot could not be found or does not exist.
+    # Available for Redis only.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCacheSnapshotNotFoundFault AWS API Documentation
+    #
+    class ServerlessCacheSnapshotNotFoundFault < Aws::EmptyStructure; end
+
+    # The number of serverless cache snapshots exceeds the customer snapshot
+    # quota. Available for Redis only.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServerlessCacheSnapshotQuotaExceededFault AWS API Documentation
+    #
+    class ServerlessCacheSnapshotQuotaExceededFault < Aws::EmptyStructure; end
+
     # The specified service linked role (SLR) was not found.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ServiceLinkedRoleNotFoundFault AWS API Documentation
@@ -8007,15 +8866,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
+    #       **M7g node types**: `cache.m7g.large`, `cache.m7g.xlarge`,
+    #       `cache.m7g.2xlarge`, `cache.m7g.4xlarge`, `cache.m7g.8xlarge`,
+    #       `cache.m7g.12xlarge`, `cache.m7g.16xlarge`
+    #
+    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
+    #
+    #        </note>
+    #
     #       **M6g node types** (available only for Redis engine version
     #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
     #       `cache.m6g.large`, `cache.m6g.xlarge`, `cache.m6g.2xlarge`,
     #       `cache.m6g.4xlarge`, `cache.m6g.8xlarge`, `cache.m6g.12xlarge`,
     #       `cache.m6g.16xlarge`
-    #
-    #       <note markdown="1"> For region availability, see [Supported Node Types][1]
-    #
-    #        </note>
     #
     #       **M5 node types:** `cache.m5.large`, `cache.m5.xlarge`,
     #       `cache.m5.2xlarge`, `cache.m5.4xlarge`, `cache.m5.12xlarge`,
@@ -8058,16 +8921,19 @@ module Aws::ElastiCache
     #
     #     * Current generation:
     #
-    #       **R6g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward).
-    #
-    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
-    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
-    #       `cache.r6g.16xlarge`
+    #       **R7g node types**: `cache.r7g.large`, `cache.r7g.xlarge`,
+    #       `cache.r7g.2xlarge`, `cache.r7g.4xlarge`, `cache.r7g.8xlarge`,
+    #       `cache.r7g.12xlarge`, `cache.r7g.16xlarge`
     #
     #       <note markdown="1"> For region availability, see [Supported Node Types][1]
     #
     #        </note>
+    #
+    #       **R6g node types** (available only for Redis engine version
+    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
+    #       `cache.r6g.large`, `cache.r6g.xlarge`, `cache.r6g.2xlarge`,
+    #       `cache.r6g.4xlarge`, `cache.r6g.8xlarge`, `cache.r6g.12xlarge`,
+    #       `cache.r6g.16xlarge`
     #
     #       **R5 node types:** `cache.r5.large`, `cache.r5.xlarge`,
     #       `cache.r5.2xlarge`, `cache.r5.4xlarge`, `cache.r5.12xlarge`,
@@ -8470,7 +9336,7 @@ module Aws::ElastiCache
     # @!attribute [rw] node_group_id
     #   The name of the node group (called shard in the console) in this
     #   replication group on which automatic failover is to be tested. You
-    #   may test automatic failover on up to 5 node groups in any rolling
+    #   may test automatic failover on up to 15 node groups in any rolling
     #   24-hour period.
     #   @return [String]
     #
@@ -8819,6 +9685,11 @@ module Aws::ElastiCache
     #   A list of replication groups that the user group can access.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] serverless_caches
+    #   Indicates which serverless caches the specified user group is
+    #   associated with. Available for Redis only.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the user group.
     #   @return [String]
@@ -8833,6 +9704,7 @@ module Aws::ElastiCache
       :minimum_engine_version,
       :pending_changes,
       :replication_groups,
+      :serverless_caches,
       :arn)
       SENSITIVE = []
       include Aws::Structure

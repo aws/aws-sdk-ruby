@@ -1,0 +1,491 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Signer
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class AddProfilePermissionRequest
+      attr_accessor profile_name: ::String
+      attr_accessor profile_version: ::String
+      attr_accessor action: ::String
+      attr_accessor principal: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor statement_id: ::String
+      SENSITIVE: []
+    end
+
+    class AddProfilePermissionResponse
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class BadRequestException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class CancelSigningProfileRequest
+      attr_accessor profile_name: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSigningJobRequest
+      attr_accessor job_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeSigningJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor source: Types::Source
+      attr_accessor signing_material: Types::SigningMaterial
+      attr_accessor platform_id: ::String
+      attr_accessor platform_display_name: ::String
+      attr_accessor profile_name: ::String
+      attr_accessor profile_version: ::String
+      attr_accessor overrides: Types::SigningPlatformOverrides
+      attr_accessor signing_parameters: ::Hash[::String, ::String]
+      attr_accessor created_at: ::Time
+      attr_accessor completed_at: ::Time
+      attr_accessor signature_expires_at: ::Time
+      attr_accessor requested_by: ::String
+      attr_accessor status: ("InProgress" | "Failed" | "Succeeded")
+      attr_accessor status_reason: ::String
+      attr_accessor revocation_record: Types::SigningJobRevocationRecord
+      attr_accessor signed_object: Types::SignedObject
+      attr_accessor job_owner: ::String
+      attr_accessor job_invoker: ::String
+      SENSITIVE: []
+    end
+
+    class Destination
+      attr_accessor s3: Types::S3Destination
+      SENSITIVE: []
+    end
+
+    class EncryptionAlgorithmOptions
+      attr_accessor allowed_values: ::Array[("RSA" | "ECDSA")]
+      attr_accessor default_value: ("RSA" | "ECDSA")
+      SENSITIVE: []
+    end
+
+    class GetRevocationStatusRequest
+      attr_accessor signature_timestamp: ::Time
+      attr_accessor platform_id: ::String
+      attr_accessor profile_version_arn: ::String
+      attr_accessor job_arn: ::String
+      attr_accessor certificate_hashes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetRevocationStatusResponse
+      attr_accessor revoked_entities: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetSigningPlatformRequest
+      attr_accessor platform_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSigningPlatformResponse
+      attr_accessor platform_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor partner: ::String
+      attr_accessor target: ::String
+      attr_accessor category: ("AWSIoT")
+      attr_accessor signing_configuration: Types::SigningConfiguration
+      attr_accessor signing_image_format: Types::SigningImageFormat
+      attr_accessor max_size_in_mb: ::Integer
+      attr_accessor revocation_supported: bool
+      SENSITIVE: []
+    end
+
+    class GetSigningProfileRequest
+      attr_accessor profile_name: ::String
+      attr_accessor profile_owner: ::String
+      SENSITIVE: []
+    end
+
+    class GetSigningProfileResponse
+      attr_accessor profile_name: ::String
+      attr_accessor profile_version: ::String
+      attr_accessor profile_version_arn: ::String
+      attr_accessor revocation_record: Types::SigningProfileRevocationRecord
+      attr_accessor signing_material: Types::SigningMaterial
+      attr_accessor platform_id: ::String
+      attr_accessor platform_display_name: ::String
+      attr_accessor signature_validity_period: Types::SignatureValidityPeriod
+      attr_accessor overrides: Types::SigningPlatformOverrides
+      attr_accessor signing_parameters: ::Hash[::String, ::String]
+      attr_accessor status: ("Active" | "Canceled" | "Revoked")
+      attr_accessor status_reason: ::String
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class HashAlgorithmOptions
+      attr_accessor allowed_values: ::Array[("SHA1" | "SHA256")]
+      attr_accessor default_value: ("SHA1" | "SHA256")
+      SENSITIVE: []
+    end
+
+    class InternalServiceErrorException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfilePermissionsRequest
+      attr_accessor profile_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProfilePermissionsResponse
+      attr_accessor revision_id: ::String
+      attr_accessor policy_size_bytes: ::Integer
+      attr_accessor permissions: ::Array[Types::Permission]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSigningJobsRequest
+      attr_accessor status: ("InProgress" | "Failed" | "Succeeded")
+      attr_accessor platform_id: ::String
+      attr_accessor requested_by: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor is_revoked: bool
+      attr_accessor signature_expires_before: ::Time
+      attr_accessor signature_expires_after: ::Time
+      attr_accessor job_invoker: ::String
+      SENSITIVE: []
+    end
+
+    class ListSigningJobsResponse
+      attr_accessor jobs: ::Array[Types::SigningJob]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSigningPlatformsRequest
+      attr_accessor category: ::String
+      attr_accessor partner: ::String
+      attr_accessor target: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSigningPlatformsResponse
+      attr_accessor platforms: ::Array[Types::SigningPlatform]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSigningProfilesRequest
+      attr_accessor include_canceled: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor platform_id: ::String
+      attr_accessor statuses: ::Array[("Active" | "Canceled" | "Revoked")]
+      SENSITIVE: []
+    end
+
+    class ListSigningProfilesResponse
+      attr_accessor profiles: ::Array[Types::SigningProfile]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NotFoundException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class Permission
+      attr_accessor action: ::String
+      attr_accessor principal: ::String
+      attr_accessor statement_id: ::String
+      attr_accessor profile_version: ::String
+      SENSITIVE: []
+    end
+
+    class PutSigningProfileRequest
+      attr_accessor profile_name: ::String
+      attr_accessor signing_material: Types::SigningMaterial
+      attr_accessor signature_validity_period: Types::SignatureValidityPeriod
+      attr_accessor platform_id: ::String
+      attr_accessor overrides: Types::SigningPlatformOverrides
+      attr_accessor signing_parameters: ::Hash[::String, ::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class PutSigningProfileResponse
+      attr_accessor arn: ::String
+      attr_accessor profile_version: ::String
+      attr_accessor profile_version_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveProfilePermissionRequest
+      attr_accessor profile_name: ::String
+      attr_accessor revision_id: ::String
+      attr_accessor statement_id: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveProfilePermissionResponse
+      attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeSignatureRequest
+      attr_accessor job_id: ::String
+      attr_accessor job_owner: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeSigningProfileRequest
+      attr_accessor profile_name: ::String
+      attr_accessor profile_version: ::String
+      attr_accessor reason: ::String
+      attr_accessor effective_time: ::Time
+      SENSITIVE: []
+    end
+
+    class S3Destination
+      attr_accessor bucket_name: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class S3SignedObject
+      attr_accessor bucket_name: ::String
+      attr_accessor key: ::String
+      SENSITIVE: []
+    end
+
+    class S3Source
+      attr_accessor bucket_name: ::String
+      attr_accessor key: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceLimitExceededException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class SignPayloadRequest
+      attr_accessor profile_name: ::String
+      attr_accessor profile_owner: ::String
+      attr_accessor payload: ::String
+      attr_accessor payload_format: ::String
+      SENSITIVE: []
+    end
+
+    class SignPayloadResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_owner: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor signature: ::String
+      SENSITIVE: []
+    end
+
+    class SignatureValidityPeriod
+      attr_accessor value: ::Integer
+      attr_accessor type: ("DAYS" | "MONTHS" | "YEARS")
+      SENSITIVE: []
+    end
+
+    class SignedObject
+      attr_accessor s3: Types::S3SignedObject
+      SENSITIVE: []
+    end
+
+    class SigningConfiguration
+      attr_accessor encryption_algorithm_options: Types::EncryptionAlgorithmOptions
+      attr_accessor hash_algorithm_options: Types::HashAlgorithmOptions
+      SENSITIVE: []
+    end
+
+    class SigningConfigurationOverrides
+      attr_accessor encryption_algorithm: ("RSA" | "ECDSA")
+      attr_accessor hash_algorithm: ("SHA1" | "SHA256")
+      SENSITIVE: []
+    end
+
+    class SigningImageFormat
+      attr_accessor supported_formats: ::Array[("JSON" | "JSONEmbedded" | "JSONDetached")]
+      attr_accessor default_format: ("JSON" | "JSONEmbedded" | "JSONDetached")
+      SENSITIVE: []
+    end
+
+    class SigningJob
+      attr_accessor job_id: ::String
+      attr_accessor source: Types::Source
+      attr_accessor signed_object: Types::SignedObject
+      attr_accessor signing_material: Types::SigningMaterial
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("InProgress" | "Failed" | "Succeeded")
+      attr_accessor is_revoked: bool
+      attr_accessor profile_name: ::String
+      attr_accessor profile_version: ::String
+      attr_accessor platform_id: ::String
+      attr_accessor platform_display_name: ::String
+      attr_accessor signature_expires_at: ::Time
+      attr_accessor job_owner: ::String
+      attr_accessor job_invoker: ::String
+      SENSITIVE: []
+    end
+
+    class SigningJobRevocationRecord
+      attr_accessor reason: ::String
+      attr_accessor revoked_at: ::Time
+      attr_accessor revoked_by: ::String
+      SENSITIVE: []
+    end
+
+    class SigningMaterial
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SigningPlatform
+      attr_accessor platform_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor partner: ::String
+      attr_accessor target: ::String
+      attr_accessor category: ("AWSIoT")
+      attr_accessor signing_configuration: Types::SigningConfiguration
+      attr_accessor signing_image_format: Types::SigningImageFormat
+      attr_accessor max_size_in_mb: ::Integer
+      attr_accessor revocation_supported: bool
+      SENSITIVE: []
+    end
+
+    class SigningPlatformOverrides
+      attr_accessor signing_configuration: Types::SigningConfigurationOverrides
+      attr_accessor signing_image_format: ("JSON" | "JSONEmbedded" | "JSONDetached")
+      SENSITIVE: []
+    end
+
+    class SigningProfile
+      attr_accessor profile_name: ::String
+      attr_accessor profile_version: ::String
+      attr_accessor profile_version_arn: ::String
+      attr_accessor signing_material: Types::SigningMaterial
+      attr_accessor signature_validity_period: Types::SignatureValidityPeriod
+      attr_accessor platform_id: ::String
+      attr_accessor platform_display_name: ::String
+      attr_accessor signing_parameters: ::Hash[::String, ::String]
+      attr_accessor status: ("Active" | "Canceled" | "Revoked")
+      attr_accessor arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class SigningProfileRevocationRecord
+      attr_accessor revocation_effective_from: ::Time
+      attr_accessor revoked_at: ::Time
+      attr_accessor revoked_by: ::String
+      SENSITIVE: []
+    end
+
+    class Source
+      attr_accessor s3: Types::S3Source
+      SENSITIVE: []
+    end
+
+    class StartSigningJobRequest
+      attr_accessor source: Types::Source
+      attr_accessor destination: Types::Destination
+      attr_accessor profile_name: ::String
+      attr_accessor client_request_token: ::String
+      attr_accessor profile_owner: ::String
+      SENSITIVE: []
+    end
+
+    class StartSigningJobResponse
+      attr_accessor job_id: ::String
+      attr_accessor job_owner: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class TooManyRequestsException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+  end
+end

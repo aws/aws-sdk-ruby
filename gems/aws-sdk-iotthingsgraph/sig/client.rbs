@@ -1,0 +1,542 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTThingsGraph
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateEntityToThingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateEntityToThingResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#associate_entity_to_thing-instance_method
+      def associate_entity_to_thing: (
+                                       thing_name: ::String,
+                                       entity_id: ::String,
+                                       ?namespace_version: ::Integer
+                                     ) -> _AssociateEntityToThingResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateEntityToThingResponseSuccess
+
+      interface _CreateFlowTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFlowTemplateResponse]
+        def summary: () -> Types::FlowTemplateSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#create_flow_template-instance_method
+      def create_flow_template: (
+                                  definition: {
+                                    language: ("GRAPHQL"),
+                                    text: ::String
+                                  },
+                                  ?compatible_namespace_version: ::Integer
+                                ) -> _CreateFlowTemplateResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFlowTemplateResponseSuccess
+
+      interface _CreateSystemInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSystemInstanceResponse]
+        def summary: () -> Types::SystemInstanceSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#create_system_instance-instance_method
+      def create_system_instance: (
+                                    ?tags: Array[
+                                      {
+                                        key: ::String,
+                                        value: ::String
+                                      },
+                                    ],
+                                    definition: {
+                                      language: ("GRAPHQL"),
+                                      text: ::String
+                                    },
+                                    target: ("GREENGRASS" | "CLOUD"),
+                                    ?greengrass_group_name: ::String,
+                                    ?s3_bucket_name: ::String,
+                                    ?metrics_configuration: {
+                                      cloud_metric_enabled: bool?,
+                                      metric_rule_role_arn: ::String?
+                                    },
+                                    ?flow_actions_role_arn: ::String
+                                  ) -> _CreateSystemInstanceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSystemInstanceResponseSuccess
+
+      interface _CreateSystemTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSystemTemplateResponse]
+        def summary: () -> Types::SystemTemplateSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#create_system_template-instance_method
+      def create_system_template: (
+                                    definition: {
+                                      language: ("GRAPHQL"),
+                                      text: ::String
+                                    },
+                                    ?compatible_namespace_version: ::Integer
+                                  ) -> _CreateSystemTemplateResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSystemTemplateResponseSuccess
+
+      interface _DeleteFlowTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFlowTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#delete_flow_template-instance_method
+      def delete_flow_template: (
+                                  id: ::String
+                                ) -> _DeleteFlowTemplateResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFlowTemplateResponseSuccess
+
+      interface _DeleteNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNamespaceResponse]
+        def namespace_arn: () -> ::String
+        def namespace_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#delete_namespace-instance_method
+      def delete_namespace: (
+                            ) -> _DeleteNamespaceResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNamespaceResponseSuccess
+
+      interface _DeleteSystemInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSystemInstanceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#delete_system_instance-instance_method
+      def delete_system_instance: (
+                                    ?id: ::String
+                                  ) -> _DeleteSystemInstanceResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSystemInstanceResponseSuccess
+
+      interface _DeleteSystemTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSystemTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#delete_system_template-instance_method
+      def delete_system_template: (
+                                    id: ::String
+                                  ) -> _DeleteSystemTemplateResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSystemTemplateResponseSuccess
+
+      interface _DeploySystemInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeploySystemInstanceResponse]
+        def summary: () -> Types::SystemInstanceSummary
+        def greengrass_deployment_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#deploy_system_instance-instance_method
+      def deploy_system_instance: (
+                                    ?id: ::String
+                                  ) -> _DeploySystemInstanceResponseSuccess
+                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeploySystemInstanceResponseSuccess
+
+      interface _DeprecateFlowTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeprecateFlowTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#deprecate_flow_template-instance_method
+      def deprecate_flow_template: (
+                                     id: ::String
+                                   ) -> _DeprecateFlowTemplateResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeprecateFlowTemplateResponseSuccess
+
+      interface _DeprecateSystemTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeprecateSystemTemplateResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#deprecate_system_template-instance_method
+      def deprecate_system_template: (
+                                       id: ::String
+                                     ) -> _DeprecateSystemTemplateResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeprecateSystemTemplateResponseSuccess
+
+      interface _DescribeNamespaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeNamespaceResponse]
+        def namespace_arn: () -> ::String
+        def namespace_name: () -> ::String
+        def tracking_namespace_name: () -> ::String
+        def tracking_namespace_version: () -> ::Integer
+        def namespace_version: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#describe_namespace-instance_method
+      def describe_namespace: (
+                                ?namespace_name: ::String
+                              ) -> _DescribeNamespaceResponseSuccess
+                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeNamespaceResponseSuccess
+
+      interface _DissociateEntityFromThingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DissociateEntityFromThingResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#dissociate_entity_from_thing-instance_method
+      def dissociate_entity_from_thing: (
+                                          thing_name: ::String,
+                                          entity_type: ("DEVICE" | "SERVICE" | "DEVICE_MODEL" | "CAPABILITY" | "STATE" | "ACTION" | "EVENT" | "PROPERTY" | "MAPPING" | "ENUM")
+                                        ) -> _DissociateEntityFromThingResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DissociateEntityFromThingResponseSuccess
+
+      interface _GetEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEntitiesResponse]
+        def descriptions: () -> ::Array[Types::EntityDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#get_entities-instance_method
+      def get_entities: (
+                          ids: Array[::String],
+                          ?namespace_version: ::Integer
+                        ) -> _GetEntitiesResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEntitiesResponseSuccess
+
+      interface _GetFlowTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFlowTemplateResponse]
+        def description: () -> Types::FlowTemplateDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#get_flow_template-instance_method
+      def get_flow_template: (
+                               id: ::String,
+                               ?revision_number: ::Integer
+                             ) -> _GetFlowTemplateResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFlowTemplateResponseSuccess
+
+      interface _GetFlowTemplateRevisionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFlowTemplateRevisionsResponse]
+        def summaries: () -> ::Array[Types::FlowTemplateSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#get_flow_template_revisions-instance_method
+      def get_flow_template_revisions: (
+                                         id: ::String,
+                                         ?next_token: ::String,
+                                         ?max_results: ::Integer
+                                       ) -> _GetFlowTemplateRevisionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFlowTemplateRevisionsResponseSuccess
+
+      interface _GetNamespaceDeletionStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNamespaceDeletionStatusResponse]
+        def namespace_arn: () -> ::String
+        def namespace_name: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def error_code: () -> ("VALIDATION_FAILED")
+        def error_message: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#get_namespace_deletion_status-instance_method
+      def get_namespace_deletion_status: (
+                                         ) -> _GetNamespaceDeletionStatusResponseSuccess
+                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNamespaceDeletionStatusResponseSuccess
+
+      interface _GetSystemInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSystemInstanceResponse]
+        def description: () -> Types::SystemInstanceDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#get_system_instance-instance_method
+      def get_system_instance: (
+                                 id: ::String
+                               ) -> _GetSystemInstanceResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSystemInstanceResponseSuccess
+
+      interface _GetSystemTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSystemTemplateResponse]
+        def description: () -> Types::SystemTemplateDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#get_system_template-instance_method
+      def get_system_template: (
+                                 id: ::String,
+                                 ?revision_number: ::Integer
+                               ) -> _GetSystemTemplateResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSystemTemplateResponseSuccess
+
+      interface _GetSystemTemplateRevisionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSystemTemplateRevisionsResponse]
+        def summaries: () -> ::Array[Types::SystemTemplateSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#get_system_template_revisions-instance_method
+      def get_system_template_revisions: (
+                                           id: ::String,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _GetSystemTemplateRevisionsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSystemTemplateRevisionsResponseSuccess
+
+      interface _GetUploadStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetUploadStatusResponse]
+        def upload_id: () -> ::String
+        def upload_status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def namespace_arn: () -> ::String
+        def namespace_name: () -> ::String
+        def namespace_version: () -> ::Integer
+        def failure_reason: () -> ::Array[::String]
+        def created_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#get_upload_status-instance_method
+      def get_upload_status: (
+                               upload_id: ::String
+                             ) -> _GetUploadStatusResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUploadStatusResponseSuccess
+
+      interface _ListFlowExecutionMessagesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFlowExecutionMessagesResponse]
+        def messages: () -> ::Array[Types::FlowExecutionMessage]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#list_flow_execution_messages-instance_method
+      def list_flow_execution_messages: (
+                                          flow_execution_id: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListFlowExecutionMessagesResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFlowExecutionMessagesResponseSuccess
+
+      interface _ListTagsForResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
+        def tags: () -> ::Array[Types::Tag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#list_tags_for_resource-instance_method
+      def list_tags_for_resource: (
+                                    ?max_results: ::Integer,
+                                    resource_arn: ::String,
+                                    ?next_token: ::String
+                                  ) -> _ListTagsForResourceResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
+
+      interface _SearchEntitiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchEntitiesResponse]
+        def descriptions: () -> ::Array[Types::EntityDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#search_entities-instance_method
+      def search_entities: (
+                             entity_types: Array[("DEVICE" | "SERVICE" | "DEVICE_MODEL" | "CAPABILITY" | "STATE" | "ACTION" | "EVENT" | "PROPERTY" | "MAPPING" | "ENUM")],
+                             ?filters: Array[
+                               {
+                                 name: ("NAME" | "NAMESPACE" | "SEMANTIC_TYPE_PATH" | "REFERENCED_ENTITY_ID")?,
+                                 value: Array[::String]?
+                               },
+                             ],
+                             ?next_token: ::String,
+                             ?max_results: ::Integer,
+                             ?namespace_version: ::Integer
+                           ) -> _SearchEntitiesResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchEntitiesResponseSuccess
+
+      interface _SearchFlowExecutionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchFlowExecutionsResponse]
+        def summaries: () -> ::Array[Types::FlowExecutionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#search_flow_executions-instance_method
+      def search_flow_executions: (
+                                    system_instance_id: ::String,
+                                    ?flow_execution_id: ::String,
+                                    ?start_time: ::Time,
+                                    ?end_time: ::Time,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _SearchFlowExecutionsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchFlowExecutionsResponseSuccess
+
+      interface _SearchFlowTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchFlowTemplatesResponse]
+        def summaries: () -> ::Array[Types::FlowTemplateSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#search_flow_templates-instance_method
+      def search_flow_templates: (
+                                   ?filters: Array[
+                                     {
+                                       name: ("DEVICE_MODEL_ID"),
+                                       value: Array[::String]
+                                     },
+                                   ],
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _SearchFlowTemplatesResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchFlowTemplatesResponseSuccess
+
+      interface _SearchSystemInstancesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchSystemInstancesResponse]
+        def summaries: () -> ::Array[Types::SystemInstanceSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#search_system_instances-instance_method
+      def search_system_instances: (
+                                     ?filters: Array[
+                                       {
+                                         name: ("SYSTEM_TEMPLATE_ID" | "STATUS" | "GREENGRASS_GROUP_NAME")?,
+                                         value: Array[::String]?
+                                       },
+                                     ],
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _SearchSystemInstancesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchSystemInstancesResponseSuccess
+
+      interface _SearchSystemTemplatesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchSystemTemplatesResponse]
+        def summaries: () -> ::Array[Types::SystemTemplateSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#search_system_templates-instance_method
+      def search_system_templates: (
+                                     ?filters: Array[
+                                       {
+                                         name: ("FLOW_TEMPLATE_ID"),
+                                         value: Array[::String]
+                                       },
+                                     ],
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _SearchSystemTemplatesResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchSystemTemplatesResponseSuccess
+
+      interface _SearchThingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchThingsResponse]
+        def things: () -> ::Array[Types::Thing]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#search_things-instance_method
+      def search_things: (
+                           entity_id: ::String,
+                           ?next_token: ::String,
+                           ?max_results: ::Integer,
+                           ?namespace_version: ::Integer
+                         ) -> _SearchThingsResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchThingsResponseSuccess
+
+      interface _TagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#tag_resource-instance_method
+      def tag_resource: (
+                          resource_arn: ::String,
+                          tags: Array[
+                            {
+                              key: ::String,
+                              value: ::String
+                            },
+                          ]
+                        ) -> _TagResourceResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
+
+      interface _UndeploySystemInstanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UndeploySystemInstanceResponse]
+        def summary: () -> Types::SystemInstanceSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#undeploy_system_instance-instance_method
+      def undeploy_system_instance: (
+                                      ?id: ::String
+                                    ) -> _UndeploySystemInstanceResponseSuccess
+                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UndeploySystemInstanceResponseSuccess
+
+      interface _UntagResourceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UntagResourceResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#untag_resource-instance_method
+      def untag_resource: (
+                            resource_arn: ::String,
+                            tag_keys: Array[::String]
+                          ) -> _UntagResourceResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateFlowTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFlowTemplateResponse]
+        def summary: () -> Types::FlowTemplateSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#update_flow_template-instance_method
+      def update_flow_template: (
+                                  id: ::String,
+                                  definition: {
+                                    language: ("GRAPHQL"),
+                                    text: ::String
+                                  },
+                                  ?compatible_namespace_version: ::Integer
+                                ) -> _UpdateFlowTemplateResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFlowTemplateResponseSuccess
+
+      interface _UpdateSystemTemplateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSystemTemplateResponse]
+        def summary: () -> Types::SystemTemplateSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#update_system_template-instance_method
+      def update_system_template: (
+                                    id: ::String,
+                                    definition: {
+                                      language: ("GRAPHQL"),
+                                      text: ::String
+                                    },
+                                    ?compatible_namespace_version: ::Integer
+                                  ) -> _UpdateSystemTemplateResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSystemTemplateResponseSuccess
+
+      interface _UploadEntityDefinitionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UploadEntityDefinitionsResponse]
+        def upload_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTThingsGraph/Client.html#upload_entity_definitions-instance_method
+      def upload_entity_definitions: (
+                                       ?document: {
+                                         language: ("GRAPHQL"),
+                                         text: ::String
+                                       },
+                                       ?sync_with_public_namespace: bool,
+                                       ?deprecate_existing_entities: bool
+                                     ) -> _UploadEntityDefinitionsResponseSuccess
+                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UploadEntityDefinitionsResponseSuccess
+    end
+  end
+end
+

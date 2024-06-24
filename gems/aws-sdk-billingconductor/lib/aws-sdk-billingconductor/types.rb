@@ -176,6 +176,29 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
+    # The key-value pair that represents the attribute by which the
+    # `BillingGroupCostReportResults` are grouped. For example, if you want
+    # a service-level breakdown for Amazon Simple Storage Service (Amazon
+    # S3) of the billing group, the attribute will be a key-value pair of
+    # `"PRODUCT_NAME"` and `"S3"`.
+    #
+    # @!attribute [rw] key
+    #   The key in a key-value pair that describes the margin summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value in a key-value pair that describes the margin summary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/Attribute AWS API Documentation
+    #
+    class Attribute < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] target_arn
     #   A percentage custom line item ARN to associate the resources to.
     #   @return [String]
@@ -305,6 +328,59 @@ module Aws::BillingConductor
       include Aws::Structure
     end
 
+    # A paginated call to retrieve a list of summary reports of actual
+    # Amazon Web Services charges and the calculated Amazon Web Services
+    # charges, broken down by attributes.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Number (ARN) that uniquely identifies the
+    #   billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_cost
+    #   The actual Amazon Web Services charges for the billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] proforma_cost
+    #   The hypothetical Amazon Web Services charges based on the associated
+    #   pricing plan of a billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] margin
+    #   The billing group margin.
+    #   @return [String]
+    #
+    # @!attribute [rw] margin_percentage
+    #   The percentage of the billing group margin.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency
+    #   The displayed currency.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   The list of key-value pairs that represent the attributes by which
+    #   the `BillingGroupCostReportResults` are grouped. For example, if you
+    #   want the Amazon S3 service-level breakdown of a billing group for
+    #   November 2023, the attributes list will contain a key-value pair of
+    #   `"PRODUCT_NAME"` and `"S3"` and a key-value pair of
+    #   `"BILLING_PERIOD"` and `"Nov 2023"`.
+    #   @return [Array<Types::Attribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/BillingGroupCostReportResultElement AWS API Documentation
+    #
+    class BillingGroupCostReportResultElement < Struct.new(
+      :arn,
+      :aws_cost,
+      :proforma_cost,
+      :margin,
+      :margin_percentage,
+      :currency,
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A representation of a billing group.
     #
     # @!attribute [rw] name
@@ -369,6 +445,30 @@ module Aws::BillingConductor
       :status_reason,
       :account_grouping)
       SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # A time range for which the margin summary is effective. The time range
+    # can be up to 12 months.
+    #
+    # @!attribute [rw] inclusive_start_billing_period
+    #   The inclusive start billing period that defines a billing period
+    #   range for the margin summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclusive_end_billing_period
+    #   The exclusive end billing period that defines a billing period range
+    #   for the margin summary. For example, if you choose a billing period
+    #   that starts in October 2023 and ends in December 2023, the margin
+    #   summary will only include data from October 2023 and November 2023.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/BillingPeriodRange AWS API Documentation
+    #
+    class BillingPeriodRange < Struct.new(
+      :inclusive_start_billing_period,
+      :exclusive_end_billing_period)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -515,6 +615,11 @@ module Aws::BillingConductor
     #   for a custom line item.
     #   @return [Types::CustomLineItemChargeDetails]
     #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account in which this custom line item will
+    #   be applied to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CreateCustomLineItemInput AWS API Documentation
     #
     class CreateCustomLineItemInput < Struct.new(
@@ -524,7 +629,8 @@ module Aws::BillingConductor
       :billing_group_arn,
       :billing_period_range,
       :tags,
-      :charge_details)
+      :charge_details,
+      :account_id)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -837,6 +943,11 @@ module Aws::BillingConductor
     #   The number of resources that are associated to the custom line item.
     #   @return [Integer]
     #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account in which this custom line item will
+    #   be applied to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CustomLineItemListElement AWS API Documentation
     #
     class CustomLineItemListElement < Struct.new(
@@ -849,7 +960,8 @@ module Aws::BillingConductor
       :billing_group_arn,
       :creation_time,
       :last_modified_time,
-      :association_size)
+      :association_size,
+      :account_id)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -934,6 +1046,11 @@ module Aws::BillingConductor
     #   The inclusive start time.
     #   @return [Integer]
     #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account in which this custom line item will
+    #   be applied to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CustomLineItemVersionListElement AWS API Documentation
     #
     class CustomLineItemVersionListElement < Struct.new(
@@ -949,7 +1066,8 @@ module Aws::BillingConductor
       :start_billing_period,
       :end_billing_period,
       :arn,
-      :start_time)
+      :start_time,
+      :account_id)
       SENSITIVE = [:name, :description]
       include Aws::Structure
     end
@@ -998,7 +1116,7 @@ module Aws::BillingConductor
     end
 
     # @!attribute [rw] arn
-    #   Then ARN of the deleted custom line item.
+    #   The ARN of the deleted custom line item.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/DeleteCustomLineItemOutput AWS API Documentation
@@ -1152,6 +1270,60 @@ module Aws::BillingConductor
     #
     class FreeTierConfig < Struct.new(
       :activated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Number (ARN) that uniquely identifies the
+    #   billing group.
+    #   @return [String]
+    #
+    # @!attribute [rw] billing_period_range
+    #   A time range for which the margin summary is effective. You can
+    #   specify up to 12 months.
+    #   @return [Types::BillingPeriodRange]
+    #
+    # @!attribute [rw] group_by
+    #   A list of strings that specify the attributes that are used to break
+    #   down costs in the margin summary reports for the billing group. For
+    #   example, you can view your costs by the Amazon Web Service name or
+    #   the billing period.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of margin summary reports to retrieve.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used on subsequent calls to get reports.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/GetBillingGroupCostReportInput AWS API Documentation
+    #
+    class GetBillingGroupCostReportInput < Struct.new(
+      :arn,
+      :billing_period_range,
+      :group_by,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] billing_group_cost_report_results
+    #   The list of margin summary reports.
+    #   @return [Array<Types::BillingGroupCostReportResultElement>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used on subsequent calls to get reports.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/GetBillingGroupCostReportOutput AWS API Documentation
+    #
+    class GetBillingGroupCostReportOutput < Struct.new(
+      :billing_group_cost_report_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1621,12 +1793,18 @@ module Aws::BillingConductor
     #   A list of custom line item ARNs to retrieve information.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] account_ids
+    #   The Amazon Web Services accounts in which this custom line item will
+    #   be applied to.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/ListCustomLineItemsFilter AWS API Documentation
     #
     class ListCustomLineItemsFilter < Struct.new(
       :names,
       :billing_groups,
-      :arns)
+      :arns,
+      :account_ids)
       SENSITIVE = []
       include Aws::Structure
     end

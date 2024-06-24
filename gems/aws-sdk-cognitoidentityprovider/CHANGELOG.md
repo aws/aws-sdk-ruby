@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2024-06-17)
+------------------
+
+* Feature - Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
+1.93.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2024-05-08)
+------------------
+
+* Feature - Add EXTERNAL_PROVIDER enum value to UserStatusType.
+
+1.90.0 (2024-04-26)
+------------------
+
+* Feature - Add LimitExceededException to SignUp errors
+
+1.89.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.88.0 (2024-03-08)
+------------------
+
+* Feature - Add ConcurrentModificationException to SetUserPoolMfaConfig
+
+1.87.0 (2024-02-01)
+------------------
+
+* Feature - Added CreateIdentityProvider and UpdateIdentityProvider details for new SAML IdP features
+
+1.86.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.85.0 (2023-12-18)
+------------------
+
+* Feature - Amazon Cognito now supports trigger versions that define the fields in the request sent to pre token generation Lambda triggers.
+
+1.84.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.83.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.82.0 (2023-09-27)
 ------------------
 

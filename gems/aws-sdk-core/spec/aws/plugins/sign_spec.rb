@@ -43,6 +43,23 @@ module Aws
         }
       end
 
+      let(:sigv4_credentials_and_region_override_plugin) do
+        Class.new(Seahorse::Client::Plugin) do
+          class Handler < Seahorse::Client::Handler
+            def call(context)
+              context[:sigv4_region] = 'override-region'
+              context[:sigv4_credentials] = Aws::Sigv4::StaticCredentialsProvider.new(
+                access_key_id: 'override-akid',
+                secret_access_key: 'override-secret',
+                session_token: 'override-token'
+              )
+              @handler.call(context)
+            end
+          end
+          handler(Handler)
+        end
+      end
+
       let(:client) { TestClient.new(client_options) }
 
       context 'sigv4' do
@@ -76,25 +93,20 @@ module Aws
           expect(req.headers['authorization']).to include('config-region')
         end
 
-        it 'prefers the context sigv4_region over configured sigv4_region' do
-          client = TestClient.new(
-            client_options.merge(sigv4_region: 'config-region'))
-
-          allow_any_instance_of(Aws::Plugins::Sign::Handler).to receive(:call).and_wrap_original do |m, *args|
-            args[0][:sigv4_region] = 'context-region'
-            m.call(*args)
-          end
-
-          resp = client.operation
-          req = resp.context.http_request
-          expect(req.headers['authorization']).to include('context-region')
-        end
-
         it 'raises an error when attempting to sign a request w/out credentials' do
           client = TestClient.new(client_options.merge(credentials: nil) )
           expect {
             client.operation
           }.to raise_error(Errors::MissingCredentialsError)
+        end
+
+        it 'allows for region and credentials override' do
+          TestClient.add_plugin(sigv4_credentials_and_region_override_plugin)
+          resp = client.operation
+          req = resp.context.http_request
+          expect(req.headers['authorization']).to include('override-region')
+          expect(req.headers['authorization']).to include('override-akid')
+          TestClient.remove_plugin(sigv4_credentials_and_region_override_plugin)
         end
 
         it 'signs payload for operations' do
@@ -193,6 +205,31 @@ module Aws
           resp = client.streaming_operation
           req = resp.context.http_request
           expect(req.headers['x-amz-content-sha256']).to eq('UNSIGNED-PAYLOAD')
+        end
+      end
+
+      context 'sigv4-s3express' do
+        let(:auth_scheme) do
+          {
+            'name' => 'sigv4-s3express',
+            'signingRegionSet' => region,
+            'signingName' => 's3express-svc',
+          }
+        end
+
+        it 'signs the request with sigv4-s3express' do
+          resp = client.operation
+          req = resp.context.http_request
+          expect(req.headers['authorization']).to include('AWS4-HMAC-SHA256')
+        end
+
+        it 'allows for region and credentials override' do
+          TestClient.add_plugin(sigv4_credentials_and_region_override_plugin)
+          resp = client.operation
+          req = resp.context.http_request
+          expect(req.headers['authorization']).to include('override-region')
+          expect(req.headers['authorization']).to include('override-akid')
+          TestClient.remove_plugin(sigv4_credentials_and_region_override_plugin)
         end
       end
 

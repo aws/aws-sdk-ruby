@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2024-06-18)
+------------------
+
+* Feature - Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
+1.109.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.108.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.107.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.106.0 (2024-04-12)
+------------------
+
+* Feature - Updates documentation for AWS Config
+
+1.105.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.104.0 (2024-01-04)
+------------------
+
+* Feature - Updated ResourceType enum with new resource types onboarded by AWS Config in November and December 2023.
+
+1.103.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.102.0 (2023-11-27)
+------------------
+
+* Feature - Support Periodic Recording for Configuration Recorder
+
+1.101.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.100.0 (2023-11-03)
+------------------
+
+* Feature - Updated ResourceType enum with new resource types onboarded by AWS Config in October 2023.
+
+1.99.0 (2023-10-12)
+------------------
+
+* Feature - Add enums for resource types supported by Config
+
 1.98.0 (2023-09-27)
 ------------------
 

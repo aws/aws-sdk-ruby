@@ -509,9 +509,15 @@ module Aws::IoT
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
-    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #   <note markdown="1"> The `namespaceId` feature is only supported by IoT Greengrass at
+    #   this time. For more information, see [Setting up IoT Greengrass core
+    #   devices.][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
     #   @return [String]
     #
     class AssociateTargetsWithJobRequest < Struct.new(
@@ -1300,12 +1306,18 @@ module Aws::IoT
     #   Suppresses alerts.
     #   @return [Boolean]
     #
+    # @!attribute [rw] export_metric
+    #   Value indicates exporting metrics related to the behavior when it is
+    #   true.
+    #   @return [Boolean]
+    #
     class Behavior < Struct.new(
       :name,
       :metric,
       :metric_dimension,
       :criteria,
-      :suppress_alerts)
+      :suppress_alerts,
+      :export_metric)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1890,6 +1902,23 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The certificate provider summary.
+    #
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_provider_arn
+    #   The ARN of the certificate provider.
+    #   @return [String]
+    #
+    class CertificateProviderSummary < Struct.new(
+      :certificate_provider_name,
+      :certificate_provider_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The certificate operation is not allowed.
     #
     # @!attribute [rw] message
@@ -2350,6 +2379,58 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The ARN of the Lambda function that defines the authentication
+    #   logic.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_default_for_operations
+    #   A list of the operations that the certificate provider will use to
+    #   generate certificates. Valid value: `CreateCertificateFromCsr`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   A string that you can optionally pass in the
+    #   `CreateCertificateProvider` request to make sure the request is
+    #   idempotent.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the certificate provider.
+    #   @return [Array<Types::Tag>]
+    #
+    class CreateCertificateProviderRequest < Struct.new(
+      :certificate_provider_name,
+      :lambda_function_arn,
+      :account_default_for_operations,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_provider_arn
+    #   The ARN of the certificate provider.
+    #   @return [String]
+    #
+    class CreateCertificateProviderResponse < Struct.new(
+      :certificate_provider_name,
+      :certificate_provider_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] metric_name
     #   The name of the custom metric. This will be used in the metric
     #   report submitted from the device/thing. The name can't begin with
@@ -2523,6 +2604,10 @@ module Aws::IoT
     #   An object that specifies the TLS configuration for a domain.
     #   @return [Types::TlsConfig]
     #
+    # @!attribute [rw] server_certificate_config
+    #   The server certificate configuration.
+    #   @return [Types::ServerCertificateConfig]
+    #
     class CreateDomainConfigurationRequest < Struct.new(
       :domain_configuration_name,
       :domain_name,
@@ -2531,7 +2616,8 @@ module Aws::IoT
       :authorizer_config,
       :service_type,
       :tags,
-      :tls_config)
+      :tls_config,
+      :server_certificate_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2795,9 +2881,15 @@ module Aws::IoT
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
-    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #   <note markdown="1"> The `namespaceId` feature is only supported by IoT Greengrass at
+    #   this time. For more information, see [Setting up IoT Greengrass core
+    #   devices.][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
     #   @return [String]
     #
     # @!attribute [rw] job_template_arn
@@ -2827,10 +2919,17 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].
     #
-    #   **Note:**The following Length Constraints relates to a single
-    #   string. Up to five strings are allowed.
+    #   **Note:**The following Length Constraints relates to a single ARN.
+    #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class CreateJobRequest < Struct.new(
@@ -2944,10 +3043,17 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].
     #
-    #   **Note:**The following Length Constraints relates to a single
-    #   string. Up to five strings are allowed.
+    #   **Note:**The following Length Constraints relates to a single ARN.
+    #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class CreateJobTemplateRequest < Struct.new(
@@ -3773,6 +3879,10 @@ module Aws::IoT
     #   Metadata that can be used to manage the security profile.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] metrics_export_config
+    #   Specifies the MQTT topic and role ARN required for metric export.
+    #   @return [Types::MetricsExportConfig]
+    #
     class CreateSecurityProfileRequest < Struct.new(
       :security_profile_name,
       :security_profile_description,
@@ -3780,7 +3890,8 @@ module Aws::IoT
       :alert_targets,
       :additional_metrics_to_retain,
       :additional_metrics_to_retain_v2,
-      :tags)
+      :tags,
+      :metrics_export_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4175,6 +4286,18 @@ module Aws::IoT
     #
     class DeleteCACertificateResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    class DeleteCertificateProviderRequest < Struct.new(
+      :certificate_provider_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DeleteCertificateProviderResponse < Aws::EmptyStructure; end
+
     # The input for the DeleteCertificate operation.
     #
     # @!attribute [rw] certificate_id
@@ -4316,9 +4439,15 @@ module Aws::IoT
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
-    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #   <note markdown="1"> The `namespaceId` feature is only supported by IoT Greengrass at
+    #   this time. For more information, see [Setting up IoT Greengrass core
+    #   devices.][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
     #   @return [String]
     #
     class DeleteJobExecutionRequest < Struct.new(
@@ -4364,9 +4493,15 @@ module Aws::IoT
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
-    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #   <note markdown="1"> The `namespaceId` feature is only supported by IoT Greengrass at
+    #   this time. For more information, see [Setting up IoT Greengrass core
+    #   devices.][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
     #   @return [String]
     #
     class DeleteJobRequest < Struct.new(
@@ -5038,6 +5173,55 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    class DescribeCertificateProviderRequest < Struct.new(
+      :certificate_provider_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_provider_arn
+    #   The ARN of the certificate provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The Lambda function ARN that's associated with the certificate
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_default_for_operations
+    #   A list of the operations that the certificate provider will use to
+    #   generate certificates. Valid value: `CreateCertificateFromCsr`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_date
+    #   The date-time string that indicates when the certificate provider
+    #   was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date-time string that indicates when the certificate provider
+    #   was last updated.
+    #   @return [Time]
+    #
+    class DescribeCertificateProviderResponse < Struct.new(
+      :certificate_provider_name,
+      :certificate_provider_arn,
+      :lambda_function_arn,
+      :account_default_for_operations,
+      :creation_date,
+      :last_modified_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for the DescribeCertificate operation.
     #
     # @!attribute [rw] certificate_id
@@ -5249,6 +5433,10 @@ module Aws::IoT
     #   An object that specifies the TLS configuration for a domain.
     #   @return [Types::TlsConfig]
     #
+    # @!attribute [rw] server_certificate_config
+    #   The server certificate configuration.
+    #   @return [Types::ServerCertificateConfig]
+    #
     class DescribeDomainConfigurationResponse < Struct.new(
       :domain_configuration_name,
       :domain_configuration_arn,
@@ -5259,7 +5447,8 @@ module Aws::IoT
       :service_type,
       :domain_type,
       :last_status_change_date,
-      :tls_config)
+      :tls_config,
+      :server_certificate_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5598,10 +5787,17 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].
     #
-    #   **Note:**The following Length Constraints relates to a single
-    #   string. Up to five strings are allowed.
+    #   **Note:**The following Length Constraints relates to a single ARN.
+    #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class DescribeJobTemplateResponse < Struct.new(
@@ -5999,6 +6195,10 @@ module Aws::IoT
     #   The time the security profile was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] metrics_export_config
+    #   Specifies the MQTT topic and role ARN required for metric export.
+    #   @return [Types::MetricsExportConfig]
+    #
     class DescribeSecurityProfileResponse < Struct.new(
       :security_profile_name,
       :security_profile_arn,
@@ -6009,7 +6209,8 @@ module Aws::IoT
       :additional_metrics_to_retain_v2,
       :version,
       :creation_date,
-      :last_modified_date)
+      :last_modified_date,
+      :metrics_export_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6981,6 +7182,28 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # A geolocation target that you select to index. Each geolocation target
+    # contains a `name` and `order` key-value pair that specifies the
+    # geolocation target fields.
+    #
+    # @!attribute [rw] name
+    #   The `name` of the geolocation target field. If the target field is
+    #   part of a named shadow, you must select the named shadow using the
+    #   `namedShadow` filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   The `order` of the geolocation target field. This field is optional.
+    #   The default value is `LatLon`.
+    #   @return [String]
+    #
+    class GeoLocationTarget < Struct.new(
+      :name,
+      :order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] security_profile_name
     #   The name of the security profile.
     #   @return [String]
@@ -7810,11 +8033,27 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Provides additional filters for specific data sources. Named shadow is
-    # the only data source that currently supports and requires a filter. To
-    # add named shadows to your fleet indexing configuration, set
-    # `namedShadowIndexingMode` to be `ON` and specify your shadow names in
-    # `filter`.
+    # Provides additional selections for named shadows and geolocation data.
+    #
+    # To add named shadows to your fleet indexing configuration, set
+    # `namedShadowIndexingMode` to be ON and specify your shadow names in
+    # `namedShadowNames` filter.
+    #
+    # To add geolocation data to your fleet indexing configuration:
+    #
+    # * If you store geolocation data in a class/unnamed shadow, set
+    #   `thingIndexingMode` to be `REGISTRY_AND_SHADOW` and specify your
+    #   geolocation data in `geoLocations` filter.
+    #
+    # * If you store geolocation data in a named shadow, set
+    #   `namedShadowIndexingMode` to be `ON`, add the shadow name in
+    #   `namedShadowNames` filter, and specify your geolocation data in
+    #   `geoLocations` filter. For more information, see [Managing fleet
+    #   indexing][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html
     #
     # @!attribute [rw] named_shadow_names
     #   The shadow names that you select to index. The default maximum
@@ -7827,8 +8066,21 @@ module Aws::IoT
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits
     #   @return [Array<String>]
     #
+    # @!attribute [rw] geo_locations
+    #   The list of geolocation targets that you select to index. The
+    #   default maximum number of geolocation targets for indexing is `1`.
+    #   To increase the limit, see [Amazon Web Services IoT Device
+    #   Management Quotas][1] in the *Amazon Web Services General
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits
+    #   @return [Array<Types::GeoLocationTarget>]
+    #
     class IndexingFilter < Struct.new(
-      :named_shadow_names)
+      :named_shadow_names,
+      :geo_locations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8161,9 +8413,15 @@ module Aws::IoT
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
-    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #   <note markdown="1"> The `namespaceId` feature is only supported by IoT Greengrass at
+    #   this time. For more information, see [Setting up IoT Greengrass core
+    #   devices.][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
     #   @return [String]
     #
     # @!attribute [rw] job_template_arn
@@ -8206,10 +8464,19 @@ module Aws::IoT
     #
     # @!attribute [rw] destination_package_versions
     #   The package version Amazon Resource Names (ARNs) that are installed
-    #   on the device when the job successfully completes.
+    #   on the device when the job successfully completes. The package
+    #   version must be in either the Published or Deprecated state when the
+    #   job deploys. For more information, see [Package version
+    #   lifecycle][1].The package version must be in either the Published or
+    #   Deprecated state when the job deploys. For more information, see
+    #   [Package version lifecycle][1].
     #
-    #   **Note:**The following Length Constraints relates to a single
-    #   string. Up to five strings are allowed.
+    #   **Note:**The following Length Constraints relates to a single ARN.
+    #   Up to 25 package version ARNs are allowed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
     #   @return [Array<String>]
     #
     class Job < Struct.new(
@@ -9244,6 +9511,40 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or `null` if there are no
+    #   more results.
+    #   @return [String]
+    #
+    # @!attribute [rw] ascending_order
+    #   Returns the list of certificate providers in ascending alphabetical
+    #   order.
+    #   @return [Boolean]
+    #
+    class ListCertificateProvidersRequest < Struct.new(
+      :next_token,
+      :ascending_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_providers
+    #   The list of certificate providers in your Amazon Web Services
+    #   account.
+    #   @return [Array<Types::CertificateProviderSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or `null` if there are no
+    #   more results.
+    #   @return [String]
+    #
+    class ListCertificateProvidersResponse < Struct.new(
+      :certificate_providers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input to the ListCertificatesByCA operation.
     #
     # @!attribute [rw] ca_certificate_id
@@ -9663,9 +9964,15 @@ module Aws::IoT
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
-    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #   <note markdown="1"> The `namespaceId` feature is only supported by IoT Greengrass at
+    #   this time. For more information, see [Setting up IoT Greengrass core
+    #   devices.][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -9786,9 +10093,15 @@ module Aws::IoT
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
-    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #   <note markdown="1"> The `namespaceId` feature is only supported by IoT Greengrass at
+    #   this time. For more information, see [Setting up IoT Greengrass core
+    #   devices.][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
     #   @return [String]
     #
     class ListJobsRequest < Struct.new(
@@ -11537,9 +11850,15 @@ module Aws::IoT
     #   The dimension of a metric. This can't be used with custom metrics.
     #   @return [Types::MetricDimension]
     #
+    # @!attribute [rw] export_metric
+    #   The value indicates exporting metrics related to the `MetricToRetain
+    #   ` when it's true.
+    #   @return [Boolean]
+    #
     class MetricToRetain < Struct.new(
       :metric,
-      :metric_dimension)
+      :metric_dimension,
+      :export_metric)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11580,6 +11899,26 @@ module Aws::IoT
       :number,
       :numbers,
       :strings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Set configurations for metrics export.
+    #
+    # @!attribute [rw] mqtt_topic
+    #   The MQTT topic that Device Defender Detect should publish messages
+    #   to for metrics export.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   This role ARN has permission to publish MQTT messages, after which
+    #   Device Defender Detect can assume the role and publish messages on
+    #   your behalf.
+    #   @return [String]
+    #
+    class MetricsExportConfig < Struct.new(
+      :mqtt_topic,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13239,7 +13578,15 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return at one time.
+    #   The maximum number of results to return per page at one time. This
+    #   maximum number cannot exceed 100. The response might contain fewer
+    #   results but will never contain more. You can use [ `nextToken` ][1]
+    #   to retrieve the next set of results until `nextToken` returns
+    #   `NULL`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_SearchIndex.html#iot-SearchIndex-request-nextToken
     #   @return [Integer]
     #
     # @!attribute [rw] query_version
@@ -13322,6 +13669,27 @@ module Aws::IoT
     class SecurityProfileTargetMapping < Struct.new(
       :security_profile_identifier,
       :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The server certificate configuration.
+    #
+    # @!attribute [rw] enable_ocsp_check
+    #   A Boolean value that indicates whether Online Certificate Status
+    #   Protocol (OCSP) server certificate check is enabled or not.
+    #
+    #   For more information, see [Configuring OCSP server-certificate
+    #   stapling in domain configuration][1] from Amazon Web Services IoT
+    #   Core Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-custom-domain-ocsp-config.html
+    #   @return [Boolean]
+    #
+    class ServerCertificateConfig < Struct.new(
+      :enable_ocsp_check)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14414,6 +14782,11 @@ module Aws::IoT
     #   information, see [Managed fields][1] in the *Amazon Web Services IoT
     #   Core Developer Guide*.
     #
+    #   <note markdown="1"> You can't modify managed fields by updating fleet indexing
+    #   configuration.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html#managed-field
@@ -14537,7 +14910,18 @@ module Aws::IoT
     #
     # @!attribute [rw] managed_fields
     #   Contains fields that are indexed and whose types are already known
-    #   by the Fleet Indexing service.
+    #   by the Fleet Indexing service. This is an optional field. For more
+    #   information, see [Managed fields][1] in the *Amazon Web Services IoT
+    #   Core Developer Guide*.
+    #
+    #   <note markdown="1"> You can't modify managed fields by updating fleet indexing
+    #   configuration.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html#managed-field
     #   @return [Array<Types::Field>]
     #
     # @!attribute [rw] custom_fields
@@ -14545,11 +14929,28 @@ module Aws::IoT
     #   @return [Array<Types::Field>]
     #
     # @!attribute [rw] filter
-    #   Provides additional filters for specific data sources. Named shadow
-    #   is the only data source that currently supports and requires a
-    #   filter. To add named shadows to your fleet indexing configuration,
-    #   set `namedShadowIndexingMode` to be `ON` and specify your shadow
-    #   names in `filter`.
+    #   Provides additional selections for named shadows and geolocation
+    #   data.
+    #
+    #   To add named shadows to your fleet indexing configuration, set
+    #   `namedShadowIndexingMode` to be ON and specify your shadow names in
+    #   `namedShadowNames` filter.
+    #
+    #   To add geolocation data to your fleet indexing configuration:
+    #
+    #   * If you store geolocation data in a class/unnamed shadow, set
+    #     `thingIndexingMode` to be `REGISTRY_AND_SHADOW` and specify your
+    #     geolocation data in `geoLocations` filter.
+    #
+    #   * If you store geolocation data in a named shadow, set
+    #     `namedShadowIndexingMode` to be `ON`, add the shadow name in
+    #     `namedShadowNames` filter, and specify your geolocation data in
+    #     `geoLocations` filter. For more information, see [Managing fleet
+    #     indexing][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html
     #   @return [Types::IndexingFilter]
     #
     class ThingIndexingConfiguration < Struct.new(
@@ -15412,6 +15813,43 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The Lambda function ARN that's associated with the certificate
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_default_for_operations
+    #   A list of the operations that the certificate provider will use to
+    #   generate certificates. Valid value: `CreateCertificateFromCsr`.
+    #   @return [Array<String>]
+    #
+    class UpdateCertificateProviderRequest < Struct.new(
+      :certificate_provider_name,
+      :lambda_function_arn,
+      :account_default_for_operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_provider_name
+    #   The name of the certificate provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_provider_arn
+    #   The ARN of the certificate provider.
+    #   @return [String]
+    #
+    class UpdateCertificateProviderResponse < Struct.new(
+      :certificate_provider_name,
+      :certificate_provider_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input for the UpdateCertificate operation.
     #
     # @!attribute [rw] certificate_id
@@ -15587,12 +16025,17 @@ module Aws::IoT
     #   An object that specifies the TLS configuration for a domain.
     #   @return [Types::TlsConfig]
     #
+    # @!attribute [rw] server_certificate_config
+    #   The server certificate configuration.
+    #   @return [Types::ServerCertificateConfig]
+    #
     class UpdateDomainConfigurationRequest < Struct.new(
       :domain_configuration_name,
       :authorizer_config,
       :domain_configuration_status,
       :remove_authorizer_config,
-      :tls_config)
+      :tls_config,
+      :server_certificate_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15793,9 +16236,15 @@ module Aws::IoT
     #
     #   `$aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/`
     #
-    #   <note markdown="1"> The `namespaceId` feature is in public preview.
+    #   <note markdown="1"> The `namespaceId` feature is only supported by IoT Greengrass at
+    #   this time. For more information, see [Setting up IoT Greengrass core
+    #   devices.][1]
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
     #   @return [String]
     #
     # @!attribute [rw] job_executions_retry_config
@@ -16175,6 +16624,15 @@ module Aws::IoT
     #   `VersionConflictException` is thrown.
     #   @return [Integer]
     #
+    # @!attribute [rw] metrics_export_config
+    #   Specifies the MQTT topic and role ARN required for metric export.
+    #   @return [Types::MetricsExportConfig]
+    #
+    # @!attribute [rw] delete_metrics_export_config
+    #   Set the value as true to delete metrics export related
+    #   configurations.
+    #   @return [Boolean]
+    #
     class UpdateSecurityProfileRequest < Struct.new(
       :security_profile_name,
       :security_profile_description,
@@ -16185,7 +16643,9 @@ module Aws::IoT
       :delete_behaviors,
       :delete_alert_targets,
       :delete_additional_metrics_to_retain,
-      :expected_version)
+      :expected_version,
+      :metrics_export_config,
+      :delete_metrics_export_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16239,6 +16699,10 @@ module Aws::IoT
     #   The time the security profile was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] metrics_export_config
+    #   Specifies the MQTT topic and role ARN required for metric export.
+    #   @return [Types::MetricsExportConfig]
+    #
     class UpdateSecurityProfileResponse < Struct.new(
       :security_profile_name,
       :security_profile_arn,
@@ -16249,7 +16713,8 @@ module Aws::IoT
       :additional_metrics_to_retain_v2,
       :version,
       :creation_date,
-      :last_modified_date)
+      :last_modified_date,
+      :metrics_export_config)
       SENSITIVE = []
       include Aws::Structure
     end

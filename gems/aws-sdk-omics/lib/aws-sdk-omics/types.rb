@@ -33,7 +33,7 @@ module Aws::Omics
     class AbortMultipartReadSetUploadResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] share_id
-    #   The ID for a share offer for analytics store data.
+    #   The ID of the resource share.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/AcceptShareRequest AWS API Documentation
@@ -45,7 +45,7 @@ module Aws::Omics
     end
 
     # @!attribute [rw] status
-    #   The status of an analytics store share.
+    #   The status of the resource share.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/AcceptShareResponse AWS API Documentation
@@ -766,7 +766,7 @@ module Aws::Omics
     #   @return [String]
     #
     # @!attribute [rw] upload_id
-    #   he ID for the initiated multipart upload.
+    #   The ID for the initiated multipart upload.
     #   @return [String]
     #
     # @!attribute [rw] source_file_type
@@ -987,6 +987,10 @@ module Aws::Omics
     #   upload.
     #   @return [String]
     #
+    # @!attribute [rw] e_tag_algorithm_family
+    #   The ETag algorithm family to use for ingested read sets.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateSequenceStoreRequest AWS API Documentation
     #
     class CreateSequenceStoreRequest < Struct.new(
@@ -995,7 +999,8 @@ module Aws::Omics
       :sse_config,
       :tags,
       :client_token,
-      :fallback_location)
+      :fallback_location,
+      :e_tag_algorithm_family)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1029,6 +1034,10 @@ module Aws::Omics
     #   upload.
     #   @return [String]
     #
+    # @!attribute [rw] e_tag_algorithm_family
+    #   The algorithm family of the ETag.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateSequenceStoreResponse AWS API Documentation
     #
     class CreateSequenceStoreResponse < Struct.new(
@@ -1038,22 +1047,23 @@ module Aws::Omics
       :description,
       :sse_config,
       :creation_time,
-      :fallback_location)
+      :fallback_location,
+      :e_tag_algorithm_family)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] resource_arn
-    #   The resource ARN for the analytics store to be shared.
+    #   The ARN of the resource to be shared.
     #   @return [String]
     #
     # @!attribute [rw] principal_subscriber
-    #   The principal subscriber is the account being given access to the
-    #   analytics store data through the share offer.
+    #   The principal subscriber is the account being offered shared access
+    #   to the resource.
     #   @return [String]
     #
     # @!attribute [rw] share_name
-    #   A name given to the share.
+    #   A name that the owner defines for the share.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateShareRequest AWS API Documentation
@@ -1067,15 +1077,15 @@ module Aws::Omics
     end
 
     # @!attribute [rw] share_id
-    #   An ID generated for the share.
+    #   The ID that HealthOmics generates for the share.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of a share.
+    #   The status of the share.
     #   @return [String]
     #
     # @!attribute [rw] share_name
-    #   A name given to the share.
+    #   The name of the share.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/CreateShareResponse AWS API Documentation
@@ -1181,7 +1191,7 @@ module Aws::Omics
     #   @return [Hash<String,Types::WorkflowParameter>]
     #
     # @!attribute [rw] storage_capacity
-    #   A storage capacity for the workflow in gigabytes.
+    #   The storage capacity for the workflow in gibibytes.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -1389,7 +1399,7 @@ module Aws::Omics
     class DeleteSequenceStoreResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] share_id
-    #   The ID for the share request to be deleted.
+    #   The ID for the resource share to be deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/DeleteShareRequest AWS API Documentation
@@ -1593,32 +1603,45 @@ module Aws::Omics
     #   The file's content length.
     #   @return [Integer]
     #
+    # @!attribute [rw] s3_access
+    #   The S3 URI metadata of a sequence store.
+    #   @return [Types::ReadSetS3Access]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/FileInformation AWS API Documentation
     #
     class FileInformation < Struct.new(
       :total_parts,
       :part_size,
-      :content_length)
+      :content_length,
+      :s3_access)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Use filters to focus the returned annotation store versions on a
-    # specific parameter, such as the status of the annotation store.
+    # Use filters to return a subset of resources. You can define filters
+    # for specific parameters, such as the resource status.
     #
     # @!attribute [rw] resource_arns
-    #   The Amazon Resource Number (Arn) for an analytics store.
+    #   Filter based on the Amazon Resource Number (ARN) of the resource.
+    #   You can specify up to 10 values.
     #   @return [Array<String>]
     #
     # @!attribute [rw] status
-    #   The status of an annotation store version.
+    #   Filter based on the resource status. You can specify up to 10
+    #   values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   The type of resources to be filtered. You can specify one or more of
+    #   the resource types.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/Filter AWS API Documentation
     #
     class Filter < Struct.new(
       :resource_arns,
-      :status)
+      :status,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2620,7 +2643,9 @@ module Aws::Omics
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] storage_capacity
-    #   The run's storage capacity in gigabytes.
+    #   The run's storage capacity in gibibytes. For dynamic storage, after
+    #   the run has completed, this value is the maximum amount of storage
+    #   used during the run.
     #   @return [Integer]
     #
     # @!attribute [rw] output_uri
@@ -2667,6 +2692,30 @@ module Aws::Omics
     #   The run's retention mode.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reason
+    #   The reason a run has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_location
+    #   The location of the run log.
+    #   @return [Types::RunLogLocation]
+    #
+    # @!attribute [rw] uuid
+    #   The universally unique identifier for a run.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_output_uri
+    #   The destination for workflow outputs.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_type
+    #   The run's storage type.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_owner_id
+    #   The ID of the workflow owner.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetRunResponse AWS API Documentation
     #
     class GetRunResponse < Struct.new(
@@ -2694,13 +2743,19 @@ module Aws::Omics
       :status_message,
       :tags,
       :accelerators,
-      :retention_mode)
+      :retention_mode,
+      :failure_reason,
+      :log_location,
+      :uuid,
+      :run_output_uri,
+      :storage_type,
+      :workflow_owner_id)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] id
-    #   The task's ID.
+    #   The workflow run ID.
     #   @return [String]
     #
     # @!attribute [rw] task_id
@@ -2764,6 +2819,10 @@ module Aws::Omics
     #   The instance type for a task.
     #   @return [String]
     #
+    # @!attribute [rw] failure_reason
+    #   The reason a task has failed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetRunTaskResponse AWS API Documentation
     #
     class GetRunTaskResponse < Struct.new(
@@ -2778,7 +2837,8 @@ module Aws::Omics
       :status_message,
       :log_stream,
       :gpus,
-      :instance_type)
+      :instance_type,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2824,6 +2884,15 @@ module Aws::Omics
     #   upload.
     #   @return [String]
     #
+    # @!attribute [rw] s3_access
+    #   The S3 metadata of a sequence store, including the ARN and S3 URI of
+    #   the S3 bucket.
+    #   @return [Types::SequenceStoreS3Access]
+    #
+    # @!attribute [rw] e_tag_algorithm_family
+    #   The algorithm family of the ETag.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetSequenceStoreResponse AWS API Documentation
     #
     class GetSequenceStoreResponse < Struct.new(
@@ -2833,13 +2902,15 @@ module Aws::Omics
       :description,
       :sse_config,
       :creation_time,
-      :fallback_location)
+      :fallback_location,
+      :s3_access,
+      :e_tag_algorithm_family)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] share_id
-    #   The generated ID for a share.
+    #   The ID of the share.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetShareRequest AWS API Documentation
@@ -2851,8 +2922,8 @@ module Aws::Omics
     end
 
     # @!attribute [rw] share
-    #   An analytic store share details object. contains status,
-    #   resourceArn, ownerId, etc.
+    #   A resource share details object. The object includes the status, the
+    #   resourceArn, and ownerId.
     #   @return [Types::ShareDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetShareResponse AWS API Documentation
@@ -3028,12 +3099,17 @@ module Aws::Omics
     #   The export format for the workflow.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] workflow_owner_id
+    #   The ID of the workflow owner.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetWorkflowRequest AWS API Documentation
     #
     class GetWorkflowRequest < Struct.new(
       :id,
       :type,
-      :export)
+      :export,
+      :workflow_owner_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3083,7 +3159,7 @@ module Aws::Omics
     #   @return [Hash<String,Types::WorkflowParameter>]
     #
     # @!attribute [rw] storage_capacity
-    #   The workflow's storage capacity in gigabytes.
+    #   The workflow's storage capacity in gibibytes.
     #   @return [Integer]
     #
     # @!attribute [rw] creation_time
@@ -4146,11 +4222,12 @@ module Aws::Omics
     end
 
     # @!attribute [rw] resource_owner
-    #   The account that owns the analytics store shared.
+    #   The account that owns the resource shares.
     #   @return [String]
     #
     # @!attribute [rw] filter
-    #   Attributes used to filter for a specific subset of shares.
+    #   Attributes that you use to filter for a specific subset of resource
+    #   shares.
     #   @return [Types::Filter]
     #
     # @!attribute [rw] next_token
@@ -4175,7 +4252,7 @@ module Aws::Omics
     end
 
     # @!attribute [rw] shares
-    #   The shares available and their meta details.
+    #   The shares available and their metadata details.
     #   @return [Array<Types::ShareDetails>]
     #
     # @!attribute [rw] next_token
@@ -4340,11 +4417,11 @@ module Aws::Omics
     end
 
     # @!attribute [rw] type
-    #   The workflows' type.
+    #   Filter the list by workflow type.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The workflows' name.
+    #   Filter the list by workflow name.
     #   @return [String]
     #
     # @!attribute [rw] starting_token
@@ -4368,7 +4445,7 @@ module Aws::Omics
     end
 
     # @!attribute [rw] items
-    #   The workflows' items.
+    #   A list of workflow items.
     #   @return [Array<Types::WorkflowListItem>]
     #
     # @!attribute [rw] next_token
@@ -4715,6 +4792,20 @@ module Aws::Omics
       :status_message,
       :creation_type,
       :etag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The S3 URI for each read set file.
+    #
+    # @!attribute [rw] s3_uri
+    #   The S3 URI for each read set file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ReadSetS3Access AWS API Documentation
+    #
+    class ReadSetS3Access < Struct.new(
+      :s3_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5070,7 +5161,9 @@ module Aws::Omics
     #   @return [Integer]
     #
     # @!attribute [rw] storage_capacity
-    #   The run's storage capacity.
+    #   The run's storage capacity in gibibytes. For dynamic storage, after
+    #   the run has completed, this value is the maximum amount of storage
+    #   used during the run.
     #   @return [Integer]
     #
     # @!attribute [rw] creation_time
@@ -5085,6 +5178,10 @@ module Aws::Omics
     #   When the run stopped.
     #   @return [Time]
     #
+    # @!attribute [rw] storage_type
+    #   The run's storage type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/RunListItem AWS API Documentation
     #
     class RunListItem < Struct.new(
@@ -5097,7 +5194,27 @@ module Aws::Omics
       :storage_capacity,
       :creation_time,
       :start_time,
-      :stop_time)
+      :stop_time,
+      :storage_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The URI for the run log.
+    #
+    # @!attribute [rw] engine_log_stream
+    #   The log stream ARN for the engine log.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_log_stream
+    #   The log stream ARN for the run log.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/RunLogLocation AWS API Documentation
+    #
+    class RunLogLocation < Struct.new(
+      :engine_log_stream,
+      :run_log_stream)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5162,6 +5279,10 @@ module Aws::Omics
     #   upload.
     #   @return [String]
     #
+    # @!attribute [rw] e_tag_algorithm_family
+    #   The algorithm family of the ETag.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/SequenceStoreDetail AWS API Documentation
     #
     class SequenceStoreDetail < Struct.new(
@@ -5171,7 +5292,8 @@ module Aws::Omics
       :description,
       :sse_config,
       :creation_time,
-      :fallback_location)
+      :fallback_location,
+      :e_tag_algorithm_family)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5200,6 +5322,26 @@ module Aws::Omics
       include Aws::Structure
     end
 
+    # The S3 access metadata of the sequence store.
+    #
+    # @!attribute [rw] s3_uri
+    #   The S3 URI of the sequence store.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_access_point_arn
+    #   This is ARN of the access point associated with the S3 bucket
+    #   storing read sets.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/SequenceStoreS3Access AWS API Documentation
+    #
+    class SequenceStoreS3Access < Struct.new(
+      :s3_uri,
+      :s3_access_point_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request exceeds a service quota.
     #
     # @!attribute [rw] message
@@ -5213,45 +5355,49 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # The details of a share.
+    # The details of a resource share.
     #
     # @!attribute [rw] share_id
-    #   The ID for a share offer for an analytics store .
+    #   The ID of the resource share.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The resource Arn of the analytics store being shared.
+    #   The Arn of the shared resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the shared resource.
     #   @return [String]
     #
     # @!attribute [rw] principal_subscriber
-    #   The principal subscriber is the account the analytics store data is
-    #   being shared with.
+    #   The principal subscriber is the account that is sharing the
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] owner_id
-    #   The account ID for the data owner. The owner creates the share
-    #   offer.
+    #   The account ID for the data owner. The owner creates the resource
+    #   share.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of a share.
+    #   The status of the share.
     #   @return [String]
     #
     # @!attribute [rw] status_message
-    #   The status message for a share. It provides more details on the
-    #   status of the share.
+    #   The status message for a resource share. It provides additional
+    #   details about the share status.
     #   @return [String]
     #
     # @!attribute [rw] share_name
-    #   The name of the share.
+    #   The name of the resource share.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The timestamp for when the share was created.
+    #   The timestamp of when the resource share was created.
     #   @return [Time]
     #
     # @!attribute [rw] update_time
-    #   The timestamp of the share update.
+    #   The timestamp of the resource share update.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/ShareDetails AWS API Documentation
@@ -5259,6 +5405,7 @@ module Aws::Omics
     class ShareDetails < Struct.new(
       :share_id,
       :resource_arn,
+      :resource_id,
       :principal_subscriber,
       :owner_id,
       :status,
@@ -5727,7 +5874,9 @@ module Aws::Omics
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @!attribute [rw] storage_capacity
-    #   A storage capacity for the run in gigabytes.
+    #   A storage capacity for the run in gibibytes. This field is not
+    #   required if the storage type is dynamic (the system ignores any
+    #   value that you enter).
     #   @return [Integer]
     #
     # @!attribute [rw] output_uri
@@ -5754,6 +5903,17 @@ module Aws::Omics
     #   The retention mode for the run.
     #   @return [String]
     #
+    # @!attribute [rw] storage_type
+    #   The run's storage type. By default, the run uses STATIC storage
+    #   type, which allocates a fixed amount of storage. If you set the
+    #   storage type to DYNAMIC, HealthOmics dynamically scales the storage
+    #   up or down, based on file system utilization.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_owner_id
+    #   The ID of the workflow owner.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartRunRequest AWS API Documentation
     #
     class StartRunRequest < Struct.new(
@@ -5770,7 +5930,9 @@ module Aws::Omics
       :log_level,
       :tags,
       :request_id,
-      :retention_mode)
+      :retention_mode,
+      :storage_type,
+      :workflow_owner_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5791,13 +5953,23 @@ module Aws::Omics
     #   The run's tags.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] uuid
+    #   The universally unique identifier for a run.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_output_uri
+    #   The destination for workflow outputs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartRunResponse AWS API Documentation
     #
     class StartRunResponse < Struct.new(
       :arn,
       :id,
       :status,
-      :tags)
+      :tags,
+      :uuid,
+      :run_output_uri)
       SENSITIVE = []
       include Aws::Structure
     end

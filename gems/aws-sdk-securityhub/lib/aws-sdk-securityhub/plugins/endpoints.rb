@@ -14,6 +14,7 @@ module Aws::SecurityHub
       option(
         :endpoint_provider,
         doc_type: 'Aws::SecurityHub::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::SecurityHub
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -68,6 +70,8 @@ module Aws::SecurityHub
             Aws::SecurityHub::Endpoints::BatchEnableStandards.build(context)
           when :batch_get_automation_rules
             Aws::SecurityHub::Endpoints::BatchGetAutomationRules.build(context)
+          when :batch_get_configuration_policy_associations
+            Aws::SecurityHub::Endpoints::BatchGetConfigurationPolicyAssociations.build(context)
           when :batch_get_security_controls
             Aws::SecurityHub::Endpoints::BatchGetSecurityControls.build(context)
           when :batch_get_standards_control_associations
@@ -84,6 +88,8 @@ module Aws::SecurityHub
             Aws::SecurityHub::Endpoints::CreateActionTarget.build(context)
           when :create_automation_rule
             Aws::SecurityHub::Endpoints::CreateAutomationRule.build(context)
+          when :create_configuration_policy
+            Aws::SecurityHub::Endpoints::CreateConfigurationPolicy.build(context)
           when :create_finding_aggregator
             Aws::SecurityHub::Endpoints::CreateFindingAggregator.build(context)
           when :create_insight
@@ -94,6 +100,8 @@ module Aws::SecurityHub
             Aws::SecurityHub::Endpoints::DeclineInvitations.build(context)
           when :delete_action_target
             Aws::SecurityHub::Endpoints::DeleteActionTarget.build(context)
+          when :delete_configuration_policy
+            Aws::SecurityHub::Endpoints::DeleteConfigurationPolicy.build(context)
           when :delete_finding_aggregator
             Aws::SecurityHub::Endpoints::DeleteFindingAggregator.build(context)
           when :delete_insight
@@ -134,6 +142,10 @@ module Aws::SecurityHub
             Aws::SecurityHub::Endpoints::EnableSecurityHub.build(context)
           when :get_administrator_account
             Aws::SecurityHub::Endpoints::GetAdministratorAccount.build(context)
+          when :get_configuration_policy
+            Aws::SecurityHub::Endpoints::GetConfigurationPolicy.build(context)
+          when :get_configuration_policy_association
+            Aws::SecurityHub::Endpoints::GetConfigurationPolicyAssociation.build(context)
           when :get_enabled_standards
             Aws::SecurityHub::Endpoints::GetEnabledStandards.build(context)
           when :get_finding_aggregator
@@ -152,10 +164,16 @@ module Aws::SecurityHub
             Aws::SecurityHub::Endpoints::GetMasterAccount.build(context)
           when :get_members
             Aws::SecurityHub::Endpoints::GetMembers.build(context)
+          when :get_security_control_definition
+            Aws::SecurityHub::Endpoints::GetSecurityControlDefinition.build(context)
           when :invite_members
             Aws::SecurityHub::Endpoints::InviteMembers.build(context)
           when :list_automation_rules
             Aws::SecurityHub::Endpoints::ListAutomationRules.build(context)
+          when :list_configuration_policies
+            Aws::SecurityHub::Endpoints::ListConfigurationPolicies.build(context)
+          when :list_configuration_policy_associations
+            Aws::SecurityHub::Endpoints::ListConfigurationPolicyAssociations.build(context)
           when :list_enabled_products_for_import
             Aws::SecurityHub::Endpoints::ListEnabledProductsForImport.build(context)
           when :list_finding_aggregators
@@ -172,12 +190,18 @@ module Aws::SecurityHub
             Aws::SecurityHub::Endpoints::ListStandardsControlAssociations.build(context)
           when :list_tags_for_resource
             Aws::SecurityHub::Endpoints::ListTagsForResource.build(context)
+          when :start_configuration_policy_association
+            Aws::SecurityHub::Endpoints::StartConfigurationPolicyAssociation.build(context)
+          when :start_configuration_policy_disassociation
+            Aws::SecurityHub::Endpoints::StartConfigurationPolicyDisassociation.build(context)
           when :tag_resource
             Aws::SecurityHub::Endpoints::TagResource.build(context)
           when :untag_resource
             Aws::SecurityHub::Endpoints::UntagResource.build(context)
           when :update_action_target
             Aws::SecurityHub::Endpoints::UpdateActionTarget.build(context)
+          when :update_configuration_policy
+            Aws::SecurityHub::Endpoints::UpdateConfigurationPolicy.build(context)
           when :update_finding_aggregator
             Aws::SecurityHub::Endpoints::UpdateFindingAggregator.build(context)
           when :update_findings
@@ -186,6 +210,8 @@ module Aws::SecurityHub
             Aws::SecurityHub::Endpoints::UpdateInsight.build(context)
           when :update_organization_configuration
             Aws::SecurityHub::Endpoints::UpdateOrganizationConfiguration.build(context)
+          when :update_security_control
+            Aws::SecurityHub::Endpoints::UpdateSecurityControl.build(context)
           when :update_security_hub_configuration
             Aws::SecurityHub::Endpoints::UpdateSecurityHubConfiguration.build(context)
           when :update_standards_control

@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Athena
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Athena
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::Athena
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::Athena
     #   @option options [Aws::Athena::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Athena::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -543,6 +568,7 @@ module Aws::Athena
     #   resp.query_executions[0].statistics.data_manifest_location #=> String
     #   resp.query_executions[0].statistics.total_execution_time_in_millis #=> Integer
     #   resp.query_executions[0].statistics.query_queue_time_in_millis #=> Integer
+    #   resp.query_executions[0].statistics.service_pre_processing_time_in_millis #=> Integer
     #   resp.query_executions[0].statistics.query_planning_time_in_millis #=> Integer
     #   resp.query_executions[0].statistics.service_processing_time_in_millis #=> Integer
     #   resp.query_executions[0].statistics.result_reuse_information.reused_previous_result #=> Boolean
@@ -552,6 +578,9 @@ module Aws::Athena
     #   resp.query_executions[0].execution_parameters #=> Array
     #   resp.query_executions[0].execution_parameters[0] #=> String
     #   resp.query_executions[0].substatement_type #=> String
+    #   resp.query_executions[0].query_results_s3_access_grants_configuration.enable_s3_access_grants #=> Boolean
+    #   resp.query_executions[0].query_results_s3_access_grants_configuration.create_user_level_prefix #=> Boolean
+    #   resp.query_executions[0].query_results_s3_access_grants_configuration.authentication_type #=> String, one of "DIRECTORY_IDENTITY"
     #   resp.unprocessed_query_execution_ids #=> Array
     #   resp.unprocessed_query_execution_ids[0].query_execution_id #=> String
     #   resp.unprocessed_query_execution_ids[0].error_code #=> String
@@ -684,12 +713,7 @@ module Aws::Athena
     #       `AwsDataCatalog` that already exists in your account, of which you
     #       can have only one and cannot modify.
     #
-    #     * Queries that specify a Glue Data Catalog other than the default
-    #       `AwsDataCatalog` must be run on Athena engine version 2.
-    #
-    #     * In Regions where Athena engine version 2 is not available,
-    #       creating new Glue data catalogs results in an `INVALID_INPUT`
-    #       error.
+    #     ^
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of comma separated tags to add to the data catalog that is
@@ -725,13 +749,6 @@ module Aws::Athena
 
     # Creates a named query in the specified workgroup. Requires that you
     # have access to the workgroup.
-    #
-    # For code samples using the Amazon Web Services SDK for Java, see
-    # [Examples and Code Samples][1] in the *Amazon Athena User Guide*.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/athena/latest/ug/code-samples.html
     #
     # @option params [required, String] :name
     #   The query name.
@@ -970,6 +987,15 @@ module Aws::Athena
     #         kms_key: "KmsKey", # required
     #       },
     #       enable_minimum_encryption_configuration: false,
+    #       identity_center_configuration: {
+    #         enable_identity_center: false,
+    #         identity_center_instance_arn: "IdentityCenterInstanceArn",
+    #       },
+    #       query_results_s3_access_grants_configuration: {
+    #         enable_s3_access_grants: false, # required
+    #         create_user_level_prefix: false,
+    #         authentication_type: "DIRECTORY_IDENTITY", # required, accepts DIRECTORY_IDENTITY
+    #       },
     #     },
     #     description: "WorkGroupDescriptionString",
     #     tags: [
@@ -1040,13 +1066,6 @@ module Aws::Athena
 
     # Deletes the named query if you have access to the workgroup in which
     # the query was saved.
-    #
-    # For code samples using the Amazon Web Services SDK for Java, see
-    # [Examples and Code Samples][1] in the *Amazon Athena User Guide*.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/athena/latest/ug/code-samples.html
     #
     # @option params [required, String] :named_query_id
     #   The unique ID of the query to delete.
@@ -1368,6 +1387,10 @@ module Aws::Athena
     # @option params [required, String] :name
     #   The name of the data catalog to return.
     #
+    # @option params [String] :work_group
+    #   The name of the workgroup. Required if making an IAM Identity Center
+    #   request.
+    #
     # @return [Types::GetDataCatalogOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDataCatalogOutput#data_catalog #data_catalog} => Types::DataCatalog
@@ -1376,6 +1399,7 @@ module Aws::Athena
     #
     #   resp = client.get_data_catalog({
     #     name: "CatalogNameString", # required
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -1403,6 +1427,11 @@ module Aws::Athena
     # @option params [required, String] :database_name
     #   The name of the database to return.
     #
+    # @option params [String] :work_group
+    #   The name of the workgroup for which the metadata is being fetched.
+    #   Required if requesting an IAM Identity Center enabled Glue Data
+    #   Catalog.
+    #
     # @return [Types::GetDatabaseOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDatabaseOutput#database #database} => Types::Database
@@ -1412,6 +1441,7 @@ module Aws::Athena
     #   resp = client.get_database({
     #     catalog_name: "CatalogNameString", # required
     #     database_name: "NameString", # required
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -1579,6 +1609,7 @@ module Aws::Athena
     #   resp.query_execution.statistics.data_manifest_location #=> String
     #   resp.query_execution.statistics.total_execution_time_in_millis #=> Integer
     #   resp.query_execution.statistics.query_queue_time_in_millis #=> Integer
+    #   resp.query_execution.statistics.service_pre_processing_time_in_millis #=> Integer
     #   resp.query_execution.statistics.query_planning_time_in_millis #=> Integer
     #   resp.query_execution.statistics.service_processing_time_in_millis #=> Integer
     #   resp.query_execution.statistics.result_reuse_information.reused_previous_result #=> Boolean
@@ -1588,6 +1619,9 @@ module Aws::Athena
     #   resp.query_execution.execution_parameters #=> Array
     #   resp.query_execution.execution_parameters[0] #=> String
     #   resp.query_execution.substatement_type #=> String
+    #   resp.query_execution.query_results_s3_access_grants_configuration.enable_s3_access_grants #=> Boolean
+    #   resp.query_execution.query_results_s3_access_grants_configuration.create_user_level_prefix #=> Boolean
+    #   resp.query_execution.query_results_s3_access_grants_configuration.authentication_type #=> String, one of "DIRECTORY_IDENTITY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryExecution AWS API Documentation
     #
@@ -1677,11 +1711,13 @@ module Aws::Athena
 
     # Returns query execution runtime statistics related to a single
     # execution of a query if you have access to the workgroup in which the
-    # query ran. Query execution runtime statistics are returned only when
-    # QueryExecutionStatus$State is in a SUCCEEDED or FAILED state.
-    # Stage-level input and output row count and data size statistics are
-    # not shown when a query has row-level filters defined in Lake
-    # Formation.
+    # query ran. Statistics from the `Timeline` section of the response
+    # object are available as soon as QueryExecutionStatus$State is in a
+    # SUCCEEDED or FAILED state. The remaining non-timeline statistics in
+    # the response (like stage-level input and output row count and data
+    # size) are updated asynchronously and may not be available immediately
+    # after a query completes. The non-timeline statistics are also not
+    # included when a query has row-level filters defined in Lake Formation.
     #
     # @option params [required, String] :query_execution_id
     #   The unique ID of the query execution.
@@ -1699,6 +1735,7 @@ module Aws::Athena
     # @example Response structure
     #
     #   resp.query_runtime_statistics.timeline.query_queue_time_in_millis #=> Integer
+    #   resp.query_runtime_statistics.timeline.service_pre_processing_time_in_millis #=> Integer
     #   resp.query_runtime_statistics.timeline.query_planning_time_in_millis #=> Integer
     #   resp.query_runtime_statistics.timeline.engine_execution_time_in_millis #=> Integer
     #   resp.query_runtime_statistics.timeline.service_processing_time_in_millis #=> Integer
@@ -1839,6 +1876,11 @@ module Aws::Athena
     # @option params [required, String] :table_name
     #   The name of the table for which metadata is returned.
     #
+    # @option params [String] :work_group
+    #   The name of the workgroup for which the metadata is being fetched.
+    #   Required if requesting an IAM Identity Center enabled Glue Data
+    #   Catalog.
+    #
     # @return [Types::GetTableMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTableMetadataOutput#table_metadata #table_metadata} => Types::TableMetadata
@@ -1849,6 +1891,7 @@ module Aws::Athena
     #     catalog_name: "CatalogNameString", # required
     #     database_name: "NameString", # required
     #     table_name: "NameString", # required
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -1911,8 +1954,14 @@ module Aws::Athena
     #   resp.work_group.configuration.execution_role #=> String
     #   resp.work_group.configuration.customer_content_encryption_configuration.kms_key #=> String
     #   resp.work_group.configuration.enable_minimum_encryption_configuration #=> Boolean
+    #   resp.work_group.configuration.identity_center_configuration.enable_identity_center #=> Boolean
+    #   resp.work_group.configuration.identity_center_configuration.identity_center_instance_arn #=> String
+    #   resp.work_group.configuration.query_results_s3_access_grants_configuration.enable_s3_access_grants #=> Boolean
+    #   resp.work_group.configuration.query_results_s3_access_grants_configuration.create_user_level_prefix #=> Boolean
+    #   resp.work_group.configuration.query_results_s3_access_grants_configuration.authentication_type #=> String, one of "DIRECTORY_IDENTITY"
     #   resp.work_group.description #=> String
     #   resp.work_group.creation_time #=> Time
+    #   resp.work_group.identity_center_application_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetWorkGroup AWS API Documentation
     #
@@ -1923,10 +1972,12 @@ module Aws::Athena
       req.send_request(options)
     end
 
-    # Imports a single `ipynb` file to a Spark enabled workgroup. The
-    # maximum file size that can be imported is 10 megabytes. If an `ipynb`
-    # file with the same name already exists in the workgroup, throws an
-    # error.
+    # Imports a single `ipynb` file to a Spark enabled workgroup. To import
+    # the notebook, the request must specify a value for either `Payload` or
+    # `NoteBookS3LocationUri`. If neither is specified or both are
+    # specified, an `InvalidRequestException` occurs. The maximum file size
+    # that can be imported is 10 megabytes. If an `ipynb` file with the same
+    # name already exists in the workgroup, throws an error.
     #
     # @option params [required, String] :work_group
     #   The name of the Spark enabled workgroup to import the notebook to.
@@ -1934,11 +1985,16 @@ module Aws::Athena
     # @option params [required, String] :name
     #   The name of the notebook to import.
     #
-    # @option params [required, String] :payload
-    #   The notebook content to be imported.
+    # @option params [String] :payload
+    #   The notebook content to be imported. The payload must be in `ipynb`
+    #   format.
     #
     # @option params [required, String] :type
     #   The notebook content type. Currently, the only valid type is `IPYNB`.
+    #
+    # @option params [String] :notebook_s3_location_uri
+    #   A URI that specifies the Amazon S3 location of a notebook file in
+    #   `ipynb` format.
     #
     # @option params [String] :client_request_token
     #   A unique case-sensitive string used to ensure the request to import
@@ -1959,8 +2015,9 @@ module Aws::Athena
     #   resp = client.import_notebook({
     #     work_group: "WorkGroupName", # required
     #     name: "NotebookName", # required
-    #     payload: "Payload", # required
+    #     payload: "Payload",
     #     type: "IPYNB", # required, accepts IPYNB
+    #     notebook_s3_location_uri: "S3Uri",
     #     client_request_token: "ClientRequestToken",
     #   })
     #
@@ -2155,6 +2212,10 @@ module Aws::Athena
     # @option params [Integer] :max_results
     #   Specifies the maximum number of data catalogs to return.
     #
+    # @option params [String] :work_group
+    #   The name of the workgroup. Required if making an IAM Identity Center
+    #   request.
+    #
     # @return [Types::ListDataCatalogsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDataCatalogsOutput#data_catalogs_summary #data_catalogs_summary} => Array&lt;Types::DataCatalogSummary&gt;
@@ -2167,6 +2228,7 @@ module Aws::Athena
     #   resp = client.list_data_catalogs({
     #     next_token: "Token",
     #     max_results: 1,
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -2199,6 +2261,11 @@ module Aws::Athena
     # @option params [Integer] :max_results
     #   Specifies the maximum number of results to return.
     #
+    # @option params [String] :work_group
+    #   The name of the workgroup for which the metadata is being fetched.
+    #   Required if requesting an IAM Identity Center enabled Glue Data
+    #   Catalog.
+    #
     # @return [Types::ListDatabasesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDatabasesOutput#database_list #database_list} => Array&lt;Types::Database&gt;
@@ -2212,6 +2279,7 @@ module Aws::Athena
     #     catalog_name: "CatalogNameString", # required
     #     next_token: "Token",
     #     max_results: 1,
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -2349,13 +2417,6 @@ module Aws::Athena
     # specified workgroup. Requires that you have access to the specified
     # workgroup. If a workgroup is not specified, lists the saved queries
     # for the primary workgroup.
-    #
-    # For code samples using the Amazon Web Services SDK for Java, see
-    # [Examples and Code Samples][1] in the *Amazon Athena User Guide*.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/athena/latest/ug/code-samples.html
     #
     # @option params [String] :next_token
     #   A token generated by the Athena service that specifies where to
@@ -2546,16 +2607,10 @@ module Aws::Athena
     end
 
     # Provides a list of available query execution IDs for the queries in
-    # the specified workgroup. If a workgroup is not specified, returns a
-    # list of query execution IDs for the primary workgroup. Requires you to
-    # have access to the workgroup in which the queries ran.
-    #
-    # For code samples using the Amazon Web Services SDK for Java, see
-    # [Examples and Code Samples][1] in the *Amazon Athena User Guide*.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/athena/latest/ug/code-samples.html
+    # the specified workgroup. Athena keeps a query history for 45 days. If
+    # a workgroup is not specified, returns a list of query execution IDs
+    # for the primary workgroup. Requires you to have access to the
+    # workgroup in which the queries ran.
     #
     # @option params [String] :next_token
     #   A token generated by the Athena service that specifies where to
@@ -2704,6 +2759,11 @@ module Aws::Athena
     # @option params [Integer] :max_results
     #   Specifies the maximum number of results to return.
     #
+    # @option params [String] :work_group
+    #   The name of the workgroup for which the metadata is being fetched.
+    #   Required if requesting an IAM Identity Center enabled Glue Data
+    #   Catalog.
+    #
     # @return [Types::ListTableMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListTableMetadataOutput#table_metadata_list #table_metadata_list} => Array&lt;Types::TableMetadata&gt;
@@ -2719,6 +2779,7 @@ module Aws::Athena
     #     expression: "ExpressionString",
     #     next_token: "Token",
     #     max_results: 1,
+    #     work_group: "WorkGroupName",
     #   })
     #
     # @example Response structure
@@ -2828,6 +2889,7 @@ module Aws::Athena
     #   resp.work_groups[0].creation_time #=> Time
     #   resp.work_groups[0].engine_version.selected_engine_version #=> String
     #   resp.work_groups[0].engine_version.effective_engine_version #=> String
+    #   resp.work_groups[0].identity_center_application_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListWorkGroups AWS API Documentation
@@ -2876,6 +2938,14 @@ module Aws::Athena
     # Submits calculations for execution within a session. You can supply
     # the code to run as an inline code block within the request.
     #
+    # <note markdown="1"> The request syntax requires the
+    # StartCalculationExecutionRequest$CodeBlock parameter or the
+    # CalculationConfiguration$CodeBlock parameter, but not both. Because
+    # CalculationConfiguration$CodeBlock is deprecated, use the
+    # StartCalculationExecutionRequest$CodeBlock parameter instead.
+    #
+    #  </note>
+    #
     # @option params [required, String] :session_id
     #   The session ID.
     #
@@ -2886,7 +2956,8 @@ module Aws::Athena
     #   Contains configuration information for the calculation.
     #
     # @option params [String] :code_block
-    #   A string that contains the code of the calculation.
+    #   A string that contains the code of the calculation. Use this parameter
+    #   instead of CalculationConfiguration$CodeBlock, which is deprecated.
     #
     # @option params [String] :client_request_token
     #   A unique case-sensitive string used to ensure the request to create
@@ -2950,8 +3021,11 @@ module Aws::Athena
     #   A unique case-sensitive string used to ensure the request to create
     #   the query is idempotent (executes only once). If another
     #   `StartQueryExecution` request is received, the same response is
-    #   returned and another query is not created. If a parameter has changed,
-    #   for example, the `QueryString`, an error is returned.
+    #   returned and another query is not created. An error is returned if a
+    #   parameter, such as `QueryString`, has changed. A call to
+    #   `StartQueryExecution` that uses a previous client request token
+    #   returns the same `QueryExecutionId` even if the requester doesn't
+    #   have permission on the tables specified in `QueryString`.
     #
     #   This token is listed as not required because Amazon Web Services SDKs
     #   (for example the Amazon Web Services SDK for Java) auto-generate the
@@ -3150,13 +3224,6 @@ module Aws::Athena
 
     # Stops a query execution. Requires you to have access to the workgroup
     # in which the query ran.
-    #
-    # For code samples using the Amazon Web Services SDK for Java, see
-    # [Examples and Code Samples][1] in the *Amazon Athena User Guide*.
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/athena/latest/ug/code-samples.html
     #
     # @option params [required, String] :query_execution_id
     #   The unique ID of the query execution to stop.
@@ -3587,6 +3654,11 @@ module Aws::Athena
     #         kms_key: "KmsKey", # required
     #       },
     #       enable_minimum_encryption_configuration: false,
+    #       query_results_s3_access_grants_configuration: {
+    #         enable_s3_access_grants: false, # required
+    #         create_user_level_prefix: false,
+    #         authentication_type: "DIRECTORY_IDENTITY", # required, accepts DIRECTORY_IDENTITY
+    #       },
     #     },
     #     state: "ENABLED", # accepts ENABLED, DISABLED
     #   })
@@ -3613,7 +3685,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

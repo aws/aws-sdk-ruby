@@ -33,8 +33,18 @@ module Aws::Outposts
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
     CIDR = Shapes::StringShape.new(name: 'CIDR')
     CIDRList = Shapes::ListShape.new(name: 'CIDRList')
+    CancelCapacityTaskInput = Shapes::StructureShape.new(name: 'CancelCapacityTaskInput')
+    CancelCapacityTaskOutput = Shapes::StructureShape.new(name: 'CancelCapacityTaskOutput')
     CancelOrderInput = Shapes::StructureShape.new(name: 'CancelOrderInput')
     CancelOrderOutput = Shapes::StructureShape.new(name: 'CancelOrderOutput')
+    CapacityTaskFailure = Shapes::StructureShape.new(name: 'CapacityTaskFailure')
+    CapacityTaskFailureType = Shapes::StringShape.new(name: 'CapacityTaskFailureType')
+    CapacityTaskId = Shapes::StringShape.new(name: 'CapacityTaskId')
+    CapacityTaskList = Shapes::ListShape.new(name: 'CapacityTaskList')
+    CapacityTaskStatus = Shapes::StringShape.new(name: 'CapacityTaskStatus')
+    CapacityTaskStatusList = Shapes::ListShape.new(name: 'CapacityTaskStatusList')
+    CapacityTaskStatusReason = Shapes::StringShape.new(name: 'CapacityTaskStatusReason')
+    CapacityTaskSummary = Shapes::StructureShape.new(name: 'CapacityTaskSummary')
     CatalogItem = Shapes::StructureShape.new(name: 'CatalogItem')
     CatalogItemClass = Shapes::StringShape.new(name: 'CatalogItemClass')
     CatalogItemClassList = Shapes::ListShape.new(name: 'CatalogItemClassList')
@@ -65,12 +75,15 @@ module Aws::Outposts
     DeleteSiteOutput = Shapes::StructureShape.new(name: 'DeleteSiteOutput')
     DeviceSerialNumber = Shapes::StringShape.new(name: 'DeviceSerialNumber')
     DistrictOrCounty = Shapes::StringShape.new(name: 'DistrictOrCounty')
+    DryRun = Shapes::BooleanShape.new(name: 'DryRun')
     EC2Capacity = Shapes::StructureShape.new(name: 'EC2Capacity')
     EC2CapacityListDefinition = Shapes::ListShape.new(name: 'EC2CapacityListDefinition')
     EC2FamilyList = Shapes::ListShape.new(name: 'EC2FamilyList')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Family = Shapes::StringShape.new(name: 'Family')
     FiberOpticCableType = Shapes::StringShape.new(name: 'FiberOpticCableType')
+    GetCapacityTaskInput = Shapes::StructureShape.new(name: 'GetCapacityTaskInput')
+    GetCapacityTaskOutput = Shapes::StructureShape.new(name: 'GetCapacityTaskOutput')
     GetCatalogItemInput = Shapes::StructureShape.new(name: 'GetCatalogItemInput')
     GetCatalogItemOutput = Shapes::StructureShape.new(name: 'GetCatalogItemOutput')
     GetConnectionRequest = Shapes::StructureShape.new(name: 'GetConnectionRequest')
@@ -81,6 +94,8 @@ module Aws::Outposts
     GetOutpostInstanceTypesInput = Shapes::StructureShape.new(name: 'GetOutpostInstanceTypesInput')
     GetOutpostInstanceTypesOutput = Shapes::StructureShape.new(name: 'GetOutpostInstanceTypesOutput')
     GetOutpostOutput = Shapes::StructureShape.new(name: 'GetOutpostOutput')
+    GetOutpostSupportedInstanceTypesInput = Shapes::StructureShape.new(name: 'GetOutpostSupportedInstanceTypesInput')
+    GetOutpostSupportedInstanceTypesOutput = Shapes::StructureShape.new(name: 'GetOutpostSupportedInstanceTypesOutput')
     GetSiteAddressInput = Shapes::StructureShape.new(name: 'GetSiteAddressInput')
     GetSiteAddressOutput = Shapes::StructureShape.new(name: 'GetSiteAddressOutput')
     GetSiteInput = Shapes::StructureShape.new(name: 'GetSiteInput')
@@ -91,8 +106,11 @@ module Aws::Outposts
     InstanceFamilies = Shapes::ListShape.new(name: 'InstanceFamilies')
     InstanceFamilyName = Shapes::StringShape.new(name: 'InstanceFamilyName')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
+    InstanceTypeCapacity = Shapes::StructureShape.new(name: 'InstanceTypeCapacity')
+    InstanceTypeCount = Shapes::IntegerShape.new(name: 'InstanceTypeCount')
     InstanceTypeItem = Shapes::StructureShape.new(name: 'InstanceTypeItem')
     InstanceTypeListDefinition = Shapes::ListShape.new(name: 'InstanceTypeListDefinition')
+    InstanceTypeName = Shapes::StringShape.new(name: 'InstanceTypeName')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     LifeCycleStatus = Shapes::StringShape.new(name: 'LifeCycleStatus')
     LifeCycleStatusList = Shapes::ListShape.new(name: 'LifeCycleStatusList')
@@ -108,6 +126,8 @@ module Aws::Outposts
     LineItemStatusCounts = Shapes::MapShape.new(name: 'LineItemStatusCounts')
     ListAssetsInput = Shapes::StructureShape.new(name: 'ListAssetsInput')
     ListAssetsOutput = Shapes::StructureShape.new(name: 'ListAssetsOutput')
+    ListCapacityTasksInput = Shapes::StructureShape.new(name: 'ListCapacityTasksInput')
+    ListCapacityTasksOutput = Shapes::StructureShape.new(name: 'ListCapacityTasksOutput')
     ListCatalogItemsInput = Shapes::StructureShape.new(name: 'ListCatalogItemsInput')
     ListCatalogItemsOutput = Shapes::StructureShape.new(name: 'ListCatalogItemsOutput')
     ListOrdersInput = Shapes::StructureShape.new(name: 'ListOrdersInput')
@@ -152,6 +172,7 @@ module Aws::Outposts
     RackElevation = Shapes::FloatShape.new(name: 'RackElevation')
     RackId = Shapes::StringShape.new(name: 'RackId')
     RackPhysicalProperties = Shapes::StructureShape.new(name: 'RackPhysicalProperties')
+    RequestedInstancePools = Shapes::ListShape.new(name: 'RequestedInstancePools')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ServerEndpoint = Shapes::StringShape.new(name: 'ServerEndpoint')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
@@ -164,6 +185,8 @@ module Aws::Outposts
     SiteName = Shapes::StringShape.new(name: 'SiteName')
     SiteNotes = Shapes::StringShape.new(name: 'SiteNotes')
     SkuCode = Shapes::StringShape.new(name: 'SkuCode')
+    StartCapacityTaskInput = Shapes::StructureShape.new(name: 'StartCapacityTaskInput')
+    StartCapacityTaskOutput = Shapes::StructureShape.new(name: 'StartCapacityTaskOutput')
     StartConnectionRequest = Shapes::StructureShape.new(name: 'StartConnectionRequest')
     StartConnectionResponse = Shapes::StructureShape.new(name: 'StartConnectionResponse')
     StateOrRegion = Shapes::StringShape.new(name: 'StateOrRegion')
@@ -235,10 +258,33 @@ module Aws::Outposts
 
     CIDRList.member = Shapes::ShapeRef.new(shape: CIDR)
 
+    CancelCapacityTaskInput.add_member(:capacity_task_id, Shapes::ShapeRef.new(shape: CapacityTaskId, required: true, location: "uri", location_name: "CapacityTaskId"))
+    CancelCapacityTaskInput.add_member(:outpost_identifier, Shapes::ShapeRef.new(shape: OutpostIdentifier, required: true, location: "uri", location_name: "OutpostId"))
+    CancelCapacityTaskInput.struct_class = Types::CancelCapacityTaskInput
+
+    CancelCapacityTaskOutput.struct_class = Types::CancelCapacityTaskOutput
+
     CancelOrderInput.add_member(:order_id, Shapes::ShapeRef.new(shape: OrderId, required: true, location: "uri", location_name: "OrderId"))
     CancelOrderInput.struct_class = Types::CancelOrderInput
 
     CancelOrderOutput.struct_class = Types::CancelOrderOutput
+
+    CapacityTaskFailure.add_member(:reason, Shapes::ShapeRef.new(shape: CapacityTaskStatusReason, required: true, location_name: "Reason"))
+    CapacityTaskFailure.add_member(:type, Shapes::ShapeRef.new(shape: CapacityTaskFailureType, location_name: "Type"))
+    CapacityTaskFailure.struct_class = Types::CapacityTaskFailure
+
+    CapacityTaskList.member = Shapes::ShapeRef.new(shape: CapacityTaskSummary)
+
+    CapacityTaskStatusList.member = Shapes::ShapeRef.new(shape: CapacityTaskStatus)
+
+    CapacityTaskSummary.add_member(:capacity_task_id, Shapes::ShapeRef.new(shape: CapacityTaskId, location_name: "CapacityTaskId"))
+    CapacityTaskSummary.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, location_name: "OutpostId"))
+    CapacityTaskSummary.add_member(:order_id, Shapes::ShapeRef.new(shape: OrderId, location_name: "OrderId"))
+    CapacityTaskSummary.add_member(:capacity_task_status, Shapes::ShapeRef.new(shape: CapacityTaskStatus, location_name: "CapacityTaskStatus"))
+    CapacityTaskSummary.add_member(:creation_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "CreationDate"))
+    CapacityTaskSummary.add_member(:completion_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "CompletionDate"))
+    CapacityTaskSummary.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "LastModifiedDate"))
+    CapacityTaskSummary.struct_class = Types::CapacityTaskSummary
 
     CatalogItem.add_member(:catalog_item_id, Shapes::ShapeRef.new(shape: SkuCode, location_name: "CatalogItemId"))
     CatalogItem.add_member(:item_status, Shapes::ShapeRef.new(shape: CatalogItemStatus, location_name: "ItemStatus"))
@@ -327,6 +373,22 @@ module Aws::Outposts
 
     EC2FamilyList.member = Shapes::ShapeRef.new(shape: Family)
 
+    GetCapacityTaskInput.add_member(:capacity_task_id, Shapes::ShapeRef.new(shape: CapacityTaskId, required: true, location: "uri", location_name: "CapacityTaskId"))
+    GetCapacityTaskInput.add_member(:outpost_identifier, Shapes::ShapeRef.new(shape: OutpostIdentifier, required: true, location: "uri", location_name: "OutpostId"))
+    GetCapacityTaskInput.struct_class = Types::GetCapacityTaskInput
+
+    GetCapacityTaskOutput.add_member(:capacity_task_id, Shapes::ShapeRef.new(shape: CapacityTaskId, location_name: "CapacityTaskId"))
+    GetCapacityTaskOutput.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, location_name: "OutpostId"))
+    GetCapacityTaskOutput.add_member(:order_id, Shapes::ShapeRef.new(shape: OrderId, location_name: "OrderId"))
+    GetCapacityTaskOutput.add_member(:requested_instance_pools, Shapes::ShapeRef.new(shape: RequestedInstancePools, location_name: "RequestedInstancePools"))
+    GetCapacityTaskOutput.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
+    GetCapacityTaskOutput.add_member(:capacity_task_status, Shapes::ShapeRef.new(shape: CapacityTaskStatus, location_name: "CapacityTaskStatus"))
+    GetCapacityTaskOutput.add_member(:failed, Shapes::ShapeRef.new(shape: CapacityTaskFailure, location_name: "Failed"))
+    GetCapacityTaskOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "CreationDate"))
+    GetCapacityTaskOutput.add_member(:completion_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "CompletionDate"))
+    GetCapacityTaskOutput.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "LastModifiedDate"))
+    GetCapacityTaskOutput.struct_class = Types::GetCapacityTaskOutput
+
     GetCatalogItemInput.add_member(:catalog_item_id, Shapes::ShapeRef.new(shape: SkuCode, required: true, location: "uri", location_name: "CatalogItemId"))
     GetCatalogItemInput.struct_class = Types::GetCatalogItemInput
 
@@ -363,6 +425,16 @@ module Aws::Outposts
     GetOutpostOutput.add_member(:outpost, Shapes::ShapeRef.new(shape: Outpost, location_name: "Outpost"))
     GetOutpostOutput.struct_class = Types::GetOutpostOutput
 
+    GetOutpostSupportedInstanceTypesInput.add_member(:outpost_identifier, Shapes::ShapeRef.new(shape: OutpostIdentifier, required: true, location: "uri", location_name: "OutpostId"))
+    GetOutpostSupportedInstanceTypesInput.add_member(:order_id, Shapes::ShapeRef.new(shape: OrderId, required: true, location: "querystring", location_name: "OrderId"))
+    GetOutpostSupportedInstanceTypesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults1000, location: "querystring", location_name: "MaxResults"))
+    GetOutpostSupportedInstanceTypesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "NextToken"))
+    GetOutpostSupportedInstanceTypesInput.struct_class = Types::GetOutpostSupportedInstanceTypesInput
+
+    GetOutpostSupportedInstanceTypesOutput.add_member(:instance_types, Shapes::ShapeRef.new(shape: InstanceTypeListDefinition, location_name: "InstanceTypes"))
+    GetOutpostSupportedInstanceTypesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    GetOutpostSupportedInstanceTypesOutput.struct_class = Types::GetOutpostSupportedInstanceTypesOutput
+
     GetSiteAddressInput.add_member(:site_id, Shapes::ShapeRef.new(shape: SiteId, required: true, location: "uri", location_name: "SiteId"))
     GetSiteAddressInput.add_member(:address_type, Shapes::ShapeRef.new(shape: AddressType, required: true, location: "querystring", location_name: "AddressType"))
     GetSiteAddressInput.struct_class = Types::GetSiteAddressInput
@@ -381,6 +453,10 @@ module Aws::Outposts
     HostIdList.member = Shapes::ShapeRef.new(shape: HostId)
 
     InstanceFamilies.member = Shapes::ShapeRef.new(shape: InstanceFamilyName)
+
+    InstanceTypeCapacity.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceTypeName, required: true, location_name: "InstanceType"))
+    InstanceTypeCapacity.add_member(:count, Shapes::ShapeRef.new(shape: InstanceTypeCount, required: true, location_name: "Count"))
+    InstanceTypeCapacity.struct_class = Types::InstanceTypeCapacity
 
     InstanceTypeItem.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "InstanceType"))
     InstanceTypeItem.struct_class = Types::InstanceTypeItem
@@ -429,6 +505,16 @@ module Aws::Outposts
     ListAssetsOutput.add_member(:assets, Shapes::ShapeRef.new(shape: AssetListDefinition, location_name: "Assets"))
     ListAssetsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListAssetsOutput.struct_class = Types::ListAssetsOutput
+
+    ListCapacityTasksInput.add_member(:outpost_identifier_filter, Shapes::ShapeRef.new(shape: OutpostIdentifier, location: "querystring", location_name: "OutpostIdentifierFilter"))
+    ListCapacityTasksInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults1000, location: "querystring", location_name: "MaxResults"))
+    ListCapacityTasksInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "NextToken"))
+    ListCapacityTasksInput.add_member(:capacity_task_status_filter, Shapes::ShapeRef.new(shape: CapacityTaskStatusList, location: "querystring", location_name: "CapacityTaskStatusFilter"))
+    ListCapacityTasksInput.struct_class = Types::ListCapacityTasksInput
+
+    ListCapacityTasksOutput.add_member(:capacity_tasks, Shapes::ShapeRef.new(shape: CapacityTaskList, location_name: "CapacityTasks"))
+    ListCapacityTasksOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListCapacityTasksOutput.struct_class = Types::ListCapacityTasksOutput
 
     ListCatalogItemsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "NextToken"))
     ListCatalogItemsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults1000, location: "querystring", location_name: "MaxResults"))
@@ -530,6 +616,8 @@ module Aws::Outposts
     RackPhysicalProperties.add_member(:maximum_supported_weight_lbs, Shapes::ShapeRef.new(shape: MaximumSupportedWeightLbs, location_name: "MaximumSupportedWeightLbs"))
     RackPhysicalProperties.struct_class = Types::RackPhysicalProperties
 
+    RequestedInstancePools.member = Shapes::ShapeRef.new(shape: InstanceTypeCapacity)
+
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
@@ -550,7 +638,25 @@ module Aws::Outposts
     Site.add_member(:rack_physical_properties, Shapes::ShapeRef.new(shape: RackPhysicalProperties, location_name: "RackPhysicalProperties"))
     Site.struct_class = Types::Site
 
-    StartConnectionRequest.add_member(:device_serial_number, Shapes::ShapeRef.new(shape: DeviceSerialNumber, required: true, location_name: "DeviceSerialNumber"))
+    StartCapacityTaskInput.add_member(:outpost_identifier, Shapes::ShapeRef.new(shape: OutpostIdentifier, required: true, location: "uri", location_name: "OutpostId"))
+    StartCapacityTaskInput.add_member(:order_id, Shapes::ShapeRef.new(shape: OrderId, required: true, location_name: "OrderId"))
+    StartCapacityTaskInput.add_member(:instance_pools, Shapes::ShapeRef.new(shape: RequestedInstancePools, required: true, location_name: "InstancePools"))
+    StartCapacityTaskInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
+    StartCapacityTaskInput.struct_class = Types::StartCapacityTaskInput
+
+    StartCapacityTaskOutput.add_member(:capacity_task_id, Shapes::ShapeRef.new(shape: CapacityTaskId, location_name: "CapacityTaskId"))
+    StartCapacityTaskOutput.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, location_name: "OutpostId"))
+    StartCapacityTaskOutput.add_member(:order_id, Shapes::ShapeRef.new(shape: OrderId, location_name: "OrderId"))
+    StartCapacityTaskOutput.add_member(:requested_instance_pools, Shapes::ShapeRef.new(shape: RequestedInstancePools, location_name: "RequestedInstancePools"))
+    StartCapacityTaskOutput.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
+    StartCapacityTaskOutput.add_member(:capacity_task_status, Shapes::ShapeRef.new(shape: CapacityTaskStatus, location_name: "CapacityTaskStatus"))
+    StartCapacityTaskOutput.add_member(:failed, Shapes::ShapeRef.new(shape: CapacityTaskFailure, location_name: "Failed"))
+    StartCapacityTaskOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "CreationDate"))
+    StartCapacityTaskOutput.add_member(:completion_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "CompletionDate"))
+    StartCapacityTaskOutput.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: ISO8601Timestamp, location_name: "LastModifiedDate"))
+    StartCapacityTaskOutput.struct_class = Types::StartCapacityTaskOutput
+
+    StartConnectionRequest.add_member(:device_serial_number, Shapes::ShapeRef.new(shape: DeviceSerialNumber, location_name: "DeviceSerialNumber"))
     StartConnectionRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "AssetId"))
     StartConnectionRequest.add_member(:client_public_key, Shapes::ShapeRef.new(shape: WireGuardPublicKey, required: true, location_name: "ClientPublicKey"))
     StartConnectionRequest.add_member(:network_interface_device_index, Shapes::ShapeRef.new(shape: NetworkInterfaceDeviceIndex, required: true, location_name: "NetworkInterfaceDeviceIndex"))
@@ -653,6 +759,19 @@ module Aws::Outposts
         "uid" => "outposts-2019-12-03",
       }
 
+      api.add_operation(:cancel_capacity_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelCapacityTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/outposts/{OutpostId}/capacity/{CapacityTaskId}"
+        o.input = Shapes::ShapeRef.new(shape: CancelCapacityTaskInput)
+        o.output = Shapes::ShapeRef.new(shape: CancelCapacityTaskOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:cancel_order, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CancelOrder"
         o.http_method = "POST"
@@ -733,6 +852,18 @@ module Aws::Outposts
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_capacity_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCapacityTask"
+        o.http_method = "GET"
+        o.http_request_uri = "/outposts/{OutpostId}/capacity/{CapacityTaskId}"
+        o.input = Shapes::ShapeRef.new(shape: GetCapacityTaskInput)
+        o.output = Shapes::ShapeRef.new(shape: GetCapacityTaskOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_catalog_item, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCatalogItem"
         o.http_method = "GET"
@@ -797,6 +928,24 @@ module Aws::Outposts
         )
       end)
 
+      api.add_operation(:get_outpost_supported_instance_types, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetOutpostSupportedInstanceTypes"
+        o.http_method = "GET"
+        o.http_request_uri = "/outposts/{OutpostId}/supportedInstanceTypes"
+        o.input = Shapes::ShapeRef.new(shape: GetOutpostSupportedInstanceTypesInput)
+        o.output = Shapes::ShapeRef.new(shape: GetOutpostSupportedInstanceTypesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:get_site, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSite"
         o.http_method = "GET"
@@ -827,6 +976,24 @@ module Aws::Outposts
         o.http_request_uri = "/outposts/{OutpostId}/assets"
         o.input = Shapes::ShapeRef.new(shape: ListAssetsInput)
         o.output = Shapes::ShapeRef.new(shape: ListAssetsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_capacity_tasks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCapacityTasks"
+        o.http_method = "GET"
+        o.http_request_uri = "/capacity/tasks"
+        o.input = Shapes::ShapeRef.new(shape: ListCapacityTasksInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCapacityTasksOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -917,6 +1084,19 @@ module Aws::Outposts
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:start_capacity_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartCapacityTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/outposts/{OutpostId}/capacity"
+        o.input = Shapes::ShapeRef.new(shape: StartCapacityTaskInput)
+        o.output = Shapes::ShapeRef.new(shape: StartCapacityTaskOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:start_connection, Seahorse::Model::Operation.new.tap do |o|

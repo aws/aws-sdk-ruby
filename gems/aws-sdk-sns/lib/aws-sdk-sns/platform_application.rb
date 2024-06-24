@@ -45,6 +45,14 @@ module Aws::SNS
     # * `ApplePlatformBundleID` – The app identifier used to configure
     #   token-based authentication.
     #
+    # * `AuthenticationMethod` – Returns the credential type used when
+    #   sending push notifications from application to APNS/APNS\_Sandbox,
+    #   or application to GCM.
+    #
+    #   * APNS – Returns the token or certificate.
+    #
+    #   * GCM – Returns the token or key.
+    #
     # * `EventEndpointCreated` – Topic ARN to which EndpointCreated event
     #   notifications should be sent.
     #
@@ -76,7 +84,7 @@ module Aws::SNS
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_platform_application_attributes(platform_application_arn: @arn)
       end
       @data = resp.data
@@ -122,7 +130,7 @@ module Aws::SNS
     #   Arbitrary user data to associate with the endpoint. Amazon SNS does
     #   not use this data. The data must be in UTF-8 format and less than 2KB.
     # @option options [Hash<String,String>] :attributes
-    #   For a list of attributes, see [SetEndpointAttributes][1].
+    #   For a list of attributes, see [ `SetEndpointAttributes` ][1].
     #
     #
     #
@@ -130,7 +138,7 @@ module Aws::SNS
     # @return [PlatformEndpoint]
     def create_platform_endpoint(options = {})
       options = options.merge(platform_application_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_platform_endpoint(options)
       end
       PlatformEndpoint.new(
@@ -146,7 +154,7 @@ module Aws::SNS
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(platform_application_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_platform_application(options)
       end
       resp.data
@@ -175,8 +183,16 @@ module Aws::SNS
     #     * For Apple Services using token credentials, `PlatformCredential`
     #       is signing key.
     #
-    #     * For GCM (Firebase Cloud Messaging), `PlatformCredential` is API
-    #       key.
+    #     * For GCM (Firebase Cloud Messaging) using key credentials, there is
+    #       no `PlatformPrincipal`. The `PlatformCredential` is `API key`.
+    #
+    #     * For GCM (Firebase Cloud Messaging) using token credentials, there
+    #       is no `PlatformPrincipal`. The `PlatformCredential` is a JSON
+    #       formatted private key file. When using the Amazon Web Services
+    #       CLI, the file must be in string format and special characters must
+    #       be ignored. To format the file correctly, Amazon SNS recommends
+    #       using the following command: `` SERVICE_JSON=`jq @json <<< cat
+    #       service.json` ``.
     #   ^
     #
     #   * `PlatformPrincipal` – The principal received from the notification
@@ -227,7 +243,7 @@ module Aws::SNS
     # @return [EmptyStructure]
     def set_attributes(options = {})
       options = options.merge(platform_application_arn: @arn)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.set_platform_application_attributes(options)
       end
       resp.data
@@ -243,7 +259,7 @@ module Aws::SNS
     def endpoints(options = {})
       batches = Enumerator.new do |y|
         options = options.merge(platform_application_arn: @arn)
-        resp = Aws::Plugins::UserAgent.feature('resource') do
+        resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
           @client.list_endpoints_by_platform_application(options)
         end
         resp.each_page do |page|

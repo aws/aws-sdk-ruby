@@ -924,6 +924,10 @@
       "max":50,
       "min":0
     },
+    "AgentVersion":{
+      "type":"string",
+      "pattern":"^[0-9]{1,5}.[0-9]{1,5}.[0-9]{1,5}(.[0-9]{4}.[0-9]{3}.[0-9]{4})?$"
+    },
     "AssociateSourceNetworkStackRequest":{
       "type":"structure",
       "required":[
@@ -1002,6 +1006,7 @@
         "forceUefi":{"shape":"Boolean"},
         "rootVolumeName":{"shape":"LargeBoundedString"},
         "volumeToConversionMap":{"shape":"VolumeToConversionMap"},
+        "volumeToProductCodes":{"shape":"VolumeToProductCodes"},
         "volumeToVolumeSize":{"shape":"VolumeToSizeMap"}
       }
     },
@@ -1032,6 +1037,7 @@
         "copyTags":{"shape":"Boolean"},
         "exportBucketArn":{"shape":"ARN"},
         "launchDisposition":{"shape":"LaunchDisposition"},
+        "launchIntoSourceInstance":{"shape":"Boolean"},
         "licensing":{"shape":"Licensing"},
         "postLaunchEnabled":{"shape":"Boolean"},
         "tags":{"shape":"TagsMap"},
@@ -1133,7 +1139,8 @@
         "etaDateTime":{"shape":"ISO8601DatetimeString"},
         "lagDuration":{"shape":"ISO8601DurationString"},
         "replicatedDisks":{"shape":"DataReplicationInfoReplicatedDisks"},
-        "stagingAvailabilityZone":{"shape":"AwsAvailabilityZone"}
+        "stagingAvailabilityZone":{"shape":"AwsAvailabilityZone"},
+        "stagingOutpostArn":{"shape":"OutpostARN"}
       }
     },
     "DataReplicationInfoReplicatedDisk":{
@@ -1143,7 +1150,8 @@
         "deviceName":{"shape":"BoundedString"},
         "replicatedStorageBytes":{"shape":"PositiveInteger"},
         "rescannedStorageBytes":{"shape":"PositiveInteger"},
-        "totalStorageBytes":{"shape":"PositiveInteger"}
+        "totalStorageBytes":{"shape":"PositiveInteger"},
+        "volumeStatus":{"shape":"VolumeStatus"}
       }
     },
     "DataReplicationInfoReplicatedDisks":{
@@ -1886,6 +1894,7 @@
     },
     "LaunchActionOrder":{
       "type":"integer",
+      "box":true,
       "max":10000,
       "min":2
     },
@@ -1992,6 +2001,7 @@
         "copyTags":{"shape":"Boolean"},
         "ec2LaunchTemplateID":{"shape":"BoundedString"},
         "launchDisposition":{"shape":"LaunchDisposition"},
+        "launchIntoInstanceProperties":{"shape":"LaunchIntoInstanceProperties"},
         "licensing":{"shape":"Licensing"},
         "name":{"shape":"SmallBoundedString"},
         "postLaunchEnabled":{"shape":"Boolean"},
@@ -2008,6 +2018,7 @@
         "exportBucketArn":{"shape":"ARN"},
         "launchConfigurationTemplateID":{"shape":"LaunchConfigurationTemplateID"},
         "launchDisposition":{"shape":"LaunchDisposition"},
+        "launchIntoSourceInstance":{"shape":"Boolean"},
         "licensing":{"shape":"Licensing"},
         "postLaunchEnabled":{"shape":"Boolean"},
         "tags":{"shape":"TagsMap"},
@@ -2038,6 +2049,12 @@
         "STOPPED",
         "STARTED"
       ]
+    },
+    "LaunchIntoInstanceProperties":{
+      "type":"structure",
+      "members":{
+        "launchIntoEC2InstanceID":{"shape":"EC2InstanceID"}
+      }
     },
     "LaunchStatus":{
       "type":"string",
@@ -2160,11 +2177,13 @@
     },
     "MaxResultsReplicatingSourceServers":{
       "type":"integer",
+      "box":true,
       "max":300,
       "min":1
     },
     "MaxResultsType":{
       "type":"integer",
+      "box":true,
       "max":1000,
       "min":1
     },
@@ -2194,6 +2213,12 @@
         "ON_PREMISES",
         "AWS"
       ]
+    },
+    "OutpostARN":{
+      "type":"string",
+      "max":255,
+      "min":20,
+      "pattern":"^arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:outpost/op-[a-f0-9]{17}$"
     },
     "PITPolicy":{
       "type":"list",
@@ -2264,6 +2289,30 @@
       "type":"long",
       "min":0
     },
+    "ProductCode":{
+      "type":"structure",
+      "members":{
+        "productCodeId":{"shape":"ProductCodeId"},
+        "productCodeMode":{"shape":"ProductCodeMode"}
+      }
+    },
+    "ProductCodeId":{
+      "type":"string",
+      "max":25,
+      "min":25,
+      "pattern":"^([A-Za-z0-9])+$"
+    },
+    "ProductCodeMode":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "ProductCodes":{
+      "type":"list",
+      "member":{"shape":"ProductCode"}
+    },
     "PutLaunchActionRequest":{
       "type":"structure",
       "required":[
@@ -2272,6 +2321,7 @@
         "actionVersion",
         "active",
         "category",
+        "description",
         "name",
         "optional",
         "order",
@@ -2311,6 +2361,7 @@
     "RecoveryInstance":{
       "type":"structure",
       "members":{
+        "agentVersion":{"shape":"AgentVersion"},
         "arn":{"shape":"ARN"},
         "dataReplicationInfo":{"shape":"RecoveryInstanceDataReplicationInfo"},
         "ec2InstanceID":{"shape":"EC2InstanceID"},
@@ -2323,6 +2374,7 @@
         "pointInTimeSnapshotDateTime":{"shape":"ISO8601DatetimeString"},
         "recoveryInstanceID":{"shape":"RecoveryInstanceID"},
         "recoveryInstanceProperties":{"shape":"RecoveryInstanceProperties"},
+        "sourceOutpostArn":{"shape":"OutpostARN"},
         "sourceServerID":{"shape":"SourceServerID"},
         "tags":{"shape":"TagsMap"}
       }
@@ -2343,7 +2395,8 @@
         "etaDateTime":{"shape":"ISO8601DatetimeString"},
         "lagDuration":{"shape":"ISO8601DatetimeString"},
         "replicatedDisks":{"shape":"RecoveryInstanceDataReplicationInfoReplicatedDisks"},
-        "stagingAvailabilityZone":{"shape":"AwsAvailabilityZone"}
+        "stagingAvailabilityZone":{"shape":"AwsAvailabilityZone"},
+        "stagingOutpostArn":{"shape":"OutpostARN"}
       }
     },
     "RecoveryInstanceDataReplicationInfoReplicatedDisk":{
@@ -2751,7 +2804,8 @@
       "members":{
         "originAccountID":{"shape":"AccountID"},
         "originAvailabilityZone":{"shape":"AwsAvailabilityZone"},
-        "originRegion":{"shape":"AwsRegion"}
+        "originRegion":{"shape":"AwsRegion"},
+        "sourceOutpostArn":{"shape":"OutpostARN"}
       }
     },
     "SourceNetwork":{
@@ -2806,6 +2860,7 @@
     "SourceServer":{
       "type":"structure",
       "members":{
+        "agentVersion":{"shape":"AgentVersion"},
         "arn":{"shape":"ARN"},
         "dataReplicationInfo":{"shape":"DataReplicationInfo"},
         "lastLaunchResult":{"shape":"LastLaunchResult"},
@@ -2845,7 +2900,7 @@
       "type":"string",
       "max":1011,
       "min":1,
-      "pattern":"^([A-Za-z0-9-])+$"
+      "pattern":"^([A-Za-z0-9-/:])+$"
     },
     "StagingArea":{
       "type":"structure",
@@ -3007,6 +3062,7 @@
     },
     "StrictlyPositiveInteger":{
       "type":"integer",
+      "box":true,
       "min":1
     },
     "SubnetID":{
@@ -3143,6 +3199,7 @@
         "copyPrivateIp":{"shape":"Boolean"},
         "copyTags":{"shape":"Boolean"},
         "launchDisposition":{"shape":"LaunchDisposition"},
+        "launchIntoInstanceProperties":{"shape":"LaunchIntoInstanceProperties"},
         "licensing":{"shape":"Licensing"},
         "name":{"shape":"SmallBoundedString"},
         "postLaunchEnabled":{"shape":"Boolean"},
@@ -3159,6 +3216,7 @@
         "exportBucketArn":{"shape":"ARN"},
         "launchConfigurationTemplateID":{"shape":"LaunchConfigurationTemplateID"},
         "launchDisposition":{"shape":"LaunchDisposition"},
+        "launchIntoSourceInstance":{"shape":"Boolean"},
         "licensing":{"shape":"Licensing"},
         "postLaunchEnabled":{"shape":"Boolean"},
         "targetInstanceTypeRightSizingMethod":{"shape":"TargetInstanceTypeRightSizingMethod"}
@@ -3249,10 +3307,25 @@
         "other"
       ]
     },
+    "VolumeStatus":{
+      "type":"string",
+      "enum":[
+        "REGULAR",
+        "CONTAINS_MARKETPLACE_PRODUCT_CODES",
+        "MISSING_VOLUME_ATTRIBUTES",
+        "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE",
+        "PENDING"
+      ]
+    },
     "VolumeToConversionMap":{
       "type":"map",
       "key":{"shape":"LargeBoundedString"},
       "value":{"shape":"ConversionMap"}
+    },
+    "VolumeToProductCodes":{
+      "type":"map",
+      "key":{"shape":"LargeBoundedString"},
+      "value":{"shape":"ProductCodes"}
     },
     "VolumeToSizeMap":{
       "type":"map",

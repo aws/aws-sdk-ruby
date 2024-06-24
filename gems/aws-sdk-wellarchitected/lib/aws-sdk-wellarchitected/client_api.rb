@@ -14,6 +14,9 @@ module Aws::WellArchitected
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountJiraConfigurationInput = Shapes::StructureShape.new(name: 'AccountJiraConfigurationInput')
+    AccountJiraConfigurationOutput = Shapes::StructureShape.new(name: 'AccountJiraConfigurationOutput')
+    AccountJiraIssueManagementStatus = Shapes::StringShape.new(name: 'AccountJiraIssueManagementStatus')
     AccountSummary = Shapes::MapShape.new(name: 'AccountSummary')
     AdditionalResourceType = Shapes::StringShape.new(name: 'AdditionalResourceType')
     AdditionalResources = Shapes::StructureShape.new(name: 'AdditionalResources')
@@ -108,6 +111,7 @@ module Aws::WellArchitected
     GetConsolidatedReportInput = Shapes::StructureShape.new(name: 'GetConsolidatedReportInput')
     GetConsolidatedReportMaxResults = Shapes::IntegerShape.new(name: 'GetConsolidatedReportMaxResults')
     GetConsolidatedReportOutput = Shapes::StructureShape.new(name: 'GetConsolidatedReportOutput')
+    GetGlobalSettingsOutput = Shapes::StructureShape.new(name: 'GetGlobalSettingsOutput')
     GetLensInput = Shapes::StructureShape.new(name: 'GetLensInput')
     GetLensOutput = Shapes::StructureShape.new(name: 'GetLensOutput')
     GetLensReviewInput = Shapes::StructureShape.new(name: 'GetLensReviewInput')
@@ -138,10 +142,18 @@ module Aws::WellArchitected
     ImprovementSummaries = Shapes::ListShape.new(name: 'ImprovementSummaries')
     ImprovementSummary = Shapes::StructureShape.new(name: 'ImprovementSummary')
     IncludeSharedResources = Shapes::BooleanShape.new(name: 'IncludeSharedResources')
+    IntegratingService = Shapes::StringShape.new(name: 'IntegratingService')
+    IntegrationStatus = Shapes::StringShape.new(name: 'IntegrationStatus')
+    IntegrationStatusInput = Shapes::StringShape.new(name: 'IntegrationStatusInput')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     IsApplicable = Shapes::BooleanShape.new(name: 'IsApplicable')
     IsMajorVersion = Shapes::BooleanShape.new(name: 'IsMajorVersion')
     IsReviewOwnerUpdateAcknowledged = Shapes::BooleanShape.new(name: 'IsReviewOwnerUpdateAcknowledged')
+    IssueManagementType = Shapes::StringShape.new(name: 'IssueManagementType')
+    JiraConfiguration = Shapes::StructureShape.new(name: 'JiraConfiguration')
+    JiraIssueUrl = Shapes::StringShape.new(name: 'JiraIssueUrl')
+    JiraProjectKey = Shapes::StringShape.new(name: 'JiraProjectKey')
+    JiraSelectedQuestionConfiguration = Shapes::StructureShape.new(name: 'JiraSelectedQuestionConfiguration')
     Lens = Shapes::StructureShape.new(name: 'Lens')
     LensAlias = Shapes::StringShape.new(name: 'LensAlias')
     LensAliases = Shapes::ListShape.new(name: 'LensAliases')
@@ -297,7 +309,11 @@ module Aws::WellArchitected
     RiskCounts = Shapes::MapShape.new(name: 'RiskCounts')
     SelectedChoiceIds = Shapes::ListShape.new(name: 'SelectedChoiceIds')
     SelectedChoices = Shapes::ListShape.new(name: 'SelectedChoices')
+    SelectedPillar = Shapes::StructureShape.new(name: 'SelectedPillar')
+    SelectedPillars = Shapes::ListShape.new(name: 'SelectedPillars')
     SelectedProfileChoiceIds = Shapes::ListShape.new(name: 'SelectedProfileChoiceIds')
+    SelectedQuestionId = Shapes::StringShape.new(name: 'SelectedQuestionId')
+    SelectedQuestionIds = Shapes::ListShape.new(name: 'SelectedQuestionIds')
     ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     ShareId = Shapes::StringShape.new(name: 'ShareId')
@@ -311,6 +327,7 @@ module Aws::WellArchitected
     SharedWith = Shapes::StringShape.new(name: 'SharedWith')
     SharedWithPrefix = Shapes::StringShape.new(name: 'SharedWithPrefix')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
+    Subdomain = Shapes::StringShape.new(name: 'Subdomain')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -332,6 +349,7 @@ module Aws::WellArchitected
     UpdateAnswerInput = Shapes::StructureShape.new(name: 'UpdateAnswerInput')
     UpdateAnswerOutput = Shapes::StructureShape.new(name: 'UpdateAnswerOutput')
     UpdateGlobalSettingsInput = Shapes::StructureShape.new(name: 'UpdateGlobalSettingsInput')
+    UpdateIntegrationInput = Shapes::StructureShape.new(name: 'UpdateIntegrationInput')
     UpdateLensReviewInput = Shapes::StructureShape.new(name: 'UpdateLensReviewInput')
     UpdateLensReviewOutput = Shapes::StructureShape.new(name: 'UpdateLensReviewOutput')
     UpdateProfileInput = Shapes::StructureShape.new(name: 'UpdateProfileInput')
@@ -371,6 +389,9 @@ module Aws::WellArchitected
     WorkloadImprovementStatus = Shapes::StringShape.new(name: 'WorkloadImprovementStatus')
     WorkloadIndustry = Shapes::StringShape.new(name: 'WorkloadIndustry')
     WorkloadIndustryType = Shapes::StringShape.new(name: 'WorkloadIndustryType')
+    WorkloadIssueManagementStatus = Shapes::StringShape.new(name: 'WorkloadIssueManagementStatus')
+    WorkloadJiraConfigurationInput = Shapes::StructureShape.new(name: 'WorkloadJiraConfigurationInput')
+    WorkloadJiraConfigurationOutput = Shapes::StructureShape.new(name: 'WorkloadJiraConfigurationOutput')
     WorkloadLenses = Shapes::ListShape.new(name: 'WorkloadLenses')
     WorkloadName = Shapes::StringShape.new(name: 'WorkloadName')
     WorkloadNamePrefix = Shapes::StringShape.new(name: 'WorkloadNamePrefix')
@@ -390,6 +411,20 @@ module Aws::WellArchitected
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccountJiraConfigurationInput.add_member(:issue_management_status, Shapes::ShapeRef.new(shape: AccountJiraIssueManagementStatus, location_name: "IssueManagementStatus"))
+    AccountJiraConfigurationInput.add_member(:issue_management_type, Shapes::ShapeRef.new(shape: IssueManagementType, location_name: "IssueManagementType"))
+    AccountJiraConfigurationInput.add_member(:jira_project_key, Shapes::ShapeRef.new(shape: JiraProjectKey, location_name: "JiraProjectKey"))
+    AccountJiraConfigurationInput.add_member(:integration_status, Shapes::ShapeRef.new(shape: IntegrationStatusInput, location_name: "IntegrationStatus"))
+    AccountJiraConfigurationInput.struct_class = Types::AccountJiraConfigurationInput
+
+    AccountJiraConfigurationOutput.add_member(:integration_status, Shapes::ShapeRef.new(shape: IntegrationStatus, location_name: "IntegrationStatus"))
+    AccountJiraConfigurationOutput.add_member(:issue_management_status, Shapes::ShapeRef.new(shape: AccountJiraIssueManagementStatus, location_name: "IssueManagementStatus"))
+    AccountJiraConfigurationOutput.add_member(:issue_management_type, Shapes::ShapeRef.new(shape: IssueManagementType, location_name: "IssueManagementType"))
+    AccountJiraConfigurationOutput.add_member(:subdomain, Shapes::ShapeRef.new(shape: Subdomain, location_name: "Subdomain"))
+    AccountJiraConfigurationOutput.add_member(:jira_project_key, Shapes::ShapeRef.new(shape: JiraProjectKey, location_name: "JiraProjectKey"))
+    AccountJiraConfigurationOutput.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
+    AccountJiraConfigurationOutput.struct_class = Types::AccountJiraConfigurationOutput
 
     AccountSummary.key = Shapes::ShapeRef.new(shape: CheckStatus)
     AccountSummary.value = Shapes::ShapeRef.new(shape: CheckStatusCount)
@@ -414,6 +449,7 @@ module Aws::WellArchitected
     Answer.add_member(:risk, Shapes::ShapeRef.new(shape: Risk, location_name: "Risk"))
     Answer.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
     Answer.add_member(:reason, Shapes::ShapeRef.new(shape: AnswerReason, location_name: "Reason"))
+    Answer.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: JiraConfiguration, location_name: "JiraConfiguration"))
     Answer.struct_class = Types::Answer
 
     AnswerSummaries.member = Shapes::ShapeRef.new(shape: AnswerSummary)
@@ -428,6 +464,7 @@ module Aws::WellArchitected
     AnswerSummary.add_member(:risk, Shapes::ShapeRef.new(shape: Risk, location_name: "Risk"))
     AnswerSummary.add_member(:reason, Shapes::ShapeRef.new(shape: AnswerReason, location_name: "Reason"))
     AnswerSummary.add_member(:question_type, Shapes::ShapeRef.new(shape: QuestionType, location_name: "QuestionType"))
+    AnswerSummary.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: JiraConfiguration, location_name: "JiraConfiguration"))
     AnswerSummary.struct_class = Types::AnswerSummary
 
     AssociateLensesInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
@@ -623,6 +660,7 @@ module Aws::WellArchitected
     CreateWorkloadInput.add_member(:applications, Shapes::ShapeRef.new(shape: WorkloadApplications, location_name: "Applications"))
     CreateWorkloadInput.add_member(:profile_arns, Shapes::ShapeRef.new(shape: WorkloadProfileArns, location_name: "ProfileArns"))
     CreateWorkloadInput.add_member(:review_template_arns, Shapes::ShapeRef.new(shape: ReviewTemplateArns, location_name: "ReviewTemplateArns"))
+    CreateWorkloadInput.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: WorkloadJiraConfigurationInput, location_name: "JiraConfiguration"))
     CreateWorkloadInput.struct_class = Types::CreateWorkloadInput
 
     CreateWorkloadOutput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
@@ -714,6 +752,11 @@ module Aws::WellArchitected
     GetConsolidatedReportOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetConsolidatedReportOutput.add_member(:base_64_string, Shapes::ShapeRef.new(shape: Base64String, location_name: "Base64String"))
     GetConsolidatedReportOutput.struct_class = Types::GetConsolidatedReportOutput
+
+    GetGlobalSettingsOutput.add_member(:organization_sharing_status, Shapes::ShapeRef.new(shape: OrganizationSharingStatus, location_name: "OrganizationSharingStatus"))
+    GetGlobalSettingsOutput.add_member(:discovery_integration_status, Shapes::ShapeRef.new(shape: DiscoveryIntegrationStatus, location_name: "DiscoveryIntegrationStatus"))
+    GetGlobalSettingsOutput.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: AccountJiraConfigurationOutput, location_name: "JiraConfiguration"))
+    GetGlobalSettingsOutput.struct_class = Types::GetGlobalSettingsOutput
 
     GetLensInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
     GetLensInput.add_member(:lens_version, Shapes::ShapeRef.new(shape: LensVersion, location: "querystring", location_name: "LensVersion"))
@@ -823,10 +866,18 @@ module Aws::WellArchitected
     ImprovementSummary.add_member(:risk, Shapes::ShapeRef.new(shape: Risk, location_name: "Risk"))
     ImprovementSummary.add_member(:improvement_plan_url, Shapes::ShapeRef.new(shape: ImprovementPlanUrl, location_name: "ImprovementPlanUrl"))
     ImprovementSummary.add_member(:improvement_plans, Shapes::ShapeRef.new(shape: ChoiceImprovementPlans, location_name: "ImprovementPlans"))
+    ImprovementSummary.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: JiraConfiguration, location_name: "JiraConfiguration"))
     ImprovementSummary.struct_class = Types::ImprovementSummary
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    JiraConfiguration.add_member(:jira_issue_url, Shapes::ShapeRef.new(shape: JiraIssueUrl, location_name: "JiraIssueUrl"))
+    JiraConfiguration.add_member(:last_synced_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastSyncedTime"))
+    JiraConfiguration.struct_class = Types::JiraConfiguration
+
+    JiraSelectedQuestionConfiguration.add_member(:selected_pillars, Shapes::ShapeRef.new(shape: SelectedPillars, location_name: "SelectedPillars"))
+    JiraSelectedQuestionConfiguration.struct_class = Types::JiraSelectedQuestionConfiguration
 
     Lens.add_member(:lens_arn, Shapes::ShapeRef.new(shape: LensArn, location_name: "LensArn"))
     Lens.add_member(:lens_version, Shapes::ShapeRef.new(shape: LensVersion, location_name: "LensVersion"))
@@ -852,6 +903,7 @@ module Aws::WellArchitected
     LensReview.add_member(:lens_name, Shapes::ShapeRef.new(shape: LensName, location_name: "LensName"))
     LensReview.add_member(:lens_status, Shapes::ShapeRef.new(shape: LensStatus, location_name: "LensStatus"))
     LensReview.add_member(:pillar_review_summaries, Shapes::ShapeRef.new(shape: PillarReviewSummaries, location_name: "PillarReviewSummaries"))
+    LensReview.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: JiraSelectedQuestionConfiguration, location_name: "JiraConfiguration"))
     LensReview.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     LensReview.add_member(:notes, Shapes::ShapeRef.new(shape: Notes, location_name: "Notes"))
     LensReview.add_member(:risk_counts, Shapes::ShapeRef.new(shape: RiskCounts, location_name: "RiskCounts"))
@@ -1372,7 +1424,15 @@ module Aws::WellArchitected
 
     SelectedChoices.member = Shapes::ShapeRef.new(shape: ChoiceId)
 
+    SelectedPillar.add_member(:pillar_id, Shapes::ShapeRef.new(shape: PillarId, location_name: "PillarId"))
+    SelectedPillar.add_member(:selected_question_ids, Shapes::ShapeRef.new(shape: SelectedQuestionIds, location_name: "SelectedQuestionIds"))
+    SelectedPillar.struct_class = Types::SelectedPillar
+
+    SelectedPillars.member = Shapes::ShapeRef.new(shape: SelectedPillar)
+
     SelectedProfileChoiceIds.member = Shapes::ShapeRef.new(shape: ChoiceId)
+
+    SelectedQuestionIds.member = Shapes::ShapeRef.new(shape: SelectedQuestionId)
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "Message"))
     ServiceQuotaExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ExceptionResourceId, location_name: "ResourceId"))
@@ -1457,12 +1517,19 @@ module Aws::WellArchitected
 
     UpdateGlobalSettingsInput.add_member(:organization_sharing_status, Shapes::ShapeRef.new(shape: OrganizationSharingStatus, location_name: "OrganizationSharingStatus"))
     UpdateGlobalSettingsInput.add_member(:discovery_integration_status, Shapes::ShapeRef.new(shape: DiscoveryIntegrationStatus, location_name: "DiscoveryIntegrationStatus"))
+    UpdateGlobalSettingsInput.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: AccountJiraConfigurationInput, location_name: "JiraConfiguration"))
     UpdateGlobalSettingsInput.struct_class = Types::UpdateGlobalSettingsInput
+
+    UpdateIntegrationInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
+    UpdateIntegrationInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    UpdateIntegrationInput.add_member(:integrating_service, Shapes::ShapeRef.new(shape: IntegratingService, required: true, location_name: "IntegratingService"))
+    UpdateIntegrationInput.struct_class = Types::UpdateIntegrationInput
 
     UpdateLensReviewInput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, required: true, location: "uri", location_name: "WorkloadId"))
     UpdateLensReviewInput.add_member(:lens_alias, Shapes::ShapeRef.new(shape: LensAlias, required: true, location: "uri", location_name: "LensAlias"))
     UpdateLensReviewInput.add_member(:lens_notes, Shapes::ShapeRef.new(shape: Notes, location_name: "LensNotes"))
     UpdateLensReviewInput.add_member(:pillar_notes, Shapes::ShapeRef.new(shape: PillarNotes, location_name: "PillarNotes"))
+    UpdateLensReviewInput.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: JiraSelectedQuestionConfiguration, location_name: "JiraConfiguration"))
     UpdateLensReviewInput.struct_class = Types::UpdateLensReviewInput
 
     UpdateLensReviewOutput.add_member(:workload_id, Shapes::ShapeRef.new(shape: WorkloadId, location_name: "WorkloadId"))
@@ -1537,6 +1604,7 @@ module Aws::WellArchitected
     UpdateWorkloadInput.add_member(:improvement_status, Shapes::ShapeRef.new(shape: WorkloadImprovementStatus, location_name: "ImprovementStatus"))
     UpdateWorkloadInput.add_member(:discovery_config, Shapes::ShapeRef.new(shape: WorkloadDiscoveryConfig, location_name: "DiscoveryConfig"))
     UpdateWorkloadInput.add_member(:applications, Shapes::ShapeRef.new(shape: WorkloadApplications, location_name: "Applications"))
+    UpdateWorkloadInput.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: WorkloadJiraConfigurationInput, location_name: "JiraConfiguration"))
     UpdateWorkloadInput.struct_class = Types::UpdateWorkloadInput
 
     UpdateWorkloadOutput.add_member(:workload, Shapes::ShapeRef.new(shape: Workload, location_name: "Workload"))
@@ -1611,6 +1679,7 @@ module Aws::WellArchitected
     Workload.add_member(:applications, Shapes::ShapeRef.new(shape: WorkloadApplications, location_name: "Applications"))
     Workload.add_member(:profiles, Shapes::ShapeRef.new(shape: WorkloadProfiles, location_name: "Profiles"))
     Workload.add_member(:prioritized_risk_counts, Shapes::ShapeRef.new(shape: RiskCounts, location_name: "PrioritizedRiskCounts"))
+    Workload.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: WorkloadJiraConfigurationOutput, location_name: "JiraConfiguration"))
     Workload.struct_class = Types::Workload
 
     WorkloadAccountIds.member = Shapes::ShapeRef.new(shape: AwsAccountId)
@@ -1622,6 +1691,17 @@ module Aws::WellArchitected
     WorkloadDiscoveryConfig.add_member(:trusted_advisor_integration_status, Shapes::ShapeRef.new(shape: TrustedAdvisorIntegrationStatus, location_name: "TrustedAdvisorIntegrationStatus"))
     WorkloadDiscoveryConfig.add_member(:workload_resource_definition, Shapes::ShapeRef.new(shape: WorkloadResourceDefinition, location_name: "WorkloadResourceDefinition"))
     WorkloadDiscoveryConfig.struct_class = Types::WorkloadDiscoveryConfig
+
+    WorkloadJiraConfigurationInput.add_member(:issue_management_status, Shapes::ShapeRef.new(shape: WorkloadIssueManagementStatus, location_name: "IssueManagementStatus"))
+    WorkloadJiraConfigurationInput.add_member(:issue_management_type, Shapes::ShapeRef.new(shape: IssueManagementType, location_name: "IssueManagementType"))
+    WorkloadJiraConfigurationInput.add_member(:jira_project_key, Shapes::ShapeRef.new(shape: JiraProjectKey, location_name: "JiraProjectKey"))
+    WorkloadJiraConfigurationInput.struct_class = Types::WorkloadJiraConfigurationInput
+
+    WorkloadJiraConfigurationOutput.add_member(:issue_management_status, Shapes::ShapeRef.new(shape: WorkloadIssueManagementStatus, location_name: "IssueManagementStatus"))
+    WorkloadJiraConfigurationOutput.add_member(:issue_management_type, Shapes::ShapeRef.new(shape: IssueManagementType, location_name: "IssueManagementType"))
+    WorkloadJiraConfigurationOutput.add_member(:jira_project_key, Shapes::ShapeRef.new(shape: JiraProjectKey, location_name: "JiraProjectKey"))
+    WorkloadJiraConfigurationOutput.add_member(:status_message, Shapes::ShapeRef.new(shape: StatusMessage, location_name: "StatusMessage"))
+    WorkloadJiraConfigurationOutput.struct_class = Types::WorkloadJiraConfigurationOutput
 
     WorkloadLenses.member = Shapes::ShapeRef.new(shape: LensAlias)
 
@@ -2035,6 +2115,18 @@ module Aws::WellArchitected
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_global_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGlobalSettings"
+        o.http_method = "GET"
+        o.http_request_uri = "/global-settings"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: GetGlobalSettingsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:get_lens, Seahorse::Model::Operation.new.tap do |o|
@@ -2587,6 +2679,20 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:update_integration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateIntegration"
+        o.http_method = "POST"
+        o.http_request_uri = "/workloads/{WorkloadId}/updateIntegration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateIntegrationInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:update_lens_review, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateLensReview"
         o.http_method = "PATCH"
@@ -2711,6 +2817,7 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:upgrade_profile_version, Seahorse::Model::Operation.new.tap do |o|
@@ -2725,6 +2832,7 @@ module Aws::WellArchitected
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:upgrade_review_template_lens_review, Seahorse::Model::Operation.new.tap do |o|

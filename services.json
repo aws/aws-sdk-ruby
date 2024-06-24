@@ -20,9 +20,6 @@
   "Account": {
     "models": "account/2021-02-01"
   },
-  "AlexaForBusiness": {
-    "models": "alexaforbusiness/2017-11-09"
-  },
   "Amplify": {
     "models": "amplify/2017-07-25"
   },
@@ -65,6 +62,9 @@
   "AppSync": {
     "models": "appsync/2017-07-25"
   },
+  "AppTest": {
+    "models": "apptest/2022-12-06"
+  },
   "Appflow": {
     "models": "appflow/2020-08-23"
   },
@@ -81,6 +81,12 @@
   "ApplicationInsights": {
     "models": "application-insights/2018-11-25"
   },
+  "ApplicationSignals": {
+    "models": "application-signals/2024-04-15"
+  },
+  "Artifact": {
+    "models": "artifact/2018-05-10"
+  },
   "Athena": {
     "models": "athena/2017-05-18"
   },
@@ -96,20 +102,29 @@
   "AutoScalingPlans": {
     "models": "autoscaling-plans/2018-01-06"
   },
+  "B2bi": {
+    "models": "b2bi/2022-06-23"
+  },
+  "BCMDataExports": {
+    "models": "bcm-data-exports/2023-11-26"
+  },
   "Backup": {
     "models": "backup/2018-11-15"
   },
   "BackupGateway": {
     "models": "backup-gateway/2021-01-01"
   },
-  "BackupStorage": {
-    "models": "backupstorage/2018-04-10"
-  },
   "Batch": {
     "models": "batch/2016-08-10"
   },
   "Bedrock": {
     "models": "bedrock/2023-04-20"
+  },
+  "BedrockAgent": {
+    "models": "bedrock-agent/2023-06-05"
+  },
+  "BedrockAgentRuntime": {
+    "models": "bedrock-agent-runtime/2023-07-26"
   },
   "BedrockRuntime": {
     "models": "bedrock-runtime/2023-09-30"
@@ -122,6 +137,9 @@
   },
   "Budgets": {
     "models": "budgets/2016-10-20"
+  },
+  "Chatbot": {
+    "models": "chatbot/2017-10-11"
   },
   "Chime": {
     "models": "chime/2018-05-01"
@@ -144,6 +162,9 @@
   "CleanRooms": {
     "models": "cleanrooms/2022-02-17"
   },
+  "CleanRoomsML": {
+    "models": "cleanroomsml/2023-09-06"
+  },
   "Cloud9": {
     "models": "cloud9/2017-09-23"
   },
@@ -158,6 +179,9 @@
   },
   "CloudFront": {
     "models": "cloudfront/2020-05-31"
+  },
+  "CloudFrontKeyValueStore": {
+    "models": "cloudfront-keyvaluestore/2022-07-26"
   },
   "CloudHSM": {
     "models": "cloudhsm/2014-05-30"
@@ -214,6 +238,9 @@
   },
   "CodeCommit": {
     "models": "codecommit/2015-04-13"
+  },
+  "CodeConnections": {
+    "models": "codeconnections/2023-12-01"
   },
   "CodeDeploy": {
     "models": "codedeploy/2014-10-06"
@@ -278,11 +305,17 @@
   "ConnectWisdomService": {
     "models": "wisdom/2020-10-19"
   },
+  "ControlCatalog": {
+    "models": "controlcatalog/2018-05-10"
+  },
   "ControlTower": {
     "models": "controltower/2018-05-10"
   },
   "CostExplorer": {
     "models": "ce/2017-10-25"
+  },
+  "CostOptimizationHub": {
+    "models": "cost-optimization-hub/2022-07-26"
   },
   "CostandUsageReportService": {
     "models": "cur/2017-01-06"
@@ -310,6 +343,9 @@
   },
   "DatabaseMigrationService": {
     "models": "dms/2016-01-01"
+  },
+  "Deadline": {
+    "models": "deadline/2023-10-12"
   },
   "Detective": {
     "models": "detective/2018-10-26"
@@ -360,10 +396,7 @@
     "addPlugins": [
       "Aws::EC2::Plugins::CopyEncryptedSnapshot",
       "Aws::EC2::Plugins::RegionValidation"
-    ],
-    "dependencies": {
-      "aws-sigv4": "~> 1.0"
-    }
+    ]
   },
   "EC2InstanceConnect": {
     "models": "ec2-instance-connect/2018-04-02"
@@ -382,6 +415,9 @@
   },
   "EKS": {
     "models": "eks/2017-11-01"
+  },
+  "EKSAuth": {
+    "models": "eks-auth/2023-11-26"
   },
   "EMR": {
     "models": "elasticmapreduce/2009-03-31"
@@ -452,11 +488,11 @@
   "FraudDetector": {
     "models": "frauddetector/2019-11-15"
   },
+  "FreeTier": {
+    "models": "freetier/2023-09-07"
+  },
   "GameLift": {
     "models": "gamelift/2015-10-01"
-  },
-  "GameSparks": {
-    "models": "gamesparks/2021-08-17"
   },
   "Glacier": {
     "models": "glacier/2012-06-01",
@@ -493,9 +529,6 @@
   "HealthLake": {
     "models": "healthlake/2017-07-01"
   },
-  "Honeycode": {
-    "models": "honeycode/2020-03-01"
-  },
   "IAM": {
     "models": "iam/2010-05-08"
   },
@@ -519,6 +552,9 @@
   },
   "Inspector2": {
     "models": "inspector2/2020-06-08"
+  },
+  "InspectorScan": {
+    "models": "inspector-scan/2023-08-08"
   },
   "InternetMonitor": {
     "models": "internetmonitor/2021-06-03"
@@ -556,9 +592,6 @@
   },
   "IoTJobsDataPlane": {
     "models": "iot-jobs-data/2017-09-29"
-  },
-  "IoTRoboRunner": {
-    "models": "iot-roborunner/2018-05-10"
   },
   "IoTSecureTunneling": {
     "models": "iotsecuretunneling/2018-10-05"
@@ -629,6 +662,9 @@
   "LambdaPreview": {
     "models": "lambda/2014-11-11"
   },
+  "LaunchWizard": {
+    "models": "launch-wizard/2018-05-10"
+  },
   "Lex": {
     "models": "runtime.lex/2016-11-28"
   },
@@ -680,11 +716,11 @@
       "Aws::MachineLearning::Plugins::PredictEndpoint"
     ]
   },
-  "Macie": {
-    "models": "macie/2017-12-19"
-  },
   "Macie2": {
     "models": "macie2/2020-01-01"
+  },
+  "MailManager": {
+    "models": "mailmanager/2023-10-17"
   },
   "MainframeModernization": {
     "models": "m2/2021-04-28"
@@ -698,11 +734,17 @@
   "ManagedGrafana": {
     "models": "grafana/2020-08-18"
   },
+  "MarketplaceAgreement": {
+    "models": "marketplace-agreement/2020-03-01"
+  },
   "MarketplaceCatalog": {
     "models": "marketplace-catalog/2018-09-17"
   },
   "MarketplaceCommerceAnalytics": {
     "models": "marketplacecommerceanalytics/2015-07-01"
+  },
+  "MarketplaceDeployment": {
+    "models": "marketplace-deployment/2023-01-25"
   },
   "MarketplaceEntitlementService": {
     "models": "entitlement.marketplace/2017-01-11"
@@ -770,6 +812,9 @@
       "Aws::Neptune::Plugins::CrossRegionCopying"
     ]
   },
+  "NeptuneGraph": {
+    "models": "neptune-graph/2023-11-29"
+  },
   "Neptunedata": {
     "models": "neptunedata/2023-08-01"
   },
@@ -778,6 +823,9 @@
   },
   "NetworkManager": {
     "models": "networkmanager/2019-07-05"
+  },
+  "NetworkMonitor": {
+    "models": "networkmonitor/2023-08-01"
   },
   "NimbleStudio": {
     "models": "nimble/2020-08-01"
@@ -824,6 +872,9 @@
   "PcaConnectorAd": {
     "models": "pca-connector-ad/2018-05-10"
   },
+  "PcaConnectorScep": {
+    "models": "pca-connector-scep/2018-05-10"
+  },
   "Personalize": {
     "models": "personalize/2018-05-22"
   },
@@ -863,6 +914,12 @@
   "Proton": {
     "models": "proton/2020-07-20"
   },
+  "QBusiness": {
+    "models": "qbusiness/2023-11-27"
+  },
+  "QConnect": {
+    "models": "qconnect/2020-10-19"
+  },
   "QLDB": {
     "models": "qldb/2019-01-02"
   },
@@ -879,10 +936,7 @@
     "models": "rds/2014-10-31",
     "addPlugins": [
       "Aws::RDS::Plugins::CrossRegionCopying"
-    ],
-    "dependencies": {
-      "aws-sigv4": "~> 1.0"
-    }
+    ]
   },
   "RDSDataService": {
     "models": "rds-data/2018-08-01"
@@ -901,6 +955,9 @@
   },
   "Rekognition": {
     "models": "rekognition/2016-06-27"
+  },
+  "Repostspace": {
+    "models": "repostspace/2022-05-13"
   },
   "ResilienceHub": {
     "models": "resiliencehub/2020-04-30"
@@ -929,6 +986,9 @@
   "Route53Domains": {
     "models": "route53domains/2014-05-15"
   },
+  "Route53Profiles": {
+    "models": "route53profiles/2018-05-10"
+  },
   "Route53RecoveryCluster": {
     "models": "route53-recovery-cluster/2019-12-02"
   },
@@ -945,15 +1005,17 @@
     "models": "s3/2006-03-01",
     "dependencies": {
       "aws-sdk-kms": "~> 1",
-      "aws-sigv4": "~> 1.6"
+      "aws-sigv4": "~> 1.8"
     },
     "addPlugins": [
       "Aws::S3::Plugins::Accelerate",
+      "Aws::S3::Plugins::AccessGrants",
       "Aws::S3::Plugins::ARN",
       "Aws::S3::Plugins::BucketDns",
       "Aws::S3::Plugins::BucketNameRestrictions",
       "Aws::S3::Plugins::Dualstack",
       "Aws::S3::Plugins::Expect100Continue",
+      "Aws::S3::Plugins::ExpressSessionAuth",
       "Aws::S3::Plugins::GetBucketLocationFix",
       "Aws::S3::Plugins::Http200Errors",
       "Aws::S3::Plugins::IADRegionalEndpoint",
@@ -963,16 +1025,13 @@
       "Aws::S3::Plugins::S3HostId",
       "Aws::S3::Plugins::S3Signer",
       "Aws::S3::Plugins::SseCpk",
+      "Aws::S3::Plugins::SkipWholeMultipartGetChecksums",
       "Aws::S3::Plugins::StreamingRetry",
-      "Aws::S3::Plugins::UrlEncodedKeys",
-      "Aws::S3::Plugins::SkipWholeMultipartGetChecksums"
+      "Aws::S3::Plugins::UrlEncodedKeys"
     ]
   },
   "S3Control": {
     "models": "s3control/2018-08-20",
-    "dependencies": {
-      "aws-sigv4": "~> 1.1"
-    },
     "addPlugins": [
       "Aws::S3Control::Plugins::ARN",
       "Aws::S3Control::Plugins::Dualstack",
@@ -1110,6 +1169,9 @@
   "StorageGateway": {
     "models": "storagegateway/2013-06-30"
   },
+  "SupplyChain": {
+    "models": "supplychain/2024-01-01"
+  },
   "Support": {
     "models": "support/2013-04-15"
   },
@@ -1119,8 +1181,14 @@
   "Synthetics": {
     "models": "synthetics/2017-10-11"
   },
+  "TaxSettings": {
+    "models": "taxsettings/2018-05-10"
+  },
   "Textract": {
     "models": "textract/2018-06-27"
+  },
+  "TimestreamInfluxDB": {
+    "models": "timestream-influxdb/2023-01-27"
   },
   "TimestreamQuery": {
     "models": "timestream-query/2018-11-01"
@@ -1145,6 +1213,9 @@
     "addPlugins": [
       "Aws::Translate::Plugins::TranslateDocumentEncoding"
     ]
+  },
+  "TrustedAdvisor": {
+    "models": "trustedadvisor/2022-09-15"
   },
   "VPCLattice": {
     "models": "vpc-lattice/2022-11-30"
@@ -1181,6 +1252,9 @@
   },
   "WorkSpaces": {
     "models": "workspaces/2015-04-08"
+  },
+  "WorkSpacesThinClient": {
+    "models": "workspaces-thin-client/2023-08-22"
   },
   "WorkSpacesWeb": {
     "models": "workspaces-web/2020-07-08"

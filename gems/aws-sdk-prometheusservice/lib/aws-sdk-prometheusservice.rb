@@ -53,6 +53,6 @@ require_relative 'aws-sdk-prometheusservice/customizations'
 # @!group service
 module Aws::PrometheusService
 
-  GEM_VERSION = '1.24.0'
+  GEM_VERSION = '1.33.0'
 
 end

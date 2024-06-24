@@ -303,6 +303,13 @@ module Aws::GlobalAccelerator
     #   The address range, in CIDR notation. This must be the exact range
     #   that you provisioned. You can't advertise only a portion of the
     #   provisioned range.
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1]
+    #   in the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AdvertiseByoipCidrRequest AWS API Documentation
@@ -409,6 +416,61 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # A cross-account attachment in Global Accelerator. A cross-account
+    # attachment specifies the *principals* who have permission to work with
+    # *resources* in your account, which you also list in the attachment.
+    #
+    # @!attribute [rw] attachment_arn
+    #   The Amazon Resource Name (ARN) of the cross-account attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the cross-account attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] principals
+    #   The principals included in the cross-account attachment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resources
+    #   The resources included in the cross-account attachment.
+    #   @return [Array<Types::Resource>]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the cross-account attachment was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_time
+    #   The date and time that the cross-account attachment was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/Attachment AWS API Documentation
+    #
+    class Attachment < Struct.new(
+      :attachment_arn,
+      :name,
+      :principals,
+      :resources,
+      :last_modified_time,
+      :created_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # No cross-account attachment was found.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/AttachmentNotFoundException AWS API Documentation
+    #
+    class AttachmentNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an IP address range that is provisioned for use with
     # your Amazon Web Services resources through bring your own IP address
     # (BYOIP).
@@ -467,6 +529,13 @@ module Aws::GlobalAccelerator
     #
     # @!attribute [rw] cidr
     #   The address range, in CIDR notation.
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1]
+    #   in the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -658,6 +727,66 @@ module Aws::GlobalAccelerator
     #
     class CreateAcceleratorResponse < Struct.new(
       :accelerator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the cross-account attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] principals
+    #   The principals to include in the cross-account attachment. A
+    #   principal can be an Amazon Web Services account number or the Amazon
+    #   Resource Name (ARN) for an accelerator.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resources
+    #   The Amazon Resource Names (ARNs) for the resources to include in the
+    #   cross-account attachment. A resource can be any supported Amazon Web
+    #   Services resource type for Global Accelerator or a CIDR range for a
+    #   bring your own IP address (BYOIP) address pool.
+    #   @return [Array<Types::Resource>]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency—that is, the uniqueness—of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Add tags for a cross-account attachment.
+    #
+    #   For more information, see [Tagging in Global Accelerator][1] in the
+    #   *Global Accelerator Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateCrossAccountAttachmentRequest AWS API Documentation
+    #
+    class CreateCrossAccountAttachmentRequest < Struct.new(
+      :name,
+      :principals,
+      :resources,
+      :idempotency_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cross_account_attachment
+    #   Information about the cross-account attachment.
+    #   @return [Types::Attachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CreateCrossAccountAttachmentResponse AWS API Documentation
+    #
+    class CreateCrossAccountAttachmentResponse < Struct.new(
+      :cross_account_attachment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1032,6 +1161,55 @@ module Aws::GlobalAccelerator
       include Aws::Structure
     end
 
+    # An endpoint (Amazon Web Services resource) or an IP address range, in
+    # CIDR format, that is listed in a cross-account attachment. A
+    # cross-account resource can be added to an accelerator by specified
+    # principals, which are also listed in the attachment.
+    #
+    # For more information, see [ Working with cross-account attachments and
+    # resources in Global Accelerator][1] in the <i> Global Accelerator
+    # Developer Guide</i>.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html
+    #
+    # @!attribute [rw] endpoint_id
+    #   The endpoint ID for the endpoint that is listed in a cross-account
+    #   attachment and can be added to an accelerator by specified
+    #   principals.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr
+    #   An IP address range, in CIDR format, that is specified as an Amazon
+    #   Web Services resource. The address must be provisioned and
+    #   advertised in Global Accelerator by following the bring your own IP
+    #   address (BYOIP) process for Global Accelerator.
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1]
+    #   in the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_arn
+    #   The Amazon Resource Name (ARN) of the cross-account attachment that
+    #   specifies the resources (endpoints or CIDR range) that can be added
+    #   to accelerators and principals that have permission to add them.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CrossAccountResource AWS API Documentation
+    #
+    class CrossAccountResource < Struct.new(
+      :endpoint_id,
+      :cidr,
+      :attachment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Attributes of a custom routing accelerator.
     #
     # @!attribute [rw] accelerator_arn
@@ -1222,10 +1400,18 @@ module Aws::GlobalAccelerator
     #   virtual private cloud (VPC) subnet ID.
     #   @return [String]
     #
+    # @!attribute [rw] attachment_arn
+    #   The Amazon Resource Name (ARN) of the cross-account attachment that
+    #   specifies the endpoints (resources) that can be added to
+    #   accelerators and principals that have permission to add the
+    #   endpoints.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/CustomRoutingEndpointConfiguration AWS API Documentation
     #
     class CustomRoutingEndpointConfiguration < Struct.new(
-      :endpoint_id)
+      :endpoint_id,
+      :attachment_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1317,6 +1503,19 @@ module Aws::GlobalAccelerator
     #
     class DeleteAcceleratorRequest < Struct.new(
       :accelerator_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachment_arn
+    #   The Amazon Resource Name (ARN) for the cross-account attachment to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeleteCrossAccountAttachmentRequest AWS API Documentation
+    #
+    class DeleteCrossAccountAttachmentRequest < Struct.new(
+      :attachment_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1436,6 +1635,13 @@ module Aws::GlobalAccelerator
     # @!attribute [rw] cidr
     #   The address range, in CIDR notation. The prefix must be the same
     #   prefix that you specified when you provisioned the address range.
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1]
+    #   in the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DeprovisionByoipCidrRequest AWS API Documentation
@@ -1503,6 +1709,31 @@ module Aws::GlobalAccelerator
     #
     class DescribeAcceleratorResponse < Struct.new(
       :accelerator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachment_arn
+    #   The Amazon Resource Name (ARN) for the cross-account attachment to
+    #   describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeCrossAccountAttachmentRequest AWS API Documentation
+    #
+    class DescribeCrossAccountAttachmentRequest < Struct.new(
+      :attachment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cross_account_attachment
+    #   Information about the cross-account attachment.
+    #   @return [Types::Attachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/DescribeCrossAccountAttachmentResponse AWS API Documentation
+    #
+    class DescribeCrossAccountAttachmentResponse < Struct.new(
+      :cross_account_attachment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1732,8 +1963,7 @@ module Aws::GlobalAccelerator
     #   is the EC2 instance ID. A resource must be valid and active when you
     #   add it as an endpoint.
     #
-    #   An Application Load Balancer can be either internal or
-    #   internet-facing.
+    #   For cross-account endpoints, this must be the ARN of the resource.
     #   @return [String]
     #
     # @!attribute [rw] weight
@@ -1754,7 +1984,7 @@ module Aws::GlobalAccelerator
     # @!attribute [rw] client_ip_preservation_enabled
     #   Indicates whether client IP address preservation is enabled for an
     #   endpoint. The value is true or false. The default value is true for
-    #   new accelerators.
+    #   Application Load Balancer endpoints.
     #
     #   If the value is set to true, the client's IP address is preserved
     #   in the `X-Forwarded-For` request header as traffic travels to
@@ -1762,8 +1992,8 @@ module Aws::GlobalAccelerator
     #
     #   Client IP address preservation is supported, in specific Amazon Web
     #   Services Regions, for endpoints that are Application Load Balancers,
-    #   Amazon EC2 instances, and Network Load Balancers with Security
-    #   Groups. IMPORTANT: You cannot use client IP address preservation
+    #   Amazon EC2 instances, and Network Load Balancers with security
+    #   groups. IMPORTANT: You cannot use client IP address preservation
     #   with Network Load Balancers with TLS listeners.
     #
     #   For more information, see [ Preserve client IP addresses in Global
@@ -1774,12 +2004,20 @@ module Aws::GlobalAccelerator
     #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] attachment_arn
+    #   The Amazon Resource Name (ARN) of the cross-account attachment that
+    #   specifies the endpoints (resources) that can be added to
+    #   accelerators and principals that have permission to add the
+    #   endpoints.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/EndpointConfiguration AWS API Documentation
     #
     class EndpointConfiguration < Struct.new(
       :endpoint_id,
       :weight,
-      :client_ip_preservation_enabled)
+      :client_ip_preservation_enabled,
+      :attachment_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1824,7 +2062,7 @@ module Aws::GlobalAccelerator
     # @!attribute [rw] client_ip_preservation_enabled
     #   Indicates whether client IP address preservation is enabled for an
     #   endpoint. The value is true or false. The default value is true for
-    #   new accelerators.
+    #   Application Load Balancers endpoints.
     #
     #   If the value is set to true, the client's IP address is preserved
     #   in the `X-Forwarded-For` request header as traffic travels to
@@ -1832,8 +2070,8 @@ module Aws::GlobalAccelerator
     #
     #   Client IP address preservation is supported, in specific Amazon Web
     #   Services Regions, for endpoints that are Application Load Balancers,
-    #   Amazon EC2 instances, and Network Load Balancers with Security
-    #   Groups. IMPORTANT: You cannot use client IP address preservation
+    #   Amazon EC2 instances, and Network Load Balancers with security
+    #   groups. IMPORTANT: You cannot use client IP address preservation
     #   with Network Load Balancers with TLS listeners.
     #
     #   For more information, see [ Preserve client IP addresses in Global
@@ -2186,6 +2424,111 @@ module Aws::GlobalAccelerator
     #
     class ListByoipCidrsResponse < Struct.new(
       :byoip_cidrs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The number of cross-account attachment objects that you want to
+    #   return with this call. The default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCrossAccountAttachmentsRequest AWS API Documentation
+    #
+    class ListCrossAccountAttachmentsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cross_account_attachments
+    #   Information about the cross-account attachments.
+    #   @return [Array<Types::Attachment>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCrossAccountAttachmentsResponse AWS API Documentation
+    #
+    class ListCrossAccountAttachmentsResponse < Struct.new(
+      :cross_account_attachments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCrossAccountResourceAccountsRequest AWS API Documentation
+    #
+    class ListCrossAccountResourceAccountsRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] resource_owner_aws_account_ids
+    #   The account IDs of principals (resource owners) in a cross-account
+    #   attachment who can work with resources listed in the same
+    #   attachment.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCrossAccountResourceAccountsResponse AWS API Documentation
+    #
+    class ListCrossAccountResourceAccountsResponse < Struct.new(
+      :resource_owner_aws_account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] accelerator_arn
+    #   The Amazon Resource Name (ARN) of an accelerator in a cross-account
+    #   attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_aws_account_id
+    #   The account ID of a resource owner in a cross-account attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of cross-account resource objects that you want to return
+    #   with this call. The default value is 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCrossAccountResourcesRequest AWS API Documentation
+    #
+    class ListCrossAccountResourcesRequest < Struct.new(
+      :accelerator_arn,
+      :resource_owner_aws_account_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cross_account_resources
+    #   The cross-account resources used with an accelerator.
+    #   @return [Array<Types::CrossAccountResource>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/ListCrossAccountResourcesResponse AWS API Documentation
+    #
+    class ListCrossAccountResourcesResponse < Struct.new(
+      :cross_account_resources,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2691,8 +3034,15 @@ module Aws::GlobalAccelerator
     # @!attribute [rw] cidr
     #   The public IPv4 address range, in CIDR notation. The most specific
     #   IP prefix that you can specify is /24. The address range cannot
-    #   overlap with another address range that you've brought to this or
-    #   another Region.
+    #   overlap with another address range that you've brought to this
+    #   Amazon Web Services Region or another Region.
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1]
+    #   in the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #   @return [String]
     #
     # @!attribute [rw] cidr_authorization_context
@@ -2753,6 +3103,49 @@ module Aws::GlobalAccelerator
     class RemoveEndpointsRequest < Struct.new(
       :endpoint_identifiers,
       :endpoint_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A resource is one of the following: the ARN for an Amazon Web Services
+    # resource that is supported by Global Accelerator to be added as an
+    # endpoint, or a CIDR range that specifies a bring your own IP (BYOIP)
+    # address pool.
+    #
+    # @!attribute [rw] endpoint_id
+    #   The endpoint ID for the endpoint that is specified as a Amazon Web
+    #   Services resource.
+    #
+    #   An endpoint ID for the cross-account feature is the ARN of an Amazon
+    #   Web Services resource, such as a Network Load Balancer, that Global
+    #   Accelerator supports as an endpoint for an accelerator.
+    #   @return [String]
+    #
+    # @!attribute [rw] cidr
+    #   An IP address range, in CIDR format, that is specified as resource.
+    #   The address must be provisioned and advertised in Global Accelerator
+    #   by following the bring your own IP address (BYOIP) process for
+    #   Global Accelerator
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1]
+    #   in the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region where a shared endpoint resource is
+    #   located.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/Resource AWS API Documentation
+    #
+    class Resource < Struct.new(
+      :endpoint_id,
+      :cidr,
+      :region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2929,6 +3322,10 @@ module Aws::GlobalAccelerator
     #   accelerator, the value can be IPV4 or DUAL\_STACK.
     #   @return [String]
     #
+    # @!attribute [rw] ip_addresses
+    #   The IP addresses for an accelerator.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] enabled
     #   Indicates whether an accelerator is enabled. The value is true or
     #   false. The default value is true.
@@ -2943,6 +3340,7 @@ module Aws::GlobalAccelerator
       :accelerator_arn,
       :name,
       :ip_address_type,
+      :ip_addresses,
       :enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -2956,6 +3354,79 @@ module Aws::GlobalAccelerator
     #
     class UpdateAcceleratorResponse < Struct.new(
       :accelerator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachment_arn
+    #   The Amazon Resource Name (ARN) of the cross-account attachment to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the cross-account attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_principals
+    #   The principals to add to the cross-account attachment. A principal
+    #   is an account or the Amazon Resource Name (ARN) of an accelerator
+    #   that the attachment gives permission to work with resources from
+    #   another account. The resources are also listed in the attachment.
+    #
+    #   To add more than one principal, separate the account numbers or
+    #   accelerator ARNs, or both, with commas.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_principals
+    #   The principals to remove from the cross-account attachment. A
+    #   principal is an account or the Amazon Resource Name (ARN) of an
+    #   accelerator that the attachment gives permission to work with
+    #   resources from another account. The resources are also listed in the
+    #   attachment.
+    #
+    #   To remove more than one principal, separate the account numbers or
+    #   accelerator ARNs, or both, with commas.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] add_resources
+    #   The resources to add to the cross-account attachment. A resource
+    #   listed in a cross-account attachment can be used with an accelerator
+    #   by the principals that are listed in the attachment.
+    #
+    #   To add more than one resource, separate the resource ARNs with
+    #   commas.
+    #   @return [Array<Types::Resource>]
+    #
+    # @!attribute [rw] remove_resources
+    #   The resources to remove from the cross-account attachment. A
+    #   resource listed in a cross-account attachment can be used with an
+    #   accelerator by the principals that are listed in the attachment.
+    #
+    #   To remove more than one resource, separate the resource ARNs with
+    #   commas.
+    #   @return [Array<Types::Resource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateCrossAccountAttachmentRequest AWS API Documentation
+    #
+    class UpdateCrossAccountAttachmentRequest < Struct.new(
+      :attachment_arn,
+      :name,
+      :add_principals,
+      :remove_principals,
+      :add_resources,
+      :remove_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cross_account_attachment
+    #   Information about the updated cross-account attachment.
+    #   @return [Types::Attachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/UpdateCrossAccountAttachmentResponse AWS API Documentation
+    #
+    class UpdateCrossAccountAttachmentResponse < Struct.new(
+      :cross_account_attachment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3035,6 +3506,10 @@ module Aws::GlobalAccelerator
     #   routing accelerator, the value must be IPV4.
     #   @return [String]
     #
+    # @!attribute [rw] ip_addresses
+    #   The IP addresses for an accelerator.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] enabled
     #   Indicates whether an accelerator is enabled. The value is true or
     #   false. The default value is true.
@@ -3049,6 +3524,7 @@ module Aws::GlobalAccelerator
       :accelerator_arn,
       :name,
       :ip_address_type,
+      :ip_addresses,
       :enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -3266,6 +3742,13 @@ module Aws::GlobalAccelerator
 
     # @!attribute [rw] cidr
     #   The address range, in CIDR notation.
+    #
+    #   For more information, see [Bring your own IP addresses (BYOIP)][1]
+    #   in the Global Accelerator Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/WithdrawByoipCidrRequest AWS API Documentation
@@ -3277,7 +3760,7 @@ module Aws::GlobalAccelerator
     end
 
     # @!attribute [rw] byoip_cidr
-    #   Information about the address pool.
+    #   Information about the BYOIP address pool.
     #   @return [Types::ByoipCidr]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/globalaccelerator-2018-08-08/WithdrawByoipCidrResponse AWS API Documentation

@@ -255,13 +255,24 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #   @return [String]
     #
+    # @!attribute [rw] idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests from the same Amazon Web Services account use the
+    #   same idempotency token, the same response is returned for each
+    #   repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateServiceActionWithProvisioningArtifactInput AWS API Documentation
     #
     class AssociateServiceActionWithProvisioningArtifactInput < Struct.new(
       :product_id,
       :provisioning_artifact_id,
       :service_action_id,
-      :accept_language)
+      :accept_language,
+      :idempotency_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -817,8 +828,13 @@ module Aws::ServiceCatalog
     #   @return [Boolean]
     #
     # @!attribute [rw] share_principals
+    #   This parameter is only supported for portfolios with an
+    #   **OrganizationalNode** Type of `ORGANIZATION` or
+    #   `ORGANIZATIONAL_UNIT`.
+    #
     #   Enables or disables `Principal` sharing when creating the portfolio
-    #   share. If this flag is not provided, principal sharing is disabled.
+    #   share. If you do **not** provide this flag, principal sharing is
+    #   disabled.
     #
     #   When you enable Principal Name Sharing for a portfolio share, the
     #   share recipient account end users with a principal that matches any
@@ -1464,11 +1480,22 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #   @return [String]
     #
+    # @!attribute [rw] idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests from the same Amazon Web Services account use the
+    #   same idempotency token, the same response is returned for each
+    #   repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteServiceActionInput AWS API Documentation
     #
     class DeleteServiceActionInput < Struct.new(
       :id,
-      :accept_language)
+      :accept_language,
+      :idempotency_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2463,13 +2490,24 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #   @return [String]
     #
+    # @!attribute [rw] idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests from the same Amazon Web Services account use the
+    #   same idempotency token, the same response is returned for each
+    #   repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateServiceActionFromProvisioningArtifactInput AWS API Documentation
     #
     class DisassociateServiceActionFromProvisioningArtifactInput < Struct.new(
       :product_id,
       :provisioning_artifact_id,
       :service_action_id,
-      :accept_language)
+      :accept_language,
+      :idempotency_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4535,7 +4573,8 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] type
     #   The type of provisioned product. The supported values are
-    #   `CFN_STACK` and `CFN_STACKSET`.
+    #   `CFN_STACK`, `CFN_STACKSET`, `TERRAFORM_OPEN_SOURCE`,
+    #   `TERRAFORM_CLOUD`, and `EXTERNAL`.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -4686,7 +4725,8 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] type
     #   The type of provisioned product. The supported values are
-    #   `CFN_STACK` and `CFN_STACKSET`.
+    #   `CFN_STACK`, `CFN_STACKSET`, `TERRAFORM_OPEN_SOURCE`,
+    #   `TERRAFORM_CLOUD`, and `EXTERNAL`.
     #   @return [String]
     #
     # @!attribute [rw] id
@@ -4980,7 +5020,13 @@ module Aws::ServiceCatalog
     # @!attribute [rw] type
     #   The type of provisioning artifact.
     #
-    #   `CLOUD_FORMATION_TEMPLATE` - CloudFormation template
+    #   * `CLOUD_FORMATION_TEMPLATE` - CloudFormation template
+    #
+    #   * `TERRAFORM_OPEN_SOURCE` - Terraform Open Source configuration file
+    #
+    #   * `TERRAFORM_CLOUD` - Terraform Cloud configuration file
+    #
+    #   * `EXTERNAL` - External configuration file
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -5159,7 +5205,11 @@ module Aws::ServiceCatalog
     #
     #   * `CLOUD_FORMATION_TEMPLATE` - CloudFormation template
     #
-    #   * `TERRAFORM_OPEN_SOURCE` - Terraform open source configuration file
+    #   * `TERRAFORM_OPEN_SOURCE` - Terraform Open Source configuration file
+    #
+    #   * `TERRAFORM_CLOUD` - Terraform Cloud configuration file
+    #
+    #   * `EXTERNAL` - External configuration file
     #   @return [String]
     #
     # @!attribute [rw] disable_template_validation
@@ -5421,8 +5471,8 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] provisioned_product_type
     #   The type of provisioned product. The supported values are
-    #   `CFN_STACK`, `CFN_STACKSET`, `TERRAFORM_OPEN_SOURCE`, and
-    #   `TERRAFORM_CLOUD`.
+    #   `CFN_STACK`, `CFN_STACKSET`, `TERRAFORM_OPEN_SOURCE`,
+    #   `TERRAFORM_CLOUD`, and `EXTERNAL`.
     #   @return [String]
     #
     # @!attribute [rw] record_type

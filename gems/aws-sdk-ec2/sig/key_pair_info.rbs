@@ -1,0 +1,63 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EC2
+    # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html
+    class KeyPairInfo
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#initialize-instance_method
+      def initialize: (String name, Hash[Symbol, untyped] options) -> void
+                    | (name: String, ?client: Client) -> void
+                    | (Hash[Symbol, untyped] args) -> void
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#name-instance_method
+      def name: () -> String
+      alias key_name name
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#key_pair_id-instance_method
+      def key_pair_id: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#key_fingerprint-instance_method
+      def key_fingerprint: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#key_type-instance_method
+      def key_type: () -> ("rsa" | "ed25519")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#tags-instance_method
+      def tags: () -> ::Array[Types::Tag]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#public_key-instance_method
+      def public_key: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#create_time-instance_method
+      def create_time: () -> ::Time
+
+      def client: () -> Client
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#load-instance_method
+      def load: () -> self
+      alias reload load
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#data-instance_method
+      def data: () -> Types::KeyPairInfo
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#data_loaded?-instance_method
+      def data_loaded?: () -> bool
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/KeyPairInfo.html#delete-instance_method
+      def delete: (
+                    ?key_pair_id: ::String,
+                    ?dry_run: bool
+                  ) -> Types::DeleteKeyPairResult
+                | (?Hash[Symbol, untyped]) -> Types::DeleteKeyPairResult
+
+      class Collection < ::Aws::Resources::Collection[KeyPairInfo]
+      end
+    end
+  end
+end

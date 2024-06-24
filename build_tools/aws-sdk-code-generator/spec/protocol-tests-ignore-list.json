@@ -1,0 +1,34 @@
+{
+  "ec2" :
+    {
+      "input" : [],
+      "output" : []
+    },
+  "json" : {
+    "input" : [],
+    "output" : []
+  },
+  "json_1_0" : {
+    "input" : [],
+    "output" : []
+  },
+  "query" : {
+    "input" : [],
+    "output" : []
+  },
+  "rest-json" : {
+    "input" : [],
+    "output" : [
+    ]
+  },
+  "rest-xml" : {
+    "input" : [],
+    "output" : [
+      {"SimpleScalarPropertiesComplexEscapes": "OxEngine does not handle all escape cases but other engines supports it"}
+    ]
+  },
+  "api-gateway" : {
+    "input" : [],
+    "output" : []
+  }
+}

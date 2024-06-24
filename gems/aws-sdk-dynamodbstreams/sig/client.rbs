@@ -1,0 +1,129 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DynamoDBStreams
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDBStreams/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_attributes: bool,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _DescribeStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeStreamOutput]
+        def stream_description: () -> Types::StreamDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDBStreams/Client.html#describe_stream-instance_method
+      def describe_stream: (
+                             stream_arn: ::String,
+                             ?limit: ::Integer,
+                             ?exclusive_start_shard_id: ::String
+                           ) -> _DescribeStreamResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeStreamResponseSuccess
+
+      interface _GetRecordsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetRecordsOutput]
+        def records: () -> ::Array[Types::Record]
+        def next_shard_iterator: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDBStreams/Client.html#get_records-instance_method
+      def get_records: (
+                         shard_iterator: ::String,
+                         ?limit: ::Integer
+                       ) -> _GetRecordsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecordsResponseSuccess
+
+      interface _GetShardIteratorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetShardIteratorOutput]
+        def shard_iterator: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDBStreams/Client.html#get_shard_iterator-instance_method
+      def get_shard_iterator: (
+                                stream_arn: ::String,
+                                shard_id: ::String,
+                                shard_iterator_type: ("TRIM_HORIZON" | "LATEST" | "AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER"),
+                                ?sequence_number: ::String
+                              ) -> _GetShardIteratorResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetShardIteratorResponseSuccess
+
+      interface _ListStreamsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamsOutput]
+        def streams: () -> ::Array[Types::Stream]
+        def last_evaluated_stream_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDBStreams/Client.html#list_streams-instance_method
+      def list_streams: (
+                          ?table_name: ::String,
+                          ?limit: ::Integer,
+                          ?exclusive_start_stream_arn: ::String
+                        ) -> _ListStreamsResponseSuccess
+                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamsResponseSuccess
+    end
+  end
+end
+

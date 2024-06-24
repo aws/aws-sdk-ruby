@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::CodeStarconnections
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::CodeStarconnections
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::CodeStarconnections
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -347,50 +357,65 @@ module Aws::CodeStarconnections
     #   @option options [Aws::CodeStarconnections::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::CodeStarconnections::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -425,7 +450,7 @@ module Aws::CodeStarconnections
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_connection({
-    #     provider_type: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab
+    #     provider_type: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab, GitLabSelfManaged
     #     connection_name: "ConnectionName", # required
     #     tags: [
     #       {
@@ -483,6 +508,7 @@ module Aws::CodeStarconnections
     #   already be connected to the VPC.
     #
     # @option params [Array<Types::Tag>] :tags
+    #   Tags for the host to be created.
     #
     # @return [Types::CreateHostOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -493,7 +519,7 @@ module Aws::CodeStarconnections
     #
     #   resp = client.create_host({
     #     name: "HostName", # required
-    #     provider_type: "Bitbucket", # required, accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab
+    #     provider_type: "Bitbucket", # required, accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab, GitLabSelfManaged
     #     provider_endpoint: "Url", # required
     #     vpc_configuration: {
     #       vpc_id: "VpcId", # required
@@ -522,6 +548,144 @@ module Aws::CodeStarconnections
     # @param [Hash] params ({})
     def create_host(params = {}, options = {})
       req = build_request(:create_host, params)
+      req.send_request(options)
+    end
+
+    # Creates a link to a specified external Git repository. A repository
+    # link allows Git sync to monitor and sync changes to files in a
+    # specified Git repository.
+    #
+    # @option params [required, String] :connection_arn
+    #   The Amazon Resource Name (ARN) of the connection to be associated with
+    #   the repository link.
+    #
+    # @option params [required, String] :owner_id
+    #   The owner ID for the repository associated with a specific sync
+    #   configuration, such as the owner ID in GitHub.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository to be associated with the repository link.
+    #
+    # @option params [String] :encryption_key_arn
+    #   The Amazon Resource Name (ARN) encryption key for the repository to be
+    #   associated with the repository link.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags for the repository to be associated with the repository link.
+    #
+    # @return [Types::CreateRepositoryLinkOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRepositoryLinkOutput#repository_link_info #repository_link_info} => Types::RepositoryLinkInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_repository_link({
+    #     connection_arn: "ConnectionArn", # required
+    #     owner_id: "OwnerId", # required
+    #     repository_name: "RepositoryName", # required
+    #     encryption_key_arn: "KmsKeyArn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.repository_link_info.connection_arn #=> String
+    #   resp.repository_link_info.encryption_key_arn #=> String
+    #   resp.repository_link_info.owner_id #=> String
+    #   resp.repository_link_info.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.repository_link_info.repository_link_arn #=> String
+    #   resp.repository_link_info.repository_link_id #=> String
+    #   resp.repository_link_info.repository_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/CreateRepositoryLink AWS API Documentation
+    #
+    # @overload create_repository_link(params = {})
+    # @param [Hash] params ({})
+    def create_repository_link(params = {}, options = {})
+      req = build_request(:create_repository_link, params)
+      req.send_request(options)
+    end
+
+    # Creates a sync configuration which allows Amazon Web Services to sync
+    # content from a Git repository to update a specified Amazon Web
+    # Services resource. Parameters for the sync configuration are
+    # determined by the sync type.
+    #
+    # @option params [required, String] :branch
+    #   The branch in the repository from which changes will be synced.
+    #
+    # @option params [required, String] :config_file
+    #   The file name of the configuration file that manages syncing between
+    #   the connection and the repository. This configuration file is stored
+    #   in the repository.
+    #
+    # @option params [required, String] :repository_link_id
+    #   The ID of the repository link created for the connection. A repository
+    #   link allows Git sync to monitor and sync changes to files in a
+    #   specified Git repository.
+    #
+    # @option params [required, String] :resource_name
+    #   The name of the Amazon Web Services resource (for example, a
+    #   CloudFormation stack in the case of CFN\_STACK\_SYNC) that will be
+    #   synchronized from the linked repository.
+    #
+    # @option params [required, String] :role_arn
+    #   The ARN of the IAM role that grants permission for Amazon Web Services
+    #   to use Git sync to update a given Amazon Web Services resource on your
+    #   behalf.
+    #
+    # @option params [required, String] :sync_type
+    #   The type of sync configuration.
+    #
+    # @option params [String] :publish_deployment_status
+    #   Whether to enable or disable publishing of deployment status to source
+    #   providers.
+    #
+    # @option params [String] :trigger_resource_update_on
+    #   When to trigger Git sync to begin the stack update.
+    #
+    # @return [Types::CreateSyncConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSyncConfigurationOutput#sync_configuration #sync_configuration} => Types::SyncConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_sync_configuration({
+    #     branch: "BranchName", # required
+    #     config_file: "DeploymentFilePath", # required
+    #     repository_link_id: "RepositoryLinkId", # required
+    #     resource_name: "ResourceName", # required
+    #     role_arn: "IamRoleArn", # required
+    #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
+    #     publish_deployment_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     trigger_resource_update_on: "ANY_CHANGE", # accepts ANY_CHANGE, FILE_CHANGE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sync_configuration.branch #=> String
+    #   resp.sync_configuration.config_file #=> String
+    #   resp.sync_configuration.owner_id #=> String
+    #   resp.sync_configuration.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.sync_configuration.repository_link_id #=> String
+    #   resp.sync_configuration.repository_name #=> String
+    #   resp.sync_configuration.resource_name #=> String
+    #   resp.sync_configuration.role_arn #=> String
+    #   resp.sync_configuration.sync_type #=> String, one of "CFN_STACK_SYNC"
+    #   resp.sync_configuration.publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.sync_configuration.trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/CreateSyncConfiguration AWS API Documentation
+    #
+    # @overload create_sync_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_sync_configuration(params = {}, options = {})
+      req = build_request(:create_sync_configuration, params)
       req.send_request(options)
     end
 
@@ -579,6 +743,57 @@ module Aws::CodeStarconnections
       req.send_request(options)
     end
 
+    # Deletes the association between your connection and a specified
+    # external Git repository.
+    #
+    # @option params [required, String] :repository_link_id
+    #   The ID of the repository link to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_repository_link({
+    #     repository_link_id: "RepositoryLinkId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/DeleteRepositoryLink AWS API Documentation
+    #
+    # @overload delete_repository_link(params = {})
+    # @param [Hash] params ({})
+    def delete_repository_link(params = {}, options = {})
+      req = build_request(:delete_repository_link, params)
+      req.send_request(options)
+    end
+
+    # Deletes the sync configuration for a specified repository and
+    # connection.
+    #
+    # @option params [required, String] :sync_type
+    #   The type of sync configuration to be deleted.
+    #
+    # @option params [required, String] :resource_name
+    #   The name of the Amazon Web Services resource associated with the sync
+    #   configuration to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_sync_configuration({
+    #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
+    #     resource_name: "ResourceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/DeleteSyncConfiguration AWS API Documentation
+    #
+    # @overload delete_sync_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_sync_configuration(params = {}, options = {})
+      req = build_request(:delete_sync_configuration, params)
+      req.send_request(options)
+    end
+
     # Returns the connection ARN and details such as status, owner, and
     # provider type.
     #
@@ -599,7 +814,7 @@ module Aws::CodeStarconnections
     #
     #   resp.connection.connection_name #=> String
     #   resp.connection.connection_arn #=> String
-    #   resp.connection.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.connection.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.connection.owner_account_id #=> String
     #   resp.connection.connection_status #=> String, one of "PENDING", "AVAILABLE", "ERROR"
     #   resp.connection.host_arn #=> String
@@ -637,7 +852,7 @@ module Aws::CodeStarconnections
     #
     #   resp.name #=> String
     #   resp.status #=> String
-    #   resp.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.provider_endpoint #=> String
     #   resp.vpc_configuration.vpc_id #=> String
     #   resp.vpc_configuration.subnet_ids #=> Array
@@ -652,6 +867,260 @@ module Aws::CodeStarconnections
     # @param [Hash] params ({})
     def get_host(params = {}, options = {})
       req = build_request(:get_host, params)
+      req.send_request(options)
+    end
+
+    # Returns details about a repository link. A repository link allows Git
+    # sync to monitor and sync changes from files in a specified Git
+    # repository.
+    #
+    # @option params [required, String] :repository_link_id
+    #   The ID of the repository link to get.
+    #
+    # @return [Types::GetRepositoryLinkOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRepositoryLinkOutput#repository_link_info #repository_link_info} => Types::RepositoryLinkInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_repository_link({
+    #     repository_link_id: "RepositoryLinkId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.repository_link_info.connection_arn #=> String
+    #   resp.repository_link_info.encryption_key_arn #=> String
+    #   resp.repository_link_info.owner_id #=> String
+    #   resp.repository_link_info.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.repository_link_info.repository_link_arn #=> String
+    #   resp.repository_link_info.repository_link_id #=> String
+    #   resp.repository_link_info.repository_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/GetRepositoryLink AWS API Documentation
+    #
+    # @overload get_repository_link(params = {})
+    # @param [Hash] params ({})
+    def get_repository_link(params = {}, options = {})
+      req = build_request(:get_repository_link, params)
+      req.send_request(options)
+    end
+
+    # Returns details about the sync status for a repository. A repository
+    # sync uses Git sync to push and pull changes from your remote
+    # repository.
+    #
+    # @option params [required, String] :branch
+    #   The branch of the repository link for the requested repository sync
+    #   status.
+    #
+    # @option params [required, String] :repository_link_id
+    #   The repository link ID for the requested repository sync status.
+    #
+    # @option params [required, String] :sync_type
+    #   The sync type of the requested sync status.
+    #
+    # @return [Types::GetRepositorySyncStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRepositorySyncStatusOutput#latest_sync #latest_sync} => Types::RepositorySyncAttempt
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_repository_sync_status({
+    #     branch: "BranchName", # required
+    #     repository_link_id: "RepositoryLinkId", # required
+    #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.latest_sync.started_at #=> Time
+    #   resp.latest_sync.status #=> String, one of "FAILED", "INITIATED", "IN_PROGRESS", "SUCCEEDED", "QUEUED"
+    #   resp.latest_sync.events #=> Array
+    #   resp.latest_sync.events[0].event #=> String
+    #   resp.latest_sync.events[0].external_id #=> String
+    #   resp.latest_sync.events[0].time #=> Time
+    #   resp.latest_sync.events[0].type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/GetRepositorySyncStatus AWS API Documentation
+    #
+    # @overload get_repository_sync_status(params = {})
+    # @param [Hash] params ({})
+    def get_repository_sync_status(params = {}, options = {})
+      req = build_request(:get_repository_sync_status, params)
+      req.send_request(options)
+    end
+
+    # Returns the status of the sync with the Git repository for a specific
+    # Amazon Web Services resource.
+    #
+    # @option params [required, String] :resource_name
+    #   The name of the Amazon Web Services resource for the sync status with
+    #   the Git repository.
+    #
+    # @option params [required, String] :sync_type
+    #   The sync type for the sync status with the Git repository.
+    #
+    # @return [Types::GetResourceSyncStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourceSyncStatusOutput#desired_state #desired_state} => Types::Revision
+    #   * {Types::GetResourceSyncStatusOutput#latest_successful_sync #latest_successful_sync} => Types::ResourceSyncAttempt
+    #   * {Types::GetResourceSyncStatusOutput#latest_sync #latest_sync} => Types::ResourceSyncAttempt
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_sync_status({
+    #     resource_name: "ResourceName", # required
+    #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.desired_state.branch #=> String
+    #   resp.desired_state.directory #=> String
+    #   resp.desired_state.owner_id #=> String
+    #   resp.desired_state.repository_name #=> String
+    #   resp.desired_state.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.desired_state.sha #=> String
+    #   resp.latest_successful_sync.events #=> Array
+    #   resp.latest_successful_sync.events[0].event #=> String
+    #   resp.latest_successful_sync.events[0].external_id #=> String
+    #   resp.latest_successful_sync.events[0].time #=> Time
+    #   resp.latest_successful_sync.events[0].type #=> String
+    #   resp.latest_successful_sync.initial_revision.branch #=> String
+    #   resp.latest_successful_sync.initial_revision.directory #=> String
+    #   resp.latest_successful_sync.initial_revision.owner_id #=> String
+    #   resp.latest_successful_sync.initial_revision.repository_name #=> String
+    #   resp.latest_successful_sync.initial_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.latest_successful_sync.initial_revision.sha #=> String
+    #   resp.latest_successful_sync.started_at #=> Time
+    #   resp.latest_successful_sync.status #=> String, one of "FAILED", "INITIATED", "IN_PROGRESS", "SUCCEEDED"
+    #   resp.latest_successful_sync.target_revision.branch #=> String
+    #   resp.latest_successful_sync.target_revision.directory #=> String
+    #   resp.latest_successful_sync.target_revision.owner_id #=> String
+    #   resp.latest_successful_sync.target_revision.repository_name #=> String
+    #   resp.latest_successful_sync.target_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.latest_successful_sync.target_revision.sha #=> String
+    #   resp.latest_successful_sync.target #=> String
+    #   resp.latest_sync.events #=> Array
+    #   resp.latest_sync.events[0].event #=> String
+    #   resp.latest_sync.events[0].external_id #=> String
+    #   resp.latest_sync.events[0].time #=> Time
+    #   resp.latest_sync.events[0].type #=> String
+    #   resp.latest_sync.initial_revision.branch #=> String
+    #   resp.latest_sync.initial_revision.directory #=> String
+    #   resp.latest_sync.initial_revision.owner_id #=> String
+    #   resp.latest_sync.initial_revision.repository_name #=> String
+    #   resp.latest_sync.initial_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.latest_sync.initial_revision.sha #=> String
+    #   resp.latest_sync.started_at #=> Time
+    #   resp.latest_sync.status #=> String, one of "FAILED", "INITIATED", "IN_PROGRESS", "SUCCEEDED"
+    #   resp.latest_sync.target_revision.branch #=> String
+    #   resp.latest_sync.target_revision.directory #=> String
+    #   resp.latest_sync.target_revision.owner_id #=> String
+    #   resp.latest_sync.target_revision.repository_name #=> String
+    #   resp.latest_sync.target_revision.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.latest_sync.target_revision.sha #=> String
+    #   resp.latest_sync.target #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/GetResourceSyncStatus AWS API Documentation
+    #
+    # @overload get_resource_sync_status(params = {})
+    # @param [Hash] params ({})
+    def get_resource_sync_status(params = {}, options = {})
+      req = build_request(:get_resource_sync_status, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the most recent sync blockers.
+    #
+    # @option params [required, String] :sync_type
+    #   The sync type for the sync blocker summary.
+    #
+    # @option params [required, String] :resource_name
+    #   The name of the Amazon Web Services resource currently blocked from
+    #   automatically being synced from a Git repository.
+    #
+    # @return [Types::GetSyncBlockerSummaryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSyncBlockerSummaryOutput#sync_blocker_summary #sync_blocker_summary} => Types::SyncBlockerSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_sync_blocker_summary({
+    #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
+    #     resource_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sync_blocker_summary.resource_name #=> String
+    #   resp.sync_blocker_summary.parent_resource_name #=> String
+    #   resp.sync_blocker_summary.latest_blockers #=> Array
+    #   resp.sync_blocker_summary.latest_blockers[0].id #=> String
+    #   resp.sync_blocker_summary.latest_blockers[0].type #=> String, one of "AUTOMATED"
+    #   resp.sync_blocker_summary.latest_blockers[0].status #=> String, one of "ACTIVE", "RESOLVED"
+    #   resp.sync_blocker_summary.latest_blockers[0].created_reason #=> String
+    #   resp.sync_blocker_summary.latest_blockers[0].created_at #=> Time
+    #   resp.sync_blocker_summary.latest_blockers[0].contexts #=> Array
+    #   resp.sync_blocker_summary.latest_blockers[0].contexts[0].key #=> String
+    #   resp.sync_blocker_summary.latest_blockers[0].contexts[0].value #=> String
+    #   resp.sync_blocker_summary.latest_blockers[0].resolved_reason #=> String
+    #   resp.sync_blocker_summary.latest_blockers[0].resolved_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/GetSyncBlockerSummary AWS API Documentation
+    #
+    # @overload get_sync_blocker_summary(params = {})
+    # @param [Hash] params ({})
+    def get_sync_blocker_summary(params = {}, options = {})
+      req = build_request(:get_sync_blocker_summary, params)
+      req.send_request(options)
+    end
+
+    # Returns details about a sync configuration, including the sync type
+    # and resource name. A sync configuration allows the configuration to
+    # sync (push and pull) changes from the remote repository for a
+    # specified branch in a Git repository.
+    #
+    # @option params [required, String] :sync_type
+    #   The sync type for the sync configuration for which you want to
+    #   retrieve information.
+    #
+    # @option params [required, String] :resource_name
+    #   The name of the Amazon Web Services resource for the sync
+    #   configuration for which you want to retrieve information.
+    #
+    # @return [Types::GetSyncConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSyncConfigurationOutput#sync_configuration #sync_configuration} => Types::SyncConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_sync_configuration({
+    #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
+    #     resource_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sync_configuration.branch #=> String
+    #   resp.sync_configuration.config_file #=> String
+    #   resp.sync_configuration.owner_id #=> String
+    #   resp.sync_configuration.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.sync_configuration.repository_link_id #=> String
+    #   resp.sync_configuration.repository_name #=> String
+    #   resp.sync_configuration.resource_name #=> String
+    #   resp.sync_configuration.role_arn #=> String
+    #   resp.sync_configuration.sync_type #=> String, one of "CFN_STACK_SYNC"
+    #   resp.sync_configuration.publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.sync_configuration.trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/GetSyncConfiguration AWS API Documentation
+    #
+    # @overload get_sync_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_sync_configuration(params = {}, options = {})
+      req = build_request(:get_sync_configuration, params)
       req.send_request(options)
     end
 
@@ -684,7 +1153,7 @@ module Aws::CodeStarconnections
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_connections({
-    #     provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab
+    #     provider_type_filter: "Bitbucket", # accepts Bitbucket, GitHub, GitHubEnterpriseServer, GitLab, GitLabSelfManaged
     #     host_arn_filter: "HostArn",
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -695,7 +1164,7 @@ module Aws::CodeStarconnections
     #   resp.connections #=> Array
     #   resp.connections[0].connection_name #=> String
     #   resp.connections[0].connection_arn #=> String
-    #   resp.connections[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.connections[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.connections[0].owner_account_id #=> String
     #   resp.connections[0].connection_status #=> String, one of "PENDING", "AVAILABLE", "ERROR"
     #   resp.connections[0].host_arn #=> String
@@ -740,7 +1209,7 @@ module Aws::CodeStarconnections
     #   resp.hosts #=> Array
     #   resp.hosts[0].name #=> String
     #   resp.hosts[0].host_arn #=> String
-    #   resp.hosts[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab"
+    #   resp.hosts[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
     #   resp.hosts[0].provider_endpoint #=> String
     #   resp.hosts[0].vpc_configuration.vpc_id #=> String
     #   resp.hosts[0].vpc_configuration.subnet_ids #=> Array
@@ -758,6 +1227,150 @@ module Aws::CodeStarconnections
     # @param [Hash] params ({})
     def list_hosts(params = {}, options = {})
       req = build_request(:list_hosts, params)
+      req.send_request(options)
+    end
+
+    # Lists the repository links created for connections in your account.
+    #
+    # @option params [Integer] :max_results
+    #   A non-zero, non-negative integer used to limit the number of returned
+    #   results.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that, when provided in a request, returns the
+    #   next batch of the results.
+    #
+    # @return [Types::ListRepositoryLinksOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRepositoryLinksOutput#repository_links #repository_links} => Array&lt;Types::RepositoryLinkInfo&gt;
+    #   * {Types::ListRepositoryLinksOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_repository_links({
+    #     max_results: 1,
+    #     next_token: "SharpNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.repository_links #=> Array
+    #   resp.repository_links[0].connection_arn #=> String
+    #   resp.repository_links[0].encryption_key_arn #=> String
+    #   resp.repository_links[0].owner_id #=> String
+    #   resp.repository_links[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.repository_links[0].repository_link_arn #=> String
+    #   resp.repository_links[0].repository_link_id #=> String
+    #   resp.repository_links[0].repository_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/ListRepositoryLinks AWS API Documentation
+    #
+    # @overload list_repository_links(params = {})
+    # @param [Hash] params ({})
+    def list_repository_links(params = {}, options = {})
+      req = build_request(:list_repository_links, params)
+      req.send_request(options)
+    end
+
+    # Lists the repository sync definitions for repository links in your
+    # account.
+    #
+    # @option params [required, String] :repository_link_id
+    #   The ID of the repository link for the sync definition for which you
+    #   want to retrieve information.
+    #
+    # @option params [required, String] :sync_type
+    #   The sync type of the repository link for the the sync definition for
+    #   which you want to retrieve information.
+    #
+    # @return [Types::ListRepositorySyncDefinitionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRepositorySyncDefinitionsOutput#repository_sync_definitions #repository_sync_definitions} => Array&lt;Types::RepositorySyncDefinition&gt;
+    #   * {Types::ListRepositorySyncDefinitionsOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_repository_sync_definitions({
+    #     repository_link_id: "RepositoryLinkId", # required
+    #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.repository_sync_definitions #=> Array
+    #   resp.repository_sync_definitions[0].branch #=> String
+    #   resp.repository_sync_definitions[0].directory #=> String
+    #   resp.repository_sync_definitions[0].parent #=> String
+    #   resp.repository_sync_definitions[0].target #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/ListRepositorySyncDefinitions AWS API Documentation
+    #
+    # @overload list_repository_sync_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_repository_sync_definitions(params = {}, options = {})
+      req = build_request(:list_repository_sync_definitions, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of sync configurations for a specified repository.
+    #
+    # @option params [Integer] :max_results
+    #   A non-zero, non-negative integer used to limit the number of returned
+    #   results.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that allows the operation to batch the results of
+    #   the operation.
+    #
+    # @option params [required, String] :repository_link_id
+    #   The ID of the repository link for the requested list of sync
+    #   configurations.
+    #
+    # @option params [required, String] :sync_type
+    #   The sync type for the requested list of sync configurations.
+    #
+    # @return [Types::ListSyncConfigurationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSyncConfigurationsOutput#sync_configurations #sync_configurations} => Array&lt;Types::SyncConfiguration&gt;
+    #   * {Types::ListSyncConfigurationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sync_configurations({
+    #     max_results: 1,
+    #     next_token: "SharpNextToken",
+    #     repository_link_id: "RepositoryLinkId", # required
+    #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sync_configurations #=> Array
+    #   resp.sync_configurations[0].branch #=> String
+    #   resp.sync_configurations[0].config_file #=> String
+    #   resp.sync_configurations[0].owner_id #=> String
+    #   resp.sync_configurations[0].provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.sync_configurations[0].repository_link_id #=> String
+    #   resp.sync_configurations[0].repository_name #=> String
+    #   resp.sync_configurations[0].resource_name #=> String
+    #   resp.sync_configurations[0].role_arn #=> String
+    #   resp.sync_configurations[0].sync_type #=> String, one of "CFN_STACK_SYNC"
+    #   resp.sync_configurations[0].publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.sync_configurations[0].trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/ListSyncConfigurations AWS API Documentation
+    #
+    # @overload list_sync_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_sync_configurations(params = {}, options = {})
+      req = build_request(:list_sync_configurations, params)
       req.send_request(options)
     end
 
@@ -889,6 +1502,178 @@ module Aws::CodeStarconnections
       req.send_request(options)
     end
 
+    # Updates the association between your connection and a specified
+    # external Git repository. A repository link allows Git sync to monitor
+    # and sync changes to files in a specified Git repository.
+    #
+    # @option params [String] :connection_arn
+    #   The Amazon Resource Name (ARN) of the connection for the repository
+    #   link to be updated. The updated connection ARN must have the same
+    #   providerType (such as GitHub) as the original connection ARN for the
+    #   repo link.
+    #
+    # @option params [String] :encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the encryption key for the
+    #   repository link to be updated.
+    #
+    # @option params [required, String] :repository_link_id
+    #   The ID of the repository link to be updated.
+    #
+    # @return [Types::UpdateRepositoryLinkOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRepositoryLinkOutput#repository_link_info #repository_link_info} => Types::RepositoryLinkInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_repository_link({
+    #     connection_arn: "ConnectionArn",
+    #     encryption_key_arn: "KmsKeyArn",
+    #     repository_link_id: "RepositoryLinkId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.repository_link_info.connection_arn #=> String
+    #   resp.repository_link_info.encryption_key_arn #=> String
+    #   resp.repository_link_info.owner_id #=> String
+    #   resp.repository_link_info.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.repository_link_info.repository_link_arn #=> String
+    #   resp.repository_link_info.repository_link_id #=> String
+    #   resp.repository_link_info.repository_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UpdateRepositoryLink AWS API Documentation
+    #
+    # @overload update_repository_link(params = {})
+    # @param [Hash] params ({})
+    def update_repository_link(params = {}, options = {})
+      req = build_request(:update_repository_link, params)
+      req.send_request(options)
+    end
+
+    # Allows you to update the status of a sync blocker, resolving the
+    # blocker and allowing syncing to continue.
+    #
+    # @option params [required, String] :id
+    #   The ID of the sync blocker to be updated.
+    #
+    # @option params [required, String] :sync_type
+    #   The sync type of the sync blocker to be updated.
+    #
+    # @option params [required, String] :resource_name
+    #   The name of the resource for the sync blocker to be updated.
+    #
+    # @option params [required, String] :resolved_reason
+    #   The reason for resolving the sync blocker.
+    #
+    # @return [Types::UpdateSyncBlockerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSyncBlockerOutput#resource_name #resource_name} => String
+    #   * {Types::UpdateSyncBlockerOutput#parent_resource_name #parent_resource_name} => String
+    #   * {Types::UpdateSyncBlockerOutput#sync_blocker #sync_blocker} => Types::SyncBlocker
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_sync_blocker({
+    #     id: "Id", # required
+    #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
+    #     resource_name: "ResourceName", # required
+    #     resolved_reason: "ResolvedReason", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_name #=> String
+    #   resp.parent_resource_name #=> String
+    #   resp.sync_blocker.id #=> String
+    #   resp.sync_blocker.type #=> String, one of "AUTOMATED"
+    #   resp.sync_blocker.status #=> String, one of "ACTIVE", "RESOLVED"
+    #   resp.sync_blocker.created_reason #=> String
+    #   resp.sync_blocker.created_at #=> Time
+    #   resp.sync_blocker.contexts #=> Array
+    #   resp.sync_blocker.contexts[0].key #=> String
+    #   resp.sync_blocker.contexts[0].value #=> String
+    #   resp.sync_blocker.resolved_reason #=> String
+    #   resp.sync_blocker.resolved_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UpdateSyncBlocker AWS API Documentation
+    #
+    # @overload update_sync_blocker(params = {})
+    # @param [Hash] params ({})
+    def update_sync_blocker(params = {}, options = {})
+      req = build_request(:update_sync_blocker, params)
+      req.send_request(options)
+    end
+
+    # Updates the sync configuration for your connection and a specified
+    # external Git repository.
+    #
+    # @option params [String] :branch
+    #   The branch for the sync configuration to be updated.
+    #
+    # @option params [String] :config_file
+    #   The configuration file for the sync configuration to be updated.
+    #
+    # @option params [String] :repository_link_id
+    #   The ID of the repository link for the sync configuration to be
+    #   updated.
+    #
+    # @option params [required, String] :resource_name
+    #   The name of the Amazon Web Services resource for the sync
+    #   configuration to be updated.
+    #
+    # @option params [String] :role_arn
+    #   The ARN of the IAM role for the sync configuration to be updated.
+    #
+    # @option params [required, String] :sync_type
+    #   The sync type for the sync configuration to be updated.
+    #
+    # @option params [String] :publish_deployment_status
+    #   Whether to enable or disable publishing of deployment status to source
+    #   providers.
+    #
+    # @option params [String] :trigger_resource_update_on
+    #   When to trigger Git sync to begin the stack update.
+    #
+    # @return [Types::UpdateSyncConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSyncConfigurationOutput#sync_configuration #sync_configuration} => Types::SyncConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_sync_configuration({
+    #     branch: "BranchName",
+    #     config_file: "DeploymentFilePath",
+    #     repository_link_id: "RepositoryLinkId",
+    #     resource_name: "ResourceName", # required
+    #     role_arn: "IamRoleArn",
+    #     sync_type: "CFN_STACK_SYNC", # required, accepts CFN_STACK_SYNC
+    #     publish_deployment_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     trigger_resource_update_on: "ANY_CHANGE", # accepts ANY_CHANGE, FILE_CHANGE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sync_configuration.branch #=> String
+    #   resp.sync_configuration.config_file #=> String
+    #   resp.sync_configuration.owner_id #=> String
+    #   resp.sync_configuration.provider_type #=> String, one of "Bitbucket", "GitHub", "GitHubEnterpriseServer", "GitLab", "GitLabSelfManaged"
+    #   resp.sync_configuration.repository_link_id #=> String
+    #   resp.sync_configuration.repository_name #=> String
+    #   resp.sync_configuration.resource_name #=> String
+    #   resp.sync_configuration.role_arn #=> String
+    #   resp.sync_configuration.sync_type #=> String, one of "CFN_STACK_SYNC"
+    #   resp.sync_configuration.publish_deployment_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.sync_configuration.trigger_resource_update_on #=> String, one of "ANY_CHANGE", "FILE_CHANGE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-connections-2019-12-01/UpdateSyncConfiguration AWS API Documentation
+    #
+    # @overload update_sync_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_sync_configuration(params = {}, options = {})
+      req = build_request(:update_sync_configuration, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -902,7 +1687,7 @@ module Aws::CodeStarconnections
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestarconnections'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -46,11 +46,13 @@ module Aws::Pricing
     PriceListJsonItems = Shapes::ListShape.new(name: 'PriceListJsonItems')
     PriceLists = Shapes::ListShape.new(name: 'PriceLists')
     RegionCode = Shapes::StringShape.new(name: 'RegionCode')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     Service = Shapes::StructureShape.new(name: 'Service')
     ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
     ServiceList = Shapes::ListShape.new(name: 'ServiceList')
     String = Shapes::StringShape.new(name: 'String')
     SynthesizedJsonPriceListJsonItem = Shapes::StringShape.new(name: 'SynthesizedJsonPriceListJsonItem')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
@@ -149,11 +151,17 @@ module Aws::Pricing
 
     PriceLists.member = Shapes::ShapeRef.new(shape: PriceList)
 
+    ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
     Service.add_member(:service_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceCode"))
     Service.add_member(:attribute_names, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributeNames"))
     Service.struct_class = Types::Service
 
     ServiceList.member = Shapes::ShapeRef.new(shape: Service)
+
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "Message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
 
 
     # @api private
@@ -185,6 +193,7 @@ module Aws::Pricing
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -204,6 +213,7 @@ module Aws::Pricing
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -223,6 +233,8 @@ module Aws::Pricing
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_products, Seahorse::Model::Operation.new.tap do |o|
@@ -235,6 +247,7 @@ module Aws::Pricing
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -255,6 +268,8 @@ module Aws::Pricing
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

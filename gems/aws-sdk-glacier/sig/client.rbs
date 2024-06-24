@@ -1,0 +1,564 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Glacier
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#abort_multipart_upload-instance_method
+      def abort_multipart_upload: (
+                                    account_id: ::String,
+                                    vault_name: ::String,
+                                    upload_id: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#abort_vault_lock-instance_method
+      def abort_vault_lock: (
+                              account_id: ::String,
+                              vault_name: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#add_tags_to_vault-instance_method
+      def add_tags_to_vault: (
+                               account_id: ::String,
+                               vault_name: ::String,
+                               ?tags: Hash[::String, ::String]
+                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CompleteMultipartUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ArchiveCreationOutput]
+        def location: () -> ::String
+        def checksum: () -> ::String
+        def archive_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#complete_multipart_upload-instance_method
+      def complete_multipart_upload: (
+                                       account_id: ::String,
+                                       vault_name: ::String,
+                                       upload_id: ::String,
+                                       ?archive_size: ::Integer,
+                                       ?checksum: ::String
+                                     ) -> _CompleteMultipartUploadResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CompleteMultipartUploadResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#complete_vault_lock-instance_method
+      def complete_vault_lock: (
+                                 account_id: ::String,
+                                 vault_name: ::String,
+                                 lock_id: ::String
+                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _CreateVaultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateVaultOutput]
+        def location: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#create_vault-instance_method
+      def create_vault: (
+                          account_id: ::String,
+                          vault_name: ::String
+                        ) -> _CreateVaultResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVaultResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#delete_archive-instance_method
+      def delete_archive: (
+                            account_id: ::String,
+                            vault_name: ::String,
+                            archive_id: ::String
+                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#delete_vault-instance_method
+      def delete_vault: (
+                          account_id: ::String,
+                          vault_name: ::String
+                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#delete_vault_access_policy-instance_method
+      def delete_vault_access_policy: (
+                                        account_id: ::String,
+                                        vault_name: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#delete_vault_notifications-instance_method
+      def delete_vault_notifications: (
+                                        account_id: ::String,
+                                        vault_name: ::String
+                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DescribeJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GlacierJobDescription]
+        def job_id: () -> ::String
+        def job_description: () -> ::String
+        def action: () -> ("ArchiveRetrieval" | "InventoryRetrieval" | "Select")
+        def archive_id: () -> ::String
+        def vault_arn: () -> ::String
+        def creation_date: () -> ::Time
+        def completed: () -> bool
+        def status_code: () -> ("InProgress" | "Succeeded" | "Failed")
+        def status_message: () -> ::String
+        def archive_size_in_bytes: () -> ::Integer
+        def inventory_size_in_bytes: () -> ::Integer
+        def sns_topic: () -> ::String
+        def completion_date: () -> ::Time
+        def sha256_tree_hash: () -> ::String
+        def archive_sha256_tree_hash: () -> ::String
+        def retrieval_byte_range: () -> ::String
+        def tier: () -> ::String
+        def inventory_retrieval_parameters: () -> Types::InventoryRetrievalJobDescription
+        def job_output_path: () -> ::String
+        def select_parameters: () -> Types::SelectParameters
+        def output_location: () -> Types::OutputLocation
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#describe_job-instance_method
+      def describe_job: (
+                          account_id: ::String,
+                          vault_name: ::String,
+                          job_id: ::String
+                        ) -> _DescribeJobResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeJobResponseSuccess
+
+      interface _DescribeVaultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeVaultOutput]
+        def vault_arn: () -> ::String
+        def vault_name: () -> ::String
+        def creation_date: () -> ::Time
+        def last_inventory_date: () -> ::Time
+        def number_of_archives: () -> ::Integer
+        def size_in_bytes: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#describe_vault-instance_method
+      def describe_vault: (
+                            account_id: ::String,
+                            vault_name: ::String
+                          ) -> _DescribeVaultResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeVaultResponseSuccess
+
+      interface _GetDataRetrievalPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataRetrievalPolicyOutput]
+        def policy: () -> Types::DataRetrievalPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#get_data_retrieval_policy-instance_method
+      def get_data_retrieval_policy: (
+                                       account_id: ::String
+                                     ) -> _GetDataRetrievalPolicyResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataRetrievalPolicyResponseSuccess
+
+      interface _GetJobOutputResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetJobOutputOutput]
+        def body: () -> ::IO
+        def checksum: () -> ::String
+        def status: () -> ::Integer
+        def content_range: () -> ::String
+        def accept_ranges: () -> ::String
+        def content_type: () -> ::String
+        def archive_description: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#get_job_output-instance_method
+      def get_job_output: (
+                            account_id: ::String,
+                            vault_name: ::String,
+                            job_id: ::String,
+                            ?range: ::String
+                          ) ?{ (*untyped) -> void } -> _GetJobOutputResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _GetJobOutputResponseSuccess
+
+      interface _GetVaultAccessPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVaultAccessPolicyOutput]
+        def policy: () -> Types::VaultAccessPolicy
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#get_vault_access_policy-instance_method
+      def get_vault_access_policy: (
+                                     account_id: ::String,
+                                     vault_name: ::String
+                                   ) -> _GetVaultAccessPolicyResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVaultAccessPolicyResponseSuccess
+
+      interface _GetVaultLockResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVaultLockOutput]
+        def policy: () -> ::String
+        def state: () -> ::String
+        def expiration_date: () -> ::Time
+        def creation_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#get_vault_lock-instance_method
+      def get_vault_lock: (
+                            account_id: ::String,
+                            vault_name: ::String
+                          ) -> _GetVaultLockResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVaultLockResponseSuccess
+
+      interface _GetVaultNotificationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetVaultNotificationsOutput]
+        def vault_notification_config: () -> Types::VaultNotificationConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#get_vault_notifications-instance_method
+      def get_vault_notifications: (
+                                     account_id: ::String,
+                                     vault_name: ::String
+                                   ) -> _GetVaultNotificationsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetVaultNotificationsResponseSuccess
+
+      interface _InitiateJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InitiateJobOutput]
+        def location: () -> ::String
+        def job_id: () -> ::String
+        def job_output_path: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#initiate_job-instance_method
+      def initiate_job: (
+                          account_id: ::String,
+                          vault_name: ::String,
+                          ?job_parameters: {
+                            format: ::String?,
+                            type: ::String?,
+                            archive_id: ::String?,
+                            description: ::String?,
+                            sns_topic: ::String?,
+                            retrieval_byte_range: ::String?,
+                            tier: ::String?,
+                            inventory_retrieval_parameters: {
+                              start_date: ::Time?,
+                              end_date: ::Time?,
+                              limit: ::String?,
+                              marker: ::String?
+                            }?,
+                            select_parameters: {
+                              input_serialization: {
+                                csv: {
+                                  file_header_info: ("USE" | "IGNORE" | "NONE")?,
+                                  comments: ::String?,
+                                  quote_escape_character: ::String?,
+                                  record_delimiter: ::String?,
+                                  field_delimiter: ::String?,
+                                  quote_character: ::String?
+                                }?
+                              }?,
+                              expression_type: ("SQL")?,
+                              expression: ::String?,
+                              output_serialization: {
+                                csv: {
+                                  quote_fields: ("ALWAYS" | "ASNEEDED")?,
+                                  quote_escape_character: ::String?,
+                                  record_delimiter: ::String?,
+                                  field_delimiter: ::String?,
+                                  quote_character: ::String?
+                                }?
+                              }?
+                            }?,
+                            output_location: {
+                              s3: {
+                                bucket_name: ::String?,
+                                prefix: ::String?,
+                                encryption: {
+                                  encryption_type: ("aws:kms" | "AES256")?,
+                                  kms_key_id: ::String?,
+                                  kms_context: ::String?
+                                }?,
+                                canned_acl: ("private" | "public-read" | "public-read-write" | "aws-exec-read" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control")?,
+                                access_control_list: Array[
+                                  {
+                                    grantee: {
+                                      type: ("AmazonCustomerByEmail" | "CanonicalUser" | "Group"),
+                                      display_name: ::String?,
+                                      uri: ::String?,
+                                      id: ::String?,
+                                      email_address: ::String?
+                                    }?,
+                                    permission: ("FULL_CONTROL" | "WRITE" | "WRITE_ACP" | "READ" | "READ_ACP")?
+                                  },
+                                ]?,
+                                tagging: Hash[::String, ::String]?,
+                                user_metadata: Hash[::String, ::String]?,
+                                storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA")?
+                              }?
+                            }?
+                          }
+                        ) -> _InitiateJobResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitiateJobResponseSuccess
+
+      interface _InitiateMultipartUploadResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InitiateMultipartUploadOutput]
+        def location: () -> ::String
+        def upload_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#initiate_multipart_upload-instance_method
+      def initiate_multipart_upload: (
+                                       account_id: ::String,
+                                       vault_name: ::String,
+                                       ?archive_description: ::String,
+                                       ?part_size: ::Integer
+                                     ) -> _InitiateMultipartUploadResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitiateMultipartUploadResponseSuccess
+
+      interface _InitiateVaultLockResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::InitiateVaultLockOutput]
+        def lock_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#initiate_vault_lock-instance_method
+      def initiate_vault_lock: (
+                                 account_id: ::String,
+                                 vault_name: ::String,
+                                 ?policy: {
+                                   policy: ::String?
+                                 }
+                               ) -> _InitiateVaultLockResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InitiateVaultLockResponseSuccess
+
+      interface _ListJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListJobsOutput]
+        def job_list: () -> ::Array[Types::GlacierJobDescription]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#list_jobs-instance_method
+      def list_jobs: (
+                       account_id: ::String,
+                       vault_name: ::String,
+                       ?limit: ::Integer,
+                       ?marker: ::String,
+                       ?statuscode: ::String,
+                       ?completed: ::String
+                     ) -> _ListJobsResponseSuccess
+                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobsResponseSuccess
+
+      interface _ListMultipartUploadsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListMultipartUploadsOutput]
+        def uploads_list: () -> ::Array[Types::UploadListElement]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#list_multipart_uploads-instance_method
+      def list_multipart_uploads: (
+                                    account_id: ::String,
+                                    vault_name: ::String,
+                                    ?marker: ::String,
+                                    ?limit: ::Integer
+                                  ) -> _ListMultipartUploadsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMultipartUploadsResponseSuccess
+
+      interface _ListPartsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPartsOutput]
+        def multipart_upload_id: () -> ::String
+        def vault_arn: () -> ::String
+        def archive_description: () -> ::String
+        def part_size_in_bytes: () -> ::Integer
+        def creation_date: () -> ::Time
+        def parts: () -> ::Array[Types::PartListElement]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#list_parts-instance_method
+      def list_parts: (
+                        account_id: ::String,
+                        vault_name: ::String,
+                        upload_id: ::String,
+                        ?marker: ::String,
+                        ?limit: ::Integer
+                      ) -> _ListPartsResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPartsResponseSuccess
+
+      interface _ListProvisionedCapacityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListProvisionedCapacityOutput]
+        def provisioned_capacity_list: () -> ::Array[Types::ProvisionedCapacityDescription]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#list_provisioned_capacity-instance_method
+      def list_provisioned_capacity: (
+                                       account_id: ::String
+                                     ) -> _ListProvisionedCapacityResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProvisionedCapacityResponseSuccess
+
+      interface _ListTagsForVaultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForVaultOutput]
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#list_tags_for_vault-instance_method
+      def list_tags_for_vault: (
+                                 account_id: ::String,
+                                 vault_name: ::String
+                               ) -> _ListTagsForVaultResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForVaultResponseSuccess
+
+      interface _ListVaultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListVaultsOutput]
+        def vault_list: () -> ::Array[Types::DescribeVaultOutput]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#list_vaults-instance_method
+      def list_vaults: (
+                         account_id: ::String,
+                         ?marker: ::String,
+                         ?limit: ::Integer
+                       ) -> _ListVaultsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListVaultsResponseSuccess
+
+      interface _PurchaseProvisionedCapacityResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PurchaseProvisionedCapacityOutput]
+        def capacity_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#purchase_provisioned_capacity-instance_method
+      def purchase_provisioned_capacity: (
+                                           account_id: ::String
+                                         ) -> _PurchaseProvisionedCapacityResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PurchaseProvisionedCapacityResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#remove_tags_from_vault-instance_method
+      def remove_tags_from_vault: (
+                                    account_id: ::String,
+                                    vault_name: ::String,
+                                    ?tag_keys: Array[::String]
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#set_data_retrieval_policy-instance_method
+      def set_data_retrieval_policy: (
+                                       account_id: ::String,
+                                       ?policy: {
+                                         rules: Array[
+                                           {
+                                             strategy: ::String?,
+                                             bytes_per_hour: ::Integer?
+                                           },
+                                         ]?
+                                       }
+                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#set_vault_access_policy-instance_method
+      def set_vault_access_policy: (
+                                     account_id: ::String,
+                                     vault_name: ::String,
+                                     ?policy: {
+                                       policy: ::String?
+                                     }
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#set_vault_notifications-instance_method
+      def set_vault_notifications: (
+                                     account_id: ::String,
+                                     vault_name: ::String,
+                                     ?vault_notification_config: {
+                                       sns_topic: ::String?,
+                                       events: Array[::String]?
+                                     }
+                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _UploadArchiveResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ArchiveCreationOutput]
+        def location: () -> ::String
+        def checksum: () -> ::String
+        def archive_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#upload_archive-instance_method
+      def upload_archive: (
+                            vault_name: ::String,
+                            account_id: ::String,
+                            ?archive_description: ::String,
+                            ?checksum: ::String,
+                            ?body: ::String
+                          ) -> _UploadArchiveResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UploadArchiveResponseSuccess
+
+      interface _UploadMultipartPartResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UploadMultipartPartOutput]
+        def checksum: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#upload_multipart_part-instance_method
+      def upload_multipart_part: (
+                                   account_id: ::String,
+                                   vault_name: ::String,
+                                   upload_id: ::String,
+                                   ?checksum: ::String,
+                                   ?range: ::String,
+                                   ?body: ::String
+                                 ) -> _UploadMultipartPartResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UploadMultipartPartResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glacier/Client.html#wait_until-instance_method
+      def wait_until: (:vault_exists waiter_name, 
+                    account_id: ::String,
+                    vault_name: ::String
+                  ) -> Client::_DescribeVaultResponseSuccess
+                    | (:vault_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeVaultResponseSuccess
+                    | (:vault_not_exists waiter_name, 
+                    account_id: ::String,
+                    vault_name: ::String
+                  ) -> Client::_DescribeVaultResponseSuccess
+                    | (:vault_not_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeVaultResponseSuccess
+    end
+  end
+end
+

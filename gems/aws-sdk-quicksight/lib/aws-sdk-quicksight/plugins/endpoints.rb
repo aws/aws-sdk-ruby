@@ -14,6 +14,7 @@ module Aws::QuickSight
       option(
         :endpoint_provider,
         doc_type: 'Aws::QuickSight::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::QuickSight
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -86,6 +88,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::CreateNamespace.build(context)
           when :create_refresh_schedule
             Aws::QuickSight::Endpoints::CreateRefreshSchedule.build(context)
+          when :create_role_membership
+            Aws::QuickSight::Endpoints::CreateRoleMembership.build(context)
           when :create_template
             Aws::QuickSight::Endpoints::CreateTemplate.build(context)
           when :create_template_alias
@@ -124,10 +128,16 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DeleteGroupMembership.build(context)
           when :delete_iam_policy_assignment
             Aws::QuickSight::Endpoints::DeleteIAMPolicyAssignment.build(context)
+          when :delete_identity_propagation_config
+            Aws::QuickSight::Endpoints::DeleteIdentityPropagationConfig.build(context)
           when :delete_namespace
             Aws::QuickSight::Endpoints::DeleteNamespace.build(context)
           when :delete_refresh_schedule
             Aws::QuickSight::Endpoints::DeleteRefreshSchedule.build(context)
+          when :delete_role_custom_permission
+            Aws::QuickSight::Endpoints::DeleteRoleCustomPermission.build(context)
+          when :delete_role_membership
+            Aws::QuickSight::Endpoints::DeleteRoleMembership.build(context)
           when :delete_template
             Aws::QuickSight::Endpoints::DeleteTemplate.build(context)
           when :delete_template_alias
@@ -198,10 +208,14 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::DescribeIngestion.build(context)
           when :describe_ip_restriction
             Aws::QuickSight::Endpoints::DescribeIpRestriction.build(context)
+          when :describe_key_registration
+            Aws::QuickSight::Endpoints::DescribeKeyRegistration.build(context)
           when :describe_namespace
             Aws::QuickSight::Endpoints::DescribeNamespace.build(context)
           when :describe_refresh_schedule
             Aws::QuickSight::Endpoints::DescribeRefreshSchedule.build(context)
+          when :describe_role_custom_permission
+            Aws::QuickSight::Endpoints::DescribeRoleCustomPermission.build(context)
           when :describe_template
             Aws::QuickSight::Endpoints::DescribeTemplate.build(context)
           when :describe_template_alias
@@ -262,12 +276,16 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::ListIAMPolicyAssignments.build(context)
           when :list_iam_policy_assignments_for_user
             Aws::QuickSight::Endpoints::ListIAMPolicyAssignmentsForUser.build(context)
+          when :list_identity_propagation_configs
+            Aws::QuickSight::Endpoints::ListIdentityPropagationConfigs.build(context)
           when :list_ingestions
             Aws::QuickSight::Endpoints::ListIngestions.build(context)
           when :list_namespaces
             Aws::QuickSight::Endpoints::ListNamespaces.build(context)
           when :list_refresh_schedules
             Aws::QuickSight::Endpoints::ListRefreshSchedules.build(context)
+          when :list_role_memberships
+            Aws::QuickSight::Endpoints::ListRoleMemberships.build(context)
           when :list_tags_for_resource
             Aws::QuickSight::Endpoints::ListTagsForResource.build(context)
           when :list_template_aliases
@@ -330,6 +348,8 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::UpdateAnalysisPermissions.build(context)
           when :update_dashboard
             Aws::QuickSight::Endpoints::UpdateDashboard.build(context)
+          when :update_dashboard_links
+            Aws::QuickSight::Endpoints::UpdateDashboardLinks.build(context)
           when :update_dashboard_permissions
             Aws::QuickSight::Endpoints::UpdateDashboardPermissions.build(context)
           when :update_dashboard_published_version
@@ -350,12 +370,20 @@ module Aws::QuickSight
             Aws::QuickSight::Endpoints::UpdateGroup.build(context)
           when :update_iam_policy_assignment
             Aws::QuickSight::Endpoints::UpdateIAMPolicyAssignment.build(context)
+          when :update_identity_propagation_config
+            Aws::QuickSight::Endpoints::UpdateIdentityPropagationConfig.build(context)
           when :update_ip_restriction
             Aws::QuickSight::Endpoints::UpdateIpRestriction.build(context)
+          when :update_key_registration
+            Aws::QuickSight::Endpoints::UpdateKeyRegistration.build(context)
           when :update_public_sharing_settings
             Aws::QuickSight::Endpoints::UpdatePublicSharingSettings.build(context)
           when :update_refresh_schedule
             Aws::QuickSight::Endpoints::UpdateRefreshSchedule.build(context)
+          when :update_role_custom_permission
+            Aws::QuickSight::Endpoints::UpdateRoleCustomPermission.build(context)
+          when :update_spice_capacity_configuration
+            Aws::QuickSight::Endpoints::UpdateSPICECapacityConfiguration.build(context)
           when :update_template
             Aws::QuickSight::Endpoints::UpdateTemplate.build(context)
           when :update_template_alias

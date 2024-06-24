@@ -14,6 +14,7 @@ module Aws::CodeBuild
       option(
         :endpoint_provider,
         doc_type: 'Aws::CodeBuild::EndpointProvider',
+        rbs_type: 'untyped',
         docstring: 'The endpoint provider used to resolve endpoints. Any '\
                    'object that responds to `#resolve_endpoint(parameters)` '\
                    'where `parameters` is a Struct similar to '\
@@ -25,16 +26,17 @@ module Aws::CodeBuild
       # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
-          # If endpoint was discovered, do not resolve or apply the endpoint.
           unless context[:discovered_endpoint]
             params = parameters_for_operation(context)
             endpoint = context.config.endpoint_provider.resolve_endpoint(params)
 
             context.http_request.endpoint = endpoint.url
             apply_endpoint_headers(context, endpoint.headers)
+
+            context[:endpoint_params] = params
+            context[:endpoint_properties] = endpoint.properties
           end
 
-          context[:endpoint_params] = params
           context[:auth_scheme] =
             Aws::Endpoints.resolve_auth_scheme(context, endpoint)
 
@@ -62,12 +64,16 @@ module Aws::CodeBuild
             Aws::CodeBuild::Endpoints::BatchGetBuildBatches.build(context)
           when :batch_get_builds
             Aws::CodeBuild::Endpoints::BatchGetBuilds.build(context)
+          when :batch_get_fleets
+            Aws::CodeBuild::Endpoints::BatchGetFleets.build(context)
           when :batch_get_projects
             Aws::CodeBuild::Endpoints::BatchGetProjects.build(context)
           when :batch_get_report_groups
             Aws::CodeBuild::Endpoints::BatchGetReportGroups.build(context)
           when :batch_get_reports
             Aws::CodeBuild::Endpoints::BatchGetReports.build(context)
+          when :create_fleet
+            Aws::CodeBuild::Endpoints::CreateFleet.build(context)
           when :create_project
             Aws::CodeBuild::Endpoints::CreateProject.build(context)
           when :create_report_group
@@ -76,6 +82,8 @@ module Aws::CodeBuild
             Aws::CodeBuild::Endpoints::CreateWebhook.build(context)
           when :delete_build_batch
             Aws::CodeBuild::Endpoints::DeleteBuildBatch.build(context)
+          when :delete_fleet
+            Aws::CodeBuild::Endpoints::DeleteFleet.build(context)
           when :delete_project
             Aws::CodeBuild::Endpoints::DeleteProject.build(context)
           when :delete_report
@@ -110,6 +118,8 @@ module Aws::CodeBuild
             Aws::CodeBuild::Endpoints::ListBuildsForProject.build(context)
           when :list_curated_environment_images
             Aws::CodeBuild::Endpoints::ListCuratedEnvironmentImages.build(context)
+          when :list_fleets
+            Aws::CodeBuild::Endpoints::ListFleets.build(context)
           when :list_projects
             Aws::CodeBuild::Endpoints::ListProjects.build(context)
           when :list_report_groups
@@ -138,6 +148,8 @@ module Aws::CodeBuild
             Aws::CodeBuild::Endpoints::StopBuild.build(context)
           when :stop_build_batch
             Aws::CodeBuild::Endpoints::StopBuildBatch.build(context)
+          when :update_fleet
+            Aws::CodeBuild::Endpoints::UpdateFleet.build(context)
           when :update_project
             Aws::CodeBuild::Endpoints::UpdateProject.build(context)
           when :update_project_visibility

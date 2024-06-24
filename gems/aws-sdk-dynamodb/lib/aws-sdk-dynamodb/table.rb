@@ -370,6 +370,14 @@ module Aws::DynamoDB
       data[:deletion_protection_enabled]
     end
 
+    # The maximum number of read and write units for the specified on-demand
+    # table. If you use this parameter, you must specify
+    # `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
+    # @return [Types::OnDemandThroughput]
+    def on_demand_throughput
+      data[:on_demand_throughput]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -384,7 +392,7 @@ module Aws::DynamoDB
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_table(table_name: @name)
       end
       @data = resp.table
@@ -501,7 +509,7 @@ module Aws::DynamoDB
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -515,7 +523,7 @@ module Aws::DynamoDB
     # @return [Types::DeleteTableOutput]
     def delete(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_table(options)
       end
       resp.data
@@ -719,7 +727,7 @@ module Aws::DynamoDB
     # @return [Types::DeleteItemOutput]
     def delete_item(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_item(options)
       end
       resp.data
@@ -844,7 +852,7 @@ module Aws::DynamoDB
     # @return [Types::GetItemOutput]
     def get_item(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.get_item(options)
       end
       resp.data
@@ -1069,7 +1077,7 @@ module Aws::DynamoDB
     # @return [Types::PutItemOutput]
     def put_item(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.put_item(options)
       end
       resp.data
@@ -1298,7 +1306,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.FilterExpression.html
     # @option options [String] :key_condition_expression
     #   The condition that specifies the key values for items to be retrieved
     #   by the `Query` action.
@@ -1459,7 +1467,7 @@ module Aws::DynamoDB
     # @return [Types::QueryOutput]
     def query(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.query(options)
       end
       resp.data
@@ -1681,7 +1689,7 @@ module Aws::DynamoDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Query.FilterExpression
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.FilterExpression
     # @option options [Hash<String,String>] :expression_attribute_names
     #   One or more substitution tokens for attribute names in an expression.
     #   The following are some use cases for using `ExpressionAttributeNames`:
@@ -1776,7 +1784,7 @@ module Aws::DynamoDB
     # @return [Types::ScanOutput]
     def scan(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.scan(options)
       end
       resp.data
@@ -1800,9 +1808,13 @@ module Aws::DynamoDB
     #       {
     #         update: {
     #           index_name: "IndexName", # required
-    #           provisioned_throughput: { # required
+    #           provisioned_throughput: {
     #             read_capacity_units: 1, # required
     #             write_capacity_units: 1, # required
+    #           },
+    #           on_demand_throughput: {
+    #             max_read_request_units: 1,
+    #             max_write_request_units: 1,
     #           },
     #         },
     #         create: {
@@ -1820,6 +1832,10 @@ module Aws::DynamoDB
     #           provisioned_throughput: {
     #             read_capacity_units: 1, # required
     #             write_capacity_units: 1, # required
+    #           },
+    #           on_demand_throughput: {
+    #             max_read_request_units: 1,
+    #             max_write_request_units: 1,
     #           },
     #         },
     #         delete: {
@@ -1844,11 +1860,17 @@ module Aws::DynamoDB
     #           provisioned_throughput_override: {
     #             read_capacity_units: 1,
     #           },
+    #           on_demand_throughput_override: {
+    #             max_read_request_units: 1,
+    #           },
     #           global_secondary_indexes: [
     #             {
     #               index_name: "IndexName", # required
     #               provisioned_throughput_override: {
     #                 read_capacity_units: 1,
+    #               },
+    #               on_demand_throughput_override: {
+    #                 max_read_request_units: 1,
     #               },
     #             },
     #           ],
@@ -1860,11 +1882,17 @@ module Aws::DynamoDB
     #           provisioned_throughput_override: {
     #             read_capacity_units: 1,
     #           },
+    #           on_demand_throughput_override: {
+    #             max_read_request_units: 1,
+    #           },
     #           global_secondary_indexes: [
     #             {
     #               index_name: "IndexName", # required
     #               provisioned_throughput_override: {
     #                 read_capacity_units: 1,
+    #               },
+    #               on_demand_throughput_override: {
+    #                 max_read_request_units: 1,
     #               },
     #             },
     #           ],
@@ -1877,6 +1905,10 @@ module Aws::DynamoDB
     #     ],
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
     #     deletion_protection_enabled: false,
+    #     on_demand_throughput: {
+    #       max_read_request_units: 1,
+    #       max_write_request_units: 1,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::AttributeDefinition>] :attribute_definitions
@@ -1894,16 +1926,16 @@ module Aws::DynamoDB
     #
     #   * `PROVISIONED` - We recommend using `PROVISIONED` for predictable
     #     workloads. `PROVISIONED` sets the billing mode to [Provisioned
-    #     Mode][1].
+    #     capacity mode][1].
     #
     #   * `PAY_PER_REQUEST` - We recommend using `PAY_PER_REQUEST` for
     #     unpredictable workloads. `PAY_PER_REQUEST` sets the billing mode to
-    #     [On-Demand Mode][2].
+    #     [On-demand capacity mode][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual
-    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html
     # @option options [Types::ProvisionedThroughput] :provisioned_throughput
     #   The new provisioned throughput settings for the specified table or
     #   index.
@@ -1930,9 +1962,9 @@ module Aws::DynamoDB
     # @option options [Types::StreamSpecification] :stream_specification
     #   Represents the DynamoDB Streams configuration for the table.
     #
-    #   <note markdown="1"> You receive a `ResourceInUseException` if you try to enable a stream
-    #   on a table that already has a stream, or if you try to disable a
-    #   stream on a table that doesn't have a stream.
+    #   <note markdown="1"> You receive a `ValidationException` if you try to enable a stream on a
+    #   table that already has a stream, or if you try to disable a stream on
+    #   a table that doesn't have a stream.
     #
     #    </note>
     # @option options [Types::SSESpecification] :sse_specification
@@ -1941,24 +1973,24 @@ module Aws::DynamoDB
     #   A list of replica update actions (create, delete, or update) for the
     #   table.
     #
-    #   <note markdown="1"> This property only applies to [Version 2019.11.21 (Current)][1] of
-    #   global tables.
+    #   <note markdown="1"> For global tables, this property only applies to global tables using
+    #   Version 2019.11.21 (Current version).
     #
     #    </note>
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html
     # @option options [String] :table_class
     #   The table class of the table to be updated. Valid values are
     #   `STANDARD` and `STANDARD_INFREQUENT_ACCESS`.
     # @option options [Boolean] :deletion_protection_enabled
     #   Indicates whether deletion protection is to be enabled (true) or
     #   disabled (false) on the table.
+    # @option options [Types::OnDemandThroughput] :on_demand_throughput
+    #   Updates the maximum number of read and write units for the specified
+    #   table in on-demand capacity mode. If you use this parameter, you must
+    #   specify `MaxReadRequestUnits`, `MaxWriteRequestUnits`, or both.
     # @return [Table]
     def update(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.update_table(options)
       end
       Table.new(
@@ -2274,7 +2306,7 @@ module Aws::DynamoDB
     # @return [Types::UpdateItemOutput]
     def update_item(options = {})
       options = options.merge(table_name: @name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.update_item(options)
       end
       resp.data

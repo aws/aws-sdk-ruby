@@ -1,0 +1,740 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::BedrockAgentRuntime
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ActionGroupInvocationInput
+      attr_accessor action_group_name: ::String
+      attr_accessor api_path: ::String
+      attr_accessor function: ::String
+      attr_accessor parameters: ::Array[Types::Parameter]
+      attr_accessor request_body: Types::RequestBody
+      attr_accessor verb: ::String
+      SENSITIVE: [:action_group_name, :api_path, :function, :verb]
+    end
+
+    class ActionGroupInvocationOutput
+      attr_accessor text: ::String
+      SENSITIVE: [:text]
+    end
+
+    class ApiInvocationInput
+      attr_accessor action_group: ::String
+      attr_accessor api_path: ::String
+      attr_accessor http_method: ::String
+      attr_accessor parameters: ::Array[Types::ApiParameter]
+      attr_accessor request_body: Types::ApiRequestBody
+      SENSITIVE: [:api_path]
+    end
+
+    class ApiParameter
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class ApiRequestBody
+      attr_accessor content: ::Hash[::String, Types::PropertyParameters]
+      SENSITIVE: []
+    end
+
+    class ApiResult
+      attr_accessor action_group: ::String
+      attr_accessor api_path: ::String
+      attr_accessor http_method: ::String
+      attr_accessor http_status_code: ::Integer
+      attr_accessor response_body: ::Hash[::String, Types::ContentBody]
+      attr_accessor response_state: ("FAILURE" | "REPROMPT")
+      SENSITIVE: [:api_path]
+    end
+
+    class Attribution
+      attr_accessor citations: ::Array[Types::Citation]
+      SENSITIVE: []
+    end
+
+    class BadGatewayException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ByteContentDoc
+      attr_accessor content_type: ::String
+      attr_accessor data: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: [:data, :identifier]
+    end
+
+    class Citation
+      attr_accessor generated_response_part: Types::GeneratedResponsePart
+      attr_accessor retrieved_references: ::Array[Types::RetrievedReference]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ContentBody
+      attr_accessor body: ::String
+      SENSITIVE: []
+    end
+
+    class DependencyFailedException
+      attr_accessor message: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ExternalSource
+      attr_accessor byte_content: Types::ByteContentDoc
+      attr_accessor s3_location: Types::S3ObjectDoc
+      attr_accessor source_type: ("S3" | "BYTE_CONTENT")
+      SENSITIVE: []
+    end
+
+    class ExternalSourcesGenerationConfiguration
+      attr_accessor additional_model_request_fields: ::Hash[::String, untyped]
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
+      attr_accessor inference_config: Types::InferenceConfig
+      attr_accessor prompt_template: Types::PromptTemplate
+      SENSITIVE: []
+    end
+
+    class ExternalSourcesRetrieveAndGenerateConfiguration
+      attr_accessor generation_configuration: Types::ExternalSourcesGenerationConfiguration
+      attr_accessor model_arn: ::String
+      attr_accessor sources: ::Array[Types::ExternalSource]
+      SENSITIVE: []
+    end
+
+    class FailureTrace
+      attr_accessor failure_reason: ::String
+      attr_accessor trace_id: ::String
+      SENSITIVE: [:failure_reason]
+    end
+
+    class FilterAttribute
+      attr_accessor key: ::String
+      attr_accessor value: untyped
+      SENSITIVE: []
+    end
+
+    class FinalResponse
+      attr_accessor text: ::String
+      SENSITIVE: [:text]
+    end
+
+    class FunctionInvocationInput
+      attr_accessor action_group: ::String
+      attr_accessor function: ::String
+      attr_accessor parameters: ::Array[Types::FunctionParameter]
+      SENSITIVE: []
+    end
+
+    class FunctionParameter
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class FunctionResult
+      attr_accessor action_group: ::String
+      attr_accessor function: ::String
+      attr_accessor response_body: ::Hash[::String, Types::ContentBody]
+      attr_accessor response_state: ("FAILURE" | "REPROMPT")
+      SENSITIVE: []
+    end
+
+    class GeneratedResponsePart
+      attr_accessor text_response_part: Types::TextResponsePart
+      SENSITIVE: [:text_response_part]
+    end
+
+    class GenerationConfiguration
+      attr_accessor additional_model_request_fields: ::Hash[::String, untyped]
+      attr_accessor guardrail_configuration: Types::GuardrailConfiguration
+      attr_accessor inference_config: Types::InferenceConfig
+      attr_accessor prompt_template: Types::PromptTemplate
+      SENSITIVE: []
+    end
+
+    class GuardrailAssessment
+      attr_accessor content_policy: Types::GuardrailContentPolicyAssessment
+      attr_accessor sensitive_information_policy: Types::GuardrailSensitiveInformationPolicyAssessment
+      attr_accessor topic_policy: Types::GuardrailTopicPolicyAssessment
+      attr_accessor word_policy: Types::GuardrailWordPolicyAssessment
+      SENSITIVE: [:content_policy, :sensitive_information_policy, :topic_policy, :word_policy]
+    end
+
+    class GuardrailConfiguration
+      attr_accessor guardrail_id: ::String
+      attr_accessor guardrail_version: ::String
+      SENSITIVE: []
+    end
+
+    class GuardrailContentFilter
+      attr_accessor action: ("BLOCKED")
+      attr_accessor confidence: ("NONE" | "LOW" | "MEDIUM" | "HIGH")
+      attr_accessor type: ("INSULTS" | "HATE" | "SEXUAL" | "VIOLENCE" | "MISCONDUCT" | "PROMPT_ATTACK")
+      SENSITIVE: []
+    end
+
+    class GuardrailContentPolicyAssessment
+      attr_accessor filters: ::Array[Types::GuardrailContentFilter]
+      SENSITIVE: [:filters]
+    end
+
+    class GuardrailCustomWord
+      attr_accessor action: ("BLOCKED")
+      attr_accessor match: ::String
+      SENSITIVE: []
+    end
+
+    class GuardrailManagedWord
+      attr_accessor action: ("BLOCKED")
+      attr_accessor match: ::String
+      attr_accessor type: ("PROFANITY")
+      SENSITIVE: []
+    end
+
+    class GuardrailPiiEntityFilter
+      attr_accessor action: ("BLOCKED" | "ANONYMIZED")
+      attr_accessor match: ::String
+      attr_accessor type: ("ADDRESS" | "AGE" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "DRIVER_ID" | "EMAIL" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "IP_ADDRESS" | "LICENSE_PLATE" | "MAC_ADDRESS" | "NAME" | "PASSWORD" | "PHONE" | "PIN" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "URL" | "USERNAME" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "VEHICLE_IDENTIFICATION_NUMBER")
+      SENSITIVE: []
+    end
+
+    class GuardrailRegexFilter
+      attr_accessor action: ("BLOCKED" | "ANONYMIZED")
+      attr_accessor match: ::String
+      attr_accessor name: ::String
+      attr_accessor regex: ::String
+      SENSITIVE: []
+    end
+
+    class GuardrailSensitiveInformationPolicyAssessment
+      attr_accessor pii_entities: ::Array[Types::GuardrailPiiEntityFilter]
+      attr_accessor regexes: ::Array[Types::GuardrailRegexFilter]
+      SENSITIVE: [:pii_entities, :regexes]
+    end
+
+    class GuardrailTopic
+      attr_accessor action: ("BLOCKED")
+      attr_accessor name: ::String
+      attr_accessor type: ("DENY")
+      SENSITIVE: []
+    end
+
+    class GuardrailTopicPolicyAssessment
+      attr_accessor topics: ::Array[Types::GuardrailTopic]
+      SENSITIVE: [:topics]
+    end
+
+    class GuardrailTrace
+      attr_accessor action: ("INTERVENED" | "NONE")
+      attr_accessor input_assessments: ::Array[Types::GuardrailAssessment]
+      attr_accessor output_assessments: ::Array[Types::GuardrailAssessment]
+      attr_accessor trace_id: ::String
+      SENSITIVE: []
+    end
+
+    class GuardrailWordPolicyAssessment
+      attr_accessor custom_words: ::Array[Types::GuardrailCustomWord]
+      attr_accessor managed_word_lists: ::Array[Types::GuardrailManagedWord]
+      SENSITIVE: [:custom_words, :managed_word_lists]
+    end
+
+    class InferenceConfig
+      attr_accessor text_inference_config: Types::TextInferenceConfig
+      SENSITIVE: []
+    end
+
+    class InferenceConfiguration
+      attr_accessor maximum_length: ::Integer
+      attr_accessor stop_sequences: ::Array[::String]
+      attr_accessor temperature: ::Float
+      attr_accessor top_k: ::Integer
+      attr_accessor top_p: ::Float
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class InvocationInput
+      attr_accessor action_group_invocation_input: Types::ActionGroupInvocationInput
+      attr_accessor invocation_type: ("ACTION_GROUP" | "KNOWLEDGE_BASE" | "FINISH")
+      attr_accessor knowledge_base_lookup_input: Types::KnowledgeBaseLookupInput
+      attr_accessor trace_id: ::String
+      SENSITIVE: []
+    end
+
+    class InvocationInputMember
+      attr_accessor api_invocation_input: Types::ApiInvocationInput
+      attr_accessor function_invocation_input: Types::FunctionInvocationInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ApiInvocationInput < InvocationInputMember
+      end
+      class FunctionInvocationInput < InvocationInputMember
+      end
+      class Unknown < InvocationInputMember
+      end
+    end
+
+    class InvocationResultMember
+      attr_accessor api_result: Types::ApiResult
+      attr_accessor function_result: Types::FunctionResult
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ApiResult < InvocationResultMember
+      end
+      class FunctionResult < InvocationResultMember
+      end
+      class Unknown < InvocationResultMember
+      end
+    end
+
+    class InvokeAgentRequest
+      attr_accessor agent_alias_id: ::String
+      attr_accessor agent_id: ::String
+      attr_accessor enable_trace: bool
+      attr_accessor end_session: bool
+      attr_accessor input_text: ::String
+      attr_accessor session_id: ::String
+      attr_accessor session_state: Types::SessionState
+      SENSITIVE: [:input_text]
+    end
+
+    class InvokeAgentResponse
+      attr_accessor completion: Types::ResponseStream
+      attr_accessor content_type: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class KnowledgeBaseLookupInput
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor text: ::String
+      SENSITIVE: [:knowledge_base_id, :text]
+    end
+
+    class KnowledgeBaseLookupOutput
+      attr_accessor retrieved_references: ::Array[Types::RetrievedReference]
+      SENSITIVE: []
+    end
+
+    class KnowledgeBaseQuery
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class KnowledgeBaseRetrievalConfiguration
+      attr_accessor vector_search_configuration: Types::KnowledgeBaseVectorSearchConfiguration
+      SENSITIVE: []
+    end
+
+    class KnowledgeBaseRetrievalResult
+      attr_accessor content: Types::RetrievalResultContent
+      attr_accessor location: Types::RetrievalResultLocation
+      attr_accessor metadata: ::Hash[::String, untyped]
+      attr_accessor score: ::Float
+      SENSITIVE: [:content, :location, :metadata]
+    end
+
+    class KnowledgeBaseRetrieveAndGenerateConfiguration
+      attr_accessor generation_configuration: Types::GenerationConfiguration
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor model_arn: ::String
+      attr_accessor retrieval_configuration: Types::KnowledgeBaseRetrievalConfiguration
+      SENSITIVE: []
+    end
+
+    class KnowledgeBaseVectorSearchConfiguration
+      attr_accessor filter: Types::RetrievalFilter
+      attr_accessor number_of_results: ::Integer
+      attr_accessor override_search_type: ("HYBRID" | "SEMANTIC")
+      SENSITIVE: [:filter]
+    end
+
+    class ModelInvocationInput
+      attr_accessor inference_configuration: Types::InferenceConfiguration
+      attr_accessor override_lambda: ::String
+      attr_accessor parser_mode: ("DEFAULT" | "OVERRIDDEN")
+      attr_accessor prompt_creation_mode: ("DEFAULT" | "OVERRIDDEN")
+      attr_accessor text: ::String
+      attr_accessor trace_id: ::String
+      attr_accessor type: ("PRE_PROCESSING" | "ORCHESTRATION" | "KNOWLEDGE_BASE_RESPONSE_GENERATION" | "POST_PROCESSING")
+      SENSITIVE: [:text]
+    end
+
+    class Observation
+      attr_accessor action_group_invocation_output: Types::ActionGroupInvocationOutput
+      attr_accessor final_response: Types::FinalResponse
+      attr_accessor knowledge_base_lookup_output: Types::KnowledgeBaseLookupOutput
+      attr_accessor reprompt_response: Types::RepromptResponse
+      attr_accessor trace_id: ::String
+      attr_accessor type: ("ACTION_GROUP" | "KNOWLEDGE_BASE" | "FINISH" | "ASK_USER" | "REPROMPT")
+      SENSITIVE: [:reprompt_response]
+    end
+
+    class OrchestrationTrace
+      attr_accessor invocation_input: Types::InvocationInput
+      attr_accessor model_invocation_input: Types::ModelInvocationInput
+      attr_accessor observation: Types::Observation
+      attr_accessor rationale: Types::Rationale
+      attr_accessor unknown: untyped
+      SENSITIVE: [:invocation_input, :model_invocation_input, :observation, :rationale]
+
+      class InvocationInput < OrchestrationTrace
+      end
+      class ModelInvocationInput < OrchestrationTrace
+      end
+      class Observation < OrchestrationTrace
+      end
+      class Rationale < OrchestrationTrace
+      end
+      class Unknown < OrchestrationTrace
+      end
+    end
+
+    class Parameter
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class PayloadPart
+      attr_accessor attribution: Types::Attribution
+      attr_accessor bytes: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: [:bytes]
+    end
+
+    class PostProcessingModelInvocationOutput
+      attr_accessor parsed_response: Types::PostProcessingParsedResponse
+      attr_accessor trace_id: ::String
+      SENSITIVE: [:parsed_response]
+    end
+
+    class PostProcessingParsedResponse
+      attr_accessor text: ::String
+      SENSITIVE: [:text]
+    end
+
+    class PostProcessingTrace
+      attr_accessor model_invocation_input: Types::ModelInvocationInput
+      attr_accessor model_invocation_output: Types::PostProcessingModelInvocationOutput
+      attr_accessor unknown: untyped
+      SENSITIVE: [:model_invocation_input, :model_invocation_output]
+
+      class ModelInvocationInput < PostProcessingTrace
+      end
+      class ModelInvocationOutput < PostProcessingTrace
+      end
+      class Unknown < PostProcessingTrace
+      end
+    end
+
+    class PreProcessingModelInvocationOutput
+      attr_accessor parsed_response: Types::PreProcessingParsedResponse
+      attr_accessor trace_id: ::String
+      SENSITIVE: [:parsed_response]
+    end
+
+    class PreProcessingParsedResponse
+      attr_accessor is_valid: bool
+      attr_accessor rationale: ::String
+      SENSITIVE: [:rationale]
+    end
+
+    class PreProcessingTrace
+      attr_accessor model_invocation_input: Types::ModelInvocationInput
+      attr_accessor model_invocation_output: Types::PreProcessingModelInvocationOutput
+      attr_accessor unknown: untyped
+      SENSITIVE: [:model_invocation_input, :model_invocation_output]
+
+      class ModelInvocationInput < PreProcessingTrace
+      end
+      class ModelInvocationOutput < PreProcessingTrace
+      end
+      class Unknown < PreProcessingTrace
+      end
+    end
+
+    class PromptTemplate
+      attr_accessor text_prompt_template: ::String
+      SENSITIVE: [:text_prompt_template]
+    end
+
+    class PropertyParameters
+      attr_accessor properties: ::Array[Types::Parameter]
+      SENSITIVE: []
+    end
+
+    class Rationale
+      attr_accessor text: ::String
+      attr_accessor trace_id: ::String
+      SENSITIVE: [:text]
+    end
+
+    class RepromptResponse
+      attr_accessor source: ("ACTION_GROUP" | "KNOWLEDGE_BASE" | "PARSER")
+      attr_accessor text: ::String
+      SENSITIVE: [:source]
+    end
+
+    class RequestBody
+      attr_accessor content: ::Hash[::String, ::Array[Types::Parameter]]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class RetrievalFilter
+      attr_accessor and_all: ::Array[Types::RetrievalFilter]
+      attr_accessor equals: Types::FilterAttribute
+      attr_accessor greater_than: Types::FilterAttribute
+      attr_accessor greater_than_or_equals: Types::FilterAttribute
+      attr_accessor in: Types::FilterAttribute
+      attr_accessor less_than: Types::FilterAttribute
+      attr_accessor less_than_or_equals: Types::FilterAttribute
+      attr_accessor list_contains: Types::FilterAttribute
+      attr_accessor not_equals: Types::FilterAttribute
+      attr_accessor not_in: Types::FilterAttribute
+      attr_accessor or_all: ::Array[Types::RetrievalFilter]
+      attr_accessor starts_with: Types::FilterAttribute
+      attr_accessor string_contains: Types::FilterAttribute
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AndAll < RetrievalFilter
+      end
+      class Equals < RetrievalFilter
+      end
+      class GreaterThan < RetrievalFilter
+      end
+      class GreaterThanOrEquals < RetrievalFilter
+      end
+      class In < RetrievalFilter
+      end
+      class LessThan < RetrievalFilter
+      end
+      class LessThanOrEquals < RetrievalFilter
+      end
+      class ListContains < RetrievalFilter
+      end
+      class NotEquals < RetrievalFilter
+      end
+      class NotIn < RetrievalFilter
+      end
+      class OrAll < RetrievalFilter
+      end
+      class StartsWith < RetrievalFilter
+      end
+      class StringContains < RetrievalFilter
+      end
+      class Unknown < RetrievalFilter
+      end
+    end
+
+    class RetrievalResultContent
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class RetrievalResultLocation
+      attr_accessor s3_location: Types::RetrievalResultS3Location
+      attr_accessor type: ("S3")
+      SENSITIVE: []
+    end
+
+    class RetrievalResultS3Location
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class RetrieveAndGenerateConfiguration
+      attr_accessor external_sources_configuration: Types::ExternalSourcesRetrieveAndGenerateConfiguration
+      attr_accessor knowledge_base_configuration: Types::KnowledgeBaseRetrieveAndGenerateConfiguration
+      attr_accessor type: ("KNOWLEDGE_BASE" | "EXTERNAL_SOURCES")
+      SENSITIVE: []
+    end
+
+    class RetrieveAndGenerateInput
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class RetrieveAndGenerateOutput
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class RetrieveAndGenerateRequest
+      attr_accessor input: Types::RetrieveAndGenerateInput
+      attr_accessor retrieve_and_generate_configuration: Types::RetrieveAndGenerateConfiguration
+      attr_accessor session_configuration: Types::RetrieveAndGenerateSessionConfiguration
+      attr_accessor session_id: ::String
+      SENSITIVE: [:input]
+    end
+
+    class RetrieveAndGenerateResponse
+      attr_accessor citations: ::Array[Types::Citation]
+      attr_accessor guardrail_action: ("INTERVENED" | "NONE")
+      attr_accessor output: Types::RetrieveAndGenerateOutput
+      attr_accessor session_id: ::String
+      SENSITIVE: [:output]
+    end
+
+    class RetrieveAndGenerateSessionConfiguration
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RetrieveRequest
+      attr_accessor knowledge_base_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor retrieval_configuration: Types::KnowledgeBaseRetrievalConfiguration
+      attr_accessor retrieval_query: Types::KnowledgeBaseQuery
+      SENSITIVE: [:retrieval_query]
+    end
+
+    class RetrieveResponse
+      attr_accessor next_token: ::String
+      attr_accessor retrieval_results: ::Array[Types::KnowledgeBaseRetrievalResult]
+      SENSITIVE: [:retrieval_results]
+    end
+
+    class RetrievedReference
+      attr_accessor content: Types::RetrievalResultContent
+      attr_accessor location: Types::RetrievalResultLocation
+      attr_accessor metadata: ::Hash[::String, untyped]
+      SENSITIVE: [:content, :location, :metadata]
+    end
+
+    class ReturnControlPayload
+      attr_accessor invocation_id: ::String
+      attr_accessor invocation_inputs: ::Array[Types::InvocationInputMember]
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class S3ObjectDoc
+      attr_accessor uri: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class SessionState
+      attr_accessor invocation_id: ::String
+      attr_accessor prompt_session_attributes: ::Hash[::String, ::String]
+      attr_accessor return_control_invocation_results: ::Array[Types::InvocationResultMember]
+      attr_accessor session_attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Span
+      attr_accessor end: ::Integer
+      attr_accessor start: ::Integer
+      SENSITIVE: []
+    end
+
+    class TextInferenceConfig
+      attr_accessor max_tokens: ::Integer
+      attr_accessor stop_sequences: ::Array[::String]
+      attr_accessor temperature: ::Float
+      attr_accessor top_p: ::Float
+      SENSITIVE: []
+    end
+
+    class TextResponsePart
+      attr_accessor span: Types::Span
+      attr_accessor text: ::String
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class Trace
+      attr_accessor failure_trace: Types::FailureTrace
+      attr_accessor guardrail_trace: Types::GuardrailTrace
+      attr_accessor orchestration_trace: Types::OrchestrationTrace
+      attr_accessor post_processing_trace: Types::PostProcessingTrace
+      attr_accessor pre_processing_trace: Types::PreProcessingTrace
+      attr_accessor unknown: untyped
+      SENSITIVE: [:failure_trace, :guardrail_trace, :orchestration_trace, :post_processing_trace, :pre_processing_trace]
+
+      class FailureTrace < Trace
+      end
+      class GuardrailTrace < Trace
+      end
+      class OrchestrationTrace < Trace
+      end
+      class PostProcessingTrace < Trace
+      end
+      class PreProcessingTrace < Trace
+      end
+      class Unknown < Trace
+      end
+    end
+
+    class TracePart
+      attr_accessor agent_alias_id: ::String
+      attr_accessor agent_id: ::String
+      attr_accessor agent_version: ::String
+      attr_accessor session_id: ::String
+      attr_accessor trace: Types::Trace
+      attr_accessor event_type: untyped
+      SENSITIVE: [:trace]
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class ResponseStream < Enumerator[untyped, untyped]
+      def event_types: () -> [:access_denied_exception, :bad_gateway_exception, :chunk, :conflict_exception, :dependency_failed_exception, :internal_server_exception, :resource_not_found_exception, :return_control, :service_quota_exceeded_exception, :throttling_exception, :trace, :validation_exception]
+    end
+  end
+end

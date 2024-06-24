@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::LakeFormation
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::LakeFormation
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::LakeFormation
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::LakeFormation
     #   @option options [Aws::LakeFormation::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::LakeFormation::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -939,6 +964,71 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
+    # Creates an IAM Identity Center connection with Lake Formation to allow
+    # IAM Identity Center users and groups to access Data Catalog resources.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, view definitions, and other control
+    #   information to manage your Lake Formation environment.
+    #
+    # @option params [String] :instance_arn
+    #   The ARN of the IAM Identity Center instance for which the operation
+    #   will be executed. For more information about ARNs, see Amazon Resource
+    #   Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon
+    #   Web Services General Reference.
+    #
+    # @option params [Types::ExternalFilteringConfiguration] :external_filtering
+    #   A list of the account IDs of Amazon Web Services accounts of
+    #   third-party applications that are allowed to access data managed by
+    #   Lake Formation.
+    #
+    # @option params [Array<Types::DataLakePrincipal>] :share_recipients
+    #   A list of Amazon Web Services account IDs and/or Amazon Web Services
+    #   organization/organizational unit ARNs that are allowed to access data
+    #   managed by Lake Formation.
+    #
+    #   If the `ShareRecipients` list includes valid values, a resource share
+    #   is created with the principals you want to have access to the
+    #   resources.
+    #
+    #   If the `ShareRecipients` value is null or the list is empty, no
+    #   resource share is created.
+    #
+    # @return [Types::CreateLakeFormationIdentityCenterConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLakeFormationIdentityCenterConfigurationResponse#application_arn #application_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_lake_formation_identity_center_configuration({
+    #     catalog_id: "CatalogIdString",
+    #     instance_arn: "IdentityCenterInstanceArn",
+    #     external_filtering: {
+    #       status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       authorized_targets: ["ScopeTarget"], # required
+    #     },
+    #     share_recipients: [
+    #       {
+    #         data_lake_principal_identifier: "DataLakePrincipalString",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/CreateLakeFormationIdentityCenterConfiguration AWS API Documentation
+    #
+    # @overload create_lake_formation_identity_center_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_lake_formation_identity_center_configuration(params = {}, options = {})
+      req = build_request(:create_lake_formation_identity_center_configuration, params)
+      req.send_request(options)
+    end
+
     # Enforce Lake Formation permissions for the given databases, tables,
     # and principals.
     #
@@ -1082,6 +1172,31 @@ module Aws::LakeFormation
     # @param [Hash] params ({})
     def delete_lf_tag(params = {}, options = {})
       req = build_request(:delete_lf_tag, params)
+      req.send_request(options)
+    end
+
+    # Deletes an IAM Identity Center connection with Lake Formation.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, view definition, and other control
+    #   information to manage your Lake Formation environment.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_lake_formation_identity_center_configuration({
+    #     catalog_id: "CatalogIdString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DeleteLakeFormationIdentityCenterConfiguration AWS API Documentation
+    #
+    # @overload delete_lake_formation_identity_center_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_lake_formation_identity_center_configuration(params = {}, options = {})
+      req = build_request(:delete_lake_formation_identity_center_configuration, params)
       req.send_request(options)
     end
 
@@ -1247,6 +1362,50 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
+    # Retrieves the instance ARN and application ARN for the connection.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, and other control information to
+    #   manage your Lake Formation environment.
+    #
+    # @return [Types::DescribeLakeFormationIdentityCenterConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#catalog_id #catalog_id} => String
+    #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#instance_arn #instance_arn} => String
+    #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#application_arn #application_arn} => String
+    #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#external_filtering #external_filtering} => Types::ExternalFilteringConfiguration
+    #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#share_recipients #share_recipients} => Array&lt;Types::DataLakePrincipal&gt;
+    #   * {Types::DescribeLakeFormationIdentityCenterConfigurationResponse#resource_share #resource_share} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_lake_formation_identity_center_configuration({
+    #     catalog_id: "CatalogIdString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.catalog_id #=> String
+    #   resp.instance_arn #=> String
+    #   resp.application_arn #=> String
+    #   resp.external_filtering.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.external_filtering.authorized_targets #=> Array
+    #   resp.external_filtering.authorized_targets[0] #=> String
+    #   resp.share_recipients #=> Array
+    #   resp.share_recipients[0].data_lake_principal_identifier #=> String
+    #   resp.resource_share #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DescribeLakeFormationIdentityCenterConfiguration AWS API Documentation
+    #
+    # @overload describe_lake_formation_identity_center_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_lake_formation_identity_center_configuration(params = {}, options = {})
+      req = build_request(:describe_lake_formation_identity_center_configuration, params)
+      req.send_request(options)
+    end
+
     # Retrieves the current data access role for the given resource
     # registered in Lake Formation.
     #
@@ -1383,6 +1542,25 @@ module Aws::LakeFormation
     # @param [Hash] params ({})
     def get_data_cells_filter(params = {}, options = {})
       req = build_request(:get_data_cells_filter, params)
+      req.send_request(options)
+    end
+
+    # Returns the identity of the invoking principal.
+    #
+    # @return [Types::GetDataLakePrincipalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDataLakePrincipalResponse#identity #identity} => String
+    #
+    # @example Response structure
+    #
+    #   resp.identity #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetDataLakePrincipal AWS API Documentation
+    #
+    # @overload get_data_lake_principal(params = {})
+    # @param [Hash] params ({})
+    def get_data_lake_principal(params = {}, options = {})
+      req = build_request(:get_data_lake_principal, params)
       req.send_request(options)
     end
 
@@ -1921,12 +2099,22 @@ module Aws::LakeFormation
     #   A list of supported permission types for the table. Valid values are
     #   `COLUMN_PERMISSION` and `CELL_FILTER_PERMISSION`.
     #
+    # @option params [String] :s3_path
+    #   The Amazon S3 path for the table.
+    #
+    # @option params [Types::QuerySessionContext] :query_session_context
+    #   A structure used as a protocol between query engines and Lake
+    #   Formation or Glue. Contains both a Lake Formation generated
+    #   authorization identifier and information from the request's
+    #   authorization context.
+    #
     # @return [Types::GetTemporaryGlueTableCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTemporaryGlueTableCredentialsResponse#access_key_id #access_key_id} => String
     #   * {Types::GetTemporaryGlueTableCredentialsResponse#secret_access_key #secret_access_key} => String
     #   * {Types::GetTemporaryGlueTableCredentialsResponse#session_token #session_token} => String
     #   * {Types::GetTemporaryGlueTableCredentialsResponse#expiration #expiration} => Time
+    #   * {Types::GetTemporaryGlueTableCredentialsResponse#vended_s3_path #vended_s3_path} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1938,6 +2126,16 @@ module Aws::LakeFormation
     #       additional_audit_context: "AuditContextString",
     #     },
     #     supported_permission_types: ["COLUMN_PERMISSION"], # accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION, NESTED_PERMISSION, NESTED_CELL_PERMISSION
+    #     s3_path: "PathString",
+    #     query_session_context: {
+    #       query_id: "HashString",
+    #       query_start_time: Time.now,
+    #       cluster_id: "NullableString",
+    #       query_authorization_id: "HashString",
+    #       additional_context: {
+    #         "ContextKey" => "ContextValue",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1946,6 +2144,8 @@ module Aws::LakeFormation
     #   resp.secret_access_key #=> String
     #   resp.session_token #=> String
     #   resp.expiration #=> Time
+    #   resp.vended_s3_path #=> Array
+    #   resp.vended_s3_path[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryGlueTableCredentials AWS API Documentation
     #
@@ -3386,6 +3586,65 @@ module Aws::LakeFormation
       req.send_request(options)
     end
 
+    # Updates the IAM Identity Center connection parameters.
+    #
+    # @option params [String] :catalog_id
+    #   The identifier for the Data Catalog. By default, the account ID. The
+    #   Data Catalog is the persistent metadata store. It contains database
+    #   definitions, table definitions, view definitions, and other control
+    #   information to manage your Lake Formation environment.
+    #
+    # @option params [Array<Types::DataLakePrincipal>] :share_recipients
+    #   A list of Amazon Web Services account IDs or Amazon Web Services
+    #   organization/organizational unit ARNs that are allowed to access to
+    #   access data managed by Lake Formation.
+    #
+    #   If the `ShareRecipients` list includes valid values, then the resource
+    #   share is updated with the principals you want to have access to the
+    #   resources.
+    #
+    #   If the `ShareRecipients` value is null, both the list of share
+    #   recipients and the resource share remain unchanged.
+    #
+    #   If the `ShareRecipients` value is an empty list, then the existing
+    #   share recipients list will be cleared, and the resource share will be
+    #   deleted.
+    #
+    # @option params [String] :application_status
+    #   Allows to enable or disable the IAM Identity Center connection.
+    #
+    # @option params [Types::ExternalFilteringConfiguration] :external_filtering
+    #   A list of the account IDs of Amazon Web Services accounts of
+    #   third-party applications that are allowed to access data managed by
+    #   Lake Formation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_lake_formation_identity_center_configuration({
+    #     catalog_id: "CatalogIdString",
+    #     share_recipients: [
+    #       {
+    #         data_lake_principal_identifier: "DataLakePrincipalString",
+    #       },
+    #     ],
+    #     application_status: "ENABLED", # accepts ENABLED, DISABLED
+    #     external_filtering: {
+    #       status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       authorized_targets: ["ScopeTarget"], # required
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/UpdateLakeFormationIdentityCenterConfiguration AWS API Documentation
+    #
+    # @overload update_lake_formation_identity_center_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_lake_formation_identity_center_configuration(params = {}, options = {})
+      req = build_request(:update_lake_formation_identity_center_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates the data access role used for vending access to the given
     # (registered) resource in Lake Formation.
     #
@@ -3536,7 +3795,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -50,8 +50,12 @@ module Aws::ElasticsearchService
     BackendRole = Shapes::StringShape.new(name: 'BackendRole')
     BaseException = Shapes::StructureShape.new(name: 'BaseException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CancelDomainConfigChangeRequest = Shapes::StructureShape.new(name: 'CancelDomainConfigChangeRequest')
+    CancelDomainConfigChangeResponse = Shapes::StructureShape.new(name: 'CancelDomainConfigChangeResponse')
     CancelElasticsearchServiceSoftwareUpdateRequest = Shapes::StructureShape.new(name: 'CancelElasticsearchServiceSoftwareUpdateRequest')
     CancelElasticsearchServiceSoftwareUpdateResponse = Shapes::StructureShape.new(name: 'CancelElasticsearchServiceSoftwareUpdateResponse')
+    CancelledChangeProperty = Shapes::StructureShape.new(name: 'CancelledChangeProperty')
+    CancelledChangePropertyList = Shapes::ListShape.new(name: 'CancelledChangePropertyList')
     ChangeProgressDetails = Shapes::StructureShape.new(name: 'ChangeProgressDetails')
     ChangeProgressStage = Shapes::StructureShape.new(name: 'ChangeProgressStage')
     ChangeProgressStageList = Shapes::ListShape.new(name: 'ChangeProgressStageList')
@@ -66,6 +70,7 @@ module Aws::ElasticsearchService
     CommitMessage = Shapes::StringShape.new(name: 'CommitMessage')
     CompatibleElasticsearchVersionsList = Shapes::ListShape.new(name: 'CompatibleElasticsearchVersionsList')
     CompatibleVersionsMap = Shapes::StructureShape.new(name: 'CompatibleVersionsMap')
+    ConfigChangeStatus = Shapes::StringShape.new(name: 'ConfigChangeStatus')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectionAlias = Shapes::StringShape.new(name: 'ConnectionAlias')
     CreateElasticsearchDomainRequest = Shapes::StructureShape.new(name: 'CreateElasticsearchDomainRequest')
@@ -139,6 +144,7 @@ module Aws::ElasticsearchService
     DomainPackageDetails = Shapes::StructureShape.new(name: 'DomainPackageDetails')
     DomainPackageDetailsList = Shapes::ListShape.new(name: 'DomainPackageDetailsList')
     DomainPackageStatus = Shapes::StringShape.new(name: 'DomainPackageStatus')
+    DomainProcessingStatusType = Shapes::StringShape.new(name: 'DomainProcessingStatusType')
     Double = Shapes::FloatShape.new(name: 'Double')
     DryRun = Shapes::BooleanShape.new(name: 'DryRun')
     DryRunResults = Shapes::StructureShape.new(name: 'DryRunResults')
@@ -168,6 +174,7 @@ module Aws::ElasticsearchService
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     GUID = Shapes::StringShape.new(name: 'GUID')
+    GUIDList = Shapes::ListShape.new(name: 'GUIDList')
     GetCompatibleElasticsearchVersionsRequest = Shapes::StructureShape.new(name: 'GetCompatibleElasticsearchVersionsRequest')
     GetCompatibleElasticsearchVersionsResponse = Shapes::StructureShape.new(name: 'GetCompatibleElasticsearchVersionsResponse')
     GetPackageVersionHistoryRequest = Shapes::StructureShape.new(name: 'GetPackageVersionHistoryRequest')
@@ -181,6 +188,7 @@ module Aws::ElasticsearchService
     InboundCrossClusterSearchConnectionStatus = Shapes::StructureShape.new(name: 'InboundCrossClusterSearchConnectionStatus')
     InboundCrossClusterSearchConnectionStatusCode = Shapes::StringShape.new(name: 'InboundCrossClusterSearchConnectionStatusCode')
     InboundCrossClusterSearchConnections = Shapes::ListShape.new(name: 'InboundCrossClusterSearchConnections')
+    InitiatedBy = Shapes::StringShape.new(name: 'InitiatedBy')
     InstanceCount = Shapes::IntegerShape.new(name: 'InstanceCount')
     InstanceCountLimits = Shapes::StructureShape.new(name: 'InstanceCountLimits')
     InstanceLimits = Shapes::StructureShape.new(name: 'InstanceLimits')
@@ -227,6 +235,8 @@ module Aws::ElasticsearchService
     MaximumInstanceCount = Shapes::IntegerShape.new(name: 'MaximumInstanceCount')
     Message = Shapes::StringShape.new(name: 'Message')
     MinimumInstanceCount = Shapes::IntegerShape.new(name: 'MinimumInstanceCount')
+    ModifyingProperties = Shapes::StructureShape.new(name: 'ModifyingProperties')
+    ModifyingPropertiesList = Shapes::ListShape.new(name: 'ModifyingPropertiesList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NodeToNodeEncryptionOptions = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptions')
     NodeToNodeEncryptionOptionsStatus = Shapes::StructureShape.new(name: 'NodeToNodeEncryptionOptionsStatus')
@@ -253,6 +263,7 @@ module Aws::ElasticsearchService
     Password = Shapes::StringShape.new(name: 'Password')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
+    PropertyValueType = Shapes::StringShape.new(name: 'PropertyValueType')
     PurchaseReservedElasticsearchInstanceOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseReservedElasticsearchInstanceOfferingRequest')
     PurchaseReservedElasticsearchInstanceOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseReservedElasticsearchInstanceOfferingResponse')
     RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
@@ -456,14 +467,34 @@ module Aws::ElasticsearchService
     BaseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     BaseException.struct_class = Types::BaseException
 
+    CancelDomainConfigChangeRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    CancelDomainConfigChangeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
+    CancelDomainConfigChangeRequest.struct_class = Types::CancelDomainConfigChangeRequest
+
+    CancelDomainConfigChangeResponse.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
+    CancelDomainConfigChangeResponse.add_member(:cancelled_change_ids, Shapes::ShapeRef.new(shape: GUIDList, location_name: "CancelledChangeIds"))
+    CancelDomainConfigChangeResponse.add_member(:cancelled_change_properties, Shapes::ShapeRef.new(shape: CancelledChangePropertyList, location_name: "CancelledChangeProperties"))
+    CancelDomainConfigChangeResponse.struct_class = Types::CancelDomainConfigChangeResponse
+
     CancelElasticsearchServiceSoftwareUpdateRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     CancelElasticsearchServiceSoftwareUpdateRequest.struct_class = Types::CancelElasticsearchServiceSoftwareUpdateRequest
 
     CancelElasticsearchServiceSoftwareUpdateResponse.add_member(:service_software_options, Shapes::ShapeRef.new(shape: ServiceSoftwareOptions, location_name: "ServiceSoftwareOptions"))
     CancelElasticsearchServiceSoftwareUpdateResponse.struct_class = Types::CancelElasticsearchServiceSoftwareUpdateResponse
 
+    CancelledChangeProperty.add_member(:property_name, Shapes::ShapeRef.new(shape: String, location_name: "PropertyName"))
+    CancelledChangeProperty.add_member(:cancelled_value, Shapes::ShapeRef.new(shape: String, location_name: "CancelledValue"))
+    CancelledChangeProperty.add_member(:active_value, Shapes::ShapeRef.new(shape: String, location_name: "ActiveValue"))
+    CancelledChangeProperty.struct_class = Types::CancelledChangeProperty
+
+    CancelledChangePropertyList.member = Shapes::ShapeRef.new(shape: CancelledChangeProperty)
+
     ChangeProgressDetails.add_member(:change_id, Shapes::ShapeRef.new(shape: GUID, location_name: "ChangeId"))
     ChangeProgressDetails.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ChangeProgressDetails.add_member(:config_change_status, Shapes::ShapeRef.new(shape: ConfigChangeStatus, location_name: "ConfigChangeStatus"))
+    ChangeProgressDetails.add_member(:start_time, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "StartTime"))
+    ChangeProgressDetails.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "LastUpdatedTime"))
+    ChangeProgressDetails.add_member(:initiated_by, Shapes::ShapeRef.new(shape: InitiatedBy, location_name: "InitiatedBy"))
     ChangeProgressDetails.struct_class = Types::ChangeProgressDetails
 
     ChangeProgressStage.add_member(:name, Shapes::ShapeRef.new(shape: ChangeProgressStageName, location_name: "Name"))
@@ -481,6 +512,9 @@ module Aws::ElasticsearchService
     ChangeProgressStatusDetails.add_member(:completed_properties, Shapes::ShapeRef.new(shape: StringList, location_name: "CompletedProperties"))
     ChangeProgressStatusDetails.add_member(:total_number_of_stages, Shapes::ShapeRef.new(shape: TotalNumberOfStages, location_name: "TotalNumberOfStages"))
     ChangeProgressStatusDetails.add_member(:change_progress_stages, Shapes::ShapeRef.new(shape: ChangeProgressStageList, location_name: "ChangeProgressStages"))
+    ChangeProgressStatusDetails.add_member(:config_change_status, Shapes::ShapeRef.new(shape: ConfigChangeStatus, location_name: "ConfigChangeStatus"))
+    ChangeProgressStatusDetails.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "LastUpdatedTime"))
+    ChangeProgressStatusDetails.add_member(:initiated_by, Shapes::ShapeRef.new(shape: InitiatedBy, location_name: "InitiatedBy"))
     ChangeProgressStatusDetails.struct_class = Types::ChangeProgressStatusDetails
 
     CognitoOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
@@ -783,6 +817,7 @@ module Aws::ElasticsearchService
     ElasticsearchDomainConfig.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsStatus, location_name: "AdvancedSecurityOptions"))
     ElasticsearchDomainConfig.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsStatus, location_name: "AutoTuneOptions"))
     ElasticsearchDomainConfig.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
+    ElasticsearchDomainConfig.add_member(:modifying_properties, Shapes::ShapeRef.new(shape: ModifyingPropertiesList, location_name: "ModifyingProperties"))
     ElasticsearchDomainConfig.struct_class = Types::ElasticsearchDomainConfig
 
     ElasticsearchDomainStatus.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
@@ -810,6 +845,8 @@ module Aws::ElasticsearchService
     ElasticsearchDomainStatus.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptions, location_name: "AdvancedSecurityOptions"))
     ElasticsearchDomainStatus.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsOutput, location_name: "AutoTuneOptions"))
     ElasticsearchDomainStatus.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
+    ElasticsearchDomainStatus.add_member(:domain_processing_status, Shapes::ShapeRef.new(shape: DomainProcessingStatusType, location_name: "DomainProcessingStatus"))
+    ElasticsearchDomainStatus.add_member(:modifying_properties, Shapes::ShapeRef.new(shape: ModifyingPropertiesList, location_name: "ModifyingProperties"))
     ElasticsearchDomainStatus.struct_class = Types::ElasticsearchDomainStatus
 
     ElasticsearchDomainStatusList.member = Shapes::ShapeRef.new(shape: ElasticsearchDomainStatus)
@@ -842,6 +879,8 @@ module Aws::ElasticsearchService
     Filter.struct_class = Types::Filter
 
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
+
+    GUIDList.member = Shapes::ShapeRef.new(shape: GUID)
 
     GetCompatibleElasticsearchVersionsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location: "querystring", location_name: "domainName"))
     GetCompatibleElasticsearchVersionsRequest.struct_class = Types::GetCompatibleElasticsearchVersionsRequest
@@ -1001,6 +1040,14 @@ module Aws::ElasticsearchService
     MasterUserOptions.add_member(:master_user_name, Shapes::ShapeRef.new(shape: Username, location_name: "MasterUserName"))
     MasterUserOptions.add_member(:master_user_password, Shapes::ShapeRef.new(shape: Password, location_name: "MasterUserPassword"))
     MasterUserOptions.struct_class = Types::MasterUserOptions
+
+    ModifyingProperties.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    ModifyingProperties.add_member(:active_value, Shapes::ShapeRef.new(shape: String, location_name: "ActiveValue"))
+    ModifyingProperties.add_member(:pending_value, Shapes::ShapeRef.new(shape: String, location_name: "PendingValue"))
+    ModifyingProperties.add_member(:value_type, Shapes::ShapeRef.new(shape: PropertyValueType, location_name: "ValueType"))
+    ModifyingProperties.struct_class = Types::ModifyingProperties
+
+    ModifyingPropertiesList.member = Shapes::ShapeRef.new(shape: ModifyingProperties)
 
     NodeToNodeEncryptionOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     NodeToNodeEncryptionOptions.struct_class = Types::NodeToNodeEncryptionOptions
@@ -1364,6 +1411,19 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: BaseException)
+      end)
+
+      api.add_operation(:cancel_domain_config_change, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelDomainConfigChange"
+        o.http_method = "POST"
+        o.http_request_uri = "/2015-01-01/es/domain/{DomainName}/config/cancel"
+        o.input = Shapes::ShapeRef.new(shape: CancelDomainConfigChangeRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelDomainConfigChangeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
       api.add_operation(:cancel_elasticsearch_service_software_update, Seahorse::Model::Operation.new.tap do |o|

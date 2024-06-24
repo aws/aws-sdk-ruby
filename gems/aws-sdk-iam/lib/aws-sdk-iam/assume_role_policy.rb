@@ -156,7 +156,7 @@ module Aws::IAM
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -195,7 +195,7 @@ module Aws::IAM
     # @return [EmptyStructure]
     def update(options = {})
       options = options.merge(role_name: @role_name)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.update_assume_role_policy(options)
       end
       resp.data

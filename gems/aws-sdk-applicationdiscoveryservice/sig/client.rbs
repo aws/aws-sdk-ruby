@@ -1,0 +1,480 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ApplicationDiscoveryService
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?simple_json: bool,
+                      ?stub_responses: untyped,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateConfigurationItemsToApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateConfigurationItemsToApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#associate_configuration_items_to_application-instance_method
+      def associate_configuration_items_to_application: (
+                                                          application_configuration_id: ::String,
+                                                          configuration_ids: Array[::String]
+                                                        ) -> _AssociateConfigurationItemsToApplicationResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateConfigurationItemsToApplicationResponseSuccess
+
+      interface _BatchDeleteAgentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteAgentsResponse]
+        def errors: () -> ::Array[Types::BatchDeleteAgentError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#batch_delete_agents-instance_method
+      def batch_delete_agents: (
+                                 delete_agents: Array[
+                                   {
+                                     agent_id: ::String,
+                                     force: bool?
+                                   },
+                                 ]
+                               ) -> _BatchDeleteAgentsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteAgentsResponseSuccess
+
+      interface _BatchDeleteImportDataResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteImportDataResponse]
+        def errors: () -> ::Array[Types::BatchDeleteImportDataError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#batch_delete_import_data-instance_method
+      def batch_delete_import_data: (
+                                      import_task_ids: Array[::String],
+                                      ?delete_history: bool
+                                    ) -> _BatchDeleteImportDataResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteImportDataResponseSuccess
+
+      interface _CreateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationResponse]
+        def configuration_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#create_application-instance_method
+      def create_application: (
+                                name: ::String,
+                                ?description: ::String
+                              ) -> _CreateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _CreateTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateTagsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#create_tags-instance_method
+      def create_tags: (
+                         configuration_ids: Array[::String],
+                         tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> _CreateTagsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTagsResponseSuccess
+
+      interface _DeleteApplicationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteApplicationsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#delete_applications-instance_method
+      def delete_applications: (
+                                 configuration_ids: Array[::String]
+                               ) -> _DeleteApplicationsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationsResponseSuccess
+
+      interface _DeleteTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteTagsResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#delete_tags-instance_method
+      def delete_tags: (
+                         configuration_ids: Array[::String],
+                         ?tags: Array[
+                           {
+                             key: ::String,
+                             value: ::String
+                           },
+                         ]
+                       ) -> _DeleteTagsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTagsResponseSuccess
+
+      interface _DescribeAgentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeAgentsResponse]
+        def agents_info: () -> ::Array[Types::AgentInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#describe_agents-instance_method
+      def describe_agents: (
+                             ?agent_ids: Array[::String],
+                             ?filters: Array[
+                               {
+                                 name: ::String,
+                                 values: Array[::String],
+                                 condition: ::String
+                               },
+                             ],
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _DescribeAgentsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAgentsResponseSuccess
+
+      interface _DescribeBatchDeleteConfigurationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBatchDeleteConfigurationTaskResponse]
+        def task: () -> Types::BatchDeleteConfigurationTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#describe_batch_delete_configuration_task-instance_method
+      def describe_batch_delete_configuration_task: (
+                                                      task_id: ::String
+                                                    ) -> _DescribeBatchDeleteConfigurationTaskResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBatchDeleteConfigurationTaskResponseSuccess
+
+      interface _DescribeConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeConfigurationsResponse]
+        def configurations: () -> ::Array[::Hash[::String, ::String]]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#describe_configurations-instance_method
+      def describe_configurations: (
+                                     configuration_ids: Array[::String]
+                                   ) -> _DescribeConfigurationsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConfigurationsResponseSuccess
+
+      interface _DescribeContinuousExportsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeContinuousExportsResponse]
+        def descriptions: () -> ::Array[Types::ContinuousExportDescription]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#describe_continuous_exports-instance_method
+      def describe_continuous_exports: (
+                                         ?export_ids: Array[::String],
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _DescribeContinuousExportsResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeContinuousExportsResponseSuccess
+
+      interface _DescribeExportConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeExportConfigurationsResponse]
+        def exports_info: () -> ::Array[Types::ExportInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#describe_export_configurations-instance_method
+      def describe_export_configurations: (
+                                            ?export_ids: Array[::String],
+                                            ?max_results: ::Integer,
+                                            ?next_token: ::String
+                                          ) -> _DescribeExportConfigurationsResponseSuccess
+                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeExportConfigurationsResponseSuccess
+
+      interface _DescribeExportTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeExportTasksResponse]
+        def exports_info: () -> ::Array[Types::ExportInfo]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#describe_export_tasks-instance_method
+      def describe_export_tasks: (
+                                   ?export_ids: Array[::String],
+                                   ?filters: Array[
+                                     {
+                                       name: ::String,
+                                       values: Array[::String],
+                                       condition: ::String
+                                     },
+                                   ],
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _DescribeExportTasksResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeExportTasksResponseSuccess
+
+      interface _DescribeImportTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeImportTasksResponse]
+        def next_token: () -> ::String
+        def tasks: () -> ::Array[Types::ImportTask]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#describe_import_tasks-instance_method
+      def describe_import_tasks: (
+                                   ?filters: Array[
+                                     {
+                                       name: ("IMPORT_TASK_ID" | "STATUS" | "NAME")?,
+                                       values: Array[::String]?
+                                     },
+                                   ],
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _DescribeImportTasksResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeImportTasksResponseSuccess
+
+      interface _DescribeTagsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeTagsResponse]
+        def tags: () -> ::Array[Types::ConfigurationTag]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#describe_tags-instance_method
+      def describe_tags: (
+                           ?filters: Array[
+                             {
+                               name: ::String,
+                               values: Array[::String]
+                             },
+                           ],
+                           ?max_results: ::Integer,
+                           ?next_token: ::String
+                         ) -> _DescribeTagsResponseSuccess
+                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeTagsResponseSuccess
+
+      interface _DisassociateConfigurationItemsFromApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateConfigurationItemsFromApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#disassociate_configuration_items_from_application-instance_method
+      def disassociate_configuration_items_from_application: (
+                                                               application_configuration_id: ::String,
+                                                               configuration_ids: Array[::String]
+                                                             ) -> _DisassociateConfigurationItemsFromApplicationResponseSuccess
+                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateConfigurationItemsFromApplicationResponseSuccess
+
+      interface _ExportConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExportConfigurationsResponse]
+        def export_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#export_configurations-instance_method
+      def export_configurations: () -> _ExportConfigurationsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportConfigurationsResponseSuccess
+
+      interface _GetDiscoverySummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDiscoverySummaryResponse]
+        def servers: () -> ::Integer
+        def applications: () -> ::Integer
+        def servers_mapped_to_applications: () -> ::Integer
+        def servers_mappedto_tags: () -> ::Integer
+        def agent_summary: () -> Types::CustomerAgentInfo
+        def connector_summary: () -> Types::CustomerConnectorInfo
+        def me_collector_summary: () -> Types::CustomerMeCollectorInfo
+        def agentless_collector_summary: () -> Types::CustomerAgentlessCollectorInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#get_discovery_summary-instance_method
+      def get_discovery_summary: (
+                                 ) -> _GetDiscoverySummaryResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDiscoverySummaryResponseSuccess
+
+      interface _ListConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConfigurationsResponse]
+        def configurations: () -> ::Array[::Hash[::String, ::String]]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#list_configurations-instance_method
+      def list_configurations: (
+                                 configuration_type: ("SERVER" | "PROCESS" | "CONNECTION" | "APPLICATION"),
+                                 ?filters: Array[
+                                   {
+                                     name: ::String,
+                                     values: Array[::String],
+                                     condition: ::String
+                                   },
+                                 ],
+                                 ?max_results: ::Integer,
+                                 ?next_token: ::String,
+                                 ?order_by: Array[
+                                   {
+                                     field_name: ::String,
+                                     sort_order: ("ASC" | "DESC")?
+                                   },
+                                 ]
+                               ) -> _ListConfigurationsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationsResponseSuccess
+
+      interface _ListServerNeighborsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListServerNeighborsResponse]
+        def neighbors: () -> ::Array[Types::NeighborConnectionDetail]
+        def next_token: () -> ::String
+        def known_dependency_count: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#list_server_neighbors-instance_method
+      def list_server_neighbors: (
+                                   configuration_id: ::String,
+                                   ?port_information_needed: bool,
+                                   ?neighbor_configuration_ids: Array[::String],
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListServerNeighborsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServerNeighborsResponseSuccess
+
+      interface _StartBatchDeleteConfigurationTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartBatchDeleteConfigurationTaskResponse]
+        def task_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#start_batch_delete_configuration_task-instance_method
+      def start_batch_delete_configuration_task: (
+                                                   configuration_type: ("SERVER"),
+                                                   configuration_ids: Array[::String]
+                                                 ) -> _StartBatchDeleteConfigurationTaskResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBatchDeleteConfigurationTaskResponseSuccess
+
+      interface _StartContinuousExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartContinuousExportResponse]
+        def export_id: () -> ::String
+        def s3_bucket: () -> ::String
+        def start_time: () -> ::Time
+        def data_source: () -> ("AGENT")
+        def schema_storage_config: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#start_continuous_export-instance_method
+      def start_continuous_export: (
+                                   ) -> _StartContinuousExportResponseSuccess
+                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartContinuousExportResponseSuccess
+
+      interface _StartDataCollectionByAgentIdsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartDataCollectionByAgentIdsResponse]
+        def agents_configuration_status: () -> ::Array[Types::AgentConfigurationStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#start_data_collection_by_agent_ids-instance_method
+      def start_data_collection_by_agent_ids: (
+                                                agent_ids: Array[::String]
+                                              ) -> _StartDataCollectionByAgentIdsResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartDataCollectionByAgentIdsResponseSuccess
+
+      interface _StartExportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartExportTaskResponse]
+        def export_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#start_export_task-instance_method
+      def start_export_task: (
+                               ?export_data_format: Array[("CSV")],
+                               ?filters: Array[
+                                 {
+                                   name: ::String,
+                                   values: Array[::String],
+                                   condition: ::String
+                                 },
+                               ],
+                               ?start_time: ::Time,
+                               ?end_time: ::Time,
+                               ?preferences: {
+                                 ec2_recommendations_preferences: {
+                                   enabled: bool?,
+                                   cpu_performance_metric_basis: {
+                                     name: ::String?,
+                                     percentage_adjust: ::Float?
+                                   }?,
+                                   ram_performance_metric_basis: {
+                                     name: ::String?,
+                                     percentage_adjust: ::Float?
+                                   }?,
+                                   tenancy: ("DEDICATED" | "SHARED")?,
+                                   excluded_instance_types: Array[::String]?,
+                                   preferred_region: ::String?,
+                                   reserved_instance_options: {
+                                     purchasing_option: ("ALL_UPFRONT" | "PARTIAL_UPFRONT" | "NO_UPFRONT"),
+                                     offering_class: ("STANDARD" | "CONVERTIBLE"),
+                                     term_length: ("ONE_YEAR" | "THREE_YEAR")
+                                   }?
+                                 }?
+                               }
+                             ) -> _StartExportTaskResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartExportTaskResponseSuccess
+
+      interface _StartImportTaskResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartImportTaskResponse]
+        def task: () -> Types::ImportTask
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#start_import_task-instance_method
+      def start_import_task: (
+                               ?client_request_token: ::String,
+                               name: ::String,
+                               import_url: ::String
+                             ) -> _StartImportTaskResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartImportTaskResponseSuccess
+
+      interface _StopContinuousExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopContinuousExportResponse]
+        def start_time: () -> ::Time
+        def stop_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#stop_continuous_export-instance_method
+      def stop_continuous_export: (
+                                    export_id: ::String
+                                  ) -> _StopContinuousExportResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopContinuousExportResponseSuccess
+
+      interface _StopDataCollectionByAgentIdsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopDataCollectionByAgentIdsResponse]
+        def agents_configuration_status: () -> ::Array[Types::AgentConfigurationStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#stop_data_collection_by_agent_ids-instance_method
+      def stop_data_collection_by_agent_ids: (
+                                               agent_ids: Array[::String]
+                                             ) -> _StopDataCollectionByAgentIdsResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopDataCollectionByAgentIdsResponseSuccess
+
+      interface _UpdateApplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApplicationDiscoveryService/Client.html#update_application-instance_method
+      def update_application: (
+                                configuration_id: ::String,
+                                ?name: ::String,
+                                ?description: ::String
+                              ) -> _UpdateApplicationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
+    end
+  end
+end
+

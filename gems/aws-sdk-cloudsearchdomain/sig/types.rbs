@@ -1,0 +1,145 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudSearchDomain
+  module Types
+
+    class Bucket
+      attr_accessor value: ::String
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
+    class BucketInfo
+      attr_accessor buckets: ::Array[Types::Bucket]
+      SENSITIVE: []
+    end
+
+    class DocumentServiceException
+      attr_accessor status: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class DocumentServiceWarning
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class FieldStats
+      attr_accessor min: ::String
+      attr_accessor max: ::String
+      attr_accessor count: ::Integer
+      attr_accessor missing: ::Integer
+      attr_accessor sum: ::Float
+      attr_accessor sum_of_squares: ::Float
+      attr_accessor mean: ::String
+      attr_accessor stddev: ::Float
+      SENSITIVE: []
+    end
+
+    class Hit
+      attr_accessor id: ::String
+      attr_accessor fields: ::Hash[::String, ::Array[::String]]
+      attr_accessor exprs: ::Hash[::String, ::String]
+      attr_accessor highlights: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Hits
+      attr_accessor found: ::Integer
+      attr_accessor start: ::Integer
+      attr_accessor cursor: ::String
+      attr_accessor hit: ::Array[Types::Hit]
+      SENSITIVE: []
+    end
+
+    class SearchException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SearchRequest
+      attr_accessor cursor: ::String
+      attr_accessor expr: ::String
+      attr_accessor facet: ::String
+      attr_accessor filter_query: ::String
+      attr_accessor highlight: ::String
+      attr_accessor partial: bool
+      attr_accessor query: ::String
+      attr_accessor query_options: ::String
+      attr_accessor query_parser: ("simple" | "structured" | "lucene" | "dismax")
+      attr_accessor return: ::String
+      attr_accessor size: ::Integer
+      attr_accessor sort: ::String
+      attr_accessor start: ::Integer
+      attr_accessor stats: ::String
+      SENSITIVE: []
+    end
+
+    class SearchResponse
+      attr_accessor status: Types::SearchStatus
+      attr_accessor hits: Types::Hits
+      attr_accessor facets: ::Hash[::String, Types::BucketInfo]
+      attr_accessor stats: ::Hash[::String, Types::FieldStats]
+      SENSITIVE: []
+    end
+
+    class SearchStatus
+      attr_accessor timems: ::Integer
+      attr_accessor rid: ::String
+      SENSITIVE: []
+    end
+
+    class SuggestModel
+      attr_accessor query: ::String
+      attr_accessor found: ::Integer
+      attr_accessor suggestions: ::Array[Types::SuggestionMatch]
+      SENSITIVE: []
+    end
+
+    class SuggestRequest
+      attr_accessor query: ::String
+      attr_accessor suggester: ::String
+      attr_accessor size: ::Integer
+      SENSITIVE: []
+    end
+
+    class SuggestResponse
+      attr_accessor status: Types::SuggestStatus
+      attr_accessor suggest: Types::SuggestModel
+      SENSITIVE: []
+    end
+
+    class SuggestStatus
+      attr_accessor timems: ::Integer
+      attr_accessor rid: ::String
+      SENSITIVE: []
+    end
+
+    class SuggestionMatch
+      attr_accessor suggestion: ::String
+      attr_accessor score: ::Integer
+      attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class UploadDocumentsRequest
+      attr_accessor documents: ::IO
+      attr_accessor content_type: ("application/json" | "application/xml")
+      SENSITIVE: []
+    end
+
+    class UploadDocumentsResponse
+      attr_accessor status: ::String
+      attr_accessor adds: ::Integer
+      attr_accessor deletes: ::Integer
+      attr_accessor warnings: ::Array[Types::DocumentServiceWarning]
+      SENSITIVE: []
+    end
+  end
+end

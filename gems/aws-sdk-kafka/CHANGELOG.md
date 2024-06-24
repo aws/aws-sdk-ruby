@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2024-05-28)
+------------------
+
+* Feature - Adds ControllerNodeInfo in ListNodes response to support Raft mode for MSK
+
+1.72.0 (2024-05-16)
+------------------
+
+* Feature - AWS MSK support for Broker Removal.
+
+1.71.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2024-03-12)
+------------------
+
+* Feature - Added support for specifying the starting position of topic replication in MSK-Replicator.
+
+1.68.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.66.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.65.0 (2023-11-16)
+------------------
+
+* Feature - Added a new API response field which determines if there is an action required from the customer regarding their cluster.
+
+1.64.0 (2023-10-17)
+------------------
+
+* Feature - AWS Managed Streaming for Kafka is launching MSK Replicator, a new feature that enables customers to reliably replicate data across Amazon MSK clusters in same or different AWS regions. You can now use SDK to create, list, describe, delete, update, and manage tags of MSK Replicators.
+
 1.63.0 (2023-09-27)
 ------------------
 

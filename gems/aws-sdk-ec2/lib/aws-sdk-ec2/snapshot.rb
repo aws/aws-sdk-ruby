@@ -59,9 +59,8 @@ module Aws::EC2
       data[:encrypted]
     end
 
-    # The Amazon Resource Name (ARN) of the Key Management Service (KMS) KMS
-    # key that was used to protect the volume encryption key for the parent
-    # volume.
+    # The Amazon Resource Name (ARN) of the KMS key that was used to protect
+    # the volume encryption key for the parent volume.
     # @return [String]
     def kms_key_id
       data[:kms_key_id]
@@ -92,10 +91,10 @@ module Aws::EC2
     end
 
     # Encrypted Amazon EBS snapshots are copied asynchronously. If a
-    # snapshot copy operation fails (for example, if the proper Key
-    # Management Service (KMS) permissions are not obtained) this field
-    # displays error state details to help you diagnose why the error
-    # occurred. This parameter is only returned by DescribeSnapshots.
+    # snapshot copy operation fails (for example, if the proper KMS
+    # permissions are not obtained) this field displays error state details
+    # to help you diagnose why the error occurred. This parameter is only
+    # returned by DescribeSnapshots.
     # @return [String]
     def state_message
       data[:state_message]
@@ -125,11 +124,11 @@ module Aws::EC2
 
     # The ARN of the Outpost on which the snapshot is stored. For more
     # information, see [Amazon EBS local snapshots on Outposts][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # *Amazon EBS User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html
+    # [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html
     # @return [String]
     def outpost_arn
       data[:outpost_arn]
@@ -178,7 +177,7 @@ module Aws::EC2
     #
     # @return [self]
     def load
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_snapshots(snapshot_ids: [@id])
       end
       @data = resp.snapshots[0]
@@ -211,7 +210,7 @@ module Aws::EC2
       options, params = separate_params_and_options(options)
       waiter = Waiters::SnapshotCompleted.new(options)
       yield_waiter_and_warn(waiter, &block) if block_given?
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         waiter.wait(params.merge(snapshot_ids: [@id]))
       end
       Snapshot.new({
@@ -315,7 +314,7 @@ module Aws::EC2
           :retry
         end
       end
-      Aws::Plugins::UserAgent.feature('resource') do
+      Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         Aws::Waiters::Waiter.new(options).wait({})
       end
     end
@@ -334,7 +333,7 @@ module Aws::EC2
     #     source_region: "String", # required
     #     tag_specifications: [
     #       {
-    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
+    #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint
     #         tags: [
     #           {
     #             key: "String",
@@ -357,12 +356,11 @@ module Aws::EC2
     #   Outpost.
     #
     #   For more information, see [ Copy snapshots from an Amazon Web Services
-    #   Region to an Outpost][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   Region to an Outpost][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-snapshots
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-snapshots
     # @option options [String] :destination_region
     #   The destination Region to use in the `PresignedUrl` parameter of a
     #   snapshot copy operation. This parameter is only valid for specifying
@@ -379,16 +377,15 @@ module Aws::EC2
     #   omit this parameter. Encrypted snapshots are encrypted, even if you
     #   omit this parameter and encryption by default is not enabled. You
     #   cannot set this parameter to false. For more information, see [Amazon
-    #   EBS encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   EBS encryption][1] in the *Amazon EBS User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   [1]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
     # @option options [String] :kms_key_id
-    #   The identifier of the Key Management Service (KMS) KMS key to use for
-    #   Amazon EBS encryption. If this parameter is not specified, your KMS
-    #   key for Amazon EBS is used. If `KmsKeyId` is specified, the encrypted
-    #   state must be `true`.
+    #   The identifier of the KMS key to use for Amazon EBS encryption. If
+    #   this parameter is not specified, your KMS key for Amazon EBS is used.
+    #   If `KmsKeyId` is specified, the encrypted state must be `true`.
     #
     #   You can specify the KMS key using any of the following:
     #
@@ -416,11 +413,10 @@ module Aws::EC2
     #   `PresignedUrl` must be signed using Amazon Web Services Signature
     #   Version 4. Because EBS snapshots are stored in Amazon S3, the signing
     #   algorithm for this parameter uses the same logic that is described in
-    #   [Authenticating Requests: Using Query Parameters (Amazon Web Services
-    #   Signature Version 4)][2] in the *Amazon Simple Storage Service API
-    #   Reference*. An invalid or improperly signed `PresignedUrl` will cause
-    #   the copy operation to fail asynchronously, and the snapshot will move
-    #   to an `error` state.
+    #   [ Authenticating Requests: Using Query Parameters (Amazon Web Services
+    #   Signature Version 4)][2] in the *Amazon S3 API Reference*. An invalid
+    #   or improperly signed `PresignedUrl` will cause the copy operation to
+    #   fail asynchronously, and the snapshot will move to an `error` state.
     #
     #
     #
@@ -438,7 +434,7 @@ module Aws::EC2
     # @return [Types::CopySnapshotResult]
     def copy(options = {})
       options = options.merge(source_snapshot_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.copy_snapshot(options)
       end
       resp.data
@@ -469,7 +465,7 @@ module Aws::EC2
     def create_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.create_tags(options)
       end
       options[:tags].each do |t|
@@ -516,7 +512,7 @@ module Aws::EC2
     def delete_tags(options = {})
       batch = []
       options = Aws::Util.deep_merge(options, resources: [@id])
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_tags(options)
       end
       options[:tags].each do |t|
@@ -544,7 +540,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(snapshot_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.delete_snapshot(options)
       end
       resp.data
@@ -567,7 +563,7 @@ module Aws::EC2
     # @return [Types::DescribeSnapshotAttributeResult]
     def describe_attribute(options = {})
       options = options.merge(snapshot_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.describe_snapshot_attribute(options)
       end
       resp.data
@@ -616,7 +612,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def modify_attribute(options = {})
       options = options.merge(snapshot_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.modify_snapshot_attribute(options)
       end
       resp.data
@@ -640,7 +636,7 @@ module Aws::EC2
     # @return [EmptyStructure]
     def reset_attribute(options = {})
       options = options.merge(snapshot_id: @id)
-      resp = Aws::Plugins::UserAgent.feature('resource') do
+      resp = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
         @client.reset_snapshot_attribute(options)
       end
       resp.data

@@ -238,6 +238,21 @@ module Aws::EC2InstanceConnect
       include Aws::Structure
     end
 
+    # Your instance's BIOS version is unsupported for serial console
+    # connection. Reboot your instance to update its BIOS, and then try
+    # again to connect.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-instance-connect-2018-04-02/SerialConsoleSessionUnsupportedException AWS API Documentation
+    #
+    class SerialConsoleSessionUnsupportedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The service encountered an error. Follow the instructions in the error
     # message and try again.
     #

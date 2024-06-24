@@ -79,6 +79,8 @@ module Aws::WAFV2
     CustomResponseBodies = Shapes::MapShape.new(name: 'CustomResponseBodies')
     CustomResponseBody = Shapes::StructureShape.new(name: 'CustomResponseBody')
     DefaultAction = Shapes::StructureShape.new(name: 'DefaultAction')
+    DeleteAPIKeyRequest = Shapes::StructureShape.new(name: 'DeleteAPIKeyRequest')
+    DeleteAPIKeyResponse = Shapes::StructureShape.new(name: 'DeleteAPIKeyResponse')
     DeleteFirewallManagerRuleGroupsRequest = Shapes::StructureShape.new(name: 'DeleteFirewallManagerRuleGroupsRequest')
     DeleteFirewallManagerRuleGroupsResponse = Shapes::StructureShape.new(name: 'DeleteFirewallManagerRuleGroupsResponse')
     DeleteIPSetRequest = Shapes::StructureShape.new(name: 'DeleteIPSetRequest')
@@ -103,11 +105,13 @@ module Aws::WAFV2
     DisassociateWebACLResponse = Shapes::StructureShape.new(name: 'DisassociateWebACLResponse')
     DownloadUrl = Shapes::StringShape.new(name: 'DownloadUrl')
     EmailField = Shapes::StructureShape.new(name: 'EmailField')
+    EnableMachineLearning = Shapes::BooleanShape.new(name: 'EnableMachineLearning')
     EntityDescription = Shapes::StringShape.new(name: 'EntityDescription')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
     EntityName = Shapes::StringShape.new(name: 'EntityName')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorReason = Shapes::StringShape.new(name: 'ErrorReason')
+    EvaluationWindowSec = Shapes::IntegerShape.new(name: 'EvaluationWindowSec')
     ExcludedRule = Shapes::StructureShape.new(name: 'ExcludedRule')
     ExcludedRules = Shapes::ListShape.new(name: 'ExcludedRules')
     FailureCode = Shapes::IntegerShape.new(name: 'FailureCode')
@@ -219,6 +223,8 @@ module Aws::WAFV2
     ListWebACLsResponse = Shapes::StructureShape.new(name: 'ListWebACLsResponse')
     LockToken = Shapes::StringShape.new(name: 'LockToken')
     LogDestinationConfigs = Shapes::ListShape.new(name: 'LogDestinationConfigs')
+    LogScope = Shapes::StringShape.new(name: 'LogScope')
+    LogType = Shapes::StringShape.new(name: 'LogType')
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
     LoggingConfigurations = Shapes::ListShape.new(name: 'LoggingConfigurations')
     LoggingFilter = Shapes::StructureShape.new(name: 'LoggingFilter')
@@ -348,6 +354,7 @@ module Aws::WAFV2
     SizeConstraintStatement = Shapes::StructureShape.new(name: 'SizeConstraintStatement')
     SizeInspectionLimit = Shapes::StringShape.new(name: 'SizeInspectionLimit')
     SolveTimestamp = Shapes::IntegerShape.new(name: 'SolveTimestamp')
+    SourceType = Shapes::StringShape.new(name: 'SourceType')
     SqliMatchStatement = Shapes::StructureShape.new(name: 'SqliMatchStatement')
     Statement = Shapes::StructureShape.new(name: 'Statement')
     Statements = Shapes::ListShape.new(name: 'Statements')
@@ -440,7 +447,7 @@ module Aws::WAFV2
     AWSManagedRulesATPRuleSet.struct_class = Types::AWSManagedRulesATPRuleSet
 
     AWSManagedRulesBotControlRuleSet.add_member(:inspection_level, Shapes::ShapeRef.new(shape: InspectionLevel, required: true, location_name: "InspectionLevel"))
-    AWSManagedRulesBotControlRuleSet.add_member(:enable_machine_learning, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableMachineLearning"))
+    AWSManagedRulesBotControlRuleSet.add_member(:enable_machine_learning, Shapes::ShapeRef.new(shape: EnableMachineLearning, location_name: "EnableMachineLearning"))
     AWSManagedRulesBotControlRuleSet.struct_class = Types::AWSManagedRulesBotControlRuleSet
 
     ActionCondition.add_member(:action, Shapes::ShapeRef.new(shape: ActionValue, required: true, location_name: "Action"))
@@ -617,6 +624,12 @@ module Aws::WAFV2
     DefaultAction.add_member(:allow, Shapes::ShapeRef.new(shape: AllowAction, location_name: "Allow"))
     DefaultAction.struct_class = Types::DefaultAction
 
+    DeleteAPIKeyRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
+    DeleteAPIKeyRequest.add_member(:api_key, Shapes::ShapeRef.new(shape: APIKey, required: true, location_name: "APIKey"))
+    DeleteAPIKeyRequest.struct_class = Types::DeleteAPIKeyRequest
+
+    DeleteAPIKeyResponse.struct_class = Types::DeleteAPIKeyResponse
+
     DeleteFirewallManagerRuleGroupsRequest.add_member(:web_acl_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "WebACLArn"))
     DeleteFirewallManagerRuleGroupsRequest.add_member(:web_acl_lock_token, Shapes::ShapeRef.new(shape: LockToken, required: true, location_name: "WebACLLockToken"))
     DeleteFirewallManagerRuleGroupsRequest.struct_class = Types::DeleteFirewallManagerRuleGroupsRequest
@@ -633,6 +646,8 @@ module Aws::WAFV2
     DeleteIPSetResponse.struct_class = Types::DeleteIPSetResponse
 
     DeleteLoggingConfigurationRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    DeleteLoggingConfigurationRequest.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, location_name: "LogType"))
+    DeleteLoggingConfigurationRequest.add_member(:log_scope, Shapes::ShapeRef.new(shape: LogScope, location_name: "LogScope"))
     DeleteLoggingConfigurationRequest.struct_class = Types::DeleteLoggingConfigurationRequest
 
     DeleteLoggingConfigurationResponse.struct_class = Types::DeleteLoggingConfigurationResponse
@@ -774,6 +789,8 @@ module Aws::WAFV2
     GetIPSetResponse.struct_class = Types::GetIPSetResponse
 
     GetLoggingConfigurationRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    GetLoggingConfigurationRequest.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, location_name: "LogType"))
+    GetLoggingConfigurationRequest.add_member(:log_scope, Shapes::ShapeRef.new(shape: LogScope, location_name: "LogScope"))
     GetLoggingConfigurationRequest.struct_class = Types::GetLoggingConfigurationRequest
 
     GetLoggingConfigurationResponse.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
@@ -994,6 +1011,7 @@ module Aws::WAFV2
     ListLoggingConfigurationsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
     ListLoggingConfigurationsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
     ListLoggingConfigurationsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
+    ListLoggingConfigurationsRequest.add_member(:log_scope, Shapes::ShapeRef.new(shape: LogScope, location_name: "LogScope"))
     ListLoggingConfigurationsRequest.struct_class = Types::ListLoggingConfigurationsRequest
 
     ListLoggingConfigurationsResponse.add_member(:logging_configurations, Shapes::ShapeRef.new(shape: LoggingConfigurations, location_name: "LoggingConfigurations"))
@@ -1068,6 +1086,8 @@ module Aws::WAFV2
     LoggingConfiguration.add_member(:redacted_fields, Shapes::ShapeRef.new(shape: RedactedFields, location_name: "RedactedFields"))
     LoggingConfiguration.add_member(:managed_by_firewall_manager, Shapes::ShapeRef.new(shape: Boolean, location_name: "ManagedByFirewallManager"))
     LoggingConfiguration.add_member(:logging_filter, Shapes::ShapeRef.new(shape: LoggingFilter, location_name: "LoggingFilter"))
+    LoggingConfiguration.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, location_name: "LogType"))
+    LoggingConfiguration.add_member(:log_scope, Shapes::ShapeRef.new(shape: LogScope, location_name: "LogScope"))
     LoggingConfiguration.struct_class = Types::LoggingConfiguration
 
     LoggingConfigurations.member = Shapes::ShapeRef.new(shape: LoggingConfiguration)
@@ -1207,6 +1227,7 @@ module Aws::WAFV2
     QueryString.struct_class = Types::QueryString
 
     RateBasedStatement.add_member(:limit, Shapes::ShapeRef.new(shape: RateLimit, required: true, location_name: "Limit"))
+    RateBasedStatement.add_member(:evaluation_window_sec, Shapes::ShapeRef.new(shape: EvaluationWindowSec, location_name: "EvaluationWindowSec"))
     RateBasedStatement.add_member(:aggregate_key_type, Shapes::ShapeRef.new(shape: RateBasedStatementAggregateKeyType, required: true, location_name: "AggregateKeyType"))
     RateBasedStatement.add_member(:scope_down_statement, Shapes::ShapeRef.new(shape: Statement, location_name: "ScopeDownStatement"))
     RateBasedStatement.add_member(:forwarded_ip_config, Shapes::ShapeRef.new(shape: ForwardedIPConfig, location_name: "ForwardedIPConfig"))
@@ -1617,6 +1638,7 @@ module Aws::WAFV2
     WAFInvalidResourceException.struct_class = Types::WAFInvalidResourceException
 
     WAFLimitsExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    WAFLimitsExceededException.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
     WAFLimitsExceededException.struct_class = Types::WAFLimitsExceededException
 
     WAFLogDestinationPermissionIssueException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -1689,6 +1711,7 @@ module Aws::WAFV2
         "endpointPrefix" => "wafv2",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "WAFV2",
         "serviceFullName" => "AWS WAFV2",
         "serviceId" => "WAFV2",
@@ -1812,6 +1835,19 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFExpiredManagedRuleGroupVersionException)
       end)
 
+      api.add_operation(:delete_api_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAPIKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAPIKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAPIKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFOptimisticLockException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+      end)
+
       api.add_operation(:delete_firewall_manager_rule_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteFirewallManagerRuleGroups"
         o.http_method = "POST"
@@ -1921,6 +1957,7 @@ module Aws::WAFV2
         o.output = Shapes::ShapeRef.new(shape: DescribeAllManagedProductsResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
       end)
 
       api.add_operation(:describe_managed_products_by_vendor, Seahorse::Model::Operation.new.tap do |o|
@@ -1979,6 +2016,7 @@ module Aws::WAFV2
         o.input = Shapes::ShapeRef.new(shape: GetDecryptedAPIKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDecryptedAPIKeyResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidResourceException)

@@ -1,0 +1,77 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTSiteWise
+    module Waiters
+
+      class AssetActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    asset_id: ::String,
+                    ?exclude_properties: bool
+                  ) -> Client::_DescribeAssetResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeAssetResponseSuccess
+      end
+
+      class AssetModelActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    asset_model_id: ::String,
+                    ?exclude_properties: bool
+                  ) -> Client::_DescribeAssetModelResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeAssetModelResponseSuccess
+      end
+
+      class AssetModelNotExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    asset_model_id: ::String,
+                    ?exclude_properties: bool
+                  ) -> Client::_DescribeAssetModelResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeAssetModelResponseSuccess
+      end
+
+      class AssetNotExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    asset_id: ::String,
+                    ?exclude_properties: bool
+                  ) -> Client::_DescribeAssetResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeAssetResponseSuccess
+      end
+
+      class PortalActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    portal_id: ::String
+                  ) -> Client::_DescribePortalResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribePortalResponseSuccess
+      end
+
+      class PortalNotExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    portal_id: ::String
+                  ) -> Client::_DescribePortalResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribePortalResponseSuccess
+      end
+    end
+  end
+end

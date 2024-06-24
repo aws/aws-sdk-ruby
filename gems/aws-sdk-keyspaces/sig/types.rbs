@@ -1,0 +1,392 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::Keyspaces
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AutoScalingPolicy
+      attr_accessor target_tracking_scaling_policy_configuration: Types::TargetTrackingScalingPolicyConfiguration
+      SENSITIVE: []
+    end
+
+    class AutoScalingSettings
+      attr_accessor auto_scaling_disabled: bool
+      attr_accessor minimum_units: ::Integer
+      attr_accessor maximum_units: ::Integer
+      attr_accessor scaling_policy: Types::AutoScalingPolicy
+      SENSITIVE: []
+    end
+
+    class AutoScalingSpecification
+      attr_accessor write_capacity_auto_scaling: Types::AutoScalingSettings
+      attr_accessor read_capacity_auto_scaling: Types::AutoScalingSettings
+      SENSITIVE: []
+    end
+
+    class CapacitySpecification
+      attr_accessor throughput_mode: ("PAY_PER_REQUEST" | "PROVISIONED")
+      attr_accessor read_capacity_units: ::Integer
+      attr_accessor write_capacity_units: ::Integer
+      SENSITIVE: []
+    end
+
+    class CapacitySpecificationSummary
+      attr_accessor throughput_mode: ("PAY_PER_REQUEST" | "PROVISIONED")
+      attr_accessor read_capacity_units: ::Integer
+      attr_accessor write_capacity_units: ::Integer
+      attr_accessor last_update_to_pay_per_request_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ClientSideTimestamps
+      attr_accessor status: ("ENABLED")
+      SENSITIVE: []
+    end
+
+    class ClusteringKey
+      attr_accessor name: ::String
+      attr_accessor order_by: ("ASC" | "DESC")
+      SENSITIVE: []
+    end
+
+    class ColumnDefinition
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class Comment
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateKeyspaceRequest
+      attr_accessor keyspace_name: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor replication_specification: Types::ReplicationSpecification
+      SENSITIVE: []
+    end
+
+    class CreateKeyspaceResponse
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CreateTableRequest
+      attr_accessor keyspace_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor schema_definition: Types::SchemaDefinition
+      attr_accessor comment: Types::Comment
+      attr_accessor capacity_specification: Types::CapacitySpecification
+      attr_accessor encryption_specification: Types::EncryptionSpecification
+      attr_accessor point_in_time_recovery: Types::PointInTimeRecovery
+      attr_accessor ttl: Types::TimeToLive
+      attr_accessor default_time_to_live: ::Integer
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_side_timestamps: Types::ClientSideTimestamps
+      attr_accessor auto_scaling_specification: Types::AutoScalingSpecification
+      attr_accessor replica_specifications: ::Array[Types::ReplicaSpecification]
+      SENSITIVE: []
+    end
+
+    class CreateTableResponse
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKeyspaceRequest
+      attr_accessor keyspace_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteKeyspaceResponse < Aws::EmptyStructure
+    end
+
+    class DeleteTableRequest
+      attr_accessor keyspace_name: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteTableResponse < Aws::EmptyStructure
+    end
+
+    class EncryptionSpecification
+      attr_accessor type: ("CUSTOMER_MANAGED_KMS_KEY" | "AWS_OWNED_KMS_KEY")
+      attr_accessor kms_key_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetKeyspaceRequest
+      attr_accessor keyspace_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetKeyspaceResponse
+      attr_accessor keyspace_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor replication_strategy: ("SINGLE_REGION" | "MULTI_REGION")
+      attr_accessor replication_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetTableAutoScalingSettingsRequest
+      attr_accessor keyspace_name: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetTableAutoScalingSettingsResponse
+      attr_accessor keyspace_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor auto_scaling_specification: Types::AutoScalingSpecification
+      attr_accessor replica_specifications: ::Array[Types::ReplicaAutoScalingSpecification]
+      SENSITIVE: []
+    end
+
+    class GetTableRequest
+      attr_accessor keyspace_name: ::String
+      attr_accessor table_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetTableResponse
+      attr_accessor keyspace_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor creation_timestamp: ::Time
+      attr_accessor status: ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "DELETED" | "RESTORING" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS")
+      attr_accessor schema_definition: Types::SchemaDefinition
+      attr_accessor capacity_specification: Types::CapacitySpecificationSummary
+      attr_accessor encryption_specification: Types::EncryptionSpecification
+      attr_accessor point_in_time_recovery: Types::PointInTimeRecoverySummary
+      attr_accessor ttl: Types::TimeToLive
+      attr_accessor default_time_to_live: ::Integer
+      attr_accessor comment: Types::Comment
+      attr_accessor client_side_timestamps: Types::ClientSideTimestamps
+      attr_accessor replica_specifications: ::Array[Types::ReplicaSpecificationSummary]
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class KeyspaceSummary
+      attr_accessor keyspace_name: ::String
+      attr_accessor resource_arn: ::String
+      attr_accessor replication_strategy: ("SINGLE_REGION" | "MULTI_REGION")
+      attr_accessor replication_regions: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListKeyspacesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListKeyspacesResponse
+      attr_accessor next_token: ::String
+      attr_accessor keyspaces: ::Array[Types::KeyspaceSummary]
+      SENSITIVE: []
+    end
+
+    class ListTablesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor keyspace_name: ::String
+      SENSITIVE: []
+    end
+
+    class ListTablesResponse
+      attr_accessor next_token: ::String
+      attr_accessor tables: ::Array[Types::TableSummary]
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor next_token: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class PartitionKey
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class PointInTimeRecovery
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class PointInTimeRecoverySummary
+      attr_accessor status: ("ENABLED" | "DISABLED")
+      attr_accessor earliest_restorable_timestamp: ::Time
+      SENSITIVE: []
+    end
+
+    class ReplicaAutoScalingSpecification
+      attr_accessor region: ::String
+      attr_accessor auto_scaling_specification: Types::AutoScalingSpecification
+      SENSITIVE: []
+    end
+
+    class ReplicaSpecification
+      attr_accessor region: ::String
+      attr_accessor read_capacity_units: ::Integer
+      attr_accessor read_capacity_auto_scaling: Types::AutoScalingSettings
+      SENSITIVE: []
+    end
+
+    class ReplicaSpecificationSummary
+      attr_accessor region: ::String
+      attr_accessor status: ("ACTIVE" | "CREATING" | "UPDATING" | "DELETING" | "DELETED" | "RESTORING" | "INACCESSIBLE_ENCRYPTION_CREDENTIALS")
+      attr_accessor capacity_specification: Types::CapacitySpecificationSummary
+      SENSITIVE: []
+    end
+
+    class ReplicationSpecification
+      attr_accessor replication_strategy: ("SINGLE_REGION" | "MULTI_REGION")
+      attr_accessor region_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RestoreTableRequest
+      attr_accessor source_keyspace_name: ::String
+      attr_accessor source_table_name: ::String
+      attr_accessor target_keyspace_name: ::String
+      attr_accessor target_table_name: ::String
+      attr_accessor restore_timestamp: ::Time
+      attr_accessor capacity_specification_override: Types::CapacitySpecification
+      attr_accessor encryption_specification_override: Types::EncryptionSpecification
+      attr_accessor point_in_time_recovery_override: Types::PointInTimeRecovery
+      attr_accessor tags_override: ::Array[Types::Tag]
+      attr_accessor auto_scaling_specification: Types::AutoScalingSpecification
+      attr_accessor replica_specifications: ::Array[Types::ReplicaSpecification]
+      SENSITIVE: []
+    end
+
+    class RestoreTableResponse
+      attr_accessor restored_table_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SchemaDefinition
+      attr_accessor all_columns: ::Array[Types::ColumnDefinition]
+      attr_accessor partition_keys: ::Array[Types::PartitionKey]
+      attr_accessor clustering_keys: ::Array[Types::ClusteringKey]
+      attr_accessor static_columns: ::Array[Types::StaticColumn]
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class StaticColumn
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class TableSummary
+      attr_accessor keyspace_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Tag
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TargetTrackingScalingPolicyConfiguration
+      attr_accessor disable_scale_in: bool
+      attr_accessor scale_in_cooldown: ::Integer
+      attr_accessor scale_out_cooldown: ::Integer
+      attr_accessor target_value: ::Float
+      SENSITIVE: []
+    end
+
+    class TimeToLive
+      attr_accessor status: ("ENABLED")
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateTableRequest
+      attr_accessor keyspace_name: ::String
+      attr_accessor table_name: ::String
+      attr_accessor add_columns: ::Array[Types::ColumnDefinition]
+      attr_accessor capacity_specification: Types::CapacitySpecification
+      attr_accessor encryption_specification: Types::EncryptionSpecification
+      attr_accessor point_in_time_recovery: Types::PointInTimeRecovery
+      attr_accessor ttl: Types::TimeToLive
+      attr_accessor default_time_to_live: ::Integer
+      attr_accessor client_side_timestamps: Types::ClientSideTimestamps
+      attr_accessor auto_scaling_specification: Types::AutoScalingSpecification
+      attr_accessor replica_specifications: ::Array[Types::ReplicaSpecification]
+      SENSITIVE: []
+    end
+
+    class UpdateTableResponse
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -55,6 +55,7 @@ module Aws::Firehose
     CopyOptions = Shapes::StringShape.new(name: 'CopyOptions')
     CreateDeliveryStreamInput = Shapes::StructureShape.new(name: 'CreateDeliveryStreamInput')
     CreateDeliveryStreamOutput = Shapes::StructureShape.new(name: 'CreateDeliveryStreamOutput')
+    CustomTimeZone = Shapes::StringShape.new(name: 'CustomTimeZone')
     Data = Shapes::BlobShape.new(name: 'Data')
     DataFormatConversionConfiguration = Shapes::StructureShape.new(name: 'DataFormatConversionConfiguration')
     DataTableColumns = Shapes::StringShape.new(name: 'DataTableColumns')
@@ -105,6 +106,7 @@ module Aws::Firehose
     ExtendedS3DestinationDescription = Shapes::StructureShape.new(name: 'ExtendedS3DestinationDescription')
     ExtendedS3DestinationUpdate = Shapes::StructureShape.new(name: 'ExtendedS3DestinationUpdate')
     FailureDescription = Shapes::StructureShape.new(name: 'FailureDescription')
+    FileExtension = Shapes::StringShape.new(name: 'FileExtension')
     HECAcknowledgmentTimeoutInSeconds = Shapes::IntegerShape.new(name: 'HECAcknowledgmentTimeoutInSeconds')
     HECEndpoint = Shapes::StringShape.new(name: 'HECEndpoint')
     HECEndpointType = Shapes::StringShape.new(name: 'HECEndpointType')
@@ -133,6 +135,7 @@ module Aws::Firehose
     IntervalInSeconds = Shapes::IntegerShape.new(name: 'IntervalInSeconds')
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
     InvalidKMSResourceException = Shapes::StructureShape.new(name: 'InvalidKMSResourceException')
+    InvalidSourceException = Shapes::StructureShape.new(name: 'InvalidSourceException')
     KMSEncryptionConfig = Shapes::StructureShape.new(name: 'KMSEncryptionConfig')
     KeyType = Shapes::StringShape.new(name: 'KeyType')
     KinesisStreamARN = Shapes::StringShape.new(name: 'KinesisStreamARN')
@@ -204,11 +207,36 @@ module Aws::Firehose
     S3DestinationDescription = Shapes::StructureShape.new(name: 'S3DestinationDescription')
     S3DestinationUpdate = Shapes::StructureShape.new(name: 'S3DestinationUpdate')
     SchemaConfiguration = Shapes::StructureShape.new(name: 'SchemaConfiguration')
+    SecretARN = Shapes::StringShape.new(name: 'SecretARN')
+    SecretsManagerConfiguration = Shapes::StructureShape.new(name: 'SecretsManagerConfiguration')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     Serializer = Shapes::StructureShape.new(name: 'Serializer')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SizeInMBs = Shapes::IntegerShape.new(name: 'SizeInMBs')
+    SnowflakeAccountUrl = Shapes::StringShape.new(name: 'SnowflakeAccountUrl')
+    SnowflakeContentColumnName = Shapes::StringShape.new(name: 'SnowflakeContentColumnName')
+    SnowflakeDataLoadingOption = Shapes::StringShape.new(name: 'SnowflakeDataLoadingOption')
+    SnowflakeDatabase = Shapes::StringShape.new(name: 'SnowflakeDatabase')
+    SnowflakeDestinationConfiguration = Shapes::StructureShape.new(name: 'SnowflakeDestinationConfiguration')
+    SnowflakeDestinationDescription = Shapes::StructureShape.new(name: 'SnowflakeDestinationDescription')
+    SnowflakeDestinationUpdate = Shapes::StructureShape.new(name: 'SnowflakeDestinationUpdate')
+    SnowflakeKeyPassphrase = Shapes::StringShape.new(name: 'SnowflakeKeyPassphrase')
+    SnowflakeMetaDataColumnName = Shapes::StringShape.new(name: 'SnowflakeMetaDataColumnName')
+    SnowflakePrivateKey = Shapes::StringShape.new(name: 'SnowflakePrivateKey')
+    SnowflakePrivateLinkVpceId = Shapes::StringShape.new(name: 'SnowflakePrivateLinkVpceId')
+    SnowflakeRetryDurationInSeconds = Shapes::IntegerShape.new(name: 'SnowflakeRetryDurationInSeconds')
+    SnowflakeRetryOptions = Shapes::StructureShape.new(name: 'SnowflakeRetryOptions')
+    SnowflakeRole = Shapes::StringShape.new(name: 'SnowflakeRole')
+    SnowflakeRoleConfiguration = Shapes::StructureShape.new(name: 'SnowflakeRoleConfiguration')
+    SnowflakeS3BackupMode = Shapes::StringShape.new(name: 'SnowflakeS3BackupMode')
+    SnowflakeSchema = Shapes::StringShape.new(name: 'SnowflakeSchema')
+    SnowflakeTable = Shapes::StringShape.new(name: 'SnowflakeTable')
+    SnowflakeUser = Shapes::StringShape.new(name: 'SnowflakeUser')
+    SnowflakeVpcConfiguration = Shapes::StructureShape.new(name: 'SnowflakeVpcConfiguration')
     SourceDescription = Shapes::StructureShape.new(name: 'SourceDescription')
+    SplunkBufferingHints = Shapes::StructureShape.new(name: 'SplunkBufferingHints')
+    SplunkBufferingIntervalInSeconds = Shapes::IntegerShape.new(name: 'SplunkBufferingIntervalInSeconds')
+    SplunkBufferingSizeInMBs = Shapes::IntegerShape.new(name: 'SplunkBufferingSizeInMBs')
     SplunkDestinationConfiguration = Shapes::StructureShape.new(name: 'SplunkDestinationConfiguration')
     SplunkDestinationDescription = Shapes::StructureShape.new(name: 'SplunkDestinationDescription')
     SplunkDestinationUpdate = Shapes::StructureShape.new(name: 'SplunkDestinationUpdate')
@@ -369,6 +397,7 @@ module Aws::Firehose
     CreateDeliveryStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagDeliveryStreamInputTagList, location_name: "Tags"))
     CreateDeliveryStreamInput.add_member(:amazon_open_search_serverless_destination_configuration, Shapes::ShapeRef.new(shape: AmazonOpenSearchServerlessDestinationConfiguration, location_name: "AmazonOpenSearchServerlessDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:msk_source_configuration, Shapes::ShapeRef.new(shape: MSKSourceConfiguration, location_name: "MSKSourceConfiguration"))
+    CreateDeliveryStreamInput.add_member(:snowflake_destination_configuration, Shapes::ShapeRef.new(shape: SnowflakeDestinationConfiguration, location_name: "SnowflakeDestinationConfiguration"))
     CreateDeliveryStreamInput.struct_class = Types::CreateDeliveryStreamInput
 
     CreateDeliveryStreamOutput.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: DeliveryStreamARN, location_name: "DeliveryStreamARN"))
@@ -432,6 +461,7 @@ module Aws::Firehose
     DestinationDescription.add_member(:amazonopensearchservice_destination_description, Shapes::ShapeRef.new(shape: AmazonopensearchserviceDestinationDescription, location_name: "AmazonopensearchserviceDestinationDescription"))
     DestinationDescription.add_member(:splunk_destination_description, Shapes::ShapeRef.new(shape: SplunkDestinationDescription, location_name: "SplunkDestinationDescription"))
     DestinationDescription.add_member(:http_endpoint_destination_description, Shapes::ShapeRef.new(shape: HttpEndpointDestinationDescription, location_name: "HttpEndpointDestinationDescription"))
+    DestinationDescription.add_member(:snowflake_destination_description, Shapes::ShapeRef.new(shape: SnowflakeDestinationDescription, location_name: "SnowflakeDestinationDescription"))
     DestinationDescription.add_member(:amazon_open_search_serverless_destination_description, Shapes::ShapeRef.new(shape: AmazonOpenSearchServerlessDestinationDescription, location_name: "AmazonOpenSearchServerlessDestinationDescription"))
     DestinationDescription.struct_class = Types::DestinationDescription
 
@@ -514,6 +544,8 @@ module Aws::Firehose
     ExtendedS3DestinationConfiguration.add_member(:s3_backup_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "S3BackupConfiguration"))
     ExtendedS3DestinationConfiguration.add_member(:data_format_conversion_configuration, Shapes::ShapeRef.new(shape: DataFormatConversionConfiguration, location_name: "DataFormatConversionConfiguration"))
     ExtendedS3DestinationConfiguration.add_member(:dynamic_partitioning_configuration, Shapes::ShapeRef.new(shape: DynamicPartitioningConfiguration, location_name: "DynamicPartitioningConfiguration"))
+    ExtendedS3DestinationConfiguration.add_member(:file_extension, Shapes::ShapeRef.new(shape: FileExtension, location_name: "FileExtension"))
+    ExtendedS3DestinationConfiguration.add_member(:custom_time_zone, Shapes::ShapeRef.new(shape: CustomTimeZone, location_name: "CustomTimeZone"))
     ExtendedS3DestinationConfiguration.struct_class = Types::ExtendedS3DestinationConfiguration
 
     ExtendedS3DestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
@@ -529,6 +561,8 @@ module Aws::Firehose
     ExtendedS3DestinationDescription.add_member(:s3_backup_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3BackupDescription"))
     ExtendedS3DestinationDescription.add_member(:data_format_conversion_configuration, Shapes::ShapeRef.new(shape: DataFormatConversionConfiguration, location_name: "DataFormatConversionConfiguration"))
     ExtendedS3DestinationDescription.add_member(:dynamic_partitioning_configuration, Shapes::ShapeRef.new(shape: DynamicPartitioningConfiguration, location_name: "DynamicPartitioningConfiguration"))
+    ExtendedS3DestinationDescription.add_member(:file_extension, Shapes::ShapeRef.new(shape: FileExtension, location_name: "FileExtension"))
+    ExtendedS3DestinationDescription.add_member(:custom_time_zone, Shapes::ShapeRef.new(shape: CustomTimeZone, location_name: "CustomTimeZone"))
     ExtendedS3DestinationDescription.struct_class = Types::ExtendedS3DestinationDescription
 
     ExtendedS3DestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
@@ -544,6 +578,8 @@ module Aws::Firehose
     ExtendedS3DestinationUpdate.add_member(:s3_backup_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3BackupUpdate"))
     ExtendedS3DestinationUpdate.add_member(:data_format_conversion_configuration, Shapes::ShapeRef.new(shape: DataFormatConversionConfiguration, location_name: "DataFormatConversionConfiguration"))
     ExtendedS3DestinationUpdate.add_member(:dynamic_partitioning_configuration, Shapes::ShapeRef.new(shape: DynamicPartitioningConfiguration, location_name: "DynamicPartitioningConfiguration"))
+    ExtendedS3DestinationUpdate.add_member(:file_extension, Shapes::ShapeRef.new(shape: FileExtension, location_name: "FileExtension"))
+    ExtendedS3DestinationUpdate.add_member(:custom_time_zone, Shapes::ShapeRef.new(shape: CustomTimeZone, location_name: "CustomTimeZone"))
     ExtendedS3DestinationUpdate.struct_class = Types::ExtendedS3DestinationUpdate
 
     FailureDescription.add_member(:type, Shapes::ShapeRef.new(shape: DeliveryStreamFailureType, required: true, location_name: "Type"))
@@ -581,6 +617,7 @@ module Aws::Firehose
     HttpEndpointDestinationConfiguration.add_member(:retry_options, Shapes::ShapeRef.new(shape: HttpEndpointRetryOptions, location_name: "RetryOptions"))
     HttpEndpointDestinationConfiguration.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: HttpEndpointS3BackupMode, location_name: "S3BackupMode"))
     HttpEndpointDestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, required: true, location_name: "S3Configuration"))
+    HttpEndpointDestinationConfiguration.add_member(:secrets_manager_configuration, Shapes::ShapeRef.new(shape: SecretsManagerConfiguration, location_name: "SecretsManagerConfiguration"))
     HttpEndpointDestinationConfiguration.struct_class = Types::HttpEndpointDestinationConfiguration
 
     HttpEndpointDestinationDescription.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: HttpEndpointDescription, location_name: "EndpointConfiguration"))
@@ -592,6 +629,7 @@ module Aws::Firehose
     HttpEndpointDestinationDescription.add_member(:retry_options, Shapes::ShapeRef.new(shape: HttpEndpointRetryOptions, location_name: "RetryOptions"))
     HttpEndpointDestinationDescription.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: HttpEndpointS3BackupMode, location_name: "S3BackupMode"))
     HttpEndpointDestinationDescription.add_member(:s3_destination_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3DestinationDescription"))
+    HttpEndpointDestinationDescription.add_member(:secrets_manager_configuration, Shapes::ShapeRef.new(shape: SecretsManagerConfiguration, location_name: "SecretsManagerConfiguration"))
     HttpEndpointDestinationDescription.struct_class = Types::HttpEndpointDestinationDescription
 
     HttpEndpointDestinationUpdate.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: HttpEndpointConfiguration, location_name: "EndpointConfiguration"))
@@ -603,6 +641,7 @@ module Aws::Firehose
     HttpEndpointDestinationUpdate.add_member(:retry_options, Shapes::ShapeRef.new(shape: HttpEndpointRetryOptions, location_name: "RetryOptions"))
     HttpEndpointDestinationUpdate.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: HttpEndpointS3BackupMode, location_name: "S3BackupMode"))
     HttpEndpointDestinationUpdate.add_member(:s3_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3Update"))
+    HttpEndpointDestinationUpdate.add_member(:secrets_manager_configuration, Shapes::ShapeRef.new(shape: SecretsManagerConfiguration, location_name: "SecretsManagerConfiguration"))
     HttpEndpointDestinationUpdate.struct_class = Types::HttpEndpointDestinationUpdate
 
     HttpEndpointRequestConfiguration.add_member(:content_encoding, Shapes::ShapeRef.new(shape: ContentEncoding, location_name: "ContentEncoding"))
@@ -621,6 +660,10 @@ module Aws::Firehose
     InvalidKMSResourceException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
     InvalidKMSResourceException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InvalidKMSResourceException.struct_class = Types::InvalidKMSResourceException
+
+    InvalidSourceException.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "code"))
+    InvalidSourceException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    InvalidSourceException.struct_class = Types::InvalidSourceException
 
     KMSEncryptionConfig.add_member(:awskms_key_arn, Shapes::ShapeRef.new(shape: AWSKMSKeyARN, required: true, location_name: "AWSKMSKeyARN"))
     KMSEncryptionConfig.struct_class = Types::KMSEncryptionConfig
@@ -748,26 +791,28 @@ module Aws::Firehose
     RedshiftDestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
     RedshiftDestinationConfiguration.add_member(:cluster_jdbc_url, Shapes::ShapeRef.new(shape: ClusterJDBCURL, required: true, location_name: "ClusterJDBCURL"))
     RedshiftDestinationConfiguration.add_member(:copy_command, Shapes::ShapeRef.new(shape: CopyCommand, required: true, location_name: "CopyCommand"))
-    RedshiftDestinationConfiguration.add_member(:username, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "Username"))
-    RedshiftDestinationConfiguration.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "Password"))
+    RedshiftDestinationConfiguration.add_member(:username, Shapes::ShapeRef.new(shape: Username, location_name: "Username"))
+    RedshiftDestinationConfiguration.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
     RedshiftDestinationConfiguration.add_member(:retry_options, Shapes::ShapeRef.new(shape: RedshiftRetryOptions, location_name: "RetryOptions"))
     RedshiftDestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, required: true, location_name: "S3Configuration"))
     RedshiftDestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     RedshiftDestinationConfiguration.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: RedshiftS3BackupMode, location_name: "S3BackupMode"))
     RedshiftDestinationConfiguration.add_member(:s3_backup_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "S3BackupConfiguration"))
     RedshiftDestinationConfiguration.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    RedshiftDestinationConfiguration.add_member(:secrets_manager_configuration, Shapes::ShapeRef.new(shape: SecretsManagerConfiguration, location_name: "SecretsManagerConfiguration"))
     RedshiftDestinationConfiguration.struct_class = Types::RedshiftDestinationConfiguration
 
     RedshiftDestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
     RedshiftDestinationDescription.add_member(:cluster_jdbc_url, Shapes::ShapeRef.new(shape: ClusterJDBCURL, required: true, location_name: "ClusterJDBCURL"))
     RedshiftDestinationDescription.add_member(:copy_command, Shapes::ShapeRef.new(shape: CopyCommand, required: true, location_name: "CopyCommand"))
-    RedshiftDestinationDescription.add_member(:username, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "Username"))
+    RedshiftDestinationDescription.add_member(:username, Shapes::ShapeRef.new(shape: Username, location_name: "Username"))
     RedshiftDestinationDescription.add_member(:retry_options, Shapes::ShapeRef.new(shape: RedshiftRetryOptions, location_name: "RetryOptions"))
     RedshiftDestinationDescription.add_member(:s3_destination_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, required: true, location_name: "S3DestinationDescription"))
     RedshiftDestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     RedshiftDestinationDescription.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: RedshiftS3BackupMode, location_name: "S3BackupMode"))
     RedshiftDestinationDescription.add_member(:s3_backup_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3BackupDescription"))
     RedshiftDestinationDescription.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    RedshiftDestinationDescription.add_member(:secrets_manager_configuration, Shapes::ShapeRef.new(shape: SecretsManagerConfiguration, location_name: "SecretsManagerConfiguration"))
     RedshiftDestinationDescription.struct_class = Types::RedshiftDestinationDescription
 
     RedshiftDestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
@@ -781,6 +826,7 @@ module Aws::Firehose
     RedshiftDestinationUpdate.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: RedshiftS3BackupMode, location_name: "S3BackupMode"))
     RedshiftDestinationUpdate.add_member(:s3_backup_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3BackupUpdate"))
     RedshiftDestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    RedshiftDestinationUpdate.add_member(:secrets_manager_configuration, Shapes::ShapeRef.new(shape: SecretsManagerConfiguration, location_name: "SecretsManagerConfiguration"))
     RedshiftDestinationUpdate.struct_class = Types::RedshiftDestinationUpdate
 
     RedshiftRetryOptions.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: RedshiftRetryDurationInSeconds, location_name: "DurationInSeconds"))
@@ -833,6 +879,11 @@ module Aws::Firehose
     SchemaConfiguration.add_member(:version_id, Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace, location_name: "VersionId"))
     SchemaConfiguration.struct_class = Types::SchemaConfiguration
 
+    SecretsManagerConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretARN, location_name: "SecretARN"))
+    SecretsManagerConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    SecretsManagerConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "Enabled"))
+    SecretsManagerConfiguration.struct_class = Types::SecretsManagerConfiguration
+
     SecurityGroupIdList.member = Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace)
 
     Serializer.add_member(:parquet_ser_de, Shapes::ShapeRef.new(shape: ParquetSerDe, location_name: "ParquetSerDe"))
@@ -842,19 +893,95 @@ module Aws::Firehose
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
 
+    SnowflakeDestinationConfiguration.add_member(:account_url, Shapes::ShapeRef.new(shape: SnowflakeAccountUrl, required: true, location_name: "AccountUrl"))
+    SnowflakeDestinationConfiguration.add_member(:private_key, Shapes::ShapeRef.new(shape: SnowflakePrivateKey, location_name: "PrivateKey"))
+    SnowflakeDestinationConfiguration.add_member(:key_passphrase, Shapes::ShapeRef.new(shape: SnowflakeKeyPassphrase, location_name: "KeyPassphrase"))
+    SnowflakeDestinationConfiguration.add_member(:user, Shapes::ShapeRef.new(shape: SnowflakeUser, location_name: "User"))
+    SnowflakeDestinationConfiguration.add_member(:database, Shapes::ShapeRef.new(shape: SnowflakeDatabase, required: true, location_name: "Database"))
+    SnowflakeDestinationConfiguration.add_member(:schema, Shapes::ShapeRef.new(shape: SnowflakeSchema, required: true, location_name: "Schema"))
+    SnowflakeDestinationConfiguration.add_member(:table, Shapes::ShapeRef.new(shape: SnowflakeTable, required: true, location_name: "Table"))
+    SnowflakeDestinationConfiguration.add_member(:snowflake_role_configuration, Shapes::ShapeRef.new(shape: SnowflakeRoleConfiguration, location_name: "SnowflakeRoleConfiguration"))
+    SnowflakeDestinationConfiguration.add_member(:data_loading_option, Shapes::ShapeRef.new(shape: SnowflakeDataLoadingOption, location_name: "DataLoadingOption"))
+    SnowflakeDestinationConfiguration.add_member(:meta_data_column_name, Shapes::ShapeRef.new(shape: SnowflakeMetaDataColumnName, location_name: "MetaDataColumnName"))
+    SnowflakeDestinationConfiguration.add_member(:content_column_name, Shapes::ShapeRef.new(shape: SnowflakeContentColumnName, location_name: "ContentColumnName"))
+    SnowflakeDestinationConfiguration.add_member(:snowflake_vpc_configuration, Shapes::ShapeRef.new(shape: SnowflakeVpcConfiguration, location_name: "SnowflakeVpcConfiguration"))
+    SnowflakeDestinationConfiguration.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    SnowflakeDestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    SnowflakeDestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    SnowflakeDestinationConfiguration.add_member(:retry_options, Shapes::ShapeRef.new(shape: SnowflakeRetryOptions, location_name: "RetryOptions"))
+    SnowflakeDestinationConfiguration.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: SnowflakeS3BackupMode, location_name: "S3BackupMode"))
+    SnowflakeDestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, required: true, location_name: "S3Configuration"))
+    SnowflakeDestinationConfiguration.add_member(:secrets_manager_configuration, Shapes::ShapeRef.new(shape: SecretsManagerConfiguration, location_name: "SecretsManagerConfiguration"))
+    SnowflakeDestinationConfiguration.struct_class = Types::SnowflakeDestinationConfiguration
+
+    SnowflakeDestinationDescription.add_member(:account_url, Shapes::ShapeRef.new(shape: SnowflakeAccountUrl, location_name: "AccountUrl"))
+    SnowflakeDestinationDescription.add_member(:user, Shapes::ShapeRef.new(shape: SnowflakeUser, location_name: "User"))
+    SnowflakeDestinationDescription.add_member(:database, Shapes::ShapeRef.new(shape: SnowflakeDatabase, location_name: "Database"))
+    SnowflakeDestinationDescription.add_member(:schema, Shapes::ShapeRef.new(shape: SnowflakeSchema, location_name: "Schema"))
+    SnowflakeDestinationDescription.add_member(:table, Shapes::ShapeRef.new(shape: SnowflakeTable, location_name: "Table"))
+    SnowflakeDestinationDescription.add_member(:snowflake_role_configuration, Shapes::ShapeRef.new(shape: SnowflakeRoleConfiguration, location_name: "SnowflakeRoleConfiguration"))
+    SnowflakeDestinationDescription.add_member(:data_loading_option, Shapes::ShapeRef.new(shape: SnowflakeDataLoadingOption, location_name: "DataLoadingOption"))
+    SnowflakeDestinationDescription.add_member(:meta_data_column_name, Shapes::ShapeRef.new(shape: SnowflakeMetaDataColumnName, location_name: "MetaDataColumnName"))
+    SnowflakeDestinationDescription.add_member(:content_column_name, Shapes::ShapeRef.new(shape: SnowflakeContentColumnName, location_name: "ContentColumnName"))
+    SnowflakeDestinationDescription.add_member(:snowflake_vpc_configuration, Shapes::ShapeRef.new(shape: SnowflakeVpcConfiguration, location_name: "SnowflakeVpcConfiguration"))
+    SnowflakeDestinationDescription.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    SnowflakeDestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    SnowflakeDestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    SnowflakeDestinationDescription.add_member(:retry_options, Shapes::ShapeRef.new(shape: SnowflakeRetryOptions, location_name: "RetryOptions"))
+    SnowflakeDestinationDescription.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: SnowflakeS3BackupMode, location_name: "S3BackupMode"))
+    SnowflakeDestinationDescription.add_member(:s3_destination_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3DestinationDescription"))
+    SnowflakeDestinationDescription.add_member(:secrets_manager_configuration, Shapes::ShapeRef.new(shape: SecretsManagerConfiguration, location_name: "SecretsManagerConfiguration"))
+    SnowflakeDestinationDescription.struct_class = Types::SnowflakeDestinationDescription
+
+    SnowflakeDestinationUpdate.add_member(:account_url, Shapes::ShapeRef.new(shape: SnowflakeAccountUrl, location_name: "AccountUrl"))
+    SnowflakeDestinationUpdate.add_member(:private_key, Shapes::ShapeRef.new(shape: SnowflakePrivateKey, location_name: "PrivateKey"))
+    SnowflakeDestinationUpdate.add_member(:key_passphrase, Shapes::ShapeRef.new(shape: SnowflakeKeyPassphrase, location_name: "KeyPassphrase"))
+    SnowflakeDestinationUpdate.add_member(:user, Shapes::ShapeRef.new(shape: SnowflakeUser, location_name: "User"))
+    SnowflakeDestinationUpdate.add_member(:database, Shapes::ShapeRef.new(shape: SnowflakeDatabase, location_name: "Database"))
+    SnowflakeDestinationUpdate.add_member(:schema, Shapes::ShapeRef.new(shape: SnowflakeSchema, location_name: "Schema"))
+    SnowflakeDestinationUpdate.add_member(:table, Shapes::ShapeRef.new(shape: SnowflakeTable, location_name: "Table"))
+    SnowflakeDestinationUpdate.add_member(:snowflake_role_configuration, Shapes::ShapeRef.new(shape: SnowflakeRoleConfiguration, location_name: "SnowflakeRoleConfiguration"))
+    SnowflakeDestinationUpdate.add_member(:data_loading_option, Shapes::ShapeRef.new(shape: SnowflakeDataLoadingOption, location_name: "DataLoadingOption"))
+    SnowflakeDestinationUpdate.add_member(:meta_data_column_name, Shapes::ShapeRef.new(shape: SnowflakeMetaDataColumnName, location_name: "MetaDataColumnName"))
+    SnowflakeDestinationUpdate.add_member(:content_column_name, Shapes::ShapeRef.new(shape: SnowflakeContentColumnName, location_name: "ContentColumnName"))
+    SnowflakeDestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    SnowflakeDestinationUpdate.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    SnowflakeDestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    SnowflakeDestinationUpdate.add_member(:retry_options, Shapes::ShapeRef.new(shape: SnowflakeRetryOptions, location_name: "RetryOptions"))
+    SnowflakeDestinationUpdate.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: SnowflakeS3BackupMode, location_name: "S3BackupMode"))
+    SnowflakeDestinationUpdate.add_member(:s3_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3Update"))
+    SnowflakeDestinationUpdate.add_member(:secrets_manager_configuration, Shapes::ShapeRef.new(shape: SecretsManagerConfiguration, location_name: "SecretsManagerConfiguration"))
+    SnowflakeDestinationUpdate.struct_class = Types::SnowflakeDestinationUpdate
+
+    SnowflakeRetryOptions.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: SnowflakeRetryDurationInSeconds, location_name: "DurationInSeconds"))
+    SnowflakeRetryOptions.struct_class = Types::SnowflakeRetryOptions
+
+    SnowflakeRoleConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Enabled"))
+    SnowflakeRoleConfiguration.add_member(:snowflake_role, Shapes::ShapeRef.new(shape: SnowflakeRole, location_name: "SnowflakeRole"))
+    SnowflakeRoleConfiguration.struct_class = Types::SnowflakeRoleConfiguration
+
+    SnowflakeVpcConfiguration.add_member(:private_link_vpce_id, Shapes::ShapeRef.new(shape: SnowflakePrivateLinkVpceId, required: true, location_name: "PrivateLinkVpceId"))
+    SnowflakeVpcConfiguration.struct_class = Types::SnowflakeVpcConfiguration
+
     SourceDescription.add_member(:kinesis_stream_source_description, Shapes::ShapeRef.new(shape: KinesisStreamSourceDescription, location_name: "KinesisStreamSourceDescription"))
     SourceDescription.add_member(:msk_source_description, Shapes::ShapeRef.new(shape: MSKSourceDescription, location_name: "MSKSourceDescription"))
     SourceDescription.struct_class = Types::SourceDescription
 
+    SplunkBufferingHints.add_member(:interval_in_seconds, Shapes::ShapeRef.new(shape: SplunkBufferingIntervalInSeconds, location_name: "IntervalInSeconds"))
+    SplunkBufferingHints.add_member(:size_in_m_bs, Shapes::ShapeRef.new(shape: SplunkBufferingSizeInMBs, location_name: "SizeInMBs"))
+    SplunkBufferingHints.struct_class = Types::SplunkBufferingHints
+
     SplunkDestinationConfiguration.add_member(:hec_endpoint, Shapes::ShapeRef.new(shape: HECEndpoint, required: true, location_name: "HECEndpoint"))
     SplunkDestinationConfiguration.add_member(:hec_endpoint_type, Shapes::ShapeRef.new(shape: HECEndpointType, required: true, location_name: "HECEndpointType"))
-    SplunkDestinationConfiguration.add_member(:hec_token, Shapes::ShapeRef.new(shape: HECToken, required: true, location_name: "HECToken"))
+    SplunkDestinationConfiguration.add_member(:hec_token, Shapes::ShapeRef.new(shape: HECToken, location_name: "HECToken"))
     SplunkDestinationConfiguration.add_member(:hec_acknowledgment_timeout_in_seconds, Shapes::ShapeRef.new(shape: HECAcknowledgmentTimeoutInSeconds, location_name: "HECAcknowledgmentTimeoutInSeconds"))
     SplunkDestinationConfiguration.add_member(:retry_options, Shapes::ShapeRef.new(shape: SplunkRetryOptions, location_name: "RetryOptions"))
     SplunkDestinationConfiguration.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: SplunkS3BackupMode, location_name: "S3BackupMode"))
     SplunkDestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, required: true, location_name: "S3Configuration"))
     SplunkDestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     SplunkDestinationConfiguration.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    SplunkDestinationConfiguration.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: SplunkBufferingHints, location_name: "BufferingHints"))
+    SplunkDestinationConfiguration.add_member(:secrets_manager_configuration, Shapes::ShapeRef.new(shape: SecretsManagerConfiguration, location_name: "SecretsManagerConfiguration"))
     SplunkDestinationConfiguration.struct_class = Types::SplunkDestinationConfiguration
 
     SplunkDestinationDescription.add_member(:hec_endpoint, Shapes::ShapeRef.new(shape: HECEndpoint, location_name: "HECEndpoint"))
@@ -866,6 +993,8 @@ module Aws::Firehose
     SplunkDestinationDescription.add_member(:s3_destination_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3DestinationDescription"))
     SplunkDestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     SplunkDestinationDescription.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    SplunkDestinationDescription.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: SplunkBufferingHints, location_name: "BufferingHints"))
+    SplunkDestinationDescription.add_member(:secrets_manager_configuration, Shapes::ShapeRef.new(shape: SecretsManagerConfiguration, location_name: "SecretsManagerConfiguration"))
     SplunkDestinationDescription.struct_class = Types::SplunkDestinationDescription
 
     SplunkDestinationUpdate.add_member(:hec_endpoint, Shapes::ShapeRef.new(shape: HECEndpoint, location_name: "HECEndpoint"))
@@ -877,6 +1006,8 @@ module Aws::Firehose
     SplunkDestinationUpdate.add_member(:s3_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3Update"))
     SplunkDestinationUpdate.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     SplunkDestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    SplunkDestinationUpdate.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: SplunkBufferingHints, location_name: "BufferingHints"))
+    SplunkDestinationUpdate.add_member(:secrets_manager_configuration, Shapes::ShapeRef.new(shape: SecretsManagerConfiguration, location_name: "SecretsManagerConfiguration"))
     SplunkDestinationUpdate.struct_class = Types::SplunkDestinationUpdate
 
     SplunkRetryOptions.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: SplunkRetryDurationInSeconds, location_name: "DurationInSeconds"))
@@ -926,6 +1057,7 @@ module Aws::Firehose
     UpdateDestinationInput.add_member(:splunk_destination_update, Shapes::ShapeRef.new(shape: SplunkDestinationUpdate, location_name: "SplunkDestinationUpdate"))
     UpdateDestinationInput.add_member(:http_endpoint_destination_update, Shapes::ShapeRef.new(shape: HttpEndpointDestinationUpdate, location_name: "HttpEndpointDestinationUpdate"))
     UpdateDestinationInput.add_member(:amazon_open_search_serverless_destination_update, Shapes::ShapeRef.new(shape: AmazonOpenSearchServerlessDestinationUpdate, location_name: "AmazonOpenSearchServerlessDestinationUpdate"))
+    UpdateDestinationInput.add_member(:snowflake_destination_update, Shapes::ShapeRef.new(shape: SnowflakeDestinationUpdate, location_name: "SnowflakeDestinationUpdate"))
     UpdateDestinationInput.struct_class = Types::UpdateDestinationInput
 
     UpdateDestinationOutput.struct_class = Types::UpdateDestinationOutput
@@ -952,6 +1084,7 @@ module Aws::Firehose
         "endpointPrefix" => "firehose",
         "jsonVersion" => "1.1",
         "protocol" => "json",
+        "protocols" => ["json"],
         "serviceAbbreviation" => "Firehose",
         "serviceFullName" => "Amazon Kinesis Firehose",
         "serviceId" => "Firehose",
@@ -1019,6 +1152,7 @@ module Aws::Firehose
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidKMSResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSourceException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
@@ -1031,6 +1165,7 @@ module Aws::Firehose
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidKMSResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSourceException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 

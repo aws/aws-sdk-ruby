@@ -1,6 +1,126 @@
 Unreleased Changes
 ------------------
 
+1.180.0 (2024-06-20)
+------------------
+
+* Feature - Fix Glue paginators for Jobs, JobRuns, Triggers, Blueprints and Workflows.
+
+1.179.0 (2024-06-17)
+------------------
+
+* Feature - This release introduces a new feature, Usage profiles. Usage profiles allow the AWS Glue admin to create different profiles for various classes of users within the account, enforcing limits and defaults for jobs and sessions.
+
+1.178.0 (2024-06-13)
+------------------
+
+* Feature - This release adds support for configuration of evaluation method for composite rules in Glue Data Quality rulesets.
+
+1.177.0 (2024-06-06)
+------------------
+
+* Feature - This release adds support for creating and updating Glue Data Catalog Views.
+
+1.176.0 (2024-06-05)
+------------------
+
+* Feature - AWS Glue now supports native SaaS connectivity: Salesforce connector available now
+
+1.175.0 (2024-05-29)
+------------------
+
+* Feature - Add optional field JobMode to CreateJob and UpdateJob APIs.
+
+1.174.0 (2024-05-21)
+------------------
+
+* Feature - Add Maintenance window to CreateJob and UpdateJob APIs and JobRun response. Add a new Job Run State for EXPIRED.
+
+1.173.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.172.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.171.0 (2024-04-19)
+------------------
+
+* Feature - Adding RowFilter in the response for GetUnfilteredTableMetadata API
+
+1.170.0 (2024-04-12)
+------------------
+
+* Feature - Modifying request for GetUnfilteredTableMetadata for view-related fields.
+
+1.169.0 (2024-04-02)
+------------------
+
+* Feature - Adding View related fields to responses of read-only Table APIs.
+
+1.168.0 (2024-02-05)
+------------------
+
+* Feature - Introduce Catalog Encryption Role within Glue Data Catalog Settings. Introduce SASL/PLAIN as an authentication method for Glue Kafka connections
+
+1.167.0 (2024-01-31)
+------------------
+
+* Feature - Update page size limits for GetJobRuns and GetTriggers APIs.
+
+1.166.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.165.0 (2023-12-22)
+------------------
+
+* Feature - This release adds additional configurations for Query Session Context on the following APIs: GetUnfilteredTableMetadata, GetUnfilteredPartitionMetadata, GetUnfilteredPartitionsMetadata.
+
+1.164.0 (2023-11-30)
+------------------
+
+* Feature - Adds observation and analyzer support to the GetDataQualityResult and BatchGetDataQualityResult APIs.
+
+1.163.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.162.0 (2023-11-27)
+------------------
+
+* Feature - add observations support to DQ CodeGen config model + update document for connectiontypes supported by ConnectorData entities
+
+1.161.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.160.0 (2023-11-16)
+------------------
+
+* Feature - Introduces new column statistics APIs to support statistics generation for tables within the Glue Data Catalog.
+
+1.159.0 (2023-11-14)
+------------------
+
+* Feature - Introduces new storage optimization APIs to support automatic compaction of Apache Iceberg tables.
+
+1.158.0 (2023-11-02)
+------------------
+
+* Feature - This release introduces Google BigQuery Source and Target in AWS Glue CodeGenConfigurationNode.
+
+1.157.0 (2023-10-12)
+------------------
+
+* Feature - Extending version control support to GitLab and Bitbucket from AWSGlue
+
 1.156.0 (2023-09-27)
 ------------------
 

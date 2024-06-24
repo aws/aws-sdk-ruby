@@ -150,13 +150,57 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the ConfigurationSet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/AssociateProtectConfigurationRequest AWS API Documentation
+    #
+    class AssociateProtectConfigurationRequest < Struct.new(
+      :protect_configuration_id,
+      :configuration_set_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_set_arn
+    #   The Amazon Resource Name (ARN) of the configuration set.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the ConfigurationSet.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/AssociateProtectConfigurationResult AWS API Documentation
+    #
+    class AssociateProtectConfigurationResult < Struct.new(
+      :configuration_set_arn,
+      :configuration_set_name,
+      :protect_configuration_arn,
+      :protect_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the destination configuration to use when publishing message
     # sending events.
     #
     # @!attribute [rw] iam_role_arn
-    #   The Amazon Resource Name (ARN) of an Amazon Identity and Access
-    #   Management (IAM) role that is able to write event data to an Amazon
-    #   CloudWatch destination.
+    #   The Amazon Resource Name (ARN) of an Identity and Access Management
+    #   role that is able to write event data to an Amazon CloudWatch
+    #   destination.
     #   @return [String]
     #
     # @!attribute [rw] log_group_arn
@@ -227,6 +271,10 @@ module Aws::PinpointSMSVoiceV2
     #   [1]: https://www.epochconverter.com/
     #   @return [Time]
     #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ConfigurationSetInformation AWS API Documentation
     #
     class ConfigurationSetInformation < Struct.new(
@@ -235,7 +283,8 @@ module Aws::PinpointSMSVoiceV2
       :event_destinations,
       :default_message_type,
       :default_sender_id,
-      :created_timestamp)
+      :created_timestamp,
+      :protect_configuration_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -348,11 +397,15 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] matching_event_types
     #   An array of event types that determine which events to log. If
     #   "ALL" is used, then Amazon Pinpoint logs every event type.
+    #
+    #   <note markdown="1"> The `TEXT_SENT` event type is not supported.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] cloud_watch_logs_destination
     #   An object that contains information about an event destination for
-    #   logging to Amazon CloudWatch logs.
+    #   logging to Amazon CloudWatch Logs.
     #   @return [Types::CloudWatchLogsDestination]
     #
     # @!attribute [rw] kinesis_firehose_destination
@@ -555,6 +608,11 @@ module Aws::PinpointSMSVoiceV2
     #   The Amazon Resource Name (ARN) of the two way channel.
     #   @return [String]
     #
+    # @!attribute [rw] two_way_channel_role
+    #   An optional IAM Role Arn for a service to assume, to be able to post
+    #   inbound SMS messages.
+    #   @return [String]
+    #
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   By default this is set to false. When an end recipient sends a
     #   message that begins with HELP or STOP to one of your dedicated
@@ -598,12 +656,515 @@ module Aws::PinpointSMSVoiceV2
       :message_type,
       :two_way_enabled,
       :two_way_channel_arn,
+      :two_way_channel_role,
       :self_managed_opt_outs_enabled,
       :opt_out_list_name,
       :shared_routes_enabled,
       :deletion_protection_enabled,
       :tags,
       :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   When set to true deletion protection is enabled. By default this is
+    #   set to false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   An array of key and value pair tags that are associated with the
+    #   resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateProtectConfigurationRequest AWS API Documentation
+    #
+    class CreateProtectConfigurationRequest < Struct.new(
+      :client_token,
+      :deletion_protection_enabled,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the protect configuration was created, in [UNIX epoch
+    #   time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] account_default
+    #   This is true if the protect configuration is set as your account
+    #   default protect configuration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   When set to true deletion protection is enabled. By default this is
+    #   set to false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   An array of key and value pair tags that are associated with the
+    #   resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateProtectConfigurationResult AWS API Documentation
+    #
+    class CreateProtectConfigurationResult < Struct.new(
+      :protect_configuration_arn,
+      :protect_configuration_id,
+      :created_timestamp,
+      :account_default,
+      :deletion_protection_enabled,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The unique identifier for the origination identity. For example this
+    #   could be a **PhoneNumberId** or **SenderId**.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateRegistrationAssociationRequest AWS API Documentation
+    #
+    class CreateRegistrationAssociationRequest < Struct.new(
+      :registration_id,
+      :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_arn
+    #   The Amazon Resource Name (ARN) for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_type
+    #   The type of registration form. The list of **RegistrationTypes** can
+    #   be found using the DescribeRegistrationTypeDefinitions action.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the origination identity that is
+    #   associated with the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The unique identifier for the origination identity. For example this
+    #   could be a **PhoneNumberId** or **SenderId**.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The registration type or origination identity type.
+    #   @return [String]
+    #
+    # @!attribute [rw] iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the
+    #   country or region.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number associated with the registration in E.164 format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateRegistrationAssociationResult AWS API Documentation
+    #
+    class CreateRegistrationAssociationResult < Struct.new(
+      :registration_arn,
+      :registration_id,
+      :registration_type,
+      :resource_arn,
+      :resource_id,
+      :resource_type,
+      :iso_country_code,
+      :phone_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachment_body
+    #   The registration file to upload. The maximum file size is 1MiB and
+    #   valid file extensions are PDF, JPEG and PNG.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_url
+    #   A URL to the required registration file. For example, you can
+    #   provide the S3 object URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of tags (key and value pairs) to associate with the
+    #   registration attachment.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateRegistrationAttachmentRequest AWS API Documentation
+    #
+    class CreateRegistrationAttachmentRequest < Struct.new(
+      :attachment_body,
+      :attachment_url,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_attachment_arn
+    #   The Amazon Resource Name (ARN) for the registration attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_attachment_id
+    #   The unique identifier for the registration attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_status
+    #   The status of the registration attachment.
+    #
+    #   * `UPLOAD_IN_PROGRESS` The attachment is being uploaded.
+    #
+    #   * `UPLOAD_COMPLETE` The attachment has been uploaded.
+    #
+    #   * `UPLOAD_FAILED` The attachment failed to uploaded.
+    #
+    #   * `DELETED` The attachment has been deleted..
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of tags (key and value pairs) to associate with the
+    #   registration attachment.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the registration attachment was created, in [UNIX
+    #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateRegistrationAttachmentResult AWS API Documentation
+    #
+    class CreateRegistrationAttachmentResult < Struct.new(
+      :registration_attachment_arn,
+      :registration_attachment_id,
+      :attachment_status,
+      :tags,
+      :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_type
+    #   The type of registration form to create. The list of
+    #   **RegistrationTypes** can be found using the
+    #   DescribeRegistrationTypeDefinitions action.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of tags (key and value pairs) to associate with the
+    #   registration.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateRegistrationRequest AWS API Documentation
+    #
+    class CreateRegistrationRequest < Struct.new(
+      :registration_type,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_arn
+    #   The Amazon Resource Name (ARN) for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_type
+    #   The type of registration form to create. The list of
+    #   **RegistrationTypes** can be found using the
+    #   DescribeRegistrationTypeDefinitions action.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_status
+    #   The status of the registration.
+    #
+    #   * `CREATED`: Your registration is created but not submitted.
+    #
+    #   * `SUBMITTED`: Your registration has been submitted and is awaiting
+    #     review.
+    #
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
+    #
+    #   * `PROVISIONING`: Your registration has been approved and your
+    #     origination identity is being created.
+    #
+    #   * `COMPLETE`: Your registration has been approved and and your
+    #     origination identity has been created.
+    #
+    #   * `REQUIRES_UPDATES`: You must fix your registration and resubmit
+    #     it.
+    #
+    #   * `CLOSED`: The phone number or sender ID has been deleted and you
+    #     must also delete the registration for the number.
+    #
+    #   * `DELETED`: The registration has been deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version_number
+    #   The current version number of the registration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_attributes
+    #   Metadata about a given registration which is specific to that
+    #   registration type.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   An array of tags (key and value pairs) to associate with the
+    #   registration.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the registration was created, in [UNIX epoch time][1]
+    #   format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateRegistrationResult AWS API Documentation
+    #
+    class CreateRegistrationResult < Struct.new(
+      :registration_arn,
+      :registration_id,
+      :registration_type,
+      :registration_status,
+      :current_version_number,
+      :additional_attributes,
+      :tags,
+      :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateRegistrationVersionRequest AWS API Documentation
+    #
+    class CreateRegistrationVersionRequest < Struct.new(
+      :registration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_arn
+    #   The Amazon Resource Name (ARN) for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The new version number of the registration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] registration_version_status
+    #   The status of the registration.
+    #
+    #   * `DRAFT`: The initial status of a registration version after it’s
+    #     created.
+    #
+    #   * `SUBMITTED`: Your registration has been submitted.
+    #
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
+    #
+    #   * `APPROVED`: Your registration has been approved.
+    #
+    #   * `DISCARDED`: You've abandon this version of their registration to
+    #     start over with a new version.
+    #
+    #   * `DENIED`: You must fix your registration and resubmit it.
+    #
+    #   * `REVOKED`: Your previously approved registration has been revoked.
+    #
+    #   * `ARCHIVED`: Your previously approved registration version moves
+    #     into this status when a more recently submitted version is
+    #     approved.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_version_status_history
+    #   A **RegistrationVersionStatusHistory** object that contains
+    #   timestamps for the registration.
+    #   @return [Types::RegistrationVersionStatusHistory]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateRegistrationVersionResult AWS API Documentation
+    #
+    class CreateRegistrationVersionResult < Struct.new(
+      :registration_arn,
+      :registration_id,
+      :version_number,
+      :registration_version_status,
+      :registration_version_status_history)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_phone_number
+    #   The verified destination phone number, in E.164 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of tags (key and value pairs) to associate with the
+    #   destination number.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateVerifiedDestinationNumberRequest AWS API Documentation
+    #
+    class CreateVerifiedDestinationNumberRequest < Struct.new(
+      :destination_phone_number,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] verified_destination_number_arn
+    #   The Amazon Resource Name (ARN) for the verified destination phone
+    #   number.
+    #   @return [String]
+    #
+    # @!attribute [rw] verified_destination_number_id
+    #   The unique identifier for the verified destination phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_phone_number
+    #   The verified destination phone number, in E.164 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the verified destination phone number.
+    #
+    #   * `PENDING`: The phone number hasn't been verified yet.
+    #
+    #   * `VERIFIED`: The phone number is verified and can receive messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An array of tags (key and value pairs) to associate with the
+    #   destination number.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the verified phone number was created, in [UNIX epoch
+    #   time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/CreateVerifiedDestinationNumberResult AWS API Documentation
+    #
+    class CreateVerifiedDestinationNumberResult < Struct.new(
+      :verified_destination_number_arn,
+      :verified_destination_number_id,
+      :destination_phone_number,
+      :status,
+      :tags,
+      :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteAccountDefaultProtectConfigurationRequest AWS API Documentation
+    #
+    class DeleteAccountDefaultProtectConfigurationRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] default_protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the account default protect
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_protect_configuration_id
+    #   The unique identifier of the account default protect configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteAccountDefaultProtectConfigurationResult AWS API Documentation
+    #
+    class DeleteAccountDefaultProtectConfigurationResult < Struct.new(
+      :default_protect_configuration_arn,
+      :default_protect_configuration_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -834,6 +1395,24 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteMediaMessageSpendLimitOverrideRequest AWS API Documentation
+    #
+    class DeleteMediaMessageSpendLimitOverrideRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] monthly_limit
+    #   The current monthly limit, in US dollars.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteMediaMessageSpendLimitOverrideResult AWS API Documentation
+    #
+    class DeleteMediaMessageSpendLimitOverrideResult < Struct.new(
+      :monthly_limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] opt_out_list_name
     #   The OptOutListName or OptOutListArn of the OptOutList to delete. You
     #   can use DescribeOptOutLists to find the values for OptOutListName
@@ -975,6 +1554,11 @@ module Aws::PinpointSMSVoiceV2
     #   The Amazon Resource Name (ARN) of the TwoWayChannel.
     #   @return [String]
     #
+    # @!attribute [rw] two_way_channel_role
+    #   An optional IAM Role Arn for a service to assume, to be able to post
+    #   inbound SMS messages.
+    #   @return [String]
+    #
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   By default this is set to false. When an end recipient sends a
     #   message that begins with HELP or STOP to one of your dedicated
@@ -1010,9 +1594,272 @@ module Aws::PinpointSMSVoiceV2
       :message_type,
       :two_way_enabled,
       :two_way_channel_arn,
+      :two_way_channel_role,
       :self_managed_opt_outs_enabled,
       :opt_out_list_name,
       :shared_routes_enabled,
+      :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteProtectConfigurationRequest AWS API Documentation
+    #
+    class DeleteProtectConfigurationRequest < Struct.new(
+      :protect_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the protect configuration was created, in [UNIX epoch
+    #   time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] account_default
+    #   This is true if the protect configuration is set as your account
+    #   default protect configuration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   The status of deletion protection for the protect configuration.
+    #   When set to true deletion protection is enabled. By default this is
+    #   set to false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteProtectConfigurationResult AWS API Documentation
+    #
+    class DeleteProtectConfigurationResult < Struct.new(
+      :protect_configuration_arn,
+      :protect_configuration_id,
+      :created_timestamp,
+      :account_default,
+      :deletion_protection_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_attachment_id
+    #   The unique identifier for the registration attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteRegistrationAttachmentRequest AWS API Documentation
+    #
+    class DeleteRegistrationAttachmentRequest < Struct.new(
+      :registration_attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_attachment_arn
+    #   The Amazon Resource Name (ARN) for the registration attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_attachment_id
+    #   The unique identifier for the registration attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_status
+    #   The status of the registration attachment.
+    #
+    #   * `UPLOAD_IN_PROGRESS` The attachment is being uploaded.
+    #
+    #   * `UPLOAD_COMPLETE` The attachment has been uploaded.
+    #
+    #   * `UPLOAD_FAILED` The attachment failed to uploaded.
+    #
+    #   * `DELETED` The attachment has been deleted..
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_upload_error_reason
+    #   The error message if the upload failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the registration attachment was created, in [UNIX
+    #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteRegistrationAttachmentResult AWS API Documentation
+    #
+    class DeleteRegistrationAttachmentResult < Struct.new(
+      :registration_attachment_arn,
+      :registration_attachment_id,
+      :attachment_status,
+      :attachment_upload_error_reason,
+      :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_path
+    #   The path to the registration form field. You can use
+    #   DescribeRegistrationFieldDefinitions for a list of **FieldPaths**.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteRegistrationFieldValueRequest AWS API Documentation
+    #
+    class DeleteRegistrationFieldValueRequest < Struct.new(
+      :registration_id,
+      :field_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_arn
+    #   The Amazon Resource Name (ARN) for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the registration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] field_path
+    #   The path to the registration form field.
+    #   @return [String]
+    #
+    # @!attribute [rw] select_choices
+    #   An array of values for the form field.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] text_value
+    #   The text data for a free form field.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_attachment_id
+    #   The unique identifier for the registration attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteRegistrationFieldValueResult AWS API Documentation
+    #
+    class DeleteRegistrationFieldValueResult < Struct.new(
+      :registration_arn,
+      :registration_id,
+      :version_number,
+      :field_path,
+      :select_choices,
+      :text_value,
+      :registration_attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteRegistrationRequest AWS API Documentation
+    #
+    class DeleteRegistrationRequest < Struct.new(
+      :registration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_arn
+    #   The Amazon Resource Name (ARN) for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_type
+    #   The type of registration form. The list of **RegistrationTypes** can
+    #   be found using the DescribeRegistrationTypeDefinitions action.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_status
+    #   The status of the registration.
+    #
+    #   * `CREATED`: Your registration is created but not submitted.
+    #
+    #   * `SUBMITTED`: Your registration has been submitted and is awaiting
+    #     review.
+    #
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
+    #
+    #   * `PROVISIONING`: Your registration has been approved and your
+    #     origination identity is being created.
+    #
+    #   * `COMPLETE`: Your registration has been approved and and your
+    #     origination identity has been created.
+    #
+    #   * `REQUIRES_UPDATES`: You must fix your registration and resubmit
+    #     it.
+    #
+    #   * `CLOSED`: The phone number or sender ID has been deleted and you
+    #     must also delete the registration for the number.
+    #
+    #   * `DELETED`: The registration has been deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version_number
+    #   The current version number of the registration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] approved_version_number
+    #   The version number of the registration that was approved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] latest_denied_version_number
+    #   The latest version number of the registration that was denied.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_attributes
+    #   Metadata about a given registration which is specific to that
+    #   registration type.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the registration was created, in [UNIX epoch time][1]
+    #   format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteRegistrationResult AWS API Documentation
+    #
+    class DeleteRegistrationResult < Struct.new(
+      :registration_arn,
+      :registration_id,
+      :registration_type,
+      :registration_status,
+      :current_version_number,
+      :approved_version_number,
+      :latest_denied_version_number,
+      :additional_attributes,
       :created_timestamp)
       SENSITIVE = []
       include Aws::Structure
@@ -1032,6 +1879,51 @@ module Aws::PinpointSMSVoiceV2
     #
     class DeleteTextMessageSpendLimitOverrideResult < Struct.new(
       :monthly_limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] verified_destination_number_id
+    #   The unique identifier for the verified destination phone number.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteVerifiedDestinationNumberRequest AWS API Documentation
+    #
+    class DeleteVerifiedDestinationNumberRequest < Struct.new(
+      :verified_destination_number_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] verified_destination_number_arn
+    #   The Amazon Resource Name (ARN) for the verified destination phone
+    #   number.
+    #   @return [String]
+    #
+    # @!attribute [rw] verified_destination_number_id
+    #   The unique identifier for the verified destination phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_phone_number
+    #   The verified destination phone number, in E.164 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the destination phone number was created, in [UNIX
+    #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DeleteVerifiedDestinationNumberResult AWS API Documentation
+    #
+    class DeleteVerifiedDestinationNumberResult < Struct.new(
+      :verified_destination_number_arn,
+      :verified_destination_number_id,
+      :destination_phone_number,
+      :created_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1444,6 +2336,442 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] protect_configuration_ids
+    #   An array of protect configuration identifiers to search for.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   An array of ProtectConfigurationFilter objects to filter the
+    #   results.
+    #   @return [Array<Types::ProtectConfigurationFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per each request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeProtectConfigurationsRequest AWS API Documentation
+    #
+    class DescribeProtectConfigurationsRequest < Struct.new(
+      :protect_configuration_ids,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configurations
+    #   An array of ProtectConfigurationInformation objects that contain the
+    #   details for the request.
+    #   @return [Array<Types::ProtectConfigurationInformation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeProtectConfigurationsResult AWS API Documentation
+    #
+    class DescribeProtectConfigurationsResult < Struct.new(
+      :protect_configurations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_attachment_ids
+    #   The unique identifier of registration attachments to find. This is
+    #   an array of **RegistrationAttachmentId**.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   An array of RegistrationAttachmentFilter objects to filter the
+    #   results.
+    #   @return [Array<Types::RegistrationAttachmentFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per each request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationAttachmentsRequest AWS API Documentation
+    #
+    class DescribeRegistrationAttachmentsRequest < Struct.new(
+      :registration_attachment_ids,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_attachments
+    #   An array of **RegistrationAttachments** objects that contain the
+    #   details for the requested registration attachments.
+    #   @return [Array<Types::RegistrationAttachmentsInformation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationAttachmentsResult AWS API Documentation
+    #
+    class DescribeRegistrationAttachmentsResult < Struct.new(
+      :registration_attachments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_type
+    #   The type of registration form. The list of **RegistrationTypes** can
+    #   be found using the DescribeRegistrationTypeDefinitions action.
+    #   @return [String]
+    #
+    # @!attribute [rw] section_path
+    #   The path to the section of the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_paths
+    #   An array of paths to the registration form field.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per each request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationFieldDefinitionsRequest AWS API Documentation
+    #
+    class DescribeRegistrationFieldDefinitionsRequest < Struct.new(
+      :registration_type,
+      :section_path,
+      :field_paths,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_type
+    #   The type of registration form. The list of **RegistrationTypes** can
+    #   be found using the DescribeRegistrationTypeDefinitions action.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_field_definitions
+    #   An array of RegistrationFieldDefinitions objects that contain the
+    #   details for the requested fields.
+    #   @return [Array<Types::RegistrationFieldDefinition>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationFieldDefinitionsResult AWS API Documentation
+    #
+    class DescribeRegistrationFieldDefinitionsResult < Struct.new(
+      :registration_type,
+      :registration_field_definitions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the registration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] section_path
+    #   The path to the section of the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_paths
+    #   An array of paths to the registration form field.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per each request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationFieldValuesRequest AWS API Documentation
+    #
+    class DescribeRegistrationFieldValuesRequest < Struct.new(
+      :registration_id,
+      :version_number,
+      :section_path,
+      :field_paths,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_arn
+    #   The Amazon Resource Name (ARN) for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The current version of the registration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] registration_field_values
+    #   An array of RegistrationFieldValues objects that contain the values
+    #   for the requested registration.
+    #   @return [Array<Types::RegistrationFieldValueInformation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationFieldValuesResult AWS API Documentation
+    #
+    class DescribeRegistrationFieldValuesResult < Struct.new(
+      :registration_arn,
+      :registration_id,
+      :version_number,
+      :registration_field_values,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_type
+    #   The type of registration form. The list of **RegistrationTypes** can
+    #   be found using the DescribeRegistrationTypeDefinitions action.
+    #   @return [String]
+    #
+    # @!attribute [rw] section_paths
+    #   An array of paths for the registration form section.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per each request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationSectionDefinitionsRequest AWS API Documentation
+    #
+    class DescribeRegistrationSectionDefinitionsRequest < Struct.new(
+      :registration_type,
+      :section_paths,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_type
+    #   The type of registration form. The list of **RegistrationTypes** can
+    #   be found using the DescribeRegistrationTypeDefinitions action.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_section_definitions
+    #   An array of RegistrationSectionDefinition objects.
+    #   @return [Array<Types::RegistrationSectionDefinition>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationSectionDefinitionsResult AWS API Documentation
+    #
+    class DescribeRegistrationSectionDefinitionsResult < Struct.new(
+      :registration_type,
+      :registration_section_definitions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_types
+    #   The type of registration form. The list of **RegistrationTypes** can
+    #   be found using the DescribeRegistrationTypeDefinitions action.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   An array of RegistrationFilter objects to filter the results.
+    #   @return [Array<Types::RegistrationTypeFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per each request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationTypeDefinitionsRequest AWS API Documentation
+    #
+    class DescribeRegistrationTypeDefinitionsRequest < Struct.new(
+      :registration_types,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_type_definitions
+    #   The type of registration form. The list of **RegistrationTypes** can
+    #   be found using the DescribeRegistrationTypeDefinitions action.
+    #   @return [Array<Types::RegistrationTypeDefinition>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationTypeDefinitionsResult AWS API Documentation
+    #
+    class DescribeRegistrationTypeDefinitionsResult < Struct.new(
+      :registration_type_definitions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_numbers
+    #   An array of registration version numbers.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] filters
+    #   An array of RegistrationVersionFilter objects to filter the results.
+    #   @return [Array<Types::RegistrationVersionFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per each request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationVersionsRequest AWS API Documentation
+    #
+    class DescribeRegistrationVersionsRequest < Struct.new(
+      :registration_id,
+      :version_numbers,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_arn
+    #   The Amazon Resource Name (ARN) for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_versions
+    #   An array of RegistrationVersions objects.
+    #   @return [Array<Types::RegistrationVersionInformation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationVersionsResult AWS API Documentation
+    #
+    class DescribeRegistrationVersionsResult < Struct.new(
+      :registration_arn,
+      :registration_id,
+      :registration_versions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_ids
+    #   An array of unique identifiers for each registration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   An array of RegistrationFilter objects to filter the results.
+    #   @return [Array<Types::RegistrationFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per each request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationsRequest AWS API Documentation
+    #
+    class DescribeRegistrationsRequest < Struct.new(
+      :registration_ids,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registrations
+    #   An array of RegistrationInformation objects.
+    #   @return [Array<Types::RegistrationInformation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeRegistrationsResult AWS API Documentation
+    #
+    class DescribeRegistrationsResult < Struct.new(
+      :registrations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] sender_ids
     #   An array of SenderIdAndCountry objects to search for.
     #   @return [Array<Types::SenderIdAndCountry>]
@@ -1528,6 +2856,58 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] verified_destination_number_ids
+    #   An array of VerifiedDestinationNumberid to retreive.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destination_phone_numbers
+    #   An array of verified destination phone number, in E.164 format.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   An array of VerifiedDestinationNumberFilter objects to filter the
+    #   results.
+    #   @return [Array<Types::VerifiedDestinationNumberFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per each request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeVerifiedDestinationNumbersRequest AWS API Documentation
+    #
+    class DescribeVerifiedDestinationNumbersRequest < Struct.new(
+      :verified_destination_number_ids,
+      :destination_phone_numbers,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] verified_destination_numbers
+    #   An array of VerifiedDestinationNumberInformation objects
+    #   @return [Array<Types::VerifiedDestinationNumberInformation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DescribeVerifiedDestinationNumbersResult AWS API Documentation
+    #
+    class DescribeVerifiedDestinationNumbersResult < Struct.new(
+      :verified_destination_numbers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] pool_id
     #   The unique identifier for the pool to disassociate with the
     #   origination identity. This value can be either the PoolId or
@@ -1602,11 +2982,121 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the ConfigurationSet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DisassociateProtectConfigurationRequest AWS API Documentation
+    #
+    class DisassociateProtectConfigurationRequest < Struct.new(
+      :protect_configuration_id,
+      :configuration_set_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_set_arn
+    #   The Amazon Resource Name (ARN) of the configuration set.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the ConfigurationSet.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DisassociateProtectConfigurationResult AWS API Documentation
+    #
+    class DisassociateProtectConfigurationResult < Struct.new(
+      :configuration_set_arn,
+      :configuration_set_name,
+      :protect_configuration_arn,
+      :protect_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DiscardRegistrationVersionRequest AWS API Documentation
+    #
+    class DiscardRegistrationVersionRequest < Struct.new(
+      :registration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_arn
+    #   The Amazon Resource Name (ARN) for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the registration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] registration_version_status
+    #   The status of the registration version.
+    #
+    #   * `DRAFT`: The initial status of a registration version after it’s
+    #     created.
+    #
+    #   * `SUBMITTED`: Your registration has been submitted.
+    #
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
+    #
+    #   * `APPROVED`: Your registration has been approved.
+    #
+    #   * `DISCARDED`: You've abandon this version of their registration to
+    #     start over with a new version.
+    #
+    #   * `DENIED`: You must fix your registration and resubmit it.
+    #
+    #   * `REVOKED`: Your previously approved registration has been revoked.
+    #
+    #   * `ARCHIVED`: Your previously approved registration version moves
+    #     into this status when a more recently submitted version is
+    #     approved.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_version_status_history
+    #   The **RegistrationVersionStatusHistory** object contains the time
+    #   stamps for when the reservations status changes.
+    #   @return [Types::RegistrationVersionStatusHistory]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/DiscardRegistrationVersionResult AWS API Documentation
+    #
+    class DiscardRegistrationVersionResult < Struct.new(
+      :registration_arn,
+      :registration_id,
+      :version_number,
+      :registration_version_status,
+      :registration_version_status_history)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about an event destination.
     #
     # Event destinations are associated with configuration sets, which
-    # enable you to publish message sending events to Amazon CloudWatch,
-    # Amazon Kinesis Data Firehose, or Amazon SNS.
+    # enable you to publish message sending events to CloudWatch, Kinesis
+    # Data Firehose, or Amazon SNS.
     #
     # @!attribute [rw] event_destination_name
     #   The name of the EventDestination.
@@ -1618,6 +3108,10 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] matching_event_types
     #   An array of event types that determine which events to log.
+    #
+    #   <note markdown="1"> The `TEXT_SENT` event type is not supported.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] cloud_watch_logs_destination
@@ -1644,6 +3138,60 @@ module Aws::PinpointSMSVoiceV2
       :cloud_watch_logs_destination,
       :kinesis_firehose_destination,
       :sns_destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_capability
+    #   The capability type to return the CountryRuleSet for. Valid values
+    #   are `SMS`, `VOICE`, or `MMS`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/GetProtectConfigurationCountryRuleSetRequest AWS API Documentation
+    #
+    class GetProtectConfigurationCountryRuleSetRequest < Struct.new(
+      :protect_configuration_id,
+      :number_capability)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_capability
+    #   The capability type associated with the returned
+    #   ProtectConfigurationCountryRuleSetInformation objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] country_rule_set
+    #   A map of ProtectConfigurationCountryRuleSetInformation objects that
+    #   contain the details for the requested NumberCapability. The Key is
+    #   the two-letter ISO country code. For a list of supported ISO country
+    #   codes, see [Supported countries and regions (SMS channel)][1] in the
+    #   Amazon Pinpoint SMS user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html
+    #   @return [Hash<String,Types::ProtectConfigurationCountryRuleSetInformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/GetProtectConfigurationCountryRuleSetResult AWS API Documentation
+    #
+    class GetProtectConfigurationCountryRuleSetResult < Struct.new(
+      :protect_configuration_arn,
+      :protect_configuration_id,
+      :number_capability,
+      :country_rule_set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1712,7 +3260,7 @@ module Aws::PinpointSMSVoiceV2
     end
 
     # Contains the delivery stream Amazon Resource Name (ARN), and the ARN
-    # of the Identity and Access Management (IAM) role associated with an
+    # of the Identity and Access Management (IAM) role associated with a
     # Kinesis Data Firehose event destination.
     #
     # Event destinations, such as Kinesis Data Firehose, are associated with
@@ -1720,8 +3268,8 @@ module Aws::PinpointSMSVoiceV2
     # events.
     #
     # @!attribute [rw] iam_role_arn
-    #   The ARN of an Amazon Identity and Access Management (IAM) role that
-    #   is able to write event data to an Amazon Firehose destination.
+    #   The ARN of an Identity and Access Management role that is able to
+    #   write event data to an Amazon Kinesis Data Firehose destination.
     #   @return [String]
     #
     # @!attribute [rw] delivery_stream_arn
@@ -1790,6 +3338,69 @@ module Aws::PinpointSMSVoiceV2
       :pool_arn,
       :pool_id,
       :origination_identities,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   An array of RegistrationAssociationFilter to apply to the results
+    #   that are returned.
+    #   @return [Array<Types::RegistrationAssociationFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per each request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ListRegistrationAssociationsRequest AWS API Documentation
+    #
+    class ListRegistrationAssociationsRequest < Struct.new(
+      :registration_id,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_arn
+    #   The Amazon Resource Name (ARN) for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_type
+    #   The type of registration form. The list of **RegistrationTypes** can
+    #   be found using the DescribeRegistrationTypeDefinitions action.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_associations
+    #   An array of RegistrationAssociationMetadata objects.
+    #   @return [Array<Types::RegistrationAssociationMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results. You
+    #   don't need to supply a value for this field in the initial request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ListRegistrationAssociationsResult AWS API Documentation
+    #
+    class ListRegistrationAssociationsResult < Struct.new(
+      :registration_arn,
+      :registration_id,
+      :registration_type,
+      :registration_associations,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1923,13 +3534,18 @@ module Aws::PinpointSMSVoiceV2
     #   voice calls or both.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] phone_number
+    #   The phone number in E.164 format.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/OriginationIdentityMetadata AWS API Documentation
     #
     class OriginationIdentityMetadata < Struct.new(
       :origination_identity_arn,
       :origination_identity,
       :iso_country_code,
-      :number_capabilities)
+      :number_capabilities,
+      :phone_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1953,7 +3569,8 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
-    # The information for a phone number in an Amazon Web Services account.
+    # The information for a phone number, in E.164 format, in an Amazon Web
+    # Services account.
     #
     # @!attribute [rw] phone_number_arn
     #   The Amazon Resource Name (ARN) associated with the phone number.
@@ -2005,6 +3622,11 @@ module Aws::PinpointSMSVoiceV2
     #   The Amazon Resource Name (ARN) of the two way channel.
     #   @return [String]
     #
+    # @!attribute [rw] two_way_channel_role
+    #   An optional IAM Role Arn for a service to assume, to be able to post
+    #   inbound SMS messages.
+    #   @return [String]
+    #
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   When set to false an end recipient sends a message that begins with
     #   HELP or STOP to one of your dedicated numbers, Amazon Pinpoint
@@ -2031,6 +3653,10 @@ module Aws::PinpointSMSVoiceV2
     #   The unique identifier of the pool associated with the phone number.
     #   @return [String]
     #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
     # @!attribute [rw] created_timestamp
     #   The time when the phone number was created, in [UNIX epoch time][1]
     #   format.
@@ -2054,10 +3680,12 @@ module Aws::PinpointSMSVoiceV2
       :monthly_leasing_price,
       :two_way_enabled,
       :two_way_channel_arn,
+      :two_way_channel_role,
       :self_managed_opt_outs_enabled,
       :opt_out_list_name,
       :deletion_protection_enabled,
       :pool_id,
+      :registration_id,
       :created_timestamp)
       SENSITIVE = []
       include Aws::Structure
@@ -2111,6 +3739,11 @@ module Aws::PinpointSMSVoiceV2
     #   The Amazon Resource Name (ARN) of the two way channel.
     #   @return [String]
     #
+    # @!attribute [rw] two_way_channel_role
+    #   An optional IAM Role Arn for a service to assume, to be able to post
+    #   inbound SMS messages.
+    #   @return [String]
+    #
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   When set to false, an end recipient sends a message that begins with
     #   HELP or STOP to one of your dedicated numbers, Amazon Pinpoint
@@ -2161,6 +3794,7 @@ module Aws::PinpointSMSVoiceV2
       :message_type,
       :two_way_enabled,
       :two_way_channel_arn,
+      :two_way_channel_role,
       :self_managed_opt_outs_enabled,
       :opt_out_list_name,
       :shared_routes_enabled,
@@ -2190,6 +3824,82 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # The types of statuses that can be used.
+    #
+    # @!attribute [rw] protect_status
+    #   The types of protection that can be used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ProtectConfigurationCountryRuleSetInformation AWS API Documentation
+    #
+    class ProtectConfigurationCountryRuleSetInformation < Struct.new(
+      :protect_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter definition for filtering protect configurations that meet a
+    # specified criteria.
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array of values to filter for.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ProtectConfigurationFilter AWS API Documentation
+    #
+    class ProtectConfigurationFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information on the specified protect configuration.
+    #
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the protect configuration was created, in [UNIX epoch
+    #   time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] account_default
+    #   This is true if the protect configuration is set as your account
+    #   default protect configuration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   The status of deletion protection for the protect configuration.
+    #   When set to true deletion protection is enabled. By default this is
+    #   set to false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ProtectConfigurationInformation AWS API Documentation
+    #
+    class ProtectConfigurationInformation < Struct.new(
+      :protect_configuration_arn,
+      :protect_configuration_id,
+      :created_timestamp,
+      :account_default,
+      :deletion_protection_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] origination_identity
     #   The origination identity to use such as a PhoneNumberId,
     #   PhoneNumberArn, SenderId or SenderIdArn. You can use
@@ -2204,16 +3914,16 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] keyword_message
     #   The message associated with the keyword.
+    #   @return [String]
+    #
+    # @!attribute [rw] keyword_action
+    #   The action to perform for the new keyword when it is received.
     #
     #   * AUTOMATIC\_RESPONSE: A message is sent to the recipient.
     #
     #   * OPT\_OUT: Keeps the recipient from receiving future messages.
     #
     #   * OPT\_IN: The recipient wants to receive future messages.
-    #   @return [String]
-    #
-    # @!attribute [rw] keyword_action
-    #   The action to perform for the new keyword when it is received.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/PutKeywordRequest AWS API Documentation
@@ -2314,6 +4024,767 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_path
+    #   The path to the registration form field. You can use
+    #   DescribeRegistrationFieldDefinitions for a list of **FieldPaths**.
+    #   @return [String]
+    #
+    # @!attribute [rw] select_choices
+    #   An array of values for the form field.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] text_value
+    #   The text data for a free form field.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_attachment_id
+    #   The unique identifier for the registration attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/PutRegistrationFieldValueRequest AWS API Documentation
+    #
+    class PutRegistrationFieldValueRequest < Struct.new(
+      :registration_id,
+      :field_path,
+      :select_choices,
+      :text_value,
+      :registration_attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_arn
+    #   The Amazon Resource Name (ARN) for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the registration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] field_path
+    #   The path to the registration form field. You can use
+    #   DescribeRegistrationFieldDefinitions for a list of **FieldPaths**.
+    #   @return [String]
+    #
+    # @!attribute [rw] select_choices
+    #   An array of values for the form field.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] text_value
+    #   The text data for a free form field.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_attachment_id
+    #   The unique identifier for the registration attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/PutRegistrationFieldValueResult AWS API Documentation
+    #
+    class PutRegistrationFieldValueResult < Struct.new(
+      :registration_arn,
+      :registration_id,
+      :version_number,
+      :field_path,
+      :select_choices,
+      :text_value,
+      :registration_attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter definition for filtering registrations that meets a
+    # specified criteria.
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array of values to filter for.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationAssociationFilter AWS API Documentation
+    #
+    class RegistrationAssociationFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata for the origination identity that is associated with the
+    # registration.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the origination identity that is
+    #   associated with the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The unique identifier for the origination identity. For example this
+    #   could be a **PhoneNumberId** or **SenderId**.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The origination identity type.
+    #   @return [String]
+    #
+    # @!attribute [rw] iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the
+    #   country or region.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number associated with the registration in E.164 format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationAssociationMetadata AWS API Documentation
+    #
+    class RegistrationAssociationMetadata < Struct.new(
+      :resource_arn,
+      :resource_id,
+      :resource_type,
+      :iso_country_code,
+      :phone_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter definition for filtering registration attachments that
+    # meets a specified criteria.
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array of values to filter on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationAttachmentFilter AWS API Documentation
+    #
+    class RegistrationAttachmentFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information on the specified registration attachments.
+    #
+    # @!attribute [rw] registration_attachment_arn
+    #   The Amazon Resource Name (ARN) for the registration attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_attachment_id
+    #   The unique identifier for the registration attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_status
+    #   The status of the registration attachment.
+    #
+    #   * `UPLOAD_IN_PROGRESS` The attachment is being uploaded.
+    #
+    #   * `UPLOAD_COMPLETE` The attachment has been uploaded.
+    #
+    #   * `UPLOAD_FAILED` The attachment failed to uploaded.
+    #
+    #   * `DELETED` The attachment has been deleted..
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_upload_error_reason
+    #   A description of why the upload didn't successfully complete.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the registration attachment was created, in [UNIX
+    #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationAttachmentsInformation AWS API Documentation
+    #
+    class RegistrationAttachmentsInformation < Struct.new(
+      :registration_attachment_arn,
+      :registration_attachment_id,
+      :attachment_status,
+      :attachment_upload_error_reason,
+      :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the reason a registration was rejected.
+    #
+    # @!attribute [rw] reason
+    #   The reason a registration was rejected.
+    #   @return [String]
+    #
+    # @!attribute [rw] short_description
+    #   A short description of the rejection reason.
+    #   @return [String]
+    #
+    # @!attribute [rw] long_description
+    #   A long description of the rejection reason.
+    #   @return [String]
+    #
+    # @!attribute [rw] documentation_title
+    #   The title of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] documentation_link
+    #   The link to the document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationDeniedReasonInformation AWS API Documentation
+    #
+    class RegistrationDeniedReasonInformation < Struct.new(
+      :reason,
+      :short_description,
+      :long_description,
+      :documentation_title,
+      :documentation_link)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a description of the specified field.
+    #
+    # @!attribute [rw] section_path
+    #   The section path of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_path
+    #   The path to the registration form field. You can use
+    #   DescribeRegistrationFieldDefinitions for a list of **FieldPaths**.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_type
+    #   The type of field.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_requirement
+    #   Specifies if the field for the registration form is required,
+    #   conditional or optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] select_validation
+    #   The validation rules for a select field.
+    #   @return [Types::SelectValidation]
+    #
+    # @!attribute [rw] text_validation
+    #   The validation rules for a text field.
+    #   @return [Types::TextValidation]
+    #
+    # @!attribute [rw] display_hints
+    #   An array of RegistrationFieldDisplayHints objects for the field.
+    #   @return [Types::RegistrationFieldDisplayHints]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationFieldDefinition AWS API Documentation
+    #
+    class RegistrationFieldDefinition < Struct.new(
+      :section_path,
+      :field_path,
+      :field_type,
+      :field_requirement,
+      :select_validation,
+      :text_validation,
+      :display_hints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides help information on the registration field.
+    #
+    # @!attribute [rw] title
+    #   The title of the display hint.
+    #   @return [String]
+    #
+    # @!attribute [rw] short_description
+    #   A short description of the display hint.
+    #   @return [String]
+    #
+    # @!attribute [rw] long_description
+    #   A full description of the display hint.
+    #   @return [String]
+    #
+    # @!attribute [rw] documentation_title
+    #   The title of the document the display hint is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] documentation_link
+    #   The link to the document the display hint is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] select_option_descriptions
+    #   An array of SelectOptionDescription objects.
+    #   @return [Array<Types::SelectOptionDescription>]
+    #
+    # @!attribute [rw] text_validation_description
+    #   The validation rules for the text field.
+    #   @return [String]
+    #
+    # @!attribute [rw] example_text_value
+    #   Example text of what the value of a field should contain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationFieldDisplayHints AWS API Documentation
+    #
+    class RegistrationFieldDisplayHints < Struct.new(
+      :title,
+      :short_description,
+      :long_description,
+      :documentation_title,
+      :documentation_link,
+      :select_option_descriptions,
+      :text_validation_description,
+      :example_text_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the values of the specified field.
+    #
+    # @!attribute [rw] field_path
+    #   The path to the registration form field. You can use
+    #   DescribeRegistrationFieldDefinitions for a list of **FieldPaths**.
+    #   @return [String]
+    #
+    # @!attribute [rw] select_choices
+    #   An array of values for the form field.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] text_value
+    #   The text data for a free form field.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_attachment_id
+    #   The unique identifier for the registration attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] denied_reason
+    #   A description of why the registration was denied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationFieldValueInformation AWS API Documentation
+    #
+    class RegistrationFieldValueInformation < Struct.new(
+      :field_path,
+      :select_choices,
+      :text_value,
+      :registration_attachment_id,
+      :denied_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter definition for filtering registrations that meets a
+    # specified criteria.
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array of values to filter on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationFilter AWS API Documentation
+    #
+    class RegistrationFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the requested registration.
+    #
+    # @!attribute [rw] registration_arn
+    #   The Amazon Resource Name (ARN) for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_type
+    #   The type of registration form. The list of **RegistrationTypes** can
+    #   be found using the DescribeRegistrationTypeDefinitions action.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_status
+    #   The status of the registration.
+    #
+    #   * `CREATED`: Your registration is created but not submitted.
+    #
+    #   * `SUBMITTED`: Your registration has been submitted and is awaiting
+    #     review.
+    #
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
+    #
+    #   * `PROVISIONING`: Your registration has been approved and your
+    #     origination identity is being created.
+    #
+    #   * `COMPLETE`: Your registration has been approved and and your
+    #     origination identity has been created.
+    #
+    #   * `REQUIRES_UPDATES`: You must fix your registration and resubmit
+    #     it.
+    #
+    #   * `CLOSED`: The phone number or sender ID has been deleted and you
+    #     must also delete the registration for the number.
+    #
+    #   * `DELETED`: The registration has been deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_version_number
+    #   The current version number of the registration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] approved_version_number
+    #   The version number of the registration that was approved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] latest_denied_version_number
+    #   The latest version number of the registration that was denied.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_attributes
+    #   Metadata about a given registration which is specific to that
+    #   registration type.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the registration was created, in [UNIX epoch time][1]
+    #   format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationInformation AWS API Documentation
+    #
+    class RegistrationInformation < Struct.new(
+      :registration_arn,
+      :registration_id,
+      :registration_type,
+      :registration_status,
+      :current_version_number,
+      :approved_version_number,
+      :latest_denied_version_number,
+      :additional_attributes,
+      :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information on the specified section definition.
+    #
+    # @!attribute [rw] section_path
+    #   The path to the section of the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_hints
+    #   The path to the section of the registration.
+    #   @return [Types::RegistrationSectionDisplayHints]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationSectionDefinition AWS API Documentation
+    #
+    class RegistrationSectionDefinition < Struct.new(
+      :section_path,
+      :display_hints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides help information on the registration section.
+    #
+    # @!attribute [rw] title
+    #   The title of the display hint.
+    #   @return [String]
+    #
+    # @!attribute [rw] short_description
+    #   A short description of the display hint.
+    #   @return [String]
+    #
+    # @!attribute [rw] long_description
+    #   A full description of the display hint.
+    #   @return [String]
+    #
+    # @!attribute [rw] documentation_title
+    #   The title of the document the display hint is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] documentation_link
+    #   The link to the document the display hint is associated with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationSectionDisplayHints AWS API Documentation
+    #
+    class RegistrationSectionDisplayHints < Struct.new(
+      :title,
+      :short_description,
+      :long_description,
+      :documentation_title,
+      :documentation_link)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information on the supported registration type.
+    #
+    # @!attribute [rw] registration_type
+    #   The type of registration form. The list of **RegistrationTypes** can
+    #   be found using the DescribeRegistrationTypeDefinitions action.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_associations
+    #   The supported association behavior for the registration type.
+    #   @return [Array<Types::SupportedAssociation>]
+    #
+    # @!attribute [rw] display_hints
+    #   Provides help information on the registration.
+    #   @return [Types::RegistrationTypeDisplayHints]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationTypeDefinition AWS API Documentation
+    #
+    class RegistrationTypeDefinition < Struct.new(
+      :registration_type,
+      :supported_associations,
+      :display_hints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides help information on the registration type.
+    #
+    # @!attribute [rw] title
+    #   The title of the display hint.
+    #   @return [String]
+    #
+    # @!attribute [rw] short_description
+    #   A short description of the display hint.
+    #   @return [String]
+    #
+    # @!attribute [rw] long_description
+    #   A full description of the display hint.
+    #   @return [String]
+    #
+    # @!attribute [rw] documentation_title
+    #   The title of the document the display hint is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] documentation_link
+    #   The link to the document the display hint is associated with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationTypeDisplayHints AWS API Documentation
+    #
+    class RegistrationTypeDisplayHints < Struct.new(
+      :title,
+      :short_description,
+      :long_description,
+      :documentation_title,
+      :documentation_link)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter definition for filtering registration types that meets a
+    # specified criteria.
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array of values to filter on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationTypeFilter AWS API Documentation
+    #
+    class RegistrationTypeFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter definition for filtering registration versions that meets a
+    # specified criteria.
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array of values to filter on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationVersionFilter AWS API Documentation
+    #
+    class RegistrationVersionFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the specified version of the registration.
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the registration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] registration_version_status
+    #   The status of the registration.
+    #
+    #   * `DRAFT`: The initial status of a registration version after it’s
+    #     created.
+    #
+    #   * `SUBMITTED`: Your registration has been submitted.
+    #
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
+    #
+    #   * `APPROVED`: Your registration has been approved.
+    #
+    #   * `DISCARDED`: You've abandon this version of their registration to
+    #     start over with a new version.
+    #
+    #   * `DENIED`: You must fix your registration and resubmit it.
+    #
+    #   * `REVOKED`: Your previously approved registration has been revoked.
+    #
+    #   * `ARCHIVED`: Your previously approved registration version moves
+    #     into this status when a more recently submitted version is
+    #     approved.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_version_status_history
+    #   The **RegistrationVersionStatusHistory** object contains the time
+    #   stamps for when the reservations status changes.
+    #   @return [Types::RegistrationVersionStatusHistory]
+    #
+    # @!attribute [rw] denied_reasons
+    #   An array of RegistrationDeniedReasonInformation objects.
+    #   @return [Array<Types::RegistrationDeniedReasonInformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationVersionInformation AWS API Documentation
+    #
+    class RegistrationVersionInformation < Struct.new(
+      :version_number,
+      :registration_version_status,
+      :registration_version_status_history,
+      :denied_reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The **RegistrationVersionStatusHistory** object contains the time
+    # stamps for when the reservations status changes.
+    #
+    # @!attribute [rw] draft_timestamp
+    #   The time when the registration was in the draft state, in [UNIX
+    #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] submitted_timestamp
+    #   The time when the registration was in the submitted state, in [UNIX
+    #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] reviewing_timestamp
+    #   The time when the registration was in the reviewing state, in [UNIX
+    #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] approved_timestamp
+    #   The time when the registration was in the approved state, in [UNIX
+    #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] discarded_timestamp
+    #   The time when the registration was in the discarded state, in [UNIX
+    #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] denied_timestamp
+    #   The time when the registration was in the denied state, in [UNIX
+    #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] revoked_timestamp
+    #   The time when the registration was in the revoked state, in [UNIX
+    #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] archived_timestamp
+    #   The time when the registration was in the archived state, in [UNIX
+    #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RegistrationVersionStatusHistory AWS API Documentation
+    #
+    class RegistrationVersionStatusHistory < Struct.new(
+      :draft_timestamp,
+      :submitted_timestamp,
+      :reviewing_timestamp,
+      :approved_timestamp,
+      :discarded_timestamp,
+      :denied_timestamp,
+      :revoked_timestamp,
+      :archived_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] phone_number_id
     #   The PhoneNumberId or PhoneNumberArn of the phone number to release.
     #   You can use DescribePhoneNumbers to get the values for PhoneNumberId
@@ -2375,6 +4846,11 @@ module Aws::PinpointSMSVoiceV2
     #   The Amazon Resource Name (ARN) of the TwoWayChannel.
     #   @return [String]
     #
+    # @!attribute [rw] two_way_channel_role
+    #   An optional IAM Role Arn for a service to assume, to be able to post
+    #   inbound SMS messages.
+    #   @return [String]
+    #
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   By default this is set to false. When an end recipient sends a
     #   message that begins with HELP or STOP to one of your dedicated
@@ -2387,6 +4863,10 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] opt_out_list_name
     #   The name of the OptOutList that was associated with the phone
     #   number.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
     #   @return [String]
     #
     # @!attribute [rw] created_timestamp
@@ -2412,9 +4892,74 @@ module Aws::PinpointSMSVoiceV2
       :monthly_leasing_price,
       :two_way_enabled,
       :two_way_channel_arn,
+      :two_way_channel_role,
       :self_managed_opt_outs_enabled,
       :opt_out_list_name,
+      :registration_id,
       :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sender_id
+    #   The sender ID to release.
+    #   @return [String]
+    #
+    # @!attribute [rw] iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the
+    #   country or region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ReleaseSenderIdRequest AWS API Documentation
+    #
+    class ReleaseSenderIdRequest < Struct.new(
+      :sender_id,
+      :iso_country_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sender_id_arn
+    #   The Amazon Resource Name (ARN) associated with the SenderId.
+    #   @return [String]
+    #
+    # @!attribute [rw] sender_id
+    #   The sender ID that was released.
+    #   @return [String]
+    #
+    # @!attribute [rw] iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the
+    #   country or region.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_types
+    #   The type of message. Valid values are TRANSACTIONAL for messages
+    #   that are critical or time-sensitive and PROMOTIONAL for messages
+    #   that aren't critical or time-sensitive.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] monthly_leasing_price
+    #   The monthly price, in US dollars, to lease the sender ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] registered
+    #   True if the sender ID is registered.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ReleaseSenderIdResult AWS API Documentation
+    #
+    class ReleaseSenderIdResult < Struct.new(
+      :sender_id_arn,
+      :sender_id,
+      :iso_country_code,
+      :message_types,
+      :monthly_leasing_price,
+      :registered,
+      :registration_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2441,7 +4986,7 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] opt_out_list_name
     #   The name of the OptOutList to associate with the phone number. You
-    #   can use the OutOutListName or OptPutListArn.
+    #   can use the OptOutListName or OptOutListArn.
     #   @return [String]
     #
     # @!attribute [rw] pool_id
@@ -2540,6 +5085,11 @@ module Aws::PinpointSMSVoiceV2
     #   The ARN used to identify the two way channel.
     #   @return [String]
     #
+    # @!attribute [rw] two_way_channel_role
+    #   An optional IAM Role Arn for a service to assume, to be able to post
+    #   inbound SMS messages.
+    #   @return [String]
+    #
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   By default this is set to false. When an end recipient sends a
     #   message that begins with HELP or STOP to one of your dedicated
@@ -2561,6 +5111,10 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] pool_id
     #   The unique identifier of the pool associated with the phone number
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2591,12 +5145,114 @@ module Aws::PinpointSMSVoiceV2
       :monthly_leasing_price,
       :two_way_enabled,
       :two_way_channel_arn,
+      :two_way_channel_role,
       :self_managed_opt_outs_enabled,
       :opt_out_list_name,
       :deletion_protection_enabled,
       :pool_id,
+      :registration_id,
       :tags,
       :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sender_id
+    #   The sender ID string to request.
+    #   @return [String]
+    #
+    # @!attribute [rw] iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the
+    #   country or region.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_types
+    #   The type of message. Valid values are TRANSACTIONAL for messages
+    #   that are critical or time-sensitive and PROMOTIONAL for messages
+    #   that aren't critical or time-sensitive.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   By default this is set to false. When set to true the sender ID
+    #   can't be deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   An array of tags (key and value pairs) to associate with the sender
+    #   ID.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, a
+    #   randomly generated token is used for the request to ensure
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RequestSenderIdRequest AWS API Documentation
+    #
+    class RequestSenderIdRequest < Struct.new(
+      :sender_id,
+      :iso_country_code,
+      :message_types,
+      :deletion_protection_enabled,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sender_id_arn
+    #   The Amazon Resource Name (ARN) associated with the SenderId.
+    #   @return [String]
+    #
+    # @!attribute [rw] sender_id
+    #   The sender ID that was requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the
+    #   country or region.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_types
+    #   The type of message. Valid values are TRANSACTIONAL for messages
+    #   that are critical or time-sensitive and PROMOTIONAL for messages
+    #   that aren't critical or time-sensitive.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] monthly_leasing_price
+    #   The monthly price, in US dollars, to lease the sender ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   By default this is set to false. When set to true the sender ID
+    #   can't be deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] registered
+    #   True if the sender ID is registered.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags
+    #   An array of tags (key and value pairs) to associate with the sender
+    #   ID.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RequestSenderIdResult AWS API Documentation
+    #
+    class RequestSenderIdResult < Struct.new(
+      :sender_id_arn,
+      :sender_id,
+      :iso_country_code,
+      :message_types,
+      :monthly_leasing_price,
+      :deletion_protection_enabled,
+      :registered,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2624,6 +5280,207 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # A description of each select option.
+    #
+    # @!attribute [rw] option
+    #   The value of the option.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the select option.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the option meaning.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SelectOptionDescription AWS API Documentation
+    #
+    class SelectOptionDescription < Struct.new(
+      :option,
+      :title,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Validation rules for a select field.
+    #
+    # @!attribute [rw] min_choices
+    #   The minimum number of choices for the select.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_choices
+    #   The maximum number of choices for the select.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] options
+    #   An array of strings for the possible selection options.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SelectValidation AWS API Documentation
+    #
+    class SelectValidation < Struct.new(
+      :min_choices,
+      :max_choices,
+      :options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] verified_destination_number_id
+    #   The unique identifier for the verified destination phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] verification_channel
+    #   Choose to send the verification code as an SMS or voice message.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   Choose the language to use for the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] origination_identity
+    #   The origination identity of the message. This can be either the
+    #   PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn,
+    #   PoolId, or PoolArn.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set to use. This can be either the
+    #   ConfigurationSetName or ConfigurationSetArn.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   You can specify custom data in this field. If you do, that data is
+    #   logged to the event destination.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] destination_country_parameters
+    #   This field is used for any country-specific registration
+    #   requirements. Currently, this setting is only used when you send
+    #   messages to recipients in India using a sender ID. For more
+    #   information see [Special requirements for sending SMS messages to
+    #   recipients in India][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendDestinationNumberVerificationCodeRequest AWS API Documentation
+    #
+    class SendDestinationNumberVerificationCodeRequest < Struct.new(
+      :verified_destination_number_id,
+      :verification_channel,
+      :language_code,
+      :origination_identity,
+      :configuration_set_name,
+      :context,
+      :destination_country_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_id
+    #   The unique identifier for the message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendDestinationNumberVerificationCodeResult AWS API Documentation
+    #
+    class SendDestinationNumberVerificationCodeResult < Struct.new(
+      :message_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_phone_number
+    #   The destination phone number in E.164 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] origination_identity
+    #   The origination identity of the message. This can be either the
+    #   PhoneNumber, PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn,
+    #   PoolId, or PoolArn.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_body
+    #   The text body of the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] media_urls
+    #   An array of URLs to each media file to send.
+    #
+    #   The media files have to be stored in a publicly available S3 bucket.
+    #   Supported media file formats are listed in [MMS file types, size and
+    #   character limits][1]. For more information on creating an S3 bucket
+    #   and managing objects, see [Creating a bucket][2] and [Uploading
+    #   objects][3] in the S3 user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/mms-limitations-character.html
+    #   [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html
+    #   [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set to use. This can be either the
+    #   ConfigurationSetName or ConfigurationSetArn.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_price
+    #   The maximum amount that you want to spend, in US dollars, per each
+    #   MMS message.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_to_live
+    #   How long the text message is valid for. By default this is 72 hours.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] context
+    #   You can specify custom data in this field. If you do, that data is
+    #   logged to the event destination.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] dry_run
+    #   When set to true, the message is checked and validated, but isn't
+    #   sent to the end recipient.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier of the protect configuration to use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendMediaMessageRequest AWS API Documentation
+    #
+    class SendMediaMessageRequest < Struct.new(
+      :destination_phone_number,
+      :origination_identity,
+      :message_body,
+      :media_urls,
+      :configuration_set_name,
+      :max_price,
+      :time_to_live,
+      :context,
+      :dry_run,
+      :protect_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message_id
+    #   The unique identifier for the message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendMediaMessageResult AWS API Documentation
+    #
+    class SendMediaMessageResult < Struct.new(
+      :message_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] destination_phone_number
     #   The destination phone number in E.164 format.
     #   @return [String]
@@ -2639,9 +5496,9 @@ module Aws::PinpointSMSVoiceV2
     #   @return [String]
     #
     # @!attribute [rw] message_type
-    #   The type of message. Valid values are TRANSACTIONAL for messages
-    #   that are critical or time-sensitive and PROMOTIONAL for messages
-    #   that aren't critical or time-sensitive.
+    #   The type of message. Valid values are for messages that are critical
+    #   or time-sensitive and PROMOTIONAL for messages that aren't critical
+    #   or time-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] keyword
@@ -2685,6 +5542,10 @@ module Aws::PinpointSMSVoiceV2
     #   sent to the end recipient.
     #   @return [Boolean]
     #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendTextMessageRequest AWS API Documentation
     #
     class SendTextMessageRequest < Struct.new(
@@ -2698,7 +5559,8 @@ module Aws::PinpointSMSVoiceV2
       :time_to_live,
       :context,
       :destination_country_parameters,
-      :dry_run)
+      :dry_run,
+      :protect_configuration_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2776,6 +5638,10 @@ module Aws::PinpointSMSVoiceV2
     #   sent to the end recipient.
     #   @return [Boolean]
     #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SendVoiceMessageRequest AWS API Documentation
     #
     class SendVoiceMessageRequest < Struct.new(
@@ -2788,7 +5654,8 @@ module Aws::PinpointSMSVoiceV2
       :max_price_per_minute,
       :time_to_live,
       :context,
-      :dry_run)
+      :dry_run,
+      :protect_configuration_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2877,6 +5744,19 @@ module Aws::PinpointSMSVoiceV2
     #   The monthly leasing price, in US dollars.
     #   @return [String]
     #
+    # @!attribute [rw] deletion_protection_enabled
+    #   By default this is set to false. When set to true the sender ID
+    #   can't be deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] registered
+    #   True if the sender ID is registered.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SenderIdInformation AWS API Documentation
     #
     class SenderIdInformation < Struct.new(
@@ -2884,7 +5764,10 @@ module Aws::PinpointSMSVoiceV2
       :sender_id,
       :iso_country_code,
       :message_types,
-      :monthly_leasing_price)
+      :monthly_leasing_price,
+      :deletion_protection_enabled,
+      :registered,
+      :registration_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2903,6 +5786,36 @@ module Aws::PinpointSMSVoiceV2
     class ServiceQuotaExceededException < Struct.new(
       :message,
       :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetAccountDefaultProtectConfigurationRequest AWS API Documentation
+    #
+    class SetAccountDefaultProtectConfigurationRequest < Struct.new(
+      :protect_configuration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] default_protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the account default protect
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_protect_configuration_id
+    #   The unique identifier of the account default protect configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetAccountDefaultProtectConfigurationResult AWS API Documentation
+    #
+    class SetAccountDefaultProtectConfigurationResult < Struct.new(
+      :default_protect_configuration_arn,
+      :default_protect_configuration_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2990,6 +5903,30 @@ module Aws::PinpointSMSVoiceV2
       :configuration_set_arn,
       :configuration_set_name,
       :sender_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monthly_limit
+    #   The new monthly limit to enforce on text messages.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetMediaMessageSpendLimitOverrideRequest AWS API Documentation
+    #
+    class SetMediaMessageSpendLimitOverrideRequest < Struct.new(
+      :monthly_limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monthly_limit
+    #   The current monthly limit to enforce on sending text messages.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SetMediaMessageSpendLimitOverrideResult AWS API Documentation
+    #
+    class SetMediaMessageSpendLimitOverrideResult < Struct.new(
+      :monthly_limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3102,6 +6039,127 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SubmitRegistrationVersionRequest AWS API Documentation
+    #
+    class SubmitRegistrationVersionRequest < Struct.new(
+      :registration_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registration_arn
+    #   The Amazon Resource Name (ARN) for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the registration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] registration_version_status
+    #   The status of the registration version.
+    #
+    #   * `DRAFT`: The initial status of a registration version after it’s
+    #     created.
+    #
+    #   * `SUBMITTED`: Your registration has been submitted.
+    #
+    #   * `REVIEWING`: Your registration has been accepted and is being
+    #     reviewed.
+    #
+    #   * `APPROVED`: Your registration has been approved.
+    #
+    #   * `DISCARDED`: You've abandon this version of their registration to
+    #     start over with a new version.
+    #
+    #   * `DENIED`: You must fix your registration and resubmit it.
+    #
+    #   * `REVOKED`: Your previously approved registration has been revoked.
+    #
+    #   * `ARCHIVED`: Your previously approved registration version moves
+    #     into this status when a more recently submitted version is
+    #     approved.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_version_status_history
+    #   The **RegistrationVersionStatusHistory** object contains the time
+    #   stamps for when the reservations status changes.
+    #   @return [Types::RegistrationVersionStatusHistory]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SubmitRegistrationVersionResult AWS API Documentation
+    #
+    class SubmitRegistrationVersionResult < Struct.new(
+      :registration_arn,
+      :registration_id,
+      :version_number,
+      :registration_version_status,
+      :registration_version_status_history)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The processing rules for when a registration can be associated with an
+    # origination identity and disassociated from an origination identity.
+    #
+    # @!attribute [rw] resource_type
+    #   Defines the behavior of when an origination identity and
+    #   registration can be associated with each other.
+    #   @return [String]
+    #
+    # @!attribute [rw] iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the
+    #   country or region.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_behavior
+    #   The association behavior.
+    #
+    #   * `ASSOCIATE_BEFORE_SUBMIT` The origination identity has to be
+    #     supplied when creating a registration.
+    #
+    #   * `ASSOCIATE_ON_APPROVAL` This applies to all short code
+    #     registrations. The short code will be automatically provisioned
+    #     once the registration is approved.
+    #
+    #   * `ASSOCIATE_AFTER_COMPLETE` This applies to phone number
+    #     registrations when you must complete a registration first, then
+    #     associate one or more phone numbers later. For example 10DLC
+    #     campaigns and long codes.
+    #   @return [String]
+    #
+    # @!attribute [rw] disassociation_behavior
+    #   The disassociation behavior.
+    #
+    #   * `DISASSOCIATE_ALL_CLOSES_REGISTRATION` All origination identities
+    #     must be disassociated from the registration before the
+    #     registration can be closed.
+    #
+    #   * `DISASSOCIATE_ALL_ALLOWS_DELETE_REGISTRATION` All origination
+    #     identities must be disassociated from the registration before the
+    #     registration can be deleted.
+    #
+    #   * `DELETE_REGISTRATION_DISASSOCIATES` The registration can be
+    #     deleted and all origination identities will be disasscoiated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SupportedAssociation AWS API Documentation
+    #
+    class SupportedAssociation < Struct.new(
+      :resource_type,
+      :iso_country_code,
+      :association_behavior,
+      :disassociation_behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The list of tags to be added to the specified topic.
     #
     # @!attribute [rw] key
@@ -3142,6 +6200,30 @@ module Aws::PinpointSMSVoiceV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/TagResourceResult AWS API Documentation
     #
     class TagResourceResult < Aws::EmptyStructure; end
+
+    # Validation rules for a text field.
+    #
+    # @!attribute [rw] min_length
+    #   The minimum number of characters for the text field.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_length
+    #   The maximum number of characters for the text field.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pattern
+    #   The regular expression used to validate the text field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/TextValidation AWS API Documentation
+    #
+    class TextValidation < Struct.new(
+      :min_length,
+      :max_length,
+      :pattern)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # An error that occurred because too many requests were sent during a
     # certain amount of time.
@@ -3194,6 +6276,10 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] matching_event_types
     #   An array of event types that determine which events to log.
+    #
+    #   <note markdown="1"> The `TEXT_SENT` event type is not supported.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] cloud_watch_logs_destination
@@ -3263,6 +6349,11 @@ module Aws::PinpointSMSVoiceV2
     #   The Amazon Resource Name (ARN) of the two way channel.
     #   @return [String]
     #
+    # @!attribute [rw] two_way_channel_role
+    #   An optional IAM Role Arn for a service to assume, to be able to post
+    #   inbound SMS messages.
+    #   @return [String]
+    #
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   By default this is set to false. When an end recipient sends a
     #   message that begins with HELP or STOP to one of your dedicated
@@ -3288,6 +6379,7 @@ module Aws::PinpointSMSVoiceV2
       :phone_number_id,
       :two_way_enabled,
       :two_way_channel_arn,
+      :two_way_channel_role,
       :self_managed_opt_outs_enabled,
       :opt_out_list_name,
       :deletion_protection_enabled)
@@ -3344,6 +6436,11 @@ module Aws::PinpointSMSVoiceV2
     #   The Amazon Resource Name (ARN) of the two way channel.
     #   @return [String]
     #
+    # @!attribute [rw] two_way_channel_role
+    #   An optional IAM Role Arn for a service to assume, to be able to post
+    #   inbound SMS messages.
+    #   @return [String]
+    #
     # @!attribute [rw] self_managed_opt_outs_enabled
     #   This is true if self managed opt-out are enabled.
     #   @return [Boolean]
@@ -3355,6 +6452,10 @@ module Aws::PinpointSMSVoiceV2
     # @!attribute [rw] deletion_protection_enabled
     #   When set to true the phone number can't be deleted.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
     #
     # @!attribute [rw] created_timestamp
     #   The time when the phone number was created, in [UNIX epoch time][1]
@@ -3379,9 +6480,11 @@ module Aws::PinpointSMSVoiceV2
       :monthly_leasing_price,
       :two_way_enabled,
       :two_way_channel_arn,
+      :two_way_channel_role,
       :self_managed_opt_outs_enabled,
       :opt_out_list_name,
       :deletion_protection_enabled,
+      :registration_id,
       :created_timestamp)
       SENSITIVE = []
       include Aws::Structure
@@ -3399,6 +6502,11 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] two_way_channel_arn
     #   The Amazon Resource Name (ARN) of the two way channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] two_way_channel_role
+    #   An optional IAM Role Arn for a service to assume, to be able to post
+    #   inbound SMS messages.
     #   @return [String]
     #
     # @!attribute [rw] self_managed_opt_outs_enabled
@@ -3429,6 +6537,7 @@ module Aws::PinpointSMSVoiceV2
       :pool_id,
       :two_way_enabled,
       :two_way_channel_arn,
+      :two_way_channel_role,
       :self_managed_opt_outs_enabled,
       :opt_out_list_name,
       :shared_routes_enabled,
@@ -3460,6 +6569,11 @@ module Aws::PinpointSMSVoiceV2
     #
     # @!attribute [rw] two_way_channel_arn
     #   The Amazon Resource Name (ARN) of the two way channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] two_way_channel_role
+    #   An optional IAM Role Arn for a service to assume, to be able to post
+    #   inbound SMS messages.
     #   @return [String]
     #
     # @!attribute [rw] self_managed_opt_outs_enabled
@@ -3500,11 +6614,203 @@ module Aws::PinpointSMSVoiceV2
       :message_type,
       :two_way_enabled,
       :two_way_channel_arn,
+      :two_way_channel_role,
       :self_managed_opt_outs_enabled,
       :opt_out_list_name,
       :shared_routes_enabled,
       :deletion_protection_enabled,
       :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_capability
+    #   The number capability to apply the CountryRuleSetUpdates updates to.
+    #   @return [String]
+    #
+    # @!attribute [rw] country_rule_set_updates
+    #   A map of ProtectConfigurationCountryRuleSetInformation objects that
+    #   contain the details for the requested NumberCapability. The Key is
+    #   the two-letter ISO country code. For a list of supported ISO country
+    #   codes, see [Supported countries and regions (SMS channel)][1] in the
+    #   Amazon Pinpoint SMS user guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html
+    #   @return [Hash<String,Types::ProtectConfigurationCountryRuleSetInformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateProtectConfigurationCountryRuleSetRequest AWS API Documentation
+    #
+    class UpdateProtectConfigurationCountryRuleSetRequest < Struct.new(
+      :protect_configuration_id,
+      :number_capability,
+      :country_rule_set_updates)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_capability
+    #   The number capability that was updated
+    #   @return [String]
+    #
+    # @!attribute [rw] country_rule_set
+    #   An array of ProtectConfigurationCountryRuleSetInformation containing
+    #   the rules for the NumberCapability.
+    #   @return [Hash<String,Types::ProtectConfigurationCountryRuleSetInformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateProtectConfigurationCountryRuleSetResult AWS API Documentation
+    #
+    class UpdateProtectConfigurationCountryRuleSetResult < Struct.new(
+      :protect_configuration_arn,
+      :protect_configuration_id,
+      :number_capability,
+      :country_rule_set)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   When set to true deletion protection is enabled. By default this is
+    #   set to false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateProtectConfigurationRequest AWS API Documentation
+    #
+    class UpdateProtectConfigurationRequest < Struct.new(
+      :protect_configuration_id,
+      :deletion_protection_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] protect_configuration_arn
+    #   The Amazon Resource Name (ARN) of the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] protect_configuration_id
+    #   The unique identifier for the protect configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the protect configuration was created, in [UNIX epoch
+    #   time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @!attribute [rw] account_default
+    #   This is true if the protect configuration is set as your account
+    #   default protect configuration.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   The status of deletion protection for the protect configuration.
+    #   When set to true deletion protection is enabled. By default this is
+    #   set to false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateProtectConfigurationResult AWS API Documentation
+    #
+    class UpdateProtectConfigurationResult < Struct.new(
+      :protect_configuration_arn,
+      :protect_configuration_id,
+      :created_timestamp,
+      :account_default,
+      :deletion_protection_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sender_id
+    #   The sender ID to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the
+    #   country or region.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   By default this is set to false. When set to true the sender ID
+    #   can't be deleted.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateSenderIdRequest AWS API Documentation
+    #
+    class UpdateSenderIdRequest < Struct.new(
+      :sender_id,
+      :iso_country_code,
+      :deletion_protection_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] sender_id_arn
+    #   The Amazon Resource Name (ARN) associated with the SenderId.
+    #   @return [String]
+    #
+    # @!attribute [rw] sender_id
+    #   The sender ID that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the
+    #   country or region.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_types
+    #   The type of message. Valid values are TRANSACTIONAL for messages
+    #   that are critical or time-sensitive and PROMOTIONAL for messages
+    #   that aren't critical or time-sensitive.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] monthly_leasing_price
+    #   The monthly price, in US dollars, to lease the sender ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection_enabled
+    #   By default this is set to false. When set to true the sender ID
+    #   can't be deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] registered
+    #   True if the sender ID is registered..
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] registration_id
+    #   The unique identifier for the registration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/UpdateSenderIdResult AWS API Documentation
+    #
+    class UpdateSenderIdResult < Struct.new(
+      :sender_id_arn,
+      :sender_id,
+      :iso_country_code,
+      :message_types,
+      :monthly_leasing_price,
+      :deletion_protection_enabled,
+      :registered,
+      :registration_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3548,6 +6854,127 @@ module Aws::PinpointSMSVoiceV2
     class ValidationExceptionField < Struct.new(
       :name,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter definition for filtering verified destination phone numbers
+    # that meets a specified criteria.
+    #
+    # @!attribute [rw] name
+    #   The name of the attribute to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An array of values to filter on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/VerifiedDestinationNumberFilter AWS API Documentation
+    #
+    class VerifiedDestinationNumberFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the requested verified destintion phone
+    # number.
+    #
+    # @!attribute [rw] verified_destination_number_arn
+    #   The Amazon Resource Name (ARN) for the verified destination phone
+    #   number.
+    #   @return [String]
+    #
+    # @!attribute [rw] verified_destination_number_id
+    #   The unique identifier for the verified destination phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_phone_number
+    #   The verified destination phone number, in E.164 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the verified destination phone number.
+    #
+    #   * `PENDING`: The phone number hasn't been verified yet.
+    #
+    #   * `VERIFIED`: The phone number is verified and can receive messages.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the destination phone number was created, in [UNIX
+    #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/VerifiedDestinationNumberInformation AWS API Documentation
+    #
+    class VerifiedDestinationNumberInformation < Struct.new(
+      :verified_destination_number_arn,
+      :verified_destination_number_id,
+      :destination_phone_number,
+      :status,
+      :created_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] verified_destination_number_id
+    #   The unique identifier for the verififed destination phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] verification_code
+    #   The verification code that was received by the verified destination
+    #   phone number.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/VerifyDestinationNumberRequest AWS API Documentation
+    #
+    class VerifyDestinationNumberRequest < Struct.new(
+      :verified_destination_number_id,
+      :verification_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] verified_destination_number_arn
+    #   The Amazon Resource Name (ARN) for the verified destination phone
+    #   number.
+    #   @return [String]
+    #
+    # @!attribute [rw] verified_destination_number_id
+    #   The unique identifier for the verified destination phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_phone_number
+    #   The phone number in E.164 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status for being able to send messages to the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the destination phone number was created, in [UNIX
+    #   epoch time][1] format.
+    #
+    #
+    #
+    #   [1]: https://www.epochconverter.com/
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/VerifyDestinationNumberResult AWS API Documentation
+    #
+    class VerifyDestinationNumberResult < Struct.new(
+      :verified_destination_number_arn,
+      :verified_destination_number_id,
+      :destination_phone_number,
+      :status,
+      :created_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end

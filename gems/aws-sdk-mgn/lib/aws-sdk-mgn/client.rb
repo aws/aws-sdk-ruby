@@ -22,6 +22,7 @@ require 'aws-sdk-core/plugins/endpoint_pattern.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
@@ -72,6 +73,7 @@ module Aws::Mgn
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::ClientMetricsPlugin)
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
@@ -196,10 +198,17 @@ module Aws::Mgn
     #     When set to 'true' the request body will not be compressed
     #     for supported operations.
     #
-    #   @option options [String] :endpoint
-    #     The client endpoint is normally constructed from the `:region`
-    #     option. You should only configure an `:endpoint` when connecting
-    #     to test or custom endpoints. This should be a valid HTTP(S) URI.
+    #   @option options [String, URI::HTTPS, URI::HTTP] :endpoint
+    #     Normally you should not configure the `:endpoint` option
+    #     directly. This is normally constructed from the `:region`
+    #     option. Configuring `:endpoint` is normally reserved for
+    #     connecting to test or custom endpoints. The endpoint should
+    #     be a URI formatted like:
+    #
+    #         'http://example.com'
+    #         'https://example.com'
+    #         'http://example.com:123'
+    #
     #
     #   @option options [Integer] :endpoint_cache_max_entries (1000)
     #     Used for the maximum size limit of the LRU cache storing endpoints data
@@ -292,8 +301,9 @@ module Aws::Mgn
     #
     #   @option options [String] :sdk_ua_app_id
     #     A unique and opaque application ID that is appended to the
-    #     User-Agent header as app/<sdk_ua_app_id>. It should have a
-    #     maximum length of 50.
+    #     User-Agent header as app/sdk_ua_app_id. It should have a
+    #     maximum length of 50. This variable is sourced from environment
+    #     variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
     #
     #   @option options [String] :secret_access_key
     #
@@ -337,50 +347,65 @@ module Aws::Mgn
     #   @option options [Aws::Mgn::EndpointProvider] :endpoint_provider
     #     The endpoint provider used to resolve endpoints. Any object that responds to `#resolve_endpoint(parameters)` where `parameters` is a Struct similar to `Aws::Mgn::EndpointParameters`
     #
-    #   @option options [URI::HTTP,String] :http_proxy A proxy to send
-    #     requests through.  Formatted like 'http://proxy.com:123'.
+    #   @option options [Float] :http_continue_timeout (1)
+    #     The number of seconds to wait for a 100-continue response before sending the
+    #     request body.  This option has no effect unless the request has "Expect"
+    #     header set to "100-continue".  Defaults to `nil` which  disables this
+    #     behaviour.  This value can safely be set per request on the session.
     #
-    #   @option options [Float] :http_open_timeout (15) The number of
-    #     seconds to wait when opening a HTTP session before raising a
-    #     `Timeout::Error`.
+    #   @option options [Float] :http_idle_timeout (5)
+    #     The number of seconds a connection is allowed to sit idle before it
+    #     is considered stale.  Stale connections are closed and removed from the
+    #     pool before making a request.
     #
-    #   @option options [Float] :http_read_timeout (60) The default
-    #     number of seconds to wait for response data.  This value can
-    #     safely be set per-request on the session.
+    #   @option options [Float] :http_open_timeout (15)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :http_idle_timeout (5) The number of
-    #     seconds a connection is allowed to sit idle before it is
-    #     considered stale.  Stale connections are closed and removed
-    #     from the pool before making a request.
+    #   @option options [URI::HTTP,String] :http_proxy
+    #     A proxy to send requests through.  Formatted like 'http://proxy.com:123'.
     #
-    #   @option options [Float] :http_continue_timeout (1) The number of
-    #     seconds to wait for a 100-continue response before sending the
-    #     request body.  This option has no effect unless the request has
-    #     "Expect" header set to "100-continue".  Defaults to `nil` which
-    #     disables this behaviour.  This value can safely be set per
-    #     request on the session.
+    #   @option options [Float] :http_read_timeout (60)
+    #     The default number of seconds to wait for response data.
+    #     This value can safely be set per-request on the session.
     #
-    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
-    #     in seconds.
+    #   @option options [Boolean] :http_wire_trace (false)
+    #     When `true`,  HTTP debug output will be sent to the `:logger`.
     #
-    #   @option options [Boolean] :http_wire_trace (false) When `true`,
-    #     HTTP debug output will be sent to the `:logger`.
+    #   @option options [Proc] :on_chunk_received
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the response body is received. It provides three arguments: the chunk,
+    #     the number of bytes received, and the total number of
+    #     bytes in the response (or nil if the server did not send a `content-length`).
     #
-    #   @option options [Boolean] :ssl_verify_peer (true) When `true`,
-    #     SSL peer certificates are verified when establishing a
-    #     connection.
+    #   @option options [Proc] :on_chunk_sent
+    #     When a Proc object is provided, it will be used as callback when each chunk
+    #     of the request body is sent. It provides three arguments: the chunk,
+    #     the number of bytes read from the body, and the total number of
+    #     bytes in the body.
     #
-    #   @option options [String] :ssl_ca_bundle Full path to the SSL
-    #     certificate authority bundle file that should be used when
-    #     verifying peer certificates.  If you do not pass
-    #     `:ssl_ca_bundle` or `:ssl_ca_directory` the the system default
-    #     will be used if available.
+    #   @option options [Boolean] :raise_response_errors (true)
+    #     When `true`, response errors are raised.
     #
-    #   @option options [String] :ssl_ca_directory Full path of the
-    #     directory that contains the unbundled SSL certificate
+    #   @option options [String] :ssl_ca_bundle
+    #     Full path to the SSL certificate authority bundle file that should be used when
+    #     verifying peer certificates.  If you do not pass `:ssl_ca_bundle` or
+    #     `:ssl_ca_directory` the the system default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_directory
+    #     Full path of the directory that contains the unbundled SSL certificate
     #     authority files for verifying peer certificates.  If you do
-    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the
-    #     system default will be used if available.
+    #     not pass `:ssl_ca_bundle` or `:ssl_ca_directory` the the system
+    #     default will be used if available.
+    #
+    #   @option options [String] :ssl_ca_store
+    #     Sets the X509::Store to verify peer certificate.
+    #
+    #   @option options [Float] :ssl_timeout
+    #     Sets the SSL timeout in seconds
+    #
+    #   @option options [Boolean] :ssl_verify_peer (true)
+    #     When `true`, SSL peer certificates are verified when establishing a connection.
     #
     def initialize(*args)
       super
@@ -868,7 +893,7 @@ module Aws::Mgn
     #
     #   resp = client.create_launch_configuration_template({
     #     associate_public_ip_address: false,
-    #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI
+    #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI, USE_SOURCE
     #     copy_private_ip: false,
     #     copy_tags: false,
     #     enable_map_auto_tagging: false,
@@ -925,7 +950,7 @@ module Aws::Mgn
     #
     #   resp.arn #=> String
     #   resp.associate_public_ip_address #=> Boolean
-    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI"
+    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI", "USE_SOURCE"
     #   resp.copy_private_ip #=> Boolean
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
@@ -1524,7 +1549,7 @@ module Aws::Mgn
     #   resp.items #=> Array
     #   resp.items[0].arn #=> String
     #   resp.items[0].associate_public_ip_address #=> Boolean
-    #   resp.items[0].boot_mode #=> String, one of "LEGACY_BIOS", "UEFI"
+    #   resp.items[0].boot_mode #=> String, one of "LEGACY_BIOS", "UEFI", "USE_SOURCE"
     #   resp.items[0].copy_private_ip #=> Boolean
     #   resp.items[0].copy_tags #=> Boolean
     #   resp.items[0].ec2_launch_template_id #=> String
@@ -2127,7 +2152,7 @@ module Aws::Mgn
     #
     # @example Response structure
     #
-    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI"
+    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI", "USE_SOURCE"
     #   resp.copy_private_ip #=> Boolean
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
@@ -2642,7 +2667,7 @@ module Aws::Mgn
     #   resp.items[0].action_id #=> String
     #   resp.items[0].action_name #=> String
     #   resp.items[0].active #=> Boolean
-    #   resp.items[0].category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
+    #   resp.items[0].category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "REFACTORING", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
     #   resp.items[0].description #=> String
     #   resp.items[0].document_identifier #=> String
     #   resp.items[0].document_version #=> String
@@ -2734,7 +2759,7 @@ module Aws::Mgn
     #   resp.items[0].action_id #=> String
     #   resp.items[0].action_name #=> String
     #   resp.items[0].active #=> Boolean
-    #   resp.items[0].category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
+    #   resp.items[0].category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "REFACTORING", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
     #   resp.items[0].description #=> String
     #   resp.items[0].document_identifier #=> String
     #   resp.items[0].document_version #=> String
@@ -3107,7 +3132,7 @@ module Aws::Mgn
     #     action_id: "ActionID", # required
     #     action_name: "ActionName", # required
     #     active: false,
-    #     category: "DISASTER_RECOVERY", # accepts DISASTER_RECOVERY, OPERATING_SYSTEM, LICENSE_AND_SUBSCRIPTION, VALIDATION, OBSERVABILITY, SECURITY, NETWORKING, CONFIGURATION, BACKUP, OTHER
+    #     category: "DISASTER_RECOVERY", # accepts DISASTER_RECOVERY, OPERATING_SYSTEM, LICENSE_AND_SUBSCRIPTION, VALIDATION, OBSERVABILITY, REFACTORING, SECURITY, NETWORKING, CONFIGURATION, BACKUP, OTHER
     #     description: "ActionDescription",
     #     document_identifier: "BoundedString", # required
     #     document_version: "DocumentVersion",
@@ -3135,7 +3160,7 @@ module Aws::Mgn
     #   resp.action_id #=> String
     #   resp.action_name #=> String
     #   resp.active #=> Boolean
-    #   resp.category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
+    #   resp.category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "REFACTORING", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
     #   resp.description #=> String
     #   resp.document_identifier #=> String
     #   resp.document_version #=> String
@@ -3225,7 +3250,7 @@ module Aws::Mgn
     #     action_id: "ActionID", # required
     #     action_name: "BoundedString", # required
     #     active: false,
-    #     category: "DISASTER_RECOVERY", # accepts DISASTER_RECOVERY, OPERATING_SYSTEM, LICENSE_AND_SUBSCRIPTION, VALIDATION, OBSERVABILITY, SECURITY, NETWORKING, CONFIGURATION, BACKUP, OTHER
+    #     category: "DISASTER_RECOVERY", # accepts DISASTER_RECOVERY, OPERATING_SYSTEM, LICENSE_AND_SUBSCRIPTION, VALIDATION, OBSERVABILITY, REFACTORING, SECURITY, NETWORKING, CONFIGURATION, BACKUP, OTHER
     #     description: "ActionDescription",
     #     document_identifier: "BoundedString", # required
     #     document_version: "DocumentVersion",
@@ -3254,7 +3279,7 @@ module Aws::Mgn
     #   resp.action_id #=> String
     #   resp.action_name #=> String
     #   resp.active #=> Boolean
-    #   resp.category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
+    #   resp.category #=> String, one of "DISASTER_RECOVERY", "OPERATING_SYSTEM", "LICENSE_AND_SUBSCRIPTION", "VALIDATION", "OBSERVABILITY", "REFACTORING", "SECURITY", "NETWORKING", "CONFIGURATION", "BACKUP", "OTHER"
     #   resp.description #=> String
     #   resp.document_identifier #=> String
     #   resp.document_version #=> String
@@ -4361,6 +4386,10 @@ module Aws::Mgn
 
     # Updates multiple LaunchConfigurations by Source Server ID.
     #
+    # <note markdown="1"> bootMode valid values are `LEGACY_BIOS | UEFI`
+    #
+    #  </note>
+    #
     # @option params [String] :account_id
     #   Update Launch configuration Account ID.
     #
@@ -4416,7 +4445,7 @@ module Aws::Mgn
     #
     #   resp = client.update_launch_configuration({
     #     account_id: "AccountID",
-    #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI
+    #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI, USE_SOURCE
     #     copy_private_ip: false,
     #     copy_tags: false,
     #     enable_map_auto_tagging: false,
@@ -4459,7 +4488,7 @@ module Aws::Mgn
     #
     # @example Response structure
     #
-    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI"
+    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI", "USE_SOURCE"
     #   resp.copy_private_ip #=> Boolean
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
@@ -4563,7 +4592,7 @@ module Aws::Mgn
     #
     #   resp = client.update_launch_configuration_template({
     #     associate_public_ip_address: false,
-    #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI
+    #     boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI, USE_SOURCE
     #     copy_private_ip: false,
     #     copy_tags: false,
     #     enable_map_auto_tagging: false,
@@ -4618,7 +4647,7 @@ module Aws::Mgn
     #
     #   resp.arn #=> String
     #   resp.associate_public_ip_address #=> Boolean
-    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI"
+    #   resp.boot_mode #=> String, one of "LEGACY_BIOS", "UEFI", "USE_SOURCE"
     #   resp.copy_private_ip #=> Boolean
     #   resp.copy_tags #=> Boolean
     #   resp.ec2_launch_template_id #=> String
@@ -5238,7 +5267,7 @@ module Aws::Mgn
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

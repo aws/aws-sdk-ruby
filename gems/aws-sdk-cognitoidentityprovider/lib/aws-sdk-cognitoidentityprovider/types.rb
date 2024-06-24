@@ -130,11 +130,15 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The username for the user.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] group_name
-    #   The group name.
+    #   The name of the group that you want to add your user to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminAddUserToGroupRequest AWS API Documentation
@@ -154,7 +158,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name for which you want to confirm user registration.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] client_metadata
@@ -319,18 +327,24 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<Types::AttributeType>]
     #
     # @!attribute [rw] validation_data
-    #   The user's validation data. This is an array of name-value pairs
-    #   that contain user attributes and attribute values that you can use
-    #   for custom validation, such as restricting the types of user
-    #   accounts that can be registered. For example, you might choose to
-    #   allow or disallow user sign-up based on the user's domain.
+    #   Temporary user attributes that contribute to the outcomes of your
+    #   pre sign-up Lambda trigger. This set of key-value pairs are for
+    #   custom validation of information that you collect from your users
+    #   but don't need to retain.
     #
-    #   To configure custom validation, you must create a Pre Sign-up Lambda
-    #   trigger for the user pool as described in the Amazon Cognito
-    #   Developer Guide. The Lambda trigger receives the validation data and
-    #   uses it in the validation process.
+    #   Your Lambda function can analyze this additional data and act on it.
+    #   Your function might perform external API operations like logging
+    #   user attributes and validation data to Amazon CloudWatch Logs.
+    #   Validation data might also affect the response that your function
+    #   returns to Amazon Cognito, like automatically confirming the user if
+    #   they sign up from within your network.
     #
-    #   The user's validation data isn't persisted.
+    #   For more information about the pre sign-up Lambda trigger, see [Pre
+    #   sign-up Lambda trigger][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-pre-sign-up.html
     #   @return [Array<Types::AttributeType>]
     #
     # @!attribute [rw] temporary_password
@@ -457,8 +471,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name of the user from which you would like to delete
-    #   attributes.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] user_attribute_names
@@ -494,7 +511,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name of the user you want to delete.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDeleteUserRequest AWS API Documentation
@@ -535,7 +556,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name of the user you want to disable.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableUserRequest AWS API Documentation
@@ -562,7 +587,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name of the user you want to enable.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminEnableUserRequest AWS API Documentation
@@ -588,7 +617,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] device_key
@@ -616,7 +649,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetDeviceRequest AWS API Documentation
@@ -651,7 +688,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name of the user you want to retrieve.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetUserRequest AWS API Documentation
@@ -679,12 +720,10 @@ module Aws::CognitoIdentityProvider
     #   @return [Time]
     #
     # @!attribute [rw] user_last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] enabled
@@ -858,8 +897,6 @@ module Aws::CognitoIdentityProvider
     #
     #   * Define auth challenge
     #
-    #   * Verify auth challenge
-    #
     #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
@@ -967,7 +1004,7 @@ module Aws::CognitoIdentityProvider
     #
     #   * `MFA_SETUP`: For users who are required to set up an MFA factor
     #     before they can sign in. The MFA types activated for the user pool
-    #     will be listed in the challenge parameters `MFA_CAN_SETUP` value.
+    #     will be listed in the challenge parameters `MFAS_CAN_SETUP` value.
     #
     #     To set up software token MFA, use the session returned here from
     #     `InitiateAuth` as an input to `AssociateSoftwareToken`, and use
@@ -1106,7 +1143,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -1114,7 +1155,13 @@ module Aws::CognitoIdentityProvider
     #   @return [Integer]
     #
     # @!attribute [rw] pagination_token
-    #   The pagination token.
+    #   This API operation returns a limited number of results. The
+    #   pagination token is an identifier that you can present in an
+    #   additional API request with the same parameters. When you include
+    #   the pagination token, Amazon Cognito returns the next set of items
+    #   after the current list. Subsequent requests return a new pagination
+    #   token. By use of this token, you can paginate through the full list
+    #   of items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListDevicesRequest AWS API Documentation
@@ -1135,7 +1182,11 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<Types::DeviceType>]
     #
     # @!attribute [rw] pagination_token
-    #   The pagination token.
+    #   The identifier that Amazon Cognito returned with the previous
+    #   request to this operation. When you include a pagination token in
+    #   your request, Amazon Cognito returns the next set of items in the
+    #   list. By use of this token, you can paginate through the full list
+    #   of items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListDevicesResponse AWS API Documentation
@@ -1148,7 +1199,11 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute [rw] username
-    #   The username for the user.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] user_pool_id
@@ -1200,7 +1255,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user pool username or an alias.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1247,7 +1306,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The username for the user.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] group_name
@@ -1273,7 +1336,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name of the user whose password you want to reset.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] client_metadata
@@ -1352,51 +1419,86 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] challenge_responses
-    #   The challenge responses. These are inputs corresponding to the value
-    #   of `ChallengeName`, for example:
+    #   The responses to the challenge that you received in the previous
+    #   request. Each challenge has its own required response parameters.
+    #   The following examples are partial JSON request bodies that
+    #   highlight challenge-response parameters.
     #
-    #   * `SMS_MFA`: `SMS_MFA_CODE`, `USERNAME`, `SECRET_HASH` (if app
-    #     client is configured with client secret).
+    #   You must provide a SECRET\_HASH parameter in all challenge responses
+    #   to an app client that has a client secret.
     #
-    #   * `PASSWORD_VERIFIER`: `PASSWORD_CLAIM_SIGNATURE`,
-    #     `PASSWORD_CLAIM_SECRET_BLOCK`, `TIMESTAMP`, `USERNAME`,
-    #     `SECRET_HASH` (if app client is configured with client secret).
+    #   SMS\_MFA
     #
-    #     <note markdown="1"> `PASSWORD_VERIFIER` requires `DEVICE_KEY` when signing in with a
-    #     remembered device.
+    #   : `"ChallengeName": "SMS_MFA", "ChallengeResponses":
+    #     \{"SMS_MFA_CODE": "[SMS_code]", "USERNAME": "[username]"\}`
     #
-    #      </note>
+    #   PASSWORD\_VERIFIER
     #
-    #   * `ADMIN_NO_SRP_AUTH`: `PASSWORD`, `USERNAME`, `SECRET_HASH` (if app
-    #     client is configured with client secret).
+    #   : `"ChallengeName": "PASSWORD_VERIFIER", "ChallengeResponses":
+    #     \{"PASSWORD_CLAIM_SIGNATURE": "[claim_signature]",
+    #     "PASSWORD_CLAIM_SECRET_BLOCK": "[secret_block]", "TIMESTAMP":
+    #     [timestamp], "USERNAME": "[username]"\}`
     #
-    #   * `NEW_PASSWORD_REQUIRED`: `NEW_PASSWORD`, `USERNAME`, `SECRET_HASH`
-    #     (if app client is configured with client secret). To set any
-    #     required attributes that Amazon Cognito returned as
-    #     `requiredAttributes` in the `AdminInitiateAuth` response, add a
-    #     `userAttributes.attributename ` parameter. This parameter can also
-    #     set values for writable attributes that aren't required by your
-    #     user pool.
+    #     Add `"DEVICE_KEY"` when you sign in with a remembered device.
+    #
+    #   CUSTOM\_CHALLENGE
+    #
+    #   : `"ChallengeName": "CUSTOM_CHALLENGE", "ChallengeResponses":
+    #     \{"USERNAME": "[username]", "ANSWER": "[challenge_answer]"\}`
+    #
+    #     Add `"DEVICE_KEY"` when you sign in with a remembered device.
+    #
+    #   NEW\_PASSWORD\_REQUIRED
+    #
+    #   : `"ChallengeName": "NEW_PASSWORD_REQUIRED", "ChallengeResponses":
+    #     \{"NEW_PASSWORD": "[new_password]", "USERNAME": "[username]"\}`
+    #
+    #     To set any required attributes that `InitiateAuth` returned in an
+    #     `requiredAttributes` parameter, add
+    #     `"userAttributes.[attribute_name]": "[attribute_value]"`. This
+    #     parameter can also set values for writable attributes that aren't
+    #     required by your user pool.
     #
     #     <note markdown="1"> In a `NEW_PASSWORD_REQUIRED` challenge response, you can't modify
     #     a required attribute that already has a value. In
-    #     `AdminRespondToAuthChallenge`, set a value for any keys that
-    #     Amazon Cognito returned in the `requiredAttributes` parameter,
-    #     then use the `AdminUpdateUserAttributes` API operation to modify
-    #     the value of any additional attributes.
+    #     `RespondToAuthChallenge`, set a value for any keys that Amazon
+    #     Cognito returned in the `requiredAttributes` parameter, then use
+    #     the `UpdateUserAttributes` API operation to modify the value of
+    #     any additional attributes.
     #
     #      </note>
     #
-    #   * `MFA_SETUP` requires `USERNAME`, plus you must use the session
-    #     value returned by `VerifySoftwareToken` in the `Session`
-    #     parameter.
+    #   SOFTWARE\_TOKEN\_MFA
     #
-    #   The value of the `USERNAME` attribute must be the user's actual
-    #   username, not an alias (such as an email address or phone number).
-    #   To make this simpler, the `AdminInitiateAuth` response includes the
-    #   actual username value in the `USERNAMEUSER_ID_FOR_SRP` attribute.
-    #   This happens even if you specified an alias in your call to
-    #   `AdminInitiateAuth`.
+    #   : `"ChallengeName": "SOFTWARE_TOKEN_MFA", "ChallengeResponses":
+    #     \{"USERNAME": "[username]", "SOFTWARE_TOKEN_MFA_CODE":
+    #     [authenticator_code]\}`
+    #
+    #   DEVICE\_SRP\_AUTH
+    #
+    #   : `"ChallengeName": "DEVICE_SRP_AUTH", "ChallengeResponses":
+    #     \{"USERNAME": "[username]", "DEVICE_KEY": "[device_key]", "SRP_A":
+    #     "[srp_a]"\}`
+    #
+    #   DEVICE\_PASSWORD\_VERIFIER
+    #
+    #   : `"ChallengeName": "DEVICE_PASSWORD_VERIFIER",
+    #     "ChallengeResponses": \{"DEVICE_KEY": "[device_key]",
+    #     "PASSWORD_CLAIM_SIGNATURE": "[claim_signature]",
+    #     "PASSWORD_CLAIM_SECRET_BLOCK": "[secret_block]", "TIMESTAMP":
+    #     [timestamp], "USERNAME": "[username]"\}`
+    #
+    #   MFA\_SETUP
+    #
+    #   : `"ChallengeName": "MFA_SETUP", "ChallengeResponses": \{"USERNAME":
+    #     "[username]"\}, "SESSION": "[Session ID from
+    #     VerifySoftwareToken]"`
+    #
+    #   SELECT\_MFA\_TYPE
+    #
+    #   : `"ChallengeName": "SELECT_MFA_TYPE", "ChallengeResponses":
+    #     \{"USERNAME": "[username]", "ANSWER": "[SMS_MFA or
+    #     SOFTWARE_TOKEN_MFA]"\}`
     #
     #   For more information about `SECRET_HASH`, see [Computing secret hash
     #   values][1]. For information about `DEVICE_KEY`, see [Working with
@@ -1554,7 +1656,11 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::SoftwareTokenMfaSettingsType]
     #
     # @!attribute [rw] username
-    #   The user pool username or alias.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] user_pool_id
@@ -1582,7 +1688,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name of the user whose password you want to set.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] password
@@ -1617,7 +1727,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name of the user whose options you're setting.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] mfa_options
@@ -1647,7 +1761,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user pool username.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] event_id
@@ -1686,7 +1804,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] device_key
@@ -1724,8 +1846,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name of the user for whom you want to update user
-    #   attributes.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] user_attributes
@@ -1814,7 +1939,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUserGlobalSignOutRequest AWS API Documentation
@@ -1994,12 +2123,10 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] event_response
@@ -2327,8 +2454,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name of the user for whom you want to enter a code to
-    #   retrieve a forgotten password.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] confirmation_code
@@ -2430,7 +2560,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name of the user whose registration you want to confirm.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] confirmation_code
@@ -2637,74 +2771,127 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] provider_details
-    #   The IdP details. The following list describes the provider detail
-    #   keys for each IdP type.
+    #   The scopes, URLs, and identifiers for your external identity
+    #   provider. The following examples describe the provider detail keys
+    #   for each IdP type. These values and their schema are subject to
+    #   change. Social IdP `authorize_scopes` values must match the values
+    #   listed here.
     #
-    #   * For Google and Login with Amazon:
+    #   OpenID Connect (OIDC)
     #
-    #     * client\_id
+    #   : Amazon Cognito accepts the following elements when it can't
+    #     discover endpoint URLs from `oidc_issuer`: `attributes_url`,
+    #     `authorize_url`, `jwks_uri`, `token_url`.
     #
-    #     * client\_secret
+    #     Create or update request: `"ProviderDetails": \{
+    #     "attributes_request_method": "GET", "attributes_url":
+    #     "https://auth.example.com/userInfo", "authorize_scopes": "openid
+    #     profile email", "authorize_url":
+    #     "https://auth.example.com/authorize", "client_id":
+    #     "1example23456789", "client_secret": "provider-app-client-secret",
+    #     "jwks_uri": "https://auth.example.com/.well-known/jwks.json",
+    #     "oidc_issuer": "https://auth.example.com", "token_url":
+    #     "https://example.com/token" \}`
     #
-    #     * authorize\_scopes
+    #     Describe response: `"ProviderDetails": \{
+    #     "attributes_request_method": "GET", "attributes_url":
+    #     "https://auth.example.com/userInfo",
+    #     "attributes_url_add_attributes": "false", "authorize_scopes":
+    #     "openid profile email", "authorize_url":
+    #     "https://auth.example.com/authorize", "client_id":
+    #     "1example23456789", "client_secret": "provider-app-client-secret",
+    #     "jwks_uri": "https://auth.example.com/.well-known/jwks.json",
+    #     "oidc_issuer": "https://auth.example.com", "token_url":
+    #     "https://example.com/token" \}`
     #
-    #   * For Facebook:
+    #   SAML
     #
-    #     * client\_id
+    #   : Create or update request with Metadata URL: `"ProviderDetails": \{
+    #     "IDPInit": "true", "IDPSignout": "true", "EncryptedResponses" :
+    #     "true", "MetadataURL":
+    #     "https://auth.example.com/sso/saml/metadata",
+    #     "RequestSigningAlgorithm": "rsa-sha256" \}`
     #
-    #     * client\_secret
+    #     Create or update request with Metadata file: `"ProviderDetails":
+    #     \{ "IDPInit": "true", "IDPSignout": "true", "EncryptedResponses" :
+    #     "true", "MetadataFile": "[metadata XML]",
+    #     "RequestSigningAlgorithm": "rsa-sha256" \}`
     #
-    #     * authorize\_scopes
+    #     The value of `MetadataFile` must be the plaintext metadata
+    #     document with all quote (") characters escaped by backslashes.
     #
-    #     * api\_version
+    #     Describe response: `"ProviderDetails": \{ "IDPInit": "true",
+    #     "IDPSignout": "true", "EncryptedResponses" : "true",
+    #     "ActiveEncryptionCertificate": "[certificate]", "MetadataURL":
+    #     "https://auth.example.com/sso/saml/metadata",
+    #     "RequestSigningAlgorithm": "rsa-sha256", "SLORedirectBindingURI":
+    #     "https://auth.example.com/slo/saml", "SSORedirectBindingURI":
+    #     "https://auth.example.com/sso/saml" \}`
     #
-    #   * For Sign in with Apple:
+    #   LoginWithAmazon
     #
-    #     * client\_id
+    #   : Create or update request: `"ProviderDetails": \{
+    #     "authorize_scopes": "profile postal_code", "client_id":
+    #     "amzn1.application-oa2-client.1example23456789", "client_secret":
+    #     "provider-app-client-secret"`
     #
-    #     * team\_id
+    #     Describe response: `"ProviderDetails": \{ "attributes_url":
+    #     "https://api.amazon.com/user/profile",
+    #     "attributes_url_add_attributes": "false", "authorize_scopes":
+    #     "profile postal_code", "authorize_url":
+    #     "https://www.amazon.com/ap/oa", "client_id":
+    #     "amzn1.application-oa2-client.1example23456789", "client_secret":
+    #     "provider-app-client-secret", "token_request_method": "POST",
+    #     "token_url": "https://api.amazon.com/auth/o2/token" \}`
     #
-    #     * key\_id
+    #   Google
     #
-    #     * private\_key
+    #   : Create or update request: `"ProviderDetails": \{
+    #     "authorize_scopes": "email profile openid", "client_id":
+    #     "1example23456789.apps.googleusercontent.com", "client_secret":
+    #     "provider-app-client-secret" \}`
     #
-    #     * authorize\_scopes
+    #     Describe response: `"ProviderDetails": \{ "attributes_url":
+    #     "https://people.googleapis.com/v1/people/me?personFields=",
+    #     "attributes_url_add_attributes": "true", "authorize_scopes":
+    #     "email profile openid", "authorize_url":
+    #     "https://accounts.google.com/o/oauth2/v2/auth", "client_id":
+    #     "1example23456789.apps.googleusercontent.com", "client_secret":
+    #     "provider-app-client-secret", "oidc_issuer":
+    #     "https://accounts.google.com", "token_request_method": "POST",
+    #     "token_url": "https://www.googleapis.com/oauth2/v4/token" \}`
     #
-    #   * For OpenID Connect (OIDC) providers:
+    #   SignInWithApple
     #
-    #     * client\_id
+    #   : Create or update request: `"ProviderDetails": \{
+    #     "authorize_scopes": "email name", "client_id":
+    #     "com.example.cognito", "private_key": "1EXAMPLE", "key_id":
+    #     "2EXAMPLE", "team_id": "3EXAMPLE" \}`
     #
-    #     * client\_secret
+    #     Describe response: `"ProviderDetails": \{
+    #     "attributes_url_add_attributes": "false", "authorize_scopes":
+    #     "email name", "authorize_url":
+    #     "https://appleid.apple.com/auth/authorize", "client_id":
+    #     "com.example.cognito", "key_id": "1EXAMPLE", "oidc_issuer":
+    #     "https://appleid.apple.com", "team_id": "2EXAMPLE",
+    #     "token_request_method": "POST", "token_url":
+    #     "https://appleid.apple.com/auth/token" \}`
     #
-    #     * attributes\_request\_method
+    #   Facebook
     #
-    #     * oidc\_issuer
+    #   : Create or update request: `"ProviderDetails": \{ "api_version":
+    #     "v17.0", "authorize_scopes": "public_profile, email", "client_id":
+    #     "1example23456789", "client_secret": "provider-app-client-secret"
+    #     \}`
     #
-    #     * authorize\_scopes
-    #
-    #     * The following keys are only present if Amazon Cognito didn't
-    #       discover them at the `oidc_issuer` URL.
-    #
-    #       * authorize\_url
-    #
-    #       * token\_url
-    #
-    #       * attributes\_url
-    #
-    #       * jwks\_uri
-    #
-    #     * Amazon Cognito sets the value of the following keys
-    #       automatically. They are read-only.
-    #
-    #       * attributes\_url\_add\_attributes
-    #
-    #       ^
-    #
-    #   * For SAML providers:
-    #
-    #     * MetadataFile or MetadataURL
-    #
-    #     * IDPSignout *optional*
+    #     Describe response: `"ProviderDetails": \{ "api_version": "v17.0",
+    #     "attributes_url": "https://graph.facebook.com/v17.0/me?fields=",
+    #     "attributes_url_add_attributes": "true", "authorize_scopes":
+    #     "public_profile, email", "authorize_url":
+    #     "https://www.facebook.com/v17.0/dialog/oauth", "client_id":
+    #     "1example23456789", "client_secret": "provider-app-client-secret",
+    #     "token_request_method": "GET", "token_url":
+    #     "https://graph.facebook.com/v17.0/oauth/access_token" \}`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] attribute_mapping
@@ -2746,9 +2933,14 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] identifier
-    #   A unique resource server identifier for the resource server. This
-    #   could be an HTTPS endpoint where the resource server is located,
-    #   such as `https://my-weather-api.example.com`.
+    #   A unique resource server identifier for the resource server. The
+    #   identifier can be an API friendly name like `solar-system-data`. You
+    #   can also set an API URL like
+    #   `https://solar-system-data-api.example.com` as your identifier.
+    #
+    #   Amazon Cognito represents scopes in the access token in the format
+    #   `$resource-server-identifier/$scope`. Longer scope-identifier
+    #   strings increase the size of your access tokens.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2900,11 +3092,43 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::TokenValidityUnitsType]
     #
     # @!attribute [rw] read_attributes
-    #   The read attributes.
+    #   The list of user attributes that you want your app client to have
+    #   read-only access to. After your user authenticates in your app,
+    #   their access token authorizes them to read their own attribute value
+    #   for any attribute in this list. An example of this kind of activity
+    #   is when your user selects a link to view their profile information.
+    #   Your app makes a [GetUser][1] API request to retrieve and display
+    #   your user's profile data.
+    #
+    #   When you don't specify the `ReadAttributes` for your app client,
+    #   your app can read the values of `email_verified`,
+    #   `phone_number_verified`, and the Standard attributes of your user
+    #   pool. When your user pool has read access to these default
+    #   attributes, `ReadAttributes` doesn't return any information. Amazon
+    #   Cognito only populates `ReadAttributes` in the API response if you
+    #   have specified your own custom set of read attributes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_GetUser.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] write_attributes
-    #   The user pool attributes that the app client can write to.
+    #   The list of user attributes that you want your app client to have
+    #   write access to. After your user authenticates in your app, their
+    #   access token authorizes them to set or modify their own attribute
+    #   value for any attribute in this list. An example of this kind of
+    #   activity is when you present your user with a form to update their
+    #   profile information and they change their last name. Your app then
+    #   makes an [UpdateUserAttributes][1] API request and sets
+    #   `family_name` to the new value.
+    #
+    #   When you don't specify the `WriteAttributes` for your app client,
+    #   your app can write the values of the Standard attributes of your
+    #   user pool. When your user pool has write access to these default
+    #   attributes, `WriteAttributes` doesn't return any information.
+    #   Amazon Cognito only populates `WriteAttributes` in the API response
+    #   if you have specified your own custom set of write attributes.
     #
     #   If your app client allows users to sign in through an IdP, this
     #   array must include all attributes that you have mapped to IdP
@@ -2912,11 +3136,12 @@ module Aws::CognitoIdentityProvider
     #   in to your application through an IdP. If your app client does not
     #   have write access to a mapped attribute, Amazon Cognito throws an
     #   error when it tries to update the attribute. For more information,
-    #   see [Specifying IdP Attribute Mappings for Your user pool][1].
+    #   see [Specifying IdP Attribute Mappings for Your user pool][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UpdateUserAttributes.html
+    #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] explicit_auth_flows
@@ -2996,7 +3221,9 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_redirect_uri
-    #   The default redirect URI. Must be in the `CallbackURLs` list.
+    #   The default redirect URI. In app clients with one assigned IdP,
+    #   replaces `redirect_uri` in authentication requests. Must be in the
+    #   `CallbackURLs` list.
     #
     #   A redirect URI must:
     #
@@ -3006,7 +3233,7 @@ module Aws::CognitoIdentityProvider
     #
     #   * Not include a fragment component.
     #
-    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #   For more information, see [Default redirect URI][1].
     #
     #   Amazon Cognito requires HTTPS over HTTP except for http://localhost
     #   for testing purposes only.
@@ -3015,11 +3242,13 @@ module Aws::CognitoIdentityProvider
     #
     #
     #
-    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-client-apps.html#cognito-user-pools-app-idp-settings-about
     #   @return [String]
     #
     # @!attribute [rw] allowed_o_auth_flows
-    #   The allowed OAuth flows.
+    #   The OAuth grant types that you want your app client to generate. To
+    #   create an app client that generates client credentials grants, you
+    #   must add `client_credentials` as the only allowed OAuth flow.
     #
     #   code
     #
@@ -3217,6 +3446,9 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] cloud_front_domain
     #   The Amazon CloudFront endpoint that you use as the target of the
     #   alias that you set up with your Domain Name Service (DNS) provider.
+    #   Amazon Cognito returns this value if you set a custom domain with
+    #   `CustomDomainConfig`. If you set an Amazon Cognito prefix domain,
+    #   this operation returns a blank response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolDomainResponse AWS API Documentation
@@ -3488,17 +3720,20 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # A custom email sender Lambda configuration type.
+    # The properties of a custom email sender Lambda trigger.
     #
     # @!attribute [rw] lambda_version
-    #   Signature of the "request" attribute in the "event" information
-    #   Amazon Cognito passes to your custom email Lambda function. The only
-    #   supported value is `V1_0`.
+    #   The user pool trigger version of the request that Amazon Cognito
+    #   sends to your Lambda function. Higher-numbered versions add fields
+    #   that support new features.
+    #
+    #   You must use a `LambdaVersion` of `V1_0` with a custom sender
+    #   function.
     #   @return [String]
     #
     # @!attribute [rw] lambda_arn
-    #   The Amazon Resource Name (ARN) of the Lambda function that Amazon
-    #   Cognito activates to send email notifications to users.
+    #   The Amazon Resource Name (ARN) of the function that you want to
+    #   assign to your Lambda trigger.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CustomEmailLambdaVersionConfigType AWS API Documentation
@@ -3510,17 +3745,20 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # A custom SMS sender Lambda configuration type.
+    # The properties of a custom SMS sender Lambda trigger.
     #
     # @!attribute [rw] lambda_version
-    #   Signature of the "request" attribute in the "event" information
-    #   that Amazon Cognito passes to your custom SMS Lambda function. The
-    #   only supported value is `V1_0`.
+    #   The user pool trigger version of the request that Amazon Cognito
+    #   sends to your Lambda function. Higher-numbered versions add fields
+    #   that support new features.
+    #
+    #   You must use a `LambdaVersion` of `V1_0` with a custom sender
+    #   function.
     #   @return [String]
     #
     # @!attribute [rw] lambda_arn
-    #   The Amazon Resource Name (ARN) of the Lambda function that Amazon
-    #   Cognito activates to send SMS notifications to users.
+    #   The Amazon Resource Name (ARN) of the function that you want to
+    #   assign to your Lambda trigger.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CustomSMSLambdaVersionConfigType AWS API Documentation
@@ -3719,7 +3957,14 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] identifier
-    #   The identifier for the resource server
+    #   A unique resource server identifier for the resource server. The
+    #   identifier can be an API friendly name like `solar-system-data`. You
+    #   can also set an API URL like
+    #   `https://solar-system-data-api.example.com` as your identifier.
+    #
+    #   Amazon Cognito represents scopes in the access token in the format
+    #   `$resource-server-identifier/$scope`. Longer scope-identifier
+    #   strings increase the size of your access tokens.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeResourceServerRequest AWS API Documentation
@@ -4002,12 +4247,10 @@ module Aws::CognitoIdentityProvider
     #   @return [Time]
     #
     # @!attribute [rw] device_last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] device_last_authenticated_date
@@ -4412,8 +4655,11 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UserContextDataType]
     #
     # @!attribute [rw] username
-    #   The user name of the user for whom you want to enter a code to reset
-    #   a forgotten password.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] analytics_metadata
@@ -4951,21 +5197,17 @@ module Aws::CognitoIdentityProvider
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GroupType AWS API Documentation
@@ -5016,77 +5258,127 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] provider_details
-    #   The IdP details. The following list describes the provider detail
-    #   keys for each IdP type.
+    #   The scopes, URLs, and identifiers for your external identity
+    #   provider. The following examples describe the provider detail keys
+    #   for each IdP type. These values and their schema are subject to
+    #   change. Social IdP `authorize_scopes` values must match the values
+    #   listed here.
     #
-    #   * For Google and Login with Amazon:
+    #   OpenID Connect (OIDC)
     #
-    #     * client\_id
+    #   : Amazon Cognito accepts the following elements when it can't
+    #     discover endpoint URLs from `oidc_issuer`: `attributes_url`,
+    #     `authorize_url`, `jwks_uri`, `token_url`.
     #
-    #     * client\_secret
+    #     Create or update request: `"ProviderDetails": \{
+    #     "attributes_request_method": "GET", "attributes_url":
+    #     "https://auth.example.com/userInfo", "authorize_scopes": "openid
+    #     profile email", "authorize_url":
+    #     "https://auth.example.com/authorize", "client_id":
+    #     "1example23456789", "client_secret": "provider-app-client-secret",
+    #     "jwks_uri": "https://auth.example.com/.well-known/jwks.json",
+    #     "oidc_issuer": "https://auth.example.com", "token_url":
+    #     "https://example.com/token" \}`
     #
-    #     * authorize\_scopes
+    #     Describe response: `"ProviderDetails": \{
+    #     "attributes_request_method": "GET", "attributes_url":
+    #     "https://auth.example.com/userInfo",
+    #     "attributes_url_add_attributes": "false", "authorize_scopes":
+    #     "openid profile email", "authorize_url":
+    #     "https://auth.example.com/authorize", "client_id":
+    #     "1example23456789", "client_secret": "provider-app-client-secret",
+    #     "jwks_uri": "https://auth.example.com/.well-known/jwks.json",
+    #     "oidc_issuer": "https://auth.example.com", "token_url":
+    #     "https://example.com/token" \}`
     #
-    #   * For Facebook:
+    #   SAML
     #
-    #     * client\_id
+    #   : Create or update request with Metadata URL: `"ProviderDetails": \{
+    #     "IDPInit": "true", "IDPSignout": "true", "EncryptedResponses" :
+    #     "true", "MetadataURL":
+    #     "https://auth.example.com/sso/saml/metadata",
+    #     "RequestSigningAlgorithm": "rsa-sha256" \}`
     #
-    #     * client\_secret
+    #     Create or update request with Metadata file: `"ProviderDetails":
+    #     \{ "IDPInit": "true", "IDPSignout": "true", "EncryptedResponses" :
+    #     "true", "MetadataFile": "[metadata XML]",
+    #     "RequestSigningAlgorithm": "rsa-sha256" \}`
     #
-    #     * authorize\_scopes
+    #     The value of `MetadataFile` must be the plaintext metadata
+    #     document with all quote (") characters escaped by backslashes.
     #
-    #     * api\_version
+    #     Describe response: `"ProviderDetails": \{ "IDPInit": "true",
+    #     "IDPSignout": "true", "EncryptedResponses" : "true",
+    #     "ActiveEncryptionCertificate": "[certificate]", "MetadataURL":
+    #     "https://auth.example.com/sso/saml/metadata",
+    #     "RequestSigningAlgorithm": "rsa-sha256", "SLORedirectBindingURI":
+    #     "https://auth.example.com/slo/saml", "SSORedirectBindingURI":
+    #     "https://auth.example.com/sso/saml" \}`
     #
-    #   * For Sign in with Apple:
+    #   LoginWithAmazon
     #
-    #     * client\_id
+    #   : Create or update request: `"ProviderDetails": \{
+    #     "authorize_scopes": "profile postal_code", "client_id":
+    #     "amzn1.application-oa2-client.1example23456789", "client_secret":
+    #     "provider-app-client-secret"`
     #
-    #     * team\_id
+    #     Describe response: `"ProviderDetails": \{ "attributes_url":
+    #     "https://api.amazon.com/user/profile",
+    #     "attributes_url_add_attributes": "false", "authorize_scopes":
+    #     "profile postal_code", "authorize_url":
+    #     "https://www.amazon.com/ap/oa", "client_id":
+    #     "amzn1.application-oa2-client.1example23456789", "client_secret":
+    #     "provider-app-client-secret", "token_request_method": "POST",
+    #     "token_url": "https://api.amazon.com/auth/o2/token" \}`
     #
-    #     * key\_id
+    #   Google
     #
-    #     * private\_key
+    #   : Create or update request: `"ProviderDetails": \{
+    #     "authorize_scopes": "email profile openid", "client_id":
+    #     "1example23456789.apps.googleusercontent.com", "client_secret":
+    #     "provider-app-client-secret" \}`
     #
-    #       *You can submit a private\_key when you add or update an IdP.
-    #       Describe operations don't return the private key.*
+    #     Describe response: `"ProviderDetails": \{ "attributes_url":
+    #     "https://people.googleapis.com/v1/people/me?personFields=",
+    #     "attributes_url_add_attributes": "true", "authorize_scopes":
+    #     "email profile openid", "authorize_url":
+    #     "https://accounts.google.com/o/oauth2/v2/auth", "client_id":
+    #     "1example23456789.apps.googleusercontent.com", "client_secret":
+    #     "provider-app-client-secret", "oidc_issuer":
+    #     "https://accounts.google.com", "token_request_method": "POST",
+    #     "token_url": "https://www.googleapis.com/oauth2/v4/token" \}`
     #
-    #     * authorize\_scopes
+    #   SignInWithApple
     #
-    #   * For OIDC providers:
+    #   : Create or update request: `"ProviderDetails": \{
+    #     "authorize_scopes": "email name", "client_id":
+    #     "com.example.cognito", "private_key": "1EXAMPLE", "key_id":
+    #     "2EXAMPLE", "team_id": "3EXAMPLE" \}`
     #
-    #     * client\_id
+    #     Describe response: `"ProviderDetails": \{
+    #     "attributes_url_add_attributes": "false", "authorize_scopes":
+    #     "email name", "authorize_url":
+    #     "https://appleid.apple.com/auth/authorize", "client_id":
+    #     "com.example.cognito", "key_id": "1EXAMPLE", "oidc_issuer":
+    #     "https://appleid.apple.com", "team_id": "2EXAMPLE",
+    #     "token_request_method": "POST", "token_url":
+    #     "https://appleid.apple.com/auth/token" \}`
     #
-    #     * client\_secret
+    #   Facebook
     #
-    #     * attributes\_request\_method
+    #   : Create or update request: `"ProviderDetails": \{ "api_version":
+    #     "v17.0", "authorize_scopes": "public_profile, email", "client_id":
+    #     "1example23456789", "client_secret": "provider-app-client-secret"
+    #     \}`
     #
-    #     * oidc\_issuer
-    #
-    #     * authorize\_scopes
-    #
-    #     * The following keys are only present if Amazon Cognito didn't
-    #       discover them at the `oidc_issuer` URL.
-    #
-    #       * authorize\_url
-    #
-    #       * token\_url
-    #
-    #       * attributes\_url
-    #
-    #       * jwks\_uri
-    #
-    #     * Amazon Cognito sets the value of the following keys
-    #       automatically. They are read-only.
-    #
-    #       * attributes\_url\_add\_attributes
-    #
-    #       ^
-    #
-    #   * For SAML providers:
-    #
-    #     * MetadataFile or MetadataURL
-    #
-    #     * IDPSignout *optional*
+    #     Describe response: `"ProviderDetails": \{ "api_version": "v17.0",
+    #     "attributes_url": "https://graph.facebook.com/v17.0/me?fields=",
+    #     "attributes_url_add_attributes": "true", "authorize_scopes":
+    #     "public_profile, email", "authorize_url":
+    #     "https://www.facebook.com/v17.0/dialog/oauth", "client_id":
+    #     "1example23456789", "client_secret": "provider-app-client-secret",
+    #     "token_request_method": "GET", "token_url":
+    #     "https://graph.facebook.com/v17.0/oauth/access_token" \}`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] attribute_mapping
@@ -5099,21 +5391,17 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/IdentityProviderType AWS API Documentation
@@ -5235,8 +5523,6 @@ module Aws::CognitoIdentityProvider
     #
     #   * Define auth challenge
     #
-    #   * Verify auth challenge
-    #
     #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
@@ -5294,8 +5580,8 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] challenge_name
     #   The name of the challenge that you're responding to with this call.
-    #   This name is returned in the `AdminInitiateAuth` response if you
-    #   must pass another challenge.
+    #   This name is returned in the `InitiateAuth` response if you must
+    #   pass another challenge.
     #
     #   Valid values include the following:
     #
@@ -5343,7 +5629,7 @@ module Aws::CognitoIdentityProvider
     #
     #   * `MFA_SETUP`: For users who are required to setup an MFA factor
     #     before they can sign in. The MFA types activated for the user pool
-    #     will be listed in the challenge parameters `MFA_CAN_SETUP` value.
+    #     will be listed in the challenge parameters `MFAS_CAN_SETUP` value.
     #
     #     To set up software token MFA, use the session returned here from
     #     `InitiateAuth` as an input to `AssociateSoftwareToken`. Use the
@@ -5573,12 +5859,26 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] pre_token_generation
-    #   A Lambda trigger that is invoked before token generation.
+    #   The Amazon Resource Name (ARN) of the function that you want to
+    #   assign to your Lambda trigger.
+    #
+    #   Set this parameter for legacy purposes. If you also set an ARN in
+    #   `PreTokenGenerationConfig`, its value must be identical to
+    #   `PreTokenGeneration`. For new instances of pre token generation
+    #   triggers, set the `LambdaArn` of `PreTokenGenerationConfig`.
+    #
+    #   You can set ``
     #   @return [String]
     #
     # @!attribute [rw] user_migration
     #   The user migration Lambda config type.
     #   @return [String]
+    #
+    # @!attribute [rw] pre_token_generation_config
+    #   The detailed configuration of a pre token generation trigger. If you
+    #   also set an ARN in `PreTokenGeneration`, its value must be identical
+    #   to `PreTokenGenerationConfig`.
+    #   @return [Types::PreTokenGenerationVersionConfigType]
     #
     # @!attribute [rw] custom_sms_sender
     #   A custom SMS sender Lambda trigger.
@@ -5608,6 +5908,7 @@ module Aws::CognitoIdentityProvider
       :verify_auth_challenge_response,
       :pre_token_generation,
       :user_migration,
+      :pre_token_generation_config,
       :custom_sms_sender,
       :custom_email_sender,
       :kms_key_id)
@@ -5643,7 +5944,13 @@ module Aws::CognitoIdentityProvider
     #   @return [Integer]
     #
     # @!attribute [rw] pagination_token
-    #   The pagination token for the list request.
+    #   This API operation returns a limited number of results. The
+    #   pagination token is an identifier that you can present in an
+    #   additional API request with the same parameters. When you include
+    #   the pagination token, Amazon Cognito returns the next set of items
+    #   after the current list. Subsequent requests return a new pagination
+    #   token. By use of this token, you can paginate through the full list
+    #   of items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListDevicesRequest AWS API Documentation
@@ -5663,7 +5970,11 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<Types::DeviceType>]
     #
     # @!attribute [rw] pagination_token
-    #   The pagination token for the list device response.
+    #   The identifier that Amazon Cognito returned with the previous
+    #   request to this operation. When you include a pagination token in
+    #   your request, Amazon Cognito returns the next set of items in the
+    #   list. By use of this token, you can paginate through the full list
+    #   of items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListDevicesResponse AWS API Documentation
@@ -5833,9 +6144,13 @@ module Aws::CognitoIdentityProvider
     #   @return [Integer]
     #
     # @!attribute [rw] pagination_token
-    #   An identifier that was returned from the previous call to
-    #   `ListUserImportJobs`, which can be used to return the next set of
-    #   import jobs in the list.
+    #   This API operation returns a limited number of results. The
+    #   pagination token is an identifier that you can present in an
+    #   additional API request with the same parameters. When you include
+    #   the pagination token, Amazon Cognito returns the next set of items
+    #   after the current list. Subsequent requests return a new pagination
+    #   token. By use of this token, you can paginate through the full list
+    #   of items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserImportJobsRequest AWS API Documentation
@@ -5856,8 +6171,11 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<Types::UserImportJobType>]
     #
     # @!attribute [rw] pagination_token
-    #   An identifier that can be used to return the next set of user import
-    #   jobs in the list.
+    #   The identifier that Amazon Cognito returned with the previous
+    #   request to this operation. When you include a pagination token in
+    #   your request, Amazon Cognito returns the next set of items in the
+    #   list. By use of this token, you can paginate through the full list
+    #   of items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserImportJobsResponse AWS API Documentation
@@ -5970,7 +6288,8 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The limit of the request to list users.
+    #   The maximum number of users that you want to retrieve before
+    #   pagination.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -5991,7 +6310,7 @@ module Aws::CognitoIdentityProvider
     end
 
     # @!attribute [rw] users
-    #   The users returned in the request to list users.
+    #   A list of users in the group, and their attributes.
     #   @return [Array<Types::UserType>]
     #
     # @!attribute [rw] next_token
@@ -6020,6 +6339,13 @@ module Aws::CognitoIdentityProvider
     #   you want Amazon Cognito to include in the response for each user.
     #   When you don't provide an `AttributesToGet` parameter, Amazon
     #   Cognito returns all attributes for each user.
+    #
+    #   Use `AttributesToGet` with required attributes in your user pool, or
+    #   in conjunction with `Filter`. Amazon Cognito returns an error if not
+    #   all users in the results have set a value for the attribute you
+    #   request. Attributes that you can't filter on, including custom
+    #   attributes, must have a value set in every user profile before an
+    #   `AttributesToGet` parameter returns results.
     #   @return [Array<String>]
     #
     # @!attribute [rw] limit
@@ -6027,23 +6353,27 @@ module Aws::CognitoIdentityProvider
     #   @return [Integer]
     #
     # @!attribute [rw] pagination_token
-    #   An identifier that was returned from the previous call to this
-    #   operation, which can be used to return the next set of items in the
-    #   list.
+    #   This API operation returns a limited number of results. The
+    #   pagination token is an identifier that you can present in an
+    #   additional API request with the same parameters. When you include
+    #   the pagination token, Amazon Cognito returns the next set of items
+    #   after the current list. Subsequent requests return a new pagination
+    #   token. By use of this token, you can paginate through the full list
+    #   of items.
     #   @return [String]
     #
     # @!attribute [rw] filter
     #   A filter string of the form "*AttributeName* *Filter-Type*
     #   "*AttributeValue*"". Quotation marks within the filter string
-    #   must be escaped using the backslash (\\) character. For example,
-    #   "`family_name` = \\"Reddy\\"".
+    #   must be escaped using the backslash (``) character. For example,
+    #   `"family_name = "Reddy""`.
     #
     #   * *AttributeName*: The name of the attribute to search for. You can
     #     only search for one attribute at a time.
     #
-    #   * *Filter-Type*: For an exact match, use =, for example,
-    #     "`given_name` = \\"Jon\\"". For a prefix ("starts with")
-    #     match, use ^=, for example, "`given_name` ^= \\"Jon\\"".
+    #   * *Filter-Type*: For an exact match, use `=`, for example,
+    #     "`given_name = "Jon"`". For a prefix ("starts with") match,
+    #     use `^=`, for example, "`given_name ^= "Jon"`".
     #
     #   * *AttributeValue*: The attribute value that must be matched for
     #     each user.
@@ -6137,9 +6467,11 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<Types::UserType>]
     #
     # @!attribute [rw] pagination_token
-    #   An identifier that was returned from the previous call to this
-    #   operation, which can be used to return the next set of items in the
-    #   list.
+    #   The identifier that Amazon Cognito returned with the previous
+    #   request to this operation. When you include a pagination token in
+    #   your request, Amazon Cognito returns the next set of items in the
+    #   list. By use of this token, you can paginate through the full list
+    #   of items.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUsersResponse AWS API Documentation
@@ -6381,7 +6713,9 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] max_value
-    #   The maximum value of an attribute that is of the number data type.
+    #   The maximum length of a number attribute value. Must be a number
+    #   less than or equal to `2^1023`, represented as a string with a
+    #   length of 131072 characters or fewer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/NumberAttributeConstraintsType AWS API Documentation
@@ -6425,7 +6759,9 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] temporary_password_validity_days
     #   The number of days a temporary password is valid in the password
     #   policy. If the user doesn't sign in during this time, an
-    #   administrator must reset their password.
+    #   administrator must reset their password. Defaults to `7`. If you
+    #   submit a value of `0`, Amazon Cognito treats it as a null value and
+    #   sets `TemporaryPasswordValidityDays` to its default value.
     #
     #   <note markdown="1"> When you set `TemporaryPasswordValidityDays` for a user pool, you
     #   can no longer set a value for the legacy `UnusedAccountValidityDays`
@@ -6461,6 +6797,32 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # The properties of a pre token generation Lambda trigger.
+    #
+    # @!attribute [rw] lambda_version
+    #   The user pool trigger version of the request that Amazon Cognito
+    #   sends to your Lambda function. Higher-numbered versions add fields
+    #   that support new features.
+    #   @return [String]
+    #
+    # @!attribute [rw] lambda_arn
+    #   The Amazon Resource Name (ARN) of the function that you want to
+    #   assign to your Lambda trigger.
+    #
+    #   This parameter and the `PreTokenGeneration` property of
+    #   `LambdaConfig` have the same value. For new instances of pre token
+    #   generation triggers, set `LambdaArn`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/PreTokenGenerationVersionConfigType AWS API Documentation
+    #
+    class PreTokenGenerationVersionConfigType < Struct.new(
+      :lambda_version,
+      :lambda_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when a precondition is not met.
     #
     # @!attribute [rw] message
@@ -6490,12 +6852,10 @@ module Aws::CognitoIdentityProvider
     #   @return [Time]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ProviderDescription AWS API Documentation
@@ -6577,8 +6937,11 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UserContextDataType]
     #
     # @!attribute [rw] username
-    #   The `username` attribute of the user to whom you want to resend a
-    #   confirmation code.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] analytics_metadata
@@ -6695,7 +7058,14 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] identifier
-    #   The identifier for the resource server.
+    #   A unique resource server identifier for the resource server. The
+    #   identifier can be an API friendly name like `solar-system-data`. You
+    #   can also set an API URL like
+    #   `https://solar-system-data-api.example.com` as your identifier.
+    #
+    #   Amazon Cognito represents scopes in the access token in the format
+    #   `$resource-server-identifier/$scope`. Longer scope-identifier
+    #   strings increase the size of your access tokens.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -6743,32 +7113,45 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] challenge_responses
-    #   The challenge responses. These are inputs corresponding to the value
-    #   of `ChallengeName`, for example:
+    #   The responses to the challenge that you received in the previous
+    #   request. Each challenge has its own required response parameters.
+    #   The following examples are partial JSON request bodies that
+    #   highlight challenge-response parameters.
     #
-    #   <note markdown="1"> `SECRET_HASH` (if app client is configured with client secret)
-    #   applies to all of the inputs that follow (including
-    #   `SOFTWARE_TOKEN_MFA`).
+    #   You must provide a SECRET\_HASH parameter in all challenge responses
+    #   to an app client that has a client secret.
     #
-    #    </note>
+    #   SMS\_MFA
     #
-    #   * `SMS_MFA`: `SMS_MFA_CODE`, `USERNAME`.
+    #   : `"ChallengeName": "SMS_MFA", "ChallengeResponses":
+    #     \{"SMS_MFA_CODE": "[SMS_code]", "USERNAME": "[username]"\}`
     #
-    #   * `PASSWORD_VERIFIER`: `PASSWORD_CLAIM_SIGNATURE`,
-    #     `PASSWORD_CLAIM_SECRET_BLOCK`, `TIMESTAMP`, `USERNAME`.
+    #   PASSWORD\_VERIFIER
     #
-    #     <note markdown="1"> `PASSWORD_VERIFIER` requires `DEVICE_KEY` when you sign in with a
-    #     remembered device.
+    #   : `"ChallengeName": "PASSWORD_VERIFIER", "ChallengeResponses":
+    #     \{"PASSWORD_CLAIM_SIGNATURE": "[claim_signature]",
+    #     "PASSWORD_CLAIM_SECRET_BLOCK": "[secret_block]", "TIMESTAMP":
+    #     [timestamp], "USERNAME": "[username]"\}`
     #
-    #      </note>
+    #     Add `"DEVICE_KEY"` when you sign in with a remembered device.
     #
-    #   * `NEW_PASSWORD_REQUIRED`: `NEW_PASSWORD`, `USERNAME`, `SECRET_HASH`
-    #     (if app client is configured with client secret). To set any
-    #     required attributes that Amazon Cognito returned as
-    #     `requiredAttributes` in the `InitiateAuth` response, add a
-    #     `userAttributes.attributename ` parameter. This parameter can also
-    #     set values for writable attributes that aren't required by your
-    #     user pool.
+    #   CUSTOM\_CHALLENGE
+    #
+    #   : `"ChallengeName": "CUSTOM_CHALLENGE", "ChallengeResponses":
+    #     \{"USERNAME": "[username]", "ANSWER": "[challenge_answer]"\}`
+    #
+    #     Add `"DEVICE_KEY"` when you sign in with a remembered device.
+    #
+    #   NEW\_PASSWORD\_REQUIRED
+    #
+    #   : `"ChallengeName": "NEW_PASSWORD_REQUIRED", "ChallengeResponses":
+    #     \{"NEW_PASSWORD": "[new_password]", "USERNAME": "[username]"\}`
+    #
+    #     To set any required attributes that `InitiateAuth` returned in an
+    #     `requiredAttributes` parameter, add
+    #     `"userAttributes.[attribute_name]": "[attribute_value]"`. This
+    #     parameter can also set values for writable attributes that aren't
+    #     required by your user pool.
     #
     #     <note markdown="1"> In a `NEW_PASSWORD_REQUIRED` challenge response, you can't modify
     #     a required attribute that already has a value. In
@@ -6779,18 +7162,37 @@ module Aws::CognitoIdentityProvider
     #
     #      </note>
     #
-    #   * `SOFTWARE_TOKEN_MFA`: `USERNAME` and `SOFTWARE_TOKEN_MFA_CODE` are
-    #     required attributes.
+    #   SOFTWARE\_TOKEN\_MFA
     #
-    #   * `DEVICE_SRP_AUTH` requires `USERNAME`, `DEVICE_KEY`, `SRP_A` (and
-    #     `SECRET_HASH`).
+    #   : `"ChallengeName": "SOFTWARE_TOKEN_MFA", "ChallengeResponses":
+    #     \{"USERNAME": "[username]", "SOFTWARE_TOKEN_MFA_CODE":
+    #     [authenticator_code]\}`
     #
-    #   * `DEVICE_PASSWORD_VERIFIER` requires everything that
-    #     `PASSWORD_VERIFIER` requires, plus `DEVICE_KEY`.
+    #   DEVICE\_SRP\_AUTH
     #
-    #   * `MFA_SETUP` requires `USERNAME`, plus you must use the session
-    #     value returned by `VerifySoftwareToken` in the `Session`
-    #     parameter.
+    #   : `"ChallengeName": "DEVICE_SRP_AUTH", "ChallengeResponses":
+    #     \{"USERNAME": "[username]", "DEVICE_KEY": "[device_key]", "SRP_A":
+    #     "[srp_a]"\}`
+    #
+    #   DEVICE\_PASSWORD\_VERIFIER
+    #
+    #   : `"ChallengeName": "DEVICE_PASSWORD_VERIFIER",
+    #     "ChallengeResponses": \{"DEVICE_KEY": "[device_key]",
+    #     "PASSWORD_CLAIM_SIGNATURE": "[claim_signature]",
+    #     "PASSWORD_CLAIM_SECRET_BLOCK": "[secret_block]", "TIMESTAMP":
+    #     [timestamp], "USERNAME": "[username]"\}`
+    #
+    #   MFA\_SETUP
+    #
+    #   : `"ChallengeName": "MFA_SETUP", "ChallengeResponses": \{"USERNAME":
+    #     "[username]"\}, "SESSION": "[Session ID from
+    #     VerifySoftwareToken]"`
+    #
+    #   SELECT\_MFA\_TYPE
+    #
+    #   : `"ChallengeName": "SELECT_MFA_TYPE", "ChallengeResponses":
+    #     \{"USERNAME": "[username]", "ANSWER": "[SMS_MFA or
+    #     SOFTWARE_TOKEN_MFA]"\}`
     #
     #   For more information about `SECRET_HASH`, see [Computing secret hash
     #   values][1]. For information about `DEVICE_KEY`, see [Working with
@@ -6965,12 +7367,10 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::RiskExceptionConfigurationType]
     #
     # @!attribute [rw] last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RiskConfigurationType AWS API Documentation
@@ -7052,12 +7452,23 @@ module Aws::CognitoIdentityProvider
     # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html
     #
     # @!attribute [rw] name
-    #   The name of your user pool attribute, for example `username` or
-    #   `custom:costcenter`.
+    #   The name of your user pool attribute. When you create or update a
+    #   user pool, adding a schema attribute creates a custom or
+    #   developer-only attribute. When you add an attribute with a `Name`
+    #   value of `MyAttribute`, Amazon Cognito creates the custom attribute
+    #   `custom:MyAttribute`. When `DeveloperOnlyAttribute` is `true`,
+    #   Amazon Cognito creates your attribute as `dev:MyAttribute`. In an
+    #   operation that describes a user pool, Amazon Cognito returns this
+    #   value as `value` for standard attributes, `custom:value` for custom
+    #   attributes, and `dev:value` for developer-only attributes..
     #   @return [String]
     #
     # @!attribute [rw] attribute_data_type
-    #   The data format of the values for your attribute.
+    #   The data format of the values for your attribute. When you choose an
+    #   `AttributeDataType`, Amazon Cognito validates the input against the
+    #   data type. A custom attribute value in your user's ID token is
+    #   always a string, for example `"custom:isMember" : "true"` or
+    #   `"custom:YearsAsMember" : "12"`.
     #   @return [String]
     #
     # @!attribute [rw] developer_only_attribute
@@ -7395,7 +7806,9 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user name of the user you want to register.
+    #   The username of the user that you want to sign up. The value of this
+    #   parameter is typically a username, but can be any alias attribute in
+    #   your user pool.
     #   @return [String]
     #
     # @!attribute [rw] password
@@ -7410,7 +7823,24 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<Types::AttributeType>]
     #
     # @!attribute [rw] validation_data
-    #   The validation data in the request to register a user.
+    #   Temporary user attributes that contribute to the outcomes of your
+    #   pre sign-up Lambda trigger. This set of key-value pairs are for
+    #   custom validation of information that you collect from your users
+    #   but don't need to retain.
+    #
+    #   Your Lambda function can analyze this additional data and act on it.
+    #   Your function might perform external API operations like logging
+    #   user attributes and validation data to Amazon CloudWatch Logs.
+    #   Validation data might also affect the response that your function
+    #   returns to Amazon Cognito, like automatically confirming the user if
+    #   they sign up from within your network.
+    #
+    #   For more information about the pre sign-up Lambda trigger, see [Pre
+    #   sign-up Lambda trigger][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-pre-sign-up.html
     #   @return [Array<Types::AttributeType>]
     #
     # @!attribute [rw] analytics_metadata
@@ -7732,7 +8162,9 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] max_length
-    #   The maximum length.
+    #   The maximum length of a string attribute value. Must be a number
+    #   less than or equal to `2^1023`, represented as a string with a
+    #   length of 131072 characters or fewer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StringAttributeConstraintsType AWS API Documentation
@@ -7858,21 +8290,17 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UICustomizationType AWS API Documentation
@@ -8002,7 +8430,11 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user pool username.
+    #   The username of the user that you want to query or modify. The value
+    #   of this parameter is typically your user's username, but it can be
+    #   any of their alias attributes. If `username` isn't an alias
+    #   attribute in your user pool, this value must be the `sub` of a local
+    #   user or the username of a user from a third-party IdP.
     #   @return [String]
     #
     # @!attribute [rw] event_id
@@ -8130,8 +8562,127 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] provider_details
-    #   The IdP details to be updated, such as `MetadataURL` and
-    #   `MetadataFile`.
+    #   The scopes, URLs, and identifiers for your external identity
+    #   provider. The following examples describe the provider detail keys
+    #   for each IdP type. These values and their schema are subject to
+    #   change. Social IdP `authorize_scopes` values must match the values
+    #   listed here.
+    #
+    #   OpenID Connect (OIDC)
+    #
+    #   : Amazon Cognito accepts the following elements when it can't
+    #     discover endpoint URLs from `oidc_issuer`: `attributes_url`,
+    #     `authorize_url`, `jwks_uri`, `token_url`.
+    #
+    #     Create or update request: `"ProviderDetails": \{
+    #     "attributes_request_method": "GET", "attributes_url":
+    #     "https://auth.example.com/userInfo", "authorize_scopes": "openid
+    #     profile email", "authorize_url":
+    #     "https://auth.example.com/authorize", "client_id":
+    #     "1example23456789", "client_secret": "provider-app-client-secret",
+    #     "jwks_uri": "https://auth.example.com/.well-known/jwks.json",
+    #     "oidc_issuer": "https://auth.example.com", "token_url":
+    #     "https://example.com/token" \}`
+    #
+    #     Describe response: `"ProviderDetails": \{
+    #     "attributes_request_method": "GET", "attributes_url":
+    #     "https://auth.example.com/userInfo",
+    #     "attributes_url_add_attributes": "false", "authorize_scopes":
+    #     "openid profile email", "authorize_url":
+    #     "https://auth.example.com/authorize", "client_id":
+    #     "1example23456789", "client_secret": "provider-app-client-secret",
+    #     "jwks_uri": "https://auth.example.com/.well-known/jwks.json",
+    #     "oidc_issuer": "https://auth.example.com", "token_url":
+    #     "https://example.com/token" \}`
+    #
+    #   SAML
+    #
+    #   : Create or update request with Metadata URL: `"ProviderDetails": \{
+    #     "IDPInit": "true", "IDPSignout": "true", "EncryptedResponses" :
+    #     "true", "MetadataURL":
+    #     "https://auth.example.com/sso/saml/metadata",
+    #     "RequestSigningAlgorithm": "rsa-sha256" \}`
+    #
+    #     Create or update request with Metadata file: `"ProviderDetails":
+    #     \{ "IDPInit": "true", "IDPSignout": "true", "EncryptedResponses" :
+    #     "true", "MetadataFile": "[metadata XML]",
+    #     "RequestSigningAlgorithm": "rsa-sha256" \}`
+    #
+    #     The value of `MetadataFile` must be the plaintext metadata
+    #     document with all quote (") characters escaped by backslashes.
+    #
+    #     Describe response: `"ProviderDetails": \{ "IDPInit": "true",
+    #     "IDPSignout": "true", "EncryptedResponses" : "true",
+    #     "ActiveEncryptionCertificate": "[certificate]", "MetadataURL":
+    #     "https://auth.example.com/sso/saml/metadata",
+    #     "RequestSigningAlgorithm": "rsa-sha256", "SLORedirectBindingURI":
+    #     "https://auth.example.com/slo/saml", "SSORedirectBindingURI":
+    #     "https://auth.example.com/sso/saml" \}`
+    #
+    #   LoginWithAmazon
+    #
+    #   : Create or update request: `"ProviderDetails": \{
+    #     "authorize_scopes": "profile postal_code", "client_id":
+    #     "amzn1.application-oa2-client.1example23456789", "client_secret":
+    #     "provider-app-client-secret"`
+    #
+    #     Describe response: `"ProviderDetails": \{ "attributes_url":
+    #     "https://api.amazon.com/user/profile",
+    #     "attributes_url_add_attributes": "false", "authorize_scopes":
+    #     "profile postal_code", "authorize_url":
+    #     "https://www.amazon.com/ap/oa", "client_id":
+    #     "amzn1.application-oa2-client.1example23456789", "client_secret":
+    #     "provider-app-client-secret", "token_request_method": "POST",
+    #     "token_url": "https://api.amazon.com/auth/o2/token" \}`
+    #
+    #   Google
+    #
+    #   : Create or update request: `"ProviderDetails": \{
+    #     "authorize_scopes": "email profile openid", "client_id":
+    #     "1example23456789.apps.googleusercontent.com", "client_secret":
+    #     "provider-app-client-secret" \}`
+    #
+    #     Describe response: `"ProviderDetails": \{ "attributes_url":
+    #     "https://people.googleapis.com/v1/people/me?personFields=",
+    #     "attributes_url_add_attributes": "true", "authorize_scopes":
+    #     "email profile openid", "authorize_url":
+    #     "https://accounts.google.com/o/oauth2/v2/auth", "client_id":
+    #     "1example23456789.apps.googleusercontent.com", "client_secret":
+    #     "provider-app-client-secret", "oidc_issuer":
+    #     "https://accounts.google.com", "token_request_method": "POST",
+    #     "token_url": "https://www.googleapis.com/oauth2/v4/token" \}`
+    #
+    #   SignInWithApple
+    #
+    #   : Create or update request: `"ProviderDetails": \{
+    #     "authorize_scopes": "email name", "client_id":
+    #     "com.example.cognito", "private_key": "1EXAMPLE", "key_id":
+    #     "2EXAMPLE", "team_id": "3EXAMPLE" \}`
+    #
+    #     Describe response: `"ProviderDetails": \{
+    #     "attributes_url_add_attributes": "false", "authorize_scopes":
+    #     "email name", "authorize_url":
+    #     "https://appleid.apple.com/auth/authorize", "client_id":
+    #     "com.example.cognito", "key_id": "1EXAMPLE", "oidc_issuer":
+    #     "https://appleid.apple.com", "team_id": "2EXAMPLE",
+    #     "token_request_method": "POST", "token_url":
+    #     "https://appleid.apple.com/auth/token" \}`
+    #
+    #   Facebook
+    #
+    #   : Create or update request: `"ProviderDetails": \{ "api_version":
+    #     "v17.0", "authorize_scopes": "public_profile, email", "client_id":
+    #     "1example23456789", "client_secret": "provider-app-client-secret"
+    #     \}`
+    #
+    #     Describe response: `"ProviderDetails": \{ "api_version": "v17.0",
+    #     "attributes_url": "https://graph.facebook.com/v17.0/me?fields=",
+    #     "attributes_url_add_attributes": "true", "authorize_scopes":
+    #     "public_profile, email", "authorize_url":
+    #     "https://www.facebook.com/v17.0/dialog/oauth", "client_id":
+    #     "1example23456789", "client_secret": "provider-app-client-secret",
+    #     "token_request_method": "GET", "token_url":
+    #     "https://graph.facebook.com/v17.0/oauth/access_token" \}`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] attribute_mapping
@@ -8171,7 +8722,14 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] identifier
-    #   The identifier for the resource server.
+    #   A unique resource server identifier for the resource server. The
+    #   identifier can be an API friendly name like `solar-system-data`. You
+    #   can also set an API URL like
+    #   `https://solar-system-data-api.example.com` as your identifier.
+    #
+    #   Amazon Cognito represents scopes in the access token in the format
+    #   `$resource-server-identifier/$scope`. Longer scope-identifier
+    #   strings increase the size of your access tokens.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -8366,11 +8924,56 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::TokenValidityUnitsType]
     #
     # @!attribute [rw] read_attributes
-    #   The read-only attributes of the user pool.
+    #   The list of user attributes that you want your app client to have
+    #   read-only access to. After your user authenticates in your app,
+    #   their access token authorizes them to read their own attribute value
+    #   for any attribute in this list. An example of this kind of activity
+    #   is when your user selects a link to view their profile information.
+    #   Your app makes a [GetUser][1] API request to retrieve and display
+    #   your user's profile data.
+    #
+    #   When you don't specify the `ReadAttributes` for your app client,
+    #   your app can read the values of `email_verified`,
+    #   `phone_number_verified`, and the Standard attributes of your user
+    #   pool. When your user pool has read access to these default
+    #   attributes, `ReadAttributes` doesn't return any information. Amazon
+    #   Cognito only populates `ReadAttributes` in the API response if you
+    #   have specified your own custom set of read attributes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_GetUser.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] write_attributes
-    #   The writeable attributes of the user pool.
+    #   The list of user attributes that you want your app client to have
+    #   write access to. After your user authenticates in your app, their
+    #   access token authorizes them to set or modify their own attribute
+    #   value for any attribute in this list. An example of this kind of
+    #   activity is when you present your user with a form to update their
+    #   profile information and they change their last name. Your app then
+    #   makes an [UpdateUserAttributes][1] API request and sets
+    #   `family_name` to the new value.
+    #
+    #   When you don't specify the `WriteAttributes` for your app client,
+    #   your app can write the values of the Standard attributes of your
+    #   user pool. When your user pool has write access to these default
+    #   attributes, `WriteAttributes` doesn't return any information.
+    #   Amazon Cognito only populates `WriteAttributes` in the API response
+    #   if you have specified your own custom set of write attributes.
+    #
+    #   If your app client allows users to sign in through an IdP, this
+    #   array must include all attributes that you have mapped to IdP
+    #   attributes. Amazon Cognito updates mapped attributes when users sign
+    #   in to your application through an IdP. If your app client does not
+    #   have write access to a mapped attribute, Amazon Cognito throws an
+    #   error when it tries to update the attribute. For more information,
+    #   see [Specifying IdP Attribute Mappings for Your user pool][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UpdateUserAttributes.html
+    #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] explicit_auth_flows
@@ -8981,12 +9584,10 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] start_date
@@ -9190,21 +9791,17 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] refresh_token_validity
@@ -9266,11 +9863,56 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::TokenValidityUnitsType]
     #
     # @!attribute [rw] read_attributes
-    #   The Read-only attributes.
+    #   The list of user attributes that you want your app client to have
+    #   read-only access to. After your user authenticates in your app,
+    #   their access token authorizes them to read their own attribute value
+    #   for any attribute in this list. An example of this kind of activity
+    #   is when your user selects a link to view their profile information.
+    #   Your app makes a [GetUser][1] API request to retrieve and display
+    #   your user's profile data.
+    #
+    #   When you don't specify the `ReadAttributes` for your app client,
+    #   your app can read the values of `email_verified`,
+    #   `phone_number_verified`, and the Standard attributes of your user
+    #   pool. When your user pool has read access to these default
+    #   attributes, `ReadAttributes` doesn't return any information. Amazon
+    #   Cognito only populates `ReadAttributes` in the API response if you
+    #   have specified your own custom set of read attributes.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_GetUser.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] write_attributes
-    #   The writeable attributes.
+    #   The list of user attributes that you want your app client to have
+    #   write access to. After your user authenticates in your app, their
+    #   access token authorizes them to set or modify their own attribute
+    #   value for any attribute in this list. An example of this kind of
+    #   activity is when you present your user with a form to update their
+    #   profile information and they change their last name. Your app then
+    #   makes an [UpdateUserAttributes][1] API request and sets
+    #   `family_name` to the new value.
+    #
+    #   When you don't specify the `WriteAttributes` for your app client,
+    #   your app can write the values of the Standard attributes of your
+    #   user pool. When your user pool has write access to these default
+    #   attributes, `WriteAttributes` doesn't return any information.
+    #   Amazon Cognito only populates `WriteAttributes` in the API response
+    #   if you have specified your own custom set of write attributes.
+    #
+    #   If your app client allows users to sign in through an IdP, this
+    #   array must include all attributes that you have mapped to IdP
+    #   attributes. Amazon Cognito updates mapped attributes when users sign
+    #   in to your application through an IdP. If your app client does not
+    #   have write access to a mapped attribute, Amazon Cognito throws an
+    #   error when it tries to update the attribute. For more information,
+    #   see [Specifying IdP Attribute Mappings for Your user pool][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UpdateUserAttributes.html
+    #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] explicit_auth_flows
@@ -9550,21 +10192,17 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolDescriptionType AWS API Documentation
@@ -9639,25 +10277,21 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::LambdaConfigType]
     #
     # @!attribute [rw] status
-    #   The status of a user pool.
+    #   This parameter is no longer used.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] creation_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   created.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was created. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] schema_attributes
@@ -9939,12 +10573,10 @@ module Aws::CognitoIdentityProvider
     #   @return [Time]
     #
     # @!attribute [rw] user_last_modified_date
-    #   The date and time, in [ISO 8601][1] format, when the item was
-    #   modified.
-    #
-    #
-    #
-    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   The date and time when the item was modified. Amazon Cognito returns
+    #   this timestamp in UNIX epoch time format. Your SDK might render the
+    #   output in a human-readable format like ISO 8601 or a Java `Date`
+    #   object.
     #   @return [Time]
     #
     # @!attribute [rw] enabled

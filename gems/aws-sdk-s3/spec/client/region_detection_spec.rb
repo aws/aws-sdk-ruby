@@ -33,9 +33,9 @@ module Aws
         'WlSrUk+8d2/rvcnEv2QXer0=</HostId></Error>'
       end
 
-      before(:each) do
+      before do
         allow($stderr).to receive(:write)
-        S3::BUCKET_REGIONS.clear
+        Aws::S3.bucket_region_cache.clear
       end
 
       context 'accessing us-west-2 bucket using classic endpoint' do
@@ -49,7 +49,7 @@ module Aws
           expect_any_instance_of(Plugins::S3Signer::BucketRegionErrorHandler)
             .to receive(:warn)
           expect_auth({ 'signingRegion' => 'us-east-1' })
-          expect_auth({ 'signingRegion' => 'us-east-1' }, 'us-west-2')
+          expect_auth({ 'signingRegion' => 'us-east-1' }, region: 'us-west-2')
           resp = client.put_object(bucket: 'bucket', key: 'key', body: 'body')
           host = resp.context.http_request.endpoint.host
           expect(host).to eq('bucket.s3.us-west-2.amazonaws.com')
@@ -93,7 +93,7 @@ module Aws
         end
 
         it 'does not redirect custom endpoints when the region is cached' do
-          S3::BUCKET_REGIONS['bucket'] = 'us-west-2'
+          Aws::S3.bucket_region_cache['bucket'] = 'us-west-2'
           stub_request(:put, 'http://bucket.localhost:9000/key')
             .to_return(status: [200, 'Ok'])
 
@@ -151,7 +151,7 @@ module Aws
             .to receive(:warn)
 
           expect_auth({ 'signingRegion' => 'us-east-1' })
-          expect_auth({ 'signingRegion' => 'us-east-1' }, 'us-west-2')
+          expect_auth({ 'signingRegion' => 'us-east-1' }, region: 'us-west-2')
           client.put_object(bucket: 'bucket', key: 'key', body: 'body')
           expect(stub_publisher.metrics.size).to eq(1)
           metric = stub_publisher.metrics.first

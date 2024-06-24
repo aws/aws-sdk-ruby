@@ -1,0 +1,787 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::SageMakerGeospatial
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AreaOfInterest
+      attr_accessor area_of_interest_geometry: Types::AreaOfInterestGeometry
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AreaOfInterestGeometry < AreaOfInterest
+      end
+      class Unknown < AreaOfInterest
+      end
+    end
+
+    class AreaOfInterestGeometry
+      attr_accessor multi_polygon_geometry: Types::MultiPolygonGeometryInput
+      attr_accessor polygon_geometry: Types::PolygonGeometryInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MultiPolygonGeometry < AreaOfInterestGeometry
+      end
+      class PolygonGeometry < AreaOfInterestGeometry
+      end
+      class Unknown < AreaOfInterestGeometry
+      end
+    end
+
+    class AssetValue
+      attr_accessor href: ::String
+      SENSITIVE: []
+    end
+
+    class BandMathConfigInput
+      attr_accessor custom_indices: Types::CustomIndicesInput
+      attr_accessor predefined_indices: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CloudMaskingConfigInput < Aws::EmptyStructure
+    end
+
+    class CloudRemovalConfigInput
+      attr_accessor algorithm_name: ("INTERPOLATION")
+      attr_accessor interpolation_value: ::String
+      attr_accessor target_bands: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class CustomIndicesInput
+      attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class DeleteEarthObservationJobInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteEarthObservationJobOutput < Aws::EmptyStructure
+    end
+
+    class DeleteVectorEnrichmentJobInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteVectorEnrichmentJobOutput < Aws::EmptyStructure
+    end
+
+    class EarthObservationJobErrorDetails
+      attr_accessor message: ::String
+      attr_accessor type: ("CLIENT_ERROR" | "SERVER_ERROR")
+      SENSITIVE: []
+    end
+
+    class EoCloudCoverInput
+      attr_accessor lower_bound: ::Float
+      attr_accessor upper_bound: ::Float
+      SENSITIVE: []
+    end
+
+    class ExportEarthObservationJobInput
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor export_source_images: bool
+      attr_accessor output_config: Types::OutputConfigInput
+      SENSITIVE: []
+    end
+
+    class ExportEarthObservationJobOutput
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor execution_role_arn: ::String
+      attr_accessor export_source_images: bool
+      attr_accessor export_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor output_config: Types::OutputConfigInput
+      SENSITIVE: []
+    end
+
+    class ExportErrorDetails
+      attr_accessor export_results: Types::ExportErrorDetailsOutput
+      attr_accessor export_source_images: Types::ExportErrorDetailsOutput
+      SENSITIVE: []
+    end
+
+    class ExportErrorDetailsOutput
+      attr_accessor message: ::String
+      attr_accessor type: ("CLIENT_ERROR" | "SERVER_ERROR")
+      SENSITIVE: []
+    end
+
+    class ExportS3DataInput
+      attr_accessor kms_key_id: ::String
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class ExportVectorEnrichmentJobInput
+      attr_accessor arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor output_config: Types::ExportVectorEnrichmentJobOutputConfig
+      SENSITIVE: []
+    end
+
+    class ExportVectorEnrichmentJobOutput
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor execution_role_arn: ::String
+      attr_accessor export_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor output_config: Types::ExportVectorEnrichmentJobOutputConfig
+      SENSITIVE: []
+    end
+
+    class ExportVectorEnrichmentJobOutputConfig
+      attr_accessor s3_data: Types::VectorEnrichmentJobS3Data
+      SENSITIVE: []
+    end
+
+    class Filter
+      attr_accessor maximum: ::Float
+      attr_accessor minimum: ::Float
+      attr_accessor name: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class GeoMosaicConfigInput
+      attr_accessor algorithm_name: ("NEAR" | "BILINEAR" | "CUBIC" | "CUBICSPLINE" | "LANCZOS" | "AVERAGE" | "RMS" | "MODE" | "MAX" | "MIN" | "MED" | "Q1" | "Q3" | "SUM")
+      attr_accessor target_bands: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Geometry
+      attr_accessor coordinates: ::Array[::Array[::Array[::Float]]]
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class GetEarthObservationJobInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetEarthObservationJobOutput
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor duration_in_seconds: ::Integer
+      attr_accessor error_details: Types::EarthObservationJobErrorDetails
+      attr_accessor execution_role_arn: ::String
+      attr_accessor export_error_details: Types::ExportErrorDetails
+      attr_accessor export_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor input_config: Types::InputConfigOutput
+      attr_accessor job_config: Types::JobConfigInput
+      attr_accessor kms_key_id: ::String
+      attr_accessor name: ::String
+      attr_accessor output_bands: ::Array[Types::OutputBand]
+      attr_accessor status: ("INITIALIZING" | "IN_PROGRESS" | "STOPPING" | "COMPLETED" | "STOPPED" | "FAILED" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetRasterDataCollectionInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetRasterDataCollectionOutput
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor description_page_url: ::String
+      attr_accessor image_source_bands: ::Array[::String]
+      attr_accessor name: ::String
+      attr_accessor supported_filters: ::Array[Types::Filter]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("PUBLIC" | "PREMIUM" | "USER")
+      SENSITIVE: []
+    end
+
+    class GetTileInput
+      attr_accessor arn: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor image_assets: ::Array[::String]
+      attr_accessor image_mask: bool
+      attr_accessor output_data_type: ("INT32" | "FLOAT32" | "INT16" | "FLOAT64" | "UINT16")
+      attr_accessor output_format: ::String
+      attr_accessor property_filters: ::String
+      attr_accessor target: ("INPUT" | "OUTPUT")
+      attr_accessor time_range_filter: ::String
+      attr_accessor x: ::Integer
+      attr_accessor y: ::Integer
+      attr_accessor z: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetTileOutput
+      attr_accessor binary_file: ::IO
+      SENSITIVE: []
+    end
+
+    class GetVectorEnrichmentJobInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetVectorEnrichmentJobOutput
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor duration_in_seconds: ::Integer
+      attr_accessor error_details: Types::VectorEnrichmentJobErrorDetails
+      attr_accessor execution_role_arn: ::String
+      attr_accessor export_error_details: Types::VectorEnrichmentJobExportErrorDetails
+      attr_accessor export_status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor input_config: Types::VectorEnrichmentJobInputConfig
+      attr_accessor job_config: Types::VectorEnrichmentJobConfig
+      attr_accessor kms_key_id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("INITIALIZING" | "IN_PROGRESS" | "STOPPING" | "STOPPED" | "COMPLETED" | "FAILED" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("REVERSE_GEOCODING" | "MAP_MATCHING")
+      SENSITIVE: []
+    end
+
+    class InputConfigInput
+      attr_accessor previous_earth_observation_job_arn: ::String
+      attr_accessor raster_data_collection_query: Types::RasterDataCollectionQueryInput
+      SENSITIVE: []
+    end
+
+    class InputConfigOutput
+      attr_accessor previous_earth_observation_job_arn: ::String
+      attr_accessor raster_data_collection_query: Types::RasterDataCollectionQueryOutput
+      SENSITIVE: []
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class ItemSource
+      attr_accessor assets: ::Hash[::String, Types::AssetValue]
+      attr_accessor date_time: ::Time
+      attr_accessor geometry: Types::Geometry
+      attr_accessor id: ::String
+      attr_accessor properties: Types::Properties
+      SENSITIVE: []
+    end
+
+    class JobConfigInput
+      attr_accessor band_math_config: Types::BandMathConfigInput
+      attr_accessor cloud_masking_config: Types::CloudMaskingConfigInput
+      attr_accessor cloud_removal_config: Types::CloudRemovalConfigInput
+      attr_accessor geo_mosaic_config: Types::GeoMosaicConfigInput
+      attr_accessor land_cover_segmentation_config: Types::LandCoverSegmentationConfigInput
+      attr_accessor resampling_config: Types::ResamplingConfigInput
+      attr_accessor stack_config: Types::StackConfigInput
+      attr_accessor temporal_statistics_config: Types::TemporalStatisticsConfigInput
+      attr_accessor zonal_statistics_config: Types::ZonalStatisticsConfigInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BandMathConfig < JobConfigInput
+      end
+      class CloudMaskingConfig < JobConfigInput
+      end
+      class CloudRemovalConfig < JobConfigInput
+      end
+      class GeoMosaicConfig < JobConfigInput
+      end
+      class LandCoverSegmentationConfig < JobConfigInput
+      end
+      class ResamplingConfig < JobConfigInput
+      end
+      class StackConfig < JobConfigInput
+      end
+      class TemporalStatisticsConfig < JobConfigInput
+      end
+      class ZonalStatisticsConfig < JobConfigInput
+      end
+      class Unknown < JobConfigInput
+      end
+    end
+
+    class LandCoverSegmentationConfigInput < Aws::EmptyStructure
+    end
+
+    class LandsatCloudCoverLandInput
+      attr_accessor lower_bound: ::Float
+      attr_accessor upper_bound: ::Float
+      SENSITIVE: []
+    end
+
+    class ListEarthObservationJobInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ::String
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor status_equals: ("INITIALIZING" | "IN_PROGRESS" | "STOPPING" | "COMPLETED" | "STOPPED" | "FAILED" | "DELETING" | "DELETED")
+      SENSITIVE: [:next_token]
+    end
+
+    class ListEarthObservationJobOutput
+      attr_accessor earth_observation_job_summaries: ::Array[Types::ListEarthObservationJobOutputConfig]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListEarthObservationJobOutputConfig
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor duration_in_seconds: ::Integer
+      attr_accessor name: ::String
+      attr_accessor operation_type: ::String
+      attr_accessor status: ("INITIALIZING" | "IN_PROGRESS" | "STOPPING" | "COMPLETED" | "STOPPED" | "FAILED" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListRasterDataCollectionsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListRasterDataCollectionsOutput
+      attr_accessor next_token: ::String
+      attr_accessor raster_data_collection_summaries: ::Array[Types::RasterDataCollectionMetadata]
+      SENSITIVE: [:next_token]
+    end
+
+    class ListTagsForResourceRequest
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListTagsForResourceResponse
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class ListVectorEnrichmentJobInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor sort_by: ::String
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor status_equals: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ListVectorEnrichmentJobOutput
+      attr_accessor next_token: ::String
+      attr_accessor vector_enrichment_job_summaries: ::Array[Types::ListVectorEnrichmentJobOutputConfig]
+      SENSITIVE: [:next_token]
+    end
+
+    class ListVectorEnrichmentJobOutputConfig
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor duration_in_seconds: ::Integer
+      attr_accessor name: ::String
+      attr_accessor status: ("INITIALIZING" | "IN_PROGRESS" | "STOPPING" | "STOPPED" | "COMPLETED" | "FAILED" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("REVERSE_GEOCODING" | "MAP_MATCHING")
+      SENSITIVE: []
+    end
+
+    class MapMatchingConfig
+      attr_accessor id_attribute_name: ::String
+      attr_accessor timestamp_attribute_name: ::String
+      attr_accessor x_attribute_name: ::String
+      attr_accessor y_attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class MultiPolygonGeometryInput
+      attr_accessor coordinates: ::Array[::Array[::Array[::Array[::Float]]]]
+      SENSITIVE: []
+    end
+
+    class Operation
+      attr_accessor equation: ::String
+      attr_accessor name: ::String
+      attr_accessor output_type: ("INT32" | "FLOAT32" | "INT16" | "FLOAT64" | "UINT16")
+      SENSITIVE: []
+    end
+
+    class OutputBand
+      attr_accessor band_name: ::String
+      attr_accessor output_data_type: ("INT32" | "FLOAT32" | "INT16" | "FLOAT64" | "UINT16")
+      SENSITIVE: []
+    end
+
+    class OutputConfigInput
+      attr_accessor s3_data: Types::ExportS3DataInput
+      SENSITIVE: []
+    end
+
+    class OutputResolutionResamplingInput
+      attr_accessor user_defined: Types::UserDefined
+      SENSITIVE: []
+    end
+
+    class OutputResolutionStackInput
+      attr_accessor predefined: ("HIGHEST" | "LOWEST" | "AVERAGE")
+      attr_accessor user_defined: Types::UserDefined
+      SENSITIVE: []
+    end
+
+    class PlatformInput
+      attr_accessor comparison_operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class PolygonGeometryInput
+      attr_accessor coordinates: ::Array[::Array[::Array[::Float]]]
+      SENSITIVE: []
+    end
+
+    class Properties
+      attr_accessor eo_cloud_cover: ::Float
+      attr_accessor landsat_cloud_cover_land: ::Float
+      attr_accessor platform: ::String
+      attr_accessor view_off_nadir: ::Float
+      attr_accessor view_sun_azimuth: ::Float
+      attr_accessor view_sun_elevation: ::Float
+      SENSITIVE: []
+    end
+
+    class Property
+      attr_accessor eo_cloud_cover: Types::EoCloudCoverInput
+      attr_accessor landsat_cloud_cover_land: Types::LandsatCloudCoverLandInput
+      attr_accessor platform: Types::PlatformInput
+      attr_accessor view_off_nadir: Types::ViewOffNadirInput
+      attr_accessor view_sun_azimuth: Types::ViewSunAzimuthInput
+      attr_accessor view_sun_elevation: Types::ViewSunElevationInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class EoCloudCover < Property
+      end
+      class LandsatCloudCoverLand < Property
+      end
+      class Platform < Property
+      end
+      class ViewOffNadir < Property
+      end
+      class ViewSunAzimuth < Property
+      end
+      class ViewSunElevation < Property
+      end
+      class Unknown < Property
+      end
+    end
+
+    class PropertyFilter
+      attr_accessor property: Types::Property
+      SENSITIVE: []
+    end
+
+    class PropertyFilters
+      attr_accessor logical_operator: ("AND")
+      attr_accessor properties: ::Array[Types::PropertyFilter]
+      SENSITIVE: []
+    end
+
+    class RasterDataCollectionMetadata
+      attr_accessor arn: ::String
+      attr_accessor description: ::String
+      attr_accessor description_page_url: ::String
+      attr_accessor name: ::String
+      attr_accessor supported_filters: ::Array[Types::Filter]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("PUBLIC" | "PREMIUM" | "USER")
+      SENSITIVE: []
+    end
+
+    class RasterDataCollectionQueryInput
+      attr_accessor area_of_interest: Types::AreaOfInterest
+      attr_accessor property_filters: Types::PropertyFilters
+      attr_accessor raster_data_collection_arn: ::String
+      attr_accessor time_range_filter: Types::TimeRangeFilterInput
+      SENSITIVE: [:time_range_filter]
+    end
+
+    class RasterDataCollectionQueryOutput
+      attr_accessor area_of_interest: Types::AreaOfInterest
+      attr_accessor property_filters: Types::PropertyFilters
+      attr_accessor raster_data_collection_arn: ::String
+      attr_accessor raster_data_collection_name: ::String
+      attr_accessor time_range_filter: Types::TimeRangeFilterOutput
+      SENSITIVE: [:time_range_filter]
+    end
+
+    class RasterDataCollectionQueryWithBandFilterInput
+      attr_accessor area_of_interest: Types::AreaOfInterest
+      attr_accessor band_filter: ::Array[::String]
+      attr_accessor property_filters: Types::PropertyFilters
+      attr_accessor time_range_filter: Types::TimeRangeFilterInput
+      SENSITIVE: [:time_range_filter]
+    end
+
+    class ResamplingConfigInput
+      attr_accessor algorithm_name: ("NEAR" | "BILINEAR" | "CUBIC" | "CUBICSPLINE" | "LANCZOS" | "AVERAGE" | "RMS" | "MODE" | "MAX" | "MIN" | "MED" | "Q1" | "Q3" | "SUM")
+      attr_accessor output_resolution: Types::OutputResolutionResamplingInput
+      attr_accessor target_bands: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class ReverseGeocodingConfig
+      attr_accessor x_attribute_name: ::String
+      attr_accessor y_attribute_name: ::String
+      SENSITIVE: []
+    end
+
+    class SearchRasterDataCollectionInput
+      attr_accessor arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor raster_data_collection_query: Types::RasterDataCollectionQueryWithBandFilterInput
+      SENSITIVE: [:next_token]
+    end
+
+    class SearchRasterDataCollectionOutput
+      attr_accessor approximate_result_count: ::Integer
+      attr_accessor items: ::Array[Types::ItemSource]
+      attr_accessor next_token: ::String
+      SENSITIVE: [:next_token]
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class StackConfigInput
+      attr_accessor output_resolution: Types::OutputResolutionStackInput
+      attr_accessor target_bands: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StartEarthObservationJobInput
+      attr_accessor client_token: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor input_config: Types::InputConfigInput
+      attr_accessor job_config: Types::JobConfigInput
+      attr_accessor kms_key_id: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartEarthObservationJobOutput
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor duration_in_seconds: ::Integer
+      attr_accessor execution_role_arn: ::String
+      attr_accessor input_config: Types::InputConfigOutput
+      attr_accessor job_config: Types::JobConfigInput
+      attr_accessor kms_key_id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("INITIALIZING" | "IN_PROGRESS" | "STOPPING" | "COMPLETED" | "STOPPED" | "FAILED" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartVectorEnrichmentJobInput
+      attr_accessor client_token: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor input_config: Types::VectorEnrichmentJobInputConfig
+      attr_accessor job_config: Types::VectorEnrichmentJobConfig
+      attr_accessor kms_key_id: ::String
+      attr_accessor name: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class StartVectorEnrichmentJobOutput
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor duration_in_seconds: ::Integer
+      attr_accessor execution_role_arn: ::String
+      attr_accessor input_config: Types::VectorEnrichmentJobInputConfig
+      attr_accessor job_config: Types::VectorEnrichmentJobConfig
+      attr_accessor kms_key_id: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("INITIALIZING" | "IN_PROGRESS" | "STOPPING" | "STOPPED" | "COMPLETED" | "FAILED" | "DELETING" | "DELETED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("REVERSE_GEOCODING" | "MAP_MATCHING")
+      SENSITIVE: []
+    end
+
+    class StopEarthObservationJobInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopEarthObservationJobOutput < Aws::EmptyStructure
+    end
+
+    class StopVectorEnrichmentJobInput
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class StopVectorEnrichmentJobOutput < Aws::EmptyStructure
+    end
+
+    class TagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure
+    end
+
+    class TemporalStatisticsConfigInput
+      attr_accessor group_by: ("ALL" | "YEARLY")
+      attr_accessor statistics: ::Array[("MEAN" | "MEDIAN" | "STANDARD_DEVIATION")]
+      attr_accessor target_bands: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class TimeRangeFilterInput
+      attr_accessor end_time: ::Time
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class TimeRangeFilterOutput
+      attr_accessor end_time: ::Time
+      attr_accessor start_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UntagResourceRequest
+      attr_accessor resource_arn: ::String
+      attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UserDefined
+      attr_accessor unit: ("METERS")
+      attr_accessor value: ::Float
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class VectorEnrichmentJobConfig
+      attr_accessor map_matching_config: Types::MapMatchingConfig
+      attr_accessor reverse_geocoding_config: Types::ReverseGeocodingConfig
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class MapMatchingConfig < VectorEnrichmentJobConfig
+      end
+      class ReverseGeocodingConfig < VectorEnrichmentJobConfig
+      end
+      class Unknown < VectorEnrichmentJobConfig
+      end
+    end
+
+    class VectorEnrichmentJobDataSourceConfigInput
+      attr_accessor s3_data: Types::VectorEnrichmentJobS3Data
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3Data < VectorEnrichmentJobDataSourceConfigInput
+      end
+      class Unknown < VectorEnrichmentJobDataSourceConfigInput
+      end
+    end
+
+    class VectorEnrichmentJobErrorDetails
+      attr_accessor error_message: ::String
+      attr_accessor error_type: ("CLIENT_ERROR" | "SERVER_ERROR")
+      SENSITIVE: []
+    end
+
+    class VectorEnrichmentJobExportErrorDetails
+      attr_accessor message: ::String
+      attr_accessor type: ("CLIENT_ERROR" | "SERVER_ERROR")
+      SENSITIVE: []
+    end
+
+    class VectorEnrichmentJobInputConfig
+      attr_accessor data_source_config: Types::VectorEnrichmentJobDataSourceConfigInput
+      attr_accessor document_type: ("CSV")
+      SENSITIVE: []
+    end
+
+    class VectorEnrichmentJobS3Data
+      attr_accessor kms_key_id: ::String
+      attr_accessor s3_uri: ::String
+      SENSITIVE: []
+    end
+
+    class ViewOffNadirInput
+      attr_accessor lower_bound: ::Float
+      attr_accessor upper_bound: ::Float
+      SENSITIVE: []
+    end
+
+    class ViewSunAzimuthInput
+      attr_accessor lower_bound: ::Float
+      attr_accessor upper_bound: ::Float
+      SENSITIVE: []
+    end
+
+    class ViewSunElevationInput
+      attr_accessor lower_bound: ::Float
+      attr_accessor upper_bound: ::Float
+      SENSITIVE: []
+    end
+
+    class ZonalStatisticsConfigInput
+      attr_accessor statistics: ::Array[("MEAN" | "MEDIAN" | "STANDARD_DEVIATION" | "MAX" | "MIN" | "SUM")]
+      attr_accessor target_bands: ::Array[::String]
+      attr_accessor zone_s3_path: ::String
+      attr_accessor zone_s3_path_kms_key_id: ::String
+      SENSITIVE: []
+    end
+  end
+end

@@ -67,6 +67,45 @@ module Aws
         end
       end
 
+      # @param [Number] input
+      # @return [Number, String] The serialized number
+      def serialize_number(input)
+        if input == ::Float::INFINITY then 'Infinity'
+        elsif input == -::Float::INFINITY then '-Infinity'
+        elsif input&.nan? then 'NaN'
+        else
+          input
+        end
+      end
+
+      # @param [String] str
+      # @return [Number] The input as a number
+      def deserialize_number(str)
+        case str
+        when 'Infinity' then ::Float::INFINITY
+        when '-Infinity' then -::Float::INFINITY
+        when 'NaN' then ::Float::NAN
+        when nil then nil
+        else str.to_f
+        end
+      end
+
+      # @param [String] value
+      # @return [Time]
+      def deserialize_time(value)
+        case value
+        when nil then nil
+        when /^[\d.]+$/ then Time.at(value.to_f).utc
+        else
+          begin
+            fractional_time = Time.parse(value).to_f
+            Time.at(fractional_time).utc
+          rescue ArgumentError
+            raise "unhandled timestamp format `#{value}'"
+          end
+        end
+      end
+
     end
   end
 end

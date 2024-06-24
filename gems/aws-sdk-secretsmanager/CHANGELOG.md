@@ -1,6 +1,81 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2024-06-17)
+------------------
+
+* Feature - Doc only update for Secrets Manager
+
+1.97.0 (2024-06-12)
+------------------
+
+* Feature - Introducing RotationToken parameter for PutSecretValue API
+
+1.96.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.95.0 (2024-05-20)
+------------------
+
+* Feature - add v2 smoke tests and smithy smokeTests trait for SDK testing
+
+1.94.0 (2024-05-16)
+------------------
+
+* Feature - Documentation updates for AWS Secrets Manager
+
+1.93.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.92.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2024-03-27)
+------------------
+
+* Feature - Documentation updates for Secrets Manager
+
+1.90.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.89.0 (2024-01-11)
+------------------
+
+* Feature - Doc only update for Secrets Manager
+
+1.88.0 (2023-12-22)
+------------------
+
+* Feature - Update endpoint rules and examples.
+
+1.87.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.86.0 (2023-11-27)
+------------------
+
+* Feature - AWS Secrets Manager has released the BatchGetSecretValue API, which allows customers to fetch up to 20 Secrets with a single request using a list of secret names or filters.
+
+1.85.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.84.0 (2023-10-19)
+------------------
+
+* Feature - Documentation updates for Secrets Manager
+
 1.83.0 (2023-09-27)
 ------------------
 

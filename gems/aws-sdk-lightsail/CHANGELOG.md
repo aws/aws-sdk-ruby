@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2024-06-18)
+------------------
+
+* Feature - Add v2 smoke tests and smithy smokeTests trait for SDK testing.
+
+1.92.0 (2024-06-05)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.91.0 (2024-05-21)
+------------------
+
+* Feature - This release adds support for Amazon Lightsail instances to switch between dual-stack or IPv4 only and IPv6-only public IP address types.
+
+1.90.0 (2024-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.89.0 (2024-04-25)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.88.0 (2024-02-13)
+------------------
+
+* Feature - This release adds support to upgrade the major version of a database.
+
+1.87.0 (2024-01-26)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.86.0 (2024-01-25)
+------------------
+
+* Feature - This release adds support for IPv6-only instance plans.
+
+1.85.0 (2024-01-04)
+------------------
+
+* Feature - This release adds support to set up an HTTPS endpoint on an instance.
+
+1.84.0 (2023-11-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.83.0 (2023-11-22)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.82.0 (2023-09-27)
 ------------------
 
